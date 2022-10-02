@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/uim-cake
+uim-cake.so
+uim-cake.dylib
+uim-cake.dll
+uim-cake.a
+uim-cake.lib
+uim-cake-test-*
+*.exe
+*.o
+*.obj
+*.lst

@@ -1,0 +1,12 @@
+{
+	"authors": [
+		"oz"
+	],
+	"copyright": "Copyright © 2022, oz",
+	"dependencies": {
+		"vibe-d": "~>0.9"
+	},
+	"description": "A simple vibe.d server application.",
+	"license": "proprietary",
+	"name": "uim-cake"
+}
