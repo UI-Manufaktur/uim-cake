@@ -26,8 +26,7 @@ abstract class AbstractPasswordHasher
      *
      * @param array<string, mixed> myConfig Array of config.
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.setConfig(myConfig);
     }
 

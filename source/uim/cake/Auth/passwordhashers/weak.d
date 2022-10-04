@@ -37,8 +37,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
     /**
      * @inheritDoc
      */
-    function hash(string myPassword)
-    {
+    function hash(string myPassword) {
         return Security::hash(myPassword, this._config['hashType'], true);
     }
 

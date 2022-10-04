@@ -62,8 +62,7 @@ class FormAuthenticate : BaseAuthenticate
      * @param \Cake\Http\Response $response Unused response object.
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
-    function authenticate(ServerRequest myRequest, Response $response)
-    {
+    function authenticate(ServerRequest myRequest, Response $response) {
         myFields = this._config['fields'];
         if (!this._checkFields(myRequest, myFields)) {
             return false;

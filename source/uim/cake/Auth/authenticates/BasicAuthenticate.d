@@ -48,8 +48,7 @@ class BasicAuthenticate : BaseAuthenticate
      * @param \Cake\Http\Response $response The response to add headers to.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
-    function authenticate(ServerRequest myRequest, Response $response)
-    {
+    function authenticate(ServerRequest myRequest, Response $response) {
         return this.getUser(myRequest);
     }
 
@@ -59,8 +58,7 @@ class BasicAuthenticate : BaseAuthenticate
      * @param \Cake\Http\ServerRequest myRequest Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    auto getUser(ServerRequest myRequest)
-    {
+    auto getUser(ServerRequest myRequest) {
         myUsername = myRequest.getEnv('PHP_AUTH_USER');
         $pass = myRequest.getEnv('PHP_AUTH_PW');
 
@@ -79,8 +77,7 @@ class BasicAuthenticate : BaseAuthenticate
      * @return \Cake\Http\Response|null|void
      * @throws \Cake\Http\Exception\UnauthorizedException
      */
-    function unauthenticated(ServerRequest myRequest, Response $response)
-    {
+    function unauthenticated(ServerRequest myRequest, Response $response) {
         $unauthorizedException = new UnauthorizedException();
         $unauthorizedException.setHeaders(this.loginHeaders(myRequest));
 

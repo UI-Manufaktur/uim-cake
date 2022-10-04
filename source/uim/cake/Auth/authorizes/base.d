@@ -36,8 +36,7 @@ abstract class BaseAuthorize
      * @param \Cake\Controller\ComponentRegistry $registry The controller for this request.
      * @param array<string, mixed> myConfig An array of config. This class does not use any config.
      */
-    this(ComponentRegistry $registry, array myConfig = [])
-    {
+    this(ComponentRegistry $registry, array myConfig = []) {
         this._registry = $registry;
         this.setConfig(myConfig);
     }

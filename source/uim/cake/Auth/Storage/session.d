@@ -53,8 +53,7 @@ class SessionStorage : IStorage
      * @param \Cake\Http\Response $response Response instance.
      * @param array<string, mixed> myConfig Configuration list.
      */
-    this(ServerRequest myRequest, Response $response, array myConfig = [])
-    {
+    this(ServerRequest myRequest, Response $response, array myConfig = []) {
         this._session = myRequest.getSession();
         this.setConfig(myConfig);
     }
@@ -109,8 +108,7 @@ class SessionStorage : IStorage
     /**
      * @inheritDoc
      */
-    function redirectUrl(myUrl = null)
-    {
+    function redirectUrl(myUrl = null) {
         if (myUrl === null) {
             return this._session.read(this._config['redirect']);
         }

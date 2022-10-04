@@ -48,8 +48,7 @@ class MemoryStorage : IStorage
     /**
      * @inheritDoc
      */
-    function redirectUrl(myUrl = null)
-    {
+    function redirectUrl(myUrl = null) {
         if (myUrl === null) {
             return this._redirectUrl;
         }

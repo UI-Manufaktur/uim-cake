@@ -50,8 +50,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @param string myPassword Plain text password to hash.
      * @return string|false Password hash or false
      */
-    function hash(string myPassword)
-    {
+    function hash(string myPassword) {
         return this._hashers[0].hash(myPassword);
     }
 
