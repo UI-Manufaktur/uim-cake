@@ -2,18 +2,18 @@ module uim.cake.collection;
 
 use AppendIterator;
 use ArrayIterator;
-import uim.cake.collection\Iterator\BufferedIterator;
-import uim.cake.collection\Iterator\ExtractIterator;
-import uim.cake.collection\Iterator\FilterIterator;
-import uim.cake.collection\Iterator\InsertIterator;
-import uim.cake.collection\Iterator\MapReduce;
-import uim.cake.collection\Iterator\NestIterator;
-import uim.cake.collection\Iterator\ReplaceIterator;
-import uim.cake.collection\Iterator\SortIterator;
-import uim.cake.collection\Iterator\StoppableIterator;
-import uim.cake.collection\Iterator\TreeIterator;
-import uim.cake.collection\Iterator\UnfoldIterator;
-import uim.cake.collection\Iterator\ZipIterator;
+import uim.cake.collection.iIterator\BufferedIterator;
+import uim.cake.collection.iIterator\ExtractIterator;
+import uim.cake.collection.iIterator\FilterIterator;
+import uim.cake.collection.iIterator\InsertIterator;
+import uim.cake.collection.iIterator\MapReduce;
+import uim.cake.collection.iIterator\NestIterator;
+import uim.cake.collection.iIterator\ReplaceIterator;
+import uim.cake.collection.iIterator\SortIterator;
+import uim.cake.collection.iIterator\StoppableIterator;
+import uim.cake.collection.iIterator\TreeIterator;
+import uim.cake.collection.iIterator\UnfoldIterator;
+import uim.cake.collection.iIterator\ZipIterator;
 use Countable;
 use InvalidArgumentException;
 use LimitIterator;
@@ -293,12 +293,12 @@ trait CollectionTrait
         $callback = this._propertyExtractor(myPath);
 
         $mapper = function (myValue, myKey, $mr) use ($callback): void {
-            /** @var \Cake\Collection\Iterator\MapReduce $mr */
+            /** @var \Cake\collection.iIterator\MapReduce $mr */
             $mr.emitIntermediate(myValue, $callback(myValue));
         };
 
         $reducer = function (myValues, myKey, $mr): void {
-            /** @var \Cake\Collection\Iterator\MapReduce $mr */
+            /** @var \Cake\collection.iIterator\MapReduce $mr */
             $mr.emit(count(myValues), myKey);
         };
 

@@ -1,4 +1,4 @@
-module uim.cake.collection\Iterator;
+module uim.cake.collections.iterators;
 
 use ArrayIterator;
 import uim.cake.collection\Collection;

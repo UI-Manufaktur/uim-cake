@@ -1,7 +1,7 @@
 module uim.cake.Datasource;
 
 use BadMethodCallException;
-import uim.cake.collection\Iterator\MapReduce;
+import uim.cake.collection.iIterator\MapReduce;
 import uim.cake.Datasource\Exception\RecordNotFoundException;
 use InvalidArgumentException;
 use Traversable;
@@ -301,7 +301,7 @@ trait QueryTrait
      * @param callable|null $reducer The reducing function.
      * @param bool $overwrite Set to true to overwrite existing map + reduce functions.
      * @return this
-     * @see \Cake\Collection\Iterator\MapReduce for details on how to use emit data to the map reducer.
+     * @see \Cake\collection.iIterator\MapReduce for details on how to use emit data to the map reducer.
      */
     function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
     {

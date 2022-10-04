@@ -513,7 +513,7 @@ class TreeBehavior : Behavior
                 'spacer' => '_',
             ];
 
-            /** @var \Cake\Collection\Iterator\TreeIterator $nested */
+            /** @var \Cake\collection.iIterator\TreeIterator $nested */
             $nested = myResults.listNested();
 
             return $nested.printer(myOptions['valuePath'], myOptions['keyPath'], myOptions['spacer']);

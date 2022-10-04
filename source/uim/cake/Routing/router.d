@@ -1,5 +1,5 @@
 
-module uim.cake.Routing;
+module uim.cake.routing.router;
 
 import uim.cake.core.Configure;
 import uim.cake.Http\ServerRequest;
