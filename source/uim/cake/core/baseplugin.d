@@ -123,9 +123,7 @@ class BasePlugin : PluginInterface
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getName(): string
     {
         if (this.name) {
@@ -138,9 +136,7 @@ class BasePlugin : PluginInterface
         return this.name;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getPath(): string
     {
         if (this.path) {
@@ -158,9 +154,7 @@ class BasePlugin : PluginInterface
         return this.path;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getConfigPath(): string
     {
         if (this.configPath) {
@@ -171,9 +165,7 @@ class BasePlugin : PluginInterface
         return myPath . 'config' . DIRECTORY_SEPARATOR;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getClassPath(): string
     {
         if (this.classPath) {
@@ -184,9 +176,7 @@ class BasePlugin : PluginInterface
         return myPath . 'src' . DIRECTORY_SEPARATOR;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getTemplatePath(): string
     {
         if (this.templatePath) {
@@ -197,9 +187,7 @@ class BasePlugin : PluginInterface
         return this.templatePath = myPath . 'templates' . DIRECTORY_SEPARATOR;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function enable(string $hook)
     {
         this.checkHook($hook);
@@ -208,9 +196,7 @@ class BasePlugin : PluginInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function disable(string $hook)
     {
         this.checkHook($hook);
@@ -219,9 +205,7 @@ class BasePlugin : PluginInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isEnabled(string $hook): bool
     {
         this.checkHook($hook);
@@ -245,9 +229,7 @@ class BasePlugin : PluginInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function routes(RouteBuilder $routes): void
     {
         myPath = this.getConfigPath() . 'routes.php';
@@ -259,9 +241,7 @@ class BasePlugin : PluginInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function bootstrap(PluginApplicationInterface $app): void
     {
         $bootstrap = this.getConfigPath() . 'bootstrap.php';
@@ -270,17 +250,13 @@ class BasePlugin : PluginInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function console(CommandCollection $commands): CommandCollection
     {
         return $commands.addMany($commands.discoverPlugin(this.getName()));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         return $middlewareQueue;

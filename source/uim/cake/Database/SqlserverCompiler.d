@@ -18,9 +18,7 @@ class SqlserverCompiler : QueryCompiler
      */
     protected $_orderedUnion = false;
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_templates = [
         'delete' => 'DELETE',
         'where' => ' WHERE %s',
@@ -30,9 +28,7 @@ class SqlserverCompiler : QueryCompiler
         'epilog' => ' %s',
     ];
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_selectParts = [
         'with', 'select', 'from', 'join', 'where', 'group', 'having', 'window', 'order',
         'offset', 'limit', 'union', 'epilog',

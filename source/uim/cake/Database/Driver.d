@@ -129,14 +129,10 @@ abstract class Driver : IDriver
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     abstract function connect(): bool;
 
-    /**
-     * @inheritDoc
-     */
+
     function disconnect(): void
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
@@ -189,14 +185,10 @@ abstract class Driver : IDriver
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     abstract function enabled(): bool;
 
-    /**
-     * @inheritDoc
-     */
+
     function prepare(myQuery): IStatement
     {
         this.connect();
@@ -205,9 +197,7 @@ abstract class Driver : IDriver
         return new PDOStatement($statement, this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function beginTransaction(): bool
     {
         this.connect();
@@ -218,9 +208,7 @@ abstract class Driver : IDriver
         return this._connection.beginTransaction();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function commitTransaction(): bool
     {
         this.connect();
@@ -231,9 +219,7 @@ abstract class Driver : IDriver
         return this._connection.commit();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rollbackTransaction(): bool
     {
         this.connect();
@@ -256,9 +242,7 @@ abstract class Driver : IDriver
         return this._connection.inTransaction();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function supportsSavePoints(): bool
     {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
@@ -279,9 +263,7 @@ abstract class Driver : IDriver
         return this.supports(static::FEATURE_CTE);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function quote(myValue, myType = PDO::PARAM_STR): string
     {
         this.connect();
@@ -302,24 +284,16 @@ abstract class Driver : IDriver
         return this.supports(static::FEATURE_QUOTE);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     abstract function queryTranslator(string myType): Closure;
 
-    /**
-     * @inheritDoc
-     */
+
     abstract function schemaDialect(): SchemaDialect;
 
-    /**
-     * @inheritDoc
-     */
+
     abstract function quoteIdentifier(string myIdentifier): string;
 
-    /**
-     * @inheritDoc
-     */
+
     function schemaValue(myValue): string
     {
         if (myValue === null) {
@@ -353,17 +327,13 @@ abstract class Driver : IDriver
         return this._connection.quote((string)myValue, PDO::PARAM_STR);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function schema(): string
     {
         return this._config['schema'];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function lastInsertId(?string myTable = null, ?string $column = null)
     {
         this.connect();
@@ -375,9 +345,7 @@ abstract class Driver : IDriver
         return this._connection.lastInsertId(myTable);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isConnected(): bool
     {
         if (this._connection === null) {
@@ -393,9 +361,7 @@ abstract class Driver : IDriver
         return $connected;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function enableAutoQuoting(bool myEnable = true)
     {
         this._autoQuoting = myEnable;
@@ -403,18 +369,14 @@ abstract class Driver : IDriver
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function disableAutoQuoting() {
         this._autoQuoting = false;
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isAutoQuotingEnabled(): bool
     {
         return this._autoQuoting;
@@ -440,9 +402,7 @@ abstract class Driver : IDriver
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function compileQuery(Query myQuery, ValueBinder $binder): array
     {
         $processor = this.newCompiler();
@@ -452,17 +412,13 @@ abstract class Driver : IDriver
         return [myQuery, $processor.compile(myQuery, $binder)];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function newCompiler(): QueryCompiler
     {
         return new QueryCompiler();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function newTableSchema(string myTable, array $columns = []): TableSchema
     {
         myClassName = TableSchema::class;

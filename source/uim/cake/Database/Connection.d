@@ -141,17 +141,13 @@ class Connection : ConnectionInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function config(): array
     {
         return this._config;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function configName(): string
     {
         return this._config['name'] ?? '';
@@ -657,9 +653,7 @@ class Connection : ConnectionInterface
         return this._driver.supportsDynamicConstraints();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function transactional(callable $callback)
     {
         this.begin();
@@ -697,9 +691,7 @@ class Connection : ConnectionInterface
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function disableConstraints(callable $callback)
     {
         return this.getDisconnectRetry().run(function () use ($callback) {
@@ -785,9 +777,7 @@ class Connection : ConnectionInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto setCacher(ICache $cacher)
     {
         this.cacher = $cacher;
@@ -795,9 +785,7 @@ class Connection : ConnectionInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getCacher(): ICache
     {
         if (this.cacher !== null) {

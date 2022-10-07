@@ -15,9 +15,7 @@ class Mysql : Driver
 {
     use SqlDialectTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     protected const MAX_ALIAS_LENGTH = 256;
 
     /**
@@ -191,9 +189,7 @@ class Mysql : Driver
         return myResult;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function schemaDialect(): SchemaDialect
     {
         if (this._schemaDialect === null) {
@@ -203,33 +199,25 @@ class Mysql : Driver
         return this._schemaDialect;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function schema(): string
     {
         return this._config['database'];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function disableForeignKeySQL(): string
     {
         return 'SET foreign_key_checks = 0';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function enableForeignKeySQL(): string
     {
         return 'SET foreign_key_checks = 1';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function supports(string $feature): bool
     {
         switch ($feature) {
@@ -246,9 +234,7 @@ class Mysql : Driver
         return super.supports($feature);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function supportsDynamicConstraints(): bool
     {
         return true;
