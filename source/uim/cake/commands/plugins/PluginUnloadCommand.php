@@ -47,7 +47,7 @@ class PluginUnloadCommand : Command {
      * @param string myPlugin Name of plugin.
      * @return bool If modify passed.
      */
-    protected auto modifyApplication(string $app, string myPlugin): bool
+    protected bool modifyApplication(string $app, string myPlugin)
     {
         myPlugin = preg_quote(myPlugin, '/');
         myFinder = "/

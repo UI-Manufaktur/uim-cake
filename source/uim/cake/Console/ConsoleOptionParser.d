@@ -364,10 +364,8 @@ class ConsoleOptionParser
 
     /**
      * Checks whether sorting is enabled for subcommands.
-     *
-     * @return bool
      */
-    function isSubcommandSortEnabled(): bool
+    bool isSubcommandSortEnabled()
     {
         return this._subcommandSort;
     }
@@ -891,7 +889,7 @@ class ConsoleOptionParser
      * @param string myName The name of the option.
      * @return bool
      */
-    protected auto _optionExists(string myName): bool
+    protected bool _optionExists(string myName)
     {
         if (substr(myName, 0, 2) === '--') {
             return isset(this._options[substr(myName, 2)]);

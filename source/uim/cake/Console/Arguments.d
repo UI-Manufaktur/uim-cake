@@ -73,7 +73,7 @@ class Arguments
      * @param int $index The argument index to check.
      * @return bool
      */
-    function hasArgumentAt(int $index): bool
+    bool hasArgumentAt(int $index)
     {
         return isset(this.args[$index]);
     }
@@ -84,7 +84,7 @@ class Arguments
      * @param string myName The argument name to check.
      * @return bool
      */
-    function hasArgument(string myName): bool
+    bool hasArgument(string myName)
     {
         $offset = array_search(myName, this.argNames, true);
         if ($offset === false) {
@@ -137,7 +137,7 @@ class Arguments
      * @param string myName The name of the option to check.
      * @return bool
      */
-    function hasOption(string myName): bool
+    bool hasOption(string myName)
     {
         return isset(this.options[myName]);
     }
