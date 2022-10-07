@@ -54,9 +54,7 @@ class ArrayItemNode : INode
         return this.key;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getChildren(): array
     {
         return [this.value];

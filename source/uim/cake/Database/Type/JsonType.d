@@ -62,9 +62,7 @@ class JsonType : BaseType : BatchCastingInterface
         return json_decode(myValue, true);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function manyToPHP(array myValues, array myFields, IDriver myDriver): array
     {
         foreach (myFields as myField) {

@@ -9,22 +9,16 @@ import uim.cake.I18n\I18nIDateTime;
  */
 class TimeType : DateTimeType
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_format = 'H:i:s';
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_marshalFormats = [
         'H:i:s',
         'H:i',
     ];
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto _parseLocaleValue(string myValue): ?I18nIDateTime
     {
         /** @psalm-var class-string<\Cake\I18n\I18nIDateTime> myClass */

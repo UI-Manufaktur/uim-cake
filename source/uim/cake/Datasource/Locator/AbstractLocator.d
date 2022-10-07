@@ -70,25 +70,19 @@ abstract class AbstractLocator : ILocator
      */
     abstract protected auto createInstance(string myAlias, array myOptions);
 
-    /**
-     * @inheritDoc
-     */
+
     auto set(string myAlias, IRepository myRepository)
     {
         return this.instances[myAlias] = myRepository;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function exists(string myAlias): bool
     {
         return isset(this.instances[myAlias]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function remove(string myAlias): void
     {
         unset(
@@ -97,9 +91,7 @@ abstract class AbstractLocator : ILocator
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function clear(): void
     {
         this.instances = [];

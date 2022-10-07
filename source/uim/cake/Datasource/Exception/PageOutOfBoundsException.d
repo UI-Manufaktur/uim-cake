@@ -19,8 +19,6 @@ import uim.cake.core.Exception\CakeException;
  */
 class PageOutOfBoundsException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = 'Page number %s could not be found.';
 }

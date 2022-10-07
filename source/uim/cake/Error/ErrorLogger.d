@@ -38,9 +38,7 @@ class ErrorLogger : IErrorLogger
         this.setConfig(myConfig);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function logMessage($level, string myMessage, array $context = []): bool
     {
         if (!empty($context['request'])) {
@@ -53,9 +51,7 @@ class ErrorLogger : IErrorLogger
         return Log::write($level, myMessage);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function log(Throwable myException, ?IServerRequest myRequest = null): bool
     {
         foreach (this.getConfig('skipLog') as myClass) {
