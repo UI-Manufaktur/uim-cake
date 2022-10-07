@@ -124,5 +124,5 @@ interface PluginInterface
      * @param string $hook The hook to check
      * @return bool
      */
-    function isEnabled(string $hook): bool;
+    bool isEnabled(string $hook);
 }

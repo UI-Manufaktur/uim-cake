@@ -136,7 +136,7 @@ class App {
      * @param string $module module.
      * @return bool
      */
-    protected static auto _classExistsInBase(string myName, string $module): bool
+    protected static bool _classExistsInBase(string myName, string $module)
     {
         return class_exists($module . myName);
     }

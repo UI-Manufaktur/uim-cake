@@ -449,7 +449,7 @@ class RequestHandlerComponent : Component
      *    not exist in the type map, or if the Content-type header has
      *    already been set by this method.
      */
-    function respondAs(myType, array myOptions = []): bool
+    bool respondAs(myType, array myOptions = [])
     {
         $defaults = ['index' => null, 'charset' => null, 'attachment' => false];
         myOptions += $defaults;

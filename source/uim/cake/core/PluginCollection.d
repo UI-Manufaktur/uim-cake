@@ -300,9 +300,6 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Part of Iterator Interface
-     *
-     * @return bool
-     */
     bool valid()
     {
         $valid = isset(this.names[this.positions[this.loopDepth]]);

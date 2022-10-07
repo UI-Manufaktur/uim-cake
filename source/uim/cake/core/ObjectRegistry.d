@@ -198,7 +198,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string myName The object name to check for.
      * @return bool True is object is loaded else false.
      */
-    function has(string myName): bool
+    bool has(string myName)
     {
         return isset(this._loaded[myName]);
     }
@@ -238,7 +238,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string myName Name of object being checked.
      * @return bool
      */
-    auto __isset(string myName): bool
+    bool __isset(string myName)
     {
         return this.has(myName);
     }

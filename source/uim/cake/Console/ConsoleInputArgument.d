@@ -127,9 +127,6 @@ class ConsoleInputArgument
 
     /**
      * Check if this argument is a required argument
-     *
-     * @return bool
-     */
     bool isRequired()
     {
         return this._required;

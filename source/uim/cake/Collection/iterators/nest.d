@@ -45,10 +45,7 @@ class NestIterator : Collection : RecursiveIterator
     /**
      * Returns true if there is an array or a traversable object stored under the
      * configured nestKey for the current item
-     *
-     * @return bool
-     */
-    function hasChildren(): bool
+    bool hasChildren()
     {
         $property = this._propertyExtractor(this._nestKey);
         $children = $property(this.current());

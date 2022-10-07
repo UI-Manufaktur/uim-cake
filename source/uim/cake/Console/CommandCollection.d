@@ -102,7 +102,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @param string myName The named shell.
      * @return bool
      */
-    function has(string myName): bool
+    bool has(string myName)
     {
         return isset(this.commands[myName]);
     }

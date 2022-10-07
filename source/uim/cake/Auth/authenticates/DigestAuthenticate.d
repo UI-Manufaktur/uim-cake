@@ -258,7 +258,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $nonce The nonce value to check.
      * @return bool
      */
-    protected auto validNonce(string $nonce): bool
+    protected bool validNonce(string $nonce)
     {
         myValue = base64_decode($nonce);
         if (myValue === false) {

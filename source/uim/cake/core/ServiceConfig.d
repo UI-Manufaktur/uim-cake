@@ -27,7 +27,7 @@ class ServiceConfig
      * @param string myPath The path to check.
      * @return bool True if the configuration data exists.
      */
-    function has(string myPath): bool
+    bool has(string myPath)
     {
         return Configure::check(myPath);
     }

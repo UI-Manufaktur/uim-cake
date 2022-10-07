@@ -195,9 +195,6 @@ class ConsoleInputOption
 
     /**
      * Check if this option is required
-     *
-     * @return bool
-     */
     bool isRequired()
     {
         return this.required;
@@ -205,9 +202,6 @@ class ConsoleInputOption
 
     /**
      * Check if this option is a boolean option
-     *
-     * @return bool
-     */
     bool isBoolean()
     {
         return this._boolean;
@@ -215,9 +209,6 @@ class ConsoleInputOption
 
     /**
      * Check if this option accepts multiple values.
-     *
-     * @return bool
-     */
     bool acceptsMultiple()
     {
         return this._multiple;
