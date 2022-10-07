@@ -378,7 +378,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return string|null
      * @since 3.6.0
      */
-    auto getPlugin(): ?string
+    string getPlugin()
     {
         return this.plugin;
     }

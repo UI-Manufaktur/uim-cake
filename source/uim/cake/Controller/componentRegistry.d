@@ -74,7 +74,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected auto _resolveClassName(string myClass): ?string
+    protected string _resolveClassName(string myClass)
     {
         return App::className(myClass, 'Controller/Component', 'Component');
     }

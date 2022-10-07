@@ -29,7 +29,7 @@ abstract class BaseType : TypeInterface
     /**
      * @inheritDoc
      */
-    auto getName(): ?string
+    string getName()
     {
         return this._name;
     }
@@ -37,7 +37,7 @@ abstract class BaseType : TypeInterface
     /**
      * @inheritDoc
      */
-    auto getBaseType(): ?string
+    string getBaseType()
     {
         return this._name;
     }

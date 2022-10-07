@@ -232,7 +232,7 @@ class WhenThenExpression : IExpression
      * @return string|null
      * @see WhenThenExpression::then()
      */
-    auto getResultType(): ?string
+    string getResultType()
     {
         return this.thenType;
     }

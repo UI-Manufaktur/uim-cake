@@ -75,7 +75,7 @@ class IdentifierExpression : IExpression
      *
      * @return string|null
      */
-    auto getCollation(): ?string
+    string getCollation()
     {
         return this.collation;
     }

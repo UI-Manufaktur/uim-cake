@@ -35,7 +35,7 @@ class App {
      * @return string|null moduled class name, null if the class is not found.
      * @psalm-return class-string|null
      */
-    static function className(string aClassName, string aClassType = '', string aClassNameSuffix = ''): ?string
+    static string className(string aClassName, string aClassType = '', string aClassNameSuffix = '')
     {
         if (strpos(aClassName, '\\') !== false) {
             return class_exists(aClassName) ? aClassName : null;

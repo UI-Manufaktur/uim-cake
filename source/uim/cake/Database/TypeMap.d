@@ -127,7 +127,7 @@ class TypeMap
      * @param string|int $column The type for a given column
      * @return string|null
      */
-    function type($column): ?string
+    string type($column)
     {
         return this._types[$column] ?? this._defaults[$column] ?? null;
     }
