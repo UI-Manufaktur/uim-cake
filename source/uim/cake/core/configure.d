@@ -115,7 +115,7 @@ class Configure
      * @param string $var Variable name to check for
      * @return bool True if variable is there
      */
-    static function check(string $var): bool
+    static bool check(string $var)
     {
         if (empty($var)) {
             return false;
@@ -245,7 +245,7 @@ class Configure
      * @param string myName Engine name.
      * @return bool
      */
-    static function isConfigured(string myName): bool
+    static bool isConfigured(string myName)
     {
         return isset(static::$_engines[myName]);
     }
@@ -271,7 +271,7 @@ class Configure
      * @param string myName Name of the engine to drop.
      * @return bool Success
      */
-    static function drop(string myName): bool
+    static bool drop(string myName)
     {
         if (!isset(static::$_engines[myName])) {
             return false;
@@ -308,7 +308,7 @@ class Configure
      * @throws \Cake\Core\Exception\CakeException if the myConfig engine is not found
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
-    static function load(string myKey, string myConfig = 'default', bool myMerge = true): bool
+    static bool load(string myKey, string myConfig = 'default', bool myMerge = true)
     {
         $engine = static::_getEngine(myConfig);
         if (!$engine) {
@@ -361,7 +361,7 @@ class Configure
      * @return bool Success
      * @throws \Cake\Core\Exception\CakeException if the adapter does not implement a `dump` method.
      */
-    static function dump(string myKey, string myConfig = 'default', array myKeys = []): bool
+    static bool dump(string myKey, string myConfig = 'default', array myKeys = [])
     {
         $engine = static::_getEngine(myConfig);
         if (!$engine) {
@@ -433,7 +433,7 @@ class Configure
      * @return bool Success
      * @throws \RuntimeException
      */
-    static function store(string myName, string $cacheConfig = 'default', ?array myData = null): bool
+    static bool store(string myName, string $cacheConfig = 'default', ?array myData = null)
     {
         if (myData === null) {
             myData = static::$_values;
@@ -454,7 +454,7 @@ class Configure
      * @return bool Success.
      * @throws \RuntimeException
      */
-    static function restore(string myName, string $cacheConfig = 'default'): bool
+    static bool restore(string myName, string $cacheConfig = 'default')
     {
         if (!class_exists(Cache::class)) {
             throw new RuntimeException('You must install cakephp/cache to use Configure::restore()');

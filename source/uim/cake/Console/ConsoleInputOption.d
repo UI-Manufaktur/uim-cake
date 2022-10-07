@@ -198,7 +198,7 @@ class ConsoleInputOption
      *
      * @return bool
      */
-    function isRequired(): bool
+    bool isRequired()
     {
         return this.required;
     }
@@ -208,7 +208,7 @@ class ConsoleInputOption
      *
      * @return bool
      */
-    function isBoolean(): bool
+    bool isBoolean()
     {
         return this._boolean;
     }
@@ -218,7 +218,7 @@ class ConsoleInputOption
      *
      * @return bool
      */
-    function acceptsMultiple(): bool
+    bool acceptsMultiple()
     {
         return this._multiple;
     }
@@ -230,7 +230,7 @@ class ConsoleInputOption
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    function validChoice(myValue): bool
+    bool validChoice(myValue)
     {
         if (empty(this._choices)) {
             return true;

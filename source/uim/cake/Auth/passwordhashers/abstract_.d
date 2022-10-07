@@ -46,7 +46,7 @@ abstract class AbstractPasswordHasher
      * @param string myHashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    abstract function check(string myPassword, string myHashedPassword): bool;
+    abstract bool check(string myPassword, string myHashedPassword);
 
     /**
      * Returns true if the password need to be rehashed, due to the password being

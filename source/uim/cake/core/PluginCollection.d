@@ -187,7 +187,7 @@ class PluginCollection : Iterator, Countable
      * @param string myName The named plugin.
      * @return bool
      */
-    function has(string myName): bool
+    bool has(string myName)
     {
         return isset(this.plugins[myName]);
     }
@@ -303,7 +303,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return bool
      */
-    function valid(): bool
+    bool valid()
     {
         $valid = isset(this.names[this.positions[this.loopDepth]]);
         if (!$valid) {

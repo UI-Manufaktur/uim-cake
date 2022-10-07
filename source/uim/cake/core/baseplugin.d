@@ -206,7 +206,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function isEnabled(string $hook): bool
+    bool isEnabled(string $hook)
     {
         this.checkHook($hook);
 

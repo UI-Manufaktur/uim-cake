@@ -78,7 +78,7 @@ class ConsoleInputArgument
      * @param \Cake\Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      * @return bool
      */
-    function isEqualTo(ConsoleInputArgument $argument): bool
+    bool isEqualTo(ConsoleInputArgument $argument)
     {
         return this.usage() === $argument.usage();
     }
@@ -130,7 +130,7 @@ class ConsoleInputArgument
      *
      * @return bool
      */
-    function isRequired(): bool
+    bool isRequired()
     {
         return this._required;
     }
@@ -142,7 +142,7 @@ class ConsoleInputArgument
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    function validChoice(string myValue): bool
+    bool validChoice(string myValue)
     {
         if (empty(this._choices)) {
             return true;
