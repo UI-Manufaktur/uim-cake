@@ -56,10 +56,7 @@ class WindowExpression : IExpression, WindowInterface
      *
      * These window expressions only specify a named window and do not
      * specify their own partitions, frame or order.
-     *
-     * @return bool
-     */
-    function isNamedOnly(): bool
+    bool isNamedOnly()
     {
         return this.name.getIdentifier() && (!this.partitions && !this.frame && !this.order);
     }

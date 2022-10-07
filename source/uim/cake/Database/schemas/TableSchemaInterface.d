@@ -156,10 +156,8 @@ interface TableSchemaInterface : SchemaInterface
 
     /**
      * Check whether a table has an autoIncrement column defined.
-     *
-     * @return bool
      */
-    function hasAutoincrement(): bool;
+    bool hasAutoincrement();
 
     /**
      * Sets whether the table is temporary in the database.
@@ -174,7 +172,7 @@ interface TableSchemaInterface : SchemaInterface
      *
      * @return bool The current temporary setting.
      */
-    function isTemporary(): bool;
+    bool isTemporary();
 
     /**
      * Get the column(s) used for the primary key.

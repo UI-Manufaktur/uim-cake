@@ -47,7 +47,7 @@ class LoggingStatement : StatementDecorator
      * @return bool True on success, false otherwise
      * @throws \Exception Re-throws any exception raised during query execution.
      */
-    auto execute(?array myParams = null): bool
+    bool execute(?array myParams = null)
     {
         this.startTime = microtime(true);
 

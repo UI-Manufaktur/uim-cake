@@ -32,7 +32,7 @@ class ErrorCodeWaitStrategy : RetryStrategyInterface
     }
 
 
-    function shouldRetry(Exception myException, int $retryCount): bool
+    bool shouldRetry(Exception myException, int $retryCount)
     {
         if (
             myException instanceof PDOException &&

@@ -156,7 +156,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param array|null myParams list of values to be bound to query
      * @return bool true on success, false otherwise
      */
-    auto execute(?array myParams = null): bool
+    bool execute(?array myParams = null)
     {
         this._hasExecuted = true;
 

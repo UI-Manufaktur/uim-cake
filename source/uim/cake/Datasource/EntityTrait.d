@@ -133,7 +133,7 @@ trait EntityTrait
      * @return bool
      * @see \Cake\ORM\Entity::has()
      */
-    auto __isset(string myField): bool
+    bool __isset(string myField)
     {
         return this.has(myField);
     }
@@ -342,7 +342,7 @@ trait EntityTrait
      * @param array<string>|string myField The field or fields to check.
      * @return bool
      */
-    function has(myField): bool
+    bool has(myField)
     {
         foreach ((array)myField as $prop) {
             if (this.get($prop) === null) {
@@ -368,7 +368,7 @@ trait EntityTrait
      * @param string myField The field to check.
      * @return bool
      */
-    function isEmpty(string myField): bool
+    bool isEmpty(string myField)
     {
         myValue = this.get(myField);
         if (
@@ -404,7 +404,7 @@ trait EntityTrait
      * @param string myField The field to check.
      * @return bool
      */
-    function hasValue(string myField): bool
+    bool hasValue(string myField)
     {
         return !this.isEmpty(myField);
     }
@@ -574,7 +574,7 @@ trait EntityTrait
      * @param string $offset The offset to check.
      * @return bool Success
      */
-    function offsetExists($offset): bool
+    bool offsetExists($offset)
     {
         return this.has($offset);
     }
@@ -749,7 +749,7 @@ trait EntityTrait
      * @param string|null myField The field to check the status for. Null for the whole entity.
      * @return bool Whether the field was changed or not
      */
-    function isDirty(?string myField = null): bool
+    bool isDirty(?string myField = null)
     {
         if (myField === null) {
             return !empty(this._dirty);
@@ -810,7 +810,7 @@ trait EntityTrait
      *
      * @return bool Whether the entity has been persisted.
      */
-    function isNew(): bool
+    bool isNew()
     {
         if (func_num_args()) {
             deprecationWarning('Using isNew() as setter is deprecated. Use setNew() instead.');
@@ -827,7 +827,7 @@ trait EntityTrait
      * @param bool $includeNested true will check nested entities for hasErrors()
      * @return bool
      */
-    function hasErrors(bool $includeNested = true): bool
+    bool hasErrors(bool $includeNested = true)
     {
         if (Hash::filter(this._errors)) {
             return true;
@@ -1005,7 +1005,10 @@ trait EntityTrait
      * @param \Cake\Datasource\IEntity|array $object The object to read errors from.
      * @return bool
      */
-    protected auto _readHasErrors($object): bool
+    protected      *
+     * @return bool
+     */
+    bool _readHasErrors($object)
     {
         if ($object instanceof IEntity && $object.hasErrors()) {
             return true;
@@ -1176,7 +1179,10 @@ trait EntityTrait
      * @param string myField Field name to check
      * @return bool
      */
-    function isAccessible(string myField): bool
+         *
+     * @return bool
+     */
+    bool isAccessible(string myField)
     {
         myValue = this._accessible[myField] ?? null;
 

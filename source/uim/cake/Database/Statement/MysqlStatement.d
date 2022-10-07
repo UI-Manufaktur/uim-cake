@@ -12,7 +12,7 @@ class MysqlStatement : PDOStatement
     use BufferResultsTrait;
 
 
-    auto execute(?array myParams = null): bool
+    bool execute(?array myParams = null)
     {
         myConnection = this._driver.getConnection();
 

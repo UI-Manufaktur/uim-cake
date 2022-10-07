@@ -646,7 +646,7 @@ class QueryExpression : IExpression, Countable
      * @deprecated 4.2.0 This method is unused.
      * @codeCoverageIgnore
      */
-    function isCallable($callable): bool
+    bool isCallable($callable)
     {
         if (is_string($callable)) {
             return false;
@@ -661,10 +661,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Returns true if this expression contains any other nested
      * IExpression objects
-     *
-     * @return bool
-     */
-    function hasNestedExpression(): bool
+    bool hasNestedExpression()
     {
         foreach (this._conditions as $c) {
             if ($c instanceof IExpression) {

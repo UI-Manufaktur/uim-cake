@@ -123,8 +123,6 @@ interface ConnectionInterface : LoggerAwareInterface
 
     /**
      * Check if query logging is enabled.
-     *
-     * @return bool
      */
-    function isQueryLoggingEnabled(): bool;
+    bool isQueryLoggingEnabled();
 }

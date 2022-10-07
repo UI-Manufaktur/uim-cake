@@ -104,7 +104,7 @@ class RuleInvoker
      * @param array $scope The rule's scope/options.
      * @return bool Whether the rule passed.
      */
-    auto __invoke(IEntity $entity, array $scope): bool
+    bool __invoke(IEntity $entity, array $scope)
     {
         $rule = this.rule;
         $pass = $rule($entity, this.options + $scope);

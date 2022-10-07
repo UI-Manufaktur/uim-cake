@@ -357,7 +357,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function hasColumn(string myName): bool
+    bool hasColumn(string myName)
     {
         return isset(this._columns[myName]);
     }
@@ -389,7 +389,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function isNullable(string myName): bool
+    bool isNullable(string myName)
     {
         if (!isset(this._columns[myName])) {
             return true;
@@ -573,10 +573,8 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
 
     /**
      * Check whether a table has an autoIncrement column defined.
-     *
-     * @return bool
      */
-    function hasAutoincrement(): bool
+    bool hasAutoincrement()
     {
         foreach (this._columns as $column) {
             if (isset($column['autoIncrement']) && $column['autoIncrement']) {
@@ -650,7 +648,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function isTemporary(): bool
+    bool isTemporary()
     {
         return this._temporary;
     }

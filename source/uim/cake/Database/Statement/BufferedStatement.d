@@ -115,7 +115,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    auto execute(?array myParams = null): bool
+    bool execute(?array myParams = null)
     {
         this._reset();
         this._hasExecuted = true;
@@ -271,10 +271,8 @@ class BufferedStatement : Iterator, IStatement
 
     /**
      * Returns whether the iterator has more elements
-     *
-     * @return bool
      */
-    function valid(): bool
+    bool valid()
     {
         $old = this.index;
         $row = this.fetch(self::FETCH_TYPE_ASSOC);

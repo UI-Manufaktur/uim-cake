@@ -79,7 +79,7 @@ class ReconnectStrategy : RetryStrategyInterface
      *
      * @return bool Whether the connection was re-established
      */
-    protected auto reconnect(): bool
+    bool auto reconnect()
     {
         if (this.connection.inTransaction()) {
             // It is not safe to blindly reconnect in the middle of a transaction
