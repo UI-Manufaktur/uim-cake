@@ -67,7 +67,7 @@ class ControllerAuthorize : BaseAuthorize
      * @throws \Cake\Core\Exception\CakeException If controller does not have method `isAuthorized()`.
      * @return bool
      */
-    function authorize(myUser, ServerRequest myRequest): bool
+    bool authorize(myUser, ServerRequest myRequest)
     {
         if (!method_exists(this._Controller, 'isAuthorized')) {
             throw new CakeException(sprintf(

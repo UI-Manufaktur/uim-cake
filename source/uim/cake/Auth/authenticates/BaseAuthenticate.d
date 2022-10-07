@@ -183,8 +183,6 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * Returns whether the password stored in the repository for the logged in user
      * requires to be rehashed with another algorithm
-     *
-     * @return bool
      */
     bool needsPasswordRehash()
     {

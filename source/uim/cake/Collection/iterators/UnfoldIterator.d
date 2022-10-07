@@ -47,10 +47,8 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
     /**
      * Returns true as each of the elements in the array represent a
      * list of items
-     *
-     * @return bool
      */
-    function hasChildren(): bool
+    bool hasChildren()
     {
         return true;
     }

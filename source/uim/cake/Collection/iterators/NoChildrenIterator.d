@@ -12,10 +12,8 @@ class NoChildrenIterator : Collection : RecursiveIterator
 {
     /**
      * Returns false as there are no children iterators in this collection
-     *
-     * @return bool
      */
-    function hasChildren(): bool
+    bool hasChildren()
     {
         return false;
     }

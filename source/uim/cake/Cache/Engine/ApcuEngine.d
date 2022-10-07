@@ -48,7 +48,7 @@ class ApcuEngine : CacheEngine
      * @return bool True on success and false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
-    auto set(myKey, myValue, $ttl = null): bool
+    bool set(myKey, myValue, $ttl = null)
     {
         myKey = this._key(myKey);
         $duration = this.duration($ttl);
@@ -112,7 +112,7 @@ class ApcuEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    bool delete(myKey): bool
+    bool delete(myKey)
     {
         myKey = this._key(myKey);
 

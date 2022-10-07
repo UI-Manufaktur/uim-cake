@@ -105,10 +105,8 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Returns whether the iterator has more elements
-     *
-     * @return bool
      */
-    function valid(): bool
+    bool valid()
     {
         if (this._buffer.offsetExists(this._index)) {
             $current = this._buffer.offsetGet(this._index);

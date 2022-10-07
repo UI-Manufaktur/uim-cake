@@ -64,7 +64,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @param string myHashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    function check(string myPassword, string myHashedPassword): bool
+    bool check(string myPassword, string myHashedPassword)
     {
         foreach (this._hashers as myHasher) {
             if (myHasher.check(myPassword, myHashedPassword)) {
@@ -82,7 +82,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @param string myPassword The password to verify
      * @return bool
      */
-    function needsRehash(string myPassword): bool
+    bool needsRehash(string myPassword)
     {
         return this._hashers[0].needsRehash(myPassword);
     }

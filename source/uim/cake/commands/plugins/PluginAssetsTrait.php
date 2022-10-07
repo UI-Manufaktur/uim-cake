@@ -140,7 +140,7 @@ trait PluginAssetsTrait
      * @param array<string, mixed> myConfig Plugin config.
      * @return bool
      */
-    protected auto _remove(array myConfig): bool
+    protected bool _remove(array myConfig)
     {
         if (myConfig['moduled'] && !is_dir(myConfig['destDir'])) {
             this.io.verbose(
@@ -194,7 +194,7 @@ trait PluginAssetsTrait
      * @param string $dir Directory name
      * @return bool
      */
-    protected auto _createDirectory(string $dir): bool
+    protected bool _createDirectory(string $dir)
     {
         $old = umask(0);
         // phpcs:disable
@@ -220,7 +220,7 @@ trait PluginAssetsTrait
      * @param string $link Link name
      * @return bool
      */
-    protected auto _createSymlink(string myTarget, string $link): bool
+    protected bool _createSymlink(string myTarget, string $link)
     {
         // phpcs:disable
         myResult = @symlink(myTarget, $link);
@@ -242,7 +242,7 @@ trait PluginAssetsTrait
      * @param string $destination Destination directory
      * @return bool
      */
-    protected auto _copyDirectory(string $source, string $destination): bool
+    protected bool _copyDirectory(string $source, string $destination)
     {
         $fs = new Filesystem();
         if ($fs.copyDir($source, $destination)) {

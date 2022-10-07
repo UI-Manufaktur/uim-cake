@@ -1054,8 +1054,6 @@ interface ICollection : Iterator, JsonSerializable
      * ```
      * (new Collection([])).isEmpty(); // true
      * ```
-     *
-     * @return bool
      */
     bool isEmpty();
 

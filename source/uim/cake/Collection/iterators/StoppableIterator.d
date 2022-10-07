@@ -51,10 +51,8 @@ class StoppableIterator : Collection
     /**
      * Evaluates the condition and returns its result, this controls
      * whether more results will be yielded.
-     *
-     * @return bool
      */
-    function valid(): bool
+    bool valid()
     {
         if (!super.valid()) {
             return false;
