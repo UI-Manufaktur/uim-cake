@@ -31,9 +31,7 @@ class DefaultFormatter : AbstractFormatter
         this.setConfig(myConfig);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function format($level, string myMessage, array $context = []): string
     {
         if (this._config['includeDate']) {

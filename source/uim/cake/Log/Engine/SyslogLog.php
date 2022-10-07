@@ -80,9 +80,7 @@ class SyslogLog : BaseLog
      */
     protected $_open = false;
 
-    /**
-     * @inheritDoc
-     */
+
     this(array myConfig = [])
     {
         if (isset(myConfig['format'])) {

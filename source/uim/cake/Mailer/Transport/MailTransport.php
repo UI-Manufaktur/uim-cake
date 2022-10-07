@@ -20,9 +20,7 @@ import uim.cake.Mailer\Message;
  */
 class MailTransport : AbstractTransport
 {
-    /**
-     * @inheritDoc
-     */
+
     function send(Message myMessage): array
     {
         this.checkRecipient(myMessage);

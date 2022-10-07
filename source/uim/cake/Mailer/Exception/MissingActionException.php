@@ -18,8 +18,6 @@ import uim.cake.core.Exception\CakeException;
  */
 class MissingActionException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = 'Mail %s::%s() could not be found, or is not accessible.';
 }

@@ -1096,9 +1096,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(?ValueBinder $binder = null): string
     {
         this.triggerBeforeFind();
@@ -1330,9 +1328,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto __debugInfo(): array
     {
         $eagerLoader = this.getEagerLoader();
