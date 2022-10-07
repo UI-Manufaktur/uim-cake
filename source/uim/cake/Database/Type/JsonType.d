@@ -33,7 +33,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    function toDatabase(myValue, IDriver myDriver): ?string
+    string toDatabase(myValue, IDriver myDriver)
     {
         if (is_resource(myValue)) {
             throw new InvalidArgumentException('Cannot convert a resource value to JSON');

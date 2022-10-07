@@ -147,7 +147,7 @@ class Folder
      *
      * @return string|null Current path
      */
-    function pwd(): ?string
+    string pwd()
     {
         return this.path;
     }

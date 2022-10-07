@@ -279,7 +279,7 @@ class Response : Message : IResponse
      *
      * @return string|null
      */
-    auto getEncoding(): ?string
+    string getEncoding()
     {
         myContents = this.getHeaderLine('content-type');
         if (!myContents) {

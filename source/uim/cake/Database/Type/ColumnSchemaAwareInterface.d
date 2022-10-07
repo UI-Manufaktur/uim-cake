@@ -14,7 +14,7 @@ interface ColumnSchemaAwareInterface
      * @param \Cake\Database\IDriver myDriver The driver instance being used.
      * @return string|null An SQL fragment, or `null` in case the column isn't processed by this type.
      */
-    auto getColumnSql(TableSchemaInterface $schema, string $column, IDriver myDriver): ?string;
+    string getColumnSql(TableSchemaInterface $schema, string $column, IDriver myDriver);
 
     /**
      * Convert a SQL column definition to an abstract type definition.

@@ -58,7 +58,7 @@ class PropertyNode : INode
      *
      * @return string
      */
-    auto getVisibility(): ?string
+    string getVisibility()
     {
         return this.visibility;
     }

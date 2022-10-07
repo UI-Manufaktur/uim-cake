@@ -15,7 +15,7 @@ class UuidType : StringType
      * @param \Cake\Database\IDriver myDriver object from which database preferences and configuration will be extracted
      * @return string|null
      */
-    function toDatabase(myValue, IDriver myDriver): ?string
+    string toDatabase(myValue, IDriver myDriver)
     {
         if (myValue === null || myValue === '' || myValue === false) {
             return null;
@@ -40,7 +40,7 @@ class UuidType : StringType
      * @param mixed myValue The value to convert.
      * @return string|null Converted value.
      */
-    function marshal(myValue): ?string
+    string marshal(myValue)
     {
         if (myValue === null || myValue === '' || is_array(myValue)) {
             return null;

@@ -836,7 +836,7 @@ class QueryExpression : IExpression, Countable
      * @param \Cake\Database\IExpression|string myField The field name to get a type for.
      * @return string|null The computed type or null, if the type is unknown.
      */
-    protected auto _calculateType(myField): ?string
+    protected string _calculateType(myField)
     {
         myField = myField instanceof IdentifierExpression ? myField.getIdentifier() : myField;
         if (is_string(myField)) {

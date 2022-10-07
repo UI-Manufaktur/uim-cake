@@ -76,7 +76,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param \Cake\Database\IDriver myDriver The driver instance to convert with.
      * @return string|null
      */
-    function toPHP(myValue, IDriver myDriver): ?string
+    string toPHP(myValue, IDriver myDriver)
     {
         if (myValue === null) {
             return null;
@@ -119,7 +119,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param mixed myValue The value to convert.
      * @return string|null Converted value.
      */
-    function marshal(myValue): ?string
+    string marshal(myValue)
     {
         if (myValue === null || myValue === '') {
             return null;

@@ -139,7 +139,7 @@ class FormDataPart
      * @param string|null $filename Use null to get/string to set.
      * @return string|null
      */
-    function filename(?string $filename = null): ?string
+    string filename(?string $filename = null)
     {
         if ($filename === null) {
             return this._filename;
@@ -154,7 +154,7 @@ class FormDataPart
      * @param string|null myType Use null to get/string to set.
      * @return string|null
      */
-    function type(?string myType): ?string
+    string type(?string myType)
     {
         if (myType === null) {
             return this._type;

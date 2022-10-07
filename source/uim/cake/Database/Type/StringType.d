@@ -27,7 +27,7 @@ class StringType : BaseType : IOptionalConvert
      * @param \Cake\Database\IDriver myDriver The driver instance to convert with.
      * @return string|null
      */
-    function toDatabase(myValue, IDriver myDriver): ?string
+    string toDatabase(myValue, IDriver myDriver)
     {
         if (myValue === null || is_string(myValue)) {
             return myValue;
@@ -54,7 +54,7 @@ class StringType : BaseType : IOptionalConvert
      * @param \Cake\Database\IDriver myDriver The driver instance to convert with.
      * @return string|null
      */
-    function toPHP(myValue, IDriver myDriver): ?string
+    string toPHP(myValue, IDriver myDriver)
     {
         if (myValue === null) {
             return null;
@@ -81,7 +81,7 @@ class StringType : BaseType : IOptionalConvert
      * @param mixed myValue The value to convert.
      * @return string|null Converted value.
      */
-    function marshal(myValue): ?string
+    string marshal(myValue)
     {
         if (myValue === null || is_array(myValue)) {
             return null;

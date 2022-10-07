@@ -225,7 +225,7 @@ interface CookieInterface
      *
      * @return string|null
      */
-    auto getSameSite(): ?string;
+    string getSameSite();
 
     /**
      * Create a cookie with an updated SameSite option.

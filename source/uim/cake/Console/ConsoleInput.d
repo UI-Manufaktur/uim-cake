@@ -41,7 +41,7 @@ class ConsoleInput
      *
      * @return string|null The value of the stream. Null on EOF.
      */
-    function read(): ?string
+    string read()
     {
         if (this._canReadline) {
             $line = readline('');

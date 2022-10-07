@@ -313,7 +313,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null
      */
-    function contentType(): ?string
+    string contentType()
     {
         myType = this.getEnv('CONTENT_TYPE');
         if (myType) {
@@ -407,7 +407,7 @@ class ServerRequest : IServerRequest
      *   Local addresses do not contain hostnames.
      * @return string|null The referring address for this request or null.
      */
-    function referer(bool $local = true): ?string
+    string referer(bool $local = true)
     {
         $ref = this.getEnv('HTTP_REFERER');
 
@@ -973,7 +973,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null
      */
-    function host(): ?string
+    string host()
     {
         if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_HOST')) {
             return this.getEnv('HTTP_X_FORWARDED_HOST');
@@ -987,7 +987,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null
      */
-    function port(): ?string
+    string port()
     {
         if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_PORT')) {
             return this.getEnv('HTTP_X_FORWARDED_PORT');
@@ -1003,7 +1003,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null The scheme used for the request.
      */
-    function scheme(): ?string
+    string scheme()
     {
         if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_PROTO')) {
             return this.getEnv('HTTP_X_FORWARDED_PROTO');
@@ -1449,7 +1449,7 @@ class ServerRequest : IServerRequest
      *   variable's value that does not exist.
      * @return string|null Either the environment value, or null if the value doesn't exist.
      */
-    auto getEnv(string myKey, ?string $default = null): ?string
+    string getEnv(string myKey, ?string $default = null)
     {
         myKey = strtoupper(myKey);
         if (!array_key_exists(myKey, this._environment)) {

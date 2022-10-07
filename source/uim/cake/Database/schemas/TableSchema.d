@@ -346,7 +346,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     /**
      * @inheritDoc
      */
-    auto getColumnType(string myName): ?string
+    string getColumnType(string myName)
     {
         if (!isset(this._columns[myName])) {
             return null;
@@ -381,7 +381,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     /**
      * @inheritDoc
      */
-    function baseColumnType(string $column): ?string
+    string baseColumnType(string $column)
     {
         if (isset(this._columns[$column]['baseType'])) {
             return this._columns[$column]['baseType'];

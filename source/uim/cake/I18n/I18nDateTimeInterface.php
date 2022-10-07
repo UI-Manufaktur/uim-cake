@@ -14,7 +14,7 @@ interface I18nIDateTime : ChronosInterface, JsonSerializable
      *
      * @return string|null The default locale string to be used or null.
      */
-    static auto getDefaultLocale(): ?string;
+    static string getDefaultLocale();
 
     /**
      * Sets the default locale.
