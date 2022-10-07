@@ -87,7 +87,7 @@ class PhpConfig : ConfigEngineInterface
      * @param array myData Data to dump.
      * @return bool Success
      */
-    function dump(string myKey, array myData): bool
+    bool dump(string myKey, array myData)
     {
         myContentss = '<?php' . "\n" . 'return ' . var_export(myData, true) . ';';
 

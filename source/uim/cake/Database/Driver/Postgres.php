@@ -66,7 +66,7 @@ class Postgres : Driver
      *
      * @return bool true on success
      */
-    function connect(): bool
+    bool connect()
     {
         if (this._connection) {
             return true;
@@ -109,7 +109,7 @@ class Postgres : Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    function enabled(): bool
+    bool enabled()
     {
         return in_array('pgsql', PDO::getAvailableDrivers(), true);
     }
@@ -162,7 +162,7 @@ class Postgres : Driver
     }
 
 
-    function supports(string $feature): bool
+    bool supports(string $feature)
     {
         switch ($feature) {
             case static::FEATURE_CTE:
@@ -179,7 +179,7 @@ class Postgres : Driver
     }
 
 
-    function supportsDynamicConstraints(): bool
+    bool supportsDynamicConstraints()
     {
         return true;
     }

@@ -209,7 +209,7 @@ class Connection : ConnectionInterface
      * @throws \Cake\Database\Exception\MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
-    function connect(): bool
+    bool connect()
     {
         try {
             return this._driver.connect();
@@ -239,10 +239,7 @@ class Connection : ConnectionInterface
 
     /**
      * Returns whether connection to database server was already established.
-     *
-     * @return bool
-     */
-    function isConnected(): bool
+    bool isConnected()
     {
         return this._driver.isConnected();
     }
@@ -470,7 +467,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true on success, false otherwise
      */
-    function commit(): bool
+    bool commit()
     {
         if (!this._transactionStarted) {
             return false;
@@ -508,7 +505,7 @@ class Connection : ConnectionInterface
      * beginning of it. Defaults to false if using savepoints, or true if not.
      * @return bool
      */
-    function rollback(?bool $toBeginning = null): bool
+    bool rollback(?bool $toBeginning = null)
     {
         if (!this._transactionStarted) {
             return false;
@@ -576,7 +573,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true if enabled, false otherwise
      */
-    function isSavePointsEnabled(): bool
+    bool isSavePointsEnabled()
     {
         return this._useSavePoints;
     }
@@ -648,7 +645,7 @@ class Connection : ConnectionInterface
      * @return bool true if driver supports dynamic constraints
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
-    function supportsDynamicConstraints(): bool
+    bool supportsDynamicConstraints()
     {
         return this._driver.supportsDynamicConstraints();
     }
@@ -686,7 +683,7 @@ class Connection : ConnectionInterface
      *
      * @return bool
      */
-    protected auto wasNestedTransactionRolledback(): bool
+    protected bool wasNestedTransactionRolledback()
     {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }
@@ -712,7 +709,7 @@ class Connection : ConnectionInterface
      *
      * @return bool True if a transaction is running else false.
      */
-    function inTransaction(): bool
+    bool inTransaction()
     {
         return this._transactionStarted;
     }
@@ -737,10 +734,7 @@ class Connection : ConnectionInterface
      * Checks if using `quote()` is supported.
      *
      * This is not required to use `quoteIdentifier()`.
-     *
-     * @return bool
-     */
-    function supportsQuoting(): bool
+    bool supportsQuoting()
     {
         return this._driver.supports(IDriver::FEATURE_QUOTE);
     }
@@ -833,10 +827,8 @@ class Connection : ConnectionInterface
 
     /**
      * Check if query logging is enabled.
-     *
-     * @return bool
      */
-    function isQueryLoggingEnabled(): bool
+    bool isQueryLoggingEnabled()
     {
         return this._logQueries;
     }

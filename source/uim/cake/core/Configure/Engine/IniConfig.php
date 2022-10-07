@@ -137,7 +137,7 @@ class IniConfig : ConfigEngineInterface
      * @param array myData The data to convert to ini file.
      * @return bool Success.
      */
-    function dump(string myKey, array myData): bool
+    bool dump(string myKey, array myData)
     {
         myResult = [];
         foreach (myData as $k => myValue) {

@@ -90,7 +90,7 @@ class JsonConfig : ConfigEngineInterface
      * @param array myData Data to dump.
      * @return bool Success
      */
-    function dump(string myKey, array myData): bool
+    bool dump(string myKey, array myData)
     {
         $filename = this._getFilePath(myKey);
 

@@ -33,5 +33,5 @@ interface ConfigEngineInterface
      * @param array myData The data to dump.
      * @return bool True on success or false on failure.
      */
-    function dump(string myKey, array myData): bool;
+    bool dump(string myKey, array myData);
 }

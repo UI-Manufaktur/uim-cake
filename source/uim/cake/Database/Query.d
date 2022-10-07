@@ -2167,10 +2167,8 @@ class Query : IExpression, IteratorAggregate
      *
      * When disabled it will consume less memory as fetched results are not
      * remembered for future iterations.
-     *
-     * @return bool
      */
-    function isBufferedResultsEnabled(): bool
+    bool isBufferedResultsEnabled()
     {
         return this._useBufferedResults;
     }
@@ -2246,7 +2244,10 @@ class Query : IExpression, IteratorAggregate
      *
      * @return bool
      */
-    function isResultsCastingEnabled(): bool
+         *
+     * @return bool
+     */
+    bool isResultsCastingEnabled()
     {
         return this.typeCastEnabled;
     }
