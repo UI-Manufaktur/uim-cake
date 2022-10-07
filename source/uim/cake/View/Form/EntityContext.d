@@ -172,9 +172,7 @@ class EntityContext : IContext
         return (array)this._tables[this._rootName].getPrimaryKey();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isPrimaryKey(string myField): bool
     {
         $parts = explode('.', myField);
@@ -501,9 +499,7 @@ class EntityContext : IContext
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getRequiredMessage(string myField): ?string
     {
         $parts = explode('.', myField);

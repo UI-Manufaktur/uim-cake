@@ -179,9 +179,7 @@ class BasicWidget : WidgetInterface
         return myData;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function secureFields(array myData): array
     {
         if (!isset(myData['name']) || myData['name'] === '') {

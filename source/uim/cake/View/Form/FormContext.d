@@ -43,33 +43,25 @@ class FormContext : IContext
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getPrimaryKey(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isPrimaryKey(string myField): bool
     {
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isCreate(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function val(string myField, array myOptions = [])
     {
         myOptions += [
@@ -105,9 +97,7 @@ class FormContext : IContext
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isRequired(string myField): ?bool
     {
         $validator = this._form.getValidator();
@@ -121,9 +111,7 @@ class FormContext : IContext
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getRequiredMessage(string myField): ?string
     {
         $parts = explode('.', myField);
@@ -142,9 +130,7 @@ class FormContext : IContext
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getMaxLength(string myField): ?int
     {
         $validator = this._form.getValidator();
@@ -165,25 +151,19 @@ class FormContext : IContext
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fieldNames(): array
     {
         return this._form.getSchema().fields();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function type(string myField): ?string
     {
         return this._form.getSchema().fieldType(myField);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function attributes(string myField): array
     {
         return array_intersect_key(
@@ -192,9 +172,7 @@ class FormContext : IContext
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function hasError(string myField): bool
     {
         myErrors = this.error(myField);
@@ -202,9 +180,7 @@ class FormContext : IContext
         return count(myErrors) > 0;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function error(string myField): array
     {
         return (array)Hash::get(this._form.getErrors(), myField, []);

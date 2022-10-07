@@ -18,8 +18,6 @@ import uim.cake.core.Exception\CakeException;
  */
 class MissingHelperException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = 'Helper class %s could not be found.';
 }

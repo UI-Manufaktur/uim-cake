@@ -18,9 +18,7 @@ import uim.cake.Mailer\Message;
  */
 class MailContainsHtml : MailContains
 {
-    /**
-     * @inheritDoc
-     */
+
     protected myType = Message::MESSAGE_HTML;
 
     /**

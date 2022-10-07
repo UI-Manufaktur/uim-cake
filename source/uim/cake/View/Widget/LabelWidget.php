@@ -74,9 +74,7 @@ class LabelWidget : WidgetInterface
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function secureFields(array myData): array
     {
         return [];

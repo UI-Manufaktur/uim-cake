@@ -111,17 +111,13 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         this.init();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function connection(): string
     {
         return this.connection;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sourceName(): string
     {
         return this.table;
@@ -258,9 +254,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function create(ConnectionInterface myConnection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
@@ -295,9 +289,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function drop(ConnectionInterface myConnection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
@@ -322,9 +314,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function insert(ConnectionInterface myConnection)
     {
         if (!empty(this.records)) {
@@ -345,9 +335,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createConstraints(ConnectionInterface myConnection): bool
     {
         if (empty(this._constraints)) {
@@ -372,9 +360,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraints(ConnectionInterface myConnection): bool
     {
         if (empty(this._constraints)) {
@@ -425,9 +411,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return [myFields, myValues, myTypes];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncate(ConnectionInterface myConnection): bool
     {
         /** @psalm-suppress ArgumentTypeCoercion */
@@ -439,16 +423,12 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getTableSchema() {
         return this._schema;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto setTableSchema($schema)
     {
         this._schema = $schema;

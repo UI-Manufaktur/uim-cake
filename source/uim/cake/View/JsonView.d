@@ -120,9 +120,7 @@ class JsonView : SerializedView
         return $return;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto _serialize($serialize): string
     {
         myData = this._dataToSerialize($serialize);

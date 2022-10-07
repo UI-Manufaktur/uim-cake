@@ -113,9 +113,7 @@ class ArrayContext : IContext
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isPrimaryKey(string myField): bool
     {
         $primaryKey = this.getPrimaryKey();
@@ -212,9 +210,7 @@ class ArrayContext : IContext
         return $required;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getRequiredMessage(string myField): ?string
     {
         if (!is_array(this._context['required'])) {
@@ -253,9 +249,7 @@ class ArrayContext : IContext
         return Hash::get(this._context['schema'], "myField.length");
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fieldNames(): array
     {
         $schema = this._context['schema'];

@@ -16,14 +16,10 @@
  */
 class AjaxView : View
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $layout = 'ajax';
 
-    /**
-     * @inheritDoc
-     */
+
     function initialize(): void
     {
         super.initialize();
