@@ -59,9 +59,7 @@ class ExtractIterator : Collection
         return $extractor(super.current());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unwrap(): Traversable
     {
         $iterator = this.getInnerIterator();

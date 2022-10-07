@@ -56,9 +56,7 @@ class ReplaceIterator : Collection
         return $callback(super.current(), this.key(), this._innerIterator);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unwrap(): Traversable
     {
         $iterator = this._innerIterator;

@@ -13,9 +13,7 @@ import uim.cake.Utility\Inflector;
  * Language string extractor
  */
 class I18nExtractCommand : Command {
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'i18n extract';
     }

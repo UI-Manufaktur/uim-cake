@@ -12,9 +12,7 @@ import uim.cake.console.consoleOptionParser;
  * CacheClear command.
  */
 class CacheClearCommand : Command {
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'cache clear';
     }
