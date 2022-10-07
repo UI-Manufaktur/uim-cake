@@ -247,9 +247,7 @@ trait DateFormatTrait
         return static::$_formatters[myKey].format($date.format('U'));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto __toString(): string
     {
         return (string)this.i18nFormat();
@@ -285,9 +283,7 @@ trait DateFormatTrait
         static::$_toStringFormat = $format;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     static auto setJsonEncodeFormat($format): void
     {
         static::$_jsonEncodeFormat = $format;
