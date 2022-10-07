@@ -11,9 +11,7 @@ class MysqlStatement : PDOStatement
 {
     use BufferResultsTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     auto execute(?array myParams = null): bool
     {
         myConnection = this._driver.getConnection();

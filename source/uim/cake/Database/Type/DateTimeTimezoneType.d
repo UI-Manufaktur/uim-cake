@@ -5,14 +5,10 @@ module uim.cake.database.Type;
  */
 class DateTimeTimezoneType : DateTimeType
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_format = 'Y-m-d H:i:s.uP';
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_marshalFormats = [
         'Y-m-d H:i',
         'Y-m-d H:i:s',

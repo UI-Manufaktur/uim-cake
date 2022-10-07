@@ -26,25 +26,19 @@ abstract class BaseType : TypeInterface
         this._name = myName;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     string getName()
     {
         return this._name;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     string getBaseType()
     {
         return this._name;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function toStatement(myValue, IDriver myDriver)
     {
         if (myValue === null) {
@@ -54,9 +48,7 @@ abstract class BaseType : TypeInterface
         return PDO::PARAM_STR;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function newId() {
         return null;
     }

@@ -9,9 +9,7 @@ class SqliteStatement : StatementDecorator
 {
     use BufferResultsTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     auto execute(?array myParams = null): bool
     {
         if (this._statement instanceof BufferedStatement) {

@@ -85,48 +85,36 @@ class BufferedStatement : Iterator, IStatement
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function bindValue($column, myValue, myType = 'string'): void
     {
         this.statement.bindValue($column, myValue, myType);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function closeCursor(): void
     {
         this.statement.closeCursor();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function columnCount(): int
     {
         return this.statement.columnCount();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function errorCode() {
         return this.statement.errorCode();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function errorInfo(): array
     {
         return this.statement.errorInfo();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto execute(?array myParams = null): bool
     {
         this._reset();
@@ -135,9 +123,7 @@ class BufferedStatement : Iterator, IStatement
         return this.statement.execute(myParams);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fetchColumn(int $position)
     {
         myResult = this.fetch(static::FETCH_TYPE_NUM);
@@ -159,17 +145,13 @@ class BufferedStatement : Iterator, IStatement
         return this.rowCount();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function bind(array myParams, array myTypes): void
     {
         this.statement.bind(myParams, myTypes);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function lastInsertId(?string myTable = null, ?string $column = null)
     {
         return this.statement.lastInsertId(myTable, $column);
@@ -219,9 +201,7 @@ class BufferedStatement : Iterator, IStatement
         return myResult ?: [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fetchAll(myType = self::FETCH_TYPE_NUM)
     {
         if (this._allFetched) {
@@ -237,9 +217,7 @@ class BufferedStatement : Iterator, IStatement
         return this.buffer;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rowCount(): int
     {
         if (!this._allFetched) {

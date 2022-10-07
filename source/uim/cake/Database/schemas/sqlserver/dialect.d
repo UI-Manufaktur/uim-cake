@@ -12,9 +12,7 @@ class SqlserverSchemaDialect : SchemaDialect
      */
     public const DEFAULT_SCHEMA_NAME = 'dbo';
 
-    /**
-     * @inheritDoc
-     */
+
     function listTablesSql(array myConfig): array
     {
         mySql = "SELECT TABLE_NAME
@@ -27,9 +25,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return [mySql, [$schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeColumnSql(string myTableName, array myConfig): array
     {
         mySql = 'SELECT DISTINCT
@@ -168,9 +164,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return ['type' => TableSchema::TYPE_STRING, 'length' => null];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
         myField = this._convertColumn(
@@ -230,9 +224,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $default;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeIndexSql(string myTableName, array myConfig): array
     {
         mySql = "SELECT
@@ -254,9 +246,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return [mySql, [myTableName, $schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertIndexDescription(TableSchema $schema, array $row): void
     {
         myType = TableSchema::INDEX_INDEX;
@@ -293,9 +283,7 @@ class SqlserverSchemaDialect : SchemaDialect
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeForeignKeySql(string myTableName, array myConfig): array
     {
         // phpcs:disable Generic.Files.LineLength
@@ -318,9 +306,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return [mySql, [myTableName, $schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         myData = [
@@ -334,9 +320,7 @@ class SqlserverSchemaDialect : SchemaDialect
         $schema.addConstraint(myName, myData);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto _foreignOnClause(string $on): string
     {
         $parent = super._foreignOnClause($on);
@@ -344,9 +328,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $parent === 'RESTRICT' ? super._foreignOnClause(TableSchema::ACTION_NO_ACTION) : $parent;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto _convertOnClause(string $clause): string
     {
         switch ($clause) {
@@ -363,9 +345,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return TableSchema::ACTION_SET_NULL;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function columnSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -508,9 +488,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addConstraintSql(TableSchema $schema): array
     {
         mySqlPattern = 'ALTER TABLE %s ADD %s;';
@@ -528,9 +506,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraintSql(TableSchema $schema): array
     {
         mySqlPattern = 'ALTER TABLE %s DROP CONSTRAINT %s;';
@@ -549,9 +525,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -569,9 +543,7 @@ class SqlserverSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function constraintSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -614,9 +586,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $prefix . ' (' . implode(', ', $columns) . ')';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         myContents = array_merge($columns, $constraints);
@@ -631,9 +601,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateTableSql(TableSchema $schema): array
     {
         myName = this._driver.quoteIdentifier($schema.name());

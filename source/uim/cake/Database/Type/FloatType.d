@@ -60,9 +60,7 @@ class FloatType : BaseType : BatchCastingInterface
         return (float)myValue;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function manyToPHP(array myValues, array myFields, IDriver myDriver): array
     {
         foreach (myFields as myField) {
