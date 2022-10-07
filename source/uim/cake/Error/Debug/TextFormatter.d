@@ -21,9 +21,7 @@ use RuntimeException;
  */
 class TextFormatter : IFormatter
 {
-    /**
-     * @inheritDoc
-     */
+
     function formatWrapper(string myContentss, array myLocation): string
     {
         myTemplate = <<<TEXT

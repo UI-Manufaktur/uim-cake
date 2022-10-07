@@ -26,9 +26,7 @@ use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
  */
 class CallbackStream : BaseCallbackStream
 {
-    /**
-     * @inheritDoc
-     */
+
     auto getContents(): string
     {
         $callback = this.detach();

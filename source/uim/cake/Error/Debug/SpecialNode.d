@@ -39,9 +39,7 @@ class SpecialNode : INode
         return this.value;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getChildren(): array
     {
         return [];

@@ -73,9 +73,7 @@ class PropertyNode : INode
         return this.name;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getChildren(): array
     {
         return [this.value];

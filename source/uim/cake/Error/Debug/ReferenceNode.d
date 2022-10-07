@@ -56,9 +56,7 @@ class ReferenceNode : INode {
         return this.id;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getChildren(): array
     {
         return [];

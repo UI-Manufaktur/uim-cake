@@ -86,9 +86,7 @@ class EventManager : IEventManager
         return static::$_generalManager;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function on(myEventKey, myOptions = [], ?callable $callable = null)
     {
         if (myEventKey instanceof IEventListener) {
@@ -164,9 +162,7 @@ class EventManager : IEventManager
         return [$method, myOptions];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function off(myEventKey, $callable = null)
     {
         if (myEventKey instanceof IEventListener) {
@@ -249,9 +245,7 @@ class EventManager : IEventManager
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dispatch(myEvent): IEvent
     {
         if (is_string(myEvent)) {
@@ -302,9 +296,7 @@ class EventManager : IEventManager
         return $listener(myEvent, ...array_values(myData));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function listeners(string myEventKey): array
     {
         $localListeners = [];

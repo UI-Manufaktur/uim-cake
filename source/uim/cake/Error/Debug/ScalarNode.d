@@ -55,9 +55,7 @@ class ScalarNode : INode
         return this.value;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getChildren(): array
     {
         return [];

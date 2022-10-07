@@ -51,9 +51,7 @@ class HtmlFormatter : IFormatter
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function formatWrapper(string myContentss, array myLocation): string
     {
         $lineInfo = '';

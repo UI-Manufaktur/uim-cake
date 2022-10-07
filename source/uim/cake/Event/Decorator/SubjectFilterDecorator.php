@@ -25,9 +25,7 @@ use RuntimeException;
  */
 class SubjectFilterDecorator : AbstractDecorator
 {
-    /**
-     * @inheritDoc
-     */
+
     auto __invoke() {
         $args = func_get_args();
         if (!this.canTrigger($args[0])) {

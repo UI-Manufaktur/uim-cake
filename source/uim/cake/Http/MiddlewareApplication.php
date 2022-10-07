@@ -16,14 +16,10 @@ use Psr\Http\Message\IServerRequest;
  */
 abstract class MiddlewareApplication : HttpApplicationInterface
 {
-    /**
-     * @inheritDoc
-     */
+
     abstract function bootstrap(): void;
 
-    /**
-     * @inheritDoc
-     */
+
     abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
     /**
