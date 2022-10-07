@@ -16,13 +16,9 @@
  */
 class NotImplementedException : HttpException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = '%s is not implemented.';
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 501;
 }

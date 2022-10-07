@@ -362,9 +362,7 @@ class Cookie : CookieInterface
         return implode('; ', $headerValue);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withName(string myName)
     {
         this.validateName(myName);
@@ -374,17 +372,13 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getId(): string
     {
         return "{this.name};{this.domain};{this.path}";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getName(): string
     {
         return this.name;
@@ -411,9 +405,7 @@ class Cookie : CookieInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getValue() {
         return this.value;
     }
@@ -432,9 +424,7 @@ class Cookie : CookieInterface
         return this.getScalarValue();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getScalarValue() {
         if (this.isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -444,9 +434,7 @@ class Cookie : CookieInterface
         return this.value;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withValue(myValue)
     {
         $new = clone this;
@@ -467,9 +455,7 @@ class Cookie : CookieInterface
         this.value = myValue;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withPath(string myPath)
     {
         $new = clone this;
@@ -478,17 +464,13 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getPath(): string
     {
         return this.path;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withDomain(string $domain)
     {
         $new = clone this;
@@ -497,25 +479,19 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getDomain(): string
     {
         return this.domain;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isSecure(): bool
     {
         return this.secure;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withSecure(bool $secure)
     {
         $new = clone this;
@@ -524,9 +500,7 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withHttpOnly(bool $httpOnly)
     {
         $new = clone this;
@@ -535,17 +509,13 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isHttpOnly(): bool
     {
         return this.httpOnly;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withExpiry($dateTime)
     {
         $new = clone this;
@@ -554,16 +524,12 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getExpiry() {
         return this.expiresAt;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getExpiresTimestamp(): ?int
     {
         if (!this.expiresAt) {
@@ -573,9 +539,7 @@ class Cookie : CookieInterface
         return (int)this.expiresAt.format('U');
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getFormattedExpires(): string
     {
         if (!this.expiresAt) {
@@ -585,9 +549,7 @@ class Cookie : CookieInterface
         return this.expiresAt.format(static::EXPIRES_FORMAT);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isExpired($time = null): bool
     {
         $time = $time ?: new DateTimeImmutable('now', new DateTimeZone('UTC'));
@@ -598,9 +560,7 @@ class Cookie : CookieInterface
         return this.expiresAt < $time;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withNeverExpire() {
         $new = clone this;
         $new.expiresAt = new DateTimeImmutable('2038-01-01');
@@ -608,9 +568,7 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withExpired() {
         $new = clone this;
         $new.expiresAt = new DateTimeImmutable('1970-01-01 00:00:01');
@@ -618,17 +576,13 @@ class Cookie : CookieInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getSameSite(): ?string
     {
         return this.sameSite;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withSameSite(?string $sameSite)
     {
         if ($sameSite !== null) {
@@ -752,9 +706,7 @@ class Cookie : CookieInterface
         return this.isExpanded;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getOptions(): array
     {
         myOptions = [
@@ -772,9 +724,7 @@ class Cookie : CookieInterface
         return myOptions;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function toArray(): array
     {
         return [

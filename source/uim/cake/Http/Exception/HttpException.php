@@ -23,9 +23,7 @@ import uim.cake.core.Exception\CakeException;
  */
 class HttpException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 500;
 
     /**

@@ -32,9 +32,7 @@ use Psr\Http\Message\RequestInterface;
  */
 class Curl : AdapterInterface
 {
-    /**
-     * @inheritDoc
-     */
+
     function send(RequestInterface myRequest, array myOptions): array
     {
         if (!extension_loaded('curl')) {
