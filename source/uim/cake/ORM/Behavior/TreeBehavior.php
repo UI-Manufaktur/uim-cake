@@ -61,9 +61,7 @@ class TreeBehavior : Behavior
         'recoverOrder' => null,
     ];
 
-    /**
-     * @inheritDoc
-     */
+
     function initialize(array myConfig): void
     {
         this._config['leftField'] = new IdentifierExpression(this._config['left']);

@@ -112,9 +112,7 @@ class TableLocator : AbstractLocator : ILocator
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto setConfig(myAlias, myOptions = null)
     {
         if (!is_string(myAlias)) {
@@ -135,9 +133,7 @@ class TableLocator : AbstractLocator : ILocator
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     auto getConfig(?string myAlias = null): array
     {
         if (myAlias === null) {
@@ -189,9 +185,7 @@ class TableLocator : AbstractLocator : ILocator
         return super.get(myAlias, myOptions);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto createInstance(string myAlias, array myOptions)
     {
         if (strpos(myAlias, '\\') === false) {
@@ -306,9 +300,7 @@ class TableLocator : AbstractLocator : ILocator
         return this.instances[myAlias] = myRepository;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function clear(): void
     {
         super.clear();
@@ -330,9 +322,7 @@ class TableLocator : AbstractLocator : ILocator
         return this._fallbacked;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function remove(string myAlias): void
     {
         super.remove(myAlias);

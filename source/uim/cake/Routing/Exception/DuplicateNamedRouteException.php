@@ -19,9 +19,7 @@ use Throwable;
  */
 class DuplicateNamedRouteException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = 'A route named "%s" has already been connected to "%s".';
 
     /**

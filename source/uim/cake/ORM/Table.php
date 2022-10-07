@@ -1695,9 +1695,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         return Query::subquery(this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function updateAll(myFields, $conditions): int
     {
         myQuery = this.query();
@@ -1710,9 +1708,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         return $statement.rowCount();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function deleteAll($conditions): int
     {
         myQuery = this.query()
@@ -1724,9 +1720,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         return $statement.rowCount();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function exists($conditions): bool
     {
         return (bool)count(
@@ -3046,9 +3040,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto validationMethodExists(string myName): bool
     {
         return method_exists(this, myName) || this.behaviors().hasMethod(myName);

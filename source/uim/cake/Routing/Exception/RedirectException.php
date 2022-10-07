@@ -19,8 +19,6 @@ import uim.cake.core.Exception\CakeException;
  */
 class RedirectException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 302;
 }

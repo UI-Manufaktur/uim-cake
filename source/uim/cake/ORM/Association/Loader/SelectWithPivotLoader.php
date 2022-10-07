@@ -47,9 +47,7 @@ class SelectWithPivotLoader : SelectLoader
      */
     protected $junctionConditions;
 
-    /**
-     * @inheritDoc
-     */
+
     this(array myOptions)
     {
         super.this(myOptions);
@@ -122,9 +120,7 @@ class SelectWithPivotLoader : SelectLoader
         return myQuery;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto _assertFieldsPresent(Query $fetchQuery, array myKey): void
     {
         // _buildQuery() manually adds in required fields from junction table

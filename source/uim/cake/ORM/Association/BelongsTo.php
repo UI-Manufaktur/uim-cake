@@ -164,9 +164,7 @@ class BelongsTo : Association
         return $conditions;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function eagerLoader(array myOptions): Closure
     {
         $loader = new SelectLoader([

@@ -20,9 +20,7 @@ use Throwable;
  */
 class MissingRouteException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = 'A route matching "%s" could not be found.';
 
     /**
