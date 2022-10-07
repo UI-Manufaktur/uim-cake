@@ -7,8 +7,6 @@ import uim.cake.core.Exception\CakeException;
  */
 class MissingDriverException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = 'Database driver %s could not be found.';
 }

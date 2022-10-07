@@ -73,9 +73,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function partition($partitions)
     {
         this.over();
@@ -84,9 +82,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function order(myFields)
     {
         this.over();
@@ -95,9 +91,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function range($start, $end = 0)
     {
         this.over();
@@ -106,9 +100,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rows(?int $start, ?int $end = 0)
     {
         this.over();
@@ -117,9 +109,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function groups(?int $start, ?int $end = 0)
     {
         this.over();
@@ -128,9 +118,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function frame(
         string myType,
         $startOffset,
@@ -144,9 +132,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeCurrent() {
         this.over();
         this.window.excludeCurrent();
@@ -154,9 +140,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeGroup() {
         this.over();
         this.window.excludeGroup();
@@ -164,9 +148,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeTies() {
         this.over();
         this.window.excludeTies();
@@ -174,9 +156,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         mySql = super.sql($binder);
@@ -194,9 +174,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         super.traverse($callback);
@@ -212,9 +190,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function count(): int
     {
         myCount = super.count();

@@ -117,9 +117,7 @@ class ComparisonExpression : IExpression, FieldInterface
         return this._operator;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         /** @var \Cake\Database\IExpression|string myField */
@@ -142,9 +140,7 @@ class ComparisonExpression : IExpression, FieldInterface
         return sprintf(myTemplate, myField, this._operator, myValue);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         if (this._field instanceof IExpression) {

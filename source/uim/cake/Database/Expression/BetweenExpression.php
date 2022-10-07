@@ -55,9 +55,7 @@ class BetweenExpression : IExpression, FieldInterface
         this._type = myType;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $parts = [
@@ -82,9 +80,7 @@ class BetweenExpression : IExpression, FieldInterface
         return sprintf('%s BETWEEN %s AND %s', myField, $parts['from'], $parts['to']);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         foreach ([this._field, this._from, this._to] as $part) {

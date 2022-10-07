@@ -80,9 +80,7 @@ class IdentifierExpression : IExpression
         return this.collation;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         mySql = this._identifier;
@@ -93,9 +91,7 @@ class IdentifierExpression : IExpression
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         return this;

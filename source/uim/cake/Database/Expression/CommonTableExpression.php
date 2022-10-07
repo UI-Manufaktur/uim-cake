@@ -167,9 +167,7 @@ class CommonTableExpression : IExpression
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         myFields = '';
@@ -191,9 +189,7 @@ class CommonTableExpression : IExpression
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         $callback(this.name);

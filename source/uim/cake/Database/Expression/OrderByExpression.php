@@ -21,9 +21,7 @@ class OrderByExpression : QueryExpression
         super.this($conditions, myTypes, $conjunction);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $order = [];
