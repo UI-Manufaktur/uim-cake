@@ -28,7 +28,7 @@ class ApcuEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    function init(array myConfig = []): bool
+    bool init(array myConfig = [])
     {
         if (!extension_loaded('apcu')) {
             throw new RuntimeException('The `apcu` extension must be enabled to use ApcuEngine.');
@@ -112,7 +112,7 @@ class ApcuEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    function delete(myKey): bool
+    bool delete(myKey): bool
     {
         myKey = this._key(myKey);
 
@@ -126,7 +126,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-cache-info.php
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    function clear(): bool
+    bool clear()
     {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
@@ -157,7 +157,7 @@ class ApcuEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-add.php
      */
-    function add(string myKey, myValue): bool
+    bool add(string myKey, myValue)
     {
         myKey = this._key(myKey);
         $duration = this._config['duration'];
@@ -216,7 +216,7 @@ class ApcuEngine : CacheEngine
      * @return bool success
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
-    function clearGroup(string $group): bool
+    bool clearGroup(string $group)
     {
         $success = false;
         apcu_inc(this._config['prefix'] . $group, 1, $success);

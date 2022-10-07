@@ -105,9 +105,7 @@ class SessionStorage : IStorage
         this._session.renew();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function redirectUrl(myUrl = null) {
         if (myUrl === null) {
             return this._session.read(this._config['redirect']);

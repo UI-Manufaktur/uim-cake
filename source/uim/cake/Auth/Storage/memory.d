@@ -22,32 +22,24 @@ class MemoryStorage : IStorage
      */
     protected $_redirectUrl;
 
-    /**
-     * @inheritDoc
-     */
+
     function read() {
         return this._user;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function write(myUser): void
     {
         this._user = myUser;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function delete(): void
     {
         this._user = null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function redirectUrl(myUrl = null) {
         if (myUrl === null) {
             return this._redirectUrl;

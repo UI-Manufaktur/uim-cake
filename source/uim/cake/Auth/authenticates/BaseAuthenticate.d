@@ -186,7 +186,7 @@ abstract class BaseAuthenticate : IEventListener
      *
      * @return bool
      */
-    function needsPasswordRehash(): bool
+    bool needsPasswordRehash()
     {
         return this._needsPasswordRehash;
     }

@@ -68,7 +68,7 @@ class RedisEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    function init(array myConfig = []): bool
+    bool init(array myConfig = [])
     {
         if (!extension_loaded('redis')) {
             throw new RuntimeException('The `redis` extension must be enabled to use RedisEngine.');
@@ -88,7 +88,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if Redis server was connected
      */
-    protected auto _connect(): bool
+    protected bool _connect()
     {
         try {
             this._Redis = new Redis();
@@ -136,7 +136,7 @@ class RedisEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    auto set(myKey, myValue, $ttl = null): bool
+    bool set(myKey, myValue, $ttl = null)
     {
         myKey = this._key(myKey);
         myValue = this.serialize(myValue);
@@ -213,7 +213,7 @@ class RedisEngine : CacheEngine
      * @param string myKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    function delete(myKey): bool
+    bool delete(myKey)
     {
         myKey = this._key(myKey);
 
@@ -225,7 +225,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    function clear(): bool
+    bool clear()
     {
         this._Redis.setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
@@ -258,7 +258,7 @@ class RedisEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://github.com/phpredis/phpredis#set
      */
-    function add(string myKey, myValue): bool
+    bool add(string myKey, myValue)
     {
         $duration = this._config['duration'];
         myKey = this._key(myKey);
@@ -300,7 +300,7 @@ class RedisEngine : CacheEngine
      * @param string $group name of the group to be cleared
      * @return bool success
      */
-    function clearGroup(string $group): bool
+    bool clearGroup(string $group)
     {
         return (bool)this._Redis.incr(this._config['prefix'] . $group);
     }

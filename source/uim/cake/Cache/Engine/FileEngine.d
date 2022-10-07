@@ -68,7 +68,7 @@ class FileEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    function init(array myConfig = []): bool
+    bool init(array myConfig = [])
     {
         super.init(myConfig);
 
@@ -95,7 +95,7 @@ class FileEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    auto set(string myDataId, myValue, $ttl = null): bool
+    bool set(string myDataId, myValue, $ttl = null)
     {
         if (myValue === '' || !this._init) {
             return false;
@@ -195,7 +195,7 @@ class FileEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't
      *   exist or couldn't be removed
      */
-    function delete(myDataId): bool
+    bool delete(myDataId)
     {
         myDataId = this._key(myDataId);
 
@@ -341,7 +341,7 @@ class FileEngine : CacheEngine
      * @param bool $createKey Whether the key should be created if it doesn't exists, or not
      * @return bool true if the cache key could be set, false otherwise
      */
-    protected auto _setKey(string myKey, bool $createKey = false): bool
+    protected bool _setKey(string myKey, bool $createKey = false)
     {
         $groups = null;
         if (this._groupPrefix) {
@@ -390,7 +390,7 @@ class FileEngine : CacheEngine
      *
      * @return bool
      */
-    protected auto _active(): bool
+    protected bool _active()
     {
         $dir = new SplFileInfo(this._config['path']);
         myPath = $dir.getPathname();
@@ -413,9 +413,7 @@ class FileEngine : CacheEngine
         return $success;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto _key(myKey): string
     {
         myKey = super._key(myKey);
@@ -436,7 +434,7 @@ class FileEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    function clearGroup(string $group): bool
+    bool clearGroup(string $group)
     {
         this._File = null;
 
