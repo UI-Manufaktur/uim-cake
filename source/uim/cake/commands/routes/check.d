@@ -12,9 +12,7 @@ import uim.cake.Routing\Router;
  * Provides interactive CLI tool for testing routes.
  */
 class RoutesCheckCommand : Command {
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'routes check';
     }

@@ -12,9 +12,7 @@ import uim.cake.console.consoleOptionParser;
 class PluginAssetsSymlinkCommand : Command {
     use PluginAssetsTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'plugin assets symlink';
     }

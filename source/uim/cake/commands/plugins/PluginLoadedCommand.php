@@ -9,9 +9,7 @@ import uim.cake.core.Plugin;
  * Displays all currently loaded plugins.
  */
 class PluginLoadedCommand : Command {
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'plugin loaded';
     }

@@ -38,9 +38,7 @@ class CommandFactory : ICommandFactory
         this.container = myContainer;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function create(string myClassName)
     {
         if (this.container && this.container.has(myClassName)) {

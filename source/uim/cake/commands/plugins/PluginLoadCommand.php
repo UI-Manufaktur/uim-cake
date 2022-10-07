@@ -12,9 +12,7 @@ import uim.cake.core.Plugin;
  * @psalm-suppress PropertyNotSetInConstructor
  */
 class PluginLoadCommand : Command {
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'plugin load';
     }

@@ -50,9 +50,7 @@ class PaginatorComponent : Component
      */
     protected $_paginator;
 
-    /**
-     * @inheritDoc
-     */
+
     this(ComponentRegistry $registry, array myConfig = [])
     {
         if (isset(myConfig['paginator'])) {

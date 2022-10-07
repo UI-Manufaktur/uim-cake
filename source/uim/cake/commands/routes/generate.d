@@ -10,9 +10,7 @@ import uim.cake.Routing\Router;
  * Provides interactive CLI tools for URL generation
  */
 class RoutesGenerateCommand : Command {
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'routes generate';
     }

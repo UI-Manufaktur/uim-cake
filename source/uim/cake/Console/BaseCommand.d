@@ -24,9 +24,7 @@ abstract class BaseCommand : ICommand
      */
     protected string myName = 'cake unknown';
 
-    /**
-     * @inheritDoc
-     */
+
     auto setName(string myName)
     {
         if (strpos(myName, ' ') < 1) {
@@ -127,9 +125,7 @@ abstract class BaseCommand : ICommand
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function run(array $argv, ConsoleIo $io): ?int
     {
         this.initialize();

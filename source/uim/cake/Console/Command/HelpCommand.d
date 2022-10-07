@@ -24,9 +24,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      */
     protected $commands;
 
-    /**
-     * @inheritDoc
-     */
+
     auto setCommandCollection(CommandCollection $commands): void
     {
         this.commands = $commands;

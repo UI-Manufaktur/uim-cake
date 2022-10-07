@@ -8,9 +8,7 @@ import uim.cake.console.consoleOptionParser;
  * Command for unloading plugins.
  */
 class PluginUnloadCommand : Command {
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'plugin unload';
     }

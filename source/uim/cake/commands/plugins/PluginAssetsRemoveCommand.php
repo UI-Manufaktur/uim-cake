@@ -12,9 +12,7 @@ import uim.cake.console.consoleOptionParser;
 class PluginAssetsRemoveCommand : Command {
     use PluginAssetsTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     static string defaultName() {
         return 'plugin assets remove';
     }

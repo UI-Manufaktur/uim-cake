@@ -18,8 +18,6 @@ import uim.cake.core.Exception\CakeException;
  */
 class MissingComponentException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = 'Component class %s could not be found.';
 }
