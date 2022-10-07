@@ -31,9 +31,7 @@ class OrderClauseExpression : IExpression, FieldInterface
         this._direction = strtolower($direction) === 'asc' ? 'ASC' : 'DESC';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         /** @var \Cake\Database\IExpression|string myField */
@@ -47,9 +45,7 @@ class OrderClauseExpression : IExpression, FieldInterface
         return sprintf('%s %s', myField, this._direction);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         if (this._field instanceof IExpression) {

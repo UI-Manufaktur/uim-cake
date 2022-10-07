@@ -31,9 +31,7 @@ class ErrorCodeWaitStrategy : RetryStrategyInterface
         this.retryInterval = $retryInterval;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function shouldRetry(Exception myException, int $retryCount): bool
     {
         if (

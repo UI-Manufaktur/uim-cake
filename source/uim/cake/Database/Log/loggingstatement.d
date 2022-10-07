@@ -73,9 +73,7 @@ class LoggingStatement : StatementDecorator
         return myResult;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fetch(myType = self::FETCH_TYPE_NUM)
     {
         $record = super.fetch(myType);
@@ -87,9 +85,7 @@ class LoggingStatement : StatementDecorator
         return $record;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fetchAll(myType = self::FETCH_TYPE_NUM)
     {
         myResults = super.fetchAll(myType);
@@ -101,9 +97,7 @@ class LoggingStatement : StatementDecorator
         return myResults;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rowCount(): int
     {
         myResult = super.rowCount();

@@ -9,9 +9,7 @@ import uim.cake.database.Exception\DatabaseException;
  */
 class PostgresSchemaDialect : SchemaDialect
 {
-    /**
-     * @inheritDoc
-     */
+
     function listTablesSql(array myConfig): array
     {
         mySql = 'SELECT table_name as name FROM information_schema.tables WHERE table_schema = ? ORDER BY name';
@@ -20,9 +18,7 @@ class PostgresSchemaDialect : SchemaDialect
         return [mySql, [$schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeColumnSql(string myTableName, array myConfig): array
     {
         mySql = 'SELECT DISTINCT table_schema AS schema,
@@ -145,9 +141,7 @@ class PostgresSchemaDialect : SchemaDialect
         return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
         myField = this._convertColumn($row['type']);
@@ -222,9 +216,7 @@ class PostgresSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeIndexSql(string myTableName, array myConfig): array
     {
         mySql = 'SELECT
@@ -250,9 +242,7 @@ class PostgresSchemaDialect : SchemaDialect
         return [mySql, [$schema, myTableName]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertIndexDescription(TableSchema $schema, array $row): void
     {
         myType = TableSchema::INDEX_INDEX;
@@ -301,9 +291,7 @@ class PostgresSchemaDialect : SchemaDialect
         $schema.addConstraint(myName, $constraint);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeForeignKeySql(string myTableName, array myConfig): array
     {
         // phpcs:disable Generic.Files.LineLength
@@ -331,9 +319,7 @@ class PostgresSchemaDialect : SchemaDialect
         return [mySql, [$schema, myTableName]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         myData = [
@@ -346,9 +332,7 @@ class PostgresSchemaDialect : SchemaDialect
         $schema.addConstraint($row['name'], myData);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected auto _convertOnClause(string $clause): string
     {
         if ($clause === 'r') {
@@ -364,9 +348,7 @@ class PostgresSchemaDialect : SchemaDialect
         return TableSchema::ACTION_SET_NULL;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function columnSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -491,9 +473,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addConstraintSql(TableSchema $schema): array
     {
         mySqlPattern = 'ALTER TABLE %s ADD %s;';
@@ -511,9 +491,7 @@ class PostgresSchemaDialect : SchemaDialect
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraintSql(TableSchema $schema): array
     {
         mySqlPattern = 'ALTER TABLE %s DROP CONSTRAINT %s;';
@@ -532,9 +510,7 @@ class PostgresSchemaDialect : SchemaDialect
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -552,9 +528,7 @@ class PostgresSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function constraintSql(TableSchema $schema, string myName): string
     {
         /** @var array<string, mixed> myData */
@@ -597,9 +571,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $prefix . ' (' . implode(', ', $columns) . ')';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         myContents = array_merge($columns, $constraints);
@@ -626,9 +598,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateTableSql(TableSchema $schema): array
     {
         myName = this._driver.quoteIdentifier($schema.name());

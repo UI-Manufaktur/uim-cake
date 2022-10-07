@@ -24,9 +24,7 @@ class QueryLogger : BaseLog
         super.this(myConfig);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function log($level, myMessage, array $context = [])
     {
         $context['scope'] = this.scopes() ?: ['queriesLog'];

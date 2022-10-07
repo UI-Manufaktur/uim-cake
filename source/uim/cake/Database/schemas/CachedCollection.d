@@ -42,17 +42,13 @@ class CachedCollection : ICollection
         this.cacher = $cacher;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function listTables(): array
     {
         return this.collection.listTables();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describe(string myName, array myOptions = []): TableSchemaInterface
     {
         myOptions += ['forceRefresh' => false];

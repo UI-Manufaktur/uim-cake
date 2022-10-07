@@ -77,9 +77,7 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function partition($partitions)
     {
         if (!$partitions) {
@@ -105,9 +103,7 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function order(myFields)
     {
         if (!myFields) {
@@ -127,33 +123,25 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function range($start, $end = 0)
     {
         return this.frame(self::RANGE, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rows(?int $start, ?int $end = 0)
     {
         return this.frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function groups(?int $start, ?int $end = 0)
     {
         return this.frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function frame(
         string myType,
         $startOffset,
@@ -176,36 +164,28 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeCurrent() {
         this.exclusion = 'CURRENT ROW';
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeGroup() {
         this.exclusion = 'GROUP';
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeTies() {
         this.exclusion = 'TIES';
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $clauses = [];
@@ -250,9 +230,7 @@ class WindowExpression : IExpression, WindowInterface
         return implode(' ', $clauses);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         $callback(this.name);

@@ -135,9 +135,7 @@ class SqliteSchemaDialect : SchemaDialect
         return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function listTablesSql(array myConfig): array
     {
         return [
@@ -147,9 +145,7 @@ class SqliteSchemaDialect : SchemaDialect
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeColumnSql(string myTableName, array myConfig): array
     {
         mySql = sprintf(
@@ -160,9 +156,7 @@ class SqliteSchemaDialect : SchemaDialect
         return [mySql, []];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
         myField = this._convertColumn($row['type']);
@@ -218,9 +212,7 @@ class SqliteSchemaDialect : SchemaDialect
         return $default;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeIndexSql(string myTableName, array myConfig): array
     {
         mySql = sprintf(
@@ -271,9 +263,7 @@ class SqliteSchemaDialect : SchemaDialect
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeForeignKeySql(string myTableName, array myConfig): array
     {
         mySql = sprintf('PRAGMA foreign_key_list(%s)', this._driver.quoteIdentifier(myTableName));
@@ -281,9 +271,7 @@ class SqliteSchemaDialect : SchemaDialect
         return [mySql, []];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         myName = $row['from'] . '_fk';
@@ -532,9 +520,7 @@ class SqliteSchemaDialect : SchemaDialect
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -552,9 +538,7 @@ class SqliteSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $lines = array_merge($columns, $constraints);
@@ -569,9 +553,7 @@ class SqliteSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateTableSql(TableSchema $schema): array
     {
         myName = $schema.name();

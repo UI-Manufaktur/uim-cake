@@ -17,41 +17,31 @@ class MysqlSchemaDialect : SchemaDialect
      */
     protected $_driver;
 
-    /**
-     * @inheritDoc
-     */
+
     function listTablesSql(array myConfig): array
     {
         return ['SHOW TABLES FROM ' . this._driver.quoteIdentifier(myConfig['database']), []];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeColumnSql(string myTableName, array myConfig): array
     {
         return ['SHOW FULL COLUMNS FROM ' . this._driver.quoteIdentifier(myTableName), []];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeIndexSql(string myTableName, array myConfig): array
     {
         return ['SHOW INDEXES FROM ' . this._driver.quoteIdentifier(myTableName), []];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeOptionsSql(string myTableName, array myConfig): array
     {
         return ['SHOW TABLE STATUS WHERE Name = ?', [myTableName]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertOptionsDescription(TableSchema $schema, array $row): void
     {
         $schema.setOptions([
@@ -172,9 +162,7 @@ class MysqlSchemaDialect : SchemaDialect
         return ['type' => TableSchema::TYPE_STRING, 'length' => null];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
         myField = this._convertColumn($row['Type']);
@@ -190,9 +178,7 @@ class MysqlSchemaDialect : SchemaDialect
         $schema.addColumn($row['Field'], myField);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertIndexDescription(TableSchema $schema, array $row): void
     {
         myType = null;
@@ -246,9 +232,7 @@ class MysqlSchemaDialect : SchemaDialect
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeForeignKeySql(string myTableName, array myConfig): array
     {
         mySql = 'SELECT * FROM information_schema.key_column_usage AS kcu
@@ -263,9 +247,7 @@ class MysqlSchemaDialect : SchemaDialect
         return [mySql, [myConfig['database'], myTableName, myTableName]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         myData = [
@@ -279,17 +261,13 @@ class MysqlSchemaDialect : SchemaDialect
         $schema.addConstraint(myName, myData);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateTableSql(TableSchema $schema): array
     {
         return [sprintf('TRUNCATE TABLE `%s`', $schema.name())];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         myContents = implode(",\n", array_merge($columns, $constraints, $indexes));
@@ -309,9 +287,7 @@ class MysqlSchemaDialect : SchemaDialect
         return [myContents];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function columnSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -503,9 +479,7 @@ class MysqlSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function constraintSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */
@@ -531,9 +505,7 @@ class MysqlSchemaDialect : SchemaDialect
         return this._keySql($out, myData);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addConstraintSql(TableSchema $schema): array
     {
         mySqlPattern = 'ALTER TABLE %s ADD %s;';
@@ -551,9 +523,7 @@ class MysqlSchemaDialect : SchemaDialect
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraintSql(TableSchema $schema): array
     {
         mySqlPattern = 'ALTER TABLE %s DROP FOREIGN KEY %s;';
@@ -572,9 +542,7 @@ class MysqlSchemaDialect : SchemaDialect
         return mySql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexSql(TableSchema $schema, string myName): string
     {
         /** @var array myData */

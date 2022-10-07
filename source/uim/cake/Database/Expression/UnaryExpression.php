@@ -58,9 +58,7 @@ class UnaryExpression : IExpression
         this.position = $position;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $operand = this._value;
@@ -75,9 +73,7 @@ class UnaryExpression : IExpression
         return this._operator . ' (' . $operand . ')';
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function traverse(Closure $callback)
     {
         if (this._value instanceof IExpression) {
