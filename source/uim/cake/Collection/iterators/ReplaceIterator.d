@@ -36,8 +36,7 @@ class ReplaceIterator : Collection
      * @param iterable myItems The items to be filtered.
      * @param callable $callback Callback.
      */
-    this(iterable myItems, callable $callback)
-    {
+    this(iterable myItems, callable $callback) {
         this._callback = $callback;
         super.this(myItems);
         this._innerIterator = this.getInnerIterator();

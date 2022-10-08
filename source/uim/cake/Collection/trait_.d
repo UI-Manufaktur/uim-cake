@@ -45,8 +45,7 @@ trait CollectionTrait
     }
 
 
-    function each(callable $callback)
-    {
+    function each(callable $callback) {
         foreach (this.optimizeUnwrap() as $k => $v) {
             $callback($v, $k);
         }
@@ -75,8 +74,7 @@ trait CollectionTrait
     }
 
 
-    bool every(callable $callback)
-    {
+    bool every(callable $callback) {
         foreach (this.optimizeUnwrap() as myKey => myValue) {
             if (!$callback(myValue, myKey)) {
                 return false;
@@ -99,8 +97,7 @@ trait CollectionTrait
     }
 
 
-    bool contains(myValue)
-    {
+    bool contains(myValue) {
         foreach (this.optimizeUnwrap() as $v) {
             if (myValue === $v) {
                 return true;
@@ -117,8 +114,7 @@ trait CollectionTrait
     }
 
 
-    function reduce(callable $callback, $initial = null)
-    {
+    function reduce(callable $callback, $initial = null) {
         $isFirst = false;
         if (func_num_args() < 2) {
             $isFirst = true;
@@ -153,20 +149,17 @@ trait CollectionTrait
     }
 
 
-    function max(myPath, int $sort = \SORT_NUMERIC)
-    {
+    function max(myPath, int $sort = \SORT_NUMERIC) {
         return (new SortIterator(this.unwrap(), myPath, \SORT_DESC, $sort)).first();
     }
 
 
-    function min(myPath, int $sort = \SORT_NUMERIC)
-    {
+    function min(myPath, int $sort = \SORT_NUMERIC) {
         return (new SortIterator(this.unwrap(), myPath, \SORT_ASC, $sort)).first();
     }
 
 
-    function avg(myPath = null)
-    {
+    function avg(myPath = null) {
         myResult = this;
         if (myPath !== null) {
             myResult = myResult.extract(myPath);
@@ -186,8 +179,7 @@ trait CollectionTrait
     }
 
 
-    function median(myPath = null)
-    {
+    function median(myPath = null) {
         myItems = this;
         if (myPath !== null) {
             myItems = myItems.extract(myPath);
@@ -320,8 +312,7 @@ trait CollectionTrait
     }
 
 
-    function firstMatch(array $conditions)
-    {
+    function firstMatch(array $conditions) {
         return this.match($conditions).first();
     }
 
@@ -760,8 +751,7 @@ trait CollectionTrait
     }
 
 
-    bool isEmpty()
-    {
+    bool isEmpty() {
         foreach (this as $el) {
             return false;
         }

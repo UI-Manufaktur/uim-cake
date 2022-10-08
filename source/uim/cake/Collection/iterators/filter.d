@@ -32,8 +32,7 @@ class FilterIterator : Collection
      * @param \Traversable|array myItems The items to be filtered.
      * @param callable $callback Callback.
      */
-    this(myItems, callable $callback)
-    {
+    this(myItems, callable $callback) {
         if (!myItems instanceof Iterator) {
             myItems = new Collection(myItems);
         }

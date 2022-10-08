@@ -60,8 +60,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @param iterable myItems The items to be filtered.
      */
-    this(iterable myItems)
-    {
+    this(iterable myItems) {
         this._buffer = new SplDoublyLinkedList();
         super.this(myItems);
     }
@@ -106,8 +105,7 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Returns whether the iterator has more elements
      */
-    bool valid()
-    {
+    bool valid() {
         if (this._buffer.offsetExists(this._index)) {
             $current = this._buffer.offsetGet(this._index);
             this._current = $current['value'];

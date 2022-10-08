@@ -40,8 +40,7 @@ class ExtractIterator : Collection
      * so that the final one can be returned or a callable that will take care
      * of doing that.
      */
-    this(iterable myItems, myPath)
-    {
+    this(iterable myItems, myPath) {
         this._extractor = this._propertyExtractor(myPath);
         super.this(myItems);
     }

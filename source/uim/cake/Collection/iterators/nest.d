@@ -24,8 +24,7 @@ class NestIterator : Collection : RecursiveIterator
      * @param callable|string $nestKey the property that contains the nested items
      * If a callable is passed, it should return the childrens for the passed item
      */
-    this(iterable myItems, $nestKey)
-    {
+    this(iterable myItems, $nestKey) {
         super.this(myItems);
         this._nestKey = $nestKey;
     }
@@ -45,8 +44,7 @@ class NestIterator : Collection : RecursiveIterator
     /**
      * Returns true if there is an array or a traversable object stored under the
      * configured nestKey for the current item
-    bool hasChildren()
-    {
+    bool hasChildren() {
         $property = this._propertyExtractor(this._nestKey);
         $children = $property(this.current());
 

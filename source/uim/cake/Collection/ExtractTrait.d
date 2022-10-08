@@ -46,8 +46,7 @@ trait ExtractTrait
      * @param array<string> $parts Path to extract from.
      * @return mixed
      */
-    protected auto _extract(myData, array $parts)
-    {
+    protected auto _extract(myData, array $parts) {
         myValue = null;
         myCollectionTransform = false;
 
@@ -92,8 +91,7 @@ trait ExtractTrait
      * @param array<string> $parts Path to extract from.
      * @return mixed
      */
-    protected auto _simpleExtract(myData, array $parts)
-    {
+    protected auto _simpleExtract(myData, array $parts) {
         myValue = null;
         foreach ($parts as $column) {
             if (!isset(myData[$column])) {

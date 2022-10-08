@@ -107,8 +107,7 @@ class MapReduce : IteratorAggregate
      * of the bucket that was created during the mapping phase and third one is an
      * instance of this class.
      */
-    this(Traversable myData, callable $mapper, ?callable $reducer = null)
-    {
+    this(Traversable myData, callable $mapper, ?callable $reducer = null) {
         this._data = myData;
         this._mapper = $mapper;
         this._reducer = $reducer;
