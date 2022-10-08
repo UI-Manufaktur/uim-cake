@@ -52,7 +52,7 @@ abstract class BaseErrorHandler
      * @param bool $debug Whether the app is in debug mode.
      * @return void
      */
-    abstract protected auto _displayError(array myError, bool $debug): void;
+    abstract protected void _displayError(array myError, bool $debug);
 
     /**
      * Display an exception in an environment specific way.
@@ -63,14 +63,14 @@ abstract class BaseErrorHandler
      * @param \Throwable myException The uncaught exception.
      * @return void
      */
-    abstract protected auto _displayException(Throwable myException): void;
+    abstract protected void _displayException(Throwable myException);
 
     /**
      * Register the error and exception handlers.
      *
      * @return void
      */
-    function register(): void
+    void register()
     {
         $level = this._config['errorLevel'] ?? -1;
         error_reporting($level);
@@ -180,7 +180,7 @@ abstract class BaseErrorHandler
      * @return void
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
-    function wrapAndHandleException(Throwable myException): void
+    void wrapAndHandleException(Throwable myException)
     {
         deprecationWarning('This method is no longer in use. Call handleException instead.');
         this.handleException(myException);
@@ -197,7 +197,7 @@ abstract class BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    function handleException(Throwable myException): void
+    void handleException(Throwable myException)
     {
         this._displayException(myException);
         this.logException(myException);
@@ -213,7 +213,7 @@ abstract class BaseErrorHandler
      * @param int $code Exit code.
      * @return void
      */
-    protected auto _stop(int $code): void
+    protected void _stop(int $code)
     {
         // Do nothing.
     }
@@ -249,7 +249,7 @@ abstract class BaseErrorHandler
      * @param int $additionalKb Number in kilobytes
      * @return void
      */
-    function increaseMemoryLimit(int $additionalKb): void
+    void increaseMemoryLimit(int $additionalKb)
     {
         $limit = ini_get('memory_limit');
         if ($limit === false || $limit === '' || $limit === '-1') {
