@@ -318,8 +318,7 @@ class AuthComponent : Component : IEventDispatcher
      *   controller object
      * @return bool True if action is accessible without authentication else false
      */
-    protected bool _isAllowed(Controller $controller)
-    {
+    protected bool _isAllowed(Controller $controller) {
         $action = strtolower($controller.getRequest().getParam('action', ''));
 
         return in_array($action, array_map('strtolower', this.allowedActions), true);
@@ -392,8 +391,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param \Cake\Controller\Controller $controller A reference to the controller object.
      * @return bool True if current action is login action else false.
      */
-    protected bool _isLoginAction(Controller $controller)
-    {
+    protected bool _isLoginAction(Controller $controller) {
         $uri = $controller.getRequest().getUri();
         myUrl = Router::normalize($uri.getPath());
         $loginAction = Router::normalize(this._config['loginAction']);
@@ -476,8 +474,7 @@ class AuthComponent : Component : IEventDispatcher
      *   If empty, the current request will be used.
      * @return bool True if myUser is authorized, otherwise false
      */
-    bool isAuthorized(myUser = null, ?ServerRequest myRequest = null)
-    {
+    bool isAuthorized(myUser = null, ?ServerRequest myRequest = null) {
         if (empty(myUser) && !this.user()) {
             return false;
         }
@@ -665,8 +662,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return mixed|null Either User record or null if no user is logged in, or retrieved field if key is specified.
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#accessing-the-logged-in-user
      */
-    function user(?string myKey = null)
-    {
+    function user(?string myKey = null) {
         myUser = this.storage().read();
         if (!myUser) {
             return null;
@@ -688,8 +684,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @return bool true If a user can be found, false if one cannot.
      */
-    protected bool _getUser()
-    {
+    protected bool _getUser() {
         myUser = this.user();
         if (myUser) {
             return true;
@@ -880,8 +875,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param string myName Property name
      * @return mixed
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         if (myName === 'sessionKey') {
             return this.storage().getConfig('key');
         }

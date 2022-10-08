@@ -30,8 +30,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param \Cake\Controller\Controller|null $controller Controller instance.
      */
-    this(?Controller $controller = null)
-    {
+    this(?Controller $controller = null) {
         if ($controller) {
             this.setController($controller);
         }
@@ -57,8 +56,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @param \Cake\Controller\Controller $controller Controller instance.
      * @return this
      */
-    auto setController(Controller $controller)
-    {
+    auto setController(Controller $controller) {
         this._controller = $controller;
         this.setEventManager($controller.getEventManager());
 
@@ -74,8 +72,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected string _resolveClassName(string myClass)
-    {
+    protected string _resolveClassName(string myClass) {
         return App::className(myClass, 'Controller/Component', 'Component');
     }
 

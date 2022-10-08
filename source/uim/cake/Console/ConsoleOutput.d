@@ -146,8 +146,7 @@ class ConsoleOutput
      *
      * @param string $stream The identifier of the stream to write output to.
      */
-    this(string $stream = 'php://stdout')
-    {
+    this(string $stream = 'php://stdout') {
         this._output = fopen($stream, 'wb');
 
         if (

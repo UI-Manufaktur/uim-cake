@@ -78,8 +78,7 @@ class FlashComponent : Component
      * @return this
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    auto setConfig(myKey, myValue = null, myMerge = true)
-    {
+    auto setConfig(myKey, myValue = null, myMerge = true) {
         this.flash().setConfig(myKey, myValue, myMerge);
 
         return this;
@@ -92,8 +91,7 @@ class FlashComponent : Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    auto getConfig(?string myKey = null, $default = null)
-    {
+    auto getConfig(?string myKey = null, $default = null) {
         return this.flash().getConfig(myKey, $default);
     }
 
@@ -104,8 +102,7 @@ class FlashComponent : Component
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    auto getConfigOrFail(string myKey)
-    {
+    auto getConfigOrFail(string myKey) {
         return this.flash().getConfigOrFail(myKey);
     }
 
@@ -116,8 +113,7 @@ class FlashComponent : Component
      * @param mixed|null myValue The value to set.
      * @return this
      */
-    function configShallow(myKey, myValue = null)
-    {
+    function configShallow(myKey, myValue = null) {
         this.flash().configShallow(myKey, myValue);
 
         return this;
@@ -145,8 +141,7 @@ class FlashComponent : Component
      * @return void
      * @throws \Cake\Http\Exception\InternalErrorException If missing the flash message.
      */
-    auto __call(string myName, array $args)
-    {
+    auto __call(string myName, array $args) {
         $element = Inflector::underscore(myName);
 
         if (count($args) < 1) {

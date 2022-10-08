@@ -142,8 +142,7 @@ class ConsoleOptionParser
      * @param bool $defaultOptions Whether you want the verbose and quiet options set. Setting
      *  this to false will prevent the addition of `--verbose` & `--quiet` options.
      */
-    this(string $command = '', bool $defaultOptions = true)
-    {
+    this(string $command = '', bool $defaultOptions = true) {
         this.setCommand($command);
 
         this.addOption('help', [
@@ -172,8 +171,7 @@ class ConsoleOptionParser
      * @param bool $defaultOptions Whether you want the verbose and quiet options set.
      * @return static
      */
-    static function create(string $command, bool $defaultOptions = true)
-    {
+    static function create(string $command, bool $defaultOptions = true) {
         return new static($command, $defaultOptions);
     }
 
@@ -200,8 +198,7 @@ class ConsoleOptionParser
      * @param bool $defaultOptions Whether you want the verbose and quiet options set.
      * @return static
      */
-    static function buildFromArray(array $spec, bool $defaultOptions = true)
-    {
+    static function buildFromArray(array $spec, bool $defaultOptions = true) {
         $parser = new static($spec['command'], $defaultOptions);
         if (!empty($spec['arguments'])) {
             $parser.addArguments($spec['arguments']);
@@ -247,8 +244,7 @@ class ConsoleOptionParser
      * @param \Cake\Console\ConsoleOptionParser|array $spec ConsoleOptionParser or spec to merge with.
      * @return this
      */
-    function merge($spec)
-    {
+    function merge($spec) {
         if ($spec instanceof ConsoleOptionParser) {
             $spec = $spec.toArray();
         }
@@ -277,8 +273,7 @@ class ConsoleOptionParser
      * @param string $text The text to set.
      * @return this
      */
-    auto setCommand(string $text)
-    {
+    auto setCommand(string $text) {
         this._command = Inflector::underscore($text);
 
         return this;
@@ -301,8 +296,7 @@ class ConsoleOptionParser
      *   text will be imploded with "\n".
      * @return this
      */
-    auto setDescription($text)
-    {
+    auto setDescription($text) {
         if (is_array($text)) {
             $text = implode("\n", $text);
         }
@@ -329,8 +323,7 @@ class ConsoleOptionParser
      *   be imploded with "\n".
      * @return this
      */
-    auto setEpilog($text)
-    {
+    auto setEpilog($text) {
         if (is_array($text)) {
             $text = implode("\n", $text);
         }
@@ -355,8 +348,7 @@ class ConsoleOptionParser
      * @param bool myValue Whether to sort subcommands
      * @return this
      */
-    function enableSubcommandSort(bool myValue = true)
-    {
+    function enableSubcommandSort(bool myValue = true) {
         this._subcommandSort = myValue;
 
         return this;
@@ -365,8 +357,7 @@ class ConsoleOptionParser
     /**
      * Checks whether sorting is enabled for subcommands.
      */
-    bool isSubcommandSortEnabled()
-    {
+    bool isSubcommandSortEnabled() {
         return this._subcommandSort;
     }
 
@@ -394,8 +385,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> myOptions An array of parameters that define the behavior of the option
      * @return this
      */
-    function addOption(myName, array myOptions = [])
-    {
+    function addOption(myName, array myOptions = []) {
         if (myName instanceof ConsoleInputOption) {
             $option = myName;
             myName = $option.name();
@@ -437,8 +427,7 @@ class ConsoleOptionParser
      * @param string myName The option name to remove.
      * @return this
      */
-    function removeOption(string myName)
-    {
+    function removeOption(string myName) {
         unset(this._options[myName]);
 
         return this;
@@ -462,8 +451,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> myParams Parameters for the argument, see above.
      * @return this
      */
-    function addArgument(myName, array myParams = [])
-    {
+    function addArgument(myName, array myParams = []) {
         if (myName instanceof ConsoleInputArgument) {
             $arg = myName;
             $index = count(this._args);
@@ -502,8 +490,7 @@ class ConsoleOptionParser
      * @see \Cake\Console\ConsoleOptionParser::addArgument()
      * @return this
      */
-    function addArguments(array $args)
-    {
+    function addArguments(array $args) {
         foreach ($args as myName => myParams) {
             if (myParams instanceof ConsoleInputArgument) {
                 myName = myParams;
@@ -523,8 +510,7 @@ class ConsoleOptionParser
      * @see \Cake\Console\ConsoleOptionParser::addOption()
      * @return this
      */
-    function addOptions(array myOptions)
-    {
+    function addOptions(array myOptions) {
         foreach (myOptions as myName => myParams) {
             if (myParams instanceof ConsoleInputOption) {
                 myName = myParams;
@@ -552,8 +538,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> myOptions Array of params, see above.
      * @return this
      */
-    function addSubcommand(myName, array myOptions = [])
-    {
+    function addSubcommand(myName, array myOptions = []) {
         if (myName instanceof ConsoleInputSubcommand) {
             $command = myName;
             myName = $command.name();
@@ -582,8 +567,7 @@ class ConsoleOptionParser
      * @param string myName The subcommand name to remove.
      * @return this
      */
-    function removeSubcommand(string myName)
-    {
+    function removeSubcommand(string myName) {
         unset(this._subcommands[myName]);
 
         return this;
@@ -595,8 +579,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $commands Array of subcommands.
      * @return this
      */
-    function addSubcommands(array $commands)
-    {
+    function addSubcommands(array $commands) {
         foreach ($commands as myName => myParams) {
             if (myParams instanceof ConsoleInputSubcommand) {
                 myName = myParams;
@@ -781,8 +764,7 @@ class ConsoleOptionParser
      * @param string myName The root command name
      * @return this
      */
-    auto setRootName(string myName)
-    {
+    auto setRootName(string myName) {
         this.rootName = myName;
 
         return this;
@@ -889,8 +871,7 @@ class ConsoleOptionParser
      * @param string myName The name of the option.
      * @return bool
      */
-    protected bool _optionExists(string myName)
-    {
+    protected bool _optionExists(string myName) {
         if (substr(myName, 0, 2) === '--') {
             return isset(this._options[substr(myName, 2)]);
         }

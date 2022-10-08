@@ -84,8 +84,7 @@ class Component : IEventListener
      *  this component can use to lazy load its components.
      * @param array<string, mixed> myConfig Array of configuration settings.
      */
-    this(ComponentRegistry $registry, array myConfig = [])
-    {
+    this(ComponentRegistry $registry, array myConfig = []) {
         this._registry = $registry;
 
         this.setConfig(myConfig);
@@ -125,8 +124,7 @@ class Component : IEventListener
      * @param string myName Name of component to get.
      * @return \Cake\Controller\Component|null A Component object or null.
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         if (isset(this._componentMap[myName]) && !isset(this.{myName})) {
             myConfig = (array)this._componentMap[myName]['config'] + ['enabled' => false];
             this.{myName} = this._registry.load(this._componentMap[myName]['class'], myConfig);

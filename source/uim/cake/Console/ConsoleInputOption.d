@@ -195,22 +195,19 @@ class ConsoleInputOption
 
     /**
      * Check if this option is required
-    bool isRequired()
-    {
+    bool isRequired() {
         return this.required;
     }
 
     /**
      * Check if this option is a boolean option
-    bool isBoolean()
-    {
+    bool isBoolean() {
         return this._boolean;
     }
 
     /**
      * Check if this option accepts multiple values.
-    bool acceptsMultiple()
-    {
+    bool acceptsMultiple() {
         return this._multiple;
     }
 
@@ -221,8 +218,7 @@ class ConsoleInputOption
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    bool validChoice(myValue)
-    {
+    bool validChoice(myValue) {
         if (empty(this._choices)) {
             return true;
         }

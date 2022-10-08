@@ -287,8 +287,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param string myName Property name
      * @return \Cake\Datasource\IRepository|null The model instance or null
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         if (!empty(this.modelClass)) {
             if (strpos(this.modelClass, '\\') === false) {
                 [, myClass] = pluginSplit(this.modelClass, true);
@@ -365,8 +364,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return this
      * @since 3.6.0
      */
-    auto setName(string myName)
-    {
+    auto setName(string myName) {
         this.name = myName;
 
         return this;
@@ -378,8 +376,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return string|null
      * @since 3.6.0
      */
-    string getPlugin()
-    {
+    string getPlugin() {
         return this.plugin;
     }
 
@@ -390,8 +387,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return this
      * @since 3.6.0
      */
-    auto setPlugin(?string myName)
-    {
+    auto setPlugin(?string myName) {
         this.plugin = myName;
 
         return this;
@@ -403,8 +399,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return bool
      * @since 3.6.0
      */
-    bool isAutoRenderEnabled()
-    {
+    bool isAutoRenderEnabled() {
         return this.autoRender;
     }
 
@@ -453,8 +448,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param \Cake\Http\ServerRequest myRequest Request instance.
      * @return this
      */
-    auto setRequest(ServerRequest myRequest)
-    {
+    auto setRequest(ServerRequest myRequest) {
         this.request = myRequest;
         this.plugin = myRequest.getParam('plugin') ?: null;
 
@@ -479,8 +473,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return this
      * @since 3.6.0
      */
-    auto setResponse(Response $response)
-    {
+    auto setResponse(Response $response) {
         this.response = $response;
 
         return this;
@@ -545,8 +538,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return void
      * @psalm-param array{only?: array|string, except?: array|string} myOptions
      */
-    function middleware($middleware, array myOptions = [])
-    {
+    function middleware($middleware, array myOptions = []) {
         this.middlewares[] = [
             'middleware' => $middleware,
             'options' => myOptions,
@@ -693,8 +685,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return mixed Returns the return value of the called action
      * @deprecated 4.2.0 Refactor your code use `redirect()` instead of forwarding actions.
      */
-    auto setAction(string $action, ...$args)
-    {
+    auto setAction(string $action, ...$args) {
         deprecationWarning(
             'Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, ' .
             'or call the other action as a method.'
@@ -811,8 +802,7 @@ class Controller : IEventListener, IEventDispatcher
      * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
-    function paginate($object = null, array $settings = [])
-    {
+    function paginate($object = null, array $settings = []) {
         if (is_object($object)) {
             myTable = $object;
         }
@@ -848,8 +838,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return bool Whether the method is accessible from a URL.
      * @throws \ReflectionException
      */
-    bool isAction(string $action)
-    {
+    bool isAction(string $action) {
         $baseClass = new ReflectionClass(self::class);
         if ($baseClass.hasMethod($action)) {
             return false;
@@ -871,8 +860,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeFilter(IEvent myEvent)
-    {
+    function beforeFilter(IEvent myEvent) {
     }
 
     /**
@@ -883,8 +871,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeRender(IEvent myEvent)
-    {
+    function beforeRender(IEvent myEvent) {
     }
 
     /**
@@ -903,8 +890,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeRedirect(IEvent myEvent, myUrl, Response $response)
-    {
+    function beforeRedirect(IEvent myEvent, myUrl, Response $response) {
     }
 
     /**
@@ -914,7 +900,6 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function afterFilter(IEvent myEvent)
-    {
+    function afterFilter(IEvent myEvent) {
     }
 }

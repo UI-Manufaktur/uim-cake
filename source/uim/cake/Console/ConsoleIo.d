@@ -298,8 +298,7 @@ class ConsoleIo
      * @param array<string>|string myMessage The message to wrap.
      * @return array<string>|string The message wrapped with the given message type.
      */
-    protected auto wrapMessageWithType(string myMessageType, myMessage)
-    {
+    protected auto wrapMessageWithType(string myMessageType, myMessage) {
         if (is_array(myMessage)) {
             foreach (myMessage as $k => $v) {
                 myMessage[$k] = "<{myMessageType}>{$v}</{myMessageType}>";
@@ -590,8 +589,7 @@ class ConsoleIo
      * @throws \Cake\Console\Exception\StopException When `q` is given as an answer
      *   to whether a file should be overwritten.
      */
-    function createFile(string myPath, string myContentss, bool $forceOverwrite = false): bool
-    {
+    function createFile(string myPath, string myContentss, bool $forceOverwrite = false) {
         this.out();
         $forceOverwrite = $forceOverwrite || this.forceOverwrite;
 

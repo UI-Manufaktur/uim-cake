@@ -165,8 +165,7 @@ class Shell {
      * @param \Cake\ORM\Locator\ILocator|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell
      */
-    this(?ConsoleIo $io = null, ?ILocator $locator = null)
-    {
+    this(?ConsoleIo $io = null, ?ILocator $locator = null) {
         if (!this.name) {
             [, myClass] = moduleSplit(static::class);
             this.name = str_replace(['Shell', 'Task'], '', myClass);
@@ -193,8 +192,7 @@ class Shell {
      * @param string myName The name of the root command.
      * @return this
      */
-    auto setRootName(string myName)
-    {
+    auto setRootName(string myName) {
         this.rootName = myName;
 
         return this;
@@ -265,8 +263,7 @@ class Shell {
      *
      * @return true
      */
-    bool loadTasks()
-    {
+    bool loadTasks() {
         if (this.tasks === true || empty(this.tasks)) {
             return true;
         }
@@ -304,8 +301,7 @@ class Shell {
      * @return bool Success
      * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasTask(string $task)
-    {
+    bool hasTask(string $task) {
         return isset(this._taskMap[Inflector::camelize($task)]);
     }
 
@@ -316,8 +312,7 @@ class Shell {
      * @return bool
      * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasMethod(string myName)
-    {
+    bool hasMethod(string myName) {
         try {
             $method = new ReflectionMethod(this, myName);
             if (!$method.isPublic()) {
@@ -446,8 +441,7 @@ class Shell {
      * @return int|bool|null
      * @link https://book.cakephp.org/4/en/console-and-shells.html#the-cakephp-console
      */
-    function runCommand(array $argv, bool $autoMethod = false, array $extra = [])
-    {
+    function runCommand(array $argv, bool $autoMethod = false, array $extra = []) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         this.OptionParser = this.getOptionParser();
         try {
@@ -533,8 +527,7 @@ class Shell {
      * @param string|null $command The command to get help for.
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    protected auto _displayHelp(?string $command = null)
-    {
+    protected auto _displayHelp(?string $command = null) {
         $format = 'text';
         if (!empty(this.args[0]) && this.args[0] === 'xml') {
             $format = 'xml';
@@ -574,8 +567,7 @@ class Shell {
      * @param string myName The task to get.
      * @return \Cake\Console\Shell Object of Task
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         if (empty(this.{myName}) && in_array(myName, this.taskNames, true)) {
             $properties = this._taskMap[myName];
             this.{myName} = this.Tasks.load($properties['class'], $properties['config']);
@@ -594,8 +586,7 @@ class Shell {
      * @param string myName The name of the parameter to get.
      * @return string|bool|null Value. Will return null if it doesn't exist.
      */
-    function param(string myName)
-    {
+    function param(string myName) {
         return this.params[myName] ?? null;
     }
 
@@ -810,8 +801,7 @@ class Shell {
      * @return bool Success
      * @link https://book.cakephp.org/4/en/console-and-shells.html#creating-files
      */
-    bool createFile(string myPath, string myContentss)
-    {
+    bool createFile(string myPath, string myContentss) {
         myPath = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, myPath);
 
         this._io.out();

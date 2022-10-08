@@ -50,8 +50,7 @@ class ConsoleInputSubCommand {
      * @param \Cake\Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
-    this(myName, $help = '', $parser = null)
-    {
+    this(myName, $help = '', $parser = null) {
         if (is_array(myName)) {
             myData = myName + ['name' => null, 'help' => '', 'parser' => null];
             if (empty(myData['name'])) {
