@@ -1,8 +1,8 @@
-module uim.cake.Network;
+module uim.cake.networks;
 
 import uim.cake.core.Exception\CakeException;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Network\Exception\SocketException;
+import uim.cake.networks\Exception\SocketException;
 import uim.cake.Validation\Validation;
 use Composer\CaBundle\CaBundle;
 use Exception;
@@ -90,8 +90,7 @@ class Socket
      * @param array<string, mixed> myConfig Socket configuration, which will be merged with the base configuration
      * @see \Cake\Network\Socket::$_defaultConfig
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.setConfig(myConfig);
     }
 
@@ -188,8 +187,7 @@ class Socket
      * @param resource $context context
      * @return resource|null
      */
-    protected auto _getStreamSocketClient($remoteSocketTarget, &$errNum, &$errStr, $timeout, $connectAs, $context)
-    {
+    protected auto _getStreamSocketClient($remoteSocketTarget, &$errNum, &$errStr, $timeout, $connectAs, $context) {
         $resource = stream_socket_client(
             $remoteSocketTarget,
             $errNum,
@@ -504,8 +502,7 @@ class Socket
      * @param string myName Property name.
      * @return mixed
      */
-    auto __get(myName)
-    {
+    auto __get(myName) {
         switch (myName) {
             case 'connected':
                 deprecationWarning('The property `$connected` is deprecated, use `isConnected()` instead.');

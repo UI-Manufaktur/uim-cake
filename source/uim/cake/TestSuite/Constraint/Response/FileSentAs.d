@@ -31,8 +31,7 @@ class FileSentAs : ResponseBase
      * @param mixed $other Expected type
      * @return bool
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         /** @psalm-suppress PossiblyNullReference */
         return this.response.getFile().getPathName() === $other;
     }

@@ -40,8 +40,7 @@ class AssetMiddleware : MiddlewareInterface
      *
      * @param array<string, mixed> myOptions The options to use
      */
-    this(array myOptions = [])
-    {
+    this(array myOptions = []) {
         if (!empty(myOptions['cacheTime'])) {
             this.cacheTime = myOptions['cacheTime'];
         }

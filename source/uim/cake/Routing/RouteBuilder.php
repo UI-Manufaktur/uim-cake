@@ -110,8 +110,7 @@ class RouteBuilder
      * @param array myParams The scope's routing parameters.
      * @param array<string, mixed> myOptions Options list.
      */
-    this(RouteCollection myCollection, string myPath, array myParams = [], array myOptions = [])
-    {
+    this(RouteCollection myCollection, string myPath, array myParams = [], array myOptions = []) {
         this._collection = myCollection;
         this._path = myPath;
         this._params = myParams;
@@ -135,8 +134,7 @@ class RouteBuilder
      * @param string $routeClass Class name.
      * @return this
      */
-    auto setRouteClass(string $routeClass)
-    {
+    auto setRouteClass(string $routeClass) {
         this._routeClass = $routeClass;
 
         return this;
@@ -161,8 +159,7 @@ class RouteBuilder
      * @param array<string>|string $extensions The extensions to set.
      * @return this
      */
-    auto setExtensions($extensions)
-    {
+    auto setExtensions($extensions) {
         this._extensions = (array)$extensions;
 
         return this;
@@ -184,8 +181,7 @@ class RouteBuilder
      * @param array<string>|string $extensions One or more extensions to add
      * @return this
      */
-    function addExtensions($extensions)
-    {
+    function addExtensions($extensions) {
         $extensions = array_merge(this._extensions, (array)$extensions);
         this._extensions = array_unique($extensions);
 
@@ -338,8 +334,7 @@ class RouteBuilder
      *   scopes inherit the existing path and 'id' parameter.
      * @return this
      */
-    function resources(string myName, myOptions = [], $callback = null)
-    {
+    function resources(string myName, myOptions = [], $callback = null) {
         if (!is_array(myOptions)) {
             $callback = myOptions;
             myOptions = [];
@@ -557,8 +552,7 @@ class RouteBuilder
      * @throws \Cake\Core\Exception\MissingPluginException When the plugin has not been loaded.
      * @throws \InvalidArgumentException When the plugin does not have a routes file.
      */
-    function loadPlugin(string myName)
-    {
+    function loadPlugin(string myName) {
         myPlugins = Plugin::getCollection();
         if (!myPlugins.has(myName)) {
             throw new MissingPluginException(['plugin' => myName]);
@@ -823,8 +817,7 @@ class RouteBuilder
      * @return this
      * @throws \InvalidArgumentException If a valid callback is not passed
      */
-    function prefix(string myName, myParams = [], $callback = null)
-    {
+    function prefix(string myName, myParams = [], $callback = null) {
         if (!is_array(myParams)) {
             $callback = myParams;
             myParams = [];
@@ -868,8 +861,7 @@ class RouteBuilder
      *   Only required when myOptions is defined.
      * @return this
      */
-    function plugin(string myName, myOptions = [], $callback = null)
-    {
+    function plugin(string myName, myOptions = [], $callback = null) {
         if (!is_array(myOptions)) {
             $callback = myOptions;
             myOptions = [];
@@ -902,8 +894,7 @@ class RouteBuilder
      * @return this
      * @throws \InvalidArgumentException when there is no callable parameter.
      */
-    function scope(string myPath, myParams, $callback = null)
-    {
+    function scope(string myPath, myParams, $callback = null) {
         if (!is_array(myParams)) {
             $callback = myParams;
             myParams = [];
@@ -945,8 +936,7 @@ class RouteBuilder
      *   if not specified
      * @return this
      */
-    function fallbacks(?string $routeClass = null)
-    {
+    function fallbacks(?string $routeClass = null) {
         $routeClass = $routeClass ?: this._routeClass;
         this.connect('/{controller}', ['action' => 'index'], compact('routeClass'));
         this.connect('/{controller}/{action}/*', [], compact('routeClass'));
@@ -965,8 +955,7 @@ class RouteBuilder
      * @return this
      * @see \Cake\Routing\RouteCollection
      */
-    function registerMiddleware(string myName, $middleware)
-    {
+    function registerMiddleware(string myName, $middleware) {
         this._collection.registerMiddleware(myName, $middleware);
 
         return this;
@@ -982,8 +971,7 @@ class RouteBuilder
      * @throws \RuntimeException
      * @see \Cake\Routing\RouteCollection::addMiddlewareToScope()
      */
-    function applyMiddleware(string ...myNames)
-    {
+    function applyMiddleware(string ...myNames) {
         foreach (myNames as myName) {
             if (!this._collection.middlewareExists(myName)) {
                 myMessage = "Cannot apply 'myName' middleware or middleware group. " .
@@ -1013,8 +1001,7 @@ class RouteBuilder
      * @param array<string> $middlewareNames Names of the middleware
      * @return this
      */
-    function middlewareGroup(string myName, array $middlewareNames)
-    {
+    function middlewareGroup(string myName, array $middlewareNames) {
         this._collection.middlewareGroup(myName, $middlewareNames);
 
         return this;

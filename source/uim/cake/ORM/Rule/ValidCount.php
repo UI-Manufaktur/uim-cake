@@ -30,8 +30,7 @@ class ValidCount
      *
      * @param string myField The field to check the count on.
      */
-    this(string myField)
-    {
+    this(string myField) {
         this._field = myField;
     }
 

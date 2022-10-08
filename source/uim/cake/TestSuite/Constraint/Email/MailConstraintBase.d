@@ -30,8 +30,7 @@ abstract class MailConstraintBase : Constraint
      * @param int|null $at At
      * @return void
      */
-    this(?int $at = null)
-    {
+    this(?int $at = null) {
         this.at = $at;
     }
 

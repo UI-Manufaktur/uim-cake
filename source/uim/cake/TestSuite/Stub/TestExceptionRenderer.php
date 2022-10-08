@@ -30,8 +30,7 @@ class TestExceptionRenderer
      * @return void
      * @throws \Throwable myException Rethrows the passed exception.
      */
-    this(Throwable myException)
-    {
+    this(Throwable myException) {
         throw myException;
     }
 }

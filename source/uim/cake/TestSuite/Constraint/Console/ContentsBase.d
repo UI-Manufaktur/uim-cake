@@ -38,8 +38,7 @@ abstract class ContentsBase : Constraint
      * @param array<string> myContentss Contents
      * @param string $output Output type
      */
-    this(array myContentss, string $output)
-    {
+    this(array myContentss, string $output) {
         this.contents = implode(PHP_EOL, myContentss);
         this.output = $output;
     }

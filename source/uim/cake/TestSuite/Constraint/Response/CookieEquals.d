@@ -38,8 +38,7 @@ class CookieEquals : ResponseBase
      * @param \Cake\Http\Response|null $response A response instance.
      * @param string $cookieName Cookie name
      */
-    this(?Response $response, string $cookieName)
-    {
+    this(?Response $response, string $cookieName) {
         super.this($response);
 
         this.cookieName = $cookieName;

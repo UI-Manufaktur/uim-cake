@@ -752,8 +752,7 @@ trait IntegrationTestTrait
      * @param string myName The view variable to get.
      * @return mixed The view variable if set.
      */
-    function viewVariable(string myName)
-    {
+    function viewVariable(string myName) {
         return this._controller ? this._controller.viewBuilder().getVar(myName) : null;
     }
 
@@ -851,8 +850,7 @@ trait IntegrationTestTrait
      * @param string myMessage The failure message that will be appended to the generated message.
      * @return void
      */
-    function assertRedirectEquals(myUrl = null, myMessage = '')
-    {
+    function assertRedirectEquals(myUrl = null, myMessage = '') {
         if (!this._response) {
             this.fail('No response set, cannot assert header.');
         }

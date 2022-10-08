@@ -41,8 +41,7 @@ class EventFiredWith : Constraint
      * @param string myDataKey Data key
      * @param mixed myDataValue Data value
      */
-    this(EventManager myEventManager, string myDataKey, myDataValue)
-    {
+    this(EventManager myEventManager, string myDataKey, myDataValue) {
         this._eventManager = myEventManager;
         this._dataKey = myDataKey;
         this._dataValue = myDataValue;

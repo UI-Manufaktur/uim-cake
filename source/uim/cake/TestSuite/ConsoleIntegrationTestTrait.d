@@ -160,8 +160,7 @@ trait ConsoleIntegrationTestTrait
      * @param string myMessage Failure message
      * @return void
      */
-    function assertExitSuccess(myMessage = '')
-    {
+    function assertExitSuccess(myMessage = '') {
         this.assertThat(Command::CODE_SUCCESS, new ExitCode(this._exitCode), myMessage);
     }
 
@@ -171,8 +170,7 @@ trait ConsoleIntegrationTestTrait
      * @param string myMessage Failure message
      * @return void
      */
-    function assertExitError(myMessage = '')
-    {
+    function assertExitError(myMessage = '') {
         this.assertThat(Command::CODE_ERROR, new ExitCode(this._exitCode), myMessage);
     }
 

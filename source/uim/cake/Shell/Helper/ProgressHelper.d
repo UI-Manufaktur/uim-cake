@@ -85,8 +85,7 @@ class ProgressHelper : Helper
      * @param array $args The initialization data.
      * @return this
      */
-    function init(array $args = [])
-    {
+    function init(array $args = []) {
         $args += ['total' => 100, 'width' => 80];
         this._progress = 0;
         this._width = $args['width'];
@@ -101,8 +100,7 @@ class ProgressHelper : Helper
      * @param float|int $num The amount of progress to advance by.
      * @return this
      */
-    function increment($num = 1)
-    {
+    function increment($num = 1) {
         this._progress = min(max(0, this._progress + $num), this._total);
 
         return this;

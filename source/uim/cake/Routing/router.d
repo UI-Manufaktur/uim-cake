@@ -934,8 +934,7 @@ class Router
      * @param array myUrl Route array with `_path` key
      * @return array
      */
-    protected static function unwrapShortString(array myUrl)
-    {
+    protected static function unwrapShortString(array myUrl) {
         foreach (['plugin', 'prefix', 'controller', 'action'] as myKey) {
             if (array_key_exists(myKey, myUrl)) {
                 throw new InvalidArgumentException(

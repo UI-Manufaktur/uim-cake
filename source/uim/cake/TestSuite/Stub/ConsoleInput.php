@@ -39,8 +39,7 @@ class ConsoleInput : ConsoleInputBase
      *
      * @param array<string> $replies A list of replies for read()
      */
-    this(array $replies)
-    {
+    this(array $replies) {
         super.this();
 
         this.replies = $replies;

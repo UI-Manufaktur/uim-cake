@@ -33,8 +33,7 @@ class SessionHasKey : Constraint
      *
      * @param string myPath Session Path
      */
-    this(string myPath)
-    {
+    this(string myPath) {
         this.path = myPath;
     }
 

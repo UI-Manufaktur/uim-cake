@@ -315,8 +315,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function insert(ConnectionInterface myConnection)
-    {
+    function insert(ConnectionInterface myConnection) {
         if (!empty(this.records)) {
             [myFields, myValues, myTypes] = this._getRecords();
             myQuery = myConnection.newQuery()
@@ -429,8 +428,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    auto setTableSchema($schema)
-    {
+    auto setTableSchema($schema) {
         this._schema = $schema;
 
         return this;

@@ -26,8 +26,7 @@ class BodyNotEmpty : BodyEmpty
      * @param mixed $other Expected type
      * @return bool
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return super.matches($other) === false;
     }
 

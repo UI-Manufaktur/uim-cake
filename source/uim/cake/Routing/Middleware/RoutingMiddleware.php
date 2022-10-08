@@ -58,8 +58,7 @@ class RoutingMiddleware : MiddlewareInterface
      * @param \Cake\Routing\RoutingApplicationInterface $app The application instance that routes are defined on.
      * @param string|null $cacheConfig The cache config name to use or null to disable routes cache
      */
-    this(RoutingApplicationInterface $app, ?string $cacheConfig = null)
-    {
+    this(RoutingApplicationInterface $app, ?string $cacheConfig = null) {
         this.app = $app;
         this.cacheConfig = $cacheConfig;
     }

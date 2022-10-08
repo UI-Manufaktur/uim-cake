@@ -33,8 +33,7 @@ class BodyContains : ResponseBase
      * @param \Psr\Http\Message\IResponse $response A response instance.
      * @param bool $ignoreCase Ignore case
      */
-    this(IResponse $response, bool $ignoreCase = false)
-    {
+    this(IResponse $response, bool $ignoreCase = false) {
         super.this($response);
 
         this.ignoreCase = $ignoreCase;
@@ -46,8 +45,7 @@ class BodyContains : ResponseBase
      * @param mixed $other Expected type
      * @return bool
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         $method = 'mb_strpos';
         if (this.ignoreCase) {
             $method = 'mb_stripos';
