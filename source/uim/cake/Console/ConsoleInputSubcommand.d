@@ -77,7 +77,7 @@ class ConsoleInputSubCommand {
      *
      * @return string Value of this._name.
      */
-    function name(): string
+    string name()
     {
         return this._name;
     }
@@ -87,7 +87,7 @@ class ConsoleInputSubCommand {
      *
      * @return string
      */
-    auto getRawHelp(): string
+    string getRawHelp()
     {
         return this._help;
     }
@@ -98,7 +98,7 @@ class ConsoleInputSubCommand {
      * @param int $width The width to make the name of the subcommand.
      * @return string
      */
-    function help(int $width = 0): string
+    string help(int $width = 0)
     {
         myName = this._name;
         if (strlen(myName) < $width) {

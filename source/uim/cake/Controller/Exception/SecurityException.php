@@ -37,7 +37,7 @@ class SecurityException : BadRequestException
      *
      * @return string
      */
-    auto getType(): string
+    string getType()
     {
         return this._type;
     }

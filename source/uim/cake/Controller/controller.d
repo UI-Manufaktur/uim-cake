@@ -352,7 +352,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return string
 
      */
-    string getName(): string
+    string getName()
     {
         return this.name;
     }
@@ -744,7 +744,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @return string
      */
-    protected auto _templatePath(): string
+    protected string _templatePath()
     {
         myTemplatePath = this.name;
         if (this.request.getParam('prefix')) {
@@ -766,7 +766,7 @@ class Controller : IEventListener, IEventDispatcher
      *   Careful with trusting external sources.
      * @return string Referring URL
      */
-    function referer($default = '/', bool $local = true): string
+    string referer($default = '/', bool $local = true)
     {
         $referer = this.request.referer($local);
         if ($referer === null) {

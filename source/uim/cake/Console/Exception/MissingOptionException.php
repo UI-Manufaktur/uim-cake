@@ -59,7 +59,7 @@ class MissingOptionException : ConsoleException
      *
      * @return string
      */
-    auto getFullMessage(): string
+    string getFullMessage()
     {
         $out = this.getMessage();
         $bestGuess = this.findClosestItem(this.requested, this.suggestions);

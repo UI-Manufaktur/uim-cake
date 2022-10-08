@@ -21,7 +21,7 @@ trait SqlDialectTrait
      * @param string myIdentifier The identifier to quote.
      * @return string
      */
-    function quoteIdentifier(string myIdentifier): string
+    string quoteIdentifier(string myIdentifier)
     {
         myIdentifier = trim(myIdentifier);
 
@@ -263,7 +263,7 @@ trait SqlDialectTrait
      * @param string|int myName save point name
      * @return string
      */
-    function savePointSQL(myName): string
+    string savePointSQL(myName)
     {
         return 'SAVEPOINT LEVEL' . myName;
     }
@@ -274,7 +274,7 @@ trait SqlDialectTrait
      * @param string|int myName save point name
      * @return string
      */
-    function releaseSavePointSQL(myName): string
+    string releaseSavePointSQL(myName)
     {
         return 'RELEASE SAVEPOINT LEVEL' . myName;
     }
@@ -285,7 +285,7 @@ trait SqlDialectTrait
      * @param string|int myName save point name
      * @return string
      */
-    function rollbackSavePointSQL(myName): string
+    string rollbackSavePointSQL(myName)
     {
         return 'ROLLBACK TO SAVEPOINT LEVEL' . myName;
     }
