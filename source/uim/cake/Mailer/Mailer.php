@@ -19,7 +19,7 @@ import uim.cake.Event\IEventListener;
 import uim.cake.Log\Log;
 import uim.cake.Mailer\Exception\MissingActionException;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.View\ViewBuilder;
+import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 
 /**
