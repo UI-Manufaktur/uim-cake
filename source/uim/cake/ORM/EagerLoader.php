@@ -176,8 +176,7 @@ class EagerLoader
      * @param bool myEnable The value to set.
      * @return this
      */
-    function enableAutoFields(bool myEnable = true)
-    {
+    function enableAutoFields(bool myEnable = true) {
         this._autoFields = myEnable;
 
         return this;
@@ -223,8 +222,7 @@ class EagerLoader
      * @param array<string, mixed> myOptions Extra options for the association matching.
      * @return this
      */
-    auto setMatching(string $associationPath, ?callable myBuilder = null, array myOptions = [])
-    {
+    auto setMatching(string $associationPath, ?callable myBuilder = null, array myOptions = []) {
         if (this._matching === null) {
             this._matching = new static();
         }

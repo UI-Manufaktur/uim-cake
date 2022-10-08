@@ -101,8 +101,7 @@ class BelongsTo : Association
      * the saved entity
      * @see \Cake\ORM\Table::save()
      */
-    function saveAssociated(IEntity $entity, array myOptions = [])
-    {
+    function saveAssociated(IEntity $entity, array myOptions = []) {
         myTargetEntity = $entity.get(this.getProperty());
         if (empty(myTargetEntity) || !(myTargetEntity instanceof IEntity)) {
             return $entity;

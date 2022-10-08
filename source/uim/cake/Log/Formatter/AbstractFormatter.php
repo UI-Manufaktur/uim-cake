@@ -27,8 +27,7 @@ abstract class AbstractFormatter
     /**
      * @param array<string, mixed> myConfig Config options
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.setConfig(myConfig);
     }
 

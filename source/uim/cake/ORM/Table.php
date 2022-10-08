@@ -259,8 +259,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @param array<string, mixed> myConfig List of options for this table
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         if (!empty(myConfig['registryAlias'])) {
             this.setRegistryAlias(myConfig['registryAlias']);
         }
@@ -353,8 +352,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param string myTable Table name.
      * @return this
      */
-    auto setTable(string myTable)
-    {
+    auto setTable(string myTable) {
         this._table = myTable;
 
         return this;
@@ -387,8 +385,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param string myAlias Table alias
      * @return this
      */
-    auto setAlias(string myAlias)
-    {
+    auto setAlias(string myAlias) {
         this._alias = myAlias;
 
         return this;
@@ -433,8 +430,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param string $registryAlias The key used to access this object.
      * @return this
      */
-    auto setRegistryAlias(string $registryAlias)
-    {
+    auto setRegistryAlias(string $registryAlias) {
         this._registryAlias = $registryAlias;
 
         return this;
@@ -460,8 +456,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param \Cake\Database\Connection myConnection The connection instance
      * @return this
      */
-    auto setConnection(Connection myConnection)
-    {
+    auto setConnection(Connection myConnection) {
         this._connection = myConnection;
 
         return this;
@@ -513,8 +508,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param \Cake\Database\Schema\TableSchemaInterface|array $schema Schema to be used for this table
      * @return this
      */
-    auto setSchema($schema)
-    {
+    auto setSchema($schema) {
         if (is_array($schema)) {
             $constraints = [];
 
@@ -619,8 +613,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param array<string>|string myKey Sets a new name to be used as primary key
      * @return this
      */
-    auto setPrimaryKey(myKey)
-    {
+    auto setPrimaryKey(myKey) {
         this._primaryKey = myKey;
 
         return this;
@@ -649,8 +642,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param array<string>|string myField Name to be used as display field.
      * @return this
      */
-    auto setDisplayField(myField)
-    {
+    auto setDisplayField(myField) {
         this._displayField = myField;
 
         return this;
@@ -718,8 +710,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \Cake\ORM\Exception\MissingEntityException when the entity class cannot be found
      * @return this
      */
-    auto setEntityClass(string myName)
-    {
+    auto setEntityClass(string myName) {
         /** @psalm-var class-string<\Cake\Datasource\IEntity>|null */
         myClass = App::className(myName, 'Model/Entity');
         if (myClass === null) {
@@ -755,8 +746,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \RuntimeException If a behavior is being reloaded.
      * @see \Cake\ORM\Behavior
      */
-    function addBehavior(string myName, array myOptions = [])
-    {
+    function addBehavior(string myName, array myOptions = []) {
         this._behaviors.load(myName, myOptions);
 
         return this;
@@ -778,8 +768,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      * @throws \RuntimeException If a behavior is being reloaded.
      */
-    function addBehaviors(array $behaviors)
-    {
+    function addBehaviors(array $behaviors) {
         foreach ($behaviors as myName => myOptions) {
             if (is_int(myName)) {
                 myName = myOptions;
@@ -807,8 +796,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      * @see \Cake\ORM\Behavior
      */
-    function removeBehavior(string myName)
-    {
+    function removeBehavior(string myName) {
         this._behaviors.unload(myName);
 
         return this;
@@ -975,8 +963,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @see \Cake\ORM\Table::hasMany()
      * @see \Cake\ORM\Table::belongsToMany()
      */
-    function addAssociations(array myParams)
-    {
+    function addAssociations(array myParams) {
         foreach (myParams as $assocType => myTables) {
             foreach (myTables as $associated => myOptions) {
                 if (is_numeric($associated)) {
@@ -1533,8 +1520,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param bool $atomic Whether to execute the worker inside a database transaction.
      * @return mixed
      */
-    protected auto _executeTransaction(callable $worker, bool $atomic = true)
-    {
+    protected auto _executeTransaction(callable $worker, bool $atomic = true) {
         if ($atomic) {
             return this.getConnection().transactional(function () use ($worker) {
                 return $worker();
@@ -1621,8 +1607,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn't be saved
      * @throws \InvalidArgumentException
      */
-    protected auto _processFindOrCreate($search, ?callable $callback = null, myOptions = [])
-    {
+    protected auto _processFindOrCreate($search, ?callable $callback = null, myOptions = []) {
         myQuery = this._getFindOrCreateQuery($search);
 
         $row = myQuery.first();
@@ -1819,8 +1804,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return \Cake\Datasource\IEntity|false
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
-    function save(IEntity $entity, myOptions = [])
-    {
+    function save(IEntity $entity, myOptions = []) {
         if (myOptions instanceof SaveOptionsBuilder) {
             myOptions = myOptions.toArray();
         }
@@ -1889,8 +1873,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
-    protected auto _processSave(IEntity $entity, ArrayObject myOptions)
-    {
+    protected auto _processSave(IEntity $entity, ArrayObject myOptions) {
         $primaryColumns = (array)this.getPrimaryKey();
 
         if (myOptions['checkExisting'] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
@@ -2005,8 +1988,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \RuntimeException if not all the primary keys where supplied or could
      * be generated when the table has composite primary keys. Or when the table has no primary key.
      */
-    protected auto _insert(IEntity $entity, array myData)
-    {
+    protected auto _insert(IEntity $entity, array myData) {
         $primary = (array)this.getPrimaryKey();
         if (empty($primary)) {
             $msg = sprintf(
@@ -2084,8 +2066,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param array<string> $primary The primary key columns to get a new ID for.
      * @return string|null Either null or the primary key value or a list of primary key values.
      */
-    protected auto _newId(array $primary)
-    {
+    protected auto _newId(array $primary) {
         if (!$primary || count($primary) > 1) {
             return null;
         }
@@ -2104,8 +2085,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return \Cake\Datasource\IEntity|false
      * @throws \InvalidArgumentException When primary key data is missing.
      */
-    protected auto _update(IEntity $entity, array myData)
-    {
+    protected auto _update(IEntity $entity, array myData) {
         $primaryColumns = (array)this.getPrimaryKey();
         $primaryKey = $entity.extract($primaryColumns);
 
@@ -2154,8 +2134,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity>|false False on failure, entities list on success.
      * @throws \Exception
      */
-    function saveMany(iterable $entities, myOptions = [])
-    {
+    function saveMany(iterable $entities, myOptions = []) {
         try {
             return this._saveMany($entities, myOptions);
         } catch (PersistenceFailedException myException) {
@@ -2310,8 +2289,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *   on success, false on failure.
      * @see \Cake\ORM\Table::delete() for options and events related to this method.
      */
-    function deleteMany(iterable $entities, myOptions = [])
-    {
+    function deleteMany(iterable $entities, myOptions = []) {
         $failed = this._deleteMany($entities, myOptions);
 
         if ($failed !== null) {
@@ -2519,8 +2497,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \BadMethodCallException when there are missing arguments, or when
      *  and & or are combined.
      */
-    protected auto _dynamicFinder(string $method, array $args)
-    {
+    protected auto _dynamicFinder(string $method, array $args) {
         $method = Inflector::underscore($method);
         preg_match('/^find_([\w]+)_by_/', $method, $matches);
         if (empty($matches)) {
@@ -2584,8 +2561,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return mixed
      * @throws \BadMethodCallException
      */
-    auto __call($method, $args)
-    {
+    auto __call($method, $args) {
         if (this._behaviors.hasMethod($method)) {
             return this._behaviors.call($method, $args);
         }
@@ -2606,8 +2582,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return \Cake\ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
-    auto __get($property)
-    {
+    auto __get($property) {
         $association = this._associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
@@ -2629,8 +2604,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param string $property the association name
      * @return bool
      */
-    auto __isset($property)
-    {
+    auto __isset($property) {
         return this._associations.has($property);
     }
 
@@ -3035,8 +3009,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @see \Cake\ORM\Query::contain()
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>
      */
-    function loadInto($entities, array $contain)
-    {
+    function loadInto($entities, array $contain) {
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);
     }
 

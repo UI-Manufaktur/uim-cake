@@ -21,8 +21,7 @@ class ChainMessagesLoader
      *
      * @param array<callable> $loaders List of callables to execute
      */
-    this(array $loaders)
-    {
+    this(array $loaders) {
         this._loaders = $loaders;
     }
 

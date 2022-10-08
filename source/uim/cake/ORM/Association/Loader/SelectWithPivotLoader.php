@@ -48,8 +48,7 @@ class SelectWithPivotLoader : SelectLoader
     protected $junctionConditions;
 
 
-    this(array myOptions)
-    {
+    this(array myOptions) {
         super.this(myOptions);
         this.junctionAssociationName = myOptions['junctionAssociationName'];
         this.junctionProperty = myOptions['junctionProperty'];
@@ -133,8 +132,7 @@ class SelectWithPivotLoader : SelectLoader
      * @param array<string, mixed> myOptions the options to use for getting the link field.
      * @return array<string>|string
      */
-    protected auto _linkField(array myOptions)
-    {
+    protected auto _linkField(array myOptions) {
         $links = [];
         myName = this.junctionAssociationName;
 

@@ -78,8 +78,7 @@ class TreeBehavior : Behavior
      * @return void
      * @throws \RuntimeException if the parent to set for the node is invalid
      */
-    function beforeSave(IEvent myEvent, IEntity $entity)
-    {
+    function beforeSave(IEvent myEvent, IEntity $entity) {
         $isNew = $entity.isNew();
         myConfig = this.getConfig();
         $parent = $entity.get(myConfig['parent']);
@@ -146,8 +145,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\IEntity $entity the entity that is going to be saved
      * @return void
      */
-    function afterSave(IEvent myEvent, IEntity $entity)
-    {
+    function afterSave(IEvent myEvent, IEntity $entity) {
         if (!this._config['level'] || $entity.isNew()) {
             return;
         }
@@ -199,8 +197,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
      * @return void
      */
-    function beforeDelete(IEvent myEvent, IEntity $entity)
-    {
+    function beforeDelete(IEvent myEvent, IEntity $entity) {
         myConfig = this.getConfig();
         this._ensureFields($entity);
         $left = $entity.get(myConfig['left']);
@@ -529,8 +526,7 @@ class TreeBehavior : Behavior
      * @return \Cake\Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
-    function removeFromTree(IEntity myNode)
-    {
+    function removeFromTree(IEntity myNode) {
         return this._table.getConnection().transactional(function () use (myNode) {
             this._ensureFields(myNode);
 
@@ -545,8 +541,7 @@ class TreeBehavior : Behavior
      * @return \Cake\Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
-    protected auto _removeFromTree(IEntity myNode)
-    {
+    protected auto _removeFromTree(IEntity myNode) {
         myConfig = this.getConfig();
         $left = myNode.get(myConfig['left']);
         $right = myNode.get(myConfig['right']);
@@ -590,8 +585,7 @@ class TreeBehavior : Behavior
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      * @return \Cake\Datasource\IEntity|false myNode The node after being moved or false if `$number` is < 1
      */
-    function moveUp(IEntity myNode, $number = 1)
-    {
+    function moveUp(IEntity myNode, $number = 1) {
         if ($number < 1) {
             return false;
         }
@@ -682,8 +676,7 @@ class TreeBehavior : Behavior
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      * @return \Cake\Datasource\IEntity|false the entity after being moved or false if `$number` is < 1
      */
-    function moveDown(IEntity myNode, $number = 1)
-    {
+    function moveDown(IEntity myNode, $number = 1) {
         if ($number < 1) {
             return false;
         }
@@ -973,8 +966,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\IEntity|string|int $entity The entity or primary key get the level of.
      * @return int|false Integer of the level or false if the node does not exist.
      */
-    auto getLevel($entity)
-    {
+    auto getLevel($entity) {
         $primaryKey = this._getPrimaryKey();
         $id = $entity;
         if ($entity instanceof IEntity) {

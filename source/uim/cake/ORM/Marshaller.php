@@ -37,8 +37,7 @@ class Marshaller
      *
      * @param \Cake\ORM\Table myTable The table this marshaller is for.
      */
-    this(Table myTable)
-    {
+    this(Table myTable) {
         this._table = myTable;
     }
 
@@ -291,8 +290,7 @@ class Marshaller
      * @param array<string, mixed> myOptions List of options.
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
      */
-    protected auto _marshalAssociation(Association $assoc, myValue, array myOptions)
-    {
+    protected auto _marshalAssociation(Association $assoc, myValue, array myOptions) {
         if (!is_array(myValue)) {
             return null;
         }
@@ -725,8 +723,7 @@ class Marshaller
      * @param array<string, mixed> myOptions List of options.
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
      */
-    protected auto _mergeAssociation($original, Association $assoc, myValue, array myOptions)
-    {
+    protected auto _mergeAssociation($original, Association $assoc, myValue, array myOptions) {
         if (!$original) {
             return this._marshalAssociation($assoc, myValue, myOptions);
         }

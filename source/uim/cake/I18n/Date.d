@@ -115,8 +115,7 @@ class Date : MutableDate : I18nIDateTime
      * @param \DateTimeZone|string|null $tz The timezone in which the date is taken.
      *                                  Ignored if `$time` is a IDateTime instance.
      */
-    this($time = 'now', $tz = null)
-    {
+    this($time = 'now', $tz = null) {
         deprecationWarning(
             'The `Date` class has been deprecated. Use the immutable alternative `FrozenDate` instead',
             0

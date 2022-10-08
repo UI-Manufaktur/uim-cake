@@ -58,8 +58,7 @@ trait TranslateStrategyTrait
      *   the behavior fall back to using the globally configured locale.
      * @return this
      */
-    auto setLocale(?string $locale)
-    {
+    auto setLocale(?string $locale) {
         this.locale = $locale;
 
         return this;
@@ -88,8 +87,7 @@ trait TranslateStrategyTrait
      * @param \Cake\Datasource\IEntity $entity The entity to check for empty translations fields inside.
      * @return void
      */
-    protected auto unsetEmptyFields($entity)
-    {
+    protected auto unsetEmptyFields($entity) {
         /** @var array<\Cake\ORM\Entity> $translations */
         $translations = (array)$entity.get('_translations');
         foreach ($translations as $locale => $translation) {
@@ -177,8 +175,7 @@ trait TranslateStrategyTrait
      * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
      * @return void
      */
-    function afterSave(IEvent myEvent, IEntity $entity)
-    {
+    function afterSave(IEvent myEvent, IEntity $entity) {
         $entity.unset('_i18n');
     }
 }

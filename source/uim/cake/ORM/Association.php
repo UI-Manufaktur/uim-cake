@@ -188,8 +188,7 @@ abstract class Association
      * @param string myAlias The name given to the association
      * @param array<string, mixed> myOptions A list of properties to be set on this object
      */
-    this(string myAlias, array myOptions = [])
-    {
+    this(string myAlias, array myOptions = []) {
         $defaults = [
             'cascadeCallbacks',
             'className',
@@ -233,8 +232,7 @@ abstract class Association
      * @deprecated 4.3.0 Changing the association name after object creation is
      *   no longer supported. The name should only be set through the constructor.
      */
-    auto setName(string myName)
-    {
+    auto setName(string myName) {
         deprecationWarning(
             'Changing the association name after object creation is no longer supported.'
             . ' The name should only be set through the constructor'
@@ -273,8 +271,7 @@ abstract class Association
      * @param bool $cascadeCallbacks cascade callbacks switch value
      * @return this
      */
-    auto setCascadeCallbacks(bool $cascadeCallbacks)
-    {
+    auto setCascadeCallbacks(bool $cascadeCallbacks) {
         this._cascadeCallbacks = $cascadeCallbacks;
 
         return this;
@@ -298,8 +295,7 @@ abstract class Association
      * @throws \InvalidArgumentException In case the class name is set after the target table has been
      *  resolved, and it doesn't match the target table's class name.
      */
-    auto setClassName(string myClassName)
-    {
+    auto setClassName(string myClassName) {
         if (
             this._targetTable !== null &&
             get_class(this._targetTable) !== App::className(myClassName, 'Model/Table', 'Table')
@@ -332,8 +328,7 @@ abstract class Association
      * @param \Cake\ORM\Table myTable the instance to be assigned as source side
      * @return this
      */
-    auto setSource(Table myTable)
-    {
+    auto setSource(Table myTable) {
         this._sourceTable = myTable;
 
         return this;
@@ -355,8 +350,7 @@ abstract class Association
      * @param \Cake\ORM\Table myTable the instance to be assigned as target side
      * @return this
      */
-    auto setTarget(Table myTable)
-    {
+    auto setTarget(Table myTable) {
         this._targetTable = myTable;
 
         return this;
@@ -417,8 +411,7 @@ abstract class Association
      * @see \Cake\Database\Query::where() for examples on the format of the array
      * @return \Cake\ORM\Association
      */
-    auto setConditions($conditions)
-    {
+    auto setConditions($conditions) {
         this._conditions = $conditions;
 
         return this;
@@ -442,8 +435,7 @@ abstract class Association
      * @param array<string>|string myKey the table field or fields to be used to link both tables together
      * @return this
      */
-    auto setBindingKey(myKey)
-    {
+    auto setBindingKey(myKey) {
         this._bindingKey = myKey;
 
         return this;
@@ -480,8 +472,7 @@ abstract class Association
      * @param array<string>|string myKey the key or keys to be used to link both tables together
      * @return this
      */
-    auto setForeignKey(myKey)
-    {
+    auto setForeignKey(myKey) {
         this._foreignKey = myKey;
 
         return this;
@@ -498,8 +489,7 @@ abstract class Association
      * @param bool $dependent Set the dependent mode. Use null to read the current state.
      * @return this
      */
-    auto setDependent(bool $dependent)
-    {
+    auto setDependent(bool $dependent) {
         this._dependent = $dependent;
 
         return this;
@@ -537,8 +527,7 @@ abstract class Association
      * @param string myType the join type to be used (e.g. INNER)
      * @return this
      */
-    auto setJoinType(string myType)
-    {
+    auto setJoinType(string myType) {
         this._joinType = myType;
 
         return this;
@@ -561,8 +550,7 @@ abstract class Association
      * @param string myName The name of the association property. Use null to read the current value.
      * @return this
      */
-    auto setProperty(string myName)
-    {
+    auto setProperty(string myName) {
         this._propertyName = myName;
 
         return this;
@@ -612,8 +600,7 @@ abstract class Association
      * @return this
      * @throws \InvalidArgumentException When an invalid strategy is provided.
      */
-    auto setStrategy(string myName)
-    {
+    auto setStrategy(string myName) {
         if (!in_array(myName, this._validStrategies, true)) {
             throw new InvalidArgumentException(sprintf(
                 'Invalid strategy "%s" was provided. Valid options are (%s).',
@@ -653,8 +640,7 @@ abstract class Association
      * @param array|string myFinder the finder name to use or array of finder name and option.
      * @return this
      */
-    auto setFinder(myFinder)
-    {
+    auto setFinder(myFinder) {
         this._finder = myFinder;
 
         return this;
@@ -1136,8 +1122,7 @@ abstract class Association
      * @return \Cake\ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
-    auto __get($property)
-    {
+    auto __get($property) {
         return this.getTarget().{$property};
     }
 
@@ -1148,8 +1133,7 @@ abstract class Association
      * @param string $property the property name
      * @return bool true if the property exists
      */
-    auto __isset($property)
-    {
+    auto __isset($property) {
         return isset(this.getTarget().{$property});
     }
 
@@ -1161,8 +1145,7 @@ abstract class Association
      * @return mixed
      * @throws \BadMethodCallException
      */
-    auto __call($method, $argument)
-    {
+    auto __call($method, $argument) {
         return this.getTarget().$method(...$argument);
     }
 

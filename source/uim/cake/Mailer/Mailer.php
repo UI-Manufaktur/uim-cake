@@ -200,8 +200,7 @@ class Mailer : IEventListener
      *
      * @param array<string, mixed>|string|null myConfig Array of configs, or string to load configs from app.php
      */
-    this(myConfig = null)
-    {
+    this(myConfig = null) {
         this.message = new this.messageClass();
 
         if (this.defaultTable !== null) {
@@ -247,8 +246,7 @@ class Mailer : IEventListener
      * @param \Cake\Mailer\Renderer $renderer Render instance.
      * @return this
      */
-    auto setRenderer(Renderer $renderer)
-    {
+    auto setRenderer(Renderer $renderer) {
         this.renderer = $renderer;
 
         return this;
@@ -270,8 +268,7 @@ class Mailer : IEventListener
      * @param \Cake\Mailer\Message myMessage Message instance.
      * @return this
      */
-    auto setMessage(Message myMessage)
-    {
+    auto setMessage(Message myMessage) {
         this.message = myMessage;
 
         return this;
@@ -284,8 +281,7 @@ class Mailer : IEventListener
      * @param array $args Method arguments
      * @return this|mixed
      */
-    auto __call(string $method, array $args)
-    {
+    auto __call(string $method, array $args) {
         myResult = this.message.$method(...$args);
         if (strpos($method, 'get') === 0) {
             return myResult;
@@ -302,8 +298,7 @@ class Mailer : IEventListener
      * @return this
      * @deprecated 4.0.0 Use {@link Mailer::setViewVars()} instead.
      */
-    auto set(myKey, myValue = null)
-    {
+    auto set(myKey, myValue = null) {
         deprecationWarning('Mailer::set() is deprecated. Use setViewVars() instead.');
 
         return this.setViewVars(myKey, myValue);
@@ -316,8 +311,7 @@ class Mailer : IEventListener
      * @param mixed myValue View variable value.
      * @return this
      */
-    auto setViewVars(myKey, myValue = null)
-    {
+    auto setViewVars(myKey, myValue = null) {
         this.getRenderer().set(myKey, myValue);
 
         return this;
@@ -376,8 +370,7 @@ class Mailer : IEventListener
      * @param string myContents Content.
      * @return this
      */
-    function render(string myContents = '')
-    {
+    function render(string myContents = '') {
         myContents = this.getRenderer().render(
             myContents,
             this.message.getBodyTypes()
@@ -395,8 +388,7 @@ class Mailer : IEventListener
      * @return array
      * @psalm-return array{headers: string, message: string}
      */
-    function deliver(string myContents = '')
-    {
+    function deliver(string myContents = '') {
         this.render(myContents);
 
         myResult = this.getTransport().send(this.message);
@@ -412,8 +404,7 @@ class Mailer : IEventListener
      *    an array with config.
      * @return this
      */
-    auto setProfile(myConfig)
-    {
+    auto setProfile(myConfig) {
         if (is_string(myConfig)) {
             myName = myConfig;
             myConfig = static::getConfig(myName);
@@ -477,8 +468,7 @@ class Mailer : IEventListener
      * @throws \LogicException When the chosen transport lacks a send method.
      * @throws \InvalidArgumentException When myName is neither a string nor an object.
      */
-    auto setTransport(myName)
-    {
+    auto setTransport(myName) {
         if (is_string(myName)) {
             $transport = TransportFactory::get(myName);
         } elseif (is_object(myName)) {
@@ -577,8 +567,7 @@ class Mailer : IEventListener
      * @param array<string, mixed>|string|true $log Log config.
      * @return void
      */
-    protected auto setLogConfig($log)
-    {
+    protected auto setLogConfig($log) {
         myConfig = [
             'level' => 'debug',
             'scope' => 'email',

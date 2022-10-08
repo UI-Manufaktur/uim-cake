@@ -31,8 +31,7 @@ abstract class AbstractTransport
      *
      * @param array<string, mixed> myConfig Configuration options.
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.setConfig(myConfig);
     }
 

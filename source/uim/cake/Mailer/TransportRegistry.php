@@ -84,8 +84,7 @@ class TransportRegistry : ObjectRegistry
      * @param string myName The adapter name.
      * @return this
      */
-    function unload(string myName)
-    {
+    function unload(string myName) {
         unset(this._loaded[myName]);
 
         return this;

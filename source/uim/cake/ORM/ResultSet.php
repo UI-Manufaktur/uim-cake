@@ -141,8 +141,7 @@ class ResultSet : ResultSetInterface
      * @param \Cake\ORM\Query myQuery Query from where results come
      * @param \Cake\Database\IStatement $statement The statement to fetch from
      */
-    this(Query myQuery, IStatement $statement)
-    {
+    this(Query myQuery, IStatement $statement) {
         myRepository = myQuery.getRepository();
         this._statement = $statement;
         this._driver = myQuery.getConnection().getDriver();
@@ -317,8 +316,7 @@ class ResultSet : ResultSetInterface
      * @param string $serialized Serialized object
      * @return void
      */
-    function unserialize($serialized)
-    {
+    function unserialize($serialized) {
         this.__unserialize((array)(unserialize($serialized) ?: []));
     }
 
@@ -439,8 +437,7 @@ class ResultSet : ResultSetInterface
      * @param array $row Array containing columns and values or false if there is no results
      * @return \Cake\Datasource\IEntity|array Results
      */
-    protected auto _groupResult(array $row)
-    {
+    protected auto _groupResult(array $row) {
         $defaultAlias = this._defaultAlias;
         myResults = $presentAliases = [];
         myOptions = [

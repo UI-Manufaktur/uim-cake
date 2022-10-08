@@ -17,8 +17,7 @@ trait TranslateTrait
      * @param string myLanguage Language to return entity for.
      * @return \Cake\Datasource\IEntity|this
      */
-    function translation(string myLanguage)
-    {
+    function translation(string myLanguage) {
         if (myLanguage === this.get('_locale')) {
             return this;
         }

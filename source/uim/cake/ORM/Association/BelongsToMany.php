@@ -149,8 +149,7 @@ class BelongsToMany : Association
      * @param array<string>|string myKey the key to be used to link both tables together
      * @return this
      */
-    auto setTargetForeignKey(myKey)
-    {
+    auto setTargetForeignKey(myKey) {
         this._targetForeignKey = myKey;
 
         return this;
@@ -200,8 +199,7 @@ class BelongsToMany : Association
      * @param mixed $sort A find() compatible order clause
      * @return this
      */
-    auto setSort($sort)
-    {
+    auto setSort($sort) {
         this._sort = $sort;
 
         return this;
@@ -609,8 +607,7 @@ class BelongsToMany : Association
      * @throws \InvalidArgumentException if an invalid strategy name is passed
      * @return this
      */
-    auto setSaveStrategy(string $strategy)
-    {
+    auto setSaveStrategy(string $strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
             $msg = sprintf('Invalid save strategy "%s"', $strategy);
             throw new InvalidArgumentException($msg);
@@ -655,8 +652,7 @@ class BelongsToMany : Association
      * @see \Cake\ORM\Table::save()
      * @see \Cake\ORM\Association\BelongsToMany::replaceLinks()
      */
-    function saveAssociated(IEntity $entity, array myOptions = [])
-    {
+    function saveAssociated(IEntity $entity, array myOptions = []) {
         myTargetEntity = $entity.get(this.getProperty());
         $strategy = this.getSaveStrategy();
 
@@ -693,8 +689,7 @@ class BelongsToMany : Association
      * @return \Cake\Datasource\IEntity|false The parent entity after all links have been
      * created if no errors happened, false otherwise
      */
-    protected auto _saveTarget(IEntity $parentEntity, array $entities, myOptions)
-    {
+    protected auto _saveTarget(IEntity $parentEntity, array $entities, myOptions) {
         $joinAssociations = false;
         if (isset(myOptions['associated']) && is_array(myOptions['associated'])) {
             if (!empty(myOptions['associated'][this._junctionProperty]['associated'])) {
@@ -930,8 +925,7 @@ class BelongsToMany : Association
     }
 
 
-    auto setConditions($conditions)
-    {
+    auto setConditions($conditions) {
         super.setConditions($conditions);
         this._targetConditions = this._junctionConditions = null;
 
@@ -944,8 +938,7 @@ class BelongsToMany : Association
      * @param \Cake\ORM\Table|string $through Name of the Table instance or the instance itself
      * @return this
      */
-    auto setThrough($through)
-    {
+    auto setThrough($through) {
         this._through = $through;
 
         return this;

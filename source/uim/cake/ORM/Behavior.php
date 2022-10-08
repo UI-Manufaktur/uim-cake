@@ -134,8 +134,7 @@ class Behavior : IEventListener
      * @param \Cake\ORM\Table myTable The table this behavior is attached to.
      * @param array<string, mixed> myConfig The config for this behavior.
      */
-    this(Table myTable, array myConfig = [])
-    {
+    this(Table myTable, array myConfig = []) {
         myConfig = this._resolveMethodAliases(
             'implementedFinders',
             this._defaultConfig,

@@ -112,8 +112,7 @@ class EagerLoadable
      * @param string myName The Association name.
      * @param array<string, mixed> myConfig The list of properties to set.
      */
-    this(string myName, array myConfig = [])
-    {
+    this(string myName, array myConfig = []) {
         this._name = myName;
         $allowed = [
             'associations', 'instance', 'config', 'canBeJoined',
@@ -199,8 +198,7 @@ class EagerLoadable
      * @param bool $possible The value to set.
      * @return this
      */
-    auto setCanBeJoined(bool $possible)
-    {
+    auto setCanBeJoined(bool $possible) {
         this._canBeJoined = $possible;
 
         return this;
@@ -223,8 +221,7 @@ class EagerLoadable
      * @param array<string, mixed> myConfig The value to set.
      * @return this
      */
-    auto setConfig(array myConfig)
-    {
+    auto setConfig(array myConfig) {
         this._config = myConfig;
 
         return this;

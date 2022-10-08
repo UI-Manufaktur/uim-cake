@@ -29,8 +29,7 @@ trait LocatorAwareTrait
      * @param \Cake\ORM\Locator\ILocator myTableLocator ILocator instance.
      * @return this
      */
-    auto setTableLocator(ILocator myTableLocator)
-    {
+    auto setTableLocator(ILocator myTableLocator) {
         this._tableLocator = myTableLocator;
 
         return this;

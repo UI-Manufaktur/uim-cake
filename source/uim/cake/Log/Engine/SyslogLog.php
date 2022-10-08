@@ -81,8 +81,7 @@ class SyslogLog : BaseLog
     protected $_open = false;
 
 
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         if (isset(myConfig['format'])) {
             deprecationWarning(
                 '`format` option is now deprecated in favor of custom formatters. ' .

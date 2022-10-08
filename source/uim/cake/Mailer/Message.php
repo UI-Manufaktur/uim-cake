@@ -290,8 +290,7 @@ class Message : JsonSerializable, Serializable
      *
      * @param array<string,mixed>|null myConfig Array of configs, or string to load configs from app.php
      */
-    this(?array myConfig = null)
-    {
+    this(?array myConfig = null) {
         this.appCharset = Configure::read('App.encoding');
         if (this.appCharset !== null) {
             this.charset = this.appCharset;
@@ -315,8 +314,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setFrom($email, ?string myName = null)
-    {
+    auto setFrom($email, ?string myName = null) {
         return this.setEmailSingle('from', $email, myName, 'From requires only 1 email address.');
     }
 
@@ -340,8 +338,7 @@ class Message : JsonSerializable, Serializable
      * @throws \InvalidArgumentException
      * @link https://tools.ietf.org/html/rfc2822.html#section-3.6.2
      */
-    auto setSender($email, ?string myName = null)
-    {
+    auto setSender($email, ?string myName = null) {
         return this.setEmailSingle('sender', $email, myName, 'Sender requires only 1 email address.');
     }
 
@@ -365,8 +362,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setReplyTo($email, ?string myName = null)
-    {
+    auto setReplyTo($email, ?string myName = null) {
         return this.setEmail('replyTo', $email, myName);
     }
 
@@ -388,8 +384,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null myName Name
      * @return this
      */
-    function addReplyTo($email, ?string myName = null)
-    {
+    function addReplyTo($email, ?string myName = null) {
         return this.addEmail('replyTo', $email, myName);
     }
 
@@ -402,8 +397,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setReadReceipt($email, ?string myName = null)
-    {
+    auto setReadReceipt($email, ?string myName = null) {
         return this.setEmailSingle(
             'readReceipt',
             $email,
@@ -431,8 +425,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setReturnPath($email, ?string myName = null)
-    {
+    auto setReturnPath($email, ?string myName = null) {
         return this.setEmailSingle('returnPath', $email, myName, 'Return-Path requires only 1 email address.');
     }
 
@@ -454,8 +447,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null myName Name
      * @return this
      */
-    auto setTo($email, ?string myName = null)
-    {
+    auto setTo($email, ?string myName = null) {
         return this.setEmail('to', $email, myName);
     }
 
@@ -477,8 +469,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null myName Name
      * @return this
      */
-    function addTo($email, ?string myName = null)
-    {
+    function addTo($email, ?string myName = null) {
         return this.addEmail('to', $email, myName);
     }
 
@@ -490,8 +481,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null myName Name
      * @return this
      */
-    auto setCc($email, ?string myName = null)
-    {
+    auto setCc($email, ?string myName = null) {
         return this.setEmail('cc', $email, myName);
     }
 
@@ -513,8 +503,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null myName Name
      * @return this
      */
-    function addCc($email, ?string myName = null)
-    {
+    function addCc($email, ?string myName = null) {
         return this.addEmail('cc', $email, myName);
     }
 
@@ -526,8 +515,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null myName Name
      * @return this
      */
-    auto setBcc($email, ?string myName = null)
-    {
+    auto setBcc($email, ?string myName = null) {
         return this.setEmail('bcc', $email, myName);
     }
 
@@ -549,8 +537,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null myName Name
      * @return this
      */
-    function addBcc($email, ?string myName = null)
-    {
+    function addBcc($email, ?string myName = null) {
         return this.addEmail('bcc', $email, myName);
     }
 
@@ -560,8 +547,7 @@ class Message : JsonSerializable, Serializable
      * @param string $charset Character set.
      * @return this
      */
-    auto setCharset(string $charset)
-    {
+    auto setCharset(string $charset) {
         this.charset = $charset;
 
         return this;
@@ -583,8 +569,7 @@ class Message : JsonSerializable, Serializable
      * @param string|null $charset Character set.
      * @return this
      */
-    auto setHeaderCharset(?string $charset)
-    {
+    auto setHeaderCharset(?string $charset) {
         this.headerCharset = $charset;
 
         return this;
@@ -607,8 +592,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setTransferEncoding(?string $encoding)
-    {
+    auto setTransferEncoding(?string $encoding) {
         if ($encoding !== null) {
             $encoding = strtolower($encoding);
             if (!in_array($encoding, this.transferEncodingAvailable, true)) {
@@ -643,8 +627,7 @@ class Message : JsonSerializable, Serializable
      *   null to unset the pattern and make use of filter_var() instead.
      * @return this
      */
-    auto setEmailPattern(?string $regex)
-    {
+    auto setEmailPattern(?string $regex) {
         this.emailPattern = $regex;
 
         return this;
@@ -670,8 +653,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    protected auto setEmail(string $varName, $email, ?string myName)
-    {
+    protected auto setEmail(string $varName, $email, ?string myName) {
         if (!is_array($email)) {
             this.validateEmail($email, $varName);
             this.{$varName} = [$email => myName ?? $email];
@@ -727,8 +709,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    protected auto setEmailSingle(string $varName, $email, ?string myName, string $throwMessage)
-    {
+    protected auto setEmailSingle(string $varName, $email, ?string myName, string $throwMessage) {
         if ($email === []) {
             this.{$varName} = $email;
 
@@ -755,8 +736,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    protected auto addEmail(string $varName, $email, ?string myName)
-    {
+    protected auto addEmail(string $varName, $email, ?string myName) {
         if (!is_array($email)) {
             this.validateEmail($email, $varName);
             if (myName === null) {
@@ -785,8 +765,7 @@ class Message : JsonSerializable, Serializable
      * @param string $subject Subject string.
      * @return this
      */
-    auto setSubject(string $subject)
-    {
+    auto setSubject(string $subject) {
         this.subject = this.encodeForHeader($subject);
 
         return this;
@@ -818,8 +797,7 @@ class Message : JsonSerializable, Serializable
      * @param array $headers Associative array containing headers to be set.
      * @return this
      */
-    auto setHeaders(array $headers)
-    {
+    auto setHeaders(array $headers) {
         this.headers = $headers;
 
         return this;
@@ -831,8 +809,7 @@ class Message : JsonSerializable, Serializable
      * @param array $headers Headers to set.
      * @return this
      */
-    function addHeaders(array $headers)
-    {
+    function addHeaders(array $headers) {
         this.headers = Hash::merge(this.headers, $headers);
 
         return this;
@@ -1000,8 +977,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setEmailFormat(string $format)
-    {
+    auto setEmailFormat(string $format) {
         if (!in_array($format, this.emailFormatAvailable, true)) {
             throw new InvalidArgumentException('Format not available.');
         }
@@ -1044,8 +1020,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setMessageId(myMessage)
-    {
+    auto setMessageId(myMessage) {
         if (is_bool(myMessage)) {
             this.messageId = myMessage;
         } else {
@@ -1077,8 +1052,7 @@ class Message : JsonSerializable, Serializable
      * @param string $domain Manually set the domain for CLI mailing.
      * @return this
      */
-    auto setDomain(string $domain)
-    {
+    auto setDomain(string $domain) {
         this.domain = $domain;
 
         return this;
@@ -1143,8 +1117,7 @@ class Message : JsonSerializable, Serializable
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setAttachments(array $attachments)
-    {
+    auto setAttachments(array $attachments) {
         $attach = [];
         foreach ($attachments as myName => $fileInfo) {
             if (!is_array($fileInfo)) {
@@ -1215,8 +1188,7 @@ class Message : JsonSerializable, Serializable
      * @throws \InvalidArgumentException
      * @see \Cake\Mailer\Email::setAttachments()
      */
-    function addAttachments(array $attachments)
-    {
+    function addAttachments(array $attachments) {
         $current = this.attachments;
         this.setAttachments($attachments);
         this.attachments = array_merge($current, this.attachments);
@@ -1440,8 +1412,7 @@ class Message : JsonSerializable, Serializable
      * @param int|null $priority 1 (highest) to 5 (lowest)
      * @return this
      */
-    auto setPriority(?int $priority)
-    {
+    auto setPriority(?int $priority) {
         this.priority = $priority;
 
         return this;
@@ -1463,8 +1434,7 @@ class Message : JsonSerializable, Serializable
      * @param array<string, mixed> myConfig Config array.
      * @return this
      */
-    auto setConfig(array myConfig)
-    {
+    auto setConfig(array myConfig) {
         $simpleMethods = [
             'from', 'sender', 'to', 'replyTo', 'readReceipt', 'returnPath',
             'cc', 'bcc', 'messageId', 'domain', 'subject', 'attachments',
@@ -1490,8 +1460,7 @@ class Message : JsonSerializable, Serializable
      *   content string of respective type.
      * @return this
      */
-    auto setBody(array myContents)
-    {
+    auto setBody(array myContents) {
         foreach (myContents as myType => $text) {
             if (!in_array(myType, this.emailFormatAvailable, true)) {
                 throw new InvalidArgumentException(sprintf(
@@ -1522,8 +1491,7 @@ class Message : JsonSerializable, Serializable
      * @param string myContents Content string
      * @return this
      */
-    auto setBodyText(string myContents)
-    {
+    auto setBodyText(string myContents) {
         this.setBody([static::MESSAGE_TEXT => myContents]);
 
         return this;
@@ -1535,8 +1503,7 @@ class Message : JsonSerializable, Serializable
      * @param string myContents Content string
      * @return this
      */
-    auto setBodyHtml(string myContents)
-    {
+    auto setBodyHtml(string myContents) {
         this.setBody([static::MESSAGE_HTML => myContents]);
 
         return this;
@@ -1858,8 +1825,7 @@ class Message : JsonSerializable, Serializable
      * @param array<string, mixed> myConfig Email configuration array.
      * @return this
      */
-    function createFromArray(array myConfig)
-    {
+    function createFromArray(array myConfig) {
         foreach (myConfig as $property => myValue) {
             this.{$property} = myValue;
         }
@@ -1903,8 +1869,7 @@ class Message : JsonSerializable, Serializable
      * @param string myData Serialized string.
      * @return void
      */
-    function unserialize(myData)
-    {
+    function unserialize(myData) {
         $array = unserialize(myData);
         if (!is_array($array)) {
             throw new CakeException('Unable to unserialize message.');

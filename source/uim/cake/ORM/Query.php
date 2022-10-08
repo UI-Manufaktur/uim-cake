@@ -159,8 +159,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param \Cake\Database\Connection myConnection The connection object
      * @param \Cake\ORM\Table myTable The table this query is starting on
      */
-    this(Connection myConnection, Table myTable)
-    {
+    this(Connection myConnection, Table myTable) {
         super.this(myConnection);
         this.repository(myTable);
 
@@ -209,8 +208,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
-    function select(myFields = [], bool $overwrite = false)
-    {
+    function select(myFields = [], bool $overwrite = false) {
         if (myFields instanceof Association) {
             myFields = myFields.getTarget();
         }
@@ -239,8 +237,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @return this
      * @throws \InvalidArgumentException If Association|Table is not passed in first argument
      */
-    function selectAllExcept(myTable, array $excludedFields, bool $overwrite = false)
-    {
+    function selectAllExcept(myTable, array $excludedFields, bool $overwrite = false) {
         if (myTable instanceof Association) {
             myTable = myTable.getTarget();
         }
@@ -268,8 +265,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param \Cake\ORM\Table myTable The table to pull types from
      * @return this
      */
-    function addDefaultTypes(Table myTable)
-    {
+    function addDefaultTypes(Table myTable) {
         myAlias = myTable.getAlias();
         $map = myTable.getSchema().typeMap();
         myFields = [];
@@ -288,8 +284,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param \Cake\ORM\EagerLoader $instance The eager loader to use.
      * @return this
      */
-    auto setEagerLoader(EagerLoader $instance)
-    {
+    auto setEagerLoader(EagerLoader $instance) {
         this._eagerLoader = $instance;
 
         return this;
@@ -425,8 +420,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * defaults to merging previous list with the new one.
      * @return this
      */
-    function contain($associations, $override = false)
-    {
+    function contain($associations, $override = false) {
         $loader = this.getEagerLoader();
         if ($override === true) {
             this.clearContain();
@@ -547,8 +541,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function matching(string $assoc, ?callable myBuilder = null)
-    {
+    function matching(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader().setMatching($assoc, myBuilder).getMatching();
         this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
         this._dirty();
@@ -619,8 +612,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function leftJoinWith(string $assoc, ?callable myBuilder = null)
-    {
+    function leftJoinWith(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
                 'joinType' => Query::JOIN_TYPE_LEFT,
@@ -668,8 +660,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @return this
      * @see \Cake\ORM\Query::matching()
      */
-    function innerJoinWith(string $assoc, ?callable myBuilder = null)
-    {
+    function innerJoinWith(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
                 'joinType' => Query::JOIN_TYPE_INNER,
@@ -732,8 +723,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function notMatching(string $assoc, ?callable myBuilder = null)
-    {
+    function notMatching(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
                 'joinType' => Query::JOIN_TYPE_LEFT,
@@ -810,8 +800,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @return this
      * @see getOptions()
      */
-    function applyOptions(array myOptions)
-    {
+    function applyOptions(array myOptions) {
         $valid = [
             'fields' => 'select',
             'conditions' => 'where',
@@ -991,8 +980,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param callable|null myCounter The counter value
      * @return this
      */
-    function counter(?callable myCounter)
-    {
+    function counter(?callable myCounter) {
         this._counter = myCounter;
 
         return this;
@@ -1006,8 +994,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param bool myEnable Use a boolean to set the hydration mode.
      * @return this
      */
-    function enableHydration(bool myEnable = true)
-    {
+    function enableHydration(bool myEnable = true) {
         this._dirty();
         this._hydrate = myEnable;
 
@@ -1049,8 +1036,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @return this
      * @throws \RuntimeException When you attempt to cache a non-select query.
      */
-    function cache(myKey, myConfig = 'default')
-    {
+    function cache(myKey, myConfig = 'default') {
         if (this._type !== 'select' && this._type !== null) {
             throw new RuntimeException('You cannot cache the results of non-select queries.');
         }
@@ -1215,8 +1201,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @return static Returns a modified query.
      * @psalm-suppress MoreSpecificReturnType
      */
-    function find(string myFinder, array myOptions = [])
-    {
+    function find(string myFinder, array myOptions = []) {
         myTable = this.getRepository();
 
         /** @psalm-suppress LessSpecificReturnStatement */
@@ -1245,8 +1230,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param \Cake\Database\IExpression|string|null myTable Unused parameter.
      * @return this
      */
-    function update(myTable = null)
-    {
+    function update(myTable = null) {
         if (!myTable) {
             myRepository = this.getRepository();
             myTable = myRepository.getTable();
@@ -1264,8 +1248,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param string|null myTable Unused parameter.
      * @return this
      */
-    function delete(?string myTable = null)
-    {
+    function delete(?string myTable = null) {
         myRepository = this.getRepository();
         this.from([myRepository.getAlias() => myRepository.getTable()]);
 
@@ -1286,8 +1269,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param array<string, string> myTypes A map between columns & their datatypes.
      * @return this
      */
-    function insert(array $columns, array myTypes = [])
-    {
+    function insert(array $columns, array myTypes = []) {
         myRepository = this.getRepository();
         myTable = myRepository.getTable();
         this.into(myTable);
@@ -1301,8 +1283,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param \Cake\ORM\Table myTable The table this query is starting on
      * @return static
      */
-    static function subquery(Table myTable)
-    {
+    static function subquery(Table myTable) {
         myQuery = new static(myTable.getConnection(), myTable);
         myQuery.aliasingEnabled = false;
 
@@ -1317,8 +1298,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @return mixed
      * @throws \BadMethodCallException if the method is called for a non-select query
      */
-    auto __call(string $method, array $arguments)
-    {
+    auto __call(string $method, array $arguments) {
         if (this.type() === 'select') {
             return this._call($method, $arguments);
         }
@@ -1366,8 +1346,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param bool myValue Set true to enable, false to disable.
      * @return this
      */
-    function enableAutoFields(bool myValue = true)
-    {
+    function enableAutoFields(bool myValue = true) {
         this._autoFields = myValue;
 
         return this;

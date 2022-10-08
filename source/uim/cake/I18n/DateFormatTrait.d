@@ -161,8 +161,7 @@ trait DateFormatTrait
      * @param string|null $locale The locale name in which the date should be displayed (e.g. pt-BR)
      * @return string|int Formatted and translated date string
      */
-    function i18nFormat($format = null, $timezone = null, $locale = null)
-    {
+    function i18nFormat($format = null, $timezone = null, $locale = null) {
         if ($format === Time::UNIX_TIMESTAMP_FORMAT) {
             return this.getTimestamp();
         }
@@ -316,8 +315,7 @@ trait DateFormatTrait
      * @param \DateTimeZone|string|null $tz The timezone for the instance
      * @return static|null
      */
-    static function parseDateTime(string $time, $format = null, $tz = null)
-    {
+    static function parseDateTime(string $time, $format = null, $tz = null) {
         $format = $format ?? static::$_toStringFormat;
         $pattern = '';
 
@@ -378,8 +376,7 @@ trait DateFormatTrait
      * @param array|string|int|null $format Any format accepted by IntlDateFormatter.
      * @return static|null
      */
-    static function parseDate(string $date, $format = null)
-    {
+    static function parseDate(string $date, $format = null) {
         if (is_int($format)) {
             $format = [$format, IntlDateFormatter::NONE];
         }
@@ -408,8 +405,7 @@ trait DateFormatTrait
      * @param string|int|null $format Any format accepted by IntlDateFormatter.
      * @return static|null
      */
-    static function parseTime(string $time, $format = null)
-    {
+    static function parseTime(string $time, $format = null) {
         if (is_int($format)) {
             $format = [IntlDateFormatter::NONE, $format];
         }

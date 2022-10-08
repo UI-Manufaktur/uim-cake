@@ -79,8 +79,7 @@ class FileLog : BaseLog
      *
      * @param array<string, mixed> myConfig Configuration array
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         super.this(myConfig);
 
         this._path = this.getConfig('path', sys_get_temp_dir() . DIRECTORY_SEPARATOR);

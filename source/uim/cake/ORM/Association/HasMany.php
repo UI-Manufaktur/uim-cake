@@ -92,8 +92,7 @@ class HasMany : Association
      * @throws \InvalidArgumentException if an invalid strategy name is passed
      * @return this
      */
-    auto setSaveStrategy(string $strategy)
-    {
+    auto setSaveStrategy(string $strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
             $msg = sprintf('Invalid save strategy "%s"', $strategy);
             throw new InvalidArgumentException($msg);
@@ -127,8 +126,7 @@ class HasMany : Association
      * @see \Cake\ORM\Table::save()
      * @throws \InvalidArgumentException when the association data cannot be traversed.
      */
-    function saveAssociated(IEntity $entity, array myOptions = [])
-    {
+    function saveAssociated(IEntity $entity, array myOptions = []) {
         myTargetEntities = $entity.get(this.getProperty());
 
         $isEmpty = in_array(myTargetEntities, [null, [], '', false], true);
@@ -587,8 +585,7 @@ class HasMany : Association
      * @param mixed $sort A find() compatible order clause
      * @return this
      */
-    auto setSort($sort)
-    {
+    auto setSort($sort) {
         this._sort = $sort;
 
         return this;

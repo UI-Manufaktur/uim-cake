@@ -89,8 +89,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param \Cake\ORM\Table myTable The table this behavior is attached to.
      * @param array<string, mixed> myConfig The config for this behavior.
      */
-    this(Table myTable, array myConfig = [])
-    {
+    this(Table myTable, array myConfig = []) {
         myConfig += [
             'defaultLocale' => I18n::getDefaultLocale(),
             'referenceName' => this.referenceName(myTable),
@@ -119,8 +118,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @since 4.0.0
      * @psalm-param class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> myClass
      */
-    static auto setDefaultStrategyClass(string myClass)
-    {
+    static auto setDefaultStrategyClass(string myClass) {
         static::$defaultStrategyClass = myClass;
     }
 
@@ -175,8 +173,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @return this
      * @since 4.0.0
      */
-    auto setStrategy(TranslateStrategyInterface $strategy)
-    {
+    auto setStrategy(TranslateStrategyInterface $strategy) {
         this.strategy = $strategy;
 
         return this;
@@ -233,8 +230,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
-    auto setLocale(?string $locale)
-    {
+    auto setLocale(?string $locale) {
         this.getStrategy().setLocale($locale);
 
         return this;
@@ -316,8 +312,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param array $args Method arguments.
      * @return mixed
      */
-    auto __call($method, $args)
-    {
+    auto __call($method, $args) {
         return this.strategy.{$method}(...$args);
     }
 

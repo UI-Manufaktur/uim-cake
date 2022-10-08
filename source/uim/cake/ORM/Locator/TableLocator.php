@@ -65,8 +65,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param array<string>|null myLocations Locations where tables should be looked for.
      *   If none provided, the default `Model\Table` under your app's module is used.
      */
-    this(?array myLocations = null)
-    {
+    this(?array myLocations = null) {
         if (myLocations === null) {
             myLocations = [
                 'Model/Table',
@@ -87,8 +86,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param bool $allow Flag to enable or disable fallback
      * @return this
      */
-    function allowFallbackClass(bool $allow)
-    {
+    function allowFallbackClass(bool $allow) {
         this.allowFallbackClass = $allow;
 
         return this;
@@ -105,16 +103,14 @@ class TableLocator : AbstractLocator : ILocator
      * @return this
      * @psalm-param class-string<\Cake\ORM\Table> myClassName
      */
-    auto setFallbackClassName(myClassName)
-    {
+    auto setFallbackClassName(myClassName) {
         this.fallbackClassName = myClassName;
 
         return this;
     }
 
 
-    auto setConfig(myAlias, myOptions = null)
-    {
+    auto setConfig(myAlias, myOptions = null) {
         if (!is_string(myAlias)) {
             this._config = myAlias;
 
@@ -186,8 +182,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    protected auto createInstance(string myAlias, array myOptions)
-    {
+    protected auto createInstance(string myAlias, array myOptions) {
         if (strpos(myAlias, '\\') === false) {
             [, myClassAlias] = pluginSplit(myAlias);
             myOptions = ['alias' => myClassAlias] + myOptions;
@@ -337,8 +332,7 @@ class TableLocator : AbstractLocator : ILocator
      * @return this
      * @since 3.8.0
      */
-    function addLocation(string myLocation)
-    {
+    function addLocation(string myLocation) {
         myLocation = str_replace('\\', '/', myLocation);
         this.locations[] = trim(myLocation, '/');
 

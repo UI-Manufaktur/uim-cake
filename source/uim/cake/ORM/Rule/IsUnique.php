@@ -34,8 +34,7 @@ class IsUnique
      * @param array<string> myFields The list of fields to check uniqueness for
      * @param array<string, mixed> myOptions The options for unique checks.
      */
-    this(array myFields, array myOptions = [])
-    {
+    this(array myFields, array myOptions = []) {
         this._fields = myFields;
         this._options = myOptions + this._options;
     }

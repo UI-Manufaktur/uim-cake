@@ -75,8 +75,7 @@ class Translator
      * @param string myKey The message key.
      * @return mixed The message translation string, or false if not found.
      */
-    protected auto getMessage(string myKey)
-    {
+    protected auto getMessage(string myKey) {
         myMessage = this.package.getMessage(myKey);
         if (myMessage) {
             return myMessage;
@@ -165,8 +164,7 @@ class Translator
      * @param array $vars The variables containing the `_context` key.
      * @return array|string
      */
-    protected auto resolveContext(string myKey, array myMessage, array $vars)
-    {
+    protected auto resolveContext(string myKey, array myMessage, array $vars) {
         $context = $vars['_context'] ?? null;
 
         // No or missing context, fallback to the key/first message
