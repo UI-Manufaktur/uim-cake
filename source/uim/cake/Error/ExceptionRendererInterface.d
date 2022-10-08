@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Error;
+ */module uim.cake.errors;
 
 use Psr\Http\Message\IResponse;
 

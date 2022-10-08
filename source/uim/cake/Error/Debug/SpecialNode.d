@@ -1,4 +1,4 @@
-module uim.cake.Error\Debug;
+module uim.cake.errors\Debug;
 
 /**
  * Debug node for special messages like errors or recursion warnings.

@@ -1,4 +1,4 @@
-module uim.cake.Error\Debug;
+module uim.cake.errors\Debug;
 
 /**
  * Dump node for Array values.
