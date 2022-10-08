@@ -1,4 +1,4 @@
-module uim.cake.errorss;
+module uim.cake.errors;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;

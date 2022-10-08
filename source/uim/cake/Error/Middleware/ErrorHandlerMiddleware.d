@@ -7,13 +7,13 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.errorss\Middleware;
+ */module uim.cake.errors\Middleware;
 
 import uim.cake.core.App;
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.errorss\ErrorHandler;
-import uim.cake.errorss\ExceptionRenderer;
+import uim.cake.errors\ErrorHandler;
+import uim.cake.errors\ExceptionRenderer;
 import uim.cake.Http\Exception\RedirectException;
 import uim.cake.Http\Response;
 use InvalidArgumentException;

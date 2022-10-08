@@ -1,4 +1,4 @@
-module uim.cake.errorss\Debug;
+module uim.cake.errors\Debug;
 
 /**
  * Dump node for objects/class instances.
