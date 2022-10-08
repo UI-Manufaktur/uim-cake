@@ -32,8 +32,7 @@ class IdentifierExpression : IExpression
      * @param string myIdentifier The identifier this expression represents
      * @param string|null $collation The identifier collation
      */
-    this(string myIdentifier, ?string $collation = null)
-    {
+    this(string myIdentifier, ?string $collation = null) {
         this._identifier = myIdentifier;
         this.collation = $collation;
     }
@@ -75,8 +74,7 @@ class IdentifierExpression : IExpression
      *
      * @return string|null
      */
-    string getCollation()
-    {
+    string getCollation() {
         return this.collation;
     }
 
@@ -92,8 +90,7 @@ class IdentifierExpression : IExpression
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         return this;
     }
 }

@@ -23,8 +23,7 @@ class StringExpression : IExpression
      * @param string $string String value
      * @param string $collation String collation
      */
-    this(string $string, string $collation)
-    {
+    this(string $string, string $collation) {
         this.string = $string;
         this.collation = $collation;
     }
@@ -60,8 +59,7 @@ class StringExpression : IExpression
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         return this;
     }
 }

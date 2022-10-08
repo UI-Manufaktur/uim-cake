@@ -42,8 +42,7 @@ class BetweenExpression : IExpression, FieldInterface
      * @param mixed $to The ending value in the comparison range.
      * @param string|null myType The data type name to bind the values with.
      */
-    this(myField, $from, $to, myType = null)
-    {
+    this(myField, $from, $to, myType = null) {
         if (myType !== null) {
             $from = this._castToExpression($from, myType);
             $to = this._castToExpression($to, myType);
@@ -81,8 +80,7 @@ class BetweenExpression : IExpression, FieldInterface
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         foreach ([this._field, this._from, this._to] as $part) {
             if ($part instanceof IExpression) {
                 $callback($part);

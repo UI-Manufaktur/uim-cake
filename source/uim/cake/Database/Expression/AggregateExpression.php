@@ -39,8 +39,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      * @return this
      * @see \Cake\Database\Query::where()
      */
-    function filter($conditions, array myTypes = [])
-    {
+    function filter($conditions, array myTypes = []) {
         if (this.filter === null) {
             this.filter = new QueryExpression();
         }
@@ -60,8 +59,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      * @param string|null myName Window name
      * @return this
      */
-    function over(?string myName = null)
-    {
+    function over(?string myName = null) {
         if (this.window === null) {
             this.window = new WindowExpression();
         }
@@ -74,8 +72,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    function partition($partitions)
-    {
+    function partition($partitions) {
         this.over();
         this.window.partition($partitions);
 
@@ -83,8 +80,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    function order(myFields)
-    {
+    function order(myFields) {
         this.over();
         this.window.order(myFields);
 
@@ -92,8 +88,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    function range($start, $end = 0)
-    {
+    function range($start, $end = 0) {
         this.over();
         this.window.range($start, $end);
 
@@ -101,8 +96,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    function rows(?int $start, ?int $end = 0)
-    {
+    function rows(?int $start, ?int $end = 0) {
         this.over();
         this.window.rows($start, $end);
 
@@ -110,8 +104,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    function groups(?int $start, ?int $end = 0)
-    {
+    function groups(?int $start, ?int $end = 0) {
         this.over();
         this.window.groups($start, $end);
 
@@ -175,8 +168,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         super.traverse($callback);
         if (this.filter !== null) {
             $callback(this.filter);

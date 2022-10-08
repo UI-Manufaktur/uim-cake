@@ -60,8 +60,7 @@ class CommonTableExpression : IExpression
      * @param string myName The CTE name.
      * @param \Cake\Database\IExpression|\Closure myQuery CTE query
      */
-    this(string myName = '', myQuery = null)
-    {
+    this(string myName = '', myQuery = null) {
         this.name = new IdentifierExpression(myName);
         if (myQuery) {
             this.query(myQuery);
@@ -77,8 +76,7 @@ class CommonTableExpression : IExpression
      * @param string myName The CTE name.
      * @return this
      */
-    function name(string myName)
-    {
+    function name(string myName) {
         this.name = new IdentifierExpression(myName);
 
         return this;
@@ -90,8 +88,7 @@ class CommonTableExpression : IExpression
      * @param \Cake\Database\IExpression|\Closure myQuery CTE query
      * @return this
      */
-    function query(myQuery)
-    {
+    function query(myQuery) {
         if (myQuery instanceof Closure) {
             myQuery = myQuery();
             if (!(myQuery instanceof IExpression)) {
@@ -111,8 +108,7 @@ class CommonTableExpression : IExpression
      * @param \Cake\Database\Expression\IdentifierExpression|array<\Cake\Database\Expression\IdentifierExpression>|array<string>|string myFields Field names
      * @return this
      */
-    function field(myFields)
-    {
+    function field(myFields) {
         myFields = (array)myFields;
         foreach (myFields as &myField) {
             if (!(myField instanceof IdentifierExpression)) {
@@ -148,8 +144,7 @@ class CommonTableExpression : IExpression
 
     /**
      * Gets whether this CTE is recursive.
-    bool isRecursive()
-    {
+    bool isRecursive() {
         return this.recursive;
     }
 
@@ -187,8 +182,7 @@ class CommonTableExpression : IExpression
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         $callback(this.name);
         foreach (this.fields as myField) {
             $callback(myField);

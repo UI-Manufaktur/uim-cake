@@ -60,8 +60,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null myType the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
      */
-    this(myField, myValue, ?string myType = null, string $operator = '=')
-    {
+    this(myField, myValue, ?string myType = null, string $operator = '=') {
         this._type = myType;
         this.setField(myField);
         this.setValue(myValue);
@@ -141,8 +140,7 @@ class ComparisonExpression : IExpression, FieldInterface
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         if (this._field instanceof IExpression) {
             $callback(this._field);
             this._field.traverse($callback);

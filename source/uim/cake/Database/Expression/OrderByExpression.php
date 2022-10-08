@@ -16,8 +16,7 @@ class OrderByExpression : QueryExpression
      * @param \Cake\Database\TypeMap|array<string, string> myTypes The types for each column.
      * @param string $conjunction The glue used to join conditions together.
      */
-    this($conditions = [], myTypes = [], $conjunction = '')
-    {
+    this($conditions = [], myTypes = [], $conjunction = '') {
         super.this($conditions, myTypes, $conjunction);
     }
 
