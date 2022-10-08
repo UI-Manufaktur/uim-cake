@@ -1,4 +1,4 @@
-module uim.cake.database;
+module uim.cake.databases;
 
 /**
  * Represents an expression that is known to return a specific type

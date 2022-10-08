@@ -1,7 +1,7 @@
-module uim.cake.database;
+module uim.cake.databases;
 
-import uim.cake.database.exceptions\DatabaseException;
-import uim.cake.database.Expression\FunctionExpression;
+import uim.cake.databases.exceptions\DatabaseException;
+import uim.cake.databases.Expression\FunctionExpression;
 
 /**
  * Responsible for compiling a Query object into its SQL representation

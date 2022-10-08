@@ -1,14 +1,14 @@
-module uim.cake.database;
+module uim.cake.databases;
 
-import uim.cake.database.exceptions\DatabaseException;
-import uim.cake.database.Expression\CommonTableExpression;
-import uim.cake.database.Expression\IdentifierExpression;
-import uim.cake.database.Expression\OrderByExpression;
-import uim.cake.database.Expression\OrderClauseExpression;
-import uim.cake.database.Expression\QueryExpression;
-import uim.cake.database.Expression\ValuesExpression;
-import uim.cake.database.Expression\WindowExpression;
-import uim.cake.database.Statement\CallbackStatement;
+import uim.cake.databases.exceptions\DatabaseException;
+import uim.cake.databases.Expression\CommonTableExpression;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\OrderByExpression;
+import uim.cake.databases.Expression\OrderClauseExpression;
+import uim.cake.databases.Expression\QueryExpression;
+import uim.cake.databases.Expression\ValuesExpression;
+import uim.cake.databases.Expression\WindowExpression;
+import uim.cake.databases.Statement\CallbackStatement;
 use Closure;
 use InvalidArgumentException;
 use IteratorAggregate;
