@@ -44,8 +44,7 @@ class PhpConfig : ConfigEngineInterface
      *
      * @param string|null myPath The path to read config files from. Defaults to CONFIG.
      */
-    this(?string myPath = null)
-    {
+    this(?string myPath = null) {
         if (myPath === null) {
             myPath = CONFIG;
         }
@@ -87,8 +86,7 @@ class PhpConfig : ConfigEngineInterface
      * @param array myData Data to dump.
      * @return bool Success
      */
-    bool dump(string myKey, array myData)
-    {
+    bool dump(string myKey, array myData) {
         myContentss = '<?php' . "\n" . 'return ' . var_export(myData, true) . ';';
 
         $filename = this._getFilePath(myKey);

@@ -49,8 +49,7 @@ class PostgresCompiler : QueryCompiler
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
      * @return string
      */
-    protected auto _buildHavingPart($parts, myQuery, $binder)
-    {
+    protected auto _buildHavingPart($parts, myQuery, $binder) {
         $selectParts = myQuery.clause('select');
 
         foreach ($selectParts as $selectKey => $selectPart) {

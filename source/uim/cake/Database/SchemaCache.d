@@ -26,8 +26,7 @@ class SchemaCache
      *
      * @param \Cake\Database\Connection myConnection Connection name to get the schema for or a connection instance
      */
-    this(Connection myConnection)
-    {
+    this(Connection myConnection) {
         this._schema = this.getSchema(myConnection);
     }
 

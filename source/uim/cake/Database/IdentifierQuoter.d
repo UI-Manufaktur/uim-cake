@@ -23,8 +23,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Driver myDriver The driver instance used to do the identifier quoting
      */
-    this(Driver myDriver)
-    {
+    this(Driver myDriver) {
         this._driver = myDriver;
     }
 

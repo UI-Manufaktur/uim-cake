@@ -99,7 +99,7 @@ interface IStatement
      * @param array|null myParams list of values to be bound to query
      * @return bool true on success, false otherwise
      */
-    auto execute(?array myParams = null): bool;
+    bool execute(?array myParams = null);
 
     /**
      * Returns the next row for the result set after executing this statement.

@@ -63,8 +63,7 @@ class IniConfig : ConfigEngineInterface
      * @param string|null $section Only get one section, leave null to parse and fetch
      *     all sections in the ini file.
      */
-    this(?string myPath = null, ?string $section = null)
-    {
+    this(?string myPath = null, ?string $section = null) {
         if (myPath === null) {
             myPath = CONFIG;
         }
@@ -137,8 +136,7 @@ class IniConfig : ConfigEngineInterface
      * @param array myData The data to convert to ini file.
      * @return bool Success.
      */
-    bool dump(string myKey, array myData)
-    {
+    bool dump(string myKey, array myData) {
         myResult = [];
         foreach (myData as $k => myValue) {
             $isSection = false;

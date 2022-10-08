@@ -126,8 +126,7 @@ class TypeFactory
      * @param string|null myType Type name to get mapped class for or null to get map array.
      * @return array<string>|string|null Configured class name for given myType or map array.
      */
-    static auto getMap(?string myType = null)
-    {
+    static auto getMap(?string myType = null) {
         if (myType === null) {
             return static::$_types;
         }

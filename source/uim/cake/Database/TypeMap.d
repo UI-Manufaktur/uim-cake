@@ -30,8 +30,7 @@ class TypeMap
      *
      * @param array<string, string> $defaults The defaults to use.
      */
-    this(array $defaults = [])
-    {
+    this(array $defaults = []) {
         this.setDefaults($defaults);
     }
 
@@ -57,8 +56,7 @@ class TypeMap
      * are the correspondent type.
      * @return this
      */
-    auto setDefaults(array $defaults)
-    {
+    auto setDefaults(array $defaults) {
         this._defaults = $defaults;
 
         return this;
@@ -102,8 +100,7 @@ class TypeMap
      * are the correspondent type.
      * @return this
      */
-    auto setTypes(array myTypes)
-    {
+    auto setTypes(array myTypes) {
         this._types = myTypes;
 
         return this;
@@ -127,8 +124,7 @@ class TypeMap
      * @param string|int $column The type for a given column
      * @return string|null
      */
-    string type($column)
-    {
+    string type($column) {
         return this._types[$column] ?? this._defaults[$column] ?? null;
     }
 

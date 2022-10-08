@@ -19,8 +19,7 @@ trait TypeMapTrait
      * @param \Cake\Database\TypeMap|array myTypeMap Creates a TypeMap if array, otherwise sets the given TypeMap
      * @return this
      */
-    auto setTypeMap(myTypeMap)
-    {
+    auto setTypeMap(myTypeMap) {
         this._typeMap = is_array(myTypeMap) ? new TypeMap(myTypeMap) : myTypeMap;
 
         return this;
@@ -54,8 +53,7 @@ trait TypeMapTrait
      * @return this
      * @see \Cake\Database\TypeMap::setDefaults()
      */
-    auto setDefaultTypes(array myTypes)
-    {
+    auto setDefaultTypes(array myTypes) {
         this.getTypeMap().setDefaults(myTypes);
 
         return this;
