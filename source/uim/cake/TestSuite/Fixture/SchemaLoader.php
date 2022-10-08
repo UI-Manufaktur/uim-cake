@@ -12,7 +12,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.TestSuite\Fixture;
 
-import uim.cake.database.Schema\TableSchema;
+import uim.cake.databases.Schema\TableSchema;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.TestSuite\ConnectionHelper;
 use InvalidArgumentException;

@@ -2,10 +2,10 @@ module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.Configure;
 import uim.cake.core.Exception\CakeException;
-import uim.cake.database.ConstraintsInterface;
-import uim.cake.database.Driver\Postgres;
-import uim.cake.database.Schema\TableSchema;
-import uim.cake.database.Schema\TableSchemaAwareInterface;
+import uim.cake.databases.ConstraintsInterface;
+import uim.cake.databases.Driver\Postgres;
+import uim.cake.databases.Schema\TableSchema;
+import uim.cake.databases.Schema\TableSchemaAwareInterface;
 import uim.cake.Datasource\ConnectionInterface;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\FixtureInterface;
