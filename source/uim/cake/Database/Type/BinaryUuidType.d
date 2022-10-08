@@ -22,8 +22,7 @@ class BinaryUuidType : BaseType
      * @param \Cake\Database\IDriver myDriver The driver instance to convert with.
      * @return resource|string|null
      */
-    function toDatabase(myValue, IDriver myDriver)
-    {
+    function toDatabase(myValue, IDriver myDriver) {
         if (!is_string(myValue)) {
             return myValue;
         }
@@ -54,8 +53,7 @@ class BinaryUuidType : BaseType
      * @return resource|string|null
      * @throws \Cake\Core\Exception\CakeException
      */
-    function toPHP(myValue, IDriver myDriver)
-    {
+    function toPHP(myValue, IDriver myDriver) {
         if (myValue === null) {
             return null;
         }
@@ -90,8 +88,7 @@ class BinaryUuidType : BaseType
      * @param mixed myValue The value to convert.
      * @return mixed Converted value.
      */
-    function marshal(myValue)
-    {
+    function marshal(myValue) {
         return myValue;
     }
 

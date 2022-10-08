@@ -108,8 +108,7 @@ trait EntityTrait
      * @param string myField Name of the field to access
      * @return mixed
      */
-    function &__get(string myField)
-    {
+    function &__get(string myField) {
         return this.get(myField);
     }
 
@@ -133,8 +132,7 @@ trait EntityTrait
      * @return bool
      * @see \Cake\ORM\Entity::has()
      */
-    bool __isset(string myField)
-    {
+    bool __isset(string myField) {
         return this.has(myField);
     }
 
@@ -203,8 +201,7 @@ trait EntityTrait
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto set(myField, myValue = null, array myOptions = [])
-    {
+    auto set(myField, myValue = null, array myOptions = []) {
         if (is_string(myField) && myField !== '') {
             $guard = false;
             myField = [myField => myValue];
@@ -256,8 +253,7 @@ trait EntityTrait
      * @return mixed
      * @throws \InvalidArgumentException if an empty field name is passed
      */
-    function &get(string myField)
-    {
+    function &get(string myField) {
         if (myField === '') {
             throw new InvalidArgumentException('Cannot get an empty field');
         }
@@ -285,8 +281,7 @@ trait EntityTrait
      * @return mixed
      * @throws \InvalidArgumentException if an empty field name is passed.
      */
-    auto getOriginal(string myField)
-    {
+    auto getOriginal(string myField) {
         if (myField === '') {
             throw new InvalidArgumentException('Cannot get an empty field');
         }
@@ -342,8 +337,7 @@ trait EntityTrait
      * @param array<string>|string myField The field or fields to check.
      * @return bool
      */
-    bool has(myField)
-    {
+    bool has(myField) {
         foreach ((array)myField as $prop) {
             if (this.get($prop) === null) {
                 return false;
@@ -368,8 +362,7 @@ trait EntityTrait
      * @param string myField The field to check.
      * @return bool
      */
-    bool isEmpty(string myField)
-    {
+    bool isEmpty(string myField) {
         myValue = this.get(myField);
         if (
             myValue === null ||
@@ -404,8 +397,7 @@ trait EntityTrait
      * @param string myField The field to check.
      * @return bool
      */
-    bool hasValue(string myField)
-    {
+    bool hasValue(string myField) {
         return !this.isEmpty(myField);
     }
 
@@ -422,8 +414,7 @@ trait EntityTrait
      * @param array<string>|string myField The field to unset.
      * @return this
      */
-    function unset(myField)
-    {
+    function unset(myField) {
         myField = (array)myField;
         foreach (myField as $p) {
             unset(this._fields[$p], this._original[$p], this._dirty[$p]);
@@ -439,8 +430,7 @@ trait EntityTrait
      * @param array<string>|string myField The field to unset.
      * @return this
      */
-    function unsetProperty(myField)
-    {
+    function unsetProperty(myField) {
         deprecationWarning('EntityTrait::unsetProperty() is deprecated. Use unset() instead.');
 
         return this.unset(myField);
@@ -453,8 +443,7 @@ trait EntityTrait
      * @param bool myMerge Merge the new fields with the existing. By default false.
      * @return this
      */
-    auto setHidden(array myFields, bool myMerge = false)
-    {
+    auto setHidden(array myFields, bool myMerge = false) {
         if (myMerge === false) {
             this._hidden = myFields;
 
@@ -484,8 +473,7 @@ trait EntityTrait
      * @param bool myMerge Merge the new fields with the existing. By default false.
      * @return this
      */
-    auto setVirtual(array myFields, bool myMerge = false)
-    {
+    auto setVirtual(array myFields, bool myMerge = false) {
         if (myMerge === false) {
             this._virtual = myFields;
 
@@ -574,8 +562,7 @@ trait EntityTrait
      * @param string $offset The offset to check.
      * @return bool Success
      */
-    bool offsetExists($offset)
-    {
+    bool offsetExists($offset) {
         return this.has($offset);
     }
 
@@ -586,8 +573,7 @@ trait EntityTrait
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function &offsetGet($offset)
-    {
+    function &offsetGet($offset) {
         return this.get($offset);
     }
 
@@ -729,8 +715,7 @@ trait EntityTrait
      * it was not changed. Defaults to true.
      * @return this
      */
-    auto setDirty(string myField, bool $isDirty = true)
-    {
+    auto setDirty(string myField, bool $isDirty = true) {
         if ($isDirty === false) {
             unset(this._dirty[myField]);
 
@@ -749,8 +734,7 @@ trait EntityTrait
      * @param string|null myField The field to check the status for. Null for the whole entity.
      * @return bool Whether the field was changed or not
      */
-    bool isDirty(?string myField = null)
-    {
+    bool isDirty(?string myField = null) {
         if (myField === null) {
             return !empty(this._dirty);
         }
@@ -792,8 +776,7 @@ trait EntityTrait
      * @param bool $new Indicate whether this entity has been persisted.
      * @return this
      */
-    auto setNew(bool $new)
-    {
+    auto setNew(bool $new) {
         if ($new) {
             foreach (this._fields as $k => $p) {
                 this._dirty[$k] = true;
@@ -810,8 +793,7 @@ trait EntityTrait
      *
      * @return bool Whether the entity has been persisted.
      */
-    bool isNew()
-    {
+    bool isNew() {
         if (func_num_args()) {
             deprecationWarning('Using isNew() as setter is deprecated. Use setNew() instead.');
 
@@ -827,8 +809,7 @@ trait EntityTrait
      * @param bool $includeNested true will check nested entities for hasErrors()
      * @return bool
      */
-    bool hasErrors(bool $includeNested = true)
-    {
+    bool hasErrors(bool $includeNested = true) {
         if (Hash::filter(this._errors)) {
             return true;
         }
@@ -896,8 +877,7 @@ trait EntityTrait
      * @param bool $overwrite Whether to overwrite pre-existing errors for myFields
      * @return this
      */
-    auto setErrors(array myErrors, bool $overwrite = false)
-    {
+    auto setErrors(array myErrors, bool $overwrite = false) {
         if ($overwrite) {
             foreach (myErrors as $f => myError) {
                 this._errors[$f] = (array)myError;
@@ -939,8 +919,7 @@ trait EntityTrait
      * @param bool $overwrite Whether to overwrite pre-existing errors for myField
      * @return this
      */
-    auto setError(string myField, myErrors, bool $overwrite = false)
-    {
+    auto setError(string myField, myErrors, bool $overwrite = false) {
         if (is_string(myErrors)) {
             myErrors = [myErrors];
         }
@@ -1005,11 +984,8 @@ trait EntityTrait
      * @param \Cake\Datasource\IEntity|array $object The object to read errors from.
      * @return bool
      */
-    protected      *
-     * @return bool
-     */
-    bool _readHasErrors($object)
-    {
+    protected      */
+    bool _readHasErrors($object) {
         if ($object instanceof IEntity && $object.hasErrors()) {
             return true;
         }
@@ -1071,8 +1047,7 @@ trait EntityTrait
      * @param string myField The name of the field.
      * @return mixed|null
      */
-    auto getInvalidField(string myField)
-    {
+    auto getInvalidField(string myField) {
         return this._invalid[myField] ?? null;
     }
 
@@ -1087,8 +1062,7 @@ trait EntityTrait
      * @param bool $overwrite Whether to overwrite pre-existing values for myField.
      * @return this
      */
-    auto setInvalid(array myFields, bool $overwrite = false)
-    {
+    auto setInvalid(array myFields, bool $overwrite = false) {
         foreach (myFields as myField => myValue) {
             if ($overwrite === true) {
                 this._invalid[myField] = myValue;
@@ -1107,8 +1081,7 @@ trait EntityTrait
      * @param mixed myValue The invalid value to be set for myField.
      * @return this
      */
-    auto setInvalidField(string myField, myValue)
-    {
+    auto setInvalidField(string myField, myValue) {
         this._invalid[myField] = myValue;
 
         return this;
@@ -1138,8 +1111,7 @@ trait EntityTrait
      * mark it as protected.
      * @return this
      */
-    auto setAccess(myField, bool $set)
-    {
+    auto setAccess(myField, bool $set) {
         if (myField === '*') {
             this._accessible = array_map(function ($p) use ($set) {
                 return $set;
@@ -1179,11 +1151,8 @@ trait EntityTrait
      * @param string myField Field name to check
      * @return bool
      */
-         *
-     * @return bool
-     */
-    bool isAccessible(string myField)
-    {
+         */
+    bool isAccessible(string myField) {
         myValue = this._accessible[myField] ?? null;
 
         return (myValue === null && !empty(this._accessible['*'])) || myValue;
@@ -1205,8 +1174,7 @@ trait EntityTrait
      * @param string myAlias the alias of the repository
      * @return this
      */
-    auto setSource(string myAlias)
-    {
+    auto setSource(string myAlias) {
         this._registryAlias = myAlias;
 
         return this;

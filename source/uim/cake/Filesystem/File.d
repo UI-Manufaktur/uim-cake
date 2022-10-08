@@ -128,8 +128,7 @@ class File {
      * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won't
      * @return string|false String on success, false on failure
      */
-    function read($bytes = false, string myMode = 'rb', bool $force = false)
-    {
+    function read($bytes = false, string myMode = 'rb', bool $force = false) {
         if ($bytes === false && this.lock === null) {
             return file_get_contents(this.path);
         }
@@ -166,8 +165,7 @@ class File {
      * @return int|bool True on success, false on failure (set mode), false on failure
      *   or integer offset on success (get mode).
      */
-    function offset($offset = false, int $seek = SEEK_SET)
-    {
+    function offset($offset = false, int $seek = SEEK_SET) {
         if ($offset === false) {
             if (is_resource(this.handle)) {
                 return ftell(this.handle);
@@ -377,8 +375,7 @@ class File {
      * @return string|false md5 Checksum {@link https://secure.php.net/md5_file See md5_file()},
      *  or false in case of an error.
      */
-    function md5($maxsize = 5)
-    {
+    function md5($maxsize = 5) {
         if ($maxsize === true) {
             return md5_file(this.path);
         }

@@ -83,8 +83,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @param \Cake\Event\EventManager|null myEventManager The event manager.
      *  Defaults to a new instance.
      */
-    this(?EventManager myEventManager = null)
-    {
+    this(?EventManager myEventManager = null) {
         if (myEventManager !== null) {
             this.setEventManager(myEventManager);
         }
@@ -127,8 +126,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @param \Cake\Form\Schema $schema The schema to set
      * @return this
      */
-    auto setSchema(Schema $schema)
-    {
+    auto setSchema(Schema $schema) {
         this._schema = $schema;
 
         return this;
@@ -232,8 +230,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @param array myErrors Errors list.
      * @return this
      */
-    auto setErrors(array myErrors)
-    {
+    auto setErrors(array myErrors) {
         this._errors = myErrors;
 
         return this;
@@ -292,8 +289,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *   all fields.
      * @return mixed
      */
-    auto getData(?string myField = null)
-    {
+    auto getData(?string myField = null) {
         if (myField === null) {
             return this._data;
         }
@@ -309,8 +305,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @param mixed myValue Value to set for var
      * @return this
      */
-    auto set(myName, myValue = null)
-    {
+    auto set(myName, myValue = null) {
         $write = myName;
         if (!is_array(myName)) {
             $write = [myName => myValue];
@@ -330,8 +325,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @param array myData Data array.
      * @return this
      */
-    auto setData(array myData)
-    {
+    auto setData(array myData) {
         this._data = myData;
 
         return this;

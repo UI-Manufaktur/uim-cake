@@ -28,8 +28,7 @@ abstract class SchemaDialect
      *
      * @param \Cake\Database\IDriver myDriver The driver to use.
      */
-    this(IDriver myDriver)
-    {
+    this(IDriver myDriver) {
         myDriver.connect();
         this._driver = myDriver;
     }

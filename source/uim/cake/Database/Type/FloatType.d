@@ -92,8 +92,7 @@ class FloatType : BaseType : BatchCastingInterface
      * @param mixed myValue The value to convert.
      * @return string|float|null Converted value.
      */
-    function marshal(myValue)
-    {
+    function marshal(myValue) {
         if (myValue === null || myValue === '') {
             return null;
         }
@@ -117,8 +116,7 @@ class FloatType : BaseType : BatchCastingInterface
      * @param bool myEnable Whether to enable
      * @return this
      */
-    function useLocaleParser(bool myEnable = true)
-    {
+    function useLocaleParser(bool myEnable = true) {
         if (myEnable === false) {
             this._useLocaleParser = myEnable;
 

@@ -73,8 +73,7 @@ class Event : IEvent
      *   with this event to it can be read by listeners.
      * @psalm-param TSubject|null $subject
      */
-    this(string myName, $subject = null, myData = null)
-    {
+    this(string myName, $subject = null, myData = null) {
         this._name = myName;
         this._subject = $subject;
         this._data = (array)myData;
@@ -123,8 +122,7 @@ class Event : IEvent
      *
      * @return bool True if the event is stopped
      */
-    function isStopped(): bool
-    {
+    bool isStopped() {
         return this._stopped;
     }
 
@@ -143,8 +141,7 @@ class Event : IEvent
      * @param mixed myValue The value to set.
      * @return this
      */
-    auto setResult(myValue = null)
-    {
+    auto setResult(myValue = null) {
         this.result = myValue;
 
         return this;
@@ -157,8 +154,7 @@ class Event : IEvent
      * @return mixed|array|null The data payload if myKey is null, or the data value for the given myKey.
      *   If the myKey does not exist a null value is returned.
      */
-    auto getData(?string myKey = null)
-    {
+    auto getData(?string myKey = null) {
         if (myKey !== null) {
             return this._data[myKey] ?? null;
         }
@@ -174,8 +170,7 @@ class Event : IEvent
      * @param mixed myValue The value to set.
      * @return this
      */
-    auto setData(myKey, myValue = null)
-    {
+    auto setData(myKey, myValue = null) {
         if (is_array(myKey)) {
             this._data = myKey;
         } else {

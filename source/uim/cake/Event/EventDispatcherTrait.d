@@ -55,8 +55,7 @@ trait EventDispatcherTrait
      * @param \Cake\Event\IEventManager myEventManager the eventManager to set
      * @return this
      */
-    auto setEventManager(IEventManager myEventManager)
-    {
+    auto setEventManager(IEventManager myEventManager) {
         this._eventManager = myEventManager;
 
         return this;

@@ -21,26 +21,22 @@ abstract class BaseType : TypeInterface
      *
      * @param string|null myName The name identifying this type
      */
-    this(?string myName = null)
-    {
+    this(?string myName = null) {
         this._name = myName;
     }
 
 
-    string getName()
-    {
+    string getName() {
         return this._name;
     }
 
 
-    string getBaseType()
-    {
+    string getBaseType() {
         return this._name;
     }
 
 
-    function toStatement(myValue, IDriver myDriver)
-    {
+    function toStatement(myValue, IDriver myDriver) {
         if (myValue === null) {
             return PDO::PARAM_NULL;
         }

@@ -35,8 +35,7 @@ class CachedCollection : ICollection
      * @param string $prefix The cache key prefix to use. Typically the connection name.
      * @param \Psr\SimpleCache\ICache $cacher Cacher instance.
      */
-    this(ICollection myCollection, string $prefix, ICache $cacher)
-    {
+    this(ICollection myCollection, string $prefix, ICache $cacher) {
         this.collection = myCollection;
         this.prefix = $prefix;
         this.cacher = $cacher;
@@ -84,8 +83,7 @@ class CachedCollection : ICollection
      * @param \Psr\SimpleCache\ICache $cacher Cacher object
      * @return this
      */
-    auto setCacher(ICache $cacher)
-    {
+    auto setCacher(ICache $cacher) {
         this.cacher = $cacher;
 
         return this;

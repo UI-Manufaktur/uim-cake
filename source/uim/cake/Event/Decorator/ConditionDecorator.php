@@ -37,8 +37,7 @@ class ConditionDecorator : AbstractDecorator
      * @param \Cake\Event\IEvent myEvent Event object.
      * @return bool
      */
-    function canTrigger(IEvent myEvent): bool
-    {
+    bool canTrigger(IEvent myEvent) {
         $if = this._evaluateCondition('if', myEvent);
         $unless = this._evaluateCondition('unless', myEvent);
 
@@ -52,8 +51,7 @@ class ConditionDecorator : AbstractDecorator
      * @param \Cake\Event\IEvent myEvent Event object
      * @return bool
      */
-    protected auto _evaluateCondition(string $condition, IEvent myEvent): bool
-    {
+    protected bool _evaluateCondition(string $condition, IEvent myEvent) {
         if (!isset(this._options[$condition])) {
             return $condition !== 'unless';
         }

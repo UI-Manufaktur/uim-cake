@@ -26,8 +26,7 @@ trait ExpressionTypeCasterTrait
      * @param string|null myType The type name
      * @return mixed
      */
-    protected auto _castToExpression(myValue, ?string myType = null)
-    {
+    protected auto _castToExpression(myValue, ?string myType = null) {
         if (myType === null) {
             return myValue;
         }

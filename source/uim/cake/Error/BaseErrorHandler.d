@@ -122,13 +122,13 @@ abstract class BaseErrorHandler
      * @param array<string, mixed>|null $context Context
      * @return bool True if error was handled
      */
-    function handleError(
+    bool handleError(
         int $code,
         string $description,
         ?string $file = null,
         ?int $line = null,
         ?array $context = null
-    ): bool {
+    ) {
         if (!(error_reporting() & $code)) {
             return false;
         }
@@ -227,8 +227,7 @@ abstract class BaseErrorHandler
      * @param int $line Line that triggered the error
      * @return bool
      */
-    function handleFatalError(int $code, string $description, string $file, int $line): bool
-    {
+    bool handleFatalError(int $code, string $description, string $file, int $line) {
         myData = [
             'code' => $code,
             'description' => $description,
@@ -280,8 +279,7 @@ abstract class BaseErrorHandler
      * @param array myData Array of error data.
      * @return bool
      */
-    protected auto _logError($level, array myData): bool
-    {
+    protected bool _logError($level, array myData) {
         myMessage = sprintf(
             '%s (%s): %s in [%s, line %s]',
             myData['error'],
@@ -309,8 +307,7 @@ abstract class BaseErrorHandler
      * @param \Psr\Http\Message\IServerRequest|null myRequest The current request.
      * @return bool
      */
-    function logException(Throwable myException, ?IServerRequest myRequest = null): bool
-    {
+    bool logException(Throwable myException, ?IServerRequest myRequest = null) {
         if (empty(this._config['log'])) {
             return false;
         }

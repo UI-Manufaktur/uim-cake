@@ -56,7 +56,7 @@ interface SchemaInterface
      * @param string myName Column name.
      * @return bool
      */
-    function hasColumn(string myName): bool;
+    bool hasColumn(string myName);
 
     /**
      * Remove a column from the table schema.
@@ -110,7 +110,7 @@ interface SchemaInterface
      * @param string myName The column to get the type of.
      * @return bool Whether the field is nullable.
      */
-    function isNullable(string myName): bool;
+    bool isNullable(string myName);
 
     /**
      * Returns an array where the keys are the column names in the schema

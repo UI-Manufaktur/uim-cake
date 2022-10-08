@@ -35,8 +35,7 @@ abstract class AbstractDecorator
      * @param callable $callable Callable.
      * @param array<string, mixed> myOptions Decorator options.
      */
-    this(callable $callable, array myOptions = [])
-    {
+    this(callable $callable, array myOptions = []) {
         this._callable = $callable;
         this._options = myOptions;
     }
@@ -57,8 +56,7 @@ abstract class AbstractDecorator
      * @param array $args Arguments for the callable.
      * @return mixed
      */
-    protected auto _call(array $args)
-    {
+    protected auto _call(array $args) {
         $callable = this._callable;
 
         return $callable(...$args);

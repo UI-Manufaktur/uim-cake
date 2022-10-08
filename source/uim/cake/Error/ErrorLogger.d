@@ -33,8 +33,7 @@ class ErrorLogger : IErrorLogger
      *
      * @param array<string, mixed> myConfig Config array.
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.setConfig(myConfig);
     }
 

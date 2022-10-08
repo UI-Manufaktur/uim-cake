@@ -51,8 +51,7 @@ class UnaryExpression : IExpression
      * @param mixed myValue the value to use as the operand for the expression
      * @param int $position either UnaryExpression::PREFIX or UnaryExpression::POSTFIX
      */
-    this(string $operator, myValue, $position = self::PREFIX)
-    {
+    this(string $operator, myValue, $position = self::PREFIX) {
         this._operator = $operator;
         this._value = myValue;
         this.position = $position;
@@ -74,8 +73,7 @@ class UnaryExpression : IExpression
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         if (this._value instanceof IExpression) {
             $callback(this._value);
             this._value.traverse($callback);

@@ -194,8 +194,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param string|int|null $default The default value.
      * @return string|int|null
      */
-    protected auto _defaultValue($default)
-    {
+    protected auto _defaultValue($default) {
         if (is_numeric($default) || $default === null) {
             return $default;
         }

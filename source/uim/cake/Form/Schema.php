@@ -30,8 +30,7 @@ class Schema
      * @param array<string, array<string, mixed>|string> myFields The fields to add.
      * @return this
      */
-    function addFields(array myFields)
-    {
+    function addFields(array myFields) {
         foreach (myFields as myName => $attrs) {
             this.addField(myName, $attrs);
         }
@@ -47,8 +46,7 @@ class Schema
      *   as a string.
      * @return this
      */
-    function addField(string myName, $attrs)
-    {
+    function addField(string myName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ['type' => $attrs];
         }
@@ -64,8 +62,7 @@ class Schema
      * @param string myName The field to remove.
      * @return this
      */
-    function removeField(string myName)
-    {
+    function removeField(string myName) {
         unset(this._fields[myName]);
 
         return this;

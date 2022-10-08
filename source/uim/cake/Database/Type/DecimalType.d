@@ -45,8 +45,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @return string|float|int|null
      * @throws \InvalidArgumentException
      */
-    function toDatabase(myValue, IDriver myDriver)
-    {
+    function toDatabase(myValue, IDriver myDriver) {
         if (myValue === null || myValue === '') {
             return null;
         }
@@ -76,8 +75,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param \Cake\Database\IDriver myDriver The driver instance to convert with.
      * @return string|null
      */
-    string toPHP(myValue, IDriver myDriver)
-    {
+    string toPHP(myValue, IDriver myDriver) {
         if (myValue === null) {
             return null;
         }
@@ -117,8 +115,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param mixed myValue The value to convert.
      * @return string|null Converted value.
      */
-    string marshal(myValue)
-    {
+    string marshal(myValue) {
         if (myValue === null || myValue === '') {
             return null;
         }
@@ -143,8 +140,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @return this
      * @throws \RuntimeException
      */
-    function useLocaleParser(bool myEnable = true)
-    {
+    function useLocaleParser(bool myEnable = true) {
         if (myEnable === false) {
             this._useLocaleParser = myEnable;
 

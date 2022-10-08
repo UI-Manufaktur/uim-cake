@@ -50,8 +50,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      *  such as PDOStatement.
      * @param \Cake\Database\IDriver myDriver Driver instance
      */
-    this(IStatement $statement, IDriver myDriver)
-    {
+    this(IStatement $statement, IDriver myDriver) {
         this._statement = $statement;
         this._driver = myDriver;
     }
@@ -62,8 +61,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param string $property internal property to get
      * @return string|null
      */
-    auto __get(string $property)
-    {
+    auto __get(string $property) {
         if ($property === 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
             return this._statement.queryString;
@@ -156,8 +154,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param array|null myParams list of values to be bound to query
      * @return bool true on success, false otherwise
      */
-    bool execute(?array myParams = null)
-    {
+    bool execute(?array myParams = null) {
         this._hasExecuted = true;
 
         return this._statement.execute(myParams);
@@ -180,8 +177,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    function fetch(myType = self::FETCH_TYPE_NUM)
-    {
+    function fetch(myType = self::FETCH_TYPE_NUM) {
         return this._statement.fetch(myType);
     }
 
@@ -204,8 +200,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param int $position The numeric position of the column to retrieve in the result
      * @return mixed Returns the specific value of the column designated at $position
      */
-    function fetchColumn(int $position)
-    {
+    function fetchColumn(int $position) {
         myResult = this.fetch(static::FETCH_TYPE_NUM);
         if (myResult && isset(myResult[$position])) {
             return myResult[$position];
@@ -228,8 +223,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param string|int myType num for fetching columns as positional keys or assoc for column names as keys
      * @return array|false List of all results from database for this statement. False on failure.
      */
-    function fetchAll(myType = self::FETCH_TYPE_NUM)
-    {
+    function fetchAll(myType = self::FETCH_TYPE_NUM) {
         return this._statement.fetchAll(myType);
     }
 
@@ -320,8 +314,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param string|null $column the name of the column representing the primary key
      * @return string|int
      */
-    function lastInsertId(?string myTable = null, ?string $column = null)
-    {
+    function lastInsertId(?string myTable = null, ?string $column = null) {
         if ($column && this.columnCount()) {
             $row = this.fetch(static::FETCH_TYPE_ASSOC);
 

@@ -29,8 +29,7 @@ class DateType : DateTimeType
     protected $setToDateStart = true;
 
 
-    this(?string myName = null)
-    {
+    this(?string myName = null) {
         super.this(myName);
 
         this._setClassName(FrozenDate::class, DateTimeImmutable::class);

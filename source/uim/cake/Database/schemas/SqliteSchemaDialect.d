@@ -198,8 +198,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param string|int|null $default The default value.
      * @return string|int|null
      */
-    protected auto _defaultValue($default)
-    {
+    protected auto _defaultValue($default) {
         if ($default === 'NULL' || $default === null) {
             return null;
         }
@@ -571,8 +570,7 @@ class SqliteSchemaDialect : SchemaDialect
      * Returns whether there is any table in this connection to SQLite containing
      * sequences
      */
-    bool hasSequences()
-    {
+    bool hasSequences() {
         myResult = this._driver.prepare(
             'SELECT 1 FROM sqlite_master WHERE name = "sqlite_sequence"'
         );

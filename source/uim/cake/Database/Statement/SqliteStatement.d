@@ -10,8 +10,7 @@ class SqliteStatement : StatementDecorator
     use BufferResultsTrait;
 
 
-    bool execute(?array myParams = null)
-    {
+    bool execute(?array myParams = null) {
         if (this._statement instanceof BufferedStatement) {
             this._statement = this._statement.getInnerStatement();
         }

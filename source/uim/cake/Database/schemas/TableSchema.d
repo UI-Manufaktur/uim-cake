@@ -276,8 +276,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
      * @param string myTable The table name.
      * @param array<string, array|string> $columns The list of columns for the schema.
      */
-    this(string myTable, array $columns = [])
-    {
+    this(string myTable, array $columns = []) {
         this._table = myTable;
         foreach ($columns as myField => $definition) {
             this.addColumn(myField, $definition);
@@ -291,8 +290,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function addColumn(string myName, $attrs)
-    {
+    function addColumn(string myName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ['type' => $attrs];
         }
@@ -308,8 +306,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function removeColumn(string myName)
-    {
+    function removeColumn(string myName) {
         unset(this._columns[myName], this._typeMap[myName]);
 
         return this;
@@ -334,8 +331,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    string getColumnType(string myName)
-    {
+    string getColumnType(string myName) {
         if (!isset(this._columns[myName])) {
             return null;
         }
@@ -344,8 +340,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    auto setColumnType(string myName, string myType)
-    {
+    auto setColumnType(string myName, string myType) {
         if (!isset(this._columns[myName])) {
             return this;
         }
@@ -357,14 +352,12 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    bool hasColumn(string myName)
-    {
+    bool hasColumn(string myName) {
         return isset(this._columns[myName]);
     }
 
 
-    string baseColumnType(string $column)
-    {
+    string baseColumnType(string $column) {
         if (isset(this._columns[$column]['baseType'])) {
             return this._columns[$column]['baseType'];
         }
@@ -389,8 +382,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    bool isNullable(string myName)
-    {
+    bool isNullable(string myName) {
         if (!isset(this._columns[myName])) {
             return true;
         }
@@ -416,8 +408,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function addIndex(string myName, $attrs)
-    {
+    function addIndex(string myName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ['type' => $attrs];
         }
@@ -501,8 +492,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function addConstraint(string myName, $attrs)
-    {
+    function addConstraint(string myName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ['type' => $attrs];
         }
@@ -562,8 +552,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    function dropConstraint(string myName)
-    {
+    function dropConstraint(string myName) {
         if (isset(this._constraints[myName])) {
             unset(this._constraints[myName]);
         }
@@ -574,8 +563,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     /**
      * Check whether a table has an autoIncrement column defined.
      */
-    bool hasAutoincrement()
-    {
+    bool hasAutoincrement() {
         foreach (this._columns as $column) {
             if (isset($column['autoIncrement']) && $column['autoIncrement']) {
                 return true;
@@ -626,8 +614,7 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    auto setOptions(array myOptions)
-    {
+    auto setOptions(array myOptions) {
         this._options = myOptions + this._options;
 
         return this;
@@ -640,16 +627,14 @@ class TableSchema : TableSchemaInterface, ISqlGenerator
     }
 
 
-    auto setTemporary(bool $temporary)
-    {
+    auto setTemporary(bool $temporary) {
         this._temporary = $temporary;
 
         return this;
     }
 
 
-    bool isTemporary()
-    {
+    bool isTemporary() {
         return this._temporary;
     }
 

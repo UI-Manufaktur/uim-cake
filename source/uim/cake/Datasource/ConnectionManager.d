@@ -180,8 +180,7 @@ class ConnectionManager
      * @throws \Cake\Datasource\Exception\MissingDatasourceConfigException When config
      * data is missing.
      */
-    static auto get(string myName, bool $useAliases = true)
-    {
+    static auto get(string myName, bool $useAliases = true) {
         if ($useAliases && isset(static::$_aliasMap[myName])) {
             myName = static::$_aliasMap[myName];
         }

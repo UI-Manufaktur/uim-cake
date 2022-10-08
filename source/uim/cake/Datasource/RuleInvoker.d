@@ -57,8 +57,7 @@ class RuleInvoker
      * @param ?string myName The name of the rule. Used in error messages.
      * @param array<string, mixed> myOptions The options for the rule. See above.
      */
-    this(callable $rule, ?string myName, array myOptions = [])
-    {
+    this(callable $rule, ?string myName, array myOptions = []) {
         this.rule = $rule;
         this.name = myName;
         this.options = myOptions;
@@ -72,8 +71,7 @@ class RuleInvoker
      * @param array<string, mixed> myOptions The options to set.
      * @return this
      */
-    auto setOptions(array myOptions)
-    {
+    auto setOptions(array myOptions) {
         this.options = myOptions + this.options;
 
         return this;
@@ -87,8 +85,7 @@ class RuleInvoker
      * @param string|null myName The name to set.
      * @return this
      */
-    auto setName(?string myName)
-    {
+    auto setName(?string myName) {
         if (myName) {
             this.name = myName;
         }
@@ -104,8 +101,7 @@ class RuleInvoker
      * @param array $scope The rule's scope/options.
      * @return bool Whether the rule passed.
      */
-    bool __invoke(IEntity $entity, array $scope)
-    {
+    bool __invoke(IEntity $entity, array $scope) {
         $rule = this.rule;
         $pass = $rule($entity, this.options + $scope);
         if ($pass === true || empty(this.options['errorField'])) {

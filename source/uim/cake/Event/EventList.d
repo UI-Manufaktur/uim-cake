@@ -52,8 +52,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed $offset An offset to check for.
      * @return bool True on success or false on failure.
      */
-    function offsetExists($offset): bool
-    {
+    bool offsetExists($offset) {
         return isset(this._events[$offset]);
     }
 
@@ -65,8 +64,7 @@ class EventList : ArrayAccess, Countable
      * @return mixed Can return all value types.
      */
     #[\ReturnTypeWillChange]
-    function offsetGet($offset)
-    {
+    function offsetGet($offset) {
         if (this.offsetExists($offset)) {
             return this._events[$offset];
         }
@@ -116,8 +114,7 @@ class EventList : ArrayAccess, Countable
      * @param string myName Event name.
      * @return bool
      */
-    function hasEvent(string myName): bool
-    {
+    bool hasEvent(string myName) {
         foreach (this._events as myEvent) {
             if (myEvent.getName() === myName) {
                 return true;

@@ -25,15 +25,13 @@ class ErrorCodeWaitStrategy : RetryStrategyInterface
      * @param array<int> myErrorCodes DB-specific error codes that allow retrying
      * @param int $retryInterval Seconds to wait before allowing next retry, 0 for no wait.
      */
-    this(array myErrorCodes, int $retryInterval)
-    {
+    this(array myErrorCodes, int $retryInterval) {
         this.errorCodes = myErrorCodes;
         this.retryInterval = $retryInterval;
     }
 
 
-    bool shouldRetry(Exception myException, int $retryCount)
-    {
+    bool shouldRetry(Exception myException, int $retryCount) {
         if (
             myException instanceof PDOException &&
             myException.errorInfo &&

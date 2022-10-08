@@ -110,8 +110,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param \Cake\Http\ServerRequest|null myRequest The request if this is set it will be used
      *   instead of creating a new one.
      */
-    this(Throwable myException, ?ServerRequest myRequest = null)
-    {
+    this(Throwable myException, ?ServerRequest myRequest = null) {
         this.error = myException;
         this.request = myRequest;
         this.controller = this._getController();

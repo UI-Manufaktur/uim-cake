@@ -107,8 +107,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      *
      * @param string|null myName The name identifying this type
      */
-    this(?string myName = null)
-    {
+    this(?string myName = null) {
         super.this(myName);
 
         this.defaultTimezone = new DateTimeZone(date_default_timezone_get());
@@ -152,8 +151,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @return this
      * @deprecated 4.1.0 Use {@link setDatabaseTimezone()} instead.
      */
-    auto setTimezone($timezone)
-    {
+    auto setTimezone($timezone) {
         deprecationWarning('DateTimeType::setTimezone() is deprecated. Use setDatabaseTimezone() instead.');
 
         return this.setDatabaseTimezone($timezone);
@@ -169,8 +167,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \DateTimeZone|string|null $timezone Database timezone.
      * @return this
      */
-    auto setDatabaseTimezone($timezone)
-    {
+    auto setDatabaseTimezone($timezone) {
         if (is_string($timezone)) {
             $timezone = new DateTimeZone($timezone);
         }
@@ -187,8 +184,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \DateTimeZone|string|null $timezone User timezone.
      * @return this
      */
-    auto setUserTimezone($timezone)
-    {
+    auto setUserTimezone($timezone) {
         if (is_string($timezone)) {
             $timezone = new DateTimeZone($timezone);
         }
@@ -204,8 +200,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \Cake\Database\IDriver myDriver Object from which database preferences and configuration will be extracted
      * @return \IDateTime|null
      */
-    function toPHP(myValue, IDriver myDriver)
-    {
+    function toPHP(myValue, IDriver myDriver) {
         if (myValue === null) {
             return null;
         }
@@ -248,8 +243,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      *      to DateTime instances.
      * @return this
      */
-    auto setKeepDatabaseTimezone(bool $keep)
-    {
+    auto setKeepDatabaseTimezone(bool $keep) {
         this.keepDatabaseTimezone = $keep;
 
         return this;
@@ -387,8 +381,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param bool myEnable Whether to enable
      * @return this
      */
-    function useLocaleParser(bool myEnable = true)
-    {
+    function useLocaleParser(bool myEnable = true) {
         if (myEnable === false) {
             this._useLocaleMarshal = myEnable;
 
@@ -413,8 +406,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @see \Cake\I18n\Time::parseDateTime()
      * @return this
      */
-    auto setLocaleFormat($format)
-    {
+    auto setLocaleFormat($format) {
         this._localeMarshalFormat = $format;
 
         return this;
@@ -532,8 +524,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \Cake\Database\IDriver myDriver object from which database preferences and configuration will be extracted
      * @return mixed
      */
-    function toStatement(myValue, IDriver myDriver)
-    {
+    function toStatement(myValue, IDriver myDriver) {
         return PDO::PARAM_STR;
     }
 }

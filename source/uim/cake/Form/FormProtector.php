@@ -81,8 +81,7 @@ class FormProtector
      *
      * @param array<string, mixed> myData Data array, can contain key `unlockedFields` with list of unlocked fields.
      */
-    this(array myData = [])
-    {
+    this(array myData = []) {
         if (!empty(myData['unlockedFields'])) {
             this.unlockedFields = myData['unlockedFields'];
         }
@@ -98,8 +97,7 @@ class FormProtector
      * @param mixed myValue Field value, if value should not be tampered with.
      * @return this
      */
-    function addField(myField, bool $lock = true, myValue = null)
-    {
+    function addField(myField, bool $lock = true, myValue = null) {
         if (is_string(myField)) {
             myField = this.getFieldNameArray(myField);
         }
@@ -171,8 +169,7 @@ class FormProtector
      * @param string myName The dot separated name for the field.
      * @return this
      */
-    function unlockField(myName)
-    {
+    function unlockField(myName) {
         if (!in_array(myName, this.unlockedFields, true)) {
             this.unlockedFields[] = myName;
         }
@@ -191,8 +188,7 @@ class FormProtector
      *
      * @return string|null
      */
-    string getError()
-    {
+    string getError() {
         return this.debugMessage;
     }
 
@@ -202,8 +198,7 @@ class FormProtector
      * @param mixed $formData Data to validate.
      * @return string|null Fields token on success, null on failure.
      */
-    protected string extractToken($formData)
-    {
+    protected string extractToken($formData) {
         if (!is_array($formData)) {
             this.debugMessage = 'Request data is not an array.';
 
@@ -411,8 +406,7 @@ class FormProtector
      * @param string $sessionId Session Id.
      * @return string
      */
-    protected auto generateHash(array myFields, array $unlockedFields, string myUrl, string $sessionId)
-    {
+    protected auto generateHash(array myFields, array $unlockedFields, string myUrl, string $sessionId) {
         $hashParts = [
             myUrl,
             serialize(myFields),
@@ -541,8 +535,7 @@ class FormProtector
      * @param string $missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected string debugExpectedFields(array $expectedFields = [], string $missingMessage = '')
-    {
+    protected string debugExpectedFields(array $expectedFields = [], string $missingMessage = '') {
         if (count($expectedFields) === 0) {
             return null;
         }

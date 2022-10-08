@@ -87,8 +87,7 @@ class WhenThenExpression : IExpression
      * @param \Cake\Database\TypeMap|null myTypeMap The type map to use when using an array of conditions for the `WHEN`
      *  value.
      */
-    this(?TypeMap myTypeMap = null)
-    {
+    this(?TypeMap myTypeMap = null) {
         if (myTypeMap === null) {
             myTypeMap = new TypeMap();
         }
@@ -116,8 +115,7 @@ class WhenThenExpression : IExpression
      * neither a string, nor null.
      * @see CaseStatementExpression::when() for a more detailed usage explanation.
      */
-    function when($when, myType = null)
-    {
+    function when($when, myType = null) {
         if (
             !(is_array($when) && !empty($when)) &&
             !is_scalar($when) &&
@@ -198,8 +196,7 @@ class WhenThenExpression : IExpression
      *  result value.
      * @return this
      */
-    function then(myResult, ?string myType = null)
-    {
+    function then(myResult, ?string myType = null) {
         if (
             myResult !== null &&
             !is_scalar(myResult) &&
@@ -232,8 +229,7 @@ class WhenThenExpression : IExpression
      * @return string|null
      * @see WhenThenExpression::then()
      */
-    string getResultType()
-    {
+    string getResultType() {
         return this.thenType;
     }
 
@@ -251,8 +247,7 @@ class WhenThenExpression : IExpression
      * @return \Cake\Database\IExpression|object|scalar|null
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
-    function clause(string $clause)
-    {
+    function clause(string $clause) {
         if (!in_array($clause, this.validClauseNames, true)) {
             throw new InvalidArgumentException(
                 sprintf(
@@ -305,8 +300,7 @@ class WhenThenExpression : IExpression
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         if (this.when instanceof IExpression) {
             $callback(this.when);
             this.when.traverse($callback);

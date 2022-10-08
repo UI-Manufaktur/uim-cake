@@ -75,8 +75,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      *  or config array.
      * @throws \InvalidArgumentException
      */
-    this(myErrorHandler = [])
-    {
+    this(myErrorHandler = []) {
         if (func_num_args() > 1) {
             deprecationWarning(
                 'The signature of ErrorHandlerMiddleware::this() has changed. '

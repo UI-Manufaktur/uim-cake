@@ -72,8 +72,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\EventManager|null $manager Event manager instance.
      * @return \Cake\Event\EventManager The global event manager
      */
-    static function instance(?EventManager $manager = null)
-    {
+    static function instance(?EventManager $manager = null) {
         if ($manager instanceof EventManager) {
             static::$_generalManager = $manager;
         }
@@ -87,8 +86,7 @@ class EventManager : IEventManager
     }
 
 
-    function on(myEventKey, myOptions = [], ?callable $callable = null)
-    {
+    function on(myEventKey, myOptions = [], ?callable $callable = null) {
         if (myEventKey instanceof IEventListener) {
             this._attachSubscriber(myEventKey);
 
@@ -163,8 +161,7 @@ class EventManager : IEventManager
     }
 
 
-    function off(myEventKey, $callable = null)
-    {
+    function off(myEventKey, $callable = null) {
         if (myEventKey instanceof IEventListener) {
             this._detachSubscriber(myEventKey);
 
@@ -289,8 +286,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\IEvent myEvent Event instance.
      * @return mixed The result of the $listener function.
      */
-    protected auto _callListener(callable $listener, IEvent myEvent)
-    {
+    protected auto _callListener(callable $listener, IEvent myEvent) {
         myData = (array)myEvent.getData();
 
         return $listener(myEvent, ...array_values(myData));
@@ -374,8 +370,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\IEvent myEvent An event to add to the list.
      * @return this
      */
-    function addEventToList(IEvent myEvent)
-    {
+    function addEventToList(IEvent myEvent) {
         if (this._eventList) {
             this._eventList.add(myEvent);
         }
@@ -389,8 +384,7 @@ class EventManager : IEventManager
      * @param bool myEnabled True or false to enable / disable it.
      * @return this
      */
-    function trackEvents(bool myEnabled)
-    {
+    function trackEvents(bool myEnabled) {
         this._trackEvents = myEnabled;
 
         return this;
@@ -398,11 +392,8 @@ class EventManager : IEventManager
 
     /**
      * Returns whether this manager is set up to track events
-     *
-     * @return bool
      */
-    function isTrackingEvents(): bool
-    {
+    bool isTrackingEvents() {
         return this._trackEvents && this._eventList;
     }
 
@@ -412,8 +403,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\EventList myEventList The event list object to use.
      * @return this
      */
-    auto setEventList(EventList myEventList)
-    {
+    auto setEventList(EventList myEventList) {
         this._eventList = myEventList;
         this._trackEvents = true;
 

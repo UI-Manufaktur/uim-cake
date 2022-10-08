@@ -179,8 +179,7 @@ class Debugger
      * @param string|null myClass Class name.
      * @return static
      */
-    static auto getInstance(?string myClass = null)
-    {
+    static auto getInstance(?string myClass = null) {
         static $instance = [];
         if (!empty(myClass)) {
             if (!$instance || strtolower(myClass) !== strtolower(get_class($instance[0]))) {
@@ -203,8 +202,7 @@ class Debugger
      * @return mixed Config value being read, or the object itself on write operations.
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    static function configInstance(myKey = null, myValue = null, bool myMerge = true)
-    {
+    static function configInstance(myKey = null, myValue = null, bool myMerge = true) {
         if (myKey === null) {
             return static::getInstance().getConfig(myKey);
         }
@@ -353,8 +351,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function trace(array myOptions = [])
-    {
+    static function trace(array myOptions = []) {
         return Debugger::formatTrace(debug_backtrace(), myOptions);
     }
 
@@ -375,8 +372,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function formatTrace($backtrace, array myOptions = [])
-    {
+    static function formatTrace($backtrace, array myOptions = []) {
         if ($backtrace instanceof Throwable) {
             $backtrace = $backtrace.getTrace();
         }

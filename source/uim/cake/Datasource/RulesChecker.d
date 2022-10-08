@@ -102,8 +102,7 @@ class RulesChecker
      *
      * @param array<string, mixed> myOptions The options to pass to every rule
      */
-    this(array myOptions = [])
-    {
+    this(array myOptions = []) {
         this._options = myOptions;
         this._useI18n = function_exists('__d');
     }
@@ -127,8 +126,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function add(callable $rule, myName = null, array myOptions = [])
-    {
+    function add(callable $rule, myName = null, array myOptions = []) {
         this._rules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -152,8 +150,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addCreate(callable $rule, myName = null, array myOptions = [])
-    {
+    function addCreate(callable $rule, myName = null, array myOptions = []) {
         this._createRules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -177,8 +174,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addUpdate(callable $rule, myName = null, array myOptions = [])
-    {
+    function addUpdate(callable $rule, myName = null, array myOptions = []) {
         this._updateRules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -202,8 +198,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addDelete(callable $rule, myName = null, array myOptions = [])
-    {
+    function addDelete(callable $rule, myName = null, array myOptions = []) {
         this._deleteRules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -220,8 +215,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    function check(IEntity $entity, string myMode, array myOptions = []): bool
-    {
+    bool check(IEntity $entity, string myMode, array myOptions = []) {
         if (myMode === self::CREATE) {
             return this.checkCreate($entity, myOptions);
         }
@@ -245,8 +239,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @return bool
      */
-    function checkCreate(IEntity $entity, array myOptions = []): bool
-    {
+    bool checkCreate(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._createRules));
     }
 
@@ -258,8 +251,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @return bool
      */
-    function checkUpdate(IEntity $entity, array myOptions = []): bool
-    {
+    bool checkUpdate(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._updateRules));
     }
 
@@ -271,8 +263,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @return bool
      */
-    function checkDelete(IEntity $entity, array myOptions = []): bool
-    {
+    bool checkDelete(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, this._deleteRules);
     }
 
@@ -285,8 +276,7 @@ class RulesChecker
      * @param array<\Cake\Datasource\RuleInvoker> $rules The list of rules that must be checked.
      * @return bool
      */
-    protected auto _checkRules(IEntity $entity, array myOptions = [], array $rules = []): bool
-    {
+    protected bool _checkRules(IEntity $entity, array myOptions = [], array $rules = []) {
         $success = true;
         myOptions += this._options;
         foreach ($rules as $rule) {

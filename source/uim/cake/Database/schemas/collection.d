@@ -31,8 +31,7 @@ class Collection : ICollection
      *
      * @param \Cake\Database\Connection myConnection The connection instance.
      */
-    this(Connection myConnection)
-    {
+    this(Connection myConnection) {
         this._connection = myConnection;
         this._dialect = myConnection.getDriver().schemaDialect();
     }
