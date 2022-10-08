@@ -66,7 +66,7 @@ class ConsoleInputArgument
      *
      * @return string Value of this._name.
      */
-    function name(): string
+    string name()
     {
         return this._name;
     }
@@ -87,7 +87,7 @@ class ConsoleInputArgument
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    function help(int $width = 0): string
+    string help(int $width = 0)
     {
         myName = this._name;
         if (strlen(myName) < $width) {
@@ -109,7 +109,7 @@ class ConsoleInputArgument
      *
      * @return string
      */
-    function usage(): string
+    string usage()
     {
         myName = this._name;
         if (this._choices) {

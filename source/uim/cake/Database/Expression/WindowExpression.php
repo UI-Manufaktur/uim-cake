@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.1.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.database.Expression;
+module uim.cake.database.Expression;
 
 import uim.cake.database.IExpression;
 import uim.cake.database.ValueBinder;
@@ -46,8 +37,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @param string myName Window name
      */
-    this(string myName = '')
-    {
+    this(string myName = '') {
         this.name = new IdentifierExpression(myName);
     }
 
@@ -56,8 +46,7 @@ class WindowExpression : IExpression, WindowInterface
      *
      * These window expressions only specify a named window and do not
      * specify their own partitions, frame or order.
-    bool isNamedOnly()
-    {
+    bool isNamedOnly() {
         return this.name.getIdentifier() && (!this.partitions && !this.frame && !this.order);
     }
 
@@ -67,16 +56,14 @@ class WindowExpression : IExpression, WindowInterface
      * @param string myName Window name
      * @return this
      */
-    function name(string myName)
-    {
+    function name(string myName) {
         this.name = new IdentifierExpression(myName);
 
         return this;
     }
 
 
-    function partition($partitions)
-    {
+    function partition($partitions) {
         if (!$partitions) {
             return this;
         }
@@ -101,8 +88,7 @@ class WindowExpression : IExpression, WindowInterface
     }
 
 
-    function order(myFields)
-    {
+    function order(myFields) {
         if (!myFields) {
             return this;
         }
@@ -121,20 +107,17 @@ class WindowExpression : IExpression, WindowInterface
     }
 
 
-    function range($start, $end = 0)
-    {
+    function range($start, $end = 0) {
         return this.frame(self::RANGE, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
 
-    function rows(?int $start, ?int $end = 0)
-    {
+    function rows(?int $start, ?int $end = 0) {
         return this.frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
 
-    function groups(?int $start, ?int $end = 0)
-    {
+    function groups(?int $start, ?int $end = 0) {
         return this.frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
@@ -228,8 +211,7 @@ class WindowExpression : IExpression, WindowInterface
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         $callback(this.name);
         foreach (this.partitions as $partition) {
             $callback($partition);

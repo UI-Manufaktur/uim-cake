@@ -213,8 +213,7 @@ class Cookie : CookieInterface
      * @return static
      * @see \Cake\Cookie\Cookie::setDefaults()
      */
-    static function create(string myName, myValue, array myOptions = [])
-    {
+    static function create(string myName, myValue, array myOptions = []) {
         myOptions += static::$defaults;
         myOptions['expires'] = static::dateTimeInstance(myOptions['expires']);
 
@@ -273,8 +272,7 @@ class Cookie : CookieInterface
      * @return static
      * @see \Cake\Http\Cookie\Cookie::setDefaults()
      */
-    static function createFromHeaderString(string $cookie, array $defaults = [])
-    {
+    static function createFromHeaderString(string $cookie, array $defaults = []) {
         if (strpos($cookie, '";"') !== false) {
             $cookie = str_replace('";"', '{__cookie_replace__}', $cookie);
             $parts = str_replace('{__cookie_replace__}', '";"', explode(';', $cookie));
@@ -363,8 +361,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withName(string myName)
-    {
+    function withName(string myName) {
         this.validateName(myName);
         $new = clone this;
         $new.name = myName;
@@ -435,8 +432,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withValue(myValue)
-    {
+    function withValue(myValue) {
         $new = clone this;
         $new._setValue(myValue);
 
@@ -456,8 +452,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withPath(string myPath)
-    {
+    function withPath(string myPath) {
         $new = clone this;
         $new.path = myPath;
 
@@ -471,8 +466,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withDomain(string $domain)
-    {
+    function withDomain(string $domain) {
         $new = clone this;
         $new.domain = $domain;
 
@@ -492,8 +486,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withSecure(bool $secure)
-    {
+    function withSecure(bool $secure) {
         $new = clone this;
         $new.secure = $secure;
 
@@ -501,8 +494,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withHttpOnly(bool $httpOnly)
-    {
+    function withHttpOnly(bool $httpOnly) {
         $new = clone this;
         $new.httpOnly = $httpOnly;
 
@@ -516,8 +508,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withExpiry($dateTime)
-    {
+    function withExpiry($dateTime) {
         $new = clone this;
         $new.expiresAt = $dateTime.setTimezone(new DateTimeZone('GMT'));
 
@@ -583,8 +574,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withSameSite(?string $sameSite)
-    {
+    function withSameSite(?string $sameSite) {
         if ($sameSite !== null) {
             this.validateSameSiteValue($sameSite);
         }
@@ -602,8 +592,7 @@ class Cookie : CookieInterface
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected static function validateSameSiteValue(string $sameSite)
-    {
+    protected static function validateSameSiteValue(string $sameSite) {
         if (!in_array($sameSite, CookieInterface::SAMESITE_VALUES, true)) {
             throw new InvalidArgumentException(
                 'Samesite value must be either of: ' . implode(', ', CookieInterface::SAMESITE_VALUES)
@@ -638,8 +627,7 @@ class Cookie : CookieInterface
      * @param mixed myValue Value to write
      * @return static
      */
-    function withAddedValue(string myPath, myValue)
-    {
+    function withAddedValue(string myPath, myValue) {
         $new = clone this;
         if ($new.isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -658,8 +646,7 @@ class Cookie : CookieInterface
      * @param string myPath Path to remove
      * @return static
      */
-    function withoutAddedValue(string myPath)
-    {
+    function withoutAddedValue(string myPath) {
         $new = clone this;
         if ($new.isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -681,8 +668,7 @@ class Cookie : CookieInterface
      * @param string|null myPath Path to read the data from
      * @return mixed
      */
-    function read(?string myPath = null)
-    {
+    function read(?string myPath = null) {
         if (this.isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             this.value = this._expand(this.value);
@@ -751,8 +737,7 @@ class Cookie : CookieInterface
      * @param string $string A string containing JSON encoded data, or a bare string.
      * @return array|string Map of key and values
      */
-    protected auto _expand(string $string)
-    {
+    protected auto _expand(string $string) {
         this.isExpanded = true;
         $first = substr($string, 0, 1);
         if ($first === '{' || $first === '[') {

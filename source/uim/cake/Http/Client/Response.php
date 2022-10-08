@@ -122,8 +122,7 @@ class Response : Message : IResponse
      * @param array $headers Unparsed headers.
      * @param string $body The response body.
      */
-    this(array $headers = [], string $body = '')
-    {
+    this(array $headers = [], string $body = '') {
         this._parseHeaders($headers);
         if (this.getHeaderLine('Content-Encoding') === 'gzip') {
             $body = this._decodeGzipBody($body);
@@ -255,8 +254,7 @@ class Response : Message : IResponse
      * @param string $reasonPhrase The status reason phrase.
      * @return static A copy of the current object with an updated status code.
      */
-    function withStatus($code, $reasonPhrase = '')
-    {
+    function withStatus($code, $reasonPhrase = '') {
         $new = clone this;
         $new.code = $code;
         $new.reasonPhrase = $reasonPhrase;
@@ -279,8 +277,7 @@ class Response : Message : IResponse
      *
      * @return string|null
      */
-    string getEncoding()
-    {
+    string getEncoding() {
         myContents = this.getHeaderLine('content-type');
         if (!myContents) {
             return null;
@@ -324,8 +321,7 @@ class Response : Message : IResponse
      * @param string myName The name of the cookie value.
      * @return array|string|null Either the cookie's value or null when the cookie is undefined.
      */
-    auto getCookie(string myName)
-    {
+    auto getCookie(string myName) {
         this.buildCookieCollection();
 
         if (!this.cookies.has(myName)) {

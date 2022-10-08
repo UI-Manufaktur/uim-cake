@@ -85,8 +85,7 @@ class Session
      * @return static
      * @see \Cake\Http\Session::this()
      */
-    static function create(array $sessionConfig = [])
-    {
+    static function create(array $sessionConfig = []) {
         if (isset($sessionConfig['defaults'])) {
             $defaults = static::_defaultConfig($sessionConfig['defaults']);
             if ($defaults) {
@@ -126,8 +125,7 @@ class Session
      * @param string myName Config name.
      * @return array|false
      */
-    protected static auto _defaultConfig(string myName)
-    {
+    protected static auto _defaultConfig(string myName) {
         $tmp = defined('TMP') ? TMP : sys_get_temp_dir() . DIRECTORY_SEPARATOR;
         $defaults = [
             'php' => [
@@ -196,8 +194,7 @@ class Session
      *
      * @param array<string, mixed> myConfig The Configuration to apply to this session object
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         myConfig += [
             'timeout' => null,
             'cookie' => null,
@@ -427,8 +424,7 @@ class Session
      * @return mixed|null The value of the session variable, or default value if a session
      *   is not available, can't be started, or provided myName is not found in the session.
      */
-    function read(?string myName = null, $default = null)
-    {
+    function read(?string myName = null, $default = null) {
         if (this._hasSession() && !this.started()) {
             this.start();
         }
@@ -451,8 +447,7 @@ class Session
      * @throws \RuntimeException
      * @return mixed|null
      */
-    function readOrFail(string myName)
-    {
+    function readOrFail(string myName) {
         if (!this.check(myName)) {
             throw new RuntimeException(sprintf('Expected session key "%s" not found.', myName));
         }
@@ -467,8 +462,7 @@ class Session
      * @return mixed|null The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    function consume(string myName)
-    {
+    function consume(string myName) {
         if (empty(myName)) {
             return null;
         }

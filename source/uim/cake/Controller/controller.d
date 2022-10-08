@@ -350,9 +350,9 @@ class Controller : IEventListener, IEventDispatcher
      * Returns the controller name.
      *
      * @return string
-     * @since 3.6.0
+
      */
-    auto getName(): string
+    string getName(): string
     {
         return this.name;
     }
@@ -362,7 +362,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param string myName Controller name.
      * @return this
-     * @since 3.6.0
+
      */
     auto setName(string myName) {
         this.name = myName;
@@ -374,7 +374,7 @@ class Controller : IEventListener, IEventDispatcher
      * Returns the plugin name.
      *
      * @return string|null
-     * @since 3.6.0
+
      */
     string getPlugin() {
         return this.plugin;
@@ -385,7 +385,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param string|null myName Plugin name.
      * @return this
-     * @since 3.6.0
+
      */
     auto setPlugin(?string myName) {
         this.plugin = myName;
@@ -397,7 +397,7 @@ class Controller : IEventListener, IEventDispatcher
      * Returns true if an action should be rendered automatically.
      *
      * @return bool
-     * @since 3.6.0
+
      */
     bool isAutoRenderEnabled() {
         return this.autoRender;
@@ -407,7 +407,7 @@ class Controller : IEventListener, IEventDispatcher
      * Enable automatic action rendering.
      *
      * @return this
-     * @since 3.6.0
+
      */
     function enableAutoRender() {
         this.autoRender = true;
@@ -419,7 +419,7 @@ class Controller : IEventListener, IEventDispatcher
      * Disable automatic action rendering.
      *
      * @return this
-     * @since 3.6.0
+
      */
     function disableAutoRender() {
         this.autoRender = false;
@@ -431,7 +431,7 @@ class Controller : IEventListener, IEventDispatcher
      * Gets the request instance.
      *
      * @return \Cake\Http\ServerRequest
-     * @since 3.6.0
+
      */
     auto getRequest(): ServerRequest
     {
@@ -459,7 +459,7 @@ class Controller : IEventListener, IEventDispatcher
      * Gets the response instance.
      *
      * @return \Cake\Http\Response
-     * @since 3.6.0
+
      */
     auto getResponse(): Response
     {
@@ -471,7 +471,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param \Cake\Http\Response $response Response instance.
      * @return this
-     * @since 3.6.0
+
      */
     auto setResponse(Response $response) {
         this.response = $response;

@@ -175,8 +175,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myConfig Config options for scoped clients.
      * @throws \InvalidArgumentException
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.setConfig(myConfig);
 
         $adapter = this._config['adapter'];
@@ -217,8 +216,7 @@ class Client : ClientInterface
      * @return static
      * @throws \InvalidArgumentException
      */
-    static function createFromUrl(string myUrl)
-    {
+    static function createFromUrl(string myUrl) {
         $parts = parse_url(myUrl);
 
         if ($parts === false) {
@@ -256,8 +254,7 @@ class Client : ClientInterface
      * @return this
      * @throws \InvalidArgumentException
      */
-    function addCookie(CookieInterface $cookie)
-    {
+    function addCookie(CookieInterface $cookie) {
         if (!$cookie.getDomain() || !$cookie.getPath()) {
             throw new InvalidArgumentException('Cookie must have a domain and a path set.');
         }
@@ -722,8 +719,7 @@ class Client : ClientInterface
      * @return object Authentication strategy instance.
      * @throws \Cake\Core\Exception\CakeException when an invalid strategy is chosen.
      */
-    protected auto _createAuth(array $auth, array myOptions)
-    {
+    protected auto _createAuth(array $auth, array myOptions) {
         if (empty($auth['type'])) {
             $auth['type'] = 'basic';
         }

@@ -28,8 +28,7 @@ class NotFoundException : HttpException
      * @param int|null $code Status code, defaults to 404
      * @param \Throwable|null $previous The previous exception.
      */
-    this(?string myMessage = null, ?int $code = null, ?Throwable $previous = null)
-    {
+    this(?string myMessage = null, ?int $code = null, ?Throwable $previous = null) {
         if (empty(myMessage)) {
             myMessage = 'Not Found';
         }

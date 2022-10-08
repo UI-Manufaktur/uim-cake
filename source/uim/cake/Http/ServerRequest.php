@@ -208,8 +208,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string, mixed> myConfig An array of request data to create a request with.
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         myConfig += [
             'params' => this.params,
             'query' => [],
@@ -313,8 +312,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null
      */
-    string contentType()
-    {
+    string contentType() {
         myType = this.getEnv('CONTENT_TYPE');
         if (myType) {
             return myType;
@@ -407,8 +405,7 @@ class ServerRequest : IServerRequest
      *   Local addresses do not contain hostnames.
      * @return string|null The referring address for this request or null.
      */
-    string referer(bool $local = true)
-    {
+    string referer(bool $local = true) {
         $ref = this.getEnv('HTTP_REFERER');
 
         $base = Configure::read('App.fullBaseUrl') . this.webroot;
@@ -440,8 +437,7 @@ class ServerRequest : IServerRequest
      * @return bool
      * @throws \BadMethodCallException when an invalid method is called.
      */
-    auto __call(string myName, array myParams)
-    {
+    auto __call(string myName, array myParams) {
         if (strpos(myName, 'is') === 0) {
             myType = strtolower(substr(myName, 2));
 
@@ -833,8 +829,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withHeader(myName, myValue)
-    {
+    function withHeader(myName, myValue) {
         $new = clone this;
         myName = this.normalizeHeaderName(myName);
         $new._environment[myName] = myValue;
@@ -853,8 +848,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withAddedHeader(myName, myValue)
-    {
+    function withAddedHeader(myName, myValue) {
         $new = clone this;
         myName = this.normalizeHeaderName(myName);
         $existing = [];
@@ -874,8 +868,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withoutHeader(myName)
-    {
+    function withoutHeader(myName) {
         $new = clone this;
         myName = this.normalizeHeaderName(myName);
         unset($new._environment[myName]);
@@ -909,8 +902,7 @@ class ServerRequest : IServerRequest
      * @return static A new instance with the updated method.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withMethod($method)
-    {
+    function withMethod($method) {
         $new = clone this;
 
         if (
@@ -960,8 +952,7 @@ class ServerRequest : IServerRequest
      * @return static A new instance with the updated query string data.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withQueryParams(array myQuery)
-    {
+    function withQueryParams(array myQuery) {
         $new = clone this;
         $new.query = myQuery;
 
@@ -973,8 +964,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null
      */
-    string host()
-    {
+    string host() {
         if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_HOST')) {
             return this.getEnv('HTTP_X_FORWARDED_HOST');
         }
@@ -987,8 +977,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null
      */
-    string port()
-    {
+    string port() {
         if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_PORT')) {
             return this.getEnv('HTTP_X_FORWARDED_PORT');
         }
@@ -1003,8 +992,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null The scheme used for the request.
      */
-    string scheme()
-    {
+    string scheme() {
         if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_PROTO')) {
             return this.getEnv('HTTP_X_FORWARDED_PROTO');
         }
@@ -1074,8 +1062,7 @@ class ServerRequest : IServerRequest
      * @return array<string>|bool Either an array of all the types the client accepts or a boolean if they accept the
      *   provided type.
      */
-    function accepts(?string myType = null)
-    {
+    function accepts(?string myType = null) {
         $raw = this.parseAccept();
         $accept = [];
         foreach ($raw as myTypes) {
@@ -1116,8 +1103,7 @@ class ServerRequest : IServerRequest
      * @param string|null myLanguage The language to test.
      * @return array|bool If a myLanguage is provided, a boolean. Otherwise the array of accepted languages.
      */
-    function acceptLanguage(?string myLanguage = null)
-    {
+    function acceptLanguage(?string myLanguage = null) {
         $raw = this._parseAcceptWithQualifier(this.getHeaderLine('Accept-Language'));
         $accept = [];
         foreach ($raw as myLanguages) {
@@ -1194,8 +1180,7 @@ class ServerRequest : IServerRequest
      * @return array|string|null Query data.
      * @see ServerRequest::getQueryParams()
      */
-    auto getQuery(?string myName = null, $default = null)
-    {
+    auto getQuery(?string myName = null, $default = null) {
         if (myName === null) {
             return this.query;
         }
@@ -1235,8 +1220,7 @@ class ServerRequest : IServerRequest
      * @param mixed $default The default data.
      * @return mixed The value being read.
      */
-    auto getData(?string myName = null, $default = null)
-    {
+    auto getData(?string myName = null, $default = null) {
         if (myName === null) {
             return this.data;
         }
@@ -1275,8 +1259,7 @@ class ServerRequest : IServerRequest
      * @param mixed ...$args The additional arguments
      * @return mixed The decoded/processed request data.
      */
-    function input(?callable $callback = null, ...$args)
-    {
+    function input(?callable $callback = null, ...$args) {
         deprecationWarning(
             'Use `(string)myRequest.getBody()` to get the raw PHP input as string; '
             . 'use `BodyParserMiddleware` to parse the request body so that it\'s available as array/object '
@@ -1300,8 +1283,7 @@ class ServerRequest : IServerRequest
      * @param array|string|null $default The default value if the cookie is not set.
      * @return array|string|null Either the cookie value, or null if the value doesn't exist.
      */
-    auto getCookie(string myKey, $default = null)
-    {
+    auto getCookie(string myKey, $default = null) {
         return Hash::get(this.cookies, myKey, $default);
     }
 
@@ -1332,8 +1314,7 @@ class ServerRequest : IServerRequest
      * @param \Cake\Http\Cookie\CookieCollection $cookies The cookie collection
      * @return static
      */
-    function withCookieCollection(CookieCollection $cookies)
-    {
+    function withCookieCollection(CookieCollection $cookies) {
         $new = clone this;
         myValues = [];
         foreach ($cookies as $cookie) {
@@ -1360,8 +1341,7 @@ class ServerRequest : IServerRequest
      * @param array $cookies The new cookie data to use.
      * @return static
      */
-    function withCookieParams(array $cookies)
-    {
+    function withCookieParams(array $cookies) {
         $new = clone this;
         $new.cookies = $cookies;
 
@@ -1390,8 +1370,7 @@ class ServerRequest : IServerRequest
      *     typically be in an array or object.
      * @return static
      */
-    function withParsedBody(myData)
-    {
+    function withParsedBody(myData) {
         $new = clone this;
         $new.data = myData;
 
@@ -1429,8 +1408,7 @@ class ServerRequest : IServerRequest
      * @param string $version HTTP protocol version
      * @return static
      */
-    function withProtocolVersion($version)
-    {
+    function withProtocolVersion($version) {
         if (!preg_match('/^(1\.[01]|2)$/', $version)) {
             throw new InvalidArgumentException("Unsupported protocol version '{$version}' provided");
         }
@@ -1449,8 +1427,7 @@ class ServerRequest : IServerRequest
      *   variable's value that does not exist.
      * @return string|null Either the environment value, or null if the value doesn't exist.
      */
-    string getEnv(string myKey, ?string $default = null)
-    {
+    string getEnv(string myKey, ?string $default = null) {
         myKey = strtoupper(myKey);
         if (!array_key_exists(myKey, this._environment)) {
             this._environment[myKey] = env(myKey);
@@ -1469,8 +1446,7 @@ class ServerRequest : IServerRequest
      * @param string myValue Value to set
      * @return static
      */
-    function withEnv(string myKey, string myValue)
-    {
+    function withEnv(string myKey, string myValue) {
         $new = clone this;
         $new._environment[myKey] = myValue;
         $new.clearDetectorCache();
@@ -1521,8 +1497,7 @@ class ServerRequest : IServerRequest
      * @param mixed myValue The value to insert into the request data.
      * @return static
      */
-    function withData(string myName, myValue)
-    {
+    function withData(string myName, myValue) {
         $copy = clone this;
 
         if (is_array($copy.data)) {
@@ -1541,8 +1516,7 @@ class ServerRequest : IServerRequest
      * @param string myName The dot separated path to remove.
      * @return static
      */
-    function withoutData(string myName)
-    {
+    function withoutData(string myName) {
         $copy = clone this;
 
         if (is_array($copy.data)) {
@@ -1562,8 +1536,7 @@ class ServerRequest : IServerRequest
      * @param mixed myValue The value to insert into the the request parameters.
      * @return static
      */
-    function withParam(string myName, myValue)
-    {
+    function withParam(string myName, myValue) {
         $copy = clone this;
         $copy.params = Hash::insert($copy.params, myName, myValue);
 
@@ -1577,8 +1550,7 @@ class ServerRequest : IServerRequest
      * @param mixed $default The default value if `myName` is not set. Default `null`.
      * @return mixed
      */
-    auto getParam(string myName, $default = null)
-    {
+    auto getParam(string myName, $default = null) {
         return Hash::get(this.params, myName, $default);
     }
 
@@ -1589,8 +1561,7 @@ class ServerRequest : IServerRequest
      * @param mixed myValue The value of the attribute.
      * @return static
      */
-    function withAttribute(myName, myValue)
-    {
+    function withAttribute(myName, myValue) {
         $new = clone this;
         if (in_array(myName, this.emulatedAttributes, true)) {
             $new.{myName} = myValue;
@@ -1608,8 +1579,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @throws \InvalidArgumentException
      */
-    function withoutAttribute(myName)
-    {
+    function withoutAttribute(myName) {
         $new = clone this;
         if (in_array(myName, this.emulatedAttributes, true)) {
             throw new InvalidArgumentException(
@@ -1628,8 +1598,7 @@ class ServerRequest : IServerRequest
      * @param mixed|null $default The default value if the attribute has not been set.
      * @return mixed
      */
-    auto getAttribute(myName, $default = null)
-    {
+    auto getAttribute(myName, $default = null) {
         if (in_array(myName, this.emulatedAttributes, true)) {
             if (myName === 'here') {
                 return this.base . this.uri.getPath();
@@ -1697,8 +1666,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @throws \InvalidArgumentException when $files contains an invalid object.
      */
-    function withUploadedFiles(array $uploadedFiles)
-    {
+    function withUploadedFiles(array $uploadedFiles) {
         this.validateUploadedFiles($uploadedFiles, '');
         $new = clone this;
         $new.uploadedFiles = $uploadedFiles;
@@ -1744,8 +1712,7 @@ class ServerRequest : IServerRequest
      * @param \Psr\Http\Message\StreamInterface $body The new request body
      * @return static
      */
-    function withBody(StreamInterface $body)
-    {
+    function withBody(StreamInterface $body) {
         $new = clone this;
         $new.stream = $body;
 
@@ -1773,8 +1740,7 @@ class ServerRequest : IServerRequest
      * @param bool $preserveHost Whether the host should be retained.
      * @return static
      */
-    function withUri(UriInterface $uri, $preserveHost = false)
-    {
+    function withUri(UriInterface $uri, $preserveHost = false) {
         $new = clone this;
         $new.uri = $uri;
 
@@ -1808,8 +1774,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function withRequestTarget(myRequestTarget)
-    {
+    function withRequestTarget(myRequestTarget) {
         $new = clone this;
         $new.requestTarget = myRequestTarget;
 

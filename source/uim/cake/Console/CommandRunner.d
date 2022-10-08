@@ -282,7 +282,7 @@ class CommandRunner : IEventDispatcher
      * @return string The resolved name.
      * @throws \Cake\Console\Exception\MissingOptionException
      */
-    protected auto resolveName(CommandCollection $commands, ConsoleIo $io, ?string myName): string
+    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string myName)
     {
         if (!myName) {
             $io.err('<error>No command provided. Choose one of the available commands.</error>', 2);

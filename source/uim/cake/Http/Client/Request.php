@@ -37,8 +37,7 @@ class Request : Message : RequestInterface
      * @param array $headers The HTTP headers to set.
      * @param array|string|null myData The request body to use.
      */
-    this(string myUrl = '', string $method = self::METHOD_GET, array $headers = [], myData = null)
-    {
+    this(string myUrl = '', string $method = self::METHOD_GET, array $headers = [], myData = null) {
         this.setMethod($method);
         this.uri = this.createUri(myUrl);
         $headers += [
@@ -79,8 +78,7 @@ class Request : Message : RequestInterface
      * @param array|string myContents The body for the request.
      * @return this
      */
-    protected auto setContent(myContents)
-    {
+    protected auto setContent(myContents) {
         if (is_array(myContents)) {
             $formData = new FormData();
             $formData.addMany(myContents);

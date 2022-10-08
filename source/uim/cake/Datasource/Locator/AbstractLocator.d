@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.1.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Datasource\Locator;
+module uim.cake.Datasource\Locator;
 
 import uim.cake.Datasource\IRepository;
 use RuntimeException;
@@ -40,8 +31,7 @@ abstract class AbstractLocator : ILocator
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    auto get(string myAlias, array myOptions = [])
-    {
+    auto get(string myAlias, array myOptions = []) {
         $storeOptions = myOptions;
         unset($storeOptions['allowFallbackClass']);
 
@@ -71,14 +61,12 @@ abstract class AbstractLocator : ILocator
     abstract protected auto createInstance(string myAlias, array myOptions);
 
 
-    auto set(string myAlias, IRepository myRepository)
-    {
+    auto set(string myAlias, IRepository myRepository) {
         return this.instances[myAlias] = myRepository;
     }
 
 
-    function exists(string myAlias): bool
-    {
+    bool exists(string myAlias) {
         return isset(this.instances[myAlias]);
     }
 

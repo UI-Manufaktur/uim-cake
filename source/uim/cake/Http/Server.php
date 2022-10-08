@@ -43,8 +43,7 @@ class Server : IEventDispatcher
      * @param \Cake\Core\HttpApplicationInterface $app The application to use.
      * @param \Cake\Http\Runner|null $runner Application runner.
      */
-    this(HttpApplicationInterface $app, ?Runner $runner = null)
-    {
+    this(HttpApplicationInterface $app, ?Runner $runner = null) {
         this.app = $app;
         this.runner = $runner ?? new Runner();
     }
@@ -154,8 +153,7 @@ class Server : IEventDispatcher
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setEventManager(IEventManager myEventManager)
-    {
+    auto setEventManager(IEventManager myEventManager) {
         if (this.app instanceof IEventDispatcher) {
             this.app.setEventManager(myEventManager);
 

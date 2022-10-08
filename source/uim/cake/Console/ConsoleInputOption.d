@@ -116,7 +116,7 @@ class ConsoleInputOption
      *
      * @return string Value of this._name.
      */
-    function name(): string
+    string name()
     {
         return this._name;
     }
@@ -126,7 +126,7 @@ class ConsoleInputOption
      *
      * @return string Value of this._short.
      */
-    function short(): string
+    string short()
     {
         return this._short;
     }
@@ -137,7 +137,7 @@ class ConsoleInputOption
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    function help(int $width = 0): string
+    string help(int $width = 0)
     {
         $default = $short = '';
         if (this._default && this._default !== true) {
@@ -166,7 +166,7 @@ class ConsoleInputOption
      *
      * @return string
      */
-    function usage(): string
+    string usage()
     {
         myName = this._short === '' ? '--' . this._name : '-' . this._short;
         $default = '';

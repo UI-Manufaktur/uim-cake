@@ -45,8 +45,7 @@ class CookieCollection : IteratorAggregate, Countable
      *
      * @param array<\Cake\Http\Cookie\CookieInterface> $cookies Array of cookie objects
      */
-    this(array $cookies = [])
-    {
+    this(array $cookies = []) {
         this.checkCookies($cookies);
         foreach ($cookies as $cookie) {
             this.cookies[$cookie.getId()] = $cookie;
@@ -60,8 +59,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param array<string, mixed> $defaults The defaults attributes.
      * @return static
      */
-    static function createFromHeader(array $header, array $defaults = [])
-    {
+    static function createFromHeader(array $header, array $defaults = []) {
         $cookies = [];
         foreach ($header as myValue) {
             try {
@@ -80,8 +78,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param \Psr\Http\Message\IServerRequest myRequest The request to extract cookie data from
      * @return static
      */
-    static function createFromServerRequest(IServerRequest myRequest)
-    {
+    static function createFromServerRequest(IServerRequest myRequest) {
         myData = myRequest.getCookieParams();
         $cookies = [];
         foreach (myData as myName => myValue) {
@@ -111,8 +108,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param \Cake\Http\Cookie\CookieInterface $cookie Cookie instance to add.
      * @return static
      */
-    function add(CookieInterface $cookie)
-    {
+    function add(CookieInterface $cookie) {
         $new = clone this;
         $new.cookies[$cookie.getId()] = $cookie;
 
@@ -169,8 +165,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string myName The name of the cookie to remove.
      * @return static
      */
-    function remove(string myName)
-    {
+    function remove(string myName) {
         $new = clone this;
         myKey = mb_strtolower(myName);
         foreach ($new.cookies as $i => $cookie) {
@@ -303,8 +298,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param \Psr\Http\Message\RequestInterface myRequest Request to get cookie context from.
      * @return static
      */
-    function addFromResponse(IResponse $response, RequestInterface myRequest)
-    {
+    function addFromResponse(IResponse $response, RequestInterface myRequest) {
         $uri = myRequest.getUri();
         $host = $uri.getHost();
         myPath = $uri.getPath() ?: '/';

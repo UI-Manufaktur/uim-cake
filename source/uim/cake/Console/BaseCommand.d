@@ -41,7 +41,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    auto getName(): string
+    string getName()
     {
         return this.name;
     }

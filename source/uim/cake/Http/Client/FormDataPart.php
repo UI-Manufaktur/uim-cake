@@ -89,8 +89,7 @@ class FormDataPart
      * @param string $disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    this(string myName, string myValue, string $disposition = 'form-data', ?string $charset = null)
-    {
+    this(string myName, string myValue, string $disposition = 'form-data', ?string $charset = null) {
         this._name = myName;
         this._value = myValue;
         this._disposition = $disposition;
@@ -139,8 +138,7 @@ class FormDataPart
      * @param string|null $filename Use null to get/string to set.
      * @return string|null
      */
-    string filename(?string $filename = null)
-    {
+    string filename(?string $filename = null) {
         if ($filename === null) {
             return this._filename;
         }
@@ -154,8 +152,7 @@ class FormDataPart
      * @param string|null myType Use null to get/string to set.
      * @return string|null
      */
-    string type(?string myType)
-    {
+    string type(?string myType) {
         if (myType === null) {
             return this._type;
         }

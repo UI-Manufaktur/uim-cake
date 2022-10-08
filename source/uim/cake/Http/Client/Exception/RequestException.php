@@ -39,8 +39,7 @@ class RequestException : RuntimeException : RequestExceptionInterface
      * @param \Psr\Http\Message\RequestInterface myRequest Request instance.
      * @param \Throwable|null $previous Previous Exception
      */
-    this(string myMessage, RequestInterface myRequest, ?Throwable $previous = null)
-    {
+    this(string myMessage, RequestInterface myRequest, ?Throwable $previous = null) {
         this.request = myRequest;
         super.this(myMessage, 0, $previous);
     }

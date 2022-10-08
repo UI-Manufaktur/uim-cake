@@ -627,7 +627,7 @@ class Shell {
      * @see \Cake\Utility\Text::wrap()
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::wrapText
      */
-    function wrapText(string $text, myOptions = []): string
+    string wrapText(string $text, myOptions = [])
     {
         return Text::wrap($text, myOptions);
     }
@@ -739,7 +739,7 @@ class Shell {
      * @return string
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::nl
      */
-    function nl(int $multiplier = 1): string
+    string nl(int $multiplier = 1)
     {
         return this._io.nl($multiplier);
     }
@@ -857,7 +857,7 @@ class Shell {
      * @return string short path
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::shortPath
      */
-    function shortPath(string absoluteFilePath): string
+    string shortPath(string absoluteFilePath)
     {
         $shortPath = str_replace(ROOT, '', absoluteFilePath);
         $shortPath = str_replace('..' . DIRECTORY_SEPARATOR, '', $shortPath);

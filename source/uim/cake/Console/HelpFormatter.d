@@ -68,7 +68,7 @@ class HelpFormatter
      * @param int $width The width of the help output.
      * @return string
      */
-    function text(int $width = 72): string
+    string text(int $width = 72)
     {
         $parser = this._parser;
         $out = [];
@@ -145,7 +145,7 @@ class HelpFormatter
      *
      * @return string
      */
-    protected auto _generateUsage(): string
+    protected string _generateUsage()
     {
         $usage = [this._alias . ' ' . this._parser.getCommand()];
         $subcommands = this._parser.subcommands();

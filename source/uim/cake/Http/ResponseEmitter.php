@@ -41,8 +41,7 @@ class ResponseEmitter : EmitterInterface
      *
      * @param int $maxBufferLength Maximum output buffering size for each iteration.
      */
-    this(int $maxBufferLength = 8192)
-    {
+    this(int $maxBufferLength = 8192) {
         this.maxBufferLength = $maxBufferLength;
     }
 
@@ -274,8 +273,7 @@ class ResponseEmitter : EmitterInterface
      * @return array|false [unit, first, last, length]; returns false if no
      *     content range or an invalid content range is provided
      */
-    protected auto parseContentRange(string $header)
-    {
+    protected auto parseContentRange(string $header) {
         if (preg_match('/(?P<unit>[\w]+)\s+(?P<first>\d+)-(?P<last>\d+)\/(?P<length>\d+|\*)/', $header, $matches)) {
             return [
                 $matches['unit'],

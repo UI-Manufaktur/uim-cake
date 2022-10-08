@@ -37,8 +37,7 @@ class FlashMessage
      * @param array<string, mixed> myConfig Config array.
      * @see FlashMessage::set() For list of valid config keys.
      */
-    this(Session $session, array myConfig = [])
-    {
+    this(Session $session, array myConfig = []) {
         this.session = $session;
         this.setConfig(myConfig);
     }
