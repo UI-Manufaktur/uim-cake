@@ -48,8 +48,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher {
      * @param string myHashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    bool check(string myPassword, string myHashedPassword)
-    {
+    bool check(string myPassword, string myHashedPassword) {
         return password_verify(myPassword, myHashedPassword);
     }
 
@@ -60,8 +59,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher {
      * @param string myPassword The password to verify
      * @return bool
      */
-    bool needsRehash(string myPassword)
-    {
+    bool needsRehash(string myPassword) {
         return password_needs_rehash(myPassword, this._config['hashType'], this._config['hashOptions']);
     }
 }

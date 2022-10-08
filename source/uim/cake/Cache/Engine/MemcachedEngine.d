@@ -94,8 +94,7 @@ class MemcachedEngine : CacheEngine
      * @throws \InvalidArgumentException When you try use authentication without
      *   Memcached compiled with SASL support
      */
-    bool init(array myConfig = [])
-    {
+    bool init(array myConfig = []) {
         if (!extension_loaded('memcached')) {
             throw new RuntimeException('The `memcached` extension must be enabled to use MemcachedEngine.');
         }
@@ -200,8 +199,7 @@ class MemcachedEngine : CacheEngine
      * @throws \InvalidArgumentException When the Memcached extension is not built
      *   with the desired serializer engine.
      */
-    protected void _setOptions()
-    {
+    protected void _setOptions() {
         this._Memcached.setOption(Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
 
         $serializer = strtolower(this._config['serialize']);
@@ -280,8 +278,7 @@ class MemcachedEngine : CacheEngine
      * @return string|int|bool|null
      * @see https://secure.php.net/manual/en/memcached.getoption.php
      */
-    auto getOption(int myName)
-    {
+    auto getOption(int myName) {
         return this._Memcached.getOption(myName);
     }
 
@@ -299,8 +296,7 @@ class MemcachedEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure
      * @see https://www.php.net/manual/en/memcached.set.php
      */
-    bool set(myKey, myValue, $ttl = null)
-    {
+    bool set(myKey, myValue, $ttl = null) {
         $duration = this.duration($ttl);
 
         return this._Memcached.set(this._key(myKey), myValue, $duration);
@@ -315,8 +311,7 @@ class MemcachedEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool Whether the write was successful or not.
      */
-    bool setMultiple(myValues, $ttl = null)
-    {
+    bool setMultiple(myValues, $ttl = null) {
         $cacheData = [];
         foreach (myValues as myKey => myValue) {
             $cacheData[this._key(myKey)] = myValue;
@@ -334,8 +329,7 @@ class MemcachedEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn't exist, has
      * expired, or if there was an error fetching it.
      */
-    auto get(myKey, $default = null)
-    {
+    auto get(myKey, $default = null) {
         myKey = this._key(myKey);
         myValue = this._Memcached.get(myKey);
         if (this._Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
@@ -376,8 +370,7 @@ class MemcachedEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string myKey, int $offset = 1)
-    {
+    function increment(string myKey, int $offset = 1) {
         return this._Memcached.increment(this._key(myKey), $offset);
     }
 
@@ -388,8 +381,7 @@ class MemcachedEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string myKey, int $offset = 1)
-    {
+    function decrement(string myKey, int $offset = 1) {
         return this._Memcached.decrement(this._key(myKey), $offset);
     }
 
@@ -400,8 +392,7 @@ class MemcachedEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't
      *   exist or couldn't be removed.
      */
-    bool delete(myKey)
-    {
+    bool delete(myKey) {
         return this._Memcached.delete(this._key(myKey));
     }
 
@@ -412,8 +403,7 @@ class MemcachedEngine : CacheEngine
      * @return bool of boolean values that are true if the key was successfully
      *   deleted, false if it didn't exist or couldn't be removed.
      */
-    bool deleteMultiple(myKeys)
-    {
+    bool deleteMultiple(myKeys) {
         $cacheKeys = [];
         foreach (myKeys as myKey) {
             $cacheKeys[] = this._key(myKey);
@@ -427,8 +417,7 @@ class MemcachedEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    bool clear()
-    {
+    bool clear() {
         myKeys = this._Memcached.getAllKeys();
         if (myKeys === false) {
             return false;
@@ -450,8 +439,7 @@ class MemcachedEngine : CacheEngine
      * @param mixed myValue Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    bool add(string myKey, myValue)
-    {
+    bool add(string myKey, myValue) {
         $duration = this._config['duration'];
         myKey = this._key(myKey);
 
@@ -500,8 +488,7 @@ class MemcachedEngine : CacheEngine
      * @param string $group name of the group to be cleared
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         return (bool)this._Memcached.increment(this._config['prefix'] . $group);
     }
 }
