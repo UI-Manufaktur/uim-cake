@@ -71,8 +71,7 @@ class BreadcrumbsHelper : Helper
      * - *templateVars*: Specific template vars in case you override the templates provided.
      * @return this
      */
-    function add($title, myUrl = null, array myOptions = [])
-    {
+    function add($title, myUrl = null, array myOptions = []) {
         if (is_array($title)) {
             foreach ($title as $crumb) {
                 this.crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
@@ -107,8 +106,7 @@ class BreadcrumbsHelper : Helper
      * - *templateVars*: Specific template vars in case you override the templates provided.
      * @return this
      */
-    function prepend($title, myUrl = null, array myOptions = [])
-    {
+    function prepend($title, myUrl = null, array myOptions = []) {
         if (is_array($title)) {
             $crumbs = [];
             foreach ($title as $crumb) {
@@ -145,8 +143,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the index is out of bound
      */
-    function insertAt(int $index, string $title, myUrl = null, array myOptions = [])
-    {
+    function insertAt(int $index, string $title, myUrl = null, array myOptions = []) {
         if (!isset(this.crumbs[$index])) {
             throw new LogicException(sprintf("No crumb could be found at index '%s'", $index));
         }
@@ -175,8 +172,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found
      */
-    function insertBefore(string $matchingTitle, string $title, myUrl = null, array myOptions = [])
-    {
+    function insertBefore(string $matchingTitle, string $title, myUrl = null, array myOptions = []) {
         myKey = this.findCrumb($matchingTitle);
 
         if (myKey === null) {
@@ -205,8 +201,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found.
      */
-    function insertAfter(string $matchingTitle, string $title, myUrl = null, array myOptions = [])
-    {
+    function insertAfter(string $matchingTitle, string $title, myUrl = null, array myOptions = []) {
         myKey = this.findCrumb($matchingTitle);
 
         if (myKey === null) {

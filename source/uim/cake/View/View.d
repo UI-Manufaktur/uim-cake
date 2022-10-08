@@ -350,8 +350,7 @@ class View : IEventDispatcher {
      * @param \Cake\Http\ServerRequest myRequest Request instance.
      * @return this
      */
-    auto setRequest(ServerRequest myRequest)
-    {
+    auto setRequest(ServerRequest myRequest) {
         this.request = myRequest;
         this.plugin = myRequest.getParam('plugin');
 
@@ -386,8 +385,7 @@ class View : IEventDispatcher {
      * @param bool myEnable Boolean to turn on/off.
      * @return this
      */
-    function enableAutoLayout(bool myEnable = true)
-    {
+    function enableAutoLayout(bool myEnable = true) {
         this.autoLayout = myEnable;
 
         return this;
@@ -421,8 +419,7 @@ class View : IEventDispatcher {
      * @param string|null $theme Theme name.
      * @return this
      */
-    auto setTheme(?string $theme)
-    {
+    auto setTheme(?string $theme) {
         this.theme = $theme;
 
         return this;
@@ -446,8 +443,7 @@ class View : IEventDispatcher {
      * @param string myName Template file name to set.
      * @return this
      */
-    auto setTemplate(string myName)
-    {
+    auto setTemplate(string myName) {
         this.template = myName;
 
         return this;
@@ -473,8 +469,7 @@ class View : IEventDispatcher {
      * @param string myName Layout file name to set.
      * @return this
      */
-    auto setLayout(string myName)
-    {
+    auto setLayout(string myName) {
         this.layout = myName;
 
         return this;
@@ -492,8 +487,7 @@ class View : IEventDispatcher {
      * @return mixed Config value being read.
      * @psalm-suppress PossiblyNullArgument
      */
-    auto getConfig(?string myKey = null, $default = null)
-    {
+    auto getConfig(?string myKey = null, $default = null) {
         myValue = this._getConfig(myKey);
 
         if (myValue !== null) {
@@ -745,8 +739,7 @@ class View : IEventDispatcher {
      * @param mixed $default The default/fallback content of $var.
      * @return mixed The content of the named var if its set, otherwise $default.
      */
-    auto get(string $var, $default = null)
-    {
+    auto get(string $var, $default = null) {
         return this.viewVars[$var] ?? $default;
     }
 
@@ -759,8 +752,7 @@ class View : IEventDispatcher {
      * @return this
      * @throws \RuntimeException If the array combine operation failed.
      */
-    auto set(myName, myValue = null)
-    {
+    auto set(myName, myValue = null) {
         if (is_array(myName)) {
             if (is_array(myValue)) {
                 /** @var array|false myData */
@@ -816,8 +808,7 @@ class View : IEventDispatcher {
      * @return this
      * @see \Cake\View\ViewBlock::start()
      */
-    function start(string myName)
-    {
+    function start(string myName) {
         this.Blocks.start(myName);
 
         return this;
@@ -834,8 +825,7 @@ class View : IEventDispatcher {
      * @return this
      * @see \Cake\View\ViewBlock::concat()
      */
-    function append(string myName, myValue = null)
-    {
+    function append(string myName, myValue = null) {
         this.Blocks.concat(myName, myValue);
 
         return this;
@@ -852,8 +842,7 @@ class View : IEventDispatcher {
      * @return this
      * @see \Cake\View\ViewBlock::concat()
      */
-    function prepend(string myName, myValue)
-    {
+    function prepend(string myName, myValue) {
         this.Blocks.concat(myName, myValue, ViewBlock::PREPEND);
 
         return this;
@@ -869,8 +858,7 @@ class View : IEventDispatcher {
      * @return this
      * @see \Cake\View\ViewBlock::set()
      */
-    function assign(string myName, myValue)
-    {
+    function assign(string myName, myValue) {
         this.Blocks.set(myName, myValue);
 
         return this;
@@ -884,8 +872,7 @@ class View : IEventDispatcher {
      * @return this
      * @see \Cake\View\ViewBlock::set()
      */
-    function reset(string myName)
-    {
+    function reset(string myName) {
         this.assign(myName, '');
 
         return this;
@@ -937,8 +924,7 @@ class View : IEventDispatcher {
      * @throws \LogicException when you extend a template with itself or make extend loops.
      * @throws \LogicException when you extend an element which doesn't exist
      */
-    function extend(string myName)
-    {
+    function extend(string myName) {
         myType = myName[0] === '/' ? static::TYPE_TEMPLATE : this._currentType;
         switch (myType) {
             case static::TYPE_ELEMENT:
@@ -987,8 +973,7 @@ class View : IEventDispatcher {
      * @param string myName Name of the attribute to get.
      * @return \Cake\View\Helper|null
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         $registry = this.helpers();
         if (!isset($registry.{myName})) {
             return null;
@@ -1129,8 +1114,7 @@ class View : IEventDispatcher {
      * @see \Cake\View\View::$subDir
 
      */
-    auto setSubDir(string $subDir)
-    {
+    auto setSubDir(string $subDir) {
         this.subDir = $subDir;
 
         return this;
@@ -1177,8 +1161,7 @@ class View : IEventDispatcher {
      * @return this
 
      */
-    auto setPlugin(?string myName)
-    {
+    auto setPlugin(?string myName) {
         this.plugin = myName;
 
         return this;
@@ -1192,8 +1175,7 @@ class View : IEventDispatcher {
      * @see \Cake\View\View::$elementCache
 
      */
-    auto setElementCache(string $elementCache)
-    {
+    auto setElementCache(string $elementCache) {
         this.elementCache = $elementCache;
 
         return this;
@@ -1361,8 +1343,7 @@ class View : IEventDispatcher {
      * @param string|null myPlugin The plugin to fetch paths for.
      * @return \Generator
      */
-    protected auto getLayoutPaths(?string myPlugin)
-    {
+    protected auto getLayoutPaths(?string myPlugin) {
         $subDir = '';
         if (this.layoutPath) {
             $subDir = this.layoutPath . DIRECTORY_SEPARATOR;
@@ -1383,8 +1364,7 @@ class View : IEventDispatcher {
      * @param bool myPluginCheck - if false will ignore the request's plugin if parsed plugin is not loaded
      * @return string|false Either a string to the element filename or false when one can't be found.
      */
-    protected auto _getElementFileName(string myName, bool myPluginCheck = true)
-    {
+    protected auto _getElementFileName(string myName, bool myPluginCheck = true) {
         [myPlugin, myName] = this.pluginSplit(myName, myPluginCheck);
 
         myName .= this._ext;
@@ -1403,8 +1383,7 @@ class View : IEventDispatcher {
      * @param string|null myPlugin The plugin to fetch paths for.
      * @return \Generator
      */
-    protected auto getElementPaths(?string myPlugin)
-    {
+    protected auto getElementPaths(?string myPlugin) {
         $elementPaths = this._getSubPaths(static::TYPE_ELEMENT);
         foreach (this._paths(myPlugin) as myPath) {
             foreach ($elementPaths as $subdir) {

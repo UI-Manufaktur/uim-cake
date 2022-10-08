@@ -33,8 +33,7 @@ class ContextFactory
      * @param array $providers Array of provider callables. Each element should
      *   be of form `['type' => 'a-string', 'callable' => ..]`
      */
-    this(array $providers = [])
-    {
+    this(array $providers = []) {
         foreach ($providers as $provider) {
             this.addProvider($provider['type'], $provider['callable']);
         }
@@ -47,8 +46,7 @@ class ContextFactory
      *   be of form `['type' => 'a-string', 'callable' => ..]`
      * @return static
      */
-    static function createWithDefaults(array $providers = [])
-    {
+    static function createWithDefaults(array $providers = []) {
         $providers = [
             [
                 'type' => 'orm',
@@ -113,8 +111,7 @@ class ContextFactory
      *   when the form context is the correct type.
      * @return this
      */
-    function addProvider(string myType, callable $check)
-    {
+    function addProvider(string myType, callable $check) {
         this.providers = [myType => ['type' => myType, 'callable' => $check]]
             + this.providers;
 

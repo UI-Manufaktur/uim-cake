@@ -149,8 +149,7 @@ trait ValidatorAwareTrait
      * @param \Cake\Validation\Validator $validator Validator object to be set.
      * @return this
      */
-    auto setValidator(string myName, Validator $validator)
-    {
+    auto setValidator(string myName, Validator $validator) {
         $validator.setProvider(static::VALIDATOR_PROVIDER_NAME, this);
         this._validators[myName] = $validator;
 

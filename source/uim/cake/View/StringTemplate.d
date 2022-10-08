@@ -93,8 +93,7 @@ class StringTemplate {
      *
      * @param array<string, mixed> myConfig A set of templates to add.
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.add(myConfig);
     }
 
@@ -139,8 +138,7 @@ class StringTemplate {
      * @param array<string> myTemplates An associative list of named templates.
      * @return this
      */
-    function add(array myTemplates)
-    {
+    function add(array myTemplates) {
         this.setConfig(myTemplates);
         this._compileTemplates(array_keys(myTemplates));
 
@@ -327,8 +325,7 @@ class StringTemplate {
      * @param string $useIndex if you are inputting an array with an element other than default of 'class'.
      * @return array<string>|string
      */
-    function addClass($input, $newClass, string $useIndex = 'class')
-    {
+    function addClass($input, $newClass, string $useIndex = 'class') {
         // NOOP
         if (empty($newClass)) {
             return $input;

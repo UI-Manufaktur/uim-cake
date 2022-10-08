@@ -63,8 +63,7 @@ class Helper : IEventListener
      * @param \Cake\View\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper.
      */
-    this(View $view, array myConfig = [])
-    {
+    this(View $view, array myConfig = []) {
         this._View = $view;
         this.setConfig(myConfig);
 
@@ -82,8 +81,7 @@ class Helper : IEventListener
      * @param array myParams Array of params for the method.
      * @return mixed|void
      */
-    auto __call(string $method, array myParams)
-    {
+    auto __call(string $method, array myParams) {
         trigger_error(sprintf('Method %1$s::%2$s does not exist', static::class, $method), E_USER_WARNING);
     }
 
@@ -93,8 +91,7 @@ class Helper : IEventListener
      * @param string myName Name of the property being accessed.
      * @return \Cake\View\Helper|null|void Helper instance if helper with provided name exists
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         if (isset(this._helperMap[myName]) && !isset(this.{myName})) {
             myConfig = ['enabled' => false] + (array)this._helperMap[myName]['config'];
             this.{myName} = this._View.loadHelper(this._helperMap[myName]['class'], myConfig);

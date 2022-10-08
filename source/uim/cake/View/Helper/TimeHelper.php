@@ -44,8 +44,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone The override timezone if applicable.
      * @return \DateTimeZone|string|null The chosen timezone or null.
      */
-    protected auto _getTimezone($timezone)
-    {
+    protected auto _getTimezone($timezone) {
         if ($timezone) {
             return $timezone;
         }
@@ -189,8 +188,7 @@ class TimeHelper : Helper
      * @return array<string>|int 1, 2, 3, or 4 quarter of year or array if $range true
      * @see \Cake\I18n\Time::toQuarter()
      */
-    function toQuarter($dateString, $range = false)
-    {
+    function toQuarter($dateString, $range = false) {
         return (new FrozenTime($dateString)).toQuarter($range);
     }
 
@@ -353,8 +351,7 @@ class TimeHelper : Helper
      * @return string|int|false Formatted and translated date string
      * @see \Cake\I18n\Time::i18nFormat()
      */
-    function format($date, $format = null, $invalid = false, $timezone = null)
-    {
+    function format($date, $format = null, $invalid = false, $timezone = null) {
         return this.i18nFormat($date, $format, $invalid, $timezone);
     }
 
@@ -370,8 +367,7 @@ class TimeHelper : Helper
      * @throws \Exception When the date cannot be parsed
      * @see \Cake\I18n\Time::i18nFormat()
      */
-    function i18nFormat($date, $format = null, $invalid = false, $timezone = null)
-    {
+    function i18nFormat($date, $format = null, $invalid = false, $timezone = null) {
         if ($date === null) {
             return $invalid;
         }

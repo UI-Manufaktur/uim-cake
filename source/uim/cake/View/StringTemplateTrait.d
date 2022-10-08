@@ -23,8 +23,7 @@ trait StringTemplateTrait
      * @param array<string> myTemplates Templates to be added.
      * @return this
      */
-    auto setTemplates(array myTemplates)
-    {
+    auto setTemplates(array myTemplates) {
         this.templater().add(myTemplates);
 
         return this;
@@ -36,8 +35,7 @@ trait StringTemplateTrait
      * @param string|null myTemplate String for reading a specific template, null for all.
      * @return array|string
      */
-    auto getTemplates(?string myTemplate = null)
-    {
+    auto getTemplates(?string myTemplate = null) {
         return this.templater().get(myTemplate);
     }
 

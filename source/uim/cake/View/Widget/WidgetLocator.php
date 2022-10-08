@@ -52,8 +52,7 @@ class WidgetLocator
      * @param \Cake\View\View $view The view instance to set as a widget.
      * @param array $widgets See add() method for more information.
      */
-    this(StringTemplate myTemplates, View $view, array $widgets = [])
-    {
+    this(StringTemplate myTemplates, View $view, array $widgets = []) {
         this._templates = myTemplates;
         this._view = $view;
 

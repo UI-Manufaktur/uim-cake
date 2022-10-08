@@ -153,8 +153,7 @@ class Security
      * @throws \InvalidArgumentException When no compatible crypto extension is available.
      * @psalm-suppress MoreSpecificReturnType
      */
-    static function engine($instance = null)
-    {
+    static function engine($instance = null) {
         if ($instance === null && static::$_instance === null) {
             if (extension_loaded('openssl')) {
                 $instance = new OpenSsl();

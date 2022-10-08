@@ -22,8 +22,7 @@ class FormContext : IContext
      *
      * @param array $context Context info.
      */
-    this(array $context)
-    {
+    this(array $context) {
         $context += [
             'entity' => null,
         ];
@@ -62,8 +61,7 @@ class FormContext : IContext
     }
 
 
-    function val(string myField, array myOptions = [])
-    {
+    function val(string myField, array myOptions = []) {
         myOptions += [
             'default' => null,
             'schemaDefault' => true,
@@ -87,8 +85,7 @@ class FormContext : IContext
      * @param string myField Field name.
      * @return mixed
      */
-    protected auto _schemaDefault(string myField)
-    {
+    protected auto _schemaDefault(string myField) {
         myField = this._form.getSchema().field(myField);
         if (myField) {
             return myField['default'];

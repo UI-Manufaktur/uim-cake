@@ -107,8 +107,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param mixed myValue Value.
      * @return this
      */
-    auto setVar(string myName, myValue = null)
-    {
+    auto setVar(string myName, myValue = null) {
         this._vars[myName] = myValue;
 
         return this;
@@ -121,8 +120,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool myMerge Whether to merge with existing vars, default true.
      * @return this
      */
-    auto setVars(array myData, bool myMerge = true)
-    {
+    auto setVars(array myData, bool myMerge = true) {
         if (myMerge) {
             this._vars = myData + this._vars;
         } else {
@@ -149,8 +147,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string myName Var name
      * @return mixed The var value or null if unset.
      */
-    auto getVar(string myName)
-    {
+    auto getVar(string myName) {
         return this._vars[myName] ?? null;
     }
 
@@ -216,8 +213,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current plugin name.
      * @return this
      */
-    auto setPlugin(?string myName)
-    {
+    auto setPlugin(?string myName) {
         this._plugin = myName;
 
         return this;
@@ -241,8 +237,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      * @since 4.1.0
      */
-    function addHelper(string $helper, array myOptions = [])
-    {
+    function addHelper(string $helper, array myOptions = []) {
         if (myOptions) {
             $array = [$helper => myOptions];
         } else {
@@ -261,8 +256,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      * @since 4.3.0
      */
-    function addHelpers(array $helpers)
-    {
+    function addHelpers(array $helpers) {
         foreach ($helpers as $helper => myConfig) {
             if (is_int($helper)) {
                 $helper = myConfig;
@@ -281,8 +275,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool myMerge Whether to merge existing data with the new data.
      * @return this
      */
-    auto setHelpers(array $helpers, bool myMerge = true)
-    {
+    auto setHelpers(array $helpers, bool myMerge = true) {
         if (myMerge) {
             deprecationWarning('The myMerge param is deprecated, use addHelper()/addHelpers() instead.');
             $helpers = array_merge(this._helpers, $helpers);
@@ -309,8 +302,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current theme.
      * @return this
      */
-    auto setTheme(?string $theme)
-    {
+    auto setTheme(?string $theme) {
         this._theme = $theme;
 
         return this;
@@ -333,8 +325,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null myName View file name to set, or null to remove the template name.
      * @return this
      */
-    auto setTemplate(?string myName)
-    {
+    auto setTemplate(?string myName) {
         this._template = myName;
 
         return this;
@@ -359,8 +350,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null myName Layout file name to set.
      * @return this
      */
-    auto setLayout(?string myName)
-    {
+    auto setLayout(?string myName) {
         this._layout = myName;
 
         return this;
@@ -382,8 +372,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string myName The name of the option.
      * @return mixed
      */
-    auto getOption(string myName)
-    {
+    auto getOption(string myName) {
         return this._options[myName] ?? null;
     }
 
@@ -394,8 +383,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param mixed myValue Value to set.
      * @return this
      */
-    auto setOption(string myName, myValue)
-    {
+    auto setOption(string myName, myValue) {
         this._options[myName] = myValue;
 
         return this;
@@ -410,8 +398,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool myMerge Whether to merge existing data with the new data.
      * @return this
      */
-    auto setOptions(array myOptions, bool myMerge = true)
-    {
+    auto setOptions(array myOptions, bool myMerge = true) {
         if (myMerge) {
             myOptions = array_merge(this._options, myOptions);
         }
@@ -436,8 +423,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null myName The name of the view, or null to remove the current name.
      * @return this
      */
-    auto setName(?string myName)
-    {
+    auto setName(?string myName) {
         this._name = myName;
 
         return this;
@@ -463,8 +449,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null myName The class name for the view.
      * @return this
      */
-    auto setClassName(?string myName)
-    {
+    auto setClassName(?string myName) {
         this._className = myName;
 
         return this;
@@ -602,8 +587,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param array<string, mixed> myConfig View builder configuration array.
      * @return this
      */
-    function createFromArray(array myConfig)
-    {
+    function createFromArray(array myConfig) {
         foreach (myConfig as $property => myValue) {
             this.{$property} = myValue;
         }

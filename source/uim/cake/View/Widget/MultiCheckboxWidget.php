@@ -53,8 +53,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param \Cake\View\StringTemplate myTemplates Templates list.
      * @param \Cake\View\Widget\LabelWidget $label Label widget instance.
      */
-    this(StringTemplate myTemplates, LabelWidget $label)
-    {
+    this(StringTemplate myTemplates, LabelWidget $label) {
         this._templates = myTemplates;
         this._label = $label;
     }

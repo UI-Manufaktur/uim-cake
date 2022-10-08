@@ -85,8 +85,7 @@ class PaginatorHelper : Helper
      * @param \Cake\View\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper.
      */
-    this(View $view, array myConfig = [])
-    {
+    this(View $view, array myConfig = []) {
         super.this($view, myConfig);
 
         myQuery = this._View.getRequest().getQueryParams();
@@ -123,8 +122,7 @@ class PaginatorHelper : Helper
      * @param string|null myModel Optional model name. Uses the default if none is specified.
      * @return mixed Content of the requested param.
      */
-    function param(string myKey, ?string myModel = null)
-    {
+    function param(string myKey, ?string myModel = null) {
         myParams = this.params(myModel);
 
         return myParams[myKey] ?? null;

@@ -251,8 +251,7 @@ class FormHelper : Helper
      * @param \Cake\View\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper.
      */
-    this(View $view, array myConfig = [])
-    {
+    this(View $view, array myConfig = []) {
         $locator = null;
         $widgets = this._defaultWidgets;
         if (isset(myConfig['locator'])) {
@@ -285,7 +284,7 @@ class FormHelper : Helper
      * Get the widget locator currently used by the helper.
      *
      * @return \Cake\View\Widget\WidgetLocator Current locator instance
-     * @since 3.6.0
+
      */
     auto getWidgetLocator(): WidgetLocator
     {
@@ -297,10 +296,9 @@ class FormHelper : Helper
      *
      * @param \Cake\View\Widget\WidgetLocator $instance The locator instance to set.
      * @return this
-     * @since 3.6.0
+
      */
-    auto setWidgetLocator(WidgetLocator $instance)
-    {
+    auto setWidgetLocator(WidgetLocator $instance) {
         this._locator = $instance;
 
         return this;
@@ -477,8 +475,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions An array of options from create()
      * @return array|string The action attribute for the form.
      */
-    protected auto _formUrl(IContext $context, array myOptions)
-    {
+    protected auto _formUrl(IContext $context, array myOptions) {
         myRequest = this._View.getRequest();
 
         if (myOptions['url'] === null) {
@@ -639,8 +636,7 @@ class FormHelper : Helper
      * @param string myName The dot separated name for the field.
      * @return this
      */
-    function unlockField(string myName)
-    {
+    function unlockField(string myName) {
         this.getFormProtector().unlockField(myName);
 
         return this;
@@ -1189,8 +1185,7 @@ class FormHelper : Helper
      * @return array|string The generated input element string
      *  or array if checkbox() is called with option 'hiddenField' set to '_split'.
      */
-    protected auto _getInput(string myFieldName, array myOptions)
-    {
+    protected auto _getInput(string myFieldName, array myOptions) {
         $label = myOptions['labelOptions'];
         unset(myOptions['labelOptions']);
         switch (strtolower(myOptions['type'])) {
@@ -1359,8 +1354,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return array<string, mixed> Modified options list.
      */
-    protected auto setRequiredAndCustomValidity(string myFieldName, array myOptions)
-    {
+    protected auto setRequiredAndCustomValidity(string myFieldName, array myOptions) {
         $context = this._getContext();
 
         if (!isset(myOptions['required']) && myOptions['type'] !== 'hidden') {
@@ -1391,8 +1385,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return string|false Generated label element or false.
      */
-    protected auto _getLabel(string myFieldName, array myOptions)
-    {
+    protected auto _getLabel(string myFieldName, array myOptions) {
         if (myOptions['type'] === 'hidden') {
             return false;
         }
@@ -1417,8 +1410,7 @@ class FormHelper : Helper
      * @param mixed $default The default option value
      * @return mixed the contents of the option or default
      */
-    protected auto _extractOption(string myName, array myOptions, $default = null)
-    {
+    protected auto _extractOption(string myName, array myOptions, $default = null) {
         if (array_key_exists(myName, myOptions)) {
             return myOptions[myName];
         }
@@ -1485,8 +1477,7 @@ class FormHelper : Helper
      * @return array<string>|string An HTML text input element.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-checkboxes
      */
-    function checkbox(string myFieldName, array myOptions = [])
-    {
+    function checkbox(string myFieldName, array myOptions = []) {
         myOptions += ['hiddenField' => true, 'value' => 1];
 
         // Work around value=>val translations.
@@ -1589,8 +1580,7 @@ class FormHelper : Helper
      * @return string Formatted input method.
      * @throws \Cake\Core\Exception\CakeException When there are no params for the method call.
      */
-    auto __call(string $method, array myParams)
-    {
+    auto __call(string $method, array myParams) {
         if (empty(myParams)) {
             throw new CakeException(sprintf('Missing field name for FormHelper::%s', $method));
         }
@@ -2535,8 +2525,7 @@ class FormHelper : Helper
      * @return this
      * @throws \InvalidArgumentException If sources list contains invalid value.
      */
-    auto setValueSources($sources)
-    {
+    auto setValueSources($sources) {
         $sources = (array)$sources;
 
         this.validateValueSources($sources);
@@ -2552,8 +2541,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions The options containing default values.
      * @return mixed Field value derived from sources or defaults.
      */
-    auto getSourceValue(string myFieldname, array myOptions = [])
-    {
+    auto getSourceValue(string myFieldname, array myOptions = []) {
         myValueMap = [
             'data' => 'getData',
             'query' => 'getQuery',

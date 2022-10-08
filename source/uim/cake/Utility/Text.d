@@ -1011,8 +1011,7 @@ class Text
      * @throws \InvalidArgumentException On invalid Unit type.
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#Cake\Utility\Text::parseFileSize
      */
-    static function parseFileSize(string $size, $default = false)
-    {
+    static function parseFileSize(string $size, $default = false) {
         if (ctype_digit($size)) {
             return (int)$size;
         }

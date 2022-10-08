@@ -13,8 +13,7 @@ class NullContext : IContext
      *
      * @param array $context Context info.
      */
-    this(array $context)
-    {
+    this(array $context) {
     }
 
     /**
@@ -49,8 +48,7 @@ class NullContext : IContext
     }
 
 
-    function val(string myField, array myOptions = [])
-    {
+    function val(string myField, array myOptions = []) {
         return null;
     }
 

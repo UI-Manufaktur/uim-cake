@@ -35,8 +35,7 @@ class LabelWidget : WidgetInterface
      *
      * @param \Cake\View\StringTemplate myTemplates Templates list.
      */
-    this(StringTemplate myTemplates)
-    {
+    this(StringTemplate myTemplates) {
         this._templates = myTemplates;
     }
 

@@ -66,8 +66,7 @@ class ArrayContext : IContext
      *
      * @param array $context Context info.
      */
-    this(array $context)
-    {
+    this(array $context) {
         $context += [
             'data' => [],
             'schema' => [],
@@ -157,8 +156,7 @@ class ArrayContext : IContext
      *     context's schema should be used if it's not explicitly provided.
      * @return mixed
      */
-    function val(string myField, array myOptions = [])
-    {
+    function val(string myField, array myOptions = []) {
         myOptions += [
             'default' => null,
             'schemaDefault' => true,

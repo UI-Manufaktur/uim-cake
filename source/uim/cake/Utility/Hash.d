@@ -39,8 +39,7 @@ class Hash
      * @return mixed The value fetched from the array, or null.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::get
      */
-    static auto get(myData, myPath, $default = null)
-    {
+    static auto get(myData, myPath, $default = null) {
         if (!(is_array(myData) || myData instanceof ArrayAccess)) {
             throw new InvalidArgumentException(
                 'Invalid data type, must be an array or \ArrayAccess instance.'
@@ -115,8 +114,7 @@ class Hash
      *   if there are no matches.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::extract
      */
-    static function extract(myData, string myPath)
-    {
+    static function extract(myData, string myPath) {
         if (!(is_array(myData) || myData instanceof ArrayAccess)) {
             throw new InvalidArgumentException(
                 'Invalid data type, must be an array or \ArrayAccess instance.'
@@ -902,8 +900,7 @@ class Hash
      * @return mixed The reduced value.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::reduce
      */
-    static function reduce(array myData, string myPath, callable $function)
-    {
+    static function reduce(array myData, string myPath, callable $function) {
         myValues = (array)static::extract(myData, myPath);
 
         return array_reduce(myValues, $function);
@@ -934,8 +931,7 @@ class Hash
      * @return mixed The results of the applied method.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::apply
      */
-    static function apply(array myData, string myPath, callable $function)
-    {
+    static function apply(array myData, string myPath, callable $function) {
         myValues = (array)static::extract(myData, myPath);
 
         return $function(myValues);

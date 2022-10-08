@@ -170,8 +170,7 @@ class Inflector
      * @param string|false myValue Inflected value
      * @return string|false Inflected value on cache hit or false on cache miss.
      */
-    protected static auto _cache(string myType, string myKey, myValue = false)
-    {
+    protected static auto _cache(string myType, string myKey, myValue = false) {
         myKey = '_' . myKey;
         myType = '_' . myType;
         if (myValue !== false) {

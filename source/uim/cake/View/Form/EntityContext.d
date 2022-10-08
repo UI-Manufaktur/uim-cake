@@ -77,8 +77,7 @@ class EntityContext : IContext
      *
      * @param array $context Context info.
      */
-    this(array $context)
-    {
+    this(array $context) {
         $context += [
             'entity' => null,
             'table' => null,
@@ -226,8 +225,7 @@ class EntityContext : IContext
      *     schema should be used if it's not explicitly provided.
      * @return mixed The value of the field or null on a miss.
      */
-    function val(string myField, array myOptions = [])
-    {
+    function val(string myField, array myOptions = []) {
         myOptions += [
             'default' => null,
             'schemaDefault' => true,
@@ -282,8 +280,7 @@ class EntityContext : IContext
      * @param array<string> $parts Each one of the parts in a path for a field name
      * @return mixed
      */
-    protected auto _schemaDefault(array $parts)
-    {
+    protected auto _schemaDefault(array $parts) {
         myTable = this._getTable($parts);
         if (myTable === null) {
             return null;
@@ -329,8 +326,7 @@ class EntityContext : IContext
      * @return \Cake\Datasource\IEntity|iterable|null
      * @throws \RuntimeException When properties cannot be read.
      */
-    function entity(?array myPath = null)
-    {
+    function entity(?array myPath = null) {
         if (myPath === null) {
             return this._context['entity'];
         }
@@ -388,8 +384,7 @@ class EntityContext : IContext
      * @return array Containing the found entity, and remaining un-matched path.
      * @throws \RuntimeException When properties cannot be read.
      */
-    protected auto leafEntity(myPath = null)
-    {
+    protected auto leafEntity(myPath = null) {
         if (myPath === null) {
             return this._context['entity'];
         }
@@ -450,8 +445,7 @@ class EntityContext : IContext
      * @param string myField The next field to fetch.
      * @return mixed
      */
-    protected auto _getProp(myTarget, myField)
-    {
+    protected auto _getProp(myTarget, myField) {
         if (is_array(myTarget) && isset(myTarget[myField])) {
             return myTarget[myField];
         }

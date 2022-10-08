@@ -71,8 +71,7 @@ trait ViewVarsTrait {
      *   Unused if myName is an associative array, otherwise serves as the values to myName's keys.
      * @return this
      */
-    auto set(myName, myValue = null)
-    {
+    auto set(myName, myValue = null) {
         if (is_array(myName)) {
             if (is_array(myValue)) {
                 myData = array_combine(myName, myValue);
