@@ -2,8 +2,8 @@ module uim.cake.ORM;
 
 use ArrayObject;
 import uim.cake.collection\Collection;
-import uim.cake.database.Expression\TupleComparison;
-import uim.cake.database.TypeFactory;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Datasource\InvalidPropertyInterface;
 import uim.cake.ORM\Association\BelongsToMany;

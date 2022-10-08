@@ -1,4 +1,4 @@
-module uim.cake.database.Type;
+module uim.cake.databases.Type;
 
 import uim.cake.I18n\Date;
 import uim.cake.I18n\FrozenDate;

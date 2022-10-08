@@ -1,4 +1,4 @@
-module uim.cake.database.Type;
+module uim.cake.databases.Type;
 
 /**
  * An interface used by Type objects to signal whether the casting

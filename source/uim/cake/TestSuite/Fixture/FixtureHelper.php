@@ -10,9 +10,9 @@
  */module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.Configure;
-import uim.cake.database.Connection;
-import uim.cake.database.IDriver;
-import uim.cake.database.Schema\TableSchema;
+import uim.cake.databases.Connection;
+import uim.cake.databases.IDriver;
+import uim.cake.databases.Schema\TableSchema;
 import uim.cake.Datasource\ConnectionInterface;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\FixtureInterface;

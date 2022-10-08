@@ -1,7 +1,7 @@
 module uim.cake.ORM\Behavior;
 
-import uim.cake.database.Type\DateTimeType;
-import uim.cake.database.TypeFactory;
+import uim.cake.databases.Type\DateTimeType;
+import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Event\IEvent;
 import uim.cake.I18n\FrozenTime;

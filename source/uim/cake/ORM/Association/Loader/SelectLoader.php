@@ -9,9 +9,9 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.ORM\Association\Loader;
 
-import uim.cake.database.Expression\IdentifierExpression;
-import uim.cake.database.Expression\TupleComparison;
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.ValueBinder;
 import uim.cake.ORM\Association;
 import uim.cake.ORM\Query;
 use Closure;

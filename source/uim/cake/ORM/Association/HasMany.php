@@ -1,8 +1,8 @@
 module uim.cake.ORM\Association;
 
 import uim.cake.collection\Collection;
-import uim.cake.database.Expression\FieldInterface;
-import uim.cake.database.Expression\QueryExpression;
+import uim.cake.databases.Expression\FieldInterface;
+import uim.cake.databases.Expression\QueryExpression;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Datasource\InvalidPropertyInterface;
 import uim.cake.ORM\Association;

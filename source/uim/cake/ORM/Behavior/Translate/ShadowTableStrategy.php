@@ -3,7 +3,7 @@ module uim.cake.ORM\Behavior\Translate;
 use ArrayObject;
 import uim.cake.collection\ICollection;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.database.Expression\FieldInterface;
+import uim.cake.databases.Expression\FieldInterface;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Event\IEvent;
 import uim.cake.ORM\Locator\LocatorAwareTrait;

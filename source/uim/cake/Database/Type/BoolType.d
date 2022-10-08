@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.1.2
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.database.Type;
+ */module uim.cake.databases.Type;
 
-import uim.cake.database.IDriver;
+import uim.cake.databases.IDriver;
 use InvalidArgumentException;
 use PDO;
 

@@ -2,12 +2,12 @@ module uim.cake.ORM;
 
 use ArrayObject;
 use BadMethodCallException;
-import uim.cake.database.Connection;
-import uim.cake.database.IExpression;
-import uim.cake.database.Query as DatabaseQuery;
-import uim.cake.database.TypedResultInterface;
-import uim.cake.database.TypeMap;
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.Connection;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query as DatabaseQuery;
+import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.TypeMap;
+import uim.cake.databases.ValueBinder;
 import uim.cake.Datasource\QueryInterface;
 import uim.cake.Datasource\QueryTrait;
 import uim.cake.Datasource\ResultSetInterface;
