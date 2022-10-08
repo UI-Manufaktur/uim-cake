@@ -99,8 +99,7 @@ trait StaticConfigTrait
      * @param string myKey The name of the configuration.
      * @return mixed|null Configuration data at the named key or null if the key does not exist.
      */
-    static auto getConfig(string myKey)
-    {
+    static auto getConfig(string myKey) {
         return static::$_config[myKey] ?? null;
     }
 
@@ -113,8 +112,7 @@ trait StaticConfigTrait
      * @return mixed Configuration data at the named key.
      * @throws \InvalidArgumentException If value does not exist.
      */
-    static auto getConfigOrFail(string myKey)
-    {
+    static auto getConfigOrFail(string myKey) {
         if (!isset(static::$_config[myKey])) {
             throw new InvalidArgumentException(sprintf('Expected configuration `%s` not found.', myKey));
         }
@@ -134,8 +132,7 @@ trait StaticConfigTrait
      * @param string myConfig An existing configuration you wish to remove.
      * @return bool Success of the removal, returns false when the config does not exist.
      */
-    static bool drop(string myConfig)
-    {
+    static bool drop(string myConfig) {
         if (!isset(static::$_config[myConfig])) {
             return false;
         }

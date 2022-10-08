@@ -98,8 +98,7 @@ class BasePlugin : PluginInterface
      *
      * @param array<string, mixed> myOptions Options
      */
-    this(array myOptions = [])
-    {
+    this(array myOptions = []) {
         foreach (static::VALID_HOOKS as myKey) {
             if (isset(myOptions[myKey])) {
                 this.{"{myKey}Enabled"} = (bool)myOptions[myKey];
@@ -188,8 +187,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function enable(string $hook)
-    {
+    function enable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled}"} = true;
 
@@ -197,8 +195,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function disable(string $hook)
-    {
+    function disable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled"} = false;
 
@@ -206,8 +203,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    bool isEnabled(string $hook)
-    {
+    bool isEnabled(string $hook) {
         this.checkHook($hook);
 
         return this.{"{$hook}Enabled"} === true;

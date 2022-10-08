@@ -79,8 +79,7 @@ class Plugin
      * @return bool
 
      */
-    static bool isLoaded(string myPlugin)
-    {
+    static bool isLoaded(string myPlugin) {
         return static::getCollection().has(myPlugin);
     }
 

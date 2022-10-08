@@ -61,8 +61,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
-    function load(string myName, array myConfig = [])
-    {
+    function load(string myName, array myConfig = []) {
         if (isset(myConfig['className'])) {
             $objName = myName;
             myName = myConfig['className'];
@@ -198,8 +197,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string myName The object name to check for.
      * @return bool True is object is loaded else false.
      */
-    bool has(string myName)
-    {
+    bool has(string myName) {
         return isset(this._loaded[myName]);
     }
 
@@ -211,8 +209,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @throws \RuntimeException If not loaded or found.
      * @psalm-return TObject
      */
-    auto get(string myName)
-    {
+    auto get(string myName) {
         if (!isset(this._loaded[myName])) {
             throw new RuntimeException(sprintf('Unknown object "%s"', myName));
         }
@@ -227,8 +224,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return object|null
      * @psalm-return TObject|null
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         return this._loaded[myName] ?? null;
     }
 
@@ -238,8 +234,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string myName Name of object being checked.
      * @return bool
      */
-    bool __isset(string myName)
-    {
+    bool __isset(string myName) {
         return this.has(myName);
     }
 
@@ -321,8 +316,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-param TObject $object
      * @psalm-suppress MoreSpecificReturnType
      */
-    auto set(string myName, object $object)
-    {
+    auto set(string myName, object $object) {
         [, $objName] = pluginSplit(myName);
 
         // Just call unload if the object was loaded before
@@ -347,8 +341,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return this
      * @psalm-suppress MoreSpecificReturnType
      */
-    function unload(string myName)
-    {
+    function unload(string myName) {
         if (empty(this._loaded[myName])) {
             [myPlugin, myName] = pluginSplit(myName);
             this._throwMissingClassError(myName, myPlugin);

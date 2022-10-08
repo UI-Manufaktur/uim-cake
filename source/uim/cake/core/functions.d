@@ -23,8 +23,7 @@ if (!function_exists('h')) {
      * @return mixed Wrapped text.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#h
      */
-    function h($text, bool $double = true, ?string $charset = null)
-    {
+    function h($text, bool $double = true, ?string $charset = null) {
         if (is_string($text)) {
             //optimize for strings
         } elseif (is_array($text)) {
@@ -123,8 +122,7 @@ if (!function_exists('pr')) {
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#pr
      * @see debug()
      */
-    function pr($var)
-    {
+    function pr($var) {
         if (!Configure::read('debug')) {
             return $var;
         }
@@ -151,8 +149,7 @@ if (!function_exists('pj')) {
      * @see pr()
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#pj
      */
-    function pj($var)
-    {
+    function pj($var) {
         if (!Configure::read('debug')) {
             return $var;
         }
@@ -177,8 +174,7 @@ if (!function_exists('env')) {
      * @return string|bool|null Environment variable setting.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#env
      */
-    function env(string myKey, $default = null)
-    {
+    function env(string myKey, $default = null) {
         if (myKey === 'HTTPS') {
             if (isset($_SERVER['HTTPS'])) {
                 return !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';

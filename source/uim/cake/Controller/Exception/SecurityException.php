@@ -57,8 +57,7 @@ class SecurityException : BadRequestException
      * Set Reason
      * @param string|null $reason Reason details
      */
-    auto setReason(?string $reason = null)
-    {
+    auto setReason(?string $reason = null) {
         this._reason = $reason;
 
         return this;
@@ -67,8 +66,7 @@ class SecurityException : BadRequestException
     /**
      * Get Reason
      */
-    string getReason()
-    {
+    string getReason() {
         return this._reason;
     }
 }

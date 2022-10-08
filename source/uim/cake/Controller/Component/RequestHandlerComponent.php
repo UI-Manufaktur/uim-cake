@@ -71,8 +71,7 @@ class RequestHandlerComponent : Component
      * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> myConfig Array of config.
      */
-    this(ComponentRegistry $registry, array myConfig = [])
-    {
+    this(ComponentRegistry $registry, array myConfig = []) {
         myConfig += [
             'viewClassMap' => [
                 'json' => 'Json',
@@ -246,8 +245,7 @@ class RequestHandlerComponent : Component
      *   if the client accepts it. If an array is passed, returns true
      *   if the client accepts one or more elements in the array.
      */
-    function accepts(myType = null)
-    {
+    function accepts(myType = null) {
         $controller = this.getController();
         /** @var array $accepted */
         $accepted = $controller.getRequest().accepts();
@@ -282,8 +280,7 @@ class RequestHandlerComponent : Component
      *   The mapped value of CONTENT_TYPE will be returned. If an array is supplied the first type
      *   in the request content type will be returned.
      */
-    function requestedWith(myType = null)
-    {
+    function requestedWith(myType = null) {
         $controller = this.getController();
         myRequest = $controller.getRequest();
 
@@ -333,8 +330,7 @@ class RequestHandlerComponent : Component
      *    If an array of types are provided then the first preferred type is returned.
      *    If no type is provided the first preferred type is returned.
      */
-    function prefers(myType = null)
-    {
+    function prefers(myType = null) {
         $controller = this.getController();
 
         $acceptRaw = $controller.getRequest().parseAccept();
@@ -449,8 +445,7 @@ class RequestHandlerComponent : Component
      *    not exist in the type map, or if the Content-type header has
      *    already been set by this method.
      */
-    bool respondAs(myType, array myOptions = [])
-    {
+    bool respondAs(myType, array myOptions = []) {
         $defaults = ['index' => null, 'charset' => null, 'attachment' => false];
         myOptions += $defaults;
 
@@ -497,8 +492,7 @@ class RequestHandlerComponent : Component
      *   alias maps to more than one content type, the first one will be returned. If an array is provided
      *   for myAlias, an array of mapped types will be returned.
      */
-    function mapAlias(myAlias)
-    {
+    function mapAlias(myAlias) {
         if (is_array(myAlias)) {
             return array_map([this, 'mapAlias'], myAlias);
         }

@@ -51,8 +51,7 @@ class PaginatorComponent : Component
     protected $_paginator;
 
 
-    this(ComponentRegistry $registry, array myConfig = [])
-    {
+    this(ComponentRegistry $registry, array myConfig = []) {
         if (isset(myConfig['paginator'])) {
             if (!myConfig['paginator'] instanceof Paginator) {
                 throw new InvalidArgumentException('Paginator must be an instance of ' . Paginator::class);
@@ -227,8 +226,7 @@ class PaginatorComponent : Component
      * @param \Cake\Datasource\Paginator $paginator Paginator instance.
      * @return this
      */
-    auto setPaginator(Paginator $paginator)
-    {
+    auto setPaginator(Paginator $paginator) {
         this._paginator = $paginator;
 
         return this;
@@ -266,8 +264,7 @@ class PaginatorComponent : Component
      * @param bool myMerge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
      */
-    auto setConfig(myKey, myValue = null, myMerge = true)
-    {
+    auto setConfig(myKey, myValue = null, myMerge = true) {
         this._paginator.setConfig(myKey, myValue, myMerge);
 
         return this;
@@ -280,8 +277,7 @@ class PaginatorComponent : Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Config value being read.
      */
-    auto getConfig(?string myKey = null, $default = null)
-    {
+    auto getConfig(?string myKey = null, $default = null) {
         return this._paginator.getConfig(myKey, $default);
     }
 
@@ -292,8 +288,7 @@ class PaginatorComponent : Component
      * @param mixed|null myValue The value to set.
      * @return this
      */
-    function configShallow(myKey, myValue = null)
-    {
+    function configShallow(myKey, myValue = null) {
         this._paginator.configShallow(myKey, null);
 
         return this;
@@ -306,8 +301,7 @@ class PaginatorComponent : Component
      * @param array $args Method arguments.
      * @return mixed
      */
-    auto __call(string $method, array $args)
-    {
+    auto __call(string $method, array $args) {
         return this._paginator.{$method}(...$args);
     }
 }

@@ -101,8 +101,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * @param string $id Identifier.
      * @return bool
      */
-    bool provides(string $id)
-    {
+    bool provides(string $id) {
         return in_array($id, this.provides, true);
     }
 

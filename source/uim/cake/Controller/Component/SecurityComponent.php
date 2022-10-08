@@ -153,8 +153,7 @@ class SecurityComponent : Component
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
      * @throws \Cake\Http\Exception\BadRequestException
      */
-    function blackHole(Controller $controller, string myError = '', ?SecurityException myException = null)
-    {
+    function blackHole(Controller $controller, string myError = '', ?SecurityException myException = null) {
         if (!this._config['blackHoleCallback']) {
             this._throwException(myException);
         }
@@ -501,8 +500,7 @@ class SecurityComponent : Component
      * @return mixed Controller callback method's response
      * @throws \Cake\Http\Exception\BadRequestException When a the blackholeCallback is not callable.
      */
-    protected auto _callback(Controller $controller, string $method, array myParams = [])
-    {
+    protected auto _callback(Controller $controller, string $method, array myParams = []) {
         $callable = [$controller, $method];
 
         if (!is_callable($callable)) {
@@ -556,8 +554,7 @@ class SecurityComponent : Component
      * @param string $missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected string _debugExpectedFields(array $expectedFields = [], string $missingMessage = '')
-    {
+    protected string _debugExpectedFields(array $expectedFields = [], string $missingMessage = '') {
         if (count($expectedFields) === 0) {
             return null;
         }

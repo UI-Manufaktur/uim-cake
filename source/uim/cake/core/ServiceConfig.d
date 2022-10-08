@@ -16,8 +16,7 @@ class ServiceConfig
      * @param mixed $default The default value to use if myPath does not exist.
      * @return mixed The configuration data or $default value.
      */
-    auto get(string myPath, $default = null)
-    {
+    auto get(string myPath, $default = null) {
         return Configure::read(myPath, $default);
     }
 
@@ -27,8 +26,7 @@ class ServiceConfig
      * @param string myPath The path to check.
      * @return bool True if the configuration data exists.
      */
-    bool has(string myPath)
-    {
+    bool has(string myPath) {
         return Configure::check(myPath);
     }
 }
