@@ -4,7 +4,7 @@ module uim.cake.basics;
 import uim.cake;
 
 /* import uim.cake.core.Configure;
-import uim.cake.errors\Debugger;
+import uim.cake.errorss\Debugger;
 use Psy\Shell as PsyShell;
  */
 define('SECOND', 1);

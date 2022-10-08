@@ -9,7 +9,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.5
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.errors;
+ */module uim.cake.errorss;
 
 import uim.cake.core.App;
 import uim.cake.Http\ResponseEmitter;

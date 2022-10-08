@@ -1,4 +1,4 @@
-module uim.cake.errors;
+module uim.cake.errorss;
 
 import uim.cake.controller\Controller;
 import uim.cake.controller\ControllerFactory;

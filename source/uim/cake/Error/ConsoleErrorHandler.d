@@ -1,4 +1,4 @@
-module uim.cake.errors;
+module uim.cake.errorss;
 
 import uim.cake.command\Command;
 import uim.cake.console.consoleOutput;

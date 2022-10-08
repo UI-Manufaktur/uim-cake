@@ -1,4 +1,4 @@
-module uim.cake.errors\Debug;
+module uim.cake.errorss\Debug;
 
 /**
  * Interface for Debugs

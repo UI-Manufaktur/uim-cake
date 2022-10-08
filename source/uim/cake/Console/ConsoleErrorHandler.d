@@ -5,5 +5,5 @@ class_alias(
     'Cake\Console\ConsoleErrorHandler'
 );
 deprecationWarning(
-    'import uim.cake.errors\ConsoleErrorHandler instead of Cake\Console\ConsoleErrorHandler.'
+    'import uim.cake.errorss\ConsoleErrorHandler instead of Cake\Console\ConsoleErrorHandler.'
 );
