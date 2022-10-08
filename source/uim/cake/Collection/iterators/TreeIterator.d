@@ -74,8 +74,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
      * their depth in the tree
      * @return \Cake\collection.iIterator\TreePrinter
      */
-    function printer(myValuePath, myKeyPath = null, $spacer = '__')
-    {
+    function printer(myValuePath, myKeyPath = null, $spacer = '__') {
         if (!myKeyPath) {
             myCounter = 0;
             myKeyPath = function () use (&myCounter) {

@@ -43,8 +43,7 @@ class SortIterator : Collection
      * @param int myType the type of comparison to perform, either SORT_STRING
      * SORT_NUMERIC or SORT_NATURAL
      */
-    this(iterable myItems, $callback, int $dir = \SORT_DESC, int myType = \SORT_NUMERIC)
-    {
+    this(iterable myItems, $callback, int $dir = \SORT_DESC, int myType = \SORT_NUMERIC) {
         if (!is_array(myItems)) {
             myItems = iterator_to_array((new Collection(myItems)).unwrap(), false);
         }

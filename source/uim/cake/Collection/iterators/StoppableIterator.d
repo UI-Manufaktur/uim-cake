@@ -41,8 +41,7 @@ class StoppableIterator : Collection
      * the collection, if the result evaluates to false, no more items will be
      * yielded from this iterator.
      */
-    this(iterable myItems, callable $condition)
-    {
+    this(iterable myItems, callable $condition) {
         this._condition = $condition;
         super.this(myItems);
         this._innerIterator = this.getInnerIterator();
@@ -52,8 +51,7 @@ class StoppableIterator : Collection
      * Evaluates the condition and returns its result, this controls
      * whether more results will be yielded.
      */
-    bool valid()
-    {
+    bool valid() {
         if (!super.valid()) {
             return false;
         }

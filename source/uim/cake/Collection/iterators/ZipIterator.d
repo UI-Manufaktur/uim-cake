@@ -54,8 +54,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * @param array $sets The list of array or iterators to be zipped.
      * @param callable|null $callable The function to use for zipping the elements of each iterator.
      */
-    this(array $sets, ?callable $callable = null)
-    {
+    this(array $sets, ?callable $callable = null) {
         $sets = array_map(function (myItems) {
             return (new Collection(myItems)).unwrap();
         }, $sets);

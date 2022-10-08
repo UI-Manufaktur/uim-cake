@@ -33,14 +33,12 @@ class CommandFactory : ICommandFactory
      *
      * @param \Cake\Core\IContainer|null myContainer The container to use if available.
      */
-    this(?IContainer myContainer = null)
-    {
+    this(?IContainer myContainer = null) {
         this.container = myContainer;
     }
 
 
-    function create(string myClassName)
-    {
+    function create(string myClassName) {
         if (this.container && this.container.has(myClassName)) {
             $command = this.container.get(myClassName);
         } else {

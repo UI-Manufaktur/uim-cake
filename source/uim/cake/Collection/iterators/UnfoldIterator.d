@@ -37,8 +37,7 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
      * current item and key. It must return an array or Traversable object
      * out of which the nested iterators will be yielded.
      */
-    this(Traversable myItems, callable $unfolder)
-    {
+    this(Traversable myItems, callable $unfolder) {
         this._unfolder = $unfolder;
         super.this(myItems);
         this._innerIterator = this.getInnerIterator();
@@ -48,8 +47,7 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
      * Returns true as each of the elements in the array represent a
      * list of items
      */
-    bool hasChildren()
-    {
+    bool hasChildren() {
         return true;
     }
 
