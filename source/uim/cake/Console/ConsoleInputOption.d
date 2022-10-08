@@ -135,7 +135,6 @@ class ConsoleInputOption
      * Generate the help for this this option.
      *
      * @param int $width The width to make the name of the option.
-     * @return string
      */
     string help(int $width = 0)
     {
@@ -163,8 +162,6 @@ class ConsoleInputOption
 
     /**
      * Get the usage value for this option
-     *
-     * @return string
      */
     string usage()
     {

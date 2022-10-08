@@ -642,7 +642,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return string Normalized config `logoutRedirect`
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#logging-users-out
      */
-    function logout(): string
+    string logout()
     {
         this._setDefaults();
         if (empty(this._authenticateObjects)) {
@@ -728,7 +728,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param array|string|null myUrl Optional URL to write as the login redirect URL.
      * @return string Redirect URL
      */
-    function redirectUrl(myUrl = null): string
+    string redirectUrl(myUrl = null)
     {
         $redirectUrl = this.getController().getRequest().getQuery(static::QUERY_STRING_REDIRECT);
         if ($redirectUrl && (substr($redirectUrl, 0, 1) !== '/' || substr($redirectUrl, 0, 2) === '//')) {
@@ -972,7 +972,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @return string
      */
-    protected auto _getUrlToRedirectBackTo(): string
+    protected string _getUrlToRedirectBackTo()
     {
         myUrlToRedirectBackTo = this.getController().getRequest().getRequestTarget();
         if (!this.getController().getRequest().is('get')) {

@@ -11,7 +11,6 @@ interface IFormatter
      * Convert a tree of INode objects into a plain text string.
      *
      * @param \Cake\Error\Debug\INode myNode The node tree to dump.
-     * @return string
      */
     string dump(INode myNode);
 

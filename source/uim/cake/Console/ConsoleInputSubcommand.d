@@ -84,8 +84,6 @@ class ConsoleInputSubCommand {
 
     /**
      * Get the raw help string for this command
-     *
-     * @return string
      */
     string getRawHelp()
     {
@@ -96,7 +94,6 @@ class ConsoleInputSubCommand {
      * Generate the help for this this subcommand.
      *
      * @param int $width The width to make the name of the subcommand.
-     * @return string
      */
     string help(int $width = 0)
     {

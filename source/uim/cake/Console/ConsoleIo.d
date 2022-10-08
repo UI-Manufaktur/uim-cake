@@ -367,9 +367,8 @@ class ConsoleIo
      * Returns a single or multiple linefeeds sequences.
      *
      * @param int $multiplier Number of times the linefeed sequence should be repeated
-     * @return string
      */
-    function nl(int $multiplier = 1): string
+    string nl(int $multiplier = 1)
     {
         return str_repeat(ConsoleOutput::LF, $multiplier);
     }
@@ -395,7 +394,7 @@ class ConsoleIo
      * @param string|null $default Default input value.
      * @return string Either the default value, or the user-provided input.
      */
-    function ask(string $prompt, ?string $default = null): string
+    string ask(string $prompt, ?string $default = null)
     {
         return this._getInput($prompt, null, $default);
     }
@@ -456,7 +455,7 @@ class ConsoleIo
      * @param string|null $default Default input value.
      * @return string Either the default value, or the user-provided input.
      */
-    function askChoice(string $prompt, myOptions, ?string $default = null): string
+    string askChoice(string $prompt, myOptions, ?string $default = null)
     {
         if (is_string(myOptions)) {
             if (strpos(myOptions, ',')) {
@@ -490,7 +489,7 @@ class ConsoleIo
      * @param string|null $default Default input value. Pass null to omit.
      * @return string Either the default value, or the user-provided input.
      */
-    protected auto _getInput(string $prompt, ?string myOptions, ?string $default): string
+    protected string _getInput(string $prompt, ?string myOptions, ?string $default)
     {
         if (!this.interactive) {
             return (string)$default;

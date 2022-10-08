@@ -38,8 +38,6 @@ abstract class BaseCommand : ICommand
 
     /**
      * Get the command name.
-     *
-     * @return string
      */
     string getName()
     {

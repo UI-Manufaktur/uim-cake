@@ -147,7 +147,7 @@ class Connection : ConnectionInterface
     }
 
 
-    function configName(): string
+    string configName()
     {
         return this._config['name'] ?? '';
     }
@@ -287,9 +287,8 @@ class Connection : ConnectionInterface
      *
      * @param \Cake\Database\Query myQuery The query to be compiled
      * @param \Cake\Database\ValueBinder $binder Value binder
-     * @return string
      */
-    function compileQuery(Query myQuery, ValueBinder $binder): string
+    string compileQuery(Query myQuery, ValueBinder $binder)
     {
         return this.getDriver().compileQuery(myQuery, $binder)[1];
     }
@@ -709,7 +708,7 @@ class Connection : ConnectionInterface
      * @param \Cake\Database\TypeInterface|string|int myType Type to be used for determining kind of quoting to perform
      * @return string Quoted value
      */
-    function quote(myValue, myType = 'string'): string
+    string quote(myValue, myType = 'string')
     {
         [myValue, myType] = this.cast(myValue, myType);
 
@@ -731,9 +730,8 @@ class Connection : ConnectionInterface
      * This does not require `supportsQuoting()` to work.
      *
      * @param string myIdentifier The identifier to quote.
-     * @return string
      */
-    function quoteIdentifier(string myIdentifier): string
+    string quoteIdentifier(string myIdentifier)
     {
         return this._driver.quoteIdentifier(myIdentifier);
     }
