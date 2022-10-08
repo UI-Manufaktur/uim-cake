@@ -1,11 +1,11 @@
-module uim.cake.database.Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.database.IExpression;
-import uim.cake.database.Query;
-import uim.cake.database.Type\ExpressionTypeCasterTrait;
-import uim.cake.database.TypedResultInterface;
-import uim.cake.database.TypedResultTrait;
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query;
+import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.TypedResultTrait;
+import uim.cake.databases.ValueBinder;
 
 /**
  * This class represents a function call string in a SQL statement. Calls can be

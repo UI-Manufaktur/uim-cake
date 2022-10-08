@@ -7,13 +7,13 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.database.Expression;
+ */module uim.cake.databases.Expression;
 
 import uim.cake.chronos\Date;
 import uim.cake.chronos\MutableDate;
-import uim.cake.database.IExpression;
-import uim.cake.database.Query;
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query;
+import uim.cake.databases.ValueBinder;
 use IDateTime;
 
 /**

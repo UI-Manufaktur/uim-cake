@@ -1,4 +1,4 @@
-module uim.cake.database.Expression;
+module uim.cake.databases.Expression;
 
 /**
  * Describes a getter and a setter for the a field property. Useful for expressions

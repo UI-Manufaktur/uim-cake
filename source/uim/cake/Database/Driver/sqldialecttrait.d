@@ -1,9 +1,9 @@
-module uim.cake.database.Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.database.Expression\ComparisonExpression;
-import uim.cake.database.Expression\IdentifierExpression;
-import uim.cake.database.IdentifierQuoter;
-import uim.cake.database.Query;
+import uim.cake.databases.Expression\ComparisonExpression;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.IdentifierQuoter;
+import uim.cake.databases.Query;
 use Closure;
 use RuntimeException;
 

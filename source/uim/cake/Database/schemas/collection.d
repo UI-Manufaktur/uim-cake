@@ -1,7 +1,7 @@
-module uim.cake.database.Schema;
+module uim.cake.databases.Schema;
 
-import uim.cake.database.Connection;
-import uim.cake.database.exceptions\DatabaseException;
+import uim.cake.databases.Connection;
+import uim.cake.databases.exceptions\DatabaseException;
 use PDOException;
 
 /**

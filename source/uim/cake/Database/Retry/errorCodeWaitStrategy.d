@@ -1,4 +1,4 @@
-module uim.cake.database.Retry;
+module uim.cake.databases.Retry;
 
 import uim.cake.core.Retry\RetryStrategyInterface;
 use Exception;

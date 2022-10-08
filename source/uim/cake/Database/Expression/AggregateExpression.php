@@ -1,6 +1,6 @@
-module uim.cake.database.Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.ValueBinder;
 use Closure;
 
 /**

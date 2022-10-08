@@ -1,11 +1,11 @@
-module uim.cake.database.Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.database.Driver;
-import uim.cake.database.Query;
-import uim.cake.database.Schema\MysqlSchemaDialect;
-import uim.cake.database.Schema\SchemaDialect;
-import uim.cake.database.Statement\MysqlStatement;
-import uim.cake.database.IStatement;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Query;
+import uim.cake.databases.Schema\MysqlSchemaDialect;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Statement\MysqlStatement;
+import uim.cake.databases.IStatement;
 use PDO;
 
 /**

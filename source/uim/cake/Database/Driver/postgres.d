@@ -1,14 +1,14 @@
-module uim.cake.database.Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.database.Driver;
-import uim.cake.database.Expression\FunctionExpression;
-import uim.cake.database.Expression\IdentifierExpression;
-import uim.cake.database.Expression\StringExpression;
-import uim.cake.database.PostgresCompiler;
-import uim.cake.database.Query;
-import uim.cake.database.QueryCompiler;
-import uim.cake.database.Schema\PostgresSchemaDialect;
-import uim.cake.database.Schema\SchemaDialect;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Expression\FunctionExpression;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\StringExpression;
+import uim.cake.databases.PostgresCompiler;
+import uim.cake.databases.Query;
+import uim.cake.databases.QueryCompiler;
+import uim.cake.databases.Schema\PostgresSchemaDialect;
+import uim.cake.databases.Schema\SchemaDialect;
 use PDO;
 
 /**

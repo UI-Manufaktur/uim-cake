@@ -1,4 +1,4 @@
-module uim.cake.database.Log;
+module uim.cake.databases.Log;
 
 import uim.cake.Log\Engine\BaseLog;
 import uim.cake.Log\Log;

@@ -1,16 +1,16 @@
-module uim.cake.database.Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.database.Driver;
-import uim.cake.database.Expression\FunctionExpression;
-import uim.cake.database.Expression\TupleComparison;
-import uim.cake.database.Query;
-import uim.cake.database.QueryCompiler;
-import uim.cake.database.Schema\SchemaDialect;
-import uim.cake.database.Schema\SqliteSchemaDialect;
-import uim.cake.database.SqliteCompiler;
-import uim.cake.database.Statement\PDOStatement;
-import uim.cake.database.Statement\SqliteStatement;
-import uim.cake.database.IStatement;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Expression\FunctionExpression;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.Query;
+import uim.cake.databases.QueryCompiler;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Schema\SqliteSchemaDialect;
+import uim.cake.databases.SqliteCompiler;
+import uim.cake.databases.Statement\PDOStatement;
+import uim.cake.databases.Statement\SqliteStatement;
+import uim.cake.databases.IStatement;
 use InvalidArgumentException;
 use PDO;
 

@@ -1,9 +1,9 @@
-module uim.cake.database.Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.database.exceptions\DatabaseException;
-import uim.cake.database.IExpression;
-import uim.cake.database.Type\ExpressionTypeCasterTrait;
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.exceptions\DatabaseException;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.ValueBinder;
 use Closure;
 
 /**

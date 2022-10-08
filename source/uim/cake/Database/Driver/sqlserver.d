@@ -1,19 +1,19 @@
-module uim.cake.database.Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.database.Driver;
-import uim.cake.database.Expression\FunctionExpression;
-import uim.cake.database.Expression\OrderByExpression;
-import uim.cake.database.Expression\OrderClauseExpression;
-import uim.cake.database.Expression\TupleComparison;
-import uim.cake.database.Expression\UnaryExpression;
-import uim.cake.database.IExpression;
-import uim.cake.database.Query;
-import uim.cake.database.QueryCompiler;
-import uim.cake.database.Schema\SchemaDialect;
-import uim.cake.database.Schema\SqlserverSchemaDialect;
-import uim.cake.database.SqlserverCompiler;
-import uim.cake.database.Statement\SqlserverStatement;
-import uim.cake.database.IStatement;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Expression\FunctionExpression;
+import uim.cake.databases.Expression\OrderByExpression;
+import uim.cake.databases.Expression\OrderClauseExpression;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.Expression\UnaryExpression;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query;
+import uim.cake.databases.QueryCompiler;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Schema\SqlserverSchemaDialect;
+import uim.cake.databases.SqlserverCompiler;
+import uim.cake.databases.Statement\SqlserverStatement;
+import uim.cake.databases.IStatement;
 use InvalidArgumentException;
 use PDO;
 

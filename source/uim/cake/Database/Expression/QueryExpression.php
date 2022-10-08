@@ -1,9 +1,9 @@
-module uim.cake.database.Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.database.IExpression;
-import uim.cake.database.Query;
-import uim.cake.database.TypeMapTrait;
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query;
+import uim.cake.databases.TypeMapTrait;
+import uim.cake.databases.ValueBinder;
 use Closure;
 use Countable;
 use InvalidArgumentException;

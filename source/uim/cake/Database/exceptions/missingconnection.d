@@ -1,4 +1,4 @@
-module uim.cake.database.exceptions;
+module uim.cake.databases.exceptions;
 
 import uim.cake.core.Exception\CakeException;
 

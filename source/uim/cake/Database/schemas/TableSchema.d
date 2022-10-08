@@ -1,8 +1,8 @@
-module uim.cake.database.Schema;
+module uim.cake.databases.Schema;
 
-import uim.cake.database.Connection;
-import uim.cake.database.exceptions\DatabaseException;
-import uim.cake.database.TypeFactory;
+import uim.cake.databases.Connection;
+import uim.cake.databases.exceptions\DatabaseException;
+import uim.cake.databases.TypeFactory;
 
 /**
  * Represents a single table in a database schema.

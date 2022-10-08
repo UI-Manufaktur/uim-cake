@@ -1,6 +1,6 @@
-module uim.cake.database.Log;
+module uim.cake.databases.Log;
 
-import uim.cake.database.Statement\StatementDecorator;
+import uim.cake.databases.Statement\StatementDecorator;
 use Exception;
 use Psr\Log\LoggerInterface;
 
