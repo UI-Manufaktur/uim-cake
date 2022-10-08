@@ -1,6 +1,6 @@
 module uim.cake.database.Schema;
 
-import uim.cake.database.Exception\DatabaseException;
+import uim.cake.database.exceptions\DatabaseException;
 
 /**
  * Schema management/reflection features for Postgres.

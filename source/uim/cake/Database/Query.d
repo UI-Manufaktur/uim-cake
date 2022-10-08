@@ -1,6 +1,6 @@
 module uim.cake.database;
 
-import uim.cake.database.Exception\DatabaseException;
+import uim.cake.database.exceptions\DatabaseException;
 import uim.cake.database.Expression\CommonTableExpression;
 import uim.cake.database.Expression\IdentifierExpression;
 import uim.cake.database.Expression\OrderByExpression;

@@ -14,7 +14,7 @@
 
 import uim.cake.controller\Controller;
 import uim.cake.core.Configure;
-import uim.cake.database.Exception\DatabaseException;
+import uim.cake.database.exceptions\DatabaseException;
 import uim.cake.Error\ExceptionRenderer;
 import uim.cake.Event\IEvent;
 import uim.cake.Event\EventManager;

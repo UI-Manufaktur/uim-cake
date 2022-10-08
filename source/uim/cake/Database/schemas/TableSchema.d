@@ -1,7 +1,7 @@
 module uim.cake.database.Schema;
 
 import uim.cake.database.Connection;
-import uim.cake.database.Exception\DatabaseException;
+import uim.cake.database.exceptions\DatabaseException;
 import uim.cake.database.TypeFactory;
 
 /**

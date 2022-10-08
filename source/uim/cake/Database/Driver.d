@@ -2,7 +2,7 @@ module uim.cake.database;
 
 import uim.cake.core.App;
 import uim.cake.core.Retry\CommandRetry;
-import uim.cake.database.Exception\MissingConnectionException;
+import uim.cake.database.exceptions\MissingConnectionException;
 import uim.cake.database.Retry\ErrorCodeWaitStrategy;
 import uim.cake.database.Schema\SchemaDialect;
 import uim.cake.database.Schema\TableSchema;

@@ -1,6 +1,6 @@
 module uim.cake.database.Expression;
 
-import uim.cake.database.Exception\DatabaseException;
+import uim.cake.database.exceptions\DatabaseException;
 import uim.cake.database.IExpression;
 import uim.cake.database.Type\ExpressionTypeCasterTrait;
 import uim.cake.database.ValueBinder;
