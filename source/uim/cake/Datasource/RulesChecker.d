@@ -220,7 +220,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    function check(IEntity $entity, string myMode, array myOptions = []): bool
+    bool check(IEntity $entity, string myMode, array myOptions = [])
     {
         if (myMode === self::CREATE) {
             return this.checkCreate($entity, myOptions);
@@ -245,7 +245,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @return bool
      */
-    function checkCreate(IEntity $entity, array myOptions = []): bool
+    bool checkCreate(IEntity $entity, array myOptions = [])
     {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._createRules));
     }
@@ -258,7 +258,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @return bool
      */
-    function checkUpdate(IEntity $entity, array myOptions = []): bool
+    bool checkUpdate(IEntity $entity, array myOptions = [])
     {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._updateRules));
     }
@@ -271,7 +271,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @return bool
      */
-    function checkDelete(IEntity $entity, array myOptions = []): bool
+    bool checkDelete(IEntity $entity, array myOptions = [])
     {
         return this._checkRules($entity, myOptions, this._deleteRules);
     }
@@ -285,7 +285,7 @@ class RulesChecker
      * @param array<\Cake\Datasource\RuleInvoker> $rules The list of rules that must be checked.
      * @return bool
      */
-    protected auto _checkRules(IEntity $entity, array myOptions = [], array $rules = []): bool
+    protected bool _checkRules(IEntity $entity, array myOptions = [], array $rules = [])
     {
         $success = true;
         myOptions += this._options;

@@ -11,7 +11,7 @@ interface FixtureInterface
      * @param \Cake\Datasource\ConnectionInterface myConnection An instance of the connection the fixture should be created on.
      * @return bool True on success, false on failure.
      */
-    function create(ConnectionInterface myConnection): bool;
+    bool create(ConnectionInterface myConnection);
 
     /**
      * Run after all tests executed, should remove the table/collection from the connection.
@@ -19,7 +19,7 @@ interface FixtureInterface
      * @param \Cake\Datasource\ConnectionInterface myConnection An instance of the connection the fixture should be removed from.
      * @return bool True on success, false on failure.
      */
-    function drop(ConnectionInterface myConnection): bool;
+    bool drop(ConnectionInterface myConnection);
 
     /**
      * Run before each test is executed.
@@ -39,7 +39,7 @@ interface FixtureInterface
      * @param \Cake\Datasource\ConnectionInterface myConnection A reference to a db instance
      * @return bool
      */
-    function truncate(ConnectionInterface myConnection): bool;
+    bool truncate(ConnectionInterface myConnection);
 
     /**
      * Get the connection name this fixture should be inserted into.
