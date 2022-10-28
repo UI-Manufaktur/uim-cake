@@ -176,8 +176,7 @@ class CommandRunner : IEventDispatcher
      *
      * @return void
      */
-    protected void bootstrap()
-    {
+    protected void bootstrap() {
         this.app.bootstrap();
         if (this.app instanceof PluginApplicationInterface) {
             this.app.pluginBootstrap();
@@ -282,8 +281,7 @@ class CommandRunner : IEventDispatcher
      * @return string The resolved name.
      * @throws \Cake\Console\Exception\MissingOptionException
      */
-    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string myName)
-    {
+    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string myName) {
         if (!myName) {
             $io.err('<error>No command provided. Choose one of the available commands.</error>', 2);
             myName = 'help';
@@ -369,8 +367,7 @@ class CommandRunner : IEventDispatcher
      *
      * @return void
      */
-    protected void loadRoutes()
-    {
+    protected void loadRoutes() {
         if (!(this.app instanceof RoutingApplicationInterface)) {
             return;
         }

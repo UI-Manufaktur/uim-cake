@@ -1129,7 +1129,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return int
      */
-    function count(): int;
+    int count();
 
     /**
      * Returns the number of unique keys in this iterator. This is the same as the number of
@@ -1141,7 +1141,7 @@ interface ICollection : Iterator, JsonSerializable
      * @see \Cake\Collection\ICollection::count()
      * @return int
      */
-    function countKeys(): int;
+    int countKeys();
 
     /**
      * Create a new collection that is the cartesian product of the current collection

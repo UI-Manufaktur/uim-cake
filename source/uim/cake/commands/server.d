@@ -60,8 +60,7 @@ class ServerCommand : Command {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#hook-methods
      */
-    protected void startup(Arguments $args, ConsoleIo $io)
-    {
+    protected void startup(Arguments $args, ConsoleIo $io) {
         if ($args.getOption('host')) {
             this._host = (string)$args.getOption('host');
         }

@@ -26,8 +26,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\CommandCollection $commands The command collection
      * @return void
      */
-    void setCommandCollection(CommandCollection $commands)
-    {
+    void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;
     }
 
@@ -108,8 +107,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    protected auto getCommands(Arguments $args, ConsoleIo $io): int
-    {
+    protected int getCommands(Arguments $args, ConsoleIo $io) {
         myOptions = [];
         foreach (this.commands as myKey => myValue) {
             $parts = explode(' ', myKey);

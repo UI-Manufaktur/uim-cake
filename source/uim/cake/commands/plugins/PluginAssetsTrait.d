@@ -84,8 +84,7 @@ trait PluginAssetsTrait
      * @param bool $overwrite Overwrite existing files.
      * @return void
      */
-    protected void _process(array myPlugins, bool $copy = false, bool $overwrite = false)
-    {
+    protected void _process(array myPlugins, bool $copy = false, bool $overwrite = false) {
         foreach (myPlugins as myPlugin => myConfig) {
             this.io.out();
             this.io.out('For plugin: ' . myPlugin);

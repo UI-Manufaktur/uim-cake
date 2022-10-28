@@ -87,8 +87,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * Returns a string representation of this object that can be used
      * to reconstruct it
      */
-    string serialize()
-    {
+    string serialize() {
         return serialize(this._iterators);
     }
 
@@ -108,8 +107,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * @param string $iterators The serialized iterators
      * @return void
      */
-    void unserialize($iterators)
-    {
+    void unserialize($iterators) {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
         this._iterators = unserialize($iterators);
         foreach (this._iterators as $it) {
@@ -123,8 +121,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * @param array myData Data array.
      * @return void
      */
-    void __unserialize(array myData)
-    {
+    void __unserialize(array myData) {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
         this._iterators = myData;

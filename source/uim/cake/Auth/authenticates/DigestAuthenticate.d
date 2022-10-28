@@ -178,8 +178,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $method Request method
      * @return string Response hash
      */
-    string generateResponseHash(array $digest, string myPassword, string $method)
-    {
+    string generateResponseHash(array $digest, string myPassword, string $method) {
         return md5(
             myPassword .
             ':' . $digest['nonce'] . ':' . $digest['nc'] . ':' . $digest['cnonce'] . ':' . $digest['qop'] . ':' .
@@ -195,8 +194,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $realm The realm the password is for.
      * @return string the hashed password that can later be used with Digest authentication.
      */
-    static string password(string myUsername, string myPassword, string $realm)
-    {
+    static string password(string myUsername, string myPassword, string $realm) {
         return md5(myUsername . ':' . $realm . ':' . myPassword);
     }
 
@@ -240,8 +238,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Generate a nonce value that is validated in future requests.
      */
-    protected string generateNonce()
-    {
+    protected string generateNonce() {
         $expiryTime = microtime(true) + this.getConfig('nonceLifetime');
         $secret = this.getConfig('secret');
         $signatureValue = hash_hmac('sha256', $expiryTime . ':' . $secret, $secret);

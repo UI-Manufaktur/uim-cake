@@ -863,8 +863,7 @@ trait CollectionTrait
     }
 
 
-    function count(): int
-    {
+    int count() {
         myTraversable = this.optimizeUnwrap();
 
         if (is_array(myTraversable)) {
@@ -875,8 +874,7 @@ trait CollectionTrait
     }
 
 
-    function countKeys(): int
-    {
+    int countKeys() {
         return count(this.toArray());
     }
 

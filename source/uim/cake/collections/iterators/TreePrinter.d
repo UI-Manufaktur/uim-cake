@@ -83,8 +83,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      *
      * @return string
      */
-    string current()
-    {
+    string current() {
         $extractor = this._value;
         $current = this._fetchCurrent();
         $spacer = str_repeat(this._spacer, this.getDepth());
@@ -97,8 +96,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      *
      * @return void
      */
-    void next()
-    {
+    void next() {
         super.next();
         this._current = null;
     }

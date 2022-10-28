@@ -39,8 +39,7 @@ abstract class BaseCommand : ICommand
     /**
      * Get the command name.
      */
-    string getName()
-    {
+    string getName() {
         return this.name;
     }
 
@@ -49,8 +48,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    string getRootName()
-    {
+    string getRootName() {
         [$root] = explode(' ', this.name);
 
         return $root;
@@ -160,8 +158,7 @@ abstract class BaseCommand : ICommand
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected void displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io)
-    {
+    protected void displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io) {
         $format = 'text';
         if ($args.getArgumentAt(0) === 'xml') {
             $format = 'xml';
@@ -178,8 +175,7 @@ abstract class BaseCommand : ICommand
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected void setOutputLevel(Arguments $args, ConsoleIo $io)
-    {
+    protected void setOutputLevel(Arguments $args, ConsoleIo $io) {
         $io.setLoggers(ConsoleIo::NORMAL);
         if ($args.getOption('quiet')) {
             $io.level(ConsoleIo::QUIET);
@@ -207,8 +203,7 @@ abstract class BaseCommand : ICommand
      * @throws \Cake\Console\Exception\StopException
      * @return void
      */
-    void abort(int $code = self::CODE_ERROR)
-    {
+    void abort(int $code = self::CODE_ERROR) {
         throw new StopException('Command aborted', $code);
     }
 
