@@ -204,7 +204,7 @@ class File {
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    function write(string myData, string myMode = 'w', bool $force = false): bool
+    bool write(string myData, string myMode = 'w', bool $force = false)
     {
         $success = false;
         if (this.open(myMode, $force) === true) {
@@ -230,7 +230,7 @@ class File {
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    function append(string myData, bool $force = false): bool
+    bool append(string myData, bool $force = false)
     {
         return this.write(myData, 'a', $force);
     }
@@ -240,7 +240,7 @@ class File {
      *
      * @return bool True if closing was successful or file was already closed, otherwise false
      */
-    function close(): bool
+    bool close()
     {
         if (!is_resource(this.handle)) {
             return true;
@@ -254,7 +254,7 @@ class File {
      *
      * @return bool Success
      */
-    function delete(): bool
+    bool delete()
     {
         this.close();
         this.handle = null;
@@ -409,7 +409,7 @@ class File {
      *
      * @return bool True if it exists, false otherwise
      */
-    function exists(): bool
+    bool exists()
     {
         this.clearStatCache();
 
@@ -447,7 +447,7 @@ class File {
      *
      * @return bool True if it's writable, false otherwise
      */
-    function writable(): bool
+    bool writable()
     {
         return is_writable(this.path);
     }
@@ -457,7 +457,7 @@ class File {
      *
      * @return bool True if it's executable, false otherwise
      */
-    function executable(): bool
+    bool executable()
     {
         return is_executable(this.path);
     }
@@ -467,7 +467,7 @@ class File {
      *
      * @return bool True if file is readable, false otherwise
      */
-    function readable(): bool
+    bool readable()
     {
         return is_readable(this.path);
     }
@@ -541,7 +541,7 @@ class File {
      * @param bool $overwrite Overwrite $dest if exists
      * @return bool Success
      */
-    function copy(string $dest, bool $overwrite = true): bool
+    bool copy(string $dest, bool $overwrite = true)
     {
         if (!this.exists() || is_file($dest) && !$overwrite) {
             return false;
@@ -600,7 +600,7 @@ class File {
      * @param array<string>|string $replace Text(s) to replace with.
      * @return bool Success
      */
-    function replaceText($search, $replace): bool
+    bool replaceText($search, $replace)
     {
         if (!this.open('r+')) {
             return false;

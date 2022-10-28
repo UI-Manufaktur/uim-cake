@@ -54,7 +54,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\Message\IResponse $response The response to emit.
      * @return bool
      */
-    function emit(IResponse $response): bool
+    bool emit(IResponse $response)
     {
         $file = '';
         $line = 0;
@@ -217,7 +217,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Cake\Http\Cookie\CookieInterface|string $cookie Cookie.
      * @return bool
      */
-    protected auto setCookie($cookie): bool
+    protected bool setCookie($cookie)
     {
         if (is_string($cookie)) {
             $cookie = Cookie::createFromHeaderString($cookie, ['path' => '']);

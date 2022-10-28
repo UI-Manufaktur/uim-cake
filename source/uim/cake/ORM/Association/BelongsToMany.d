@@ -175,7 +175,7 @@ class BelongsToMany : Association
      * @return bool if the 'matching' key in $option is true then this function
      * will return true, false otherwise
      */
-    function canBeJoined(array myOptions = []): bool
+    bool canBeJoined(array myOptions = [])
     {
         return !empty(myOptions['matching']);
     }
@@ -550,7 +550,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions The options for the original delete.
      * @return bool Success.
      */
-    function cascadeDelete(IEntity $entity, array myOptions = []): bool
+    bool cascadeDelete(IEntity $entity, array myOptions = [])
     {
         if (!this.getDependent()) {
             return true;
@@ -595,7 +595,7 @@ class BelongsToMany : Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
      */
-    function isOwningSide(Table $side): bool
+    bool isOwningSide(Table $side)
     {
         return true;
     }
@@ -751,7 +751,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions list of options accepted by `Table::save()`
      * @return bool success
      */
-    protected auto _saveLinks(IEntity $sourceEntity, array myTargetEntities, array myOptions): bool
+    protected bool _saveLinks(IEntity $sourceEntity, array myTargetEntities, array myOptions)
     {
         myTarget = this.getTarget();
         $junction = this.junction();
@@ -827,7 +827,7 @@ class BelongsToMany : Association
      *   detected to not be already persisted
      * @return bool true on success, false otherwise
      */
-    function link(IEntity $sourceEntity, array myTargetEntities, array myOptions = []): bool
+    bool link(IEntity $sourceEntity, array myTargetEntities, array myOptions = [])
     {
         this._checkPersistenceStatus($sourceEntity, myTargetEntities);
         $property = this.getProperty();
@@ -878,7 +878,7 @@ class BelongsToMany : Association
      *   any of them is lacking a primary key value.
      * @return bool Success
      */
-    function unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = []): bool
+    bool unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = [])
     {
         if (is_bool(myOptions)) {
             myOptions = [
@@ -1131,7 +1131,7 @@ class BelongsToMany : Association
      *   any of them is lacking a primary key value
      * @return bool success
      */
-    function replaceLinks(IEntity $sourceEntity, array myTargetEntities, array myOptions = []): bool
+    bool replaceLinks(IEntity $sourceEntity, array myTargetEntities, array myOptions = [])
     {
         $bindingKey = (array)this.getBindingKey();
         $primaryValue = $sourceEntity.extract($bindingKey);
@@ -1280,7 +1280,7 @@ class BelongsToMany : Association
      * @return bool
      * @throws \InvalidArgumentException
      */
-    protected auto _checkPersistenceStatus(IEntity $sourceEntity, array myTargetEntities): bool
+    protected bool _checkPersistenceStatus(IEntity $sourceEntity, array myTargetEntities)
     {
         if ($sourceEntity.isNew()) {
             myError = 'Source entity needs to be persisted before links can be created or removed.';

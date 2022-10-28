@@ -49,7 +49,7 @@ class BelongsTo : Association
      * @param array<string, mixed> myOptions The options for the original delete.
      * @return bool Success.
      */
-    function cascadeDelete(IEntity $entity, array myOptions = []): bool
+    bool cascadeDelete(IEntity $entity, array myOptions = [])
     {
         return true;
     }
@@ -74,7 +74,7 @@ class BelongsTo : Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
      */
-    function isOwningSide(Table $side): bool
+    bool isOwningSide(Table $side)
     {
         return $side === this.getTarget();
     }

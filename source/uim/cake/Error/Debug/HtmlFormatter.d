@@ -33,7 +33,7 @@ class HtmlFormatter : IFormatter
      *
      * @return bool
      */
-    static function environmentMatches(): bool
+    static bool environmentMatches()
     {
         if (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') {
             return false;

@@ -458,7 +458,7 @@ class ServerRequest : IServerRequest
      * @param mixed ...$args List of arguments
      * @return bool Whether the request is the type you are checking.
      */
-    function is(myType, ...$args): bool
+    bool is(myType, ...$args)
     {
         if (is_array(myType)) {
             foreach (myType as $_type) {
