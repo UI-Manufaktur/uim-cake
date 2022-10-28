@@ -232,8 +232,7 @@ class ServerRequest : IServerRequest
      * @param array<string, mixed> myConfig The config data to use.
      * @return void
      */
-    protected void _setConfig(array myConfig)
-    {
+    protected void _setConfig(array myConfig) {
         if (empty(myConfig['session'])) {
             myConfig['session'] = new Session([
                 'cookiePath' => myConfig['base'],
@@ -382,8 +381,7 @@ class ServerRequest : IServerRequest
      * @param array<string> $proxies ips list of trusted proxies
      * @return void
      */
-    void setTrustedProxies(array $proxies)
-    {
+    void setTrustedProxies(array $proxies) {
         this.trustedProxies = $proxies;
         this.trustProxy = true;
     }
@@ -486,8 +484,7 @@ class ServerRequest : IServerRequest
     /**
      * Clears the instance detector cache, used by the is() function
      */
-    void clearDetectorCache()
-    {
+    void clearDetectorCache() {
         this._detectorCache = [];
     }
 
@@ -706,8 +703,7 @@ class ServerRequest : IServerRequest
      * @param callable|array $detector A callable or options array for the detector definition.
      * @return void
      */
-    static void addDetector(string myName, $detector)
-    {
+    static void addDetector(string myName, $detector) {
         myName = strtolower(myName);
         if (is_callable($detector)) {
             static::$_detectors[myName] = $detector;
@@ -1680,8 +1676,7 @@ class ServerRequest : IServerRequest
      * @return void
      * @throws \InvalidArgumentException If any leaf elements are not valid files.
      */
-    protected void validateUploadedFiles(array $uploadedFiles, string myPath)
-    {
+    protected void validateUploadedFiles(array $uploadedFiles, string myPath) {
         foreach ($uploadedFiles as myKey => $file) {
             if (is_array($file)) {
                 this.validateUploadedFiles($file, myKey . '.');

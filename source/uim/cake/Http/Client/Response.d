@@ -170,8 +170,7 @@ class Response : Message : IResponse
      * @param array $headers Headers to parse.
      * @return void
      */
-    protected void _parseHeaders(array $headers)
-    {
+    protected void _parseHeaders(array $headers) {
         foreach ($headers as myValue) {
             if (substr(myValue, 0, 5) === 'HTTP/') {
                 preg_match('/HTTP\/([\d.]+) ([0-9]+)(.*)/i', myValue, $matches);
@@ -353,8 +352,7 @@ class Response : Message : IResponse
      *
      * @return void
      */
-    protected void buildCookieCollection()
-    {
+    protected void buildCookieCollection() {
         if (this.cookies !== null) {
             return;
         }

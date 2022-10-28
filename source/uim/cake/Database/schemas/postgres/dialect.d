@@ -332,8 +332,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    protected string _convertOnClause(string $clause)
-    {
+    protected string _convertOnClause(string $clause) {
         if ($clause === 'r') {
             return TableSchema::ACTION_RESTRICT;
         }
@@ -348,8 +347,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    string columnSql(TableSchema $schema, string myName)
-    {
+    string columnSql(TableSchema $schema, string myName) {
         /** @var array myData */
         myData = $schema.getColumn(myName);
 
@@ -510,8 +508,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    string indexSql(TableSchema $schema, string myName)
-    {
+    string indexSql(TableSchema $schema, string myName) {
         /** @var array myData */
         myData = $schema.getIndex(myName);
         $columns = array_map(
@@ -528,8 +525,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    string constraintSql(TableSchema $schema, string myName)
-    {
+    string constraintSql(TableSchema $schema, string myName) {
         /** @var array<string, mixed> myData */
         myData = $schema.getConstraint(myName);
         $out = 'CONSTRAINT ' . this._driver.quoteIdentifier(myName);
@@ -550,8 +546,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param array<string, mixed> myData Key data.
      * @return string
      */
-    protected string _keySql(string $prefix, array myData)
-    {
+    protected string _keySql(string $prefix, array myData) {
         $columns = array_map(
             [this._driver, 'quoteIdentifier'],
             myData['columns']

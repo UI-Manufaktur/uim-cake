@@ -198,18 +198,15 @@ class Mysql : Driver
     }
 
 
-    string schema()
-    {
+    string schema() {
         return this._config['database'];
     }
 
-    string disableForeignKeySQL()
-    {
+    string disableForeignKeySQL() {
         return 'SET foreign_key_checks = 0';
     }
 
-    string enableForeignKeySQL()
-    {
+    string enableForeignKeySQL() {
         return 'SET foreign_key_checks = 1';
     }
 
@@ -246,8 +243,7 @@ class Mysql : Driver
      *
      * @return string
      */
-    string version()
-    {
+    string version() {
         if (this._version === null) {
             this.connect();
             this._version = (string)this._connection.getAttribute(PDO::ATTR_SERVER_VERSION);

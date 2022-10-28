@@ -28,8 +28,7 @@ class TupleComparison : ComparisonExpression
      * one type per position in the value array in needed
      * @param string $conjunction the operator used for comparing field and value
      */
-    this(myFields, myValues, array myTypes = [], string $conjunction = '=')
-    {
+    this(myFields, myValues, array myTypes = [], string $conjunction = '=') {
         this._type = myTypes;
         this.setField(myFields);
         this._operator = $conjunction;
@@ -151,8 +150,7 @@ class TupleComparison : ComparisonExpression
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         /** @var array<string> myFields */
         myFields = this.getField();
         foreach (myFields as myField) {
@@ -199,8 +197,7 @@ class TupleComparison : ComparisonExpression
     /**
      * Determines if each of the values in this expressions is a tuple in
      * itself
-    bool isMulti()
-    {
+    bool isMulti() {
         return in_array(strtolower(this._operator), ['in', 'not in']);
     }
 }

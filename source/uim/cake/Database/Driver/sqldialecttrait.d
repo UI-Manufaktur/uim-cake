@@ -20,8 +20,7 @@ trait SqlDialectTrait
      *
      * @param string myIdentifier The identifier to quote.
      */
-    string quoteIdentifier(string myIdentifier)
-    {
+    string quoteIdentifier(string myIdentifier) {
         myIdentifier = trim(myIdentifier);
 
         if (myIdentifier === '*' || myIdentifier === '') {
@@ -261,8 +260,7 @@ trait SqlDialectTrait
      *
      * @param string|int myName save point name
      */
-    string savePointSQL(myName)
-    {
+    string savePointSQL(myName) {
         return 'SAVEPOINT LEVEL' . myName;
     }
 
@@ -271,8 +269,7 @@ trait SqlDialectTrait
      *
      * @param string|int myName save point name
      */
-    string releaseSavePointSQL(myName)
-    {
+    string releaseSavePointSQL(myName) {
         return 'RELEASE SAVEPOINT LEVEL' . myName;
     }
 
@@ -281,8 +278,7 @@ trait SqlDialectTrait
      *
      * @param string|int myName save point name
      */
-    string rollbackSavePointSQL(myName)
-    {
+    string rollbackSavePointSQL(myName) {
         return 'ROLLBACK TO SAVEPOINT LEVEL' . myName;
     }
 }

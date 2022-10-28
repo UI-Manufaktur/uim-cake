@@ -23,8 +23,7 @@ class FactoryLocator
      * @param \Cake\Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      * @return void
      */
-    static void add(string myType, $factory)
-    {
+    static void add(string myType, $factory) {
         if (!$factory instanceof ILocator && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
                 '`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable.'
@@ -42,8 +41,7 @@ class FactoryLocator
      * @param string myType The name of the repository type to drop the factory for.
      * @return void
      */
-    static void drop(string myType)
-    {
+    static void drop(string myType) {
         unset(static::$_modelFactories[myType]);
     }
 

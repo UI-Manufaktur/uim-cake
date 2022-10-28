@@ -153,14 +153,12 @@ abstract class BaseApplication :
     }
 
 
-    void bootstrap()
-    {
+    void bootstrap() {
         require_once this.configDir . 'bootstrap.php';
     }
 
 
-    void pluginBootstrap()
-    {
+    void pluginBootstrap() {
         foreach (this.plugins.with('bootstrap') as myPlugin) {
             myPlugin.bootstrap(this);
         }
@@ -174,8 +172,7 @@ abstract class BaseApplication :
      * @param \Cake\Routing\RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
-    void routes(RouteBuilder $routes)
-    {
+    void routes(RouteBuilder $routes) {
         // Only load routes if the router is empty
         if (!Router::routes()) {
             $return = require this.configDir . 'routes.php';
@@ -266,8 +263,7 @@ abstract class BaseApplication :
      * @param \Cake\Core\IContainer myContainer The Container to update.
      * @return void
      */
-    void services(IContainer myContainer)
-    {
+    void services(IContainer myContainer) {
     }
 
     /**

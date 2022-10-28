@@ -33,8 +33,7 @@ class ValueBinder
      * to database
      * @return void
      */
-    void bind($param, myValue, myType = null)
-    {
+    void bind($param, myValue, myType = null) {
         this._bindings[$param] = compact('value', 'type') + [
             'placeholder' => is_int($param) ? $param : substr($param, 1),
         ];
@@ -97,8 +96,7 @@ class ValueBinder
     /**
      * Clears any bindings that were previously registered
      */
-    void reset()
-    {
+    void reset() {
         this._bindings = [];
         this._bindingsCount = 0;
     }
@@ -106,8 +104,7 @@ class ValueBinder
     /**
      * Resets the bindings count without clearing previously bound values
      */
-    void resetCount()
-    {
+    void resetCount() {
         this._bindingsCount = 0;
     }
 
@@ -117,8 +114,7 @@ class ValueBinder
      * @param \Cake\Database\IStatement $statement The statement to add parameters to.
      * @return void
      */
-    void attachTo(IStatement $statement)
-    {
+    void attachTo(IStatement $statement) {
         $bindings = this.bindings();
         if (empty($bindings)) {
             return;

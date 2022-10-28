@@ -18,8 +18,7 @@ class EventList : ArrayAccess, Countable
     /**
      * Empties the list of dispatched events.
      */
-    void flush()
-    {
+    void flush() {
         this._events = [];
     }
 
@@ -29,8 +28,7 @@ class EventList : ArrayAccess, Countable
      * @param \Cake\Event\IEvent myEvent An event to the list of dispatched events.
      * @return void
      */
-    void add(IEvent myEvent)
-    {
+    void add(IEvent myEvent) {
         this._events[] = myEvent;
     }
 
@@ -69,8 +67,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed myValue The value to set.
      * @return void
      */
-    void offsetSet($offset, myValue)
-    {
+    void offsetSet($offset, myValue) {
         this._events[$offset] = myValue;
     }
 
@@ -81,8 +78,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed $offset The offset to unset.
      * @return void
      */
-    void offsetUnset($offset)
-    {
+    void offsetUnset($offset) {
         unset(this._events[$offset]);
     }
 

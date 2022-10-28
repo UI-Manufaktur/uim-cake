@@ -17,8 +17,7 @@ use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
  */
 class CallbackStream : BaseCallbackStream
 {
-    string getContents()
-    {
+    string getContents() {
         $callback = this.detach();
         myResult = '';
         /** @psalm-suppress TypeDoesNotContainType */
