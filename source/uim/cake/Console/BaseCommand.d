@@ -49,7 +49,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    auto getRootName(): string
+    string getRootName()
     {
         [$root] = explode(' ', this.name);
 
@@ -115,11 +115,8 @@ abstract class BaseCommand : ICommand
      * Override this method and implement expensive/important setup steps that
      * should not run on every command run. This method will be called *before*
      * the options and arguments are validated and processed.
-     *
-     * @return void
      */
-    void initialize()
-    {
+    override void initialize() {
     }
 
 

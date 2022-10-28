@@ -1,6 +1,6 @@
-module uim.cake.View;
+module uim.cake.views;
 
-import uim.cake.View\Exception\SerializationFailureException;
+import uim.cake.views\Exception\SerializationFailureException;
 use Exception;
 use TypeError;
 
@@ -33,10 +33,9 @@ abstract class SerializedView : View
     ];
 
 
-    function initialize(): void
-    {
-        super.initialize();
-        this.setResponse(this.getResponse().withType(this._responseType));
+    override void initialize() {
+      super.initialize();
+      this.setResponse(this.getResponse().withType(this._responseType));
     }
 
     /**
@@ -59,7 +58,7 @@ abstract class SerializedView : View
      *   need(s) to be serialized
      * @return string The serialized data.
      */
-    abstract protected auto _serialize($serialize): string;
+    abstract protected string _serialize($serialize);
 
     /**
      * Render view template or return serialized data.
@@ -69,7 +68,7 @@ abstract class SerializedView : View
      * @return string The rendered view.
      * @throws \Cake\View\Exception\SerializationFailureException When serialization fails.
      */
-    function render(?string myTemplate = null, $layout = null): string
+    string render(?string myTemplate = null, $layout = null)
     {
         $serialize = this.getConfig('serialize', false);
 

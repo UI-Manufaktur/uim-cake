@@ -227,11 +227,8 @@ class Controller : IEventListener, IEventDispatcher
      *
      * Implement this method to avoid having to overwrite
      * the constructor and call parent.
-     *
-     * @return void
      */
-    void initialize()
-    {
+    override void initialize() {
     }
 
     /**
@@ -741,8 +738,6 @@ class Controller : IEventListener, IEventDispatcher
 
     /**
      * Get the templatePath based on controller name and request prefix.
-     *
-     * @return string
      */
     protected string _templatePath()
     {

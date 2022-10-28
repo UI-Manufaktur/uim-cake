@@ -198,23 +198,20 @@ class Mysql : Driver
     }
 
 
-    function schema(): string
+    string schema()
     {
         return this._config['database'];
     }
 
-
-    function disableForeignKeySQL(): string
+    string disableForeignKeySQL()
     {
         return 'SET foreign_key_checks = 0';
     }
 
-
-    function enableForeignKeySQL(): string
+    string enableForeignKeySQL()
     {
         return 'SET foreign_key_checks = 1';
     }
-
 
     bool supports(string $feature) {
         switch ($feature) {
@@ -249,7 +246,7 @@ class Mysql : Driver
      *
      * @return string
      */
-    function version(): string
+    string version()
     {
         if (this._version === null) {
             this.connect();
