@@ -284,8 +284,7 @@ class ConsoleOptionParser
      *
      * @return string The value of the command.
      */
-    string getCommand()
-    {
+    string getCommand() {
         return this._command;
     }
 
@@ -310,8 +309,7 @@ class ConsoleOptionParser
      *
      * @return string The value of the description
      */
-    string getDescription()
-    {
+    string getDescription() {
         return this._description;
     }
 
@@ -337,8 +335,7 @@ class ConsoleOptionParser
      *
      * @return string The value of the epilog.
      */
-    string getEpilog()
-    {
+    string getEpilog() {
         return this._epilog;
     }
 
@@ -706,8 +703,7 @@ class ConsoleOptionParser
      * @param int $width The width to format user content to. Defaults to 72
      * @return string Generated help.
      */
-    function help(?string $subcommand = null, string $format = 'text', int $width = 72)
-    {
+    function help(?string $subcommand = null, string $format = 'text', int $width = 72) {
         if ($subcommand === null) {
             $formatter = new HelpFormatter(this);
             $formatter.setAlias(this.rootName);
@@ -917,8 +913,7 @@ class ConsoleOptionParser
      *
      * @return string next token or ''
      */
-    protected string _nextToken()
-    {
+    protected string _nextToken() {
         return this._tokens[0] ?? '';
     }
 }

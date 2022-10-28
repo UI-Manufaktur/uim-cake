@@ -149,8 +149,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      * @param array<string> myNames Names
      * @return string
      */
-    protected string getShortestName(array myNames)
-    {
+    protected string getShortestName(array myNames) {
         if (count(myNames) <= 1) {
             return array_shift(myNames);
         }

@@ -13,8 +13,7 @@ trait ConventionsTrait
      * @param string myName Model class name
      * @return string Singular model key
      */
-    protected string _fixtureName(string myName)
-    {
+    protected string _fixtureName(string myName) {
         return Inflector::camelize(myName);
     }
 
@@ -24,8 +23,7 @@ trait ConventionsTrait
      * @param string myName Name
      * @return string Camelized and plural model name
      */
-    protected string _entityName(string myName)
-    {
+    protected string _entityName(string myName) {
         return Inflector::singularize(Inflector::camelize(myName));
     }
 
@@ -37,8 +35,7 @@ trait ConventionsTrait
      * @param string myName Model class name
      * @return string Singular model key
      */
-    protected string _modelKey(string myName)
-    {
+    protected string _modelKey(string myName) {
         [, myName] = pluginSplit(myName);
 
         return Inflector::underscore(Inflector::singularize(myName)) . '_id';
@@ -50,8 +47,7 @@ trait ConventionsTrait
      * @param string myKey Foreign key
      * @return string Model name
      */
-    protected string _modelNameFromKey(string myKey)
-    {
+    protected string _modelNameFromKey(string myKey) {
         myKey = str_replace('_id', '', myKey);
 
         return Inflector::camelize(Inflector::pluralize(myKey));
@@ -63,8 +59,7 @@ trait ConventionsTrait
      * @param string myName Name to use
      * @return string Variable name
      */
-    protected string _singularName(string myName)
-    {
+    protected string _singularName(string myName) {
         return Inflector::variable(Inflector::singularize(myName));
     }
 
@@ -74,8 +69,7 @@ trait ConventionsTrait
      * @param string myName Name to use
      * @return string Plural name for views
      */
-    protected string _variableName(string myName)
-    {
+    protected string _variableName(string myName) {
         return Inflector::variable(myName);
     }
 
@@ -85,8 +79,7 @@ trait ConventionsTrait
      * @param string myName Controller name
      * @return string Singular human name
      */
-    protected string _singularHumanName(string myName)
-    {
+    protected string _singularHumanName(string myName) {
         return Inflector::humanize(Inflector::underscore(Inflector::singularize(myName)));
     }
 
@@ -96,8 +89,7 @@ trait ConventionsTrait
      * @param string myName name
      * @return string Camelized name
      */
-    protected string _camelize(string myName)
-    {
+    protected string _camelize(string myName) {
         return Inflector::camelize(myName);
     }
 
@@ -107,8 +99,7 @@ trait ConventionsTrait
      * @param string myName Controller name
      * @return string Plural human name
      */
-    protected string _pluralHumanName(string myName)
-    {
+    protected string _pluralHumanName(string myName) {
         return Inflector::humanize(Inflector::underscore(myName));
     }
 
@@ -118,8 +109,7 @@ trait ConventionsTrait
      * @param string myPluginName Name of the plugin you want ie. DebugKit
      * @return string path path to the correct plugin.
      */
-    protected string _pluginPath(string myPluginName)
-    {
+    protected string _pluginPath(string myPluginName) {
         if (Plugin::isLoaded(myPluginName)) {
             return Plugin::path(myPluginName);
         }
@@ -133,8 +123,7 @@ trait ConventionsTrait
      * @param string myPluginName Plugin name
      * @return string Plugin's module
      */
-    protected string _pluginmodule(string myPluginName)
-    {
+    protected string _pluginmodule(string myPluginName) {
         return str_replace('/', '\\', myPluginName);
     }
 }

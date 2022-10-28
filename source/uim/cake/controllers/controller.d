@@ -320,8 +320,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param mixed myValue Value to set.
      * @return void
      */
-    void __set(string propertyName, myValue)
-    {
+    void __set(string propertyName, myValue) {
         if (propertyName === 'components') {
             triggerWarning(
                 'Support for loading components using $components property is removed. ' .
@@ -349,8 +348,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return string
 
      */
-    string getName()
-    {
+    string getName() {
         return this.name;
     }
 
@@ -507,8 +505,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return void
      * @throws \UnexpectedValueException If return value of action is not `null` or `IResponse` instance.
      */
-    void invokeAction(Closure $action, array $args)
-    {
+    void invokeAction(Closure $action, array $args) {
         myResult = $action(...$args);
         if (myResult !== null && !myResult instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
@@ -739,8 +736,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Get the templatePath based on controller name and request prefix.
      */
-    protected string _templatePath()
-    {
+    protected string _templatePath() {
         myTemplatePath = this.name;
         if (this.request.getParam('prefix')) {
             $prefixes = array_map(
@@ -761,8 +757,7 @@ class Controller : IEventListener, IEventDispatcher
      *   Careful with trusting external sources.
      * @return string Referring URL
      */
-    string referer($default = '/', bool $local = true)
-    {
+    string referer($default = '/', bool $local = true) {
         $referer = this.request.referer($local);
         if ($referer === null) {
             myUrl = Router::url($default, !$local);

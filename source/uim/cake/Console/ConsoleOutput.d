@@ -192,8 +192,7 @@ class ConsoleOutput
      * @param string $text Text with styling tags.
      * @return string String with color codes added.
      */
-    string styleText(string $text)
-    {
+    string styleText(string $text) {
         if (this._outputAs === static::RAW) {
             return $text;
         }
@@ -216,8 +215,7 @@ class ConsoleOutput
      * @param array<string, string> $matches An array of matches to replace.
      * @return string
      */
-    protected string _replaceTags(array $matches)
-    {
+    protected string _replaceTags(array $matches) {
         $style = this.getStyle($matches['tag']);
         if (empty($style)) {
             return '<' . $matches['tag'] . '>' . $matches['text'] . '</' . $matches['tag'] . '>';
@@ -281,8 +279,7 @@ class ConsoleOutput
      * @param array $definition The array definition of the style to change or create..
      * @return void
      */
-    void setStyle(string $style, array $definition)
-    {
+    void setStyle(string $style, array $definition) {
         if (!$definition) {
             unset(static::$_styles[$style]);
 
@@ -319,8 +316,7 @@ class ConsoleOutput
      * @return void
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
-    void setOutputAs(int myType)
-    {
+    void setOutputAs(int myType) {
         if (!in_array(myType, [self::RAW, self::PLAIN, self::COLOR], true)) {
             throw new InvalidArgumentException(sprintf('Invalid output type "%s".', myType));
         }

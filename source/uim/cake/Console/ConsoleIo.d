@@ -116,8 +116,7 @@ class ConsoleIo
      * @param bool myValue Value
      * @return void
      */
-    void setInteractive(bool myValue)
-    {
+    void setInteractive(bool myValue) {
         this.interactive = myValue;
     }
 
@@ -127,8 +126,7 @@ class ConsoleIo
      * @param int|null $level The current output level.
      * @return int The current output level.
      */
-    function level(?int $level = null): int
-    {
+    int level(?int $level = null) {
         if ($level !== null) {
             this._level = $level;
         }
@@ -234,8 +232,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    function warning(myMessage, int $newlines = 1): int
-    {
+    int warning(myMessage, int $newlines = 1) {
         myMessageType = 'warning';
         myMessage = this.wrapMessageWithType(myMessageType, myMessage);
 
@@ -250,8 +247,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    function error(myMessage, int $newlines = 1): int
-    {
+    int error(myMessage, int $newlines = 1) {
         myMessageType = 'error';
         myMessage = this.wrapMessageWithType(myMessageType, myMessage);
 
@@ -284,8 +280,7 @@ class ConsoleIo
      * @return void
      * @throws \Cake\Console\Exception\StopException
      */
-    void abort(myMessage, $code = ICommand::CODE_ERROR)
-    {
+    void abort(myMessage, $code = ICommand::CODE_ERROR) {
         this.error(myMessage);
 
         throw new StopException(myMessage, $code);
@@ -324,8 +319,7 @@ class ConsoleIo
      *    length of the last message output.
      * @return void
      */
-    void overwrite(myMessage, int $newlines = 1, ?int $size = null)
-    {
+    void overwrite(myMessage, int $newlines = 1, ?int $size = null) {
         $size = $size ?: this._lastWritten;
 
         // Output backspaces.
@@ -358,7 +352,7 @@ class ConsoleIo
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    function err(myMessage = '', int $newlines = 1): int
+    int err(myMessage = '', int $newlines = 1): int
     {
         return this._err.write(myMessage, $newlines);
     }
@@ -368,8 +362,7 @@ class ConsoleIo
      *
      * @param int $multiplier Number of times the linefeed sequence should be repeated
      */
-    string nl(int $multiplier = 1)
-    {
+    string nl(int $multiplier = 1) {
         return str_repeat(ConsoleOutput::LF, $multiplier);
     }
 
@@ -380,8 +373,7 @@ class ConsoleIo
      * @param int $width Width of the line, defaults to 79
      * @return void
      */
-    void hr(int $newlines = 0, int $width = 79)
-    {
+    void hr(int $newlines = 0, int $width = 79) {
         this.out('', $newlines);
         this.out(str_repeat('-', $width));
         this.out('', $newlines);
@@ -394,8 +386,7 @@ class ConsoleIo
      * @param string|null $default Default input value.
      * @return string Either the default value, or the user-provided input.
      */
-    string ask(string $prompt, ?string $default = null)
-    {
+    string ask(string $prompt, ?string $default = null) {
         return this._getInput($prompt, null, $default);
     }
 
@@ -406,8 +397,7 @@ class ConsoleIo
      * @return void
      * @see \Cake\Console\ConsoleOutput::setOutputAs()
      */
-    void setOutputAs(int myMode)
-    {
+    void setOutputAs(int myMode) {
         this._out.setOutputAs(myMode);
     }
 
@@ -442,8 +432,7 @@ class ConsoleIo
      * @return void
      * @see \Cake\Console\ConsoleOutput::setStyle()
      */
-    void setStyle(string $style, array $definition)
-    {
+    void setStyle(string $style, array $definition) {
         this._out.setStyle($style, $definition);
     }
 
@@ -455,8 +444,7 @@ class ConsoleIo
      * @param string|null $default Default input value.
      * @return string Either the default value, or the user-provided input.
      */
-    string askChoice(string $prompt, myOptions, ?string $default = null)
-    {
+    string askChoice(string $prompt, myOptions, ?string $default = null) {
         if (is_string(myOptions)) {
             if (strpos(myOptions, ',')) {
                 myOptions = explode(',', myOptions);
@@ -489,8 +477,7 @@ class ConsoleIo
      * @param string|null $default Default input value. Pass null to omit.
      * @return string Either the default value, or the user-provided input.
      */
-    protected string _getInput(string $prompt, ?string myOptions, ?string $default)
-    {
+    protected string _getInput(string $prompt, ?string myOptions, ?string $default) {
         if (!this.interactive) {
             return (string)$default;
         }
@@ -528,8 +515,7 @@ class ConsoleIo
      *   QUIET disables notice, info and debug logs.
      * @return void
      */
-    void setLoggers(myEnable)
-    {
+    void setLoggers(myEnable) {
         Log::drop('stdout');
         Log::drop('stderr');
         if (myEnable === false) {

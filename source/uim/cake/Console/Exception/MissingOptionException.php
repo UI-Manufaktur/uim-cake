@@ -45,8 +45,7 @@ class MissingOptionException : ConsoleException
     /**
      * Get the message with suggestions
      */
-    string getFullMessage()
-    {
+    string getFullMessage() {
         $out = this.getMessage();
         $bestGuess = this.findClosestItem(this.requested, this.suggestions);
         if ($bestGuess) {

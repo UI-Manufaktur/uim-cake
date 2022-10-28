@@ -98,8 +98,7 @@ class App {
      * @param string aClassNameSuffix Class name suffix
      * @return string Plugin split name of class
      */
-    static string shortName(string aClassName, string aClassType, string aClassNameSuffix = '')
-    {
+    static string shortName(string aClassName, string aClassType, string aClassNameSuffix = '') {
         aClassName = str_replace('\\', '/', aClassName);
         aClassType = '/' . aClassType . '/';
 

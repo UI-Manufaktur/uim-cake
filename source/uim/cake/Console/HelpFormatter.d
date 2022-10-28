@@ -57,8 +57,7 @@ class HelpFormatter
      * @param string myAlias The alias
      * @return void
      */
-    void setAlias(string myAlias)
-    {
+    void setAlias(string myAlias) {
         this._alias = myAlias;
     }
 
@@ -67,8 +66,7 @@ class HelpFormatter
      *
      * @param int $width The width of the help output.
      */
-    string text(int $width = 72)
-    {
+    string text(int $width = 72) {
         $parser = this._parser;
         $out = [];
         $description = $parser.getDescription();
@@ -142,8 +140,7 @@ class HelpFormatter
      * Usage strings favor short options over the long ones. and optional args will
      * be indicated with []
      */
-    protected string _generateUsage()
-    {
+    protected string _generateUsage() {
         $usage = [this._alias . ' ' . this._parser.getCommand()];
         $subcommands = this._parser.subcommands();
         if (!empty($subcommands)) {

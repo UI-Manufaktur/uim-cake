@@ -241,8 +241,7 @@ class SecurityComponent : Component
      * @throws \Cake\Controller\Exception\SecurityException
      * @return string fields token
      */
-    protected string _validToken(Controller $controller)
-    {
+    protected string _validToken(Controller $controller) {
         $check = $controller.getRequest().getData();
 
         myMessage = '\'%s\' was not found in request data.';
@@ -377,8 +376,7 @@ class SecurityComponent : Component
      * @param array myData Data array
      * @return string
      */
-    protected string _unlocked(array myData)
-    {
+    protected string _unlocked(array myData) {
         return urldecode(myData['_Token']['unlocked']);
     }
 
@@ -388,8 +386,7 @@ class SecurityComponent : Component
      * @param array myData Data array
      * @return string
      */
-    protected string _sortedUnlocked(array myData)
-    {
+    protected string _sortedUnlocked(array myData) {
         $unlocked = this._unlocked(myData);
         $unlocked = explode('|', $unlocked);
         sort($unlocked, SORT_STRING);
@@ -404,8 +401,7 @@ class SecurityComponent : Component
      * @param array<string> $hashParts Elements used to generate the Token hash
      * @return string Message explaining why the tokens are not matching
      */
-    protected string _debugPostTokenNotMatching(Controller $controller, array $hashParts)
-    {
+    protected string _debugPostTokenNotMatching(Controller $controller, array $hashParts) {
         myMessages = [];
         $expectedParts = json_decode(urldecode($controller.getRequest().getData('_Token.debug')), true);
         if (!is_array($expectedParts) || count($expectedParts) !== 3) {
