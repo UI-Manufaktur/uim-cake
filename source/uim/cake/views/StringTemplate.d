@@ -102,8 +102,7 @@ class StringTemplate {
      *
      * @return void
      */
-    void push()
-    {
+    void push() {
         this._configStack[] = [
             this._config,
             this._compiled,
@@ -115,8 +114,7 @@ class StringTemplate {
      *
      * @return void
      */
-    void pop()
-    {
+    void pop() {
         if (empty(this._configStack)) {
             return;
         }
@@ -151,8 +149,7 @@ class StringTemplate {
      * @param array<string> myTemplates The template names to compile. If empty all templates will be compiled.
      * @return void
      */
-    protected void _compileTemplates(array myTemplates = [])
-    {
+    protected void _compileTemplates(array myTemplates = []) {
         if (empty(myTemplates)) {
             myTemplates = array_keys(this._config);
         }
@@ -181,8 +178,7 @@ class StringTemplate {
      * @param string $file The file to load
      * @return void
      */
-    void load(string $file)
-    {
+    void load(string $file) {
         if ($file === '') {
             throw new CakeException('String template filename cannot be an empty string');
         }
@@ -198,8 +194,7 @@ class StringTemplate {
      * @param string myName The template to remove.
      * @return void
      */
-    void remove(string myName)
-    {
+    void remove(string myName) {
         this.setConfig(myName, null);
         unset(this._compiled[myName]);
     }

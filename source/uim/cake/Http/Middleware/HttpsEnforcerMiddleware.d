@@ -48,8 +48,7 @@ class HttpsEnforcerMiddleware : MiddlewareInterface
      * @param array<string, mixed> myConfig The options to use.
      * @see \Cake\Http\Middleware\HttpsEnforcerMiddleware::myConfig
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.config = myConfig + this.config;
     }
 

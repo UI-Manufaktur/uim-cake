@@ -40,8 +40,7 @@ class DoublePassDecoratorMiddleware : MiddlewareInterface
      *
      * @param callable $callable A closure.
      */
-    this(callable $callable)
-    {
+    this(callable $callable) {
         deprecationWarning(
             '"Double pass" middleware are deprecated. Use a `Closure` with the signature of'
             . ' `(myRequest, $handler)` or a class which : `Psr\Http\Server\MiddlewareInterface` instead.',

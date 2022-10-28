@@ -74,8 +74,7 @@ class SessionCsrfProtectionMiddleware : MiddlewareInterface
      *
      * @param array<string, mixed> myConfig Config options. See $_config for valid keys.
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this._config = myConfig + this._config;
     }
 
@@ -135,8 +134,7 @@ class SessionCsrfProtectionMiddleware : MiddlewareInterface
      * @param callable $callback A callable.
      * @return this
      */
-    function skipCheckCallback(callable $callback)
-    {
+    function skipCheckCallback(callable $callback) {
         this.skipCheckCallback = $callback;
 
         return this;

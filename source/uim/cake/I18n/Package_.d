@@ -124,8 +124,7 @@ class Package
      *
      * @return string
      */
-    string getFormatter()
-    {
+    string getFormatter() {
         return this.formatter;
     }
 

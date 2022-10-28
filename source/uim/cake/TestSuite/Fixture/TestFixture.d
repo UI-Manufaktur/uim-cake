@@ -112,14 +112,12 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    string connection()
-    {
+    string connection() {
         return this.connection;
     }
 
 
-    string sourceName()
-    {
+    string sourceName() {
         return this.table;
     }
 
@@ -151,8 +149,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * Returns the table name using the fixture class
      */
-    protected string _tableFromClass()
-    {
+    protected string _tableFromClass() {
         [, myClass] = moduleSplit(static::class);
         preg_match('/^(.*)Fixture$/', myClass, $matches);
         myTable = $matches[1] ?? myClass;

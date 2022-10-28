@@ -122,8 +122,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      *     'origin-when-cross-origin', 'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', 'unsafe-url'
      * @return this
      */
-    auto setReferrerPolicy(string $policy = self::SAME_ORIGIN)
-    {
+    auto setReferrerPolicy(string $policy = self::SAME_ORIGIN) {
         $available = [
             self::NO_REFERRER,
             self::NO_REFERRER_WHEN_DOWNGRADE,
@@ -149,8 +148,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      * @param string|null myUrl URL if mode is `allow-from`
      * @return this
      */
-    auto setXFrameOptions(string $option = self::SAMEORIGIN, ?string myUrl = null)
-    {
+    auto setXFrameOptions(string $option = self::SAMEORIGIN, ?string myUrl = null) {
         this.checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
         if ($option === self::ALLOW_FROM) {
@@ -172,8 +170,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      * @param string myMode Mode value. Available Values: '1', '0', 'block'
      * @return this
      */
-    auto setXssProtection(string myMode = self::XSS_BLOCK)
-    {
+    auto setXssProtection(string myMode = self::XSS_BLOCK) {
         if (myMode === self::XSS_BLOCK) {
             myMode = self::XSS_ENABLED_BLOCK;
         }
@@ -192,8 +189,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      *     'by-ftp-filename'
      * @return this
      */
-    auto setCrossDomainPolicy(string $policy = self::ALL)
-    {
+    auto setCrossDomainPolicy(string $policy = self::ALL) {
         this.checkValues($policy, [
             self::ALL,
             self::NONE,

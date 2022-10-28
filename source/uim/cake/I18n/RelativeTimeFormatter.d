@@ -81,8 +81,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @return string Relative time string.
      * @see \Cake\I18n\Time::timeAgoInWords()
      */
-    string timeAgoInWords(I18nIDateTime $time, array myOptions = [])
-    {
+    string timeAgoInWords(I18nIDateTime $time, array myOptions = []) {
         myOptions = this._options(myOptions, FrozenTime::class);
         if (myOptions['timezone']) {
             $time = $time.timezone(myOptions['timezone']);
@@ -303,8 +302,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @return string Relative date string.
      * @see \Cake\I18n\Date::timeAgoInWords()
      */
-    string dateAgoInWords(I18nIDateTime $date, array myOptions = [])
-    {
+    string dateAgoInWords(I18nIDateTime $date, array myOptions = []) {
         myOptions = this._options(myOptions, FrozenDate::class);
         if (myOptions['timezone']) {
             $date = $date.timezone(myOptions['timezone']);

@@ -473,8 +473,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param array<string, array> $associations The nested tree of associations to walk.
      * @return void
      */
-    protected void _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations)
-    {
+    protected void _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations) {
         foreach ($associations as myName => $nested) {
             if (!myTable.hasAssociation(myName)) {
                 continue;
@@ -1066,8 +1065,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * Will not trigger more than once, and only for select queries.
      */
-    void triggerBeforeFind()
-    {
+    void triggerBeforeFind() {
         if (!this._beforeFindFired && this._type === 'select') {
             this._beforeFindFired = true;
 
@@ -1081,8 +1079,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     }
 
 
-    string sql(?ValueBinder $binder = null)
-    {
+    string sql(?ValueBinder $binder = null) {
         this.triggerBeforeFind();
 
         this._transformQuery();
@@ -1123,8 +1120,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @see \Cake\Database\Query::execute()
      * @return void
      */
-    protected void _transformQuery()
-    {
+    protected void _transformQuery() {
         if (!this._dirty || this._type !== 'select') {
             return;
         }
@@ -1145,8 +1141,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return void
      */
-    protected void _addDefaultFields()
-    {
+    protected void _addDefaultFields() {
         $select = this.clause('select');
         this._hasFields = true;
 
@@ -1169,8 +1164,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return void
      */
-    protected void _addDefaultSelectTypes()
-    {
+    protected void _addDefaultSelectTypes() {
         myTypeMap = this.getTypeMap().getDefaults();
         $select = this.clause('select');
         myTypes = [];
@@ -1212,8 +1206,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return void
      */
-    protected void _dirty()
-    {
+    protected void _dirty() {
         this._results = null;
         this._resultsCount = null;
         super._dirty();

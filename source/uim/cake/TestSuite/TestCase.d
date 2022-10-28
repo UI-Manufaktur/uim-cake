@@ -491,8 +491,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    void assertTextNotEquals(string $expected, string myResult, string myMessage = '')
-    {
+    void assertTextNotEquals(string $expected, string myResult, string myMessage = '') {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         myResult = str_replace(["\r\n", "\r"], "\n", myResult);
         this.assertNotEquals($expected, myResult, myMessage);
@@ -507,8 +506,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    void assertTextEquals(string $expected, string myResult, string myMessage = '')
-    {
+    void assertTextEquals(string $expected, string myResult, string myMessage = '') {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         myResult = str_replace(["\r\n", "\r"], "\n", myResult);
         this.assertEquals($expected, myResult, myMessage);
@@ -523,8 +521,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    void assertTextStartsWith(string $prefix, string $string, string myMessage = '')
-    {
+    void assertTextStartsWith(string $prefix, string $string, string myMessage = '') {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringStartsWith($prefix, $string, myMessage);
@@ -539,8 +536,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    void assertTextStartsNotWith(string $prefix, string $string, string myMessage = '')
-    {
+    void assertTextStartsNotWith(string $prefix, string $string, string myMessage = '') {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringStartsNotWith($prefix, $string, myMessage);
@@ -555,8 +551,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    void assertTextEndsWith(string $suffix, string $string, string myMessage = '')
-    {
+    void assertTextEndsWith(string $suffix, string $string, string myMessage = '') {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringEndsWith($suffix, $string, myMessage);
@@ -571,8 +566,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    void assertTextEndsNotWith(string $suffix, string $string, string myMessage = '')
-    {
+    void assertTextEndsNotWith(string $suffix, string $string, string myMessage = '') {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringEndsNotWith($suffix, $string, myMessage);
@@ -904,8 +898,7 @@ abstract class TestCase : BaseTestCase
      * @param string myPath Path separated by "/" slash.
      * @return string Normalized path separated by DIRECTORY_SEPARATOR.
      */
-    protected string _normalizePath(string myPath)
-    {
+    protected string _normalizePath(string myPath) {
         return str_replace('/', DIRECTORY_SEPARATOR, myPath);
     }
 
@@ -1041,8 +1034,7 @@ abstract class TestCase : BaseTestCase
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @psalm-return class-string<\Cake\ORM\Table>
      */
-    protected string _getTableClassName(string myAlias, array myOptions)
-    {
+    protected string _getTableClassName(string myAlias, array myOptions) {
         if (empty(myOptions['className'])) {
             myClass = Inflector::camelize(myAlias);
             /** @psalm-var class-string<\Cake\ORM\Table>|null */

@@ -53,8 +53,7 @@ class BodyParserMiddleware : MiddlewareInterface
      *
      * @param array<string, mixed> myOptions The options to use. See above.
      */
-    this(array myOptions = [])
-    {
+    this(array myOptions = []) {
         myOptions += ['json' => true, 'xml' => false, 'methods' => null];
         if (myOptions['json']) {
             this.addParser(
@@ -79,8 +78,7 @@ class BodyParserMiddleware : MiddlewareInterface
      * @param array<string> $methods The methods to parse data on.
      * @return this
      */
-    auto setMethods(array $methods)
-    {
+    auto setMethods(array $methods) {
         this.methods = $methods;
 
         return this;
@@ -116,8 +114,7 @@ class BodyParserMiddleware : MiddlewareInterface
      *   into the request.
      * @return this
      */
-    function addParser(array myTypes, Closure $parser)
-    {
+    function addParser(array myTypes, Closure $parser) {
         foreach (myTypes as myType) {
             myType = strtolower(myType);
             this.parsers[myType] = $parser;
@@ -172,8 +169,7 @@ class BodyParserMiddleware : MiddlewareInterface
      * @param string $body The request body to decode
      * @return array|null
      */
-    protected auto decodeJson(string $body)
-    {
+    protected auto decodeJson(string $body) {
         if ($body === '') {
             return [];
         }

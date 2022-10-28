@@ -34,8 +34,7 @@ class ClosureDecoratorMiddleware : MiddlewareInterface
      *
      * @param \Closure $callable A closure.
      */
-    this(Closure $callable)
-    {
+    this(Closure $callable) {
         this.callable = $callable;
     }
 
