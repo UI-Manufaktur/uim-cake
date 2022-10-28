@@ -90,7 +90,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @return void
      */
-    function rewind(): void
+    void rewind()
     {
         if (this._index === 0 && !this._started) {
             this._started = true;
@@ -135,7 +135,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @return void
      */
-    function next(): void
+    void next()
     {
         this._index++;
 
@@ -199,7 +199,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * @param string myCollection The serialized buffer iterator
      * @return void
      */
-    function unserialize(myCollection): void
+    void unserialize(myCollection)
     {
         this.this([]);
         this._buffer = unserialize(myCollection);
@@ -213,7 +213,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * @param array myData Data array.
      * @return void
      */
-    auto __unserialize(array myData): void
+    void __unserialize(array myData)
     {
         this.this([]);
 

@@ -118,7 +118,7 @@ abstract class BaseCommand : ICommand
      *
      * @return void
      */
-    function initialize(): void
+    void initialize()
     {
     }
 

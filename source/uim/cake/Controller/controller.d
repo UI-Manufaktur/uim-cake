@@ -230,7 +230,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @return void
      */
-    function initialize(): void
+    void initialize()
     {
     }
 
@@ -323,7 +323,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param mixed myValue Value to set.
      * @return void
      */
-    auto __set(string propertyName, myValue): void
+    void __set(string propertyName, myValue)
     {
         if (propertyName === 'components') {
             triggerWarning(
@@ -510,7 +510,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return void
      * @throws \UnexpectedValueException If return value of action is not `null` or `IResponse` instance.
      */
-    function invokeAction(Closure $action, array $args): void
+    void invokeAction(Closure $action, array $args)
     {
         myResult = $action(...$args);
         if (myResult !== null && !myResult instanceof IResponse) {
