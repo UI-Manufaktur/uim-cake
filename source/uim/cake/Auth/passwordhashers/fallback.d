@@ -79,7 +79,6 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * in the list of hashers
      *
      * @param string myPassword The password to verify
-     * @return bool
      */
     bool needsRehash(string myPassword) {
         return this._hashers[0].needsRehash(myPassword);

@@ -54,7 +54,6 @@ interface SchemaInterface
      * Returns true if a column exists in the schema.
      *
      * @param string myName Column name.
-     * @return bool
      */
     bool hasColumn(string myName);
 

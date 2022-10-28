@@ -24,9 +24,8 @@ class BodyEquals : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected type
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other)
     {
         return this._getBodyAsString() === $other;
     }

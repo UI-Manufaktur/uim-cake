@@ -335,7 +335,6 @@ trait EntityTrait
      * in order for true to be returned.
      *
      * @param array<string>|string myField The field or fields to check.
-     * @return bool
      */
     bool has(myField) {
         foreach ((array)myField as $prop) {
@@ -360,7 +359,6 @@ trait EntityTrait
      * and false in all other cases.
      *
      * @param string myField The field to check.
-     * @return bool
      */
     bool isEmpty(string myField) {
         myValue = this.get(myField);
@@ -395,7 +393,6 @@ trait EntityTrait
      * and false in all other cases.
      *
      * @param string myField The field to check.
-     * @return bool
      */
     bool hasValue(string myField) {
         return !this.isEmpty(myField);
@@ -807,7 +804,6 @@ trait EntityTrait
      * Returns whether this entity has errors.
      *
      * @param bool $includeNested true will check nested entities for hasErrors()
-     * @return bool
      */
     bool hasErrors(bool $includeNested = true) {
         if (Hash::filter(this._errors)) {

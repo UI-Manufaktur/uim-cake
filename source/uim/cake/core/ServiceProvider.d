@@ -99,7 +99,6 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * alias added to this array or it will be ignored.
      *
      * @param string $id Identifier.
-     * @return bool
      */
     bool provides(string $id) {
         return in_array($id, this.provides, true);

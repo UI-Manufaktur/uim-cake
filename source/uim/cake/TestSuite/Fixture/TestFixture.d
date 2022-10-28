@@ -250,7 +250,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function create(ConnectionInterface myConnection): bool
+    bool create(ConnectionInterface myConnection)
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(this._schema)) {
@@ -284,8 +284,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-
-    function drop(ConnectionInterface myConnection): bool
+    bool drop(ConnectionInterface myConnection)
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(this._schema)) {
@@ -329,8 +328,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-
-    function createConstraints(ConnectionInterface myConnection): bool
+    bool createConstraints(ConnectionInterface myConnection)
     {
         if (empty(this._constraints)) {
             return true;
@@ -355,7 +353,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function dropConstraints(ConnectionInterface myConnection): bool
+    bool dropConstraints(ConnectionInterface myConnection)
     {
         if (empty(this._constraints)) {
             return true;
@@ -406,7 +404,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function truncate(ConnectionInterface myConnection): bool
+    bool truncate(ConnectionInterface myConnection)
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         mySql = this._schema.truncateSql(myConnection);

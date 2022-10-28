@@ -37,7 +37,6 @@ interface FixtureInterface
      * Truncates the current fixture.
      *
      * @param \Cake\Datasource\ConnectionInterface myConnection A reference to a db instance
-     * @return bool
      */
     bool truncate(ConnectionInterface myConnection);
 

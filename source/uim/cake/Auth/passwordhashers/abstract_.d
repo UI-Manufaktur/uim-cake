@@ -56,7 +56,6 @@ abstract class AbstractPasswordHasher
      * on is the one provided by default in php 5.5+ or any compatible library
      *
      * @param string myPassword The password to verify
-     * @return bool
      */
     bool needsRehash(string myPassword) {
         return password_needs_rehash(myPassword, PASSWORD_DEFAULT);

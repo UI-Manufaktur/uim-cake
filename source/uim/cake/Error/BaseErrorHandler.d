@@ -219,7 +219,6 @@ abstract class BaseErrorHandler
      * @param string $description Error description
      * @param string $file File on which error occurred
      * @param int $line Line that triggered the error
-     * @return bool
      */
     bool handleFatalError(int $code, string $description, string $file, int $line) {
         myData = [
@@ -298,7 +297,6 @@ abstract class BaseErrorHandler
      *
      * @param \Throwable myException The exception to log a message for.
      * @param \Psr\Http\Message\IServerRequest|null myRequest The current request.
-     * @return bool
      */
     bool logException(Throwable myException, ?IServerRequest myRequest = null) {
         if (empty(this._config['log'])) {

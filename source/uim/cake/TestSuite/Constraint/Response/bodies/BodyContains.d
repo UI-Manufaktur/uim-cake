@@ -43,7 +43,6 @@ class BodyContains : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected type
-     * @return bool
      */
     bool matches($other) {
         $method = 'mb_strpos';

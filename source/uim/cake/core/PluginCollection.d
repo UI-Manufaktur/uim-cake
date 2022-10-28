@@ -182,7 +182,6 @@ class PluginCollection : Iterator, Countable
      * Check whether the named plugin exists in the collection.
      *
      * @param string myName The named plugin.
-     * @return bool
      */
     bool has(string myName) {
         return isset(this.plugins[myName]);

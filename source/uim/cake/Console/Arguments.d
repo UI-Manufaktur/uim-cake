@@ -70,7 +70,6 @@ class Arguments
      * Check if a positional argument exists
      *
      * @param int $index The argument index to check.
-     * @return bool
      */
     bool hasArgumentAt(int $index) {
         return isset(this.args[$index]);
@@ -80,7 +79,6 @@ class Arguments
      * Check if a positional argument exists by name
      *
      * @param string myName The argument name to check.
-     * @return bool
      */
     bool hasArgument(string myName) {
         $offset = array_search(myName, this.argNames, true);
@@ -131,7 +129,6 @@ class Arguments
      * Check if an option is defined and not null.
      *
      * @param string myName The name of the option to check.
-     * @return bool
      */
     bool hasOption(string myName) {
         return isset(this.options[myName]);

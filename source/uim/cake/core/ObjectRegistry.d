@@ -232,7 +232,6 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * Provide isset access to _loaded
      *
      * @param string myName Name of object being checked.
-     * @return bool
      */
     bool __isset(string myName) {
         return this.has(myName);

@@ -31,7 +31,6 @@ interface ILocator
      * Check to see if an instance exists in the registry.
      *
      * @param string myAlias The alias to check for.
-     * @return bool
      */
     bool exists(string myAlias);
 

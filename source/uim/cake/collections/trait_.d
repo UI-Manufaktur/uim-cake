@@ -85,7 +85,7 @@ trait CollectionTrait
     }
 
 
-    function some(callable $callback): bool
+    bool some(callable $callback)
     {
         foreach (this.optimizeUnwrap() as myKey => myValue) {
             if ($callback(myValue, myKey) === true) {

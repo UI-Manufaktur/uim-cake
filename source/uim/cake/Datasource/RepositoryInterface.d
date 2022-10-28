@@ -119,7 +119,6 @@ interface IRepository
      * conditions.
      *
      * @param array $conditions list of conditions to pass to the query
-     * @return bool
      */
     bool exists($conditions);
 

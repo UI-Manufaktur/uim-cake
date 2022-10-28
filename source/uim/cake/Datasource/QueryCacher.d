@@ -73,7 +73,7 @@ class QueryCacher
      * @param \Traversable myResults The result set to store.
      * @return bool True if the data was successfully cached, false on failure
      */
-    function store(object myQuery, Traversable myResults): bool
+    bool store(object myQuery, Traversable myResults)
     {
         myKey = this._resolveKey(myQuery);
         $storage = this._resolveCacher();

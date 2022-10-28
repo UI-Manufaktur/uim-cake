@@ -97,7 +97,6 @@ class EventList : ArrayAccess, Countable
      * Checks if an event is in the list.
      *
      * @param string myName Event name.
-     * @return bool
      */
     bool hasEvent(string myName) {
         foreach (this._events as myEvent) {

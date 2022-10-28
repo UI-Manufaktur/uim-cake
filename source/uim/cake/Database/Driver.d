@@ -371,7 +371,6 @@ abstract class Driver : IDriver
      * Defaults to true for FEATURE_QUOTE and FEATURE_SAVEPOINT.
      *
      * @param string $feature Driver feature name
-     * @return bool
      */
     bool supports(string $feature) {
         switch ($feature) {

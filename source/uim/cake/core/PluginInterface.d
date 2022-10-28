@@ -112,7 +112,6 @@ interface PluginInterface
      * Check if the named hook is enabled
      *
      * @param string $hook The hook to check
-     * @return bool
      */
     bool isEnabled(string $hook);
 }

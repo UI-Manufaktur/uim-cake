@@ -237,7 +237,6 @@ class RulesChecker
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
-     * @return bool
      */
     bool checkCreate(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._createRules));
@@ -249,7 +248,6 @@ class RulesChecker
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
-     * @return bool
      */
     bool checkUpdate(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._updateRules));
@@ -261,7 +259,6 @@ class RulesChecker
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
-     * @return bool
      */
     bool checkDelete(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, this._deleteRules);

@@ -25,7 +25,6 @@ class ConditionDecorator : AbstractDecorator
      * Checks if the event is triggered for this listener.
      *
      * @param \Cake\Event\IEvent myEvent Event object.
-     * @return bool
      */
     bool canTrigger(IEvent myEvent) {
         $if = this._evaluateCondition('if', myEvent);
