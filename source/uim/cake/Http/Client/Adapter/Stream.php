@@ -115,7 +115,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Additional request options.
      * @return void
      */
-    protected auto _buildContext(RequestInterface myRequest, array myOptions): void
+    protected void _buildContext(RequestInterface myRequest, array myOptions)
     {
         this._buildContent(myRequest, myOptions);
         this._buildHeaders(myRequest, myOptions);
@@ -141,7 +141,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected auto _buildHeaders(RequestInterface myRequest, array myOptions): void
+    protected void _buildHeaders(RequestInterface myRequest, array myOptions)
     {
         $headers = [];
         foreach (myRequest.getHeaders() as myName => myValues) {
@@ -160,7 +160,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected auto _buildContent(RequestInterface myRequest, array myOptions): void
+    protected void _buildContent(RequestInterface myRequest, array myOptions)
     {
         $body = myRequest.getBody();
         $body.rewind();
@@ -174,7 +174,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected auto _buildOptions(RequestInterface myRequest, array myOptions): void
+    protected void _buildOptions(RequestInterface myRequest, array myOptions)
     {
         this._contextOptions['method'] = myRequest.getMethod();
         this._contextOptions['protocol_version'] = myRequest.getProtocolVersion();
@@ -199,7 +199,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected auto _buildSslContext(RequestInterface myRequest, array myOptions): void
+    protected void _buildSslContext(RequestInterface myRequest, array myOptions)
     {
         $sslOptions = [
             'ssl_verify_peer',
@@ -297,7 +297,7 @@ class Stream : AdapterInterface
      * @return void
      * @throws \Psr\Http\Client\RequestExceptionInterface
      */
-    protected auto _open(string myUrl, RequestInterface myRequest): void
+    protected void _open(string myUrl, RequestInterface myRequest)
     {
         if (!(bool)ini_get('allow_url_fopen')) {
             throw new ClientException('The PHP directive `allow_url_fopen` must be enabled.');

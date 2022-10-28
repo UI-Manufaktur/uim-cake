@@ -26,7 +26,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\CommandCollection $commands The command collection
      * @return void
      */
-    auto setCommandCollection(CommandCollection $commands): void
+    void setCommandCollection(CommandCollection $commands)
     {
         this.commands = $commands;
     }

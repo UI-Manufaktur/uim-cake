@@ -160,7 +160,7 @@ abstract class BaseCommand : ICommand
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected auto displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io): void
+    protected void displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io)
     {
         $format = 'text';
         if ($args.getArgumentAt(0) === 'xml') {
@@ -178,7 +178,7 @@ abstract class BaseCommand : ICommand
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected auto setOutputLevel(Arguments $args, ConsoleIo $io): void
+    protected void setOutputLevel(Arguments $args, ConsoleIo $io)
     {
         $io.setLoggers(ConsoleIo::NORMAL);
         if ($args.getOption('quiet')) {
@@ -207,7 +207,7 @@ abstract class BaseCommand : ICommand
      * @throws \Cake\Console\Exception\StopException
      * @return void
      */
-    function abort(int $code = self::CODE_ERROR): void
+    void abort(int $code = self::CODE_ERROR)
     {
         throw new StopException('Command aborted', $code);
     }

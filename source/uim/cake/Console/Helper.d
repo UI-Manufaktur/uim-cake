@@ -44,5 +44,5 @@ abstract class Helper
      * @param array $args The arguments for the helper.
      * @return void
      */
-    abstract function output(array $args): void;
+    abstract void output(array $args);
 }

@@ -108,7 +108,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * @param string $iterators The serialized iterators
      * @return void
      */
-    function unserialize($iterators): void
+    void unserialize($iterators)
     {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
         this._iterators = unserialize($iterators);
@@ -123,7 +123,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * @param array myData Data array.
      * @return void
      */
-    auto __unserialize(array myData): void
+    void __unserialize(array myData)
     {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 

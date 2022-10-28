@@ -136,7 +136,7 @@ class MapReduce : IteratorAggregate
      * @param mixed $bucket the name of the bucket where to put the record
      * @return void
      */
-    function emitIntermediate($val, $bucket): void
+    void emitIntermediate($val, $bucket)
     {
         this._intermediate[$bucket][] = $val;
     }
@@ -149,7 +149,7 @@ class MapReduce : IteratorAggregate
      * @param mixed myKey and optional key to assign to the value
      * @return void
      */
-    function emit($val, myKey = null): void
+    void emit($val, myKey = null)
     {
         this._result[myKey ?? this._counter] = $val;
         this._counter++;
@@ -164,7 +164,7 @@ class MapReduce : IteratorAggregate
      * @throws \LogicException if emitIntermediate was called but no reducer function
      * was provided
      */
-    protected auto _execute(): void
+    protected void _execute()
     {
         $mapper = this._mapper;
         foreach (this._data as myKey => $val) {

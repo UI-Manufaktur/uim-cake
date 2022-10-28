@@ -97,7 +97,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      *
      * @return void
      */
-    function next(): void
+    void next()
     {
         super.next();
         this._current = null;

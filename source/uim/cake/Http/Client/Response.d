@@ -170,7 +170,7 @@ class Response : Message : IResponse
      * @param array $headers Headers to parse.
      * @return void
      */
-    protected auto _parseHeaders(array $headers): void
+    protected void _parseHeaders(array $headers)
     {
         foreach ($headers as myValue) {
             if (substr(myValue, 0, 5) === 'HTTP/') {
@@ -353,7 +353,7 @@ class Response : Message : IResponse
      *
      * @return void
      */
-    protected auto buildCookieCollection(): void
+    protected void buildCookieCollection()
     {
         if (this.cookies !== null) {
             return;

@@ -281,7 +281,7 @@ class ConsoleOutput
      * @param array $definition The array definition of the style to change or create..
      * @return void
      */
-    auto setStyle(string $style, array $definition): void
+    void setStyle(string $style, array $definition)
     {
         if (!$definition) {
             unset(static::$_styles[$style]);
@@ -319,7 +319,7 @@ class ConsoleOutput
      * @return void
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
-    auto setOutputAs(int myType): void
+    void setOutputAs(int myType)
     {
         if (!in_array(myType, [self::RAW, self::PLAIN, self::COLOR], true)) {
             throw new InvalidArgumentException(sprintf('Invalid output type "%s".', myType));

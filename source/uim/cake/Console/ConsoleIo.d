@@ -116,7 +116,7 @@ class ConsoleIo
      * @param bool myValue Value
      * @return void
      */
-    auto setInteractive(bool myValue): void
+    void setInteractive(bool myValue)
     {
         this.interactive = myValue;
     }
@@ -284,7 +284,7 @@ class ConsoleIo
      * @return void
      * @throws \Cake\Console\Exception\StopException
      */
-    function abort(myMessage, $code = ICommand::CODE_ERROR): void
+    void abort(myMessage, $code = ICommand::CODE_ERROR)
     {
         this.error(myMessage);
 
@@ -324,7 +324,7 @@ class ConsoleIo
      *    length of the last message output.
      * @return void
      */
-    function overwrite(myMessage, int $newlines = 1, ?int $size = null): void
+    void overwrite(myMessage, int $newlines = 1, ?int $size = null)
     {
         $size = $size ?: this._lastWritten;
 
@@ -380,7 +380,7 @@ class ConsoleIo
      * @param int $width Width of the line, defaults to 79
      * @return void
      */
-    function hr(int $newlines = 0, int $width = 79): void
+    void hr(int $newlines = 0, int $width = 79)
     {
         this.out('', $newlines);
         this.out(str_repeat('-', $width));
@@ -406,7 +406,7 @@ class ConsoleIo
      * @return void
      * @see \Cake\Console\ConsoleOutput::setOutputAs()
      */
-    auto setOutputAs(int myMode): void
+    void setOutputAs(int myMode)
     {
         this._out.setOutputAs(myMode);
     }
@@ -442,7 +442,7 @@ class ConsoleIo
      * @return void
      * @see \Cake\Console\ConsoleOutput::setStyle()
      */
-    auto setStyle(string $style, array $definition): void
+    void setStyle(string $style, array $definition)
     {
         this._out.setStyle($style, $definition);
     }
@@ -528,7 +528,7 @@ class ConsoleIo
      *   QUIET disables notice, info and debug logs.
      * @return void
      */
-    auto setLoggers(myEnable): void
+    void setLoggers(myEnable)
     {
         Log::drop('stdout');
         Log::drop('stderr');

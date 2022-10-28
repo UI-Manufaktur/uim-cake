@@ -214,7 +214,7 @@ class Shell {
      * @param \Cake\Console\ConsoleIo $io The ConsoleIo object to use.
      * @return void
      */
-    auto setIo(ConsoleIo $io): void
+    void setIo(ConsoleIo $io)
     {
         this._io = $io;
     }
@@ -227,7 +227,7 @@ class Shell {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::initialize
      */
-    function initialize(): void
+    void initialize()
     {
         this.loadTasks();
     }
@@ -242,7 +242,7 @@ class Shell {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::startup
      */
-    function startup(): void
+    void startup()
     {
         if (!this.param('requested')) {
             this._welcome();
@@ -254,7 +254,7 @@ class Shell {
      *
      * @return void
      */
-    protected auto _welcome(): void
+    protected void _welcome()
     {
     }
 
@@ -281,7 +281,7 @@ class Shell {
      * @throws \RuntimeException
      * @return void
      */
-    protected auto _validateTasks(): void
+    protected void _validateTasks()
     {
         foreach (this._taskMap as $taskName => $task) {
             myClass = App::className($task['class'], 'Shell/Task', 'Task');
@@ -508,7 +508,7 @@ class Shell {
      *
      * @return void
      */
-    protected auto _setOutputLevel(): void
+    protected void _setOutputLevel()
     {
         this._io.setLoggers(ConsoleIo::NORMAL);
         if (!empty(this.params['quiet'])) {
@@ -752,7 +752,7 @@ class Shell {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::hr
      */
-    function hr(int $newlines = 0, int $width = 63): void
+    void hr(int $newlines = 0, int $width = 63)
     {
         this._io.hr($newlines, $width);
     }
@@ -768,7 +768,7 @@ class Shell {
      * @link https://book.cakephp.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
      */
-    function abort(string myMessage, int $exitCode = self::CODE_ERROR): void
+    void abort(string myMessage, int $exitCode = self::CODE_ERROR)
     {
         this._io.err('<error>' . myMessage . '</error>');
         throw new StopException(myMessage, $exitCode);

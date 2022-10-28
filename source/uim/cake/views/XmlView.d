@@ -90,7 +90,7 @@ class XmlView : SerializedView
     ];
 
 
-    protected auto _serialize($serialize): string
+    protected string _serialize($serialize)
     {
         $rootNode = this.getConfig('rootNode', 'response');
 

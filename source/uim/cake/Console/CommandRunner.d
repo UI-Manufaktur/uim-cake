@@ -176,7 +176,7 @@ class CommandRunner : IEventDispatcher
      *
      * @return void
      */
-    protected auto bootstrap(): void
+    protected void bootstrap()
     {
         this.app.bootstrap();
         if (this.app instanceof PluginApplicationInterface) {
@@ -369,7 +369,7 @@ class CommandRunner : IEventDispatcher
      *
      * @return void
      */
-    protected auto loadRoutes(): void
+    protected void loadRoutes()
     {
         if (!(this.app instanceof RoutingApplicationInterface)) {
             return;

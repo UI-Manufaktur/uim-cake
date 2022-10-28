@@ -108,7 +108,7 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The io instance.
      * @return void
      */
-    protected auto _getPaths(ConsoleIo $io): void
+    protected void _getPaths(ConsoleIo $io)
     {
         /** @psalm-suppress UndefinedConstant */
         $defaultPaths = array_merge(
@@ -267,7 +267,7 @@ class I18nExtractCommand : Command {
      * @param array $details Context and plural form if any, file and line references
      * @return void
      */
-    protected auto _addTranslation(string $domain, string $msgid, array $details = []): void
+    protected void _addTranslation(string $domain, string $msgid, array $details = [])
     {
         $context = $details['msgctxt'] ?? '';
 
@@ -294,7 +294,7 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The io instance
      * @return void
      */
-    protected auto _extract(Arguments $args, ConsoleIo $io): void
+    protected void _extract(Arguments $args, ConsoleIo $io)
     {
         $io.out();
         $io.out();
@@ -382,7 +382,7 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The io instance
      * @return void
      */
-    protected auto _extractTokens(Arguments $args, ConsoleIo $io): void
+    protected void _extractTokens(Arguments $args, ConsoleIo $io)
     {
         /** @var \Cake\Shell\Helper\ProgressHelper $progress */
         $progress = $io.helper('progress');
@@ -440,7 +440,7 @@ class I18nExtractCommand : Command {
      * @param array $map Array containing what variables it will find (e.g: domain, singular, plural)
      * @return void
      */
-    protected auto _parse(ConsoleIo $io, string $functionName, array $map): void
+    protected void _parse(ConsoleIo $io, string $functionName, array $map)
     {
         myCount = 0;
         $tokenCount = count(this._tokens);
@@ -502,7 +502,7 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\Arguments $args Console arguments
      * @return void
      */
-    protected auto _buildFiles(Arguments $args): void
+    protected void _buildFiles(Arguments $args)
     {
         myPaths = this._paths;
         /** @psalm-suppress UndefinedConstant */
@@ -566,7 +566,7 @@ class I18nExtractCommand : Command {
      * @param string $sentence The sentence to store.
      * @return void
      */
-    protected auto _store(string $domain, string $header, string $sentence): void
+    protected void _store(string $domain, string $header, string $sentence)
     {
         this._storage[$domain] = this._storage[$domain] ?? [];
 
@@ -584,7 +584,7 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected auto _writeFiles(Arguments $args, ConsoleIo $io): void
+    protected void _writeFiles(Arguments $args, ConsoleIo $io)
     {
         $io.out();
         $overwriteAll = false;
@@ -758,7 +758,7 @@ class I18nExtractCommand : Command {
      * @param int myCount Count
      * @return void
      */
-    protected auto _markerError($io, string $file, int $line, string $marker, int myCount): void
+    protected void _markerError($io, string $file, int $line, string $marker, int myCount)
     {
         if (strpos(this._file, CAKE_CORE_INCLUDE_PATH) === false) {
             this._countMarkerError++;
@@ -796,7 +796,7 @@ class I18nExtractCommand : Command {
      *
      * @return void
      */
-    protected auto _searchFiles(): void
+    protected void _searchFiles()
     {
         $pattern = false;
         if (!empty(this._exclude)) {
