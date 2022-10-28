@@ -1,14 +1,4 @@
-
-
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         3.9.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Datasource;
+module uim.cake.Datasource;
 
 /**
  * Simplified paginator which avoids potentially expensives queries

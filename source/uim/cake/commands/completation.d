@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP Project
- * @since         2.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.command;
+module uim.cake.command;
 
 import uim.cake.console.Arguments;
 import uim.cake.console.commandCollection;

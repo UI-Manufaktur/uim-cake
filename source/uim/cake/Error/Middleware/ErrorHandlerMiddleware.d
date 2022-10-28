@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.errors\Middleware;
+module uim.cake.errors\Middleware;
 
 import uim.cake.core.App;
 import uim.cake.core.Configure;
