@@ -1,31 +1,18 @@
+module uim.cake.Http\Client\Exception;
 
-
-/**
-
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http\Client\Exception;
-
-use Psr\Http\Client\RequestExceptionInterface;
+use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
 use Throwable;
 
 /**
- * Exception for when a request failed.
+ * Thrown when the request cannot be completed because of network issues.
  *
- * Examples:
+ * There is no response object as this exception is thrown when no response has been received.
  *
- *   - Request is invalid (e.g. method is missing)
- *   - Runtime request errors (e.g. the body stream is not seekable)
+ * Example: the target host name can not be resolved or the connection failed.
  */
-class RequestException : RuntimeException : RequestExceptionInterface
+class NetworkException : RuntimeException : NetworkExceptionInterface
 {
     /**
      * @var \Psr\Http\Message\RequestInterface

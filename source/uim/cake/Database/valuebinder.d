@@ -96,8 +96,6 @@ class ValueBinder
 
     /**
      * Clears any bindings that were previously registered
-     *
-     * @return void
      */
     void reset()
     {
@@ -107,8 +105,6 @@ class ValueBinder
 
     /**
      * Resets the bindings count without clearing previously bound values
-     *
-     * @return void
      */
     void resetCount()
     {

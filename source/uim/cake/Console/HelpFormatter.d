@@ -141,8 +141,6 @@ class HelpFormatter
      * Generate the usage for a shell based on its arguments and options.
      * Usage strings favor short options over the long ones. and optional args will
      * be indicated with []
-     *
-     * @return string
      */
     protected string _generateUsage()
     {

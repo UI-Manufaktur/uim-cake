@@ -288,7 +288,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param \Throwable myException Exception instance.
      * @return string
      */
-    protected auto _method(Throwable myException): string
+    protected string _method(Throwable myException)
     {
         [, $baseClass] = moduleSplit(get_class(myException));
 
@@ -309,7 +309,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param int $code Error code.
      * @return string Error message
      */
-    protected auto _message(Throwable myException, int $code): string
+    protected string _message(Throwable myException, int $code)
     {
         myMessage = myException.getMessage();
 
@@ -335,7 +335,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param int $code Error code.
      * @return string Template name
      */
-    protected auto _template(Throwable myException, string $method, int $code): string
+    protected string _template(Throwable myException, string $method, int $code)
     {
         if (myException instanceof HttpException || !Configure::read('debug')) {
             return this.template = $code < 500 ? 'error400' : 'error500';

@@ -250,12 +250,12 @@ trait CollectionTrait
     {
         $callback = this._propertyExtractor(myPath);
 
-        $mapper = function (myValue, myKey, $mr) use ($callback): void {
+        $mapper = void (myValue, myKey, $mr) use ($callback) {
             /** @var \Cake\collection.iIterator\MapReduce $mr */
             $mr.emitIntermediate(myValue, $callback(myValue));
         };
 
-        $reducer = function (myValues, myKey, $mr): void {
+        $reducer = void (myValues, myKey, $mr) {
             /** @var \Cake\collection.iIterator\MapReduce $mr */
             $mr.emit(count(myValues), myKey);
         };
@@ -511,7 +511,7 @@ trait CollectionTrait
             );
         };
 
-        $reducer = function (myValues, myKey, MapReduce $mapReduce): void {
+        $reducer = void (myValues, myKey, MapReduce $mapReduce) {
             myResult = [];
             foreach (myValues as myValue) {
                 myResult += myValue;
@@ -530,7 +530,7 @@ trait CollectionTrait
         $parentPath = this._propertyExtractor($parentPath);
         $isObject = true;
 
-        $mapper = function ($row, myKey, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey): void {
+        $mapper = void ($row, myKey, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey) {
             $row[$nestingKey] = [];
             $id = $idPath($row, myKey);
             $parentId = $parentPath($row, myKey);

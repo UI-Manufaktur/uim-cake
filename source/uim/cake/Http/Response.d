@@ -644,7 +644,7 @@ class Response : IResponse
      * @link http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      * @return string Reason phrase; must return an empty string if none present.
      */
-    auto getReasonPhrase(): string
+    string getReasonPhrase()
     {
         return this._reasonPhrase;
     }
@@ -670,7 +670,7 @@ class Response : IResponse
      *
      * @return string
      */
-    auto getType(): string
+    string getType()
     {
         $header = this.getHeaderLine('Content-Type');
         if (strpos($header, ';') !== false) {
@@ -704,7 +704,7 @@ class Response : IResponse
      * @return string The resolved content-type
      * @throws \InvalidArgumentException When an invalid content-type or alias is used.
      */
-    protected auto resolveType(string myContentsType): string
+    protected string resolveType(string myContentsType)
     {
         $mapped = this.getMimeType(myContentsType);
         if ($mapped) {
@@ -756,7 +756,7 @@ class Response : IResponse
      *
      * @return string
      */
-    auto getCharset(): string
+    string getCharset()
     {
         return this._charset;
     }
@@ -1199,7 +1199,7 @@ class Response : IResponse
      *
      * @return string
      */
-    auto __toString(): string
+    string __toString()
     {
         this.stream.rewind();
 

@@ -192,7 +192,7 @@ class ConsoleOutput
      * @param string $text Text with styling tags.
      * @return string String with color codes added.
      */
-    function styleText(string $text): string
+    string styleText(string $text)
     {
         if (this._outputAs === static::RAW) {
             return $text;
@@ -216,7 +216,7 @@ class ConsoleOutput
      * @param array<string, string> $matches An array of matches to replace.
      * @return string
      */
-    protected auto _replaceTags(array $matches): string
+    protected string _replaceTags(array $matches)
     {
         $style = this.getStyle($matches['tag']);
         if (empty($style)) {

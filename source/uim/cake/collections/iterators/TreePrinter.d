@@ -83,7 +83,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      *
      * @return string
      */
-    function current(): string
+    string current()
     {
         $extractor = this._value;
         $current = this._fetchCurrent();

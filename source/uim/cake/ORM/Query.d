@@ -473,7 +473,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param array<string, array> $associations The nested tree of associations to walk.
      * @return void
      */
-    protected auto _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations): void
+    protected void _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations)
     {
         foreach ($associations as myName => $nested) {
             if (!myTable.hasAssociation(myName)) {
@@ -1065,10 +1065,8 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * Trigger the beforeFind event on the query's repository object.
      *
      * Will not trigger more than once, and only for select queries.
-     *
-     * @return void
      */
-    function triggerBeforeFind(): void
+    void triggerBeforeFind()
     {
         if (!this._beforeFindFired && this._type === 'select') {
             this._beforeFindFired = true;
@@ -1083,7 +1081,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     }
 
 
-    function sql(?ValueBinder $binder = null): string
+    string sql(?ValueBinder $binder = null)
     {
         this.triggerBeforeFind();
 
@@ -1125,7 +1123,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @see \Cake\Database\Query::execute()
      * @return void
      */
-    protected auto _transformQuery(): void
+    protected void _transformQuery()
     {
         if (!this._dirty || this._type !== 'select') {
             return;
@@ -1147,7 +1145,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return void
      */
-    protected auto _addDefaultFields(): void
+    protected void _addDefaultFields()
     {
         $select = this.clause('select');
         this._hasFields = true;
@@ -1171,7 +1169,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return void
      */
-    protected auto _addDefaultSelectTypes(): void
+    protected void _addDefaultSelectTypes()
     {
         myTypeMap = this.getTypeMap().getDefaults();
         $select = this.clause('select');
@@ -1214,7 +1212,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return void
      */
-    protected auto _dirty(): void
+    protected void _dirty()
     {
         this._results = null;
         this._resultsCount = null;

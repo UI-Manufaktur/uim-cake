@@ -65,8 +65,6 @@ class InsertIterator : Collection {
 
     /**
      * Advances the cursor to the next record
-     *
-     * @return void
      */
     void  next() {
         super.next();
@@ -105,8 +103,6 @@ class InsertIterator : Collection {
 
     /**
      * Resets the collection pointer.
-     *
-     * @return void
      */
     void rewind() {
         super.rewind();

@@ -558,7 +558,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string Charset
      */
-    auto getCharset(): string
+    string getCharset()
     {
         return this.charset;
     }
@@ -580,7 +580,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string Charset
      */
-    auto getHeaderCharset(): string
+    string getHeaderCharset()
     {
         return this.headerCharset ?: this.charset;
     }
@@ -776,7 +776,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    auto getSubject(): string
+    string getSubject()
     {
         return this.subject;
     }
@@ -786,7 +786,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string Original subject
      */
-    auto getOriginalSubject(): string
+    string getOriginalSubject()
     {
         return this.decodeForHeader(this.subject);
     }
@@ -920,7 +920,7 @@ class Message : JsonSerializable, Serializable
      * @return string
      * @see Message::getHeaders()
      */
-    auto getHeadersString(array $include = [], string $eol = "\r\n", ?Closure $callback = null): string
+    string getHeadersString(array $include = [], string $eol = "\r\n", ?Closure $callback = null)
     {
         $lines = this.getHeaders($include);
 
@@ -991,7 +991,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    auto getEmailFormat(): string
+    string getEmailFormat()
     {
         return this.emailFormat;
     }
@@ -1063,7 +1063,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    auto getDomain(): string
+    string getDomain()
     {
         return this.domain;
     }
@@ -1216,7 +1216,7 @@ class Message : JsonSerializable, Serializable
      * @return string
      * @see Message::getBody()
      */
-    auto getBodyString(string $eol = "\r\n"): string
+    string getBodyString(string $eol = "\r\n")
     {
         $lines = this.getBody();
 
@@ -1535,7 +1535,7 @@ class Message : JsonSerializable, Serializable
      * @param string $charset the target encoding
      * @return string
      */
-    protected auto encodeString(string $text, string $charset): string
+    protected string encodeString(string $text, string $charset)
     {
         if (this.appCharset === $charset) {
             return $text;
@@ -1694,7 +1694,7 @@ class Message : JsonSerializable, Serializable
      * @param string $text String to encode
      * @return string Encoded string
      */
-    protected auto encodeForHeader(string $text): string
+    protected string encodeForHeader(string $text)
     {
         if (this.appCharset === null) {
             return $text;
@@ -1715,7 +1715,7 @@ class Message : JsonSerializable, Serializable
      * @param string $text String to decode
      * @return string Decoded string
      */
-    protected auto decodeForHeader(string $text): string
+    protected string decodeForHeader(string $text)
     {
         if (this.appCharset === null) {
             return $text;
@@ -1737,7 +1737,7 @@ class Message : JsonSerializable, Serializable
      *   or UploadedFileInterface instance.
      * @return string File contents in base64 encoding
      */
-    protected auto readFile($file): string
+    protected string readFile($file)
     {
         if (is_string($file)) {
             myContents = (string)file_get_contents($file);
@@ -1754,7 +1754,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    auto getContentTransferEncoding(): string
+    string getContentTransferEncoding()
     {
         if (this.transferEncoding) {
             return this.transferEncoding;
@@ -1776,7 +1776,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    auto getContentTypeCharset(): string
+    string getContentTypeCharset()
     {
         $charset = strtoupper(this.charset);
         if (array_key_exists($charset, this.contentTypeCharset)) {
@@ -1838,7 +1838,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function serialize(): string
+    string serialize()
     {
         $array = this.__serialize();
 

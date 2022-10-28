@@ -239,8 +239,6 @@ class DigestAuthenticate : BasicAuthenticate
 
     /**
      * Generate a nonce value that is validated in future requests.
-     *
-     * @return string
      */
     protected string generateNonce()
     {

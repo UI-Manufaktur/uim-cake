@@ -969,8 +969,6 @@ class AuthComponent : Component : IEventDispatcher
      *
      * This method takes the referrer into account if the
      * request is not of type GET.
-     *
-     * @return string
      */
     protected string _getUrlToRedirectBackTo()
     {

@@ -106,7 +106,7 @@ class EventFiredWith : Constraint
      *
      * @return string
      */
-    function toString(): string
+    string toString()
     {
         return 'was fired with ' . this._dataKey . ' matching ' . (string)this._dataValue;
     }

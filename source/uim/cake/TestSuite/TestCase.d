@@ -904,7 +904,7 @@ abstract class TestCase : BaseTestCase
      * @param string myPath Path separated by "/" slash.
      * @return string Normalized path separated by DIRECTORY_SEPARATOR.
      */
-    protected auto _normalizePath(string myPath): string
+    protected string _normalizePath(string myPath)
     {
         return str_replace('/', DIRECTORY_SEPARATOR, myPath);
     }
@@ -1041,7 +1041,7 @@ abstract class TestCase : BaseTestCase
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @psalm-return class-string<\Cake\ORM\Table>
      */
-    protected auto _getTableClassName(string myAlias, array myOptions): string
+    protected string _getTableClassName(string myAlias, array myOptions)
     {
         if (empty(myOptions['className'])) {
             myClass = Inflector::camelize(myAlias);

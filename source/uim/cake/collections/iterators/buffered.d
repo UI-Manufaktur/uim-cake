@@ -87,8 +87,6 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Rewinds the collection
-     *
-     * @return void
      */
     void rewind()
     {
@@ -132,8 +130,6 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Advances the iterator pointer to the next element
-     *
-     * @return void
      */
     void next()
     {
