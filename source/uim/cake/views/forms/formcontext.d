@@ -1,6 +1,6 @@
-module uim.cake.views\Form;
+module uim.cake.views.forms;
 
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * Provides a context provider for {@link \Cake\Form\Form} instances.

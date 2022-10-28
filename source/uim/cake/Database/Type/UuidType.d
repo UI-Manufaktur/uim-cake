@@ -1,7 +1,7 @@
 module uim.cake.databases.Type;
 
 import uim.cake.databases.IDriver;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 
 /**
  * Provides behavior for the UUID type

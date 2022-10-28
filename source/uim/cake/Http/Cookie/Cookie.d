@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.Http\Cookie;
 
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use DateTimeImmutable;
 use IDateTime;
 use DateTimeZone;

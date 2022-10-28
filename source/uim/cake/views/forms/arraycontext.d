@@ -1,6 +1,6 @@
-module uim.cake.views\Form;
+module uim.cake.views.forms;
 
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * Provides a basic array based context provider for FormHelper.

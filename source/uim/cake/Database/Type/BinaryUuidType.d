@@ -2,7 +2,7 @@ module uim.cake.databases.Type;
 
 import uim.cake.core.Exception\CakeException;
 import uim.cake.databases.IDriver;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 use PDO;
 
 /**

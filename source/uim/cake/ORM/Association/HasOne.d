@@ -4,7 +4,7 @@ import uim.cake.Datasource\IEntity;
 import uim.cake.ORM\Association;
 import uim.cake.ORM\Association\Loader\SelectLoader;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use Closure;
 
 /**

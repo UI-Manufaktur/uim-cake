@@ -2,7 +2,7 @@ module uim.cake.Http\Middleware;
 
 import uim.cake.Http\Cookie\CookieCollection;
 import uim.cake.Http\Response;
-import uim.cake.Utility\CookieCryptTrait;
+import uim.cake.utikities.CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;

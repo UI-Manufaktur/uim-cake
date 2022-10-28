@@ -10,7 +10,7 @@
  */module uim.cake.Http;
 
 import uim.cake.core.App;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use InvalidArgumentException;
 use RuntimeException;
 use SessionHandlerInterface;

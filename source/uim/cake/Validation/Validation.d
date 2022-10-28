@@ -1,7 +1,7 @@
 module uim.cake.Validation;
 
 import uim.cake.I18n\FrozenTime;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 use Countable;
 use IDateTime;
 use InvalidArgumentException;

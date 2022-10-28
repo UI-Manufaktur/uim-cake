@@ -23,7 +23,7 @@ import uim.cake.Http\Exception\ForbiddenException;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Routing\Router;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * Authentication control component class.

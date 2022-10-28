@@ -19,8 +19,8 @@ import uim.cake.Http\Exception\BadRequestException;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Routing\Router;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Security;
+import uim.cake.utikities.Hash;
+import uim.cake.utikities.Security;
 
 /**
  * The Security Component creates an easy way to integrate tighter security in

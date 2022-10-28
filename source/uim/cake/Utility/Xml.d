@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.Utility;
 
-import uim.cake.Utility\Exception\XmlException;
+import uim.cake.utikities.Exception\XmlException;
 use Closure;
 use DOMDocument;
 use DOMNode;

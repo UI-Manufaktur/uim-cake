@@ -1,7 +1,7 @@
 module uim.cake.ORM\Rule;
 
 import uim.cake.Datasource\IEntity;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * Checks that a list of fields from an entity are unique in the table

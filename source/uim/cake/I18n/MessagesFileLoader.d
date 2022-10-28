@@ -2,7 +2,7 @@ module uim.cake.I18n;
 
 import uim.cake.core.App;
 import uim.cake.core.Plugin;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use Locale;
 use RuntimeException;
 

@@ -11,8 +11,8 @@
  */module uim.cake.Http\Middleware;
 
 import uim.cake.Http\Exception\BadRequestException;
-import uim.cake.Utility\Exception\XmlException;
-import uim.cake.Utility\Xml;
+import uim.cake.utikities.Exception\XmlException;
+import uim.cake.utikities.Xml;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

@@ -2,7 +2,7 @@ module uim.cake.Routing;
 
 import uim.cake.core.Configure;
 import uim.cake.core.Plugin;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 
 /**
  * Class for generating asset URLs.

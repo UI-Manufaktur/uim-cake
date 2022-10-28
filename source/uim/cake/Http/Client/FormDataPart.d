@@ -12,7 +12,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.Http\Client;
 
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 
 /**
  * Contains the data and behavior for a single

@@ -7,7 +7,7 @@ import uim.cake.Datasource\IRepository;
 import uim.cake.ORM\AssociationCollection;
 import uim.cake.ORM\Exception\MissingTableClassException;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use RuntimeException;
 
 /**

@@ -16,7 +16,7 @@ import uim.cake.Event\EventManager;
 import uim.cake.Event\IEventManager;
 import uim.cake.Routing\Router;
 import uim.cake.Routing\RoutingApplicationInterface;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 

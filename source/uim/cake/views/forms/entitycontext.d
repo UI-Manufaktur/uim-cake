@@ -1,4 +1,4 @@
-module uim.cake.views\Form;
+module uim.cake.views.forms;
 
 use ArrayAccess;
 import uim.cake.collection\Collection;
@@ -7,7 +7,7 @@ import uim.cake.Datasource\InvalidPropertyInterface;
 import uim.cake.ORM\Entity;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 import uim.cake.Validation\Validator;
 use RuntimeException;
 use Traversable;

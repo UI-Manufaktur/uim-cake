@@ -1,7 +1,7 @@
 module uim.cake.views\Helper;
 
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Hash;
+import uim.cake.utikities.Inflector;
 import uim.cake.views\Helper;
 import uim.cake.views\StringTemplate;
 import uim.cake.views\StringTemplateTrait;

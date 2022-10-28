@@ -11,7 +11,7 @@
 
 import uim.cake.core.Plugin;
 import uim.cake.Http\Response;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

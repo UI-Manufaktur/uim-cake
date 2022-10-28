@@ -1,7 +1,7 @@
 module uim.cake.views;
 
 import uim.cake.core.App;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 import uim.cake.views\Exception\MissingCellException;
 
 /**

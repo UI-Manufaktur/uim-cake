@@ -1,6 +1,6 @@
 module uim.cake.views\Widget;
 
-import uim.cake.views\Form\IContext;
+import uim.cake.views.forms\IContext;
 import uim.cake.views\StringTemplate;
 use IDateTime;
 use InvalidArgumentException;

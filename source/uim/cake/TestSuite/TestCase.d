@@ -26,7 +26,7 @@ import uim.cake.TestSuite\Constraint\EventFired;
 import uim.cake.TestSuite\Constraint\EventFiredWith;
 import uim.cake.TestSuite\Fixture\FixtureStrategyInterface;
 import uim.cake.TestSuite\Fixture\TruncateStrategy;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use LogicException;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;

@@ -1,6 +1,6 @@
 module uim.cake.views\Helper;
 
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 
 /**
  * A trait that provides id generating methods to be

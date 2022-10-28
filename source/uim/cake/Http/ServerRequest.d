@@ -5,7 +5,7 @@ import uim.cake.core.Configure;
 import uim.cake.core.Exception\CakeException;
 import uim.cake.Http\Cookie\CookieCollection;
 import uim.cake.Http\Exception\MethodNotAllowedException;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\PhpInputStream;
 use Laminas\Diactoros\Stream;

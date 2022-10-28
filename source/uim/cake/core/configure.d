@@ -4,7 +4,7 @@ import uim.cake.cache\Cache;
 import uim.cake.core.Configure\ConfigEngineInterface;
 import uim.cake.core.Configure\Engine\PhpConfig;
 import uim.cake.core.Exception\CakeException;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use RuntimeException;
 
 /**

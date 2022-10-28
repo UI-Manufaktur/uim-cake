@@ -11,8 +11,8 @@
 
 import uim.cake.core.App;
 import uim.cake.core.Exception\CakeException;
-import uim.cake.Utility\Security;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Security;
+import uim.cake.utikities.Text;
 import uim.cake.views\Helper;
 import uim.cake.views\View;
 

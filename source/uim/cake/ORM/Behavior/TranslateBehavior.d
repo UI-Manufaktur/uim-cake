@@ -8,7 +8,7 @@ import uim.cake.ORM\Marshaller;
 import uim.cake.ORM\PropertyMarshalInterface;
 import uim.cake.ORM\Query;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 
 /**
  * This behavior provides a way to translate dynamic data by keeping translations

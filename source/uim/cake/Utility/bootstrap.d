@@ -1,6 +1,6 @@
 
 
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 
 // Store the initial state
 Inflector::reset();

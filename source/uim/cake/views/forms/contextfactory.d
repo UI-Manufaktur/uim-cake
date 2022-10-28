@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.views\Form;
+ */module uim.cake.views.forms;
 
 import uim.cake.collection\Collection;
 import uim.cake.Datasource\IEntity;

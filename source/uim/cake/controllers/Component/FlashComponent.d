@@ -3,7 +3,7 @@ module uim.cake.controller\Component;
 import uim.cake.controller\Component;
 import uim.cake.Http\Exception\InternalErrorException;
 import uim.cake.Http\FlashMessage;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use Throwable;
 
 /**

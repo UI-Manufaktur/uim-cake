@@ -19,7 +19,7 @@ import uim.cake.Http\Exception\NotFoundException;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Routing\Router;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 
 /**
  * Request object handling for alternative HTTP requests.

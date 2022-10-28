@@ -13,8 +13,8 @@
 use ArrayAccess;
 import uim.cake.Http\Exception\InvalidCsrfTokenException;
 import uim.cake.Http\Session;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Security;
+import uim.cake.utikities.Hash;
+import uim.cake.utikities.Security;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;

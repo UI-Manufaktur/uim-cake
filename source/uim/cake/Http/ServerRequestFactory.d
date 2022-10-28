@@ -10,7 +10,7 @@
  */module uim.cake.Http;
 
 import uim.cake.core.Configure;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Message\UriInterface;

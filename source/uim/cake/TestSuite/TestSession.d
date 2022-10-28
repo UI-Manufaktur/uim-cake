@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.TestSuite;
 
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * Read only access to the session during testing.
