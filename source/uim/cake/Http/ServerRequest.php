@@ -232,7 +232,7 @@ class ServerRequest : IServerRequest
      * @param array<string, mixed> myConfig The config data to use.
      * @return void
      */
-    protected auto _setConfig(array myConfig): void
+    protected void _setConfig(array myConfig)
     {
         if (empty(myConfig['session'])) {
             myConfig['session'] = new Session([
@@ -382,7 +382,7 @@ class ServerRequest : IServerRequest
      * @param array<string> $proxies ips list of trusted proxies
      * @return void
      */
-    auto setTrustedProxies(array $proxies): void
+    void setTrustedProxies(array $proxies)
     {
         this.trustedProxies = $proxies;
         this.trustProxy = true;
@@ -488,7 +488,7 @@ class ServerRequest : IServerRequest
      *
      * @return void
      */
-    function clearDetectorCache(): void
+    void clearDetectorCache()
     {
         this._detectorCache = [];
     }
@@ -708,7 +708,7 @@ class ServerRequest : IServerRequest
      * @param callable|array $detector A callable or options array for the detector definition.
      * @return void
      */
-    static function addDetector(string myName, $detector): void
+    static void addDetector(string myName, $detector)
     {
         myName = strtolower(myName);
         if (is_callable($detector)) {
@@ -1682,7 +1682,7 @@ class ServerRequest : IServerRequest
      * @return void
      * @throws \InvalidArgumentException If any leaf elements are not valid files.
      */
-    protected auto validateUploadedFiles(array $uploadedFiles, string myPath): void
+    protected void validateUploadedFiles(array $uploadedFiles, string myPath)
     {
         foreach ($uploadedFiles as myKey => $file) {
             if (is_array($file)) {

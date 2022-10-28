@@ -469,13 +469,13 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage Assertion failure message
      * @return void
      */
-    function assertEventFiredWith(
+    void assertEventFiredWith(
         string myName,
         string myDataKey,
         myDataValue,
         ?EventManager myEventManager = null,
         string myMessage = ''
-    ): void {
+    ) {
         if (!myEventManager) {
             myEventManager = EventManager::instance();
         }
@@ -491,7 +491,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextNotEquals(string $expected, string myResult, string myMessage = ''): void
+    void assertTextNotEquals(string $expected, string myResult, string myMessage = '')
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         myResult = str_replace(["\r\n", "\r"], "\n", myResult);
@@ -507,7 +507,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextEquals(string $expected, string myResult, string myMessage = ''): void
+    void assertTextEquals(string $expected, string myResult, string myMessage = '')
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         myResult = str_replace(["\r\n", "\r"], "\n", myResult);
@@ -523,7 +523,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextStartsWith(string $prefix, string $string, string myMessage = ''): void
+    void assertTextStartsWith(string $prefix, string $string, string myMessage = '')
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -539,7 +539,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextStartsNotWith(string $prefix, string $string, string myMessage = ''): void
+    void assertTextStartsNotWith(string $prefix, string $string, string myMessage = '')
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -555,7 +555,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextEndsWith(string $suffix, string $string, string myMessage = ''): void
+    void assertTextEndsWith(string $suffix, string $string, string myMessage = '')
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -571,7 +571,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextEndsNotWith(string $suffix, string $string, string myMessage = ''): void
+    void assertTextEndsNotWith(string $suffix, string $string, string myMessage = '')
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -588,12 +588,12 @@ abstract class TestCase : BaseTestCase
      * @param bool $ignoreCase Whether the search should be case-sensitive.
      * @return void
      */
-    function assertTextContains(
+    void assertTextContains(
         string $needle,
         string $haystack,
         string myMessage = '',
         bool $ignoreCase = false
-    ): void {
+    ) {
         $needle = str_replace(["\r\n", "\r"], "\n", $needle);
         $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
 
