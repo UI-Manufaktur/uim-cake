@@ -3,14 +3,14 @@ module uim.cake.ORM\Behavior\Translate;
 use ArrayObject;
 import uim.cake.collection\ICollection;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.database.Expression\FieldInterface;
+import uim.cake.databases.Expression\FieldInterface;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Event\IEvent;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
 import uim.cake.ORM\Marshaller;
 import uim.cake.ORM\Query;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations
@@ -48,8 +48,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \Cake\ORM\Table myTable Table instance.
      * @param array<string, mixed> myConfig Configuration.
      */
-    this(Table myTable, array myConfig = [])
-    {
+    this(Table myTable, array myConfig = []) {
         myTableAlias = myTable.getAlias();
         [myPlugin] = pluginSplit(myTable.getRegistryAlias(), true);
         myTableReferenceName = myConfig['referenceName'];
@@ -105,8 +104,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject myOptions The options for the query.
      * @return void
      */
-    function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions)
-    {
+    function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions) {
         $locale = Hash::get(myOptions, 'locale', this.getLocale());
         myConfig = this.getConfig();
 
@@ -188,8 +186,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param array<string, mixed> myConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected auto addFieldsToQuery(myQuery, array myConfig)
-    {
+    protected auto addFieldsToQuery(myQuery, array myConfig) {
         if (myQuery.isAutoFieldsEnabled()) {
             return true;
         }
@@ -325,8 +322,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject myOptions the options passed to the save method.
      * @return void
      */
-    function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)
-    {
+    function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
         $locale = $entity.get('_locale') ?: this.getLocale();
         $newOptions = [this.translationTable.getAlias() => ['validate' => false]];
         myOptions['associated'] = $newOptions + myOptions['associated'];
@@ -451,8 +447,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param string $locale Locale string
      * @return \Cake\Collection\ICollection
      */
-    protected auto rowMapper(myResults, $locale)
-    {
+    protected auto rowMapper(myResults, $locale) {
         $allowEmpty = this._config['allowEmptyTranslations'];
 
         return myResults.map(function ($row) use ($allowEmpty, $locale) {
@@ -547,8 +542,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \Cake\Datasource\IEntity $entity Entity.
      * @return void
      */
-    protected auto bundleTranslatedFields($entity)
-    {
+    protected auto bundleTranslatedFields($entity) {
         $translations = (array)$entity.get('_translations');
 
         if (empty($translations) && !$entity.isDirty('_translations')) {

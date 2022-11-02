@@ -74,8 +74,7 @@ trait QueryTrait
      * @param \Cake\Datasource\IRepository|\Cake\ORM\Table myRepository The default table object to use
      * @return this
      */
-    function repository(IRepository myRepository)
-    {
+    function repository(IRepository myRepository) {
         this._repository = myRepository;
 
         return this;
@@ -104,8 +103,7 @@ trait QueryTrait
      * @param iterable myResults The results this query should return.
      * @return this
      */
-    auto setResult(iterable myResults)
-    {
+    auto setResult(iterable myResults) {
         this._results = myResults;
 
         return this;
@@ -160,8 +158,7 @@ trait QueryTrait
      *   a cache engine instance.
      * @return this
      */
-    function cache(myKey, myConfig = 'default')
-    {
+    function cache(myKey, myConfig = 'default') {
         if (myKey === false) {
             this._cache = null;
 
@@ -174,11 +171,8 @@ trait QueryTrait
 
     /**
      * Returns the current configured query `_eagerLoaded` value
-     *
-     * @return bool
      */
-    function isEagerLoaded(): bool
-    {
+    bool isEagerLoaded() {
         return this._eagerLoaded;
     }
 
@@ -189,8 +183,7 @@ trait QueryTrait
      * @param bool myValue Whether to eager load.
      * @return this
      */
-    function eagerLoaded(bool myValue)
-    {
+    function eagerLoaded(bool myValue) {
         this._eagerLoaded = myValue;
 
         return this;
@@ -303,8 +296,7 @@ trait QueryTrait
      * @return this
      * @see \Cake\collection.iIterator\MapReduce for details on how to use emit data to the map reducer.
      */
-    function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
-    {
+    function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false) {
         if ($overwrite) {
             this._mapReduce = [];
         }
@@ -422,8 +414,7 @@ trait QueryTrait
      * @return this
      * @throws \InvalidArgumentException
      */
-    function formatResults(?callable $formatter = null, myMode = self::APPEND)
-    {
+    function formatResults(?callable $formatter = null, myMode = self::APPEND) {
         if (myMode === self::OVERWRITE) {
             this._formatters = [];
         }
@@ -524,8 +515,7 @@ trait QueryTrait
      * @return mixed
      * @throws \BadMethodCallException if no such method exists in result set
      */
-    auto __call(string $method, array $arguments)
-    {
+    auto __call(string $method, array $arguments) {
         myResultSetClass = this._decoratorClass();
         if (in_array($method, get_class_methods(myResultSetClass), true)) {
             deprecationWarning(sprintf(

@@ -44,8 +44,7 @@ class PackageLocator
      * @param array $registry A registry of packages.
      * @see PackageLocator::$registry
      */
-    this(array $registry = [])
-    {
+    this(array $registry = []) {
         foreach ($registry as myName => $locales) {
             foreach ($locales as $locale => $spec) {
                 this.set(myName, $locale, $spec);

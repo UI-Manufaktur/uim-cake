@@ -9,9 +9,9 @@ import uim.cake.Filesystem\Filesystem;
 import uim.cake.Log\LogTrait;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
 import uim.cake.ORM\Locator\ILocator;
-import uim.cake.Utility\Inflector;
-import uim.cake.Utility\MergeVariablesTrait;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Inflector;
+import uim.cake.utikities.MergeVariablesTrait;
+import uim.cake.utikities.Text;
 use ReflectionException;
 use ReflectionMethod;
 use RuntimeException;
@@ -165,8 +165,7 @@ class Shell {
      * @param \Cake\ORM\Locator\ILocator|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell
      */
-    this(?ConsoleIo $io = null, ?ILocator $locator = null)
-    {
+    this(?ConsoleIo $io = null, ?ILocator $locator = null) {
         if (!this.name) {
             [, myClass] = moduleSplit(static::class);
             this.name = str_replace(['Shell', 'Task'], '', myClass);
@@ -193,8 +192,7 @@ class Shell {
      * @param string myName The name of the root command.
      * @return this
      */
-    auto setRootName(string myName)
-    {
+    auto setRootName(string myName) {
         this.rootName = myName;
 
         return this;
@@ -216,8 +214,7 @@ class Shell {
      * @param \Cake\Console\ConsoleIo $io The ConsoleIo object to use.
      * @return void
      */
-    auto setIo(ConsoleIo $io): void
-    {
+    void setIo(ConsoleIo $io) {
         this._io = $io;
     }
 
@@ -229,8 +226,7 @@ class Shell {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::initialize
      */
-    function initialize(): void
-    {
+    void initialize() {
         this.loadTasks();
     }
 
@@ -244,8 +240,7 @@ class Shell {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::startup
      */
-    function startup(): void
-    {
+    void startup() {
         if (!this.param('requested')) {
             this._welcome();
         }
@@ -256,8 +251,7 @@ class Shell {
      *
      * @return void
      */
-    protected auto _welcome(): void
-    {
+    protected void _welcome() {
     }
 
     /**
@@ -265,8 +259,7 @@ class Shell {
      *
      * @return true
      */
-    bool loadTasks()
-    {
+    bool loadTasks() {
         if (this.tasks === true || empty(this.tasks)) {
             return true;
         }
@@ -284,8 +277,7 @@ class Shell {
      * @throws \RuntimeException
      * @return void
      */
-    protected auto _validateTasks(): void
-    {
+    protected void _validateTasks() {
         foreach (this._taskMap as $taskName => $task) {
             myClass = App::className($task['class'], 'Shell/Task', 'Task');
             if (myClass === null) {
@@ -304,8 +296,7 @@ class Shell {
      * @return bool Success
      * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasTask(string $task)
-    {
+    bool hasTask(string $task) {
         return isset(this._taskMap[Inflector::camelize($task)]);
     }
 
@@ -316,8 +307,7 @@ class Shell {
      * @return bool
      * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasMethod(string myName)
-    {
+    bool hasMethod(string myName) {
         try {
             $method = new ReflectionMethod(this, myName);
             if (!$method.isPublic()) {
@@ -446,8 +436,7 @@ class Shell {
      * @return int|bool|null
      * @link https://book.cakephp.org/4/en/console-and-shells.html#the-cakephp-console
      */
-    function runCommand(array $argv, bool $autoMethod = false, array $extra = [])
-    {
+    function runCommand(array $argv, bool $autoMethod = false, array $extra = []) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         this.OptionParser = this.getOptionParser();
         try {
@@ -514,8 +503,7 @@ class Shell {
      *
      * @return void
      */
-    protected auto _setOutputLevel(): void
-    {
+    protected void _setOutputLevel() {
         this._io.setLoggers(ConsoleIo::NORMAL);
         if (!empty(this.params['quiet'])) {
             this._io.level(ConsoleIo::QUIET);
@@ -533,8 +521,7 @@ class Shell {
      * @param string|null $command The command to get help for.
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    protected auto _displayHelp(?string $command = null)
-    {
+    protected auto _displayHelp(?string $command = null) {
         $format = 'text';
         if (!empty(this.args[0]) && this.args[0] === 'xml') {
             $format = 'xml';
@@ -574,8 +561,7 @@ class Shell {
      * @param string myName The task to get.
      * @return \Cake\Console\Shell Object of Task
      */
-    auto __get(string myName)
-    {
+    auto __get(string myName) {
         if (empty(this.{myName}) && in_array(myName, this.taskNames, true)) {
             $properties = this._taskMap[myName];
             this.{myName} = this.Tasks.load($properties['class'], $properties['config']);
@@ -594,8 +580,7 @@ class Shell {
      * @param string myName The name of the parameter to get.
      * @return string|bool|null Value. Will return null if it doesn't exist.
      */
-    function param(string myName)
-    {
+    function param(string myName) {
         return this.params[myName] ?? null;
     }
 
@@ -636,8 +621,7 @@ class Shell {
      * @see \Cake\Utility\Text::wrap()
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::wrapText
      */
-    function wrapText(string $text, myOptions = []): string
-    {
+    string wrapText(string $text, myOptions = []) {
         return Text::wrap($text, myOptions);
     }
 
@@ -748,8 +732,7 @@ class Shell {
      * @return string
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::nl
      */
-    function nl(int $multiplier = 1): string
-    {
+    string nl(int $multiplier = 1) {
         return this._io.nl($multiplier);
     }
 
@@ -761,8 +744,7 @@ class Shell {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::hr
      */
-    function hr(int $newlines = 0, int $width = 63): void
-    {
+    void hr(int $newlines = 0, int $width = 63) {
         this._io.hr($newlines, $width);
     }
 
@@ -777,8 +759,7 @@ class Shell {
      * @link https://book.cakephp.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
      */
-    function abort(string myMessage, int $exitCode = self::CODE_ERROR): void
-    {
+    void abort(string myMessage, int $exitCode = self::CODE_ERROR) {
         this._io.err('<error>' . myMessage . '</error>');
         throw new StopException(myMessage, $exitCode);
     }
@@ -810,8 +791,7 @@ class Shell {
      * @return bool Success
      * @link https://book.cakephp.org/4/en/console-and-shells.html#creating-files
      */
-    bool createFile(string myPath, string myContentss)
-    {
+    bool createFile(string myPath, string myContentss) {
         myPath = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, myPath);
 
         this._io.out();
@@ -867,8 +847,7 @@ class Shell {
      * @return string short path
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::shortPath
      */
-    function shortPath(string absoluteFilePath): string
-    {
+    string shortPath(string absoluteFilePath) {
         $shortPath = str_replace(ROOT, '', absoluteFilePath);
         $shortPath = str_replace('..' . DIRECTORY_SEPARATOR, '', $shortPath);
         $shortPath = str_replace(DIRECTORY_SEPARATOR, '/', $shortPath);

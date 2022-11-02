@@ -1,7 +1,7 @@
-module uim.cake.database.Schema;
+module uim.cake.databases.Schema;
 
-import uim.cake.database.Connection;
-import uim.cake.database.Exception\DatabaseException;
+import uim.cake.databases.Connection;
+import uim.cake.databases.exceptions\DatabaseException;
 use PDOException;
 
 /**
@@ -31,8 +31,7 @@ class Collection : ICollection
      *
      * @param \Cake\Database\Connection myConnection The connection instance.
      */
-    this(Connection myConnection)
-    {
+    this(Connection myConnection) {
         this._connection = myConnection;
         this._dialect = myConnection.getDriver().schemaDialect();
     }

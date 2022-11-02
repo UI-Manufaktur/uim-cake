@@ -1,4 +1,4 @@
-module uim.cake.database;
+module uim.cake.databases;
 
 use Closure;
 
@@ -11,7 +11,6 @@ interface IExpression
      * Converts the Node into a SQL string fragment.
      *
      * @param \Cake\Database\ValueBinder $binder Parameter binder
-     * @return string
      */
     string sql(ValueBinder $binder);
 

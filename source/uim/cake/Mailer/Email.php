@@ -2,7 +2,7 @@ module uim.cake.Mailer;
 
 use BadMethodCallException;
 import uim.cake.Log\Log;
-import uim.cake.View\ViewBuilder;
+import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 use JsonSerializable;
 use LogicException;
@@ -101,8 +101,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string, mixed>|string|null myConfig Array of configs, or string to load configs from app.php
      */
-    this(myConfig = null)
-    {
+    this(myConfig = null) {
         this.message = new this.messageClass();
 
         if (myConfig === null) {
@@ -136,8 +135,7 @@ class Email : JsonSerializable, Serializable
      * @param array $args Method arguments
      * @return this|mixed
      */
-    auto __call(string $method, array $args)
-    {
+    auto __call(string $method, array $args) {
         myResult = this.message.$method(...$args);
 
         if (strpos($method, 'get') === 0) {
@@ -168,8 +166,7 @@ class Email : JsonSerializable, Serializable
      * @param string $viewClass View class name.
      * @return this
      */
-    auto setViewRenderer(string $viewClass)
-    {
+    auto setViewRenderer(string $viewClass) {
         this.getRenderer().viewBuilder().setClassName($viewClass);
 
         return this;
@@ -193,8 +190,7 @@ class Email : JsonSerializable, Serializable
      * @param array $viewVars Variables to set for view.
      * @return this
      */
-    auto setViewVars(array $viewVars)
-    {
+    auto setViewVars(array $viewVars) {
         this.getRenderer().viewBuilder().setVars($viewVars);
 
         return this;
@@ -222,8 +218,7 @@ class Email : JsonSerializable, Serializable
      * @throws \LogicException When the chosen transport lacks a send method.
      * @throws \InvalidArgumentException When myName is neither a string nor an object.
      */
-    auto setTransport(myName)
-    {
+    auto setTransport(myName) {
         if (is_string(myName)) {
             $transport = TransportFactory::get(myName);
         } elseif (is_object(myName)) {
@@ -259,8 +254,7 @@ class Email : JsonSerializable, Serializable
      * @param string|null myType Use MESSAGE_* constants or null to return the full message as array
      * @return array|string String if type is given, array if type is null
      */
-    function message(?string myType = null)
-    {
+    function message(?string myType = null) {
         if (myType === null) {
             return this.message.getBody();
         }
@@ -277,8 +271,7 @@ class Email : JsonSerializable, Serializable
      *    an array with config.
      * @return this
      */
-    auto setProfile(myConfig)
-    {
+    auto setProfile(myConfig) {
         if (is_string(myConfig)) {
             myName = myConfig;
             myConfig = Mailer::getConfig(myName);
@@ -416,8 +409,7 @@ class Email : JsonSerializable, Serializable
      * @param \Cake\Mailer\Renderer $renderer Render instance.
      * @return this
      */
-    auto setRenderer(Renderer $renderer)
-    {
+    auto setRenderer(Renderer $renderer) {
         this.renderer = $renderer;
 
         return this;
@@ -546,8 +538,7 @@ class Email : JsonSerializable, Serializable
      * @param array<string, mixed> myConfig Email configuration array.
      * @return this
      */
-    function createFromArray(array myConfig)
-    {
+    function createFromArray(array myConfig) {
         if (isset(myConfig['viewConfig'])) {
             this.getRenderer().viewBuilder().createFromArray(myConfig['viewConfig']);
             unset(myConfig['viewConfig']);
@@ -620,8 +611,7 @@ class Email : JsonSerializable, Serializable
      * @param array $arguments Method argument.
      * @return mixed
      */
-    static auto __callStatic(myName, $arguments)
-    {
+    static auto __callStatic(myName, $arguments) {
         return [Mailer::class, myName](...$arguments);
     }
 }

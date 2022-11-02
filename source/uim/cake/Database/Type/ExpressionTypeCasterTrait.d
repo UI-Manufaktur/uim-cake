@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.database.Type;
+ */module uim.cake.databases.Type;
 
-import uim.cake.database.TypeFactory;
+import uim.cake.databases.TypeFactory;
 
 /**
  * Offers a method to convert values to IExpression objects
@@ -26,8 +26,7 @@ trait ExpressionTypeCasterTrait
      * @param string|null myType The type name
      * @return mixed
      */
-    protected auto _castToExpression(myValue, ?string myType = null)
-    {
+    protected auto _castToExpression(myValue, ?string myType = null) {
         if (myType === null) {
             return myValue;
         }

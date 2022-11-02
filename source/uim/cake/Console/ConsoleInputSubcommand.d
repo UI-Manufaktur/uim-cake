@@ -50,8 +50,7 @@ class ConsoleInputSubCommand {
      * @param \Cake\Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
-    this(myName, $help = '', $parser = null)
-    {
+    this(myName, $help = '', $parser = null) {
         if (is_array(myName)) {
             myData = myName + ['name' => null, 'help' => '', 'parser' => null];
             if (empty(myData['name'])) {
@@ -78,18 +77,14 @@ class ConsoleInputSubCommand {
      *
      * @return string Value of this._name.
      */
-    function name(): string
-    {
+    string name() {
         return this._name;
     }
 
     /**
      * Get the raw help string for this command
-     *
-     * @return string
      */
-    auto getRawHelp(): string
-    {
+    string getRawHelp() {
         return this._help;
     }
 
@@ -97,10 +92,8 @@ class ConsoleInputSubCommand {
      * Generate the help for this this subcommand.
      *
      * @param int $width The width to make the name of the subcommand.
-     * @return string
      */
-    function help(int $width = 0): string
-    {
+    string help(int $width = 0) {
         myName = this._name;
         if (strlen(myName) < $width) {
             myName = str_pad(myName, $width, ' ');

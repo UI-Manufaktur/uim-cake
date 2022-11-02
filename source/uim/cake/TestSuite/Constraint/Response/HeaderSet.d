@@ -33,8 +33,7 @@ class HeaderSet : ResponseBase
      * @param \Psr\Http\Message\IResponse|null $response A response instance.
      * @param string $headerName Header name
      */
-    this(?IResponse $response, string $headerName)
-    {
+    this(?IResponse $response, string $headerName) {
         super.this($response);
 
         this.headerName = $headerName;

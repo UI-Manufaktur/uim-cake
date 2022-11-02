@@ -155,8 +155,7 @@ trait ModelAwareTrait
      * @param string myModelType The model type
      * @return this
      */
-    auto setModelType(string myModelType)
-    {
+    auto setModelType(string myModelType) {
         this._modelType = myModelType;
 
         return this;

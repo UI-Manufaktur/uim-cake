@@ -14,8 +14,8 @@
 
 import uim.cake.controller\Controller;
 import uim.cake.core.Configure;
-import uim.cake.database.Exception\DatabaseException;
-import uim.cake.Error\ExceptionRenderer;
+import uim.cake.databases.exceptions\DatabaseException;
+import uim.cake.errors\ExceptionRenderer;
 import uim.cake.Event\IEvent;
 import uim.cake.Event\EventManager;
 import uim.cake.Form\FormProtector;
@@ -53,9 +53,9 @@ import uim.cake.TestSuite\Constraint\Session\SessionHasKey;
 import uim.cake.TestSuite\Constraint\View\LayoutFileEquals;
 import uim.cake.TestSuite\Constraint\View\TemplateFileEquals;
 import uim.cake.TestSuite\Stub\TestExceptionRenderer;
-import uim.cake.Utility\CookieCryptTrait;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Security;
+import uim.cake.utikities.CookieCryptTrait;
+import uim.cake.utikities.Hash;
+import uim.cake.utikities.Security;
 use Exception;
 use Laminas\Diactoros\Uri;
 use PHPUnit\Exception as PHPUnitException;
@@ -752,8 +752,7 @@ trait IntegrationTestTrait
      * @param string myName The view variable to get.
      * @return mixed The view variable if set.
      */
-    function viewVariable(string myName)
-    {
+    function viewVariable(string myName) {
         return this._controller ? this._controller.viewBuilder().getVar(myName) : null;
     }
 
@@ -851,8 +850,7 @@ trait IntegrationTestTrait
      * @param string myMessage The failure message that will be appended to the generated message.
      * @return void
      */
-    function assertRedirectEquals(myUrl = null, myMessage = '')
-    {
+    function assertRedirectEquals(myUrl = null, myMessage = '') {
         if (!this._response) {
             this.fail('No response set, cannot assert header.');
         }

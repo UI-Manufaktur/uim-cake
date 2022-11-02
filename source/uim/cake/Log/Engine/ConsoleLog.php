@@ -56,8 +56,7 @@ class ConsoleLog : BaseLog
      * @param array<string, mixed> myConfig Options for the FileLog, see above.
      * @throws \InvalidArgumentException
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         super.this(myConfig);
 
         myConfig = this._config;
@@ -88,8 +87,7 @@ class ConsoleLog : BaseLog
      * @return void success of write.
      * @see \Cake\Log\Log::$_levels
      */
-    function log($level, myMessage, array $context = [])
-    {
+    function log($level, myMessage, array $context = []) {
         myMessage = this._format(myMessage, $context);
         this._output.write(this.formatter.format($level, myMessage, $context));
     }

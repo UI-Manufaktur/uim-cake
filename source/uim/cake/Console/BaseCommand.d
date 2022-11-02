@@ -2,7 +2,7 @@ module uim.cake.console;
 
 import uim.cake.console.Exception\ConsoleException;
 import uim.cake.console.Exception\StopException;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -25,8 +25,7 @@ abstract class BaseCommand : ICommand
     protected string myName = 'cake unknown';
 
 
-    auto setName(string myName)
-    {
+    auto setName(string myName) {
         if (strpos(myName, ' ') < 1) {
             throw new InvalidArgumentException(
                 "The name '{myName}' is missing a space. Names should look like `cake routes`"
@@ -39,11 +38,8 @@ abstract class BaseCommand : ICommand
 
     /**
      * Get the command name.
-     *
-     * @return string
      */
-    auto getName(): string
-    {
+    string getName() {
         return this.name;
     }
 
@@ -52,8 +48,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    auto getRootName(): string
-    {
+    string getRootName() {
         [$root] = explode(' ', this.name);
 
         return $root;
@@ -118,11 +113,8 @@ abstract class BaseCommand : ICommand
      * Override this method and implement expensive/important setup steps that
      * should not run on every command run. This method will be called *before*
      * the options and arguments are validated and processed.
-     *
-     * @return void
      */
-    function initialize(): void
-    {
+    override void initialize() {
     }
 
 
@@ -166,8 +158,7 @@ abstract class BaseCommand : ICommand
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected auto displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io): void
-    {
+    protected void displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io) {
         $format = 'text';
         if ($args.getArgumentAt(0) === 'xml') {
             $format = 'xml';
@@ -184,8 +175,7 @@ abstract class BaseCommand : ICommand
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected auto setOutputLevel(Arguments $args, ConsoleIo $io): void
-    {
+    protected void setOutputLevel(Arguments $args, ConsoleIo $io) {
         $io.setLoggers(ConsoleIo::NORMAL);
         if ($args.getOption('quiet')) {
             $io.level(ConsoleIo::QUIET);
@@ -213,8 +203,7 @@ abstract class BaseCommand : ICommand
      * @throws \Cake\Console\Exception\StopException
      * @return void
      */
-    function abort(int $code = self::CODE_ERROR): void
-    {
+    void abort(int $code = self::CODE_ERROR) {
         throw new StopException('Command aborted', $code);
     }
 

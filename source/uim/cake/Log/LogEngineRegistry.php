@@ -93,8 +93,7 @@ class LogEngineRegistry : ObjectRegistry
      * @param string myName The logger name.
      * @return this
      */
-    function unload(string myName)
-    {
+    function unload(string myName) {
         unset(this._loaded[myName]);
 
         return this;

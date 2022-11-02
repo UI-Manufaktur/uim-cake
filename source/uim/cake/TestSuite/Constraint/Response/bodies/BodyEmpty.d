@@ -24,9 +24,8 @@ class BodyEmpty : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected type
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other)
     {
         return empty(this._getBodyAsString());
     }

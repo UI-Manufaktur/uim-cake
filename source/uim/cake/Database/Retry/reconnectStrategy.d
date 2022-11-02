@@ -1,7 +1,7 @@
-module uim.cake.database.Retry;
+module uim.cake.databases.Retry;
 
 import uim.cake.core.Retry\RetryStrategyInterface;
-import uim.cake.database.Connection;
+import uim.cake.databases.Connection;
 use Exception;
 
 /**
@@ -50,8 +50,7 @@ class ReconnectStrategy : RetryStrategyInterface
      *
      * @param \Cake\Database\Connection myConnection The connection to check
      */
-    this(Connection myConnection)
-    {
+    this(Connection myConnection) {
         this.connection = myConnection;
     }
 
@@ -61,8 +60,7 @@ class ReconnectStrategy : RetryStrategyInterface
      * Checks whether the exception was caused by a lost connection,
      * and returns true if it was able to successfully reconnect.
      */
-    function shouldRetry(Exception myException, int $retryCount): bool
-    {
+    bool shouldRetry(Exception myException, int $retryCount) {
         myMessage = myException.getMessage();
 
         foreach (static::$causes as $cause) {
@@ -79,8 +77,7 @@ class ReconnectStrategy : RetryStrategyInterface
      *
      * @return bool Whether the connection was re-established
      */
-    bool auto reconnect()
-    {
+    bool auto reconnect() {
         if (this.connection.inTransaction()) {
             // It is not safe to blindly reconnect in the middle of a transaction
             return false;

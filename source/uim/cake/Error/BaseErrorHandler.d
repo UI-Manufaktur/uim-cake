@@ -1,4 +1,4 @@
-module uim.cake.Error;
+module uim.cake.errors;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
@@ -52,7 +52,7 @@ abstract class BaseErrorHandler
      * @param bool $debug Whether the app is in debug mode.
      * @return void
      */
-    abstract protected auto _displayError(array myError, bool $debug): void;
+    abstract protected void _displayError(array myError, bool $debug);
 
     /**
      * Display an exception in an environment specific way.
@@ -63,15 +63,12 @@ abstract class BaseErrorHandler
      * @param \Throwable myException The uncaught exception.
      * @return void
      */
-    abstract protected auto _displayException(Throwable myException): void;
+    abstract protected void _displayException(Throwable myException);
 
     /**
      * Register the error and exception handlers.
-     *
-     * @return void
      */
-    function register(): void
-    {
+    void register() {
         $level = this._config['errorLevel'] ?? -1;
         error_reporting($level);
         set_error_handler([this, 'handleError'], $level);
@@ -122,13 +119,13 @@ abstract class BaseErrorHandler
      * @param array<string, mixed>|null $context Context
      * @return bool True if error was handled
      */
-    function handleError(
+    bool handleError(
         int $code,
         string $description,
         ?string $file = null,
         ?int $line = null,
         ?array $context = null
-    ): bool {
+    ) {
         if (!(error_reporting() & $code)) {
             return false;
         }
@@ -180,8 +177,7 @@ abstract class BaseErrorHandler
      * @return void
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
-    function wrapAndHandleException(Throwable myException): void
-    {
+    void wrapAndHandleException(Throwable myException) {
         deprecationWarning('This method is no longer in use. Call handleException instead.');
         this.handleException(myException);
     }
@@ -197,8 +193,7 @@ abstract class BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    function handleException(Throwable myException): void
-    {
+    void handleException(Throwable myException) {
         this._displayException(myException);
         this.logException(myException);
         $code = myException.getCode() ?: 1;
@@ -213,8 +208,7 @@ abstract class BaseErrorHandler
      * @param int $code Exit code.
      * @return void
      */
-    protected auto _stop(int $code): void
-    {
+    protected void _stop(int $code) {
         // Do nothing.
     }
 
@@ -225,10 +219,8 @@ abstract class BaseErrorHandler
      * @param string $description Error description
      * @param string $file File on which error occurred
      * @param int $line Line that triggered the error
-     * @return bool
      */
-    function handleFatalError(int $code, string $description, string $file, int $line): bool
-    {
+    bool handleFatalError(int $code, string $description, string $file, int $line) {
         myData = [
             'code' => $code,
             'description' => $description,
@@ -250,8 +242,7 @@ abstract class BaseErrorHandler
      * @param int $additionalKb Number in kilobytes
      * @return void
      */
-    function increaseMemoryLimit(int $additionalKb): void
-    {
+    void increaseMemoryLimit(int $additionalKb) {
         $limit = ini_get('memory_limit');
         if ($limit === false || $limit === '' || $limit === '-1') {
             return;
@@ -280,8 +271,7 @@ abstract class BaseErrorHandler
      * @param array myData Array of error data.
      * @return bool
      */
-    protected auto _logError($level, array myData): bool
-    {
+    protected bool _logError($level, array myData) {
         myMessage = sprintf(
             '%s (%s): %s in [%s, line %s]',
             myData['error'],
@@ -307,10 +297,8 @@ abstract class BaseErrorHandler
      *
      * @param \Throwable myException The exception to log a message for.
      * @param \Psr\Http\Message\IServerRequest|null myRequest The current request.
-     * @return bool
      */
-    function logException(Throwable myException, ?IServerRequest myRequest = null): bool
-    {
+    bool logException(Throwable myException, ?IServerRequest myRequest = null) {
         if (empty(this._config['log'])) {
             return false;
         }

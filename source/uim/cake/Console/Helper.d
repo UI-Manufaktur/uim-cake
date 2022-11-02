@@ -33,8 +33,7 @@ abstract class Helper
      * @param \Cake\Console\ConsoleIo $io The ConsoleIo instance to use.
      * @param array<string, mixed> myConfig The settings for this helper.
      */
-    this(ConsoleIo $io, array myConfig = [])
-    {
+    this(ConsoleIo $io, array myConfig = []) {
         this._io = $io;
         this.setConfig(myConfig);
     }
@@ -45,5 +44,5 @@ abstract class Helper
      * @param array $args The arguments for the helper.
      * @return void
      */
-    abstract function output(array $args): void;
+    abstract void output(array $args);
 }

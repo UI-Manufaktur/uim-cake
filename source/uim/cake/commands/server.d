@@ -1,13 +1,3 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         2.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 module uim.cake.command;
 
 import uim.cake.console.Arguments;
@@ -70,8 +60,7 @@ class ServerCommand : Command {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#hook-methods
      */
-    protected auto startup(Arguments $args, ConsoleIo $io): void
-    {
+    protected void startup(Arguments $args, ConsoleIo $io) {
         if ($args.getOption('host')) {
             this._host = (string)$args.getOption('host');
         }

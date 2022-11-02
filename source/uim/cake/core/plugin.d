@@ -24,8 +24,7 @@ class Plugin
      * @throws \Cake\Core\Exception\MissingPluginException If the folder for plugin was not found
      *   or plugin has not been loaded.
      */
-    static function path(string myName): string
-    {
+    static string path(string myName) {
         myPlugin = static::getCollection().get(myName);
         return myPlugin.getPath();
     }
@@ -37,8 +36,7 @@ class Plugin
      * @return string Path to the plugin folder containing class files.
      * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
      */
-    static function classPath(string myName): string
-    {
+    static string classPath(string myName) {
         myPlugin = static::getCollection().get(myName);
 
         return myPlugin.getClassPath();
@@ -51,8 +49,7 @@ class Plugin
      * @return string Path to the plugin folder containing config files.
      * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
      */
-    static function configPath(string myName): string
-    {
+    static string configPath(string myName) {
         myPlugin = static::getCollection().get(myName);
 
         return myPlugin.getConfigPath();
@@ -65,8 +62,7 @@ class Plugin
      * @return string Path to the plugin folder containing template files.
      * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
      */
-    static function templatePath(string myName): string
-    {
+    static string templatePath(string myName) {
         myPlugin = static::getCollection().get(myName);
 
         return myPlugin.getTemplatePath();
@@ -79,8 +75,7 @@ class Plugin
      * @return bool
 
      */
-    static bool isLoaded(string myPlugin)
-    {
+    static bool isLoaded(string myPlugin) {
         return static::getCollection().has(myPlugin);
     }
 

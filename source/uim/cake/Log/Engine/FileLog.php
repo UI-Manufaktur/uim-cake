@@ -12,7 +12,7 @@
 
 import uim.cake.core.Configure;
 import uim.cake.Log\Formatter\DefaultFormatter;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 
 /**
  * File Storage stream for Logging. Writes logs to different files
@@ -79,8 +79,7 @@ class FileLog : BaseLog
      *
      * @param array<string, mixed> myConfig Configuration array
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         super.this(myConfig);
 
         this._path = this.getConfig('path', sys_get_temp_dir() . DIRECTORY_SEPARATOR);

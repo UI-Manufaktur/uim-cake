@@ -45,8 +45,7 @@ class ExistsIn
      *     Options 'allowNullableNulls' will make the rule pass if given foreign keys are set to `null`.
      *     Notice: allowNullableNulls cannot pass by database columns set to `NOT NULL`.
      */
-    this(myFields, myRepository, array myOptions = [])
-    {
+    this(myFields, myRepository, array myOptions = []) {
         myOptions += ['allowNullableNulls' => false];
         this._options = myOptions;
 

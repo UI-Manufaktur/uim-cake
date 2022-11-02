@@ -5,7 +5,7 @@ import uim.cake;
 
 /* import uim.cake.controller\ComponentRegistry;
 import uim.cake.Http\ServerRequest;
-import uim.cake.Utility\Security;
+import uim.cake.utikities.Security;
  */
 /**
  * Digest Authentication adapter for AuthComponent.
@@ -178,8 +178,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $method Request method
      * @return string Response hash
      */
-    function generateResponseHash(array $digest, string myPassword, string $method): string
-    {
+    string generateResponseHash(array $digest, string myPassword, string $method) {
         return md5(
             myPassword .
             ':' . $digest['nonce'] . ':' . $digest['nc'] . ':' . $digest['cnonce'] . ':' . $digest['qop'] . ':' .
@@ -195,8 +194,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $realm The realm the password is for.
      * @return string the hashed password that can later be used with Digest authentication.
      */
-    static function password(string myUsername, string myPassword, string $realm): string
-    {
+    static string password(string myUsername, string myPassword, string $realm) {
         return md5(myUsername . ':' . $realm . ':' . myPassword);
     }
 
@@ -239,11 +237,8 @@ class DigestAuthenticate : BasicAuthenticate
 
     /**
      * Generate a nonce value that is validated in future requests.
-     *
-     * @return string
      */
-    protected auto generateNonce(): string
-    {
+    protected string generateNonce() {
         $expiryTime = microtime(true) + this.getConfig('nonceLifetime');
         $secret = this.getConfig('secret');
         $signatureValue = hash_hmac('sha256', $expiryTime . ':' . $secret, $secret);
@@ -258,8 +253,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $nonce The nonce value to check.
      * @return bool
      */
-    protected bool validNonce(string $nonce)
-    {
+    protected bool validNonce(string $nonce) {
         myValue = base64_decode($nonce);
         if (myValue === false) {
             return false;

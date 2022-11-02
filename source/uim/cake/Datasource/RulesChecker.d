@@ -102,8 +102,7 @@ class RulesChecker
      *
      * @param array<string, mixed> myOptions The options to pass to every rule
      */
-    this(array myOptions = [])
-    {
+    this(array myOptions = []) {
         this._options = myOptions;
         this._useI18n = function_exists('__d');
     }
@@ -127,8 +126,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function add(callable $rule, myName = null, array myOptions = [])
-    {
+    function add(callable $rule, myName = null, array myOptions = []) {
         this._rules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -152,8 +150,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addCreate(callable $rule, myName = null, array myOptions = [])
-    {
+    function addCreate(callable $rule, myName = null, array myOptions = []) {
         this._createRules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -177,8 +174,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addUpdate(callable $rule, myName = null, array myOptions = [])
-    {
+    function addUpdate(callable $rule, myName = null, array myOptions = []) {
         this._updateRules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -202,8 +198,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addDelete(callable $rule, myName = null, array myOptions = [])
-    {
+    function addDelete(callable $rule, myName = null, array myOptions = []) {
         this._deleteRules[] = this._addError($rule, myName, myOptions);
 
         return this;
@@ -243,7 +238,6 @@ class RulesChecker
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
-     * @return bool
      */
     bool checkCreate(IEntity $entity, array myOptions = [])
     {
@@ -256,7 +250,6 @@ class RulesChecker
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
-     * @return bool
      */
     bool checkUpdate(IEntity $entity, array myOptions = [])
     {
@@ -269,7 +262,6 @@ class RulesChecker
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
-     * @return bool
      */
     bool checkDelete(IEntity $entity, array myOptions = [])
     {

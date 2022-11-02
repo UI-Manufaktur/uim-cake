@@ -1,4 +1,4 @@
-module uim.cake.database.Type;
+module uim.cake.databases.Type;
 
 /**
  * : DateTimeType with support for time zones.

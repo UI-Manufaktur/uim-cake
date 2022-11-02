@@ -68,8 +68,7 @@ class FileEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = [])
-    {
+    bool init(array myConfig = []) {
         super.init(myConfig);
 
         if (this._config['path'] === null) {
@@ -95,8 +94,7 @@ class FileEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    bool set(string myDataId, myValue, $ttl = null)
-    {
+    bool set(string myDataId, myValue, $ttl = null) {
         if (myValue === '' || !this._init) {
             return false;
         }
@@ -141,8 +139,7 @@ class FileEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn't exist, has
      *   expired, or if there was an error fetching it
      */
-    auto get(myDataId, $default = null)
-    {
+    auto get(myDataId, $default = null) {
         myDataId = this._key(myDataId);
 
         if (!this._init || this._setKey(myDataId) === false) {
@@ -195,8 +192,7 @@ class FileEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't
      *   exist or couldn't be removed
      */
-    bool delete(myDataId)
-    {
+    bool delete(myDataId) {
         myDataId = this._key(myDataId);
 
         if (this._setKey(myDataId) === false || !this._init) {
@@ -270,8 +266,7 @@ class FileEngine : CacheEngine
      * @param string myPath The path to search.
      * @return void
      */
-    protected auto _clearDirectory(string myPath): void
-    {
+    protected void _clearDirectory(string myPath) {
         if (!is_dir(myPath)) {
             return;
         }
@@ -315,8 +310,7 @@ class FileEngine : CacheEngine
      * @return int|false
      * @throws \LogicException
      */
-    function decrement(string myKey, int $offset = 1)
-    {
+    function decrement(string myKey, int $offset = 1) {
         throw new LogicException('Files cannot be atomically decremented.');
     }
 
@@ -328,8 +322,7 @@ class FileEngine : CacheEngine
      * @return int|false
      * @throws \LogicException
      */
-    function increment(string myKey, int $offset = 1)
-    {
+    function increment(string myKey, int $offset = 1) {
         throw new LogicException('Files cannot be atomically incremented.');
     }
 
@@ -341,8 +334,7 @@ class FileEngine : CacheEngine
      * @param bool $createKey Whether the key should be created if it doesn't exists, or not
      * @return bool true if the cache key could be set, false otherwise
      */
-    protected bool _setKey(string myKey, bool $createKey = false)
-    {
+    protected bool _setKey(string myKey, bool $createKey = false) {
         $groups = null;
         if (this._groupPrefix) {
             $groups = vsprintf(this._groupPrefix, this.groups());
@@ -390,8 +382,7 @@ class FileEngine : CacheEngine
      *
      * @return bool
      */
-    protected bool _active()
-    {
+    protected bool _active() {
         $dir = new SplFileInfo(this._config['path']);
         myPath = $dir.getPathname();
         $success = true;
@@ -414,8 +405,7 @@ class FileEngine : CacheEngine
     }
 
 
-    protected auto _key(myKey): string
-    {
+    protected string _key(myKey) {
         myKey = super._key(myKey);
 
         if (preg_match('/[\/\\<>?:|*"]/', myKey)) {
@@ -434,8 +424,7 @@ class FileEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         this._File = null;
 
         $prefix = (string)this._config['prefix'];

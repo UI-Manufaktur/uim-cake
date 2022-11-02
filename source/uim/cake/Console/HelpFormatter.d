@@ -1,6 +1,6 @@
 module uim.cake.console;
 
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 use SimpleXMLElement;
 
 /**
@@ -47,8 +47,7 @@ class HelpFormatter
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser help is being generated for.
      */
-    this(ConsoleOptionParser $parser)
-    {
+    this(ConsoleOptionParser $parser) {
         this._parser = $parser;
     }
 
@@ -58,8 +57,7 @@ class HelpFormatter
      * @param string myAlias The alias
      * @return void
      */
-    auto setAlias(string myAlias): void
-    {
+    void setAlias(string myAlias) {
         this._alias = myAlias;
     }
 
@@ -67,10 +65,8 @@ class HelpFormatter
      * Get the help as formatted text suitable for output on the command line.
      *
      * @param int $width The width of the help output.
-     * @return string
      */
-    function text(int $width = 72): string
-    {
+    string text(int $width = 72) {
         $parser = this._parser;
         $out = [];
         $description = $parser.getDescription();
@@ -143,11 +139,8 @@ class HelpFormatter
      * Generate the usage for a shell based on its arguments and options.
      * Usage strings favor short options over the long ones. and optional args will
      * be indicated with []
-     *
-     * @return string
      */
-    protected auto _generateUsage(): string
-    {
+    protected string _generateUsage() {
         $usage = [this._alias . ' ' . this._parser.getCommand()];
         $subcommands = this._parser.subcommands();
         if (!empty($subcommands)) {
@@ -195,8 +188,7 @@ class HelpFormatter
      * @param bool $string Return the SimpleXml object or a string. Defaults to true.
      * @return \SimpleXMLElement|string See $string
      */
-    function xml(bool $string = true)
-    {
+    function xml(bool $string = true) {
         $parser = this._parser;
         $xml = new SimpleXMLElement('<shell></shell>');
         $xml.addChild('command', $parser.getCommand());

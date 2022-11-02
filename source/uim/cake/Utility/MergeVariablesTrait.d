@@ -98,8 +98,7 @@ trait MergeVariablesTrait
      * @param bool $isAssoc Whether the merging should be done in associative mode.
      * @return array The updated value.
      */
-    protected auto _mergePropertyData(array $current, array $parent, bool $isAssoc)
-    {
+    protected auto _mergePropertyData(array $current, array $parent, bool $isAssoc) {
         if (!$isAssoc) {
             return array_merge($parent, $current);
         }

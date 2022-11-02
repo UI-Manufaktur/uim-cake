@@ -28,38 +28,28 @@ interface PluginInterface
 
     /**
      * Get the name of this plugin.
-     *
-     * @return string
      */
-    auto getName(): string;
+    string getName();
 
     /**
      * Get the filesystem path to this plugin
-     *
-     * @return string
      */
-    auto getPath(): string;
+    string getPath();
 
     /**
      * Get the filesystem path to configuration for this plugin
-     *
-     * @return string
      */
-    auto getConfigPath(): string;
+    string getConfigPath();
 
     /**
      * Get the filesystem path to configuration for this plugin
-     *
-     * @return string
      */
-    auto getClassPath(): string;
+    string getClassPath();
 
     /**
      * Get the filesystem path to templates for this plugin
-     *
-     * @return string
      */
-    auto getTemplatePath(): string;
+    string getTemplatePath();
 
     /**
      * Load all the application configuration and bootstrap logic.
@@ -122,7 +112,6 @@ interface PluginInterface
      * Check if the named hook is enabled
      *
      * @param string $hook The hook to check
-     * @return bool
      */
     bool isEnabled(string $hook);
 }

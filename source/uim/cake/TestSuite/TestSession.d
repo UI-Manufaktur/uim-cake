@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.TestSuite;
 
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * Read only access to the session during testing.
@@ -26,8 +26,7 @@ class TestSession
     /**
      * @param array|null $session Session data.
      */
-    this(?array $session)
-    {
+    this(?array $session) {
         this.session = $session;
     }
 
@@ -57,8 +56,7 @@ class TestSession
      * @return mixed The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    function read(?string myName = null)
-    {
+    function read(?string myName = null) {
         if (this.session === null) {
             return null;
         }

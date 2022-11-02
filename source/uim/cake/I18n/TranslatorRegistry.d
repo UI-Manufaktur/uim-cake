@@ -120,8 +120,7 @@ class TranslatorRegistry
      *
      * @return string
      */
-    auto getLocale(): string
-    {
+    string getLocale() {
         return this.locale;
     }
 
@@ -263,8 +262,7 @@ class TranslatorRegistry
      * @param string|null myName The name of the formatter to use.
      * @return string The name of the formatter.
      */
-    function defaultFormatter(?string myName = null): string
-    {
+    string defaultFormatter(?string myName = null) {
         if (myName === null) {
             return this._defaultFormatter;
         }

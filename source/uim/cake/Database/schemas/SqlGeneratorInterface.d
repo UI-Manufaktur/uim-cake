@@ -1,6 +1,6 @@
-module uim.cake.database.Schema;
+module uim.cake.databases.Schema;
 
-import uim.cake.database.Connection;
+import uim.cake.databases.Connection;
 
 /**
  * An interface used by TableSchema objects.

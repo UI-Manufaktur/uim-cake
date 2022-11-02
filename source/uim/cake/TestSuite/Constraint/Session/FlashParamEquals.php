@@ -14,7 +14,7 @@
  */module uim.cake.TestSuite\Constraint\Session;
 
 import uim.cake.Http\Session;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
 
@@ -53,8 +53,7 @@ class FlashParamEquals : Constraint
      * @param string $param Param to check
      * @param int|null $at Expected index
      */
-    this(?Session $session, string myKey, string $param, ?int $at = null)
-    {
+    this(?Session $session, string myKey, string $param, ?int $at = null) {
         if (!$session) {
             myMessage = 'There is no stored session data. Perhaps you need to run a request?';
             myMessage .= ' Additionally, ensure `this.enableRetainFlashMessages()` has been enabled for the test.';

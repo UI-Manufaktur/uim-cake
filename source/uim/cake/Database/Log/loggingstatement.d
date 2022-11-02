@@ -1,6 +1,6 @@
-module uim.cake.database.Log;
+module uim.cake.databases.Log;
 
-import uim.cake.database.Statement\StatementDecorator;
+import uim.cake.databases.Statement\StatementDecorator;
 use Exception;
 use Psr\Log\LoggerInterface;
 
@@ -47,8 +47,7 @@ class LoggingStatement : StatementDecorator
      * @return bool True on success, false otherwise
      * @throws \Exception Re-throws any exception raised during query execution.
      */
-    bool execute(?array myParams = null)
-    {
+    bool execute(?array myParams = null) {
         this.startTime = microtime(true);
 
         this.loggedQuery = new LoggedQuery();
@@ -74,8 +73,7 @@ class LoggingStatement : StatementDecorator
     }
 
 
-    function fetch(myType = self::FETCH_TYPE_NUM)
-    {
+    function fetch(myType = self::FETCH_TYPE_NUM) {
         $record = super.fetch(myType);
 
         if (this.loggedQuery) {
@@ -86,8 +84,7 @@ class LoggingStatement : StatementDecorator
     }
 
 
-    function fetchAll(myType = self::FETCH_TYPE_NUM)
-    {
+    function fetchAll(myType = self::FETCH_TYPE_NUM) {
         myResults = super.fetchAll(myType);
 
         if (this.loggedQuery) {

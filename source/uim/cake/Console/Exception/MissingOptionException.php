@@ -1,16 +1,4 @@
-
-
-/**
-
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://book.cakephp.org/4/en/development/errors.html#error-exception-configuration
- * @since         4.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.console\Exception;
+module uim.cake.console\Exception;
 
 use Throwable;
 
@@ -56,11 +44,8 @@ class MissingOptionException : ConsoleException
 
     /**
      * Get the message with suggestions
-     *
-     * @return string
      */
-    auto getFullMessage(): string
-    {
+    string getFullMessage() {
         $out = this.getMessage();
         $bestGuess = this.findClosestItem(this.requested, this.suggestions);
         if ($bestGuess) {

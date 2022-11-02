@@ -24,8 +24,7 @@ class PDOStatement : StatementDecorator
      * @param \PDOStatement $statement Original statement to be decorated.
      * @param \Cake\Database\IDriver myDriver Driver instance.
      */
-    this(Statement $statement, IDriver myDriver)
-    {
+    this(Statement $statement, IDriver myDriver) {
         this._statement = $statement;
         this._driver = myDriver;
     }
@@ -36,8 +35,7 @@ class PDOStatement : StatementDecorator
      * @param string $property internal property to get
      * @return string|null
      */
-    auto __get(string $property)
-    {
+    auto __get(string $property) {
         if ($property === 'queryString' && isset(this._statement.queryString)) {
             /** @psalm-suppress NoInterfaceProperties */
             return this._statement.queryString;
@@ -99,8 +97,7 @@ class PDOStatement : StatementDecorator
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    function fetch(myType = super.FETCH_TYPE_NUM)
-    {
+    function fetch(myType = super.FETCH_TYPE_NUM) {
         if (myType === static::FETCH_TYPE_NUM) {
             return this._statement.fetch(PDO::FETCH_NUM);
         }
@@ -136,8 +133,7 @@ class PDOStatement : StatementDecorator
      * @return array|false list of all results from database for this statement, false on failure
      * @psalm-assert string myType
      */
-    function fetchAll(myType = super.FETCH_TYPE_NUM)
-    {
+    function fetchAll(myType = super.FETCH_TYPE_NUM) {
         if (myType === static::FETCH_TYPE_NUM) {
             return this._statement.fetchAll(PDO::FETCH_NUM);
         }

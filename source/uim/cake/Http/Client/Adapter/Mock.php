@@ -48,7 +48,7 @@ class Mock : AdapterInterface
      * @param array<string, mixed> myOptions See above.
      * @return void
      */
-    function addResponse(RequestInterface myRequest, Response $response, array myOptions): void
+    void addResponse(RequestInterface myRequest, Response $response, array myOptions)
     {
         if (isset(myOptions['match']) && !(myOptions['match'] instanceof Closure)) {
             myType = getTypeName(myOptions['match']);

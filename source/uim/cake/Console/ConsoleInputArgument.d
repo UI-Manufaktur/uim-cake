@@ -47,8 +47,7 @@ class ConsoleInputArgument
      * @param bool $required Whether this argument is required. Missing required args will trigger exceptions
      * @param array<string> $choices Valid choices for this option.
      */
-    this(myName, $help = '', $required = false, $choices = [])
-    {
+    this(myName, $help = '', $required = false, $choices = []) {
         if (is_array(myName) && isset(myName['name'])) {
             foreach (myName as myKey => myValue) {
                 this.{'_' . myKey} = myValue;
@@ -67,8 +66,7 @@ class ConsoleInputArgument
      *
      * @return string Value of this._name.
      */
-    function name(): string
-    {
+    string name() {
         return this._name;
     }
 
@@ -76,10 +74,8 @@ class ConsoleInputArgument
      * Checks if this argument is equal to another argument.
      *
      * @param \Cake\Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
-     * @return bool
      */
-    bool isEqualTo(ConsoleInputArgument $argument)
-    {
+    bool isEqualTo(ConsoleInputArgument $argument) {
         return this.usage() === $argument.usage();
     }
 
@@ -87,10 +83,8 @@ class ConsoleInputArgument
      * Generate the help for this argument.
      *
      * @param int $width The width to make the name of the option.
-     * @return string
      */
-    function help(int $width = 0): string
-    {
+    string help(int $width = 0) {
         myName = this._name;
         if (strlen(myName) < $width) {
             myName = str_pad(myName, $width, ' ');
@@ -108,11 +102,8 @@ class ConsoleInputArgument
 
     /**
      * Get the usage value for this argument
-     *
-     * @return string
      */
-    function usage(): string
-    {
+    string usage() {
         myName = this._name;
         if (this._choices) {
             myName = implode('|', this._choices);
@@ -127,8 +118,7 @@ class ConsoleInputArgument
 
     /**
      * Check if this argument is a required argument
-    bool isRequired()
-    {
+    bool isRequired() {
         return this._required;
     }
 
@@ -139,8 +129,7 @@ class ConsoleInputArgument
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    bool validChoice(string myValue)
-    {
+    bool validChoice(string myValue) {
         if (empty(this._choices)) {
             return true;
         }

@@ -7,7 +7,7 @@ import uim.cake.core.Configure;
 import uim.cake.core.Plugin;
 import uim.cake.Log\Log;
 import uim.cake.Shell\Task\CommandTask;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 
 /**
  * Shell dispatcher handles dispatching CLI commands.
@@ -41,8 +41,7 @@ class ShellDispatcher
      * @param array $args the argv from PHP
      * @param bool $bootstrap Should the environment be bootstrapped.
      */
-    this(array $args = [], bool $bootstrap = true)
-    {
+    this(array $args = [], bool $bootstrap = true) {
         set_time_limit(0);
         this.args = $args;
 
@@ -80,8 +79,7 @@ class ShellDispatcher
      * @param string|null $original The original full name for the shell.
      * @return string|null The aliased class name, or null if the alias does not exist
      */
-    static string alias(string $short, ?string $original = null)
-    {
+    static string alias(string $short, ?string $original = null) {
         $short = Inflector::camelize($short);
         if ($original) {
             static::$_aliases[$short] = $original;
@@ -189,8 +187,7 @@ class ShellDispatcher
      * @return int|bool|null
      * @throws \Cake\Console\Exception\MissingShellMethodException
      */
-    protected auto _dispatch(array $extra = [])
-    {
+    protected auto _dispatch(array $extra = []) {
         $shellName = this.shiftArgs();
 
         if (!$shellName) {
@@ -323,8 +320,7 @@ class ShellDispatcher
      * @param string $shell Optionally the name of a plugin or alias
      * @return string Shell name with plugin prefix
      */
-    protected auto _handleAlias(string $shell): string
-    {
+    protected string _handleAlias(string $shell) {
         myAliased = static::alias($shell);
         if (myAliased) {
             $shell = myAliased;
@@ -341,8 +337,7 @@ class ShellDispatcher
      * @param string $shell The shell name to look for.
      * @return string|null Either the classname or null.
      */
-    protected string _shellExists(string $shell)
-    {
+    protected string _shellExists(string $shell) {
         myClass = App::className($shell, 'Shell', 'Shell');
         if (myClass) {
             return myClass;

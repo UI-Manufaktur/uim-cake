@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.database.Type;
+ */module uim.cake.databases.Type;
 
-import uim.cake.database.IDriver;
+import uim.cake.databases.IDriver;
 use InvalidArgumentException;
 use PDO;
 
@@ -33,8 +33,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    string toDatabase(myValue, IDriver myDriver)
-    {
+    string toDatabase(myValue, IDriver myDriver) {
         if (is_resource(myValue)) {
             throw new InvalidArgumentException('Cannot convert a resource value to JSON');
         }
@@ -53,8 +52,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @param \Cake\Database\IDriver myDriver The driver instance to convert with.
      * @return array|string|null
      */
-    function toPHP(myValue, IDriver myDriver)
-    {
+    function toPHP(myValue, IDriver myDriver) {
         if (!is_string(myValue)) {
             return null;
         }
@@ -94,8 +92,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @param mixed myValue The value to convert.
      * @return mixed Converted value.
      */
-    function marshal(myValue)
-    {
+    function marshal(myValue) {
         return myValue;
     }
 
@@ -106,8 +103,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @return this
      * @see https://www.php.net/manual/en/function.json-encode.php
      */
-    auto setEncodingOptions(int myOptions)
-    {
+    auto setEncodingOptions(int myOptions) {
         this._encodingOptions = myOptions;
 
         return this;

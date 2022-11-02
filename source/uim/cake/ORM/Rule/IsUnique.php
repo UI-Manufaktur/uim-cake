@@ -1,7 +1,7 @@
 module uim.cake.ORM\Rule;
 
 import uim.cake.Datasource\IEntity;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * Checks that a list of fields from an entity are unique in the table
@@ -34,8 +34,7 @@ class IsUnique
      * @param array<string> myFields The list of fields to check uniqueness for
      * @param array<string, mixed> myOptions The options for unique checks.
      */
-    this(array myFields, array myOptions = [])
-    {
+    this(array myFields, array myOptions = []) {
         this._fields = myFields;
         this._options = myOptions + this._options;
     }

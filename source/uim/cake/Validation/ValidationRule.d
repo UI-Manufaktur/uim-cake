@@ -69,8 +69,7 @@ class ValidationRule
      *
      * @param array $validator [optional] The validator properties
      */
-    this(array $validator = [])
-    {
+    this(array $validator = []) {
         this._addValidatorProps($validator);
     }
 
@@ -103,8 +102,7 @@ class ValidationRule
      * @throws \InvalidArgumentException when the supplied rule is not a valid
      * callable for the configured scope
      */
-    function process(myValue, array $providers, array $context = [])
-    {
+    function process(myValue, array $providers, array $context = []) {
         $context += ['data' => [], 'newRecord' => true, 'providers' => $providers];
 
         if (this._skip($context)) {
@@ -202,8 +200,7 @@ class ValidationRule
      * @param string $property The name of the property to retrieve.
      * @return mixed
      */
-    auto get(string $property)
-    {
+    auto get(string $property) {
         $property = '_' . $property;
 
         return this.{$property} ?? null;

@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.1.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Error\Debug;
+module uim.cake.errors\Debug;
 
 use SplObjectStorage;
 
@@ -41,8 +32,7 @@ class DebugContext
      *
      * @param int $maxDepth The desired depth of dump output.
      */
-    this(int $maxDepth)
-    {
+    this(int $maxDepth) {
         this.maxDepth = $maxDepth;
         this.refs = new SplObjectStorage();
     }
@@ -95,7 +85,7 @@ class DebugContext
      * @param object $object The object to get a reference for.
      * @return bool
      */
-    function hasReference(object $object): bool
+    bool hasReference(object $object)
     {
         return this.refs.contains($object);
     }

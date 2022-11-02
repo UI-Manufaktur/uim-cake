@@ -27,8 +27,7 @@ class RedirectRoute : Route
      * @param array $defaults Defaults for the route. Either a redirect=>value array or a CakePHP array URL.
      * @param array<string, mixed> myOptions Array of additional options for the Route
      */
-    this(string myTemplate, array $defaults = [], array myOptions = [])
-    {
+    this(string myTemplate, array $defaults = [], array myOptions = []) {
         super.this(myTemplate, $defaults, myOptions);
         if (isset($defaults['redirect'])) {
             $defaults = (array)$defaults['redirect'];
@@ -92,8 +91,7 @@ class RedirectRoute : Route
      * @param int $status The status code for this route
      * @return this
      */
-    auto setStatus(int $status)
-    {
+    auto setStatus(int $status) {
         this.options['status'] = $status;
 
         return this;

@@ -26,8 +26,7 @@ class WincacheEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = [])
-    {
+    bool init(array myConfig = []) {
         if (!extension_loaded('wincache')) {
             throw new RuntimeException('The `wincache` extension must be enabled to use WincacheEngine.');
         }
@@ -47,8 +46,7 @@ class WincacheEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool set(myKey, myValue, $ttl = null)
-    {
+    bool set(myKey, myValue, $ttl = null) {
         myKey = this._key(myKey);
         $duration = this.duration($ttl);
 
@@ -63,8 +61,7 @@ class WincacheEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn't exist,
      *   has expired, or if there was an error fetching it
      */
-    auto get(myKey, $default = null)
-    {
+    auto get(myKey, $default = null) {
         myValue = wincache_ucache_get(this._key(myKey), $success);
         if ($success === false) {
             return $default;
@@ -80,8 +77,7 @@ class WincacheEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string myKey, int $offset = 1)
-    {
+    function increment(string myKey, int $offset = 1) {
         myKey = this._key(myKey);
 
         return wincache_ucache_inc(myKey, $offset);
@@ -94,8 +90,7 @@ class WincacheEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string myKey, int $offset = 1)
-    {
+    function decrement(string myKey, int $offset = 1) {
         myKey = this._key(myKey);
 
         return wincache_ucache_dec(myKey, $offset);
@@ -107,8 +102,7 @@ class WincacheEngine : CacheEngine
      * @param string myKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    function delete(myKey): bool
-    {
+    bool delete(myKey) {
         myKey = this._key(myKey);
 
         return wincache_ucache_delete(myKey);
@@ -120,8 +114,7 @@ class WincacheEngine : CacheEngine
      *
      * @return bool True Returns true.
      */
-    bool clear()
-    {
+    bool clear() {
         $info = wincache_ucache_info();
         $cacheKeys = $info['ucache_entries'];
         unset($info);
@@ -176,8 +169,7 @@ class WincacheEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         $success = false;
         wincache_ucache_inc(this._config['prefix'] . $group, 1, $success);
 

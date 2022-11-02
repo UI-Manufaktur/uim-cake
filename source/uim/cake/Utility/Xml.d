@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.Utility;
 
-import uim.cake.Utility\Exception\XmlException;
+import uim.cake.utikities.Exception\XmlException;
 use Closure;
 use DOMDocument;
 use DOMNode;
@@ -95,8 +95,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    static function build($input, array myOptions = [])
-    {
+    static function build($input, array myOptions = []) {
         $defaults = [
             'return' => 'simplexml',
             'loadEntities' => false,
@@ -133,8 +132,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static auto _loadXml(string $input, array myOptions)
-    {
+    protected static auto _loadXml(string $input, array myOptions) {
         return static::load(
             $input,
             myOptions,
@@ -160,8 +158,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    static function loadHtml(string $input, array myOptions = [])
-    {
+    static function loadHtml(string $input, array myOptions = []) {
         $defaults = [
             'return' => 'simplexml',
             'loadEntities' => false,
@@ -193,8 +190,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static function load(string $input, array myOptions, Closure $callable)
-    {
+    protected static function load(string $input, array myOptions, Closure $callable) {
         $flags = 0;
         if (!empty(myOptions['parseHuge'])) {
             $flags |= LIBXML_PARSEHUGE;
@@ -259,8 +255,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    static function fromArray($input, array myOptions = [])
-    {
+    static function fromArray($input, array myOptions = []) {
         if (is_object($input) && method_exists($input, 'toArray') && is_callable([$input, 'toArray'])) {
             $input = $input.toArray();
         }

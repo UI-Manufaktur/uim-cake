@@ -63,8 +63,7 @@ class BufferedStatement : Iterator, IStatement
      * @param \Cake\Database\IStatement $statement Statement implementation such as PDOStatement
      * @param \Cake\Database\IDriver myDriver Driver instance
      */
-    this(IStatement $statement, IDriver myDriver)
-    {
+    this(IStatement $statement, IDriver myDriver) {
         this.statement = $statement;
         this._driver = myDriver;
     }
@@ -75,8 +74,7 @@ class BufferedStatement : Iterator, IStatement
      * @param string $property internal property to get
      * @return string|null
      */
-    auto __get(string $property)
-    {
+    auto __get(string $property) {
         if ($property === 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
             return this.statement.queryString;
@@ -98,8 +96,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function columnCount(): int
-    {
+    int columnCount() {
         return this.statement.columnCount();
     }
 
@@ -115,8 +112,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    bool execute(?array myParams = null)
-    {
+    bool execute(?array myParams = null) {
         this._reset();
         this._hasExecuted = true;
 
@@ -124,8 +120,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function fetchColumn(int $position)
-    {
+    function fetchColumn(int $position) {
         myResult = this.fetch(static::FETCH_TYPE_NUM);
         if (myResult !== false && isset(myResult[$position])) {
             return myResult[$position];
@@ -140,8 +135,7 @@ class BufferedStatement : Iterator, IStatement
      *
      * @return int
      */
-    function count(): int
-    {
+    int count() {
         return this.rowCount();
     }
 
@@ -152,8 +146,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function lastInsertId(?string myTable = null, ?string $column = null)
-    {
+    function lastInsertId(?string myTable = null, ?string $column = null) {
         return this.statement.lastInsertId(myTable, $column);
     }
 
@@ -163,8 +156,7 @@ class BufferedStatement : Iterator, IStatement
      * @param string|int myType The type to fetch.
      * @return array|false
      */
-    function fetch(myType = self::FETCH_TYPE_NUM)
-    {
+    function fetch(myType = self::FETCH_TYPE_NUM) {
         if (this._allFetched) {
             $row = false;
             if (isset(this.buffer[this.index])) {
@@ -202,8 +194,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function fetchAll(myType = self::FETCH_TYPE_NUM)
-    {
+    function fetchAll(myType = self::FETCH_TYPE_NUM) {
         if (this._allFetched) {
             return this.buffer;
         }
@@ -218,8 +209,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function rowCount(): int
-    {
+    int rowCount() {
         if (!this._allFetched) {
             this.fetchAll(static::FETCH_TYPE_ASSOC);
         }
@@ -272,8 +262,7 @@ class BufferedStatement : Iterator, IStatement
     /**
      * Returns whether the iterator has more elements
      */
-    bool valid()
-    {
+    bool valid() {
         $old = this.index;
         $row = this.fetch(self::FETCH_TYPE_ASSOC);
 

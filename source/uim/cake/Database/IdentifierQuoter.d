@@ -1,8 +1,8 @@
-module uim.cake.database;
+module uim.cake.databases;
 
-import uim.cake.database.Expression\FieldInterface;
-import uim.cake.database.Expression\IdentifierExpression;
-import uim.cake.database.Expression\OrderByExpression;
+import uim.cake.databases.Expression\FieldInterface;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\OrderByExpression;
 
 /**
  * Contains all the logic related to quoting identifiers in a Query object
@@ -23,8 +23,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Driver myDriver The driver instance used to do the identifier quoting
      */
-    this(Driver myDriver)
-    {
+    this(Driver myDriver) {
         this._driver = myDriver;
     }
 

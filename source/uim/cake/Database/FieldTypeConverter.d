@@ -1,7 +1,7 @@
-module uim.cake.database;
+module uim.cake.databases;
 
-import uim.cake.database.Type\BatchCastingInterface;
-import uim.cake.database.Type\IOptionalConvert;
+import uim.cake.databases.Type\BatchCastingInterface;
+import uim.cake.databases.Type\IOptionalConvert;
 
 /**
  * A callable class to be used for processing each of the rows in a statement
@@ -47,8 +47,7 @@ class FieldTypeConverter
      * @param \Cake\Database\TypeMap myTypeMap Contains the types to use for converting results
      * @param \Cake\Database\IDriver myDriver The driver to use for the type conversion
      */
-    this(TypeMap myTypeMap, IDriver myDriver)
-    {
+    this(TypeMap myTypeMap, IDriver myDriver) {
         this._driver = myDriver;
         $map = myTypeMap.toArray();
         myTypes = TypeFactory::buildAll();

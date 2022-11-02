@@ -1,24 +1,24 @@
-module uim.cake.Error;
+module uim.cake.errors;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Error\Debug\ArrayItemNode;
-import uim.cake.Error\Debug\ArrayNode;
-import uim.cake.Error\Debug\ClassNode;
-import uim.cake.Error\Debug\ConsoleFormatter;
-import uim.cake.Error\Debug\DebugContext;
-import uim.cake.Error\Debug\IFormatter;
-import uim.cake.Error\Debug\HtmlFormatter;
-import uim.cake.Error\Debug\INode;
-import uim.cake.Error\Debug\PropertyNode;
-import uim.cake.Error\Debug\ReferenceNode;
-import uim.cake.Error\Debug\ScalarNode;
-import uim.cake.Error\Debug\SpecialNode;
-import uim.cake.Error\Debug\TextFormatter;
+import uim.cake.errors\Debug\ArrayItemNode;
+import uim.cake.errors\Debug\ArrayNode;
+import uim.cake.errors\Debug\ClassNode;
+import uim.cake.errors\Debug\ConsoleFormatter;
+import uim.cake.errors\Debug\DebugContext;
+import uim.cake.errors\Debug\IFormatter;
+import uim.cake.errors\Debug\HtmlFormatter;
+import uim.cake.errors\Debug\INode;
+import uim.cake.errors\Debug\PropertyNode;
+import uim.cake.errors\Debug\ReferenceNode;
+import uim.cake.errors\Debug\ScalarNode;
+import uim.cake.errors\Debug\SpecialNode;
+import uim.cake.errors\Debug\TextFormatter;
 import uim.cake.Log\Log;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Security;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Hash;
+import uim.cake.utikities.Security;
+import uim.cake.utikities.Text;
 use Closure;
 use Exception;
 use InvalidArgumentException;
@@ -179,8 +179,7 @@ class Debugger
      * @param string|null myClass Class name.
      * @return static
      */
-    static auto getInstance(?string myClass = null)
-    {
+    static auto getInstance(?string myClass = null) {
         static $instance = [];
         if (!empty(myClass)) {
             if (!$instance || strtolower(myClass) !== strtolower(get_class($instance[0]))) {
@@ -203,8 +202,7 @@ class Debugger
      * @return mixed Config value being read, or the object itself on write operations.
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    static function configInstance(myKey = null, myValue = null, bool myMerge = true)
-    {
+    static function configInstance(myKey = null, myValue = null, bool myMerge = true) {
         if (myKey === null) {
             return static::getInstance().getConfig(myKey);
         }
@@ -353,8 +351,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function trace(array myOptions = [])
-    {
+    static function trace(array myOptions = []) {
         return Debugger::formatTrace(debug_backtrace(), myOptions);
     }
 
@@ -375,8 +372,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function formatTrace($backtrace, array myOptions = [])
-    {
+    static function formatTrace($backtrace, array myOptions = []) {
         if ($backtrace instanceof Throwable) {
             $backtrace = $backtrace.getTrace();
         }

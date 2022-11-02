@@ -24,8 +24,7 @@ class TaskRegistry : ObjectRegistry
      *
      * @param \Cake\Console\Shell $shell Shell instance
      */
-    this(Shell $shell)
-    {
+    this(Shell $shell) {
         this._Shell = $shell;
     }
 

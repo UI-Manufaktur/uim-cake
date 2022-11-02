@@ -10,7 +10,7 @@ import uim.cake.ORM\Entity;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
 import uim.cake.ORM\Query;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations
@@ -56,8 +56,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param \Cake\ORM\Table myTable The table this strategy is attached to.
      * @param array<string, mixed> myConfig The config for this strategy.
      */
-    this(Table myTable, array myConfig = [])
-    {
+    this(Table myTable, array myConfig = []) {
         if (isset(myConfig['tableLocator'])) {
             this._tableLocator = myConfig['tableLocator'];
         }
@@ -148,8 +147,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
-    function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions)
-    {
+    function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions) {
         $locale = Hash::get(myOptions, 'locale', this.getLocale());
 
         if ($locale === this.getConfig('defaultLocale')) {
@@ -213,8 +211,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param \ArrayObject myOptions the options passed to the save method
      * @return void
      */
-    function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)
-    {
+    function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
         $locale = $entity.get('_locale') ?: this.getLocale();
         $newOptions = [this.translationTable.getAlias() => ['validate' => false]];
         myOptions['associated'] = $newOptions + myOptions['associated'];
@@ -338,8 +335,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param string $locale Locale string
      * @return \Cake\Collection\ICollection
      */
-    protected auto rowMapper(myResults, $locale)
-    {
+    protected auto rowMapper(myResults, $locale) {
         return myResults.map(function ($row) use ($locale) {
             /** @var \Cake\Datasource\IEntity|array|null $row */
             if ($row === null) {
@@ -421,8 +417,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param \Cake\Datasource\IEntity $entity Entity
      * @return void
      */
-    protected auto bundleTranslatedFields($entity)
-    {
+    protected auto bundleTranslatedFields($entity) {
         $translations = (array)$entity.get('_translations');
 
         if (empty($translations) && !$entity.isDirty('_translations')) {
@@ -475,8 +470,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param array $ruleSet An array of array of conditions to be used for finding each
      * @return array
      */
-    protected auto findExistingTranslations($ruleSet)
-    {
+    protected auto findExistingTranslations($ruleSet) {
         $association = this.table.getAssociation(this.translationTable.getAlias());
 
         myQuery = $association.find()

@@ -4,8 +4,8 @@ module uim.cake.Auth;
 import uim.cake;
 
 /* import uim.cake.core.Configure;
-import uim.cake.Error\Debugger;
-import uim.cake.Utility\Security;
+import uim.cake.errors\Debugger;
+import uim.cake.utikities.Security;
  */
 /**
  * Password hashing class that use weak hashing algorithms. This class is

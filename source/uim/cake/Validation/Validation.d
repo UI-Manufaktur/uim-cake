@@ -1,7 +1,7 @@
 module uim.cake.Validation;
 
 import uim.cake.I18n\FrozenTime;
-import uim.cake.Utility\Text;
+import uim.cake.utikities.Text;
 use Countable;
 use IDateTime;
 use InvalidArgumentException;
@@ -397,7 +397,7 @@ class Validation
      * @param string $operator Comparison operator. See Validation::comparison().
      * @param array<string, mixed> $context The validation context.
      * @return bool
-     * @since 3.6.0
+
      */
     static function compareFields($check, string myField, string $operator, array $context): bool
     {
@@ -1251,8 +1251,7 @@ class Validation
      * @param mixed $check The data to read a filename out of.
      * @return string|false Either the filename or false on failure.
      */
-    protected static auto getFilename($check)
-    {
+    protected static auto getFilename($check) {
         if ($check instanceof UploadedFileInterface) {
             // Uploaded files throw exceptions on upload errors.
             try {

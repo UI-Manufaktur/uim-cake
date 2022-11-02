@@ -44,8 +44,7 @@ class LinkConstraint
      * @param string $requiredLinkStatus The link status that is required to be present in order for the check to
      *  succeed.
      */
-    this($association, string $requiredLinkStatus)
-    {
+    this($association, string $requiredLinkStatus) {
         if (
             !is_string($association) &&
             !($association instanceof Association)
@@ -75,7 +74,7 @@ class LinkConstraint
      * @param array<string, mixed> myOptions Options passed from the rules checker.
      * @return bool Whether the check was successful.
      */
-    auto __invoke(IEntity $entity, array myOptions): bool
+    bool __invoke(IEntity $entity, array myOptions)
     {
         myTable = myOptions['repository'] ?? null;
         if (!(myTable instanceof Table)) {

@@ -122,8 +122,7 @@ class Folder
      * @param bool $create Create folder if not found
      * @param int|null myMode Mode (CHMOD) to apply to created folder, false to ignore
      */
-    this(?string myPath = null, bool $create = false, ?int myMode = null)
-    {
+    this(?string myPath = null, bool $create = false, ?int myMode = null) {
         if (empty(myPath)) {
             myPath = TMP;
         }
@@ -147,8 +146,7 @@ class Folder
      *
      * @return string|null Current path
      */
-    string pwd()
-    {
+    string pwd() {
         return this.path;
     }
 
@@ -158,8 +156,7 @@ class Folder
      * @param string myPath Path to the directory to change to
      * @return string|false The new path. Returns false on failure
      */
-    function cd(string myPath)
-    {
+    function cd(string myPath) {
         myPath = this.realpath(myPath);
         if (myPath !== false && is_dir(myPath)) {
             return this.path = myPath;
@@ -303,7 +300,7 @@ class Folder
      * @param string myPath Path to check
      * @return bool true if windows path, false otherwise
      */
-    static function isWindowsPath(string myPath): bool
+    static bool isWindowsPath(string myPath)
     {
         return preg_match('/^[A-Z]:\\\\/i', myPath) || substr(myPath, 0, 2) === '\\\\';
     }
@@ -314,7 +311,7 @@ class Folder
      * @param string myPath Path to check
      * @return bool true if path is absolute.
      */
-    static function isAbsolute(string myPath): bool
+    static bool isAbsolute(string myPath)
     {
         if (empty(myPath)) {
             return false;
@@ -332,7 +329,7 @@ class Folder
      * @param string myPath Path to check
      * @return bool True if path is registered stream wrapper.
      */
-    static function isRegisteredStreamWrapper(string myPath): bool
+    static bool isRegisteredStreamWrapper(string myPath)
     {
         return preg_match('/^[^:\/]+?(?=:\/\/)/', myPath, $matches) &&
             in_array($matches[0], stream_get_wrappers(), true);
@@ -401,7 +398,7 @@ class Folder
      * @return bool
      * @throws \InvalidArgumentException When the given `myPath` argument is not an absolute path.
      */
-    function inPath(string myPath, bool $reverse = false): bool
+    bool inPath(string myPath, bool $reverse = false)
     {
         if (!Folder::isAbsolute(myPath)) {
             throw new InvalidArgumentException('The myPath argument is expected to be an absolute path.');
@@ -428,7 +425,7 @@ class Folder
      * @param array<string> myExceptions Array of files, directories to skip.
      * @return bool Success.
      */
-    function chmod(string myPath, ?int myMode = null, bool $recursive = true, array myExceptions = []): bool
+    bool chmod(string myPath, ?int myMode = null, bool $recursive = true, array myExceptions = [])
     {
         if (!myMode) {
             myMode = this.mode;
@@ -606,7 +603,7 @@ class Folder
      * @param int|null myMode octal value 0755
      * @return bool Returns TRUE on success, FALSE on failure
      */
-    function create(string myPathname, ?int myMode = null): bool
+    bool create(string myPathname, ?int myMode = null)
     {
         if (is_dir(myPathname) || empty(myPathname)) {
             return true;
@@ -689,7 +686,7 @@ class Folder
      * @param string|null myPath Path of directory to delete
      * @return bool Success
      */
-    function delete(?string myPath = null): bool
+    bool delete(?string myPath = null)
     {
         if (!myPath) {
             myPath = this.pwd();
@@ -770,7 +767,7 @@ class Folder
      * @param array<string, mixed> myOptions Array of options (see above).
      * @return bool Success.
      */
-    function copy(string $to, array myOptions = []): bool
+    bool copy(string $to, array myOptions = [])
     {
         if (!this.pwd()) {
             return false;
@@ -871,7 +868,7 @@ class Folder
      * @param array<string, mixed> myOptions Array of options (see above).
      * @return bool Success
      */
-    function move(string $to, array myOptions = []): bool
+    bool move(string $to, array myOptions = [])
     {
         myOptions += ['from' => this.path, 'mode' => this.mode, 'skip' => [], 'recursive' => true];
 
@@ -920,8 +917,7 @@ class Folder
      * @param string myPath Path to resolve
      * @return string|false The resolved path
      */
-    function realpath(myPath)
-    {
+    function realpath(myPath) {
         if (strpos(myPath, '..') === false) {
             if (!Folder::isAbsolute(myPath)) {
                 myPath = Folder::addPathElement(this.path, myPath);
@@ -962,7 +958,7 @@ class Folder
      * @param string myPath Path to check
      * @return bool true if path ends with slash, false otherwise
      */
-    static function isSlashTerm(string myPath): bool
+    static bool isSlashTerm(string myPath)
     {
         $lastChar = myPath[strlen(myPath) - 1];
 

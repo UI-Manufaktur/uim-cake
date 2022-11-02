@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.TestSuite\Constraint\Session;
 
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**
@@ -33,8 +33,7 @@ class SessionHasKey : Constraint
      *
      * @param string myPath Session Path
      */
-    this(string myPath)
-    {
+    this(string myPath) {
         this.path = myPath;
     }
 

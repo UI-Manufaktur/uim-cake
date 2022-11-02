@@ -29,8 +29,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands The map of commands to add to the collection.
      */
-    this(array $commands = [])
-    {
+    this(array $commands = []) {
         foreach ($commands as myName => $command) {
             this.add(myName, $command);
         }
@@ -45,8 +44,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @return this
      * @throws \InvalidArgumentException
      */
-    function add(string myName, $command)
-    {
+    function add(string myName, $command) {
         if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, ICommand::class)) {
             myClass = is_string($command) ? $command : get_class($command);
             throw new InvalidArgumentException(sprintf(
@@ -74,8 +72,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @return this
      * @see \Cake\Console\CommandCollection::add()
      */
-    function addMany(array $commands)
-    {
+    function addMany(array $commands) {
         foreach ($commands as myName => myClass) {
             this.add(myName, myClass);
         }
@@ -89,8 +86,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @param string myName The named shell.
      * @return this
      */
-    function remove(string myName)
-    {
+    function remove(string myName) {
         unset(this.commands[myName]);
 
         return this;
@@ -100,10 +96,8 @@ class CommandCollection : IteratorAggregate, Countable
      * Check whether the named shell exists in the collection.
      *
      * @param string myName The named shell.
-     * @return bool
      */
-    bool has(string myName)
-    {
+    bool has(string myName) {
         return isset(this.commands[myName]);
     }
 
@@ -115,8 +109,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @throws \InvalidArgumentException when unknown commands are fetched.
      * @psalm-return \Cake\Console\ICommand|\Cake\Console\Shell|class-string
      */
-    auto get(string myName)
-    {
+    auto get(string myName) {
         if (!this.has(myName)) {
             throw new InvalidArgumentException("The myName is not a known command name.");
         }
@@ -142,8 +135,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @return int
      */
-    function count(): int
-    {
+    int count() {
         return count(this.commands);
     }
 

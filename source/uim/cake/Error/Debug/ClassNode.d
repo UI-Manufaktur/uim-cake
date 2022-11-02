@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.1.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Error\Debug;
+module uim.cake.errors\Debug;
 
 /**
  * Dump node for objects/class instances.
@@ -35,8 +26,7 @@ class ClassNode : INode
      * @param string myClass The class name
      * @param int $id The reference id of this object in the DumpContext
      */
-    this(string myClass, int $id)
-    {
+    this(string myClass, int $id) {
         this.class = myClass;
         this.id = $id;
     }
@@ -57,8 +47,7 @@ class ClassNode : INode
      *
      * @return string
      */
-    auto getValue(): string
-    {
+    string getValue() {
         return this.class;
     }
 

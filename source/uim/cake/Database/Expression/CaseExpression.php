@@ -1,8 +1,8 @@
-module uim.cake.database.Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.database.IExpression;
-import uim.cake.database.Type\ExpressionTypeCasterTrait;
-import uim.cake.database.ValueBinder;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.ValueBinder;
 use Closure;
 
 /**
@@ -48,8 +48,7 @@ class CaseExpression : IExpression
      * @param array<string> myTypes Associative array of types to be associated with the values
      * passed in myValues
      */
-    this($conditions = [], myValues = [], myTypes = [])
-    {
+    this($conditions = [], myValues = [], myTypes = []) {
         $conditions = is_array($conditions) ? $conditions : [$conditions];
         myValues = is_array(myValues) ? myValues : [myValues];
         myTypes = is_array(myTypes) ? myTypes : [myTypes];
@@ -76,8 +75,7 @@ class CaseExpression : IExpression
      * @param array<string> myTypes Associative array of types to be associated with the values
      * @return this
      */
-    function add($conditions = [], myValues = [], myTypes = [])
-    {
+    function add($conditions = [], myValues = [], myTypes = []) {
         $conditions = is_array($conditions) ? $conditions : [$conditions];
         myValues = is_array(myValues) ? myValues : [myValues];
         myTypes = is_array(myTypes) ? myTypes : [myTypes];
@@ -213,8 +211,7 @@ class CaseExpression : IExpression
     }
 
 
-    function traverse(Closure $callback)
-    {
+    function traverse(Closure $callback) {
         foreach (['_conditions', '_values'] as $part) {
             foreach (this.{$part} as $c) {
                 if ($c instanceof IExpression) {

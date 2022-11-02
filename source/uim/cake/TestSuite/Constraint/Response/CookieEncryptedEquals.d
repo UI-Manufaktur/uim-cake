@@ -14,7 +14,7 @@
  */module uim.cake.TestSuite\Constraint\Response;
 
 import uim.cake.Http\Response;
-import uim.cake.Utility\CookieCryptTrait;
+import uim.cake.utikities.CookieCryptTrait;
 
 /**
  * CookieEncryptedEquals
@@ -48,8 +48,7 @@ class CookieEncryptedEquals : CookieEquals
      * @param string myMode Mode
      * @param string myKey Key
      */
-    this(?Response $response, string $cookieName, string myMode, string myKey)
-    {
+    this(?Response $response, string $cookieName, string myMode, string myKey) {
         super.this($response, $cookieName);
 
         this.key = myKey;

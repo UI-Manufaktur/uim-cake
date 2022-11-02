@@ -35,8 +35,7 @@ class Arguments
      * @param array<int, string> $argNames List of argument names. Order is expected to be
      *  the same as $args.
      */
-    this(array $args, array myOptions, array $argNames)
-    {
+    this(array $args, array myOptions, array $argNames) {
         this.args = $args;
         this.options = myOptions;
         this.argNames = $argNames;
@@ -71,10 +70,8 @@ class Arguments
      * Check if a positional argument exists
      *
      * @param int $index The argument index to check.
-     * @return bool
      */
-    bool hasArgumentAt(int $index)
-    {
+    bool hasArgumentAt(int $index) {
         return isset(this.args[$index]);
     }
 
@@ -82,10 +79,8 @@ class Arguments
      * Check if a positional argument exists by name
      *
      * @param string myName The argument name to check.
-     * @return bool
      */
-    bool hasArgument(string myName)
-    {
+    bool hasArgument(string myName) {
         $offset = array_search(myName, this.argNames, true);
         if ($offset === false) {
             return false;
@@ -126,8 +121,7 @@ class Arguments
      * @param string myName The name of the option to check.
      * @return string|int|bool|null The option value or null.
      */
-    auto getOption(string myName)
-    {
+    auto getOption(string myName) {
         return this.options[myName] ?? null;
     }
 
@@ -135,10 +129,8 @@ class Arguments
      * Check if an option is defined and not null.
      *
      * @param string myName The name of the option to check.
-     * @return bool
      */
-    bool hasOption(string myName)
-    {
+    bool hasOption(string myName) {
         return isset(this.options[myName]);
     }
 }

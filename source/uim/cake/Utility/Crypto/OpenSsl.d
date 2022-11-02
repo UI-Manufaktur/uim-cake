@@ -1,4 +1,4 @@
-module uim.cake.Utility\Crypto;
+module uim.cake.utikities.Crypto;
 
 /**
  * OpenSSL implementation of crypto features for Cake\Utility\Security

@@ -1,4 +1,4 @@
-module uim.cake.Error;
+module uim.cake.errors;
 
 import uim.cake.controller\Controller;
 import uim.cake.controller\ControllerFactory;
@@ -19,9 +19,9 @@ import uim.cake.Http\ServerRequest;
 import uim.cake.Http\ServerRequestFactory;
 import uim.cake.Routing\Exception\MissingRouteException;
 import uim.cake.Routing\Router;
-import uim.cake.Utility\Inflector;
-import uim.cake.View\Exception\MissingLayoutException;
-import uim.cake.View\Exception\MissingTemplateException;
+import uim.cake.utikities.Inflector;
+import uim.cake.views\Exception\MissingLayoutException;
+import uim.cake.views\Exception\MissingTemplateException;
 use PDOException;
 use Psr\Http\Message\IResponse;
 use Throwable;
@@ -110,8 +110,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param \Cake\Http\ServerRequest|null myRequest The request if this is set it will be used
      *   instead of creating a new one.
      */
-    this(Throwable myException, ?ServerRequest myRequest = null)
-    {
+    this(Throwable myException, ?ServerRequest myRequest = null) {
         this.error = myException;
         this.request = myRequest;
         this.controller = this._getController();
@@ -289,8 +288,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param \Throwable myException Exception instance.
      * @return string
      */
-    protected auto _method(Throwable myException): string
-    {
+    protected string _method(Throwable myException) {
         [, $baseClass] = moduleSplit(get_class(myException));
 
         if (substr($baseClass, -9) === 'Exception') {
@@ -310,8 +308,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param int $code Error code.
      * @return string Error message
      */
-    protected auto _message(Throwable myException, int $code): string
-    {
+    protected string _message(Throwable myException, int $code) {
         myMessage = myException.getMessage();
 
         if (
@@ -336,8 +333,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param int $code Error code.
      * @return string Template name
      */
-    protected auto _template(Throwable myException, string $method, int $code): string
-    {
+    protected string _template(Throwable myException, string $method, int $code) {
         if (myException instanceof HttpException || !Configure::read('debug')) {
             return this.template = $code < 500 ? 'error400' : 'error500';
         }

@@ -1,17 +1,4 @@
-
-
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.core;
+module uim.cake.core;
 
 /**
  * ClassLoader
@@ -74,8 +61,7 @@ class ClassLoader
      * @return string|false The mapped file name on success, or boolean false on
      * failure.
      */
-    function loadClass(string myClass)
-    {
+    function loadClass(string myClass) {
         $prefix = myClass;
 
         while (($pos = strrpos($prefix, '\\')) !== false) {
@@ -101,8 +87,7 @@ class ClassLoader
      * @return string|false Boolean false if no mapped file can be loaded, or the
      * name of the mapped file that was loaded.
      */
-    protected auto _loadMappedFile(string $prefix, string $relativeClass)
-    {
+    protected auto _loadMappedFile(string $prefix, string $relativeClass) {
         if (!isset(this._prefixes[$prefix])) {
             return false;
         }
@@ -124,8 +109,7 @@ class ClassLoader
      * @param string $file The file to require.
      * @return bool True if the file exists, false if not.
      */
-    protected auto _requireFile(string $file): bool
-    {
+    protected bool _requireFile(string $file) {
         if (file_exists($file)) {
             require $file;
 

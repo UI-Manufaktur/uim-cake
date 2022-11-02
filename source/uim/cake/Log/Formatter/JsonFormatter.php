@@ -26,8 +26,7 @@ class JsonFormatter : AbstractFormatter
     /**
      * @param array<string, mixed> myConfig Formatter config
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this.setConfig(myConfig);
     }
 

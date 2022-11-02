@@ -104,8 +104,7 @@ class Package
      * @param string myKey the key of the message to return
      * @return array|string|false The message translation, or false if not found.
      */
-    auto getMessage(string myKey)
-    {
+    auto getMessage(string myKey) {
         return this.messages[myKey] ?? false;
     }
 
@@ -125,8 +124,7 @@ class Package
      *
      * @return string
      */
-    auto getFormatter(): string
-    {
+    string getFormatter() {
         return this.formatter;
     }
 

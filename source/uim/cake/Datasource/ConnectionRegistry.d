@@ -57,8 +57,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param array<string, mixed> myConfig An array of settings to use for the datasource.
      * @return \Cake\Datasource\ConnectionInterface A connection with the correct settings.
      */
-    protected auto _create(myClass, string myAlias, array myConfig)
-    {
+    protected auto _create(myClass, string myAlias, array myConfig) {
         if (is_callable(myClass)) {
             return myClass(myAlias);
         }
@@ -79,8 +78,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param string myName The adapter name.
      * @return this
      */
-    function unload(string myName)
-    {
+    function unload(string myName) {
         unset(this._loaded[myName]);
 
         return this;

@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Event;
+module uim.cake.Event;
 
 use ArrayAccess;
 use Countable;
@@ -26,11 +17,8 @@ class EventList : ArrayAccess, Countable
 
     /**
      * Empties the list of dispatched events.
-     *
-     * @return void
      */
-    function flush(): void
-    {
+    void flush() {
         this._events = [];
     }
 
@@ -40,8 +28,7 @@ class EventList : ArrayAccess, Countable
      * @param \Cake\Event\IEvent myEvent An event to the list of dispatched events.
      * @return void
      */
-    function add(IEvent myEvent): void
-    {
+    void add(IEvent myEvent) {
         this._events[] = myEvent;
     }
 
@@ -52,8 +39,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed $offset An offset to check for.
      * @return bool True on success or false on failure.
      */
-    function offsetExists($offset): bool
-    {
+    bool offsetExists($offset) {
         return isset(this._events[$offset]);
     }
 
@@ -65,8 +51,7 @@ class EventList : ArrayAccess, Countable
      * @return mixed Can return all value types.
      */
     #[\ReturnTypeWillChange]
-    function offsetGet($offset)
-    {
+    function offsetGet($offset) {
         if (this.offsetExists($offset)) {
             return this._events[$offset];
         }
@@ -82,8 +67,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed myValue The value to set.
      * @return void
      */
-    function offsetSet($offset, myValue): void
-    {
+    void offsetSet($offset, myValue) {
         this._events[$offset] = myValue;
     }
 
@@ -94,8 +78,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed $offset The offset to unset.
      * @return void
      */
-    function offsetUnset($offset): void
-    {
+    void offsetUnset($offset) {
         unset(this._events[$offset]);
     }
 
@@ -114,10 +97,8 @@ class EventList : ArrayAccess, Countable
      * Checks if an event is in the list.
      *
      * @param string myName Event name.
-     * @return bool
      */
-    function hasEvent(string myName): bool
-    {
+    bool hasEvent(string myName) {
         foreach (this._events as myEvent) {
             if (myEvent.getName() === myName) {
                 return true;

@@ -63,8 +63,7 @@ class PluginCollection : Iterator, Countable
      *
      * @param array<\Cake\Core\PluginInterface> myPlugins The map of plugins to add to the collection.
      */
-    this(array myPlugins = [])
-    {
+    this(array myPlugins = []) {
         foreach (myPlugins as myPlugin) {
             this.add(myPlugin);
         }
@@ -144,8 +143,7 @@ class PluginCollection : Iterator, Countable
      * @param \Cake\Core\PluginInterface myPlugin The plugin to load.
      * @return this
      */
-    function add(PluginInterface myPlugin)
-    {
+    function add(PluginInterface myPlugin) {
         myName = myPlugin.getName();
         this.plugins[myName] = myPlugin;
         this.names = array_keys(this.plugins);
@@ -159,8 +157,7 @@ class PluginCollection : Iterator, Countable
      * @param string myName The named plugin.
      * @return this
      */
-    function remove(string myName)
-    {
+    function remove(string myName) {
         unset(this.plugins[myName]);
         this.names = array_keys(this.plugins);
 
@@ -185,10 +182,8 @@ class PluginCollection : Iterator, Countable
      * Check whether the named plugin exists in the collection.
      *
      * @param string myName The named plugin.
-     * @return bool
      */
-    bool has(string myName)
-    {
+    bool has(string myName) {
         return isset(this.plugins[myName]);
     }
 
@@ -300,8 +295,7 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Part of Iterator Interface
-    bool valid()
-    {
+    bool valid() {
         $valid = isset(this.names[this.positions[this.loopDepth]]);
         if (!$valid) {
             array_pop(this.positions);

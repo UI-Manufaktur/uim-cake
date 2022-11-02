@@ -1,7 +1,7 @@
-module uim.cake.database;
+module uim.cake.databases;
 
-import uim.cake.database.Expression\AggregateExpression;
-import uim.cake.database.Expression\FunctionExpression;
+import uim.cake.databases.Expression\AggregateExpression;
+import uim.cake.databases.Expression\FunctionExpression;
 use InvalidArgumentException;
 
 /**
@@ -323,8 +323,7 @@ class FunctionsBuilder
      * @param string $return Return type of the entire expression. Defaults to float.
      * @return \Cake\Database\Expression\AggregateExpression
      */
-    function aggregate(string myName, array myParams = [], array myTypes = [], string $return = 'float')
-    {
+    function aggregate(string myName, array myParams = [], array myTypes = [], string $return = 'float') {
         return new AggregateExpression(myName, myParams, myTypes, $return);
     }
 
@@ -348,8 +347,7 @@ class FunctionsBuilder
      * @param \Cake\Database\IExpression|string $expression function argument
      * @return array<\Cake\Database\IExpression|string>
      */
-    protected auto toLiteralParam($expression)
-    {
+    protected auto toLiteralParam($expression) {
         if (is_string($expression)) {
             return [$expression => 'literal'];
         }

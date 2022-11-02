@@ -12,8 +12,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.TestSuite;
 
-import uim.cake.database.Connection;
-import uim.cake.database.IDriver;
+import uim.cake.databases.Connection;
+import uim.cake.databases.IDriver;
 import uim.cake.Datasource\ConnectionManager;
 use Closure;
 

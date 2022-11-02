@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Datasource;
+module uim.cake.Datasource;
 
 import uim.cake.Datasource\Locator\ILocator;
 import uim.cake.ORM\Locator\TableLocator;
@@ -32,8 +23,7 @@ class FactoryLocator
      * @param \Cake\Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      * @return void
      */
-    static function add(string myType, $factory): void
-    {
+    static void add(string myType, $factory) {
         if (!$factory instanceof ILocator && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
                 '`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable.'
@@ -51,8 +41,7 @@ class FactoryLocator
      * @param string myType The name of the repository type to drop the factory for.
      * @return void
      */
-    static function drop(string myType): void
-    {
+    static void drop(string myType) {
         unset(static::$_modelFactories[myType]);
     }
 
@@ -63,8 +52,7 @@ class FactoryLocator
      * @throws \InvalidArgumentException If the specified repository type has no factory.
      * @return \Cake\Datasource\Locator\ILocator|callable The factory for the repository type.
      */
-    static auto get(string myType)
-    {
+    static auto get(string myType) {
         if (!isset(static::$_modelFactories['Table'])) {
             static::$_modelFactories['Table'] = new TableLocator();
         }

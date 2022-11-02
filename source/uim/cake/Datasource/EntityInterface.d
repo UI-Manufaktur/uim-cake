@@ -116,7 +116,6 @@ interface IEntity : ArrayAccess, JsonSerializable
      * Checks if a field is accessible
      *
      * @param string myField Field name to check
-     * @return bool
      */
     bool isAccessible(string myField);
 

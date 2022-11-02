@@ -35,8 +35,7 @@ class App {
      * @return string|null moduled class name, null if the class is not found.
      * @psalm-return class-string|null
      */
-    static string className(string aClassName, string aClassType = '', string aClassNameSuffix = '')
-    {
+    static string className(string aClassName, string aClassType = '', string aClassNameSuffix = '') {
         if (strpos(aClassName, '\\') !== false) {
             return class_exists(aClassName) ? aClassName : null;
         }
@@ -99,8 +98,7 @@ class App {
      * @param string aClassNameSuffix Class name suffix
      * @return string Plugin split name of class
      */
-    static function shortName(string aClassName, string aClassType, string aClassNameSuffix = ''): string
-    {
+    static string shortName(string aClassName, string aClassType, string aClassNameSuffix = '') {
         aClassName = str_replace('\\', '/', aClassName);
         aClassType = '/' . aClassType . '/';
 
@@ -136,8 +134,7 @@ class App {
      * @param string $module module.
      * @return bool
      */
-    protected static bool _classExistsInBase(string myName, string $module)
-    {
+    protected static bool _classExistsInBase(string myName, string $module) {
         return class_exists($module . myName);
     }
 

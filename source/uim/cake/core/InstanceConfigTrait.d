@@ -1,7 +1,7 @@
 module uim.cake.core;
 
 import uim.cake.core.Exception\CakeException;
-import uim.cake.Utility\Hash;
+import uim.cake.utikities.Hash;
 use InvalidArgumentException;
 
 /**
@@ -54,8 +54,7 @@ trait InstanceConfigTrait
      * @return this
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    auto setConfig(myKey, myValue = null, myMerge = true)
-    {
+    auto setConfig(myKey, myValue = null, myMerge = true) {
         if (!this._configInitialized) {
             this._config = this._defaultConfig;
             this._configInitialized = true;
@@ -99,8 +98,7 @@ trait InstanceConfigTrait
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    auto getConfig(?string myKey = null, $default = null)
-    {
+    auto getConfig(?string myKey = null, $default = null) {
         if (!this._configInitialized) {
             this._config = this._defaultConfig;
             this._configInitialized = true;
@@ -120,8 +118,7 @@ trait InstanceConfigTrait
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    auto getConfigOrFail(string myKey)
-    {
+    auto getConfigOrFail(string myKey) {
         myConfig = this.getConfig(myKey);
         if (myConfig === null) {
             throw new InvalidArgumentException(sprintf('Expected configuration `%s` not found.', myKey));
@@ -156,8 +153,7 @@ trait InstanceConfigTrait
      * @param mixed|null myValue The value to set.
      * @return this
      */
-    function configShallow(myKey, myValue = null)
-    {
+    function configShallow(myKey, myValue = null) {
         if (!this._configInitialized) {
             this._config = this._defaultConfig;
             this._configInitialized = true;
@@ -174,8 +170,7 @@ trait InstanceConfigTrait
      * @param string|null myKey Key to read.
      * @return mixed
      */
-    protected auto _configRead(?string myKey)
-    {
+    protected auto _configRead(?string myKey) {
         if (myKey === null) {
             return this._config;
         }

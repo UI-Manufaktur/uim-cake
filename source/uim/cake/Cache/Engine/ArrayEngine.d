@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.7.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.cache\Engine;
+module uim.cake.cache\Engine;
 
 import uim.cake.cache\CacheEngine;
 
@@ -42,8 +33,7 @@ class ArrayEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    bool set(myKey, myValue, $ttl = null)
-    {
+    bool set(myKey, myValue, $ttl = null) {
         myKey = this._key(myKey);
         $expires = time() + this.duration($ttl);
         this.data[myKey] = ['exp' => $expires, 'val' => myValue];
@@ -59,8 +49,7 @@ class ArrayEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn't exist, has
      * expired, or if there was an error fetching it.
      */
-    auto get(myKey, $default = null)
-    {
+    auto get(myKey, $default = null) {
         myKey = this._key(myKey);
         if (!isset(this.data[myKey])) {
             return $default;
@@ -85,8 +74,7 @@ class ArrayEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string myKey, int $offset = 1)
-    {
+    function increment(string myKey, int $offset = 1) {
         if (this.get(myKey) === null) {
             this.set(myKey, 0);
         }
@@ -103,8 +91,7 @@ class ArrayEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string myKey, int $offset = 1)
-    {
+    function decrement(string myKey, int $offset = 1) {
         if (this.get(myKey) === null) {
             this.set(myKey, 0);
         }
@@ -120,8 +107,7 @@ class ArrayEngine : CacheEngine
      * @param string myKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    bool delete(myKey)
-    {
+    bool delete(myKey) {
         myKey = this._key(myKey);
         unset(this.data[myKey]);
 
@@ -133,8 +119,7 @@ class ArrayEngine : CacheEngine
      *
      * @return bool True Returns true.
      */
-    bool clear()
-    {
+    bool clear() {
         this.data = [];
 
         return true;
@@ -169,8 +154,7 @@ class ArrayEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         myKey = this._config['prefix'] . $group;
         if (isset(this.data[myKey])) {
             this.data[myKey]['val'] += 1;

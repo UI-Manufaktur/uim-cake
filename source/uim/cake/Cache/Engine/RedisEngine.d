@@ -1,13 +1,3 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         2.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 module uim.cake.cache\Engine;
 
 import uim.cake.cache\CacheEngine;
@@ -68,8 +58,7 @@ class RedisEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = [])
-    {
+    bool init(array myConfig = []) {
         if (!extension_loaded('redis')) {
             throw new RuntimeException('The `redis` extension must be enabled to use RedisEngine.');
         }
@@ -88,8 +77,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if Redis server was connected
      */
-    protected bool _connect()
-    {
+    protected bool _connect() {
         try {
             this._Redis = new Redis();
             if (!empty(this._config['unix_socket'])) {
@@ -136,8 +124,7 @@ class RedisEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool set(myKey, myValue, $ttl = null)
-    {
+    bool set(myKey, myValue, $ttl = null) {
         myKey = this._key(myKey);
         myValue = this.serialize(myValue);
 
@@ -157,8 +144,7 @@ class RedisEngine : CacheEngine
      * @return mixed The cached data, or the default if the data doesn't exist, has
      *   expired, or if there was an error fetching it
      */
-    auto get(myKey, $default = null)
-    {
+    auto get(myKey, $default = null) {
         myValue = this._Redis.get(this._key(myKey));
         if (myValue === false) {
             return $default;
@@ -174,8 +160,7 @@ class RedisEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string myKey, int $offset = 1)
-    {
+    function increment(string myKey, int $offset = 1) {
         $duration = this._config['duration'];
         myKey = this._key(myKey);
 
@@ -194,8 +179,7 @@ class RedisEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string myKey, int $offset = 1)
-    {
+    function decrement(string myKey, int $offset = 1) {
         $duration = this._config['duration'];
         myKey = this._key(myKey);
 
@@ -213,8 +197,7 @@ class RedisEngine : CacheEngine
      * @param string myKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    bool delete(myKey)
-    {
+    bool delete(myKey) {
         myKey = this._key(myKey);
 
         return this._Redis.del(myKey) > 0;
@@ -225,8 +208,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    bool clear()
-    {
+    bool clear() {
         this._Redis.setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
         $isAllDeleted = true;
@@ -258,8 +240,7 @@ class RedisEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://github.com/phpredis/phpredis#set
      */
-    bool add(string myKey, myValue)
-    {
+    bool add(string myKey, myValue) {
         $duration = this._config['duration'];
         myKey = this._key(myKey);
         myValue = this.serialize(myValue);
@@ -300,8 +281,7 @@ class RedisEngine : CacheEngine
      * @param string $group name of the group to be cleared
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         return (bool)this._Redis.incr(this._config['prefix'] . $group);
     }
 
@@ -315,8 +295,7 @@ class RedisEngine : CacheEngine
      * @return string
      * @link https://github.com/phpredis/phpredis/issues/81
      */
-    protected auto serialize(myValue): string
-    {
+    protected string serialize(myValue) {
         if (is_int(myValue)) {
             return (string)myValue;
         }
@@ -330,8 +309,7 @@ class RedisEngine : CacheEngine
      * @param string myValue Value to unserialize.
      * @return mixed
      */
-    protected auto unserialize(string myValue)
-    {
+    protected auto unserialize(string myValue) {
         if (preg_match('/^[-]?\d+$/', myValue)) {
             return (int)myValue;
         }

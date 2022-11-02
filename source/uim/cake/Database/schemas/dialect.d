@@ -1,8 +1,8 @@
-module uim.cake.database.Schema;
+module uim.cake.databases.Schema;
 
-import uim.cake.database.IDriver;
-import uim.cake.database.Type\ColumnSchemaAwareInterface;
-import uim.cake.database.TypeFactory;
+import uim.cake.databases.IDriver;
+import uim.cake.databases.Type\ColumnSchemaAwareInterface;
+import uim.cake.databases.TypeFactory;
 use InvalidArgumentException;
 
 /**
@@ -28,8 +28,7 @@ abstract class SchemaDialect
      *
      * @param \Cake\Database\IDriver myDriver The driver to use.
      */
-    this(IDriver myDriver)
-    {
+    this(IDriver myDriver) {
         myDriver.connect();
         this._driver = myDriver;
     }

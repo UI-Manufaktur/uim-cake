@@ -1,4 +1,4 @@
-module uim.cake.database.Log;
+module uim.cake.databases.Log;
 
 import uim.cake.Log\Engine\BaseLog;
 import uim.cake.Log\Log;
@@ -16,8 +16,7 @@ class QueryLogger : BaseLog
      *
      * @param array<string, mixed> myConfig Configuration array
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         this._defaultConfig['scopes'] = ['queriesLog'];
         this._defaultConfig['connection'] = '';
 
@@ -25,8 +24,7 @@ class QueryLogger : BaseLog
     }
 
 
-    function log($level, myMessage, array $context = [])
-    {
+    function log($level, myMessage, array $context = []) {
         $context['scope'] = this.scopes() ?: ['queriesLog'];
         $context['connection'] = this.getConfig('connection');
 

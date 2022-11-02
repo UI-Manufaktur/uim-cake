@@ -98,8 +98,7 @@ class BasePlugin : PluginInterface
      *
      * @param array<string, mixed> myOptions Options
      */
-    this(array myOptions = [])
-    {
+    this(array myOptions = []) {
         foreach (static::VALID_HOOKS as myKey) {
             if (isset(myOptions[myKey])) {
                 this.{"{myKey}Enabled"} = (bool)myOptions[myKey];
@@ -124,8 +123,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    auto getName(): string
-    {
+    string getName() {
         if (this.name) {
             return this.name;
         }
@@ -137,8 +135,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    auto getPath(): string
-    {
+    string getPath() {
         if (this.path) {
             return this.path;
         }
@@ -155,8 +152,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    auto getConfigPath(): string
-    {
+    string getConfigPath() {
         if (this.configPath) {
             return this.configPath;
         }
@@ -166,8 +162,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    auto getClassPath(): string
-    {
+    string getClassPath() {
         if (this.classPath) {
             return this.classPath;
         }
@@ -177,8 +172,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    auto getTemplatePath(): string
-    {
+    string getTemplatePath() {
         if (this.templatePath) {
             return this.templatePath;
         }
@@ -188,8 +182,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function enable(string $hook)
-    {
+    function enable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled}"} = true;
 
@@ -197,8 +190,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function disable(string $hook)
-    {
+    function disable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled"} = false;
 
@@ -206,8 +198,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    bool isEnabled(string $hook)
-    {
+    bool isEnabled(string $hook) {
         this.checkHook($hook);
 
         return this.{"{$hook}Enabled"} === true;

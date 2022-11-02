@@ -146,8 +146,7 @@ class ConsoleOutput
      *
      * @param string $stream The identifier of the stream to write output to.
      */
-    this(string $stream = 'php://stdout')
-    {
+    this(string $stream = 'php://stdout') {
         this._output = fopen($stream, 'wb');
 
         if (
@@ -193,8 +192,7 @@ class ConsoleOutput
      * @param string $text Text with styling tags.
      * @return string String with color codes added.
      */
-    function styleText(string $text): string
-    {
+    string styleText(string $text) {
         if (this._outputAs === static::RAW) {
             return $text;
         }
@@ -217,8 +215,7 @@ class ConsoleOutput
      * @param array<string, string> $matches An array of matches to replace.
      * @return string
      */
-    protected auto _replaceTags(array $matches): string
-    {
+    protected string _replaceTags(array $matches) {
         $style = this.getStyle($matches['tag']);
         if (empty($style)) {
             return '<' . $matches['tag'] . '>' . $matches['text'] . '</' . $matches['tag'] . '>';
@@ -282,8 +279,7 @@ class ConsoleOutput
      * @param array $definition The array definition of the style to change or create..
      * @return void
      */
-    auto setStyle(string $style, array $definition): void
-    {
+    void setStyle(string $style, array $definition) {
         if (!$definition) {
             unset(static::$_styles[$style]);
 
@@ -320,8 +316,7 @@ class ConsoleOutput
      * @return void
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
-    auto setOutputAs(int myType): void
-    {
+    void setOutputAs(int myType) {
         if (!in_array(myType, [self::RAW, self::PLAIN, self::COLOR], true)) {
             throw new InvalidArgumentException(sprintf('Invalid output type "%s".', myType));
         }

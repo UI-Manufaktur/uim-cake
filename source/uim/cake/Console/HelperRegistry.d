@@ -25,8 +25,7 @@ class HelperRegistry : ObjectRegistry
      * @param \Cake\Console\ConsoleIo $io An io instance.
      * @return void
      */
-    auto setIo(ConsoleIo $io): void
-    {
+    void setIo(ConsoleIo $io) {
         this._io = $io;
     }
 
@@ -63,8 +62,7 @@ class HelperRegistry : ObjectRegistry
      * @return void
      * @throws \Cake\Console\Exception\MissingHelperException
      */
-    protected auto _throwMissingClassError(string myClass, ?string myPlugin): void
-    {
+    protected void _throwMissingClassError(string myClass, ?string myPlugin) {
         throw new MissingHelperException([
             'class' => myClass,
             'plugin' => myPlugin,

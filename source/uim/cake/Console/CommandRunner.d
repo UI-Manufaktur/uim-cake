@@ -16,7 +16,7 @@ import uim.cake.Event\EventManager;
 import uim.cake.Event\IEventManager;
 import uim.cake.Routing\Router;
 import uim.cake.Routing\RoutingApplicationInterface;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -93,8 +93,7 @@ class CommandRunner : IEventDispatcher
      * @param array<string> myAliases The map of aliases to replace.
      * @return this
      */
-    auto setAliases(array myAliases)
-    {
+    auto setAliases(array myAliases) {
         this.aliases = myAliases;
 
         return this;
@@ -177,8 +176,7 @@ class CommandRunner : IEventDispatcher
      *
      * @return void
      */
-    protected auto bootstrap(): void
-    {
+    protected void bootstrap() {
         this.app.bootstrap();
         if (this.app instanceof PluginApplicationInterface) {
             this.app.pluginBootstrap();
@@ -209,8 +207,7 @@ class CommandRunner : IEventDispatcher
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setEventManager(IEventManager myEventManager)
-    {
+    auto setEventManager(IEventManager myEventManager) {
         if (this.app instanceof PluginApplicationInterface) {
             this.app.setEventManager(myEventManager);
 
@@ -228,8 +225,7 @@ class CommandRunner : IEventDispatcher
      * @param string myName The command name to find
      * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
-    protected auto getCommand(ConsoleIo $io, CommandCollection $commands, string myName)
-    {
+    protected auto getCommand(ConsoleIo $io, CommandCollection $commands, string myName) {
         $instance = $commands.get(myName);
         if (is_string($instance)) {
             $instance = this.createCommand($instance, $io);
@@ -285,8 +281,7 @@ class CommandRunner : IEventDispatcher
      * @return string The resolved name.
      * @throws \Cake\Console\Exception\MissingOptionException
      */
-    protected auto resolveName(CommandCollection $commands, ConsoleIo $io, ?string myName): string
-    {
+    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string myName) {
         if (!myName) {
             $io.err('<error>No command provided. Choose one of the available commands.</error>', 2);
             myName = 'help';
@@ -331,8 +326,7 @@ class CommandRunner : IEventDispatcher
      * @param array $argv The CLI arguments to invoke.
      * @return int|bool|null Exit code
      */
-    protected auto runShell(Shell $shell, array $argv)
-    {
+    protected auto runShell(Shell $shell, array $argv) {
         try {
             $shell.initialize();
 
@@ -349,8 +343,7 @@ class CommandRunner : IEventDispatcher
      * @param \Cake\Console\ConsoleIo $io The IO wrapper for the created shell class.
      * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
-    protected auto createCommand(string myClassName, ConsoleIo $io)
-    {
+    protected auto createCommand(string myClassName, ConsoleIo $io) {
         if (!this.factory) {
             myContainer = null;
             if (this.app instanceof ContainerApplicationInterface) {
@@ -374,8 +367,7 @@ class CommandRunner : IEventDispatcher
      *
      * @return void
      */
-    protected auto loadRoutes(): void
-    {
+    protected void loadRoutes() {
         if (!(this.app instanceof RoutingApplicationInterface)) {
             return;
         }

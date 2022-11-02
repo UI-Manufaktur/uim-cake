@@ -28,14 +28,12 @@ class MemoryStorage : IStorage
     }
 
 
-    function write(myUser): void
-    {
+    void write(myUser) {
         this._user = myUser;
     }
 
 
-    function delete(): void
-    {
+    void delete() {
         this._user = null;
     }
 

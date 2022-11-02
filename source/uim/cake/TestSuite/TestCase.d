@@ -26,7 +26,7 @@ import uim.cake.TestSuite\Constraint\EventFired;
 import uim.cake.TestSuite\Constraint\EventFiredWith;
 import uim.cake.TestSuite\Fixture\FixtureStrategyInterface;
 import uim.cake.TestSuite\Fixture\TruncateStrategy;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use LogicException;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;
@@ -469,13 +469,13 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage Assertion failure message
      * @return void
      */
-    function assertEventFiredWith(
+    void assertEventFiredWith(
         string myName,
         string myDataKey,
         myDataValue,
         ?EventManager myEventManager = null,
         string myMessage = ''
-    ): void {
+    ) {
         if (!myEventManager) {
             myEventManager = EventManager::instance();
         }
@@ -491,8 +491,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextNotEquals(string $expected, string myResult, string myMessage = ''): void
-    {
+    void assertTextNotEquals(string $expected, string myResult, string myMessage = '') {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         myResult = str_replace(["\r\n", "\r"], "\n", myResult);
         this.assertNotEquals($expected, myResult, myMessage);
@@ -507,8 +506,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextEquals(string $expected, string myResult, string myMessage = ''): void
-    {
+    void assertTextEquals(string $expected, string myResult, string myMessage = '') {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         myResult = str_replace(["\r\n", "\r"], "\n", myResult);
         this.assertEquals($expected, myResult, myMessage);
@@ -523,8 +521,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextStartsWith(string $prefix, string $string, string myMessage = ''): void
-    {
+    void assertTextStartsWith(string $prefix, string $string, string myMessage = '') {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringStartsWith($prefix, $string, myMessage);
@@ -539,8 +536,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextStartsNotWith(string $prefix, string $string, string myMessage = ''): void
-    {
+    void assertTextStartsNotWith(string $prefix, string $string, string myMessage = '') {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringStartsNotWith($prefix, $string, myMessage);
@@ -555,8 +551,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextEndsWith(string $suffix, string $string, string myMessage = ''): void
-    {
+    void assertTextEndsWith(string $suffix, string $string, string myMessage = '') {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringEndsWith($suffix, $string, myMessage);
@@ -571,8 +566,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage The message to use for failure.
      * @return void
      */
-    function assertTextEndsNotWith(string $suffix, string $string, string myMessage = ''): void
-    {
+    void assertTextEndsNotWith(string $suffix, string $string, string myMessage = '') {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
         this.assertStringEndsNotWith($suffix, $string, myMessage);
@@ -588,12 +582,12 @@ abstract class TestCase : BaseTestCase
      * @param bool $ignoreCase Whether the search should be case-sensitive.
      * @return void
      */
-    function assertTextContains(
+    void assertTextContains(
         string $needle,
         string $haystack,
         string myMessage = '',
         bool $ignoreCase = false
-    ): void {
+    ) {
         $needle = str_replace(["\r\n", "\r"], "\n", $needle);
         $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
 
@@ -870,8 +864,7 @@ abstract class TestCase : BaseTestCase
      * @param array|string $regex Full regexp from `assertHtml`
      * @return string|false
      */
-    protected auto _assertAttributes(array $assertions, string $string, bool $fullDebug = false, $regex = '')
-    {
+    protected auto _assertAttributes(array $assertions, string $string, bool $fullDebug = false, $regex = '') {
         $asserts = $assertions['attrs'];
         $explains = $assertions['explains'];
         do {
@@ -905,8 +898,7 @@ abstract class TestCase : BaseTestCase
      * @param string myPath Path separated by "/" slash.
      * @return string Normalized path separated by DIRECTORY_SEPARATOR.
      */
-    protected auto _normalizePath(string myPath): string
-    {
+    protected string _normalizePath(string myPath) {
         return str_replace('/', DIRECTORY_SEPARATOR, myPath);
     }
 
@@ -921,8 +913,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertWithinRange($expected, myResult, $margin, myMessage = '')
-    {
+    protected static function assertWithinRange($expected, myResult, $margin, myMessage = '') {
         $upper = myResult + $margin;
         $lower = myResult - $margin;
         static::assertTrue(($expected <= $upper) && ($expected >= $lower), myMessage);
@@ -937,8 +928,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertNotWithinRange($expected, myResult, $margin, myMessage = '')
-    {
+    protected static function assertNotWithinRange($expected, myResult, $margin, myMessage = '') {
         $upper = myResult + $margin;
         $lower = myResult - $margin;
         static::assertTrue(($expected > $upper) || ($expected < $lower), myMessage);
@@ -952,8 +942,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertPathEquals($expected, myResult, myMessage = '')
-    {
+    protected static function assertPathEquals($expected, myResult, myMessage = '') {
         $expected = str_replace(DIRECTORY_SEPARATOR, '/', $expected);
         myResult = str_replace(DIRECTORY_SEPARATOR, '/', myResult);
         static::assertEquals($expected, myResult, myMessage);
@@ -966,8 +955,7 @@ abstract class TestCase : BaseTestCase
      * @param string myMessage Message for skip
      * @return bool
      */
-    protected auto skipUnless($condition, myMessage = '')
-    {
+    protected auto skipUnless($condition, myMessage = '') {
         if (!$condition) {
             this.markTestSkipped(myMessage);
         }
@@ -986,8 +974,7 @@ abstract class TestCase : BaseTestCase
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @return \Cake\ORM\Table|\PHPUnit\Framework\MockObject\MockObject
      */
-    auto getMockForModel(string myAlias, array $methods = [], array myOptions = [])
-    {
+    auto getMockForModel(string myAlias, array $methods = [], array myOptions = []) {
         myClassName = this._getTableClassName(myAlias, myOptions);
         myConnectionName = myClassName::defaultConnectionName();
         myConnection = ConnectionManager::get(myConnectionName);
@@ -1047,8 +1034,7 @@ abstract class TestCase : BaseTestCase
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @psalm-return class-string<\Cake\ORM\Table>
      */
-    protected auto _getTableClassName(string myAlias, array myOptions): string
-    {
+    protected string _getTableClassName(string myAlias, array myOptions) {
         if (empty(myOptions['className'])) {
             myClass = Inflector::camelize(myAlias);
             /** @psalm-var class-string<\Cake\ORM\Table>|null */
@@ -1090,8 +1076,7 @@ abstract class TestCase : BaseTestCase
      * @param string $fixture Fixture
      * @return this
      */
-    protected auto addFixture(string $fixture)
-    {
+    protected auto addFixture(string $fixture) {
         this.fixtures[] = $fixture;
 
         return this;

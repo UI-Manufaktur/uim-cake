@@ -24,9 +24,8 @@ class BodyNotContains : BodyContains
      * Checks assertion
      *
      * @param mixed $other Expected type
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other)
     {
         return super.matches($other) === false;
     }

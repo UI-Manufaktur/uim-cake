@@ -25,8 +25,7 @@ class CallbackStatement : StatementDecorator
      * @param \Cake\Database\IDriver myDriver The driver instance used by the statement.
      * @param callable $callback The callback to apply to results before they are returned.
      */
-    this(IStatement $statement, IDriver myDriver, callable $callback)
-    {
+    this(IStatement $statement, IDriver myDriver, callable $callback) {
         super.this($statement, myDriver);
         this._callback = $callback;
     }
@@ -39,8 +38,7 @@ class CallbackStatement : StatementDecorator
      * @param string|int myType Either 'num' or 'assoc' to indicate the result format you would like.
      * @return array|false
      */
-    function fetch(myType = super.FETCH_TYPE_NUM)
-    {
+    function fetch(myType = super.FETCH_TYPE_NUM) {
         $callback = this._callback;
         $row = this._statement.fetch(myType);
 
@@ -52,8 +50,7 @@ class CallbackStatement : StatementDecorator
      *
      * Each row in the result will be processed by the callback when it is not `false.
      */
-    function fetchAll(myType = super.FETCH_TYPE_NUM)
-    {
+    function fetchAll(myType = super.FETCH_TYPE_NUM) {
         myResults = this._statement.fetchAll(myType);
 
         return myResults !== false ? array_map(this._callback, myResults) : false;

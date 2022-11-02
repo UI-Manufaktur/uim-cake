@@ -116,8 +116,7 @@ class ConsoleIo
      * @param bool myValue Value
      * @return void
      */
-    auto setInteractive(bool myValue): void
-    {
+    void setInteractive(bool myValue) {
         this.interactive = myValue;
     }
 
@@ -127,8 +126,7 @@ class ConsoleIo
      * @param int|null $level The current output level.
      * @return int The current output level.
      */
-    function level(?int $level = null): int
-    {
+    int level(?int $level = null) {
         if ($level !== null) {
             this._level = $level;
         }
@@ -234,8 +232,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    function warning(myMessage, int $newlines = 1): int
-    {
+    int warning(myMessage, int $newlines = 1) {
         myMessageType = 'warning';
         myMessage = this.wrapMessageWithType(myMessageType, myMessage);
 
@@ -250,8 +247,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    function error(myMessage, int $newlines = 1): int
-    {
+    int error(myMessage, int $newlines = 1) {
         myMessageType = 'error';
         myMessage = this.wrapMessageWithType(myMessageType, myMessage);
 
@@ -284,8 +280,7 @@ class ConsoleIo
      * @return void
      * @throws \Cake\Console\Exception\StopException
      */
-    function abort(myMessage, $code = ICommand::CODE_ERROR): void
-    {
+    void abort(myMessage, $code = ICommand::CODE_ERROR) {
         this.error(myMessage);
 
         throw new StopException(myMessage, $code);
@@ -298,8 +293,7 @@ class ConsoleIo
      * @param array<string>|string myMessage The message to wrap.
      * @return array<string>|string The message wrapped with the given message type.
      */
-    protected auto wrapMessageWithType(string myMessageType, myMessage)
-    {
+    protected auto wrapMessageWithType(string myMessageType, myMessage) {
         if (is_array(myMessage)) {
             foreach (myMessage as $k => $v) {
                 myMessage[$k] = "<{myMessageType}>{$v}</{myMessageType}>";
@@ -325,8 +319,7 @@ class ConsoleIo
      *    length of the last message output.
      * @return void
      */
-    function overwrite(myMessage, int $newlines = 1, ?int $size = null): void
-    {
+    void overwrite(myMessage, int $newlines = 1, ?int $size = null) {
         $size = $size ?: this._lastWritten;
 
         // Output backspaces.
@@ -359,7 +352,7 @@ class ConsoleIo
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    function err(myMessage = '', int $newlines = 1): int
+    int err(myMessage = '', int $newlines = 1): int
     {
         return this._err.write(myMessage, $newlines);
     }
@@ -368,10 +361,8 @@ class ConsoleIo
      * Returns a single or multiple linefeeds sequences.
      *
      * @param int $multiplier Number of times the linefeed sequence should be repeated
-     * @return string
      */
-    function nl(int $multiplier = 1): string
-    {
+    string nl(int $multiplier = 1) {
         return str_repeat(ConsoleOutput::LF, $multiplier);
     }
 
@@ -382,8 +373,7 @@ class ConsoleIo
      * @param int $width Width of the line, defaults to 79
      * @return void
      */
-    function hr(int $newlines = 0, int $width = 79): void
-    {
+    void hr(int $newlines = 0, int $width = 79) {
         this.out('', $newlines);
         this.out(str_repeat('-', $width));
         this.out('', $newlines);
@@ -396,8 +386,7 @@ class ConsoleIo
      * @param string|null $default Default input value.
      * @return string Either the default value, or the user-provided input.
      */
-    function ask(string $prompt, ?string $default = null): string
-    {
+    string ask(string $prompt, ?string $default = null) {
         return this._getInput($prompt, null, $default);
     }
 
@@ -408,8 +397,7 @@ class ConsoleIo
      * @return void
      * @see \Cake\Console\ConsoleOutput::setOutputAs()
      */
-    auto setOutputAs(int myMode): void
-    {
+    void setOutputAs(int myMode) {
         this._out.setOutputAs(myMode);
     }
 
@@ -444,8 +432,7 @@ class ConsoleIo
      * @return void
      * @see \Cake\Console\ConsoleOutput::setStyle()
      */
-    auto setStyle(string $style, array $definition): void
-    {
+    void setStyle(string $style, array $definition) {
         this._out.setStyle($style, $definition);
     }
 
@@ -457,8 +444,7 @@ class ConsoleIo
      * @param string|null $default Default input value.
      * @return string Either the default value, or the user-provided input.
      */
-    function askChoice(string $prompt, myOptions, ?string $default = null): string
-    {
+    string askChoice(string $prompt, myOptions, ?string $default = null) {
         if (is_string(myOptions)) {
             if (strpos(myOptions, ',')) {
                 myOptions = explode(',', myOptions);
@@ -491,8 +477,7 @@ class ConsoleIo
      * @param string|null $default Default input value. Pass null to omit.
      * @return string Either the default value, or the user-provided input.
      */
-    protected auto _getInput(string $prompt, ?string myOptions, ?string $default): string
-    {
+    protected string _getInput(string $prompt, ?string myOptions, ?string $default) {
         if (!this.interactive) {
             return (string)$default;
         }
@@ -530,8 +515,7 @@ class ConsoleIo
      *   QUIET disables notice, info and debug logs.
      * @return void
      */
-    auto setLoggers(myEnable): void
-    {
+    void setLoggers(myEnable) {
         Log::drop('stdout');
         Log::drop('stderr');
         if (myEnable === false) {
@@ -590,8 +574,7 @@ class ConsoleIo
      * @throws \Cake\Console\Exception\StopException When `q` is given as an answer
      *   to whether a file should be overwritten.
      */
-    function createFile(string myPath, string myContentss, bool $forceOverwrite = false): bool
-    {
+    function createFile(string myPath, string myContentss, bool $forceOverwrite = false) {
         this.out();
         $forceOverwrite = $forceOverwrite || this.forceOverwrite;
 

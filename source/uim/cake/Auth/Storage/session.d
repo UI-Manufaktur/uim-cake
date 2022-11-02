@@ -95,8 +95,6 @@ class SessionStorage : IStorage
      * Delete user record from session.
      *
      * The session id is also renewed to help mitigate issues with session replays.
-     *
-     * @return void
      */
     void delete() {
         this._user = false;

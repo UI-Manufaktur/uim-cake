@@ -30,8 +30,7 @@ class ConsoleInput
      *
      * @param string $handle The location of the stream to use as input.
      */
-    this(string $handle = 'php://stdin')
-    {
+    this(string $handle = 'php://stdin') {
         this._canReadline = (extension_loaded('readline') && $handle === 'php://stdin');
         this._input = fopen($handle, 'rb');
     }
@@ -41,8 +40,7 @@ class ConsoleInput
      *
      * @return string|null The value of the stream. Null on EOF.
      */
-    string read()
-    {
+    string read() {
         if (this._canReadline) {
             $line = readline('');
 
@@ -66,8 +64,7 @@ class ConsoleInput
      * @param int $timeout An optional time to wait for data
      * @return bool True for data available, false otherwise
      */
-    bool dataAvailable(int $timeout = 0)
-    {
+    bool dataAvailable(int $timeout = 0) {
         $readFds = [this._input];
         $writeFds = null;
         myErrorFds = null;

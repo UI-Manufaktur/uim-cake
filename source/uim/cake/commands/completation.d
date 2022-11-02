@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP Project
- * @since         2.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.command;
+module uim.cake.command;
 
 import uim.cake.console.Arguments;
 import uim.cake.console.commandCollection;
@@ -15,7 +6,7 @@ import uim.cake.console.commandCollectionAwareInterface;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
 import uim.cake.console.Shell;
-import uim.cake.Utility\Inflector;
+import uim.cake.utikities.Inflector;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -35,8 +26,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\CommandCollection $commands The command collection
      * @return void
      */
-    auto setCommandCollection(CommandCollection $commands): void
-    {
+    void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;
     }
 
@@ -117,8 +107,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    protected auto getCommands(Arguments $args, ConsoleIo $io): int
-    {
+    protected int getCommands(Arguments $args, ConsoleIo $io) {
         myOptions = [];
         foreach (this.commands as myKey => myValue) {
             $parts = explode(' ', myKey);

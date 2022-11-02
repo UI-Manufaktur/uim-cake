@@ -40,8 +40,7 @@ class FormatterLocator
      * @param array $registry An array of key-value pairs where the key is the
      * formatter name the value is a FQCN for the formatter.
      */
-    this(array $registry = [])
-    {
+    this(array $registry = []) {
         foreach ($registry as myName => $spec) {
             this.set(myName, $spec);
         }

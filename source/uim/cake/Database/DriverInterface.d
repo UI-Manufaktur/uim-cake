@@ -1,7 +1,7 @@
-module uim.cake.database;
+module uim.cake.databases;
 
-import uim.cake.database.Schema\SchemaDialect;
-import uim.cake.database.Schema\TableSchema;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Schema\TableSchema;
 use Closure;
 
 /**
@@ -72,8 +72,6 @@ interface IDriver {
 
     /**
      * Disconnects from database server.
-     *
-     * @return void
      */
     void disconnect() void;
 
@@ -129,7 +127,6 @@ interface IDriver {
      * Get the SQL for creating a save point.
      *
      * @param string|int myName Save point name or id
-     * @return string
      */
     string savePointSQL(myName);
 
@@ -147,8 +144,6 @@ interface IDriver {
 
     /**
      * Get the SQL for enabling foreign keys.
-     *
-     * @return string
      */
     string enableForeignKeySQL();
 
@@ -174,7 +169,6 @@ interface IDriver {
      *
      * @param mixed myValue The value to quote.
      * @param int myType Must be one of the \PDO::PARAM_* constants
-     * @return string
      */
     string quote(myValue, myType);
 

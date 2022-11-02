@@ -1,4 +1,4 @@
-module uim.cake.database.Type;
+module uim.cake.databases.Type;
 
 import uim.cake.I18n\Date;
 import uim.cake.I18n\FrozenDate;
@@ -29,8 +29,7 @@ class DateType : DateTimeType
     protected $setToDateStart = true;
 
 
-    this(?string myName = null)
-    {
+    this(?string myName = null) {
         super.this(myName);
 
         this._setClassName(FrozenDate::class, DateTimeImmutable::class);

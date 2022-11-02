@@ -18,15 +18,13 @@ import uim.cake.Validation\Validator;
 class ContactForm : Form
 {
 
-    protected auto _buildSchema(Schema $schema)
-    {
+    protected auto _buildSchema(Schema $schema) {
         return $schema.addField('name', 'string')
             .addField('email', ['type' => 'string'])
             .addField('body', ['type' => 'text']);
     }
 
-    function validationDefault(Validator $validator)
-    {
+    function validationDefault(Validator $validator) {
         return $validator.add('name', 'length', [
                 'rule' => ['minLength', 10],
                 'message' => 'A name is required'
@@ -36,8 +34,7 @@ class ContactForm : Form
             ]);
     }
 
-    protected auto _execute(array myData)
-    {
+    protected auto _execute(array myData) {
         // Send an email.
         return true;
     }

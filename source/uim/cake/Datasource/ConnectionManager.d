@@ -10,11 +10,11 @@
  */module uim.cake.Datasource;
 
 import uim.cake.core.StaticConfigTrait;
-import uim.cake.database.Connection;
-import uim.cake.database.Driver\Mysql;
-import uim.cake.database.Driver\Postgres;
-import uim.cake.database.Driver\Sqlite;
-import uim.cake.database.Driver\Sqlserver;
+import uim.cake.databases.Connection;
+import uim.cake.databases.Driver\Mysql;
+import uim.cake.databases.Driver\Postgres;
+import uim.cake.databases.Driver\Sqlite;
+import uim.cake.databases.Driver\Sqlserver;
 import uim.cake.Datasource\Exception\MissingDatasourceConfigException;
 
 /**
@@ -180,8 +180,7 @@ class ConnectionManager
      * @throws \Cake\Datasource\Exception\MissingDatasourceConfigException When config
      * data is missing.
      */
-    static auto get(string myName, bool $useAliases = true)
-    {
+    static auto get(string myName, bool $useAliases = true) {
         if ($useAliases && isset(static::$_aliasMap[myName])) {
             myName = static::$_aliasMap[myName];
         }

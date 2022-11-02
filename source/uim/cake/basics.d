@@ -4,7 +4,7 @@ module uim.cake.basics;
 import uim.cake;
 
 /* import uim.cake.core.Configure;
-import uim.cake.Error\Debugger;
+import uim.cake.errors\Debugger;
 use Psy\Shell as PsyShell;
  */
 define('SECOND', 1);
@@ -65,8 +65,7 @@ if (!function_exists('stackTrace')) {
      * @param array<string, mixed> myOptions Format for outputting stack trace
      * @return void
      */
-    function stackTrace(array myOptions = []): void
-    {
+    void stackTrace(array myOptions = []) {
         if (!Configure::read('debug')) {
             return;
         }
@@ -94,8 +93,7 @@ if (!function_exists('breakpoint')) {
      * @return string|null
      * @link http://psysh.org/
      */
-    string breakpoint()
-    {
+    string breakpoint() {
         if ((PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') && class_exists(PsyShell::class)) {
             return 'extract(\Psy\Shell::debug(get_defined_vars(), isset(this) ? this : null));';
         }
@@ -120,8 +118,7 @@ if (!function_exists('dd')) {
      * @return void
      * @link https://book.cakephp.org/4/en/development/debugging.html#basic-debugging
      */
-    function dd($var, $showHtml = null): void
-    {
+    void dd($var, $showHtml = null) {
         if (!Configure::read('debug')) {
             return;
         }

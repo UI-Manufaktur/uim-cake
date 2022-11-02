@@ -42,8 +42,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param array<string, mixed> myConfig The configuration for this engine. It requires the 'model'
      * key to be present corresponding to the Table to use for managing the sessions.
      */
-    this(array myConfig = [])
-    {
+    this(array myConfig = []) {
         if (isset(myConfig['tableLocator'])) {
             this.setTableLocator(myConfig['tableLocator']);
         }
@@ -67,8 +66,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param int $timeout The timeout duration.
      * @return this
      */
-    auto setTimeout(int $timeout)
-    {
+    auto setTimeout(int $timeout) {
         this._timeout = $timeout;
 
         return this;
@@ -103,8 +101,7 @@ class DatabaseSession : SessionHandlerInterface
      * @return string|false Session data or false if it does not exist.
      */
     #[\ReturnTypeWillChange]
-    function read($id)
-    {
+    function read($id) {
         /** @var string $pkField */
         $pkField = this._table.getPrimaryKey();
         myResult = this._table
@@ -177,8 +174,7 @@ class DatabaseSession : SessionHandlerInterface
      * @return int|false The number of deleted sessions on success, or false on failure.
      */
     #[\ReturnTypeWillChange]
-    function gc($maxlifetime)
-    {
+    function gc($maxlifetime) {
         return this._table.deleteAll(['expires <' => time()]);
     }
 }

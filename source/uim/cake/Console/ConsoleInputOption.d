@@ -116,8 +116,7 @@ class ConsoleInputOption
      *
      * @return string Value of this._name.
      */
-    function name(): string
-    {
+    string name() {
         return this._name;
     }
 
@@ -126,8 +125,7 @@ class ConsoleInputOption
      *
      * @return string Value of this._short.
      */
-    function short(): string
-    {
+    string short() {
         return this._short;
     }
 
@@ -135,10 +133,8 @@ class ConsoleInputOption
      * Generate the help for this this option.
      *
      * @param int $width The width to make the name of the option.
-     * @return string
      */
-    function help(int $width = 0): string
-    {
+    string help(int $width = 0) {
         $default = $short = '';
         if (this._default && this._default !== true) {
             $default = sprintf(' <comment>(default: %s)</comment>', this._default);
@@ -163,11 +159,8 @@ class ConsoleInputOption
 
     /**
      * Get the usage value for this option
-     *
-     * @return string
      */
-    function usage(): string
-    {
+    string usage() {
         myName = this._short === '' ? '--' . this._name : '-' . this._short;
         $default = '';
         if (this._default !== null && !is_bool(this._default) && this._default !== '') {
@@ -195,22 +188,19 @@ class ConsoleInputOption
 
     /**
      * Check if this option is required
-    bool isRequired()
-    {
+    bool isRequired() {
         return this.required;
     }
 
     /**
      * Check if this option is a boolean option
-    bool isBoolean()
-    {
+    bool isBoolean() {
         return this._boolean;
     }
 
     /**
      * Check if this option accepts multiple values.
-    bool acceptsMultiple()
-    {
+    bool acceptsMultiple() {
         return this._multiple;
     }
 
@@ -221,8 +211,7 @@ class ConsoleInputOption
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    bool validChoice(myValue)
-    {
+    bool validChoice(myValue) {
         if (empty(this._choices)) {
             return true;
         }

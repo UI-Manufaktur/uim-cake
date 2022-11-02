@@ -22,8 +22,7 @@ class NullEngine : CacheEngine
     }
 
 
-    auto get(myKey, $default = null)
-    {
+    auto get(myKey, $default = null) {
         return $default;
     }
 
@@ -34,14 +33,12 @@ class NullEngine : CacheEngine
     }
 
 
-    function increment(string myKey, int $offset = 1)
-    {
+    function increment(string myKey, int $offset = 1) {
         return 1;
     }
 
 
-    function decrement(string myKey, int $offset = 1)
-    {
+    function decrement(string myKey, int $offset = 1) {
         return 0;
     }
 

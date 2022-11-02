@@ -1,6 +1,6 @@
 module uim.cake.database.Schema;
 
-import uim.cake.database.Exception\DatabaseException;
+import uim.cake.database.exceptions\DatabaseException;
 
 /**
  * Schema management/reflection features for Postgres.
@@ -194,8 +194,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param string|int|null $default The default value.
      * @return string|int|null
      */
-    protected auto _defaultValue($default)
-    {
+    protected auto _defaultValue($default) {
         if (is_numeric($default) || $default === null) {
             return $default;
         }
@@ -333,8 +332,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    protected auto _convertOnClause(string $clause): string
-    {
+    protected string _convertOnClause(string $clause) {
         if ($clause === 'r') {
             return TableSchema::ACTION_RESTRICT;
         }
@@ -349,8 +347,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function columnSql(TableSchema $schema, string myName): string
-    {
+    string columnSql(TableSchema $schema, string myName) {
         /** @var array myData */
         myData = $schema.getColumn(myName);
 
@@ -511,8 +508,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string myName): string
-    {
+    string indexSql(TableSchema $schema, string myName) {
         /** @var array myData */
         myData = $schema.getIndex(myName);
         $columns = array_map(
@@ -529,8 +525,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function constraintSql(TableSchema $schema, string myName): string
-    {
+    string constraintSql(TableSchema $schema, string myName) {
         /** @var array<string, mixed> myData */
         myData = $schema.getConstraint(myName);
         $out = 'CONSTRAINT ' . this._driver.quoteIdentifier(myName);
@@ -551,8 +546,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param array<string, mixed> myData Key data.
      * @return string
      */
-    protected auto _keySql(string $prefix, array myData): string
-    {
+    protected string _keySql(string $prefix, array myData) {
         $columns = array_map(
             [this._driver, 'quoteIdentifier'],
             myData['columns']

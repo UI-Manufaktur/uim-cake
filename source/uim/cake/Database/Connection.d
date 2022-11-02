@@ -1,19 +1,19 @@
-module uim.cake.database;
+module uim.cake.databases;
 
 import uim.cake.cache\Cache;
 import uim.cake.core.App;
 import uim.cake.core.Retry\CommandRetry;
-import uim.cake.database.Exception\MissingConnectionException;
-import uim.cake.database.Exception\MissingDriverException;
-import uim.cake.database.Exception\MissingExtensionException;
-import uim.cake.database.Exception\NestedTransactionRollbackException;
-import uim.cake.database.Log\LoggedQuery;
-import uim.cake.database.Log\LoggingStatement;
-import uim.cake.database.Log\QueryLogger;
-import uim.cake.database.Retry\ReconnectStrategy;
-import uim.cake.database.Schema\CachedCollection;
-import uim.cake.database.Schema\Collection as SchemaCollection;
-import uim.cake.database.Schema\ICollection as SchemaICollection;
+import uim.cake.databases.exceptions\MissingConnectionException;
+import uim.cake.databases.exceptions\MissingDriverException;
+import uim.cake.databases.exceptions\MissingExtensionException;
+import uim.cake.databases.exceptions\NestedTransactionRollbackException;
+import uim.cake.databases.Log\LoggedQuery;
+import uim.cake.databases.Log\LoggingStatement;
+import uim.cake.databases.Log\QueryLogger;
+import uim.cake.databases.Retry\ReconnectStrategy;
+import uim.cake.databases.Schema\CachedCollection;
+import uim.cake.databases.Schema\Collection as SchemaCollection;
+import uim.cake.databases.Schema\ICollection as SchemaICollection;
 import uim.cake.Datasource\ConnectionInterface;
 import uim.cake.Log\Log;
 use Psr\Log\LoggerInterface;
@@ -115,8 +115,7 @@ class Connection : ConnectionInterface
      *
      * @param array<string, mixed> myConfig Configuration array.
      */
-    this(array myConfig)
-    {
+    this(array myConfig) {
         this._config = myConfig;
 
         myDriver = '';
@@ -148,8 +147,7 @@ class Connection : ConnectionInterface
     }
 
 
-    function configName(): string
-    {
+    string configName() {
         return this._config['name'] ?? '';
     }
 
@@ -163,8 +161,7 @@ class Connection : ConnectionInterface
      * @throws \Cake\Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
      * @return this
      */
-    auto setDriver(myDriver, myConfig = [])
-    {
+    auto setDriver(myDriver, myConfig = []) {
         if (is_string(myDriver)) {
             /** @psalm-var class-string<\Cake\Database\IDriver>|null myClassName */
             myClassName = App::className(myDriver, 'Database/Driver');
@@ -209,8 +206,7 @@ class Connection : ConnectionInterface
      * @throws \Cake\Database\Exception\MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
-    bool connect()
-    {
+    bool connect() {
         try {
             return this._driver.connect();
         } catch (MissingConnectionException $e) {
@@ -239,8 +235,7 @@ class Connection : ConnectionInterface
 
     /**
      * Returns whether connection to database server was already established.
-    bool isConnected()
-    {
+    bool isConnected() {
         return this._driver.isConnected();
     }
 
@@ -291,10 +286,8 @@ class Connection : ConnectionInterface
      *
      * @param \Cake\Database\Query myQuery The query to be compiled
      * @param \Cake\Database\ValueBinder $binder Value binder
-     * @return string
      */
-    function compileQuery(Query myQuery, ValueBinder $binder): string
-    {
+    string compileQuery(Query myQuery, ValueBinder $binder) {
         return this.getDriver().compileQuery(myQuery, $binder)[1];
     }
 
@@ -348,8 +341,7 @@ class Connection : ConnectionInterface
      * @param \Cake\Database\Schema\ICollection myCollection The schema collection object
      * @return this
      */
-    auto setSchemaCollection(SchemaICollection myCollection)
-    {
+    auto setSchemaCollection(SchemaICollection myCollection) {
         this._schemaCollection = myCollection;
 
         return this;
@@ -467,8 +459,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true on success, false otherwise
      */
-    bool commit()
-    {
+    bool commit() {
         if (!this._transactionStarted) {
             return false;
         }
@@ -503,10 +494,8 @@ class Connection : ConnectionInterface
      *
      * @param bool|null $toBeginning Whether the transaction should be rolled back to the
      * beginning of it. Defaults to false if using savepoints, or true if not.
-     * @return bool
      */
-    bool rollback(?bool $toBeginning = null)
-    {
+    bool rollback(?bool $toBeginning = null) {
         if (!this._transactionStarted) {
             return false;
         }
@@ -546,8 +535,7 @@ class Connection : ConnectionInterface
      * @param bool myEnable Whether save points should be used.
      * @return this
      */
-    function enableSavePoints(bool myEnable = true)
-    {
+    function enableSavePoints(bool myEnable = true) {
         if (myEnable === false) {
             this._useSavePoints = false;
         } else {
@@ -573,8 +561,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true if enabled, false otherwise
      */
-    bool isSavePointsEnabled()
-    {
+    bool isSavePointsEnabled() {
         return this._useSavePoints;
     }
 
@@ -645,14 +632,12 @@ class Connection : ConnectionInterface
      * @return bool true if driver supports dynamic constraints
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
-    bool supportsDynamicConstraints()
-    {
+    bool supportsDynamicConstraints() {
         return this._driver.supportsDynamicConstraints();
     }
 
 
-    function transactional(callable $callback)
-    {
+    function transactional(callable $callback) {
         this.begin();
 
         try {
@@ -683,14 +668,12 @@ class Connection : ConnectionInterface
      *
      * @return bool
      */
-    protected bool wasNestedTransactionRolledback()
-    {
+    protected bool wasNestedTransactionRolledback() {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }
 
 
-    function disableConstraints(callable $callback)
-    {
+    function disableConstraints(callable $callback) {
         return this.getDisconnectRetry().run(function () use ($callback) {
             this.disableForeignKeys();
 
@@ -709,8 +692,7 @@ class Connection : ConnectionInterface
      *
      * @return bool True if a transaction is running else false.
      */
-    bool inTransaction()
-    {
+    bool inTransaction() {
         return this._transactionStarted;
     }
 
@@ -723,8 +705,7 @@ class Connection : ConnectionInterface
      * @param \Cake\Database\TypeInterface|string|int myType Type to be used for determining kind of quoting to perform
      * @return string Quoted value
      */
-    function quote(myValue, myType = 'string'): string
-    {
+    string quote(myValue, myType = 'string') {
         [myValue, myType] = this.cast(myValue, myType);
 
         return this._driver.quote(myValue, myType);
@@ -734,8 +715,7 @@ class Connection : ConnectionInterface
      * Checks if using `quote()` is supported.
      *
      * This is not required to use `quoteIdentifier()`.
-    bool supportsQuoting()
-    {
+    bool supportsQuoting() {
         return this._driver.supports(IDriver::FEATURE_QUOTE);
     }
 
@@ -746,10 +726,8 @@ class Connection : ConnectionInterface
      * This does not require `supportsQuoting()` to work.
      *
      * @param string myIdentifier The identifier to quote.
-     * @return string
      */
-    function quoteIdentifier(string myIdentifier): string
-    {
+    string quoteIdentifier(string myIdentifier) {
         return this._driver.quoteIdentifier(myIdentifier);
     }
 
@@ -772,8 +750,7 @@ class Connection : ConnectionInterface
     }
 
 
-    auto setCacher(ICache $cacher)
-    {
+    auto setCacher(ICache $cacher) {
         this.cacher = $cacher;
 
         return this;
@@ -807,8 +784,7 @@ class Connection : ConnectionInterface
      * @param bool myEnable Enable/disable query logging
      * @return this
      */
-    function enableQueryLogging(bool myEnable = true)
-    {
+    function enableQueryLogging(bool myEnable = true) {
         this._logQueries = myEnable;
 
         return this;
@@ -828,8 +804,7 @@ class Connection : ConnectionInterface
     /**
      * Check if query logging is enabled.
      */
-    bool isQueryLoggingEnabled()
-    {
+    bool isQueryLoggingEnabled() {
         return this._logQueries;
     }
 
@@ -840,8 +815,7 @@ class Connection : ConnectionInterface
      * @return this
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
-    auto setLogger(LoggerInterface $logger)
-    {
+    auto setLogger(LoggerInterface $logger) {
         this._logger = $logger;
 
         return this;
