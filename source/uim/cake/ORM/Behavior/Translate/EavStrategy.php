@@ -377,7 +377,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param \Cake\Datasource\ResultSetInterface myResults Results to modify.
      * @return \Cake\Collection\ICollection
      */
-    function groupTranslations(myResults): ICollection
+    ICollection groupTranslations(myResults)
     {
         return myResults.map(function ($row) {
             if (!$row instanceof IEntity) {

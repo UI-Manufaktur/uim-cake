@@ -10,7 +10,7 @@ if (!function_exists('collection')) {
      * @param iterable myItems The items from which the collection will be built.
      * @return \Cake\Collection\Collection
      */
-    function collection(iterable myItems): ICollection
+    ICollection collection(iterable myItems)
     {
         return new Collection(myItems);
     }

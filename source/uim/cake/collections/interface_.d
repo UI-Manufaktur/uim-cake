@@ -52,7 +52,7 @@ interface ICollection : Iterator, JsonSerializable
      *   If left null, a callback that filters out falsey values will be used.
      * @return self
      */
-    function filter(?callable $callback = null): ICollection;
+    function filter(?callable $callback = null);
 
     /**
      * Looks through each value in the collection, and returns another collection with
@@ -77,7 +77,7 @@ interface ICollection : Iterator, JsonSerializable
      * returns true whether they should be out of the resulting collection.
      * @return self
      */
-    function reject(callable $callback): ICollection;
+    ICollection reject(callable $callback);
 
     /**
      * Returns true if all values in this collection pass the truth test provided
@@ -156,7 +156,7 @@ interface ICollection : Iterator, JsonSerializable
      * returns the new value for the key that is being iterated
      * @return self
      */
-    function map(callable $callback): ICollection;
+    ICollection map(callable $callback);
 
     /**
      * Folds the values in this collection to a single value, as the result of
@@ -215,7 +215,7 @@ interface ICollection : Iterator, JsonSerializable
      * of doing that.
      * @return self
      */
-    function extract(myPath): ICollection;
+    ICollection extract(myPath);
 
     /**
      * Returns the top element in this collection after being sorted by a property.
@@ -368,7 +368,7 @@ interface ICollection : Iterator, JsonSerializable
      * SORT_NUMERIC or SORT_NATURAL
      * @return self
      */
-    function sortBy(myPath, int $order = SORT_DESC, int $sort = \SORT_NUMERIC): ICollection;
+    ICollection sortBy(myPath, int $order = SORT_DESC, int $sort = \SORT_NUMERIC);
 
     /**
      * Splits a collection into sets, grouped by the result of running each value
@@ -411,7 +411,7 @@ interface ICollection : Iterator, JsonSerializable
      * or a function returning the grouping key out of the provided element
      * @return self
      */
-    function groupBy(myPath): ICollection;
+    ICollection groupBy(myPath);
 
     /**
      * Given a list and a callback function that returns a key for each element
@@ -450,7 +450,7 @@ interface ICollection : Iterator, JsonSerializable
      * or a function returning the indexing key out of the provided element
      * @return self
      */
-    function indexBy(myPath): ICollection;
+    ICollection indexBy(myPath);
 
     /**
      * Sorts a list into groups and returns a count for the number of elements
@@ -488,7 +488,7 @@ interface ICollection : Iterator, JsonSerializable
      * or a function returning the indexing key out of the provided element
      * @return self
      */
-    function countBy(myPath): ICollection;
+    ICollection countBy(myPath);
 
     /**
      * Returns the total sum of all the values extracted with $matcher
@@ -523,7 +523,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    function shuffle(): ICollection;
+    ICollection shuffle();
 
     /**
      * Returns a new collection with maximum $size random elements
@@ -533,7 +533,7 @@ interface ICollection : Iterator, JsonSerializable
      * take from this collection
      * @return self
      */
-    function sample(int $length = 10): ICollection;
+    ICollection sample(int $length = 10);
 
     /**
      * Returns a new collection with maximum $size elements in the internal
@@ -545,7 +545,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param int $offset A positional offset from where to take the elements
      * @return self
      */
-    function take(int $length = 1, int $offset = 0): ICollection;
+    ICollection take(int $length = 1, int $offset = 0);
 
     /**
      * Returns the last N elements of a collection
@@ -564,7 +564,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param int $length The number of elements at the end of the collection
      * @return self
      */
-    function takeLast(int $length): ICollection;
+    ICollection takeLast(int $length);
 
     /**
      * Returns a new collection that will skip the specified amount of elements
@@ -573,7 +573,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param int $length The number of elements to skip.
      * @return self
      */
-    function skip(int $length): ICollection;
+    ICollection skip(int $length);
 
     /**
      * Looks through each value in the list, returning a Collection of all the
@@ -600,7 +600,7 @@ interface ICollection : Iterator, JsonSerializable
      * and the value the condition against with each element will be matched
      * @return self
      */
-    function match(array $conditions): ICollection;
+    ICollection match(array $conditions);
 
     /**
      * Returns the first result matching all the key-value pairs listed in
@@ -635,7 +635,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param iterable myItems Items list.
      * @return self
      */
-    function append(myItems): ICollection;
+    ICollection append(myItems);
 
     /**
      * Append a single item creating a new collection.
@@ -644,7 +644,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param mixed myKey The key to append the item with. If null a key will be generated.
      * @return self
      */
-    function appendItem($item, myKey = null): ICollection;
+    ICollection appendItem($item, myKey = null);
 
     /**
      * Prepend a set of items to a collection creating a new collection
@@ -652,7 +652,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param mixed myItems The items to prepend.
      * @return self
      */
-    function prepend(myItems): ICollection;
+    ICollection prepend(myItems);
 
     /**
      * Prepend a single item creating a new collection.
@@ -661,7 +661,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param mixed myKey The key to prepend the item with. If null a key will be generated.
      * @return self
      */
-    function prependItem($item, myKey = null): ICollection;
+    ICollection prependItem($item, myKey = null);
 
     /**
      * Returns a new collection where the values extracted based on a value path
@@ -703,7 +703,7 @@ interface ICollection : Iterator, JsonSerializable
      * grouping key or a function returning the key out of the provided element
      * @return self
      */
-    function combine(myKeyPath, myValuePath, $groupPath = null): ICollection;
+    ICollection combine(myKeyPath, myValuePath, $groupPath = null);
 
     /**
      * Returns a new collection where the values are nested in a tree-like structure
@@ -716,7 +716,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param string $nestingKey The key name under which children are nested
      * @return self
      */
-    function nest($idPath, $parentPath, string $nestingKey = 'children'): ICollection;
+    ICollection nest($idPath, $parentPath, string $nestingKey = 'children');
 
     /**
      * Returns a new collection containing each of the elements found in `myValues` as
@@ -754,7 +754,7 @@ interface ICollection : Iterator, JsonSerializable
      * values are matched with the elements in this collection by its positional index.
      * @return self
      */
-    function insert(string myPath, myValues): ICollection;
+    ICollection insert(string myPath, myValues);
 
     /**
      * Returns an array representation of the results
@@ -817,7 +817,7 @@ interface ICollection : Iterator, JsonSerializable
      * can help getting all items if keys are not important in the result.
      * @return self
      */
-    function compile(bool $keepKeys = true): ICollection;
+    ICollection compile(bool $keepKeys = true);
 
     /**
      * Returns a new collection where any operations chained after it are guaranteed
@@ -827,7 +827,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    function lazy(): ICollection;
+    ICollection lazy();
 
     /**
      * Returns a new collection where the operations performed by this collection.
@@ -838,7 +838,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    function buffered(): ICollection;
+    ICollection buffered();
 
     /**
      * Returns a new collection with each of the elements of this collection
@@ -879,7 +879,7 @@ interface ICollection : Iterator, JsonSerializable
      * or a callable function that will return the children list
      * @return self
      */
-    function listNested($order = 'desc', $nestingKey = 'children'): ICollection;
+    ICollection listNested($order = 'desc', $nestingKey = 'children');
 
     /**
      * Creates a new collection that when iterated will stop yielding results if
@@ -914,7 +914,7 @@ interface ICollection : Iterator, JsonSerializable
      * and the value the condition against with each element will be matched.
      * @return self
      */
-    function stopWhen($condition): ICollection;
+    ICollection stopWhen($condition);
 
     /**
      * Creates a new collection where the items are the
@@ -949,7 +949,7 @@ interface ICollection : Iterator, JsonSerializable
      * the items in the collection and should return an array or Traversable object
      * @return self
      */
-    function unfold(?callable $callback = null): ICollection;
+    ICollection unfold(?callable $callback = null);
 
     /**
      * Passes this collection through a callable as its first argument.
@@ -968,7 +968,7 @@ interface ICollection : Iterator, JsonSerializable
      * this collection as first argument.
      * @return self
      */
-    function through(callable $callback): ICollection;
+    ICollection through(callable $callback);
 
     /**
      * Combines the elements of this collection with each of the elements of the
@@ -984,7 +984,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param iterable ...myItems The collections to zip.
      * @return self
      */
-    function zip(iterable myItems): ICollection;
+    ICollection zip(iterable myItems);
 
     /**
      * Combines the elements of this collection with each of the elements of the
@@ -1006,7 +1006,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param callable $callback The function to use for zipping the elements together.
      * @return self
      */
-    function zipWith(iterable myItems, $callback): ICollection;
+    ICollection zipWith(iterable myItems, $callback);
 
     /**
      * Breaks the collection into smaller arrays of the given size.
@@ -1022,7 +1022,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param int $chunkSize The maximum size for each chunk
      * @return self
      */
-    function chunk(int $chunkSize): ICollection;
+    ICollection chunk(int $chunkSize);
 
     /**
      * Breaks the collection into smaller arrays of the given size.
@@ -1039,7 +1039,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param bool $keepKeys If the keys of the array should be kept
      * @return self
      */
-    function chunkWithKeys(int $chunkSize, bool $keepKeys = true): ICollection;
+    ICollection chunkWithKeys(int $chunkSize, bool $keepKeys = true);
 
     /**
      * Returns whether there are elements in this collection
@@ -1092,7 +1092,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    function transpose(): ICollection;
+    ICollection transpose();
 
     /**
      * Returns the amount of elements in the collection.
@@ -1172,5 +1172,5 @@ interface ICollection : Iterator, JsonSerializable
      *   of the final results.
      * @return self
      */
-    function cartesianProduct(?callable $operation = null, ?callable $filter = null): ICollection;
+    ICollection cartesianProduct(?callable $operation = null, ?callable $filter = null);
 }

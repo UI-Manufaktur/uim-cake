@@ -76,8 +76,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param \Cake\Datasource\ResultSetInterface myResults Results to modify.
      * @return \Cake\Collection\ICollection
      */
-    function groupTranslations(myResults): ICollection;
-
+    ICollection
     /**
      * Callback method that listens to the `beforeFind` event in the bound
      * table. It modifies the passed query by eager loading the translated fields
