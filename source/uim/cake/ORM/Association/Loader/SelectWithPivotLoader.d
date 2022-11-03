@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.ORM\Association\Loader;
+ */module uim.cake.orm.Association\Loader;
 
-import uim.cake.ORM\Query;
+import uim.cake.orm.Query;
 use RuntimeException;
 
 /**

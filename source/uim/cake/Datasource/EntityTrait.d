@@ -1,7 +1,7 @@
 module uim.cake.Datasource;
 
 import uim.cake.collection\Collection;
-import uim.cake.ORM\Entity;
+import uim.cake.orm.Entity;
 import uim.cake.utikities.Hash;
 import uim.cake.utikities.Inflector;
 use InvalidArgumentException;

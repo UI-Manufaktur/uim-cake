@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.2.9
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.ORM\Rule;
+ */module uim.cake.orm.Rule;
 
 import uim.cake.Datasource\IEntity;
 import uim.cake.Validation\Validation;

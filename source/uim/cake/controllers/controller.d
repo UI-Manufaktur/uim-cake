@@ -12,7 +12,7 @@ import uim.cake.Event\IEventManager;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Log\LogTrait;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.orm.Locator\LocatorAwareTrait;
 import uim.cake.Routing\Router;
 import uim.cake.views\ViewVarsTrait;
 use Closure;

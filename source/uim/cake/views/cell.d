@@ -8,7 +8,7 @@ import uim.cake.Event\EventDispatcherTrait;
 import uim.cake.Event\IEventManager;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.orm.Locator\LocatorAwareTrait;
 import uim.cake.utikities.Inflector;
 import uim.cake.views\Exception\MissingCellTemplateException;
 import uim.cake.views\Exception\MissingTemplateException;

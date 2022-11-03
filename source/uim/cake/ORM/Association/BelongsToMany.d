@@ -1,14 +1,14 @@
-module uim.cake.ORM\Association;
+module uim.cake.orm.Association;
 
 import uim.cake.core.App;
 import uim.cake.databases.Expression\IdentifierExpression;
 import uim.cake.databases.Expression\QueryExpression;
 import uim.cake.databases.IExpression;
 import uim.cake.Datasource\IEntity;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Association\Loader\SelectWithPivotLoader;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectWithPivotLoader;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 import uim.cake.utikities.Hash;
 import uim.cake.utikities.Inflector;
 use Closure;

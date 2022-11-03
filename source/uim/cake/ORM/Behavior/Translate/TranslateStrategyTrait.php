@@ -1,10 +1,10 @@
-module uim.cake.ORM\Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
 import uim.cake.Datasource\IEntity;
 import uim.cake.Event\IEvent;
 import uim.cake.I18n\I18n;
-import uim.cake.ORM\Marshaller;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.Table;
 
 /**
  * Contains common code needed by TranslateBehavior strategy classes.

@@ -1,10 +1,10 @@
-module uim.cake.ORM\Association\Loader;
+module uim.cake.orm.Association\Loader;
 
 import uim.cake.databases.Expression\IdentifierExpression;
 import uim.cake.databases.Expression\TupleComparison;
 import uim.cake.databases.ValueBinder;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Query;
+import uim.cake.orm.Association;
+import uim.cake.orm.Query;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;

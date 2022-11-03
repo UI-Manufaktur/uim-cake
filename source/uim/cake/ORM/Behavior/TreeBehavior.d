@@ -1,12 +1,12 @@
-module uim.cake.ORM\Behavior;
+module uim.cake.orm.Behavior;
 
 import uim.cake.collection\ICollection;
 import uim.cake.databases.Expression\IdentifierExpression;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Datasource\Exception\RecordNotFoundException;
 import uim.cake.Event\IEvent;
-import uim.cake.ORM\Behavior;
-import uim.cake.ORM\Query;
+import uim.cake.orm.Behavior;
+import uim.cake.orm.Query;
 use InvalidArgumentException;
 use RuntimeException;
 

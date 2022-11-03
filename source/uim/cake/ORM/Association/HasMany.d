@@ -1,14 +1,14 @@
-module uim.cake.ORM\Association;
+module uim.cake.orm.Association;
 
 import uim.cake.collection\Collection;
 import uim.cake.databases.Expression\FieldInterface;
 import uim.cake.databases.Expression\QueryExpression;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Datasource\InvalidPropertyInterface;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Association\Loader\SelectLoader;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 use Closure;
 use InvalidArgumentException;
 

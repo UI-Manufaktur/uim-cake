@@ -20,7 +20,7 @@ import uim.cake.Datasource\ConnectionInterface;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\FixtureInterface;
 import uim.cake.Log\Log;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.orm.Locator\LocatorAwareTrait;
 import uim.cake.utikities.Inflector;
 use Exception;
 

@@ -1,7 +1,7 @@
 module uim.cake.Datasource;
 
 import uim.cake.Datasource\Locator\ILocator;
-import uim.cake.ORM\Locator\TableLocator;
+import uim.cake.orm.Locator\TableLocator;
 use InvalidArgumentException;
 
 /**

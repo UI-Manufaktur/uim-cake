@@ -9,7 +9,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.2.13
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.ORM\Exception;
+ */module uim.cake.orm.Exception;
 
 import uim.cake.core.Exception\CakeException;
 

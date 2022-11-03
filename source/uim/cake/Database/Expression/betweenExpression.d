@@ -55,7 +55,7 @@ class BetweenExpression : IExpression, FieldInterface
     }
 
 
-    function sql(ValueBinder $binder): string
+    string sql(ValueBinder $binder)
     {
         $parts = [
             'from' => this._from,
@@ -98,7 +98,7 @@ class BetweenExpression : IExpression, FieldInterface
      * @param string myType The type of myValue
      * @return string generated placeholder
      */
-    protected auto _bindValue(myValue, $binder, myType): string
+    protected string _bindValue(myValue, $binder, myType)
     {
         $placeholder = $binder.placeholder('c');
         $binder.bind($placeholder, myValue, myType);
@@ -106,12 +106,8 @@ class BetweenExpression : IExpression, FieldInterface
         return $placeholder;
     }
 
-    /**
-     * Do a deep clone of this expression.
-     *
-     * @return void
-     */
-    auto __clone() {
+    // Do a deep clone of this expression.
+    void __clone() {
         foreach (['_field', '_from', '_to'] as $part) {
             if (this.{$part} instanceof IExpression) {
                 this.{$part} = clone this.{$part};

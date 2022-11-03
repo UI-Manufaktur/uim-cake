@@ -1,4 +1,4 @@
-module uim.cake.ORM\Rule;
+module uim.cake.orm.Rule;
 
 import uim.cake.Datasource\IEntity;
 import uim.cake.utikities.Hash;

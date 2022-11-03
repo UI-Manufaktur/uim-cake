@@ -395,7 +395,7 @@ class Configure
      *
      * @return string Current version of CakePHP
      */
-    static function version(): string
+    static string version()
     {
         $version = static::read('Cake.version');
         if ($version !== null) {

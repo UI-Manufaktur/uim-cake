@@ -2,10 +2,10 @@ module uim.cake.ORM;
 
 import uim.cake.Datasource\RuleInvoker;
 import uim.cake.Datasource\RulesChecker as BaseRulesChecker;
-import uim.cake.ORM\Rule\ExistsIn;
-import uim.cake.ORM\Rule\IsUnique;
-import uim.cake.ORM\Rule\LinkConstraint;
-import uim.cake.ORM\Rule\ValidCount;
+import uim.cake.orm.Rule\ExistsIn;
+import uim.cake.orm.Rule\IsUnique;
+import uim.cake.orm.Rule\LinkConstraint;
+import uim.cake.orm.Rule\ValidCount;
 import uim.cake.utikities.Inflector;
 
 /**

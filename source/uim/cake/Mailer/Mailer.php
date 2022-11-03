@@ -18,7 +18,7 @@ import uim.cake.Datasource\ModelAwareTrait;
 import uim.cake.Event\IEventListener;
 import uim.cake.Log\Log;
 import uim.cake.Mailer\Exception\MissingActionException;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.orm.Locator\LocatorAwareTrait;
 import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 

@@ -1,13 +1,13 @@
-module uim.cake.ORM\Behavior;
+module uim.cake.orm.Behavior;
 
 import uim.cake.I18n\I18n;
-import uim.cake.ORM\Behavior;
-import uim.cake.ORM\Behavior\Translate\EavStrategy;
-import uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface;
-import uim.cake.ORM\Marshaller;
-import uim.cake.ORM\PropertyMarshalInterface;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Behavior;
+import uim.cake.orm.Behavior\Translate\EavStrategy;
+import uim.cake.orm.Behavior\Translate\TranslateStrategyInterface;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.PropertyMarshalInterface;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 import uim.cake.utikities.Inflector;
 
 /**

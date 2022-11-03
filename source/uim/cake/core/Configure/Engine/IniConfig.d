@@ -168,7 +168,7 @@ class IniConfig : ConfigEngineInterface
      * @param mixed myValue Value to export.
      * @return string String value for ini file.
      */
-    protected auto _value(myValue): string
+    protected string _value(myValue)
     {
         if (myValue === null) {
             return 'null';

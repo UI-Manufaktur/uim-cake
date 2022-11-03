@@ -112,7 +112,7 @@ class PluginCollection : Iterator, Countable
      * @throws \Cake\Core\Exception\MissingPluginException when a plugin path cannot be resolved.
      * @internal
      */
-    function findPath(string myName): string
+    string findPath(string myName)
     {
         // Ensure plugin config is loaded each time. This is necessary primarily
         // for testing because the Configure::clear() call in TestCase::tearDown()
@@ -120,9 +120,7 @@ class PluginCollection : Iterator, Countable
         this.loadConfig();
 
         myPath = Configure::read('plugins.' . myName);
-        if (myPath) {
-            return myPath;
-        }
+        if (myPath) { return myPath; }
 
         myPluginPath = str_replace('/', DIRECTORY_SEPARATOR, myName);
         myPaths = App::path('plugins');
@@ -164,18 +162,14 @@ class PluginCollection : Iterator, Countable
         return this;
     }
 
-    /**
-     * Remove all plugins from the collection
-     *
-     * @return this
-     */
-    function clear() {
+    // Remove all plugins from the collection
+    O clear(this O)() {
         this.plugins = [];
         this.names = [];
         this.positions = [];
         this.loopDepth = -1;
 
-        return this;
+        return cast(O)this;
     }
 
     /**
@@ -197,8 +191,7 @@ class PluginCollection : Iterator, Countable
      * @return \Cake\Core\PluginInterface The plugin.
      * @throws \Cake\Core\Exception\MissingPluginException when unknown plugins are fetched.
      */
-    auto get(string myName): PluginInterface
-    {
+    PluginInterface get(string myName) {
         if (this.has(myName)) {
             return this.plugins[myName];
         }
@@ -264,7 +257,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return string
      */
-    function key(): string
+    string key()
     {
         return this.names[this.positions[this.loopDepth]];
     }

@@ -6,7 +6,7 @@ import uim.cake.databases.Expression\TupleComparison;
 import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Datasource\InvalidPropertyInterface;
-import uim.cake.ORM\Association\BelongsToMany;
+import uim.cake.orm.Association\BelongsToMany;
 import uim.cake.utikities.Hash;
 use InvalidArgumentException;
 use RuntimeException;

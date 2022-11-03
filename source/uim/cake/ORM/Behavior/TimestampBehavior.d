@@ -1,11 +1,11 @@
-module uim.cake.ORM\Behavior;
+module uim.cake.orm.Behavior;
 
 import uim.cake.databases.Type\DateTimeType;
 import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Event\IEvent;
 import uim.cake.I18n\FrozenTime;
-import uim.cake.ORM\Behavior;
+import uim.cake.orm.Behavior;
 use IDateTime;
 use RuntimeException;
 use UnexpectedValueException;

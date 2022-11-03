@@ -1,4 +1,4 @@
-module uim.cake.ORM\Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
 import uim.cake.collection\ICollection;
@@ -6,10 +6,10 @@ import uim.cake.core.InstanceConfigTrait;
 import uim.cake.databases.Expression\FieldInterface;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Event\IEvent;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.ORM\Marshaller;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 import uim.cake.utikities.Hash;
 
 /**

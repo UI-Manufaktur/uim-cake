@@ -1,22 +1,12 @@
-
-
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         4.0.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.ORM\Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
 import uim.cake.collection\ICollection;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Event\IEvent;
-import uim.cake.ORM\PropertyMarshalInterface;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.PropertyMarshalInterface;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 
 /**
  * This interface describes the methods for translate behavior strategies.
@@ -55,7 +45,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      *
      * @return string
      */
-    auto getLocale(): string;
+    string getLocale();
 
     /**
      * Returns a fully aliased field name for translated fields.
@@ -67,7 +57,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param string myField Field name to be aliased.
      * @return string
      */
-    function translationField(string myField): string;
+    string translationField(string myField);
 
     /**
      * Modifies the results from a table find in order to merge full translation records
@@ -87,7 +77,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
-    function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions);
+    void beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions);
 
     /**
      * Modifies the entity before it is saved so that translated fields are persisted

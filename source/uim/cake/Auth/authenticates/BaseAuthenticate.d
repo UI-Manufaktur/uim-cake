@@ -8,8 +8,8 @@ import uim.cake.core.InstanceConfigTrait;
 import uim.cake.Event\IEventListener;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.ORM\Query;
+import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.Query;
  */
 /**
  * Base Authentication class with common methods and properties.

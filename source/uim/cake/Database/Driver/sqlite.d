@@ -169,13 +169,13 @@ class Sqlite : Driver
     }
 
 
-    function disableForeignKeySQL(): string
+    string disableForeignKeySQL()
     {
         return 'PRAGMA foreign_keys = OFF';
     }
 
 
-    function enableForeignKeySQL(): string
+    string enableForeignKeySQL()
     {
         return 'PRAGMA foreign_keys = ON';
     }

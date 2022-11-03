@@ -1,10 +1,10 @@
-module uim.cake.ORM\Association;
+module uim.cake.orm.Association;
 
 import uim.cake.databases.Expression\IdentifierExpression;
 import uim.cake.Datasource\IEntity;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Association\Loader\SelectLoader;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.Table;
 import uim.cake.utikities.Inflector;
 use Closure;
 use RuntimeException;

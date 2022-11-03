@@ -5,7 +5,7 @@ import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
 import uim.cake.Event\IEventDispatcher;
 import uim.cake.Event\EventDispatcherTrait;
-import uim.cake.ORM\Exception\MissingBehaviorException;
+import uim.cake.orm.Exception\MissingBehaviorException;
 use LogicException;
 
 /**
