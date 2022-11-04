@@ -46,7 +46,6 @@ abstract class BaseAuthorize
      *
      * @param \ArrayAccess|array myUser Active user data
      * @param \Cake\Http\ServerRequest myRequest Request instance.
-     * @return bool
      */
     abstract bool authorize(myUser, ServerRequest myRequest);
 }
