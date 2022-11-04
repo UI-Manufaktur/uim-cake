@@ -71,7 +71,12 @@ class Arguments
      *
      * @param int $index The argument index to check.
      */
+<<<<<<< HEAD
+    bool hasArgumentAt(int $index)
+    {
+=======
     bool hasArgumentAt(int $index) {
+>>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         return isset(this.args[$index]);
     }
 
@@ -80,7 +85,12 @@ class Arguments
      *
      * @param string myName The argument name to check.
      */
+<<<<<<< HEAD
+    bool hasArgument(string myName)
+    {
+=======
     bool hasArgument(string myName) {
+>>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         $offset = array_search(myName, this.argNames, true);
         if ($offset === false) {
             return false;
@@ -130,7 +140,12 @@ class Arguments
      *
      * @param string myName The name of the option to check.
      */
+<<<<<<< HEAD
+    bool hasOption(string myName)
+    {
+=======
     bool hasOption(string myName) {
+>>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         return isset(this.options[myName]);
     }
 }

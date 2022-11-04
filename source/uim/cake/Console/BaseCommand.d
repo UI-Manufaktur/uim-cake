@@ -24,8 +24,15 @@ abstract class BaseCommand : ICommand
      */
     protected string myName = 'cake unknown';
 
+<<<<<<< HEAD
+    /**
+     * @inheritDoc
+     */
+    auto setName(string myName) {
+=======
 
     auto setName(string myName) {
+>>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         if (strpos(myName, ' ') < 1) {
             throw new InvalidArgumentException(
                 "The name '{myName}' is missing a space. Names should look like `cake routes`"
