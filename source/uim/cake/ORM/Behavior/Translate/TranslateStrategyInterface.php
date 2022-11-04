@@ -3,7 +3,7 @@ module uim.cake.orm.Behavior\Translate;
 use ArrayObject;
 import uim.cake.collection\ICollection;
 import uim.cake.Datasource\IEntity;
-import uim.cake.Event\IEvent;
+import uim.cake.events\IEvent;
 import uim.cake.orm.PropertyMarshalInterface;
 import uim.cake.orm.Query;
 import uim.cake.orm.Table;

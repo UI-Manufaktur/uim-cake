@@ -1,7 +1,7 @@
 module uim.cake.core;
 
 import uim.cake.console.commandCollection;
-import uim.cake.Event\IEventDispatcher;
+import uim.cake.events\IEventDispatcher;
 import uim.cake.Http\MiddlewareQueue;
 import uim.cake.Routing\RouteBuilder;
 

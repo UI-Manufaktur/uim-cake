@@ -4,7 +4,7 @@ import uim.cake.collection\ICollection;
 import uim.cake.databases.Expression\IdentifierExpression;
 import uim.cake.Datasource\IEntity;
 import uim.cake.Datasource\Exception\RecordNotFoundException;
-import uim.cake.Event\IEvent;
+import uim.cake.events\IEvent;
 import uim.cake.orm.Behavior;
 import uim.cake.orm.Query;
 use InvalidArgumentException;

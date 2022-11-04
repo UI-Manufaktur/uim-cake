@@ -11,10 +11,10 @@
 
 import uim.cake.core.HttpApplicationInterface;
 import uim.cake.core.PluginApplicationInterface;
-import uim.cake.Event\IEventDispatcher;
-import uim.cake.Event\EventDispatcherTrait;
-import uim.cake.Event\EventManager;
-import uim.cake.Event\IEventManager;
+import uim.cake.events\IEventDispatcher;
+import uim.cake.events\EventDispatcherTrait;
+import uim.cake.events\EventManager;
+import uim.cake.events\IEventManager;
 use InvalidArgumentException;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\IResponse;

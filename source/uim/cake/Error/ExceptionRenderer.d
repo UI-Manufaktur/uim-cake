@@ -11,7 +11,7 @@ import uim.cake.core.Exception\CakeException;
 import uim.cake.core.Exception\MissingPluginException;
 import uim.cake.Datasource\Exception\PageOutOfBoundsException;
 import uim.cake.Datasource\Exception\RecordNotFoundException;
-import uim.cake.Event\Event;
+import uim.cake.events\Event;
 import uim.cake.Http\Exception\HttpException;
 import uim.cake.Http\Exception\MissingControllerException;
 import uim.cake.Http\Response;

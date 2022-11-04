@@ -5,7 +5,7 @@ import uim.cake;
 
 /* import uim.cake.controller\ComponentRegistry;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Event\IEventListener;
+import uim.cake.events\IEventListener;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.orm.Locator\LocatorAwareTrait;

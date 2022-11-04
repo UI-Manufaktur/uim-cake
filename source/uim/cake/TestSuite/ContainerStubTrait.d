@@ -15,7 +15,7 @@
 
 import uim.cake.core.Configure;
 import uim.cake.core.IContainer;
-import uim.cake.Event\IEvent;
+import uim.cake.events\IEvent;
 use Closure;
 use LogicException;
 

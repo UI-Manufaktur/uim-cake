@@ -1,6 +1,6 @@
-module uim.cake.Event\Decorator;
+module uim.cake.events\Decorator;
 
-import uim.cake.Event\IEvent;
+import uim.cake.events\IEvent;
 use RuntimeException;
 
 /**

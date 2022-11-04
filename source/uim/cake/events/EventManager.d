@@ -1,4 +1,4 @@
-module uim.cake.Event;
+module uim.cake.events;
 
 import uim.cake.core.Exception\CakeException;
 

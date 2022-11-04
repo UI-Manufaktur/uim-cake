@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.TestSuite\Constraint;
 
-import uim.cake.Event\EventManager;
+import uim.cake.events\EventManager;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
 

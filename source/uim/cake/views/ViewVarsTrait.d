@@ -3,7 +3,7 @@ module uim.cake.View;
 @safe:
 import uim.cake;
 
-/* import uim.cake.Event\IEventDispatcher;
+/* import uim.cake.events\IEventDispatcher;
  */
 /**
  * Provides the set() method for collecting template context.

@@ -1,7 +1,7 @@
 module uim.cake.View;
 
 import uim.cake.core.App;
-import uim.cake.Event\IEventManager;
+import uim.cake.events\IEventManager;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.View\Exception\MissingViewException;

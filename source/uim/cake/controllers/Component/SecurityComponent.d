@@ -14,7 +14,7 @@ import uim.cake.controller\Controller;
 import uim.cake.controller\Exception\AuthSecurityException;
 import uim.cake.controller\Exception\SecurityException;
 import uim.cake.core.Configure;
-import uim.cake.Event\IEvent;
+import uim.cake.events\IEvent;
 import uim.cake.Http\Exception\BadRequestException;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;

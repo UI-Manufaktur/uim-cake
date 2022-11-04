@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.validations;
 
-import uim.cake.Event\IEventDispatcher;
+import uim.cake.events\IEventDispatcher;
 use RuntimeException;
 
 /**

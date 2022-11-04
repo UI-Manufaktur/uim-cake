@@ -15,7 +15,7 @@ use BadMethodCallException;
 import uim.cake.core.Exception\CakeException;
 import uim.cake.core.StaticConfigTrait;
 import uim.cake.Datasource\ModelAwareTrait;
-import uim.cake.Event\IEventListener;
+import uim.cake.events\IEventListener;
 import uim.cake.Log\Log;
 import uim.cake.Mailer\Exception\MissingActionException;
 import uim.cake.orm.Locator\LocatorAwareTrait;
