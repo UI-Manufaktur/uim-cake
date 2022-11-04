@@ -7,20 +7,20 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.views\Helper;
+ */module uim.cake.View\Helper;
 
 import uim.cake.core.Configure;
 import uim.cake.core.Exception\CakeException;
 import uim.cake.forms\FormProtector;
 import uim.cake.Routing\Router;
-import uim.cake.utikities.Hash;
-import uim.cake.utikities.Inflector;
-import uim.cake.views.forms\ContextFactory;
-import uim.cake.views.forms\IContext;
-import uim.cake.views\Helper;
-import uim.cake.views\StringTemplateTrait;
-import uim.cake.views\View;
-import uim.cake.views\Widget\WidgetLocator;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Inflector;
+import uim.cake.View\Form\ContextFactory;
+import uim.cake.View\Form\IContext;
+import uim.cake.View\Helper;
+import uim.cake.View\StringTemplateTrait;
+import uim.cake.View\View;
+import uim.cake.View\Widget\WidgetLocator;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -284,7 +284,7 @@ class FormHelper : Helper
      * Get the widget locator currently used by the helper.
      *
      * @return \Cake\View\Widget\WidgetLocator Current locator instance
-
+     * @since 3.6.0
      */
     auto getWidgetLocator(): WidgetLocator
     {
@@ -296,7 +296,7 @@ class FormHelper : Helper
      *
      * @param \Cake\View\Widget\WidgetLocator $instance The locator instance to set.
      * @return this
-
+     * @since 3.6.0
      */
     auto setWidgetLocator(WidgetLocator $instance) {
         this._locator = $instance;
