@@ -10,7 +10,7 @@
  */module uim.cake.orm.Rule;
 
 import uim.cake.Datasource\IEntity;
-import uim.cake.Validation\Validation;
+import uim.cake.validations\Validation;
 use Countable;
 
 /**

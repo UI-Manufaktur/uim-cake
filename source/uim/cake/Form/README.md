@@ -13,7 +13,7 @@ API services, or contact forms.
 ```php
 import uim.cake.Form\Form;
 import uim.cake.Form\Schema;
-import uim.cake.Validation\Validator;
+import uim.cake.validations\Validator;
 
 class ContactForm : Form
 {

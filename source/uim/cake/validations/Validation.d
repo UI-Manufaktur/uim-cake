@@ -1,4 +1,4 @@
-module uim.cake.Validation;
+module uim.cake.validations;
 
 import uim.cake.I18n\FrozenTime;
 import uim.cake.utikities.Text;

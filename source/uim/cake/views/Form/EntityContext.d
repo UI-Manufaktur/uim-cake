@@ -8,7 +8,7 @@ import uim.cake.ORM\Entity;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
 import uim.cake.ORM\Table;
 import uim.cake.Utility\Inflector;
-import uim.cake.Validation\Validator;
+import uim.cake.validations\Validator;
 use RuntimeException;
 use Traversable;
 

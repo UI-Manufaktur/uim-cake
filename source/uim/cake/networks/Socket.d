@@ -3,7 +3,7 @@ module uim.cake.networks;
 import uim.cake.core.Exception\CakeException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.networks\Exception\SocketException;
-import uim.cake.Validation\Validation;
+import uim.cake.validations\Validation;
 use Composer\CaBundle\CaBundle;
 use Exception;
 use InvalidArgumentException;

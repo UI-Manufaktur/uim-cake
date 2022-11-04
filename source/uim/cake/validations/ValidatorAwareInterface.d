@@ -1,4 +1,4 @@
-module uim.cake.Validation;
+module uim.cake.validations;
 
 /**
  * Provides methods for managing multiple validators.
