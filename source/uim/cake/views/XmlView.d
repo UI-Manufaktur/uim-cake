@@ -1,11 +1,11 @@
-module uim.cake.views;
+module uim.cake.View;
 
 @safe:
 import uim.cake;
 
 /* import uim.cake.core.Configure;
-import uim.cake.utikities.Hash;
-import uim.cake.utikities.Xml; */
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Xml; */
 
 /**
  * A view class that is used for creating XML responses.
@@ -89,8 +89,11 @@ class XmlView : SerializedView
         'rootNode' => null,
     ];
 
-
-    protected string _serialize($serialize) {
+    /**
+     * @inheritDoc
+     */
+    protected auto _serialize($serialize): string
+    {
         $rootNode = this.getConfig('rootNode', 'response');
 
         if (is_array($serialize)) {

@@ -1,4 +1,4 @@
-module uim.cake.views;
+module uim.cake.View;
 
 import uim.cake.core.Exception\CakeException;
 

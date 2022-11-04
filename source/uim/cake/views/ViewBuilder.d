@@ -1,10 +1,10 @@
-module uim.cake.views;
+module uim.cake.View;
 
 import uim.cake.core.App;
 import uim.cake.Event\IEventManager;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
-import uim.cake.views\Exception\MissingViewException;
+import uim.cake.View\Exception\MissingViewException;
 use Closure;
 use Exception;
 use JsonSerializable;

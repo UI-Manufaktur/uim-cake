@@ -1,6 +1,6 @@
 
 
-module uim.cake.views;
+module uim.cake.View;
 
 @safe:
 import uim.cake;
@@ -16,10 +16,10 @@ import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Log\LogTrait;
 import uim.cake.Routing\Router;
-import uim.cake.utikities.Inflector;
-import uim.cake.views\Exception\MissingElementException;
-import uim.cake.views\Exception\MissingLayoutException;
-import uim.cake.views\Exception\MissingTemplateException;
+import uim.cake.Utility\Inflector;
+import uim.cake.View\Exception\MissingElementException;
+import uim.cake.View\Exception\MissingLayoutException;
+import uim.cake.View\Exception\MissingTemplateException;
 use InvalidArgumentException;
 use LogicException;
 use RuntimeException;
