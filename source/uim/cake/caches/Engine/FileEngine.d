@@ -1,7 +1,7 @@
-module uim.cake.cache\Engine;
+module uim.baklava.cache\Engine;
 
-import uim.cake.cache\CacheEngine;
-import uim.cake.cache\InvalidArgumentException;
+import uim.baklava.cache\CacheEngine;
+import uim.baklava.cache\InvalidArgumentException;
 use CallbackFilterIterator;
 use Exception;
 use FilesystemIterator;

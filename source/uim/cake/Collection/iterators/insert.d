@@ -1,6 +1,6 @@
-module uim.cake.collections.iterators;
+module uim.baklava.collections.iterators;
 
-import uim.cake.collection\Collection;
+import uim.baklava.collection\Collection;
 
 /**
  * This iterator will insert values into a property of each of the records returned.
