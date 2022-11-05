@@ -1,9 +1,9 @@
 module uim.baklava.orm.Locator;
 
 import uim.baklava.core.App;
-import uim.baklava.Datasource\ConnectionManager;
-import uim.baklava.Datasource\Locator\AbstractLocator;
-import uim.baklava.Datasource\IRepository;
+import uim.baklava.datasources\ConnectionManager;
+import uim.baklava.datasources\Locator\AbstractLocator;
+import uim.baklava.datasources\IRepository;
 import uim.baklava.orm.AssociationCollection;
 import uim.baklava.orm.Exception\MissingTableClassException;
 import uim.baklava.orm.Table;

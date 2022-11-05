@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.orm.Rule;
 
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.validations\Validation;
 use Countable;
 

@@ -1,7 +1,7 @@
 module uim.baklava.orm.Locator;
 
-import uim.baklava.Datasource\Locator\ILocator as BaseILocator;
-import uim.baklava.Datasource\IRepository;
+import uim.baklava.datasources\Locator\ILocator as BaseILocator;
+import uim.baklava.datasources\IRepository;
 import uim.baklava.orm.Table;
 
 /**

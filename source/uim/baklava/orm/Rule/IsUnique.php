@@ -1,6 +1,6 @@
 module uim.baklava.orm.Rule;
 
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.utilities.Hash;
 
 /**
