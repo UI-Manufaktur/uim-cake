@@ -1,8 +1,8 @@
 module uim.cake.databases.Driver;
 
 import uim.cake.databases.Driver;
-import uim.cake.databases.Expression\FunctionExpression;
-import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.expressions\FunctionExpression;
+import uim.cake.databases.expressions\TupleComparison;
 import uim.cake.databases.Query;
 import uim.cake.databases.QueryCompiler;
 import uim.cake.databases.Schema\SchemaDialect;

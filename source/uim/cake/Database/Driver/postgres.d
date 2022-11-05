@@ -1,9 +1,9 @@
 module uim.cake.databases.Driver;
 
 import uim.cake.databases.Driver;
-import uim.cake.databases.Expression\FunctionExpression;
-import uim.cake.databases.Expression\IdentifierExpression;
-import uim.cake.databases.Expression\StringExpression;
+import uim.cake.databases.expressions\FunctionExpression;
+import uim.cake.databases.expressions\IdentifierExpression;
+import uim.cake.databases.expressions\StringExpression;
 import uim.cake.databases.PostgresCompiler;
 import uim.cake.databases.Query;
 import uim.cake.databases.QueryCompiler;

@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.databases;
 
-import uim.cake.databases.Expression\FunctionExpression;
+import uim.cake.databases.expressions\FunctionExpression;
 
 /**
  * Responsible for compiling a Query object into its SQL representation

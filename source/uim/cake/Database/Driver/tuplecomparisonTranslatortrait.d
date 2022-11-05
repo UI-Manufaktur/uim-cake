@@ -1,8 +1,8 @@
 module uim.cake.databases.Driver;
 
-import uim.cake.databases.Expression\IdentifierExpression;
-import uim.cake.databases.Expression\QueryExpression;
-import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.expressions\IdentifierExpression;
+import uim.cake.databases.expressions\QueryExpression;
+import uim.cake.databases.expressions\TupleComparison;
 import uim.cake.databases.Query;
 use RuntimeException;
 
