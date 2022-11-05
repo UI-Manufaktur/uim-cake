@@ -34,22 +34,22 @@ trait FileConfigTrait
         [myPlugin, myKey] = pluginSplit(myKey);
 
         if (myPlugin) {
-            $file = Plugin::configPath(myPlugin) . myKey;
+            myfile = Plugin::configPath(myPlugin) . myKey;
         } else {
-            $file = this._path . myKey;
+            myfile = this._path . myKey;
         }
 
-        $file .= this._extension;
+        myfile .= this._extension;
 
-        if (!$checkExists || is_file($file)) {
-            return $file;
+        if (!$checkExists || is_file(myfile)) {
+            return myfile;
         }
 
-        $realPath = realpath($file);
+        $realPath = realpath(myfile);
         if ($realPath !== false && is_file($realPath)) {
             return $realPath;
         }
 
-        throw new CakeException(sprintf('Could not load configuration file: %s', $file));
+        throw new CakeException(sprintf('Could not load configuration file: %s', myfile));
     }
 }

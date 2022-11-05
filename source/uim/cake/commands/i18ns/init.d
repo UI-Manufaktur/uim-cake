@@ -50,15 +50,15 @@ class I18nInitCommand : Command {
 
         auto myCount = 0;
         $iterator = new DirectoryIterator($sourceFolder);
-        foreach ($iterator as $fileinfo) {
-            if (!$fileinfo.isFile()) {
+        foreach ($iterator as myfileinfo) {
+            if (!myfileinfo.isFile()) {
                 continue;
             }
-            $filename = $fileinfo.getFilename();
-            $newFilename = $fileinfo.getBasename('.pot');
+            myfilename = myfileinfo.getFilename();
+            $newFilename = myfileinfo.getBasename('.pot');
             $newFilename .= '.po';
 
-            $io.createFile(myTargetFolder . $newFilename, file_get_contents($sourceFolder . $filename));
+            $io.createFile(myTargetFolder . $newFilename, file_get_contents($sourceFolder . myfilename));
             myCount++;
         }
 

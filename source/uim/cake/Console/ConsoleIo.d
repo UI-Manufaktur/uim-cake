@@ -607,15 +607,15 @@ class ConsoleIo
                 mkdir($directory, 0777 ^ umask(), true);
             }
 
-            $file = new SplFileObject(myPath, 'w');
+            myfile = new SplFileObject(myPath, 'w');
         } catch (RuntimeException $e) {
             this.error("Could not write to `{myPath}`. Permission denied.", 2);
 
             return false;
         }
 
-        $file.rewind();
-        $file.fwrite(myContentss);
+        myfile.rewind();
+        myfile.fwrite(myContentss);
         if (file_exists(myPath)) {
             this.out("<success>Wrote</success> `{myPath}`");
 

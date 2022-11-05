@@ -895,7 +895,7 @@ interface ICollection : Iterator, JsonSerializable
      * Get an array of lines in a CSV file until the timestamp column is less than a date
      *
      * ```
-     * $lines = (new Collection($fileLines)).stopWhen(function (myValue, myKey) {
+     * $lines = (new Collection(myfileLines)).stopWhen(function (myValue, myKey) {
      *  return (new DateTime(myValue)).format('Y') < 2012;
      * })
      * .toArray();

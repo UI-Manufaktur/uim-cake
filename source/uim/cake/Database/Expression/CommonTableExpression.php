@@ -15,7 +15,7 @@ class CommonTableExpression : IExpression
      *
      * @var \Cake\Database\Expression\IdentifierExpression
      */
-    protected myName;
+    protected string myName;
 
     /**
      * The field names to use for the CTE.

@@ -91,7 +91,7 @@ class BasePlugin : PluginInterface
      *
      * @var string
      */
-    protected myName;
+    protected string myName;
 
     /**
      * Constructor

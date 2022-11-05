@@ -65,11 +65,11 @@ class PhpConfig : ConfigEngineInterface
      */
     function read(string myKey): array
     {
-        $file = this._getFilePath(myKey, true);
+        myfile = this._getFilePath(myKey, true);
 
         myConfig = null;
 
-        $return = include $file;
+        $return = include myfile;
         if (is_array($return)) {
             return $return;
         }
@@ -89,8 +89,8 @@ class PhpConfig : ConfigEngineInterface
     bool dump(string myKey, array myData) {
         myContentss = '<?php' . "\n" . 'return ' . var_export(myData, true) . ';';
 
-        $filename = this._getFilePath(myKey);
+        myfilename = this._getFilePath(myKey);
 
-        return file_put_contents($filename, myContentss) > 0;
+        return file_put_contents(myfilename, myContentss) > 0;
     }
 }

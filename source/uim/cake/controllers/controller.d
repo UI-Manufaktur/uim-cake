@@ -86,7 +86,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @var string
      */
-    protected myName;
+    protected string myName;
 
     /**
      * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.

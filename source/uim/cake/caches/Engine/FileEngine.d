@@ -233,16 +233,16 @@ class FileEngine : CacheEngine
             RecursiveIteratorIterator::SELF_FIRST
         );
         $cleared = [];
-        /** @var \SplFileInfo $fileInfo */
-        foreach (myContentss as $fileInfo) {
-            if ($fileInfo.isFile()) {
-                unset($fileInfo);
+        /** @var \SplFileInfo myfileInfo */
+        foreach (myContentss as myfileInfo) {
+            if (myfileInfo.isFile()) {
+                unset(myfileInfo);
                 continue;
             }
 
-            $realPath = $fileInfo.getRealPath();
+            $realPath = myfileInfo.getRealPath();
             if (!$realPath) {
-                unset($fileInfo);
+                unset(myfileInfo);
                 continue;
             }
 
@@ -253,7 +253,7 @@ class FileEngine : CacheEngine
             }
 
             // possible inner iterators need to be unset too in order for locks on parents to be released
-            unset($fileInfo);
+            unset(myfileInfo);
         }
 
         // unsetting iterators helps releasing possible locks in certain environments,
@@ -288,17 +288,17 @@ class FileEngine : CacheEngine
             }
 
             try {
-                $file = new SplFileObject(myPath . $entry, 'r');
+                myfile = new SplFileObject(myPath . $entry, 'r');
             } catch (Exception $e) {
                 continue;
             }
 
-            if ($file.isFile()) {
-                $filePath = $file.getRealPath();
-                unset($file);
+            if (myfile.isFile()) {
+                myfilePath = myfile.getRealPath();
+                unset(myfile);
 
                 // phpcs:disable
-                @unlink($filePath);
+                @unlink(myfilePath);
                 // phpcs:enable
             }
         }

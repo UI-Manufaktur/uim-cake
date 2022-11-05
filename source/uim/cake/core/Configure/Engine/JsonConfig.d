@@ -60,9 +60,9 @@ class JsonConfig : ConfigEngineInterface
      */
     function read(string myKey): array
     {
-        $file = this._getFilePath(myKey, true);
+        myfile = this._getFilePath(myKey, true);
 
-        myValues = json_decode(file_get_contents($file), true);
+        myValues = json_decode(file_get_contents(myfile), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new CakeException(sprintf(
                 'Error parsing JSON string fetched from config file "%s.json": %s',
@@ -90,8 +90,8 @@ class JsonConfig : ConfigEngineInterface
      * @return bool Success
      */
     bool dump(string myKey, array myData) {
-        $filename = this._getFilePath(myKey);
+        myfilename = this._getFilePath(myKey);
 
-        return file_put_contents($filename, json_encode(myData, JSON_PRETTY_PRINT)) > 0;
+        return file_put_contents(myfilename, json_encode(myData, JSON_PRETTY_PRINT)) > 0;
     }
 }

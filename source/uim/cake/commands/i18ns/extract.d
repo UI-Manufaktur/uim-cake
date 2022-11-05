@@ -403,13 +403,13 @@ class I18nExtractCommand : Command {
         ];
         $pattern = '/(' . implode('|', array_keys($functions)) . ')\s*\(/';
 
-        foreach (this._files as $file) {
-            this._file = $file;
+        foreach (this._files as myfile) {
+            this._file = myfile;
             if ($isVerbose) {
-                $io.verbose(sprintf('Processing %s...', $file));
+                $io.verbose(sprintf('Processing %s...', myfile));
             }
 
-            $code = file_get_contents($file);
+            $code = file_get_contents(myfile);
 
             if (preg_match($pattern, $code) === 1) {
                 $allTokens = token_get_all($code);
@@ -518,15 +518,15 @@ class I18nExtractCommand : Command {
             foreach ($translations as $msgid => $contexts) {
                 foreach ($contexts as $context => $details) {
                     $plural = $details['msgid_plural'];
-                    $files = $details['references'];
+                    myfiles = $details['references'];
                     $header = '';
 
                     if (!$args.getOption('no-location')) {
                         $occurrences = [];
-                        foreach ($files as $file => $lines) {
+                        foreach (myfiles as myfile => $lines) {
                             $lines = array_unique($lines);
                             foreach ($lines as $line) {
-                                $occurrences[] = $file . ':' . $line;
+                                $occurrences[] = myfile . ':' . $line;
                             }
                         }
                         $occurrences = implode("\n#: ", $occurrences);
@@ -606,11 +606,11 @@ class I18nExtractCommand : Command {
                 $domain = substr($domain, $slashPosition + 1);
             }
 
-            $filename = str_replace('/', '_', $domain) . '.pot';
-            $outputPath = this._output . $filename;
+            myfilename = str_replace('/', '_', $domain) . '.pot';
+            $outputPath = this._output . myfilename;
 
             if (this.checkUnchanged($outputPath, $headerLength, $output) === true) {
-                $io.out($filename . ' is unchanged. Skipping.');
+                $io.out(myfilename . ' is unchanged. Skipping.');
                 continue;
             }
 
@@ -618,22 +618,22 @@ class I18nExtractCommand : Command {
             while ($overwriteAll === false && file_exists($outputPath) && strtoupper($response) !== 'Y') {
                 $io.out();
                 $response = $io.askChoice(
-                    sprintf('Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll', $filename),
+                    sprintf('Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll', myfilename),
                     ['y', 'n', 'a'],
                     'y'
                 );
                 if (strtoupper($response) === 'N') {
                     $response = '';
                     while (!$response) {
-                        $response = $io.ask('What would you like to name this file?', 'new_' . $filename);
-                        $filename = $response;
+                        $response = $io.ask('What would you like to name this file?', 'new_' . myfilename);
+                        myfilename = $response;
                     }
                 } elseif (strtoupper($response) === 'A') {
                     $overwriteAll = true;
                 }
             }
             $fs = new Filesystem();
-            $fs.dumpFile(this._output . $filename, $output);
+            $fs.dumpFile(this._output . myfilename, $output);
         }
     }
 
@@ -755,13 +755,13 @@ class I18nExtractCommand : Command {
      * Indicate an invalid marker on a processed file
      *
      * @param \Cake\Console\ConsoleIo $io The io instance.
-     * @param string $file File where invalid marker resides
+     * @param string myfile File where invalid marker resides
      * @param int $line Line number
      * @param string $marker Marker found
      * @param int myCount Count
      * @return void
      */
-    protected auto _markerError($io, string $file, int $line, string $marker, int myCount): void
+    protected auto _markerError($io, string myfile, int $line, string $marker, int myCount): void
     {
         if (strpos(this._file, CAKE_CORE_INCLUDE_PATH) === false) {
             this._countMarkerError++;
@@ -771,7 +771,7 @@ class I18nExtractCommand : Command {
             return;
         }
 
-        $io.err(sprintf("Invalid marker content in %s:%s\n* %s(", $file, $line, $marker));
+        $io.err(sprintf("Invalid marker content in %s:%s\n* %s(", myfile, $line, $marker));
         myCount += 2;
         $tokenCount = count(this._tokens);
         $parenthesis = 1;
@@ -816,14 +816,14 @@ class I18nExtractCommand : Command {
         foreach (this._paths as myPath) {
             myPath = realpath(myPath) . DIRECTORY_SEPARATOR;
             $fs = new Filesystem();
-            $files = $fs.findRecursive(myPath, '/\.php$/');
-            $files = array_keys(iterator_to_array($files));
-            sort($files);
+            myfiles = $fs.findRecursive(myPath, '/\.php$/');
+            myfiles = array_keys(iterator_to_array(myfiles));
+            sort(myfiles);
             if (!empty($pattern)) {
-                $files = preg_grep($pattern, $files, PREG_GREP_INVERT);
-                $files = array_values($files);
+                myfiles = preg_grep($pattern, myfiles, PREG_GREP_INVERT);
+                myfiles = array_values(myfiles);
             }
-            this._files = array_merge(this._files, $files);
+            this._files = array_merge(this._files, myfiles);
         }
         this._files = array_unique(this._files);
     }

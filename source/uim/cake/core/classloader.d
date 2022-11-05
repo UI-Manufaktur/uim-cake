@@ -93,10 +93,10 @@ class ClassLoader
         }
 
         foreach (this._prefixes[$prefix] as $baseDir) {
-            $file = $baseDir . str_replace('\\', DIRECTORY_SEPARATOR, $relativeClass) . '.php';
+            myfile = $baseDir . str_replace('\\', DIRECTORY_SEPARATOR, $relativeClass) . '.php';
 
-            if (this._requireFile($file)) {
-                return $file;
+            if (this._requireFile(myfile)) {
+                return myfile;
             }
         }
 
@@ -106,12 +106,12 @@ class ClassLoader
     /**
      * If a file exists, require it from the file system.
      *
-     * @param string $file The file to require.
+     * @param string myfile The file to require.
      * @return bool True if the file exists, false if not.
      */
-    protected bool _requireFile(string $file) {
-        if (file_exists($file)) {
-            require $file;
+    protected bool _requireFile(string myfile) {
+        if (file_exists(myfile)) {
+            require myfile;
 
             return true;
         }

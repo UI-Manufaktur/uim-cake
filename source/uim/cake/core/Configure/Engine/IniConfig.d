@@ -82,9 +82,9 @@ class IniConfig : ConfigEngineInterface
      */
     function read(string myKey): array
     {
-        $file = this._getFilePath(myKey, true);
+        myfile = this._getFilePath(myKey, true);
 
-        myContentss = parse_ini_file($file, true);
+        myContentss = parse_ini_file(myfile, true);
         if (this._section && isset(myContentss[this._section])) {
             myValues = this._parseNestedValues(myContentss[this._section]);
         } else {
@@ -157,9 +157,9 @@ class IniConfig : ConfigEngineInterface
         }
         myContentss = trim(implode("\n", myResult));
 
-        $filename = this._getFilePath(myKey);
+        myfilename = this._getFilePath(myKey);
 
-        return file_put_contents($filename, myContentss) > 0;
+        return file_put_contents(myfilename, myContentss) > 0;
     }
 
     /**

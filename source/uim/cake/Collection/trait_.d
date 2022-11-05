@@ -851,7 +851,7 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    bool isEmpty(): bool
+    bool isEmpty()
     {
         foreach (this as $el) {
             return false;

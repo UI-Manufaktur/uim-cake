@@ -796,14 +796,14 @@ class Shell {
 
         this._io.out();
 
-        $fileExists = is_file(myPath);
-        if ($fileExists && empty(this.params['force']) && !this.interactive) {
+        myfileExists = is_file(myPath);
+        if (myfileExists && empty(this.params['force']) && !this.interactive) {
             this._io.out('<warning>File exists, skipping</warning>.');
 
             return false;
         }
 
-        if ($fileExists && this.interactive && empty(this.params['force'])) {
+        if (myfileExists && this.interactive && empty(this.params['force'])) {
             this._io.out(sprintf('<warning>File `%s` exists</warning>', myPath));
             myKey = this._io.askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
 
@@ -843,7 +843,7 @@ class Shell {
     /**
      * Makes absolute file path easier to read
      *
-     * @param string $file Absolute file path
+     * @param string myfile Absolute file path
      * @return string short path
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::shortPath
      */
