@@ -1,4 +1,4 @@
-module uim.baklava.core.Exception;
+module uim.baklava.core.exceptions;
 
 use RuntimeException;
 use Throwable;

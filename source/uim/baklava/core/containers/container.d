@@ -1,4 +1,4 @@
-module uim.baklava.core;
+module uim.baklava.core.containers.container;
 
 use League\Container\Container as LeagueContainer;
 

@@ -1,6 +1,6 @@
 module uim.baklava.core;
 
-import uim.baklava.core.Exception\MissingPluginException;
+import uim.baklava.core.exceptions\MissingPluginException;
 use Countable;
 use Generator;
 use InvalidArgumentException;

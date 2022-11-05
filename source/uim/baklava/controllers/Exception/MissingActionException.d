@@ -1,6 +1,6 @@
 module uim.baklava.controller\Exception;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 
 /**
  * Missing Action exception - used when a controller action

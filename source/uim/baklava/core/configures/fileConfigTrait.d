@@ -1,6 +1,6 @@
 module uim.baklava.core.Configure;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.Plugin;
 
 /**

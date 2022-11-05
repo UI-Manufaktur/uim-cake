@@ -2,7 +2,7 @@ module uim.baklava.core.Configure\Engine;
 
 import uim.baklava.core.Configure\ConfigEngineInterface;
 import uim.baklava.core.Configure\FileConfigTrait;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 
 /**
  * JSON engine allows Configure to load configuration values from
