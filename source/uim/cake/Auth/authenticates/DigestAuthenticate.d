@@ -1,11 +1,11 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.controller\ComponentRegistry;
-import uim.cake.Http\ServerRequest;
-import uim.cake.utikities.Security;
+/* import uim.baklava.controller\ComponentRegistry;
+import uim.baklava.Http\ServerRequest;
+import uim.baklava.utikities.Security;
  */
 /**
  * Digest Authentication adapter for AuthComponent.

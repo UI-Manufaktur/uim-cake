@@ -1,11 +1,11 @@
-module uim.cake.Auth\Storage;
+module uim.baklava.Auth\Storage;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.Http\Response;
+import uim.baklava.Http\ServerRequest;
 
 /**
  * Session based persistent storage for authenticated user record.

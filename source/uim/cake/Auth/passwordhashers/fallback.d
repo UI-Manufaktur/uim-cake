@@ -1,7 +1,7 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
 /**
  * A password hasher that can use multiple different hashes where only

@@ -1,9 +1,9 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.core.App;
+/* import uim.baklava.core.App;
 use RuntimeException;
  */
 /**

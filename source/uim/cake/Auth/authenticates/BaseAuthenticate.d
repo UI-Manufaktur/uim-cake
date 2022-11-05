@@ -1,15 +1,15 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.controller\ComponentRegistry;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.events\IEventListener;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
-import uim.cake.orm.Locator\LocatorAwareTrait;
-import uim.cake.orm.Query;
+/* import uim.baklava.controller\ComponentRegistry;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.events\IEventListener;
+import uim.baklava.Http\Response;
+import uim.baklava.Http\ServerRequest;
+import uim.baklava.orm.Locator\LocatorAwareTrait;
+import uim.baklava.orm.Query;
  */
 /**
  * Base Authentication class with common methods and properties.

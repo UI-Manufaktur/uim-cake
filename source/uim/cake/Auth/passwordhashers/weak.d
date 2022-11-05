@@ -1,11 +1,11 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.core.Configure;
-import uim.cake.errors\Debugger;
-import uim.cake.utikities.Security;
+/* import uim.baklava.core.Configure;
+import uim.baklava.errors\Debugger;
+import uim.baklava.utikities.Security;
  */
 /**
  * Password hashing class that use weak hashing algorithms. This class is

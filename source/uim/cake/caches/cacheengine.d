@@ -1,6 +1,6 @@
-module uim.cake.cache;
+module uim.baklava.cache;
 
-import uim.cake.core.InstanceConfigTrait;
+import uim.baklava.core.InstanceConfigTrait;
 use DateInterval;
 use Psr\SimpleCache\ICache;
 

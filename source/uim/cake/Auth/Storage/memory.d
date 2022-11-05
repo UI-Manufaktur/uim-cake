@@ -1,7 +1,7 @@
-module uim.cake.Auth\Storage;
+module uim.baklava.Auth\Storage;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
 /**
  * Memory based non-persistent storage for authenticated user record.

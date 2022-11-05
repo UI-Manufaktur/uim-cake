@@ -1,11 +1,11 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.controller\ComponentRegistry;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Http\ServerRequest;
+/* import uim.baklava.controller\ComponentRegistry;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.Http\ServerRequest;
  */
 /**
  * Abstract base authorization adapter for AuthComponent.

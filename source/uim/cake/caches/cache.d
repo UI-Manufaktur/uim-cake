@@ -1,7 +1,7 @@
-module uim.cake.cache;
+module uim.baklava.cache;
 
-import uim.cake.cache\Engine\NullEngine;
-import uim.cake.core.StaticConfigTrait;
+import uim.baklava.cache\Engine\NullEngine;
+import uim.baklava.core.StaticConfigTrait;
 use RuntimeException;
 
 /**

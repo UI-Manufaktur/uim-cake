@@ -1,10 +1,10 @@
-module uim.cake.basics;
+module uim.baklava.basics;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.core.Configure;
-import uim.cake.errors\Debugger;
+/* import uim.baklava.core.Configure;
+import uim.baklava.errors\Debugger;
 use Psy\Shell as PsyShell;
  */
 define('SECOND', 1);

@@ -1,7 +1,7 @@
-module uim.cake.Auth\Storage;
+module uim.baklava.Auth\Storage;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
 /**
  * Describes the methods that any class representing an Auth data storage should

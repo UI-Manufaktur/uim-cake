@@ -1,4 +1,4 @@
-module uim.cake.cache;
+module uim.baklava.cache;
 
 /**
  * Interface for cache engines that defines methods

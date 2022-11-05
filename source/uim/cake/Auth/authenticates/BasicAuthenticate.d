@@ -1,11 +1,11 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake
+import uim.baklava
 
-/* import uim.cake.Http\Exception\UnauthorizedException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+/* import uim.baklava.Http\Exception\UnauthorizedException;
+import uim.baklava.Http\Response;
+import uim.baklava.Http\ServerRequest;
  */
 /**
  * Basic Authentication adapter for AuthComponent.

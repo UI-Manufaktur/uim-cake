@@ -1,12 +1,12 @@
-module uim.cake.Auth;
+module uim.baklava.Auth;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.controller\ComponentRegistry;
-import uim.cake.controller\Controller;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.Http\ServerRequest;
+/* import uim.baklava.controller\ComponentRegistry;
+import uim.baklava.controller\Controller;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.Http\ServerRequest;
  */
 /**
  * An authorization adapter for AuthComponent. Provides the ability to authorize
