@@ -1,6 +1,6 @@
 module uim.baklava.events;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 
 /**
  * Class Event

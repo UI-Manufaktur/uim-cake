@@ -1,6 +1,6 @@
 module uim.baklava.Filesystem;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 use CallbackFilterIterator;
 use FilesystemIterator;
 use Iterator;
