@@ -1,6 +1,6 @@
 module uim.baklava.views.exceptions;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 
 /**
  * Used when a view class file cannot be found.

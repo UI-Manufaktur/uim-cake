@@ -10,7 +10,7 @@
  */module uim.baklava.views\Helper;
 
 import uim.baklava.core.Configure;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.forms\FormProtector;
 import uim.baklava.Routing\Router;
 import uim.baklava.utikities.Hash;

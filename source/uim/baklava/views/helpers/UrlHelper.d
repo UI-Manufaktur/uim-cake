@@ -1,7 +1,7 @@
 module uim.baklava.views\Helper;
 
 import uim.baklava.core.App;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.Routing\Asset;
 import uim.baklava.Routing\Router;
 import uim.baklava.views\Helper;
