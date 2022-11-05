@@ -2,7 +2,7 @@ module uim.baklava.controller;
 
 import uim.baklava.controller\Exception\MissingComponentException;
 import uim.baklava.core.App;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.ObjectRegistry;
 import uim.baklava.events\IEventDispatcher;
 import uim.baklava.events\EventDispatcherTrait;

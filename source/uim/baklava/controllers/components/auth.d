@@ -15,7 +15,7 @@ import uim.baklava.Auth\Storage\IStorage;
 import uim.baklava.controllers.components;
 import uim.baklava.controller\Controller;
 import uim.baklava.core.App;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.events\IEventDispatcher;
 import uim.baklava.events\EventDispatcherTrait;
 import uim.baklava.events\IEvent;
