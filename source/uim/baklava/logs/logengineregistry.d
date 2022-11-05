@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Log;
+ */module uim.baklava.logs;
 
 import uim.baklava.core.App;
 import uim.baklava.core.ObjectRegistry;

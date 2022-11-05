@@ -10,7 +10,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Log;
+ */module uim.baklava.logs;
 
 use Psr\Log\LogLevel;
 

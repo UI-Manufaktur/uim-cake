@@ -1,6 +1,6 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
-import uim.baklava.collection\ICollection;
+import uim.baklava.collections\ICollection;
 use Countable;
 use Serializable;
 

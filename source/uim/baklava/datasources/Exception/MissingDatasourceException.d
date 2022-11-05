@@ -1,4 +1,4 @@
-module uim.baklava.Datasource\Exception;
+module uim.baklava.datasources\Exception;
 
 import uim.baklava.core.exceptions\CakeException;
 

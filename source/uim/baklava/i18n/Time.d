@@ -282,7 +282,7 @@ class Time : MutableDateTime : I18nIDateTime
             'after' => null,
         ];
         myOptions += $defaults;
-        $group = myOptions['group'];
+        myGroup = myOptions['group'];
 
         $regex = null;
         if (is_string($filter)) {
@@ -302,8 +302,8 @@ class Time : MutableDateTime : I18nIDateTime
             }
         }
 
-        if ($group) {
-            $groupedIdentifiers = [];
+        if (myGroup) {
+            myGroupedIdentifiers = [];
             $now = time();
             $before = myOptions['before'];
             $after = myOptions['after'];
@@ -318,13 +318,13 @@ class Time : MutableDateTime : I18nIDateTime
                 }
                 $item = explode('/', $tz, 2);
                 if (isset($item[1])) {
-                    $groupedIdentifiers[$item[0]][$tz] = $item[1] . $abbr;
+                    myGroupedIdentifiers[$item[0]][$tz] = $item[1] . $abbr;
                 } else {
-                    $groupedIdentifiers[$item[0]] = [$tz => $item[0] . $abbr];
+                    myGroupedIdentifiers[$item[0]] = [$tz => $item[0] . $abbr];
                 }
             }
 
-            return $groupedIdentifiers;
+            return myGroupedIdentifiers;
         }
 
         return array_combine(myIdentifiers, myIdentifiers);

@@ -3,7 +3,7 @@ module uim.baklava.errors;
 import uim.baklava.core.Configure;
 import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.InstanceConfigTrait;
-import uim.baklava.Log\Log;
+import uim.baklava.logs\Log;
 use Psr\Http\Message\IServerRequest;
 use Throwable;
 

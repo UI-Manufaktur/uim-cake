@@ -1,6 +1,6 @@
-module uim.baklava.Datasource\Locator;
+module uim.baklava.datasources\Locator;
 
-import uim.baklava.Datasource\IRepository;
+import uim.baklava.datasources\IRepository;
 use RuntimeException;
 
 /**

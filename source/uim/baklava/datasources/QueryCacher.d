@@ -1,4 +1,4 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
 import uim.baklava.caches\Cache;
 use Closure;

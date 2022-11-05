@@ -1,4 +1,4 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
 /**
  * This interface describes the methods for paginator instance.

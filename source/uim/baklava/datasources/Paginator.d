@@ -1,8 +1,8 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
 import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.InstanceConfigTrait;
-import uim.baklava.Datasource\Exception\PageOutOfBoundsException;
+import uim.baklava.datasources\Exception\PageOutOfBoundsException;
 
 /**
  * This class is used to handle automatic model data pagination.

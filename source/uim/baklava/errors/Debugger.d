@@ -15,7 +15,7 @@ import uim.baklava.errors\Debug\ReferenceNode;
 import uim.baklava.errors\Debug\ScalarNode;
 import uim.baklava.errors\Debug\SpecialNode;
 import uim.baklava.errors\Debug\TextFormatter;
-import uim.baklava.Log\Log;
+import uim.baklava.logs\Log;
 import uim.baklava.utilities.Hash;
 import uim.baklava.utilities.Security;
 import uim.baklava.utilities.Text;

@@ -8,9 +8,9 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         4.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Log\Engine;
+ */module uim.baklava.logs\Engine;
 
-import uim.baklava.Log\Formatter\DefaultFormatter;
+import uim.baklava.logs\Formatter\DefaultFormatter;
 
 /**
  * Array logger.

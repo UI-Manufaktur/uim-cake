@@ -19,7 +19,7 @@ should be configured using `Cake\Core\Log.` An example would be:
 ```php
 import uim.baklava.caches\Cache;
 
-import uim.baklava.Log\Log;
+import uim.baklava.logs\Log;
 
 // Short classname
 Log::config('local', [

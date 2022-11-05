@@ -1,7 +1,7 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
-import uim.baklava.Datasource\Exception\MissingModelException;
-import uim.baklava.Datasource\Locator\ILocator;
+import uim.baklava.datasources\Exception\MissingModelException;
+import uim.baklava.datasources\Locator\ILocator;
 use InvalidArgumentException;
 use UnexpectedValueException;
 
