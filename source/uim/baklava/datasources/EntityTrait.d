@@ -1,6 +1,6 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
-import uim.baklava.collection\Collection;
+import uim.baklava.collections\Collection;
 import uim.baklava.orm.Entity;
 import uim.baklava.utilities.Hash;
 import uim.baklava.utilities.Inflector;

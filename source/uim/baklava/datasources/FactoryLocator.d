@@ -1,6 +1,6 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
-import uim.baklava.Datasource\Locator\ILocator;
+import uim.baklava.datasources\Locator\ILocator;
 import uim.baklava.orm.Locator\TableLocator;
 use InvalidArgumentException;
 

@@ -1,8 +1,8 @@
-module uim.baklava.Datasource;
+module uim.baklava.datasources;
 
 import uim.baklava.core.App;
 import uim.baklava.core.ObjectRegistry;
-import uim.baklava.Datasource\Exception\MissingDatasourceException;
+import uim.baklava.datasources\Exception\MissingDatasourceException;
 
 /**
  * A registry object for connection instances.
