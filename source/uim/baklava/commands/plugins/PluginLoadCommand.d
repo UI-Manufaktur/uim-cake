@@ -3,7 +3,7 @@ module uim.baklava.command;
 import uim.baklava.console.Arguments;
 import uim.baklava.console.consoleIo;
 import uim.baklava.console.consoleOptionParser;
-import uim.baklava.core.Exception\MissingPluginException;
+import uim.baklava.core.exceptions\MissingPluginException;
 import uim.baklava.core.Plugin;
 
 /**

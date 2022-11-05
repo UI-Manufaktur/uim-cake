@@ -5,7 +5,7 @@ import uim.baklava;
 
 /* import uim.baklava.controllers.componentsRegistry;
 import uim.baklava.controller\Controller;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.https\ServerRequest;
  */
 /**
