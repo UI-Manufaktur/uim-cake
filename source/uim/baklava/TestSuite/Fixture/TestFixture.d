@@ -12,7 +12,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.TestSuite\Fixture;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.databases.ConstraintsInterface;
 import uim.baklava.databases.Schema\TableSchema;
 import uim.baklava.databases.Schema\TableSchemaAwareInterface;

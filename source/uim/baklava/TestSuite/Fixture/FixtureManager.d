@@ -1,7 +1,7 @@
 module uim.baklava.TestSuite\Fixture;
 
 import uim.baklava.core.Configure;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.databases.ConstraintsInterface;
 import uim.baklava.databases.Driver\Postgres;
 import uim.baklava.databases.Schema\TableSchema;

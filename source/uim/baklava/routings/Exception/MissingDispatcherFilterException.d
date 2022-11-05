@@ -9,17 +9,15 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.orm.Exception;
+ */module uim.baklava.Routing\Exception;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 
 /**
- * Used when a behavior cannot be found.
+ * Exception raised when a Dispatcher filter could not be found
  */
-class MissingBehaviorException : CakeException
+class MissingDispatcherFilterException : CakeException
 {
-    /**
-     * @var string
-     */
-    protected $_messageTemplate = 'Behavior class %s could not be found.';
+
+    protected $_messageTemplate = 'Dispatcher filter %s could not be found.';
 }

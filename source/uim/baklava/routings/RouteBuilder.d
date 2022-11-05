@@ -2,7 +2,7 @@ module uim.baklava.Routing;
 
 use BadMethodCallException;
 import uim.baklava.core.App;
-import uim.baklava.core.Exception\MissingPluginException;
+import uim.baklava.core.exceptions\MissingPluginException;
 import uim.baklava.core.Plugin;
 import uim.baklava.Routing\Route\RedirectRoute;
 import uim.baklava.Routing\Route\Route;

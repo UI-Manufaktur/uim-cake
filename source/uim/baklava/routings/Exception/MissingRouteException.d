@@ -7,20 +7,28 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @since         3.3.1
+ * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.Routing\Exception;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 use Throwable;
 
 /**
- * Exception raised when a route names used twice.
+ * Exception raised when a URL cannot be reverse routed
+ * or when a URL cannot be parsed.
  */
-class DuplicateNamedRouteException : CakeException
+class MissingRouteException : CakeException
 {
 
-    protected $_messageTemplate = 'A route named "%s" has already been connected to "%s".';
+    protected $_messageTemplate = 'A route matching "%s" could not be found.';
+
+    /**
+     * Message template to use when the requested method is included.
+     *
+     * @var string
+     */
+    protected $_messageTemplateWithMethod = 'A "%s" route matching "%s" could not be found.';
 
     /**
      * Constructor.
@@ -31,8 +39,12 @@ class DuplicateNamedRouteException : CakeException
      * @param \Throwable|null $previous the previous exception.
      */
     this(myMessage, Nullable!int $code = 404, ?Throwable $previous = null) {
-        if (is_array(myMessage) && isset(myMessage['message'])) {
-            this._messageTemplate = myMessage['message'];
+        if (is_array(myMessage)) {
+            if (isset(myMessage['message'])) {
+                this._messageTemplate = myMessage['message'];
+            } elseif (isset(myMessage['method']) && myMessage['method']) {
+                this._messageTemplate = this._messageTemplateWithMethod;
+            }
         }
         super.this(myMessage, $code, $previous);
     }

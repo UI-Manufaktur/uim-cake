@@ -1,6 +1,6 @@
 module uim.baklava.Routing\Exception;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 
 /**
  * An exception subclass used by the routing layer to indicate

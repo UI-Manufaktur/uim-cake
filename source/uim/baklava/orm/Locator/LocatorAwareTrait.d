@@ -1,6 +1,6 @@
 module uim.baklava.orm.Locator;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.Datasource\FactoryLocator;
 import uim.baklava.orm.Table;
 
