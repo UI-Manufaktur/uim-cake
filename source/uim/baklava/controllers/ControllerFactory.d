@@ -17,7 +17,7 @@ import uim.baklava.https\Exception\MissingControllerException;
 import uim.baklava.https\MiddlewareQueue;
 import uim.baklava.https\Runner;
 import uim.baklava.https\ServerRequest;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

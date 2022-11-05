@@ -5,7 +5,7 @@ import uim.baklava;
 
 /* import uim.baklava.controllers.componentsRegistry;
 import uim.baklava.https\ServerRequest;
-import uim.baklava.utikities.Security;
+import uim.baklava.utilities.Security;
  */
 /**
  * Digest Authentication adapter for AuthComponent.

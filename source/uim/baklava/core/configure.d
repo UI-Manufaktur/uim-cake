@@ -4,7 +4,7 @@ import uim.baklava.cache\Cache;
 import uim.baklava.core.Configure\ConfigEngineInterface;
 import uim.baklava.core.Configure\Engine\PhpConfig;
 import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use RuntimeException;
 
 /**

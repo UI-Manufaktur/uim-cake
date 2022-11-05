@@ -11,8 +11,8 @@
  */module uim.baklava.https\Middleware;
 
 import uim.baklava.https\Exception\BadRequestException;
-import uim.baklava.utikities.Exception\XmlException;
-import uim.baklava.utikities.Xml;
+import uim.baklava.utilities.Exception\XmlException;
+import uim.baklava.utilities.Xml;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

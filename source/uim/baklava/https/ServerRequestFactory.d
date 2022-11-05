@@ -10,7 +10,7 @@
  */module uim.baklava.https;
 
 import uim.baklava.core.Configure;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Message\UriInterface;

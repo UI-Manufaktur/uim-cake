@@ -4,7 +4,7 @@ import uim.baklava.events\IEventDispatcher;
 import uim.baklava.events\EventDispatcherTrait;
 import uim.baklava.events\IEventListener;
 import uim.baklava.events\EventManager;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 import uim.baklava.validations\ValidatorAwareInterface;
 import uim.baklava.validations\ValidatorAwareTrait;
 

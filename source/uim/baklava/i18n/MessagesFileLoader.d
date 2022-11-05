@@ -2,7 +2,7 @@ module uim.baklava.I18n;
 
 import uim.baklava.core.App;
 import uim.baklava.core.Plugin;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use Locale;
 use RuntimeException;
 

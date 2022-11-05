@@ -3,7 +3,7 @@ module uim.baklava.command;
 import uim.baklava.core.Configure;
 import uim.baklava.core.Plugin;
 import uim.baklava.Filesystem\Filesystem;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * trait for symlinking / copying plugin assets to app's webroot.

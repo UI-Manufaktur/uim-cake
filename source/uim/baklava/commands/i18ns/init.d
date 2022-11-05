@@ -5,7 +5,7 @@ import uim.baklava.console.consoleIo;
 import uim.baklava.console.consoleOptionParser;
 import uim.baklava.core.App;
 import uim.baklava.core.Plugin;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use DirectoryIterator;
 
 /**

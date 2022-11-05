@@ -1,6 +1,6 @@
 module uim.baklava.core;
 
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * Provides methods that allow other classes access to conventions based inflections.

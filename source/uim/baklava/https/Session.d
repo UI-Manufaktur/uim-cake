@@ -10,7 +10,7 @@
  */module uim.baklava.https;
 
 import uim.baklava.core.App;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use InvalidArgumentException;
 use RuntimeException;
 use SessionHandlerInterface;

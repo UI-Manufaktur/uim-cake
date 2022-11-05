@@ -3,7 +3,7 @@ module uim.baklava.controllers.components;
 import uim.baklava.controllers.components;
 import uim.baklava.https\Exception\InternalErrorException;
 import uim.baklava.https\FlashMessage;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use Throwable;
 
 /**

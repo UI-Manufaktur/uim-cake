@@ -7,7 +7,7 @@ import uim.baklava.core.Configure;
 import uim.baklava.core.Plugin;
 import uim.baklava.Log\Log;
 import uim.baklava.Shell\Task\CommandTask;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * Shell dispatcher handles dispatching CLI commands.

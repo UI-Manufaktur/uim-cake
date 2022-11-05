@@ -5,7 +5,7 @@ import uim.baklava;
 
 /* import uim.baklava.core.Configure;
 import uim.baklava.errors\Debugger;
-import uim.baklava.utikities.Security;
+import uim.baklava.utilities.Security;
  */
 /**
  * Password hashing class that use weak hashing algorithms. This class is

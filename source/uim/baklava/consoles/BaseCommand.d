@@ -2,7 +2,7 @@ module uim.baklava.console;
 
 import uim.baklava.console.Exception\ConsoleException;
 import uim.baklava.console.Exception\StopException;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 

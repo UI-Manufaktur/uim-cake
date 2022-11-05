@@ -1,8 +1,8 @@
 module uim.baklava.Form;
 
 import uim.baklava.core.Configure;
-import uim.baklava.utikities.Hash;
-import uim.baklava.utikities.Security;
+import uim.baklava.utilities.Hash;
+import uim.baklava.utilities.Security;
 
 /**
  * Protects against form tampering. It ensures that:

@@ -2,8 +2,8 @@ module uim.baklava.Datasource;
 
 import uim.baklava.collection\Collection;
 import uim.baklava.orm.Entity;
-import uim.baklava.utikities.Hash;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Hash;
+import uim.baklava.utilities.Inflector;
 use InvalidArgumentException;
 use Traversable;
 

@@ -1,6 +1,6 @@
 module uim.baklava.console;
 
-import uim.baklava.utikities.Text;
+import uim.baklava.utilities.Text;
 use SimpleXMLElement;
 
 /**

@@ -2,7 +2,7 @@ module uim.baklava.https\Middleware;
 
 import uim.baklava.https\Cookie\CookieCollection;
 import uim.baklava.https\Response;
-import uim.baklava.utikities.CookieCryptTrait;
+import uim.baklava.utilities.CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;

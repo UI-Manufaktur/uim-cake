@@ -1,7 +1,7 @@
 module uim.baklava.core;
 
 import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use InvalidArgumentException;
 
 /**

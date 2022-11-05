@@ -2,7 +2,7 @@ module uim.baklava.https\Client\Auth;
 
 import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.https\Client\Request;
-import uim.baklava.utikities.Security;
+import uim.baklava.utilities.Security;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 

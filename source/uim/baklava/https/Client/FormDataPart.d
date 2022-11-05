@@ -12,7 +12,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.https\Client;
 
-import uim.baklava.utikities.Text;
+import uim.baklava.utilities.Text;
 
 /**
  * Contains the data and behavior for a single

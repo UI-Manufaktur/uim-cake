@@ -2,7 +2,7 @@ module uim.baklava.core.Configure\Engine;
 
 import uim.baklava.core.Configure\ConfigEngineInterface;
 import uim.baklava.core.Configure\FileConfigTrait;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 
 /**
  * Ini file configuration engine.

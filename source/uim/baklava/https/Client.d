@@ -11,7 +11,7 @@ import uim.baklava.https\Client\Request;
 import uim.baklava.https\Client\Response;
 import uim.baklava.https\Cookie\CookieCollection;
 import uim.baklava.https\Cookie\CookieInterface;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\Uri;
 use Psr\Http\Client\ClientInterface;
