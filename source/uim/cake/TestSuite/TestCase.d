@@ -10,23 +10,23 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-import uim.cake.Datasource\ConnectionManager;
-import uim.cake.events\EventManager;
-import uim.cake.Http\BaseApplication;
-import uim.cake.orm.Entity;
-import uim.cake.orm.Exception\MissingTableClassException;
-import uim.cake.orm.Locator\LocatorAwareTrait;
-import uim.cake.Routing\Router;
-import uim.cake.TestSuite\Constraint\EventFired;
-import uim.cake.TestSuite\Constraint\EventFiredWith;
-import uim.cake.TestSuite\Fixture\FixtureStrategyInterface;
-import uim.cake.TestSuite\Fixture\TruncateStrategy;
-import uim.cake.utikities.Inflector;
+import uim.baklava.core.App;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Plugin;
+import uim.baklava.Datasource\ConnectionManager;
+import uim.baklava.events\EventManager;
+import uim.baklava.Http\BaseApplication;
+import uim.baklava.orm.Entity;
+import uim.baklava.orm.Exception\MissingTableClassException;
+import uim.baklava.orm.Locator\LocatorAwareTrait;
+import uim.baklava.Routing\Router;
+import uim.baklava.TestSuite\Constraint\EventFired;
+import uim.baklava.TestSuite\Constraint\EventFiredWith;
+import uim.baklava.TestSuite\Fixture\FixtureStrategyInterface;
+import uim.baklava.TestSuite\Fixture\TruncateStrategy;
+import uim.baklava.utikities.Inflector;
 use LogicException;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;

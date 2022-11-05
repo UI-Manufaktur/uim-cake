@@ -11,11 +11,11 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @since         4.2.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.core.Configure;
-import uim.cake.core.IContainer;
-import uim.cake.events\IEvent;
+import uim.baklava.core.Configure;
+import uim.baklava.core.IContainer;
+import uim.baklava.events\IEvent;
 use Closure;
 use LogicException;
 

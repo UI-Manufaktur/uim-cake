@@ -1,8 +1,8 @@
-module uim.cake.Http\Middleware;
+module uim.baklava.Http\Middleware;
 
-import uim.cake.Http\Cookie\CookieCollection;
-import uim.cake.Http\Response;
-import uim.cake.utikities.CookieCryptTrait;
+import uim.baklava.Http\Cookie\CookieCollection;
+import uim.baklava.Http\Response;
+import uim.baklava.utikities.CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;

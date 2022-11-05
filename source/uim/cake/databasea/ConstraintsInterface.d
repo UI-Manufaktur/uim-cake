@@ -1,6 +1,6 @@
-module uim.cake.database;
+module uim.baklava.database;
 
-import uim.cake.Datasource\ConnectionInterface;
+import uim.baklava.Datasource\ConnectionInterface;
 
 /**
  * Defines the interface for a fixture that needs to manage constraints.

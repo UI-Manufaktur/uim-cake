@@ -1,6 +1,6 @@
-module uim.cake.views\Helper;
+module uim.baklava.views\Helper;
 
-import uim.cake.views\Helper;
+import uim.baklava.views\Helper;
 
 /**
  * FlashHelper class to render flash messages.

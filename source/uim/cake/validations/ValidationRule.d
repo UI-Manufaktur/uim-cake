@@ -11,7 +11,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.validations;
+ */module uim.baklava.validations;
 
 use InvalidArgumentException;
 

@@ -1,8 +1,8 @@
-module uim.cake.TestSuite\Fixture;
+module uim.baklava.TestSuite\Fixture;
 
-import uim.cake.databases.Schema\TableSchema;
-import uim.cake.Datasource\ConnectionManager;
-import uim.cake.TestSuite\ConnectionHelper;
+import uim.baklava.databases.Schema\TableSchema;
+import uim.baklava.Datasource\ConnectionManager;
+import uim.baklava.TestSuite\ConnectionHelper;
 use InvalidArgumentException;
 
 /**

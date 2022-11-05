@@ -1,4 +1,4 @@
-module uim.cake.events;
+module uim.baklava.events;
 
 use ArrayAccess;
 use Countable;

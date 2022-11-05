@@ -1,7 +1,7 @@
-module uim.cake.databases.Retry;
+module uim.baklava.databases.Retry;
 
-import uim.cake.core.Retry\RetryStrategyInterface;
-import uim.cake.databases.Connection;
+import uim.baklava.core.Retry\RetryStrategyInterface;
+import uim.baklava.databases.Connection;
 use Exception;
 
 /**

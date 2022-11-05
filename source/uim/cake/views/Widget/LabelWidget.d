@@ -1,7 +1,7 @@
-module uim.cake.View\Widget;
+module uim.baklava.View\Widget;
 
-import uim.cake.View\Form\IContext;
-import uim.cake.View\StringTemplate;
+import uim.baklava.View\Form\IContext;
+import uim.baklava.View\StringTemplate;
 
 /**
  * Form 'widget' for creating labels.

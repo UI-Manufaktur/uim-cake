@@ -1,7 +1,7 @@
-module uim.cake.events\Decorator;
+module uim.baklava.events\Decorator;
 
-import uim.cake.core.Exception\CakeException;
-import uim.cake.events\IEvent;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.events\IEvent;
 use RuntimeException;
 
 /**

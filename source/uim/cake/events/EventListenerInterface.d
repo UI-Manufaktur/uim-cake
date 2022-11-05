@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.events;
+ */module uim.baklava.events;
 
 /**
  * Objects implementing this interface should declare the `implementedEvents()` method

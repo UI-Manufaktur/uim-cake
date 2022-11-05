@@ -1,12 +1,12 @@
-module uim.cake.database;
+module uim.baklava.database;
 
-import uim.cake.core.App;
-import uim.cake.core.Retry\CommandRetry;
-import uim.cake.database.Exception\MissingConnectionException;
-import uim.cake.database.Retry\ErrorCodeWaitStrategy;
-import uim.cake.database.Schema\SchemaDialect;
-import uim.cake.database.Schema\TableSchema;
-import uim.cake.database.Statement\PDOStatement;
+import uim.baklava.core.App;
+import uim.baklava.core.Retry\CommandRetry;
+import uim.baklava.database.Exception\MissingConnectionException;
+import uim.baklava.database.Retry\ErrorCodeWaitStrategy;
+import uim.baklava.database.Schema\SchemaDialect;
+import uim.baklava.database.Schema\TableSchema;
+import uim.baklava.database.Statement\PDOStatement;
 use Closure;
 use InvalidArgumentException;
 use PDO;

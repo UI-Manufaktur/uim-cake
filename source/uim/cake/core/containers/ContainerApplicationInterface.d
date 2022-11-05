@@ -1,4 +1,4 @@
-module uim.cake.core;
+module uim.baklava.core;
 
 /**
  * Interface for applications that configure and use a dependency injection container.

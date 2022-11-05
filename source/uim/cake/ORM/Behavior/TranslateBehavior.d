@@ -1,14 +1,14 @@
-module uim.cake.orm.Behavior;
+module uim.baklava.orm.Behavior;
 
-import uim.cake.I18n\I18n;
-import uim.cake.orm.Behavior;
-import uim.cake.orm.Behavior\Translate\EavStrategy;
-import uim.cake.orm.Behavior\Translate\TranslateStrategyInterface;
-import uim.cake.orm.Marshaller;
-import uim.cake.orm.PropertyMarshalInterface;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
-import uim.cake.utikities.Inflector;
+import uim.baklava.I18n\I18n;
+import uim.baklava.orm.Behavior;
+import uim.baklava.orm.Behavior\Translate\EavStrategy;
+import uim.baklava.orm.Behavior\Translate\TranslateStrategyInterface;
+import uim.baklava.orm.Marshaller;
+import uim.baklava.orm.PropertyMarshalInterface;
+import uim.baklava.orm.Query;
+import uim.baklava.orm.Table;
+import uim.baklava.utikities.Inflector;
 
 /**
  * This behavior provides a way to translate dynamic data by keeping translations

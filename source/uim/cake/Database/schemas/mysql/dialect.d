@@ -1,7 +1,7 @@
-module uim.cake.databases.Schema;
+module uim.baklava.databases.Schema;
 
-import uim.cake.databases.IDriver;
-import uim.cake.databases.exceptions\DatabaseException;
+import uim.baklava.databases.IDriver;
+import uim.baklava.databases.exceptions\DatabaseException;
 
 /**
  * Schema generation/reflection features for MySQL

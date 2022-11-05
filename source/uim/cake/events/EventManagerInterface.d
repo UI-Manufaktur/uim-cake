@@ -1,4 +1,4 @@
-module uim.cake.events;
+module uim.baklava.events;
 
 /**
  * Interface IEventManager

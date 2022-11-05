@@ -1,4 +1,4 @@
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
 /**
  * Defines the interface that testing fixtures use.

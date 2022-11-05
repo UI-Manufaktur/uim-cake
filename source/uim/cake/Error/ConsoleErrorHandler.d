@@ -1,8 +1,8 @@
-module uim.cake.errors;
+module uim.baklava.errors;
 
-import uim.cake.command\Command;
-import uim.cake.console.consoleOutput;
-import uim.cake.console.Exception\ConsoleException;
+import uim.baklava.command\Command;
+import uim.baklava.console.consoleOutput;
+import uim.baklava.console.Exception\ConsoleException;
 use Throwable;
 
 /**

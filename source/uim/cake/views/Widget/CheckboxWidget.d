@@ -1,6 +1,6 @@
-module uim.cake.views\Widget;
+module uim.baklava.views\Widget;
 
-import uim.cake.views.forms\IContext;
+import uim.baklava.views.forms\IContext;
 
 /**
  * Input widget for creating checkbox widgets.

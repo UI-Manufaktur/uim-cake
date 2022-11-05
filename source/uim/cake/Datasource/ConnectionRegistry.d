@@ -1,8 +1,8 @@
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
-import uim.cake.Datasource\Exception\MissingDatasourceException;
+import uim.baklava.core.App;
+import uim.baklava.core.ObjectRegistry;
+import uim.baklava.Datasource\Exception\MissingDatasourceException;
 
 /**
  * A registry object for connection instances.

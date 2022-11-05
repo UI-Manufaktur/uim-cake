@@ -1,6 +1,6 @@
 
 
-import uim.cake.core.Configure;
+import uim.baklava.core.Configure;
 
 if (!defined('DS')) {
     /**

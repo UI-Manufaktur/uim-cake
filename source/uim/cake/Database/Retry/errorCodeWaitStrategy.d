@@ -1,6 +1,6 @@
-module uim.cake.databases.Retry;
+module uim.baklava.databases.Retry;
 
-import uim.cake.core.Retry\RetryStrategyInterface;
+import uim.baklava.core.Retry\RetryStrategyInterface;
 use Exception;
 use PDOException;
 

@@ -1,8 +1,8 @@
-module uim.cake.databases;
+module uim.baklava.databases;
 
-import uim.cake.databases.expressions\FieldInterface;
-import uim.cake.databases.expressions\IdentifierExpression;
-import uim.cake.databases.expressions\OrderByExpression;
+import uim.baklava.databases.expressions\FieldInterface;
+import uim.baklava.databases.expressions\IdentifierExpression;
+import uim.baklava.databases.expressions\OrderByExpression;
 
 /**
  * Contains all the logic related to quoting identifiers in a Query object

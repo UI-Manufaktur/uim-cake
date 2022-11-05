@@ -1,6 +1,6 @@
-module uim.cake.Datasource\Exception;
+module uim.baklava.Datasource\Exception;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Exception raised when the provided primary key does not match the table primary key

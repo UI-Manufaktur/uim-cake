@@ -1,4 +1,4 @@
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
 /**
  * An interface used by TableSchema objects.

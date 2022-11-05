@@ -1,12 +1,12 @@
-module uim.cake.orm.Behavior\Translate;
+module uim.baklava.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.cake.collection\ICollection;
-import uim.cake.Datasource\IEntity;
-import uim.cake.events\IEvent;
-import uim.cake.orm.PropertyMarshalInterface;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
+import uim.baklava.collection\ICollection;
+import uim.baklava.Datasource\IEntity;
+import uim.baklava.events\IEvent;
+import uim.baklava.orm.PropertyMarshalInterface;
+import uim.baklava.orm.Query;
+import uim.baklava.orm.Table;
 
 /**
  * This interface describes the methods for translate behavior strategies.

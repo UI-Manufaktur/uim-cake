@@ -11,9 +11,9 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @since         3.5.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.console.consoleIo;
+import uim.baklava.console.consoleIo;
 
 /**
  * Class that dispatches to the legacy ShellDispatcher using the same signature

@@ -7,10 +7,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Log;
+ */module uim.baklava.Log;
 
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
+import uim.baklava.core.App;
+import uim.baklava.core.ObjectRegistry;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 

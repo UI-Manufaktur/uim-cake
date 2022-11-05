@@ -1,4 +1,4 @@
-module uim.cake.views;
+module uim.baklava.views;
 
 /**
  * A view class that is used for AJAX responses.

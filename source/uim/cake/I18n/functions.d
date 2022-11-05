@@ -1,6 +1,6 @@
 
 
-import uim.cake.I18n\I18n;
+import uim.baklava.I18n\I18n;
 
 // Backwards compatibility alias for custom translation messages loaders which return a Package instance.
 // phpcs:disable

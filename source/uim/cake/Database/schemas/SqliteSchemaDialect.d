@@ -1,6 +1,6 @@
-module uim.cake.databases.Schema;
+module uim.baklava.databases.Schema;
 
-import uim.cake.databases.exceptions\DatabaseException;
+import uim.baklava.databases.exceptions\DatabaseException;
 
 /**
  * Schema management/reflection features for Sqlite

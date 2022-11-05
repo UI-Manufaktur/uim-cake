@@ -1,6 +1,6 @@
-module uim.cake.views;
+module uim.baklava.views;
 
-import uim.cake.core.Configure;
+import uim.baklava.core.Configure;
 use RuntimeException;
 
 /**

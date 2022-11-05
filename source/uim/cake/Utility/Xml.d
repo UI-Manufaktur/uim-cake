@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.3
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Utility;
+ */module uim.baklava.Utility;
 
-import uim.cake.utikities.Exception\XmlException;
+import uim.baklava.utikities.Exception\XmlException;
 use Closure;
 use DOMDocument;
 use DOMNode;
@@ -50,7 +50,7 @@ class Xml
      * Building XML from a remote URL:
      *
      * ```
-     * import uim.cake.Http\Client;
+     * import uim.baklava.Http\Client;
      *
      * $http = new Client();
      * $response = $http.get('http://example.com/example.xml');

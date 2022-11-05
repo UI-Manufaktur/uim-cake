@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http;
+ */module uim.baklava.Http;
 
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

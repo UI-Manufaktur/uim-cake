@@ -10,15 +10,15 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http\Client\Adapter;
+ */module uim.baklava.Http\Client\Adapter;
 
-import uim.cake.Http\Client\AdapterInterface;
-import uim.cake.Http\Client\Exception\ClientException;
-import uim.cake.Http\Client\Exception\NetworkException;
-import uim.cake.Http\Client\Exception\RequestException;
-import uim.cake.Http\Client\Request;
-import uim.cake.Http\Client\Response;
-import uim.cake.Http\Exception\HttpException;
+import uim.baklava.Http\Client\AdapterInterface;
+import uim.baklava.Http\Client\Exception\ClientException;
+import uim.baklava.Http\Client\Exception\NetworkException;
+import uim.baklava.Http\Client\Exception\RequestException;
+import uim.baklava.Http\Client\Request;
+import uim.baklava.Http\Client\Response;
+import uim.baklava.Http\Exception\HttpException;
 use Composer\CaBundle\CaBundle;
 use Psr\Http\Message\RequestInterface;
 

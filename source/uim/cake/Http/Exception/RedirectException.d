@@ -1,4 +1,4 @@
-module uim.cake.Http\Exception;
+module uim.baklava.Http\Exception;
 
 /**
  * An exception subclass used by routing and application code to

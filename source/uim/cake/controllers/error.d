@@ -1,9 +1,9 @@
-module uim.cake.controller.error;
+module uim.baklava.controller.error;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.events\IEvent;
+/* import uim.baklava.events\IEvent;
  */
 /**
  * Error Handling Controller

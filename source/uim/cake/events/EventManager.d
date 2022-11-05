@@ -1,6 +1,6 @@
-module uim.cake.events;
+module uim.baklava.events;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * The event manager is responsible for keeping track of event listeners, passing the correct

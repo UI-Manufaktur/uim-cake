@@ -1,6 +1,6 @@
-module uim.cake.Http;
+module uim.baklava.Http;
 
-import uim.cake.core.InstanceConfigTrait;
+import uim.baklava.core.InstanceConfigTrait;
 use Throwable;
 
 /**

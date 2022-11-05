@@ -1,7 +1,7 @@
-module uim.cake.TestSuite\Fixture;
+module uim.baklava.TestSuite\Fixture;
 
-import uim.cake.TestSuite\TestCase;
-import uim.cake.TestSuite\TestListenerTrait;
+import uim.baklava.TestSuite\TestCase;
+import uim.baklava.TestSuite\TestListenerTrait;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestListener;
 use PHPUnit\Framework\TestSuite;

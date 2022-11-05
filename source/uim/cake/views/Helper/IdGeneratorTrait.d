@@ -1,6 +1,6 @@
-module uim.cake.views\Helper;
+module uim.baklava.views\Helper;
 
-import uim.cake.utikities.Text;
+import uim.baklava.utikities.Text;
 
 /**
  * A trait that provides id generating methods to be

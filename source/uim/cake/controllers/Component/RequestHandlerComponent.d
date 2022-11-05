@@ -7,19 +7,19 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.4
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.controller\Component;
+ */module uim.baklava.controller\Component;
 
-import uim.cake.controller\Component;
-import uim.cake.controller\ComponentRegistry;
-import uim.cake.controller\Controller;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.events\IEvent;
-import uim.cake.Http\Exception\NotFoundException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
-import uim.cake.Routing\Router;
-import uim.cake.utikities.Inflector;
+import uim.baklava.controller\Component;
+import uim.baklava.controller\ComponentRegistry;
+import uim.baklava.controller\Controller;
+import uim.baklava.core.App;
+import uim.baklava.core.Configure;
+import uim.baklava.events\IEvent;
+import uim.baklava.Http\Exception\NotFoundException;
+import uim.baklava.Http\Response;
+import uim.baklava.Http\ServerRequest;
+import uim.baklava.Routing\Router;
+import uim.baklava.utikities.Inflector;
 
 /**
  * Request object handling for alternative HTTP requests.

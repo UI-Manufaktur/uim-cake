@@ -7,18 +7,18 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.TestSuite\Constraint\Email\MailContains;
-import uim.cake.TestSuite\Constraint\Email\MailContainsAttachment;
-import uim.cake.TestSuite\Constraint\Email\MailContainsHtml;
-import uim.cake.TestSuite\Constraint\Email\MailContainsText;
-import uim.cake.TestSuite\Constraint\Email\MailCount;
-import uim.cake.TestSuite\Constraint\Email\MailSentFrom;
-import uim.cake.TestSuite\Constraint\Email\MailSentTo;
-import uim.cake.TestSuite\Constraint\Email\MailSentWith;
-import uim.cake.TestSuite\Constraint\Email\MailSubjectContains;
-import uim.cake.TestSuite\Constraint\Email\NoMailSent;
+import uim.baklava.TestSuite\Constraint\Email\MailContains;
+import uim.baklava.TestSuite\Constraint\Email\MailContainsAttachment;
+import uim.baklava.TestSuite\Constraint\Email\MailContainsHtml;
+import uim.baklava.TestSuite\Constraint\Email\MailContainsText;
+import uim.baklava.TestSuite\Constraint\Email\MailCount;
+import uim.baklava.TestSuite\Constraint\Email\MailSentFrom;
+import uim.baklava.TestSuite\Constraint\Email\MailSentTo;
+import uim.baklava.TestSuite\Constraint\Email\MailSentWith;
+import uim.baklava.TestSuite\Constraint\Email\MailSubjectContains;
+import uim.baklava.TestSuite\Constraint\Email\NoMailSent;
 
 /**
  * Make assertions on emails sent through the Cake\TestSuite\TestEmailTransport

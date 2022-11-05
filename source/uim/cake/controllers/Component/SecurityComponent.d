@@ -7,20 +7,20 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.8
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.controller\Component;
+ */module uim.baklava.controller\Component;
 
-import uim.cake.controller\Component;
-import uim.cake.controller\Controller;
-import uim.cake.controller\Exception\AuthSecurityException;
-import uim.cake.controller\Exception\SecurityException;
-import uim.cake.core.Configure;
-import uim.cake.events\IEvent;
-import uim.cake.Http\Exception\BadRequestException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
-import uim.cake.Routing\Router;
-import uim.cake.utikities.Hash;
-import uim.cake.utikities.Security;
+import uim.baklava.controller\Component;
+import uim.baklava.controller\Controller;
+import uim.baklava.controller\Exception\AuthSecurityException;
+import uim.baklava.controller\Exception\SecurityException;
+import uim.baklava.core.Configure;
+import uim.baklava.events\IEvent;
+import uim.baklava.Http\Exception\BadRequestException;
+import uim.baklava.Http\Response;
+import uim.baklava.Http\ServerRequest;
+import uim.baklava.Routing\Router;
+import uim.baklava.utikities.Hash;
+import uim.baklava.utikities.Security;
 
 /**
  * The Security Component creates an easy way to integrate tighter security in

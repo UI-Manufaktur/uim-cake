@@ -1,6 +1,6 @@
-module uim.cake.orm.Behavior\Translate;
+module uim.baklava.orm.Behavior\Translate;
 
-import uim.cake.Datasource\IEntity;
+import uim.baklava.Datasource\IEntity;
 
 /**
  * Contains a translation method aimed to help managing multiple translations

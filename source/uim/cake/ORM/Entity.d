@@ -1,8 +1,8 @@
-module uim.cake.ORM;
+module uim.baklava.ORM;
 
-import uim.cake.Datasource\IEntity;
-import uim.cake.Datasource\EntityTrait;
-import uim.cake.Datasource\InvalidPropertyInterface;
+import uim.baklava.Datasource\IEntity;
+import uim.baklava.Datasource\EntityTrait;
+import uim.baklava.Datasource\InvalidPropertyInterface;
 
 /**
  * An entity represents a single result row from a repository. It exposes the

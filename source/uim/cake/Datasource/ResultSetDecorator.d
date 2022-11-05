@@ -1,6 +1,6 @@
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
-import uim.cake.collection\Collection;
+import uim.baklava.collection\Collection;
 use Countable;
 
 /**

@@ -1,4 +1,4 @@
-module uim.cake.TestSuite;
+module uim.baklava.TestSuite;
 
 /**
  * Compare a string to the contents of a file

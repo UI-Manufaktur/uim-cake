@@ -1,7 +1,7 @@
-module uim.cake.databases.Log;
+module uim.baklava.databases.Log;
 
-import uim.cake.Log\Engine\BaseLog;
-import uim.cake.Log\Log;
+import uim.baklava.Log\Engine\BaseLog;
+import uim.baklava.Log\Log;
 
 /**
  * This class is a bridge used to write LoggedQuery objects into a real log.

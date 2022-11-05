@@ -1,10 +1,10 @@
-module uim.cake.View;
+module uim.baklava.View;
 
-import uim.cake.core.App;
-import uim.cake.events\IEventManager;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
-import uim.cake.views.exceptions\MissingViewException;
+import uim.baklava.core.App;
+import uim.baklava.events\IEventManager;
+import uim.baklava.Http\Response;
+import uim.baklava.Http\ServerRequest;
+import uim.baklava.views.exceptions\MissingViewException;
 use Closure;
 use Exception;
 use JsonSerializable;

@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.View;
+ */module uim.baklava.View;
 
-import uim.cake.core.Configure;
+import uim.baklava.core.Configure;
 use RuntimeException;
 
 /**

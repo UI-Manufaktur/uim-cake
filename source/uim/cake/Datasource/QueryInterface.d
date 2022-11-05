@@ -8,7 +8,7 @@
  * @since         3.1
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
 /**
  * The basis for every query object

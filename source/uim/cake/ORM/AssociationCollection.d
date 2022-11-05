@@ -1,9 +1,9 @@
-module uim.cake.ORM;
+module uim.baklava.ORM;
 
 use ArrayIterator;
-import uim.cake.Datasource\IEntity;
-import uim.cake.orm.Locator\LocatorAwareTrait;
-import uim.cake.orm.Locator\ILocator;
+import uim.baklava.Datasource\IEntity;
+import uim.baklava.orm.Locator\LocatorAwareTrait;
+import uim.baklava.orm.Locator\ILocator;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;

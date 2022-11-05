@@ -1,6 +1,6 @@
-module uim.cake.views\Exception;
+module uim.baklava.views\Exception;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Used when a cell class file cannot be found.

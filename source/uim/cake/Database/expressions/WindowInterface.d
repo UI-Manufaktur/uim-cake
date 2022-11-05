@@ -1,4 +1,4 @@
-module uim.cake.databases.expressions;
+module uim.baklava.databases.expressions;
 
 /**
  * This defines the functions used for building window expressions.

@@ -7,10 +7,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.2.9
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.orm.Rule;
+ */module uim.baklava.orm.Rule;
 
-import uim.cake.Datasource\IEntity;
-import uim.cake.validations\Validation;
+import uim.baklava.Datasource\IEntity;
+import uim.baklava.validations\Validation;
 use Countable;
 
 /**

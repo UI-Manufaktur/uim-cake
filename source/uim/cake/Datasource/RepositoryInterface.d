@@ -1,4 +1,4 @@
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
 /**
  * Describes the methods that any class representing a data storage should

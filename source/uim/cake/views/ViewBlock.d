@@ -1,6 +1,6 @@
-module uim.cake.View;
+module uim.baklava.View;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * ViewBlock : the concept of Blocks or Slots in the View layer.

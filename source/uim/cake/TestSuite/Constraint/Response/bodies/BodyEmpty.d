@@ -1,4 +1,4 @@
-module uim.cake.TestSuite\Constraint\Response;
+module uim.baklava.TestSuite\Constraint\Response;
 
 /**
  * BodyEmpty

@@ -1,6 +1,6 @@
-module uim.cake.I18n;
+module uim.baklava.I18n;
 
-import uim.cake.chronos\Chronos;
+import uim.baklava.chronos\Chronos;
 use IDateTime;
 use DateTimeZone;
 use IntlDateFormatter;

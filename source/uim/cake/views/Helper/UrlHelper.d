@@ -1,10 +1,10 @@
-module uim.cake.views\Helper;
+module uim.baklava.views\Helper;
 
-import uim.cake.core.App;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.Routing\Asset;
-import uim.cake.Routing\Router;
-import uim.cake.views\Helper;
+import uim.baklava.core.App;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.Routing\Asset;
+import uim.baklava.Routing\Router;
+import uim.baklava.views\Helper;
 
 /**
  * UrlHelper class for generating URLs.

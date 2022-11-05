@@ -7,11 +7,11 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.Mailer\Message;
-import uim.cake.Mailer\Transport\DebugTransport;
-import uim.cake.Mailer\TransportFactory;
+import uim.baklava.Mailer\Message;
+import uim.baklava.Mailer\Transport\DebugTransport;
+import uim.baklava.Mailer\TransportFactory;
 
 /**
  * TestEmailTransport

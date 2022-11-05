@@ -1,6 +1,6 @@
-module uim.cake.databases.exceptions;
+module uim.baklava.databases.exceptions;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Class MissingDriverException

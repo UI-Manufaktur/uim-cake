@@ -9,9 +9,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.0.5
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.utikities.Hash;
+import uim.baklava.utikities.Hash;
 
 /**
  * Read only access to the session during testing.

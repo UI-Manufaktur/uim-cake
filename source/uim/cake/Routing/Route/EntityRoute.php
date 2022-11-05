@@ -1,4 +1,4 @@
-module uim.cake.Routing\Route;
+module uim.baklava.Routing\Route;
 
 use ArrayAccess;
 use RuntimeException;

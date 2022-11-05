@@ -1,4 +1,4 @@
-module uim.cake.core;
+module uim.baklava.core;
 
 /**
  * Plugin is used to load and locate plugins.

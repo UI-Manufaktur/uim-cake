@@ -1,4 +1,4 @@
-module uim.cake.core;
+module uim.baklava.core;
 
 /**
  * Read-only wrapper for configuration data

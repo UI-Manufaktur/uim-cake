@@ -1,6 +1,6 @@
-module uim.cake.Http;
+module uim.baklava.Http;
 
-import uim.cake.core.HttpApplicationInterface;
+import uim.baklava.core.HttpApplicationInterface;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 

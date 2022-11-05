@@ -1,4 +1,4 @@
-module uim.cake.core;
+module uim.baklava.core;
 
 /**
  * App is responsible for resource location, and path management.

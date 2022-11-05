@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite\Fixture;
+ */module uim.baklava.TestSuite\Fixture;
 
 /**
  * Fixture strategy that truncates all fixture ables at the end of test.

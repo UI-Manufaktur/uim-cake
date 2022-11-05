@@ -1,4 +1,4 @@
-module uim.cake.TestSuite;
+module uim.baklava.TestSuite;
 
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Test;

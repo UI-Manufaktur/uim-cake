@@ -1,9 +1,9 @@
-module uim.cake.View\Widget;
+module uim.baklava.View\Widget;
 
-import uim.cake.core.App;
-import uim.cake.core.Configure\Engine\PhpConfig;
-import uim.cake.View\StringTemplate;
-import uim.cake.View\View;
+import uim.baklava.core.App;
+import uim.baklava.core.Configure\Engine\PhpConfig;
+import uim.baklava.View\StringTemplate;
+import uim.baklava.View\View;
 use ReflectionClass;
 use RuntimeException;
 

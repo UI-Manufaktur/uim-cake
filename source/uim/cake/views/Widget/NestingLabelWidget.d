@@ -1,4 +1,4 @@
-module uim.cake.View\Widget;
+module uim.baklava.View\Widget;
 
 /**
  * Form 'widget' for creating labels that contain their input.

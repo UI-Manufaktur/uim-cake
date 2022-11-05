@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.4.3
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.databases.exceptions;
+ */module uim.baklava.databases.exceptions;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 use Throwable;
 
 /**

@@ -7,10 +7,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite\Fixture;
+ */module uim.baklava.TestSuite\Fixture;
 
-import uim.cake.Log\Log;
-import uim.cake.TestSuite\ConnectionHelper;
+import uim.baklava.Log\Log;
+import uim.baklava.TestSuite\ConnectionHelper;
 use PHPUnit\Runner\BeforeFirstTestHook;
 
 /**

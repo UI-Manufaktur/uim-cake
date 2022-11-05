@@ -1,9 +1,9 @@
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
-import uim.cake.collection\Collection;
-import uim.cake.orm.Entity;
-import uim.cake.utikities.Hash;
-import uim.cake.utikities.Inflector;
+import uim.baklava.collection\Collection;
+import uim.baklava.orm.Entity;
+import uim.baklava.utikities.Hash;
+import uim.baklava.utikities.Inflector;
 use InvalidArgumentException;
 use Traversable;
 

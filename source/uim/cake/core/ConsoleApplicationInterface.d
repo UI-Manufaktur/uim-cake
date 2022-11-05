@@ -1,6 +1,6 @@
-module uim.cake.core;
+module uim.baklava.core;
 
-import uim.cake.console.commandCollection;
+import uim.baklava.console.commandCollection;
 
 /**
  * An interface defining the methods that the

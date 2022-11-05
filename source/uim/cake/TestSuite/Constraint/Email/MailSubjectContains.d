@@ -1,4 +1,4 @@
-module uim.cake.TestSuite\Constraint\Email;
+module uim.baklava.TestSuite\Constraint\Email;
 
 use InvalidArgumentException;
 

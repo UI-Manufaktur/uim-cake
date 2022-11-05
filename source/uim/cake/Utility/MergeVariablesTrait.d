@@ -1,4 +1,4 @@
-module uim.cake.Utility;
+module uim.baklava.Utility;
 
 /**
  * Provides features for merging object properties recursively with

@@ -12,7 +12,7 @@ handle incoming server requests and send outgoing HTTP requests.
 Sending requests is straight forward. Doing a GET request looks like:
 
 ```php
-import uim.cake.Http\Client;
+import uim.baklava.Http\Client;
 
 $http = new Client();
 
@@ -38,9 +38,9 @@ emit responses. To get started first implement the
 
 ```phpmodule App;
 
-import uim.cake.core.HttpApplicationInterface;
-import uim.cake.Http\MiddlewareQueue;
-import uim.cake.Http\Response;
+import uim.baklava.core.HttpApplicationInterface;
+import uim.baklava.Http\MiddlewareQueue;
+import uim.baklava.Http\Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 
@@ -92,7 +92,7 @@ requests:
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Application;
-import uim.cake.Http\Server;
+import uim.baklava.Http\Server;
 
 // Bind your application to the server.
 $server = new Server(new Application());

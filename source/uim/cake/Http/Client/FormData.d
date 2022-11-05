@@ -10,7 +10,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http\Client;
+ */module uim.baklava.Http\Client;
 
 use Countable;
 use finfo;

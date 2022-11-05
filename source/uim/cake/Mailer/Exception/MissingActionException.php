@@ -9,9 +9,9 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Mailer\Exception;
+ */module uim.baklava.Mailer\Exception;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Missing Action exception - used when a mailer action cannot be found.

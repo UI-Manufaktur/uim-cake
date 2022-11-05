@@ -1,9 +1,9 @@
-module uim.cake.views;
+module uim.baklava.views;
 
-import uim.cake.core.Configure\Engine\PhpConfig;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.utikities.Hash;
+import uim.baklava.core.Configure\Engine\PhpConfig;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.utikities.Hash;
 use RuntimeException;
 
 /**

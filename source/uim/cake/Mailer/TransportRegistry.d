@@ -7,11 +7,11 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Mailer;
+ */module uim.baklava.Mailer;
 
 use BadMethodCallException;
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
+import uim.baklava.core.App;
+import uim.baklava.core.ObjectRegistry;
 use RuntimeException;
 
 /**
@@ -74,7 +74,7 @@ class TransportRegistry : ObjectRegistry
         }
 
         throw new RuntimeException(
-            'Mailer transports must import uim.cake.Mailer\AbstractTransport as a base class.'
+            'Mailer transports must import uim.baklava.Mailer\AbstractTransport as a base class.'
         );
     }
 

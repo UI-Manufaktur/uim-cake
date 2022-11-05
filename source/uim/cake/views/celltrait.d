@@ -1,8 +1,8 @@
-module uim.cake.views;
+module uim.baklava.views;
 
-import uim.cake.core.App;
-import uim.cake.utikities.Inflector;
-import uim.cake.views\Exception\MissingCellException;
+import uim.baklava.core.App;
+import uim.baklava.utikities.Inflector;
+import uim.baklava.views\Exception\MissingCellException;
 
 /**
  * Provides cell() method for usage in Controller and View classes.

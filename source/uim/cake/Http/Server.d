@@ -7,14 +7,14 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http;
+ */module uim.baklava.Http;
 
-import uim.cake.core.HttpApplicationInterface;
-import uim.cake.core.PluginApplicationInterface;
-import uim.cake.events\IEventDispatcher;
-import uim.cake.events\EventDispatcherTrait;
-import uim.cake.events\EventManager;
-import uim.cake.events\IEventManager;
+import uim.baklava.core.HttpApplicationInterface;
+import uim.baklava.core.PluginApplicationInterface;
+import uim.baklava.events\IEventDispatcher;
+import uim.baklava.events\EventDispatcherTrait;
+import uim.baklava.events\EventManager;
+import uim.baklava.events\IEventManager;
 use InvalidArgumentException;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\IResponse;

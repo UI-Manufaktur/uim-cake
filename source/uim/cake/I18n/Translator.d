@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.12
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.I18n;
+ */module uim.baklava.I18n;
 
 /**
  * Translator to translate the message.

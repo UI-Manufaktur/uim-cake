@@ -1,1 +1,1 @@
-module uim.cake.testsuite.constraint.response.bodies;
+module uim.baklava.testsuite.constraint.response.bodies;

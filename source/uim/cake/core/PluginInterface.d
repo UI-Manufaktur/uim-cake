@@ -5,11 +5,11 @@
  * Copyright 2005-2011, Cake Software Foundation, Inc. (https://cakefoundation.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- */module uim.cake.core;
+ */module uim.baklava.core;
 
-import uim.cake.console.commandCollection;
-import uim.cake.Http\MiddlewareQueue;
-import uim.cake.Routing\RouteBuilder;
+import uim.baklava.console.commandCollection;
+import uim.baklava.Http\MiddlewareQueue;
+import uim.baklava.Routing\RouteBuilder;
 
 /**
  * Plugin Interface

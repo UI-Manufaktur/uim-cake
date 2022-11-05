@@ -1,4 +1,4 @@
-module uim.cake.Datasource;
+module uim.baklava.Datasource;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;

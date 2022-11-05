@@ -1,6 +1,6 @@
-module uim.cake.Datasource\Exception;
+module uim.baklava.Datasource\Exception;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Used when a model cannot be found.

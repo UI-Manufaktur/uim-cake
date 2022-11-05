@@ -7,10 +7,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.Http\Client;
-import uim.cake.Http\Client\Response;
+import uim.baklava.Http\Client;
+import uim.baklava.Http\Client\Response;
 
 /**
  * Define mock responses and have mocks automatically cleared.

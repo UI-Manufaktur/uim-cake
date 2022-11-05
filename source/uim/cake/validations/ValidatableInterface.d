@@ -1,4 +1,4 @@
-module uim.cake.validations;
+module uim.baklava.validations;
 
 /**
  * Describes objects that can be validated by passing a Validator object.

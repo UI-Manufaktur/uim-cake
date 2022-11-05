@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Mailer;
+ */module uim.baklava.Mailer;
 
-import uim.cake.core.StaticConfigTrait;
+import uim.baklava.core.StaticConfigTrait;
 use InvalidArgumentException;
 
 /**

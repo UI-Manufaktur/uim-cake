@@ -1,4 +1,4 @@
-module uim.cake.databases;
+module uim.baklava.databases;
 
 /*
  * Represents a class that holds a TypeMap object

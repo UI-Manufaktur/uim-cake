@@ -1,8 +1,8 @@
-module uim.cake.databases.Schema;
+module uim.baklava.databases.Schema;
 
-import uim.cake.databases.Connection;
-import uim.cake.databases.exceptions\DatabaseException;
-import uim.cake.databases.TypeFactory;
+import uim.baklava.databases.Connection;
+import uim.baklava.databases.exceptions\DatabaseException;
+import uim.baklava.databases.TypeFactory;
 
 /**
  * Represents a single table in a database schema.

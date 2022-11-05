@@ -1,12 +1,12 @@
-module uim.cake.Http\Middleware;
+module uim.baklava.Http\Middleware;
 
 use ArrayAccess;
-import uim.cake.Http\Cookie\Cookie;
-import uim.cake.Http\Cookie\CookieInterface;
-import uim.cake.Http\Exception\InvalidCsrfTokenException;
-import uim.cake.Http\Response;
-import uim.cake.utikities.Hash;
-import uim.cake.utikities.Security;
+import uim.baklava.Http\Cookie\Cookie;
+import uim.baklava.Http\Cookie\CookieInterface;
+import uim.baklava.Http\Exception\InvalidCsrfTokenException;
+import uim.baklava.Http\Response;
+import uim.baklava.utikities.Hash;
+import uim.baklava.utikities.Security;
 use InvalidArgumentException;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

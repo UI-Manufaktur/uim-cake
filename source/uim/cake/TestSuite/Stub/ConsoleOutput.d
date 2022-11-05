@@ -1,6 +1,6 @@
-module uim.cake.TestSuite\Stub;
+module uim.baklava.TestSuite\Stub;
 
-import uim.cake.console.consoleOutput as ConsoleOutputBase;
+import uim.baklava.console.consoleOutput as ConsoleOutputBase;
 
 /**
  * StubOutput makes testing shell commands/shell helpers easier.
@@ -9,8 +9,8 @@ import uim.cake.console.consoleOutput as ConsoleOutputBase;
  * that your command/task/helper uses:
  *
  * ```
- * import uim.cake.console.consoleIo;
- * import uim.cake.TestSuite\Stub\ConsoleOutput;
+ * import uim.baklava.console.consoleIo;
+ * import uim.baklava.TestSuite\Stub\ConsoleOutput;
  *
  * $output = new ConsoleOutput();
  * $io = new ConsoleIo($output);

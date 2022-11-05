@@ -11,10 +11,10 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @since         3.7.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite\Constraint\Response;
+ */module uim.baklava.TestSuite\Constraint\Response;
 
-import uim.cake.Http\Response;
-import uim.cake.utikities.CookieCryptTrait;
+import uim.baklava.Http\Response;
+import uim.baklava.utikities.CookieCryptTrait;
 
 /**
  * CookieEncryptedEquals

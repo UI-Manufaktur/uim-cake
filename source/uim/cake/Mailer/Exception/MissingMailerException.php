@@ -1,6 +1,6 @@
-module uim.cake.Mailer\Exception;
+module uim.baklava.Mailer\Exception;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Used when a mailer cannot be found.

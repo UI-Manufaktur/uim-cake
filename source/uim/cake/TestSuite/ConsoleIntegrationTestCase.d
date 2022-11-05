@@ -11,7 +11,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @since         3.5.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
 /**
  * A test case class intended to make integration tests of cake console commands

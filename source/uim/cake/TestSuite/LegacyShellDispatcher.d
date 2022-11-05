@@ -11,11 +11,11 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @since         3.5.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite;
+ */module uim.baklava.TestSuite;
 
-import uim.cake.console.consoleIo;
-import uim.cake.console.Shell;
-import uim.cake.console.ShellDispatcher;
+import uim.baklava.console.consoleIo;
+import uim.baklava.console.Shell;
+import uim.baklava.console.ShellDispatcher;
 
 /**
  * Allows injecting mock IO into shells

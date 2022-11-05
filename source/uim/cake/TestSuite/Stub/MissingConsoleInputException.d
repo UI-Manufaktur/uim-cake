@@ -1,4 +1,4 @@
-module uim.cake.TestSuite\Stub;
+module uim.baklava.TestSuite\Stub;
 
 use RuntimeException;
 

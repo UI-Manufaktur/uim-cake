@@ -1,8 +1,8 @@
 
-module uim.cake.views;
+module uim.baklava.views;
 
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.events\IEventListener;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.events\IEventListener;
 
 /**
  * Abstract base class for all other Helpers in CakePHP.

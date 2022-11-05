@@ -1,4 +1,4 @@
-module uim.cake.views.exceptions;
+module uim.baklava.views.exceptions;
 
 /**
  * Used when a layout file cannot be found.

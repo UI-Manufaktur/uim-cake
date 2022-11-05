@@ -1,4 +1,4 @@
-module uim.cake.events;
+module uim.baklava.events;
 
 /**
  * Represents the transport class of events across the system. It receives a name, subject and an optional

@@ -7,23 +7,23 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.controller\Component;
+ */module uim.baklava.controller\Component;
 
-import uim.cake.Auth\BaseAuthenticate;
-import uim.cake.Auth\BaseAuthorize;
-import uim.cake.Auth\Storage\IStorage;
-import uim.cake.controller\Component;
-import uim.cake.controller\Controller;
-import uim.cake.core.App;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.events\IEventDispatcher;
-import uim.cake.events\EventDispatcherTrait;
-import uim.cake.events\IEvent;
-import uim.cake.Http\Exception\ForbiddenException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
-import uim.cake.Routing\Router;
-import uim.cake.utikities.Hash;
+import uim.baklava.Auth\BaseAuthenticate;
+import uim.baklava.Auth\BaseAuthorize;
+import uim.baklava.Auth\Storage\IStorage;
+import uim.baklava.controller\Component;
+import uim.baklava.controller\Controller;
+import uim.baklava.core.App;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.events\IEventDispatcher;
+import uim.baklava.events\EventDispatcherTrait;
+import uim.baklava.events\IEvent;
+import uim.baklava.Http\Exception\ForbiddenException;
+import uim.baklava.Http\Response;
+import uim.baklava.Http\ServerRequest;
+import uim.baklava.Routing\Router;
+import uim.baklava.utikities.Hash;
 
 /**
  * Authentication control component class.

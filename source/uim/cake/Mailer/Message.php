@@ -1,11 +1,11 @@
-module uim.cake.Mailer;
+module uim.baklava.Mailer;
 
-import uim.cake.core.Configure;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.Http\Client\FormDataPart;
-import uim.cake.utikities.Hash;
-import uim.cake.utikities.Security;
-import uim.cake.utikities.Text;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.Http\Client\FormDataPart;
+import uim.baklava.utikities.Hash;
+import uim.baklava.utikities.Security;
+import uim.baklava.utikities.Text;
 use Closure;
 use InvalidArgumentException;
 use JsonSerializable;

@@ -1,9 +1,9 @@
-module uim.cake.errors;
+module uim.baklava.errors;
 
-import uim.cake.core.Configure;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Log\Log;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.Log\Log;
 use Psr\Http\Message\IServerRequest;
 use Throwable;
 

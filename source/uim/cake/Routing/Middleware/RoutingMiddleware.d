@@ -7,17 +7,17 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Routing\Middleware;
+ */module uim.baklava.Routing\Middleware;
 
-import uim.cake.cache\Cache;
-import uim.cake.core.PluginApplicationInterface;
-import uim.cake.Http\Exception\RedirectException;
-import uim.cake.Http\MiddlewareQueue;
-import uim.cake.Http\Runner;
-import uim.cake.Routing\Exception\RedirectException as DeprecatedRedirectException;
-import uim.cake.Routing\RouteCollection;
-import uim.cake.Routing\Router;
-import uim.cake.Routing\RoutingApplicationInterface;
+import uim.baklava.cache\Cache;
+import uim.baklava.core.PluginApplicationInterface;
+import uim.baklava.Http\Exception\RedirectException;
+import uim.baklava.Http\MiddlewareQueue;
+import uim.baklava.Http\Runner;
+import uim.baklava.Routing\Exception\RedirectException as DeprecatedRedirectException;
+import uim.baklava.Routing\RouteCollection;
+import uim.baklava.Routing\Router;
+import uim.baklava.Routing\RoutingApplicationInterface;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

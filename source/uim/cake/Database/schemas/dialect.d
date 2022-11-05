@@ -1,8 +1,8 @@
-module uim.cake.databases.Schema;
+module uim.baklava.databases.Schema;
 
-import uim.cake.databases.IDriver;
-import uim.cake.databases.Type\ColumnSchemaAwareInterface;
-import uim.cake.databases.TypeFactory;
+import uim.baklava.databases.IDriver;
+import uim.baklava.databases.Type\ColumnSchemaAwareInterface;
+import uim.baklava.databases.TypeFactory;
 use InvalidArgumentException;
 
 /**

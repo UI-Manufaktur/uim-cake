@@ -1,4 +1,4 @@
-module uim.cake.databases.Schema;
+module uim.baklava.databases.Schema;
 
 /**
  * Represents a database schema collection

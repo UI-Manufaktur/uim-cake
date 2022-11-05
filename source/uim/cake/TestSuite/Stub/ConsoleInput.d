@@ -1,6 +1,6 @@
-module uim.cake.TestSuite\Stub;
+module uim.baklava.TestSuite\Stub;
 
-import uim.cake.console.consoleInput as ConsoleInputBase;
+import uim.baklava.console.consoleInput as ConsoleInputBase;
 use NumberFormatter;
 
 /**

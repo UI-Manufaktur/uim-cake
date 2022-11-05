@@ -1,12 +1,12 @@
-module uim.cake.ORM;
+module uim.baklava.ORM;
 
-import uim.cake.Datasource\RuleInvoker;
-import uim.cake.Datasource\RulesChecker as BaseRulesChecker;
-import uim.cake.orm.Rule\ExistsIn;
-import uim.cake.orm.Rule\IsUnique;
-import uim.cake.orm.Rule\LinkConstraint;
-import uim.cake.orm.Rule\ValidCount;
-import uim.cake.utikities.Inflector;
+import uim.baklava.Datasource\RuleInvoker;
+import uim.baklava.Datasource\RulesChecker as BaseRulesChecker;
+import uim.baklava.orm.Rule\ExistsIn;
+import uim.baklava.orm.Rule\IsUnique;
+import uim.baklava.orm.Rule\LinkConstraint;
+import uim.baklava.orm.Rule\ValidCount;
+import uim.baklava.utikities.Inflector;
 
 /**
  * ORM flavoured rules checker.

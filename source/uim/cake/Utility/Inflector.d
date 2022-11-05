@@ -1,5 +1,5 @@
 
-module uim.cake.Utility;
+module uim.baklava.Utility;
 
 /**
  * Pluralize and singularize English words.

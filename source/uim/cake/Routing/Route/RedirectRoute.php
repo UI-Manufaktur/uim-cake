@@ -1,7 +1,7 @@
-module uim.cake.Routing\Route;
+module uim.baklava.Routing\Route;
 
-import uim.cake.Http\Exception\RedirectException;
-import uim.cake.Routing\Router;
+import uim.baklava.Http\Exception\RedirectException;
+import uim.baklava.Routing\Router;
 
 /**
  * Redirect route will perform an immediate redirect. Redirect routes

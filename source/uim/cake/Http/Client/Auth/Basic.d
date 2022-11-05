@@ -1,6 +1,6 @@
-module uim.cake.Http\Client\Auth;
+module uim.baklava.Http\Client\Auth;
 
-import uim.cake.Http\Client\Request;
+import uim.baklava.Http\Client\Request;
 
 /**
  * Basic authentication adapter for Cake\Http\Client

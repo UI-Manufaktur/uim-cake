@@ -7,11 +7,11 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Routing\Middleware;
+ */module uim.baklava.Routing\Middleware;
 
-import uim.cake.core.Plugin;
-import uim.cake.Http\Response;
-import uim.cake.utikities.Inflector;
+import uim.baklava.core.Plugin;
+import uim.baklava.Http\Response;
+import uim.baklava.utikities.Inflector;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

@@ -1,6 +1,6 @@
-module uim.cake.databases.Schema;
+module uim.baklava.databases.Schema;
 
-import uim.cake.Datasource\SchemaInterface;
+import uim.baklava.Datasource\SchemaInterface;
 
 /**
  * An interface used by database TableSchema objects.

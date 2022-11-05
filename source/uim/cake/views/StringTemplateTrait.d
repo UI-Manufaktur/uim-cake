@@ -1,4 +1,4 @@
-module uim.cake.View;
+module uim.baklava.View;
 
 /**
  * Adds string template functionality to any class by providing methods to

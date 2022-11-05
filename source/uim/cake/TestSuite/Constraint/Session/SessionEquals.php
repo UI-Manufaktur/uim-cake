@@ -11,9 +11,9 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @since         3.7.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite\Constraint\Session;
+ */module uim.baklava.TestSuite\Constraint\Session;
 
-import uim.cake.utikities.Hash;
+import uim.baklava.utikities.Hash;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**

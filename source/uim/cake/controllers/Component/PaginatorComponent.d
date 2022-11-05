@@ -1,11 +1,11 @@
-module uim.cake.controller\Component;
+module uim.baklava.controller\Component;
 
-import uim.cake.controller\Component;
-import uim.cake.controller\ComponentRegistry;
-import uim.cake.Datasource\Exception\PageOutOfBoundsException;
-import uim.cake.Datasource\Paginator;
-import uim.cake.Datasource\ResultSetInterface;
-import uim.cake.Http\Exception\NotFoundException;
+import uim.baklava.controller\Component;
+import uim.baklava.controller\ComponentRegistry;
+import uim.baklava.Datasource\Exception\PageOutOfBoundsException;
+import uim.baklava.Datasource\Paginator;
+import uim.baklava.Datasource\ResultSetInterface;
+import uim.baklava.Http\Exception\NotFoundException;
 use InvalidArgumentException;
 
 /**

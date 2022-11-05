@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         1.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.core.Configure;
+ */module uim.baklava.core.Configure;
 
 /**
  * An interface for creating objects compatible with Configure::load()

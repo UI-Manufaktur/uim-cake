@@ -1,7 +1,7 @@
-module uim.cake.database;
+module uim.baklava.database;
 
-import uim.cake.database.Expression\AggregateExpression;
-import uim.cake.database.Expression\FunctionExpression;
+import uim.baklava.database.Expression\AggregateExpression;
+import uim.baklava.database.Expression\FunctionExpression;
 use InvalidArgumentException;
 
 /**

@@ -1,9 +1,9 @@
-module uim.cake.controller\Component;
+module uim.baklava.controller\Component;
 
-import uim.cake.controller\Component;
-import uim.cake.Http\Exception\InternalErrorException;
-import uim.cake.Http\FlashMessage;
-import uim.cake.utikities.Inflector;
+import uim.baklava.controller\Component;
+import uim.baklava.Http\Exception\InternalErrorException;
+import uim.baklava.Http\FlashMessage;
+import uim.baklava.utikities.Inflector;
 use Throwable;
 
 /**

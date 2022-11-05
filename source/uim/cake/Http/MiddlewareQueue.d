@@ -7,11 +7,11 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http;
+ */module uim.baklava.Http;
 
-import uim.cake.core.App;
-import uim.cake.Http\Middleware\ClosureDecoratorMiddleware;
-import uim.cake.Http\Middleware\DoublePassDecoratorMiddleware;
+import uim.baklava.core.App;
+import uim.baklava.Http\Middleware\ClosureDecoratorMiddleware;
+import uim.baklava.Http\Middleware\DoublePassDecoratorMiddleware;
 use Closure;
 use Countable;
 use LogicException;

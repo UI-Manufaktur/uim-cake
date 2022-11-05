@@ -9,9 +9,9 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.controller\Exception;
+ */module uim.baklava.controller\Exception;
 
-import uim.cake.Http\Exception\BadRequestException;
+import uim.baklava.Http\Exception\BadRequestException;
 
 /**
  * Security exception - used when SecurityComponent detects any issue with the current request

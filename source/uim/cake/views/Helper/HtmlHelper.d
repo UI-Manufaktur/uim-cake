@@ -1,8 +1,8 @@
-module uim.cake.views\Helper;
+module uim.baklava.views\Helper;
 
-import uim.cake.core.Configure;
-import uim.cake.views\Helper;
-import uim.cake.views\StringTemplateTrait;
+import uim.baklava.core.Configure;
+import uim.baklava.views\Helper;
+import uim.baklava.views\StringTemplateTrait;
 
 /**
  * Html Helper class for easy use of HTML widgets.

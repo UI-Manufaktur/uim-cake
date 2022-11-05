@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite\Stub;
+ */module uim.baklava.TestSuite\Stub;
 
 use Throwable;
 

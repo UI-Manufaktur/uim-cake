@@ -10,11 +10,11 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http\Client\Adapter;
+ */module uim.baklava.Http\Client\Adapter;
 
-import uim.cake.Http\Client\AdapterInterface;
-import uim.cake.Http\Client\Exception\MissingResponseException;
-import uim.cake.Http\Client\Response;
+import uim.baklava.Http\Client\AdapterInterface;
+import uim.baklava.Http\Client\Exception\MissingResponseException;
+import uim.baklava.Http\Client\Response;
 use Closure;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;

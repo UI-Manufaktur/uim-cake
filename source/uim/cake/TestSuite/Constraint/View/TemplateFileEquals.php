@@ -1,4 +1,4 @@
-module uim.cake.TestSuite\Constraint\View;
+module uim.baklava.TestSuite\Constraint\View;
 
 use PHPUnit\Framework\Constraint\Constraint;
 

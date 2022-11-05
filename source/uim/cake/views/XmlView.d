@@ -1,11 +1,11 @@
-module uim.cake.View;
+module uim.baklava.View;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.core.Configure;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Xml; */
+/* import uim.baklava.core.Configure;
+import uim.baklava.Utility\Hash;
+import uim.baklava.Utility\Xml; */
 
 /**
  * A view class that is used for creating XML responses.

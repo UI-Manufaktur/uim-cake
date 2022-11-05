@@ -1,4 +1,4 @@
-module uim.cake.Http\Middleware;
+module uim.baklava.Http\Middleware;
 
 use Closure;
 use Psr\Http\Message\IResponse;

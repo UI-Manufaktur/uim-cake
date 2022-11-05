@@ -5,6 +5,6 @@ class_alias(
     'Cake\Routing\Exception\MissingControllerException'
 );
 deprecationWarning(
-    'import uim.cake.Http\Exception\MissingControllerException instead of Cake\Routing\Exception\MissingControllerException.',
+    'import uim.baklava.Http\Exception\MissingControllerException instead of Cake\Routing\Exception\MissingControllerException.',
     0
 );

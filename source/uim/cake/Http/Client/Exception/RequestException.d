@@ -1,4 +1,4 @@
-module uim.cake.Http\Client\Exception;
+module uim.baklava.Http\Client\Exception;
 
 use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\RequestInterface;

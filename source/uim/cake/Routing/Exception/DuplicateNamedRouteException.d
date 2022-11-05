@@ -9,9 +9,9 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.3.1
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Routing\Exception;
+ */module uim.baklava.Routing\Exception;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 use Throwable;
 
 /**

@@ -7,14 +7,14 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.views\Helper;
+ */module uim.baklava.views\Helper;
 
-import uim.cake.core.App;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.utikities.Security;
-import uim.cake.utikities.Text;
-import uim.cake.views\Helper;
-import uim.cake.views\View;
+import uim.baklava.core.App;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.utikities.Security;
+import uim.baklava.utikities.Text;
+import uim.baklava.views\Helper;
+import uim.baklava.views\View;
 
 /**
  * Text helper library.

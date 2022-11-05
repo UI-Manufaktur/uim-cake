@@ -5,5 +5,5 @@ class_alias(
     'Cake\Http\ControllerFactory'
 );
 deprecationWarning(
-    'import uim.cake.controller\ControllerFactory instead of Cake\Http\ControllerFactory.'
+    'import uim.baklava.controller\ControllerFactory instead of Cake\Http\ControllerFactory.'
 );

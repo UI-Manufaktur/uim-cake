@@ -1,7 +1,7 @@
-module uim.cake.core.Configure;
+module uim.baklava.core.Configure;
 
-import uim.cake.core.Exception\CakeException;
-import uim.cake.core.Plugin;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.Plugin;
 
 /**
  * Trait providing utility methods for file based config engines.

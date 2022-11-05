@@ -1,4 +1,4 @@
-module uim.cake.Form;
+module uim.baklava.Form;
 
 /**
  * Contains the schema information for Form instances.

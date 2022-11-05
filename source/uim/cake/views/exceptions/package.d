@@ -1,1 +1,1 @@
-module uim.cake.views.exceptions;
+module uim.baklava.views.exceptions;

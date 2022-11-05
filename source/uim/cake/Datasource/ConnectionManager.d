@@ -7,15 +7,15 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Datasource;
+ */module uim.baklava.Datasource;
 
-import uim.cake.core.StaticConfigTrait;
-import uim.cake.databases.Connection;
-import uim.cake.databases.Driver\Mysql;
-import uim.cake.databases.Driver\Postgres;
-import uim.cake.databases.Driver\Sqlite;
-import uim.cake.databases.Driver\Sqlserver;
-import uim.cake.Datasource\Exception\MissingDatasourceConfigException;
+import uim.baklava.core.StaticConfigTrait;
+import uim.baklava.databases.Connection;
+import uim.baklava.databases.Driver\Mysql;
+import uim.baklava.databases.Driver\Postgres;
+import uim.baklava.databases.Driver\Sqlite;
+import uim.baklava.databases.Driver\Sqlserver;
+import uim.baklava.Datasource\Exception\MissingDatasourceConfigException;
 
 /**
  * Manages and loads instances of Connection

@@ -1,6 +1,6 @@
-module uim.cake.View\Widget;
+module uim.baklava.View\Widget;
 
-import uim.cake.View\Form\IContext;
+import uim.baklava.View\Form\IContext;
 
 /**
  * Input widget class for generating a textarea control.

@@ -6,9 +6,9 @@
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- */module uim.cake.core;
+ */module uim.baklava.core;
 
-import uim.cake.core.Exception\MissingPluginException;
+import uim.baklava.core.Exception\MissingPluginException;
 use Countable;
 use Generator;
 use InvalidArgumentException;

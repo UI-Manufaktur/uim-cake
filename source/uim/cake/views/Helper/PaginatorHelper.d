@@ -1,11 +1,11 @@
-module uim.cake.views\Helper;
+module uim.baklava.views\Helper;
 
-import uim.cake.utikities.Hash;
-import uim.cake.utikities.Inflector;
-import uim.cake.views\Helper;
-import uim.cake.views\StringTemplate;
-import uim.cake.views\StringTemplateTrait;
-import uim.cake.views\View;
+import uim.baklava.utikities.Hash;
+import uim.baklava.utikities.Inflector;
+import uim.baklava.views\Helper;
+import uim.baklava.views\StringTemplate;
+import uim.baklava.views\StringTemplateTrait;
+import uim.baklava.views\View;
 
 /**
  * Pagination Helper class for easy generation of pagination links.

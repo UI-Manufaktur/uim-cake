@@ -1,15 +1,15 @@
-module uim.cake.TestSuite\Fixture;
+module uim.baklava.TestSuite\Fixture;
 
-import uim.cake.core.Configure;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.databases.ConstraintsInterface;
-import uim.cake.databases.Driver\Postgres;
-import uim.cake.databases.Schema\TableSchema;
-import uim.cake.databases.Schema\TableSchemaAwareInterface;
-import uim.cake.Datasource\ConnectionInterface;
-import uim.cake.Datasource\ConnectionManager;
-import uim.cake.Datasource\FixtureInterface;
-import uim.cake.TestSuite\TestCase;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.databases.ConstraintsInterface;
+import uim.baklava.databases.Driver\Postgres;
+import uim.baklava.databases.Schema\TableSchema;
+import uim.baklava.databases.Schema\TableSchemaAwareInterface;
+import uim.baklava.Datasource\ConnectionInterface;
+import uim.baklava.Datasource\ConnectionManager;
+import uim.baklava.Datasource\FixtureInterface;
+import uim.baklava.TestSuite\TestCase;
 use PDOException;
 use RuntimeException;
 use UnexpectedValueException;

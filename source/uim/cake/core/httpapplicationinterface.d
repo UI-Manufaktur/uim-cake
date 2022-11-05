@@ -1,6 +1,6 @@
-module uim.cake.core;
+module uim.baklava.core;
 
-import uim.cake.Http\MiddlewareQueue;
+import uim.baklava.Http\MiddlewareQueue;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**

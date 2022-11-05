@@ -1,6 +1,6 @@
-module uim.cake.Http\Client\Exception;
+module uim.baklava.Http\Client\Exception;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Used to indicate that a request did not have a matching mock response.

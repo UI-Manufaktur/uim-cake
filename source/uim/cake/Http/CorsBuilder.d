@@ -1,4 +1,4 @@
-module uim.cake.Http;
+module uim.baklava.Http;
 
 use Psr\Http\Message\MessageInterface;
 

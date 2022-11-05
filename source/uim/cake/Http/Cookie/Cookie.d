@@ -11,9 +11,9 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         3.5.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http\Cookie;
+ */module uim.baklava.Http\Cookie;
 
-import uim.cake.utikities.Hash;
+import uim.baklava.utikities.Hash;
 use DateTimeImmutable;
 use IDateTime;
 use DateTimeZone;

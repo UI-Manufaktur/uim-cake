@@ -1,8 +1,8 @@
-module uim.cake.errors;
+module uim.baklava.errors;
 
-import uim.cake.core.App;
-import uim.cake.Http\ResponseEmitter;
-import uim.cake.Routing\Router;
+import uim.baklava.core.App;
+import uim.baklava.Http\ResponseEmitter;
+import uim.baklava.Routing\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 use Throwable;

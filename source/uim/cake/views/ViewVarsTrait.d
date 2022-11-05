@@ -1,9 +1,9 @@
-module uim.cake.View;
+module uim.baklava.View;
 
 @safe:
-import uim.cake;
+import uim.baklava;
 
-/* import uim.cake.events\IEventDispatcher;
+/* import uim.baklava.events\IEventDispatcher;
  */
 /**
  * Provides the set() method for collecting template context.

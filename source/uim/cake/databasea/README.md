@@ -33,8 +33,8 @@ Before performing any operations with the connection, you need to specify a driv
 to use:
 
 ```php
-import uim.cake.database.Connection;
-import uim.cake.database.Driver\Mysql;
+import uim.baklava.database.Connection;
+import uim.baklava.database.Driver\Mysql;
 
 myDriver = new Mysql([
 	'database' => 'test',
@@ -52,7 +52,7 @@ be specified by passing a class name. In that case, include all the connection d
 directly in the options array:
 
 ```php
-import uim.cake.database.Connection;
+import uim.baklava.database.Connection;
 
 myConnection = new Connection([
 	'driver' => Cake\Database\Driver\Sqlite::class,

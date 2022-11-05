@@ -1,4 +1,4 @@
-module uim.cake.events\Decorator;
+module uim.baklava.events\Decorator;
 
 /**
  * Common base class for event decorator subclasses.

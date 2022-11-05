@@ -9,9 +9,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.Http\Session;
+ */module uim.baklava.Http\Session;
 
-import uim.cake.cache\Cache;
+import uim.baklava.cache\Cache;
 use InvalidArgumentException;
 use SessionHandlerInterface;
 

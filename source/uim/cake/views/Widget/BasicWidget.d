@@ -1,7 +1,7 @@
-module uim.cake.views\Widget;
+module uim.baklava.views\Widget;
 
-import uim.cake.views.forms\IContext;
-import uim.cake.views\StringTemplate;
+import uim.baklava.views.forms\IContext;
+import uim.baklava.views\StringTemplate;
 
 /**
  * Basic input class.

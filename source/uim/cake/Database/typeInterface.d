@@ -1,4 +1,4 @@
-module uim.cake.databases;
+module uim.baklava.databases;
 
 /**
  * Encapsulates all conversion functions for values coming from a database into PHP and

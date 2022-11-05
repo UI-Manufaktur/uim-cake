@@ -1,12 +1,12 @@
-module uim.cake.controller\Component;
+module uim.baklava.controller\Component;
 
-import uim.cake.controller\Component;
-import uim.cake.core.Configure;
-import uim.cake.events\IEvent;
-import uim.cake.Form\FormProtector;
-import uim.cake.Http\Exception\BadRequestException;
-import uim.cake.Http\Response;
-import uim.cake.Routing\Router;
+import uim.baklava.controller\Component;
+import uim.baklava.core.Configure;
+import uim.baklava.events\IEvent;
+import uim.baklava.Form\FormProtector;
+import uim.baklava.Http\Exception\BadRequestException;
+import uim.baklava.Http\Response;
+import uim.baklava.Routing\Router;
 use Closure;
 
 /**

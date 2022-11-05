@@ -1,12 +1,12 @@
-module uim.cake.errors\Middleware;
+module uim.baklava.errors\Middleware;
 
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.errors\ErrorHandler;
-import uim.cake.errors\ExceptionRenderer;
-import uim.cake.Http\Exception\RedirectException;
-import uim.cake.Http\Response;
+import uim.baklava.core.App;
+import uim.baklava.core.Configure;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.errors\ErrorHandler;
+import uim.baklava.errors\ExceptionRenderer;
+import uim.baklava.Http\Exception\RedirectException;
+import uim.baklava.Http\Response;
 use InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;

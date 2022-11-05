@@ -1,14 +1,14 @@
-module uim.cake.database;
+module uim.baklava.database;
 
-import uim.cake.database.Exception\DatabaseException;
-import uim.cake.database.Expression\CommonTableExpression;
-import uim.cake.database.Expression\IdentifierExpression;
-import uim.cake.database.Expression\OrderByExpression;
-import uim.cake.database.Expression\OrderClauseExpression;
-import uim.cake.database.Expression\QueryExpression;
-import uim.cake.database.Expression\ValuesExpression;
-import uim.cake.database.Expression\WindowExpression;
-import uim.cake.database.Statement\CallbackStatement;
+import uim.baklava.database.Exception\DatabaseException;
+import uim.baklava.database.Expression\CommonTableExpression;
+import uim.baklava.database.Expression\IdentifierExpression;
+import uim.baklava.database.Expression\OrderByExpression;
+import uim.baklava.database.Expression\OrderClauseExpression;
+import uim.baklava.database.Expression\QueryExpression;
+import uim.baklava.database.Expression\ValuesExpression;
+import uim.baklava.database.Expression\WindowExpression;
+import uim.baklava.database.Statement\CallbackStatement;
 use Closure;
 use InvalidArgumentException;
 use IteratorAggregate;

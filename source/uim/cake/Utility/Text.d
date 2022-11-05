@@ -1,6 +1,6 @@
-module uim.cake.Utility;
+module uim.baklava.Utility;
 
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.core.Exception\CakeException;
 use InvalidArgumentException;
 use Transliterator;
 
