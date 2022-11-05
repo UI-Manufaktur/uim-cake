@@ -18,9 +18,9 @@ import uim.baklava.events\IEvent;
 import uim.baklava.https\Exception\BadRequestException;
 import uim.baklava.https\Response;
 import uim.baklava.https\ServerRequest;
-import uim.baklava.Routing\Router;
-import uim.baklava.utikities.Hash;
-import uim.baklava.utikities.Security;
+import uim.baklava.routings\Router;
+import uim.baklava.utilities.Hash;
+import uim.baklava.utilities.Security;
 
 /**
  * The Security Component creates an easy way to integrate tighter security in

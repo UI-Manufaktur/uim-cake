@@ -6,7 +6,7 @@ import uim.baklava.events\IEvent;
 import uim.baklava.Form\FormProtector;
 import uim.baklava.https\Exception\BadRequestException;
 import uim.baklava.https\Response;
-import uim.baklava.Routing\Router;
+import uim.baklava.routings\Router;
 use Closure;
 
 /**

@@ -1,12 +1,12 @@
-module uim.baklava.Routing;
+module uim.baklava.routings;
 
 use BadMethodCallException;
 import uim.baklava.core.App;
 import uim.baklava.core.exceptions\MissingPluginException;
 import uim.baklava.core.Plugin;
-import uim.baklava.Routing\Route\RedirectRoute;
-import uim.baklava.Routing\Route\Route;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.routings\Route\RedirectRoute;
+import uim.baklava.routings\Route\Route;
+import uim.baklava.utilities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 

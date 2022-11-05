@@ -3,8 +3,8 @@ module uim.baklava.routing.router;
 
 import uim.baklava.core.Configure;
 import uim.baklava.https\ServerRequest;
-import uim.baklava.Routing\Exception\MissingRouteException;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.routings\Exception\MissingRouteException;
+import uim.baklava.utilities.Inflector;
 use InvalidArgumentException;
 use ReflectionFunction;
 use ReflectionMethod;

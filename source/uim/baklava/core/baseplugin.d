@@ -10,7 +10,7 @@
 
 import uim.baklava.console.commandCollection;
 import uim.baklava.https\MiddlewareQueue;
-import uim.baklava.Routing\RouteBuilder;
+import uim.baklava.routings\RouteBuilder;
 use Closure;
 use InvalidArgumentException;
 use ReflectionClass;

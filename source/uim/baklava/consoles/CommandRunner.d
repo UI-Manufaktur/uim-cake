@@ -14,9 +14,9 @@ import uim.baklava.events\IEventDispatcher;
 import uim.baklava.events\EventDispatcherTrait;
 import uim.baklava.events\EventManager;
 import uim.baklava.events\IEventManager;
-import uim.baklava.Routing\Router;
-import uim.baklava.Routing\RoutingApplicationInterface;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.routings\Router;
+import uim.baklava.routings\RoutingApplicationInterface;
+import uim.baklava.utilities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 

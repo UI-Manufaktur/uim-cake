@@ -3,7 +3,7 @@ module uim.baklava.command;
 import uim.baklava.console.Arguments;
 import uim.baklava.console.consoleIo;
 import uim.baklava.console.consoleOptionParser;
-import uim.baklava.Routing\Router;
+import uim.baklava.routings\Router;
 
 /**
  * Provides interactive CLI tools for routing.

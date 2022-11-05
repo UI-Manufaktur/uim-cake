@@ -1,4 +1,4 @@
-module uim.baklava.Routing;
+module uim.baklava.routings;
 
 /**
  * Interface for applications that use routing.

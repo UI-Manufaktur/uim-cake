@@ -1,8 +1,8 @@
-module uim.baklava.Routing;
+module uim.baklava.routings;
 
-import uim.baklava.Routing\Exception\DuplicateNamedRouteException;
-import uim.baklava.Routing\Exception\MissingRouteException;
-import uim.baklava.Routing\Route\Route;
+import uim.baklava.routings\Exception\DuplicateNamedRouteException;
+import uim.baklava.routings\Exception\MissingRouteException;
+import uim.baklava.routings\Route\Route;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 

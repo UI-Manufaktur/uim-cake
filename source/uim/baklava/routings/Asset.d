@@ -1,8 +1,8 @@
-module uim.baklava.Routing;
+module uim.baklava.routings;
 
 import uim.baklava.core.Configure;
 import uim.baklava.core.Plugin;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * Class for generating asset URLs.

@@ -2,7 +2,7 @@ module uim.baklava.errors;
 
 import uim.baklava.core.Configure;
 import uim.baklava.core.InstanceConfigTrait;
-import uim.baklava.Routing\Router;
+import uim.baklava.routings\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 use Throwable;

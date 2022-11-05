@@ -22,8 +22,8 @@ import uim.baklava.events\IEvent;
 import uim.baklava.https\Exception\ForbiddenException;
 import uim.baklava.https\Response;
 import uim.baklava.https\ServerRequest;
-import uim.baklava.Routing\Router;
-import uim.baklava.utikities.Hash;
+import uim.baklava.routings\Router;
+import uim.baklava.utilities.Hash;
 
 /**
  * Authentication control component class.

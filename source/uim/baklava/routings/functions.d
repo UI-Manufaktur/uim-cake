@@ -1,6 +1,6 @@
 
 
-import uim.baklava.Routing\Router;
+import uim.baklava.routings\Router;
 
 if (!function_exists('urlArray')) {
     /**

@@ -13,7 +13,7 @@ import uim.baklava.https\Response;
 import uim.baklava.https\ServerRequest;
 import uim.baklava.Log\LogTrait;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
-import uim.baklava.Routing\Router;
+import uim.baklava.routings\Router;
 import uim.baklava.views\ViewVarsTrait;
 use Closure;
 use Psr\Http\Message\IResponse;
