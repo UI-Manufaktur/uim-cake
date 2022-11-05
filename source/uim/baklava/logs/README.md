@@ -17,7 +17,7 @@ You can define as many or as few loggers as your application needs. Loggers
 should be configured using `Cake\Core\Log.` An example would be:
 
 ```php
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 
 import uim.baklava.Log\Log;
 

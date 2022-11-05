@@ -1,9 +1,9 @@
 module uim.baklava.command;
 
-import uim.baklava.cache\Cache;
-import uim.baklava.cache\Engine\ApcuEngine;
-import uim.baklava.cache\Engine\WincacheEngine;
-import uim.baklava.cache\InvalidArgumentException;
+import uim.baklava.caches\Cache;
+import uim.baklava.caches\Engine\ApcuEngine;
+import uim.baklava.caches\Engine\WincacheEngine;
+import uim.baklava.caches\InvalidArgumentException;
 import uim.baklava.console.Arguments;
 import uim.baklava.console.consoleIo;
 import uim.baklava.console.consoleOptionParser;

@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.https\Session;
 
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 use InvalidArgumentException;
 use SessionHandlerInterface;
 

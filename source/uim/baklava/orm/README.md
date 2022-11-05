@@ -153,7 +153,7 @@ It is recommended to enable metadata cache for production systems to avoid perfo
 For e.g. file system strategy your bootstrap file could look like this:
 
 ```php
-import uim.baklava.cache\Engine\FileEngine;
+import uim.baklava.caches\Engine\FileEngine;
 
 $cacheConfig = [
    'className' => FileEngine::class,

@@ -1,4 +1,4 @@
-module uim.baklava.cache;
+module uim.baklava.caches;
 
 use BadMethodCallException;
 import uim.baklava.core.App;
@@ -65,7 +65,7 @@ class CacheRegistry : ObjectRegistry
 
         if (!($instance instanceof CacheEngine)) {
             throw new RuntimeException(
-                'Cache engines must import uim.baklava.cache\CacheEngine as a base class.'
+                'Cache engines must import uim.baklava.caches\CacheEngine as a base class.'
             );
         }
 

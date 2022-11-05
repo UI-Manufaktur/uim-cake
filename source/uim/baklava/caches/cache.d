@@ -1,6 +1,6 @@
-module uim.baklava.cache;
+module uim.baklava.caches;
 
-import uim.baklava.cache\Engine\NullEngine;
+import uim.baklava.caches\Engine\NullEngine;
 import uim.baklava.core.StaticConfigTrait;
 use RuntimeException;
 

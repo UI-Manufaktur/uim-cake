@@ -150,12 +150,12 @@ class CommandRunner : IEventDispatcher
         }
 
         myResult = ICommand::CODE_ERROR;
-        $shell = this.getCommand($io, $commands, myName);
-        if ($shell instanceof Shell) {
-            myResult = this.runShell($shell, $argv);
+        myShell = this.getCommand($io, $commands, myName);
+        if (myShell instanceof Shell) {
+            myResult = this.runShell(myShell, $argv);
         }
-        if ($shell instanceof ICommand) {
-            myResult = this.runCommand($shell, $argv, $io);
+        if (myShell instanceof ICommand) {
+            myResult = this.runCommand(myShell, $argv, $io);
         }
 
         if (myResult === null || myResult === true) {
@@ -322,15 +322,15 @@ class CommandRunner : IEventDispatcher
     /**
      * Execute a Shell class.
      *
-     * @param \Cake\Console\Shell $shell The shell to run.
+     * @param \Cake\Console\Shell myShell The shell to run.
      * @param array $argv The CLI arguments to invoke.
      * @return int|bool|null Exit code
      */
-    protected auto runShell(Shell $shell, array $argv) {
+    protected auto runShell(Shell myShell, array $argv) {
         try {
-            $shell.initialize();
+            myShell.initialize();
 
-            return $shell.runCommand($argv, true);
+            return myShell.runCommand($argv, true);
         } catch (StopException $e) {
             return $e.getCode();
         }
@@ -352,12 +352,12 @@ class CommandRunner : IEventDispatcher
             this.factory = new CommandFactory(myContainer);
         }
 
-        $shell = this.factory.create(myClassName);
-        if ($shell instanceof Shell) {
-            $shell.setIo($io);
+        myShell = this.factory.create(myClassName);
+        if (myShell instanceof Shell) {
+            myShell.setIo($io);
         }
 
-        return $shell;
+        return myShell;
     }
 
     /**

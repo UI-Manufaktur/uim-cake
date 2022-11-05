@@ -5,7 +5,7 @@ module uim.baklava.views;
 @safe:
 import uim.baklava;
 
-/* import uim.baklava.cache\Cache;
+/* import uim.baklava.caches\Cache;
 import uim.baklava.core.App;
 import uim.baklava.core.InstanceConfigTrait;
 import uim.baklava.core.Plugin;

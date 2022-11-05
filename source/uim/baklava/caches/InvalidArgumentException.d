@@ -11,7 +11,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.cache;
+ */module uim.baklava.caches;
 
 import uim.baklava.core.exceptions\CakeException;
 use Psr\SimpleCache\InvalidArgumentException as InvalidArgumentInterface;

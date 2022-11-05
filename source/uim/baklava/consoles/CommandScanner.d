@@ -77,9 +77,9 @@ class CommandScanner
         $prefix = Inflector::underscore(myPlugin) . '.';
 
         $commands = this.scanDir(myPath . 'Command', $module . '\Command\\', $prefix, []);
-        $shells = this.scanDir(myPath . 'Shell', $module . '\Shell\\', $prefix, []);
+        myShells = this.scanDir(myPath . 'Shell', $module . '\Shell\\', $prefix, []);
 
-        return array_merge($shells, $commands);
+        return array_merge(myShells, $commands);
     }
 
     /**
@@ -106,7 +106,7 @@ class CommandScanner
         /** @var array<\SplFileInfo> myfiles */
         myfiles = $fs.find(myPath, myClassPattern);
 
-        $shells = [];
+        myShells = [];
         foreach (myfiles as myfileInfo) {
             myfile = myfileInfo.getFilename();
 
@@ -126,7 +126,7 @@ class CommandScanner
             if (is_subclass_of(myClass, BaseCommand::class)) {
                 myName = myClass::defaultName();
             }
-            $shells[myPath . myfile] = [
+            myShells[myPath . myfile] = [
                 'file' => myPath . myfile,
                 'fullName' => $prefix . myName,
                 'name' => myName,
@@ -134,8 +134,8 @@ class CommandScanner
             ];
         }
 
-        ksort($shells);
+        ksort(myShells);
 
-        return array_values($shells);
+        return array_values(myShells);
     }
 }

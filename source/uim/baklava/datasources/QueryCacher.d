@@ -1,6 +1,6 @@
 module uim.baklava.Datasource;
 
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 use Closure;
 use Psr\SimpleCache\ICache;
 use RuntimeException;

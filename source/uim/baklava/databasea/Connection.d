@@ -1,6 +1,6 @@
 module uim.baklava.database;
 
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 import uim.baklava.core.App;
 import uim.baklava.core.Retry\CommandRetry;
 import uim.baklava.database.Exception\MissingConnectionException;

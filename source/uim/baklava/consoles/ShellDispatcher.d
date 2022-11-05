@@ -188,29 +188,29 @@ class ShellDispatcher
      * @throws \Cake\Console\Exception\MissingShellMethodException
      */
     protected auto _dispatch(array $extra = []) {
-        $shellName = this.shiftArgs();
+        myShellName = this.shiftArgs();
 
-        if (!$shellName) {
+        if (!myShellName) {
             this.help();
 
             return false;
         }
-        if (in_array($shellName, ['help', '--help', '-h'], true)) {
+        if (in_array(myShellName, ['help', '--help', '-h'], true)) {
             this.help();
 
             return true;
         }
-        if (in_array($shellName, ['version', '--version'], true)) {
+        if (in_array(myShellName, ['version', '--version'], true)) {
             this.version();
 
             return true;
         }
 
-        $shell = this.findShell($shellName);
+        myShell = this.findShell(myShellName);
 
-        $shell.initialize();
+        myShell.initialize();
 
-        return $shell.runCommand(this.args, true, $extra);
+        return myShell.runCommand(this.args, true, $extra);
     }
 
     /**
@@ -237,51 +237,51 @@ class ShellDispatcher
                 continue;
             }
 
-            foreach ($list[myPlugin] as $shell) {
-                myAliases += [$shell => myPlugin];
-                if (!isset($others[$shell])) {
-                    $others[$shell] = [myPlugin];
+            foreach ($list[myPlugin] as myShell) {
+                myAliases += [myShell => myPlugin];
+                if (!isset($others[myShell])) {
+                    $others[myShell] = [myPlugin];
                 } else {
-                    $others[$shell] = array_merge($others[$shell], [myPlugin]);
+                    $others[myShell] = array_merge($others[myShell], [myPlugin]);
                 }
             }
         }
 
-        foreach (myAliases as $shell => myPlugin) {
-            if (isset($fixed[$shell])) {
+        foreach (myAliases as myShell => myPlugin) {
+            if (isset($fixed[myShell])) {
                 Log::write(
                     'debug',
-                    "command '$shell' in plugin 'myPlugin' was not aliased, conflicts with another shell",
+                    "command 'myShell' in plugin 'myPlugin' was not aliased, conflicts with another shell",
                     ['shell-dispatcher']
                 );
                 continue;
             }
 
-            $other = static::alias($shell);
+            $other = static::alias(myShell);
             if ($other) {
                 if ($other !== myPlugin) {
                     Log::write(
                         'debug',
-                        "command '$shell' in plugin 'myPlugin' was not aliased, conflicts with '$other'",
+                        "command 'myShell' in plugin 'myPlugin' was not aliased, conflicts with '$other'",
                         ['shell-dispatcher']
                     );
                 }
                 continue;
             }
 
-            if (isset($others[$shell])) {
-                $conflicts = array_diff($others[$shell], [myPlugin]);
+            if (isset($others[myShell])) {
+                $conflicts = array_diff($others[myShell], [myPlugin]);
                 if (count($conflicts) > 0) {
                     $conflictList = implode("', '", $conflicts);
                     Log::write(
                         'debug',
-                        "command '$shell' in plugin 'myPlugin' was not aliased, conflicts with '$conflictList'",
+                        "command 'myShell' in plugin 'myPlugin' was not aliased, conflicts with '$conflictList'",
                         ['shell-dispatcher']
                     );
                 }
             }
 
-            static::alias($shell, "myPlugin.$shell");
+            static::alias(myShell, "myPlugin.myShell");
         }
 
         return static::$_aliases;
@@ -293,40 +293,40 @@ class ShellDispatcher
      * All paths in the loaded shell paths are searched, handles alias
      * dereferencing
      *
-     * @param string $shell Optionally the name of a plugin
+     * @param string myShell Optionally the name of a plugin
      * @return \Cake\Console\Shell A shell instance.
      * @throws \Cake\Console\Exception\MissingShellException when errors are encountered.
      */
-    function findShell(string $shell): Shell
+    function findShell(string myShell): Shell
     {
-        myClassName = this._shellExists($shell);
+        myClassName = this._shellExists(myShell);
         if (!myClassName) {
-            $shell = this._handleAlias($shell);
-            myClassName = this._shellExists($shell);
+            myShell = this._handleAlias(myShell);
+            myClassName = this._shellExists(myShell);
         }
 
         if (!myClassName) {
             throw new MissingShellException([
-                'class' => $shell,
+                'class' => myShell,
             ]);
         }
 
-        return this._createShell(myClassName, $shell);
+        return this._createShell(myClassName, myShell);
     }
 
     /**
      * If the input matches an alias, return the aliased shell name
      *
-     * @param string $shell Optionally the name of a plugin or alias
+     * @param string myShell Optionally the name of a plugin or alias
      * @return string Shell name with plugin prefix
      */
-    protected string _handleAlias(string $shell) {
-        myAliased = static::alias($shell);
+    protected string _handleAlias(string myShell) {
+        myAliased = static::alias(myShell);
         if (myAliased) {
-            $shell = myAliased;
+            myShell = myAliased;
         }
 
-        myClass = array_map('Cake\Utility\Inflector::camelize', explode('.', $shell));
+        myClass = array_map('Cake\Utility\Inflector::camelize', explode('.', myShell));
 
         return implode('.', myClass);
     }
@@ -334,11 +334,11 @@ class ShellDispatcher
     /**
      * Check if a shell class exists for the given name.
      *
-     * @param string $shell The shell name to look for.
+     * @param string myShell The shell name to look for.
      * @return string|null Either the classname or null.
      */
-    protected string _shellExists(string $shell) {
-        myClass = App::className($shell, 'Shell', 'Shell');
+    protected string _shellExists(string myShell) {
+        myClass = App::className(myShell, 'Shell', 'Shell');
         if (myClass) {
             return myClass;
         }

@@ -153,8 +153,8 @@ class CompletionCommand : Command : ICommandCollectionAware
                 myValue = $reflection.newInstance();
             }
             if (myValue instanceof Shell) {
-                $shellCommands = this.shellSubcommands(myValue);
-                myOptions = array_merge(myOptions, $shellCommands);
+                myShellCommands = this.shellSubcommands(myValue);
+                myOptions = array_merge(myOptions, myShellCommands);
             }
         }
         myOptions = array_unique(myOptions);
@@ -166,15 +166,15 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * Reflect the subcommands names out of a shell.
      *
-     * @param \Cake\Console\Shell $shell The shell to get commands for
+     * @param \Cake\Console\Shell myShell The shell to get commands for
      * @return array<string> A list of commands
      */
-    protected auto shellSubcommands(Shell $shell): array
+    protected auto shellSubcommands(Shell myShell): array
     {
-        $shell.initialize();
-        $shell.loadTasks();
+        myShell.initialize();
+        myShell.loadTasks();
 
-        $optionParser = $shell.getOptionParser();
+        $optionParser = myShell.getOptionParser();
         $subcommands = $optionParser.subcommands();
 
         $output = array_keys($subcommands);
@@ -184,17 +184,17 @@ class CompletionCommand : Command : ICommandCollectionAware
         if (count($subcommands) === 0) {
             /** @psalm-suppress DeprecatedClass */
             $coreShellReflection = new ReflectionClass(Shell::class);
-            $reflection = new ReflectionClass($shell);
+            $reflection = new ReflectionClass(myShell);
             foreach ($reflection.getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
                 if (
-                    $shell.hasMethod($method.getName())
+                    myShell.hasMethod($method.getName())
                     && !$coreShellReflection.hasMethod($method.getName())
                 ) {
                     $output[] = $method.getName();
                 }
             }
         }
-        $taskNames = array_map('Cake\Utility\Inflector::underscore', $shell.taskNames);
+        $taskNames = array_map('Cake\Utility\Inflector::underscore', myShell.taskNames);
         $output = array_merge($output, $taskNames);
 
         return array_unique($output);

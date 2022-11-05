@@ -22,10 +22,10 @@ class TaskRegistry : ObjectRegistry
     /**
      * Constructor
      *
-     * @param \Cake\Console\Shell $shell Shell instance
+     * @param \Cake\Console\Shell myShell Shell instance
      */
-    this(Shell $shell) {
-        this._Shell = $shell;
+    this(Shell myShell) {
+        this._Shell = myShell;
     }
 
     /**

@@ -1,7 +1,7 @@
 module uim.baklava.views;
 
 use BadMethodCallException;
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 import uim.baklava.Datasource\ModelAwareTrait;
 import uim.baklava.events\IEventDispatcher;
 import uim.baklava.events\EventDispatcherTrait;

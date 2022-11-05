@@ -1,4 +1,4 @@
-module uim.baklava.cache;
+module uim.baklava.caches;
 
 import uim.baklava.core.InstanceConfigTrait;
 use DateInterval;

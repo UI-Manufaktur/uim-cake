@@ -1,6 +1,6 @@
 module uim.baklava.I18n;
 
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 import uim.baklava.I18n\Exception\I18nException;
 import uim.baklava.I18n\Formatter\IcuFormatter;
 import uim.baklava.I18n\Formatter\SprintfFormatter;

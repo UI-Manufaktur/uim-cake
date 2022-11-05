@@ -17,7 +17,7 @@ The caching backends supported are:
 Caching engines need to be configured with the `Cache::config()` method.
 
 ```php
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 
 // Using a short name
 Cache::config('default', [

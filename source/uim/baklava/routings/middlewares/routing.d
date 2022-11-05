@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.routings.middlewares;
 
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 import uim.baklava.core.PluginApplicationInterface;
 import uim.baklava.https\Exception\RedirectException;
 import uim.baklava.https\MiddlewareQueue;

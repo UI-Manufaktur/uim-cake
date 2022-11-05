@@ -153,9 +153,9 @@ class CommandCollection : IteratorAggregate, Countable
     function discoverPlugin(string myPlugin): array
     {
         $scanner = new CommandScanner();
-        $shells = $scanner.scanPlugin(myPlugin);
+        myShells = $scanner.scanPlugin(myPlugin);
 
-        return this.resolveNames($shells);
+        return this.resolveNames(myShells);
     }
 
     /**

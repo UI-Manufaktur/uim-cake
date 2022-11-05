@@ -1,6 +1,6 @@
-module uim.baklava.cache\Engine;
+module uim.baklava.caches\Engine;
 
-import uim.baklava.cache\CacheEngine;
+import uim.baklava.caches\CacheEngine;
 
 /**
  * Null cache engine, all operations appear to work, but do nothing.

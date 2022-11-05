@@ -8,9 +8,9 @@
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.baklava.cache\Engine;
+module uim.baklava.caches\Engine;
 
-import uim.baklava.cache\CacheEngine;
+import uim.baklava.caches\CacheEngine;
 import uim.baklava.Log\Log;
 use Redis;
 use RedisException;

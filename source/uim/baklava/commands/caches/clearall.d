@@ -1,6 +1,6 @@
 module uim.baklava.command;
 
-import uim.baklava.cache\Cache;
+import uim.baklava.caches\Cache;
 import uim.baklava.console.Arguments;
 import uim.baklava.console.consoleIo;
 import uim.baklava.console.consoleOptionParser;

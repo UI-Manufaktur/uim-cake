@@ -170,19 +170,19 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      */
     protected auto asXml(ConsoleIo $io, iterable $commands): void
     {
-        $shells = new SimpleXMLElement('<shells></shells>');
+        myShells = new SimpleXMLElement('<shells></shells>');
         foreach ($commands as myName => myClass) {
             if (is_object(myClass)) {
                 myClass = get_class(myClass);
             }
-            $shell = $shells.addChild('shell');
-            $shell.addAttribute('name', myName);
-            $shell.addAttribute('call_as', myName);
-            $shell.addAttribute('provider', myClass);
-            $shell.addAttribute('help', myName . ' -h');
+            myShell = myShells.addChild('shell');
+            myShell.addAttribute('name', myName);
+            myShell.addAttribute('call_as', myName);
+            myShell.addAttribute('provider', myClass);
+            myShell.addAttribute('help', myName . ' -h');
         }
         $io.setOutputAs(ConsoleOutput::RAW);
-        $io.out($shells.saveXML());
+        $io.out(myShells.saveXML());
     }
 
     /**
