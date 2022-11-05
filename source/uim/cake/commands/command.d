@@ -1,11 +1,11 @@
-module uim.cake.command;
+module uim.baklava.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.BaseCommand;
-import uim.cake.console.consoleIo;
-import uim.cake.Datasource\ModelAwareTrait;
-import uim.cake.Log\LogTrait;
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.baklava.console.Arguments;
+import uim.baklava.console.BaseCommand;
+import uim.baklava.console.consoleIo;
+import uim.baklava.Datasource\ModelAwareTrait;
+import uim.baklava.Log\LogTrait;
+import uim.baklava.orm.Locator\LocatorAwareTrait;
 
 /**
  * Base class for commands using the full stack

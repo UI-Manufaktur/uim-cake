@@ -1,10 +1,10 @@
-module uim.cake.command;
+module uim.baklava.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.cake.databases.SchemaCache;
-import uim.cake.Datasource\ConnectionManager;
+import uim.baklava.console.Arguments;
+import uim.baklava.console.consoleIo;
+import uim.baklava.console.consoleOptionParser;
+import uim.baklava.databases.SchemaCache;
+import uim.baklava.Datasource\ConnectionManager;
 use RuntimeException;
 
 /**

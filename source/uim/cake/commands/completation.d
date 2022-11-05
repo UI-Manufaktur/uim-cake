@@ -1,12 +1,12 @@
-module uim.cake.command;
+module uim.baklava.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.commandCollection;
-import uim.cake.console.commandCollectionAwareInterface;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.cake.console.Shell;
-import uim.cake.utikities.Inflector;
+import uim.baklava.console.Arguments;
+import uim.baklava.console.commandCollection;
+import uim.baklava.console.commandCollectionAwareInterface;
+import uim.baklava.console.consoleIo;
+import uim.baklava.console.consoleOptionParser;
+import uim.baklava.console.Shell;
+import uim.baklava.utikities.Inflector;
 use ReflectionClass;
 use ReflectionMethod;
 

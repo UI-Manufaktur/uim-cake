@@ -1,8 +1,8 @@
-module uim.cake.collections.iterators;
+module uim.baklava.collections.iterators;
 
 use ArrayIterator;
-import uim.cake.collection\Collection;
-import uim.cake.collection\ICollection;
+import uim.baklava.collection\Collection;
+import uim.baklava.collection\ICollection;
 use CallbackFilterIterator;
 use Iterator;
 use Traversable;

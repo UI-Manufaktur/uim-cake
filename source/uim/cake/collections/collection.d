@@ -1,4 +1,4 @@
-module uim.cake.collection;
+module uim.baklava.collection;
 
 use ArrayIterator;
 use IteratorIterator;
