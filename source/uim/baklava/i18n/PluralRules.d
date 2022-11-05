@@ -1,6 +1,6 @@
 module uim.baklava.I18n;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 use Locale;
 
 /**
