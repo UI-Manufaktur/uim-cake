@@ -177,10 +177,10 @@ class Folder
      */
     function read($sort = self::SORT_NAME, myExceptions = false, bool $fullPath = false): array
     {
-        $dirs = $files = [];
+        $dirs = myfiles = [];
 
         if (!this.pwd()) {
-            return [$dirs, $files];
+            return [$dirs, myfiles];
         }
         if (is_array(myExceptions)) {
             myExceptions = array_flip(myExceptions);
@@ -190,7 +190,7 @@ class Folder
         try {
             $iterator = new DirectoryIterator(this.path);
         } catch (Exception $e) {
-            return [$dirs, $files];
+            return [$dirs, myfiles];
         }
 
         if (!is_bool($sort) && isset(this._fsorts[$sort])) {
@@ -214,24 +214,24 @@ class Folder
             if ($item.isDir()) {
                 $dirs[$item.{$methodName}()][] = myName;
             } else {
-                $files[$item.{$methodName}()][] = myName;
+                myfiles[$item.{$methodName}()][] = myName;
             }
         }
 
         if ($sort || this.sort) {
             ksort($dirs);
-            ksort($files);
+            ksort(myfiles);
         }
 
         if ($dirs) {
             $dirs = array_merge(...array_values($dirs));
         }
 
-        if ($files) {
-            $files = array_merge(...array_values($files));
+        if (myfiles) {
+            myfiles = array_merge(...array_values(myfiles));
         }
 
-        return [$dirs, $files];
+        return [$dirs, myfiles];
     }
 
     /**
@@ -243,9 +243,9 @@ class Folder
      */
     function find(string $regexpPattern = '.*', $sort = false): array
     {
-        [, $files] = this.read($sort);
+        [, myfiles] = this.read($sort);
 
-        return array_values(preg_grep('/^' . $regexpPattern . '$/i', $files));
+        return array_values(preg_grep('/^' . $regexpPattern . '$/i', myfiles));
     }
 
     /**
@@ -276,12 +276,12 @@ class Folder
      */
     protected auto _findRecursive(string $pattern, bool $sort = false): array
     {
-        [$dirs, $files] = this.read($sort);
+        [$dirs, myfiles] = this.read($sort);
         $found = [];
 
-        foreach ($files as $file) {
-            if (preg_match('/^' . $pattern . '$/i', $file)) {
-                $found[] = Folder::addPathElement(this.path, $file);
+        foreach (myfiles as myfile) {
+            if (preg_match('/^' . $pattern . '$/i', myfile)) {
+                $found[] = Folder::addPathElement(this.path, myfile);
             }
         }
         $start = this.path;
@@ -519,7 +519,7 @@ class Folder
         if (!myPath) {
             myPath = this.path;
         }
-        $files = [];
+        myfiles = [];
         $directories = [myPath];
 
         if (is_array(myExceptions)) {
@@ -569,7 +569,7 @@ class Folder
             }
 
             if ($item.isFile()) {
-                $files[] = $itemPath;
+                myfiles[] = $itemPath;
             } elseif ($item.isDir() && !$item.isDot()) {
                 $directories[] = $itemPath;
             }
@@ -583,13 +583,13 @@ class Folder
         unset($directory, $iterator);
 
         if (myType === null) {
-            return [$directories, $files];
+            return [$directories, myfiles];
         }
         if (myType === 'dir') {
             return $directories;
         }
 
-        return $files;
+        return myfiles;
     }
 
     /**
@@ -706,22 +706,22 @@ class Folder
             }
 
             foreach ($iterator as $item) {
-                $filePath = $item.getPathname();
+                myfilePath = $item.getPathname();
                 if ($item.isFile() || $item.isLink()) {
                     // phpcs:disable
-                    if (@unlink($filePath)) {
+                    if (@unlink(myfilePath)) {
                         // phpcs:enable
-                        this._messages[] = sprintf('%s removed', $filePath);
+                        this._messages[] = sprintf('%s removed', myfilePath);
                     } else {
-                        this._errors[] = sprintf('%s NOT removed', $filePath);
+                        this._errors[] = sprintf('%s NOT removed', myfilePath);
                     }
                 } elseif ($item.isDir() && !$item.isDot()) {
                     // phpcs:disable
-                    if (@rmdir($filePath)) {
+                    if (@rmdir(myfilePath)) {
                         // phpcs:enable
-                        this._messages[] = sprintf('%s removed', $filePath);
+                        this._messages[] = sprintf('%s removed', myfilePath);
                     } else {
-                        this._errors[] = sprintf('%s NOT removed', $filePath);
+                        this._errors[] = sprintf('%s NOT removed', myfilePath);
 
                         unset($directory, $iterator, $item);
 

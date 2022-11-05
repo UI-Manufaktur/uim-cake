@@ -164,8 +164,8 @@ class I18n
      *  import uim.cake.I18n\MessagesFileLoader;
      *  I18n::config('my_domain', function (myName, $locale) {
      *      // Load resources/locales/$locale/filename.po
-     *      $fileLoader = new MessagesFileLoader('filename', $locale, 'po');
-     *      return $fileLoader();
+     *      myfileLoader = new MessagesFileLoader('filename', $locale, 'po');
+     *      return myfileLoader();
      *  });
      * ```
      *

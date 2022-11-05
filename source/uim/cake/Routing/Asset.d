@@ -229,17 +229,17 @@ class Asset
         }
         $timestampEnabled = $timestamp === 'force' || ($timestamp === true && Configure::read('debug'));
         if ($timestampEnabled) {
-            $filepath = preg_replace(
+            myfilepath = preg_replace(
                 '/^' . preg_quote(static::requestWebroot(), '/') . '/',
                 '',
                 urldecode(myPath)
             );
-            $webrootPath = Configure::read('App.wwwRoot') . str_replace('/', DIRECTORY_SEPARATOR, $filepath);
+            $webrootPath = Configure::read('App.wwwRoot') . str_replace('/', DIRECTORY_SEPARATOR, myfilepath);
             if (is_file($webrootPath)) {
                 return myPath . '?' . filemtime($webrootPath);
             }
             // Check for plugins and org prefixed plugins.
-            $segments = explode('/', ltrim($filepath, '/'));
+            $segments = explode('/', ltrim(myfilepath, '/'));
             myPlugin = Inflector::camelize($segments[0]);
             if (!Plugin::isLoaded(myPlugin) && count($segments) > 1) {
                 myPlugin = implode('/', [myPlugin, Inflector::camelize($segments[1])]);
@@ -267,34 +267,34 @@ class Asset
      *
      * - `theme` Optional theme name
      *
-     * @param string $file The file to create a webroot path to.
+     * @param string myfile The file to create a webroot path to.
      * @param array<string, mixed> myOptions Options array.
      * @return string Web accessible path to file.
      */
-    static function webroot(string $file, array myOptions = []): string
+    static function webroot(string myfile, array myOptions = []): string
     {
         myOptions += ['theme' => null];
         myRequestWebroot = static::requestWebroot();
 
-        $asset = explode('?', $file);
+        $asset = explode('?', myfile);
         $asset[1] = isset($asset[1]) ? '?' . $asset[1] : '';
         $webPath = myRequestWebroot . $asset[0];
-        $file = $asset[0];
+        myfile = $asset[0];
 
         $themeName = myOptions['theme'];
         if ($themeName) {
-            $file = trim($file, '/');
+            myfile = trim(myfile, '/');
             $theme = static::inflectString($themeName) . '/';
 
             if (DIRECTORY_SEPARATOR === '\\') {
-                $file = str_replace('/', '\\', $file);
+                myfile = str_replace('/', '\\', myfile);
             }
 
-            if (is_file(Configure::read('App.wwwRoot') . $theme . $file)) {
+            if (is_file(Configure::read('App.wwwRoot') . $theme . myfile)) {
                 $webPath = myRequestWebroot . $theme . $asset[0];
             } else {
                 $themePath = Plugin::path($themeName);
-                myPath = $themePath . 'webroot/' . $file;
+                myPath = $themePath . 'webroot/' . myfile;
                 if (is_file(myPath)) {
                     $webPath = myRequestWebroot . $theme . $asset[0];
                 }

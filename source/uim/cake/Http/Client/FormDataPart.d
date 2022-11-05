@@ -135,15 +135,15 @@ class FormDataPart
      * Setting the filename to `false` will exclude it from the
      * generated output.
      *
-     * @param string|null $filename Use null to get/string to set.
+     * @param string|null myfilename Use null to get/string to set.
      * @return string|null
      */
-    string filename(?string $filename = null) {
-        if ($filename === null) {
+    string filename(?string myfilename = null) {
+        if (myfilename === null) {
             return this._filename;
         }
 
-        return this._filename = $filename;
+        return this._filename = myfilename;
     }
 
     /**

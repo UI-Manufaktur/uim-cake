@@ -56,10 +56,10 @@ class ResponseEmitter : EmitterInterface
      */
     bool emit(IResponse $response)
     {
-        $file = '';
+        myfile = '';
         $line = 0;
-        if (headers_sent($file, $line)) {
-            myMessage = "Unable to emit headers. Headers sent in file=$file line=$line";
+        if (headers_sent(myfile, $line)) {
+            myMessage = "Unable to emit headers. Headers sent in file=myfile line=$line";
             trigger_error(myMessage, E_USER_WARNING);
         }
 

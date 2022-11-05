@@ -1,16 +1,4 @@
-
-
-/**
-
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @since         4.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.TestSuite\Fixture;
+module uim.cake.TestSuite\Fixture;
 
 import uim.cake.databases.Schema\TableSchema;
 import uim.cake.Datasource\ConnectionManager;
@@ -57,7 +45,7 @@ class SchemaLoader
         bool $dropTables = true,
         bool $truncateTables = false
     ): void {
-        $files = (array)myPaths;
+        myfiles = (array)myPaths;
 
         // Don't create schema if we are in a phpunit separate process test method.
         if (isset($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {
@@ -70,11 +58,11 @@ class SchemaLoader
 
         /** @var \Cake\Database\Connection myConnection */
         myConnection = ConnectionManager::get(myConnectionName);
-        foreach ($files as $file) {
-            if (!file_exists($file)) {
-                throw new InvalidArgumentException("Unable to load SQL file `$file`.");
+        foreach (myfiles as myfile) {
+            if (!file_exists(myfile)) {
+                throw new InvalidArgumentException("Unable to load SQL file `myfile`.");
             }
-            mySql = file_get_contents($file);
+            mySql = file_get_contents(myfile);
 
             // Use the underlying PDO connection so we can avoid prepared statements
             // which don't support multiple queries in postgres.
@@ -90,12 +78,12 @@ class SchemaLoader
     /**
      * Load and apply CakePHP-specific schema file.
      *
-     * @param string $file Schema file
+     * @param string myfile Schema file
      * @param string myConnectionName Connection name
      * @return void
      * @internal
      */
-    function loadInternalFile(string $file, string myConnectionName = 'test'): void
+    function loadInternalFile(string myfile, string myConnectionName = 'test'): void
     {
         // Don't reload schema when we are in a separate process state.
         if (isset($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {
@@ -104,7 +92,7 @@ class SchemaLoader
 
         this.helper.dropTables(myConnectionName);
 
-        myTables = include $file;
+        myTables = include myfile;
 
         myConnection = ConnectionManager::get(myConnectionName);
         myConnection.disableConstraints(function (myConnection) use (myTables) {

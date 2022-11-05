@@ -69,9 +69,9 @@ class AssetMiddleware : MiddlewareInterface
             return $handler.handle(myRequest);
         }
 
-        $file = new SplFileInfo($assetFile);
-        $modifiedTime = $file.getMTime();
-        if (this.isNotModified(myRequest, $file)) {
+        myfile = new SplFileInfo($assetFile);
+        $modifiedTime = myfile.getMTime();
+        if (this.isNotModified(myRequest, myfile)) {
             return (new Response())
                 .withStringBody('')
                 .withStatus(304)
@@ -81,24 +81,24 @@ class AssetMiddleware : MiddlewareInterface
                 );
         }
 
-        return this.deliverAsset(myRequest, $file);
+        return this.deliverAsset(myRequest, myfile);
     }
 
     /**
      * Check the not modified header.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to check.
-     * @param \SplFileInfo $file The file object to compare.
+     * @param \SplFileInfo myfile The file object to compare.
      * @return bool
      */
-    protected auto isNotModified(IServerRequest myRequest, SplFileInfo $file): bool
+    protected auto isNotModified(IServerRequest myRequest, SplFileInfo myfile): bool
     {
         $modifiedSince = myRequest.getHeaderLine('If-Modified-Since');
         if (!$modifiedSince) {
             return false;
         }
 
-        return strtotime($modifiedSince) === $file.getMTime();
+        return strtotime($modifiedSince) === myfile.getMTime();
     }
 
     /**
@@ -119,10 +119,10 @@ class AssetMiddleware : MiddlewareInterface
             myPlugin = implode('/', myPluginPart);
             if (Plugin::isLoaded(myPlugin)) {
                 $parts = array_slice($parts, $i + 1);
-                $fileFragment = implode(DIRECTORY_SEPARATOR, $parts);
+                myfileFragment = implode(DIRECTORY_SEPARATOR, $parts);
                 myPluginWebroot = Plugin::path(myPlugin) . 'webroot' . DIRECTORY_SEPARATOR;
 
-                return myPluginWebroot . $fileFragment;
+                return myPluginWebroot . myfileFragment;
             }
         }
 
@@ -133,17 +133,17 @@ class AssetMiddleware : MiddlewareInterface
      * Sends an asset file to the client
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request object to use.
-     * @param \SplFileInfo $file The file wrapper for the file.
+     * @param \SplFileInfo myfile The file wrapper for the file.
      * @return \Cake\Http\Response The response with the file & headers.
      */
-    protected auto deliverAsset(IServerRequest myRequest, SplFileInfo $file): Response
+    protected auto deliverAsset(IServerRequest myRequest, SplFileInfo myfile): Response
     {
-        $stream = new Stream(fopen($file.getPathname(), 'rb'));
+        $stream = new Stream(fopen(myfile.getPathname(), 'rb'));
 
         $response = new Response(['stream' => $stream]);
 
-        myContentsType = $response.getMimeType($file.getExtension()) ?: 'application/octet-stream';
-        $modified = $file.getMTime();
+        myContentsType = $response.getMimeType(myfile.getExtension()) ?: 'application/octet-stream';
+        $modified = myfile.getMTime();
         $expire = strtotime(this.cacheTime);
         $maxAge = $expire - time();
 

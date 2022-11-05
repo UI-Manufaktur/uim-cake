@@ -25,7 +25,7 @@ class RuleInvoker
      *
      * @var string|null
      */
-    protected myName;
+    protected string myName;
 
     /**
      * Rule options

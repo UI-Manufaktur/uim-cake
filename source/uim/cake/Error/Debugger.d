@@ -280,11 +280,11 @@ class Debugger
     /**
      * Get a formatted URL for the active editor.
      *
-     * @param string $file The file to create a link for.
+     * @param string myfile The file to create a link for.
      * @param int $line The line number to create a link for.
      * @return string The formatted URL.
      */
-    static function editorUrl(string $file, int $line): string
+    static function editorUrl(string myfile, int $line): string
     {
         $instance = static::getInstance();
         $editor = $instance.getConfig('editor');
@@ -294,10 +294,10 @@ class Debugger
 
         myTemplate = $instance.editors[$editor];
         if (is_string(myTemplate)) {
-            return str_replace(['{file}', '{line}'], [$file, (string)$line], myTemplate);
+            return str_replace(['{file}', '{line}'], [myfile, (string)$line], myTemplate);
         }
 
-        return myTemplate($file, $line);
+        return myTemplate(myfile, $line);
     }
 
     /**
@@ -482,20 +482,20 @@ class Debugger
      * are processed with highlight_string() as well, so they have basic PHP syntax highlighting
      * applied.
      *
-     * @param string $file Absolute path to a PHP file.
+     * @param string myfile Absolute path to a PHP file.
      * @param int $line Line number to highlight.
      * @param int $context Number of lines of context to extract above and below $line.
      * @return array<string> Set of lines highlighted
      * @see https://secure.php.net/highlight_string
      * @link https://book.cakephp.org/4/en/development/debugging.html#getting-an-excerpt-from-a-file
      */
-    static function excerpt(string $file, int $line, int $context = 2): array
+    static function excerpt(string myfile, int $line, int $context = 2): array
     {
         $lines = [];
-        if (!file_exists($file)) {
+        if (!file_exists(myfile)) {
             return [];
         }
-        myData = file_get_contents($file);
+        myData = file_get_contents(myfile);
         if (empty(myData)) {
             return $lines;
         }
@@ -901,16 +901,16 @@ class Debugger
         ];
         myData += $defaults;
 
-        $files = static::trace(['start' => myData['start'], 'format' => 'points']);
+        myfiles = static::trace(['start' => myData['start'], 'format' => 'points']);
         $code = '';
-        $file = null;
-        if (isset($files[0]['file'])) {
-            $file = $files[0];
-        } elseif (isset($files[1]['file'])) {
-            $file = $files[1];
+        myfile = null;
+        if (isset(myfiles[0]['file'])) {
+            myfile = myfiles[0];
+        } elseif (isset(myfiles[1]['file'])) {
+            myfile = myfiles[1];
         }
-        if ($file) {
-            $code = static::excerpt($file['file'], $file['line'], 1);
+        if (myfile) {
+            $code = static::excerpt(myfile['file'], myfile['line'], 1);
         }
         $trace = static::trace(['start' => myData['start'], 'depth' => '20']);
         $insertOpts = ['before' => '{:', 'after' => '}'];

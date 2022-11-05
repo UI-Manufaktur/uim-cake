@@ -122,12 +122,12 @@ class FileLog : BaseLog
         myMessage = this._format(myMessage, $context);
         myMessage = this.formatter.format($level, myMessage, $context);
 
-        $filename = this._getFilename($level);
+        myfilename = this._getFilename($level);
         if (this._size) {
-            this._rotateFile($filename);
+            this._rotateFile(myfilename);
         }
 
-        myPathname = this._path . $filename;
+        myPathname = this._path . myfilename;
         $mask = this._config['mask'];
         if (!$mask) {
             file_put_contents(myPathname, myMessage . "\n", FILE_APPEND);
@@ -160,51 +160,51 @@ class FileLog : BaseLog
         $debugTypes = ['notice', 'info', 'debug'];
 
         if (this._file) {
-            $filename = this._file;
+            myfilename = this._file;
         } elseif ($level === 'error' || $level === 'warning') {
-            $filename = 'error.log';
+            myfilename = 'error.log';
         } elseif (in_array($level, $debugTypes, true)) {
-            $filename = 'debug.log';
+            myfilename = 'debug.log';
         } else {
-            $filename = $level . '.log';
+            myfilename = $level . '.log';
         }
 
-        return $filename;
+        return myfilename;
     }
 
     /**
      * Rotate log file if size specified in config is reached.
      * Also if `rotate` count is reached oldest file is removed.
      *
-     * @param string $filename Log file name
+     * @param string myfilename Log file name
      * @return bool|null True if rotated successfully or false in case of error.
      *   Null if file doesn't need to be rotated.
      */
-    protected auto _rotateFile(string $filename): ?bool
+    protected auto _rotateFile(string myfilename): ?bool
     {
-        $filePath = this._path . $filename;
-        clearstatcache(true, $filePath);
+        myfilePath = this._path . myfilename;
+        clearstatcache(true, myfilePath);
 
         if (
-            !is_file($filePath) ||
-            filesize($filePath) < this._size
+            !is_file(myfilePath) ||
+            filesize(myfilePath) < this._size
         ) {
             return null;
         }
 
         $rotate = this._config['rotate'];
         if ($rotate === 0) {
-            myResult = unlink($filePath);
+            myResult = unlink(myfilePath);
         } else {
-            myResult = rename($filePath, $filePath . '.' . time());
+            myResult = rename(myfilePath, myfilePath . '.' . time());
         }
 
-        $files = glob($filePath . '.*');
-        if ($files) {
-            $filesToDelete = count($files) - $rotate;
-            while ($filesToDelete > 0) {
-                unlink(array_shift($files));
-                $filesToDelete--;
+        myfiles = glob(myfilePath . '.*');
+        if (myfiles) {
+            myfilesToDelete = count(myfiles) - $rotate;
+            while (myfilesToDelete > 0) {
+                unlink(array_shift(myfiles));
+                myfilesToDelete--;
             }
         }
 

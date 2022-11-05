@@ -495,7 +495,7 @@ class ServerRequest : IServerRequest
      * @param array $args Array of custom detector arguments.
      * @return bool Whether the request is the type you are checking.
      */
-    protected auto _is(string myType, array $args): bool
+    protected bool _is(string myType, array $args)
     {
         $detect = static::$_detectors[myType];
         if (is_callable($detect)) {
@@ -525,7 +525,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected auto _acceptHeaderDetector(array $detect): bool
+    protected bool _acceptHeaderDetector(array $detect)
     {
         $acceptHeaders = explode(',', (string)this.getEnv('HTTP_ACCEPT'));
         foreach ($detect['accept'] as $header) {
@@ -543,7 +543,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected auto _headerDetector(array $detect): bool
+    protected bool _headerDetector(array $detect)
     {
         foreach ($detect['header'] as $header => myValue) {
             $header = this.getEnv('http_' . $header);
@@ -565,7 +565,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected auto _paramDetector(array $detect): bool
+    protected bool _paramDetector(array $detect)
     {
         myKey = $detect['param'];
         if (isset($detect['value'])) {
@@ -586,7 +586,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected auto _environmentDetector(array $detect): bool
+    protected bool _environmentDetector(array $detect)
     {
         if (isset($detect['env'])) {
             if (isset($detect['value'])) {
@@ -616,7 +616,7 @@ class ServerRequest : IServerRequest
      * @return bool Success.
      * @see \Cake\Http\ServerRequest::is()
      */
-    function isAll(array myTypes): bool
+    bool isAll(array myTypes)
     {
         foreach (myTypes as myType) {
             if (!this.is(myType)) {
@@ -773,7 +773,7 @@ class ServerRequest : IServerRequest
      * @return bool Whether the header is defined.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function hasHeader(myName): bool
+    bool hasHeader(myName)
     {
         myName = this.normalizeHeaderName(myName);
 
@@ -1465,7 +1465,7 @@ class ServerRequest : IServerRequest
      * @return true
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    function allowMethod($methods): bool
+    bool allowMethod($methods)
     {
         $methods = (array)$methods;
         foreach ($methods as $method) {
@@ -1635,12 +1635,12 @@ class ServerRequest : IServerRequest
      */
     auto getUploadedFile(string myPath): ?UploadedFileInterface
     {
-        $file = Hash::get(this.uploadedFiles, myPath);
-        if (!$file instanceof UploadedFile) {
+        myfile = Hash::get(this.uploadedFiles, myPath);
+        if (!myfile instanceof UploadedFile) {
             return null;
         }
 
-        return $file;
+        return myfile;
     }
 
     /**
@@ -1658,7 +1658,7 @@ class ServerRequest : IServerRequest
      *
      * @param array $uploadedFiles An array of uploaded file objects.
      * @return static
-     * @throws \InvalidArgumentException when $files contains an invalid object.
+     * @throws \InvalidArgumentException when myfiles contains an invalid object.
      */
     function withUploadedFiles(array $uploadedFiles) {
         this.validateUploadedFiles($uploadedFiles, '');
@@ -1677,13 +1677,13 @@ class ServerRequest : IServerRequest
      * @throws \InvalidArgumentException If any leaf elements are not valid files.
      */
     protected void validateUploadedFiles(array $uploadedFiles, string myPath) {
-        foreach ($uploadedFiles as myKey => $file) {
-            if (is_array($file)) {
-                this.validateUploadedFiles($file, myKey . '.');
+        foreach ($uploadedFiles as myKey => myfile) {
+            if (is_array(myfile)) {
+                this.validateUploadedFiles(myfile, myKey . '.');
                 continue;
             }
 
-            if (!$file instanceof UploadedFileInterface) {
+            if (!myfile instanceof UploadedFileInterface) {
                 throw new InvalidArgumentException("Invalid file at '{myPath}{myKey}'");
             }
         }

@@ -4,7 +4,7 @@ import uim.cake.core.App;
 import uim.cake.events\IEventManager;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
-import uim.cake.View\Exception\MissingViewException;
+import uim.cake.views.exceptions\MissingViewException;
 use Closure;
 use Exception;
 use JsonSerializable;

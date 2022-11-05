@@ -9,7 +9,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.View\Exception;
+ */module uim.cake.views\Exception;
 
 use Throwable;
 
@@ -21,7 +21,7 @@ class MissingCellTemplateException : MissingTemplateException
     /**
      * @var string
      */
-    protected myName;
+    protected string myName;
 
     /**
      * @var string
@@ -32,21 +32,21 @@ class MissingCellTemplateException : MissingTemplateException
      * Constructor
      *
      * @param string myName The Cell name that is missing a view.
-     * @param string $file The view filename.
+     * @param string myfile The view filename.
      * @param array<string> myPaths The path list that template could not be found in.
      * @param int|null $code The code of the error.
      * @param \Throwable|null $previous the previous exception.
      */
     this(
         string myName,
-        string $file,
+        string myfile,
         array myPaths = [],
         ?int $code = null,
         ?Throwable $previous = null
     ) {
         this.name = myName;
 
-        super.this($file, myPaths, $code, $previous);
+        super.this(myfile, myPaths, $code, $previous);
     }
 
     /**

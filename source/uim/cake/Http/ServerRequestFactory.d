@@ -42,7 +42,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * @param array|null myQuery $_GET superglobal
      * @param array|null $parsedBody $_POST superglobal
      * @param array|null $cookies $_COOKIE superglobal
-     * @param array|null $files $_FILES superglobal
+     * @param array|null myfiles $_FILES superglobal
      * @return \Cake\Http\ServerRequest
      * @throws \InvalidArgumentException for invalid file values
      */
@@ -51,7 +51,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         ?array myQuery = null,
         ?array $parsedBody = null,
         ?array $cookies = null,
-        ?array $files = null
+        ?array myfiles = null
     ): ServerRequest {
         $server = normalizeServer($server ?: $_SERVER);
         $uri = static::createUri($server);
@@ -76,7 +76,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         ]);
 
         myRequest = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, myRequest);
-        myRequest = static::marshalFiles($files ?? $_FILES, myRequest);
+        myRequest = static::marshalFiles(myfiles ?? $_FILES, myRequest);
 
         return myRequest;
     }
@@ -130,14 +130,14 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     /**
      * Process uploaded files and move things onto the parsed body.
      *
-     * @param array $files Files array for normalization and merging in parsed body.
+     * @param array myfiles Files array for normalization and merging in parsed body.
      * @param \Cake\Http\ServerRequest myRequest Request instance.
      * @return \Cake\Http\ServerRequest
      */
-    protected static function marshalFiles(array $files, ServerRequest myRequest): ServerRequest
+    protected static function marshalFiles(array myfiles, ServerRequest myRequest): ServerRequest
     {
-        $files = normalizeUploadedFiles($files);
-        myRequest = myRequest.withUploadedFiles($files);
+        myfiles = normalizeUploadedFiles(myfiles);
+        myRequest = myRequest.withUploadedFiles(myfiles);
 
         $parsedBody = myRequest.getParsedBody();
         if (!is_array($parsedBody)) {
@@ -145,22 +145,22 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         }
 
         if (Configure::read('App.uploadedFilesAsObjects', true)) {
-            $parsedBody = Hash::merge($parsedBody, $files);
+            $parsedBody = Hash::merge($parsedBody, myfiles);
         } else {
             // Make a flat map that can be inserted into body for BC.
-            $fileMap = Hash::flatten($files);
-            foreach ($fileMap as myKey => $file) {
-                myError = $file.getError();
+            myfileMap = Hash::flatten(myfiles);
+            foreach (myfileMap as myKey => myfile) {
+                myError = myfile.getError();
                 $tmpName = '';
                 if (myError === UPLOAD_ERR_OK) {
-                    $tmpName = $file.getStream().getMetadata('uri');
+                    $tmpName = myfile.getStream().getMetadata('uri');
                 }
                 $parsedBody = Hash::insert($parsedBody, (string)myKey, [
                     'tmp_name' => $tmpName,
                     'error' => myError,
-                    'name' => $file.getClientFilename(),
-                    'type' => $file.getClientMediaType(),
-                    'size' => $file.getSize(),
+                    'name' => myfile.getClientFilename(),
+                    'type' => myfile.getClientMediaType(),
+                    'size' => myfile.getSize(),
                 ]);
             }
         }
@@ -325,7 +325,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             return [$base, $base . '/'];
         }
 
-        $file = '/' . basename($baseUrl);
+        myfile = '/' . basename($baseUrl);
         $base = dirname($baseUrl);
 
         if ($base === DIRECTORY_SEPARATOR || $base === '.') {
@@ -342,6 +342,6 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             }
         }
 
-        return [$base . $file, $webrootDir];
+        return [$base . myfile, $webrootDir];
     }
 }

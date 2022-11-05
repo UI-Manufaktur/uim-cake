@@ -133,15 +133,15 @@ abstract class TestCase : BaseTestCase
     /**
      * Asserts that a file does not exist.
      *
-     * @param string $filename Filename
+     * @param string myfilename Filename
      * @param string myMessage Message
      * @return void
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    static function assertFileDoesNotExist(string $filename, string myMessage = ''): void
+    static function assertFileDoesNotExist(string myfilename, string myMessage = ''): void
     {
-        static::assertThat($filename, new LogicalNot(new FileExists()), myMessage);
+        static::assertThat(myfilename, new LogicalNot(new FileExists()), myMessage);
     }
 
     /**
@@ -209,14 +209,14 @@ abstract class TestCase : BaseTestCase
          * @psalm-suppress InvalidArgument
          */
         $previousHandler = set_error_handler(
-            function ($code, myMessage, $file, $line, $context = null) use (&$previousHandler, &$deprecation) {
+            function ($code, myMessage, myfile, $line, $context = null) use (&$previousHandler, &$deprecation) {
                 if ($code == E_USER_DEPRECATED) {
                     $deprecation = true;
 
                     return;
                 }
                 if ($previousHandler) {
-                    return $previousHandler($code, myMessage, $file, $line, $context);
+                    return $previousHandler($code, myMessage, myfile, $line, $context);
                 }
 
                 return false;

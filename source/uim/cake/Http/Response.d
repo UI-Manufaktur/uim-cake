@@ -1095,11 +1095,11 @@ class Response : IResponse
     /**
      * Create a new instance with the Content-Disposition header set.
      *
-     * @param string $filename The name of the file as the browser will download the response
+     * @param string myfilename The name of the file as the browser will download the response
      * @return static
      */
-    function withDownload(string $filename) {
-        return this.withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    function withDownload(string myfilename) {
+        return this.withHeader('Content-Disposition', 'attachment; filename="' . myfilename . '"');
     }
 
     /**
@@ -1368,13 +1368,13 @@ class Response : IResponse
      * @throws \Cake\Http\Exception\NotFoundException
      */
     function withFile(string myPath, array myOptions = []) {
-        $file = this.validateFile(myPath);
+        myfile = this.validateFile(myPath);
         myOptions += [
             'name' => null,
             'download' => null,
         ];
 
-        $extension = strtolower($file.getExtension());
+        $extension = strtolower(myfile.getExtension());
         $mapped = this.getMimeType($extension);
         if ((!$extension || !$mapped) && myOptions['download'] === null) {
             myOptions['download'] = true;
@@ -1385,7 +1385,7 @@ class Response : IResponse
             $new = $new.withType($extension);
         }
 
-        $fileSize = $file.getSize();
+        myfileSize = myfile.getSize();
         if (myOptions['download']) {
             $agent = (string)env('HTTP_USER_AGENT');
 
@@ -1398,7 +1398,7 @@ class Response : IResponse
             if (isset(myContentsType)) {
                 $new = $new.withType(myContentsType);
             }
-            myName = myOptions['name'] ?: $file.getFileName();
+            myName = myOptions['name'] ?: myfile.getFileName();
             $new = $new.withDownload(myName)
                 .withHeader('Content-Transfer-Encoding', 'binary');
         }
@@ -1406,12 +1406,12 @@ class Response : IResponse
         $new = $new.withHeader('Accept-Ranges', 'bytes');
         $httpRange = (string)env('HTTP_RANGE');
         if ($httpRange) {
-            $new._fileRange($file, $httpRange);
+            $new._fileRange(myfile, $httpRange);
         } else {
-            $new = $new.withHeader('Content-Length', (string)$fileSize);
+            $new = $new.withHeader('Content-Length', (string)myfileSize);
         }
-        $new._file = $file;
-        $new.stream = new Stream($file.getPathname(), 'rb');
+        $new._file = myfile;
+        $new.stream = new Stream(myfile.getPathname(), 'rb');
 
         return $new;
     }
@@ -1443,15 +1443,15 @@ class Response : IResponse
             throw new NotFoundException(__d('cake', 'The requested file contains `..` and will not be read.'));
         }
 
-        $file = new SplFileInfo(myPath);
-        if (!$file.isFile() || !$file.isReadable()) {
+        myfile = new SplFileInfo(myPath);
+        if (!myfile.isFile() || !myfile.isReadable()) {
             if (Configure::read('debug')) {
                 throw new NotFoundException(sprintf('The requested file %s was not found or not readable', myPath));
             }
             throw new NotFoundException(__d('cake', 'The requested file was not found'));
         }
 
-        return $file;
+        return myfile;
     }
 
     /**
@@ -1470,14 +1470,14 @@ class Response : IResponse
      * If an invalid range is requested a 416 Status code will be used
      * in the response.
      *
-     * @param \SplFileInfo $file The file to set a range on.
+     * @param \SplFileInfo myfile The file to set a range on.
      * @param string $httpRange The range to use.
      * @return void
      */
-    protected auto _fileRange(SplFileInfo $file, string $httpRange): void
+    protected auto _fileRange(SplFileInfo myfile, string $httpRange): void
     {
-        $fileSize = $file.getSize();
-        $lastByte = $fileSize - 1;
+        myfileSize = myfile.getSize();
+        $lastByte = myfileSize - 1;
         $start = 0;
         $end = $lastByte;
 
@@ -1488,7 +1488,7 @@ class Response : IResponse
         }
 
         if ($start === '') {
-            $start = $fileSize - (int)$end;
+            $start = myfileSize - (int)$end;
             $end = $lastByte;
         }
         if ($end === '') {
@@ -1497,14 +1497,14 @@ class Response : IResponse
 
         if ($start > $end || $end > $lastByte || $start > $lastByte) {
             this._setStatus(416);
-            this._setHeader('Content-Range', 'bytes 0-' . $lastByte . '/' . $fileSize);
+            this._setHeader('Content-Range', 'bytes 0-' . $lastByte . '/' . myfileSize);
 
             return;
         }
 
         /** @psalm-suppress PossiblyInvalidOperand */
         this._setHeader('Content-Length', (string)($end - $start + 1));
-        this._setHeader('Content-Range', 'bytes ' . $start . '-' . $end . '/' . $fileSize);
+        this._setHeader('Content-Range', 'bytes ' . $start . '-' . $end . '/' . myfileSize);
         this._setStatus(206);
         /**
          * @var int $start

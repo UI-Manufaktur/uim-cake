@@ -114,7 +114,7 @@ abstract class BaseErrorHandler
      *
      * @param int $code Code of error
      * @param string $description Error description
-     * @param string|null $file File on which error occurred
+     * @param string|null myfile File on which error occurred
      * @param int|null $line Line that triggered the error
      * @param array<string, mixed>|null $context Context
      * @return bool True if error was handled
@@ -122,7 +122,7 @@ abstract class BaseErrorHandler
     bool handleError(
         int $code,
         string $description,
-        ?string $file = null,
+        ?string myfile = null,
         ?int $line = null,
         ?array $context = null
     ) {
@@ -133,14 +133,14 @@ abstract class BaseErrorHandler
         [myError, $log] = static::mapErrorCode($code);
         if ($log === LOG_ERR) {
             /** @psalm-suppress PossiblyNullArgument */
-            return this.handleFatalError($code, $description, $file, $line);
+            return this.handleFatalError($code, $description, myfile, $line);
         }
         myData = [
             'level' => $log,
             'code' => $code,
             'error' => myError,
             'description' => $description,
-            'file' => $file,
+            'file' => myfile,
             'line' => $line,
         ];
 
@@ -159,7 +159,7 @@ abstract class BaseErrorHandler
             myData += [
                 'context' => $context,
                 'start' => $start,
-                'path' => Debugger::trimPath((string)$file),
+                'path' => Debugger::trimPath((string)myfile),
             ];
         }
         this._displayError(myData, $debug);
@@ -217,20 +217,20 @@ abstract class BaseErrorHandler
      *
      * @param int $code Code of error
      * @param string $description Error description
-     * @param string $file File on which error occurred
+     * @param string myfile File on which error occurred
      * @param int $line Line that triggered the error
      */
-    bool handleFatalError(int $code, string $description, string $file, int $line) {
+    bool handleFatalError(int $code, string $description, string myfile, int $line) {
         myData = [
             'code' => $code,
             'description' => $description,
-            'file' => $file,
+            'file' => myfile,
             'line' => $line,
             'error' => 'Fatal Error',
         ];
         this._logError(LOG_ERR, myData);
 
-        this.handleException(new FatalErrorException($description, 500, $file, $line));
+        this.handleException(new FatalErrorException($description, 500, myfile, $line));
 
         return true;
     }

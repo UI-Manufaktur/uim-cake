@@ -108,11 +108,11 @@ class CommandTask : Shell
         }
 
         $fs = new Filesystem();
-        $files = $fs.find($dir, '/\.php$/');
+        myfiles = $fs.find($dir, '/\.php$/');
 
         $shells = [];
-        foreach ($files as $file) {
-            $shells[] = $file.getBasename('.php');
+        foreach (myfiles as myfile) {
+            $shells[] = myfile.getBasename('.php');
         }
 
         sort($shells);

@@ -66,13 +66,13 @@ class WidgetLocator
      * all the widgets to load. Loaded widgets will be merged with existing
      * widgets.
      *
-     * @param string $file The file to load
+     * @param string myfile The file to load
      * @return void
      */
-    function load(string $file): void
+    function load(string myfile): void
     {
         $loader = new PhpConfig();
-        $widgets = $loader.read($file);
+        $widgets = $loader.read(myfile);
         this.add($widgets);
     }
 
@@ -98,11 +98,11 @@ class WidgetLocator
      */
     function add(array $widgets): void
     {
-        $files = [];
+        myfiles = [];
 
         foreach ($widgets as myKey => $widget) {
             if (is_int(myKey)) {
-                $files[] = $widget;
+                myfiles[] = $widget;
                 continue;
             }
 
@@ -117,8 +117,8 @@ class WidgetLocator
             this._widgets[myKey] = $widget;
         }
 
-        foreach ($files as $file) {
-            this.load($file);
+        foreach (myfiles as myfile) {
+            this.load(myfile);
         }
     }
 

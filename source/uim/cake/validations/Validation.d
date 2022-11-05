@@ -1213,8 +1213,8 @@ class Validation
      */
     static function mimeType($check, $mimeTypes = []): bool
     {
-        $file = static::getFilename($check);
-        if ($file === false) {
+        myfile = static::getFilename($check);
+        if (myfile === false) {
             return false;
         }
 
@@ -1222,12 +1222,12 @@ class Validation
             throw new LogicException('ext/fileinfo is required for validating file mime types');
         }
 
-        if (!is_file($file)) {
+        if (!is_file(myfile)) {
             throw new RuntimeException('Cannot validate mimetype for a missing file');
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = finfo_file($finfo, $file);
+        $mime = finfo_file($finfo, myfile);
 
         if (!$mime) {
             throw new RuntimeException('Can not determine the mimetype.');
@@ -1290,17 +1290,17 @@ class Validation
      */
     static function fileSize($check, string $operator, $size): bool
     {
-        $file = static::getFilename($check);
-        if ($file === false) {
+        myfile = static::getFilename($check);
+        if (myfile === false) {
             return false;
         }
 
         if (is_string($size)) {
             $size = Text::parseFileSize($size);
         }
-        $filesize = filesize($file);
+        myfilesize = filesize(myfile);
 
-        return static::comparison($filesize, $operator, $size);
+        return static::comparison(myfilesize, $operator, $size);
     }
 
     /**
@@ -1343,11 +1343,11 @@ class Validation
      * - `optional` - Whether this file is optional. Defaults to false.
      *   If true a missing file will pass the validator regardless of other constraints.
      *
-     * @param mixed $file The uploaded file data from PHP.
+     * @param mixed myfile The uploaded file data from PHP.
      * @param array<string, mixed> myOptions An array of options for the validation.
      * @return bool
      */
-    static function uploadedFile($file, array myOptions = []): bool
+    static function uploadedFile(myfile, array myOptions = []): bool
     {
         myOptions += [
             'minSize' => null,
@@ -1355,25 +1355,25 @@ class Validation
             'types' => null,
             'optional' => false,
         ];
-        if (!is_array($file) && !($file instanceof UploadedFileInterface)) {
+        if (!is_array(myfile) && !(myfile instanceof UploadedFileInterface)) {
             return false;
         }
         myError = $isUploaded = false;
-        if ($file instanceof UploadedFileInterface) {
-            myError = $file.getError();
+        if (myfile instanceof UploadedFileInterface) {
+            myError = myfile.getError();
             $isUploaded = true;
         }
-        if (is_array($file)) {
+        if (is_array(myfile)) {
             myKeys = ['error', 'name', 'size', 'tmp_name', 'type'];
-            ksort($file);
-            if (array_keys($file) !== myKeys) {
+            ksort(myfile);
+            if (array_keys(myfile) !== myKeys) {
                 return false;
             }
-            myError = (int)$file['error'];
-            $isUploaded = is_uploaded_file($file['tmp_name']);
+            myError = (int)myfile['error'];
+            $isUploaded = is_uploaded_file(myfile['tmp_name']);
         }
 
-        if (!static::uploadError($file, myOptions['optional'])) {
+        if (!static::uploadError(myfile, myOptions['optional'])) {
             return false;
         }
         if (myOptions['optional'] && myError === UPLOAD_ERR_NO_FILE) {
@@ -1381,17 +1381,17 @@ class Validation
         }
         if (
             isset(myOptions['minSize'])
-            && !static::fileSize($file, static::COMPARE_GREATER_OR_EQUAL, myOptions['minSize'])
+            && !static::fileSize(myfile, static::COMPARE_GREATER_OR_EQUAL, myOptions['minSize'])
         ) {
             return false;
         }
         if (
             isset(myOptions['maxSize'])
-            && !static::fileSize($file, static::COMPARE_LESS_OR_EQUAL, myOptions['maxSize'])
+            && !static::fileSize(myfile, static::COMPARE_LESS_OR_EQUAL, myOptions['maxSize'])
         ) {
             return false;
         }
-        if (isset(myOptions['types']) && !static::mimeType($file, myOptions['types'])) {
+        if (isset(myOptions['types']) && !static::mimeType(myfile, myOptions['types'])) {
             return false;
         }
 
@@ -1401,12 +1401,12 @@ class Validation
     /**
      * Validates the size of an uploaded image.
      *
-     * @param mixed $file The uploaded file data from PHP.
+     * @param mixed myfile The uploaded file data from PHP.
      * @param array<string, mixed> myOptions Options to validate width and height.
      * @return bool
      * @throws \InvalidArgumentException
      */
-    static function imageSize($file, array myOptions): bool
+    static function imageSize(myfile, array myOptions): bool
     {
         if (!isset(myOptions['height']) && !isset(myOptions['width'])) {
             throw new InvalidArgumentException(
@@ -1414,12 +1414,12 @@ class Validation
             );
         }
 
-        $file = static::getFilename($file);
-        if ($file === false) {
+        myfile = static::getFilename(myfile);
+        if (myfile === false) {
             return false;
         }
 
-        [$width, $height] = getimagesize($file);
+        [$width, $height] = getimagesize(myfile);
         $validHeight = null;
         $validWidth = null;
 
@@ -1445,14 +1445,14 @@ class Validation
     /**
      * Validates the image width.
      *
-     * @param mixed $file The uploaded file data from PHP.
+     * @param mixed myfile The uploaded file data from PHP.
      * @param string $operator Comparison operator.
      * @param int $width Min or max width.
      * @return bool
      */
-    static function imageWidth($file, string $operator, int $width): bool
+    static function imageWidth(myfile, string $operator, int $width): bool
     {
-        return self::imageSize($file, [
+        return self::imageSize(myfile, [
             'width' => [
                 $operator,
                 $width,
@@ -1463,14 +1463,14 @@ class Validation
     /**
      * Validates the image height.
      *
-     * @param mixed $file The uploaded file data from PHP.
+     * @param mixed myfile The uploaded file data from PHP.
      * @param string $operator Comparison operator.
      * @param int $height Min or max height.
      * @return bool
      */
-    static function imageHeight($file, string $operator, int $height): bool
+    static function imageHeight(myfile, string $operator, int $height): bool
     {
-        return self::imageSize($file, [
+        return self::imageSize(myfile, [
             'height' => [
                 $operator,
                 $height,

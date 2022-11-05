@@ -17,9 +17,9 @@ import uim.cake.Http\ServerRequest;
 import uim.cake.Log\LogTrait;
 import uim.cake.Routing\Router;
 import uim.cake.Utility\Inflector;
-import uim.cake.View\Exception\MissingElementException;
-import uim.cake.View\Exception\MissingLayoutException;
-import uim.cake.View\Exception\MissingTemplateException;
+import uim.cake.views.exceptions\MissingElementException;
+import uim.cake.views.exceptions\MissingLayoutException;
+import uim.cake.views.exceptions\MissingTemplateException;
 use InvalidArgumentException;
 use LogicException;
 use RuntimeException;
@@ -547,14 +547,14 @@ class View : IEventDispatcher {
         }
 
         myPluginCheck = myOptions['plugin'] !== false;
-        $file = this._getElementFileName(myName, myPluginCheck);
-        if ($file && myOptions['cache']) {
-            return this.cache(function () use ($file, myData, myOptions): void {
-                echo this._renderElement($file, myData, myOptions);
+        myfile = this._getElementFileName(myName, myPluginCheck);
+        if (myfile && myOptions['cache']) {
+            return this.cache(function () use (myfile, myData, myOptions): void {
+                echo this._renderElement(myfile, myData, myOptions);
             }, myOptions['cache']);
         }
-        if ($file) {
-            return this._renderElement($file, myData, myOptions);
+        if (myfile) {
+            return this._renderElement(myfile, myData, myOptions);
         }
 
         if (myOptions['ignoreMissing']) {
@@ -1259,21 +1259,21 @@ class View : IEventDispatcher {
      * Only paths that contain `..` will be checked, as they are the ones most likely to
      * have the ability to resolve to files outside of the template paths.
      *
-     * @param string $file The path to the template file.
-     * @param string myPath Base path that $file should be inside of.
+     * @param string myfile The path to the template file.
+     * @param string myPath Base path that myfile should be inside of.
      * @return string The file path
      * @throws \InvalidArgumentException
      */
-    protected auto _checkFilePath(string $file, string myPath): string
+    protected auto _checkFilePath(string myfile, string myPath): string
     {
-        if (strpos($file, '..') === false) {
-            return $file;
+        if (strpos(myfile, '..') === false) {
+            return myfile;
         }
-        $absolute = realpath($file);
+        $absolute = realpath(myfile);
         if (strpos($absolute, myPath) !== 0) {
             throw new InvalidArgumentException(sprintf(
                 'Cannot use "%s" as a template, it is not within any view template path.',
-                $file
+                myfile
             ));
         }
 
@@ -1533,27 +1533,27 @@ class View : IEventDispatcher {
      * Renders an element and fires the before and afterRender callbacks for it
      * and writes to the cache if a cache is used
      *
-     * @param string $file Element file path
+     * @param string myfile Element file path
      * @param array myData Data to render
      * @param array<string, mixed> myOptions Element options
      * @return string
-     * @triggers View.beforeRender this, [$file]
-     * @triggers View.afterRender this, [$file, $element]
+     * @triggers View.beforeRender this, [myfile]
+     * @triggers View.afterRender this, [myfile, $element]
      */
-    protected auto _renderElement(string $file, array myData, array myOptions): string
+    protected auto _renderElement(string myfile, array myData, array myOptions): string
     {
         $current = this._current;
         $restore = this._currentType;
         this._currentType = static::TYPE_ELEMENT;
 
         if (myOptions['callbacks']) {
-            this.dispatchEvent('View.beforeRender', [$file]);
+            this.dispatchEvent('View.beforeRender', [myfile]);
         }
 
-        $element = this._render($file, array_merge(this.viewVars, myData));
+        $element = this._render(myfile, array_merge(this.viewVars, myData));
 
         if (myOptions['callbacks']) {
-            this.dispatchEvent('View.afterRender', [$file, $element]);
+            this.dispatchEvent('View.afterRender', [myfile, $element]);
         }
 
         this._currentType = $restore;

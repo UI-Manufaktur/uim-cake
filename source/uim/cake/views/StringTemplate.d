@@ -178,17 +178,17 @@ class StringTemplate {
      * all the templates to load. Loaded templates will be merged with existing
      * templates.
      *
-     * @param string $file The file to load
+     * @param string myfile The file to load
      * @return void
      */
-    function load(string $file): void
+    function load(string myfile): void
     {
-        if ($file === '') {
+        if (myfile === '') {
             throw new CakeException('String template filename cannot be an empty string');
         }
 
         $loader = new PhpConfig();
-        myTemplates = $loader.read($file);
+        myTemplates = $loader.read(myfile);
         this.add(myTemplates);
     }
 

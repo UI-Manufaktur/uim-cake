@@ -19,11 +19,11 @@ class MailContainsAttachment : MailContains
 
         myMessages = this.getMessages();
         foreach (myMessages as myMessage) {
-            foreach (myMessage.getAttachments() as $filename => $fileInfo) {
-                if ($filename === $expectedFilename && empty($expectedFileInfo)) {
+            foreach (myMessage.getAttachments() as myfilename => myfileInfo) {
+                if (myfilename === $expectedFilename && empty($expectedFileInfo)) {
                     return true;
                 }
-                if (!empty($expectedFileInfo) && array_intersect($expectedFileInfo, $fileInfo) === $expectedFileInfo) {
+                if (!empty($expectedFileInfo) && array_intersect($expectedFileInfo, myfileInfo) === $expectedFileInfo) {
                     return true;
                 }
             }

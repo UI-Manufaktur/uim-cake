@@ -1112,51 +1112,51 @@ class Message : JsonSerializable, Serializable
      */
     auto setAttachments(array $attachments) {
         $attach = [];
-        foreach ($attachments as myName => $fileInfo) {
-            if (!is_array($fileInfo)) {
-                $fileInfo = ['file' => $fileInfo];
+        foreach ($attachments as myName => myfileInfo) {
+            if (!is_array(myfileInfo)) {
+                myfileInfo = ['file' => myfileInfo];
             }
-            if (!isset($fileInfo['file'])) {
-                if (!isset($fileInfo['data'])) {
+            if (!isset(myfileInfo['file'])) {
+                if (!isset(myfileInfo['data'])) {
                     throw new InvalidArgumentException('No file or data specified.');
                 }
                 if (is_int(myName)) {
                     throw new InvalidArgumentException('No filename specified.');
                 }
-                $fileInfo['data'] = chunk_split(base64_encode($fileInfo['data']), 76, "\r\n");
-            } elseif ($fileInfo['file'] instanceof UploadedFileInterface) {
-                $fileInfo['mimetype'] = $fileInfo['file'].getClientMediaType();
+                myfileInfo['data'] = chunk_split(base64_encode(myfileInfo['data']), 76, "\r\n");
+            } elseif (myfileInfo['file'] instanceof UploadedFileInterface) {
+                myfileInfo['mimetype'] = myfileInfo['file'].getClientMediaType();
                 if (is_int(myName)) {
                     /** @var string myName */
-                    myName = $fileInfo['file'].getClientFilename();
+                    myName = myfileInfo['file'].getClientFilename();
                 }
-            } elseif (is_string($fileInfo['file'])) {
-                $fileName = $fileInfo['file'];
-                $fileInfo['file'] = realpath($fileInfo['file']);
-                if ($fileInfo['file'] === false || !file_exists($fileInfo['file'])) {
-                    throw new InvalidArgumentException(sprintf('File not found: "%s"', $fileName));
+            } elseif (is_string(myfileInfo['file'])) {
+                myfileName = myfileInfo['file'];
+                myfileInfo['file'] = realpath(myfileInfo['file']);
+                if (myfileInfo['file'] === false || !file_exists(myfileInfo['file'])) {
+                    throw new InvalidArgumentException(sprintf('File not found: "%s"', myfileName));
                 }
                 if (is_int(myName)) {
-                    myName = basename($fileInfo['file']);
+                    myName = basename(myfileInfo['file']);
                 }
             } else {
                 throw new InvalidArgumentException(sprintf(
                     'File must be a filepath or UploadedFileInterface instance. Found `%s` instead.',
-                    gettype($fileInfo['file'])
+                    gettype(myfileInfo['file'])
                 ));
             }
             if (
-                !isset($fileInfo['mimetype'])
-                && isset($fileInfo['file'])
-                && is_string($fileInfo['file'])
+                !isset(myfileInfo['mimetype'])
+                && isset(myfileInfo['file'])
+                && is_string(myfileInfo['file'])
                 && function_exists('mime_content_type')
             ) {
-                $fileInfo['mimetype'] = mime_content_type($fileInfo['file']);
+                myfileInfo['mimetype'] = mime_content_type(myfileInfo['file']);
             }
-            if (!isset($fileInfo['mimetype'])) {
-                $fileInfo['mimetype'] = 'application/octet-stream';
+            if (!isset(myfileInfo['mimetype'])) {
+                myfileInfo['mimetype'] = 'application/octet-stream';
             }
-            $attach[myName] = $fileInfo;
+            $attach[myName] = myfileInfo;
         }
         this.attachments = $attach;
 
@@ -1339,23 +1339,23 @@ class Message : JsonSerializable, Serializable
         }
 
         $msg = [];
-        foreach (this.attachments as $filename => $fileInfo) {
-            if (!empty($fileInfo['contentId'])) {
+        foreach (this.attachments as myfilename => myfileInfo) {
+            if (!empty(myfileInfo['contentId'])) {
                 continue;
             }
-            myData = $fileInfo['data'] ?? this.readFile($fileInfo['file']);
+            myData = myfileInfo['data'] ?? this.readFile(myfileInfo['file']);
             $hasDisposition = (
-                !isset($fileInfo['contentDisposition']) ||
-                $fileInfo['contentDisposition']
+                !isset(myfileInfo['contentDisposition']) ||
+                myfileInfo['contentDisposition']
             );
             $part = new FormDataPart('', myData, '', this.getHeaderCharset());
 
             if ($hasDisposition) {
                 $part.disposition('attachment');
-                $part.filename($filename);
+                $part.filename(myfilename);
             }
             $part.transferEncoding('base64');
-            $part.type($fileInfo['mimetype']);
+            $part.type(myfileInfo['mimetype']);
 
             $msg[] = '--' . $boundary;
             $msg[] = (string)$part;
@@ -1379,18 +1379,18 @@ class Message : JsonSerializable, Serializable
         }
 
         $msg = [];
-        foreach (this.getAttachments() as $filename => $fileInfo) {
-            if (empty($fileInfo['contentId'])) {
+        foreach (this.getAttachments() as myfilename => myfileInfo) {
+            if (empty(myfileInfo['contentId'])) {
                 continue;
             }
-            myData = $fileInfo['data'] ?? this.readFile($fileInfo['file']);
+            myData = myfileInfo['data'] ?? this.readFile(myfileInfo['file']);
 
             $msg[] = '--' . $boundary;
             $part = new FormDataPart('', myData, 'inline', this.getHeaderCharset());
-            $part.type($fileInfo['mimetype']);
+            $part.type(myfileInfo['mimetype']);
             $part.transferEncoding('base64');
-            $part.contentId($fileInfo['contentId']);
-            $part.filename($filename);
+            $part.contentId(myfileInfo['contentId']);
+            $part.filename(myfilename);
             $msg[] = (string)$part;
             $msg[] = '';
         }
@@ -1722,15 +1722,15 @@ class Message : JsonSerializable, Serializable
     /**
      * Read the file contents and return a base64 version of the file contents.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|string $file The absolute path to the file to read
+     * @param \Psr\Http\Message\UploadedFileInterface|string myfile The absolute path to the file to read
      *   or UploadedFileInterface instance.
      * @return string File contents in base64 encoding
      */
-    protected string readFile($file) {
-        if (is_string($file)) {
-            myContents = (string)file_get_contents($file);
+    protected string readFile(myfile) {
+        if (is_string(myfile)) {
+            myContents = (string)file_get_contents(myfile);
         } else {
-            myContents = (string)$file.getStream();
+            myContents = (string)myfile.getStream();
         }
 
         return chunk_split(base64_encode(myContents));

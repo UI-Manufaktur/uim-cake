@@ -91,22 +91,22 @@ class MessagesFileLoader
     auto __invoke() {
         $folders = this.translationsFolders();
         $ext = this._extension;
-        $file = false;
+        myfile = false;
 
-        $fileName = this._name;
-        $pos = strpos($fileName, '/');
+        myfileName = this._name;
+        $pos = strpos(myfileName, '/');
         if ($pos !== false) {
-            $fileName = substr($fileName, $pos + 1);
+            myfileName = substr(myfileName, $pos + 1);
         }
         foreach ($folders as $folder) {
-            myPath = $folder . $fileName . ".$ext";
+            myPath = $folder . myfileName . ".$ext";
             if (is_file(myPath)) {
-                $file = myPath;
+                myfile = myPath;
                 break;
             }
         }
 
-        if (!$file) {
+        if (!myfile) {
             return false;
         }
 
@@ -117,7 +117,7 @@ class MessagesFileLoader
             throw new RuntimeException(sprintf('Could not find class %s', "{myName}FileParser"));
         }
 
-        myMessages = (new myClass()).parse($file);
+        myMessages = (new myClass()).parse(myfile);
         $package = new Package('default');
         $package.setMessages(myMessages);
 

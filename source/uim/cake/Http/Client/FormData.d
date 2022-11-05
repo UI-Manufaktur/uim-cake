@@ -138,7 +138,7 @@ class FormData : Countable
     {
         this._hasFile = true;
 
-        $filename = false;
+        myfilename = false;
         myContentsType = 'application/octet-stream';
         if (is_resource(myValue)) {
             myContents = stream_get_contents(myValue);
@@ -146,19 +146,19 @@ class FormData : Countable
                 $finfo = new finfo(FILEINFO_MIME);
                 $metadata = stream_get_meta_data(myValue);
                 myContentsType = $finfo.file($metadata['uri']);
-                $filename = basename($metadata['uri']);
+                myfilename = basename($metadata['uri']);
             }
         } else {
             $finfo = new finfo(FILEINFO_MIME);
             myValue = substr(myValue, 1);
-            $filename = basename(myValue);
+            myfilename = basename(myValue);
             myContents = file_get_contents(myValue);
             myContentsType = $finfo.file(myValue);
         }
         $part = this.newPart(myName, myContents);
         $part.type(myContentsType);
-        if ($filename) {
-            $part.filename($filename);
+        if (myfilename) {
+            $part.filename(myfilename);
         }
         this.add($part);
 

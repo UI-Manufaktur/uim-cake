@@ -221,14 +221,14 @@ class UrlHelper : Helper
     /**
      * Checks if a file exists when theme is used, if no file is found default location is returned
      *
-     * @param string $file The file to create a webroot path to.
+     * @param string myfile The file to create a webroot path to.
      * @return string Web accessible path to file.
      */
-    function webroot(string $file): string
+    function webroot(string myfile): string
     {
         myOptions = ['theme' => this._View.getTheme()];
 
-        return h(this._assetUrlClassName::webroot($file, myOptions));
+        return h(this._assetUrlClassName::webroot(myfile, myOptions));
     }
 
     /**

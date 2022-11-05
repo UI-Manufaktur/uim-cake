@@ -91,7 +91,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if the given datetime string is today.
      */
-    function isToday($dateString, $timezone = null): bool
+    bool isToday($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isToday();
     }
@@ -103,7 +103,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if the given datetime string lies in the future.
      */
-    function isFuture($dateString, $timezone = null): bool
+    bool isFuture($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isFuture();
     }
@@ -115,7 +115,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if the given datetime string lies in the past.
      */
-    function isPast($dateString, $timezone = null): bool
+    bool isPast($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isPast();
     }
@@ -127,7 +127,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if datetime string is within current week
      */
-    function isThisWeek($dateString, $timezone = null): bool
+    bool isThisWeek($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isThisWeek();
     }
@@ -139,7 +139,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if datetime string is within the current month
      */
-    function isThisMonth($dateString, $timezone = null): bool
+    bool isThisMonth($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isThisMonth();
     }
@@ -151,7 +151,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if datetime string is within current year
      */
-    function isThisYear($dateString, $timezone = null): bool
+    bool isThisYear($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isThisYear();
     }
@@ -163,7 +163,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if datetime string was yesterday
      */
-    function wasYesterday($dateString, $timezone = null): bool
+    bool wasYesterday($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isYesterday();
     }
@@ -175,7 +175,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User's timezone string or DateTimeZone object
      * @return bool True if datetime string was yesterday
      */
-    function isTomorrow($dateString, $timezone = null): bool
+    bool isTomorrow($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isTomorrow();
     }
@@ -304,7 +304,7 @@ class TimeHelper : Helper
      * @return bool
      * @see \Cake\I18n\Time::wasWithinLast()
      */
-    function wasWithinLast(string $timeInterval, $dateString, $timezone = null): bool
+    bool wasWithinLast(string $timeInterval, $dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).wasWithinLast($timeInterval);
     }
@@ -319,7 +319,7 @@ class TimeHelper : Helper
      * @return bool
      * @see \Cake\I18n\Time::wasWithinLast()
      */
-    function isWithinNext(string $timeInterval, $dateString, $timezone = null): bool
+    bool isWithinNext(string $timeInterval, $dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).isWithinNext($timeInterval);
     }

@@ -12,7 +12,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @var \Cake\Database\Expression\IdentifierExpression
      */
-    protected myName;
+    protected string myName;
 
     /**
      * @var array<\Cake\Database\IExpression>

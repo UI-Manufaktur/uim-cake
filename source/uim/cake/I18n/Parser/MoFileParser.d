@@ -37,13 +37,13 @@ class MoFileParser
      * Parses machine object (MO) format, independent of the machine's endian it
      * was created on. Both 32bit and 64bit systems are supported.
      *
-     * @param string $file The file to be parsed.
+     * @param string myfile The file to be parsed.
      * @return array List of messages extracted from the file
      * @throws \RuntimeException If stream content has an invalid format.
      */
-    function parse($file): array
+    function parse(myfile): array
     {
-        $stream = fopen($file, 'rb');
+        $stream = fopen(myfile, 'rb');
 
         $stat = fstat($stream);
 

@@ -109,26 +109,26 @@ class Filesystem
     /**
      * Dump contents to file.
      *
-     * @param string $filename File path.
+     * @param string myfilename File path.
      * @param string myContents Content to dump.
      * @return void
      * @throws \Cake\Core\Exception\CakeException When dumping fails.
      */
-    function dumpFile(string $filename, string myContents): void
+    function dumpFile(string myfilename, string myContents): void
     {
-        $dir = dirname($filename);
+        $dir = dirname(myfilename);
         if (!is_dir($dir)) {
             this.mkdir($dir);
         }
 
-        $exists = file_exists($filename);
+        $exists = file_exists(myfilename);
 
-        if (this.isStream($filename)) {
+        if (this.isStream(myfilename)) {
             // phpcs:ignore
-            $success = @file_put_contents($filename, myContents);
+            $success = @file_put_contents(myfilename, myContents);
         } else {
             // phpcs:ignore
-            $success = @file_put_contents($filename, myContents, LOCK_EX);
+            $success = @file_put_contents(myfilename, myContents, LOCK_EX);
         }
 
         if ($success === false) {
@@ -136,7 +136,7 @@ class Filesystem
         }
 
         if (!$exists) {
-            chmod($filename, 0666 & ~umask());
+            chmod(myfilename, 0666 & ~umask());
         }
     }
 
@@ -171,7 +171,7 @@ class Filesystem
      * @return bool
      * @throws \Cake\Core\Exception\CakeException If path is not a directory.
      */
-    function deleteDir(string myPath): bool
+    bool deleteDir(string myPath)
     {
         if (!file_exists(myPath)) {
             return true;
@@ -187,19 +187,19 @@ class Filesystem
         );
 
         myResult = true;
-        foreach ($iterator as $fileInfo) {
-            $isWindowsLink = DIRECTORY_SEPARATOR === '\\' && $fileInfo.getType() === 'link';
-            if ($fileInfo.getType() === self::TYPE_DIR || $isWindowsLink) {
+        foreach ($iterator as myfileInfo) {
+            $isWindowsLink = DIRECTORY_SEPARATOR === '\\' && myfileInfo.getType() === 'link';
+            if (myfileInfo.getType() === self::TYPE_DIR || $isWindowsLink) {
                 // phpcs:ignore
-                myResult = myResult && @rmdir($fileInfo.getPathname());
-                unset($fileInfo);
+                myResult = myResult && @rmdir(myfileInfo.getPathname());
+                unset(myfileInfo);
                 continue;
             }
 
             // phpcs:ignore
-            myResult = myResult && @unlink($fileInfo.getPathname());
+            myResult = myResult && @unlink(myfileInfo.getPathname());
             // possible inner iterators need to be unset too in order for locks on parents to be released
-            unset($fileInfo);
+            unset(myfileInfo);
         }
 
         // unsetting iterators helps releasing possible locks in certain environments,
@@ -219,7 +219,7 @@ class Filesystem
      * @param string $destination Destination path.
      * @return bool
      */
-    function copyDir(string $source, string $destination): bool
+    bool copyDir(string $source, string $destination)
     {
         $destination = (new SplFileInfo($destination)).getPathname();
 
@@ -230,17 +230,17 @@ class Filesystem
         $iterator = new FilesystemIterator($source);
 
         myResult = true;
-        foreach ($iterator as $fileInfo) {
-            if ($fileInfo.isDir()) {
+        foreach ($iterator as myfileInfo) {
+            if (myfileInfo.isDir()) {
                 myResult = myResult && this.copyDir(
-                    $fileInfo.getPathname(),
-                    $destination . DIRECTORY_SEPARATOR . $fileInfo.getFilename()
+                    myfileInfo.getPathname(),
+                    $destination . DIRECTORY_SEPARATOR . myfileInfo.getFilename()
                 );
             } else {
                 // phpcs:ignore
                 myResult = myResult && @copy(
-                    $fileInfo.getPathname(),
-                    $destination . DIRECTORY_SEPARATOR . $fileInfo.getFilename()
+                    myfileInfo.getPathname(),
+                    $destination . DIRECTORY_SEPARATOR . myfileInfo.getFilename()
                 );
             }
         }
@@ -254,7 +254,7 @@ class Filesystem
      * @param string myPath Path.
      * @return bool
      */
-    function isStream(string myPath): bool
+    bool isStream(string myPath)
     {
         return strpos(myPath, '://') !== false;
     }

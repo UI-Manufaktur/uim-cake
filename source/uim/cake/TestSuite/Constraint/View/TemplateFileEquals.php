@@ -12,15 +12,15 @@ class TemplateFileEquals : Constraint
     /**
      * @var string
      */
-    protected $filename;
+    protected myfilename;
 
     /**
      * Constructor
      *
-     * @param string $filename Template file name
+     * @param string myfilename Template file name
      */
-    this(string $filename) {
-        this.filename = $filename;
+    this(string myfilename) {
+        this.filename = myfilename;
     }
 
     /**

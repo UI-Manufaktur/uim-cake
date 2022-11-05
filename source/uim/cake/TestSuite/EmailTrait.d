@@ -192,14 +192,14 @@ trait EmailTrait
     /**
      * Asserts an email contains expected attachment
      *
-     * @param string $filename Filename
-     * @param array $file Additional file properties
+     * @param string myfilename Filename
+     * @param array myfile Additional file properties
      * @param string myMessage Message
      * @return void
      */
-    function assertMailContainsAttachment(string $filename, array $file = [], string myMessage = ''): void
+    function assertMailContainsAttachment(string myfilename, array myfile = [], string myMessage = ''): void
     {
-        this.assertThat([$filename, $file], new MailContainsAttachment(), myMessage);
+        this.assertThat([myfilename, myfile], new MailContainsAttachment(), myMessage);
     }
 
     /**

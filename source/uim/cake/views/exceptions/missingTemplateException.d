@@ -9,7 +9,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.View\Exception;
+ */module uim.cake.views.exceptions;
 
 import uim.cake.core.Exception\CakeException;
 use Throwable;
@@ -27,7 +27,7 @@ class MissingTemplateException : CakeException
     /**
      * @var string
      */
-    protected $filename;
+    protected myfilename;
 
     /**
      * @var array<string>
@@ -42,17 +42,17 @@ class MissingTemplateException : CakeException
     /**
      * Constructor
      *
-     * @param array<string>|string $file Either the file name as a string, or in an array for backwards compatibility.
+     * @param array<string>|string myfile Either the file name as a string, or in an array for backwards compatibility.
      * @param array<string> myPaths The path list that template could not be found in.
      * @param int|null $code The code of the error.
      * @param \Throwable|null $previous the previous exception.
      */
-    this($file, array myPaths = [], ?int $code = null, ?Throwable $previous = null) {
-        if (is_array($file)) {
-            this.filename = array_pop($file);
-            this.templateName = array_pop($file);
+    this(myfile, array myPaths = [], ?int $code = null, ?Throwable $previous = null) {
+        if (is_array(myfile)) {
+            this.filename = array_pop(myfile);
+            this.templateName = array_pop(myfile);
         } else {
-            this.filename = $file;
+            this.filename = myfile;
             this.templateName = null;
         }
         this.paths = myPaths;

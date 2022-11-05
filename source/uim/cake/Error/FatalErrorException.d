@@ -24,20 +24,20 @@ class FatalErrorException : CakeException
      *
      * @param string myMessage Message string.
      * @param int|null $code Code.
-     * @param string|null $file File name.
+     * @param string|null myfile File name.
      * @param int|null $line Line number.
      * @param \Throwable|null $previous The previous exception.
      */
     this(
         string myMessage,
         ?int $code = null,
-        ?string $file = null,
+        ?string myfile = null,
         ?int $line = null,
         ?Throwable $previous = null
     ) {
         super.this(myMessage, $code, $previous);
-        if ($file) {
-            this.file = $file;
+        if (myfile) {
+            this.file = myfile;
         }
         if ($line) {
             this.line = $line;
