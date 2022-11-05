@@ -1,6 +1,6 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.core.InstanceConfigTrait;
+import uim.baklava.core.InstanceConfigTrait;
 
 /**
  * Base class for Helpers.

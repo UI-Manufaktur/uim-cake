@@ -10,10 +10,10 @@
  * @link          https://book.cakephp.org/4/en/development/errors.html#error-exception-configuration
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.console\Exception;
+ */module uim.baklava.console\Exception;
 
-import uim.cake.console.commandInterface;
-import uim.cake.core.Exception\CakeException;
+import uim.baklava.console.commandInterface;
+import uim.baklava.core.Exception\CakeException;
 
 /**
  * Exception class for Console libraries. This exception will be thrown from Console library

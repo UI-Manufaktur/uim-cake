@@ -1,8 +1,8 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.console.Exception\MissingTaskException;
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
+import uim.baklava.console.Exception\MissingTaskException;
+import uim.baklava.core.App;
+import uim.baklava.core.ObjectRegistry;
 
 /**
  * Registry for Tasks. Provides features

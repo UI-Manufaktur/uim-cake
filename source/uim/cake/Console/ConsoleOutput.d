@@ -1,4 +1,4 @@
-module uim.cake.console;
+module uim.baklava.console;
 
 use InvalidArgumentException;
 

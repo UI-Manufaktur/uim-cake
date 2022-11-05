@@ -1,8 +1,8 @@
-module uim.cake.controller;
+module uim.baklava.controller;
 
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.events\IEventListener;
-import uim.cake.Log\LogTrait;
+import uim.baklava.core.InstanceConfigTrait;
+import uim.baklava.events\IEventListener;
+import uim.baklava.Log\LogTrait;
 
 /**
  * Base class for an individual Component. Components provide reusable bits of

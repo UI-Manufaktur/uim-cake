@@ -1,10 +1,10 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-import uim.cake.Filesystem\Filesystem;
-import uim.cake.utikities.Inflector;
+import uim.baklava.core.App;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Plugin;
+import uim.baklava.Filesystem\Filesystem;
+import uim.baklava.utikities.Inflector;
 
 /**
  * Used by CommandCollection and CommandTask to scan the filesystem

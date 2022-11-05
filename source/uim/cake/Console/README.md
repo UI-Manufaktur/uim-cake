@@ -28,7 +28,7 @@ bootstrap logic, and binds your commands. Lets put our entrypoint script in
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Application;
-import uim.cake.console.commandRunner;
+import uim.baklava.console.commandRunner;
 
 // Build the runner with an application and root executable name.
 $runner = new CommandRunner(new Application(), 'tool');
@@ -41,8 +41,8 @@ For our `Application` class we can start with:
 <?phpmodule App;
 
 use App\Command\HelloCommand;
-import uim.cake.core.ConsoleApplicationInterface;
-import uim.cake.console.commandCollection;
+import uim.baklava.core.ConsoleApplicationInterface;
+import uim.baklava.console.commandCollection;
 
 class Application : ConsoleApplicationInterface
 {
@@ -78,10 +78,10 @@ Next we'll build a very simple `HelloCommand`:
 ```php
 <?phpmodule App\Command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.BaseCommand;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
+import uim.baklava.console.Arguments;
+import uim.baklava.console.BaseCommand;
+import uim.baklava.console.consoleIo;
+import uim.baklava.console.consoleOptionParser;
 
 class HelloCommand : BaseCommand {
     protected auto buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser

@@ -1,4 +1,4 @@
-module uim.cake.console;
+module uim.baklava.console;
 
 /**
  * Describe the interface between a command

@@ -1,13 +1,13 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.console.Exception\MissingShellException;
-import uim.cake.console.Exception\StopException;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-import uim.cake.Log\Log;
-import uim.cake.Shell\Task\CommandTask;
-import uim.cake.utikities.Inflector;
+import uim.baklava.console.Exception\MissingShellException;
+import uim.baklava.console.Exception\StopException;
+import uim.baklava.core.App;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Plugin;
+import uim.baklava.Log\Log;
+import uim.baklava.Shell\Task\CommandTask;
+import uim.baklava.utikities.Inflector;
 
 /**
  * Shell dispatcher handles dispatching CLI commands.
@@ -381,7 +381,7 @@ class ShellDispatcher
     {
         trigger_error(
             'Console help cannot be generated from Shell classes anymore. ' .
-            'Upgrade your application to import uim.cake.console.commandRunner instead.',
+            'Upgrade your application to import uim.baklava.console.commandRunner instead.',
             E_USER_WARNING
         );
     }
@@ -395,7 +395,7 @@ class ShellDispatcher
     {
         trigger_error(
             'Version information cannot be generated from Shell classes anymore. ' .
-            'Upgrade your application to import uim.cake.console.commandRunner instead.',
+            'Upgrade your application to import uim.baklava.console.commandRunner instead.',
             E_USER_WARNING
         );
     }

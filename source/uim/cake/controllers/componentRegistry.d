@@ -1,11 +1,11 @@
-module uim.cake.controller;
+module uim.baklava.controller;
 
-import uim.cake.controller\Exception\MissingComponentException;
-import uim.cake.core.App;
-import uim.cake.core.Exception\CakeException;
-import uim.cake.core.ObjectRegistry;
-import uim.cake.events\IEventDispatcher;
-import uim.cake.events\EventDispatcherTrait;
+import uim.baklava.controller\Exception\MissingComponentException;
+import uim.baklava.core.App;
+import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.ObjectRegistry;
+import uim.baklava.events\IEventDispatcher;
+import uim.baklava.events\EventDispatcherTrait;
 
 /**
  * ComponentRegistry is a registry for loaded components

@@ -1,8 +1,8 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.console.Exception\StopException;
-import uim.cake.Log\Engine\ConsoleLog;
-import uim.cake.Log\Log;
+import uim.baklava.console.Exception\StopException;
+import uim.baklava.Log\Engine\ConsoleLog;
+import uim.baklava.Log\Log;
 use RuntimeException;
 use SplFileObject;
 

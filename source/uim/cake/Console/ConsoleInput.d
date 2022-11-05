@@ -1,6 +1,6 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.console.Exception\ConsoleException;
+import uim.baklava.console.Exception\ConsoleException;
 
 /**
  * Object wrapper for interacting with stdin

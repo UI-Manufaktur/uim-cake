@@ -1,8 +1,8 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.console.Exception\MissingHelperException;
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
+import uim.baklava.console.Exception\MissingHelperException;
+import uim.baklava.core.App;
+import uim.baklava.core.ObjectRegistry;
 
 /**
  * Registry for Helpers. Provides features

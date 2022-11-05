@@ -1,4 +1,4 @@
-module uim.cake.console\Exception;
+module uim.baklava.console\Exception;
 
 use Throwable;
 

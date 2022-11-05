@@ -1,4 +1,4 @@
-module uim.cake.console\Exception;
+module uim.baklava.console\Exception;
 
 /**
  * Used when a shell method cannot be found.
