@@ -1,6 +1,6 @@
 module uim.baklava.networks;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.InstanceConfigTrait;
 import uim.baklava.networks\Exception\SocketException;
 import uim.baklava.validations\Validation;

@@ -1,7 +1,7 @@
 module uim.baklava.Mailer;
 
 import uim.baklava.core.Configure;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.https\Client\FormDataPart;
 import uim.baklava.utikities.Hash;
 import uim.baklava.utikities.Security;

@@ -12,7 +12,7 @@
  */module uim.baklava.Mailer;
 
 use BadMethodCallException;
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.StaticConfigTrait;
 import uim.baklava.Datasource\ModelAwareTrait;
 import uim.baklava.events\IEventListener;

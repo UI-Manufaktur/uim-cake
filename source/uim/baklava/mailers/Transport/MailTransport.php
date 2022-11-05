@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.Mailer\Transport;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.Mailer\AbstractTransport;
 import uim.baklava.Mailer\Message;
 

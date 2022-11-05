@@ -1,6 +1,6 @@
 module uim.baklava.Mailer;
 
-import uim.baklava.core.Exception\CakeException;
+import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.InstanceConfigTrait;
 
 /**
