@@ -1,9 +1,9 @@
 module uim.baklava.ORM;
 
-import uim.baklava.collection\Collection;
-import uim.baklava.collection\ICollection;
+import uim.baklava.collections\Collection;
+import uim.baklava.collections\ICollection;
 import uim.baklava.databases.expressions\TupleComparison;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 
 /**
  * Contains methods that are capable of injecting eagerly loaded associations into

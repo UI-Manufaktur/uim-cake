@@ -14,9 +14,9 @@
 use BadMethodCallException;
 import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.core.StaticConfigTrait;
-import uim.baklava.Datasource\ModelAwareTrait;
+import uim.baklava.datasources\ModelAwareTrait;
 import uim.baklava.events\IEventListener;
-import uim.baklava.Log\Log;
+import uim.baklava.logs\Log;
 import uim.baklava.Mailer\Exception\MissingActionException;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.views\ViewBuilder;

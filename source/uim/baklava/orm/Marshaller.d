@@ -1,11 +1,11 @@
 module uim.baklava.ORM;
 
 use ArrayObject;
-import uim.baklava.collection\Collection;
+import uim.baklava.collections\Collection;
 import uim.baklava.databases.expressions\TupleComparison;
 import uim.baklava.databases.TypeFactory;
-import uim.baklava.Datasource\IEntity;
-import uim.baklava.Datasource\InvalidPropertyInterface;
+import uim.baklava.datasources\IEntity;
+import uim.baklava.datasources\InvalidPropertyInterface;
 import uim.baklava.orm.Association\BelongsToMany;
 import uim.baklava.utilities.Hash;
 use InvalidArgumentException;

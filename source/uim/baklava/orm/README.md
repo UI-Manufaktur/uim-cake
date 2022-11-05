@@ -24,7 +24,7 @@ object.  Before performing any operations with the connection, you need to
 specify a driver to use:
 
 ```php
-import uim.baklava.Datasource\ConnectionManager;
+import uim.baklava.datasources\ConnectionManager;
 
 ConnectionManager::setConfig('default', [
 	'className' => \Cake\Database\Connection::class,
@@ -153,7 +153,7 @@ It is recommended to enable metadata cache for production systems to avoid perfo
 For e.g. file system strategy your bootstrap file could look like this:
 
 ```php
-import uim.baklava.caches\Engine\FileEngine;
+import uim.baklava.caches.engines\FileEngine;
 
 $cacheConfig = [
    'className' => FileEngine::class,

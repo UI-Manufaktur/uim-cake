@@ -1,6 +1,6 @@
 module uim.baklava.orm.Behavior\Translate;
 
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 
 /**
  * Contains a translation method aimed to help managing multiple translations

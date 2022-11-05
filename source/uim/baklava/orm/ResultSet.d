@@ -1,11 +1,11 @@
 module uim.baklava.ORM;
 
-import uim.baklava.collection\Collection;
-import uim.baklava.collection\CollectionTrait;
+import uim.baklava.collections\Collection;
+import uim.baklava.collections\CollectionTrait;
 import uim.baklava.databases.exceptions\DatabaseException;
 import uim.baklava.databases.IStatement;
-import uim.baklava.Datasource\IEntity;
-import uim.baklava.Datasource\ResultSetInterface;
+import uim.baklava.datasources\IEntity;
+import uim.baklava.datasources\ResultSetInterface;
 use SplFixedArray;
 
 /**

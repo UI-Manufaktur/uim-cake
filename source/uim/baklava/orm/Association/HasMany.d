@@ -1,10 +1,10 @@
 module uim.baklava.orm.Association;
 
-import uim.baklava.collection\Collection;
+import uim.baklava.collections\Collection;
 import uim.baklava.databases.expressions\FieldInterface;
 import uim.baklava.databases.expressions\QueryExpression;
-import uim.baklava.Datasource\IEntity;
-import uim.baklava.Datasource\InvalidPropertyInterface;
+import uim.baklava.datasources\IEntity;
+import uim.baklava.datasources\InvalidPropertyInterface;
 import uim.baklava.orm.Association;
 import uim.baklava.orm.Association\Loader\SelectLoader;
 import uim.baklava.orm.Query;

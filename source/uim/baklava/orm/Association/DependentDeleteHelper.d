@@ -1,6 +1,6 @@
 module uim.baklava.orm.Association;
 
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.orm.Association;
 
 /**

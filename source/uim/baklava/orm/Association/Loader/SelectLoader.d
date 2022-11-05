@@ -420,7 +420,7 @@ class SelectLoader
         }
 
         myFields = myQuery.aliasFields(myKeys, this.sourceAlias);
-        $group = myFields = array_values(myFields);
+        myGroup = myFields = array_values(myFields);
 
         $order = myQuery.clause('order');
         if ($order) {
@@ -432,7 +432,7 @@ class SelectLoader
             });
         }
 
-        return ['select' => myFields, 'group' => $group];
+        return ['select' => myFields, 'group' => myGroup];
     }
 
     /**

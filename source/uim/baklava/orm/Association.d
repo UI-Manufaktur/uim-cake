@@ -1,11 +1,11 @@
 module uim.baklava.ORM;
 
-import uim.baklava.collection\Collection;
+import uim.baklava.collections\Collection;
 import uim.baklava.core.App;
 import uim.baklava.core.ConventionsTrait;
 import uim.baklava.databases.expressions\IdentifierExpression;
-import uim.baklava.Datasource\IEntity;
-import uim.baklava.Datasource\ResultSetDecorator;
+import uim.baklava.datasources\IEntity;
+import uim.baklava.datasources\ResultSetDecorator;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.utilities.Inflector;
 use Closure;

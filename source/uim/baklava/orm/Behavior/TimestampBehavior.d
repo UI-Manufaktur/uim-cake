@@ -2,7 +2,7 @@ module uim.baklava.orm.Behavior;
 
 import uim.baklava.databases.Type\DateTimeType;
 import uim.baklava.databases.TypeFactory;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.events\IEvent;
 import uim.baklava.I18n\FrozenTime;
 import uim.baklava.orm.Behavior;

@@ -8,12 +8,12 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Log\Engine;
+ */module uim.baklava.logs\Engine;
 
 use ArrayObject;
 import uim.baklava.core.InstanceConfigTrait;
-import uim.baklava.Log\Formatter\AbstractFormatter;
-import uim.baklava.Log\Formatter\DefaultFormatter;
+import uim.baklava.logs\Formatter\AbstractFormatter;
+import uim.baklava.logs\Formatter\DefaultFormatter;
 use InvalidArgumentException;
 use JsonSerializable;
 use Psr\Log\AbstractLogger;

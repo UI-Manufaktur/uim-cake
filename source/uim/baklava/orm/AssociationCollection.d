@@ -1,7 +1,7 @@
 module uim.baklava.ORM;
 
 use ArrayIterator;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.orm.Locator\ILocator;
 use InvalidArgumentException;

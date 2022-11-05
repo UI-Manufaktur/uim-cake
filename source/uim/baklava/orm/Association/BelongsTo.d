@@ -1,7 +1,7 @@
 module uim.baklava.orm.Association;
 
 import uim.baklava.databases.expressions\IdentifierExpression;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.orm.Association;
 import uim.baklava.orm.Association\Loader\SelectLoader;
 import uim.baklava.orm.Table;

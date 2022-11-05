@@ -1,7 +1,7 @@
 module uim.baklava.orm.Behavior;
 
 use ArrayObject;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.events\IEvent;
 import uim.baklava.orm.Association;
 import uim.baklava.orm.Behavior;

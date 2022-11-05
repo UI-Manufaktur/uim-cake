@@ -1,6 +1,6 @@
 module uim.baklava.ORM;
 
-import uim.baklava.Datasource\FactoryLocator;
+import uim.baklava.datasources\FactoryLocator;
 import uim.baklava.orm.Locator\ILocator;
 
 /**

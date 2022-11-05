@@ -8,10 +8,10 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         1.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Log\Engine;
+ */module uim.baklava.logs\Engine;
 
 import uim.baklava.core.Configure;
-import uim.baklava.Log\Formatter\DefaultFormatter;
+import uim.baklava.logs\Formatter\DefaultFormatter;
 import uim.baklava.utilities.Text;
 
 /**

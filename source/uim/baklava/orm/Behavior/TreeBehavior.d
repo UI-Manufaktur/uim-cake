@@ -1,9 +1,9 @@
 module uim.baklava.orm.Behavior;
 
-import uim.baklava.collection\ICollection;
+import uim.baklava.collections\ICollection;
 import uim.baklava.databases.expressions\IdentifierExpression;
-import uim.baklava.Datasource\IEntity;
-import uim.baklava.Datasource\Exception\RecordNotFoundException;
+import uim.baklava.datasources\IEntity;
+import uim.baklava.datasources\Exception\RecordNotFoundException;
 import uim.baklava.events\IEvent;
 import uim.baklava.orm.Behavior;
 import uim.baklava.orm.Query;

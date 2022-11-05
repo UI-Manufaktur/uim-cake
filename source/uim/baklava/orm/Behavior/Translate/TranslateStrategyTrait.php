@@ -1,6 +1,6 @@
 module uim.baklava.orm.Behavior\Translate;
 
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.events\IEvent;
 import uim.baklava.I18n\I18n;
 import uim.baklava.orm.Marshaller;

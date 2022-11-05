@@ -4,7 +4,7 @@ import uim.baklava.core.App;
 import uim.baklava.databases.expressions\IdentifierExpression;
 import uim.baklava.databases.expressions\QueryExpression;
 import uim.baklava.databases.IExpression;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.orm.Association;
 import uim.baklava.orm.Association\Loader\SelectWithPivotLoader;
 import uim.baklava.orm.Query;

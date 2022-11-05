@@ -1,8 +1,8 @@
 module uim.baklava.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.baklava.collection\ICollection;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.collections\ICollection;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.events\IEvent;
 import uim.baklava.orm.PropertyMarshalInterface;
 import uim.baklava.orm.Query;

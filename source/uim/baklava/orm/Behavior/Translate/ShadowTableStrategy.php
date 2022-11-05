@@ -1,10 +1,10 @@
 module uim.baklava.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.baklava.collection\ICollection;
+import uim.baklava.collections\ICollection;
 import uim.baklava.core.InstanceConfigTrait;
 import uim.baklava.databases.expressions\FieldInterface;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.events\IEvent;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.orm.Marshaller;

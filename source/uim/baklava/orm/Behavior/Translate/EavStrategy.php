@@ -1,10 +1,10 @@
 module uim.baklava.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.baklava.collection\Collection;
-import uim.baklava.collection\ICollection;
+import uim.baklava.collections\Collection;
+import uim.baklava.collections\ICollection;
 import uim.baklava.core.InstanceConfigTrait;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.events\IEvent;
 import uim.baklava.orm.Entity;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
@@ -387,10 +387,10 @@ class EavStrategy : TranslateStrategyInterface
             if (empty($translations) && $row.get('_translations')) {
                 return $row;
             }
-            $grouped = new Collection($translations);
+            myGrouped = new Collection($translations);
 
             myResult = [];
-            foreach ($grouped.combine('field', 'content', 'locale') as $locale => myKeys) {
+            foreach (myGrouped.combine('field', 'content', 'locale') as $locale => myKeys) {
                 $entityClass = this.table.getEntityClass();
                 $translation = new $entityClass(myKeys + ['locale' => $locale], [
                     'markNew' => false,

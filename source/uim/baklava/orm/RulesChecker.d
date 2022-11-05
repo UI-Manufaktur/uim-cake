@@ -1,7 +1,7 @@
 module uim.baklava.ORM;
 
-import uim.baklava.Datasource\RuleInvoker;
-import uim.baklava.Datasource\RulesChecker as BaseRulesChecker;
+import uim.baklava.datasources\RuleInvoker;
+import uim.baklava.datasources\RulesChecker as BaseRulesChecker;
 import uim.baklava.orm.Rule\ExistsIn;
 import uim.baklava.orm.Rule\IsUnique;
 import uim.baklava.orm.Rule\LinkConstraint;
