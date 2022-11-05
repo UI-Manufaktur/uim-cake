@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.Utility;
 
-import uim.baklava.utikities.Exception\XmlException;
+import uim.baklava.utilities.Exception\XmlException;
 use Closure;
 use DOMDocument;
 use DOMNode;

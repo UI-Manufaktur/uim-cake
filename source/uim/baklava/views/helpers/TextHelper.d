@@ -11,8 +11,8 @@
 
 import uim.baklava.core.App;
 import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.utikities.Security;
-import uim.baklava.utikities.Text;
+import uim.baklava.utilities.Security;
+import uim.baklava.utilities.Text;
 import uim.baklava.views\Helper;
 import uim.baklava.views\View;
 

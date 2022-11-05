@@ -1,7 +1,7 @@
 module uim.baklava.validations;
 
 import uim.baklava.I18n\FrozenTime;
-import uim.baklava.utikities.Text;
+import uim.baklava.utilities.Text;
 use Countable;
 use IDateTime;
 use InvalidArgumentException;

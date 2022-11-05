@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.Utility;
 
-import uim.baklava.utikities.Crypto\OpenSsl;
+import uim.baklava.utilities.Crypto\OpenSsl;
 use InvalidArgumentException;
 use RuntimeException;
 

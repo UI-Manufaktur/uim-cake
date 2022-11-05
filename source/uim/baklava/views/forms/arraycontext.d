@@ -1,6 +1,6 @@
 module uim.baklava.views.forms;
 
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 
 /**
  * Provides a basic array based context provider for FormHelper.

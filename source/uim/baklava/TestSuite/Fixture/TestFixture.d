@@ -21,7 +21,7 @@ import uim.baklava.Datasource\ConnectionManager;
 import uim.baklava.Datasource\FixtureInterface;
 import uim.baklava.Log\Log;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use Exception;
 
 /**

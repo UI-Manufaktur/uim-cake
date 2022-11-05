@@ -1,7 +1,7 @@
 module uim.baklava.views;
 
 import uim.baklava.core.App;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 import uim.baklava.views\Exception\MissingCellException;
 
 /**

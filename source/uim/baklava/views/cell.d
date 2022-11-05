@@ -9,7 +9,7 @@ import uim.baklava.events\IEventManager;
 import uim.baklava.https\Response;
 import uim.baklava.https\ServerRequest;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 import uim.baklava.views\Exception\MissingCellTemplateException;
 import uim.baklava.views\Exception\MissingTemplateException;
 use Error;

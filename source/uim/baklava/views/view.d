@@ -15,7 +15,7 @@ import uim.baklava.events\EventManager;
 import uim.baklava.https\Response;
 import uim.baklava.https\ServerRequest;
 import uim.baklava.Log\LogTrait;
-import uim.baklava.Routing\Router;
+import uim.baklava.routings\Router;
 import uim.baklava.Utility\Inflector;
 import uim.baklava.views.exceptions\MissingElementException;
 import uim.baklava.views.exceptions\MissingLayoutException;

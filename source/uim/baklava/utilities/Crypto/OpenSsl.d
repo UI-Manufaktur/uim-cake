@@ -1,4 +1,4 @@
-module uim.baklava.utikities.Crypto;
+module uim.baklava.utilities.Crypto;
 
 /**
  * OpenSSL implementation of crypto features for Cake\Utility\Security

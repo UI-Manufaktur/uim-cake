@@ -1,7 +1,7 @@
 module uim.baklava.views\Helper;
 
-import uim.baklava.utikities.Hash;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Hash;
+import uim.baklava.utilities.Inflector;
 import uim.baklava.views\Helper;
 import uim.baklava.views\StringTemplate;
 import uim.baklava.views\StringTemplateTrait;

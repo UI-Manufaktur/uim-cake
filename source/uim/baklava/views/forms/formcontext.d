@@ -1,6 +1,6 @@
 module uim.baklava.views.forms;
 
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 
 /**
  * Provides a context provider for {@link \Cake\Form\Form} instances.

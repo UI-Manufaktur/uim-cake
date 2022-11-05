@@ -7,7 +7,7 @@ import uim.baklava.Datasource\InvalidPropertyInterface;
 import uim.baklava.orm.Entity;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.orm.Table;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 import uim.baklava.validations\Validator;
 use RuntimeException;
 use Traversable;
