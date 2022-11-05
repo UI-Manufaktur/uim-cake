@@ -7,7 +7,7 @@ import uim.baklava.Datasource\IRepository;
 import uim.baklava.orm.AssociationCollection;
 import uim.baklava.orm.Exception\MissingTableClassException;
 import uim.baklava.orm.Table;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use RuntimeException;
 
 /**

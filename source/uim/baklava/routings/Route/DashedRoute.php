@@ -1,6 +1,6 @@
-module uim.baklava.Routing\Route;
+module uim.baklava.routings\Route;
 
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * This route class will transparently inflect the controller, action and plugin

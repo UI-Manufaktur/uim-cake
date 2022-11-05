@@ -1,7 +1,7 @@
 module uim.baklava.TestSuite\Constraint\Session;
 
 import uim.baklava.https\Session;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
 

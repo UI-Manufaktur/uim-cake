@@ -1,7 +1,7 @@
-module uim.baklava.Routing\Route;
+module uim.baklava.routings\Route;
 
 import uim.baklava.https\Exception\RedirectException;
-import uim.baklava.Routing\Router;
+import uim.baklava.routings\Router;
 
 /**
  * Redirect route will perform an immediate redirect. Redirect routes

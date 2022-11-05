@@ -12,7 +12,7 @@
 
 import uim.baklava.core.Configure;
 import uim.baklava.Log\Formatter\DefaultFormatter;
-import uim.baklava.utikities.Text;
+import uim.baklava.utilities.Text;
 
 /**
  * File Storage stream for Logging. Writes logs to different files

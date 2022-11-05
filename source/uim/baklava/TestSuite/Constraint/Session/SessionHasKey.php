@@ -1,6 +1,6 @@
 module uim.baklava.TestSuite\Constraint\Session;
 
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**

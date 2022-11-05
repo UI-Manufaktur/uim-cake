@@ -18,8 +18,8 @@ import uim.baklava.https\FlashMessage;
 import uim.baklava.https\Server;
 import uim.baklava.https\ServerRequest;
 import uim.baklava.https\ServerRequestFactory;
-import uim.baklava.Routing\Router;
-import uim.baklava.Routing\RoutingApplicationInterface;
+import uim.baklava.routings\Router;
+import uim.baklava.routings\RoutingApplicationInterface;
 use Psr\Http\Message\IResponse;
 
 /**

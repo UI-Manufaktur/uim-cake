@@ -1,17 +1,8 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Routing\Middleware;
+module uim.baklava.routings.middlewares;
 
 import uim.baklava.core.Plugin;
 import uim.baklava.https\Response;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

@@ -13,7 +13,7 @@
 
 import uim.baklava.core.exceptions\CakeException;
 import uim.baklava.Datasource\IEntity;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use Throwable;
 
 /**

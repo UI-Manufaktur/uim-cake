@@ -13,7 +13,7 @@ import uim.baklava.console.Shell;
 import uim.baklava.core.App;
 import uim.baklava.core.Plugin;
 import uim.baklava.Filesystem\Filesystem;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * Base class for Shell Command reflection.

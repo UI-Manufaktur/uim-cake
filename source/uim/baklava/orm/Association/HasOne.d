@@ -4,7 +4,7 @@ import uim.baklava.Datasource\IEntity;
 import uim.baklava.orm.Association;
 import uim.baklava.orm.Association\Loader\SelectLoader;
 import uim.baklava.orm.Table;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use Closure;
 
 /**

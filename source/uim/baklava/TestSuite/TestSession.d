@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.TestSuite;
 
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 
 /**
  * Read only access to the session during testing.

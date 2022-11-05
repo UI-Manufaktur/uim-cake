@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.TestSuite\Constraint\Session;
 
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**

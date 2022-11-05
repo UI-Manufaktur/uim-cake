@@ -10,7 +10,7 @@ import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.orm.Marshaller;
 import uim.baklava.orm.Query;
 import uim.baklava.orm.Table;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations

@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         1.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Routing\Route;
+ */module uim.baklava.routings\Route;
 
 /**
  * Plugin short route, that copies the plugin param to the controller parameters

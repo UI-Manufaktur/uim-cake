@@ -8,7 +8,7 @@ import uim.baklava.orm.Marshaller;
 import uim.baklava.orm.PropertyMarshalInterface;
 import uim.baklava.orm.Query;
 import uim.baklava.orm.Table;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * This behavior provides a way to translate dynamic data by keeping translations

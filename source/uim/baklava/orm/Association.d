@@ -7,7 +7,7 @@ import uim.baklava.databases.expressions\IdentifierExpression;
 import uim.baklava.Datasource\IEntity;
 import uim.baklava.Datasource\ResultSetDecorator;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;

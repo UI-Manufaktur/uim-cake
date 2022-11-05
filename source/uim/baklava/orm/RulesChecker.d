@@ -6,7 +6,7 @@ import uim.baklava.orm.Rule\ExistsIn;
 import uim.baklava.orm.Rule\IsUnique;
 import uim.baklava.orm.Rule\LinkConstraint;
 import uim.baklava.orm.Rule\ValidCount;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 
 /**
  * ORM flavoured rules checker.

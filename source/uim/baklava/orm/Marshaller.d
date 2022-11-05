@@ -7,7 +7,7 @@ import uim.baklava.databases.TypeFactory;
 import uim.baklava.Datasource\IEntity;
 import uim.baklava.Datasource\InvalidPropertyInterface;
 import uim.baklava.orm.Association\BelongsToMany;
-import uim.baklava.utikities.Hash;
+import uim.baklava.utilities.Hash;
 use InvalidArgumentException;
 use RuntimeException;
 

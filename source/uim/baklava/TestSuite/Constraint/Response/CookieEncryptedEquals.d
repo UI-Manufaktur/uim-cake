@@ -14,7 +14,7 @@
  */module uim.baklava.TestSuite\Constraint\Response;
 
 import uim.baklava.https\Response;
-import uim.baklava.utikities.CookieCryptTrait;
+import uim.baklava.utilities.CookieCryptTrait;
 
 /**
  * CookieEncryptedEquals

@@ -24,7 +24,7 @@ import uim.baklava.orm.Exception\MissingEntityException;
 import uim.baklava.orm.Exception\PersistenceFailedException;
 import uim.baklava.orm.Exception\RolledbackTransactionException;
 import uim.baklava.orm.Rule\IsUnique;
-import uim.baklava.utikities.Inflector;
+import uim.baklava.utilities.Inflector;
 import uim.baklava.validations\ValidatorAwareInterface;
 import uim.baklava.validations\ValidatorAwareTrait;
 use Exception;
