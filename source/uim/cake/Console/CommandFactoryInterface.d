@@ -1,4 +1,4 @@
-module uim.cake.console;
+module uim.baklava.console;
 
 /**
  * An interface for abstracting creation of command and shell instances.

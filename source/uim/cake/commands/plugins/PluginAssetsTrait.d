@@ -1,9 +1,9 @@
-module uim.cake.command;
+module uim.baklava.command;
 
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-import uim.cake.Filesystem\Filesystem;
-import uim.cake.utikities.Inflector;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Plugin;
+import uim.baklava.Filesystem\Filesystem;
+import uim.baklava.utikities.Inflector;
 
 /**
  * trait for symlinking / copying plugin assets to app's webroot.

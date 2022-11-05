@@ -1,4 +1,4 @@
-module uim.cake.console;
+module uim.baklava.console;
 
 /**
  * An interface for shells that take a CommandCollection

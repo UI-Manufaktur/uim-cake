@@ -1,8 +1,8 @@
-module uim.cake.command;
+module uim.baklava.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.core.Configure;
+import uim.baklava.console.Arguments;
+import uim.baklava.console.consoleIo;
+import uim.baklava.core.Configure;
 
 /**
  * Print out the version of CakePHP in use.

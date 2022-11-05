@@ -1,13 +1,13 @@
-module uim.cake.command;
+module uim.baklava.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-import uim.cake.Filesystem\Filesystem;
-import uim.cake.Utility\Inflector;
+import uim.baklava.console.Arguments;
+import uim.baklava.console.consoleIo;
+import uim.baklava.console.consoleOptionParser;
+import uim.baklava.core.App;
+import uim.baklava.core.Configure;
+import uim.baklava.core.Plugin;
+import uim.baklava.Filesystem\Filesystem;
+import uim.baklava.Utility\Inflector;
 
 /**
  * Language string extractor

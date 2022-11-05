@@ -1,8 +1,8 @@
-module uim.cake.console;
+module uim.baklava.console;
 
-import uim.cake.console.Exception\ConsoleException;
-import uim.cake.console.Exception\StopException;
-import uim.cake.utikities.Inflector;
+import uim.baklava.console.Exception\ConsoleException;
+import uim.baklava.console.Exception\StopException;
+import uim.baklava.utikities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 
