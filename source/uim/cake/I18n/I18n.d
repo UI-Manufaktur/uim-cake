@@ -218,7 +218,7 @@ class I18n
     {
         static::getDefaultLocale();
         $current = Locale::getDefault();
-        if ($current === '') {
+        if ($current == "") {
             $current = static::DEFAULT_LOCALE;
             Locale::setDefault($current);
         }

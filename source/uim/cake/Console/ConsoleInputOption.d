@@ -161,7 +161,7 @@ class ConsoleInputOption
      * Get the usage value for this option
      */
     string usage() {
-        myName = this._short === '' ? '--' . this._name : '-' . this._short;
+        myName = this._short == "" ? '--' . this._name : '-' . this._short;
         $default = '';
         if (this._default !== null && !is_bool(this._default) && this._default !== '') {
             $default = ' ' . this._default;

@@ -183,7 +183,7 @@ class StringTemplate {
      */
     function load(string myfile): void
     {
-        if (myfile === '') {
+        if (myfile == "") {
             throw new CakeException('String template filename cannot be an empty string');
         }
 

@@ -36,7 +36,7 @@ class SqliteSchemaDialect : SchemaDialect
      */
     protected auto _convertColumn(string $column): array
     {
-        if ($column === '') {
+        if ($column == "") {
             return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
         }
 

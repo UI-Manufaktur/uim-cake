@@ -179,7 +179,7 @@ class StringTemplate {
      * @return void
      */
     void load(string myfile) {
-        if (myfile === '') {
+        if (myfile == "") {
             throw new CakeException('String template filename cannot be an empty string');
         }
 

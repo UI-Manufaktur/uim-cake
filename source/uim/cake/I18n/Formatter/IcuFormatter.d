@@ -21,7 +21,7 @@ class IcuFormatter : IFormatter
      */
     function format(string $locale, string myMessage, array $tokenValues): string
     {
-        if (myMessage === '') {
+        if (myMessage == "") {
             return myMessage;
         }
 

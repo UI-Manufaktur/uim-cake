@@ -93,7 +93,7 @@ trait TranslateStrategyTrait
         foreach ($translations as $locale => $translation) {
             myFields = $translation.extract(this._config['fields'], false);
             foreach (myFields as myField => myValue) {
-                if (myValue === null || myValue === '') {
+                if (myValue === null || myValue == "") {
                     $translation.unset(myField);
                 }
             }

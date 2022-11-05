@@ -20,7 +20,7 @@ import uim.baklava.views.forms\IContext;
 import uim.baklava.views\Helper;
 import uim.baklava.views\StringTemplateTrait;
 import uim.baklava.views\View;
-import uim.baklava.views\Widget\WidgetLocator;
+import uim.baklava.views.widgets\WidgetLocator;
 use InvalidArgumentException;
 use RuntimeException;
 

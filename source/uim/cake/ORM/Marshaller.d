@@ -184,7 +184,7 @@ class Marshaller
                 continue;
             }
 
-            if (myValue === '' && in_array(myKey, $primaryKey, true)) {
+            if (myValue == "" && in_array(myKey, $primaryKey, true)) {
                 // Skip marshalling '' for pk fields.
                 continue;
             }
@@ -657,7 +657,7 @@ class Marshaller
                 return implode(';', myKeys);
             })
             .map(function ($element, myKey) {
-                return myKey === '' ? $element : $element[0];
+                return myKey == "" ? $element : $element[0];
             })
             .toArray();
 

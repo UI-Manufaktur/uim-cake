@@ -296,7 +296,7 @@ class ExceptionRenderer : ExceptionRendererInterface
         }
 
         // $baseClass would be an empty string if the exception class is \Exception.
-        $method = $baseClass === '' ? 'error500' : Inflector::variable($baseClass);
+        $method = $baseClass == "" ? 'error500' : Inflector::variable($baseClass);
 
         return this.method = $method;
     }

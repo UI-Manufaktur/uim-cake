@@ -199,7 +199,7 @@ class ComparisonExpression : IExpression, FieldInterface
 
             // To avoid SQL errors when comparing a field to a list of empty values,
             // better just throw an exception here
-            if (myValue === '') {
+            if (myValue == "") {
                 myField = this._field instanceof IExpression ? this._field.sql($binder) : this._field;
                 /** @psalm-suppress PossiblyInvalidCast */
                 throw new DatabaseException(

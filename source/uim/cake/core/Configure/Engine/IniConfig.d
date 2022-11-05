@@ -114,7 +114,7 @@ class IniConfig : ConfigEngineInterface
             if (myValue === '1') {
                 myValue = true;
             }
-            if (myValue === '') {
+            if (myValue == "") {
                 myValue = false;
             }
             unset(myValues[myKey]);

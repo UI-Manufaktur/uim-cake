@@ -115,7 +115,7 @@ class Curl : AdapterInterface
         if ($out[CURLOPT_POSTFIELDS] !== '' && isset($out[CURLOPT_HTTPGET])) {
             $out[CURLOPT_CUSTOMREQUEST] = 'get';
         }
-        if ($out[CURLOPT_POSTFIELDS] === '') {
+        if ($out[CURLOPT_POSTFIELDS] == "") {
             unset($out[CURLOPT_POSTFIELDS]);
         }
 

@@ -28,7 +28,7 @@ class ContentsEmpty : ContentsBase
      */
     function matches($other): bool
     {
-        return this.contents === '';
+        return this.contents == "";
     }
 
     /**

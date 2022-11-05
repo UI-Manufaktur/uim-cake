@@ -23,7 +23,7 @@ trait SqlDialectTrait
     string quoteIdentifier(string myIdentifier) {
         myIdentifier = trim(myIdentifier);
 
-        if (myIdentifier === '*' || myIdentifier === '') {
+        if (myIdentifier === '*' || myIdentifier == "") {
             return myIdentifier;
         }
 

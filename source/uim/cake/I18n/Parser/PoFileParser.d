@@ -70,7 +70,7 @@ class PoFileParser
         while ($line = fgets($stream)) {
             $line = trim($line);
 
-            if ($line === '') {
+            if ($line == "") {
                 // Whitespace indicated current item is done
                 this._addMessage(myMessages, $item);
                 $item = $defaults;

@@ -254,7 +254,7 @@ trait EntityTrait
      * @throws \InvalidArgumentException if an empty field name is passed
      */
     function &get(string myField) {
-        if (myField === '') {
+        if (myField == "") {
             throw new InvalidArgumentException('Cannot get an empty field');
         }
 
@@ -282,7 +282,7 @@ trait EntityTrait
      * @throws \InvalidArgumentException if an empty field name is passed.
      */
     auto getOriginal(string myField) {
-        if (myField === '') {
+        if (myField == "") {
             throw new InvalidArgumentException('Cannot get an empty field');
         }
         if (array_key_exists(myField, this._original)) {
@@ -369,7 +369,7 @@ trait EntityTrait
                 empty(myValue) ||
                 (
                     is_string(myValue) &&
-                    myValue === ''
+                    myValue == ""
                 )
             )
         ) {

@@ -339,14 +339,14 @@ class File {
         $splInfo = new SplFileInfo(myPath);
         myName = ltrim($splInfo.getFilename(), '/\\');
 
-        if ($ext === null || $ext === '') {
+        if ($ext === null || $ext == "") {
             return myName;
         }
         $ext = preg_quote($ext);
         $new = preg_replace("/({$ext})$/u", '', myName);
 
         // basename of '/etc/.d' is '.d' not ''
-        return $new === '' ? myName : $new;
+        return $new == "" ? myName : $new;
     }
 
     /**

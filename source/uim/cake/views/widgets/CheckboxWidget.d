@@ -1,4 +1,4 @@
-module uim.baklava.views\Widget;
+module uim.baklava.views.widgets;
 
 import uim.baklava.views.forms\IContext;
 

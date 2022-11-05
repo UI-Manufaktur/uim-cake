@@ -462,7 +462,7 @@ class ConsoleIo
             myOptions
         );
         $in = '';
-        while ($in === '' || !in_array($in, myOptions, true)) {
+        while ($in == "" || !in_array($in, myOptions, true)) {
             $in = this._getInput($prompt, $printOptions, $default);
         }
 
@@ -495,7 +495,7 @@ class ConsoleIo
         myResult = this._in.read();
 
         myResult = myResult === null ? '' : trim(myResult);
-        if ($default !== null && myResult === '') {
+        if ($default !== null && myResult == "") {
             return $default;
         }
 

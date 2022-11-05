@@ -432,7 +432,7 @@ class Hash
                 if (empty(myData[$k])) {
                     unset(myData[$k]);
                 }
-            } elseif ($match && $nextPath === '') {
+            } elseif ($match && $nextPath == "") {
                 unset(myData[$k]);
             }
         }

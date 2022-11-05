@@ -934,7 +934,7 @@ class Folder
         }
 
         while (($part = array_shift($parts)) !== null) {
-            if ($part === '.' || $part === '') {
+            if ($part === '.' || $part == "") {
                 continue;
             }
             if ($part === '..') {

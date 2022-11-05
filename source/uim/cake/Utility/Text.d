@@ -609,7 +609,7 @@ class Text
                     myContentsLength = self::_strlen($tag[3], myOptions);
                 }
 
-                if ($truncate === '') {
+                if ($truncate == "") {
                     if (
                         !preg_match(
                             '/img|br|input|hr|area|base|basefont|col|frame|isindex|link|meta|param/i',
@@ -667,7 +667,7 @@ class Text
             }
 
             // If result is empty, then we don't need to count ellipsis in the cut.
-            if (myResult === '') {
+            if (myResult == "") {
                 myResult = self::_substr($text, 0, $length, myOptions);
             }
         }

@@ -690,7 +690,7 @@ class Message : JsonSerializable, Serializable
         }
 
         $context = ltrim($context, '_');
-        if ($email === '') {
+        if ($email == "") {
             throw new InvalidArgumentException(sprintf('The email set for "%s" is empty.', $context));
         }
         throw new InvalidArgumentException(sprintf('Invalid email set for "%s". You passed "%s".', $context, $email));
@@ -1548,7 +1548,7 @@ class Message : JsonSerializable, Serializable
      */
     protected auto wrap(?string myMessage = null, int $wrapLength = self::LINE_LENGTH_MUST): array
     {
-        if (myMessage === null || myMessage === '') {
+        if (myMessage === null || myMessage == "") {
             return [''];
         }
         myMessage = str_replace(["\r\n", "\r"], "\n", myMessage);

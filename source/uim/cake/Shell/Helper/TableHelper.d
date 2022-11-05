@@ -57,7 +57,7 @@ class TableHelper : Helper
      */
     protected auto _cellWidth(string $text): int
     {
-        if ($text === '') {
+        if ($text == "") {
             return 0;
         }
 

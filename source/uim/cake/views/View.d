@@ -709,7 +709,7 @@ class View : IEventDispatcher {
         this.dispatchEvent('View.beforeLayout', [$layoutFileName]);
 
         $title = this.Blocks.get('title');
-        if ($title === '') {
+        if ($title == "") {
             $title = Inflector::humanize(str_replace(DIRECTORY_SEPARATOR, '/', this.templatePath));
             this.Blocks.set('title', $title);
         }

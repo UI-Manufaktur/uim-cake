@@ -170,7 +170,7 @@ class BodyParserMiddleware : MiddlewareInterface
      * @return array|null
      */
     protected auto decodeJson(string $body) {
-        if ($body === '') {
+        if ($body == "") {
             return [];
         }
         $decoded = json_decode($body, true);

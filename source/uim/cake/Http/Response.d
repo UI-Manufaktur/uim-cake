@@ -620,7 +620,7 @@ class Response : IResponse
         }
 
         this._status = $code;
-        if ($reasonPhrase === '' && isset(this._statusCodes[$code])) {
+        if ($reasonPhrase == "" && isset(this._statusCodes[$code])) {
             $reasonPhrase = this._statusCodes[$code];
         }
         this._reasonPhrase = $reasonPhrase;
@@ -1487,11 +1487,11 @@ class Response : IResponse
             $end = $matches[2] ?? '';
         }
 
-        if ($start === '') {
+        if ($start == "") {
             $start = myfileSize - (int)$end;
             $end = $lastByte;
         }
-        if ($end === '') {
+        if ($end == "") {
             $end = $lastByte;
         }
 

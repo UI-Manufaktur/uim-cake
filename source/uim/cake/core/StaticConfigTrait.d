@@ -242,7 +242,7 @@ REGEXP;
             } elseif (strpos($k, '_') === 0) {
                 $exists[substr($k, 1)] = ($v !== '');
                 unset($parsed[$k]);
-            } elseif ($v === '' && !$exists[$k]) {
+            } elseif ($v == "" && !$exists[$k]) {
                 unset($parsed[$k]);
             }
         }

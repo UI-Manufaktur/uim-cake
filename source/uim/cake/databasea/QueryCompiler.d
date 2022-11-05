@@ -271,7 +271,7 @@ class QueryCompiler
             if (isset($join['conditions']) && $join['conditions'] instanceof IExpression) {
                 $condition = $join['conditions'].sql($binder);
             }
-            if ($condition === '') {
+            if ($condition == "") {
                 $joins .= ' ON 1 = 1';
             } else {
                 $joins .= " ON {$condition}";

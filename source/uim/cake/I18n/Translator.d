@@ -147,7 +147,7 @@ class Translator
             myMessage = myMessage[$form] ?? (string)end(myMessage);
         }
 
-        if (myMessage === '') {
+        if (myMessage == "") {
             myMessage = myKey;
         }
 
@@ -170,7 +170,7 @@ class Translator
         // No or missing context, fallback to the key/first message
         if ($context === null) {
             if (isset(myMessage['_context'][''])) {
-                return myMessage['_context'][''] === '' ? myKey : myMessage['_context'][''];
+                return myMessage['_context'][''] == "" ? myKey : myMessage['_context'][''];
             }
 
             return current(myMessage['_context']);
@@ -178,7 +178,7 @@ class Translator
         if (!isset(myMessage['_context'][$context])) {
             return myKey;
         }
-        if (myMessage['_context'][$context] === '') {
+        if (myMessage['_context'][$context] == "") {
             return myKey;
         }
 

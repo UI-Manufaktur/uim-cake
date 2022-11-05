@@ -129,7 +129,7 @@ class CompletionCommand : Command : ICommandCollectionAware
     protected auto getSubcommands(Arguments $args, ConsoleIo $io): int
     {
         myName = $args.getArgument('command');
-        if (myName === null || myName === '') {
+        if (myName === null || myName == "") {
             return static::CODE_SUCCESS;
         }
 

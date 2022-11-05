@@ -1,4 +1,4 @@
-module uim.baklava.views\Widget;
+module uim.baklava.views.widgets;
 
 import uim.baklava.views.forms\IContext;
 import uim.baklava.views\StringTemplate;
@@ -65,7 +65,7 @@ class ButtonWidget : WidgetInterface
 
     function secureFields(array myData): array
     {
-        if (!isset(myData['name']) || myData['name'] === '') {
+        if (!isset(myData['name']) || myData['name'] == "") {
             return [];
         }
 

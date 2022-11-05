@@ -410,7 +410,7 @@ class ServerRequest : IServerRequest
         if (!empty($ref) && !empty($base)) {
             if ($local && strpos($ref, $base) === 0) {
                 $ref = substr($ref, strlen($base));
-                if ($ref === '' || strpos($ref, '//') === 0) {
+                if ($ref == "" || strpos($ref, '//') === 0) {
                     $ref = '/';
                 }
                 if ($ref[0] !== '/') {

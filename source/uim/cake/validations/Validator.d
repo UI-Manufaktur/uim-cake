@@ -2550,7 +2550,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
             return true;
         }
 
-        if (myData === '' && ($flags & self::EMPTY_STRING)) {
+        if (myData == "" && ($flags & self::EMPTY_STRING)) {
             return true;
         }
 

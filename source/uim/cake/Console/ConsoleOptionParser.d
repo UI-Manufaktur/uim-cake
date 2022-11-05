@@ -730,7 +730,7 @@ class ConsoleOptionParser
                     .addOptions(this.options())
                     .addArguments(this.arguments());
             }
-            if ($subparser.getDescription() === '') {
+            if ($subparser.getDescription() == "") {
                 $subparser.setDescription($command.getRawHelp());
             }
             $subparser.setCommand(this.getCommand() . ' ' . $subcommand);

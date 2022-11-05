@@ -164,7 +164,7 @@ class DateTimeWidget : BasicWidget
      */
     protected auto formatDateTime(myValue, array myOptions): string
     {
-        if (myValue === '' || myValue === null) {
+        if (myValue == "" || myValue === null) {
             return '';
         }
 
@@ -213,7 +213,7 @@ class DateTimeWidget : BasicWidget
      */
     function secureFields(array myData): array
     {
-        if (!isset(myData['name']) || myData['name'] === '') {
+        if (!isset(myData['name']) || myData['name'] == "") {
             return [];
         }
 

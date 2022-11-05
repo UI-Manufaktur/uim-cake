@@ -869,7 +869,7 @@ class Route
         if ($star !== false) {
             myPath = rtrim(substr(this.template, 0, $star), '/');
 
-            return myPath === '' ? '/' : myPath;
+            return myPath == "" ? '/' : myPath;
         }
 
         return this.template;

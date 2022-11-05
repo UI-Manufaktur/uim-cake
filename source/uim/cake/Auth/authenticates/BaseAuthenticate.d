@@ -110,7 +110,7 @@ abstract class BaseAuthenticate : IEventListener
             myHasher = this.passwordHasher();
             myHashedPassword = myResult.get(myPasswordField);
 
-            if (myHashedPassword === null || myHashedPassword === '') {
+            if (myHashedPassword === null || myHashedPassword == "") {
                 // Waste time hashing the password, to prevent
                 // timing side-channels to distinguish whether
                 // user has password or not.

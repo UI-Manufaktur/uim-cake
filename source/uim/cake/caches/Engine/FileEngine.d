@@ -97,7 +97,7 @@ class FileEngine : CacheEngine
      */
     bool set(string myDataId, myValue, $ttl = null)
     {
-        if (myValue === '' || !this._init) {
+        if (myValue == "" || !this._init) {
             return false;
         }
 
@@ -451,7 +451,7 @@ class FileEngine : CacheEngine
                     return false;
                 }
 
-                $hasPrefix = $prefix === ''
+                $hasPrefix = $prefix == ""
                     || strpos($current.getBasename(), $prefix) === 0;
                 if ($hasPrefix === false) {
                     return false;
