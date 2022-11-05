@@ -4,7 +4,7 @@ import uim.baklava.console.Arguments;
 import uim.baklava.console.consoleIo;
 import uim.baklava.console.consoleOptionParser;
 import uim.baklava.databases.SchemaCache;
-import uim.baklava.Datasource\ConnectionManager;
+import uim.baklava.datasources\ConnectionManager;
 use RuntimeException;
 
 /**

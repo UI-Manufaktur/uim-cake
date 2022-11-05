@@ -2,9 +2,9 @@ module uim.baklava.controllers.components;
 
 import uim.baklava.controllers.components;
 import uim.baklava.controllers.componentsRegistry;
-import uim.baklava.Datasource\Exception\PageOutOfBoundsException;
-import uim.baklava.Datasource\Paginator;
-import uim.baklava.Datasource\ResultSetInterface;
+import uim.baklava.datasources\Exception\PageOutOfBoundsException;
+import uim.baklava.datasources\Paginator;
+import uim.baklava.datasources\ResultSetInterface;
 import uim.baklava.https\Exception\NotFoundException;
 use InvalidArgumentException;
 

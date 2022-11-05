@@ -5,7 +5,7 @@ import uim.baklava.console.Exception\StopException;
 import uim.baklava.core.App;
 import uim.baklava.core.Configure;
 import uim.baklava.core.Plugin;
-import uim.baklava.Log\Log;
+import uim.baklava.logs\Log;
 import uim.baklava.Shell\Task\CommandTask;
 import uim.baklava.utilities.Inflector;
 

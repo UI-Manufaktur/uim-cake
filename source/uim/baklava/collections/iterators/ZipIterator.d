@@ -1,9 +1,9 @@
 
-module uim.baklava.collections.iterators;
+module uim.baklava.collectionss.iterators;
 
-import uim.baklava.collection\Collection;
-import uim.baklava.collection\ICollection;
-import uim.baklava.collection\CollectionTrait;
+import uim.baklava.collections\Collection;
+import uim.baklava.collections\ICollection;
+import uim.baklava.collections\CollectionTrait;
 use MultipleIterator;
 use Serializable;
 

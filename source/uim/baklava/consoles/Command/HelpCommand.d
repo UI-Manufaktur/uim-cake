@@ -74,7 +74,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
             }
             $invert[myClass][] = myName;
         }
-        $grouped = [];
+        myGrouped = [];
         myPlugins = Plugin::loaded();
         foreach ($invert as myClass => myNames) {
             preg_match('/^(.+)\\\\(Command|Shell)\\\\/', myClass, $matches);
@@ -94,14 +94,14 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
                 [, $shortestName] = explode('.', $shortestName, 2);
             }
 
-            $grouped[$prefix][] = $shortestName;
+            myGrouped[$prefix][] = $shortestName;
         }
-        ksort($grouped);
+        ksort(myGrouped);
 
         this.outputPaths($io);
         $io.out('<info>Available Commands:</info>', 2);
 
-        foreach ($grouped as $prefix => myNames) {
+        foreach (myGrouped as $prefix => myNames) {
             $io.out("<info>{$prefix}</info>:");
             sort(myNames);
             foreach (myNames as myName) {

@@ -1,4 +1,4 @@
-module uim.baklava.collections.iterators;
+module uim.baklava.collectionss.iterators;
 
 use IteratorIterator;
 use RecursiveIterator;

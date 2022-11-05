@@ -1,8 +1,8 @@
 module uim.baklava.console;
 
 import uim.baklava.console.Exception\StopException;
-import uim.baklava.Log\Engine\ConsoleLog;
-import uim.baklava.Log\Log;
+import uim.baklava.logs\Engine\ConsoleLog;
+import uim.baklava.logs\Log;
 use RuntimeException;
 use SplFileObject;
 

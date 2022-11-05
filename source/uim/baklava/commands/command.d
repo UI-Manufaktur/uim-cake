@@ -3,8 +3,8 @@ module uim.baklava.command;
 import uim.baklava.console.Arguments;
 import uim.baklava.console.BaseCommand;
 import uim.baklava.console.consoleIo;
-import uim.baklava.Datasource\ModelAwareTrait;
-import uim.baklava.Log\LogTrait;
+import uim.baklava.datasources\ModelAwareTrait;
+import uim.baklava.logs\LogTrait;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 
 /**

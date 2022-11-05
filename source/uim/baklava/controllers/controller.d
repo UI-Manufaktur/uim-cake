@@ -3,7 +3,7 @@ module uim.baklava.controller;
 
 import uim.baklava.controller\Exception\MissingActionException;
 import uim.baklava.core.App;
-import uim.baklava.Datasource\ModelAwareTrait;
+import uim.baklava.datasources\ModelAwareTrait;
 import uim.baklava.events\IEventDispatcher;
 import uim.baklava.events\EventDispatcherTrait;
 import uim.baklava.events\IEvent;
@@ -11,7 +11,7 @@ import uim.baklava.events\IEventListener;
 import uim.baklava.events\IEventManager;
 import uim.baklava.https\Response;
 import uim.baklava.https\ServerRequest;
-import uim.baklava.Log\LogTrait;
+import uim.baklava.logs\LogTrait;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.routings\Router;
 import uim.baklava.views\ViewVarsTrait;
