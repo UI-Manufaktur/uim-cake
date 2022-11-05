@@ -2,7 +2,7 @@ module uim.cake.ORM;
 
 import uim.cake.collection\Collection;
 import uim.cake.collection\ICollection;
-import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.expressions\TupleComparison;
 import uim.cake.Datasource\IEntity;
 
 /**

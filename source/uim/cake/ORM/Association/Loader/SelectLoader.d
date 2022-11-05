@@ -1,7 +1,7 @@
 module uim.cake.orm.Association\Loader;
 
-import uim.cake.databases.Expression\IdentifierExpression;
-import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.expressions\IdentifierExpression;
+import uim.cake.databases.expressions\TupleComparison;
 import uim.cake.databases.ValueBinder;
 import uim.cake.orm.Association;
 import uim.cake.orm.Query;

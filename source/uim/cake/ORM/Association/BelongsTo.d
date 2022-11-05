@@ -1,6 +1,6 @@
 module uim.cake.orm.Association;
 
-import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.expressions\IdentifierExpression;
 import uim.cake.Datasource\IEntity;
 import uim.cake.orm.Association;
 import uim.cake.orm.Association\Loader\SelectLoader;
