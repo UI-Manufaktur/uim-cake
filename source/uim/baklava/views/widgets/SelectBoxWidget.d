@@ -205,11 +205,11 @@ class SelectBoxWidget : BasicWidget
             $label = $optgroup['text'];
             $attrs = (array)$optgroup;
         }
-        $groupOptions = this._renderOptions($opts, $disabled, $selected, myTemplateVars, $escape);
+        myGroupOptions = this._renderOptions($opts, $disabled, $selected, myTemplateVars, $escape);
 
         return this._templates.format('optgroup', [
             'label' => $escape ? h($label) : $label,
-            'content' => implode('', $groupOptions),
+            'content' => implode('', myGroupOptions),
             'templateVars' => myTemplateVars,
             'attrs' => this._templates.formatAttributes($attrs, ['text', 'options']),
         ]);

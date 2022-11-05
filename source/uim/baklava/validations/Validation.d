@@ -774,13 +774,13 @@ class Validation
         $locale = ini_get('intl.default_locale') ?: static::DEFAULT_LOCALE;
         $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
         $decimalPoint = $formatter.getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
-        $groupingSep = $formatter.getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+        myGroupingSep = $formatter.getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
 
         // There are two types of non-breaking spaces - we inject a space to account for human input
-        if ($groupingSep == "\xc2\xa0" || $groupingSep == "\xe2\x80\xaf") {
-            $check = str_replace([' ', $groupingSep, $decimalPoint], ['', '', '.'], (string)$check);
+        if (myGroupingSep == "\xc2\xa0" || myGroupingSep == "\xe2\x80\xaf") {
+            $check = str_replace([' ', myGroupingSep, $decimalPoint], ['', '', '.'], (string)$check);
         } else {
-            $check = str_replace([$groupingSep, $decimalPoint], ['', '.'], (string)$check);
+            $check = str_replace([myGroupingSep, $decimalPoint], ['', '.'], (string)$check);
         }
 
         return static::_check($check, $regex);

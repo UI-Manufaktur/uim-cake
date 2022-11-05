@@ -1142,12 +1142,12 @@ class FormHelper : Helper
      */
     protected auto _groupTemplate(array myOptions): string
     {
-        $groupTemplate = myOptions['options']['type'] . 'FormGroup';
-        if (!this.templater().get($groupTemplate)) {
-            $groupTemplate = 'formGroup';
+        myGroupTemplate = myOptions['options']['type'] . 'FormGroup';
+        if (!this.templater().get(myGroupTemplate)) {
+            myGroupTemplate = 'formGroup';
         }
 
-        return this.formatTemplate($groupTemplate, [
+        return this.formatTemplate(myGroupTemplate, [
             'input' => myOptions['input'] ?? [],
             'label' => myOptions['label'],
             'error' => myOptions['error'],

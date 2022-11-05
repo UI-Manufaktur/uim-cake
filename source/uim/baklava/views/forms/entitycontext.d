@@ -1,9 +1,9 @@
 module uim.baklava.views.forms;
 
 use ArrayAccess;
-import uim.baklava.collection\Collection;
-import uim.baklava.Datasource\IEntity;
-import uim.baklava.Datasource\InvalidPropertyInterface;
+import uim.baklava.collections\Collection;
+import uim.baklava.datasources\IEntity;
+import uim.baklava.datasources\InvalidPropertyInterface;
 import uim.baklava.orm.Entity;
 import uim.baklava.orm.Locator\LocatorAwareTrait;
 import uim.baklava.orm.Table;

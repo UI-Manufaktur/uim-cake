@@ -444,17 +444,17 @@ class Hash
      * Creates an associative array using `myKeyPath` as the path to build its keys, and optionally
      * `myValuePath` as path to get the values. If `myValuePath` is not specified, all values will be initialized
      * to null (useful for Hash::merge). You can optionally group the values by what is obtained when
-     * following the path specified in `$groupPath`.
+     * following the path specified in `myGroupPath`.
      *
      * @param array myData Array from where to extract keys and values
      * @param array<string>|string|null myKeyPath A dot-separated string.
      * @param array<string>|string|null myValuePath A dot-separated string.
-     * @param string|null $groupPath A dot-separated string.
+     * @param string|null myGroupPath A dot-separated string.
      * @return array Combined array
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::combine
      * @throws \RuntimeException When keys and values count is unequal.
      */
-    static function combine(array myData, myKeyPath, myValuePath = null, Nullable!string $groupPath = null): array
+    static function combine(array myData, myKeyPath, myValuePath = null, Nullable!string myGroupPath = null): array
     {
         if (empty(myData)) {
             return [];
@@ -493,18 +493,18 @@ class Hash
             );
         }
 
-        if ($groupPath !== null) {
-            $group = static::extract(myData, $groupPath);
-            if (!empty($group)) {
+        if (myGroupPath !== null) {
+            myGroup = static::extract(myData, myGroupPath);
+            if (!empty(myGroup)) {
                 $c = is_array(myKeys) ? count(myKeys) : count($vals);
                 $out = [];
                 for ($i = 0; $i < $c; $i++) {
-                    $group[$i] = $group[$i] ?? 0;
-                    $out[$group[$i]] = $out[$group[$i]] ?? [];
+                    myGroup[$i] = myGroup[$i] ?? 0;
+                    $out[myGroup[$i]] = $out[myGroup[$i]] ?? [];
                     if (myKeys === null) {
-                        $out[$group[$i]][] = $vals[$i];
+                        $out[myGroup[$i]][] = $vals[$i];
                     } else {
-                        $out[$group[$i]][myKeys[$i]] = $vals[$i];
+                        $out[myGroup[$i]][myKeys[$i]] = $vals[$i];
                     }
                 }
 

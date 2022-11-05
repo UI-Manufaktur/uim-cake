@@ -9,8 +9,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.baklava.views.forms;
 
-import uim.baklava.collection\Collection;
-import uim.baklava.Datasource\IEntity;
+import uim.baklava.collections\Collection;
+import uim.baklava.datasources\IEntity;
 import uim.baklava.forms\Form;
 import uim.baklava.https\ServerRequest;
 use RuntimeException;
