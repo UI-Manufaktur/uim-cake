@@ -1,6 +1,6 @@
-module uim.baklava.collections.iterators;
+module uim.baklava.collectionss.iterators;
 
-import uim.baklava.collection\Collection;
+import uim.baklava.collections\Collection;
 
 /**
  * This iterator will insert values into a property of each of the records returned.

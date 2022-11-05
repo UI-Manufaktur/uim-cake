@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.caches\Engine;
+ */module uim.baklava.caches.engines;
 
 import uim.baklava.caches\CacheEngine;
 
@@ -147,13 +147,13 @@ class ArrayEngine : CacheEngine
     function groups(): array
     {
         myResult = [];
-        foreach (this._config['groups'] as $group) {
-            myKey = this._config['prefix'] . $group;
+        foreach (this._config['groups'] as myGroup) {
+            myKey = this._config['prefix'] . myGroup;
             if (!isset(this.data[myKey])) {
                 this.data[myKey] = ['exp' => PHP_INT_MAX, 'val' => 1];
             }
             myValue = this.data[myKey]['val'];
-            myResult[] = $group . myValue;
+            myResult[] = myGroup . myValue;
         }
 
         return myResult;
@@ -163,12 +163,12 @@ class ArrayEngine : CacheEngine
      * Increments the group value to simulate deletion of all keys under a group
      * old values will remain in storage until they expire.
      *
-     * @param string $group The group to clear.
+     * @param string myGroup The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
+    bool clearGroup(string myGroup)
     {
-        myKey = this._config['prefix'] . $group;
+        myKey = this._config['prefix'] . myGroup;
         if (isset(this.data[myKey])) {
             this.data[myKey]['val'] += 1;
         }

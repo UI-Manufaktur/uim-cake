@@ -291,10 +291,10 @@ abstract class CacheEngine : ICache, ICacheEngine
      * to decide whether actually delete the keys or just simulate it to achieve
      * the same result.
      *
-     * @param string $group name of the group to be cleared
+     * @param string myGroup name of the group to be cleared
      * @return bool
      */
-    abstract bool clearGroup(string $group);
+    abstract bool clearGroup(string myGroup);
 
     /**
      * Does whatever initialization for each group is required

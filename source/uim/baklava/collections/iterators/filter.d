@@ -1,8 +1,8 @@
-module uim.baklava.collections.iterators;
+module uim.baklava.collectionss.iterators;
 
 use ArrayIterator;
-import uim.baklava.collection\Collection;
-import uim.baklava.collection\ICollection;
+import uim.baklava.collections\Collection;
+import uim.baklava.collections\ICollection;
 use CallbackFilterIterator;
 use Iterator;
 use Traversable;

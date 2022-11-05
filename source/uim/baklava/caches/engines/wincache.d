@@ -1,4 +1,4 @@
-module uim.baklava.caches\Engine;
+module uim.baklava.caches.engines;
 
 import uim.baklava.caches\CacheEngine;
 use RuntimeException;
@@ -141,26 +141,26 @@ class WincacheEngine : CacheEngine
     function groups(): array
     {
         if (empty(this._compiledGroupNames)) {
-            foreach (this._config['groups'] as $group) {
-                this._compiledGroupNames[] = this._config['prefix'] . $group;
+            foreach (this._config['groups'] as myGroup) {
+                this._compiledGroupNames[] = this._config['prefix'] . myGroup;
             }
         }
 
-        $groups = wincache_ucache_get(this._compiledGroupNames);
-        if (count($groups) !== count(this._config['groups'])) {
-            foreach (this._compiledGroupNames as $group) {
-                if (!isset($groups[$group])) {
-                    wincache_ucache_set($group, 1);
-                    $groups[$group] = 1;
+        myGroups = wincache_ucache_get(this._compiledGroupNames);
+        if (count(myGroups) !== count(this._config['groups'])) {
+            foreach (this._compiledGroupNames as myGroup) {
+                if (!isset(myGroups[myGroup])) {
+                    wincache_ucache_set(myGroup, 1);
+                    myGroups[myGroup] = 1;
                 }
             }
-            ksort($groups);
+            ksort(myGroups);
         }
 
         myResult = [];
-        $groups = array_values($groups);
-        foreach (this._config['groups'] as $i => $group) {
-            myResult[] = $group . $groups[$i];
+        myGroups = array_values(myGroups);
+        foreach (this._config['groups'] as $i => myGroup) {
+            myResult[] = myGroup . myGroups[$i];
         }
 
         return myResult;
@@ -170,13 +170,13 @@ class WincacheEngine : CacheEngine
      * Increments the group value to simulate deletion of all keys under a group
      * old values will remain in storage until they expire.
      *
-     * @param string $group The group to clear.
+     * @param string myGroup The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
+    bool clearGroup(string myGroup)
     {
         $success = false;
-        wincache_ucache_inc(this._config['prefix'] . $group, 1, $success);
+        wincache_ucache_inc(this._config['prefix'] . myGroup, 1, $success);
 
         return $success;
     }

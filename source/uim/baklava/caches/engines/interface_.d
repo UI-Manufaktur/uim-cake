@@ -6,8 +6,6 @@ module uim.baklava.caches;
  *
  * Internally Cache uses this interface when calling engine
  * methods.
- *
- * @since 3.7.0
  */
 interface ICacheEngine
 {
@@ -42,12 +40,10 @@ interface ICacheEngine
     /**
      * Clear all values belonging to the named group.
      *
-     * Each implementation needs to decide whether actually
-     * delete the keys or just augment a group generation value
+     * Each implementation needs to decide whether actually delete the keys or just augment a group generation value
      * to achieve the same result.
      *
-     * @param string $group name of the group to be cleared
-     * @return bool
+     * string myGroup - name of the group to be cleared
      */
-    bool clearGroup(string $group);
+    bool clearGroup(string myGroup);
 }

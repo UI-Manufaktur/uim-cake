@@ -1,4 +1,4 @@
-module uim.baklava.caches\Engine;
+module uim.baklava.caches.engines;
 
 import uim.baklava.caches\CacheEngine;
 import uim.baklava.caches\InvalidArgumentException;
@@ -340,11 +340,11 @@ class FileEngine : CacheEngine
      */
     protected bool _setKey(string myKey, bool $createKey = false)
     {
-        $groups = null;
+        myGroups = null;
         if (this._groupPrefix) {
-            $groups = vsprintf(this._groupPrefix, this.groups());
+            myGroups = vsprintf(this._groupPrefix, this.groups());
         }
-        $dir = this._config['path'] . $groups;
+        $dir = this._config['path'] . myGroups;
 
         if (!is_dir($dir)) {
             mkdir($dir, 0775, true);
@@ -428,12 +428,12 @@ class FileEngine : CacheEngine
     }
 
     /**
-     * Recursively deletes all files under any directory named as $group
+     * Recursively deletes all files under any directory named as myGroup
      *
-     * @param string $group The group to clear.
+     * @param string myGroup The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
+    bool clearGroup(string myGroup)
     {
         this._File = null;
 
@@ -446,7 +446,7 @@ class FileEngine : CacheEngine
         );
         $filtered = new CallbackFilterIterator(
             myContentss,
-            function (SplFileInfo $current) use ($group, $prefix) {
+            function (SplFileInfo $current) use (myGroup, $prefix) {
                 if (!$current.isFile()) {
                     return false;
                 }
@@ -459,7 +459,7 @@ class FileEngine : CacheEngine
 
                 $pos = strpos(
                     $current.getPathname(),
-                    DIRECTORY_SEPARATOR . $group . DIRECTORY_SEPARATOR
+                    DIRECTORY_SEPARATOR . myGroup . DIRECTORY_SEPARATOR
                 );
 
                 return $pos !== false;

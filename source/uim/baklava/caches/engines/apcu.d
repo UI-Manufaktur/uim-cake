@@ -1,4 +1,4 @@
-module uim.baklava.caches\Engine;
+module uim.baklava.caches.engines;
 
 @safe:
 import uim.baklava;
@@ -174,32 +174,32 @@ class ApcuEngine : CacheEngine
     function groups(): array
     {
         if (empty(this._compiledGroupNames)) {
-            foreach (this._config['groups'] as $group) {
-                this._compiledGroupNames[] = this._config['prefix'] . $group;
+            foreach (this._config['groups'] as myGroup) {
+                this._compiledGroupNames[] = this._config['prefix'] . myGroup;
             }
         }
 
         $success = false;
-        $groups = apcu_fetch(this._compiledGroupNames, $success);
-        if ($success && count($groups) !== count(this._config['groups'])) {
-            foreach (this._compiledGroupNames as $group) {
-                if (!isset($groups[$group])) {
+        myGroups = apcu_fetch(this._compiledGroupNames, $success);
+        if ($success && count(myGroups) !== count(this._config['groups'])) {
+            foreach (this._compiledGroupNames as myGroup) {
+                if (!isset(myGroups[myGroup])) {
                     myValue = 1;
-                    if (apcu_store($group, myValue) === false) {
+                    if (apcu_store(myGroup, myValue) === false) {
                         this.warning(
-                            sprintf('Failed to store key "%s" with value "%s" into APCu cache.', $group, myValue)
+                            sprintf('Failed to store key "%s" with value "%s" into APCu cache.', myGroup, myValue)
                         );
                     }
-                    $groups[$group] = myValue;
+                    myGroups[myGroup] = myValue;
                 }
             }
-            ksort($groups);
+            ksort(myGroups);
         }
 
         myResult = [];
-        $groups = array_values($groups);
-        foreach (this._config['groups'] as $i => $group) {
-            myResult[] = $group . $groups[$i];
+        myGroups = array_values(myGroups);
+        foreach (this._config['groups'] as $i => myGroup) {
+            myResult[] = myGroup . myGroups[$i];
         }
 
         return myResult;
@@ -209,14 +209,14 @@ class ApcuEngine : CacheEngine
      * Increments the group value to simulate deletion of all keys under a group
      * old values will remain in storage until they expire.
      *
-     * @param string $group The group to clear.
+     * @param string myGroup The group to clear.
      * @return bool success
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
-    bool clearGroup(string $group)
+    bool clearGroup(string myGroup)
     {
         $success = false;
-        apcu_inc(this._config['prefix'] . $group, 1, $success);
+        apcu_inc(this._config['prefix'] . myGroup, 1, $success);
 
         return $success;
     }

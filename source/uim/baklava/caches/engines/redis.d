@@ -8,10 +8,10 @@
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.baklava.caches\Engine;
+module uim.baklava.caches.engines;
 
 import uim.baklava.caches\CacheEngine;
-import uim.baklava.Log\Log;
+import uim.baklava.logs\Log;
 use Redis;
 use RedisException;
 use RuntimeException;
@@ -278,13 +278,13 @@ class RedisEngine : CacheEngine
     function groups(): array
     {
         myResult = [];
-        foreach (this._config['groups'] as $group) {
-            myValue = this._Redis.get(this._config['prefix'] . $group);
+        foreach (this._config['groups'] as myGroup) {
+            myValue = this._Redis.get(this._config['prefix'] . myGroup);
             if (!myValue) {
                 myValue = this.serialize(1);
-                this._Redis.set(this._config['prefix'] . $group, myValue);
+                this._Redis.set(this._config['prefix'] . myGroup, myValue);
             }
-            myResult[] = $group . myValue;
+            myResult[] = myGroup . myValue;
         }
 
         return myResult;
@@ -294,12 +294,12 @@ class RedisEngine : CacheEngine
      * Increments the group value to simulate deletion of all keys under a group
      * old values will remain in storage until they expire.
      *
-     * @param string $group name of the group to be cleared
+     * @param string myGroup name of the group to be cleared
      * @return bool success
      */
-    bool clearGroup(string $group)
+    bool clearGroup(string myGroup)
     {
-        return (bool)this._Redis.incr(this._config['prefix'] . $group);
+        return (bool)this._Redis.incr(this._config['prefix'] . myGroup);
     }
 
     /**

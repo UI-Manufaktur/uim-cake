@@ -1,6 +1,6 @@
-module uim.baklava.collections.iterators;
+module uim.baklava.collectionss.iterators;
 
-import uim.baklava.collection\Collection;
+import uim.baklava.collections\Collection;
 use RecursiveIterator;
 use Traversable;
 

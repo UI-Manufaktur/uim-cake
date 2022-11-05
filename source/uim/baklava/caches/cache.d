@@ -1,6 +1,6 @@
 module uim.baklava.caches;
 
-import uim.baklava.caches\Engine\NullEngine;
+import uim.baklava.caches.engines\NullEngine;
 import uim.baklava.core.StaticConfigTrait;
 use RuntimeException;
 
@@ -173,10 +173,10 @@ class Cache
         }
 
         if (!empty(myConfig['groups'])) {
-            foreach (myConfig['groups'] as $group) {
-                static::$_groups[$group][] = myName;
-                static::$_groups[$group] = array_unique(static::$_groups[$group]);
-                sort(static::$_groups[$group]);
+            foreach (myConfig['groups'] as myGroup) {
+                static::$_groups[myGroup][] = myName;
+                static::$_groups[myGroup] = array_unique(static::$_groups[myGroup]);
+                sort(static::$_groups[myGroup]);
             }
         }
     }
@@ -461,13 +461,13 @@ class Cache
     /**
      * Delete all keys from the cache belonging to the same group.
      *
-     * @param string $group name of the group to be cleared
+     * @param string myGroup name of the group to be cleared
      * @param string myConfig name of the configuration to use. Defaults to 'default'
      * @return bool True if the cache group was successfully cleared, false otherwise
      */
-    static bool clearGroup(string $group, string myConfig = 'default')
+    static bool clearGroup(string myGroup, string myConfig = 'default')
     {
-        return static::pool(myConfig).clearGroup($group);
+        return static::pool(myConfig).clearGroup(myGroup);
     }
 
     /**
@@ -482,24 +482,24 @@ class Cache
      * myConfigs will equal to `['posts' => ['daily', 'weekly']]`
      * Calling this method will load all the configured engines.
      *
-     * @param string|null $group Group name or null to retrieve all group mappings
+     * @param string|null myGroup Group name or null to retrieve all group mappings
      * @return array<string, array> Map of group and all configuration that has the same group
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    static function groupConfigs(Nullable!string $group = null): array
+    static function groupConfigs(Nullable!string myGroup = null): array
     {
         foreach (static::configured() as myConfig) {
             static::pool(myConfig);
         }
-        if ($group === null) {
+        if (myGroup === null) {
             return static::$_groups;
         }
 
-        if (isset(self::$_groups[$group])) {
-            return [$group => self::$_groups[$group]];
+        if (isset(self::$_groups[myGroup])) {
+            return [myGroup => self::$_groups[myGroup]];
         }
 
-        throw new InvalidArgumentException(sprintf('Invalid cache group %s', $group));
+        throw new InvalidArgumentException(sprintf('Invalid cache group %s', myGroup));
     }
 
     /**

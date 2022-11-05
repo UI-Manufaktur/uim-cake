@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.caches\Engine;
+ */module uim.baklava.caches.engines;
 
 import uim.baklava.caches\CacheEngine;
 use InvalidArgumentException;
@@ -463,26 +463,26 @@ class MemcachedEngine : CacheEngine
     function groups(): array
     {
         if (empty(this._compiledGroupNames)) {
-            foreach (this._config['groups'] as $group) {
-                this._compiledGroupNames[] = this._config['prefix'] . $group;
+            foreach (this._config['groups'] as myGroup) {
+                this._compiledGroupNames[] = this._config['prefix'] . myGroup;
             }
         }
 
-        $groups = this._Memcached.getMulti(this._compiledGroupNames) ?: [];
-        if (count($groups) !== count(this._config['groups'])) {
-            foreach (this._compiledGroupNames as $group) {
-                if (!isset($groups[$group])) {
-                    this._Memcached.set($group, 1, 0);
-                    $groups[$group] = 1;
+        myGroups = this._Memcached.getMulti(this._compiledGroupNames) ?: [];
+        if (count(myGroups) !== count(this._config['groups'])) {
+            foreach (this._compiledGroupNames as myGroup) {
+                if (!isset(myGroups[myGroup])) {
+                    this._Memcached.set(myGroup, 1, 0);
+                    myGroups[myGroup] = 1;
                 }
             }
-            ksort($groups);
+            ksort(myGroups);
         }
 
         myResult = [];
-        $groups = array_values($groups);
-        foreach (this._config['groups'] as $i => $group) {
-            myResult[] = $group . $groups[$i];
+        myGroups = array_values(myGroups);
+        foreach (this._config['groups'] as $i => myGroup) {
+            myResult[] = myGroup . myGroups[$i];
         }
 
         return myResult;
@@ -492,11 +492,11 @@ class MemcachedEngine : CacheEngine
      * Increments the group value to simulate deletion of all keys under a group
      * old values will remain in storage until they expire.
      *
-     * @param string $group name of the group to be cleared
+     * @param string myGroup name of the group to be cleared
      * @return bool success
      */
-    bool clearGroup(string $group)
+    bool clearGroup(string myGroup)
     {
-        return (bool)this._Memcached.increment(this._config['prefix'] . $group);
+        return (bool)this._Memcached.increment(this._config['prefix'] . myGroup);
     }
 }

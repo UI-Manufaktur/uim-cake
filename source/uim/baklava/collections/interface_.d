@@ -1,12 +1,15 @@
-module uim.baklava.collection;
+module uim.baklava.collections.interface_;
 
-use Iterator;
+@safe:
+import uim.baklava;
+
+/* use Iterator;
 use JsonSerializable;
 use Traversable;
+ */
 
 /**
- * Describes the methods a Collection should implement. A collection is an immutable
- * list of elements exposing a number of traversing and extracting method for
+ * Interface for describing collections. A collection is an immutable list of elements exposing a number of traversing and extracting method for
  * generating other collections.
  */
 interface ICollection : Iterator, JsonSerializable
@@ -388,10 +391,10 @@ interface ICollection : Iterator, JsonSerializable
      *  ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
      * ];
      *
-     * $group = (new Collection(myItems)).groupBy('parent_id');
+     * myGroup = (new Collection(myItems)).groupBy('parent_id');
      *
      * // Or
-     * $group = (new Collection(myItems)).groupBy(function ($e) {
+     * myGroup = (new Collection(myItems)).groupBy(function ($e) {
      *  return $e['parent_id'];
      * });
      *
@@ -470,10 +473,10 @@ interface ICollection : Iterator, JsonSerializable
      *  ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
      * ];
      *
-     * $group = (new Collection(myItems)).countBy('parent_id');
+     * myGroup = (new Collection(myItems)).countBy('parent_id');
      *
      * // Or
-     * $group = (new Collection(myItems)).countBy(function ($e) {
+     * myGroup = (new Collection(myItems)).countBy(function ($e) {
      *  return $e['parent_id'];
      * });
      *
@@ -699,11 +702,11 @@ interface ICollection : Iterator, JsonSerializable
      * or a function returning the indexing key out of the provided element
      * @param callable|string myValuePath the column name path to use as the array value
      * or a function returning the value out of the provided element
-     * @param callable|string|null $groupPath the column name path to use as the parent
+     * @param callable|string|null myGroupPath the column name path to use as the parent
      * grouping key or a function returning the key out of the provided element
      * @return self
      */
-    ICollection combine(myKeyPath, myValuePath, $groupPath = null);
+    ICollection combine(myKeyPath, myValuePath, myGroupPath = null);
 
     /**
      * Returns a new collection where the values are nested in a tree-like structure

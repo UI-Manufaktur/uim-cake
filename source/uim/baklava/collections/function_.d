@@ -1,7 +1,11 @@
-
-
-import uim.baklava.collection\Collection;
-import uim.baklava.collection\ICollection;
+/**
+ * @copyright     Copyright (c) Ozan Nurettin Süel (https://www.sicherheitsschmiede.de)
+ * @license       https://opensource.org/licenses/mit-license.php MIT License
+ **/
+module uim.baklava.collectionss.function_;
+s
+import uim.baklava.collections\Collection;
+import uim.baklava.collections\ICollection;
 
 if (!function_exists('collection')) {
     /**

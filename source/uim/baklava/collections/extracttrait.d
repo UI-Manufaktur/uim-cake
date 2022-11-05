@@ -1,4 +1,4 @@
-module uim.baklava.collection;
+module uim.baklava.collections;
 
 use Closure;
 use Traversable;

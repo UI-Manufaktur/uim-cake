@@ -1,19 +1,19 @@
-module uim.baklava.collection;
+module uim.baklava.collections;
 
 use AppendIterator;
 use ArrayIterator;
-import uim.baklava.collection.iIterator\BufferedIterator;
-import uim.baklava.collection.iIterator\ExtractIterator;
-import uim.baklava.collection.iIterator\FilterIterator;
-import uim.baklava.collection.iIterator\InsertIterator;
-import uim.baklava.collection.iIterator\MapReduce;
-import uim.baklava.collection.iIterator\NestIterator;
-import uim.baklava.collection.iIterator\ReplaceIterator;
-import uim.baklava.collection.iIterator\SortIterator;
-import uim.baklava.collection.iIterator\StoppableIterator;
-import uim.baklava.collection.iIterator\TreeIterator;
-import uim.baklava.collection.iIterator\UnfoldIterator;
-import uim.baklava.collection.iIterator\ZipIterator;
+import uim.baklava.collections.iIterator\BufferedIterator;
+import uim.baklava.collections.iIterator\ExtractIterator;
+import uim.baklava.collections.iIterator\FilterIterator;
+import uim.baklava.collections.iIterator\InsertIterator;
+import uim.baklava.collections.iIterator\MapReduce;
+import uim.baklava.collections.iIterator\NestIterator;
+import uim.baklava.collections.iIterator\ReplaceIterator;
+import uim.baklava.collections.iIterator\SortIterator;
+import uim.baklava.collections.iIterator\StoppableIterator;
+import uim.baklava.collections.iIterator\TreeIterator;
+import uim.baklava.collections.iIterator\UnfoldIterator;
+import uim.baklava.collections.iIterator\ZipIterator;
 use Countable;
 use InvalidArgumentException;
 use LimitIterator;
@@ -211,7 +211,7 @@ trait CollectionTrait
     ICollection groupBy(myPath)
     {
         $callback = this._propertyExtractor(myPath);
-        $group = [];
+        myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
             if (myPathValue === null) {
@@ -220,17 +220,17 @@ trait CollectionTrait
                     'Use a callback to return a default value for that path.'
                 );
             }
-            $group[myPathValue][] = myValue;
+            myGroup[myPathValue][] = myValue;
         }
 
-        return this.newCollection($group);
+        return this.newCollection(myGroup);
     }
 
 
     ICollection indexBy(myPath)
     {
         $callback = this._propertyExtractor(myPath);
-        $group = [];
+        myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
             if (myPathValue === null) {
@@ -239,10 +239,10 @@ trait CollectionTrait
                     'Use a callback to return a default value for that path.'
                 );
             }
-            $group[myPathValue] = myValue;
+            myGroup[myPathValue] = myValue;
         }
 
-        return this.newCollection($group);
+        return this.newCollection(myGroup);
     }
 
 
@@ -486,12 +486,12 @@ trait CollectionTrait
     }
 
 
-    ICollection combine(myKeyPath, myValuePath, $groupPath = null)
+    ICollection combine(myKeyPath, myValuePath, myGroupPath = null)
     {
         myOptions = [
             'keyPath' => this._propertyExtractor(myKeyPath),
             'valuePath' => this._propertyExtractor(myValuePath),
-            'groupPath' => $groupPath ? this._propertyExtractor($groupPath) : null,
+            'groupPath' => myGroupPath ? this._propertyExtractor(myGroupPath) : null,
         ];
 
         $mapper = function (myValue, myKey, MapReduce $mapReduce) use (myOptions) {

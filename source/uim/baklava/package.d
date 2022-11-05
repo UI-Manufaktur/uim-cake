@@ -1,7 +1,30 @@
-module uim.baklava.basics;
+module uim.baklava;
 
-@safe:
-import uim.baklava;
+import uim.baklava.auths;
+import uim.baklava.caches;
+import uim.baklava.collectionss;
+import uim.baklava.commands;
+import uim.baklava.consoles;
+import uim.baklava.controllers;
+import uim.baklava.core;
+import uim.baklava.databases;
+import uim.baklava.datasources;
+import uim.baklava.errors;
+import uim.baklava.events;
+import uim.baklava.filesystems;
+import uim.baklava.forms;
+import uim.baklava.https;
+import uim.baklava.i18n;
+import uim.baklava.logs;
+import uim.baklava.mailers;
+import uim.baklava.networks;
+import uim.baklava.orm;
+import uim.baklava.routings;
+import uim.baklava.shells;
+import uim.baklava.tests;
+import uim.baklava.utilities;
+import uim.baklava.validations;
+import uim.baklava.views;
 
 /* import uim.baklava.core.Configure;
 import uim.baklava.errors\Debugger;

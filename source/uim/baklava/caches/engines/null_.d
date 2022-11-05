@@ -1,4 +1,4 @@
-module uim.baklava.caches\Engine;
+module uim.baklava.caches.engines;
 
 import uim.baklava.caches\CacheEngine;
 
@@ -62,7 +62,7 @@ class NullEngine : CacheEngine
         return true;
     }
 
-    bool clearGroup(string $group) {
+    bool clearGroup(string myGroup) {
         return true;
     }
 }
