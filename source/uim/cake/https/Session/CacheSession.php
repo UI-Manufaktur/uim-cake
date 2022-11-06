@@ -9,9 +9,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.caketps\Session;
+ */module uim.cake.https\Session;
 
-import uim.cakeches\Cache;
+import uim.cake.caches\Cache;
 use InvalidArgumentException;
 use SessionHandlerInterface;
 

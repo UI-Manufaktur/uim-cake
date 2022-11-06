@@ -1,4 +1,4 @@
-module uim.caketps\Middleware;
+module uim.cake.https\Middleware;
 
 use InvalidArgumentException;
 use Psr\Http\Message\IResponse;
