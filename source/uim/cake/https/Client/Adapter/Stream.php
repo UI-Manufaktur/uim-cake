@@ -115,8 +115,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Additional request options.
      * @return void
      */
-    protected void _buildContext(RequestInterface myRequest, array myOptions)
-    {
+    protected void _buildContext(RequestInterface myRequest, array myOptions) {
         this._buildContent(myRequest, myOptions);
         this._buildHeaders(myRequest, myOptions);
         this._buildOptions(myRequest, myOptions);
@@ -141,8 +140,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected void _buildHeaders(RequestInterface myRequest, array myOptions)
-    {
+    protected void _buildHeaders(RequestInterface myRequest, array myOptions) {
         $headers = [];
         foreach (myRequest.getHeaders() as myName => myValues) {
             $headers[] = sprintf('%s: %s', myName, implode(', ', myValues));
@@ -160,8 +158,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected void _buildContent(RequestInterface myRequest, array myOptions)
-    {
+    protected void _buildContent(RequestInterface myRequest, array myOptions) {
         $body = myRequest.getBody();
         $body.rewind();
         this._contextOptions['content'] = $body.getContents();
@@ -174,8 +171,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected void _buildOptions(RequestInterface myRequest, array myOptions)
-    {
+    protected void _buildOptions(RequestInterface myRequest, array myOptions) {
         this._contextOptions['method'] = myRequest.getMethod();
         this._contextOptions['protocol_version'] = myRequest.getProtocolVersion();
         this._contextOptions['ignore_errors'] = true;
@@ -199,8 +195,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> myOptions Array of options to use.
      * @return void
      */
-    protected void _buildSslContext(RequestInterface myRequest, array myOptions)
-    {
+    protected void _buildSslContext(RequestInterface myRequest, array myOptions) {
         $sslOptions = [
             'ssl_verify_peer',
             'ssl_verify_peer_name',
@@ -297,8 +292,7 @@ class Stream : AdapterInterface
      * @return void
      * @throws \Psr\Http\Client\RequestExceptionInterface
      */
-    protected void _open(string myUrl, RequestInterface myRequest)
-    {
+    protected void _open(string myUrl, RequestInterface myRequest) {
         if (!(bool)ini_get('allow_url_fopen')) {
             throw new ClientException('The PHP directive `allow_url_fopen` must be enabled.');
         }

@@ -86,8 +86,7 @@ class TableRegistry
      * @return bool
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::exists()} instead. Will be removed in 5.0
      */
-    static bool exists(string myAlias)
-    {
+    static bool exists(string myAlias) {
         return static::getTableLocator().exists(myAlias);
     }
 

@@ -36,8 +36,7 @@ class Mock : AdapterInterface
      * @param array<string, mixed> myOptions See above.
      * @return void
      */
-    void addResponse(RequestInterface myRequest, Response $response, array myOptions)
-    {
+    void addResponse(RequestInterface myRequest, Response $response, array myOptions) {
         if (isset(myOptions['match']) && !(myOptions['match'] instanceof Closure)) {
             myType = getTypeName(myOptions['match']);
             throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{myType}`.");

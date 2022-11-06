@@ -105,8 +105,7 @@ class FormDataPart
      * @param string|null $disposition Use null to get/string to set.
      * @return string
      */
-    string disposition(Nullable!string $disposition = null)
-    {
+    string disposition(Nullable!string $disposition = null) {
         if ($disposition === null) {
             return this._disposition;
         }
@@ -182,8 +181,7 @@ class FormDataPart
      *
      * @return string
      */
-    string name()
-    {
+    string name() {
         return this._name;
     }
 
@@ -192,8 +190,7 @@ class FormDataPart
      *
      * @return string
      */
-    string value()
-    {
+    string value() {
         return this._value;
     }
 
@@ -204,8 +201,7 @@ class FormDataPart
      *
      * @return string
      */
-    string __toString()
-    {
+    string __toString() {
         $out = '';
         if (this._disposition) {
             $out .= 'Content-Disposition: ' . this._disposition;
@@ -242,8 +238,7 @@ class FormDataPart
      * @param string myValue The value of the header parameter
      * @return string
      */
-    protected string _headerParameterToString(string myName, string myValue)
-    {
+    protected string _headerParameterToString(string myName, string myValue) {
         $transliterated = Text::transliterate(str_replace('"', '', myValue));
         $return = sprintf('%s="%s"', myName, $transliterated);
         if (this._charset !== null && myValue !== $transliterated) {

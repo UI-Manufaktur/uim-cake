@@ -131,8 +131,7 @@ class Response : Message : IResponse
      * @return string
      * @throws \RuntimeException When attempting to decode gzip content without gzinflate.
      */
-    protected string _decodeGzipBody(string $body)
-    {
+    protected string _decodeGzipBody(string $body) {
         if (!function_exists('gzinflate')) {
             throw new RuntimeException('Cannot decompress gzip response body without gzinflate()');
         }
@@ -252,8 +251,7 @@ class Response : Message : IResponse
     /**
      * @return string The current reason phrase.
      */
-    string getReasonPhrase()
-    {
+    string getReasonPhrase() {
         return this.reasonPhrase;
     }
 
@@ -366,8 +364,7 @@ class Response : Message : IResponse
      *
      * @return string
      */
-    string getStringBody()
-    {
+    string getStringBody() {
         return this._getBody();
     }
 
@@ -444,8 +441,7 @@ class Response : Message : IResponse
      *
      * @return string
      */
-    protected string _getBody()
-    {
+    protected string _getBody() {
         this.stream.rewind();
 
         return this.stream.getContents();

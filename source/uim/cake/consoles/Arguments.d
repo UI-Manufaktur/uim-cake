@@ -72,7 +72,8 @@ class Arguments
      * @param int $index The argument index to check.
      */
 <<<<<<< HEAD
-    bool hasArgumentAt(int $index) {
+    bool hasArgumentAt(int $index)
+    {
 =======
     bool hasArgumentAt(int $index) {
 >>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
