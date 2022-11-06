@@ -161,8 +161,7 @@ class FrozenTime : Chronos : I18nIDateTime
      * @param array<string, mixed> myOptions Array of options.
      * @return string Relative time string.
      */
-    string timeAgoInWords(array myOptions = [])
-    {
+    string timeAgoInWords(array myOptions = []) {
         /** @psalm-suppress UndefinedInterfaceMethod */
         return static::getDiffFormatter().timeAgoInWords(this, myOptions);
     }

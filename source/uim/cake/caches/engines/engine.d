@@ -59,8 +59,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param array<string, mixed> myConfig Associative array of parameters for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = [])
-    {
+    bool init(array myConfig = []) {
         this.setConfig(myConfig);
 
         if (!empty(this._config['groups'])) {
@@ -146,8 +145,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException If myValues is neither an array nor a Traversable,
      *   or if any of the myValues are not a legal value.
      */
-    bool setMultiple(myValues, $ttl = null)
-    {
+    bool setMultiple(myValues, $ttl = null) {
         this.ensureValidType(myValues, self::CHECK_KEY);
 
         if ($ttl !== null) {
@@ -178,8 +176,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException If myKeys is neither an array nor a Traversable,
      *   or if any of the myKeys are not a legal value.
      */
-    bool deleteMultiple(myKeys)
-    {
+    bool deleteMultiple(myKeys) {
         this.ensureValidType(myKeys);
 
         foreach (myKeys as myKey) {
@@ -204,8 +201,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return bool
      * @throws \Cake\Cache\InvalidArgumentException If the myKey string is not a legal value.
      */
-    bool has(myKey)
-    {
+    bool has(myKey) {
         return this.get(myKey) !== null;
     }
 
@@ -276,8 +272,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param mixed myValue Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    bool add(string myKey, myValue)
-    {
+    bool add(string myKey, myValue) {
         $cachedValue = this.get(myKey);
         if ($cachedValue === null) {
             return this.set(myKey, myValue);

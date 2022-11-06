@@ -68,8 +68,7 @@ class RedisEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = [])
-    {
+    bool init(array myConfig = []) {
         if (!extension_loaded('redis')) {
             throw new RuntimeException('The `redis` extension must be enabled to use RedisEngine.');
         }
@@ -88,8 +87,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if Redis server was connected
      */
-    protected bool _connect()
-    {
+    protected bool _connect() {
         try {
             this._Redis = new Redis();
             if (!empty(this._config['unix_socket'])) {
@@ -136,8 +134,7 @@ class RedisEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool set(myKey, myValue, $ttl = null)
-    {
+    bool set(myKey, myValue, $ttl = null) {
         myKey = this._key(myKey);
         myValue = this.serialize(myValue);
 
@@ -210,8 +207,7 @@ class RedisEngine : CacheEngine
      * @param string myKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    bool delete(myKey)
-    {
+    bool delete(myKey) {
         myKey = this._key(myKey);
 
         return this._Redis.del(myKey) > 0;
@@ -222,8 +218,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    bool clear()
-    {
+    bool clear() {
         this._Redis.setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
         $isAllDeleted = true;
@@ -255,8 +250,7 @@ class RedisEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://github.com/phpredis/phpredis#set
      */
-    bool add(string myKey, myValue)
-    {
+    bool add(string myKey, myValue) {
         $duration = this._config['duration'];
         myKey = this._key(myKey);
         myValue = this.serialize(myValue);
@@ -297,8 +291,7 @@ class RedisEngine : CacheEngine
      * @param string myGroup name of the group to be cleared
      * @return bool success
      */
-    bool clearGroup(string myGroup)
-    {
+    bool clearGroup(string myGroup) {
         return (bool)this._Redis.incr(this._config['prefix'] . myGroup);
     }
 

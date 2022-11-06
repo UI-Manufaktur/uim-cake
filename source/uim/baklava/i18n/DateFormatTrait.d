@@ -103,8 +103,7 @@ trait DateFormatTrait
      * @param string|null $locale The locale name in which the date should be displayed (e.g. pt-BR)
      * @return string Formatted date string
      */
-    string nice($timezone = null, $locale = null)
-    {
+    string nice($timezone = null, $locale = null) {
         return (string)this.i18nFormat(static::$niceFormat, $timezone, $locale);
     }
 
@@ -189,8 +188,7 @@ trait DateFormatTrait
      * @param string|null $locale The locale name in which the date should be displayed.
      * @return string
      */
-    protected string _formatObject($date, $format, Nullable!string $locale)
-    {
+    protected string _formatObject($date, $format, Nullable!string $locale) {
         $pattern = '';
 
         if (is_array($format)) {
@@ -247,8 +245,7 @@ trait DateFormatTrait
     }
 
 
-    string __toString()
-    {
+    string __toString() {
         return (string)this.i18nFormat();
     }
 

@@ -39,8 +39,7 @@ trait CollectionTrait
      * @param mixed ...$args Constructor arguments.
      * @return \Cake\Collection\ICollection
      */
-    protected ICollection newCollection(...$args)
-    {
+    protected ICollection newCollection(...$args) {
         return new Collection(...$args);
     }
 
@@ -54,8 +53,7 @@ trait CollectionTrait
     }
 
 
-    ICollection filter(?callable $callback = null)
-    {
+    ICollection filter(?callable $callback = null) {
         if ($callback === null) {
             $callback = function ($v) {
                 return (bool)$v;
@@ -66,8 +64,7 @@ trait CollectionTrait
     }
 
 
-    ICollection reject(callable $callback)
-    {
+    ICollection reject(callable $callback) {
         return new FilterIterator(this.unwrap(), function (myKey, myValue, myItems) use ($callback) {
             return !$callback(myKey, myValue, myItems);
         });
@@ -85,8 +82,7 @@ trait CollectionTrait
     }
 
 
-    bool some(callable $callback)
-    {
+    bool some(callable $callback) {
         foreach (this.optimizeUnwrap() as myKey => myValue) {
             if ($callback(myValue, myKey) === true) {
                 return true;
@@ -108,8 +104,7 @@ trait CollectionTrait
     }
 
 
-    ICollection map(callable $callback)
-    {
+    ICollection map(callable $callback) {
         return new ReplaceIterator(this.unwrap(), $callback);
     }
 
@@ -134,8 +129,7 @@ trait CollectionTrait
     }
 
 
-    ICollection extract(myPath)
-    {
+    ICollection extract(myPath) {
         $extractor = new ExtractIterator(this.unwrap(), myPath);
         if (is_string(myPath) && strpos(myPath, '{*}') !== false) {
             $extractor = $extractor
@@ -202,14 +196,12 @@ trait CollectionTrait
     }
 
 
-    ICollection sortBy(myPath, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC)
-    {
+    ICollection sortBy(myPath, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC) {
         return new SortIterator(this.unwrap(), myPath, $order, $sort);
     }
 
 
-    ICollection groupBy(myPath)
-    {
+    ICollection groupBy(myPath) {
         $callback = this._propertyExtractor(myPath);
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
@@ -227,8 +219,7 @@ trait CollectionTrait
     }
 
 
-    ICollection indexBy(myPath)
-    {
+    ICollection indexBy(myPath) {
         $callback = this._propertyExtractor(myPath);
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
@@ -246,8 +237,7 @@ trait CollectionTrait
     }
 
 
-    ICollection countBy(myPath)
-    {
+    ICollection countBy(myPath) {
         $callback = this._propertyExtractor(myPath);
 
         $mapper = void (myValue, myKey, $mr) use ($callback) {
@@ -279,8 +269,7 @@ trait CollectionTrait
     }
 
 
-    ICollection shuffle()
-    {
+    ICollection shuffle() {
         myItems = this.toList();
         shuffle(myItems);
 
@@ -288,26 +277,22 @@ trait CollectionTrait
     }
 
 
-    ICollection sample(int $length = 10)
-    {
+    ICollection sample(int $length = 10) {
         return this.newCollection(new LimitIterator(this.shuffle(), 0, $length));
     }
 
 
-    ICollection take(int $length = 1, int $offset = 0)
-    {
+    ICollection take(int $length = 1, int $offset = 0) {
         return this.newCollection(new LimitIterator(this, $offset, $length));
     }
 
 
-    ICollection skip(int $length)
-    {
+    ICollection skip(int $length) {
         return this.newCollection(new LimitIterator(this, $length));
     }
 
 
-    ICollection match(array $conditions)
-    {
+    ICollection match(array $conditions) {
         return this.filter(this._createMatcherFilter($conditions));
     }
 
@@ -349,8 +334,7 @@ trait CollectionTrait
     }
 
 
-    ICollection takeLast(int $length)
-    {
+    ICollection takeLast(int $length) {
         if ($length < 1) {
             throw new InvalidArgumentException('The takeLast method requires a number greater than 0.');
         }
@@ -446,8 +430,7 @@ trait CollectionTrait
     }
 
 
-    ICollection append(myItems)
-    {
+    ICollection append(myItems) {
         $list = new AppendIterator();
         $list.append(this.unwrap());
         $list.append(this.newCollection(myItems).unwrap());
@@ -456,8 +439,7 @@ trait CollectionTrait
     }
 
 
-    ICollection appendItem($item, myKey = null)
-    {
+    ICollection appendItem($item, myKey = null) {
         if (myKey !== null) {
             myData = [myKey => $item];
         } else {
@@ -468,14 +450,12 @@ trait CollectionTrait
     }
 
 
-    ICollection prepend(myItems)
-    {
+    ICollection prepend(myItems) {
         return this.newCollection(myItems).append(this);
     }
 
 
-    ICollection prependItem($item, myKey = null)
-    {
+    ICollection prependItem($item, myKey = null) {
         if (myKey !== null) {
             myData = [myKey => $item];
         } else {
@@ -486,8 +466,7 @@ trait CollectionTrait
     }
 
 
-    ICollection combine(myKeyPath, myValuePath, myGroupPath = null)
-    {
+    ICollection combine(myKeyPath, myValuePath, myGroupPath = null) {
         myOptions = [
             'keyPath' => this._propertyExtractor(myKeyPath),
             'valuePath' => this._propertyExtractor(myValuePath),
@@ -523,8 +502,7 @@ trait CollectionTrait
     }
 
 
-    ICollection nest($idPath, $parentPath, string $nestingKey = 'children')
-    {
+    ICollection nest($idPath, $parentPath, string $nestingKey = 'children') {
         $parents = [];
         $idPath = this._propertyExtractor($idPath);
         $parentPath = this._propertyExtractor($parentPath);
@@ -569,8 +547,7 @@ trait CollectionTrait
     }
 
 
-    ICollection insert(string myPath, myValues)
-    {
+    ICollection insert(string myPath, myValues) {
         return new InsertIterator(this.unwrap(), myPath, myValues);
     }
 
@@ -605,14 +582,12 @@ trait CollectionTrait
     }
 
 
-    ICollection compile(bool $keepKeys = true)
-    {
+    ICollection compile(bool $keepKeys = true) {
         return this.newCollection(this.toArray($keepKeys));
     }
 
 
-    ICollection lazy()
-    {
+    ICollection lazy() {
         $generator = function () {
             foreach (this.unwrap() as $k => $v) {
                 yield $k => $v;
@@ -623,14 +598,12 @@ trait CollectionTrait
     }
 
 
-    ICollection buffered()
-    {
+    ICollection buffered() {
         return new BufferedIterator(this.unwrap());
     }
 
 
-    ICollection listNested($order = 'desc', $nestingKey = 'children')
-    {
+    ICollection listNested($order = 'desc', $nestingKey = 'children') {
         if (is_string($order)) {
             $order = strtolower($order);
             myModes = [
@@ -655,8 +628,7 @@ trait CollectionTrait
     }
 
 
-    ICollection stopWhen($condition)
-    {
+    ICollection stopWhen($condition) {
         if (!is_callable($condition)) {
             $condition = this._createMatcherFilter($condition);
         }
@@ -665,8 +637,7 @@ trait CollectionTrait
     }
 
 
-    ICollection unfold(?callable $callback = null)
-    {
+    ICollection unfold(?callable $callback = null) {
         if ($callback === null) {
             $callback = function ($item) {
                 return $item;
@@ -682,22 +653,19 @@ trait CollectionTrait
     }
 
 
-    ICollection through(callable $callback)
-    {
+    ICollection through(callable $callback) {
         myResult = $callback(this);
 
         return myResult instanceof ICollection ? myResult : this.newCollection(myResult);
     }
 
 
-    ICollection zip(iterable myItems)
-    {
+    ICollection zip(iterable myItems) {
         return new ZipIterator(array_merge([this.unwrap()], func_get_args()));
     }
 
 
-    ICollection zipWith(iterable myItems, $callback)
-    {
+    ICollection zipWith(iterable myItems, $callback) {
         if (func_num_args() > 2) {
             myItems = func_get_args();
             $callback = array_pop(myItems);
@@ -709,8 +677,7 @@ trait CollectionTrait
     }
 
 
-    ICollection chunk(int $chunkSize)
-    {
+    ICollection chunk(int $chunkSize) {
         return this.map(function ($v, $k, $iterator) use ($chunkSize) {
             myValues = [$v];
             for ($i = 1; $i < $chunkSize; $i++) {
@@ -726,8 +693,7 @@ trait CollectionTrait
     }
 
 
-    ICollection chunkWithKeys(int $chunkSize, bool $keepKeys = true)
-    {
+    ICollection chunkWithKeys(int $chunkSize, bool $keepKeys = true) {
         return this.map(function ($v, $k, $iterator) use ($chunkSize, $keepKeys) {
             myKey = 0;
             if ($keepKeys) {
@@ -786,8 +752,7 @@ trait CollectionTrait
      * @return \Cake\Collection\ICollection
      * @throws \LogicException
      */
-    ICollection cartesianProduct(?callable $operation = null, ?callable $filter = null)
-    {
+    ICollection cartesianProduct(?callable $operation = null, ?callable $filter = null) {
         if (this.isEmpty()) {
             return this.newCollection([]);
         }
@@ -844,8 +809,7 @@ trait CollectionTrait
      * @return \Cake\Collection\ICollection
      * @throws \LogicException
      */
-    ICollection transpose()
-    {
+    ICollection transpose() {
         $arrayValue = this.toList();
         $length = count(current($arrayValue));
         myResult = [];

@@ -18,8 +18,7 @@ if (!function_exists('__')) {
      * @return string The translated text.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__
      */
-    string __(string $singular, ...$args)
-    {
+    string __(string $singular, ...$args) {
         if (!$singular) {
             return '';
         }
@@ -44,8 +43,7 @@ if (!function_exists('__n')) {
      * @return string Plural form of translated string.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__n
      */
-    string __n(string $singular, string $plural, int myCount, ...$args)
-    {
+    string __n(string $singular, string $plural, int myCount, ...$args) {
         if (!$singular) {
             return '';
         }
@@ -71,8 +69,7 @@ if (!function_exists('__d')) {
      * @return string Translated string.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__d
      */
-    string __d(string $domain, string $msg, ...$args)
-    {
+    string __d(string $domain, string $msg, ...$args) {
         if (!$msg) {
             return '';
         }
@@ -99,8 +96,7 @@ if (!function_exists('__dn')) {
      * @return string Plural form of translated string.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__dn
      */
-    string __dn(string $domain, string $singular, string $plural, int myCount, ...$args)
-    {
+    string __dn(string $domain, string $singular, string $plural, int myCount, ...$args) {
         if (!$singular) {
             return '';
         }
@@ -128,8 +124,7 @@ if (!function_exists('__x')) {
      * @return string Translated string.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__x
      */
-    string __x(string $context, string $singular, ...$args)
-    {
+    string __x(string $context, string $singular, ...$args) {
         if (!$singular) {
             return '';
         }
@@ -157,8 +152,7 @@ if (!function_exists('__xn')) {
      * @return string Plural form of translated string.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__xn
      */
-    string __xn(string $context, string $singular, string $plural, int myCount, ...$args)
-    {
+    string __xn(string $context, string $singular, string $plural, int myCount, ...$args) {
         if (!$singular) {
             return '';
         }
@@ -187,8 +181,7 @@ if (!function_exists('__dx')) {
      * @return string Translated string.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__dx
      */
-    string __dx(string $domain, string $context, string $msg, ...$args)
-    {
+    string __dx(string $domain, string $context, string $msg, ...$args) {
         if (!$msg) {
             return '';
         }
@@ -220,8 +213,7 @@ if (!function_exists('__dxn')) {
      * @return string Plural form of translated string.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#__dxn
      */
-    string __dxn(string $domain, string $context, string $singular, string $plural, int myCount, ...$args)
-    {
+    string __dxn(string $domain, string $context, string $singular, string $plural, int myCount, ...$args) {
         if (!$singular) {
             return '';
         }

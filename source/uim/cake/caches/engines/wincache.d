@@ -26,8 +26,7 @@ class WincacheEngine : CacheEngine
      * @param array<string, mixed> myConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = [])
-    {
+    bool init(array myConfig = []) {
         if (!extension_loaded('wincache')) {
             throw new RuntimeException('The `wincache` extension must be enabled to use WincacheEngine.');
         }
@@ -47,8 +46,7 @@ class WincacheEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool set(myKey, myValue, $ttl = null)
-    {
+    bool set(myKey, myValue, $ttl = null) {
         myKey = this._key(myKey);
         $duration = this.duration($ttl);
 
@@ -104,8 +102,7 @@ class WincacheEngine : CacheEngine
      * @param string myKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    bool delete(myKey)
-    {
+    bool delete(myKey) {
         myKey = this._key(myKey);
 
         return wincache_ucache_delete(myKey);
@@ -117,8 +114,7 @@ class WincacheEngine : CacheEngine
      *
      * @return bool True Returns true.
      */
-    bool clear()
-    {
+    bool clear() {
         $info = wincache_ucache_info();
         $cacheKeys = $info['ucache_entries'];
         unset($info);
@@ -173,8 +169,7 @@ class WincacheEngine : CacheEngine
      * @param string myGroup The group to clear.
      * @return bool success
      */
-    bool clearGroup(string myGroup)
-    {
+    bool clearGroup(string myGroup) {
         $success = false;
         wincache_ucache_inc(this._config['prefix'] . myGroup, 1, $success);
 

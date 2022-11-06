@@ -238,8 +238,7 @@ class Cache
      * @param string myConfig Optional string configuration name to write to. Defaults to 'default'
      * @return bool True if the data was successfully cached, false on failure
      */
-    static bool write(string myKey, myValue, string myConfig = 'default')
-    {
+    static bool write(string myKey, myValue, string myConfig = 'default') {
         if (is_resource(myValue)) {
             return false;
         }
@@ -283,8 +282,7 @@ class Cache
      * @return bool True on success, false on failure
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    static bool writeMany(iterable myData, string myConfig = 'default')
-    {
+    static bool writeMany(iterable myData, string myConfig = 'default') {
         return static::pool(myConfig).setMultiple(myData);
     }
 
@@ -399,8 +397,7 @@ class Cache
      * @param string myConfig name of the configuration to use. Defaults to 'default'
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    static bool delete(string myKey, string myConfig = 'default')
-    {
+    static bool delete(string myKey, string myConfig = 'default') {
         return static::pool(myConfig).delete(myKey);
     }
 
@@ -426,8 +423,7 @@ class Cache
      * @return bool True on success, false on failure.
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    static bool deleteMany(iterable myKeys, string myConfig = 'default')
-    {
+    static bool deleteMany(iterable myKeys, string myConfig = 'default') {
         return static::pool(myConfig).deleteMultiple(myKeys);
     }
 
@@ -437,8 +433,7 @@ class Cache
      * @param string myConfig name of the configuration to use. Defaults to 'default'
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    static bool clear(string myConfig = 'default')
-    {
+    static bool clear(string myConfig = 'default') {
         return static::pool(myConfig).clear();
     }
 
@@ -465,8 +460,7 @@ class Cache
      * @param string myConfig name of the configuration to use. Defaults to 'default'
      * @return bool True if the cache group was successfully cleared, false otherwise
      */
-    static bool clearGroup(string myGroup, string myConfig = 'default')
-    {
+    static bool clearGroup(string myGroup, string myConfig = 'default') {
         return static::pool(myConfig).clearGroup(myGroup);
     }
 
@@ -531,8 +525,7 @@ class Cache
      *
      * @return bool
      */
-    static bool enabled()
-    {
+    static bool enabled() {
         return static::$_enabled;
     }
 
@@ -595,8 +588,7 @@ class Cache
      * @return bool True if the data was successfully cached, false on failure.
      *   Or if the key existed already.
      */
-    static bool add(string myKey, myValue, string myConfig = 'default')
-    {
+    static bool add(string myKey, myValue, string myConfig = 'default') {
         if (is_resource(myValue)) {
             return false;
         }
