@@ -1,9 +1,9 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
 use ArrayIterator;
-import uim.caketasources\IEntity;
-import uim.cakem.Locator\LocatorAwareTrait;
-import uim.cakem.Locator\ILocator;
+import uim.cake.datasources\IEntity;
+import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.Locator\ILocator;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;

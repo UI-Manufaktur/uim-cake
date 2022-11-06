@@ -1,4 +1,4 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
 /**
  * Contains methods for parsing the associated tables array that is typically

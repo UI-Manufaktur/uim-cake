@@ -1,8 +1,8 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
-import uim.caketabases.Statement\BufferedStatement;
-import uim.caketabases.Statement\CallbackStatement;
-import uim.caketabases.IStatement;
+import uim.cake.databases.Statement\BufferedStatement;
+import uim.cake.databases.Statement\CallbackStatement;
+import uim.cake.databases.IStatement;
 use Closure;
 use InvalidArgumentException;
 

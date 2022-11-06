@@ -1,13 +1,13 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
 use ArrayObject;
-import uim.cakellections\Collection;
-import uim.caketabases.expressions\TupleComparison;
-import uim.caketabases.TypeFactory;
-import uim.caketasources\IEntity;
-import uim.caketasources\InvalidPropertyInterface;
-import uim.cakem.Association\BelongsToMany;
-import uim.cakeilities.Hash;
+import uim.cake.collections\Collection;
+import uim.cake.databases.expressions\TupleComparison;
+import uim.cake.databases.TypeFactory;
+import uim.cake.datasources\IEntity;
+import uim.cake.datasources\InvalidPropertyInterface;
+import uim.cake.orm.Association\BelongsToMany;
+import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use RuntimeException;
 

@@ -1,9 +1,9 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
-import uim.cakellections\Collection;
-import uim.cakellections\ICollection;
-import uim.caketabases.expressions\TupleComparison;
-import uim.caketasources\IEntity;
+import uim.cake.collections\Collection;
+import uim.cake.collections\ICollection;
+import uim.cake.databases.expressions\TupleComparison;
+import uim.cake.datasources\IEntity;
 
 /**
  * Contains methods that are capable of injecting eagerly loaded associations into

@@ -1,11 +1,11 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
 use BadMethodCallException;
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakem.Exception\MissingBehaviorException;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
+import uim.cake.events\IEventDispatcher;
+import uim.cake.events\EventDispatcherTrait;
+import uim.cake.orm.Exception\MissingBehaviorException;
 use LogicException;
 
 /**

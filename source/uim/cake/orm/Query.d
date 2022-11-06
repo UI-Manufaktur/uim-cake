@@ -1,16 +1,16 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
 use ArrayObject;
 use BadMethodCallException;
-import uim.caketabases.Connection;
-import uim.caketabases.IExpression;
-import uim.caketabases.Query as DatabaseQuery;
-import uim.caketabases.TypedResultInterface;
-import uim.caketabases.TypeMap;
-import uim.caketabases.ValueBinder;
-import uim.caketasources\QueryInterface;
-import uim.caketasources\QueryTrait;
-import uim.caketasources\ResultSetInterface;
+import uim.cake.databases.Connection;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query as DatabaseQuery;
+import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.TypeMap;
+import uim.cake.databases.ValueBinder;
+import uim.cake.datasources\QueryInterface;
+import uim.cake.datasources\QueryTrait;
+import uim.cake.datasources\ResultSetInterface;
 use InvalidArgumentException;
 use JsonSerializable;
 use RuntimeException;
