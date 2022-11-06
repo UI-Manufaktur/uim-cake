@@ -1,4 +1,4 @@
-module uim.cake.Filesystem;
+module uim.cake.filesystems;
 
 import uim.cake.core.exceptions\CakeException;
 use CallbackFilterIterator;
