@@ -1,9 +1,9 @@
-module uim.baklava.https;
+module uim.cake.https;
 
-import uim.baklava.core.Configure;
-import uim.baklava.https\Cookie\CookieCollection;
-import uim.baklava.https\Cookie\CookieInterface;
-import uim.baklava.https\Exception\NotFoundException;
+import uim.cake.core.Configure;
+import uim.cake.https\Cookie\CookieCollection;
+import uim.cake.https\Cookie\CookieInterface;
+import uim.cake.https\Exception\NotFoundException;
 use DateTime;
 use IDateTime;
 use DateTimeZone;

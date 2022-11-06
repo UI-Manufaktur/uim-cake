@@ -1,4 +1,4 @@
-module uim.baklava.https\Client;
+module uim.cake.https\Client;
 
 /**
  * Base class for other HTTP requests/responses

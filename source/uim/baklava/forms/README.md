@@ -11,9 +11,9 @@ API services, or contact forms.
 
 
 ```php
-import uim.baklava.Form\Form;
-import uim.baklava.Form\Schema;
-import uim.baklava.validations\Validator;
+import uim.cake.Form\Form;
+import uim.cake.Form\Schema;
+import uim.cake.validations\Validator;
 
 class ContactForm : Form
 {

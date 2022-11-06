@@ -1,6 +1,6 @@
-module uim.baklava.https;
+module uim.cake.https;
 
-import uim.baklava.core.HttpApplicationInterface;
+import uim.cake.core.HttpApplicationInterface;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 

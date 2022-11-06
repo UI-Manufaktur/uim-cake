@@ -10,9 +10,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.https\Client;
+ */module uim.cake.https\Client;
 
-import uim.baklava.utilities.Text;
+import uim.cake.utilities.Text;
 
 /**
  * Contains the data and behavior for a single

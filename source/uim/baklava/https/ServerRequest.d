@@ -1,11 +1,11 @@
-module uim.baklava.https;
+module uim.cake.https;
 
 use BadMethodCallException;
-import uim.baklava.core.Configure;
-import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.https\Cookie\CookieCollection;
-import uim.baklava.https\Exception\MethodNotAllowedException;
-import uim.baklava.utilities.Hash;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.https\Cookie\CookieCollection;
+import uim.cake.https\Exception\MethodNotAllowedException;
+import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\PhpInputStream;
 use Laminas\Diactoros\Stream;

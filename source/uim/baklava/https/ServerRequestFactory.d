@@ -7,10 +7,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.https;
+ */module uim.cake.https;
 
-import uim.baklava.core.Configure;
-import uim.baklava.utilities.Hash;
+import uim.cake.core.Configure;
+import uim.cake.utilities.Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Message\UriInterface;

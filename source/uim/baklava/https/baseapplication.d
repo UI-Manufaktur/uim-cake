@@ -8,25 +8,25 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.baklava.https;
+module uim.cake.https;
 
-import uim.baklava.console.commandCollection;
-import uim.baklava.controller\ControllerFactory;
-import uim.baklava.core.ConsoleApplicationInterface;
-import uim.baklava.core.Container;
-import uim.baklava.core.ContainerApplicationInterface;
-import uim.baklava.core.IContainer;
-import uim.baklava.core.exceptions\MissingPluginException;
-import uim.baklava.core.HttpApplicationInterface;
-import uim.baklava.core.Plugin;
-import uim.baklava.core.PluginApplicationInterface;
-import uim.baklava.core.PluginCollection;
-import uim.baklava.events\EventDispatcherTrait;
-import uim.baklava.events\EventManager;
-import uim.baklava.events\IEventManager;
-import uim.baklava.routings\RouteBuilder;
-import uim.baklava.routings\Router;
-import uim.baklava.routings\RoutingApplicationInterface;
+import uim.cake.console.commandCollection;
+import uim.cake.controller\ControllerFactory;
+import uim.cake.core.ConsoleApplicationInterface;
+import uim.cake.core.Container;
+import uim.cake.core.ContainerApplicationInterface;
+import uim.cake.core.IContainer;
+import uim.cake.core.exceptions\MissingPluginException;
+import uim.cake.core.HttpApplicationInterface;
+import uim.cake.core.Plugin;
+import uim.cake.core.PluginApplicationInterface;
+import uim.cake.core.PluginCollection;
+import uim.cake.events\EventDispatcherTrait;
+import uim.cake.events\EventManager;
+import uim.cake.events\IEventManager;
+import uim.cake.routings\RouteBuilder;
+import uim.cake.routings\Router;
+import uim.cake.routings\RoutingApplicationInterface;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
