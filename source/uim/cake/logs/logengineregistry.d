@@ -7,10 +7,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs;
+ */module uim.cake.logs;
 
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 

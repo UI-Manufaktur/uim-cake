@@ -10,10 +10,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.2.9
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs;
+ */module uim.cake.logs;
 
-import uim.cakere.StaticConfigTrait;
-import uim.cakegs\Engine\BaseLog;
+import uim.cake.core.StaticConfigTrait;
+import uim.cake.logs\Engine\BaseLog;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
