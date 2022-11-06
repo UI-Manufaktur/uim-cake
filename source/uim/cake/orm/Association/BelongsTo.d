@@ -1,11 +1,11 @@
-module uim.cakem.Association;
+module uim.cake.orm.Association;
 
-import uim.caketabases.expressions\IdentifierExpression;
-import uim.caketasources\IEntity;
-import uim.cakem.Association;
-import uim.cakem.Association\Loader\SelectLoader;
-import uim.cakem.Table;
-import uim.cakeilities.Inflector;
+import uim.cake.databases.expressions\IdentifierExpression;
+import uim.cake.datasources\IEntity;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.Table;
+import uim.cake.utilities.Inflector;
 use Closure;
 use RuntimeException;
 

@@ -1,10 +1,10 @@
-module uim.cakem.Behavior;
+module uim.cake.orm.Behavior;
 
 use ArrayObject;
-import uim.caketasources\IEntity;
-import uim.cakeents\IEvent;
-import uim.cakem.Association;
-import uim.cakem.Behavior;
+import uim.cake.datasources\IEntity;
+import uim.cake.events\IEvent;
+import uim.cake.orm.Association;
+import uim.cake.orm.Behavior;
 use Closure;
 
 /**

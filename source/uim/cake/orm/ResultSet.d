@@ -1,11 +1,11 @@
-module uim.cakeM;
+module uim.cake.ORM;
 
-import uim.cakellections\Collection;
-import uim.cakellections\CollectionTrait;
-import uim.caketabases.exceptions\DatabaseException;
-import uim.caketabases.IStatement;
-import uim.caketasources\IEntity;
-import uim.caketasources\ResultSetInterface;
+import uim.cake.collections\Collection;
+import uim.cake.collections\CollectionTrait;
+import uim.cake.databases.exceptions\DatabaseException;
+import uim.cake.databases.IStatement;
+import uim.cake.datasources\IEntity;
+import uim.cake.datasources\ResultSetInterface;
 use SplFixedArray;
 
 /**

@@ -1,16 +1,16 @@
-module uim.cakem.Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.cakellections\Collection;
-import uim.cakellections\ICollection;
-import uim.cakere.InstanceConfigTrait;
-import uim.caketasources\IEntity;
-import uim.cakeents\IEvent;
-import uim.cakem.Entity;
-import uim.cakem.Locator\LocatorAwareTrait;
-import uim.cakem.Query;
-import uim.cakem.Table;
-import uim.cakeilities.Hash;
+import uim.cake.collections\Collection;
+import uim.cake.collections\ICollection;
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.datasources\IEntity;
+import uim.cake.events\IEvent;
+import uim.cake.orm.Entity;
+import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
+import uim.cake.utilities.Hash;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations

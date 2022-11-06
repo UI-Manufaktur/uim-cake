@@ -1,10 +1,10 @@
-module uim.cakem.Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
-import uim.caketasources\IEntity;
-import uim.cakeents\IEvent;
-import uim.cake8n\I18n;
-import uim.cakem.Marshaller;
-import uim.cakem.Table;
+import uim.cake.datasources\IEntity;
+import uim.cake.events\IEvent;
+import uim.cake.I18n\I18n;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.Table;
 
 /**
  * Contains common code needed by TranslateBehavior strategy classes.

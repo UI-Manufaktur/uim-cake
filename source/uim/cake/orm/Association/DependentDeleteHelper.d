@@ -1,7 +1,7 @@
-module uim.cakem.Association;
+module uim.cake.orm.Association;
 
-import uim.caketasources\IEntity;
-import uim.cakem.Association;
+import uim.cake.datasources\IEntity;
+import uim.cake.orm.Association;
 
 /**
  * Helper class for cascading deletes in associations.

@@ -1,14 +1,14 @@
-module uim.cakem.Behavior;
+module uim.cake.orm.Behavior;
 
-import uim.cake8n\I18n;
-import uim.cakem.Behavior;
-import uim.cakem.Behavior\Translate\EavStrategy;
-import uim.cakem.Behavior\Translate\TranslateStrategyInterface;
-import uim.cakem.Marshaller;
-import uim.cakem.PropertyMarshalInterface;
-import uim.cakem.Query;
-import uim.cakem.Table;
-import uim.cakeilities.Inflector;
+import uim.cake.I18n\I18n;
+import uim.cake.orm.Behavior;
+import uim.cake.orm.Behavior\Translate\EavStrategy;
+import uim.cake.orm.Behavior\Translate\TranslateStrategyInterface;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.PropertyMarshalInterface;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
+import uim.cake.utilities.Inflector;
 
 /**
  * This behavior provides a way to translate dynamic data by keeping translations

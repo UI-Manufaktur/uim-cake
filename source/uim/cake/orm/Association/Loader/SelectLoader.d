@@ -1,10 +1,10 @@
-module uim.cakem.Association\Loader;
+module uim.cake.orm.Association\Loader;
 
-import uim.caketabases.expressions\IdentifierExpression;
-import uim.caketabases.expressions\TupleComparison;
-import uim.caketabases.ValueBinder;
-import uim.cakem.Association;
-import uim.cakem.Query;
+import uim.cake.databases.expressions\IdentifierExpression;
+import uim.cake.databases.expressions\TupleComparison;
+import uim.cake.databases.ValueBinder;
+import uim.cake.orm.Association;
+import uim.cake.orm.Query;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;

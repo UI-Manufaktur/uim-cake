@@ -1,6 +1,6 @@
-module uim.cakem.Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
-import uim.caketasources\IEntity;
+import uim.cake.datasources\IEntity;
 
 /**
  * Contains a translation method aimed to help managing multiple translations
