@@ -1,8 +1,8 @@
-module uim.cakeiler;
+module uim.cake.Mailer;
 
 use BadMethodCallException;
-import uim.cakegs\Log;
-import uim.cakeews\ViewBuilder;
+import uim.cake.logs\Log;
+import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 use JsonSerializable;
 use LogicException;

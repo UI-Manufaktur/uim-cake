@@ -1,11 +1,11 @@
-module uim.cakeiler;
+module uim.cake.Mailer;
 
-import uim.cakere.Configure;
-import uim.cakere.exceptions\CakeException;
-import uim.caketps\Client\FormDataPart;
-import uim.cakeilities.Hash;
-import uim.cakeilities.Security;
-import uim.cakeilities.Text;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.https\Client\FormDataPart;
+import uim.cake.utilities.Hash;
+import uim.cake.utilities.Security;
+import uim.cake.utilities.Text;
 use Closure;
 use InvalidArgumentException;
 use JsonSerializable;

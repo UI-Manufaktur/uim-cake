@@ -10,9 +10,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake8n\Middleware;
+ */module uim.cake.I18n\Middleware;
 
-import uim.cake8n\I18n;
+import uim.cake.I18n\I18n;
 use Locale;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

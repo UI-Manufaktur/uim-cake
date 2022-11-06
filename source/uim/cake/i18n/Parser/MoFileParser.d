@@ -1,4 +1,4 @@
-module uim.cake8n\Parser;
+module uim.cake.I18n\Parser;
 
 use RuntimeException;
 

@@ -1,6 +1,6 @@
-module uim.cake8n\Parser;
+module uim.cake.I18n\Parser;
 
-import uim.cake8n\Translator;
+import uim.cake.I18n\Translator;
 
 /**
  * Parses file in PO format

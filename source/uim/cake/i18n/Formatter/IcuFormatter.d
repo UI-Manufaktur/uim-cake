@@ -1,7 +1,7 @@
-module uim.cake8n\Formatter;
+module uim.cake.I18n\Formatter;
 
-import uim.cake8n\Exception\I18nException;
-import uim.cake8n\IFormatter;
+import uim.cake.I18n\Exception\I18nException;
+import uim.cake.I18n\IFormatter;
 use MessageFormatter;
 
 /**

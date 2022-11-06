@@ -1,9 +1,9 @@
-module uim.cakeiler\Transport;
+module uim.cake.Mailer\Transport;
 
-import uim.cakeiler\AbstractTransport;
-import uim.cakeiler\Message;
-import uim.caketwork\Exception\SocketException;
-import uim.caketwork\Socket;
+import uim.cake.Mailer\AbstractTransport;
+import uim.cake.Mailer\Message;
+import uim.cake.Network\Exception\SocketException;
+import uim.cake.Network\Socket;
 use Exception;
 use RuntimeException;
 

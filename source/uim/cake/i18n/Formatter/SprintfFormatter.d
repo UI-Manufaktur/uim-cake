@@ -1,6 +1,6 @@
-module uim.cake8n\Formatter;
+module uim.cake.I18n\Formatter;
 
-import uim.cake8n\IFormatter;
+import uim.cake.I18n\IFormatter;
 
 /**
  * A formatter that will interpolate variables using sprintf and

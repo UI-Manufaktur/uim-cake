@@ -1,7 +1,7 @@
-module uim.cakeiler;
+module uim.cake.Mailer;
 
-import uim.cakeews\View;
-import uim.cakeews\ViewVarsTrait;
+import uim.cake.views\View;
+import uim.cake.views\ViewVarsTrait;
 
 /**
  * Class for rendering email message.
