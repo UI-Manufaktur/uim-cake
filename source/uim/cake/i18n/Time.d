@@ -1,6 +1,6 @@
-module uim.cake8n;
+module uim.cake.I18n;
 
-import uim.cakeronos\MutableDateTime;
+import uim.cake.chronos\MutableDateTime;
 use IDateTime;
 use DateTimeZone;
 use IntlDateFormatter;

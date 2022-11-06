@@ -8,9 +8,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake8n;
+ */module uim.cake.I18n;
 
-import uim.cake8n\Exception\I18nException;
+import uim.cake.I18n\Exception\I18nException;
 
 /**
  * A ServiceLocator implementation for loading and retaining formatter objects.

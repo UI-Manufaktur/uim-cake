@@ -1,6 +1,6 @@
-module uim.cake8n;
+module uim.cake.I18n;
 
-import uim.cakeronos\Date as ChronosDate;
+import uim.cake.chronos\Date as ChronosDate;
 use IntlDateFormatter;
 
 /**

@@ -1,7 +1,7 @@
-module uim.cake8n;
+module uim.cake.I18n;
 
-import uim.cakeronos\ChronosInterface;
-import uim.cakeronos\DifferenceIFormatter;
+import uim.cake.chronos\ChronosInterface;
+import uim.cake.chronos\DifferenceIFormatter;
 
 /**
  * Helper class for formatting relative dates & times.

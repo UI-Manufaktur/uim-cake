@@ -1,4 +1,4 @@
-module uim.cake8n;
+module uim.cake.I18n;
 
 use RuntimeException;
 

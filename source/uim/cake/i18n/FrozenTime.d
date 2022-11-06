@@ -1,6 +1,6 @@
-module uim.cake8n;
+module uim.cake.I18n;
 
-import uim.cakeronos\Chronos;
+import uim.cake.chronos\Chronos;
 use IDateTime;
 use DateTimeZone;
 use IntlDateFormatter;
@@ -161,8 +161,7 @@ class FrozenTime : Chronos : I18nIDateTime
      * @param array<string, mixed> myOptions Array of options.
      * @return string Relative time string.
      */
-    function timeAgoInWords(array myOptions = []): string
-    {
+    string timeAgoInWords(array myOptions = []) {
         /** @psalm-suppress UndefinedInterfaceMethod */
         return static::getDiffFormatter().timeAgoInWords(this, myOptions);
     }

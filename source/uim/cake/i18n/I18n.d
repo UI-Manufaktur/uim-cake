@@ -1,9 +1,9 @@
-module uim.cake8n;
+module uim.cake.I18n;
 
-import uim.cakeches\Cache;
-import uim.cake8n\Exception\I18nException;
-import uim.cake8n\Formatter\IcuFormatter;
-import uim.cake8n\Formatter\SprintfFormatter;
+import uim.cake.caches\Cache;
+import uim.cake.I18n\Exception\I18nException;
+import uim.cake.I18n\Formatter\IcuFormatter;
+import uim.cake.I18n\Formatter\SprintfFormatter;
 use Locale;
 
 /**
@@ -161,7 +161,7 @@ class I18n
      * ### Example:
      *
      * ```
-     *  import uim.cake8n\MessagesFileLoader;
+     *  import uim.cake.I18n\MessagesFileLoader;
      *  I18n::config('my_domain', function (myName, $locale) {
      *      // Load resources/locales/$locale/filename.po
      *      myfileLoader = new MessagesFileLoader('filename', $locale, 'po');
@@ -172,7 +172,7 @@ class I18n
      * You can also assemble the package object yourself:
      *
      * ```
-     *  import uim.cake8n\Package;
+     *  import uim.cake.I18n\Package;
      *  I18n::config('my_domain', function (myName, $locale) {
      *      $package = new Package('default');
      *      myMessages = (...); // Fetch messages for locale from external service.
