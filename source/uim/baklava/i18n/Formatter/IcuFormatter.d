@@ -1,7 +1,7 @@
-module uim.baklava.I18n\Formatter;
+module uim.cake.I18n\Formatter;
 
-import uim.baklava.I18n\Exception\I18nException;
-import uim.baklava.I18n\IFormatter;
+import uim.cake.I18n\Exception\I18nException;
+import uim.cake.I18n\IFormatter;
 use MessageFormatter;
 
 /**

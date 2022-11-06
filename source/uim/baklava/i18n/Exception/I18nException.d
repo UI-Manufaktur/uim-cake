@@ -8,9 +8,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.I18n\Exception;
+ */module uim.cake.I18n\Exception;
 
-import uim.baklava.core.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * I18n exception.

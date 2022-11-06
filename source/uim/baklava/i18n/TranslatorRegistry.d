@@ -1,4 +1,4 @@
-module uim.baklava.I18n;
+module uim.cake.I18n;
 
 /**
  * Constructs and stores instances of translators that can be

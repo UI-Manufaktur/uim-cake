@@ -1,4 +1,4 @@
-module uim.baklava.https\Client;
+module uim.cake.https\Client;
 
 use Laminas\Diactoros\RequestTrait;
 use Laminas\Diactoros\Stream;

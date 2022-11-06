@@ -1,6 +1,6 @@
-module uim.baklava.I18n\Parser;
+module uim.cake.I18n\Parser;
 
-import uim.baklava.I18n\Translator;
+import uim.cake.I18n\Translator;
 
 /**
  * Parses file in PO format

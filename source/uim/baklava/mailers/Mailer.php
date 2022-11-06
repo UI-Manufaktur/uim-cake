@@ -9,17 +9,17 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Mailer;
+ */module uim.cake.Mailer;
 
 use BadMethodCallException;
-import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.core.StaticConfigTrait;
-import uim.baklava.datasources\ModelAwareTrait;
-import uim.baklava.events\IEventListener;
-import uim.baklava.logs\Log;
-import uim.baklava.Mailer\Exception\MissingActionException;
-import uim.baklava.orm.Locator\LocatorAwareTrait;
-import uim.baklava.views\ViewBuilder;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.StaticConfigTrait;
+import uim.cake.datasources\ModelAwareTrait;
+import uim.cake.events\IEventListener;
+import uim.cake.logs\Log;
+import uim.cake.Mailer\Exception\MissingActionException;
+import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 
 /**

@@ -8,9 +8,9 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.logs\Formatter;
+ */module uim.cake.logs\Formatter;
 
-import uim.baklava.core.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 
 abstract class AbstractFormatter
 {

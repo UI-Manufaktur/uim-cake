@@ -1,4 +1,4 @@
-module uim.baklava.I18n\Parser;
+module uim.cake.I18n\Parser;
 
 use RuntimeException;
 

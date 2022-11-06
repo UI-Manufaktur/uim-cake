@@ -1,8 +1,8 @@
-module uim.baklava.I18n;
+module uim.cake.I18n;
 
-import uim.baklava.core.App;
-import uim.baklava.core.Plugin;
-import uim.baklava.utilities.Inflector;
+import uim.cake.core.App;
+import uim.cake.core.Plugin;
+import uim.cake.utilities.Inflector;
 use Locale;
 use RuntimeException;
 

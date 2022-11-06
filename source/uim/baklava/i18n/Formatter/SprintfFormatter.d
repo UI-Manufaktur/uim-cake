@@ -1,6 +1,6 @@
-module uim.baklava.I18n\Formatter;
+module uim.cake.I18n\Formatter;
 
-import uim.baklava.I18n\IFormatter;
+import uim.cake.I18n\IFormatter;
 
 /**
  * A formatter that will interpolate variables using sprintf and

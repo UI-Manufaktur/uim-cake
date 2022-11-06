@@ -1,7 +1,7 @@
-module uim.baklava.Mailer;
+module uim.cake.Mailer;
 
-import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.core.InstanceConfigTrait;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.InstanceConfigTrait;
 
 /**
  * Abstract transport for sending email

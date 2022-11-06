@@ -1,8 +1,8 @@
-module uim.baklava.Mailer;
+module uim.cake.Mailer;
 
 use BadMethodCallException;
-import uim.baklava.logs\Log;
-import uim.baklava.views\ViewBuilder;
+import uim.cake.logs\Log;
+import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 use JsonSerializable;
 use LogicException;
