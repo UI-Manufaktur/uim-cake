@@ -211,8 +211,7 @@ class Connection : ConnectionInterface
      * @throws \Cake\Database\Exception\MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
-    bool connect()
-    {
+    bool connect() {
         try {
             return this._driver.connect();
         } catch (MissingConnectionException $e) {
@@ -244,8 +243,7 @@ class Connection : ConnectionInterface
      *
      * @return bool
      */
-    bool isConnected()
-    {
+    bool isConnected() {
         return this._driver.isConnected();
     }
 
@@ -471,8 +469,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true on success, false otherwise
      */
-    bool commit()
-    {
+    bool commit() {
         if (!this._transactionStarted) {
             return false;
         }
@@ -509,8 +506,7 @@ class Connection : ConnectionInterface
      * beginning of it. Defaults to false if using savepoints, or true if not.
      * @return bool
      */
-    bool rollback(?bool $toBeginning = null)
-    {
+    bool rollback(?bool $toBeginning = null) {
         if (!this._transactionStarted) {
             return false;
         }
@@ -576,8 +572,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true if enabled, false otherwise
      */
-    bool isSavePointsEnabled()
-    {
+    bool isSavePointsEnabled() {
         return this._useSavePoints;
     }
 
@@ -648,8 +643,7 @@ class Connection : ConnectionInterface
      * @return bool true if driver supports dynamic constraints
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
-    bool supportsDynamicConstraints()
-    {
+    bool supportsDynamicConstraints() {
         return this._driver.supportsDynamicConstraints();
     }
 
@@ -687,8 +681,7 @@ class Connection : ConnectionInterface
      *
      * @return bool
      */
-    protected bool wasNestedTransactionRolledback()
-    {
+    protected bool wasNestedTransactionRolledback() {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }
 
@@ -714,8 +707,7 @@ class Connection : ConnectionInterface
      *
      * @return bool True if a transaction is running else false.
      */
-    bool inTransaction()
-    {
+    bool inTransaction() {
         return this._transactionStarted;
     }
 
@@ -742,8 +734,7 @@ class Connection : ConnectionInterface
      *
      * @return bool
      */
-    bool supportsQuoting()
-    {
+    bool supportsQuoting() {
         return this._driver.supports(IDriver::FEATURE_QUOTE);
     }
 
@@ -840,8 +831,7 @@ class Connection : ConnectionInterface
      *
      * @return bool
      */
-    bool isQueryLoggingEnabled()
-    {
+    bool isQueryLoggingEnabled() {
         return this._logQueries;
     }
 

@@ -1072,8 +1072,7 @@ class Response : IResponse
      *
      * @return bool false if client does not accept compressed responses or no handler is available, true otherwise
      */
-    bool compress()
-    {
+    bool compress() {
         $compressionEnabled = ini_get('zlib.output_compression') !== '1' &&
             extension_loaded('zlib') &&
             (strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') !== false);
@@ -1086,8 +1085,7 @@ class Response : IResponse
      *
      * @return bool
      */
-    bool outputCompressed()
-    {
+    bool outputCompressed() {
         return strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') !== false
             && (ini_get('zlib.output_compression') === '1' || in_array('ob_gzhandler', ob_list_handlers(), true));
     }
@@ -1163,8 +1161,7 @@ class Response : IResponse
      * @param \Cake\Http\ServerRequest myRequest Request object
      * @return bool Whether the response was marked as not modified or not.
      */
-    bool checkNotModified(ServerRequest myRequest)
-    {
+    bool checkNotModified(ServerRequest myRequest) {
         $etags = preg_split('/\s*,\s*/', myRequest.getHeaderLine('If-None-Match'), 0, PREG_SPLIT_NO_EMPTY);
         $responseTag = this.getHeaderLine('Etag');
         $etagMatches = null;

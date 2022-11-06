@@ -302,8 +302,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return bool
      * @see \Iterator::valid()
      */
-    bool valid()
-    {
+    bool valid() {
         return isset(this.queue[this.position]);
     }
 }

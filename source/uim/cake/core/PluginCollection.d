@@ -104,8 +104,7 @@ class PluginCollection : Iterator, Countable
      * @throws \Cake\Core\Exception\MissingPluginException when a plugin path cannot be resolved.
      * @internal
      */
-    string findPath(string myName)
-    {
+    string findPath(string myName) {
         // Ensure plugin config is loaded each time. This is necessary primarily
         // for testing because the Configure::clear() call in TestCase::tearDown()
         // wipes out all configuration including plugin paths config.
@@ -249,8 +248,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return string
      */
-    string key()
-    {
+    string key() {
         return this.names[this.positions[this.loopDepth]];
     }
 

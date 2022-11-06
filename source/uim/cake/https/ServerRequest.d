@@ -345,8 +345,7 @@ class ServerRequest : IServerRequest
      *
      * @return string The client IP.
      */
-    string clientIp()
-    {
+    string clientIp() {
         if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_FOR')) {
             $addresses = array_map('trim', explode(',', (string)this.getEnv('HTTP_X_FORWARDED_FOR')));
             $trusted = (count(this.trustedProxies) > 0);
@@ -458,8 +457,7 @@ class ServerRequest : IServerRequest
      * @param mixed ...$args List of arguments
      * @return bool Whether the request is the type you are checking.
      */
-    bool is(myType, ...$args)
-    {
+    bool is(myType, ...$args) {
         if (is_array(myType)) {
             foreach (myType as $_type) {
                 if (this.is($_type)) {
@@ -495,8 +493,7 @@ class ServerRequest : IServerRequest
      * @param array $args Array of custom detector arguments.
      * @return bool Whether the request is the type you are checking.
      */
-    protected bool _is(string myType, array $args)
-    {
+    protected bool _is(string myType, array $args) {
         $detect = static::$_detectors[myType];
         if (is_callable($detect)) {
             array_unshift($args, this);
@@ -525,8 +522,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected bool _acceptHeaderDetector(array $detect)
-    {
+    protected bool _acceptHeaderDetector(array $detect) {
         $acceptHeaders = explode(',', (string)this.getEnv('HTTP_ACCEPT'));
         foreach ($detect['accept'] as $header) {
             if (in_array($header, $acceptHeaders, true)) {
@@ -543,8 +539,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected bool _headerDetector(array $detect)
-    {
+    protected bool _headerDetector(array $detect) {
         foreach ($detect['header'] as $header => myValue) {
             $header = this.getEnv('http_' . $header);
             if ($header !== null) {
@@ -565,8 +560,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected bool _paramDetector(array $detect)
-    {
+    protected bool _paramDetector(array $detect) {
         myKey = $detect['param'];
         if (isset($detect['value'])) {
             myValue = $detect['value'];
@@ -586,8 +580,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected bool _environmentDetector(array $detect)
-    {
+    protected bool _environmentDetector(array $detect) {
         if (isset($detect['env'])) {
             if (isset($detect['value'])) {
                 return this.getEnv($detect['env']) == $detect['value'];
@@ -616,8 +609,7 @@ class ServerRequest : IServerRequest
      * @return bool Success.
      * @see \Cake\Http\ServerRequest::is()
      */
-    bool isAll(array myTypes)
-    {
+    bool isAll(array myTypes) {
         foreach (myTypes as myType) {
             if (!this.is(myType)) {
                 return false;
@@ -723,8 +715,7 @@ class ServerRequest : IServerRequest
      * @param string myName The header name.
      * @return string The normalized header name.
      */
-    protected string normalizeHeaderName(string myName)
-    {
+    protected string normalizeHeaderName(string myName) {
         myName = str_replace('-', '_', strtoupper(myName));
         if (!in_array(myName, ['CONTENT_LENGTH', 'CONTENT_TYPE'], true)) {
             myName = 'HTTP_' . myName;
@@ -773,8 +764,7 @@ class ServerRequest : IServerRequest
      * @return bool Whether the header is defined.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    bool hasHeader(myName)
-    {
+    bool hasHeader(myName) {
         myName = this.normalizeHeaderName(myName);
 
         return isset(this._environment[myName]);
@@ -808,8 +798,7 @@ class ServerRequest : IServerRequest
      * @return string Header values collapsed into a comma separated string.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string getHeaderLine(myName)
-    {
+    string getHeaderLine(myName) {
         myValue = this.getHeader(myName);
 
         return implode(', ', myValue);
@@ -884,8 +873,7 @@ class ServerRequest : IServerRequest
      * @return string The name of the HTTP method used.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string getMethod()
-    {
+    string getMethod() {
         return (string)this.getEnv('REQUEST_METHOD');
     }
 
@@ -1001,8 +989,7 @@ class ServerRequest : IServerRequest
      *   While `example.co.uk` contains 2.
      * @return string Domain name without subdomains.
      */
-    string domain(int $tldLength = 1)
-    {
+    string domain(int $tldLength = 1) {
         $host = this.host();
         if (empty($host)) {
             return '';
@@ -1376,8 +1363,7 @@ class ServerRequest : IServerRequest
      *
      * @return string HTTP protocol version.
      */
-    string getProtocolVersion()
-    {
+    string getProtocolVersion() {
         if (this.protocol) {
             return this.protocol;
         }
@@ -1465,8 +1451,7 @@ class ServerRequest : IServerRequest
      * @return true
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */
-    bool allowMethod($methods)
-    {
+    bool allowMethod($methods) {
         $methods = (array)$methods;
         foreach ($methods as $method) {
             if (this.is($method)) {
@@ -1784,8 +1769,7 @@ class ServerRequest : IServerRequest
      *
      * @return string
      */
-    string getRequestTarget()
-    {
+    string getRequestTarget() {
         if (this.requestTarget !== null) {
             return this.requestTarget;
         }
@@ -1803,8 +1787,7 @@ class ServerRequest : IServerRequest
     }
 
     // Get the path of current request.
-    string getPath()
-    {
+    string getPath() {
         if (this.requestTarget === null) {
             return this.uri.getPath();
         }

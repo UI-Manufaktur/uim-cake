@@ -206,8 +206,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    bool check(IEntity $entity, string myMode, array myOptions = [])
-    {
+    bool check(IEntity $entity, string myMode, array myOptions = []) {
         if (myMode === self::CREATE) {
             return this.checkCreate($entity, myOptions);
         }
@@ -230,8 +229,7 @@ class RulesChecker
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      */
-    bool checkCreate(IEntity $entity, array myOptions = [])
-    {
+    bool checkCreate(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._createRules));
     }
 
@@ -242,8 +240,7 @@ class RulesChecker
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      */
-    bool checkUpdate(IEntity $entity, array myOptions = [])
-    {
+    bool checkUpdate(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, array_merge(this._rules, this._updateRules));
     }
 
@@ -254,8 +251,7 @@ class RulesChecker
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      */
-    bool checkDelete(IEntity $entity, array myOptions = [])
-    {
+    bool checkDelete(IEntity $entity, array myOptions = []) {
         return this._checkRules($entity, myOptions, this._deleteRules);
     }
 
@@ -268,8 +264,7 @@ class RulesChecker
      * @param array<\Cake\Datasource\RuleInvoker> $rules The list of rules that must be checked.
      * @return bool
      */
-    protected bool _checkRules(IEntity $entity, array myOptions = [], array $rules = [])
-    {
+    protected bool _checkRules(IEntity $entity, array myOptions = [], array $rules = []) {
         $success = true;
         myOptions += this._options;
         foreach ($rules as $rule) {

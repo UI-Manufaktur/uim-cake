@@ -171,8 +171,7 @@ class Filesystem
      * @return bool
      * @throws \Cake\Core\Exception\CakeException If path is not a directory.
      */
-    bool deleteDir(string myPath)
-    {
+    bool deleteDir(string myPath) {
         if (!file_exists(myPath)) {
             return true;
         }
@@ -219,8 +218,7 @@ class Filesystem
      * @param string $destination Destination path.
      * @return bool
      */
-    bool copyDir(string $source, string $destination)
-    {
+    bool copyDir(string $source, string $destination) {
         $destination = (new SplFileInfo($destination)).getPathname();
 
         if (!is_dir($destination)) {
@@ -254,8 +252,7 @@ class Filesystem
      * @param string myPath Path.
      * @return bool
      */
-    bool isStream(string myPath)
-    {
+    bool isStream(string myPath) {
         return strpos(myPath, '://') !== false;
     }
 }

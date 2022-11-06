@@ -98,8 +98,7 @@ abstract class Driver : IDriver
      * @param array<string, mixed> myConfig configuration to be used for creating connection
      * @return bool true on success
      */
-    protected bool _connect(string $dsn, array myConfig)
-    {
+    protected bool _connect(string $dsn, array myConfig) {
         $action = function () use ($dsn, myConfig) {
             this.setConnection(new PDO(
                 $dsn,
@@ -206,8 +205,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    bool beginTransaction()
-    {
+    bool beginTransaction() {
         this.connect();
         if (this._connection.inTransaction()) {
             return true;
@@ -219,8 +217,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    bool commitTransaction()
-    {
+    bool commitTransaction() {
         this.connect();
         if (!this._connection.inTransaction()) {
             return false;
@@ -232,8 +229,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    bool rollbackTransaction()
-    {
+    bool rollbackTransaction() {
         this.connect();
         if (!this._connection.inTransaction()) {
             return false;
@@ -247,8 +243,7 @@ abstract class Driver : IDriver
      *
      * @return bool
      */
-    bool inTransaction()
-    {
+    bool inTransaction() {
         this.connect();
 
         return this._connection.inTransaction();
@@ -257,8 +252,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    bool supportsSavePoints()
-    {
+    bool supportsSavePoints() {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
         return this.supports(static::FEATURE_SAVEPOINT);
@@ -270,8 +264,7 @@ abstract class Driver : IDriver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
-    bool supportsCTEs()
-    {
+    bool supportsCTEs() {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
         return this.supports(static::FEATURE_CTE);
@@ -293,8 +286,7 @@ abstract class Driver : IDriver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
-    bool supportsQuoting()
-    {
+    bool supportsQuoting() {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
         return this.supports(static::FEATURE_QUOTE);
@@ -375,8 +367,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    bool isConnected()
-    {
+    bool isConnected() {
         if (this._connection === null) {
             $connected = false;
         } else {
@@ -411,8 +402,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    bool isAutoQuotingEnabled()
-    {
+    bool isAutoQuotingEnabled() {
         return this._autoQuoting;
     }
 
@@ -424,8 +414,7 @@ abstract class Driver : IDriver
      * @param string $feature Driver feature name
      * @return bool
      */
-    bool supports(string $feature)
-    {
+    bool supports(string $feature) {
         switch ($feature) {
             case static::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION:
             case static::FEATURE_QUOTE:

@@ -204,8 +204,7 @@ class File {
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    bool write(string myData, string myMode = 'w', bool $force = false)
-    {
+    bool write(string myData, string myMode = 'w', bool $force = false) {
         $success = false;
         if (this.open(myMode, $force) === true) {
             if (this.lock !== null && flock(this.handle, LOCK_EX) === false) {
@@ -230,8 +229,7 @@ class File {
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    bool append(string myData, bool $force = false)
-    {
+    bool append(string myData, bool $force = false) {
         return this.write(myData, 'a', $force);
     }
 
@@ -240,8 +238,7 @@ class File {
      *
      * @return bool True if closing was successful or file was already closed, otherwise false
      */
-    bool close()
-    {
+    bool close() {
         if (!is_resource(this.handle)) {
             return true;
         }
@@ -254,8 +251,7 @@ class File {
      *
      * @return bool Success
      */
-    bool delete()
-    {
+    bool delete() {
         this.close();
         this.handle = null;
         if (this.exists()) {
@@ -409,8 +405,7 @@ class File {
      *
      * @return bool True if it exists, false otherwise
      */
-    bool exists()
-    {
+    bool exists() {
         this.clearStatCache();
 
         return this.path && file_exists(this.path) && is_file(this.path);
@@ -447,8 +442,7 @@ class File {
      *
      * @return bool True if it's writable, false otherwise
      */
-    bool writable()
-    {
+    bool writable() {
         return is_writable(this.path);
     }
 
@@ -457,8 +451,7 @@ class File {
      *
      * @return bool True if it's executable, false otherwise
      */
-    bool executable()
-    {
+    bool executable() {
         return is_executable(this.path);
     }
 
@@ -467,8 +460,7 @@ class File {
      *
      * @return bool True if file is readable, false otherwise
      */
-    bool readable()
-    {
+    bool readable() {
         return is_readable(this.path);
     }
 
@@ -541,8 +533,7 @@ class File {
      * @param bool $overwrite Overwrite $dest if exists
      * @return bool Success
      */
-    bool copy(string $dest, bool $overwrite = true)
-    {
+    bool copy(string $dest, bool $overwrite = true) {
         if (!this.exists() || is_file($dest) && !$overwrite) {
             return false;
         }
@@ -600,8 +591,7 @@ class File {
      * @param array<string>|string $replace Text(s) to replace with.
      * @return bool Success
      */
-    bool replaceText($search, $replace)
-    {
+    bool replaceText($search, $replace) {
         if (!this.open('r+')) {
             return false;
         }
