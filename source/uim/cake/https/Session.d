@@ -7,10 +7,10 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.caketps;
+ */module uim.cake.https;
 
-import uim.cakere.App;
-import uim.cakeilities.Hash;
+import uim.cake.core.App;
+import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use RuntimeException;
 use SessionHandlerInterface;

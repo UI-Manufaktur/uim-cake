@@ -8,25 +8,25 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.caketps;
+module uim.cake.https;
 
-import uim.cakensole.commandCollection;
-import uim.cakentroller\ControllerFactory;
-import uim.cakere.ConsoleApplicationInterface;
-import uim.cakere.Container;
-import uim.cakere.ContainerApplicationInterface;
-import uim.cakere.IContainer;
-import uim.cakere.exceptions\MissingPluginException;
-import uim.cakere.HttpApplicationInterface;
-import uim.cakere.Plugin;
-import uim.cakere.PluginApplicationInterface;
-import uim.cakere.PluginCollection;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakeents\EventManager;
-import uim.cakeents\IEventManager;
-import uim.cakeutings\RouteBuilder;
-import uim.cakeutings\Router;
-import uim.cakeutings\RoutingApplicationInterface;
+import uim.cake.console.commandCollection;
+import uim.cake.controller\ControllerFactory;
+import uim.cake.core.ConsoleApplicationInterface;
+import uim.cake.core.Container;
+import uim.cake.core.ContainerApplicationInterface;
+import uim.cake.core.IContainer;
+import uim.cake.core.exceptions\MissingPluginException;
+import uim.cake.core.HttpApplicationInterface;
+import uim.cake.core.Plugin;
+import uim.cake.core.PluginApplicationInterface;
+import uim.cake.core.PluginCollection;
+import uim.cake.events\EventDispatcherTrait;
+import uim.cake.events\EventManager;
+import uim.cake.events\IEventManager;
+import uim.cake.routings\RouteBuilder;
+import uim.cake.routings\Router;
+import uim.cake.routings\RoutingApplicationInterface;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

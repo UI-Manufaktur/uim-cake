@@ -1,4 +1,4 @@
-module uim.caketps;
+module uim.cake.https;
 
 use Psr\Http\Message\MessageInterface;
 

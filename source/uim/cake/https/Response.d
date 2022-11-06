@@ -1,9 +1,9 @@
-module uim.caketps;
+module uim.cake.https;
 
-import uim.cakere.Configure;
-import uim.caketps\Cookie\CookieCollection;
-import uim.caketps\Cookie\CookieInterface;
-import uim.caketps\Exception\NotFoundException;
+import uim.cake.core.Configure;
+import uim.cake.https\Cookie\CookieCollection;
+import uim.cake.https\Cookie\CookieInterface;
+import uim.cake.https\Exception\NotFoundException;
 use DateTime;
 use IDateTime;
 use DateTimeZone;

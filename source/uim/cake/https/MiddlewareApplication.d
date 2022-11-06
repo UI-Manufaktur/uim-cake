@@ -1,6 +1,6 @@
-module uim.caketps;
+module uim.cake.https;
 
-import uim.cakere.HttpApplicationInterface;
+import uim.cake.core.HttpApplicationInterface;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 

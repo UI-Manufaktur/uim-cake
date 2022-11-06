@@ -1,6 +1,6 @@
-module uim.caketps;
+module uim.cake.https;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 use Throwable;
 
 /**

@@ -1,4 +1,4 @@
-module uim.caketps;
+module uim.cake.https;
 
 use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
 

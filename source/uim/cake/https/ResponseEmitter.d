@@ -11,9 +11,9 @@
  * Parts of this file are derived from Zend-Diactoros
  * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (https://www.zend.com/)
  * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
- */module uim.caketps;
+ */module uim.cake.https;
 
-import uim.caketps\Cookie\Cookie;
+import uim.cake.https\Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\IResponse;
