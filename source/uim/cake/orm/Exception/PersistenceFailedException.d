@@ -9,11 +9,11 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakem.Exception;
+ */module uim.cake.orm.Exception;
 
-import uim.cakere.exceptions\CakeException;
-import uim.caketasources\IEntity;
-import uim.cakeilities.Hash;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.datasources\IEntity;
+import uim.cake.utilities.Hash;
 use Throwable;
 
 /**

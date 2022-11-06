@@ -1,8 +1,8 @@
-module uim.cakem.Locator;
+module uim.cake.orm.Locator;
 
-import uim.cakere.exceptions\CakeException;
-import uim.caketasources\FactoryLocator;
-import uim.cakem.Table;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.datasources\FactoryLocator;
+import uim.cake.orm.Table;
 
 /**
  * Contains method for setting and accessing ILocator instance

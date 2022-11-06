@@ -1,8 +1,8 @@
-module uim.cakem.Locator;
+module uim.cake.orm.Locator;
 
-import uim.caketasources\Locator\ILocator as BaseILocator;
-import uim.caketasources\IRepository;
-import uim.cakem.Table;
+import uim.cake.datasources\Locator\ILocator as BaseILocator;
+import uim.cake.datasources\IRepository;
+import uim.cake.orm.Table;
 
 /**
  * Registries for Table objects should implement this interface.

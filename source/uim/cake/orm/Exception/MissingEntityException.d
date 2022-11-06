@@ -9,9 +9,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakem.Exception;
+ */module uim.cake.orm.Exception;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Exception raised when an Entity could not be found.

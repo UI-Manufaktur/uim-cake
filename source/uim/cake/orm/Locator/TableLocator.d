@@ -1,13 +1,13 @@
-module uim.cakem.Locator;
+module uim.cake.orm.Locator;
 
-import uim.cakere.App;
-import uim.caketasources\ConnectionManager;
-import uim.caketasources\Locator\AbstractLocator;
-import uim.caketasources\IRepository;
-import uim.cakem.AssociationCollection;
-import uim.cakem.Exception\MissingTableClassException;
-import uim.cakem.Table;
-import uim.cakeilities.Inflector;
+import uim.cake.core.App;
+import uim.cake.datasources\ConnectionManager;
+import uim.cake.datasources\Locator\AbstractLocator;
+import uim.cake.datasources\IRepository;
+import uim.cake.orm.AssociationCollection;
+import uim.cake.orm.Exception\MissingTableClassException;
+import uim.cake.orm.Table;
+import uim.cake.utilities.Inflector;
 use RuntimeException;
 
 /**
