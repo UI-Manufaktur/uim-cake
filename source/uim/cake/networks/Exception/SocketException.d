@@ -1,6 +1,6 @@
-module uim.caketworks\Exception;
+module uim.cake.networks\Exception;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Exception class for Socket. This exception will be thrown from Socket, Email, HttpSocket

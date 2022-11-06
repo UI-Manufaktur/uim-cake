@@ -1,9 +1,9 @@
-module uim.caketworks;
+module uim.cake.networks;
 
-import uim.cakere.exceptions\CakeException;
-import uim.cakere.InstanceConfigTrait;
-import uim.caketworks\Exception\SocketException;
-import uim.cakelidations\Validation;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.networks\Exception\SocketException;
+import uim.cake.validations\Validation;
 use Composer\CaBundle\CaBundle;
 use Exception;
 use InvalidArgumentException;
