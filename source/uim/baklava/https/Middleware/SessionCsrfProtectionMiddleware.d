@@ -8,13 +8,13 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         4.2.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.https\Middleware;
+ */module uim.cake.https\Middleware;
 
 use ArrayAccess;
-import uim.baklava.https\Exception\InvalidCsrfTokenException;
-import uim.baklava.https\Session;
-import uim.baklava.utilities.Hash;
-import uim.baklava.utilities.Security;
+import uim.cake.https\Exception\InvalidCsrfTokenException;
+import uim.cake.https\Session;
+import uim.cake.utilities.Hash;
+import uim.cake.utilities.Security;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;

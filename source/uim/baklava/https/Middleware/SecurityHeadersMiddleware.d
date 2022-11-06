@@ -1,4 +1,4 @@
-module uim.baklava.https\Middleware;
+module uim.cake.https\Middleware;
 
 use InvalidArgumentException;
 use Psr\Http\Message\IResponse;

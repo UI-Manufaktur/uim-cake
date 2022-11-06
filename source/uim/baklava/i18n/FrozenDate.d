@@ -1,6 +1,6 @@
-module uim.baklava.I18n;
+module uim.cake.I18n;
 
-import uim.baklava.chronos\Date as ChronosDate;
+import uim.cake.chronos\Date as ChronosDate;
 use IntlDateFormatter;
 
 /**

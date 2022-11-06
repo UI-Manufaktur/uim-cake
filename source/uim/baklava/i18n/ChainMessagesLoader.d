@@ -1,4 +1,4 @@
-module uim.baklava.I18n;
+module uim.cake.I18n;
 
 use RuntimeException;
 

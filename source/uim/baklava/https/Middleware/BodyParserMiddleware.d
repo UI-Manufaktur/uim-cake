@@ -8,11 +8,11 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         3.6.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.https\Middleware;
+ */module uim.cake.https\Middleware;
 
-import uim.baklava.https\Exception\BadRequestException;
-import uim.baklava.utilities.Exception\XmlException;
-import uim.baklava.utilities.Xml;
+import uim.cake.https\Exception\BadRequestException;
+import uim.cake.utilities.Exception\XmlException;
+import uim.cake.utilities.Xml;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
