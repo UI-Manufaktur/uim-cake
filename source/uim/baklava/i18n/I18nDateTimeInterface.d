@@ -35,7 +35,7 @@ interface I18nIDateTime : ChronosInterface, JsonSerializable
      * @param string|null $locale The locale name in which the date should be displayed (e.g. pt-BR)
      * @return string Formatted date string
      */
-    function nice($timezone = null, $locale = null): string;
+    string nice($timezone = null, $locale = null);
 
     /**
      * Returns a formatted string for this time object using the preferred format and
