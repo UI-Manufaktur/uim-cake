@@ -9,9 +9,9 @@
  * @since         4.0.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.caketps\Middleware;
+module uim.cake.https\Middleware;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 use ParagonIE\CSPBuilder\CSPBuilder;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

@@ -8,11 +8,11 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         3.6.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.caketps\Middleware;
+ */module uim.cake.https\Middleware;
 
-import uim.caketps\Exception\BadRequestException;
-import uim.cakeilities.Exception\XmlException;
-import uim.cakeilities.Xml;
+import uim.cake.https\Exception\BadRequestException;
+import uim.cake.utilities.Exception\XmlException;
+import uim.cake.utilities.Xml;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

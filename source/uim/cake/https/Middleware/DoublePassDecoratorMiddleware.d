@@ -1,6 +1,6 @@
-module uim.caketps\Middleware;
+module uim.cake.https\Middleware;
 
-import uim.caketps\Response;
+import uim.cake.https\Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;

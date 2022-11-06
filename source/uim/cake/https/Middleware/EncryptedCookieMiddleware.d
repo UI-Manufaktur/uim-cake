@@ -1,8 +1,8 @@
-module uim.caketps\Middleware;
+module uim.cake.https\Middleware;
 
-import uim.caketps\Cookie\CookieCollection;
-import uim.caketps\Response;
-import uim.cakeilities.CookieCryptTrait;
+import uim.cake.https\Cookie\CookieCollection;
+import uim.cake.https\Response;
+import uim.cake.utilities.CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;

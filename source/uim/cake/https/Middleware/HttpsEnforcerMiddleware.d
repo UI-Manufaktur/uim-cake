@@ -8,10 +8,10 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         4.0.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.caketps\Middleware;
+ */module uim.cake.https\Middleware;
 
-import uim.cakere.Configure;
-import uim.caketps\Exception\BadRequestException;
+import uim.cake.core.Configure;
+import uim.cake.https\Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

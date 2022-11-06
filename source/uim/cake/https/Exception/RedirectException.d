@@ -1,4 +1,4 @@
-module uim.caketps\Exception;
+module uim.cake.https\Exception;
 
 /**
  * An exception subclass used by routing and application code to
