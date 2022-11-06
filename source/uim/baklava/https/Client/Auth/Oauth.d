@@ -1,8 +1,8 @@
-module uim.baklava.https\Client\Auth;
+module uim.cake.https\Client\Auth;
 
-import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.https\Client\Request;
-import uim.baklava.utilities.Security;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.https\Client\Request;
+import uim.cake.utilities.Security;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 

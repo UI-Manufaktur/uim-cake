@@ -1,7 +1,7 @@
-module uim.baklava.https\Client\Auth;
+module uim.cake.https\Client\Auth;
 
-import uim.baklava.https\Client;
-import uim.baklava.https\Client\Request;
+import uim.cake.https\Client;
+import uim.cake.https\Client\Request;
 
 /**
  * Digest authentication adapter for Cake\Http\Client

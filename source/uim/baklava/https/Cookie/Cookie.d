@@ -1,6 +1,6 @@
-module uim.baklava.https\Cookie;
+module uim.cake.https\Cookie;
 
-import uim.baklava.utilities.Hash;
+import uim.cake.utilities.Hash;
 use DateTimeImmutable;
 use IDateTime;
 use DateTimeZone;

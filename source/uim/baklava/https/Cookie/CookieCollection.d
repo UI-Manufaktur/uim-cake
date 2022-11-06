@@ -11,7 +11,7 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         3.5.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.https\Cookie;
+ */module uim.cake.https\Cookie;
 
 use ArrayIterator;
 use Countable;

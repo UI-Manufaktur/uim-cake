@@ -1,4 +1,4 @@
-module uim.baklava.https\Cookie;
+module uim.cake.https\Cookie;
 
 /**
  * Cookie Interface

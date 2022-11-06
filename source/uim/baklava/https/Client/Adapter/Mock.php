@@ -1,8 +1,8 @@
-module uim.baklava.https\Client\Adapter;
+module uim.cake.https\Client\Adapter;
 
-import uim.baklava.https\Client\AdapterInterface;
-import uim.baklava.https\Client\Exception\MissingResponseException;
-import uim.baklava.https\Client\Response;
+import uim.cake.https\Client\AdapterInterface;
+import uim.cake.https\Client\Exception\MissingResponseException;
+import uim.cake.https\Client\Response;
 use Closure;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;

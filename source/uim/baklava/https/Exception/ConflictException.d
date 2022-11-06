@@ -1,4 +1,4 @@
-module uim.baklava.https\Exception;
+module uim.cake.https\Exception;
 
 use Throwable;
 
