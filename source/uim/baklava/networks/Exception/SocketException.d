@@ -1,6 +1,6 @@
-module uim.baklava.networks\Exception;
+module uim.cake.networks\Exception;
 
-import uim.baklava.core.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Exception class for Socket. This exception will be thrown from Socket, Email, HttpSocket

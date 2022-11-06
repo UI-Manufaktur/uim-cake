@@ -1,10 +1,10 @@
-module uim.baklava.orm.Behavior;
+module uim.cake.orm.Behavior;
 
 use ArrayObject;
-import uim.baklava.datasources\IEntity;
-import uim.baklava.events\IEvent;
-import uim.baklava.orm.Association;
-import uim.baklava.orm.Behavior;
+import uim.cake.datasources\IEntity;
+import uim.cake.events\IEvent;
+import uim.cake.orm.Association;
+import uim.cake.orm.Behavior;
 use Closure;
 
 /**

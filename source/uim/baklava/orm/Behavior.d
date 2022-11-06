@@ -1,8 +1,8 @@
-module uim.baklava.ORM;
+module uim.cake.ORM;
 
-import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.core.InstanceConfigTrait;
-import uim.baklava.events\IEventListener;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.events\IEventListener;
 use ReflectionClass;
 use ReflectionMethod;
 

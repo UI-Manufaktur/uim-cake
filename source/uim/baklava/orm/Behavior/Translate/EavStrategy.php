@@ -1,16 +1,16 @@
-module uim.baklava.orm.Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.baklava.collections\Collection;
-import uim.baklava.collections\ICollection;
-import uim.baklava.core.InstanceConfigTrait;
-import uim.baklava.datasources\IEntity;
-import uim.baklava.events\IEvent;
-import uim.baklava.orm.Entity;
-import uim.baklava.orm.Locator\LocatorAwareTrait;
-import uim.baklava.orm.Query;
-import uim.baklava.orm.Table;
-import uim.baklava.utilities.Hash;
+import uim.cake.collections\Collection;
+import uim.cake.collections\ICollection;
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.datasources\IEntity;
+import uim.cake.events\IEvent;
+import uim.cake.orm.Entity;
+import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
+import uim.cake.utilities.Hash;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations

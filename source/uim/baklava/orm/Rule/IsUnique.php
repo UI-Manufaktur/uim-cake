@@ -1,7 +1,7 @@
-module uim.baklava.orm.Rule;
+module uim.cake.orm.Rule;
 
-import uim.baklava.datasources\IEntity;
-import uim.baklava.utilities.Hash;
+import uim.cake.datasources\IEntity;
+import uim.cake.utilities.Hash;
 
 /**
  * Checks that a list of fields from an entity are unique in the table

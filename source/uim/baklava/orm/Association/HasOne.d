@@ -1,10 +1,10 @@
-module uim.baklava.orm.Association;
+module uim.cake.orm.Association;
 
-import uim.baklava.datasources\IEntity;
-import uim.baklava.orm.Association;
-import uim.baklava.orm.Association\Loader\SelectLoader;
-import uim.baklava.orm.Table;
-import uim.baklava.utilities.Inflector;
+import uim.cake.datasources\IEntity;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.Table;
+import uim.cake.utilities.Inflector;
 use Closure;
 
 /**

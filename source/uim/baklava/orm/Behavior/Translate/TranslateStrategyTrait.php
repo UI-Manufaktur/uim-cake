@@ -1,10 +1,10 @@
-module uim.baklava.orm.Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
-import uim.baklava.datasources\IEntity;
-import uim.baklava.events\IEvent;
-import uim.baklava.I18n\I18n;
-import uim.baklava.orm.Marshaller;
-import uim.baklava.orm.Table;
+import uim.cake.datasources\IEntity;
+import uim.cake.events\IEvent;
+import uim.cake.I18n\I18n;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.Table;
 
 /**
  * Contains common code needed by TranslateBehavior strategy classes.

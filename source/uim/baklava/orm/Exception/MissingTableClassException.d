@@ -11,9 +11,9 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.orm.Exception;
+ */module uim.cake.orm.Exception;
 
-import uim.baklava.core.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Exception raised when a Table could not be found.

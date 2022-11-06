@@ -1,7 +1,7 @@
-module uim.baklava.orm.Association;
+module uim.cake.orm.Association;
 
-import uim.baklava.datasources\IEntity;
-import uim.baklava.orm.Association;
+import uim.cake.datasources\IEntity;
+import uim.cake.orm.Association;
 
 /**
  * Helper class for cascading deletes in associations.

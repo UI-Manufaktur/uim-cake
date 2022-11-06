@@ -1,8 +1,8 @@
-module uim.baklava.orm.Locator;
+module uim.cake.orm.Locator;
 
-import uim.baklava.datasources\Locator\ILocator as BaseILocator;
-import uim.baklava.datasources\IRepository;
-import uim.baklava.orm.Table;
+import uim.cake.datasources\Locator\ILocator as BaseILocator;
+import uim.cake.datasources\IRepository;
+import uim.cake.orm.Table;
 
 /**
  * Registries for Table objects should implement this interface.

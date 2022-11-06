@@ -9,11 +9,11 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.baklava.Mailer\Transport;
+ */module uim.cake.Mailer\Transport;
 
-import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.Mailer\AbstractTransport;
-import uim.baklava.Mailer\Message;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.Mailer\AbstractTransport;
+import uim.cake.Mailer\Message;
 
 /**
  * Send mail using mail() function

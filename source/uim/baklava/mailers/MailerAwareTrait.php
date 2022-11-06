@@ -1,7 +1,7 @@
-module uim.baklava.Mailer;
+module uim.cake.Mailer;
 
-import uim.baklava.core.App;
-import uim.baklava.Mailer\Exception\MissingMailerException;
+import uim.cake.core.App;
+import uim.cake.Mailer\Exception\MissingMailerException;
 
 /**
  * Provides functionality for loading mailer classes

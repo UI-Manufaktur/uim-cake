@@ -1,8 +1,8 @@
-module uim.baklava.orm.Locator;
+module uim.cake.orm.Locator;
 
-import uim.baklava.core.exceptions\CakeException;
-import uim.baklava.datasources\FactoryLocator;
-import uim.baklava.orm.Table;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.datasources\FactoryLocator;
+import uim.cake.orm.Table;
 
 /**
  * Contains method for setting and accessing ILocator instance

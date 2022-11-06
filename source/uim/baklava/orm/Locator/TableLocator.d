@@ -1,13 +1,13 @@
-module uim.baklava.orm.Locator;
+module uim.cake.orm.Locator;
 
-import uim.baklava.core.App;
-import uim.baklava.datasources\ConnectionManager;
-import uim.baklava.datasources\Locator\AbstractLocator;
-import uim.baklava.datasources\IRepository;
-import uim.baklava.orm.AssociationCollection;
-import uim.baklava.orm.Exception\MissingTableClassException;
-import uim.baklava.orm.Table;
-import uim.baklava.utilities.Inflector;
+import uim.cake.core.App;
+import uim.cake.datasources\ConnectionManager;
+import uim.cake.datasources\Locator\AbstractLocator;
+import uim.cake.datasources\IRepository;
+import uim.cake.orm.AssociationCollection;
+import uim.cake.orm.Exception\MissingTableClassException;
+import uim.cake.orm.Table;
+import uim.cake.utilities.Inflector;
 use RuntimeException;
 
 /**

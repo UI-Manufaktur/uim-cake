@@ -1,7 +1,7 @@
-module uim.baklava.Mailer;
+module uim.cake.Mailer;
 
-import uim.baklava.views\View;
-import uim.baklava.views\ViewVarsTrait;
+import uim.cake.views\View;
+import uim.cake.views\ViewVarsTrait;
 
 /**
  * Class for rendering email message.

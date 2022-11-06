@@ -1,8 +1,8 @@
-module uim.baklava.orm.Rule;
+module uim.cake.orm.Rule;
 
-import uim.baklava.datasources\IEntity;
-import uim.baklava.orm.Association;
-import uim.baklava.orm.Table;
+import uim.cake.datasources\IEntity;
+import uim.cake.orm.Association;
+import uim.cake.orm.Table;
 
 /**
  * Checks whether links to a given association exist / do not exist.

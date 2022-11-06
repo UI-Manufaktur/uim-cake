@@ -1,7 +1,7 @@
-module uim.baklava.ORM;
+module uim.cake.ORM;
 
-import uim.baklava.datasources\FactoryLocator;
-import uim.baklava.orm.Locator\ILocator;
+import uim.cake.datasources\FactoryLocator;
+import uim.cake.orm.Locator\ILocator;
 
 /**
  * Provides a registry/factory for Table objects.
