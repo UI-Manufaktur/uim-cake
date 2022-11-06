@@ -1,4 +1,4 @@
-module uim.caketps\Client;
+module uim.cake.https\Client;
 
 use Countable;
 use finfo;
@@ -45,7 +45,7 @@ class FormData : Countable
      *
      * @return string
      */
-    function boundary(): string
+    string boundary()
     {
         if (this._boundary) {
             return this._boundary;
@@ -211,7 +211,7 @@ class FormData : Countable
      *
      * @return string
      */
-    function contentType(): string
+    string contentType()
     {
         if (!this.isMultipart()) {
             return 'application/x-www-form-urlencoded';
@@ -226,7 +226,7 @@ class FormData : Countable
      *
      * @return string
      */
-    auto __toString(): string
+    string __toString()
     {
         if (this.isMultipart()) {
             $boundary = this.boundary();

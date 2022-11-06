@@ -1,6 +1,6 @@
-module uim.caketps\Cookie;
+module uim.cake.https\Cookie;
 
-import uim.cakeilities.Hash;
+import uim.cake.utilities.Hash;
 use DateTimeImmutable;
 use IDateTime;
 use DateTimeZone;

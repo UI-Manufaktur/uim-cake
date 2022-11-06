@@ -1,8 +1,8 @@
-module uim.caketps\Client\Auth;
+module uim.cake.https\Client\Auth;
 
-import uim.cakere.exceptions\CakeException;
-import uim.caketps\Client\Request;
-import uim.cakeilities.Security;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.https\Client\Request;
+import uim.cake.utilities.Security;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;
 

@@ -1,6 +1,6 @@
-module uim.caketps\Client;
+module uim.baklava.https\Client;
 
-import uim.caketps\Cookie\CookieCollection;
+import uim.baklava.https\Cookie\CookieCollection;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;
@@ -131,7 +131,7 @@ class Response : Message : IResponse
      * @return string
      * @throws \RuntimeException When attempting to decode gzip content without gzinflate.
      */
-    protected auto _decodeGzipBody(string $body): string
+    protected string _decodeGzipBody(string $body)
     {
         if (!function_exists('gzinflate')) {
             throw new RuntimeException('Cannot decompress gzip response body without gzinflate()');
@@ -250,11 +250,9 @@ class Response : Message : IResponse
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @return string The current reason phrase.
      */
-    auto getReasonPhrase(): string
+    string getReasonPhrase()
     {
         return this.reasonPhrase;
     }
@@ -264,15 +262,12 @@ class Response : Message : IResponse
      *
      * @return string|null
      */
-    string getEncoding() {
+    Nullable!string getEncoding() {
         myContents = this.getHeaderLine('content-type');
-        if (!myContents) {
-            return null;
-        }
+        if (!myContents) { return null; }
+
         preg_match('/charset\s?=\s?[\'"]?([a-z0-9-_]+)[\'"]?/i', myContents, $matches);
-        if (empty($matches[1])) {
-            return null;
-        }
+        if (empty($matches[1])) { return null; }
 
         return $matches[1];
     }
@@ -371,7 +366,7 @@ class Response : Message : IResponse
      *
      * @return string
      */
-    auto getStringBody(): string
+    string getStringBody()
     {
         return this._getBody();
     }
@@ -449,7 +444,7 @@ class Response : Message : IResponse
      *
      * @return string
      */
-    protected auto _getBody(): string
+    protected string _getBody()
     {
         this.stream.rewind();
 

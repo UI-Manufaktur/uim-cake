@@ -1,6 +1,6 @@
-module uim.caketps\Client\Exception;
+module uim.cake.https\Client\Exception;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Used to indicate that a request did not have a matching mock response.

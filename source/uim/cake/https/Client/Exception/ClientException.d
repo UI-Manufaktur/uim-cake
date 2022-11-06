@@ -1,4 +1,4 @@
-module uim.caketps\Client\Exception;
+module uim.cake.https\Client\Exception;
 
 use Psr\Http\Client\ClientExceptionInterface;
 use RuntimeException;

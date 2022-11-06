@@ -1,7 +1,7 @@
-module uim.caketps\Client\Auth;
+module uim.cake.https\Client\Auth;
 
-import uim.caketps\Client;
-import uim.caketps\Client\Request;
+import uim.cake.https\Client;
+import uim.cake.https\Client\Request;
 
 /**
  * Digest authentication adapter for Cake\Http\Client

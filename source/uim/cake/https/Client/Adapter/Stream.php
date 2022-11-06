@@ -10,13 +10,13 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.caketps\Client\Adapter;
+ */module uim.cake.https\Client\Adapter;
 
-import uim.caketps\Client\AdapterInterface;
-import uim.caketps\Client\Exception\ClientException;
-import uim.caketps\Client\Exception\NetworkException;
-import uim.caketps\Client\Exception\RequestException;
-import uim.caketps\Client\Response;
+import uim.cake.https\Client\AdapterInterface;
+import uim.cake.https\Client\Exception\ClientException;
+import uim.cake.https\Client\Exception\NetworkException;
+import uim.cake.https\Client\Exception\RequestException;
+import uim.cake.https\Client\Response;
 use Composer\CaBundle\CaBundle;
 use Psr\Http\Message\RequestInterface;
 

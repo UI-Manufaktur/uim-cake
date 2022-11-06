@@ -1,4 +1,4 @@
-module uim.caketps\Exception;
+module uim.cake.https\Exception;
 
 use Throwable;
 

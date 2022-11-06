@@ -1,4 +1,4 @@
-module uim.caketps\Cookie;
+module uim.cake.https\Cookie;
 
 /**
  * Cookie Interface
