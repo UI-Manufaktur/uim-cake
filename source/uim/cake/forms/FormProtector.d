@@ -1,8 +1,8 @@
-module uim.cakerm;
+module uim.cake.Form;
 
-import uim.cakere.Configure;
-import uim.cakeilities.Hash;
-import uim.cakeilities.Security;
+import uim.cake.core.Configure;
+import uim.cake.utilities.Hash;
+import uim.cake.utilities.Security;
 
 /**
  * Protects against form tampering. It ensures that:

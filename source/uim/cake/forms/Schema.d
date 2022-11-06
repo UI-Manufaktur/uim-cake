@@ -1,4 +1,4 @@
-module uim.cakerm;
+module uim.cake.Form;
 
 /**
  * Contains the schema information for Form instances.
