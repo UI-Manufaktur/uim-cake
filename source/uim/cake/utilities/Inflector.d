@@ -249,8 +249,7 @@ class Inflector
      * @return string Word in plural
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
-    static function pluralize(string $word): string
-    {
+    static string pluralize(string $word) {
         if (isset(static::$_cache['pluralize'][$word])) {
             return static::$_cache['pluralize'][$word];
         }
@@ -301,8 +300,7 @@ class Inflector
      * @return string Word in singular
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
-    static function singularize(string $word): string
-    {
+    static string singularize(string $word) {
         if (isset(static::$_cache['singularize'][$word])) {
             return static::$_cache['singularize'][$word];
         }
@@ -358,8 +356,7 @@ class Inflector
      * @return string CamelizedStringLikeThis.
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
-    static function camelize(string $string, string $delimiter = '_'): string
-    {
+    static string camelize(string $string, string $delimiter = '_') {
         $cacheKey = __FUNCTION__ . $delimiter;
 
         myResult = static::_cache($cacheKey, $string);
@@ -381,8 +378,7 @@ class Inflector
      * @return string underscore_version of the input string
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
-    static function underscore(string $string): string
-    {
+    static string underscore(string $string) {
         return static::delimit(str_replace('-', '_', $string), '_');
     }
 
@@ -394,8 +390,7 @@ class Inflector
      * @param string $string The string to dasherize.
      * @return string Dashed version of the input string
      */
-    static function dasherize(string $string): string
-    {
+    static string dasherize(string $string) {
         return static::delimit(str_replace('_', '-', $string), '-');
     }
 
@@ -408,8 +403,7 @@ class Inflector
      * @return string Human-readable string
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-human-readable-forms
      */
-    static function humanize(string $string, string $delimiter = '_'): string
-    {
+    static string humanize(string $string, string $delimiter = '_') {
         $cacheKey = __FUNCTION__ . $delimiter;
 
         myResult = static::_cache($cacheKey, $string);
@@ -433,8 +427,7 @@ class Inflector
      * @param string $delimiter the character to use as a delimiter
      * @return string delimited string
      */
-    static function delimit(string $string, string $delimiter = '_'): string
-    {
+    static string delimit(string $string, string $delimiter = '_') {
         $cacheKey = __FUNCTION__ . $delimiter;
 
         myResult = static::_cache($cacheKey, $string);
@@ -454,8 +447,7 @@ class Inflector
      * @return string Name of the database table for given class
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
      */
-    static function tableize(string myClassName): string
-    {
+    static string tableize(string myClassName) {
         myResult = static::_cache(__FUNCTION__, myClassName);
 
         if (myResult === false) {
@@ -473,8 +465,7 @@ class Inflector
      * @return string Class name
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
      */
-    static function classify(string myTableName): string
-    {
+    static string classify(string myTableName) {
         myResult = static::_cache(__FUNCTION__, myTableName);
 
         if (myResult === false) {
@@ -492,8 +483,7 @@ class Inflector
      * @return string in variable form
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-variable-names
      */
-    static function variable(string $string): string
-    {
+    static string variable(string $string) {
         myResult = static::_cache(__FUNCTION__, $string);
 
         if (myResult === false) {
