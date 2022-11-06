@@ -8,12 +8,12 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs\Engine;
+ */module uim.cake.logs\Engine;
 
 use ArrayObject;
-import uim.cakere.InstanceConfigTrait;
-import uim.cakegs\Formatter\AbstractFormatter;
-import uim.cakegs\Formatter\DefaultFormatter;
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.logs\Formatter\AbstractFormatter;
+import uim.cake.logs\Formatter\DefaultFormatter;
 use InvalidArgumentException;
 use JsonSerializable;
 use Psr\Log\AbstractLogger;

@@ -8,7 +8,7 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs\Formatter;
+ */module uim.cake.logs\Formatter;
 
 /**
  * @deprecated 4.3.0 Create a custom formatter and set it with `formatter` config instead.

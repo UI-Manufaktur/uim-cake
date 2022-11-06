@@ -8,11 +8,11 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         1.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs\Engine;
+ */module uim.cake.logs\Engine;
 
-import uim.cakere.Configure;
-import uim.cakegs\Formatter\DefaultFormatter;
-import uim.cakeilities.Text;
+import uim.cake.core.Configure;
+import uim.cake.logs\Formatter\DefaultFormatter;
+import uim.cake.utilities.Text;
 
 /**
  * File Storage stream for Logging. Writes logs to different files

@@ -8,7 +8,7 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs\Formatter;
+ */module uim.cake.logs\Formatter;
 
 class JsonFormatter : AbstractFormatter
 {

@@ -8,9 +8,9 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         4.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs\Engine;
+ */module uim.cake.logs\Engine;
 
-import uim.cakegs\Formatter\DefaultFormatter;
+import uim.cake.logs\Formatter\DefaultFormatter;
 
 /**
  * Array logger.

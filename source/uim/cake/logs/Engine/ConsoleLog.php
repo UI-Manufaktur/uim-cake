@@ -8,10 +8,10 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakegs\Engine;
+ */module uim.cake.logs\Engine;
 
-import uim.cakensole.consoleOutput;
-import uim.cakegs\Formatter\DefaultFormatter;
+import uim.cake.console.consoleOutput;
+import uim.cake.logs\Formatter\DefaultFormatter;
 use InvalidArgumentException;
 
 /**
