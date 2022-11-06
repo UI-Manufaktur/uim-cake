@@ -1,4 +1,4 @@
-module uim.caketabase;
+module uim.cake.databases;
 
 /**
  * : the TypedResultInterface

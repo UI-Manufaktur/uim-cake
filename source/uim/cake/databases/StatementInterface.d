@@ -1,4 +1,4 @@
-module uim.caketabase;
+module uim.cake.databases;
 
 /**
  * Represents a database statement. Concrete implementations

@@ -1,6 +1,6 @@
 module uim.cakeews\Widget;
 
-import uim.caketabase.Schema\TableSchema;
+import uim.cake.databases.Schema\TableSchema;
 import uim.cakeews\Form\IContext;
 use DateTime;
 use IDateTime;

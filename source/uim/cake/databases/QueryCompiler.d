@@ -1,6 +1,6 @@
-module uim.caketabase;
+module uim.cake.databases;
 
-import uim.caketabase.Exception\DatabaseException;
+import uim.cake.databases.Exception\DatabaseException;
 use Closure;
 use Countable;
 

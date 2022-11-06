@@ -1,7 +1,7 @@
-module uim.caketabase;
+module uim.cake.databases;
 
-import uim.caketabase.Type\BatchCastingInterface;
-import uim.caketabase.Type\IOptionalConvert;
+import uim.cake.databases.Type\BatchCastingInterface;
+import uim.cake.databases.Type\IOptionalConvert;
 
 /**
  * A callable class to be used for processing each of the rows in a statement

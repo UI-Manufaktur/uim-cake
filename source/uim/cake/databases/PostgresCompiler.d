@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         4.0.3
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.caketabase;
+ */module uim.cake.databases;
 
-import uim.caketabase.Expression\FunctionExpression;
+import uim.cake.databases.Expression\FunctionExpression;
 
 /**
  * Responsible for compiling a Query object into its SQL representation

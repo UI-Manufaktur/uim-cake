@@ -3,7 +3,7 @@ module uim.cakemmand;
 import uim.cakensole.Arguments;
 import uim.cakensole.consoleIo;
 import uim.cakensole.consoleOptionParser;
-import uim.caketabases.SchemaCache;
+import uim.cake.databasess.SchemaCache;
 import uim.caketasources\ConnectionManager;
 use RuntimeException;
 
