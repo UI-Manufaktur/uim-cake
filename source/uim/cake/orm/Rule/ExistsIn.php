@@ -62,7 +62,7 @@ class ExistsIn
      * @throws \RuntimeException When the rule refers to an undefined association.
      * @return bool
      */
-    auto __invoke(IEntity $entity, array myOptions): bool
+    bool __invoke(IEntity $entity, array myOptions)
     {
         if (is_string(this._repository)) {
             if (!myOptions['repository'].hasAssociation(this._repository)) {
@@ -136,7 +136,7 @@ class ExistsIn
      * @param \Cake\ORM\Table $source The table to use schema from.
      * @return bool
      */
-    protected auto _fieldsAreNull(IEntity $entity, Table $source): bool
+    protected bool _fieldsAreNull(IEntity $entity, Table $source)
     {
         $nulls = 0;
         $schema = $source.getSchema();

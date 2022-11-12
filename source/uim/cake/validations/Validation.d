@@ -901,7 +901,7 @@ class Validation
      * @param int $min The minimal string length
      * @return bool Success
      */
-    static function minLength($check, int $min): bool
+    static bool minLength($check, int $min)
     {
         if (!is_scalar($check)) {
             return false;
@@ -917,7 +917,7 @@ class Validation
      * @param int $max The maximal string length
      * @return bool Success
      */
-    static function maxLength($check, int $max): bool
+    static bool maxLength($check, int $max): bool
     {
         if (!is_scalar($check)) {
             return false;
@@ -933,7 +933,7 @@ class Validation
      * @param int $min The minimal string length (in bytes)
      * @return bool Success
      */
-    static function minLengthBytes($check, int $min): bool
+    static bool minLengthBytes($check, int $min)
     {
         if (!is_scalar($check)) {
             return false;
@@ -949,7 +949,7 @@ class Validation
      * @param int $max The maximal string length
      * @return bool Success
      */
-    static function maxLengthBytes($check, int $max): bool
+    static bool maxLengthBytes($check, int $max)
     {
         if (!is_scalar($check)) {
             return false;
@@ -965,7 +965,7 @@ class Validation
      * @param string $symbolPosition Where symbol is located (left/right)
      * @return bool Success
      */
-    static function money($check, string $symbolPosition = 'left'): bool
+    static bool money($check, string $symbolPosition = 'left')
     {
         $money = '(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{1,2})?';
         if ($symbolPosition === 'right') {
@@ -991,7 +991,7 @@ class Validation
      * @param bool $caseInsensitive Set to true for case insensitive comparison.
      * @return bool Success
      */
-    static function multiple($check, array myOptions = [], bool $caseInsensitive = false): bool
+    static bool multiple($check, array myOptions = [], bool $caseInsensitive = false)
     {
         $defaults = ['in' => null, 'max' => null, 'min' => null];
         myOptions += $defaults;
@@ -1032,7 +1032,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static function numeric($check): bool
+    static bool numeric($check)
     {
         return is_numeric($check);
     }
@@ -1045,7 +1045,7 @@ class Validation
      * @return bool Success
      * @see https://en.wikipedia.org/wiki/Natural_number
      */
-    static function naturalNumber($check, bool $allowZero = false): bool
+    static bool naturalNumber($check, bool $allowZero = false)
     {
         $regex = $allowZero ? '/^(?:0|[1-9][0-9]*)$/' : '/^[1-9][0-9]*$/';
 
@@ -1064,7 +1064,7 @@ class Validation
      * @param float|null $upper Upper limit
      * @return bool Success
      */
-    static function range($check, ?float $lower = null, ?float $upper = null): bool
+    static bool range($check, ?float $lower = null, ?float $upper = null)
     {
         if (!is_numeric($check)) {
             return false;
@@ -1097,7 +1097,7 @@ class Validation
      * @return bool Success
      * @link https://tools.ietf.org/html/rfc3986
      */
-    static function url($check, bool $strict = false): bool
+    static bool url($check, bool $strict = false)
     {
         if (!is_string($check)) {
             return false;
@@ -1130,7 +1130,7 @@ class Validation
      * @param bool $caseInsensitive Set to true for case insensitive comparison.
      * @return bool Success.
      */
-    static function inList($check, array $list, bool $caseInsensitive = false): bool
+    static bool inList($check, array $list, bool $caseInsensitive = false)
     {
         if (!is_scalar($check)) {
             return false;
@@ -1151,7 +1151,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static function uuid($check): bool
+    static bool uuid($check)
     {
         $regex = '/^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[0-5][a-fA-F0-9]{3}-[089aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/';
 
@@ -1165,7 +1165,7 @@ class Validation
      * @param string $regex Regular expression
      * @return bool Success of match
      */
-    protected static auto _check($check, string $regex): bool
+    protected static bool _check($check, string $regex)
     {
         return is_scalar($check) && preg_match($regex, (string)$check);
     }
@@ -1177,7 +1177,7 @@ class Validation
      * @return bool Success
      * @see https://en.wikipedia.org/wiki/Luhn_algorithm
      */
-    static function luhn($check): bool
+    static bool luhn($check)
     {
         if (!is_scalar($check) || (int)$check === 0) {
             return false;
@@ -1211,7 +1211,7 @@ class Validation
      * @throws \RuntimeException when mime type can not be determined.
      * @throws \LogicException when ext/fileinfo is missing
      */
-    static function mimeType($check, $mimeTypes = []): bool
+    static bool mimeType($check, $mimeTypes = [])
     {
         myfile = static::getFilename($check);
         if (myfile === false) {
@@ -1288,7 +1288,7 @@ class Validation
      * @param string|int $size Size in bytes or human readable string like '5MB'.
      * @return bool Success
      */
-    static function fileSize($check, string $operator, $size): bool
+    static bool fileSize($check, string $operator, $size)
     {
         myfile = static::getFilename($check);
         if (myfile === false) {
@@ -1311,7 +1311,7 @@ class Validation
      * @return bool
      * @see https://secure.php.net/manual/en/features.file-upload.errors.php
      */
-    static function uploadError($check, bool $allowNoFile = false): bool
+    static bool uploadError($check, bool $allowNoFile = false)
     {
         if ($check instanceof UploadedFileInterface) {
             $code = $check.getError();
@@ -1347,7 +1347,7 @@ class Validation
      * @param array<string, mixed> myOptions An array of options for the validation.
      * @return bool
      */
-    static function uploadedFile(myfile, array myOptions = []): bool
+    static bool uploadedFile(myfile, array myOptions = [])
     {
         myOptions += [
             'minSize' => null,
@@ -1406,7 +1406,7 @@ class Validation
      * @return bool
      * @throws \InvalidArgumentException
      */
-    static function imageSize(myfile, array myOptions): bool
+    static bool imageSize(myfile, array myOptions)
     {
         if (!isset(myOptions['height']) && !isset(myOptions['width'])) {
             throw new InvalidArgumentException(
@@ -1450,7 +1450,7 @@ class Validation
      * @param int $width Min or max width.
      * @return bool
      */
-    static function imageWidth(myfile, string $operator, int $width): bool
+    static bool imageWidth(myfile, string $operator, int $width)
     {
         return self::imageSize(myfile, [
             'width' => [
