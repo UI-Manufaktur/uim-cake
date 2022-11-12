@@ -2124,7 +2124,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return bool
      */
-    function isBufferedResultsEnabled(): bool
+    bool isBufferedResultsEnabled()
     {
         return this._useBufferedResults;
     }
@@ -2199,7 +2199,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return bool
      */
-    function isResultsCastingEnabled(): bool
+    bool isResultsCastingEnabled()
     {
         return this.typeCastEnabled;
     }

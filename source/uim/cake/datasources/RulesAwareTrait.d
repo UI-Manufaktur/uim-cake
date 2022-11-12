@@ -40,7 +40,7 @@ trait RulesAwareTrait
      * @param \ArrayObject|array|null myOptions The options To be passed to the rules.
      * @return bool
      */
-    function checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, myOptions = null): bool
+    bool checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, myOptions = null)
     {
         $rules = this.rulesChecker();
         myOptions = myOptions ?: new ArrayObject();

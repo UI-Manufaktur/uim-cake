@@ -175,14 +175,14 @@ interface CookieInterface
      * @param \DateTime|\DateTimeImmutable $time The time to test against. Defaults to 'now' in UTC.
      * @return bool
      */
-    function isExpired($time = null): bool;
+    bool isExpired($time = null);
 
     /**
      * Check if the cookie is HTTP only
      *
      * @return bool
      */
-    function isHttpOnly(): bool;
+    bool isHttpOnly();
 
     /**
      * Create a cookie with HTTP Only updated
@@ -197,7 +197,7 @@ interface CookieInterface
      *
      * @return bool
      */
-    function isSecure(): bool;
+    bool isSecure();
 
     /**
      * Create a cookie with Secure updated

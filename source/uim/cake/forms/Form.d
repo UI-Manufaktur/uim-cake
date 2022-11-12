@@ -254,7 +254,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return bool False on validation failure, otherwise returns the
      *   result of the `_execute()` method.
      */
-    auto execute(array myData, array myOptions = []): bool
+    bool execute(array myData, array myOptions = [])
     {
         this._data = myData;
 
@@ -277,7 +277,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @param array myData Form data.
      * @return bool
      */
-    protected auto _execute(array myData): bool
+    protected bool _execute(array myData): bool
     {
         return true;
     }

@@ -100,7 +100,7 @@ class Mock : AdapterInterface
      * @param \Psr\Http\Message\RequestInterface $mock The request being mocked.
      * @return bool
      */
-    protected auto urlMatches(string myRequestUri, RequestInterface $mock): bool
+    protected bool urlMatches(string myRequestUri, RequestInterface $mock)
     {
         $mockUri = (string)$mock.getUri();
         if (myRequestUri === $mockUri) {
