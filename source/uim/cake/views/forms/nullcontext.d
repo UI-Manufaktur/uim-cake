@@ -36,14 +36,12 @@ class NullContext : IContext
     }
 
 
-    bool isPrimaryKey(string myField)
-    {
+    bool isPrimaryKey(string myField) {
         return false;
     }
 
 
-    bool isCreate()
-    {
+    bool isCreate() {
         return true;
     }
 
@@ -89,8 +87,7 @@ class NullContext : IContext
     }
 
 
-    bool hasError(string myField)
-    {
+    bool hasError(string myField) {
         return false;
     }
 

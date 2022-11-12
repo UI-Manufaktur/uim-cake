@@ -113,8 +113,7 @@ class ArrayContext : IContext
     }
 
 
-    bool isPrimaryKey(string myField)
-    {
+    bool isPrimaryKey(string myField) {
         $primaryKey = this.getPrimaryKey();
 
         return in_array(myField, $primaryKey, true);
@@ -129,8 +128,7 @@ class ArrayContext : IContext
      *
      * @return bool
      */
-    bool isCreate()
-    {
+    bool isCreate() {
         $primary = this.getPrimaryKey();
         foreach ($primary as $column) {
             if (!empty(this._context['defaults'][$column])) {
@@ -305,8 +303,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    bool hasError(string myField)
-    {
+    bool hasError(string myField) {
         if (empty(this._context['errors'])) {
             return false;
         }

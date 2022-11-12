@@ -43,8 +43,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @throws \Cake\View\Exception\MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
-    bool __isset(string $helper)
-    {
+    bool __isset(string $helper) {
         if (isset(this._loaded[$helper])) {
             return true;
         }

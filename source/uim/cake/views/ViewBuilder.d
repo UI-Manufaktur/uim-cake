@@ -136,8 +136,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string myName Var name
      * @return bool
      */
-    bool hasVar(string myName)
-    {
+    bool hasVar(string myName) {
         return array_key_exists(myName, this._vars);
     }
 
@@ -201,8 +200,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return bool
      */
-    bool isAutoLayoutEnabled()
-    {
+    bool isAutoLayoutEnabled() {
         return this._autoLayout;
     }
 

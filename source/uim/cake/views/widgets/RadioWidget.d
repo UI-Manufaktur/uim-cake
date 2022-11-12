@@ -111,8 +111,7 @@ class RadioWidget : BasicWidget
      * @param array|true|null $disabled The disabled values.
      * @return bool
      */
-    protected bool _isDisabled(array $radio, $disabled)
-    {
+    protected bool _isDisabled(array $radio, $disabled) {
         if (!$disabled) {
             return false;
         }

@@ -372,8 +372,7 @@ class View : IEventDispatcher {
      *
      * @return bool
      */
-    bool isAutoLayoutEnabled()
-    {
+    bool isAutoLayoutEnabled() {
         return this.autoLayout;
     }
 
@@ -619,8 +618,7 @@ class View : IEventDispatcher {
      *   is not found in the plugin, the normal view path cascade will be searched.
      * @return bool Success
      */
-    bool elementExists(string myName)
-    {
+    bool elementExists(string myName) {
         return (bool)this._getElementFileName(myName);
     }
 
@@ -910,8 +908,7 @@ class View : IEventDispatcher {
      * @param string myName Name of the block
      * @return bool
      */
-    bool exists(string myName)
-    {
+    bool exists(string myName) {
         return this.Blocks.exists(myName);
     }
 

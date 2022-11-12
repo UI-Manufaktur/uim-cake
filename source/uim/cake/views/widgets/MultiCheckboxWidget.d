@@ -221,8 +221,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param array<string>|string|int|false|null $selected The selected values.
      * @return bool
      */
-    protected bool _isSelected(string myKey, $selected)
-    {
+    protected bool _isSelected(string myKey, $selected) {
         if ($selected === null) {
             return false;
         }
@@ -241,8 +240,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param mixed $disabled The disabled values.
      * @return bool
      */
-    protected bool _isDisabled(string myKey, $disabled)
-    {
+    protected bool _isDisabled(string myKey, $disabled) {
         if ($disabled === null || $disabled === false) {
             return false;
         }
