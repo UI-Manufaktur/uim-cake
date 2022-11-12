@@ -1,14 +1,4 @@
-
-
-/**
- * CakePHP(tm) :  Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakefoundation.org CakePHP(tm) Project
- * @since         4.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.logs\Formatter;
+module uim.cake.logs\Formatter;
 
 class DefaultFormatter : AbstractFormatter
 {

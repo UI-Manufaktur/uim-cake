@@ -209,8 +209,7 @@ class EagerLoadable
      *
      * @return bool
      */
-    function canBeJoined(): bool
-    {
+    bool canBeJoined() {
         return this._canBeJoined;
     }
 
