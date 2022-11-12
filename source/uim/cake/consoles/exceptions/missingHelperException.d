@@ -9,7 +9,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakensole\Exception;
+ */module uim.cake.console\Exception;
 
 /**
  * Used when a Helper cannot be found.

@@ -1,7 +1,7 @@
-module uim.cakensole;
+module uim.cake.console;
 
-import uim.cakensole.Exception\ConsoleException;
-import uim.cakensole.Exception\StopException;
+import uim.cake.console.Exception\ConsoleException;
+import uim.cake.console.Exception\StopException;
 import uim.cakere.App;
 import uim.cakere.exceptions\CakeException;
 import uim.caketasources\ModelAwareTrait;

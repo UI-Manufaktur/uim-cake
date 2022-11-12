@@ -1,6 +1,6 @@
-module uim.cakensole\Exception;
+module uim.cake.console\Exception;
 
-import uim.cakensole.commandInterface;
+import uim.cake.console.commandInterface;
 import uim.cakere.exceptions\CakeException;
 
 /**

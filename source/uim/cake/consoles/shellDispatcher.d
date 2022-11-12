@@ -1,7 +1,7 @@
-module uim.cakensole;
+module uim.cake.console;
 
-import uim.cakensole.Exception\MissingShellException;
-import uim.cakensole.Exception\StopException;
+import uim.cake.console.Exception\MissingShellException;
+import uim.cake.console.Exception\StopException;
 import uim.cakere.App;
 import uim.cakere.Configure;
 import uim.cakere.Plugin;
@@ -381,7 +381,7 @@ class ShellDispatcher
     {
         trigger_error(
             'Console help cannot be generated from Shell classes anymore. ' .
-            'Upgrade your application to import uim.cakensole.commandRunner instead.',
+            'Upgrade your application to import uim.cake.console.commandRunner instead.',
             E_USER_WARNING
         );
     }
@@ -395,7 +395,7 @@ class ShellDispatcher
     {
         trigger_error(
             'Version information cannot be generated from Shell classes anymore. ' .
-            'Upgrade your application to import uim.cakensole.commandRunner instead.',
+            'Upgrade your application to import uim.cake.console.commandRunner instead.',
             E_USER_WARNING
         );
     }

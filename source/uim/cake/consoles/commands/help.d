@@ -1,20 +1,18 @@
-module uim.cakensole\Command;
+module uim.cake.console\commands;
 
 use ArrayIterator;
-import uim.cakensole.Arguments;
-import uim.cakensole.BaseCommand;
-import uim.cakensole.commandCollection;
-import uim.cakensole.commandCollectionAwareInterface;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
-import uim.cakensole.consoleOutput;
+import uim.cake.console.Arguments;
+import uim.cake.console.BaseCommand;
+import uim.cake.console.commandCollection;
+import uim.cake.console.commandCollectionAwareInterface;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
+import uim.cake.console.consoleOutput;
 import uim.cakere.Configure;
 import uim.cakere.Plugin;
 use SimpleXMLElement;
 
-/**
- * Print out command list
- */
+// Print out command list
 class HelpCommand : BaseCommand : ICommandCollectionAware
 {
     /**
@@ -23,7 +21,6 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      * @var \Cake\Console\CommandCollection
      */
     protected $commands;
-
 
     auto setCommandCollection(CommandCollection $commands): void
     {

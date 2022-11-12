@@ -1,4 +1,4 @@
-module uim.cakensole;
+module uim.cake.console;
 
 import uim.cakeilities.Text;
 use SimpleXMLElement;
