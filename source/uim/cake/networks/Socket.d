@@ -100,8 +100,7 @@ class Socket
      * @return bool Success
      * @throws \Cake\Network\Exception\SocketException
      */
-    bool connect()
-    {
+    bool connect() {
         if (this.connection) {
             this.disconnect();
         }
@@ -169,10 +168,8 @@ class Socket
     /**
      * Check the connection status after calling `connect()`.
      *
-     * @return bool
      */
-    bool isConnected()
-    {
+    bool isConnected() {
         return this.connected;
     }
 
@@ -393,8 +390,7 @@ class Socket
      *
      * @return bool Success
      */
-    bool disconnect()
-    {
+    bool disconnect() {
         if (!is_resource(this.connection)) {
             this.connected = false;
 
@@ -487,10 +483,8 @@ class Socket
     /**
      * Check the encryption status after calling `enableCrypto()`.
      *
-     * @return bool
      */
-    bool isEncrypted()
-    {
+    bool isEncrypted() {
         return this.encrypted;
     }
 

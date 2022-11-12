@@ -350,8 +350,7 @@ class Log
      * @return bool Success
      * @throws \InvalidArgumentException If invalid level is passed.
      */
-    static bool write($level, string myMessage, $context = [])
-    {
+    static bool write($level, string myMessage, $context = []) {
         static::_init();
         if (is_int($level) && in_array($level, static::$_levelMap, true)) {
             $level = array_search($level, static::$_levelMap, true);
@@ -405,8 +404,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool emergency(string myMessage, $context = [])
-    {
+    static bool emergency(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -421,8 +419,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool alert(string myMessage, $context = [])
-    {
+    static bool alert(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -437,8 +434,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool critical(string myMessage, $context = [])
-    {
+    static bool critical(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -453,8 +449,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool error(string myMessage, $context = [])
-    {
+    static bool error(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -469,8 +464,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool warning(string myMessage, $context = [])
-    {
+    static bool warning(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -485,8 +479,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool notice(string myMessage, $context = [])
-    {
+    static bool notice(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -501,8 +494,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool debug(string myMessage, $context = [])
-    {
+    static bool debug(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -517,8 +509,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool info(string myMessage, $context = [])
-    {
+    static bool info(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 }

@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.https\Session;
 
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\LocatorAwareTrait;
 use SessionHandlerInterface;
 
 /**
@@ -79,8 +79,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string myName The session name.
      * @return bool Success
      */
-    bool open(myPath, myName)
-    {
+    bool open(myPath, myName) {
         return true;
     }
 
@@ -89,8 +88,7 @@ class DatabaseSession : SessionHandlerInterface
      *
      * @return bool Success
      */
-    bool close()
-    {
+    bool close() {
         return true;
     }
 
@@ -135,8 +133,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string myData The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
-    bool write($id, myData)
-    {
+    bool write($id, myData) {
         if (!$id) {
             return false;
         }
@@ -158,8 +155,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string $id ID that uniquely identifies session in database.
      * @return bool True for successful delete, false otherwise.
      */
-    bool destroy($id)
-    {
+    bool destroy($id) {
         /** @var string $pkField */
         $pkField = this._table.getPrimaryKey();
         this._table.deleteAll([$pkField => $id]);

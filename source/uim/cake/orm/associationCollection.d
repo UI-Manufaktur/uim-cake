@@ -2,8 +2,8 @@ module uim.cake.ORM;
 
 use ArrayIterator;
 import uim.cake.datasources\IEntity;
-import uim.cake.orm.Locator\LocatorAwareTrait;
-import uim.cake.orm.Locator\ILocator;
+import uim.cake.orm.locators\LocatorAwareTrait;
+import uim.cake.orm.locators\ILocator;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;
@@ -119,8 +119,7 @@ class AssociationCollection : IteratorAggregate
      * @param string myAlias The association alias to get.
      * @return bool Whether the association exists.
      */
-    bool has(string myAlias)
-    {
+    bool has(string myAlias) {
         return isset(this._items[myAlias]);
     }
 
@@ -195,8 +194,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> myOptions The options for the save operation.
      * @return bool Success
      */
-    bool saveParents(Table myTable, IEntity $entity, array $associations, array myOptions = [])
-    {
+    bool saveParents(Table myTable, IEntity $entity, array $associations, array myOptions = []) {
         if (empty($associations)) {
             return true;
         }
@@ -217,8 +215,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> myOptions The options for the save operation.
      * @return bool Success
      */
-    bool saveChildren(Table myTable, IEntity $entity, array $associations, array myOptions)
-    {
+    bool saveChildren(Table myTable, IEntity $entity, array $associations, array myOptions) {
         if (empty($associations)) {
             return true;
         }
@@ -304,8 +301,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> myOptions The options used in the delete operation.
      * @return bool
      */
-    bool cascadeDelete(IEntity $entity, array myOptions)
-    {
+    bool cascadeDelete(IEntity $entity, array myOptions) {
         $noCascade = [];
         foreach (this._items as $assoc) {
             if (!$assoc.getCascadeCallbacks()) {

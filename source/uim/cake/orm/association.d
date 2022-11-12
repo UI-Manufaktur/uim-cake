@@ -6,7 +6,7 @@ import uim.cake.core.ConventionsTrait;
 import uim.cake.databases.expressions\IdentifierExpression;
 import uim.cake.datasources\IEntity;
 import uim.cake.datasources\ResultSetDecorator;
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\LocatorAwareTrait;
 import uim.cake.utilities.Inflector;
 use Closure;
 use InvalidArgumentException;
@@ -280,10 +280,8 @@ abstract class Association
     /**
      * Gets whether cascaded deletes should also fire callbacks.
      *
-     * @return bool
      */
-    bool getCascadeCallbacks()
-    {
+    bool getCascadeCallbacks() {
         return this._cascadeCallbacks;
     }
 
@@ -501,10 +499,8 @@ abstract class Association
      * This is primarily used to indicate that records should be removed if the owning record in
      * the source table is deleted.
      *
-     * @return bool
      */
-    bool getDependent()
-    {
+    bool getDependent() {
         return this._dependent;
     }
 
@@ -514,8 +510,7 @@ abstract class Association
      * @param array<string, mixed> myOptions custom options key that could alter the return value
      * @return bool
      */
-    bool canBeJoined(array myOptions = [])
-    {
+    bool canBeJoined(array myOptions = []) {
         $strategy = myOptions['strategy'] ?? this.getStrategy();
 
         return $strategy === this::STRATEGY_JOIN;
@@ -848,8 +843,7 @@ abstract class Association
      * @see \Cake\ORM\Table::exists()
      * @return bool
      */
-    bool exists($conditions)
-    {
+    bool exists($conditions) {
         $conditions = this.find()
             .where($conditions)
             .clause('where');
@@ -899,8 +893,7 @@ abstract class Association
      * @param array<string, mixed> myOptions The options containing the strategy to be used.
      * @return bool true if a list of keys will be required
      */
-    bool requiresKeys(array myOptions = [])
-    {
+    bool requiresKeys(array myOptions = []) {
         $strategy = myOptions['strategy'] ?? this.getStrategy();
 
         return $strategy === static::STRATEGY_SELECT;

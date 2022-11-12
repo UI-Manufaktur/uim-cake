@@ -180,7 +180,6 @@ interface CookieInterface
     /**
      * Check if the cookie is HTTP only
      *
-     * @return bool
      */
     bool isHttpOnly();
 
@@ -195,7 +194,6 @@ interface CookieInterface
     /**
      * Check if the cookie is secure
      *
-     * @return bool
      */
     bool isSecure();
 

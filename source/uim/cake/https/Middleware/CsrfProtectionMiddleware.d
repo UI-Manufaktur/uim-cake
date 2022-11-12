@@ -230,8 +230,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @param string $token The token to test.
      * @return bool
      */
-    protected bool isHexadecimalToken(string $token)
-    {
+    protected bool isHexadecimalToken(string $token) {
         return preg_match('/^[a-f0-9]{' . static::TOKEN_WITH_CHECKSUM_LENGTH . '}$/', $token) === 1;
     }
 
@@ -314,8 +313,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @param string $token The CSRF token.
      * @return bool
      */
-    protected bool _verifyToken(string $token)
-    {
+    protected bool _verifyToken(string $token) {
         // If we have a hexadecimal value we're in a compatibility mode from before
         // tokens were salted on each request.
         if (this.isHexadecimalToken($token)) {
