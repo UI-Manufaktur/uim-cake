@@ -45,7 +45,7 @@ class FormProtector
      * @param string $sessionId Session id for hash generation.
      * @return bool
      */
-    function validate($formData, string myUrl, string $sessionId): bool
+    bool validate($formData, string myUrl, string $sessionId)
     {
         this.debugMessage = null;
 

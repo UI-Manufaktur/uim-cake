@@ -190,7 +190,7 @@ class Response : Message : IResponse
      *
      * @return bool
      */
-    function isOk(): bool
+    bool isOk()
     {
         return this.code >= 200 && this.code <= 399;
     }
@@ -200,7 +200,7 @@ class Response : Message : IResponse
      *
      * @return bool
      */
-    function isSuccess(): bool
+    bool isSuccess()
     {
         return this.code >= 200 && this.code <= 299;
     }
@@ -210,7 +210,7 @@ class Response : Message : IResponse
      *
      * @return bool
      */
-    function isRedirect(): bool
+    bool isRedirect()
     {
         $codes = [
             static::STATUS_MOVED_PERMANENTLY,
