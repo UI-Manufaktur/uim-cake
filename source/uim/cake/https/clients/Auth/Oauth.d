@@ -249,7 +249,7 @@ class Oauth
      * @param \Psr\Http\Message\UriInterface $uri Uri object to build a normalized version of.
      * @return string Normalized URL
      */
-    protected auto _normalizedUrl(UriInterface $uri): string
+    protected string _normalizedUrl(UriInterface $uri)
     {
         $out = $uri.getScheme() . '://';
         $out .= strtolower($uri.getHost());
@@ -270,7 +270,7 @@ class Oauth
      * @param array $oauthValues Oauth values.
      * @return string sorted and normalized values
      */
-    protected auto _normalizedParams(Request myRequest, array $oauthValues): string
+    protected string _normalizedParams(Request myRequest, array $oauthValues)
     {
         myQuery = parse_url((string)myRequest.getUri(), PHP_URL_QUERY);
         parse_str((string)myQuery, myQueryArgs);
@@ -330,7 +330,7 @@ class Oauth
      * @param array myData The oauth_* values to build
      * @return string
      */
-    protected auto _buildAuth(array myData): string
+    protected string _buildAuth(array myData)
     {
         $out = 'OAuth ';
         myParams = [];

@@ -31,7 +31,7 @@ class ScalarNode : INode
      *
      * @return string
      */
-    auto getType(): string
+    string getType()
     {
         return this.type;
     }

@@ -97,7 +97,7 @@ class Digest
      * @param array<string, mixed> $credentials Authentication credentials.
      * @return string
      */
-    protected auto _generateHeader(Request myRequest, array $credentials): string
+    protected string _generateHeader(Request myRequest, array $credentials)
     {
         myPath = myRequest.getUri().getPath();
         $a1 = md5($credentials['username'] . ':' . $credentials['realm'] . ':' . $credentials['password']);

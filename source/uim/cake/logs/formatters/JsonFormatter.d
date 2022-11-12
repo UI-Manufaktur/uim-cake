@@ -8,7 +8,7 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.logs\Formatter;
+ */module uim.cake.logs.formatters;
 
 class JsonFormatter : AbstractFormatter
 {
@@ -31,7 +31,7 @@ class JsonFormatter : AbstractFormatter
     }
 
 
-    function format($level, string myMessage, array $context = []): string
+    string format($level, string myMessage, array $context = [])
     {
         $log = ['date' => date(this._config['dateFormat']), 'level' => (string)$level, 'message' => myMessage];
         $json = json_encode($log, this._config['flags']);

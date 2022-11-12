@@ -1,16 +1,6 @@
+module uim.cake.logs.engines;
 
-
-/**
- * CakePHP(tm) :  Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakefoundation.org CakePHP(tm) Project
- * @since         4.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.logs\Engine;
-
-import uim.cake.logs\Formatter\DefaultFormatter;
+import uim.cake.logs.formatters\DefaultFormatter;
 
 /**
  * Array logger.

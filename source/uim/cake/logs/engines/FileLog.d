@@ -8,10 +8,10 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         1.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.logs\Engine;
+ */module uim.cake.logs.engines;
 
 import uim.cake.core.Configure;
-import uim.cake.logs\Formatter\DefaultFormatter;
+import uim.cake.logs.formatters\DefaultFormatter;
 import uim.cake.utilities.Text;
 
 /**
@@ -155,7 +155,7 @@ class FileLog : BaseLog
      * @param string $level The level of log.
      * @return string File name
      */
-    protected auto _getFilename(string $level): string
+    protected string _getFilename(string $level)
     {
         $debugTypes = ['notice', 'info', 'debug'];
 

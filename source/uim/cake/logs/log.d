@@ -13,7 +13,7 @@
  */module uim.cake.logs;
 
 import uim.cake.core.StaticConfigTrait;
-import uim.cake.logs\Engine\BaseLog;
+import uim.cake.logs.engines\BaseLog;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 

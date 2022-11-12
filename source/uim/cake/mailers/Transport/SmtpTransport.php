@@ -336,7 +336,7 @@ class SmtpTransport : AbstractTransport
      * @param string myMessage The email address to send with the command.
      * @return string
      */
-    protected auto _prepareRcptCmd(string myMessage): string
+    protected string _prepareRcptCmd(string myMessage)
     {
         return 'RCPT TO:<' . myMessage . '>';
     }
@@ -378,7 +378,7 @@ class SmtpTransport : AbstractTransport
      * @param \Cake\Mailer\Message myMessage Message instance
      * @return string
      */
-    protected auto _prepareMessage(Message myMessage): string
+    protected string _prepareMessage(Message myMessage)
     {
         $lines = myMessage.getBody();
         myMessages = [];

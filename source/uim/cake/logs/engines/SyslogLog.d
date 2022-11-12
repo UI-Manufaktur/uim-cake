@@ -8,10 +8,10 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.logs\Engine;
+ */module uim.cake.logs.engines;
 
-import uim.cake.logs\Formatter\DefaultFormatter;
-import uim.cake.logs\Formatter\LegacySyslogFormatter;
+import uim.cake.logs.formatters\DefaultFormatter;
+import uim.cake.logs.formatters\LegacySyslogFormatter;
 
 /**
  * Syslog stream for Logging. Writes logs to the system logger
