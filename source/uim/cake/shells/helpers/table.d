@@ -1,12 +1,6 @@
 
 
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @since         3.1.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeell\Helper;
+module uim.cakeell\Helper;
 
 import uim.cakensole.Helper;
 use UnexpectedValueException;

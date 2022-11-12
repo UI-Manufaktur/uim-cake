@@ -1,6 +1,6 @@
-module uim.cakeews\Helper;
+module uim.cake.views.helpers;
 
-import uim.cakeews\Helper;
+import uim.cake.views.helpers;
 
 /**
  * FlashHelper class to render flash messages.
