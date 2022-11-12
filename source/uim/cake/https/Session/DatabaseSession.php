@@ -79,7 +79,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string myName The session name.
      * @return bool Success
      */
-    function open(myPath, myName): bool
+    bool open(myPath, myName)
     {
         return true;
     }
@@ -89,7 +89,7 @@ class DatabaseSession : SessionHandlerInterface
      *
      * @return bool Success
      */
-    function close(): bool
+    bool close()
     {
         return true;
     }
@@ -135,7 +135,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string myData The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
-    function write($id, myData): bool
+    bool write($id, myData)
     {
         if (!$id) {
             return false;
@@ -158,7 +158,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string $id ID that uniquely identifies session in database.
      * @return bool True for successful delete, false otherwise.
      */
-    function destroy($id): bool
+    bool destroy($id)
     {
         /** @var string $pkField */
         $pkField = this._table.getPrimaryKey();

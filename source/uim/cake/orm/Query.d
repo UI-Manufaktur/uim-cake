@@ -1020,7 +1020,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return bool
      */
-    function isHydrationEnabled(): bool
+    bool isHydrationEnabled()
     {
         return this._hydrate;
     }

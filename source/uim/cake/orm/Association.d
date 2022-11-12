@@ -282,7 +282,7 @@ abstract class Association
      *
      * @return bool
      */
-    auto getCascadeCallbacks(): bool
+    bool getCascadeCallbacks()
     {
         return this._cascadeCallbacks;
     }
@@ -503,7 +503,7 @@ abstract class Association
      *
      * @return bool
      */
-    auto getDependent(): bool
+    bool getDependent()
     {
         return this._dependent;
     }
@@ -514,7 +514,7 @@ abstract class Association
      * @param array<string, mixed> myOptions custom options key that could alter the return value
      * @return bool
      */
-    function canBeJoined(array myOptions = []): bool
+    bool canBeJoined(array myOptions = [])
     {
         $strategy = myOptions['strategy'] ?? this.getStrategy();
 
@@ -848,7 +848,7 @@ abstract class Association
      * @see \Cake\ORM\Table::exists()
      * @return bool
      */
-    function exists($conditions): bool
+    bool exists($conditions)
     {
         $conditions = this.find()
             .where($conditions)
@@ -899,7 +899,7 @@ abstract class Association
      * @param array<string, mixed> myOptions The options containing the strategy to be used.
      * @return bool true if a list of keys will be required
      */
-    function requiresKeys(array myOptions = []): bool
+    bool requiresKeys(array myOptions = [])
     {
         $strategy = myOptions['strategy'] ?? this.getStrategy();
 
@@ -1198,7 +1198,7 @@ abstract class Association
      * @param array<string, mixed> myOptions The options for the original delete.
      * @return bool Success
      */
-    abstract function cascadeDelete(IEntity $entity, array myOptions = []): bool;
+    abstract bool cascadeDelete(IEntity $entity, array myOptions = []);
 
     /**
      * Returns whether the passed table is the owning side for this
@@ -1208,7 +1208,7 @@ abstract class Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
      */
-    abstract function isOwningSide(Table $side): bool;
+    abstract bool isOwningSide(Table $side);
 
     /**
      * Extract the target's association data our from the passed entity and proxies

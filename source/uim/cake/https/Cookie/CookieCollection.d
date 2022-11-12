@@ -145,7 +145,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string myName The cookie name to check.
      * @return bool True if the cookie exists, otherwise false.
      */
-    function has(string myName): bool
+    bool has(string myName)
     {
         myKey = mb_strtolower(myName);
         foreach (this.cookies as $cookie) {

@@ -100,7 +100,7 @@ class Socket
      * @return bool Success
      * @throws \Cake\Network\Exception\SocketException
      */
-    function connect(): bool
+    bool connect()
     {
         if (this.connection) {
             this.disconnect();
@@ -171,7 +171,7 @@ class Socket
      *
      * @return bool
      */
-    function isConnected(): bool
+    bool isConnected()
     {
         return this.connected;
     }
@@ -393,7 +393,7 @@ class Socket
      *
      * @return bool Success
      */
-    function disconnect(): bool
+    bool disconnect()
     {
         if (!is_resource(this.connection)) {
             this.connected = false;
@@ -489,7 +489,7 @@ class Socket
      *
      * @return bool
      */
-    function isEncrypted(): bool
+    bool isEncrypted()
     {
         return this.encrypted;
     }

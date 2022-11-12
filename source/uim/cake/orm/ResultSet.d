@@ -226,7 +226,7 @@ class ResultSet : ResultSetInterface
      *
      * @return bool
      */
-    function valid(): bool
+    bool valid()
     {
         if (this._useBuffering) {
             $valid = this._index < this._count;
