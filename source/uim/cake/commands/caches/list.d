@@ -1,9 +1,9 @@
 module uim.cakemmand;
 
 import uim.cakeches\Cache;
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
 
 /**
  * CacheList command.

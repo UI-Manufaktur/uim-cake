@@ -1,7 +1,7 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
 import uim.cakere.Configure;
 
 /**

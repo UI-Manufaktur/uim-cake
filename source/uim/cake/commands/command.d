@@ -1,8 +1,8 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.BaseCommand;
-import uim.cakensole.consoleIo;
+import uim.cake.console.Arguments;
+import uim.cake.console.BaseCommand;
+import uim.cake.console.consoleIo;
 import uim.caketasources\ModelAwareTrait;
 import uim.cakegs\LogTrait;
 import uim.cakem.Locator\LocatorAwareTrait;

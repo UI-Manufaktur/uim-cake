@@ -4,9 +4,9 @@ import uim.cakeches\Cache;
 import uim.cakeches.engines\ApcuEngine;
 import uim.cakeches.engines\WincacheEngine;
 import uim.cakeches\InvalidArgumentException;
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
 
 /**
  * CacheClear command.

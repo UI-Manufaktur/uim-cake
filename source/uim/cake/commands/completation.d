@@ -1,11 +1,11 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.commandCollection;
-import uim.cakensole.commandCollectionAwareInterface;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
-import uim.cakensole.Shell;
+import uim.cake.console.Arguments;
+import uim.cake.console.commandCollection;
+import uim.cake.console.commandCollectionAwareInterface;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
+import uim.cake.console.Shell;
 import uim.cakeilities.Inflector;
 use ReflectionClass;
 use ReflectionMethod;
