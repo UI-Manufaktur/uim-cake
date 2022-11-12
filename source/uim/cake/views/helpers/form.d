@@ -683,7 +683,7 @@ class FormHelper : Helper
      * @return bool If there are errors this method returns true, else false.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
-    function isFieldError(string myField): bool
+    bool isFieldError(string myField)
     {
         return this._getContext().hasError(myField);
     }
@@ -2322,7 +2322,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions The option set.
      * @return bool Whether the field is disabled.
      */
-    protected auto _isDisabled(array myOptions): bool
+    protected bool _isDisabled(array myOptions)
     {
         if (!isset(myOptions['disabled'])) {
             return false;

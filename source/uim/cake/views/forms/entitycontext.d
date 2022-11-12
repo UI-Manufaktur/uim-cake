@@ -172,7 +172,7 @@ class EntityContext : IContext
     }
 
 
-    function isPrimaryKey(string myField): bool
+    bool isPrimaryKey(string myField)
     {
         $parts = explode('.', myField);
         myTable = this._getTable($parts);
@@ -195,7 +195,7 @@ class EntityContext : IContext
      *
      * @return bool
      */
-    function isCreate(): bool
+    bool isCreate()
     {
         $entity = this._context['entity'];
         if (is_iterable($entity)) {

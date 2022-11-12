@@ -598,7 +598,7 @@ class PaginatorHelper : Helper
      * @return bool True if the result set is not at the first page.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    function hasPrev(Nullable!string myModel = null): bool
+    bool hasPrev(Nullable!string myModel = null)
     {
         return this._hasPage(myModel, 'prev');
     }
@@ -610,7 +610,7 @@ class PaginatorHelper : Helper
      * @return bool True if the result set is not at the last page.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    function hasNext(Nullable!string myModel = null): bool
+    bool hasNext(Nullable!string myModel = null)
     {
         return this._hasPage(myModel, 'next');
     }
@@ -624,7 +624,7 @@ class PaginatorHelper : Helper
      * @throws \InvalidArgumentException
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    function hasPage(int $page = 1, Nullable!string myModel = null): bool
+    bool hasPage(int $page = 1, Nullable!string myModel = null)
     {
         $paging = this.params(myModel);
         if ($paging === []) {
@@ -641,7 +641,7 @@ class PaginatorHelper : Helper
      * @param string $dir Direction
      * @return bool Whether model has $dir
      */
-    protected auto _hasPage(Nullable!string myModel, string $dir): bool
+    protected bool _hasPage(Nullable!string myModel, string $dir)
     {
         myParams = this.params(myModel);
 

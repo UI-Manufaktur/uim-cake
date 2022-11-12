@@ -32,5 +32,5 @@ interface ValidatorAwareInterface
      * @param string myName The name of a validator.
      * @return bool
      */
-    function hasValidator(string myName): bool;
+    bool hasValidator(string myName);
 }

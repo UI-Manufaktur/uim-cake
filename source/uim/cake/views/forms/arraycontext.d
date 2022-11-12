@@ -113,7 +113,7 @@ class ArrayContext : IContext
     }
 
 
-    function isPrimaryKey(string myField): bool
+    bool isPrimaryKey(string myField)
     {
         $primaryKey = this.getPrimaryKey();
 
@@ -129,7 +129,7 @@ class ArrayContext : IContext
      *
      * @return bool
      */
-    function isCreate(): bool
+    bool isCreate()
     {
         $primary = this.getPrimaryKey();
         foreach ($primary as $column) {
@@ -305,7 +305,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    function hasError(string myField): bool
+    bool hasError(string myField)
     {
         if (empty(this._context['errors'])) {
             return false;

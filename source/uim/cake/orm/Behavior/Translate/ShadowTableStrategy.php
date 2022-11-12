@@ -272,7 +272,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param array<string, mixed> myConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected auto traverseClause(myQuery, myName = '', myConfig = []): bool
+    protected bool traverseClause(myQuery, myName = '', myConfig = [])
     {
         $clause = myQuery.clause(myName);
         if (!$clause || !$clause.count()) {

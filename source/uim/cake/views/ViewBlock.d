@@ -173,7 +173,7 @@ class ViewBlock
      * @param string myName Name of the block
      * @return bool
      */
-    function exists(string myName): bool
+    bool exists(string myName)
     {
         return isset(this._blocks[myName]);
     }
@@ -183,7 +183,7 @@ class ViewBlock
      *
      * @return array<string> An array containing the blocks.
      */
-    function keys(): array
+    string[] keys()
     {
         return array_keys(this._blocks);
     }

@@ -13,16 +13,14 @@ class IsUnique
      *
      * @var array<string>
      */
-    protected $_fields;
+    protected string $_fields;
 
     /**
      * The unique check options
      *
      * @var array<string, mixed>
      */
-    protected $_options = [
-        'allowMultipleNulls' => false,
-    ];
+    protected $_options = ;
 
     /**
      * Constructor.

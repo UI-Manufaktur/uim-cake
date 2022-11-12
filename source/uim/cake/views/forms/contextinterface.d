@@ -24,14 +24,14 @@ interface IContext
      *   is needed for.
      * @return bool
      */
-    function isPrimaryKey(string myField): bool;
+    bool isPrimaryKey(string myField);
 
     /**
      * Returns whether this form is for a create operation.
      *
      * @return bool
      */
-    function isCreate(): bool;
+    bool isCreate();
 
     /**
      * Get the current value for a given field.
@@ -107,7 +107,7 @@ interface IContext
      * @param string myField A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    function hasError(string myField): bool;
+    bool hasError(string myField);
 
     /**
      * Get the errors for a given field
