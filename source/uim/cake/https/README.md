@@ -12,7 +12,7 @@ handle incoming server requests and send outgoing HTTP requests.
 Sending requests is straight forward. Doing a GET request looks like:
 
 ```php
-import uim.cake.https\Client;
+import uim.cake.https.clients;
 
 $http = new Client();
 
