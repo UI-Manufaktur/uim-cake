@@ -124,7 +124,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static function notBlank($check): bool
+    static bool notBlank($check)
     {
         if (empty($check) && !is_bool($check) && !is_numeric($check)) {
             return false;
@@ -142,7 +142,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static function alphaNumeric($check): bool
+    static bool alphaNumeric($check)
     {
         if ((empty($check) && $check !== '0') || !is_scalar($check)) {
             return false;
@@ -160,7 +160,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static function notAlphaNumeric($check): bool
+    static bool notAlphaNumeric($check)
     {
         return !static::alphaNumeric($check);
     }
@@ -171,7 +171,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static function asciiAlphaNumeric($check): bool
+    static bool asciiAlphaNumeric($check)
     {
         if ((empty($check) && $check !== '0') || !is_scalar($check)) {
             return false;
@@ -186,7 +186,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static function notAsciiAlphaNumeric($check): bool
+    static bool notAsciiAlphaNumeric($check)
     {
         return !static::asciiAlphaNumeric($check);
     }
@@ -201,7 +201,7 @@ class Validation
      * @param int $max Maximum value in range (inclusive)
      * @return bool Success
      */
-    static function lengthBetween($check, int $min, int $max): bool
+    static bool lengthBetween($check, int $min, int $max)
     {
         if (!is_scalar($check)) {
             return false;
@@ -224,7 +224,7 @@ class Validation
      * @return bool Success
      * @see \Cake\Validation\Validation::luhn()
      */
-    static function creditCard($check, myType = 'fast', bool $deep = false, Nullable!string $regex = null): bool
+    static bool creditCard($check, myType = 'fast', bool $deep = false, Nullable!string $regex = null)
     {
         if (!(is_string($check) || is_int($check))) {
             return false;
@@ -296,7 +296,7 @@ class Validation
      * @param int $expectedCount The expected count value.
      * @return bool Success
      */
-    static function numElements($check, string $operator, int $expectedCount): bool
+    static bool numElements($check, string $operator, int $expectedCount)
     {
         if (!is_array($check) && !$check instanceof Countable) {
             return false;
@@ -315,7 +315,7 @@ class Validation
      * @param string|int $check2 The right value to compare.
      * @return bool Success
      */
-    static function comparison($check1, string $operator, $check2): bool
+    static bool comparison($check1, string $operator, $check2)
     {
         if (
             (!is_numeric($check1) || !is_numeric($check2)) &&
@@ -382,7 +382,7 @@ class Validation
      * @param array<string, mixed> $context The validation context.
      * @return bool
      */
-    static function compareWith($check, string myField, array $context): bool
+    static bool compareWith($check, string myField, array $context)
     {
         return self::compareFields($check, myField, static::COMPARE_SAME, $context);
     }
@@ -399,7 +399,7 @@ class Validation
      * @return bool
 
      */
-    static function compareFields($check, string myField, string $operator, array $context): bool
+    static bool compareFields($check, string myField, string $operator, array $context)
     {
         if (!isset($context['data']) || !array_key_exists(myField, $context['data'])) {
             return false;
@@ -418,7 +418,7 @@ class Validation
      * @return bool Success
      * @deprecated 4.0.0 Use {@link notAlphaNumeric()} instead. Will be removed in 5.0
      */
-    static function containsNonAlphaNumeric($check, int myCount = 1): bool
+    static bool containsNonAlphaNumeric($check, int myCount = 1)
     {
         deprecationWarning('Validation::containsNonAlphaNumeric() is deprecated. Use notAlphaNumeric() instead.');
         if (!is_string($check)) {
@@ -437,7 +437,7 @@ class Validation
      * @param string|null $regex If $check is passed as a string, $regex must also be set to valid regular expression
      * @return bool Success
      */
-    static function custom($check, Nullable!string $regex = null): bool
+    static bool custom($check, Nullable!string $regex = null)
     {
         if (!is_scalar($check)) {
             return false;
@@ -475,7 +475,7 @@ class Validation
      * @param string|null $regex If a custom regular expression is used this is the only validation that will occur.
      * @return bool Success
      */
-    static function date($check, $format = 'ymd', Nullable!string $regex = null): bool
+    static bool date($check, $format = 'ymd', Nullable!string $regex = null)
     {
         if ($check instanceof IDateTime) {
             return true;
@@ -553,7 +553,7 @@ class Validation
      * @see \Cake\Validation\Validation::date()
      * @see \Cake\Validation\Validation::time()
      */
-    static function datetime($check, $dateFormat = 'ymd', Nullable!string $regex = null): bool
+    static bool datetime($check, $dateFormat = 'ymd', Nullable!string $regex = null)
     {
         if ($check instanceof IDateTime) {
             return true;
@@ -596,7 +596,7 @@ class Validation
      * @return bool True if the value is valid, false otherwise
      * @see Regex credits: https://www.myintervals.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/
      */
-    static function iso8601($check): bool
+    static bool iso8601($check)
     {
         if ($check instanceof IDateTime) {
             return true;
@@ -621,7 +621,7 @@ class Validation
      * @param mixed $check a valid time string/object
      * @return bool Success
      */
-    static function time($check): bool
+    static bool time($check)
     {
         if ($check instanceof IDateTime) {
             return true;
@@ -653,7 +653,7 @@ class Validation
      * @see \Cake\I18n\Time::parseTime()
      * @see \Cake\I18n\Time::parseDateTime()
      */
-    static function localizedTime($check, string myType = 'datetime', $format = null): bool
+    static bool localizedTime($check, string myType = 'datetime', $format = null)
     {
         if ($check instanceof IDateTime) {
             return true;
@@ -683,7 +683,7 @@ class Validation
      * @param array $booleanValues List of valid boolean values, defaults to `[true, false, 0, 1, '0', '1']`.
      * @return bool Success.
      */
-    static function boolean($check, array $booleanValues = []): bool
+    static bool boolean($check, array $booleanValues = []): bool
     {
         if (!$booleanValues) {
             $booleanValues = [true, false, 0, 1, '0', '1'];
@@ -1468,7 +1468,7 @@ class Validation
      * @param int $height Min or max height.
      * @return bool
      */
-    static function imageHeight(myfile, string $operator, int $height): bool
+    static bool imageHeight(myfile, string $operator, int $height)
     {
         return self::imageSize(myfile, [
             'height' => [
@@ -1495,7 +1495,7 @@ class Validation
      * @param array<string, mixed> myOptions Options for the validation logic.
      * @return bool
      */
-    static function geoCoordinate(myValue, array myOptions = []): bool
+    static bool geoCoordinate(myValue, array myOptions = [])
     {
         if (!is_scalar(myValue)) {
             return false;
@@ -1531,7 +1531,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Latitude
      * @see \Cake\Validation\Validation::geoCoordinate()
      */
-    static function latitude(myValue, array myOptions = []): bool
+    static bool latitude(myValue, array myOptions = [])
     {
         myOptions['format'] = 'lat';
 
@@ -1547,7 +1547,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Longitude
      * @see \Cake\Validation\Validation::geoCoordinate()
      */
-    static function longitude(myValue, array myOptions = []): bool
+    static bool longitude(myValue, array myOptions = [])
     {
         myOptions['format'] = 'long';
 
@@ -1562,7 +1562,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static function ascii(myValue): bool
+    static bool ascii(myValue)
     {
         if (!is_string(myValue)) {
             return false;
@@ -1586,7 +1586,7 @@ class Validation
      * @param array<string, mixed> myOptions An array of options. See above for the supported options.
      * @return bool
      */
-    static function utf8(myValue, array myOptions = []): bool
+    static bool utf8(myValue, array myOptions = [])
     {
         if (!is_string(myValue)) {
             return false;
@@ -1608,7 +1608,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static function isInteger(myValue): bool
+    static bool isInteger(myValue)
     {
         if (is_int(myValue)) {
             return true;
@@ -1627,7 +1627,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static function isArray(myValue): bool
+    static bool isArray(myValue)
     {
         return is_array(myValue);
     }
@@ -1641,7 +1641,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static function isScalar(myValue): bool
+    static bool isScalar(myValue)
     {
         return is_scalar(myValue);
     }
@@ -1652,7 +1652,7 @@ class Validation
      * @param mixed $check The value to check
      * @return bool Success
      */
-    static function hexColor($check): bool
+    static bool hexColor($check)
     {
         return static::_check($check, '/^#[0-9a-f]{6}$/iD');
     }
@@ -1665,7 +1665,7 @@ class Validation
      * @param mixed $check The value to check
      * @return bool Success
      */
-    static function iban($check): bool
+    static bool iban($check)
     {
         if (
             !is_string($check) ||
