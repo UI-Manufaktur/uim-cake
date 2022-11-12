@@ -920,8 +920,7 @@ class Text
      * @param string $string value to test
      * @return bool
      */
-    static function isMultibyte(string $string): bool
-    {
+    static bool isMultibyte(string $string) {
         $length = strlen($string);
 
         for ($i = 0; $i < $length; $i++) {

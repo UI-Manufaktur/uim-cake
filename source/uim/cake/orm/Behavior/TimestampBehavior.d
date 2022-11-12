@@ -77,8 +77,7 @@ class TimestampBehavior : Behavior
      * @return true Returns true irrespective of the behavior logic, the save will not be prevented.
      * @throws \UnexpectedValueException When the value for an event is not 'always', 'new' or 'existing'
      */
-    function handleEvent(IEvent myEvent, IEntity $entity): bool
-    {
+    bool handleEvent(IEvent myEvent, IEntity $entity) {
         myEventName = myEvent.getName();
         myEvents = this._config['events'];
 
@@ -158,8 +157,7 @@ class TimestampBehavior : Behavior
      * @param string myEventName Event name.
      * @return bool true if a field is updated, false if no action performed
      */
-    function touch(IEntity $entity, string myEventName = 'Model.beforeSave'): bool
-    {
+    bool touch(IEntity $entity, string myEventName = 'Model.beforeSave') {
         myEvents = this._config['events'];
         if (empty(myEvents[myEventName])) {
             return false;

@@ -45,7 +45,7 @@ mappers if no explicit connection is defined.
 In order to access table instances you need to use a *Table Locator*.
 
 ```php
-import uim.cake.orm.Locator\TableLocator;
+import uim.cake.orm.locators\TableLocator;
 
 $locator = new TableLocator();
 $articles = $locator.get('Articles');
@@ -54,7 +54,7 @@ $articles = $locator.get('Articles');
 You can also use a trait for easy access to the locator instance:
 
 ```php
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\LocatorAwareTrait;
 
 $articles = this.getTableLocator().get('Articles');
 ```
@@ -63,8 +63,8 @@ By default, classes using `LocatorAwareTrait` will share a global locator instan
 You can inject your own locator instance into the object:
 
 ```php
-import uim.cake.orm.Locator\TableLocator;
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\TableLocator;
+import uim.cake.orm.locators\LocatorAwareTrait;
 
 $locator = new TableLocator();
 this.setTableLocator($locator);
@@ -91,7 +91,7 @@ complete examples.
 Once you've defined some table classes you can read existing data in your tables:
 
 ```php
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\LocatorAwareTrait;
 
 $articles = this.getTableLocator().get('Articles');
 foreach ($articles.find() as $article) {
@@ -109,7 +109,7 @@ Table objects provide ways to convert request data into entities, and then persi
 those entities to the database:
 
 ```php
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\LocatorAwareTrait;
 
 myData = [
 	'title' => 'My first article',
@@ -200,7 +200,7 @@ get an instance of this class, as shown before, you can use the `TableLocator`:
 ```php
 <?php
 use Acme\Data\Table\ArticlesTable;
-import uim.cake.orm.Locator\TableLocator;
+import uim.cake.orm.locators\TableLocator;
 
 $locator = new TableLocator();
 $articles = $locator.get('Articles', ['className' => ArticlesTable::class]);

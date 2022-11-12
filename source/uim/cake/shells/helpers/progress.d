@@ -1,7 +1,7 @@
 
 module uim.cakeell\Helper;
 
-import uim.cakensole.Helper;
+import uim.cake.console.Helper;
 use RuntimeException;
 
 /**

@@ -266,8 +266,7 @@ class Security
      * @return bool
      * @since 3.6.2
      */
-    static function constantEquals($original, $compare): bool
-    {
+    static bool constantEquals($original, $compare) {
         return is_string($original) && is_string($compare) && hash_equals($original, $compare);
     }
 

@@ -224,10 +224,8 @@ class ResultSet : ResultSetInterface
      *
      * Part of Iterator interface.
      *
-     * @return bool
      */
-    bool valid()
-    {
+    bool valid() {
         if (this._useBuffering) {
             $valid = this._index < this._count;
             if ($valid && this._results[this._index] !== null) {

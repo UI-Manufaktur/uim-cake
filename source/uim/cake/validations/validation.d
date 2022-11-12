@@ -124,8 +124,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static bool notBlank($check)
-    {
+    static bool notBlank($check) {
         if (empty($check) && !is_bool($check) && !is_numeric($check)) {
             return false;
         }
@@ -142,8 +141,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static bool alphaNumeric($check)
-    {
+    static bool alphaNumeric($check) {
         if ((empty($check) && $check !== '0') || !is_scalar($check)) {
             return false;
         }
@@ -160,8 +158,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static bool notAlphaNumeric($check)
-    {
+    static bool notAlphaNumeric($check) {
         return !static::alphaNumeric($check);
     }
 
@@ -171,8 +168,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static bool asciiAlphaNumeric($check)
-    {
+    static bool asciiAlphaNumeric($check) {
         if ((empty($check) && $check !== '0') || !is_scalar($check)) {
             return false;
         }
@@ -186,8 +182,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static bool notAsciiAlphaNumeric($check)
-    {
+    static bool notAsciiAlphaNumeric($check) {
         return !static::asciiAlphaNumeric($check);
     }
 
@@ -201,8 +196,7 @@ class Validation
      * @param int $max Maximum value in range (inclusive)
      * @return bool Success
      */
-    static bool lengthBetween($check, int $min, int $max)
-    {
+    static bool lengthBetween($check, int $min, int $max) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -224,8 +218,7 @@ class Validation
      * @return bool Success
      * @see \Cake\Validation\Validation::luhn()
      */
-    static bool creditCard($check, myType = 'fast', bool $deep = false, Nullable!string $regex = null)
-    {
+    static bool creditCard($check, myType = 'fast', bool $deep = false, Nullable!string $regex = null) {
         if (!(is_string($check) || is_int($check))) {
             return false;
         }
@@ -296,8 +289,7 @@ class Validation
      * @param int $expectedCount The expected count value.
      * @return bool Success
      */
-    static bool numElements($check, string $operator, int $expectedCount)
-    {
+    static bool numElements($check, string $operator, int $expectedCount) {
         if (!is_array($check) && !$check instanceof Countable) {
             return false;
         }
@@ -315,8 +307,7 @@ class Validation
      * @param string|int $check2 The right value to compare.
      * @return bool Success
      */
-    static bool comparison($check1, string $operator, $check2)
-    {
+    static bool comparison($check1, string $operator, $check2) {
         if (
             (!is_numeric($check1) || !is_numeric($check2)) &&
             !in_array($operator, static::COMPARE_STRING)
@@ -382,8 +373,7 @@ class Validation
      * @param array<string, mixed> $context The validation context.
      * @return bool
      */
-    static bool compareWith($check, string myField, array $context)
-    {
+    static bool compareWith($check, string myField, array $context) {
         return self::compareFields($check, myField, static::COMPARE_SAME, $context);
     }
 
@@ -399,8 +389,7 @@ class Validation
      * @return bool
 
      */
-    static bool compareFields($check, string myField, string $operator, array $context)
-    {
+    static bool compareFields($check, string myField, string $operator, array $context) {
         if (!isset($context['data']) || !array_key_exists(myField, $context['data'])) {
             return false;
         }
@@ -418,8 +407,7 @@ class Validation
      * @return bool Success
      * @deprecated 4.0.0 Use {@link notAlphaNumeric()} instead. Will be removed in 5.0
      */
-    static bool containsNonAlphaNumeric($check, int myCount = 1)
-    {
+    static bool containsNonAlphaNumeric($check, int myCount = 1) {
         deprecationWarning('Validation::containsNonAlphaNumeric() is deprecated. Use notAlphaNumeric() instead.');
         if (!is_string($check)) {
             return false;
@@ -437,8 +425,7 @@ class Validation
      * @param string|null $regex If $check is passed as a string, $regex must also be set to valid regular expression
      * @return bool Success
      */
-    static bool custom($check, Nullable!string $regex = null)
-    {
+    static bool custom($check, Nullable!string $regex = null) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -475,8 +462,7 @@ class Validation
      * @param string|null $regex If a custom regular expression is used this is the only validation that will occur.
      * @return bool Success
      */
-    static bool date($check, $format = 'ymd', Nullable!string $regex = null)
-    {
+    static bool date($check, $format = 'ymd', Nullable!string $regex = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -553,8 +539,7 @@ class Validation
      * @see \Cake\Validation\Validation::date()
      * @see \Cake\Validation\Validation::time()
      */
-    static bool datetime($check, $dateFormat = 'ymd', Nullable!string $regex = null)
-    {
+    static bool datetime($check, $dateFormat = 'ymd', Nullable!string $regex = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -596,8 +581,7 @@ class Validation
      * @return bool True if the value is valid, false otherwise
      * @see Regex credits: https://www.myintervals.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/
      */
-    static bool iso8601($check)
-    {
+    static bool iso8601($check) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -621,8 +605,7 @@ class Validation
      * @param mixed $check a valid time string/object
      * @return bool Success
      */
-    static bool time($check)
-    {
+    static bool time($check) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -653,8 +636,7 @@ class Validation
      * @see \Cake\I18n\Time::parseTime()
      * @see \Cake\I18n\Time::parseDateTime()
      */
-    static bool localizedTime($check, string myType = 'datetime', $format = null)
-    {
+    static bool localizedTime($check, string myType = 'datetime', $format = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -683,8 +665,7 @@ class Validation
      * @param array $booleanValues List of valid boolean values, defaults to `[true, false, 0, 1, '0', '1']`.
      * @return bool Success.
      */
-    static bool boolean($check, array $booleanValues = []): bool
-    {
+    static bool boolean($check, array $booleanValues = []) {
         if (!$booleanValues) {
             $booleanValues = [true, false, 0, 1, '0', '1'];
         }
@@ -701,8 +682,7 @@ class Validation
      * @param array $truthyValues List of valid truthy values, defaults to `[true, 1, '1']`.
      * @return bool Success.
      */
-    static function truthy($check, array $truthyValues = []): bool
-    {
+    static bool truthy($check, array $truthyValues = []) {
         if (!$truthyValues) {
             $truthyValues = [true, 1, '1'];
         }
@@ -719,8 +699,7 @@ class Validation
      * @param array $falseyValues List of valid falsey values, defaults to `[false, 0, '0']`.
      * @return bool Success.
      */
-    static function falsey($check, array $falseyValues = []): bool
-    {
+    static bool falsey($check, array $falseyValues = []) {
         if (!$falseyValues) {
             $falseyValues = [false, 0, '0'];
         }
@@ -742,8 +721,7 @@ class Validation
      * @param string|null $regex If a custom regular expression is used, this is the only validation that will occur.
      * @return bool Success
      */
-    static function decimal($check, $places = null, Nullable!string $regex = null): bool
-    {
+    static bool decimal($check, $places = null, Nullable!string $regex = null) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -797,8 +775,7 @@ class Validation
      * @param string|null $regex Regex to use (if none it will use built in regex)
      * @return bool Success
      */
-    static function email($check, ?bool $deep = false, Nullable!string $regex = null): bool
-    {
+    static bool email($check, ?bool $deep = false, Nullable!string $regex = null) {
         if (!is_string($check)) {
             return false;
         }
@@ -833,8 +810,7 @@ class Validation
      * @param mixed $comparedTo Value to compare
      * @return bool Success
      */
-    static function equalTo($check, $comparedTo): bool
-    {
+    static bool equalTo($check, $comparedTo) {
         return $check === $comparedTo;
     }
 
@@ -845,8 +821,7 @@ class Validation
      * @param array<string> $extensions file extensions to allow. By default extensions are 'gif', 'jpeg', 'png', 'jpg'
      * @return bool Success
      */
-    static function extension($check, array $extensions = ['gif', 'jpeg', 'png', 'jpg']): bool
-    {
+    static function extension($check, array $extensions = ['gif', 'jpeg', 'png', 'jpg']) {
         if ($check instanceof UploadedFileInterface) {
             $check = $check.getClientFilename();
         } elseif (is_array($check) && isset($check['name'])) {
@@ -876,8 +851,7 @@ class Validation
      * @param string myType The IP Protocol version to validate against
      * @return bool Success
      */
-    static function ip($check, string myType = 'both'): bool
-    {
+    static bool ip($check, string myType = 'both') {
         if (!is_string($check)) {
             return false;
         }
@@ -901,8 +875,7 @@ class Validation
      * @param int $min The minimal string length
      * @return bool Success
      */
-    static bool minLength($check, int $min)
-    {
+    static bool minLength($check, int $min) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -917,8 +890,7 @@ class Validation
      * @param int $max The maximal string length
      * @return bool Success
      */
-    static bool maxLength($check, int $max): bool
-    {
+    static bool maxLength($check, int $max) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -933,8 +905,7 @@ class Validation
      * @param int $min The minimal string length (in bytes)
      * @return bool Success
      */
-    static bool minLengthBytes($check, int $min)
-    {
+    static bool minLengthBytes($check, int $min) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -949,8 +920,7 @@ class Validation
      * @param int $max The maximal string length
      * @return bool Success
      */
-    static bool maxLengthBytes($check, int $max)
-    {
+    static bool maxLengthBytes($check, int $max) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -965,8 +935,7 @@ class Validation
      * @param string $symbolPosition Where symbol is located (left/right)
      * @return bool Success
      */
-    static bool money($check, string $symbolPosition = 'left')
-    {
+    static bool money($check, string $symbolPosition = 'left') {
         $money = '(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{1,2})?';
         if ($symbolPosition === 'right') {
             $regex = '/^' . $money . '(?<!\x{00a2})\p{Sc}?$/u';
@@ -991,8 +960,7 @@ class Validation
      * @param bool $caseInsensitive Set to true for case insensitive comparison.
      * @return bool Success
      */
-    static bool multiple($check, array myOptions = [], bool $caseInsensitive = false)
-    {
+    static bool multiple($check, array myOptions = [], bool $caseInsensitive = false) {
         $defaults = ['in' => null, 'max' => null, 'min' => null];
         myOptions += $defaults;
 
@@ -1032,8 +1000,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static bool numeric($check)
-    {
+    static bool numeric($check) {
         return is_numeric($check);
     }
 
@@ -1045,8 +1012,7 @@ class Validation
      * @return bool Success
      * @see https://en.wikipedia.org/wiki/Natural_number
      */
-    static bool naturalNumber($check, bool $allowZero = false)
-    {
+    static bool naturalNumber($check, bool $allowZero = false) {
         $regex = $allowZero ? '/^(?:0|[1-9][0-9]*)$/' : '/^[1-9][0-9]*$/';
 
         return static::_check($check, $regex);
@@ -1064,8 +1030,7 @@ class Validation
      * @param float|null $upper Upper limit
      * @return bool Success
      */
-    static bool range($check, ?float $lower = null, ?float $upper = null)
-    {
+    static bool range($check, ?float $lower = null, ?float $upper = null) {
         if (!is_numeric($check)) {
             return false;
         }
@@ -1097,8 +1062,7 @@ class Validation
      * @return bool Success
      * @link https://tools.ietf.org/html/rfc3986
      */
-    static bool url($check, bool $strict = false)
-    {
+    static bool url($check, bool $strict = false) {
         if (!is_string($check)) {
             return false;
         }
@@ -1130,8 +1094,7 @@ class Validation
      * @param bool $caseInsensitive Set to true for case insensitive comparison.
      * @return bool Success.
      */
-    static bool inList($check, array $list, bool $caseInsensitive = false)
-    {
+    static bool inList($check, array $list, bool $caseInsensitive = false) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -1151,8 +1114,7 @@ class Validation
      * @param mixed $check Value to check
      * @return bool Success
      */
-    static bool uuid($check)
-    {
+    static bool uuid($check) {
         $regex = '/^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[0-5][a-fA-F0-9]{3}-[089aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/';
 
         return self::_check($check, $regex);
@@ -1165,8 +1127,7 @@ class Validation
      * @param string $regex Regular expression
      * @return bool Success of match
      */
-    protected static bool _check($check, string $regex)
-    {
+    protected static bool _check($check, string $regex) {
         return is_scalar($check) && preg_match($regex, (string)$check);
     }
 
@@ -1177,8 +1138,7 @@ class Validation
      * @return bool Success
      * @see https://en.wikipedia.org/wiki/Luhn_algorithm
      */
-    static bool luhn($check)
-    {
+    static bool luhn($check) {
         if (!is_scalar($check) || (int)$check === 0) {
             return false;
         }
@@ -1211,8 +1171,7 @@ class Validation
      * @throws \RuntimeException when mime type can not be determined.
      * @throws \LogicException when ext/fileinfo is missing
      */
-    static bool mimeType($check, $mimeTypes = [])
-    {
+    static bool mimeType($check, $mimeTypes = []) {
         myfile = static::getFilename($check);
         if (myfile === false) {
             return false;
@@ -1288,8 +1247,7 @@ class Validation
      * @param string|int $size Size in bytes or human readable string like '5MB'.
      * @return bool Success
      */
-    static bool fileSize($check, string $operator, $size)
-    {
+    static bool fileSize($check, string $operator, $size) {
         myfile = static::getFilename($check);
         if (myfile === false) {
             return false;
@@ -1311,8 +1269,7 @@ class Validation
      * @return bool
      * @see https://secure.php.net/manual/en/features.file-upload.errors.php
      */
-    static bool uploadError($check, bool $allowNoFile = false)
-    {
+    static bool uploadError($check, bool $allowNoFile = false) {
         if ($check instanceof UploadedFileInterface) {
             $code = $check.getError();
         } elseif (is_array($check) && isset($check['error'])) {
@@ -1347,8 +1304,7 @@ class Validation
      * @param array<string, mixed> myOptions An array of options for the validation.
      * @return bool
      */
-    static bool uploadedFile(myfile, array myOptions = [])
-    {
+    static bool uploadedFile(myfile, array myOptions = []) {
         myOptions += [
             'minSize' => null,
             'maxSize' => null,
@@ -1406,8 +1362,7 @@ class Validation
      * @return bool
      * @throws \InvalidArgumentException
      */
-    static bool imageSize(myfile, array myOptions)
-    {
+    static bool imageSize(myfile, array myOptions) {
         if (!isset(myOptions['height']) && !isset(myOptions['width'])) {
             throw new InvalidArgumentException(
                 'Invalid image size validation parameters! Missing `width` and / or `height`.'
@@ -1450,8 +1405,7 @@ class Validation
      * @param int $width Min or max width.
      * @return bool
      */
-    static bool imageWidth(myfile, string $operator, int $width)
-    {
+    static bool imageWidth(myfile, string $operator, int $width) {
         return self::imageSize(myfile, [
             'width' => [
                 $operator,
@@ -1468,8 +1422,7 @@ class Validation
      * @param int $height Min or max height.
      * @return bool
      */
-    static bool imageHeight(myfile, string $operator, int $height)
-    {
+    static bool imageHeight(myfile, string $operator, int $height) {
         return self::imageSize(myfile, [
             'height' => [
                 $operator,
@@ -1495,8 +1448,7 @@ class Validation
      * @param array<string, mixed> myOptions Options for the validation logic.
      * @return bool
      */
-    static bool geoCoordinate(myValue, array myOptions = [])
-    {
+    static bool geoCoordinate(myValue, array myOptions = []) {
         if (!is_scalar(myValue)) {
             return false;
         }
@@ -1531,8 +1483,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Latitude
      * @see \Cake\Validation\Validation::geoCoordinate()
      */
-    static bool latitude(myValue, array myOptions = [])
-    {
+    static bool latitude(myValue, array myOptions = []) {
         myOptions['format'] = 'lat';
 
         return self::geoCoordinate(myValue, myOptions);
@@ -1547,8 +1498,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Longitude
      * @see \Cake\Validation\Validation::geoCoordinate()
      */
-    static bool longitude(myValue, array myOptions = [])
-    {
+    static bool longitude(myValue, array myOptions = []) {
         myOptions['format'] = 'long';
 
         return self::geoCoordinate(myValue, myOptions);
@@ -1562,8 +1512,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static bool ascii(myValue)
-    {
+    static bool ascii(myValue) {
         if (!is_string(myValue)) {
             return false;
         }
@@ -1586,8 +1535,7 @@ class Validation
      * @param array<string, mixed> myOptions An array of options. See above for the supported options.
      * @return bool
      */
-    static bool utf8(myValue, array myOptions = [])
-    {
+    static bool utf8(myValue, array myOptions = []) {
         if (!is_string(myValue)) {
             return false;
         }
@@ -1608,8 +1556,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static bool isInteger(myValue)
-    {
+    static bool isInteger(myValue) {
         if (is_int(myValue)) {
             return true;
         }
@@ -1627,8 +1574,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static bool isArray(myValue)
-    {
+    static bool isArray(myValue) {
         return is_array(myValue);
     }
 
@@ -1641,8 +1587,7 @@ class Validation
      * @param mixed myValue The value to check
      * @return bool
      */
-    static bool isScalar(myValue)
-    {
+    static bool isScalar(myValue) {
         return is_scalar(myValue);
     }
 
@@ -1652,8 +1597,7 @@ class Validation
      * @param mixed $check The value to check
      * @return bool Success
      */
-    static bool hexColor($check)
-    {
+    static bool hexColor($check) {
         return static::_check($check, '/^#[0-9a-f]{6}$/iD');
     }
 
@@ -1665,8 +1609,7 @@ class Validation
      * @param mixed $check The value to check
      * @return bool Success
      */
-    static bool iban($check)
-    {
+    static bool iban($check) {
         if (
             !is_string($check) ||
             !preg_match('/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/', $check)

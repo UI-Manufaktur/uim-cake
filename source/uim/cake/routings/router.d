@@ -548,8 +548,7 @@ class Router
      *   Default is false.
      * @return bool
      */
-    static function routeExists(myUrl = null, bool $full = false): bool
-    {
+    static bool routeExists(myUrl = null, bool $full = false) {
         try {
             static::url(myUrl, $full);
 

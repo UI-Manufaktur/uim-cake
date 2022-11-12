@@ -209,8 +209,7 @@ class Hash
      * @param string $token The token being matched.
      * @return bool
      */
-    protected static auto _matchToken(myKey, string $token): bool
-    {
+    protected static bool _matchToken(myKey, string $token) {
         switch ($token) {
             case '{n}':
                 return is_numeric(myKey);
@@ -230,8 +229,7 @@ class Hash
      * @param string $selector The patterns to match.
      * @return bool Fitness of expression.
      */
-    protected static auto _matches(myData, string $selector): bool
-    {
+    protected static bool _matches(myData, string $selector) {
         preg_match_all(
             '/(\[ (?P<attr>[^=><!]+?) (\s* (?P<op>[><!]?[=]|[><]) \s* (?P<val>(?:\/.*?\/ | [^\]]+)) )? \])/x',
             $selector,
@@ -577,8 +575,7 @@ class Hash
      * @return bool true If myData contains $needle, false otherwise
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::contains
      */
-    static function contains(array myData, array $needle): bool
-    {
+    static bool contains(array myData, array $needle) {
         if (empty(myData) || empty($needle)) {
             return false;
         }
@@ -621,8 +618,7 @@ class Hash
      * @see \Cake\Utility\Hash::extract()
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::check
      */
-    static function check(array myData, string myPath): bool
-    {
+    static bool check(array myData, string myPath) {
         myResults = static::extract(myData, myPath);
         if (!is_array(myResults)) {
             return false;
@@ -657,8 +653,7 @@ class Hash
      * @param mixed $var Array to filter.
      * @return bool
      */
-    protected static auto _filter($var): bool
-    {
+    protected static bool _filter($var) {
         return $var === 0 || $var === 0.0 || $var === '0' || !empty($var);
     }
 
@@ -811,8 +806,7 @@ class Hash
      * @return bool true if values are numeric, false otherwise
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::numeric
      */
-    static function numeric(array myData): bool
-    {
+    static bool numeric(array myData) {
         if (empty(myData)) {
             return false;
         }

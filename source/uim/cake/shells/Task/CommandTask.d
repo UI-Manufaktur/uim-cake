@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeell\Task;
 
-import uim.cakensole.Shell;
+import uim.cake.console.Shell;
 import uim.cakere.App;
 import uim.cakere.Plugin;
 import uim.cakelesystem\Filesystem;

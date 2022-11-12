@@ -7,7 +7,7 @@ import uim.cake.core.InstanceConfigTrait;
 import uim.cake.datasources\IEntity;
 import uim.cake.events\IEvent;
 import uim.cake.orm.Entity;
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\LocatorAwareTrait;
 import uim.cake.orm.Query;
 import uim.cake.orm.Table;
 import uim.cake.utilities.Hash;

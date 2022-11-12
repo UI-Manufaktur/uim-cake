@@ -77,10 +77,8 @@ class ValidationRule
      * Returns whether this rule should break validation process for associated field
      * after it fails
      *
-     * @return bool
      */
-    function isLast(): bool
-    {
+    bool isLast() {
         return this._last;
     }
 
@@ -155,8 +153,7 @@ class ValidationRule
      *   be passed as the last argument for the validation method
      * @return bool True if the ValidationRule should be skipped
      */
-    protected auto _skip(array $context): bool
-    {
+    protected bool _skip(array $context) {
         if (!is_string(this._on) && is_callable(this._on)) {
             $function = this._on;
 

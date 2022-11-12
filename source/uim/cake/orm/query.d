@@ -1018,10 +1018,8 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     /**
      * Returns the current hydration mode.
      *
-     * @return bool
      */
-    bool isHydrationEnabled()
-    {
+    bool isHydrationEnabled() {
         return this._hydrate;
     }
 

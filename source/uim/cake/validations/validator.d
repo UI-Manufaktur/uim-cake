@@ -296,8 +296,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string myName The field name to check.
      * @return bool
      */
-    function hasField(string myName): bool
-    {
+    bool hasField(string myName) {
         return isset(this._fields[myName]);
     }
 
@@ -402,8 +401,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string myField name of the field to check
      * @return bool
      */
-    function offsetExists(myField): bool
-    {
+    bool offsetExists(myField) {
         return isset(this._fields[myField]);
     }
 
@@ -2386,8 +2384,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      * @return bool
      */
-    function isEmptyAllowed(string myField, bool $newRecord): bool
-    {
+    bool isEmptyAllowed(string myField, bool $newRecord) {
         $providers = this._providers;
         myData = [];
         $context = compact('data', 'newRecord', 'field', 'providers');
@@ -2403,8 +2400,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param bool $newRecord Whether the data to be validated is new or to be updated.
      * @return bool
      */
-    function isPresenceRequired(string myField, bool $newRecord): bool
-    {
+    bool isPresenceRequired(string myField, bool $newRecord) {
         $providers = this._providers;
         myData = [];
         $context = compact('data', 'newRecord', 'field', 'providers');
@@ -2484,8 +2480,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param array<string, mixed> $context A key value list of data containing the validation context.
      * @return bool
      */
-    protected auto _checkPresence(ValidationSet myField, array $context): bool
-    {
+    protected bool _checkPresence(ValidationSet myField, array $context) {
         $required = myField.isPresenceRequired();
 
         if (!is_string($required) && is_callable($required)) {
@@ -2508,8 +2503,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param array<string, mixed> $context a key value list of data containing the validation context.
      * @return bool
      */
-    protected auto _canBeEmpty(ValidationSet myField, array $context): bool
-    {
+    protected bool _canBeEmpty(ValidationSet myField, array $context) {
         $allowed = myField.isEmptyAllowed();
 
         if (!is_string($allowed) && is_callable($allowed)) {
@@ -2532,8 +2526,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return bool
      * @deprecated 3.7.0 Use {@link isEmpty()} instead
      */
-    protected auto _fieldIsEmpty(myData): bool
-    {
+    protected bool _fieldIsEmpty(myData) {
         return this.isEmpty(myData, static::EMPTY_ALL);
     }
 
@@ -2544,8 +2537,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param int $flags A bitmask of EMPTY_* flags which specify what is empty
      * @return bool
      */
-    protected auto isEmpty(myData, int $flags): bool
-    {
+    protected bool isEmpty(myData, int $flags) {
         if (myData === null) {
             return true;
         }

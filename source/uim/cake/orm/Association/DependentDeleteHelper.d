@@ -20,8 +20,7 @@ class DependentDeleteHelper
      * @param array<string, mixed> myOptions The options for the original delete.
      * @return bool Success.
      */
-    bool cascadeDelete(Association $association, IEntity $entity, array myOptions = [])
-    {
+    bool cascadeDelete(Association $association, IEntity $entity, array myOptions = []) {
         if (!$association.getDependent()) {
             return true;
         }

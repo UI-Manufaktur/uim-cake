@@ -58,8 +58,7 @@ class HasOne : Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
      */
-    bool isOwningSide(Table $side)
-    {
+    bool isOwningSide(Table $side) {
         return $side === this.getSource();
     }
 
@@ -124,8 +123,7 @@ class HasOne : Association
     }
 
 
-    bool cascadeDelete(IEntity $entity, array myOptions = [])
-    {
+    bool cascadeDelete(IEntity $entity, array myOptions = []) {
         $helper = new DependentDeleteHelper();
 
         return $helper.cascadeDelete(this, $entity, myOptions);

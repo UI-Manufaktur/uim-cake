@@ -1,4 +1,4 @@
-module uim.cake.orm.Locator;
+module uim.cake.orm.locators;
 
 import uim.cake.core.App;
 import uim.cake.datasources\ConnectionManager;

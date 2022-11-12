@@ -415,8 +415,7 @@ class RouteCollection
      * @param string myName The name of the middleware group to check.
      * @return bool
      */
-    bool hasMiddlewareGroup(string myName)
-    {
+    bool hasMiddlewareGroup(string myName) {
         return array_key_exists(myName, this._middlewareGroups);
     }
 
@@ -426,8 +425,7 @@ class RouteCollection
      * @param string myName The name of the middleware to check.
      * @return bool
      */
-    bool hasMiddleware(string myName)
-    {
+    bool hasMiddleware(string myName) {
         return isset(this._middleware[myName]);
     }
 
@@ -437,8 +435,7 @@ class RouteCollection
      * @param string myName The name of the middleware to check.
      * @return bool
      */
-    bool middlewareExists(string myName)
-    {
+    bool middlewareExists(string myName) {
         return this.hasMiddleware(myName) || this.hasMiddlewareGroup(myName);
     }
 

@@ -47,8 +47,7 @@ class IsUnique
      * @param array<string, mixed> myOptions Options passed to the check,
      * @return bool
      */
-    auto __invoke(IEntity $entity, array myOptions): bool
-    {
+    bool __invoke(IEntity $entity, array myOptions) {
         if (!$entity.extract(this._fields, true)) {
             return true;
         }

@@ -1,4 +1,4 @@
-module uim.cake.orm.Locator;
+module uim.cake.orm.locators;
 
 import uim.cake.core.exceptions\CakeException;
 import uim.cake.datasources\FactoryLocator;
@@ -9,12 +9,8 @@ import uim.cake.orm.Table;
  */
 trait LocatorAwareTrait
 {
-    /**
-     * This object's default table alias.
-     *
-     * @var string|null
-     */
-    protected $defaultTable = null;
+    // This object's default table alias.
+    protected Nullable!string $defaultTable = null;
 
     /**
      * Table locator instance
