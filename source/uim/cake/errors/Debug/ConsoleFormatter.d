@@ -38,8 +38,7 @@ class ConsoleFormatter : IFormatter
      *
      * @return bool
      */
-    static bool environmentMatches()
-    {
+    static bool environmentMatches() {
         if (PHP_SAPI !== 'cli') {
             return false;
         }

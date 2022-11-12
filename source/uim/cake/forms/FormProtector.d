@@ -45,8 +45,7 @@ class FormProtector
      * @param string $sessionId Session id for hash generation.
      * @return bool
      */
-    bool validate($formData, string myUrl, string $sessionId)
-    {
+    bool validate($formData, string myUrl, string $sessionId) {
         this.debugMessage = null;
 
         $extractedToken = this.extractToken($formData);

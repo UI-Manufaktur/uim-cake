@@ -195,8 +195,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return bool Whether the data is valid.
      * @throws \RuntimeException If validator is invalid.
      */
-    bool validate(array myData, Nullable!string $validator = null)
-    {
+    bool validate(array myData, Nullable!string $validator = null) {
         this._errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
             .validate(myData);
 
@@ -254,8 +253,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return bool False on validation failure, otherwise returns the
      *   result of the `_execute()` method.
      */
-    bool execute(array myData, array myOptions = [])
-    {
+    bool execute(array myData, array myOptions = []) {
         this._data = myData;
 
         myOptions += ['validate' => true];
@@ -277,8 +275,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @param array myData Form data.
      * @return bool
      */
-    protected bool _execute(array myData)
-    {
+    protected bool _execute(array myData) {
         return true;
     }
 

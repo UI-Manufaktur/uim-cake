@@ -1,6 +1,6 @@
 module uim.cakere;
 
-import uim.cakensole.commandCollection;
+import uim.cake.console.commandCollection;
 import uim.cakeents\IEventDispatcher;
 import uim.caketps\MiddlewareQueue;
 import uim.cakeutings\RouteBuilder;

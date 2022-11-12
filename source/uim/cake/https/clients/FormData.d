@@ -183,8 +183,7 @@ class FormData : Countable
      *
      * @return bool Whether there is a file in this payload.
      */
-    bool hasFile()
-    {
+    bool hasFile() {
         return this._hasFile;
     }
 
@@ -197,8 +196,7 @@ class FormData : Countable
      *
      * @return bool Whether the payload is multipart.
      */
-    bool isMultipart()
-    {
+    bool isMultipart() {
         return this.hasFile() || this._hasComplexPart;
     }
 

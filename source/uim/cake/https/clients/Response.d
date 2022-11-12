@@ -188,30 +188,24 @@ class Response : Message : IResponse
     /**
      * Check if the response status code was in the 2xx/3xx range
      *
-     * @return bool
      */
-    bool isOk()
-    {
+    bool isOk() {
         return this.code >= 200 && this.code <= 399;
     }
 
     /**
      * Check if the response status code was in the 2xx range
      *
-     * @return bool
      */
-    bool isSuccess()
-    {
+    bool isSuccess() {
         return this.code >= 200 && this.code <= 299;
     }
 
     /**
      * Check if the response had a redirect status code.
      *
-     * @return bool
      */
-    bool isRedirect()
-    {
+    bool isRedirect() {
         $codes = [
             static::STATUS_MOVED_PERMANENTLY,
             static::STATUS_FOUND,

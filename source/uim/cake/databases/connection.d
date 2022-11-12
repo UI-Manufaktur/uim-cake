@@ -241,7 +241,6 @@ class Connection : ConnectionInterface
     /**
      * Returns whether connection to database server was already established.
      *
-     * @return bool
      */
     bool isConnected() {
         return this._driver.isConnected();
@@ -732,7 +731,6 @@ class Connection : ConnectionInterface
      *
      * This is not required to use `quoteIdentifier()`.
      *
-     * @return bool
      */
     bool supportsQuoting() {
         return this._driver.supports(IDriver::FEATURE_QUOTE);
@@ -829,7 +827,6 @@ class Connection : ConnectionInterface
     /**
      * Check if query logging is enabled.
      *
-     * @return bool
      */
     bool isQueryLoggingEnabled() {
         return this._logQueries;

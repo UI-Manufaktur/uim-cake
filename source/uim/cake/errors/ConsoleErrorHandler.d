@@ -1,8 +1,8 @@
 module uim.cakerors;
 
 import uim.cakemmand\Command;
-import uim.cakensole.consoleOutput;
-import uim.cakensole.Exception\ConsoleException;
+import uim.cake.console.consoleOutput;
+import uim.cake.console.Exception\ConsoleException;
 use Throwable;
 
 /**

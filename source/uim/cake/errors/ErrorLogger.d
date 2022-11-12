@@ -38,8 +38,7 @@ class ErrorLogger : IErrorLogger
     }
 
 
-    bool logMessage($level, string myMessage, array $context = [])
-    {
+    bool logMessage($level, string myMessage, array $context = []) {
         if (!empty($context['request'])) {
             myMessage .= this.getRequestContext($context['request']);
         }
@@ -51,8 +50,7 @@ class ErrorLogger : IErrorLogger
     }
 
 
-    bool log(Throwable myException, ?IServerRequest myRequest = null)
-    {
+    bool log(Throwable myException, ?IServerRequest myRequest = null) {
         foreach (this.getConfig('skipLog') as myClass) {
             if (myException instanceof myClass) {
                 return false;

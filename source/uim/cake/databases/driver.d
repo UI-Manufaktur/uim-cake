@@ -241,7 +241,6 @@ abstract class Driver : IDriver
     /**
      * Returns whether a transaction is active for connection.
      *
-     * @return bool
      */
     bool inTransaction() {
         this.connect();

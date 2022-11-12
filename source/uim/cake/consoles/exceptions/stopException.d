@@ -10,7 +10,7 @@
  * @link          https://book.cakephp.org/4/en/development/errors.html#error-exception-configuration
  * @since         3.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakensole\Exception;
+ */module uim.cake.console\Exception;
 
 /**
  * Exception class for halting errors in console tasks

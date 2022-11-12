@@ -1,6 +1,6 @@
 module uim.cakere;
 
-import uim.cakensole.commandCollection;
+import uim.cake.console.commandCollection;
 
 /**
  * An interface defining the methods that the

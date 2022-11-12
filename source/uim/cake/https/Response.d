@@ -1083,7 +1083,6 @@ class Response : IResponse
     /**
      * Returns whether the resulting output will be compressed by PHP
      *
-     * @return bool
      */
     bool outputCompressed() {
         return strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') !== false
