@@ -1,12 +1,12 @@
-module uim.cakensole;
+module uim.cake.console;
 
 @safe:
 import uim.cake
 
 import uim.cakemmand\VersionCommand;
-import uim.cakensole.command\HelpCommand;
-import uim.cakensole.Exception\MissingOptionException;
-import uim.cakensole.Exception\StopException;
+import uim.cake.console.command\HelpCommand;
+import uim.cake.console.Exception\MissingOptionException;
+import uim.cake.console.Exception\StopException;
 import uim.cakere.ConsoleApplicationInterface;
 import uim.cakere.ContainerApplicationInterface;
 import uim.cakere.PluginApplicationInterface;

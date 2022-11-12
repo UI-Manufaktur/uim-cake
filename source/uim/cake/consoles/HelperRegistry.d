@@ -1,6 +1,6 @@
-module uim.cakensole;
+module uim.cake.console;
 
-import uim.cakensole.Exception\MissingHelperException;
+import uim.cake.console.Exception\MissingHelperException;
 import uim.cakere.App;
 import uim.cakere.ObjectRegistry;
 

@@ -1,4 +1,4 @@
-module uim.cakensole;
+module uim.cake.console;
 
 /**
  * An interface for abstracting creation of command and shell instances.

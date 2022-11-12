@@ -9,7 +9,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakensole;
+ */module uim.cake.console;
 
 use InvalidArgumentException;
 use SimpleXMLElement;
