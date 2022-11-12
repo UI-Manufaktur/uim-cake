@@ -21,5 +21,5 @@ interface IFormatter
      * @param array myLocation The file and line the contents came from.
      * @return string
      */
-    function formatWrapper(string myContentss, array myLocation): string;
+    string formatWrapper(string myContentss, array myLocation);
 }

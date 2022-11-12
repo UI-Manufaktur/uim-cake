@@ -186,7 +186,7 @@ class File {
      * @param bool $forceWindows If true forces Windows new line string.
      * @return string The with converted line endings.
      */
-    static function prepare(string myData, bool $forceWindows = false): string
+    static string prepare(string myData, bool $forceWindows = false)
     {
         $lineBreak = "\n";
         if (DIRECTORY_SEPARATOR === '\\' || $forceWindows === true) {
@@ -325,7 +325,7 @@ class File {
      * @param string|null $ext The name of the extension
      * @return string the file basename.
      */
-    protected static auto _basename(string myPath, Nullable!string $ext = null): string
+    protected static string _basename(string myPath, Nullable!string $ext = null)
     {
         // check for multibyte string and use basename() if not found
         if (mb_strlen(myPath) === strlen(myPath)) {
@@ -352,7 +352,7 @@ class File {
      * @param string|null $ext The name of the extension to make safe if different from this.ext
      * @return string The extension of the file
      */
-    function safe(Nullable!string myName = null, Nullable!string $ext = null): string
+    string safe(Nullable!string myName = null, Nullable!string $ext = null)
     {
         if (!myName) {
             myName = (string)this.name;

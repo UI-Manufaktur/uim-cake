@@ -314,7 +314,7 @@ class Cookie : CookieInterface
      *
      * @return string
      */
-    function toHeaderValue(): string
+    string toHeaderValue()
     {
         myValue = this.value;
         if (this.isExpanded) {
@@ -357,13 +357,13 @@ class Cookie : CookieInterface
     }
 
 
-    auto getId(): string
+    string getId()
     {
         return "{this.name};{this.domain};{this.path}";
     }
 
 
-    auto getName(): string
+    string getName()
     {
         return this.name;
     }
@@ -447,7 +447,7 @@ class Cookie : CookieInterface
     }
 
 
-    auto getPath(): string
+    string getPath()
     {
         return this.path;
     }
@@ -461,7 +461,7 @@ class Cookie : CookieInterface
     }
 
 
-    auto getDomain(): string
+    auto getDomain()
     {
         return this.domain;
     }
@@ -516,7 +516,7 @@ class Cookie : CookieInterface
     }
 
 
-    auto getFormattedExpires(): string
+    string getFormattedExpires()
     {
         if (!this.expiresAt) {
             return '';
@@ -706,7 +706,7 @@ class Cookie : CookieInterface
      * @param array $array Map of key and values
      * @return string A JSON encoded string.
      */
-    protected auto _flatten(array $array): string
+    protected string _flatten(array $array)
     {
         return json_encode($array);
     }

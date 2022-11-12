@@ -87,7 +87,7 @@ class Oauth
      * @param array $credentials Authentication credentials.
      * @return string Authorization header.
      */
-    protected auto _plaintext(Request myRequest, array $credentials): string
+    protected string _plaintext(Request myRequest, array $credentials)
     {
         myValues = [
             'oauth_version' => '1.0',
@@ -116,7 +116,7 @@ class Oauth
      * @param array $credentials Authentication credentials.
      * @return string
      */
-    protected auto _hmacSha1(Request myRequest, array $credentials): string
+    protected string _hmacSha1(Request myRequest, array $credentials)
     {
         $nonce = $credentials['nonce'] ?? uniqid();
         $timestamp = $credentials['timestamp'] ?? time();
@@ -158,7 +158,7 @@ class Oauth
      * @return string
      * @throws \RuntimeException
      */
-    protected auto _rsaSha1(Request myRequest, array $credentials): string
+    protected string _rsaSha1(Request myRequest, array $credentials)
     {
         if (!function_exists('openssl_pkey_get_private')) {
             throw new RuntimeException('RSA-SHA1 signature method requires the OpenSSL extension.');
@@ -229,7 +229,7 @@ class Oauth
      * @param array $oauthValues Oauth values.
      * @return string
      */
-    function baseString(Request myRequest, array $oauthValues): string
+    string baseString(Request myRequest, array $oauthValues)
     {
         $parts = [
             myRequest.getMethod(),
@@ -348,7 +348,7 @@ class Oauth
      * @param string myValue Value to encode.
      * @return string
      */
-    protected auto _encode(string myValue): string
+    protected string _encode(string myValue)
     {
         return str_replace(['%7E', '+'], ['~', ' '], rawurlencode(myValue));
     }

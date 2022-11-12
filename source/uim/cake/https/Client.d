@@ -547,7 +547,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions The config options stored with Client::config()
      * @return string A complete url with scheme, port, host, and path.
      */
-    function buildUrl(string myUrl, myQuery = [], array myOptions = []): string
+    string buildUrl(string myUrl, myQuery = [], array myOptions = [])
     {
         if (empty(myOptions) && empty(myQuery)) {
             return myUrl;

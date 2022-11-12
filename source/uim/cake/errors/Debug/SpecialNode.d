@@ -24,7 +24,7 @@ class SpecialNode : INode
      *
      * @return string
      */
-    auto getValue(): string
+    string getValue()
     {
         return this.value;
     }
