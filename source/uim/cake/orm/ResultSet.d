@@ -277,7 +277,7 @@ class ResultSet : ResultSetInterface
      *
      * @return string Serialized object
      */
-    function serialize(): string
+    string serialize()
     {
         return serialize(this.__serialize());
     }

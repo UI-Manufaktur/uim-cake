@@ -365,7 +365,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return string
      */
-    auto getTable(): string
+    string getTable()
     {
         if (this._table === null) {
             myTable = moduleSplit(static::class);
@@ -396,7 +396,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return string
      */
-    auto getAlias(): string
+    string getAlias()
     {
         if (this._alias === null) {
             myAlias = moduleSplit(static::class);

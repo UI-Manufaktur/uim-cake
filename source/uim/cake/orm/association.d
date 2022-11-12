@@ -260,7 +260,7 @@ abstract class Association
      *
      * @return string
      */
-    auto getName(): string
+    string getName()
     {
         return this._name;
     }
@@ -315,7 +315,7 @@ abstract class Association
      *
      * @return string
      */
-    auto getClassName(): string
+    string getClassName()
     {
         return this._className;
     }
@@ -533,7 +533,7 @@ abstract class Association
      *
      * @return string
      */
-    auto getJoinType(): string
+    string getJoinType()
     {
         return this._joinType;
     }
@@ -557,7 +557,7 @@ abstract class Association
      *
      * @return string
      */
-    auto getProperty(): string
+    string getProperty()
     {
         if (!this._propertyName) {
             this._propertyName = this._propertyName();
@@ -579,7 +579,7 @@ abstract class Association
      *
      * @return string
      */
-    protected auto _propertyName(): string
+    protected string _propertyName()
     {
         [, myName] = pluginSplit(this._name);
 
@@ -615,7 +615,7 @@ abstract class Association
      *
      * @return string
      */
-    auto getStrategy(): string
+    string getStrategy()
     {
         return this._strategy;
     }
@@ -1147,7 +1147,7 @@ abstract class Association
      *
      * @return string Constant of either ONE_TO_ONE, MANY_TO_ONE, ONE_TO_MANY or MANY_TO_MANY.
      */
-    abstract function type(): string;
+    abstract string type();
 
     /**
      * Eager loads a list of records in the target table that are related to another
