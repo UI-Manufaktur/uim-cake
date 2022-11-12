@@ -19,7 +19,7 @@ interface IRepository
      *
      * @return string
      */
-    auto getAlias(): string;
+    string getAlias();
 
     /**
      * Sets the table registry key used to create this table instance.
@@ -34,7 +34,7 @@ interface IRepository
      *
      * @return string
      */
-    auto getRegistryAlias(): string;
+    string getRegistryAlias();
 
     /**
      * Test to see if a Repository has a specific field/column.

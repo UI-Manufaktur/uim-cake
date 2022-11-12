@@ -48,7 +48,7 @@ class SqlserverCompiler : QueryCompiler
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
      * @return string
      */
-    protected auto _buildWithPart(array $parts, Query myQuery, ValueBinder $binder): string
+    protected string _buildWithPart(array $parts, Query myQuery, ValueBinder $binder)
     {
         $expressions = [];
         foreach ($parts as $cte) {
@@ -70,7 +70,7 @@ class SqlserverCompiler : QueryCompiler
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
      * @return string
      */
-    protected auto _buildInsertPart(array $parts, Query myQuery, ValueBinder $binder): string
+    protected string _buildInsertPart(array $parts, Query myQuery, ValueBinder $binder)
     {
         if (!isset($parts[0])) {
             throw new DatabaseException(
@@ -97,7 +97,7 @@ class SqlserverCompiler : QueryCompiler
      * @param \Cake\Database\Query myQuery The query that is being compiled
      * @return string
      */
-    protected auto _buildLimitPart(int $limit, Query myQuery): string
+    protected string _buildLimitPart(int $limit, Query myQuery)
     {
         if (myQuery.clause('offset') === null) {
             return '';

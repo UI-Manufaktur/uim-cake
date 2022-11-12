@@ -45,12 +45,12 @@ interface FixtureInterface
      *
      * @return string
      */
-    function connection(): string;
+    string connection();
 
     /**
      * Get the table/collection name for this fixture.
      *
      * @return string
      */
-    function sourceName(): string;
+    string sourceName();
 }

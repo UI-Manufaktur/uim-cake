@@ -313,7 +313,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return string Prefixed key with potentially unsafe characters replaced.
      * @throws \Cake\Cache\InvalidArgumentException If key's value is invalid.
      */
-    protected auto _key(myKey): string
+    protected string _key(myKey)
     {
         this.ensureValidKey(myKey);
 

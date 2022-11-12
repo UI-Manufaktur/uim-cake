@@ -147,8 +147,7 @@ abstract class Driver : IDriver
      *
      * @return string
      */
-    function version(): string
-    {
+    string version() {
         if (this._version === null) {
             this.connect();
             this._version = (string)this._connection.getAttribute(PDO::ATTR_SERVER_VERSION);
@@ -272,7 +271,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    function quote(myValue, myType = PDO::PARAM_STR): string
+    string quote(myValue, myType = PDO::PARAM_STR)
     {
         this.connect();
 
@@ -304,12 +303,12 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    abstract function quoteIdentifier(string myIdentifier): string;
+    abstract string quoteIdentifier(string myIdentifier);
 
     /**
      * @inheritDoc
      */
-    function schemaValue(myValue): string
+    string schemaValue(myValue)
     {
         if (myValue === null) {
             return 'NULL';
@@ -345,7 +344,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    function schema(): string
+    string schema()
     {
         return this._config['schema'];
     }

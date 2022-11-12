@@ -10,7 +10,7 @@ interface TypedResultInterface
      *
      * @return string
      */
-    auto getReturnType(): string;
+    string getReturnType();
 
     /**
      * Set the return type of the expression

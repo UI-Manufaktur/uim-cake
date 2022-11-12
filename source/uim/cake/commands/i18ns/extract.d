@@ -643,7 +643,7 @@ class I18nExtractCommand : Command {
      * @param string $domain Domain
      * @return string Translation template header
      */
-    protected auto _writeHeader(string $domain): string
+    protected string _writeHeader(string $domain)
     {
         $projectIdVersion = $domain === 'cake' ? 'CakePHP ' . Configure::version() : 'PROJECT VERSION';
 
@@ -736,7 +736,7 @@ class I18nExtractCommand : Command {
      * @param string $string String to format
      * @return string Formatted string
      */
-    protected auto _formatString(string $string): string
+    protected string _formatString(string $string)
     {
         $quote = substr($string, 0, 1);
         $string = substr($string, 1, -1);

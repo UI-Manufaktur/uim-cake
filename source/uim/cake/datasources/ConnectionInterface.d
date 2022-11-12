@@ -53,7 +53,7 @@ interface ConnectionInterface : LoggerAwareInterface
      *
      * @return string
      */
-    function configName(): string;
+    string configName();
 
     /**
      * Get the configuration data used to create the connection.

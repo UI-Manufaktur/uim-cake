@@ -217,7 +217,7 @@ interface IDriver {
      * @param string myIdentifier The identifier expression to quote.
      * @return string
      */
-    function quoteIdentifier(string myIdentifier): string;
+    string quoteIdentifier(string myIdentifier);
 
     /**
      * Escapes values for use in schema definitions.
@@ -225,7 +225,7 @@ interface IDriver {
      * @param mixed myValue The value to escape.
      * @return string String for use in schema definitions.
      */
-    function schemaValue(myValue): string;
+    string schemaValue(myValue);
 
     // Returns the schema name that's being used.
     string schema();

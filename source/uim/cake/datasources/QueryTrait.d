@@ -582,7 +582,7 @@ trait QueryTrait
      * @return string
      * @psalm-return class-string<\Cake\Datasource\ResultSetInterface>
      */
-    protected auto _decoratorClass(): string
+    protected string _decoratorClass()
     {
         return ResultSetDecorator::class;
     }

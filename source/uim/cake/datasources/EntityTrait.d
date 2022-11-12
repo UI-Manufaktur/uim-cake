@@ -605,7 +605,7 @@ trait EntityTrait
      * @param string myType the accessor type ('get' or 'set')
      * @return string method name or empty string (no method available)
      */
-    protected static auto _accessor(string $property, string myType): string
+    protected static string _accessor(string $property, string myType)
     {
         myClass = static::class;
 
@@ -1159,7 +1159,7 @@ trait EntityTrait
      *
      * @return string
      */
-    auto getSource(): string
+    string getSource()
     {
         return this._registryAlias;
     }
@@ -1181,7 +1181,7 @@ trait EntityTrait
      *
      * @return string
      */
-    auto __toString(): string
+    string __toString()
     {
         return (string)json_encode(this, JSON_PRETTY_PRINT);
     }

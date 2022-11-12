@@ -61,7 +61,7 @@ class ConsoleFormatter : IFormatter
     }
 
 
-    function formatWrapper(string myContentss, array myLocation): string
+    string formatWrapper(string myContentss, array myLocation)
     {
         $lineInfo = '';
         if (isset(myLocation['file'], myLocation['file'])) {
@@ -84,7 +84,7 @@ class ConsoleFormatter : IFormatter
      * @param \Cake\Error\Debug\INode myNode The node tree to dump.
      * @return string
      */
-    function dump(INode myNode): string
+    string dump(INode myNode)
     {
         $indent = 0;
 
@@ -98,7 +98,7 @@ class ConsoleFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string
      */
-    protected auto export(INode $var, int $indent): string
+    protected string export(INode $var, int $indent)
     {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
@@ -135,7 +135,7 @@ class ConsoleFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
-    protected auto exportArray(ArrayNode $var, int $indent): string
+    protected string exportArray(ArrayNode $var, int $indent)
     {
         $out = this.style('punct', '[');
         $break = "\n" . str_repeat('  ', $indent);
@@ -164,7 +164,7 @@ class ConsoleFormatter : IFormatter
      * @return string
      * @see \Cake\Error\Debugger::exportVar()
      */
-    protected auto exportObject($var, int $indent): string
+    protected string exportObject($var, int $indent)
     {
         $props = [];
 
@@ -215,7 +215,7 @@ class ConsoleFormatter : IFormatter
      * @param string $text The text to style.
      * @return string The styled output.
      */
-    protected auto style(string $style, string $text): string
+    protected string style(string $style, string $text)
     {
         $code = this.styles[$style];
 

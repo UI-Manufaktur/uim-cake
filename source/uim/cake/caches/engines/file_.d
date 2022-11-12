@@ -408,7 +408,7 @@ class FileEngine : CacheEngine
     /**
      * @inheritDoc
      */
-    protected auto _key(myKey): string
+    protected string _key(myKey)
     {
         myKey = super._key(myKey);
 

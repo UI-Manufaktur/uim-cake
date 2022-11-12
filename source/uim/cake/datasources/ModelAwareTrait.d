@@ -144,7 +144,7 @@ trait ModelAwareTrait
      *
      * @return string
      */
-    auto getModelType(): string
+    string getModelType()
     {
         return this._modelType;
     }
