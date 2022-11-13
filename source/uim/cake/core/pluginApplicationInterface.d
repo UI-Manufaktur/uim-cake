@@ -31,7 +31,7 @@ interface PluginApplicationInterface : IEventDispatcher
      *
      * @return void
      */
-    function pluginBootstrap(): void;
+    void pluginBootstrap();
 
     /**
      * Run routes hooks for loaded plugins

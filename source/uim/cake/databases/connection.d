@@ -232,7 +232,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function disconnect(): void
+    void disconnect()
     {
         this._driver.disconnect();
     }
@@ -435,14 +435,14 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function begin(): void
+    void begin()
     {
         if (!this._transactionStarted) {
             if (this._logQueries) {
                 this.log("BEGIN");
             }
 
-            this.getDisconnectRetry().run(function (): void {
+            this.getDisconnectRetry().run(void () {
                 this._driver.beginTransaction();
             });
 
@@ -577,7 +577,7 @@ class Connection : ConnectionInterface
      * @param string|int myName Save point name or id
      * @return void
      */
-    function createSavePoint(myName): void
+    void createSavePoint(myName)
     {
         this.execute(this._driver.savePointSQL(myName)).closeCursor();
     }
@@ -588,7 +588,7 @@ class Connection : ConnectionInterface
      * @param string|int myName Save point name or id
      * @return void
      */
-    function releaseSavePoint(myName): void
+    void releaseSavePoint(myName)
     {
         mySql = this._driver.releaseSavePointSQL(myName);
         if (mySql) {
@@ -602,7 +602,7 @@ class Connection : ConnectionInterface
      * @param string|int myName Save point name or id
      * @return void
      */
-    function rollbackSavepoint(myName): void
+    void rollbackSavepoint(myName)
     {
         this.execute(this._driver.rollbackSavePointSQL(myName)).closeCursor();
     }
@@ -612,9 +612,9 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function disableForeignKeys(): void
+    void disableForeignKeys()
     {
-        this.getDisconnectRetry().run(function (): void {
+        this.getDisconnectRetry().run(void () {
             this.execute(this._driver.disableForeignKeySQL()).closeCursor();
         });
     }
@@ -624,9 +624,9 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function enableForeignKeys(): void
+    void enableForeignKeys()
     {
-        this.getDisconnectRetry().run(function (): void {
+        this.getDisconnectRetry().run(void () {
             this.execute(this._driver.enableForeignKeySQL()).closeCursor();
         });
     }
@@ -751,7 +751,7 @@ class Connection : ConnectionInterface
      *   true to use `_cake_model_` or the name of the cache config to use.
      * @return void
      */
-    function cacheMetadata($cache): void
+    void cacheMetadata($cache)
     {
         this._schemaCollection = null;
         this._config["cacheMetadata"] = $cache;
@@ -863,7 +863,7 @@ class Connection : ConnectionInterface
      * @param string mySql string to be logged
      * @return void
      */
-    function log(string mySql): void
+    void log(string mySql)
     {
         myQuery = new LoggedQuery();
         myQuery.query = mySql;

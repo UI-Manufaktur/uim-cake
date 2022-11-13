@@ -63,7 +63,7 @@ interface PluginInterface
      * @param \Cake\Core\PluginApplicationInterface $app The host application
      * @return void
      */
-    function bootstrap(PluginApplicationInterface $app): void;
+    void bootstrap(PluginApplicationInterface $app);
 
     /**
      * Add console commands for the plugin.
@@ -90,7 +90,7 @@ interface PluginInterface
      * @param \Cake\Routing\RouteBuilder $routes The route builder to update.
      * @return void
      */
-    function routes(RouteBuilder $routes): void;
+    void routes(RouteBuilder $routes);
 
     /**
      * Disables the named hook

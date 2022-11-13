@@ -112,7 +112,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return void
      * @throws \RuntimeException When a duplicate is found.
      */
-    protected auto _checkDuplicate(string myName, array myConfig): void
+    protected void _checkDuplicate(string myName, array myConfig)
     {
         $existing = this._loaded[myName];
         $msg = sprintf("The "%s" alias has already been loaded.", myName);
@@ -164,7 +164,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return void
      * @throws \Exception
      */
-    abstract protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void;
+    abstract protected void _throwMissingClassError(string myClass, Nullable!string myPlugin);
 
     /**
      * Create an instance of a given classname.
@@ -245,7 +245,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-param TObject $object
      * @return void
      */
-    auto __set(string myName, $object): void
+    auto __set(string myName, $object)
     {
         this.set(myName, $object);
     }
@@ -256,7 +256,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string myName Name of a property to unset.
      * @return void
      */
-    auto __unset(string myName): void
+    void __unset(string myName)
     {
         this.unload(myName);
     }
