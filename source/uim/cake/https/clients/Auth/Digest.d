@@ -7,7 +7,7 @@ import uim.cake.https.clients\Request;
  * Digest authentication adapter for Cake\Http\Client
  *
  * Generally not directly constructed, but instead used by {@link \Cake\Http\Client}
- * when myOptions['auth']['type'] is 'digest'
+ * when myOptions["auth"]["type"] is "digest"
  */
 class Digest
 {
@@ -38,18 +38,18 @@ class Digest
      */
     function authentication(Request myRequest, array $credentials): Request
     {
-        if (!isset($credentials['username'], $credentials['password'])) {
+        if (!isset($credentials["username"], $credentials["password"])) {
             return myRequest;
         }
-        if (!isset($credentials['realm'])) {
+        if (!isset($credentials["realm"])) {
             $credentials = this._getServerInfo(myRequest, $credentials);
         }
-        if (!isset($credentials['realm'])) {
+        if (!isset($credentials["realm"])) {
             return myRequest;
         }
         myValue = this._generateHeader(myRequest, $credentials);
 
-        return myRequest.withHeader('Authorization', myValue);
+        return myRequest.withHeader("Authorization", myValue);
     }
 
     /**
@@ -68,23 +68,23 @@ class Digest
         $response = this._client.get(
             (string)myRequest.getUri(),
             [],
-            ['auth' => ['type' => null]]
+            ["auth" => ["type" => null]]
         );
 
-        if (!$response.getHeader('WWW-Authenticate')) {
+        if (!$response.getHeader("WWW-Authenticate")) {
             return [];
         }
         preg_match_all(
-            '@(\w+)=(?:(?:")([^"]+)"|([^\s,$]+))@',
-            $response.getHeaderLine('WWW-Authenticate'),
+            "@(\w+)=(?:(?:")([^"]+)"|([^\s,$]+))@",
+            $response.getHeaderLine("WWW-Authenticate"),
             $matches,
             PREG_SET_ORDER
         );
         foreach ($matches as $match) {
             $credentials[$match[1]] = $match[2];
         }
-        if (!empty($credentials['qop']) && empty($credentials['nc'])) {
-            $credentials['nc'] = 1;
+        if (!empty($credentials["qop"]) && empty($credentials["nc"])) {
+            $credentials["nc"] = 1;
         }
 
         return $credentials;
@@ -100,31 +100,31 @@ class Digest
     protected string _generateHeader(Request myRequest, array $credentials)
     {
         myPath = myRequest.getUri().getPath();
-        $a1 = md5($credentials['username'] . ':' . $credentials['realm'] . ':' . $credentials['password']);
-        $a2 = md5(myRequest.getMethod() . ':' . myPath);
-        $nc = '';
+        $a1 = md5($credentials["username"] . ":" . $credentials["realm"] . ":" . $credentials["password"]);
+        $a2 = md5(myRequest.getMethod() . ":" . myPath);
+        $nc = "";
 
-        if (empty($credentials['qop'])) {
-            $response = md5($a1 . ':' . $credentials['nonce'] . ':' . $a2);
+        if (empty($credentials["qop"])) {
+            $response = md5($a1 . ":" . $credentials["nonce"] . ":" . $a2);
         } else {
-            $credentials['cnonce'] = uniqid();
-            $nc = sprintf('%08x', $credentials['nc']++);
+            $credentials["cnonce"] = uniqid();
+            $nc = sprintf("%08x", $credentials["nc"]++);
             $response = md5(
-                $a1 . ':' . $credentials['nonce'] . ':' . $nc . ':' . $credentials['cnonce'] . ':auth:' . $a2
+                $a1 . ":" . $credentials["nonce"] . ":" . $nc . ":" . $credentials["cnonce"] . ":auth:" . $a2
             );
         }
 
-        $authHeader = 'Digest ';
-        $authHeader .= 'username="' . str_replace(['\\', '"'], ['\\\\', '\\"'], $credentials['username']) . '", ';
-        $authHeader .= 'realm="' . $credentials['realm'] . '", ';
-        $authHeader .= 'nonce="' . $credentials['nonce'] . '", ';
-        $authHeader .= 'uri="' . myPath . '", ';
-        $authHeader .= 'response="' . $response . '"';
-        if (!empty($credentials['opaque'])) {
-            $authHeader .= ', opaque="' . $credentials['opaque'] . '"';
+        $authHeader = "Digest ";
+        $authHeader .= "username="" . str_replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) . "", ";
+        $authHeader .= "realm="" . $credentials["realm"] . "", ";
+        $authHeader .= "nonce="" . $credentials["nonce"] . "", ";
+        $authHeader .= "uri="" . myPath . "", ";
+        $authHeader .= "response="" . $response . """;
+        if (!empty($credentials["opaque"])) {
+            $authHeader .= ", opaque="" . $credentials["opaque"] . """;
         }
-        if (!empty($credentials['qop'])) {
-            $authHeader .= ', qop="auth", nc=' . $nc . ', cnonce="' . $credentials['cnonce'] . '"';
+        if (!empty($credentials["qop"])) {
+            $authHeader .= ", qop="auth", nc=" . $nc . ", cnonce="" . $credentials["cnonce"] . """;
         }
 
         return $authHeader;

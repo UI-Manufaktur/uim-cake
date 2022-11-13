@@ -23,5 +23,5 @@ class MissingControllerException : CakeException
     protected $_defaultCode = 404;
 
 
-    protected $_messageTemplate = 'Controller class %s could not be found.';
+    protected $_messageTemplate = "Controller class %s could not be found.";
 }

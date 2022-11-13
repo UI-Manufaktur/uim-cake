@@ -10,28 +10,28 @@ interface CookieInterface
      *
      * @var string
      */
-    public const EXPIRES_FORMAT = 'D, d-M-Y H:i:s T';
+    public const EXPIRES_FORMAT = "D, d-M-Y H:i:s T";
 
     /**
      * SameSite attribute value: Lax
      *
      * @var string
      */
-    public const SAMESITE_LAX = 'Lax';
+    public const SAMESITE_LAX = "Lax";
 
     /**
      * SameSite attribute value: Strict
      *
      * @var string
      */
-    public const SAMESITE_STRICT = 'Strict';
+    public const SAMESITE_STRICT = "Strict";
 
     /**
      * SameSite attribute value: None
      *
      * @var string
      */
-    public const SAMESITE_NONE = 'None';
+    public const SAMESITE_NONE = "None";
 
     /**
      * Valid values for "SameSite" attribute.
@@ -172,7 +172,7 @@ interface CookieInterface
      *
      * Cookies without an expiration date always return false.
      *
-     * @param \DateTime|\DateTimeImmutable $time The time to test against. Defaults to 'now' in UTC.
+     * @param \DateTime|\DateTimeImmutable $time The time to test against. Defaults to "now" in UTC.
      * @return bool
      */
     bool isExpired($time = null);

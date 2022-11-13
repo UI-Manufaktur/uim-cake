@@ -6,7 +6,7 @@ import uim.cake.https.clients\Request;
  * Basic authentication adapter for Cake\Http\Client
  *
  * Generally not directly constructed, but instead used by {@link \Cake\Http\Client}
- * when myOptions['auth']['type'] is 'basic'
+ * when myOptions["auth"]["type"] is "basic"
  */
 class Basic
 {
@@ -20,10 +20,10 @@ class Basic
      */
     function authentication(Request myRequest, array $credentials): Request
     {
-        if (isset($credentials['username'], $credentials['password'])) {
-            myValue = this._generateHeader($credentials['username'], $credentials['password']);
+        if (isset($credentials["username"], $credentials["password"])) {
+            myValue = this._generateHeader($credentials["username"], $credentials["password"]);
             /** @var \Cake\Http\Client\Request myRequest */
-            myRequest = myRequest.withHeader('Authorization', myValue);
+            myRequest = myRequest.withHeader("Authorization", myValue);
         }
 
         return myRequest;
@@ -39,10 +39,10 @@ class Basic
      */
     function proxyAuthentication(Request myRequest, array $credentials): Request
     {
-        if (isset($credentials['username'], $credentials['password'])) {
-            myValue = this._generateHeader($credentials['username'], $credentials['password']);
+        if (isset($credentials["username"], $credentials["password"])) {
+            myValue = this._generateHeader($credentials["username"], $credentials["password"]);
             /** @var \Cake\Http\Client\Request myRequest */
-            myRequest = myRequest.withHeader('Proxy-Authorization', myValue);
+            myRequest = myRequest.withHeader("Proxy-Authorization", myValue);
         }
 
         return myRequest;
@@ -57,6 +57,6 @@ class Basic
      */
     protected string _generateHeader(string myUser, string $pass)
     {
-        return 'Basic ' . base64_encode(myUser . ':' . $pass);
+        return "Basic " . base64_encode(myUser . ":" . $pass);
     }
 }

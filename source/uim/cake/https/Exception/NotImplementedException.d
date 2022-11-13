@@ -17,7 +17,7 @@
 class NotImplementedException : HttpException
 {
 
-    protected $_messageTemplate = '%s is not implemented.';
+    protected $_messageTemplate = "%s is not implemented.";
 
 
     protected $_defaultCode = 501;
