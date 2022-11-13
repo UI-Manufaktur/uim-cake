@@ -142,8 +142,6 @@ class RouteBuilder
 
     /**
      * Get default route class.
-     *
-     * @return string
      */
     string getRouteClass() {
         return this._routeClass;
@@ -189,8 +187,6 @@ class RouteBuilder
 
     /**
      * Get the path this scope is for.
-     *
-     * @return string
      */
     string path() {
         $routeKey = strpos(this._path, "{");
@@ -232,7 +228,6 @@ class RouteBuilder
      * used for routes connected after the prefix is changed.
      *
      * @param string|null myValue Either the value to set or null.
-     * @return string
      */
     string namePrefix(Nullable!string myValue = null) {
         if (myValue !== null) {

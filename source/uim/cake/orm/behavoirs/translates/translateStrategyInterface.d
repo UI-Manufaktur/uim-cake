@@ -42,8 +42,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      *
      * If no locale has been explicitly set via `setLocale()`, this method will
      * return the currently configured global locale.
-     *
-     * @return string
      */
     string getLocale();
 
@@ -55,7 +53,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * field name is returned for all other fields.
      *
      * @param string myField Field name to be aliased.
-     * @return string
      */
     string translationField(string myField);
 

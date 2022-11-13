@@ -421,7 +421,6 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * field name is returned for all other fields.
      *
      * @param string myField Field name to be aliased.
-     * @return string
      */
     string translationField(string myField) {
         if (this.getLocale() === this.getConfig("defaultLocale")) {

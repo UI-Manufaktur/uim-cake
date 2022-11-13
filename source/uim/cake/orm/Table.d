@@ -361,8 +361,6 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Returns the database table name.
      *
      * This can include the database schema name if set using `setTable()`.
-     *
-     * @return string
      */
     string getTable() {
         if (this._table === null) {
@@ -391,8 +389,6 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
     /**
      * Returns the table alias.
-     *
-     * @return string
      */
     string getAlias() {
         if (this._alias === null) {
@@ -434,8 +430,6 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
     /**
      * Returns the table registry key used to create this table instance.
-     *
-     * @return string
      */
     string getRegistryAlias() {
         if (this._registryAlias === null) {

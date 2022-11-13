@@ -539,8 +539,6 @@ class HasMany : Association
 
     /**
      * Get the relationship type.
-     *
-     * @return string
      */
     string type() {
         return self::ONE_TO_MANY;

@@ -76,7 +76,6 @@ class ValidationRule
     /**
      * Returns whether this rule should break validation process for associated field
      * after it fails
-     *
      */
     bool isLast() {
         return this._last;

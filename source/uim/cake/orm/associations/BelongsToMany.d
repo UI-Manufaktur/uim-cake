@@ -498,8 +498,6 @@ class BelongsToMany : Association
 
     /**
      * Get the relationship type.
-     *
-     * @return string
      */
     string type() {
         return self::MANY_TO_MANY;
