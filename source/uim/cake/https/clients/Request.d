@@ -25,17 +25,17 @@ class Request : Message : RequestInterface
      * @param array $headers The HTTP headers to set.
      * @param array|string|null myData The request body to use.
      */
-    this(string myUrl = '', string $method = self::METHOD_GET, array $headers = [], myData = null) {
+    this(string myUrl = "", string $method = self::METHOD_GET, array $headers = [], myData = null) {
         this.setMethod($method);
         this.uri = this.createUri(myUrl);
         $headers += [
-            'Connection' => 'close',
-            'User-Agent' => ini_get('user_agent') ?: 'CakePHP',
+            "Connection" => "close",
+            "User-Agent" => ini_get("user_agent") ?: "CakePHP",
         ];
         this.addHeaders($headers);
 
         if (myData === null) {
-            this.stream = new Stream('php://memory', 'rw');
+            this.stream = new Stream("php://memory", "rw");
         } else {
             this.setContent(myData);
         }
@@ -71,12 +71,12 @@ class Request : Message : RequestInterface
             $formData = new FormData();
             $formData.addMany(myContents);
             /** @phpstan-var array<non-empty-string, non-empty-string> $headers */
-            $headers = ['Content-Type' => $formData.contentType()];
+            $headers = ["Content-Type" => $formData.contentType()];
             this.addHeaders($headers);
             myContents = (string)$formData;
         }
 
-        $stream = new Stream('php://memory', 'rw');
+        $stream = new Stream("php://memory", "rw");
         $stream.write(myContents);
         this.stream = $stream;
 

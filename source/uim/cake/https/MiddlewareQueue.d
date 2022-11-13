@@ -62,10 +62,10 @@ class MiddlewareQueue : Countable, SeekableIterator
     protected auto resolve($middleware): MiddlewareInterface
     {
         if (is_string($middleware)) {
-            myClassName = App::className($middleware, 'Middleware', 'Middleware');
+            myClassName = App::className($middleware, "Middleware", "Middleware");
             if (myClassName === null) {
                 throw new RuntimeException(sprintf(
-                    'Middleware "%s" was not found.',
+                    "Middleware "%s" was not found.",
                     $middleware
                 ));
             }
@@ -179,7 +179,7 @@ class MiddlewareQueue : Countable, SeekableIterator
         if ($found) {
             return this.insertAt($i, $middleware);
         }
-        throw new LogicException(sprintf("No middleware matching '%s' could be found.", myClass));
+        throw new LogicException(sprintf("No middleware matching "%s" could be found.", myClass));
     }
 
     /**

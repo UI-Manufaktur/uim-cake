@@ -27,11 +27,11 @@ class ServerRequest : IServerRequest
      * @var array
      */
     protected myParams = [
-        'plugin' => null,
-        'controller' => null,
-        'action' => null,
-        '_ext' => null,
-        'pass' => [],
+        "plugin" => null,
+        "controller" => null,
+        "action" => null,
+        "_ext" => null,
+        "pass" => [],
     ];
 
     /**
@@ -76,7 +76,7 @@ class ServerRequest : IServerRequest
      *
      * @var string
      */
-    protected $webroot = '/';
+    protected $webroot = "/";
 
     /**
      * Whether to trust HTTP_X headers set by most load balancers.
@@ -103,17 +103,17 @@ class ServerRequest : IServerRequest
      * @var array<callable|array>
      */
     protected static $_detectors = [
-        'get' => ['env' => 'REQUEST_METHOD', 'value' => 'GET'],
-        'post' => ['env' => 'REQUEST_METHOD', 'value' => 'POST'],
-        'put' => ['env' => 'REQUEST_METHOD', 'value' => 'PUT'],
-        'patch' => ['env' => 'REQUEST_METHOD', 'value' => 'PATCH'],
-        'delete' => ['env' => 'REQUEST_METHOD', 'value' => 'DELETE'],
-        'head' => ['env' => 'REQUEST_METHOD', 'value' => 'HEAD'],
-        'options' => ['env' => 'REQUEST_METHOD', 'value' => 'OPTIONS'],
-        'ssl' => ['env' => 'HTTPS', 'options' => [1, 'on']],
-        'ajax' => ['env' => 'HTTP_X_REQUESTED_WITH', 'value' => 'XMLHttpRequest'],
-        'json' => ['accept' => ['application/json'], 'param' => '_ext', 'value' => 'json'],
-        'xml' => ['accept' => ['application/xml', 'text/xml'], 'param' => '_ext', 'value' => 'xml'],
+        "get" => ["env" => "REQUEST_METHOD", "value" => "GET"],
+        "post" => ["env" => "REQUEST_METHOD", "value" => "POST"],
+        "put" => ["env" => "REQUEST_METHOD", "value" => "PUT"],
+        "patch" => ["env" => "REQUEST_METHOD", "value" => "PATCH"],
+        "delete" => ["env" => "REQUEST_METHOD", "value" => "DELETE"],
+        "head" => ["env" => "REQUEST_METHOD", "value" => "HEAD"],
+        "options" => ["env" => "REQUEST_METHOD", "value" => "OPTIONS"],
+        "ssl" => ["env" => "HTTPS", "options" => [1, "on"]],
+        "ajax" => ["env" => "HTTP_X_REQUESTED_WITH", "value" => "XMLHttpRequest"],
+        "json" => ["accept" => ["application/json"], "param" => "_ext", "value" => "json"],
+        "xml" => ["accept" => ["application/xml", "text/xml"], "param" => "_ext", "value" => "xml"],
     ];
 
     /**
@@ -163,7 +163,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string>
      */
-    protected $emulatedAttributes = ['session', 'flash', 'webroot', 'base', 'params', 'here'];
+    protected $emulatedAttributes = ["session", "flash", "webroot", "base", "params", "here"];
 
     /**
      * Array of Psr\Http\Message\UploadedFileInterface objects.
@@ -210,17 +210,17 @@ class ServerRequest : IServerRequest
      */
     this(array myConfig = []) {
         myConfig += [
-            'params' => this.params,
-            'query' => [],
-            'post' => [],
-            'files' => [],
-            'cookies' => [],
-            'environment' => [],
-            'url' => '',
-            'uri' => null,
-            'base' => '',
-            'webroot' => '',
-            'input' => null,
+            "params" => this.params,
+            "query" => [],
+            "post" => [],
+            "files" => [],
+            "cookies" => [],
+            "environment" => [],
+            "url" => "",
+            "uri" => null,
+            "base" => "",
+            "webroot" => "",
+            "input" => null,
         ];
 
         this._setConfig(myConfig);
@@ -233,75 +233,75 @@ class ServerRequest : IServerRequest
      * @return void
      */
     protected void _setConfig(array myConfig) {
-        if (empty(myConfig['session'])) {
-            myConfig['session'] = new Session([
-                'cookiePath' => myConfig['base'],
+        if (empty(myConfig["session"])) {
+            myConfig["session"] = new Session([
+                "cookiePath" => myConfig["base"],
             ]);
         }
 
-        if (empty(myConfig['environment']['REQUEST_METHOD'])) {
-            myConfig['environment']['REQUEST_METHOD'] = 'GET';
+        if (empty(myConfig["environment"]["REQUEST_METHOD"])) {
+            myConfig["environment"]["REQUEST_METHOD"] = "GET";
         }
 
-        this.cookies = myConfig['cookies'];
+        this.cookies = myConfig["cookies"];
 
-        if (isset(myConfig['uri'])) {
-            if (!myConfig['uri'] instanceof UriInterface) {
-                throw new CakeException('The `uri` key must be an instance of ' . UriInterface::class);
+        if (isset(myConfig["uri"])) {
+            if (!myConfig["uri"] instanceof UriInterface) {
+                throw new CakeException("The `uri` key must be an instance of " . UriInterface::class);
             }
-            $uri = myConfig['uri'];
+            $uri = myConfig["uri"];
         } else {
-            if (myConfig['url'] !== '') {
+            if (myConfig["url"] !== "") {
                 myConfig = this.processUrlOption(myConfig);
             }
-            $uri = ServerRequestFactory::createUri(myConfig['environment']);
+            $uri = ServerRequestFactory::createUri(myConfig["environment"]);
         }
 
-        this._environment = myConfig['environment'];
+        this._environment = myConfig["environment"];
 
         this.uri = $uri;
-        this.base = myConfig['base'];
-        this.webroot = myConfig['webroot'];
+        this.base = myConfig["base"];
+        this.webroot = myConfig["webroot"];
 
-        if (isset(myConfig['input'])) {
-            $stream = new Stream('php://memory', 'rw');
-            $stream.write(myConfig['input']);
+        if (isset(myConfig["input"])) {
+            $stream = new Stream("php://memory", "rw");
+            $stream.write(myConfig["input"]);
             $stream.rewind();
         } else {
             $stream = new PhpInputStream();
         }
         this.stream = $stream;
 
-        this.data = myConfig['post'];
-        this.uploadedFiles = myConfig['files'];
-        this.query = myConfig['query'];
-        this.params = myConfig['params'];
-        this.session = myConfig['session'];
+        this.data = myConfig["post"];
+        this.uploadedFiles = myConfig["files"];
+        this.query = myConfig["query"];
+        this.params = myConfig["params"];
+        this.session = myConfig["session"];
         this.flash = new FlashMessage(this.session);
     }
 
     /**
      * Set environment vars based on `url` option to facilitate UriInterface instance generation.
      *
-     * `query` option is also updated based on URL's querystring.
+     * `query` option is also updated based on URL"s querystring.
      *
      * @param array<string, mixed> myConfig Config array.
      * @return array<string, mixed> Update config.
      */
     protected auto processUrlOption(array myConfig): array
     {
-        if (myConfig['url'][0] !== '/') {
-            myConfig['url'] = '/' . myConfig['url'];
+        if (myConfig["url"][0] !== "/") {
+            myConfig["url"] = "/" . myConfig["url"];
         }
 
-        if (strpos(myConfig['url'], '?') !== false) {
-            [myConfig['url'], myConfig['environment']['QUERY_STRING']] = explode('?', myConfig['url']);
+        if (strpos(myConfig["url"], "?") !== false) {
+            [myConfig["url"], myConfig["environment"]["QUERY_STRING"]] = explode("?", myConfig["url"]);
 
-            parse_str(myConfig['environment']['QUERY_STRING'], myQueryArgs);
-            myConfig['query'] += myQueryArgs;
+            parse_str(myConfig["environment"]["QUERY_STRING"], myQueryArgs);
+            myConfig["query"] += myQueryArgs;
         }
 
-        myConfig['environment']['REQUEST_URI'] = myConfig['url'];
+        myConfig["environment"]["REQUEST_URI"] = myConfig["url"];
 
         return myConfig;
     }
@@ -312,12 +312,12 @@ class ServerRequest : IServerRequest
      * @return string|null
      */
     string contentType() {
-        myType = this.getEnv('CONTENT_TYPE');
+        myType = this.getEnv("CONTENT_TYPE");
         if (myType) {
             return myType;
         }
 
-        return this.getEnv('HTTP_CONTENT_TYPE');
+        return this.getEnv("HTTP_CONTENT_TYPE");
     }
 
     /**
@@ -346,8 +346,8 @@ class ServerRequest : IServerRequest
      * @return string The client IP.
      */
     string clientIp() {
-        if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_FOR')) {
-            $addresses = array_map('trim', explode(',', (string)this.getEnv('HTTP_X_FORWARDED_FOR')));
+        if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_FOR")) {
+            $addresses = array_map("trim", explode(",", (string)this.getEnv("HTTP_X_FORWARDED_FOR")));
             $trusted = (count(this.trustedProxies) > 0);
             $n = count($addresses);
 
@@ -363,12 +363,12 @@ class ServerRequest : IServerRequest
             return $addresses[$n - 1];
         }
 
-        if (this.trustProxy && this.getEnv('HTTP_X_REAL_IP')) {
-            $ipaddr = this.getEnv('HTTP_X_REAL_IP');
-        } elseif (this.trustProxy && this.getEnv('HTTP_CLIENT_IP')) {
-            $ipaddr = this.getEnv('HTTP_CLIENT_IP');
+        if (this.trustProxy && this.getEnv("HTTP_X_REAL_IP")) {
+            $ipaddr = this.getEnv("HTTP_X_REAL_IP");
+        } elseif (this.trustProxy && this.getEnv("HTTP_CLIENT_IP")) {
+            $ipaddr = this.getEnv("HTTP_CLIENT_IP");
         } else {
-            $ipaddr = this.getEnv('REMOTE_ADDR');
+            $ipaddr = this.getEnv("REMOTE_ADDR");
         }
 
         return trim((string)$ipaddr);
@@ -403,17 +403,17 @@ class ServerRequest : IServerRequest
      * @return string|null The referring address for this request or null.
      */
     string referer(bool $local = true) {
-        $ref = this.getEnv('HTTP_REFERER');
+        $ref = this.getEnv("HTTP_REFERER");
 
-        $base = Configure::read('App.fullBaseUrl') . this.webroot;
+        $base = Configure::read("App.fullBaseUrl") . this.webroot;
         if (!empty($ref) && !empty($base)) {
             if ($local && strpos($ref, $base) === 0) {
                 $ref = substr($ref, strlen($base));
-                if ($ref == "" || strpos($ref, '//') === 0) {
-                    $ref = '/';
+                if ($ref == "" || strpos($ref, "//") === 0) {
+                    $ref = "/";
                 }
-                if ($ref[0] !== '/') {
-                    $ref = '/' . $ref;
+                if ($ref[0] !== "/") {
+                    $ref = "/" . $ref;
                 }
 
                 return $ref;
@@ -435,14 +435,14 @@ class ServerRequest : IServerRequest
      * @throws \BadMethodCallException when an invalid method is called.
      */
     auto __call(string myName, array myParams) {
-        if (strpos(myName, 'is') === 0) {
+        if (strpos(myName, "is") === 0) {
             myType = strtolower(substr(myName, 2));
 
             array_unshift(myParams, myType);
 
             return this.is(...myParams);
         }
-        throw new BadMethodCallException(sprintf('Method "%s()" does not exist', myName));
+        throw new BadMethodCallException(sprintf("Method "%s()" does not exist", myName));
     }
 
     /**
@@ -500,16 +500,16 @@ class ServerRequest : IServerRequest
 
             return $detect(...$args);
         }
-        if (isset($detect['env']) && this._environmentDetector($detect)) {
+        if (isset($detect["env"]) && this._environmentDetector($detect)) {
             return true;
         }
-        if (isset($detect['header']) && this._headerDetector($detect)) {
+        if (isset($detect["header"]) && this._headerDetector($detect)) {
             return true;
         }
-        if (isset($detect['accept']) && this._acceptHeaderDetector($detect)) {
+        if (isset($detect["accept"]) && this._acceptHeaderDetector($detect)) {
             return true;
         }
-        if (isset($detect['param']) && this._paramDetector($detect)) {
+        if (isset($detect["param"]) && this._paramDetector($detect)) {
             return true;
         }
 
@@ -523,8 +523,8 @@ class ServerRequest : IServerRequest
      * @return bool Whether the request is the type you are checking.
      */
     protected bool _acceptHeaderDetector(array $detect) {
-        $acceptHeaders = explode(',', (string)this.getEnv('HTTP_ACCEPT'));
-        foreach ($detect['accept'] as $header) {
+        $acceptHeaders = explode(",", (string)this.getEnv("HTTP_ACCEPT"));
+        foreach ($detect["accept"] as $header) {
             if (in_array($header, $acceptHeaders, true)) {
                 return true;
             }
@@ -540,8 +540,8 @@ class ServerRequest : IServerRequest
      * @return bool Whether the request is the type you are checking.
      */
     protected bool _headerDetector(array $detect) {
-        foreach ($detect['header'] as $header => myValue) {
-            $header = this.getEnv('http_' . $header);
+        foreach ($detect["header"] as $header => myValue) {
+            $header = this.getEnv("http_" . $header);
             if ($header !== null) {
                 if (!is_string(myValue) && !is_bool(myValue) && is_callable(myValue)) {
                     return myValue($header);
@@ -561,14 +561,14 @@ class ServerRequest : IServerRequest
      * @return bool Whether the request is the type you are checking.
      */
     protected bool _paramDetector(array $detect) {
-        myKey = $detect['param'];
-        if (isset($detect['value'])) {
-            myValue = $detect['value'];
+        myKey = $detect["param"];
+        if (isset($detect["value"])) {
+            myValue = $detect["value"];
 
             return isset(this.params[myKey]) ? this.params[myKey] == myValue : false;
         }
-        if (isset($detect['options'])) {
-            return isset(this.params[myKey]) ? in_array(this.params[myKey], $detect['options']) : false;
+        if (isset($detect["options"])) {
+            return isset(this.params[myKey]) ? in_array(this.params[myKey], $detect["options"]) : false;
         }
 
         return false;
@@ -581,17 +581,17 @@ class ServerRequest : IServerRequest
      * @return bool Whether the request is the type you are checking.
      */
     protected bool _environmentDetector(array $detect) {
-        if (isset($detect['env'])) {
-            if (isset($detect['value'])) {
-                return this.getEnv($detect['env']) == $detect['value'];
+        if (isset($detect["env"])) {
+            if (isset($detect["value"])) {
+                return this.getEnv($detect["env"]) == $detect["value"];
             }
-            if (isset($detect['pattern'])) {
-                return (bool)preg_match($detect['pattern'], (string)this.getEnv($detect['env']));
+            if (isset($detect["pattern"])) {
+                return (bool)preg_match($detect["pattern"], (string)this.getEnv($detect["env"]));
             }
-            if (isset($detect['options'])) {
-                $pattern = '/' . implode('|', $detect['options']) . '/i';
+            if (isset($detect["options"])) {
+                $pattern = "/" . implode("|", $detect["options"]) . "/i";
 
-                return (bool)preg_match($pattern, (string)this.getEnv($detect['env']));
+                return (bool)preg_match($pattern, (string)this.getEnv($detect["env"]));
             }
         }
 
@@ -629,7 +629,7 @@ class ServerRequest : IServerRequest
      * The callback will receive the request object as its only parameter.
      *
      * ```
-     * addDetector('custom', function (myRequest) { //Return a boolean });
+     * addDetector("custom", function (myRequest) { //Return a boolean });
      * ```
      *
      * ### Environment value comparison
@@ -638,7 +638,7 @@ class ServerRequest : IServerRequest
      * the environment value is equality checked against the provided value.
      *
      * ```
-     * addDetector('post', ['env' => 'REQUEST_METHOD', 'value' => 'POST']);
+     * addDetector("post", ["env" => "REQUEST_METHOD", "value" => "POST"]);
      * ```
      *
      * ### Request parameter comparison
@@ -646,7 +646,7 @@ class ServerRequest : IServerRequest
      * Allows for custom detectors on the request parameters.
      *
      * ```
-     * addDetector('admin', ['param' => 'prefix', 'value' => 'admin']);
+     * addDetector("admin", ["param" => "prefix", "value" => "admin"]);
      * ```
      *
      * ### Accept comparison
@@ -654,7 +654,7 @@ class ServerRequest : IServerRequest
      * Allows for detector to compare against Accept header value.
      *
      * ```
-     * addDetector('csv', ['accept' => 'text/csv']);
+     * addDetector("csv", ["accept" => "text/csv"]);
      * ```
      *
      * ### Header comparison
@@ -662,7 +662,7 @@ class ServerRequest : IServerRequest
      * Allows for one or more headers to be compared.
      *
      * ```
-     * addDetector('fancy', ['header' => ['X-Fancy' => 1]);
+     * addDetector("fancy", ["header" => ["X-Fancy" => 1]);
      * ```
      *
      * The `param`, `env` and comparison types allow the following
@@ -673,7 +673,7 @@ class ServerRequest : IServerRequest
      * Pattern value comparison allows you to compare a value fetched from `env()` to a regular expression.
      *
      * ```
-     * addDetector('iphone', ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']);
+     * addDetector("iphone", ["env" => "HTTP_USER_AGENT", "pattern" => "/iPhone/i"]);
      * ```
      *
      * ### Option based comparison
@@ -682,14 +682,14 @@ class ServerRequest : IServerRequest
      * to add an already defined options detector will merge the options.
      *
      * ```
-     * addDetector('mobile', ['env' => 'HTTP_USER_AGENT', 'options' => ['Fennec']]);
+     * addDetector("mobile", ["env" => "HTTP_USER_AGENT", "options" => ["Fennec"]]);
      * ```
      *
      * You can also make compare against multiple values
      * using the `options` key. This is useful when you want to check
      * if a request value is in a list of options.
      *
-     * `addDetector('extension', ['param' => '_ext', 'options' => ['pdf', 'csv']]`
+     * `addDetector("extension", ["param" => "_ext", "options" => ["pdf", "csv"]]`
      *
      * @param string myName The name of the detector.
      * @param callable|array $detector A callable or options array for the detector definition.
@@ -702,7 +702,7 @@ class ServerRequest : IServerRequest
 
             return;
         }
-        if (isset(static::$_detectors[myName], $detector['options'])) {
+        if (isset(static::$_detectors[myName], $detector["options"])) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $detector = Hash::merge(static::$_detectors[myName], $detector);
         }
@@ -716,9 +716,9 @@ class ServerRequest : IServerRequest
      * @return string The normalized header name.
      */
     protected string normalizeHeaderName(string myName) {
-        myName = str_replace('-', '_', strtoupper(myName));
-        if (!in_array(myName, ['CONTENT_LENGTH', 'CONTENT_TYPE'], true)) {
-            myName = 'HTTP_' . myName;
+        myName = str_replace("-", "_", strtoupper(myName));
+        if (!in_array(myName, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
+            myName = "HTTP_" . myName;
         }
 
         return myName;
@@ -741,15 +741,15 @@ class ServerRequest : IServerRequest
         $headers = [];
         foreach (this._environment as myKey => myValue) {
             myName = null;
-            if (strpos(myKey, 'HTTP_') === 0) {
+            if (strpos(myKey, "HTTP_") === 0) {
                 myName = substr(myKey, 5);
             }
-            if (strpos(myKey, 'CONTENT_') === 0) {
+            if (strpos(myKey, "CONTENT_") === 0) {
                 myName = myKey;
             }
             if (myName !== null) {
-                myName = str_replace('_', ' ', strtolower(myName));
-                myName = str_replace(' ', '-', ucwords(myName));
+                myName = str_replace("_", " ", strtolower(myName));
+                myName = str_replace(" ", "-", ucwords(myName));
                 $headers[myName] = (array)myValue;
             }
         }
@@ -778,7 +778,7 @@ class ServerRequest : IServerRequest
      *
      * @param string myName The header you want to get (case-insensitive)
      * @return array<string> An associative array of headers and their values.
-     *   If the header doesn't exist, an empty array will be returned.
+     *   If the header doesn"t exist, an empty array will be returned.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
     auto getHeader(myName): array
@@ -801,7 +801,7 @@ class ServerRequest : IServerRequest
     string getHeaderLine(myName) {
         myValue = this.getHeader(myName);
 
-        return implode(', ', myValue);
+        return implode(", ", myValue);
     }
 
     /**
@@ -874,7 +874,7 @@ class ServerRequest : IServerRequest
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
     string getMethod() {
-        return (string)this.getEnv('REQUEST_METHOD');
+        return (string)this.getEnv("REQUEST_METHOD");
     }
 
     /**
@@ -889,14 +889,14 @@ class ServerRequest : IServerRequest
 
         if (
             !is_string($method) ||
-            !preg_match('/^[!#$%&\'*+.^_`\|~0-9a-z-]+$/i', $method)
+            !preg_match("/^[!#$%&\"*+.^_`\|~0-9a-z-]+$/i", $method)
         ) {
             throw new InvalidArgumentException(sprintf(
-                'Unsupported HTTP method "%s" provided',
+                "Unsupported HTTP method "%s" provided",
                 $method
             ));
         }
-        $new._environment['REQUEST_METHOD'] = $method;
+        $new._environment["REQUEST_METHOD"] = $method;
 
         return $new;
     }
@@ -904,7 +904,7 @@ class ServerRequest : IServerRequest
     /**
      * Get all the server environment parameters.
      *
-     * Read all of the 'environment' or 'server' data that was
+     * Read all of the "environment" or "server" data that was
      * used to create this request.
      *
      * @return array
@@ -947,11 +947,11 @@ class ServerRequest : IServerRequest
      * @return string|null
      */
     string host() {
-        if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_HOST')) {
-            return this.getEnv('HTTP_X_FORWARDED_HOST');
+        if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_HOST")) {
+            return this.getEnv("HTTP_X_FORWARDED_HOST");
         }
 
-        return this.getEnv('HTTP_HOST');
+        return this.getEnv("HTTP_HOST");
     }
 
     /**
@@ -960,26 +960,26 @@ class ServerRequest : IServerRequest
      * @return string|null
      */
     string port() {
-        if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_PORT')) {
-            return this.getEnv('HTTP_X_FORWARDED_PORT');
+        if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_PORT")) {
+            return this.getEnv("HTTP_X_FORWARDED_PORT");
         }
 
-        return this.getEnv('SERVER_PORT');
+        return this.getEnv("SERVER_PORT");
     }
 
     /**
      * Get the current url scheme used for the request.
      *
-     * e.g. 'http', or 'https'
+     * e.g. "http", or "https"
      *
      * @return string|null The scheme used for the request.
      */
     string scheme() {
-        if (this.trustProxy && this.getEnv('HTTP_X_FORWARDED_PROTO')) {
-            return this.getEnv('HTTP_X_FORWARDED_PROTO');
+        if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_PROTO")) {
+            return this.getEnv("HTTP_X_FORWARDED_PROTO");
         }
 
-        return this.getEnv('HTTPS') ? 'https' : 'http';
+        return this.getEnv("HTTPS") ? "https" : "http";
     }
 
     /**
@@ -992,13 +992,13 @@ class ServerRequest : IServerRequest
     string domain(int $tldLength = 1) {
         $host = this.host();
         if (empty($host)) {
-            return '';
+            return "";
         }
 
-        $segments = explode('.', $host);
+        $segments = explode(".", $host);
         $domain = array_slice($segments, -1 * ($tldLength + 1));
 
-        return implode('.', $domain);
+        return implode(".", $domain);
     }
 
     /**
@@ -1015,7 +1015,7 @@ class ServerRequest : IServerRequest
             return [];
         }
 
-        $segments = explode('.', $host);
+        $segments = explode(".", $host);
 
         return array_slice($segments, 0, -1 * ($tldLength + 1));
     }
@@ -1033,7 +1033,7 @@ class ServerRequest : IServerRequest
      * #### Check for a single type:
      *
      * ```
-     * this.request.accepts('application/json');
+     * this.request.accepts("application/json");
      * ```
      *
      * This method will order the returned content types by the preference values indicated
@@ -1067,7 +1067,7 @@ class ServerRequest : IServerRequest
      */
     function parseAccept(): array
     {
-        return this._parseAcceptWithQualifier(this.getHeaderLine('Accept'));
+        return this._parseAcceptWithQualifier(this.getHeaderLine("Accept"));
     }
 
     /**
@@ -1079,18 +1079,18 @@ class ServerRequest : IServerRequest
      *
      * Check if a specific language is accepted:
      *
-     * ``` \Cake\Http\ServerRequest::acceptLanguage('es-es'); ```
+     * ``` \Cake\Http\ServerRequest::acceptLanguage("es-es"); ```
      *
      * @param string|null myLanguage The language to test.
      * @return array|bool If a myLanguage is provided, a boolean. Otherwise the array of accepted languages.
      */
     function acceptLanguage(Nullable!string myLanguage = null) {
-        $raw = this._parseAcceptWithQualifier(this.getHeaderLine('Accept-Language'));
+        $raw = this._parseAcceptWithQualifier(this.getHeaderLine("Accept-Language"));
         $accept = [];
         foreach ($raw as myLanguages) {
             foreach (myLanguages as &$lang) {
-                if (strpos($lang, '_')) {
-                    $lang = str_replace('_', '-', $lang);
+                if (strpos($lang, "_")) {
+                    $lang = str_replace("_", "-", $lang);
                 }
                 $lang = strtolower($lang);
             }
@@ -1115,17 +1115,17 @@ class ServerRequest : IServerRequest
     protected auto _parseAcceptWithQualifier(string $header): array
     {
         $accept = [];
-        $headers = explode(',', $header);
+        $headers = explode(",", $header);
         foreach (array_filter($headers) as myValue) {
-            $prefValue = '1.0';
+            $prefValue = "1.0";
             myValue = trim(myValue);
 
-            $semiPos = strpos(myValue, ';');
+            $semiPos = strpos(myValue, ";");
             if ($semiPos !== false) {
-                myParams = explode(';', myValue);
+                myParams = explode(";", myValue);
                 myValue = trim(myParams[0]);
                 foreach (myParams as $param) {
-                    $qPos = strpos($param, 'q=');
+                    $qPos = strpos($param, "q=");
                     if ($qPos !== false) {
                         $prefValue = substr($param, $qPos + 2);
                     }
@@ -1153,7 +1153,7 @@ class ServerRequest : IServerRequest
      * ### PSR-7 Alternative
      *
      * ```
-     * myValue = Hash::get(myRequest.getQueryParams(), 'Post.id');
+     * myValue = Hash::get(myRequest.getQueryParams(), "Post.id");
      * ```
      *
      * @param string|null myName The name or dotted path to the query param or null to read all.
@@ -1180,10 +1180,10 @@ class ServerRequest : IServerRequest
      * myRequest.getData();
      *
      * // Read a specific field.
-     * myRequest.getData('Post.title');
+     * myRequest.getData("Post.title");
      *
      * // With a default value.
-     * myRequest.getData('Post.not there', 'default value');
+     * myRequest.getData("Post.not there", "default value");
      * ```
      *
      * When reading values you will get `null` for keys/values that do not exist.
@@ -1194,7 +1194,7 @@ class ServerRequest : IServerRequest
      * ### PSR-7 Alternative
      *
      * ```
-     * myValue = Hash::get(myRequest.getParsedBody(), 'Post.id');
+     * myValue = Hash::get(myRequest.getParsedBody(), "Post.id");
      * ```
      *
      * @param string|null myName Dot separated name of the value to read. Or null to read all data.
@@ -1220,19 +1220,19 @@ class ServerRequest : IServerRequest
      * Getting input with a decoding function:
      *
      * ```
-     * this.request.input('json_decode');
+     * this.request.input("json_decode");
      * ```
      *
      * Getting input using a decoding function, and additional params:
      *
      * ```
-     * this.request.input('Xml::build', ['return' => 'DOMDocument']);
+     * this.request.input("Xml::build", ["return" => "DOMDocument"]);
      * ```
      *
      * Any additional parameters are applied to the callback in the order they are given.
      *
      * @deprecated 4.1.0 Use `(string)myRequest.getBody()` to get the raw PHP input
-     *  as string; use `BodyParserMiddleware` to parse the request body so that it's
+     *  as string; use `BodyParserMiddleware` to parse the request body so that it"s
      *  available as array/object through `myRequest.getParsedBody()`.
      * @param callable|null $callback A decoding callback that will convert the string data to another
      *     representation. Leave empty to access the raw input data. You can also
@@ -1242,9 +1242,9 @@ class ServerRequest : IServerRequest
      */
     function input(?callable $callback = null, ...$args) {
         deprecationWarning(
-            'Use `(string)myRequest.getBody()` to get the raw PHP input as string; '
-            . 'use `BodyParserMiddleware` to parse the request body so that it\'s available as array/object '
-            . 'through myRequest.getParsedBody()'
+            "Use `(string)myRequest.getBody()` to get the raw PHP input as string; "
+            . "use `BodyParserMiddleware` to parse the request body so that it\"s available as array/object "
+            . "through myRequest.getParsedBody()"
         );
         this.stream.rewind();
         $input = this.stream.getContents();
@@ -1258,18 +1258,18 @@ class ServerRequest : IServerRequest
     }
 
     /**
-     * Read cookie data from the request's cookie data.
+     * Read cookie data from the request"s cookie data.
      *
      * @param string myKey The key or dotted path you want to read.
      * @param array|string|null $default The default value if the cookie is not set.
-     * @return array|string|null Either the cookie value, or null if the value doesn't exist.
+     * @return array|string|null Either the cookie value, or null if the value doesn"t exist.
      */
     auto getCookie(string myKey, $default = null) {
         return Hash::get(this.cookies, myKey, $default);
     }
 
     /**
-     * Get a cookie collection based on the request's cookies
+     * Get a cookie collection based on the request"s cookies
      *
      * The CookieCollection lets you interact with request cookies using
      * `\Cake\Http\Cookie\Cookie` objects and can make converting request cookies
@@ -1369,8 +1369,8 @@ class ServerRequest : IServerRequest
         }
 
         // Lazily populate this data as it is generally not used.
-        preg_match('/^HTTP\/([\d.]+)$/', (string)this.getEnv('SERVER_PROTOCOL'), $match);
-        $protocol = '1.1';
+        preg_match("/^HTTP\/([\d.]+)$/", (string)this.getEnv("SERVER_PROTOCOL"), $match);
+        $protocol = "1.1";
         if (isset($match[1])) {
             $protocol = $match[1];
         }
@@ -1389,8 +1389,8 @@ class ServerRequest : IServerRequest
      * @return static
      */
     function withProtocolVersion($version) {
-        if (!preg_match('/^(1\.[01]|2)$/', $version)) {
-            throw new InvalidArgumentException("Unsupported protocol version '{$version}' provided");
+        if (!preg_match("/^(1\.[01]|2)$/", $version)) {
+            throw new InvalidArgumentException("Unsupported protocol version "{$version}" provided");
         }
         $new = clone this;
         $new.protocol = $version;
@@ -1399,13 +1399,13 @@ class ServerRequest : IServerRequest
     }
 
     /**
-     * Get a value from the request's environment data.
+     * Get a value from the request"s environment data.
      * Fallback to using env() if the key is not set in the $environment property.
      *
      * @param string myKey The key you want to read from.
      * @param string|null $default Default value when trying to retrieve an environment
-     *   variable's value that does not exist.
-     * @return string|null Either the environment value, or null if the value doesn't exist.
+     *   variable"s value that does not exist.
+     * @return string|null Either the environment value, or null if the value doesn"t exist.
      */
     string getEnv(string myKey, Nullable!string $default = null) {
         myKey = strtoupper(myKey);
@@ -1440,9 +1440,9 @@ class ServerRequest : IServerRequest
      *
      * Example:
      *
-     * this.request.allowMethod('post');
+     * this.request.allowMethod("post");
      * or
-     * this.request.allowMethod(['post', 'delete']);
+     * this.request.allowMethod(["post", "delete"]);
      *
      * If the request would be GET, response header "Allow: POST, DELETE" will be set
      * and a 405 error will be returned.
@@ -1458,9 +1458,9 @@ class ServerRequest : IServerRequest
                 return true;
             }
         }
-        $allowed = strtoupper(implode(', ', $methods));
+        $allowed = strtoupper(implode(", ", $methods));
         $e = new MethodNotAllowedException();
-        $e.setHeader('Allow', $allowed);
+        $e.setHeader("Allow", $allowed);
         throw $e;
     }
 
@@ -1562,7 +1562,7 @@ class ServerRequest : IServerRequest
         $new = clone this;
         if (in_array(myName, this.emulatedAttributes, true)) {
             throw new InvalidArgumentException(
-                "You cannot unset 'myName'. It is a required CakePHP attribute."
+                "You cannot unset "myName". It is a required CakePHP attribute."
             );
         }
         unset($new.attributes[myName]);
@@ -1579,7 +1579,7 @@ class ServerRequest : IServerRequest
      */
     auto getAttribute(myName, $default = null) {
         if (in_array(myName, this.emulatedAttributes, true)) {
-            if (myName === 'here') {
+            if (myName === "here") {
                 return this.base . this.uri.getPath();
             }
 
@@ -1603,10 +1603,10 @@ class ServerRequest : IServerRequest
     auto getAttributes(): array
     {
         $emulated = [
-            'params' => this.params,
-            'webroot' => this.webroot,
-            'base' => this.base,
-            'here' => this.base . this.uri.getPath(),
+            "params" => this.params,
+            "webroot" => this.webroot,
+            "base" => this.base,
+            "here" => this.base . this.uri.getPath(),
         ];
 
         return this.attributes + $emulated;
@@ -1646,7 +1646,7 @@ class ServerRequest : IServerRequest
      * @throws \InvalidArgumentException when myfiles contains an invalid object.
      */
     function withUploadedFiles(array $uploadedFiles) {
-        this.validateUploadedFiles($uploadedFiles, '');
+        this.validateUploadedFiles($uploadedFiles, "");
         $new = clone this;
         $new.uploadedFiles = $uploadedFiles;
 
@@ -1664,12 +1664,12 @@ class ServerRequest : IServerRequest
     protected void validateUploadedFiles(array $uploadedFiles, string myPath) {
         foreach ($uploadedFiles as myKey => myfile) {
             if (is_array(myfile)) {
-                this.validateUploadedFiles(myfile, myKey . '.');
+                this.validateUploadedFiles(myfile, myKey . ".");
                 continue;
             }
 
             if (!myfile instanceof UploadedFileInterface) {
-                throw new InvalidArgumentException("Invalid file at '{myPath}{myKey}'");
+                throw new InvalidArgumentException("Invalid file at "{myPath}{myKey}"");
             }
         }
     }
@@ -1722,7 +1722,7 @@ class ServerRequest : IServerRequest
         $new = clone this;
         $new.uri = $uri;
 
-        if ($preserveHost && this.hasHeader('Host')) {
+        if ($preserveHost && this.hasHeader("Host")) {
             return $new;
         }
 
@@ -1732,9 +1732,9 @@ class ServerRequest : IServerRequest
         }
         $port = $uri.getPort();
         if ($port) {
-            $host .= ':' . $port;
+            $host .= ":" . $port;
         }
-        $new._environment['HTTP_HOST'] = $host;
+        $new._environment["HTTP_HOST"] = $host;
 
         return $new;
     }
@@ -1743,8 +1743,8 @@ class ServerRequest : IServerRequest
      * Create a new instance with a specific request-target.
      *
      * You can use this method to overwrite the request target that is
-     * inferred from the request's Uri. This also lets you change the request
-     * target's form to an absolute-form, authority-form or asterisk-form
+     * inferred from the request"s Uri. This also lets you change the request
+     * target"s form to an absolute-form, authority-form or asterisk-form
      *
      * @link https://tools.ietf.org/html/rfc7230#section-2.7 (for the various
      *   request-target forms allowed in request messages)
@@ -1760,9 +1760,9 @@ class ServerRequest : IServerRequest
     }
 
     /**
-     * Retrieves the request's target.
+     * Retrieves the request"s target.
      *
-     * Retrieves the message's request-target either as it was requested,
+     * Retrieves the message"s request-target either as it was requested,
      * or as set with `withRequestTarget()`. By default this will return the
      * application relative path without base directory, and the query string
      * defined in the SERVER environment.
@@ -1776,11 +1776,11 @@ class ServerRequest : IServerRequest
 
         myTarget = this.uri.getPath();
         if (this.uri.getQuery()) {
-            myTarget .= '?' . this.uri.getQuery();
+            myTarget .= "?" . this.uri.getQuery();
         }
 
         if (empty(myTarget)) {
-            myTarget = '/';
+            myTarget = "/";
         }
 
         return myTarget;
@@ -1792,7 +1792,7 @@ class ServerRequest : IServerRequest
             return this.uri.getPath();
         }
 
-        [myPath] = explode('?', this.requestTarget);
+        [myPath] = explode("?", this.requestTarget);
 
         return myPath;
     }

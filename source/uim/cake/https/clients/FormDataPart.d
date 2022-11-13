@@ -89,7 +89,7 @@ class FormDataPart
      * @param string $disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    this(string myName, string myValue, string $disposition = 'form-data', Nullable!string $charset = null) {
+    this(string myName, string myValue, string $disposition = "form-data", Nullable!string $charset = null) {
         this._name = myName;
         this._value = myValue;
         this._disposition = $disposition;
@@ -202,25 +202,25 @@ class FormDataPart
      * @return string
      */
     string __toString() {
-        $out = '';
+        $out = "";
         if (this._disposition) {
-            $out .= 'Content-Disposition: ' . this._disposition;
+            $out .= "Content-Disposition: " . this._disposition;
             if (this._name) {
-                $out .= '; ' . this._headerParameterToString('name', this._name);
+                $out .= "; " . this._headerParameterToString("name", this._name);
             }
             if (this._filename) {
-                $out .= '; ' . this._headerParameterToString('filename', this._filename);
+                $out .= "; " . this._headerParameterToString("filename", this._filename);
             }
             $out .= "\r\n";
         }
         if (this._type) {
-            $out .= 'Content-Type: ' . this._type . "\r\n";
+            $out .= "Content-Type: " . this._type . "\r\n";
         }
         if (this._transferEncoding) {
-            $out .= 'Content-Transfer-Encoding: ' . this._transferEncoding . "\r\n";
+            $out .= "Content-Transfer-Encoding: " . this._transferEncoding . "\r\n";
         }
         if (this._contentId) {
-            $out .= 'Content-ID: <' . this._contentId . ">\r\n";
+            $out .= "Content-ID: <" . this._contentId . ">\r\n";
         }
         $out .= "\r\n";
         $out .= this._value;
@@ -239,10 +239,10 @@ class FormDataPart
      * @return string
      */
     protected string _headerParameterToString(string myName, string myValue) {
-        $transliterated = Text::transliterate(str_replace('"', '', myValue));
-        $return = sprintf('%s="%s"', myName, $transliterated);
+        $transliterated = Text::transliterate(str_replace(""", "", myValue));
+        $return = sprintf("%s="%s"", myName, $transliterated);
         if (this._charset !== null && myValue !== $transliterated) {
-            $return .= sprintf("; %s*=%s''%s", myName, strtolower(this._charset), rawurlencode(myValue));
+            $return .= sprintf("; %s*=%s""%s", myName, strtolower(this._charset), rawurlencode(myValue));
         }
 
         return $return;

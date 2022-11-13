@@ -126,14 +126,14 @@ class FormData : Countable
         this._hasFile = true;
 
         myfilename = false;
-        myContentsType = 'application/octet-stream';
+        myContentsType = "application/octet-stream";
         if (is_resource(myValue)) {
             myContents = stream_get_contents(myValue);
             if (stream_is_local(myValue)) {
                 $finfo = new finfo(FILEINFO_MIME);
                 $metadata = stream_get_meta_data(myValue);
-                myContentsType = $finfo.file($metadata['uri']);
-                myfilename = basename($metadata['uri']);
+                myContentsType = $finfo.file($metadata["uri"]);
+                myfilename = basename($metadata["uri"]);
             }
         } else {
             $finfo = new finfo(FILEINFO_MIME);
@@ -162,7 +162,7 @@ class FormData : Countable
     function addRecursive(string myName, myValue): void
     {
         foreach (myValue as myKey => myValue) {
-            myKey = myName . '[' . myKey . ']';
+            myKey = myName . "[" . myKey . "]";
             this.add(myKey, myValue);
         }
     }
@@ -210,10 +210,10 @@ class FormData : Countable
      */
     string contentType() {
         if (!this.isMultipart()) {
-            return 'application/x-www-form-urlencoded';
+            return "application/x-www-form-urlencoded";
         }
 
-        return 'multipart/form-data; boundary=' . this.boundary();
+        return "multipart/form-data; boundary=" . this.boundary();
     }
 
     /**
@@ -225,7 +225,7 @@ class FormData : Countable
     string __toString() {
         if (this.isMultipart()) {
             $boundary = this.boundary();
-            $out = '';
+            $out = "";
             foreach (this._parts as $part) {
                 $out .= "--$boundary\r\n";
                 $out .= (string)$part;

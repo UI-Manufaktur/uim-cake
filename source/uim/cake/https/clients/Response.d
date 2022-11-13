@@ -19,7 +19,7 @@ use SimpleXMLElement;
  * when the response is parsed.
  *
  * ```
- * $val = $response.getHeaderLine('content-type');
+ * $val = $response.getHeaderLine("content-type");
  * ```
  *
  * Will read the Content-Type header. You can get all set
@@ -110,12 +110,12 @@ class Response : Message : IResponse
      * @param array $headers Unparsed headers.
      * @param string $body The response body.
      */
-    this(array $headers = [], string $body = '') {
+    this(array $headers = [], string $body = "") {
         this._parseHeaders($headers);
-        if (this.getHeaderLine('Content-Encoding') === 'gzip') {
+        if (this.getHeaderLine("Content-Encoding") === "gzip") {
             $body = this._decodeGzipBody($body);
         }
-        $stream = new Stream('php://memory', 'wb+');
+        $stream = new Stream("php://memory", "wb+");
         $stream.write($body);
         $stream.rewind();
         this.stream = $stream;
@@ -132,11 +132,11 @@ class Response : Message : IResponse
      * @throws \RuntimeException When attempting to decode gzip content without gzinflate.
      */
     protected string _decodeGzipBody(string $body) {
-        if (!function_exists('gzinflate')) {
-            throw new RuntimeException('Cannot decompress gzip response body without gzinflate()');
+        if (!function_exists("gzinflate")) {
+            throw new RuntimeException("Cannot decompress gzip response body without gzinflate()");
         }
         $offset = 0;
-        // Look for gzip 'signature'
+        // Look for gzip "signature"
         if (substr($body, 0, 2) === "\x1f\x8b") {
             $offset = 2;
         }
@@ -145,7 +145,7 @@ class Response : Message : IResponse
             return gzinflate(substr($body, $offset + 8));
         }
 
-        throw new RuntimeException('Invalid gzip response');
+        throw new RuntimeException("Invalid gzip response");
     }
 
     /**
@@ -159,17 +159,17 @@ class Response : Message : IResponse
      */
     protected void _parseHeaders(array $headers) {
         foreach ($headers as myValue) {
-            if (substr(myValue, 0, 5) === 'HTTP/') {
-                preg_match('/HTTP\/([\d.]+) ([0-9]+)(.*)/i', myValue, $matches);
+            if (substr(myValue, 0, 5) === "HTTP/") {
+                preg_match("/HTTP\/([\d.]+) ([0-9]+)(.*)/i", myValue, $matches);
                 this.protocol = $matches[1];
                 this.code = (int)$matches[2];
                 this.reasonPhrase = trim($matches[3]);
                 continue;
             }
-            if (strpos(myValue, ':') === false) {
+            if (strpos(myValue, ":") === false) {
                 continue;
             }
-            [myName, myValue] = explode(':', myValue, 2);
+            [myName, myValue] = explode(":", myValue, 2);
             myValue = trim(myValue);
             /** @phpstan-var non-empty-string myName */
             myName = trim(myName);
@@ -214,7 +214,7 @@ class Response : Message : IResponse
         ];
 
         return in_array(this.code, $codes, true) &&
-            this.getHeaderLine('Location');
+            this.getHeaderLine("Location");
     }
 
     /**
@@ -234,7 +234,7 @@ class Response : Message : IResponse
      * @param string $reasonPhrase The status reason phrase.
      * @return static A copy of the current object with an updated status code.
      */
-    function withStatus($code, $reasonPhrase = '') {
+    function withStatus($code, $reasonPhrase = "") {
         $new = clone this;
         $new.code = $code;
         $new.reasonPhrase = $reasonPhrase;
@@ -255,10 +255,10 @@ class Response : Message : IResponse
      * @return string|null
      */
     Nullable!string getEncoding() {
-        myContents = this.getHeaderLine('content-type');
+        myContents = this.getHeaderLine("content-type");
         if (!myContents) { return null; }
 
-        preg_match('/charset\s?=\s?[\'"]?([a-z0-9-_]+)[\'"]?/i', myContents, $matches);
+        preg_match("/charset\s?=\s?[\""]?([a-z0-9-_]+)[\""]?/i", myContents, $matches);
         if (empty($matches[1])) { return null; }
 
         return $matches[1];
@@ -277,7 +277,7 @@ class Response : Message : IResponse
     /**
      * Get the cookie collection from this response.
      *
-     * This method exposes the response's CookieCollection
+     * This method exposes the response"s CookieCollection
      * instance allowing you to interact with cookie objects directly.
      *
      * @return \Cake\Http\Cookie\CookieCollection
@@ -293,7 +293,7 @@ class Response : Message : IResponse
      * Get the value of a single cookie.
      *
      * @param string myName The name of the cookie value.
-     * @return array|string|null Either the cookie's value or null when the cookie is undefined.
+     * @return array|string|null Either the cookie"s value or null when the cookie is undefined.
      */
     auto getCookie(string myName) {
         this.buildCookieCollection();
@@ -309,7 +309,7 @@ class Response : Message : IResponse
      * Get the full data for a single cookie.
      *
      * @param string myName The name of the cookie value.
-     * @return array|null Either the cookie's data or null when the cookie is undefined.
+     * @return array|null Either the cookie"s data or null when the cookie is undefined.
      */
     auto getCookieData(string myName): ?array
     {
@@ -331,7 +331,7 @@ class Response : Message : IResponse
         if (this.cookies !== null) {
             return;
         }
-        this.cookies = CookieCollection::createFromHeader(this.getHeader('Set-Cookie'));
+        this.cookies = CookieCollection::createFromHeader(this.getHeader("Set-Cookie"));
     }
 
     /**
@@ -424,7 +424,7 @@ class Response : Message : IResponse
     {
         $out = [];
         foreach (this.headers as myKey => myValues) {
-            $out[myKey] = implode(',', myValues);
+            $out[myKey] = implode(",", myValues);
         }
 
         return $out;

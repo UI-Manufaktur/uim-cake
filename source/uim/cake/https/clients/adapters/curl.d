@@ -35,8 +35,8 @@ class Curl : AdapterInterface
 
     function send(RequestInterface myRequest, array myOptions): array
     {
-        if (!extension_loaded('curl')) {
-            throw new ClientException('curl extension is not loaded.');
+        if (!extension_loaded("curl")) {
+            throw new ClientException("curl extension is not loaded.");
         }
 
         $ch = curl_init();
@@ -79,7 +79,7 @@ class Curl : AdapterInterface
     {
         $headers = [];
         foreach (myRequest.getHeaders() as myKey => myValues) {
-            $headers[] = myKey . ': ' . implode(', ', myValues);
+            $headers[] = myKey . ": " . implode(", ", myValues);
         }
 
         $out = [
@@ -112,43 +112,43 @@ class Curl : AdapterInterface
         $body.rewind();
         $out[CURLOPT_POSTFIELDS] = $body.getContents();
         // GET requests with bodies require custom request to be used.
-        if ($out[CURLOPT_POSTFIELDS] !== '' && isset($out[CURLOPT_HTTPGET])) {
-            $out[CURLOPT_CUSTOMREQUEST] = 'get';
+        if ($out[CURLOPT_POSTFIELDS] !== "" && isset($out[CURLOPT_HTTPGET])) {
+            $out[CURLOPT_CUSTOMREQUEST] = "get";
         }
         if ($out[CURLOPT_POSTFIELDS] == "") {
             unset($out[CURLOPT_POSTFIELDS]);
         }
 
-        if (empty(myOptions['ssl_cafile'])) {
-            myOptions['ssl_cafile'] = CaBundle::getBundledCaBundlePath();
+        if (empty(myOptions["ssl_cafile"])) {
+            myOptions["ssl_cafile"] = CaBundle::getBundledCaBundlePath();
         }
-        if (!empty(myOptions['ssl_verify_host'])) {
+        if (!empty(myOptions["ssl_verify_host"])) {
             // Value of 1 or true is deprecated. Only 2 or 0 should be used now.
-            myOptions['ssl_verify_host'] = 2;
+            myOptions["ssl_verify_host"] = 2;
         }
         $optionMap = [
-            'timeout' => CURLOPT_TIMEOUT,
-            'ssl_verify_peer' => CURLOPT_SSL_VERIFYPEER,
-            'ssl_verify_host' => CURLOPT_SSL_VERIFYHOST,
-            'ssl_cafile' => CURLOPT_CAINFO,
-            'ssl_local_cert' => CURLOPT_SSLCERT,
-            'ssl_passphrase' => CURLOPT_SSLCERTPASSWD,
+            "timeout" => CURLOPT_TIMEOUT,
+            "ssl_verify_peer" => CURLOPT_SSL_VERIFYPEER,
+            "ssl_verify_host" => CURLOPT_SSL_VERIFYHOST,
+            "ssl_cafile" => CURLOPT_CAINFO,
+            "ssl_local_cert" => CURLOPT_SSLCERT,
+            "ssl_passphrase" => CURLOPT_SSLCERTPASSWD,
         ];
         foreach ($optionMap as $option => $curlOpt) {
             if (isset(myOptions[$option])) {
                 $out[$curlOpt] = myOptions[$option];
             }
         }
-        if (isset(myOptions['proxy']['proxy'])) {
-            $out[CURLOPT_PROXY] = myOptions['proxy']['proxy'];
+        if (isset(myOptions["proxy"]["proxy"])) {
+            $out[CURLOPT_PROXY] = myOptions["proxy"]["proxy"];
         }
-        if (isset(myOptions['proxy']['username'])) {
-            myPassword = !empty(myOptions['proxy']['password']) ? myOptions['proxy']['password'] : '';
-            $out[CURLOPT_PROXYUSERPWD] = myOptions['proxy']['username'] . ':' . myPassword;
+        if (isset(myOptions["proxy"]["username"])) {
+            myPassword = !empty(myOptions["proxy"]["password"]) ? myOptions["proxy"]["password"] : "";
+            $out[CURLOPT_PROXYUSERPWD] = myOptions["proxy"]["username"] . ":" . myPassword;
         }
-        if (isset(myOptions['curl']) && is_array(myOptions['curl'])) {
-            // Can't use array_merge() because keys will be re-ordered.
-            foreach (myOptions['curl'] as myKey => myValue) {
+        if (isset(myOptions["curl"]) && is_array(myOptions["curl"])) {
+            // Can"t use array_merge() because keys will be re-ordered.
+            foreach (myOptions["curl"] as myKey => myValue) {
                 $out[myKey] = myValue;
             }
         }
@@ -165,19 +165,19 @@ class Curl : AdapterInterface
     protected auto getProtocolVersion(RequestInterface myRequest): int
     {
         switch (myRequest.getProtocolVersion()) {
-            case '1.0':
+            case "1.0":
                 return CURL_HTTP_VERSION_1_0;
-            case '1.1':
+            case "1.1":
                 return CURL_HTTP_VERSION_1_1;
-            case '2':
-            case '2.0':
-                if (defined('CURL_HTTP_VERSION_2TLS')) {
+            case "2":
+            case "2.0":
+                if (defined("CURL_HTTP_VERSION_2TLS")) {
                     return CURL_HTTP_VERSION_2TLS;
                 }
-                if (defined('CURL_HTTP_VERSION_2_0')) {
+                if (defined("CURL_HTTP_VERSION_2_0")) {
                     return CURL_HTTP_VERSION_2_0;
                 }
-                throw new HttpException('libcurl 7.33 or greater required for HTTP/2 support');
+                throw new HttpException("libcurl 7.33 or greater required for HTTP/2 support");
         }
 
         return CURL_HTTP_VERSION_NONE;
