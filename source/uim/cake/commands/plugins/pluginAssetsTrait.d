@@ -1,7 +1,7 @@
 module uim.cakemmand;
 
-import uim.cakere.Configure;
-import uim.cakere.Plugin;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 import uim.cakelesystem\Filesystem;
 import uim.cakeilities.Inflector;
 

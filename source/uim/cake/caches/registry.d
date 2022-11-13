@@ -1,8 +1,8 @@
 module uim.cake.caches;
 
 use BadMethodCallException;
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 use RuntimeException;
 
 /**

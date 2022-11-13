@@ -3,7 +3,7 @@ module uim.cakemmand;
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
-import uim.cakere.Configure;
+import uim.cake.core.Configure;
 
 /**
  * built-in Server command

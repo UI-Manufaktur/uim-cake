@@ -3,8 +3,8 @@ module uim.cakemmand;
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
-import uim.cakere.App;
-import uim.cakere.Plugin;
+import uim.cake.core.App;
+import uim.cake.core.Plugin;
 import uim.cakeilities.Inflector;
 use DirectoryIterator;
 

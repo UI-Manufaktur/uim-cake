@@ -3,7 +3,7 @@ module uim.cakemmand;
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
-import uim.cakere.Plugin;
+import uim.cake.core.Plugin;
 
 /**
  * Displays all currently loaded plugins.

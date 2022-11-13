@@ -3,7 +3,7 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakere.Configure;
+/* import uim.cake.core.Configure;
 import uim.cakerors\Debugger;
 import uim.cakeilities.Security;
  */

@@ -1,6 +1,6 @@
 module uim.cake.caches;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 use DateInterval;
 use Psr\SimpleCache\ICache;
 

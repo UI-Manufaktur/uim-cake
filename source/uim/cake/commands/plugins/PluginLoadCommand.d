@@ -3,8 +3,8 @@ module uim.cakemmand;
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
-import uim.cakere.exceptions\MissingPluginException;
-import uim.cakere.Plugin;
+import uim.cake.core.exceptions\MissingPluginException;
+import uim.cake.core.Plugin;
 
 /**
  * Command for loading plugins.

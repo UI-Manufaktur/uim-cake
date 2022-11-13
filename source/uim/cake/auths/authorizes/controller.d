@@ -5,7 +5,7 @@ import uim.cake
 
 /* import uim.cake.controllerss.componentsRegistry;
 import uim.cake.controllers\Controller;
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 import uim.caketps\ServerRequest;
  */
 /**

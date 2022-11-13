@@ -3,7 +3,7 @@ module uim.caketh\Storage;
 @safe:
 import uim.cake
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.caketps\Response;
 import uim.caketps\ServerRequest;
 

@@ -3,7 +3,7 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakere.App;
+/* import uim.cake.core.App;
 use RuntimeException;
  */
 /**
