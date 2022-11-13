@@ -4,7 +4,7 @@ import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
 import uim.cake.databasess.SchemaCache;
-import uim.caketasources\ConnectionManager;
+import uim.cake.datasources\ConnectionManager;
 use RuntimeException;
 
 /**

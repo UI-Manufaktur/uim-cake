@@ -1,4 +1,4 @@
-module uim.cake.console\commands;
+module uim.cake.console.commands.help;
 
 use ArrayIterator;
 import uim.cake.console.Arguments;

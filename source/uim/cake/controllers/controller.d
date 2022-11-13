@@ -1,9 +1,9 @@
 
-module uim.cakentroller;
+module uim.cake.controllers;
 
-import uim.cakentroller\Exception\MissingActionException;
+import uim.cake.controllers\Exception\MissingActionException;
 import uim.cakere.App;
-import uim.caketasources\ModelAwareTrait;
+import uim.cake.datasources\ModelAwareTrait;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 import uim.cakeents\IEvent;

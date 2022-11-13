@@ -1,6 +1,6 @@
-module uim.cakentroller;
+module uim.cake.controllers;
 
-import uim.cakentroller\Exception\MissingComponentException;
+import uim.cake.controllers\Exception\MissingComponentException;
 import uim.cakere.App;
 import uim.cakere.exceptions\CakeException;
 import uim.cakere.ObjectRegistry;

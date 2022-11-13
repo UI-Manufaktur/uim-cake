@@ -1,6 +1,6 @@
-module uim.cakentrollers.components;
+module uim.cake.controllerss.components;
 
-import uim.cakentrollers.components;
+import uim.cake.controllerss.components;
 import uim.caketps\Exception\InternalErrorException;
 import uim.caketps\FlashMessage;
 import uim.cakeilities.Inflector;

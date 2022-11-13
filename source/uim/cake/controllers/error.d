@@ -1,4 +1,4 @@
-module uim.cakentroller.error;
+module uim.cake.controllers.error;
 
 @safe:
 import uim.cake

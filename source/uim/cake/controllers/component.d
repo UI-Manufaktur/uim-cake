@@ -1,4 +1,4 @@
-module uim.cakentroller;
+module uim.cake.controllers;
 
 import uim.cakere.InstanceConfigTrait;
 import uim.cakeents\IEventListener;

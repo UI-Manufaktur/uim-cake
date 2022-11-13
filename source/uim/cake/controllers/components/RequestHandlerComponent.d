@@ -7,11 +7,11 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.4
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakentrollers.components;
+ */module uim.cake.controllerss.components;
 
-import uim.cakentrollers.components;
-import uim.cakentrollers.componentsRegistry;
-import uim.cakentroller\Controller;
+import uim.cake.controllerss.components;
+import uim.cake.controllerss.componentsRegistry;
+import uim.cake.controllers\Controller;
 import uim.cakere.App;
 import uim.cakere.Configure;
 import uim.cakeents\IEvent;

@@ -1,10 +1,10 @@
-module uim.cakentrollers.components;
+module uim.cake.controllerss.components;
 
-import uim.cakentrollers.components;
-import uim.cakentrollers.componentsRegistry;
-import uim.caketasources\Exception\PageOutOfBoundsException;
-import uim.caketasources\Paginator;
-import uim.caketasources\ResultSetInterface;
+import uim.cake.controllerss.components;
+import uim.cake.controllerss.componentsRegistry;
+import uim.cake.datasources\Exception\PageOutOfBoundsException;
+import uim.cake.datasources\Paginator;
+import uim.cake.datasources\ResultSetInterface;
 import uim.caketps\Exception\NotFoundException;
 use InvalidArgumentException;
 

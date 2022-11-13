@@ -3,7 +3,7 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakentrollers.componentsRegistry;
+/* import uim.cake.controllerss.componentsRegistry;
 import uim.cakere.InstanceConfigTrait;
 import uim.cakeents\IEventListener;
 import uim.caketps\Response;

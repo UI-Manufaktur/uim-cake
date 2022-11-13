@@ -3,8 +3,8 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakentrollers.componentsRegistry;
-import uim.cakentroller\Controller;
+/* import uim.cake.controllerss.componentsRegistry;
+import uim.cake.controllers\Controller;
 import uim.cakere.exceptions\CakeException;
 import uim.caketps\ServerRequest;
  */

@@ -7,12 +7,12 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.8
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakentrollers.components;
+ */module uim.cake.controllerss.components;
 
-import uim.cakentrollers.components;
-import uim.cakentroller\Controller;
-import uim.cakentroller\Exception\AuthSecurityException;
-import uim.cakentroller\Exception\SecurityException;
+import uim.cake.controllerss.components;
+import uim.cake.controllers\Controller;
+import uim.cake.controllers\Exception\AuthSecurityException;
+import uim.cake.controllers\Exception\SecurityException;
 import uim.cakere.Configure;
 import uim.cakeents\IEvent;
 import uim.caketps\Exception\BadRequestException;

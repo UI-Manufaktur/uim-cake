@@ -4,7 +4,7 @@ import uim.cake.console.Exception\ConsoleException;
 import uim.cake.console.Exception\StopException;
 import uim.cakere.App;
 import uim.cakere.exceptions\CakeException;
-import uim.caketasources\ModelAwareTrait;
+import uim.cake.datasources\ModelAwareTrait;
 import uim.cakelesystem\Filesystem;
 import uim.cakegs\LogTrait;
 import uim.cakem.Locator\LocatorAwareTrait;

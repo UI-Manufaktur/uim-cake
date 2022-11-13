@@ -1,15 +1,6 @@
+module uim.cake.controllers;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakentroller;
-
-import uim.cakentroller\Exception\InvalidParameterException;
+import uim.cake.controllers\Exception\InvalidParameterException;
 import uim.cakere.App;
 import uim.cakere.IContainer;
 import uim.caketps\IControllerFactory;

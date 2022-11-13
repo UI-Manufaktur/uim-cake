@@ -1,6 +1,6 @@
-module uim.cakentrollers.components;
+module uim.cake.controllerss.components;
 
-import uim.cakentrollers.components;
+import uim.cake.controllerss.components;
 import uim.cakere.Configure;
 import uim.cakeents\IEvent;
 import uim.cakerm\FormProtector;

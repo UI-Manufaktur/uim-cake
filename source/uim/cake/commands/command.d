@@ -3,7 +3,7 @@ module uim.cakemmand;
 import uim.cake.console.Arguments;
 import uim.cake.console.BaseCommand;
 import uim.cake.console.consoleIo;
-import uim.caketasources\ModelAwareTrait;
+import uim.cake.datasources\ModelAwareTrait;
 import uim.cakegs\LogTrait;
 import uim.cakem.Locator\LocatorAwareTrait;
 
