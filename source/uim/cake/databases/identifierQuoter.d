@@ -39,15 +39,15 @@ class IdentifierQuoter
         $binder = myQuery.getValueBinder();
         myQuery.setValueBinder(null);
 
-        if (myQuery.type() === 'insert') {
+        if (myQuery.type() === "insert") {
             this._quoteInsert(myQuery);
-        } elseif (myQuery.type() === 'update') {
+        } elseif (myQuery.type() === "update") {
             this._quoteUpdate(myQuery);
         } else {
             this._quoteParts(myQuery);
         }
 
-        myQuery.traverseExpressions([this, 'quoteExpression']);
+        myQuery.traverseExpressions([this, "quoteExpression"]);
         myQuery.setValueBinder($binder);
 
         return myQuery;
@@ -88,7 +88,7 @@ class IdentifierQuoter
      */
     protected auto _quoteParts(Query myQuery): void
     {
-        foreach (['distinct', 'select', 'from', 'group'] as $part) {
+        foreach (["distinct", "select", "from", "group"] as $part) {
             myContentss = myQuery.clause($part);
 
             if (!is_array(myContentss)) {
@@ -101,7 +101,7 @@ class IdentifierQuoter
             }
         }
 
-        $joins = myQuery.clause('join');
+        $joins = myQuery.clause("join");
         if ($joins) {
             $joins = this._quoteJoins($joins);
             myQuery.join($joins, [], true);
@@ -137,14 +137,14 @@ class IdentifierQuoter
     {
         myResult = [];
         foreach ($joins as myValue) {
-            myAlias = '';
-            if (!empty(myValue['alias'])) {
-                myAlias = this._driver.quoteIdentifier(myValue['alias']);
-                myValue['alias'] = myAlias;
+            myAlias = "";
+            if (!empty(myValue["alias"])) {
+                myAlias = this._driver.quoteIdentifier(myValue["alias"]);
+                myValue["alias"] = myAlias;
             }
 
-            if (is_string(myValue['table'])) {
-                myValue['table'] = this._driver.quoteIdentifier(myValue['table']);
+            if (is_string(myValue["table"])) {
+                myValue["table"] = this._driver.quoteIdentifier(myValue["table"]);
             }
 
             myResult[myAlias] = myValue;
@@ -161,7 +161,7 @@ class IdentifierQuoter
      */
     protected auto _quoteInsert(Query myQuery): void
     {
-        $insert = myQuery.clause('insert');
+        $insert = myQuery.clause("insert");
         if (!isset($insert[0]) || !isset($insert[1])) {
             return;
         }
@@ -183,7 +183,7 @@ class IdentifierQuoter
      */
     protected auto _quoteUpdate(Query myQuery): void
     {
-        myTable = myQuery.clause('update')[0];
+        myTable = myQuery.clause("update")[0];
 
         if (is_string(myTable)) {
             myQuery.update(this._driver.quoteIdentifier(myTable));
@@ -229,7 +229,7 @@ class IdentifierQuoter
 
                 return $part;
             }
-            if (is_string($part) && strpos($part, ' ') === false) {
+            if (is_string($part) && strpos($part, " ") === false) {
                 return this._driver.quoteIdentifier($part);
             }
 

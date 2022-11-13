@@ -18,7 +18,7 @@ class FunctionsBuilder
      */
     function rand(): FunctionExpression
     {
-        return new FunctionExpression('RAND', [], [], 'float');
+        return new FunctionExpression("RAND", [], [], "float");
     }
 
     /**
@@ -30,12 +30,12 @@ class FunctionsBuilder
      */
     function sum($expression, myTypes = []): AggregateExpression
     {
-        $returnType = 'float';
-        if (current(myTypes) === 'integer') {
-            $returnType = 'integer';
+        $returnType = "float";
+        if (current(myTypes) === "integer") {
+            $returnType = "integer";
         }
 
-        return this.aggregate('SUM', this.toLiteralParam($expression), myTypes, $returnType);
+        return this.aggregate("SUM", this.toLiteralParam($expression), myTypes, $returnType);
     }
 
     /**
@@ -47,7 +47,7 @@ class FunctionsBuilder
      */
     function avg($expression, myTypes = []): AggregateExpression
     {
-        return this.aggregate('AVG', this.toLiteralParam($expression), myTypes, 'float');
+        return this.aggregate("AVG", this.toLiteralParam($expression), myTypes, "float");
     }
 
     /**
@@ -59,7 +59,7 @@ class FunctionsBuilder
      */
     function max($expression, myTypes = []): AggregateExpression
     {
-        return this.aggregate('MAX', this.toLiteralParam($expression), myTypes, current(myTypes) ?: 'float');
+        return this.aggregate("MAX", this.toLiteralParam($expression), myTypes, current(myTypes) ?: "float");
     }
 
     /**
@@ -71,7 +71,7 @@ class FunctionsBuilder
      */
     function min($expression, myTypes = []): AggregateExpression
     {
-        return this.aggregate('MIN', this.toLiteralParam($expression), myTypes, current(myTypes) ?: 'float');
+        return this.aggregate("MIN", this.toLiteralParam($expression), myTypes, current(myTypes) ?: "float");
     }
 
     /**
@@ -83,7 +83,7 @@ class FunctionsBuilder
      */
     function count($expression, myTypes = []): AggregateExpression
     {
-        return this.aggregate('COUNT', this.toLiteralParam($expression), myTypes, 'integer');
+        return this.aggregate("COUNT", this.toLiteralParam($expression), myTypes, "integer");
     }
 
     /**
@@ -95,7 +95,7 @@ class FunctionsBuilder
      */
     function concat(array $args, array myTypes = []): FunctionExpression
     {
-        return new FunctionExpression('CONCAT', $args, myTypes, 'string');
+        return new FunctionExpression("CONCAT", $args, myTypes, "string");
     }
 
     /**
@@ -107,7 +107,7 @@ class FunctionsBuilder
      */
     function coalesce(array $args, array myTypes = []): FunctionExpression
     {
-        return new FunctionExpression('COALESCE', $args, myTypes, current(myTypes) ?: 'string');
+        return new FunctionExpression("COALESCE", $args, myTypes, current(myTypes) ?: "string");
     }
 
     /**
@@ -120,23 +120,23 @@ class FunctionsBuilder
      * @param string myType The SQL data type
      * @return \Cake\Database\Expression\FunctionExpression
      */
-    function cast(myField, string myType = ''): FunctionExpression
+    function cast(myField, string myType = ""): FunctionExpression
     {
         if (is_array(myField)) {
             deprecationWarning(
-                'Build cast function by FunctionsBuilder::cast(array $args) is deprecated. ' .
-                'Use FunctionsBuilder::cast(myField, string myType) instead.'
+                "Build cast function by FunctionsBuilder::cast(array $args) is deprecated. " .
+                "Use FunctionsBuilder::cast(myField, string myType) instead."
             );
 
-            return new FunctionExpression('CAST', myField);
+            return new FunctionExpression("CAST", myField);
         }
 
         if (empty(myType)) {
-            throw new InvalidArgumentException('The `myType` in a cast cannot be empty.');
+            throw new InvalidArgumentException("The `myType` in a cast cannot be empty.");
         }
 
-        $expression = new FunctionExpression('CAST', this.toLiteralParam(myField));
-        $expression.setConjunction(' AS').add([myType => 'literal']);
+        $expression = new FunctionExpression("CAST", this.toLiteralParam(myField));
+        $expression.setConjunction(" AS").add([myType => "literal"]);
 
         return $expression;
     }
@@ -151,7 +151,7 @@ class FunctionsBuilder
      */
     function dateDiff(array $args, array myTypes = []): FunctionExpression
     {
-        return new FunctionExpression('DATEDIFF', $args, myTypes, 'integer');
+        return new FunctionExpression("DATEDIFF", $args, myTypes, "integer");
     }
 
     /**
@@ -177,8 +177,8 @@ class FunctionsBuilder
      */
     function extract(string $part, $expression, array myTypes = []): FunctionExpression
     {
-        $expression = new FunctionExpression('EXTRACT', this.toLiteralParam($expression), myTypes, 'integer');
-        $expression.setConjunction(' FROM').add([$part => 'literal'], [], true);
+        $expression = new FunctionExpression("EXTRACT", this.toLiteralParam($expression), myTypes, "integer");
+        $expression.setConjunction(" FROM").add([$part => "literal"], [], true);
 
         return $expression;
     }
@@ -197,9 +197,9 @@ class FunctionsBuilder
         if (!is_numeric(myValue)) {
             myValue = 0;
         }
-        $interval = myValue . ' ' . $unit;
-        $expression = new FunctionExpression('DATE_ADD', this.toLiteralParam($expression), myTypes, 'datetime');
-        $expression.setConjunction(', INTERVAL').add([$interval => 'literal']);
+        $interval = myValue . " " . $unit;
+        $expression = new FunctionExpression("DATE_ADD", this.toLiteralParam($expression), myTypes, "datetime");
+        $expression.setConjunction(", INTERVAL").add([$interval => "literal"]);
 
         return $expression;
     }
@@ -214,7 +214,7 @@ class FunctionsBuilder
      */
     function dayOfWeek($expression, myTypes = []): FunctionExpression
     {
-        return new FunctionExpression('DAYOFWEEK', this.toLiteralParam($expression), myTypes, 'integer');
+        return new FunctionExpression("DAYOFWEEK", this.toLiteralParam($expression), myTypes, "integer");
     }
 
     /**
@@ -238,19 +238,19 @@ class FunctionsBuilder
      * @param string myType (datetime|date|time)
      * @return \Cake\Database\Expression\FunctionExpression
      */
-    function now(string myType = 'datetime'): FunctionExpression
+    function now(string myType = "datetime"): FunctionExpression
     {
-        if (myType === 'datetime') {
-            return new FunctionExpression('NOW', [], [], 'datetime');
+        if (myType === "datetime") {
+            return new FunctionExpression("NOW", [], [], "datetime");
         }
-        if (myType === 'date') {
-            return new FunctionExpression('CURRENT_DATE', [], [], 'date');
+        if (myType === "date") {
+            return new FunctionExpression("CURRENT_DATE", [], [], "date");
         }
-        if (myType === 'time') {
-            return new FunctionExpression('CURRENT_TIME', [], [], 'time');
+        if (myType === "time") {
+            return new FunctionExpression("CURRENT_TIME", [], [], "time");
         }
 
-        throw new InvalidArgumentException('Invalid argument for FunctionsBuilder::now(): ' . myType);
+        throw new InvalidArgumentException("Invalid argument for FunctionsBuilder::now(): " . myType);
     }
 
     /**
@@ -260,7 +260,7 @@ class FunctionsBuilder
      */
     function rowNumber(): AggregateExpression
     {
-        return (new AggregateExpression('ROW_NUMBER', [], [], 'integer')).over();
+        return (new AggregateExpression("ROW_NUMBER", [], [], "integer")).over();
     }
 
     /**
@@ -268,23 +268,23 @@ class FunctionsBuilder
      *
      * @param \Cake\Database\IExpression|string $expression The value evaluated at offset
      * @param int $offset The row offset
-     * @param mixed $default The default value if offset doesn't exist
+     * @param mixed $default The default value if offset doesn"t exist
      * @param string myType The output type of the lag expression. Defaults to float.
      * @return \Cake\Database\Expression\AggregateExpression
      */
     function lag($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
-        myParams = this.toLiteralParam($expression) + [$offset => 'literal'];
+        myParams = this.toLiteralParam($expression) + [$offset => "literal"];
         if ($default !== null) {
             myParams[] = $default;
         }
 
         myTypes = [];
         if (myType !== null) {
-            myTypes = [myType, 'integer', myType];
+            myTypes = [myType, "integer", myType];
         }
 
-        return (new AggregateExpression('LAG', myParams, myTypes, myType ?? 'float')).over();
+        return (new AggregateExpression("LAG", myParams, myTypes, myType ?? "float")).over();
     }
 
     /**
@@ -292,23 +292,23 @@ class FunctionsBuilder
      *
      * @param \Cake\Database\IExpression|string $expression The value evaluated at offset
      * @param int $offset The row offset
-     * @param mixed $default The default value if offset doesn't exist
+     * @param mixed $default The default value if offset doesn"t exist
      * @param string myType The output type of the lead expression. Defaults to float.
      * @return \Cake\Database\Expression\AggregateExpression
      */
     function lead($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
-        myParams = this.toLiteralParam($expression) + [$offset => 'literal'];
+        myParams = this.toLiteralParam($expression) + [$offset => "literal"];
         if ($default !== null) {
             myParams[] = $default;
         }
 
         myTypes = [];
         if (myType !== null) {
-            myTypes = [myType, 'integer', myType];
+            myTypes = [myType, "integer", myType];
         }
 
-        return (new AggregateExpression('LEAD', myParams, myTypes, myType ?? 'float')).over();
+        return (new AggregateExpression("LEAD", myParams, myTypes, myType ?? "float")).over();
     }
 
     /**
@@ -317,13 +317,13 @@ class FunctionsBuilder
      * @param string myName The SQL aggregate function name
      * @param array myParams Array of arguments to be passed to the function.
      *     Can be an associative array with the literal value or identifier:
-     *     `['value' => 'literal']` or `['value' => 'identifier']
+     *     `["value" => "literal"]` or `["value" => "identifier"]
      * @param array myTypes Array of types that match the names used in `myParams`:
-     *     `['name' => 'type']`
+     *     `["name" => "type"]`
      * @param string $return Return type of the entire expression. Defaults to float.
      * @return \Cake\Database\Expression\AggregateExpression
      */
-    function aggregate(string myName, array myParams = [], array myTypes = [], string $return = 'float') {
+    function aggregate(string myName, array myParams = [], array myTypes = [], string $return = "float") {
         return new AggregateExpression(myName, myParams, myTypes, $return);
     }
 
@@ -349,7 +349,7 @@ class FunctionsBuilder
      */
     protected auto toLiteralParam($expression) {
         if (is_string($expression)) {
-            return [$expression => 'literal'];
+            return [$expression => "literal"];
         }
 
         return [$expression];
