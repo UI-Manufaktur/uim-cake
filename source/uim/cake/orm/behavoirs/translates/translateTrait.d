@@ -1,4 +1,4 @@
-module uim.cake.orm.Behavior\Translate;
+module uim.cake.orm.behaviors\Translate;
 
 import uim.cake.datasources\IEntity;
 
