@@ -10,7 +10,7 @@ use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
  * handles the callback not returning a string.
  *
  * Ideally we can amend/update diactoros, but we need to figure
- * that out with the diactoros project. Until then we'll use this shim
+ * that out with the diactoros project. Until then we"ll use this shim
  * to provide backwards compatibility with existing CakePHP apps.
  *
  * @internal
@@ -19,13 +19,13 @@ class CallbackStream : BaseCallbackStream
 {
     string getContents() {
         $callback = this.detach();
-        myResult = '';
+        myResult = "";
         /** @psalm-suppress TypeDoesNotContainType */
         if ($callback !== null) {
             myResult = $callback();
         }
         if (!is_string(myResult)) {
-            return '';
+            return "";
         }
 
         return myResult;

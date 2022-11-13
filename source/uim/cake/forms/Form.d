@@ -17,7 +17,7 @@ import uim.cake.validations\ValidatorAwareTrait;
  *
  * This class is most useful when subclassed. In a subclass you
  * should define the `_buildSchema`, `validationDefault` and optionally,
- * the `_execute` methods. These allow you to declare your form's
+ * the `_execute` methods. These allow you to declare your form"s
  * fields, validation and primary action respectively.
  *
  * Forms are conventionally placed in the `App\Form` module.
@@ -32,21 +32,21 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * @var string
      */
-    public const DEFAULT_VALIDATOR = 'default';
+    public const DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      *
      * @var string
      */
-    public const VALIDATOR_PROVIDER_NAME = 'form';
+    public const VALIDATOR_PROVIDER_NAME = "form";
 
     /**
      * The name of the event dispatched when a validator has been built.
      *
      * @var string
      */
-    public const BUILD_VALIDATOR_EVENT = 'Form.buildValidator';
+    public const BUILD_VALIDATOR_EVENT = "Form.buildValidator";
 
     /**
      * Schema class.
@@ -71,7 +71,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     protected $_errors = [];
 
     /**
-     * Form's data.
+     * Form"s data.
      *
      * @var array
      */
@@ -90,11 +90,11 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
 
         this.getEventManager().on(this);
 
-        if (method_exists(this, '_buildValidator')) {
+        if (method_exists(this, "_buildValidator")) {
             deprecationWarning(
-                static::class . ' : `_buildValidator` which is no longer used. ' .
-                'You should implement `buildValidator(Validator $validator, string myName): void` ' .
-                'or `validationDefault(Validator $validator): Validator` instead.'
+                static::class . " : `_buildValidator` which is no longer used. " .
+                "You should implement `buildValidator(Validator $validator, string myName): void` " .
+                "or `validationDefault(Validator $validator): Validator` instead."
             );
         }
     }
@@ -110,9 +110,9 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      */
     function implementedEvents(): array
     {
-        if (method_exists(this, 'buildValidator')) {
+        if (method_exists(this, "buildValidator")) {
             return [
-                self::BUILD_VALIDATOR_EVENT => 'buildValidator',
+                self::BUILD_VALIDATOR_EVENT => "buildValidator",
             ];
         }
 
@@ -164,7 +164,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      */
     function schema(?Schema $schema = null): Schema
     {
-        deprecationWarning('Form::schema() is deprecated. Use setSchema() and getSchema() instead.');
+        deprecationWarning("Form::schema() is deprecated. Use setSchema() and getSchema() instead.");
         if ($schema !== null) {
             this.setSchema($schema);
         }
@@ -188,7 +188,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     }
 
     /**
-     * Used to check if myData passes this form's validation.
+     * Used to check if myData passes this form"s validation.
      *
      * @param array myData The data to check.
      * @param string|null $validator Validator name.
@@ -220,7 +220,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * ```
      * myErrors = [
-     *      'field_name' => ['rule_name' => 'message']
+     *      "field_name" => ["rule_name" => "message"]
      * ];
      *
      * $form.setErrors(myErrors);
@@ -246,7 +246,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * ### Options:
      *
      * - validate: Set to `false` to disable validation. Can also be a string of the validator ruleset to be applied.
-     *   Defaults to `true`/`'default'`.
+     *   Defaults to `true`/`"default"`.
      *
      * @param array myData Form data.
      * @param array myOptions List of options.
@@ -256,13 +256,13 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     bool execute(array myData, array myOptions = []) {
         this._data = myData;
 
-        myOptions += ['validate' => true];
+        myOptions += ["validate" => true];
 
-        if (myOptions['validate'] === false) {
+        if (myOptions["validate"] === false) {
             return this._execute(myData);
         }
 
-        $validator = myOptions['validate'] === true ? static::DEFAULT_VALIDATOR : myOptions['validate'];
+        $validator = myOptions["validate"] === true ? static::DEFAULT_VALIDATOR : myOptions["validate"];
 
         return this.validate(myData, $validator) ? this._execute(myData) : false;
     }
@@ -270,7 +270,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     /**
      * Hook method to be implemented in subclasses.
      *
-     * Used by `execute()` to execute the form's action.
+     * Used by `execute()` to execute the form"s action.
      *
      * @param array myData Form data.
      * @return bool
@@ -336,9 +336,9 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     auto __debugInfo(): array
     {
         $special = [
-            '_schema' => this.getSchema().__debugInfo(),
-            '_errors' => this.getErrors(),
-            '_validator' => this.getValidator().__debugInfo(),
+            "_schema" => this.getSchema().__debugInfo(),
+            "_errors" => this.getErrors(),
+            "_validator" => this.getValidator().__debugInfo(),
         ];
 
         return $special + get_object_vars(this);

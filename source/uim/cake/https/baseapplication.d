@@ -104,7 +104,7 @@ abstract class BaseApplication :
 
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
-        foreach (this.plugins.with('middleware') as myPlugin) {
+        foreach (this.plugins.with("middleware") as myPlugin) {
             $middleware = myPlugin.middleware($middleware);
         }
 
@@ -126,7 +126,7 @@ abstract class BaseApplication :
     /**
      * Add an optional plugin
      *
-     * If it isn't available, ignore it.
+     * If it isn"t available, ignore it.
      *
      * @param \Cake\Core\PluginInterface|string myName The plugin name or plugin object.
      * @param array<string, mixed> myConfig The configuration data for the plugin if using a string for myName
@@ -154,12 +154,12 @@ abstract class BaseApplication :
 
 
     void bootstrap() {
-        require_once this.configDir . 'bootstrap.php';
+        require_once this.configDir . "bootstrap.php";
     }
 
 
     void pluginBootstrap() {
-        foreach (this.plugins.with('bootstrap') as myPlugin) {
+        foreach (this.plugins.with("bootstrap") as myPlugin) {
             myPlugin.bootstrap(this);
         }
     }
@@ -175,7 +175,7 @@ abstract class BaseApplication :
     void routes(RouteBuilder $routes) {
         // Only load routes if the router is empty
         if (!Router::routes()) {
-            $return = require this.configDir . 'routes.php';
+            $return = require this.configDir . "routes.php";
             if ($return instanceof Closure) {
                 $return($routes);
             }
@@ -185,7 +185,7 @@ abstract class BaseApplication :
 
     function pluginRoutes(RouteBuilder $routes): RouteBuilder
     {
-        foreach (this.plugins.with('routes') as myPlugin) {
+        foreach (this.plugins.with("routes") as myPlugin) {
             myPlugin.routes($routes);
         }
 
@@ -209,7 +209,7 @@ abstract class BaseApplication :
 
     function pluginConsole(CommandCollection $commands): CommandCollection
     {
-        foreach (this.plugins.with('console') as myPlugin) {
+        foreach (this.plugins.with("console") as myPlugin) {
             $commands = myPlugin.console($commands);
         }
 
@@ -245,11 +245,11 @@ abstract class BaseApplication :
     {
         myContainer = new Container();
         this.services(myContainer);
-        foreach (this.plugins.with('services') as myPlugin) {
+        foreach (this.plugins.with("services") as myPlugin) {
             myPlugin.services(myContainer);
         }
 
-        myEvent = this.dispatchEvent('Application.buildContainer', ['container' => myContainer]);
+        myEvent = this.dispatchEvent("Application.buildContainer", ["container" => myContainer]);
         if (myEvent.getResult() instanceof IContainer) {
             return myEvent.getResult();
         }

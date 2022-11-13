@@ -35,7 +35,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      *   extend one of the listed exceptions will also not be logged. Example:
      *
      *   ```
-     *   'skipLog' => ['Cake\Error\NotFoundException', 'Cake\Error\UnauthorizedException']
+     *   "skipLog" => ["Cake\Error\NotFoundException", "Cake\Error\UnauthorizedException"]
      *   ```
      *
      * - `trace` Should error logs include stack traces?
@@ -46,10 +46,10 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'skipLog' => [],
-        'log' => true,
-        'trace' => false,
-        'exceptionRenderer' => ExceptionRenderer::class,
+        "skipLog" => [],
+        "log" => true,
+        "trace" => false,
+        "exceptionRenderer" => ExceptionRenderer::class,
     ];
 
     /**
@@ -69,15 +69,15 @@ class ErrorHandlerMiddleware : MiddlewareInterface
     this(myErrorHandler = []) {
         if (func_num_args() > 1) {
             deprecationWarning(
-                'The signature of ErrorHandlerMiddleware::this() has changed. '
-                . 'Pass the config array as 1st argument instead.'
+                "The signature of ErrorHandlerMiddleware::this() has changed. "
+                . "Pass the config array as 1st argument instead."
             );
 
             myErrorHandler = func_get_arg(1);
         }
 
-        if (PHP_VERSION_ID >= 70400 && Configure::read('debug')) {
-            ini_set('zend.exception_ignore_args', '0');
+        if (PHP_VERSION_ID >= 70400 && Configure::read("debug")) {
+            ini_set("zend.exception_ignore_args", "0");
         }
 
         if (is_array(myErrorHandler)) {
@@ -88,7 +88,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
 
         if (!myErrorHandler instanceof ErrorHandler) {
             throw new InvalidArgumentException(sprintf(
-                'myErrorHandler argument must be a config array or ErrorHandler instance. Got `%s` instead.',
+                "myErrorHandler argument must be a config array or ErrorHandler instance. Got `%s` instead.",
                 getTypeName(myErrorHandler)
             ));
         }
@@ -159,7 +159,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      */
     protected auto handleInternalError(): IResponse
     {
-        $response = new Response(['body' => 'An Internal Server Error Occurred']);
+        $response = new Response(["body" => "An Internal Server Error Occurred"]);
 
         return $response.withStatus(500);
     }
@@ -173,7 +173,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
     {
         if (this.errorHandler === null) {
             /** @var class-string<\Cake\Error\ErrorHandler> myClassName */
-            myClassName = App::className('ErrorHandler', 'Error');
+            myClassName = App::className("ErrorHandler", "Error");
             this.errorHandler = new myClassName(this.getConfig());
         }
 
