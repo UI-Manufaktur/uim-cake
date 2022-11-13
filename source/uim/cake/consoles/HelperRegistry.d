@@ -43,9 +43,9 @@ class HelperRegistry : ObjectRegistry
      */
     protected auto _resolveClassName(string myClass): Nullable!string
     {
-        myName = App::className(myClass, 'Command/Helper', 'Helper');
+        myName = App::className(myClass, "Command/Helper", "Helper");
         if (myName === null) {
-            return App::className(myClass, 'Shell/Helper', 'Helper');
+            return App::className(myClass, "Shell/Helper", "Helper");
         }
 
         return myName;
@@ -64,8 +64,8 @@ class HelperRegistry : ObjectRegistry
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingHelperException([
-            'class' => myClass,
-            'plugin' => myPlugin,
+            "class" => myClass,
+            "plugin" => myPlugin,
         ]);
     }
 

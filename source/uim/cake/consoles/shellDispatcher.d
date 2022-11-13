@@ -66,13 +66,13 @@ class ShellDispatcher
      * Aliasing a shell named ClassName:
      *
      * ```
-     * this.alias('alias', 'ClassName');
+     * this.alias("alias", "ClassName");
      * ```
      *
      * Getting the original name for a given alias:
      *
      * ```
-     * this.alias('alias');
+     * this.alias("alias");
      * ```
      *
      * @param string $short The new short name for the shell.
@@ -122,10 +122,10 @@ class ShellDispatcher
     {
         this._bootstrap();
 
-        if (function_exists('ini_set')) {
-            ini_set('html_errors', '0');
-            ini_set('implicit_flush', '1');
-            ini_set('max_execution_time', '0');
+        if (function_exists("ini_set")) {
+            ini_set("html_errors", "0");
+            ini_set("implicit_flush", "1");
+            ini_set("max_execution_time", "0");
         }
 
         this.shiftArgs();
@@ -137,8 +137,8 @@ class ShellDispatcher
      * @return void
      */
     protected auto _bootstrap() {
-        if (!Configure::read('App.fullBaseUrl')) {
-            Configure.write('App.fullBaseUrl', 'http://localhost');
+        if (!Configure::read("App.fullBaseUrl")) {
+            Configure.write("App.fullBaseUrl", "http://localhost");
         }
     }
 
@@ -195,12 +195,12 @@ class ShellDispatcher
 
             return false;
         }
-        if (in_array(myShellName, ['help', '--help', '-h'], true)) {
+        if (in_array(myShellName, ["help", "--help", "-h"], true)) {
             this.help();
 
             return true;
         }
-        if (in_array(myShellName, ['version', '--version'], true)) {
+        if (in_array(myShellName, ["version", "--version"], true)) {
             this.version();
 
             return true;
@@ -228,8 +228,8 @@ class ShellDispatcher
         $io = new ConsoleIo();
         $task = new CommandTask($io);
         $io.setLoggers(false);
-        $list = $task.getShellList() + ['app' => []];
-        $fixed = array_flip($list['app']) + array_flip($list['CORE']);
+        $list = $task.getShellList() + ["app" => []];
+        $fixed = array_flip($list["app"]) + array_flip($list["CORE"]);
         myAliases = $others = [];
 
         foreach (myPlugins as myPlugin) {
@@ -250,9 +250,9 @@ class ShellDispatcher
         foreach (myAliases as myShell => myPlugin) {
             if (isset($fixed[myShell])) {
                 Log::write(
-                    'debug',
-                    "command 'myShell' in plugin 'myPlugin' was not aliased, conflicts with another shell",
-                    ['shell-dispatcher']
+                    "debug",
+                    "command "myShell" in plugin "myPlugin" was not aliased, conflicts with another shell",
+                    ["shell-dispatcher"]
                 );
                 continue;
             }
@@ -261,9 +261,9 @@ class ShellDispatcher
             if ($other) {
                 if ($other !== myPlugin) {
                     Log::write(
-                        'debug',
-                        "command 'myShell' in plugin 'myPlugin' was not aliased, conflicts with '$other'",
-                        ['shell-dispatcher']
+                        "debug",
+                        "command "myShell" in plugin "myPlugin" was not aliased, conflicts with "$other"",
+                        ["shell-dispatcher"]
                     );
                 }
                 continue;
@@ -272,11 +272,11 @@ class ShellDispatcher
             if (isset($others[myShell])) {
                 $conflicts = array_diff($others[myShell], [myPlugin]);
                 if (count($conflicts) > 0) {
-                    $conflictList = implode("', '", $conflicts);
+                    $conflictList = implode("", "", $conflicts);
                     Log::write(
-                        'debug',
-                        "command 'myShell' in plugin 'myPlugin' was not aliased, conflicts with '$conflictList'",
-                        ['shell-dispatcher']
+                        "debug",
+                        "command "myShell" in plugin "myPlugin" was not aliased, conflicts with "$conflictList"",
+                        ["shell-dispatcher"]
                     );
                 }
             }
@@ -307,7 +307,7 @@ class ShellDispatcher
 
         if (!myClassName) {
             throw new MissingShellException([
-                'class' => myShell,
+                "class" => myShell,
             ]);
         }
 
@@ -326,9 +326,9 @@ class ShellDispatcher
             myShell = myAliased;
         }
 
-        myClass = array_map('Cake\Utility\Inflector::camelize', explode('.', myShell));
+        myClass = array_map("Cake\Utility\Inflector::camelize", explode(".", myShell));
 
-        return implode('.', myClass);
+        return implode(".", myClass);
     }
 
     /**
@@ -338,7 +338,7 @@ class ShellDispatcher
      * @return string|null Either the classname or null.
      */
     protected string _shellExists(string myShell) {
-        myClass = App::className(myShell, 'Shell', 'Shell');
+        myClass = App::className(myShell, "Shell", "Shell");
         if (myClass) {
             return myClass;
         }
@@ -358,7 +358,7 @@ class ShellDispatcher
         [myPlugin] = pluginSplit($shortName);
         /** @var \Cake\Console\Shell $instance */
         $instance = new myClassName();
-        $instance.plugin = trim((string)myPlugin, '.');
+        $instance.plugin = trim((string)myPlugin, ".");
 
         return $instance;
     }
@@ -380,8 +380,8 @@ class ShellDispatcher
     function help(): void
     {
         trigger_error(
-            'Console help cannot be generated from Shell classes anymore. ' .
-            'Upgrade your application to import uim.cake.console.commandRunner instead.',
+            "Console help cannot be generated from Shell classes anymore. " .
+            "Upgrade your application to import uim.cake.console.commandRunner instead.",
             E_USER_WARNING
         );
     }
@@ -394,8 +394,8 @@ class ShellDispatcher
     function version(): void
     {
         trigger_error(
-            'Version information cannot be generated from Shell classes anymore. ' .
-            'Upgrade your application to import uim.cake.console.commandRunner instead.',
+            "Version information cannot be generated from Shell classes anymore. " .
+            "Upgrade your application to import uim.cake.console.commandRunner instead.",
             E_USER_WARNING
         );
     }

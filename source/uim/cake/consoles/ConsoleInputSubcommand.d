@@ -26,14 +26,14 @@ class ConsoleInputSubCommand {
      *
      * @var string
      */
-    protected $_name = '';
+    protected $_name = "";
 
     /**
      * Help string for the subcommand
      *
      * @var string
      */
-    protected $_help = '';
+    protected $_help = "";
 
     /**
      * The ConsoleOptionParser for this subcommand.
@@ -50,20 +50,20 @@ class ConsoleInputSubCommand {
      * @param \Cake\Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
-    this(myName, $help = '', $parser = null) {
+    this(myName, $help = "", $parser = null) {
         if (is_array(myName)) {
-            myData = myName + ['name' => null, 'help' => '', 'parser' => null];
-            if (empty(myData['name'])) {
-                throw new InvalidArgumentException('"name" not provided for console option parser');
+            myData = myName + ["name" => null, "help" => "", "parser" => null];
+            if (empty(myData["name"])) {
+                throw new InvalidArgumentException(""name" not provided for console option parser");
             }
 
-            myName = myData['name'];
-            $help = myData['help'];
-            $parser = myData['parser'];
+            myName = myData["name"];
+            $help = myData["help"];
+            $parser = myData["parser"];
         }
 
         if (is_array($parser)) {
-            $parser['command'] = myName;
+            $parser["command"] = myName;
             $parser = ConsoleOptionParser::buildFromArray($parser);
         }
 
@@ -96,7 +96,7 @@ class ConsoleInputSubCommand {
     string help(int $width = 0) {
         myName = this._name;
         if (strlen(myName) < $width) {
-            myName = str_pad(myName, $width, ' ');
+            myName = str_pad(myName, $width, " ");
         }
 
         return myName . this._help;
@@ -120,9 +120,9 @@ class ConsoleInputSubCommand {
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $command = $parent.addChild('command');
-        $command.addAttribute('name', this._name);
-        $command.addAttribute('help', this._help);
+        $command = $parent.addChild("command");
+        $command.addAttribute("name", this._name);
+        $command.addAttribute("help", this._help);
 
         return $parent;
     }

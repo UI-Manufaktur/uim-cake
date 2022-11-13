@@ -156,7 +156,7 @@ class Shell {
      *
      * @var string
      */
-    protected $rootName = 'cake';
+    protected $rootName = "cake";
 
     /**
      * Constructs this Shell instance.
@@ -168,17 +168,17 @@ class Shell {
     this(?ConsoleIo $io = null, ?ILocator $locator = null) {
         if (!this.name) {
             [, myClass] = moduleSplit(static::class);
-            this.name = str_replace(['Shell', 'Task'], '', myClass);
+            this.name = str_replace(["Shell", "Task"], "", myClass);
         }
         this._io = $io ?: new ConsoleIo();
         this._tableLocator = $locator;
 
-        this.modelFactory('Table', [this.getTableLocator(), 'get']);
+        this.modelFactory("Table", [this.getTableLocator(), "get"]);
         this.Tasks = new TaskRegistry(this);
 
         this._mergeVars(
-            ['tasks'],
-            ['associative' => ['tasks']]
+            ["tasks"],
+            ["associative" => ["tasks"]]
         );
 
         if (isset(this.modelClass)) {
@@ -241,7 +241,7 @@ class Shell {
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::startup
      */
     void startup() {
-        if (!this.param('requested')) {
+        if (!this.param("requested")) {
             this._welcome();
         }
     }
@@ -279,10 +279,10 @@ class Shell {
      */
     protected void _validateTasks() {
         foreach (this._taskMap as $taskName => $task) {
-            myClass = App::className($task['class'], 'Shell/Task', 'Task');
+            myClass = App::className($task["class"], "Shell/Task", "Task");
             if (myClass === null) {
                 throw new RuntimeException(sprintf(
-                    'Task `%s` not found. Maybe you made a typo or a plugin is missing or not loaded?',
+                    "Task `%s` not found. Maybe you made a typo or a plugin is missing or not loaded?",
                     $taskName
                 ));
             }
@@ -329,7 +329,7 @@ class Shell {
      * With a string command:
      *
      * ```
-     * return this.dispatchShell('schema create DbAcl');
+     * return this.dispatchShell("schema create DbAcl");
      * ```
      *
      * Avoid using this form if you have string arguments, with spaces in them.
@@ -339,7 +339,7 @@ class Shell {
      * With an array command:
      *
      * ```
-     * return this.dispatchShell('schema', 'create', 'i18n', '--dry');
+     * return this.dispatchShell("schema", "create", "i18n", "--dry");
      * ```
      *
      * With an array having two key / value pairs:
@@ -349,15 +349,15 @@ class Shell {
      *    parameters will be available in the `param` property of the called `Shell`
      *
      * `return this.dispatchShell([
-     *      'command' => 'schema create DbAcl',
-     *      'extra' => ['param' => 'value']
+     *      "command" => "schema create DbAcl",
+     *      "extra" => ["param" => "value"]
      * ]);`
      *
      * or
      *
      * `return this.dispatchShell([
-     *      'command' => ['schema', 'create', 'DbAcl'],
-     *      'extra' => ['param' => 'value']
+     *      "command" => ["schema", "create", "DbAcl"],
+     *      "extra" => ["param" => "value"]
      * ]);`
      *
      * @return int The CLI command exit code. 0 is success.
@@ -367,7 +367,7 @@ class Shell {
     {
         [$args, $extra] = this.parseDispatchArguments(func_get_args());
 
-        $extra['requested'] = $extra['requested'] ?? true;
+        $extra["requested"] = $extra["requested"] ?? true;
         /** @psalm-suppress DeprecatedClass */
         $dispatcher = new ShellDispatcher($args, false);
 
@@ -387,19 +387,19 @@ class Shell {
         $extra = [];
 
         if (is_string($args[0]) && count($args) === 1) {
-            $args = explode(' ', $args[0]);
+            $args = explode(" ", $args[0]);
 
             return [$args, $extra];
         }
 
-        if (is_array($args[0]) && !empty($args[0]['command'])) {
-            $command = $args[0]['command'];
+        if (is_array($args[0]) && !empty($args[0]["command"])) {
+            $command = $args[0]["command"];
             if (is_string($command)) {
-                $command = explode(' ', $command);
+                $command = explode(" ", $command);
             }
 
-            if (!empty($args[0]['extra'])) {
-                $extra = $args[0]['extra'];
+            if (!empty($args[0]["extra"])) {
+                $extra = $args[0]["extra"];
             }
 
             return [$command, $extra];
@@ -442,7 +442,7 @@ class Shell {
         try {
             [this.params, this.args] = this.OptionParser.parse($argv);
         } catch (ConsoleException $e) {
-            this.err('Error: ' . $e.getMessage());
+            this.err("Error: " . $e.getMessage());
 
             return false;
         }
@@ -450,7 +450,7 @@ class Shell {
         this.params = array_merge(this.params, $extra);
         this._setOutputLevel();
         this.command = $command;
-        if ($command && !empty(this.params['help'])) {
+        if ($command && !empty(this.params["help"])) {
             return this._displayHelp($command);
         }
 
@@ -475,21 +475,21 @@ class Shell {
             this.startup();
             array_shift($argv);
 
-            return this.{$method}.runCommand($argv, false, ['requested' => true]);
+            return this.{$method}.runCommand($argv, false, ["requested" => true]);
         }
 
-        if (this.hasMethod('main')) {
-            this.command = 'main';
+        if (this.hasMethod("main")) {
+            this.command = "main";
             this.startup();
 
             return this.main(...this.args);
         }
 
-        this.err('No subcommand provided. Choose one of the available subcommands.', 2);
+        this.err("No subcommand provided. Choose one of the available subcommands.", 2);
         try {
             this._io.err(this.OptionParser.help($command));
         } catch (ConsoleException $e) {
-            this.err('Error: ' . $e.getMessage());
+            this.err("Error: " . $e.getMessage());
         }
 
         return false;
@@ -505,11 +505,11 @@ class Shell {
      */
     protected void _setOutputLevel() {
         this._io.setLoggers(ConsoleIo::NORMAL);
-        if (!empty(this.params['quiet'])) {
+        if (!empty(this.params["quiet"])) {
             this._io.level(ConsoleIo::QUIET);
             this._io.setLoggers(ConsoleIo::QUIET);
         }
-        if (!empty(this.params['verbose'])) {
+        if (!empty(this.params["verbose"])) {
             this._io.level(ConsoleIo::VERBOSE);
             this._io.setLoggers(ConsoleIo::VERBOSE);
         }
@@ -522,9 +522,9 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      */
     protected auto _displayHelp(Nullable!string $command = null) {
-        $format = 'text';
-        if (!empty(this.args[0]) && this.args[0] === 'xml') {
-            $format = 'xml';
+        $format = "text";
+        if (!empty(this.args[0]) && this.args[0] === "xml") {
+            $format = "xml";
             this._io.setOutputAs(ConsoleOutput::RAW);
         } else {
             this._welcome();
@@ -548,7 +548,7 @@ class Shell {
      */
     auto getOptionParser(): ConsoleOptionParser
     {
-        myName = (this.plugin ? this.plugin . '.' : '') . this.name;
+        myName = (this.plugin ? this.plugin . "." : "") . this.name;
         $parser = new ConsoleOptionParser(myName);
         $parser.setRootName(this.rootName);
 
@@ -564,7 +564,7 @@ class Shell {
     auto __get(string myName) {
         if (empty(this.{myName}) && in_array(myName, this.taskNames, true)) {
             $properties = this._taskMap[myName];
-            this.{myName} = this.Tasks.load($properties['class'], $properties['config']);
+            this.{myName} = this.Tasks.load($properties["class"], $properties["config"]);
             this.{myName}.args = &this.args;
             this.{myName}.params = &this.params;
             this.{myName}.initialize();
@@ -578,7 +578,7 @@ class Shell {
      * Safely access the values in this.params.
      *
      * @param string myName The name of the parameter to get.
-     * @return string|bool|null Value. Will return null if it doesn't exist.
+     * @return string|bool|null Value. Will return null if it doesn"t exist.
      */
     function param(string myName) {
         return this.params[myName] ?? null;
@@ -662,7 +662,7 @@ class Shell {
      *
      * @param array<string>|string myMessage A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @param int $level The message's output level, see above.
+     * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
@@ -689,7 +689,7 @@ class Shell {
      *
      * @param array<string>|string myMessage A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @param int $level The message's output level, see above.
+     * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
@@ -716,7 +716,7 @@ class Shell {
      *
      * @param array<string>|string myMessage A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @param int $level The message's output level, see above.
+     * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
@@ -760,7 +760,7 @@ class Shell {
      * @psalm-return never-return
      */
     void abort(string myMessage, int $exitCode = self::CODE_ERROR) {
-        this._io.err('<error>' . myMessage . '</error>');
+        this._io.err("<error>" . myMessage . "</error>");
         throw new StopException(myMessage, $exitCode);
     }
 
@@ -772,14 +772,14 @@ class Shell {
      */
     function clear(): void
     {
-        if (!empty(this.params['noclear'])) {
+        if (!empty(this.params["noclear"])) {
             return;
         }
 
-        if (DIRECTORY_SEPARATOR === '/') {
-            passthru('clear');
+        if (DIRECTORY_SEPARATOR === "/") {
+            passthru("clear");
         } else {
-            passthru('cls');
+            passthru("cls");
         }
     }
 
@@ -797,42 +797,42 @@ class Shell {
         this._io.out();
 
         myfileExists = is_file(myPath);
-        if (myfileExists && empty(this.params['force']) && !this.interactive) {
-            this._io.out('<warning>File exists, skipping</warning>.');
+        if (myfileExists && empty(this.params["force"]) && !this.interactive) {
+            this._io.out("<warning>File exists, skipping</warning>.");
 
             return false;
         }
 
-        if (myfileExists && this.interactive && empty(this.params['force'])) {
-            this._io.out(sprintf('<warning>File `%s` exists</warning>', myPath));
-            myKey = this._io.askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
+        if (myfileExists && this.interactive && empty(this.params["force"])) {
+            this._io.out(sprintf("<warning>File `%s` exists</warning>", myPath));
+            myKey = this._io.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
 
-            if (strtolower(myKey) === 'q') {
-                this._io.out('<error>Quitting</error>.', 2);
+            if (strtolower(myKey) === "q") {
+                this._io.out("<error>Quitting</error>.", 2);
                 this._stop();
 
                 return false;
             }
-            if (strtolower(myKey) === 'a') {
-                this.params['force'] = true;
-                myKey = 'y';
+            if (strtolower(myKey) === "a") {
+                this.params["force"] = true;
+                myKey = "y";
             }
-            if (strtolower(myKey) !== 'y') {
-                this._io.out(sprintf('Skip `%s`', myPath), 2);
+            if (strtolower(myKey) !== "y") {
+                this._io.out(sprintf("Skip `%s`", myPath), 2);
 
                 return false;
             }
         } else {
-            this.out(sprintf('Creating file %s', myPath));
+            this.out(sprintf("Creating file %s", myPath));
         }
 
         try {
             $fs = new Filesystem();
             $fs.dumpFile(myPath, myContentss);
 
-            this._io.out(sprintf('<success>Wrote</success> `%s`', myPath));
+            this._io.out(sprintf("<success>Wrote</success> `%s`", myPath));
         } catch (CakeException $e) {
-            this._io.err(sprintf('<error>Could not write to `%s`</error>.', myPath), 2);
+            this._io.err(sprintf("<error>Could not write to `%s`</error>.", myPath), 2);
 
             return false;
         }
@@ -848,11 +848,11 @@ class Shell {
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::shortPath
      */
     string shortPath(string absoluteFilePath) {
-        $shortPath = str_replace(ROOT, '', absoluteFilePath);
-        $shortPath = str_replace('..' . DIRECTORY_SEPARATOR, '', $shortPath);
-        $shortPath = str_replace(DIRECTORY_SEPARATOR, '/', $shortPath);
+        $shortPath = str_replace(ROOT, "", absoluteFilePath);
+        $shortPath = str_replace(".." . DIRECTORY_SEPARATOR, "", $shortPath);
+        $shortPath = str_replace(DIRECTORY_SEPARATOR, "/", $shortPath);
 
-        return str_replace('//', DIRECTORY_SEPARATOR, $shortPath);
+        return str_replace("//", DIRECTORY_SEPARATOR, $shortPath);
     }
 
     /**
@@ -880,7 +880,7 @@ class Shell {
      */
     protected auto _stop(int $status = self::CODE_SUCCESS): void
     {
-        throw new StopException('Halting error reached', $status);
+        throw new StopException("Halting error reached", $status);
     }
 
     /**
@@ -892,13 +892,13 @@ class Shell {
     auto __debugInfo(): array
     {
         return [
-            'name' => this.name,
-            'plugin' => this.plugin,
-            'command' => this.command,
-            'tasks' => this.tasks,
-            'params' => this.params,
-            'args' => this.args,
-            'interactive' => this.interactive,
+            "name" => this.name,
+            "plugin" => this.plugin,
+            "command" => this.command,
+            "tasks" => this.tasks,
+            "params" => this.params,
+            "args" => this.args,
+            "interactive" => this.interactive,
         ];
     }
 }

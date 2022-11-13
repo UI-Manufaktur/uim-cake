@@ -7,10 +7,10 @@ use SimpleXMLElement;
  * HelpFormatter formats help for console shells. Can format to either
  * text or XML formats. Uses ConsoleOptionParser methods to generate help.
  *
- * Generally not directly used. Using $parser.help($command, 'xml'); is usually
+ * Generally not directly used. Using $parser.help($command, "xml"); is usually
  * how you would access help. Or via the `--help=xml` option on the command line.
  *
- * Xml output is useful for integration with other tools like IDE's or other build tools.
+ * Xml output is useful for integration with other tools like IDE"s or other build tools.
  */
 class HelpFormatter
 {
@@ -40,7 +40,7 @@ class HelpFormatter
      *
      * @var string
      */
-    protected $_alias = 'cake';
+    protected $_alias = "cake";
 
     /**
      * Build the help formatter for an OptionParser
@@ -72,64 +72,64 @@ class HelpFormatter
         $description = $parser.getDescription();
         if (!empty($description)) {
             $out[] = Text::wrap($description, $width);
-            $out[] = '';
+            $out[] = "";
         }
-        $out[] = '<info>Usage:</info>';
+        $out[] = "<info>Usage:</info>";
         $out[] = this._generateUsage();
-        $out[] = '';
+        $out[] = "";
         $subcommands = $parser.subcommands();
         if (!empty($subcommands)) {
-            $out[] = '<info>Subcommands:</info>';
-            $out[] = '';
+            $out[] = "<info>Subcommands:</info>";
+            $out[] = "";
             $max = this._getMaxLength($subcommands) + 2;
             foreach ($subcommands as $command) {
                 $out[] = Text::wrapBlock($command.help($max), [
-                    'width' => $width,
-                    'indent' => str_repeat(' ', $max),
-                    'indentAt' => 1,
+                    "width" => $width,
+                    "indent" => str_repeat(" ", $max),
+                    "indentAt" => 1,
                 ]);
             }
-            $out[] = '';
+            $out[] = "";
             $out[] = sprintf(
-                'To see help on a subcommand use <info>`' . this._alias . ' %s [subcommand] --help`</info>',
+                "To see help on a subcommand use <info>`" . this._alias . " %s [subcommand] --help`</info>",
                 $parser.getCommand()
             );
-            $out[] = '';
+            $out[] = "";
         }
 
         myOptions = $parser.options();
         if (myOptions) {
             $max = this._getMaxLength(myOptions) + 8;
-            $out[] = '<info>Options:</info>';
-            $out[] = '';
+            $out[] = "<info>Options:</info>";
+            $out[] = "";
             foreach (myOptions as $option) {
                 $out[] = Text::wrapBlock($option.help($max), [
-                    'width' => $width,
-                    'indent' => str_repeat(' ', $max),
-                    'indentAt' => 1,
+                    "width" => $width,
+                    "indent" => str_repeat(" ", $max),
+                    "indentAt" => 1,
                 ]);
             }
-            $out[] = '';
+            $out[] = "";
         }
 
         $arguments = $parser.arguments();
         if (!empty($arguments)) {
             $max = this._getMaxLength($arguments) + 2;
-            $out[] = '<info>Arguments:</info>';
-            $out[] = '';
+            $out[] = "<info>Arguments:</info>";
+            $out[] = "";
             foreach ($arguments as $argument) {
                 $out[] = Text::wrapBlock($argument.help($max), [
-                    'width' => $width,
-                    'indent' => str_repeat(' ', $max),
-                    'indentAt' => 1,
+                    "width" => $width,
+                    "indent" => str_repeat(" ", $max),
+                    "indentAt" => 1,
                 ]);
             }
-            $out[] = '';
+            $out[] = "";
         }
         $epilog = $parser.getEpilog();
         if (!empty($epilog)) {
             $out[] = Text::wrap($epilog, $width);
-            $out[] = '';
+            $out[] = "";
         }
 
         return implode("\n", $out);
@@ -141,17 +141,17 @@ class HelpFormatter
      * be indicated with []
      */
     protected string _generateUsage() {
-        $usage = [this._alias . ' ' . this._parser.getCommand()];
+        $usage = [this._alias . " " . this._parser.getCommand()];
         $subcommands = this._parser.subcommands();
         if (!empty($subcommands)) {
-            $usage[] = '[subcommand]';
+            $usage[] = "[subcommand]";
         }
         myOptions = [];
         foreach (this._parser.options() as $option) {
             myOptions[] = $option.usage();
         }
         if (count(myOptions) > this._maxOptions) {
-            myOptions = ['[options]'];
+            myOptions = ["[options]"];
         }
         $usage = array_merge($usage, myOptions);
         $args = [];
@@ -159,11 +159,11 @@ class HelpFormatter
             $args[] = $argument.usage();
         }
         if (count($args) > this._maxArgs) {
-            $args = ['[arguments]'];
+            $args = ["[arguments]"];
         }
         $usage = array_merge($usage, $args);
 
-        return implode(' ', $usage);
+        return implode(" ", $usage);
     }
 
     /**
@@ -190,23 +190,23 @@ class HelpFormatter
      */
     function xml(bool $string = true) {
         $parser = this._parser;
-        $xml = new SimpleXMLElement('<shell></shell>');
-        $xml.addChild('command', $parser.getCommand());
-        $xml.addChild('description', $parser.getDescription());
+        $xml = new SimpleXMLElement("<shell></shell>");
+        $xml.addChild("command", $parser.getCommand());
+        $xml.addChild("description", $parser.getDescription());
 
-        $subcommands = $xml.addChild('subcommands');
+        $subcommands = $xml.addChild("subcommands");
         foreach ($parser.subcommands() as $command) {
             $command.xml($subcommands);
         }
-        myOptions = $xml.addChild('options');
+        myOptions = $xml.addChild("options");
         foreach ($parser.options() as $option) {
             $option.xml(myOptions);
         }
-        $arguments = $xml.addChild('arguments');
+        $arguments = $xml.addChild("arguments");
         foreach ($parser.arguments() as $argument) {
             $argument.xml($arguments);
         }
-        $xml.addChild('epilog', $parser.getEpilog());
+        $xml.addChild("epilog", $parser.getEpilog());
 
         return $string ? (string)$xml.asXML() : $xml;
     }

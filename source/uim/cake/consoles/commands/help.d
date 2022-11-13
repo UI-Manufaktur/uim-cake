@@ -41,7 +41,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
             $commands.ksort();
         }
 
-        if ($args.getOption('xml')) {
+        if ($args.getOption("xml")) {
             this.asXml($io, $commands);
 
             return static::CODE_SUCCESS;
@@ -74,21 +74,21 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
         myGrouped = [];
         myPlugins = Plugin::loaded();
         foreach ($invert as myClass => myNames) {
-            preg_match('/^(.+)\\\\(Command|Shell)\\\\/', myClass, $matches);
+            preg_match("/^(.+)\\\\(Command|Shell)\\\\/", myClass, $matches);
             // Probably not a useful class
             if (empty($matches)) {
                 continue;
             }
-            $module = str_replace('\\', '/', $matches[1]);
-            $prefix = 'App';
-            if ($module === 'Cake') {
-                $prefix = 'CakePHP';
+            $module = str_replace("\\", "/", $matches[1]);
+            $prefix = "App";
+            if ($module === "Cake") {
+                $prefix = "CakePHP";
             } elseif (in_array($module, myPlugins, true)) {
                 $prefix = $module;
             }
             $shortestName = this.getShortestName(myNames);
-            if (strpos($shortestName, '.') !== false) {
-                [, $shortestName] = explode('.', $shortestName, 2);
+            if (strpos($shortestName, ".") !== false) {
+                [, $shortestName] = explode(".", $shortestName, 2);
             }
 
             myGrouped[$prefix][] = $shortestName;
@@ -96,15 +96,15 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
         ksort(myGrouped);
 
         this.outputPaths($io);
-        $io.out('<info>Available Commands:</info>', 2);
+        $io.out("<info>Available Commands:</info>", 2);
 
         foreach (myGrouped as $prefix => myNames) {
             $io.out("<info>{$prefix}</info>:");
             sort(myNames);
             foreach (myNames as myName) {
-                $io.out(' - ' . myName);
+                $io.out(" - " . myName);
             }
-            $io.out('');
+            $io.out("");
         }
         $root = this.getRootName();
 
@@ -121,25 +121,25 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
     protected auto outputPaths(ConsoleIo $io): void
     {
         myPaths = [];
-        if (Configure::check('App.dir')) {
-            $appPath = rtrim(Configure::read('App.dir'), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (Configure::check("App.dir")) {
+            $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             // Extra space is to align output
-            myPaths['app'] = ' ' . $appPath;
+            myPaths["app"] = " " . $appPath;
         }
-        if (defined('ROOT')) {
-            myPaths['root'] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (defined("ROOT")) {
+            myPaths["root"] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
-        if (defined('CORE_PATH')) {
-            myPaths['core'] = rtrim(CORE_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (defined("CORE_PATH")) {
+            myPaths["core"] = rtrim(CORE_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
         if (!count(myPaths)) {
             return;
         }
-        $io.out('<info>Current Paths:</info>', 2);
+        $io.out("<info>Current Paths:</info>", 2);
         foreach (myPaths as myKey => myValue) {
             $io.out("* {myKey}: {myValue}");
         }
-        $io.out('');
+        $io.out("");
     }
 
     /**
@@ -167,16 +167,16 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      */
     protected auto asXml(ConsoleIo $io, iterable $commands): void
     {
-        myShells = new SimpleXMLElement('<shells></shells>');
+        myShells = new SimpleXMLElement("<shells></shells>");
         foreach ($commands as myName => myClass) {
             if (is_object(myClass)) {
                 myClass = get_class(myClass);
             }
-            myShell = myShells.addChild('shell');
-            myShell.addAttribute('name', myName);
-            myShell.addAttribute('call_as', myName);
-            myShell.addAttribute('provider', myClass);
-            myShell.addAttribute('help', myName . ' -h');
+            myShell = myShells.addChild("shell");
+            myShell.addAttribute("name", myName);
+            myShell.addAttribute("call_as", myName);
+            myShell.addAttribute("provider", myClass);
+            myShell.addAttribute("help", myName . " -h");
         }
         $io.setOutputAs(ConsoleOutput::RAW);
         $io.out(myShells.saveXML());
@@ -191,10 +191,10 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
     protected auto buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Get the list of available commands for this application.'
-        ).addOption('xml', [
-            'help' => 'Get the listing as XML.',
-            'boolean' => true,
+            "Get the list of available commands for this application."
+        ).addOption("xml", [
+            "help" => "Get the listing as XML.",
+            "boolean" => true,
         ]);
 
         return $parser;

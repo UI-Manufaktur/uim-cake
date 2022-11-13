@@ -39,7 +39,7 @@ class TaskRegistry : ObjectRegistry
      */
     protected auto _resolveClassName(string myClass): Nullable!string
     {
-        return App::className(myClass, 'Shell/Task', 'Task');
+        return App::className(myClass, "Shell/Task", "Task");
     }
 
     /**
@@ -56,8 +56,8 @@ class TaskRegistry : ObjectRegistry
     protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
     {
         throw new MissingTaskException([
-            'class' => myClass,
-            'plugin' => myPlugin,
+            "class" => myClass,
+            "plugin" => myPlugin,
         ]);
     }
 

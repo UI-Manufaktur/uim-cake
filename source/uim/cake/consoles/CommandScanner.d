@@ -22,16 +22,16 @@ class CommandScanner
     function scanCore(): array
     {
         $coreShells = this.scanDir(
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Shell' . DIRECTORY_SEPARATOR,
-            'Cake\Shell\\',
-            '',
-            ['command_list']
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . "Shell" . DIRECTORY_SEPARATOR,
+            "Cake\Shell\\",
+            "",
+            ["command_list"]
         );
         $coreCommands = this.scanDir(
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Command' . DIRECTORY_SEPARATOR,
-            'Cake\Command\\',
-            '',
-            ['command_list']
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . "Command" . DIRECTORY_SEPARATOR,
+            "Cake\Command\\",
+            "",
+            ["command_list"]
         );
 
         return array_merge($coreShells, $coreCommands);
@@ -44,17 +44,17 @@ class CommandScanner
      */
     function scanApp(): array
     {
-        $appmodule = Configure::read('App.module');
+        $appmodule = Configure::read("App.module");
         $appShells = this.scanDir(
-            App::classPath('Shell')[0],
-            $appmodule . '\Shell\\',
-            '',
+            App::classPath("Shell")[0],
+            $appmodule . "\Shell\\",
+            "",
             []
         );
         $appCommands = this.scanDir(
-            App::classPath('Command')[0],
-            $appmodule . '\Command\\',
-            '',
+            App::classPath("Command")[0],
+            $appmodule . "\Command\\",
+            "",
             []
         );
 
@@ -73,11 +73,11 @@ class CommandScanner
             return [];
         }
         myPath = Plugin::classPath(myPlugin);
-        $module = str_replace('/', '\\', myPlugin);
-        $prefix = Inflector::underscore(myPlugin) . '.';
+        $module = str_replace("/", "\\", myPlugin);
+        $prefix = Inflector::underscore(myPlugin) . ".";
 
-        $commands = this.scanDir(myPath . 'Command', $module . '\Command\\', $prefix, []);
-        myShells = this.scanDir(myPath . 'Shell', $module . '\Shell\\', $prefix, []);
+        $commands = this.scanDir(myPath . "Command", $module . "\Command\\", $prefix, []);
+        myShells = this.scanDir(myPath . "Shell", $module . "\Shell\\", $prefix, []);
 
         return array_merge(myShells, $commands);
     }
@@ -99,9 +99,9 @@ class CommandScanner
         }
 
         // This ensures `Command` class is not added to the list.
-        $hide[] = '';
+        $hide[] = "";
 
-        myClassPattern = '/(Shell|Command)\.php$/';
+        myClassPattern = "/(Shell|Command)\.php$/";
         $fs = new Filesystem();
         /** @var array<\SplFileInfo> myfiles */
         myfiles = $fs.find(myPath, myClassPattern);
@@ -110,12 +110,12 @@ class CommandScanner
         foreach (myfiles as myfileInfo) {
             myfile = myfileInfo.getFilename();
 
-            myName = Inflector::underscore(preg_replace(myClassPattern, '', myfile));
+            myName = Inflector::underscore(preg_replace(myClassPattern, "", myfile));
             if (in_array(myName, $hide, true)) {
                 continue;
             }
 
-            myClass = $module . myfileInfo.getBasename('.php');
+            myClass = $module . myfileInfo.getBasename(".php");
             /** @psalm-suppress DeprecatedClass */
             if (
                 !is_subclass_of(myClass, Shell::class)
@@ -127,10 +127,10 @@ class CommandScanner
                 myName = myClass::defaultName();
             }
             myShells[myPath . myfile] = [
-                'file' => myPath . myfile,
-                'fullName' => $prefix . myName,
-                'name' => myName,
-                'class' => myClass,
+                "file" => myPath . myfile,
+                "fullName" => $prefix . myName,
+                "name" => myName,
+                "class" => myClass,
             ];
         }
 

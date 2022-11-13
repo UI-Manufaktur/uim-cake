@@ -22,10 +22,10 @@ use InvalidArgumentException;
  * You can format console output using tags with the name of the style to apply. From inside a shell object
  *
  * ```
- * this.out('<warning>Overwrite:</warning> foo.php was overwritten.');
+ * this.out("<warning>Overwrite:</warning> foo.php was overwritten.");
  * ```
  *
- * This would create orange 'Overwrite:' text, while the rest of the text would remain the normal color.
+ * This would create orange "Overwrite:" text, while the rest of the text would remain the normal color.
  * See ConsoleOutput::styles() to learn more about defining your own styles. Nested styles are not supported
  * at this time.
  */
@@ -80,14 +80,14 @@ class ConsoleOutput
      * @var array<string, int>
      */
     protected static $_foregroundColors = [
-        'black' => 30,
-        'red' => 31,
-        'green' => 32,
-        'yellow' => 33,
-        'blue' => 34,
-        'magenta' => 35,
-        'cyan' => 36,
-        'white' => 37,
+        "black" => 30,
+        "red" => 31,
+        "green" => 32,
+        "yellow" => 33,
+        "blue" => 34,
+        "magenta" => 35,
+        "cyan" => 36,
+        "white" => 37,
     ];
 
     /**
@@ -96,14 +96,14 @@ class ConsoleOutput
      * @var array<string, int>
      */
     protected static $_backgroundColors = [
-        'black' => 40,
-        'red' => 41,
-        'green' => 42,
-        'yellow' => 43,
-        'blue' => 44,
-        'magenta' => 45,
-        'cyan' => 46,
-        'white' => 47,
+        "black" => 40,
+        "red" => 41,
+        "green" => 42,
+        "yellow" => 43,
+        "blue" => 44,
+        "magenta" => 45,
+        "cyan" => 46,
+        "white" => 47,
     ];
 
     /**
@@ -112,10 +112,10 @@ class ConsoleOutput
      * @var array<string, int>
      */
     protected static $_options = [
-        'bold' => 1,
-        'underline' => 4,
-        'blink' => 5,
-        'reverse' => 7,
+        "bold" => 1,
+        "underline" => 4,
+        "blink" => 5,
+        "reverse" => 7,
     ];
 
     /**
@@ -125,17 +125,17 @@ class ConsoleOutput
      * @var array<string, array>
      */
     protected static $_styles = [
-        'emergency' => ['text' => 'red'],
-        'alert' => ['text' => 'red'],
-        'critical' => ['text' => 'red'],
-        'error' => ['text' => 'red'],
-        'warning' => ['text' => 'yellow'],
-        'info' => ['text' => 'cyan'],
-        'debug' => ['text' => 'yellow'],
-        'success' => ['text' => 'green'],
-        'comment' => ['text' => 'blue'],
-        'question' => ['text' => 'magenta'],
-        'notice' => ['text' => 'cyan'],
+        "emergency" => ["text" => "red"],
+        "alert" => ["text" => "red"],
+        "critical" => ["text" => "red"],
+        "error" => ["text" => "red"],
+        "warning" => ["text" => "yellow"],
+        "info" => ["text" => "cyan"],
+        "debug" => ["text" => "yellow"],
+        "success" => ["text" => "green"],
+        "comment" => ["text" => "blue"],
+        "question" => ["text" => "magenta"],
+        "notice" => ["text" => "cyan"],
     ];
 
     /**
@@ -146,23 +146,23 @@ class ConsoleOutput
      *
      * @param string $stream The identifier of the stream to write output to.
      */
-    this(string $stream = 'php://stdout') {
-        this._output = fopen($stream, 'wb');
+    this(string $stream = "php://stdout") {
+        this._output = fopen($stream, "wb");
 
         if (
             (
-                DIRECTORY_SEPARATOR === '\\' &&
-                strpos(strtolower(php_uname('v')), 'windows 10') === false &&
-                strpos(strtolower((string)env('SHELL')), 'bash.exe') === false &&
-                !(bool)env('ANSICON') &&
-                env('ConEmuANSI') !== 'ON'
+                DIRECTORY_SEPARATOR === "\\" &&
+                strpos(strtolower(php_uname("v")), "windows 10") === false &&
+                strpos(strtolower((string)env("SHELL")), "bash.exe") === false &&
+                !(bool)env("ANSICON") &&
+                env("ConEmuANSI") !== "ON"
             ) ||
             (
-                function_exists('posix_isatty') &&
+                function_exists("posix_isatty") &&
                 !posix_isatty(this._output)
             ) ||
             (
-                env('NO_COLOR') !== null
+                env("NO_COLOR") !== null
             )
         ) {
             this._outputAs = self::PLAIN;
@@ -197,14 +197,14 @@ class ConsoleOutput
             return $text;
         }
         if (this._outputAs === static::PLAIN) {
-            $tags = implode('|', array_keys(static::$_styles));
+            $tags = implode("|", array_keys(static::$_styles));
 
-            return preg_replace('#</?(?:' . $tags . ')>#', '', $text);
+            return preg_replace("#</?(?:" . $tags . ")>#", "", $text);
         }
 
         return preg_replace_callback(
-            '/<(?P<tag>[a-z0-9-_]+)>(?P<text>.*?)<\/(\1)>/ims',
-            [this, '_replaceTags'],
+            "/<(?P<tag>[a-z0-9-_]+)>(?P<text>.*?)<\/(\1)>/ims",
+            [this, "_replaceTags"],
             $text
         );
     }
@@ -216,26 +216,26 @@ class ConsoleOutput
      * @return string
      */
     protected string _replaceTags(array $matches) {
-        $style = this.getStyle($matches['tag']);
+        $style = this.getStyle($matches["tag"]);
         if (empty($style)) {
-            return '<' . $matches['tag'] . '>' . $matches['text'] . '</' . $matches['tag'] . '>';
+            return "<" . $matches["tag"] . ">" . $matches["text"] . "</" . $matches["tag"] . ">";
         }
 
         $styleInfo = [];
-        if (!empty($style['text']) && isset(static::$_foregroundColors[$style['text']])) {
-            $styleInfo[] = static::$_foregroundColors[$style['text']];
+        if (!empty($style["text"]) && isset(static::$_foregroundColors[$style["text"]])) {
+            $styleInfo[] = static::$_foregroundColors[$style["text"]];
         }
-        if (!empty($style['background']) && isset(static::$_backgroundColors[$style['background']])) {
-            $styleInfo[] = static::$_backgroundColors[$style['background']];
+        if (!empty($style["background"]) && isset(static::$_backgroundColors[$style["background"]])) {
+            $styleInfo[] = static::$_backgroundColors[$style["background"]];
         }
-        unset($style['text'], $style['background']);
+        unset($style["text"], $style["background"]);
         foreach ($style as $option => myValue) {
             if (myValue) {
                 $styleInfo[] = static::$_options[$option];
             }
         }
 
-        return "\033[" . implode(';', $styleInfo) . 'm' . $matches['text'] . "\033[0m";
+        return "\033[" . implode(";", $styleInfo) . "m" . $matches["text"] . "\033[0m";
     }
 
     /**
@@ -266,13 +266,13 @@ class ConsoleOutput
      * ### Creates or modifies an existing style.
      *
      * ```
-     * $output.setStyle('annoy', ['text' => 'purple', 'background' => 'yellow', 'blink' => true]);
+     * $output.setStyle("annoy", ["text" => "purple", "background" => "yellow", "blink" => true]);
      * ```
      *
      * ### Remove a style
      *
      * ```
-     * this.output.setStyle('annoy', []);
+     * this.output.setStyle("annoy", []);
      * ```
      *
      * @param string $style The style to set.
@@ -318,7 +318,7 @@ class ConsoleOutput
      */
     void setOutputAs(int myType) {
         if (!in_array(myType, [self::RAW, self::PLAIN, self::COLOR], true)) {
-            throw new InvalidArgumentException(sprintf('Invalid output type "%s".', myType));
+            throw new InvalidArgumentException(sprintf("Invalid output type "%s".", myType));
         }
 
         this._outputAs = myType;
