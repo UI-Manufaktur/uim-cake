@@ -14,7 +14,7 @@ import uim.cake.databases.Retry\ReconnectStrategy;
 import uim.cake.databases.Schema\CachedCollection;
 import uim.cake.databases.Schema\Collection as SchemaCollection;
 import uim.cake.databases.Schema\ICollection as SchemaICollection;
-import uim.caketasources\ConnectionInterface;
+import uim.cake.datasources\ConnectionInterface;
 import uim.cakegs\Log;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\ICache;

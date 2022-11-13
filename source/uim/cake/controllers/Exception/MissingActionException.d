@@ -1,4 +1,4 @@
-module uim.cakentroller\Exception;
+module uim.cake.controllers\Exception;
 
 import uim.cakere.exceptions\CakeException;
 

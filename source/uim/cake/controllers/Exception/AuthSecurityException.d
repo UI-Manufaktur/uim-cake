@@ -1,4 +1,4 @@
-module uim.cakentroller\Exception;
+module uim.cake.controllers\Exception;
 
 /**
  * Auth Security exception - used when SecurityComponent detects any issue with the current request
