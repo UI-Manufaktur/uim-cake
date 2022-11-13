@@ -74,8 +74,7 @@ trait TranslateStrategyTrait
      * @see \Cake\I18n\I18n::getLocale()
      * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
      */
-    string getLocale()
-    {
+    string getLocale() {
         return this.locale ?: I18n::getLocale();
     }
 

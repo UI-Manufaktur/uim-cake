@@ -46,8 +46,7 @@ class Text
      * @return string RFC 4122 UUID
      * @copyright Matt Farina MIT License https://github.com/lootils/uuid/blob/master/LICENSE
      */
-    static string uuid()
-    {
+    static string uuid() {
         return sprintf(
             "%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
             // 32 bits for "time_low"
@@ -176,8 +175,7 @@ class Text
      * @param array<string, mixed> myOptions An array of options, see description above
      * @return string
      */
-    static string insert(string $str, array myData, array myOptions = [])
-    {
+    static string insert(string $str, array myData, array myOptions = []) {
         $defaults = [
             "before" => ":", "after" => "", "escape" => "\\", "format" => null, "clean" => false,
         ];
@@ -247,8 +245,7 @@ class Text
      * @return string
      * @see \Cake\Utility\Text::insert()
      */
-    static string cleanInsert(string $str, array myOptions)
-    {
+    static string cleanInsert(string $str, array myOptions) {
         $clean = myOptions["clean"];
         if (!$clean) {
             return $str;
@@ -317,8 +314,7 @@ class Text
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrap(string $text, myOptions = [])
-    {
+    static string wrap(string $text, myOptions = []) {
         if (is_numeric(myOptions)) {
             myOptions = ["width" => myOptions];
         }
@@ -354,8 +350,7 @@ class Text
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrapBlock(string $text, myOptions = [])
-    {
+    static string wrapBlock(string $text, myOptions = []) {
         if (is_numeric(myOptions)) {
             myOptions = ["width" => myOptions];
         }
@@ -404,8 +399,7 @@ class Text
      * @param bool $cut If the cut is set to true, the string is always wrapped at the specified width.
      * @return string Formatted text.
      */
-    static string wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false)
-    {
+    static string wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false) {
         $paragraphs = explode($break, $text);
         foreach ($paragraphs as &$paragraph) {
             $paragraph = static::_wordWrap($paragraph, $width, $break, $cut);
@@ -423,8 +417,7 @@ class Text
      * @param bool $cut If the cut is set to true, the string is always wrapped at the specified width.
      * @return string Formatted text.
      */
-    protected static string _wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false)
-    {
+    protected static string _wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false) {
         $parts = [];
         if ($cut) {
             while (mb_strlen($text) > 0) {
@@ -481,8 +474,7 @@ class Text
      * @return string The highlighted text
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#highlighting-substrings
      */
-    static string highlight(string $text, $phrase, array myOptions = [])
-    {
+    static string highlight(string $text, $phrase, array myOptions = []) {
         if (empty($phrase)) {
             return $text;
         }
@@ -541,8 +533,7 @@ class Text
      * @param array<string, mixed> myOptions An array of options.
      * @return string Trimmed string.
      */
-    static string tail(string $text, int $length = 100, array myOptions = [])
-    {
+    static string tail(string $text, int $length = 100, array myOptions = []) {
         $default = [
             "ellipsis" => "...", "exact" => true,
         ];

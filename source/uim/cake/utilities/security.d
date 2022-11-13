@@ -53,8 +53,7 @@ class Security
      * @throws \RuntimeException
      * @link https://book.cakephp.org/4/en/core-libraries/security.html#hashing-data
      */
-    static string hash(string $string, Nullable!string $algorithm = null, $salt = false)
-    {
+    static string hash(string $string, Nullable!string $algorithm = null, $salt = false) {
         if (empty($algorithm)) {
             $algorithm = static::$hashType;
         }
@@ -101,8 +100,7 @@ class Security
      * @param int $length The number of bytes you want.
      * @return string Random bytes in binary.
      */
-    static string randomBytes(int $length)
-    {
+    static string randomBytes(int $length) {
         return random_bytes($length);
     }
 
@@ -112,8 +110,7 @@ class Security
      * @param int $length String length. Default 64.
      * @return string
      */
-    static string randomString(int $length = 64)
-    {
+    static string randomString(int $length = 64) {
         return substr(
             bin2hex(Security::randomBytes((int)ceil($length / 2))),
             0,
@@ -128,8 +125,7 @@ class Security
      * @return string Random bytes in binary.
      * @see \Cake\Utility\Security::randomBytes()
      */
-    static string insecureRandomBytes(int $length)
-    {
+    static string insecureRandomBytes(int $length) {
         $length *= 2;
 
         $bytes = "";
@@ -186,8 +182,7 @@ class Security
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static string encrypt(string $plain, string myKey, Nullable!string $hmacSalt = null)
-    {
+    static string encrypt(string $plain, string myKey, Nullable!string $hmacSalt = null) {
         self::_checkKey(myKey, "encrypt()");
 
         if ($hmacSalt === null) {
@@ -276,8 +271,7 @@ class Security
      *
      * @return string The currently configured salt
      */
-    static string getSalt()
-    {
+    static string getSalt() {
         if (static::$_salt === null) {
             throw new RuntimeException(
                 "Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`."

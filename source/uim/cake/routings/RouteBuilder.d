@@ -145,8 +145,7 @@ class RouteBuilder
      *
      * @return string
      */
-    string getRouteClass()
-    {
+    string getRouteClass() {
         return this._routeClass;
     }
 
@@ -193,8 +192,7 @@ class RouteBuilder
      *
      * @return string
      */
-    string path()
-    {
+    string path() {
         $routeKey = strpos(this._path, "{");
         if ($routeKey !== false && strpos(this._path, "}") !== false) {
             return substr(this._path, 0, $routeKey);
@@ -236,8 +234,7 @@ class RouteBuilder
      * @param string|null myValue Either the value to set or null.
      * @return string
      */
-    string namePrefix(Nullable!string myValue = null)
-    {
+    string namePrefix(Nullable!string myValue = null) {
         if (myValue !== null) {
             this._namePrefix = myValue;
         }
