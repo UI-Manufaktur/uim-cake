@@ -1,12 +1,12 @@
-module uim.cake.orm.Association;
+module uim.cake.orm.associations;
 
 import uim.cake.core.App;
 import uim.cake.databases.expressions\IdentifierExpression;
 import uim.cake.databases.expressions\QueryExpression;
 import uim.cake.databases.IExpression;
 import uim.cake.datasources\IEntity;
-import uim.cake.orm.Association;
-import uim.cake.orm.Association\Loader\SelectWithPivotLoader;
+import uim.cake.orm.associations;
+import uim.cake.orm.associations\Loader\SelectWithPivotLoader;
 import uim.cake.orm.Query;
 import uim.cake.orm.Table;
 import uim.cake.utilities.Hash;

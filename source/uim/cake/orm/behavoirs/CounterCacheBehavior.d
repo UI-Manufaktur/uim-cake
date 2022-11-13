@@ -3,7 +3,7 @@ module uim.cake.orm.behaviors;
 use ArrayObject;
 import uim.cake.datasources\IEntity;
 import uim.cake.events\IEvent;
-import uim.cake.orm.Association;
+import uim.cake.orm.associations;
 import uim.cake.orm.behaviors;
 use Closure;
 

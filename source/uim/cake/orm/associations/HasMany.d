@@ -1,12 +1,12 @@
-module uim.cake.orm.Association;
+module uim.cake.orm.associations;
 
 import uim.cake.collections\Collection;
 import uim.cake.databases.expressions\FieldInterface;
 import uim.cake.databases.expressions\QueryExpression;
 import uim.cake.datasources\IEntity;
 import uim.cake.datasources\InvalidPropertyInterface;
-import uim.cake.orm.Association;
-import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.associations;
+import uim.cake.orm.associations\Loader\SelectLoader;
 import uim.cake.orm.Query;
 import uim.cake.orm.Table;
 use Closure;
