@@ -1,5 +1,4 @@
-
-module uim.cake.filesystems;
+module uim.cake.filesystems.file;
 
 use finfo;
 use SplFileInfo;
