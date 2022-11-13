@@ -325,7 +325,7 @@ class SmtpTransport : AbstractTransport
      * @param string myMessage The email address to send with the command.
      * @return string
      */
-    protected auto _prepareFromCmd(string myMessage): string
+    protected string _prepareFromCmd(string myMessage)
     {
         return 'MAIL FROM:<' . myMessage . '>';
     }
