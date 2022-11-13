@@ -1,7 +1,7 @@
 module uim.cakerors;
 
-import uim.cakere.Configure;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakerors\Debug\ArrayItemNode;
 import uim.cakerors\Debug\ArrayNode;
 import uim.cakerors\Debug\ClassNode;

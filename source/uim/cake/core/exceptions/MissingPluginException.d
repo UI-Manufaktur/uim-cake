@@ -1,4 +1,4 @@
-module uim.cakere.exceptions;
+module uim.cake.core.exceptions;
 
 /**
  * Exception raised when a plugin could not be found

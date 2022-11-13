@@ -1,7 +1,7 @@
 module uim.cake.datasources;
 
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 import uim.cake.datasources\Exception\MissingDatasourceException;
 
 /**

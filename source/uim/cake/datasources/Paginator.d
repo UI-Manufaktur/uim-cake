@@ -1,7 +1,7 @@
 module uim.cake.datasources;
 
-import uim.cakere.exceptions\CakeException;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.datasources\Exception\PageOutOfBoundsException;
 
 /**

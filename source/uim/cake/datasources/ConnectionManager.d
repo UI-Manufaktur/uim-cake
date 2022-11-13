@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.datasources;
 
-import uim.cakere.StaticConfigTrait;
+import uim.cake.core.StaticConfigTrait;
 import uim.cake.databasess.Connection;
 import uim.cake.databasess.Driver\Mysql;
 import uim.cake.databasess.Driver\Postgres;

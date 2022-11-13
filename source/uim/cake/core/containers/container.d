@@ -1,4 +1,4 @@
-module uim.cakere.containers.container;
+module uim.cake.core.containers.container;
 
 use League\Container\Container as LeagueContainer;
 

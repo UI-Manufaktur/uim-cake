@@ -1,6 +1,6 @@
 module uim.cake.datasources\Exception;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Exception raised when requested page number does not exist.

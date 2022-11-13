@@ -1,7 +1,7 @@
 module uim.cakerors;
 
-import uim.cakere.Configure;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakeutings\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;

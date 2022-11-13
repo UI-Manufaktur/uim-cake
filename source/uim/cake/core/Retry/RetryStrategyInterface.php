@@ -1,4 +1,4 @@
-module uim.cakere.Retry;
+module uim.cake.core.Retry;
 
 use Exception;
 

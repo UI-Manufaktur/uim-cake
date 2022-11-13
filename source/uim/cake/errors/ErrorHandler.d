@@ -1,6 +1,6 @@
 module uim.cakerors;
 
-import uim.cakere.App;
+import uim.cake.core.App;
 import uim.caketps\ResponseEmitter;
 import uim.cakeutings\Router;
 use Psr\Http\Message\IServerRequest;

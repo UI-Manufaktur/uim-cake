@@ -1,8 +1,8 @@
 module uim.cake.databases;
 
 import uim.cake.caches\Cache;
-import uim.cakere.App;
-import uim.cakere.Retry\CommandRetry;
+import uim.cake.core.App;
+import uim.cake.core.Retry\CommandRetry;
 import uim.cake.databases.Exception\MissingConnectionException;
 import uim.cake.databases.Exception\MissingDriverException;
 import uim.cake.databases.Exception\MissingExtensionException;

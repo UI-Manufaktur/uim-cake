@@ -1,4 +1,4 @@
-module uim.cakere.exceptions;
+module uim.cake.core.exceptions;
 
 use RuntimeException;
 use Throwable;
