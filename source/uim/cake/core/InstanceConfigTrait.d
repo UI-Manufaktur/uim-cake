@@ -1,6 +1,6 @@
-module uim.cakere;
+module uim.cake.core;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 import uim.cakeilities.Hash;
 use InvalidArgumentException;
 

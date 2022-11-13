@@ -1,6 +1,6 @@
-module uim.cakere;
+module uim.cake.core;
 
-import uim.cakere.exceptions\MissingPluginException;
+import uim.cake.core.exceptions\MissingPluginException;
 use Countable;
 use Generator;
 use InvalidArgumentException;

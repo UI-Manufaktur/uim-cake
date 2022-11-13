@@ -1,9 +1,9 @@
-module uim.cakere;
+module uim.cake.core;
 
 import uim.cake.caches\Cache;
-import uim.cakere.Configure\ConfigEngineInterface;
-import uim.cakere.Configure\Engine\PhpConfig;
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.Configure\ConfigEngineInterface;
+import uim.cake.core.Configure\Engine\PhpConfig;
+import uim.cake.core.exceptions\CakeException;
 import uim.cakeilities.Hash;
 use RuntimeException;
 

@@ -1,8 +1,8 @@
-module uim.cakere.Configure\Engine;
+module uim.cake.core.Configure\Engine;
 
-import uim.cakere.Configure\ConfigEngineInterface;
-import uim.cakere.Configure\FileConfigTrait;
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.Configure\ConfigEngineInterface;
+import uim.cake.core.Configure\FileConfigTrait;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * JSON engine allows Configure to load configuration values from

@@ -11,8 +11,8 @@ This repository contains the classes that are used as glue for creating the Cake
 You can use the `Configure` class to store arbitrary configuration data:
 
 ```php
-import uim.cakere.Configure;
-import uim.cakere.Configure\Engine\PhpConfig;
+import uim.cake.core.Configure;
+import uim.cake.core.Configure\Engine\PhpConfig;
 
 Configure.write("Company.name","Pizza, Inc.");
 Configure::read("Company.name"); // Returns: "Pizza, Inc."

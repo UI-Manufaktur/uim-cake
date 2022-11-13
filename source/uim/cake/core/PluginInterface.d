@@ -5,7 +5,7 @@
  * Copyright 2005-2011, Cake Software Foundation, Inc. (https://cakefoundation.org)
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- */module uim.cakere;
+ */module uim.cake.core;
 
 import uim.cake.console.commandCollection;
 import uim.caketps\MiddlewareQueue;

@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 use ArrayIterator;
 import uim.cakeents\IEventDispatcher;

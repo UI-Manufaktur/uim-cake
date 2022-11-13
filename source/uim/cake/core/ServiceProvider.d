@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 use League\Container\IDefinitionContainer;
 use League\Container\ServiceProvider\AbstractServiceProvider;

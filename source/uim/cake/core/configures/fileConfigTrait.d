@@ -1,7 +1,7 @@
-module uim.cakere.Configure;
+module uim.cake.core.Configure;
 
-import uim.cakere.exceptions\CakeException;
-import uim.cakere.Plugin;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.Plugin;
 
 /**
  * Trait providing utility methods for file based config engines.

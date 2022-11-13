@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 import uim.cake.console.commandCollection;
 import uim.cakeents\IEventDispatcher;

@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 import uim.caketps\MiddlewareQueue;
 use Psr\Http\Server\RequestHandlerInterface;

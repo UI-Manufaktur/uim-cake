@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 import uim.cakeilities.Inflector;
 

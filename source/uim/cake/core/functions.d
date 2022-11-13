@@ -1,6 +1,6 @@
 
 
-import uim.cakere.Configure;
+import uim.cake.core.Configure;
 
 if (!defined("DS")) {
     /**

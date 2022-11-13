@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 use BadMethodCallException;
 use InvalidArgumentException;
