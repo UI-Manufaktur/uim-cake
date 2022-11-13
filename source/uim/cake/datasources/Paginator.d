@@ -1,8 +1,8 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
 import uim.cakere.exceptions\CakeException;
 import uim.cakere.InstanceConfigTrait;
-import uim.caketasources\Exception\PageOutOfBoundsException;
+import uim.cake.datasources\Exception\PageOutOfBoundsException;
 
 /**
  * This class is used to handle automatic model data pagination.

@@ -1,4 +1,4 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
 import uim.cakeches\Cache;
 use Closure;

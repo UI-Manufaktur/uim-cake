@@ -1,4 +1,4 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
 /**
  * This interface describes the methods for paginator instance.

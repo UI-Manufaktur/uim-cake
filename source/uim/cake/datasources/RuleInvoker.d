@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.2.12
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.caketasources;
+ */module uim.cake.datasources;
 
 /**
  * Contains logic for invoking an application rule.

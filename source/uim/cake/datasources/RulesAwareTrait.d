@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.0.7
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.caketasources;
+ */module uim.cake.datasources;
 
 use ArrayObject;
 import uim.cakeents\IEventDispatcher;

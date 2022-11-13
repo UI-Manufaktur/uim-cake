@@ -1,4 +1,4 @@
-module uim.caketasources\Exception;
+module uim.cake.datasources\Exception;
 
 import uim.cakere.exceptions\CakeException;
 
