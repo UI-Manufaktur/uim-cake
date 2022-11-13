@@ -1,8 +1,8 @@
 module uim.cakerors\Middleware;
 
-import uim.cakere.App;
-import uim.cakere.Configure;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakerors\ErrorHandler;
 import uim.cakerors\ExceptionRenderer;
 import uim.caketps\Exception\RedirectException;

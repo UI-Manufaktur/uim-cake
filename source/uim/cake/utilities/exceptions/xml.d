@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeilities.Exception;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Exception class for Xml. This exception will be thrown from Xml when it

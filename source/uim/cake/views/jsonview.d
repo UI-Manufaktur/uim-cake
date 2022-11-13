@@ -1,6 +1,6 @@
 module uim.cakeews;
 
-import uim.cakere.Configure;
+import uim.cake.core.Configure;
 use RuntimeException;
 
 /**

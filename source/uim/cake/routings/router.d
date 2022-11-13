@@ -1,7 +1,7 @@
 
 module uim.cakeuting.router;
 
-import uim.cakere.Configure;
+import uim.cake.core.Configure;
 import uim.caketps\ServerRequest;
 import uim.cakeutings\Exception\MissingRouteException;
 import uim.cakeilities.Inflector;

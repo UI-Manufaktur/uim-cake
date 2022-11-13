@@ -1,7 +1,7 @@
 
 module uim.cakeews;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakeents\IEventListener;
 
 /**

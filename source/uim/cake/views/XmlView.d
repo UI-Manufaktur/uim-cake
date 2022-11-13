@@ -3,7 +3,7 @@ module uim.cakeews;
 @safe:
 import uim.cake
 
-/* import uim.cakere.Configure;
+/* import uim.cake.core.Configure;
 import uim.cakeility\Hash;
 import uim.cakeility\Xml; */
 

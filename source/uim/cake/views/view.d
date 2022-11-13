@@ -6,9 +6,9 @@ module uim.cakeews;
 import uim.cake
 
 /* import uim.cake.caches\Cache;
-import uim.cakere.App;
-import uim.cakere.InstanceConfigTrait;
-import uim.cakere.Plugin;
+import uim.cake.core.App;
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.core.Plugin;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 import uim.cakeents\EventManager;

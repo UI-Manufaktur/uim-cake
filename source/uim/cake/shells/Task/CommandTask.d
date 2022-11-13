@@ -10,8 +10,8 @@
  */module uim.cakeell\Task;
 
 import uim.cake.console.Shell;
-import uim.cakere.App;
-import uim.cakere.Plugin;
+import uim.cake.core.App;
+import uim.cake.core.Plugin;
 import uim.cakelesystem\Filesystem;
 import uim.cakeilities.Inflector;
 

@@ -1,8 +1,8 @@
 module uim.cakerors;
 
-import uim.cakere.Configure;
-import uim.cakere.exceptions\CakeException;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakegs\Log;
 use Psr\Http\Message\IServerRequest;
 use Throwable;

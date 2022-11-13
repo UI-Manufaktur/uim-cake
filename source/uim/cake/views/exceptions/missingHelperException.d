@@ -1,6 +1,6 @@
 module uim.cakeews.exceptions;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Used when a helper cannot be found.

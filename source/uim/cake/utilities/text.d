@@ -1,6 +1,6 @@
 module uim.cakeility;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 use InvalidArgumentException;
 use Transliterator;
 

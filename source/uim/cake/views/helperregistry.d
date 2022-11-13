@@ -1,7 +1,7 @@
 module uim.cakeews;
 
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 import uim.cakeews\Exception\MissingHelperException;

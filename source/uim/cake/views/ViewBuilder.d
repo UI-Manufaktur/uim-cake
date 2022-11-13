@@ -1,6 +1,6 @@
 module uim.cakeews;
 
-import uim.cakere.App;
+import uim.cake.core.App;
 import uim.cakeents\IEventManager;
 import uim.caketps\Response;
 import uim.caketps\ServerRequest;
