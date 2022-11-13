@@ -1,4 +1,4 @@
-module uim.cakellections;
+module uim.cake.collections.collection;
 
 use ArrayIterator;
 use IteratorIterator;

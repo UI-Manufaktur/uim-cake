@@ -1,4 +1,4 @@
-module uim.cakellections.interface_;
+module uim.cake.collections.interface_;
 
 @safe:
 import uim.cake

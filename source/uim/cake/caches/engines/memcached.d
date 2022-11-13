@@ -7,9 +7,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         2.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeches.engines;
+ */module uim.cake.caches.engines;
 
-import uim.cakeches\CacheEngine;
+import uim.cake.caches\CacheEngine;
 use InvalidArgumentException;
 use Memcached;
 use RuntimeException;

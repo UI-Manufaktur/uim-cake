@@ -8,9 +8,9 @@
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cakeches.engines;
+module uim.cake.caches.engines;
 
-import uim.cakeches\CacheEngine;
+import uim.cake.caches\CacheEngine;
 import uim.cakegs\Log;
 use Redis;
 use RedisException;

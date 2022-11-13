@@ -1,6 +1,6 @@
-module uim.cakeches;
+module uim.cake.caches;
 
-import uim.cakeches.engines\NullEngine;
+import uim.cake.caches.engines\NullEngine;
 import uim.cakere.StaticConfigTrait;
 use RuntimeException;
 

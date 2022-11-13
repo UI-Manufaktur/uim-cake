@@ -1,10 +1,10 @@
-module uim.cakeches.engines;
+module uim.cake.caches.engines;
 
 @safe:
 import uim.cake
 
 <!-- use APCUIterator;
-import uim.cakeches\CacheEngine;
+import uim.cake.caches\CacheEngine;
 use RuntimeException;
  -->
 /**

@@ -1,4 +1,4 @@
-module uim.cakeches;
+module uim.cake.caches;
 
 use BadMethodCallException;
 import uim.cakere.App;
@@ -64,7 +64,7 @@ class CacheRegistry : ObjectRegistry
 
         if (!($instance instanceof CacheEngine)) {
             throw new RuntimeException(
-                "Cache engines must import uim.cakeches\CacheEngine as a base class."
+                "Cache engines must import uim.cake.caches\CacheEngine as a base class."
             );
         }
 

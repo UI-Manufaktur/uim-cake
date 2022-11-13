@@ -1,4 +1,4 @@
-module uim.cakellections;
+module uim.cake.collections;
 
 use Closure;
 use Traversable;

@@ -1,6 +1,6 @@
-module uim.cakeches.engines;
+module uim.cake.caches.engines;
 
-import uim.cakeches\CacheEngine;
+import uim.cake.caches\CacheEngine;
 
 /**
  * Null cache engine, all operations appear to work, but do nothing.

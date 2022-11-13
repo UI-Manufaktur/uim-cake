@@ -1,4 +1,4 @@
-module uim.cakeches;
+module uim.cake.caches;
 
 import uim.cakere.InstanceConfigTrait;
 use DateInterval;
