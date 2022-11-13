@@ -19,5 +19,5 @@ import uim.cakere.exceptions\CakeException;
 class MissingComponentException : CakeException
 {
 
-    protected $_messageTemplate = 'Component class %s could not be found.';
+    protected $_messageTemplate = "Component class %s could not be found.";
 }

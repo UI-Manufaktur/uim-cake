@@ -28,7 +28,7 @@ use UnexpectedValueException;
  * Provides basic functionality, such as rendering views inside layouts,
  * automatic model availability, redirection, callbacks, and more.
  *
- * Controllers should provide a number of 'action' methods. These are public
+ * Controllers should provide a number of "action" methods. These are public
  * methods on a controller that are not inherited from `Controller`.
  * Each action serves as an endpoint for performing a specific action on a
  * resource or collection of resources. For example adding or editing a new
@@ -170,7 +170,7 @@ class Controller : IEventListener, IEventDispatcher
         if (myName !== null) {
             this.name = myName;
         } elseif (this.name === null && myRequest) {
-            this.name = myRequest.getParam('controller');
+            this.name = myRequest.getParam("controller");
         }
 
         if (this.name === null) {
@@ -185,15 +185,15 @@ class Controller : IEventListener, IEventDispatcher
             this.setEventManager(myEventManager);
         }
 
-        this.modelFactory('Table', [this.getTableLocator(), 'get']);
+        this.modelFactory("Table", [this.getTableLocator(), "get"]);
 
         if (this.defaultTable !== null) {
             this.modelClass = this.defaultTable;
         }
 
         if (this.modelClass === null) {
-            myPlugin = this.request.getParam('plugin');
-            myModelClass = (myPlugin ? myPlugin . '.' : '') . this.name;
+            myPlugin = this.request.getParam("plugin");
+            myModelClass = (myPlugin ? myPlugin . "." : "") . this.name;
             this._setModelClass(myModelClass);
 
             this.defaultTable = myModelClass;
@@ -207,15 +207,15 @@ class Controller : IEventListener, IEventDispatcher
 
         if (isset(this.components)) {
             triggerWarning(
-                'Support for loading components using $components property is removed. ' .
-                'Use this.loadComponent() instead in initialize().'
+                "Support for loading components using $components property is removed. " .
+                "Use this.loadComponent() instead in initialize()."
             );
         }
 
         if (isset(this.helpers)) {
             triggerWarning(
-                'Support for loading helpers using $helpers property is removed. ' .
-                'Use this.viewBuilder().setHelpers() instead.'
+                "Support for loading helpers using $helpers property is removed. " .
+                "Use this.viewBuilder().setHelpers() instead."
             );
         }
 
@@ -255,13 +255,13 @@ class Controller : IEventListener, IEventDispatcher
     }
 
     /**
-     * Add a component to the controller's registry.
+     * Add a component to the controller"s registry.
      *
      * This method will also set the component to a property.
      * For example:
      *
      * ```
-     * this.loadComponent('Authentication.Authentication');
+     * this.loadComponent("Authentication.Authentication");
      * ```
      *
      * Will result in a `Authentication` property being set.
@@ -286,10 +286,10 @@ class Controller : IEventListener, IEventDispatcher
      */
     auto __get(string myName) {
         if (!empty(this.modelClass)) {
-            if (strpos(this.modelClass, '\\') === false) {
+            if (strpos(this.modelClass, "\\") === false) {
                 [, myClass] = pluginSplit(this.modelClass, true);
             } else {
-                myClass = App::shortName(this.modelClass, 'Model/Table', 'Table');
+                myClass = App::shortName(this.modelClass, "Model/Table", "Table");
             }
 
             if (myClass === myName) {
@@ -298,14 +298,14 @@ class Controller : IEventListener, IEventDispatcher
         }
 
         $trace = debug_backtrace();
-        $parts = explode('\\', static::class);
+        $parts = explode("\\", static::class);
         trigger_error(
             sprintf(
-                'Undefined property: %s::$%s in %s on line %s',
+                "Undefined property: %s::$%s in %s on line %s",
                 array_pop($parts),
                 myName,
-                $trace[0]['file'],
-                $trace[0]['line']
+                $trace[0]["file"],
+                $trace[0]["line"]
             ),
             E_USER_NOTICE
         );
@@ -321,19 +321,19 @@ class Controller : IEventListener, IEventDispatcher
      * @return void
      */
     void __set(string propertyName, myValue) {
-        if (propertyName === 'components') {
+        if (propertyName === "components") {
             triggerWarning(
-                'Support for loading components using $components property is removed. ' .
-                'Use this.loadComponent() instead in initialize().'
+                "Support for loading components using $components property is removed. " .
+                "Use this.loadComponent() instead in initialize()."
             );
 
             return;
         }
 
-        if (propertyName === 'helpers') {
+        if (propertyName === "helpers") {
             triggerWarning(
-                'Support for loading helpers using $helpers property is removed. ' .
-                'Use this.viewBuilder().setHelpers() instead.'
+                "Support for loading helpers using $helpers property is removed. " .
+                "Use this.viewBuilder().setHelpers() instead."
             );
 
             return;
@@ -445,7 +445,7 @@ class Controller : IEventListener, IEventDispatcher
      */
     auto setRequest(ServerRequest myRequest) {
         this.request = myRequest;
-        this.plugin = myRequest.getParam('plugin') ?: null;
+        this.plugin = myRequest.getParam("plugin") ?: null;
 
         return this;
     }
@@ -483,14 +483,14 @@ class Controller : IEventListener, IEventDispatcher
     auto getAction(): Closure
     {
         myRequest = this.request;
-        $action = myRequest.getParam('action');
+        $action = myRequest.getParam("action");
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
-                'controller' => this.name . 'Controller',
-                'action' => myRequest.getParam('action'),
-                'prefix' => myRequest.getParam('prefix') ?: '',
-                'plugin' => myRequest.getParam('plugin'),
+                "controller" => this.name . "Controller",
+                "action" => myRequest.getParam("action"),
+                "prefix" => myRequest.getParam("prefix") ?: "",
+                "plugin" => myRequest.getParam("plugin"),
             ]);
         }
 
@@ -509,8 +509,8 @@ class Controller : IEventListener, IEventDispatcher
         myResult = $action(...$args);
         if (myResult !== null && !myResult instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
-                'Controller actions can only return IResponse instance or null. '
-                . 'Got %s instead.',
+                "Controller actions can only return IResponse instance or null. "
+                . "Got %s instead.",
                 getTypeName(myResult)
             ));
         }
@@ -534,8 +534,8 @@ class Controller : IEventListener, IEventDispatcher
      */
     function middleware($middleware, array myOptions = []) {
         this.middlewares[] = [
-            'middleware' => $middleware,
-            'options' => myOptions,
+            "middleware" => $middleware,
+            "options" => myOptions,
         ];
     }
 
@@ -547,26 +547,26 @@ class Controller : IEventListener, IEventDispatcher
     auto getMiddleware(): array
     {
         $matching = [];
-        $action = this.request.getParam('action');
+        $action = this.request.getParam("action");
 
         foreach (this.middlewares as $middleware) {
-            myOptions = $middleware['options'];
-            if (!empty(myOptions['only'])) {
-                if (in_array($action, (array)myOptions['only'], true)) {
-                    $matching[] = $middleware['middleware'];
+            myOptions = $middleware["options"];
+            if (!empty(myOptions["only"])) {
+                if (in_array($action, (array)myOptions["only"], true)) {
+                    $matching[] = $middleware["middleware"];
                 }
 
                 continue;
             }
 
             if (
-                !empty(myOptions['except']) &&
-                in_array($action, (array)myOptions['except'], true)
+                !empty(myOptions["except"]) &&
+                in_array($action, (array)myOptions["except"], true)
             ) {
                 continue;
             }
 
-            $matching[] = $middleware['middleware'];
+            $matching[] = $middleware["middleware"];
         }
 
         return $matching;
@@ -581,10 +581,10 @@ class Controller : IEventListener, IEventDispatcher
     function implementedEvents(): array
     {
         return [
-            'Controller.initialize' => 'beforeFilter',
-            'Controller.beforeRender' => 'beforeRender',
-            'Controller.beforeRedirect' => 'beforeRedirect',
-            'Controller.shutdown' => 'afterFilter',
+            "Controller.initialize" => "beforeFilter",
+            "Controller.beforeRender" => "beforeRender",
+            "Controller.beforeRedirect" => "beforeRedirect",
+            "Controller.shutdown" => "afterFilter",
         ];
     }
 
@@ -600,11 +600,11 @@ class Controller : IEventListener, IEventDispatcher
      */
     function startupProcess(): ?IResponse
     {
-        myEvent = this.dispatchEvent('Controller.initialize');
+        myEvent = this.dispatchEvent("Controller.initialize");
         if (myEvent.getResult() instanceof IResponse) {
             return myEvent.getResult();
         }
-        myEvent = this.dispatchEvent('Controller.startup');
+        myEvent = this.dispatchEvent("Controller.startup");
         if (myEvent.getResult() instanceof IResponse) {
             return myEvent.getResult();
         }
@@ -617,13 +617,13 @@ class Controller : IEventListener, IEventDispatcher
      * Fire the Components and Controller callbacks in the correct order.
      *
      * - triggers the component `shutdown` callback.
-     * - calls the Controller's `afterFilter` method.
+     * - calls the Controller"s `afterFilter` method.
      *
      * @return \Psr\Http\Message\IResponse|null
      */
     function shutdownProcess(): ?IResponse
     {
-        myEvent = this.dispatchEvent('Controller.shutdown');
+        myEvent = this.dispatchEvent("Controller.shutdown");
         if (myEvent.getResult() instanceof IResponse) {
             return myEvent.getResult();
         }
@@ -647,7 +647,7 @@ class Controller : IEventListener, IEventDispatcher
             this.response = this.response.withStatus($status);
         }
 
-        myEvent = this.dispatchEvent('Controller.beforeRedirect', [myUrl, this.response]);
+        myEvent = this.dispatchEvent("Controller.beforeRedirect", [myUrl, this.response]);
         if (myEvent.getResult() instanceof Response) {
             return this.response = myEvent.getResult();
         }
@@ -656,7 +656,7 @@ class Controller : IEventListener, IEventDispatcher
         }
         $response = this.response;
 
-        if (!$response.getHeaderLine('Location')) {
+        if (!$response.getHeaderLine("Location")) {
             $response = $response.withLocation(Router::url(myUrl, true));
         }
 
@@ -669,11 +669,11 @@ class Controller : IEventListener, IEventDispatcher
      * Examples:
      *
      * ```
-     * setAction('another_action');
-     * setAction('action_with_parameters', $parameter1);
+     * setAction("another_action");
+     * setAction("action_with_parameters", $parameter1);
      * ```
      *
-     * @param string $action The new action to be 'redirected' to.
+     * @param string $action The new action to be "redirected" to.
      *   Any other parameters passed to this method will be passed as parameters to the new action.
      * @param mixed ...$args Arguments passed to the action
      * @return mixed Returns the return value of the called action
@@ -681,10 +681,10 @@ class Controller : IEventListener, IEventDispatcher
      */
     auto setAction(string $action, ...$args) {
         deprecationWarning(
-            'Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, ' .
-            'or call the other action as a method.'
+            "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " .
+            "or call the other action as a method."
         );
-        this.setRequest(this.request.withParam('action', $action));
+        this.setRequest(this.request.withParam("action", $action));
 
         return this.$action(...$args);
     }
@@ -714,7 +714,7 @@ class Controller : IEventListener, IEventDispatcher
             myBuilder.setLayout($layout);
         }
 
-        myEvent = this.dispatchEvent('Controller.beforeRender');
+        myEvent = this.dispatchEvent("Controller.beforeRender");
         if (myEvent.getResult() instanceof Response) {
             return myEvent.getResult();
         }
@@ -723,7 +723,7 @@ class Controller : IEventListener, IEventDispatcher
         }
 
         if (myBuilder.getTemplate() === null) {
-            myBuilder.setTemplate(this.request.getParam('action'));
+            myBuilder.setTemplate(this.request.getParam("action"));
         }
 
         $view = this.createView();
@@ -738,10 +738,10 @@ class Controller : IEventListener, IEventDispatcher
      */
     protected string _templatePath() {
         myTemplatePath = this.name;
-        if (this.request.getParam('prefix')) {
+        if (this.request.getParam("prefix")) {
             $prefixes = array_map(
-                'Cake\Utility\Inflector::camelize',
-                explode('/', this.request.getParam('prefix'))
+                "Cake\Utility\Inflector::camelize",
+                explode("/", this.request.getParam("prefix"))
             );
             myTemplatePath = implode(DIRECTORY_SEPARATOR, $prefixes) . DIRECTORY_SEPARATOR . myTemplatePath;
         }
@@ -757,15 +757,15 @@ class Controller : IEventListener, IEventDispatcher
      *   Careful with trusting external sources.
      * @return string Referring URL
      */
-    string referer($default = '/', bool $local = true) {
+    string referer($default = "/", bool $local = true) {
         $referer = this.request.referer($local);
         if ($referer === null) {
             myUrl = Router::url($default, !$local);
-            $base = this.request.getAttribute('base');
+            $base = this.request.getAttribute("base");
             if ($local && $base && strpos(myUrl, $base) === 0) {
                 myUrl = substr(myUrl, strlen($base));
-                if (myUrl[0] !== '/') {
-                    myUrl = '/' . myUrl;
+                if (myUrl[0] !== "/") {
+                    myUrl = "/" . myUrl;
                 }
 
                 return myUrl;
@@ -786,7 +786,7 @@ class Controller : IEventListener, IEventDispatcher
      * This method will also make the PaginatorHelper available in the view.
      *
      * @param \Cake\ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
-     * (e.g: Table instance, 'TableName' or a Query object)
+     * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return \Cake\ORM\ResultSet|\Cake\Datasource\ResultSetInterface Query results
      * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
@@ -808,9 +808,9 @@ class Controller : IEventListener, IEventDispatcher
             }
         }
 
-        this.loadComponent('Paginator');
+        this.loadComponent("Paginator");
         if (empty(myTable)) {
-            throw new RuntimeException('Unable to locate an object compatible with paginate.');
+            throw new RuntimeException("Unable to locate an object compatible with paginate.");
         }
         $settings += this.paginate;
 
@@ -865,13 +865,13 @@ class Controller : IEventListener, IEventDispatcher
     }
 
     /**
-     * The beforeRedirect method is invoked when the controller's redirect method is called but before any
+     * The beforeRedirect method is invoked when the controller"s redirect method is called but before any
      * further action.
      *
      * If the event is stopped the controller will not continue on to redirect the request.
-     * The myUrl and $status variables have same meaning as for the controller's method.
+     * The myUrl and $status variables have same meaning as for the controller"s method.
      * You can set the event result to response instance or modify the redirect location
-     * using controller's response instance.
+     * using controller"s response instance.
      *
      * @param \Cake\Event\IEvent myEvent An Event instance
      * @param array|string myUrl A string or array-based URL pointing to another location within the app,

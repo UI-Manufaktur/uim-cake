@@ -104,7 +104,7 @@ class BasePlugin : PluginInterface
                 this.{"{myKey}Enabled"} = (bool)myOptions[myKey];
             }
         }
-        foreach (['name', 'path', 'classPath', 'configPath', 'templatePath'] as myPath) {
+        foreach (["name", "path", "classPath", "configPath", "templatePath"] as myPath) {
             if (isset(myOptions[myPath])) {
                 this.{myPath} = myOptions[myPath];
             }
@@ -127,9 +127,9 @@ class BasePlugin : PluginInterface
         if (this.name) {
             return this.name;
         }
-        $parts = explode('\\', static::class);
+        $parts = explode("\\", static::class);
         array_pop($parts);
-        this.name = implode('/', $parts);
+        this.name = implode("/", $parts);
 
         return this.name;
     }
@@ -143,7 +143,7 @@ class BasePlugin : PluginInterface
         myPath = dirname($reflection.getFileName());
 
         // Trim off src
-        if (substr(myPath, -3) === 'src') {
+        if (substr(myPath, -3) === "src") {
             myPath = substr(myPath, 0, -3);
         }
         this.path = rtrim(myPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -158,7 +158,7 @@ class BasePlugin : PluginInterface
         }
         myPath = this.getPath();
 
-        return myPath . 'config' . DIRECTORY_SEPARATOR;
+        return myPath . "config" . DIRECTORY_SEPARATOR;
     }
 
 
@@ -168,7 +168,7 @@ class BasePlugin : PluginInterface
         }
         myPath = this.getPath();
 
-        return myPath . 'src' . DIRECTORY_SEPARATOR;
+        return myPath . "src" . DIRECTORY_SEPARATOR;
     }
 
 
@@ -178,7 +178,7 @@ class BasePlugin : PluginInterface
         }
         myPath = this.getPath();
 
-        return this.templatePath = myPath . 'templates' . DIRECTORY_SEPARATOR;
+        return this.templatePath = myPath . "templates" . DIRECTORY_SEPARATOR;
     }
 
 
@@ -215,7 +215,7 @@ class BasePlugin : PluginInterface
     {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
-                "`$hook` is not a valid hook name. Must be one of " . implode(', ', static::VALID_HOOKS)
+                "`$hook` is not a valid hook name. Must be one of " . implode(", ", static::VALID_HOOKS)
             );
         }
     }
@@ -223,7 +223,7 @@ class BasePlugin : PluginInterface
 
     function routes(RouteBuilder $routes): void
     {
-        myPath = this.getConfigPath() . 'routes.php';
+        myPath = this.getConfigPath() . "routes.php";
         if (is_file(myPath)) {
             $return = require myPath;
             if ($return instanceof Closure) {
@@ -235,7 +235,7 @@ class BasePlugin : PluginInterface
 
     function bootstrap(PluginApplicationInterface $app): void
     {
-        $bootstrap = this.getConfigPath() . 'bootstrap.php';
+        $bootstrap = this.getConfigPath() . "bootstrap.php";
         if (is_file($bootstrap)) {
             require $bootstrap;
         }

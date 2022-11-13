@@ -37,10 +37,10 @@ class PaginatorComponent : Component
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'page' => 1,
-        'limit' => 20,
-        'maxLimit' => 100,
-        'allowedParameters' => ['limit', 'sort', 'page', 'direction'],
+        "page" => 1,
+        "limit" => 20,
+        "maxLimit" => 100,
+        "allowedParameters" => ["limit", "sort", "page", "direction"],
     ];
 
     /**
@@ -52,12 +52,12 @@ class PaginatorComponent : Component
 
 
     this(ComponentRegistry $registry, array myConfig = []) {
-        if (isset(myConfig['paginator'])) {
-            if (!myConfig['paginator'] instanceof Paginator) {
-                throw new InvalidArgumentException('Paginator must be an instance of ' . Paginator::class);
+        if (isset(myConfig["paginator"])) {
+            if (!myConfig["paginator"] instanceof Paginator) {
+                throw new InvalidArgumentException("Paginator must be an instance of " . Paginator::class);
             }
-            this._paginator = myConfig['paginator'];
-            unset(myConfig['paginator']);
+            this._paginator = myConfig["paginator"];
+            unset(myConfig["paginator"]);
         } else {
             this._paginator = new Paginator();
         }
@@ -83,13 +83,13 @@ class PaginatorComponent : Component
      * When calling `paginate()` you can use the $settings parameter to pass in pagination settings.
      * These settings are used to build the queries made and control other pagination settings.
      *
-     * If your settings contain a key with the current table's alias. The data inside that key will be used.
+     * If your settings contain a key with the current table"s alias. The data inside that key will be used.
      * Otherwise the top level configuration will be used.
      *
      * ```
      *  $settings = [
-     *    'limit' => 20,
-     *    'maxLimit' => 100
+     *    "limit" => 20,
+     *    "maxLimit" => 100
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -99,11 +99,11 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'limit' => 20,
-     *      'maxLimit' => 100
+     *    "Articles" => [
+     *      "limit" => 20,
+     *      "maxLimit" => 100
      *    ],
-     *    'Comments' => [ ... ]
+     *    "Comments" => [ ... ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -119,9 +119,9 @@ class PaginatorComponent : Component
      *
      * ```
      * $settings = [
-     *   'Articles' => [
-     *     'finder' => 'custom',
-     *     'sortableFields' => ['title', 'author_id', 'comment_count'],
+     *   "Articles" => [
+     *     "finder" => "custom",
+     *     "sortableFields" => ["title", "author_id", "comment_count"],
      *   ]
      * ];
      * ```
@@ -134,20 +134,20 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'finder' => 'popular'
+     *    "Articles" => [
+     *      "finder" => "popular"
      *    ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
      *
-     * Would paginate using the `find('popular')` method.
+     * Would paginate using the `find("popular")` method.
      *
      * You can also pass an already created instance of a query to this method:
      *
      * ```
-     * myQuery = this.Articles.find('popular').matching('Tags', function ($q) {
-     *   return $q.where(['name' => 'CakePHP'])
+     * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
+     *   return $q.where(["name" => "CakePHP"])
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```
@@ -157,8 +157,8 @@ class PaginatorComponent : Component
      * By using request parameter scopes you can paginate multiple queries in the same controller action:
      *
      * ```
-     * $articles = $paginator.paginate($articlesQuery, ['scope' => 'articles']);
-     * $tags = $paginator.paginate($tagsQuery, ['scope' => 'tags']);
+     * $articles = $paginator.paginate($articlesQuery, ["scope" => "articles"]);
+     * $tags = $paginator.paginate($tagsQuery, ["scope" => "tags"]);
      * ```
      *
      * Each of the above queries will use different query string parameter sets
@@ -206,7 +206,7 @@ class PaginatorComponent : Component
      * config value `allowedParameters` to modify which options/values can be set using request parameters.
      *
      * @param string myAlias Model alias being paginated, if the general settings has a key with this value
-     *   that key's settings will be used for pagination instead of the general ones.
+     *   that key"s settings will be used for pagination instead of the general ones.
      * @param array<string, mixed> $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
@@ -251,9 +251,9 @@ class PaginatorComponent : Component
     {
         $controller = this.getController();
         myRequest = $controller.getRequest();
-        $paging = this._paginator.getPagingParams() + (array)myRequest.getAttribute('paging', []);
+        $paging = this._paginator.getPagingParams() + (array)myRequest.getAttribute("paging", []);
 
-        $controller.setRequest(myRequest.withAttribute('paging', $paging));
+        $controller.setRequest(myRequest.withAttribute("paging", $paging));
     }
 
     /**

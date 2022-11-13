@@ -44,7 +44,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     auto getController(): Controller
     {
         if (this._controller === null) {
-            throw new CakeException('Controller not set for ComponentRegistry');
+            throw new CakeException("Controller not set for ComponentRegistry");
         }
 
         return this._controller;
@@ -73,7 +73,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @psalm-return class-string|null
      */
     protected string _resolveClassName(string myClass) {
-        return App::className(myClass, 'Controller/Component', 'Component');
+        return App::className(myClass, "Controller/Component", "Component");
     }
 
     /**
@@ -90,8 +90,8 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
     {
         throw new MissingComponentException([
-            'class' => myClass . 'Component',
-            'plugin' => myPlugin,
+            "class" => myClass . "Component",
+            "plugin" => myPlugin,
         ]);
     }
 
@@ -112,7 +112,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     {
         /** @var \Cake\Controller\Component $instance */
         $instance = new myClass(this, myConfig);
-        myEnable = myConfig['enabled'] ?? true;
+        myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {
             this.getEventManager().on($instance);
         }

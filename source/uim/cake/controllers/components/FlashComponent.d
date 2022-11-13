@@ -22,11 +22,11 @@ class FlashComponent : Component
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key' => 'flash',
-        'element' => 'default',
-        'params' => [],
-        'clear' => false,
-        'duplicate' => true,
+        "key" => "flash",
+        "element" => "default",
+        "params" => [],
+        "clear" => false,
+        "duplicate" => true,
     ];
 
     /**
@@ -34,12 +34,12 @@ class FlashComponent : Component
      * If you make consecutive calls to this method, the messages will stack (if they are
      * set with the same flash key)
      *
-     * In your controller: this.Flash.set('This has been saved');
+     * In your controller: this.Flash.set("This has been saved");
      *
      * ### Options:
      *
-     * - `key` The key to set under the session's Flash key
-     * - `element` The element used to render the flash message. Default to 'default'.
+     * - `key` The key to set under the session"s Flash key
+     * - `element` The element used to render the flash message. Default to "default".
      * - `params` An array of variables to make available when using an element
      * - `clear` A bool stating if the current stack should be cleared to start a new one
      * - `escape` Set to false to allow templates to print out HTML content
@@ -122,7 +122,7 @@ class FlashComponent : Component
     /**
      * Magic method for verbose flash methods based on element names.
      *
-     * For example: this.Flash.success('My message') would use the
+     * For example: this.Flash.success("My message") would use the
      * `success.php` element under `templates/element/flash/` for rendering the
      * flash message.
      *
@@ -132,7 +132,7 @@ class FlashComponent : Component
      * Note that the parameter `element` will be always overridden. In order to call a
      * specific element from a plugin, you should set the `plugin` option in $args.
      *
-     * For example: `this.Flash.warning('My message', ['plugin' => 'PluginName'])` would
+     * For example: `this.Flash.warning("My message", ["plugin" => "PluginName"])` would
      * use the `warning.php` element under `plugins/PluginName/templates/element/flash/` for
      * rendering the flash message.
      *
@@ -145,15 +145,15 @@ class FlashComponent : Component
         $element = Inflector::underscore(myName);
 
         if (count($args) < 1) {
-            throw new InternalErrorException('Flash message missing.');
+            throw new InternalErrorException("Flash message missing.");
         }
 
-        myOptions = ['element' => $element];
+        myOptions = ["element" => $element];
 
         if (!empty($args[1])) {
-            if (!empty($args[1]['plugin'])) {
-                myOptions = ['element' => $args[1]['plugin'] . '.' . $element];
-                unset($args[1]['plugin']);
+            if (!empty($args[1]["plugin"])) {
+                myOptions = ["element" => $args[1]["plugin"] . "." . $element];
+                unset($args[1]["plugin"]);
             }
             myOptions += (array)$args[1];
         }

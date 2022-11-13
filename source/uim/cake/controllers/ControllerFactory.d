@@ -84,7 +84,7 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
     }
 
     /**
-     * Invoke a controller's action and wrapping methods.
+     * Invoke a controller"s action and wrapping methods.
      *
      * @param \Cake\Controller\Controller $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response
@@ -127,7 +127,7 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
         $action = $controller.getAction();
         $args = this.getActionArgs(
             $action,
-            array_values((array)$controller.getRequest().getParam('pass'))
+            array_values((array)$controller.getRequest().getParam("pass"))
         );
         $controller.invokeAction($action, $args);
 
@@ -155,12 +155,12 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
             if (myType && !myType instanceof ReflectionNamedType) {
                 // Only single types are supported
                 throw new InvalidParameterException([
-                    'template' => 'unsupported_type',
-                    'parameter' => $parameter.getName(),
-                    'controller' => this.controller.getName(),
-                    'action' => this.controller.getRequest().getParam('action'),
-                    'prefix' => this.controller.getRequest().getParam('prefix'),
-                    'plugin' => this.controller.getRequest().getParam('plugin'),
+                    "template" => "unsupported_type",
+                    "parameter" => $parameter.getName(),
+                    "controller" => this.controller.getName(),
+                    "action" => this.controller.getRequest().getParam("action"),
+                    "prefix" => this.controller.getRequest().getParam("prefix"),
+                    "plugin" => this.controller.getRequest().getParam("plugin"),
                 ]);
             }
 
@@ -179,12 +179,12 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
                 }
 
                 throw new InvalidParameterException([
-                    'template' => 'missing_dependency',
-                    'parameter' => $parameter.getName(),
-                    'controller' => this.controller.getName(),
-                    'action' => this.controller.getRequest().getParam('action'),
-                    'prefix' => this.controller.getRequest().getParam('prefix'),
-                    'plugin' => this.controller.getRequest().getParam('plugin'),
+                    "template" => "missing_dependency",
+                    "parameter" => $parameter.getName(),
+                    "controller" => this.controller.getName(),
+                    "action" => this.controller.getRequest().getParam("action"),
+                    "prefix" => this.controller.getRequest().getParam("prefix"),
+                    "plugin" => this.controller.getRequest().getParam("plugin"),
                 ]);
             }
 
@@ -196,14 +196,14 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
 
                     if (myTypedArgument === null) {
                         throw new InvalidParameterException([
-                            'template' => 'failed_coercion',
-                            'passed' => $argument,
-                            'type' => myType.getName(),
-                            'parameter' => $parameter.getName(),
-                            'controller' => this.controller.getName(),
-                            'action' => this.controller.getRequest().getParam('action'),
-                            'prefix' => this.controller.getRequest().getParam('prefix'),
-                            'plugin' => this.controller.getRequest().getParam('plugin'),
+                            "template" => "failed_coercion",
+                            "passed" => $argument,
+                            "type" => myType.getName(),
+                            "parameter" => $parameter.getName(),
+                            "controller" => this.controller.getName(),
+                            "action" => this.controller.getRequest().getParam("action"),
+                            "prefix" => this.controller.getRequest().getParam("prefix"),
+                            "plugin" => this.controller.getRequest().getParam("plugin"),
                         ]);
                     }
                     $argument = myTypedArgument;
@@ -225,12 +225,12 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
             }
 
             throw new InvalidParameterException([
-                'template' => 'missing_parameter',
-                'parameter' => $parameter.getName(),
-                'controller' => this.controller.getName(),
-                'action' => this.controller.getRequest().getParam('action'),
-                'prefix' => this.controller.getRequest().getParam('prefix'),
-                'plugin' => this.controller.getRequest().getParam('plugin'),
+                "template" => "missing_parameter",
+                "parameter" => $parameter.getName(),
+                "controller" => this.controller.getName(),
+                "action" => this.controller.getRequest().getParam("action"),
+                "prefix" => this.controller.getRequest().getParam("prefix"),
+                "plugin" => this.controller.getRequest().getParam("plugin"),
             ]);
         }
 
@@ -246,16 +246,16 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
      */
     protected auto coerceStringToType(string $argument, ReflectionNamedType myType) {
         switch (myType.getName()) {
-            case 'string':
+            case "string":
                 return $argument;
-            case 'float':
+            case "float":
                 return is_numeric($argument) ? (float)$argument : null;
-            case 'int':
+            case "int":
                 return ctype_digit($argument) ? (int)$argument : null;
-            case 'bool':
-                return $argument === '0' ? false : ($argument === '1' ? true : null);
-            case 'array':
-                return explode(',', $argument);
+            case "bool":
+                return $argument === "0" ? false : ($argument === "1" ? true : null);
+            case "array":
+                return explode(",", $argument);
         }
 
         return null;
@@ -270,36 +270,36 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
      */
     auto getControllerClass(ServerRequest myRequest): Nullable!string
     {
-        myPluginPath = '';
-        $module = 'Controller';
-        $controller = myRequest.getParam('controller', '');
-        if (myRequest.getParam('plugin')) {
-            myPluginPath = myRequest.getParam('plugin') . '.';
+        myPluginPath = "";
+        $module = "Controller";
+        $controller = myRequest.getParam("controller", "");
+        if (myRequest.getParam("plugin")) {
+            myPluginPath = myRequest.getParam("plugin") . ".";
         }
-        if (myRequest.getParam('prefix')) {
-            $prefix = myRequest.getParam('prefix');
+        if (myRequest.getParam("prefix")) {
+            $prefix = myRequest.getParam("prefix");
 
             $firstChar = substr($prefix, 0, 1);
             if ($firstChar !== strtoupper($firstChar)) {
                 deprecationWarning(
                     "The `{$prefix}` prefix did not start with an upper case character. " .
-                    'Routing prefixes should be defined as CamelCase values. ' .
-                    'Prefix inflection will be removed in 5.0'
+                    "Routing prefixes should be defined as CamelCase values. " .
+                    "Prefix inflection will be removed in 5.0"
                 );
 
-                if (strpos($prefix, '/') === false) {
-                    $module .= '/' . Inflector::camelize($prefix);
+                if (strpos($prefix, "/") === false) {
+                    $module .= "/" . Inflector::camelize($prefix);
                 } else {
                     $prefixes = array_map(
                         function ($val) {
                             return Inflector::camelize($val);
                         },
-                        explode('/', $prefix)
+                        explode("/", $prefix)
                     );
-                    $module .= '/' . implode('/', $prefixes);
+                    $module .= "/" . implode("/", $prefixes);
                 }
             } else {
-                $module .= '/' . $prefix;
+                $module .= "/" . $prefix;
             }
         }
         $firstChar = substr($controller, 0, 1);
@@ -308,16 +308,16 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
         // controller names as they allow direct references to
         // be created.
         if (
-            strpos($controller, '\\') !== false ||
-            strpos($controller, '/') !== false ||
-            strpos($controller, '.') !== false ||
+            strpos($controller, "\\") !== false ||
+            strpos($controller, "/") !== false ||
+            strpos($controller, ".") !== false ||
             $firstChar === strtolower($firstChar)
         ) {
             throw this.missingController(myRequest);
         }
 
         /** @var class-string<\Cake\Controller\Controller>|null */
-        return App::className(myPluginPath . $controller, $module, 'Controller');
+        return App::className(myPluginPath . $controller, $module, "Controller");
     }
 
     /**
@@ -328,10 +328,10 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
      */
     protected auto missingController(ServerRequest myRequest) {
         return new MissingControllerException([
-            'class' => myRequest.getParam('controller'),
-            'plugin' => myRequest.getParam('plugin'),
-            'prefix' => myRequest.getParam('prefix'),
-            '_ext' => myRequest.getParam('_ext'),
+            "class" => myRequest.getParam("controller"),
+            "plugin" => myRequest.getParam("plugin"),
+            "prefix" => myRequest.getParam("prefix"),
+            "_ext" => myRequest.getParam("_ext"),
         ]);
     }
 }

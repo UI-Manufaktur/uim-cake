@@ -23,7 +23,7 @@ class ClassLoader
     function register(): void
     {
         /** @var callable $callable */
-        $callable = [this, 'loadClass'];
+        $callable = [this, "loadClass"];
         spl_autoload_register($callable);
     }
 
@@ -40,10 +40,10 @@ class ClassLoader
      */
     function addmodule(string $prefix, string $baseDir, bool $prepend = false): void
     {
-        $prefix = trim($prefix, '\\') . '\\';
+        $prefix = trim($prefix, "\\") . "\\";
 
-        $baseDir = rtrim($baseDir, '/') . DIRECTORY_SEPARATOR;
-        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . '/';
+        $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;
+        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . "/";
 
         this._prefixes[$prefix] = this._prefixes[$prefix] ?? [];
 
@@ -64,7 +64,7 @@ class ClassLoader
     function loadClass(string myClass) {
         $prefix = myClass;
 
-        while (($pos = strrpos($prefix, '\\')) !== false) {
+        while (($pos = strrpos($prefix, "\\")) !== false) {
             $prefix = substr(myClass, 0, $pos + 1);
             $relativeClass = substr(myClass, $pos + 1);
 
@@ -73,7 +73,7 @@ class ClassLoader
                 return $mappedFile;
             }
 
-            $prefix = rtrim($prefix, '\\');
+            $prefix = rtrim($prefix, "\\");
         }
 
         return false;
@@ -93,7 +93,7 @@ class ClassLoader
         }
 
         foreach (this._prefixes[$prefix] as $baseDir) {
-            myfile = $baseDir . str_replace('\\', DIRECTORY_SEPARATOR, $relativeClass) . '.php';
+            myfile = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) . ".php";
 
             if (this._requireFile(myfile)) {
                 return myfile;
