@@ -2,8 +2,8 @@ module uim.cakeews.forms;
 
 use ArrayAccess;
 import uim.cakellections\Collection;
-import uim.caketasources\IEntity;
-import uim.caketasources\InvalidPropertyInterface;
+import uim.cake.datasources\IEntity;
+import uim.cake.datasources\InvalidPropertyInterface;
 import uim.cakem.Entity;
 import uim.cakem.Locator\LocatorAwareTrait;
 import uim.cakem.Table;

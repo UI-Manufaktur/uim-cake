@@ -1,16 +1,16 @@
 module uim.cakerors;
 
-import uim.cakentroller\Controller;
-import uim.cakentroller\ControllerFactory;
-import uim.cakentroller\Exception\InvalidParameterException;
-import uim.cakentroller\Exception\MissingActionException;
+import uim.cake.controllers\Controller;
+import uim.cake.controllers\ControllerFactory;
+import uim.cake.controllers\Exception\InvalidParameterException;
+import uim.cake.controllers\Exception\MissingActionException;
 import uim.cakere.App;
 import uim.cakere.Configure;
 import uim.cakere.Container;
 import uim.cakere.exceptions\CakeException;
 import uim.cakere.exceptions\MissingPluginException;
-import uim.caketasources\Exception\PageOutOfBoundsException;
-import uim.caketasources\Exception\RecordNotFoundException;
+import uim.cake.datasources\Exception\PageOutOfBoundsException;
+import uim.cake.datasources\Exception\RecordNotFoundException;
 import uim.cakeents\Event;
 import uim.caketps\Exception\HttpException;
 import uim.caketps\Exception\MissingControllerException;

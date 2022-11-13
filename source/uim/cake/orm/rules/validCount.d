@@ -9,7 +9,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakem.Rule;
 
-import uim.caketasources\IEntity;
+import uim.cake.datasources\IEntity;
 import uim.cakelidations\Validation;
 use Countable;
 
