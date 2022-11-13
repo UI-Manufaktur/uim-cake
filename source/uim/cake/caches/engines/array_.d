@@ -17,7 +17,7 @@ import uim.cakeches\CacheEngine;
  * Not actually a persistent cache engine. All data is only
  * stored in memory for the duration of a single process. While not
  * useful in production settings this engine can be useful in tests
- * or console tools where you don't want the overhead of interacting
+ * or console tools where you don"t want the overhead of interacting
  * with a cache servers, but want the work saving properties a cache
  * provides.
  */
@@ -45,7 +45,7 @@ class ArrayEngine : CacheEngine
     bool set(myKey, myValue, $ttl = null) {
         myKey = this._key(myKey);
         $expires = time() + this.duration($ttl);
-        this.data[myKey] = ['exp' => $expires, 'val' => myValue];
+        this.data[myKey] = ["exp" => $expires, "val" => myValue];
 
         return true;
     }
@@ -55,7 +55,7 @@ class ArrayEngine : CacheEngine
      *
      * @param string myKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
-     * @return mixed The cached data, or default value if the data doesn't exist, has
+     * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
     auto get(myKey, $default = null) {
@@ -67,13 +67,13 @@ class ArrayEngine : CacheEngine
 
         // Check expiration
         $now = time();
-        if (myData['exp'] <= $now) {
+        if (myData["exp"] <= $now) {
             unset(this.data[myKey]);
 
             return $default;
         }
 
-        return myData['val'];
+        return myData["val"];
     }
 
     /**
@@ -88,9 +88,9 @@ class ArrayEngine : CacheEngine
             this.set(myKey, 0);
         }
         myKey = this._key(myKey);
-        this.data[myKey]['val'] += $offset;
+        this.data[myKey]["val"] += $offset;
 
-        return this.data[myKey]['val'];
+        return this.data[myKey]["val"];
     }
 
     /**
@@ -105,16 +105,16 @@ class ArrayEngine : CacheEngine
             this.set(myKey, 0);
         }
         myKey = this._key(myKey);
-        this.data[myKey]['val'] -= $offset;
+        this.data[myKey]["val"] -= $offset;
 
-        return this.data[myKey]['val'];
+        return this.data[myKey]["val"];
     }
 
     /**
      * Delete a key from the cache
      *
      * @param string myKey Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete(myKey) {
         myKey = this._key(myKey);
@@ -144,12 +144,12 @@ class ArrayEngine : CacheEngine
     function groups(): array
     {
         myResult = [];
-        foreach (this._config['groups'] as myGroup) {
-            myKey = this._config['prefix'] . myGroup;
+        foreach (this._config["groups"] as myGroup) {
+            myKey = this._config["prefix"] . myGroup;
             if (!isset(this.data[myKey])) {
-                this.data[myKey] = ['exp' => PHP_INT_MAX, 'val' => 1];
+                this.data[myKey] = ["exp" => PHP_INT_MAX, "val" => 1];
             }
-            myValue = this.data[myKey]['val'];
+            myValue = this.data[myKey]["val"];
             myResult[] = myGroup . myValue;
         }
 
@@ -164,9 +164,9 @@ class ArrayEngine : CacheEngine
      * @return bool success
      */
     bool clearGroup(string myGroup) {
-        myKey = this._config['prefix'] . myGroup;
+        myKey = this._config["prefix"] . myGroup;
         if (isset(this.data[myKey])) {
-            this.data[myKey]['val'] += 1;
+            this.data[myKey]["val"] += 1;
         }
 
         return true;

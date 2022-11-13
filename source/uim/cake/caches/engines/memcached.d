@@ -37,7 +37,7 @@ class MemcachedEngine : CacheEngine
      *
      * - `compress` Whether to compress data
      * - `duration` Specify how long items in this cache configuration last.
-     * - `groups` List of groups or 'tags' associated to every key stored in this config.
+     * - `groups` List of groups or "tags" associated to every key stored in this config.
      *    handy for deleting a complete group from cache.
      * - `username` Login to access the Memcache server
      * - `password` Password to access the Memcache server
@@ -45,8 +45,8 @@ class MemcachedEngine : CacheEngine
      *    the same persistent value will share a single underlying connection.
      * - `prefix` Prepended to all entries. Good for when you need to share a keyspace
      *    with either another cache config or another application.
-     * - `serialize` The serializer engine used to serialize data. Available engines are 'php',
-     *    'igbinary' and 'json'. Beside 'php', the memcached extension must be compiled with the
+     * - `serialize` The serializer engine used to serialize data. Available engines are "php",
+     *    "igbinary" and "json". Beside "php", the memcached extension must be compiled with the
      *    appropriate serializer support.
      * - `servers` String or array of memcached servers. If an array MemcacheEngine will use
      *    them as a pool.
@@ -56,18 +56,18 @@ class MemcachedEngine : CacheEngine
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'compress' => false,
-        'duration' => 3600,
-        'groups' => [],
-        'host' => null,
-        'username' => null,
-        'password' => null,
-        'persistent' => null,
-        'port' => null,
-        'prefix' => 'cake_',
-        'serialize' => 'php',
-        'servers' => ['127.0.0.1'],
-        'options' => [],
+        "compress" => false,
+        "duration" => 3600,
+        "groups" => [],
+        "host" => null,
+        "username" => null,
+        "password" => null,
+        "persistent" => null,
+        "port" => null,
+        "prefix" => "cake_",
+        "serialize" => "php",
+        "servers" => ["127.0.0.1"],
+        "options" => [],
     ];
 
     /**
@@ -95,35 +95,35 @@ class MemcachedEngine : CacheEngine
      *   Memcached compiled with SASL support
      */
     bool init(array myConfig = []) {
-        if (!extension_loaded('memcached')) {
-            throw new RuntimeException('The `memcached` extension must be enabled to use MemcachedEngine.');
+        if (!extension_loaded("memcached")) {
+            throw new RuntimeException("The `memcached` extension must be enabled to use MemcachedEngine.");
         }
 
         this._serializers = [
-            'igbinary' => Memcached::SERIALIZER_IGBINARY,
-            'json' => Memcached::SERIALIZER_JSON,
-            'php' => Memcached::SERIALIZER_PHP,
+            "igbinary" => Memcached::SERIALIZER_IGBINARY,
+            "json" => Memcached::SERIALIZER_JSON,
+            "php" => Memcached::SERIALIZER_PHP,
         ];
-        if (defined('Memcached::HAVE_MSGPACK')) {
-            this._serializers['msgpack'] = Memcached::SERIALIZER_MSGPACK;
+        if (defined("Memcached::HAVE_MSGPACK")) {
+            this._serializers["msgpack"] = Memcached::SERIALIZER_MSGPACK;
         }
 
         super.init(myConfig);
 
-        if (!empty(myConfig['host'])) {
-            if (empty(myConfig['port'])) {
-                myConfig['servers'] = [myConfig['host']];
+        if (!empty(myConfig["host"])) {
+            if (empty(myConfig["port"])) {
+                myConfig["servers"] = [myConfig["host"]];
             } else {
-                myConfig['servers'] = [sprintf('%s:%d', myConfig['host'], myConfig['port'])];
+                myConfig["servers"] = [sprintf("%s:%d", myConfig["host"], myConfig["port"])];
             }
         }
 
-        if (isset(myConfig['servers'])) {
-            this.setConfig('servers', myConfig['servers'], false);
+        if (isset(myConfig["servers"])) {
+            this.setConfig("servers", myConfig["servers"], false);
         }
 
-        if (!is_array(this._config['servers'])) {
-            this._config['servers'] = [this._config['servers']];
+        if (!is_array(this._config["servers"])) {
+            this._config["servers"] = [this._config["servers"]];
         }
 
         /** @psalm-suppress RedundantPropertyInitializationCheck */
@@ -131,8 +131,8 @@ class MemcachedEngine : CacheEngine
             return true;
         }
 
-        if (this._config['persistent']) {
-            this._Memcached = new Memcached(this._config['persistent']);
+        if (this._config["persistent"]) {
+            this._Memcached = new Memcached(this._config["persistent"]);
         } else {
             this._Memcached = new Memcached();
         }
@@ -142,11 +142,11 @@ class MemcachedEngine : CacheEngine
         if ($serverList) {
             if (this._Memcached.isPersistent()) {
                 foreach ($serverList as $server) {
-                    if (!in_array($server['host'] . ':' . $server['port'], this._config['servers'], true)) {
+                    if (!in_array($server["host"] . ":" . $server["port"], this._config["servers"], true)) {
                         throw new InvalidArgumentException(
-                            'Invalid cache configuration. Multiple persistent cache configurations are detected' .
-                            ' with different `servers` values. `servers` values for persistent cache configurations' .
-                            ' must be the same when using the same persistence id.'
+                            "Invalid cache configuration. Multiple persistent cache configurations are detected" .
+                            " with different `servers` values. `servers` values for persistent cache configurations" .
+                            " must be the same when using the same persistence id."
                         );
                     }
                 }
@@ -156,7 +156,7 @@ class MemcachedEngine : CacheEngine
         }
 
         $servers = [];
-        foreach (this._config['servers'] as $server) {
+        foreach (this._config["servers"] as $server) {
             $servers[] = this.parseServerString($server);
         }
 
@@ -164,28 +164,28 @@ class MemcachedEngine : CacheEngine
             return false;
         }
 
-        if (is_array(this._config['options'])) {
-            foreach (this._config['options'] as $opt => myValue) {
+        if (is_array(this._config["options"])) {
+            foreach (this._config["options"] as $opt => myValue) {
                 this._Memcached.setOption($opt, myValue);
             }
         }
 
-        if (empty(this._config['username']) && !empty(this._config['login'])) {
+        if (empty(this._config["username"]) && !empty(this._config["login"])) {
             throw new InvalidArgumentException(
-                'Please pass "username" instead of "login" for connecting to Memcached'
+                "Please pass "username" instead of "login" for connecting to Memcached"
             );
         }
 
-        if (this._config['username'] !== null && this._config['password'] !== null) {
-            if (!method_exists(this._Memcached, 'setSaslAuthData')) {
+        if (this._config["username"] !== null && this._config["password"] !== null) {
+            if (!method_exists(this._Memcached, "setSaslAuthData")) {
                 throw new InvalidArgumentException(
-                    'Memcached extension is not built with SASL support'
+                    "Memcached extension is not built with SASL support"
                 );
             }
             this._Memcached.setOption(Memcached::OPT_BINARY_PROTOCOL, true);
             this._Memcached.setSaslAuthData(
-                this._config['username'],
-                this._config['password']
+                this._config["username"],
+                this._config["password"]
             );
         }
 
@@ -202,19 +202,19 @@ class MemcachedEngine : CacheEngine
     protected void _setOptions() {
         this._Memcached.setOption(Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
 
-        $serializer = strtolower(this._config['serialize']);
+        $serializer = strtolower(this._config["serialize"]);
         if (!isset(this._serializers[$serializer])) {
             throw new InvalidArgumentException(
-                sprintf('%s is not a valid serializer engine for Memcached', $serializer)
+                sprintf("%s is not a valid serializer engine for Memcached", $serializer)
             );
         }
 
         if (
-            $serializer !== 'php' &&
-            !constant('Memcached::HAVE_' . strtoupper($serializer))
+            $serializer !== "php" &&
+            !constant("Memcached::HAVE_" . strtoupper($serializer))
         ) {
             throw new InvalidArgumentException(
-                sprintf('Memcached extension is not compiled with %s support', $serializer)
+                sprintf("Memcached extension is not compiled with %s support", $serializer)
             );
         }
 
@@ -225,8 +225,8 @@ class MemcachedEngine : CacheEngine
 
         // Check for Amazon ElastiCache instance
         if (
-            defined('Memcached::OPT_CLIENT_MODE') &&
-            defined('Memcached::DYNAMIC_CLIENT_MODE')
+            defined("Memcached::OPT_CLIENT_MODE") &&
+            defined("Memcached::DYNAMIC_CLIENT_MODE")
         ) {
             this._Memcached.setOption(
                 Memcached::OPT_CLIENT_MODE,
@@ -236,7 +236,7 @@ class MemcachedEngine : CacheEngine
 
         this._Memcached.setOption(
             Memcached::OPT_COMPRESSION,
-            (bool)this._config['compress']
+            (bool)this._config["compress"]
         );
     }
 
@@ -249,17 +249,17 @@ class MemcachedEngine : CacheEngine
      */
     function parseServerString(string $server): array
     {
-        $socketTransport = 'unix://';
+        $socketTransport = "unix://";
         if (strpos($server, $socketTransport) === 0) {
             return [substr($server, strlen($socketTransport)), 0];
         }
-        if (substr($server, 0, 1) === '[') {
-            $position = strpos($server, ']:');
+        if (substr($server, 0, 1) === "[") {
+            $position = strpos($server, "]:");
             if ($position !== false) {
                 $position++;
             }
         } else {
-            $position = strpos($server, ':');
+            $position = strpos($server, ":");
         }
         $port = 11211;
         $host = $server;
@@ -326,7 +326,7 @@ class MemcachedEngine : CacheEngine
      *
      * @param string myKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
-     * @return mixed The cached data, or default value if the data doesn't exist, has
+     * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
     auto get(myKey, $default = null) {
@@ -389,8 +389,8 @@ class MemcachedEngine : CacheEngine
      * Delete a key from the cache
      *
      * @param string myKey Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't
-     *   exist or couldn't be removed.
+     * @return bool True if the value was successfully deleted, false if it didn"t
+     *   exist or couldn"t be removed.
      */
     bool delete(myKey) {
         return this._Memcached.delete(this._key(myKey));
@@ -401,7 +401,7 @@ class MemcachedEngine : CacheEngine
      *
      * @param iterable myKeys An array of identifiers for the data
      * @return bool of boolean values that are true if the key was successfully
-     *   deleted, false if it didn't exist or couldn't be removed.
+     *   deleted, false if it didn"t exist or couldn"t be removed.
      */
     bool deleteMultiple(myKeys) {
         $cacheKeys = [];
@@ -424,7 +424,7 @@ class MemcachedEngine : CacheEngine
         }
 
         foreach (myKeys as myKey) {
-            if (strpos(myKey, this._config['prefix']) === 0) {
+            if (strpos(myKey, this._config["prefix"]) === 0) {
                 this._Memcached.delete(myKey);
             }
         }
@@ -440,7 +440,7 @@ class MemcachedEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      */
     bool add(string myKey, myValue) {
-        $duration = this._config['duration'];
+        $duration = this._config["duration"];
         myKey = this._key(myKey);
 
         return this._Memcached.add(myKey, myValue, $duration);
@@ -456,13 +456,13 @@ class MemcachedEngine : CacheEngine
     function groups(): array
     {
         if (empty(this._compiledGroupNames)) {
-            foreach (this._config['groups'] as myGroup) {
-                this._compiledGroupNames[] = this._config['prefix'] . myGroup;
+            foreach (this._config["groups"] as myGroup) {
+                this._compiledGroupNames[] = this._config["prefix"] . myGroup;
             }
         }
 
         myGroups = this._Memcached.getMulti(this._compiledGroupNames) ?: [];
-        if (count(myGroups) !== count(this._config['groups'])) {
+        if (count(myGroups) !== count(this._config["groups"])) {
             foreach (this._compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     this._Memcached.set(myGroup, 1, 0);
@@ -474,7 +474,7 @@ class MemcachedEngine : CacheEngine
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config['groups'] as $i => myGroup) {
+        foreach (this._config["groups"] as $i => myGroup) {
             myResult[] = myGroup . myGroups[$i];
         }
 
@@ -489,6 +489,6 @@ class MemcachedEngine : CacheEngine
      * @return bool success
      */
     bool clearGroup(string myGroup) {
-        return (bool)this._Memcached.increment(this._config['prefix'] . myGroup);
+        return (bool)this._Memcached.increment(this._config["prefix"] . myGroup);
     }
 }

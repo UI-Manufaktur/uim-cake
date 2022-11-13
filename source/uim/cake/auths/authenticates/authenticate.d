@@ -24,24 +24,24 @@ abstract class DAuthenticate : IEventListener
      *
      * - `fields` The fields to use to identify a user by.
      * - `userModel` The alias for users table, defaults to Users.
-     * - `finder` The finder method to use to fetch user record. Defaults to 'all'.
+     * - `finder` The finder method to use to fetch user record. Defaults to "all".
      *   You can set finder name as string or an array where key is finder name and value
      *   is an array passed to `Table::find()` options.
-     *   E.g. ['finderName' => ['some_finder_option' => 'some_value']]
+     *   E.g. ["finderName" => ["some_finder_option" => "some_value"]]
      * - `passwordHasher` Password hasher class. Can be a string specifying class name
      *    or an array containing `className` key, any other keys will be passed as
-     *    config to the class. Defaults to 'Default'.
+     *    config to the class. Defaults to "Default".
      *
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'fields' => [
-            'username' => 'username',
-            'password' => 'password',
+        "fields" => [
+            "username" => "username",
+            "password" => "password",
         ],
-        'userModel' => 'Users',
-        'finder' => 'all',
-        'passwordHasher' => 'Default',
+        "userModel" => "Users",
+        "finder" => "all",
+        "passwordHasher" => "Default",
     ];
 
     /**
@@ -80,7 +80,7 @@ abstract class DAuthenticate : IEventListener
     /**
      * Find a user record using the username and password provided.
      *
-     * Input passwords will be hashed even when a user doesn't exist. This
+     * Input passwords will be hashed even when a user doesn"t exist. This
      * helps mitigate timing attacks that are attempting to find valid usernames.
      *
      * @param string myUsername The username/identifier.
@@ -93,9 +93,9 @@ abstract class DAuthenticate : IEventListener
 
         if (myResult === null) {
             // Waste time hashing the password, to prevent
-            // timing side-channels. However, don't hash
+            // timing side-channels. However, don"t hash
             // null passwords as authentication systems
-            // like digest auth don't use passwords
+            // like digest auth don"t use passwords
             // and hashing *could* create a timing side-channel.
             if (myPassword !== null) {
                 myHasher = this.passwordHasher();
@@ -105,7 +105,7 @@ abstract class DAuthenticate : IEventListener
             return false;
         }
 
-        myPasswordField = this._config['fields']['password'];
+        myPasswordField = this._config["fields"]["password"];
         if (myPassword !== null) {
             myHasher = this.passwordHasher();
             myHashedPassword = myResult.get(myPasswordField);
@@ -145,19 +145,19 @@ abstract class DAuthenticate : IEventListener
     protected auto _query(string myUsername): Query
     {
         myConfig = this._config;
-        myTable = this.getTableLocator().get(myConfig['userModel']);
+        myTable = this.getTableLocator().get(myConfig["userModel"]);
 
         myOptions = [
-            'conditions' => [myTable.aliasField(myConfig['fields']['username']) => myUsername],
+            "conditions" => [myTable.aliasField(myConfig["fields"]["username"]) => myUsername],
         ];
 
-        myFinder = myConfig['finder'];
+        myFinder = myConfig["finder"];
         if (is_array(myFinder)) {
             myOptions += current(myFinder);
             myFinder = key(myFinder);
         }
 
-        myOptions['username'] = myOptions['username'] ?? myUsername;
+        myOptions["username"] = myOptions["username"] ?? myUsername;
 
         return myTable.find(myFinder, myOptions);
     }
@@ -175,7 +175,7 @@ abstract class DAuthenticate : IEventListener
             return this._passwordHasher;
         }
 
-        myPasswordHasher = this._config['passwordHasher'];
+        myPasswordHasher = this._config["passwordHasher"];
 
         return this._passwordHasher = PasswordHasherFactory::build(myPasswordHasher);
     }

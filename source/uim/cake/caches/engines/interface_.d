@@ -10,7 +10,7 @@ module uim.cakeches;
 interface ICacheEngine
 {
     /**
-     * Write data for key into a cache engine if it doesn't exist already.
+     * Write data for key into a cache engine if it doesn"t exist already.
      *
      * @param string myKey Identifier for the data.
      * @param mixed myValue Data to be cached - anything except a resource.

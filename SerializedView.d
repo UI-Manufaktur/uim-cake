@@ -29,7 +29,7 @@ abstract class SerializedView : View
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'serialize' => null,
+        "serialize" => null,
     ];
 
 
@@ -44,7 +44,7 @@ abstract class SerializedView : View
      * @return this
      */
     function loadHelpers() {
-        if (!this.getConfig('serialize')) {
+        if (!this.getConfig("serialize")) {
             super.loadHelpers();
         }
 
@@ -69,12 +69,12 @@ abstract class SerializedView : View
      * @throws \Cake\View\Exception\SerializationFailureException When serialization fails.
      */
     string render(Nullable!string myTemplate = null, $layout = null) {
-        $serialize = this.getConfig('serialize', false);
+        $serialize = this.getConfig("serialize", false);
 
         if ($serialize === true) {
             myOptions = array_map(
                 function ($v) {
-                    return '_' . $v;
+                    return "_" . $v;
                 },
                 array_keys(this._defaultConfig)
             );
@@ -89,7 +89,7 @@ abstract class SerializedView : View
                 return this._serialize($serialize);
             } catch (Exception | TypeError $e) {
                 throw new SerializationFailureException(
-                    'Serialization of View data failed.',
+                    "Serialization of View data failed.",
                     null,
                     $e
                 );

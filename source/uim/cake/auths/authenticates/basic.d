@@ -16,12 +16,12 @@ import uim.caketps\ServerRequest;
  *
  * ### Using Basic auth
  *
- * Load `AuthComponent` in your controller's `initialize()` and add 'Basic' in 'authenticate' key
+ * Load `AuthComponent` in your controller"s `initialize()` and add "Basic" in "authenticate" key
  * ```
- *  this.loadComponent('Auth', [
- *      'authenticate' => ['Basic']
- *      'storage' => 'Memory',
- *      'unauthorizedRedirect' => false,
+ *  this.loadComponent("Auth", [
+ *      "authenticate" => ["Basic"]
+ *      "storage" => "Memory",
+ *      "unauthorizedRedirect" => false,
  *  ]);
  * ```
  *
@@ -31,7 +31,7 @@ import uim.caketps\ServerRequest;
  * You should set `unauthorizedRedirect` to `false`. This causes `AuthComponent` to
  * throw a `ForbiddenException` exception instead of redirecting to another page.
  *
- * Since HTTP Basic Authentication is stateless you don't need call `setUser()`
+ * Since HTTP Basic Authentication is stateless you don"t need call `setUser()`
  * in your controller. The user credentials will be checked on each request. If
  * valid credentials are not provided, required authentication headers will be sent
  * by this authentication provider which triggers the login dialog in the browser/client.
@@ -59,8 +59,8 @@ class BasicAuthenticate : DAuthenticate
      * @return array<string, mixed>|false Either false or an array of user information
      */
     auto getUser(ServerRequest myRequest) {
-        myUsername = myRequest.getEnv('PHP_AUTH_USER');
-        $pass = myRequest.getEnv('PHP_AUTH_PW');
+        myUsername = myRequest.getEnv("PHP_AUTH_USER");
+        $pass = myRequest.getEnv("PHP_AUTH_PW");
 
         if (!is_string(myUsername) || myUsername == "" || !is_string($pass) || $pass == "") {
             return false;
@@ -92,10 +92,10 @@ class BasicAuthenticate : DAuthenticate
      */
     function loginHeaders(ServerRequest myRequest): array
     {
-        $realm = this.getConfig('realm') ?: myRequest.getEnv('SERVER_NAME');
+        $realm = this.getConfig("realm") ?: myRequest.getEnv("SERVER_NAME");
 
         return [
-            'WWW-Authenticate' => sprintf('Basic realm="%s"', $realm),
+            "WWW-Authenticate" => sprintf("Basic realm="%s"", $realm),
         ];
     }
 }
