@@ -15,11 +15,11 @@ class CacheClearallCommand : Command {
      * @return string
      */
     static string defaultName() {
-        return 'cache clear_all';
+        return "cache clear_all";
     }
 
     /**
-     * Hook method for defining this command's option parser.
+     * Hook method for defining this command"s option parser.
      *
      * @see https://book.cakephp.org/4/en/console-commands/option-parsers.html
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
@@ -28,13 +28,13 @@ class CacheClearallCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser = super.buildOptionParser($parser);
-        $parser.setDescription('Clear all data in all configured cache engines.');
+        $parser.setDescription("Clear all data in all configured cache engines.");
 
         return $parser;
     }
 
     /**
-     * Implement this method with your command's logic.
+     * Implement this method with your command"s logic.
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io

@@ -18,27 +18,27 @@ class RoutesCommand : Command {
      */
     auto execute(Arguments $args, ConsoleIo $io): Nullable!int
     {
-        $header = ['Route name', 'URI template', 'Plugin', 'Prefix', 'Controller', 'Action', 'Method(s)'];
-        if ($args.getOption('verbose')) {
-            $header[] = 'Defaults';
+        $header = ["Route name", "URI template", "Plugin", "Prefix", "Controller", "Action", "Method(s)"];
+        if ($args.getOption("verbose")) {
+            $header[] = "Defaults";
         }
 
         $output = [];
 
         foreach (Router::routes() as $route) {
-            $methods = $route.defaults['_method'] ?? '';
+            $methods = $route.defaults["_method"] ?? "";
 
             $item = [
-                $route.options['_name'] ?? $route.getName(),
+                $route.options["_name"] ?? $route.getName(),
                 $route.template,
-                $route.defaults['plugin'] ?? '',
-                $route.defaults['prefix'] ?? '',
-                $route.defaults['controller'] ?? '',
-                $route.defaults['action'] ?? '',
-                is_string($methods) ? $methods : implode(', ', $route.defaults['_method']),
+                $route.defaults["plugin"] ?? "",
+                $route.defaults["prefix"] ?? "",
+                $route.defaults["controller"] ?? "",
+                $route.defaults["action"] ?? "",
+                is_string($methods) ? $methods : implode(", ", $route.defaults["_method"]),
             ];
 
-            if ($args.getOption('verbose')) {
+            if ($args.getOption("verbose")) {
                 ksort($route.defaults);
                 $item[] = json_encode($route.defaults);
             }
@@ -46,7 +46,7 @@ class RoutesCommand : Command {
             $output[] = $item;
         }
 
-        if ($args.getOption('sort')) {
+        if ($args.getOption("sort")) {
             usort($output, function ($a, $b) {
                 return strcasecmp($a[0], $b[0]);
             });
@@ -54,7 +54,7 @@ class RoutesCommand : Command {
 
         array_unshift($output, $header);
 
-        $io.helper('table').output($output);
+        $io.helper("table").output($output);
         $io.out();
 
         return static::CODE_SUCCESS;
@@ -69,11 +69,11 @@ class RoutesCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
-            .setDescription('Get the list of routes connected in this application.')
-            .addOption('sort', [
-                'help' => 'Sorts alphabetically by route name A-Z',
-                'short' => 's',
-                'boolean' => true,
+            .setDescription("Get the list of routes connected in this application.")
+            .addOption("sort", [
+                "help" => "Sorts alphabetically by route name A-Z",
+                "short" => "s",
+                "boolean" => true,
             ]);
 
         return $parser;

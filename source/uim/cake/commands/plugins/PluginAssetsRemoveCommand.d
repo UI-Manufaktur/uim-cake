@@ -5,7 +5,7 @@ import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
 
 /**
- * Command for removing plugin assets from app's webroot.
+ * Command for removing plugin assets from app"s webroot.
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
@@ -14,13 +14,13 @@ class PluginAssetsRemoveCommand : Command {
 
 
     static string defaultName() {
-        return 'plugin assets remove';
+        return "plugin assets remove";
     }
 
     /**
      * Execute the command
      *
-     * Remove plugin assets from app's webroot.
+     * Remove plugin assets from app"s webroot.
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
@@ -31,19 +31,19 @@ class PluginAssetsRemoveCommand : Command {
         this.io = $io;
         this.args = $args;
 
-        myName = $args.getArgument('name');
+        myName = $args.getArgument("name");
         myPlugins = this._list(myName);
 
         foreach (myPlugins as myPlugin => myConfig) {
             this.io.out();
-            this.io.out('For plugin: ' . myPlugin);
+            this.io.out("For plugin: " . myPlugin);
             this.io.hr();
 
             this._remove(myConfig);
         }
 
         this.io.out();
-        this.io.out('Done');
+        this.io.out("Done");
 
         return static::CODE_SUCCESS;
     }
@@ -57,10 +57,10 @@ class PluginAssetsRemoveCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            'Remove plugin assets from app\'s webroot.',
-        ]).addArgument('name', [
-            'help' => 'A specific plugin you want to remove.',
-            'optional' => true,
+            "Remove plugin assets from app\"s webroot.",
+        ]).addArgument("name", [
+            "help" => "A specific plugin you want to remove.",
+            "optional" => true,
         ]);
 
         return $parser;

@@ -35,8 +35,8 @@ class CommandFactory : ICommandFactory
 
         if (!($command instanceof ICommand) && !($command instanceof Shell)) {
             /** @psalm-suppress DeprecatedClass */
-            $valid = implode('` or `', [Shell::class, ICommand::class]);
-            myMessage = sprintf('Class `%s` must be an instance of `%s`.', myClassName, $valid);
+            $valid = implode("` or `", [Shell::class, ICommand::class]);
+            myMessage = sprintf("Class `%s` must be an instance of `%s`.", myClassName, $valid);
             throw new InvalidArgumentException(myMessage);
         }
 
