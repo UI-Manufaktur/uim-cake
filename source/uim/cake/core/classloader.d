@@ -20,7 +20,7 @@ class ClassLoader
      *
      * @return void
      */
-    function register(): void
+    void register()
     {
         /** @var callable $callable */
         $callable = [this, "loadClass"];
@@ -38,7 +38,7 @@ class ClassLoader
      * than last.
      * @return void
      */
-    function addmodule(string $prefix, string $baseDir, bool $prepend = false): void
+    void addmodule(string $prefix, string $baseDir, bool $prepend = false)
     {
         $prefix = trim($prefix, "\\") . "\\";
 

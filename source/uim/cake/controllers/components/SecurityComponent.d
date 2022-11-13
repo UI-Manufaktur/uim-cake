@@ -135,7 +135,7 @@ class SecurityComponent : Component
      * @param array<string>|string|null $actions Actions list
      * @return void
      */
-    function requireSecure($actions = null): void
+    void requireSecure($actions = null)
     {
         $actions = (array)$actions;
         this.setConfig("requireSecure", empty($actions) ? ["*"] : $actions);
@@ -168,7 +168,7 @@ class SecurityComponent : Component
      * @throws \Cake\Http\Exception\BadRequestException
      * @return void
      */
-    protected auto _throwException(?SecurityException myException = null): void
+    protected void _throwException(?SecurityException myException = null)
     {
         if (myException !== null) {
             if (!Configure::read("debug")) {
@@ -187,7 +187,7 @@ class SecurityComponent : Component
      * @return void
      * @throws \Cake\Controller\Exception\SecurityException
      */
-    protected auto _secureRequired(Controller $controller): void
+    protected void _secureRequired(Controller $controller)
     {
         if (
             empty(this._config["requireSecure"]) ||
@@ -216,7 +216,7 @@ class SecurityComponent : Component
      * @return void
      * @throws \Cake\Controller\Exception\AuthSecurityException
      */
-    protected auto _validatePost(Controller $controller): void
+    protected void _validatePost(Controller $controller)
     {
         $token = this._validToken($controller);
         $hashParts = this._hashParts($controller);

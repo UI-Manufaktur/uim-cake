@@ -203,7 +203,7 @@ trait InstanceConfigTrait
      * @return void
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
-    protected auto _configWrite(myKey, myValue, myMerge = false): void
+    protected void _configWrite(myKey, myValue, myMerge = false)
     {
         if (is_string(myKey) && myValue === null) {
             this._configDelete(myKey);
@@ -259,7 +259,7 @@ trait InstanceConfigTrait
      * @return void
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
-    protected auto _configDelete(string myKey): void
+    protected void _configDelete(string myKey)
     {
         if (strpos(myKey, ".") === false) {
             unset(this._config[myKey]);

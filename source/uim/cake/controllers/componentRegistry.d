@@ -87,7 +87,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @return void
      * @throws \Cake\Controller\Exception\MissingComponentException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin)
     {
         throw new MissingComponentException([
             "class" => myClass . "Component",

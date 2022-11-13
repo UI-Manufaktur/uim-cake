@@ -266,7 +266,7 @@ class FileEngine : CacheEngine
      * @param string myPath The path to search.
      * @return void
      */
-    protected auto _clearDirectory(string myPath): void
+    protected void _clearDirectory(string myPath)
     {
         if (!is_dir(myPath)) {
             return;

@@ -15,7 +15,7 @@ interface ConsoleApplicationInterface
      *
      * @return void
      */
-    function bootstrap(): void;
+    void bootstrap();
 
     /**
      * Define the console commands for an application.

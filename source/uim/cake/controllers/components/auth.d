@@ -223,7 +223,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param array<string, mixed> myConfig The config data.
      * @return void
      */
-    function initialize(array myConfig): void
+    void initialize(array myConfig)
     {
         $controller = this._registry.getController();
         this.setEventManager($controller.getEventManager());
@@ -434,7 +434,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @return void
      */
-    protected auto _setDefaults(): void
+    protected void _setDefaults()
     {
         $defaults = [
             "authenticate" => ["Form"],
@@ -571,7 +571,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-public
      */
-    function allow($actions = null): void
+    void allow($actions = null)
     {
         if ($actions === null) {
             $controller = this._registry.getController();
@@ -602,7 +602,7 @@ class AuthComponent : Component : IEventDispatcher
      * @see \Cake\Controller\Component\AuthComponent::allow()
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
-    function deny($actions = null): void
+    void deny($actions = null)
     {
         if ($actions === null) {
             this.allowedActions = [];
@@ -628,7 +628,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#identifying-users-and-logging-them-in
      */
-    auto setUser(myUser): void
+    void setUser(myUser)
     {
         this.storage().write(myUser);
     }
@@ -888,7 +888,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param mixed myValue Value to set.
      * @return void
      */
-    auto __set(string myName, myValue): void
+    void __set(string myName, myValue)
     {
         if (myName === "sessionKey") {
             this._storage = null;
@@ -929,7 +929,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param string|false myMessage The message to set. False to skip.
      * @return void
      */
-    function flash(myMessage): void
+    void flash(myMessage)
     {
         if (myMessage === false) {
             return;

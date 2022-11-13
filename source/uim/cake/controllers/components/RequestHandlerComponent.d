@@ -111,7 +111,7 @@ class RequestHandlerComponent : Component
      * @param \Cake\Http\Response $response The response instance.
      * @return void
      */
-    protected auto _setExtension(ServerRequest myRequest, Response $response): void
+    protected void _setExtension(ServerRequest myRequest, Response $response)
     {
         $accept = myRequest.parseAccept();
         if (empty($accept) || current($accept)[0] === "text/html") {
@@ -147,7 +147,7 @@ class RequestHandlerComponent : Component
      * @param \Cake\Event\IEvent myEvent The startup event that was fired.
      * @return void
      */
-    function startup(IEvent myEvent): void
+    void startup(IEvent myEvent)
     {
         $controller = this.getController();
         myRequest = $controller.getRequest();
@@ -190,7 +190,7 @@ class RequestHandlerComponent : Component
      * @return void
      * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
      */
-    function beforeRender(IEvent myEvent): void
+    void beforeRender(IEvent myEvent)
     {
         $controller = this.getController();
         $response = $controller.getResponse();
@@ -389,7 +389,7 @@ class RequestHandlerComponent : Component
      * @return void
      * @see \Cake\Controller\Component\RequestHandlerComponent::respondAs()
      */
-    function renderAs(Controller $controller, string myType, array myOptions = []): void
+    void renderAs(Controller $controller, string myType, array myOptions = [])
     {
         $defaults = ["charset" => "UTF-8"];
         $viewClassMap = this.getConfig("viewClassMap");

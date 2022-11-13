@@ -118,7 +118,7 @@ class BasePlugin : PluginInterface
      *
      * @return void
      */
-    function initialize(): void
+    void initialize()
     {
     }
 
@@ -211,7 +211,7 @@ class BasePlugin : PluginInterface
      * @throws \InvalidArgumentException on invalid hooks
      * @return void
      */
-    protected auto checkHook(string $hook): void
+    protected void checkHook(string $hook)
     {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
@@ -221,7 +221,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function routes(RouteBuilder $routes): void
+    void routes(RouteBuilder $routes)
     {
         myPath = this.getConfigPath() . "routes.php";
         if (is_file(myPath)) {
@@ -233,7 +233,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function bootstrap(PluginApplicationInterface $app): void
+    void bootstrap(PluginApplicationInterface $app)
     {
         $bootstrap = this.getConfigPath() . "bootstrap.php";
         if (is_file($bootstrap)) {
@@ -259,7 +259,7 @@ class BasePlugin : PluginInterface
      * @param \Cake\Core\IContainer myContainer The container to add services to.
      * @return void
      */
-    function services(IContainer myContainer): void
+    void services(IContainer myContainer)
     {
     }
 }

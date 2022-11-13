@@ -50,7 +50,7 @@ class FlashComponent : Component
      * @param array<string, mixed> myOptions An array of options
      * @return void
      */
-    auto set(myMessage, array myOptions = []): void
+    void set(myMessage, array myOptions = [])
     {
         if (myMessage instanceof Throwable) {
             this.flash().setExceptionMessage(myMessage, myOptions);

@@ -34,7 +34,7 @@ class SecurityException : BadRequestException
      * @param string myMessage Exception message
      * @return void
      */
-    auto setMessage(string myMessage): void
+    void setMessage(string myMessage)
     {
         this.message = myMessage;
     }

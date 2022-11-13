@@ -53,7 +53,7 @@ class TaskRegistry : ObjectRegistry
      * @return void
      * @throws \Cake\Console\Exception\MissingTaskException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin)
     {
         throw new MissingTaskException([
             "class" => myClass,
