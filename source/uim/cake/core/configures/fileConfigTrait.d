@@ -13,7 +13,7 @@ trait FileConfigTrait
      *
      * @var string
      */
-    protected $_path = '';
+    protected $_path = "";
 
     /**
      * Get file path
@@ -22,12 +22,12 @@ trait FileConfigTrait
      *  as a plugin prefix.
      * @param bool $checkExists Whether to check if file exists. Defaults to false.
      * @return string Full file path
-     * @throws \Cake\Core\Exception\CakeException When files don't exist or when
-     *  files contain '..' as this could lead to abusive reads.
+     * @throws \Cake\Core\Exception\CakeException When files don"t exist or when
+     *  files contain ".." as this could lead to abusive reads.
      */
     protected string _getFilePath(string myKey, bool $checkExists = false) {
-        if (strpos(myKey, '..') !== false) {
-            throw new CakeException('Cannot load/dump configuration files with ../ in them.');
+        if (strpos(myKey, "..") !== false) {
+            throw new CakeException("Cannot load/dump configuration files with ../ in them.");
         }
 
         [myPlugin, myKey] = pluginSplit(myKey);
@@ -49,6 +49,6 @@ trait FileConfigTrait
             return $realPath;
         }
 
-        throw new CakeException(sprintf('Could not load configuration file: %s', myfile));
+        throw new CakeException(sprintf("Could not load configuration file: %s", myfile));
     }
 }

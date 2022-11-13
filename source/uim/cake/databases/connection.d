@@ -118,14 +118,14 @@ class Connection : ConnectionInterface
     this(array myConfig) {
         this._config = myConfig;
 
-        myDriver = '';
-        if (!empty(myConfig['driver'])) {
-            myDriver = myConfig['driver'];
+        myDriver = "";
+        if (!empty(myConfig["driver"])) {
+            myDriver = myConfig["driver"];
         }
         this.setDriver(myDriver, myConfig);
 
-        if (!empty(myConfig['log'])) {
-            this.enableQueryLogging((bool)myConfig['log']);
+        if (!empty(myConfig["log"])) {
+            this.enableQueryLogging((bool)myConfig["log"]);
         }
     }
 
@@ -136,7 +136,7 @@ class Connection : ConnectionInterface
      */
     auto __destruct() {
         if (this._transactionStarted && class_exists(Log::class)) {
-            Log::warning('The connection is going to be closed but there is an active transaction.');
+            Log::warning("The connection is going to be closed but there is an active transaction.");
         }
     }
 
@@ -153,7 +153,7 @@ class Connection : ConnectionInterface
      */
     string configName()
     {
-        return this._config['name'] ?? '';
+        return this._config["name"] ?? "";
     }
 
     /**
@@ -163,20 +163,20 @@ class Connection : ConnectionInterface
      * @param \Cake\Database\IDriver|string myDriver The driver instance to use.
      * @param array<string, mixed> myConfig Config for a new driver.
      * @throws \Cake\Database\Exception\MissingDriverException When a driver class is missing.
-     * @throws \Cake\Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
+     * @throws \Cake\Database\Exception\MissingExtensionException When a driver"s PHP extension is missing.
      * @return this
      */
     auto setDriver(myDriver, myConfig = []) {
         if (is_string(myDriver)) {
             /** @psalm-var class-string<\Cake\Database\IDriver>|null myClassName */
-            myClassName = App::className(myDriver, 'Database/Driver');
+            myClassName = App::className(myDriver, "Database/Driver");
             if (myClassName === null) {
-                throw new MissingDriverException(['driver' => myDriver]);
+                throw new MissingDriverException(["driver" => myDriver]);
             }
             myDriver = new myClassName(myConfig);
         }
         if (!myDriver.enabled()) {
-            throw new MissingExtensionException(['driver' => get_class(myDriver)]);
+            throw new MissingExtensionException(["driver" => get_class(myDriver)]);
         }
 
         this._driver = myDriver;
@@ -219,8 +219,8 @@ class Connection : ConnectionInterface
         } catch (Throwable $e) {
             throw new MissingConnectionException(
                 [
-                    'driver' => App::shortName(get_class(this._driver), 'Database/Driver'),
-                    'reason' => $e.getMessage(),
+                    "driver" => App::shortName(get_class(this._driver), "Database/Driver"),
+                    "reason" => $e.getMessage(),
                 ],
                 null,
                 $e
@@ -289,7 +289,7 @@ class Connection : ConnectionInterface
 
     /**
      * Compiles a Query object into a SQL string according to the dialect for this
-     * connection's driver
+     * connection"s driver
      *
      * @param \Cake\Database\Query myQuery The query to be compiled
      * @param \Cake\Database\ValueBinder $binder Value binder
@@ -367,10 +367,10 @@ class Connection : ConnectionInterface
             return this._schemaCollection;
         }
 
-        if (!empty(this._config['cacheMetadata'])) {
+        if (!empty(this._config["cacheMetadata"])) {
             return this._schemaCollection = new CachedCollection(
                 new SchemaCollection(this),
-                empty(this._config['cacheKeyPrefix']) ? this.configName() : this._config['cacheKeyPrefix'],
+                empty(this._config["cacheKeyPrefix"]) ? this.configName() : this._config["cacheKeyPrefix"],
                 this.getCacher()
             );
         }
@@ -443,7 +443,7 @@ class Connection : ConnectionInterface
     {
         if (!this._transactionStarted) {
             if (this._logQueries) {
-                this.log('BEGIN');
+                this.log("BEGIN");
             }
 
             this.getDisconnectRetry().run(function (): void {
@@ -484,7 +484,7 @@ class Connection : ConnectionInterface
             this._transactionStarted = false;
             this.nestedTransactionRollbackException = null;
             if (this._logQueries) {
-                this.log('COMMIT');
+                this.log("COMMIT");
             }
 
             return this._driver.commitTransaction();
@@ -519,7 +519,7 @@ class Connection : ConnectionInterface
             this._transactionStarted = false;
             this.nestedTransactionRollbackException = null;
             if (this._logQueries) {
-                this.log('ROLLBACK');
+                this.log("ROLLBACK");
             }
             this._driver.rollbackTransaction();
 
@@ -719,7 +719,7 @@ class Connection : ConnectionInterface
      * @param \Cake\Database\TypeInterface|string|int myType Type to be used for determining kind of quoting to perform
      * @return string Quoted value
      */
-    string quote(myValue, myType = 'string')
+    string quote(myValue, myType = "string")
     {
         [myValue, myType] = this.cast(myValue, myType);
 
@@ -762,7 +762,7 @@ class Connection : ConnectionInterface
     function cacheMetadata($cache): void
     {
         this._schemaCollection = null;
-        this._config['cacheMetadata'] = $cache;
+        this._config["cacheMetadata"] = $cache;
         if (is_string($cache)) {
             this.cacher = null;
         }
@@ -786,15 +786,15 @@ class Connection : ConnectionInterface
             return this.cacher;
         }
 
-        myConfigName = this._config['cacheMetadata'] ?? '_cake_model_';
+        myConfigName = this._config["cacheMetadata"] ?? "_cake_model_";
         if (!is_string(myConfigName)) {
-            myConfigName = '_cake_model_';
+            myConfigName = "_cake_model_";
         }
 
         if (!class_exists(Cache::class)) {
             throw new RuntimeException(
-                'To use caching you must either set a cacher using Connection::setCacher()' .
-                ' or require the cakephp/cache package in your composer config.'
+                "To use caching you must either set a cacher using Connection::setCacher()" .
+                " or require the cakephp/cache package in your composer config."
             );
         }
 
@@ -858,12 +858,12 @@ class Connection : ConnectionInterface
 
         if (!class_exists(QueryLogger::class)) {
             throw new RuntimeException(
-                'For logging you must either set a logger using Connection::setLogger()' .
-                ' or require the cakephp/log package in your composer config.'
+                "For logging you must either set a logger using Connection::setLogger()" .
+                " or require the cakephp/log package in your composer config."
             );
         }
 
-        return this._logger = new QueryLogger(['connection' => this.configName()]);
+        return this._logger = new QueryLogger(["connection" => this.configName()]);
     }
 
     /**
@@ -876,7 +876,7 @@ class Connection : ConnectionInterface
     {
         myQuery = new LoggedQuery();
         myQuery.query = mySql;
-        this.getLogger().debug((string)myQuery, ['query' => myQuery]);
+        this.getLogger().debug((string)myQuery, ["query" => myQuery]);
     }
 
     /**
@@ -903,23 +903,23 @@ class Connection : ConnectionInterface
     auto __debugInfo(): array
     {
         $secrets = [
-            'password' => '*****',
-            'username' => '*****',
-            'host' => '*****',
-            'database' => '*****',
-            'port' => '*****',
+            "password" => "*****",
+            "username" => "*****",
+            "host" => "*****",
+            "database" => "*****",
+            "port" => "*****",
         ];
         $replace = array_intersect_key($secrets, this._config);
         myConfig = $replace + this._config;
 
         return [
-            'config' => myConfig,
-            'driver' => this._driver,
-            'transactionLevel' => this._transactionLevel,
-            'transactionStarted' => this._transactionStarted,
-            'useSavePoints' => this._useSavePoints,
-            'logQueries' => this._logQueries,
-            'logger' => this._logger,
+            "config" => myConfig,
+            "driver" => this._driver,
+            "transactionLevel" => this._transactionLevel,
+            "transactionStarted" => this._transactionStarted,
+            "useSavePoints" => this._useSavePoints,
+            "logQueries" => this._logQueries,
+            "logger" => this._logger,
         ];
     }
 }

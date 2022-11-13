@@ -14,7 +14,7 @@ use Iterator;
  * on criteria.
  *
  * This class : the Iterator interface to allow plugins
- * to be iterated, handling the situation where a plugin's hook
+ * to be iterated, handling the situation where a plugin"s hook
  * method (usually bootstrap) loads another plugin during iteration.
  *
  * While its implementation supported nested iteration it does not
@@ -74,14 +74,14 @@ class PluginCollection : Iterator, Countable
      */
     protected auto loadConfig(): void
     {
-        if (Configure::check('plugins')) {
+        if (Configure::check("plugins")) {
             return;
         }
-        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'cakephp-plugins.php';
+        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "cakephp-plugins.php";
         if (!is_file($vendorFile)) {
-            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 'cakephp-plugins.php';
+            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . "cakephp-plugins.php";
             if (!is_file($vendorFile)) {
-                Configure.write(['plugins' => []]);
+                Configure.write(["plugins" => []]);
 
                 return;
             }
@@ -94,12 +94,12 @@ class PluginCollection : Iterator, Countable
     /**
      * Locate a plugin path by looking at configuration data.
      *
-     * This will use the `plugins` Configure key, and fallback to enumerating `App::path('plugins')`
+     * This will use the `plugins` Configure key, and fallback to enumerating `App::path("plugins")`
      *
      * This method is not part of the official public API as plugins with
      * no plugin class are being phased out.
      *
-     * @param string myName The plugin name to locate a path for. Will return '' when a plugin cannot be found.
+     * @param string myName The plugin name to locate a path for. Will return "" when a plugin cannot be found.
      * @return string
      * @throws \Cake\Core\Exception\MissingPluginException when a plugin path cannot be resolved.
      * @internal
@@ -110,18 +110,18 @@ class PluginCollection : Iterator, Countable
         // wipes out all configuration including plugin paths config.
         this.loadConfig();
 
-        myPath = Configure::read('plugins.' . myName);
+        myPath = Configure::read("plugins." . myName);
         if (myPath) { return myPath; }
 
-        myPluginPath = str_replace('/', DIRECTORY_SEPARATOR, myName);
-        myPaths = App::path('plugins');
+        myPluginPath = str_replace("/", DIRECTORY_SEPARATOR, myName);
+        myPaths = App::path("plugins");
         foreach (myPaths as myPath) {
             if (is_dir(myPath . myPluginPath)) {
                 return myPath . myPluginPath . DIRECTORY_SEPARATOR;
             }
         }
 
-        throw new MissingPluginException(['plugin' => myName]);
+        throw new MissingPluginException(["plugin" => myName]);
     }
 
     /**
@@ -175,7 +175,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Get the a plugin by name.
      *
-     * If a plugin isn't already loaded it will be autoloaded on first access
+     * If a plugin isn"t already loaded it will be autoloaded on first access
      * and that plugins loaded this way may miss some hook methods.
      *
      * @param string myName The plugin to get.
@@ -203,18 +203,18 @@ class PluginCollection : Iterator, Countable
      */
     function create(string myName, array myConfig = []): PluginInterface
     {
-        if (strpos(myName, '\\') !== false) {
+        if (strpos(myName, "\\") !== false) {
             /** @var \Cake\Core\PluginInterface */
             return new myName(myConfig);
         }
 
-        myConfig += ['name' => myName];
+        myConfig += ["name" => myName];
         /** @var class-string<\Cake\Core\PluginInterface> myClassName */
-        myClassName = str_replace('/', '\\', myName) . '\\' . 'Plugin';
+        myClassName = str_replace("/", "\\", myName) . "\\" . "Plugin";
         if (!class_exists(myClassName)) {
             myClassName = BasePlugin::class;
-            if (empty(myConfig['path'])) {
-                myConfig['path'] = this.findPath(myName);
+            if (empty(myConfig["path"])) {
+                myConfig["path"] = this.findPath(myName);
             }
         }
 

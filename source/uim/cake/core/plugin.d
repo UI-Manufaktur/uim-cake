@@ -30,7 +30,7 @@ class Plugin
     }
 
     /**
-     * Returns the filesystem path for plugin's folder containing class files.
+     * Returns the filesystem path for plugin"s folder containing class files.
      *
      * @param string myName name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing class files.
@@ -43,7 +43,7 @@ class Plugin
     }
 
     /**
-     * Returns the filesystem path for plugin's folder containing config files.
+     * Returns the filesystem path for plugin"s folder containing config files.
      *
      * @param string myName name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing config files.
@@ -56,7 +56,7 @@ class Plugin
     }
 
     /**
-     * Returns the filesystem path for plugin's folder containing template files.
+     * Returns the filesystem path for plugin"s folder containing template files.
      *
      * @param string myName name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing template files.

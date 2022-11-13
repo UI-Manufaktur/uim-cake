@@ -14,22 +14,22 @@ You can use the `Configure` class to store arbitrary configuration data:
 import uim.cakere.Configure;
 import uim.cakere.Configure\Engine\PhpConfig;
 
-Configure.write('Company.name','Pizza, Inc.');
-Configure::read('Company.name'); // Returns: 'Pizza, Inc.'
+Configure.write("Company.name","Pizza, Inc.");
+Configure::read("Company.name"); // Returns: "Pizza, Inc."
 ```
 
 It also possible to load configuration from external files:
 
 ```php
-Configure::config('default', new PhpConfig('/path/to/config/folder'));
-Configure::load('app', 'default', false);
-Configure::load('other_config', 'default');
+Configure::config("default", new PhpConfig("/path/to/config/folder"));
+Configure::load("app", "default", false);
+Configure::load("other_config", "default");
 ```
 
 And write the configuration back into files:
 
 ```php
-Configure::dump('my_config', 'default');
+Configure::dump("my_config", "default");
 ```
 
 ## Documentation
