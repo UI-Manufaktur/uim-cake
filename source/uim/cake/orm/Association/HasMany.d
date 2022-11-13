@@ -106,8 +106,7 @@ class HasMany : Association
      *
      * @return string the strategy to be used for saving
      */
-    string getSaveStrategy()
-    {
+    string getSaveStrategy() {
         return this._saveStrategy;
     }
 
@@ -543,8 +542,7 @@ class HasMany : Association
      *
      * @return string
      */
-    string type()
-    {
+    string type() {
         return self::ONE_TO_MANY;
     }
 

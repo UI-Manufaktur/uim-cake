@@ -312,8 +312,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param string myField Field name to be aliased.
      * @return string
      */
-    string translationField(string myField)
-    {
+    string translationField(string myField) {
         myTable = this.table;
         if (this.getLocale() === this.getConfig("defaultLocale")) {
             return myTable.aliasField(myField);

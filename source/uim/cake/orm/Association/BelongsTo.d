@@ -58,8 +58,7 @@ class BelongsTo : Association
      *
      * @return string
      */
-    protected string _propertyName()
-    {
+    protected string _propertyName() {
         [, myName] = pluginSplit(this._name);
 
         return Inflector::underscore(Inflector::singularize(myName));
@@ -82,8 +81,7 @@ class BelongsTo : Association
      *
      * @return string
      */
-    string type()
-    {
+    string type() {
         return self::MANY_TO_ONE;
     }
 

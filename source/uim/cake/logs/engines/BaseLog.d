@@ -115,8 +115,7 @@ abstract class BaseLog : AbstractLogger
      * @return string
      * @deprecated 4.3.0 Call `interpolate()` directly from your log engine and format the message in a formatter.
      */
-    protected string _format(string myMessage, array $context = [])
-    {
+    protected string _format(string myMessage, array $context = []) {
         return this.interpolate(myMessage, $context);
     }
 
@@ -127,8 +126,7 @@ abstract class BaseLog : AbstractLogger
      * @param array $context Context for placeholder values.
      * @return string
      */
-    protected string interpolate(string myMessage, array $context = [])
-    {
+    protected string interpolate(string myMessage, array $context = []) {
         if (strpos(myMessage, "{") === false && strpos(myMessage, "}") === false) {
             return myMessage;
         }

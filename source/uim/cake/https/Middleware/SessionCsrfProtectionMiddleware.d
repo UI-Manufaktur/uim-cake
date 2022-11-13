@@ -150,8 +150,7 @@ class SessionCsrfProtectionMiddleware : MiddlewareInterface
      * @param string $token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    string saltToken(string $token)
-    {
+    string saltToken(string $token) {
         $decoded = base64_decode($token);
         $length = strlen($decoded);
         $salt = Security::randomBytes($length);
@@ -173,8 +172,7 @@ class SessionCsrfProtectionMiddleware : MiddlewareInterface
      * @param string $token The token that could be salty.
      * @return string An unsalted token.
      */
-    protected string unsaltToken(string $token)
-    {
+    protected string unsaltToken(string $token) {
         $decoded = base64_decode($token, true);
         if ($decoded === false || strlen($decoded) !== static::TOKEN_VALUE_LENGTH * 2) {
             return $token;
@@ -219,8 +217,7 @@ class SessionCsrfProtectionMiddleware : MiddlewareInterface
      *
      * @return string
      */
-    string createToken()
-    {
+    string createToken() {
         return base64_encode(Security::randomBytes(static::TOKEN_VALUE_LENGTH));
     }
 

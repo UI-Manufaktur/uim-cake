@@ -268,8 +268,7 @@ class Socket
      *
      * @return string Host name
      */
-    string host()
-    {
+    string host() {
         if (Validation::ip(this._config["host"])) {
             return gethostbyaddr(this._config["host"]);
         }
@@ -282,8 +281,7 @@ class Socket
      *
      * @return string IP address
      */
-    string address()
-    {
+    string address() {
         if (Validation::ip(this._config["host"])) {
             return this._config["host"];
         }

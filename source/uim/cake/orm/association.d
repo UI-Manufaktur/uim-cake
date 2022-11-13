@@ -260,8 +260,7 @@ abstract class Association
      *
      * @return string
      */
-    string getName()
-    {
+    string getName() {
         return this._name;
     }
 
@@ -315,8 +314,7 @@ abstract class Association
      *
      * @return string
      */
-    string getClassName()
-    {
+    string getClassName() {
         return this._className;
     }
 
@@ -533,8 +531,7 @@ abstract class Association
      *
      * @return string
      */
-    string getJoinType()
-    {
+    string getJoinType() {
         return this._joinType;
     }
 
@@ -557,8 +554,7 @@ abstract class Association
      *
      * @return string
      */
-    string getProperty()
-    {
+    string getProperty() {
         if (!this._propertyName) {
             this._propertyName = this._propertyName();
             if (in_array(this._propertyName, this._sourceTable.getSchema().columns(), true)) {
@@ -579,8 +575,7 @@ abstract class Association
      *
      * @return string
      */
-    protected string _propertyName()
-    {
+    protected string _propertyName() {
         [, myName] = pluginSplit(this._name);
 
         return Inflector::underscore(myName);
@@ -615,8 +610,7 @@ abstract class Association
      *
      * @return string
      */
-    string getStrategy()
-    {
+    string getStrategy() {
         return this._strategy;
     }
 

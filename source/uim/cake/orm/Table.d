@@ -316,8 +316,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return string
      * @see \Cake\ORM\Locator\TableLocator::get()
      */
-    static string defaultConnectionName()
-    {
+    static string defaultConnectionName() {
         return 'default';
     }
 
@@ -365,8 +364,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return string
      */
-    string getTable()
-    {
+    string getTable() {
         if (this._table === null) {
             myTable = moduleSplit(static::class);
             myTable = substr(end(myTable), 0, -5);
@@ -396,8 +394,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return string
      */
-    string getAlias()
-    {
+    string getAlias() {
         if (this._alias === null) {
             myAlias = moduleSplit(static::class);
             myAlias = substr(end(myAlias), 0, -5) ?: this.getTable();
@@ -415,8 +412,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param string myField The field to alias.
      * @return string The field prefixed with the table alias.
      */
-    string aliasField(string myField)
-    {
+    string aliasField(string myField) {
         if (strpos(myField, '.') !== false) {
             return myField;
         }
@@ -441,8 +437,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return string
      */
-    string getRegistryAlias()
-    {
+    string getRegistryAlias() {
         if (this._registryAlias === null) {
             this._registryAlias = this.getAlias();
         }
@@ -673,8 +668,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return string
      * @psalm-return class-string<\Cake\Datasource\IEntity>
      */
-    string getEntityClass()
-    {
+    string getEntityClass() {
         if (!this._entityClass) {
             $default = Entity::class;
             $self = static::class;

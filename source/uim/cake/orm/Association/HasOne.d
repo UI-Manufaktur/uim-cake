@@ -43,8 +43,7 @@ class HasOne : Association
      *
      * @return string
      */
-    protected string _propertyName()
-    {
+    protected string _propertyName() {
         [, myName] = pluginSplit(this._name);
 
         return Inflector::underscore(Inflector::singularize(myName));
@@ -67,8 +66,7 @@ class HasOne : Association
      *
      * @return string
      */
-    string type()
-    {
+    string type() {
         return self::ONE_TO_ONE;
     }
 

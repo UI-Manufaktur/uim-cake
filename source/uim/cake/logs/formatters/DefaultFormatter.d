@@ -20,8 +20,7 @@ class DefaultFormatter : AbstractFormatter
         this.setConfig(myConfig);
     }
 
-    string format($level, string myMessage, array $context = [])
-    {
+    string format($level, string myMessage, array $context = []) {
         if (this._config["includeDate"]) {
             myMessage = sprintf("%s %s: %s", date(this._config["dateFormat"]), $level, myMessage);
         } else {

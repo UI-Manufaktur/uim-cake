@@ -325,8 +325,7 @@ class SmtpTransport : AbstractTransport
      * @param string myMessage The email address to send with the command.
      * @return string
      */
-    protected string _prepareFromCmd(string myMessage)
-    {
+    protected string _prepareFromCmd(string myMessage) {
         return "MAIL FROM:<" . myMessage . ">";
     }
 
@@ -336,8 +335,7 @@ class SmtpTransport : AbstractTransport
      * @param string myMessage The email address to send with the command.
      * @return string
      */
-    protected string _prepareRcptCmd(string myMessage)
-    {
+    protected string _prepareRcptCmd(string myMessage) {
         return "RCPT TO:<" . myMessage . ">";
     }
 
@@ -378,8 +376,7 @@ class SmtpTransport : AbstractTransport
      * @param \Cake\Mailer\Message myMessage Message instance
      * @return string
      */
-    protected string _prepareMessage(Message myMessage)
-    {
+    protected string _prepareMessage(Message myMessage) {
         $lines = myMessage.getBody();
         myMessages = [];
         foreach ($lines as $line) {

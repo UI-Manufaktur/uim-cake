@@ -31,8 +31,7 @@ class JsonFormatter : AbstractFormatter
     }
 
 
-    string format($level, string myMessage, array $context = [])
-    {
+    string format($level, string myMessage, array $context = []) {
         $log = ["date" => date(this._config["dateFormat"]), "level" => (string)$level, "message" => myMessage];
         $json = json_encode($log, this._config["flags"]);
 

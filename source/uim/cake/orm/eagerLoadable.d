@@ -168,8 +168,7 @@ class EagerLoadable
      *
      * @return string
      */
-    string aliasPath()
-    {
+    string aliasPath() {
         return this._aliasPath;
     }
 

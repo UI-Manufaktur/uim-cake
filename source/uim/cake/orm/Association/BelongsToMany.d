@@ -501,8 +501,7 @@ class BelongsToMany : Association
      *
      * @return string
      */
-    string type()
-    {
+    string type() {
         return self::MANY_TO_MANY;
     }
 
@@ -620,8 +619,7 @@ class BelongsToMany : Association
      *
      * @return string the strategy to be used for saving
      */
-    string getSaveStrategy()
-    {
+    string getSaveStrategy() {
         return this._saveStrategy;
     }
 
@@ -1364,8 +1362,7 @@ class BelongsToMany : Association
      *
      * @return string
      */
-    protected string _junctionAssociationName()
-    {
+    protected string _junctionAssociationName() {
         if (!this._junctionAssociationName) {
             this._junctionAssociationName = this.getTarget()
                 .getAssociation(this.junction().getAlias())
@@ -1383,8 +1380,7 @@ class BelongsToMany : Association
      * @param string|null myName The name of the junction table.
      * @return string
      */
-    protected string _junctionTableName(Nullable!string myName = null)
-    {
+    protected string _junctionTableName(Nullable!string myName = null) {
         if (myName === null) {
             if (empty(this._junctionTableName)) {
                 myTablesNames = array_map("Cake\Utility\Inflector::underscore", [
