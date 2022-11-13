@@ -1,6 +1,6 @@
 module uim.cake.databases;
 
-import uim.cakeches\Cache;
+import uim.cake.caches\Cache;
 import uim.cakere.App;
 import uim.cakere.Retry\CommandRetry;
 import uim.cake.databases.Exception\MissingConnectionException;

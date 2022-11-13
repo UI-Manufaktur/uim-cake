@@ -1,6 +1,6 @@
 module uim.cakere;
 
-import uim.cakeches\Cache;
+import uim.cake.caches\Cache;
 import uim.cakere.Configure\ConfigEngineInterface;
 import uim.cakere.Configure\Engine\PhpConfig;
 import uim.cakere.exceptions\CakeException;

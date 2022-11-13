@@ -24,7 +24,6 @@ abstract class BaseCommand : ICommand
      */
     protected string myName = "cake unknown";
 
-
     auto setName(string myName) {
         if (strpos(myName, " ") < 1) {
             throw new InvalidArgumentException(

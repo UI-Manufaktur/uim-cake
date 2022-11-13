@@ -1,4 +1,4 @@
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
 use IteratorIterator;
 use RecursiveIterator;

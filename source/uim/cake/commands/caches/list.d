@@ -1,6 +1,6 @@
 module uim.cakemmand;
 
-import uim.cakeches\Cache;
+import uim.cake.caches\Cache;
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;

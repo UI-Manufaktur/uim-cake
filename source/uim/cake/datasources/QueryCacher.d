@@ -1,6 +1,6 @@
 module uim.cake.datasources;
 
-import uim.cakeches\Cache;
+import uim.cake.caches\Cache;
 use Closure;
 use Psr\SimpleCache\ICache;
 use RuntimeException;
