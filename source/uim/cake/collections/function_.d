@@ -7,7 +7,7 @@ s
 import uim.cakellections\Collection;
 import uim.cakellections\ICollection;
 
-if (!function_exists('collection')) {
+if (!function_exists("collection")) {
     /**
      * Returns a new {@link \Cake\Collection\Collection} object wrapping the passed argument.
      *

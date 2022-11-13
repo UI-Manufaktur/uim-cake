@@ -33,7 +33,7 @@ class RedisEngine : CacheEngine
      *
      * - `database` database number to use for connection.
      * - `duration` Specify how long items in this cache configuration last.
-     * - `groups` List of groups or 'tags' associated to every key stored in this config.
+     * - `groups` List of groups or "tags" associated to every key stored in this config.
      *    handy for deleting a complete group from cache.
      * - `password` Redis server password.
      * - `persistent` Connect to the Redis server with a persistent connection
@@ -47,17 +47,17 @@ class RedisEngine : CacheEngine
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'database' => 0,
-        'duration' => 3600,
-        'groups' => [],
-        'password' => false,
-        'persistent' => true,
-        'port' => 6379,
-        'prefix' => 'cake_',
-        'host' => null,
-        'server' => '127.0.0.1',
-        'timeout' => 0,
-        'unix_socket' => false,
+        "database" => 0,
+        "duration" => 3600,
+        "groups" => [],
+        "password" => false,
+        "persistent" => true,
+        "port" => 6379,
+        "prefix" => "cake_",
+        "host" => null,
+        "server" => "127.0.0.1",
+        "timeout" => 0,
+        "unix_socket" => false,
     ];
 
     /**
@@ -69,12 +69,12 @@ class RedisEngine : CacheEngine
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(array myConfig = []) {
-        if (!extension_loaded('redis')) {
-            throw new RuntimeException('The `redis` extension must be enabled to use RedisEngine.');
+        if (!extension_loaded("redis")) {
+            throw new RuntimeException("The `redis` extension must be enabled to use RedisEngine.");
         }
 
-        if (!empty(myConfig['host'])) {
-            myConfig['server'] = myConfig['host'];
+        if (!empty(myConfig["host"])) {
+            myConfig["server"] = myConfig["host"];
         }
 
         super.init(myConfig);
@@ -90,35 +90,35 @@ class RedisEngine : CacheEngine
     protected bool _connect() {
         try {
             this._Redis = new Redis();
-            if (!empty(this._config['unix_socket'])) {
-                $return = this._Redis.connect(this._config['unix_socket']);
-            } elseif (empty(this._config['persistent'])) {
+            if (!empty(this._config["unix_socket"])) {
+                $return = this._Redis.connect(this._config["unix_socket"]);
+            } elseif (empty(this._config["persistent"])) {
                 $return = this._Redis.connect(
-                    this._config['server'],
-                    (int)this._config['port'],
-                    (int)this._config['timeout']
+                    this._config["server"],
+                    (int)this._config["port"],
+                    (int)this._config["timeout"]
                 );
             } else {
-                $persistentId = this._config['port'] . this._config['timeout'] . this._config['database'];
+                $persistentId = this._config["port"] . this._config["timeout"] . this._config["database"];
                 $return = this._Redis.pconnect(
-                    this._config['server'],
-                    (int)this._config['port'],
-                    (int)this._config['timeout'],
+                    this._config["server"],
+                    (int)this._config["port"],
+                    (int)this._config["timeout"],
                     $persistentId
                 );
             }
         } catch (RedisException $e) {
             if (class_exists(Log::class)) {
-                Log::error('RedisEngine could not connect. Got error: ' . $e.getMessage());
+                Log::error("RedisEngine could not connect. Got error: " . $e.getMessage());
             }
 
             return false;
         }
-        if ($return && this._config['password']) {
-            $return = this._Redis.auth(this._config['password']);
+        if ($return && this._config["password"]) {
+            $return = this._Redis.auth(this._config["password"]);
         }
         if ($return) {
-            $return = this._Redis.select((int)this._config['database']);
+            $return = this._Redis.select((int)this._config["database"]);
         }
 
         return $return;
@@ -151,7 +151,7 @@ class RedisEngine : CacheEngine
      *
      * @param string myKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
-     * @return mixed The cached data, or the default if the data doesn't exist, has
+     * @return mixed The cached data, or the default if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
      */
     auto get(myKey, $default = null) {
@@ -171,7 +171,7 @@ class RedisEngine : CacheEngine
      * @return int|false New incremented value, false otherwise
      */
     function increment(string myKey, int $offset = 1) {
-        $duration = this._config['duration'];
+        $duration = this._config["duration"];
         myKey = this._key(myKey);
 
         myValue = this._Redis.incrBy(myKey, $offset);
@@ -190,7 +190,7 @@ class RedisEngine : CacheEngine
      * @return int|false New decremented value, false otherwise
      */
     function decrement(string myKey, int $offset = 1) {
-        $duration = this._config['duration'];
+        $duration = this._config["duration"];
         myKey = this._key(myKey);
 
         myValue = this._Redis.decrBy(myKey, $offset);
@@ -205,7 +205,7 @@ class RedisEngine : CacheEngine
      * Delete a key from the cache
      *
      * @param string myKey Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete(myKey) {
         myKey = this._key(myKey);
@@ -223,7 +223,7 @@ class RedisEngine : CacheEngine
 
         $isAllDeleted = true;
         $iterator = null;
-        $pattern = this._config['prefix'] . '*';
+        $pattern = this._config["prefix"] . "*";
 
         while (true) {
             myKeys = this._Redis.scan($iterator, $pattern);
@@ -242,7 +242,7 @@ class RedisEngine : CacheEngine
     }
 
     /**
-     * Write data for key into cache if it doesn't exist already.
+     * Write data for key into cache if it doesn"t exist already.
      * If it already exists, it fails and returns false.
      *
      * @param string myKey Identifier for the data.
@@ -251,11 +251,11 @@ class RedisEngine : CacheEngine
      * @link https://github.com/phpredis/phpredis#set
      */
     bool add(string myKey, myValue) {
-        $duration = this._config['duration'];
+        $duration = this._config["duration"];
         myKey = this._key(myKey);
         myValue = this.serialize(myValue);
 
-        if (this._Redis.set(myKey, myValue, ['nx', 'ex' => $duration])) {
+        if (this._Redis.set(myKey, myValue, ["nx", "ex" => $duration])) {
             return true;
         }
 
@@ -272,11 +272,11 @@ class RedisEngine : CacheEngine
     function groups(): array
     {
         myResult = [];
-        foreach (this._config['groups'] as myGroup) {
-            myValue = this._Redis.get(this._config['prefix'] . myGroup);
+        foreach (this._config["groups"] as myGroup) {
+            myValue = this._Redis.get(this._config["prefix"] . myGroup);
             if (!myValue) {
                 myValue = this.serialize(1);
-                this._Redis.set(this._config['prefix'] . myGroup, myValue);
+                this._Redis.set(this._config["prefix"] . myGroup, myValue);
             }
             myResult[] = myGroup . myValue;
         }
@@ -292,13 +292,13 @@ class RedisEngine : CacheEngine
      * @return bool success
      */
     bool clearGroup(string myGroup) {
-        return (bool)this._Redis.incr(this._config['prefix'] . myGroup);
+        return (bool)this._Redis.incr(this._config["prefix"] . myGroup);
     }
 
     /**
      * Serialize value for saving to Redis.
      *
-     * This is needed instead of using Redis' in built serialization feature
+     * This is needed instead of using Redis" in built serialization feature
      * as it creates problems incrementing/decrementing intially set integer value.
      *
      * @param mixed myValue Value to serialize.
@@ -321,7 +321,7 @@ class RedisEngine : CacheEngine
      * @return mixed
      */
     protected auto unserialize(string myValue) {
-        if (preg_match('/^[-]?\d+$/', myValue)) {
+        if (preg_match("/^[-]?\d+$/", myValue)) {
             return (int)myValue;
         }
 
@@ -332,7 +332,7 @@ class RedisEngine : CacheEngine
      * Disconnects from the redis server
      */
     auto __destruct() {
-        if (empty(this._config['persistent']) && this._Redis instanceof Redis) {
+        if (empty(this._config["persistent"]) && this._Redis instanceof Redis) {
             this._Redis.close();
         }
     }

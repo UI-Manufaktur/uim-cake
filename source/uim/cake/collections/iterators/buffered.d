@@ -7,7 +7,7 @@ use SplDoublyLinkedList;
 
 /**
  * Creates an iterator from another iterator that will keep the results of the inner
- * iterator in memory, so that results don't have to be re-calculated.
+ * iterator in memory, so that results don"t have to be re-calculated.
  */
 class BufferedIterator : Collection : Countable, Serializable
 {
@@ -40,7 +40,7 @@ class BufferedIterator : Collection : Countable, Serializable
     protected $_key;
 
     /**
-     * Whether the internal iterator's rewind method was already
+     * Whether the internal iterator"s rewind method was already
      * called
      *
      * @var bool
@@ -105,8 +105,8 @@ class BufferedIterator : Collection : Countable, Serializable
     bool valid() {
         if (this._buffer.offsetExists(this._index)) {
             $current = this._buffer.offsetGet(this._index);
-            this._current = $current['value'];
-            this._key = $current['key'];
+            this._current = $current["value"];
+            this._key = $current["key"];
 
             return true;
         }
@@ -117,8 +117,8 @@ class BufferedIterator : Collection : Countable, Serializable
             this._current = super.current();
             this._key = super.key();
             this._buffer.push([
-                'key' => this._key,
-                'value' => this._current,
+                "key" => this._key,
+                "value" => this._current,
             ]);
         }
 
@@ -133,7 +133,7 @@ class BufferedIterator : Collection : Countable, Serializable
     void next() {
         this._index++;
 
-        // Don't move inner iterator if we have more buffer
+        // Don"t move inner iterator if we have more buffer
         if (this._buffer.offsetExists(this._index)) {
             return;
         }

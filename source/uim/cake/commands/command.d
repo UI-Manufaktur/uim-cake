@@ -26,7 +26,7 @@ class Command : BaseCommand {
    * building the CommandCollection for your application.
    */
   this() {
-    this.modelFactory('Table', function (myAlias) {
+    this.modelFactory("Table", function (myAlias) {
         return this.getTableLocator().get(myAlias);
     });
 
@@ -39,7 +39,7 @@ class Command : BaseCommand {
   }
 
   /**
-   * Implement this method with your command's logic.
+   * Implement this method with your command"s logic.
    *
    * @param \Cake\Console\Arguments $args The command arguments.
    * @param \Cake\Console\ConsoleIo $io The console io

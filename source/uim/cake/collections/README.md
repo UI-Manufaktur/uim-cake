@@ -13,7 +13,7 @@ Collections can be created using an array or Traversable object.  A simple use o
 ```php
 import uim.cakellections\Collection;
 
-myItems = ['a' => 1, 'b' => 2, 'c' => 3];
+myItems = ["a" => 1, "b" => 2, "c" => 3];
 myCollection = new Collection(myItems);
 
 // Create a new collection containing elements

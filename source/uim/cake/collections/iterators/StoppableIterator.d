@@ -77,7 +77,7 @@ class StoppableIterator : Collection
         }
 
         // ArrayIterator can be traversed strictly.
-        // Let's do that for performance gains
+        // Let"s do that for performance gains
 
         $callback = this._condition;
         $res = [];

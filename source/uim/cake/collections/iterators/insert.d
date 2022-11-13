@@ -56,7 +56,7 @@ class InsertIterator : Collection {
             myValues = new Collection(myValues);
         }
 
-        myPath = explode('.', myPath);
+        myPath = explode(".", myPath);
         myTarget = array_pop(myPath);
         this._path = myPath;
         this._target = myTarget;
