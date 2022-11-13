@@ -408,8 +408,7 @@ class FileEngine : CacheEngine
     /**
      * @inheritDoc
      */
-    protected string _key(myKey)
-    {
+    protected string _key(myKey) {
         myKey = super._key(myKey);
 
         if (preg_match("/[\/\\<>?:|*"]/", myKey)) {

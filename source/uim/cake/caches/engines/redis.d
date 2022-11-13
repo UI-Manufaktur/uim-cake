@@ -305,8 +305,7 @@ class RedisEngine : CacheEngine
      * @return string
      * @link https://github.com/phpredis/phpredis/issues/81
      */
-    protected string serialize(myValue)
-    {
+    protected string serialize(myValue) {
         if (is_int(myValue)) {
             return (string)myValue;
         }

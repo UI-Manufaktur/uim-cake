@@ -38,8 +38,7 @@ class CacheRegistry : ObjectRegistry
      * @return void
      * @throws \BadMethodCallException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
-    {
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new BadMethodCallException(sprintf("Cache engine %s is not available.", myClass));
     }
 

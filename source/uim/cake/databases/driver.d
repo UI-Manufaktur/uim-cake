@@ -271,8 +271,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    string quote(myValue, myType = PDO::PARAM_STR)
-    {
+    string quote(myValue, myType = PDO::PARAM_STR) {
         this.connect();
 
         return this._connection.quote((string)myValue, myType);
@@ -308,8 +307,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    string schemaValue(myValue)
-    {
+    string schemaValue(myValue) {
         if (myValue === null) {
             return "NULL";
         }
@@ -344,8 +342,7 @@ abstract class Driver : IDriver
     /**
      * @inheritDoc
      */
-    string schema()
-    {
+    string schema() {
         return this._config["schema"];
     }
 

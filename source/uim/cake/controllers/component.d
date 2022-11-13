@@ -114,8 +114,7 @@ class Component : IEventListener
      * @param array<string, mixed> myConfig The configuration settings provided to this component.
      * @return void
      */
-    function initialize(array myConfig): void
-    {
+    void initialize(array myConfig) {
     }
 
     /**

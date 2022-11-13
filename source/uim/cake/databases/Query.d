@@ -282,8 +282,7 @@ class Query : IExpression, IteratorAggregate
      * @param \Cake\Database\ValueBinder|null $binder Value binder that generates parameter placeholders
      * @return string
      */
-    function sql(?ValueBinder $binder = null)
-    {
+    function sql(?ValueBinder $binder = null) {
         if (!$binder) {
             $binder = this.getValueBinder();
             $binder.resetCount();
@@ -1815,8 +1814,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return string
      */
-    string type()
-    {
+    string type() {
         return this._type;
     }
 
@@ -2315,8 +2313,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return string
      */
-    string __toString()
-    {
+    string __toString() {
         return this.sql();
     }
 

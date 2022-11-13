@@ -770,8 +770,7 @@ class Shell {
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#console-output
      */
-    function clear(): void
-    {
+    void clear() {
         if (!empty(this.params["noclear"])) {
             return;
         }
@@ -878,8 +877,7 @@ class Shell {
      * @throws \Cake\Console\Exception\StopException
      * @return void
      */
-    protected auto _stop(int $status = self::CODE_SUCCESS): void
-    {
+    protected void _stop(int $status = self::CODE_SUCCESS) {
         throw new StopException("Halting error reached", $status);
     }
 

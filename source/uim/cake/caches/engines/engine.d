@@ -80,8 +80,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return void
      * @throws \Cake\Cache\InvalidArgumentException When the key is not valid.
      */
-    protected auto ensureValidKey(myKey): void
-    {
+    protected void ensureValidKey(myKey) {
         if (!is_string(myKey) || strlen(myKey) === 0) {
             throw new InvalidArgumentException("A cache key must be a non-empty string.");
         }
@@ -95,8 +94,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return void
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    protected auto ensureValidType($iterable, string $check = self::CHECK_VALUE): void
-    {
+    protected void ensureValidType($iterable, string $check = self::CHECK_VALUE) {
         if (!is_iterable($iterable)) {
             throw new InvalidArgumentException(sprintf(
                 "A cache %s must be either an array or a Traversable.",
@@ -313,8 +311,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return string Prefixed key with potentially unsafe characters replaced.
      * @throws \Cake\Cache\InvalidArgumentException If key"s value is invalid.
      */
-    protected string _key(myKey)
-    {
+    protected string _key(myKey) {
         this.ensureValidKey(myKey);
 
         $prefix = "";
@@ -333,8 +330,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string myMessage The warning message.
      * @return void
      */
-    protected auto warning(string myMessage): void
-    {
+    protected void warning(string myMessage) {
         if (this.getConfig("warnOnWriteFailures") !== true) {
             return;
         }

@@ -111,8 +111,7 @@ class Cache
      * @param \Cake\Cache\CacheRegistry $registry Injectable registry object.
      * @return void
      */
-    static auto setRegistry(CacheRegistry $registry): void
-    {
+    static void setRegistry(CacheRegistry $registry) {
         static::$_registry = $registry;
     }
 
@@ -124,8 +123,7 @@ class Cache
      * @throws \RuntimeException If loading of the engine failed.
      * @return void
      */
-    protected static auto _buildEngine(string myName): void
-    {
+    protected static void _buildEngine(string myName) {
         $registry = static::getRegistry();
 
         if (empty(static::$_config[myName]["className"])) {
@@ -503,8 +501,7 @@ class Cache
      *
      * @return void
      */
-    static function enable(): void
-    {
+    static void enable() {
         static::$_enabled = true;
     }
 
@@ -515,8 +512,7 @@ class Cache
      *
      * @return void
      */
-    static function disable(): void
-    {
+    static void disable() {
         static::$_enabled = false;
     }
 

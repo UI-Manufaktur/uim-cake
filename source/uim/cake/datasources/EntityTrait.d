@@ -605,8 +605,7 @@ trait EntityTrait
      * @param string myType the accessor type ('get' or 'set')
      * @return string method name or empty string (no method available)
      */
-    protected static string _accessor(string $property, string myType)
-    {
+    protected static string _accessor(string $property, string myType) {
         myClass = static::class;
 
         if (isset(static::$_accessors[myClass][myType][$property])) {
@@ -1159,8 +1158,7 @@ trait EntityTrait
      *
      * @return string
      */
-    string getSource()
-    {
+    string getSource() {
         return this._registryAlias;
     }
 
@@ -1181,8 +1179,7 @@ trait EntityTrait
      *
      * @return string
      */
-    string __toString()
-    {
+    string __toString() {
         return (string)json_encode(this, JSON_PRETTY_PRINT);
     }
 

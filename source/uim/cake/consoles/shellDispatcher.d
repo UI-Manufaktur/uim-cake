@@ -93,8 +93,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    static function resetAliases(): void
-    {
+    static function resetAliases() {
         static::$_aliases = [];
     }
 
@@ -118,8 +117,7 @@ class ShellDispatcher
      * @return void
      * @throws \Cake\Core\Exception\CakeException
      */
-    protected auto _initEnvironment(): void
-    {
+    protected void _initEnvironment() {
         this._bootstrap();
 
         if (function_exists("ini_set")) {
@@ -377,8 +375,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    function help(): void
-    {
+    void help() {
         trigger_error(
             "Console help cannot be generated from Shell classes anymore. " .
             "Upgrade your application to import uim.cake.console.commandRunner instead.",
@@ -391,8 +388,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    function version(): void
-    {
+    void version() {
         trigger_error(
             "Version information cannot be generated from Shell classes anymore. " .
             "Upgrade your application to import uim.cake.console.commandRunner instead.",

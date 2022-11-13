@@ -22,8 +22,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      */
     protected $commands;
 
-    auto setCommandCollection(CommandCollection $commands): void
-    {
+    void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;
     }
 
@@ -59,8 +58,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      * @param iterable $commands The command collection to output.
      * @return void
      */
-    protected auto asText(ConsoleIo $io, iterable $commands): void
-    {
+    protected void asText(ConsoleIo $io, iterable $commands) {
         $invert = [];
         foreach ($commands as myName => myClass) {
             if (is_object(myClass)) {
@@ -118,8 +116,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      * @param \Cake\Console\ConsoleIo $io IO object.
      * @return void
      */
-    protected auto outputPaths(ConsoleIo $io): void
-    {
+    protected void outputPaths(ConsoleIo $io) {
         myPaths = [];
         if (Configure::check("App.dir")) {
             $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -165,8 +162,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      * @param iterable $commands The command collection to output
      * @return void
      */
-    protected auto asXml(ConsoleIo $io, iterable $commands): void
-    {
+    protected void asXml(ConsoleIo $io, iterable $commands) {
         myShells = new SimpleXMLElement("<shells></shells>");
         foreach ($commands as myName => myClass) {
             if (is_object(myClass)) {

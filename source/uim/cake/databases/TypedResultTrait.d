@@ -17,8 +17,7 @@ trait TypedResultTrait
      *
      * @return string
      */
-    string getReturnType()
-    {
+    string getReturnType() {
         return this._returnType;
     }
 
