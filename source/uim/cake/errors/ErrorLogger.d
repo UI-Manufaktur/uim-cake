@@ -75,8 +75,7 @@ class ErrorLogger : IErrorLogger
      * @param bool $isPrevious False for original exception, true for previous
      * @return string Error message
      */
-    protected string getMessage(Throwable myException, bool $isPrevious = false)
-    {
+    protected string getMessage(Throwable myException, bool $isPrevious = false) {
         myMessage = sprintf(
             "%s[%s] %s in %s on line %s",
             $isPrevious ? "\nCaused by: " : "",
@@ -121,8 +120,7 @@ class ErrorLogger : IErrorLogger
      * @param \Psr\Http\Message\IServerRequest myRequest The request to read from.
      * @return string
      */
-    string getRequestContext(IServerRequest myRequest)
-    {
+    string getRequestContext(IServerRequest myRequest) {
         myMessage = "\nRequest URL: " . myRequest.getRequestTarget();
 
         $referer = myRequest.getHeaderLine("Referer");

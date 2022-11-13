@@ -87,8 +87,7 @@ class QueryCacher
      * @return string
      * @throws \RuntimeException
      */
-    protected string _resolveKey(object myQuery)
-    {
+    protected string _resolveKey(object myQuery) {
         if (is_string(this._key)) {
             return this._key;
         }

@@ -338,8 +338,7 @@ class Folder
      * @param string myPath Path to transform
      * @return string Path with the correct set of slashes ("\\" or "/")
      */
-    static string normalizeFullPath(string myPath)
-    {
+    static string normalizeFullPath(string myPath) {
         $to = Folder::correctSlashFor(myPath);
         $from = ($to === "/" ? "\\" : "/");
 
@@ -352,8 +351,7 @@ class Folder
      * @param string myPath Path to check
      * @return string Set of slashes ("\\" or "/")
      */
-    static string correctSlashFor(string myPath)
-    {
+    static string correctSlashFor(string myPath) {
         return Folder::isWindowsPath(myPath) ? "\\" : "/";
     }
 
@@ -363,8 +361,7 @@ class Folder
      * @param string myPath Path to check
      * @return string Path with ending slash
      */
-    static string slashTerm(string myPath)
-    {
+    static string slashTerm(string myPath) {
         if (Folder::isSlashTerm(myPath)) {
             return myPath;
         }
@@ -379,8 +376,7 @@ class Folder
      * @param array<string>|string $element Element to add at end of path
      * @return string Combined path
      */
-    static string addPathElement(string myPath, $element)
-    {
+    static string addPathElement(string myPath, $element) {
         $element = (array)$element;
         array_unshift($element, rtrim(myPath, DIRECTORY_SEPARATOR));
 

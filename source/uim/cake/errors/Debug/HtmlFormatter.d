@@ -42,8 +42,7 @@ class HtmlFormatter : IFormatter
     }
 
 
-    string formatWrapper(string myContentss, array myLocation)
-    {
+    string formatWrapper(string myContentss, array myLocation) {
         $lineInfo = "";
         if (isset(myLocation["file"], myLocation["file"])) {
             $lineInfo = sprintf(
@@ -69,8 +68,7 @@ class HtmlFormatter : IFormatter
      *
      * @return string
      */
-    protected string dumpHeader()
-    {
+    protected string dumpHeader() {
         ob_start();
         include __DIR__ . DIRECTORY_SEPARATOR . "dumpHeader.html";
 
@@ -83,8 +81,7 @@ class HtmlFormatter : IFormatter
      * @param \Cake\Error\Debug\INode myNode The node tree to dump.
      * @return string
      */
-    string dump(INode myNode)
-    {
+    string dump(INode myNode) {
         $html = this.export(myNode, 0);
         $head = "";
         if (!static::$outputHeader) {
@@ -102,8 +99,7 @@ class HtmlFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string
      */
-    protected string export(INode $var, int $indent)
-    {
+    protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
                 case "bool":
@@ -139,8 +135,7 @@ class HtmlFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
-    protected string exportArray(ArrayNode $var, int $indent)
-    {
+    protected string exportArray(ArrayNode $var, int $indent) {
         $open = "<span class="cake-dbg-array">" .
             this.style("punct", "[") .
             "<samp class="cake-dbg-array-items">";
@@ -173,8 +168,7 @@ class HtmlFormatter : IFormatter
      * @return string
      * @see \Cake\Error\Debugger::exportVar()
      */
-    protected string exportObject($var, int $indent)
-    {
+    protected string exportObject($var, int $indent) {
         $objectId = "cake-db-object-{this.id}-{$var.getId()}";
         $out = sprintf(
             "<span class="cake-dbg-object" id="%s">",
@@ -249,8 +243,7 @@ class HtmlFormatter : IFormatter
      * @param string $text The text to style.
      * @return string The styled output.
      */
-    protected string style(string $style, string $text)
-    {
+    protected string style(string $style, string $text) {
         return sprintf(
             "<span class="cake-dbg-%s">%s</span>",
             $style,

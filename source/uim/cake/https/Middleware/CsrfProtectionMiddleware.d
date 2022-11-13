@@ -212,8 +212,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @return string
      * @deprecated 4.0.6 Use {@link createToken()} instead.
      */
-    protected string _createToken()
-    {
+    protected string _createToken() {
         deprecationWarning("_createToken() is deprecated. Use createToken() instead.");
 
         return this.createToken();
@@ -239,8 +238,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      *
      * @return string
      */
-    string createToken()
-    {
+    string createToken() {
         myValue = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
 
         return base64_encode(myValue . hash_hmac("sha1", myValue, Security::getSalt()));
@@ -256,8 +254,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @param string $token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    string saltToken(string $token)
-    {
+    string saltToken(string $token) {
         if (this.isHexadecimalToken($token)) {
             return $token;
         }
@@ -286,8 +283,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @param string $token The token that could be salty.
      * @return string An unsalted token.
      */
-    string unsaltToken(string $token)
-    {
+    string unsaltToken(string $token) {
         if (this.isHexadecimalToken($token)) {
             return $token;
         }

@@ -91,8 +91,7 @@ class EncryptedCookieMiddleware : MiddlewareInterface
      *
      * @return string
      */
-    protected string _getCookieEncryptionKey()
-    {
+    protected string _getCookieEncryptionKey() {
         return this.key;
     }
 

@@ -31,8 +31,7 @@ class ReferenceNode : INode {
      *
      * @return string
      */
-    string getValue()
-    {
+    string getValue() {
         return this.class;
     }
 

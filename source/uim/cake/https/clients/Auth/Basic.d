@@ -55,8 +55,7 @@ class Basic
      * @param string $pass Password.
      * @return string
      */
-    protected string _generateHeader(string myUser, string $pass)
-    {
+    protected string _generateHeader(string myUser, string $pass) {
         return "Basic " . base64_encode(myUser . ":" . $pass);
     }
 }

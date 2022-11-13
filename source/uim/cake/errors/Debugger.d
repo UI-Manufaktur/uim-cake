@@ -284,8 +284,7 @@ class Debugger
      * @param int $line The line number to create a link for.
      * @return string The formatted URL.
      */
-    static string editorUrl(string myfile, int $line)
-    {
+    static string editorUrl(string myfile, int $line) {
         $instance = static::getInstance();
         $editor = $instance.getConfig("editor");
         if (!isset($instance.editors[$editor])) {
@@ -453,8 +452,7 @@ class Debugger
      * @param string myPath Path to shorten.
      * @return string Normalized path
      */
-    static string trimPath(string myPath)
-    {
+    static string trimPath(string myPath) {
         if (defined("APP") && strpos(myPath, APP) === 0) {
             return str_replace(APP, "APP/", myPath);
         }
@@ -528,8 +526,7 @@ class Debugger
      * @param string $str The string to convert.
      * @return string
      */
-    protected static string _highlight(string $str)
-    {
+    protected static string _highlight(string $str) {
         if (function_exists("hphp_log") || function_exists("hphp_gettid")) {
             return htmlentities($str);
         }
@@ -601,8 +598,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a formatted string
      */
-    static string exportVar($var, int $maxDepth = 3)
-    {
+    static string exportVar($var, int $maxDepth = 3) {
         $context = new DebugContext($maxDepth);
         myNode = static::export($var, $context);
 
@@ -616,8 +612,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a string
      */
-    static string exportVarAsPlainText($var, int $maxDepth = 3)
-    {
+    static string exportVarAsPlainText($var, int $maxDepth = 3) {
         return (new TextFormatter()).dump(
             static::export($var, new DebugContext($maxDepth))
         );
@@ -797,8 +792,7 @@ class Debugger
      *
      * @return string Returns the current format when getting.
      */
-    static string getOutputFormat()
-    {
+    static string getOutputFormat() {
         return Debugger::getInstance()._outputFormat;
     }
 
@@ -974,8 +968,7 @@ class Debugger
      * @param mixed $var The variable to get the type of.
      * @return string The type of variable.
      */
-    static string getType($var)
-    {
+    static string getType($var) {
         myType = getTypeName($var);
 
         if (myType === "NULL") {
@@ -1039,8 +1032,7 @@ class Debugger
      * @param string myMessage The string message to format.
      * @return string Formatted message.
      */
-    static function formatHtmlMessage(string myMessage)
-    {
+    static function formatHtmlMessage(string myMessage) {
         myMessage = h(myMessage);
         myMessage = preg_replace("/`([^`]+)`/", "<code>$1</code>", myMessage);
         myMessage = nl2br(myMessage);

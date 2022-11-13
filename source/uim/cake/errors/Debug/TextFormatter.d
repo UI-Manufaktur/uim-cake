@@ -13,8 +13,7 @@ use RuntimeException;
 class TextFormatter : IFormatter
 {
 
-    string formatWrapper(string myContentss, array myLocation)
-    {
+    string formatWrapper(string myContentss, array myLocation) {
         myTemplate = <<<TEXT
 %s
 ########## DEBUG ##########
@@ -36,8 +35,7 @@ TEXT;
      * @param \Cake\Error\Debug\INode myNode The node tree to dump.
      * @return string
      */
-    string dump(INode myNode)
-    {
+    string dump(INode myNode) {
         $indent = 0;
 
         return this.export(myNode, $indent);
@@ -50,8 +48,7 @@ TEXT;
      * @param int $indent The current indentation level.
      * @return string
      */
-    protected string export(INode $var, int $indent)
-    {
+    protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
                 case "bool":
@@ -83,8 +80,7 @@ TEXT;
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
-    protected string exportArray(ArrayNode $var, int $indent)
-    {
+    protected string exportArray(ArrayNode $var, int $indent) {
         $out = "[";
         $break = "\n" . str_repeat("  ", $indent);
         $end = "\n" . str_repeat("  ", $indent - 1);
@@ -109,8 +105,7 @@ TEXT;
      * @return string
      * @see \Cake\Error\Debugger::exportVar()
      */
-    protected string exportObject($var, int $indent)
-    {
+    protected string exportObject($var, int $indent) {
         $out = "";
         $props = [];
 
