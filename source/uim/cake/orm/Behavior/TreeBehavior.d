@@ -946,7 +946,7 @@ class TreeBehavior : Behavior
      *
      * @return string
      */
-    protected auto _getPrimaryKey(): string
+    protected string _getPrimaryKey()
     {
         if (!this._primaryKey) {
             $primaryKey = (array)this._table.getPrimaryKey();

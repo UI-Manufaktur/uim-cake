@@ -129,7 +129,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @since 4.0.0
      * @psalm-return class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface>
      */
-    static auto getDefaultStrategyClass(): string
+    static string getDefaultStrategyClass()
     {
         return static::$defaultStrategyClass;
     }
@@ -246,7 +246,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @see \Cake\I18n\I18n::getLocale()
      * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
      */
-    auto getLocale(): string
+    string getLocale()
     {
         return this.getStrategy().getLocale();
     }
@@ -261,7 +261,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param string myField Field name to be aliased.
      * @return string
      */
-    function translationField(string myField): string
+    string translationField(string myField)
     {
         return this.getStrategy().translationField(myField);
     }
@@ -327,7 +327,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param \Cake\ORM\Table myTable The table class to get a reference name for.
      * @return string
      */
-    protected auto referenceName(Table myTable): string
+    protected string referenceName(Table myTable)
     {
         myName = moduleSplit(get_class(myTable));
         myName = substr(end(myName), 0, -5);

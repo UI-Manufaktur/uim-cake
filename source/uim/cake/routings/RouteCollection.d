@@ -275,7 +275,7 @@ class RouteCollection
      * @return string The URL string on match.
      * @throws \Cake\Routing\Exception\MissingRouteException When no route could be matched.
      */
-    function match(array myUrl, array $context): string
+    string match(array myUrl, array $context)
     {
         // Named routes support optimization.
         if (isset(myUrl['_name'])) {

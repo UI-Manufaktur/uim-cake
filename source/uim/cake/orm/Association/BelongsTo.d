@@ -58,7 +58,7 @@ class BelongsTo : Association
      *
      * @return string
      */
-    protected auto _propertyName(): string
+    protected string _propertyName()
     {
         [, myName] = pluginSplit(this._name);
 
@@ -82,7 +82,7 @@ class BelongsTo : Association
      *
      * @return string
      */
-    function type(): string
+    string type()
     {
         return self::MANY_TO_ONE;
     }

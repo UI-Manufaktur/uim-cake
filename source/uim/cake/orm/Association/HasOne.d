@@ -43,7 +43,7 @@ class HasOne : Association
      *
      * @return string
      */
-    protected auto _propertyName(): string
+    protected string _propertyName()
     {
         [, myName] = pluginSplit(this._name);
 
@@ -67,7 +67,7 @@ class HasOne : Association
      *
      * @return string
      */
-    function type(): string
+    string type()
     {
         return self::ONE_TO_ONE;
     }

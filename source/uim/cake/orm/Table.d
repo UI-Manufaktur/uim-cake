@@ -316,7 +316,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return string
      * @see \Cake\ORM\Locator\TableLocator::get()
      */
-    static function defaultConnectionName(): string
+    static string defaultConnectionName()
     {
         return 'default';
     }
@@ -415,7 +415,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param string myField The field to alias.
      * @return string The field prefixed with the table alias.
      */
-    function aliasField(string myField): string
+    string aliasField(string myField)
     {
         if (strpos(myField, '.') !== false) {
             return myField;
@@ -441,7 +441,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return string
      */
-    auto getRegistryAlias(): string
+    string getRegistryAlias()
     {
         if (this._registryAlias === null) {
             this._registryAlias = this.getAlias();
@@ -673,7 +673,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return string
      * @psalm-return class-string<\Cake\Datasource\IEntity>
      */
-    auto getEntityClass(): string
+    string getEntityClass()
     {
         if (!this._entityClass) {
             $default = Entity::class;

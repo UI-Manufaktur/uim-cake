@@ -501,7 +501,7 @@ class BelongsToMany : Association
      *
      * @return string
      */
-    function type(): string
+    string type()
     {
         return self::MANY_TO_MANY;
     }
@@ -620,7 +620,7 @@ class BelongsToMany : Association
      *
      * @return string the strategy to be used for saving
      */
-    auto getSaveStrategy(): string
+    string getSaveStrategy()
     {
         return this._saveStrategy;
     }
@@ -1364,7 +1364,7 @@ class BelongsToMany : Association
      *
      * @return string
      */
-    protected auto _junctionAssociationName(): string
+    protected string _junctionAssociationName()
     {
         if (!this._junctionAssociationName) {
             this._junctionAssociationName = this.getTarget()
@@ -1383,7 +1383,7 @@ class BelongsToMany : Association
      * @param string|null myName The name of the junction table.
      * @return string
      */
-    protected auto _junctionTableName(Nullable!string myName = null): string
+    protected string _junctionTableName(Nullable!string myName = null)
     {
         if (myName === null) {
             if (empty(this._junctionTableName)) {

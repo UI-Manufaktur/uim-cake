@@ -193,7 +193,7 @@ class RouteBuilder
      *
      * @return string
      */
-    function path(): string
+    string path()
     {
         $routeKey = strpos(this._path, '{');
         if ($routeKey !== false && strpos(this._path, '}') !== false) {

@@ -32,7 +32,7 @@ trait CookieCryptTrait
      *
      * @return string
      */
-    abstract protected auto _getCookieEncryptionKey(): string;
+    abstract protected string _getCookieEncryptionKey();
 
     /**
      * Encrypts myValue using public myType method in Security class
@@ -43,7 +43,7 @@ trait CookieCryptTrait
      * @param string|null myKey Used as the security salt if specified.
      * @return string Encoded values
      */
-    protected auto _encrypt(myValue, $encrypt, Nullable!string myKey = null): string
+    protected string _encrypt(myValue, $encrypt, Nullable!string myKey = null)
     {
         if (is_array(myValue)) {
             myValue = this._implode(myValue);
@@ -149,7 +149,7 @@ trait CookieCryptTrait
      * @param array $array Map of key and values
      * @return string A JSON encoded string.
      */
-    protected auto _implode(array $array): string
+    protected string _implode(array $array)
     {
         return json_encode($array);
     }

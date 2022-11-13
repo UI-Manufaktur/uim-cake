@@ -399,7 +399,7 @@ class Router
      * @return string Full translated URL with base path.
      * @throws \Cake\Core\Exception\CakeException When the route name is not found
      */
-    static function url(myUrl = null, bool $full = false): string
+    static string url(myUrl = null, bool $full = false)
     {
         $context = static::$_requestContext;
         myRequest = static::getRequest();
@@ -527,7 +527,7 @@ class Router
      *   Default is false.
      * @return string Full translated URL with base path.
      */
-    static function pathUrl(string myPath, array myParams = [], bool $full = false): string
+    static string pathUrl(string myPath, array myParams = [], bool $full = false)
     {
         return static::url(['_path' => myPath] + myParams, $full);
     }
@@ -573,7 +573,7 @@ class Router
      * For example: `http://example.com`
      * @return string
      */
-    static function fullBaseUrl(Nullable!string $base = null): string
+    static string fullBaseUrl(Nullable!string $base = null)
     {
         if ($base === null && static::$_fullBaseUrl !== null) {
             return static::$_fullBaseUrl;
@@ -657,7 +657,7 @@ class Router
      *     protocol when reversing the URL.
      * @return string The string that is the reversed result of the array
      */
-    static function reverse(myParams, $full = false): string
+    static string reverse(myParams, $full = false)
     {
         myParams = static::reverseToArray(myParams);
 
@@ -673,7 +673,7 @@ class Router
      * @param array|string myUrl URL to normalize Either an array or a string URL.
      * @return string Normalized URL
      */
-    static function normalize(myUrl = '/'): string
+    static string normalize(myUrl = '/')
     {
         if (is_array(myUrl)) {
             myUrl = static::url(myUrl);
