@@ -4,7 +4,7 @@ module uim.caketh;
 import uim.cake
 
 /* import uim.cake.controllerss.componentsRegistry;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakeents\IEventListener;
 import uim.caketps\Response;
 import uim.caketps\ServerRequest;
