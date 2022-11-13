@@ -7,8 +7,6 @@ interface SchemaInterface
 {
     /**
      * Get the name of the table.
-     *
-     * @return string
      */
     string name();
 

@@ -144,8 +144,6 @@ abstract class Driver : IDriver
 
     /**
      * Returns connected server version.
-     *
-     * @return string
      */
     string version() {
         if (this._version === null) {
@@ -239,7 +237,6 @@ abstract class Driver : IDriver
 
     /**
      * Returns whether a transaction is active for connection.
-     *
      */
     bool inTransaction() {
         this.connect();

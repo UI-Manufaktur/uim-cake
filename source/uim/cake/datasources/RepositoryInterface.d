@@ -16,8 +16,6 @@ interface IRepository
 
     /**
      * Returns the repository alias.
-     *
-     * @return string
      */
     string getAlias();
 
@@ -31,8 +29,6 @@ interface IRepository
 
     /**
      * Returns the table registry key used to create this table instance.
-     *
-     * @return string
      */
     string getRegistryAlias();
 

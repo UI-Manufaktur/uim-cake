@@ -129,7 +129,6 @@ interface IDriver {
      * Get the SQL for creating a save point.
      *
      * @param string|int myName Save point name or id
-     * @return string
      */
     string savePointSQL(myName);
 
@@ -147,8 +146,6 @@ interface IDriver {
 
     /**
      * Get the SQL for enabling foreign keys.
-     *
-     * @return string
      */
     string enableForeignKeySQL();
 
@@ -174,7 +171,6 @@ interface IDriver {
      *
      * @param mixed myValue The value to quote.
      * @param int myType Must be one of the \PDO::PARAM_* constants
-     * @return string
      */
     string quote(myValue, myType);
 
@@ -215,7 +211,6 @@ interface IDriver {
      * be used safely in queries without the risk of using reserved words.
      *
      * @param string myIdentifier The identifier expression to quote.
-     * @return string
      */
     string quoteIdentifier(string myIdentifier);
 

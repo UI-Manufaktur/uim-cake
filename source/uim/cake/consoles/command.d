@@ -52,8 +52,6 @@ abstract class BaseCommand : ICommand
 
     /**
      * Get the root command name.
-     *
-     * @return string
      */
     string getRootName() {
         [$root] = explode(" ", this.name);

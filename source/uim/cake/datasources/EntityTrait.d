@@ -1155,8 +1155,6 @@ trait EntityTrait
 
     /**
      * Returns the alias of the repository from which this entity came from.
-     *
-     * @return string
      */
     string getSource() {
         return this._registryAlias;
@@ -1176,8 +1174,6 @@ trait EntityTrait
 
     /**
      * Returns a string representation of this object in a human readable format.
-     *
-     * @return string
      */
     string __toString() {
         return (string)json_encode(this, JSON_PRETTY_PRINT);

@@ -80,8 +80,6 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
 
     /**
      * Returns the current iteration value
-     *
-     * @return string
      */
     string current() {
         $extractor = this._value;

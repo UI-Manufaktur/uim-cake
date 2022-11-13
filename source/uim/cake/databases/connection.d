@@ -239,7 +239,6 @@ class Connection : ConnectionInterface
 
     /**
      * Returns whether connection to database server was already established.
-     *
      */
     bool isConnected() {
         return this._driver.isConnected();
@@ -292,7 +291,6 @@ class Connection : ConnectionInterface
      *
      * @param \Cake\Database\Query myQuery The query to be compiled
      * @param \Cake\Database\ValueBinder $binder Value binder
-     * @return string
      */
     string compileQuery(Query myQuery, ValueBinder $binder) {
         return this.getDriver().compileQuery(myQuery, $binder)[1];
@@ -727,7 +725,6 @@ class Connection : ConnectionInterface
      * Checks if using `quote()` is supported.
      *
      * This is not required to use `quoteIdentifier()`.
-     *
      */
     bool supportsQuoting() {
         return this._driver.supports(IDriver::FEATURE_QUOTE);
@@ -740,7 +737,6 @@ class Connection : ConnectionInterface
      * This does not require `supportsQuoting()` to work.
      *
      * @param string myIdentifier The identifier to quote.
-     * @return string
      */
     string quoteIdentifier(string myIdentifier) {
         return this._driver.quoteIdentifier(myIdentifier);
@@ -822,7 +818,6 @@ class Connection : ConnectionInterface
 
     /**
      * Check if query logging is enabled.
-     *
      */
     bool isQueryLoggingEnabled() {
         return this._logQueries;

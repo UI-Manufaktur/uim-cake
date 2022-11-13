@@ -50,8 +50,6 @@ interface ConnectionInterface : LoggerAwareInterface
 
     /**
      * Get the configuration name for this connection.
-     *
-     * @return string
      */
     string configName();
 

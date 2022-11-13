@@ -118,7 +118,6 @@ class ErrorLogger : IErrorLogger
      * Get the request context for an error/exception trace.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to read from.
-     * @return string
      */
     string getRequestContext(IServerRequest myRequest) {
         myMessage = "\nRequest URL: " . myRequest.getRequestTarget();

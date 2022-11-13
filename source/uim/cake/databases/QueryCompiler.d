@@ -83,7 +83,6 @@ class QueryCompiler
      *
      * @param \Cake\Database\Query myQuery The query that is being compiled
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholders
-     * @return string
      */
     string compile(Query myQuery, ValueBinder $binder) {
         mySql = "";

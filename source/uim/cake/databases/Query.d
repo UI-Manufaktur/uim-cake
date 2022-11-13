@@ -1811,8 +1811,6 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Returns the type of this query (select, insert, update, delete)
-     *
-     * @return string
      */
     string type() {
         return this._type;
@@ -2119,7 +2117,6 @@ class Query : IExpression, IteratorAggregate
      *
      * When disabled it will consume less memory as fetched results are not
      * remembered for future iterations.
-     *
      */
     bool isBufferedResultsEnabled() {
         return this._useBufferedResults;
@@ -2192,7 +2189,6 @@ class Query : IExpression, IteratorAggregate
      * When disabled, the fields will be returned as received from the database
      * driver (which in most environments means they are being returned as
      * strings), which can improve performance with larger datasets.
-     *
      */
     bool isResultsCastingEnabled() {
         return this.typeCastEnabled;
@@ -2310,8 +2306,6 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Returns string representation of this query (complete SQL statement).
-     *
-     * @return string
      */
     string __toString() {
         return this.sql();

@@ -245,8 +245,6 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Part of Iterator Interface
-     *
-     * @return string
      */
     string key() {
         return this.names[this.positions[this.loopDepth]];
