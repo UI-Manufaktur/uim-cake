@@ -1,7 +1,7 @@
 module uim.cakeews.forms;
 
 use ArrayAccess;
-import uim.cakellections\Collection;
+import uim.cake.collections\Collection;
 import uim.cake.datasources\IEntity;
 import uim.cake.datasources\InvalidPropertyInterface;
 import uim.cakem.Entity;

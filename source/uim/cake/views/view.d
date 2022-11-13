@@ -5,7 +5,7 @@ module uim.cakeews;
 @safe:
 import uim.cake
 
-/* import uim.cakeches\Cache;
+/* import uim.cake.caches\Cache;
 import uim.cakere.App;
 import uim.cakere.InstanceConfigTrait;
 import uim.cakere.Plugin;

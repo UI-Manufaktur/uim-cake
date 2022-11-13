@@ -1,7 +1,7 @@
 module uim.cake.datasources;
 
 use BadMethodCallException;
-import uim.cakellections.iIterator\MapReduce;
+import uim.cake.collections.iIterator\MapReduce;
 import uim.cake.datasources\Exception\RecordNotFoundException;
 use InvalidArgumentException;
 use Traversable;
