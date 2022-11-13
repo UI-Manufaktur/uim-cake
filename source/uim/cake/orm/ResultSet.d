@@ -223,7 +223,6 @@ class ResultSet : ResultSetInterface
      * Whether there are more results to be fetched from the iterator
      *
      * Part of Iterator interface.
-     *
      */
     bool valid() {
         if (this._useBuffering) {

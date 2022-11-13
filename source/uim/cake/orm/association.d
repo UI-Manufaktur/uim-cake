@@ -257,8 +257,6 @@ abstract class Association
     /**
      * Gets the name for this association, usually the alias
      * assigned to the target associated table
-     *
-     * @return string
      */
     string getName() {
         return this._name;
@@ -278,7 +276,6 @@ abstract class Association
 
     /**
      * Gets whether cascaded deletes should also fire callbacks.
-     *
      */
     bool getCascadeCallbacks() {
         return this._cascadeCallbacks;
@@ -311,8 +308,6 @@ abstract class Association
 
     /**
      * Gets the class name of the target table object.
-     *
-     * @return string
      */
     string getClassName() {
         return this._className;
@@ -496,7 +491,6 @@ abstract class Association
      *
      * This is primarily used to indicate that records should be removed if the owning record in
      * the source table is deleted.
-     *
      */
     bool getDependent() {
         return this._dependent;
@@ -528,8 +522,6 @@ abstract class Association
 
     /**
      * Gets the type of join to be used when adding the association to a query.
-     *
-     * @return string
      */
     string getJoinType() {
         return this._joinType;
@@ -551,8 +543,6 @@ abstract class Association
     /**
      * Gets the property name that should be filled with data from the target table
      * in the source table record.
-     *
-     * @return string
      */
     string getProperty() {
         if (!this._propertyName) {
@@ -607,8 +597,6 @@ abstract class Association
      * Gets the strategy name to be used to fetch associated records. Keep in mind
      * that some association types might not implement but a default strategy,
      * rendering any changes to this setting void.
-     *
-     * @return string
      */
     string getStrategy() {
         return this._strategy;

@@ -666,8 +666,6 @@ class Response : IResponse
 
     /**
      * Returns the current content type.
-     *
-     * @return string
      */
     string getType() {
         $header = this.getHeaderLine("Content-Type");
@@ -750,8 +748,6 @@ class Response : IResponse
 
     /**
      * Returns the current charset.
-     *
-     * @return string
      */
     string getCharset() {
         return this._charset;
@@ -1082,7 +1078,6 @@ class Response : IResponse
 
     /**
      * Returns whether the resulting output will be compressed by PHP
-     *
      */
     bool outputCompressed() {
         return strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false
@@ -1188,8 +1183,6 @@ class Response : IResponse
      * String conversion. Fetches the response body as a string.
      * Does *not* send headers.
      * If body is a callable, a blank string is returned.
-     *
-     * @return string
      */
     string __toString() {
         this.stream.rewind();

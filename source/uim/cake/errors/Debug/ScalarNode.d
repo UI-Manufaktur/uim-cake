@@ -28,8 +28,6 @@ class ScalarNode : INode
 
     /**
      * Get the type of value
-     *
-     * @return string
      */
     string getType() {
         return this.type;

@@ -103,7 +103,6 @@ class FormDataPart
      * header from being added.
      *
      * @param string|null $disposition Use null to get/string to set.
-     * @return string
      */
     string disposition(Nullable!string $disposition = null) {
         if ($disposition === null) {
@@ -178,8 +177,6 @@ class FormDataPart
 
     /**
      * Get the part name.
-     *
-     * @return string
      */
     string name() {
         return this._name;
@@ -187,8 +184,6 @@ class FormDataPart
 
     /**
      * Get the value.
-     *
-     * @return string
      */
     string value() {
         return this._value;
@@ -198,8 +193,6 @@ class FormDataPart
      * Convert the part into a string.
      *
      * Creates a string suitable for use in HTTP requests.
-     *
-     * @return string
      */
     string __toString() {
         $out = "";

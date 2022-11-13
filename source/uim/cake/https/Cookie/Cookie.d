@@ -311,8 +311,6 @@ class Cookie : CookieInterface
 
     /**
      * Returns a header value as string
-     *
-     * @return string
      */
     string toHeaderValue() {
         myValue = this.value;
@@ -661,7 +659,6 @@ class Cookie : CookieInterface
 
     /**
      * Checks if the cookie value was expanded
-     *
      */
     bool isExpanded() {
         return this.isExpanded;

@@ -79,7 +79,6 @@ class HtmlFormatter : IFormatter
      * Convert a tree of INode objects into HTML
      *
      * @param \Cake\Error\Debug\INode myNode The node tree to dump.
-     * @return string
      */
     string dump(INode myNode) {
         $html = this.export(myNode, 0);

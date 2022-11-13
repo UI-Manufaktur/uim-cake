@@ -167,7 +167,6 @@ class Socket
 
     /**
      * Check the connection status after calling `connect()`.
-     *
      */
     bool isConnected() {
         return this.connected;
@@ -480,7 +479,6 @@ class Socket
 
     /**
      * Check the encryption status after calling `enableCrypto()`.
-     *
      */
     bool isEncrypted() {
         return this.encrypted;

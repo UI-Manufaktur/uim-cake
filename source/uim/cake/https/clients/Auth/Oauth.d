@@ -224,7 +224,6 @@ class Oauth
      *
      * @param \Cake\Http\Client\Request myRequest The request object.
      * @param array $oauthValues Oauth values.
-     * @return string
      */
     string baseString(Request myRequest, array $oauthValues) {
         $parts = [

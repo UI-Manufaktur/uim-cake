@@ -187,7 +187,6 @@ class Response : Message : IResponse
 
     /**
      * Check if the response status code was in the 2xx/3xx range
-     *
      */
     bool isOk() {
         return this.code >= 200 && this.code <= 399;
@@ -195,7 +194,6 @@ class Response : Message : IResponse
 
     /**
      * Check if the response status code was in the 2xx range
-     *
      */
     bool isSuccess() {
         return this.code >= 200 && this.code <= 299;
@@ -203,7 +201,6 @@ class Response : Message : IResponse
 
     /**
      * Check if the response had a redirect status code.
-     *
      */
     bool isRedirect() {
         $codes = [
@@ -355,8 +352,6 @@ class Response : Message : IResponse
 
     /**
      * Get the response body as string.
-     *
-     * @return string
      */
     string getStringBody() {
         return this._getBody();

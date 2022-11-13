@@ -235,8 +235,6 @@ class CsrfProtectionMiddleware : MiddlewareInterface
 
     /**
      * Create a new token to be used for CSRF protection
-     *
-     * @return string
      */
     string createToken() {
         myValue = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
