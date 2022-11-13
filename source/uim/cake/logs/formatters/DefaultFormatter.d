@@ -8,9 +8,9 @@ class DefaultFormatter : AbstractFormatter
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'dateFormat' => 'Y-m-d H:i:s',
-        'includeTags' => false,
-        'includeDate' => true,
+        "dateFormat" => "Y-m-d H:i:s",
+        "includeTags" => false,
+        "includeDate" => true,
     ];
 
     /**
@@ -22,13 +22,13 @@ class DefaultFormatter : AbstractFormatter
 
     string format($level, string myMessage, array $context = [])
     {
-        if (this._config['includeDate']) {
-            myMessage = sprintf('%s %s: %s', date(this._config['dateFormat']), $level, myMessage);
+        if (this._config["includeDate"]) {
+            myMessage = sprintf("%s %s: %s", date(this._config["dateFormat"]), $level, myMessage);
         } else {
-            myMessage = sprintf('%s: %s', $level, myMessage);
+            myMessage = sprintf("%s: %s", $level, myMessage);
         }
-        if (this._config['includeTags']) {
-            myMessage = sprintf('<%s>%s</%s>', $level, myMessage, $level);
+        if (this._config["includeTags"]) {
+            myMessage = sprintf("<%s>%s</%s>", $level, myMessage, $level);
         }
 
         return myMessage;

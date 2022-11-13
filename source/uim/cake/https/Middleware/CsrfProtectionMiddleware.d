@@ -49,12 +49,12 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @var array<string, mixed>
      */
     protected $_config = [
-        'cookieName' => 'csrfToken',
-        'expiry' => 0,
-        'secure' => false,
-        'httponly' => false,
-        'samesite' => null,
-        'field' => '_csrfToken',
+        "cookieName" => "csrfToken",
+        "expiry" => 0,
+        "secure" => false,
+        "httponly" => false,
+        "samesite" => null,
+        "field" => "_csrfToken",
     ];
 
     /**
@@ -90,9 +90,9 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @param array<string, mixed> myConfig Config options. See $_config for valid keys.
      */
     this(array myConfig = []) {
-        if (array_key_exists('httpOnly', myConfig)) {
-            myConfig['httponly'] = myConfig['httpOnly'];
-            deprecationWarning('Option `httpOnly` is deprecated. Use lowercased `httponly` instead.');
+        if (array_key_exists("httpOnly", myConfig)) {
+            myConfig["httponly"] = myConfig["httpOnly"];
+            deprecationWarning("Option `httpOnly` is deprecated. Use lowercased `httponly` instead.");
         }
 
         this._config = myConfig + this._config;
@@ -108,7 +108,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
     function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
     {
         $method = myRequest.getMethod();
-        $hasData = in_array($method, ['PUT', 'POST', 'DELETE', 'PATCH'], true)
+        $hasData = in_array($method, ["PUT", "POST", "DELETE", "PATCH"], true)
             || myRequest.getParsedBody();
 
         if (
@@ -120,29 +120,29 @@ class CsrfProtectionMiddleware : MiddlewareInterface
 
             return $handler.handle(myRequest);
         }
-        if (myRequest.getAttribute('csrfToken')) {
+        if (myRequest.getAttribute("csrfToken")) {
             throw new RuntimeException(
-                'A CSRF token is already set in the request.' .
+                "A CSRF token is already set in the request." .
                 "\n" .
-                'Ensure you do not have the CSRF middleware applied more than once. ' .
-                'Check both your `Application::middleware()` method and `config/routes.php`.'
+                "Ensure you do not have the CSRF middleware applied more than once. " .
+                "Check both your `Application::middleware()` method and `config/routes.php`."
             );
         }
 
         $cookies = myRequest.getCookieParams();
-        $cookieData = Hash::get($cookies, this._config['cookieName']);
+        $cookieData = Hash::get($cookies, this._config["cookieName"]);
 
-        if (is_string($cookieData) && $cookieData !== '') {
+        if (is_string($cookieData) && $cookieData !== "") {
             try {
-                myRequest = myRequest.withAttribute('csrfToken', this.saltToken($cookieData));
+                myRequest = myRequest.withAttribute("csrfToken", this.saltToken($cookieData));
             } catch (InvalidArgumentException $e) {
                 $cookieData = null;
             }
         }
 
-        if ($method === 'GET' && $cookieData === null) {
+        if ($method === "GET" && $cookieData === null) {
             $token = this.createToken();
-            myRequest = myRequest.withAttribute('csrfToken', this.saltToken($token));
+            myRequest = myRequest.withAttribute("csrfToken", this.saltToken($token));
             /** @var mixed $response */
             $response = $handler.handle(myRequest);
 
@@ -168,7 +168,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @return this
      */
     function whitelistCallback(callable $callback) {
-        deprecationWarning('`whitelistCallback()` is deprecated. Use `skipCheckCallback()` instead.');
+        deprecationWarning("`whitelistCallback()` is deprecated. Use `skipCheckCallback()` instead.");
         this.skipCheckCallback = $callback;
 
         return this;
@@ -199,7 +199,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
     {
         $body = myRequest.getParsedBody();
         if (is_array($body)) {
-            unset($body[this._config['field']]);
+            unset($body[this._config["field"]]);
             myRequest = myRequest.withParsedBody($body);
         }
 
@@ -214,7 +214,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      */
     protected string _createToken()
     {
-        deprecationWarning('_createToken() is deprecated. Use createToken() instead.');
+        deprecationWarning("_createToken() is deprecated. Use createToken() instead.");
 
         return this.createToken();
     }
@@ -231,7 +231,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @return bool
      */
     protected bool isHexadecimalToken(string $token) {
-        return preg_match('/^[a-f0-9]{' . static::TOKEN_WITH_CHECKSUM_LENGTH . '}$/', $token) === 1;
+        return preg_match("/^[a-f0-9]{" . static::TOKEN_WITH_CHECKSUM_LENGTH . "}$/", $token) === 1;
     }
 
     /**
@@ -243,7 +243,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
     {
         myValue = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
 
-        return base64_encode(myValue . hash_hmac('sha1', myValue, Security::getSalt()));
+        return base64_encode(myValue . hash_hmac("sha1", myValue, Security::getSalt()));
     }
 
     /**
@@ -263,12 +263,12 @@ class CsrfProtectionMiddleware : MiddlewareInterface
         }
         $decoded = base64_decode($token, true);
         if ($decoded === false) {
-            throw new InvalidArgumentException('Invalid token data.');
+            throw new InvalidArgumentException("Invalid token data.");
         }
 
         $length = strlen($decoded);
         $salt = Security::randomBytes($length);
-        $salted = '';
+        $salted = "";
         for ($i = 0; $i < $length; $i++) {
             // XOR the token and salt together so that we can reverse it later.
             $salted .= chr(ord($decoded[$i]) ^ ord($salt[$i]));
@@ -298,7 +298,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
         $salted = substr($decoded, 0, static::TOKEN_WITH_CHECKSUM_LENGTH);
         $salt = substr($decoded, static::TOKEN_WITH_CHECKSUM_LENGTH);
 
-        $unsalted = '';
+        $unsalted = "";
         for ($i = 0; $i < static::TOKEN_WITH_CHECKSUM_LENGTH; $i++) {
             // Reverse the XOR to desalt.
             $unsalted .= chr(ord($salted[$i]) ^ ord($salt[$i]));
@@ -314,7 +314,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @return bool
      */
     protected bool _verifyToken(string $token) {
-        // If we have a hexadecimal value we're in a compatibility mode from before
+        // If we have a hexadecimal value we"re in a compatibility mode from before
         // tokens were salted on each request.
         if (this.isHexadecimalToken($token)) {
             $decoded = $token;
@@ -328,7 +328,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
         myKey = substr($decoded, 0, static::TOKEN_VALUE_LENGTH);
         $hmac = substr($decoded, static::TOKEN_VALUE_LENGTH);
 
-        $expectedHmac = hash_hmac('sha1', myKey, Security::getSalt());
+        $expectedHmac = hash_hmac("sha1", myKey, Security::getSalt());
 
         return hash_equals($hmac, $expectedHmac);
     }
@@ -351,7 +351,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
             return $response.withCookie($cookie);
         }
 
-        return $response.withAddedHeader('Set-Cookie', $cookie.toHeaderValue());
+        return $response.withAddedHeader("Set-Cookie", $cookie.toHeaderValue());
     }
 
     /**
@@ -363,39 +363,39 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      */
     protected auto _validateToken(IServerRequest myRequest): void
     {
-        $cookie = Hash::get(myRequest.getCookieParams(), this._config['cookieName']);
+        $cookie = Hash::get(myRequest.getCookieParams(), this._config["cookieName"]);
 
         if (!$cookie || !is_string($cookie)) {
-            throw new InvalidCsrfTokenException(__d('cake', 'Missing or incorrect CSRF cookie type.'));
+            throw new InvalidCsrfTokenException(__d("cake", "Missing or incorrect CSRF cookie type."));
         }
 
         if (!this._verifyToken($cookie)) {
-            myException = new InvalidCsrfTokenException(__d('cake', 'Missing or invalid CSRF cookie.'));
+            myException = new InvalidCsrfTokenException(__d("cake", "Missing or invalid CSRF cookie."));
 
-            $expiredCookie = this._createCookie('', myRequest).withExpired();
-            myException.setHeader('Set-Cookie', $expiredCookie.toHeaderValue());
+            $expiredCookie = this._createCookie("", myRequest).withExpired();
+            myException.setHeader("Set-Cookie", $expiredCookie.toHeaderValue());
 
             throw myException;
         }
 
         $body = myRequest.getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
-            $post = (string)Hash::get($body, this._config['field']);
+            $post = (string)Hash::get($body, this._config["field"]);
             $post = this.unsaltToken($post);
             if (hash_equals($post, $cookie)) {
                 return;
             }
         }
 
-        $header = myRequest.getHeaderLine('X-CSRF-Token');
+        $header = myRequest.getHeaderLine("X-CSRF-Token");
         $header = this.unsaltToken($header);
         if (hash_equals($header, $cookie)) {
             return;
         }
 
         throw new InvalidCsrfTokenException(__d(
-            'cake',
-            'CSRF token from either the request body or request headers did not match or is missing.'
+            "cake",
+            "CSRF token from either the request body or request headers did not match or is missing."
         ));
     }
 
@@ -409,14 +409,14 @@ class CsrfProtectionMiddleware : MiddlewareInterface
     protected auto _createCookie(string myValue, IServerRequest myRequest): CookieInterface
     {
         $cookie = Cookie::create(
-            this._config['cookieName'],
+            this._config["cookieName"],
             myValue,
             [
-                'expires' => this._config['expiry'] ?: null,
-                'path' => myRequest.getAttribute('webroot'),
-                'secure' => this._config['secure'],
-                'httponly' => this._config['httponly'],
-                'samesite' => this._config['samesite'],
+                "expires" => this._config["expiry"] ?: null,
+                "path" => myRequest.getAttribute("webroot"),
+                "secure" => this._config["secure"],
+                "httponly" => this._config["httponly"],
+                "samesite" => this._config["samesite"],
             ]
         );
 

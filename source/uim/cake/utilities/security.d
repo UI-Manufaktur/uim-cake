@@ -20,11 +20,11 @@ class Security
 {
     /**
      * Default hash method. If `myType` param for `Security::hash()` is not specified
-     * this value is used. Defaults to 'sha1'.
+     * this value is used. Defaults to "sha1".
      *
      * @var string
      */
-    static $hashType = 'sha1';
+    static $hashType = "sha1";
 
     /**
      * The HMAC salt to use for encryption and decryption routines
@@ -53,7 +53,7 @@ class Security
      * @throws \RuntimeException
      * @link https://book.cakephp.org/4/en/core-libraries/security.html#hashing-data
      */
-    static function hash(string $string, Nullable!string $algorithm = null, $salt = false): string
+    static string hash(string $string, Nullable!string $algorithm = null, $salt = false)
     {
         if (empty($algorithm)) {
             $algorithm = static::$hashType;
@@ -63,9 +63,9 @@ class Security
         $availableAlgorithms = hash_algos();
         if (!in_array($algorithm, $availableAlgorithms, true)) {
             throw new RuntimeException(sprintf(
-                'The hash type `%s` was not found. Available algorithms are: %s',
+                "The hash type `%s` was not found. Available algorithms are: %s",
                 $algorithm,
-                implode(', ', $availableAlgorithms)
+                implode(", ", $availableAlgorithms)
             ));
         }
 
@@ -101,7 +101,7 @@ class Security
      * @param int $length The number of bytes you want.
      * @return string Random bytes in binary.
      */
-    static function randomBytes(int $length): string
+    static string randomBytes(int $length)
     {
         return random_bytes($length);
     }
@@ -112,7 +112,7 @@ class Security
      * @param int $length String length. Default 64.
      * @return string
      */
-    static function randomString(int $length = 64): string
+    static string randomString(int $length = 64)
     {
         return substr(
             bin2hex(Security::randomBytes((int)ceil($length / 2))),
@@ -128,19 +128,19 @@ class Security
      * @return string Random bytes in binary.
      * @see \Cake\Utility\Security::randomBytes()
      */
-    static function insecureRandomBytes(int $length): string
+    static string insecureRandomBytes(int $length)
     {
         $length *= 2;
 
-        $bytes = '';
+        $bytes = "";
         $byteLength = 0;
         while ($byteLength < $length) {
-            $bytes .= static::hash(Text::uuid() . uniqid((string)mt_rand(), true), 'sha512', true);
+            $bytes .= static::hash(Text::uuid() . uniqid((string)mt_rand(), true), "sha512", true);
             $byteLength = strlen($bytes);
         }
         $bytes = substr($bytes, 0, $length);
 
-        return pack('H*', $bytes);
+        return pack("H*", $bytes);
     }
 
     /**
@@ -155,7 +155,7 @@ class Security
      */
     static function engine($instance = null) {
         if ($instance === null && static::$_instance === null) {
-            if (extension_loaded('openssl')) {
+            if (extension_loaded("openssl")) {
                 $instance = new OpenSsl();
             }
         }
@@ -167,8 +167,8 @@ class Security
             return static::$_instance;
         }
         throw new InvalidArgumentException(
-            'No compatible crypto engine available. ' .
-            'Load the openssl extension.'
+            "No compatible crypto engine available. " .
+            "Load the openssl extension."
         );
     }
 
@@ -186,19 +186,19 @@ class Security
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function encrypt(string $plain, string myKey, Nullable!string $hmacSalt = null): string
+    static string encrypt(string $plain, string myKey, Nullable!string $hmacSalt = null)
     {
-        self::_checkKey(myKey, 'encrypt()');
+        self::_checkKey(myKey, "encrypt()");
 
         if ($hmacSalt === null) {
             $hmacSalt = static::getSalt();
         }
         // Generate the encryption and hmac key.
-        myKey = mb_substr(hash('sha256', myKey . $hmacSalt), 0, 32, '8bit');
+        myKey = mb_substr(hash("sha256", myKey . $hmacSalt), 0, 32, "8bit");
 
         $crypto = static::engine();
         $ciphertext = $crypto.encrypt($plain, myKey);
-        $hmac = hash_hmac('sha256', $ciphertext, myKey);
+        $hmac = hash_hmac("sha256", $ciphertext, myKey);
 
         return $hmac . $ciphertext;
     }
@@ -213,9 +213,9 @@ class Security
      */
     protected static auto _checkKey(string myKey, string $method): void
     {
-        if (mb_strlen(myKey, '8bit') < 32) {
+        if (mb_strlen(myKey, "8bit") < 32) {
             throw new InvalidArgumentException(
-                sprintf('Invalid key for %s, key must be at least 256 bits (32 bytes) long.', $method)
+                sprintf("Invalid key for %s, key must be at least 256 bits (32 bytes) long.", $method)
             );
         }
     }
@@ -232,23 +232,23 @@ class Security
      */
     static function decrypt(string $cipher, string myKey, Nullable!string $hmacSalt = null): Nullable!string
     {
-        self::_checkKey(myKey, 'decrypt()');
+        self::_checkKey(myKey, "decrypt()");
         if (empty($cipher)) {
-            throw new InvalidArgumentException('The data to decrypt cannot be empty.');
+            throw new InvalidArgumentException("The data to decrypt cannot be empty.");
         }
         if ($hmacSalt === null) {
             $hmacSalt = static::getSalt();
         }
 
         // Generate the encryption and hmac key.
-        myKey = mb_substr(hash('sha256', myKey . $hmacSalt), 0, 32, '8bit');
+        myKey = mb_substr(hash("sha256", myKey . $hmacSalt), 0, 32, "8bit");
 
         // Split out hmac for comparison
         $macSize = 64;
-        $hmac = mb_substr($cipher, 0, $macSize, '8bit');
-        $cipher = mb_substr($cipher, $macSize, null, '8bit');
+        $hmac = mb_substr($cipher, 0, $macSize, "8bit");
+        $cipher = mb_substr($cipher, $macSize, null, "8bit");
 
-        $compareHmac = hash_hmac('sha256', $cipher, myKey);
+        $compareHmac = hash_hmac("sha256", $cipher, myKey);
         if (!static::constantEquals($hmac, $compareHmac)) {
             return null;
         }
@@ -276,11 +276,11 @@ class Security
      *
      * @return string The currently configured salt
      */
-    static auto getSalt(): string
+    static string getSalt()
     {
         if (static::$_salt === null) {
             throw new RuntimeException(
-                'Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`.'
+                "Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`."
             );
         }
 

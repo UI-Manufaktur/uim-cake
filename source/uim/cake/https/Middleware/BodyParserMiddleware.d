@@ -22,7 +22,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Parse encoded request body data.
  *
- * Enables JSON and XML request payloads to be parsed into the request's body.
+ * Enables JSON and XML request payloads to be parsed into the request"s body.
  * You can also add your own request body parsers using the `addParser()` method.
  */
 class BodyParserMiddleware : MiddlewareInterface
@@ -39,7 +39,7 @@ class BodyParserMiddleware : MiddlewareInterface
      *
      * @var array<string>
      */
-    protected $methods = ['PUT', 'POST', 'PATCH', 'DELETE'];
+    protected $methods = ["PUT", "POST", "PATCH", "DELETE"];
 
     /**
      * Constructor
@@ -54,21 +54,21 @@ class BodyParserMiddleware : MiddlewareInterface
      * @param array<string, mixed> myOptions The options to use. See above.
      */
     this(array myOptions = []) {
-        myOptions += ['json' => true, 'xml' => false, 'methods' => null];
-        if (myOptions['json']) {
+        myOptions += ["json" => true, "xml" => false, "methods" => null];
+        if (myOptions["json"]) {
             this.addParser(
-                ['application/json', 'text/json'],
-                Closure::fromCallable([this, 'decodeJson'])
+                ["application/json", "text/json"],
+                Closure::fromCallable([this, "decodeJson"])
             );
         }
-        if (myOptions['xml']) {
+        if (myOptions["xml"]) {
             this.addParser(
-                ['application/xml', 'text/xml'],
-                Closure::fromCallable([this, 'decodeXml'])
+                ["application/xml", "text/xml"],
+                Closure::fromCallable([this, "decodeXml"])
             );
         }
-        if (myOptions['methods']) {
-            this.setMethods(myOptions['methods']);
+        if (myOptions["methods"]) {
+            this.setMethods(myOptions["methods"]);
         }
     }
 
@@ -104,7 +104,7 @@ class BodyParserMiddleware : MiddlewareInterface
      * An naive CSV request body parser could be built like so:
      *
      * ```
-     * $parser.addParser(['text/csv'], function ($body) {
+     * $parser.addParser(["text/csv"], function ($body) {
      *   return str_getcsv($body);
      * });
      * ```
@@ -147,7 +147,7 @@ class BodyParserMiddleware : MiddlewareInterface
         if (!in_array(myRequest.getMethod(), this.methods, true)) {
             return $handler.handle(myRequest);
         }
-        [myType] = explode(';', myRequest.getHeaderLine('Content-Type'));
+        [myType] = explode(";", myRequest.getHeaderLine("Content-Type"));
         myType = strtolower(myType);
         if (!isset(this.parsers[myType])) {
             return $handler.handle(myRequest);
@@ -190,7 +190,7 @@ class BodyParserMiddleware : MiddlewareInterface
     protected auto decodeXml(string $body): array
     {
         try {
-            $xml = Xml::build($body, ['return' => 'domdocument', 'readFile' => false]);
+            $xml = Xml::build($body, ["return" => "domdocument", "readFile" => false]);
             // We might not get child nodes if there are nested inline entities.
             if ((int)$xml.childNodes.length > 0) {
                 return Xml::toArray($xml);

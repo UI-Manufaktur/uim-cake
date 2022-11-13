@@ -25,13 +25,13 @@ class ConsoleLog : BaseLog
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'stream' => 'php://stderr',
-        'levels' => null,
-        'scopes' => [],
-        'outputAs' => null,
-        'formatter' => [
-            'className' => DefaultFormatter::class,
-            'includeTags' => true,
+        "stream" => "php://stderr",
+        "levels" => null,
+        "scopes" => [],
+        "outputAs" => null,
+        "formatter" => [
+            "className" => DefaultFormatter::class,
+            "includeTags" => true,
         ],
     ];
 
@@ -60,21 +60,21 @@ class ConsoleLog : BaseLog
         super.this(myConfig);
 
         myConfig = this._config;
-        if (myConfig['stream'] instanceof ConsoleOutput) {
-            this._output = myConfig['stream'];
-        } elseif (is_string(myConfig['stream'])) {
-            this._output = new ConsoleOutput(myConfig['stream']);
+        if (myConfig["stream"] instanceof ConsoleOutput) {
+            this._output = myConfig["stream"];
+        } elseif (is_string(myConfig["stream"])) {
+            this._output = new ConsoleOutput(myConfig["stream"]);
         } else {
-            throw new InvalidArgumentException('`stream` not a ConsoleOutput nor string');
+            throw new InvalidArgumentException("`stream` not a ConsoleOutput nor string");
         }
 
-        if (isset(myConfig['outputAs'])) {
-            this._output.setOutputAs(myConfig['outputAs']);
+        if (isset(myConfig["outputAs"])) {
+            this._output.setOutputAs(myConfig["outputAs"]);
         }
 
-        if (isset(this._config['dateFormat'])) {
-            deprecationWarning('`dateFormat` option should now be set in the formatter options.', 0);
-            this.formatter.setConfig('dateFormat', this._config['dateFormat']);
+        if (isset(this._config["dateFormat"])) {
+            deprecationWarning("`dateFormat` option should now be set in the formatter options.", 0);
+            this.formatter.setConfig("dateFormat", this._config["dateFormat"]);
         }
     }
 

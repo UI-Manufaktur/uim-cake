@@ -211,8 +211,8 @@ class ResultSet : ResultSetInterface
         }
 
         if (!this._useBuffering) {
-            $msg = 'You cannot rewind an un-buffered ResultSet. '
-                . 'Use Query::bufferResults() to get a buffered ResultSet.';
+            $msg = "You cannot rewind an un-buffered ResultSet. "
+                . "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
         }
 
@@ -290,8 +290,8 @@ class ResultSet : ResultSetInterface
     auto __serialize(): array
     {
         if (!this._useBuffering) {
-            $msg = 'You cannot serialize an un-buffered ResultSet. '
-                . 'Use Query::bufferResults() to get a buffered ResultSet.';
+            $msg = "You cannot serialize an un-buffered ResultSet. "
+                . "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
         }
 
@@ -367,13 +367,13 @@ class ResultSet : ResultSetInterface
     {
         $map = myQuery.getEagerLoader().associationsMap(this._defaultTable);
         this._matchingMap = (new Collection($map))
-            .match(['matching' => true])
-            .indexBy('alias')
+            .match(["matching" => true])
+            .indexBy("alias")
             .toArray();
 
         this._containMap = (new Collection(array_reverse($map)))
-            .match(['matching' => false])
-            .indexBy('nestKey')
+            .match(["matching" => false])
+            .indexBy("nestKey")
             .toArray();
     }
 
@@ -387,15 +387,15 @@ class ResultSet : ResultSetInterface
     protected auto _calculateColumnMap(Query myQuery): void
     {
         $map = [];
-        foreach (myQuery.clause('select') as myKey => myField) {
-            myKey = trim(myKey, '"`[]');
+        foreach (myQuery.clause("select") as myKey => myField) {
+            myKey = trim(myKey, ""`[]");
 
-            if (strpos(myKey, '__') <= 0) {
+            if (strpos(myKey, "__") <= 0) {
                 $map[this._defaultAlias][myKey] = myKey;
                 continue;
             }
 
-            $parts = explode('__', myKey, 2);
+            $parts = explode("__", myKey, 2);
             $map[$parts[0]][myKey] = $parts[1];
         }
 
@@ -421,7 +421,7 @@ class ResultSet : ResultSetInterface
             return false;
         }
 
-        $row = this._statement.fetch('assoc');
+        $row = this._statement.fetch("assoc");
         if ($row === false) {
             return $row;
         }
@@ -439,25 +439,25 @@ class ResultSet : ResultSetInterface
         $defaultAlias = this._defaultAlias;
         myResults = $presentAliases = [];
         myOptions = [
-            'useSetters' => false,
-            'markClean' => true,
-            'markNew' => false,
-            'guard' => false,
+            "useSetters" => false,
+            "markClean" => true,
+            "markNew" => false,
+            "guard" => false,
         ];
 
         foreach (this._matchingMapColumns as myAlias => myKeys) {
             $matching = this._matchingMap[myAlias];
-            myResults['_matchingData'][myAlias] = array_combine(
+            myResults["_matchingData"][myAlias] = array_combine(
                 myKeys,
                 array_intersect_key($row, myKeys)
             );
             if (this._hydrate) {
                 /** @var \Cake\ORM\Table myTable */
-                myTable = $matching['instance'];
-                myOptions['source'] = myTable.getRegistryAlias();
+                myTable = $matching["instance"];
+                myOptions["source"] = myTable.getRegistryAlias();
                 /** @var \Cake\Datasource\IEntity $entity */
-                $entity = new $matching['entityClass'](myResults['_matchingData'][myAlias], myOptions);
-                myResults['_matchingData'][myAlias] = $entity;
+                $entity = new $matching["entityClass"](myResults["_matchingData"][myAlias], myOptions);
+                myResults["_matchingData"][myAlias] = $entity;
             }
         }
 
@@ -474,29 +474,29 @@ class ResultSet : ResultSetInterface
         unset($presentAliases[$defaultAlias]);
 
         foreach (this._containMap as $assoc) {
-            myAlias = $assoc['nestKey'];
+            myAlias = $assoc["nestKey"];
 
-            if ($assoc['canBeJoined'] && empty(this._map[myAlias])) {
+            if ($assoc["canBeJoined"] && empty(this._map[myAlias])) {
                 continue;
             }
 
             /** @var \Cake\ORM\Association $instance */
-            $instance = $assoc['instance'];
+            $instance = $assoc["instance"];
 
-            if (!$assoc['canBeJoined'] && !isset($row[myAlias])) {
-                myResults = $instance.defaultRowValue(myResults, $assoc['canBeJoined']);
+            if (!$assoc["canBeJoined"] && !isset($row[myAlias])) {
+                myResults = $instance.defaultRowValue(myResults, $assoc["canBeJoined"]);
                 continue;
             }
 
-            if (!$assoc['canBeJoined']) {
+            if (!$assoc["canBeJoined"]) {
                 myResults[myAlias] = $row[myAlias];
             }
 
             myTarget = $instance.getTarget();
-            myOptions['source'] = myTarget.getRegistryAlias();
+            myOptions["source"] = myTarget.getRegistryAlias();
             unset($presentAliases[myAlias]);
 
-            if ($assoc['canBeJoined'] && this._autoFields !== false) {
+            if ($assoc["canBeJoined"] && this._autoFields !== false) {
                 $hasData = false;
                 foreach (myResults[myAlias] as $v) {
                     if ($v !== null && $v !== []) {
@@ -510,12 +510,12 @@ class ResultSet : ResultSetInterface
                 }
             }
 
-            if (this._hydrate && myResults[myAlias] !== null && $assoc['canBeJoined']) {
-                $entity = new $assoc['entityClass'](myResults[myAlias], myOptions);
+            if (this._hydrate && myResults[myAlias] !== null && $assoc["canBeJoined"]) {
+                $entity = new $assoc["entityClass"](myResults[myAlias], myOptions);
                 myResults[myAlias] = $entity;
             }
 
-            myResults = $instance.transformRow(myResults, myAlias, $assoc['canBeJoined'], $assoc['targetProperty']);
+            myResults = $instance.transformRow(myResults, myAlias, $assoc["canBeJoined"], $assoc["targetProperty"]);
         }
 
         foreach ($presentAliases as myAlias => $present) {
@@ -525,11 +525,11 @@ class ResultSet : ResultSetInterface
             myResults[$defaultAlias][myAlias] = myResults[myAlias];
         }
 
-        if (isset(myResults['_matchingData'])) {
-            myResults[$defaultAlias]['_matchingData'] = myResults['_matchingData'];
+        if (isset(myResults["_matchingData"])) {
+            myResults[$defaultAlias]["_matchingData"] = myResults["_matchingData"];
         }
 
-        myOptions['source'] = this._defaultTable.getRegistryAlias();
+        myOptions["source"] = this._defaultTable.getRegistryAlias();
         if (isset(myResults[$defaultAlias])) {
             myResults = myResults[$defaultAlias];
         }
@@ -548,7 +548,7 @@ class ResultSet : ResultSetInterface
      */
     auto __debugInfo() {
         return [
-            'items' => this.toArray(),
+            "items" => this.toArray(),
         ];
     }
 }

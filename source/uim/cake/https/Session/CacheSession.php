@@ -33,13 +33,13 @@ class CacheSession : SessionHandlerInterface
      * Constructor.
      *
      * @param array<string, mixed> myConfig The configuration to use for this engine
-     * It requires the key 'config' which is the name of the Cache config to use for
+     * It requires the key "config" which is the name of the Cache config to use for
      * storing the session
-     * @throws \InvalidArgumentException if the 'config' key is not provided
+     * @throws \InvalidArgumentException if the "config" key is not provided
      */
     this(array myConfig = []) {
-        if (empty(myConfig['config'])) {
-            throw new InvalidArgumentException('The cache configuration name to use is required');
+        if (empty(myConfig["config"])) {
+            throw new InvalidArgumentException("The cache configuration name to use is required");
         }
         this._options = myConfig;
     }
@@ -72,10 +72,10 @@ class CacheSession : SessionHandlerInterface
      */
     #[\ReturnTypeWillChange]
     function read($id) {
-        myValue = Cache::read($id, this._options['config']);
+        myValue = Cache::read($id, this._options["config"]);
 
         if (myValue === null) {
-            return '';
+            return "";
         }
 
         return myValue;
@@ -93,7 +93,7 @@ class CacheSession : SessionHandlerInterface
             return false;
         }
 
-        return Cache::write($id, myData, this._options['config']);
+        return Cache::write($id, myData, this._options["config"]);
     }
 
     /**
@@ -103,13 +103,13 @@ class CacheSession : SessionHandlerInterface
      * @return bool Always true.
      */
     bool destroy($id) {
-        Cache::delete($id, this._options['config']);
+        Cache::delete($id, this._options["config"]);
 
         return true;
     }
 
     /**
-     * No-op method. Always returns 0 since cache engine don't have garbage collection.
+     * No-op method. Always returns 0 since cache engine don"t have garbage collection.
      *
      * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
      * @return int|false

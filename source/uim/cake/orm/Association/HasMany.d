@@ -56,14 +56,14 @@ class HasMany : Association
      *
      * @var string
      */
-    public const SAVE_APPEND = 'append';
+    public const SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
      *
      * @var string
      */
-    public const SAVE_REPLACE = 'replace';
+    public const SAVE_REPLACE = "replace";
 
     /**
      * Saving strategy to be used by this association
@@ -74,8 +74,8 @@ class HasMany : Association
 
     /**
      * Returns whether the passed table is the owning side for this
-     * association. This means that rows in the 'target' table would miss important
-     * or required information if the row in 'source' did not exist.
+     * association. This means that rows in the "target" table would miss important
+     * or required information if the row in "source" did not exist.
      *
      * @param \Cake\ORM\Table $side The potential Table with ownership
      */
@@ -92,7 +92,7 @@ class HasMany : Association
      */
     auto setSaveStrategy(string $strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
-            $msg = sprintf('Invalid save strategy "%s"', $strategy);
+            $msg = sprintf("Invalid save strategy "%s"", $strategy);
             throw new InvalidArgumentException($msg);
         }
 
@@ -127,7 +127,7 @@ class HasMany : Association
     function saveAssociated(IEntity $entity, array myOptions = []) {
         myTargetEntities = $entity.get(this.getProperty());
 
-        $isEmpty = in_array(myTargetEntities, [null, [], '', false], true);
+        $isEmpty = in_array(myTargetEntities, [null, [], "", false], true);
         if ($isEmpty) {
             if (
                 $entity.isNew() ||
@@ -141,7 +141,7 @@ class HasMany : Association
 
         if (!is_iterable(myTargetEntities)) {
             myName = this.getProperty();
-            myMessage = sprintf('Could not save %s, it cannot be traversed', myName);
+            myMessage = sprintf("Could not save %s, it cannot be traversed", myName);
             throw new InvalidArgumentException(myMessage);
         }
 
@@ -150,7 +150,7 @@ class HasMany : Association
             $entity.extract((array)this.getBindingKey())
         );
 
-        myOptions['_sourceTable'] = this.getSource();
+        myOptions["_sourceTable"] = this.getSource();
 
         if (
             this._saveStrategy === self::SAVE_REPLACE &&
@@ -197,12 +197,12 @@ class HasMany : Association
                 break;
             }
 
-            if (!empty(myOptions['atomic'])) {
+            if (!empty(myOptions["atomic"])) {
                 $entity = clone $entity;
             }
 
             if ($foreignKeyReference !== $entity.extract($foreignKey)) {
-                $entity.set($foreignKeyReference, ['guard' => false]);
+                $entity.set($foreignKeyReference, ["guard" => false]);
             }
 
             if (myTable.save($entity, myOptions)) {
@@ -210,7 +210,7 @@ class HasMany : Association
                 continue;
             }
 
-            if (!empty(myOptions['atomic'])) {
+            if (!empty(myOptions["atomic"])) {
                 $original[$k].setErrors($entity.getErrors());
                 if ($entity instanceof InvalidPropertyInterface) {
                     $original[$k].setInvalid($entity.getInvalid());
@@ -228,7 +228,7 @@ class HasMany : Association
     /**
      * Associates the source entity to each of the target entities provided.
      * When using this method, all entities in `myTargetEntities` will be appended to
-     * the source entity's property corresponding to this association object.
+     * the source entity"s property corresponding to this association object.
      *
      * This method does not check link uniqueness.
      * Changes are persisted in the database and also in the source entity.
@@ -237,11 +237,11 @@ class HasMany : Association
      *
      * ```
      * myUser = myUsers.get(1);
-     * $allArticles = $articles.find('all').toArray();
+     * $allArticles = $articles.find("all").toArray();
      * myUsers.Articles.link(myUser, $allArticles);
      * ```
      *
-     * `myUser.get('articles')` will contain all articles in `$allArticles` after linking
+     * `myUser.get("articles")` will contain all articles in `$allArticles` after linking
      *
      * @param \Cake\Datasource\IEntity $sourceEntity the row belonging to the `source` side
      * of this association
@@ -303,12 +303,12 @@ class HasMany : Association
      * ```
      * myUser = myUsers.get(1);
      * myUser.articles = [$article1, $article2, $article3, $article4];
-     * myUsers.save(myUser, ['Associated' => ['Articles']]);
+     * myUsers.save(myUser, ["Associated" => ["Articles"]]);
      * $allArticles = [$article1, $article2, $article3];
      * myUsers.Articles.unlink(myUser, $allArticles);
      * ```
      *
-     * `$article.get('articles')` will contain only `[$article4]` after deleting in the database
+     * `$article.get("articles")` will contain only `[$article4]` after deleting in the database
      *
      * @param \Cake\Datasource\IEntity $sourceEntity an entity persisted in the source table for
      * this association
@@ -324,10 +324,10 @@ class HasMany : Association
     {
         if (is_bool(myOptions)) {
             myOptions = [
-                'cleanProperty' => myOptions,
+                "cleanProperty" => myOptions,
             ];
         } else {
-            myOptions += ['cleanProperty' => true];
+            myOptions += ["cleanProperty" => true];
         }
         if (count(myTargetEntities) === 0) {
             return;
@@ -339,7 +339,7 @@ class HasMany : Association
         $property = this.getProperty();
 
         $conditions = [
-            'OR' => (new Collection(myTargetEntities))
+            "OR" => (new Collection(myTargetEntities))
                 .map(function ($entity) use (myTargetPrimaryKey) {
                     /** @var \Cake\Datasource\IEntity $entity */
                     return $entity.extract(myTargetPrimaryKey);
@@ -350,7 +350,7 @@ class HasMany : Association
         this._unlink($foreignKey, myTarget, $conditions, myOptions);
 
         myResult = $sourceEntity.get($property);
-        if (myOptions['cleanProperty'] && myResult !== null) {
+        if (myOptions["cleanProperty"] && myResult !== null) {
             $sourceEntity.set(
                 $property,
                 (new Collection($sourceEntity.get($property)))
@@ -373,10 +373,10 @@ class HasMany : Association
      * be created for the passed target entities that are not already in the database
      * and the rest will be removed.
      *
-     * For example, if an author has many articles, such as 'article1','article 2' and 'article 3' and you pass
-     * to this method an array containing the entities for articles 'article 1' and 'article 4',
-     * only the link for 'article 1' will be kept in database, the links for 'article 2' and 'article 3' will be
-     * deleted and the link for 'article 4' will be created.
+     * For example, if an author has many articles, such as "article1","article 2" and "article 3" and you pass
+     * to this method an array containing the entities for articles "article 1" and "article 4",
+     * only the link for "article 1" will be kept in database, the links for "article 2" and "article 3" will be
+     * deleted and the link for "article 4" will be created.
      *
      * Existing links are not deleted and created again, they are either left untouched
      * or updated.
@@ -395,10 +395,10 @@ class HasMany : Association
      * $author.articles = [$article1, $article2, $article3, $article4];
      * $authors.save($author);
      * $articles = [$article1, $article3];
-     * $authors.getAssociation('articles').replace($author, $articles);
+     * $authors.getAssociation("articles").replace($author, $articles);
      * ```
      *
-     * `$author.get('articles')` will contain only `[$article1, $article3]` at the end
+     * `$author.get("articles")` will contain only `[$article1, $article3]` at the end
      *
      * @param \Cake\Datasource\IEntity $sourceEntity an entity persisted in the source table for
      * this association
@@ -463,8 +463,8 @@ class HasMany : Association
 
         if (count($exclusions) > 0) {
             $conditions = [
-                'NOT' => [
-                    'OR' => $exclusions,
+                "NOT" => [
+                    "OR" => $exclusions,
                 ],
                 $foreignKeyReference,
             ];
@@ -552,11 +552,11 @@ class HasMany : Association
      * Whether this association can be expressed directly in a query join
      *
      * @param array<string, mixed> myOptions custom options key that could alter the return value
-     * @return bool if the 'matching' key in $option is true then this function
+     * @return bool if the "matching" key in $option is true then this function
      * will return true, false otherwise
      */
     bool canBeJoined(array myOptions = []) {
-        return !empty(myOptions['matching']);
+        return !empty(myOptions["matching"]);
     }
 
     /**
@@ -612,11 +612,11 @@ class HasMany : Association
      */
     protected auto _options(array myOptions): void
     {
-        if (!empty(myOptions['saveStrategy'])) {
-            this.setSaveStrategy(myOptions['saveStrategy']);
+        if (!empty(myOptions["saveStrategy"])) {
+            this.setSaveStrategy(myOptions["saveStrategy"]);
         }
-        if (isset(myOptions['sort'])) {
-            this.setSort(myOptions['sort']);
+        if (isset(myOptions["sort"])) {
+            this.setSort(myOptions["sort"]);
         }
     }
 
@@ -624,15 +624,15 @@ class HasMany : Association
     function eagerLoader(array myOptions): Closure
     {
         $loader = new SelectLoader([
-            'alias' => this.getAlias(),
-            'sourceAlias' => this.getSource().getAlias(),
-            'targetAlias' => this.getTarget().getAlias(),
-            'foreignKey' => this.getForeignKey(),
-            'bindingKey' => this.getBindingKey(),
-            'strategy' => this.getStrategy(),
-            'associationType' => this.type(),
-            'sort' => this.getSort(),
-            'finder' => [this, 'find'],
+            "alias" => this.getAlias(),
+            "sourceAlias" => this.getSource().getAlias(),
+            "targetAlias" => this.getTarget().getAlias(),
+            "foreignKey" => this.getForeignKey(),
+            "bindingKey" => this.getBindingKey(),
+            "strategy" => this.getStrategy(),
+            "associationType" => this.type(),
+            "sort" => this.getSort(),
+            "finder" => [this, "find"],
         ]);
 
         return $loader.buildEagerLoader(myOptions);

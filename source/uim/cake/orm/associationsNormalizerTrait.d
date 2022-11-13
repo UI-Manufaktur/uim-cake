@@ -24,30 +24,30 @@ trait AssociationsNormalizerTrait
                 myOptions = [];
             }
 
-            if (!strpos(myTable, '.')) {
+            if (!strpos(myTable, ".")) {
                 myResult[myTable] = myOptions;
                 continue;
             }
 
-            myPath = explode('.', myTable);
+            myPath = explode(".", myTable);
             myTable = array_pop(myPath);
             /** @var string $first */
             $first = array_shift(myPath);
             $pointer += [$first => []];
             $pointer = &$pointer[$first];
-            $pointer += ['associated' => []];
+            $pointer += ["associated" => []];
 
             foreach (myPath as $t) {
-                $pointer += ['associated' => []];
-                $pointer['associated'] += [$t => []];
-                $pointer['associated'][$t] += ['associated' => []];
-                $pointer = &$pointer['associated'][$t];
+                $pointer += ["associated" => []];
+                $pointer["associated"] += [$t => []];
+                $pointer["associated"][$t] += ["associated" => []];
+                $pointer = &$pointer["associated"][$t];
             }
 
-            $pointer['associated'] += [myTable => []];
-            $pointer['associated'][myTable] = myOptions + $pointer['associated'][myTable];
+            $pointer["associated"] += [myTable => []];
+            $pointer["associated"][myTable] = myOptions + $pointer["associated"][myTable];
         }
 
-        return myResult['associated'] ?? myResult;
+        return myResult["associated"] ?? myResult;
     }
 }

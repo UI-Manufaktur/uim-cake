@@ -52,9 +52,9 @@ class EncryptedCookieMiddleware : MiddlewareInterface
      *
      * @param array<string> $cookieNames The list of cookie names that should have their values encrypted.
      * @param string myKey The encryption key to use.
-     * @param string $cipherType The cipher type to use. Defaults to 'aes'.
+     * @param string $cipherType The cipher type to use. Defaults to "aes".
      */
-    this(array $cookieNames, string myKey, string $cipherType = 'aes') {
+    this(array $cookieNames, string myKey, string $cipherType = "aes") {
         this.cookieNames = $cookieNames;
         this.key = myKey;
         this.cipherType = $cipherType;
@@ -74,7 +74,7 @@ class EncryptedCookieMiddleware : MiddlewareInterface
         }
 
         $response = $handler.handle(myRequest);
-        if ($response.hasHeader('Set-Cookie')) {
+        if ($response.hasHeader("Set-Cookie")) {
             $response = this.encodeSetCookieHeader($response);
         }
         if ($response instanceof Response) {
@@ -115,7 +115,7 @@ class EncryptedCookieMiddleware : MiddlewareInterface
     }
 
     /**
-     * Encode cookies from a response's CookieCollection.
+     * Encode cookies from a response"s CookieCollection.
      *
      * @param \Cake\Http\Response $response The response to encode cookies in.
      * @return \Cake\Http\Response Updated response with encoded cookies.
@@ -135,7 +135,7 @@ class EncryptedCookieMiddleware : MiddlewareInterface
     }
 
     /**
-     * Encode cookies from a response's Set-Cookie header
+     * Encode cookies from a response"s Set-Cookie header
      *
      * @param \Psr\Http\Message\IResponse $response The response to encode cookies in.
      * @return \Psr\Http\Message\IResponse Updated response with encoded cookies.
@@ -143,7 +143,7 @@ class EncryptedCookieMiddleware : MiddlewareInterface
     protected auto encodeSetCookieHeader(IResponse $response): IResponse
     {
         /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
-        $cookies = CookieCollection::createFromHeader($response.getHeader('Set-Cookie'));
+        $cookies = CookieCollection::createFromHeader($response.getHeader("Set-Cookie"));
         $header = [];
         foreach ($cookies as $cookie) {
             if (in_array($cookie.getName(), this.cookieNames, true)) {
@@ -153,6 +153,6 @@ class EncryptedCookieMiddleware : MiddlewareInterface
             $header[] = $cookie.toHeaderValue();
         }
 
-        return $response.withHeader('Set-Cookie', $header);
+        return $response.withHeader("Set-Cookie", $header);
     }
 }

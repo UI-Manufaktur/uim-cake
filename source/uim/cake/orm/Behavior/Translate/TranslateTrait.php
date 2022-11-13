@@ -18,11 +18,11 @@ trait TranslateTrait
      * @return \Cake\Datasource\IEntity|this
      */
     function translation(string myLanguage) {
-        if (myLanguage === this.get('_locale')) {
+        if (myLanguage === this.get("_locale")) {
             return this;
         }
 
-        $i18n = this.get('_translations');
+        $i18n = this.get("_translations");
         $created = false;
 
         if (empty($i18n)) {
@@ -38,11 +38,11 @@ trait TranslateTrait
         }
 
         if ($created) {
-            this.set('_translations', $i18n);
+            this.set("_translations", $i18n);
         }
 
         // Assume the user will modify any of the internal translations, helps with saving
-        this.setDirty('_translations', true);
+        this.setDirty("_translations", true);
 
         return $i18n[myLanguage];
     }

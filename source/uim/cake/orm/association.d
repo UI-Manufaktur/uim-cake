@@ -28,49 +28,49 @@ abstract class Association
      *
      * @var string
      */
-    public const STRATEGY_JOIN = 'join';
+    public const STRATEGY_JOIN = "join";
 
     /**
      * Strategy name to use a subquery for fetching associated records
      *
      * @var string
      */
-    public const STRATEGY_SUBQUERY = 'subquery';
+    public const STRATEGY_SUBQUERY = "subquery";
 
     /**
      * Strategy name to use a select for fetching associated records
      *
      * @var string
      */
-    public const STRATEGY_SELECT = 'select';
+    public const STRATEGY_SELECT = "select";
 
     /**
      * Association type for one to one associations.
      *
      * @var string
      */
-    public const ONE_TO_ONE = 'oneToOne';
+    public const ONE_TO_ONE = "oneToOne";
 
     /**
      * Association type for one to many associations.
      *
      * @var string
      */
-    public const ONE_TO_MANY = 'oneToMany';
+    public const ONE_TO_MANY = "oneToMany";
 
     /**
      * Association type for many to many associations.
      *
      * @var string
      */
-    public const MANY_TO_MANY = 'manyToMany';
+    public const MANY_TO_MANY = "manyToMany";
 
     /**
      * Association type for many to one associations.
      *
      * @var string
      */
-    public const MANY_TO_ONE = 'manyToOne';
+    public const MANY_TO_ONE = "manyToOne";
 
     /**
      * Name given to the association, it usually represents the alias
@@ -168,7 +168,7 @@ abstract class Association
      *
      * @var array|string
      */
-    protected $_finder = 'all';
+    protected $_finder = "all";
 
     /**
      * Valid strategies for this association. Subclasses can narrow this down.
@@ -190,22 +190,22 @@ abstract class Association
      */
     this(string myAlias, array myOptions = []) {
         $defaults = [
-            'cascadeCallbacks',
-            'className',
-            'conditions',
-            'dependent',
-            'finder',
-            'bindingKey',
-            'foreignKey',
-            'joinType',
-            'tableLocator',
-            'propertyName',
-            'sourceTable',
-            'targetTable',
+            "cascadeCallbacks",
+            "className",
+            "conditions",
+            "dependent",
+            "finder",
+            "bindingKey",
+            "foreignKey",
+            "joinType",
+            "tableLocator",
+            "propertyName",
+            "sourceTable",
+            "targetTable",
         ];
         foreach ($defaults as $property) {
             if (isset(myOptions[$property])) {
-                this.{'_' . $property} = myOptions[$property];
+                this.{"_" . $property} = myOptions[$property];
             }
         }
 
@@ -218,8 +218,8 @@ abstract class Association
 
         this._options(myOptions);
 
-        if (!empty(myOptions['strategy'])) {
-            this.setStrategy(myOptions['strategy']);
+        if (!empty(myOptions["strategy"])) {
+            this.setStrategy(myOptions["strategy"]);
         }
     }
 
@@ -234,15 +234,15 @@ abstract class Association
      */
     auto setName(string myName) {
         deprecationWarning(
-            'Changing the association name after object creation is no longer supported.'
-            . ' The name should only be set through the constructor'
+            "Changing the association name after object creation is no longer supported."
+            . " The name should only be set through the constructor"
         );
 
         if (this._targetTable !== null) {
             myAlias = this._targetTable.getAlias();
             if (myAlias !== myName) {
                 throw new InvalidArgumentException(sprintf(
-                    'Association name "%s" does not match target table alias "%s".',
+                    "Association name "%s" does not match target table alias "%s".",
                     myName,
                     myAlias
                 ));
@@ -291,15 +291,15 @@ abstract class Association
      * @param string myClassName Class name to set.
      * @return this
      * @throws \InvalidArgumentException In case the class name is set after the target table has been
-     *  resolved, and it doesn't match the target table's class name.
+     *  resolved, and it doesn"t match the target table"s class name.
      */
     auto setClassName(string myClassName) {
         if (
             this._targetTable !== null &&
-            get_class(this._targetTable) !== App::className(myClassName, 'Model/Table', 'Table')
+            get_class(this._targetTable) !== App::className(myClassName, "Model/Table", "Table")
         ) {
             throw new InvalidArgumentException(sprintf(
-                'The class name "%s" doesn\'t match the target table class name of "%s".',
+                "The class name "%s" doesn\"t match the target table class name of "%s".",
                 myClassName,
                 get_class(this._targetTable)
             ));
@@ -362,7 +362,7 @@ abstract class Association
     auto getTarget(): Table
     {
         if (this._targetTable === null) {
-            if (strpos(this._className, '.')) {
+            if (strpos(this._className, ".")) {
                 [myPlugin] = pluginSplit(this._className, true);
                 $registryAlias = (string)myPlugin . this._name;
             } else {
@@ -374,21 +374,21 @@ abstract class Association
             myConfig = [];
             $exists = myTableLocator.exists($registryAlias);
             if (!$exists) {
-                myConfig = ['className' => this._className];
+                myConfig = ["className" => this._className];
             }
             this._targetTable = myTableLocator.get($registryAlias, myConfig);
 
             if ($exists) {
-                myClassName = App::className(this._className, 'Model/Table', 'Table') ?: Table::class;
+                myClassName = App::className(this._className, "Model/Table", "Table") ?: Table::class;
 
                 if (!this._targetTable instanceof myClassName) {
-                    myErrorMessage = '%s association "%s" of type "%s" to "%s" doesn\'t match the expected class "%s". ';
-                    myErrorMessage .= 'You can\'t have an association of the same name with a different target ';
-                    myErrorMessage .= '"className" option anywhere in your app.';
+                    myErrorMessage = "%s association "%s" of type "%s" to "%s" doesn\"t match the expected class "%s". ";
+                    myErrorMessage .= "You can\"t have an association of the same name with a different target ";
+                    myErrorMessage .= ""className" option anywhere in your app.";
 
                     throw new RuntimeException(sprintf(
                         myErrorMessage,
-                        this._sourceTable === null ? 'null' : get_class(this._sourceTable),
+                        this._sourceTable === null ? "null" : get_class(this._sourceTable),
                         this.getName(),
                         this.type(),
                         get_class(this._targetTable),
@@ -511,7 +511,7 @@ abstract class Association
      * @return bool
      */
     bool canBeJoined(array myOptions = []) {
-        $strategy = myOptions['strategy'] ?? this.getStrategy();
+        $strategy = myOptions["strategy"] ?? this.getStrategy();
 
         return $strategy === this::STRATEGY_JOIN;
     }
@@ -562,8 +562,8 @@ abstract class Association
         if (!this._propertyName) {
             this._propertyName = this._propertyName();
             if (in_array(this._propertyName, this._sourceTable.getSchema().columns(), true)) {
-                $msg = 'Association property name "%s" clashes with field of same name of table "%s".' .
-                    ' You should explicitly specify the "propertyName" option.';
+                $msg = "Association property name "%s" clashes with field of same name of table "%s"." .
+                    " You should explicitly specify the "propertyName" option.";
                 trigger_error(
                     sprintf($msg, this._propertyName, this._sourceTable.getTable()),
                     E_USER_WARNING
@@ -598,9 +598,9 @@ abstract class Association
     auto setStrategy(string myName) {
         if (!in_array(myName, this._validStrategies, true)) {
             throw new InvalidArgumentException(sprintf(
-                'Invalid strategy "%s" was provided. Valid options are (%s).',
+                "Invalid strategy "%s" was provided. Valid options are (%s).",
                 myName,
-                implode(', ', this._validStrategies)
+                implode(", ", this._validStrategies)
             ));
         }
         this._strategy = myName;
@@ -684,45 +684,45 @@ abstract class Association
         myTable = myTarget.getTable();
 
         myOptions += [
-            'includeFields' => true,
-            'foreignKey' => this.getForeignKey(),
-            'conditions' => [],
-            'joinType' => this.getJoinType(),
-            'fields' => [],
-            'table' => myTable,
-            'finder' => this.getFinder(),
+            "includeFields" => true,
+            "foreignKey" => this.getForeignKey(),
+            "conditions" => [],
+            "joinType" => this.getJoinType(),
+            "fields" => [],
+            "table" => myTable,
+            "finder" => this.getFinder(),
         ];
 
         // This is set by joinWith to disable matching results
-        if (myOptions['fields'] === false) {
-            myOptions['fields'] = [];
-            myOptions['includeFields'] = false;
+        if (myOptions["fields"] === false) {
+            myOptions["fields"] = [];
+            myOptions["includeFields"] = false;
         }
 
-        if (!empty(myOptions['foreignKey'])) {
+        if (!empty(myOptions["foreignKey"])) {
             $joinCondition = this._joinCondition(myOptions);
             if ($joinCondition) {
-                myOptions['conditions'][] = $joinCondition;
+                myOptions["conditions"][] = $joinCondition;
             }
         }
 
-        [myFinder, $opts] = this._extractFinder(myOptions['finder']);
+        [myFinder, $opts] = this._extractFinder(myOptions["finder"]);
         $dummy = this
             .find(myFinder, $opts)
             .eagerLoaded(true);
 
-        if (!empty(myOptions['queryBuilder'])) {
-            $dummy = myOptions['queryBuilder']($dummy);
+        if (!empty(myOptions["queryBuilder"])) {
+            $dummy = myOptions["queryBuilder"]($dummy);
             if (!($dummy instanceof Query)) {
                 throw new RuntimeException(sprintf(
-                    'Query builder for association "%s" did not return a query',
+                    "Query builder for association "%s" did not return a query",
                     this.getName()
                 ));
             }
         }
 
         if (
-            !empty(myOptions['matching']) &&
+            !empty(myOptions["matching"]) &&
             this._strategy === static::STRATEGY_JOIN &&
             $dummy.getContain()
         ) {
@@ -731,13 +731,13 @@ abstract class Association
             );
         }
 
-        $dummy.where(myOptions['conditions']);
+        $dummy.where(myOptions["conditions"]);
         this._dispatchBeforeFind($dummy);
 
         myQuery.join([this._name => [
-            'table' => myOptions['table'],
-            'conditions' => $dummy.clause('where'),
-            'type' => myOptions['joinType'],
+            "table" => myOptions["table"],
+            "conditions" => $dummy.clause("where"),
+            "type" => myOptions["joinType"],
         ]]);
 
         this._appendFields(myQuery, $dummy, myOptions);
@@ -757,10 +757,10 @@ abstract class Association
     protected auto _appendNotMatching(Query myQuery, array myOptions): void
     {
         myTarget = this._targetTable;
-        if (!empty(myOptions['negateMatch'])) {
+        if (!empty(myOptions["negateMatch"])) {
             $primaryKey = myQuery.aliasFields((array)myTarget.getPrimaryKey(), this._name);
             myQuery.andWhere(function ($exp) use ($primaryKey) {
-                array_map([$exp, 'isNull'], $primaryKey);
+                array_map([$exp, "isNull"], $primaryKey);
 
                 return $exp;
             });
@@ -814,7 +814,7 @@ abstract class Association
     }
 
     /**
-     * Proxies the finding operation to the target table's find method
+     * Proxies the finding operation to the target table"s find method
      * and modifies the query accordingly based of this association
      * configuration
      *
@@ -835,7 +835,7 @@ abstract class Association
     }
 
     /**
-     * Proxies the operation to the target table's exists method after
+     * Proxies the operation to the target table"s exists method after
      * appending the default conditions for this association
      *
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The conditions to use
@@ -846,13 +846,13 @@ abstract class Association
     bool exists($conditions) {
         $conditions = this.find()
             .where($conditions)
-            .clause('where');
+            .clause("where");
 
         return this.getTarget().exists($conditions);
     }
 
     /**
-     * Proxies the update operation to the target table's updateAll method
+     * Proxies the update operation to the target table"s updateAll method
      *
      * @param array myFields A hash of field => new value.
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
@@ -864,13 +864,13 @@ abstract class Association
     {
         $expression = this.find()
             .where($conditions)
-            .clause('where');
+            .clause("where");
 
         return this.getTarget().updateAll(myFields, $expression);
     }
 
     /**
-     * Proxies the delete operation to the target table's deleteAll method
+     * Proxies the delete operation to the target table"s deleteAll method
      *
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
@@ -881,20 +881,20 @@ abstract class Association
     {
         $expression = this.find()
             .where($conditions)
-            .clause('where');
+            .clause("where");
 
         return this.getTarget().deleteAll($expression);
     }
 
     /**
-     * Returns true if the eager loading process will require a set of the owning table's
+     * Returns true if the eager loading process will require a set of the owning table"s
      * binding keys in order to use them as a filter in the finder query.
      *
      * @param array<string, mixed> myOptions The options containing the strategy to be used.
      * @return bool true if a list of keys will be required
      */
     bool requiresKeys(array myOptions = []) {
-        $strategy = myOptions['strategy'] ?? this.getStrategy();
+        $strategy = myOptions["strategy"] ?? this.getStrategy();
 
         return $strategy === static::STRATEGY_SELECT;
     }
@@ -926,10 +926,10 @@ abstract class Association
             return;
         }
 
-        myFields = array_merge($surrogate.clause('select'), myOptions['fields']);
+        myFields = array_merge($surrogate.clause("select"), myOptions["fields"]);
 
         if (
-            (empty(myFields) && myOptions['includeFields']) ||
+            (empty(myFields) && myOptions["includeFields"]) ||
             $surrogate.isAutoFieldsEnabled()
         ) {
             myFields = array_merge(myFields, this._targetTable.getSchema().columns());
@@ -956,12 +956,12 @@ abstract class Association
     {
         $formatters = $surrogate.getResultFormatters();
 
-        if (!$formatters || empty(myOptions['propertyPath'])) {
+        if (!$formatters || empty(myOptions["propertyPath"])) {
             return;
         }
 
-        $property = myOptions['propertyPath'];
-        $propertyPath = explode('.', $property);
+        $property = myOptions["propertyPath"];
+        $propertyPath = explode(".", $property);
         myQuery.formatResults(function (myResults, myQuery) use ($formatters, $property, $propertyPath) {
             $extracted = [];
             foreach (myResults as myResult) {
@@ -1018,7 +1018,7 @@ abstract class Association
 
         $newContain = [];
         foreach ($contain as myAlias => myValue) {
-            $newContain[myOptions['aliasPath'] . '.' . myAlias] = myValue;
+            $newContain[myOptions["aliasPath"] . "." . myAlias] = myValue;
         }
 
         $eagerLoader = myQuery.getEagerLoader();
@@ -1028,8 +1028,8 @@ abstract class Association
 
         foreach ($matching as myAlias => myValue) {
             $eagerLoader.setMatching(
-                myOptions['aliasPath'] . '.' . myAlias,
-                myValue['queryBuilder'],
+                myOptions["aliasPath"] . "." . myAlias,
+                myValue["queryBuilder"],
                 myValue
             );
         }
@@ -1049,7 +1049,7 @@ abstract class Association
         $conditions = [];
         $tAlias = this._name;
         $sAlias = this.getSource().getAlias();
-        $foreignKey = (array)myOptions['foreignKey'];
+        $foreignKey = (array)myOptions["foreignKey"];
         $bindingKey = (array)this.getBindingKey();
 
         if (count($foreignKey) !== count($bindingKey)) {
@@ -1058,22 +1058,22 @@ abstract class Association
                 if (this.isOwningSide(this.getSource())) {
                     myTable = this.getSource().getTable();
                 }
-                $msg = 'The "%s" table does not define a primary key, and cannot have join conditions generated.';
+                $msg = "The "%s" table does not define a primary key, and cannot have join conditions generated.";
                 throw new RuntimeException(sprintf($msg, myTable));
             }
 
-            $msg = 'Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"';
+            $msg = "Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"";
             throw new RuntimeException(sprintf(
                 $msg,
                 this._name,
-                implode(', ', $foreignKey),
-                implode(', ', $bindingKey)
+                implode(", ", $foreignKey),
+                implode(", ", $bindingKey)
             ));
         }
 
         foreach ($foreignKey as $k => $f) {
-            myField = sprintf('%s.%s', $sAlias, $bindingKey[$k]);
-            myValue = new IdentifierExpression(sprintf('%s.%s', $tAlias, $f));
+            myField = sprintf("%s.%s", $sAlias, $bindingKey[$k]);
+            myValue = new IdentifierExpression(sprintf("%s.%s", $tAlias, $f));
             $conditions[myField] = myValue;
         }
 
@@ -1087,10 +1087,10 @@ abstract class Association
      *
      * ### Examples:
      *
-     * The following will call the finder 'translations' with the value of the finder as its options:
-     * myQuery.contain(['Comments' => ['finder' => ['translations']]]);
-     * myQuery.contain(['Comments' => ['finder' => ['translations' => []]]]);
-     * myQuery.contain(['Comments' => ['finder' => ['translations' => ['locales' => ['en_US']]]]]);
+     * The following will call the finder "translations" with the value of the finder as its options:
+     * myQuery.contain(["Comments" => ["finder" => ["translations"]]]);
+     * myQuery.contain(["Comments" => ["finder" => ["translations" => []]]]);
+     * myQuery.contain(["Comments" => ["finder" => ["translations" => ["locales" => ["en_US"]]]]]);
      *
      * @param array|string myFinderData The finder name or an array having the name as key
      * and options as value.
@@ -1109,7 +1109,7 @@ abstract class Association
 
     /**
      * Proxies property retrieval to the target table. This is handy for getting this
-     * association's associations
+     * association"s associations
      *
      * @param string $property the property name
      * @return \Cake\ORM\Association
@@ -1195,8 +1195,8 @@ abstract class Association
 
     /**
      * Returns whether the passed table is the owning side for this
-     * association. This means that rows in the 'target' table would miss important
-     * or required information if the row in 'source' did not exist.
+     * association. This means that rows in the "target" table would miss important
+     * or required information if the row in "source" did not exist.
      *
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
@@ -1204,7 +1204,7 @@ abstract class Association
     abstract bool isOwningSide(Table $side);
 
     /**
-     * Extract the target's association data our from the passed entity and proxies
+     * Extract the target"s association data our from the passed entity and proxies
      * the saving operation to the target table.
      *
      * @param \Cake\Datasource\IEntity $entity the data to be saved

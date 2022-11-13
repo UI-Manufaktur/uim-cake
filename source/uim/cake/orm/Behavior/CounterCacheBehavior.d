@@ -17,8 +17,8 @@ use Closure;
  * Regular counter cache
  * ```
  * [
- *     'Users' => [
- *         'post_count'
+ *     "Users" => [
+ *         "post_count"
  *     ]
  * ]
  * ```
@@ -26,10 +26,10 @@ use Closure;
  * Counter cache with scope
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => [
- *             'conditions' => [
- *                 'published' => true
+ *     "Users" => [
+ *         "posts_published" => [
+ *             "conditions" => [
+ *                 "published" => true
  *             ]
  *         ]
  *     ]
@@ -39,9 +39,9 @@ use Closure;
  * Counter cache using custom find
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => [
- *             'finder' => 'published' // Will be using findPublished()
+ *     "Users" => [
+ *         "posts_published" => [
+ *             "finder" => "published" // Will be using findPublished()
  *         ]
  *     ]
  * ]
@@ -52,11 +52,11 @@ use Closure;
  *
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => function (IEvent myEvent, IEntity $entity, Table myTable) {
- *             myQuery = myTable.find('all').where([
- *                 'published' => true,
- *                 'user_id' => $entity.get('user_id')
+ *     "Users" => [
+ *         "posts_published" => function (IEvent myEvent, IEntity $entity, Table myTable) {
+ *             myQuery = myTable.find("all").where([
+ *                 "published" => true,
+ *                 "user_id" => $entity.get("user_id")
  *             ]);
  *             return myQuery.count();
  *          }
@@ -70,9 +70,9 @@ use Closure;
  * Ignore updating the field if it is dirty
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => [
- *             'ignoreDirty' => true
+ *     "Users" => [
+ *         "posts_published" => [
+ *             "ignoreDirty" => true
  *         ]
  *     ]
  * ]
@@ -82,7 +82,7 @@ use Closure;
  * to your save operation:
  *
  * ```
- * this.Articles.save($article, ['ignoreCounterCache' => true]);
+ * this.Articles.save($article, ["ignoreCounterCache" => true]);
  * ```
  */
 class CounterCacheBehavior : Behavior
@@ -105,7 +105,7 @@ class CounterCacheBehavior : Behavior
      * @return void
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        if (isset(myOptions['ignoreCounterCache']) && myOptions['ignoreCounterCache'] === true) {
+        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] === true) {
             return;
         }
 
@@ -121,8 +121,8 @@ class CounterCacheBehavior : Behavior
 
                 if (
                     !is_callable(myConfig) &&
-                    isset(myConfig['ignoreDirty']) &&
-                    myConfig['ignoreDirty'] === true &&
+                    isset(myConfig["ignoreDirty"]) &&
+                    myConfig["ignoreDirty"] === true &&
                     $entity.$entityAlias.isDirty(myField)
                 ) {
                     this._ignoreDirty[$registryAlias][myField] = true;
@@ -143,7 +143,7 @@ class CounterCacheBehavior : Behavior
      */
     function afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions): void
     {
-        if (isset(myOptions['ignoreCounterCache']) && myOptions['ignoreCounterCache'] === true) {
+        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] === true) {
             return;
         }
 
@@ -162,7 +162,7 @@ class CounterCacheBehavior : Behavior
      * @return void
      */
     function afterDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        if (isset(myOptions['ignoreCounterCache']) && myOptions['ignoreCounterCache'] === true) {
+        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] === true) {
             return;
         }
 
@@ -205,7 +205,7 @@ class CounterCacheBehavior : Behavior
 
         foreach (myCountConditions as myField => myValue) {
             if (myValue === null) {
-                myCountConditions[myField . ' IS'] = myValue;
+                myCountConditions[myField . " IS"] = myValue;
                 unset(myCountConditions[myField]);
             }
         }
@@ -276,13 +276,13 @@ class CounterCacheBehavior : Behavior
      */
     protected auto _getCount(array myConfig, array $conditions): int
     {
-        myFinder = 'all';
-        if (!empty(myConfig['finder'])) {
-            myFinder = myConfig['finder'];
-            unset(myConfig['finder']);
+        myFinder = "all";
+        if (!empty(myConfig["finder"])) {
+            myFinder = myConfig["finder"];
+            unset(myConfig["finder"]);
         }
 
-        myConfig['conditions'] = array_merge($conditions, myConfig['conditions'] ?? []);
+        myConfig["conditions"] = array_merge($conditions, myConfig["conditions"] ?? []);
         myQuery = this._table.find(myFinder, myConfig);
 
         return myQuery.count();

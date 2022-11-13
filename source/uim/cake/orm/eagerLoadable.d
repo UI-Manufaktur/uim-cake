@@ -115,12 +115,12 @@ class EagerLoadable
     this(string myName, array myConfig = []) {
         this._name = myName;
         $allowed = [
-            'associations', 'instance', 'config', 'canBeJoined',
-            'aliasPath', 'propertyPath', 'forMatching', 'targetProperty',
+            "associations", "instance", "config", "canBeJoined",
+            "aliasPath", "propertyPath", "forMatching", "targetProperty",
         ];
         foreach ($allowed as $property) {
             if (isset(myConfig[$property])) {
-                this.{'_' . $property} = myConfig[$property];
+                this.{"_" . $property} = myConfig[$property];
             }
         }
     }
@@ -156,7 +156,7 @@ class EagerLoadable
     function instance(): Association
     {
         if (this._instance === null) {
-            throw new \RuntimeException('No instance set.');
+            throw new \RuntimeException("No instance set.");
         }
 
         return this._instance;
@@ -281,13 +281,13 @@ class EagerLoadable
         }
         myConfig = this._config;
         if (this._forMatching !== null) {
-            myConfig = ['matching' => this._forMatching] + myConfig;
+            myConfig = ["matching" => this._forMatching] + myConfig;
         }
 
         return [
             this._name => [
-                'associations' => $associations,
-                'config' => myConfig,
+                "associations" => $associations,
+                "config" => myConfig,
             ],
         ];
     }

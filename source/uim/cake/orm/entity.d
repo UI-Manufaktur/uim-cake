@@ -25,7 +25,7 @@ class Entity : IEntity, InvalidPropertyInterface
      * ### Example:
      *
      * ```
-     *  $entity = new Entity(['id' => 1, 'name' => 'Andrew'])
+     *  $entity = new Entity(["id" => 1, "name" => "Andrew"])
      * ```
      *
      * @param array<string, mixed> $properties hash of properties to set in this entity
@@ -33,22 +33,22 @@ class Entity : IEntity, InvalidPropertyInterface
      */
     this(array $properties = [], array myOptions = []) {
         myOptions += [
-            'useSetters' => true,
-            'markClean' => false,
-            'markNew' => null,
-            'guard' => false,
-            'source' => null,
+            "useSetters" => true,
+            "markClean" => false,
+            "markNew" => null,
+            "guard" => false,
+            "source" => null,
         ];
 
-        if (!empty(myOptions['source'])) {
-            this.setSource(myOptions['source']);
+        if (!empty(myOptions["source"])) {
+            this.setSource(myOptions["source"]);
         }
 
-        if (myOptions['markNew'] !== null) {
-            this.setNew(myOptions['markNew']);
+        if (myOptions["markNew"] !== null) {
+            this.setNew(myOptions["markNew"]);
         }
 
-        if (!empty($properties) && myOptions['markClean'] && !myOptions['useSetters']) {
+        if (!empty($properties) && myOptions["markClean"] && !myOptions["useSetters"]) {
             this._fields = $properties;
 
             return;
@@ -56,12 +56,12 @@ class Entity : IEntity, InvalidPropertyInterface
 
         if (!empty($properties)) {
             this.set($properties, [
-                'setter' => myOptions['useSetters'],
-                'guard' => myOptions['guard'],
+                "setter" => myOptions["useSetters"],
+                "guard" => myOptions["guard"],
             ]);
         }
 
-        if (myOptions['markClean']) {
+        if (myOptions["markClean"]) {
             this.clean();
         }
     }

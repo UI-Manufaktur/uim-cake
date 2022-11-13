@@ -36,24 +36,24 @@ class SyslogLog : BaseLog
      * ### Example:
      *
      * ```
-     *  Log::config('error', ]
-     *      'engine' => 'Syslog',
-     *      'levels' => ['emergency', 'alert', 'critical', 'error'],
-     *      'prefix' => 'Web Server 01'
+     *  Log::config("error", ]
+     *      "engine" => "Syslog",
+     *      "levels" => ["emergency", "alert", "critical", "error"],
+     *      "prefix" => "Web Server 01"
      *  ]);
      * ```
      *
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'levels' => [],
-        'scopes' => [],
-        'flag' => LOG_ODELAY,
-        'prefix' => '',
-        'facility' => LOG_USER,
-        'formatter' => [
-            'className' => DefaultFormatter::class,
-            'includeDate' => false,
+        "levels" => [],
+        "scopes" => [],
+        "flag" => LOG_ODELAY,
+        "prefix" => "",
+        "facility" => LOG_USER,
+        "formatter" => [
+            "className" => DefaultFormatter::class,
+            "includeDate" => false,
         ],
     ];
 
@@ -63,14 +63,14 @@ class SyslogLog : BaseLog
      * @var array<int>
      */
     protected $_levelMap = [
-        'emergency' => LOG_EMERG,
-        'alert' => LOG_ALERT,
-        'critical' => LOG_CRIT,
-        'error' => LOG_ERR,
-        'warning' => LOG_WARNING,
-        'notice' => LOG_NOTICE,
-        'info' => LOG_INFO,
-        'debug' => LOG_DEBUG,
+        "emergency" => LOG_EMERG,
+        "alert" => LOG_ALERT,
+        "critical" => LOG_CRIT,
+        "error" => LOG_ERR,
+        "warning" => LOG_WARNING,
+        "notice" => LOG_NOTICE,
+        "info" => LOG_INFO,
+        "debug" => LOG_DEBUG,
     ];
 
     /**
@@ -82,16 +82,16 @@ class SyslogLog : BaseLog
 
 
     this(array myConfig = []) {
-        if (isset(myConfig['format'])) {
+        if (isset(myConfig["format"])) {
             deprecationWarning(
-                '`format` option is now deprecated in favor of custom formatters. ' .
-                'Switching to `LegacySyslogFormatter`.',
+                "`format` option is now deprecated in favor of custom formatters. " .
+                "Switching to `LegacySyslogFormatter`.",
                 0
             );
             /** @psalm-suppress DeprecatedClass */
-            myConfig['formatter'] = [
-                'className' => LegacySyslogFormatter::class,
-                'format' => myConfig['format'],
+            myConfig["formatter"] = [
+                "className" => LegacySyslogFormatter::class,
+                "format" => myConfig["format"],
             ];
         }
         super.this(myConfig);
@@ -113,7 +113,7 @@ class SyslogLog : BaseLog
     {
         if (!this._open) {
             myConfig = this._config;
-            this._open(myConfig['prefix'], myConfig['flag'], myConfig['facility']);
+            this._open(myConfig["prefix"], myConfig["flag"], myConfig["facility"]);
             this._open = true;
         }
 

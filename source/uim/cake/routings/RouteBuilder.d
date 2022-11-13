@@ -23,14 +23,14 @@ class RouteBuilder
      *
      * @var string
      */
-    public const ID = '[0-9]+';
+    public const ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
      *
      * @var string
      */
-    public const UUID = '[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}';
+    public const UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
      * Default HTTP request method => controller action map.
@@ -38,11 +38,11 @@ class RouteBuilder
      * @var array<string, array>
      */
     protected static $_resourceMap = [
-        'index' => ['action' => 'index', 'method' => 'GET', 'path' => ''],
-        'create' => ['action' => 'add', 'method' => 'POST', 'path' => ''],
-        'view' => ['action' => 'view', 'method' => 'GET', 'path' => '{id}'],
-        'update' => ['action' => 'edit', 'method' => ['PUT', 'PATCH'], 'path' => '{id}'],
-        'delete' => ['action' => 'delete', 'method' => 'DELETE', 'path' => '{id}'],
+        "index" => ["action" => "index", "method" => "GET", "path" => ""],
+        "create" => ["action" => "add", "method" => "POST", "path" => ""],
+        "view" => ["action" => "view", "method" => "GET", "path" => "{id}"],
+        "update" => ["action" => "edit", "method" => ["PUT", "PATCH"], "path" => "{id}"],
+        "delete" => ["action" => "delete", "method" => "DELETE", "path" => "{id}"],
     ];
 
     /**
@@ -78,7 +78,7 @@ class RouteBuilder
      *
      * @var string
      */
-    protected $_namePrefix = '';
+    protected $_namePrefix = "";
 
     /**
      * The route collection routes should be added to.
@@ -107,24 +107,24 @@ class RouteBuilder
      *
      * @param \Cake\Routing\RouteCollection myCollection The route collection to append routes into.
      * @param string myPath The path prefix the scope is for.
-     * @param array myParams The scope's routing parameters.
+     * @param array myParams The scope"s routing parameters.
      * @param array<string, mixed> myOptions Options list.
      */
     this(RouteCollection myCollection, string myPath, array myParams = [], array myOptions = []) {
         this._collection = myCollection;
         this._path = myPath;
         this._params = myParams;
-        if (isset(myOptions['routeClass'])) {
-            this._routeClass = myOptions['routeClass'];
+        if (isset(myOptions["routeClass"])) {
+            this._routeClass = myOptions["routeClass"];
         }
-        if (isset(myOptions['extensions'])) {
-            this._extensions = myOptions['extensions'];
+        if (isset(myOptions["extensions"])) {
+            this._extensions = myOptions["extensions"];
         }
-        if (isset(myOptions['namePrefix'])) {
-            this._namePrefix = myOptions['namePrefix'];
+        if (isset(myOptions["namePrefix"])) {
+            this._namePrefix = myOptions["namePrefix"];
         }
-        if (isset(myOptions['middleware'])) {
-            this.middleware = (array)myOptions['middleware'];
+        if (isset(myOptions["middleware"])) {
+            this.middleware = (array)myOptions["middleware"];
         }
     }
 
@@ -145,13 +145,13 @@ class RouteBuilder
      *
      * @return string
      */
-    auto getRouteClass(): string
+    string getRouteClass()
     {
         return this._routeClass;
     }
 
     /**
-     * Set the extensions in this route builder's scope.
+     * Set the extensions in this route builder"s scope.
      *
      * Future routes connected in through this builder will have the connected
      * extensions applied. However, setting extensions does not modify existing routes.
@@ -166,7 +166,7 @@ class RouteBuilder
     }
 
     /**
-     * Get the extensions in this route builder's scope.
+     * Get the extensions in this route builder"s scope.
      *
      * @return array<string>
      */
@@ -195,12 +195,12 @@ class RouteBuilder
      */
     string path()
     {
-        $routeKey = strpos(this._path, '{');
-        if ($routeKey !== false && strpos(this._path, '}') !== false) {
+        $routeKey = strpos(this._path, "{");
+        if ($routeKey !== false && strpos(this._path, "}") !== false) {
             return substr(this._path, 0, $routeKey);
         }
 
-        $routeKey = strpos(this._path, ':');
+        $routeKey = strpos(this._path, ":");
         if ($routeKey !== false) {
             return substr(this._path, 0, $routeKey);
         }
@@ -236,7 +236,7 @@ class RouteBuilder
      * @param string|null myValue Either the value to set or null.
      * @return string
      */
-    function namePrefix(Nullable!string myValue = null): string
+    string namePrefix(Nullable!string myValue = null)
     {
         if (myValue !== null) {
             this._namePrefix = myValue;
@@ -255,15 +255,15 @@ class RouteBuilder
      * Connect resource routes for an app controller:
      *
      * ```
-     * $routes.resources('Posts');
+     * $routes.resources("Posts");
      * ```
      *
      * Connect resource routes for the Comments controller in the
      * Comments plugin:
      *
      * ```
-     * Router::plugin('Comments', function ($routes) {
-     *   $routes.resources('Comments');
+     * Router::plugin("Comments", function ($routes) {
+     *   $routes.resources("Comments");
      * });
      * ```
      *
@@ -274,8 +274,8 @@ class RouteBuilder
      * Admin prefix:
      *
      * ```
-     * Router::prefix('Admin', function ($routes) {
-     *   $routes.resources('Articles');
+     * Router::prefix("Admin", function ($routes) {
+     *   $routes.resources("Articles");
      * });
      * ```
      *
@@ -285,8 +285,8 @@ class RouteBuilder
      * You can create nested resources by passing a callback in:
      *
      * ```
-     * $routes.resources('Articles', function ($routes) {
-     *   $routes.resources('Comments');
+     * $routes.resources("Articles", function ($routes) {
+     *   $routes.resources("Comments");
      * });
      * ```
      *
@@ -294,42 +294,42 @@ class RouteBuilder
      * You can use the `map` option to connect additional resource methods:
      *
      * ```
-     * $routes.resources('Articles', [
-     *   'map' => ['deleteAll' => ['action' => 'deleteAll', 'method' => 'DELETE']]
+     * $routes.resources("Articles", [
+     *   "map" => ["deleteAll" => ["action" => "deleteAll", "method" => "DELETE"]]
      * ]);
      * ```
      *
      * In addition to the default routes, this would also connect a route for `/articles/delete_all`.
-     * By default, the path segment will match the key name. You can use the 'path' key inside the resource
+     * By default, the path segment will match the key name. You can use the "path" key inside the resource
      * definition to customize the path name.
      *
      * You can use the `inflect` option to change how path segments are generated:
      *
      * ```
-     * $routes.resources('PaymentTypes', ['inflect' => 'underscore']);
+     * $routes.resources("PaymentTypes", ["inflect" => "underscore"]);
      * ```
      *
      * Will generate routes like `/payment-types` instead of `/payment_types`
      *
      * ### Options:
      *
-     * - 'id' - The regular expression fragment to use when matching IDs. By default, matches
+     * - "id" - The regular expression fragment to use when matching IDs. By default, matches
      *    integer values and UUIDs.
-     * - 'inflect' - Choose the inflection method used on the resource name. Defaults to 'dasherize'.
-     * - 'only' - Only connect the specific list of actions.
-     * - 'actions' - Override the method names used for connecting actions.
-     * - 'map' - Additional resource routes that should be connected. If you define 'only' and 'map',
-     *   make sure that your mapped methods are also in the 'only' list.
-     * - 'prefix' - Define a routing prefix for the resource controller. If the current scope
+     * - "inflect" - Choose the inflection method used on the resource name. Defaults to "dasherize".
+     * - "only" - Only connect the specific list of actions.
+     * - "actions" - Override the method names used for connecting actions.
+     * - "map" - Additional resource routes that should be connected. If you define "only" and "map",
+     *   make sure that your mapped methods are also in the "only" list.
+     * - "prefix" - Define a routing prefix for the resource controller. If the current scope
      *   defines a prefix, this prefix will be appended to it.
-     * - 'connectOptions' - Custom options for connecting the routes.
-     * - 'path' - Change the path so it doesn't match the resource name. E.g ArticlesController
+     * - "connectOptions" - Custom options for connecting the routes.
+     * - "path" - Change the path so it doesn"t match the resource name. E.g ArticlesController
      *   is available at `/posts`
      *
      * @param string myName A controller name to connect resource routes for.
      * @param callable|array myOptions Options to use when generating REST routes, or a callback.
      * @param callable|null $callback An optional callback to be executed in a nested scope. Nested
-     *   scopes inherit the existing path and 'id' parameter.
+     *   scopes inherit the existing path and "id" parameter.
      * @return this
      */
     function resources(string myName, myOptions = [], $callback = null) {
@@ -338,43 +338,43 @@ class RouteBuilder
             myOptions = [];
         }
         myOptions += [
-            'connectOptions' => [],
-            'inflect' => 'dasherize',
-            'id' => static::ID . '|' . static::UUID,
-            'only' => [],
-            'actions' => [],
-            'map' => [],
-            'prefix' => null,
-            'path' => null,
+            "connectOptions" => [],
+            "inflect" => "dasherize",
+            "id" => static::ID . "|" . static::UUID,
+            "only" => [],
+            "actions" => [],
+            "map" => [],
+            "prefix" => null,
+            "path" => null,
         ];
 
-        foreach (myOptions['map'] as $k => $mapped) {
-            myOptions['map'][$k] += ['method' => 'GET', 'path' => $k, 'action' => ''];
+        foreach (myOptions["map"] as $k => $mapped) {
+            myOptions["map"][$k] += ["method" => "GET", "path" => $k, "action" => ""];
         }
 
         $ext = null;
-        if (!empty(myOptions['_ext'])) {
-            $ext = myOptions['_ext'];
+        if (!empty(myOptions["_ext"])) {
+            $ext = myOptions["_ext"];
         }
 
-        $connectOptions = myOptions['connectOptions'];
-        if (empty(myOptions['path'])) {
-            $method = myOptions['inflect'];
-            myOptions['path'] = Inflector::$method(myName);
+        $connectOptions = myOptions["connectOptions"];
+        if (empty(myOptions["path"])) {
+            $method = myOptions["inflect"];
+            myOptions["path"] = Inflector::$method(myName);
         }
-        $resourceMap = array_merge(static::$_resourceMap, myOptions['map']);
+        $resourceMap = array_merge(static::$_resourceMap, myOptions["map"]);
 
-        $only = (array)myOptions['only'];
+        $only = (array)myOptions["only"];
         if (empty($only)) {
             $only = array_keys($resourceMap);
         }
 
-        $prefix = '';
-        if (myOptions['prefix']) {
-            $prefix = myOptions['prefix'];
+        $prefix = "";
+        if (myOptions["prefix"]) {
+            $prefix = myOptions["prefix"];
         }
-        if (isset(this._params['prefix']) && $prefix) {
-            $prefix = this._params['prefix'] . '/' . $prefix;
+        if (isset(this._params["prefix"]) && $prefix) {
+            $prefix = this._params["prefix"] . "/" . $prefix;
         }
 
         foreach ($resourceMap as $method => myParams) {
@@ -382,28 +382,28 @@ class RouteBuilder
                 continue;
             }
 
-            $action = myOptions['actions'][$method] ?? myParams['action'];
+            $action = myOptions["actions"][$method] ?? myParams["action"];
 
-            myUrl = '/' . implode('/', array_filter([myOptions['path'], myParams['path']]));
+            myUrl = "/" . implode("/", array_filter([myOptions["path"], myParams["path"]]));
             myParams = [
-                'controller' => myName,
-                'action' => $action,
-                '_method' => myParams['method'],
+                "controller" => myName,
+                "action" => $action,
+                "_method" => myParams["method"],
             ];
             if ($prefix) {
-                myParams['prefix'] = $prefix;
+                myParams["prefix"] = $prefix;
             }
             $routeOptions = $connectOptions + [
-                'id' => myOptions['id'],
-                'pass' => ['id'],
-                '_ext' => $ext,
+                "id" => myOptions["id"],
+                "pass" => ["id"],
+                "_ext" => $ext,
             ];
             this.connect(myUrl, myParams, $routeOptions);
         }
 
         if ($callback !== null) {
-            $idName = Inflector::singularize(Inflector::underscore(myName)) . '_id';
-            myPath = '/' . myOptions['path'] . '/{' . $idName . '}';
+            $idName = Inflector::singularize(Inflector::underscore(myName)) . "_id";
+            myPath = "/" . myOptions["path"] . "/{" . $idName . "}";
             this.scope(myPath, [], $callback);
         }
 
@@ -421,7 +421,7 @@ class RouteBuilder
      */
     auto get(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute('GET', myTemplate, myTarget, myName);
+        return this._methodRoute("GET", myTemplate, myTarget, myName);
     }
 
     /**
@@ -435,7 +435,7 @@ class RouteBuilder
      */
     function post(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute('POST', myTemplate, myTarget, myName);
+        return this._methodRoute("POST", myTemplate, myTarget, myName);
     }
 
     /**
@@ -449,7 +449,7 @@ class RouteBuilder
      */
     function put(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute('PUT', myTemplate, myTarget, myName);
+        return this._methodRoute("PUT", myTemplate, myTarget, myName);
     }
 
     /**
@@ -463,7 +463,7 @@ class RouteBuilder
      */
     function patch(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute('PATCH', myTemplate, myTarget, myName);
+        return this._methodRoute("PATCH", myTemplate, myTarget, myName);
     }
 
     /**
@@ -477,7 +477,7 @@ class RouteBuilder
      */
     function delete(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute('DELETE', myTemplate, myTarget, myName);
+        return this._methodRoute("DELETE", myTemplate, myTarget, myName);
     }
 
     /**
@@ -491,7 +491,7 @@ class RouteBuilder
      */
     function head(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute('HEAD', myTemplate, myTarget, myName);
+        return this._methodRoute("HEAD", myTemplate, myTarget, myName);
     }
 
     /**
@@ -505,7 +505,7 @@ class RouteBuilder
      */
     function options(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute('OPTIONS', myTemplate, myTarget, myName);
+        return this._methodRoute("OPTIONS", myTemplate, myTarget, myName);
     }
 
     /**
@@ -524,14 +524,14 @@ class RouteBuilder
             myName = this._namePrefix . myName;
         }
         myOptions = [
-            '_name' => myName,
-            '_ext' => this._extensions,
-            '_middleware' => this.middleware,
-            'routeClass' => this._routeClass,
+            "_name" => myName,
+            "_ext" => this._extensions,
+            "_middleware" => this.middleware,
+            "routeClass" => this._routeClass,
         ];
 
         myTarget = this.parseDefaults(myTarget);
-        myTarget['_method'] = $method;
+        myTarget["_method"] = $method;
 
         $route = this._makeRoute(myTemplate, myTarget, myOptions);
         this._collection.add($route, myOptions);
@@ -553,13 +553,13 @@ class RouteBuilder
     function loadPlugin(string myName) {
         myPlugins = Plugin::getCollection();
         if (!myPlugins.has(myName)) {
-            throw new MissingPluginException(['plugin' => myName]);
+            throw new MissingPluginException(["plugin" => myName]);
         }
         myPlugin = myPlugins.get(myName);
         myPlugin.routes(this);
 
         // Disable the routes hook to prevent duplicate route issues.
-        myPlugin.disable('routes');
+        myPlugin.disable("routes");
 
         return this;
     }
@@ -574,16 +574,16 @@ class RouteBuilder
      * Examples:
      *
      * ```
-     * $routes.connect('/{controller}/{action}/*');
+     * $routes.connect("/{controller}/{action}/*");
      * ```
      *
      * The first parameter will be used as a controller name while the second is
-     * used as the action name. The '/*' syntax makes this route greedy in that
+     * used as the action name. The "/*" syntax makes this route greedy in that
      * it will match requests like `/posts/index` as well as requests
      * like `/posts/edit/1/foo/bar`.
      *
      * ```
-     * $routes.connect('/home-page', ['controller' => 'Pages', 'action' => 'display', 'home']);
+     * $routes.connect("/home-page", ["controller" => "Pages", "action" => "display", "home"]);
      * ```
      *
      * The above shows the use of route parameter defaults. And providing routing
@@ -591,9 +591,9 @@ class RouteBuilder
      *
      * ```
      * $routes.connect(
-     *   '/{lang}/{controller}/{action}/{id}',
+     *   "/{lang}/{controller}/{action}/{id}",
      *   [],
-     *   ['id' => '[0-9]+', 'lang' => '[a-z]{3}']
+     *   ["id" => "[0-9]+", "lang" => "[a-z]{3}"]
      * );
      * ```
      *
@@ -601,19 +601,19 @@ class RouteBuilder
      * providing patterns for those parameters. Patterns for routing parameters
      * do not need capturing groups, as one will be added for each route params.
      *
-     * myOptions offers several 'special' keys that have special meaning
+     * myOptions offers several "special" keys that have special meaning
      * in the myOptions array.
      *
      * - `routeClass` is used to extend and change how individual routes parse requests
      *   and handle reverse routing, via a custom routing class.
-     *   Ex. `'routeClass' => 'SlugRoute'`
+     *   Ex. `"routeClass" => "SlugRoute"`
      * - `pass` is used to define which of the routed parameters should be shifted
      *   into the pass array. Adding a parameter to pass will remove it from the
-     *   regular route array. Ex. `'pass' => ['slug']`.
+     *   regular route array. Ex. `"pass" => ["slug"]`.
      * -  `persist` is used to define which route parameters should be automatically
      *   included when generating new URLs. You can override persistent parameters
      *   by redefining them in a URL or remove them by setting the parameter to `false`.
-     *   Ex. `'persist' => ['lang']`
+     *   Ex. `"persist" => ["lang"]`
      * - `multibytePattern` Set to true to enable multibyte pattern support in route
      *   parameter patterns.
      * - `_name` is used to define a specific name for routes. This can be used to optimize
@@ -625,12 +625,12 @@ class RouteBuilder
      * - `_host` - Define the host name pattern if you want this route to only match
      *   specific host names. You can use `.*` and to create wildcard subdomains/hosts
      *   e.g. `*.example.com` matches all subdomains on `example.com`.
-     * - '_port` - Define the port if you want this route to only match specific port number.
+     * - "_port` - Define the port if you want this route to only match specific port number.
      *
      * Example of using the `_method` condition:
      *
      * ```
-     * $routes.connect('/tasks', ['controller' => 'Tasks', 'action' => 'index', '_method' => 'GET']);
+     * $routes.connect("/tasks", ["controller" => "Tasks", "action" => "index", "_method" => "GET"]);
      * ```
      *
      * The above route will only be matched for GET requests. POST requests will fail to match this route.
@@ -649,17 +649,17 @@ class RouteBuilder
     function connect($route, $defaults = [], array myOptions = []): Route
     {
         $defaults = this.parseDefaults($defaults);
-        if (empty(myOptions['_ext'])) {
-            myOptions['_ext'] = this._extensions;
+        if (empty(myOptions["_ext"])) {
+            myOptions["_ext"] = this._extensions;
         }
-        if (empty(myOptions['routeClass'])) {
-            myOptions['routeClass'] = this._routeClass;
+        if (empty(myOptions["routeClass"])) {
+            myOptions["routeClass"] = this._routeClass;
         }
-        if (isset(myOptions['_name']) && this._namePrefix) {
-            myOptions['_name'] = this._namePrefix . myOptions['_name'];
+        if (isset(myOptions["_name"]) && this._namePrefix) {
+            myOptions["_name"] = this._namePrefix . myOptions["_name"];
         }
-        if (empty(myOptions['_middleware'])) {
-            myOptions['_middleware'] = this.middleware;
+        if (empty(myOptions["_middleware"])) {
+            myOptions["_middleware"] = this.middleware;
         }
 
         $route = this._makeRoute($route, $defaults, myOptions);
@@ -669,7 +669,7 @@ class RouteBuilder
     }
 
     /**
-     * Parse the defaults if they're a string
+     * Parse the defaults if they"re a string
      *
      * @param array|string $defaults Defaults array from the connect() method.
      * @return array
@@ -696,23 +696,23 @@ class RouteBuilder
     protected auto _makeRoute($route, $defaults, myOptions): Route
     {
         if (is_string($route)) {
-            $routeClass = App::className(myOptions['routeClass'], 'Routing/Route');
+            $routeClass = App::className(myOptions["routeClass"], "Routing/Route");
             if ($routeClass === null) {
                 throw new InvalidArgumentException(sprintf(
-                    'Cannot find route class %s',
-                    myOptions['routeClass']
+                    "Cannot find route class %s",
+                    myOptions["routeClass"]
                 ));
             }
 
-            $route = str_replace('//', '/', this._path . $route);
-            if ($route !== '/') {
-                $route = rtrim($route, '/');
+            $route = str_replace("//", "/", this._path . $route);
+            if ($route !== "/") {
+                $route = rtrim($route, "/");
             }
 
             foreach (this._params as $param => $val) {
-                if (isset($defaults[$param]) && $param !== 'prefix' && $defaults[$param] !== $val) {
-                    $msg = 'You cannot define routes that conflict with the scope. ' .
-                        'Scope had %s = %s, while route had %s = %s';
+                if (isset($defaults[$param]) && $param !== "prefix" && $defaults[$param] !== $val) {
+                    $msg = "You cannot define routes that conflict with the scope. " .
+                        "Scope had %s = %s, while route had %s = %s";
                     throw new BadMethodCallException(sprintf(
                         $msg,
                         $param,
@@ -722,9 +722,9 @@ class RouteBuilder
                     ));
                 }
             }
-            $defaults += this._params + ['plugin' => null];
-            if (!isset($defaults['action']) && !isset(myOptions['action'])) {
-                $defaults['action'] = 'index';
+            $defaults += this._params + ["plugin" => null];
+            if (!isset($defaults["action"]) && !isset(myOptions["action"])) {
+                $defaults["action"] = "index";
             }
 
             $route = new $routeClass($route, $defaults, myOptions);
@@ -734,7 +734,7 @@ class RouteBuilder
             return $route;
         }
         throw new InvalidArgumentException(
-            'Route class not found, or route class is not a subclass of Cake\Routing\Route\Route'
+            "Route class not found, or route class is not a subclass of Cake\Routing\Route\Route"
         );
     }
 
@@ -748,14 +748,14 @@ class RouteBuilder
      * Examples:
      *
      * ```
-     * $routes.redirect('/home/*', ['controller' => 'Posts', 'action' => 'view']);
+     * $routes.redirect("/home/*", ["controller" => "Posts", "action" => "view"]);
      * ```
      *
      * Redirects /home/* to /posts/view and passes the parameters to /posts/view. Using an array as the
      * redirect destination allows you to use other routes to define where a URL string should be redirected to.
      *
      * ```
-     * $routes.redirect('/posts/*', 'http://google.com', ['status' => 302]);
+     * $routes.redirect("/posts/*", "http://google.com", ["status" => 302]);
      * ```
      *
      * Redirects /posts/* to http://google.com with a HTTP status of 302
@@ -775,9 +775,9 @@ class RouteBuilder
      */
     function redirect(string $route, myUrl, array myOptions = []): Route
     {
-        myOptions['routeClass'] = myOptions['routeClass'] ?? RedirectRoute::class;
+        myOptions["routeClass"] = myOptions["routeClass"] ?? RedirectRoute::class;
         if (is_string(myUrl)) {
-            myUrl = ['redirect' => myUrl];
+            myUrl = ["redirect" => myUrl];
         }
 
         return this.connect($route, myUrl, myOptions);
@@ -790,19 +790,19 @@ class RouteBuilder
      * relevant prefix information.
      *
      * The myName parameter is used to generate the routing parameter name.
-     * For example a path of `admin` would result in `'prefix' => 'admin'` being
+     * For example a path of `admin` would result in `"prefix" => "admin"` being
      * applied to all connected routes.
      *
      * You can re-open a prefix as many times as necessary, as well as nest prefixes.
      * Nested prefixes will result in prefix values like `admin/api` which translates
      * to the `Controller\Admin\Api\` module.
      *
-     * If you need to have prefix with dots, eg: '/api/v1.0', use 'path' key
+     * If you need to have prefix with dots, eg: "/api/v1.0", use "path" key
      * for myParams argument:
      *
      * ```
-     * $route.prefix('Api', function($route) {
-     *     $route.prefix('V10', ['path' => '/v1.0'], function($route) {
+     * $route.prefix("Api", function($route) {
+     *     $route.prefix("V10", ["path" => "/v1.0"], function($route) {
      *         // Translates to `Controller\Api\V10\` module
      *     });
      * });
@@ -820,16 +820,16 @@ class RouteBuilder
             $callback = myParams;
             myParams = [];
         }
-        myPath = '/' . Inflector::dasherize(myName);
+        myPath = "/" . Inflector::dasherize(myName);
         myName = Inflector::camelize(myName);
-        if (isset(myParams['path'])) {
-            myPath = myParams['path'];
-            unset(myParams['path']);
+        if (isset(myParams["path"])) {
+            myPath = myParams["path"];
+            unset(myParams["path"]);
         }
-        if (isset(this._params['prefix'])) {
-            myName = this._params['prefix'] . '/' . myName;
+        if (isset(this._params["prefix"])) {
+            myName = this._params["prefix"] . "/" . myName;
         }
-        myParams = array_merge(myParams, ['prefix' => myName]);
+        myParams = array_merge(myParams, ["prefix" => myName]);
         this.scope(myPath, myParams, $callback);
 
         return this;
@@ -865,9 +865,9 @@ class RouteBuilder
             myOptions = [];
         }
 
-        myPath = myOptions['path'] ?? '/' . Inflector::dasherize(myName);
-        unset(myOptions['path']);
-        myOptions = ['plugin' => myName] + myOptions;
+        myPath = myOptions["path"] ?? "/" . Inflector::dasherize(myName);
+        unset(myOptions["path"]);
+        myOptions = ["plugin" => myName] + myOptions;
         this.scope(myPath, myOptions, $callback);
 
         return this;
@@ -899,26 +899,26 @@ class RouteBuilder
         }
         if (!is_callable($callback)) {
             throw new InvalidArgumentException(sprintf(
-                'Need a valid callable to connect routes. Got `%s` instead.',
+                "Need a valid callable to connect routes. Got `%s` instead.",
                 getTypeName($callback)
             ));
         }
 
-        if (this._path !== '/') {
+        if (this._path !== "/") {
             myPath = this._path . myPath;
         }
         myNamePrefix = this._namePrefix;
-        if (isset(myParams['_namePrefix'])) {
-            myNamePrefix .= myParams['_namePrefix'];
+        if (isset(myParams["_namePrefix"])) {
+            myNamePrefix .= myParams["_namePrefix"];
         }
-        unset(myParams['_namePrefix']);
+        unset(myParams["_namePrefix"]);
 
         myParams += this._params;
         myBuilder = new static(this._collection, myPath, myParams, [
-            'routeClass' => this._routeClass,
-            'extensions' => this._extensions,
-            'namePrefix' => myNamePrefix,
-            'middleware' => this.middleware,
+            "routeClass" => this._routeClass,
+            "extensions" => this._extensions,
+            "namePrefix" => myNamePrefix,
+            "middleware" => this.middleware,
         ]);
         $callback(myBuilder);
 
@@ -936,8 +936,8 @@ class RouteBuilder
      */
     function fallbacks(Nullable!string $routeClass = null) {
         $routeClass = $routeClass ?: this._routeClass;
-        this.connect('/{controller}', ['action' => 'index'], compact('routeClass'));
-        this.connect('/{controller}/{action}/*', [], compact('routeClass'));
+        this.connect("/{controller}", ["action" => "index"], compact("routeClass"));
+        this.connect("/{controller}/{action}/*", [], compact("routeClass"));
 
         return this;
     }
@@ -972,8 +972,8 @@ class RouteBuilder
     function applyMiddleware(string ...myNames) {
         foreach (myNames as myName) {
             if (!this._collection.middlewareExists(myName)) {
-                myMessage = "Cannot apply 'myName' middleware or middleware group. " .
-                    'Use registerMiddleware() to register middleware.';
+                myMessage = "Cannot apply "myName" middleware or middleware group. " .
+                    "Use registerMiddleware() to register middleware.";
                 throw new RuntimeException(myMessage);
             }
         }

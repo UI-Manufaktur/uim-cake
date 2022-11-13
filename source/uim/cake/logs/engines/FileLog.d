@@ -30,7 +30,7 @@ class FileLog : BaseLog
      * - `size` Used to implement basic log file rotation. If log file size
      *   reaches specified size the existing file is renamed by appending timestamp
      *   to filename and new log file is created. Can be integer bytes value or
-     *   human readable string values like '10MB', '100KB' etc.
+     *   human readable string values like "10MB", "100KB" etc.
      * - `rotate` Log files are rotated specified times before being removed.
      *   If value is 0, old versions are removed rather then rotated.
      * - `mask` A mask is applied when log files are created. Left empty no chmod
@@ -40,16 +40,16 @@ class FileLog : BaseLog
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'path' => null,
-        'file' => null,
-        'types' => null,
-        'levels' => [],
-        'scopes' => [],
-        'rotate' => 10,
-        'size' => 10485760, // 10MB
-        'mask' => null,
-        'formatter' => [
-            'className' => DefaultFormatter::class,
+        "path" => null,
+        "file" => null,
+        "types" => null,
+        "levels" => [],
+        "scopes" => [],
+        "rotate" => 10,
+        "size" => 10485760, // 10MB
+        "mask" => null,
+        "formatter" => [
+            "className" => DefaultFormatter::class,
         ],
     ];
 
@@ -82,29 +82,29 @@ class FileLog : BaseLog
     this(array myConfig = []) {
         super.this(myConfig);
 
-        this._path = this.getConfig('path', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
-        if (Configure::read('debug') && !is_dir(this._path)) {
+        this._path = this.getConfig("path", sys_get_temp_dir() . DIRECTORY_SEPARATOR);
+        if (Configure::read("debug") && !is_dir(this._path)) {
             mkdir(this._path, 0775, true);
         }
 
-        if (!empty(this._config['file'])) {
-            this._file = this._config['file'];
-            if (substr(this._file, -4) !== '.log') {
-                this._file .= '.log';
+        if (!empty(this._config["file"])) {
+            this._file = this._config["file"];
+            if (substr(this._file, -4) !== ".log") {
+                this._file .= ".log";
             }
         }
 
-        if (!empty(this._config['size'])) {
-            if (is_numeric(this._config['size'])) {
-                this._size = (int)this._config['size'];
+        if (!empty(this._config["size"])) {
+            if (is_numeric(this._config["size"])) {
+                this._size = (int)this._config["size"];
             } else {
-                this._size = Text::parseFileSize(this._config['size']);
+                this._size = Text::parseFileSize(this._config["size"]);
             }
         }
 
-        if (isset(this._config['dateFormat'])) {
-            deprecationWarning('`dateFormat` option should now be set in the formatter options.', 0);
-            this.formatter.setConfig('dateFormat', this._config['dateFormat']);
+        if (isset(this._config["dateFormat"])) {
+            deprecationWarning("`dateFormat` option should now be set in the formatter options.", 0);
+            this.formatter.setConfig("dateFormat", this._config["dateFormat"]);
         }
     }
 
@@ -128,7 +128,7 @@ class FileLog : BaseLog
         }
 
         myPathname = this._path . myfilename;
-        $mask = this._config['mask'];
+        $mask = this._config["mask"];
         if (!$mask) {
             file_put_contents(myPathname, myMessage . "\n", FILE_APPEND);
 
@@ -142,7 +142,7 @@ class FileLog : BaseLog
         if (!$selfError && !$exists && !chmod(myPathname, (int)$mask)) {
             $selfError = true;
             trigger_error(vsprintf(
-                'Could not apply permission mask "%s" on log file "%s"',
+                "Could not apply permission mask "%s" on log file "%s"",
                 [$mask, myPathname]
             ), E_USER_WARNING);
             $selfError = false;
@@ -157,16 +157,16 @@ class FileLog : BaseLog
      */
     protected string _getFilename(string $level)
     {
-        $debugTypes = ['notice', 'info', 'debug'];
+        $debugTypes = ["notice", "info", "debug"];
 
         if (this._file) {
             myfilename = this._file;
-        } elseif ($level === 'error' || $level === 'warning') {
-            myfilename = 'error.log';
+        } elseif ($level === "error" || $level === "warning") {
+            myfilename = "error.log";
         } elseif (in_array($level, $debugTypes, true)) {
-            myfilename = 'debug.log';
+            myfilename = "debug.log";
         } else {
-            myfilename = $level . '.log';
+            myfilename = $level . ".log";
         }
 
         return myfilename;
@@ -178,7 +178,7 @@ class FileLog : BaseLog
      *
      * @param string myfilename Log file name
      * @return bool|null True if rotated successfully or false in case of error.
-     *   Null if file doesn't need to be rotated.
+     *   Null if file doesn"t need to be rotated.
      */
     protected auto _rotateFile(string myfilename): ?bool
     {
@@ -192,14 +192,14 @@ class FileLog : BaseLog
             return null;
         }
 
-        $rotate = this._config['rotate'];
+        $rotate = this._config["rotate"];
         if ($rotate === 0) {
             myResult = unlink(myfilePath);
         } else {
-            myResult = rename(myfilePath, myfilePath . '.' . time());
+            myResult = rename(myfilePath, myfilePath . "." . time());
         }
 
-        myfiles = glob(myfilePath . '.*');
+        myfiles = glob(myfilePath . ".*");
         if (myfiles) {
             myfilesToDelete = count(myfiles) - $rotate;
             while (myfilesToDelete > 0) {

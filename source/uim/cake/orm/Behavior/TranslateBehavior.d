@@ -32,20 +32,20 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'implementedFinders' => ['translations' => 'findTranslations'],
-        'implementedMethods' => [
-            'setLocale' => 'setLocale',
-            'getLocale' => 'getLocale',
-            'translationField' => 'translationField',
+        "implementedFinders" => ["translations" => "findTranslations"],
+        "implementedMethods" => [
+            "setLocale" => "setLocale",
+            "getLocale" => "getLocale",
+            "translationField" => "translationField",
         ],
-        'fields' => [],
-        'defaultLocale' => null,
-        'referenceName' => '',
-        'allowEmptyTranslations' => true,
-        'onlyTranslated' => false,
-        'strategy' => 'subquery',
-        'tableLocator' => null,
-        'validator' => false,
+        "fields" => [],
+        "defaultLocale" => null,
+        "referenceName" => "",
+        "allowEmptyTranslations" => true,
+        "onlyTranslated" => false,
+        "strategy" => "subquery",
+        "tableLocator" => null,
+        "validator" => false,
     ];
 
     /**
@@ -78,10 +78,10 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *   `I18n::getDefaultLocale()` will be used to get default locale.
      *   If you do not want any default locale and want translated fields
      *   for all locales to be stored in translation table then set this config
-     *   to empty string `''`.
+     *   to empty string `""`.
      * - `allowEmptyTranslations`: By default if a record has been translated and
      *   stored as an empty string the translate behavior will take and use this
-     *   value to overwrite the original field value. If you don't want this behavior
+     *   value to overwrite the original field value. If you don"t want this behavior
      *   then set this option to `false`.
      * - `validator`: The validator that should be used when translation records
      *   are created/modified. Default `null`.
@@ -91,9 +91,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      */
     this(Table myTable, array myConfig = []) {
         myConfig += [
-            'defaultLocale' => I18n::getDefaultLocale(),
-            'referenceName' => this.referenceName(myTable),
-            'tableLocator' => myTable.associations().getTableLocator(),
+            "defaultLocale" => I18n::getDefaultLocale(),
+            "referenceName" => this.referenceName(myTable),
+            "tableLocator" => myTable.associations().getTableLocator(),
         ];
 
         super.this(myTable, myConfig);
@@ -158,10 +158,10 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     protected auto createStrategy() {
         myConfig = array_diff_key(
             this._config,
-            ['implementedFinders', 'implementedMethods', 'strategyClass']
+            ["implementedFinders", "implementedMethods", "strategyClass"]
         );
         /** @var class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> myClassName */
-        myClassName = this.getConfig('strategyClass', static::$defaultStrategyClass);
+        myClassName = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
         return new myClassName(this._table, myConfig);
     }
@@ -187,9 +187,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     function implementedEvents(): array
     {
         return [
-            'Model.beforeFind' => 'beforeFind',
-            'Model.beforeSave' => 'beforeSave',
-            'Model.afterSave' => 'afterSave',
+            "Model.beforeFind" => "beforeFind",
+            "Model.beforeSave" => "beforeSave",
+            "Model.afterSave" => "afterSave",
         ];
     }
 
@@ -197,7 +197,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * {@inheritDoc}
      *
      * Add in `_translations` marshalling handlers. You can disable marshalling
-     * of translations by setting `'translations' => false` in the options
+     * of translations by setting `"translations" => false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
@@ -277,8 +277,8 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * ### Example:
      *
      * ```
-     * $article = $articles.find('translations', ['locales' => ['eng', 'deu']).first();
-     * $englishTranslatedFields = $article.get('_translations')['eng'];
+     * $article = $articles.find("translations", ["locales" => ["eng", "deu"]).first();
+     * $englishTranslatedFields = $article.get("_translations")["eng"];
      * ```
      *
      * If the `locales` array is not passed, it will bring all translations found
@@ -290,7 +290,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      */
     function findTranslations(Query myQuery, array myOptions): Query
     {
-        $locales = myOptions['locales'] ?? [];
+        $locales = myOptions["locales"] ?? [];
         myTargetAlias = this.getStrategy().getTranslationTable().getAlias();
 
         return myQuery
@@ -302,7 +302,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
 
                 return myQuery;
             }])
-            .formatResults([this.getStrategy(), 'groupTranslations'], myQuery::PREPEND);
+            .formatResults([this.getStrategy(), "groupTranslations"], myQuery::PREPEND);
     }
 
     /**

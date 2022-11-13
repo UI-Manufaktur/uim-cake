@@ -86,15 +86,15 @@ class SelectLoader
      * @param array<string, mixed> myOptions Properties to be copied to this class
      */
     this(array myOptions) {
-        this.alias = myOptions['alias'];
-        this.sourceAlias = myOptions['sourceAlias'];
-        this.targetAlias = myOptions['targetAlias'];
-        this.foreignKey = myOptions['foreignKey'];
-        this.strategy = myOptions['strategy'];
-        this.bindingKey = myOptions['bindingKey'];
-        this.finder = myOptions['finder'];
-        this.associationType = myOptions['associationType'];
-        this.sort = myOptions['sort'] ?? null;
+        this.alias = myOptions["alias"];
+        this.sourceAlias = myOptions["sourceAlias"];
+        this.targetAlias = myOptions["targetAlias"];
+        this.foreignKey = myOptions["foreignKey"];
+        this.strategy = myOptions["strategy"];
+        this.bindingKey = myOptions["bindingKey"];
+        this.finder = myOptions["finder"];
+        this.associationType = myOptions["associationType"];
+        this.sort = myOptions["sort"] ?? null;
     }
 
     /**
@@ -121,11 +121,11 @@ class SelectLoader
     protected auto _defaultOptions(): array
     {
         return [
-            'foreignKey' => this.foreignKey,
-            'conditions' => [],
-            'strategy' => this.strategy,
-            'nestKey' => this.alias,
-            'sort' => this.sort,
+            "foreignKey" => this.foreignKey,
+            "conditions" => [],
+            "strategy" => this.strategy,
+            "nestKey" => this.alias,
+            "sort" => this.sort,
         ];
     }
 
@@ -141,46 +141,46 @@ class SelectLoader
     protected auto _buildQuery(array myOptions): Query
     {
         myKey = this._linkField(myOptions);
-        $filter = myOptions['keys'];
-        $useSubquery = myOptions['strategy'] === Association::STRATEGY_SUBQUERY;
+        $filter = myOptions["keys"];
+        $useSubquery = myOptions["strategy"] === Association::STRATEGY_SUBQUERY;
         myFinder = this.finder;
-        myOptions['fields'] = myOptions['fields'] ?? [];
+        myOptions["fields"] = myOptions["fields"] ?? [];
 
         /** @var \Cake\ORM\Query myQuery */
         myQuery = myFinder();
-        if (isset(myOptions['finder'])) {
-            [myFinderName, $opts] = this._extractFinder(myOptions['finder']);
+        if (isset(myOptions["finder"])) {
+            [myFinderName, $opts] = this._extractFinder(myOptions["finder"]);
             myQuery = myQuery.find(myFinderName, $opts);
         }
 
         $fetchQuery = myQuery
-            .select(myOptions['fields'])
-            .where(myOptions['conditions'])
+            .select(myOptions["fields"])
+            .where(myOptions["conditions"])
             .eagerLoaded(true)
-            .enableHydration(myOptions['query'].isHydrationEnabled());
-        if (myOptions['query'].isResultsCastingEnabled()) {
+            .enableHydration(myOptions["query"].isHydrationEnabled());
+        if (myOptions["query"].isResultsCastingEnabled()) {
             $fetchQuery.enableResultsCasting();
         } else {
             $fetchQuery.disableResultsCasting();
         }
 
         if ($useSubquery) {
-            $filter = this._buildSubquery(myOptions['query']);
+            $filter = this._buildSubquery(myOptions["query"]);
             $fetchQuery = this._addFilteringJoin($fetchQuery, myKey, $filter);
         } else {
             $fetchQuery = this._addFilteringCondition($fetchQuery, myKey, $filter);
         }
 
-        if (!empty(myOptions['sort'])) {
-            $fetchQuery.order(myOptions['sort']);
+        if (!empty(myOptions["sort"])) {
+            $fetchQuery.order(myOptions["sort"]);
         }
 
-        if (!empty(myOptions['contain'])) {
-            $fetchQuery.contain(myOptions['contain']);
+        if (!empty(myOptions["contain"])) {
+            $fetchQuery.contain(myOptions["contain"]);
         }
 
-        if (!empty(myOptions['queryBuilder'])) {
-            $fetchQuery = myOptions['queryBuilder']($fetchQuery);
+        if (!empty(myOptions["queryBuilder"])) {
+            $fetchQuery = myOptions["queryBuilder"]($fetchQuery);
         }
 
         this._assertFieldsPresent($fetchQuery, (array)myKey);
@@ -195,10 +195,10 @@ class SelectLoader
      *
      * ### Examples:
      *
-     * The following will call the finder 'translations' with the value of the finder as its options:
-     * myQuery.contain(['Comments' => ['finder' => ['translations']]]);
-     * myQuery.contain(['Comments' => ['finder' => ['translations' => []]]]);
-     * myQuery.contain(['Comments' => ['finder' => ['translations' => ['locales' => ['en_US']]]]]);
+     * The following will call the finder "translations" with the value of the finder as its options:
+     * myQuery.contain(["Comments" => ["finder" => ["translations"]]]);
+     * myQuery.contain(["Comments" => ["finder" => ["translations" => []]]]);
+     * myQuery.contain(["Comments" => ["finder" => ["translations" => ["locales" => ["en_US"]]]]]);
      *
      * @param array|string myFinderData The finder name or an array having the name as key
      * and options as value.
@@ -227,7 +227,7 @@ class SelectLoader
      */
     protected auto _assertFieldsPresent(Query $fetchQuery, array myKey): void
     {
-        $select = $fetchQuery.aliasFields($fetchQuery.clause('select'));
+        $select = $fetchQuery.aliasFields($fetchQuery.clause("select"));
         if (empty($select)) {
             return;
         }
@@ -244,15 +244,15 @@ class SelectLoader
         $missingFields = $missingKey($select, myKey);
         if ($missingFields) {
             myDriver = $fetchQuery.getConnection().getDriver();
-            $quoted = array_map([myDriver, 'quoteIdentifier'], myKey);
+            $quoted = array_map([myDriver, "quoteIdentifier"], myKey);
             $missingFields = $missingKey($select, $quoted);
         }
 
         if ($missingFields) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'You are required to select the "%s" field(s)',
-                    implode(', ', myKey)
+                    "You are required to select the "%s" field(s)",
+                    implode(", ", myKey)
                 )
             );
         }
@@ -263,7 +263,7 @@ class SelectLoader
      * target table query given a filter key and some filtering values when the
      * filtering needs to be done using a subquery.
      *
-     * @param \Cake\ORM\Query myQuery Target table's query
+     * @param \Cake\ORM\Query myQuery Target table"s query
      * @param array<string>|string myKey the fields that should be used for filtering
      * @param \Cake\ORM\Query $subquery The Subquery to use for filtering
      * @return \Cake\ORM\Query
@@ -273,7 +273,7 @@ class SelectLoader
         $filter = [];
         myAliasedTable = this.sourceAlias;
 
-        foreach ($subquery.clause('select') as myAliasedField => myField) {
+        foreach ($subquery.clause("select") as myAliasedField => myField) {
             if (is_int(myAliasedField)) {
                 $filter[] = new IdentifierExpression(myField);
             } else {
@@ -283,7 +283,7 @@ class SelectLoader
         $subquery.select($filter, true);
 
         if (is_array(myKey)) {
-            $conditions = this._createTupleCondition(myQuery, myKey, $filter, '=');
+            $conditions = this._createTupleCondition(myQuery, myKey, $filter, "=");
         } else {
             $filter = current($filter);
             $conditions = myQuery.newExpr([myKey => $filter]);
@@ -299,7 +299,7 @@ class SelectLoader
      * Appends any conditions required to load the relevant set of records in the
      * target table query given a filter key and some filtering values.
      *
-     * @param \Cake\ORM\Query myQuery Target table's query
+     * @param \Cake\ORM\Query myQuery Target table"s query
      * @param array<string>|string myKey The fields that should be used for filtering
      * @param mixed $filter The value that should be used to match for myKey
      * @return \Cake\ORM\Query
@@ -307,9 +307,9 @@ class SelectLoader
     protected auto _addFilteringCondition(Query myQuery, myKey, $filter): Query
     {
         if (is_array(myKey)) {
-            $conditions = this._createTupleCondition(myQuery, myKey, $filter, 'IN');
+            $conditions = this._createTupleCondition(myQuery, myKey, $filter, "IN");
         } else {
-            $conditions = [myKey . ' IN' => $filter];
+            $conditions = [myKey . " IN" => $filter];
         }
 
         return myQuery.andWhere($conditions);
@@ -319,7 +319,7 @@ class SelectLoader
      * Returns a TupleComparison object that can be used for matching all the fields
      * from myKeys with the tuple values in $filter using the provided operator.
      *
-     * @param \Cake\ORM\Query myQuery Target table's query
+     * @param \Cake\ORM\Query myQuery Target table"s query
      * @param array<string> myKeys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for myKey
      * @param string $operator The operator for comparing the tuples
@@ -350,9 +350,9 @@ class SelectLoader
         $links = [];
         myName = this.alias;
 
-        if (myOptions['foreignKey'] === false && this.associationType === Association::ONE_TO_MANY) {
-            $msg = 'Cannot have foreignKey = false for hasMany associations. ' .
-                   'You must provide a foreignKey column.';
+        if (myOptions["foreignKey"] === false && this.associationType === Association::ONE_TO_MANY) {
+            $msg = "Cannot have foreignKey = false for hasMany associations. " .
+                   "You must provide a foreignKey column.";
             throw new RuntimeException($msg);
         }
 
@@ -361,7 +361,7 @@ class SelectLoader
             this.bindingKey;
 
         foreach ((array)myKeys as myKey) {
-            $links[] = sprintf('%s.%s', myName, myKey);
+            $links[] = sprintf("%s.%s", myName, myKey);
         }
 
         if (count($links) === 1) {
@@ -389,14 +389,14 @@ class SelectLoader
         $filterQuery.setValueBinder(new ValueBinder());
 
         // Ignore limit if there is no order since we need all rows to find matches
-        if (!$filterQuery.clause('limit') || !$filterQuery.clause('order')) {
+        if (!$filterQuery.clause("limit") || !$filterQuery.clause("order")) {
             $filterQuery.limit(null);
             $filterQuery.order([], true);
             $filterQuery.offset(null);
         }
 
         myFields = this._subqueryFields(myQuery);
-        $filterQuery.select(myFields['select'], true).group(myFields['group']);
+        $filterQuery.select(myFields["select"], true).group(myFields["group"]);
 
         return $filterQuery;
     }
@@ -422,9 +422,9 @@ class SelectLoader
         myFields = myQuery.aliasFields(myKeys, this.sourceAlias);
         myGroup = myFields = array_values(myFields);
 
-        $order = myQuery.clause('order');
+        $order = myQuery.clause("order");
         if ($order) {
-            $columns = myQuery.clause('select');
+            $columns = myQuery.clause("select");
             $order.iterateParts(function ($direction, myField) use (&myFields, $columns): void {
                 if (isset($columns[myField])) {
                     myFields[myField] = $columns[myField];
@@ -432,7 +432,7 @@ class SelectLoader
             });
         }
 
-        return ['select' => myFields, 'group' => myGroup];
+        return ["select" => myFields, "group" => myGroup];
     }
 
     /**
@@ -458,9 +458,9 @@ class SelectLoader
                 myValues[] = myResult[$k];
             }
             if ($singleResult) {
-                myResultMap[implode(';', myValues)] = myResult;
+                myResultMap[implode(";", myValues)] = myResult;
             } else {
-                myResultMap[implode(';', myValues)][] = myResult;
+                myResultMap[implode(";", myValues)][] = myResult;
             }
         }
 
@@ -489,7 +489,7 @@ class SelectLoader
             $sourceKeys[] = key($f);
         }
 
-        $nestKey = myOptions['nestKey'];
+        $nestKey = myOptions["nestKey"];
         if (count($sourceKeys) > 1) {
             return this._multiKeysInjector(myResultMap, $sourceKeys, $nestKey);
         }
@@ -523,7 +523,7 @@ class SelectLoader
                 myValues[] = $row[myKey];
             }
 
-            myKey = implode(';', myValues);
+            myKey = implode(";", myValues);
             if (isset(myResultMap[myKey])) {
                 $row[$nestKey] = myResultMap[myKey];
             }

@@ -69,13 +69,13 @@ class AssociationCollection : IteratorAggregate
     function load(string myClassName, string $associated, array myOptions = []): Association
     {
         myOptions += [
-            'tableLocator' => this.getTableLocator(),
+            "tableLocator" => this.getTableLocator(),
         ];
 
         $association = new myClassName($associated, myOptions);
         if (!$association instanceof Association) {
             myMessage = sprintf(
-                'The association must extend `%s` class, `%s` given.',
+                "The association must extend `%s` class, `%s` given.",
                 Association::class,
                 get_class($association)
             );
@@ -137,13 +137,13 @@ class AssociationCollection : IteratorAggregate
      * Get an array of associations matching a specific type.
      *
      * @param array<string>|string myClass The type of associations you want.
-     *   For example 'BelongsTo' or array like ['BelongsTo', 'HasOne']
+     *   For example "BelongsTo" or array like ["BelongsTo", "HasOne"]
      * @return array<\Cake\ORM\Association> An array of Association objects.
      * @since 3.5.3
      */
     auto getByType(myClass): array
     {
-        myClass = array_map('strtolower', (array)myClass);
+        myClass = array_map("strtolower", (array)myClass);
 
         $out = array_filter(this._items, function ($assoc) use (myClass) {
             [, myName] = moduleSplit(get_class($assoc));
@@ -224,13 +224,13 @@ class AssociationCollection : IteratorAggregate
     }
 
     /**
-     * Helper method for saving an association's data.
+     * Helper method for saving an association"s data.
      *
      * @param \Cake\ORM\Table myTable The table the save is currently operating on
      * @param \Cake\Datasource\IEntity $entity The entity to save
      * @param array $associations Array of associations to save.
      * @param array<string, mixed> myOptions Original options
-     * @param bool $owningSide Compared with association classes'
+     * @param bool $owningSide Compared with association classes"
      *   isOwningSide method.
      * @return bool Success
      * @throws \InvalidArgumentException When an unknown alias is used.
@@ -242,7 +242,7 @@ class AssociationCollection : IteratorAggregate
         array myOptions,
         bool $owningSide
     ) {
-        unset(myOptions['associated']);
+        unset(myOptions["associated"]);
         foreach ($associations as myAlias => $nested) {
             if (is_int(myAlias)) {
                 myAlias = $nested;
@@ -251,7 +251,7 @@ class AssociationCollection : IteratorAggregate
             $relation = this.get(myAlias);
             if (!$relation) {
                 $msg = sprintf(
-                    'Cannot save %s, it is not associated to %s',
+                    "Cannot save %s, it is not associated to %s",
                     myAlias,
                     myTable.getAlias()
                 );
@@ -269,7 +269,7 @@ class AssociationCollection : IteratorAggregate
     }
 
     /**
-     * Helper method for saving an association's data.
+     * Helper method for saving an association"s data.
      *
      * @param \Cake\ORM\Association $association The association object to save with.
      * @param \Cake\Datasource\IEntity $entity The entity to save

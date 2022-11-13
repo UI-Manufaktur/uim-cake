@@ -28,14 +28,14 @@ class BelongsToMany : Association
      *
      * @var string
      */
-    public const SAVE_APPEND = 'append';
+    public const SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
      *
      * @var string
      */
-    public const SAVE_REPLACE = 'replace';
+    public const SAVE_REPLACE = "replace";
 
     /**
      * The type of join to be used when adding the association to a query
@@ -79,7 +79,7 @@ class BelongsToMany : Association
      *
      * @var string
      */
-    protected $_junctionProperty = '_joinData';
+    protected $_junctionProperty = "_joinData";
 
     /**
      * Saving strategy to be used by this association
@@ -172,11 +172,11 @@ class BelongsToMany : Association
      * Whether this association can be expressed directly in a query join
      *
      * @param array<string, mixed> myOptions custom options key that could alter the return value
-     * @return bool if the 'matching' key in $option is true then this function
+     * @return bool if the "matching" key in $option is true then this function
      * will return true, false otherwise
      */
     bool canBeJoined(array myOptions = []) {
-        return !empty(myOptions['matching']);
+        return !empty(myOptions["matching"]);
     }
 
     /**
@@ -247,11 +247,11 @@ class BelongsToMany : Association
 
             myConfig = [];
             if (!myTableLocator.exists(myTableAlias)) {
-                myConfig = ['table' => myTableName, 'allowFallbackClass' => true];
+                myConfig = ["table" => myTableName, "allowFallbackClass" => true];
 
-                // Propagate the connection if we'll get an auto-model
-                if (!App::className(myTableAlias, 'Model/Table', 'Table')) {
-                    myConfig['connection'] = this.getSource().getConnection();
+                // Propagate the connection if we"ll get an auto-model
+                if (!App::className(myTableAlias, "Model/Table", "Table")) {
+                    myConfig["connection"] = this.getSource().getConnection();
                 }
             }
             myTable = myTableLocator.get(myTableAlias, myConfig);
@@ -265,7 +265,7 @@ class BelongsToMany : Association
         myTarget = this.getTarget();
         if ($source.getAlias() === myTarget.getAlias()) {
             throw new InvalidArgumentException(sprintf(
-                'The `%s` association on `%s` cannot target the same table.',
+                "The `%s` association on `%s` cannot target the same table.",
                 this.getName(),
                 $source.getAlias()
             ));
@@ -307,21 +307,21 @@ class BelongsToMany : Association
 
         if (!myTarget.hasAssociation($junctionAlias)) {
             myTarget.hasMany($junctionAlias, [
-                'targetTable' => $junction,
-                'bindingKey' => myTargetBindingKey,
-                'foreignKey' => this.getTargetForeignKey(),
-                'strategy' => this._strategy,
+                "targetTable" => $junction,
+                "bindingKey" => myTargetBindingKey,
+                "foreignKey" => this.getTargetForeignKey(),
+                "strategy" => this._strategy,
             ]);
         }
         if (!myTarget.hasAssociation($sAlias)) {
             myTarget.belongsToMany($sAlias, [
-                'sourceTable' => myTarget,
-                'targetTable' => $source,
-                'foreignKey' => this.getTargetForeignKey(),
-                'targetForeignKey' => this.getForeignKey(),
-                'through' => $junction,
-                'conditions' => this.getConditions(),
-                'strategy' => this._strategy,
+                "sourceTable" => myTarget,
+                "targetTable" => $source,
+                "foreignKey" => this.getTargetForeignKey(),
+                "targetForeignKey" => this.getForeignKey(),
+                "through" => $junction,
+                "conditions" => this.getConditions(),
+                "strategy" => this._strategy,
             ]);
         }
     }
@@ -352,10 +352,10 @@ class BelongsToMany : Association
 
         if (!$source.hasAssociation($junctionAlias)) {
             $source.hasMany($junctionAlias, [
-                'targetTable' => $junction,
-                'bindingKey' => $sourceBindingKey,
-                'foreignKey' => this.getForeignKey(),
-                'strategy' => this._strategy,
+                "targetTable" => $junction,
+                "bindingKey" => $sourceBindingKey,
+                "foreignKey" => this.getForeignKey(),
+                "strategy" => this._strategy,
             ]);
         }
     }
@@ -384,8 +384,8 @@ class BelongsToMany : Association
 
         if (!$junction.hasAssociation($tAlias)) {
             $junction.belongsTo($tAlias, [
-                'foreignKey' => this.getTargetForeignKey(),
-                'targetTable' => myTarget,
+                "foreignKey" => this.getTargetForeignKey(),
+                "targetTable" => myTarget,
             ]);
         } else {
             $belongsTo = $junction.getAssociation($tAlias);
@@ -402,8 +402,8 @@ class BelongsToMany : Association
 
         if (!$junction.hasAssociation($sAlias)) {
             $junction.belongsTo($sAlias, [
-                'foreignKey' => this.getForeignKey(),
-                'targetTable' => $source,
+                "foreignKey" => this.getForeignKey(),
+                "targetTable" => $source,
             ]);
         }
     }
@@ -427,7 +427,7 @@ class BelongsToMany : Association
      */
     function attachTo(Query myQuery, array myOptions = []): void
     {
-        if (!empty(myOptions['negateMatch'])) {
+        if (!empty(myOptions["negateMatch"])) {
             this._appendNotMatching(myQuery, myOptions);
 
             return;
@@ -435,18 +435,18 @@ class BelongsToMany : Association
 
         $junction = this.junction();
         $belongsTo = $junction.getAssociation(this.getSource().getAlias());
-        $cond = $belongsTo._joinCondition(['foreignKey' => $belongsTo.getForeignKey()]);
+        $cond = $belongsTo._joinCondition(["foreignKey" => $belongsTo.getForeignKey()]);
         $cond += this.junctionConditions();
 
-        $includeFields = myOptions['includeFields'] ?? null;
+        $includeFields = myOptions["includeFields"] ?? null;
 
         // Attach the junction table as well we need it to populate _joinData.
         $assoc = this._targetTable.getAssociation($junction.getAlias());
-        $newOptions = array_intersect_key(myOptions, ['joinType' => 1, 'fields' => 1]);
+        $newOptions = array_intersect_key(myOptions, ["joinType" => 1, "fields" => 1]);
         $newOptions += [
-            'conditions' => $cond,
-            'includeFields' => $includeFields,
-            'foreignKey' => false,
+            "conditions" => $cond,
+            "includeFields" => $includeFields,
+            "foreignKey" => false,
         ];
         $assoc.attachTo(myQuery, $newOptions);
         myQuery.getEagerLoader().addToJoinsMap($junction.getAlias(), $assoc, true);
@@ -454,27 +454,27 @@ class BelongsToMany : Association
         super.attachTo(myQuery, myOptions);
 
         $foreignKey = this.getTargetForeignKey();
-        thisJoin = myQuery.clause('join')[this.getName()];
-        thisJoin['conditions'].add($assoc._joinCondition(['foreignKey' => $foreignKey]));
+        thisJoin = myQuery.clause("join")[this.getName()];
+        thisJoin["conditions"].add($assoc._joinCondition(["foreignKey" => $foreignKey]));
     }
 
 
     protected auto _appendNotMatching(Query myQuery, array myOptions): void
     {
-        if (empty(myOptions['negateMatch'])) {
+        if (empty(myOptions["negateMatch"])) {
             return;
         }
-        myOptions['conditions'] = myOptions['conditions'] ?? [];
+        myOptions["conditions"] = myOptions["conditions"] ?? [];
         $junction = this.junction();
         $belongsTo = $junction.getAssociation(this.getSource().getAlias());
-        $conds = $belongsTo._joinCondition(['foreignKey' => $belongsTo.getForeignKey()]);
+        $conds = $belongsTo._joinCondition(["foreignKey" => $belongsTo.getForeignKey()]);
 
         $subquery = this.find()
             .select(array_values($conds))
-            .where(myOptions['conditions']);
+            .where(myOptions["conditions"]);
 
-        if (!empty(myOptions['queryBuilder'])) {
-            $subquery = myOptions['queryBuilder']($subquery);
+        if (!empty(myOptions["queryBuilder"])) {
+            $subquery = myOptions["queryBuilder"]($subquery);
         }
 
         $subquery = this._appendJunctionJoin($subquery);
@@ -485,13 +485,13 @@ class BelongsToMany : Association
                 foreach (array_keys($conds) as myField) {
                     myIdentifiers[] = new IdentifierExpression(myField);
                 }
-                myIdentifiers = $subquery.newExpr().add(myIdentifiers).setConjunction(',');
+                myIdentifiers = $subquery.newExpr().add(myIdentifiers).setConjunction(",");
                 $nullExp = clone $exp;
 
                 return $exp
                     .or([
                         $exp.notIn(myIdentifiers, $subquery),
-                        $nullExp.and(array_map([$nullExp, 'isNull'], array_keys($conds))),
+                        $nullExp.and(array_map([$nullExp, "isNull"], array_keys($conds))),
                     ]);
             });
     }
@@ -522,19 +522,19 @@ class BelongsToMany : Association
     {
         myName = this._junctionAssociationName();
         $loader = new SelectWithPivotLoader([
-            'alias' => this.getAlias(),
-            'sourceAlias' => this.getSource().getAlias(),
-            'targetAlias' => this.getTarget().getAlias(),
-            'foreignKey' => this.getForeignKey(),
-            'bindingKey' => this.getBindingKey(),
-            'strategy' => this.getStrategy(),
-            'associationType' => this.type(),
-            'sort' => this.getSort(),
-            'junctionAssociationName' => myName,
-            'junctionProperty' => this._junctionProperty,
-            'junctionAssoc' => this.getTarget().getAssociation(myName),
-            'junctionConditions' => this.junctionConditions(),
-            'finder' => function () {
+            "alias" => this.getAlias(),
+            "sourceAlias" => this.getSource().getAlias(),
+            "targetAlias" => this.getTarget().getAlias(),
+            "foreignKey" => this.getForeignKey(),
+            "bindingKey" => this.getBindingKey(),
+            "strategy" => this.getStrategy(),
+            "associationType" => this.type(),
+            "sort" => this.getSort(),
+            "junctionAssociationName" => myName,
+            "junctionProperty" => this._junctionProperty,
+            "junctionAssoc" => this.getTarget().getAssociation(myName),
+            "junctionConditions" => this.junctionConditions(),
+            "finder" => function () {
                 return this._appendJunctionJoin(this.find(), []);
             },
         ]);
@@ -564,7 +564,7 @@ class BelongsToMany : Association
         myTable = this.junction();
         $hasMany = this.getSource().getAssociation(myTable.getAlias());
         if (this._cascadeCallbacks) {
-            foreach ($hasMany.find('all').where($conditions).all().toList() as $related) {
+            foreach ($hasMany.find("all").where($conditions).all().toList() as $related) {
                 $success = myTable.delete($related, myOptions);
                 if (!$success) {
                     return false;
@@ -587,7 +587,7 @@ class BelongsToMany : Association
     }
 
     /**
-     * Returns boolean true, as both of the tables 'own' rows in the other side
+     * Returns boolean true, as both of the tables "own" rows in the other side
      * of the association via the joint table.
      *
      * @param \Cake\ORM\Table $side The potential Table with ownership
@@ -606,7 +606,7 @@ class BelongsToMany : Association
      */
     auto setSaveStrategy(string $strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
-            $msg = sprintf('Invalid save strategy "%s"', $strategy);
+            $msg = sprintf("Invalid save strategy "%s"", $strategy);
             throw new InvalidArgumentException($msg);
         }
 
@@ -631,11 +631,11 @@ class BelongsToMany : Association
      * saved on the target table for this association by passing supplied
      * `myOptions`
      *
-     * When using the 'append' strategy, this function will only create new links
+     * When using the "append" strategy, this function will only create new links
      * between each side of this association. It will not destroy existing ones even
      * though they may not be present in the array of entities to be saved.
      *
-     * When using the 'replace' strategy, existing links will be removed and new links
+     * When using the "replace" strategy, existing links will be removed and new links
      * will be created in the joint table. If there exists links in the database to some
      * of the entities intended to be saved by this method, they will be updated,
      * not deleted.
@@ -653,7 +653,7 @@ class BelongsToMany : Association
         myTargetEntity = $entity.get(this.getProperty());
         $strategy = this.getSaveStrategy();
 
-        $isEmpty = in_array(myTargetEntity, [null, [], '', false], true);
+        $isEmpty = in_array(myTargetEntity, [null, [], "", false], true);
         if ($isEmpty && $entity.isNew()) {
             return $entity;
         }
@@ -688,11 +688,11 @@ class BelongsToMany : Association
      */
     protected auto _saveTarget(IEntity $parentEntity, array $entities, myOptions) {
         $joinAssociations = false;
-        if (isset(myOptions['associated']) && is_array(myOptions['associated'])) {
-            if (!empty(myOptions['associated'][this._junctionProperty]['associated'])) {
-                $joinAssociations = myOptions['associated'][this._junctionProperty]['associated'];
+        if (isset(myOptions["associated"]) && is_array(myOptions["associated"])) {
+            if (!empty(myOptions["associated"][this._junctionProperty]["associated"])) {
+                $joinAssociations = myOptions["associated"][this._junctionProperty]["associated"];
             }
-            unset(myOptions['associated'][this._junctionProperty]);
+            unset(myOptions["associated"][this._junctionProperty]);
         }
 
         myTable = this.getTarget();
@@ -704,7 +704,7 @@ class BelongsToMany : Association
                 break;
             }
 
-            if (!empty(myOptions['atomic'])) {
+            if (!empty(myOptions["atomic"])) {
                 $entity = clone $entity;
             }
 
@@ -717,7 +717,7 @@ class BelongsToMany : Association
 
             // Saving the new linked entity failed, copy errors back into the
             // original entity if applicable and abort.
-            if (!empty(myOptions['atomic'])) {
+            if (!empty(myOptions["atomic"])) {
                 $original[$k].setErrors($entity.getErrors());
             }
             if ($saved === false) {
@@ -725,9 +725,9 @@ class BelongsToMany : Association
             }
         }
 
-        myOptions['associated'] = $joinAssociations;
+        myOptions["associated"] = $joinAssociations;
         $success = this._saveLinks($parentEntity, $persisted, myOptions);
-        if (!$success && !empty(myOptions['atomic'])) {
+        if (!$success && !empty(myOptions["atomic"])) {
             $parentEntity.set(this.getProperty(), $original);
 
             return false;
@@ -763,7 +763,7 @@ class BelongsToMany : Association
         foreach (myTargetEntities as $e) {
             $joint = $e.get($jointProperty);
             if (!$joint || !($joint instanceof IEntity)) {
-                $joint = new $entityClass([], ['markNew' => true, 'source' => $junctionRegistryAlias]);
+                $joint = new $entityClass([], ["markNew" => true, "source" => $junctionRegistryAlias]);
             }
             $sourceKeys = array_combine($foreignKey, $sourceEntity.extract($bindingKey));
             myTargetKeys = array_combine($assocForeignKey, $e.extract(myTargetBindingKey));
@@ -779,11 +779,11 @@ class BelongsToMany : Association
             if ($changedKeys) {
                 $joint.setNew(true);
                 $joint.unset($junction.getPrimaryKey())
-                    .set(array_merge($sourceKeys, myTargetKeys), ['guard' => false]);
+                    .set(array_merge($sourceKeys, myTargetKeys), ["guard" => false]);
             }
             $saved = $junction.save($joint, myOptions);
 
-            if (!$saved && !empty(myOptions['atomic'])) {
+            if (!$saved && !empty(myOptions["atomic"])) {
                 return false;
             }
 
@@ -801,18 +801,18 @@ class BelongsToMany : Association
      * as new or their status is unknown then an exception will be thrown.
      *
      * When using this method, all entities in `myTargetEntities` will be appended to
-     * the source entity's property corresponding to this association object.
+     * the source entity"s property corresponding to this association object.
      *
      * This method does not check link uniqueness.
      *
      * ### Example:
      *
      * ```
-     * $newTags = $tags.find('relevant').toArray();
-     * $articles.getAssociation('tags').link($article, $newTags);
+     * $newTags = $tags.find("relevant").toArray();
+     * $articles.getAssociation("tags").link($article, $newTags);
      * ```
      *
-     * `$article.get('tags')` will contain all tags in `$newTags` after liking
+     * `$article.get("tags")` will contain all tags in `$newTags` after liking
      *
      * @param \Cake\Datasource\IEntity $sourceEntity the row belonging to the `source` side
      *   of this association
@@ -858,10 +858,10 @@ class BelongsToMany : Association
      * ```
      * $article.tags = [$tag1, $tag2, $tag3, $tag4];
      * $tags = [$tag1, $tag2, $tag3];
-     * $articles.getAssociation('tags').unlink($article, $tags);
+     * $articles.getAssociation("tags").unlink($article, $tags);
      * ```
      *
-     * `$article.get('tags')` will contain only `[$tag4]` after deleting in the database
+     * `$article.get("tags")` will contain only `[$tag4]` after deleting in the database
      *
      * @param \Cake\Datasource\IEntity $sourceEntity An entity persisted in the source table for
      *   this association.
@@ -876,10 +876,10 @@ class BelongsToMany : Association
     bool unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = []) {
         if (is_bool(myOptions)) {
             myOptions = [
-                'cleanProperty' => myOptions,
+                "cleanProperty" => myOptions,
             ];
         } else {
-            myOptions += ['cleanProperty' => true];
+            myOptions += ["cleanProperty" => true];
         }
 
         this._checkPersistenceStatus($sourceEntity, myTargetEntities);
@@ -896,7 +896,7 @@ class BelongsToMany : Association
 
         /** @var array<\Cake\Datasource\IEntity> $existing */
         $existing = $sourceEntity.get($property) ?: [];
-        if (!myOptions['cleanProperty'] || empty($existing)) {
+        if (!myOptions["cleanProperty"] || empty($existing)) {
             return true;
         }
 
@@ -966,7 +966,7 @@ class BelongsToMany : Association
             return $conditions;
         }
         $matching = [];
-        myAlias = this.getAlias() . '.';
+        myAlias = this.getAlias() . ".";
         foreach ($conditions as myField => myValue) {
             if (is_string(myField) && strpos(myField, myAlias) === 0) {
                 $matching[myField] = myValue;
@@ -994,7 +994,7 @@ class BelongsToMany : Association
         if (!is_array($conditions)) {
             return $matching;
         }
-        myAlias = this._junctionAssociationName() . '.';
+        myAlias = this._junctionAssociationName() . ".";
         foreach ($conditions as myField => myValue) {
             $isString = is_string(myField);
             if ($isString && strpos(myField, myAlias) === 0) {
@@ -1002,7 +1002,7 @@ class BelongsToMany : Association
             }
             // Assume that operators contain junction conditions.
             // Trying to manage complex conditions could result in incorrect queries.
-            if ($isString && in_array(strtoupper(myField), ['OR', 'NOT', 'AND', 'XOR'], true)) {
+            if ($isString && in_array(strtoupper(myField), ["OR", "NOT", "AND", "XOR"], true)) {
                 $matching[myField] = myValue;
             }
         }
@@ -1011,12 +1011,12 @@ class BelongsToMany : Association
     }
 
     /**
-     * Proxies the finding operation to the target table's find method
+     * Proxies the finding operation to the target table"s find method
      * and modifies the query accordingly based of this association
      * configuration.
      *
      * If your association includes conditions or a finder, the junction table will be
-     * included in the query's contained associations.
+     * included in the query"s contained associations.
      *
      * @param array<string, mixed>|string|null myType the type of query to perform, if an array is passed,
      *   it will be interpreted as the `myOptions` parameter
@@ -1053,19 +1053,19 @@ class BelongsToMany : Association
         if ($conditions === null) {
             $belongsTo = $junctionTable.getAssociation(this.getTarget().getAlias());
             $conditions = $belongsTo._joinCondition([
-                'foreignKey' => this.getTargetForeignKey(),
+                "foreignKey" => this.getTargetForeignKey(),
             ]);
             $conditions += this.junctionConditions();
         }
 
         myName = this._junctionAssociationName();
         /** @var array $joins */
-        $joins = myQuery.clause('join');
+        $joins = myQuery.clause("join");
         $matching = [
             myName => [
-                'table' => $junctionTable.getTable(),
-                'conditions' => $conditions,
-                'type' => Query::JOIN_TYPE_INNER,
+                "table" => $junctionTable.getTable(),
+                "conditions" => $conditions,
+                "type" => Query::JOIN_TYPE_INNER,
             ],
         ];
 
@@ -1083,10 +1083,10 @@ class BelongsToMany : Association
      * be created for the passed target entities that are not already in the database
      * and the rest will be removed.
      *
-     * For example, if an article is linked to tags 'cake' and 'framework' and you pass
-     * to this method an array containing the entities for tags 'cake', 'php' and 'awesome',
-     * only the link for cake will be kept in database, the link for 'framework' will be
-     * deleted and the links for 'php' and 'awesome' will be created.
+     * For example, if an article is linked to tags "cake" and "framework" and you pass
+     * to this method an array containing the entities for tags "cake", "php" and "awesome",
+     * only the link for cake will be kept in database, the link for "framework" will be
+     * deleted and the links for "php" and "awesome" will be created.
      *
      * Existing links are not deleted and created again, they are either left untouched
      * or updated so that potential extra information stored in the joint row is not
@@ -1111,10 +1111,10 @@ class BelongsToMany : Association
      * $article.tags = [$tag1, $tag2, $tag3, $tag4];
      * $articles.save($article);
      * $tags = [$tag1, $tag3];
-     * $articles.getAssociation('tags').replaceLinks($article, $tags);
+     * $articles.getAssociation("tags").replaceLinks($article, $tags);
      * ```
      *
-     * `$article.get('tags')` will contain only `[$tag1, $tag3]` at the end
+     * `$article.get("tags")` will contain only `[$tag1, $tag3]` at the end
      *
      * @param \Cake\Datasource\IEntity $sourceEntity an entity persisted in the source table for
      *   this association
@@ -1130,7 +1130,7 @@ class BelongsToMany : Association
         $primaryValue = $sourceEntity.extract($bindingKey);
 
         if (count(Hash::filter($primaryValue)) !== count($bindingKey)) {
-            myMessage = 'Could not find primary key value for source entity';
+            myMessage = "Could not find primary key value for source entity";
             throw new InvalidArgumentException(myMessage);
         }
 
@@ -1140,7 +1140,7 @@ class BelongsToMany : Association
                 myTarget = this.getTarget();
 
                 $foreignKey = (array)this.getForeignKey();
-                $prefixedForeignKey = array_map([$junction, 'aliasField'], $foreignKey);
+                $prefixedForeignKey = array_map([$junction, "aliasField"], $foreignKey);
 
                 $junctionPrimaryKey = (array)$junction.getPrimaryKey();
                 $assocForeignKey = (array)$junction.getAssociation(myTarget.getAlias()).getForeignKey();
@@ -1255,7 +1255,7 @@ class BelongsToMany : Association
         }
 
         foreach ($deletes as $entity) {
-            if (!$junction.delete($entity, myOptions) && !empty(myOptions['atomic'])) {
+            if (!$junction.delete($entity, myOptions) && !empty(myOptions["atomic"])) {
                 return false;
             }
         }
@@ -1275,13 +1275,13 @@ class BelongsToMany : Association
      */
     protected bool _checkPersistenceStatus(IEntity $sourceEntity, array myTargetEntities) {
         if ($sourceEntity.isNew()) {
-            myError = 'Source entity needs to be persisted before links can be created or removed.';
+            myError = "Source entity needs to be persisted before links can be created or removed.";
             throw new InvalidArgumentException(myError);
         }
 
         foreach (myTargetEntities as $entity) {
             if ($entity.isNew()) {
-                myError = 'Cannot link entities that have not been persisted yet.';
+                myError = "Cannot link entities that have not been persisted yet.";
                 throw new InvalidArgumentException(myError);
             }
         }
@@ -1334,11 +1334,11 @@ class BelongsToMany : Association
         $hasMany = $source.getAssociation($junction.getAlias());
         $foreignKey = (array)this.getForeignKey();
         $foreignKey = array_map(function (myKey) {
-            return myKey . ' IS';
+            return myKey . " IS";
         }, $foreignKey);
         $assocForeignKey = (array)$belongsTo.getForeignKey();
         $assocForeignKey = array_map(function (myKey) {
-            return myKey . ' IS';
+            return myKey . " IS";
         }, $assocForeignKey);
         $sourceKey = $sourceEntity.extract((array)$source.getPrimaryKey());
 
@@ -1387,12 +1387,12 @@ class BelongsToMany : Association
     {
         if (myName === null) {
             if (empty(this._junctionTableName)) {
-                myTablesNames = array_map('Cake\Utility\Inflector::underscore', [
+                myTablesNames = array_map("Cake\Utility\Inflector::underscore", [
                     this.getSource().getTable(),
                     this.getTarget().getTable(),
                 ]);
                 sort(myTablesNames);
-                this._junctionTableName = implode('_', myTablesNames);
+                this._junctionTableName = implode("_", myTablesNames);
             }
 
             return this._junctionTableName;
@@ -1409,20 +1409,20 @@ class BelongsToMany : Association
      */
     protected auto _options(array myOptions): void
     {
-        if (!empty(myOptions['targetForeignKey'])) {
-            this.setTargetForeignKey(myOptions['targetForeignKey']);
+        if (!empty(myOptions["targetForeignKey"])) {
+            this.setTargetForeignKey(myOptions["targetForeignKey"]);
         }
-        if (!empty(myOptions['joinTable'])) {
-            this._junctionTableName(myOptions['joinTable']);
+        if (!empty(myOptions["joinTable"])) {
+            this._junctionTableName(myOptions["joinTable"]);
         }
-        if (!empty(myOptions['through'])) {
-            this.setThrough(myOptions['through']);
+        if (!empty(myOptions["through"])) {
+            this.setThrough(myOptions["through"]);
         }
-        if (!empty(myOptions['saveStrategy'])) {
-            this.setSaveStrategy(myOptions['saveStrategy']);
+        if (!empty(myOptions["saveStrategy"])) {
+            this.setSaveStrategy(myOptions["saveStrategy"]);
         }
-        if (isset(myOptions['sort'])) {
-            this.setSort(myOptions['sort']);
+        if (isset(myOptions["sort"])) {
+            this.setSort(myOptions["sort"]);
         }
     }
 }

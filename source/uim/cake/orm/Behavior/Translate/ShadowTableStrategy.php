@@ -32,14 +32,14 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'fields' => [],
-        'defaultLocale' => null,
-        'referenceName' => null,
-        'allowEmptyTranslations' => true,
-        'onlyTranslated' => false,
-        'strategy' => 'subquery',
-        'tableLocator' => null,
-        'validator' => false,
+        "fields" => [],
+        "defaultLocale" => null,
+        "referenceName" => null,
+        "allowEmptyTranslations" => true,
+        "onlyTranslated" => false,
+        "strategy" => "subquery",
+        "tableLocator" => null,
+        "validator" => false,
     ];
 
     /**
@@ -51,23 +51,23 @@ class ShadowTableStrategy : TranslateStrategyInterface
     this(Table myTable, array myConfig = []) {
         myTableAlias = myTable.getAlias();
         [myPlugin] = pluginSplit(myTable.getRegistryAlias(), true);
-        myTableReferenceName = myConfig['referenceName'];
+        myTableReferenceName = myConfig["referenceName"];
 
         myConfig += [
-            'mainTableAlias' => myTableAlias,
-            'translationTable' => myPlugin . myTableReferenceName . 'Translations',
-            'hasOneAlias' => myTableAlias . 'Translation',
+            "mainTableAlias" => myTableAlias,
+            "translationTable" => myPlugin . myTableReferenceName . "Translations",
+            "hasOneAlias" => myTableAlias . "Translation",
         ];
 
-        if (isset(myConfig['tableLocator'])) {
-            this._tableLocator = myConfig['tableLocator'];
+        if (isset(myConfig["tableLocator"])) {
+            this._tableLocator = myConfig["tableLocator"];
         }
 
         this.setConfig(myConfig);
         this.table = myTable;
         this.translationTable = this.getTableLocator().get(
-            this._config['translationTable'],
-            ['allowFallbackClass' => true]
+            this._config["translationTable"],
+            ["allowFallbackClass" => true]
         );
 
         this.setupAssociations();
@@ -76,7 +76,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
     /**
      * Create a hasMany association for all records.
      *
-     * Don't create a hasOne association here as the join conditions are modified
+     * Don"t create a hasOne association here as the join conditions are modified
      * in before find - so create/modify it there.
      *
      * @return void
@@ -86,11 +86,11 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
         myTargetAlias = this.translationTable.getAlias();
         this.table.hasMany(myTargetAlias, [
-            'className' => myConfig['translationTable'],
-            'foreignKey' => 'id',
-            'strategy' => myConfig['strategy'],
-            'propertyName' => '_i18n',
-            'dependent' => true,
+            "className" => myConfig["translationTable"],
+            "foreignKey" => "id",
+            "strategy" => myConfig["strategy"],
+            "propertyName" => "_i18n",
+            "dependent" => true,
         ]);
     }
 
@@ -105,27 +105,27 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @return void
      */
     function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions) {
-        $locale = Hash::get(myOptions, 'locale', this.getLocale());
+        $locale = Hash::get(myOptions, "locale", this.getLocale());
         myConfig = this.getConfig();
 
-        if ($locale === myConfig['defaultLocale']) {
+        if ($locale === myConfig["defaultLocale"]) {
             return;
         }
 
         this.setupHasOneAssociation($locale, myOptions);
 
         myFieldsAdded = this.addFieldsToQuery(myQuery, myConfig);
-        $orderByTranslatedField = this.iterateClause(myQuery, 'order', myConfig);
+        $orderByTranslatedField = this.iterateClause(myQuery, "order", myConfig);
         $filteredByTranslatedField =
-            this.traverseClause(myQuery, 'where', myConfig) ||
-            myConfig['onlyTranslated'] ||
-            (myOptions['filterByCurrentLocale'] ?? null);
+            this.traverseClause(myQuery, "where", myConfig) ||
+            myConfig["onlyTranslated"] ||
+            (myOptions["filterByCurrentLocale"] ?? null);
 
         if (!myFieldsAdded && !$orderByTranslatedField && !$filteredByTranslatedField) {
             return;
         }
 
-        myQuery.contain([myConfig['hasOneAlias']]);
+        myQuery.contain([myConfig["hasOneAlias"]]);
 
         myQuery.formatResults(function (myResults) use ($locale) {
             return this.rowMapper(myResults, $locale);
@@ -143,32 +143,32 @@ class ShadowTableStrategy : TranslateStrategyInterface
     {
         myConfig = this.getConfig();
 
-        [myPlugin] = pluginSplit(myConfig['translationTable']);
-        $hasOneTargetAlias = myPlugin ? (myPlugin . '.' . myConfig['hasOneAlias']) : myConfig['hasOneAlias'];
+        [myPlugin] = pluginSplit(myConfig["translationTable"]);
+        $hasOneTargetAlias = myPlugin ? (myPlugin . "." . myConfig["hasOneAlias"]) : myConfig["hasOneAlias"];
         if (!this.getTableLocator().exists($hasOneTargetAlias)) {
             // Load table before hand with fallback class usage enabled
             this.getTableLocator().get(
                 $hasOneTargetAlias,
                 [
-                    'className' => myConfig['translationTable'],
-                    'allowFallbackClass' => true,
+                    "className" => myConfig["translationTable"],
+                    "allowFallbackClass" => true,
                 ]
             );
         }
 
-        if (isset(myOptions['filterByCurrentLocale'])) {
-            $joinType = myOptions['filterByCurrentLocale'] ? 'INNER' : 'LEFT';
+        if (isset(myOptions["filterByCurrentLocale"])) {
+            $joinType = myOptions["filterByCurrentLocale"] ? "INNER" : "LEFT";
         } else {
-            $joinType = myConfig['onlyTranslated'] ? 'INNER' : 'LEFT';
+            $joinType = myConfig["onlyTranslated"] ? "INNER" : "LEFT";
         }
 
-        this.table.hasOne(myConfig['hasOneAlias'], [
-            'foreignKey' => ['id'],
-            'joinType' => $joinType,
-            'propertyName' => 'translation',
-            'className' => myConfig['translationTable'],
-            'conditions' => [
-                myConfig['hasOneAlias'] . '.locale' => $locale,
+        this.table.hasOne(myConfig["hasOneAlias"], [
+            "foreignKey" => ["id"],
+            "joinType" => $joinType,
+            "propertyName" => "translation",
+            "className" => myConfig["translationTable"],
+            "conditions" => [
+                myConfig["hasOneAlias"] . ".locale" => $locale,
             ],
         ]);
     }
@@ -177,7 +177,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Add translation fields to query.
      *
      * If the query is using autofields (directly or implicitly) add the
-     * main table's fields to the query first.
+     * main table"s fields to the query first.
      *
      * Only add translations for fields that are in the main table, always
      * add the locale field though.
@@ -191,7 +191,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
             return true;
         }
 
-        $select = array_filter(myQuery.clause('select'), function (myField) {
+        $select = array_filter(myQuery.clause("select"), function (myField) {
             return is_string(myField);
         });
 
@@ -199,17 +199,17 @@ class ShadowTableStrategy : TranslateStrategyInterface
             return true;
         }
 
-        myAlias = myConfig['mainTableAlias'];
+        myAlias = myConfig["mainTableAlias"];
         $joinRequired = false;
         foreach (this.translatedFields() as myField) {
             if (array_intersect($select, [myField, "myAlias.myField"])) {
                 $joinRequired = true;
-                myQuery.select(myQuery.aliasField(myField, myConfig['hasOneAlias']));
+                myQuery.select(myQuery.aliasField(myField, myConfig["hasOneAlias"]));
             }
         }
 
         if ($joinRequired) {
-            myQuery.select(myQuery.aliasField('locale', myConfig['hasOneAlias']));
+            myQuery.select(myQuery.aliasField("locale", myConfig["hasOneAlias"]));
         }
 
         return $joinRequired;
@@ -227,21 +227,21 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param array<string, mixed> myConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected bool iterateClause(myQuery, myName = '', myConfig = []) {
+    protected bool iterateClause(myQuery, myName = "", myConfig = []) {
         $clause = myQuery.clause(myName);
         if (!$clause || !$clause.count()) {
             return false;
         }
 
-        myAlias = myConfig['hasOneAlias'];
+        myAlias = myConfig["hasOneAlias"];
         myFields = this.translatedFields();
-        $mainTableAlias = myConfig['mainTableAlias'];
+        $mainTableAlias = myConfig["mainTableAlias"];
         $mainTableFields = this.mainFields();
         $joinRequired = false;
 
         $clause.iterateParts(
             function ($c, &myField) use (myFields, myAlias, $mainTableAlias, $mainTableFields, &$joinRequired) {
-                if (!is_string(myField) || strpos(myField, '.')) {
+                if (!is_string(myField) || strpos(myField, ".")) {
                     return $c;
                 }
 
@@ -272,15 +272,15 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param array<string, mixed> myConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected bool traverseClause(myQuery, myName = '', myConfig = []) {
+    protected bool traverseClause(myQuery, myName = "", myConfig = []) {
         $clause = myQuery.clause(myName);
         if (!$clause || !$clause.count()) {
             return false;
         }
 
-        myAlias = myConfig['hasOneAlias'];
+        myAlias = myConfig["hasOneAlias"];
         myFields = this.translatedFields();
-        $mainTableAlias = myConfig['mainTableAlias'];
+        $mainTableAlias = myConfig["mainTableAlias"];
         $mainTableFields = this.mainFields();
         $joinRequired = false;
 
@@ -290,7 +290,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
                     return;
                 }
                 myField = $expression.getField();
-                if (!is_string(myField) || strpos(myField, '.')) {
+                if (!is_string(myField) || strpos(myField, ".")) {
                     return;
                 }
 
@@ -321,24 +321,24 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @return void
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        $locale = $entity.get('_locale') ?: this.getLocale();
-        $newOptions = [this.translationTable.getAlias() => ['validate' => false]];
-        myOptions['associated'] = $newOptions + myOptions['associated'];
+        $locale = $entity.get("_locale") ?: this.getLocale();
+        $newOptions = [this.translationTable.getAlias() => ["validate" => false]];
+        myOptions["associated"] = $newOptions + myOptions["associated"];
 
         // Check early if empty translations are present in the entity.
         // If this is the case, unset them to prevent persistence.
-        // This only applies if this._config['allowEmptyTranslations'] is false
-        if (this._config['allowEmptyTranslations'] === false) {
+        // This only applies if this._config["allowEmptyTranslations"] is false
+        if (this._config["allowEmptyTranslations"] === false) {
             this.unsetEmptyFields($entity);
         }
 
         this.bundleTranslatedFields($entity);
-        $bundled = $entity.get('_i18n') ?: [];
+        $bundled = $entity.get("_i18n") ?: [];
         $noBundled = count($bundled) === 0;
 
         // No additional translation records need to be saved,
         // as the entity is in the default locale.
-        if ($noBundled && $locale === this.getConfig('defaultLocale')) {
+        if ($noBundled && $locale === this.getConfig("defaultLocale")) {
             return;
         }
 
@@ -371,14 +371,14 @@ class ShadowTableStrategy : TranslateStrategyInterface
             return;
         }
 
-        $where = ['locale' => $locale];
+        $where = ["locale" => $locale];
         $translation = null;
         if ($id) {
-            $where['id'] = $id;
+            $where["id"] = $id;
 
             /** @var \Cake\Datasource\IEntity|null $translation */
             $translation = this.translationTable.find()
-                .select(array_merge(['id', 'locale'], myFields))
+                .select(array_merge(["id", "locale"], myFields))
                 .where($where)
                 .disableBufferedResults()
                 .first();
@@ -390,15 +390,15 @@ class ShadowTableStrategy : TranslateStrategyInterface
             $translation = this.translationTable.newEntity(
                 $where + myValues,
                 [
-                    'useSetters' => false,
-                    'markNew' => true,
+                    "useSetters" => false,
+                    "markNew" => true,
                 ]
             );
         }
 
-        $entity.set('_i18n', array_merge($bundled, [$translation]));
-        $entity.set('_locale', $locale, ['setter' => false]);
-        $entity.setDirty('_locale', false);
+        $entity.set("_i18n", array_merge($bundled, [$translation]));
+        $entity.set("_locale", $locale, ["setter" => false]);
+        $entity.setDirty("_locale", false);
 
         foreach (myFields as myField) {
             $entity.setDirty(myField, false);
@@ -425,13 +425,13 @@ class ShadowTableStrategy : TranslateStrategyInterface
      */
     string translationField(string myField)
     {
-        if (this.getLocale() === this.getConfig('defaultLocale')) {
+        if (this.getLocale() === this.getConfig("defaultLocale")) {
             return this.table.aliasField(myField);
         }
 
         $translatedFields = this.translatedFields();
         if (in_array(myField, $translatedFields, true)) {
-            return this.getConfig('hasOneAlias') . '.' . myField;
+            return this.getConfig("hasOneAlias") . "." . myField;
         }
 
         return this.table.aliasField(myField);
@@ -446,7 +446,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @return \Cake\Collection\ICollection
      */
     protected auto rowMapper(myResults, $locale) {
-        $allowEmpty = this._config['allowEmptyTranslations'];
+        $allowEmpty = this._config["allowEmptyTranslations"];
 
         return myResults.map(function ($row) use ($allowEmpty, $locale) {
             /** @var \Cake\Datasource\IEntity|array|null $row */
@@ -456,9 +456,9 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
             $hydrated = !is_array($row);
 
-            if (empty($row['translation'])) {
-                $row['_locale'] = $locale;
-                unset($row['translation']);
+            if (empty($row["translation"])) {
+                $row["_locale"] = $locale;
+                unset($row["translation"]);
 
                 if ($hydrated) {
                     /** @psalm-suppress PossiblyInvalidMethodCall */
@@ -469,7 +469,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
             }
 
             /** @var \Cake\ORM\Entity|array $translation */
-            $translation = $row['translation'];
+            $translation = $row["translation"];
 
             /**
              * @psalm-suppress PossiblyInvalidMethodCall
@@ -478,19 +478,19 @@ class ShadowTableStrategy : TranslateStrategyInterface
             myKeys = $hydrated ? $translation.getVisible() : array_keys($translation);
 
             foreach (myKeys as myField) {
-                if (myField === 'locale') {
-                    $row['_locale'] = $translation[myField];
+                if (myField === "locale") {
+                    $row["_locale"] = $translation[myField];
                     continue;
                 }
 
                 if ($translation[myField] !== null) {
-                    if ($allowEmpty || $translation[myField] !== '') {
+                    if ($allowEmpty || $translation[myField] !== "") {
                         $row[myField] = $translation[myField];
                     }
                 }
             }
 
-            unset($row['translation']);
+            unset($row["translation"]);
 
             if ($hydrated) {
                 /** @psalm-suppress PossiblyInvalidMethodCall */
@@ -510,19 +510,19 @@ class ShadowTableStrategy : TranslateStrategyInterface
      */
     ICollection groupTranslations(myResults) {
         return myResults.map(function ($row) {
-            $translations = (array)$row['_i18n'];
-            if (empty($translations) && $row.get('_translations')) {
+            $translations = (array)$row["_i18n"];
+            if (empty($translations) && $row.get("_translations")) {
                 return $row;
             }
 
             myResult = [];
             foreach ($translations as $translation) {
-                unset($translation['id']);
-                myResult[$translation['locale']] = $translation;
+                unset($translation["id"]);
+                myResult[$translation["locale"]] = $translation;
             }
 
-            $row['_translations'] = myResult;
-            unset($row['_i18n']);
+            $row["_translations"] = myResult;
+            unset($row["_i18n"]);
             if ($row instanceof IEntity) {
                 $row.clean();
             }
@@ -540,9 +540,9 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @return void
      */
     protected auto bundleTranslatedFields($entity) {
-        $translations = (array)$entity.get('_translations');
+        $translations = (array)$entity.get("_translations");
 
-        if (empty($translations) && !$entity.isDirty('_translations')) {
+        if (empty($translations) && !$entity.isDirty("_translations")) {
             return;
         }
 
@@ -552,14 +552,14 @@ class ShadowTableStrategy : TranslateStrategyInterface
         foreach ($translations as $lang => $translation) {
             if (!$translation.id) {
                 $update = [
-                    'id' => myKey,
-                    'locale' => $lang,
+                    "id" => myKey,
+                    "locale" => $lang,
                 ];
-                $translation.set($update, ['guard' => false]);
+                $translation.set($update, ["guard" => false]);
             }
         }
 
-        $entity.set('_i18n', $translations);
+        $entity.set("_i18n", $translations);
     }
 
     /**
@@ -568,7 +568,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @return array
      */
     protected auto mainFields() {
-        myFields = this.getConfig('mainTableFields');
+        myFields = this.getConfig("mainTableFields");
 
         if (myFields) {
             return myFields;
@@ -576,7 +576,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
         myFields = this.table.getSchema().columns();
 
-        this.setConfig('mainTableFields', myFields);
+        this.setConfig("mainTableFields", myFields);
 
         return myFields;
     }
@@ -587,7 +587,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @return array
      */
     protected auto translatedFields() {
-        myFields = this.getConfig('fields');
+        myFields = this.getConfig("fields");
 
         if (myFields) {
             return myFields;
@@ -595,9 +595,9 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
         myTable = this.translationTable;
         myFields = myTable.getSchema().columns();
-        myFields = array_values(array_diff(myFields, ['id', 'locale']));
+        myFields = array_values(array_diff(myFields, ["id", "locale"]));
 
-        this.setConfig('fields', myFields);
+        this.setConfig("fields", myFields);
 
         return myFields;
     }

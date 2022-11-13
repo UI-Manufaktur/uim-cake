@@ -21,7 +21,7 @@ class LegacySyslogFormatter : AbstractFormatter
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'format' => '%s: %s',
+        "format" => "%s: %s",
     ];
 
     /**
@@ -34,6 +34,6 @@ class LegacySyslogFormatter : AbstractFormatter
 
     string format($level, string myMessage, array $context = [])
     {
-        return sprintf(this.getConfig('format'), $level, myMessage);
+        return sprintf(this.getConfig("format"), $level, myMessage);
     }
 }

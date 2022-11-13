@@ -31,18 +31,18 @@ class TimestampBehavior : Behavior
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'implementedFinders' => [],
-        'implementedMethods' => [
-            'timestamp' => 'timestamp',
-            'touch' => 'touch',
+        "implementedFinders" => [],
+        "implementedMethods" => [
+            "timestamp" => "timestamp",
+            "touch" => "touch",
         ],
-        'events' => [
-            'Model.beforeSave' => [
-                'created' => 'new',
-                'modified' => 'always',
+        "events" => [
+            "Model.beforeSave" => [
+                "created" => "new",
+                "modified" => "always",
             ],
         ],
-        'refreshTimestamp' => true,
+        "refreshTimestamp" => true,
     ];
 
     /**
@@ -63,8 +63,8 @@ class TimestampBehavior : Behavior
      */
     function initialize(array myConfig): void
     {
-        if (isset(myConfig['events'])) {
-            this.setConfig('events', myConfig['events'], false);
+        if (isset(myConfig["events"])) {
+            this.setConfig("events", myConfig["events"], false);
         }
     }
 
@@ -73,32 +73,32 @@ class TimestampBehavior : Behavior
      *
      * @param \Cake\Event\IEvent myEvent Event instance.
      * @param \Cake\Datasource\IEntity $entity Entity instance.
-     * @throws \UnexpectedValueException if a field's when value is misdefined
+     * @throws \UnexpectedValueException if a field"s when value is misdefined
      * @return true Returns true irrespective of the behavior logic, the save will not be prevented.
-     * @throws \UnexpectedValueException When the value for an event is not 'always', 'new' or 'existing'
+     * @throws \UnexpectedValueException When the value for an event is not "always", "new" or "existing"
      */
     bool handleEvent(IEvent myEvent, IEntity $entity) {
         myEventName = myEvent.getName();
-        myEvents = this._config['events'];
+        myEvents = this._config["events"];
 
         $new = $entity.isNew() !== false;
-        $refresh = this._config['refreshTimestamp'];
+        $refresh = this._config["refreshTimestamp"];
 
         foreach (myEvents[myEventName] as myField => $when) {
-            if (!in_array($when, ['always', 'new', 'existing'], true)) {
+            if (!in_array($when, ["always", "new", "existing"], true)) {
                 throw new UnexpectedValueException(sprintf(
-                    'When should be one of "always", "new" or "existing". The passed value "%s" is invalid',
+                    "When should be one of "always", "new" or "existing". The passed value "%s" is invalid",
                     $when
                 ));
             }
             if (
-                $when === 'always' ||
+                $when === "always" ||
                 (
-                    $when === 'new' &&
+                    $when === "new" &&
                     $new
                 ) ||
                 (
-                    $when === 'existing' &&
+                    $when === "existing" &&
                     !$new
                 )
             ) {
@@ -118,7 +118,7 @@ class TimestampBehavior : Behavior
      */
     function implementedEvents(): array
     {
-        return array_fill_keys(array_keys(this._config['events']), 'handleEvent');
+        return array_fill_keys(array_keys(this._config["events"]), "handleEvent");
     }
 
     /**
@@ -135,8 +135,8 @@ class TimestampBehavior : Behavior
     function timestamp(?IDateTime $ts = null, bool $refreshTimestamp = false): IDateTime
     {
         if ($ts) {
-            if (this._config['refreshTimestamp']) {
-                this._config['refreshTimestamp'] = false;
+            if (this._config["refreshTimestamp"]) {
+                this._config["refreshTimestamp"] = false;
             }
             this._ts = new FrozenTime($ts);
         } elseif (this._ts === null || $refreshTimestamp) {
@@ -157,17 +157,17 @@ class TimestampBehavior : Behavior
      * @param string myEventName Event name.
      * @return bool true if a field is updated, false if no action performed
      */
-    bool touch(IEntity $entity, string myEventName = 'Model.beforeSave') {
-        myEvents = this._config['events'];
+    bool touch(IEntity $entity, string myEventName = "Model.beforeSave") {
+        myEvents = this._config["events"];
         if (empty(myEvents[myEventName])) {
             return false;
         }
 
         $return = false;
-        $refresh = this._config['refreshTimestamp'];
+        $refresh = this._config["refreshTimestamp"];
 
         foreach (myEvents[myEventName] as myField => $when) {
-            if (in_array($when, ['always', 'existing'], true)) {
+            if (in_array($when, ["always", "existing"], true)) {
                 $return = true;
                 $entity.setDirty(myField, false);
                 this._updateField($entity, myField, $refresh);
@@ -178,7 +178,7 @@ class TimestampBehavior : Behavior
     }
 
     /**
-     * Update a field, if it hasn't been updated already
+     * Update a field, if it hasn"t been updated already
      *
      * @param \Cake\Datasource\IEntity $entity Entity instance.
      * @param string myField Field name
@@ -202,7 +202,7 @@ class TimestampBehavior : Behavior
         myType = TypeFactory::build($columnType);
 
         if (!myType instanceof DateTimeType) {
-            throw new RuntimeException('TimestampBehavior only supports columns of type DateTimeType.');
+            throw new RuntimeException("TimestampBehavior only supports columns of type DateTimeType.");
         }
 
         myClass = myType.getDateTimeClassName();

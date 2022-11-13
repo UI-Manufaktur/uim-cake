@@ -32,9 +32,9 @@ abstract class BaseLog : AbstractLogger
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'levels' => [],
-        'scopes' => [],
-        'formatter' => DefaultFormatter::class,
+        "levels" => [],
+        "scopes" => [],
+        "formatter" => DefaultFormatter::class,
     ];
 
     /**
@@ -50,22 +50,22 @@ abstract class BaseLog : AbstractLogger
     this(array myConfig = []) {
         this.setConfig(myConfig);
 
-        if (!is_array(this._config['scopes']) && this._config['scopes'] !== false) {
-            this._config['scopes'] = (array)this._config['scopes'];
+        if (!is_array(this._config["scopes"]) && this._config["scopes"] !== false) {
+            this._config["scopes"] = (array)this._config["scopes"];
         }
 
-        if (!is_array(this._config['levels'])) {
-            this._config['levels'] = (array)this._config['levels'];
+        if (!is_array(this._config["levels"])) {
+            this._config["levels"] = (array)this._config["levels"];
         }
 
-        if (!empty(this._config['types']) && empty(this._config['levels'])) {
-            this._config['levels'] = (array)this._config['types'];
+        if (!empty(this._config["types"]) && empty(this._config["levels"])) {
+            this._config["levels"] = (array)this._config["types"];
         }
 
-        $formatter = this._config['formatter'] ?? DefaultFormatter::class;
+        $formatter = this._config["formatter"] ?? DefaultFormatter::class;
         if (!is_object($formatter)) {
             if (is_array($formatter)) {
-                myClass = $formatter['className'];
+                myClass = $formatter["className"];
                 myOptions = $formatter;
             } else {
                 myClass = $formatter;
@@ -77,7 +77,7 @@ abstract class BaseLog : AbstractLogger
 
         if (!$formatter instanceof AbstractFormatter) {
             throw new InvalidArgumentException(sprintf(
-                'Formatter must extend `%s`, got `%s` instead',
+                "Formatter must extend `%s`, got `%s` instead",
                 AbstractFormatter::class,
                 get_class($formatter)
             ));
@@ -92,7 +92,7 @@ abstract class BaseLog : AbstractLogger
      */
     function levels(): array
     {
-        return this._config['levels'];
+        return this._config["levels"];
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class BaseLog : AbstractLogger
      * @return array<string>|false
      */
     function scopes() {
-        return this._config['scopes'];
+        return this._config["scopes"];
     }
 
     /**
@@ -129,12 +129,12 @@ abstract class BaseLog : AbstractLogger
      */
     protected string interpolate(string myMessage, array $context = [])
     {
-        if (strpos(myMessage, '{') === false && strpos(myMessage, '}') === false) {
+        if (strpos(myMessage, "{") === false && strpos(myMessage, "}") === false) {
             return myMessage;
         }
 
         preg_match_all(
-            '/(?<!' . preg_quote('\\', '/') . ')\{([a-z0-9-_]+)\}/i',
+            "/(?<!" . preg_quote("\\", "/") . ")\{([a-z0-9-_]+)\}/i",
             myMessage,
             $matches
         );
@@ -149,53 +149,53 @@ abstract class BaseLog : AbstractLogger
             myValue = $context[myKey];
 
             if (is_scalar(myValue)) {
-                $replacements['{' . myKey . '}'] = (string)myValue;
+                $replacements["{" . myKey . "}"] = (string)myValue;
                 continue;
             }
 
             if (is_array(myValue)) {
-                $replacements['{' . myKey . '}'] = json_encode(myValue, JSON_UNESCAPED_UNICODE);
+                $replacements["{" . myKey . "}"] = json_encode(myValue, JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if (myValue instanceof JsonSerializable) {
-                $replacements['{' . myKey . '}'] = json_encode(myValue, JSON_UNESCAPED_UNICODE);
+                $replacements["{" . myKey . "}"] = json_encode(myValue, JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if (myValue instanceof ArrayObject) {
-                $replacements['{' . myKey . '}'] = json_encode(myValue.getArrayCopy(), JSON_UNESCAPED_UNICODE);
+                $replacements["{" . myKey . "}"] = json_encode(myValue.getArrayCopy(), JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if (myValue instanceof Serializable) {
-                $replacements['{' . myKey . '}'] = myValue.serialize();
+                $replacements["{" . myKey . "}"] = myValue.serialize();
                 continue;
             }
 
             if (is_object(myValue)) {
-                if (method_exists(myValue, 'toArray')) {
-                    $replacements['{' . myKey . '}'] = json_encode(myValue.toArray(), JSON_UNESCAPED_UNICODE);
+                if (method_exists(myValue, "toArray")) {
+                    $replacements["{" . myKey . "}"] = json_encode(myValue.toArray(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
 
-                if (method_exists(myValue, '__serialize')) {
-                    $replacements['{' . myKey . '}'] = serialize(myValue);
+                if (method_exists(myValue, "__serialize")) {
+                    $replacements["{" . myKey . "}"] = serialize(myValue);
                     continue;
                 }
 
-                if (method_exists(myValue, '__toString')) {
-                    $replacements['{' . myKey . '}'] = (string)myValue;
+                if (method_exists(myValue, "__toString")) {
+                    $replacements["{" . myKey . "}"] = (string)myValue;
                     continue;
                 }
 
-                if (method_exists(myValue, '__debugInfo')) {
-                    $replacements['{' . myKey . '}'] = json_encode(myValue.__debugInfo(), JSON_UNESCAPED_UNICODE);
+                if (method_exists(myValue, "__debugInfo")) {
+                    $replacements["{" . myKey . "}"] = json_encode(myValue.__debugInfo(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
             }
 
-            $replacements['{' . myKey . '}'] = sprintf('[unhandled value of type %s]', getTypeName(myValue));
+            $replacements["{" . myKey . "}"] = sprintf("[unhandled value of type %s]", getTypeName(myValue));
         }
 
         /** @psalm-suppress InvalidArgument */
