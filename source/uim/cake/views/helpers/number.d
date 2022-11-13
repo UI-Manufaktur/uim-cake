@@ -1,7 +1,7 @@
 module uim.cakeews\Helper;
 
-import uim.cakere.App;
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.App;
+import uim.cake.core.exceptions\CakeException;
 import uim.cake8n\Number;
 import uim.cakeews\Helper;
 import uim.cakeews\View;

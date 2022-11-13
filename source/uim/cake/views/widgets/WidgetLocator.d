@@ -1,7 +1,7 @@
 module uim.cakeews\Widget;
 
-import uim.cakere.App;
-import uim.cakere.Configure\Engine\PhpConfig;
+import uim.cake.core.App;
+import uim.cake.core.Configure\Engine\PhpConfig;
 import uim.cakeews\StringTemplate;
 import uim.cakeews\View;
 use ReflectionClass;

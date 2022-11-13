@@ -1,6 +1,6 @@
 module uim.cakeews\Helper;
 
-import uim.cakere.Configure;
+import uim.cake.core.Configure;
 import uim.cakeews\Helper;
 import uim.cakeews\StringTemplateTrait;
 

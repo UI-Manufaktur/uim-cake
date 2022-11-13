@@ -1,7 +1,7 @@
 module uim.cakeews\Helper;
 
-import uim.cakere.App;
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.App;
+import uim.cake.core.exceptions\CakeException;
 import uim.cakeutings\Asset;
 import uim.cakeutings\Router;
 import uim.cakeews\Helper;

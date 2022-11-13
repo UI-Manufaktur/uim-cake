@@ -1,6 +1,6 @@
 module uim.cakeews\Widget;
 
-import uim.cakere.Configure;
+import uim.cake.core.Configure;
 import uim.cakeews\Form\IContext;
 
 /**

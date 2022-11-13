@@ -9,8 +9,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeews\Helper;
 
-import uim.cakere.Configure;
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions\CakeException;
 import uim.cakerms\FormProtector;
 import uim.cakeutings\Router;
 import uim.cakeilities.Hash;
