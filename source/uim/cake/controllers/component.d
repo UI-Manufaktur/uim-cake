@@ -1,6 +1,6 @@
 module uim.cake.controllers;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakeents\IEventListener;
 import uim.cakegs\LogTrait;
 

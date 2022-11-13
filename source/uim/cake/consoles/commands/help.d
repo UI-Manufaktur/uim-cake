@@ -8,8 +8,8 @@ import uim.cake.console.commandCollectionAwareInterface;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
 import uim.cake.console.consoleOutput;
-import uim.cakere.Configure;
-import uim.cakere.Plugin;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 use SimpleXMLElement;
 
 // Print out command list

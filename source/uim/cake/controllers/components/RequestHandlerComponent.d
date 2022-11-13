@@ -12,8 +12,8 @@
 import uim.cake.controllerss.components;
 import uim.cake.controllerss.componentsRegistry;
 import uim.cake.controllers\Controller;
-import uim.cakere.App;
-import uim.cakere.Configure;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
 import uim.cakeents\IEvent;
 import uim.caketps\Exception\NotFoundException;
 import uim.caketps\Response;

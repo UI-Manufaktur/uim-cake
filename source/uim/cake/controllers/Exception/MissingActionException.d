@@ -1,6 +1,6 @@
 module uim.cake.controllers\Exception;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * Missing Action exception - used when a controller action

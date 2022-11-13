@@ -1,8 +1,8 @@
 module uim.cake.controllers;
 
 import uim.cake.controllers\Exception\InvalidParameterException;
-import uim.cakere.App;
-import uim.cakere.IContainer;
+import uim.cake.core.App;
+import uim.cake.core.IContainer;
 import uim.caketps\IControllerFactory;
 import uim.caketps\Exception\MissingControllerException;
 import uim.caketps\MiddlewareQueue;

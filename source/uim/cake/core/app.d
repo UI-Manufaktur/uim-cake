@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 /**
  * App is responsible for resource location, and path management.

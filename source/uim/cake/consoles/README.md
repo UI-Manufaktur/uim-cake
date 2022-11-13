@@ -41,7 +41,7 @@ For our `Application` class we can start with:
 <?phpmodule App;
 
 use App\Command\HelloCommand;
-import uim.cakere.ConsoleApplicationInterface;
+import uim.cake.core.ConsoleApplicationInterface;
 import uim.cake.console.commandCollection;
 
 class Application : ConsoleApplicationInterface

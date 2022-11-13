@@ -1,7 +1,7 @@
 module uim.cake.controllerss.components;
 
 import uim.cake.controllerss.components;
-import uim.cakere.Configure;
+import uim.cake.core.Configure;
 import uim.cakeents\IEvent;
 import uim.cakerm\FormProtector;
 import uim.caketps\Exception\BadRequestException;
