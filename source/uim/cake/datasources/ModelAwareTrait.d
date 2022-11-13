@@ -17,10 +17,10 @@ use UnexpectedValueException;
 trait ModelAwareTrait
 {
     /**
-     * This object's primary model class name. Should be a plural form.
+     * This object"s primary model class name. Should be a plural form.
      * CakePHP will not inflect the name.
      *
-     * Example: For an object named 'Comments', the modelClass would be 'Comments'.
+     * Example: For an object named "Comments", the modelClass would be "Comments".
      * Plugin classes should use `Plugin.Comments` style names to correctly load
      * models from the correct plugin.
      *
@@ -44,7 +44,7 @@ trait ModelAwareTrait
      *
      * @var string
      */
-    protected $_modelType = 'Table';
+    protected $_modelType = "Table";
 
     /**
      * Set the modelClass property based on conventions.
@@ -71,7 +71,7 @@ trait ModelAwareTrait
      * be thrown.
      *
      * @param string|null myModelClass Name of model class to load. Defaults to this.modelClass.
-     *  The name can be an alias like `'Post'` or FQCN like `App\Model\Table\PostsTable::class`.
+     *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null myModelType The type of repository to load. Defaults to the getModelType() value.
      * @return \Cake\Datasource\IRepository The model instance created.
      * @throws \Cake\Datasource\Exception\MissingModelException If the model class cannot be found.
@@ -83,19 +83,19 @@ trait ModelAwareTrait
     {
         myModelClass = myModelClass ?? this.modelClass;
         if (empty(myModelClass)) {
-            throw new UnexpectedValueException('Default modelClass is empty');
+            throw new UnexpectedValueException("Default modelClass is empty");
         }
         myModelType = myModelType ?? this.getModelType();
 
         myOptions = [];
-        if (strpos(myModelClass, '\\') === false) {
+        if (strpos(myModelClass, "\\") === false) {
             [, myAlias] = pluginSplit(myModelClass, true);
         } else {
-            myOptions['className'] = myModelClass;
+            myOptions["className"] = myModelClass;
             /** @psalm-suppress PossiblyFalseOperand */
             myAlias = substr(
                 myModelClass,
-                strrpos(myModelClass, '\\') + 1,
+                strrpos(myModelClass, "\\") + 1,
                 -strlen(myModelType)
             );
             myModelClass = myAlias;
@@ -130,8 +130,8 @@ trait ModelAwareTrait
     {
         if (!$factory instanceof ILocator && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
-                '`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable.'
-                . ' Got type `%s` instead.',
+                "`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable."
+                . " Got type `%s` instead.",
                 getTypeName($factory)
             ));
         }

@@ -98,17 +98,17 @@ class RuleInvoker
      *
      * @param \Cake\Datasource\IEntity $entity The entity the rule
      *   should apply to.
-     * @param array $scope The rule's scope/options.
+     * @param array $scope The rule"s scope/options.
      * @return bool Whether the rule passed.
      */
     bool __invoke(IEntity $entity, array $scope) {
         $rule = this.rule;
         $pass = $rule($entity, this.options + $scope);
-        if ($pass === true || empty(this.options['errorField'])) {
+        if ($pass === true || empty(this.options["errorField"])) {
             return $pass === true;
         }
 
-        myMessage = this.options['message'] ?? 'invalid';
+        myMessage = this.options["message"] ?? "invalid";
         if (is_string($pass)) {
             myMessage = $pass;
         }
@@ -117,7 +117,7 @@ class RuleInvoker
         } else {
             myMessage = [myMessage];
         }
-        myErrorField = this.options['errorField'];
+        myErrorField = this.options["errorField"];
         $entity.setError(myErrorField, myMessage);
 
         if ($entity instanceof InvalidPropertyInterface && isset($entity.{myErrorField})) {

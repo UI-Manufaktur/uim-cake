@@ -32,7 +32,7 @@ use Throwable;
  *
  * #### Using a custom renderer with `exceptionRenderer`
  *
- * If you don't want to take control of the exception handling, but want to change how exceptions are
+ * If you don"t want to take control of the exception handling, but want to change how exceptions are
  * rendered you can use `exceptionRenderer` option to choose a class to render exception pages. By default
  * `Cake\Error\ExceptionRenderer` is used. Your custom exception renderer class should be placed in src/Error.
  *
@@ -63,7 +63,7 @@ use Throwable;
  * to one or a combination of a few of the E_* constants will only enable the specified errors:
  *
  * ```
- * myOptions['errorLevel'] = E_ALL & ~E_NOTICE;
+ * myOptions["errorLevel"] = E_ALL & ~E_NOTICE;
  * ```
  *
  * Would enable handling for all non Notice errors.
@@ -79,7 +79,7 @@ class ErrorHandler : BaseErrorHandler
      */
     this(array myConfig = []) {
         myConfig += [
-            'exceptionRenderer' => ExceptionRenderer::class,
+            "exceptionRenderer" => ExceptionRenderer::class,
         ];
 
         this.setConfig(myConfig);
@@ -135,14 +135,14 @@ class ErrorHandler : BaseErrorHandler
         Throwable myException,
         ?IServerRequest myRequest = null
     ): ExceptionRendererInterface {
-        $renderer = this._config['exceptionRenderer'];
+        $renderer = this._config["exceptionRenderer"];
 
         if (is_string($renderer)) {
             /** @var class-string<\Cake\Error\ExceptionRendererInterface>|null myClass */
-            myClass = App::className($renderer, 'Error');
+            myClass = App::className($renderer, "Error");
             if (!myClass) {
                 throw new RuntimeException(sprintf(
-                    "The '%s' renderer class could not be found.",
+                    "The "%s" renderer class could not be found.",
                     $renderer
                 ));
             }
@@ -165,7 +165,7 @@ class ErrorHandler : BaseErrorHandler
     protected auto _logInternalError(Throwable myException): void
     {
         // Disable trace for internal errors.
-        this._config['trace'] = false;
+        this._config["trace"] = false;
         myMessage = sprintf(
             "[%s] %s (%s:%s)\n%s", // Keeping same message format
             get_class(myException),

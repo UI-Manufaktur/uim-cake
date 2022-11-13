@@ -30,21 +30,21 @@ class RulesChecker
      *
      * @var string
      */
-    public const CREATE = 'create';
+    public const CREATE = "create";
 
     /**
      * Indicates that the checking rules to apply are those used for updating entities
      *
      * @var string
      */
-    public const UPDATE = 'update';
+    public const UPDATE = "update";
 
     /**
      * Indicates that the checking rules to apply are those used for deleting entities
      *
      * @var string
      */
-    public const DELETE = 'delete';
+    public const DELETE = "delete";
 
     /**
      * The list of rules to be checked on both create and update operations
@@ -95,7 +95,7 @@ class RulesChecker
      */
     this(array myOptions = []) {
         this._options = myOptions;
-        this._useI18n = function_exists('__d');
+        this._useI18n = function_exists("__d");
     }
 
     /**
@@ -201,7 +201,7 @@ class RulesChecker
      * can only be RulesChecker::CREATE, RulesChecker::UPDATE or RulesChecker::DELETE
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
-     * @param string myMode Either 'create, 'update' or 'delete'.
+     * @param string myMode Either "create, "update" or "delete".
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
@@ -219,12 +219,12 @@ class RulesChecker
             return this.checkDelete($entity, myOptions);
         }
 
-        throw new InvalidArgumentException('Wrong checking mode: ' . myMode);
+        throw new InvalidArgumentException("Wrong checking mode: " . myMode);
     }
 
     /**
      * Runs each of the rules by passing the provided entity and returns true if all
-     * of them pass. The rules selected will be only those specified to be run on 'create'
+     * of them pass. The rules selected will be only those specified to be run on "create"
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
@@ -235,7 +235,7 @@ class RulesChecker
 
     /**
      * Runs each of the rules by passing the provided entity and returns true if all
-     * of them pass. The rules selected will be only those specified to be run on 'update'
+     * of them pass. The rules selected will be only those specified to be run on "update"
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
@@ -246,7 +246,7 @@ class RulesChecker
 
     /**
      * Runs each of the rules by passing the provided entity and returns true if all
-     * of them pass. The rules selected will be only those specified to be run on 'delete'
+     * of them pass. The rules selected will be only those specified to be run on "delete"
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.

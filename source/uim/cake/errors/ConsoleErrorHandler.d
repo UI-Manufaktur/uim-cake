@@ -25,17 +25,17 @@ class ConsoleErrorHandler : BaseErrorHandler
      */
     this(array myConfig = []) {
         myConfig += [
-            'stderr' => new ConsoleOutput('php://stderr'),
-            'log' => false,
+            "stderr" => new ConsoleOutput("php://stderr"),
+            "log" => false,
         ];
 
         this.setConfig(myConfig);
-        this._stderr = this._config['stderr'];
+        this._stderr = this._config["stderr"];
     }
 
     /**
      * Handle errors in the console environment. Writes errors to stderr,
-     * and logs messages if Configure::read('debug') is false.
+     * and logs messages if Configure::read("debug") is false.
      *
      * @param \Throwable myException Exception instance.
      * @return void
@@ -62,9 +62,9 @@ class ConsoleErrorHandler : BaseErrorHandler
      */
     protected auto _displayException(Throwable myException): void
     {
-        myErrorName = 'Exception:';
+        myErrorName = "Exception:";
         if (myException instanceof FatalErrorException) {
-            myErrorName = 'Fatal Error:';
+            myErrorName = "Fatal Error:";
         }
 
         myMessage = sprintf(
@@ -90,13 +90,13 @@ class ConsoleErrorHandler : BaseErrorHandler
     {
         myMessage = sprintf(
             "%s\nIn [%s, line %s]",
-            myError['description'],
-            myError['file'],
-            myError['line']
+            myError["description"],
+            myError["file"],
+            myError["line"]
         );
         myMessage = sprintf(
             "<error>%s Error:</error> %s\n",
-            myError['error'],
+            myError["error"],
             myMessage
         );
         this._stderr.write(myMessage);

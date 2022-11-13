@@ -27,10 +27,10 @@ class Paginator : PaginatorInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'page' => 1,
-        'limit' => 20,
-        'maxLimit' => 100,
-        'allowedParameters' => ['limit', 'sort', 'page', 'direction'],
+        "page" => 1,
+        "limit" => 20,
+        "maxLimit" => 100,
+        "allowedParameters" => ["limit", "sort", "page", "direction"],
     ];
 
     /**
@@ -49,14 +49,14 @@ class Paginator : PaginatorInterface
      * pagination settings. These settings are used to build the queries made
      * and control other pagination settings.
      *
-     * If your settings contain a key with the current table's alias. The data
+     * If your settings contain a key with the current table"s alias. The data
      * inside that key will be used. Otherwise the top level configuration will
      * be used.
      *
      * ```
      *  $settings = [
-     *    'limit' => 20,
-     *    'maxLimit' => 100
+     *    "limit" => 20,
+     *    "maxLimit" => 100
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -66,11 +66,11 @@ class Paginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'limit' => 20,
-     *      'maxLimit' => 100
+     *    "Articles" => [
+     *      "limit" => 20,
+     *      "maxLimit" => 100
      *    ],
-     *    'Comments' => [ ... ]
+     *    "Comments" => [ ... ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -88,9 +88,9 @@ class Paginator : PaginatorInterface
      *
      * ```
      * $settings = [
-     *   'Articles' => [
-     *     'finder' => 'custom',
-     *     'sortableFields' => ['title', 'author_id', 'comment_count'],
+     *   "Articles" => [
+     *     "finder" => "custom",
+     *     "sortableFields" => ["title", "author_id", "comment_count"],
      *   ]
      * ];
      * ```
@@ -104,20 +104,20 @@ class Paginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'finder' => 'popular'
+     *    "Articles" => [
+     *      "finder" => "popular"
      *    ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
      *
-     * Would paginate using the `find('popular')` method.
+     * Would paginate using the `find("popular")` method.
      *
      * You can also pass an already created instance of a query to this method:
      *
      * ```
-     * myQuery = this.Articles.find('popular').matching('Tags', function ($q) {
-     *   return $q.where(['name' => 'CakePHP'])
+     * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
+     *   return $q.where(["name" => "CakePHP"])
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```
@@ -128,8 +128,8 @@ class Paginator : PaginatorInterface
      * the same controller action:
      *
      * ```
-     * $articles = $paginator.paginate($articlesQuery, ['scope' => 'articles']);
-     * $tags = $paginator.paginate($tagsQuery, ['scope' => 'tags']);
+     * $articles = $paginator.paginate($articlesQuery, ["scope" => "articles"]);
+     * $tags = $paginator.paginate($tagsQuery, ["scope" => "tags"]);
      * ```
      *
      * Each of the above queries will use different query string parameter sets
@@ -153,7 +153,7 @@ class Paginator : PaginatorInterface
             myQuery = $object;
             $object = myQuery.getRepository();
             if ($object === null) {
-                throw new CakeException('No repository set for query.');
+                throw new CakeException("No repository set for query.");
             }
         }
 
@@ -162,16 +162,16 @@ class Paginator : PaginatorInterface
 
         $cleanQuery = clone myQuery;
         myResults = myQuery.all();
-        myData['numResults'] = count(myResults);
-        myData['count'] = this.getCount($cleanQuery, myData);
+        myData["numResults"] = count(myResults);
+        myData["count"] = this.getCount($cleanQuery, myData);
 
         $pagingParams = this.buildParams(myData);
         myAlias = $object.getAlias();
         this._pagingParams = [myAlias => $pagingParams];
-        if ($pagingParams['requestedPage'] > $pagingParams['page']) {
+        if ($pagingParams["requestedPage"] > $pagingParams["page"]) {
             throw new PageOutOfBoundsException([
-                'requestedPage' => $pagingParams['requestedPage'],
-                'pagingParams' => this._pagingParams,
+                "requestedPage" => $pagingParams["requestedPage"],
+                "pagingParams" => this._pagingParams,
             ]);
         }
 
@@ -189,9 +189,9 @@ class Paginator : PaginatorInterface
     protected auto getQuery(IRepository $object, ?QueryInterface myQuery, array myData): QueryInterface
     {
         if (myQuery === null) {
-            myQuery = $object.find(myData['finder'], myData['options']);
+            myQuery = $object.find(myData["finder"], myData["options"]);
         } else {
-            myQuery.applyOptions(myData['options']);
+            myQuery.applyOptions(myData["options"]);
         }
 
         return myQuery;
@@ -215,7 +215,7 @@ class Paginator : PaginatorInterface
      * @param \Cake\Datasource\IRepository $object The repository object.
      * @param array<string, mixed> myParams Request params
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return array Array with keys 'defaults', 'options' and 'finder'
+     * @return array Array with keys "defaults", "options" and "finder"
      */
     protected auto extractData(IRepository $object, array myParams, array $settings): array
     {
@@ -225,30 +225,30 @@ class Paginator : PaginatorInterface
         myOptions = this.validateSort($object, myOptions);
         myOptions = this.checkLimit(myOptions);
 
-        myOptions += ['page' => 1, 'scope' => null];
-        myOptions['page'] = (int)myOptions['page'] < 1 ? 1 : (int)myOptions['page'];
+        myOptions += ["page" => 1, "scope" => null];
+        myOptions["page"] = (int)myOptions["page"] < 1 ? 1 : (int)myOptions["page"];
         [myFinder, myOptions] = this._extractFinder(myOptions);
 
-        return compact('defaults', 'options', 'finder');
+        return compact("defaults", "options", "finder");
     }
 
     /**
      * Build pagination params.
      *
-     * @param array<string, mixed> myData Paginator data containing keys 'options',
-     *   'count', 'defaults', 'finder', 'numResults'.
+     * @param array<string, mixed> myData Paginator data containing keys "options",
+     *   "count", "defaults", "finder", "numResults".
      * @return array<string, mixed> Paging params.
      */
     protected auto buildParams(array myData): array
     {
-        $limit = myData['options']['limit'];
+        $limit = myData["options"]["limit"];
 
         $paging = [
-            'count' => myData['count'],
-            'current' => myData['numResults'],
-            'perPage' => $limit,
-            'page' => myData['options']['page'],
-            'requestedPage' => myData['options']['page'],
+            "count" => myData["count"],
+            "current" => myData["numResults"],
+            "perPage" => $limit,
+            "page" => myData["options"]["page"],
+            "requestedPage" => myData["options"]["page"],
         ];
 
         $paging = this.addPageCountParams($paging, myData);
@@ -257,9 +257,9 @@ class Paginator : PaginatorInterface
         $paging = this.addSortingParams($paging, myData);
 
         $paging += [
-            'limit' => myData['defaults']['limit'] != $limit ? $limit : null,
-            'scope' => myData['options']['scope'],
-            'finder' => myData['finder'],
+            "limit" => myData["defaults"]["limit"] != $limit ? $limit : null,
+            "scope" => myData["options"]["scope"],
+            "finder" => myData["finder"],
         ];
 
         return $paging;
@@ -274,18 +274,18 @@ class Paginator : PaginatorInterface
      */
     protected auto addPageCountParams(array myParams, array myData): array
     {
-        $page = myParams['page'];
+        $page = myParams["page"];
         $pageCount = 0;
 
-        if (myParams['count'] !== null) {
-            $pageCount = max((int)ceil(myParams['count'] / myParams['perPage']), 1);
+        if (myParams["count"] !== null) {
+            $pageCount = max((int)ceil(myParams["count"] / myParams["perPage"]), 1);
             $page = min($page, $pageCount);
-        } elseif (myParams['current'] === 0 && myParams['requestedPage'] > 1) {
+        } elseif (myParams["current"] === 0 && myParams["requestedPage"] > 1) {
             $page = 1;
         }
 
-        myParams['page'] = $page;
-        myParams['pageCount'] = $pageCount;
+        myParams["page"] = $page;
+        myParams["pageCount"] = $pageCount;
 
         return myParams;
     }
@@ -301,13 +301,13 @@ class Paginator : PaginatorInterface
     {
         $start = $end = 0;
 
-        if (myParams['current'] > 0) {
-            $start = ((myParams['page'] - 1) * myParams['perPage']) + 1;
-            $end = $start + myParams['current'] - 1;
+        if (myParams["current"] > 0) {
+            $start = ((myParams["page"] - 1) * myParams["perPage"]) + 1;
+            $end = $start + myParams["current"] - 1;
         }
 
-        myParams['start'] = $start;
-        myParams['end'] = $end;
+        myParams["start"] = $start;
+        myParams["end"] = $end;
 
         return myParams;
     }
@@ -321,11 +321,11 @@ class Paginator : PaginatorInterface
      */
     protected auto addPrevNextParams(array myParams, array myData): array
     {
-        myParams['prevPage'] = myParams['page'] > 1;
-        if (myParams['count'] === null) {
-            myParams['nextPage'] = true;
+        myParams["prevPage"] = myParams["page"] > 1;
+        if (myParams["count"] === null) {
+            myParams["nextPage"] = true;
         } else {
-            myParams['nextPage'] = myParams['count'] > myParams['page'] * myParams['perPage'];
+            myParams["nextPage"] = myParams["count"] > myParams["page"] * myParams["perPage"];
         }
 
         return myParams;
@@ -340,21 +340,21 @@ class Paginator : PaginatorInterface
      */
     protected auto addSortingParams(array myParams, array myData): array
     {
-        $defaults = myData['defaults'];
-        $order = (array)myData['options']['order'];
+        $defaults = myData["defaults"];
+        $order = (array)myData["options"]["order"];
         $sortDefault = $directionDefault = false;
 
-        if (!empty($defaults['order']) && count($defaults['order']) === 1) {
-            $sortDefault = key($defaults['order']);
-            $directionDefault = current($defaults['order']);
+        if (!empty($defaults["order"]) && count($defaults["order"]) === 1) {
+            $sortDefault = key($defaults["order"]);
+            $directionDefault = current($defaults["order"]);
         }
 
         myParams += [
-            'sort' => myData['options']['sort'],
-            'direction' => isset(myData['options']['sort']) && count($order) ? current($order) : null,
-            'sortDefault' => $sortDefault,
-            'directionDefault' => $directionDefault,
-            'completeSort' => $order,
+            "sort" => myData["options"]["sort"],
+            "direction" => isset(myData["options"]["sort"]) && count($order) ? current($order) : null,
+            "sortDefault" => $sortDefault,
+            "directionDefault" => $directionDefault,
+            "completeSort" => $order,
         ];
 
         return myParams;
@@ -369,8 +369,8 @@ class Paginator : PaginatorInterface
      */
     protected auto _extractFinder(array myOptions): array
     {
-        myType = !empty(myOptions['finder']) ? myOptions['finder'] : 'all';
-        unset(myOptions['finder'], myOptions['maxLimit']);
+        myType = !empty(myOptions["finder"]) ? myOptions["finder"] : "all";
+        unset(myOptions["finder"], myOptions["maxLimit"]);
 
         if (is_array(myType)) {
             myOptions = (array)current(myType) + myOptions;
@@ -397,13 +397,13 @@ class Paginator : PaginatorInterface
      */
     protected auto getAllowedParameters(): array
     {
-        $allowed = this.getConfig('allowedParameters');
+        $allowed = this.getConfig("allowedParameters");
         if (!$allowed) {
             $allowed = [];
         }
-        $whitelist = this.getConfig('whitelist');
+        $whitelist = this.getConfig("whitelist");
         if ($whitelist) {
-            deprecationWarning('The `whitelist` option is deprecated. Use the `allowedParameters` option instead.');
+            deprecationWarning("The `whitelist` option is deprecated. Use the `allowedParameters` option instead.");
 
             return array_merge($allowed, $whitelist);
         }
@@ -419,13 +419,13 @@ class Paginator : PaginatorInterface
      */
     protected auto getSortableFields(array myConfig): ?array
     {
-        $allowed = myConfig['sortableFields'] ?? null;
+        $allowed = myConfig["sortableFields"] ?? null;
         if ($allowed !== null) {
             return $allowed;
         }
-        $deprecated = myConfig['sortWhitelist'] ?? null;
+        $deprecated = myConfig["sortWhitelist"] ?? null;
         if ($deprecated !== null) {
-            deprecationWarning('The `sortWhitelist` option is deprecated. Use `sortableFields` instead.');
+            deprecationWarning("The `sortWhitelist` option is deprecated. Use `sortableFields` instead.");
         }
 
         return $deprecated;
@@ -449,8 +449,8 @@ class Paginator : PaginatorInterface
      */
     function mergeOptions(array myParams, array $settings): array
     {
-        if (!empty($settings['scope'])) {
-            $scope = $settings['scope'];
+        if (!empty($settings["scope"])) {
+            $scope = $settings["scope"];
             myParams = !empty(myParams[$scope]) ? (array)myParams[$scope] : [];
         }
 
@@ -476,17 +476,17 @@ class Paginator : PaginatorInterface
         }
 
         $defaults = this.getConfig();
-        $defaults['whitelist'] = $defaults['allowedParameters'] = this.getAllowedParameters();
+        $defaults["whitelist"] = $defaults["allowedParameters"] = this.getAllowedParameters();
 
-        $maxLimit = $settings['maxLimit'] ?? $defaults['maxLimit'];
-        $limit = $settings['limit'] ?? $defaults['limit'];
+        $maxLimit = $settings["maxLimit"] ?? $defaults["maxLimit"];
+        $limit = $settings["limit"] ?? $defaults["limit"];
 
         if ($limit > $maxLimit) {
             $limit = $maxLimit;
         }
 
-        $settings['maxLimit'] = $maxLimit;
-        $settings['limit'] = $limit;
+        $settings["maxLimit"] = $maxLimit;
+        $settings["limit"] = $limit;
 
         return $settings + $defaults;
     }
@@ -509,7 +509,7 @@ class Paginator : PaginatorInterface
      * You can use this to sort on synthetic columns, or columns added in custom
      * find operations that may not exist in the schema.
      *
-     * The default order options provided to paginate() will be merged with the user's
+     * The default order options provided to paginate() will be merged with the user"s
      * requested sorting field/direction.
      *
      * @param \Cake\Datasource\IRepository $object Repository object.
@@ -519,57 +519,57 @@ class Paginator : PaginatorInterface
      */
     function validateSort(IRepository $object, array myOptions): array
     {
-        if (isset(myOptions['sort'])) {
+        if (isset(myOptions["sort"])) {
             $direction = null;
-            if (isset(myOptions['direction'])) {
-                $direction = strtolower(myOptions['direction']);
+            if (isset(myOptions["direction"])) {
+                $direction = strtolower(myOptions["direction"]);
             }
-            if (!in_array($direction, ['asc', 'desc'], true)) {
-                $direction = 'asc';
+            if (!in_array($direction, ["asc", "desc"], true)) {
+                $direction = "asc";
             }
 
-            $order = isset(myOptions['order']) && is_array(myOptions['order']) ? myOptions['order'] : [];
-            if ($order && myOptions['sort'] && strpos(myOptions['sort'], '.') === false) {
+            $order = isset(myOptions["order"]) && is_array(myOptions["order"]) ? myOptions["order"] : [];
+            if ($order && myOptions["sort"] && strpos(myOptions["sort"], ".") === false) {
                 $order = this._removeAliases($order, $object.getAlias());
             }
 
-            myOptions['order'] = [myOptions['sort'] => $direction] + $order;
+            myOptions["order"] = [myOptions["sort"] => $direction] + $order;
         } else {
-            myOptions['sort'] = null;
+            myOptions["sort"] = null;
         }
-        unset(myOptions['direction']);
+        unset(myOptions["direction"]);
 
-        if (empty(myOptions['order'])) {
-            myOptions['order'] = [];
+        if (empty(myOptions["order"])) {
+            myOptions["order"] = [];
         }
-        if (!is_array(myOptions['order'])) {
+        if (!is_array(myOptions["order"])) {
             return myOptions;
         }
 
         $sortAllowed = false;
         $allowed = this.getSortableFields(myOptions);
         if ($allowed !== null) {
-            myOptions['sortableFields'] = myOptions['sortWhitelist'] = $allowed;
+            myOptions["sortableFields"] = myOptions["sortWhitelist"] = $allowed;
 
-            myField = key(myOptions['order']);
+            myField = key(myOptions["order"]);
             $sortAllowed = in_array(myField, $allowed, true);
             if (!$sortAllowed) {
-                myOptions['order'] = [];
-                myOptions['sort'] = null;
+                myOptions["order"] = [];
+                myOptions["sort"] = null;
 
                 return myOptions;
             }
         }
 
         if (
-            myOptions['sort'] === null
-            && count(myOptions['order']) === 1
-            && !is_numeric(key(myOptions['order']))
+            myOptions["sort"] === null
+            && count(myOptions["order"]) === 1
+            && !is_numeric(key(myOptions["order"]))
         ) {
-            myOptions['sort'] = key(myOptions['order']);
+            myOptions["sort"] = key(myOptions["order"]);
         }
 
-        myOptions['order'] = this._prefix($object, myOptions['order'], $sortAllowed);
+        myOptions["order"] = this._prefix($object, myOptions["order"], $sortAllowed);
 
         return myOptions;
     }
@@ -585,12 +585,12 @@ class Paginator : PaginatorInterface
     {
         myResult = [];
         foreach (myFields as myField => $sort) {
-            if (strpos(myField, '.') === false) {
+            if (strpos(myField, ".") === false) {
                 myResult[myField] = $sort;
                 continue;
             }
 
-            [myAlias, $currentField] = explode('.', myField);
+            [myAlias, $currentField] = explode(".", myField);
 
             if (myAlias === myModel) {
                 myResult[$currentField] = $sort;
@@ -623,21 +623,21 @@ class Paginator : PaginatorInterface
             myField = myKey;
             myAlias = myTableAlias;
 
-            if (strpos(myKey, '.') !== false) {
-                [myAlias, myField] = explode('.', myKey);
+            if (strpos(myKey, ".") !== false) {
+                [myAlias, myField] = explode(".", myKey);
             }
             $correctAlias = (myTableAlias === myAlias);
 
             if ($correctAlias && $allowed) {
                 // Disambiguate fields in schema. As id is quite common.
                 if ($object.hasField(myField)) {
-                    myField = myAlias . '.' . myField;
+                    myField = myAlias . "." . myField;
                 }
                 myTableOrder[myField] = myValue;
             } elseif ($correctAlias && $object.hasField(myField)) {
-                myTableOrder[myTableAlias . '.' . myField] = myValue;
+                myTableOrder[myTableAlias . "." . myField] = myValue;
             } elseif (!$correctAlias && $allowed) {
-                myTableOrder[myAlias . '.' . myField] = myValue;
+                myTableOrder[myAlias . "." . myField] = myValue;
             }
         }
 
@@ -645,18 +645,18 @@ class Paginator : PaginatorInterface
     }
 
     /**
-     * Check the limit parameter and ensure it's within the maxLimit bounds.
+     * Check the limit parameter and ensure it"s within the maxLimit bounds.
      *
      * @param array<string, mixed> myOptions An array of options with a limit key to be checked.
      * @return array<string, mixed> An array of options for pagination.
      */
     function checkLimit(array myOptions): array
     {
-        myOptions['limit'] = (int)myOptions['limit'];
-        if (myOptions['limit'] < 1) {
-            myOptions['limit'] = 1;
+        myOptions["limit"] = (int)myOptions["limit"];
+        if (myOptions["limit"] < 1) {
+            myOptions["limit"] = 1;
         }
-        myOptions['limit'] = max(min(myOptions['limit'], myOptions['maxLimit']), 1);
+        myOptions["limit"] = max(min(myOptions["limit"], myOptions["maxLimit"]), 1);
 
         return myOptions;
     }

@@ -39,12 +39,12 @@ class QueryCacher
      */
     this(myKey, myConfig) {
         if (!is_string(myKey) && !(myKey instanceof Closure)) {
-            throw new RuntimeException('Cache keys must be strings or callables.');
+            throw new RuntimeException("Cache keys must be strings or callables.");
         }
         this._key = myKey;
 
         if (!is_string(myConfig) && !(myConfig instanceof ICache)) {
-            throw new RuntimeException('Cache configs must be strings or \Psr\SimpleCache\ICache instances.');
+            throw new RuntimeException("Cache configs must be strings or \Psr\SimpleCache\ICache instances.");
         }
         this._config = myConfig;
     }
@@ -95,7 +95,7 @@ class QueryCacher
         $func = this._key;
         myKey = $func(myQuery);
         if (!is_string(myKey)) {
-            $msg = sprintf('Cache key functions must return a string. Got %s.', var_export(myKey, true));
+            $msg = sprintf("Cache key functions must return a string. Got %s.", var_export(myKey, true));
             throw new RuntimeException($msg);
         }
 

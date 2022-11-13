@@ -10,5 +10,5 @@ class MissingDatasourceException : CakeException
     /**
      * @var string
      */
-    protected $_messageTemplate = 'Datasource class %s could not be found. %s';
+    protected $_messageTemplate = "Datasource class %s could not be found. %s";
 }

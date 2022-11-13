@@ -136,17 +136,17 @@ trait QueryTrait
      *
      * ```
      * // Simple string key + config
-     * myQuery.cache('my_key', 'db_results');
+     * myQuery.cache("my_key", "db_results");
      *
      * // Function to generate key.
      * myQuery.cache(function ($q) {
-     *   myKey = serialize($q.clause('select'));
-     *   myKey .= serialize($q.clause('where'));
+     *   myKey = serialize($q.clause("select"));
+     *   myKey .= serialize($q.clause("where"));
      *   return md5(myKey);
      * });
      *
      * // Using a pre-built cache engine.
-     * myQuery.cache('my_key', $engine);
+     * myQuery.cache("my_key", $engine);
      *
      * // Disable caching
      * myQuery.cache(false);
@@ -158,7 +158,7 @@ trait QueryTrait
      *   a cache engine instance.
      * @return this
      */
-    function cache(myKey, myConfig = 'default') {
+    function cache(myKey, myConfig = "default") {
         if (myKey === false) {
             this._cache = null;
 
@@ -203,15 +203,15 @@ trait QueryTrait
      */
     function aliasField(string myField, Nullable!string myAlias = null): array
     {
-        if (strpos(myField, '.') === false) {
+        if (strpos(myField, ".") === false) {
             myAlias = myAlias ?: this.getRepository().getAlias();
-            myAliasedField = myAlias . '.' . myField;
+            myAliasedField = myAlias . "." . myField;
         } else {
             myAliasedField = myField;
-            [myAlias, myField] = explode('.', myField);
+            [myAlias, myField] = explode(".", myField);
         }
 
-        myKey = sprintf('%s__%s', myAlias, myField);
+        myKey = sprintf("%s__%s", myAlias, myField);
 
         return [myKey => myAliasedField];
     }
@@ -302,12 +302,12 @@ trait QueryTrait
         }
         if ($mapper === null) {
             if (!$overwrite) {
-                throw new InvalidArgumentException('$mapper can be null only when $overwrite is true.');
+                throw new InvalidArgumentException("$mapper can be null only when $overwrite is true.");
             }
 
             return this;
         }
-        this._mapReduce[] = compact('mapper', 'reducer');
+        this._mapReduce[] = compact("mapper", "reducer");
 
         return this;
     }
@@ -330,7 +330,7 @@ trait QueryTrait
      * and replace them with the passed first argument.
      *
      * Callbacks are required to return an iterator object, which will be used as
-     * the return value for this query's result. Formatter functions are applied
+     * the return value for this query"s result. Formatter functions are applied
      * after all the `MapReduce` routines for this query have been executed.
      *
      * Formatting callbacks will receive two arguments, the first one being an object
@@ -349,36 +349,36 @@ trait QueryTrait
      * Return all results from the table indexed by id:
      *
      * ```
-     * myQuery.select(['id', 'name']).formatResults(function (myResults) {
-     *     return myResults.indexBy('id');
+     * myQuery.select(["id", "name"]).formatResults(function (myResults) {
+     *     return myResults.indexBy("id");
      * });
      * ```
      *
      * Add a new column to the ResultSet:
      *
      * ```
-     * myQuery.select(['name', 'birth_date']).formatResults(function (myResults) {
+     * myQuery.select(["name", "birth_date"]).formatResults(function (myResults) {
      *     return myResults.map(function ($row) {
-     *         $row['age'] = $row['birth_date'].diff(new DateTime).y;
+     *         $row["age"] = $row["birth_date"].diff(new DateTime).y;
      *
      *         return $row;
      *     });
      * });
      * ```
      *
-     * Add a new column to the results with respect to the query's hydration configuration:
+     * Add a new column to the results with respect to the query"s hydration configuration:
      *
      * ```
      * myQuery.formatResults(function (myResults, myQuery) {
      *     return myResults.map(function ($row) use (myQuery) {
      *         myData = [
-     *             'bar' => 'baz',
+     *             "bar" => "baz",
      *         ];
      *
      *         if (myQuery.isHydrationEnabled()) {
-     *             $row['foo'] = new Foo(myData)
+     *             $row["foo"] = new Foo(myData)
      *         } else {
-     *             $row['foo'] = myData;
+     *             $row["foo"] = myData;
      *         }
      *
      *         return $row;
@@ -387,12 +387,12 @@ trait QueryTrait
      * ```
      *
      * Retaining access to the association target query instance of joined associations,
-     * by inheriting the contain callback's query argument:
+     * by inheriting the contain callback"s query argument:
      *
      * ```
      * // Assuming a `Articles belongsTo Authors` association that uses the join strategy
      *
-     * $articlesQuery.contain('Authors', function ($authorsQuery) {
+     * $articlesQuery.contain("Authors", function ($authorsQuery) {
      *     return $authorsQuery.formatResults(function (myResults, myQuery) use ($authorsQuery) {
      *         // Here `$authorsQuery` will always be the instance
      *         // where the callback was attached to.
@@ -420,7 +420,7 @@ trait QueryTrait
         }
         if ($formatter === null) {
             if (myMode !== self::OVERWRITE) {
-                throw new InvalidArgumentException('$formatter can be null only when myMode is overwrite.');
+                throw new InvalidArgumentException("$formatter can be null only when myMode is overwrite.");
             }
 
             return this;
@@ -454,7 +454,7 @@ trait QueryTrait
      * ### Example:
      *
      * ```
-     * $singleUser = myQuery.select(['id', 'username']).first();
+     * $singleUser = myQuery.select(["id", "username"]).first();
      * ```
      *
      * @return \Cake\Datasource\IEntity|array|null The first result from the ResultSet.
@@ -478,7 +478,7 @@ trait QueryTrait
         if (!$entity) {
             myTable = this.getRepository();
             throw new RecordNotFoundException(sprintf(
-                'Record not found in table "%s"',
+                "Record not found in table "%s"",
                 myTable.getTable()
             ));
         }
@@ -493,8 +493,8 @@ trait QueryTrait
      * ### Example:
      *
      * ```
-     *  myQuery.applyOptions(['doABarrelRoll' => true, 'fields' => ['id', 'name']);
-     *  myQuery.getOptions(); // Returns ['doABarrelRoll' => true]
+     *  myQuery.applyOptions(["doABarrelRoll" => true, "fields" => ["id", "name"]);
+     *  myQuery.getOptions(); // Returns ["doABarrelRoll" => true]
      * ```
      *
      * @see \Cake\Datasource\QueryInterface::applyOptions() to read about the options that will
@@ -519,8 +519,8 @@ trait QueryTrait
         myResultSetClass = this._decoratorClass();
         if (in_array($method, get_class_methods(myResultSetClass), true)) {
             deprecationWarning(sprintf(
-                'Calling result set method `%s()` directly on query instance is deprecated. ' .
-                'You must call `all()` to retrieve the results first.',
+                "Calling result set method `%s()` directly on query instance is deprecated. " .
+                "You must call `all()` to retrieve the results first.",
                 $method
             ), 2);
             myResults = this.all();
@@ -528,7 +528,7 @@ trait QueryTrait
             return myResults.$method(...$arguments);
         }
         throw new BadMethodCallException(
-            sprintf('Unknown method "%s"', $method)
+            sprintf("Unknown method "%s"", $method)
         );
     }
 
@@ -558,7 +558,7 @@ trait QueryTrait
     {
         $decorator = this._decoratorClass();
         foreach (this._mapReduce as $functions) {
-            myResult = new MapReduce(myResult, $functions['mapper'], $functions['reducer']);
+            myResult = new MapReduce(myResult, $functions["mapper"], $functions["reducer"]);
         }
 
         if (!empty(this._mapReduce)) {
