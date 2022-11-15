@@ -114,7 +114,7 @@ class CommandRunner : IEventDispatcher
      * @return int The exit code of the command.
      * @throws \RuntimeException
      */
-    function run(array $argv, ?ConsoleIo $io = null): int
+    int run(array $argv, ?ConsoleIo $io = null)
     {
         this.bootstrap();
 
