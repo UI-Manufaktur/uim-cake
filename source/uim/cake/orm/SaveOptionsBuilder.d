@@ -77,7 +77,7 @@ class SaveOptionsBuilder : ArrayObject
     function associated($associated) {
         $associated = this._normalizeAssociations($associated);
         this._associated(this._table, $associated);
-        this._options['associated'] = $associated;
+        this._options["associated"] = $associated;
 
         return this;
     }
@@ -97,8 +97,8 @@ class SaveOptionsBuilder : ArrayObject
                 continue;
             }
             this._checkAssociation(myTable, myKey);
-            if (isset($associated['associated'])) {
-                this._associated(myTable.getAssociation(myKey).getTarget(), $associated['associated']);
+            if (isset($associated["associated"])) {
+                this._associated(myTable.getAssociation(myKey).getTarget(), $associated["associated"]);
                 continue;
             }
         }
@@ -116,7 +116,7 @@ class SaveOptionsBuilder : ArrayObject
     {
         if (!myTable.associations().has($association)) {
             throw new RuntimeException(sprintf(
-                'Table `%s` is not associated with `%s`',
+                "Table `%s` is not associated with `%s`",
                 get_class(myTable),
                 $association
             ));
@@ -130,7 +130,7 @@ class SaveOptionsBuilder : ArrayObject
      * @return this
      */
     function guard(bool $guard) {
-        this._options['guard'] = $guard;
+        this._options["guard"] = $guard;
 
         return this;
     }
@@ -143,7 +143,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function validate(string $validate) {
         this._table.getValidator($validate);
-        this._options['validate'] = $validate;
+        this._options["validate"] = $validate;
 
         return this;
     }
@@ -155,7 +155,7 @@ class SaveOptionsBuilder : ArrayObject
      * @return this
      */
     function checkExisting(bool $checkExisting) {
-        this._options['checkExisting'] = $checkExisting;
+        this._options["checkExisting"] = $checkExisting;
 
         return this;
     }
@@ -167,7 +167,7 @@ class SaveOptionsBuilder : ArrayObject
      * @return this
      */
     function checkRules(bool $checkRules) {
-        this._options['checkRules'] = $checkRules;
+        this._options["checkRules"] = $checkRules;
 
         return this;
     }
@@ -179,7 +179,7 @@ class SaveOptionsBuilder : ArrayObject
      * @return this
      */
     function atomic(bool $atomic) {
-        this._options['atomic'] = $atomic;
+        this._options["atomic"] = $atomic;
 
         return this;
     }

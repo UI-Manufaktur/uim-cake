@@ -76,7 +76,7 @@ class Session
      *
      * The full list of options follows:
      *
-     * - defaults: either 'php', 'database', 'cache' or 'cake' as explained above.
+     * - defaults: either "php", "database", "cache" or "cake" as explained above.
      * - handler: An array containing the handler configuration
      * - ini: A list of php.ini directives to set before the session starts.
      * - timeout: The time in minutes the session should stay active
@@ -86,34 +86,34 @@ class Session
      * @see \Cake\Http\Session::this()
      */
     static function create(array $sessionConfig = []) {
-        if (isset($sessionConfig['defaults'])) {
-            $defaults = static::_defaultConfig($sessionConfig['defaults']);
+        if (isset($sessionConfig["defaults"])) {
+            $defaults = static::_defaultConfig($sessionConfig["defaults"]);
             if ($defaults) {
                 $sessionConfig = Hash::merge($defaults, $sessionConfig);
             }
         }
 
         if (
-            !isset($sessionConfig['ini']['session.cookie_secure'])
-            && env('HTTPS')
-            && ini_get('session.cookie_secure') != 1
+            !isset($sessionConfig["ini"]["session.cookie_secure"])
+            && env("HTTPS")
+            && ini_get("session.cookie_secure") != 1
         ) {
-            $sessionConfig['ini']['session.cookie_secure'] = 1;
+            $sessionConfig["ini"]["session.cookie_secure"] = 1;
         }
 
         if (
-            !isset($sessionConfig['ini']['session.name'])
-            && isset($sessionConfig['cookie'])
+            !isset($sessionConfig["ini"]["session.name"])
+            && isset($sessionConfig["cookie"])
         ) {
-            $sessionConfig['ini']['session.name'] = $sessionConfig['cookie'];
+            $sessionConfig["ini"]["session.name"] = $sessionConfig["cookie"];
         }
 
-        if (!isset($sessionConfig['ini']['session.use_strict_mode']) && ini_get('session.use_strict_mode') != 1) {
-            $sessionConfig['ini']['session.use_strict_mode'] = 1;
+        if (!isset($sessionConfig["ini"]["session.use_strict_mode"]) && ini_get("session.use_strict_mode") != 1) {
+            $sessionConfig["ini"]["session.use_strict_mode"] = 1;
         }
 
-        if (!isset($sessionConfig['ini']['session.cookie_httponly']) && ini_get('session.cookie_httponly') != 1) {
-            $sessionConfig['ini']['session.cookie_httponly'] = 1;
+        if (!isset($sessionConfig["ini"]["session.cookie_httponly"]) && ini_get("session.cookie_httponly") != 1) {
+            $sessionConfig["ini"]["session.cookie_httponly"] = 1;
         }
 
         return new static($sessionConfig);
@@ -126,40 +126,40 @@ class Session
      * @return array|false
      */
     protected static auto _defaultConfig(string myName) {
-        $tmp = defined('TMP') ? TMP : sys_get_temp_dir() . DIRECTORY_SEPARATOR;
+        $tmp = defined("TMP") ? TMP : sys_get_temp_dir() . DIRECTORY_SEPARATOR;
         $defaults = [
-            'php' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
+            "php" => [
+                "ini" => [
+                    "session.use_trans_sid" => 0,
                 ],
             ],
-            'cake' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
-                    'session.serialize_handler' => 'php',
-                    'session.use_cookies' => 1,
-                    'session.save_path' => $tmp . 'sessions',
-                    'session.save_handler' => 'files',
+            "cake" => [
+                "ini" => [
+                    "session.use_trans_sid" => 0,
+                    "session.serialize_handler" => "php",
+                    "session.use_cookies" => 1,
+                    "session.save_path" => $tmp . "sessions",
+                    "session.save_handler" => "files",
                 ],
             ],
-            'cache' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
-                    'session.use_cookies' => 1,
+            "cache" => [
+                "ini" => [
+                    "session.use_trans_sid" => 0,
+                    "session.use_cookies" => 1,
                 ],
-                'handler' => [
-                    'engine' => 'CacheSession',
-                    'config' => 'default',
+                "handler" => [
+                    "engine" => "CacheSession",
+                    "config" => "default",
                 ],
             ],
-            'database' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
-                    'session.use_cookies' => 1,
-                    'session.serialize_handler' => 'php',
+            "database" => [
+                "ini" => [
+                    "session.use_trans_sid" => 0,
+                    "session.use_cookies" => 1,
+                    "session.serialize_handler" => "php",
                 ],
-                'handler' => [
-                    'engine' => 'DatabaseSession',
+                "handler" => [
+                    "engine" => "DatabaseSession",
                 ],
             ],
         ];
@@ -167,9 +167,9 @@ class Session
         if (isset($defaults[myName])) {
             if (
                 PHP_VERSION_ID >= 70300
-                && (myName !== 'php' || empty(ini_get('session.cookie_samesite')))
+                && (myName !== "php" || empty(ini_get("session.cookie_samesite")))
             ) {
-                $defaults['php']['ini']['session.cookie_samesite'] = 'Lax';
+                $defaults["php"]["ini"]["session.cookie_samesite"] = "Lax";
             }
 
             return $defaults[myName];
@@ -196,35 +196,35 @@ class Session
      */
     this(array myConfig = []) {
         myConfig += [
-            'timeout' => null,
-            'cookie' => null,
-            'ini' => [],
-            'handler' => [],
+            "timeout" => null,
+            "cookie" => null,
+            "ini" => [],
+            "handler" => [],
         ];
 
-        if (myConfig['timeout']) {
-            myConfig['ini']['session.gc_maxlifetime'] = 60 * myConfig['timeout'];
+        if (myConfig["timeout"]) {
+            myConfig["ini"]["session.gc_maxlifetime"] = 60 * myConfig["timeout"];
         }
 
-        if (myConfig['cookie']) {
-            myConfig['ini']['session.name'] = myConfig['cookie'];
+        if (myConfig["cookie"]) {
+            myConfig["ini"]["session.name"] = myConfig["cookie"];
         }
 
-        if (!isset(myConfig['ini']['session.cookie_path'])) {
-            $cookiePath = empty(myConfig['cookiePath']) ? '/' : myConfig['cookiePath'];
-            myConfig['ini']['session.cookie_path'] = $cookiePath;
+        if (!isset(myConfig["ini"]["session.cookie_path"])) {
+            $cookiePath = empty(myConfig["cookiePath"]) ? "/" : myConfig["cookiePath"];
+            myConfig["ini"]["session.cookie_path"] = $cookiePath;
         }
 
-        this.options(myConfig['ini']);
+        this.options(myConfig["ini"]);
 
-        if (!empty(myConfig['handler'])) {
-            myClass = myConfig['handler']['engine'];
-            unset(myConfig['handler']['engine']);
-            this.engine(myClass, myConfig['handler']);
+        if (!empty(myConfig["handler"])) {
+            myClass = myConfig["handler"]["engine"];
+            unset(myConfig["handler"]["engine"]);
+            this.engine(myClass, myConfig["handler"]);
         }
 
-        this._lifetime = (int)ini_get('session.gc_maxlifetime');
-        this._isCLI = (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg');
+        this._lifetime = (int)ini_get("session.gc_maxlifetime");
+        this._isCLI = (PHP_SAPI === "cli" || PHP_SAPI === "phpdbg");
         session_register_shutdown();
     }
 
@@ -253,18 +253,18 @@ class Session
         if (myClass instanceof SessionHandlerInterface) {
             return this.setEngine(myClass);
         }
-        myClassName = App::className(myClass, 'Http/Session');
+        myClassName = App::className(myClass, "Http/Session");
 
         if (!myClassName) {
             throw new InvalidArgumentException(
-                sprintf('The class "%s" does not exist and cannot be used as a session engine', myClass)
+                sprintf("The class "%s" does not exist and cannot be used as a session engine", myClass)
             );
         }
 
         $handler = new myClassName(myOptions);
         if (!($handler instanceof SessionHandlerInterface)) {
             throw new InvalidArgumentException(
-                'The chosen SessionHandler does not implement SessionHandlerInterface, it cannot be used as an engine.'
+                "The chosen SessionHandler does not implement SessionHandlerInterface, it cannot be used as an engine."
             );
         }
 
@@ -293,7 +293,7 @@ class Session
      * ### Example:
      *
      * ```
-     * $session.options(['session.use_cookies' => 1]);
+     * $session.options(["session.use_cookies" => 1]);
      * ```
      *
      * @param array<string, mixed> myOptions Ini options to set.
@@ -309,7 +309,7 @@ class Session
         foreach (myOptions as $setting => myValue) {
             if (ini_set($setting, (string)myValue) === false) {
                 throw new RuntimeException(
-                    sprintf('Unable to configure the session, setting %s failed.', $setting)
+                    sprintf("Unable to configure the session, setting %s failed.", $setting)
                 );
             }
         }
@@ -328,21 +328,21 @@ class Session
 
         if (this._isCLI) {
             $_SESSION = [];
-            this.id('cli');
+            this.id("cli");
 
             return this._started = true;
         }
 
         if (session_status() === \PHP_SESSION_ACTIVE) {
-            throw new RuntimeException('Session was already started');
+            throw new RuntimeException("Session was already started");
         }
 
-        if (ini_get('session.use_cookies') && headers_sent()) {
+        if (ini_get("session.use_cookies") && headers_sent()) {
             return false;
         }
 
         if (!session_start()) {
-            throw new RuntimeException('Could not start the session');
+            throw new RuntimeException("Could not start the session");
         }
 
         this._started = true;
@@ -373,7 +373,7 @@ class Session
         }
 
         if (!session_write_close()) {
-            throw new RuntimeException('Could not close the session');
+            throw new RuntimeException("Could not close the session");
         }
 
         this._started = false;
@@ -418,7 +418,7 @@ class Session
      * @param string|null myName The name of the session variable (or a path as sent to Hash.extract)
      * @param mixed $default The return value when the path does not exist
      * @return mixed|null The value of the session variable, or default value if a session
-     *   is not available, can't be started, or provided myName is not found in the session.
+     *   is not available, can"t be started, or provided myName is not found in the session.
      */
     function read(Nullable!string myName = null, $default = null) {
         if (this._hasSession() && !this.started()) {
@@ -445,7 +445,7 @@ class Session
      */
     function readOrFail(string myName) {
         if (!this.check(myName)) {
-            throw new RuntimeException(sprintf('Expected session key "%s" not found.', myName));
+            throw new RuntimeException(sprintf("Expected session key "%s" not found.", myName));
         }
 
         return this.read(myName);
@@ -510,8 +510,7 @@ class Session
      * @param string|null $id Id to replace the current session id
      * @return string Session id
      */
-    function id(Nullable!string $id = null): string
-    {
+    string id(Nullable!string $id = null) {
         if ($id !== null && !headers_sent()) {
             session_id($id);
         }
@@ -533,7 +532,7 @@ class Session
     }
 
     /**
-     * Used to write new data to _SESSION, since PHP doesn't like us setting the _SESSION var itself.
+     * Used to write new data to _SESSION, since PHP doesn"t like us setting the _SESSION var itself.
      *
      * @param array $old Set of old variables => values
      * @param array $new New set of variable => value
@@ -594,10 +593,10 @@ class Session
      * @return bool
      */
     protected bool _hasSession() {
-        return !ini_get('session.use_cookies')
+        return !ini_get("session.use_cookies")
             || isset($_COOKIE[session_name()])
             || this._isCLI
-            || (ini_get('session.use_trans_sid') && isset($_GET[session_name()]));
+            || (ini_get("session.use_trans_sid") && isset($_GET[session_name()]));
     }
 
     /**
@@ -615,15 +614,15 @@ class Session
         myParams = session_get_cookie_params();
         setcookie(
             session_name(),
-            '',
+            "",
             time() - 42000,
-            myParams['path'],
-            myParams['domain'],
-            myParams['secure'],
-            myParams['httponly']
+            myParams["path"],
+            myParams["domain"],
+            myParams["secure"],
+            myParams["httponly"]
         );
 
-        if (session_id() !== '') {
+        if (session_id() !== "") {
             session_regenerate_id(true);
         }
     }
@@ -635,7 +634,7 @@ class Session
      * @return bool
      */
     protected bool _timedOut() {
-        $time = this.read('Config.time');
+        $time = this.read("Config.time");
         myResult = false;
 
         $checkTime = $time !== null && this._lifetime > 0;
@@ -643,7 +642,7 @@ class Session
             myResult = true;
         }
 
-        this.write('Config.time', time());
+        this.write("Config.time", time());
 
         return myResult;
     }

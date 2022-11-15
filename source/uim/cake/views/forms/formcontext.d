@@ -49,14 +49,12 @@ class FormContext : IContext
     }
 
 
-    function isPrimaryKey(string myField): bool
-    {
+    bool isPrimaryKey(string myField) {
         return false;
     }
 
 
-    function isCreate(): bool
-    {
+    bool isCreate() {
         return true;
     }
 
@@ -169,14 +167,11 @@ class FormContext : IContext
         );
     }
 
-
-    function hasError(string myField): bool
-    {
+    bool hasError(string myField) {
         myErrors = this.error(myField);
 
         return count(myErrors) > 0;
     }
-
 
     function error(string myField): array
     {

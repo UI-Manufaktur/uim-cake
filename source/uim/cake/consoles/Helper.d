@@ -1,4 +1,4 @@
-module uim.cakensole;
+module uim.cake.console;
 
 import uim.cakere.InstanceConfigTrait;
 

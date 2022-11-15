@@ -16,21 +16,21 @@ class ConsoleFormatter : IFormatter
      */
     protected $styles = [
         // bold yellow
-        'const' => '1;33',
+        "const" => "1;33",
         // green
-        'string' => '0;32',
+        "string" => "0;32",
         // bold blue
-        'number' => '1;34',
+        "number" => "1;34",
         // cyan
-        'class' => '0;36',
+        "class" => "0;36",
         // grey
-        'punct' => '0;90',
+        "punct" => "0;90",
         // default foreground
-        'property' => '0;39',
+        "property" => "0;39",
         // magenta
-        'visibility' => '0;35',
+        "visibility" => "0;35",
         // red
-        'special' => '0;31',
+        "special" => "0;31",
     ];
 
     /**
@@ -38,22 +38,21 @@ class ConsoleFormatter : IFormatter
      *
      * @return bool
      */
-    static bool environmentMatches(): bool
-    {
-        if (PHP_SAPI !== 'cli') {
+    static bool environmentMatches() {
+        if (PHP_SAPI !== "cli") {
             return false;
         }
         // NO_COLOR in environment means no color.
-        if (env('NO_COLOR')) {
+        if (env("NO_COLOR")) {
             return false;
         }
         // Windows environment checks
         if (
-            DIRECTORY_SEPARATOR === '\\' &&
-            strpos(strtolower(php_uname('v')), 'windows 10') === false &&
-            strpos(strtolower((string)env('SHELL')), 'bash.exe') === false &&
-            !(bool)env('ANSICON') &&
-            env('ConEmuANSI') !== 'ON'
+            DIRECTORY_SEPARATOR === "\\" &&
+            strpos(strtolower(php_uname("v")), "windows 10") === false &&
+            strpos(strtolower((string)env("SHELL")), "bash.exe") === false &&
+            !(bool)env("ANSICON") &&
+            env("ConEmuANSI") !== "ON"
         ) {
             return false;
         }
@@ -62,18 +61,17 @@ class ConsoleFormatter : IFormatter
     }
 
 
-    function formatWrapper(string myContentss, array myLocation): string
-    {
-        $lineInfo = '';
-        if (isset(myLocation['file'], myLocation['file'])) {
-            $lineInfo = sprintf('%s (line %s)', myLocation['file'], myLocation['line']);
+    string formatWrapper(string myContentss, array myLocation) {
+        $lineInfo = "";
+        if (isset(myLocation["file"], myLocation["file"])) {
+            $lineInfo = sprintf("%s (line %s)", myLocation["file"], myLocation["line"]);
         }
         $parts = [
-            this.style('const', $lineInfo),
-            this.style('special', '########## DEBUG ##########'),
+            this.style("const", $lineInfo),
+            this.style("special", "########## DEBUG ##########"),
             myContentss,
-            this.style('special', '###########################'),
-            '',
+            this.style("special", "###########################"),
+            "",
         ];
 
         return implode("\n", $parts);
@@ -83,10 +81,8 @@ class ConsoleFormatter : IFormatter
      * Convert a tree of INode objects into a plain text string.
      *
      * @param \Cake\Error\Debug\INode myNode The node tree to dump.
-     * @return string
      */
-    function dump(INode myNode): string
-    {
+    string dump(INode myNode) {
         $indent = 0;
 
         return this.export(myNode, $indent);
@@ -99,20 +95,19 @@ class ConsoleFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string
      */
-    protected auto export(INode $var, int $indent): string
-    {
+    protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
-                case 'bool':
-                    return this.style('const', $var.getValue() ? 'true' : 'false');
-                case 'null':
-                    return this.style('const', 'null');
-                case 'string':
-                    return this.style('string', "'" . (string)$var.getValue() . "'");
-                case 'int':
-                case 'float':
-                    return this.style('visibility', "({$var.getType()})") .
-                        ' ' . this.style('number', "{$var.getValue()}");
+                case "bool":
+                    return this.style("const", $var.getValue() ? "true" : "false");
+                case "null":
+                    return this.style("const", "null");
+                case "string":
+                    return this.style("string", """ . (string)$var.getValue() . """);
+                case "int":
+                case "float":
+                    return this.style("visibility", "({$var.getType()})") .
+                        " " . this.style("number", "{$var.getValue()}");
                 default:
                     return "({$var.getType()}) {$var.getValue()}";
             }
@@ -124,9 +119,9 @@ class ConsoleFormatter : IFormatter
             return this.exportObject($var, $indent + 1);
         }
         if ($var instanceof SpecialNode) {
-            return this.style('special', $var.getValue());
+            return this.style("special", $var.getValue());
         }
-        throw new RuntimeException('Unknown node received ' . get_class($var));
+        throw new RuntimeException("Unknown node received " . get_class($var));
     }
 
     /**
@@ -136,22 +131,21 @@ class ConsoleFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
-    protected auto exportArray(ArrayNode $var, int $indent): string
-    {
-        $out = this.style('punct', '[');
-        $break = "\n" . str_repeat('  ', $indent);
-        $end = "\n" . str_repeat('  ', $indent - 1);
+    protected string exportArray(ArrayNode $var, int $indent) {
+        $out = this.style("punct", "[");
+        $break = "\n" . str_repeat("  ", $indent);
+        $end = "\n" . str_repeat("  ", $indent - 1);
         $vars = [];
 
-        $arrow = this.style('punct', ' => ');
+        $arrow = this.style("punct", " => ");
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
             $vars[] = $break . this.export($item.getKey(), $indent) . $arrow . this.export($val, $indent);
         }
 
-        $close = this.style('punct', ']');
+        $close = this.style("punct", "]");
         if (count($vars)) {
-            return $out . implode(this.style('punct', ','), $vars) . $end . $close;
+            return $out . implode(this.style("punct", ","), $vars) . $end . $close;
         }
 
         return $out . $close;
@@ -165,39 +159,38 @@ class ConsoleFormatter : IFormatter
      * @return string
      * @see \Cake\Error\Debugger::exportVar()
      */
-    protected auto exportObject($var, int $indent): string
-    {
+    protected string exportObject($var, int $indent) {
         $props = [];
 
         if ($var instanceof ReferenceNode) {
-            return this.style('punct', 'object(') .
-                this.style('class', $var.getValue()) .
-                this.style('punct', ') id:') .
-                this.style('number', (string)$var.getId()) .
-                this.style('punct', ' {}');
+            return this.style("punct", "object(") .
+                this.style("class", $var.getValue()) .
+                this.style("punct", ") id:") .
+                this.style("number", (string)$var.getId()) .
+                this.style("punct", " {}");
         }
 
-        $out = this.style('punct', 'object(') .
-            this.style('class', $var.getValue()) .
-            this.style('punct', ') id:') .
-            this.style('number', (string)$var.getId()) .
-            this.style('punct', ' {');
+        $out = this.style("punct", "object(") .
+            this.style("class", $var.getValue()) .
+            this.style("punct", ") id:") .
+            this.style("number", (string)$var.getId()) .
+            this.style("punct", " {");
 
-        $break = "\n" . str_repeat('  ', $indent);
-        $end = "\n" . str_repeat('  ', $indent - 1) . this.style('punct', '}');
+        $break = "\n" . str_repeat("  ", $indent);
+        $end = "\n" . str_repeat("  ", $indent - 1) . this.style("punct", "}");
 
-        $arrow = this.style('punct', ' => ');
+        $arrow = this.style("punct", " => ");
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
             myName = $property.getName();
-            if ($visibility && $visibility !== 'public') {
-                $props[] = this.style('visibility', $visibility) .
-                    ' ' .
-                    this.style('property', myName) .
+            if ($visibility && $visibility !== "public") {
+                $props[] = this.style("visibility", $visibility) .
+                    " " .
+                    this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent);
             } else {
-                $props[] = this.style('property', myName) .
+                $props[] = this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent);
             }
@@ -206,7 +199,7 @@ class ConsoleFormatter : IFormatter
             return $out . $break . implode($break, $props) . $end;
         }
 
-        return $out . this.style('punct', '}');
+        return $out . this.style("punct", "}");
     }
 
     /**
@@ -216,8 +209,7 @@ class ConsoleFormatter : IFormatter
      * @param string $text The text to style.
      * @return string The styled output.
      */
-    protected auto style(string $style, string $text): string
-    {
+    protected string style(string $style, string $text) {
         $code = this.styles[$style];
 
         return "\033[{$code}m{$text}\033[0m";

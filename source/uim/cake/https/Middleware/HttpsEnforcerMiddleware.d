@@ -36,10 +36,10 @@ class HttpsEnforcerMiddleware : MiddlewareInterface
      * @var array<string, mixed>
      */
     protected myConfig = [
-        'redirect' => true,
-        'statusCode' => 301,
-        'headers' => [],
-        'disableOnDebug' => true,
+        "redirect" => true,
+        "statusCode" => 301,
+        "headers" => [],
+        "disableOnDebug" => true,
     ];
 
     /**
@@ -66,29 +66,29 @@ class HttpsEnforcerMiddleware : MiddlewareInterface
     function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
     {
         if (
-            myRequest.getUri().getScheme() === 'https'
-            || (this.config['disableOnDebug']
-                && Configure::read('debug'))
+            myRequest.getUri().getScheme() === "https"
+            || (this.config["disableOnDebug"]
+                && Configure::read("debug"))
         ) {
             return $handler.handle(myRequest);
         }
 
-        if (this.config['redirect'] && myRequest.getMethod() === 'GET') {
-            $uri = myRequest.getUri().withScheme('https');
-            $base = myRequest.getAttribute('base');
+        if (this.config["redirect"] && myRequest.getMethod() === "GET") {
+            $uri = myRequest.getUri().withScheme("https");
+            $base = myRequest.getAttribute("base");
             if ($base) {
                 $uri = $uri.withPath($base . $uri.getPath());
             }
 
             return new RedirectResponse(
                 $uri,
-                this.config['statusCode'],
-                this.config['headers']
+                this.config["statusCode"],
+                this.config["headers"]
             );
         }
 
         throw new BadRequestException(
-            'Requests to this URL must be made with HTTPS.'
+            "Requests to this URL must be made with HTTPS."
         );
     }
 }

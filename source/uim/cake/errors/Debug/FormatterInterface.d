@@ -19,7 +19,6 @@ interface IFormatter
      *
      * @param string myContentss The contents to wrap and return
      * @param array myLocation The file and line the contents came from.
-     * @return string
      */
-    function formatWrapper(string myContentss, array myLocation): string;
+    string formatWrapper(string myContentss, array myLocation);
 }

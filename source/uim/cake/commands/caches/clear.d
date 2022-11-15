@@ -1,12 +1,12 @@
 module uim.cakemmand;
 
-import uim.cakeches\Cache;
-import uim.cakeches.engines\ApcuEngine;
-import uim.cakeches.engines\WincacheEngine;
-import uim.cakeches\InvalidArgumentException;
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
+import uim.cake.caches\Cache;
+import uim.cake.caches.engines\ApcuEngine;
+import uim.cake.caches.engines\WincacheEngine;
+import uim.cake.caches\InvalidArgumentException;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
 
 /**
  * CacheClear command.
@@ -14,11 +14,11 @@ import uim.cakensole.consoleOptionParser;
 class CacheClearCommand : Command {
 
     static string defaultName() {
-        return 'cache clear';
+        return "cache clear";
     }
 
     /**
-     * Hook method for defining this command's option parser.
+     * Hook method for defining this command"s option parser.
      *
      * @see https://book.cakephp.org/4/en/console-commands/option-parsers.html
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
@@ -28,19 +28,19 @@ class CacheClearCommand : Command {
     {
         $parser = super.buildOptionParser($parser);
         $parser
-            .setDescription('Clear all data in a single cache engine')
-            .addArgument('engine', [
-                'help' => 'The cache engine to clear.' .
-                    'For example, `cake cache clear _cake_model_` will clear the model cache.' .
-                    ' Use `cake cache list` to list available engines.',
-                'required' => true,
+            .setDescription("Clear all data in a single cache engine")
+            .addArgument("engine", [
+                "help" => "The cache engine to clear." .
+                    "For example, `cake cache clear _cake_model_` will clear the model cache." .
+                    " Use `cake cache list` to list available engines.",
+                "required" => true,
             ]);
 
         return $parser;
     }
 
     /**
-     * Implement this method with your command's logic.
+     * Implement this method with your command"s logic.
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
@@ -48,7 +48,7 @@ class CacheClearCommand : Command {
      */
     auto execute(Arguments $args, ConsoleIo $io): Nullable!int
     {
-        myName = (string)$args.getArgument('engine');
+        myName = (string)$args.getArgument("engine");
         try {
             $io.out("Clearing {myName}");
 

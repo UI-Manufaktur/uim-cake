@@ -1,7 +1,7 @@
 module uim.cakeews;
 
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 import uim.cakeews\Exception\MissingHelperException;
@@ -43,8 +43,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @throws \Cake\View\Exception\MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
-    auto __isset(string $helper): bool
-    {
+    bool __isset(string $helper) {
         if (isset(this._loaded[$helper])) {
             return true;
         }

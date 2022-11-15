@@ -28,11 +28,8 @@ class ReferenceNode : INode {
 
     /**
      * Get the class name/value
-     *
-     * @return string
      */
-    auto getValue(): string
-    {
+    string getValue() {
         return this.class;
     }
 

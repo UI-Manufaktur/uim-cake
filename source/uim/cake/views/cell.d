@@ -1,8 +1,8 @@
 module uim.cakeews;
 
 use BadMethodCallException;
-import uim.cakeches\Cache;
-import uim.caketasources\ModelAwareTrait;
+import uim.cake.caches\Cache;
+import uim.cake.datasources\ModelAwareTrait;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 import uim.cakeents\IEventManager;

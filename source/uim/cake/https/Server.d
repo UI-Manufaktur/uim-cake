@@ -55,7 +55,7 @@ class Server : IEventDispatcher
      *
      * - App.bootstrap() - Perform any bootstrapping logic for your application here.
      * - App.middleware() - Attach any application middleware here.
-     * - Trigger the 'Server.buildMiddleware' event. You can use this to modify the
+     * - Trigger the "Server.buildMiddleware" event. You can use this to modify the
      *   from event listeners.
      * - Run the middleware queue including the application.
      *
@@ -77,7 +77,7 @@ class Server : IEventDispatcher
             $middleware = this.app.pluginMiddleware($middleware);
         }
 
-        this.dispatchEvent('Server.buildMiddleware', ['middleware' => $middleware]);
+        this.dispatchEvent("Server.buildMiddleware", ["middleware" => $middleware]);
 
         $response = this.runner.run($middleware, myRequest, this.app);
 
@@ -91,7 +91,7 @@ class Server : IEventDispatcher
     /**
      * Application bootstrap wrapper.
      *
-     * Calls the application's `bootstrap()` hook. After the application the
+     * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
      *
      * @return void
@@ -131,7 +131,7 @@ class Server : IEventDispatcher
     }
 
     /**
-     * Get the application's event manager or the global one.
+     * Get the application"s event manager or the global one.
      *
      * @return \Cake\Event\IEventManager
      */
@@ -145,7 +145,7 @@ class Server : IEventDispatcher
     }
 
     /**
-     * Set the application's event manager.
+     * Set the application"s event manager.
      *
      * If the application does not support events, an exception will be raised.
      *
@@ -160,6 +160,6 @@ class Server : IEventDispatcher
             return this;
         }
 
-        throw new InvalidArgumentException('Cannot set the event manager, the application does not support events.');
+        throw new InvalidArgumentException("Cannot set the event manager, the application does not support events.");
     }
 }

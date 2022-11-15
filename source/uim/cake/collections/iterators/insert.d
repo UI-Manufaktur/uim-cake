@@ -1,6 +1,6 @@
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
-import uim.cakellections\Collection;
+import uim.cake.collections\Collection;
 
 /**
  * This iterator will insert values into a property of each of the records returned.
@@ -56,7 +56,7 @@ class InsertIterator : Collection {
             myValues = new Collection(myValues);
         }
 
-        myPath = explode('.', myPath);
+        myPath = explode(".", myPath);
         myTarget = array_pop(myPath);
         this._path = myPath;
         this._target = myTarget;

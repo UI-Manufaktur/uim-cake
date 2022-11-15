@@ -1,9 +1,9 @@
-module uim.cakentroller;
+module uim.cake.controllers;
 
-import uim.cakentroller\Exception\MissingComponentException;
-import uim.cakere.App;
-import uim.cakere.exceptions\CakeException;
-import uim.cakere.ObjectRegistry;
+import uim.cake.controllers\Exception\MissingComponentException;
+import uim.cake.core.App;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.ObjectRegistry;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 
@@ -44,7 +44,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     auto getController(): Controller
     {
         if (this._controller === null) {
-            throw new CakeException('Controller not set for ComponentRegistry');
+            throw new CakeException("Controller not set for ComponentRegistry");
         }
 
         return this._controller;
@@ -73,7 +73,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @psalm-return class-string|null
      */
     protected string _resolveClassName(string myClass) {
-        return App::className(myClass, 'Controller/Component', 'Component');
+        return App::className(myClass, "Controller/Component", "Component");
     }
 
     /**
@@ -87,11 +87,11 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @return void
      * @throws \Cake\Controller\Exception\MissingComponentException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin)
     {
         throw new MissingComponentException([
-            'class' => myClass . 'Component',
-            'plugin' => myPlugin,
+            "class" => myClass . "Component",
+            "plugin" => myPlugin,
         ]);
     }
 
@@ -112,7 +112,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     {
         /** @var \Cake\Controller\Component $instance */
         $instance = new myClass(this, myConfig);
-        myEnable = myConfig['enabled'] ?? true;
+        myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {
             this.getEventManager().on($instance);
         }

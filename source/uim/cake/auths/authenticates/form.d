@@ -14,14 +14,14 @@ import uim.caketps\ServerRequest;
  *
  * ### Using Form auth
  *
- * Load `AuthComponent` in your controller's `initialize()` and add 'Form' in 'authenticate' key
+ * Load `AuthComponent` in your controller"s `initialize()` and add "Form" in "authenticate" key
  *
  * ```
- * this.loadComponent('Auth', [
- *     'authenticate' => [
- *         'Form' => [
- *             'fields' => ['username' => 'email', 'password' => 'passwd'],
- *             'finder' => 'auth',
+ * this.loadComponent("Auth", [
+ *     "authenticate" => [
+ *         "Form" => [
+ *             "fields" => ["username" => "email", "password" => "passwd"],
+ *             "finder" => "auth",
  *         ]
  *     ]
  * ]);
@@ -41,7 +41,7 @@ class FormAuthenticate : BaseAuthenticate {
      * @return bool False if the fields have not been supplied. True if they exist.
      */
     protected bool _checkFields(ServerRequest myRequest, array myFields) {
-        foreach ([myFields['username'], myFields['password']] as myField) {
+        foreach ([myFields["username"], myFields["password"]] as myField) {
             myValue = myRequest.getData(myField);
             if (empty(myValue) || !is_string(myValue)) {
                 return false;
@@ -61,14 +61,14 @@ class FormAuthenticate : BaseAuthenticate {
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
     function authenticate(ServerRequest myRequest, Response $response) {
-        myFields = this._config['fields'];
+        myFields = this._config["fields"];
         if (!this._checkFields(myRequest, myFields)) {
             return false;
         }
 
         return this._findUser(
-            myRequest.getData(myFields['username']),
-            myRequest.getData(myFields['password'])
+            myRequest.getData(myFields["username"]),
+            myRequest.getData(myFields["password"])
         );
     }
 }

@@ -1,7 +1,7 @@
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
-import uim.cakellections\ICollection;
-import uim.cakellections\CollectionTrait;
+import uim.cake.collections\ICollection;
+import uim.cake.collections\CollectionTrait;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
 
@@ -53,7 +53,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
      * ### Example
      *
      * ```
-     *  $printer = (new Collection($treeStructure)).listNested().printer('name');
+     *  $printer = (new Collection($treeStructure)).listNested().printer("name");
      * ```
      *
      * Using a closure:
@@ -74,7 +74,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
      * their depth in the tree
      * @return \Cake\collection.iIterator\TreePrinter
      */
-    function printer(myValuePath, myKeyPath = null, $spacer = '__') {
+    function printer(myValuePath, myKeyPath = null, $spacer = "__") {
         if (!myKeyPath) {
             myCounter = 0;
             myKeyPath = function () use (&myCounter) {

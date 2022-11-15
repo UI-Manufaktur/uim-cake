@@ -275,8 +275,7 @@ class RouteCollection
      * @return string The URL string on match.
      * @throws \Cake\Routing\Exception\MissingRouteException When no route could be matched.
      */
-    function match(array myUrl, array $context): string
-    {
+    string match(array myUrl, array $context) {
         // Named routes support optimization.
         if (isset(myUrl['_name'])) {
             myName = myUrl['_name'];
@@ -415,8 +414,7 @@ class RouteCollection
      * @param string myName The name of the middleware group to check.
      * @return bool
      */
-    function hasMiddlewareGroup(string myName): bool
-    {
+    bool hasMiddlewareGroup(string myName) {
         return array_key_exists(myName, this._middlewareGroups);
     }
 
@@ -426,8 +424,7 @@ class RouteCollection
      * @param string myName The name of the middleware to check.
      * @return bool
      */
-    function hasMiddleware(string myName): bool
-    {
+    bool hasMiddleware(string myName) {
         return isset(this._middleware[myName]);
     }
 
@@ -437,8 +434,7 @@ class RouteCollection
      * @param string myName The name of the middleware to check.
      * @return bool
      */
-    function middlewareExists(string myName): bool
-    {
+    bool middlewareExists(string myName) {
         return this.hasMiddleware(myName) || this.hasMiddlewareGroup(myName);
     }
 

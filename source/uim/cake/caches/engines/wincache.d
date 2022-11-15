@@ -1,6 +1,6 @@
-module uim.cakeches.engines;
+module uim.cake.caches.engines;
 
-import uim.cakeches\CacheEngine;
+import uim.cake.caches\CacheEngine;
 use RuntimeException;
 
 /**
@@ -27,8 +27,8 @@ class WincacheEngine : CacheEngine
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(array myConfig = []) {
-        if (!extension_loaded('wincache')) {
-            throw new RuntimeException('The `wincache` extension must be enabled to use WincacheEngine.');
+        if (!extension_loaded("wincache")) {
+            throw new RuntimeException("The `wincache` extension must be enabled to use WincacheEngine.");
         }
 
         super.init(myConfig);
@@ -58,7 +58,7 @@ class WincacheEngine : CacheEngine
      *
      * @param string myKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
-     * @return mixed The cached data, or default value if the data doesn't exist,
+     * @return mixed The cached data, or default value if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
      */
     auto get(myKey, $default = null) {
@@ -100,7 +100,7 @@ class WincacheEngine : CacheEngine
      * Delete a key from the cache
      *
      * @param string myKey Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete(myKey) {
         myKey = this._key(myKey);
@@ -116,11 +116,11 @@ class WincacheEngine : CacheEngine
      */
     bool clear() {
         $info = wincache_ucache_info();
-        $cacheKeys = $info['ucache_entries'];
+        $cacheKeys = $info["ucache_entries"];
         unset($info);
         foreach ($cacheKeys as myKey) {
-            if (strpos(myKey['key_name'], this._config['prefix']) === 0) {
-                wincache_ucache_delete(myKey['key_name']);
+            if (strpos(myKey["key_name"], this._config["prefix"]) === 0) {
+                wincache_ucache_delete(myKey["key_name"]);
             }
         }
 
@@ -137,13 +137,13 @@ class WincacheEngine : CacheEngine
     function groups(): array
     {
         if (empty(this._compiledGroupNames)) {
-            foreach (this._config['groups'] as myGroup) {
-                this._compiledGroupNames[] = this._config['prefix'] . myGroup;
+            foreach (this._config["groups"] as myGroup) {
+                this._compiledGroupNames[] = this._config["prefix"] . myGroup;
             }
         }
 
         myGroups = wincache_ucache_get(this._compiledGroupNames);
-        if (count(myGroups) !== count(this._config['groups'])) {
+        if (count(myGroups) !== count(this._config["groups"])) {
             foreach (this._compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     wincache_ucache_set(myGroup, 1);
@@ -155,7 +155,7 @@ class WincacheEngine : CacheEngine
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config['groups'] as $i => myGroup) {
+        foreach (this._config["groups"] as $i => myGroup) {
             myResult[] = myGroup . myGroups[$i];
         }
 
@@ -171,7 +171,7 @@ class WincacheEngine : CacheEngine
      */
     bool clearGroup(string myGroup) {
         $success = false;
-        wincache_ucache_inc(this._config['prefix'] . myGroup, 1, $success);
+        wincache_ucache_inc(this._config["prefix"] . myGroup, 1, $success);
 
         return $success;
     }

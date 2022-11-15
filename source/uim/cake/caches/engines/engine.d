@@ -1,6 +1,6 @@
-module uim.cakeches;
+module uim.cake.caches;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 use DateInterval;
 use Psr\SimpleCache\ICache;
 
@@ -14,19 +14,19 @@ abstract class CacheEngine : ICache, ICacheEngine
     /**
      * @var string
      */
-    protected const CHECK_KEY = 'key';
+    protected const CHECK_KEY = "key";
 
     /**
      * @var string
      */
-    protected const CHECK_VALUE = 'value';
+    protected const CHECK_VALUE = "value";
 
     /**
      * The default cache configuration is overridden in most cache adapters. These are
      * the keys that are common to all adapters. If overridden, this property is not used.
      *
      * - `duration` Specify how long items in this cache configuration last.
-     * - `groups` List of groups or 'tags' associated to every key stored in this config.
+     * - `groups` List of groups or "tags" associated to every key stored in this config.
      *    handy for deleting a complete group from cache.
      * - `prefix` Prefix appended to all entries. Good for when you need to share a keyspace
      *    with either another cache config or another application.
@@ -36,10 +36,10 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'duration' => 3600,
-        'groups' => [],
-        'prefix' => 'cake_',
-        'warnOnWriteFailures' => true,
+        "duration" => 3600,
+        "groups" => [],
+        "prefix" => "cake_",
+        "warnOnWriteFailures" => true,
     ];
 
     /**
@@ -48,7 +48,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @var string
      */
-    protected $_groupPrefix = '';
+    protected $_groupPrefix = "";
 
     /**
      * Initialize the cache engine
@@ -62,12 +62,12 @@ abstract class CacheEngine : ICache, ICacheEngine
     bool init(array myConfig = []) {
         this.setConfig(myConfig);
 
-        if (!empty(this._config['groups'])) {
-            sort(this._config['groups']);
-            this._groupPrefix = str_repeat('%s_', count(this._config['groups']));
+        if (!empty(this._config["groups"])) {
+            sort(this._config["groups"]);
+            this._groupPrefix = str_repeat("%s_", count(this._config["groups"]));
         }
-        if (!is_numeric(this._config['duration'])) {
-            this._config['duration'] = strtotime(this._config['duration']) - time();
+        if (!is_numeric(this._config["duration"])) {
+            this._config["duration"] = strtotime(this._config["duration"]) - time();
         }
 
         return true;
@@ -80,10 +80,9 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return void
      * @throws \Cake\Cache\InvalidArgumentException When the key is not valid.
      */
-    protected auto ensureValidKey(myKey): void
-    {
+    protected void ensureValidKey(myKey) {
         if (!is_string(myKey) || strlen(myKey) === 0) {
-            throw new InvalidArgumentException('A cache key must be a non-empty string.');
+            throw new InvalidArgumentException("A cache key must be a non-empty string.");
         }
     }
 
@@ -95,12 +94,11 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return void
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    protected auto ensureValidType($iterable, string $check = self::CHECK_VALUE): void
-    {
+    protected void ensureValidType($iterable, string $check = self::CHECK_VALUE) {
         if (!is_iterable($iterable)) {
             throw new InvalidArgumentException(sprintf(
-                'A cache %s must be either an array or a Traversable.',
-                $check === self::CHECK_VALUE ? 'key set' : 'set'
+                "A cache %s must be either an array or a Traversable.",
+                $check === self::CHECK_VALUE ? "key set" : "set"
             ));
         }
 
@@ -149,8 +147,8 @@ abstract class CacheEngine : ICache, ICacheEngine
         this.ensureValidType(myValues, self::CHECK_KEY);
 
         if ($ttl !== null) {
-            $restore = this.getConfig('duration');
-            this.setConfig('duration', $ttl);
+            $restore = this.getConfig("duration");
+            this.setConfig("duration", $ttl);
         }
         try {
             foreach (myValues as myKey => myValue) {
@@ -163,7 +161,7 @@ abstract class CacheEngine : ICache, ICacheEngine
             return true;
         } finally {
             if (isset($restore)) {
-                this.setConfig('duration', $restore);
+                this.setConfig("duration", $restore);
             }
         }
     }
@@ -251,7 +249,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Delete a key from the cache
      *
      * @param string myKey Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     abstract bool delete(myKey);
 
@@ -300,7 +298,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      */
     function groups(): array
     {
-        return this._config['groups'];
+        return this._config["groups"];
     }
 
     /**
@@ -311,19 +309,18 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @param string myKey the key passed over
      * @return string Prefixed key with potentially unsafe characters replaced.
-     * @throws \Cake\Cache\InvalidArgumentException If key's value is invalid.
+     * @throws \Cake\Cache\InvalidArgumentException If key"s value is invalid.
      */
-    protected auto _key(myKey): string
-    {
+    protected string _key(myKey) {
         this.ensureValidKey(myKey);
 
-        $prefix = '';
+        $prefix = "";
         if (this._groupPrefix) {
-            $prefix = md5(implode('_', this.groups()));
+            $prefix = md5(implode("_", this.groups()));
         }
-        myKey = preg_replace('/[\s]+/', '_', myKey);
+        myKey = preg_replace("/[\s]+/", "_", myKey);
 
-        return this._config['prefix'] . $prefix . myKey;
+        return this._config["prefix"] . $prefix . myKey;
     }
 
     /**
@@ -333,9 +330,8 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string myMessage The warning message.
      * @return void
      */
-    protected auto warning(string myMessage): void
-    {
-        if (this.getConfig('warnOnWriteFailures') !== true) {
+    protected void warning(string myMessage) {
+        if (this.getConfig("warnOnWriteFailures") !== true) {
             return;
         }
 
@@ -346,21 +342,21 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Convert the various expressions of a TTL value into duration in seconds
      *
      * @param \DateInterval|int|null $ttl The TTL value of this item. If null is sent, the
-     *   driver's default duration will be used.
+     *   driver"s default duration will be used.
      * @return int
      */
     protected auto duration($ttl): int
     {
         if ($ttl === null) {
-            return this._config['duration'];
+            return this._config["duration"];
         }
         if (is_int($ttl)) {
             return $ttl;
         }
         if ($ttl instanceof DateInterval) {
-            return (int)$ttl.format('%s');
+            return (int)$ttl.format("%s");
         }
 
-        throw new InvalidArgumentException('TTL values must be one of null, int, \DateInterval');
+        throw new InvalidArgumentException("TTL values must be one of null, int, \DateInterval");
     }
 }

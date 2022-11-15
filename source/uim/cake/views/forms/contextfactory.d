@@ -9,8 +9,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeews.forms;
 
-import uim.cakellections\Collection;
-import uim.caketasources\IEntity;
+import uim.cake.collections\Collection;
+import uim.cake.datasources\IEntity;
 import uim.cakerms\Form;
 import uim.caketps\ServerRequest;
 use RuntimeException;

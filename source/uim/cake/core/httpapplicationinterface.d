@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 import uim.caketps\MiddlewareQueue;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -16,7 +16,7 @@ interface HttpApplicationInterface : RequestHandlerInterface
      *
      * @return void
      */
-    function bootstrap(): void;
+    void bootstrap();
 
     /**
      * Define the HTTP middleware layers for an application.

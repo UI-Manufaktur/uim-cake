@@ -1,4 +1,4 @@
-module uim.cakensole;
+module uim.cake.console;
 
 use ArrayIterator;
 use Countable;
@@ -48,13 +48,13 @@ class CommandCollection : IteratorAggregate, Countable
         if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, ICommand::class)) {
             myClass = is_string($command) ? $command : get_class($command);
             throw new InvalidArgumentException(sprintf(
-                "Cannot use '%s' for command '%s'. " .
+                "Cannot use "%s" for command "%s". " .
                 "It is not a subclass of Cake\Console\Shell or Cake\Command\Command.",
                 myClass,
                 myName
             ));
         }
-        if (!preg_match('/^[^\s]+(?:(?: [^\s]+){1,2})?$/ui', myName)) {
+        if (!preg_match("/^[^\s]+(?:(?: [^\s]+){1,2})?$/ui", myName)) {
             throw new InvalidArgumentException(
                 "The command name `{myName}` is invalid. Names can only be a maximum of three words."
             );
@@ -168,19 +168,19 @@ class CommandCollection : IteratorAggregate, Countable
     {
         $out = [];
         foreach ($input as $info) {
-            myName = $info['name'];
-            $addLong = myName !== $info['fullName'];
+            myName = $info["name"];
+            $addLong = myName !== $info["fullName"];
 
             // If the short name has been used, use the full name.
             // This allows app shells to have name preference.
             // and app shells to overwrite core shells.
             if (this.has(myName) && $addLong) {
-                myName = $info['fullName'];
+                myName = $info["fullName"];
             }
 
-            $out[myName] = $info['class'];
+            $out[myName] = $info["class"];
             if ($addLong) {
-                $out[$info['fullName']] = $info['class'];
+                $out[$info["fullName"]] = $info["class"];
             }
         }
 

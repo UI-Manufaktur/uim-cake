@@ -21,7 +21,7 @@ interface IControllerFactory
     function create(IServerRequest myRequest);
 
     /**
-     * Invoke a controller's action and wrapping methods.
+     * Invoke a controller"s action and wrapping methods.
      *
      * @param mixed $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response

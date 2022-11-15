@@ -19,7 +19,7 @@ class Translator
     /**
      * @var string
      */
-    public const PLURAL_PREFIX = 'p:';
+    public const PLURAL_PREFIX = "p:";
 
     /**
      * A fallback translator.
@@ -101,9 +101,8 @@ class Translator
      *   message.
      * @return string The translated message with tokens replaced.
      */
-    function translate(string myKey, array $tokensValues = []): string
-    {
-        if (isset($tokensValues['_count'])) {
+    string translate(string myKey, array $tokensValues = []) {
+        if (isset($tokensValues["_count"])) {
             myMessage = this.getMessage(static::PLURAL_PREFIX . myKey);
             if (!myMessage) {
                 myMessage = this.getMessage(myKey);
@@ -121,28 +120,28 @@ class Translator
         }
 
         // Check for missing/invalid context
-        if (is_array(myMessage) && isset(myMessage['_context'])) {
+        if (is_array(myMessage) && isset(myMessage["_context"])) {
             myMessage = this.resolveContext(myKey, myMessage, $tokensValues);
-            unset($tokensValues['_context']);
+            unset($tokensValues["_context"]);
         }
 
         if (empty($tokensValues)) {
             // Fallback for plurals that were using the singular key
             if (is_array(myMessage)) {
-                return array_values(myMessage + [''])[0];
+                return array_values(myMessage + [""])[0];
             }
 
             return myMessage;
         }
 
         // Singular message, but plural call
-        if (is_string(myMessage) && isset($tokensValues['_singular'])) {
-            myMessage = [$tokensValues['_singular'], myMessage];
+        if (is_string(myMessage) && isset($tokensValues["_singular"])) {
+            myMessage = [$tokensValues["_singular"], myMessage];
         }
 
         // Resolve plural form.
         if (is_array(myMessage)) {
-            myCount = $tokensValues['_count'] ?? 0;
+            myCount = $tokensValues["_count"] ?? 0;
             $form = PluralRules::calculate(this.locale, (int)myCount);
             myMessage = myMessage[$form] ?? (string)end(myMessage);
         }
@@ -151,13 +150,13 @@ class Translator
             myMessage = myKey;
         }
 
-        unset($tokensValues['_count'], $tokensValues['_singular']);
+        unset($tokensValues["_count"], $tokensValues["_singular"]);
 
         return this.formatter.format(this.locale, myMessage, $tokensValues);
     }
 
     /**
-     * Resolve a message's context structure.
+     * Resolve a message"s context structure.
      *
      * @param string myKey The message key being handled.
      * @param array myMessage The message content.
@@ -165,24 +164,24 @@ class Translator
      * @return array|string
      */
     protected auto resolveContext(string myKey, array myMessage, array $vars) {
-        $context = $vars['_context'] ?? null;
+        $context = $vars["_context"] ?? null;
 
         // No or missing context, fallback to the key/first message
         if ($context === null) {
-            if (isset(myMessage['_context'][''])) {
-                return myMessage['_context'][''] == "" ? myKey : myMessage['_context'][''];
+            if (isset(myMessage["_context"][""])) {
+                return myMessage["_context"][""] == "" ? myKey : myMessage["_context"][""];
             }
 
-            return current(myMessage['_context']);
+            return current(myMessage["_context"]);
         }
-        if (!isset(myMessage['_context'][$context])) {
+        if (!isset(myMessage["_context"][$context])) {
             return myKey;
         }
-        if (myMessage['_context'][$context] == "") {
+        if (myMessage["_context"][$context] == "") {
             return myKey;
         }
 
-        return myMessage['_context'][$context];
+        return myMessage["_context"][$context];
     }
 
     /**

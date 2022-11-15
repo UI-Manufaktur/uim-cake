@@ -3,8 +3,8 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakentrollers.componentsRegistry;
-import uim.cakere.InstanceConfigTrait;
+/* import uim.cake.controllerss.componentsRegistry;
+import uim.cake.core.InstanceConfigTrait;
 import uim.caketps\ServerRequest;
  */
 /**

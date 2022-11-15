@@ -17,32 +17,32 @@ The caching backends supported are:
 Caching engines need to be configured with the `Cache::config()` method.
 
 ```php
-import uim.cakeches\Cache;
+import uim.cake.caches\Cache;
 
 // Using a short name
-Cache::config('default', [
-    'className' => 'File',
-    'duration' => '+1 hours',
-    'path' => sys_get_tmp_dir(),
-    'prefix' => 'my_app_'
+Cache::config("default", [
+    "className" => "File",
+    "duration" => "+1 hours",
+    "path" => sys_get_tmp_dir(),
+    "prefix" => "my_app_"
 ]);
 
 // Using a fully moduled name.
-Cache::config('long', [
-    'className' => \Cake\Cache\Engine\ApcuEngine::class,
-    'duration' => '+1 week',
-    'prefix' => 'my_app_'
+Cache::config("long", [
+    "className" => \Cake\Cache\Engine\ApcuEngine::class,
+    "duration" => "+1 week",
+    "prefix" => "my_app_"
 ]);
 
 // Using a constructed object.
 $object = new FileEngine(myConfig);
-Cache::config('other', $object);
+Cache::config("other", $object);
 ```
 
 You can now read and write from the cache:
 
 ```php
-myData = Cache::remember('my_cache_key', function () {
+myData = Cache::remember("my_cache_key", function () {
 	return Service::expensiveCall();
 });
 ```

@@ -1,10 +1,10 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
-import uim.cakere.App;
-import uim.cakere.Plugin;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
+import uim.cake.core.App;
+import uim.cake.core.Plugin;
 import uim.cakeilities.Inflector;
 use DirectoryIterator;
 
@@ -14,7 +14,7 @@ use DirectoryIterator;
 class I18nInitCommand : Command {
 
     static string defaultName() {
-        return 'i18n init';
+        return "i18n init";
     }
 
     /**
@@ -25,23 +25,23 @@ class I18nInitCommand : Command {
      * @return int|null The exit code or null for success
      */
     int execute(Arguments $args, ConsoleIo $io) {
-        auto myLanguage = $args.getArgument('language');
+        auto myLanguage = $args.getArgument("language");
         if (!myLanguage) {
-            myLanguage = $io.ask('Please specify language code, e.g. `en`, `eng`, `en_US` etc.');
+            myLanguage = $io.ask("Please specify language code, e.g. `en`, `eng`, `en_US` etc.");
         }
         if (strlen(myLanguage) < 2) {
-            $io.err('Invalid language code. Valid is `en`, `eng`, `en_US` etc.');
+            $io.err("Invalid language code. Valid is `en`, `eng`, `en_US` etc.");
 
             return static::CODE_ERROR;
         }
 
-        myPaths = App::path('locales');
-        if ($args.hasOption('plugin')) {
-            myPlugin = Inflector::camelize((string)$args.getOption('plugin'));
-            myPaths = [Plugin::path(myPlugin) . 'resources' . DIRECTORY_SEPARATOR . 'locales' . DIRECTORY_SEPARATOR];
+        myPaths = App::path("locales");
+        if ($args.hasOption("plugin")) {
+            myPlugin = Inflector::camelize((string)$args.getOption("plugin"));
+            myPaths = [Plugin::path(myPlugin) . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR];
         }
 
-        $response = $io.ask('What folder?', rtrim(myPaths[0], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+        $response = $io.ask("What folder?", rtrim(myPaths[0], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
         $sourceFolder = rtrim($response, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         myTargetFolder = $sourceFolder . myLanguage . DIRECTORY_SEPARATOR;
         if (!is_dir(myTargetFolder)) {
@@ -55,14 +55,14 @@ class I18nInitCommand : Command {
                 continue;
             }
             myfilename = myfileinfo.getFilename();
-            $newFilename = myfileinfo.getBasename('.pot');
-            $newFilename .= '.po';
+            $newFilename = myfileinfo.getBasename(".pot");
+            $newFilename .= ".po";
 
             $io.createFile(myTargetFolder . $newFilename, file_get_contents($sourceFolder . myfilename));
             myCount++;
         }
 
-        $io.out('Generated ' . myCount . ' PO files in ' . myTargetFolder);
+        $io.out("Generated " . myCount . " PO files in " . myTargetFolder);
 
         return static::CODE_SUCCESS;
     }
@@ -75,13 +75,13 @@ class I18nInitCommand : Command {
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser.setDescription('Initialize a language PO file from the POT file')
-           .addOption('plugin', [
-               'help' => 'The plugin to create a PO file in.',
-               'short' => 'p',
+        $parser.setDescription("Initialize a language PO file from the POT file")
+           .addOption("plugin", [
+               "help" => "The plugin to create a PO file in.",
+               "short" => "p",
            ])
-           .addArgument('language', [
-               'help' => 'Two-letter language code to create PO files for.',
+           .addArgument("language", [
+               "help" => "Two-letter language code to create PO files for.",
            ]);
 
         return $parser;

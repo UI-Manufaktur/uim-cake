@@ -25,7 +25,7 @@ class Filesystem
      *
      * @var string
      */
-    public const TYPE_DIR = 'dir';
+    public const TYPE_DIR = "dir";
 
     /**
      * Find files / directories (non-recursively) in given directory path.
@@ -70,7 +70,7 @@ class Filesystem
         $dirFilter = new RecursiveCallbackFilterIterator(
             $directory,
             function (SplFileInfo $current) {
-                if ($current.getFilename()[0] === '.' && $current.isDir()) {
+                if ($current.getFilename()[0] === "." && $current.isDir()) {
                     return false;
                 }
 
@@ -132,7 +132,7 @@ class Filesystem
         }
 
         if ($success === false) {
-            throw new CakeException(sprintf('Failed dumping content to file `%s`', $dir));
+            throw new CakeException(sprintf("Failed dumping content to file `%s`", $dir));
         }
 
         if (!$exists) {
@@ -158,14 +158,14 @@ class Filesystem
         // phpcs:ignore
         if (@mkdir($dir, myMode, true) === false) {
             umask($old);
-            throw new CakeException(sprintf('Failed to create directory "%s"', $dir));
+            throw new CakeException(sprintf("Failed to create directory "%s"", $dir));
         }
 
         umask($old);
     }
 
     /**
-     * Delete directory along with all it's contents.
+     * Delete directory along with all it"s contents.
      *
      * @param string myPath Directory path.
      * @return bool
@@ -177,7 +177,7 @@ class Filesystem
         }
 
         if (!is_dir(myPath)) {
-            throw new CakeException(sprintf('"%s" is not a directory', myPath));
+            throw new CakeException(sprintf(""%s" is not a directory", myPath));
         }
 
         $iterator = new RecursiveIteratorIterator(
@@ -187,7 +187,7 @@ class Filesystem
 
         myResult = true;
         foreach ($iterator as myfileInfo) {
-            $isWindowsLink = DIRECTORY_SEPARATOR === '\\' && myfileInfo.getType() === 'link';
+            $isWindowsLink = DIRECTORY_SEPARATOR === "\\" && myfileInfo.getType() === "link";
             if (myfileInfo.getType() === self::TYPE_DIR || $isWindowsLink) {
                 // phpcs:ignore
                 myResult = myResult && @rmdir(myfileInfo.getPathname());
@@ -212,7 +212,7 @@ class Filesystem
     }
 
     /**
-     * Copies directory with all it's contents.
+     * Copies directory with all it"s contents.
      *
      * @param string $source Source path.
      * @param string $destination Destination path.
@@ -253,6 +253,6 @@ class Filesystem
      * @return bool
      */
     bool isStream(string myPath) {
-        return strpos(myPath, '://') !== false;
+        return strpos(myPath, "://") !== false;
     }
 }

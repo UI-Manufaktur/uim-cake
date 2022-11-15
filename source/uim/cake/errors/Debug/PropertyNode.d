@@ -43,23 +43,15 @@ class PropertyNode : INode
         return this.value;
     }
 
-    /**
-     * Get the property visibility
-     */
+    // Get the property visibility
     string getVisibility() {
         return this.visibility;
     }
 
-    /**
-     * Get the property name
-     *
-     * @return string
-     */
-    auto getName(): string
-    {
+    // Get the property name
+    string getName() {
         return this.name;
     }
-
 
     auto getChildren(): array
     {

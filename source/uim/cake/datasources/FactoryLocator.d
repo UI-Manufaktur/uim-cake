@@ -1,6 +1,6 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
-import uim.caketasources\Locator\ILocator;
+import uim.cake.datasources\Locator\ILocator;
 import uim.cakem.Locator\TableLocator;
 use InvalidArgumentException;
 
@@ -26,8 +26,8 @@ class FactoryLocator
     static void add(string myType, $factory) {
         if (!$factory instanceof ILocator && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
-                '`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable.'
-                . ' Got type `%s` instead.',
+                "`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable."
+                . " Got type `%s` instead.",
                 getTypeName($factory)
             ));
         }
@@ -53,13 +53,13 @@ class FactoryLocator
      * @return \Cake\Datasource\Locator\ILocator|callable The factory for the repository type.
      */
     static auto get(string myType) {
-        if (!isset(static::$_modelFactories['Table'])) {
-            static::$_modelFactories['Table'] = new TableLocator();
+        if (!isset(static::$_modelFactories["Table"])) {
+            static::$_modelFactories["Table"] = new TableLocator();
         }
 
         if (!isset(static::$_modelFactories[myType])) {
             throw new InvalidArgumentException(sprintf(
-                'Unknown repository type "%s". Make sure you register a type before trying to use it.',
+                "Unknown repository type "%s". Make sure you register a type before trying to use it.",
                 myType
             ));
         }

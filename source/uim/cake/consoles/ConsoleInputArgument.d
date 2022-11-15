@@ -1,6 +1,6 @@
-module uim.cakensole;
+module uim.cake.console;
 
-import uim.cakensole.Exception\ConsoleException;
+import uim.cake.console.Exception\ConsoleException;
 use SimpleXMLElement;
 
 /**
@@ -47,10 +47,10 @@ class ConsoleInputArgument
      * @param bool $required Whether this argument is required. Missing required args will trigger exceptions
      * @param array<string> $choices Valid choices for this option.
      */
-    this(myName, $help = '', $required = false, $choices = []) {
-        if (is_array(myName) && isset(myName['name'])) {
+    this(myName, $help = "", $required = false, $choices = []) {
+        if (is_array(myName) && isset(myName["name"])) {
             foreach (myName as myKey => myValue) {
-                this.{'_' . myKey} = myValue;
+                this.{"_" . myKey} = myValue;
             }
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
@@ -87,17 +87,17 @@ class ConsoleInputArgument
     string help(int $width = 0) {
         myName = this._name;
         if (strlen(myName) < $width) {
-            myName = str_pad(myName, $width, ' ');
+            myName = str_pad(myName, $width, " ");
         }
-        $optional = '';
+        $optional = "";
         if (!this.isRequired()) {
-            $optional = ' <comment>(optional)</comment>';
+            $optional = " <comment>(optional)</comment>";
         }
         if (this._choices) {
-            $optional .= sprintf(' <comment>(choices: %s)</comment>', implode('|', this._choices));
+            $optional .= sprintf(" <comment>(choices: %s)</comment>", implode("|", this._choices));
         }
 
-        return sprintf('%s%s%s', myName, this._help, $optional);
+        return sprintf("%s%s%s", myName, this._help, $optional);
     }
 
     /**
@@ -106,11 +106,11 @@ class ConsoleInputArgument
     string usage() {
         myName = this._name;
         if (this._choices) {
-            myName = implode('|', this._choices);
+            myName = implode("|", this._choices);
         }
-        myName = '<' . myName . '>';
+        myName = "<" . myName . ">";
         if (!this.isRequired()) {
-            myName = '[' . myName . ']';
+            myName = "[" . myName . "]";
         }
 
         return myName;
@@ -136,10 +136,10 @@ class ConsoleInputArgument
         if (!in_array(myValue, this._choices, true)) {
             throw new ConsoleException(
                 sprintf(
-                    '"%s" is not a valid value for %s. Please use one of "%s"',
+                    ""%s" is not a valid value for %s. Please use one of "%s"",
                     myValue,
                     this._name,
-                    implode(', ', this._choices)
+                    implode(", ", this._choices)
                 )
             );
         }
@@ -155,13 +155,13 @@ class ConsoleInputArgument
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $option = $parent.addChild('argument');
-        $option.addAttribute('name', this._name);
-        $option.addAttribute('help', this._help);
-        $option.addAttribute('required', (string)(int)this.isRequired());
-        $choices = $option.addChild('choices');
+        $option = $parent.addChild("argument");
+        $option.addAttribute("name", this._name);
+        $option.addAttribute("help", this._help);
+        $option.addAttribute("required", (string)(int)this.isRequired());
+        $choices = $option.addChild("choices");
         foreach (this._choices as $valid) {
-            $choices.addChild('choice', $valid);
+            $choices.addChild("choice", $valid);
         }
 
         return $parent;

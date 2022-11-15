@@ -1,11 +1,11 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
-import uim.cakere.App;
-import uim.cakere.Configure;
-import uim.cakere.Plugin;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 import uim.cakelesystem\Filesystem;
 import uim.cakeility\Inflector;
 
@@ -17,7 +17,7 @@ class I18nExtractCommand : Command {
      * @inheritDoc
      */
     static string defaultName() {
-        return 'i18n extract';
+        return "i18n extract";
     }
 
     /**
@@ -46,7 +46,7 @@ class I18nExtractCommand : Command {
      *
      * @var string
      */
-    protected $_file = '';
+    protected $_file = "";
 
     /**
      * Contains all content waiting to be written
@@ -74,7 +74,7 @@ class I18nExtractCommand : Command {
      *
      * @var string
      */
-    protected $_output = '';
+    protected $_output = "";
 
     /**
      * An array of directories to exclude.
@@ -110,40 +110,39 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The io instance.
      * @return void
      */
-    protected auto _getPaths(ConsoleIo $io): void
-    {
+    protected void _getPaths(ConsoleIo $io) {
         /** @psalm-suppress UndefinedConstant */
         $defaultPaths = array_merge(
             [APP],
-            App::path('templates'),
-            ['D'] // This is required to break the loop below
+            App::path("templates"),
+            ["D"] // This is required to break the loop below
         );
         $defaultPathIndex = 0;
         while (true) {
-            $currentPaths = count(this._paths) > 0 ? this._paths : ['None'];
+            $currentPaths = count(this._paths) > 0 ? this._paths : ["None"];
             myMessage = sprintf(
                 "Current paths: %s\nWhat is the path you would like to extract?\n[Q]uit [D]one",
-                implode(', ', $currentPaths)
+                implode(", ", $currentPaths)
             );
-            $response = $io.ask(myMessage, $defaultPaths[$defaultPathIndex] ?? 'D');
-            if (strtoupper($response) === 'Q') {
-                $io.err('Extract Aborted');
+            $response = $io.ask(myMessage, $defaultPaths[$defaultPathIndex] ?? "D");
+            if (strtoupper($response) === "Q") {
+                $io.err("Extract Aborted");
                 this.abort();
 
                 return;
             }
-            if (strtoupper($response) === 'D' && count(this._paths)) {
+            if (strtoupper($response) === "D" && count(this._paths)) {
                 $io.out();
 
                 return;
             }
-            if (strtoupper($response) === 'D') {
-                $io.warning('No directories selected. Please choose a directory.');
+            if (strtoupper($response) === "D") {
+                $io.warning("No directories selected. Please choose a directory.");
             } elseif (is_dir($response)) {
                 this._paths[] = $response;
                 $defaultPathIndex++;
             } else {
-                $io.err('The directory path you supplied was not found. Please try again.');
+                $io.err("The directory path you supplied was not found. Please try again.");
             }
             $io.out();
         }
@@ -158,60 +157,60 @@ class I18nExtractCommand : Command {
      */
     auto execute(Arguments $args, ConsoleIo $io): Nullable!int
     {
-        myPlugin = '';
-        if ($args.getOption('exclude')) {
-            this._exclude = explode(',', (string)$args.getOption('exclude'));
+        myPlugin = "";
+        if ($args.getOption("exclude")) {
+            this._exclude = explode(",", (string)$args.getOption("exclude"));
         }
-        if ($args.getOption('files')) {
-            this._files = explode(',', (string)$args.getOption('files'));
+        if ($args.getOption("files")) {
+            this._files = explode(",", (string)$args.getOption("files"));
         }
-        if ($args.getOption('paths')) {
-            this._paths = explode(',', (string)$args.getOption('paths'));
-        } elseif ($args.getOption('plugin')) {
-            myPlugin = Inflector::camelize((string)$args.getOption('plugin'));
+        if ($args.getOption("paths")) {
+            this._paths = explode(",", (string)$args.getOption("paths"));
+        } elseif ($args.getOption("plugin")) {
+            myPlugin = Inflector::camelize((string)$args.getOption("plugin"));
             this._paths = [Plugin::classPath(myPlugin), Plugin::templatePath(myPlugin)];
         } else {
             this._getPaths($io);
         }
 
-        if ($args.hasOption('extract-core')) {
-            this._extractCore = !(strtolower((string)$args.getOption('extract-core')) === 'no');
+        if ($args.hasOption("extract-core")) {
+            this._extractCore = !(strtolower((string)$args.getOption("extract-core")) === "no");
         } else {
             $response = $io.askChoice(
-                'Would you like to extract the messages from the CakePHP core?',
-                ['y', 'n'],
-                'n'
+                "Would you like to extract the messages from the CakePHP core?",
+                ["y", "n"],
+                "n"
             );
-            this._extractCore = strtolower($response) === 'y';
+            this._extractCore = strtolower($response) === "y";
         }
 
-        if ($args.hasOption('exclude-plugins') && this._isExtractingApp()) {
-            this._exclude = array_merge(this._exclude, App::path('plugins'));
+        if ($args.hasOption("exclude-plugins") && this._isExtractingApp()) {
+            this._exclude = array_merge(this._exclude, App::path("plugins"));
         }
 
         if (this._extractCore) {
             this._paths[] = CAKE;
         }
 
-        if ($args.hasOption('output')) {
-            this._output = (string)$args.getOption('output');
-        } elseif ($args.hasOption('plugin')) {
+        if ($args.hasOption("output")) {
+            this._output = (string)$args.getOption("output");
+        } elseif ($args.hasOption("plugin")) {
             this._output = Plugin::path(myPlugin)
-                . 'resources' . DIRECTORY_SEPARATOR
-                . 'locales' . DIRECTORY_SEPARATOR;
+                . "resources" . DIRECTORY_SEPARATOR
+                . "locales" . DIRECTORY_SEPARATOR;
         } else {
             myMessage = "What is the path you would like to output?\n[Q]uit";
-            $localePaths = App::path('locales');
+            $localePaths = App::path("locales");
             if (!$localePaths) {
-                $localePaths[] = ROOT . 'resources' . DIRECTORY_SEPARATOR . 'locales';
+                $localePaths[] = ROOT . "resources" . DIRECTORY_SEPARATOR . "locales";
             }
             while (true) {
                 $response = $io.ask(
                     myMessage,
                     $localePaths[0]
                 );
-                if (strtoupper($response) === 'Q') {
-                    $io.err('Extract Aborted');
+                if (strtoupper($response) === "Q") {
+                    $io.err("Extract Aborted");
 
                     return static::CODE_ERROR;
                 }
@@ -220,28 +219,28 @@ class I18nExtractCommand : Command {
                     break;
                 }
 
-                $io.err('');
+                $io.err("");
                 $io.err(
-                    '<error>The directory path you supplied was ' .
-                    'not found. Please try again.</error>'
+                    "<error>The directory path you supplied was " .
+                    "not found. Please try again.</error>"
                 );
-                $io.err('');
+                $io.err("");
             }
         }
 
-        if ($args.hasOption('merge')) {
-            this._merge = !(strtolower((string)$args.getOption('merge')) === 'no');
+        if ($args.hasOption("merge")) {
+            this._merge = !(strtolower((string)$args.getOption("merge")) === "no");
         } else {
             $io.out();
             $response = $io.askChoice(
-                'Would you like to merge all domain strings into the default.pot file?',
-                ['y', 'n'],
-                'n'
+                "Would you like to merge all domain strings into the default.pot file?",
+                ["y", "n"],
+                "n"
             );
-            this._merge = strtolower($response) === 'y';
+            this._merge = strtolower($response) === "y";
         }
 
-        this._markerError = (bool)$args.getOption('marker-error');
+        this._markerError = (bool)$args.getOption("marker-error");
 
         if (empty(this._files)) {
             this._searchFiles();
@@ -249,7 +248,7 @@ class I18nExtractCommand : Command {
 
         this._output = rtrim(this._output, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         if (!this._isPathUsable(this._output)) {
-            $io.err(sprintf('The output directory %s was not found or writable.', this._output));
+            $io.err(sprintf("The output directory %s was not found or writable.", this._output));
 
             return static::CODE_ERROR;
         }
@@ -269,23 +268,22 @@ class I18nExtractCommand : Command {
      * @param array $details Context and plural form if any, file and line references
      * @return void
      */
-    protected auto _addTranslation(string $domain, string $msgid, array $details = []): void
-    {
-        $context = $details['msgctxt'] ?? '';
+    protected void _addTranslation(string $domain, string $msgid, array $details = []) {
+        $context = $details["msgctxt"] ?? "";
 
         if (empty(this._translations[$domain][$msgid][$context])) {
             this._translations[$domain][$msgid][$context] = [
-                'msgid_plural' => false,
+                "msgid_plural" => false,
             ];
         }
 
-        if (isset($details['msgid_plural'])) {
-            this._translations[$domain][$msgid][$context]['msgid_plural'] = $details['msgid_plural'];
+        if (isset($details["msgid_plural"])) {
+            this._translations[$domain][$msgid][$context]["msgid_plural"] = $details["msgid_plural"];
         }
 
-        if (isset($details['file'])) {
-            $line = $details['line'] ?? 0;
-            this._translations[$domain][$msgid][$context]['references'][$details['file']][] = $line;
+        if (isset($details["file"])) {
+            $line = $details["line"] ?? 0;
+            this._translations[$domain][$msgid][$context]["references"][$details["file"]][] = $line;
         }
     }
 
@@ -296,17 +294,16 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The io instance
      * @return void
      */
-    protected auto _extract(Arguments $args, ConsoleIo $io): void
-    {
+    protected void _extract(Arguments $args, ConsoleIo $io) {
         $io.out();
         $io.out();
-        $io.out('Extracting...');
+        $io.out("Extracting...");
         $io.hr();
-        $io.out('Paths:');
+        $io.out("Paths:");
         foreach (this._paths as myPath) {
-            $io.out('   ' . myPath);
+            $io.out("   " . myPath);
         }
-        $io.out('Output Directory: ' . this._output);
+        $io.out("Output Directory: " . this._output);
         $io.hr();
         this._extractTokens($args, $io);
         this._buildFiles($args);
@@ -316,10 +313,10 @@ class I18nExtractCommand : Command {
         $io.out();
         if (this._countMarkerError) {
             $io.err("{this._countMarkerError} marker error(s) detected.");
-            $io.err(' => Use the --marker-error option to display errors.');
+            $io.err(" => Use the --marker-error option to display errors.");
         }
 
-        $io.out('Done.');
+        $io.out("Done.");
     }
 
     /**
@@ -331,47 +328,47 @@ class I18nExtractCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Extract i18n POT files from application source files. ' .
-            'Source files are parsed and string literal format strings ' .
-            'provided to the <info>__</info> family of functions are extracted.'
-        ).addOption('app', [
-            'help' => 'Directory where your application is located.',
-        ]).addOption('paths', [
-            'help' => 'Comma separated list of paths that are searched for source files.',
-        ]).addOption('merge', [
-            'help' => 'Merge all domain strings into a single default.po file.',
-            'default' => 'no',
-            'choices' => ['yes', 'no'],
-        ]).addOption('output', [
-            'help' => 'Full path to output directory.',
-        ]).addOption('files', [
-            'help' => 'Comma separated list of files to parse.',
-        ]).addOption('exclude-plugins', [
-            'boolean' => true,
-            'default' => true,
-            'help' => 'Ignores all files in plugins if this command is run inside from the same app directory.',
-        ]).addOption('plugin', [
-            'help' => 'Extracts tokens only from the plugin specified and '
-                . 'puts the result in the plugin\'s `locales` directory.',
-            'short' => 'p',
-        ]).addOption('exclude', [
-            'help' => 'Comma separated list of directories to exclude.' .
-                ' Any path containing a path segment with the provided values will be skipped. E.g. test,vendors',
-        ]).addOption('overwrite', [
-            'boolean' => true,
-            'default' => false,
-            'help' => 'Always overwrite existing .pot files.',
-        ]).addOption('extract-core', [
-            'help' => 'Extract messages from the CakePHP core libraries.',
-            'choices' => ['yes', 'no'],
-        ]).addOption('no-location', [
-            'boolean' => true,
-            'default' => false,
-            'help' => 'Do not write file locations for each extracted message.',
-        ]).addOption('marker-error', [
-            'boolean' => true,
-            'default' => false,
-            'help' => 'Do not display marker error.',
+            "Extract i18n POT files from application source files. " .
+            "Source files are parsed and string literal format strings " .
+            "provided to the <info>__</info> family of functions are extracted."
+        ).addOption("app", [
+            "help" => "Directory where your application is located.",
+        ]).addOption("paths", [
+            "help" => "Comma separated list of paths that are searched for source files.",
+        ]).addOption("merge", [
+            "help" => "Merge all domain strings into a single default.po file.",
+            "default" => "no",
+            "choices" => ["yes", "no"],
+        ]).addOption("output", [
+            "help" => "Full path to output directory.",
+        ]).addOption("files", [
+            "help" => "Comma separated list of files to parse.",
+        ]).addOption("exclude-plugins", [
+            "boolean" => true,
+            "default" => true,
+            "help" => "Ignores all files in plugins if this command is run inside from the same app directory.",
+        ]).addOption("plugin", [
+            "help" => "Extracts tokens only from the plugin specified and "
+                . "puts the result in the plugin\"s `locales` directory.",
+            "short" => "p",
+        ]).addOption("exclude", [
+            "help" => "Comma separated list of directories to exclude." .
+                " Any path containing a path segment with the provided values will be skipped. E.g. test,vendors",
+        ]).addOption("overwrite", [
+            "boolean" => true,
+            "default" => false,
+            "help" => "Always overwrite existing .pot files.",
+        ]).addOption("extract-core", [
+            "help" => "Extract messages from the CakePHP core libraries.",
+            "choices" => ["yes", "no"],
+        ]).addOption("no-location", [
+            "boolean" => true,
+            "default" => false,
+            "help" => "Do not write file locations for each extracted message.",
+        ]).addOption("marker-error", [
+            "boolean" => true,
+            "default" => false,
+            "help" => "Do not display marker error.",
         ]);
 
         return $parser;
@@ -384,29 +381,28 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The io instance
      * @return void
      */
-    protected auto _extractTokens(Arguments $args, ConsoleIo $io): void
-    {
+    protected void _extractTokens(Arguments $args, ConsoleIo $io) {
         /** @var \Cake\Shell\Helper\ProgressHelper $progress */
-        $progress = $io.helper('progress');
-        $progress.init(['total' => count(this._files)]);
-        $isVerbose = $args.getOption('verbose');
+        $progress = $io.helper("progress");
+        $progress.init(["total" => count(this._files)]);
+        $isVerbose = $args.getOption("verbose");
 
         $functions = [
-            '__' => ['singular'],
-            '__n' => ['singular', 'plural'],
-            '__d' => ['domain', 'singular'],
-            '__dn' => ['domain', 'singular', 'plural'],
-            '__x' => ['context', 'singular'],
-            '__xn' => ['context', 'singular', 'plural'],
-            '__dx' => ['domain', 'context', 'singular'],
-            '__dxn' => ['domain', 'context', 'singular', 'plural'],
+            "__" => ["singular"],
+            "__n" => ["singular", "plural"],
+            "__d" => ["domain", "singular"],
+            "__dn" => ["domain", "singular", "plural"],
+            "__x" => ["context", "singular"],
+            "__xn" => ["context", "singular", "plural"],
+            "__dx" => ["domain", "context", "singular"],
+            "__dxn" => ["domain", "context", "singular", "plural"],
         ];
-        $pattern = '/(' . implode('|', array_keys($functions)) . ')\s*\(/';
+        $pattern = "/(" . implode("|", array_keys($functions)) . ")\s*\(/";
 
         foreach (this._files as myfile) {
             this._file = myfile;
             if ($isVerbose) {
-                $io.verbose(sprintf('Processing %s...', myfile));
+                $io.verbose(sprintf("Processing %s...", myfile));
             }
 
             $code = file_get_contents(myfile);
@@ -438,12 +434,11 @@ class I18nExtractCommand : Command {
      * Parse tokens
      *
      * @param \Cake\Console\ConsoleIo $io The io instance
-     * @param string $functionName Function name that indicates translatable string (e.g: '__')
+     * @param string $functionName Function name that indicates translatable string (e.g: "__")
      * @param array $map Array containing what variables it will find (e.g: domain, singular, plural)
      * @return void
      */
-    protected auto _parse(ConsoleIo $io, string $functionName, array $map): void
-    {
+    protected void _parse(ConsoleIo $io, string $functionName, array $map) {
         myCount = 0;
         $tokenCount = count(this._tokens);
 
@@ -456,14 +451,14 @@ class I18nExtractCommand : Command {
             }
 
             [myType, $string, $line] = myCountToken;
-            if ((myType === T_STRING) && ($string === $functionName) && ($firstParenthesis === '(')) {
+            if ((myType === T_STRING) && ($string === $functionName) && ($firstParenthesis === "(")) {
                 $position = myCount;
                 $depth = 0;
 
                 while (!$depth) {
-                    if (this._tokens[$position] === '(') {
+                    if (this._tokens[$position] === "(") {
                         $depth++;
-                    } elseif (this._tokens[$position] === ')') {
+                    } elseif (this._tokens[$position] === ")") {
                         $depth--;
                     }
                     $position++;
@@ -473,21 +468,21 @@ class I18nExtractCommand : Command {
                 $strings = this._getStrings($position, $mapCount);
 
                 if ($mapCount === count($strings)) {
-                    $singular = '';
+                    $singular = "";
                     $plural = $context = null;
                     $vars = array_combine($map, $strings);
                     extract($vars);
-                    $domain = $domain ?? 'default';
+                    $domain = $domain ?? "default";
                     $details = [
-                        'file' => this._file,
-                        'line' => $line,
+                        "file" => this._file,
+                        "line" => $line,
                     ];
-                    $details['file'] = '.' . str_replace(ROOT, '', $details['file']);
+                    $details["file"] = "." . str_replace(ROOT, "", $details["file"]);
                     if ($plural !== null) {
-                        $details['msgid_plural'] = $plural;
+                        $details["msgid_plural"] = $plural;
                     }
                     if ($context !== null) {
-                        $details['msgctxt'] = $context;
+                        $details["msgctxt"] = $context;
                     }
                     this._addTranslation($domain, $singular, $details);
                 } else {
@@ -504,8 +499,7 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\Arguments $args Console arguments
      * @return void
      */
-    protected auto _buildFiles(Arguments $args): void
-    {
+    protected void _buildFiles(Arguments $args) {
         myPaths = this._paths;
         /** @psalm-suppress UndefinedConstant */
         myPaths[] = realpath(APP) . DIRECTORY_SEPARATOR;
@@ -517,27 +511,27 @@ class I18nExtractCommand : Command {
         foreach (this._translations as $domain => $translations) {
             foreach ($translations as $msgid => $contexts) {
                 foreach ($contexts as $context => $details) {
-                    $plural = $details['msgid_plural'];
-                    myfiles = $details['references'];
-                    $header = '';
+                    $plural = $details["msgid_plural"];
+                    myfiles = $details["references"];
+                    $header = "";
 
-                    if (!$args.getOption('no-location')) {
+                    if (!$args.getOption("no-location")) {
                         $occurrences = [];
                         foreach (myfiles as myfile => $lines) {
                             $lines = array_unique($lines);
                             foreach ($lines as $line) {
-                                $occurrences[] = myfile . ':' . $line;
+                                $occurrences[] = myfile . ":" . $line;
                             }
                         }
                         $occurrences = implode("\n#: ", $occurrences);
 
-                        $header = '#: '
-                            . str_replace(DIRECTORY_SEPARATOR, '/', $occurrences)
+                        $header = "#: "
+                            . str_replace(DIRECTORY_SEPARATOR, "/", $occurrences)
                             . "\n";
                     }
 
-                    $sentence = '';
-                    if ($context !== '') {
+                    $sentence = "";
+                    if ($context !== "") {
                         $sentence .= "msgctxt \"{$context}\"\n";
                     }
                     if ($plural === false) {
@@ -550,8 +544,8 @@ class I18nExtractCommand : Command {
                         $sentence .= "msgstr[1] \"\"\n\n";
                     }
 
-                    if ($domain !== 'default' && this._merge) {
-                        this._store('default', $header, $sentence);
+                    if ($domain !== "default" && this._merge) {
+                        this._store("default", $header, $sentence);
                     } else {
                         this._store($domain, $header, $sentence);
                     }
@@ -568,8 +562,7 @@ class I18nExtractCommand : Command {
      * @param string $sentence The sentence to store.
      * @return void
      */
-    protected auto _store(string $domain, string $header, string $sentence): void
-    {
+    protected void _store(string $domain, string $header, string $sentence) {
         this._storage[$domain] = this._storage[$domain] ?? [];
 
         if (!isset(this._storage[$domain][$sentence])) {
@@ -586,11 +579,10 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
      */
-    protected auto _writeFiles(Arguments $args, ConsoleIo $io): void
-    {
+    protected void _writeFiles(Arguments $args, ConsoleIo $io) {
         $io.out();
         $overwriteAll = false;
-        if ($args.getOption('overwrite')) {
+        if ($args.getOption("overwrite")) {
             $overwriteAll = true;
         }
         foreach (this._storage as $domain => $sentences) {
@@ -601,34 +593,34 @@ class I18nExtractCommand : Command {
             }
 
             // Remove vendor prefix if present.
-            $slashPosition = strpos($domain, '/');
+            $slashPosition = strpos($domain, "/");
             if ($slashPosition !== false) {
                 $domain = substr($domain, $slashPosition + 1);
             }
 
-            myfilename = str_replace('/', '_', $domain) . '.pot';
+            myfilename = str_replace("/", "_", $domain) . ".pot";
             $outputPath = this._output . myfilename;
 
             if (this.checkUnchanged($outputPath, $headerLength, $output) === true) {
-                $io.out(myfilename . ' is unchanged. Skipping.');
+                $io.out(myfilename . " is unchanged. Skipping.");
                 continue;
             }
 
-            $response = '';
-            while ($overwriteAll === false && file_exists($outputPath) && strtoupper($response) !== 'Y') {
+            $response = "";
+            while ($overwriteAll === false && file_exists($outputPath) && strtoupper($response) !== "Y") {
                 $io.out();
                 $response = $io.askChoice(
-                    sprintf('Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll', myfilename),
-                    ['y', 'n', 'a'],
-                    'y'
+                    sprintf("Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll", myfilename),
+                    ["y", "n", "a"],
+                    "y"
                 );
-                if (strtoupper($response) === 'N') {
-                    $response = '';
+                if (strtoupper($response) === "N") {
+                    $response = "";
                     while (!$response) {
-                        $response = $io.ask('What would you like to name this file?', 'new_' . myfilename);
+                        $response = $io.ask("What would you like to name this file?", "new_" . myfilename);
                         myfilename = $response;
                     }
-                } elseif (strtoupper($response) === 'A') {
+                } elseif (strtoupper($response) === "A") {
                     $overwriteAll = true;
                 }
             }
@@ -643,9 +635,8 @@ class I18nExtractCommand : Command {
      * @param string $domain Domain
      * @return string Translation template header
      */
-    protected auto _writeHeader(string $domain): string
-    {
-        $projectIdVersion = $domain === 'cake' ? 'CakePHP ' . Configure::version() : 'PROJECT VERSION';
+    protected string _writeHeader(string $domain) {
+        $projectIdVersion = $domain === "cake" ? "CakePHP " . Configure::version() : "PROJECT VERSION";
 
         $output = "# LANGUAGE translation of CakePHP Application\n";
         $output .= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
@@ -653,8 +644,8 @@ class I18nExtractCommand : Command {
         $output .= "#, fuzzy\n";
         $output .= "msgid \"\"\n";
         $output .= "msgstr \"\"\n";
-        $output .= '"Project-Id-Version: ' . $projectIdVersion . "\\n\"\n";
-        $output .= '"POT-Creation-Date: ' . date('Y-m-d H:iO') . "\\n\"\n";
+        $output .= ""Project-Id-Version: " . $projectIdVersion . "\\n\"\n";
+        $output .= ""POT-Creation-Date: " . date("Y-m-d H:iO") . "\\n\"\n";
         $output .= "\"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n\"\n";
         $output .= "\"Last-Translator: NAME <EMAIL@ADDRESS>\\n\"\n";
         $output .= "\"Language-Team: LANGUAGE <EMAIL@ADDRESS>\\n\"\n";
@@ -701,17 +692,17 @@ class I18nExtractCommand : Command {
         myCount = 0;
         while (
             myCount < myTarget
-            && (this._tokens[$position] === ','
+            && (this._tokens[$position] === ","
                 || this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING
                 || this._tokens[$position][0] === T_LNUMBER
             )
         ) {
             myCount = count($strings);
-            if (this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING && this._tokens[$position + 1] === '.') {
-                $string = '';
+            if (this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING && this._tokens[$position + 1] === ".") {
+                $string = "";
                 while (
                     this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING
-                    || this._tokens[$position] === '.'
+                    || this._tokens[$position] === "."
                 ) {
                     if (this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING) {
                         $string .= this._formatString(this._tokens[$position][1]);
@@ -736,14 +727,13 @@ class I18nExtractCommand : Command {
      * @param string $string String to format
      * @return string Formatted string
      */
-    protected auto _formatString(string $string): string
-    {
+    protected string _formatString(string $string) {
         $quote = substr($string, 0, 1);
         $string = substr($string, 1, -1);
-        if ($quote === '"') {
+        if ($quote === """) {
             $string = stripcslashes($string);
         } else {
-            $string = strtr($string, ["\\'" => "'", '\\\\' => '\\']);
+            $string = strtr($string, ["\\"" => """, "\\\\" => "\\"]);
         }
         $string = str_replace("\r\n", "\n", $string);
 
@@ -760,8 +750,7 @@ class I18nExtractCommand : Command {
      * @param int myCount Count
      * @return void
      */
-    protected auto _markerError($io, string myfile, int $line, string $marker, int myCount): void
-    {
+    protected void _markerError($io, string myfile, int $line, string $marker, int myCount) {
         if (strpos(this._file, CAKE_CORE_INCLUDE_PATH) === false) {
             this._countMarkerError++;
         }
@@ -780,11 +769,11 @@ class I18nExtractCommand : Command {
                 $io.err(this._tokens[myCount][1], 0);
             } else {
                 $io.err(this._tokens[myCount], 0);
-                if (this._tokens[myCount] === '(') {
+                if (this._tokens[myCount] === "(") {
                     $parenthesis++;
                 }
 
-                if (this._tokens[myCount] === ')') {
+                if (this._tokens[myCount] === ")") {
                     $parenthesis--;
                 }
             }
@@ -798,24 +787,23 @@ class I18nExtractCommand : Command {
      *
      * @return void
      */
-    protected auto _searchFiles(): void
-    {
+    protected void _searchFiles() {
         $pattern = false;
         if (!empty(this._exclude)) {
             $exclude = [];
             foreach (this._exclude as $e) {
-                if (DIRECTORY_SEPARATOR !== '\\' && $e[0] !== DIRECTORY_SEPARATOR) {
+                if (DIRECTORY_SEPARATOR !== "\\" && $e[0] !== DIRECTORY_SEPARATOR) {
                     $e = DIRECTORY_SEPARATOR . $e;
                 }
-                $exclude[] = preg_quote($e, '/');
+                $exclude[] = preg_quote($e, "/");
             }
-            $pattern = '/' . implode('|', $exclude) . '/';
+            $pattern = "/" . implode("|", $exclude) . "/";
         }
 
         foreach (this._paths as myPath) {
             myPath = realpath(myPath) . DIRECTORY_SEPARATOR;
             $fs = new Filesystem();
-            myfiles = $fs.findRecursive(myPath, '/\.php$/');
+            myfiles = $fs.findRecursive(myPath, "/\.php$/");
             myfiles = array_keys(iterator_to_array(myfiles));
             sort(myfiles);
             if (!empty($pattern)) {

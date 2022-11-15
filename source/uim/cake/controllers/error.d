@@ -1,4 +1,4 @@
-module uim.cakentroller.error;
+module uim.cake.controllers.error;
 
 @safe:
 import uim.cake
@@ -13,7 +13,7 @@ import uim.cake
 class ErrorController : Controller {
   // Initialization hook method.
   void initialize() {
-    this.loadComponent('RequestHandler');
+    this.loadComponent("RequestHandler");
   }
 
   /**
@@ -24,14 +24,14 @@ class ErrorController : Controller {
     */
   function beforeRender(IEvent myEvent) {
     myBuilder = this.viewBuilder();
-    myTemplatePath = 'Error';
+    myTemplatePath = "Error";
 
     if (
-        this.request.getParam('prefix') &&
-        in_array(myBuilder.getTemplate(), ['error400', 'error500'], true)
+        this.request.getParam("prefix") &&
+        in_array(myBuilder.getTemplate(), ["error400", "error500"], true)
     ) {
         $parts = explode(DIRECTORY_SEPARATOR, (string)myBuilder.getTemplatePath(), -1);
-        myTemplatePath = implode(DIRECTORY_SEPARATOR, $parts) . DIRECTORY_SEPARATOR . 'Error';
+        myTemplatePath = implode(DIRECTORY_SEPARATOR, $parts) . DIRECTORY_SEPARATOR . "Error";
     }
 
     myBuilder.setTemplatePath(myTemplatePath);

@@ -1,6 +1,6 @@
-module uim.cakere;
+module uim.cake.core;
 
-import uim.cakensole.commandCollection;
+import uim.cake.console.commandCollection;
 
 /**
  * An interface defining the methods that the
@@ -15,7 +15,7 @@ interface ConsoleApplicationInterface
      *
      * @return void
      */
-    function bootstrap(): void;
+    void bootstrap();
 
     /**
      * Define the console commands for an application.

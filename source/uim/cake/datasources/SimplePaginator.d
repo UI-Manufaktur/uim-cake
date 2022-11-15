@@ -1,4 +1,4 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
 /**
  * Simplified paginator which avoids potentially expensives queries

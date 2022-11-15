@@ -1,8 +1,8 @@
-module uim.cakeches;
+module uim.cake.caches;
 
 use BadMethodCallException;
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 use RuntimeException;
 
 /**
@@ -25,7 +25,7 @@ class CacheRegistry : ObjectRegistry
      */
     protected auto _resolveClassName(string myClass): Nullable!string
     {
-        return App::className(myClass, 'Cache/Engine', 'Engine');
+        return App::className(myClass, "Cache/Engine", "Engine");
     }
 
     /**
@@ -38,9 +38,8 @@ class CacheRegistry : ObjectRegistry
      * @return void
      * @throws \BadMethodCallException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
-    {
-        throw new BadMethodCallException(sprintf('Cache engine %s is not available.', myClass));
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
+        throw new BadMethodCallException(sprintf("Cache engine %s is not available.", myClass));
     }
 
     /**
@@ -52,7 +51,7 @@ class CacheRegistry : ObjectRegistry
      * @param string myAlias The alias of the object.
      * @param array<string, mixed> myConfig An array of settings to use for the cache engine.
      * @return \Cake\Cache\CacheEngine The constructed CacheEngine class.
-     * @throws \RuntimeException when an object doesn't implement the correct interface.
+     * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected auto _create(myClass, string myAlias, array myConfig): CacheEngine
     {
@@ -61,18 +60,18 @@ class CacheRegistry : ObjectRegistry
         } else {
             $instance = new myClass(myConfig);
         }
-        unset(myConfig['className']);
+        unset(myConfig["className"]);
 
         if (!($instance instanceof CacheEngine)) {
             throw new RuntimeException(
-                'Cache engines must import uim.cakeches\CacheEngine as a base class.'
+                "Cache engines must import uim.cake.caches\CacheEngine as a base class."
             );
         }
 
         if (!$instance.init(myConfig)) {
             throw new RuntimeException(
                 sprintf(
-                    'Cache engine %s is not properly configured. Check error log for additional information.',
+                    "Cache engine %s is not properly configured. Check error log for additional information.",
                     get_class($instance)
                 )
             );

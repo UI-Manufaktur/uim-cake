@@ -1,10 +1,10 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
 import uim.cake.databasess.SchemaCache;
-import uim.caketasources\ConnectionManager;
+import uim.cake.datasources\ConnectionManager;
 use RuntimeException;
 
 /**
@@ -17,7 +17,7 @@ class SchemacacheClearCommand : Command {
      * @return string
      */
     static string defaultName() {
-        return 'schema_cache clear';
+        return "schema_cache clear";
     }
 
     /**
@@ -30,7 +30,7 @@ class SchemacacheClearCommand : Command {
     int execute(Arguments $args, ConsoleIo $io) {
         try {
             /** @var \Cake\Database\Connection myConnection */
-            myConnection = ConnectionManager::get((string)$args.getOption('connection'));
+            myConnection = ConnectionManager::get((string)$args.getOption("connection"));
 
             $cache = new SchemaCache(myConnection);
         } catch (RuntimeException $e) {
@@ -38,13 +38,13 @@ class SchemacacheClearCommand : Command {
 
             return static::CODE_ERROR;
         }
-        myTables = $cache.clear($args.getArgument('name'));
+        myTables = $cache.clear($args.getArgument("name"));
 
         foreach (myTables as myTable) {
-            $io.verbose(sprintf('Cleared "%s"', myTable));
+            $io.verbose(sprintf("Cleared "%s"", myTable));
         }
 
-        $io.out('<success>Cache clear complete</success>');
+        $io.out("<success>Cache clear complete</success>");
 
         return static::CODE_SUCCESS;
     }
@@ -58,15 +58,15 @@ class SchemacacheClearCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Clear all metadata caches for the connection. If a ' .
-            'table name is provided, only that table will be removed.'
-        ).addOption('connection', [
-            'help' => 'The connection to build/clear metadata cache data for.',
-            'short' => 'c',
-            'default' => 'default',
-        ]).addArgument('name', [
-            'help' => 'A specific table you want to clear cached data for.',
-            'optional' => true,
+            "Clear all metadata caches for the connection. If a " .
+            "table name is provided, only that table will be removed."
+        ).addOption("connection", [
+            "help" => "The connection to build/clear metadata cache data for.",
+            "short" => "c",
+            "default" => "default",
+        ]).addArgument("name", [
+            "help" => "A specific table you want to clear cached data for.",
+            "optional" => true,
         ]);
 
         return $parser;

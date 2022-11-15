@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 /**
  * Interface for applications that configure and use a dependency injection container.

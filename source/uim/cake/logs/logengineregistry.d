@@ -32,7 +32,7 @@ class LogEngineRegistry : ObjectRegistry
      */
     protected auto _resolveClassName(string myClass): Nullable!string
     {
-        return App::className(myClass, 'Log/Engine', 'Log');
+        return App::className(myClass, "Log/Engine", "Log");
     }
 
     /**
@@ -47,7 +47,7 @@ class LogEngineRegistry : ObjectRegistry
      */
     protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
     {
-        throw new RuntimeException(sprintf('Could not load class %s', myClass));
+        throw new RuntimeException(sprintf("Could not load class %s", myClass));
     }
 
     /**
@@ -59,7 +59,7 @@ class LogEngineRegistry : ObjectRegistry
      * @param string myAlias The alias of the object.
      * @param array<string, mixed> myConfig An array of settings to use for the logger.
      * @return \Psr\Log\LoggerInterface The constructed logger class.
-     * @throws \RuntimeException when an object doesn't implement the correct interface.
+     * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected auto _create(myClass, string myAlias, array myConfig): LoggerInterface
     {
@@ -81,7 +81,7 @@ class LogEngineRegistry : ObjectRegistry
         }
 
         throw new RuntimeException(sprintf(
-            'Loggers must implement %s. Found `%s` instance instead.',
+            "Loggers must implement %s. Found `%s` instance instead.",
             LoggerInterface::class,
             getTypeName($instance)
         ));

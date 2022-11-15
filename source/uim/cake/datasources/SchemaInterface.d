@@ -1,4 +1,4 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
 /**
  * An interface used by TableSchema objects.
@@ -7,10 +7,8 @@ interface SchemaInterface
 {
     /**
      * Get the name of the table.
-     *
-     * @return string
      */
-    function name(): string;
+    string name();
 
     /**
      * Add a column to the table.
@@ -20,7 +18,7 @@ interface SchemaInterface
      * Columns can have several attributes:
      *
      * - `type` The type of the column. This should be
-     *   one of CakePHP's abstract types.
+     *   one of CakePHP"s abstract types.
      * - `length` The length of the column.
      * - `precision` The number of decimal places to store
      *   for float and decimal types.

@@ -3,7 +3,7 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakentrollers.componentsRegistry;
+/* import uim.cake.controllerss.componentsRegistry;
 import uim.caketps\ServerRequest;
 import uim.cakeilities.Security;
  */
@@ -14,13 +14,13 @@ import uim.cakeilities.Security;
  *
  * ### Using Digest auth
  *
- * Load `AuthComponent` in your controller's `initialize()` and add 'Digest' in 'authenticate' key
+ * Load `AuthComponent` in your controller"s `initialize()` and add "Digest" in "authenticate" key
  *
  * ```
- *  this.loadComponent('Auth', [
- *      'authenticate' => ['Digest'],
- *      'storage' => 'Memory',
- *      'unauthorizedRedirect' => false,
+ *  this.loadComponent("Auth", [
+ *      "authenticate" => ["Digest"],
+ *      "storage" => "Memory",
+ *      "unauthorizedRedirect" => false,
  *  ]);
  * ```
  *
@@ -30,7 +30,7 @@ import uim.cakeilities.Security;
  * You should set `unauthorizedRedirect` to `false`. This causes `AuthComponent` to
  * throw a `ForbiddenException` exception instead of redirecting to another page.
  *
- * Since HTTP Digest Authentication is stateless you don't need call `setUser()`
+ * Since HTTP Digest Authentication is stateless you don"t need call `setUser()`
  * in your controller. The user credentials will be checked on each request. If
  * valid credentials are not provided, required authentication headers will be sent
  * by this authentication provider which triggers the login dialog in the browser/client.
@@ -41,11 +41,11 @@ import uim.cakeilities.Security;
  * You can generate this password using `DigestAuthenticate::password()`
  *
  * ```
- * $digestPass = DigestAuthenticate::password(myUsername, myPassword, env('SERVER_NAME'));
+ * $digestPass = DigestAuthenticate::password(myUsername, myPassword, env("SERVER_NAME"));
  * ```
  *
  * If you wish to use digest authentication alongside other authentication methods,
- * it's recommended that you store the digest authentication separately. For
+ * it"s recommended that you store the digest authentication separately. For
  * example `User.digest_pass` could be used for a digest password, while
  * `User.password` would store the password hash for use with other methods like
  * Basic or Form.
@@ -62,9 +62,9 @@ class DigestAuthenticate : BasicAuthenticate
      *
      * - `secret` The secret to use for nonce validation. Defaults to Security::getSalt().
      * - `realm` The realm authentication is for, Defaults to the servername.
-     * - `qop` Defaults to 'auth', no other values are supported at this time.
+     * - `qop` Defaults to "auth", no other values are supported at this time.
      * - `opaque` A string that must be returned unchanged by clients.
-     *    Defaults to `md5(myConfig['realm'])`
+     *    Defaults to `md5(myConfig["realm"])`
      * - `nonceLifetime` The number of seconds that nonces are valid for. Defaults to 300.
      *
      * @param \Cake\Controller\ComponentRegistry $registry The Component registry
@@ -73,11 +73,11 @@ class DigestAuthenticate : BasicAuthenticate
      */
     this(ComponentRegistry $registry, array myConfig = []) {
         this.setConfig([
-            'nonceLifetime' => 300,
-            'secret' => Security::getSalt(),
-            'realm' => null,
-            'qop' => 'auth',
-            'opaque' => null,
+            "nonceLifetime" => 300,
+            "secret" => Security::getSalt(),
+            "realm" => null,
+            "qop" => "auth",
+            "opaque" => null,
         ]);
 
         super.this($registry, myConfig);
@@ -95,26 +95,26 @@ class DigestAuthenticate : BasicAuthenticate
             return false;
         }
 
-        myUser = this._findUser($digest['username']);
+        myUser = this._findUser($digest["username"]);
         if (empty(myUser)) {
             return false;
         }
 
-        if (!this.validNonce($digest['nonce'])) {
+        if (!this.validNonce($digest["nonce"])) {
             return false;
         }
 
-        myField = this._config['fields']['password'];
+        myField = this._config["fields"]["password"];
         myPassword = myUser[myField];
         unset(myUser[myField]);
 
-        myRequestMethod = myRequest.getEnv('ORIGINAL_REQUEST_METHOD') ?: myRequest.getMethod();
+        myRequestMethod = myRequest.getEnv("ORIGINAL_REQUEST_METHOD") ?: myRequest.getMethod();
         $hash = this.generateResponseHash(
             $digest,
             myPassword,
             (string)myRequestMethod
         );
-        if (hash_equals($hash, $digest['response'])) {
+        if (hash_equals($hash, $digest["response"])) {
             return myUser;
         }
 
@@ -129,11 +129,11 @@ class DigestAuthenticate : BasicAuthenticate
      */
     protected auto _getDigest(ServerRequest myRequest): ?array
     {
-        $digest = myRequest.getEnv('PHP_AUTH_DIGEST');
-        if (empty($digest) && function_exists('apache_request_headers')) {
+        $digest = myRequest.getEnv("PHP_AUTH_DIGEST");
+        if (empty($digest) && function_exists("apache_request_headers")) {
             $headers = apache_request_headers();
-            if (!empty($headers['Authorization']) && substr($headers['Authorization'], 0, 7) === 'Digest ') {
-                $digest = substr($headers['Authorization'], 7);
+            if (!empty($headers["Authorization"]) && substr($headers["Authorization"], 0, 7) === "Digest ") {
+                $digest = substr($headers["Authorization"], 7);
             }
         }
         if (empty($digest)) {
@@ -151,12 +151,12 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function parseAuthData(string $digest): ?array
     {
-        if (substr($digest, 0, 7) === 'Digest ') {
+        if (substr($digest, 0, 7) === "Digest ") {
             $digest = substr($digest, 7);
         }
         myKeys = $match = [];
-        $req = ['nonce' => 1, 'nc' => 1, 'cnonce' => 1, 'qop' => 1, 'username' => 1, 'uri' => 1, 'response' => 1];
-        preg_match_all('/(\w+)=([\'"]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/', $digest, $match, PREG_SET_ORDER);
+        $req = ["nonce" => 1, "nc" => 1, "cnonce" => 1, "qop" => 1, "username" => 1, "uri" => 1, "response" => 1];
+        preg_match_all("/(\w+)=([\""]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/", $digest, $match, PREG_SET_ORDER);
 
         foreach ($match as $i) {
             myKeys[$i[1]] = $i[3];
@@ -181,8 +181,8 @@ class DigestAuthenticate : BasicAuthenticate
     string generateResponseHash(array $digest, string myPassword, string $method) {
         return md5(
             myPassword .
-            ':' . $digest['nonce'] . ':' . $digest['nc'] . ':' . $digest['cnonce'] . ':' . $digest['qop'] . ':' .
-            md5($method . ':' . $digest['uri'])
+            ":" . $digest["nonce"] . ":" . $digest["nc"] . ":" . $digest["cnonce"] . ":" . $digest["qop"] . ":" .
+            md5($method . ":" . $digest["uri"])
         );
     }
 
@@ -195,7 +195,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @return string the hashed password that can later be used with Digest authentication.
      */
     static string password(string myUsername, string myPassword, string $realm) {
-        return md5(myUsername . ':' . $realm . ':' . myPassword);
+        return md5(myUsername . ":" . $realm . ":" . myPassword);
     }
 
     /**
@@ -206,32 +206,32 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function loginHeaders(ServerRequest myRequest): array
     {
-        $realm = this._config['realm'] ?: myRequest.getEnv('SERVER_NAME');
+        $realm = this._config["realm"] ?: myRequest.getEnv("SERVER_NAME");
 
         myOptions = [
-            'realm' => $realm,
-            'qop' => this._config['qop'],
-            'nonce' => this.generateNonce(),
-            'opaque' => this._config['opaque'] ?: md5($realm),
+            "realm" => $realm,
+            "qop" => this._config["qop"],
+            "nonce" => this.generateNonce(),
+            "opaque" => this._config["opaque"] ?: md5($realm),
         ];
 
         $digest = this._getDigest(myRequest);
-        if ($digest && isset($digest['nonce']) && !this.validNonce($digest['nonce'])) {
-            myOptions['stale'] = true;
+        if ($digest && isset($digest["nonce"]) && !this.validNonce($digest["nonce"])) {
+            myOptions["stale"] = true;
         }
 
         $opts = [];
         foreach (myOptions as $k => $v) {
             if (is_bool($v)) {
-                $v = $v ? 'true' : 'false';
-                $opts[] = sprintf('%s=%s', $k, $v);
+                $v = $v ? "true" : "false";
+                $opts[] = sprintf("%s=%s", $k, $v);
             } else {
-                $opts[] = sprintf('%s="%s"', $k, $v);
+                $opts[] = sprintf("%s="%s"", $k, $v);
             }
         }
 
         return [
-            'WWW-Authenticate' => 'Digest ' . implode(',', $opts),
+            "WWW-Authenticate" => "Digest " . implode(",", $opts),
         ];
     }
 
@@ -239,10 +239,10 @@ class DigestAuthenticate : BasicAuthenticate
      * Generate a nonce value that is validated in future requests.
      */
     protected string generateNonce() {
-        $expiryTime = microtime(true) + this.getConfig('nonceLifetime');
-        $secret = this.getConfig('secret');
-        $signatureValue = hash_hmac('sha256', $expiryTime . ':' . $secret, $secret);
-        $nonceValue = $expiryTime . ':' . $signatureValue;
+        $expiryTime = microtime(true) + this.getConfig("nonceLifetime");
+        $secret = this.getConfig("secret");
+        $signatureValue = hash_hmac("sha256", $expiryTime . ":" . $secret, $secret);
+        $nonceValue = $expiryTime . ":" . $signatureValue;
 
         return base64_encode($nonceValue);
     }
@@ -258,7 +258,7 @@ class DigestAuthenticate : BasicAuthenticate
         if (myValue === false) {
             return false;
         }
-        $parts = explode(':', myValue);
+        $parts = explode(":", myValue);
         if (count($parts) !== 2) {
             return false;
         }
@@ -266,8 +266,8 @@ class DigestAuthenticate : BasicAuthenticate
         if ($expires < microtime(true)) {
             return false;
         }
-        $secret = this.getConfig('secret');
-        $check = hash_hmac('sha256', $expires . ':' . $secret, $secret);
+        $secret = this.getConfig("secret");
+        $check = hash_hmac("sha256", $expires . ":" . $secret, $secret);
 
         return hash_equals($check, $checksum);
     }

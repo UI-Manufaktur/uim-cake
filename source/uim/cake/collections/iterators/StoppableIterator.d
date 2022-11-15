@@ -1,8 +1,8 @@
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
 use ArrayIterator;
-import uim.cakellections\Collection;
-import uim.cakellections\ICollection;
+import uim.cake.collections\Collection;
+import uim.cake.collections\ICollection;
 use Traversable;
 
 /**
@@ -77,7 +77,7 @@ class StoppableIterator : Collection
         }
 
         // ArrayIterator can be traversed strictly.
-        // Let's do that for performance gains
+        // Let"s do that for performance gains
 
         $callback = this._condition;
         $res = [];

@@ -1,10 +1,10 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
-import uim.cakere.exceptions\MissingPluginException;
-import uim.cakere.Plugin;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
+import uim.cake.core.exceptions\MissingPluginException;
+import uim.cake.core.Plugin;
 
 /**
  * Command for loading plugins.
@@ -14,7 +14,7 @@ import uim.cakere.Plugin;
 class PluginLoadCommand : Command {
 
     static string defaultName() {
-        return 'plugin load';
+        return "plugin load";
     }
 
     /**
@@ -42,17 +42,17 @@ class PluginLoadCommand : Command {
         this.io = $io;
         this.args = $args;
 
-        myPlugin = $args.getArgument('plugin') ?? '';
+        myPlugin = $args.getArgument("plugin") ?? "";
         try {
             Plugin::getCollection().findPath(myPlugin);
         } catch (MissingPluginException $e) {
             this.io.err($e.getMessage());
-            this.io.err('Ensure you have the correct spelling and casing.');
+            this.io.err("Ensure you have the correct spelling and casing.");
 
             return static::CODE_ERROR;
         }
 
-        $app = APP . 'Application.php';
+        $app = APP . "Application.php";
         if (file_exists($app)) {
             this.modifyApplication($app, myPlugin);
 
@@ -73,8 +73,8 @@ class PluginLoadCommand : Command {
         myContentss = file_get_contents($app);
 
         // Find start of bootstrap
-        if (!preg_match('/^(\s+)function bootstrap(?:\s*)\(\)/mu', myContentss, $matches, PREG_OFFSET_CAPTURE)) {
-            this.io.err('Your Application class does not have a bootstrap() method. Please add one.');
+        if (!preg_match("/^(\s+)function bootstrap(?:\s*)\(\)/mu", myContentss, $matches, PREG_OFFSET_CAPTURE)) {
+            this.io.err("Your Application class does not have a bootstrap() method. Please add one.");
             this.abort();
         }
 
@@ -83,20 +83,20 @@ class PluginLoadCommand : Command {
 
         // Find closing function bracket
         if (!preg_match("/^$indent\}\n$/mu", myContentss, $matches, PREG_OFFSET_CAPTURE, $offset)) {
-            this.io.err('Your Application class does not have a bootstrap() method. Please add one.');
+            this.io.err("Your Application class does not have a bootstrap() method. Please add one.");
             this.abort();
         }
 
-        $append = "$indent    \this.addPlugin('%s');\n";
-        $insert = str_replace(', []', '', sprintf($append, myPlugin));
+        $append = "$indent    \this.addPlugin("%s");\n";
+        $insert = str_replace(", []", "", sprintf($append, myPlugin));
 
         $offset = $matches[0][1];
         myContentss = substr_replace(myContentss, $insert, $offset, 0);
 
         file_put_contents($app, myContentss);
 
-        this.io.out('');
-        this.io.out(sprintf('%s modified', $app));
+        this.io.out("");
+        this.io.out(sprintf("%s modified", $app));
     }
 
     /**
@@ -108,11 +108,11 @@ class PluginLoadCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            'Command for loading plugins.',
+            "Command for loading plugins.",
         ])
-        .addArgument('plugin', [
-            'help' => 'Name of the plugin to load. Must be in CamelCase format. Example: cake plugin load Example',
-            'required' => true,
+        .addArgument("plugin", [
+            "help" => "Name of the plugin to load. Must be in CamelCase format. Example: cake plugin load Example",
+            "required" => true,
         ]);
 
         return $parser;

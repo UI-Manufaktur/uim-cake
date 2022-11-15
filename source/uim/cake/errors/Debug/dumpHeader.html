@@ -126,11 +126,11 @@ nesting works.
 (function (win, doc) {
 
 function initialize() {
-  createCollapsibles(doc.querySelectorAll('.cake-dbg-array-items'));
-  createCollapsibles(doc.querySelectorAll('.cake-dbg-object-props'));
-  attachRefEvents(doc.querySelectorAll('.cake-dbg'));
-  openBlocks(doc.querySelectorAll('.cake-debug[data-open-all="true"]'));
-  attachCopyButton(doc.querySelectorAll('.cake-dbg'));
+  createCollapsibles(doc.querySelectorAll(".cake-dbg-array-items"));
+  createCollapsibles(doc.querySelectorAll(".cake-dbg-object-props"));
+  attachRefEvents(doc.querySelectorAll(".cake-dbg"));
+  openBlocks(doc.querySelectorAll(".cake-debug[data-open-all="true"]"));
+  attachCopyButton(doc.querySelectorAll(".cake-dbg"));
 }
 // Add a name on window so DebugKit can add controls to dump blocks
 win.__cakeDebugBlockInit = initialize;
@@ -140,7 +140,7 @@ win.__cakeDebugBlockInit = initialize;
  */
 function openBlocks(blocks) {
   blocks.forEach(function (block) {
-    block.querySelectorAll('.cake-dbg-collapse[data-open="false"]').forEach(function (el) {
+    block.querySelectorAll(".cake-dbg-collapse[data-open="false"]").forEach(function (el) {
       el.click();
     });
   });
@@ -153,27 +153,27 @@ function createCollapsibles(nodes) {
   nodes.forEach(function (node) {
     // Hide the childnode container if it is not
     // a direct parent of the container.
-    if (!node.parentNode.parentNode.classList.contains('cake-dbg')) {
+    if (!node.parentNode.parentNode.classList.contains("cake-dbg")) {
       node.dataset.hidden = true;
     }
 
-    // Don't show toggles for empty arrays/objects
+    // Don"t show toggles for empty arrays/objects
     if (node.childNodes.length == 0) {
       return;
     }
 
-    var collapser = doc.createElement('a');
-    collapser.classList.add('cake-dbg-collapse');
+    var collapser = doc.createElement("a");
+    collapser.classList.add("cake-dbg-collapse");
     collapser.dataset.open = !node.dataset.hidden;
-    collapser.setAttribute('href', '#')
-    collapser.setAttribute('title', 'Toggle items');
+    collapser.setAttribute("href", "#")
+    collapser.setAttribute("title", "Toggle items");
 
     // Add open/close behavior
-    collapser.addEventListener('click', function (event) {
+    collapser.addEventListener("click", function (event) {
       event.preventDefault();
       event.stopPropagation();
-      node.dataset.hidden = node.dataset.hidden === 'true' ? 'false' : 'true';
-      collapser.dataset.open = collapser.dataset.open === 'true' ? 'false' : 'true';
+      node.dataset.hidden = node.dataset.hidden === "true" ? "false" : "true";
+      collapser.dataset.open = collapser.dataset.open === "true" ? "false" : "true";
     });
 
     node.parentNode.insertBefore(collapser, node);
@@ -186,12 +186,12 @@ function createCollapsibles(nodes) {
  */
 function attachRefEvents(nodes) {
   nodes.forEach(function (container) {
-    var refLinks = container.querySelectorAll('.cake-dbg-ref');
+    var refLinks = container.querySelectorAll(".cake-dbg-ref");
     refLinks.forEach(function (ref) {
-      ref.addEventListener('click', function (event) {
+      ref.addEventListener("click", function (event) {
         event.preventDefault();
         event.stopPropagation();
-        var target = document.getElementById(ref.getAttribute('href').substr(1));
+        var target = document.getElementById(ref.getAttribute("href").substr(1));
         openPath(container, target);
       });
     });
@@ -200,14 +200,14 @@ function attachRefEvents(nodes) {
 
 function openPath(container, target) {
   // Open the target element
-  var expander = target.querySelector('.cake-dbg-collapse');
-  if (expander.dataset.open === 'false') {
+  var expander = target.querySelector(".cake-dbg-collapse");
+  if (expander.dataset.open === "false") {
     expander.click();
   }
-  container.querySelectorAll('.cake-dbg-object').forEach(function (el) {
-    el.dataset.highlighted = 'false';
+  container.querySelectorAll(".cake-dbg-object").forEach(function (el) {
+    el.dataset.highlighted = "false";
   })
-  target.dataset.highlighted = 'true';
+  target.dataset.highlighted = "true";
 
   var current = target;
   // Traverse up the tree opening all closed containers.
@@ -216,9 +216,9 @@ function openPath(container, target) {
     if (parent == container) {
       break;
     }
-    if (parent.classList.contains('cake-dbg-object') || parent.classList.contains('cake-dbg-array')) {
-      expander = parent.querySelector('.cake-dbg-collapse');
-      if (expander.dataset.open === 'false') {
+    if (parent.classList.contains("cake-dbg-object") || parent.classList.contains("cake-dbg-array")) {
+      expander = parent.querySelector(".cake-dbg-collapse");
+      if (expander.dataset.open === "false") {
         expander.click();
       }
     }
@@ -228,15 +228,15 @@ function openPath(container, target) {
 
 // https://www.30secondsofcode.org/js/s/copy-to-clipboard
 function copyToClipboard (str) {
-  var el = document.createElement('textarea');
+  var el = document.createElement("textarea");
   el.value = str;
-  el.setAttribute('readonly', '');
-  el.style.position = 'absolute';
-  el.style.left = '-9999px';
+  el.setAttribute("readonly", "");
+  el.style.position = "absolute";
+  el.style.left = "-9999px";
   document.body.appendChild(el);
   var selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
   el.select();
-  document.execCommand('copy');
+  document.execCommand("copy");
   document.body.removeChild(el);
   if (selected) {
     document.getSelection().removeAllRanges();
@@ -246,19 +246,19 @@ function copyToClipboard (str) {
 
 function attachCopyButton(nodes) {
   nodes.forEach(function (container) {
-    var copy = doc.createElement('a');
-    copy.classList.add('cake-dbg-copy');
-    copy.setAttribute('href', '#');
-    copy.setAttribute('title', 'Copy contents of debug output');
-    copy.appendChild(doc.createTextNode('Copy'));
+    var copy = doc.createElement("a");
+    copy.classList.add("cake-dbg-copy");
+    copy.setAttribute("href", "#");
+    copy.setAttribute("title", "Copy contents of debug output");
+    copy.appendChild(doc.createTextNode("Copy"));
 
     // Add copy behavior
-    copy.addEventListener('click', function (event) {
+    copy.addEventListener("click", function (event) {
       event.preventDefault();
       event.stopPropagation();
-      var lineNo = '';
-      if (container.parentNode && container.parentNode.classList.contains('cake-debug')) {
-        var line = container.parentNode.querySelector('span');
+      var lineNo = "";
+      if (container.parentNode && container.parentNode.classList.contains("cake-debug")) {
+        var line = container.parentNode.querySelector("span");
         lineNo = line.textContent + "\n";
       }
 
@@ -270,6 +270,6 @@ function attachCopyButton(nodes) {
   });
 }
 
-doc.addEventListener('DOMContentLoaded', initialize);
+doc.addEventListener("DOMContentLoaded", initialize);
 }(window, document))
 </script>

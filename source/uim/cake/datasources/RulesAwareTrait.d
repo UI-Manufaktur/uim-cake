@@ -7,7 +7,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         3.0.7
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.caketasources;
+ */module uim.cake.datasources;
 
 use ArrayObject;
 import uim.cakeents\IEventDispatcher;
@@ -36,12 +36,11 @@ trait RulesAwareTrait
      * the rules checker.
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
-     * @param string $operation The operation being run. Either 'create', 'update' or 'delete'.
+     * @param string $operation The operation being run. Either "create", "update" or "delete".
      * @param \ArrayObject|array|null myOptions The options To be passed to the rules.
      * @return bool
      */
-    function checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, myOptions = null): bool
-    {
+    bool checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, myOptions = null) {
         $rules = this.rulesChecker();
         myOptions = myOptions ?: new ArrayObject();
         myOptions = is_array(myOptions) ? new ArrayObject(myOptions) : myOptions;
@@ -49,8 +48,8 @@ trait RulesAwareTrait
 
         if ($hasEvents) {
             myEvent = this.dispatchEvent(
-                'Model.beforeRules',
-                compact('entity', 'options', 'operation')
+                "Model.beforeRules",
+                compact("entity", "options", "operation")
             );
             if (myEvent.isStopped()) {
                 return myEvent.getResult();
@@ -61,8 +60,8 @@ trait RulesAwareTrait
 
         if ($hasEvents) {
             myEvent = this.dispatchEvent(
-                'Model.afterRules',
-                compact('entity', 'options', 'result', 'operation')
+                "Model.afterRules",
+                compact("entity", "options", "result", "operation")
             );
 
             if (myEvent.isStopped()) {
@@ -89,10 +88,10 @@ trait RulesAwareTrait
             return this._rulesChecker;
         }
         /** @psalm-var class-string<\Cake\Datasource\RulesChecker> myClass */
-        myClass = defined('static::RULES_CLASS') ? static::RULES_CLASS : RulesChecker::class;
+        myClass = defined("static::RULES_CLASS") ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
-        this._rulesChecker = this.buildRules(new myClass(['repository' => this]));
-        this.dispatchEvent('Model.buildRules', ['rules' => this._rulesChecker]);
+        this._rulesChecker = this.buildRules(new myClass(["repository" => this]));
+        this.dispatchEvent("Model.buildRules", ["rules" => this._rulesChecker]);
 
         return this._rulesChecker;
     }

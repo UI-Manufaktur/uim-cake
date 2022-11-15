@@ -1,9 +1,9 @@
-module uim.cakere;
+module uim.cake.core;
 
-import uim.cakeches\Cache;
-import uim.cakere.Configure\ConfigEngineInterface;
-import uim.cakere.Configure\Engine\PhpConfig;
-import uim.cakere.exceptions\CakeException;
+import uim.cake.caches\Cache;
+import uim.cake.core.Configure\ConfigEngineInterface;
+import uim.cake.core.Configure\Engine\PhpConfig;
+import uim.cake.core.exceptions\CakeException;
 import uim.cakeilities.Hash;
 use RuntimeException;
 
@@ -24,7 +24,7 @@ class Configure
      * @var array
      */
     protected static $_values = [
-        'debug' => false,
+        "debug" => false,
     ];
 
     /**
@@ -47,16 +47,16 @@ class Configure
      *
      * Usage:
      * ```
-     * Configure.write('One.key1', 'value of the Configure::One[key1]');
-     * Configure.write(['One.key1' => 'value of the Configure::One[key1]']);
-     * Configure.write('One', [
-     *     'key1' => 'value of the Configure::One[key1]',
-     *     'key2' => 'value of the Configure::One[key2]'
+     * Configure.write("One.key1", "value of the Configure::One[key1]");
+     * Configure.write(["One.key1" => "value of the Configure::One[key1]"]);
+     * Configure.write("One", [
+     *     "key1" => "value of the Configure::One[key1]",
+     *     "key2" => "value of the Configure::One[key2]"
      * ]);
      *
      * Configure.write([
-     *     'One.key1' => 'value of the Configure::One[key1]',
-     *     'One.key2' => 'value of the Configure::One[key2]'
+     *     "One.key1" => "value of the Configure::One[key1]",
+     *     "One.key2" => "value of the Configure::One[key2]"
      * ]);
      * ```
      *
@@ -75,27 +75,27 @@ class Configure
             static::$_values = Hash::insert(static::$_values, myName, myValue);
         }
 
-        if (isset(myConfig['debug'])) {
+        if (isset(myConfig["debug"])) {
             if (static::$_hasIniSet === null) {
-                static::$_hasIniSet = function_exists('ini_set');
+                static::$_hasIniSet = function_exists("ini_set");
             }
             if (static::$_hasIniSet) {
-                ini_set('display_errors', myConfig['debug'] ? '1' : '0');
+                ini_set("display_errors", myConfig["debug"] ? "1" : "0");
             }
         }
     }
 
     /**
-     * Used to read information stored in Configure. It's not
+     * Used to read information stored in Configure. It"s not
      * possible to store `null` values in Configure.
      *
      * Usage:
      * ```
-     * Configure::read('Name'); will return all values for Name
-     * Configure::read('Name.key'); will return only the value of Configure::Name[key]
+     * Configure::read("Name"); will return all values for Name
+     * Configure::read("Name.key"); will return only the value of Configure::Name[key]
      * ```
      *
-     * @param string|null $var Variable to obtain. Use '.' to access array elements.
+     * @param string|null $var Variable to obtain. Use "." to access array elements.
      * @param mixed $default The return value when the configure does not exist
      * @return mixed Value stored in configure, or null.
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
@@ -123,7 +123,7 @@ class Configure
     }
 
     /**
-     * Used to get information stored in Configure. It's not
+     * Used to get information stored in Configure. It"s not
      * possible to store `null` values in Configure.
      *
      * Acts as a wrapper around Configure::read() and Configure::check().
@@ -132,18 +132,18 @@ class Configure
      *
      * Usage:
      * ```
-     * Configure::readOrFail('Name'); will return all values for Name
-     * Configure::readOrFail('Name.key'); will return only the value of Configure::Name[key]
+     * Configure::readOrFail("Name"); will return all values for Name
+     * Configure::readOrFail("Name.key"); will return only the value of Configure::Name[key]
      * ```
      *
-     * @param string $var Variable to obtain. Use '.' to access array elements.
+     * @param string $var Variable to obtain. Use "." to access array elements.
      * @return mixed Value stored in configure.
      * @throws \RuntimeException if the requested configuration is not set.
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
      */
     static function readOrFail(string $var) {
         if (!static::check($var)) {
-            throw new RuntimeException(sprintf('Expected configuration key "%s" not found.', $var));
+            throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
 
         return static::read($var);
@@ -154,35 +154,35 @@ class Configure
      *
      * Usage:
      * ```
-     * Configure::delete('Name'); will delete the entire Configure::Name
-     * Configure::delete('Name.key'); will delete only the Configure::Name[key]
+     * Configure::delete("Name"); will delete the entire Configure::Name
+     * Configure::delete("Name.key"); will delete only the Configure::Name[key]
      * ```
      *
      * @param string $var the var to be deleted
      * @return void
      * @link https://book.cakephp.org/4/en/development/configuration.html#deleting-configuration-data
      */
-    static function delete(string $var): void
+    static void delete(string $var)
     {
         static::$_values = Hash::remove(static::$_values, $var);
     }
 
     /**
-     * Used to consume information stored in Configure. It's not
+     * Used to consume information stored in Configure. It"s not
      * possible to store `null` values in Configure.
      *
      * Acts as a wrapper around Configure::consume() and Configure::check().
      * The configure key/value pair consumed via this method is expected to exist.
      * In case it does not an exception will be thrown.
      *
-     * @param string $var Variable to consume. Use '.' to access array elements.
+     * @param string $var Variable to consume. Use "." to access array elements.
      * @return mixed Value stored in configure.
      * @throws \RuntimeException if the requested configuration is not set.
 
      */
     static function consumeOrFail(string $var) {
         if (!static::check($var)) {
-            throw new RuntimeException(sprintf('Expected configuration key "%s" not found.', $var));
+            throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
 
         return static::consume($var);
@@ -198,7 +198,7 @@ class Configure
      * @return array|string|null
      */
     static function consume(string $var) {
-        if (strpos($var, '.') === false) {
+        if (strpos($var, ".") === false) {
             if (!isset(static::$_values[$var])) {
                 return null;
             }
@@ -221,7 +221,7 @@ class Configure
      * To add a new engine to Configure:
      *
      * ```
-     * Configure::config('ini', new IniConfig());
+     * Configure::config("ini", new IniConfig());
      * ```
      *
      * @param string myName The name of the engine being configured. This alias is used later to
@@ -229,7 +229,7 @@ class Configure
      * @param \Cake\Core\Configure\ConfigEngineInterface $engine The engine to append.
      * @return void
      */
-    static function config(string myName, ConfigEngineInterface $engine): void
+    static void config(string myName, ConfigEngineInterface $engine)
     {
         static::$_engines[myName] = $engine;
     }
@@ -282,13 +282,13 @@ class Configure
      * runtime configuration. You can load configuration files from plugins
      * by preceding the filename with the plugin name.
      *
-     * `Configure::load('Users.user', 'default')`
+     * `Configure::load("Users.user", "default")`
      *
-     * Would load the 'user' config file using the default config engine. You can load
+     * Would load the "user" config file using the default config engine. You can load
      * app config files by giving the name of the resource you want loaded.
      *
      * ```
-     * Configure::load('setup', 'default');
+     * Configure::load("setup", "default");
      * ```
      *
      * If using `default` config and no engine has been configured for it yet,
@@ -301,12 +301,12 @@ class Configure
      * @throws \Cake\Core\Exception\CakeException if the myConfig engine is not found
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
-    static bool load(string myKey, string myConfig = 'default', bool myMerge = true) {
+    static bool load(string myKey, string myConfig = "default", bool myMerge = true) {
         $engine = static::_getEngine(myConfig);
         if (!$engine) {
             throw new CakeException(
                 sprintf(
-                    'Config %s engine not found when attempting to load %s.',
+                    "Config %s engine not found when attempting to load %s.",
                     myConfig,
                     myKey
                 )
@@ -327,22 +327,22 @@ class Configure
     /**
      * Dump data currently in Configure into myKey. The serialization format
      * is decided by the config engine attached as myConfig. For example, if the
-     * 'default' adapter is a PhpConfig, the generated file will be a PHP
+     * "default" adapter is a PhpConfig, the generated file will be a PHP
      * configuration file loadable by the PhpConfig.
      *
      * ### Usage
      *
-     * Given that the 'default' engine is an instance of PhpConfig.
+     * Given that the "default" engine is an instance of PhpConfig.
      * Save all data in Configure to the file `my_config.php`:
      *
      * ```
-     * Configure::dump('my_config', 'default');
+     * Configure::dump("my_config", "default");
      * ```
      *
      * Save only the error handling configuration:
      *
      * ```
-     * Configure::dump('error', 'default', ['Error', 'Exception'];
+     * Configure::dump("error", "default", ["Error", "Exception"];
      * ```
      *
      * @param string myKey The identifier to create in the config adapter.
@@ -353,10 +353,10 @@ class Configure
      * @return bool Success
      * @throws \Cake\Core\Exception\CakeException if the adapter does not implement a `dump` method.
      */
-    static bool dump(string myKey, string myConfig = 'default', array myKeys = []) {
+    static bool dump(string myKey, string myConfig = "default", array myKeys = []) {
         $engine = static::_getEngine(myConfig);
         if (!$engine) {
-            throw new CakeException(sprintf('There is no "%s" config engine.', myConfig));
+            throw new CakeException(sprintf("There is no "%s" config engine.", myConfig));
         }
         myValues = static::$_values;
         if (!empty(myKeys)) {
@@ -376,7 +376,7 @@ class Configure
     protected static auto _getEngine(string myConfig): ?ConfigEngineInterface
     {
         if (!isset(static::$_engines[myConfig])) {
-            if (myConfig !== 'default') {
+            if (myConfig !== "default") {
                 return null;
             }
             static::config(myConfig, new PhpConfig());
@@ -396,20 +396,20 @@ class Configure
      * @return string Current version of CakePHP
      */
     static string version() {
-        $version = static::read('Cake.version');
+        $version = static::read("Cake.version");
         if ($version !== null) {
             return $version;
         }
 
-        myPath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'config/config.php';
+        myPath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "config/config.php";
         if (is_file(myPath)) {
             myConfig = require myPath;
             static::write(myConfig);
 
-            return static::read('Cake.version');
+            return static::read("Cake.version");
         }
 
-        return 'unknown';
+        return "unknown";
     }
 
     /**
@@ -418,17 +418,17 @@ class Configure
      * frontends, or other GUI type interfaces for configuration.
      *
      * @param string myName The storage name for the saved configuration.
-     * @param string $cacheConfig The cache configuration to save into. Defaults to 'default'
+     * @param string $cacheConfig The cache configuration to save into. Defaults to "default"
      * @param array|null myData Either an array of data to store, or leave empty to store all values.
      * @return bool Success
      * @throws \RuntimeException
      */
-    static bool store(string myName, string $cacheConfig = 'default', ?array myData = null) {
+    static bool store(string myName, string $cacheConfig = "default", ?array myData = null) {
         if (myData === null) {
             myData = static::$_values;
         }
         if (!class_exists(Cache::class)) {
-            throw new RuntimeException('You must install cakephp/cache to use Configure::store()');
+            throw new RuntimeException("You must install cakephp/cache to use Configure::store()");
         }
 
         return Cache::write(myName, myData, $cacheConfig);
@@ -443,9 +443,9 @@ class Configure
      * @return bool Success.
      * @throws \RuntimeException
      */
-    static bool restore(string myName, string $cacheConfig = 'default') {
+    static bool restore(string myName, string $cacheConfig = "default") {
         if (!class_exists(Cache::class)) {
-            throw new RuntimeException('You must install cakephp/cache to use Configure::restore()');
+            throw new RuntimeException("You must install cakephp/cache to use Configure::restore()");
         }
         myValues = Cache::read(myName, $cacheConfig);
         if (myValues) {
@@ -462,7 +462,7 @@ class Configure
      *
      * @return void
      */
-    static function clear(): void
+    static void clear()
     {
         static::$_values = [];
     }

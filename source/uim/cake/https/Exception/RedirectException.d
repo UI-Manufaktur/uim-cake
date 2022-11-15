@@ -7,7 +7,7 @@ module uim.cake.https\Exception;
  * The URL and status code are provided as constructor arguments.
  *
  * ```
- * throw new RedirectException('http://example.com/some/path', 301);
+ * throw new RedirectException("http://example.com/some/path", 301);
  * ```
  *
  * Additional headers can also be provided in the constructor, or
@@ -39,7 +39,7 @@ class RedirectException : HttpException
      * @deprecated 4.2.0 Use `setHeaders()` instead.
      */
     function addHeaders(array $headers) {
-        deprecationWarning('RedirectException::addHeaders() is deprecated, use setHeaders() instead.');
+        deprecationWarning("RedirectException::addHeaders() is deprecated, use setHeaders() instead.");
 
         foreach ($headers as myKey => myValue) {
             this.headers[myKey][] = myValue;
@@ -56,7 +56,7 @@ class RedirectException : HttpException
      * @deprecated 4.2.0 Use `setHeaders()` instead.
      */
     function removeHeader(string myKey) {
-        deprecationWarning('RedirectException::removeHeader() is deprecated, use setHeaders() instead.');
+        deprecationWarning("RedirectException::removeHeader() is deprecated, use setHeaders() instead.");
 
         unset(this.headers[myKey]);
 

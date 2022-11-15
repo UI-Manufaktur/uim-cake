@@ -3,12 +3,12 @@ module uim.cake.https;
 import uim.cake.core.App;
 import uim.cake.core.exceptions\CakeException;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.https\Client\Adapter\Curl;
-import uim.cake.https\Client\Adapter\Mock as MockAdapter;
-import uim.cake.https\Client\Adapter\Stream;
-import uim.cake.https\Client\AdapterInterface;
-import uim.cake.https\Client\Request;
-import uim.cake.https\Client\Response;
+import uim.cake.https.clients.adapters\Curl;
+import uim.cake.https.clients.adapters\Mock as MockAdapter;
+import uim.cake.https.clients.adapters\Stream;
+import uim.cake.https.clients.adaptersInterface;
+import uim.cake.https.clients\Request;
+import uim.cake.https.clients\Response;
 import uim.cake.https\Cookie\CookieCollection;
 import uim.cake.https\Cookie\CookieInterface;
 import uim.cake.utilities.Hash;
@@ -23,13 +23,13 @@ use Psr\Http\Message\IResponse;
  *
  * ### Scoped clients
  *
- * If you're doing multiple requests to the same hostname it's often convenient
+ * If you"re doing multiple requests to the same hostname it"s often convenient
  * to use the constructor arguments to create a scoped client. This allows you
  * to keep your code DRY and not repeat hostnames, authentication, and other options.
  *
  * ### Doing requests
  *
- * Once you've created an instance of Client you can do requests
+ * Once you"ve created an instance of Client you can do requests
  * using several methods. Each corresponds to a different HTTP method.
  *
  * - get()
@@ -43,11 +43,11 @@ use Psr\Http\Message\IResponse;
  * Client will maintain cookies from the responses done with
  * a client instance. These cookies will be automatically added
  * to future requests to matching hosts. Cookies will respect the
- * `Expires`, `Path` and `Domain` attributes. You can get the client's
+ * `Expires`, `Path` and `Domain` attributes. You can get the client"s
  * CookieCollection using cookies()
  *
- * You can use the 'cookieJar' constructor option to provide a custom
- * cookie jar instance you've restored from cache/disk. By default,
+ * You can use the "cookieJar" constructor option to provide a custom
+ * cookie jar instance you"ve restored from cache/disk. By default,
  * an empty instance of {@link \Cake\Http\Client\CookieCollection} will be created.
  *
  * ### Sending request bodies
@@ -61,7 +61,7 @@ use Psr\Http\Message\IResponse;
  * set the Content-Type for the request:
  *
  * ```
- * $http.get('/users', [], ['type' => 'json']);
+ * $http.get("/users", [], ["type" => "json"]);
  * ```
  *
  * The `type` option sets both the `Content-Type` and `Accept` header, to
@@ -96,24 +96,24 @@ class Client : ClientInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'adapter' => null,
-        'host' => null,
-        'port' => null,
-        'scheme' => 'http',
-        'basePath' => '',
-        'timeout' => 30,
-        'ssl_verify_peer' => true,
-        'ssl_verify_peer_name' => true,
-        'ssl_verify_depth' => 5,
-        'ssl_verify_host' => true,
-        'redirect' => false,
-        'protocolVersion' => '1.1',
+        "adapter" => null,
+        "host" => null,
+        "port" => null,
+        "scheme" => "http",
+        "basePath" => "",
+        "timeout" => 30,
+        "ssl_verify_peer" => true,
+        "ssl_verify_peer_name" => true,
+        "ssl_verify_depth" => 5,
+        "ssl_verify_host" => true,
+        "redirect" => false,
+        "protocolVersion" => "1.1",
     ];
 
     /**
      * List of cookies from responses made with this client.
      *
-     * Cookies are indexed by the cookie's domain or
+     * Cookies are indexed by the cookie"s domain or
      * request host name.
      *
      * @var \Cake\Http\Cookie\CookieCollection
@@ -166,15 +166,15 @@ class Client : ClientInterface
     this(array myConfig = []) {
         this.setConfig(myConfig);
 
-        $adapter = this._config['adapter'];
+        $adapter = this._config["adapter"];
         if ($adapter === null) {
             $adapter = Curl::class;
 
-            if (!extension_loaded('curl')) {
+            if (!extension_loaded("curl")) {
                 $adapter = Stream::class;
             }
         } else {
-            this.setConfig('adapter', null);
+            this.setConfig("adapter", null);
         }
 
         if (is_string($adapter)) {
@@ -182,13 +182,13 @@ class Client : ClientInterface
         }
 
         if (!$adapter instanceof AdapterInterface) {
-            throw new InvalidArgumentException('Adapter must be an instance of Cake\Http\Client\AdapterInterface');
+            throw new InvalidArgumentException("Adapter must be an instance of Cake\Http\Client\AdapterInterface");
         }
         this._adapter = $adapter;
 
-        if (!empty(this._config['cookieJar'])) {
-            this._cookies = this._config['cookieJar'];
-            this.setConfig('cookieJar', null);
+        if (!empty(this._config["cookieJar"])) {
+            this._cookies = this._config["cookieJar"];
+            this.setConfig("cookieJar", null);
         } else {
             this._cookies = new CookieCollection();
         }
@@ -208,18 +208,18 @@ class Client : ClientInterface
         $parts = parse_url(myUrl);
 
         if ($parts === false) {
-            throw new InvalidArgumentException('String ' . myUrl . ' did not parse');
+            throw new InvalidArgumentException("String " . myUrl . " did not parse");
         }
 
-        myConfig = array_intersect_key($parts, ['scheme' => '', 'port' => '', 'host' => '', 'path' => '']);
+        myConfig = array_intersect_key($parts, ["scheme" => "", "port" => "", "host" => "", "path" => ""]);
 
-        if (empty(myConfig['scheme']) || empty(myConfig['host'])) {
-            throw new InvalidArgumentException('The URL was parsed but did not contain a scheme or host');
+        if (empty(myConfig["scheme"]) || empty(myConfig["host"])) {
+            throw new InvalidArgumentException("The URL was parsed but did not contain a scheme or host");
         }
 
-        if (isset(myConfig['path'])) {
-            myConfig['basePath'] = myConfig['path'];
-            unset(myConfig['path']);
+        if (isset(myConfig["path"])) {
+            myConfig["basePath"] = myConfig["path"];
+            unset(myConfig["path"]);
         }
 
         return new static(myConfig);
@@ -244,7 +244,7 @@ class Client : ClientInterface
      */
     function addCookie(CookieInterface $cookie) {
         if (!$cookie.getDomain() || !$cookie.getPath()) {
-            throw new InvalidArgumentException('Cookie must have a domain and a path set.');
+            throw new InvalidArgumentException("Cookie must have a domain and a path set.");
         }
         this._cookies = this._cookies.add($cookie);
 
@@ -268,9 +268,9 @@ class Client : ClientInterface
     {
         myOptions = this._mergeOptions(myOptions);
         $body = null;
-        if (is_array(myData) && isset(myData['_content'])) {
-            $body = myData['_content'];
-            unset(myData['_content']);
+        if (is_array(myData) && isset(myData["_content"])) {
+            $body = myData["_content"];
+            unset(myData["_content"]);
         }
         myUrl = this.buildUrl(myUrl, myData, myOptions);
 
@@ -391,7 +391,7 @@ class Client : ClientInterface
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, myData, myOptions);
 
-        return this._doRequest(Request::METHOD_HEAD, myUrl, '', myOptions);
+        return this._doRequest(Request::METHOD_HEAD, myUrl, "", myOptions);
     }
 
     /**
@@ -451,9 +451,9 @@ class Client : ClientInterface
     function send(RequestInterface myRequest, array myOptions = []): Response
     {
         $redirects = 0;
-        if (isset(myOptions['redirect'])) {
-            $redirects = (int)myOptions['redirect'];
-            unset(myOptions['redirect']);
+        if (isset(myOptions["redirect"])) {
+            $redirects = (int)myOptions["redirect"];
+            unset(myOptions["redirect"]);
         }
 
         do {
@@ -463,12 +463,12 @@ class Client : ClientInterface
             if ($handleRedirect) {
                 myUrl = myRequest.getUri();
 
-                myLocation = $response.getHeaderLine('Location');
+                myLocation = $response.getHeaderLine("Location");
                 myLocationUrl = this.buildUrl(myLocation, [], [
-                    'host' => myUrl.getHost(),
-                    'port' => myUrl.getPort(),
-                    'scheme' => myUrl.getScheme(),
-                    'protocolRelative' => true,
+                    "host" => myUrl.getHost(),
+                    "port" => myUrl.getPort(),
+                    "scheme" => myUrl.getScheme(),
+                    "protocolRelative" => true,
                 ]);
                 myRequest = myRequest.withUri(new Uri(myLocationUrl));
                 myRequest = this._cookies.addToRequest(myRequest, []);
@@ -547,45 +547,44 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions The config options stored with Client::config()
      * @return string A complete url with scheme, port, host, and path.
      */
-    function buildUrl(string myUrl, myQuery = [], array myOptions = []): string
-    {
+    string buildUrl(string myUrl, myQuery = [], array myOptions = []) {
         if (empty(myOptions) && empty(myQuery)) {
             return myUrl;
         }
         $defaults = [
-            'host' => null,
-            'port' => null,
-            'scheme' => 'http',
-            'basePath' => '',
-            'protocolRelative' => false,
+            "host" => null,
+            "port" => null,
+            "scheme" => "http",
+            "basePath" => "",
+            "protocolRelative" => false,
         ];
         myOptions += $defaults;
 
         if (myQuery) {
-            $q = strpos(myUrl, '?') === false ? '?' : '&';
+            $q = strpos(myUrl, "?") === false ? "?" : "&";
             myUrl .= $q;
-            myUrl .= is_string(myQuery) ? myQuery : http_build_query(myQuery, '', '&', PHP_QUERY_RFC3986);
+            myUrl .= is_string(myQuery) ? myQuery : http_build_query(myQuery, "", "&", PHP_QUERY_RFC3986);
         }
 
-        if (myOptions['protocolRelative'] && preg_match('#^//#', myUrl)) {
-            myUrl = myOptions['scheme'] . ':' . myUrl;
+        if (myOptions["protocolRelative"] && preg_match("#^//#", myUrl)) {
+            myUrl = myOptions["scheme"] . ":" . myUrl;
         }
-        if (preg_match('#^https?://#', myUrl)) {
+        if (preg_match("#^https?://#", myUrl)) {
             return myUrl;
         }
 
         $defaultPorts = [
-            'http' => 80,
-            'https' => 443,
+            "http" => 80,
+            "https" => 443,
         ];
-        $out = myOptions['scheme'] . '://' . myOptions['host'];
-        if (myOptions['port'] && (int)myOptions['port'] !== $defaultPorts[myOptions['scheme']]) {
-            $out .= ':' . myOptions['port'];
+        $out = myOptions["scheme"] . "://" . myOptions["host"];
+        if (myOptions["port"] && (int)myOptions["port"] !== $defaultPorts[myOptions["scheme"]]) {
+            $out .= ":" . myOptions["port"];
         }
-        if (!empty(myOptions['basePath'])) {
-            $out .= '/' . trim(myOptions['basePath'], '/');
+        if (!empty(myOptions["basePath"])) {
+            $out .= "/" . trim(myOptions["basePath"], "/");
         }
-        $out .= '/' . ltrim(myUrl, '/');
+        $out .= "/" . ltrim(myUrl, "/");
 
         return $out;
     }
@@ -602,24 +601,24 @@ class Client : ClientInterface
     protected auto _createRequest(string $method, string myUrl, myData, myOptions): Request
     {
         /** @var array<non-empty-string, non-empty-string> $headers */
-        $headers = (array)(myOptions['headers'] ?? []);
-        if (isset(myOptions['type'])) {
-            $headers = array_merge($headers, this._typeHeaders(myOptions['type']));
+        $headers = (array)(myOptions["headers"] ?? []);
+        if (isset(myOptions["type"])) {
+            $headers = array_merge($headers, this._typeHeaders(myOptions["type"]));
         }
-        if (is_string(myData) && !isset($headers['Content-Type']) && !isset($headers['content-type'])) {
-            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        if (is_string(myData) && !isset($headers["Content-Type"]) && !isset($headers["content-type"])) {
+            $headers["Content-Type"] = "application/x-www-form-urlencoded";
         }
 
         myRequest = new Request(myUrl, $method, $headers, myData);
         /** @var \Cake\Http\Client\Request myRequest */
-        myRequest = myRequest.withProtocolVersion(this.getConfig('protocolVersion'));
-        $cookies = myOptions['cookies'] ?? [];
+        myRequest = myRequest.withProtocolVersion(this.getConfig("protocolVersion"));
+        $cookies = myOptions["cookies"] ?? [];
         /** @var \Cake\Http\Client\Request myRequest */
         myRequest = this._cookies.addToRequest(myRequest, $cookies);
-        if (isset(myOptions['auth'])) {
+        if (isset(myOptions["auth"])) {
             myRequest = this._addAuthentication(myRequest, myOptions);
         }
-        if (isset(myOptions['proxy'])) {
+        if (isset(myOptions["proxy"])) {
             myRequest = this._addProxy(myRequest, myOptions);
         }
 
@@ -638,23 +637,23 @@ class Client : ClientInterface
      */
     protected auto _typeHeaders(string myType): array
     {
-        if (strpos(myType, '/') !== false) {
+        if (strpos(myType, "/") !== false) {
             return [
-                'Accept' => myType,
-                'Content-Type' => myType,
+                "Accept" => myType,
+                "Content-Type" => myType,
             ];
         }
         myTypeMap = [
-            'json' => 'application/json',
-            'xml' => 'application/xml',
+            "json" => "application/json",
+            "xml" => "application/xml",
         ];
         if (!isset(myTypeMap[myType])) {
-            throw new CakeException("Unknown type alias 'myType'.");
+            throw new CakeException("Unknown type alias "myType".");
         }
 
         return [
-            'Accept' => myTypeMap[myType],
-            'Content-Type' => myTypeMap[myType],
+            "Accept" => myTypeMap[myType],
+            "Content-Type" => myTypeMap[myType],
         ];
     }
 
@@ -665,16 +664,16 @@ class Client : ClientInterface
      * and use its methods to add headers.
      *
      * @param \Cake\Http\Client\Request myRequest The request to modify.
-     * @param array<string, mixed> myOptions Array of options containing the 'auth' key.
+     * @param array<string, mixed> myOptions Array of options containing the "auth" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */
     protected auto _addAuthentication(Request myRequest, array myOptions): Request
     {
-        $auth = myOptions['auth'];
+        $auth = myOptions["auth"];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */
         $adapter = this._createAuth($auth, myOptions);
 
-        return $adapter.authentication(myRequest, myOptions['auth']);
+        return $adapter.authentication(myRequest, myOptions["auth"]);
     }
 
     /**
@@ -684,16 +683,16 @@ class Client : ClientInterface
      * and use its methods to add headers.
      *
      * @param \Cake\Http\Client\Request myRequest The request to modify.
-     * @param array<string, mixed> myOptions Array of options containing the 'proxy' key.
+     * @param array<string, mixed> myOptions Array of options containing the "proxy" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */
     protected auto _addProxy(Request myRequest, array myOptions): Request
     {
-        $auth = myOptions['proxy'];
+        $auth = myOptions["proxy"];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */
         $adapter = this._createAuth($auth, myOptions);
 
-        return $adapter.proxyAuthentication(myRequest, myOptions['proxy']);
+        return $adapter.proxyAuthentication(myRequest, myOptions["proxy"]);
     }
 
     /**
@@ -708,14 +707,14 @@ class Client : ClientInterface
      * @throws \Cake\Core\Exception\CakeException when an invalid strategy is chosen.
      */
     protected auto _createAuth(array $auth, array myOptions) {
-        if (empty($auth['type'])) {
-            $auth['type'] = 'basic';
+        if (empty($auth["type"])) {
+            $auth["type"] = "basic";
         }
-        myName = ucfirst($auth['type']);
-        myClass = App::className(myName, 'Http/Client/Auth');
+        myName = ucfirst($auth["type"]);
+        myClass = App::className(myName, "Http/Client/Auth");
         if (!myClass) {
             throw new CakeException(
-                sprintf('Invalid authentication type %s', myName)
+                sprintf("Invalid authentication type %s", myName)
             );
         }
 

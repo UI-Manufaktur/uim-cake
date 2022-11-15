@@ -1,10 +1,10 @@
-module uim.cakeches.engines;
+module uim.cake.caches.engines;
 
 @safe:
 import uim.cake
 
 <!-- use APCUIterator;
-import uim.cakeches\CacheEngine;
+import uim.cake.caches\CacheEngine;
 use RuntimeException;
  -->
 /**
@@ -29,8 +29,8 @@ class ApcuEngine : CacheEngine
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(array myConfig = []) {
-        if (!extension_loaded('apcu')) {
-            throw new RuntimeException('The `apcu` extension must be enabled to use ApcuEngine.');
+        if (!extension_loaded("apcu")) {
+            throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
         }
 
         return super.init(myConfig);
@@ -59,7 +59,7 @@ class ApcuEngine : CacheEngine
      *
      * @param string myKey Identifier for the data
      * @param mixed $default Default value in case the cache misses.
-     * @return mixed The cached data, or default if the data doesn't exist,
+     * @return mixed The cached data, or default if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
      * @link https://secure.php.net/manual/en/function.apcu-fetch.php
      */
@@ -104,7 +104,7 @@ class ApcuEngine : CacheEngine
      * Delete a key from the cache
      *
      * @param string myKey Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
     bool delete(myKey) {
@@ -123,7 +123,7 @@ class ApcuEngine : CacheEngine
     bool clear() {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
-                '/^' . preg_quote(this._config['prefix'], '/') . '/',
+                "/^" . preg_quote(this._config["prefix"], "/") . "/",
                 APC_ITER_NONE
             );
             apcu_delete($iterator);
@@ -132,9 +132,9 @@ class ApcuEngine : CacheEngine
         }
 
         $cache = apcu_cache_info(); // Raises warning by itself already
-        foreach ($cache['cache_list'] as myKey) {
-            if (strpos(myKey['info'], this._config['prefix']) === 0) {
-                apcu_delete(myKey['info']);
+        foreach ($cache["cache_list"] as myKey) {
+            if (strpos(myKey["info"], this._config["prefix"]) === 0) {
+                apcu_delete(myKey["info"]);
             }
         }
 
@@ -142,7 +142,7 @@ class ApcuEngine : CacheEngine
     }
 
     /**
-     * Write data for key into cache if it doesn't exist already.
+     * Write data for key into cache if it doesn"t exist already.
      * If it already exists, it fails and returns false.
      *
      * @param string myKey Identifier for the data.
@@ -152,7 +152,7 @@ class ApcuEngine : CacheEngine
      */
     bool add(string myKey, myValue) {
         myKey = this._key(myKey);
-        $duration = this._config['duration'];
+        $duration = this._config["duration"];
 
         return apcu_add(myKey, myValue, $duration);
     }
@@ -169,20 +169,20 @@ class ApcuEngine : CacheEngine
     function groups(): array
     {
         if (empty(this._compiledGroupNames)) {
-            foreach (this._config['groups'] as myGroup) {
-                this._compiledGroupNames[] = this._config['prefix'] . myGroup;
+            foreach (this._config["groups"] as myGroup) {
+                this._compiledGroupNames[] = this._config["prefix"] . myGroup;
             }
         }
 
         $success = false;
         myGroups = apcu_fetch(this._compiledGroupNames, $success);
-        if ($success && count(myGroups) !== count(this._config['groups'])) {
+        if ($success && count(myGroups) !== count(this._config["groups"])) {
             foreach (this._compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     myValue = 1;
                     if (apcu_store(myGroup, myValue) === false) {
                         this.warning(
-                            sprintf('Failed to store key "%s" with value "%s" into APCu cache.', myGroup, myValue)
+                            sprintf("Failed to store key "%s" with value "%s" into APCu cache.", myGroup, myValue)
                         );
                     }
                     myGroups[myGroup] = myValue;
@@ -193,7 +193,7 @@ class ApcuEngine : CacheEngine
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config['groups'] as $i => myGroup) {
+        foreach (this._config["groups"] as $i => myGroup) {
             myResult[] = myGroup . myGroups[$i];
         }
 
@@ -210,7 +210,7 @@ class ApcuEngine : CacheEngine
      */
     bool clearGroup(string myGroup) {
         $success = false;
-        apcu_inc(this._config['prefix'] . myGroup, 1, $success);
+        apcu_inc(this._config["prefix"] . myGroup, 1, $success);
 
         return $success;
     }

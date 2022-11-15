@@ -11,7 +11,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.https\Session;
 
-import uim.cake.orm.Locator\LocatorAwareTrait;
+import uim.cake.orm.locators\LocatorAwareTrait;
 use SessionHandlerInterface;
 
 /**
@@ -39,23 +39,23 @@ class DatabaseSession : SessionHandlerInterface
      * Constructor. Looks at Session configuration information and
      * sets up the session model.
      *
-     * @param array<string, mixed> myConfig The configuration for this engine. It requires the 'model'
+     * @param array<string, mixed> myConfig The configuration for this engine. It requires the "model"
      * key to be present corresponding to the Table to use for managing the sessions.
      */
     this(array myConfig = []) {
-        if (isset(myConfig['tableLocator'])) {
-            this.setTableLocator(myConfig['tableLocator']);
+        if (isset(myConfig["tableLocator"])) {
+            this.setTableLocator(myConfig["tableLocator"]);
         }
         myTableLocator = this.getTableLocator();
 
-        if (empty(myConfig['model'])) {
-            myConfig = myTableLocator.exists('Sessions') ? [] : ['table' => 'sessions', 'allowFallbackClass' => true];
-            this._table = myTableLocator.get('Sessions', myConfig);
+        if (empty(myConfig["model"])) {
+            myConfig = myTableLocator.exists("Sessions") ? [] : ["table" => "sessions", "allowFallbackClass" => true];
+            this._table = myTableLocator.get("Sessions", myConfig);
         } else {
-            this._table = myTableLocator.get(myConfig['model']);
+            this._table = myTableLocator.get(myConfig["model"]);
         }
 
-        this._timeout = (int)ini_get('session.gc_maxlifetime');
+        this._timeout = (int)ini_get("session.gc_maxlifetime");
     }
 
     /**
@@ -79,8 +79,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string myName The session name.
      * @return bool Success
      */
-    function open(myPath, myName): bool
-    {
+    bool open(myPath, myName) {
         return true;
     }
 
@@ -89,8 +88,7 @@ class DatabaseSession : SessionHandlerInterface
      *
      * @return bool Success
      */
-    function close(): bool
-    {
+    bool close() {
         return true;
     }
 
@@ -105,24 +103,24 @@ class DatabaseSession : SessionHandlerInterface
         /** @var string $pkField */
         $pkField = this._table.getPrimaryKey();
         myResult = this._table
-            .find('all')
-            .select(['data'])
+            .find("all")
+            .select(["data"])
             .where([$pkField => $id])
             .disableHydration()
             .first();
 
         if (empty(myResult)) {
-            return '';
+            return "";
         }
 
-        if (is_string(myResult['data'])) {
-            return myResult['data'];
+        if (is_string(myResult["data"])) {
+            return myResult["data"];
         }
 
-        $session = stream_get_contents(myResult['data']);
+        $session = stream_get_contents(myResult["data"]);
 
         if ($session === false) {
-            return '';
+            return "";
         }
 
         return $session;
@@ -135,8 +133,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string myData The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
-    function write($id, myData): bool
-    {
+    bool write($id, myData) {
         if (!$id) {
             return false;
         }
@@ -145,9 +142,9 @@ class DatabaseSession : SessionHandlerInterface
         $pkField = this._table.getPrimaryKey();
         $session = this._table.newEntity([
             $pkField => $id,
-            'data' => myData,
-            'expires' => time() + this._timeout,
-        ], ['accessibleFields' => [$pkField => true]]);
+            "data" => myData,
+            "expires" => time() + this._timeout,
+        ], ["accessibleFields" => [$pkField => true]]);
 
         return (bool)this._table.save($session);
     }
@@ -158,8 +155,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param string $id ID that uniquely identifies session in database.
      * @return bool True for successful delete, false otherwise.
      */
-    function destroy($id): bool
-    {
+    bool destroy($id) {
         /** @var string $pkField */
         $pkField = this._table.getPrimaryKey();
         this._table.deleteAll([$pkField => $id]);
@@ -175,6 +171,6 @@ class DatabaseSession : SessionHandlerInterface
      */
     #[\ReturnTypeWillChange]
     function gc($maxlifetime) {
-        return this._table.deleteAll(['expires <' => time()]);
+        return this._table.deleteAll(["expires <" => time()]);
     }
 }

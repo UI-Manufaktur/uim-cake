@@ -1,6 +1,6 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
-import uim.cakellections\Collection;
+import uim.cake.collections\Collection;
 import uim.cakem.Entity;
 import uim.cakeilities.Hash;
 import uim.cakeilities.Inflector;
@@ -605,8 +605,7 @@ trait EntityTrait
      * @param string myType the accessor type ('get' or 'set')
      * @return string method name or empty string (no method available)
      */
-    protected static auto _accessor(string $property, string myType): string
-    {
+    protected static string _accessor(string $property, string myType) {
         myClass = static::class;
 
         if (isset(static::$_accessors[myClass][myType][$property])) {
@@ -1156,11 +1155,8 @@ trait EntityTrait
 
     /**
      * Returns the alias of the repository from which this entity came from.
-     *
-     * @return string
      */
-    auto getSource(): string
-    {
+    string getSource() {
         return this._registryAlias;
     }
 
@@ -1178,11 +1174,8 @@ trait EntityTrait
 
     /**
      * Returns a string representation of this object in a human readable format.
-     *
-     * @return string
      */
-    auto __toString(): string
-    {
+    string __toString() {
         return (string)json_encode(this, JSON_PRETTY_PRINT);
     }
 

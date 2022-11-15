@@ -19,7 +19,7 @@ import uim.cake.core.exceptions\CakeException;
  * catch blocks can be specifically typed.
  *
  * You may also use this as a meaningful bridge to {@link \Cake\Core\Exception\CakeException}, e.g.:
- * throw new \Cake\Network\Exception\HttpException('HTTP Version Not Supported', 505);
+ * throw new \Cake\Network\Exception\HttpException("HTTP Version Not Supported", 505);
  */
 class HttpException : CakeException
 {

@@ -17,12 +17,12 @@ class FlashMessage
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key' => 'flash',
-        'element' => 'default',
-        'plugin' => null,
-        'params' => [],
-        'clear' => false,
-        'duplicate' => true,
+        "key" => "flash",
+        "element" => "default",
+        "plugin" => null,
+        "params" => [],
+        "clear" => false,
+        "duplicate" => true,
     ];
 
     /**
@@ -50,9 +50,9 @@ class FlashMessage
      *
      * ### Options:
      *
-     * - `key` The key to set under the session's Flash key.
+     * - `key` The key to set under the session"s Flash key.
      * - `element` The element used to render the flash message. You can use
-     *     `'SomePlugin.name'` style value for flash elements from a plugin.
+     *     `"SomePlugin.name"` style value for flash elements from a plugin.
      * - `plugin` Plugin name to use element from.
      * - `params` An array of variables to be made available to the element.
      * - `clear` A bool stating if the current stack should be cleared to start a new one.
@@ -67,51 +67,51 @@ class FlashMessage
     {
         myOptions += (array)this.getConfig();
 
-        if (isset(myOptions['escape']) && !isset(myOptions['params']['escape'])) {
-            myOptions['params']['escape'] = myOptions['escape'];
+        if (isset(myOptions["escape"]) && !isset(myOptions["params"]["escape"])) {
+            myOptions["params"]["escape"] = myOptions["escape"];
         }
 
-        [myPlugin, $element] = pluginSplit(myOptions['element']);
-        if (myOptions['plugin']) {
-            myPlugin = myOptions['plugin'];
+        [myPlugin, $element] = pluginSplit(myOptions["element"]);
+        if (myOptions["plugin"]) {
+            myPlugin = myOptions["plugin"];
         }
 
         if (myPlugin) {
-            myOptions['element'] = myPlugin . '.flash/' . $element;
+            myOptions["element"] = myPlugin . ".flash/" . $element;
         } else {
-            myOptions['element'] = 'flash/' . $element;
+            myOptions["element"] = "flash/" . $element;
         }
 
         myMessages = [];
-        if (!myOptions['clear']) {
-            myMessages = (array)this.session.read('Flash.' . myOptions['key']);
+        if (!myOptions["clear"]) {
+            myMessages = (array)this.session.read("Flash." . myOptions["key"]);
         }
 
-        if (!myOptions['duplicate']) {
+        if (!myOptions["duplicate"]) {
             foreach (myMessages as $existingMessage) {
-                if ($existingMessage['message'] === myMessage) {
+                if ($existingMessage["message"] === myMessage) {
                     return;
                 }
             }
         }
 
         myMessages[] = [
-            'message' => myMessage,
-            'key' => myOptions['key'],
-            'element' => myOptions['element'],
-            'params' => myOptions['params'],
+            "message" => myMessage,
+            "key" => myOptions["key"],
+            "element" => myOptions["element"],
+            "params" => myOptions["params"],
         ];
 
-        this.session.write('Flash.' . myOptions['key'], myMessages);
+        this.session.write("Flash." . myOptions["key"], myMessages);
     }
 
     /**
-     * Set an exception's message as flash message.
+     * Set an exception"s message as flash message.
      *
      * The following options will be set by default if unset:
      * ```
-     * 'element' => 'error',
-     * `params' => ['code' => myException.getCode()]
+     * "element" => "error",
+     * `params" => ["code" => myException.getCode()]
      * ```
      *
      * @param \Throwable myException Exception instance.
@@ -121,8 +121,8 @@ class FlashMessage
      */
     auto setExceptionMessage(Throwable myException, array myOptions = []): void
     {
-        myOptions['element'] = myOptions['element'] ?? 'error';
-        myOptions['params']['code'] = myOptions['params']['code'] ?? myException.getCode();
+        myOptions["element"] = myOptions["element"] ?? "error";
+        myOptions["params"]["code"] = myOptions["params"]["code"] ?? myException.getCode();
 
         myMessage = myException.getMessage();
         this.set(myMessage, myOptions);
@@ -142,7 +142,7 @@ class FlashMessage
     /**
      * Set a success message.
      *
-     * The `'element'` option will be set to  `'success'`.
+     * The `"element"` option will be set to  `"success"`.
      *
      * @param string myMessage Message to flash.
      * @param array<string, mixed> myOptions An array of options.
@@ -151,14 +151,14 @@ class FlashMessage
      */
     function success(string myMessage, array myOptions = []): void
     {
-        myOptions['element'] = 'success';
+        myOptions["element"] = "success";
         this.set(myMessage, myOptions);
     }
 
     /**
      * Set an success message.
      *
-     * The `'element'` option will be set to  `'error'`.
+     * The `"element"` option will be set to  `"error"`.
      *
      * @param string myMessage Message to flash.
      * @param array<string, mixed> myOptions An array of options.
@@ -167,14 +167,14 @@ class FlashMessage
      */
     function error(string myMessage, array myOptions = []): void
     {
-        myOptions['element'] = 'error';
+        myOptions["element"] = "error";
         this.set(myMessage, myOptions);
     }
 
     /**
      * Set a warning message.
      *
-     * The `'element'` option will be set to  `'warning'`.
+     * The `"element"` option will be set to  `"warning"`.
      *
      * @param string myMessage Message to flash.
      * @param array<string, mixed> myOptions An array of options.
@@ -183,14 +183,14 @@ class FlashMessage
      */
     function warning(string myMessage, array myOptions = []): void
     {
-        myOptions['element'] = 'warning';
+        myOptions["element"] = "warning";
         this.set(myMessage, myOptions);
     }
 
     /**
      * Set an info message.
      *
-     * The `'element'` option will be set to  `'info'`.
+     * The `"element"` option will be set to  `"info"`.
      *
      * @param string myMessage Message to flash.
      * @param array<string, mixed> myOptions An array of options.
@@ -199,7 +199,7 @@ class FlashMessage
      */
     function info(string myMessage, array myOptions = []): void
     {
-        myOptions['element'] = 'info';
+        myOptions["element"] = "info";
         this.set(myMessage, myOptions);
     }
 }

@@ -10,28 +10,28 @@ interface CookieInterface
      *
      * @var string
      */
-    public const EXPIRES_FORMAT = 'D, d-M-Y H:i:s T';
+    public const EXPIRES_FORMAT = "D, d-M-Y H:i:s T";
 
     /**
      * SameSite attribute value: Lax
      *
      * @var string
      */
-    public const SAMESITE_LAX = 'Lax';
+    public const SAMESITE_LAX = "Lax";
 
     /**
      * SameSite attribute value: Strict
      *
      * @var string
      */
-    public const SAMESITE_STRICT = 'Strict';
+    public const SAMESITE_STRICT = "Strict";
 
     /**
      * SameSite attribute value: None
      *
      * @var string
      */
-    public const SAMESITE_NONE = 'None';
+    public const SAMESITE_NONE = "None";
 
     /**
      * Valid values for "SameSite" attribute.
@@ -54,10 +54,8 @@ interface CookieInterface
 
     /**
      * Gets the cookie name
-     *
-     * @return string
      */
-    auto getName(): string;
+    string getName();
 
     /**
      * Gets the cookie value
@@ -87,17 +85,13 @@ interface CookieInterface
      * Get the id for a cookie
      *
      * Cookies are unique across name, domain, path tuples.
-     *
-     * @return string
      */
-    auto getId(): string;
+    string getId();
 
     /**
      * Get the path attribute.
-     *
-     * @return string
      */
-    auto getPath(): string;
+    string getPath();
 
     /**
      * Create a new cookie with an updated path
@@ -109,10 +103,8 @@ interface CookieInterface
 
     /**
      * Get the domain attribute.
-     *
-     * @return string
      */
-    auto getDomain(): string;
+    string getDomain();
 
     /**
      * Create a cookie with an updated domain
@@ -138,10 +130,8 @@ interface CookieInterface
 
     /**
      * Builds the expiration value part of the header string
-     *
-     * @return string
      */
-    auto getFormattedExpires(): string;
+    string getFormattedExpires();
 
     /**
      * Create a cookie with an updated expiration date
@@ -172,17 +162,15 @@ interface CookieInterface
      *
      * Cookies without an expiration date always return false.
      *
-     * @param \DateTime|\DateTimeImmutable $time The time to test against. Defaults to 'now' in UTC.
+     * @param \DateTime|\DateTimeImmutable $time The time to test against. Defaults to "now" in UTC.
      * @return bool
      */
-    function isExpired($time = null): bool;
+    bool isExpired($time = null);
 
     /**
      * Check if the cookie is HTTP only
-     *
-     * @return bool
      */
-    function isHttpOnly(): bool;
+    bool isHttpOnly();
 
     /**
      * Create a cookie with HTTP Only updated
@@ -194,10 +182,8 @@ interface CookieInterface
 
     /**
      * Check if the cookie is secure
-     *
-     * @return bool
      */
-    function isSecure(): bool;
+    bool isSecure();
 
     /**
      * Create a cookie with Secure updated
@@ -239,8 +225,6 @@ interface CookieInterface
 
     /**
      * Returns the cookie as header value
-     *
-     * @return string
      */
-    function toHeaderValue(): string;
+    string toHeaderValue();
 }

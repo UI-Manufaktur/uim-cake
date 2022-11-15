@@ -1,6 +1,6 @@
 module uim.cakeews;
 
-import uim.cakere.App;
+import uim.cake.core.App;
 import uim.cakeilities.Inflector;
 import uim.cakeews\Exception\MissingCellException;
 

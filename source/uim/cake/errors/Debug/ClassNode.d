@@ -44,8 +44,6 @@ class ClassNode : INode
 
     /**
      * Get the class name
-     *
-     * @return string
      */
     string getValue() {
         return this.class;

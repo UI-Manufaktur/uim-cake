@@ -1,6 +1,6 @@
-module uim.cakere;
+module uim.cake.core;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 import uim.cakeilities.Hash;
 use InvalidArgumentException;
 
@@ -33,19 +33,19 @@ trait InstanceConfigTrait
      * Setting a specific value:
      *
      * ```
-     * this.setConfig('key', myValue);
+     * this.setConfig("key", myValue);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * this.setConfig('some.nested.key', myValue);
+     * this.setConfig("some.nested.key", myValue);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.setConfig(['one' => 'value', 'another' => 'value']);
+     * this.setConfig(["one" => "value", "another" => "value"]);
      * ```
      *
      * @param array<string, mixed>|string myKey The key to set, or a complete array of configs.
@@ -79,19 +79,19 @@ trait InstanceConfigTrait
      * Reading a specific value:
      *
      * ```
-     * this.getConfig('key');
+     * this.getConfig("key");
      * ```
      *
      * Reading a nested value:
      *
      * ```
-     * this.getConfig('some.nested.key');
+     * this.getConfig("some.nested.key");
      * ```
      *
      * Reading with default value:
      *
      * ```
-     * this.getConfig('some-key', 'default-value');
+     * this.getConfig("some-key", "default-value");
      * ```
      *
      * @param string|null myKey The key to get or null for the whole config.
@@ -121,7 +121,7 @@ trait InstanceConfigTrait
     auto getConfigOrFail(string myKey) {
         myConfig = this.getConfig(myKey);
         if (myConfig === null) {
-            throw new InvalidArgumentException(sprintf('Expected configuration `%s` not found.', myKey));
+            throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", myKey));
         }
 
         return myConfig;
@@ -134,19 +134,19 @@ trait InstanceConfigTrait
      * Setting a specific value:
      *
      * ```
-     * this.configShallow('key', myValue);
+     * this.configShallow("key", myValue);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * this.configShallow('some.nested.key', myValue);
+     * this.configShallow("some.nested.key", myValue);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.configShallow(['one' => 'value', 'another' => 'value']);
+     * this.configShallow(["one" => "value", "another" => "value"]);
      * ```
      *
      * @param array<string, mixed>|string myKey The key to set, or a complete array of configs.
@@ -159,7 +159,7 @@ trait InstanceConfigTrait
             this._configInitialized = true;
         }
 
-        this._configWrite(myKey, myValue, 'shallow');
+        this._configWrite(myKey, myValue, "shallow");
 
         return this;
     }
@@ -175,13 +175,13 @@ trait InstanceConfigTrait
             return this._config;
         }
 
-        if (strpos(myKey, '.') === false) {
+        if (strpos(myKey, ".") === false) {
             return this._config[myKey] ?? null;
         }
 
         $return = this._config;
 
-        foreach (explode('.', myKey) as $k) {
+        foreach (explode(".", myKey) as $k) {
             if (!is_array($return) || !isset($return[$k])) {
                 $return = null;
                 break;
@@ -198,12 +198,12 @@ trait InstanceConfigTrait
      *
      * @param array<string, mixed>|string myKey Key to write to.
      * @param mixed myValue Value to write.
-     * @param string|bool myMerge True to merge recursively, 'shallow' for simple merge,
+     * @param string|bool myMerge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
      * @return void
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
-    protected auto _configWrite(myKey, myValue, myMerge = false): void
+    protected void _configWrite(myKey, myValue, myMerge = false)
     {
         if (is_string(myKey) && myValue === null) {
             this._configDelete(myKey);
@@ -213,7 +213,7 @@ trait InstanceConfigTrait
 
         if (myMerge) {
             $update = is_array(myKey) ? myKey : [myKey => myValue];
-            if (myMerge === 'shallow') {
+            if (myMerge === "shallow") {
                 this._config = array_merge(this._config, Hash::expand($update));
             } else {
                 this._config = Hash::merge(this._config, Hash::expand($update));
@@ -230,18 +230,18 @@ trait InstanceConfigTrait
             return;
         }
 
-        if (strpos(myKey, '.') === false) {
+        if (strpos(myKey, ".") === false) {
             this._config[myKey] = myValue;
 
             return;
         }
 
         $update = &this._config;
-        $stack = explode('.', myKey);
+        $stack = explode(".", myKey);
 
         foreach ($stack as $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf('Cannot set %s value', myKey));
+                throw new CakeException(sprintf("Cannot set %s value", myKey));
             }
 
             $update[$k] = $update[$k] ?? [];
@@ -259,21 +259,21 @@ trait InstanceConfigTrait
      * @return void
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
-    protected auto _configDelete(string myKey): void
+    protected void _configDelete(string myKey)
     {
-        if (strpos(myKey, '.') === false) {
+        if (strpos(myKey, ".") === false) {
             unset(this._config[myKey]);
 
             return;
         }
 
         $update = &this._config;
-        $stack = explode('.', myKey);
+        $stack = explode(".", myKey);
         $length = count($stack);
 
         foreach ($stack as $i => $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf('Cannot unset %s value', myKey));
+                throw new CakeException(sprintf("Cannot unset %s value", myKey));
             }
 
             if (!isset($update[$k])) {

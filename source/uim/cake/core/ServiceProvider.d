@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 use League\Container\IDefinitionContainer;
 use League\Container\ServiceProvider\AbstractServiceProvider;
@@ -9,11 +9,11 @@ use RuntimeException;
  * Container ServiceProvider
  *
  * Service provider bundle related services together helping
- * to organize your application's dependencies. They also help
+ * to organize your application"s dependencies. They also help
  * improve performance of applications with many services by
  * allowing service registration to be deferred until services are needed.
  *
- * @experimental This class' interface is not stable and may change
+ * @experimental This class" interface is not stable and may change
  *   in future minor releases.
  */
 abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProviderInterface
@@ -29,8 +29,8 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
     /**
      * Get the container.
      *
-     * This method's actual return type and documented return type differ
-     * because PHP 7.2 doesn't support return type narrowing.
+     * This method"s actual return type and documented return type differ
+     * because PHP 7.2 doesn"t support return type narrowing.
      *
      * @return \Cake\Core\IContainer
      */
@@ -40,7 +40,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
 
         if (!(myContainer instanceof IContainer)) {
             myMessage = sprintf(
-                'Unexpected container type. Expected `%s` got `%s` instead.',
+                "Unexpected container type. Expected `%s` got `%s` instead.",
                 IContainer::class,
                 getTypeName(myContainer)
             );
@@ -58,7 +58,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return void
      */
-    function boot(): void
+    void boot()
     {
         this.bootstrap(this.getContainer());
     }
@@ -74,7 +74,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * @param \Cake\Core\IContainer myContainer The container to add services to.
      * @return void
      */
-    function bootstrap(IContainer myContainer): void
+    void bootstrap(IContainer myContainer)
     {
     }
 
@@ -86,7 +86,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return void
      */
-    function register(): void
+    void register()
     {
         this.services(this.getContainer());
     }
@@ -113,5 +113,5 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * @param \Cake\Core\IContainer myContainer The container to add services to.
      * @return void
      */
-    abstract function services(IContainer myContainer): void;
+    abstract void services(IContainer myContainer);
 }

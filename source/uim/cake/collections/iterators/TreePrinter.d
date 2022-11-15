@@ -1,7 +1,7 @@
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
-import uim.cakellections\ICollection;
-import uim.cakellections\CollectionTrait;
+import uim.cake.collections\ICollection;
+import uim.cake.collections\CollectionTrait;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
 
@@ -80,8 +80,6 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
 
     /**
      * Returns the current iteration value
-     *
-     * @return string
      */
     string current() {
         $extractor = this._value;

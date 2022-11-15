@@ -3,7 +3,7 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakere.InstanceConfigTrait;
+/* import uim.cake.core.InstanceConfigTrait;
  */
 /**
  * Abstract password hashing class

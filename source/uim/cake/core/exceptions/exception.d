@@ -1,4 +1,4 @@
-module uim.cakere.exceptions;
+module uim.cake.core.exceptions;
 
 use RuntimeException;
 use Throwable;
@@ -19,11 +19,11 @@ class CakeException : RuntimeException
     protected $_attributes = [];
 
     /**
-     * Template string that has attributes sprintf()'ed into it.
+     * Template string that has attributes sprintf()"ed into it.
      *
      * @var string
      */
-    protected $_messageTemplate = '';
+    protected $_messageTemplate = "";
 
     /**
      * Array of headers to be passed to {@link \Cake\Http\Response::withHeader()}
@@ -46,11 +46,11 @@ class CakeException : RuntimeException
      * when debug mode is off.
      *
      * @param array|string myMessage Either the string of the error message, or an array of attributes
-     *   that are made available in the view, and sprintf()'d into Exception::$_messageTemplate
+     *   that are made available in the view, and sprintf()"d into Exception::$_messageTemplate
      * @param int|null $code The error code
      * @param \Throwable|null $previous the previous exception.
      */
-    this(myMessage = '', Nullable!int $code = null, ?Throwable $previous = null) {
+    this(myMessage = "", Nullable!int $code = null, ?Throwable $previous = null) {
         if (is_array(myMessage)) {
             this._attributes = myMessage;
             myMessage = vsprintf(this._messageTemplate, myMessage);
@@ -87,9 +87,9 @@ class CakeException : RuntimeException
         }
 
         deprecationWarning(
-            'Setting HTTP response headers from Exception directly is deprecated. ' .
-            'If your exceptions extend Exception, they must now extend HttpException. ' .
-            'You should only set HTTP headers on HttpException instances via the `setHeaders()` method.'
+            "Setting HTTP response headers from Exception directly is deprecated. " .
+            "If your exceptions extend Exception, they must now extend HttpException. " .
+            "You should only set HTTP headers on HttpException instances via the `setHeaders()` method."
         );
         if (is_array($header)) {
             return this._responseHeaders = $header;
@@ -100,5 +100,5 @@ class CakeException : RuntimeException
 }
 
 // phpcs:disable
-class_exists('Cake\Core\Exception\Exception');
+class_exists("Cake\Core\Exception\Exception");
 // phpcs:enable

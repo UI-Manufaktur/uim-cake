@@ -87,15 +87,15 @@ class EventManager : IEventManager
         $argCount = func_num_args();
         if ($argCount === 2) {
             this._listeners[myEventKey][static::$defaultPriority][] = [
-                'callable' => myOptions,
+                "callable" => myOptions,
             ];
 
             return this;
         }
 
-        $priority = myOptions['priority'] ?? static::$defaultPriority;
+        $priority = myOptions["priority"] ?? static::$defaultPriority;
         this._listeners[myEventKey][$priority][] = [
-            'callable' => $callable,
+            "callable" => $callable,
         ];
 
         return this;
@@ -113,7 +113,7 @@ class EventManager : IEventManager
         foreach ($subscriber.implementedEvents() as myEventKey => $function) {
             myOptions = [];
             $method = $function;
-            if (is_array($function) && isset($function['callable'])) {
+            if (is_array($function) && isset($function["callable"])) {
                 [$method, myOptions] = this._extractCallable($function, $subscriber);
             } elseif (is_array($function) && is_numeric(key($function))) {
                 foreach ($function as $f) {
@@ -140,9 +140,9 @@ class EventManager : IEventManager
     protected auto _extractCallable(array $function, IEventListener $object): array
     {
         /** @var callable $method */
-        $method = $function['callable'];
+        $method = $function["callable"];
         myOptions = $function;
-        unset(myOptions['callable']);
+        unset(myOptions["callable"]);
         if (is_string($method)) {
             /** @var callable $method */
             $method = [$object, $method];
@@ -162,8 +162,8 @@ class EventManager : IEventManager
         if (!is_string(myEventKey)) {
             if (!is_callable(myEventKey)) {
                 throw new CakeException(
-                    'First argument of EventManager::off() must be ' .
-                    ' string or IEventListener instance or callable.'
+                    "First argument of EventManager::off() must be " .
+                    " string or IEventListener instance or callable."
                 );
             }
 
@@ -192,7 +192,7 @@ class EventManager : IEventManager
 
         foreach (this._listeners[myEventKey] as $priority => $callables) {
             foreach ($callables as $k => $callback) {
-                if ($callback['callable'] === $callable) {
+                if ($callback["callable"] === $callable) {
                     unset(this._listeners[myEventKey][$priority][$k]);
                     break;
                 }
@@ -222,12 +222,12 @@ class EventManager : IEventManager
             if (is_array($function)) {
                 if (is_numeric(key($function))) {
                     foreach ($function as $handler) {
-                        $handler = $handler['callable'] ?? $handler;
+                        $handler = $handler["callable"] ?? $handler;
                         this.off(myKey, [$subscriber, $handler]);
                     }
                     continue;
                 }
-                $function = $function['callable'];
+                $function = $function["callable"];
             }
             this.off(myKey, [$subscriber, $function]);
         }
@@ -258,7 +258,7 @@ class EventManager : IEventManager
             if (myEvent.isStopped()) {
                 break;
             }
-            myResult = this._callListener($listener['callable'], myEvent);
+            myResult = this._callListener($listener["callable"], myEvent);
             if (myResult === false) {
                 myEvent.stopPropagation();
             }
@@ -334,7 +334,7 @@ class EventManager : IEventManager
      */
     function matchingListeners(string myEventKeyPattern): array
     {
-        $matchPattern = '/' . preg_quote(myEventKeyPattern, '/') . '/';
+        $matchPattern = "/" . preg_quote(myEventKeyPattern, "/") . "/";
         $matches = array_intersect_key(
             this._listeners,
             array_flip(
@@ -421,14 +421,14 @@ class EventManager : IEventManager
     auto __debugInfo(): array
     {
         $properties = get_object_vars(this);
-        $properties['_generalManager'] = '(object) EventManager';
-        $properties['_listeners'] = [];
+        $properties["_generalManager"] = "(object) EventManager";
+        $properties["_listeners"] = [];
         foreach (this._listeners as myKey => $priorities) {
             $listenerCount = 0;
             foreach ($priorities as $listeners) {
                 $listenerCount += count($listeners);
             }
-            $properties['_listeners'][myKey] = $listenerCount . ' listener(s)';
+            $properties["_listeners"][myKey] = $listenerCount . " listener(s)";
         }
         if (this._eventList) {
             myCount = count(this._eventList);
@@ -436,15 +436,15 @@ class EventManager : IEventManager
                 myEvent = this._eventList[$i];
                 try {
                     $subject = myEvent.getSubject();
-                    $properties['_dispatchedEvents'][] = myEvent.getName() . ' with subject ' . get_class($subject);
+                    $properties["_dispatchedEvents"][] = myEvent.getName() . " with subject " . get_class($subject);
                 } catch (CakeException $e) {
-                    $properties['_dispatchedEvents'][] = myEvent.getName() . ' with no subject';
+                    $properties["_dispatchedEvents"][] = myEvent.getName() . " with no subject";
                 }
             }
         } else {
-            $properties['_dispatchedEvents'] = null;
+            $properties["_dispatchedEvents"] = null;
         }
-        unset($properties['_eventList']);
+        unset($properties["_eventList"]);
 
         return $properties;
     }

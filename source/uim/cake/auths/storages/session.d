@@ -3,7 +3,7 @@ module uim.caketh\Storage;
 @safe:
 import uim.cake
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.caketps\Response;
 import uim.caketps\ServerRequest;
 
@@ -42,8 +42,8 @@ class SessionStorage : IStorage
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key' => 'Auth.User',
-        'redirect' => 'Auth.redirect',
+        "key" => "Auth.User",
+        "redirect" => "Auth.redirect",
     ];
 
     /**
@@ -70,7 +70,7 @@ class SessionStorage : IStorage
         }
 
         /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-        this._user = this._session.read(this._config['key']) ?: false;
+        this._user = this._session.read(this._config["key"]) ?: false;
 
         /** @psalm-suppress InvalidReturnStatement */
         return this._user ?: null;
@@ -88,7 +88,7 @@ class SessionStorage : IStorage
         this._user = myUser;
 
         this._session.renew();
-        this._session.write(this._config['key'], myUser);
+        this._session.write(this._config["key"], myUser);
     }
 
     /**
@@ -99,23 +99,23 @@ class SessionStorage : IStorage
     void delete() {
         this._user = false;
 
-        this._session.delete(this._config['key']);
+        this._session.delete(this._config["key"]);
         this._session.renew();
     }
 
 
     function redirectUrl(myUrl = null) {
         if (myUrl === null) {
-            return this._session.read(this._config['redirect']);
+            return this._session.read(this._config["redirect"]);
         }
 
         if (myUrl === false) {
-            this._session.delete(this._config['redirect']);
+            this._session.delete(this._config["redirect"]);
 
             return null;
         }
 
-        this._session.write(this._config['redirect'], myUrl);
+        this._session.write(this._config["redirect"], myUrl);
 
         return null;
     }

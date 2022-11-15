@@ -1,8 +1,8 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
 import uim.caketps\Exception\RedirectException;
 import uim.caketps\ServerRequest;
 import uim.cakeutings\Exception\MissingRouteException;
@@ -14,7 +14,7 @@ import uim.cakeutings\Router;
 class RoutesCheckCommand : Command {
 
     static string defaultName() {
-        return 'routes check';
+        return "routes check";
     }
 
     /**
@@ -25,36 +25,36 @@ class RoutesCheckCommand : Command {
      * @return int|null The exit code or null for success
      */
     int execute(Arguments $args, ConsoleIo $io) {
-        auto myUrl = $args.getArgument('url');
+        auto myUrl = $args.getArgument("url");
         try {
-            myRequest = new ServerRequest(['url' => myUrl]);
+            myRequest = new ServerRequest(["url" => myUrl]);
             $route = Router::parseRequest(myRequest);
             myName = null;
             foreach (Router::routes() as $r) {
                 if ($r.match($route)) {
-                    myName = $r.options['_name'] ?? $r.getName();
+                    myName = $r.options["_name"] ?? $r.getName();
                     break;
                 }
             }
 
-            unset($route['_matchedRoute']);
+            unset($route["_matchedRoute"]);
             ksort($route);
 
             $output = [
-                ['Route name', 'URI template', 'Defaults'],
+                ["Route name", "URI template", "Defaults"],
                 [myName, myUrl, json_encode($route)],
             ];
-            $io.helper('table').output($output);
+            $io.helper("table").output($output);
             $io.out();
         } catch (RedirectException $e) {
             $output = [
-                ['URI template', 'Redirect'],
+                ["URI template", "Redirect"],
                 [myUrl, $e.getMessage()],
             ];
-            $io.helper('table').output($output);
+            $io.helper("table").output($output);
             $io.out();
         } catch (MissingRouteException $e) {
-            $io.warning("'myUrl' did not match any routes.");
+            $io.warning(""myUrl" did not match any routes.");
             $io.out();
 
             return static::CODE_ERROR;
@@ -72,12 +72,12 @@ class RoutesCheckCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Check a URL string against the routes. ' .
-            'Will output the routing parameters the route resolves to.'
+            "Check a URL string against the routes. " .
+            "Will output the routing parameters the route resolves to."
         )
-        .addArgument('url', [
-            'help' => 'The URL to check.',
-            'required' => true,
+        .addArgument("url", [
+            "help" => "The URL to check.",
+            "required" => true,
         ]);
 
         return $parser;

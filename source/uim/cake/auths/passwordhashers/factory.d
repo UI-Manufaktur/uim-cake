@@ -3,7 +3,7 @@ module uim.caketh;
 @safe:
 import uim.cake
 
-/* import uim.cakere.App;
+/* import uim.cake.core.App;
 use RuntimeException;
  */
 /**
@@ -26,19 +26,19 @@ class PasswordHasherFactory
         if (is_string(myPasswordHasher)) {
             myClass = myPasswordHasher;
         } else {
-            myClass = myPasswordHasher['className'];
+            myClass = myPasswordHasher["className"];
             myConfig = myPasswordHasher;
-            unset(myConfig['className']);
+            unset(myConfig["className"]);
         }
 
-        myClassName = App::className(myClass, 'Auth', 'PasswordHasher');
+        myClassName = App::className(myClass, "Auth", "PasswordHasher");
         if (myClassName === null) {
-            throw new RuntimeException(sprintf('Password hasher class "%s" was not found.', myClass));
+            throw new RuntimeException(sprintf("Password hasher class "%s" was not found.", myClass));
         }
 
         myHasher = new myClassName(myConfig);
         if (!(myHasher instanceof AbstractPasswordHasher)) {
-            throw new RuntimeException('Password hasher must extend AbstractPasswordHasher class.');
+            throw new RuntimeException("Password hasher must extend AbstractPasswordHasher class.");
         }
 
         return myHasher;

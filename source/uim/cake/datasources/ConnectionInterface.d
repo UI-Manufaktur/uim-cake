@@ -1,4 +1,4 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -50,10 +50,8 @@ interface ConnectionInterface : LoggerAwareInterface
 
     /**
      * Get the configuration name for this connection.
-     *
-     * @return string
      */
-    function configName(): string;
+    string configName();
 
     /**
      * Get the configuration data used to create the connection.

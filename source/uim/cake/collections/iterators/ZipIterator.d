@@ -1,9 +1,9 @@
 
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
-import uim.cakellections\Collection;
-import uim.cakellections\ICollection;
-import uim.cakellections\CollectionTrait;
+import uim.cake.collections\Collection;
+import uim.cake.collections\ICollection;
+import uim.cake.collections\CollectionTrait;
 use MultipleIterator;
 use Serializable;
 

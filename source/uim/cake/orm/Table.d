@@ -16,10 +16,10 @@ import uim.cake.events\IEventDispatcher;
 import uim.cake.events\EventDispatcherTrait;
 import uim.cake.events\IEventListener;
 import uim.cake.events\EventManager;
-import uim.cake.orm.Association\BelongsTo;
-import uim.cake.orm.Association\BelongsToMany;
-import uim.cake.orm.Association\HasMany;
-import uim.cake.orm.Association\HasOne;
+import uim.cake.orm.associations\BelongsTo;
+import uim.cake.orm.associations\BelongsToMany;
+import uim.cake.orm.associations\HasMany;
+import uim.cake.orm.associations\HasOne;
 import uim.cake.orm.Exception\MissingEntityException;
 import uim.cake.orm.Exception\PersistenceFailedException;
 import uim.cake.orm.Exception\RolledbackTransactionException;
@@ -316,8 +316,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return string
      * @see \Cake\ORM\Locator\TableLocator::get()
      */
-    static function defaultConnectionName(): string
-    {
+    static string defaultConnectionName() {
         return 'default';
     }
 
@@ -362,11 +361,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Returns the database table name.
      *
      * This can include the database schema name if set using `setTable()`.
-     *
-     * @return string
      */
-    auto getTable(): string
-    {
+    string getTable() {
         if (this._table === null) {
             myTable = moduleSplit(static::class);
             myTable = substr(end(myTable), 0, -5);
@@ -393,11 +389,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
     /**
      * Returns the table alias.
-     *
-     * @return string
      */
-    auto getAlias(): string
-    {
+    string getAlias() {
         if (this._alias === null) {
             myAlias = moduleSplit(static::class);
             myAlias = substr(end(myAlias), 0, -5) ?: this.getTable();
@@ -415,8 +408,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param string myField The field to alias.
      * @return string The field prefixed with the table alias.
      */
-    function aliasField(string myField): string
-    {
+    string aliasField(string myField) {
         if (strpos(myField, '.') !== false) {
             return myField;
         }
@@ -438,11 +430,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
     /**
      * Returns the table registry key used to create this table instance.
-     *
-     * @return string
      */
-    auto getRegistryAlias(): string
-    {
+    string getRegistryAlias() {
         if (this._registryAlias === null) {
             this._registryAlias = this.getAlias();
         }
@@ -673,8 +662,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return string
      * @psalm-return class-string<\Cake\Datasource\IEntity>
      */
-    auto getEntityClass(): string
-    {
+    string getEntityClass() {
         if (!this._entityClass) {
             $default = Entity::class;
             $self = static::class;

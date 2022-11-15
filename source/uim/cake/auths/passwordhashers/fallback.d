@@ -15,7 +15,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'hashers' => [],
+        "hashers" => [],
     ];
 
     /**
@@ -34,9 +34,9 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      */
     this(array myConfig = []) {
         super.this(myConfig);
-        foreach (this._config['hashers'] as myKey => myHasher) {
-            if (is_array(myHasher) && !isset(myHasher['className'])) {
-                myHasher['className'] = myKey;
+        foreach (this._config["hashers"] as myKey => myHasher) {
+            if (is_array(myHasher) && !isset(myHasher["className"])) {
+                myHasher["className"] = myKey;
             }
             this._hashers[] = PasswordHasherFactory::build(myHasher);
         }

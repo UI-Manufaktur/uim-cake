@@ -33,13 +33,13 @@ class CacheSession : SessionHandlerInterface
      * Constructor.
      *
      * @param array<string, mixed> myConfig The configuration to use for this engine
-     * It requires the key 'config' which is the name of the Cache config to use for
+     * It requires the key "config" which is the name of the Cache config to use for
      * storing the session
-     * @throws \InvalidArgumentException if the 'config' key is not provided
+     * @throws \InvalidArgumentException if the "config" key is not provided
      */
     this(array myConfig = []) {
-        if (empty(myConfig['config'])) {
-            throw new InvalidArgumentException('The cache configuration name to use is required');
+        if (empty(myConfig["config"])) {
+            throw new InvalidArgumentException("The cache configuration name to use is required");
         }
         this._options = myConfig;
     }
@@ -51,8 +51,7 @@ class CacheSession : SessionHandlerInterface
      * @param string myName The session name.
      * @return bool Success
      */
-    function open(myPath, myName): bool
-    {
+    bool open(myPath, myName) {
         return true;
     }
 
@@ -61,8 +60,7 @@ class CacheSession : SessionHandlerInterface
      *
      * @return bool Success
      */
-    function close(): bool
-    {
+    bool close() {
         return true;
     }
 
@@ -74,10 +72,10 @@ class CacheSession : SessionHandlerInterface
      */
     #[\ReturnTypeWillChange]
     function read($id) {
-        myValue = Cache::read($id, this._options['config']);
+        myValue = Cache::read($id, this._options["config"]);
 
         if (myValue === null) {
-            return '';
+            return "";
         }
 
         return myValue;
@@ -90,13 +88,12 @@ class CacheSession : SessionHandlerInterface
      * @param string myData The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
-    function write($id, myData): bool
-    {
+    bool write($id, myData) {
         if (!$id) {
             return false;
         }
 
-        return Cache::write($id, myData, this._options['config']);
+        return Cache::write($id, myData, this._options["config"]);
     }
 
     /**
@@ -105,15 +102,14 @@ class CacheSession : SessionHandlerInterface
      * @param string $id ID that uniquely identifies session in cache.
      * @return bool Always true.
      */
-    function destroy($id): bool
-    {
-        Cache::delete($id, this._options['config']);
+    bool destroy($id) {
+        Cache::delete($id, this._options["config"]);
 
         return true;
     }
 
     /**
-     * No-op method. Always returns 0 since cache engine don't have garbage collection.
+     * No-op method. Always returns 0 since cache engine don"t have garbage collection.
      *
      * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
      * @return int|false

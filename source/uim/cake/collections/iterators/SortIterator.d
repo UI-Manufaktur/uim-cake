@@ -1,6 +1,6 @@
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
-import uim.cakellections\Collection;
+import uim.cake.collections\Collection;
 use IDateTime;
 use Traversable;
 
@@ -53,7 +53,7 @@ class SortIterator : Collection
         foreach (myItems as myKey => $val) {
             $val = $callback($val);
             if ($val instanceof IDateTime && myType === \SORT_NUMERIC) {
-                $val = $val.format('U');
+                $val = $val.format("U");
             }
             myResults[myKey] = $val;
         }

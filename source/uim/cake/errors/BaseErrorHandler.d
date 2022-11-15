@@ -1,7 +1,7 @@
 module uim.cakerors;
 
-import uim.cakere.Configure;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakeutings\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
@@ -24,10 +24,10 @@ abstract class BaseErrorHandler
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'log' => true,
-        'trace' => false,
-        'skipLog' => [],
-        'errorLogger' => ErrorLogger::class,
+        "log" => true,
+        "trace" => false,
+        "skipLog" => [],
+        "errorLogger" => ErrorLogger::class,
     ];
 
     /**
@@ -69,15 +69,15 @@ abstract class BaseErrorHandler
      * Register the error and exception handlers.
      */
     void register() {
-        $level = this._config['errorLevel'] ?? -1;
+        $level = this._config["errorLevel"] ?? -1;
         error_reporting($level);
-        set_error_handler([this, 'handleError'], $level);
-        set_exception_handler([this, 'handleException']);
+        set_error_handler([this, "handleError"], $level);
+        set_exception_handler([this, "handleException"]);
         register_shutdown_function(function (): void {
-            if ((PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') && this._handled) {
+            if ((PHP_SAPI === "cli" || PHP_SAPI === "phpdbg") && this._handled) {
                 return;
             }
-            $megabytes = this._config['extraFatalErrorMemory'] ?? 4;
+            $megabytes = this._config["extraFatalErrorMemory"] ?? 4;
             if ($megabytes > 0) {
                 this.increaseMemoryLimit($megabytes * 1024);
             }
@@ -90,14 +90,14 @@ abstract class BaseErrorHandler
                 E_ERROR,
                 E_PARSE,
             ];
-            if (!in_array(myError['type'], $fatals, true)) {
+            if (!in_array(myError["type"], $fatals, true)) {
                 return;
             }
             this.handleFatalError(
-                myError['type'],
-                myError['message'],
-                myError['file'],
-                myError['line']
+                myError["type"],
+                myError["message"],
+                myError["file"],
+                myError["line"]
             );
         });
     }
@@ -109,8 +109,8 @@ abstract class BaseErrorHandler
      * This function will use Debugger to display errors when debug mode is on. And
      * will log errors to Log, when debug mode is off.
      *
-     * You can use the 'errorLevel' option to set what type of errors will be handled.
-     * Stack traces for errors can be enabled with the 'trace' option.
+     * You can use the "errorLevel" option to set what type of errors will be handled.
+     * Stack traces for errors can be enabled with the "trace" option.
      *
      * @param int $code Code of error
      * @param string $description Error description
@@ -136,15 +136,15 @@ abstract class BaseErrorHandler
             return this.handleFatalError($code, $description, myfile, $line);
         }
         myData = [
-            'level' => $log,
-            'code' => $code,
-            'error' => myError,
-            'description' => $description,
-            'file' => myfile,
-            'line' => $line,
+            "level" => $log,
+            "code" => $code,
+            "error" => myError,
+            "description" => $description,
+            "file" => myfile,
+            "line" => $line,
         ];
 
-        $debug = (bool)Configure::read('debug');
+        $debug = (bool)Configure::read("debug");
         if ($debug) {
             // By default trim 3 frames off for the public and protected methods
             // used by ErrorHandler instances.
@@ -152,14 +152,14 @@ abstract class BaseErrorHandler
 
             // Can be used by error handlers that wrap other error handlers
             // to coerce the generated stack trace to the correct point.
-            if (isset($context['_trace_frame_offset'])) {
-                $start += $context['_trace_frame_offset'];
-                unset($context['_trace_frame_offset']);
+            if (isset($context["_trace_frame_offset"])) {
+                $start += $context["_trace_frame_offset"];
+                unset($context["_trace_frame_offset"]);
             }
             myData += [
-                'context' => $context,
-                'start' => $start,
-                'path' => Debugger::trimPath((string)myfile),
+                "context" => $context,
+                "start" => $start,
+                "path" => Debugger::trimPath((string)myfile),
             ];
         }
         this._displayError(myData, $debug);
@@ -178,7 +178,7 @@ abstract class BaseErrorHandler
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
     void wrapAndHandleException(Throwable myException) {
-        deprecationWarning('This method is no longer in use. Call handleException instead.');
+        deprecationWarning("This method is no longer in use. Call handleException instead.");
         this.handleException(myException);
     }
 
@@ -222,11 +222,11 @@ abstract class BaseErrorHandler
      */
     bool handleFatalError(int $code, string $description, string myfile, int $line) {
         myData = [
-            'code' => $code,
-            'description' => $description,
-            'file' => myfile,
-            'line' => $line,
-            'error' => 'Fatal Error',
+            "code" => $code,
+            "description" => $description,
+            "file" => myfile,
+            "line" => $line,
+            "error" => "Fatal Error",
         ];
         this._logError(LOG_ERR, myData);
 
@@ -243,24 +243,24 @@ abstract class BaseErrorHandler
      * @return void
      */
     void increaseMemoryLimit(int $additionalKb) {
-        $limit = ini_get('memory_limit');
-        if ($limit === false || $limit == "" || $limit === '-1') {
+        $limit = ini_get("memory_limit");
+        if ($limit === false || $limit == "" || $limit === "-1") {
             return;
         }
         $limit = trim($limit);
         $units = strtoupper(substr($limit, -1));
         $current = (int)substr($limit, 0, strlen($limit) - 1);
-        if ($units === 'M') {
+        if ($units === "M") {
             $current *= 1024;
-            $units = 'K';
+            $units = "K";
         }
-        if ($units === 'G') {
+        if ($units === "G") {
             $current = $current * 1024 * 1024;
-            $units = 'K';
+            $units = "K";
         }
 
-        if ($units === 'K') {
-            ini_set('memory_limit', ceil($current + $additionalKb) . 'K');
+        if ($units === "K") {
+            ini_set("memory_limit", ceil($current + $additionalKb) . "K");
         }
     }
 
@@ -273,20 +273,20 @@ abstract class BaseErrorHandler
      */
     protected bool _logError($level, array myData) {
         myMessage = sprintf(
-            '%s (%s): %s in [%s, line %s]',
-            myData['error'],
-            myData['code'],
-            myData['description'],
-            myData['file'],
-            myData['line']
+            "%s (%s): %s in [%s, line %s]",
+            myData["error"],
+            myData["code"],
+            myData["description"],
+            myData["file"],
+            myData["line"]
         );
         $context = [];
-        if (!empty(this._config['trace'])) {
-            $context['trace'] = Debugger::trace([
-                'start' => 1,
-                'format' => 'log',
+        if (!empty(this._config["trace"])) {
+            $context["trace"] = Debugger::trace([
+                "start" => 1,
+                "format" => "log",
             ]);
-            $context['request'] = Router::getRequest();
+            $context["request"] = Router::getRequest();
         }
 
         return this.getLogger().logMessage($level, myMessage, $context);
@@ -299,7 +299,7 @@ abstract class BaseErrorHandler
      * @param \Psr\Http\Message\IServerRequest|null myRequest The current request.
      */
     bool logException(Throwable myException, ?IServerRequest myRequest = null) {
-        if (empty(this._config['log'])) {
+        if (empty(this._config["log"])) {
             return false;
         }
 
@@ -314,7 +314,7 @@ abstract class BaseErrorHandler
     auto getLogger() {
         if (this.logger === null) {
             /** @var \Cake\Error\IErrorLogger $logger */
-            $logger = new this._config['errorLogger'](this._config);
+            $logger = new this._config["errorLogger"](this._config);
 
             if (!$logger instanceof IErrorLogger) {
                 // Set the logger so that the next error can be logged.
@@ -339,27 +339,27 @@ abstract class BaseErrorHandler
     static function mapErrorCode(int $code): array
     {
         $levelMap = [
-            E_PARSE => 'error',
-            E_ERROR => 'error',
-            E_CORE_ERROR => 'error',
-            E_COMPILE_ERROR => 'error',
-            E_USER_ERROR => 'error',
-            E_WARNING => 'warning',
-            E_USER_WARNING => 'warning',
-            E_COMPILE_WARNING => 'warning',
-            E_RECOVERABLE_ERROR => 'warning',
-            E_NOTICE => 'notice',
-            E_USER_NOTICE => 'notice',
-            E_STRICT => 'strict',
-            E_DEPRECATED => 'deprecated',
-            E_USER_DEPRECATED => 'deprecated',
+            E_PARSE => "error",
+            E_ERROR => "error",
+            E_CORE_ERROR => "error",
+            E_COMPILE_ERROR => "error",
+            E_USER_ERROR => "error",
+            E_WARNING => "warning",
+            E_USER_WARNING => "warning",
+            E_COMPILE_WARNING => "warning",
+            E_RECOVERABLE_ERROR => "warning",
+            E_NOTICE => "notice",
+            E_USER_NOTICE => "notice",
+            E_STRICT => "strict",
+            E_DEPRECATED => "deprecated",
+            E_USER_DEPRECATED => "deprecated",
         ];
         $logMap = [
-            'error' => LOG_ERR,
-            'warning' => LOG_WARNING,
-            'notice' => LOG_NOTICE,
-            'strict' => LOG_NOTICE,
-            'deprecated' => LOG_NOTICE,
+            "error" => LOG_ERR,
+            "warning" => LOG_WARNING,
+            "notice" => LOG_NOTICE,
+            "strict" => LOG_NOTICE,
+            "deprecated" => LOG_NOTICE,
         ];
 
         myError = $levelMap[$code];

@@ -1,13 +1,4 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         4.0.3
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.databases;
+module uim.cake.databases;
 
 import uim.cake.databases.Expression\FunctionExpression;
 
@@ -32,13 +23,13 @@ class PostgresCompiler : QueryCompiler
      * @inheritDoc
      */
     protected $_templates = [
-        'delete' => 'DELETE',
-        'where' => ' WHERE %s',
-        'group' => ' GROUP BY %s',
-        'order' => ' %s',
-        'limit' => ' LIMIT %s',
-        'offset' => ' OFFSET %s',
-        'epilog' => ' %s',
+        "delete" => "DELETE",
+        "where" => " WHERE %s",
+        "group" => " GROUP BY %s",
+        "order" => " %s",
+        "limit" => " LIMIT %s",
+        "offset" => " OFFSET %s",
+        "epilog" => " %s",
     ];
 
     /**
@@ -52,7 +43,7 @@ class PostgresCompiler : QueryCompiler
      * @return string
      */
     protected auto _buildHavingPart($parts, myQuery, $binder) {
-        $selectParts = myQuery.clause('select');
+        $selectParts = myQuery.clause("select");
 
         foreach ($selectParts as $selectKey => $selectPart) {
             if (!$selectPart instanceof FunctionExpression) {
@@ -63,7 +54,7 @@ class PostgresCompiler : QueryCompiler
                     continue;
                 }
                 preg_match_all(
-                    '/\b' . trim($selectKey, '"') . '\b/i',
+                    "/\b" . trim($selectKey, """) . "\b/i",
                     $p,
                     $matches
                 );
@@ -73,13 +64,13 @@ class PostgresCompiler : QueryCompiler
                 }
 
                 $parts[$k] = preg_replace(
-                    ['/"/', '/\b' . trim($selectKey, '"') . '\b/i'],
-                    ['', $selectPart.sql($binder)],
+                    ["/"/", "/\b" . trim($selectKey, """) . "\b/i"],
+                    ["", $selectPart.sql($binder)],
                     $p
                 );
             }
         }
 
-        return sprintf(' HAVING %s', implode(', ', $parts));
+        return sprintf(" HAVING %s", implode(", ", $parts));
     }
 }

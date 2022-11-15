@@ -1,7 +1,7 @@
 module uim.cakerors;
 
-import uim.cakere.Configure;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakerors\Debug\ArrayItemNode;
 import uim.cakerors\Debug\ArrayNode;
 import uim.cakerors\Debug\ClassNode;
@@ -30,7 +30,7 @@ use Throwable;
 /**
  * Provide custom logging and error handling.
  *
- * Debugger : PHP's default error handling and gives
+ * Debugger : PHP"s default error handling and gives
  * simpler to use more powerful interfaces.
  *
  * @link https://book.cakephp.org/4/en/development/debugging.html#module-Cake\Error
@@ -45,9 +45,9 @@ class Debugger
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'outputMask' => [],
-        'exportFormatter' => null,
-        'editor' => 'phpstorm',
+        "outputMask" => [],
+        "exportFormatter" => null,
+        "editor" => "phpstorm",
     ];
 
     /**
@@ -55,7 +55,7 @@ class Debugger
      *
      * @var string
      */
-    protected $_outputFormat = 'js';
+    protected $_outputFormat = "js";
 
     /**
      * Templates used when generating trace or error strings. Can be global or indexed by the format
@@ -64,33 +64,33 @@ class Debugger
      * @var array<string, array<string, mixed>>
      */
     protected $_templates = [
-        'log' => [
-            'trace' => '{:reference} - {:path}, line {:line}',
-            'error' => '{:error} ({:code}): {:description} in [{:file}, line {:line}]',
+        "log" => [
+            "trace" => "{:reference} - {:path}, line {:line}",
+            "error" => "{:error} ({:code}): {:description} in [{:file}, line {:line}]",
         ],
-        'js' => [
-            'error' => '',
-            'info' => '',
-            'trace' => '<pre class="stack-trace">{:trace}</pre>',
-            'code' => '',
-            'context' => '',
-            'links' => [],
-            'escapeContext' => true,
+        "js" => [
+            "error" => "",
+            "info" => "",
+            "trace" => "<pre class="stack-trace">{:trace}</pre>",
+            "code" => "",
+            "context" => "",
+            "links" => [],
+            "escapeContext" => true,
         ],
-        'html' => [
-            'trace' => '<pre class="cake-error trace"><b>Trace</b> <p>{:trace}</p></pre>',
-            'context' => '<pre class="cake-error context"><b>Context</b> <p>{:context}</p></pre>',
-            'escapeContext' => true,
+        "html" => [
+            "trace" => "<pre class="cake-error trace"><b>Trace</b> <p>{:trace}</p></pre>",
+            "context" => "<pre class="cake-error context"><b>Context</b> <p>{:context}</p></pre>",
+            "escapeContext" => true,
         ],
-        'txt' => [
-            'error' => "{:error}: {:code} :: {:description} on line {:line} of {:path}\n{:info}",
-            'code' => '',
-            'info' => '',
+        "txt" => [
+            "error" => "{:error}: {:code} :: {:description} on line {:line} of {:path}\n{:info}",
+            "code" => "",
+            "info" => "",
         ],
-        'base' => [
-            'traceLine' => '{:reference} - {:path}, line {:line}',
-            'trace' => "Trace:\n{:trace}\n",
-            'context' => "Context:\n{:context}\n",
+        "base" => [
+            "traceLine" => "{:reference} - {:path}, line {:line}",
+            "trace" => "Trace:\n{:trace}\n",
+            "context" => "Context:\n{:context}\n",
         ],
     ];
 
@@ -100,13 +100,13 @@ class Debugger
      * @var array<string, string|callable>
      */
     protected $editors = [
-        'atom' => 'atom://core/open/file?filename={file}&line={line}',
-        'emacs' => 'emacs://open?url=file://{file}&line={line}',
-        'macvim' => 'mvim://open/?url=file://{file}&line={line}',
-        'phpstorm' => 'phpstorm://open?file={file}&line={line}',
-        'sublime' => 'subl://open?url=file://{file}&line={line}',
-        'textmate' => 'txmt://open?url=file://{file}&line={line}',
-        'vscode' => 'vscode://file/{file}:{line}',
+        "atom" => "atom://core/open/file?filename={file}&line={line}",
+        "emacs" => "emacs://open?url=file://{file}&line={line}",
+        "macvim" => "mvim://open/?url=file://{file}&line={line}",
+        "phpstorm" => "phpstorm://open?file={file}&line={line}",
+        "sublime" => "subl://open?url=file://{file}&line={line}",
+        "textmate" => "txmt://open?url=file://{file}&line={line}",
+        "vscode" => "vscode://file/{file}:{line}",
     ];
 
     /**
@@ -120,57 +120,57 @@ class Debugger
      * Constructor.
      */
     this() {
-        $docRef = ini_get('docref_root');
-        if (empty($docRef) && function_exists('ini_set')) {
-            ini_set('docref_root', 'https://secure.php.net/');
+        $docRef = ini_get("docref_root");
+        if (empty($docRef) && function_exists("ini_set")) {
+            ini_set("docref_root", "https://secure.php.net/");
         }
-        if (!defined('E_RECOVERABLE_ERROR')) {
-            define('E_RECOVERABLE_ERROR', 4096);
+        if (!defined("E_RECOVERABLE_ERROR")) {
+            define("E_RECOVERABLE_ERROR", 4096);
         }
 
-        myConfig = array_intersect_key((array)Configure::read('Debugger'), this._defaultConfig);
+        myConfig = array_intersect_key((array)Configure::read("Debugger"), this._defaultConfig);
         this.setConfig(myConfig);
 
-        $e = '<pre class="cake-error">';
-        $e .= '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-trace\')';
-        $e .= '.style.display = (document.getElementById(\'{:id}-trace\').style.display == ';
-        $e .= '\'none\' ? \'\' : \'none\');"><b>{:error}</b> ({:code})</a>: {:description} ';
-        $e .= '[<b>{:path}</b>, line <b>{:line}</b>]';
+        $e = "<pre class="cake-error">";
+        $e .= "<a href="javascript:void(0);" onclick="document.getElementById(\"{:id}-trace\")";
+        $e .= ".style.display = (document.getElementById(\"{:id}-trace\").style.display == ";
+        $e .= "\"none\" ? \"\" : \"none\");"><b>{:error}</b> ({:code})</a>: {:description} ";
+        $e .= "[<b>{:path}</b>, line <b>{:line}</b>]";
 
-        $e .= '<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">';
-        $e .= '{:links}{:info}</div>';
-        $e .= '</pre>';
-        this._templates['js']['error'] = $e;
+        $e .= "<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">";
+        $e .= "{:links}{:info}</div>";
+        $e .= "</pre>";
+        this._templates["js"]["error"] = $e;
 
-        $t = '<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">';
-        $t .= '{:context}{:code}{:trace}</div>';
-        this._templates['js']['info'] = $t;
+        $t = "<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">";
+        $t .= "{:context}{:code}{:trace}</div>";
+        this._templates["js"]["info"] = $t;
 
         $links = [];
-        $link = '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-code\')';
-        $link .= '.style.display = (document.getElementById(\'{:id}-code\').style.display == ';
-        $link .= '\'none\' ? \'\' : \'none\')">Code</a>';
-        $links['code'] = $link;
+        $link = "<a href="javascript:void(0);" onclick="document.getElementById(\"{:id}-code\")";
+        $link .= ".style.display = (document.getElementById(\"{:id}-code\").style.display == ";
+        $link .= "\"none\" ? \"\" : \"none\")">Code</a>";
+        $links["code"] = $link;
 
-        $link = '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-context\')';
-        $link .= '.style.display = (document.getElementById(\'{:id}-context\').style.display == ';
-        $link .= '\'none\' ? \'\' : \'none\')">Context</a>';
-        $links['context'] = $link;
+        $link = "<a href="javascript:void(0);" onclick="document.getElementById(\"{:id}-context\")";
+        $link .= ".style.display = (document.getElementById(\"{:id}-context\").style.display == ";
+        $link .= "\"none\" ? \"\" : \"none\")">Context</a>";
+        $links["context"] = $link;
 
-        this._templates['js']['links'] = $links;
+        this._templates["js"]["links"] = $links;
 
-        this._templates['js']['context'] = '<pre id="{:id}-context" class="cake-context cake-debug" ';
-        this._templates['js']['context'] .= 'style="display: none;">{:context}</pre>';
+        this._templates["js"]["context"] = "<pre id="{:id}-context" class="cake-context cake-debug" ";
+        this._templates["js"]["context"] .= "style="display: none;">{:context}</pre>";
 
-        this._templates['js']['code'] = '<pre id="{:id}-code" class="cake-code-dump" ';
-        this._templates['js']['code'] .= 'style="display: none;">{:code}</pre>';
+        this._templates["js"]["code"] = "<pre id="{:id}-code" class="cake-code-dump" ";
+        this._templates["js"]["code"] .= "style="display: none;">{:code}</pre>";
 
-        $e = '<pre class="cake-error"><b>{:error}</b> ({:code}) : {:description} ';
-        $e .= '[<b>{:path}</b>, line <b>{:line}]</b></pre>';
-        this._templates['html']['error'] = $e;
+        $e = "<pre class="cake-error"><b>{:error}</b> ({:code}) : {:description} ";
+        $e .= "[<b>{:path}</b>, line <b>{:line}]</b></pre>";
+        this._templates["html"]["error"] = $e;
 
-        this._templates['html']['context'] = '<pre class="cake-context cake-debug"><b>Context</b> ';
-        this._templates['html']['context'] .= '<p>{:context}</p></pre>';
+        this._templates["html"]["context"] = "<pre class="cake-context cake-debug"><b>Context</b> ";
+        this._templates["html"]["context"] .= "<p>{:context}</p></pre>";
     }
 
     /**
@@ -221,7 +221,7 @@ class Debugger
      */
     static function outputMask(): array
     {
-        return static::configInstance('outputMask');
+        return static::configInstance("outputMask");
     }
 
     /**
@@ -229,7 +229,7 @@ class Debugger
      *
      * ### Example
      *
-     * Debugger::setOutputMask(['password' => '[*************]');
+     * Debugger::setOutputMask(["password" => "[*************]");
      *
      * @param array<string, string> myValue An array where keys are replaced by their values in output.
      * @param bool myMerge Whether to recursively merge or overwrite existing config, defaults to true.
@@ -237,7 +237,7 @@ class Debugger
      */
     static auto setOutputMask(array myValue, bool myMerge = true): void
     {
-        static::configInstance('outputMask', myValue, myMerge);
+        static::configInstance("outputMask", myValue, myMerge);
     }
 
     /**
@@ -271,10 +271,10 @@ class Debugger
     {
         $instance = static::getInstance();
         if (!isset($instance.editors[myName])) {
-            $known = implode(', ', array_keys($instance.editors));
+            $known = implode(", ", array_keys($instance.editors));
             throw new RuntimeException("Unknown editor `{myName}`. Known editors are {$known}");
         }
-        $instance.setConfig('editor', myName);
+        $instance.setConfig("editor", myName);
     }
 
     /**
@@ -284,17 +284,16 @@ class Debugger
      * @param int $line The line number to create a link for.
      * @return string The formatted URL.
      */
-    static function editorUrl(string myfile, int $line): string
-    {
+    static string editorUrl(string myfile, int $line) {
         $instance = static::getInstance();
-        $editor = $instance.getConfig('editor');
+        $editor = $instance.getConfig("editor");
         if (!isset($instance.editors[$editor])) {
             throw new RuntimeException("Cannot format editor URL `{$editor}` is not a known editor.");
         }
 
         myTemplate = $instance.editors[$editor];
         if (is_string(myTemplate)) {
-            return str_replace(['{file}', '{line}'], [myfile, (string)$line], myTemplate);
+            return str_replace(["{file}", "{line}"], [myfile, (string)$line], myTemplate);
         }
 
         return myTemplate(myfile, $line);
@@ -319,14 +318,14 @@ class Debugger
      * as well as export the variable using exportVar. By default, the log is written to the debug log.
      *
      * @param mixed $var Variable or content to log.
-     * @param string|int $level Type of log to use. Defaults to 'debug'.
+     * @param string|int $level Type of log to use. Defaults to "debug".
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return void
      */
-    static function log($var, $level = 'debug', int $maxDepth = 3): void
+    static function log($var, $level = "debug", int $maxDepth = 3): void
     {
         /** @var string $source */
-        $source = static::trace(['start' => 1]);
+        $source = static::trace(["start" => 1]);
         $source .= "\n";
 
         Log::write(
@@ -342,7 +341,7 @@ class Debugger
      *
      * - `depth` - The number of stack frames to return. Defaults to 999
      * - `format` - The format you want the return. Defaults to the currently selected format. If
-     *    format is 'array' or 'points' the return will be an array.
+     *    format is "array" or "points" the return will be an array.
      * - `args` - Should arguments for functions be shown? If true, the arguments for each method call
      *   will be displayed.
      * - `start` - The stack frame to start generating a trace from. Defaults to 0
@@ -362,7 +361,7 @@ class Debugger
      *
      * - `depth` - The number of stack frames to return. Defaults to 999
      * - `format` - The format you want the return. Defaults to the currently selected format. If
-     *    format is 'array' or 'points' the return will be an array.
+     *    format is "array" or "points" the return will be an array.
      * - `args` - Should arguments for functions be shown? If true, the arguments for each method call
      *   will be displayed.
      * - `start` - The stack frame to start generating a trace from. Defaults to 0
@@ -378,12 +377,12 @@ class Debugger
         }
         $self = Debugger::getInstance();
         $defaults = [
-            'depth' => 999,
-            'format' => $self._outputFormat,
-            'args' => false,
-            'start' => 0,
-            'scope' => null,
-            'exclude' => ['call_user_func_array', 'trigger_error'],
+            "depth" => 999,
+            "format" => $self._outputFormat,
+            "args" => false,
+            "start" => 0,
+            "scope" => null,
+            "exclude" => ["call_user_func_array", "trigger_error"],
         ];
         myOptions = Hash::merge($defaults, myOptions);
 
@@ -391,54 +390,54 @@ class Debugger
         $back = [];
 
         $_trace = [
-            'line' => '??',
-            'file' => '[internal]',
-            'class' => null,
-            'function' => '[main]',
+            "line" => "??",
+            "file" => "[internal]",
+            "class" => null,
+            "function" => "[main]",
         ];
 
-        for ($i = myOptions['start']; $i < myCount && $i < myOptions['depth']; $i++) {
-            $trace = $backtrace[$i] + ['file' => '[internal]', 'line' => '??'];
-            $signature = $reference = '[main]';
+        for ($i = myOptions["start"]; $i < myCount && $i < myOptions["depth"]; $i++) {
+            $trace = $backtrace[$i] + ["file" => "[internal]", "line" => "??"];
+            $signature = $reference = "[main]";
 
             if (isset($backtrace[$i + 1])) {
                 $next = $backtrace[$i + 1] + $_trace;
-                $signature = $reference = $next['function'];
+                $signature = $reference = $next["function"];
 
-                if (!empty($next['class'])) {
-                    $signature = $next['class'] . '::' . $next['function'];
-                    $reference = $signature . '(';
-                    if (myOptions['args'] && isset($next['args'])) {
+                if (!empty($next["class"])) {
+                    $signature = $next["class"] . "::" . $next["function"];
+                    $reference = $signature . "(";
+                    if (myOptions["args"] && isset($next["args"])) {
                         $args = [];
-                        foreach ($next['args'] as $arg) {
+                        foreach ($next["args"] as $arg) {
                             $args[] = Debugger::exportVar($arg);
                         }
-                        $reference .= implode(', ', $args);
+                        $reference .= implode(", ", $args);
                     }
-                    $reference .= ')';
+                    $reference .= ")";
                 }
             }
-            if (in_array($signature, myOptions['exclude'], true)) {
+            if (in_array($signature, myOptions["exclude"], true)) {
                 continue;
             }
-            if (myOptions['format'] === 'points' && $trace['file'] !== '[internal]') {
-                $back[] = ['file' => $trace['file'], 'line' => $trace['line']];
-            } elseif (myOptions['format'] === 'array') {
+            if (myOptions["format"] === "points" && $trace["file"] !== "[internal]") {
+                $back[] = ["file" => $trace["file"], "line" => $trace["line"]];
+            } elseif (myOptions["format"] === "array") {
                 $back[] = $trace;
             } else {
-                if (isset($self._templates[myOptions['format']]['traceLine'])) {
-                    $tpl = $self._templates[myOptions['format']]['traceLine'];
+                if (isset($self._templates[myOptions["format"]]["traceLine"])) {
+                    $tpl = $self._templates[myOptions["format"]]["traceLine"];
                 } else {
-                    $tpl = $self._templates['base']['traceLine'];
+                    $tpl = $self._templates["base"]["traceLine"];
                 }
-                $trace['path'] = static::trimPath($trace['file']);
-                $trace['reference'] = $reference;
-                unset($trace['object'], $trace['args']);
-                $back[] = Text::insert($tpl, $trace, ['before' => '{:', 'after' => '}']);
+                $trace["path"] = static::trimPath($trace["file"]);
+                $trace["reference"] = $reference;
+                unset($trace["object"], $trace["args"]);
+                $back[] = Text::insert($tpl, $trace, ["before" => "{:", "after" => "}"]);
             }
         }
 
-        if (myOptions['format'] === 'array' || myOptions['format'] === 'points') {
+        if (myOptions["format"] === "array" || myOptions["format"] === "points") {
             return $back;
         }
 
@@ -447,22 +446,21 @@ class Debugger
     }
 
     /**
-     * Shortens file paths by replacing the application base path with 'APP', and the CakePHP core
-     * path with 'CORE'.
+     * Shortens file paths by replacing the application base path with "APP", and the CakePHP core
+     * path with "CORE".
      *
      * @param string myPath Path to shorten.
      * @return string Normalized path
      */
-    static function trimPath(string myPath): string
-    {
-        if (defined('APP') && strpos(myPath, APP) === 0) {
-            return str_replace(APP, 'APP/', myPath);
+    static string trimPath(string myPath) {
+        if (defined("APP") && strpos(myPath, APP) === 0) {
+            return str_replace(APP, "APP/", myPath);
         }
-        if (defined('CAKE_CORE_INCLUDE_PATH') && strpos(myPath, CAKE_CORE_INCLUDE_PATH) === 0) {
-            return str_replace(CAKE_CORE_INCLUDE_PATH, 'CORE', myPath);
+        if (defined("CAKE_CORE_INCLUDE_PATH") && strpos(myPath, CAKE_CORE_INCLUDE_PATH) === 0) {
+            return str_replace(CAKE_CORE_INCLUDE_PATH, "CORE", myPath);
         }
-        if (defined('ROOT') && strpos(myPath, ROOT) === 0) {
-            return str_replace(ROOT, 'ROOT', myPath);
+        if (defined("ROOT") && strpos(myPath, ROOT) === 0) {
+            return str_replace(ROOT, "ROOT", myPath);
         }
 
         return myPath;
@@ -474,7 +472,7 @@ class Debugger
      * Usage:
      *
      * ```
-     * Debugger::excerpt('/path/to/file', 100, 4);
+     * Debugger::excerpt("/path/to/file", 100, 4);
      * ```
      *
      * The above would return an array of 8 items. The 4th item would be the provided line,
@@ -510,9 +508,9 @@ class Debugger
             if (!isset(myData[$i])) {
                 continue;
             }
-            $string = str_replace(["\r\n", "\n"], '', static::_highlight(myData[$i]));
+            $string = str_replace(["\r\n", "\n"], "", static::_highlight(myData[$i]));
             if ($i === $line) {
-                $lines[] = '<span class="code-highlight">' . $string . '</span>';
+                $lines[] = "<span class="code-highlight">" . $string . "</span>";
             } else {
                 $lines[] = $string;
             }
@@ -528,21 +526,20 @@ class Debugger
      * @param string $str The string to convert.
      * @return string
      */
-    protected static auto _highlight(string $str): string
-    {
-        if (function_exists('hphp_log') || function_exists('hphp_gettid')) {
+    protected static string _highlight(string $str) {
+        if (function_exists("hphp_log") || function_exists("hphp_gettid")) {
             return htmlentities($str);
         }
         $added = false;
-        if (strpos($str, '<?php') === false) {
+        if (strpos($str, "<?php") === false) {
             $added = true;
             $str = "<?php \n" . $str;
         }
         $highlight = highlight_string($str, true);
         if ($added) {
             $highlight = str_replace(
-                ['&lt;?php&nbsp;<br/>', '&lt;?php&nbsp;<br />'],
-                '',
+                ["&lt;?php&nbsp;<br/>", "&lt;?php&nbsp;<br />"],
+                "",
                 $highlight
             );
         }
@@ -560,7 +557,7 @@ class Debugger
     auto getExportFormatter(): IFormatter
     {
         $instance = static::getInstance();
-        myClass = $instance.getConfig('exportFormatter');
+        myClass = $instance.getConfig("exportFormatter");
         if (!myClass) {
             if (ConsoleFormatter::environmentMatches()) {
                 myClass = ConsoleFormatter::class;
@@ -601,8 +598,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a formatted string
      */
-    static function exportVar($var, int $maxDepth = 3): string
-    {
+    static string exportVar($var, int $maxDepth = 3) {
         $context = new DebugContext($maxDepth);
         myNode = static::export($var, $context);
 
@@ -616,8 +612,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a string
      */
-    static function exportVarAsPlainText($var, int $maxDepth = 3): string
-    {
+    static string exportVarAsPlainText($var, int $maxDepth = 3) {
         return (new TextFormatter()).dump(
             static::export($var, new DebugContext($maxDepth))
         );
@@ -649,20 +644,20 @@ class Debugger
     {
         myType = static::getType($var);
         switch (myType) {
-            case 'float':
-            case 'string':
-            case 'resource':
-            case 'resource (closed)':
-            case 'null':
+            case "float":
+            case "string":
+            case "resource":
+            case "resource (closed)":
+            case "null":
                 return new ScalarNode(myType, $var);
-            case 'boolean':
-                return new ScalarNode('bool', $var);
-            case 'integer':
-                return new ScalarNode('int', $var);
-            case 'array':
+            case "boolean":
+                return new ScalarNode("bool", $var);
+            case "integer":
+                return new ScalarNode("int", $var);
+            case "array":
                 return static::exportArray($var, $context.withAddedDepth());
-            case 'unknown':
-                return new SpecialNode('(unknown)');
+            case "unknown":
+                return new SpecialNode("(unknown)");
             default:
                 return static::exportObject($var, $context.withAddedDepth());
         }
@@ -671,7 +666,7 @@ class Debugger
     /**
      * Export an array type object. Filters out keys used in datasource configuration.
      *
-     * The following keys are replaced with ***'s
+     * The following keys are replaced with ***"s
      *
      * - password
      * - login
@@ -694,7 +689,7 @@ class Debugger
             $outputMask = static::outputMask();
             foreach ($var as myKey => $val) {
                 if (array_key_exists(myKey, $outputMask)) {
-                    myNode = new ScalarNode('string', $outputMask[myKey]);
+                    myNode = new ScalarNode("string", $outputMask[myKey]);
                 } elseif ($val !== $var) {
                     // Dump all the items without increasing depth.
                     myNode = static::export($val, $context);
@@ -706,8 +701,8 @@ class Debugger
             }
         } else {
             myItems[] = new ArrayItemNode(
-                new ScalarNode('string', ''),
-                new SpecialNode('[maximum depth reached]')
+                new ScalarNode("string", ""),
+                new SpecialNode("[maximum depth reached]")
             );
         }
 
@@ -735,10 +730,10 @@ class Debugger
 
         $remaining = $context.remainingDepth();
         if ($remaining > 0) {
-            if (method_exists($var, '__debugInfo')) {
+            if (method_exists($var, "__debugInfo")) {
                 try {
                     foreach ($var.__debugInfo() as myKey => $val) {
-                        myNode.addProperty(new PropertyNode("'{myKey}'", null, static::export($val, $context)));
+                        myNode.addProperty(new PropertyNode(""{myKey}"", null, static::export($val, $context)));
                     }
 
                     return myNode;
@@ -755,15 +750,15 @@ class Debugger
                 }
                 /** @psalm-suppress RedundantCast */
                 myNode.addProperty(
-                    new PropertyNode((string)myKey, 'public', static::export(myValue, $context.withAddedDepth()))
+                    new PropertyNode((string)myKey, "public", static::export(myValue, $context.withAddedDepth()))
                 );
             }
 
             $ref = new ReflectionObject($var);
 
             $filters = [
-                ReflectionProperty::IS_PROTECTED => 'protected',
-                ReflectionProperty::IS_PRIVATE => 'private',
+                ReflectionProperty::IS_PROTECTED => "protected",
+                ReflectionProperty::IS_PRIVATE => "private",
             ];
             foreach ($filters as $filter => $visibility) {
                 $reflectionProperties = $ref.getProperties($filter);
@@ -771,10 +766,10 @@ class Debugger
                     $reflectionProperty.setAccessible(true);
 
                     if (
-                        method_exists($reflectionProperty, 'isInitialized') &&
+                        method_exists($reflectionProperty, "isInitialized") &&
                         !$reflectionProperty.isInitialized($var)
                     ) {
-                        myValue = new SpecialNode('[uninitialized]');
+                        myValue = new SpecialNode("[uninitialized]");
                     } else {
                         myValue = static::export($reflectionProperty.getValue($var), $context.withAddedDepth());
                     }
@@ -797,8 +792,7 @@ class Debugger
      *
      * @return string Returns the current format when getting.
      */
-    static auto getOutputFormat(): string
-    {
+    static string getOutputFormat() {
         return Debugger::getInstance()._outputFormat;
     }
 
@@ -807,14 +801,14 @@ class Debugger
      *
      * @param string $format The format you want errors to be output as.
      * @return void
-     * @throws \InvalidArgumentException When choosing a format that doesn't exist.
+     * @throws \InvalidArgumentException When choosing a format that doesn"t exist.
      */
     static auto setOutputFormat(string $format): void
     {
         $self = Debugger::getInstance();
 
         if (!isset($self._templates[$format])) {
-            throw new InvalidArgumentException('Invalid Debugger output format.');
+            throw new InvalidArgumentException("Invalid Debugger output format.");
         }
         $self._outputFormat = $format;
     }
@@ -823,33 +817,33 @@ class Debugger
      * Add an output format or update a format in Debugger.
      *
      * ```
-     * Debugger::addFormat('custom', myData);
+     * Debugger::addFormat("custom", myData);
      * ```
      *
      * Where myData is an array of strings that use Text::insert() variable
      * replacement. The template vars should be in a `{:id}` style.
      * An error formatter can have the following keys:
      *
-     * - 'error' - Used for the container for the error message. Gets the following template
+     * - "error" - Used for the container for the error message. Gets the following template
      *   variables: `id`, `error`, `code`, `description`, `path`, `line`, `links`, `info`
-     * - 'info' - A combination of `code`, `context` and `trace`. Will be set with
+     * - "info" - A combination of `code`, `context` and `trace`. Will be set with
      *   the contents of the other template keys.
-     * - 'trace' - The container for a stack trace. Gets the following template
+     * - "trace" - The container for a stack trace. Gets the following template
      *   variables: `trace`
-     * - 'context' - The container element for the context variables.
+     * - "context" - The container element for the context variables.
      *   Gets the following templates: `id`, `context`
-     * - 'links' - An array of HTML links that are used for creating links to other resources.
+     * - "links" - An array of HTML links that are used for creating links to other resources.
      *   Typically this is used to create javascript links to open other sections.
      *   Link keys, are: `code`, `context`, `help`. See the JS output format for an
      *   example.
-     * - 'traceLine' - Used for creating lines in the stacktrace. Gets the following
+     * - "traceLine" - Used for creating lines in the stacktrace. Gets the following
      *   template variables: `reference`, `path`, `line`
      *
      * Alternatively if you want to use a custom callback to do all the formatting, you can use
      * the callback key, and provide a callable:
      *
      * ```
-     * Debugger::addFormat('custom', ['callback' => [$foo, 'outputError']];
+     * Debugger::addFormat("custom", ["callback" => [$foo, "outputError"]];
      * ```
      *
      * The callback can expect two parameters. The first is an array of all
@@ -857,8 +851,8 @@ class Debugger
      * the other template strings. Keys like `info`, `links`, `code`, `context` and `trace`
      * will be present depending on the other templates in the format type.
      *
-     * @param string $format Format to use, including 'js' for JavaScript-enhanced HTML, 'html' for
-     *    straight HTML output, or 'txt' for unformatted text.
+     * @param string $format Format to use, including "js" for JavaScript-enhanced HTML, "html" for
+     *    straight HTML output, or "txt" for unformatted text.
      * @param array $strings Template strings, or a callback to be used for the output format.
      * @return array The resulting format string set.
      */
@@ -866,12 +860,12 @@ class Debugger
     {
         $self = Debugger::getInstance();
         if (isset($self._templates[$format])) {
-            if (isset($strings['links'])) {
-                $self._templates[$format]['links'] = array_merge(
-                    $self._templates[$format]['links'],
-                    $strings['links']
+            if (isset($strings["links"])) {
+                $self._templates[$format]["links"] = array_merge(
+                    $self._templates[$format]["links"],
+                    $strings["links"]
                 );
-                unset($strings['links']);
+                unset($strings["links"]);
             }
             $self._templates[$format] = $strings + $self._templates[$format];
         } else {
@@ -890,64 +884,64 @@ class Debugger
     function outputError(array myData): void
     {
         $defaults = [
-            'level' => 0,
-            'error' => 0,
-            'code' => 0,
-            'description' => '',
-            'file' => '',
-            'line' => 0,
-            'context' => [],
-            'start' => 2,
+            "level" => 0,
+            "error" => 0,
+            "code" => 0,
+            "description" => "",
+            "file" => "",
+            "line" => 0,
+            "context" => [],
+            "start" => 2,
         ];
         myData += $defaults;
 
-        myfiles = static::trace(['start' => myData['start'], 'format' => 'points']);
-        $code = '';
+        myfiles = static::trace(["start" => myData["start"], "format" => "points"]);
+        $code = "";
         myfile = null;
-        if (isset(myfiles[0]['file'])) {
+        if (isset(myfiles[0]["file"])) {
             myfile = myfiles[0];
-        } elseif (isset(myfiles[1]['file'])) {
+        } elseif (isset(myfiles[1]["file"])) {
             myfile = myfiles[1];
         }
         if (myfile) {
-            $code = static::excerpt(myfile['file'], myfile['line'], 1);
+            $code = static::excerpt(myfile["file"], myfile["line"], 1);
         }
-        $trace = static::trace(['start' => myData['start'], 'depth' => '20']);
-        $insertOpts = ['before' => '{:', 'after' => '}'];
+        $trace = static::trace(["start" => myData["start"], "depth" => "20"]);
+        $insertOpts = ["before" => "{:", "after" => "}"];
         $context = [];
         $links = [];
-        $info = '';
+        $info = "";
 
-        foreach ((array)myData['context'] as $var => myValue) {
+        foreach ((array)myData["context"] as $var => myValue) {
             $context[] = "\${$var} = " . static::exportVar(myValue, 3);
         }
 
         switch (this._outputFormat) {
             case false:
-                this._data[] = compact('context', 'trace') + myData;
+                this._data[] = compact("context", "trace") + myData;
 
                 return;
-            case 'log':
-                static::log(compact('context', 'trace') + myData);
+            case "log":
+                static::log(compact("context", "trace") + myData);
 
                 return;
         }
 
-        myData['trace'] = $trace;
-        myData['id'] = 'cakeErr' . uniqid();
-        $tpl = this._templates[this._outputFormat] + this._templates['base'];
+        myData["trace"] = $trace;
+        myData["id"] = "cakeErr" . uniqid();
+        $tpl = this._templates[this._outputFormat] + this._templates["base"];
 
-        if (isset($tpl['links'])) {
-            foreach ($tpl['links'] as myKey => $val) {
+        if (isset($tpl["links"])) {
+            foreach ($tpl["links"] as myKey => $val) {
                 $links[myKey] = Text::insert($val, myData, $insertOpts);
             }
         }
 
-        if (!empty($tpl['escapeContext'])) {
-            myData['description'] = h(myData['description']);
+        if (!empty($tpl["escapeContext"])) {
+            myData["description"] = h(myData["description"]);
         }
 
-        $infoData = compact('code', 'context', 'trace');
+        $infoData = compact("code", "context", "trace");
         foreach ($infoData as myKey => myValue) {
             if (empty(myValue) || !isset($tpl[myKey])) {
                 continue;
@@ -957,14 +951,14 @@ class Debugger
             }
             $info .= Text::insert($tpl[myKey], [myKey => myValue] + myData, $insertOpts);
         }
-        $links = implode(' ', $links);
+        $links = implode(" ", $links);
 
-        if (isset($tpl['callback']) && is_callable($tpl['callback'])) {
-            $tpl['callback'](myData, compact('links', 'info'));
+        if (isset($tpl["callback"]) && is_callable($tpl["callback"])) {
+            $tpl["callback"](myData, compact("links", "info"));
 
             return;
         }
-        echo Text::insert($tpl['error'], compact('links', 'info') + myData, $insertOpts);
+        echo Text::insert($tpl["error"], compact("links", "info") + myData, $insertOpts);
     }
 
     /**
@@ -974,20 +968,19 @@ class Debugger
      * @param mixed $var The variable to get the type of.
      * @return string The type of variable.
      */
-    static auto getType($var): string
-    {
+    static string getType($var) {
         myType = getTypeName($var);
 
-        if (myType === 'NULL') {
-            return 'null';
+        if (myType === "NULL") {
+            return "null";
         }
 
-        if (myType === 'double') {
-            return 'float';
+        if (myType === "double") {
+            return "float";
         }
 
-        if (myType === 'unknown type') {
-            return 'unknown';
+        if (myType === "unknown type") {
+            return "unknown";
         }
 
         return myType;
@@ -1007,22 +1000,22 @@ class Debugger
      */
     static function printVar($var, array myLocation = [], ?bool $showHtml = null): void
     {
-        myLocation += ['file' => null, 'line' => null];
-        if (myLocation['file']) {
-            myLocation['file'] = static::trimPath((string)myLocation['file']);
+        myLocation += ["file" => null, "line" => null];
+        if (myLocation["file"]) {
+            myLocation["file"] = static::trimPath((string)myLocation["file"]);
         }
 
         $debugger = static::getInstance();
         $restore = null;
         if ($showHtml !== null) {
-            $restore = $debugger.getConfig('exportFormatter');
-            $debugger.setConfig('exportFormatter', $showHtml ? HtmlFormatter::class : TextFormatter::class);
+            $restore = $debugger.getConfig("exportFormatter");
+            $debugger.setConfig("exportFormatter", $showHtml ? HtmlFormatter::class : TextFormatter::class);
         }
         myContentss = static::exportVar($var, 25);
         $formatter = $debugger.getExportFormatter();
 
         if ($restore) {
-            $debugger.setConfig('exportFormatter', $restore);
+            $debugger.setConfig("exportFormatter", $restore);
         }
         echo $formatter.formatWrapper(myContentss, myLocation);
     }
@@ -1039,27 +1032,26 @@ class Debugger
      * @param string myMessage The string message to format.
      * @return string Formatted message.
      */
-    static function formatHtmlMessage(string myMessage): string
-    {
+    static function formatHtmlMessage(string myMessage) {
         myMessage = h(myMessage);
-        myMessage = preg_replace('/`([^`]+)`/', '<code>$1</code>', myMessage);
+        myMessage = preg_replace("/`([^`]+)`/", "<code>$1</code>", myMessage);
         myMessage = nl2br(myMessage);
 
         return myMessage;
     }
 
     /**
-     * Verifies that the application's salt and cipher seed value has been changed from the default value.
+     * Verifies that the application"s salt and cipher seed value has been changed from the default value.
      *
      * @return void
      */
     static function checkSecurityKeys(): void
     {
         $salt = Security::getSalt();
-        if ($salt === '__SALT__' || strlen($salt) < 32) {
+        if ($salt === "__SALT__" || strlen($salt) < 32) {
             trigger_error(
-                'Please change the value of `Security.salt` in `ROOT/config/app_local.php` ' .
-                'to a random value of at least 32 characters.',
+                "Please change the value of `Security.salt` in `ROOT/config/app_local.php` " .
+                "to a random value of at least 32 characters.",
                 E_USER_NOTICE
             );
         }

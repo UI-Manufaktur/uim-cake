@@ -1,9 +1,9 @@
 module uim.cakeews.forms;
 
 use ArrayAccess;
-import uim.cakellections\Collection;
-import uim.caketasources\IEntity;
-import uim.caketasources\InvalidPropertyInterface;
+import uim.cake.collections\Collection;
+import uim.cake.datasources\IEntity;
+import uim.cake.datasources\InvalidPropertyInterface;
 import uim.cakem.Entity;
 import uim.cakem.Locator\LocatorAwareTrait;
 import uim.cakem.Table;
@@ -172,8 +172,7 @@ class EntityContext : IContext
     }
 
 
-    function isPrimaryKey(string myField): bool
-    {
+    bool isPrimaryKey(string myField) {
         $parts = explode('.', myField);
         myTable = this._getTable($parts);
         if (!myTable) {
@@ -195,8 +194,7 @@ class EntityContext : IContext
      *
      * @return bool
      */
-    function isCreate(): bool
-    {
+    bool isCreate() {
         $entity = this._context['entity'];
         if (is_iterable($entity)) {
             foreach ($entity as $e) {
@@ -702,8 +700,7 @@ class EntityContext : IContext
      * @param string myField A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    function hasError(string myField): bool
-    {
+    bool hasError(string myField) {
         return this.error(myField) !== [];
     }
 

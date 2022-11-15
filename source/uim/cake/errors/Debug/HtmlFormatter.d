@@ -25,7 +25,7 @@ class HtmlFormatter : IFormatter
      * Constructor.
      */
     this() {
-        this.id = uniqid('', true);
+        this.id = uniqid("", true);
     }
 
     /**
@@ -34,7 +34,7 @@ class HtmlFormatter : IFormatter
      * @return bool
      */
     static bool environmentMatches() {
-        if (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') {
+        if (PHP_SAPI === "cli" || PHP_SAPI === "phpdbg") {
             return false;
         }
 
@@ -42,21 +42,20 @@ class HtmlFormatter : IFormatter
     }
 
 
-    function formatWrapper(string myContentss, array myLocation): string
-    {
-        $lineInfo = '';
-        if (isset(myLocation['file'], myLocation['file'])) {
+    string formatWrapper(string myContentss, array myLocation) {
+        $lineInfo = "";
+        if (isset(myLocation["file"], myLocation["file"])) {
             $lineInfo = sprintf(
-                '<span><strong>%s</strong> (line <strong>%s</strong>)</span>',
-                myLocation['file'],
-                myLocation['line']
+                "<span><strong>%s</strong> (line <strong>%s</strong>)</span>",
+                myLocation["file"],
+                myLocation["line"]
             );
         }
         $parts = [
-            '<div class="cake-debug-output cake-debug" style="direction:ltr">',
+            "<div class="cake-debug-output cake-debug" style="direction:ltr">",
             $lineInfo,
             myContentss,
-            '</div>',
+            "</div>",
         ];
 
         return implode("\n", $parts);
@@ -65,14 +64,13 @@ class HtmlFormatter : IFormatter
     /**
      * Generate the CSS and Javascript for dumps
      *
-     * Only output once per process as we don't need it more than once.
+     * Only output once per process as we don"t need it more than once.
      *
      * @return string
      */
-    protected auto dumpHeader(): string
-    {
+    protected string dumpHeader() {
         ob_start();
-        include __DIR__ . DIRECTORY_SEPARATOR . 'dumpHeader.html';
+        include __DIR__ . DIRECTORY_SEPARATOR . "dumpHeader.html";
 
         return ob_get_clean();
     }
@@ -81,18 +79,16 @@ class HtmlFormatter : IFormatter
      * Convert a tree of INode objects into HTML
      *
      * @param \Cake\Error\Debug\INode myNode The node tree to dump.
-     * @return string
      */
-    function dump(INode myNode): string
-    {
+    string dump(INode myNode) {
         $html = this.export(myNode, 0);
-        $head = '';
+        $head = "";
         if (!static::$outputHeader) {
             static::$outputHeader = true;
             $head = this.dumpHeader();
         }
 
-        return $head . '<div class="cake-dbg">' . $html . '</div>';
+        return $head . "<div class="cake-dbg">" . $html . "</div>";
     }
 
     /**
@@ -102,20 +98,19 @@ class HtmlFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string
      */
-    protected auto export(INode $var, int $indent): string
-    {
+    protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
-                case 'bool':
-                    return this.style('const', $var.getValue() ? 'true' : 'false');
-                case 'null':
-                    return this.style('const', 'null');
-                case 'string':
-                    return this.style('string', "'" . (string)$var.getValue() . "'");
-                case 'int':
-                case 'float':
-                    return this.style('visibility', "({$var.getType()})") .
-                        ' ' . this.style('number', "{$var.getValue()}");
+                case "bool":
+                    return this.style("const", $var.getValue() ? "true" : "false");
+                case "null":
+                    return this.style("const", "null");
+                case "string":
+                    return this.style("string", """ . (string)$var.getValue() . """);
+                case "int":
+                case "float":
+                    return this.style("visibility", "({$var.getType()})") .
+                        " " . this.style("number", "{$var.getValue()}");
                 default:
                     return "({$var.getType()}) {$var.getValue()}";
             }
@@ -127,9 +122,9 @@ class HtmlFormatter : IFormatter
             return this.exportObject($var, $indent + 1);
         }
         if ($var instanceof SpecialNode) {
-            return this.style('special', $var.getValue());
+            return this.style("special", $var.getValue());
         }
-        throw new RuntimeException('Unknown node received ' . get_class($var));
+        throw new RuntimeException("Unknown node received " . get_class($var));
     }
 
     /**
@@ -139,30 +134,29 @@ class HtmlFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
-    protected auto exportArray(ArrayNode $var, int $indent): string
-    {
-        $open = '<span class="cake-dbg-array">' .
-            this.style('punct', '[') .
-            '<samp class="cake-dbg-array-items">';
+    protected string exportArray(ArrayNode $var, int $indent) {
+        $open = "<span class="cake-dbg-array">" .
+            this.style("punct", "[") .
+            "<samp class="cake-dbg-array-items">";
         $vars = [];
-        $break = "\n" . str_repeat('  ', $indent);
-        $endBreak = "\n" . str_repeat('  ', $indent - 1);
+        $break = "\n" . str_repeat("  ", $indent);
+        $endBreak = "\n" . str_repeat("  ", $indent - 1);
 
-        $arrow = this.style('punct', ' => ');
+        $arrow = this.style("punct", " => ");
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
-            $vars[] = $break . '<span class="cake-dbg-array-item">' .
+            $vars[] = $break . "<span class="cake-dbg-array-item">" .
                 this.export($item.getKey(), $indent) . $arrow . this.export($val, $indent) .
-                this.style('punct', ',') .
-                '</span>';
+                this.style("punct", ",") .
+                "</span>";
         }
 
-        $close = '</samp>' .
+        $close = "</samp>" .
             $endBreak .
-            this.style('punct', ']') .
-            '</span>';
+            this.style("punct", "]") .
+            "</span>";
 
-        return $open . implode('', $vars) . $close;
+        return $open . implode("", $vars) . $close;
     }
 
     /**
@@ -173,70 +167,69 @@ class HtmlFormatter : IFormatter
      * @return string
      * @see \Cake\Error\Debugger::exportVar()
      */
-    protected auto exportObject($var, int $indent): string
-    {
+    protected string exportObject($var, int $indent) {
         $objectId = "cake-db-object-{this.id}-{$var.getId()}";
         $out = sprintf(
-            '<span class="cake-dbg-object" id="%s">',
+            "<span class="cake-dbg-object" id="%s">",
             $objectId
         );
-        $break = "\n" . str_repeat('  ', $indent);
-        $endBreak = "\n" . str_repeat('  ', $indent - 1);
+        $break = "\n" . str_repeat("  ", $indent);
+        $endBreak = "\n" . str_repeat("  ", $indent - 1);
 
         if ($var instanceof ReferenceNode) {
             $link = sprintf(
-                '<a class="cake-dbg-ref" href="#%s">id: %s</a>',
+                "<a class="cake-dbg-ref" href="#%s">id: %s</a>",
                 $objectId,
                 $var.getId()
             );
 
-            return '<span class="cake-dbg-ref">' .
-                this.style('punct', 'object(') .
-                this.style('class', $var.getValue()) .
-                this.style('punct', ') ') .
+            return "<span class="cake-dbg-ref">" .
+                this.style("punct", "object(") .
+                this.style("class", $var.getValue()) .
+                this.style("punct", ") ") .
                 $link .
-                this.style('punct', ' {}') .
-                '</span>';
+                this.style("punct", " {}") .
+                "</span>";
         }
 
-        $out .= this.style('punct', 'object(') .
-            this.style('class', $var.getValue()) .
-            this.style('punct', ') id:') .
-            this.style('number', (string)$var.getId()) .
-            this.style('punct', ' {') .
-            '<samp class="cake-dbg-object-props">';
+        $out .= this.style("punct", "object(") .
+            this.style("class", $var.getValue()) .
+            this.style("punct", ") id:") .
+            this.style("number", (string)$var.getId()) .
+            this.style("punct", " {") .
+            "<samp class="cake-dbg-object-props">";
 
         $props = [];
         foreach ($var.getChildren() as $property) {
-            $arrow = this.style('punct', ' => ');
+            $arrow = this.style("punct", " => ");
             $visibility = $property.getVisibility();
             myName = $property.getName();
-            if ($visibility && $visibility !== 'public') {
+            if ($visibility && $visibility !== "public") {
                 $props[] = $break .
-                    '<span class="cake-dbg-prop">' .
-                    this.style('visibility', $visibility) .
-                    ' ' .
-                    this.style('property', myName) .
+                    "<span class="cake-dbg-prop">" .
+                    this.style("visibility", $visibility) .
+                    " " .
+                    this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent) .
-                '</span>';
+                "</span>";
             } else {
                 $props[] = $break .
-                    '<span class="cake-dbg-prop">' .
-                    this.style('property', myName) .
+                    "<span class="cake-dbg-prop">" .
+                    this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent) .
-                    '</span>';
+                    "</span>";
             }
         }
 
-        $end = '</samp>' .
+        $end = "</samp>" .
             $endBreak .
-            this.style('punct', '}') .
-            '</span>';
+            this.style("punct", "}") .
+            "</span>";
 
         if (count($props)) {
-            return $out . implode('', $props) . $end;
+            return $out . implode("", $props) . $end;
         }
 
         return $out . $end;
@@ -249,10 +242,9 @@ class HtmlFormatter : IFormatter
      * @param string $text The text to style.
      * @return string The styled output.
      */
-    protected auto style(string $style, string $text): string
-    {
+    protected string style(string $style, string $text) {
         return sprintf(
-            '<span class="cake-dbg-%s">%s</span>',
+            "<span class="cake-dbg-%s">%s</span>",
             $style,
             h($text)
         );

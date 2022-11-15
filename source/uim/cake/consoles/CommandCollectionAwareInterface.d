@@ -1,4 +1,4 @@
-module uim.cakensole;
+module uim.cake.console;
 
 /**
  * An interface for shells that take a CommandCollection

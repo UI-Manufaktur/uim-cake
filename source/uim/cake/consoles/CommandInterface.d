@@ -1,4 +1,4 @@
-module uim.cakensole;
+module uim.cake.console;
 
 /**
  * Describe the interface between a command

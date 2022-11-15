@@ -1,8 +1,8 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakere.Configure;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.core.Configure;
 
 /**
  * Print out the version of CakePHP in use.

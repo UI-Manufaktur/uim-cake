@@ -1,7 +1,7 @@
-module uim.cakentrollers.components;
+module uim.cake.controllerss.components;
 
-import uim.cakentrollers.components;
-import uim.cakere.Configure;
+import uim.cake.controllerss.components;
+import uim.cake.core.Configure;
 import uim.cakeents\IEvent;
 import uim.cakerm\FormProtector;
 import uim.caketps\Exception\BadRequestException;
@@ -12,7 +12,7 @@ use Closure;
 /**
  * Protects against form tampering. It ensures that:
  *
- * - Form's action (URL) is not modified.
+ * - Form"s action (URL) is not modified.
  * - Unknown / extra fields are not added to the form.
  * - Existing fields have not been removed from the form.
  * - Values of hidden inputs have not been changed.
@@ -26,7 +26,7 @@ class FormProtectionComponent : Component
      *
      * @var string
      */
-    public const DEFAULT_EXCEPTION_MESSAGE = 'Form tampering protection token validation failed.';
+    public const DEFAULT_EXCEPTION_MESSAGE = "Form tampering protection token validation failed.";
 
     /**
      * Default config
@@ -45,10 +45,10 @@ class FormProtectionComponent : Component
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'validate' => true,
-        'unlockedFields' => [],
-        'unlockedActions' => [],
-        'validationFailureCallback' => null,
+        "validate" => true,
+        "unlockedFields" => [],
+        "unlockedActions" => [],
+        "validationFailureCallback" => null,
     ];
 
     /**
@@ -63,12 +63,12 @@ class FormProtectionComponent : Component
     {
         myRequest = this.getController().getRequest();
         myData = myRequest.getParsedBody();
-        $hasData = (myData || myRequest.is(['put', 'post', 'delete', 'patch']));
+        $hasData = (myData || myRequest.is(["put", "post", "delete", "patch"]));
 
         if (
-            !in_array(myRequest.getParam('action'), this._config['unlockedActions'], true)
+            !in_array(myRequest.getParam("action"), this._config["unlockedActions"], true)
             && $hasData
-            && this._config['validate']
+            && this._config["validate"]
         ) {
             $session = myRequest.getSession();
             $session.start();
@@ -83,14 +83,14 @@ class FormProtectionComponent : Component
         }
 
         $token = [
-            'unlockedFields' => this._config['unlockedFields'],
+            "unlockedFields" => this._config["unlockedFields"],
         ];
-        myRequest = myRequest.withAttribute('formTokenData', [
-            'unlockedFields' => $token['unlockedFields'],
+        myRequest = myRequest.withAttribute("formTokenData", [
+            "unlockedFields" => $token["unlockedFields"],
         ]);
 
         if (is_array(myData)) {
-            unset(myData['_Token']);
+            unset(myData["_Token"]);
             myRequest = myRequest.withParsedBody(myData);
         }
 
@@ -107,7 +107,7 @@ class FormProtectionComponent : Component
     function implementedEvents(): array
     {
         return [
-            'Controller.startup' => 'startup',
+            "Controller.startup" => "startup",
         ];
     }
 
@@ -118,19 +118,19 @@ class FormProtectionComponent : Component
      * callback by executing the method passing the argument as exception.
      *
      * @param \Cake\Form\FormProtector $formProtector Form Protector instance.
-     * @return \Cake\Http\Response|null If specified, validationFailureCallback's response, or no return otherwise.
+     * @return \Cake\Http\Response|null If specified, validationFailureCallback"s response, or no return otherwise.
      * @throws \Cake\Http\Exception\BadRequestException
      */
     protected auto validationFailure(FormProtector $formProtector): ?Response
     {
-        if (Configure::read('debug')) {
+        if (Configure::read("debug")) {
             myException = new BadRequestException($formProtector.getError());
         } else {
             myException = new BadRequestException(static::DEFAULT_EXCEPTION_MESSAGE);
         }
 
-        if (this._config['validationFailureCallback']) {
-            return this.executeCallback(this._config['validationFailureCallback'], myException);
+        if (this._config["validationFailureCallback"]) {
+            return this.executeCallback(this._config["validationFailureCallback"], myException);
         }
 
         throw myException;

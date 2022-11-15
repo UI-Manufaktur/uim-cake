@@ -1,7 +1,7 @@
-module uim.cakeches.engines;
+module uim.cake.caches.engines;
 
-import uim.cakeches\CacheEngine;
-import uim.cakeches\InvalidArgumentException;
+import uim.cake.caches\CacheEngine;
+import uim.cake.caches\InvalidArgumentException;
 use CallbackFilterIterator;
 use Exception;
 use FilesystemIterator;
@@ -13,7 +13,7 @@ use SplFileObject;
 
 /**
  * File Storage engine for cache. Filestorage is the slowest cache storage
- * to read and write. However, it is good for servers that don't have other storage
+ * to read and write. However, it is good for servers that don"t have other storage
  * engine available, or have content which is not performance sensitive.
  *
  * You can configure a FileEngine cache, using Cache::config()
@@ -31,11 +31,11 @@ class FileEngine : CacheEngine
      * The default config used unless overridden by runtime configuration
      *
      * - `duration` Specify how long items in this cache configuration last.
-     * - `groups` List of groups or 'tags' associated to every key stored in this config.
+     * - `groups` List of groups or "tags" associated to every key stored in this config.
      *    handy for deleting a complete group from cache.
      * - `lock` Used by FileCache. Should files be locked before writing to them?
      * - `mask` The mask used for created files
-     * - `path` Path to where cachefiles should be saved. Defaults to system's temp dir.
+     * - `path` Path to where cachefiles should be saved. Defaults to system"s temp dir.
      * - `prefix` Prepended to all entries. Good for when you need to share a keyspace
      *    with either another cache config or another application.
      *    cache::gc from ever being called automatically.
@@ -44,13 +44,13 @@ class FileEngine : CacheEngine
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'duration' => 3600,
-        'groups' => [],
-        'lock' => true,
-        'mask' => 0664,
-        'path' => null,
-        'prefix' => 'cake_',
-        'serialize' => true,
+        "duration" => 3600,
+        "groups" => [],
+        "lock" => true,
+        "mask" => 0664,
+        "path" => null,
+        "prefix" => "cake_",
+        "serialize" => true,
     ];
 
     /**
@@ -71,14 +71,14 @@ class FileEngine : CacheEngine
     bool init(array myConfig = []) {
         super.init(myConfig);
 
-        if (this._config['path'] === null) {
-            this._config['path'] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'cake_cache' . DIRECTORY_SEPARATOR;
+        if (this._config["path"] === null) {
+            this._config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
         }
-        if (substr(this._config['path'], -1) !== DIRECTORY_SEPARATOR) {
-            this._config['path'] .= DIRECTORY_SEPARATOR;
+        if (substr(this._config["path"], -1) !== DIRECTORY_SEPARATOR) {
+            this._config["path"] .= DIRECTORY_SEPARATOR;
         }
         if (this._groupPrefix) {
-            this._groupPrefix = this._groupPrefix.replace('_', DIRECTORY_SEPARATOR);
+            this._groupPrefix = this._groupPrefix.replace("_", DIRECTORY_SEPARATOR);
         }
 
         return this._active();
@@ -105,14 +105,14 @@ class FileEngine : CacheEngine
             return false;
         }
 
-        if (!empty(this._config['serialize'])) {
+        if (!empty(this._config["serialize"])) {
             myValue = serialize(myValue);
         }
 
         $expires = time() + this.duration($ttl);
         myContentss = implode([$expires, PHP_EOL, myValue, PHP_EOL]);
 
-        if (this._config['lock']) {
+        if (this._config["lock"]) {
             /** @psalm-suppress PossiblyNullReference */
             this._File.flock(LOCK_EX);
         }
@@ -123,7 +123,7 @@ class FileEngine : CacheEngine
             this._File.fwrite(myContentss) &&
             this._File.fflush();
 
-        if (this._config['lock']) {
+        if (this._config["lock"]) {
             this._File.flock(LOCK_UN);
         }
         this._File = null;
@@ -136,7 +136,7 @@ class FileEngine : CacheEngine
      *
      * @param string myDataId Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
-     * @return mixed The cached data, or default value if the data doesn't exist, has
+     * @return mixed The cached data, or default value if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
      */
     auto get(myDataId, $default = null) {
@@ -146,7 +146,7 @@ class FileEngine : CacheEngine
             return $default;
         }
 
-        if (this._config['lock']) {
+        if (this._config["lock"]) {
             /** @psalm-suppress PossiblyNullReference */
             this._File.flock(LOCK_SH);
         }
@@ -157,14 +157,14 @@ class FileEngine : CacheEngine
         $cachetime = (int)this._File.current();
 
         if ($cachetime < $time) {
-            if (this._config['lock']) {
+            if (this._config["lock"]) {
                 this._File.flock(LOCK_UN);
             }
 
             return $default;
         }
 
-        myData = '';
+        myData = "";
         this._File.next();
         while (this._File.valid()) {
             /** @psalm-suppress PossiblyInvalidOperand */
@@ -172,13 +172,13 @@ class FileEngine : CacheEngine
             this._File.next();
         }
 
-        if (this._config['lock']) {
+        if (this._config["lock"]) {
             this._File.flock(LOCK_UN);
         }
 
         myData = trim(myData);
 
-        if (myData !== '' && !empty(this._config['serialize'])) {
+        if (myData !== "" && !empty(this._config["serialize"])) {
             myData = unserialize(myData);
         }
 
@@ -189,8 +189,8 @@ class FileEngine : CacheEngine
      * Delete a key from the cache
      *
      * @param string myDataId Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't
-     *   exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t
+     *   exist or couldn"t be removed
      */
     bool delete(myDataId) {
         myDataId = this._key(myDataId);
@@ -219,10 +219,10 @@ class FileEngine : CacheEngine
         }
         this._File = null;
 
-        this._clearDirectory(this._config['path']);
+        this._clearDirectory(this._config["path"]);
 
         $directory = new RecursiveDirectoryIterator(
-            this._config['path'],
+            this._config["path"],
             FilesystemIterator::SKIP_DOTS
         );
         myContentss = new RecursiveIteratorIterator(
@@ -266,7 +266,7 @@ class FileEngine : CacheEngine
      * @param string myPath The path to search.
      * @return void
      */
-    protected auto _clearDirectory(string myPath): void
+    protected void _clearDirectory(string myPath)
     {
         if (!is_dir(myPath)) {
             return;
@@ -277,15 +277,15 @@ class FileEngine : CacheEngine
             return;
         }
 
-        $prefixLength = strlen(this._config['prefix']);
+        $prefixLength = strlen(this._config["prefix"]);
 
         while (($entry = $dir.read()) !== false) {
-            if (substr($entry, 0, $prefixLength) !== this._config['prefix']) {
+            if (substr($entry, 0, $prefixLength) !== this._config["prefix"]) {
                 continue;
             }
 
             try {
-                myfile = new SplFileObject(myPath . $entry, 'r');
+                myfile = new SplFileObject(myPath . $entry, "r");
             } catch (Exception $e) {
                 continue;
             }
@@ -312,7 +312,7 @@ class FileEngine : CacheEngine
      * @throws \LogicException
      */
     function decrement(string myKey, int $offset = 1) {
-        throw new LogicException('Files cannot be atomically decremented.');
+        throw new LogicException("Files cannot be atomically decremented.");
     }
 
     /**
@@ -324,7 +324,7 @@ class FileEngine : CacheEngine
      * @throws \LogicException
      */
     function increment(string myKey, int $offset = 1) {
-        throw new LogicException('Files cannot be atomically incremented.');
+        throw new LogicException("Files cannot be atomically incremented.");
     }
 
     /**
@@ -332,7 +332,7 @@ class FileEngine : CacheEngine
      * for the cache file the key is referring to.
      *
      * @param string myKey The key
-     * @param bool $createKey Whether the key should be created if it doesn't exists, or not
+     * @param bool $createKey Whether the key should be created if it doesn"t exists, or not
      * @return bool true if the cache key could be set, false otherwise
      */
     protected bool _setKey(string myKey, bool $createKey = false) {
@@ -340,7 +340,7 @@ class FileEngine : CacheEngine
         if (this._groupPrefix) {
             myGroups = vsprintf(this._groupPrefix, this.groups());
         }
-        $dir = this._config['path'] . myGroups;
+        $dir = this._config["path"] . myGroups;
 
         if (!is_dir($dir)) {
             mkdir($dir, 0775, true);
@@ -358,7 +358,7 @@ class FileEngine : CacheEngine
         ) {
             $exists = is_file(myPath.getPathname());
             try {
-                this._File = myPath.openFile('c+');
+                this._File = myPath.openFile("c+");
             } catch (Exception $e) {
                 trigger_error($e.getMessage(), E_USER_WARNING);
 
@@ -366,11 +366,11 @@ class FileEngine : CacheEngine
             }
             unset(myPath);
 
-            if (!$exists && !chmod(this._File.getPathname(), (int)this._config['mask'])) {
+            if (!$exists && !chmod(this._File.getPathname(), (int)this._config["mask"])) {
                 trigger_error(sprintf(
-                    'Could not apply permission mask "%s" on cache file "%s"',
+                    "Could not apply permission mask "%s" on cache file "%s"",
                     this._File.getPathname(),
-                    this._config['mask']
+                    this._config["mask"]
                 ), E_USER_WARNING);
             }
         }
@@ -384,7 +384,7 @@ class FileEngine : CacheEngine
      * @return bool
      */
     protected bool _active() {
-        $dir = new SplFileInfo(this._config['path']);
+        $dir = new SplFileInfo(this._config["path"]);
         myPath = $dir.getPathname();
         $success = true;
         if (!is_dir(myPath)) {
@@ -397,8 +397,8 @@ class FileEngine : CacheEngine
         if (!$success || (this._init && !$isWritableDir)) {
             this._init = false;
             trigger_error(sprintf(
-                '%s is not writable',
-                this._config['path']
+                "%s is not writable",
+                this._config["path"]
             ), E_USER_WARNING);
         }
 
@@ -408,14 +408,13 @@ class FileEngine : CacheEngine
     /**
      * @inheritDoc
      */
-    protected auto _key(myKey): string
-    {
+    protected string _key(myKey) {
         myKey = super._key(myKey);
 
-        if (preg_match('/[\/\\<>?:|*"]/', myKey)) {
+        if (preg_match("/[\/\\<>?:|*"]/", myKey)) {
             throw new InvalidArgumentException(
                 "Cache key `{myKey}` contains invalid characters. " .
-                'You cannot use /, \\, <, >, ?, :, |, *, or " in cache keys.'
+                "You cannot use /, \\, <, >, ?, :, |, *, or " in cache keys."
             );
         }
 
@@ -431,9 +430,9 @@ class FileEngine : CacheEngine
     bool clearGroup(string myGroup) {
         this._File = null;
 
-        $prefix = (string)this._config['prefix'];
+        $prefix = (string)this._config["prefix"];
 
-        $directoryIterator = new RecursiveDirectoryIterator(this._config['path']);
+        $directoryIterator = new RecursiveDirectoryIterator(this._config["path"]);
         myContentss = new RecursiveIteratorIterator(
             $directoryIterator,
             RecursiveIteratorIterator::CHILD_FIRST

@@ -24,13 +24,13 @@ class NotAcceptableException : HttpException
     /**
      * Constructor
      *
-     * @param string|null myMessage If no message is given 'Not Acceptable' will be the message
+     * @param string|null myMessage If no message is given "Not Acceptable" will be the message
      * @param int|null $code Status code, defaults to 406
      * @param \Throwable|null $previous The previous exception.
      */
     this(Nullable!string myMessage = null, Nullable!int $code = null, ?Throwable $previous = null) {
         if (empty(myMessage)) {
-            myMessage = 'Not Acceptable';
+            myMessage = "Not Acceptable";
         }
         super.this(myMessage, $code, $previous);
     }

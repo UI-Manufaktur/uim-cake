@@ -1,6 +1,6 @@
-module uim.cakensole;
+module uim.cake.console;
 
-import uim.cakensole.Exception\ConsoleException;
+import uim.cake.console.Exception\ConsoleException;
 
 /**
  * Object wrapper for interacting with stdin
@@ -30,9 +30,9 @@ class ConsoleInput
      *
      * @param string $handle The location of the stream to use as input.
      */
-    this(string $handle = 'php://stdin') {
-        this._canReadline = (extension_loaded('readline') && $handle === 'php://stdin');
-        this._input = fopen($handle, 'rb');
+    this(string $handle = "php://stdin") {
+        this._canReadline = (extension_loaded("readline") && $handle === "php://stdin");
+        this._input = fopen($handle, "rb");
     }
 
     /**
@@ -42,9 +42,9 @@ class ConsoleInput
      */
     string read() {
         if (this._canReadline) {
-            $line = readline('');
+            $line = readline("");
 
-            if ($line !== false && $line !== '') {
+            if ($line !== false && $line !== "") {
                 readline_add_history($line);
             }
         } else {

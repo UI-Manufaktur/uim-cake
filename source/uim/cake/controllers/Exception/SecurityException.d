@@ -1,4 +1,4 @@
-module uim.cakentroller\Exception;
+module uim.cake.controllers\Exception;
 
 import uim.caketps\Exception\BadRequestException;
 
@@ -12,7 +12,7 @@ class SecurityException : BadRequestException
      *
      * @var string
      */
-    protected $_type = 'secure';
+    protected $_type = "secure";
 
     /**
      * Reason for request blackhole
@@ -34,7 +34,7 @@ class SecurityException : BadRequestException
      * @param string myMessage Exception message
      * @return void
      */
-    auto setMessage(string myMessage): void
+    void setMessage(string myMessage)
     {
         this.message = myMessage;
     }

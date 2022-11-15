@@ -14,70 +14,70 @@ use Psr\Http\Server\RequestHandlerInterface;
 class SecurityHeadersMiddleware : MiddlewareInterface
 {
     /** @var string X-Content-Type-Option nosniff */
-    public const NOSNIFF = 'nosniff';
+    public const NOSNIFF = "nosniff";
 
     /** @var string X-Download-Option noopen */
-    public const NOOPEN = 'noopen';
+    public const NOOPEN = "noopen";
 
     /** @var string Referrer-Policy no-referrer */
-    public const NO_REFERRER = 'no-referrer';
+    public const NO_REFERRER = "no-referrer";
 
     /** @var string Referrer-Policy no-referrer-when-downgrade */
-    public const NO_REFERRER_WHEN_DOWNGRADE = 'no-referrer-when-downgrade';
+    public const NO_REFERRER_WHEN_DOWNGRADE = "no-referrer-when-downgrade";
 
     /** @var string Referrer-Policy origin */
-    public const ORIGIN = 'origin';
+    public const ORIGIN = "origin";
 
     /** @var string Referrer-Policy origin-when-cross-origin */
-    public const ORIGIN_WHEN_CROSS_ORIGIN = 'origin-when-cross-origin';
+    public const ORIGIN_WHEN_CROSS_ORIGIN = "origin-when-cross-origin";
 
     /** @var string Referrer-Policy same-origin */
-    public const SAME_ORIGIN = 'same-origin';
+    public const SAME_ORIGIN = "same-origin";
 
     /** @var string Referrer-Policy strict-origin */
-    public const STRICT_ORIGIN = 'strict-origin';
+    public const STRICT_ORIGIN = "strict-origin";
 
     /** @var string Referrer-Policy strict-origin-when-cross-origin */
-    public const STRICT_ORIGIN_WHEN_CROSS_ORIGIN = 'strict-origin-when-cross-origin';
+    public const STRICT_ORIGIN_WHEN_CROSS_ORIGIN = "strict-origin-when-cross-origin";
 
     /** @var string Referrer-Policy unsafe-url */
-    public const UNSAFE_URL = 'unsafe-url';
+    public const UNSAFE_URL = "unsafe-url";
 
     /** @var string X-Frame-Option deny */
-    public const DENY = 'deny';
+    public const DENY = "deny";
 
     /** @var string X-Frame-Option sameorigin */
-    public const SAMEORIGIN = 'sameorigin';
+    public const SAMEORIGIN = "sameorigin";
 
     /** @var string X-Frame-Option allow-from */
-    public const ALLOW_FROM = 'allow-from';
+    public const ALLOW_FROM = "allow-from";
 
     /** @var string X-XSS-Protection block, sets enabled with block */
-    public const XSS_BLOCK = 'block';
+    public const XSS_BLOCK = "block";
 
     /** @var string X-XSS-Protection enabled with block */
-    public const XSS_ENABLED_BLOCK = '1; mode=block';
+    public const XSS_ENABLED_BLOCK = "1; mode=block";
 
     /** @var string X-XSS-Protection enabled */
-    public const XSS_ENABLED = '1';
+    public const XSS_ENABLED = "1";
 
     /** @var string X-XSS-Protection disabled */
-    public const XSS_DISABLED = '0';
+    public const XSS_DISABLED = "0";
 
     /** @var string X-Permitted-Cross-Domain-Policy all */
-    public const ALL = 'all';
+    public const ALL = "all";
 
     /** @var string X-Permitted-Cross-Domain-Policy none */
-    public const NONE = 'none';
+    public const NONE = "none";
 
     /** @var string X-Permitted-Cross-Domain-Policy master-only */
-    public const MASTER_ONLY = 'master-only';
+    public const MASTER_ONLY = "master-only";
 
     /** @var string X-Permitted-Cross-Domain-Policy by-content-type */
-    public const BY_CONTENT_TYPE = 'by-content-type';
+    public const BY_CONTENT_TYPE = "by-content-type";
 
     /** @var string X-Permitted-Cross-Domain-Policy by-ftp-filename */
-    public const BY_FTP_FILENAME = 'by-ftp-filename';
+    public const BY_FTP_FILENAME = "by-ftp-filename";
 
     /**
      * Security related headers to set
@@ -89,13 +89,13 @@ class SecurityHeadersMiddleware : MiddlewareInterface
     /**
      * X-Content-Type-Options
      *
-     * Sets the header value for it to 'nosniff'
+     * Sets the header value for it to "nosniff"
      *
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
      * @return this
      */
     function noSniff() {
-        this.headers['x-content-type-options'] = self::NOSNIFF;
+        this.headers["x-content-type-options"] = self::NOSNIFF;
 
         return this;
     }
@@ -103,13 +103,13 @@ class SecurityHeadersMiddleware : MiddlewareInterface
     /**
      * X-Download-Options
      *
-     * Sets the header value for it to 'noopen'
+     * Sets the header value for it to "noopen"
      *
      * @link https://msdn.microsoft.com/en-us/library/jj542450(v=vs.85).aspx
      * @return this
      */
     function noOpen() {
-        this.headers['x-download-options'] = self::NOOPEN;
+        this.headers["x-download-options"] = self::NOOPEN;
 
         return this;
     }
@@ -118,8 +118,8 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      * Referrer-Policy
      *
      * @link https://w3c.github.io/webappsec-referrer-policy
-     * @param string $policy Policy value. Available Value: 'no-referrer', 'no-referrer-when-downgrade', 'origin',
-     *     'origin-when-cross-origin', 'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', 'unsafe-url'
+     * @param string $policy Policy value. Available Value: "no-referrer", "no-referrer-when-downgrade", "origin",
+     *     "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
      * @return this
      */
     auto setReferrerPolicy(string $policy = self::SAME_ORIGIN) {
@@ -135,7 +135,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
         ];
 
         this.checkValues($policy, $available);
-        this.headers['referrer-policy'] = $policy;
+        this.headers["referrer-policy"] = $policy;
 
         return this;
     }
@@ -144,7 +144,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      * X-Frame-Options
      *
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
-     * @param string $option Option value. Available Values: 'deny', 'sameorigin', 'allow-from <uri>'
+     * @param string $option Option value. Available Values: "deny", "sameorigin", "allow-from <uri>"
      * @param string|null myUrl URL if mode is `allow-from`
      * @return this
      */
@@ -153,12 +153,12 @@ class SecurityHeadersMiddleware : MiddlewareInterface
 
         if ($option === self::ALLOW_FROM) {
             if (empty(myUrl)) {
-                throw new InvalidArgumentException('The 2nd arg myUrl can not be empty when `allow-from` is used');
+                throw new InvalidArgumentException("The 2nd arg myUrl can not be empty when `allow-from` is used");
             }
-            $option .= ' ' . myUrl;
+            $option .= " " . myUrl;
         }
 
-        this.headers['x-frame-options'] = $option;
+        this.headers["x-frame-options"] = $option;
 
         return this;
     }
@@ -167,7 +167,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      * X-XSS-Protection
      *
      * @link https://blogs.msdn.microsoft.com/ieinternals/2011/01/31/controlling-the-xss-filter
-     * @param string myMode Mode value. Available Values: '1', '0', 'block'
+     * @param string myMode Mode value. Available Values: "1", "0", "block"
      * @return this
      */
     auto setXssProtection(string myMode = self::XSS_BLOCK) {
@@ -176,7 +176,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
         }
 
         this.checkValues(myMode, [self::XSS_ENABLED, self::XSS_DISABLED, self::XSS_ENABLED_BLOCK]);
-        this.headers['x-xss-protection'] = myMode;
+        this.headers["x-xss-protection"] = myMode;
 
         return this;
     }
@@ -185,8 +185,8 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      * X-Permitted-Cross-Domain-Policies
      *
      * @link https://www.adobe.com/devnet/adobe-media-server/articles/cross-domain-xml-for-streaming.html
-     * @param string $policy Policy value. Available Values: 'all', 'none', 'master-only', 'by-content-type',
-     *     'by-ftp-filename'
+     * @param string $policy Policy value. Available Values: "all", "none", "master-only", "by-content-type",
+     *     "by-ftp-filename"
      * @return this
      */
     auto setCrossDomainPolicy(string $policy = self::ALL) {
@@ -197,7 +197,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
             self::BY_CONTENT_TYPE,
             self::BY_FTP_FILENAME,
         ]);
-        this.headers['x-permitted-cross-domain-policies'] = $policy;
+        this.headers["x-permitted-cross-domain-policies"] = $policy;
 
         return this;
     }
@@ -214,9 +214,9 @@ class SecurityHeadersMiddleware : MiddlewareInterface
     {
         if (!in_array(myValue, $allowed, true)) {
             throw new InvalidArgumentException(sprintf(
-                'Invalid arg `%s`, use one of these: %s',
+                "Invalid arg `%s`, use one of these: %s",
                 myValue,
-                implode(', ', $allowed)
+                implode(", ", $allowed)
             ));
         }
     }

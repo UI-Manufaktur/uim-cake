@@ -44,8 +44,8 @@ class CspMiddleware : MiddlewareInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'scriptNonce' => false,
-        'styleNonce' => false,
+        "scriptNonce" => false,
+        "styleNonce" => false,
     ];
 
     /**
@@ -57,7 +57,7 @@ class CspMiddleware : MiddlewareInterface
      */
     this($csp, array myConfig = []) {
         if (!class_exists(CSPBuilder::class)) {
-            throw new RuntimeException('You must install paragonie/csp-builder to use CspMiddleware');
+            throw new RuntimeException("You must install paragonie/csp-builder to use CspMiddleware");
         }
         this.setConfig(myConfig);
 
@@ -77,11 +77,11 @@ class CspMiddleware : MiddlewareInterface
      */
     function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
     {
-        if (this.getConfig('scriptNonce')) {
-            myRequest = myRequest.withAttribute('cspScriptNonce', this.csp.nonce('script-src'));
+        if (this.getConfig("scriptNonce")) {
+            myRequest = myRequest.withAttribute("cspScriptNonce", this.csp.nonce("script-src"));
         }
-        if (this.getconfig('styleNonce')) {
-            myRequest = myRequest.withAttribute('cspStyleNonce', this.csp.nonce('style-src'));
+        if (this.getconfig("styleNonce")) {
+            myRequest = myRequest.withAttribute("cspStyleNonce", this.csp.nonce("style-src"));
         }
         $response = $handler.handle(myRequest);
 

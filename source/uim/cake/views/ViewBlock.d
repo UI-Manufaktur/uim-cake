@@ -1,6 +1,6 @@
 module uim.cakeews;
 
-import uim.cakere.exceptions\CakeException;
+import uim.cake.core.exceptions\CakeException;
 
 /**
  * ViewBlock : the concept of Blocks or Slots in the View layer.
@@ -173,8 +173,7 @@ class ViewBlock
      * @param string myName Name of the block
      * @return bool
      */
-    function exists(string myName): bool
-    {
+    bool exists(string myName) {
         return isset(this._blocks[myName]);
     }
 
@@ -183,8 +182,7 @@ class ViewBlock
      *
      * @return array<string> An array containing the blocks.
      */
-    function keys(): array
-    {
+    string[] keys() {
         return array_keys(this._blocks);
     }
 

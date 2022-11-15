@@ -1,4 +1,4 @@
-module uim.cakere;
+module uim.cake.core;
 
 import uim.cakeilities.Inflector;
 
@@ -38,7 +38,7 @@ trait ConventionsTrait
     protected string _modelKey(string myName) {
         [, myName] = pluginSplit(myName);
 
-        return Inflector::underscore(Inflector::singularize(myName)) . '_id';
+        return Inflector::underscore(Inflector::singularize(myName)) . "_id";
     }
 
     /**
@@ -48,7 +48,7 @@ trait ConventionsTrait
      * @return string Model name
      */
     protected string _modelNameFromKey(string myKey) {
-        myKey = str_replace('_id', '', myKey);
+        myKey = str_replace("_id", "", myKey);
 
         return Inflector::camelize(Inflector::pluralize(myKey));
     }
@@ -114,16 +114,16 @@ trait ConventionsTrait
             return Plugin::path(myPluginName);
         }
 
-        return current(App::path('plugins')) . myPluginName . DIRECTORY_SEPARATOR;
+        return current(App::path("plugins")) . myPluginName . DIRECTORY_SEPARATOR;
     }
 
     /**
-     * Return plugin's module
+     * Return plugin"s module
      *
      * @param string myPluginName Plugin name
-     * @return string Plugin's module
+     * @return string Plugin"s module
      */
     protected string _pluginmodule(string myPluginName) {
-        return str_replace('/', '\\', myPluginName);
+        return str_replace("/", "\\", myPluginName);
     }
 }

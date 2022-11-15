@@ -21,13 +21,13 @@ class InternalErrorException : HttpException
     /**
      * Constructor
      *
-     * @param string|null myMessage If no message is given 'Internal Server Error' will be the message
+     * @param string|null myMessage If no message is given "Internal Server Error" will be the message
      * @param int|null $code Status code, defaults to 500
      * @param \Throwable|null $previous The previous exception.
      */
     this(Nullable!string myMessage = null, Nullable!int $code = null, ?Throwable $previous = null) {
         if (empty(myMessage)) {
-            myMessage = 'Internal Server Error';
+            myMessage = "Internal Server Error";
         }
         super.this(myMessage, $code, $previous);
     }

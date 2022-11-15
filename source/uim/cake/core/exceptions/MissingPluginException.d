@@ -1,4 +1,4 @@
-module uim.cakere.exceptions;
+module uim.cake.core.exceptions;
 
 /**
  * Exception raised when a plugin could not be found
@@ -6,5 +6,5 @@ module uim.cakere.exceptions;
 class MissingPluginException : CakeException
 {
 
-    protected $_messageTemplate = 'Plugin %s could not be found.';
+    protected $_messageTemplate = "Plugin %s could not be found.";
 }

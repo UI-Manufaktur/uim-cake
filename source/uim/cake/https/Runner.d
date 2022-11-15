@@ -71,9 +71,9 @@ class Runner : RequestHandlerInterface
         }
 
         $response = new Response([
-            'body' => 'Middleware queue was exhausted without returning a response '
-                . 'and no fallback request handler was set for Runner',
-            'status' => 500,
+            "body" => "Middleware queue was exhausted without returning a response "
+                . "and no fallback request handler was set for Runner",
+            "status" => 500,
         ]);
 
         return $response;

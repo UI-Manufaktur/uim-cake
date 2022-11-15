@@ -1,8 +1,8 @@
 module uim.cakerors;
 
-import uim.cakere.Configure;
-import uim.cakere.exceptions\CakeException;
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakegs\Log;
 use Psr\Http\Message\IServerRequest;
 use Throwable;
@@ -24,8 +24,8 @@ class ErrorLogger : IErrorLogger
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'skipLog' => [],
-        'trace' => false,
+        "skipLog" => [],
+        "trace" => false,
     ];
 
     /**
@@ -38,22 +38,20 @@ class ErrorLogger : IErrorLogger
     }
 
 
-    function logMessage($level, string myMessage, array $context = []): bool
-    {
-        if (!empty($context['request'])) {
-            myMessage .= this.getRequestContext($context['request']);
+    bool logMessage($level, string myMessage, array $context = []) {
+        if (!empty($context["request"])) {
+            myMessage .= this.getRequestContext($context["request"]);
         }
-        if (!empty($context['trace'])) {
-            myMessage .= "\nTrace:\n" . $context['trace'] . "\n";
+        if (!empty($context["trace"])) {
+            myMessage .= "\nTrace:\n" . $context["trace"] . "\n";
         }
 
         return Log::write($level, myMessage);
     }
 
 
-    function log(Throwable myException, ?IServerRequest myRequest = null): bool
-    {
-        foreach (this.getConfig('skipLog') as myClass) {
+    bool log(Throwable myException, ?IServerRequest myRequest = null) {
+        foreach (this.getConfig("skipLog") as myClass) {
             if (myException instanceof myClass) {
                 return false;
             }
@@ -77,17 +75,16 @@ class ErrorLogger : IErrorLogger
      * @param bool $isPrevious False for original exception, true for previous
      * @return string Error message
      */
-    protected auto getMessage(Throwable myException, bool $isPrevious = false): string
-    {
+    protected string getMessage(Throwable myException, bool $isPrevious = false) {
         myMessage = sprintf(
-            '%s[%s] %s in %s on line %s',
-            $isPrevious ? "\nCaused by: " : '',
+            "%s[%s] %s in %s on line %s",
+            $isPrevious ? "\nCaused by: " : "",
             get_class(myException),
             myException.getMessage(),
             myException.getFile(),
             myException.getLine()
         );
-        $debug = Configure::read('debug');
+        $debug = Configure::read("debug");
 
         if ($debug && myException instanceof CakeException) {
             $attributes = myException.getAttributes();
@@ -96,15 +93,15 @@ class ErrorLogger : IErrorLogger
             }
         }
 
-        if (this.getConfig('trace')) {
+        if (this.getConfig("trace")) {
             /** @var array $trace */
-            $trace = Debugger::formatTrace(myException, ['format' => 'points']);
+            $trace = Debugger::formatTrace(myException, ["format" => "points"]);
             myMessage .= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {
-                    myMessage .= '- ' . $line;
+                    myMessage .= "- " . $line;
                 } else {
-                    myMessage .= "- {$line['file']}:{$line['line']}\n";
+                    myMessage .= "- {$line["file"]}:{$line["line"]}\n";
                 }
             }
         }
@@ -121,20 +118,18 @@ class ErrorLogger : IErrorLogger
      * Get the request context for an error/exception trace.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to read from.
-     * @return string
      */
-    auto getRequestContext(IServerRequest myRequest): string
-    {
+    string getRequestContext(IServerRequest myRequest) {
         myMessage = "\nRequest URL: " . myRequest.getRequestTarget();
 
-        $referer = myRequest.getHeaderLine('Referer');
+        $referer = myRequest.getHeaderLine("Referer");
         if ($referer) {
             myMessage .= "\nReferer URL: " . $referer;
         }
 
-        if (method_exists(myRequest, 'clientIp')) {
+        if (method_exists(myRequest, "clientIp")) {
             $clientIp = myRequest.clientIp();
-            if ($clientIp && $clientIp !== '::1') {
+            if ($clientIp && $clientIp !== "::1") {
                 myMessage .= "\nClient IP: " . $clientIp;
             }
         }

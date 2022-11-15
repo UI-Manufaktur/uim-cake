@@ -24,7 +24,7 @@ use Psr\Http\Message\IResponse;
  * This emitter offers a few changes from the emitters offered by
  * diactoros:
  *
- * - It logs headers sent using CakePHP's logging tools.
+ * - It logs headers sent using CakePHP"s logging tools.
  * - Cookies are emitted using setcookie() to not conflict with ext/session
  */
 class ResponseEmitter : EmitterInterface
@@ -55,7 +55,7 @@ class ResponseEmitter : EmitterInterface
      * @return bool
      */
     bool emit(IResponse $response) {
-        myfile = '';
+        myfile = "";
         $line = 0;
         if (headers_sent(myfile, $line)) {
             myMessage = "Unable to emit headers. Headers sent in file=myfile line=$line";
@@ -66,14 +66,14 @@ class ResponseEmitter : EmitterInterface
         this.emitHeaders($response);
         this.flush();
 
-        $range = this.parseContentRange($response.getHeaderLine('Content-Range'));
+        $range = this.parseContentRange($response.getHeaderLine("Content-Range"));
         if (is_array($range)) {
             this.emitBodyRange($range, $response);
         } else {
             this.emitBody($response);
         }
 
-        if (function_exists('fastcgi_finish_request')) {
+        if (function_exists("fastcgi_finish_request")) {
             fastcgi_finish_request();
         }
 
@@ -153,10 +153,10 @@ class ResponseEmitter : EmitterInterface
     {
         $reasonPhrase = $response.getReasonPhrase();
         header(sprintf(
-            'HTTP/%s %d%s',
+            "HTTP/%s %d%s",
             $response.getProtocolVersion(),
             $response.getStatusCode(),
-            ($reasonPhrase ? ' ' . $reasonPhrase : '')
+            ($reasonPhrase ? " " . $reasonPhrase : "")
         ));
     }
 
@@ -174,19 +174,19 @@ class ResponseEmitter : EmitterInterface
     protected auto emitHeaders(IResponse $response): void
     {
         $cookies = [];
-        if (method_exists($response, 'getCookieCollection')) {
+        if (method_exists($response, "getCookieCollection")) {
             $cookies = iterator_to_array($response.getCookieCollection());
         }
 
         foreach ($response.getHeaders() as myName => myValues) {
-            if (strtolower(myName) === 'set-cookie') {
+            if (strtolower(myName) === "set-cookie") {
                 $cookies = array_merge($cookies, myValues);
                 continue;
             }
             $first = true;
             foreach (myValues as myValue) {
                 header(sprintf(
-                    '%s: %s',
+                    "%s: %s",
                     myName,
                     myValue
                 ), $first);
@@ -218,7 +218,7 @@ class ResponseEmitter : EmitterInterface
      */
     protected bool setCookie($cookie) {
         if (is_string($cookie)) {
-            $cookie = Cookie::createFromHeaderString($cookie, ['path' => '']);
+            $cookie = Cookie::createFromHeaderString($cookie, ["path" => ""]);
         }
 
         if (PHP_VERSION_ID >= 70300) {
@@ -231,7 +231,7 @@ class ResponseEmitter : EmitterInterface
         if ($sameSite !== null) {
             // Temporary hack for PHP 7.2 to set "SameSite" attribute
             // https://stackoverflow.com/questions/39750906/php-setcookie-samesite-strict
-            myPath .= '; samesite=' . $sameSite;
+            myPath .= "; samesite=" . $sameSite;
         }
 
         return setcookie(
@@ -272,12 +272,12 @@ class ResponseEmitter : EmitterInterface
      *     content range or an invalid content range is provided
      */
     protected auto parseContentRange(string $header) {
-        if (preg_match('/(?P<unit>[\w]+)\s+(?P<first>\d+)-(?P<last>\d+)\/(?P<length>\d+|\*)/', $header, $matches)) {
+        if (preg_match("/(?P<unit>[\w]+)\s+(?P<first>\d+)-(?P<last>\d+)\/(?P<length>\d+|\*)/", $header, $matches)) {
             return [
-                $matches['unit'],
-                (int)$matches['first'],
-                (int)$matches['last'],
-                $matches['length'] === '*' ? '*' : (int)$matches['length'],
+                $matches["unit"],
+                (int)$matches["first"],
+                (int)$matches["last"],
+                $matches["length"] === "*" ? "*" : (int)$matches["length"],
             ];
         }
 

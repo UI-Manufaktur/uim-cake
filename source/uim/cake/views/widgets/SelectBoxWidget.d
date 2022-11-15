@@ -291,8 +291,7 @@ class SelectBoxWidget : BasicWidget
      * @param array<string>|string|int|false|null $selected The selected values.
      * @return bool
      */
-    protected auto _isSelected(string myKey, $selected): bool
-    {
+    protected bool _isSelected(string myKey, $selected) {
         if ($selected === null) {
             return false;
         }
@@ -313,8 +312,7 @@ class SelectBoxWidget : BasicWidget
      * @param array<string>|null $disabled The disabled values.
      * @return bool
      */
-    protected auto _isDisabled(string myKey, ?array $disabled): bool
-    {
+    protected bool _isDisabled(string myKey, ?array $disabled) {
         if ($disabled === null) {
             return false;
         }

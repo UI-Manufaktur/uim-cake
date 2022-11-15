@@ -5,10 +5,10 @@ module uim.cakeews;
 @safe:
 import uim.cake
 
-/* import uim.cakeches\Cache;
-import uim.cakere.App;
-import uim.cakere.InstanceConfigTrait;
-import uim.cakere.Plugin;
+/* import uim.cake.caches\Cache;
+import uim.cake.core.App;
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.core.Plugin;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 import uim.cakeents\EventManager;
@@ -372,8 +372,7 @@ class View : IEventDispatcher {
      *
      * @return bool
      */
-    function isAutoLayoutEnabled(): bool
-    {
+    bool isAutoLayoutEnabled() {
         return this.autoLayout;
     }
 
@@ -619,8 +618,7 @@ class View : IEventDispatcher {
      *   is not found in the plugin, the normal view path cascade will be searched.
      * @return bool Success
      */
-    function elementExists(string myName): bool
-    {
+    bool elementExists(string myName) {
         return (bool)this._getElementFileName(myName);
     }
 
@@ -910,8 +908,7 @@ class View : IEventDispatcher {
      * @param string myName Name of the block
      * @return bool
      */
-    function exists(string myName): bool
-    {
+    bool exists(string myName) {
         return this.Blocks.exists(myName);
     }
 

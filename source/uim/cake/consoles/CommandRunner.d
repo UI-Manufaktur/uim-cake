@@ -1,12 +1,12 @@
-module uim.cakensole;
+module uim.cake.console;
 
 @safe:
 import uim.cake
 
 import uim.cakemmand\VersionCommand;
-import uim.cakensole.command\HelpCommand;
-import uim.cakensole.Exception\MissingOptionException;
-import uim.cakensole.Exception\StopException;
+import uim.cake.console.command\HelpCommand;
+import uim.cake.console.Exception\MissingOptionException;
+import uim.cake.console.Exception\StopException;
 import uim.cakere.ConsoleApplicationInterface;
 import uim.cakere.ContainerApplicationInterface;
 import uim.cakere.PluginApplicationInterface;
@@ -64,16 +64,16 @@ class CommandRunner : IEventDispatcher
      */
     this(
         ConsoleApplicationInterface $app,
-        string $root = 'cake',
+        string $root = "cake",
         ?ICommandFactory $factory = null
     ) {
         this.app = $app;
         this.root = $root;
         this.factory = $factory;
         this.aliases = [
-            '--version' => 'version',
-            '--help' => 'help',
-            '-h' => 'help',
+            "--version" => "version",
+            "--help" => "help",
+            "-h" => "help",
         ];
     }
 
@@ -87,7 +87,7 @@ class CommandRunner : IEventDispatcher
      * ### Usage
      *
      * ```
-     * $runner.setAliases(['--version' => 'version']);
+     * $runner.setAliases(["--version" => "version"]);
      * ```
      *
      * @param array<string> myAliases The map of aliases to replace.
@@ -119,21 +119,21 @@ class CommandRunner : IEventDispatcher
         this.bootstrap();
 
         $commands = new CommandCollection([
-            'help' => HelpCommand::class,
+            "help" => HelpCommand::class,
         ]);
         if (class_exists(VersionCommand::class)) {
-            $commands.add('version', VersionCommand::class);
+            $commands.add("version", VersionCommand::class);
         }
         $commands = this.app.console($commands);
 
         if (this.app instanceof PluginApplicationInterface) {
             $commands = this.app.pluginConsole($commands);
         }
-        this.dispatchEvent('Console.buildCommands', ['commands' => $commands]);
+        this.dispatchEvent("Console.buildCommands", ["commands" => $commands]);
         this.loadRoutes();
 
         if (empty($argv)) {
-            throw new RuntimeException('Cannot run any commands. No arguments received.');
+            throw new RuntimeException("Cannot run any commands. No arguments received.");
         }
         // Remove the root executable segment
         array_shift($argv);
@@ -171,7 +171,7 @@ class CommandRunner : IEventDispatcher
     /**
      * Application bootstrap wrapper.
      *
-     * Calls the application's `bootstrap()` hook. After the application the
+     * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
      *
      * @return void
@@ -184,7 +184,7 @@ class CommandRunner : IEventDispatcher
     }
 
     /**
-     * Get the application's event manager or the global one.
+     * Get the application"s event manager or the global one.
      *
      * @return \Cake\Event\IEventManager
      */
@@ -198,7 +198,7 @@ class CommandRunner : IEventDispatcher
     }
 
     /**
-     * Get/set the application's event manager.
+     * Get/set the application"s event manager.
      *
      * If the application does not support events and this method is used as
      * a setter, an exception will be raised.
@@ -214,7 +214,7 @@ class CommandRunner : IEventDispatcher
             return this;
         }
 
-        throw new InvalidArgumentException('Cannot set the event manager, the application does not support events.');
+        throw new InvalidArgumentException("Cannot set the event manager, the application does not support events.");
     }
 
     /**
@@ -257,7 +257,7 @@ class CommandRunner : IEventDispatcher
     {
         for ($i = 3; $i > 1; $i--) {
             $parts = array_slice($argv, 0, $i);
-            myName = implode(' ', $parts);
+            myName = implode(" ", $parts);
             if ($commands.has(myName)) {
                 return [myName, array_slice($argv, $i)];
             }
@@ -283,8 +283,8 @@ class CommandRunner : IEventDispatcher
      */
     protected string resolveName(CommandCollection $commands, ConsoleIo $io, Nullable!string myName) {
         if (!myName) {
-            $io.err('<error>No command provided. Choose one of the available commands.</error>', 2);
-            myName = 'help';
+            $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);
+            myName = "help";
         }
         myName = this.aliases[myName] ?? myName;
         if (!$commands.has(myName)) {
@@ -361,7 +361,7 @@ class CommandRunner : IEventDispatcher
     }
 
     /**
-     * Ensure that the application's routes are loaded.
+     * Ensure that the application"s routes are loaded.
      *
      * Console commands and shells often need to generate URLs.
      *
@@ -371,7 +371,7 @@ class CommandRunner : IEventDispatcher
         if (!(this.app instanceof RoutingApplicationInterface)) {
             return;
         }
-        myBuilder = Router::createRouteBuilder('/');
+        myBuilder = Router::createRouteBuilder("/");
 
         this.app.routes(myBuilder);
         if (this.app instanceof PluginApplicationInterface) {

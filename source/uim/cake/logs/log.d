@@ -13,13 +13,13 @@
  */module uim.cake.logs;
 
 import uim.cake.core.StaticConfigTrait;
-import uim.cake.logs\Engine\BaseLog;
+import uim.cake.logs.engines\BaseLog;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
 /**
  * Logs messages to configured Log adapters. One or more adapters
- * can be configured using Cake Logs's methods. If you don't
+ * can be configured using Cake Logs"s methods. If you don"t
  * configure any adapters, and write to Log, the messages will be
  * ignored.
  *
@@ -29,7 +29,7 @@ use Psr\Log\LoggerInterface;
  * A sample configuration would look like:
  *
  * ```
- * Log::setConfig('my_log', ['className' => 'FileLog']);
+ * Log::setConfig("my_log", ["className" => "FileLog"]);
  * ```
  *
  * You can define the className as any fully moduled classname or use a short hand
@@ -40,7 +40,7 @@ use Psr\Log\LoggerInterface;
  * built-in base class (`Cake\Log\Engine\BaseLog`) that can be used for custom loggers.
  *
  * Outside of the `className` key, all other configuration values will be passed to the
- * logging adapter's constructor as an array.
+ * logging adapter"s constructor as an array.
  *
  * ### Logging levels
  *
@@ -48,10 +48,10 @@ use Psr\Log\LoggerInterface;
  * This allows you to disable debug messages in production for example:
  *
  * ```
- * Log::setConfig('default', [
- *     'className' => 'File',
- *     'path' => LOGS,
- *     'levels' => ['error', 'critical', 'alert', 'emergency']
+ * Log::setConfig("default", [
+ *     "className" => "File",
+ *     "path" => LOGS,
+ *     "levels" => ["error", "critical", "alert", "emergency"]
  * ]);
  * ```
  *
@@ -62,13 +62,13 @@ use Psr\Log\LoggerInterface;
  *
  * When configuring loggers you can define the active scopes the logger
  * is for. If defined, only the listed scopes will be handled by the
- * logger. If you don't define any scopes an adapter will catch
+ * logger. If you don"t define any scopes an adapter will catch
  * all scopes that match the handled levels.
  *
  * ```
- * Log::setConfig('payments', [
- *     'className' => 'File',
- *     'scopes' => ['payment', 'order']
+ * Log::setConfig("payments", [
+ *     "className" => "File",
+ *     "scopes" => ["payment", "order"]
  * ]);
  * ```
  *
@@ -87,14 +87,14 @@ use Psr\Log\LoggerInterface;
  * or the correct constants with `write()`:
  *
  * ```
- * Log::error('Something horrible happened');
- * Log::write(LOG_ERR, 'Something horrible happened');
+ * Log::error("Something horrible happened");
+ * Log::write(LOG_ERR, "Something horrible happened");
  * ```
  *
  * ### Logging scopes
  *
  * When logging messages and configuring log adapters, you can specify
- * 'scopes' that the logger will handle. You can think of scopes as subsystems
+ * "scopes" that the logger will handle. You can think of scopes as subsystems
  * in your application that may require different logging setups. For
  * example in an e-commerce application you may want to handle logged errors
  * in the cart and ordering subsystems differently than the rest of the
@@ -114,9 +114,9 @@ class Log
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        'console' => Engine\ConsoleLog::class,
-        'file' => Engine\FileLog::class,
-        'syslog' => Engine\SyslogLog::class,
+        "console" => Engine\ConsoleLog::class,
+        "file" => Engine\FileLog::class,
+        "syslog" => Engine\SyslogLog::class,
     ];
 
     /**
@@ -139,14 +139,14 @@ class Log
      * @var array<string>
      */
     protected static $_levels = [
-        'emergency',
-        'alert',
-        'critical',
-        'error',
-        'warning',
-        'notice',
-        'info',
-        'debug',
+        "emergency",
+        "alert",
+        "critical",
+        "error",
+        "warning",
+        "notice",
+        "info",
+        "debug",
     ];
 
     /**
@@ -156,14 +156,14 @@ class Log
      * @var array<string, int>
      */
     protected static $_levelMap = [
-        'emergency' => LOG_EMERG,
-        'alert' => LOG_ALERT,
-        'critical' => LOG_CRIT,
-        'error' => LOG_ERR,
-        'warning' => LOG_WARNING,
-        'notice' => LOG_NOTICE,
-        'info' => LOG_INFO,
-        'debug' => LOG_DEBUG,
+        "emergency" => LOG_EMERG,
+        "alert" => LOG_ALERT,
+        "critical" => LOG_CRIT,
+        "error" => LOG_ERR,
+        "warning" => LOG_WARNING,
+        "notice" => LOG_NOTICE,
+        "info" => LOG_INFO,
+        "debug" => LOG_DEBUG,
     ];
 
     /**
@@ -192,8 +192,8 @@ class Log
     protected static auto _loadConfig(): void
     {
         foreach (static::$_config as myName => $properties) {
-            if (isset($properties['engine'])) {
-                $properties['className'] = $properties['engine'];
+            if (isset($properties["engine"])) {
+                $properties["className"] = $properties["engine"];
             }
             if (!static::$_registry.has((string)myName)) {
                 static::$_registry.load((string)myName, $properties);
@@ -238,7 +238,7 @@ class Log
      * This method can be used to define logging adapters for an application
      * or read existing configuration.
      *
-     * To change an adapter's configuration at runtime, first drop the adapter and then
+     * To change an adapter"s configuration at runtime, first drop the adapter and then
      * reconfigure it.
      *
      * Loggers will not be constructed until the first log message is written.
@@ -248,19 +248,19 @@ class Log
      * Setting a cache engine up.
      *
      * ```
-     * Log::setConfig('default', $settings);
+     * Log::setConfig("default", $settings);
      * ```
      *
      * Injecting a constructed adapter in:
      *
      * ```
-     * Log::setConfig('default', $instance);
+     * Log::setConfig("default", $instance);
      * ```
      *
      * Using a factory function to get an adapter:
      *
      * ```
-     * Log::setConfig('default', function () { return new FileLog(); });
+     * Log::setConfig("default", function () { return new FileLog(); });
      * ```
      *
      * Configure multiple adapters at once:
@@ -303,21 +303,21 @@ class Log
      *
      * ### Levels:
      *
-     * - `LOG_EMERG` => 'emergency',
-     * - `LOG_ALERT` => 'alert',
-     * - `LOG_CRIT` => 'critical',
-     * - `LOG_ERR` => 'error',
-     * - `LOG_WARNING` => 'warning',
-     * - `LOG_NOTICE` => 'notice',
-     * - `LOG_INFO` => 'info',
-     * - `LOG_DEBUG` => 'debug',
+     * - `LOG_EMERG` => "emergency",
+     * - `LOG_ALERT` => "alert",
+     * - `LOG_CRIT` => "critical",
+     * - `LOG_ERR` => "error",
+     * - `LOG_WARNING` => "warning",
+     * - `LOG_NOTICE` => "notice",
+     * - `LOG_INFO` => "info",
+     * - `LOG_DEBUG` => "debug",
      *
      * ### Basic usage
      *
-     * Write a 'warning' message to the logs:
+     * Write a "warning" message to the logs:
      *
      * ```
-     * Log::write('warning', 'Stuff is broken here');
+     * Log::write("warning", "Stuff is broken here");
      * ```
      *
      * ### Using scopes
@@ -326,7 +326,7 @@ class Log
      * This allows you to handle messages differently based on application section/feature.
      *
      * ```
-     * Log::write('warning', 'Payment failed', ['scope' => 'payment']);
+     * Log::write("warning", "Payment failed", ["scope" => "payment"]);
      * ```
      *
      * When configuring loggers you can configure the scopes a particular logger will handle.
@@ -350,8 +350,7 @@ class Log
      * @return bool Success
      * @throws \InvalidArgumentException If invalid level is passed.
      */
-    static function write($level, string myMessage, $context = []): bool
-    {
+    static bool write($level, string myMessage, $context = []) {
         static::_init();
         if (is_int($level) && in_array($level, static::$_levelMap, true)) {
             $level = array_search($level, static::$_levelMap, true);
@@ -359,15 +358,15 @@ class Log
 
         if (!in_array($level, static::$_levels, true)) {
             /** @psalm-suppress PossiblyFalseArgument */
-            throw new InvalidArgumentException(sprintf('Invalid log level `%s`', $level));
+            throw new InvalidArgumentException(sprintf("Invalid log level `%s`", $level));
         }
 
         $logged = false;
         $context = (array)$context;
         if (isset($context[0])) {
-            $context = ['scope' => $context];
+            $context = ["scope" => $context];
         }
-        $context += ['scope' => []];
+        $context += ["scope" => []];
 
         foreach (static::$_registry.loaded() as $streamName) {
             $logger = static::$_registry.{$streamName};
@@ -382,8 +381,8 @@ class Log
             }
 
             $correctLevel = empty($levels) || in_array($level, $levels, true);
-            $inScope = $scopes === false && empty($context['scope']) || $scopes === [] ||
-                is_array($scopes) && array_intersect((array)$context['scope'], $scopes);
+            $inScope = $scopes === false && empty($context["scope"]) || $scopes === [] ||
+                is_array($scopes) && array_intersect((array)$context["scope"], $scopes);
 
             if ($correctLevel && $inScope) {
                 $logger.log($level, myMessage, $context);
@@ -405,8 +404,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function emergency(string myMessage, $context = []): bool
-    {
+    static bool emergency(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -421,8 +419,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function alert(string myMessage, $context = []): bool
-    {
+    static bool alert(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -437,8 +434,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function critical(string myMessage, $context = []): bool
-    {
+    static bool critical(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -453,8 +449,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function error(string myMessage, $context = []): bool
-    {
+    static bool error(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -469,8 +464,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function warning(string myMessage, $context = []): bool
-    {
+    static bool warning(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -485,8 +479,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function notice(string myMessage, $context = []): bool
-    {
+    static bool notice(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -501,8 +494,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function debug(string myMessage, $context = []): bool
-    {
+    static bool debug(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 
@@ -517,8 +509,7 @@ class Log
      *  See {@link \Cake\Log\Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static function info(string myMessage, $context = []): bool
-    {
+    static bool info(string myMessage, $context = []) {
         return static::write(__FUNCTION__, myMessage, $context);
     }
 }

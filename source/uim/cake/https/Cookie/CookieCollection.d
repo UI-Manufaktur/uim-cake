@@ -65,7 +65,7 @@ class CookieCollection : IteratorAggregate, Countable
             try {
                 $cookies[] = Cookie::createFromHeaderString(myValue, $defaults);
             } catch (Exception $e) {
-                // Don't blow up on invalid cookies
+                // Don"t blow up on invalid cookies
             }
         }
 
@@ -133,7 +133,7 @@ class CookieCollection : IteratorAggregate, Countable
 
         throw new InvalidArgumentException(
             sprintf(
-                'Cookie %s not found. Use has() to check first for existence.',
+                "Cookie %s not found. Use has() to check first for existence.",
                 myName
             )
         );
@@ -145,8 +145,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string myName The cookie name to check.
      * @return bool True if the cookie exists, otherwise false.
      */
-    function has(string myName): bool
-    {
+    bool has(string myName) {
         myKey = mb_strtolower(myName);
         foreach (this.cookies as $cookie) {
             if (mb_strtolower($cookie.getName()) === myKey) {
@@ -190,7 +189,7 @@ class CookieCollection : IteratorAggregate, Countable
             if (!$cookie instanceof CookieInterface) {
                 throw new InvalidArgumentException(
                     sprintf(
-                        'Expected `%s[]` as $cookies but instead got `%s` at index %d',
+                        "Expected `%s[]` as $cookies but instead got `%s` at index %d",
                         static::class,
                         getTypeName($cookie),
                         $index
@@ -213,8 +212,8 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Add cookies that match the path/domain/expiration to the request.
      *
-     * This allows CookieCollections to be used as a 'cookie jar' in an HTTP client
-     * situation. Cookies that match the request's domain + path that are not expired
+     * This allows CookieCollections to be used as a "cookie jar" in an HTTP client
+     * situation. Cookies that match the request"s domain + path that are not expired
      * when this method is called will be applied to the request.
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to update.
@@ -228,16 +227,16 @@ class CookieCollection : IteratorAggregate, Countable
         $cookies = this.findMatchingCookies(
             $uri.getScheme(),
             $uri.getHost(),
-            $uri.getPath() ?: '/'
+            $uri.getPath() ?: "/"
         );
         $cookies = array_merge($cookies, $extraCookies);
         $cookiePairs = [];
         foreach ($cookies as myKey => myValue) {
-            $cookie = sprintf('%s=%s', rawurlencode(myKey), rawurlencode(myValue));
+            $cookie = sprintf("%s=%s", rawurlencode(myKey), rawurlencode(myValue));
             $size = strlen($cookie);
             if ($size > 4096) {
                 triggerWarning(sprintf(
-                    'The cookie `%s` exceeds the recommended maximum cookie length of 4096 bytes.',
+                    "The cookie `%s` exceeds the recommended maximum cookie length of 4096 bytes.",
                     myKey
                 ));
             }
@@ -248,7 +247,7 @@ class CookieCollection : IteratorAggregate, Countable
             return myRequest;
         }
 
-        return myRequest.withHeader('Cookie', implode('; ', $cookiePairs));
+        return myRequest.withHeader("Cookie", implode("; ", $cookiePairs));
     }
 
     /**
@@ -262,25 +261,25 @@ class CookieCollection : IteratorAggregate, Countable
     protected auto findMatchingCookies(string $scheme, string $host, string myPath): array
     {
         $out = [];
-        $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+        $now = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         foreach (this.cookies as $cookie) {
-            if ($scheme === 'http' && $cookie.isSecure()) {
+            if ($scheme === "http" && $cookie.isSecure()) {
                 continue;
             }
             if (strpos(myPath, $cookie.getPath()) !== 0) {
                 continue;
             }
             $domain = $cookie.getDomain();
-            $leadingDot = substr($domain, 0, 1) === '.';
+            $leadingDot = substr($domain, 0, 1) === ".";
             if ($leadingDot) {
-                $domain = ltrim($domain, '.');
+                $domain = ltrim($domain, ".");
             }
 
             if ($cookie.isExpired($now)) {
                 continue;
             }
 
-            $pattern = '/' . preg_quote($domain, '/') . '$/';
+            $pattern = "/" . preg_quote($domain, "/") . "$/";
             if (!preg_match($pattern, $host)) {
                 continue;
             }
@@ -301,11 +300,11 @@ class CookieCollection : IteratorAggregate, Countable
     function addFromResponse(IResponse $response, RequestInterface myRequest) {
         $uri = myRequest.getUri();
         $host = $uri.getHost();
-        myPath = $uri.getPath() ?: '/';
+        myPath = $uri.getPath() ?: "/";
 
         $cookies = static::createFromHeader(
-            $response.getHeader('Set-Cookie'),
-            ['domain' => $host, 'path' => myPath]
+            $response.getHeader("Set-Cookie"),
+            ["domain" => $host, "path" => myPath]
         );
         $new = clone this;
         foreach ($cookies as $cookie) {
@@ -325,8 +324,8 @@ class CookieCollection : IteratorAggregate, Countable
      */
     protected auto removeExpiredCookies(string $host, string myPath): void
     {
-        $time = new DateTimeImmutable('now', new DateTimeZone('UTC'));
-        $hostPattern = '/' . preg_quote($host, '/') . '$/';
+        $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
+        $hostPattern = "/" . preg_quote($host, "/") . "$/";
 
         foreach (this.cookies as $i => $cookie) {
             if (!$cookie.isExpired($time)) {

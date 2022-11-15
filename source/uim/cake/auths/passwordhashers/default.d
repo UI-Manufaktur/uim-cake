@@ -20,8 +20,8 @@ class DefaultPasswordHasher : AbstractPasswordHasher {
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'hashType' => PASSWORD_DEFAULT,
-        'hashOptions' => [],
+        "hashType" => PASSWORD_DEFAULT,
+        "hashOptions" => [],
     ];
 
     /**
@@ -36,8 +36,8 @@ class DefaultPasswordHasher : AbstractPasswordHasher {
         /** @psalm-suppress NullableReturnStatement */
         return password_hash(
             myPassword,
-            this._config['hashType'],
-            this._config['hashOptions']
+            this._config["hashType"],
+            this._config["hashOptions"]
         );
     }
 
@@ -59,6 +59,6 @@ class DefaultPasswordHasher : AbstractPasswordHasher {
      * @param string myPassword The password to verify
      */
     bool needsRehash(string myPassword) {
-        return password_needs_rehash(myPassword, this._config['hashType'], this._config['hashOptions']);
+        return password_needs_rehash(myPassword, this._config["hashType"], this._config["hashOptions"]);
     }
 }

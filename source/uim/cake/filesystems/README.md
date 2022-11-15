@@ -14,8 +14,8 @@ Create a folder instance and search for all the `.php` files within it:
 ```php
 import uim.cake.filesystems\Folder;
 
-$dir = new Folder('/path/to/folder');
-myfiles = $dir.find('.*\.php');
+$dir = new Folder("/path/to/folder");
+myfiles = $dir.find(".*\.php");
 ```
 
 Now you can loop through the files and read from or write/append to the contents or simply delete the file:
@@ -24,10 +24,10 @@ Now you can loop through the files and read from or write/append to the contents
 foreach (myfiles as myfile) {
     myfile = new File($dir.pwd() . DIRECTORY_SEPARATOR . myfile);
     myContentss = myfile.read();
-    // myfile.write('I am overwriting the contents of this file');
-    // myfile.append('I am adding to the bottom of this file.');
+    // myfile.write("I am overwriting the contents of this file");
+    // myfile.append("I am adding to the bottom of this file.");
     // myfile.delete(); // I am deleting this file
-    myfile.close(); // Be sure to close the file when you're done
+    myfile.close(); // Be sure to close the file when you"re done
 }
 ```
 

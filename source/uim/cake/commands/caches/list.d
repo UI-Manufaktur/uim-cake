@@ -1,9 +1,9 @@
 module uim.cakemmand;
 
-import uim.cakeches\Cache;
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
+import uim.cake.caches\Cache;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
 
 /**
  * CacheList command.
@@ -11,11 +11,11 @@ import uim.cakensole.consoleOptionParser;
 class CacheListCommand : Command {
 
     static string defaultName() {
-        return 'cache list';
+        return "cache list";
     }
 
     /**
-     * Hook method for defining this command's option parser.
+     * Hook method for defining this command"s option parser.
      *
      * @see https://book.cakephp.org/4/en/console-commands/option-parsers.html
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
@@ -24,7 +24,7 @@ class CacheListCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser = super.buildOptionParser($parser);
-        $parser.setDescription('Show a list of configured caches.');
+        $parser.setDescription("Show a list of configured caches.");
 
         return $parser;
     }

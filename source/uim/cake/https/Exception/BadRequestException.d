@@ -24,13 +24,13 @@ class BadRequestException : HttpException
     /**
      * Constructor
      *
-     * @param string|null myMessage If no message is given 'Bad Request' will be the message
+     * @param string|null myMessage If no message is given "Bad Request" will be the message
      * @param int|null $code Status code, defaults to 400
      * @param \Throwable|null $previous The previous exception.
      */
     this(Nullable!string myMessage = null, Nullable!int $code = null, ?Throwable $previous = null) {
         if (empty(myMessage)) {
-            myMessage = 'Bad Request';
+            myMessage = "Bad Request";
         }
         super.this(myMessage, $code, $previous);
     }

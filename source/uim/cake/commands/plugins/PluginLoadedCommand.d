@@ -1,9 +1,9 @@
 module uim.cakemmand;
 
-import uim.cakensole.Arguments;
-import uim.cakensole.consoleIo;
-import uim.cakensole.consoleOptionParser;
-import uim.cakere.Plugin;
+import uim.cake.console.Arguments;
+import uim.cake.console.consoleIo;
+import uim.cake.console.consoleOptionParser;
+import uim.cake.core.Plugin;
 
 /**
  * Displays all currently loaded plugins.
@@ -11,7 +11,7 @@ import uim.cakere.Plugin;
 class PluginLoadedCommand : Command {
 
     static string defaultName() {
-        return 'plugin loaded';
+        return "plugin loaded";
     }
 
     /**
@@ -37,7 +37,7 @@ class PluginLoadedCommand : Command {
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser.setDescription('Displays all currently loaded plugins.');
+        $parser.setDescription("Displays all currently loaded plugins.");
 
         return $parser;
     }

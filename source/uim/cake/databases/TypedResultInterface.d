@@ -7,10 +7,8 @@ interface TypedResultInterface
 {
     /**
      * Return the abstract type this expression will return
-     *
-     * @return string
      */
-    auto getReturnType(): string;
+    string getReturnType();
 
     /**
      * Set the return type of the expression

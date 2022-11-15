@@ -22,7 +22,7 @@ class NullContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    function primaryKey(): array
+    strimh primaryKey(): array
     {
         deprecationWarning('`NullContext::primaryKey()` is deprecated. Use `NullContext::getPrimaryKey()`.');
 
@@ -36,14 +36,12 @@ class NullContext : IContext
     }
 
 
-    function isPrimaryKey(string myField): bool
-    {
+    bool isPrimaryKey(string myField) {
         return false;
     }
 
 
-    function isCreate(): bool
-    {
+    bool isCreate() {
         return true;
     }
 
@@ -89,8 +87,7 @@ class NullContext : IContext
     }
 
 
-    function hasError(string myField): bool
-    {
+    bool hasError(string myField) {
         return false;
     }
 

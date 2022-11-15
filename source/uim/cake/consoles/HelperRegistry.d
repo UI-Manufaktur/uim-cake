@@ -1,8 +1,8 @@
-module uim.cakensole;
+module uim.cake.console;
 
-import uim.cakensole.Exception\MissingHelperException;
-import uim.cakere.App;
-import uim.cakere.ObjectRegistry;
+import uim.cake.console.Exception\MissingHelperException;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 
 /**
  * Registry for Helpers. Provides features
@@ -43,9 +43,9 @@ class HelperRegistry : ObjectRegistry
      */
     protected auto _resolveClassName(string myClass): Nullable!string
     {
-        myName = App::className(myClass, 'Command/Helper', 'Helper');
+        myName = App::className(myClass, "Command/Helper", "Helper");
         if (myName === null) {
-            return App::className(myClass, 'Shell/Helper', 'Helper');
+            return App::className(myClass, "Shell/Helper", "Helper");
         }
 
         return myName;
@@ -64,8 +64,8 @@ class HelperRegistry : ObjectRegistry
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingHelperException([
-            'class' => myClass,
-            'plugin' => myPlugin,
+            "class" => myClass,
+            "plugin" => myPlugin,
         ]);
     }
 

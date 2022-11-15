@@ -1,4 +1,4 @@
-module uim.caketasources;
+module uim.cake.datasources;
 
 /**
  * Defines the interface that testing fixtures use.
@@ -42,15 +42,11 @@ interface FixtureInterface
 
     /**
      * Get the connection name this fixture should be inserted into.
-     *
-     * @return string
      */
-    function connection(): string;
+    string connection();
 
     /**
      * Get the table/collection name for this fixture.
-     *
-     * @return string
      */
-    function sourceName(): string;
+    string sourceName();
 }

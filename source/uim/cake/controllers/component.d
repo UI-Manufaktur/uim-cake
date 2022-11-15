@@ -1,6 +1,6 @@
-module uim.cakentroller;
+module uim.cake.controllers;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cakeents\IEventListener;
 import uim.cakegs\LogTrait;
 
@@ -12,7 +12,7 @@ import uim.cakegs\LogTrait;
  * ### Initialize hook
  *
  * Like Controller and Table, this class has an initialize() hook that you can use
- * to add custom 'constructor' logic. It is important to remember that each request
+ * to add custom "constructor" logic. It is important to remember that each request
  * (and sub-request) will only make one instance of any given component.
  *
  * ### Life cycle callbacks
@@ -114,8 +114,7 @@ class Component : IEventListener
      * @param array<string, mixed> myConfig The configuration settings provided to this component.
      * @return void
      */
-    function initialize(array myConfig): void
-    {
+    void initialize(array myConfig) {
     }
 
     /**
@@ -126,8 +125,8 @@ class Component : IEventListener
      */
     auto __get(string myName) {
         if (isset(this._componentMap[myName]) && !isset(this.{myName})) {
-            myConfig = (array)this._componentMap[myName]['config'] + ['enabled' => false];
-            this.{myName} = this._registry.load(this._componentMap[myName]['class'], myConfig);
+            myConfig = (array)this._componentMap[myName]["config"] + ["enabled" => false];
+            this.{myName} = this._registry.load(this._componentMap[myName]["class"], myConfig);
         }
 
         return this.{myName} ?? null;
@@ -148,11 +147,11 @@ class Component : IEventListener
     function implementedEvents(): array
     {
         myEventMap = [
-            'Controller.initialize' => 'beforeFilter',
-            'Controller.startup' => 'startup',
-            'Controller.beforeRender' => 'beforeRender',
-            'Controller.beforeRedirect' => 'beforeRedirect',
-            'Controller.shutdown' => 'afterFilter',
+            "Controller.initialize" => "beforeFilter",
+            "Controller.startup" => "startup",
+            "Controller.beforeRender" => "beforeRender",
+            "Controller.beforeRedirect" => "beforeRedirect",
+            "Controller.shutdown" => "afterFilter",
         ];
         myEvents = [];
         foreach (myEventMap as myEvent => $method) {
@@ -161,12 +160,12 @@ class Component : IEventListener
             }
         }
 
-        if (!isset(myEvents['Controller.shutdown']) && method_exists(this, 'shutdown')) {
+        if (!isset(myEvents["Controller.shutdown"]) && method_exists(this, "shutdown")) {
             deprecationWarning(
-                '`Controller.shutdown` event callback is now `afterFilter()` instead of `shutdown()`.',
+                "`Controller.shutdown` event callback is now `afterFilter()` instead of `shutdown()`.",
                 0
             );
-            myEvents[myEvent] = 'shutdown';
+            myEvents[myEvent] = "shutdown";
         }
 
         return myEvents;
@@ -181,9 +180,9 @@ class Component : IEventListener
     auto __debugInfo(): array
     {
         return [
-            'components' => this.components,
-            'implementedEvents' => this.implementedEvents(),
-            '_config' => this.getConfig(),
+            "components" => this.components,
+            "implementedEvents" => this.implementedEvents(),
+            "_config" => this.getConfig(),
         ];
     }
 }

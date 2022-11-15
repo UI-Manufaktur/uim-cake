@@ -1,8 +1,8 @@
-module uim.cakellectionss.iterators;
+module uim.cake.collectionss.iterators;
 
 use ArrayIterator;
-import uim.cakellections\Collection;
-import uim.cakellections\ICollection;
+import uim.cake.collections\Collection;
+import uim.cake.collections\ICollection;
 use Traversable;
 
 /**
@@ -29,10 +29,10 @@ class ExtractIterator : Collection
      *
      * ```
      * myItems = [
-     *  ['comment' => ['body' => 'cool', 'user' => ['name' => 'Mark']],
-     *  ['comment' => ['body' => 'very cool', 'user' => ['name' => 'Renan']]
+     *  ["comment" => ["body" => "cool", "user" => ["name" => "Mark"]],
+     *  ["comment" => ["body" => "very cool", "user" => ["name" => "Renan"]]
      * ];
-     * $extractor = new ExtractIterator(myItems, 'comment.user.name'');
+     * $extractor = new ExtractIterator(myItems, "comment.user.name"");
      * ```
      *
      * @param iterable myItems The list of values to iterate
@@ -72,7 +72,7 @@ class ExtractIterator : Collection
         }
 
         // ArrayIterator can be traversed strictly.
-        // Let's do that for performance gains
+        // Let"s do that for performance gains
 
         $callback = this._extractor;
         $res = [];
