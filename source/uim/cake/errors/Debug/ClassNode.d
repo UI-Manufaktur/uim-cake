@@ -54,7 +54,7 @@ class ClassNode : INode
      *
      * @return int
      */
-    auto getId(): int
+    int getId()
     {
         return this.id;
     }

@@ -228,7 +228,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return int
      */
-    function count(): int
+    int count()
     {
         return count(this.plugins);
     }

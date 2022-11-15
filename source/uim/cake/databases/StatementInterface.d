@@ -73,7 +73,7 @@ interface IStatement
      *
      * @return int
      */
-    function columnCount(): int;
+    int columnCount();
 
     /**
      * Returns the error code for the last error that occurred when executing this statement
@@ -157,7 +157,7 @@ interface IStatement
      *
      * @return int
      */
-    function rowCount(): int;
+    int rowCount();
 
     /**
      * Statements can be passed as argument for count()
@@ -165,7 +165,7 @@ interface IStatement
      *
      * @return int
      */
-    function count(): int;
+    int count();
 
     /**
      * Binds a set of values to statement object with corresponding type

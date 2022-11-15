@@ -561,7 +561,7 @@ class Response : IResponse
      *
      * @return int Status code.
      */
-    auto getStatusCode(): int
+    int getStatusCode()
     {
         return this._status;
     }

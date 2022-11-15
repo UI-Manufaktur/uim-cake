@@ -69,7 +69,7 @@ class CommandRetry
      *
      * @return int
      */
-    auto getRetries(): int
+    int getRetries()
     {
         return this.numRetries;
     }

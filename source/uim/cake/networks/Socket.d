@@ -334,7 +334,7 @@ class Socket
      * @param string myData The data to write to the socket.
      * @return int Bytes written.
      */
-    function write(string myData): int
+    int write(string myData)
     {
         if (!this.connected && !this.connect()) {
             return 0;

@@ -177,7 +177,7 @@ class ConsoleOutput
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to output.
      */
-    function write(myMessage, int $newlines = 1): int
+    int write(myMessage, int $newlines = 1)
     {
         if (is_array(myMessage)) {
             myMessage = implode(static::LF, myMessage);
@@ -244,7 +244,7 @@ class ConsoleOutput
      * @param string myMessage Message to write.
      * @return int The number of bytes returned from writing to output.
      */
-    protected auto _write(string myMessage): int
+    protected int _write(string myMessage)
     {
         return (int)fwrite(this._output, myMessage);
     }
@@ -304,7 +304,7 @@ class ConsoleOutput
      *
      * @return int
      */
-    auto getOutputAs(): int
+    int getOutputAs()
     {
         return this._outputAs;
     }

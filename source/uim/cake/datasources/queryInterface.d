@@ -150,7 +150,7 @@ interface QueryInterface
      *
      * @return int
      */
-    function count(): int;
+    int count();
 
     /**
      * Sets the number of records that should be retrieved from database,

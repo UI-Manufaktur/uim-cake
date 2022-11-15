@@ -148,7 +148,7 @@ class LinkConstraint
      * @param \Cake\Datasource\IEntity $entity The entity involved in the operation.
      * @return int The number of links.
      */
-    protected auto _countLinks(Association $association, IEntity $entity): int
+    protected int _countLinks(Association $association, IEntity $entity)
     {
         $source = $association.getSource();
 

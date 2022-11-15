@@ -638,7 +638,7 @@ class Folder
      *
      * @return int size in bytes of current folder
      */
-    function dirsize(): int
+    int dirsize()
     {
         $size = 0;
         $directory = Folder::slashTerm(this.path);

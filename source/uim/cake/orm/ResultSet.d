@@ -179,7 +179,7 @@ class ResultSet : ResultSetInterface
      *
      * @return int
      */
-    function key(): int
+    int key()
     {
         return this._index;
     }
@@ -336,7 +336,7 @@ class ResultSet : ResultSetInterface
      *
      * @return int
      */
-    function count(): int
+    int count()
     {
         if (this._count !== null) {
             return this._count;

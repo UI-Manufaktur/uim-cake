@@ -223,7 +223,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      *
      * @return int
      */
-    function count(): int
+    int count()
     {
         return count(this.queue);
     }
@@ -280,7 +280,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return int
      * @see \Iterator::key()
      */
-    function key(): int
+    int key()
     {
         return this.position;
     }
