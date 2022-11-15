@@ -1,7 +1,7 @@
 module uim.cake.console;
 
-import uim.cakere.IContainer;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * This is a factory for creating Command and Shell instances.

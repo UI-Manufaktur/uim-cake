@@ -1,16 +1,7 @@
 module uim.cake.console.commands.help;
 
-use ArrayIterator;
-import uim.cake.console.Arguments;
-import uim.cake.console.BaseCommand;
-import uim.cake.console.commandCollection;
-import uim.cake.console.commandCollectionAwareInterface;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.cake.console.consoleOutput;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-use SimpleXMLElement;
+@safe:
+import uim.cake;
 
 // Print out command list
 class HelpCommand : BaseCommand : ICommandCollectionAware
