@@ -112,7 +112,6 @@ class Component : IEventListener
      * the constructor and call parent.
      *
      * @param array<string, mixed> myConfig The configuration settings provided to this component.
-     * @return void
      */
     void initialize(array myConfig) {
     }

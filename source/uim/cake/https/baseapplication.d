@@ -170,7 +170,6 @@ abstract class BaseApplication :
      * By default, this will load `config/routes.php` for ease of use and backwards compatibility.
      *
      * @param \Cake\Routing\RouteBuilder $routes A route builder to add routes into.
-     * @return void
      */
     void routes(RouteBuilder $routes) {
         // Only load routes if the router is empty
@@ -261,7 +260,6 @@ abstract class BaseApplication :
      * Register application container services.
      *
      * @param \Cake\Core\IContainer myContainer The Container to update.
-     * @return void
      */
     void services(IContainer myContainer) {
     }

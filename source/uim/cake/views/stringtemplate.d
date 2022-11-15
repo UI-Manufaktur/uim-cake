@@ -100,7 +100,6 @@ class StringTemplate {
     /**
      * Push the current templates into the template stack.
      *
-     * @return void
      */
     void push() {
         this._configStack[] = [
@@ -112,7 +111,6 @@ class StringTemplate {
     /**
      * Restore the most recently pushed set of templates.
      *
-     * @return void
      */
     void pop() {
         if (empty(this._configStack)) {
@@ -175,7 +173,6 @@ class StringTemplate {
      * templates.
      *
      * @param string myfile The file to load
-     * @return void
      */
     void load(string myfile) {
         if (myfile == "") {
@@ -191,7 +188,6 @@ class StringTemplate {
      * Remove the named template.
      *
      * @param string myName The template to remove.
-     * @return void
      */
     void remove(string myName) {
         this.setConfig(myName, null);

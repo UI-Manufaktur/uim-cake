@@ -48,7 +48,6 @@ class FlashComponent : Component
      *   of \Throwable the throwable message will be used and code will be set
      *   in params.
      * @param array<string, mixed> myOptions An array of options
-     * @return void
      */
     void set(myMessage, array myOptions = []) {
         if (myMessage instanceof Throwable) {

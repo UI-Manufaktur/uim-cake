@@ -23,7 +23,6 @@ class HelperRegistry : ObjectRegistry
      * Sets The IO instance that should be passed to the shell helpers
      *
      * @param \Cake\Console\ConsoleIo $io An io instance.
-     * @return void
      */
     void setIo(ConsoleIo $io) {
         this._io = $io;

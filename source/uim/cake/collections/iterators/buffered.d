@@ -187,7 +187,6 @@ class BufferedIterator : Collection : Countable, Serializable
      * Unserializes the passed string and rebuilds the BufferedIterator instance
      *
      * @param string myCollection The serialized buffer iterator
-     * @return void
      */
     void unserialize(myCollection) {
         this.this([]);
@@ -200,7 +199,6 @@ class BufferedIterator : Collection : Countable, Serializable
      * Magic method used to rebuild the iterator instance.
      *
      * @param array myData Data array.
-     * @return void
      */
     void __unserialize(array myData) {
         this.this([]);

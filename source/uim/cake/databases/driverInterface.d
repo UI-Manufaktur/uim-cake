@@ -73,7 +73,6 @@ interface IDriver {
     /**
      * Disconnects from database server.
      *
-     * @return void
      */
     void disconnect() void;
 

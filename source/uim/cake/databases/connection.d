@@ -230,7 +230,6 @@ class Connection : ConnectionInterface
     /**
      * Disconnects from database server.
      *
-     * @return void
      */
     void disconnect() {
         this._driver.disconnect();
@@ -432,7 +431,6 @@ class Connection : ConnectionInterface
     /**
      * Starts a new transaction.
      *
-     * @return void
      */
     void begin() {
         if (!this._transactionStarted) {
@@ -573,7 +571,6 @@ class Connection : ConnectionInterface
      * Creates a new save point for nested transactions.
      *
      * @param string|int myName Save point name or id
-     * @return void
      */
     void createSavePoint(myName) {
         this.execute(this._driver.savePointSQL(myName)).closeCursor();
@@ -583,7 +580,6 @@ class Connection : ConnectionInterface
      * Releases a save point by its name.
      *
      * @param string|int myName Save point name or id
-     * @return void
      */
     void releaseSavePoint(myName) {
         mySql = this._driver.releaseSavePointSQL(myName);
@@ -596,7 +592,6 @@ class Connection : ConnectionInterface
      * Rollback a save point by its name.
      *
      * @param string|int myName Save point name or id
-     * @return void
      */
     void rollbackSavepoint(myName) {
         this.execute(this._driver.rollbackSavePointSQL(myName)).closeCursor();
@@ -605,7 +600,6 @@ class Connection : ConnectionInterface
     /**
      * Run driver specific SQL to disable foreign key checks.
      *
-     * @return void
      */
     void disableForeignKeys() {
         this.getDisconnectRetry().run(void () {
@@ -616,7 +610,6 @@ class Connection : ConnectionInterface
     /**
      * Run driver specific SQL to enable foreign key checks.
      *
-     * @return void
      */
     void enableForeignKeys() {
         this.getDisconnectRetry().run(void () {
@@ -742,7 +735,6 @@ class Connection : ConnectionInterface
      *
      * @param string|bool $cache Either boolean false to disable metadata caching, or
      *   true to use `_cake_model_` or the name of the cache config to use.
-     * @return void
      */
     void cacheMetadata($cache) {
         this._schemaCollection = null;
@@ -853,7 +845,6 @@ class Connection : ConnectionInterface
      * Logs a Query string using the configured logger object.
      *
      * @param string mySql string to be logged
-     * @return void
      */
     void log(string mySql) {
         myQuery = new LoggedQuery();

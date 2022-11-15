@@ -221,7 +221,6 @@ class AuthComponent : Component : IEventDispatcher
      * Initialize properties.
      *
      * @param array<string, mixed> myConfig The config data.
-     * @return void
      */
     void initialize(array myConfig) {
         $controller = this._registry.getController();
@@ -880,7 +879,6 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param string myName Property name.
      * @param mixed myValue Value to set.
-     * @return void
      */
     void __set(string myName, myValue) {
         if (myName === "sessionKey") {
@@ -920,7 +918,6 @@ class AuthComponent : Component : IEventDispatcher
      * Set a flash message. Uses the Flash component with values from `flash` config.
      *
      * @param string|false myMessage The message to set. False to skip.
-     * @return void
      */
     void flash(myMessage) {
         if (myMessage === false) {

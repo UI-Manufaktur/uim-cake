@@ -20,13 +20,11 @@ interface IStorage {
      * Write user record.
      *
      * @param mixed myUser array or \ArrayAccess User record.
-     * @return void
      */
     void write(myUser);
 
     /**
      * Delete user record.
-     * @return void
      */
     void delete();
 

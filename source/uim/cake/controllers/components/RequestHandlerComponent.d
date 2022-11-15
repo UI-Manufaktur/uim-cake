@@ -143,7 +143,6 @@ class RequestHandlerComponent : Component
      * to the myData property of the controller, which can then be saved to a model object.
      *
      * @param \Cake\Event\IEvent myEvent The startup event that was fired.
-     * @return void
      */
     void startup(IEvent myEvent) {
         $controller = this.getController();

@@ -61,7 +61,6 @@ interface PluginInterface
      * plugin dependencies, or attach events.
      *
      * @param \Cake\Core\PluginApplicationInterface $app The host application
-     * @return void
      */
     void bootstrap(PluginApplicationInterface $app);
 
@@ -88,7 +87,6 @@ interface PluginInterface
      * can override this method to replace that behavior.
      *
      * @param \Cake\Routing\RouteBuilder $routes The route builder to update.
-     * @return void
      */
     void routes(RouteBuilder $routes);
 

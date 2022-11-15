@@ -275,7 +275,6 @@ class ConsoleOutput
      *
      * @param string $style The style to set.
      * @param array $definition The array definition of the style to change or create..
-     * @return void
      */
     void setStyle(string $style, array $definition) {
         if (!$definition) {

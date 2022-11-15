@@ -371,7 +371,6 @@ class ShellDispatcher
     /**
      * Shows console help. Performs an internal dispatch to the CommandList Shell
      *
-     * @return void
      */
     void help() {
         trigger_error(
@@ -384,7 +383,6 @@ class ShellDispatcher
     /**
      * Prints the currently installed version of CakePHP. Performs an internal dispatch to the CommandList Shell
      *
-     * @return void
      */
     void version() {
         trigger_error(

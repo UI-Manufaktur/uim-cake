@@ -86,7 +86,6 @@ if (!function_exists('stackTrace')) {
      * - `start` - The stack frame to start generating a trace from. Defaults to 1
      *
      * @param array<string, mixed> myOptions Format for outputting stack trace
-     * @return void
      */
     void stackTrace(array myOptions = []) {
         if (!Configure::read('debug')) {

@@ -82,7 +82,6 @@ class SessionStorage : IStorage
      * The session id is also renewed to help mitigate issues with session replays.
      *
      * @param \ArrayAccess|array myUser User record.
-     * @return void
      */
     void write(myUser) {
         this._user = myUser;

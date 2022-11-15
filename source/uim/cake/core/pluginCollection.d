@@ -231,7 +231,6 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      *
-     * @return void
      */
     void next() {
         this.positions[this.loopDepth]++;
@@ -260,7 +259,6 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      *
-     * @return void
      */
     void rewind() {
         this.positions[] = 0;

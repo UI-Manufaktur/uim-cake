@@ -49,7 +49,6 @@ class Application : ConsoleApplicationInterface
     /**
      * Load all the application configuration and bootstrap logic.
      *
-     * @return void
      */
     void bootstrap() {
         // Load configuration here. This is the first

@@ -16,7 +16,6 @@ interface ContainerApplicationInterface
      * on service definitions.
      *
      * @param \Cake\Core\IContainer myContainer The container to add services to
-     * @return void
      */
     void services(IContainer myContainer);
 

@@ -34,7 +34,6 @@ class Mock : AdapterInterface
      * @param \Psr\Http\Message\RequestInterface myRequest A partial request to use for matching.
      * @param \Cake\Http\Client\Response $response The response that matches the request.
      * @param array<string, mixed> myOptions See above.
-     * @return void
      */
     void addResponse(RequestInterface myRequest, Response $response, array myOptions) {
         if (isset(myOptions["match"]) && !(myOptions["match"] instanceof Closure)) {

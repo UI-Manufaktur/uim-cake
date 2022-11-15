@@ -29,7 +29,6 @@ interface PluginApplicationInterface : IEventDispatcher
     /**
      * Run bootstrap logic for loaded plugins.
      *
-     * @return void
      */
     void pluginBootstrap();
 

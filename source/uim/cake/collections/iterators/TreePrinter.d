@@ -92,7 +92,6 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
     /**
      * Advances the cursor one position
      *
-     * @return void
      */
     void next() {
         super.next();

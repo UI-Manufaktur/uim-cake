@@ -18,7 +18,6 @@ class ClassLoader
     /**
      * Register loader with SPL autoloader stack.
      *
-     * @return void
      */
     void register() {
         /** @var callable $callable */
@@ -35,7 +34,6 @@ class ClassLoader
      * @param bool $prepend If true, prepend the base directory to the stack
      * instead of appending it; this causes it to be searched first rather
      * than last.
-     * @return void
      */
     void addmodule(string $prefix, string $baseDir, bool $prepend = false) {
         $prefix = trim($prefix, "\\") . "\\";

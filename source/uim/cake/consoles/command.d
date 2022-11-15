@@ -192,7 +192,6 @@ abstract class BaseCommand : ICommand
      *
      * @param int $code The exit code to use.
      * @throws \Cake\Console\Exception\StopException
-     * @return void
      */
     void abort(int $code = self::CODE_ERROR) {
         throw new StopException("Command aborted", $code);

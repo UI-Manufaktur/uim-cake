@@ -38,7 +38,6 @@ interface ILocator
      * Removes an repository instance from the registry.
      *
      * @param string myAlias The alias to remove.
-     * @return void
      */
     void remove(string myAlias);
 

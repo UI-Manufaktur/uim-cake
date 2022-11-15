@@ -116,7 +116,6 @@ class BasePlugin : PluginInterface
     /**
      * Initialization hook called from constructor.
      *
-     * @return void
      */
     void initialize() {
     }
@@ -252,7 +251,6 @@ class BasePlugin : PluginInterface
      * Register container services for this plugin.
      *
      * @param \Cake\Core\IContainer myContainer The container to add services to.
-     * @return void
      */
     void services(IContainer myContainer) {
     }

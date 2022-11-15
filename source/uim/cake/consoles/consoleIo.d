@@ -114,7 +114,6 @@ class ConsoleIo
 
     /**
      * @param bool myValue Value
-     * @return void
      */
     void setInteractive(bool myValue) {
         this.interactive = myValue;
@@ -317,7 +316,6 @@ class ConsoleIo
      * @param int $newlines Number of newlines to append.
      * @param int|null $size The number of bytes to overwrite. Defaults to the
      *    length of the last message output.
-     * @return void
      */
     void overwrite(myMessage, int $newlines = 1, Nullable!int $size = null) {
         $size = $size ?: this._lastWritten;
@@ -370,7 +368,6 @@ class ConsoleIo
      *
      * @param int $newlines Number of newlines to pre- and append
      * @param int $width Width of the line, defaults to 79
-     * @return void
      */
     void hr(int $newlines = 0, int $width = 79) {
         this.out("", $newlines);
@@ -512,7 +509,6 @@ class ConsoleIo
      *   one of the verbosity constants (self::VERBOSE, self::QUIET, self::NORMAL)
      *   to control logging levels. VERBOSE enables debug logs, NORMAL does not include debug logs,
      *   QUIET disables notice, info and debug logs.
-     * @return void
      */
     void setLoggers(myEnable) {
         Log::drop("stdout");

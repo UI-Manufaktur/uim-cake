@@ -252,7 +252,6 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * Unsets an object.
      *
      * @param string myName Name of a property to unset.
-     * @return void
      */
     void __unset(string myName) {
         this.unload(myName);

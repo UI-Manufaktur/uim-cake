@@ -72,7 +72,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param \Cake\Event\IEvent myEvent The beforeFind event that was fired.
      * @param \Cake\ORM\Query myQuery Query
      * @param \ArrayObject myOptions The options for the query
-     * @return void
      */
     void beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions);
 

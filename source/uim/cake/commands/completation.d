@@ -24,7 +24,6 @@ class CompletionCommand : Command : ICommandCollectionAware
      * Set the command collection used to get completion data on.
      *
      * @param \Cake\Console\CommandCollection $commands The command collection
-     * @return void
      */
     void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;

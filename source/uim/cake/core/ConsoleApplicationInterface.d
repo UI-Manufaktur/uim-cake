@@ -13,7 +13,6 @@ interface ConsoleApplicationInterface
      *
      * Override this method to add additional bootstrap logic for your application.
      *
-     * @return void
      */
     void bootstrap();
 

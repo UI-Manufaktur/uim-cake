@@ -55,7 +55,6 @@ class HelpFormatter
      * Set the alias
      *
      * @param string myAlias The alias
-     * @return void
      */
     void setAlias(string myAlias) {
         this._alias = myAlias;

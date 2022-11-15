@@ -318,7 +318,6 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param string propertyName Property name.
      * @param mixed myValue Value to set.
-     * @return void
      */
     void __set(string propertyName, myValue) {
         if (propertyName === "components") {

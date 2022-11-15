@@ -212,7 +212,6 @@ class Shell {
      * Set the io object for this shell.
      *
      * @param \Cake\Console\ConsoleIo $io The ConsoleIo object to use.
-     * @return void
      */
     void setIo(ConsoleIo $io) {
         this._io = $io;

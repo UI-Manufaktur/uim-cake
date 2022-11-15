@@ -239,7 +239,6 @@ abstract class BaseErrorHandler
      * in kilobytes
      *
      * @param int $additionalKb Number in kilobytes
-     * @return void
      */
     void increaseMemoryLimit(int $additionalKb) {
         $limit = ini_get("memory_limit");
