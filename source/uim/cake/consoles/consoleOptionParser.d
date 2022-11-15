@@ -1,7 +1,7 @@
 module uim.cake.console;
 
-import uim.cake.console.Exception\ConsoleException;
-import uim.cake.console.Exception\MissingOptionException;
+import uim.cake.console.exceptions\ConsoleException;
+import uim.cake.console.exceptions\MissingOptionException;
 import uim.cakeilities.Inflector;
 use LogicException;
 

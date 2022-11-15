@@ -5,8 +5,8 @@ import uim.cake
 
 import uim.cakemmand\VersionCommand;
 import uim.cake.console.command\HelpCommand;
-import uim.cake.console.Exception\MissingOptionException;
-import uim.cake.console.Exception\StopException;
+import uim.cake.console.exceptions\MissingOptionException;
+import uim.cake.console.exceptions\StopException;
 import uim.cakere.ConsoleApplicationInterface;
 import uim.cakere.ContainerApplicationInterface;
 import uim.cakere.PluginApplicationInterface;

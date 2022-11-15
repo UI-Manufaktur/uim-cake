@@ -1,6 +1,6 @@
 module uim.cake.console;
 
-import uim.cake.console.Exception\MissingTaskException;
+import uim.cake.console.exceptions\MissingTaskException;
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
 

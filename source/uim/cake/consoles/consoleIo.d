@@ -1,6 +1,6 @@
 module uim.cake.console;
 
-import uim.cake.console.Exception\StopException;
+import uim.cake.console.exceptions\StopException;
 import uim.cakegs\Engine\ConsoleLog;
 import uim.cakegs\Log;
 use RuntimeException;
