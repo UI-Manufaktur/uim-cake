@@ -167,8 +167,6 @@ class FormData : Countable
 
     /**
      * Returns the count of parts inside this object.
-     *
-     * @return int
      */
     int count() {
         return count(this._parts);

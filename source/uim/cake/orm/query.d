@@ -887,8 +887,6 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * Returns the COUNT(*) for the query. If the query has not been
      * modified, and the count has already been performed the cached
      * value is returned
-     *
-     * @return int
      */
     int count() {
         if (this._resultsCount === null) {

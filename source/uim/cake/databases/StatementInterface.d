@@ -70,8 +70,6 @@ interface IStatement
      *  $statement.execute();
      *  echo $statement.columnCount(); // outputs 2
      * ```
-     *
-     * @return int
      */
     int columnCount();
 
@@ -154,16 +152,12 @@ interface IStatement
      *  $statement.execute();
      *  print_r($statement.rowCount()); // will show 1
      * ```
-     *
-     * @return int
      */
     int rowCount();
 
     /**
      * Statements can be passed as argument for count()
      * to return the number for affected rows from last execution
-     *
-     * @return int
      */
     int count();
 

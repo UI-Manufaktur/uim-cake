@@ -15,8 +15,6 @@ class ResultSetDecorator : Collection : ResultSetInterface
      * Part of the Countable interface. Calling this method
      * will convert the underlying traversable object into an array and
      * get the count of the underlying data.
-     *
-     * @return int
      */
     int count() {
         $iterator = this.getInnerIterator();

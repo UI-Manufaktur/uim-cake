@@ -132,8 +132,6 @@ class CommandCollection : IteratorAggregate, Countable
      * Implementation of Countable.
      *
      * Get the number of commands in the collection.
-     *
-     * @return int
      */
     int count() {
         return count(this.commands);

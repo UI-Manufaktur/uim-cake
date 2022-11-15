@@ -90,8 +90,6 @@ class CookieCollection : IteratorAggregate, Countable
 
     /**
      * Get the number of cookies in the collection.
-     *
-     * @return int
      */
     int count() {
         return count(this.cookies);

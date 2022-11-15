@@ -220,8 +220,6 @@ class MiddlewareQueue : Countable, SeekableIterator
      * Get the number of connected middleware layers.
      *
      * Implement the Countable interface.
-     *
-     * @return int
      */
     int count() {
         return count(this.queue);

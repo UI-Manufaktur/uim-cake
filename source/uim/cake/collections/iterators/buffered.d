@@ -144,8 +144,6 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Returns the number or items in this collection
-     *
-     * @return int
      */
     int count() {
         if (!this._started) {

@@ -224,8 +224,6 @@ class PluginCollection : Iterator, Countable
      * Implementation of Countable.
      *
      * Get the number of plugins in the collection.
-     *
-     * @return int
      */
     int count() {
         return count(this.plugins);

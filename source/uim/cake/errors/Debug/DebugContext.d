@@ -51,8 +51,6 @@ class DebugContext
 
     /**
      * Get the remaining depth levels
-     *
-     * @return int
      */
     int remainingDepth() {
         return this.maxDepth - this.depth;

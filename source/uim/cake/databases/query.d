@@ -254,8 +254,6 @@ class Query : IExpression, IteratorAggregate
      *
      * The above example will change the published column to true for all false records, and return the number of
      * records that were updated.
-     *
-     * @return int
      */
     int rowCountAndClose() {
         $statement = this.execute();

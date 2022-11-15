@@ -35,8 +35,6 @@ class ReferenceNode : INode {
 
     /**
      * Get the reference id for this node.
-     *
-     * @return int
      */
     int getId() {
         return this.id;

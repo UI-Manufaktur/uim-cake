@@ -176,8 +176,6 @@ class ResultSet : ResultSetInterface
      * Returns the key of the current record in the iterator
      *
      * Part of Iterator interface.
-     *
-     * @return int
      */
     int key() {
         return this._index;
@@ -332,8 +330,6 @@ class ResultSet : ResultSetInterface
      * Gives the number of rows in the result set.
      *
      * Part of the Countable interface.
-     *
-     * @return int
      */
     int count() {
         if (this._count !== null) {

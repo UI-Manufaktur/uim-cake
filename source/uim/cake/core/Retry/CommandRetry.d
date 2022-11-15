@@ -66,8 +66,6 @@ class CommandRetry
 
     /**
      * Returns the last number of retry attemps.
-     *
-     * @return int
      */
     int getRetries() {
         return this.numRetries;

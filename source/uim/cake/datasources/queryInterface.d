@@ -147,8 +147,6 @@ interface QueryInterface
 
     /**
      * Returns the total amount of results for the query.
-     *
-     * @return int
      */
     int count();
 

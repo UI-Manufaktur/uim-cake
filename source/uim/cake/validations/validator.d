@@ -458,8 +458,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
     /**
      * Returns the number of fields having validation rules
-     *
-     * @return int
      */
     int count() {
         return count(this._fields);

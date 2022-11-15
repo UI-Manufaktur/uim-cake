@@ -68,10 +68,8 @@ class Collection : IteratorIterator : ICollection, Serializable {
 
     /**
      * {@inheritDoc}
-     *
-     * @return int
      */
-    insize_tt countKeys() {
+    int size_tt countKeys() {
         return count(this.toArray());
     }
 

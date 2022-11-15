@@ -299,8 +299,6 @@ class ConsoleOutput
 
     /**
      * Get the output type on how formatting tags are treated.
-     *
-     * @return int
      */
     int getOutputAs() {
         return this._outputAs;

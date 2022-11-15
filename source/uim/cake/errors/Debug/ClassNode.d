@@ -51,8 +51,6 @@ class ClassNode : INode
 
     /**
      * Get the reference id
-     *
-     * @return int
      */
     int getId() {
         return this.id;
