@@ -219,8 +219,7 @@ class Response : Message : IResponse
      *
      * @return int The status code.
      */
-    int getStatusCode()
-    {
+    int getStatusCode() {
         return this.code;
     }
 

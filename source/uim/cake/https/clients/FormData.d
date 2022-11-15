@@ -170,8 +170,7 @@ class FormData : Countable
      *
      * @return int
      */
-    int count()
-    {
+    int count() {
         return count(this._parts);
     }
 

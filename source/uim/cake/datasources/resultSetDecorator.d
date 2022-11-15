@@ -18,8 +18,7 @@ class ResultSetDecorator : Collection : ResultSetInterface
      *
      * @return int
      */
-    int count()
-    {
+    int count() {
         $iterator = this.getInnerIterator();
         if ($iterator instanceof Countable) {
             return $iterator.count();

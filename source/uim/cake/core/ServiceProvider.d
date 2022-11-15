@@ -58,8 +58,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return void
      */
-    void boot()
-    {
+    void boot() {
         this.bootstrap(this.getContainer());
     }
 
@@ -74,8 +73,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * @param \Cake\Core\IContainer myContainer The container to add services to.
      * @return void
      */
-    void bootstrap(IContainer myContainer)
-    {
+    void bootstrap(IContainer myContainer) {
     }
 
     /**
@@ -86,8 +84,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return void
      */
-    void register()
-    {
+    void register() {
         this.services(this.getContainer());
     }
 

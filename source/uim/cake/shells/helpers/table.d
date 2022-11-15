@@ -49,8 +49,7 @@ class TableHelper : Helper
      * @param string $text The text to calculate a width for.
      * @return int The width of the textual content in visible characters.
      */
-    protected int _cellWidth(string $text)
-    {
+    protected int _cellWidth(string $text) {
         if ($text == "") {
             return 0;
         }

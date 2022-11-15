@@ -890,8 +890,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return int
      */
-    int count()
-    {
+    int count() {
         if (this._resultsCount === null) {
             this._resultsCount = this._performCount();
         }
@@ -904,8 +903,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * @return int
      */
-    protected int _performCount()
-    {
+    protected int _performCount() {
         myQuery = this.cleanCopy();
         myCounter = this._counter;
         if (myCounter !== null) {

@@ -93,8 +93,7 @@ class CookieCollection : IteratorAggregate, Countable
      *
      * @return int
      */
-    int count()
-    {
+    int count() {
         return count(this.cookies);
     }
 

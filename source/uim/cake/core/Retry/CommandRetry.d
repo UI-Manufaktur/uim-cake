@@ -69,8 +69,7 @@ class CommandRetry
      *
      * @return int
      */
-    int getRetries()
-    {
+    int getRetries() {
         return this.numRetries;
     }
 }

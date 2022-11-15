@@ -72,8 +72,7 @@ class PluginCollection : Iterator, Countable
      * @internal
      * @return void
      */
-    protected void loadConfig()
-    {
+    protected void loadConfig() {
         if (Configure::check("plugins")) {
             return;
         }
@@ -228,8 +227,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return int
      */
-    int count()
-    {
+    int count() {
         return count(this.plugins);
     }
 
@@ -238,8 +236,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return void
      */
-    void next()
-    {
+    void next() {
         this.positions[this.loopDepth]++;
     }
 
@@ -268,8 +265,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return void
      */
-    void rewind()
-    {
+    void rewind() {
         this.positions[] = 0;
         this.loopDepth += 1;
     }

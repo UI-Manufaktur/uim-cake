@@ -231,8 +231,7 @@ if (!function_exists("triggerWarning")) {
      * @param string myMessage The warning message.
      * @return void
      */
-    void triggerWarning(string myMessage)
-    {
+    void triggerWarning(string myMessage) {
         $stackFrame = 1;
         $trace = debug_backtrace();
         if (isset($trace[$stackFrame])) {
@@ -258,8 +257,7 @@ if (!function_exists("deprecationWarning")) {
      *   as that should point to application/plugin code.
      * @return void
      */
-    void deprecationWarning(string myMessage, int $stackFrame = 1)
-    {
+    void deprecationWarning(string myMessage, int $stackFrame = 1) {
         if (!(error_reporting() & E_USER_DEPRECATED)) {
             return;
         }

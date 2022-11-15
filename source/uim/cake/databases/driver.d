@@ -467,8 +467,7 @@ abstract class Driver : IDriver
      *
      * @return int
      */
-    int getConnectRetries()
-    {
+    int getConnectRetries() {
         return this.connectRetries;
     }
 

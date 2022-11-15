@@ -126,8 +126,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    protected int getSubcommands(Arguments $args, ConsoleIo $io)
-    {
+    protected int getSubcommands(Arguments $args, ConsoleIo $io) {
         myName = $args.getArgument("command");
         if (myName === null || myName == "") {
             return static::CODE_SUCCESS;

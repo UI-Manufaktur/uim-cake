@@ -173,8 +173,7 @@ class PaginatorHelper : Helper
      * @return int The current page number of the recordset.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    int current(Nullable!string myModel = null)
-    {
+    int current(Nullable!string myModel = null) {
         myParams = this.params(myModel);
 
         return myParams['page'] ?? 1;
@@ -186,8 +185,7 @@ class PaginatorHelper : Helper
      * @param string|null myModel Optional model name. Uses the default if none is specified.
      * @return int The total pages for the recordset.
      */
-    int total(Nullable!string myModel = null)
-    {
+    int total(Nullable!string myModel = null) {
         myParams = this.params(myModel);
 
         return myParams['pageCount'] ?? 0;

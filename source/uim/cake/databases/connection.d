@@ -232,8 +232,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    void disconnect()
-    {
+    void disconnect() {
         this._driver.disconnect();
     }
 
@@ -435,8 +434,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    void begin()
-    {
+    void begin() {
         if (!this._transactionStarted) {
             if (this._logQueries) {
                 this.log("BEGIN");
@@ -577,8 +575,7 @@ class Connection : ConnectionInterface
      * @param string|int myName Save point name or id
      * @return void
      */
-    void createSavePoint(myName)
-    {
+    void createSavePoint(myName) {
         this.execute(this._driver.savePointSQL(myName)).closeCursor();
     }
 
@@ -588,8 +585,7 @@ class Connection : ConnectionInterface
      * @param string|int myName Save point name or id
      * @return void
      */
-    void releaseSavePoint(myName)
-    {
+    void releaseSavePoint(myName) {
         mySql = this._driver.releaseSavePointSQL(myName);
         if (mySql) {
             this.execute(mySql).closeCursor();
@@ -602,8 +598,7 @@ class Connection : ConnectionInterface
      * @param string|int myName Save point name or id
      * @return void
      */
-    void rollbackSavepoint(myName)
-    {
+    void rollbackSavepoint(myName) {
         this.execute(this._driver.rollbackSavePointSQL(myName)).closeCursor();
     }
 
@@ -612,8 +607,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    void disableForeignKeys()
-    {
+    void disableForeignKeys() {
         this.getDisconnectRetry().run(void () {
             this.execute(this._driver.disableForeignKeySQL()).closeCursor();
         });
@@ -624,8 +618,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    void enableForeignKeys()
-    {
+    void enableForeignKeys() {
         this.getDisconnectRetry().run(void () {
             this.execute(this._driver.enableForeignKeySQL()).closeCursor();
         });
@@ -751,8 +744,7 @@ class Connection : ConnectionInterface
      *   true to use `_cake_model_` or the name of the cache config to use.
      * @return void
      */
-    void cacheMetadata($cache)
-    {
+    void cacheMetadata($cache) {
         this._schemaCollection = null;
         this._config["cacheMetadata"] = $cache;
         if (is_string($cache)) {
@@ -863,8 +855,7 @@ class Connection : ConnectionInterface
      * @param string mySql string to be logged
      * @return void
      */
-    void log(string mySql)
-    {
+    void log(string mySql) {
         myQuery = new LoggedQuery();
         myQuery.query = mySql;
         this.getLogger().debug((string)myQuery, ["query" => myQuery]);

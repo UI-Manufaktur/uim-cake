@@ -345,8 +345,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *   driver"s default duration will be used.
      * @return int
      */
-    protected int duration($ttl)
-    {
+    protected int duration($ttl) {
         if ($ttl === null) {
             return this._config["duration"];
         }

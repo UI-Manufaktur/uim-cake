@@ -104,8 +104,7 @@ class ShellDispatcher
      * @param array $extra Extra parameters
      * @return int The exit code of the shell process.
      */
-    static int run(array $argv, array $extra = [])
-    {
+    static int run(array $argv, array $extra = []) {
         $dispatcher = new ShellDispatcher($argv);
 
         return $dispatcher.dispatch($extra);
@@ -153,8 +152,7 @@ class ShellDispatcher
      * - `requested` : if used, will prevent the Shell welcome message to be displayed
      * @return int The CLI command exit code. 0 is success.
      */
-    int dispatch(array $extra = [])
-    {
+    int dispatch(array $extra = []) {
         try {
             myResult = this._dispatch($extra);
         } catch (StopException $e) {

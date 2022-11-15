@@ -20,8 +20,7 @@ class ClassLoader
      *
      * @return void
      */
-    void register()
-    {
+    void register() {
         /** @var callable $callable */
         $callable = [this, "loadClass"];
         spl_autoload_register($callable);
@@ -38,8 +37,7 @@ class ClassLoader
      * than last.
      * @return void
      */
-    void addmodule(string $prefix, string $baseDir, bool $prepend = false)
-    {
+    void addmodule(string $prefix, string $baseDir, bool $prepend = false) {
         $prefix = trim($prefix, "\\") . "\\";
 
         $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;

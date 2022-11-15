@@ -118,8 +118,7 @@ class BasePlugin : PluginInterface
      *
      * @return void
      */
-    void initialize()
-    {
+    void initialize() {
     }
 
 
@@ -211,8 +210,7 @@ class BasePlugin : PluginInterface
      * @throws \InvalidArgumentException on invalid hooks
      * @return void
      */
-    protected void checkHook(string $hook)
-    {
+    protected void checkHook(string $hook) {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
                 "`$hook` is not a valid hook name. Must be one of " . implode(", ", static::VALID_HOOKS)
@@ -221,8 +219,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    void routes(RouteBuilder $routes)
-    {
+    void routes(RouteBuilder $routes) {
         myPath = this.getConfigPath() . "routes.php";
         if (is_file(myPath)) {
             $return = require myPath;
@@ -233,8 +230,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    void bootstrap(PluginApplicationInterface $app)
-    {
+    void bootstrap(PluginApplicationInterface $app) {
         $bootstrap = this.getConfigPath() . "bootstrap.php";
         if (is_file($bootstrap)) {
             require $bootstrap;
@@ -259,7 +255,6 @@ class BasePlugin : PluginInterface
      * @param \Cake\Core\IContainer myContainer The container to add services to.
      * @return void
      */
-    void services(IContainer myContainer)
-    {
+    void services(IContainer myContainer) {
     }
 }

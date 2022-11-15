@@ -825,8 +825,7 @@ class Hash
      * @return int The number of dimensions in myData
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::dimensions
      */
-    static int dimensions(array myData)
-    {
+    static int dimensions(array myData) {
         if (empty(myData)) {
             return 0;
         }
@@ -852,8 +851,7 @@ class Hash
      * @return int The maximum number of dimensions in myData
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::maxDimensions
      */
-    static int maxDimensions(array myData)
-    {
+    static int maxDimensions(array myData) {
         $depth = [];
         if (!empty(myData)) {
             foreach (myData as myValue) {

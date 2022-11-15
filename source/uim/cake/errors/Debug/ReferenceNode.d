@@ -38,8 +38,7 @@ class ReferenceNode : INode {
      *
      * @return int
      */
-    int getId()
-    {
+    int getId() {
         return this.id;
     }
 

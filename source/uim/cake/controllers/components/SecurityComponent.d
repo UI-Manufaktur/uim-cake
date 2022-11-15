@@ -135,8 +135,7 @@ class SecurityComponent : Component
      * @param array<string>|string|null $actions Actions list
      * @return void
      */
-    void requireSecure($actions = null)
-    {
+    void requireSecure($actions = null) {
         $actions = (array)$actions;
         this.setConfig("requireSecure", empty($actions) ? ["*"] : $actions);
     }
@@ -168,8 +167,7 @@ class SecurityComponent : Component
      * @throws \Cake\Http\Exception\BadRequestException
      * @return void
      */
-    protected void _throwException(?SecurityException myException = null)
-    {
+    protected void _throwException(?SecurityException myException = null) {
         if (myException !== null) {
             if (!Configure::read("debug")) {
                 myException.setReason(myException.getMessage());
@@ -187,8 +185,7 @@ class SecurityComponent : Component
      * @return void
      * @throws \Cake\Controller\Exception\SecurityException
      */
-    protected void _secureRequired(Controller $controller)
-    {
+    protected void _secureRequired(Controller $controller) {
         if (
             empty(this._config["requireSecure"]) ||
             !is_array(this._config["requireSecure"])
@@ -216,8 +213,7 @@ class SecurityComponent : Component
      * @return void
      * @throws \Cake\Controller\Exception\AuthSecurityException
      */
-    protected void _validatePost(Controller $controller)
-    {
+    protected void _validatePost(Controller $controller) {
         $token = this._validToken($controller);
         $hashParts = this._hashParts($controller);
         $check = hash_hmac("sha1", implode("", $hashParts), Security::getSalt());

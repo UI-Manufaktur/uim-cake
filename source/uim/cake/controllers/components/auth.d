@@ -223,8 +223,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param array<string, mixed> myConfig The config data.
      * @return void
      */
-    void initialize(array myConfig)
-    {
+    void initialize(array myConfig) {
         $controller = this._registry.getController();
         this.setEventManager($controller.getEventManager());
     }
@@ -434,8 +433,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @return void
      */
-    protected void _setDefaults()
-    {
+    protected void _setDefaults() {
         $defaults = [
             "authenticate" => ["Form"],
             "flash" => [
@@ -571,8 +569,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-public
      */
-    void allow($actions = null)
-    {
+    void allow($actions = null) {
         if ($actions === null) {
             $controller = this._registry.getController();
             this.allowedActions = get_class_methods($controller);
@@ -602,8 +599,7 @@ class AuthComponent : Component : IEventDispatcher
      * @see \Cake\Controller\Component\AuthComponent::allow()
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
-    void deny($actions = null)
-    {
+    void deny($actions = null) {
         if ($actions === null) {
             this.allowedActions = [];
 
@@ -628,8 +624,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#identifying-users-and-logging-them-in
      */
-    void setUser(myUser)
-    {
+    void setUser(myUser) {
         this.storage().write(myUser);
     }
 
@@ -888,8 +883,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param mixed myValue Value to set.
      * @return void
      */
-    void __set(string myName, myValue)
-    {
+    void __set(string myName, myValue) {
         if (myName === "sessionKey") {
             this._storage = null;
 
@@ -929,8 +923,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param string|false myMessage The message to set. False to skip.
      * @return void
      */
-    void flash(myMessage)
-    {
+    void flash(myMessage) {
         if (myMessage === false) {
             return;
         }

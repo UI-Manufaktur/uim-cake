@@ -382,8 +382,7 @@ class TreeBehavior : Behavior
      * direct children
      * @return int Number of children nodes.
      */
-    int childCount(IEntity myNode, bool $direct = false)
-    {
+    int childCount(IEntity myNode, bool $direct = false) {
         myConfig = this.getConfig();
         $parent = this._table.aliasField(myConfig["parent"]);
 
@@ -804,8 +803,7 @@ class TreeBehavior : Behavior
      * @param int $level Node level
      * @return int The next lftRght value
      */
-    protected int _recoverTree(int $lftRght = 1, $parentId = null, $level = 0)
-    {
+    protected int _recoverTree(int $lftRght = 1, $parentId = null, $level = 0) {
         myConfig = this.getConfig();
         [$parent, $left, $right] = [myConfig["parent"], myConfig["left"], myConfig["right"]];
         $primaryKey = this._getPrimaryKey();
@@ -841,8 +839,7 @@ class TreeBehavior : Behavior
      *
      * @return int
      */
-    protected int _getMax()
-    {
+    protected int _getMax() {
         myField = this._config["right"];
         $rightField = this._config["rightField"];
         $edge = this._scope(this._table.find())

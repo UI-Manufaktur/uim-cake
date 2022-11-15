@@ -54,8 +54,7 @@ class DebugContext
      *
      * @return int
      */
-    int remainingDepth()
-    {
+    int remainingDepth() {
         return this.maxDepth - this.depth;
     }
 
@@ -68,8 +67,7 @@ class DebugContext
      * @param object $object The object to get a reference for.
      * @return int
      */
-    int getReferenceId(object $object)
-    {
+    int getReferenceId(object $object) {
         if (this.refs.contains($object)) {
             return this.refs[$object];
         }

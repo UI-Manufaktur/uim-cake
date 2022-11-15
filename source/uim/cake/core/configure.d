@@ -162,8 +162,7 @@ class Configure
      * @return void
      * @link https://book.cakephp.org/4/en/development/configuration.html#deleting-configuration-data
      */
-    static void delete(string $var)
-    {
+    static void delete(string $var) {
         static::$_values = Hash::remove(static::$_values, $var);
     }
 
@@ -229,8 +228,7 @@ class Configure
      * @param \Cake\Core\Configure\ConfigEngineInterface $engine The engine to append.
      * @return void
      */
-    static void config(string myName, ConfigEngineInterface $engine)
-    {
+    static void config(string myName, ConfigEngineInterface $engine) {
         static::$_engines[myName] = $engine;
     }
 
@@ -462,8 +460,7 @@ class Configure
      *
      * @return void
      */
-    static void clear()
-    {
+    static void clear() {
         static::$_values = [];
     }
 }
