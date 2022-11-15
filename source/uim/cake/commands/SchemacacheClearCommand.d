@@ -13,8 +13,6 @@ use RuntimeException;
 class SchemacacheClearCommand : Command {
     /**
      * Get the command name.
-     *
-     * @return string
      */
     static string defaultName() {
         return "schema_cache clear";

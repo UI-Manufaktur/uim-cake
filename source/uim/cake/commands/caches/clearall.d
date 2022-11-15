@@ -11,8 +11,6 @@ import uim.cake.console.consoleOptionParser;
 class CacheClearallCommand : Command {
     /**
      * Get the command name.
-     *
-     * @return string
      */
     static string defaultName() {
         return "cache clear_all";

@@ -55,8 +55,6 @@ abstract class BaseCommand : ICommand
      * Returns the command name based on class name.
      * For e.g. for a command with class name `UpdateTableCommand` the default
      * name returned would be `"update_table"`.
-     *
-     * @return string
      */
     static string defaultName() {
         $pos = strrpos(static::class, "\\");
