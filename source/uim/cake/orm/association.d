@@ -842,7 +842,7 @@ abstract class Association
      * @see \Cake\ORM\Table::updateAll()
      * @return int Count Returns the affected rows.
      */
-    function updateAll(array myFields, $conditions): int
+    int updateAll(array myFields, $conditions)
     {
         $expression = this.find()
             .where($conditions)
@@ -859,7 +859,7 @@ abstract class Association
      * @return int Returns the number of affected rows.
      * @see \Cake\ORM\Table::deleteAll()
      */
-    function deleteAll($conditions): int
+    int deleteAll($conditions)
     {
         $expression = this.find()
             .where($conditions)

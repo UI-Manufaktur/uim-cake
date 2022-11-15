@@ -162,7 +162,7 @@ class Curl : AdapterInterface
      * @param \Psr\Http\Message\RequestInterface myRequest The request to get a protocol version for.
      * @return int
      */
-    protected auto getProtocolVersion(RequestInterface myRequest): int
+    protected int getProtocolVersion(RequestInterface myRequest)
     {
         switch (myRequest.getProtocolVersion()) {
             case "1.0":

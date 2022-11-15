@@ -352,7 +352,7 @@ class ConsoleIo
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    int err(myMessage = "", int $newlines = 1): int
+    int err(myMessage = "", int $newlines = 1)
     {
         return this._err.write(myMessage, $newlines);
     }

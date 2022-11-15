@@ -172,7 +172,7 @@ class HelpFormatter
      * @param array<\Cake\Console\ConsoleInputOption|\Cake\Console\ConsoleInputArgument|\Cake\Console\ConsoleInputSubcommand> myCollection The collection to find a max length of.
      * @return int
      */
-    protected auto _getMaxLength(array myCollection): int
+    protected int _getMaxLength(array myCollection)
     {
         $max = 0;
         foreach (myCollection as $item) {

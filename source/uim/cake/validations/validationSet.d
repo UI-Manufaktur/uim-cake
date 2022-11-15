@@ -213,7 +213,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @return int
      */
-    function count(): int
+    int count()
     {
         return count(this._rules);
     }

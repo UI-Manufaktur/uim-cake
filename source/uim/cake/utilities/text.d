@@ -693,7 +693,7 @@ class Text
      * @param array<string, mixed> myOptions An array of options.
      * @return int
      */
-    protected static auto _strlen(string $text, array myOptions): int
+    protected static int _strlen(string $text, array myOptions)
     {
         if (empty(myOptions["trimWidth"])) {
             $strlen = "mb_strlen";

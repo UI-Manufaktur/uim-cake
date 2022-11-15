@@ -257,7 +257,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return int
      */
-    function rowCountAndClose(): int
+    int rowCountAndClose()
     {
         $statement = this.execute();
         try {

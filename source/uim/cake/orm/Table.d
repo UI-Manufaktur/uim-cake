@@ -1665,7 +1665,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     }
 
 
-    function updateAll(myFields, $conditions): int
+    int updateAll(myFields, $conditions)
     {
         myQuery = this.query();
         myQuery.update()
@@ -1678,7 +1678,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     }
 
 
-    function deleteAll($conditions): int
+    int deleteAll($conditions)
     {
         myQuery = this.query()
             .delete()
