@@ -208,7 +208,6 @@ class BasePlugin : PluginInterface
      *
      * @param string $hook The hook name to check
      * @throws \InvalidArgumentException on invalid hooks
-     * @return void
      */
     protected void checkHook(string $hook) {
         if (!in_array($hook, static::VALID_HOOKS, true)) {

@@ -431,7 +431,6 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Sets defaults for configs.
      *
-     * @return void
      */
     protected void _setDefaults() {
         $defaults = [

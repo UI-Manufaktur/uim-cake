@@ -442,7 +442,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * Accepts either a short name (Ajax) a plugin name (MyPlugin.Ajax)
      * or a fully moduled name (App\View\AppView) or null to use the
-     * View class provided by CakePHP.
+     * View class provided by UIM.
      *
      * @param string|null myName The class name for the view.
      * @return this

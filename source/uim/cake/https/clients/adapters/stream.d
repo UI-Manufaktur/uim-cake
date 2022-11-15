@@ -113,7 +113,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to build context from.
      * @param array<string, mixed> myOptions Additional request options.
-     * @return void
      */
     protected void _buildContext(RequestInterface myRequest, array myOptions) {
         this._buildContent(myRequest, myOptions);
@@ -138,7 +137,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
-     * @return void
      */
     protected void _buildHeaders(RequestInterface myRequest, array myOptions) {
         $headers = [];
@@ -156,7 +154,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
-     * @return void
      */
     protected void _buildContent(RequestInterface myRequest, array myOptions) {
         $body = myRequest.getBody();
@@ -169,7 +166,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
-     * @return void
      */
     protected void _buildOptions(RequestInterface myRequest, array myOptions) {
         this._contextOptions["method"] = myRequest.getMethod();
@@ -193,7 +189,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
-     * @return void
      */
     protected void _buildSslContext(RequestInterface myRequest, array myOptions) {
         $sslOptions = [

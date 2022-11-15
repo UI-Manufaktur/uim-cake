@@ -82,7 +82,6 @@ trait PluginAssetsTrait
      * @param array<string, mixed> myPlugins List of plugins to process
      * @param bool $copy Force copy mode. Default false.
      * @param bool $overwrite Overwrite existing files.
-     * @return void
      */
     protected void _process(array myPlugins, bool $copy = false, bool $overwrite = false) {
         foreach (myPlugins as myPlugin => myConfig) {

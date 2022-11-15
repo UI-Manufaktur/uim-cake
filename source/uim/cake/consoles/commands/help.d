@@ -56,7 +56,6 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      *
      * @param \Cake\Console\ConsoleIo $io The console io
      * @param iterable $commands The command collection to output.
-     * @return void
      */
     protected void asText(ConsoleIo $io, iterable $commands) {
         $invert = [];
@@ -114,7 +113,6 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      * Output relevant paths if defined
      *
      * @param \Cake\Console\ConsoleIo $io IO object.
-     * @return void
      */
     protected void outputPaths(ConsoleIo $io) {
         myPaths = [];
@@ -160,7 +158,6 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      *
      * @param \Cake\Console\ConsoleIo $io The console io
      * @param iterable $commands The command collection to output
-     * @return void
      */
     protected void asXml(ConsoleIo $io, iterable $commands) {
         myShells = new SimpleXMLElement("<shells></shells>");

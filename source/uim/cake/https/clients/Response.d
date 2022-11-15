@@ -155,7 +155,6 @@ class Response : Message : IResponse
      * - Parses and normalizes header names + values.
      *
      * @param array $headers Headers to parse.
-     * @return void
      */
     protected void _parseHeaders(array $headers) {
         foreach ($headers as myValue) {
@@ -321,7 +320,6 @@ class Response : Message : IResponse
     /**
      * Lazily build the CookieCollection and cookie objects from the response header
      *
-     * @return void
      */
     protected void buildCookieCollection() {
         if (this.cookies !== null) {

@@ -103,7 +103,7 @@ abstract class BaseErrorHandler
     }
 
     /**
-     * Set as the default error handler by CakePHP.
+     * Set as the default error handler by UIM.
      *
      * Use config/error.php to customize or replace this error handler.
      * This function will use Debugger to display errors when debug mode is on. And
@@ -206,7 +206,6 @@ abstract class BaseErrorHandler
      * Implemented in subclasses that need it.
      *
      * @param int $code Exit code.
-     * @return void
      */
     protected void _stop(int $code) {
         // Do nothing.

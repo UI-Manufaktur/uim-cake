@@ -195,7 +195,7 @@ class CommandCollection : IteratorAggregate, Countable
      * - Application commands
      *
      * Commands defined in the application will overwrite commands with
-     * the same name provided by CakePHP.
+     * the same name provided by UIM.
      *
      * @return array<string, string> An array of command names and their classes.
      */

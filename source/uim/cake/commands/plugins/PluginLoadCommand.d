@@ -67,7 +67,6 @@ class PluginLoadCommand : Command {
      *
      * @param string $app The Application file to modify.
      * @param string myPlugin The plugin name to add.
-     * @return void
      */
     protected void modifyApplication(string $app, string myPlugin) {
         myContentss = file_get_contents($app);

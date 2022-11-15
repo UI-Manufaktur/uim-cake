@@ -264,7 +264,6 @@ class FileEngine : CacheEngine
      * Used to clear a directory of matching files.
      *
      * @param string myPath The path to search.
-     * @return void
      */
     protected void _clearDirectory(string myPath) {
         if (!is_dir(myPath)) {

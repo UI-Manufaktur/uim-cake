@@ -70,7 +70,6 @@ class PluginCollection : Iterator, Countable
      * in their composer.json file to move plugin outside of vendor/
      *
      * @internal
-     * @return void
      */
     protected void loadConfig() {
         if (Configure::check("plugins")) {

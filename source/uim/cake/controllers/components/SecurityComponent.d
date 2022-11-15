@@ -165,7 +165,6 @@ class SecurityComponent : Component
      *
      * @param \Cake\Controller\Exception\SecurityException|null myException Additional debug info describing the cause
      * @throws \Cake\Http\Exception\BadRequestException
-     * @return void
      */
     protected void _throwException(?SecurityException myException = null) {
         if (myException !== null) {

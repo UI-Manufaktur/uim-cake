@@ -109,7 +109,6 @@ class RequestHandlerComponent : Component
      *
      * @param \Cake\Http\ServerRequest myRequest The request instance.
      * @param \Cake\Http\Response $response The response instance.
-     * @return void
      */
     protected void _setExtension(ServerRequest myRequest, Response $response) {
         $accept = myRequest.parseAccept();

@@ -101,7 +101,7 @@ abstract class BaseCommand : ICommand
     }
 
     /**
-     * Hook method invoked by CakePHP when a command is about to be executed.
+     * Hook method invoked by UIM when a command is about to be executed.
      *
      * Override this method and implement expensive/important setup steps that
      * should not run on every command run. This method will be called *before*
@@ -149,7 +149,6 @@ abstract class BaseCommand : ICommand
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser.
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
-     * @return void
      */
     protected void displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io) {
         $format = "text";
@@ -166,7 +165,6 @@ abstract class BaseCommand : ICommand
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
-     * @return void
      */
     protected void setOutputLevel(Arguments $args, ConsoleIo $io) {
         $io.setLoggers(ConsoleIo::NORMAL);

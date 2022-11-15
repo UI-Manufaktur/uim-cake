@@ -230,7 +230,6 @@ class ServerRequest : IServerRequest
      * Process the config/settings data into properties.
      *
      * @param array<string, mixed> myConfig The config data to use.
-     * @return void
      */
     protected void _setConfig(array myConfig) {
         if (empty(myConfig["session"])) {
@@ -868,7 +867,7 @@ class ServerRequest : IServerRequest
      * - You can submit an input with the name `_method`
      *
      * Any of these 3 approaches can be used to set the HTTP method used
-     * by CakePHP internally, and will effect the result of this method.
+     * by UIM internally, and will effect the result of this method.
      *
      * @return string The name of the HTTP method used.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.

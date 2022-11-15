@@ -471,7 +471,6 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param \Cake\Database\TypeMap myTypeMap The typemap to check for columns in.
      *   This typemap is indirectly mutated via {@link \Cake\ORM\Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
-     * @return void
      */
     protected void _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations) {
         foreach ($associations as myName => $nested) {
@@ -1111,7 +1110,6 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * It also sets the default types for the columns in the select clause
      *
      * @see \Cake\Database\Query::execute()
-     * @return void
      */
     protected void _transformQuery() {
         if (!this._dirty || this._type !== 'select') {
@@ -1132,7 +1130,6 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * Inspects if there are any set fields for selecting, otherwise adds all
      * the fields for the default table.
      *
-     * @return void
      */
     protected void _addDefaultFields() {
         $select = this.clause('select');
@@ -1155,7 +1152,6 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     /**
      * Sets the default types for converting the fields in the select clause
      *
-     * @return void
      */
     protected void _addDefaultSelectTypes() {
         myTypeMap = this.getTypeMap().getDefaults();
@@ -1197,7 +1193,6 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching such as previous results
      *
-     * @return void
      */
     protected void _dirty() {
         this._results = null;
