@@ -49,7 +49,7 @@ use UnexpectedValueException;
  *
  * ### Life cycle callbacks
  *
- * CakePHP fires a number of life cycle callbacks during each request.
+ * UIM fires a number of life cycle callbacks during each request.
  * By implementing a method you can receive the related events. The available
  * callbacks are:
  *
@@ -69,7 +69,7 @@ use UnexpectedValueException;
  * @property \Cake\Controller\Component\RequestHandlerComponent myRequestHandler
  * @property \Cake\Controller\Component\SecurityComponent $Security
  * @property \Cake\Controller\Component\AuthComponent $Auth
- * @link https://book.cakephp.org/4/en/controllers.html
+ * @link https://book.UIM.org/4/en/controllers.html
  */
 class Controller : IEventListener, IEventDispatcher
 {
@@ -94,7 +94,7 @@ class Controller : IEventListener, IEventDispatcher
      * additional information about the request.
      *
      * @var \Cake\Http\ServerRequest
-     * @link https://book.cakephp.org/4/en/controllers/request-response.html#request
+     * @link https://book.UIM.org/4/en/controllers/request-response.html#request
      */
     protected myRequest;
 
@@ -102,7 +102,7 @@ class Controller : IEventListener, IEventDispatcher
      * An instance of a Response object that contains information about the impending response
      *
      * @var \Cake\Http\Response
-     * @link https://book.cakephp.org/4/en/controllers/request-response.html#response
+     * @link https://book.UIM.org/4/en/controllers/request-response.html#response
      */
     protected $response;
 
@@ -151,7 +151,7 @@ class Controller : IEventListener, IEventDispatcher
      * Constructor.
      *
      * Sets a number of properties based on conventions if they are empty. To override the
-     * conventions CakePHP uses you can define properties in your class declaration.
+     * conventions UIM uses you can define properties in your class declaration.
      *
      * @param \Cake\Http\ServerRequest|null myRequest Request object for this controller. Can be null for testing,
      *   but expect that features that use the request parameters will not work.
@@ -636,7 +636,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param \Psr\Http\Message\UriInterface|array|string myUrl A string, array-based URL or UriInterface instance.
      * @param int $status HTTP status code. Defaults to `302`.
      * @return \Cake\Http\Response|null
-     * @link https://book.cakephp.org/4/en/controllers.html#Controller::redirect
+     * @link https://book.UIM.org/4/en/controllers.html#Controller::redirect
      */
     function redirect(myUrl, int $status = 302): ?Response
     {
@@ -694,7 +694,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param string|null myTemplate Template to use for rendering
      * @param string|null $layout Layout to use
      * @return \Cake\Http\Response A response object containing the rendered view.
-     * @link https://book.cakephp.org/4/en/controllers.html#rendering-a-view
+     * @link https://book.UIM.org/4/en/controllers.html#rendering-a-view
      */
     function render(Nullable!string myTemplate = null, Nullable!string $layout = null): Response
     {
@@ -788,7 +788,7 @@ class Controller : IEventListener, IEventDispatcher
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return \Cake\ORM\ResultSet|\Cake\Datasource\ResultSetInterface Query results
-     * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
+     * @link https://book.UIM.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
     function paginate($object = null, array $settings = []) {
@@ -847,7 +847,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param \Cake\Event\IEvent myEvent An Event instance
      * @return \Cake\Http\Response|null|void
-     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeFilter(IEvent myEvent) {
     }
@@ -858,7 +858,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param \Cake\Event\IEvent myEvent An Event instance
      * @return \Cake\Http\Response|null|void
-     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeRender(IEvent myEvent) {
     }
@@ -877,7 +877,7 @@ class Controller : IEventListener, IEventDispatcher
      *     or an absolute URL
      * @param \Cake\Http\Response $response The response object.
      * @return \Cake\Http\Response|null|void
-     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeRedirect(IEvent myEvent, myUrl, Response $response) {
     }
@@ -887,7 +887,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param \Cake\Event\IEvent myEvent An Event instance
      * @return \Cake\Http\Response|null|void
-     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function afterFilter(IEvent myEvent) {
     }

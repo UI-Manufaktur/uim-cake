@@ -1,7 +1,7 @@
 
 
 /**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * UIM(tm) : Rapid Development Framework (https://UIM.org)
  * Copyright 2005-2011, Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * Licensed under The MIT License

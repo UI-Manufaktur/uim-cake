@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.controllerss.components;
@@ -32,10 +32,10 @@ import uim.cakeilities.Hash;
  *
  * @property \Cake\Controller\Component\RequestHandlerComponent myRequestHandler
  * @property \Cake\Controller\Component\FlashComponent $Flash
- * @link https://book.cakephp.org/4/en/controllers/components/authentication.html
- * @deprecated 4.0.0 Use the cakephp/authentication and cakephp/authorization plugins instead.
- * @see https://github.com/cakephp/authentication
- * @see https://github.com/cakephp/authorization
+ * @link https://book.UIM.org/4/en/controllers/components/authentication.html
+ * @deprecated 4.0.0 Use the UIM/authentication and UIM/authorization plugins instead.
+ * @see https://github.com/UIM/authentication
+ * @see https://github.com/UIM/authorization
  */
 class AuthComponent : Component : IEventDispatcher
 {
@@ -565,7 +565,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
      * @return void
-     * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-public
+     * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-public
      */
     void allow($actions = null) {
         if ($actions === null) {
@@ -595,7 +595,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param array<string>|string|null $actions Controller action name or array of actions
      * @return void
      * @see \Cake\Controller\Component\AuthComponent::allow()
-     * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
+     * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
     void deny($actions = null) {
         if ($actions === null) {
@@ -620,7 +620,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param \ArrayAccess|array myUser User data.
      * @return void
-     * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#identifying-users-and-logging-them-in
+     * @link https://book.UIM.org/4/en/controllers/components/authentication.html#identifying-users-and-logging-them-in
      */
     void setUser(myUser) {
         this.storage().write(myUser);
@@ -633,7 +633,7 @@ class AuthComponent : Component : IEventDispatcher
      * which the authenticate classes can listen for and perform custom logout logic.
      *
      * @return string Normalized config `logoutRedirect`
-     * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#logging-users-out
+     * @link https://book.UIM.org/4/en/controllers/components/authentication.html#logging-users-out
      */
     string logout() {
         this._setDefaults();
@@ -652,7 +652,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param string|null myKey Field to retrieve. Leave null to get entire User record.
      * @return mixed|null Either User record or null if no user is logged in, or retrieved field if key is specified.
-     * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#accessing-the-logged-in-user
+     * @link https://book.UIM.org/4/en/controllers/components/authentication.html#accessing-the-logged-in-user
      */
     function user(Nullable!string myKey = null) {
         myUser = this.storage().read();
