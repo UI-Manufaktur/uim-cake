@@ -73,7 +73,7 @@ use Psr\Http\Message\IResponse;
  *
  * By using the `auth` key you can use authentication. The type sub option
  * can be used to specify which authentication strategy you want to use.
- * CakePHP comes with a few built-in strategies:
+ * UIM comes with a few built-in strategies:
  *
  * - Basic
  * - Digest
@@ -84,7 +84,7 @@ use Psr\Http\Message\IResponse;
  * By using the `proxy` key you can set authentication credentials for
  * a proxy if you need to use one. The type sub option can be used to
  * specify which authentication strategy you want to use.
- * CakePHP comes with built-in support for basic authentication.
+ * UIM comes with built-in support for basic authentication.
  */
 class Client : ClientInterface
 {

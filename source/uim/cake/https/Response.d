@@ -1298,17 +1298,17 @@ class Response : IResponse
      *
      * ### Full URI
      * ```
-     * cors(myRequest, "https://www.cakephp.org");
+     * cors(myRequest, "https://www.UIM.org");
      * ```
      *
      * ### URI with wildcard
      * ```
-     * cors(myRequest, "https://*.cakephp.org");
+     * cors(myRequest, "https://*.UIM.org");
      * ```
      *
      * ### Ignoring the requested protocol
      * ```
-     * cors(myRequest, "www.cakephp.org");
+     * cors(myRequest, "www.UIM.org");
      * ```
      *
      * ### Any URI
@@ -1318,7 +1318,7 @@ class Response : IResponse
      *
      * ### Allowed list of URIs
      * ```
-     * cors(myRequest, ["http://www.cakephp.org", "*.google.com", "https://myproject.github.io"]);
+     * cors(myRequest, ["http://www.UIM.org", "*.google.com", "https://myproject.github.io"]);
      * ```
      *
      * *Note* The `$allowedDomains`, `$allowedMethods`, `$allowedHeaders` parameters are deprecated.

@@ -1560,7 +1560,7 @@ class ServerRequest : IServerRequest
         $new = clone this;
         if (in_array(myName, this.emulatedAttributes, true)) {
             throw new InvalidArgumentException(
-                "You cannot unset "myName". It is a required CakePHP attribute."
+                "You cannot unset "myName". It is a required UIM attribute."
             );
         }
         unset($new.attributes[myName]);
@@ -1593,7 +1593,7 @@ class ServerRequest : IServerRequest
     /**
      * Get all the attributes in the request.
      *
-     * This will include the params, webroot, base, and here attributes that CakePHP
+     * This will include the params, webroot, base, and here attributes that UIM
      * provides.
      *
      * @return array

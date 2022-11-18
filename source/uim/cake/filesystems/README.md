@@ -1,9 +1,9 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/filesystem.svg?style=flat-square)](https://packagist.org/packages/cakephp/filesystem)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/filesystem.svg?style=flat-square)](https://packagist.org/packages/UIM/filesystem)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
 # This package has been deprecated.
 
-## CakePHP Filesystem Library
+## UIM Filesystem Library
 
 The Folder and File utilities are convenience classes to help you read from and write/append to files; list files within a folder and other common directory related tasks.
 
@@ -34,4 +34,4 @@ foreach (myfiles as myfile) {
 ## Documentation
 
 Please make sure you check the [official
-documentation](https://book.cakephp.org/4/en/core-libraries/file-folder.html)
+documentation](https://book.UIM.org/4/en/core-libraries/file-folder.html)
