@@ -80,7 +80,7 @@ class Paginator : PaginatorInterface
      *
      * ### Controlling sort fields
      *
-     * By default CakePHP will automatically allow sorting on any column on the
+     * By default UIM will automatically allow sorting on any column on the
      * repository object being paginated. Often times you will want to allow
      * sorting on either associated columns or calculated fields. In these cases
      * you will need to define an allowed list of all the columns you wish to allow
@@ -117,7 +117,7 @@ class Paginator : PaginatorInterface
      *
      * ```
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
-     *   return $q.where(["name" => "CakePHP"])
+     *   return $q.where(["name" => "UIM"])
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```

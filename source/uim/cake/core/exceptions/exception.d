@@ -4,7 +4,7 @@ use RuntimeException;
 use Throwable;
 
 /**
- * Base class that all CakePHP Exceptions extend.
+ * Base class that all UIM Exceptions extend.
  *
  * @method int getCode() Gets the Exception code.
  */

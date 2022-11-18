@@ -18,7 +18,7 @@ interface SchemaInterface
      * Columns can have several attributes:
      *
      * - `type` The type of the column. This should be
-     *   one of CakePHP"s abstract types.
+     *   one of UIM"s abstract types.
      * - `length` The length of the column.
      * - `precision` The number of decimal places to store
      *   for float and decimal types.
