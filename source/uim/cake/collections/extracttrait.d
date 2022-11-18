@@ -1,7 +1,7 @@
-module uim.cake.collections;
+module uim.cake.collections.extracttrait;
 
-use Closure;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Provides utility protected methods for extracting a property or column

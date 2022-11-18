@@ -3,11 +3,6 @@ module uim.cake.collections.interface_;
 @safe:
 import uim.cake
 
-/* use Iterator;
-use JsonSerializable;
-use Traversable;
- */
-
 /**
  * Interface for describing collections. A collection is an immutable list of elements exposing a number of traversing and extracting method for
  * generating other collections.
