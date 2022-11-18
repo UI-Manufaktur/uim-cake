@@ -31,7 +31,7 @@ use ReflectionMethod;
  * ### Callback methods
  *
  * Behaviors can listen to any events fired on a Table. By default,
- * CakePHP provides a number of lifecycle events your behaviors can
+ * UIM provides a number of lifecycle events your behaviors can
  * listen to:
  *
  * - `beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions, boolean $primary)`

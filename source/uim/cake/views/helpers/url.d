@@ -59,7 +59,7 @@ class UrlHelper : Helper
      *
      * @param array|string|null myUrl Either a relative string URL like `/products/view/23` or
      *    an array of URL parameters. Using an array for URLs will allow you to leverage
-     *    the reverse routing features of CakePHP.
+     *    the reverse routing features of UIM.
      * @param array<string, mixed> myOptions Array of options.
      * @return string Full translated URL with base path.
      */

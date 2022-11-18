@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.https;
@@ -22,7 +22,7 @@ use function Laminas\Diactoros\normalizeUploadedFiles;
 /**
  * Factory for making ServerRequest instances.
  *
- * This subclass adds in CakePHP specific behavior to populate
+ * This subclass adds in UIM specific behavior to populate
  * the basePath and webroot attributes. Furthermore the Uri"s path
  * is corrected to only contain the "virtual" path for the request.
  */
@@ -72,7 +72,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             "webroot" => $uri.webroot,
             "base" => $uri.base,
             "session" => $session,
-            "input" => $server["CAKEPHP_INPUT"] ?? null,
+            "input" => $server["UIM_INPUT"] ?? null,
         ]);
 
         myRequest = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, myRequest);
@@ -216,7 +216,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     /**
      * Build a UriInterface object.
      *
-     * Add in some CakePHP specific logic/properties that help
+     * Add in some UIM specific logic/properties that help
      * preserve backwards compatibility.
      *
      * @param array $server The server parameters.

@@ -30,7 +30,7 @@ class Request : Message : RequestInterface
         this.uri = this.createUri(myUrl);
         $headers += [
             "Connection" => "close",
-            "User-Agent" => ini_get("user_agent") ?: "CakePHP",
+            "User-Agent" => ini_get("user_agent") ?: "UIM",
         ];
         this.addHeaders($headers);
 

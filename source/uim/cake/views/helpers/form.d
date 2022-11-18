@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeews\Helper;
@@ -36,7 +36,7 @@ use RuntimeException;
  * @method string search(string myFieldName, array myOptions = []) Creates input of type search.
  * @property \Cake\View\Helper\HtmlHelper $Html
  * @property \Cake\View\Helper\UrlHelper myUrl
- * @link https://book.cakephp.org/4/en/views/helpers/form.html
+ * @link https://book.UIM.org/4/en/views/helpers/form.html
  */
 class FormHelper : Helper
 {
@@ -351,7 +351,7 @@ class FormHelper : Helper
      *   array of meta data. You can use `null` to make a context-less form.
      * @param array<string, mixed> myOptions An array of html attributes and options.
      * @return string An formatted opening FORM tag.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#Cake\View\Helper\FormHelper::create
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#Cake\View\Helper\FormHelper::create
      */
     function create($context = null, array myOptions = []): string
     {
@@ -548,7 +548,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $secureAttributes Secure attributes which will be passed as HTML attributes
      *   into the hidden input elements generated for the Security Component.
      * @return string A closing FORM tag.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#closing-the-form
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#closing-the-form
      */
     function end(array $secureAttributes = []): string
     {
@@ -681,7 +681,7 @@ class FormHelper : Helper
      *
      * @param string myField This should be "modelname.fieldname"
      * @return bool If there are errors this method returns true, else false.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#displaying-and-checking-errors
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
     bool isFieldError(string myField) {
         return this._getContext().hasError(myField);
@@ -702,7 +702,7 @@ class FormHelper : Helper
      *   it should be a hash of key names => messages.
      * @param array<string, mixed> myOptions See above.
      * @return string Formatted errors or ''.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#displaying-and-checking-errors
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
     function error(string myField, $text = null, array myOptions = []): string
     {
@@ -816,7 +816,7 @@ class FormHelper : Helper
      *   fieldName.
      * @param array<string, mixed> myOptions An array of HTML attributes.
      * @return string The formatted LABEL element
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-labels
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-labels
      */
     function label(string myFieldName, Nullable!string $text = null, array myOptions = []): string
     {
@@ -885,7 +885,7 @@ class FormHelper : Helper
      * - `legend` Set to false to disable the legend for the generated control set. Or supply a string
      *    to customize the legend text.
      * @return string Completed form controls.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#generating-entire-forms
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#generating-entire-forms
      */
     function allControls(array myFields = [], array myOptions = []): string
     {
@@ -922,7 +922,7 @@ class FormHelper : Helper
      * - `legend` Set to false to disable the legend for the generated input set.
      *    Or supply a string to customize the legend text.
      * @return string Completed form inputs.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#generating-entire-forms
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#generating-entire-forms
      */
     function controls(array myFields, array myOptions = []): string
     {
@@ -1016,7 +1016,7 @@ class FormHelper : Helper
      * @param string myFieldName This should be "modelname.fieldname"
      * @param array<string, mixed> myOptions Each type of input takes different options.
      * @return string Completed form widget.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-form-inputs
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-form-inputs
      * @psalm-suppress InvalidReturnType
      * @psalm-suppress InvalidReturnStatement
      */
@@ -1474,7 +1474,7 @@ class FormHelper : Helper
      * @param string myFieldName Name of a field, like this "modelname.fieldname"
      * @param array<string, mixed> myOptions Array of HTML attributes.
      * @return array<string>|string An HTML text input element.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-checkboxes
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-checkboxes
      */
     function checkbox(string myFieldName, array myOptions = []) {
         myOptions += ['hiddenField' => true, 'value' => 1];
@@ -1531,7 +1531,7 @@ class FormHelper : Helper
      * @param iterable myOptions Radio button options array.
      * @param array<string, mixed> $attributes Array of attributes.
      * @return string Completed radio widget set.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-radio-buttons
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-radio-buttons
      */
     function radio(string myFieldName, iterable myOptions = [], array $attributes = []): string
     {
@@ -1600,7 +1600,7 @@ class FormHelper : Helper
      * @param string myFieldName Name of a field, in the form "modelname.fieldname"
      * @param array<string, mixed> myOptions Array of HTML attributes, and special options above.
      * @return string A generated HTML text input element
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-textareas
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-textareas
      */
     function textarea(string myFieldName, array myOptions = []): string
     {
@@ -1616,7 +1616,7 @@ class FormHelper : Helper
      * @param string myFieldName Name of a field, in the form of "modelname.fieldname"
      * @param array<string, mixed> myOptions Array of HTML attributes.
      * @return string A generated hidden input
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-hidden-inputs
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-hidden-inputs
      */
     function hidden(string myFieldName, array myOptions = []): string
     {
@@ -1649,7 +1649,7 @@ class FormHelper : Helper
      * @param string myFieldName Name of a field, in the form "modelname.fieldname"
      * @param array<string, mixed> myOptions Array of HTML attributes.
      * @return string A generated file input.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-file-inputs
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-file-inputs
      */
     function file(string myFieldName, array myOptions = []): string
     {
@@ -1674,7 +1674,7 @@ class FormHelper : Helper
      * @param string $title The button's caption. Not automatically HTML encoded
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string A HTML button tag.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-button-elements
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-button-elements
      */
     function button(string $title, array myOptions = []): string
     {
@@ -1720,7 +1720,7 @@ class FormHelper : Helper
      * @param array|string myUrl URL as string or array
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string A HTML button tag.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
     function postButton(string $title, myUrl, array myOptions = []): string
     {
@@ -1773,7 +1773,7 @@ class FormHelper : Helper
      *   external URL (starts with http://)
      * @param array<string, mixed> myOptions Array of HTML attributes.
      * @return string An `<a />` element.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
     function postLink(string $title, myUrl = null, array myOptions = []): string
     {
@@ -1884,7 +1884,7 @@ class FormHelper : Helper
      *  OR if the first character is not /, image is relative to webroot/img.
      * @param array<string, mixed> myOptions Array of options. See above.
      * @return string A HTML submit button
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
     function submit(Nullable!string $caption = null, array myOptions = []): string
     {
@@ -2005,7 +2005,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
      * @see \Cake\View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-select-pickers
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-select-pickers
      */
     function select(string myFieldName, iterable myOptions = [], array $attributes = []): string
     {
@@ -2128,7 +2128,7 @@ class FormHelper : Helper
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Options & attributes for the select elements.
      * @return string Completed year select input
-     * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-year-inputs
+     * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-year-inputs
      */
     function year(string myFieldName, array myOptions = []): string
     {
@@ -2354,7 +2354,7 @@ class FormHelper : Helper
      * Add a new context type.
      *
      * Form context types allow FormHelper to interact with
-     * data providers that come from outside CakePHP. For example
+     * data providers that come from outside UIM. For example
      * if you wanted to use an alternative ORM like Doctrine you could
      * create and connect a new context class to allow FormHelper to
      * read metadata from doctrine.

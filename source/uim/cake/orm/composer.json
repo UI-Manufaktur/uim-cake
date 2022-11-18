@@ -1,40 +1,40 @@
 {
-    "name": "cakephp/orm",
-    "description": "CakePHP ORM - Provides a flexible and powerful ORM implementing a data-mapper pattern.",
+    "name": "UIM/orm",
+    "description": "UIM ORM - Provides a flexible and powerful ORM implementing a data-mapper pattern.",
     "type": "library",
     "keywords": [
-        "cakephp",
+        "UIM",
         "orm",
         "data-mapper",
         "data-mapper pattern"
     ],
-    "homepage": "https://cakephp.org",
+    "homepage": "https://UIM.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
-            "homepage": "https://github.com/cakephp/orm/graphs/contributors"
+            "name": "UIM Community",
+            "homepage": "https://github.com/UIM/orm/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/cakephp/cakephp/issues",
-        "forum": "https://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/orm"
+        "issues": "https://github.com/UIM/UIM/issues",
+        "forum": "https://stackoverflow.com/tags/UIM",
+        "irc": "irc://irc.freenode.org/UIM",
+        "source": "https://github.com/UIM/orm"
     },
     "require": {
         "php": ">=7.2.0",
-        "cakephp/collection": "^4.0",
-        "cakephp/core": "^4.0",
-        "cakephp/datasource": "^4.0",
-        "cakephp/database": "^4.0",
-        "cakephp/event": "^4.0",
-        "cakephp/utility": "^4.0",
-        "cakephp/validation": "^4.0"
+        "UIM/collection": "^4.0",
+        "UIM/core": "^4.0",
+        "UIM/datasource": "^4.0",
+        "UIM/database": "^4.0",
+        "UIM/event": "^4.0",
+        "UIM/utility": "^4.0",
+        "UIM/validation": "^4.0"
     },
     "suggest": {
-        "cakephp/cache": "If you decide to use Query caching.",
-        "cakephp/i18n": "If you are using Translate/TimestampBehavior or Chronos types."
+        "UIM/cache": "If you decide to use Query caching.",
+        "UIM/i18n": "If you are using Translate/TimestampBehavior or Chronos types."
     },
     "autoload": {
         "psr-4": {

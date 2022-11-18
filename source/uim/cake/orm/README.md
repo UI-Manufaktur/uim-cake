@@ -1,21 +1,21 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/orm.svg?style=flat-square)](https://packagist.org/packages/cakephp/orm)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/orm.svg?style=flat-square)](https://packagist.org/packages/UIM/orm)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP ORM
+# UIM ORM
 
-The CakePHP ORM provides a powerful and flexible way to work with relational
+The UIM ORM provides a powerful and flexible way to work with relational
 databases. Using a datamapper pattern the ORM allows you to manipulate data as
 entities allowing you to create expressive domain layers in your applications.
 
 ## Database engines supported
 
-The CakePHP ORM is compatible with:
+The UIM ORM is compatible with:
 
 * MySQL 5.1+
 * Postgres 8+
 * SQLite3
 * SQLServer 2008+
-* Oracle (through a [community plugin](https://github.com/CakeDC/cakephp-oracle-driver))
+* Oracle (through a [community plugin](https://github.com/CakeDC/UIM-oracle-driver))
 
 ## Connecting to the Database
 
@@ -74,7 +74,7 @@ $articles = this.getTableLocator().get("Articles");
 
 ## Creating Associations
 
-In your table classes you can define the relations between your tables. CakePHP"s ORM
+In your table classes you can define the relations between your tables. UIM"s ORM
 supports 4 association types out of the box:
 
 * belongsTo - E.g. Many articles belong to a user.
@@ -83,7 +83,7 @@ supports 4 association types out of the box:
 * belongsToMany - E.g. An article belongsToMany tags.
 
 You define associations in your table"s `initialize()` method. See the
-[documentation](https://book.cakephp.org/4/en/orm/associations.html) for
+[documentation](https://book.UIM.org/4/en/orm/associations.html) for
 complete examples.
 
 ## Reading Data
@@ -99,8 +99,8 @@ foreach ($articles.find() as $article) {
 }
 ```
 
-You can use the [query builder](https://book.cakephp.org/4/en/orm/query-builder.html) to create
-complex queries, and a [variety of methods](https://book.cakephp.org/4/en/orm/retrieving-data-and-resultsets.html)
+You can use the [query builder](https://book.UIM.org/4/en/orm/query-builder.html) to create
+complex queries, and a [variety of methods](https://book.UIM.org/4/en/orm/retrieving-data-and-resultsets.html)
 to access your data.
 
 ## Saving Data
@@ -134,7 +134,7 @@ $articles.save($article, [
 ```
 
 The above shows how you can easily marshal and save an entity and its
-associations in a simple & powerful way. Consult the [ORM documentation](https://book.cakephp.org/4/en/orm/saving-data.html)
+associations in a simple & powerful way. Consult the [ORM documentation](https://book.UIM.org/4/en/orm/saving-data.html)
 for more in-depth examples.
 
 ## Deleting Data
@@ -235,5 +235,5 @@ Configure.write("App.module", "My\Log\Submodule");
 
 ## Additional Documentation
 
-Consult [the CakePHP ORM documentation](https://book.cakephp.org/4/en/orm.html)
+Consult [the UIM ORM documentation](https://book.UIM.org/4/en/orm.html)
 for more in-depth documentation.

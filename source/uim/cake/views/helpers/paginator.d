@@ -16,7 +16,7 @@ import uim.cakeews\View;
  * @property \Cake\View\Helper\NumberHelper $Number
  * @property \Cake\View\Helper\HtmlHelper $Html
  * @property \Cake\View\Helper\FormHelper $Form
- * @link https://book.cakephp.org/4/en/views/helpers/paginator.html
+ * @link https://book.UIM.org/4/en/views/helpers/paginator.html
  */
 class PaginatorHelper : Helper
 {
@@ -171,7 +171,7 @@ class PaginatorHelper : Helper
      *
      * @param string|null myModel Optional model name. Uses the default if none is specified.
      * @return int The current page number of the recordset.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
     int current(Nullable!string myModel = null) {
         myParams = this.params(myModel);
@@ -198,7 +198,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options for pagination links.
      * @return string|null The name of the key by which the recordset is being sorted, or
      *  null if the results are not currently sorted.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
     function sortKey(Nullable!string myModel = null, array myOptions = []): Nullable!string
     {
@@ -219,7 +219,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options for pagination links.
      * @return string The direction by which the recordset is being sorted, or
      *  null if the results are not currently sorted.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
     function sortDir(Nullable!string myModel = null, array myOptions = []): string
     {
@@ -319,7 +319,7 @@ class PaginatorHelper : Helper
      * @param string $title Title for the link. Defaults to '<< Previous'.
      * @param array<string, mixed> myOptions Options for pagination link. See above for list of keys.
      * @return string A "previous" link or a disabled link.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
     function prev(string $title = '<< Previous', array myOptions = []): string
     {
@@ -359,7 +359,7 @@ class PaginatorHelper : Helper
      * @param string $title Title for the link. Defaults to 'Next >>'.
      * @param array<string, mixed> myOptions Options for pagination link. See above for list of keys.
      * @return string A "next" link or $disabledTitle text if the link is disabled.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
     function next(string $title = 'Next >>', array myOptions = []): string
     {
@@ -399,7 +399,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options for sorting link. See above for list of keys.
      * @return string A link sorting default by 'asc'. If the resultset is sorted 'asc' by the specified
      *  key the returned link will sort by 'desc'.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
     function sort(string myKey, $title = null, array myOptions = []): string
     {
@@ -476,7 +476,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myUrlOptions Array of options
      * @return string By default, returns a full pagination URL string for use
      *   in non-standard contexts (i.e. JavaScript)
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#generating-pagination-urls
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#generating-pagination-urls
      */
     function generateUrl(
         array myOptions = [],
@@ -594,7 +594,7 @@ class PaginatorHelper : Helper
      *
      * @param string|null myModel Optional model name. Uses the default if none is specified.
      * @return bool True if the result set is not at the first page.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
     bool hasPrev(Nullable!string myModel = null) {
         return this._hasPage(myModel, 'prev');
@@ -605,7 +605,7 @@ class PaginatorHelper : Helper
      *
      * @param string|null myModel Optional model name. Uses the default if none is specified.
      * @return bool True if the result set is not at the last page.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
     bool hasNext(Nullable!string myModel = null) {
         return this._hasPage(myModel, 'next');
@@ -618,7 +618,7 @@ class PaginatorHelper : Helper
      * @param string|null myModel Optional model name. Uses the default if none is specified.
      * @return bool True if the given result set has the specified page number.
      * @throws \InvalidArgumentException
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
     bool hasPage(int $page = 1, Nullable!string myModel = null) {
         $paging = this.params(myModel);
@@ -680,7 +680,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options for the counter string. See #options for list of keys.
      *   If string it will be used as format.
      * @return string Counter string.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-a-page-counter
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-a-page-counter
      */
     function counter(string $format = 'pages', array myOptions = []): string
     {
@@ -752,7 +752,7 @@ class PaginatorHelper : Helper
      *
      * @param array<string, mixed> myOptions Options for the numbers.
      * @return string Numbers string.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-page-number-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-page-number-links
      */
     function numbers(array myOptions = []): string
     {
@@ -1007,7 +1007,7 @@ class PaginatorHelper : Helper
      *   you want at the beginning of the range.
      * @param array<string, mixed> myOptions An array of options.
      * @return string Numbers string.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
     function first($first = '<< first', array myOptions = []): string
     {
@@ -1067,7 +1067,7 @@ class PaginatorHelper : Helper
      * @param string|int $last if string use as label for the link, if numeric print page numbers
      * @param array<string, mixed> myOptions Array of options
      * @return string Numbers string.
-     * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
+     * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
     function last($last = 'last >>', array myOptions = []): string
     {

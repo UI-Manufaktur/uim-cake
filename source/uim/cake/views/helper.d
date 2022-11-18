@@ -5,7 +5,7 @@ import uim.cake.core.InstanceConfigTrait;
 import uim.cakeents\IEventListener;
 
 /**
- * Abstract base class for all other Helpers in CakePHP.
+ * Abstract base class for all other Helpers in UIM.
  * Provides common methods and features.
  *
  * ### Callback methods

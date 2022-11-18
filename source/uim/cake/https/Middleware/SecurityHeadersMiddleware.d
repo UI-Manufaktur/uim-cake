@@ -9,7 +9,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Handles common security headers in a convenient way
  *
- * @link https://book.cakephp.org/4/en/controllers/middleware.html#security-header-middleware
+ * @link https://book.UIM.org/4/en/controllers/middleware.html#security-header-middleware
  */
 class SecurityHeadersMiddleware : MiddlewareInterface
 {

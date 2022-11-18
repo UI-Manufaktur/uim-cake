@@ -10,7 +10,7 @@ import uim.cakeews\StringTemplateTrait;
  * HtmlHelper encloses all methods needed while working with HTML pages.
  *
  * @property \Cake\View\Helper\UrlHelper myUrl
- * @link https://book.cakephp.org/4/en/views/helpers/html.html
+ * @link https://book.UIM.org/4/en/views/helpers/html.html
  */
 class HtmlHelper : Helper
 {
@@ -100,7 +100,7 @@ class HtmlHelper : Helper
      * Create a custom meta tag:
      *
      * ```
-     * this.Html.meta(['property' => 'og:site_name', 'content' => 'CakePHP']);
+     * this.Html.meta(['property' => 'og:site_name', 'content' => 'UIM']);
      * ```
      *
      * ### Options
@@ -114,7 +114,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> myOptions Other attributes for the generated tag. If the type attribute is html,
      *    rss, atom, or icon, the mime-type is returned.
      * @return string|null A completed `<link />` element, or null if the element was sent to a block.
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-meta-tags
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-meta-tags
      */
     function meta(myType, myContents = null, array myOptions = []): Nullable!string
     {
@@ -197,7 +197,7 @@ class HtmlHelper : Helper
      * @param string|null $charset The character set to be used in the meta tag. If empty,
      *  The App.encoding value will be used. Example: "utf-8".
      * @return string A meta tag containing the specified character set.
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-charset-tags
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-charset-tags
      */
     function charset(Nullable!string $charset = null): string
     {
@@ -232,7 +232,7 @@ class HtmlHelper : Helper
      *   external URL (starts with http://)
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string An `<a />` element.
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
     function link($title, myUrl = null, array myOptions = []): string
     {
@@ -300,7 +300,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string An `<a />` element.
      * @see \Cake\Routing\Router::pathUrl()
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
     function linkFromPath(string $title, string myPath, array myParams = [], array myOptions = []): string
     {
@@ -356,7 +356,7 @@ class HtmlHelper : Helper
      *   of your application. Otherwise, the path will be relative to your CSS path, usually webroot/css.
      * @param array<string, mixed> myOptions Array of options and HTML arguments.
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-css-files
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-css-files
      */
     function css(myPath, array myOptions = []): Nullable!string
     {
@@ -456,7 +456,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> myOptions Array of options, and html attributes see above.
      * @return string|null String of `<script />` tags or null if block is specified in options
      *   or if $once is true and the file has been included before.
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-javascript-files
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-javascript-files
      */
     function script(myUrl, array myOptions = []): Nullable!string
     {
@@ -515,7 +515,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> myOptions The options to use. Options not listed above will be
      *    treated as HTML attributes.
      * @return string|null String or null depending on the value of `myOptions['block']`
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
     function scriptBlock(string $script, array myOptions = []): Nullable!string
     {
@@ -549,7 +549,7 @@ class HtmlHelper : Helper
      *
      * @param array<string, mixed> myOptions Options for the code block.
      * @return void
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
     function scriptStart(array myOptions = []): void
     {
@@ -563,7 +563,7 @@ class HtmlHelper : Helper
      * the settings used when the scriptBlock was started
      *
      * @return string|null Depending on the settings of scriptStart() either a script tag or null
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
     function scriptEnd(): Nullable!string
     {
@@ -589,7 +589,7 @@ class HtmlHelper : Helper
      * @param array<string, string> myData Style data array, keys will be used as property names, values as property values.
      * @param bool $oneLine Whether the style block should be displayed on one line.
      * @return string CSS styling data
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-css-programatically
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-css-programatically
      */
     function style(array myData, bool $oneLine = true): string
     {
@@ -614,13 +614,13 @@ class HtmlHelper : Helper
      * Create a regular image:
      *
      * ```
-     * echo this.Html.image('cake_icon.png', ['alt' => 'CakePHP']);
+     * echo this.Html.image('cake_icon.png', ['alt' => 'UIM']);
      * ```
      *
      * Create an image link:
      *
      * ```
-     * echo this.Html.image('cake_icon.png', ['alt' => 'CakePHP', 'url' => 'https://cakephp.org']);
+     * echo this.Html.image('cake_icon.png', ['alt' => 'UIM', 'url' => 'https://UIM.org']);
      * ```
      *
      * ### Options:
@@ -633,7 +633,7 @@ class HtmlHelper : Helper
      * @param array|string myPath Path to the image file, relative to the webroot/img/ directory.
      * @param array<string, mixed> myOptions Array of HTML attributes. See above for special options.
      * @return string completed img tag
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-images
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-images
      */
     function image(myPath, array myOptions = []): string
     {
@@ -679,7 +679,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed>|null $trOptions HTML options for TR elements.
      * @param array<string, mixed>|null $thOptions HTML options for TH elements.
      * @return string Completed table headers
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-table-headings
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-table-headings
      */
     function tableHeaders(array myNames, ?array $trOptions = null, ?array $thOptions = null): string
     {
@@ -715,7 +715,7 @@ class HtmlHelper : Helper
      * @param bool $continueOddEven If false, will use a non-static myCount variable,
      *    so that the odd/even count is reset to zero just for that call.
      * @return string Formatted HTML
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-table-cells
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-table-cells
      */
     function tableCells(
         myData,
@@ -1061,7 +1061,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> myOptions Options and additional HTML attributes of the list (ol/ul) tag.
      * @param array<string, mixed> $itemOptions Options and additional HTML attributes of the list item (LI) tag.
      * @return string The nested list
-     * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-nested-lists
+     * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-nested-lists
      */
     function nestedList(array $list, array myOptions = [], array $itemOptions = []): string
     {

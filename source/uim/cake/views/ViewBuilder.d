@@ -167,7 +167,7 @@ class ViewBuilder : JsonSerializable, Serializable
     mixin(OProperty!("string", "layoutPath"));
 
     /**
-     * Turns on or off CakePHP's conventional mode of applying layout files.
+     * Turns on or off UIM's conventional mode of applying layout files.
      * On by default. Setting to off means that layouts will not be
      * automatically applied to rendered views.
      *
@@ -181,7 +181,7 @@ class ViewBuilder : JsonSerializable, Serializable
     }
 
     /**
-     * Turns off CakePHP's conventional mode of applying layout files.
+     * Turns off UIM's conventional mode of applying layout files.
      *
      * Setting to off means that layouts will not be automatically applied to
      * rendered views.
@@ -195,7 +195,7 @@ class ViewBuilder : JsonSerializable, Serializable
     }
 
     /**
-     * Returns if CakePHP's conventional mode of applying layout files is enabled.
+     * Returns if UIM's conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      *
      * @return bool
