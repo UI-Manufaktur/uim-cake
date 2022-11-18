@@ -1,4 +1,4 @@
-module uim.cakemmand;
+module uim.cake.command;
 
 import uim.cake.core.Configure;
 import uim.cake.core.Plugin;

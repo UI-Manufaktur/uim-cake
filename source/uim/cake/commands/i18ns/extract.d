@@ -1,4 +1,4 @@
-module uim.cakemmand;
+module uim.cake.command;
 
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
@@ -84,7 +84,7 @@ class I18nExtractCommand : Command {
     protected $_exclude = [];
 
     /**
-     * Holds whether this call should extract the CakePHP Lib messages
+     * Holds whether this call should extract the UIM Lib messages
      *
      * @var bool
      */
@@ -176,7 +176,7 @@ class I18nExtractCommand : Command {
             this._extractCore = !(strtolower((string)$args.getOption("extract-core")) === "no");
         } else {
             $response = $io.askChoice(
-                "Would you like to extract the messages from the CakePHP core?",
+                "Would you like to extract the messages from the UIM core?",
                 ["y", "n"],
                 "n"
             );
@@ -356,7 +356,7 @@ class I18nExtractCommand : Command {
             "default" => false,
             "help" => "Always overwrite existing .pot files.",
         ]).addOption("extract-core", [
-            "help" => "Extract messages from the CakePHP core libraries.",
+            "help" => "Extract messages from the UIM core libraries.",
             "choices" => ["yes", "no"],
         ]).addOption("no-location", [
             "boolean" => true,
@@ -628,9 +628,9 @@ class I18nExtractCommand : Command {
      * @return string Translation template header
      */
     protected string _writeHeader(string $domain) {
-        $projectIdVersion = $domain === "cake" ? "CakePHP " . Configure::version() : "PROJECT VERSION";
+        $projectIdVersion = $domain === "cake" ? "UIM " . Configure::version() : "PROJECT VERSION";
 
-        $output = "# LANGUAGE translation of CakePHP Application\n";
+        $output = "# LANGUAGE translation of UIM Application\n";
         $output .= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
         $output .= "#\n";
         $output .= "#, fuzzy\n";

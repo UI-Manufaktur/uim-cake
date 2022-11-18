@@ -1,4 +1,4 @@
-module uim.cakemmand;
+module uim.cake.command;
 
 import uim.cake.console.Arguments;
 import uim.cake.console.commandCollection;

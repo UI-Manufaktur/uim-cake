@@ -1,4 +1,4 @@
-module uim.cakemmand;
+module uim.cake.command;
 
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
@@ -58,7 +58,7 @@ class ServerCommand : Command {
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return void
-     * @link https://book.cakephp.org/4/en/console-and-shells.html#hook-methods
+     * @link https://book.UIM.org/4/en/console-and-shells.html#hook-methods
      */
     protected void startup(Arguments $args, ConsoleIo $io) {
         if ($args.getOption("host")) {
@@ -88,7 +88,7 @@ class ServerCommand : Command {
         }
 
         $io.out();
-        $io.out(sprintf("<info>Welcome to CakePHP %s Console</info>", "v" . Configure::version()));
+        $io.out(sprintf("<info>Welcome to UIM %s Console</info>", "v" . Configure::version()));
         $io.hr();
         $io.out(sprintf("App : %s", Configure::read("App.dir")));
         $io.out(sprintf("Path: %s", APP));
@@ -139,7 +139,7 @@ class ServerCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            "PHP Built-in Server for CakePHP",
+            "PHP Built-in Server for UIM",
             "<warning>[WARN] Don\"t use this in a production environment</warning>",
         ]).addOption("host", [
             "short" => "H",

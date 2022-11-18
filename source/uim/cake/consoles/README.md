@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/http.svg?style=flat-square)](https://packagist.org/packages/cakephp/console)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/http.svg?style=flat-square)](https://packagist.org/packages/UIM/console)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Console Library
+# UIM Console Library
 
 This library provides a framework for building command line applications from a
 set of commands. It provides abstractions for defining option and argument
@@ -12,7 +12,7 @@ parsers, and dispatching commands.
 You can install it from Composer. In your project:
 
 ```
-composer require cakephp/console
+composer require UIM/console
 ```
 
 # Getting Started
@@ -115,6 +115,6 @@ class HelloCommand : BaseCommand {
 Next we can run our command with `php bin/tool.php hello Syd`. To learn more
 about the various features we"ve used in this example read the docs:
 
-* [Option Parsing](https://book.cakephp.org/4/en/console-commands/option-parsers.html)
-* [Input & Output](https://book.cakephp.org/4/en/console-commands/input-output.html)
+* [Option Parsing](https://book.UIM.org/4/en/console-commands/option-parsers.html)
+* [Input & Output](https://book.UIM.org/4/en/console-commands/input-output.html)
 
