@@ -5,7 +5,7 @@ use DateInterval;
 use Psr\SimpleCache\ICache;
 
 /**
- * Storage engine for CakePHP caching
+ * Storage engine for UIM caching
  */
 abstract class CacheEngine : ICache, ICacheEngine
 {

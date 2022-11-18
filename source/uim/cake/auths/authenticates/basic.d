@@ -25,7 +25,7 @@ import uim.caketps\ServerRequest;
  *  ]);
  * ```
  *
- * You should set `storage` to `Memory` to prevent CakePHP from sending a
+ * You should set `storage` to `Memory` to prevent UIM from sending a
  * session cookie to the client.
  *
  * You should set `unauthorizedRedirect` to `false`. This causes `AuthComponent` to
@@ -36,7 +36,7 @@ import uim.caketps\ServerRequest;
  * valid credentials are not provided, required authentication headers will be sent
  * by this authentication provider which triggers the login dialog in the browser/client.
  *
- * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
+ * @see https://book.UIM.org/4/en/controllers/components/authentication.html
  */
 class BasicAuthenticate : DAuthenticate
 {

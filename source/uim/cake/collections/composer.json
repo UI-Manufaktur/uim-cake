@@ -1,26 +1,26 @@
 {
-    "name": "cakephp/collection",
+    "name": "UIM/collection",
     "description": "Work easily with arrays and iterators by having a battery of utility traversal methods",
     "type": "library",
     "keywords": [
-        "cakephp",
+        "UIM",
         "collections",
         "iterators",
         "arrays"
     ],
-    "homepage": "https://cakephp.org",
+    "homepage": "https://UIM.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
-            "homepage": "https://github.com/cakephp/collection/graphs/contributors"
+            "name": "UIM Community",
+            "homepage": "https://github.com/UIM/collection/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/cakephp/cakephp/issues",
-        "forum": "https://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/collection"
+        "issues": "https://github.com/UIM/UIM/issues",
+        "forum": "https://stackoverflow.com/tags/UIM",
+        "irc": "irc://irc.freenode.org/UIM",
+        "source": "https://github.com/UIM/collection"
     },
     "require": {
         "php": ">=7.2.0"

@@ -1,29 +1,29 @@
 {
-    "name": "cakephp/cache",
+    "name": "UIM/cache",
     "description": "Easy to use Caching library with support for multiple caching backends",
     "type": "library",
     "keywords": [
-        "cakephp",
+        "UIM",
         "caching",
         "cache"
     ],
-    "homepage": "https://cakephp.org",
+    "homepage": "https://UIM.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
-            "homepage": "https://github.com/cakephp/cache/graphs/contributors"
+            "name": "UIM Community",
+            "homepage": "https://github.com/UIM/cache/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/cakephp/cakephp/issues",
-        "forum": "https://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/cache"
+        "issues": "https://github.com/UIM/UIM/issues",
+        "forum": "https://stackoverflow.com/tags/UIM",
+        "irc": "irc://irc.freenode.org/UIM",
+        "source": "https://github.com/UIM/cache"
     },
     "require": {
         "php": ">=7.2.0",
-        "cakephp/core": "^4.0",
+        "UIM/core": "^4.0",
         "psr/simple-cache": "^1.0.0"
     },
     "provide": {

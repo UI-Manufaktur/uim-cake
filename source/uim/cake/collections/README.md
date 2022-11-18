@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/collection.svg?style=flat-square)](https://packagist.org/packages/cakephp/collection)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/collection.svg?style=flat-square)](https://packagist.org/packages/UIM/collection)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Collection Library
+# UIM Collection Library
 
 The collection classes provide a set of tools to manipulate arrays or Traversable objects.
 If you have ever used underscore.js, you have an idea of what you can expect from the collection classes.
@@ -28,4 +28,4 @@ you have in your application as well.
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.cakephp.org/4/en/core-libraries/collections.html)
+Please make sure you check the [official documentation](https://book.UIM.org/4/en/core-libraries/collections.html)
