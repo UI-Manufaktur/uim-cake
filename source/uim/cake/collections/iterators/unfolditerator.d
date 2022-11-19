@@ -1,8 +1,8 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.unfolditerator;
 
-use IteratorIterator;
-use RecursiveIterator;
-use Traversable;
+@safe:
+import uim.cake;
+
 
 /**
  * An iterator that can be used to generate nested iterators out of a collection

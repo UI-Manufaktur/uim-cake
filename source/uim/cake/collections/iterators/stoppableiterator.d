@@ -1,9 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.stoppableiterator;
 
-use ArrayIterator;
-import uim.cake.collections\Collection;
-import uim.cake.collections\ICollection;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Creates an iterator from another iterator that will verify a condition on each
@@ -13,8 +11,7 @@ use Traversable;
  * @internal
  * @see \Cake\Collection\Collection::stopWhen()
  */
-class StoppableIterator : Collection
-{
+class StoppableIterator : Collection {
     /**
      * The condition to evaluate for each item of the collection
      *

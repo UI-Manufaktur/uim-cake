@@ -1,9 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.treeiterator;
 
-import uim.cake.collections\ICollection;
-import uim.cake.collections\CollectionTrait;
-use RecursiveIterator;
-use RecursiveIteratorIterator;
+@safe:
+import uim.cake;
 
 /**
  * A Recursive iterator used to flatten nested structures and also exposes

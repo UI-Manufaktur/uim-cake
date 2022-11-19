@@ -1,8 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.sortiterator;
 
-import uim.cake.collections\Collection;
-use IDateTime;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * An iterator that will return the passed items in order. The order is given by

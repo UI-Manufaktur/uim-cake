@@ -1,9 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.treeprinter;
 
-import uim.cake.collections\ICollection;
-import uim.cake.collections\CollectionTrait;
-use RecursiveIterator;
-use RecursiveIteratorIterator;
+@safe:
+import uim.cake;
 
 /**
  * Iterator for flattening elements in a tree structure while adding some
