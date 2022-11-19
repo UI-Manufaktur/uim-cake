@@ -1,18 +1,7 @@
+module uim.cake.caches.engines.memcached;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         2.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.caches.engines;
-
-import uim.cake.caches\CacheEngine;
-use InvalidArgumentException;
-use Memcached;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Memcached storage engine for cache. Memcached has some limitations in the amount of

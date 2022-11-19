@@ -1,9 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.buffered;
 
-import uim.cake.collections\Collection;
-use Countable;
-use Serializable;
-use SplDoublyLinkedList;
+@safe:
+import uim.cake;
 
 /**
  * Creates an iterator from another iterator that will keep the results of the inner
@@ -11,19 +9,12 @@ use SplDoublyLinkedList;
  */
 class BufferedIterator : Collection : Countable, Serializable
 {
-    /**
-     * The in-memory cache containing results from previous iterators
-     *
-     * @var \SplDoublyLinkedList
-     */
+    // The in-memory cache containing results from previous iterators
+    // @var \SplDoublyLinkedList
     protected $_buffer;
 
-    /**
-     * Points to the next record number that should be fetched
-     *
-     * @var int
-     */
-    protected $_index = 0;
+    // Points to the next record number that should be fetched
+    protected int _index = 0;
 
     /**
      * Last record fetched from the inner iterator

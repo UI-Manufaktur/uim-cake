@@ -1,4 +1,7 @@
-module uim.cake.caches;
+module uim.cake.caches_interface_;
+
+@safe:
+import uim.cake;
 
 /**
  * Interface for cache engines that defines methods

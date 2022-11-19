@@ -1,8 +1,7 @@
-module uim.cake.caches;
+module uim.cake.caches.engine;
 
-import uim.cake.core.InstanceConfigTrait;
-use DateInterval;
-use Psr\SimpleCache\ICache;
+@safe:
+import uim.cake;
 
 /**
  * Storage engine for UIM caching

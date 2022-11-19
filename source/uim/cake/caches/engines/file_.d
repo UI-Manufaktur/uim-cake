@@ -1,15 +1,7 @@
-module uim.cake.caches.engines;
+module uim.cake.caches.engines.file_;
 
-import uim.cake.caches\CacheEngine;
-import uim.cake.caches\InvalidArgumentException;
-use CallbackFilterIterator;
-use Exception;
-use FilesystemIterator;
-use LogicException;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
-use SplFileObject;
+@safe:
+import uim.cake;
 
 /**
  * File Storage engine for cache. Filestorage is the slowest cache storage
