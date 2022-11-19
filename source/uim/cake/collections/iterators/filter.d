@@ -1,11 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.filter;
 
-use ArrayIterator;
-import uim.cake.collections\Collection;
-import uim.cake.collections\ICollection;
-use CallbackFilterIterator;
-use Iterator;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Creates a filtered iterator from another iterator. The filtering is done by

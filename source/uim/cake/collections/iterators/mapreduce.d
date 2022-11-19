@@ -1,17 +1,7 @@
+module uim.cake.collectionss.iterators.mapreduce;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.collectionss.iterators;
-
-use ArrayIterator;
-use IteratorAggregate;
-use LogicException;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * : a simplistic version of the popular Map-Reduce algorithm. Acts
@@ -19,8 +9,7 @@ use Traversable;
  * processed, thus offering a transparent wrapper for results coming from any
  * source.
  */
-class MapReduce : IteratorAggregate
-{
+class MapReduce : IteratorAggregate {
     /**
      * Holds the shuffled results that were emitted from the map
      * phase

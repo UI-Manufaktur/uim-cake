@@ -1,6 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collections.iterators.insert;
 
-import uim.cake.collections\Collection;
+@safe:
+import uim.cake;
 
 /**
  * This iterator will insert values into a property of each of the records returned.

@@ -1,7 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.nochildreniterator;
 
-import uim.cake.collections\Collection;
-use RecursiveIterator;
+@safe:
+import uim.cake;
 
 /**
  * An iterator that can be used as an argument for other iterators that require
