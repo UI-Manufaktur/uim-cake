@@ -1,7 +1,8 @@
-module uim.cake.caches;
+module uim.cake.caches.invalidargumentexception;
 
-import uim.cake.core.exceptions\CakeException;
-use Psr\SimpleCache\InvalidArgumentException as InvalidArgumentInterface;
+@safe:
+import uim.cake;
+
 
 // Exception raised when cache keys are invalid.
 class InvalidArgumentException : CakeException : InvalidArgumentInterface

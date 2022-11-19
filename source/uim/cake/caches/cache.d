@@ -1,8 +1,7 @@
-module uim.cake.caches;
+module uim.cake.caches.cache;
 
-import uim.cake.caches.engines\NullEngine;
-import uim.cake.core.StaticConfigTrait;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Cache provides a consistent interface to Caching in your application. It allows you
