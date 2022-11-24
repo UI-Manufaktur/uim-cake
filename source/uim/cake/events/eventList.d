@@ -1,19 +1,14 @@
 module uim.cake.events;
 
-use ArrayAccess;
-use Countable;
+@safe:
+import uim.cake;
 
-/**
- * The Event List
+// The Event List
  */
 class EventList : ArrayAccess, Countable
 {
-    /**
-     * Events list
-     *
-     * @var array<\Cake\Event\IEvent>
-     */
-    protected $_events = [];
+    // Events list
+    protected IEvent[] _events;
 
     /**
      * Empties the list of dispatched events.
