@@ -22,12 +22,12 @@ class SqlserverCompiler : QueryCompiler
      * @inheritDoc
      */
     protected $_templates = [
-        "delete" => "DELETE",
-        "where" => " WHERE %s",
-        "group" => " GROUP BY %s",
-        "order" => " %s",
-        "offset" => " OFFSET %s ROWS",
-        "epilog" => " %s",
+        "delete":"DELETE",
+        "where":" WHERE %s",
+        "group":" GROUP BY %s",
+        "order":" %s",
+        "offset":" OFFSET %s ROWS",
+        "epilog":" %s",
     ];
 
     /**

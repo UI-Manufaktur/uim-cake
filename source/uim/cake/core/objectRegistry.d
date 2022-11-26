@@ -47,8 +47,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * ```
      * protected $components = [
-     *   "Email" => [
-     *     "className" => "App\Controller\Component\AliasedEmailComponent"
+     *   "Email":[
+     *     "className":"App\Controller\Component\AliasedEmailComponent"
      *   ];
      * ];
      * ```
@@ -275,9 +275,9 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
             }
             [, myName] = pluginSplit($objectName);
             if (isset(myConfig["class"])) {
-                $normal[myName] = myConfig + ["config" => []];
+                $normal[myName] = myConfig + ["config":[]];
             } else {
-                $normal[myName] = ["class" => $objectName, "config" => myConfig];
+                $normal[myName] = ["class":$objectName, "config":myConfig];
             }
         }
 

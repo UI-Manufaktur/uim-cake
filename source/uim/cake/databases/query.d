@@ -59,26 +59,26 @@ class Query : IExpression, IteratorAggregate
      * @var array<string, mixed>
      */
     protected $_parts = [
-        "delete" => true,
-        "update" => [],
-        "set" => [],
-        "insert" => [],
-        "values" => [],
-        "with" => [],
-        "select" => [],
-        "distinct" => false,
-        "modifier" => [],
-        "from" => [],
-        "join" => [],
-        "where" => null,
-        "group" => [],
-        "having" => null,
-        "window" => [],
-        "order" => null,
-        "limit" => null,
-        "offset" => null,
-        "union" => [],
-        "epilog" => null,
+        "delete":true,
+        "update":[],
+        "set":[],
+        "insert":[],
+        "values":[],
+        "with":[],
+        "select":[],
+        "distinct":false,
+        "modifier":[],
+        "from":[],
+        "join":[],
+        "where":null,
+        "group":[],
+        "having":null,
+        "window":[],
+        "order":null,
+        "limit":null,
+        "offset":null,
+        "union":[],
+        "epilog":null,
     ];
 
     /**
@@ -432,11 +432,11 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery.select(["id", "title"]); // Produces SELECT id, title
-     * myQuery.select(["author" => "author_id"]); // Appends author: SELECT id, title, author_id as author
+     * myQuery.select(["author":"author_id"]); // Appends author: SELECT id, title, author_id as author
      * myQuery.select("id", true); // Resets the list: SELECT id
-     * myQuery.select(["total" => myCountQuery]); // SELECT id, (SELECT ...) AS total
+     * myQuery.select(["total":myCountQuery]); // SELECT id, (SELECT ...) AS total
      * myQuery.select(function (myQuery) {
-     *     return ["article_id", "total" => myQuery.count("*")];
+     *     return ["article_id", "total":myQuery.count("*")];
      * })
      * ```
      *
@@ -570,10 +570,10 @@ class Query : IExpression, IteratorAggregate
      * ### Examples:
      *
      * ```
-     * myQuery.from(["p" => "posts"]); // Produces FROM posts p
+     * myQuery.from(["p":"posts"]); // Produces FROM posts p
      * myQuery.from("authors"); // Appends authors: FROM posts p, authors
      * myQuery.from(["products"], true); // Resets the list: FROM products
-     * myQuery.from(["sub" => myCountQuery]); // FROM (SELECT ...) sub
+     * myQuery.from(["sub":myCountQuery]); // FROM (SELECT ...) sub
      * ```
      *
      * @param array|string myTables tables to be added to the list. This argument, can be
@@ -608,16 +608,16 @@ class Query : IExpression, IteratorAggregate
      * `myQuery.join(["authors"])` will produce `INNER JOIN authors ON 1 = 1`
      *
      * It is also possible to alias joins using the array key:
-     * `myQuery.join(["a" => "authors"])` will produce `INNER JOIN authors a ON 1 = 1`
+     * `myQuery.join(["a":"authors"])` will produce `INNER JOIN authors a ON 1 = 1`
      *
      * A join can be fully described and aliased using the array notation:
      *
      * ```
      * myQuery.join([
-     *     "a" => [
-     *         "table" => "authors",
-     *         "type" => "LEFT",
-     *         "conditions" => "a.id = b.author_id"
+     *     "a":[
+     *         "table":"authors",
+     *         "type":"LEFT",
+     *         "conditions":"a.id = b.author_id"
      *     ]
      * ]);
      * // Produces LEFT JOIN authors a ON a.id = b.author_id
@@ -627,15 +627,15 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery.join([
-     *     "a" => [
-     *         "table" => "authors",
-     *         "type" => "LEFT",
-     *         "conditions" => "a.id = b.author_id"
+     *     "a":[
+     *         "table":"authors",
+     *         "type":"LEFT",
+     *         "conditions":"a.id = b.author_id"
      *     ],
-     *     "p" => [
-     *         "table" => "publishers",
-     *         "type" => "INNER",
-     *         "conditions" => "p.id = b.publisher_id AND p.name = "Cake Software Foundation""
+     *     "p":[
+     *         "table":"publishers",
+     *         "type":"INNER",
+     *         "conditions":"p.id = b.publisher_id AND p.name = "Cake Software Foundation""
      *     ]
      * ]);
      * // LEFT JOIN authors a ON a.id = b.author_id
@@ -653,14 +653,14 @@ class Query : IExpression, IteratorAggregate
      * using the second parameter of this function.
      *
      * ```
-     * myQuery.join(["a" => [
-     *     "table" => "articles",
-     *     "conditions" => [
-     *         "a.posted >=" => new DateTime("-3 days"),
-     *         "a.published" => true,
+     * myQuery.join(["a":[
+     *     "table":"articles",
+     *     "conditions":[
+     *         "a.posted >=":new DateTime("-3 days"),
+     *         "a.published":true,
      *         "a.author_id = authors.id"
      *     ]
-     * ]], ["a.posted" => "datetime", "a.published" => "boolean"])
+     * ]], ["a.posted":"datetime", "a.published":"boolean"])
      * ```
      *
      * ### Overwriting joins
@@ -671,9 +671,9 @@ class Query : IExpression, IteratorAggregate
      * with another list if the third parameter for this function is set to true.
      *
      * ```
-     * myQuery.join(["alias" => "table"]); // joins table with as alias
-     * myQuery.join(["alias" => "another_table"]); // joins another_table with as alias
-     * myQuery.join(["something" => "different_table"], [], true); // resets joins list
+     * myQuery.join(["alias":"table"]); // joins table with as alias
+     * myQuery.join(["alias":"another_table"]); // joins another_table with as alias
+     * myQuery.join(["something":"different_table"], [], true); // resets joins list
      * ```
      *
      * @param array<string, mixed>|string myTables list of tables to be joined in the query
@@ -691,7 +691,7 @@ class Query : IExpression, IteratorAggregate
         $i = count(this._parts["join"]);
         foreach (myTables as myAlias => $t) {
             if (!is_array($t)) {
-                $t = ["table" => $t, "conditions" => this.newExpr()];
+                $t = ["table":$t, "conditions":this.newExpr()];
             }
 
             if (!is_string($t["conditions"]) && is_callable($t["conditions"])) {
@@ -702,7 +702,7 @@ class Query : IExpression, IteratorAggregate
                 $t["conditions"] = this.newExpr().add($t["conditions"], myTypes);
             }
             myAlias = is_string(myAlias) ? myAlias : null;
-            $joins[myAlias ?: $i++] = $t + ["type" => static::JOIN_TYPE_INNER, "alias" => myAlias];
+            $joins[myAlias ?: $i++] = $t + ["type":static::JOIN_TYPE_INNER, "alias":myAlias];
         }
 
         if ($overwrite) {
@@ -745,7 +745,7 @@ class Query : IExpression, IteratorAggregate
      * myQuery.leftJoin("authors", "authors.id = posts.author_id");
      *
      * // LEFT JOIN authors a ON a.id = posts.author_id
-     * myQuery.leftJoin(["a" => "authors"], "a.id = posts.author_id");
+     * myQuery.leftJoin(["a":"authors"], "a.id = posts.author_id");
      * ```
      *
      * Conditions can be passed as strings, arrays, or expression objects. When
@@ -753,11 +753,11 @@ class Query : IExpression, IteratorAggregate
      * in order to define how to convert the values:
      *
      * ```
-     * myQuery.leftJoin(["a" => "articles"], [
-     *      "a.posted >=" => new DateTime("-3 days"),
-     *      "a.published" => true,
+     * myQuery.leftJoin(["a":"articles"], [
+     *      "a.posted >=":new DateTime("-3 days"),
+     *      "a.published":true,
      *      "a.author_id = authors.id"
-     * ], ["a.posted" => "datetime", "a.published" => "boolean"]);
+     * ], ["a.posted":"datetime", "a.published":"boolean"]);
      * ```
      *
      * See `join()` for further details on conditions and types.
@@ -842,9 +842,9 @@ class Query : IExpression, IteratorAggregate
          */
         return [
             myAlias => [
-                "table" => myTable,
-                "conditions" => $conditions,
-                "type" => myType,
+                "table":myTable,
+                "conditions":$conditions,
+                "type":myType,
             ],
         ];
     }
@@ -868,10 +868,10 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery.where([
-     *     "posted >=" => new DateTime("3 days ago"),
-     *     "title LIKE" => "Hello W%",
-     *     "author_id" => 1,
-     * ], ["posted" => "datetime"]);
+     *     "posted >=":new DateTime("3 days ago"),
+     *     "title LIKE":"Hello W%",
+     *     "author_id":1,
+     * ], ["posted":"datetime"]);
      * ```
      *
      * The previous example produces:
@@ -885,10 +885,10 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery.where([
-     *     "author_id !=" => 1,
-     *     "OR" => ["published" => true, "posted <" => new DateTime("now")],
-     *     "NOT" => ["title" => "Hello"]
-     * ], ["published" => boolean, "posted" => "datetime"]
+     *     "author_id !=":1,
+     *     "OR":["published":true, "posted <":new DateTime("now")],
+     *     "NOT":["title":"Hello"]
+     * ], ["published":boolean, "posted":"datetime"]
      * ```
      *
      * The previous example produces:
@@ -899,7 +899,7 @@ class Query : IExpression, IteratorAggregate
      * may want to define 2 different options for the same key, in that case, you can
      * wrap each condition inside a new array:
      *
-     * `myQuery.where(["OR" => [["published" => false], ["published" => true]])`
+     * `myQuery.where(["OR":[["published":false], ["published":true]])`
      *
      * Would result in:
      *
@@ -913,8 +913,8 @@ class Query : IExpression, IteratorAggregate
      * ### Using expressions objects:
      *
      * ```
-     * $exp = myQuery.newExpr().add(["id !=" => 100, "author_id" != 1]).tieWith("OR");
-     * myQuery.where(["published" => true], ["published" => "boolean"]).where($exp);
+     * $exp = myQuery.newExpr().add(["id !=":100, "author_id" != 1]).tieWith("OR");
+     * myQuery.where(["published":true], ["published":"boolean"]).where($exp);
      * ```
      *
      * The previous example produces:
@@ -932,10 +932,10 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery
-     *   .where(["title !=" => "Hello World"])
+     *   .where(["title !=":"Hello World"])
      *   .where(function ($exp, myQuery) {
-     *     $or = $exp.or(["id" => 1]);
-     *     $and = $exp.and(["id >" => 2, "id <" => 10]);
+     *     $or = $exp.or(["id":1]);
+     *     $and = $exp.and(["id >":2, "id <":10]);
      *    return $or.add($and);
      *   });
      * ```
@@ -1040,15 +1040,15 @@ class Query : IExpression, IteratorAggregate
      */
     function whereInList(string myField, array myValues, array myOptions = []) {
         myOptions += [
-            "types" => [],
-            "allowEmpty" => false,
+            "types":[],
+            "allowEmpty":false,
         ];
 
         if (myOptions["allowEmpty"] && !myValues) {
             return this.where("1=0");
         }
 
-        return this.where([myField . " IN" => myValues], myOptions["types"]);
+        return this.where([myField . " IN":myValues], myOptions["types"]);
     }
 
     /**
@@ -1066,15 +1066,15 @@ class Query : IExpression, IteratorAggregate
      */
     function whereNotInList(string myField, array myValues, array myOptions = []) {
         myOptions += [
-            "types" => [],
-            "allowEmpty" => false,
+            "types":[],
+            "allowEmpty":false,
         ];
 
         if (myOptions["allowEmpty"] && !myValues) {
-            return this.where([myField . " IS NOT" => null]);
+            return this.where([myField . " IS NOT":null]);
         }
 
-        return this.where([myField . " NOT IN" => myValues], myOptions["types"]);
+        return this.where([myField . " NOT IN":myValues], myOptions["types"]);
     }
 
     /**
@@ -1093,17 +1093,17 @@ class Query : IExpression, IteratorAggregate
      */
     function whereNotInListOrNull(string myField, array myValues, array myOptions = []) {
         myOptions += [
-            "types" => [],
-            "allowEmpty" => false,
+            "types":[],
+            "allowEmpty":false,
         ];
 
         if (myOptions["allowEmpty"] && !myValues) {
-            return this.where([myField . " IS NOT" => null]);
+            return this.where([myField . " IS NOT":null]);
         }
 
         return this.where(
             [
-                "OR" => [myField . " NOT IN" => myValues, myField . " IS" => null],
+                "OR":[myField . " NOT IN":myValues, myField . " IS":null],
             ],
             myOptions["types"]
         );
@@ -1128,7 +1128,7 @@ class Query : IExpression, IteratorAggregate
      * ### Examples:
      *
      * ```
-     * myQuery.where(["title" => "Hello World").andWhere(["author_id" => 1]);
+     * myQuery.where(["title":"Hello World").andWhere(["author_id":1]);
      * ```
      *
      * Will produce:
@@ -1137,8 +1137,8 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery
-     *   .where(["OR" => ["published" => false, "published is NULL"]])
-     *   .andWhere(["author_id" => 1, "comments_count >" => 10])
+     *   .where(["OR":["published":false, "published is NULL"]])
+     *   .andWhere(["author_id":1, "comments_count >":10])
      * ```
      *
      * Produces:
@@ -1147,11 +1147,11 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery
-     *   .where(["title" => "Foo"])
+     *   .where(["title":"Foo"])
      *   .andWhere(function ($exp, myQuery) {
      *     return $exp
-     *       .or(["author_id" => 1])
-     *       .add(["author_id" => 2]);
+     *       .or(["author_id":1])
+     *       .add(["author_id":2]);
      *   });
      * ```
      *
@@ -1187,7 +1187,7 @@ class Query : IExpression, IteratorAggregate
      * ### Examples:
      *
      * ```
-     * myQuery.order(["title" => "DESC", "author_id" => "ASC"]);
+     * myQuery.order(["title":"DESC", "author_id":"ASC"]);
      * ```
      *
      * Produces:
@@ -1196,7 +1196,7 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery
-     *     .order(["title" => myQuery.newExpr("DESC NULLS FIRST")])
+     *     .order(["title":myQuery.newExpr("DESC NULLS FIRST")])
      *     .order("author_id");
      * ```
      *
@@ -1206,14 +1206,14 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * $expression = myQuery.newExpr().add(["id % 2 = 0"]);
-     * myQuery.order($expression).order(["title" => "ASC"]);
+     * myQuery.order($expression).order(["title":"ASC"]);
      * ```
      *
      * and
      *
      * ```
      * myQuery.order(function ($exp, myQuery) {
-     *     return [$exp.add(["id % 2 = 0"]), "title" => "ASC"];
+     *     return [$exp.add(["id % 2 = 0"]), "title":"ASC"];
      * });
      * ```
      *
@@ -1421,7 +1421,7 @@ class Query : IExpression, IteratorAggregate
             }
         }
 
-        this._parts["window"][] = ["name" => new IdentifierExpression(myName), "window" => $window];
+        this._parts["window"][] = ["name":new IdentifierExpression(myName), "window":$window];
         this._dirty();
 
         return this;
@@ -1523,8 +1523,8 @@ class Query : IExpression, IteratorAggregate
      * ### Examples
      *
      * ```
-     * $union = (new Query($conn)).select(["id", "title"]).from(["a" => "articles"]);
-     * myQuery.select(["id", "name"]).from(["d" => "things"]).union($union);
+     * $union = (new Query($conn)).select(["id", "title"]).from(["a":"articles"]);
+     * myQuery.select(["id", "name"]).from(["d":"things"]).union($union);
      * ```
      *
      * Will produce:
@@ -1540,8 +1540,8 @@ class Query : IExpression, IteratorAggregate
             this._parts["union"] = [];
         }
         this._parts["union"][] = [
-            "all" => false,
-            "query" => myQuery,
+            "all":false,
+            "query":myQuery,
         ];
         this._dirty();
 
@@ -1557,8 +1557,8 @@ class Query : IExpression, IteratorAggregate
      * Unlike UNION, UNION ALL will not remove duplicate rows.
      *
      * ```
-     * $union = (new Query($conn)).select(["id", "title"]).from(["a" => "articles"]);
-     * myQuery.select(["id", "name"]).from(["d" => "things"]).unionAll($union);
+     * $union = (new Query($conn)).select(["id", "title"]).from(["a":"articles"]);
+     * myQuery.select(["id", "name"]).from(["d":"things"]).unionAll($union);
      * ```
      *
      * Will produce:
@@ -1574,8 +1574,8 @@ class Query : IExpression, IteratorAggregate
             this._parts["union"] = [];
         }
         this._parts["union"][] = [
-            "all" => true,
-            "query" => myQuery,
+            "all":true,
+            "query":myQuery,
         ];
         this._dirty();
 
@@ -1716,7 +1716,7 @@ class Query : IExpression, IteratorAggregate
      * Passing an array:
      *
      * ```
-     * myQuery.update("articles").set(["title" => "The Title"], ["title" => "string"]);
+     * myQuery.update("articles").set(["title":"The Title"], ["title":"string"]);
      * ```
      *
      * Passing a callable:
@@ -1787,10 +1787,10 @@ class Query : IExpression, IteratorAggregate
      *
      * ### Examples:
      * ```
-     * myQuery.select("id").where(["author_id" => 1]).epilog("FOR UPDATE");
+     * myQuery.select("id").where(["author_id":1]).epilog("FOR UPDATE");
      * myQuery
      *  .insert("articles", ["title"])
-     *  .values(["author_id" => 1])
+     *  .values(["author_id":1])
      *  .epilog("RETURNING id");
      * ```
      *
@@ -2334,12 +2334,12 @@ class Query : IExpression, IteratorAggregate
         }
 
         return [
-            "(help)" => "This is a Query object, to get the results execute or iterate it.",
-            "sql" => mySql,
-            "params" => myParams,
-            "defaultTypes" => this.getDefaultTypes(),
-            "decorators" => count(this._resultDecorators),
-            "executed" => this._iterator ? true : false,
+            "(help)":"This is a Query object, to get the results execute or iterate it.",
+            "sql":mySql,
+            "params":myParams,
+            "defaultTypes":this.getDefaultTypes(),
+            "decorators":count(this._resultDecorators),
+            "executed":this._iterator ? true : false,
         ];
     }
 }

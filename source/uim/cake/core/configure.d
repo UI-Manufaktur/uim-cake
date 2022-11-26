@@ -24,7 +24,7 @@ class Configure
      * @var array
      */
     protected static $_values = [
-        "debug" => false,
+        "debug":false,
     ];
 
     /**
@@ -48,15 +48,15 @@ class Configure
      * Usage:
      * ```
      * Configure.write("One.key1", "value of the Configure::One[key1]");
-     * Configure.write(["One.key1" => "value of the Configure::One[key1]"]);
+     * Configure.write(["One.key1":"value of the Configure::One[key1]"]);
      * Configure.write("One", [
-     *     "key1" => "value of the Configure::One[key1]",
-     *     "key2" => "value of the Configure::One[key2]"
+     *     "key1":"value of the Configure::One[key1]",
+     *     "key2":"value of the Configure::One[key2]"
      * ]);
      *
      * Configure.write([
-     *     "One.key1" => "value of the Configure::One[key1]",
-     *     "One.key2" => "value of the Configure::One[key2]"
+     *     "One.key1":"value of the Configure::One[key1]",
+     *     "One.key2":"value of the Configure::One[key2]"
      * ]);
      * ```
      *

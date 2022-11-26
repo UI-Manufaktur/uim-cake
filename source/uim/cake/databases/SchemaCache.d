@@ -46,7 +46,7 @@ class SchemaCache
 
         foreach (myTables as myTable) {
             /** @psalm-suppress PossiblyNullArgument */
-            this._schema.describe(myTable, ["forceRefresh" => true]);
+            this._schema.describe(myTable, ["forceRefresh":true]);
         }
 
         return myTables;

@@ -79,7 +79,7 @@ class PluginCollection : Iterator, Countable
         if (!is_file($vendorFile)) {
             $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . "cakephp-plugins.php";
             if (!is_file($vendorFile)) {
-                Configure.write(["plugins" => []]);
+                Configure.write(["plugins":[]]);
 
                 return;
             }
@@ -119,7 +119,7 @@ class PluginCollection : Iterator, Countable
             }
         }
 
-        throw new MissingPluginException(["plugin" => myName]);
+        throw new MissingPluginException(["plugin":myName]);
     }
 
     /**
@@ -206,7 +206,7 @@ class PluginCollection : Iterator, Countable
             return new myName(myConfig);
         }
 
-        myConfig += ["name" => myName];
+        myConfig += ["name":myName];
         /** @var class-string<\Cake\Core\PluginInterface> myClassName */
         myClassName = str_replace("/", "\\", myName) . "\\" . "Plugin";
         if (!class_exists(myClassName)) {

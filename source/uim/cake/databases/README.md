@@ -37,12 +37,12 @@ import uim.cake.databases.Connection;
 import uim.cake.databases.Driver\Mysql;
 
 myDriver = new Mysql([
-	"database" => "test",
-	"username" => "root",
-	"password" => "secret"
+	"database":"test",
+	"username":"root",
+	"password":"secret"
 ]);
 myConnection = new Connection([
-	"driver" => myDriver
+	"driver":myDriver
 ]);
 ```
 
@@ -55,8 +55,8 @@ directly in the options array:
 import uim.cake.databases.Connection;
 
 myConnection = new Connection([
-	"driver" => Cake\Database\Driver\Sqlite::class,
-	"database" => "/path/to/file.db"
+	"driver":Cake\Database\Driver\Sqlite::class,
+	"database":"/path/to/file.db"
 ]);
 ```
 
@@ -91,7 +91,7 @@ while($row = $statement.fetch("assoc")) {
 Binding values to parametrized arguments is also possible with the execute function:
 
 ```php
-$statement = myConnection.execute("SELECT * FROM articles WHERE id = :id", ["id" => 1], ["id" => "integer"]);
+$statement = myConnection.execute("SELECT * FROM articles WHERE id = :id", ["id":1], ["id":"integer"]);
 myResults = $statement.fetch("assoc");
 ```
 
@@ -102,7 +102,7 @@ Alternatively you can construct a statement manually and then fetch rows from it
 
 ```php
 $statement = myConnection.prepare("SELECT * from articles WHERE id != :id");
-$statement.bind(["id" => 1], ["id" => "integer"]);
+$statement.bind(["id":1], ["id":"integer"]);
 myResults = $statement.fetchAll("assoc");
 ```
 
@@ -126,10 +126,10 @@ Statements can be reused by binding new values to the parameters in the query:
 
 ```php
 $statement = myConnection.prepare("SELECT * from articles WHERE id = :id");
-$statement.bind(["id" => 1], ["id" => "integer"]);
+$statement.bind(["id":1], ["id":"integer"]);
 myResults = $statement.fetchAll("assoc");
 
-$statement.bind(["id" => 1], ["id" => "integer"]);
+$statement.bind(["id":1], ["id":"integer"]);
 myResults = $statement.fetchAll("assoc");
 ```
 
@@ -139,7 +139,7 @@ Updating can be done using the `update()` function in the connection object. In 
 example we will update the title of the article with id = 1:
 
 ```php
-myConnection.update("articles", ["title" => "New title"], ["id" => 1]);
+myConnection.update("articles", ["title":"New title"], ["id":1]);
 ```
 
 The concept of data types is central to this library, so you can use the last parameter of the function
@@ -148,9 +148,9 @@ to specify what types should be used:
 ```php
 myConnection.update(
 	"articles",
-	["title" => "New title"],
-	["created >=" => new DateTime("-3 day"), "created <" => new DateTime("now")],
-	["created" => "datetime"]
+	["title":"New title"],
+	["created >=":new DateTime("-3 day"), "created <":new DateTime("now")],
+	["created":"datetime"]
 );
 ```
 
@@ -167,7 +167,7 @@ More on creating complex where conditions or more complex update queries later.
 Similarly, the `delete()` method is used to delete rows from the database:
 
 ```php
-myConnection.delete("articles", ["created <" => DateTime("now")], ["created" => "date"]);
+myConnection.delete("articles", ["created <":DateTime("now")], ["created":"date"]);
 ```
 
 Will generate the following SQL
@@ -183,8 +183,8 @@ Rows can be inserted using the `insert()` method:
 ```php
 myConnection.insert(
 	"articles",
-	["title" => "My Title", "body" => "Some paragraph", "created" => new DateTime()],
-	["created" => "datetime"]
+	["title":"My Title", "body":"Some paragraph", "created":new DateTime()],
+	["created":"datetime"]
 );
 ```
 
@@ -207,7 +207,7 @@ Adding fields to the `SELECT` clause:
 myQuery.select(["id", "title", "body"]);
 
 // Results in SELECT id AS pk, title AS aliased_title, body ...
-myQuery.select(["pk" => "id", "aliased_title" => "title", "body"]);
+myQuery.select(["pk":"id", "aliased_title":"title", "body"]);
 
 // Use a closure
 myQuery.select(function (myQuery) {
@@ -221,26 +221,26 @@ Generating conditions:
 
 ```php
 // WHERE id = 1
-myQuery.where(["id" => 1]);
+myQuery.where(["id":1]);
 
 // WHERE id > 2
-myQuery.where(["id >" => 1]);
+myQuery.where(["id >":1]);
 ```
 
 As you can see you can use any operator by placing it with a space after the field name.
 Adding multiple conditions is easy as well:
 
 ```php
-myQuery.where(["id >" => 1]).andWhere(["title" => "My Title"]);
+myQuery.where(["id >":1]).andWhere(["title":"My Title"]);
 
 // Equivalent to
-myQuery.where(["id >" => 1, "title" => "My title"]);
+myQuery.where(["id >":1, "title":"My title"]);
 ```
 
 It is possible to generate `OR` conditions as well
 
 ```php
-myQuery.where(["OR" => ["id >" => 1, "title" => "My title"]]);
+myQuery.where(["OR":["id >":1, "title":"My title"]]);
 ```
 
 For even more complex conditions you can use closures and expression objects:
@@ -270,7 +270,7 @@ Combining expressions is also possible:
 
 ```php
 myQuery.where(function ($exp) {
-        $orConditions = $exp.or(["author_id" => 2])
+        $orConditions = $exp.or(["author_id":2])
             .eq("author_id", 5);
         return $exp
             .not($orConditions)
@@ -307,7 +307,7 @@ When using the expression objects you can use the following methods to create co
 
 ```php
 // Results in SELECT COUNT(*) count FROM ...
-myQuery.select(["count" => myQuery.func().count("*")]);
+myQuery.select(["count":myQuery.func().count("*")]);
 ```
 
 A number of commonly used functions can be created with the func() method:
@@ -328,10 +328,10 @@ For example:
 
 ```php
 $concat = myQuery.func().concat([
-    "title" => "literal",
+    "title":"literal",
     " NEW"
 ]);
-myQuery.select(["title" => $concat]);
+myQuery.select(["title":$concat]);
 ```
 
 The above generates:

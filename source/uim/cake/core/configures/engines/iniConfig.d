@@ -14,7 +14,7 @@ import uim.cakeilities.Hash;
  * to create nested array structures through usage of `.` delimited names. This allows
  * you to create nested arrays structures in an ini config file. For example:
  *
- * `db.password = secret` would turn into `["db" => ["password" => "secret"]]`
+ * `db.password = secret` would turn into `["db":["password":"secret"]]`
  *
  * You can nest properties as deeply as needed using `.`"s. In addition to using `.` you
  * can use standard ini section notation to create nested structures:

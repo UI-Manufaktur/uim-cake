@@ -45,7 +45,7 @@ trait InstanceConfigTrait
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.setConfig(["one" => "value", "another" => "value"]);
+     * this.setConfig(["one":"value", "another":"value"]);
      * ```
      *
      * @param array<string, mixed>|string myKey The key to set, or a complete array of configs.
@@ -146,7 +146,7 @@ trait InstanceConfigTrait
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.configShallow(["one" => "value", "another" => "value"]);
+     * this.configShallow(["one":"value", "another":"value"]);
      * ```
      *
      * @param array<string, mixed>|string myKey The key to set, or a complete array of configs.

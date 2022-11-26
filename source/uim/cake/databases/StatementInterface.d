@@ -109,7 +109,7 @@ interface IStatement
      * ```
      *  $statement = myConnection.prepare("SELECT id, title from articles");
      *  $statement.execute();
-     *  print_r($statement.fetch("assoc")); // will show ["id" => 1, "title" => "a title"]
+     *  print_r($statement.fetch("assoc")); // will show ["id":1, "title":"a title"]
      * ```
      *
      * @param string|int myType "num" for positional columns, assoc for named columns, or PDO fetch mode constants.
@@ -126,7 +126,7 @@ interface IStatement
      * ```
      *  $statement = myConnection.prepare("SELECT id, title from articles");
      *  $statement.execute();
-     *  print_r($statement.fetchAll("assoc")); // will show [0 => ["id" => 1, "title" => "a title"]]
+     *  print_r($statement.fetchAll("assoc")); // will show [0 => ["id":1, "title":"a title"]]
      * ```
      *
      * @param string|int myType num for fetching columns as positional keys or assoc for column names as keys

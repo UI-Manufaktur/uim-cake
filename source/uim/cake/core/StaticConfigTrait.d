@@ -75,7 +75,7 @@ trait StaticConfigTrait
         }
 
         if (is_object(myConfig)) {
-            myConfig = ["className" => myConfig];
+            myConfig = ["className":myConfig];
         }
 
         if (isset(myConfig["url"])) {

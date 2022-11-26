@@ -235,7 +235,7 @@ if (!function_exists("triggerWarning")) {
         $trace = debug_backtrace();
         if (isset($trace[$stackFrame])) {
             $frame = $trace[$stackFrame];
-            $frame += ["file" => "[internal]", "line" => "??"];
+            $frame += ["file":"[internal]", "line":"??"];
             myMessage = sprintf(
                 "%s - %s, line: %s",
                 myMessage,
@@ -263,7 +263,7 @@ if (!function_exists("deprecationWarning")) {
         $trace = debug_backtrace();
         if (isset($trace[$stackFrame])) {
             $frame = $trace[$stackFrame];
-            $frame += ["file" => "[internal]", "line" => "??"];
+            $frame += ["file":"[internal]", "line":"??"];
 
             $relative = str_replace(DIRECTORY_SEPARATOR, "/", substr($frame["file"], strlen(ROOT) + 1));
             $patterns = (array)Configure::read("Error.ignoredDeprecationPaths");

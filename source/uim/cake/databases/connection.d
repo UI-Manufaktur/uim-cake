@@ -170,12 +170,12 @@ class Connection : ConnectionInterface
             /** @psalm-var class-string<\Cake\Database\IDriver>|null myClassName */
             myClassName = App::className(myDriver, "Database/Driver");
             if (myClassName === null) {
-                throw new MissingDriverException(["driver" => myDriver]);
+                throw new MissingDriverException(["driver":myDriver]);
             }
             myDriver = new myClassName(myConfig);
         }
         if (!myDriver.enabled()) {
-            throw new MissingExtensionException(["driver" => get_class(myDriver)]);
+            throw new MissingExtensionException(["driver":get_class(myDriver)]);
         }
 
         this._driver = myDriver;
@@ -218,8 +218,8 @@ class Connection : ConnectionInterface
         } catch (Throwable $e) {
             throw new MissingConnectionException(
                 [
-                    "driver" => App::shortName(get_class(this._driver), "Database/Driver"),
-                    "reason" => $e.getMessage(),
+                    "driver":App::shortName(get_class(this._driver), "Database/Driver"),
+                    "reason":$e.getMessage(),
                 ],
                 null,
                 $e
@@ -838,7 +838,7 @@ class Connection : ConnectionInterface
             );
         }
 
-        return this._logger = new QueryLogger(["connection" => this.configName()]);
+        return this._logger = new QueryLogger(["connection":this.configName()]);
     }
 
     /**
@@ -849,7 +849,7 @@ class Connection : ConnectionInterface
     void log(string mySql) {
         myQuery = new LoggedQuery();
         myQuery.query = mySql;
-        this.getLogger().debug((string)myQuery, ["query" => myQuery]);
+        this.getLogger().debug((string)myQuery, ["query":myQuery]);
     }
 
     /**
@@ -876,23 +876,23 @@ class Connection : ConnectionInterface
     auto __debugInfo(): array
     {
         $secrets = [
-            "password" => "*****",
-            "username" => "*****",
-            "host" => "*****",
-            "database" => "*****",
-            "port" => "*****",
+            "password":"*****",
+            "username":"*****",
+            "host":"*****",
+            "database":"*****",
+            "port":"*****",
         ];
         $replace = array_intersect_key($secrets, this._config);
         myConfig = $replace + this._config;
 
         return [
-            "config" => myConfig,
-            "driver" => this._driver,
-            "transactionLevel" => this._transactionLevel,
-            "transactionStarted" => this._transactionStarted,
-            "useSavePoints" => this._useSavePoints,
-            "logQueries" => this._logQueries,
-            "logger" => this._logger,
+            "config":myConfig,
+            "driver":this._driver,
+            "transactionLevel":this._transactionLevel,
+            "transactionStarted":this._transactionStarted,
+            "useSavePoints":this._useSavePoints,
+            "logQueries":this._logQueries,
+            "logger":this._logger,
         ];
     }
 }

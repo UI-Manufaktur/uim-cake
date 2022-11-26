@@ -16,12 +16,12 @@ import uim.cake.core.exceptions\CakeException;
  * ```
  * <?php
  * return [
- *     "debug" => false,
- *     "Security" => [
- *         "salt" => "its-secret"
+ *     "debug":false,
+ *     "Security":[
+ *         "salt":"its-secret"
  *     ],
- *     "App" => [
- *         "module" => "App"
+ *     "App":[
+ *         "module":"App"
  *     ]
  * ];
  * ```

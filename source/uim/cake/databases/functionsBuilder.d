@@ -317,9 +317,9 @@ class FunctionsBuilder
      * @param string myName The SQL aggregate function name
      * @param array myParams Array of arguments to be passed to the function.
      *     Can be an associative array with the literal value or identifier:
-     *     `["value" => "literal"]` or `["value" => "identifier"]
+     *     `["value":"literal"]` or `["value":"identifier"]
      * @param array myTypes Array of types that match the names used in `myParams`:
-     *     `["name" => "type"]`
+     *     `["name":"type"]`
      * @param string $return Return type of the entire expression. Defaults to float.
      * @return \Cake\Database\Expression\AggregateExpression
      */
