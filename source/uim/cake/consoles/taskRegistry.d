@@ -55,8 +55,8 @@ class TaskRegistry : ObjectRegistry
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingTaskException([
-            "class" => myClass,
-            "plugin" => myPlugin,
+            "class":myClass,
+            "plugin":myPlugin,
         ]);
     }
 

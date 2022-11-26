@@ -68,7 +68,7 @@ class Component : IEventListener
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
     /**
      * A component lookup table used to lazy load component objects.
@@ -124,7 +124,7 @@ class Component : IEventListener
      */
     auto __get(string myName) {
         if (isset(this._componentMap[myName]) && !isset(this.{myName})) {
-            myConfig = (array)this._componentMap[myName]["config"] + ["enabled" => false];
+            myConfig = (array)this._componentMap[myName]["config"] + ["enabled":false];
             this.{myName} = this._registry.load(this._componentMap[myName]["class"], myConfig);
         }
 
@@ -146,11 +146,11 @@ class Component : IEventListener
     function implementedEvents(): array
     {
         myEventMap = [
-            "Controller.initialize" => "beforeFilter",
-            "Controller.startup" => "startup",
-            "Controller.beforeRender" => "beforeRender",
-            "Controller.beforeRedirect" => "beforeRedirect",
-            "Controller.shutdown" => "afterFilter",
+            "Controller.initialize":"beforeFilter",
+            "Controller.startup":"startup",
+            "Controller.beforeRender":"beforeRender",
+            "Controller.beforeRedirect":"beforeRedirect",
+            "Controller.shutdown":"afterFilter",
         ];
         myEvents = [];
         foreach (myEventMap as myEvent => $method) {
@@ -179,9 +179,9 @@ class Component : IEventListener
     auto __debugInfo(): array
     {
         return [
-            "components" => this.components,
-            "implementedEvents" => this.implementedEvents(),
-            "_config" => this.getConfig(),
+            "components":this.components,
+            "implementedEvents":this.implementedEvents(),
+            "_config":this.getConfig(),
         ];
     }
 }

@@ -83,9 +83,9 @@ class HelpFormatter
             $max = this._getMaxLength($subcommands) + 2;
             foreach ($subcommands as $command) {
                 $out[] = Text::wrapBlock($command.help($max), [
-                    "width" => $width,
-                    "indent" => str_repeat(" ", $max),
-                    "indentAt" => 1,
+                    "width":$width,
+                    "indent":str_repeat(" ", $max),
+                    "indentAt":1,
                 ]);
             }
             $out[] = "";
@@ -103,9 +103,9 @@ class HelpFormatter
             $out[] = "";
             foreach (myOptions as $option) {
                 $out[] = Text::wrapBlock($option.help($max), [
-                    "width" => $width,
-                    "indent" => str_repeat(" ", $max),
-                    "indentAt" => 1,
+                    "width":$width,
+                    "indent":str_repeat(" ", $max),
+                    "indentAt":1,
                 ]);
             }
             $out[] = "";
@@ -118,9 +118,9 @@ class HelpFormatter
             $out[] = "";
             foreach ($arguments as $argument) {
                 $out[] = Text::wrapBlock($argument.help($max), [
-                    "width" => $width,
-                    "indent" => str_repeat(" ", $max),
-                    "indentAt" => 1,
+                    "width":$width,
+                    "indent":str_repeat(" ", $max),
+                    "indentAt":1,
                 ]);
             }
             $out[] = "";

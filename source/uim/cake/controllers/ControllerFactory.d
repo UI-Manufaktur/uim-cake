@@ -146,12 +146,12 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
             if (myType && !myType instanceof ReflectionNamedType) {
                 // Only single types are supported
                 throw new InvalidParameterException([
-                    "template" => "unsupported_type",
-                    "parameter" => $parameter.getName(),
-                    "controller" => this.controller.getName(),
-                    "action" => this.controller.getRequest().getParam("action"),
-                    "prefix" => this.controller.getRequest().getParam("prefix"),
-                    "plugin" => this.controller.getRequest().getParam("plugin"),
+                    "template":"unsupported_type",
+                    "parameter":$parameter.getName(),
+                    "controller":this.controller.getName(),
+                    "action":this.controller.getRequest().getParam("action"),
+                    "prefix":this.controller.getRequest().getParam("prefix"),
+                    "plugin":this.controller.getRequest().getParam("plugin"),
                 ]);
             }
 
@@ -170,12 +170,12 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
                 }
 
                 throw new InvalidParameterException([
-                    "template" => "missing_dependency",
-                    "parameter" => $parameter.getName(),
-                    "controller" => this.controller.getName(),
-                    "action" => this.controller.getRequest().getParam("action"),
-                    "prefix" => this.controller.getRequest().getParam("prefix"),
-                    "plugin" => this.controller.getRequest().getParam("plugin"),
+                    "template":"missing_dependency",
+                    "parameter":$parameter.getName(),
+                    "controller":this.controller.getName(),
+                    "action":this.controller.getRequest().getParam("action"),
+                    "prefix":this.controller.getRequest().getParam("prefix"),
+                    "plugin":this.controller.getRequest().getParam("plugin"),
                 ]);
             }
 
@@ -187,14 +187,14 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
 
                     if (myTypedArgument === null) {
                         throw new InvalidParameterException([
-                            "template" => "failed_coercion",
-                            "passed" => $argument,
-                            "type" => myType.getName(),
-                            "parameter" => $parameter.getName(),
-                            "controller" => this.controller.getName(),
-                            "action" => this.controller.getRequest().getParam("action"),
-                            "prefix" => this.controller.getRequest().getParam("prefix"),
-                            "plugin" => this.controller.getRequest().getParam("plugin"),
+                            "template":"failed_coercion",
+                            "passed":$argument,
+                            "type":myType.getName(),
+                            "parameter":$parameter.getName(),
+                            "controller":this.controller.getName(),
+                            "action":this.controller.getRequest().getParam("action"),
+                            "prefix":this.controller.getRequest().getParam("prefix"),
+                            "plugin":this.controller.getRequest().getParam("plugin"),
                         ]);
                     }
                     $argument = myTypedArgument;
@@ -216,12 +216,12 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
             }
 
             throw new InvalidParameterException([
-                "template" => "missing_parameter",
-                "parameter" => $parameter.getName(),
-                "controller" => this.controller.getName(),
-                "action" => this.controller.getRequest().getParam("action"),
-                "prefix" => this.controller.getRequest().getParam("prefix"),
-                "plugin" => this.controller.getRequest().getParam("plugin"),
+                "template":"missing_parameter",
+                "parameter":$parameter.getName(),
+                "controller":this.controller.getName(),
+                "action":this.controller.getRequest().getParam("action"),
+                "prefix":this.controller.getRequest().getParam("prefix"),
+                "plugin":this.controller.getRequest().getParam("plugin"),
             ]);
         }
 
@@ -319,10 +319,10 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
      */
     protected auto missingController(ServerRequest myRequest) {
         return new MissingControllerException([
-            "class" => myRequest.getParam("controller"),
-            "plugin" => myRequest.getParam("plugin"),
-            "prefix" => myRequest.getParam("prefix"),
-            "_ext" => myRequest.getParam("_ext"),
+            "class":myRequest.getParam("controller"),
+            "plugin":myRequest.getParam("plugin"),
+            "prefix":myRequest.getParam("prefix"),
+            "_ext":myRequest.getParam("_ext"),
         ]);
     }
 }

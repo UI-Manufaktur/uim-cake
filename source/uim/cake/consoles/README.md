@@ -86,13 +86,13 @@ class HelloCommand : BaseCommand {
     {
         $parser
             .addArgument("name", [
-                "required" => true,
-                "help" => "The name to say hello to",
+                "required":true,
+                "help":"The name to say hello to",
             ])
             .addOption("color", [
-                "choices" => ["none", "green"],
-                "default" => "none",
-                "help" => "The color to use."
+                "choices":["none", "green"],
+                "default":"none",
+                "help":"The color to use."
             ]);
 
         return $parser;

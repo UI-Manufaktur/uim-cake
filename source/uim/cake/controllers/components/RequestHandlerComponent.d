@@ -60,9 +60,9 @@ class RequestHandlerComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "checkHttpCache" => true,
-        "viewClassMap" => [],
+    protected STRINGAA _defaultConfig = [
+        "checkHttpCache":true,
+        "viewClassMap":[],
     ];
 
     /**
@@ -73,10 +73,10 @@ class RequestHandlerComponent : Component
      */
     this(ComponentRegistry $registry, array myConfig = []) {
         myConfig += [
-            "viewClassMap" => [
-                "json" => "Json",
-                "xml" => "Xml",
-                "ajax" => "Ajax",
+            "viewClassMap":[
+                "json":"Json",
+                "xml":"Xml",
+                "ajax":"Ajax",
             ],
         ];
         super.this($registry, myConfig);
@@ -90,8 +90,8 @@ class RequestHandlerComponent : Component
     function implementedEvents(): array
     {
         return [
-            "Controller.startup" => "startup",
-            "Controller.beforeRender" => "beforeRender",
+            "Controller.startup":"startup",
+            "Controller.beforeRender":"beforeRender",
         ];
     }
 
@@ -375,7 +375,7 @@ class RequestHandlerComponent : Component
      * Render the response as an XML file and force the result as a file download.
      *
      * ```
-     * this.RequestHandler.renderAs(this, "xml", ["attachment" => "myfile.xml"];
+     * this.RequestHandler.renderAs(this, "xml", ["attachment":"myfile.xml"];
      * ```
      *
      * @param \Cake\Controller\Controller $controller A reference to a controller object
@@ -385,7 +385,7 @@ class RequestHandlerComponent : Component
      * @see \Cake\Controller\Component\RequestHandlerComponent::respondAs()
      */
     void renderAs(Controller $controller, string myType, array myOptions = []) {
-        $defaults = ["charset" => "UTF-8"];
+        $defaults = ["charset":"UTF-8"];
         $viewClassMap = this.getConfig("viewClassMap");
 
         if (Configure::read("App.encoding") !== null) {
@@ -440,7 +440,7 @@ class RequestHandlerComponent : Component
      *    already been set by this method.
      */
     bool respondAs(myType, array myOptions = []) {
-        $defaults = ["index" => null, "charset" => null, "attachment" => false];
+        $defaults = ["index":null, "charset":null, "attachment":false];
         myOptions += $defaults;
 
         $cType = myType;

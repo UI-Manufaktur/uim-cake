@@ -178,7 +178,7 @@ class Shell {
 
         this._mergeVars(
             ["tasks"],
-            ["associative" => ["tasks"]]
+            ["associative":["tasks"]]
         );
 
         if (isset(this.modelClass)) {
@@ -346,15 +346,15 @@ class Shell {
      *    parameters will be available in the `param` property of the called `Shell`
      *
      * `return this.dispatchShell([
-     *      "command" => "schema create DbAcl",
-     *      "extra" => ["param" => "value"]
+     *      "command":"schema create DbAcl",
+     *      "extra":["param":"value"]
      * ]);`
      *
      * or
      *
      * `return this.dispatchShell([
-     *      "command" => ["schema", "create", "DbAcl"],
-     *      "extra" => ["param" => "value"]
+     *      "command":["schema", "create", "DbAcl"],
+     *      "extra":["param":"value"]
      * ]);`
      *
      * @return int The CLI command exit code. 0 is success.
@@ -471,7 +471,7 @@ class Shell {
             this.startup();
             array_shift($argv);
 
-            return this.{$method}.runCommand($argv, false, ["requested" => true]);
+            return this.{$method}.runCommand($argv, false, ["requested":true]);
         }
 
         if (this.hasMethod("main")) {
@@ -882,13 +882,13 @@ class Shell {
     auto __debugInfo(): array
     {
         return [
-            "name" => this.name,
-            "plugin" => this.plugin,
-            "command" => this.command,
-            "tasks" => this.tasks,
-            "params" => this.params,
-            "args" => this.args,
-            "interactive" => this.interactive,
+            "name":this.name,
+            "plugin":this.plugin,
+            "command":this.command,
+            "tasks":this.tasks,
+            "params":this.params,
+            "args":this.args,
+            "interactive":this.interactive,
         ];
     }
 }

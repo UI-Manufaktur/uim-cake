@@ -59,12 +59,12 @@ class SecurityComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "blackHoleCallback" => null,
-        "requireSecure" => [],
-        "unlockedFields" => [],
-        "unlockedActions" => [],
-        "validatePost" => true,
+    protected STRINGAA _defaultConfig = [
+        "blackHoleCallback":null,
+        "requireSecure":[],
+        "unlockedFields":[],
+        "unlockedActions":[],
+        "validatePost":true,
     ];
 
     /**
@@ -125,7 +125,7 @@ class SecurityComponent : Component
     function implementedEvents(): array
     {
         return [
-            "Controller.startup" => "startup",
+            "Controller.startup":"startup",
         ];
     }
 
@@ -473,11 +473,11 @@ class SecurityComponent : Component
     function generateToken(ServerRequest myRequest): ServerRequest
     {
         $token = [
-            "unlockedFields" => this._config["unlockedFields"],
+            "unlockedFields":this._config["unlockedFields"],
         ];
 
         return myRequest.withAttribute("formTokenData", [
-            "unlockedFields" => $token["unlockedFields"],
+            "unlockedFields":$token["unlockedFields"],
         ]);
     }
 

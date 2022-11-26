@@ -1,15 +1,15 @@
 module uim.cake.console;
 
 @safe:
-import uim.cake
+import uim.cake;
 
 import uim.cakemmand\VersionCommand;
 import uim.cake.console.command\HelpCommand;
 import uim.cake.console.exceptions\MissingOptionException;
 import uim.cake.console.exceptions\StopException;
-import uim.cakere.ConsoleApplicationInterface;
-import uim.cakere.ContainerApplicationInterface;
-import uim.cakere.PluginApplicationInterface;
+import uim.cake.core.ConsoleApplicationInterface;
+import uim.cake.core.ContainerApplicationInterface;
+import uim.cake.core.PluginApplicationInterface;
 import uim.cakeents\IEventDispatcher;
 import uim.cakeents\EventDispatcherTrait;
 import uim.cakeents\EventManager;
@@ -71,9 +71,9 @@ class CommandRunner : IEventDispatcher
         this.root = $root;
         this.factory = $factory;
         this.aliases = [
-            "--version" => "version",
-            "--help" => "help",
-            "-h" => "help",
+            "--version":"version",
+            "--help":"help",
+            "-h":"help",
         ];
     }
 
@@ -87,7 +87,7 @@ class CommandRunner : IEventDispatcher
      * ### Usage
      *
      * ```
-     * $runner.setAliases(["--version" => "version"]);
+     * $runner.setAliases(["--version":"version"]);
      * ```
      *
      * @param array<string> myAliases The map of aliases to replace.
@@ -118,7 +118,7 @@ class CommandRunner : IEventDispatcher
         this.bootstrap();
 
         $commands = new CommandCollection([
-            "help" => HelpCommand::class,
+            "help":HelpCommand::class,
         ]);
         if (class_exists(VersionCommand::class)) {
             $commands.add("version", VersionCommand::class);
@@ -128,7 +128,7 @@ class CommandRunner : IEventDispatcher
         if (this.app instanceof PluginApplicationInterface) {
             $commands = this.app.pluginConsole($commands);
         }
-        this.dispatchEvent("Console.buildCommands", ["commands" => $commands]);
+        this.dispatchEvent("Console.buildCommands", ["commands":$commands]);
         this.loadRoutes();
 
         if (empty($argv)) {

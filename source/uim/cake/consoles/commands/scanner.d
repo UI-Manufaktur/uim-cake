@@ -1,8 +1,8 @@
 module uim.cake.console;
 
-import uim.cakere.App;
-import uim.cakere.Configure;
-import uim.cakere.Plugin;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 import uim.cakelesystem\Filesystem;
 import uim.cakeilities.Inflector;
 
@@ -127,10 +127,10 @@ class CommandScanner
                 myName = myClass::defaultName();
             }
             myShells[myPath . myfile] = [
-                "file" => myPath . myfile,
-                "fullName" => $prefix . myName,
-                "name" => myName,
-                "class" => myClass,
+                "file":myPath . myfile,
+                "fullName":$prefix . myName,
+                "name":myName,
+                "class":myClass,
             ];
         }
 

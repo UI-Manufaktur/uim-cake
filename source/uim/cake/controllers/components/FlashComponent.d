@@ -21,12 +21,12 @@ class FlashComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "key" => "flash",
-        "element" => "default",
-        "params" => [],
-        "clear" => false,
-        "duplicate" => true,
+    protected STRINGAA _defaultConfig = [
+        "key":"flash",
+        "element":"default",
+        "params":[],
+        "clear":false,
+        "duplicate":true,
     ];
 
     /**
@@ -130,7 +130,7 @@ class FlashComponent : Component
      * Note that the parameter `element` will be always overridden. In order to call a
      * specific element from a plugin, you should set the `plugin` option in $args.
      *
-     * For example: `this.Flash.warning("My message", ["plugin" => "PluginName"])` would
+     * For example: `this.Flash.warning("My message", ["plugin":"PluginName"])` would
      * use the `warning.php` element under `plugins/PluginName/templates/element/flash/` for
      * rendering the flash message.
      *
@@ -146,11 +146,11 @@ class FlashComponent : Component
             throw new InternalErrorException("Flash message missing.");
         }
 
-        myOptions = ["element" => $element];
+        myOptions = ["element":$element];
 
         if (!empty($args[1])) {
             if (!empty($args[1]["plugin"])) {
-                myOptions = ["element" => $args[1]["plugin"] . "." . $element];
+                myOptions = ["element":$args[1]["plugin"] . "." . $element];
                 unset($args[1]["plugin"]);
             }
             myOptions += (array)$args[1];

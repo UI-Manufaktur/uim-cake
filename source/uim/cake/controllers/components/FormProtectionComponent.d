@@ -44,11 +44,11 @@ class FormProtectionComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "validate" => true,
-        "unlockedFields" => [],
-        "unlockedActions" => [],
-        "validationFailureCallback" => null,
+    protected STRINGAA _defaultConfig = [
+        "validate":true,
+        "unlockedFields":[],
+        "unlockedActions":[],
+        "validationFailureCallback":null,
     ];
 
     /**
@@ -83,10 +83,10 @@ class FormProtectionComponent : Component
         }
 
         $token = [
-            "unlockedFields" => this._config["unlockedFields"],
+            "unlockedFields":this._config["unlockedFields"],
         ];
         myRequest = myRequest.withAttribute("formTokenData", [
-            "unlockedFields" => $token["unlockedFields"],
+            "unlockedFields":$token["unlockedFields"],
         ]);
 
         if (is_array(myData)) {
@@ -107,7 +107,7 @@ class FormProtectionComponent : Component
     function implementedEvents(): array
     {
         return [
-            "Controller.startup" => "startup",
+            "Controller.startup":"startup",
         ];
     }
 

@@ -36,11 +36,11 @@ class PaginatorComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "page" => 1,
-        "limit" => 20,
-        "maxLimit" => 100,
-        "allowedParameters" => ["limit", "sort", "page", "direction"],
+    protected STRINGAA _defaultConfig = [
+        "page":1,
+        "limit":20,
+        "maxLimit":100,
+        "allowedParameters":["limit", "sort", "page", "direction"],
     ];
 
     /**
@@ -88,8 +88,8 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    "limit" => 20,
-     *    "maxLimit" => 100
+     *    "limit":20,
+     *    "maxLimit":100
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -99,11 +99,11 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    "Articles" => [
-     *      "limit" => 20,
-     *      "maxLimit" => 100
+     *    "Articles":[
+     *      "limit":20,
+     *      "maxLimit":100
      *    ],
-     *    "Comments" => [ ... ]
+     *    "Comments":[ ... ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -119,9 +119,9 @@ class PaginatorComponent : Component
      *
      * ```
      * $settings = [
-     *   "Articles" => [
-     *     "finder" => "custom",
-     *     "sortableFields" => ["title", "author_id", "comment_count"],
+     *   "Articles":[
+     *     "finder":"custom",
+     *     "sortableFields":["title", "author_id", "comment_count"],
      *   ]
      * ];
      * ```
@@ -134,8 +134,8 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    "Articles" => [
-     *      "finder" => "popular"
+     *    "Articles":[
+     *      "finder":"popular"
      *    ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
@@ -147,7 +147,7 @@ class PaginatorComponent : Component
      *
      * ```
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
-     *   return $q.where(["name" => "CakePHP"])
+     *   return $q.where(["name":"CakePHP"])
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```
@@ -157,8 +157,8 @@ class PaginatorComponent : Component
      * By using request parameter scopes you can paginate multiple queries in the same controller action:
      *
      * ```
-     * $articles = $paginator.paginate($articlesQuery, ["scope" => "articles"]);
-     * $tags = $paginator.paginate($tagsQuery, ["scope" => "tags"]);
+     * $articles = $paginator.paginate($articlesQuery, ["scope":"articles"]);
+     * $tags = $paginator.paginate($tagsQuery, ["scope":"tags"]);
      * ```
      *
      * Each of the above queries will use different query string parameter sets

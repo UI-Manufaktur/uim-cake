@@ -486,10 +486,10 @@ class Controller : IEventListener, IEventDispatcher
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
-                "controller" => this.name . "Controller",
-                "action" => myRequest.getParam("action"),
-                "prefix" => myRequest.getParam("prefix") ?: "",
-                "plugin" => myRequest.getParam("plugin"),
+                "controller":this.name . "Controller",
+                "action":myRequest.getParam("action"),
+                "prefix":myRequest.getParam("prefix") ?: "",
+                "plugin":myRequest.getParam("plugin"),
             ]);
         }
 
@@ -533,8 +533,8 @@ class Controller : IEventListener, IEventDispatcher
      */
     function middleware($middleware, array myOptions = []) {
         this.middlewares[] = [
-            "middleware" => $middleware,
-            "options" => myOptions,
+            "middleware":$middleware,
+            "options":myOptions,
         ];
     }
 
@@ -580,10 +580,10 @@ class Controller : IEventListener, IEventDispatcher
     function implementedEvents(): array
     {
         return [
-            "Controller.initialize" => "beforeFilter",
-            "Controller.beforeRender" => "beforeRender",
-            "Controller.beforeRedirect" => "beforeRedirect",
-            "Controller.shutdown" => "afterFilter",
+            "Controller.initialize":"beforeFilter",
+            "Controller.beforeRender":"beforeRender",
+            "Controller.beforeRedirect":"beforeRedirect",
+            "Controller.shutdown":"afterFilter",
         ];
     }
 
