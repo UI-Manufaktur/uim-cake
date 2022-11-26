@@ -1,18 +1,15 @@
-module uim.caketh\Storage;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.auths.storages.session;
 
 @safe:
 import uim.cake
 
-import uim.cake.core.InstanceConfigTrait;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-
-/**
- * Session based persistent storage for authenticated user record.
- */
-class SessionStorage : IStorage
-{
-    use InstanceConfigTrait;
+// Session based persistent storage for authenticated user record.
+class SessionStorage : IStorage {
 
     /**
      * User record.
@@ -41,10 +38,9 @@ class SessionStorage : IStorage
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "key" => "Auth.User",
-        "redirect" => "Auth.redirect",
-    ];
+    protected STRINGAA $_defaultConfig = [
+        "key": "Auth.User",
+        "redirect": "Auth.redirect"];
 
     /**
      * Constructor.

@@ -18,9 +18,9 @@ import uim.cakeilities.Security;
  *
  * ```
  *  this.loadComponent("Auth", [
- *      "authenticate" => ["Digest"],
- *      "storage" => "Memory",
- *      "unauthorizedRedirect" => false,
+ *      "authenticate":["Digest"],
+ *      "storage":"Memory",
+ *      "unauthorizedRedirect":false,
  *  ]);
  * ```
  *
@@ -73,11 +73,11 @@ class DigestAuthenticate : BasicAuthenticate
      */
     this(ComponentRegistry $registry, array myConfig = []) {
         this.setConfig([
-            "nonceLifetime" => 300,
-            "secret" => Security::getSalt(),
-            "realm" => null,
-            "qop" => "auth",
-            "opaque" => null,
+            "nonceLifetime":300,
+            "secret":Security::getSalt(),
+            "realm":null,
+            "qop":"auth",
+            "opaque":null,
         ]);
 
         super.this($registry, myConfig);
@@ -155,7 +155,7 @@ class DigestAuthenticate : BasicAuthenticate
             $digest = substr($digest, 7);
         }
         myKeys = $match = [];
-        $req = ["nonce" => 1, "nc" => 1, "cnonce" => 1, "qop" => 1, "username" => 1, "uri" => 1, "response" => 1];
+        $req = ["nonce":1, "nc":1, "cnonce":1, "qop":1, "username":1, "uri":1, "response":1];
         preg_match_all("/(\w+)=([\""]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/", $digest, $match, PREG_SET_ORDER);
 
         foreach ($match as $i) {
@@ -209,10 +209,10 @@ class DigestAuthenticate : BasicAuthenticate
         $realm = this._config["realm"] ?: myRequest.getEnv("SERVER_NAME");
 
         myOptions = [
-            "realm" => $realm,
-            "qop" => this._config["qop"],
-            "nonce" => this.generateNonce(),
-            "opaque" => this._config["opaque"] ?: md5($realm),
+            "realm":$realm,
+            "qop":this._config["qop"],
+            "nonce":this.generateNonce(),
+            "opaque":this._config["opaque"] ?: md5($realm),
         ];
 
         $digest = this._getDigest(myRequest);
@@ -231,7 +231,7 @@ class DigestAuthenticate : BasicAuthenticate
         }
 
         return [
-            "WWW-Authenticate" => "Digest " . implode(",", $opts),
+            "WWW-Authenticate":"Digest " . implode(",", $opts),
         ];
     }
 

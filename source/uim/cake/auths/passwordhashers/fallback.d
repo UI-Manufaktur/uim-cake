@@ -14,8 +14,8 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "hashers" => [],
+    protected STRINGAA _defaultConfig = [
+        "hashers":[],
     ];
 
     /**

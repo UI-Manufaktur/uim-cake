@@ -1,24 +1,15 @@
-module uim.caketh;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.auths.authenticates.authenticate;
 
 @safe:
 import uim.cake
 
-/* import uim.cake.controllerss.componentsRegistry;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cakeents\IEventListener;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakem.Locator\LocatorAwareTrait;
-import uim.cakem.Query;
- */
-/**
- * Base Authentication class with common methods and properties.
- */
-abstract class DAuthenticate : IEventListener
-{
-    use InstanceConfigTrait;
-    use LocatorAwareTrait;
-
+// Base Authentication class with common methods and properties.
+abstract class DAuthenticate : IEventListener {
     /**
      * Default config for this object.
      *
@@ -27,21 +18,21 @@ abstract class DAuthenticate : IEventListener
      * - `finder` The finder method to use to fetch user record. Defaults to "all".
      *   You can set finder name as string or an array where key is finder name and value
      *   is an array passed to `Table::find()` options.
-     *   E.g. ["finderName" => ["some_finder_option" => "some_value"]]
+     *   E.g. ["finderName":["some_finder_option":"some_value"]]
      * - `passwordHasher` Password hasher class. Can be a string specifying class name
      *    or an array containing `className` key, any other keys will be passed as
      *    config to the class. Defaults to "Default".
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "fields" => [
-            "username" => "username",
-            "password" => "password",
+    protected STRINGAA _defaultConfig = [
+        "fields":[
+            "username":"username",
+            "password":"password",
         ],
-        "userModel" => "Users",
-        "finder" => "all",
-        "passwordHasher" => "Default",
+        "userModel":"Users",
+        "finder":"all",
+        "passwordHasher":"Default",
     ];
 
     /**
@@ -148,7 +139,7 @@ abstract class DAuthenticate : IEventListener
         myTable = this.getTableLocator().get(myConfig["userModel"]);
 
         myOptions = [
-            "conditions" => [myTable.aliasField(myConfig["fields"]["username"]) => myUsername],
+            "conditions":[myTable.aliasField(myConfig["fields"]["username"]) => myUsername],
         ];
 
         myFinder = myConfig["finder"];

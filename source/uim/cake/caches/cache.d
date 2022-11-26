@@ -1,9 +1,12 @@
-module uim.cake.caches;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.caches.cache;
 
-import uim.cake.caches.engines\NullEngine;
-import uim.cake.core.StaticConfigTrait;
-use RuntimeException;
-
+@safe:
+import uim.cake;
 /**
  * Cache provides a consistent interface to Caching in your application. It allows you
  * to use several different Cache engines, without coupling your application to a specific
@@ -17,8 +20,8 @@ use RuntimeException;
  *
  * ```
  * Cache::config("shared", [
- *    "className" => Cake\Cache\Engine\ApcuEngine::class,
- *    "prefix" => "my_app_"
+ *    "className":Cake\Cache\Engine\ApcuEngine::class,
+ *    "prefix":"my_app_"
  * ]);
  * ```
  *
@@ -59,13 +62,13 @@ class Cache
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        "array" => Engine\ArrayEngine::class,
-        "apcu" => Engine\ApcuEngine::class,
-        "file" => Engine\FileEngine::class,
-        "memcached" => Engine\MemcachedEngine::class,
-        "null" => Engine\NullEngine::class,
-        "redis" => Engine\RedisEngine::class,
-        "wincache" => Engine\WincacheEngine::class,
+        "array":Engine\ArrayEngine::class,
+        "apcu":Engine\ApcuEngine::class,
+        "file":Engine\FileEngine::class,
+        "memcached":Engine\MemcachedEngine::class,
+        "null":Engine\NullEngine::class,
+        "redis":Engine\RedisEngine::class,
+        "wincache":Engine\WincacheEngine::class,
     ];
 
     /**
@@ -158,7 +161,7 @@ class Cache
 
             /** @var \Cake\Cache\CacheEngine $fallbackEngine */
             $fallbackEngine = clone static::pool(myConfig["fallback"]);
-            $newConfig = myConfig + ["groups" => [], "prefix" => null];
+            $newConfig = myConfig + ["groups":[], "prefix":null];
             $fallbackEngine.setConfig("groups", $newConfig["groups"], false);
             if ($newConfig["prefix"]) {
                 $fallbackEngine.setConfig("prefix", $newConfig["prefix"], false);
@@ -266,13 +269,13 @@ class Cache
      * Writing to the active cache config:
      *
      * ```
-     * Cache::writeMany(["cached_data_1" => "data 1", "cached_data_2" => "data 2"]);
+     * Cache::writeMany(["cached_data_1":"data 1", "cached_data_2":"data 2"]);
      * ```
      *
      * Writing to a specific cache config:
      *
      * ```
-     * Cache::writeMany(["cached_data_1" => "data 1", "cached_data_2" => "data 2"], "long_term");
+     * Cache::writeMany(["cached_data_1":"data 1", "cached_data_2":"data 2"], "long_term");
      * ```
      *
      * @param iterable myData An array or Traversable of data to be stored in the cache
@@ -466,12 +469,12 @@ class Cache
      * Retrieve group names to config mapping.
      *
      * ```
-     * Cache::config("daily", ["duration" => "1 day", "groups" => ["posts"]]);
-     * Cache::config("weekly", ["duration" => "1 week", "groups" => ["posts", "archive"]]);
+     * Cache::config("daily", ["duration":"1 day", "groups":["posts"]]);
+     * Cache::config("weekly", ["duration":"1 week", "groups":["posts", "archive"]]);
      * myConfigs = Cache::groupConfigs("posts");
      * ```
      *
-     * myConfigs will equal to `["posts" => ["daily", "weekly"]]`
+     * myConfigs will equal to `["posts":["daily", "weekly"]]`
      * Calling this method will load all the configured engines.
      *
      * @param string|null myGroup Group name or null to retrieve all group mappings

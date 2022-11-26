@@ -19,9 +19,9 @@ class DefaultPasswordHasher : AbstractPasswordHasher {
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "hashType" => PASSWORD_DEFAULT,
-        "hashOptions" => [],
+    protected STRINGAA _defaultConfig = [
+        "hashType":PASSWORD_DEFAULT,
+        "hashOptions":[],
     ];
 
     /**

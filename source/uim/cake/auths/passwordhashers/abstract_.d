@@ -1,32 +1,22 @@
-module uim.caketh;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.auths.passwordhashers.abstract_;
 
 @safe:
 import uim.cake
 
-/* import uim.cake.core.InstanceConfigTrait;
- */
-/**
- * Abstract password hashing class
- */
-abstract class AbstractPasswordHasher
-{
-    use InstanceConfigTrait;
-
+// Abstract password hashing class
+abstract class AbstractPasswordHasher {
     /**
      * Default config
-     *
      * These are merged with user-provided config when the object is used.
-     *
-     * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
-    /**
-     * Constructor
-     *
-     * @param array<string, mixed> myConfig Array of config.
-     */
-    this(array myConfig = []) {
+    this(STRINGAA myConfig = []) {
         this.setConfig(myConfig);
     }
 

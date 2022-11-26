@@ -19,9 +19,9 @@ import uim.caketps\ServerRequest;
  * Load `AuthComponent` in your controller"s `initialize()` and add "Basic" in "authenticate" key
  * ```
  *  this.loadComponent("Auth", [
- *      "authenticate" => ["Basic"]
- *      "storage" => "Memory",
- *      "unauthorizedRedirect" => false,
+ *      "authenticate":["Basic"]
+ *      "storage":"Memory",
+ *      "unauthorizedRedirect":false,
  *  ]);
  * ```
  *
@@ -95,7 +95,7 @@ class BasicAuthenticate : DAuthenticate
         $realm = this.getConfig("realm") ?: myRequest.getEnv("SERVER_NAME");
 
         return [
-            "WWW-Authenticate" => sprintf("Basic realm="%s"", $realm),
+            "WWW-Authenticate":sprintf("Basic realm="%s"", $realm),
         ];
     }
 }

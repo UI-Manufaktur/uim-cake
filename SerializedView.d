@@ -1,20 +1,17 @@
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
 module uim.cake.views;
 
-import uim.cake.views\Exception\SerializationFailureException;
-use Exception;
-use TypeError;
+@safe:
+import uim.cake;
 
-/**
- * Parent class for view classes generating serialized outputs like JsonView and XmlView.
- */
-abstract class SerializedView : View
-{
-    /**
-     * Response type.
-     *
-     * @var string
-     */
-    protected $_responseType;
+// Parent class for view classes generating serialized outputs like JsonView and XmlView.
+abstract class SerializedView : View {
+    // Response type.
+    protected string $_responseType;
 
     /**
      * Default config options.
@@ -28,8 +25,8 @@ abstract class SerializedView : View
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "serialize" => null,
+    protected STRINGAA _defaultConfig = [
+        "serialize":null,
     ];
 
 

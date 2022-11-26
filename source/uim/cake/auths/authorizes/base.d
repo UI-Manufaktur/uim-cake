@@ -1,21 +1,19 @@
-module uim.caketh;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.auths.authorizes.base;
 
 @safe:
 import uim.cake
 
-/* import uim.cake.controllerss.componentsRegistry;
-import uim.cake.core.InstanceConfigTrait;
-import uim.caketps\ServerRequest;
- */
 /**
  * Abstract base authorization adapter for AuthComponent.
  *
  * @see \Cake\Controller\Component\AuthComponent::$authenticate
  */
-abstract class BaseAuthorize
-{
-    use InstanceConfigTrait;
-
+abstract class BaseAuthorize {
     /**
      * ComponentRegistry instance for getting more components.
      *
@@ -28,7 +26,7 @@ abstract class BaseAuthorize
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
     /**
      * Constructor

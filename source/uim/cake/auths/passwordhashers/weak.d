@@ -19,8 +19,8 @@ class WeakPasswordHasher : AbstractPasswordHasher
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "hashType" => null,
+    protected STRINGAA _defaultConfig = [
+        "hashType":null,
     ];
 
 

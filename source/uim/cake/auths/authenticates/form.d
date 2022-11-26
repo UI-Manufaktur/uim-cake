@@ -18,10 +18,10 @@ import uim.caketps\ServerRequest;
  *
  * ```
  * this.loadComponent("Auth", [
- *     "authenticate" => [
- *         "Form" => [
- *             "fields" => ["username" => "email", "password" => "passwd"],
- *             "finder" => "auth",
+ *     "authenticate":[
+ *         "Form":[
+ *             "fields":["username":"email", "password":"passwd"],
+ *             "finder":"auth",
  *         ]
  *     ]
  * ]);
