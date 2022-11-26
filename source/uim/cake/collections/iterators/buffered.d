@@ -117,8 +117,8 @@ class BufferedIterator : Collection : Countable, Serializable
             this._current = super.current();
             this._key = super.key();
             this._buffer.push([
-                "key" => this._key,
-                "value" => this._current,
+                "key":this._key,
+                "value":this._current,
             ]);
         }
 

@@ -46,18 +46,18 @@ class RedisEngine : CacheEngine
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "database" => 0,
-        "duration" => 3600,
-        "groups" => [],
-        "password" => false,
-        "persistent" => true,
-        "port" => 6379,
-        "prefix" => "cake_",
-        "host" => null,
-        "server" => "127.0.0.1",
-        "timeout" => 0,
-        "unix_socket" => false,
+    protected STRINGAA _defaultConfig = [
+        "database":0,
+        "duration":3600,
+        "groups":[],
+        "password":false,
+        "persistent":true,
+        "port":6379,
+        "prefix":"cake_",
+        "host":null,
+        "server":"127.0.0.1",
+        "timeout":0,
+        "unix_socket":false,
     ];
 
     /**
@@ -255,7 +255,7 @@ class RedisEngine : CacheEngine
         myKey = this._key(myKey);
         myValue = this.serialize(myValue);
 
-        if (this._Redis.set(myKey, myValue, ["nx", "ex" => $duration])) {
+        if (this._Redis.set(myKey, myValue, ["nx", "ex":$duration])) {
             return true;
         }
 

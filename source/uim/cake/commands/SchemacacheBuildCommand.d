@@ -60,12 +60,12 @@ class SchemacacheBuildCommand : Command {
             "Build all metadata caches for the connection. If a " .
             "table name is provided, only that table will be cached."
         ).addOption("connection", [
-            "help" => "The connection to build/clear metadata cache data for.",
-            "short" => "c",
-            "default" => "default",
+            "help":"The connection to build/clear metadata cache data for.",
+            "short":"c",
+            "default":"default",
         ]).addArgument("name", [
-            "help" => "A specific table you want to refresh cached data for.",
-            "optional" => true,
+            "help":"A specific table you want to refresh cached data for.",
+            "optional":true,
         ]);
 
         return $parser;

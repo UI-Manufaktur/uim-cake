@@ -29,8 +29,8 @@ class ExtractIterator : Collection
      *
      * ```
      * myItems = [
-     *  ["comment" => ["body" => "cool", "user" => ["name" => "Mark"]],
-     *  ["comment" => ["body" => "very cool", "user" => ["name" => "Renan"]]
+     *  ["comment":["body":"cool", "user":["name":"Mark"]],
+     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
      * ];
      * $extractor = new ExtractIterator(myItems, "comment.user.name"");
      * ```

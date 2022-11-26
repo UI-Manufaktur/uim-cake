@@ -35,11 +35,11 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "duration" => 3600,
-        "groups" => [],
-        "prefix" => "cake_",
-        "warnOnWriteFailures" => true,
+    protected STRINGAA _defaultConfig = [
+        "duration":3600,
+        "groups":[],
+        "prefix":"cake_",
+        "warnOnWriteFailures":true,
     ];
 
     /**

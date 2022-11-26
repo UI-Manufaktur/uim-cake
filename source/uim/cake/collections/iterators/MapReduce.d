@@ -95,7 +95,7 @@ class MapReduce : IteratorAggregate
      * Previous example will generate the following result:
      *
      * ```
-     *  ["odd" => [1, 3, 5], "even" => [2, 4]]
+     *  ["odd":[1, 3, 5], "even":[2, 4]]
      * ```
      *
      * @param \Traversable myData the original data to be processed

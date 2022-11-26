@@ -38,10 +38,10 @@ class CompletionCommand : Command : ICommandCollectionAware
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         myModes = [
-            "commands" => "Output a list of available commands",
-            "subcommands" => "Output a list of available sub-commands for a command",
-            "options" => "Output a list of available options for a command and possible subcommand.",
-            "fuzzy" => "Does nothing. Only for backwards compatibility",
+            "commands":"Output a list of available commands",
+            "subcommands":"Output a list of available sub-commands for a command",
+            "options":"Output a list of available options for a command and possible subcommand.",
+            "fuzzy":"Does nothing. Only for backwards compatibility",
         ];
         myModeHelp = "";
         foreach (myModes as myKey => $help) {
@@ -51,15 +51,15 @@ class CompletionCommand : Command : ICommandCollectionAware
         $parser.setDescription(
             "Used by shells like bash to autocomplete command name, options and arguments"
         ).addArgument("mode", [
-            "help" => "The type of thing to get completion on.",
-            "required" => true,
-            "choices" => array_keys(myModes),
+            "help":"The type of thing to get completion on.",
+            "required":true,
+            "choices":array_keys(myModes),
         ]).addArgument("command", [
-            "help" => "The command name to get information on.",
-            "required" => false,
+            "help":"The command name to get information on.",
+            "required":false,
         ]).addArgument("subcommand", [
-            "help" => "The sub-command related to command to get information on.",
-            "required" => false,
+            "help":"The sub-command related to command to get information on.",
+            "required":false,
         ]).setEpilog([
             "The various modes allow you to get help information on commands and their arguments.",
             "The available modes are:",

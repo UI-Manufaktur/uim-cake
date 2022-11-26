@@ -191,8 +191,8 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["comment" => ["body" => "cool", "user" => ["name" => "Mark"]],
-     *  ["comment" => ["body" => "very cool", "user" => ["name" => "Renan"]]
+     *  ["comment":["body":"cool", "user":["name":"Mark"]],
+     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
      * ];
      * $extracted = (new Collection(myItems)).extract("comment.user.name");
      *
@@ -204,8 +204,8 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      *  myItems = [
-     *      ["comment" => ["votes" => [["value" => 1], ["value" => 2], ["value" => 3]]],
-     *      ["comment" => ["votes" => [["value" => 4]]
+     *      ["comment":["votes":[["value":1], ["value":2], ["value":3]]],
+     *      ["comment":["votes":[["value":4]]
      * ];
      * $extracted = (new Collection(myItems)).extract("comment.votes.{*}.value");
      *
@@ -280,8 +280,8 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["invoice" => ["total" => 100]],
-     *  ["invoice" => ["total" => 200]]
+     *  ["invoice":["total":100]],
+     *  ["invoice":["total":200]]
      * ];
      *
      * $total = (new Collection(myItems)).avg("invoice.total");
@@ -310,11 +310,11 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["invoice" => ["total" => 400]],
-     *  ["invoice" => ["total" => 500]]
-     *  ["invoice" => ["total" => 100]]
-     *  ["invoice" => ["total" => 333]]
-     *  ["invoice" => ["total" => 200]]
+     *  ["invoice":["total":400]],
+     *  ["invoice":["total":500]]
+     *  ["invoice":["total":100]]
+     *  ["invoice":["total":333]]
+     *  ["invoice":["total":200]]
      * ];
      *
      * $total = (new Collection(myItems)).median("invoice.total");
@@ -386,9 +386,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["id" => 1, "name" => "foo", "parent_id" => 10],
-     *  ["id" => 2, "name" => "bar", "parent_id" => 11],
-     *  ["id" => 3, "name" => "baz", "parent_id" => 10],
+     *  ["id":1, "name":"foo", "parent_id":10],
+     *  ["id":2, "name":"bar", "parent_id":11],
+     *  ["id":3, "name":"baz", "parent_id":10],
      * ];
      *
      * myGroup = (new Collection(myItems)).groupBy("parent_id");
@@ -401,11 +401,11 @@ interface ICollection : Iterator, JsonSerializable
      * // Result will look like this when converted to array
      * [
      *  10 => [
-     *      ["id" => 1, "name" => "foo", "parent_id" => 10],
-     *      ["id" => 3, "name" => "baz", "parent_id" => 10],
+     *      ["id":1, "name":"foo", "parent_id":10],
+     *      ["id":3, "name":"baz", "parent_id":10],
      *  ],
      *  11 => [
-     *      ["id" => 2, "name" => "bar", "parent_id" => 11],
+     *      ["id":2, "name":"bar", "parent_id":11],
      *  ]
      * ];
      * ```
@@ -429,9 +429,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["id" => 1, "name" => "foo"],
-     *  ["id" => 2, "name" => "bar"],
-     *  ["id" => 3, "name" => "baz"],
+     *  ["id":1, "name":"foo"],
+     *  ["id":2, "name":"bar"],
+     *  ["id":3, "name":"baz"],
      * ];
      *
      * $indexed = (new Collection(myItems)).indexBy("id");
@@ -443,9 +443,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * // Result will look like this when converted to array
      * [
-     *  1 => ["id" => 1, "name" => "foo"],
-     *  3 => ["id" => 3, "name" => "baz"],
-     *  2 => ["id" => 2, "name" => "bar"],
+     *  1 => ["id":1, "name":"foo"],
+     *  3 => ["id":3, "name":"baz"],
+     *  2 => ["id":2, "name":"bar"],
      * ];
      * ```
      *
@@ -468,9 +468,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["id" => 1, "name" => "foo", "parent_id" => 10],
-     *  ["id" => 2, "name" => "bar", "parent_id" => 11],
-     *  ["id" => 3, "name" => "baz", "parent_id" => 10],
+     *  ["id":1, "name":"foo", "parent_id":10],
+     *  ["id":2, "name":"bar", "parent_id":11],
+     *  ["id":3, "name":"baz", "parent_id":10],
      * ];
      *
      * myGroup = (new Collection(myItems)).countBy("parent_id");
@@ -501,8 +501,8 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["invoice" => ["total" => 100]],
-     *  ["invoice" => ["total" => 200]]
+     *  ["invoice":["total":100]],
+     *  ["invoice":["total":200]]
      * ];
      *
      * $total = (new Collection(myItems)).sumOf("invoice.total");
@@ -586,15 +586,15 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["comment" => ["body" => "cool", "user" => ["name" => "Mark"]],
-     *  ["comment" => ["body" => "very cool", "user" => ["name" => "Renan"]]
+     *  ["comment":["body":"cool", "user":["name":"Mark"]],
+     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
      * ];
      *
-     * $extracted = (new Collection(myItems)).match(["user.name" => "Renan"]);
+     * $extracted = (new Collection(myItems)).match(["user.name":"Renan"]);
      *
      * // Result will look like this when converted to array
      * [
-     *  ["comment" => ["body" => "very cool", "user" => ["name" => "Renan"]]
+     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
      * ]
      * ```
      *
@@ -675,9 +675,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["id" => 1, "name" => "foo", "parent" => "a"],
-     *  ["id" => 2, "name" => "bar", "parent" => "b"],
-     *  ["id" => 3, "name" => "baz", "parent" => "a"],
+     *  ["id":1, "name":"foo", "parent":"a"],
+     *  ["id":2, "name":"bar", "parent":"b"],
+     *  ["id":3, "name":"baz", "parent":"a"],
      * ];
      *
      * $combined = (new Collection(myItems)).combine("id", "name");
@@ -693,8 +693,8 @@ interface ICollection : Iterator, JsonSerializable
      *
      * // Result will look like this when converted to array
      * [
-     *  "a" => [1 => "foo", 3 => "baz"],
-     *  "b" => [2 => "bar"]
+     *  "a":[1 => "foo", 3 => "baz"],
+     *  "b":[2 => "bar"]
      * ];
      * ```
      *
@@ -738,16 +738,16 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myItems = [
-     *  ["comment" => ["body" => "cool", "user" => ["name" => "Mark"]],
-     *  ["comment" => ["body" => "awesome", "user" => ["name" => "Renan"]]
+     *  ["comment":["body":"cool", "user":["name":"Mark"]],
+     *  ["comment":["body":"awesome", "user":["name":"Renan"]]
      * ];
      * $ages = [25, 28];
      * $inserted = (new Collection(myItems)).insert("comment.user.age", $ages);
      *
      * // Result will look like this when converted to array
      * [
-     *  ["comment" => ["body" => "cool", "user" => ["name" => "Mark", "age" => 25]],
-     *  ["comment" => ["body" => "awesome", "user" => ["name" => "Renan", "age" => 28]]
+     *  ["comment":["body":"cool", "user":["name":"Mark", "age":25]],
+     *  ["comment":["body":"awesome", "user":["name":"Renan", "age":28]]
      * ];
      * ```
      *
@@ -871,8 +871,8 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myCollection = new Collection([
-     *  ["id" => 1, "children" => [["id" => 2, "children" => [["id" => 3]]]]],
-     *  ["id" => 4, "children" => [["id" => 5]]]
+     *  ["id":1, "children":[["id":2, "children":[["id":3]]]]],
+     *  ["id":4, "children":[["id":5]]]
      * ]);
      * $flattenedIds = myCollection.listNested().extract("id"); // Yields [1, 2, 3, 4, 5]
      * ```
@@ -907,7 +907,7 @@ interface ICollection : Iterator, JsonSerializable
      * Get elements until the first unapproved message is found:
      *
      * ```
-     * $comments = (new Collection($comments)).stopWhen(["is_approved" => false]);
+     * $comments = (new Collection($comments)).stopWhen(["is_approved":false]);
      * ```
      *
      * @param callable|array $condition the method that will receive each of the elements and
@@ -1033,9 +1033,9 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems ["a" => 1, "b" => 2, "c" => 3, "d" => 4, "e" => 5, "f" => 6];
+     * myItems ["a":1, "b":2, "c":3, "d":4, "e":5, "f":6];
      * $chunked = (new Collection(myItems)).chunkWithKeys(3).toList();
-     * // Returns [["a" => 1, "b" => 2, "c" => 3], ["d" => 4, "e" => 5, "f" => 6]]
+     * // Returns [["a":1, "b":2, "c":3], ["d":4, "e":5, "f":6]]
      * ```
      *
      * @param int $chunkSize The maximum size for each chunk

@@ -1,15 +1,12 @@
-module uim.cake.caches.engines;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.caches.engines.file_;
 
-import uim.cake.caches\CacheEngine;
-import uim.cake.caches\InvalidArgumentException;
-use CallbackFilterIterator;
-use Exception;
-use FilesystemIterator;
-use LogicException;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
-use SplFileObject;
+@safe:
+import uim.cake;
 
 /**
  * File Storage engine for cache. Filestorage is the slowest cache storage
@@ -18,8 +15,7 @@ use SplFileObject;
  *
  * You can configure a FileEngine cache, using Cache::config()
  */
-class FileEngine : CacheEngine
-{
+class FileEngine : CacheEngine {
     /**
      * Instance of SplFileObject class
      *
@@ -43,14 +39,14 @@ class FileEngine : CacheEngine
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "duration" => 3600,
-        "groups" => [],
-        "lock" => true,
-        "mask" => 0664,
-        "path" => null,
-        "prefix" => "cake_",
-        "serialize" => true,
+    protected STRINGAA _defaultConfig = [
+        "duration":3600,
+        "groups":[],
+        "lock":true,
+        "mask":0664,
+        "path":null,
+        "prefix":"cake_",
+        "serialize":true,
     ];
 
     /**

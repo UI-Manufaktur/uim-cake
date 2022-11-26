@@ -55,19 +55,19 @@ class MemcachedEngine : CacheEngine
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "compress" => false,
-        "duration" => 3600,
-        "groups" => [],
-        "host" => null,
-        "username" => null,
-        "password" => null,
-        "persistent" => null,
-        "port" => null,
-        "prefix" => "cake_",
-        "serialize" => "php",
-        "servers" => ["127.0.0.1"],
-        "options" => [],
+    protected STRINGAA _defaultConfig = [
+        "compress":false,
+        "duration":3600,
+        "groups":[],
+        "host":null,
+        "username":null,
+        "password":null,
+        "persistent":null,
+        "port":null,
+        "prefix":"cake_",
+        "serialize":"php",
+        "servers":["127.0.0.1"],
+        "options":[],
     ];
 
     /**
@@ -100,9 +100,9 @@ class MemcachedEngine : CacheEngine
         }
 
         this._serializers = [
-            "igbinary" => Memcached::SERIALIZER_IGBINARY,
-            "json" => Memcached::SERIALIZER_JSON,
-            "php" => Memcached::SERIALIZER_PHP,
+            "igbinary":Memcached::SERIALIZER_IGBINARY,
+            "json":Memcached::SERIALIZER_JSON,
+            "php":Memcached::SERIALIZER_PHP,
         ];
         if (defined("Memcached::HAVE_MSGPACK")) {
             this._serializers["msgpack"] = Memcached::SERIALIZER_MSGPACK;

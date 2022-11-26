@@ -468,9 +468,9 @@ trait CollectionTrait
 
     ICollection combine(myKeyPath, myValuePath, myGroupPath = null) {
         myOptions = [
-            "keyPath" => this._propertyExtractor(myKeyPath),
-            "valuePath" => this._propertyExtractor(myValuePath),
-            "groupPath" => myGroupPath ? this._propertyExtractor(myGroupPath) : null,
+            "keyPath":this._propertyExtractor(myKeyPath),
+            "valuePath":this._propertyExtractor(myValuePath),
+            "groupPath":myGroupPath ? this._propertyExtractor(myGroupPath) : null,
         ];
 
         $mapper = function (myValue, myKey, MapReduce $mapReduce) use (myOptions) {
@@ -607,9 +607,9 @@ trait CollectionTrait
         if (is_string($order)) {
             $order = strtolower($order);
             myModes = [
-                "desc" => RecursiveIteratorIterator::SELF_FIRST,
-                "asc" => RecursiveIteratorIterator::CHILD_FIRST,
-                "leaves" => RecursiveIteratorIterator::LEAVES_ONLY,
+                "desc":RecursiveIteratorIterator::SELF_FIRST,
+                "asc":RecursiveIteratorIterator::CHILD_FIRST,
+                "leaves":RecursiveIteratorIterator::LEAVES_ONLY,
             ];
 
             if (!isset(myModes[$order])) {

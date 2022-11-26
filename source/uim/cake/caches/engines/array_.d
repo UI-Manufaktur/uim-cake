@@ -45,7 +45,7 @@ class ArrayEngine : CacheEngine
     bool set(myKey, myValue, $ttl = null) {
         myKey = this._key(myKey);
         $expires = time() + this.duration($ttl);
-        this.data[myKey] = ["exp" => $expires, "val" => myValue];
+        this.data[myKey] = ["exp":$expires, "val":myValue];
 
         return true;
     }
@@ -147,7 +147,7 @@ class ArrayEngine : CacheEngine
         foreach (this._config["groups"] as myGroup) {
             myKey = this._config["prefix"] . myGroup;
             if (!isset(this.data[myKey])) {
-                this.data[myKey] = ["exp" => PHP_INT_MAX, "val" => 1];
+                this.data[myKey] = ["exp":PHP_INT_MAX, "val":1];
             }
             myValue = this.data[myKey]["val"];
             myResult[] = myGroup . myValue;
