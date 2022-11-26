@@ -1,30 +1,30 @@
 {
-    "name": "cakephp/log",
-    "description": "CakePHP logging library with support for multiple different streams",
+    "name": "UIM/log",
+    "description": "UIM logging library with support for multiple different streams",
     "type": "library",
     "keywords": [
-        "cakephp",
+        "UIM",
         "log",
         "logging",
         "streams"
     ],
-    "homepage": "https://cakephp.org",
+    "homepage": "https://UIM.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
-            "homepage": "https://github.com/cakephp/log/graphs/contributors"
+            "name": "UIM Community",
+            "homepage": "https://github.com/UIM/log/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/cakephp/cakephp/issues",
-        "forum": "https://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/log"
+        "issues": "https://github.com/UIM/UIM/issues",
+        "forum": "https://stackoverflow.com/tags/UIM",
+        "irc": "irc://irc.freenode.org/UIM",
+        "source": "https://github.com/UIM/log"
     },
     "require": {
         "php": ">=7.2.0",
-        "cakephp/core": "^4.0",
+        "UIM/core": "^4.0",
         "psr/log": "^1.0.0"
     },
     "provide": {

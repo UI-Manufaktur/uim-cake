@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/http.svg?style=flat-square)](https://packagist.org/packages/cakephp/http)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/http.svg?style=flat-square)](https://packagist.org/packages/UIM/http)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Http Library
+# UIM Http Library
 
 This library provides a PSR-15 Http middleware server, PSR-7 Request and
 Response objects, and a PSR-18 Http Client. Together these classes let you
@@ -28,7 +28,7 @@ $response = $http.get("http://example.com/search", ["q":"widget"], [
 ]);
 ```
 
-To learn more read the [Http Client documentation](https://book.cakephp.org/4/en/core-libraries/httpclient.html).
+To learn more read the [Http Client documentation](https://book.UIM.org/4/en/core-libraries/httpclient.html).
 
 ## Using the Http Server
 
@@ -108,4 +108,4 @@ php -S localhost:8765 -t ./webroot ./webroot/index.php
 ```
 
 For more information on middleware, [consult the
-documentation](https://book.cakephp.org/4/en/controllers/middleware.html)
+documentation](https://book.UIM.org/4/en/controllers/middleware.html)

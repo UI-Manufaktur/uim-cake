@@ -7,7 +7,7 @@ module uim.cakeility;
  * Inflector pluralizes and singularizes English nouns.
  * Used by UIM's naming conventions throughout the framework.
  *
- * @link https://book.cakephp.org/4/en/core-libraries/inflector.html
+ * @link https://book.UIM.org/4/en/core-libraries/inflector.html
  */
 class Inflector
 {
@@ -247,7 +247,7 @@ class Inflector
      *
      * @param string $word Word in singular
      * @return string Word in plural
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
     static string pluralize(string $word) {
         if (isset(static::$_cache['pluralize'][$word])) {
@@ -298,7 +298,7 @@ class Inflector
      *
      * @param string $word Word in plural
      * @return string Word in singular
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
     static string singularize(string $word) {
         if (isset(static::$_cache['singularize'][$word])) {
@@ -354,7 +354,7 @@ class Inflector
      * @param string $string String to camelize
      * @param string $delimiter the delimiter in the input string
      * @return string CamelizedStringLikeThis.
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
     static string camelize(string $string, string $delimiter = '_') {
         $cacheKey = __FUNCTION__ . $delimiter;
@@ -376,7 +376,7 @@ class Inflector
      *
      * @param string $string CamelCasedString to be "underscorized"
      * @return string underscore_version of the input string
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
     static string underscore(string $string) {
         return static::delimit(str_replace('-', '_', $string), '_');
@@ -401,7 +401,7 @@ class Inflector
      * @param string $string String to be humanized
      * @param string $delimiter the character to replace with a space
      * @return string Human-readable string
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-human-readable-forms
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-human-readable-forms
      */
     static string humanize(string $string, string $delimiter = '_') {
         $cacheKey = __FUNCTION__ . $delimiter;
@@ -445,7 +445,7 @@ class Inflector
      *
      * @param string myClassName Name of class to get database table name for
      * @return string Name of the database table for given class
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
      */
     static string tableize(string myClassName) {
         myResult = static::_cache(__FUNCTION__, myClassName);
@@ -463,7 +463,7 @@ class Inflector
      *
      * @param string myTableName Name of database table to get class name for
      * @return string Class name
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-table-and-class-name-forms
      */
     static string classify(string myTableName) {
         myResult = static::_cache(__FUNCTION__, myTableName);
@@ -481,7 +481,7 @@ class Inflector
      *
      * @param string $string String to convert.
      * @return string in variable form
-     * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-variable-names
+     * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-variable-names
      */
     static string variable(string $string) {
         myResult = static::_cache(__FUNCTION__, $string);

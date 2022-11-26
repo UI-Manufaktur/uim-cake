@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.4
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.controllerss.components;
@@ -30,7 +30,7 @@ import uim.cakeilities.Inflector;
  * It can also check for HTTP caching headers like `Last-Modified`, `If-Modified-Since`
  * etc. and return a response accordingly.
  *
- * @link https://book.cakephp.org/4/en/controllers/components/request-handling.html
+ * @link https://book.UIM.org/4/en/controllers/components/request-handling.html
  */
 class RequestHandlerComponent : Component
 {

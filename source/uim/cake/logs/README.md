@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/log.svg?style=flat-square)](https://packagist.org/packages/cakephp/log)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/log.svg?style=flat-square)](https://packagist.org/packages/UIM/log)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Logging Library
+# UIM Logging Library
 
 The Log library provides a `Log` service locator for interfacing with
 multiple logging backends using a simple interface. With the `Log` class it is
@@ -80,4 +80,4 @@ Log::warning("this gets written only to payments.log", ["scope":["payments"]]);
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.cakephp.org/4/en/core-libraries/logging.html)
+Please make sure you check the [official documentation](https://book.UIM.org/4/en/core-libraries/logging.html)

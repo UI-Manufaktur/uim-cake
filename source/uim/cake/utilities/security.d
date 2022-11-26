@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeility;
@@ -51,7 +51,7 @@ class Security
      *   Security::getSalt() to $string.
      * @return string Hash
      * @throws \RuntimeException
-     * @link https://book.cakephp.org/4/en/core-libraries/security.html#hashing-data
+     * @link https://book.UIM.org/4/en/core-libraries/security.html#hashing-data
      */
     static string hash(string $string, Nullable!string $algorithm = null, $salt = false) {
         if (empty($algorithm)) {

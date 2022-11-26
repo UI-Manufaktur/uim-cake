@@ -46,7 +46,7 @@ use RuntimeException;
  *
  * ### Dynamic finders
  *
- * In addition to the standard find(myType) finder methods, CakePHP provides dynamic
+ * In addition to the standard find(myType) finder methods, UIM provides dynamic
  * finder methods. These methods allow you to easily set basic conditions up. For example
  * to filter users by username you would call
  *
@@ -68,7 +68,7 @@ use RuntimeException;
  * ### Events
  *
  * Table objects emit several events during as life-cycle hooks during find, delete and save
- * operations. All events use the CakePHP event package:
+ * operations. All events use the UIM event package:
  *
  * - `Model.beforeFind` Fired before each find operation. By stopping the event and
  *   supplying a return value you can bypass the find operation entirely. Any
@@ -123,7 +123,7 @@ use RuntimeException;
  * - `afterDeleteCommit(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
  *
  * @see \Cake\Event\EventManager for reference on the events system.
- * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
+ * @link https://book.UIM.org/4/en/orm/table-objects.html#event-list
  */
 class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInterface
 {
@@ -1016,12 +1016,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * - targetTable: An instance of a table object to be used as the target table
      * - foreignKey: The name of the field to use as foreign key, if false none
      *   will be used
-     * - dependent: Set to true if you want CakePHP to cascade deletes to the
+     * - dependent: Set to true if you want UIM to cascade deletes to the
      *   associated table when an entity is removed on this table. The delete operation
      *   on the associated table will not cascade further. To get recursive cascades enable
-     *   `cascadeCallbacks` as well. Set to false if you don't want CakePHP to remove
+     *   `cascadeCallbacks` as well. Set to false if you don't want UIM to remove
      *   associated data, or when you are using database constraints.
-     * - cascadeCallbacks: Set to true if you want CakePHP to fire callbacks on
+     * - cascadeCallbacks: Set to true if you want UIM to fire callbacks on
      *   cascaded deletes. If false the ORM will use deleteAll() to remove data.
      *   When true records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with
@@ -1062,12 +1062,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * - targetTable: An instance of a table object to be used as the target table
      * - foreignKey: The name of the field to use as foreign key, if false none
      *   will be used
-     * - dependent: Set to true if you want CakePHP to cascade deletes to the
+     * - dependent: Set to true if you want UIM to cascade deletes to the
      *   associated table when an entity is removed on this table. The delete operation
      *   on the associated table will not cascade further. To get recursive cascades enable
-     *   `cascadeCallbacks` as well. Set to false if you don't want CakePHP to remove
+     *   `cascadeCallbacks` as well. Set to false if you don't want UIM to remove
      *   associated data, or when you are using database constraints.
-     * - cascadeCallbacks: Set to true if you want CakePHP to fire callbacks on
+     * - cascadeCallbacks: Set to true if you want UIM to fire callbacks on
      *   cascaded deletes. If false the ORM will use deleteAll() to remove data.
      *   When true records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with
@@ -1120,7 +1120,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *   and target tables in this association.
      * - dependent: Set to false, if you do not want junction table records removed
      *   when an owning record is removed.
-     * - cascadeCallbacks: Set to true if you want CakePHP to fire callbacks on
+     * - cascadeCallbacks: Set to true if you want UIM to fire callbacks on
      *   cascaded deletes. If false the ORM will use deleteAll() to remove data.
      *   When true join/junction table records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with.

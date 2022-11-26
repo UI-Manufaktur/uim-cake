@@ -30,7 +30,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher {
      * @param string myPassword Plain text password to hash.
      * @return string|false Password hash or false on failure
      * @psalm-suppress InvalidNullableReturnType
-     * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#hashing-passwords
+     * @link https://book.UIM.org/4/en/controllers/components/authentication.html#hashing-passwords
      */
     function hash(string myPassword) {
         /** @psalm-suppress NullableReturnStatement */

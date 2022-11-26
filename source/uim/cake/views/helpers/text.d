@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeews\Helper;
@@ -22,7 +22,7 @@ import uim.cakeews\View;
  * Text manipulations: Highlight, excerpt, truncate, strip of links, convert email addresses to mailto: links...
  *
  * @property \Cake\View\Helper\HtmlHelper $Html
- * @link https://book.cakephp.org/4/en/views/helpers/text.html
+ * @link https://book.UIM.org/4/en/views/helpers/text.html
  * @see \Cake\Utility\Text
  */
 class TextHelper : Helper
@@ -106,7 +106,7 @@ class TextHelper : Helper
      * @param string $text Text
      * @param array<string, mixed> myOptions Array of HTML options, and options listed above.
      * @return string The text with links
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-urls
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-urls
      */
     function autoLinkUrls(string $text, array myOptions = []): string
     {
@@ -228,7 +228,7 @@ class TextHelper : Helper
      * @param string $text Text
      * @param array<string, mixed> myOptions Array of HTML options, and options listed above.
      * @return string The text with links
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-email-addresses
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-email-addresses
      */
     function autoLinkEmails(string $text, array myOptions = []): string
     {
@@ -258,7 +258,7 @@ class TextHelper : Helper
      * @param string $text Text
      * @param array<string, mixed> myOptions Array of HTML options, and options listed above.
      * @return string The text with links
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
     function autoLink(string $text, array myOptions = []): string
     {
@@ -276,7 +276,7 @@ class TextHelper : Helper
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string The highlighted text
      * @see \Cake\Utility\Text::highlight()
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#highlighting-substrings
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#highlighting-substrings
      */
     function highlight(string $text, string $phrase, array myOptions = []): string
     {
@@ -290,7 +290,7 @@ class TextHelper : Helper
      *
      * @param string|null $text Text
      * @return string The text with proper <p> and <br /> tags
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-text-into-paragraphs
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#converting-text-into-paragraphs
      */
     function autoParagraph(Nullable!string $text): string
     {
@@ -326,7 +326,7 @@ class TextHelper : Helper
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
      * @see \Cake\Utility\Text::truncate()
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-text
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-text
      */
     function truncate(string $text, int $length = 100, array myOptions = []): string
     {
@@ -349,7 +349,7 @@ class TextHelper : Helper
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
      * @see \Cake\Utility\Text::tail()
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
     function tail(string $text, int $length = 100, array myOptions = []): string
     {
@@ -366,7 +366,7 @@ class TextHelper : Helper
      * @param string $ending Ending that will be appended
      * @return string Modified string
      * @see \Cake\Utility\Text::excerpt()
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#extracting-an-excerpt
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
     function excerpt(string $text, string $phrase, int $radius = 100, string $ending = '...'): string
     {
@@ -381,7 +381,7 @@ class TextHelper : Helper
      * @param string $separator The separator used to join all the other items together. Defaults to ', '.
      * @return string The glued together string.
      * @see \Cake\Utility\Text::toList()
-     * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
+     * @link https://book.UIM.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
     function toList(array $list, Nullable!string $and = null, string $separator = ', '): string
     {

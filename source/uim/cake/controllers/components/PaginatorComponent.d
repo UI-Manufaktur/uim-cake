@@ -16,7 +16,7 @@ use InvalidArgumentException;
  *
  * You configure pagination when calling paginate(). See that method for more details.
  *
- * @link https://book.cakephp.org/4/en/controllers/components/pagination.html
+ * @link https://book.UIM.org/4/en/controllers/components/pagination.html
  * @mixin \Cake\Datasource\Paginator
  */
 class PaginatorComponent : Component
@@ -112,7 +112,7 @@ class PaginatorComponent : Component
      *
      * ### Controlling sort fields
      *
-     * By default CakePHP will automatically allow sorting on any column on the table object being
+     * By default UIM will automatically allow sorting on any column on the table object being
      * paginated. Often times you will want to allow sorting on either associated columns or calculated
      * fields. In these cases you will need to define an allowed list of fields you wish to allow
      * sorting on. You can define the allowed fields in the `$settings` parameter:
@@ -147,7 +147,11 @@ class PaginatorComponent : Component
      *
      * ```
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
+<<<<<<< HEAD
      *   return $q.where(["name":"CakePHP"])
+=======
+     *   return $q.where(["name" => "UIM"])
+>>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```

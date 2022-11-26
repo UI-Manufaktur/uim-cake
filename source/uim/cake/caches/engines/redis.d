@@ -1,31 +1,12 @@
+module uim.cake.caches.engines.redis;
 
+@safe:
+import uim.cake;
 
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         2.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
-module uim.cake.caches.engines;
-
-import uim.cake.caches\CacheEngine;
-import uim.cakegs\Log;
-use Redis;
-use RedisException;
-use RuntimeException;
-
-/**
- * Redis storage engine for cache.
- */
+// Redis storage engine for cache.
 class RedisEngine : CacheEngine
 {
-    /**
-     * Redis wrapper.
-     *
-     * @var \Redis
-     */
+    // Redis wrapper.
     protected $_Redis;
 
     /**
@@ -82,25 +63,22 @@ class RedisEngine : CacheEngine
         return this._connect();
     }
 
-    /**
-     * Connects to a Redis server
-     *
-     * @return bool True if Redis server was connected
-     */
+    // Connects to a Redis server
+    // True if Redis server was connected
     protected bool _connect() {
         try {
             this._Redis = new Redis();
             if (!empty(this._config["unix_socket"])) {
-                $return = this._Redis.connect(this._config["unix_socket"]);
+                result = this._Redis.connect(this._config["unix_socket"]);
             } elseif (empty(this._config["persistent"])) {
-                $return = this._Redis.connect(
+                result = this._Redis.connect(
                     this._config["server"],
                     (int)this._config["port"],
                     (int)this._config["timeout"]
                 );
             } else {
                 $persistentId = this._config["port"] . this._config["timeout"] . this._config["database"];
-                $return = this._Redis.pconnect(
+                result = this._Redis.pconnect(
                     this._config["server"],
                     (int)this._config["port"],
                     (int)this._config["timeout"],
@@ -114,14 +92,14 @@ class RedisEngine : CacheEngine
 
             return false;
         }
-        if ($return && this._config["password"]) {
-            $return = this._Redis.auth(this._config["password"]);
+        if (result && this._config["password"]) {
+            result = this._Redis.auth(this._config["password"]);
         }
-        if ($return) {
-            $return = this._Redis.select((int)this._config["database"]);
+        if (result) {
+            result = this._Redis.select((int)this._config["database"]);
         }
 
-        return $return;
+        return result;
     }
 
     /**

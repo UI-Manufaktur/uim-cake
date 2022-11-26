@@ -1,14 +1,14 @@
 
 
 /**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * UIM(tm) : Rapid Development Framework (http://UIM.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
+ * @link          http://UIM.org UIM(tm) Project
  * @since         3.5.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.https\Cookie;

@@ -22,12 +22,12 @@ module uim.cake.core;
  * Plugins can be located with App as well. Using Plugin::path("DebugKit") for example, will
  * give you the full path to the DebugKit plugin.
  *
- * @link https://book.cakephp.org/4/en/core-libraries/app.html
+ * @link https://book.UIM.org/4/en/core-libraries/app.html
  */
 class App {
     /**
      * Return the class name moduled. This method checks if the class is defined on the
-     * application/plugin, otherwise try to load from the CakePHP core
+     * application/plugin, otherwise try to load from the UIM core
      *
      * @param string aClassName Class name
      * @param string aClassType Type of class
@@ -163,7 +163,7 @@ class App {
      * @param string aClassType Type of path
      * @param string|null myPlugin Plugin name
      * @return array<string>
-     * @link https://book.cakephp.org/4/en/core-libraries/app.html#finding-paths-to-modules
+     * @link https://book.UIM.org/4/en/core-libraries/app.html#finding-paths-to-modules
      */
     static function path(string aClassType, Nullable!string myPlugin = null): array
     {
@@ -221,7 +221,7 @@ class App {
     }
 
     /**
-     * Returns the full path to a package inside the CakePHP core
+     * Returns the full path to a package inside the UIM core
      *
      * Usage:
      *

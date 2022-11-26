@@ -3,7 +3,7 @@ module uim.cake.console;
 @safe:
 import uim.cake;
 
-import uim.cakemmand\VersionCommand;
+import uim.cake.command\VersionCommand;
 import uim.cake.console.command\HelpCommand;
 import uim.cake.console.exceptions\MissingOptionException;
 import uim.cake.console.exceptions\StopException;

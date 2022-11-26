@@ -1,34 +1,34 @@
 {
-    "name": "cakephp/validation",
-    "description": "CakePHP Validation library",
+    "name": "UIM/validation",
+    "description": "UIM Validation library",
     "type": "library",
     "keywords": [
-        "cakephp",
+        "UIM",
         "validation",
         "data validation"
     ],
-    "homepage": "https://cakephp.org",
+    "homepage": "https://UIM.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
-            "homepage": "https://github.com/cakephp/validation/graphs/contributors"
+            "name": "UIM Community",
+            "homepage": "https://github.com/UIM/validation/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/cakephp/cakephp/issues",
-        "forum": "https://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/validation"
+        "issues": "https://github.com/UIM/UIM/issues",
+        "forum": "https://stackoverflow.com/tags/UIM",
+        "irc": "irc://irc.freenode.org/UIM",
+        "source": "https://github.com/UIM/validation"
     },
     "require": {
         "php": ">=7.2.0",
-        "cakephp/core": "^4.0",
-        "cakephp/utility": "^4.0",
+        "UIM/core": "^4.0",
+        "UIM/utility": "^4.0",
         "psr/http-message": "^1.0.0"
     },
     "suggest": {
-        "cakephp/i18n": "If you want to use Validation::localizedTime()"
+        "UIM/i18n": "If you want to use Validation::localizedTime()"
     },
     "autoload": {
         "psr-4": {

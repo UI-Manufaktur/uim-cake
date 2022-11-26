@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
@@ -35,7 +35,7 @@ use Psr\Http\Message\IServerRequest;
  * Base class for full-stack applications
  *
  * This class serves as a base class for applications that are using
- * CakePHP as a full stack framework. If you are only using the Http or Console libraries
+ * UIM as a full stack framework. If you are only using the Http or Console libraries
  * you should implement the relevant interfaces directly.
  *
  * The application class is responsible for bootstrapping the application,
@@ -194,7 +194,7 @@ abstract class BaseApplication :
     /**
      * Define the console commands for an application.
      *
-     * By default, all commands in CakePHP, plugins and the application will be
+     * By default, all commands in UIM, plugins and the application will be
      * loaded using conventions based names.
      *
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
@@ -267,7 +267,7 @@ abstract class BaseApplication :
     /**
      * Invoke the application.
      *
-     * - Convert the PSR response into CakePHP equivalents.
+     * - Convert the PSR response into UIM equivalents.
      * - Create the controller that will handle this request.
      * - Invoke the controller.
      *

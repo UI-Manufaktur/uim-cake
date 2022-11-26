@@ -1,10 +1,10 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/core.svg?style=flat-square)](https://packagist.org/packages/cakephp/core)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/core.svg?style=flat-square)](https://packagist.org/packages/UIM/core)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Core Classes
+# UIM Core Classes
 
 A set of classes used for configuration files reading and storing.
-This repository contains the classes that are used as glue for creating the CakePHP framework.
+This repository contains the classes that are used as glue for creating the UIM framework.
 
 ## Usage
 
@@ -34,4 +34,4 @@ Configure::dump("my_config", "default");
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.cakephp.org/4/en/development/configuration.html)
+Please make sure you check the [official documentation](https://book.UIM.org/4/en/development/configuration.html)

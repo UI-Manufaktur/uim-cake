@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 /*********************************************************************************************************
 *	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
 *	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
 *	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
 **********************************************************************************************************/
+=======
+>>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
 module uim.cake.caches.engines.file_;
 
 @safe:

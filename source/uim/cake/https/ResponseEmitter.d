@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         3.3.5
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  *
@@ -24,7 +24,7 @@ use Psr\Http\Message\IResponse;
  * This emitter offers a few changes from the emitters offered by
  * diactoros:
  *
- * - It logs headers sent using CakePHP"s logging tools.
+ * - It logs headers sent using UIM"s logging tools.
  * - Cookies are emitted using setcookie() to not conflict with ext/session
  */
 class ResponseEmitter : EmitterInterface

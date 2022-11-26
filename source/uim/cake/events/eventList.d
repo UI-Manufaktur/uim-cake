@@ -1,19 +1,14 @@
 module uim.cake.events;
 
-use ArrayAccess;
-use Countable;
+@safe:
+import uim.cake;
 
-/**
- * The Event List
+// The Event List
  */
 class EventList : ArrayAccess, Countable
 {
-    /**
-     * Events list
-     *
-     * @var array<\Cake\Event\IEvent>
-     */
-    protected $_events = [];
+    // Events list
+    protected IEvent[] _events;
 
     /**
      * Empties the list of dispatched events.
@@ -26,6 +21,7 @@ class EventList : ArrayAccess, Countable
      * Adds an event to the list when event listing is enabled.
      *
      * @param \Cake\Event\IEvent myEvent An event to the list of dispatched events.
+     * @return void
      */
     void add(IEvent myEvent) {
         this._events[] = myEvent;
@@ -64,6 +60,7 @@ class EventList : ArrayAccess, Countable
      * @link https://secure.php.net/manual/en/arrayaccess.offsetset.php
      * @param mixed $offset The offset to assign the value to.
      * @param mixed myValue The value to set.
+     * @return void
      */
     void offsetSet($offset, myValue) {
         this._events[$offset] = myValue;
@@ -74,6 +71,7 @@ class EventList : ArrayAccess, Countable
      *
      * @link https://secure.php.net/manual/en/arrayaccess.offsetunset.php
      * @param mixed $offset The offset to unset.
+     * @return void
      */
     void offsetUnset($offset) {
         unset(this._events[$offset]);
@@ -85,7 +83,8 @@ class EventList : ArrayAccess, Countable
      * @link https://secure.php.net/manual/en/countable.count.php
      * @return int The custom count as an integer.
      */
-    int count() {
+    function count(): int
+    {
         return count(this._events);
     }
 

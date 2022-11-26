@@ -1,9 +1,9 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/utility.svg?style=flat-square)](https://packagist.org/packages/cakephp/utility)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/utility.svg?style=flat-square)](https://packagist.org/packages/UIM/utility)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Utility Classes
+# UIM Utility Classes
 
-This library provides a range of utility classes that are used throughout the CakePHP framework
+This library provides a range of utility classes that are used throughout the UIM framework
 
 ## What's in the toolbox?
 
@@ -23,7 +23,7 @@ $bigPeople = Hash::extract($things, '{n}[age>21].name');
 // $bigPeople will contain ['Susan', 'Lucy']
 ```
 
-Check the [official Hash class documentation](https://book.cakephp.org/4/en/core-libraries/hash.html)
+Check the [official Hash class documentation](https://book.UIM.org/4/en/core-libraries/hash.html)
 
 ### Inflector
 
@@ -36,7 +36,7 @@ echo Inflector::pluralize('Apple'); // echoes Apples
 echo Inflector::singularize('People'); // echoes Person
 ```
 
-Check the [official Inflector class documentation](https://book.cakephp.org/4/en/core-libraries/inflector.html)
+Check the [official Inflector class documentation](https://book.UIM.org/4/en/core-libraries/inflector.html)
 
 ### Text
 
@@ -57,7 +57,7 @@ This is the song
 that never ends.
 ```
 
-Check the [official Text class documentation](https://book.cakephp.org/4/en/core-libraries/text.html)
+Check the [official Text class documentation](https://book.UIM.org/4/en/core-libraries/text.html)
 
 ### Security
 
@@ -70,7 +70,7 @@ myResult = Security::encrypt(myValue, myKey);
 Security::decrypt(myResult, myKey);
 ```
 
-Check the [official Security class documentation](https://book.cakephp.org/4/en/core-libraries/security.html)
+Check the [official Security class documentation](https://book.UIM.org/4/en/core-libraries/security.html)
 
 ### Xml
 
@@ -88,4 +88,4 @@ myData = [
 $xml = Xml::build(myData);
 ```
 
-Check the [official Xml class documentation](https://book.cakephp.org/4/en/core-libraries/xml.html)
+Check the [official Xml class documentation](https://book.UIM.org/4/en/core-libraries/xml.html)

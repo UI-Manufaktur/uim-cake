@@ -15,7 +15,7 @@ import uim.cakeilities.Inflector;
 class CommandScanner
 {
     /**
-     * Scan CakePHP internals for shells & commands.
+     * Scan UIM internals for shells & commands.
      *
      * @return array A list of command metadata.
      */

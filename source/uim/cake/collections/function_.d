@@ -1,11 +1,7 @@
-/**
- * @copyright     Copyright (c) Ozan Nurettin Süel (https://www.sicherheitsschmiede.de)
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- **/
-module uim.cake.collectionss.function_;
-s
-import uim.cake.collections\Collection;
-import uim.cake.collections\ICollection;
+module uim.cake.collections.function_;
+
+@safe:
+import uim.cake;
 
 if (!function_exists("collection")) {
     /**

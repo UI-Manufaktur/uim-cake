@@ -14,7 +14,7 @@
 import uim.cake.core.exceptions\CakeException;
 
 /**
- * Parent class for all the HTTP related exceptions in CakePHP.
+ * Parent class for all the HTTP related exceptions in UIM.
  * All HTTP status/error related exceptions should extend this class so
  * catch blocks can be specifically typed.
  *

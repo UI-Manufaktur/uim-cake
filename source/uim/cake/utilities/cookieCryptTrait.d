@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         3.1.6
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cakeility;
@@ -16,7 +16,7 @@ use RuntimeException;
  *
  * Provides the encrypt/decrypt logic for the CookieComponent.
  *
- * @link https://book.cakephp.org/4/en/controllers/components/cookie.html
+ * @link https://book.UIM.org/4/en/controllers/components/cookie.html
  */
 trait CookieCryptTrait
 {

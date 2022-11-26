@@ -14,7 +14,7 @@ use RuntimeException;
  * as methods for loading additional configuration files or storing runtime configuration
  * for future use.
  *
- * @link https://book.cakephp.org/4/en/development/configuration.html
+ * @link https://book.UIM.org/4/en/development/configuration.html
  */
 class Configure
 {
@@ -64,7 +64,7 @@ class Configure
      * Alternatively can be an array containing key(s) and value(s).
      * @param mixed myValue Value to set for var
      * @return void
-     * @link https://book.cakephp.org/4/en/development/configuration.html#writing-configuration-data
+     * @link https://book.UIM.org/4/en/development/configuration.html#writing-configuration-data
      */
     static void write(myConfig, myValue = null) {
         if (!is_array(myConfig)) {
@@ -98,7 +98,7 @@ class Configure
      * @param string|null $var Variable to obtain. Use "." to access array elements.
      * @param mixed $default The return value when the configure does not exist
      * @return mixed Value stored in configure, or null.
-     * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
+     * @link https://book.UIM.org/4/en/development/configuration.html#reading-configuration-data
      */
     static function read(Nullable!string $var = null, $default = null) {
         if ($var === null) {
@@ -139,7 +139,7 @@ class Configure
      * @param string $var Variable to obtain. Use "." to access array elements.
      * @return mixed Value stored in configure.
      * @throws \RuntimeException if the requested configuration is not set.
-     * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
+     * @link https://book.UIM.org/4/en/development/configuration.html#reading-configuration-data
      */
     static function readOrFail(string $var) {
         if (!static::check($var)) {
@@ -160,7 +160,7 @@ class Configure
      *
      * @param string $var the var to be deleted
      * @return void
-     * @link https://book.cakephp.org/4/en/development/configuration.html#deleting-configuration-data
+     * @link https://book.UIM.org/4/en/development/configuration.html#deleting-configuration-data
      */
     static void delete(string $var) {
         static::$_values = Hash::remove(static::$_values, $var);
@@ -191,7 +191,7 @@ class Configure
      * Used to read and delete a variable from Configure.
      *
      * This is primarily used during bootstrapping to move configuration data
-     * out of configure into the various other classes in CakePHP.
+     * out of configure into the various other classes in UIM.
      *
      * @param string $var The key to read and remove.
      * @return array|string|null
@@ -214,7 +214,7 @@ class Configure
 
     /**
      * Add a new engine to Configure. Engines allow you to read configuration
-     * files in various formats/storage locations. CakePHP comes with two built-in engines
+     * files in various formats/storage locations. UIM comes with two built-in engines
      * PhpConfig and IniConfig. You can also implement your own engine classes in your application.
      *
      * To add a new engine to Configure:
@@ -297,7 +297,7 @@ class Configure
      * @param bool myMerge if config files should be merged instead of simply overridden
      * @return bool True if load successful.
      * @throws \Cake\Core\Exception\CakeException if the myConfig engine is not found
-     * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
+     * @link https://book.UIM.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
     static bool load(string myKey, string myConfig = "default", bool myMerge = true) {
         $engine = static::_getEngine(myConfig);
@@ -384,14 +384,14 @@ class Configure
     }
 
     /**
-     * Used to determine the current version of CakePHP.
+     * Used to determine the current version of UIM.
      *
      * Usage
      * ```
      * Configure::version();
      * ```
      *
-     * @return string Current version of CakePHP
+     * @return string Current version of UIM
      */
     static string version() {
         $version = static::read("Cake.version");
@@ -426,7 +426,7 @@ class Configure
             myData = static::$_values;
         }
         if (!class_exists(Cache::class)) {
-            throw new RuntimeException("You must install cakephp/cache to use Configure::store()");
+            throw new RuntimeException("You must install UIM/cache to use Configure::store()");
         }
 
         return Cache::write(myName, myData, $cacheConfig);
@@ -443,7 +443,7 @@ class Configure
      */
     static bool restore(string myName, string $cacheConfig = "default") {
         if (!class_exists(Cache::class)) {
-            throw new RuntimeException("You must install cakephp/cache to use Configure::restore()");
+            throw new RuntimeException("You must install UIM/cache to use Configure::restore()");
         }
         myValues = Cache::read(myName, $cacheConfig);
         if (myValues) {

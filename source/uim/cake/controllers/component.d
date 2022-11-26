@@ -39,7 +39,7 @@ import uim.cakegs\LogTrait;
  * While the controller is not an explicit argument for the callback methods it
  * is the subject of each event and can be fetched using IEvent::getSubject().
  *
- * @link https://book.cakephp.org/4/en/controllers/components.html
+ * @link https://book.UIM.org/4/en/controllers/components.html
  * @see \Cake\Controller\Controller::$components
  */
 class Component : IEventListener

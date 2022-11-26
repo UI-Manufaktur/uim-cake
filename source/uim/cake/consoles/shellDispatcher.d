@@ -129,7 +129,7 @@ class ShellDispatcher
     }
 
     /**
-     * Initializes the environment and loads the CakePHP core.
+     * Initializes the environment and loads the UIM core.
      *
      * @return void
      */
@@ -381,7 +381,7 @@ class ShellDispatcher
     }
 
     /**
-     * Prints the currently installed version of CakePHP. Performs an internal dispatch to the CommandList Shell
+     * Prints the currently installed version of UIM. Performs an internal dispatch to the CommandList Shell
      *
      */
     void version() {

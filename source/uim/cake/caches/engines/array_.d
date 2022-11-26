@@ -1,15 +1,7 @@
+module uim.cake.caches.engines.array_;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         3.7.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.caches.engines;
-
-import uim.cake.caches\CacheEngine;
+@safe:
+import uim.cake;
 
 /**
  * Array storage engine for cache.

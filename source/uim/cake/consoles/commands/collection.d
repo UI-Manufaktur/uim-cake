@@ -1,16 +1,13 @@
-module uim.cake.console;
+module uim.cake.console.commands.collection;
 
-use ArrayIterator;
-use Countable;
-use InvalidArgumentException;
-use IteratorAggregate;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Collection for Commands.
  *
  * Used by Applications to specify their console commands.
- * CakePHP will use the mapped commands to construct and dispatch
+ * UIM will use the mapped commands to construct and dispatch
  * shell commands.
  */
 class CommandCollection : IteratorAggregate, Countable
@@ -186,12 +183,12 @@ class CommandCollection : IteratorAggregate, Countable
     }
 
     /**
-     * Automatically discover shell commands in CakePHP, the application and all plugins.
+     * Automatically discover shell commands in UIM, the application and all plugins.
      *
      * Commands will be located using filesystem conventions. Commands are
      * discovered in the following order:
      *
-     * - CakePHP provided commands
+     * - UIM provided commands
      * - Application commands
      *
      * Commands defined in the application will overwrite commands with

@@ -1,32 +1,32 @@
 {
-    "name": "cakephp/http",
-    "description": "CakePHP HTTP client and PSR7/15 middleware libraries",
+    "name": "UIM/http",
+    "description": "UIM HTTP client and PSR7/15 middleware libraries",
     "type": "library",
     "keywords": [
-        "cakephp",
+        "UIM",
         "http",
         "psr7",
         "psr15"
     ],
-    "homepage": "https://cakephp.org",
+    "homepage": "https://UIM.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
-            "homepage": "https://github.com/cakephp/http/graphs/contributors"
+            "name": "UIM Community",
+            "homepage": "https://github.com/UIM/http/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/cakephp/cakephp/issues",
-        "forum": "https://stackoverflow.com/tags/cakephp",
-        "irc": "irc://irc.freenode.org/cakephp",
-        "source": "https://github.com/cakephp/http"
+        "issues": "https://github.com/UIM/UIM/issues",
+        "forum": "https://stackoverflow.com/tags/UIM",
+        "irc": "irc://irc.freenode.org/UIM",
+        "source": "https://github.com/UIM/http"
     },
     "require": {
         "php": ">=7.2.0",
-        "cakephp/core": "^4.0",
-        "cakephp/event": "^4.0",
-        "cakephp/utility": "^4.0",
+        "UIM/core": "^4.0",
+        "UIM/event": "^4.0",
+        "UIM/utility": "^4.0",
         "composer/ca-bundle": "^1.2",
         "psr/http-client": "^1.0",
         "psr/http-server-handler": "^1.0",
@@ -38,8 +38,8 @@
         "psr/http-client-implementation": "^1.0"
     },
     "suggest": {
-        "cakephp/cache": "To use cache session storage",
-        "cakephp/orm": "To use database session storage"
+        "UIM/cache": "To use cache session storage",
+        "UIM/orm": "To use database session storage"
     },
     "autoload": {
         "psr-4": {

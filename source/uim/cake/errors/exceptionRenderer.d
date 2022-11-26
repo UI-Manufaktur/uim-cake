@@ -351,7 +351,8 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param \Throwable myException Exception.
      * @return int A valid HTTP status code.
      */
-    protected int getHttpCode(Throwable myException) {
+    protected auto getHttpCode(Throwable myException): int
+    {
         if (myException instanceof HttpException) {
             return myException.getCode();
         }

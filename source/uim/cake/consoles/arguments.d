@@ -1,4 +1,4 @@
-module uim.cake.console;
+module uim.cake.console.arguments;
 
 /**
  * Provides an interface for interacting with

@@ -1,4 +1,4 @@
-# CakePHP Caching Library
+# UIM Caching Library
 
 The Cache library provides a `Cache` service locator for interfacing with multiple caching backends using
 a simple to use interface.
@@ -52,6 +52,6 @@ the callback will be executed and the returned data will be cached for future ca
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.cakephp.org/4/en/core-libraries/caching.html)
+Please make sure you check the [official documentation](https://book.UIM.org/4/en/core-libraries/caching.html)
 
 

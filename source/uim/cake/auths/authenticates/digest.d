@@ -24,7 +24,7 @@ import uim.cakeilities.Security;
  *  ]);
  * ```
  *
- * You should set `storage` to `Memory` to prevent CakePHP from sending a
+ * You should set `storage` to `Memory` to prevent UIM from sending a
  * session cookie to the client.
  *
  * You should set `unauthorizedRedirect` to `false`. This causes `AuthComponent` to
@@ -50,7 +50,7 @@ import uim.cakeilities.Security;
  * `User.password` would store the password hash for use with other methods like
  * Basic or Form.
  *
- * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
+ * @see https://book.UIM.org/4/en/controllers/components/authentication.html
  */
 class DigestAuthenticate : BasicAuthenticate
 {

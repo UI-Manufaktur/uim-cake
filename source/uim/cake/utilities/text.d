@@ -472,7 +472,7 @@ class Text
      * @param array<string>|string $phrase The phrase or phrases that will be searched.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string The highlighted text
-     * @link https://book.cakephp.org/4/en/core-libraries/text.html#highlighting-substrings
+     * @link https://book.UIM.org/4/en/core-libraries/text.html#highlighting-substrings
      */
     static string highlight(string $text, $phrase, array myOptions = []) {
         if (empty($phrase)) {
@@ -570,7 +570,7 @@ class Text
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
-     * @link https://book.cakephp.org/4/en/core-libraries/text.html#truncating-text
+     * @link https://book.UIM.org/4/en/core-libraries/text.html#truncating-text
      */
     static function truncate(string $text, int $length = 100, array myOptions = []): string
     {
@@ -848,7 +848,7 @@ class Text
      * @param int $radius The amount of characters that will be returned on each side of the founded phrase
      * @param string $ellipsis Ending that will be appended
      * @return string Modified string
-     * @link https://book.cakephp.org/4/en/core-libraries/text.html#extracting-an-excerpt
+     * @link https://book.UIM.org/4/en/core-libraries/text.html#extracting-an-excerpt
      */
     static function excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "..."): string
     {
@@ -891,7 +891,7 @@ class Text
      * @param string|null $and The word used to join the last and second last items together with. Defaults to "and".
      * @param string $separator The separator used to join all the other items together. Defaults to ", ".
      * @return string The glued together string.
-     * @link https://book.cakephp.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
+     * @link https://book.UIM.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
     static function toList(array $list, Nullable!string $and = null, string $separator = ", "): string
     {
@@ -999,7 +999,7 @@ class Text
      * @param mixed $default Value to be returned when invalid size was used, for example "Unknown type"
      * @return mixed Number of bytes as integer on success, `$default` on failure if not false
      * @throws \InvalidArgumentException On invalid Unit type.
-     * @link https://book.cakephp.org/4/en/core-libraries/text.html#Cake\Utility\Text::parseFileSize
+     * @link https://book.UIM.org/4/en/core-libraries/text.html#Cake\Utility\Text::parseFileSize
      */
     static function parseFileSize(string $size, $default = false) {
         if (ctype_digit($size)) {

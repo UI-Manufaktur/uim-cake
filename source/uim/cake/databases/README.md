@@ -1,4 +1,4 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/database.svg?style=flat-square)](https://packagist.org/packages/cakephp/database)
+[![Total Downloads](https://img.shields.io/packagist/dt/UIM/database.svg?style=flat-square)](https://packagist.org/packages/UIM/database)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
 # A flexible and lightweight Database Library for PHP
@@ -342,7 +342,7 @@ SELECT CONCAT(title, :c0) ...;
 
 ### Other SQL Clauses
 
-Read of all other SQL clauses that the builder is capable of generating in the [official API docs](https://api.cakephp.org/4.x/class-Cake.Database.Query.html)
+Read of all other SQL clauses that the builder is capable of generating in the [official API docs](https://api.UIM.org/4.x/class-Cake.Database.Query.html)
 
 ### Getting Results out of a Query
 
@@ -360,5 +360,5 @@ myResults = myQuery.execute().fetchAll("assoc");
 
 ## Official API
 
-You can read the official [official API docs](https://api.cakephp.org/4.x/module-Cake.Database.html) to learn more of what this library
+You can read the official [official API docs](https://api.UIM.org/4.x/module-Cake.Database.html) to learn more of what this library
 has to offer.

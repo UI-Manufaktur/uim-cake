@@ -1,11 +1,11 @@
 
 
 /**
- * CakePHP(tm) :  Rapid Development Framework (https://cakephp.org)
+ * UIM(tm) :  Rapid Development Framework (https://UIM.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakefoundation.org CakePHP(tm) Project
+ * @link          https://cakefoundation.org UIM(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.logs.engines;

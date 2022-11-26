@@ -1,9 +1,7 @@
-module uim.cake.caches;
+module uim.cake.caches.registry;
 
-use BadMethodCallException;
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * An object registry for cache engines.

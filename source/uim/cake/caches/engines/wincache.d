@@ -1,15 +1,14 @@
-module uim.cake.caches.engines;
+module uim.cake.caches.engines.wincache;
 
-import uim.cake.caches\CacheEngine;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Wincache storage engine for cache
  *
  * Supports wincache 1.1.0 and higher.
  */
-class WincacheEngine : CacheEngine
-{
+class WincacheEngine : CacheEngine {
     /**
      * Contains the compiled group names
      * (prefixed with the global configuration prefix)

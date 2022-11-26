@@ -195,7 +195,7 @@ class ConsoleIo
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
-     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
+     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
      */
     function info(myMessage, int $newlines = 1, int $level = self::NORMAL): Nullable!int
     {
@@ -213,7 +213,7 @@ class ConsoleIo
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
-     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
+     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
      */
     function comment(myMessage, int $newlines = 1, int $level = self::NORMAL): Nullable!int
     {
@@ -229,7 +229,7 @@ class ConsoleIo
      * @param array<string>|string myMessage A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
-     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
+     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::err
      */
     int warning(myMessage, int $newlines = 1) {
         myMessageType = "warning";
@@ -244,7 +244,7 @@ class ConsoleIo
      * @param array<string>|string myMessage A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
-     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
+     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::err
      */
     int error(myMessage, int $newlines = 1) {
         myMessageType = "error";
@@ -261,7 +261,7 @@ class ConsoleIo
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
-     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
+     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
      */
     function success(myMessage, int $newlines = 1, int $level = self::NORMAL): Nullable!int
     {

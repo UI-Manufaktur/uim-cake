@@ -1,11 +1,10 @@
-module uim.cake.caches;
+module uim.cake.caches.engine;
 
-import uim.cake.core.InstanceConfigTrait;
-use DateInterval;
-use Psr\SimpleCache\ICache;
+@safe:
+import uim.cake;
 
 /**
- * Storage engine for CakePHP caching
+ * Storage engine for UIM caching
  */
 abstract class CacheEngine : ICache, ICacheEngine
 {

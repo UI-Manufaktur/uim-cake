@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.https;
@@ -66,12 +66,12 @@ class Session
      * defaults are:
      *
      * - php: just use session as configured in php.ini
-     * - cache: Use the CakePHP caching system as an storage for the session, you will need
+     * - cache: Use the UIM caching system as an storage for the session, you will need
      *   to pass the `config` key with the name of an already configured Cache engine.
-     * - database: Use the CakePHP ORM to persist and manage sessions. By default this requires
+     * - database: Use the UIM ORM to persist and manage sessions. By default this requires
      *   a table in your database named `sessions` or a `model` key in the configuration
      *   to indicate which Table object to use.
-     * - cake: Use files for storing the sessions, but let CakePHP manage them and decide
+     * - cake: Use files for storing the sessions, but let UIM manage them and decide
      *   where to store them.
      *
      * The full list of options follows:

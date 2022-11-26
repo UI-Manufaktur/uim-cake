@@ -1,9 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.extract;
 
-use ArrayIterator;
-import uim.cake.collections\Collection;
-import uim.cake.collections\ICollection;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Creates an iterator from another iterator that extract the requested column

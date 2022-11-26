@@ -1,8 +1,7 @@
-module uim.cake.collectionss.iterators;
+module uim.cake.collectionss.iterators.nest;
 
-import uim.cake.collections\Collection;
-use RecursiveIterator;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * A type of collection that is aware of nested items and exposes methods to

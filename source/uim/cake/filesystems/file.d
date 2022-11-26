@@ -13,7 +13,7 @@ class File {
      * Folder object of the file
      *
      * @var \Cake\Filesystem\Folder
-     * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html
+     * @link https://book.UIM.org/4/en/core-libraries/file-folder.html
      */
     public $Folder;
 
@@ -21,7 +21,7 @@ class File {
      * File name
      *
      * @var string
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::myName
+     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::myName
      */
     public myName;
 
@@ -29,7 +29,7 @@ class File {
      * File info
      *
      * @var array<string, mixed>
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$info
+     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$info
      */
     public $info = [];
 
@@ -37,7 +37,7 @@ class File {
      * Holds the file handler resource if the file is opened
      *
      * @var resource|null
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$handle
+     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$handle
      */
     public $handle;
 
@@ -45,7 +45,7 @@ class File {
      * Enable locking for file reading and writing
      *
      * @var bool|null
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$lock
+     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$lock
      */
     public $lock;
 
@@ -55,7 +55,7 @@ class File {
      * Current file"s absolute path
      *
      * @var string|null
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::myPath
+     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::myPath
      */
     public myPath;
 
@@ -65,7 +65,7 @@ class File {
      * @param string myPath Path to file
      * @param bool $create Create file if it does not exist (if true)
      * @param int myMode Mode to apply to the folder holding the file
-     * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html#file-api
+     * @link https://book.UIM.org/4/en/core-libraries/file-folder.html#file-api
      */
     this(string myPath, bool $create = false, int myMode = 0755) {
         $splInfo = new SplFileInfo(myPath);

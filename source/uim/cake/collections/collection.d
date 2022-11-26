@@ -1,8 +1,7 @@
 module uim.cake.collections.collection;
 
-use ArrayIterator;
-use IteratorIterator;
-use Serializable;
+@safe:
+import uim.cake;
 
 /**
  * A collection is an immutable list of elements with a handful of functions to
@@ -66,10 +65,7 @@ class Collection : IteratorIterator : ICollection, Serializable {
         return iterator_count(myTraversable);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    int size_tt countKeys() {
+    size_t countKeys() {
         return count(this.toArray());
     }
 

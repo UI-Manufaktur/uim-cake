@@ -4,7 +4,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.8
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */module uim.cake.controllerss.components;
@@ -29,7 +29,7 @@ import uim.cakeilities.Security;
  * - Form tampering protection.
  * - Requiring that SSL be used.
  *
- * @link https://book.cakephp.org/4/en/controllers/components/security.html
+ * @link https://book.UIM.org/4/en/controllers/components/security.html
  * @deprecated 4.0.0 Use {@link FormProtectionComponent} instead, for form tampering protection
  *   or {@link HttpsEnforcerMiddleware} to enforce use of HTTPS (SSL) for requests.
  */
@@ -148,7 +148,7 @@ class SecurityComponent : Component
      * @param \Cake\Controller\Exception\SecurityException|null myException Additional debug info describing the cause
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
      * @see \Cake\Controller\Component\SecurityComponent::$blackHoleCallback
-     * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
+     * @link https://book.UIM.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
      * @throws \Cake\Http\Exception\BadRequestException
      */
     function blackHole(Controller $controller, string myError = "", ?SecurityException myException = null) {

@@ -19,7 +19,7 @@ use Throwable;
  * Error handling middleware.
  *
  * Traps exceptions and converts them into HTML or content-type appropriate
- * error pages using the CakePHP ExceptionRenderer.
+ * error pages using the UIM ExceptionRenderer.
  */
 class ErrorHandlerMiddleware : MiddlewareInterface
 {
