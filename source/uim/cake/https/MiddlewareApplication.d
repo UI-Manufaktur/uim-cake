@@ -31,6 +31,6 @@ abstract class MiddlewareApplication : HttpApplicationInterface
     function handle(
         IServerRequest myRequest
     ): IResponse {
-        return new Response(["body" => "Not found", "status" => 404]);
+        return new Response(["body":"Not found", "status":404]);
     }
 }

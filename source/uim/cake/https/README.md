@@ -20,11 +20,11 @@ $http = new Client();
 $response = $http.get("http://example.com/test.html");
 
 // Simple get with querystring
-$response = $http.get("http://example.com/search", ["q" => "widget"]);
+$response = $http.get("http://example.com/search", ["q":"widget"]);
 
 // Simple get with querystring & additional headers
-$response = $http.get("http://example.com/search", ["q" => "widget"], [
-  "headers" => ["X-Requested-With" => "XMLHttpRequest"],
+$response = $http.get("http://example.com/search", ["q":"widget"], [
+  "headers":["X-Requested-With":"XMLHttpRequest"],
 ]);
 ```
 

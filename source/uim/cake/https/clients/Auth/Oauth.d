@@ -89,12 +89,12 @@ class Oauth
      */
     protected string _plaintext(Request myRequest, array $credentials) {
         myValues = [
-            "oauth_version" => "1.0",
-            "oauth_nonce" => uniqid(),
-            "oauth_timestamp" => time(),
-            "oauth_signature_method" => "PLAINTEXT",
-            "oauth_token" => $credentials["token"],
-            "oauth_consumer_key" => $credentials["consumerKey"],
+            "oauth_version":"1.0",
+            "oauth_nonce":uniqid(),
+            "oauth_timestamp":time(),
+            "oauth_signature_method":"PLAINTEXT",
+            "oauth_token":$credentials["token"],
+            "oauth_consumer_key":$credentials["consumerKey"],
         ];
         if (isset($credentials["realm"])) {
             myValues["oauth_realm"] = $credentials["realm"];
@@ -119,12 +119,12 @@ class Oauth
         $nonce = $credentials["nonce"] ?? uniqid();
         $timestamp = $credentials["timestamp"] ?? time();
         myValues = [
-            "oauth_version" => "1.0",
-            "oauth_nonce" => $nonce,
-            "oauth_timestamp" => $timestamp,
-            "oauth_signature_method" => "HMAC-SHA1",
-            "oauth_token" => $credentials["token"],
-            "oauth_consumer_key" => this._encode($credentials["consumerKey"]),
+            "oauth_version":"1.0",
+            "oauth_nonce":$nonce,
+            "oauth_timestamp":$timestamp,
+            "oauth_signature_method":"HMAC-SHA1",
+            "oauth_token":$credentials["token"],
+            "oauth_consumer_key":this._encode($credentials["consumerKey"]),
         ];
         $baseString = this.baseString(myRequest, myValues);
 
@@ -164,11 +164,11 @@ class Oauth
         $nonce = $credentials["nonce"] ?? bin2hex(Security::randomBytes(16));
         $timestamp = $credentials["timestamp"] ?? time();
         myValues = [
-            "oauth_version" => "1.0",
-            "oauth_nonce" => $nonce,
-            "oauth_timestamp" => $timestamp,
-            "oauth_signature_method" => "RSA-SHA1",
-            "oauth_consumer_key" => $credentials["consumerKey"],
+            "oauth_version":"1.0",
+            "oauth_nonce":$nonce,
+            "oauth_timestamp":$timestamp,
+            "oauth_signature_method":"RSA-SHA1",
+            "oauth_consumer_key":$credentials["consumerKey"],
         ];
         if (isset($credentials["consumerSecret"])) {
             myValues["oauth_consumer_secret"] = $credentials["consumerSecret"];
@@ -193,7 +193,7 @@ class Oauth
         }
 
         $credentials += [
-            "privateKeyPassphrase" => "",
+            "privateKeyPassphrase":"",
         ];
         if (is_resource($credentials["privateKeyPassphrase"])) {
             $resource = $credentials["privateKeyPassphrase"];

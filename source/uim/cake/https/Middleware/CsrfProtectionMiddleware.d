@@ -49,12 +49,12 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @var array<string, mixed>
      */
     protected $_config = [
-        "cookieName" => "csrfToken",
-        "expiry" => 0,
-        "secure" => false,
-        "httponly" => false,
-        "samesite" => null,
-        "field" => "_csrfToken",
+        "cookieName":"csrfToken",
+        "expiry":0,
+        "secure":false,
+        "httponly":false,
+        "samesite":null,
+        "field":"_csrfToken",
     ];
 
     /**
@@ -406,11 +406,11 @@ class CsrfProtectionMiddleware : MiddlewareInterface
             this._config["cookieName"],
             myValue,
             [
-                "expires" => this._config["expiry"] ?: null,
-                "path" => myRequest.getAttribute("webroot"),
-                "secure" => this._config["secure"],
-                "httponly" => this._config["httponly"],
-                "samesite" => this._config["samesite"],
+                "expires":this._config["expiry"] ?: null,
+                "path":myRequest.getAttribute("webroot"),
+                "secure":this._config["secure"],
+                "httponly":this._config["httponly"],
+                "samesite":this._config["samesite"],
             ]
         );
 

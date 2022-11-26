@@ -22,12 +22,12 @@ class Socket
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "persistent" => false,
-        "host" => "localhost",
-        "protocol" => "tcp",
-        "port" => 80,
-        "timeout" => 30,
+    protected STRINGAA _defaultConfig = [
+        "persistent":false,
+        "host":"localhost",
+        "protocol":"tcp",
+        "port":80,
+        "timeout":30,
     ];
 
     /**
@@ -64,16 +64,16 @@ class Socket
      * @var array<string, int>
      */
     protected $_encryptMethods = [
-        "sslv23_client" => STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
-        "tls_client" => STREAM_CRYPTO_METHOD_TLS_CLIENT,
-        "tlsv10_client" => STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT,
-        "tlsv11_client" => STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT,
-        "tlsv12_client" => STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT,
-        "sslv23_server" => STREAM_CRYPTO_METHOD_SSLv23_SERVER,
-        "tls_server" => STREAM_CRYPTO_METHOD_TLS_SERVER,
-        "tlsv10_server" => STREAM_CRYPTO_METHOD_TLSv1_0_SERVER,
-        "tlsv11_server" => STREAM_CRYPTO_METHOD_TLSv1_1_SERVER,
-        "tlsv12_server" => STREAM_CRYPTO_METHOD_TLSv1_2_SERVER,
+        "sslv23_client":STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
+        "tls_client":STREAM_CRYPTO_METHOD_TLS_CLIENT,
+        "tlsv10_client":STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT,
+        "tlsv11_client":STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT,
+        "tlsv12_client":STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT,
+        "sslv23_server":STREAM_CRYPTO_METHOD_SSLv23_SERVER,
+        "tls_server":STREAM_CRYPTO_METHOD_TLS_SERVER,
+        "tlsv10_server":STREAM_CRYPTO_METHOD_TLSv1_0_SERVER,
+        "tlsv11_server":STREAM_CRYPTO_METHOD_TLSv1_1_SERVER,
+        "tlsv12_server":STREAM_CRYPTO_METHOD_TLSv1_2_SERVER,
     ];
 
     /**
@@ -325,7 +325,7 @@ class Socket
      */
     auto setLastError(Nullable!int $errNum, string $errStr): void
     {
-        this.lastError = ["num" => $errNum, "str" => $errStr];
+        this.lastError = ["num":$errNum, "str":$errStr];
     }
 
     /**

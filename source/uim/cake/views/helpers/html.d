@@ -28,7 +28,7 @@ class HtmlHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected STRINGAA _defaultConfig = [
         'templates' => [
             'meta' => '<meta{{attrs}}/>',
             'metalink' => '<link href="{{url}}"{{attrs}}/>',

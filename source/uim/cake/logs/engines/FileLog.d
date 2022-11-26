@@ -39,17 +39,17 @@ class FileLog : BaseLog
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "path" => null,
-        "file" => null,
-        "types" => null,
-        "levels" => [],
-        "scopes" => [],
-        "rotate" => 10,
-        "size" => 10485760, // 10MB
-        "mask" => null,
-        "formatter" => [
-            "className" => DefaultFormatter::class,
+    protected STRINGAA _defaultConfig = [
+        "path":null,
+        "file":null,
+        "types":null,
+        "levels":[],
+        "scopes":[],
+        "rotate":10,
+        "size":10485760, // 10MB
+        "mask":null,
+        "formatter":[
+            "className":DefaultFormatter::class,
         ],
     ];
 

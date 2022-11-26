@@ -110,9 +110,9 @@ class SelectWithPivotLoader : SelectLoader
             .addToJoinsMap($tempName, $assoc, false, this.junctionProperty);
 
         $assoc.attachTo(myQuery, [
-            "aliasPath" => $assoc.getAlias(),
-            "includeFields" => false,
-            "propertyPath" => this.junctionProperty,
+            "aliasPath":$assoc.getAlias(),
+            "includeFields":false,
+            "propertyPath":this.junctionProperty,
         ]);
         myQuery.getTypeMap().addDefaults(myTypes);
 

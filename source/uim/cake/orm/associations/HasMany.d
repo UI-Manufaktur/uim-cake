@@ -201,7 +201,7 @@ class HasMany : Association
             }
 
             if ($foreignKeyReference !== $entity.extract($foreignKey)) {
-                $entity.set($foreignKeyReference, ["guard" => false]);
+                $entity.set($foreignKeyReference, ["guard":false]);
             }
 
             if (myTable.save($entity, myOptions)) {
@@ -302,7 +302,7 @@ class HasMany : Association
      * ```
      * myUser = myUsers.get(1);
      * myUser.articles = [$article1, $article2, $article3, $article4];
-     * myUsers.save(myUser, ["Associated" => ["Articles"]]);
+     * myUsers.save(myUser, ["Associated":["Articles"]]);
      * $allArticles = [$article1, $article2, $article3];
      * myUsers.Articles.unlink(myUser, $allArticles);
      * ```
@@ -323,10 +323,10 @@ class HasMany : Association
     {
         if (is_bool(myOptions)) {
             myOptions = [
-                "cleanProperty" => myOptions,
+                "cleanProperty":myOptions,
             ];
         } else {
-            myOptions += ["cleanProperty" => true];
+            myOptions += ["cleanProperty":true];
         }
         if (count(myTargetEntities) === 0) {
             return;
@@ -338,7 +338,7 @@ class HasMany : Association
         $property = this.getProperty();
 
         $conditions = [
-            "OR" => (new Collection(myTargetEntities))
+            "OR":(new Collection(myTargetEntities))
                 .map(function ($entity) use (myTargetPrimaryKey) {
                     /** @var \Cake\Datasource\IEntity $entity */
                     return $entity.extract(myTargetPrimaryKey);
@@ -462,8 +462,8 @@ class HasMany : Association
 
         if (count($exclusions) > 0) {
             $conditions = [
-                "NOT" => [
-                    "OR" => $exclusions,
+                "NOT":[
+                    "OR":$exclusions,
                 ],
                 $foreignKeyReference,
             ];
@@ -620,15 +620,15 @@ class HasMany : Association
     function eagerLoader(array myOptions): Closure
     {
         $loader = new SelectLoader([
-            "alias" => this.getAlias(),
-            "sourceAlias" => this.getSource().getAlias(),
-            "targetAlias" => this.getTarget().getAlias(),
-            "foreignKey" => this.getForeignKey(),
-            "bindingKey" => this.getBindingKey(),
-            "strategy" => this.getStrategy(),
-            "associationType" => this.type(),
-            "sort" => this.getSort(),
-            "finder" => [this, "find"],
+            "alias":this.getAlias(),
+            "sourceAlias":this.getSource().getAlias(),
+            "targetAlias":this.getTarget().getAlias(),
+            "foreignKey":this.getForeignKey(),
+            "bindingKey":this.getBindingKey(),
+            "strategy":this.getStrategy(),
+            "associationType":this.type(),
+            "sort":this.getSort(),
+            "finder":[this, "find"],
         ]);
 
         return $loader.buildEagerLoader(myOptions);

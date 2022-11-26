@@ -16,7 +16,7 @@ class TableHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected STRINGAA _defaultConfig = [
         'headers' => true,
         'rowSeparator' => false,
         'headerStyle' => 'info',

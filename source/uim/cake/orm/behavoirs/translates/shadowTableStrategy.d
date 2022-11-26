@@ -31,15 +31,15 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "fields" => [],
-        "defaultLocale" => null,
-        "referenceName" => null,
-        "allowEmptyTranslations" => true,
-        "onlyTranslated" => false,
-        "strategy" => "subquery",
-        "tableLocator" => null,
-        "validator" => false,
+    protected STRINGAA _defaultConfig = [
+        "fields":[],
+        "defaultLocale":null,
+        "referenceName":null,
+        "allowEmptyTranslations":true,
+        "onlyTranslated":false,
+        "strategy":"subquery",
+        "tableLocator":null,
+        "validator":false,
     ];
 
     /**
@@ -54,9 +54,9 @@ class ShadowTableStrategy : TranslateStrategyInterface
         myTableReferenceName = myConfig["referenceName"];
 
         myConfig += [
-            "mainTableAlias" => myTableAlias,
-            "translationTable" => myPlugin . myTableReferenceName . "Translations",
-            "hasOneAlias" => myTableAlias . "Translation",
+            "mainTableAlias":myTableAlias,
+            "translationTable":myPlugin . myTableReferenceName . "Translations",
+            "hasOneAlias":myTableAlias . "Translation",
         ];
 
         if (isset(myConfig["tableLocator"])) {
@@ -67,7 +67,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
         this.table = myTable;
         this.translationTable = this.getTableLocator().get(
             this._config["translationTable"],
-            ["allowFallbackClass" => true]
+            ["allowFallbackClass":true]
         );
 
         this.setupAssociations();
@@ -86,11 +86,11 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
         myTargetAlias = this.translationTable.getAlias();
         this.table.hasMany(myTargetAlias, [
-            "className" => myConfig["translationTable"],
-            "foreignKey" => "id",
-            "strategy" => myConfig["strategy"],
-            "propertyName" => "_i18n",
-            "dependent" => true,
+            "className":myConfig["translationTable"],
+            "foreignKey":"id",
+            "strategy":myConfig["strategy"],
+            "propertyName":"_i18n",
+            "dependent":true,
         ]);
     }
 
@@ -150,8 +150,8 @@ class ShadowTableStrategy : TranslateStrategyInterface
             this.getTableLocator().get(
                 $hasOneTargetAlias,
                 [
-                    "className" => myConfig["translationTable"],
-                    "allowFallbackClass" => true,
+                    "className":myConfig["translationTable"],
+                    "allowFallbackClass":true,
                 ]
             );
         }
@@ -163,12 +163,12 @@ class ShadowTableStrategy : TranslateStrategyInterface
         }
 
         this.table.hasOne(myConfig["hasOneAlias"], [
-            "foreignKey" => ["id"],
-            "joinType" => $joinType,
-            "propertyName" => "translation",
-            "className" => myConfig["translationTable"],
-            "conditions" => [
-                myConfig["hasOneAlias"] . ".locale" => $locale,
+            "foreignKey":["id"],
+            "joinType":$joinType,
+            "propertyName":"translation",
+            "className":myConfig["translationTable"],
+            "conditions":[
+                myConfig["hasOneAlias"] . ".locale":$locale,
             ],
         ]);
     }
@@ -322,7 +322,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
         $locale = $entity.get("_locale") ?: this.getLocale();
-        $newOptions = [this.translationTable.getAlias() => ["validate" => false]];
+        $newOptions = [this.translationTable.getAlias() => ["validate":false]];
         myOptions["associated"] = $newOptions + myOptions["associated"];
 
         // Check early if empty translations are present in the entity.
@@ -371,7 +371,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
             return;
         }
 
-        $where = ["locale" => $locale];
+        $where = ["locale":$locale];
         $translation = null;
         if ($id) {
             $where["id"] = $id;
@@ -390,14 +390,14 @@ class ShadowTableStrategy : TranslateStrategyInterface
             $translation = this.translationTable.newEntity(
                 $where + myValues,
                 [
-                    "useSetters" => false,
-                    "markNew" => true,
+                    "useSetters":false,
+                    "markNew":true,
                 ]
             );
         }
 
         $entity.set("_i18n", array_merge($bundled, [$translation]));
-        $entity.set("_locale", $locale, ["setter" => false]);
+        $entity.set("_locale", $locale, ["setter":false]);
         $entity.setDirty("_locale", false);
 
         foreach (myFields as myField) {
@@ -550,10 +550,10 @@ class ShadowTableStrategy : TranslateStrategyInterface
         foreach ($translations as $lang => $translation) {
             if (!$translation.id) {
                 $update = [
-                    "id" => myKey,
-                    "locale" => $lang,
+                    "id":myKey,
+                    "locale":$lang,
                 ];
-                $translation.set($update, ["guard" => false]);
+                $translation.set($update, ["guard":false]);
             }
         }
 

@@ -17,15 +17,15 @@ class SmtpTransport : AbstractTransport
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "host" => "localhost",
-        "port" => 25,
-        "timeout" => 30,
-        "username" => null,
-        "password" => null,
-        "client" => null,
-        "tls" => false,
-        "keepAlive" => false,
+    protected STRINGAA _defaultConfig = [
+        "host":"localhost",
+        "port":25,
+        "timeout":30,
+        "username":null,
+        "password":null,
+        "client":null,
+        "tls":false,
+        "keepAlive":false,
     ];
 
     /**
@@ -123,16 +123,16 @@ class SmtpTransport : AbstractTransport
      * ```
      * [
      *     [
-     *         "code" => "250",
-     *         "message" => "mail.example.com"
+     *         "code":"250",
+     *         "message":"mail.example.com"
      *     ],
      *     [
-     *         "code" => "250",
-     *         "message" => "PIPELINING"
+     *         "code":"250",
+     *         "message":"PIPELINING"
      *     ],
      *     [
-     *         "code" => "250",
-     *         "message" => "8BITMIME"
+     *         "code":"250",
+     *         "message":"8BITMIME"
      *     ],
      *     // etc...
      * ]
@@ -175,7 +175,7 @@ class SmtpTransport : AbstractTransport
     }
 
     /**
-     * Parses and stores the response lines in `"code" => "message"` format.
+     * Parses and stores the response lines in `"code":"message"` format.
      *
      * @param array<string> $responseLines Response lines to parse.
      * @return void
@@ -186,8 +186,8 @@ class SmtpTransport : AbstractTransport
         foreach ($responseLines as $responseLine) {
             if (preg_match("/^(\d{3})(?:[ -]+(.*))?$/", $responseLine, $match)) {
                 $response[] = [
-                    "code" => $match[1],
-                    "message" => $match[2] ?? null,
+                    "code":$match[1],
+                    "message":$match[2] ?? null,
                 ];
             }
         }
@@ -431,7 +431,7 @@ class SmtpTransport : AbstractTransport
         myMessage = this._prepareMessage(myMessage);
 
         this._smtpSend($headers . "\r\n\r\n" . myMessage . "\r\n\r\n\r\n.");
-        this._content = ["headers" => $headers, "message" => myMessage];
+        this._content = ["headers":$headers, "message":myMessage];
     }
 
     /**

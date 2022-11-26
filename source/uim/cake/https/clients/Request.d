@@ -29,8 +29,8 @@ class Request : Message : RequestInterface
         this.setMethod($method);
         this.uri = this.createUri(myUrl);
         $headers += [
-            "Connection" => "close",
-            "User-Agent" => ini_get("user_agent") ?: "CakePHP",
+            "Connection":"close",
+            "User-Agent":ini_get("user_agent") ?: "CakePHP",
         ];
         this.addHeaders($headers);
 
@@ -71,7 +71,7 @@ class Request : Message : RequestInterface
             $formData = new FormData();
             $formData.addMany(myContents);
             /** @phpstan-var array<non-empty-string, non-empty-string> $headers */
-            $headers = ["Content-Type" => $formData.contentType()];
+            $headers = ["Content-Type":$formData.contentType()];
             this.addHeaders($headers);
             myContents = (string)$formData;
         }

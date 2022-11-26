@@ -77,7 +77,7 @@ class Server : IEventDispatcher
             $middleware = this.app.pluginMiddleware($middleware);
         }
 
-        this.dispatchEvent("Server.buildMiddleware", ["middleware" => $middleware]);
+        this.dispatchEvent("Server.buildMiddleware", ["middleware":$middleware]);
 
         $response = this.runner.run($middleware, myRequest, this.app);
 

@@ -20,17 +20,17 @@ class ContactForm : Form
 
     protected auto _buildSchema(Schema $schema) {
         return $schema.addField("name", "string")
-            .addField("email", ["type" => "string"])
-            .addField("body", ["type" => "text"]);
+            .addField("email", ["type":"string"])
+            .addField("body", ["type":"text"]);
     }
 
     function validationDefault(Validator $validator) {
         return $validator.add("name", "length", [
-                "rule" => ["minLength", 10],
-                "message" => "A name is required"
+                "rule":["minLength", 10],
+                "message":"A name is required"
             ]).add("email", "format", [
-                "rule" => "email",
-                "message" => "A valid email address is required",
+                "rule":"email",
+                "message":"A valid email address is required",
             ]);
     }
 

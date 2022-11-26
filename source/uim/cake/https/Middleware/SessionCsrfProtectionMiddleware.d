@@ -51,8 +51,8 @@ class SessionCsrfProtectionMiddleware : MiddlewareInterface
      * @var array<string, mixed>
      */
     protected $_config = [
-        "key" => "csrfToken",
-        "field" => "_csrfToken",
+        "key":"csrfToken",
+        "field":"_csrfToken",
     ];
 
     /**

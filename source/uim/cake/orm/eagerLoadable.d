@@ -278,13 +278,13 @@ class EagerLoadable
         }
         myConfig = this._config;
         if (this._forMatching !== null) {
-            myConfig = ["matching" => this._forMatching] + myConfig;
+            myConfig = ["matching":this._forMatching] + myConfig;
         }
 
         return [
             this._name => [
-                "associations" => $associations,
-                "config" => myConfig,
+                "associations":$associations,
+                "config":myConfig,
             ],
         ];
     }

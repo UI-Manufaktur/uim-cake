@@ -115,7 +115,7 @@ class CorsBuilder
         myResult = [];
         foreach ($domains as $domain) {
             if ($domain === "*") {
-                myResult[] = ["preg" => "@.@", "original" => "*"];
+                myResult[] = ["preg":"@.@", "original":"*"];
                 continue;
             }
 

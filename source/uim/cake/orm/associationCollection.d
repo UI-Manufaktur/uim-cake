@@ -69,7 +69,7 @@ class AssociationCollection : IteratorAggregate
     function load(string myClassName, string $associated, array myOptions = []): Association
     {
         myOptions += [
-            "tableLocator" => this.getTableLocator(),
+            "tableLocator":this.getTableLocator(),
         ];
 
         $association = new myClassName($associated, myOptions);

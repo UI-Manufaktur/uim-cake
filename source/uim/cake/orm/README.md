@@ -27,13 +27,13 @@ specify a driver to use:
 import uim.cake.datasources\ConnectionManager;
 
 ConnectionManager::setConfig("default", [
-	"className" => \Cake\Database\Connection::class,
-	"driver" => \Cake\Database\Driver\Mysql::class,
-	"database" => "test",
-	"username" => "root",
-	"password" => "secret",
-	"cacheMetadata" => true,
-	"quoteIdentifiers" => false,
+	"className":\Cake\Database\Connection::class,
+	"driver":\Cake\Database\Driver\Mysql::class,
+	"database":"test",
+	"username":"root",
+	"password":"secret",
+	"cacheMetadata":true,
+	"quoteIdentifiers":false,
 ]);
 ```
 
@@ -112,24 +112,24 @@ those entities to the database:
 import uim.cake.orm.locators\LocatorAwareTrait;
 
 myData = [
-	"title" => "My first article",
-	"body" => "It is a great article",
-	"user_id" => 1,
-	"tags" => [
-		"_ids" => [1, 2, 3]
+	"title":"My first article",
+	"body":"It is a great article",
+	"user_id":1,
+	"tags":[
+		"_ids":[1, 2, 3]
 	],
-	"comments" => [
-		["comment" => "Good job"],
-		["comment" => "Awesome work"],
+	"comments":[
+		["comment":"Good job"],
+		["comment":"Awesome work"],
 	]
 ];
 
 $articles = this.getTableLocator().get("Articles");
 $article = $articles.newEntity(myData, [
-	"associated" => ["Tags", "Comments"]
+	"associated":["Tags", "Comments"]
 ]);
 $articles.save($article, [
-	"associated" => ["Tags", "Comments"]
+	"associated":["Tags", "Comments"]
 ])
 ```
 
@@ -156,9 +156,9 @@ For e.g. file system strategy your bootstrap file could look like this:
 import uim.cake.caches.engines\FileEngine;
 
 $cacheConfig = [
-   "className" => FileEngine::class,
-   "duration" => "+1 year",
-   "serialize" => true,
+   "className":FileEngine::class,
+   "duration":"+1 year",
+   "serialize":true,
    "prefix"    => "orm_",
 ];
 Cache::setConfig("_cake_model_", $cacheConfig);
@@ -188,7 +188,7 @@ class ArticlesTable : Table
 {
     function initialize() {
         this.setEntityClass(Article::class);
-        this.belongsTo("Users", ["className" => UsersTable::class]);
+        this.belongsTo("Users", ["className":UsersTable::class]);
     }
 }
 ```
@@ -203,7 +203,7 @@ use Acme\Data\Table\ArticlesTable;
 import uim.cake.orm.locators\TableLocator;
 
 $locator = new TableLocator();
-$articles = $locator.get("Articles", ["className" => ArticlesTable::class]);
+$articles = $locator.get("Articles", ["className":ArticlesTable::class]);
 ```
 
 ### Using Conventions-Based Loading

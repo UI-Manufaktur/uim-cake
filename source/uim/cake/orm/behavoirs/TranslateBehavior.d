@@ -31,21 +31,21 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "implementedFinders" => ["translations" => "findTranslations"],
-        "implementedMethods" => [
-            "setLocale" => "setLocale",
-            "getLocale" => "getLocale",
-            "translationField" => "translationField",
+    protected STRINGAA _defaultConfig = [
+        "implementedFinders":["translations":"findTranslations"],
+        "implementedMethods":[
+            "setLocale":"setLocale",
+            "getLocale":"getLocale",
+            "translationField":"translationField",
         ],
-        "fields" => [],
-        "defaultLocale" => null,
-        "referenceName" => "",
-        "allowEmptyTranslations" => true,
-        "onlyTranslated" => false,
-        "strategy" => "subquery",
-        "tableLocator" => null,
-        "validator" => false,
+        "fields":[],
+        "defaultLocale":null,
+        "referenceName":"",
+        "allowEmptyTranslations":true,
+        "onlyTranslated":false,
+        "strategy":"subquery",
+        "tableLocator":null,
+        "validator":false,
     ];
 
     /**
@@ -91,9 +91,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      */
     this(Table myTable, array myConfig = []) {
         myConfig += [
-            "defaultLocale" => I18n::getDefaultLocale(),
-            "referenceName" => this.referenceName(myTable),
-            "tableLocator" => myTable.associations().getTableLocator(),
+            "defaultLocale":I18n::getDefaultLocale(),
+            "referenceName":this.referenceName(myTable),
+            "tableLocator":myTable.associations().getTableLocator(),
         ];
 
         super.this(myTable, myConfig);
@@ -186,9 +186,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     function implementedEvents(): array
     {
         return [
-            "Model.beforeFind" => "beforeFind",
-            "Model.beforeSave" => "beforeSave",
-            "Model.afterSave" => "afterSave",
+            "Model.beforeFind":"beforeFind",
+            "Model.beforeSave":"beforeSave",
+            "Model.afterSave":"afterSave",
         ];
     }
 
@@ -196,7 +196,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * {@inheritDoc}
      *
      * Add in `_translations` marshalling handlers. You can disable marshalling
-     * of translations by setting `"translations" => false` in the options
+     * of translations by setting `"translations":false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
@@ -273,7 +273,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * ### Example:
      *
      * ```
-     * $article = $articles.find("translations", ["locales" => ["eng", "deu"]).first();
+     * $article = $articles.find("translations", ["locales":["eng", "deu"]).first();
      * $englishTranslatedFields = $article.get("_translations")["eng"];
      * ```
      *
@@ -293,7 +293,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
             .contain([myTargetAlias => function (myQuery) use ($locales, myTargetAlias) {
                 /** @var \Cake\Datasource\QueryInterface myQuery */
                 if ($locales) {
-                    myQuery.where(["myTargetAlias.locale IN" => $locales]);
+                    myQuery.where(["myTargetAlias.locale IN":$locales]);
                 }
 
                 return myQuery;

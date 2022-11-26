@@ -49,7 +49,7 @@ class DatabaseSession : SessionHandlerInterface
         myTableLocator = this.getTableLocator();
 
         if (empty(myConfig["model"])) {
-            myConfig = myTableLocator.exists("Sessions") ? [] : ["table" => "sessions", "allowFallbackClass" => true];
+            myConfig = myTableLocator.exists("Sessions") ? [] : ["table":"sessions", "allowFallbackClass":true];
             this._table = myTableLocator.get("Sessions", myConfig);
         } else {
             this._table = myTableLocator.get(myConfig["model"]);
@@ -142,9 +142,9 @@ class DatabaseSession : SessionHandlerInterface
         $pkField = this._table.getPrimaryKey();
         $session = this._table.newEntity([
             $pkField => $id,
-            "data" => myData,
-            "expires" => time() + this._timeout,
-        ], ["accessibleFields" => [$pkField => true]]);
+            "data":myData,
+            "expires":time() + this._timeout,
+        ], ["accessibleFields":[$pkField => true]]);
 
         return (bool)this._table.save($session);
     }
@@ -171,6 +171,6 @@ class DatabaseSession : SessionHandlerInterface
      */
     #[\ReturnTypeWillChange]
     function gc($maxlifetime) {
-        return this._table.deleteAll(["expires <" => time()]);
+        return this._table.deleteAll(["expires <":time()]);
     }
 }

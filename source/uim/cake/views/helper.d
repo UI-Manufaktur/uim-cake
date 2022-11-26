@@ -41,7 +41,7 @@ class Helper : IEventListener
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
     /**
      * A helper lookup table used to lazy load helper objects.

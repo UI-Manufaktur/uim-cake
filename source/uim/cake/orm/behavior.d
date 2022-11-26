@@ -124,7 +124,7 @@ class Behavior : IEventListener
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
     /**
      * Constructor
@@ -261,19 +261,19 @@ class Behavior : IEventListener
     function implementedEvents(): array
     {
         myEventMap = [
-            "Model.beforeMarshal" => "beforeMarshal",
-            "Model.afterMarshal" => "afterMarshal",
-            "Model.beforeFind" => "beforeFind",
-            "Model.beforeSave" => "beforeSave",
-            "Model.afterSave" => "afterSave",
-            "Model.afterSaveCommit" => "afterSaveCommit",
-            "Model.beforeDelete" => "beforeDelete",
-            "Model.afterDelete" => "afterDelete",
-            "Model.afterDeleteCommit" => "afterDeleteCommit",
-            "Model.buildValidator" => "buildValidator",
-            "Model.buildRules" => "buildRules",
-            "Model.beforeRules" => "beforeRules",
-            "Model.afterRules" => "afterRules",
+            "Model.beforeMarshal":"beforeMarshal",
+            "Model.afterMarshal":"afterMarshal",
+            "Model.beforeFind":"beforeFind",
+            "Model.beforeSave":"beforeSave",
+            "Model.afterSave":"afterSave",
+            "Model.afterSaveCommit":"afterSaveCommit",
+            "Model.beforeDelete":"beforeDelete",
+            "Model.afterDelete":"afterDelete",
+            "Model.afterDeleteCommit":"afterDeleteCommit",
+            "Model.buildValidator":"buildValidator",
+            "Model.buildRules":"buildRules",
+            "Model.beforeRules":"beforeRules",
+            "Model.afterRules":"afterRules",
         ];
         myConfig = this.getConfig();
         $priority = myConfig["priority"] ?? null;
@@ -287,8 +287,8 @@ class Behavior : IEventListener
                 myEvents[myEvent] = $method;
             } else {
                 myEvents[myEvent] = [
-                    "callable" => $method,
-                    "priority" => $priority,
+                    "callable":$method,
+                    "priority":$priority,
                 ];
             }
         }
@@ -303,8 +303,8 @@ class Behavior : IEventListener
      *
      * ```
      *  [
-     *    "this" => "findThis",
-     *    "alias" => "findMethodName"
+     *    "this":"findThis",
+     *    "alias":"findMethodName"
      *  ]
      * ```
      *
@@ -335,8 +335,8 @@ class Behavior : IEventListener
      *
      * ```
      *  [
-     *    "method" => "method",
-     *    "aliasedMethod" => "somethingElse"
+     *    "method":"method",
+     *    "aliasedMethod":"somethingElse"
      *  ]
      * ```
      *
@@ -397,8 +397,8 @@ class Behavior : IEventListener
         }
 
         $return = [
-            "finders" => [],
-            "methods" => [],
+            "finders":[],
+            "methods":[],
         ];
 
         $reflection = new ReflectionClass(myClass);

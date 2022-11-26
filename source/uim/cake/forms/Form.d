@@ -220,7 +220,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * ```
      * myErrors = [
-     *      "field_name" => ["rule_name" => "message"]
+     *      "field_name":["rule_name":"message"]
      * ];
      *
      * $form.setErrors(myErrors);
@@ -256,7 +256,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     bool execute(array myData, array myOptions = []) {
         this._data = myData;
 
-        myOptions += ["validate" => true];
+        myOptions += ["validate":true];
 
         if (myOptions["validate"] === false) {
             return this._execute(myData);
@@ -336,9 +336,9 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     auto __debugInfo(): array
     {
         $special = [
-            "_schema" => this.getSchema().__debugInfo(),
-            "_errors" => this.getErrors(),
-            "_validator" => this.getValidator().__debugInfo(),
+            "_schema":this.getSchema().__debugInfo(),
+            "_errors":this.getErrors(),
+            "_validator":this.getValidator().__debugInfo(),
         ];
 
         return $special + get_object_vars(this);

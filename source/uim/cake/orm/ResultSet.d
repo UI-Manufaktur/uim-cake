@@ -359,12 +359,12 @@ class ResultSet : ResultSetInterface
     {
         $map = myQuery.getEagerLoader().associationsMap(this._defaultTable);
         this._matchingMap = (new Collection($map))
-            .match(["matching" => true])
+            .match(["matching":true])
             .indexBy("alias")
             .toArray();
 
         this._containMap = (new Collection(array_reverse($map)))
-            .match(["matching" => false])
+            .match(["matching":false])
             .indexBy("nestKey")
             .toArray();
     }
@@ -431,10 +431,10 @@ class ResultSet : ResultSetInterface
         $defaultAlias = this._defaultAlias;
         myResults = $presentAliases = [];
         myOptions = [
-            "useSetters" => false,
-            "markClean" => true,
-            "markNew" => false,
-            "guard" => false,
+            "useSetters":false,
+            "markClean":true,
+            "markNew":false,
+            "guard":false,
         ];
 
         foreach (this._matchingMapColumns as myAlias => myKeys) {
@@ -540,7 +540,7 @@ class ResultSet : ResultSetInterface
      */
     auto __debugInfo() {
         return [
-            "items" => this.toArray(),
+            "items":this.toArray(),
         ];
     }
 }

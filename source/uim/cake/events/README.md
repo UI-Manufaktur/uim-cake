@@ -27,7 +27,7 @@ class Orders
 	{
 		this.doStuff();
 		myEvent = new Event("Orders.afterPlace", this, [
-			"order" => $order
+			"order":$order
 		]);
 		this.getEventManager().dispatch(myEvent);
 	}

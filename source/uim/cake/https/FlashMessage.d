@@ -16,13 +16,13 @@ class FlashMessage
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "key" => "flash",
-        "element" => "default",
-        "plugin" => null,
-        "params" => [],
-        "clear" => false,
-        "duplicate" => true,
+    protected STRINGAA _defaultConfig = [
+        "key":"flash",
+        "element":"default",
+        "plugin":null,
+        "params":[],
+        "clear":false,
+        "duplicate":true,
     ];
 
     /**
@@ -96,10 +96,10 @@ class FlashMessage
         }
 
         myMessages[] = [
-            "message" => myMessage,
-            "key" => myOptions["key"],
-            "element" => myOptions["element"],
-            "params" => myOptions["params"],
+            "message":myMessage,
+            "key":myOptions["key"],
+            "element":myOptions["element"],
+            "params":myOptions["params"],
         ];
 
         this.session.write("Flash." . myOptions["key"], myMessages);
@@ -110,8 +110,8 @@ class FlashMessage
      *
      * The following options will be set by default if unset:
      * ```
-     * "element" => "error",
-     * `params" => ["code" => myException.getCode()]
+     * "element":"error",
+     * `params":["code":myException.getCode()]
      * ```
      *
      * @param \Throwable myException Exception instance.

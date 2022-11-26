@@ -35,12 +35,12 @@ trait AssociationsNormalizerTrait
             $first = array_shift(myPath);
             $pointer += [$first => []];
             $pointer = &$pointer[$first];
-            $pointer += ["associated" => []];
+            $pointer += ["associated":[]];
 
             foreach (myPath as $t) {
-                $pointer += ["associated" => []];
+                $pointer += ["associated":[]];
                 $pointer["associated"] += [$t => []];
-                $pointer["associated"][$t] += ["associated" => []];
+                $pointer["associated"][$t] += ["associated":[]];
                 $pointer = &$pointer["associated"][$t];
             }
 

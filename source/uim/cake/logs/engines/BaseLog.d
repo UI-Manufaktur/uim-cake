@@ -31,10 +31,10 @@ abstract class BaseLog : AbstractLogger
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "levels" => [],
-        "scopes" => [],
-        "formatter" => DefaultFormatter::class,
+    protected STRINGAA _defaultConfig = [
+        "levels":[],
+        "scopes":[],
+        "formatter":DefaultFormatter::class,
     ];
 
     /**

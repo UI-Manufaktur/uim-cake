@@ -16,7 +16,7 @@ class UrlHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected STRINGAA _defaultConfig = [
         'assetUrlClassName' => Asset::class,
     ];
 

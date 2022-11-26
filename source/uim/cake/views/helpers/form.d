@@ -55,7 +55,7 @@ class FormHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected STRINGAA _defaultConfig = [
         'idPrefix' => null,
         'errorClass' => 'form-error',
         'typeMap' => [

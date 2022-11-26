@@ -301,7 +301,7 @@ class CookieCollection : IteratorAggregate, Countable
 
         $cookies = static::createFromHeader(
             $response.getHeader("Set-Cookie"),
-            ["domain" => $host, "path" => myPath]
+            ["domain":$host, "path":myPath]
         );
         $new = clone this;
         foreach ($cookies as $cookie) {

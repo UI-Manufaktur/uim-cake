@@ -121,11 +121,11 @@ class SelectLoader
     protected auto _defaultOptions(): array
     {
         return [
-            "foreignKey" => this.foreignKey,
-            "conditions" => [],
-            "strategy" => this.strategy,
-            "nestKey" => this.alias,
-            "sort" => this.sort,
+            "foreignKey":this.foreignKey,
+            "conditions":[],
+            "strategy":this.strategy,
+            "nestKey":this.alias,
+            "sort":this.sort,
         ];
     }
 
@@ -196,9 +196,9 @@ class SelectLoader
      * ### Examples:
      *
      * The following will call the finder "translations" with the value of the finder as its options:
-     * myQuery.contain(["Comments" => ["finder" => ["translations"]]]);
-     * myQuery.contain(["Comments" => ["finder" => ["translations" => []]]]);
-     * myQuery.contain(["Comments" => ["finder" => ["translations" => ["locales" => ["en_US"]]]]]);
+     * myQuery.contain(["Comments":["finder":["translations"]]]);
+     * myQuery.contain(["Comments":["finder":["translations":[]]]]);
+     * myQuery.contain(["Comments":["finder":["translations":["locales":["en_US"]]]]]);
      *
      * @param array|string myFinderData The finder name or an array having the name as key
      * and options as value.
@@ -309,7 +309,7 @@ class SelectLoader
         if (is_array(myKey)) {
             $conditions = this._createTupleCondition(myQuery, myKey, $filter, "IN");
         } else {
-            $conditions = [myKey . " IN" => $filter];
+            $conditions = [myKey . " IN":$filter];
         }
 
         return myQuery.andWhere($conditions);
@@ -432,7 +432,7 @@ class SelectLoader
             });
         }
 
-        return ["select" => myFields, "group" => myGroup];
+        return ["select":myFields, "group":myGroup];
     }
 
     /**

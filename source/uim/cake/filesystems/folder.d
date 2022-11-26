@@ -760,11 +760,11 @@ class Folder
             return false;
         }
         myOptions += [
-            "from" => this.path,
-            "mode" => this.mode,
-            "skip" => [],
-            "scheme" => Folder::MERGE,
-            "recursive" => true,
+            "from":this.path,
+            "mode":this.mode,
+            "skip":[],
+            "scheme":Folder::MERGE,
+            "recursive":true,
         ];
 
         $fromDir = myOptions["from"];
@@ -821,13 +821,13 @@ class Folder
                             chmod($to, myMode);
                             umask($old);
                             this._messages[] = sprintf("%s created", $to);
-                            myOptions = ["from" => $from] + myOptions;
+                            myOptions = ["from":$from] + myOptions;
                             this.copy($to, myOptions);
                         } else {
                             this._errors[] = sprintf("%s not created", $to);
                         }
                     } elseif (is_dir($from) && myOptions["scheme"] === Folder::MERGE) {
-                        myOptions = ["from" => $from] + myOptions;
+                        myOptions = ["from":$from] + myOptions;
                         this.copy($to, myOptions);
                     }
                 }
@@ -856,7 +856,7 @@ class Folder
      * @return bool Success
      */
     bool move(string $to, array myOptions = []) {
-        myOptions += ["from" => this.path, "mode" => this.mode, "skip" => [], "recursive" => true];
+        myOptions += ["from":this.path, "mode":this.mode, "skip":[], "recursive":true];
 
         if (this.copy($to, myOptions) && this.delete(myOptions["from"])) {
             return (bool)this.cd($to);

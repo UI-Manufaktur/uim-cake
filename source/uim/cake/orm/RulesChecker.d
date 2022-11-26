@@ -38,7 +38,7 @@ class RulesChecker : BaseRulesChecker
      */
     function isUnique(array myFields, myMessage = null): RuleInvoker
     {
-        myOptions = is_array(myMessage) ? myMessage : ["message" => myMessage];
+        myOptions = is_array(myMessage) ? myMessage : ["message":myMessage];
         myMessage = myOptions["message"] ?? null;
         unset(myOptions["message"]);
 
@@ -84,7 +84,7 @@ class RulesChecker : BaseRulesChecker
     {
         myOptions = [];
         if (is_array(myMessage)) {
-            myOptions = myMessage + ["message" => null];
+            myOptions = myMessage + ["message":null];
             myMessage = myOptions["message"];
             unset(myOptions["message"]);
         }

@@ -83,7 +83,7 @@ class XmlView : SerializedView
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected STRINGAA _defaultConfig = [
         'serialize' => null,
         'xmlOptions' => null,
         'rootNode' => null,

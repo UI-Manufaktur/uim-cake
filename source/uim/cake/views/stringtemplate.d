@@ -72,7 +72,7 @@ class StringTemplate {
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
     /**
      * A stack of template sets that have been stashed temporarily.

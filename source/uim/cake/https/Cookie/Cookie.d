@@ -104,12 +104,12 @@ class Cookie : CookieInterface
      * @see \Cake\Http\Cookie\Cookie::setDefaults()
      */
     protected static $defaults = [
-        "expires" => null,
-        "path" => "/",
-        "domain" => "",
-        "secure" => false,
-        "httponly" => false,
-        "samesite" => null,
+        "expires":null,
+        "path":"/",
+        "domain":"",
+        "secure":false,
+        "httponly":false,
+        "samesite":null,
     ];
 
     /**
@@ -269,8 +269,8 @@ class Cookie : CookieInterface
 
         [myName, myValue] = explode("=", array_shift($parts), 2);
         myData = [
-                "name" => urldecode(myName),
-                "value" => urldecode(myValue),
+                "name":urldecode(myName),
+                "value":urldecode(myValue),
             ] + $defaults;
 
         foreach ($parts as $part) {
@@ -668,11 +668,11 @@ class Cookie : CookieInterface
     auto getOptions(): array
     {
         myOptions = [
-            "expires" => (int)this.getExpiresTimestamp(),
-            "path" => this.path,
-            "domain" => this.domain,
-            "secure" => this.secure,
-            "httponly" => this.httpOnly,
+            "expires":(int)this.getExpiresTimestamp(),
+            "path":this.path,
+            "domain":this.domain,
+            "secure":this.secure,
+            "httponly":this.httpOnly,
         ];
 
         if (this.sameSite !== null) {
@@ -686,8 +686,8 @@ class Cookie : CookieInterface
     function toArray(): array
     {
         return [
-            "name" => this.name,
-            "value" => this.getScalarValue(),
+            "name":this.name,
+            "value":this.getScalarValue(),
         ] + this.getOptions();
     }
 

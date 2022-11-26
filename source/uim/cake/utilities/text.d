@@ -156,7 +156,7 @@ class Text
      * corresponds to a variable placeholder name in $str.
      * Example:
      * ```
-     * Text::insert(":name is :age years old.", ["name" => "Bob", "age" => "65"]);
+     * Text::insert(":name is :age years old.", ["name":"Bob", "age":"65"]);
      * ```
      * Returns: Bob is 65 years old.
      *
@@ -177,7 +177,7 @@ class Text
      */
     static string insert(string $str, array myData, array myOptions = []) {
         $defaults = [
-            "before" => ":", "after" => "", "escape" => "\\", "format" => null, "clean" => false,
+            "before":":", "after":"", "escape":"\\", "format":null, "clean":false,
         ];
         myOptions += $defaults;
         if (empty(myData)) {
@@ -251,17 +251,17 @@ class Text
             return $str;
         }
         if ($clean === true) {
-            $clean = ["method" => "text"];
+            $clean = ["method":"text"];
         }
         if (!is_array($clean)) {
-            $clean = ["method" => myOptions["clean"]];
+            $clean = ["method":myOptions["clean"]];
         }
         switch ($clean["method"]) {
             case "html":
                 $clean += [
-                    "word" => "[\w,.]+",
-                    "andText" => true,
-                    "replacement" => "",
+                    "word":"[\w,.]+",
+                    "andText":true,
+                    "replacement":"",
                 ];
                 $kleenex = sprintf(
                     "/[\s]*[a-z]+=(")(%s%s%s[\s]*)+\\1/i",
@@ -271,15 +271,15 @@ class Text
                 );
                 $str = preg_replace($kleenex, $clean["replacement"], $str);
                 if ($clean["andText"]) {
-                    myOptions["clean"] = ["method" => "text"];
+                    myOptions["clean"] = ["method":"text"];
                     $str = static::cleanInsert($str, myOptions);
                 }
                 break;
             case "text":
                 $clean += [
-                    "word" => "[\w,.]+",
-                    "gap" => "[\s]*(?:(?:and|or)[\s]*)?",
-                    "replacement" => "",
+                    "word":"[\w,.]+",
+                    "gap":"[\s]*(?:(?:and|or)[\s]*)?",
+                    "replacement":"",
                 ];
 
                 $kleenex = sprintf(
@@ -316,9 +316,9 @@ class Text
      */
     static string wrap(string $text, myOptions = []) {
         if (is_numeric(myOptions)) {
-            myOptions = ["width" => myOptions];
+            myOptions = ["width":myOptions];
         }
-        myOptions += ["width" => 72, "wordWrap" => true, "indent" => null, "indentAt" => 0];
+        myOptions += ["width":72, "wordWrap":true, "indent":null, "indentAt":0];
         if (myOptions["wordWrap"]) {
             $wrapped = self::wordWrap($text, myOptions["width"], "\n");
         } else {
@@ -352,9 +352,9 @@ class Text
      */
     static string wrapBlock(string $text, myOptions = []) {
         if (is_numeric(myOptions)) {
-            myOptions = ["width" => myOptions];
+            myOptions = ["width":myOptions];
         }
-        myOptions += ["width" => 72, "wordWrap" => true, "indent" => null, "indentAt" => 0];
+        myOptions += ["width":72, "wordWrap":true, "indent":null, "indentAt":0];
 
         if (!empty(myOptions["indentAt"]) && myOptions["indentAt"] === 0) {
             $indentLength = !empty(myOptions["indent"]) ? strlen(myOptions["indent"]) : 0;
@@ -480,10 +480,10 @@ class Text
         }
 
         $defaults = [
-            "format" => "<span class="highlight">\1</span>",
-            "html" => false,
-            "regex" => "|%s|iu",
-            "limit" => -1,
+            "format":"<span class="highlight">\1</span>",
+            "html":false,
+            "regex":"|%s|iu",
+            "limit":-1,
         ];
         myOptions += $defaults;
 
@@ -535,7 +535,7 @@ class Text
      */
     static string tail(string $text, int $length = 100, array myOptions = []) {
         $default = [
-            "ellipsis" => "...", "exact" => true,
+            "ellipsis":"...", "exact":true,
         ];
         myOptions += $default;
         $ellipsis = myOptions["ellipsis"];
@@ -576,7 +576,7 @@ class Text
     {
         $default = [
             "ellipsis": "...", 
-            "exact": "true", "html" => false, "trimWidth" => false,
+            "exact": "true", "html":false, "trimWidth":false,
         ];
         if (!empty(myOptions["html"]) && strtolower((string)mb_internal_encoding()) === "utf-8") {
             $default["ellipsis"] = "\xe2\x80\xa6";
@@ -678,7 +678,7 @@ class Text
      */
     static function truncateByWidth(string $text, int $length = 100, array myOptions = []): string
     {
-        return static::truncate($text, $length, ["trimWidth" => true] + myOptions);
+        return static::truncate($text, $length, ["trimWidth":true] + myOptions);
     }
 
     /**
@@ -740,7 +740,7 @@ class Text
             $substr = "mb_strimwidth";
         }
 
-        $maxPosition = self::_strlen($text, ["trimWidth" => false] + myOptions);
+        $maxPosition = self::_strlen($text, ["trimWidth":false] + myOptions);
         if ($start < 0) {
             $start += $maxPosition;
             if ($start < 0) {
@@ -779,7 +779,7 @@ class Text
             $offset = 0;
 
             if ($totalOffset < $start) {
-                $len = self::_strlen($part, ["trimWidth" => false] + myOptions);
+                $len = self::_strlen($part, ["trimWidth":false] + myOptions);
                 if ($totalOffset + $len <= $start) {
                     $totalOffset += $len;
                     continue;
@@ -853,7 +853,7 @@ class Text
     static function excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "..."): string
     {
         if (empty($text) || empty($phrase)) {
-            return static::truncate($text, $radius * 2, ["ellipsis" => $ellipsis]);
+            return static::truncate($text, $radius * 2, ["ellipsis":$ellipsis]);
         }
 
         $append = $prepend = $ellipsis;
@@ -1129,12 +1129,12 @@ class Text
     static function slug(string $string, myOptions = []): string
     {
         if (is_string(myOptions)) {
-            myOptions = ["replacement" => myOptions];
+            myOptions = ["replacement":myOptions];
         }
         myOptions += [
-            "replacement" => "-",
-            "transliteratorId" => null,
-            "preserve" => null,
+            "replacement":"-",
+            "transliteratorId":null,
+            "preserve":null,
         ];
 
         if (myOptions["transliteratorId"] !== false) {
@@ -1147,7 +1147,7 @@ class Text
         }
         $quotedReplacement = preg_quote((string)myOptions["replacement"], "/");
         $map = [
-            "/[" . $regex . "]/mu" => myOptions["replacement"],
+            "/[" . $regex . "]/mu":myOptions["replacement"],
             sprintf("/^[%s]+|[%s]+$/", $quotedReplacement, $quotedReplacement) => "",
         ];
         if (is_string(myOptions["replacement"]) && myOptions["replacement"] !== "") {

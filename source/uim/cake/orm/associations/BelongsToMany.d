@@ -247,7 +247,7 @@ class BelongsToMany : Association
 
             myConfig = [];
             if (!myTableLocator.exists(myTableAlias)) {
-                myConfig = ["table" => myTableName, "allowFallbackClass" => true];
+                myConfig = ["table":myTableName, "allowFallbackClass":true];
 
                 // Propagate the connection if we"ll get an auto-model
                 if (!App::className(myTableAlias, "Model/Table", "Table")) {
@@ -307,21 +307,21 @@ class BelongsToMany : Association
 
         if (!myTarget.hasAssociation($junctionAlias)) {
             myTarget.hasMany($junctionAlias, [
-                "targetTable" => $junction,
-                "bindingKey" => myTargetBindingKey,
-                "foreignKey" => this.getTargetForeignKey(),
-                "strategy" => this._strategy,
+                "targetTable":$junction,
+                "bindingKey":myTargetBindingKey,
+                "foreignKey":this.getTargetForeignKey(),
+                "strategy":this._strategy,
             ]);
         }
         if (!myTarget.hasAssociation($sAlias)) {
             myTarget.belongsToMany($sAlias, [
-                "sourceTable" => myTarget,
-                "targetTable" => $source,
-                "foreignKey" => this.getTargetForeignKey(),
-                "targetForeignKey" => this.getForeignKey(),
-                "through" => $junction,
-                "conditions" => this.getConditions(),
-                "strategy" => this._strategy,
+                "sourceTable":myTarget,
+                "targetTable":$source,
+                "foreignKey":this.getTargetForeignKey(),
+                "targetForeignKey":this.getForeignKey(),
+                "through":$junction,
+                "conditions":this.getConditions(),
+                "strategy":this._strategy,
             ]);
         }
     }
@@ -352,10 +352,10 @@ class BelongsToMany : Association
 
         if (!$source.hasAssociation($junctionAlias)) {
             $source.hasMany($junctionAlias, [
-                "targetTable" => $junction,
-                "bindingKey" => $sourceBindingKey,
-                "foreignKey" => this.getForeignKey(),
-                "strategy" => this._strategy,
+                "targetTable":$junction,
+                "bindingKey":$sourceBindingKey,
+                "foreignKey":this.getForeignKey(),
+                "strategy":this._strategy,
             ]);
         }
     }
@@ -384,8 +384,8 @@ class BelongsToMany : Association
 
         if (!$junction.hasAssociation($tAlias)) {
             $junction.belongsTo($tAlias, [
-                "foreignKey" => this.getTargetForeignKey(),
-                "targetTable" => myTarget,
+                "foreignKey":this.getTargetForeignKey(),
+                "targetTable":myTarget,
             ]);
         } else {
             $belongsTo = $junction.getAssociation($tAlias);
@@ -402,8 +402,8 @@ class BelongsToMany : Association
 
         if (!$junction.hasAssociation($sAlias)) {
             $junction.belongsTo($sAlias, [
-                "foreignKey" => this.getForeignKey(),
-                "targetTable" => $source,
+                "foreignKey":this.getForeignKey(),
+                "targetTable":$source,
             ]);
         }
     }
@@ -435,18 +435,18 @@ class BelongsToMany : Association
 
         $junction = this.junction();
         $belongsTo = $junction.getAssociation(this.getSource().getAlias());
-        $cond = $belongsTo._joinCondition(["foreignKey" => $belongsTo.getForeignKey()]);
+        $cond = $belongsTo._joinCondition(["foreignKey":$belongsTo.getForeignKey()]);
         $cond += this.junctionConditions();
 
         $includeFields = myOptions["includeFields"] ?? null;
 
         // Attach the junction table as well we need it to populate _joinData.
         $assoc = this._targetTable.getAssociation($junction.getAlias());
-        $newOptions = array_intersect_key(myOptions, ["joinType" => 1, "fields" => 1]);
+        $newOptions = array_intersect_key(myOptions, ["joinType":1, "fields":1]);
         $newOptions += [
-            "conditions" => $cond,
-            "includeFields" => $includeFields,
-            "foreignKey" => false,
+            "conditions":$cond,
+            "includeFields":$includeFields,
+            "foreignKey":false,
         ];
         $assoc.attachTo(myQuery, $newOptions);
         myQuery.getEagerLoader().addToJoinsMap($junction.getAlias(), $assoc, true);
@@ -455,7 +455,7 @@ class BelongsToMany : Association
 
         $foreignKey = this.getTargetForeignKey();
         thisJoin = myQuery.clause("join")[this.getName()];
-        thisJoin["conditions"].add($assoc._joinCondition(["foreignKey" => $foreignKey]));
+        thisJoin["conditions"].add($assoc._joinCondition(["foreignKey":$foreignKey]));
     }
 
 
@@ -467,7 +467,7 @@ class BelongsToMany : Association
         myOptions["conditions"] = myOptions["conditions"] ?? [];
         $junction = this.junction();
         $belongsTo = $junction.getAssociation(this.getSource().getAlias());
-        $conds = $belongsTo._joinCondition(["foreignKey" => $belongsTo.getForeignKey()]);
+        $conds = $belongsTo._joinCondition(["foreignKey":$belongsTo.getForeignKey()]);
 
         $subquery = this.find()
             .select(array_values($conds))
@@ -519,19 +519,19 @@ class BelongsToMany : Association
     {
         myName = this._junctionAssociationName();
         $loader = new SelectWithPivotLoader([
-            "alias" => this.getAlias(),
-            "sourceAlias" => this.getSource().getAlias(),
-            "targetAlias" => this.getTarget().getAlias(),
-            "foreignKey" => this.getForeignKey(),
-            "bindingKey" => this.getBindingKey(),
-            "strategy" => this.getStrategy(),
-            "associationType" => this.type(),
-            "sort" => this.getSort(),
-            "junctionAssociationName" => myName,
-            "junctionProperty" => this._junctionProperty,
-            "junctionAssoc" => this.getTarget().getAssociation(myName),
-            "junctionConditions" => this.junctionConditions(),
-            "finder" => function () {
+            "alias":this.getAlias(),
+            "sourceAlias":this.getSource().getAlias(),
+            "targetAlias":this.getTarget().getAlias(),
+            "foreignKey":this.getForeignKey(),
+            "bindingKey":this.getBindingKey(),
+            "strategy":this.getStrategy(),
+            "associationType":this.type(),
+            "sort":this.getSort(),
+            "junctionAssociationName":myName,
+            "junctionProperty":this._junctionProperty,
+            "junctionAssoc":this.getTarget().getAssociation(myName),
+            "junctionConditions":this.junctionConditions(),
+            "finder":function () {
                 return this._appendJunctionJoin(this.find(), []);
             },
         ]);
@@ -759,7 +759,7 @@ class BelongsToMany : Association
         foreach (myTargetEntities as $e) {
             $joint = $e.get($jointProperty);
             if (!$joint || !($joint instanceof IEntity)) {
-                $joint = new $entityClass([], ["markNew" => true, "source" => $junctionRegistryAlias]);
+                $joint = new $entityClass([], ["markNew":true, "source":$junctionRegistryAlias]);
             }
             $sourceKeys = array_combine($foreignKey, $sourceEntity.extract($bindingKey));
             myTargetKeys = array_combine($assocForeignKey, $e.extract(myTargetBindingKey));
@@ -775,7 +775,7 @@ class BelongsToMany : Association
             if ($changedKeys) {
                 $joint.setNew(true);
                 $joint.unset($junction.getPrimaryKey())
-                    .set(array_merge($sourceKeys, myTargetKeys), ["guard" => false]);
+                    .set(array_merge($sourceKeys, myTargetKeys), ["guard":false]);
             }
             $saved = $junction.save($joint, myOptions);
 
@@ -872,10 +872,10 @@ class BelongsToMany : Association
     bool unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = []) {
         if (is_bool(myOptions)) {
             myOptions = [
-                "cleanProperty" => myOptions,
+                "cleanProperty":myOptions,
             ];
         } else {
-            myOptions += ["cleanProperty" => true];
+            myOptions += ["cleanProperty":true];
         }
 
         this._checkPersistenceStatus($sourceEntity, myTargetEntities);
@@ -1049,7 +1049,7 @@ class BelongsToMany : Association
         if ($conditions === null) {
             $belongsTo = $junctionTable.getAssociation(this.getTarget().getAlias());
             $conditions = $belongsTo._joinCondition([
-                "foreignKey" => this.getTargetForeignKey(),
+                "foreignKey":this.getTargetForeignKey(),
             ]);
             $conditions += this.junctionConditions();
         }
@@ -1059,9 +1059,9 @@ class BelongsToMany : Association
         $joins = myQuery.clause("join");
         $matching = [
             myName => [
-                "table" => $junctionTable.getTable(),
-                "conditions" => $conditions,
-                "type" => Query::JOIN_TYPE_INNER,
+                "table":$junctionTable.getTable(),
+                "conditions":$conditions,
+                "type":Query::JOIN_TYPE_INNER,
             ],
         ];
 

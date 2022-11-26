@@ -218,7 +218,7 @@ class ResponseEmitter : EmitterInterface
      */
     protected bool setCookie($cookie) {
         if (is_string($cookie)) {
-            $cookie = Cookie::createFromHeaderString($cookie, ["path" => ""]);
+            $cookie = Cookie::createFromHeaderString($cookie, ["path":""]);
         }
 
         if (PHP_VERSION_ID >= 70300) {

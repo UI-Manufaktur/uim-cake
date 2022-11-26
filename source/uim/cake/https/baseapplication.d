@@ -248,7 +248,7 @@ abstract class BaseApplication :
             myPlugin.services(myContainer);
         }
 
-        myEvent = this.dispatchEvent("Application.buildContainer", ["container" => myContainer]);
+        myEvent = this.dispatchEvent("Application.buildContainer", ["container":myContainer]);
         if (myEvent.getResult() instanceof IContainer) {
             return myEvent.getResult();
         }

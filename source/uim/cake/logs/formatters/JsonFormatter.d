@@ -17,10 +17,10 @@ class JsonFormatter : AbstractFormatter
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "dateFormat" => DATE_ATOM,
-        "flags" => JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-        "appendNewline" => true,
+    protected STRINGAA _defaultConfig = [
+        "dateFormat":DATE_ATOM,
+        "flags":JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+        "appendNewline":true,
     ];
 
     /**
@@ -32,7 +32,7 @@ class JsonFormatter : AbstractFormatter
 
 
     string format($level, string myMessage, array $context = []) {
-        $log = ["date" => date(this._config["dateFormat"]), "level" => (string)$level, "message" => myMessage];
+        $log = ["date":date(this._config["dateFormat"]), "level":(string)$level, "message":myMessage];
         $json = json_encode($log, this._config["flags"]);
 
         return this._config["appendNewline"] ? $json . "\n" : $json;

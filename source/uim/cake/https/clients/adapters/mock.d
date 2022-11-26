@@ -41,9 +41,9 @@ class Mock : AdapterInterface
             throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{myType}`.");
         }
         this.responses[] = [
-            "request" => myRequest,
-            "response" => $response,
-            "options" => myOptions,
+            "request":myRequest,
+            "response":$response,
+            "options":myOptions,
         ];
     }
 
@@ -89,7 +89,7 @@ class Mock : AdapterInterface
             return [$mock["response"]];
         }
 
-        throw new MissingResponseException(["method" => $method, "url" => myRequestUri]);
+        throw new MissingResponseException(["method":$method, "url":myRequestUri]);
     }
 
     /**

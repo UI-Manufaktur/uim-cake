@@ -17,7 +17,7 @@ use Closure;
  * Regular counter cache
  * ```
  * [
- *     "Users" => [
+ *     "Users":[
  *         "post_count"
  *     ]
  * ]
@@ -26,10 +26,10 @@ use Closure;
  * Counter cache with scope
  * ```
  * [
- *     "Users" => [
- *         "posts_published" => [
- *             "conditions" => [
- *                 "published" => true
+ *     "Users":[
+ *         "posts_published":[
+ *             "conditions":[
+ *                 "published":true
  *             ]
  *         ]
  *     ]
@@ -39,9 +39,9 @@ use Closure;
  * Counter cache using custom find
  * ```
  * [
- *     "Users" => [
- *         "posts_published" => [
- *             "finder" => "published" // Will be using findPublished()
+ *     "Users":[
+ *         "posts_published":[
+ *             "finder":"published" // Will be using findPublished()
  *         ]
  *     ]
  * ]
@@ -52,11 +52,11 @@ use Closure;
  *
  * ```
  * [
- *     "Users" => [
- *         "posts_published" => function (IEvent myEvent, IEntity $entity, Table myTable) {
+ *     "Users":[
+ *         "posts_published":function (IEvent myEvent, IEntity $entity, Table myTable) {
  *             myQuery = myTable.find("all").where([
- *                 "published" => true,
- *                 "user_id" => $entity.get("user_id")
+ *                 "published":true,
+ *                 "user_id":$entity.get("user_id")
  *             ]);
  *             return myQuery.count();
  *          }
@@ -70,9 +70,9 @@ use Closure;
  * Ignore updating the field if it is dirty
  * ```
  * [
- *     "Users" => [
- *         "posts_published" => [
- *             "ignoreDirty" => true
+ *     "Users":[
+ *         "posts_published":[
+ *             "ignoreDirty":true
  *         ]
  *     ]
  * ]
@@ -82,7 +82,7 @@ use Closure;
  * to your save operation:
  *
  * ```
- * this.Articles.save($article, ["ignoreCounterCache" => true]);
+ * this.Articles.save($article, ["ignoreCounterCache":true]);
  * ```
  */
 class CounterCacheBehavior : Behavior

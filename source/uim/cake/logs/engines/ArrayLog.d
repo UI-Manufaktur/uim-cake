@@ -16,12 +16,12 @@ class ArrayLog : BaseLog
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "levels" => [],
-        "scopes" => [],
-        "formatter" => [
-            "className" => DefaultFormatter::class,
-            "includeDate" => false,
+    protected STRINGAA _defaultConfig = [
+        "levels":[],
+        "scopes":[],
+        "formatter":[
+            "className":DefaultFormatter::class,
+            "includeDate":false,
         ],
     ];
 

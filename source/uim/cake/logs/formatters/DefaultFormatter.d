@@ -7,10 +7,10 @@ class DefaultFormatter : AbstractFormatter
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "dateFormat" => "Y-m-d H:i:s",
-        "includeTags" => false,
-        "includeDate" => true,
+    protected STRINGAA _defaultConfig = [
+        "dateFormat":"Y-m-d H:i:s",
+        "includeTags":false,
+        "includeDate":true,
     ];
 
     /**

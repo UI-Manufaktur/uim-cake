@@ -367,7 +367,7 @@ abstract class Association
             myConfig = [];
             $exists = myTableLocator.exists($registryAlias);
             if (!$exists) {
-                myConfig = ["className" => this._className];
+                myConfig = ["className":this._className];
             }
             this._targetTable = myTableLocator.get($registryAlias, myConfig);
 
@@ -666,13 +666,13 @@ abstract class Association
         myTable = myTarget.getTable();
 
         myOptions += [
-            "includeFields" => true,
-            "foreignKey" => this.getForeignKey(),
-            "conditions" => [],
-            "joinType" => this.getJoinType(),
-            "fields" => [],
-            "table" => myTable,
-            "finder" => this.getFinder(),
+            "includeFields":true,
+            "foreignKey":this.getForeignKey(),
+            "conditions":[],
+            "joinType":this.getJoinType(),
+            "fields":[],
+            "table":myTable,
+            "finder":this.getFinder(),
         ];
 
         // This is set by joinWith to disable matching results
@@ -717,9 +717,9 @@ abstract class Association
         this._dispatchBeforeFind($dummy);
 
         myQuery.join([this._name => [
-            "table" => myOptions["table"],
-            "conditions" => $dummy.clause("where"),
-            "type" => myOptions["joinType"],
+            "table":myOptions["table"],
+            "conditions":$dummy.clause("where"),
+            "type":myOptions["joinType"],
         ]]);
 
         this._appendFields(myQuery, $dummy, myOptions);
@@ -1068,9 +1068,9 @@ abstract class Association
      * ### Examples:
      *
      * The following will call the finder "translations" with the value of the finder as its options:
-     * myQuery.contain(["Comments" => ["finder" => ["translations"]]]);
-     * myQuery.contain(["Comments" => ["finder" => ["translations" => []]]]);
-     * myQuery.contain(["Comments" => ["finder" => ["translations" => ["locales" => ["en_US"]]]]]);
+     * myQuery.contain(["Comments":["finder":["translations"]]]);
+     * myQuery.contain(["Comments":["finder":["translations":[]]]]);
+     * myQuery.contain(["Comments":["finder":["translations":["locales":["en_US"]]]]]);
      *
      * @param array|string myFinderData The finder name or an array having the name as key
      * and options as value.

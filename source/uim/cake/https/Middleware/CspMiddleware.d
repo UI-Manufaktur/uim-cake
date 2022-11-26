@@ -43,9 +43,9 @@ class CspMiddleware : MiddlewareInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "scriptNonce" => false,
-        "styleNonce" => false,
+    protected STRINGAA _defaultConfig = [
+        "scriptNonce":false,
+        "styleNonce":false,
     ];
 
     /**

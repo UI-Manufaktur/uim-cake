@@ -191,7 +191,7 @@ class File {
             $lineBreak = "\r\n";
         }
 
-        return strtr(myData, ["\r\n" => $lineBreak, "\n" => $lineBreak, "\r" => $lineBreak]);
+        return strtr(myData, ["\r\n":$lineBreak, "\n":$lineBreak, "\r":$lineBreak]);
     }
 
     /**

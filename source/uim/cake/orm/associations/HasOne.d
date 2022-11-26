@@ -90,7 +90,7 @@ class HasOne : Association
             (array)this.getForeignKey(),
             $entity.extract((array)this.getBindingKey())
         );
-        myTargetEntity.set($properties, ["guard" => false]);
+        myTargetEntity.set($properties, ["guard":false]);
 
         if (!this.getTarget().save(myTargetEntity, myOptions)) {
             myTargetEntity.unset(array_keys($properties));
@@ -105,14 +105,14 @@ class HasOne : Association
     function eagerLoader(array myOptions): Closure
     {
         $loader = new SelectLoader([
-            "alias" => this.getAlias(),
-            "sourceAlias" => this.getSource().getAlias(),
-            "targetAlias" => this.getTarget().getAlias(),
-            "foreignKey" => this.getForeignKey(),
-            "bindingKey" => this.getBindingKey(),
-            "strategy" => this.getStrategy(),
-            "associationType" => this.type(),
-            "finder" => [this, "find"],
+            "alias":this.getAlias(),
+            "sourceAlias":this.getSource().getAlias(),
+            "targetAlias":this.getTarget().getAlias(),
+            "foreignKey":this.getForeignKey(),
+            "bindingKey":this.getBindingKey(),
+            "strategy":this.getStrategy(),
+            "associationType":this.type(),
+            "finder":[this, "find"],
         ]);
 
         return $loader.buildEagerLoader(myOptions);

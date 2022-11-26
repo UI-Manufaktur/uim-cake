@@ -257,8 +257,8 @@ class FormProtector
         $unlockedFields = this.sortedUnlockedFields($formData);
 
         return [
-            "fields" => myFields,
-            "unlockedFields" => $unlockedFields,
+            "fields":myFields,
+            "unlockedFields":$unlockedFields,
         ];
     }
 
@@ -386,9 +386,9 @@ class FormProtector
         $locked = implode("|", array_keys($locked));
 
         return [
-            "fields" => urlencode(myFields . ":" . $locked),
-            "unlocked" => urlencode(implode("|", $unlockedFields)),
-            "debug" => urlencode(json_encode([
+            "fields":urlencode(myFields . ":" . $locked),
+            "unlocked":urlencode(implode("|", $unlockedFields)),
+            "debug":urlencode(json_encode([
                 myUrl,
                 this.fields,
                 this.unlockedFields,
@@ -558,9 +558,9 @@ class FormProtector
     auto __debugInfo(): array
     {
         return [
-            "fields" => this.fields,
-            "unlockedFields" => this.unlockedFields,
-            "debugMessage" => this.debugMessage,
+            "fields":this.fields,
+            "unlockedFields":this.unlockedFields,
+            "debugMessage":this.debugMessage,
         ];
     }
 }

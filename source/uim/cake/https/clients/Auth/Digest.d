@@ -68,7 +68,7 @@ class Digest
         $response = this._client.get(
             (string)myRequest.getUri(),
             [],
-            ["auth" => ["type" => null]]
+            ["auth":["type":null]]
         );
 
         if (!$response.getHeader("WWW-Authenticate")) {

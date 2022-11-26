@@ -30,19 +30,19 @@ class TimestampBehavior : Behavior
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "implementedFinders" => [],
-        "implementedMethods" => [
-            "timestamp" => "timestamp",
-            "touch" => "touch",
+    protected STRINGAA _defaultConfig = [
+        "implementedFinders":[],
+        "implementedMethods":[
+            "timestamp":"timestamp",
+            "touch":"touch",
         ],
-        "events" => [
-            "Model.beforeSave" => [
-                "created" => "new",
-                "modified" => "always",
+        "events":[
+            "Model.beforeSave":[
+                "created":"new",
+                "modified":"always",
             ],
         ],
-        "refreshTimestamp" => true,
+        "refreshTimestamp":true,
     ];
 
     /**

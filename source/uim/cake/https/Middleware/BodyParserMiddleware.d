@@ -54,7 +54,7 @@ class BodyParserMiddleware : MiddlewareInterface
      * @param array<string, mixed> myOptions The options to use. See above.
      */
     this(array myOptions = []) {
-        myOptions += ["json" => true, "xml" => false, "methods" => null];
+        myOptions += ["json":true, "xml":false, "methods":null];
         if (myOptions["json"]) {
             this.addParser(
                 ["application/json", "text/json"],
@@ -190,7 +190,7 @@ class BodyParserMiddleware : MiddlewareInterface
     protected auto decodeXml(string $body): array
     {
         try {
-            $xml = Xml::build($body, ["return" => "domdocument", "readFile" => false]);
+            $xml = Xml::build($body, ["return":"domdocument", "readFile":false]);
             // We might not get child nodes if there are nested inline entities.
             if ((int)$xml.childNodes.length > 0) {
                 return Xml::toArray($xml);

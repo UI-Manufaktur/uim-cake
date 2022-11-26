@@ -36,10 +36,10 @@ class HttpsEnforcerMiddleware : MiddlewareInterface
      * @var array<string, mixed>
      */
     protected myConfig = [
-        "redirect" => true,
-        "statusCode" => 301,
-        "headers" => [],
-        "disableOnDebug" => true,
+        "redirect":true,
+        "statusCode":301,
+        "headers":[],
+        "disableOnDebug":true,
     ];
 
     /**

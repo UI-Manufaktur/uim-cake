@@ -58,21 +58,21 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
         /** @psalm-suppress NoInterfaceProperties */
         $sessionConfig = (array)Configure::read("Session") + [
-            "defaults" => "php",
-            "cookiePath" => $uri.webroot,
+            "defaults":"php",
+            "cookiePath":$uri.webroot,
         ];
         $session = Session::create($sessionConfig);
 
         /** @psalm-suppress NoInterfaceProperties */
         myRequest = new ServerRequest([
-            "environment" => $server,
-            "uri" => $uri,
-            "cookies" => $cookies ?: $_COOKIE,
-            "query" => myQuery ?: $_GET,
-            "webroot" => $uri.webroot,
-            "base" => $uri.base,
-            "session" => $session,
-            "input" => $server["CAKEPHP_INPUT"] ?? null,
+            "environment":$server,
+            "uri":$uri,
+            "cookies":$cookies ?: $_COOKIE,
+            "query":myQuery ?: $_GET,
+            "webroot":$uri.webroot,
+            "base":$uri.base,
+            "session":$session,
+            "input":$server["CAKEPHP_INPUT"] ?? null,
         ]);
 
         myRequest = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, myRequest);
@@ -156,11 +156,11 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
                     $tmpName = myfile.getStream().getMetadata("uri");
                 }
                 $parsedBody = Hash::insert($parsedBody, (string)myKey, [
-                    "tmp_name" => $tmpName,
-                    "error" => myError,
-                    "name" => myfile.getClientFilename(),
-                    "type" => myfile.getClientMediaType(),
-                    "size" => myfile.getSize(),
+                    "tmp_name":$tmpName,
+                    "error":myError,
+                    "name":myfile.getClientFilename(),
+                    "type":myfile.getClientMediaType(),
+                    "size":myfile.getSize(),
                 ]);
             }
         }
@@ -186,7 +186,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     function createServerRequest(string $method, $uri, array $serverParams = []): IServerRequest
     {
         $serverParams["REQUEST_METHOD"] = $method;
-        myOptions = ["environment" => $serverParams];
+        myOptions = ["environment":$serverParams];
 
         if ($uri instanceof UriInterface) {
             myOptions["uri"] = $uri;
@@ -292,9 +292,9 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     protected static auto getBase(UriInterface $uri, array $server): array
     {
         myConfig = (array)Configure::read("App") + [
-            "base" => null,
-            "webroot" => null,
-            "baseUrl" => null,
+            "base":null,
+            "webroot":null,
+            "baseUrl":null,
         ];
         $base = myConfig["base"];
         $baseUrl = myConfig["baseUrl"];

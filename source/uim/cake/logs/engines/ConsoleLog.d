@@ -24,14 +24,14 @@ class ConsoleLog : BaseLog
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "stream" => "php://stderr",
-        "levels" => null,
-        "scopes" => [],
-        "outputAs" => null,
-        "formatter" => [
-            "className" => DefaultFormatter::class,
-            "includeTags" => true,
+    protected STRINGAA _defaultConfig = [
+        "stream":"php://stderr",
+        "levels":null,
+        "scopes":[],
+        "outputAs":null,
+        "formatter":[
+            "className":DefaultFormatter::class,
+            "includeTags":true,
         ],
     ];
 

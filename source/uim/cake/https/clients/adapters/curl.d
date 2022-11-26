@@ -127,12 +127,12 @@ class Curl : AdapterInterface
             myOptions["ssl_verify_host"] = 2;
         }
         $optionMap = [
-            "timeout" => CURLOPT_TIMEOUT,
-            "ssl_verify_peer" => CURLOPT_SSL_VERIFYPEER,
-            "ssl_verify_host" => CURLOPT_SSL_VERIFYHOST,
-            "ssl_cafile" => CURLOPT_CAINFO,
-            "ssl_local_cert" => CURLOPT_SSLCERT,
-            "ssl_passphrase" => CURLOPT_SSLCERTPASSWD,
+            "timeout":CURLOPT_TIMEOUT,
+            "ssl_verify_peer":CURLOPT_SSL_VERIFYPEER,
+            "ssl_verify_host":CURLOPT_SSL_VERIFYHOST,
+            "ssl_cafile":CURLOPT_CAINFO,
+            "ssl_local_cert":CURLOPT_SSLCERT,
+            "ssl_passphrase":CURLOPT_SSLCERTPASSWD,
         ];
         foreach ($optionMap as $option => $curlOpt) {
             if (isset(myOptions[$option])) {

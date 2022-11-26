@@ -125,8 +125,8 @@ class Stream : AdapterInterface
             this._buildSslContext(myRequest, myOptions);
         }
         this._context = stream_context_create([
-            "http" => this._contextOptions,
-            "ssl" => this._sslContextOptions,
+            "http":this._contextOptions,
+            "ssl":this._sslContextOptions,
         ]);
     }
 

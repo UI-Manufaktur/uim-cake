@@ -117,7 +117,7 @@ trait TranslateStrategyTrait
      * Build a set of properties that should be included in the marshalling process.
 
      * Add in `_translations` marshalling handlers. You can disable marshalling
-     * of translations by setting `"translations" => false` in the options
+     * of translations by setting `"translations":false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
@@ -132,7 +132,7 @@ trait TranslateStrategyTrait
         }
 
         return [
-            "_translations" => function (myValue, $entity) use ($marshaller, myOptions) {
+            "_translations":function (myValue, $entity) use ($marshaller, myOptions) {
                 if (!is_array(myValue)) {
                     return null;
                 }
@@ -159,7 +159,7 @@ trait TranslateStrategyTrait
 
                 // Set errors into the root entity, so validation errors match the original form data position.
                 if (myErrors) {
-                    $entity.setErrors(["_translations" => myErrors]);
+                    $entity.setErrors(["_translations":myErrors]);
                 }
 
                 return $translations;

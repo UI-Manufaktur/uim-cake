@@ -128,38 +128,38 @@ class Session
     protected static auto _defaultConfig(string myName) {
         $tmp = defined("TMP") ? TMP : sys_get_temp_dir() . DIRECTORY_SEPARATOR;
         $defaults = [
-            "php" => [
-                "ini" => [
-                    "session.use_trans_sid" => 0,
+            "php":[
+                "ini":[
+                    "session.use_trans_sid":0,
                 ],
             ],
-            "cake" => [
-                "ini" => [
-                    "session.use_trans_sid" => 0,
-                    "session.serialize_handler" => "php",
-                    "session.use_cookies" => 1,
-                    "session.save_path" => $tmp . "sessions",
-                    "session.save_handler" => "files",
+            "cake":[
+                "ini":[
+                    "session.use_trans_sid":0,
+                    "session.serialize_handler":"php",
+                    "session.use_cookies":1,
+                    "session.save_path":$tmp . "sessions",
+                    "session.save_handler":"files",
                 ],
             ],
-            "cache" => [
-                "ini" => [
-                    "session.use_trans_sid" => 0,
-                    "session.use_cookies" => 1,
+            "cache":[
+                "ini":[
+                    "session.use_trans_sid":0,
+                    "session.use_cookies":1,
                 ],
-                "handler" => [
-                    "engine" => "CacheSession",
-                    "config" => "default",
+                "handler":[
+                    "engine":"CacheSession",
+                    "config":"default",
                 ],
             ],
-            "database" => [
-                "ini" => [
-                    "session.use_trans_sid" => 0,
-                    "session.use_cookies" => 1,
-                    "session.serialize_handler" => "php",
+            "database":[
+                "ini":[
+                    "session.use_trans_sid":0,
+                    "session.use_cookies":1,
+                    "session.serialize_handler":"php",
                 ],
-                "handler" => [
-                    "engine" => "DatabaseSession",
+                "handler":[
+                    "engine":"DatabaseSession",
                 ],
             ],
         ];
@@ -196,10 +196,10 @@ class Session
      */
     this(array myConfig = []) {
         myConfig += [
-            "timeout" => null,
-            "cookie" => null,
-            "ini" => [],
-            "handler" => [],
+            "timeout":null,
+            "cookie":null,
+            "ini":[],
+            "handler":[],
         ];
 
         if (myConfig["timeout"]) {
@@ -293,7 +293,7 @@ class Session
      * ### Example:
      *
      * ```
-     * $session.options(["session.use_cookies" => 1]);
+     * $session.options(["session.use_cookies":1]);
      * ```
      *
      * @param array<string, mixed> myOptions Ini options to set.

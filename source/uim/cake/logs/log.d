@@ -29,7 +29,7 @@ use Psr\Log\LoggerInterface;
  * A sample configuration would look like:
  *
  * ```
- * Log::setConfig("my_log", ["className" => "FileLog"]);
+ * Log::setConfig("my_log", ["className":"FileLog"]);
  * ```
  *
  * You can define the className as any fully moduled classname or use a short hand
@@ -49,9 +49,9 @@ use Psr\Log\LoggerInterface;
  *
  * ```
  * Log::setConfig("default", [
- *     "className" => "File",
- *     "path" => LOGS,
- *     "levels" => ["error", "critical", "alert", "emergency"]
+ *     "className":"File",
+ *     "path":LOGS,
+ *     "levels":["error", "critical", "alert", "emergency"]
  * ]);
  * ```
  *
@@ -67,8 +67,8 @@ use Psr\Log\LoggerInterface;
  *
  * ```
  * Log::setConfig("payments", [
- *     "className" => "File",
- *     "scopes" => ["payment", "order"]
+ *     "className":"File",
+ *     "scopes":["payment", "order"]
  * ]);
  * ```
  *
@@ -114,9 +114,9 @@ class Log
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        "console" => Engine\ConsoleLog::class,
-        "file" => Engine\FileLog::class,
-        "syslog" => Engine\SyslogLog::class,
+        "console":Engine\ConsoleLog::class,
+        "file":Engine\FileLog::class,
+        "syslog":Engine\SyslogLog::class,
     ];
 
     /**
@@ -156,14 +156,14 @@ class Log
      * @var array<string, int>
      */
     protected static $_levelMap = [
-        "emergency" => LOG_EMERG,
-        "alert" => LOG_ALERT,
-        "critical" => LOG_CRIT,
-        "error" => LOG_ERR,
-        "warning" => LOG_WARNING,
-        "notice" => LOG_NOTICE,
-        "info" => LOG_INFO,
-        "debug" => LOG_DEBUG,
+        "emergency":LOG_EMERG,
+        "alert":LOG_ALERT,
+        "critical":LOG_CRIT,
+        "error":LOG_ERR,
+        "warning":LOG_WARNING,
+        "notice":LOG_NOTICE,
+        "info":LOG_INFO,
+        "debug":LOG_DEBUG,
     ];
 
     /**
@@ -326,7 +326,7 @@ class Log
      * This allows you to handle messages differently based on application section/feature.
      *
      * ```
-     * Log::write("warning", "Payment failed", ["scope" => "payment"]);
+     * Log::write("warning", "Payment failed", ["scope":"payment"]);
      * ```
      *
      * When configuring loggers you can configure the scopes a particular logger will handle.
@@ -364,9 +364,9 @@ class Log
         $logged = false;
         $context = (array)$context;
         if (isset($context[0])) {
-            $context = ["scope" => $context];
+            $context = ["scope":$context];
         }
-        $context += ["scope" => []];
+        $context += ["scope":[]];
 
         foreach (static::$_registry.loaded() as $streamName) {
             $logger = static::$_registry.{$streamName};

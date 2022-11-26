@@ -37,17 +37,17 @@ class EagerLoader
      * @var array<string, int>
      */
     protected $_containOptions = [
-        "associations" => 1,
-        "foreignKey" => 1,
-        "conditions" => 1,
-        "fields" => 1,
-        "sort" => 1,
-        "matching" => 1,
-        "queryBuilder" => 1,
-        "finder" => 1,
-        "joinType" => 1,
-        "strategy" => 1,
-        "negateMatch" => 1,
+        "associations":1,
+        "foreignKey":1,
+        "conditions":1,
+        "fields":1,
+        "sort":1,
+        "matching":1,
+        "queryBuilder":1,
+        "finder":1,
+        "joinType":1,
+        "strategy":1,
+        "negateMatch":1,
     ];
 
     /**
@@ -127,7 +127,7 @@ class EagerLoader
 
             $associations = [
                 $associations => [
-                    "queryBuilder" => myQueryBuilder,
+                    "queryBuilder":myQueryBuilder,
                 ],
             ];
         }
@@ -226,8 +226,8 @@ class EagerLoader
             this._matching = new static();
         }
 
-        myOptions += ["joinType" => Query::JOIN_TYPE_INNER];
-        $sharedOptions = ["negateMatch" => false, "matching" => true] + myOptions;
+        myOptions += ["joinType":Query::JOIN_TYPE_INNER];
+        $sharedOptions = ["negateMatch":false, "matching":true] + myOptions;
 
         $contains = [];
         $nested = &$contains;
@@ -239,7 +239,7 @@ class EagerLoader
         }
 
         // Add all options to target association contain which is the last in nested chain
-        $nested = ["matching" => true, "queryBuilder" => myBuilder] + myOptions;
+        $nested = ["matching":true, "queryBuilder":myBuilder] + myOptions;
         this._matching.contain($contains);
 
         return this;
@@ -291,7 +291,7 @@ class EagerLoader
                 myRepository,
                 myAlias,
                 myOptions,
-                ["root" => null]
+                ["root":null]
             );
         }
 
@@ -350,7 +350,7 @@ class EagerLoader
             }
 
             if (myOptions instanceof Closure) {
-                myOptions = ["queryBuilder" => myOptions];
+                myOptions = ["queryBuilder":myOptions];
             }
 
             $pointer += [myTable => []];
@@ -398,9 +398,9 @@ class EagerLoader
         do {
             foreach ($attachable as myAlias => $loadable) {
                 myConfig = $loadable.getConfig() + [
-                    "aliasPath" => $loadable.aliasPath(),
-                    "propertyPath" => $loadable.propertyPath(),
-                    "includeFields" => $includeFields,
+                    "aliasPath":$loadable.aliasPath(),
+                    "propertyPath":$loadable.propertyPath(),
+                    "includeFields":$includeFields,
                 ];
                 $loadable.instance().attachTo(myQuery, myConfig);
                 $processed[myAlias] = true;
@@ -468,7 +468,7 @@ class EagerLoader
         $defaults = this._containOptions;
         $instance = $parent.getAssociation(myAlias);
 
-        myPaths += ["aliasPath" => "", "propertyPath" => "", "root" => myAlias];
+        myPaths += ["aliasPath":"", "propertyPath":"", "root":myAlias];
         myPaths["aliasPath"] .= "." . myAlias;
 
         if (
@@ -484,12 +484,12 @@ class EagerLoader
 
         $extra = array_diff_key(myOptions, $defaults);
         myConfig = [
-            "associations" => [],
-            "instance" => $instance,
-            "config" => array_diff_key(myOptions, $extra),
-            "aliasPath" => trim(myPaths["aliasPath"], "."),
-            "propertyPath" => trim(myPaths["propertyPath"], "."),
-            "targetProperty" => $instance.getProperty(),
+            "associations":[],
+            "instance":$instance,
+            "config":array_diff_key(myOptions, $extra),
+            "aliasPath":trim(myPaths["aliasPath"], "."),
+            "propertyPath":trim(myPaths["propertyPath"], "."),
+            "targetProperty":$instance.getProperty(),
         ];
         myConfig["canBeJoined"] = $instance.canBeJoined(myConfig["config"]);
         $eagerLoadable = new EagerLoadable(myAlias, myConfig);
@@ -648,10 +648,10 @@ class EagerLoader
             myKeys = $collected[myPath][myAlias] ?? null;
             $f = $instance.eagerLoader(
                 myConfig + [
-                    "query" => myQuery,
-                    "contain" => $contain,
-                    "keys" => myKeys,
-                    "nestKey" => $meta.aliasPath(),
+                    "query":myQuery,
+                    "contain":$contain,
+                    "keys":myKeys,
+                    "nestKey":$meta.aliasPath(),
                 ]
             );
             $statement = new CallbackStatement($statement, myDriver, $f);
@@ -708,13 +708,13 @@ class EagerLoader
             $associations = $meta.associations();
             $forMatching = $meta.forMatching();
             $map[] = [
-                "alias" => $assoc,
-                "instance" => $instance,
-                "canBeJoined" => $canBeJoined,
-                "entityClass" => $instance.getTarget().getEntityClass(),
-                "nestKey" => $canBeJoined ? $assoc : $meta.aliasPath(),
-                "matching" => $forMatching ?? $matching,
-                "targetProperty" => $meta.targetProperty(),
+                "alias":$assoc,
+                "instance":$instance,
+                "canBeJoined":$canBeJoined,
+                "entityClass":$instance.getTarget().getEntityClass(),
+                "nestKey":$canBeJoined ? $assoc : $meta.aliasPath(),
+                "matching":$forMatching ?? $matching,
+                "targetProperty":$meta.targetProperty(),
             ];
             if ($canBeJoined && $associations) {
                 $map = this._buildAssociationsMap($map, $associations, $matching);
@@ -745,11 +745,11 @@ class EagerLoader
         Nullable!string myTargetProperty = null
     ): void {
         this._joinsMap[myAlias] = new EagerLoadable(myAlias, [
-            "aliasPath" => myAlias,
-            "instance" => $assoc,
-            "canBeJoined" => true,
-            "forMatching" => $asMatching,
-            "targetProperty" => myTargetProperty ?: $assoc.getProperty(),
+            "aliasPath":myAlias,
+            "instance":$assoc,
+            "canBeJoined":true,
+            "forMatching":$asMatching,
+            "targetProperty":myTargetProperty ?: $assoc.getProperty(),
         ]);
     }
 

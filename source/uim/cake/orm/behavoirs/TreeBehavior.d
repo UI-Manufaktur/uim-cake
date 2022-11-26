@@ -34,27 +34,27 @@ class TreeBehavior : Behavior
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "implementedFinders" => [
-            "path" => "findPath",
-            "children" => "findChildren",
-            "treeList" => "findTreeList",
+    protected STRINGAA _defaultConfig = [
+        "implementedFinders":[
+            "path":"findPath",
+            "children":"findChildren",
+            "treeList":"findTreeList",
         ],
-        "implementedMethods" => [
-            "childCount" => "childCount",
-            "moveUp" => "moveUp",
-            "moveDown" => "moveDown",
-            "recover" => "recover",
-            "removeFromTree" => "removeFromTree",
-            "getLevel" => "getLevel",
-            "formatTreeList" => "formatTreeList",
+        "implementedMethods":[
+            "childCount":"childCount",
+            "moveUp":"moveUp",
+            "moveDown":"moveDown",
+            "recover":"recover",
+            "removeFromTree":"removeFromTree",
+            "getLevel":"getLevel",
+            "formatTreeList":"formatTreeList",
         ],
-        "parent" => "parent_id",
-        "left" => "lft",
-        "right" => "rght",
-        "scope" => null,
-        "level" => null,
-        "recoverOrder" => null,
+        "parent":"parent_id",
+        "left":"lft",
+        "right":"rght",
+        "scope":null,
+        "level":null,
+        "recoverOrder":null,
     ];
 
 
@@ -168,9 +168,9 @@ class TreeBehavior : Behavior
         $depths = [$primaryKeyValue => $entity.get(myConfig["level"])];
 
         $children = this._table.find("children", [
-            "for" => $primaryKeyValue,
-            "fields" => [this._getPrimaryKey(), myConfig["parent"], myConfig["level"]],
-            "order" => myConfig["left"],
+            "for":$primaryKeyValue,
+            "fields":[this._getPrimaryKey(), myConfig["parent"], myConfig["level"]],
+            "order":myConfig["left"],
         ]);
 
         /** @var \Cake\Datasource\IEntity myNode */
@@ -364,12 +364,12 @@ class TreeBehavior : Behavior
             [myConfig["left"], myConfig["right"]]
         );
 
-        myNode = this._table.get(myOptions["for"], ["fields" => [$left, $right]]);
+        myNode = this._table.get(myOptions["for"], ["fields":[$left, $right]]);
 
         return this._scope(myQuery)
             .where([
-                "$left <=" => myNode.get(myConfig["left"]),
-                "$right >=" => myNode.get(myConfig["right"]),
+                "$left <=":myNode.get(myConfig["left"]),
+                "$right >=":myNode.get(myConfig["right"]),
             ])
             .order([$left => "ASC"]);
     }
@@ -416,7 +416,7 @@ class TreeBehavior : Behavior
     function findChildren(Query myQuery, array myOptions): Query
     {
         myConfig = this.getConfig();
-        myOptions += ["for" => null, "direct" => false];
+        myOptions += ["for":null, "direct":false];
         [$parent, $left, $right] = array_map(
             function (myField) {
                 return this._table.aliasField(myField);
@@ -442,8 +442,8 @@ class TreeBehavior : Behavior
 
         return this._scope(myQuery)
             .where([
-                "{$right} <" => myNode.get(myConfig["right"]),
-                "{$left} >" => myNode.get(myConfig["left"]),
+                "{$right} <":myNode.get(myConfig["right"]),
+                "{$left} >":myNode.get(myConfig["left"]),
             ]);
     }
 
@@ -470,8 +470,8 @@ class TreeBehavior : Behavior
 
         myResults = this._scope(myQuery)
             .find("threaded", [
-                "parentField" => this.getConfig("parent"),
-                "order" => [$left => "ASC"],
+                "parentField":this.getConfig("parent"),
+                "order":[$left => "ASC"],
             ]);
 
         return this.formatTreeList(myResults, myOptions);
@@ -498,9 +498,9 @@ class TreeBehavior : Behavior
     {
         return myQuery.formatResults(function (ICollection myResults) use (myOptions) {
             myOptions += [
-                "keyPath" => this._getPrimaryKey(),
-                "valuePath" => this._table.getDisplayField(),
-                "spacer" => "_",
+                "keyPath":this._getPrimaryKey(),
+                "valuePath":this._table.getDisplayField(),
+                "spacer":"_",
             ];
 
             /** @var \Cake\collection.iIterator\TreeIterator $nested */
@@ -611,7 +611,7 @@ class TreeBehavior : Behavior
             /** @var \Cake\Datasource\IEntity|null myTargetNode */
             myTargetNode = this._scope(this._table.find())
                 .select([$left, $right])
-                .where(["$parent IS" => myNodeParent])
+                .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeLeft) {
                     /** @var \Cake\Database\Expression\QueryExpression $exp */
                     return $exp.lt(myConfig["rightField"], myNodeLeft);
@@ -625,7 +625,7 @@ class TreeBehavior : Behavior
             /** @var \Cake\Datasource\IEntity|null myTargetNode */
             myTargetNode = this._scope(this._table.find())
                 .select([$left, $right])
-                .where(["$parent IS" => myNodeParent])
+                .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeLeft) {
                     /** @var \Cake\Database\Expression\QueryExpression $exp */
                     return $exp.lt(myConfig["rightField"], myNodeLeft);
@@ -702,7 +702,7 @@ class TreeBehavior : Behavior
             /** @var \Cake\Datasource\IEntity|null myTargetNode */
             myTargetNode = this._scope(this._table.find())
                 .select([$left, $right])
-                .where(["$parent IS" => myNodeParent])
+                .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeRight) {
                     /** @var \Cake\Database\Expression\QueryExpression $exp */
                     return $exp.gt(myConfig["leftField"], myNodeRight);
@@ -716,7 +716,7 @@ class TreeBehavior : Behavior
             /** @var \Cake\Datasource\IEntity|null myTargetNode */
             myTargetNode = this._scope(this._table.find())
                 .select([$left, $right])
-                .where(["$parent IS" => myNodeParent])
+                .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeRight) {
                     /** @var \Cake\Database\Expression\QueryExpression $exp */
                     return $exp.gt(myConfig["leftField"], myNodeRight);
@@ -811,7 +811,7 @@ class TreeBehavior : Behavior
 
         myNodes = this._scope(this._table.query())
             .select($primaryKey)
-            .where([$parent . " IS" => $parentId])
+            .where([$parent . " IS":$parentId])
             .order($order)
             .disableHydration()
             .all();
@@ -931,7 +931,7 @@ class TreeBehavior : Behavior
         }
 
         $fresh = this._table.get($entity.get(this._getPrimaryKey()));
-        $entity.set($fresh.extract(myFields), ["guard" => false]);
+        $entity.set($fresh.extract(myFields), ["guard":false]);
 
         foreach (myFields as myField) {
             $entity.setDirty(myField, false);
@@ -975,8 +975,8 @@ class TreeBehavior : Behavior
         }
 
         myQuery = this._table.find("all").where([
-            myConfig["left"] . " <" => $entity[myConfig["left"]],
-            myConfig["right"] . " >" => $entity[myConfig["right"]],
+            myConfig["left"] . " <":$entity[myConfig["left"]],
+            myConfig["right"] . " >":$entity[myConfig["right"]],
         ]);
 
         return this._scope(myQuery).count();

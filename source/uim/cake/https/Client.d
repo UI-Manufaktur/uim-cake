@@ -61,7 +61,7 @@ use Psr\Http\Message\IResponse;
  * set the Content-Type for the request:
  *
  * ```
- * $http.get("/users", [], ["type" => "json"]);
+ * $http.get("/users", [], ["type":"json"]);
  * ```
  *
  * The `type` option sets both the `Content-Type` and `Accept` header, to
@@ -95,19 +95,19 @@ class Client : ClientInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "adapter" => null,
-        "host" => null,
-        "port" => null,
-        "scheme" => "http",
-        "basePath" => "",
-        "timeout" => 30,
-        "ssl_verify_peer" => true,
-        "ssl_verify_peer_name" => true,
-        "ssl_verify_depth" => 5,
-        "ssl_verify_host" => true,
-        "redirect" => false,
-        "protocolVersion" => "1.1",
+    protected STRINGAA _defaultConfig = [
+        "adapter":null,
+        "host":null,
+        "port":null,
+        "scheme":"http",
+        "basePath":"",
+        "timeout":30,
+        "ssl_verify_peer":true,
+        "ssl_verify_peer_name":true,
+        "ssl_verify_depth":5,
+        "ssl_verify_host":true,
+        "redirect":false,
+        "protocolVersion":"1.1",
     ];
 
     /**
@@ -211,7 +211,7 @@ class Client : ClientInterface
             throw new InvalidArgumentException("String " . myUrl . " did not parse");
         }
 
-        myConfig = array_intersect_key($parts, ["scheme" => "", "port" => "", "host" => "", "path" => ""]);
+        myConfig = array_intersect_key($parts, ["scheme":"", "port":"", "host":"", "path":""]);
 
         if (empty(myConfig["scheme"]) || empty(myConfig["host"])) {
             throw new InvalidArgumentException("The URL was parsed but did not contain a scheme or host");
@@ -465,10 +465,10 @@ class Client : ClientInterface
 
                 myLocation = $response.getHeaderLine("Location");
                 myLocationUrl = this.buildUrl(myLocation, [], [
-                    "host" => myUrl.getHost(),
-                    "port" => myUrl.getPort(),
-                    "scheme" => myUrl.getScheme(),
-                    "protocolRelative" => true,
+                    "host":myUrl.getHost(),
+                    "port":myUrl.getPort(),
+                    "scheme":myUrl.getScheme(),
+                    "protocolRelative":true,
                 ]);
                 myRequest = myRequest.withUri(new Uri(myLocationUrl));
                 myRequest = this._cookies.addToRequest(myRequest, []);
@@ -552,11 +552,11 @@ class Client : ClientInterface
             return myUrl;
         }
         $defaults = [
-            "host" => null,
-            "port" => null,
-            "scheme" => "http",
-            "basePath" => "",
-            "protocolRelative" => false,
+            "host":null,
+            "port":null,
+            "scheme":"http",
+            "basePath":"",
+            "protocolRelative":false,
         ];
         myOptions += $defaults;
 
@@ -574,8 +574,8 @@ class Client : ClientInterface
         }
 
         $defaultPorts = [
-            "http" => 80,
-            "https" => 443,
+            "http":80,
+            "https":443,
         ];
         $out = myOptions["scheme"] . "://" . myOptions["host"];
         if (myOptions["port"] && (int)myOptions["port"] !== $defaultPorts[myOptions["scheme"]]) {
@@ -639,21 +639,21 @@ class Client : ClientInterface
     {
         if (strpos(myType, "/") !== false) {
             return [
-                "Accept" => myType,
-                "Content-Type" => myType,
+                "Accept":myType,
+                "Content-Type":myType,
             ];
         }
         myTypeMap = [
-            "json" => "application/json",
-            "xml" => "application/xml",
+            "json":"application/json",
+            "xml":"application/xml",
         ];
         if (!isset(myTypeMap[myType])) {
             throw new CakeException("Unknown type alias "myType".");
         }
 
         return [
-            "Accept" => myTypeMap[myType],
-            "Content-Type" => myTypeMap[myType],
+            "Accept":myTypeMap[myType],
+            "Content-Type":myTypeMap[myType],
         ];
     }
 

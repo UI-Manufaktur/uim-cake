@@ -27,11 +27,11 @@ class ServerRequest : IServerRequest
      * @var array
      */
     protected myParams = [
-        "plugin" => null,
-        "controller" => null,
-        "action" => null,
-        "_ext" => null,
-        "pass" => [],
+        "plugin":null,
+        "controller":null,
+        "action":null,
+        "_ext":null,
+        "pass":[],
     ];
 
     /**
@@ -103,17 +103,17 @@ class ServerRequest : IServerRequest
      * @var array<callable|array>
      */
     protected static $_detectors = [
-        "get" => ["env" => "REQUEST_METHOD", "value" => "GET"],
-        "post" => ["env" => "REQUEST_METHOD", "value" => "POST"],
-        "put" => ["env" => "REQUEST_METHOD", "value" => "PUT"],
-        "patch" => ["env" => "REQUEST_METHOD", "value" => "PATCH"],
-        "delete" => ["env" => "REQUEST_METHOD", "value" => "DELETE"],
-        "head" => ["env" => "REQUEST_METHOD", "value" => "HEAD"],
-        "options" => ["env" => "REQUEST_METHOD", "value" => "OPTIONS"],
-        "ssl" => ["env" => "HTTPS", "options" => [1, "on"]],
-        "ajax" => ["env" => "HTTP_X_REQUESTED_WITH", "value" => "XMLHttpRequest"],
-        "json" => ["accept" => ["application/json"], "param" => "_ext", "value" => "json"],
-        "xml" => ["accept" => ["application/xml", "text/xml"], "param" => "_ext", "value" => "xml"],
+        "get":["env":"REQUEST_METHOD", "value":"GET"],
+        "post":["env":"REQUEST_METHOD", "value":"POST"],
+        "put":["env":"REQUEST_METHOD", "value":"PUT"],
+        "patch":["env":"REQUEST_METHOD", "value":"PATCH"],
+        "delete":["env":"REQUEST_METHOD", "value":"DELETE"],
+        "head":["env":"REQUEST_METHOD", "value":"HEAD"],
+        "options":["env":"REQUEST_METHOD", "value":"OPTIONS"],
+        "ssl":["env":"HTTPS", "options":[1, "on"]],
+        "ajax":["env":"HTTP_X_REQUESTED_WITH", "value":"XMLHttpRequest"],
+        "json":["accept":["application/json"], "param":"_ext", "value":"json"],
+        "xml":["accept":["application/xml", "text/xml"], "param":"_ext", "value":"xml"],
     ];
 
     /**
@@ -210,17 +210,17 @@ class ServerRequest : IServerRequest
      */
     this(array myConfig = []) {
         myConfig += [
-            "params" => this.params,
-            "query" => [],
-            "post" => [],
-            "files" => [],
-            "cookies" => [],
-            "environment" => [],
-            "url" => "",
-            "uri" => null,
-            "base" => "",
-            "webroot" => "",
-            "input" => null,
+            "params":this.params,
+            "query":[],
+            "post":[],
+            "files":[],
+            "cookies":[],
+            "environment":[],
+            "url":"",
+            "uri":null,
+            "base":"",
+            "webroot":"",
+            "input":null,
         ];
 
         this._setConfig(myConfig);
@@ -234,7 +234,7 @@ class ServerRequest : IServerRequest
     protected void _setConfig(array myConfig) {
         if (empty(myConfig["session"])) {
             myConfig["session"] = new Session([
-                "cookiePath" => myConfig["base"],
+                "cookiePath":myConfig["base"],
             ]);
         }
 
@@ -636,7 +636,7 @@ class ServerRequest : IServerRequest
      * the environment value is equality checked against the provided value.
      *
      * ```
-     * addDetector("post", ["env" => "REQUEST_METHOD", "value" => "POST"]);
+     * addDetector("post", ["env":"REQUEST_METHOD", "value":"POST"]);
      * ```
      *
      * ### Request parameter comparison
@@ -644,7 +644,7 @@ class ServerRequest : IServerRequest
      * Allows for custom detectors on the request parameters.
      *
      * ```
-     * addDetector("admin", ["param" => "prefix", "value" => "admin"]);
+     * addDetector("admin", ["param":"prefix", "value":"admin"]);
      * ```
      *
      * ### Accept comparison
@@ -652,7 +652,7 @@ class ServerRequest : IServerRequest
      * Allows for detector to compare against Accept header value.
      *
      * ```
-     * addDetector("csv", ["accept" => "text/csv"]);
+     * addDetector("csv", ["accept":"text/csv"]);
      * ```
      *
      * ### Header comparison
@@ -660,7 +660,7 @@ class ServerRequest : IServerRequest
      * Allows for one or more headers to be compared.
      *
      * ```
-     * addDetector("fancy", ["header" => ["X-Fancy" => 1]);
+     * addDetector("fancy", ["header":["X-Fancy":1]);
      * ```
      *
      * The `param`, `env` and comparison types allow the following
@@ -671,7 +671,7 @@ class ServerRequest : IServerRequest
      * Pattern value comparison allows you to compare a value fetched from `env()` to a regular expression.
      *
      * ```
-     * addDetector("iphone", ["env" => "HTTP_USER_AGENT", "pattern" => "/iPhone/i"]);
+     * addDetector("iphone", ["env":"HTTP_USER_AGENT", "pattern":"/iPhone/i"]);
      * ```
      *
      * ### Option based comparison
@@ -680,14 +680,14 @@ class ServerRequest : IServerRequest
      * to add an already defined options detector will merge the options.
      *
      * ```
-     * addDetector("mobile", ["env" => "HTTP_USER_AGENT", "options" => ["Fennec"]]);
+     * addDetector("mobile", ["env":"HTTP_USER_AGENT", "options":["Fennec"]]);
      * ```
      *
      * You can also make compare against multiple values
      * using the `options` key. This is useful when you want to check
      * if a request value is in a list of options.
      *
-     * `addDetector("extension", ["param" => "_ext", "options" => ["pdf", "csv"]]`
+     * `addDetector("extension", ["param":"_ext", "options":["pdf", "csv"]]`
      *
      * @param string myName The name of the detector.
      * @param callable|array $detector A callable or options array for the detector definition.
@@ -1224,7 +1224,7 @@ class ServerRequest : IServerRequest
      * Getting input using a decoding function, and additional params:
      *
      * ```
-     * this.request.input("Xml::build", ["return" => "DOMDocument"]);
+     * this.request.input("Xml::build", ["return":"DOMDocument"]);
      * ```
      *
      * Any additional parameters are applied to the callback in the order they are given.
@@ -1601,10 +1601,10 @@ class ServerRequest : IServerRequest
     auto getAttributes(): array
     {
         $emulated = [
-            "params" => this.params,
-            "webroot" => this.webroot,
-            "base" => this.base,
-            "here" => this.base . this.uri.getPath(),
+            "params":this.params,
+            "webroot":this.webroot,
+            "base":this.base,
+            "here":this.base . this.uri.getPath(),
         ];
 
         return this.attributes + $emulated;

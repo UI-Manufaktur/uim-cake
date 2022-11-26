@@ -189,7 +189,7 @@ class View : IEventDispatcher {
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
     /**
      * Holds an array of paths.

@@ -111,7 +111,7 @@ class BelongsTo : Association
             (array)this.getForeignKey(),
             myTargetEntity.extract((array)this.getBindingKey())
         );
-        $entity.set($properties, ["guard" => false]);
+        $entity.set($properties, ["guard":false]);
 
         return $entity;
     }
@@ -161,14 +161,14 @@ class BelongsTo : Association
     function eagerLoader(array myOptions): Closure
     {
         $loader = new SelectLoader([
-            "alias" => this.getAlias(),
-            "sourceAlias" => this.getSource().getAlias(),
-            "targetAlias" => this.getTarget().getAlias(),
-            "foreignKey" => this.getForeignKey(),
-            "bindingKey" => this.getBindingKey(),
-            "strategy" => this.getStrategy(),
-            "associationType" => this.type(),
-            "finder" => [this, "find"],
+            "alias":this.getAlias(),
+            "sourceAlias":this.getSource().getAlias(),
+            "targetAlias":this.getTarget().getAlias(),
+            "foreignKey":this.getForeignKey(),
+            "bindingKey":this.getBindingKey(),
+            "strategy":this.getStrategy(),
+            "associationType":this.type(),
+            "finder":[this, "find"],
         ]);
 
         return $loader.buildEagerLoader(myOptions);
