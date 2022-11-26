@@ -23,11 +23,11 @@ abstract class BaseErrorHandler
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "log" => true,
-        "trace" => false,
-        "skipLog" => [],
-        "errorLogger" => ErrorLogger::class,
+    protected STRINGAA _defaultConfig = [
+        "log":true,
+        "trace":false,
+        "skipLog":[],
+        "errorLogger":ErrorLogger::class,
     ];
 
     /**
@@ -136,12 +136,12 @@ abstract class BaseErrorHandler
             return this.handleFatalError($code, $description, myfile, $line);
         }
         myData = [
-            "level" => $log,
-            "code" => $code,
-            "error" => myError,
-            "description" => $description,
-            "file" => myfile,
-            "line" => $line,
+            "level":$log,
+            "code":$code,
+            "error":myError,
+            "description":$description,
+            "file":myfile,
+            "line":$line,
         ];
 
         $debug = (bool)Configure::read("debug");
@@ -157,9 +157,9 @@ abstract class BaseErrorHandler
                 unset($context["_trace_frame_offset"]);
             }
             myData += [
-                "context" => $context,
-                "start" => $start,
-                "path" => Debugger::trimPath((string)myfile),
+                "context":$context,
+                "start":$start,
+                "path":Debugger::trimPath((string)myfile),
             ];
         }
         this._displayError(myData, $debug);
@@ -221,11 +221,11 @@ abstract class BaseErrorHandler
      */
     bool handleFatalError(int $code, string $description, string myfile, int $line) {
         myData = [
-            "code" => $code,
-            "description" => $description,
-            "file" => myfile,
-            "line" => $line,
-            "error" => "Fatal Error",
+            "code":$code,
+            "description":$description,
+            "file":myfile,
+            "line":$line,
+            "error":"Fatal Error",
         ];
         this._logError(LOG_ERR, myData);
 
@@ -281,8 +281,8 @@ abstract class BaseErrorHandler
         $context = [];
         if (!empty(this._config["trace"])) {
             $context["trace"] = Debugger::trace([
-                "start" => 1,
-                "format" => "log",
+                "start":1,
+                "format":"log",
             ]);
             $context["request"] = Router::getRequest();
         }
@@ -353,11 +353,11 @@ abstract class BaseErrorHandler
             E_USER_DEPRECATED => "deprecated",
         ];
         $logMap = [
-            "error" => LOG_ERR,
-            "warning" => LOG_WARNING,
-            "notice" => LOG_NOTICE,
-            "strict" => LOG_NOTICE,
-            "deprecated" => LOG_NOTICE,
+            "error":LOG_ERR,
+            "warning":LOG_WARNING,
+            "notice":LOG_NOTICE,
+            "strict":LOG_NOTICE,
+            "deprecated":LOG_NOTICE,
         ];
 
         myError = $levelMap[$code];

@@ -1,6 +1,6 @@
 module uim.cake.datasources;
 
-use Psr\Log\LoggerAwareInterface;
+use Psr\Log\ILoggerAware;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\ICache;
 
@@ -24,7 +24,7 @@ use Psr\SimpleCache\ICache;
  * @method \Cake\Database\IStatement query(string mySql) Executes a SQL statement and returns the Statement
  *   object as result. {@see \Cake\Database\Connnection::query()}
  */
-interface ConnectionInterface : LoggerAwareInterface
+interface ConnectionInterface : ILoggerAware
 {
     /**
      * Gets the current logger object.

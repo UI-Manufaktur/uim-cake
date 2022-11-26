@@ -87,7 +87,7 @@ TEXT;
 
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
-            $vars[] = $break . this.export($item.getKey(), $indent) . " => " . this.export($val, $indent);
+            $vars[] = $break . this.export($item.getKey(), $indent) . ":" . this.export($val, $indent);
         }
         if (count($vars)) {
             return $out . implode(",", $vars) . $end . "]";

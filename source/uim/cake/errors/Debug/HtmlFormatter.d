@@ -142,7 +142,7 @@ class HtmlFormatter : IFormatter
         $break = "\n" . str_repeat("  ", $indent);
         $endBreak = "\n" . str_repeat("  ", $indent - 1);
 
-        $arrow = this.style("punct", " => ");
+        $arrow = this.style("punct", ":");
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
             $vars[] = $break . "<span class="cake-dbg-array-item">" .
@@ -201,7 +201,7 @@ class HtmlFormatter : IFormatter
 
         $props = [];
         foreach ($var.getChildren() as $property) {
-            $arrow = this.style("punct", " => ");
+            $arrow = this.style("punct", ":");
             $visibility = $property.getVisibility();
             myName = $property.getName();
             if ($visibility && $visibility !== "public") {

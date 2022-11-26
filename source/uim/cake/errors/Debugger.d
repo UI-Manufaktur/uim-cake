@@ -44,10 +44,10 @@ class Debugger
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "outputMask" => [],
-        "exportFormatter" => null,
-        "editor" => "phpstorm",
+    protected STRINGAA _defaultConfig = [
+        "outputMask":[],
+        "exportFormatter":null,
+        "editor":"phpstorm",
     ];
 
     /**
@@ -64,33 +64,33 @@ class Debugger
      * @var array<string, array<string, mixed>>
      */
     protected $_templates = [
-        "log" => [
-            "trace" => "{:reference} - {:path}, line {:line}",
-            "error" => "{:error} ({:code}): {:description} in [{:file}, line {:line}]",
+        "log":[
+            "trace":"{:reference} - {:path}, line {:line}",
+            "error":"{:error} ({:code}): {:description} in [{:file}, line {:line}]",
         ],
-        "js" => [
-            "error" => "",
-            "info" => "",
-            "trace" => "<pre class="stack-trace">{:trace}</pre>",
-            "code" => "",
-            "context" => "",
-            "links" => [],
-            "escapeContext" => true,
+        "js":[
+            "error":"",
+            "info":"",
+            "trace":"<pre class="stack-trace">{:trace}</pre>",
+            "code":"",
+            "context":"",
+            "links":[],
+            "escapeContext":true,
         ],
-        "html" => [
-            "trace" => "<pre class="cake-error trace"><b>Trace</b> <p>{:trace}</p></pre>",
-            "context" => "<pre class="cake-error context"><b>Context</b> <p>{:context}</p></pre>",
-            "escapeContext" => true,
+        "html":[
+            "trace":"<pre class="cake-error trace"><b>Trace</b> <p>{:trace}</p></pre>",
+            "context":"<pre class="cake-error context"><b>Context</b> <p>{:context}</p></pre>",
+            "escapeContext":true,
         ],
-        "txt" => [
-            "error" => "{:error}: {:code} :: {:description} on line {:line} of {:path}\n{:info}",
-            "code" => "",
-            "info" => "",
+        "txt":[
+            "error":"{:error}: {:code} :: {:description} on line {:line} of {:path}\n{:info}",
+            "code":"",
+            "info":"",
         ],
-        "base" => [
-            "traceLine" => "{:reference} - {:path}, line {:line}",
-            "trace" => "Trace:\n{:trace}\n",
-            "context" => "Context:\n{:context}\n",
+        "base":[
+            "traceLine":"{:reference} - {:path}, line {:line}",
+            "trace":"Trace:\n{:trace}\n",
+            "context":"Context:\n{:context}\n",
         ],
     ];
 
@@ -100,13 +100,13 @@ class Debugger
      * @var array<string, string|callable>
      */
     protected $editors = [
-        "atom" => "atom://core/open/file?filename={file}&line={line}",
-        "emacs" => "emacs://open?url=file://{file}&line={line}",
-        "macvim" => "mvim://open/?url=file://{file}&line={line}",
-        "phpstorm" => "phpstorm://open?file={file}&line={line}",
-        "sublime" => "subl://open?url=file://{file}&line={line}",
-        "textmate" => "txmt://open?url=file://{file}&line={line}",
-        "vscode" => "vscode://file/{file}:{line}",
+        "atom":"atom://core/open/file?filename={file}&line={line}",
+        "emacs":"emacs://open?url=file://{file}&line={line}",
+        "macvim":"mvim://open/?url=file://{file}&line={line}",
+        "phpstorm":"phpstorm://open?file={file}&line={line}",
+        "sublime":"subl://open?url=file://{file}&line={line}",
+        "textmate":"txmt://open?url=file://{file}&line={line}",
+        "vscode":"vscode://file/{file}:{line}",
     ];
 
     /**
@@ -229,7 +229,7 @@ class Debugger
      *
      * ### Example
      *
-     * Debugger::setOutputMask(["password" => "[*************]");
+     * Debugger::setOutputMask(["password":"[*************]");
      *
      * @param array<string, string> myValue An array where keys are replaced by their values in output.
      * @param bool myMerge Whether to recursively merge or overwrite existing config, defaults to true.
@@ -325,7 +325,7 @@ class Debugger
     static function log($var, $level = "debug", int $maxDepth = 3): void
     {
         /** @var string $source */
-        $source = static::trace(["start" => 1]);
+        $source = static::trace(["start":1]);
         $source .= "\n";
 
         Log::write(
@@ -377,12 +377,12 @@ class Debugger
         }
         $self = Debugger::getInstance();
         $defaults = [
-            "depth" => 999,
-            "format" => $self._outputFormat,
-            "args" => false,
-            "start" => 0,
-            "scope" => null,
-            "exclude" => ["call_user_func_array", "trigger_error"],
+            "depth":999,
+            "format":$self._outputFormat,
+            "args":false,
+            "start":0,
+            "scope":null,
+            "exclude":["call_user_func_array", "trigger_error"],
         ];
         myOptions = Hash::merge($defaults, myOptions);
 
@@ -390,14 +390,14 @@ class Debugger
         $back = [];
 
         $_trace = [
-            "line" => "??",
-            "file" => "[internal]",
-            "class" => null,
-            "function" => "[main]",
+            "line":"??",
+            "file":"[internal]",
+            "class":null,
+            "function":"[main]",
         ];
 
         for ($i = myOptions["start"]; $i < myCount && $i < myOptions["depth"]; $i++) {
-            $trace = $backtrace[$i] + ["file" => "[internal]", "line" => "??"];
+            $trace = $backtrace[$i] + ["file":"[internal]", "line":"??"];
             $signature = $reference = "[main]";
 
             if (isset($backtrace[$i + 1])) {
@@ -421,7 +421,7 @@ class Debugger
                 continue;
             }
             if (myOptions["format"] === "points" && $trace["file"] !== "[internal]") {
-                $back[] = ["file" => $trace["file"], "line" => $trace["line"]];
+                $back[] = ["file":$trace["file"], "line":$trace["line"]];
             } elseif (myOptions["format"] === "array") {
                 $back[] = $trace;
             } else {
@@ -433,7 +433,7 @@ class Debugger
                 $trace["path"] = static::trimPath($trace["file"]);
                 $trace["reference"] = $reference;
                 unset($trace["object"], $trace["args"]);
-                $back[] = Text::insert($tpl, $trace, ["before" => "{:", "after" => "}"]);
+                $back[] = Text::insert($tpl, $trace, ["before":"{:", "after":"}"]);
             }
         }
 
@@ -843,7 +843,7 @@ class Debugger
      * the callback key, and provide a callable:
      *
      * ```
-     * Debugger::addFormat("custom", ["callback" => [$foo, "outputError"]];
+     * Debugger::addFormat("custom", ["callback":[$foo, "outputError"]];
      * ```
      *
      * The callback can expect two parameters. The first is an array of all
@@ -884,18 +884,18 @@ class Debugger
     function outputError(array myData): void
     {
         $defaults = [
-            "level" => 0,
-            "error" => 0,
-            "code" => 0,
-            "description" => "",
-            "file" => "",
-            "line" => 0,
-            "context" => [],
-            "start" => 2,
+            "level":0,
+            "error":0,
+            "code":0,
+            "description":"",
+            "file":"",
+            "line":0,
+            "context":[],
+            "start":2,
         ];
         myData += $defaults;
 
-        myfiles = static::trace(["start" => myData["start"], "format" => "points"]);
+        myfiles = static::trace(["start":myData["start"], "format":"points"]);
         $code = "";
         myfile = null;
         if (isset(myfiles[0]["file"])) {
@@ -906,8 +906,8 @@ class Debugger
         if (myfile) {
             $code = static::excerpt(myfile["file"], myfile["line"], 1);
         }
-        $trace = static::trace(["start" => myData["start"], "depth" => "20"]);
-        $insertOpts = ["before" => "{:", "after" => "}"];
+        $trace = static::trace(["start":myData["start"], "depth":"20"]);
+        $insertOpts = ["before":"{:", "after":"}"];
         $context = [];
         $links = [];
         $info = "";
@@ -1000,7 +1000,7 @@ class Debugger
      */
     static function printVar($var, array myLocation = [], ?bool $showHtml = null): void
     {
-        myLocation += ["file" => null, "line" => null];
+        myLocation += ["file":null, "line":null];
         if (myLocation["file"]) {
             myLocation["file"] = static::trimPath((string)myLocation["file"]);
         }

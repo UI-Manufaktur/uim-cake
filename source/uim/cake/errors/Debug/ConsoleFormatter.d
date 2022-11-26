@@ -16,21 +16,21 @@ class ConsoleFormatter : IFormatter
      */
     protected $styles = [
         // bold yellow
-        "const" => "1;33",
+        "const":"1;33",
         // green
-        "string" => "0;32",
+        "string":"0;32",
         // bold blue
-        "number" => "1;34",
+        "number":"1;34",
         // cyan
-        "class" => "0;36",
+        "class":"0;36",
         // grey
-        "punct" => "0;90",
+        "punct":"0;90",
         // default foreground
-        "property" => "0;39",
+        "property":"0;39",
         // magenta
-        "visibility" => "0;35",
+        "visibility":"0;35",
         // red
-        "special" => "0;31",
+        "special":"0;31",
     ];
 
     /**
@@ -137,7 +137,7 @@ class ConsoleFormatter : IFormatter
         $end = "\n" . str_repeat("  ", $indent - 1);
         $vars = [];
 
-        $arrow = this.style("punct", " => ");
+        $arrow = this.style("punct", ":");
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
             $vars[] = $break . this.export($item.getKey(), $indent) . $arrow . this.export($val, $indent);
@@ -179,7 +179,7 @@ class ConsoleFormatter : IFormatter
         $break = "\n" . str_repeat("  ", $indent);
         $end = "\n" . str_repeat("  ", $indent - 1) . this.style("punct", "}");
 
-        $arrow = this.style("punct", " => ");
+        $arrow = this.style("punct", ":");
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
             myName = $property.getName();

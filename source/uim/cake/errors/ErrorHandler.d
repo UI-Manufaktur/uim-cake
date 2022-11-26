@@ -79,7 +79,7 @@ class ErrorHandler : BaseErrorHandler
      */
     this(array myConfig = []) {
         myConfig += [
-            "exceptionRenderer" => ExceptionRenderer::class,
+            "exceptionRenderer":ExceptionRenderer::class,
         ];
 
         this.setConfig(myConfig);

@@ -87,7 +87,7 @@ class EventManager : IEventManager
         $argCount = func_num_args();
         if ($argCount === 2) {
             this._listeners[myEventKey][static::$defaultPriority][] = [
-                "callable" => myOptions,
+                "callable":myOptions,
             ];
 
             return this;
@@ -95,7 +95,7 @@ class EventManager : IEventManager
 
         $priority = myOptions["priority"] ?? static::$defaultPriority;
         this._listeners[myEventKey][$priority][] = [
-            "callable" => $callable,
+            "callable":$callable,
         ];
 
         return this;

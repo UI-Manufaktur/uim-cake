@@ -25,8 +25,8 @@ class ConsoleErrorHandler : BaseErrorHandler
      */
     this(array myConfig = []) {
         myConfig += [
-            "stderr" => new ConsoleOutput("php://stderr"),
-            "log" => false,
+            "stderr":new ConsoleOutput("php://stderr"),
+            "log":false,
         ];
 
         this.setConfig(myConfig);

@@ -91,11 +91,11 @@ interface QueryInterface
      *
      * ```
      * myQuery.applyOptions([
-     *   "fields" => ["id", "name"],
-     *   "conditions" => [
-     *     "created >=" => "2013-01-01"
+     *   "fields":["id", "name"],
+     *   "conditions":[
+     *     "created >=":"2013-01-01"
      *   ],
-     *   "limit" => 10
+     *   "limit":10
      * ]);
      * ```
      *
@@ -104,7 +104,7 @@ interface QueryInterface
      * ```
      *  myQuery
      *  .select(["id", "name"])
-     *  .where(["created >=" => "2013-01-01"])
+     *  .where(["created >=":"2013-01-01"])
      *  .limit(10)
      * ```
      *
@@ -204,7 +204,7 @@ interface QueryInterface
      * ### Examples:
      *
      * ```
-     * myQuery.order(["title" => "DESC", "author_id" => "ASC"]);
+     * myQuery.order(["title":"DESC", "author_id":"ASC"]);
      * ```
      *
      * Produces:
@@ -213,7 +213,7 @@ interface QueryInterface
      *
      * ```
      * myQuery
-     *     .order(["title" => myQuery.newExpr("DESC NULLS FIRST")])
+     *     .order(["title":myQuery.newExpr("DESC NULLS FIRST")])
      *     .order("author_id");
      * ```
      *
@@ -223,7 +223,7 @@ interface QueryInterface
      *
      * ```
      * $expression = myQuery.newExpr().add(["id % 2 = 0"]);
-     * myQuery.order($expression).order(["title" => "ASC"]);
+     * myQuery.order($expression).order(["title":"ASC"]);
      * ```
      *
      * Will become:
@@ -299,10 +299,10 @@ interface QueryInterface
      *
      * ```
      *  myQuery.where([
-     *      "posted >=" => new DateTime("3 days ago"),
-     *      "title LIKE" => "Hello W%",
-     *      "author_id" => 1,
-     *  ], ["posted" => "datetime"]);
+     *      "posted >=":new DateTime("3 days ago"),
+     *      "title LIKE":"Hello W%",
+     *      "author_id":1,
+     *  ], ["posted":"datetime"]);
      * ```
      *
      * The previous example produces:
@@ -316,10 +316,10 @@ interface QueryInterface
      *
      * ```
      *  myQuery.where([
-     *      "author_id !=" => 1,
-     *      "OR" => ["published" => true, "posted <" => new DateTime("now")],
-     *      "NOT" => ["title" => "Hello"]
-     *  ], ["published" => boolean, "posted" => "datetime"]
+     *      "author_id !=":1,
+     *      "OR":["published":true, "posted <":new DateTime("now")],
+     *      "NOT":["title":"Hello"]
+     *  ], ["published":boolean, "posted":"datetime"]
      * ```
      *
      * The previous example produces:
@@ -330,7 +330,7 @@ interface QueryInterface
      * may want to define 2 different options for the same key, in that case, you can
      * wrap each condition inside a new array:
      *
-     * `myQuery.where(["OR" => [["published" => false], ["published" => true]])`
+     * `myQuery.where(["OR":[["published":false], ["published":true]])`
      *
      * Keep in mind that every time you call where() with the third param set to false
      * (default), it will join the passed conditions to the previous stored list using
@@ -340,8 +340,8 @@ interface QueryInterface
      * ### Using expressions objects:
      *
      * ```
-     *  $exp = myQuery.newExpr().add(["id !=" => 100, "author_id" != 1]).tieWith("OR");
-     *  myQuery.where(["published" => true], ["published" => "boolean"]).where($exp);
+     *  $exp = myQuery.newExpr().add(["id !=":100, "author_id" != 1]).tieWith("OR");
+     *  myQuery.where(["published":true], ["published":"boolean"]).where($exp);
      * ```
      *
      * The previous example produces:
@@ -359,10 +359,10 @@ interface QueryInterface
      *
      * ```
      *  myQuery
-     *  .where(["title !=" => "Hello World"])
+     *  .where(["title !=":"Hello World"])
      *  .where(function ($exp, myQuery) {
-     *      $or = $exp.or(["id" => 1]);
-     *      $and = $exp.and(["id >" => 2, "id <" => 10]);
+     *      $or = $exp.or(["id":1]);
+     *      $and = $exp.and(["id >":2, "id <":10]);
      *  return $or.add($and);
      *  });
      * ```

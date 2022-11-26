@@ -60,7 +60,7 @@ interface IRepository
      * $id = 10;
      * $article = $articles.get($id);
      *
-     * $article = $articles.get($id, ["contain" => ["Comments]]);
+     * $article = $articles.get($id, ["contain":["Comments]]);
      * ```
      *
      * @param mixed $primaryKey primary key value to find

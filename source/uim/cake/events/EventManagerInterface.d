@@ -25,7 +25,7 @@ interface IEventManager
      * Binding with options:
      *
      * ```
-     * myEventManager.on("Model.beforeSave", ["priority" => 90], $callable);
+     * myEventManager.on("Model.beforeSave", ["priority":90], $callable);
      * ```
      *
      * @param \Cake\Event\IEventListener|string myEventKey The event unique identifier name

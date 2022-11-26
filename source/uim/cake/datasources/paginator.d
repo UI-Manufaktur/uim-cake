@@ -26,11 +26,11 @@ class Paginator : PaginatorInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "page" => 1,
-        "limit" => 20,
-        "maxLimit" => 100,
-        "allowedParameters" => ["limit", "sort", "page", "direction"],
+    protected STRINGAA _defaultConfig = [
+        "page":1,
+        "limit":20,
+        "maxLimit":100,
+        "allowedParameters":["limit", "sort", "page", "direction"],
     ];
 
     /**
@@ -55,8 +55,8 @@ class Paginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    "limit" => 20,
-     *    "maxLimit" => 100
+     *    "limit":20,
+     *    "maxLimit":100
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -66,11 +66,11 @@ class Paginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    "Articles" => [
-     *      "limit" => 20,
-     *      "maxLimit" => 100
+     *    "Articles":[
+     *      "limit":20,
+     *      "maxLimit":100
      *    ],
-     *    "Comments" => [ ... ]
+     *    "Comments":[ ... ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
      * ```
@@ -88,9 +88,9 @@ class Paginator : PaginatorInterface
      *
      * ```
      * $settings = [
-     *   "Articles" => [
-     *     "finder" => "custom",
-     *     "sortableFields" => ["title", "author_id", "comment_count"],
+     *   "Articles":[
+     *     "finder":"custom",
+     *     "sortableFields":["title", "author_id", "comment_count"],
      *   ]
      * ];
      * ```
@@ -104,8 +104,8 @@ class Paginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    "Articles" => [
-     *      "finder" => "popular"
+     *    "Articles":[
+     *      "finder":"popular"
      *    ]
      *  ];
      *  myResults = $paginator.paginate(myTable, $settings);
@@ -117,7 +117,7 @@ class Paginator : PaginatorInterface
      *
      * ```
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
-     *   return $q.where(["name" => "CakePHP"])
+     *   return $q.where(["name":"CakePHP"])
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```
@@ -128,8 +128,8 @@ class Paginator : PaginatorInterface
      * the same controller action:
      *
      * ```
-     * $articles = $paginator.paginate($articlesQuery, ["scope" => "articles"]);
-     * $tags = $paginator.paginate($tagsQuery, ["scope" => "tags"]);
+     * $articles = $paginator.paginate($articlesQuery, ["scope":"articles"]);
+     * $tags = $paginator.paginate($tagsQuery, ["scope":"tags"]);
      * ```
      *
      * Each of the above queries will use different query string parameter sets
@@ -170,8 +170,8 @@ class Paginator : PaginatorInterface
         this._pagingParams = [myAlias => $pagingParams];
         if ($pagingParams["requestedPage"] > $pagingParams["page"]) {
             throw new PageOutOfBoundsException([
-                "requestedPage" => $pagingParams["requestedPage"],
-                "pagingParams" => this._pagingParams,
+                "requestedPage":$pagingParams["requestedPage"],
+                "pagingParams":this._pagingParams,
             ]);
         }
 
@@ -225,7 +225,7 @@ class Paginator : PaginatorInterface
         myOptions = this.validateSort($object, myOptions);
         myOptions = this.checkLimit(myOptions);
 
-        myOptions += ["page" => 1, "scope" => null];
+        myOptions += ["page":1, "scope":null];
         myOptions["page"] = (int)myOptions["page"] < 1 ? 1 : (int)myOptions["page"];
         [myFinder, myOptions] = this._extractFinder(myOptions);
 
@@ -244,11 +244,11 @@ class Paginator : PaginatorInterface
         $limit = myData["options"]["limit"];
 
         $paging = [
-            "count" => myData["count"],
-            "current" => myData["numResults"],
-            "perPage" => $limit,
-            "page" => myData["options"]["page"],
-            "requestedPage" => myData["options"]["page"],
+            "count":myData["count"],
+            "current":myData["numResults"],
+            "perPage":$limit,
+            "page":myData["options"]["page"],
+            "requestedPage":myData["options"]["page"],
         ];
 
         $paging = this.addPageCountParams($paging, myData);
@@ -257,9 +257,9 @@ class Paginator : PaginatorInterface
         $paging = this.addSortingParams($paging, myData);
 
         $paging += [
-            "limit" => myData["defaults"]["limit"] != $limit ? $limit : null,
-            "scope" => myData["options"]["scope"],
-            "finder" => myData["finder"],
+            "limit":myData["defaults"]["limit"] != $limit ? $limit : null,
+            "scope":myData["options"]["scope"],
+            "finder":myData["finder"],
         ];
 
         return $paging;
@@ -350,11 +350,11 @@ class Paginator : PaginatorInterface
         }
 
         myParams += [
-            "sort" => myData["options"]["sort"],
-            "direction" => isset(myData["options"]["sort"]) && count($order) ? current($order) : null,
-            "sortDefault" => $sortDefault,
-            "directionDefault" => $directionDefault,
-            "completeSort" => $order,
+            "sort":myData["options"]["sort"],
+            "direction":isset(myData["options"]["sort"]) && count($order) ? current($order) : null,
+            "sortDefault":$sortDefault,
+            "directionDefault":$directionDefault,
+            "completeSort":$order,
         ];
 
         return myParams;

@@ -372,7 +372,7 @@ trait QueryTrait
      * myQuery.formatResults(function (myResults, myQuery) {
      *     return myResults.map(function ($row) use (myQuery) {
      *         myData = [
-     *             "bar" => "baz",
+     *             "bar":"baz",
      *         ];
      *
      *         if (myQuery.isHydrationEnabled()) {
@@ -493,8 +493,8 @@ trait QueryTrait
      * ### Example:
      *
      * ```
-     *  myQuery.applyOptions(["doABarrelRoll" => true, "fields" => ["id", "name"]);
-     *  myQuery.getOptions(); // Returns ["doABarrelRoll" => true]
+     *  myQuery.applyOptions(["doABarrelRoll":true, "fields":["id", "name"]);
+     *  myQuery.getOptions(); // Returns ["doABarrelRoll":true]
      * ```
      *
      * @see \Cake\Datasource\QueryInterface::applyOptions() to read about the options that will

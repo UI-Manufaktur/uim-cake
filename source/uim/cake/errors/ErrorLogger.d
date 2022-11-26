@@ -23,9 +23,9 @@ class ErrorLogger : IErrorLogger
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "skipLog" => [],
-        "trace" => false,
+    protected STRINGAA _defaultConfig = [
+        "skipLog":[],
+        "trace":false,
     ];
 
     /**
@@ -95,7 +95,7 @@ class ErrorLogger : IErrorLogger
 
         if (this.getConfig("trace")) {
             /** @var array $trace */
-            $trace = Debugger::formatTrace(myException, ["format" => "points"]);
+            $trace = Debugger::formatTrace(myException, ["format":"points"]);
             myMessage .= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {

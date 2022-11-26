@@ -25,9 +25,9 @@ interface IEventListener
      *  function implementedEvents()
      *  {
      *      return [
-     *          "Order.complete" => "sendEmail",
-     *          "Article.afterBuy" => "decrementInventory",
-     *          "User.onRegister" => ["callable" => "logRegistration", "priority" => 20, "passParams" => true]
+     *          "Order.complete":"sendEmail",
+     *          "Article.afterBuy":"decrementInventory",
+     *          "User.onRegister":["callable":"logRegistration", "priority":20, "passParams":true]
      *      ];
      *  }
      * ```

@@ -90,8 +90,8 @@ trait RulesAwareTrait
         /** @psalm-var class-string<\Cake\Datasource\RulesChecker> myClass */
         myClass = defined("static::RULES_CLASS") ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
-        this._rulesChecker = this.buildRules(new myClass(["repository" => this]));
-        this.dispatchEvent("Model.buildRules", ["rules" => this._rulesChecker]);
+        this._rulesChecker = this.buildRules(new myClass(["repository":this]));
+        this.dispatchEvent("Model.buildRules", ["rules":this._rulesChecker]);
 
         return this._rulesChecker;
     }

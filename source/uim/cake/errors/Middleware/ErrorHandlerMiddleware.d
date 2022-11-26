@@ -35,7 +35,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      *   extend one of the listed exceptions will also not be logged. Example:
      *
      *   ```
-     *   "skipLog" => ["Cake\Error\NotFoundException", "Cake\Error\UnauthorizedException"]
+     *   "skipLog":["Cake\Error\NotFoundException", "Cake\Error\UnauthorizedException"]
      *   ```
      *
      * - `trace` Should error logs include stack traces?
@@ -45,11 +45,11 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
-        "skipLog" => [],
-        "log" => true,
-        "trace" => false,
-        "exceptionRenderer" => ExceptionRenderer::class,
+    protected STRINGAA _defaultConfig = [
+        "skipLog":[],
+        "log":true,
+        "trace":false,
+        "exceptionRenderer":ExceptionRenderer::class,
     ];
 
     /**
@@ -159,7 +159,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      */
     protected auto handleInternalError(): IResponse
     {
-        $response = new Response(["body" => "An Internal Server Error Occurred"]);
+        $response = new Response(["body":"An Internal Server Error Occurred"]);
 
         return $response.withStatus(500);
     }
