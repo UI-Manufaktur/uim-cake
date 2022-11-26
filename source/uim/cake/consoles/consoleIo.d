@@ -522,16 +522,16 @@ class ConsoleIo
         }
         if (myEnable !== static::QUIET) {
             $stdout = new ConsoleLog([
-                "types" => $outLevels,
-                "stream" => this._out,
+                "types":$outLevels,
+                "stream":this._out,
             ]);
-            Log::setConfig("stdout", ["engine" => $stdout]);
+            Log::setConfig("stdout", ["engine":$stdout]);
         }
         $stderr = new ConsoleLog([
-            "types" => ["emergency", "alert", "critical", "error", "warning"],
-            "stream" => this._err,
+            "types":["emergency", "alert", "critical", "error", "warning"],
+            "stream":this._err,
         ]);
-        Log::setConfig("stderr", ["engine" => $stderr]);
+        Log::setConfig("stderr", ["engine":$stderr]);
     }
 
     /**

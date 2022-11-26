@@ -50,12 +50,12 @@ class PluginAssetsCopyCommand : Command {
         $parser.setDescription([
             "Copy plugin assets to app\"s webroot.",
         ]).addArgument("name", [
-            "help" => "A specific plugin you want to copy assets for.",
-            "optional" => true,
+            "help":"A specific plugin you want to copy assets for.",
+            "optional":true,
         ]).addOption("overwrite", [
-            "help" => "Overwrite existing symlink / folder / files.",
-            "default" => false,
-            "boolean" => true,
+            "help":"Overwrite existing symlink / folder / files.",
+            "default":false,
+            "boolean":true,
         ]);
 
         return $parser;

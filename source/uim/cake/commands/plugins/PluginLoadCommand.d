@@ -110,8 +110,8 @@ class PluginLoadCommand : Command {
             "Command for loading plugins.",
         ])
         .addArgument("plugin", [
-            "help" => "Name of the plugin to load. Must be in CamelCase format. Example: cake plugin load Example",
-            "required" => true,
+            "help":"Name of the plugin to load. Must be in CamelCase format. Example: cake plugin load Example",
+            "required":true,
         ]);
 
         return $parser;

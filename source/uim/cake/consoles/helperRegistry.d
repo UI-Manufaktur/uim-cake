@@ -63,8 +63,8 @@ class HelperRegistry : ObjectRegistry
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingHelperException([
-            "class" => myClass,
-            "plugin" => myPlugin,
+            "class":myClass,
+            "plugin":myPlugin,
         ]);
     }
 

@@ -1,6 +1,6 @@
 module uim.cake.console;
 
-import uim.cakere.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 
 /**
  * Base class for Helpers.
@@ -18,7 +18,7 @@ abstract class Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected STRINGAA _defaultConfig = [];
 
     /**
      * ConsoleIo instance.

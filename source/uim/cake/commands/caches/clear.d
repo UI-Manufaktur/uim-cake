@@ -30,10 +30,10 @@ class CacheClearCommand : Command {
         $parser
             .setDescription("Clear all data in a single cache engine")
             .addArgument("engine", [
-                "help" => "The cache engine to clear." .
+                "help":"The cache engine to clear." .
                     "For example, `cake cache clear _cake_model_` will clear the model cache." .
                     " Use `cake cache list` to list available engines.",
-                "required" => true,
+                "required":true,
             ]);
 
         return $parser;

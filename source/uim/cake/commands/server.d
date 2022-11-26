@@ -142,17 +142,17 @@ class ServerCommand : Command {
             "PHP Built-in Server for CakePHP",
             "<warning>[WARN] Don\"t use this in a production environment</warning>",
         ]).addOption("host", [
-            "short" => "H",
-            "help" => "ServerHost",
+            "short":"H",
+            "help":"ServerHost",
         ]).addOption("port", [
-            "short" => "p",
-            "help" => "ListenPort",
+            "short":"p",
+            "help":"ListenPort",
         ]).addOption("ini_path", [
-            "short" => "I",
-            "help" => "php.ini path",
+            "short":"I",
+            "help":"php.ini path",
         ]).addOption("document_root", [
-            "short" => "d",
-            "help" => "DocumentRoot",
+            "short":"d",
+            "help":"DocumentRoot",
         ]);
 
         return $parser;

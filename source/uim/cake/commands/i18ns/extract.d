@@ -271,7 +271,7 @@ class I18nExtractCommand : Command {
 
         if (empty(this._translations[$domain][$msgid][$context])) {
             this._translations[$domain][$msgid][$context] = [
-                "msgid_plural" => false,
+                "msgid_plural":false,
             ];
         }
 
@@ -310,7 +310,7 @@ class I18nExtractCommand : Command {
         $io.out();
         if (this._countMarkerError) {
             $io.err("{this._countMarkerError} marker error(s) detected.");
-            $io.err(" => Use the --marker-error option to display errors.");
+            $io.err(":Use the --marker-error option to display errors.");
         }
 
         $io.out("Done.");
@@ -329,43 +329,43 @@ class I18nExtractCommand : Command {
             "Source files are parsed and string literal format strings " .
             "provided to the <info>__</info> family of functions are extracted."
         ).addOption("app", [
-            "help" => "Directory where your application is located.",
+            "help":"Directory where your application is located.",
         ]).addOption("paths", [
-            "help" => "Comma separated list of paths that are searched for source files.",
+            "help":"Comma separated list of paths that are searched for source files.",
         ]).addOption("merge", [
-            "help" => "Merge all domain strings into a single default.po file.",
-            "default" => "no",
-            "choices" => ["yes", "no"],
+            "help":"Merge all domain strings into a single default.po file.",
+            "default":"no",
+            "choices":["yes", "no"],
         ]).addOption("output", [
-            "help" => "Full path to output directory.",
+            "help":"Full path to output directory.",
         ]).addOption("files", [
-            "help" => "Comma separated list of files to parse.",
+            "help":"Comma separated list of files to parse.",
         ]).addOption("exclude-plugins", [
-            "boolean" => true,
-            "default" => true,
-            "help" => "Ignores all files in plugins if this command is run inside from the same app directory.",
+            "boolean":true,
+            "default":true,
+            "help":"Ignores all files in plugins if this command is run inside from the same app directory.",
         ]).addOption("plugin", [
-            "help" => "Extracts tokens only from the plugin specified and "
+            "help":"Extracts tokens only from the plugin specified and "
                 . "puts the result in the plugin\"s `locales` directory.",
-            "short" => "p",
+            "short":"p",
         ]).addOption("exclude", [
-            "help" => "Comma separated list of directories to exclude." .
+            "help":"Comma separated list of directories to exclude." .
                 " Any path containing a path segment with the provided values will be skipped. E.g. test,vendors",
         ]).addOption("overwrite", [
-            "boolean" => true,
-            "default" => false,
-            "help" => "Always overwrite existing .pot files.",
+            "boolean":true,
+            "default":false,
+            "help":"Always overwrite existing .pot files.",
         ]).addOption("extract-core", [
-            "help" => "Extract messages from the CakePHP core libraries.",
-            "choices" => ["yes", "no"],
+            "help":"Extract messages from the CakePHP core libraries.",
+            "choices":["yes", "no"],
         ]).addOption("no-location", [
-            "boolean" => true,
-            "default" => false,
-            "help" => "Do not write file locations for each extracted message.",
+            "boolean":true,
+            "default":false,
+            "help":"Do not write file locations for each extracted message.",
         ]).addOption("marker-error", [
-            "boolean" => true,
-            "default" => false,
-            "help" => "Do not display marker error.",
+            "boolean":true,
+            "default":false,
+            "help":"Do not display marker error.",
         ]);
 
         return $parser;
@@ -380,18 +380,18 @@ class I18nExtractCommand : Command {
     protected void _extractTokens(Arguments $args, ConsoleIo $io) {
         /** @var \Cake\Shell\Helper\ProgressHelper $progress */
         $progress = $io.helper("progress");
-        $progress.init(["total" => count(this._files)]);
+        $progress.init(["total":count(this._files)]);
         $isVerbose = $args.getOption("verbose");
 
         $functions = [
-            "__" => ["singular"],
-            "__n" => ["singular", "plural"],
-            "__d" => ["domain", "singular"],
-            "__dn" => ["domain", "singular", "plural"],
-            "__x" => ["context", "singular"],
-            "__xn" => ["context", "singular", "plural"],
-            "__dx" => ["domain", "context", "singular"],
-            "__dxn" => ["domain", "context", "singular", "plural"],
+            "__":["singular"],
+            "__n":["singular", "plural"],
+            "__d":["domain", "singular"],
+            "__dn":["domain", "singular", "plural"],
+            "__x":["context", "singular"],
+            "__xn":["context", "singular", "plural"],
+            "__dx":["domain", "context", "singular"],
+            "__dxn":["domain", "context", "singular", "plural"],
         ];
         $pattern = "/(" . implode("|", array_keys($functions)) . ")\s*\(/";
 
@@ -469,8 +469,8 @@ class I18nExtractCommand : Command {
                     extract($vars);
                     $domain = $domain ?? "default";
                     $details = [
-                        "file" => this._file,
-                        "line" => $line,
+                        "file":this._file,
+                        "line":$line,
                     ];
                     $details["file"] = "." . str_replace(ROOT, "", $details["file"]);
                     if ($plural !== null) {
@@ -725,7 +725,7 @@ class I18nExtractCommand : Command {
         if ($quote === """) {
             $string = stripcslashes($string);
         } else {
-            $string = strtr($string, ["\\"" => """, "\\\\" => "\\"]);
+            $string = strtr($string, ["\\"":""", "\\\\":"\\"]);
         }
         $string = str_replace("\r\n", "\n", $string);
 

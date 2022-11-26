@@ -59,8 +59,8 @@ class PluginAssetsRemoveCommand : Command {
         $parser.setDescription([
             "Remove plugin assets from app\"s webroot.",
         ]).addArgument("name", [
-            "help" => "A specific plugin you want to remove.",
-            "optional" => true,
+            "help":"A specific plugin you want to remove.",
+            "optional":true,
         ]);
 
         return $parser;

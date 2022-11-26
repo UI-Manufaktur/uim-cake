@@ -27,7 +27,7 @@ class RoutesCheckCommand : Command {
     int execute(Arguments $args, ConsoleIo $io) {
         auto myUrl = $args.getArgument("url");
         try {
-            myRequest = new ServerRequest(["url" => myUrl]);
+            myRequest = new ServerRequest(["url":myUrl]);
             $route = Router::parseRequest(myRequest);
             myName = null;
             foreach (Router::routes() as $r) {
@@ -76,8 +76,8 @@ class RoutesCheckCommand : Command {
             "Will output the routing parameters the route resolves to."
         )
         .addArgument("url", [
-            "help" => "The URL to check.",
-            "required" => true,
+            "help":"The URL to check.",
+            "required":true,
         ]);
 
         return $parser;

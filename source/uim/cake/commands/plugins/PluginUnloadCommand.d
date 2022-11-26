@@ -83,7 +83,7 @@ class PluginUnloadCommand : Command {
             "Command for unloading plugins.",
         ])
         .addArgument("plugin", [
-            "help" => "Name of the plugin to unload.",
+            "help":"Name of the plugin to unload.",
         ]);
 
         return $parser;

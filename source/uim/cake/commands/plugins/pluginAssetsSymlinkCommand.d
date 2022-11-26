@@ -51,12 +51,12 @@ class PluginAssetsSymlinkCommand : Command {
         $parser.setDescription([
             "Symlink (copy as fallback) plugin assets to app\"s webroot.",
         ]).addArgument("name", [
-            "help" => "A specific plugin you want to symlink assets for.",
-            "optional" => true,
+            "help":"A specific plugin you want to symlink assets for.",
+            "optional":true,
         ]).addOption("overwrite", [
-            "help" => "Overwrite existing symlink / folder / files.",
-            "default" => false,
-            "boolean" => true,
+            "help":"Overwrite existing symlink / folder / files.",
+            "default":false,
+            "boolean":true,
         ]);
 
         return $parser;

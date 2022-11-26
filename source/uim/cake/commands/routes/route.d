@@ -71,9 +71,9 @@ class RoutesCommand : Command {
         $parser
             .setDescription("Get the list of routes connected in this application.")
             .addOption("sort", [
-                "help" => "Sorts alphabetically by route name A-Z",
-                "short" => "s",
-                "boolean" => true,
+                "help":"Sorts alphabetically by route name A-Z",
+                "short":"s",
+                "boolean":true,
             ]);
 
         return $parser;

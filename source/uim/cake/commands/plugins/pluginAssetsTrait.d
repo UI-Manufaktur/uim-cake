@@ -66,10 +66,10 @@ trait PluginAssetsTrait
             }
 
             myPlugins[myPlugin] = [
-                "srcPath" => Plugin::path(myPlugin) . "webroot",
-                "destDir" => $dir,
-                "link" => $link,
-                "moduled" => $moduled,
+                "srcPath":Plugin::path(myPlugin) . "webroot",
+                "destDir":$dir,
+                "link":$link,
+                "moduled":$moduled,
             ];
         }
 

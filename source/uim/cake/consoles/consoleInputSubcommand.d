@@ -52,7 +52,7 @@ class ConsoleInputSubCommand {
      */
     this(myName, $help = "", $parser = null) {
         if (is_array(myName)) {
-            myData = myName + ["name" => null, "help" => "", "parser" => null];
+            myData = myName + ["name":null, "help":"", "parser":null];
             if (empty(myData["name"])) {
                 throw new InvalidArgumentException(""name" not provided for console option parser");
             }

@@ -49,7 +49,7 @@ use LogicException;
  * declare arguments as optional, by setting the required param to false.
  *
  * ```
- * $parser.addArgument("model", ["required" => false]);
+ * $parser.addArgument("model", ["required":false]);
  * ```
  *
  * ### Providing Help text
@@ -146,20 +146,20 @@ class ConsoleOptionParser
         this.setCommand($command);
 
         this.addOption("help", [
-            "short" => "h",
-            "help" => "Display this help.",
-            "boolean" => true,
+            "short":"h",
+            "help":"Display this help.",
+            "boolean":true,
         ]);
 
         if ($defaultOptions) {
             this.addOption("verbose", [
-                "short" => "v",
-                "help" => "Enable verbose output.",
-                "boolean" => true,
+                "short":"v",
+                "help":"Enable verbose output.",
+                "boolean":true,
             ]).addOption("quiet", [
-                "short" => "q",
-                "help" => "Enable quiet output.",
-                "boolean" => true,
+                "short":"q",
+                "help":"Enable quiet output.",
+                "boolean":true,
             ]);
         }
     }
@@ -180,15 +180,15 @@ class ConsoleOptionParser
      *
      * ```
      * $spec = [
-     *      "description" => "text",
-     *      "epilog" => "text",
-     *      "arguments" => [
+     *      "description":"text",
+     *      "epilog":"text",
+     *      "arguments":[
      *          // list of arguments compatible with addArguments.
      *      ],
-     *      "options" => [
+     *      "options":[
      *          // list of options compatible with addOptions
      *      ],
-     *      "subcommands" => [
+     *      "subcommands":[
      *          // list of subcommands to add.
      *      ]
      * ];
@@ -227,12 +227,12 @@ class ConsoleOptionParser
     function toArray(): array
     {
         myResult = [
-            "command" => this._command,
-            "arguments" => this._args,
-            "options" => this._options,
-            "subcommands" => this._subcommands,
-            "description" => this._description,
-            "epilog" => this._epilog,
+            "command":this._command,
+            "arguments":this._args,
+            "options":this._options,
+            "subcommands":this._subcommands,
+            "description":this._description,
+            "epilog":this._epilog,
         ];
 
         return myResult;
@@ -388,13 +388,13 @@ class ConsoleOptionParser
             myName = $option.name();
         } else {
             $defaults = [
-                "short" => "",
-                "help" => "",
-                "default" => null,
-                "boolean" => false,
-                "multiple" => false,
-                "choices" => [],
-                "required" => false,
+                "short":"",
+                "help":"",
+                "default":null,
+                "boolean":false,
+                "multiple":false,
+                "choices":[],
+                "required":false,
             ];
             myOptions += $defaults;
             $option = new ConsoleInputOption(
@@ -454,11 +454,11 @@ class ConsoleOptionParser
             $index = count(this._args);
         } else {
             $defaults = [
-                "name" => myName,
-                "help" => "",
-                "index" => count(this._args),
-                "required" => false,
-                "choices" => [],
+                "name":myName,
+                "help":"",
+                "index":count(this._args),
+                "required":false,
+                "choices":[],
             ];
             myOptions = myParams + $defaults;
             $index = myOptions["index"];
@@ -542,9 +542,9 @@ class ConsoleOptionParser
         } else {
             myName = Inflector::underscore(myName);
             $defaults = [
-                "name" => myName,
-                "help" => "",
-                "parser" => null,
+                "name":myName,
+                "help":"",
+                "parser":null,
             ];
             myOptions += $defaults;
 
