@@ -379,7 +379,7 @@ class ResultSet : ResultSetInterface
     protected auto _calculateColumnMap(Query myQuery): void
     {
         $map = [];
-        foreach (myQuery.clause("select") as myKey => myField) {
+        foreach (myQuery.clause("select") as myKey: myField) {
             myKey = trim(myKey, ""`[]");
 
             if (strpos(myKey, "__") <= 0) {
@@ -391,7 +391,7 @@ class ResultSet : ResultSetInterface
             $map[$parts[0]][myKey] = $parts[1];
         }
 
-        foreach (this._matchingMap as myAlias => $assoc) {
+        foreach (this._matchingMap as myAlias: $assoc) {
             if (!isset($map[myAlias])) {
                 continue;
             }
@@ -437,7 +437,7 @@ class ResultSet : ResultSetInterface
             "guard":false,
         ];
 
-        foreach (this._matchingMapColumns as myAlias => myKeys) {
+        foreach (this._matchingMapColumns as myAlias: myKeys) {
             $matching = this._matchingMap[myAlias];
             myResults["_matchingData"][myAlias] = array_combine(
                 myKeys,
@@ -453,7 +453,7 @@ class ResultSet : ResultSetInterface
             }
         }
 
-        foreach (this._map as myTable => myKeys) {
+        foreach (this._map as myTable: myKeys) {
             myResults[myTable] = array_combine(myKeys, array_intersect_key($row, myKeys));
             $presentAliases[myTable] = true;
         }
@@ -510,7 +510,7 @@ class ResultSet : ResultSetInterface
             myResults = $instance.transformRow(myResults, myAlias, $assoc["canBeJoined"], $assoc["targetProperty"]);
         }
 
-        foreach ($presentAliases as myAlias => $present) {
+        foreach ($presentAliases as myAlias: $present) {
             if (!isset(myResults[myAlias])) {
                 continue;
             }

@@ -78,7 +78,7 @@ class IsUnique
     protected auto _alias(string myAlias, array $conditions): array
     {
         myAliased = [];
-        foreach ($conditions as myKey => myValue) {
+        foreach ($conditions as myKey: myValue) {
             myAliased["myAlias.myKey IS"] = myValue;
         }
 

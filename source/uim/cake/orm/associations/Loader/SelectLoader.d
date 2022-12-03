@@ -273,7 +273,7 @@ class SelectLoader
         $filter = [];
         myAliasedTable = this.sourceAlias;
 
-        foreach ($subquery.clause("select") as myAliasedField => myField) {
+        foreach ($subquery.clause("select") as myAliasedField: myField) {
             if (is_int(myAliasedField)) {
                 $filter[] = new IdentifierExpression(myField);
             } else {
@@ -286,11 +286,11 @@ class SelectLoader
             $conditions = this._createTupleCondition(myQuery, myKey, $filter, "=");
         } else {
             $filter = current($filter);
-            $conditions = myQuery.newExpr([myKey => $filter]);
+            $conditions = myQuery.newExpr([myKey: $filter]);
         }
 
         return myQuery.innerJoin(
-            [myAliasedTable => $subquery],
+            [myAliasedTable: $subquery],
             $conditions
         );
     }

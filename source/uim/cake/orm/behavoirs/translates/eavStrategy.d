@@ -156,7 +156,7 @@ class EavStrategy : TranslateStrategyInterface
 
         $conditions = function (myField, $locale, myQuery, $select) {
             return function ($q) use (myField, $locale, myQuery, $select) {
-                $q.where([$q.getRepository().aliasField("locale") => $locale]);
+                $q.where([$q.getRepository().aliasField("locale"): $locale]);
 
                 if (
                     myQuery.isAutoFieldsEnabled() ||
@@ -213,7 +213,7 @@ class EavStrategy : TranslateStrategyInterface
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
         $locale = $entity.get("_locale") ?: this.getLocale();
-        $newOptions = [this.translationTable.getAlias() => ["validate":false]];
+        $newOptions = [this.translationTable.getAlias(): ["validate":false]];
         myOptions["associated"] = $newOptions + myOptions["associated"];
 
         // Check early if empty translations are present in the entity.
@@ -280,13 +280,13 @@ class EavStrategy : TranslateStrategyInterface
         }
 
         $modified = [];
-        foreach ($preexistent as myField => $translation) {
+        foreach ($preexistent as myField: $translation) {
             $translation.set("content", myValues[myField]);
             $modified[myField] = $translation;
         }
 
         $new = array_diff_key(myValues, $modified);
-        foreach ($new as myField => myContents) {
+        foreach ($new as myField: myContents) {
             $new[myField] = new Entity(compact("locale", "field", "content", "model"), [
                 "useSetters":false,
                 "markNew":true,
@@ -387,7 +387,7 @@ class EavStrategy : TranslateStrategyInterface
             myGrouped = new Collection($translations);
 
             myResult = [];
-            foreach (myGrouped.combine("field", "content", "locale") as $locale => myKeys) {
+            foreach (myGrouped.combine("field", "content", "locale") as $locale: myKeys) {
                 $entityClass = this.table.getEntityClass();
                 $translation = new $entityClass(myKeys + ["locale":$locale], [
                     "markNew":false,
@@ -427,7 +427,7 @@ class EavStrategy : TranslateStrategyInterface
         $find = [];
         myContentss = [];
 
-        foreach ($translations as $lang => $translation) {
+        foreach ($translations as $lang: $translation) {
             foreach (myFields as myField) {
                 if (!$translation.isDirty(myField)) {
                     continue;
@@ -445,7 +445,7 @@ class EavStrategy : TranslateStrategyInterface
 
         myResults = this.findExistingTranslations($find);
 
-        foreach ($find as $i => $translation) {
+        foreach ($find as $i: $translation) {
             if (!empty(myResults[$i])) {
                 myContentss[$i].set("id", myResults[$i], ["setter":false]);
                 myContentss[$i].setNew(false);
@@ -477,7 +477,7 @@ class EavStrategy : TranslateStrategyInterface
             .disableBufferedResults();
 
         unset($ruleSet[0]);
-        foreach ($ruleSet as $i => $conditions) {
+        foreach ($ruleSet as $i: $conditions) {
             $q = $association.find()
                 .select(["id", "num":$i])
                 .where($conditions);

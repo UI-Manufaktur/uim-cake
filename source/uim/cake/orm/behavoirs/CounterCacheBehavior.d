@@ -109,9 +109,9 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        foreach (this._config as $assoc => $settings) {
+        foreach (this._config as $assoc: $settings) {
             $assoc = this._table.getAssociation($assoc);
-            foreach ($settings as myField => myConfig) {
+            foreach ($settings as myField: myConfig) {
                 if (is_int(myField)) {
                     continue;
                 }
@@ -178,7 +178,7 @@ class CounterCacheBehavior : Behavior
      */
     protected auto _processAssociations(IEvent myEvent, IEntity $entity): void
     {
-        foreach (this._config as $assoc => $settings) {
+        foreach (this._config as $assoc: $settings) {
             $assoc = this._table.getAssociation($assoc);
             this._processAssociation(myEvent, $entity, $assoc, $settings);
         }
@@ -203,7 +203,7 @@ class CounterCacheBehavior : Behavior
         $foreignKeys = (array)$assoc.getForeignKey();
         myCountConditions = $entity.extract($foreignKeys);
 
-        foreach (myCountConditions as myField => myValue) {
+        foreach (myCountConditions as myField: myValue) {
             if (myValue === null) {
                 myCountConditions[myField . " IS"] = myValue;
                 unset(myCountConditions[myField]);
@@ -218,7 +218,7 @@ class CounterCacheBehavior : Behavior
             $updateOriginalConditions = array_combine($primaryKeys, myCountOriginalConditions);
         }
 
-        foreach ($settings as myField => myConfig) {
+        foreach ($settings as myField: myConfig) {
             if (is_int(myField)) {
                 myField = myConfig;
                 myConfig = [];
@@ -238,7 +238,7 @@ class CounterCacheBehavior : Behavior
                     myCount = this._getCount(myConfig, myCountConditions);
                 }
                 if (myCount !== false) {
-                    $assoc.getTarget().updateAll([myField => myCount], $updateConditions);
+                    $assoc.getTarget().updateAll([myField: myCount], $updateConditions);
                 }
             }
 
@@ -249,7 +249,7 @@ class CounterCacheBehavior : Behavior
                     myCount = this._getCount(myConfig, myCountOriginalConditions);
                 }
                 if (myCount !== false) {
-                    $assoc.getTarget().updateAll([myField => myCount], $updateOriginalConditions);
+                    $assoc.getTarget().updateAll([myField: myCount], $updateOriginalConditions);
                 }
             }
         }

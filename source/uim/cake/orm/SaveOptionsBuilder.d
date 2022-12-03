@@ -61,7 +61,7 @@ class SaveOptionsBuilder : ArrayObject
      * @return this
      */
     function parseArrayOptions(array $array) {
-        foreach ($array as myKey => myValue) {
+        foreach ($array as myKey: myValue) {
             this.{myKey}(myValue);
         }
 
@@ -91,7 +91,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     protected auto _associated(Table myTable, array $associations): void
     {
-        foreach ($associations as myKey => $associated) {
+        foreach ($associations as myKey: $associated) {
             if (is_int(myKey)) {
                 this._checkAssociation(myTable, $associated);
                 continue;

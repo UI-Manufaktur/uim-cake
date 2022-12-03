@@ -25,7 +25,7 @@ class RedirectException : HttpException
     this(string myTarget, int $code = 302, array $headers = []) {
         super.this(myTarget, $code);
 
-        foreach ($headers as myKey => myValue) {
+        foreach ($headers as myKey: myValue) {
             this.setHeader(myKey, (array)myValue);
         }
     }
@@ -33,7 +33,7 @@ class RedirectException : HttpException
     /**
      * Add headers to be included in the response generated from this exception
      *
-     * @param array $headers An array of `header => value` to append to the exception.
+     * @param array $headers An array of `header: value` to append to the exception.
      *  If a header already exists, the new values will be appended to the existing ones.
      * @return this
      * @deprecated 4.2.0 Use `setHeaders()` instead.
@@ -41,7 +41,7 @@ class RedirectException : HttpException
     function addHeaders(array $headers) {
         deprecationWarning("RedirectException::addHeaders() is deprecated, use setHeaders() instead.");
 
-        foreach ($headers as myKey => myValue) {
+        foreach ($headers as myKey: myValue) {
             this.headers[myKey][] = myValue;
         }
 

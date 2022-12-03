@@ -208,7 +208,7 @@ class Socket
      */
     protected auto _setSslContext(string $host): void
     {
-        foreach (this._config as myKey => myValue) {
+        foreach (this._config as myKey: myValue) {
             if (substr(myKey, 0, 4) !== "ssl_") {
                 continue;
             }
@@ -425,7 +425,7 @@ class Socket
             $state = $initialState;
         }
 
-        foreach ($state as $property => myValue) {
+        foreach ($state as $property: myValue) {
             this.{$property} = myValue;
         }
     }

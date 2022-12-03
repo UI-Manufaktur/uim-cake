@@ -159,7 +159,7 @@ $cacheConfig = [
    "className":FileEngine::class,
    "duration":"+1 year",
    "serialize":true,
-   "prefix"    => "orm_",
+   "prefix"   : "orm_",
 ];
 Cache::setConfig("_cake_model_", $cacheConfig);
 ```

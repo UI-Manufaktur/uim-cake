@@ -231,7 +231,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
     function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
     {
         $response = $handler.handle(myRequest);
-        foreach (this.headers as $header => myValue) {
+        foreach (this.headers as $header: myValue) {
             $response = $response.withHeader($header, myValue);
         }
 

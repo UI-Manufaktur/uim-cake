@@ -185,7 +185,7 @@ class TableLocator : AbstractLocator : ILocator
     protected auto createInstance(string myAlias, array myOptions) {
         if (strpos(myAlias, "\\") === false) {
             [, myClassAlias] = pluginSplit(myAlias);
-            myOptions = ["alias" => myClassAlias] + myOptions;
+            myOptions = ["alias": myClassAlias] + myOptions;
         } elseif (!isset(myOptions["alias"])) {
             myOptions["className"] = myAlias;
             /** @psalm-suppress PossiblyFalseOperand */

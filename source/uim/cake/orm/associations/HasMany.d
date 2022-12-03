@@ -191,7 +191,7 @@ class HasMany : Association
         myTable = this.getTarget();
         $original = $entities;
 
-        foreach ($entities as $k => $entity) {
+        foreach ($entities as $k: $entity) {
             if (!($entity instanceof IEntity)) {
                 break;
             }

@@ -282,7 +282,7 @@ class EagerLoadable
         }
 
         return [
-            this._name => [
+            this._name: [
                 "associations":$associations,
                 "config":myConfig,
             ],
@@ -295,7 +295,7 @@ class EagerLoadable
      * @return void
      */
     auto __clone() {
-        foreach (this._associations as $i => $association) {
+        foreach (this._associations as $i: $association) {
             this._associations[$i] = clone $association;
         }
     }

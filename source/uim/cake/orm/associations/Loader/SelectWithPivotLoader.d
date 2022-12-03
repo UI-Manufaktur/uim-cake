@@ -95,7 +95,7 @@ class SelectWithPivotLoader : SelectLoader
         $schema = $assoc.getSchema();
         $joinFields = myTypes = [];
 
-        foreach ($schema.typeMap() as $f => myType) {
+        foreach ($schema.typeMap() as $f: myType) {
             myKey = $tempName . "__" . $f;
             $joinFields[myKey] = "myName.$f";
             myTypes[myKey] = myType;

@@ -137,7 +137,7 @@ class LazyEagerLoader
             })
             .toArray();
 
-        foreach ($objects as $k => $object) {
+        foreach ($objects as $k: $object) {
             myKey = implode(";", $object.extract($primaryKey));
             if (!isset(myResults[myKey])) {
                 $injected[$k] = $object;
@@ -148,7 +148,7 @@ class LazyEagerLoader
             $loaded = myResults[myKey];
             foreach ($associations as $assoc) {
                 $property = $properties[$assoc];
-                $object.set($property, $loaded.get($property), ["useSetters" => false]);
+                $object.set($property, $loaded.get($property), ["useSetters": false]);
                 $object.setDirty($property, false);
             }
             $injected[$k] = $object;

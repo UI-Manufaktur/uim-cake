@@ -148,7 +148,7 @@ class BelongsTo : Association
             ));
         }
 
-        foreach ($foreignKey as $k => $f) {
+        foreach ($foreignKey as $k: $f) {
             myField = sprintf("%s.%s", $tAlias, $bindingKey[$k]);
             myValue = new IdentifierExpression(sprintf("%s.%s", $sAlias, $f));
             $conditions[myField] = myValue;

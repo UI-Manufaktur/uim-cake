@@ -208,7 +208,7 @@ class Behavior : IEventListener
 
         $indexed = array_flip($defaults[myKey]);
         $indexedCustom = array_flip(myConfig[myKey]);
-        foreach ($indexed as $method => myAlias) {
+        foreach ($indexed as $method: myAlias) {
             if (!isset($indexedCustom[$method])) {
                 $indexedCustom[$method] = myAlias;
             }
@@ -279,7 +279,7 @@ class Behavior : IEventListener
         $priority = myConfig["priority"] ?? null;
         myEvents = [];
 
-        foreach (myEventMap as myEvent => $method) {
+        foreach (myEventMap as myEvent: $method) {
             if (!method_exists(this, $method)) {
                 continue;
             }

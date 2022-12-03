@@ -126,7 +126,7 @@ class EagerLoader
             }
 
             $associations = [
-                $associations => [
+                $associations: [
                     "queryBuilder":myQueryBuilder,
                 ],
             ];
@@ -282,7 +282,7 @@ class EagerLoader
         }
 
         $contain = [];
-        foreach (this._containments as myAlias => myOptions) {
+        foreach (this._containments as myAlias: myOptions) {
             if (!empty(myOptions["instance"])) {
                 $contain = this._containments;
                 break;
@@ -312,7 +312,7 @@ class EagerLoader
     {
         myResult = $original;
 
-        foreach ($associations as myTable => myOptions) {
+        foreach ($associations as myTable: myOptions) {
             $pointer = &myResult;
             if (is_int(myTable)) {
                 myTable = myOptions;
@@ -334,7 +334,7 @@ class EagerLoader
                 myPath = explode(".", myTable);
                 myTable = array_pop(myPath);
                 foreach (myPath as $t) {
-                    $pointer += [$t => []];
+                    $pointer += [$t: []];
                     $pointer = &$pointer[$t];
                 }
             }
@@ -353,7 +353,7 @@ class EagerLoader
                 myOptions = ["queryBuilder":myOptions];
             }
 
-            $pointer += [myTable => []];
+            $pointer += [myTable: []];
 
             if (isset(myOptions["queryBuilder"], $pointer[myTable]["queryBuilder"])) {
                 $first = $pointer[myTable]["queryBuilder"];
@@ -365,7 +365,7 @@ class EagerLoader
 
             if (!is_array(myOptions)) {
                 /** @psalm-suppress InvalidArrayOffset */
-                myOptions = [myOptions => []];
+                myOptions = [myOptions: []];
             }
 
             $pointer[myTable] = myOptions + $pointer[myTable];
@@ -396,7 +396,7 @@ class EagerLoader
         $attachable = this.attachableAssociations(myRepository);
         $processed = [];
         do {
-            foreach ($attachable as myAlias => $loadable) {
+            foreach ($attachable as myAlias: $loadable) {
                 myConfig = $loadable.getConfig() + [
                     "aliasPath":$loadable.aliasPath(),
                     "propertyPath":$loadable.propertyPath(),
@@ -500,7 +500,7 @@ class EagerLoader
             myPaths["root"] = myConfig["aliasPath"];
         }
 
-        foreach ($extra as $t => $assoc) {
+        foreach ($extra as $t: $assoc) {
             $eagerLoadable.addAssociation(
                 $t,
                 this._normalizeContain(myTable, $t, $assoc, myPaths)
@@ -569,11 +569,11 @@ class EagerLoader
     protected auto _resolveJoins(array $associations, array $matching = []): array
     {
         myResult = [];
-        foreach ($matching as myTable => $loadable) {
+        foreach ($matching as myTable: $loadable) {
             myResult[myTable] = $loadable;
             myResult += this._resolveJoins($loadable.associations(), []);
         }
-        foreach ($associations as myTable => $loadable) {
+        foreach ($associations as myTable: $loadable) {
             $inMatching = isset($matching[myTable]);
             if (!$inMatching && $loadable.canBeJoined()) {
                 myResult[myTable] = $loadable;
@@ -702,7 +702,7 @@ class EagerLoader
      */
     protected auto _buildAssociationsMap(array $map, array $level, bool $matching = false): array
     {
-        foreach ($level as $assoc => $meta) {
+        foreach ($level as $assoc: $meta) {
             $canBeJoined = $meta.canBeJoined();
             $instance = $meta.instance();
             $associations = $meta.associations();
@@ -806,7 +806,7 @@ class EagerLoader
     {
         myKeys = [];
         foreach (($statement.fetchAll("assoc") ?: []) as myResult) {
-            foreach ($collectKeys as $nestKey => $parts) {
+            foreach ($collectKeys as $nestKey: $parts) {
                 if ($parts[2] === true) {
                     // Missed joins will have null in the results.
                     if (!array_key_exists($parts[1][0], myResult)) {

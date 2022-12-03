@@ -165,7 +165,7 @@ class TreeBehavior : Behavior
 
         $primaryKey = this._getPrimaryKey();
         $primaryKeyValue = $entity.get($primaryKey);
-        $depths = [$primaryKeyValue => $entity.get(myConfig["level"])];
+        $depths = [$primaryKeyValue: $entity.get(myConfig["level"])];
 
         $children = this._table.find("children", [
             "for":$primaryKeyValue,
@@ -180,8 +180,8 @@ class TreeBehavior : Behavior
             $depths[myNode.get($primaryKey)] = $depth;
 
             this._table.updateAll(
-                [myConfig["level"] => $depth],
-                [$primaryKey => myNode.get($primaryKey)]
+                [myConfig["level"]: $depth],
+                [$primaryKey: myNode.get($primaryKey)]
             );
         }
     }
@@ -371,7 +371,7 @@ class TreeBehavior : Behavior
                 "$left <=":myNode.get(myConfig["left"]),
                 "$right >=":myNode.get(myConfig["right"]),
             ])
-            .order([$left => "ASC"]);
+            .order([$left: "ASC"]);
     }
 
     /**
@@ -388,7 +388,7 @@ class TreeBehavior : Behavior
 
         if ($direct) {
             return this._scope(this._table.find())
-                .where([$parent => myNode.get(this._getPrimaryKey())])
+                .where([$parent: myNode.get(this._getPrimaryKey())])
                 .count();
         }
 
@@ -431,11 +431,11 @@ class TreeBehavior : Behavior
         }
 
         if (myQuery.clause("order") === null) {
-            myQuery.order([$left => "ASC"]);
+            myQuery.order([$left: "ASC"]);
         }
 
         if ($direct) {
-            return this._scope(myQuery).where([$parent => $for]);
+            return this._scope(myQuery).where([$parent: $for]);
         }
 
         myNode = this._getNode($for);
@@ -471,7 +471,7 @@ class TreeBehavior : Behavior
         myResults = this._scope(myQuery)
             .find("threaded", [
                 "parentField":this.getConfig("parent"),
-                "order":[$left => "ASC"],
+                "order":[$left: "ASC"],
             ]);
 
         return this.formatTreeList(myResults, myOptions);
@@ -550,8 +550,8 @@ class TreeBehavior : Behavior
 
         $primary = this._getPrimaryKey();
         this._table.updateAll(
-            [myConfig["parent"] => $parent],
-            [myConfig["parent"] => myNode.get($primary)]
+            [myConfig["parent"]: $parent],
+            [myConfig["parent"]: myNode.get($primary)]
         );
         this._sync(1, "-", "BETWEEN " . ($left + 1) . " AND " . ($right - 1));
         this._sync(2, "-", "> {$right}");
@@ -560,7 +560,7 @@ class TreeBehavior : Behavior
         myNode.set(myConfig["right"], $edge + 2);
         myFields = [myConfig["parent"], myConfig["left"], myConfig["right"]];
 
-        this._table.updateAll(myNode.extract(myFields), [$primary => myNode.get($primary)]);
+        this._table.updateAll(myNode.extract(myFields), [$primary: myNode.get($primary)]);
 
         foreach (myFields as myField) {
             myNode.setDirty(myField, false);
@@ -771,7 +771,7 @@ class TreeBehavior : Behavior
 
         myNode = this._scope(this._table.find())
             .select(myFields)
-            .where([this._table.aliasField($primaryKey) => $id])
+            .where([this._table.aliasField($primaryKey): $id])
             .first();
 
         if (!myNode) {
@@ -820,14 +820,14 @@ class TreeBehavior : Behavior
             myNodeLft = $lftRght++;
             $lftRght = this._recoverTree($lftRght, myNode[$primaryKey], $level + 1);
 
-            myFields = [$left => myNodeLft, $right => $lftRght++];
+            myFields = [$left: myNodeLft, $right: $lftRght++];
             if (myConfig["level"]) {
                 myFields[myConfig["level"]] = $level;
             }
 
             this._table.updateAll(
                 myFields,
-                [$primaryKey => myNode[$primaryKey]]
+                [$primaryKey: myNode[$primaryKey]]
             );
         }
 
@@ -967,7 +967,7 @@ class TreeBehavior : Behavior
         myConfig = this.getConfig();
         $entity = this._table.find("all")
             .select([myConfig["left"], myConfig["right"]])
-            .where([$primaryKey => $id])
+            .where([$primaryKey: $id])
             .first();
 
         if ($entity === null) {

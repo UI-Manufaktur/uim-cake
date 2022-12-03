@@ -190,7 +190,7 @@ trait QueryTrait
     }
 
     /**
-     * Returns a key => value array representing a single aliased field
+     * Returns a key: value array representing a single aliased field
      * that can be passed directly to the select() method.
      * The key will contain the alias and the value the actual field name.
      *
@@ -213,7 +213,7 @@ trait QueryTrait
 
         myKey = sprintf("%s__%s", myAlias, myField);
 
-        return [myKey => myAliasedField];
+        return [myKey: myAliasedField];
     }
 
     /**
@@ -227,7 +227,7 @@ trait QueryTrait
     function aliasFields(array myFields, Nullable!string $defaultAlias = null): array
     {
         myAliased = [];
-        foreach (myFields as myAlias => myField) {
+        foreach (myFields as myAlias: myField) {
             if (is_numeric(myAlias) && is_string(myField)) {
                 myAliased += this.aliasField(myField, $defaultAlias);
                 continue;

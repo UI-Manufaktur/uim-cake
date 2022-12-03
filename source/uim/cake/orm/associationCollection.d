@@ -176,7 +176,7 @@ class AssociationCollection : IteratorAggregate
      */
     function removeAll(): void
     {
-        foreach (this._items as myAlias => $object) {
+        foreach (this._items as myAlias: $object) {
             this.remove(myAlias);
         }
     }
@@ -243,7 +243,7 @@ class AssociationCollection : IteratorAggregate
         bool $owningSide
     ) {
         unset(myOptions["associated"]);
-        foreach ($associations as myAlias => $nested) {
+        foreach ($associations as myAlias: $nested) {
             if (is_int(myAlias)) {
                 myAlias = $nested;
                 $nested = [];

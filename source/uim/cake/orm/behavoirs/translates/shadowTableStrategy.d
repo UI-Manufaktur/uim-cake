@@ -322,7 +322,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
         $locale = $entity.get("_locale") ?: this.getLocale();
-        $newOptions = [this.translationTable.getAlias() => ["validate":false]];
+        $newOptions = [this.translationTable.getAlias(): ["validate":false]];
         myOptions["associated"] = $newOptions + myOptions["associated"];
 
         // Check early if empty translations are present in the entity.
@@ -547,7 +547,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
         $primaryKey = (array)this.table.getPrimaryKey();
         myKey = $entity.get(current($primaryKey));
 
-        foreach ($translations as $lang => $translation) {
+        foreach ($translations as $lang: $translation) {
             if (!$translation.id) {
                 $update = [
                     "id":myKey,

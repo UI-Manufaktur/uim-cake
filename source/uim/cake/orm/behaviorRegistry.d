@@ -155,7 +155,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
         myFinders = array_change_key_case($instance.implementedFinders());
         $methods = array_change_key_case($instance.implementedMethods());
 
-        foreach (myFinders as myFinder => $methodName) {
+        foreach (myFinders as myFinder: $methodName) {
             if (isset(this._finderMap[myFinder]) && this.has(this._finderMap[myFinder][0])) {
                 $duplicate = this._finderMap[myFinder];
                 myError = sprintf(
@@ -169,7 +169,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
             myFinders[myFinder] = [myAlias, $methodName];
         }
 
-        foreach ($methods as $method => $methodName) {
+        foreach ($methods as $method: $methodName) {
             if (isset(this._methodMap[$method]) && this.has(this._methodMap[$method][0])) {
                 $duplicate = this._methodMap[$method];
                 myError = sprintf(

@@ -89,9 +89,9 @@ trait TranslateStrategyTrait
     protected auto unsetEmptyFields($entity) {
         /** @var array<\Cake\ORM\Entity> $translations */
         $translations = (array)$entity.get("_translations");
-        foreach ($translations as $locale => $translation) {
+        foreach ($translations as $locale: $translation) {
             myFields = $translation.extract(this._config["fields"], false);
-            foreach (myFields as myField => myValue) {
+            foreach (myFields as myField: myValue) {
                 if (myValue === null || myValue == "") {
                     $translation.unset(myField);
                 }
@@ -123,7 +123,7 @@ trait TranslateStrategyTrait
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> myOptions The options array used in the marshalling call.
-     * @return array A map of `[property => callable]` of additional properties to marshal.
+     * @return array A map of `[property: callable]` of additional properties to marshal.
      */
     function buildMarshalMap(Marshaller $marshaller, array $map, array myOptions): array
     {
@@ -145,7 +145,7 @@ trait TranslateStrategyTrait
 
                 myOptions["validate"] = this._config["validator"];
                 myErrors = [];
-                foreach (myValue as myLanguage => myFields) {
+                foreach (myValue as myLanguage: myFields) {
                     if (!isset($translations[myLanguage])) {
                         $translations[myLanguage] = this.table.newEmptyEntity();
                     }

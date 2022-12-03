@@ -695,7 +695,7 @@ class BelongsToMany : Association
         $original = $entities;
         $persisted = [];
 
-        foreach ($entities as $k => $entity) {
+        foreach ($entities as $k: $entity) {
             if (!($entity instanceof IEntity)) {
                 break;
             }
@@ -902,7 +902,7 @@ class BelongsToMany : Association
             $storage.attach($e);
         }
 
-        foreach ($existing as $k => $e) {
+        foreach ($existing as $k: $e) {
             if ($storage.contains($e)) {
                 unset($existing[$k]);
             }
@@ -963,7 +963,7 @@ class BelongsToMany : Association
         }
         $matching = [];
         myAlias = this.getAlias() . ".";
-        foreach ($conditions as myField => myValue) {
+        foreach ($conditions as myField: myValue) {
             if (is_string(myField) && strpos(myField, myAlias) === 0) {
                 $matching[myField] = myValue;
             } elseif (is_int(myField) || myValue instanceof IExpression) {
@@ -991,7 +991,7 @@ class BelongsToMany : Association
             return $matching;
         }
         myAlias = this._junctionAssociationName() . ".";
-        foreach ($conditions as myField => myValue) {
+        foreach ($conditions as myField: myValue) {
             $isString = is_string(myField);
             if ($isString && strpos(myField, myAlias) === 0) {
                 $matching[myField] = myValue;
@@ -1058,7 +1058,7 @@ class BelongsToMany : Association
         /** @var array $joins */
         $joins = myQuery.clause("join");
         $matching = [
-            myName => [
+            myName: [
                 "table":$junctionTable.getTable(),
                 "conditions":$conditions,
                 "type":Query::JOIN_TYPE_INNER,
@@ -1214,7 +1214,7 @@ class BelongsToMany : Association
         myKeys = array_merge($foreignKey, $assocForeignKey);
         $deletes = $indexed = $present = [];
 
-        foreach ($jointEntities as $i => $entity) {
+        foreach ($jointEntities as $i: $entity) {
             $indexed[$i] = $entity.extract(myKeys);
             $present[$i] = array_values($entity.extract($assocForeignKey));
         }
@@ -1222,7 +1222,7 @@ class BelongsToMany : Association
         foreach ($existing as myResult) {
             myFields = myResult.extract(myKeys);
             $found = false;
-            foreach ($indexed as $i => myData) {
+            foreach ($indexed as $i: myData) {
                 if (myFields === myData) {
                     unset($indexed[$i]);
                     $found = true;
@@ -1237,12 +1237,12 @@ class BelongsToMany : Association
 
         $primary = (array)myTarget.getPrimaryKey();
         $jointProperty = this._junctionProperty;
-        foreach (myTargetEntities as $k => $entity) {
+        foreach (myTargetEntities as $k: $entity) {
             if (!($entity instanceof IEntity)) {
                 continue;
             }
             myKey = array_values($entity.extract($primary));
-            foreach ($present as $i => myData) {
+            foreach ($present as $i: myData) {
                 if (myKey === myData && !$entity.get($jointProperty)) {
                     unset(myTargetEntities[$k], $present[$i]);
                     break;

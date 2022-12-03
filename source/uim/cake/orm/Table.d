@@ -292,7 +292,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             if (!is_array(myConfig["validator"])) {
                 this.setValidator(static::DEFAULT_VALIDATOR, myConfig["validator"]);
             } else {
-                foreach (myConfig["validator"] as myName => $validator) {
+                foreach (myConfig["validator"] as myName: $validator) {
                     this.setValidator(myName, $validator);
                 }
             }
@@ -508,7 +508,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
             $schema = this.getConnection().getDriver().newTableSchema(this.getTable(), $schema);
 
-            foreach ($constraints as myName => myValue) {
+            foreach ($constraints as myName: myValue) {
                 $schema.addConstraint(myName, myValue);
             }
         }
@@ -722,7 +722,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Load a behavior, with some settings.
      *
      * ```
-     * this.addBehavior("Tree", ["parent" => "parentId"]);
+     * this.addBehavior("Tree", ["parent": "parentId"]);
      * ```
      *
      * Behaviors are generally loaded during Table::initialize().
@@ -747,7 +747,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * ```
      * this.addBehaviors([
      *      "Timestamp",
-     *      "Tree" => ["level" => "level"],
+     *      "Tree": ["level": "level"],
      * ]);
      * ```
      *
@@ -756,7 +756,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \RuntimeException If a behavior is being reloaded.
      */
     function addBehaviors(array $behaviors) {
-        foreach ($behaviors as myName => myOptions) {
+        foreach ($behaviors as myName: myOptions) {
             if (is_int(myName)) {
                 myName = myOptions;
                 myOptions = [];
@@ -929,11 +929,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * this.Posts.addAssociations([
-     *   "belongsTo" => [
-     *     "Users" => ["className" => "App\Model\Table\UsersTable"]
+     *   "belongsTo": [
+     *     "Users": ["className": "App\Model\Table\UsersTable"]
      *   ],
-     *   "hasMany" => ["Comments"],
-     *   "belongsToMany" => ["Tags"]
+     *   "hasMany": ["Comments"],
+     *   "belongsToMany": ["Tags"]
      * ]);
      * ```
      *
@@ -949,8 +949,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @see \Cake\ORM\Table::belongsToMany()
      */
     function addAssociations(array myParams) {
-        foreach (myParams as $assocType => myTables) {
-            foreach (myTables as $associated => myOptions) {
+        foreach (myParams as $assocType: myTables) {
+            foreach (myTables as $associated: myOptions) {
                 if (is_numeric($associated)) {
                     $associated = myOptions;
                     myOptions = [];
@@ -994,7 +994,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function belongsTo(string $associated, array myOptions = []): BelongsTo
     {
-        myOptions += ["sourceTable" => this];
+        myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\BelongsTo $association */
         $association = this._associations.load(BelongsTo::class, $associated, myOptions);
@@ -1040,7 +1040,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function hasOne(string $associated, array myOptions = []): HasOne
     {
-        myOptions += ["sourceTable" => this];
+        myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\HasOne $association */
         $association = this._associations.load(HasOne::class, $associated, myOptions);
@@ -1092,7 +1092,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function hasMany(string $associated, array myOptions = []): HasMany
     {
-        myOptions += ["sourceTable" => this];
+        myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\HasMany $association */
         $association = this._associations.load(HasMany::class, $associated, myOptions);
@@ -1146,7 +1146,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function belongsToMany(string $associated, array myOptions = []): BelongsToMany
     {
-        myOptions += ["sourceTable" => this];
+        myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\BelongsToMany $association */
         $association = this._associations.load(BelongsToMany::class, $associated, myOptions);
@@ -1182,9 +1182,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * myQuery = $articles.find("all", [
-     *   "conditions" => ["published" => 1],
-     *   "limit" => 10,
-     *   "contain" => ["Users", "Comments"]
+     *   "conditions": ["published": 1],
+     *   "limit": 10,
+     *   "contain": ["Users", "Comments"]
      * ]);
      * ```
      *
@@ -1192,7 +1192,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * myQuery = $articles.find()
-     *   .where(["published" => 1])
+     *   .where(["published": 1])
      *   .limit(10)
      *   .contain(["Users", "Comments"]);
      * ```
@@ -1248,9 +1248,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * [
-     *  1 => "value for id 1",
-     *  2 => "value for id 2",
-     *  4 => "value for id 4"
+     *  1: "value for id 1",
+     *  2: "value for id 2",
+     *  4: "value for id 4"
      * ]
      * ```
      *
@@ -1260,8 +1260,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * myTable.find("list", [
-     *  "keyField" => "name",
-     *  "valueField" => "age"
+     *  "keyField": "name",
+     *  "valueField": "age"
      * ]);
      * ```
      *
@@ -1270,8 +1270,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * myTable.find("list", [
-     *  "valueField" => ["first_name", "last_name"],
-     *  "valueSeparator" => " | ",
+     *  "valueField": ["first_name", "last_name"],
+     *  "valueSeparator": " | ",
      * ]);
      * ```
      *
@@ -1279,8 +1279,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * [
-     *  1 => "John | Doe",
-     *  2 => "Steve | Smith"
+     *  1: "John | Doe",
+     *  2: "Steve | Smith"
      * ]
      * ```
      *
@@ -1289,7 +1289,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * myTable.find("list", [
-     *  "groupField" => "category_id",
+     *  "groupField": "category_id",
      * ]);
      * ```
      *
@@ -1297,12 +1297,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * [
-     *  "group_1" => [
-     *      1 => "value for id 1",
-     *      2 => "value for id 2",
+     *  "group_1": [
+     *      1: "value for id 1",
+     *      2: "value for id 2",
      *  ]
-     *  "group_2" => [
-     *      4 => "value for id 4"
+     *  "group_2": [
+     *      4: "value for id 4"
      *  ]
      * ]
      * ```
@@ -1314,10 +1314,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     function findList(Query myQuery, array myOptions): Query
     {
         myOptions += [
-            "keyField" => this.getPrimaryKey(),
-            "valueField" => this.getDisplayField(),
-            "groupField" => null,
-            "valueSeparator" => ";",
+            "keyField": this.getPrimaryKey(),
+            "valueField": this.getDisplayField(),
+            "groupField": null,
+            "valueSeparator": ";",
         ];
 
         if (
@@ -1366,9 +1366,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * myTable.find("threaded", [
-     *  "keyField" => "id",
-     *  "parentField" => "ancestor_id"
-     *  "nestingKey" => "children"
+     *  "keyField": "id",
+     *  "parentField": "ancestor_id"
+     *  "nestingKey": "children"
      * ]);
      * ```
      *
@@ -1379,9 +1379,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     function findThreaded(Query myQuery, array myOptions): Query
     {
         myOptions += [
-            "keyField" => this.getPrimaryKey(),
-            "parentField" => "parent_id",
-            "nestingKey" => "children",
+            "keyField": this.getPrimaryKey(),
+            "parentField": "parent_id",
+            "nestingKey": "children",
         ];
 
         myOptions = this._setFieldMatchers(myOptions, ["keyField", "parentField"]);
@@ -1440,7 +1440,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Get an article and some relationships:
      *
      * ```
-     * $article = $articles.get(1, ["contain" => ["Users", "Comments"]]);
+     * $article = $articles.get(1, ["contain": ["Users", "Comments"]]);
      * ```
      *
      * @param mixed $primaryKey primary key value to find
@@ -1457,7 +1457,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     {
         myKey = (array)this.getPrimaryKey();
         myAlias = this.getAlias();
-        foreach (myKey as $index => myKeyname) {
+        foreach (myKey as $index: myKeyname) {
             myKey[$index] = myAlias . "." . myKeyname;
         }
         $primaryKey = (array)$primaryKey;
@@ -1563,8 +1563,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     function findOrCreate($search, ?callable $callback = null, myOptions = []): IEntity
     {
         myOptions = new ArrayObject(myOptions + [
-            "atomic" => true,
-            "defaults" => true,
+            "atomic": true,
+            "defaults": true,
         ]);
 
         $entity = this._executeTransaction(function () use ($search, $callback, myOptions) {
@@ -1602,7 +1602,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         $entity = this.newEmptyEntity();
         if (myOptions["defaults"] && is_array($search)) {
             $accessibleFields = array_combine(array_keys($search), array_fill(0, count($search), true));
-            $entity = this.patchEntity($entity, $search, ["accessibleFields" => $accessibleFields]);
+            $entity = this.patchEntity($entity, $search, ["accessibleFields": $accessibleFields]);
         }
         if ($callback !== null) {
             $entity = $callback($entity) ?: $entity;
@@ -1691,7 +1691,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     bool exists($conditions) {
         return (bool)count(
             this.find("all")
-            .select(["existing" => 1])
+            .select(["existing": 1])
             .where($conditions)
             .limit(1)
             .disableHydration()
@@ -1763,21 +1763,21 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * // Only save the comments association
-     * $articles.save($entity, ["associated" => ["Comments"]]);
+     * $articles.save($entity, ["associated": ["Comments"]]);
      *
      * // Save the company, the employees and related addresses for each of them.
      * // For employees do not check the entity rules
      * $companies.save($entity, [
-     *   "associated" => [
-     *     "Employees" => [
-     *       "associated" => ["Addresses"],
-     *       "checkRules" => false
+     *   "associated": [
+     *     "Employees": [
+     *       "associated": ["Addresses"],
+     *       "checkRules": false
      *     ]
      *   ]
      * ]);
      *
      * // Save no associations
-     * $articles.save($entity, ["associated" => false]);
+     * $articles.save($entity, ["associated": false]);
      * ```
      *
      * @param \Cake\Datasource\IEntity $entity the entity to be saved
@@ -1791,11 +1791,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         myOptions = new ArrayObject((array)myOptions + [
-            "atomic" => true,
-            "associated" => true,
-            "checkRules" => true,
-            "checkExisting" => true,
-            "_primary" => true,
+            "atomic": true,
+            "associated": true,
+            "checkRules": true,
+            "checkExisting": true,
+            "_primary": true,
         ]);
 
         if ($entity.hasErrors((bool)myOptions["associated"])) {
@@ -1860,7 +1860,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         if (myOptions["checkExisting"] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
             myAlias = this.getAlias();
             $conditions = [];
-            foreach ($entity.extract($primaryColumns) as $k => $v) {
+            foreach ($entity.extract($primaryColumns) as $k: $v) {
                 $conditions["myAlias.$k"] = $v;
             }
             $entity.setNew(!this.exists($conditions));
@@ -1894,7 +1894,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             this,
             $entity,
             myOptions["associated"],
-            ["_primary" => false] + myOptions.getArrayCopy()
+            ["_primary": false] + myOptions.getArrayCopy()
         );
 
         if (!$saved && myOptions["atomic"]) {
@@ -1937,7 +1937,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             this,
             $entity,
             myOptions["associated"],
-            ["_primary" => false] + myOptions.getArrayCopy()
+            ["_primary": false] + myOptions.getArrayCopy()
         );
 
         if (!$success && myOptions["atomic"]) {
@@ -1947,7 +1947,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         this.dispatchEvent("Model.afterSave", compact("entity", "options"));
 
         if (myOptions["atomic"] && !this.getConnection().inTransaction()) {
-            throw new RolledbackTransactionException(["table" => static::class]);
+            throw new RolledbackTransactionException(["table": static::class]);
         }
 
         if (!myOptions["atomic"] && !myOptions["_primary"]) {
@@ -1991,7 +1991,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
         if (count($primary) > 1) {
             $schema = this.getSchema();
-            foreach ($primary as $k => $v) {
+            foreach ($primary as $k: $v) {
                 if (!isset(myData[$k]) && empty($schema.getColumn($k)["autoIncrement"])) {
                     $msg = "Cannot insert row, some of the primary key values are missing. ";
                     $msg .= sprintf(
@@ -2015,10 +2015,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
         if ($statement.rowCount() !== 0) {
             $success = $entity;
-            $entity.set($filteredKeys, ["guard" => false]);
+            $entity.set($filteredKeys, ["guard": false]);
             $schema = this.getSchema();
             myDriver = this.getConnection().getDriver();
-            foreach ($primary as myKey => $v) {
+            foreach ($primary as myKey: $v) {
                 if (!isset(myData[myKey])) {
                     $id = $statement.lastInsertId(this.getTable(), myKey);
                     /** @var string myType */
@@ -2151,9 +2151,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     {
         myOptions = new ArrayObject(
             (array)myOptions + [
-                "atomic" => true,
-                "checkRules" => true,
-                "_primary" => true,
+                "atomic": true,
+                "checkRules": true,
+                "_primary": true,
             ]
         );
 
@@ -2161,7 +2161,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         $isNew = [];
         $cleanup = function ($entities) use (&$isNew): void {
             /** @var array<\Cake\Datasource\IEntity> $entities */
-            foreach ($entities as myKey => $entity) {
+            foreach ($entities as myKey: $entity) {
                 if (isset($isNew[myKey]) && $isNew[myKey]) {
                     $entity.unset(this.getPrimaryKey());
                     $entity.setNew(true);
@@ -2174,7 +2174,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         try {
             this.getConnection()
                 .transactional(function () use ($entities, myOptions, &$isNew, &$failed) {
-                    foreach ($entities as myKey => $entity) {
+                    foreach ($entities as myKey: $entity) {
                         $isNew[myKey] = $entity.isNew();
                         if (this.save($entity, myOptions) === false) {
                             $failed = $entity;
@@ -2236,9 +2236,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     bool delete(IEntity $entity, myOptions = []) {
         myOptions = new ArrayObject((array)myOptions + [
-            "atomic" => true,
-            "checkRules" => true,
-            "_primary" => true,
+            "atomic": true,
+            "checkRules": true,
+            "_primary": true,
         ]);
 
         $success = this._executeTransaction(function () use ($entity, myOptions) {
@@ -2247,8 +2247,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
         if ($success && this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
             this.dispatchEvent("Model.afterDeleteCommit", [
-                "entity" => $entity,
-                "options" => myOptions,
+                "entity": $entity,
+                "options": myOptions,
             ]);
         }
 
@@ -2310,9 +2310,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     protected auto _deleteMany(iterable $entities, myOptions = []): ?IEntity
     {
         myOptions = new ArrayObject((array)myOptions + [
-                "atomic" => true,
-                "checkRules" => true,
-                "_primary" => true,
+                "atomic": true,
+                "checkRules": true,
+                "_primary": true,
             ]);
 
         $failed = this._executeTransaction(function () use ($entities, myOptions) {
@@ -2328,8 +2328,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         if ($failed === null && this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent("Model.afterDeleteCommit", [
-                    "entity" => $entity,
-                    "options" => myOptions,
+                    "entity": $entity,
+                    "options": myOptions,
                 ]);
             }
         }
@@ -2384,8 +2384,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         myEvent = this.dispatchEvent("Model.beforeDelete", [
-            "entity" => $entity,
-            "options" => myOptions,
+            "entity": $entity,
+            "options": myOptions,
         ]);
 
         if (myEvent.isStopped()) {
@@ -2394,7 +2394,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
         $success = this._associations.cascadeDelete(
             $entity,
-            ["_primary" => false] + myOptions.getArrayCopy()
+            ["_primary": false] + myOptions.getArrayCopy()
         );
         if (!$success) {
             return $success;
@@ -2412,8 +2412,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         this.dispatchEvent("Model.afterDelete", [
-            "entity" => $entity,
-            "options" => myOptions,
+            "entity": $entity,
+            "options": myOptions,
         ]);
 
         return $success;
@@ -2514,7 +2514,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         } elseif ($hasOr !== false) {
             myFields = explode("_or_", myFields);
             $conditions = [
-                "OR" => $makeConditions(myFields, $args),
+                "OR": $makeConditions(myFields, $args),
             ];
         } else {
             myFields = explode("_and_", myFields);
@@ -2522,7 +2522,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         return this.find($findType, [
-            "conditions" => $conditions,
+            "conditions": $conditions,
         ]);
     }
 
@@ -2607,7 +2607,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     {
         myClass = this.getEntityClass();
 
-        return new myClass([], ["source" => this.getRegistryAlias()]);
+        return new myClass([], ["source": this.getRegistryAlias()]);
     }
 
     /**
@@ -2620,7 +2620,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * ```
      * $article = this.Articles.newEntity(
      *   this.request.getData(),
-     *   ["associated" => ["Tags", "Comments.Users"]]
+     *   ["associated": ["Tags", "Comments.Users"]]
      * );
      * ```
      *
@@ -2629,8 +2629,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * $article = this.Articles.newEntity(this.request.getData(), [
-     *  "fields" => ["title", "body", "tags", "comments"],
-     *  "associated" => ["Tags", "Comments.Users" => ["fields" => "username"]]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      * ]
      * );
      * ```
@@ -2642,7 +2642,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * ```
      * $article = this.Articles.newEntity(
      *   this.request.getData(),
-     *   ["accessibleFields" => ["protected_field" => true]]
+     *   ["accessibleFields": ["protected_field": true]]
      * );
      * ```
      *
@@ -2653,7 +2653,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * ```
      * $article = this.Articles.newEntity(
      *   this.request.getData(),
-     *   ["validate" => false]
+     *   ["validate": false]
      * );
      * ```
      *
@@ -2687,7 +2687,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * ```
      * $articles = this.Articles.newEntities(
      *   this.request.getData(),
-     *   ["associated" => ["Tags", "Comments.Users"]]
+     *   ["associated": ["Tags", "Comments.Users"]]
      * );
      * ```
      *
@@ -2696,8 +2696,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * $articles = this.Articles.newEntities(this.request.getData(), [
-     *  "fields" => ["title", "body", "tags", "comments"],
-     *  "associated" => ["Tags", "Comments.Users" => ["fields" => "username"]]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      *  ]
      * );
      * ```
@@ -2729,16 +2729,16 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * $article = this.Articles.patchEntity($article, this.request.getData(), [
-     *  "fields" => ["title", "body", "tags", "comments"],
-     *  "associated" => ["Tags", "Comments.Users" => ["fields" => "username"]]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      *  ]
      * );
      * ```
      *
      * ```
      * $article = this.Articles.patchEntity($article, this.request.getData(), [
-     *   "associated" => [
-     *     "Tags" => ["accessibleFields" => ["*" => true]]
+     *   "associated": [
+     *     "Tags": ["accessibleFields": ["*": true]]
      *   ]
      * ]);
      * ```
@@ -2749,7 +2749,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * $article = this.patchEntity($article, this.request.getData(),[
-     *  "validate" => false
+     *  "validate": false
      * ]);
      * ```
      *
@@ -2792,8 +2792,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * $articles = this.Articles.patchEntities($articles, this.request.getData(), [
-     *  "fields" => ["title", "body", "tags", "comments"],
-     *  "associated" => ["Tags", "Comments.Users" => ["fields" => "username"]]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      *  ]
      * );
      * ```
@@ -2824,7 +2824,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * $validator.add("email", [
-     *  "unique" => ["rule" => "validateUnique", "provider" => "table"]
+     *  "unique": ["rule": "validateUnique", "provider": "table"]
      * ])
      * ```
      *
@@ -2832,9 +2832,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * ```
      * $validator.add("email", [
-     *  "unique" => [
-     *      "rule" => ["validateUnique", ["scope" => "site_id"]],
-     *      "provider" => "table"
+     *  "unique": [
+     *      "rule": ["validateUnique", ["scope": "site_id"]],
+     *      "provider": "table"
      *  ]
      * ]);
      * ```
@@ -2856,9 +2856,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         $entity = new Entity(
             $context["data"],
             [
-                "useSetters" => false,
-                "markNew" => $context["newRecord"],
-                "source" => this.getRegistryAlias(),
+                "useSetters": false,
+                "markNew": $context["newRecord"],
+                "source": this.getRegistryAlias(),
             ]
         );
         myFields = array_merge(
@@ -2875,7 +2875,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         /** @var \Cake\ORM\Rule\IsUnique $rule */
         $rule = new myClass(myFields, myOptions);
 
-        return $rule($entity, ["repository" => this]);
+        return $rule($entity, ["repository": this]);
     }
 
     /**
@@ -2889,40 +2889,40 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * The conventional method map is:
      *
-     * - Model.beforeMarshal => beforeMarshal
-     * - Model.afterMarshal => afterMarshal
-     * - Model.buildValidator => buildValidator
-     * - Model.beforeFind => beforeFind
-     * - Model.beforeSave => beforeSave
-     * - Model.afterSave => afterSave
-     * - Model.afterSaveCommit => afterSaveCommit
-     * - Model.beforeDelete => beforeDelete
-     * - Model.afterDelete => afterDelete
-     * - Model.afterDeleteCommit => afterDeleteCommit
-     * - Model.beforeRules => beforeRules
-     * - Model.afterRules => afterRules
+     * - Model.beforeMarshal: beforeMarshal
+     * - Model.afterMarshal: afterMarshal
+     * - Model.buildValidator: buildValidator
+     * - Model.beforeFind: beforeFind
+     * - Model.beforeSave: beforeSave
+     * - Model.afterSave: afterSave
+     * - Model.afterSaveCommit: afterSaveCommit
+     * - Model.beforeDelete: beforeDelete
+     * - Model.afterDelete: afterDelete
+     * - Model.afterDeleteCommit: afterDeleteCommit
+     * - Model.beforeRules: beforeRules
+     * - Model.afterRules: afterRules
      *
      * @return array<string, mixed>
      */
     function implementedEvents(): array
     {
         myEventMap = [
-            "Model.beforeMarshal" => "beforeMarshal",
-            "Model.afterMarshal" => "afterMarshal",
-            "Model.buildValidator" => "buildValidator",
-            "Model.beforeFind" => "beforeFind",
-            "Model.beforeSave" => "beforeSave",
-            "Model.afterSave" => "afterSave",
-            "Model.afterSaveCommit" => "afterSaveCommit",
-            "Model.beforeDelete" => "beforeDelete",
-            "Model.afterDelete" => "afterDelete",
-            "Model.afterDeleteCommit" => "afterDeleteCommit",
-            "Model.beforeRules" => "beforeRules",
-            "Model.afterRules" => "afterRules",
+            "Model.beforeMarshal": "beforeMarshal",
+            "Model.afterMarshal": "afterMarshal",
+            "Model.buildValidator": "buildValidator",
+            "Model.beforeFind": "beforeFind",
+            "Model.beforeSave": "beforeSave",
+            "Model.afterSave": "afterSave",
+            "Model.afterSaveCommit": "afterSaveCommit",
+            "Model.beforeDelete": "beforeDelete",
+            "Model.afterDelete": "afterDelete",
+            "Model.afterDeleteCommit": "afterDeleteCommit",
+            "Model.beforeRules": "beforeRules",
+            "Model.afterRules": "afterRules",
         ];
         myEvents = [];
 
-        foreach (myEventMap as myEvent => $method) {
+        foreach (myEventMap as myEvent: $method) {
             if (!method_exists(this, $method)) {
                 continue;
             }
@@ -3003,14 +3003,14 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         $conn = this.getConnection();
 
         return [
-            "registryAlias" => this.getRegistryAlias(),
-            "table" => this.getTable(),
-            "alias" => this.getAlias(),
-            "entityClass" => this.getEntityClass(),
-            "associations" => this._associations.keys(),
-            "behaviors" => this._behaviors.loaded(),
-            "defaultConnection" => static::defaultConnectionName(),
-            "connectionName" => $conn.configName(),
+            "registryAlias": this.getRegistryAlias(),
+            "table": this.getTable(),
+            "alias": this.getAlias(),
+            "entityClass": this.getEntityClass(),
+            "associations": this._associations.keys(),
+            "behaviors": this._behaviors.loaded(),
+            "defaultConnection": static::defaultConnectionName(),
+            "connectionName": $conn.configName(),
         ];
     }
 }

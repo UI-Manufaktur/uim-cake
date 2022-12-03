@@ -44,7 +44,7 @@ class PersistenceFailedException : CakeException
         this._entity = $entity;
         if (is_array(myMessage)) {
             myErrors = [];
-            foreach (Hash::flatten($entity.getErrors()) as myField => myError) {
+            foreach (Hash::flatten($entity.getErrors()) as myField: myError) {
                 myErrors[] = myField . ": "" . myError . """;
             }
             if (myErrors) {

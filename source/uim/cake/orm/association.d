@@ -716,7 +716,7 @@ abstract class Association
         $dummy.where(myOptions["conditions"]);
         this._dispatchBeforeFind($dummy);
 
-        myQuery.join([this._name => [
+        myQuery.join([this._name: [
             "table":myOptions["table"],
             "conditions":$dummy.clause("where"),
             "type":myOptions["joinType"],
@@ -836,7 +836,7 @@ abstract class Association
     /**
      * Proxies the update operation to the target table"s updateAll method
      *
-     * @param array myFields A hash of field => new value.
+     * @param array myFields A hash of field: new value.
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @see \Cake\ORM\Table::updateAll()
@@ -997,7 +997,7 @@ abstract class Association
         }
 
         $newContain = [];
-        foreach ($contain as myAlias => myValue) {
+        foreach ($contain as myAlias: myValue) {
             $newContain[myOptions["aliasPath"] . "." . myAlias] = myValue;
         }
 
@@ -1006,7 +1006,7 @@ abstract class Association
             $eagerLoader.contain($newContain);
         }
 
-        foreach ($matching as myAlias => myValue) {
+        foreach ($matching as myAlias: myValue) {
             $eagerLoader.setMatching(
                 myOptions["aliasPath"] . "." . myAlias,
                 myValue["queryBuilder"],
@@ -1051,7 +1051,7 @@ abstract class Association
             ));
         }
 
-        foreach ($foreignKey as $k => $f) {
+        foreach ($foreignKey as $k: $f) {
             myField = sprintf("%s.%s", $sAlias, $bindingKey[$k]);
             myValue = new IdentifierExpression(sprintf("%s.%s", $tAlias, $f));
             $conditions[myField] = myValue;

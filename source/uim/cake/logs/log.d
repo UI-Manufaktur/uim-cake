@@ -191,7 +191,7 @@ class Log
      */
     protected static auto _loadConfig(): void
     {
-        foreach (static::$_config as myName => $properties) {
+        foreach (static::$_config as myName: $properties) {
             if (isset($properties["engine"])) {
                 $properties["className"] = $properties["engine"];
             }
@@ -270,7 +270,7 @@ class Log
      * ```
      *
      * @param array<string, mixed>|string myKey The name of the logger config, or an array of multiple configs.
-     * @param array<string, mixed>|null myConfig An array of name => config data for adapter.
+     * @param array<string, mixed>|null myConfig An array of name: config data for adapter.
      * @return void
      * @throws \BadMethodCallException When trying to modify an existing config.
      */
@@ -303,14 +303,14 @@ class Log
      *
      * ### Levels:
      *
-     * - `LOG_EMERG` => "emergency",
-     * - `LOG_ALERT` => "alert",
-     * - `LOG_CRIT` => "critical",
-     * - `LOG_ERR` => "error",
-     * - `LOG_WARNING` => "warning",
-     * - `LOG_NOTICE` => "notice",
-     * - `LOG_INFO` => "info",
-     * - `LOG_DEBUG` => "debug",
+     * - `LOG_EMERG`: "emergency",
+     * - `LOG_ALERT`: "alert",
+     * - `LOG_CRIT`: "critical",
+     * - `LOG_ERR`: "error",
+     * - `LOG_WARNING`: "warning",
+     * - `LOG_NOTICE`: "notice",
+     * - `LOG_INFO`: "info",
+     * - `LOG_DEBUG`: "debug",
      *
      * ### Basic usage
      *

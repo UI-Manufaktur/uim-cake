@@ -187,11 +187,11 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * ```
      * myQuery.select(["id", "title"]); // Produces SELECT id, title
-     * myQuery.select(["author" => "author_id"]); // Appends author: SELECT id, title, author_id as author
+     * myQuery.select(["author": "author_id"]); // Appends author: SELECT id, title, author_id as author
      * myQuery.select("id", true); // Resets the list: SELECT id
-     * myQuery.select(["total" => myCountQuery]); // SELECT id, (SELECT ...) AS total
+     * myQuery.select(["total": myCountQuery]); // SELECT id, (SELECT ...) AS total
      * myQuery.select(function (myQuery) {
-     *     return ["article_id", "total" => myQuery.count("*")];
+     *     return ["article_id", "total": myQuery.count("*")];
      * })
      * ```
      *
@@ -269,7 +269,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         myAlias = myTable.getAlias();
         $map = myTable.getSchema().typeMap();
         myFields = [];
-        foreach ($map as $f => myType) {
+        foreach ($map as $f: myType) {
             myFields[$f] = myFields[myAlias . "." . $f] = myFields[myAlias . "__" . $f] = myType;
         }
         this.getTypeMap().addDefaults(myFields);
@@ -327,7 +327,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * ```
      * // Eager load the product info, and for each product load other 2 associations
-     * myQuery.contain(["Product" => ["Manufacturer", "Distributor"]);
+     * myQuery.contain(["Product": ["Manufacturer", "Distributor"]);
      *
      * // Which is equivalent to calling
      * myQuery.contain(["Products.Manufactures", "Products.Distributors"]);
@@ -342,12 +342,12 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ### Example:
      *
      * ```
-     * myQuery.contain(["Tags" => function ($q) {
-     *     return $q.where(["Tags.is_popular" => true]);
+     * myQuery.contain(["Tags": function ($q) {
+     *     return $q.where(["Tags.is_popular": true]);
      * }]);
      *
-     * myQuery.contain(["Products.Manufactures" => function ($q) {
-     *     return $q.select(["name"]).where(["Manufactures.active" => true]);
+     * myQuery.contain(["Products.Manufactures": function ($q) {
+     *     return $q.select(["name"]).where(["Manufactures.active": true]);
      * }]);
      * ```
      *
@@ -367,8 +367,8 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Set options for the hasMany articles that will be eagerly loaded for an author
      * myQuery.contain([
-     *     "Articles" => [
-     *         "fields" => ["title", "author_id"]
+     *     "Articles": [
+     *         "fields": ["title", "author_id"]
      *     ]
      * ]);
      * ```
@@ -378,10 +378,10 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Retrieve translations for the articles, but only those for the `en` and `es` locales
      * myQuery.contain([
-     *     "Articles" => [
-     *         "finder" => [
-     *             "translations" => [
-     *                 "locales" => ["en", "es"]
+     *     "Articles": [
+     *         "finder": [
+     *             "translations": [
+     *                 "locales": ["en", "es"]
      *             ]
      *         ]
      *     ]
@@ -398,13 +398,13 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * });
      * // Use special join conditions for multiple containments in the same method call
      * myQuery.contain([
-     *     "Authors" => [
-     *         "foreignKey" => false,
-     *         "queryBuilder" => function ($q) {
+     *     "Authors": [
+     *         "foreignKey": false,
+     *         "queryBuilder": function ($q) {
      *             return $q.where(...); // Add full filtering conditions
      *         }
      *     ],
-     *     "Tags" => function ($q) {
+     *     "Tags": function ($q) {
      *         return $q.where(...); // add conditions
      *     }
      * ]);
@@ -473,7 +473,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @param array<string, array> $associations The nested tree of associations to walk.
      */
     protected void _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations) {
-        foreach ($associations as myName => $nested) {
+        foreach ($associations as myName: $nested) {
             if (!myTable.hasAssociation(myName)) {
                 continue;
             }
@@ -500,7 +500,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Bring only articles that were tagged with "cake"
      * myQuery.matching("Tags", function ($q) {
-     *     return $q.where(["name" => "cake"]);
+     *     return $q.where(["name": "cake"]);
      * });
      * ```
      *
@@ -511,7 +511,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Bring only articles that were commented by "markstory"
      * myQuery.matching("Comments.Users", function ($q) {
-     *     return $q.where(["username" => "markstory"]);
+     *     return $q.where(["username": "markstory"]);
      * });
      * ```
      *
@@ -526,7 +526,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * // Bring unique articles that were commented by "markstory"
      * myQuery.distinct(["Articles.id"])
      *     .matching("Comments.Users", function ($q) {
-     *         return $q.where(["username" => "markstory"]);
+     *         return $q.where(["username": "markstory"]);
      *     });
      * ```
      *
@@ -559,7 +559,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Get the count of articles per user
      * myUsersQuery
-     *     .select(["total_articles" => myQuery.func().count("Articles.id")])
+     *     .select(["total_articles": myQuery.func().count("Articles.id")])
      *     .leftJoinWith("Articles")
      *     .group(["Users.id"])
      *     .enableAutoFields();
@@ -570,9 +570,9 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Get the count of articles per user with at least 5 votes
      * myUsersQuery
-     *     .select(["total_articles" => myQuery.func().count("Articles.id")])
+     *     .select(["total_articles": myQuery.func().count("Articles.id")])
      *     .leftJoinWith("Articles", function ($q) {
-     *         return $q.where(["Articles.votes >=" => 5]);
+     *         return $q.where(["Articles.votes >=": 5]);
      *     })
      *     .group(["Users.id"])
      *     .enableAutoFields();
@@ -594,9 +594,9 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Total comments in articles by "markstory"
      * myQuery
-     *     .select(["total_comments" => myQuery.func().count("Comments.id")])
+     *     .select(["total_comments": myQuery.func().count("Comments.id")])
      *     .leftJoinWith("Comments.Users", function ($q) {
-     *         return $q.where(["username" => "markstory"]);
+     *         return $q.where(["username": "markstory"]);
      *     })
      *    .group(["Users.id"]);
      * ```
@@ -613,8 +613,8 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     function leftJoinWith(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
-                "joinType" => Query::JOIN_TYPE_LEFT,
-                "fields" => false,
+                "joinType": Query::JOIN_TYPE_LEFT,
+                "fields": false,
             ])
             .getMatching();
         this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
@@ -635,7 +635,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Bring only articles that were tagged with "cake"
      * myQuery.innerJoinWith("Tags", function ($q) {
-     *     return $q.where(["name" => "cake"]);
+     *     return $q.where(["name": "cake"]);
      * });
      * ```
      *
@@ -661,8 +661,8 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     function innerJoinWith(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
-                "joinType" => Query::JOIN_TYPE_INNER,
-                "fields" => false,
+                "joinType": Query::JOIN_TYPE_INNER,
+                "fields": false,
             ])
             .getMatching();
         this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
@@ -682,7 +682,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Bring only articles that were not tagged with "cake"
      * myQuery.notMatching("Tags", function ($q) {
-     *     return $q.where(["name" => "cake"]);
+     *     return $q.where(["name": "cake"]);
      * });
      * ```
      *
@@ -693,7 +693,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * // Bring only articles that weren"t commented by "markstory"
      * myQuery.notMatching("Comments.Users", function ($q) {
-     *     return $q.where(["username" => "markstory"]);
+     *     return $q.where(["username": "markstory"]);
      * });
      * ```
      *
@@ -708,7 +708,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * // Bring unique articles that were commented by "markstory"
      * myQuery.distinct(["Articles.id"])
      *     .notMatching("Comments.Users", function ($q) {
-     *         return $q.where(["username" => "markstory"]);
+     *         return $q.where(["username": "markstory"]);
      *     });
      * ```
      *
@@ -724,9 +724,9 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     function notMatching(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
-                "joinType" => Query::JOIN_TYPE_LEFT,
-                "fields" => false,
-                "negateMatch" => true,
+                "joinType": Query::JOIN_TYPE_LEFT,
+                "fields": false,
+                "negateMatch": true,
             ])
             .getMatching();
         this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
@@ -760,11 +760,11 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * ```
      * myQuery.applyOptions([
-     *   "fields" => ["id", "name"],
-     *   "conditions" => [
-     *     "created >=" => "2013-01-01"
+     *   "fields": ["id", "name"],
+     *   "conditions": [
+     *     "created >=": "2013-01-01"
      *   ],
-     *   "limit" => 10,
+     *   "limit": 10,
      * ]);
      * ```
      *
@@ -773,7 +773,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * ```
      * myQuery
      *   .select(["id", "name"])
-     *   .where(["created >=" => "2013-01-01"])
+     *   .where(["created >=": "2013-01-01"])
      *   .limit(10)
      * ```
      *
@@ -781,12 +781,12 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * ```
      * myQuery.applyOptions([
-     *   "fields" => ["id", "name"],
-     *   "custom" => "value",
+     *   "fields": ["id", "name"],
+     *   "custom": "value",
      * ]);
      * ```
      *
-     * Here `myOptions` will hold `["custom" => "value"]` (the `fields`
+     * Here `myOptions` will hold `["custom": "value"]` (the `fields`
      * option will be applied to the query instead of being stored, as
      * it"s a query clause related option):
      *
@@ -800,20 +800,20 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      */
     function applyOptions(array myOptions) {
         $valid = [
-            "fields" => "select",
-            "conditions" => "where",
-            "join" => "join",
-            "order" => "order",
-            "limit" => "limit",
-            "offset" => "offset",
-            "group" => "group",
-            "having" => "having",
-            "contain" => "contain",
-            "page" => "page",
+            "fields": "select",
+            "conditions": "where",
+            "join": "join",
+            "order": "order",
+            "limit": "limit",
+            "offset": "offset",
+            "group": "group",
+            "having": "having",
+            "contain": "contain",
+            "page": "page",
         ];
 
         ksort(myOptions);
-        foreach (myOptions as $option => myValues) {
+        foreach (myOptions as $option: myValues) {
             if (isset($valid[$option], myValues)) {
                 this.{$valid[$option]}(myValues);
             } else {
@@ -931,7 +931,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
             $complex = $order === null ? false : $order.hasNestedExpression();
         }
 
-        myCount = ["count" => myQuery.func().count("*")];
+        myCount = ["count": myQuery.func().count("*")];
 
         if (!$complex) {
             myQuery.getEagerLoader().disableAutoFields();
@@ -942,7 +942,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         } else {
             $statement = this.getConnection().newQuery()
                 .select(myCount)
-                .from(["count_source" => myQuery])
+                .from(["count_source": myQuery])
                 .execute();
         }
 
@@ -1119,7 +1119,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         myRepository = this.getRepository();
 
         if (empty(this._parts["from"])) {
-            this.from([myRepository.getAlias() => myRepository.getTable()]);
+            this.from([myRepository.getAlias(): myRepository.getTable()]);
         }
         this._addDefaultFields();
         this.getEagerLoader().attachAssociations(this, myRepository, !this._hasFields);
@@ -1158,7 +1158,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         $select = this.clause("select");
         myTypes = [];
 
-        foreach ($select as myAlias => myValue) {
+        foreach ($select as myAlias: myValue) {
             if (myValue instanceof TypedResultInterface) {
                 myTypes[myAlias] = myValue.getReturnType();
                 continue;
@@ -1229,7 +1229,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      */
     function delete(Nullable!string myTable = null) {
         myRepository = this.getRepository();
-        this.from([myRepository.getAlias() => myRepository.getTable()]);
+        this.from([myRepository.getAlias(): myRepository.getTable()]);
 
         // We do not pass myTable to parent class here
         return super.delete();
@@ -1293,14 +1293,14 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         $eagerLoader = this.getEagerLoader();
 
         return super.__debugInfo() + [
-            "hydrate" => this._hydrate,
-            "buffered" => this._useBufferedResults,
-            "formatters" => count(this._formatters),
-            "mapReducers" => count(this._mapReduce),
-            "contain" => $eagerLoader.getContain(),
-            "matching" => $eagerLoader.getMatching(),
-            "extraOptions" => this._options,
-            "repository" => this._repository,
+            "hydrate": this._hydrate,
+            "buffered": this._useBufferedResults,
+            "formatters": count(this._formatters),
+            "mapReducers": count(this._mapReduce),
+            "contain": $eagerLoader.getContain(),
+            "matching": $eagerLoader.getMatching(),
+            "extraOptions": this._options,
+            "repository": this._repository,
         ];
     }
 

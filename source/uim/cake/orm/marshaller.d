@@ -42,7 +42,7 @@ class Marshaller
     }
 
     /**
-     * Build the map of property => marshalling callable.
+     * Build the map of property: marshalling callable.
      *
      * @param array myData The data being marshalled.
      * @param array<string, mixed> myOptions List of options containing the "associated" key.
@@ -68,7 +68,7 @@ class Marshaller
         // Map associations
         myOptions["associated"] = myOptions["associated"] ?? [];
         $include = this._normalizeAssociations(myOptions["associated"]);
-        foreach ($include as myKey => $nested) {
+        foreach ($include as myKey: $nested) {
             if (is_int(myKey) && is_scalar($nested)) {
                 myKey = $nested;
                 $nested = [];
@@ -93,13 +93,13 @@ class Marshaller
             if (isset(myOptions["isMerge"])) {
                 $callback = function (myValue, $entity) use ($assoc, $nested) {
                     /** @var \Cake\Datasource\IEntity $entity */
-                    myOptions = $nested + ["associated" => [], "association" => $assoc];
+                    myOptions = $nested + ["associated": [], "association": $assoc];
 
                     return this._mergeAssociation($entity.get($assoc.getProperty()), $assoc, myValue, myOptions);
                 };
             } else {
                 $callback = function (myValue, $entity) use ($assoc, $nested) {
-                    myOptions = $nested + ["associated" => []];
+                    myOptions = $nested + ["associated": []];
 
                     return this._marshalAssociation($assoc, myValue, myOptions);
                 };
@@ -139,14 +139,14 @@ class Marshaller
      *
      * ```
      * myResult = $marshaller.one(myData, [
-     *   "associated" => ["Tags" => ["onlyIds" => true]]
+     *   "associated": ["Tags": ["onlyIds": true]]
      * ]);
      * ```
      *
      * ```
      * myResult = $marshaller.one(myData, [
-     *   "associated" => [
-     *     "Tags" => ["accessibleFields" => ["*" => true]]
+     *   "associated": [
+     *     "Tags": ["accessibleFields": ["*": true]]
      *   ]
      * ]);
      * ```
@@ -167,7 +167,7 @@ class Marshaller
         $entity.setSource(this._table.getRegistryAlias());
 
         if (isset(myOptions["accessibleFields"])) {
-            foreach ((array)myOptions["accessibleFields"] as myKey => myValue) {
+            foreach ((array)myOptions["accessibleFields"] as myKey: myValue) {
                 $entity.setAccess(myKey, myValue);
             }
         }
@@ -176,7 +176,7 @@ class Marshaller
         myOptions["isMerge"] = false;
         $propertyMap = this._buildPropertyMap(myData, myOptions);
         $properties = [];
-        foreach (myData as myKey => myValue) {
+        foreach (myData as myKey: myValue) {
             if (!empty(myErrors[myKey])) {
                 if ($entity instanceof InvalidPropertyInterface) {
                     $entity.setInvalidField(myKey, myValue);
@@ -207,7 +207,7 @@ class Marshaller
 
         // Don"t flag clean association entities as
         // dirty so we don"t persist empty records.
-        foreach ($properties as myField => myValue) {
+        foreach ($properties as myField: myValue) {
             if (myValue instanceof IEntity) {
                 $entity.setDirty(myField, myValue.isDirty());
             }
@@ -267,7 +267,7 @@ class Marshaller
      */
     protected auto _prepareDataAndOptions(array myData, array myOptions): array
     {
-        myOptions += ["validate" => true];
+        myOptions += ["validate": true];
 
         myTableName = this._table.getAlias();
         if (isset(myData[myTableName])) {
@@ -380,7 +380,7 @@ class Marshaller
         $records = $conditions = [];
         $primaryCount = count($primaryKey);
 
-        foreach (myData as $i => $row) {
+        foreach (myData as $i: $row) {
             if (!is_array($row)) {
                 continue;
             }
@@ -388,7 +388,7 @@ class Marshaller
                 myKeys = array_intersect_key($row, $primaryKey);
                 if (count(myKeys) === $primaryCount) {
                     $rowConditions = [];
-                    foreach (myKeys as myKey => myValue) {
+                    foreach (myKeys as myKey: myValue) {
                         $rowConditions[][myTarget.aliasField(myKey)] = myValue;
                     }
 
@@ -418,7 +418,7 @@ class Marshaller
                 $existing[$k] = $row;
             }
 
-            foreach (myData as $i => $row) {
+            foreach (myData as $i: $row) {
                 myKey = [];
                 foreach (myKeyFields as $k) {
                     if (isset($row[$k])) {
@@ -441,7 +441,7 @@ class Marshaller
             $nested = (array)$associated["_joinData"];
         }
 
-        foreach ($records as $i => $record) {
+        foreach ($records as $i: $record) {
             // Update junction table data in _joinData.
             if (isset(myData[$i]["_joinData"])) {
                 $joinData = $jointMarshaller.one(myData[$i]["_joinData"], $nested);
@@ -482,7 +482,7 @@ class Marshaller
             }
             $filter = new TupleComparison($primaryKey, $ids, myType, "IN");
         } else {
-            $filter = [$primaryKey[0] . " IN" => $ids];
+            $filter = [$primaryKey[0] . " IN": $ids];
         }
 
         return myTarget.find().where($filter).toArray();
@@ -514,7 +514,7 @@ class Marshaller
      *
      * ```
      * myResult = $marshaller.merge($entity, myData, [
-     *   "associated" => ["Tags" => ["onlyIds" => true]]
+     *   "associated": ["Tags": ["onlyIds": true]]
      * ]);
      * ```
      *
@@ -537,7 +537,7 @@ class Marshaller
         }
 
         if (isset(myOptions["accessibleFields"])) {
-            foreach ((array)myOptions["accessibleFields"] as myKey => myValue) {
+            foreach ((array)myOptions["accessibleFields"] as myKey: myValue) {
                 $entity.setAccess(myKey, myValue);
             }
         }
@@ -546,7 +546,7 @@ class Marshaller
         myOptions["isMerge"] = true;
         $propertyMap = this._buildPropertyMap(myData, myOptions);
         $properties = [];
-        foreach (myData as myKey => myValue) {
+        foreach (myData as myKey: myValue) {
             if (!empty(myErrors[myKey])) {
                 if ($entity instanceof InvalidPropertyInterface) {
                     $entity.setInvalidField(myKey, myValue);
@@ -587,7 +587,7 @@ class Marshaller
         if (!isset(myOptions["fields"])) {
             $entity.set($properties);
 
-            foreach ($properties as myField => myValue) {
+            foreach ($properties as myField: myValue) {
                 if (myValue instanceof IEntity) {
                     $entity.setDirty(myField, myValue.isDirty());
                 }
@@ -691,7 +691,7 @@ class Marshaller
                 $conditions["OR"][] = array_combine(myFields, myKeys);
 
                 return $conditions;
-            }, ["OR" => []]);
+            }, ["OR": []]);
         $maybeExistentQuery = this._table.find().where($conditions);
 
         if (!empty($indexed) && count($maybeExistentQuery.clause("where"))) {
@@ -821,7 +821,7 @@ class Marshaller
             $nested = (array)$associated["_joinData"];
         }
 
-        myOptions["accessibleFields"] = ["_joinData" => true];
+        myOptions["accessibleFields"] = ["_joinData": true];
 
         $records = this.mergeMany($original, myValue, myOptions);
         foreach ($records as $record) {

@@ -105,7 +105,7 @@ class DatabaseSession : SessionHandlerInterface
         myResult = this._table
             .find("all")
             .select(["data"])
-            .where([$pkField => $id])
+            .where([$pkField: $id])
             .disableHydration()
             .first();
 
@@ -141,10 +141,10 @@ class DatabaseSession : SessionHandlerInterface
         /** @var string $pkField */
         $pkField = this._table.getPrimaryKey();
         $session = this._table.newEntity([
-            $pkField => $id,
+            $pkField: $id,
             "data":myData,
             "expires":time() + this._timeout,
-        ], ["accessibleFields":[$pkField => true]]);
+        ], ["accessibleFields":[$pkField: true]]);
 
         return (bool)this._table.save($session);
     }
@@ -158,7 +158,7 @@ class DatabaseSession : SessionHandlerInterface
     bool destroy($id) {
         /** @var string $pkField */
         $pkField = this._table.getPrimaryKey();
-        this._table.deleteAll([$pkField => $id]);
+        this._table.deleteAll([$pkField: $id]);
 
         return true;
     }

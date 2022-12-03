@@ -84,7 +84,7 @@ class TimestampBehavior : Behavior
         $new = $entity.isNew() !== false;
         $refresh = this._config["refreshTimestamp"];
 
-        foreach (myEvents[myEventName] as myField => $when) {
+        foreach (myEvents[myEventName] as myField: $when) {
             if (!in_array($when, ["always", "new", "existing"], true)) {
                 throw new UnexpectedValueException(sprintf(
                     "When should be one of "always", "new" or "existing". The passed value "%s" is invalid",
@@ -166,7 +166,7 @@ class TimestampBehavior : Behavior
         $return = false;
         $refresh = this._config["refreshTimestamp"];
 
-        foreach (myEvents[myEventName] as myField => $when) {
+        foreach (myEvents[myEventName] as myField: $when) {
             if (in_array($when, ["always", "existing"], true)) {
                 $return = true;
                 $entity.setDirty(myField, false);

@@ -17,10 +17,10 @@ import uim.cake.orm.locators\ILocator;
  * an instance is made, the instances *will not* be updated.
  *
  * ```
- * TableRegistry::getTableLocator().setConfig("Users", ["table" => "my_users"]);
+ * TableRegistry::getTableLocator().setConfig("Users", ["table": "my_users"]);
  *
  * // Prior to 3.6.0
- * TableRegistry::config("Users", ["table" => "my_users"]);
+ * TableRegistry::config("Users", ["table": "my_users"]);
  * ```
  *
  * Configuration data is stored *per alias* if you use the same table with

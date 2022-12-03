@@ -202,7 +202,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> myOptions The options array used in the marshalling call.
-     * @return array A map of `[property => callable]` of additional properties to marshal.
+     * @return array A map of `[property: callable]` of additional properties to marshal.
      */
     function buildMarshalMap(Marshaller $marshaller, array $map, array myOptions): array
     {
@@ -290,7 +290,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
         myTargetAlias = this.getStrategy().getTranslationTable().getAlias();
 
         return myQuery
-            .contain([myTargetAlias => function (myQuery) use ($locales, myTargetAlias) {
+            .contain([myTargetAlias: function (myQuery) use ($locales, myTargetAlias) {
                 /** @var \Cake\Datasource\QueryInterface myQuery */
                 if ($locales) {
                     myQuery.where(["myTargetAlias.locale IN":$locales]);

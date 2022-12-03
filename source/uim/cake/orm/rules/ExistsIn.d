@@ -46,7 +46,7 @@ class ExistsIn
      *     Notice: allowNullableNulls cannot pass by database columns set to `NOT NULL`.
      */
     this(myFields, myRepository, array myOptions = []) {
-        myOptions += ["allowNullableNulls" => false];
+        myOptions += ["allowNullableNulls": false];
         this._options = myOptions;
 
         this._fields = (array)myFields;
@@ -107,7 +107,7 @@ class ExistsIn
 
         if (this._options["allowNullableNulls"]) {
             $schema = $source.getSchema();
-            foreach (myFields as $i => myField) {
+            foreach (myFields as $i: myField) {
                 if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) === null) {
                     unset($bindingKey[$i], myFields[$i]);
                 }
