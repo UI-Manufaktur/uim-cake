@@ -83,8 +83,8 @@ class WidgetLocator
      *
      * ```
      * $registry.add([
-     *   "label" => new MyLabelWidget(myTemplates),
-     *   "checkbox" => ["Fancy.MyCheckbox", "label"]
+     *   "label": new MyLabelWidget(myTemplates),
+     *   "checkbox": ["Fancy.MyCheckbox", "label"]
      * ]);
      * ```
      *
@@ -100,7 +100,7 @@ class WidgetLocator
     {
         myfiles = [];
 
-        foreach ($widgets as myKey => $widget) {
+        foreach ($widgets as myKey: $widget) {
             if (is_int(myKey)) {
                 myfiles[] = $widget;
                 continue;

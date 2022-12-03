@@ -19,12 +19,12 @@ class YearWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        "name" => "",
-        "val" => null,
-        "min" => null,
-        "max" => null,
-        "order" => "desc",
-        "templateVars" => [],
+        "name": "",
+        "val": null,
+        "min": null,
+        "max": null,
+        "order": "desc",
+        "templateVars": [],
     ];
 
     /**
