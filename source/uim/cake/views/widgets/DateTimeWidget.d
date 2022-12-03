@@ -29,12 +29,12 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'val' => null,
-        'type' => 'datetime-local',
-        'escape' => true,
-        'timezone' => null,
-        'templateVars' => [],
+        'name': '',
+        'val': null,
+        'type': 'datetime-local',
+        'escape': true,
+        'timezone': null,
+        'templateVars': [],
     ];
 
     /**
@@ -43,11 +43,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string>
      */
     protected $formatMap = [
-        'datetime-local' => 'Y-m-d\TH:i:s',
-        'date' => 'Y-m-d',
-        'time' => 'H:i:s',
-        'month' => 'Y-m',
-        'week' => 'Y-\WW',
+        'datetime-local': 'Y-m-d\TH:i:s',
+        'date': 'Y-m-d',
+        'time': 'H:i:s',
+        'month': 'Y-m',
+        'week': 'Y-\WW',
     ];
 
     /**
@@ -58,11 +58,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaultStep = [
-        'datetime-local' => '1',
-        'date' => null,
-        'time' => '1',
-        'month' => null,
-        'week' => null,
+        'datetime-local': '1',
+        'date': null,
+        'time': '1',
+        'month': null,
+        'week': null,
     ];
 
     /**
@@ -106,10 +106,10 @@ class DateTimeWidget : BasicWidget
         unset(myData['val'], myData['timezone'], myData['format']);
 
         return this._templates.format('input', [
-            'name' => myData['name'],
-            'type' => myData['type'],
-            'templateVars' => myData['templateVars'],
-            'attrs' => this._templates.formatAttributes(
+            'name': myData['name'],
+            'type': myData['type'],
+            'templateVars': myData['templateVars'],
+            'attrs': this._templates.formatAttributes(
                 myData,
                 ['name', 'type']
             ),

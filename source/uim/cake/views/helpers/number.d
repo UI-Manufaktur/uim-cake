@@ -22,7 +22,7 @@ class NumberHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'engine' => Number::class,
+        'engine': Number::class,
     ];
 
     /**
@@ -136,7 +136,7 @@ class NumberHelper : Helper
     function format($number, array myOptions = []): string
     {
         $formatted = this._engine.format($number, myOptions);
-        myOptions += ['escape' => true];
+        myOptions += ['escape': true];
 
         return myOptions['escape'] ? h($formatted) : $formatted;
     }
@@ -168,7 +168,7 @@ class NumberHelper : Helper
     function currency($number, Nullable!string $currency = null, array myOptions = []): string
     {
         $formatted = this._engine.currency($number, $currency, myOptions);
-        myOptions += ['escape' => true];
+        myOptions += ['escape': true];
 
         return myOptions['escape'] ? h($formatted) : $formatted;
     }
@@ -192,7 +192,7 @@ class NumberHelper : Helper
     function formatDelta(myValue, array myOptions = []): string
     {
         $formatted = this._engine.formatDelta(myValue, myOptions);
-        myOptions += ['escape' => true];
+        myOptions += ['escape': true];
 
         return myOptions['escape'] ? h($formatted) : $formatted;
     }

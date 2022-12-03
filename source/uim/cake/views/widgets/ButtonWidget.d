@@ -48,17 +48,17 @@ class ButtonWidget : WidgetInterface
     function render(array myData, IContext $context): string
     {
         myData += [
-            'text' => '',
-            'type' => 'submit',
-            'escapeTitle' => true,
-            'escape' => true,
-            'templateVars' => [],
+            'text': '',
+            'type': 'submit',
+            'escapeTitle': true,
+            'escape': true,
+            'templateVars': [],
         ];
 
         return this._templates.format('button', [
-            'text' => myData['escapeTitle'] ? h(myData['text']) : myData['text'],
-            'templateVars' => myData['templateVars'],
-            'attrs' => this._templates.formatAttributes(myData, ['text', 'escapeTitle']),
+            'text': myData['escapeTitle'] ? h(myData['text']) : myData['text'],
+            'templateVars': myData['templateVars'],
+            'attrs': this._templates.formatAttributes(myData, ['text', 'escapeTitle']),
         ]);
     }
 

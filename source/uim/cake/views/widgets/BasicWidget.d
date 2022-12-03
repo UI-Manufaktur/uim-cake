@@ -25,11 +25,11 @@ class BasicWidget : WidgetInterface
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'val' => null,
-        'type' => 'text',
-        'escape' => true,
-        'templateVars' => [],
+        'name': '',
+        'val': null,
+        'type': 'text',
+        'escape': true,
+        'templateVars': [],
     ];
 
     /**
@@ -83,10 +83,10 @@ class BasicWidget : WidgetInterface
         }
 
         return this._templates.format('input', [
-            'name' => myData['name'],
-            'type' => myData['type'],
-            'templateVars' => myData['templateVars'],
-            'attrs' => this._templates.formatAttributes(
+            'name': myData['name'],
+            'type': myData['type'],
+            'templateVars': myData['templateVars'],
+            'attrs': this._templates.formatAttributes(
                 myData,
                 ['name', 'type']
             ),

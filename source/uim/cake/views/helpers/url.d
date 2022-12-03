@@ -17,7 +17,7 @@ class UrlHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'assetUrlClassName' => Asset::class,
+        'assetUrlClassName': Asset::class,
     ];
 
     /**
@@ -66,8 +66,8 @@ class UrlHelper : Helper
     function build(myUrl = null, array myOptions = []): string
     {
         $defaults = [
-            'fullBase' => false,
-            'escape' => true,
+            'fullBase': false,
+            'escape': true,
         ];
         myOptions += $defaults;
 
@@ -98,7 +98,7 @@ class UrlHelper : Helper
      */
     function buildFromPath(string myPath, array myParams = [], array myOptions = []): string
     {
-        return this.build(['_path' => myPath] + myParams, myOptions);
+        return this.build(['_path': myPath] + myParams, myOptions);
     }
 
     /**
@@ -120,7 +120,7 @@ class UrlHelper : Helper
      */
     function image(string myPath, array myOptions = []): string
     {
-        myOptions += ['theme' => this._View.getTheme()];
+        myOptions += ['theme': this._View.getTheme()];
 
         return h(this._assetUrlClassName::imageUrl(myPath, myOptions));
     }
@@ -145,7 +145,7 @@ class UrlHelper : Helper
      */
     function css(string myPath, array myOptions = []): string
     {
-        myOptions += ['theme' => this._View.getTheme()];
+        myOptions += ['theme': this._View.getTheme()];
 
         return h(this._assetUrlClassName::cssUrl(myPath, myOptions));
     }
@@ -170,7 +170,7 @@ class UrlHelper : Helper
      */
     function script(string myPath, array myOptions = []): string
     {
-        myOptions += ['theme' => this._View.getTheme()];
+        myOptions += ['theme': this._View.getTheme()];
 
         return h(this._assetUrlClassName::scriptUrl(myPath, myOptions));
     }
@@ -199,7 +199,7 @@ class UrlHelper : Helper
      */
     function assetUrl(string myPath, array myOptions = []): string
     {
-        myOptions += ['theme' => this._View.getTheme()];
+        myOptions += ['theme': this._View.getTheme()];
 
         return h(this._assetUrlClassName::url(myPath, myOptions));
     }
@@ -226,7 +226,7 @@ class UrlHelper : Helper
      */
     function webroot(string myfile): string
     {
-        myOptions = ['theme' => this._View.getTheme()];
+        myOptions = ['theme': this._View.getTheme()];
 
         return h(this._assetUrlClassName::webroot(myfile, myOptions));
     }

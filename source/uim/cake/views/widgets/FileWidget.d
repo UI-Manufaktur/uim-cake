@@ -17,9 +17,9 @@ class FileWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'escape' => true,
-        'templateVars' => [],
+        'name': '',
+        'escape': true,
+        'templateVars': [],
     ];
 
     /**
@@ -45,9 +45,9 @@ class FileWidget : BasicWidget
         unset(myData['val']);
 
         return this._templates.format('file', [
-            'name' => myData['name'],
-            'templateVars' => myData['templateVars'],
-            'attrs' => this._templates.formatAttributes(
+            'name': myData['name'],
+            'templateVars': myData['templateVars'],
+            'attrs': this._templates.formatAttributes(
                 myData,
                 ['name']
             ),

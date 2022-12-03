@@ -51,24 +51,24 @@ class PaginatorHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'options' => [],
-        'templates' => [
-            'nextActive' => '<li class="next"><a rel="next" href="{{url}}">{{text}}</a></li>',
-            'nextDisabled' => '<li class="next disabled"><a href="" onclick="return false;">{{text}}</a></li>',
-            'prevActive' => '<li class="prev"><a rel="prev" href="{{url}}">{{text}}</a></li>',
-            'prevDisabled' => '<li class="prev disabled"><a href="" onclick="return false;">{{text}}</a></li>',
-            'counterRange' => '{{start}} - {{end}} of {{count}}',
-            'counterPages' => '{{page}} of {{pages}}',
-            'first' => '<li class="first"><a href="{{url}}">{{text}}</a></li>',
-            'last' => '<li class="last"><a href="{{url}}">{{text}}</a></li>',
-            'number' => '<li><a href="{{url}}">{{text}}</a></li>',
-            'current' => '<li class="active"><a href="">{{text}}</a></li>',
-            'ellipsis' => '<li class="ellipsis">&hellip;</li>',
-            'sort' => '<a href="{{url}}">{{text}}</a>',
-            'sortAsc' => '<a class="asc" href="{{url}}">{{text}}</a>',
-            'sortDesc' => '<a class="desc" href="{{url}}">{{text}}</a>',
-            'sortAscLocked' => '<a class="asc locked" href="{{url}}">{{text}}</a>',
-            'sortDescLocked' => '<a class="desc locked" href="{{url}}">{{text}}</a>',
+        'options': [],
+        'templates': [
+            'nextActive': '<li class="next"><a rel="next" href="{{url}}">{{text}}</a></li>',
+            'nextDisabled': '<li class="next disabled"><a href="" onclick="return false;">{{text}}</a></li>',
+            'prevActive': '<li class="prev"><a rel="prev" href="{{url}}">{{text}}</a></li>',
+            'prevDisabled': '<li class="prev disabled"><a href="" onclick="return false;">{{text}}</a></li>',
+            'counterRange': '{{start}} - {{end}} of {{count}}',
+            'counterPages': '{{page}} of {{pages}}',
+            'first': '<li class="first"><a href="{{url}}">{{text}}</a></li>',
+            'last': '<li class="last"><a href="{{url}}">{{text}}</a></li>',
+            'number': '<li><a href="{{url}}">{{text}}</a></li>',
+            'current': '<li class="active"><a href="">{{text}}</a></li>',
+            'ellipsis': '<li class="ellipsis">&hellip;</li>',
+            'sort': '<a href="{{url}}">{{text}}</a>',
+            'sortAsc': '<a class="asc" href="{{url}}">{{text}}</a>',
+            'sortDesc': '<a class="desc" href="{{url}}">{{text}}</a>',
+            'sortAscLocked': '<a class="asc locked" href="{{url}}">{{text}}</a>',
+            'sortDescLocked': '<a class="desc locked" href="{{url}}">{{text}}</a>',
         ],
     ];
 
@@ -92,7 +92,7 @@ class PaginatorHelper : Helper
         unset(myQuery['page'], myQuery['limit'], myQuery['sort'], myQuery['direction']);
         this.setConfig(
             'options.url',
-            array_merge(this._View.getRequest().getParam('pass', []), ['?' => myQuery])
+            array_merge(this._View.getRequest().getParam('pass', []), ['?': myQuery])
         );
     }
 
@@ -272,7 +272,7 @@ class PaginatorHelper : Helper
 
         if (!myEnabled) {
             $out = myTemplater.format(myTemplate, [
-                'text' => $text,
+                'text': $text,
             ]);
 
             if ($newTemplates) {
@@ -284,14 +284,14 @@ class PaginatorHelper : Helper
         $paging = this.params(myOptions['model']);
 
         myUrl = this.generateUrl(
-            ['page' => $paging['page'] + myOptions['step']],
+            ['page': $paging['page'] + myOptions['step']],
             myOptions['model'],
             myOptions['url']
         );
 
         $out = myTemplater.format(myTemplate, [
-            'url' => myUrl,
-            'text' => $text,
+            'url': myUrl,
+            'text': $text,
         ]);
 
         if ($newTemplates) {
@@ -324,18 +324,18 @@ class PaginatorHelper : Helper
     function prev(string $title = '<< Previous', array myOptions = []): string
     {
         $defaults = [
-            'url' => [],
-            'model' => this.defaultModel(),
-            'disabledTitle' => $title,
-            'escape' => true,
+            'url': [],
+            'model': this.defaultModel(),
+            'disabledTitle': $title,
+            'escape': true,
         ];
         myOptions += $defaults;
         myOptions['step'] = -1;
 
         myEnabled = this.hasPrev(myOptions['model']);
         myTemplates = [
-            'active' => 'prevActive',
-            'disabled' => 'prevDisabled',
+            'active': 'prevActive',
+            'disabled': 'prevDisabled',
         ];
 
         return this._toggledLink($title, myEnabled, myOptions, myTemplates);
@@ -364,18 +364,18 @@ class PaginatorHelper : Helper
     function next(string $title = 'Next >>', array myOptions = []): string
     {
         $defaults = [
-            'url' => [],
-            'model' => this.defaultModel(),
-            'disabledTitle' => $title,
-            'escape' => true,
+            'url': [],
+            'model': this.defaultModel(),
+            'disabledTitle': $title,
+            'escape': true,
         ];
         myOptions += $defaults;
         myOptions['step'] = 1;
 
         myEnabled = this.hasNext(myOptions['model']);
         myTemplates = [
-            'active' => 'nextActive',
-            'disabled' => 'nextDisabled',
+            'active': 'nextActive',
+            'disabled': 'nextDisabled',
         ];
 
         return this._toggledLink($title, myEnabled, myOptions, myTemplates);
@@ -403,7 +403,7 @@ class PaginatorHelper : Helper
      */
     function sort(string myKey, $title = null, array myOptions = []): string
     {
-        myOptions += ['url' => [], 'model' => null, 'escape' => true];
+        myOptions += ['url': [], 'model': null, 'escape': true];
         myUrl = myOptions['url'];
         unset(myOptions['url']);
 
@@ -451,11 +451,11 @@ class PaginatorHelper : Helper
             $title = $title[$dir];
         }
 
-        $paging = ['sort' => myKey, 'direction' => $dir, 'page' => 1];
+        $paging = ['sort': myKey, 'direction': $dir, 'page': 1];
 
         $vars = [
-            'text' => myOptions['escape'] ? h($title) : $title,
-            'url' => this.generateUrl($paging, myOptions['model'], myUrl),
+            'text': myOptions['escape'] ? h($title) : $title,
+            'url': this.generateUrl($paging, myOptions['model'], myUrl),
         ];
 
         return this.templater().format(myTemplate, $vars);
@@ -485,8 +485,8 @@ class PaginatorHelper : Helper
         array myUrlOptions = []
     ): string {
         myUrlOptions += [
-            'escape' => true,
-            'fullBase' => false,
+            'escape': true,
+            'fullBase': false,
         ];
 
         return this.Url.build(this.generateUrlParams(myOptions, myModel, myUrl), myUrlOptions);
@@ -503,7 +503,7 @@ class PaginatorHelper : Helper
     function generateUrlParams(array myOptions = [], Nullable!string myModel = null, array myUrl = []): array
     {
         $paging = this.params(myModel);
-        $paging += ['page' => null, 'sort' => null, 'direction' => null, 'limit' => null];
+        $paging += ['page': null, 'sort': null, 'direction': null, 'limit': null];
 
         if (
             !empty($paging['sort'])
@@ -522,7 +522,7 @@ class PaginatorHelper : Helper
 
         myOptions += array_intersect_key(
             $paging,
-            ['page' => null, 'limit' => null, 'sort' => null, 'direction' => null]
+            ['page': null, 'limit': null, 'sort': null, 'direction': null]
         );
 
         if (!empty(myOptions['page']) && myOptions['page'] === 1) {
@@ -543,7 +543,7 @@ class PaginatorHelper : Helper
                 myOptions += $baseUrl['?'][$scope];
                 unset($baseUrl['?'][$scope]);
             }
-            myOptions = [$scope => myOptions];
+            myOptions = [$scope: myOptions];
         }
 
         if (!empty($baseUrl)) {
@@ -685,7 +685,7 @@ class PaginatorHelper : Helper
     function counter(string $format = 'pages', array myOptions = []): string
     {
         myOptions += [
-            'model' => this.defaultModel(),
+            'model': this.defaultModel(),
         ];
 
         $paging = this.params(myOptions['model']);
@@ -700,19 +700,19 @@ class PaginatorHelper : Helper
                 break;
             default:
                 myTemplate = 'counterCustom';
-                this.templater().add([myTemplate => $format]);
+                this.templater().add([myTemplate: $format]);
         }
         $map = array_map([this.Number, 'format'], [
-            'page' => $paging['page'],
-            'pages' => $paging['pageCount'],
-            'current' => $paging['current'],
-            'count' => $paging['count'],
-            'start' => $paging['start'],
-            'end' => $paging['end'],
+            'page': $paging['page'],
+            'pages': $paging['pageCount'],
+            'current': $paging['current'],
+            'count': $paging['count'],
+            'start': $paging['start'],
+            'end': $paging['end'],
         ]);
 
         $map += [
-            'model' => strtolower(Inflector::humanize(Inflector::tableize(myOptions['model']))),
+            'model': strtolower(Inflector::humanize(Inflector::tableize(myOptions['model']))),
         ];
 
         return this.templater().format(myTemplate, $map);
@@ -723,7 +723,7 @@ class PaginatorHelper : Helper
      * uses a modulus to decide how many numbers to show on each side of the current page (default: 8).
      *
      * ```
-     * this.Paginator.numbers(['first' => 2, 'last' => 2]);
+     * this.Paginator.numbers(['first': 2, 'last': 2]);
      * ```
      *
      * Using the first and last options you can create links to the beginning and end of the page set.
@@ -757,12 +757,12 @@ class PaginatorHelper : Helper
     function numbers(array myOptions = []): string
     {
         $defaults = [
-            'before' => null, 'after' => null, 'model' => this.defaultModel(),
-            'modulus' => 8, 'first' => null, 'last' => null, 'url' => [],
+            'before': null, 'after': null, 'model': this.defaultModel(),
+            'modulus': 8, 'first': null, 'last': null, 'url': [],
         ];
         myOptions += $defaults;
 
-        myParams = this.params(myOptions['model']) + ['page' => 1];
+        myParams = this.params(myOptions['model']) + ['page': 1];
         if (myParams['pageCount'] <= 1) {
             return '';
         }
@@ -833,8 +833,8 @@ class PaginatorHelper : Helper
     protected auto _formatNumber(StringTemplate myTemplater, array myOptions): string
     {
         $vars = [
-            'text' => myOptions['text'],
-            'url' => this.generateUrl(['page' => myOptions['page']], myOptions['model'], myOptions['url']),
+            'text': myOptions['text'],
+            'url': this.generateUrl(['page': myOptions['page']], myOptions['model'], myOptions['url']),
         ];
 
         return myTemplater.format('number', $vars);
@@ -860,38 +860,38 @@ class PaginatorHelper : Helper
 
         for ($i = $start; $i < myParams['page']; $i++) {
             $out .= this._formatNumber(myTemplater, [
-                'text' => this.Number.format($i),
-                'page' => $i,
-                'model' => myOptions['model'],
-                'url' => myOptions['url'],
+                'text': this.Number.format($i),
+                'page': $i,
+                'model': myOptions['model'],
+                'url': myOptions['url'],
             ]);
         }
 
         myUrl = myOptions['url'];
         myUrl['?']['page'] = myParams['page'];
         $out .= myTemplater.format('current', [
-            'text' => this.Number.format(myParams['page']),
-            'url' => this.generateUrl(myUrl, myOptions['model']),
+            'text': this.Number.format(myParams['page']),
+            'url': this.generateUrl(myUrl, myOptions['model']),
         ]);
 
         $start = myParams['page'] + 1;
         $i = $start;
         while ($i < $end) {
             $out .= this._formatNumber(myTemplater, [
-                'text' => this.Number.format($i),
-                'page' => $i,
-                'model' => myOptions['model'],
-                'url' => myOptions['url'],
+                'text': this.Number.format($i),
+                'page': $i,
+                'model': myOptions['model'],
+                'url': myOptions['url'],
             ]);
             $i++;
         }
 
         if ($end !== myParams['page']) {
             $out .= this._formatNumber(myTemplater, [
-                'text' => this.Number.format($i),
-                'page' => $end,
-                'model' => myOptions['model'],
-                'url' => myOptions['url'],
+                'text': this.Number.format($i),
+                'page': $end,
+                'model': myOptions['model'],
+                'url': myOptions['url'],
             ]);
         }
 
@@ -965,13 +965,13 @@ class PaginatorHelper : Helper
         for ($i = 1; $i <= myParams['pageCount']; $i++) {
             if ($i === myParams['page']) {
                 $out .= myTemplater.format('current', [
-                    'text' => this.Number.format(myParams['page']),
-                    'url' => this.generateUrl(['page' => $i], myOptions['model'], myOptions['url']),
+                    'text': this.Number.format(myParams['page']),
+                    'url': this.generateUrl(['page': $i], myOptions['model'], myOptions['url']),
                 ]);
             } else {
                 $vars = [
-                    'text' => this.Number.format($i),
-                    'url' => this.generateUrl(['page' => $i], myOptions['model'], myOptions['url']),
+                    'text': this.Number.format($i),
+                    'url': this.generateUrl(['page': $i], myOptions['model'], myOptions['url']),
                 ];
                 $out .= myTemplater.format('number', $vars);
             }
@@ -1012,9 +1012,9 @@ class PaginatorHelper : Helper
     function first($first = '<< first', array myOptions = []): string
     {
         myOptions += [
-            'url' => [],
-            'model' => this.defaultModel(),
-            'escape' => true,
+            'url': [],
+            'model': this.defaultModel(),
+            'escape': true,
         ];
 
         myParams = this.params(myOptions['model']);
@@ -1028,15 +1028,15 @@ class PaginatorHelper : Helper
         if (is_int($first) && myParams['page'] >= $first) {
             for ($i = 1; $i <= $first; $i++) {
                 $out .= this.templater().format('number', [
-                    'url' => this.generateUrl(['page' => $i], myOptions['model'], myOptions['url']),
-                    'text' => this.Number.format($i),
+                    'url': this.generateUrl(['page': $i], myOptions['model'], myOptions['url']),
+                    'text': this.Number.format($i),
                 ]);
             }
         } elseif (myParams['page'] > 1 && is_string($first)) {
             $first = myOptions['escape'] ? h($first) : $first;
             $out .= this.templater().format('first', [
-                'url' => this.generateUrl(['page' => 1], myOptions['model'], myOptions['url']),
-                'text' => $first,
+                'url': this.generateUrl(['page': 1], myOptions['model'], myOptions['url']),
+                'text': $first,
             ]);
         }
 
@@ -1072,9 +1072,9 @@ class PaginatorHelper : Helper
     function last($last = 'last >>', array myOptions = []): string
     {
         myOptions += [
-            'model' => this.defaultModel(),
-            'escape' => true,
-            'url' => [],
+            'model': this.defaultModel(),
+            'escape': true,
+            'url': [],
         ];
         myParams = this.params(myOptions['model']);
 
@@ -1088,15 +1088,15 @@ class PaginatorHelper : Helper
         if (is_int($last) && myParams['page'] <= $lower) {
             for ($i = $lower; $i <= myParams['pageCount']; $i++) {
                 $out .= this.templater().format('number', [
-                    'url' => this.generateUrl(['page' => $i], myOptions['model'], myOptions['url']),
-                    'text' => this.Number.format($i),
+                    'url': this.generateUrl(['page': $i], myOptions['model'], myOptions['url']),
+                    'text': this.Number.format($i),
                 ]);
             }
         } elseif (myParams['page'] < myParams['pageCount'] && is_string($last)) {
             $last = myOptions['escape'] ? h($last) : $last;
             $out .= this.templater().format('last', [
-                'url' => this.generateUrl(['page' => myParams['pageCount']], myOptions['model'], myOptions['url']),
-                'text' => $last,
+                'url': this.generateUrl(['page': myParams['pageCount']], myOptions['model'], myOptions['url']),
+                'text': $last,
             ]);
         }
 
@@ -1113,7 +1113,7 @@ class PaginatorHelper : Helper
      * Echos the links directly, will output nothing if there is neither a previous nor next page.
      *
      * ```
-     * this.Paginator.meta(['block' => true]);
+     * this.Paginator.meta(['block': true]);
      * ```
      *
      * Will append the output of the meta function to the named block - if true is passed the "meta"
@@ -1134,12 +1134,12 @@ class PaginatorHelper : Helper
     function meta(array myOptions = []): Nullable!string
     {
         myOptions += [
-                'model' => null,
-                'block' => false,
-                'prev' => true,
-                'next' => true,
-                'first' => false,
-                'last' => false,
+                'model': null,
+                'block': false,
+                'prev': true,
+                'next': true,
+                'first': false,
+                'last': false,
             ];
 
         myModel = myOptions['model'] ?? null;
@@ -1149,28 +1149,28 @@ class PaginatorHelper : Helper
         if (myOptions['prev'] && this.hasPrev()) {
             $links[] = this.Html.meta(
                 'prev',
-                this.generateUrl(['page' => myParams['page'] - 1], null, [], ['escape' => false, 'fullBase' => true])
+                this.generateUrl(['page': myParams['page'] - 1], null, [], ['escape': false, 'fullBase': true])
             );
         }
 
         if (myOptions['next'] && this.hasNext()) {
             $links[] = this.Html.meta(
                 'next',
-                this.generateUrl(['page' => myParams['page'] + 1], null, [], ['escape' => false, 'fullBase' => true])
+                this.generateUrl(['page': myParams['page'] + 1], null, [], ['escape': false, 'fullBase': true])
             );
         }
 
         if (myOptions['first']) {
             $links[] = this.Html.meta(
                 'first',
-                this.generateUrl(['page' => 1], null, [], ['escape' => false, 'fullBase' => true])
+                this.generateUrl(['page': 1], null, [], ['escape': false, 'fullBase': true])
             );
         }
 
         if (myOptions['last']) {
             $links[] = this.Html.meta(
                 'last',
-                this.generateUrl(['page' => myParams['pageCount']], null, [], ['escape' => false, 'fullBase' => true])
+                this.generateUrl(['page': myParams['pageCount']], null, [], ['escape': false, 'fullBase': true])
             );
         }
 
@@ -1210,7 +1210,7 @@ class PaginatorHelper : Helper
      */
     function limitControl(array $limits = [], Nullable!int $default = null, array myOptions = []): string
     {
-        $out = this.Form.create(null, ['type' => 'get']);
+        $out = this.Form.create(null, ['type': 'get']);
 
         if (empty($default)) {
             $default = this.param('perPage');
@@ -1218,19 +1218,19 @@ class PaginatorHelper : Helper
 
         if (empty($limits)) {
             $limits = [
-                '20' => '20',
-                '50' => '50',
-                '100' => '100',
+                '20': '20',
+                '50': '50',
+                '100': '100',
             ];
         }
 
         $out .= this.Form.control('limit', myOptions + [
-                'type' => 'select',
-                'label' => __('View'),
-                'default' => $default,
-                'value' => this._View.getRequest().getQuery('limit'),
-                'options' => $limits,
-                'onChange' => 'this.form.submit()',
+                'type': 'select',
+                'label': __('View'),
+                'default': $default,
+                'value': this._View.getRequest().getQuery('limit'),
+                'options': $limits,
+                'onChange': 'this.form.submit()',
             ]);
         $out .= this.Form.end();
 

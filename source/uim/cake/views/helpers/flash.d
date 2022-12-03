@@ -20,7 +20,7 @@ class FlashHelper : Helper
      * to consolidate all the parameters for a given type of flash message into the view.
      *
      * ```
-     * echo this.Flash.render('flash', ['params' => ['name' => myUser['User']['name']]]);
+     * echo this.Flash.render('flash', ['params': ['name': myUser['User']['name']]]);
      * ```
      *
      * This would pass the current user's name into the flash message, so you could create personalized
@@ -30,7 +30,7 @@ class FlashHelper : Helper
      * custom elements allows you to fully customize how flash messages are generated.
      *
      * ```
-     * echo this.Flash.render('flash', ['element' => 'my_custom_element']);
+     * echo this.Flash.render('flash', ['element': 'my_custom_element']);
      * ```
      *
      * If you want to use an element from a plugin for rendering your flash message
@@ -38,7 +38,7 @@ class FlashHelper : Helper
      *
      * ```
      * echo this.Flash.render('flash', [
-     *   'element' => 'MyPlugin.my_custom_element',
+     *   'element': 'MyPlugin.my_custom_element',
      * ]);
      * ```
      *

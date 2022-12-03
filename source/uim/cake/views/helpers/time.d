@@ -33,7 +33,7 @@ class TimeHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'outputTimezone' => null,
+        'outputTimezone': null,
     ];
 
     /**
@@ -247,8 +247,8 @@ class TimeHelper : Helper
     {
         $element = null;
         myOptions += [
-            'element' => null,
-            'timezone' => null,
+            'element': null,
+            'timezone': null,
         ];
         myOptions['timezone'] = this._getTimezone(myOptions['timezone']);
         /** @psalm-suppress UndefinedInterfaceMethod */
@@ -259,9 +259,9 @@ class TimeHelper : Helper
 
         if (!empty(myOptions['element'])) {
             $element = [
-                'tag' => 'span',
-                'class' => 'time-ago-in-words',
-                'title' => $dateTime,
+                'tag': 'span',
+                'class': 'time-ago-in-words',
+                'title': $dateTime,
             ];
 
             if (is_array(myOptions['element'])) {

@@ -26,11 +26,11 @@ class BreadcrumbsHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'templates' => [
-            'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
-            'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
-            'itemWithoutLink' => '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-            'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
+        'templates': [
+            'wrapper': '<ul{{attrs}}>{{content}}</ul>',
+            'item': '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
+            'itemWithoutLink': '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
+            'separator': '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
         ],
     ];
 
@@ -65,7 +65,7 @@ class BreadcrumbsHelper : Helper
     function add($title, myUrl = null, array myOptions = []) {
         if (is_array($title)) {
             foreach ($title as $crumb) {
-                this.crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
+                this.crumbs[] = $crumb + ['title': '', 'url': null, 'options': []];
             }
 
             return this;
@@ -101,7 +101,7 @@ class BreadcrumbsHelper : Helper
         if (is_array($title)) {
             $crumbs = [];
             foreach ($title as $crumb) {
-                $crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
+                $crumbs[] = $crumb + ['title': '', 'url': null, 'options': []];
             }
 
             array_splice(this.crumbs, 0, 0, $crumbs);
@@ -264,7 +264,7 @@ class BreadcrumbsHelper : Helper
         }
 
         $crumbTrail = '';
-        foreach ($crumbs as myKey => $crumb) {
+        foreach ($crumbs as myKey: $crumb) {
             myUrl = $crumb['url'] ? this.Url.build($crumb['url']) : null;
             $title = $crumb['title'];
             myOptions = $crumb['options'];
@@ -277,12 +277,12 @@ class BreadcrumbsHelper : Helper
 
             myTemplate = 'item';
             myTemplateParams = [
-                'attrs' => myTemplater.formatAttributes(myOptions, ['templateVars']),
-                'innerAttrs' => myTemplater.formatAttributes(myOptionsLink),
-                'title' => $title,
-                'url' => myUrl,
-                'separator' => '',
-                'templateVars' => myOptions['templateVars'] ?? [],
+                'attrs': myTemplater.formatAttributes(myOptions, ['templateVars']),
+                'innerAttrs': myTemplater.formatAttributes(myOptionsLink),
+                'title': $title,
+                'url': myUrl,
+                'separator': '',
+                'templateVars': myOptions['templateVars'] ?? [],
             ];
 
             if (!myUrl) {
@@ -297,9 +297,9 @@ class BreadcrumbsHelper : Helper
         }
 
         $crumbTrail = this.formatTemplate('wrapper', [
-            'content' => $crumbTrail,
-            'attrs' => myTemplater.formatAttributes($attributes, ['templateVars']),
-            'templateVars' => $attributes['templateVars'] ?? [],
+            'content': $crumbTrail,
+            'attrs': myTemplater.formatAttributes($attributes, ['templateVars']),
+            'templateVars': $attributes['templateVars'] ?? [],
         ]);
 
         return $crumbTrail;
@@ -314,7 +314,7 @@ class BreadcrumbsHelper : Helper
      */
     protected auto findCrumb(string $title): Nullable!int
     {
-        foreach (this.crumbs as myKey => $crumb) {
+        foreach (this.crumbs as myKey: $crumb) {
             if ($crumb['title'] === $title) {
                 return myKey;
             }

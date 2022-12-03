@@ -40,7 +40,7 @@ class TextHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'engine' => Text::class,
+        'engine': Text::class,
     ];
 
     /**
@@ -111,7 +111,7 @@ class TextHelper : Helper
     function autoLinkUrls(string $text, array myOptions = []): string
     {
         this._placeholders = [];
-        myOptions += ['escape' => true];
+        myOptions += ['escape': true];
 
         // phpcs:disable Generic.Files.LineLength
         $pattern = '/(?:(?<!href="|src="|">)
@@ -169,8 +169,8 @@ class TextHelper : Helper
         }
         myKey = hash_hmac('sha1', $match, Security::getSalt());
         this._placeholders[myKey] = [
-            'content' => $match,
-            'envelope' => $envelope,
+            'content': $match,
+            'envelope': $envelope,
         ];
 
         return myKey;
@@ -186,7 +186,7 @@ class TextHelper : Helper
     protected auto _linkUrls(string $text, array $htmlOptions): string
     {
         $replace = [];
-        foreach (this._placeholders as $hash => myContents) {
+        foreach (this._placeholders as $hash: myContents) {
             $link = myUrl = myContents['content'];
             $envelope = myContents['envelope'];
             if (!preg_match('#^[a-z]+\://#i', myUrl)) {
@@ -209,7 +209,7 @@ class TextHelper : Helper
     protected auto _linkEmails(string $text, array myOptions): string
     {
         $replace = [];
-        foreach (this._placeholders as $hash => myContents) {
+        foreach (this._placeholders as $hash: myContents) {
             myUrl = myContents['content'];
             $envelope = myContents['envelope'];
             $replace[$hash] = $envelope[0] . this.Html.link(myUrl, 'mailto:' . myUrl, myOptions) . $envelope[1];
@@ -232,7 +232,7 @@ class TextHelper : Helper
      */
     function autoLinkEmails(string $text, array myOptions = []): string
     {
-        myOptions += ['escape' => true];
+        myOptions += ['escape': true];
         this._placeholders = [];
 
         $atom = '[\p{L}0-9!#$%&\'*+\/=?^_`{|}~-]';
@@ -264,7 +264,7 @@ class TextHelper : Helper
     {
         $text = this.autoLinkUrls($text, myOptions);
 
-        return this.autoLinkEmails($text, ['escape' => false] + myOptions);
+        return this.autoLinkEmails($text, ['escape': false] + myOptions);
     }
 
     /**

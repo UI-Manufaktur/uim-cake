@@ -21,15 +21,15 @@ class RadioWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        "name" => "",
-        "options" => [],
-        "disabled" => null,
-        "val" => null,
-        "escape" => true,
-        "label" => true,
-        "empty" => false,
-        "idPrefix" => null,
-        "templateVars" => [],
+        "name": "",
+        "options": [],
+        "disabled": null,
+        "val": null,
+        "escape": true,
+        "label": true,
+        "empty": false,
+        "idPrefix": null,
+        "templateVars": [],
     ];
 
     /**
@@ -90,14 +90,14 @@ class RadioWidget : BasicWidget
 
         if (!empty(myData["empty"])) {
             $empty = myData["empty"] === true ? "empty" : myData["empty"];
-            myOptions = ["" => $empty] + myOptions;
+            myOptions = ["": $empty] + myOptions;
         }
         unset(myData["empty"]);
 
         this._idPrefix = myData["idPrefix"];
         this._clearIds();
         $opts = [];
-        foreach (myOptions as $val => $text) {
+        foreach (myOptions as $val: $text) {
             $opts[] = this._renderInput($val, $text, myData, $context);
         }
 
@@ -138,7 +138,7 @@ class RadioWidget : BasicWidget
         if (is_array($text) && isset($text["text"], $text["value"])) {
             $radio = $text;
         } else {
-            $radio = ["value" => $val, "text" => $text];
+            $radio = ["value": $val, "text": $text];
         }
         $radio["name"] = myData["name"];
 
@@ -179,10 +179,10 @@ class RadioWidget : BasicWidget
         }
 
         $input = this._templates.format("radio", [
-            "name" => $radio["name"],
-            "value" => $escape ? h($radio["value"]) : $radio["value"],
-            "templateVars" => $radio["templateVars"],
-            "attrs" => this._templates.formatAttributes(
+            "name": $radio["name"],
+            "value": $escape ? h($radio["value"]) : $radio["value"],
+            "templateVars": $radio["templateVars"],
+            "attrs": this._templates.formatAttributes(
                 $radio + myData,
                 ["name", "value", "text", "options", "label", "val", "type"]
             ),
@@ -204,9 +204,9 @@ class RadioWidget : BasicWidget
         }
 
         return this._templates.format("radioWrapper", [
-            "input" => $input,
-            "label" => $label,
-            "templateVars" => myData["templateVars"],
+            "input": $input,
+            "label": $label,
+            "templateVars": myData["templateVars"],
         ]);
     }
 
@@ -231,11 +231,11 @@ class RadioWidget : BasicWidget
         }
         $labelAttrs = is_array($label) ? $label : [];
         $labelAttrs += [
-            "for" => $radio["id"],
-            "escape" => $escape,
-            "text" => $radio["text"],
-            "templateVars" => $radio["templateVars"],
-            "input" => $input,
+            "for": $radio["id"],
+            "escape": $escape,
+            "text": $radio["text"],
+            "templateVars": $radio["templateVars"],
+            "input": $input,
         ];
 
         return this._label.render($labelAttrs, $context);

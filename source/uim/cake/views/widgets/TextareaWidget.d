@@ -16,11 +16,11 @@ class TextareaWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        "val" => "",
-        "name" => "",
-        "escape" => true,
-        "rows" => 5,
-        "templateVars" => [],
+        "val": "",
+        "name": "",
+        "escape": true,
+        "rows": 5,
+        "templateVars": [],
     ];
 
     /**
@@ -50,10 +50,10 @@ class TextareaWidget : BasicWidget
         }
 
         return this._templates.format("textarea", [
-            "name" => myData["name"],
-            "value" => myData["escape"] ? h(myData["val"]) : myData["val"],
-            "templateVars" => myData["templateVars"],
-            "attrs" => this._templates.formatAttributes(
+            "name": myData["name"],
+            "value": myData["escape"] ? h(myData["val"]) : myData["val"],
+            "templateVars": myData["templateVars"],
+            "attrs": this._templates.formatAttributes(
                 myData,
                 ["name", "val"]
             ),

@@ -20,14 +20,14 @@ class MultiCheckboxWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'escape' => true,
-        'options' => [],
-        'disabled' => null,
-        'val' => null,
-        'idPrefix' => null,
-        'templateVars' => [],
-        'label' => true,
+        'name': '',
+        'escape': true,
+        'options': [],
+        'disabled': null,
+        'val': null,
+        'idPrefix': null,
+        'templateVars': [],
+        'label': true,
     ];
 
     /**
@@ -81,15 +81,15 @@ class MultiCheckboxWidget : BasicWidget
      * You can generate simple options using a basic associative array:
      *
      * ```
-     * 'options' => ['elk' => 'Elk', 'beaver' => 'Beaver']
+     * 'options': ['elk': 'Elk', 'beaver': 'Beaver']
      * ```
      *
      * If you need to define additional attributes on your option elements
      * you can use the complex form for options:
      *
      * ```
-     * 'options' => [
-     *   ['value' => 'elk', 'text' => 'Elk', 'data-foo' => 'bar'],
+     * 'options': [
+     *   ['value': 'elk', 'text': 'Elk', 'data-foo': 'bar'],
      * ]
      * ```
      *
@@ -120,21 +120,21 @@ class MultiCheckboxWidget : BasicWidget
     protected auto _renderInputs(array myData, IContext $context): array
     {
         $out = [];
-        foreach (myData['options'] as myKey => $val) {
+        foreach (myData['options'] as myKey: $val) {
             // Grouped inputs in a fieldset.
             if (is_string(myKey) && is_array($val) && !isset($val['text'], $val['value'])) {
-                $inputs = this._renderInputs(['options' => $val] + myData, $context);
-                $title = this._templates.format('multicheckboxTitle', ['text' => myKey]);
+                $inputs = this._renderInputs(['options': $val] + myData, $context);
+                $title = this._templates.format('multicheckboxTitle', ['text': myKey]);
                 $out[] = this._templates.format('multicheckboxWrapper', [
-                    'content' => $title . implode('', $inputs),
+                    'content': $title . implode('', $inputs),
                 ]);
                 continue;
             }
 
             // Standard inputs.
             $checkbox = [
-                'value' => myKey,
-                'text' => $val,
+                'value': myKey,
+                'text': $val,
             ];
             if (is_array($val) && isset($val['text'], $val['value'])) {
                 $checkbox = $val;
@@ -178,10 +178,10 @@ class MultiCheckboxWidget : BasicWidget
     protected auto _renderInput(array $checkbox, IContext $context): string
     {
         $input = this._templates.format('checkbox', [
-            'name' => $checkbox['name'] . '[]',
-            'value' => $checkbox['escape'] ? h($checkbox['value']) : $checkbox['value'],
-            'templateVars' => $checkbox['templateVars'],
-            'attrs' => this._templates.formatAttributes(
+            'name': $checkbox['name'] . '[]',
+            'value': $checkbox['escape'] ? h($checkbox['value']) : $checkbox['value'],
+            'templateVars': $checkbox['templateVars'],
+            'attrs': this._templates.formatAttributes(
                 $checkbox,
                 ['name', 'value', 'text', 'options', 'label', 'val', 'type']
             ),
@@ -192,11 +192,11 @@ class MultiCheckboxWidget : BasicWidget
         } else {
             $labelAttrs = is_array($checkbox['label']) ? $checkbox['label'] : [];
             $labelAttrs += [
-                'for' => $checkbox['id'],
-                'escape' => $checkbox['escape'],
-                'text' => $checkbox['text'],
-                'templateVars' => $checkbox['templateVars'],
-                'input' => $input,
+                'for': $checkbox['id'],
+                'escape': $checkbox['escape'],
+                'text': $checkbox['text'],
+                'templateVars': $checkbox['templateVars'],
+                'input': $input,
             ];
 
             if ($checkbox['checked']) {
@@ -208,9 +208,9 @@ class MultiCheckboxWidget : BasicWidget
         }
 
         return this._templates.format('checkboxWrapper', [
-            'templateVars' => $checkbox['templateVars'],
-            'label' => $label,
-            'input' => $input,
+            'templateVars': $checkbox['templateVars'],
+            'label': $label,
+            'input': $input,
         ]);
     }
 
