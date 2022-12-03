@@ -18,7 +18,7 @@ class ArrayEngine : CacheEngine
     /**
      * Cached data.
      *
-     * Structured as [key => [exp => expiration, val => value]]
+     * Structured as [key: [exp: expiration, val: value]]
      *
      * @var array
      */

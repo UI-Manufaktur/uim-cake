@@ -75,7 +75,7 @@ class ExtractIterator : Collection
         $callback = this._extractor;
         $res = [];
 
-        foreach ($iterator.getArrayCopy() as $k => $v) {
+        foreach ($iterator.getArrayCopy() as $k: $v) {
             $res[$k] = $callback($v);
         }
 

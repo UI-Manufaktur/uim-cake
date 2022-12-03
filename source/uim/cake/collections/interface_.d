@@ -395,11 +395,11 @@ interface ICollection : Iterator, JsonSerializable
      *
      * // Result will look like this when converted to array
      * [
-     *  10 => [
+     *  10: [
      *      ["id":1, "name":"foo", "parent_id":10],
      *      ["id":3, "name":"baz", "parent_id":10],
      *  ],
-     *  11 => [
+     *  11: [
      *      ["id":2, "name":"bar", "parent_id":11],
      *  ]
      * ];
@@ -438,9 +438,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * // Result will look like this when converted to array
      * [
-     *  1 => ["id":1, "name":"foo"],
-     *  3 => ["id":3, "name":"baz"],
-     *  2 => ["id":2, "name":"bar"],
+     *  1: ["id":1, "name":"foo"],
+     *  3: ["id":3, "name":"baz"],
+     *  2: ["id":2, "name":"bar"],
      * ];
      * ```
      *
@@ -477,8 +477,8 @@ interface ICollection : Iterator, JsonSerializable
      *
      * // Result will look like this when converted to array
      * [
-     *  10 => 2,
-     *  11 => 1
+     *  10: 2,
+     *  11: 1
      * ];
      * ```
      *
@@ -679,17 +679,17 @@ interface ICollection : Iterator, JsonSerializable
      *
      * // Result will look like this when converted to array
      * [
-     *  1 => "foo",
-     *  2 => "bar",
-     *  3 => "baz",
+     *  1: "foo",
+     *  2: "bar",
+     *  3: "baz",
      * ];
      *
      * $combined = (new Collection(myItems)).combine("id", "name", "parent");
      *
      * // Result will look like this when converted to array
      * [
-     *  "a":[1 => "foo", 3 => "baz"],
-     *  "b":[2 => "bar"]
+     *  "a":[1: "foo", 3: "baz"],
+     *  "b":[2: "bar"]
      * ];
      * ```
      *

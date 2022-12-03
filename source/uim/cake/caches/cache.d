@@ -498,7 +498,7 @@ class Cache
         }
 
         if (isset(self::$_groups[myGroup])) {
-            return [myGroup => self::$_groups[myGroup]];
+            return [myGroup: self::$_groups[myGroup]];
         }
 
         throw new InvalidArgumentException(sprintf("Invalid cache group %s", myGroup));

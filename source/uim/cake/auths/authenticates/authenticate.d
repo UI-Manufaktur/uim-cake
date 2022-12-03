@@ -139,7 +139,7 @@ abstract class DAuthenticate : IEventListener {
         myTable = this.getTableLocator().get(myConfig["userModel"]);
 
         myOptions = [
-            "conditions":[myTable.aliasField(myConfig["fields"]["username"]) => myUsername],
+            "conditions":[myTable.aliasField(myConfig["fields"]["username"]): myUsername],
         ];
 
         myFinder = myConfig["finder"];

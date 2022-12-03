@@ -39,7 +39,7 @@ class MemcachedEngine : CacheEngine
      *    appropriate serializer support.
      * - `servers` String or array of memcached servers. If an array MemcacheEngine will use
      *    them as a pool.
-     * - `options` - Additional options for the memcached client. Should be an array of option => value.
+     * - `options` - Additional options for the memcached client. Should be an array of option: value.
      *    Use the \Memcached::OPT_* constants as keys.
      *
      * @var array<string, mixed>
@@ -154,7 +154,7 @@ class MemcachedEngine : CacheEngine
         }
 
         if (is_array(this._config["options"])) {
-            foreach (this._config["options"] as $opt => myValue) {
+            foreach (this._config["options"] as $opt: myValue) {
                 this._Memcached.setOption($opt, myValue);
             }
         }
@@ -302,7 +302,7 @@ class MemcachedEngine : CacheEngine
      */
     bool setMultiple(myValues, $ttl = null) {
         $cacheData = [];
-        foreach (myValues as myKey => myValue) {
+        foreach (myValues as myKey: myValue) {
             $cacheData[this._key(myKey)] = myValue;
         }
         $duration = this.duration($ttl);
@@ -345,7 +345,7 @@ class MemcachedEngine : CacheEngine
 
         myValues = this._Memcached.getMulti($cacheKeys);
         $return = [];
-        foreach ($cacheKeys as $original => $prefixed) {
+        foreach ($cacheKeys as $original: $prefixed) {
             $return[$original] = myValues[$prefixed] ?? $default;
         }
 
@@ -463,7 +463,7 @@ class MemcachedEngine : CacheEngine
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config["groups"] as $i => myGroup) {
+        foreach (this._config["groups"] as $i: myGroup) {
             myResult[] = myGroup . myGroups[$i];
         }
 

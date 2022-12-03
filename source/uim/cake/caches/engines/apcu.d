@@ -193,7 +193,7 @@ class ApcuEngine : CacheEngine
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config["groups"] as $i => myGroup) {
+        foreach (this._config["groups"] as $i: myGroup) {
             myResult[] = myGroup . myGroups[$i];
         }
 

@@ -50,7 +50,7 @@ trait ExtractTrait
         myValue = null;
         myCollectionTransform = false;
 
-        foreach ($parts as $i => $column) {
+        foreach ($parts as $i: $column) {
             if ($column === "{*}") {
                 myCollectionTransform = true;
                 continue;
@@ -116,7 +116,7 @@ trait ExtractTrait
     protected auto _createMatcherFilter(array $conditions): Closure
     {
         $matchers = [];
-        foreach ($conditions as $property => myValue) {
+        foreach ($conditions as $property: myValue) {
             $extractor = this._propertyExtractor($property);
             $matchers[] = function ($v) use ($extractor, myValue) {
                 return $extractor($v) == myValue;

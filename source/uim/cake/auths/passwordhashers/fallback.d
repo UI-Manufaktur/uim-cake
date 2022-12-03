@@ -34,7 +34,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      */
     this(array myConfig = []) {
         super.this(myConfig);
-        foreach (this._config["hashers"] as myKey => myHasher) {
+        foreach (this._config["hashers"] as myKey: myHasher) {
             if (is_array(myHasher) && !isset(myHasher["className"])) {
                 myHasher["className"] = myKey;
             }

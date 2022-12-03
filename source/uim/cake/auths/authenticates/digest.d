@@ -221,7 +221,7 @@ class DigestAuthenticate : BasicAuthenticate
         }
 
         $opts = [];
-        foreach (myOptions as $k => $v) {
+        foreach (myOptions as $k: $v) {
             if (is_bool($v)) {
                 $v = $v ? "true" : "false";
                 $opts[] = sprintf("%s=%s", $k, $v);

@@ -101,7 +101,7 @@ abstract class CacheEngine : ICache, ICacheEngine
             ));
         }
 
-        foreach ($iterable as myKey => myValue) {
+        foreach ($iterable as myKey: myValue) {
             if ($check === self::CHECK_VALUE) {
                 this.ensureValidKey(myValue);
             } else {
@@ -132,9 +132,9 @@ abstract class CacheEngine : ICache, ICacheEngine
     }
 
     /**
-     * Persists a set of key => value pairs in the cache, with an optional TTL.
+     * Persists a set of key: value pairs in the cache, with an optional TTL.
      *
-     * @param iterable myValues A list of key => value pairs for a multiple-set operation.
+     * @param iterable myValues A list of key: value pairs for a multiple-set operation.
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
@@ -150,7 +150,7 @@ abstract class CacheEngine : ICache, ICacheEngine
             this.setConfig("duration", $ttl);
         }
         try {
-            foreach (myValues as myKey => myValue) {
+            foreach (myValues as myKey: myValue) {
                 $success = this.set(myKey, myValue);
                 if ($success === false) {
                     return false;

@@ -45,7 +45,7 @@ trait CollectionTrait
 
 
     function each(callable $callback) {
-        foreach (this.optimizeUnwrap() as $k => $v) {
+        foreach (this.optimizeUnwrap() as $k: $v) {
             $callback($v, $k);
         }
 
@@ -72,7 +72,7 @@ trait CollectionTrait
 
 
     bool every(callable $callback) {
-        foreach (this.optimizeUnwrap() as myKey => myValue) {
+        foreach (this.optimizeUnwrap() as myKey: myValue) {
             if (!$callback(myValue, myKey)) {
                 return false;
             }
@@ -83,7 +83,7 @@ trait CollectionTrait
 
 
     bool some(callable $callback) {
-        foreach (this.optimizeUnwrap() as myKey => myValue) {
+        foreach (this.optimizeUnwrap() as myKey: myValue) {
             if ($callback(myValue, myKey) === true) {
                 return true;
             }
@@ -116,7 +116,7 @@ trait CollectionTrait
         }
 
         myResult = $initial;
-        foreach (this.optimizeUnwrap() as $k => myValue) {
+        foreach (this.optimizeUnwrap() as $k: myValue) {
             if ($isFirst) {
                 myResult = myValue;
                 $isFirst = false;
@@ -261,7 +261,7 @@ trait CollectionTrait
 
         $callback = this._propertyExtractor(myPath);
         $sum = 0;
-        foreach (this.optimizeUnwrap() as $k => $v) {
+        foreach (this.optimizeUnwrap() as $k: $v) {
             $sum += $callback($v, $k);
         }
 
@@ -407,7 +407,7 @@ trait CollectionTrait
              * The logic above applies to collections of any size.
              */
 
-            foreach ($iterator as $k => $item) {
+            foreach ($iterator as $k: $item) {
                 myResult[$bucket] = [$k, $item];
                 $bucket = (++$bucket) % $length;
                 $offset++;
@@ -418,11 +418,11 @@ trait CollectionTrait
             $tail = array_slice(myResult, 0, $offset);
 
             foreach ($head as $v) {
-                yield $v[0] => $v[1];
+                yield $v[0]: $v[1];
             }
 
             foreach ($tail as $v) {
-                yield $v[0] => $v[1];
+                yield $v[0]: $v[1];
             }
         };
 
@@ -441,7 +441,7 @@ trait CollectionTrait
 
     ICollection appendItem($item, myKey = null) {
         if (myKey !== null) {
-            myData = [myKey => $item];
+            myData = [myKey: $item];
         } else {
             myData = [$item];
         }
@@ -457,7 +457,7 @@ trait CollectionTrait
 
     ICollection prependItem($item, myKey = null) {
         if (myKey !== null) {
-            myData = [myKey => $item];
+            myData = [myKey: $item];
         } else {
             myData = [$item];
         }
@@ -485,7 +485,7 @@ trait CollectionTrait
 
             myKey = myOptions["groupPath"](myValue, myKey);
             $mapReduce.emitIntermediate(
-                [$rowKey(myValue, myKey) => $rowVal(myValue, myKey)],
+                [$rowKey(myValue, myKey): $rowVal(myValue, myKey)],
                 myKey
             );
         };
@@ -589,8 +589,8 @@ trait CollectionTrait
 
     ICollection lazy() {
         $generator = function () {
-            foreach (this.unwrap() as $k => $v) {
-                yield $k => $v;
+            foreach (this.unwrap() as $k: $v) {
+                yield $k: $v;
             }
         };
 
@@ -699,7 +699,7 @@ trait CollectionTrait
             if ($keepKeys) {
                 myKey = $k;
             }
-            myValues = [myKey => $v];
+            myValues = [myKey: $v];
             for ($i = 1; $i < $chunkSize; $i++) {
                 $iterator.next();
                 if (!$iterator.valid()) {

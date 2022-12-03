@@ -59,11 +59,11 @@ if (!function_exists("debug")) {
 
         myLocation = [];
         if ($showFrom) {
-            $trace = Debugger::trace(["start" => 1, "depth" => 2, "format" => "array"]);
+            $trace = Debugger::trace(["start": 1, "depth": 2, "format": "array"]);
             /** @psalm-suppress PossiblyInvalidArrayOffset */
             myLocation = [
-                "line" => $trace[0]["line"],
-                "file" => $trace[0]["file"],
+                "line": $trace[0]["line"],
+                "file": $trace[0]["file"],
             ];
         }
 
@@ -92,7 +92,7 @@ if (!function_exists("stackTrace")) {
             return;
         }
 
-        myOptions += ["start" => 0];
+        myOptions += ["start": 0];
         myOptions["start"]++;
 
         /** @var string $trace */
@@ -145,11 +145,11 @@ if (!function_exists("dd")) {
             return;
         }
 
-        $trace = Debugger::trace(["start" => 1, "depth" => 2, "format" => "array"]);
+        $trace = Debugger::trace(["start": 1, "depth": 2, "format": "array"]);
         /** @psalm-suppress PossiblyInvalidArrayOffset */
         myLocation = [
-            "line" => $trace[0]["line"],
-            "file" => $trace[0]["file"],
+            "line": $trace[0]["line"],
+            "file": $trace[0]["file"],
         ];
 
         Debugger::printVar($var, myLocation, $showHtml);
