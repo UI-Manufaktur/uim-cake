@@ -50,7 +50,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      */
     protected void asText(ConsoleIo $io, iterable $commands) {
         $invert = [];
-        foreach ($commands as myName => myClass) {
+        foreach ($commands as myName: myClass) {
             if (is_object(myClass)) {
                 myClass = get_class(myClass);
             }
@@ -61,7 +61,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
         }
         myGrouped = [];
         myPlugins = Plugin::loaded();
-        foreach ($invert as myClass => myNames) {
+        foreach ($invert as myClass: myNames) {
             preg_match("/^(.+)\\\\(Command|Shell)\\\\/", myClass, $matches);
             // Probably not a useful class
             if (empty($matches)) {
@@ -86,7 +86,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
         this.outputPaths($io);
         $io.out("<info>Available Commands:</info>", 2);
 
-        foreach (myGrouped as $prefix => myNames) {
+        foreach (myGrouped as $prefix: myNames) {
             $io.out("<info>{$prefix}</info>:");
             sort(myNames);
             foreach (myNames as myName) {
@@ -122,7 +122,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
             return;
         }
         $io.out("<info>Current Paths:</info>", 2);
-        foreach (myPaths as myKey => myValue) {
+        foreach (myPaths as myKey: myValue) {
             $io.out("* {myKey}: {myValue}");
         }
         $io.out("");
@@ -152,7 +152,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
      */
     protected void asXml(ConsoleIo $io, iterable $commands) {
         myShells = new SimpleXMLElement("<shells></shells>");
-        foreach ($commands as myName => myClass) {
+        foreach ($commands as myName: myClass) {
             if (is_object(myClass)) {
                 myClass = get_class(myClass);
             }

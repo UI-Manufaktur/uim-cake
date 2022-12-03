@@ -488,7 +488,7 @@ class ConsoleOptionParser
      * @return this
      */
     function addArguments(array $args) {
-        foreach ($args as myName => myParams) {
+        foreach ($args as myName: myParams) {
             if (myParams instanceof ConsoleInputArgument) {
                 myName = myParams;
                 myParams = [];
@@ -508,7 +508,7 @@ class ConsoleOptionParser
      * @return this
      */
     function addOptions(array myOptions) {
-        foreach (myOptions as myName => myParams) {
+        foreach (myOptions as myName: myParams) {
             if (myParams instanceof ConsoleInputOption) {
                 myName = myParams;
                 myParams = [];
@@ -577,7 +577,7 @@ class ConsoleOptionParser
      * @return this
      */
     function addSubcommands(array $commands) {
-        foreach ($commands as myName => myParams) {
+        foreach ($commands as myName: myParams) {
             if (myParams instanceof ConsoleInputSubcommand) {
                 myName = myParams;
                 myParams = [];
@@ -663,7 +663,7 @@ class ConsoleOptionParser
                 $args = this._parseArg($token, $args);
             }
         }
-        foreach (this._args as $i => $arg) {
+        foreach (this._args as $i: $arg) {
             if ($arg.isRequired() && !isset($args[$i]) && empty(myParams["help"])) {
                 throw new ConsoleException(
                     sprintf("Missing required argument. The `%s` argument is required.", $arg.name())
@@ -807,7 +807,7 @@ class ConsoleOptionParser
         }
         if (!isset(this._shortOptions[myKey])) {
             myOptions = [];
-            foreach (this._shortOptions as $short => $long) {
+            foreach (this._shortOptions as $short: $long) {
                 myOptions[] = "{$short} (short for `--{$long}`)";
             }
             throw new MissingOptionException(

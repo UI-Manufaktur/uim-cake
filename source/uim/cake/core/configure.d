@@ -68,10 +68,10 @@ class Configure
      */
     static void write(myConfig, myValue = null) {
         if (!is_array(myConfig)) {
-            myConfig = [myConfig => myValue];
+            myConfig = [myConfig: myValue];
         }
 
-        foreach (myConfig as myName => myValue) {
+        foreach (myConfig as myName: myValue) {
             static::$_values = Hash::insert(static::$_values, myName, myValue);
         }
 

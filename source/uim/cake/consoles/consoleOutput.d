@@ -228,7 +228,7 @@ class ConsoleOutput
             $styleInfo[] = static::$_backgroundColors[$style["background"]];
         }
         unset($style["text"], $style["background"]);
-        foreach ($style as $option => myValue) {
+        foreach ($style as $option: myValue) {
             if (myValue) {
                 $styleInfo[] = static::$_options[$option];
             }

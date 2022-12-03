@@ -126,7 +126,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         unset(myConfig["enabled"], $existingConfig["enabled"]);
 
         $failure = null;
-        foreach (myConfig as myKey => myValue) {
+        foreach (myConfig as myKey: myValue) {
             if (!array_key_exists(myKey, $existingConfig)) {
                 $failure = " The `{myKey}` was not defined in the previous configuration data.";
                 break;
@@ -267,7 +267,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     function normalizeArray(array $objects): array
     {
         $normal = [];
-        foreach ($objects as $i => $objectName) {
+        foreach ($objects as $i: $objectName) {
             myConfig = [];
             if (!is_int($i)) {
                 myConfig = (array)$objectName;

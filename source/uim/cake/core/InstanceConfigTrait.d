@@ -211,7 +211,7 @@ trait InstanceConfigTrait
         }
 
         if (myMerge) {
-            $update = is_array(myKey) ? myKey : [myKey => myValue];
+            $update = is_array(myKey) ? myKey : [myKey: myValue];
             if (myMerge === "shallow") {
                 this._config = array_merge(this._config, Hash::expand($update));
             } else {
@@ -222,7 +222,7 @@ trait InstanceConfigTrait
         }
 
         if (is_array(myKey)) {
-            foreach (myKey as $k => $val) {
+            foreach (myKey as $k: $val) {
                 this._configWrite($k, $val);
             }
 
@@ -269,7 +269,7 @@ trait InstanceConfigTrait
         $stack = explode(".", myKey);
         $length = count($stack);
 
-        foreach ($stack as $i => $k) {
+        foreach ($stack as $i: $k) {
             if (!is_array($update)) {
                 throw new CakeException(sprintf("Cannot unset %s value", myKey));
             }

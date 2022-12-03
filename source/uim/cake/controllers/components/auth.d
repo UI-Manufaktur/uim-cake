@@ -77,7 +77,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      *   ```
      *   this.Auth.setConfig("authenticate", [
-     *       AuthComponent::ALL => [
+     *       AuthComponent::ALL: [
      *          "userModel":"Users.Users",
      *          "scope":["Users.active":1]
      *      ],
@@ -104,7 +104,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      *   ```
      *   this.Auth.setConfig("authorize", [
-     *      AuthComponent::ALL => [
+     *      AuthComponent::ALL: [
      *          "actionPath":"controllers/"
      *      ],
      *      "Crud",
@@ -449,7 +449,7 @@ class AuthComponent : Component : IEventDispatcher
         ];
 
         myConfig = this.getConfig();
-        foreach (myConfig as myKey => myValue) {
+        foreach (myConfig as myKey: myValue) {
             if (myValue !== null) {
                 unset($defaults[myKey]);
             }
@@ -512,7 +512,7 @@ class AuthComponent : Component : IEventDispatcher
             $global = $authorize[AuthComponent::ALL];
             unset($authorize[AuthComponent::ALL]);
         }
-        foreach ($authorize as myAlias => myConfig) {
+        foreach ($authorize as myAlias: myConfig) {
             if (!empty(myConfig["className"])) {
                 myClass = myConfig["className"];
                 unset(myConfig["className"]);
@@ -799,7 +799,7 @@ class AuthComponent : Component : IEventDispatcher
             $global = $authenticate[AuthComponent::ALL];
             unset($authenticate[AuthComponent::ALL]);
         }
-        foreach ($authenticate as myAlias => myConfig) {
+        foreach ($authenticate as myAlias: myConfig) {
             if (!empty(myConfig["className"])) {
                 myClass = myConfig["className"];
                 unset(myConfig["className"]);

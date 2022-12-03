@@ -153,7 +153,7 @@ class Component : IEventListener
             "Controller.shutdown":"afterFilter",
         ];
         myEvents = [];
-        foreach (myEventMap as myEvent => $method) {
+        foreach (myEventMap as myEvent: $method) {
             if (method_exists(this, $method)) {
                 myEvents[myEvent] = $method;
             }

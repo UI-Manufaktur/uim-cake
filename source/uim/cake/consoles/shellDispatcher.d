@@ -234,7 +234,7 @@ class ShellDispatcher
             }
 
             foreach ($list[myPlugin] as myShell) {
-                myAliases += [myShell => myPlugin];
+                myAliases += [myShell: myPlugin];
                 if (!isset($others[myShell])) {
                     $others[myShell] = [myPlugin];
                 } else {
@@ -243,7 +243,7 @@ class ShellDispatcher
             }
         }
 
-        foreach (myAliases as myShell => myPlugin) {
+        foreach (myAliases as myShell: myPlugin) {
             if (isset($fixed[myShell])) {
                 Log::write(
                     "debug",

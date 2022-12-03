@@ -27,7 +27,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands The map of commands to add to the collection.
      */
     this(array $commands = []) {
-        foreach ($commands as myName => $command) {
+        foreach ($commands as myName: $command) {
             this.add(myName, $command);
         }
     }
@@ -65,12 +65,12 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Add multiple commands at once.
      *
-     * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands A map of command names => command classes/instances.
+     * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands A map of command names: command classes/instances.
      * @return this
      * @see \Cake\Console\CommandCollection::add()
      */
     function addMany(array $commands) {
-        foreach ($commands as myName => myClass) {
+        foreach ($commands as myName: myClass) {
             this.add(myName, myClass);
         }
 
@@ -157,7 +157,7 @@ class CommandCollection : IteratorAggregate, Countable
      * Resolve names based on existing commands
      *
      * @param array $input The results of a CommandScanner operation.
-     * @return array<string, string> A flat map of command names => class names.
+     * @return array<string, string> A flat map of command names: class names.
      */
     protected auto resolveNames(array $input): array
     {

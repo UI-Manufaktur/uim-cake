@@ -275,7 +275,7 @@ class Shell {
      * @throws \RuntimeException
      */
     protected void _validateTasks() {
-        foreach (this._taskMap as $taskName => $task) {
+        foreach (this._taskMap as $taskName: $task) {
             myClass = App::className($task["class"], "Shell/Task", "Task");
             if (myClass === null) {
                 throw new RuntimeException(sprintf(

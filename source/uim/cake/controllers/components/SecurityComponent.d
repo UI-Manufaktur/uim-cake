@@ -317,7 +317,7 @@ class SecurityComponent : Component
         $multi = $lockedFields = [];
         $isUnlocked = false;
 
-        foreach (myFieldList as $i => myKey) {
+        foreach (myFieldList as $i: myKey) {
             if (is_string(myKey) && preg_match("/(\.\d+){1,10}$/", myKey)) {
                 $multi[$i] = preg_replace("/(\.\d+){1,10}$/", "", myKey);
                 unset(myFieldList[$i]);
@@ -336,7 +336,7 @@ class SecurityComponent : Component
             )
         );
 
-        foreach (myFieldList as $i => myKey) {
+        foreach (myFieldList as $i: myKey) {
             $isLocked = in_array(myKey, $locked, true);
 
             if (!empty($unlockedFields)) {
@@ -518,7 +518,7 @@ class SecurityComponent : Component
         string $stringKeyMessage
     ): array {
         myMessages = [];
-        foreach (myDataFields as myKey => myValue) {
+        foreach (myDataFields as myKey: myValue) {
             if (is_int(myKey)) {
                 $foundKey = array_search(myValue, $expectedFields, true);
                 if ($foundKey === false) {
@@ -550,7 +550,7 @@ class SecurityComponent : Component
         }
 
         $expectedFieldNames = [];
-        foreach ($expectedFields as myKey => $expectedField) {
+        foreach ($expectedFields as myKey: $expectedField) {
             if (is_int(myKey)) {
                 $expectedFieldNames[] = $expectedField;
             } else {
