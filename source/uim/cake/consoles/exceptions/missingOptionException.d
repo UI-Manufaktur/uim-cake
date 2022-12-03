@@ -12,7 +12,7 @@ class MissingOptionException : ConsoleException
      *
      * @var string
      */
-    protected myRequested = '';
+    protected myRequested = "";
 
     /**
      * The valid suggestions.
@@ -32,7 +32,7 @@ class MissingOptionException : ConsoleException
      */
     this(
         string myMessage,
-        string myRequested = '',
+        string myRequested = "",
         array $suggestions = [],
         Nullable!int $code = null,
         ?Throwable $previous = null
@@ -54,7 +54,7 @@ class MissingOptionException : ConsoleException
         $good = [];
         foreach (this.suggestions as $option) {
             if (levenshtein($option, this.requested) < 8) {
-                $good[] = '- ' . $option;
+                $good[] = "- " . $option;
             }
         }
 
@@ -76,7 +76,7 @@ class MissingOptionException : ConsoleException
     {
         $bestGuess = null;
         foreach ($haystack as $item) {
-            if (preg_match('/^' . $needle . '/', $item)) {
+            if (preg_match("/^" . $needle . "/", $item)) {
                 return $item;
             }
         }
