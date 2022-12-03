@@ -10,43 +10,43 @@ import uim.cake;
  */
 class Validation {
     //  Default locale
-    public const string DEFAULT_LOCALE = 'en_US';
+    public const string DEFAULT_LOCALE = "en_US";
 
     // Same as operator.
-    public const string COMPARE_SAME = '===';
+    public const string COMPARE_SAME = "===";
 
     // Not same as comparison operator.
-    public const string COMPARE_NOT_SAME = '!==';
+    public const string COMPARE_NOT_SAME = "!==";
 
     // Equal to comparison operator.
-    public const string COMPARE_EQUAL = '==';
+    public const string COMPARE_EQUAL = "==";
 
     /**
      * Not equal to comparison operator.
      *
      * @var string
      */
-    public const COMPARE_NOT_EQUAL = '!=';
+    public const COMPARE_NOT_EQUAL = "!=";
 
     /**
      * Greater than comparison operator.
      *
      * @var string
      */
-    public const COMPARE_GREATER = '>';
+    public const COMPARE_GREATER = ">";
 
     /**
      * Greater than or equal to comparison operator.
      *
      * @var string
      */
-    public const COMPARE_GREATER_OR_EQUAL = '>=';
+    public const COMPARE_GREATER_OR_EQUAL = ">=";
 
     // Less than comparison operator.
-    public const string COMPARE_LESS = '<';
+    public const string COMPARE_LESS = "<";
 
     // Less than or equal to comparison operator.
-    public const string COMPARE_LESS_OR_EQUAL = '<=';
+    public const string COMPARE_LESS_OR_EQUAL = "<=";
 
     protected const string[] COMPARE_STRING = [
         self::COMPARE_EQUAL,
@@ -56,7 +56,7 @@ class Validation {
     ];
 
     // Datetime ISO8601 format
-    public const string DATETIME_ISO8601 = 'iso8601';
+    public const string DATETIME_ISO8601 = "iso8601";
 
     /**
      * Some complex patterns needed in multiple places
@@ -64,9 +64,9 @@ class Validation {
      * @var array<string, string>
      */
     protected static $_pattern = [
-        'hostname' => '(?:[_\p{L}0-9][-_\p{L}0-9]*\.)*(?:[\p{L}0-9][-\p{L}0-9]{0,62})\.(?:(?:[a-z]{2}\.)?[a-z]{2,})',
-        'latitude' => '[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)',
-        'longitude' => '[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)',
+        "hostname" => "(?:[_\p{L}0-9][-_\p{L}0-9]*\.)*(?:[\p{L}0-9][-\p{L}0-9]{0,62})\.(?:(?:[a-z]{2}\.)?[a-z]{2,})",
+        "latitude" => "[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)",
+        "longitude" => "[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)",
     ];
 
     /**
@@ -90,30 +90,30 @@ class Validation {
             return false;
         }
 
-        return static::_check($check, '/[^\s]+/m');
+        return static::_check($check, "/[^\s]+/m");
     }
 
     /**
      * Checks that a string contains only integer or letters.
      *
-     * This method's definition of letters and integers includes unicode characters.
+     * This method"s definition of letters and integers includes unicode characters.
      * Use `asciiAlphaNumeric()` if you want to exclude unicode.
      *
      * @param mixed $check Value to check
      * @return bool Success
      */
     static bool alphaNumeric($check) {
-        if ((empty($check) && $check !== '0') || !is_scalar($check)) {
+        if ((empty($check) && $check !== "0") || !is_scalar($check)) {
             return false;
         }
 
-        return self::_check($check, '/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]+$/Du');
+        return self::_check($check, "/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]+$/Du");
     }
 
     /**
-     * Checks that a doesn't contain any alpha numeric characters
+     * Checks that a doesn"t contain any alpha numeric characters
      *
-     * This method's definition of letters and integers includes unicode characters.
+     * This method"s definition of letters and integers includes unicode characters.
      * Use `notAsciiAlphaNumeric()` if you want to exclude ascii only.
      *
      * @param mixed $check Value to check
@@ -130,15 +130,15 @@ class Validation {
      * @return bool Success
      */
     static bool asciiAlphaNumeric($check) {
-        if ((empty($check) && $check !== '0') || !is_scalar($check)) {
+        if ((empty($check) && $check !== "0") || !is_scalar($check)) {
             return false;
         }
 
-        return self::_check($check, '/^[[:alnum:]]+$/');
+        return self::_check($check, "/^[[:alnum:]]+$/");
     }
 
     /**
-     * Checks that a doesn't contain any non-ascii alpha numeric characters
+     * Checks that a doesn"t contain any non-ascii alpha numeric characters
      *
      * @param mixed $check Value to check
      * @return bool Success
@@ -171,20 +171,20 @@ class Validation {
      * Returns true if $check is in the proper credit card format.
      *
      * @param mixed $check credit card number to validate
-     * @param array<string>|string myType 'all' may be passed as a string, defaults to fast which checks format of
+     * @param array<string>|string myType "all" may be passed as a string, defaults to fast which checks format of
      *     most major credit cards if an array is used only the values of the array are checked.
-     *    Example: ['amex', 'bankcard', 'maestro']
+     *    Example: ["amex", "bankcard", "maestro"]
      * @param bool $deep set to true this will check the Luhn algorithm of the credit card.
      * @param string|null $regex A custom regex, this will be used instead of the defined regex values.
      * @return bool Success
      * @see \Cake\Validation\Validation::luhn()
      */
-    static bool creditCard($check, myType = 'fast', bool $deep = false, Nullable!string $regex = null) {
+    static bool creditCard($check, myType = "fast", bool $deep = false, Nullable!string $regex = null) {
         if (!(is_string($check) || is_int($check))) {
             return false;
         }
 
-        $check = str_replace(['-', ' '], '', (string)$check);
+        $check = str_replace(["-", " "], "", (string)$check);
         if (mb_strlen($check) < 13) {
             return false;
         }
@@ -193,36 +193,36 @@ class Validation {
             return !$deep || static::luhn($check);
         }
         $cards = [
-            'all' => [
-                'amex' => '/^3[47]\\d{13}$/',
-                'bankcard' => '/^56(10\\d\\d|022[1-5])\\d{10}$/',
-                'diners' => '/^(?:3(0[0-5]|[68]\\d)\\d{11})|(?:5[1-5]\\d{14})$/',
-                'disc' => '/^(?:6011|650\\d)\\d{12}$/',
-                'electron' => '/^(?:417500|4917\\d{2}|4913\\d{2})\\d{10}$/',
-                'enroute' => '/^2(?:014|149)\\d{11}$/',
-                'jcb' => '/^(3\\d{4}|2131|1800)\\d{11}$/',
-                'maestro' => '/^(?:5020|6\\d{3})\\d{12}$/',
-                'mc' => '/^(5[1-5]\\d{14})|(2(?:22[1-9]|2[3-9][0-9]|[3-6][0-9]{2}|7[0-1][0-9]|720)\\d{12})$/',
-                'solo' => '/^(6334[5-9][0-9]|6767[0-9]{2})\\d{10}(\\d{2,3})?$/',
+            "all" => [
+                "amex" => "/^3[47]\\d{13}$/",
+                "bankcard" => "/^56(10\\d\\d|022[1-5])\\d{10}$/",
+                "diners" => "/^(?:3(0[0-5]|[68]\\d)\\d{11})|(?:5[1-5]\\d{14})$/",
+                "disc" => "/^(?:6011|650\\d)\\d{12}$/",
+                "electron" => "/^(?:417500|4917\\d{2}|4913\\d{2})\\d{10}$/",
+                "enroute" => "/^2(?:014|149)\\d{11}$/",
+                "jcb" => "/^(3\\d{4}|2131|1800)\\d{11}$/",
+                "maestro" => "/^(?:5020|6\\d{3})\\d{12}$/",
+                "mc" => "/^(5[1-5]\\d{14})|(2(?:22[1-9]|2[3-9][0-9]|[3-6][0-9]{2}|7[0-1][0-9]|720)\\d{12})$/",
+                "solo" => "/^(6334[5-9][0-9]|6767[0-9]{2})\\d{10}(\\d{2,3})?$/",
                 // phpcs:ignore Generic.Files.LineLength
-                'switch' => '/^(?:49(03(0[2-9]|3[5-9])|11(0[1-2]|7[4-9]|8[1-2])|36[0-9]{2})\\d{10}(\\d{2,3})?)|(?:564182\\d{10}(\\d{2,3})?)|(6(3(33[0-4][0-9])|759[0-9]{2})\\d{10}(\\d{2,3})?)$/',
-                'visa' => '/^4\\d{12}(\\d{3})?$/',
-                'voyager' => '/^8699[0-9]{11}$/',
+                "switch" => "/^(?:49(03(0[2-9]|3[5-9])|11(0[1-2]|7[4-9]|8[1-2])|36[0-9]{2})\\d{10}(\\d{2,3})?)|(?:564182\\d{10}(\\d{2,3})?)|(6(3(33[0-4][0-9])|759[0-9]{2})\\d{10}(\\d{2,3})?)$/",
+                "visa" => "/^4\\d{12}(\\d{3})?$/",
+                "voyager" => "/^8699[0-9]{11}$/",
             ],
             // phpcs:ignore Generic.Files.LineLength
-            'fast' => '/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47][0-9]{13})$/',
+            "fast" => "/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47][0-9]{13})$/",
         ];
 
         if (is_array(myType)) {
             foreach (myType as myValue) {
-                $regex = $cards['all'][strtolower(myValue)];
+                $regex = $cards["all"][strtolower(myValue)];
 
                 if (static::_check($check, $regex)) {
                     return static::luhn($check);
                 }
             }
-        } elseif (myType === 'all') {
-            foreach ($cards['all'] as myValue) {
+        } elseif (myType === "all") {
+            foreach ($cards["all"] as myValue) {
                 $regex = myValue;
 
                 if (static::_check($check, $regex)) {
@@ -230,7 +230,7 @@ class Validation {
                 }
             }
         } else {
-            $regex = $cards['fast'];
+            $regex = $cards["fast"];
 
             if (static::_check($check, $regex)) {
                 return static::luhn($check);
@@ -263,7 +263,7 @@ class Validation {
      *
      * @param string|int $check1 The left value to compare.
      * @param string $operator Can be one of following operator strings:
-     *   '>', '<', '>=', '<=', '==', '!=', '===' and '!=='. You can use one of
+     *   ">", "<", ">=", "<=", "==", "!=", "===" and "!==". You can use one of
      *   the Validation::COMPARE_* constants.
      * @param string|int $check2 The right value to compare.
      * @return bool Success
@@ -318,7 +318,7 @@ class Validation {
                 }
                 break;
             default:
-                static::myErrors[] = 'You must define a valid $operator parameter for Validation::comparison()';
+                static::myErrors[] = "You must define a valid $operator parameter for Validation::comparison()";
         }
 
         return false;
@@ -351,11 +351,11 @@ class Validation {
 
      */
     static bool compareFields($check, string myField, string $operator, array $context) {
-        if (!isset($context['data']) || !array_key_exists(myField, $context['data'])) {
+        if (!isset($context["data"]) || !array_key_exists(myField, $context["data"])) {
             return false;
         }
 
-        return static::comparison($check, $operator, $context['data'][myField]);
+        return static::comparison($check, $operator, $context["data"][myField]);
     }
 
     /**
@@ -369,12 +369,12 @@ class Validation {
      * @deprecated 4.0.0 Use {@link notAlphaNumeric()} instead. Will be removed in 5.0
      */
     static bool containsNonAlphaNumeric($check, int myCount = 1) {
-        deprecationWarning('Validation::containsNonAlphaNumeric() is deprecated. Use notAlphaNumeric() instead.');
+        deprecationWarning("Validation::containsNonAlphaNumeric() is deprecated. Use notAlphaNumeric() instead.");
         if (!is_string($check)) {
             return false;
         }
 
-        $matches = preg_match_all('/[^a-zA-Z0-9]/', $check);
+        $matches = preg_match_all("/[^a-zA-Z0-9]/", $check);
 
         return $matches >= myCount;
     }
@@ -391,7 +391,7 @@ class Validation {
             return false;
         }
         if ($regex === null) {
-            static::myErrors[] = 'You must define a regular expression for Validation::custom()';
+            static::myErrors[] = "You must define a regular expression for Validation::custom()";
 
             return false;
         }
@@ -419,11 +419,11 @@ class Validation {
      *
      * @param mixed $check a valid date string/object
      * @param array<string>|string $format Use a string or an array of the keys above.
-     *    Arrays should be passed as ['dmy', 'mdy', ...]
+     *    Arrays should be passed as ["dmy", "mdy", ...]
      * @param string|null $regex If a custom regular expression is used this is the only validation that will occur.
      * @return bool Success
      */
-    static bool date($check, $format = 'ymd', Nullable!string $regex = null) {
+    static bool date($check, $format = "ymd", Nullable!string $regex = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -432,49 +432,49 @@ class Validation {
         }
         if (is_array($check)) {
             $check = static::_getDateString($check);
-            $format = 'ymd';
+            $format = "ymd";
         }
 
         if ($regex !== null) {
             return static::_check($check, $regex);
         }
-        $month = '(0[123456789]|10|11|12)';
-        $separator = '([- /.])';
-        // Don't allow 0000, but 0001-2999 are ok.
-        $fourDigitYear = '(?:(?!0000)[012]\d{3})';
-        $twoDigitYear = '(?:\d{2})';
-        $year = '(?:' . $fourDigitYear . '|' . $twoDigitYear . ')';
+        $month = "(0[123456789]|10|11|12)";
+        $separator = "([- /.])";
+        // Don"t allow 0000, but 0001-2999 are ok.
+        $fourDigitYear = "(?:(?!0000)[012]\d{3})";
+        $twoDigitYear = "(?:\d{2})";
+        $year = "(?:" . $fourDigitYear . "|" . $twoDigitYear . ")";
 
         // phpcs:disable Generic.Files.LineLength
         // 2 or 4 digit leap year sub-pattern
-        $leapYear = '(?:(?:(?:(?!0000)[012]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))';
+        $leapYear = "(?:(?:(?:(?!0000)[012]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))";
         // 4 digit leap year sub-pattern
-        $fourDigitLeapYear = '(?:(?:(?:(?!0000)[012]\\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))';
+        $fourDigitLeapYear = "(?:(?:(?:(?!0000)[012]\\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))";
 
-        $regex['dmy'] = '%^(?:(?:31(\\/|-|\\.|\\x20)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)' .
-            $separator . '(?:0?[13-9]|1[0-2])\\2))' . $year . '$|^(?:29' .
-            $separator . '0?2\\3' . $leapYear . ')$|^(?:0?[1-9]|1\\d|2[0-8])' .
-            $separator . '(?:(?:0?[1-9])|(?:1[0-2]))\\4' . $year . '$%';
+        $regex["dmy"] = "%^(?:(?:31(\\/|-|\\.|\\x20)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)" .
+            $separator . "(?:0?[13-9]|1[0-2])\\2))" . $year . "$|^(?:29" .
+            $separator . "0?2\\3" . $leapYear . ")$|^(?:0?[1-9]|1\\d|2[0-8])" .
+            $separator . "(?:(?:0?[1-9])|(?:1[0-2]))\\4" . $year . "$%";
 
-        $regex['mdy'] = '%^(?:(?:(?:0?[13578]|1[02])(\\/|-|\\.|\\x20)31)\\1|(?:(?:0?[13-9]|1[0-2])' .
-            $separator . '(?:29|30)\\2))' . $year . '$|^(?:0?2' . $separator . '29\\3' . $leapYear . ')$|^(?:(?:0?[1-9])|(?:1[0-2]))' .
-            $separator . '(?:0?[1-9]|1\\d|2[0-8])\\4' . $year . '$%';
+        $regex["mdy"] = "%^(?:(?:(?:0?[13578]|1[02])(\\/|-|\\.|\\x20)31)\\1|(?:(?:0?[13-9]|1[0-2])" .
+            $separator . "(?:29|30)\\2))" . $year . "$|^(?:0?2" . $separator . "29\\3" . $leapYear . ")$|^(?:(?:0?[1-9])|(?:1[0-2]))" .
+            $separator . "(?:0?[1-9]|1\\d|2[0-8])\\4" . $year . "$%";
 
-        $regex['ymd'] = '%^(?:(?:' . $leapYear .
-            $separator . '(?:0?2\\1(?:29)))|(?:' . $year .
-            $separator . '(?:(?:(?:0?[13578]|1[02])\\2(?:31))|(?:(?:0?[13-9]|1[0-2])\\2(29|30))|(?:(?:0?[1-9])|(?:1[0-2]))\\2(?:0?[1-9]|1\\d|2[0-8]))))$%';
+        $regex["ymd"] = "%^(?:(?:" . $leapYear .
+            $separator . "(?:0?2\\1(?:29)))|(?:" . $year .
+            $separator . "(?:(?:(?:0?[13578]|1[02])\\2(?:31))|(?:(?:0?[13-9]|1[0-2])\\2(29|30))|(?:(?:0?[1-9])|(?:1[0-2]))\\2(?:0?[1-9]|1\\d|2[0-8]))))$%";
 
-        $regex['dMy'] = '/^((31(?!\\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\\b|t)t?|Nov)(ember)?)))|((30|29)(?!\\ Feb(ruary)?))|(29(?=\\ Feb(ruary)?\\ ' . $fourDigitLeapYear . '))|(0?[1-9])|1\\d|2[0-8])\\ (Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\\b|t)t?|Nov|Dec)(ember)?)\\ ' . $fourDigitYear . '$/';
+        $regex["dMy"] = "/^((31(?!\\ (Feb(ruary)?|Apr(il)?|June?|(Sep(?=\\b|t)t?|Nov)(ember)?)))|((30|29)(?!\\ Feb(ruary)?))|(29(?=\\ Feb(ruary)?\\ " . $fourDigitLeapYear . "))|(0?[1-9])|1\\d|2[0-8])\\ (Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\\b|t)t?|Nov|Dec)(ember)?)\\ " . $fourDigitYear . "$/";
 
-        $regex['Mdy'] = '/^(?:(((Jan(uary)?|Ma(r(ch)?|y)|Jul(y)?|Aug(ust)?|Oct(ober)?|Dec(ember)?)\\ 31)|((Jan(uary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep)(tember)?|(Nov|Dec)(ember)?)\\ (0?[1-9]|([12]\\d)|30))|(Feb(ruary)?\\ (0?[1-9]|1\\d|2[0-8]|(29(?=,?\\ ' . $fourDigitLeapYear . ')))))\\,?\\ ' . $fourDigitYear . ')$/';
+        $regex["Mdy"] = "/^(?:(((Jan(uary)?|Ma(r(ch)?|y)|Jul(y)?|Aug(ust)?|Oct(ober)?|Dec(ember)?)\\ 31)|((Jan(uary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep)(tember)?|(Nov|Dec)(ember)?)\\ (0?[1-9]|([12]\\d)|30))|(Feb(ruary)?\\ (0?[1-9]|1\\d|2[0-8]|(29(?=,?\\ " . $fourDigitLeapYear . ")))))\\,?\\ " . $fourDigitYear . ")$/";
 
-        $regex['My'] = '%^(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\\b|t)t?|Nov|Dec)(ember)?)' .
-            $separator . $fourDigitYear . '$%';
+        $regex["My"] = "%^(Jan(uary)?|Feb(ruary)?|Ma(r(ch)?|y)|Apr(il)?|Ju((ly?)|(ne?))|Aug(ust)?|Oct(ober)?|(Sep(?=\\b|t)t?|Nov|Dec)(ember)?)" .
+            $separator . $fourDigitYear . "$%";
         // phpcs:enable Generic.Files.LineLength
 
-        $regex['my'] = '%^(' . $month . $separator . $year . ')$%';
-        $regex['ym'] = '%^(' . $year . $separator . $month . ')$%';
-        $regex['y'] = '%^(' . $fourDigitYear . ')$%';
+        $regex["my"] = "%^(" . $month . $separator . $year . ")$%";
+        $regex["ym"] = "%^(" . $year . $separator . $month . ")$%";
+        $regex["y"] = "%^(" . $fourDigitYear . ")$%";
 
         $format = is_array($format) ? array_values($format) : [$format];
         foreach ($format as myKey) {
@@ -500,7 +500,7 @@ class Validation {
      * @see \Cake\Validation\Validation::date()
      * @see \Cake\Validation\Validation::time()
      */
-    static bool datetime($check, $dateFormat = 'ymd', Nullable!string $regex = null) {
+    static bool datetime($check, $dateFormat = "ymd", Nullable!string $regex = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -517,14 +517,14 @@ class Validation {
         $valid = false;
         if (is_array($check)) {
             $check = static::_getDateString($check);
-            $dateFormat = 'ymd';
+            $dateFormat = "ymd";
         }
-        $parts = preg_split('/[\sT]+/', $check);
+        $parts = preg_split("/[\sT]+/", $check);
         if (!empty($parts) && count($parts) > 1) {
-            $date = rtrim(array_shift($parts), ',');
-            $time = implode(' ', $parts);
+            $date = rtrim(array_shift($parts), ",");
+            $time = implode(" ", $parts);
             if ($dateFormat === static::DATETIME_ISO8601) {
-                $dateFormat = 'ymd';
+                $dateFormat = "ymd";
                 $time = preg_split("/[TZ\-\+\.]/", $time);
                 $time = array_shift($time);
             }
@@ -551,7 +551,7 @@ class Validation {
         }
 
         // phpcs:ignore Generic.Files.LineLength
-        $regex = '/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/';
+        $regex = "/^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/";
 
         return static::_check($check, $regex);
     }
@@ -578,10 +578,10 @@ class Validation {
             return false;
         }
 
-        $meridianClockRegex = '^((0?[1-9]|1[012])(:[0-5]\d){0,2} ?([AP]M|[ap]m))$';
-        $standardClockRegex = '^([01]\d|2[0-3])((:[0-5]\d){1,2}|(:[0-5]\d){2}\.\d{0,6})$';
+        $meridianClockRegex = "^((0?[1-9]|1[012])(:[0-5]\d){0,2} ?([AP]M|[ap]m))$";
+        $standardClockRegex = "^([01]\d|2[0-3])((:[0-5]\d){1,2}|(:[0-5]\d){2}\.\d{0,6})$";
 
-        return static::_check($check, '%' . $meridianClockRegex . '|' . $standardClockRegex . '%');
+        return static::_check($check, "%" . $meridianClockRegex . "|" . $standardClockRegex . "%");
     }
 
     /**
@@ -589,7 +589,7 @@ class Validation {
      * Uses `I18n::Time` to parse the date. This means parsing is locale dependent.
      *
      * @param mixed $check a date string or object (will always pass)
-     * @param string myType Parser type, one out of 'date', 'time', and 'datetime'
+     * @param string myType Parser type, one out of "date", "time", and "datetime"
      * @param string|int|null $format any format accepted by IntlDateFormatter
      * @return bool Success
      * @throws \InvalidArgumentException when unsupported myType given
@@ -597,7 +597,7 @@ class Validation {
      * @see \Cake\I18n\Time::parseTime()
      * @see \Cake\I18n\Time::parseDateTime()
      */
-    static bool localizedTime($check, string myType = 'datetime', $format = null) {
+    static bool localizedTime($check, string myType = "datetime", $format = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -605,12 +605,12 @@ class Validation {
             return false;
         }
         static $methods = [
-            'date' => 'parseDate',
-            'time' => 'parseTime',
-            'datetime' => 'parseDateTime',
+            "date" => "parseDate",
+            "time" => "parseTime",
+            "datetime" => "parseDateTime",
         ];
         if (empty($methods[myType])) {
-            throw new InvalidArgumentException('Unsupported parser type given.');
+            throw new InvalidArgumentException("Unsupported parser type given.");
         }
         $method = $methods[myType];
 
@@ -623,12 +623,12 @@ class Validation {
      * The list of what is considered to be boolean values, may be set via $booleanValues.
      *
      * @param string|int|bool $check Value to check.
-     * @param array $booleanValues List of valid boolean values, defaults to `[true, false, 0, 1, '0', '1']`.
+     * @param array $booleanValues List of valid boolean values, defaults to `[true, false, 0, 1, "0", "1"]`.
      * @return bool Success.
      */
     static bool boolean($check, array $booleanValues = []) {
         if (!$booleanValues) {
-            $booleanValues = [true, false, 0, 1, '0', '1'];
+            $booleanValues = [true, false, 0, 1, "0", "1"];
         }
 
         return in_array($check, $booleanValues, true);
@@ -640,12 +640,12 @@ class Validation {
      * The list of what is considered to be truthy values, may be set via $truthyValues.
      *
      * @param string|int|bool $check Value to check.
-     * @param array $truthyValues List of valid truthy values, defaults to `[true, 1, '1']`.
+     * @param array $truthyValues List of valid truthy values, defaults to `[true, 1, "1"]`.
      * @return bool Success.
      */
     static bool truthy($check, array $truthyValues = []) {
         if (!$truthyValues) {
-            $truthyValues = [true, 1, '1'];
+            $truthyValues = [true, 1, "1"];
         }
 
         return in_array($check, $truthyValues, true);
@@ -657,12 +657,12 @@ class Validation {
      * The list of what is considered to be falsey values, may be set via $falseyValues.
      *
      * @param string|int|bool $check Value to check.
-     * @param array $falseyValues List of valid falsey values, defaults to `[false, 0, '0']`.
+     * @param array $falseyValues List of valid falsey values, defaults to `[false, 0, "0"]`.
      * @return bool Success.
      */
     static bool falsey($check, array $falseyValues = []) {
         if (!$falseyValues) {
-            $falseyValues = [false, 0, '0'];
+            $falseyValues = [false, 0, "0"];
         }
 
         return in_array($check, $falseyValues, true);
@@ -673,9 +673,9 @@ class Validation {
      *
      * Valid Places:
      *
-     * - null => Any number of decimal places, including none. The '.' is not required.
-     * - true => Any number of decimal places greater than 0, or a float|double. The '.' is required.
-     * - 1..N => Exactly that many number of decimal places. The '.' is required.
+     * - null => Any number of decimal places, including none. The "." is not required.
+     * - true => Any number of decimal places greater than 0, or a float|double. The "." is required.
+     * - 1..N => Exactly that many number of decimal places. The "." is required.
      *
      * @param mixed $check The value the test for decimal.
      * @param int|true|null $places Decimal places.
@@ -688,20 +688,20 @@ class Validation {
         }
 
         if ($regex === null) {
-            $lnum = '[0-9]+';
+            $lnum = "[0-9]+";
             $dnum = "[0-9]*[\.]{$lnum}";
-            $sign = '[+-]?';
+            $sign = "[+-]?";
             $exp = "(?:[eE]{$sign}{$lnum})?";
 
             if ($places === null) {
                 $regex = "/^{$sign}(?:{$lnum}|{$dnum}){$exp}$/";
             } elseif ($places === true) {
                 if (is_float($check) && floor($check) === $check) {
-                    $check = sprintf('%.1f', $check);
+                    $check = sprintf("%.1f", $check);
                 }
                 $regex = "/^{$sign}{$dnum}{$exp}$/";
             } elseif (is_numeric($places)) {
-                $places = '[0-9]{' . $places . '}';
+                $places = "[0-9]{" . $places . "}";
                 $dnum = "(?:[0-9]*[\.]{$places}|{$lnum}[\.]{$places})";
                 $regex = "/^{$sign}{$dnum}{$exp}$/";
             } else {
@@ -710,16 +710,16 @@ class Validation {
         }
 
         // account for localized floats.
-        $locale = ini_get('intl.default_locale') ?: static::DEFAULT_LOCALE;
+        $locale = ini_get("intl.default_locale") ?: static::DEFAULT_LOCALE;
         $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
         $decimalPoint = $formatter.getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
         myGroupingSep = $formatter.getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
 
         // There are two types of non-breaking spaces - we inject a space to account for human input
         if (myGroupingSep == "\xc2\xa0" || myGroupingSep == "\xe2\x80\xaf") {
-            $check = str_replace([' ', myGroupingSep, $decimalPoint], ['', '', '.'], (string)$check);
+            $check = str_replace([" ", myGroupingSep, $decimalPoint], ["", "", "."], (string)$check);
         } else {
-            $check = str_replace([myGroupingSep, $decimalPoint], ['', '.'], (string)$check);
+            $check = str_replace([myGroupingSep, $decimalPoint], ["", "."], (string)$check);
         }
 
         return static::_check($check, $regex);
@@ -743,22 +743,22 @@ class Validation {
 
         if ($regex === null) {
             // phpcs:ignore Generic.Files.LineLength
-            $regex = '/^[\p{L}0-9!#$%&\'*+\/=?^_`{|}~-]+(?:\.[\p{L}0-9!#$%&\'*+\/=?^_`{|}~-]+)*@' . self::$_pattern['hostname'] . '$/ui';
+            $regex = "/^[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+(?:\.[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+)*@" . self::$_pattern["hostname"] . "$/ui";
         }
         $return = static::_check($check, $regex);
         if ($deep === false || $deep === null) {
             return $return;
         }
 
-        if ($return === true && preg_match('/@(' . static::$_pattern['hostname'] . ')$/i', $check, $regs)) {
-            if (function_exists('getmxrr') && getmxrr($regs[1], $mxhosts)) {
+        if ($return === true && preg_match("/@(" . static::$_pattern["hostname"] . ")$/i", $check, $regs)) {
+            if (function_exists("getmxrr") && getmxrr($regs[1], $mxhosts)) {
                 return true;
             }
-            if (function_exists('checkdnsrr') && checkdnsrr($regs[1], 'MX')) {
+            if (function_exists("checkdnsrr") && checkdnsrr($regs[1], "MX")) {
                 return true;
             }
 
-            return is_array(gethostbynamel($regs[1] . '.'));
+            return is_array(gethostbynamel($regs[1] . "."));
         }
 
         return false;
@@ -779,14 +779,14 @@ class Validation {
      * Checks that value has a valid file extension.
      *
      * @param \Psr\Http\Message\UploadedFileInterface|array|string $check Value to check
-     * @param array<string> $extensions file extensions to allow. By default extensions are 'gif', 'jpeg', 'png', 'jpg'
+     * @param array<string> $extensions file extensions to allow. By default extensions are "gif", "jpeg", "png", "jpg"
      * @return bool Success
      */
-    static function extension($check, array $extensions = ['gif', 'jpeg', 'png', 'jpg']) {
+    static function extension($check, array $extensions = ["gif", "jpeg", "png", "jpg"]) {
         if ($check instanceof UploadedFileInterface) {
             $check = $check.getClientFilename();
-        } elseif (is_array($check) && isset($check['name'])) {
-            $check = $check['name'];
+        } elseif (is_array($check) && isset($check["name"])) {
+            $check = $check["name"];
         } elseif (is_array($check)) {
             return static::extension(array_shift($check), $extensions);
         }
@@ -812,21 +812,21 @@ class Validation {
      * @param string myType The IP Protocol version to validate against
      * @return bool Success
      */
-    static bool ip($check, string myType = 'both') {
+    static bool ip($check, string myType = "both") {
         if (!is_string($check)) {
             return false;
         }
 
         myType = strtolower(myType);
         $flags = 0;
-        if (myType === 'ipv4') {
+        if (myType === "ipv4") {
             $flags = FILTER_FLAG_IPV4;
         }
-        if (myType === 'ipv6') {
+        if (myType === "ipv6") {
             $flags = FILTER_FLAG_IPV6;
         }
 
-        return (bool)filter_var($check, FILTER_VALIDATE_IP, ['flags' => $flags]);
+        return (bool)filter_var($check, FILTER_VALIDATE_IP, ["flags" => $flags]);
     }
 
     /**
@@ -896,12 +896,12 @@ class Validation {
      * @param string $symbolPosition Where symbol is located (left/right)
      * @return bool Success
      */
-    static bool money($check, string $symbolPosition = 'left') {
-        $money = '(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{1,2})?';
-        if ($symbolPosition === 'right') {
-            $regex = '/^' . $money . '(?<!\x{00a2})\p{Sc}?$/u';
+    static bool money($check, string $symbolPosition = "left") {
+        $money = "(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{1,2})?";
+        if ($symbolPosition === "right") {
+            $regex = "/^" . $money . "(?<!\x{00a2})\p{Sc}?$/u";
         } else {
-            $regex = '/^(?!\x{00a2})\p{Sc}?' . $money . '$/u';
+            $regex = "/^(?!\x{00a2})\p{Sc}?" . $money . "$/u";
         }
 
         return static::_check($check, $regex);
@@ -922,7 +922,7 @@ class Validation {
      * @return bool Success
      */
     static bool multiple($check, array myOptions = [], bool $caseInsensitive = false) {
-        $defaults = ['in' => null, 'max' => null, 'min' => null];
+        $defaults = ["in" => null, "max" => null, "min" => null];
         myOptions += $defaults;
 
         $check = array_filter((array)$check, function (myValue) {
@@ -931,22 +931,22 @@ class Validation {
         if (empty($check)) {
             return false;
         }
-        if (myOptions['max'] && count($check) > myOptions['max']) {
+        if (myOptions["max"] && count($check) > myOptions["max"]) {
             return false;
         }
-        if (myOptions['min'] && count($check) < myOptions['min']) {
+        if (myOptions["min"] && count($check) < myOptions["min"]) {
             return false;
         }
-        if (myOptions['in'] && is_array(myOptions['in'])) {
+        if (myOptions["in"] && is_array(myOptions["in"])) {
             if ($caseInsensitive) {
-                myOptions['in'] = array_map('mb_strtolower', myOptions['in']);
+                myOptions["in"] = array_map("mb_strtolower", myOptions["in"]);
             }
             foreach ($check as $val) {
                 $strict = !is_numeric($val);
                 if ($caseInsensitive) {
                     $val = mb_strtolower($val);
                 }
-                if (!in_array((string)$val, myOptions['in'], $strict)) {
+                if (!in_array((string)$val, myOptions["in"], $strict)) {
                     return false;
                 }
             }
@@ -974,7 +974,7 @@ class Validation {
      * @see https://en.wikipedia.org/wiki/Natural_number
      */
     static bool naturalNumber($check, bool $allowZero = false) {
-        $regex = $allowZero ? '/^(?:0|[1-9][0-9]*)$/' : '/^[1-9][0-9]*$/';
+        $regex = $allowZero ? "/^(?:0|[1-9][0-9]*)$/" : "/^[1-9][0-9]*$/";
 
         return static::_check($check, $regex);
     }
@@ -1030,18 +1030,18 @@ class Validation {
 
         static::_populateIp();
 
-        $emoji = '\x{1F190}-\x{1F9EF}';
-        $alpha = '0-9\p{L}\p{N}' . $emoji;
-        $hex = '(%[0-9a-f]{2})';
-        $subDelimiters = preg_quote('/!"$&\'()*+,-.@_:;=~[]', '/');
-        myPath = '([' . $subDelimiters . $alpha . ']|' . $hex . ')';
-        $fragmentAndQuery = '([\?' . $subDelimiters . $alpha . ']|' . $hex . ')';
+        $emoji = "\x{1F190}-\x{1F9EF}";
+        $alpha = "0-9\p{L}\p{N}" . $emoji;
+        $hex = "(%[0-9a-f]{2})";
+        $subDelimiters = preg_quote("/!"$&\"()*+,-.@_:;=~[]", "/");
+        myPath = "([" . $subDelimiters . $alpha . "]|" . $hex . ")";
+        $fragmentAndQuery = "([\?" . $subDelimiters . $alpha . "]|" . $hex . ")";
         // phpcs:disable Generic.Files.LineLength
-        $regex = '/^(?:(?:https?|ftps?|sftp|file|news|gopher):\/\/)' . ($strict ? '' : '?') .
-            '(?:' . static::$_pattern['IPv4'] . '|\[' . static::$_pattern['IPv6'] . '\]|' . static::$_pattern['hostname'] . ')(?::[1-9][0-9]{0,4})?' .
-            '(?:\/' . myPath . '*)?' .
-            '(?:\?' . $fragmentAndQuery . '*)?' .
-            '(?:#' . $fragmentAndQuery . '*)?$/iu';
+        $regex = "/^(?:(?:https?|ftps?|sftp|file|news|gopher):\/\/)" . ($strict ? "" : "?") .
+            "(?:" . static::$_pattern["IPv4"] . "|\[" . static::$_pattern["IPv6"] . "\]|" . static::$_pattern["hostname"] . ")(?::[1-9][0-9]{0,4})?" .
+            "(?:\/" . myPath . "*)?" .
+            "(?:\?" . $fragmentAndQuery . "*)?" .
+            "(?:#" . $fragmentAndQuery . "*)?$/iu";
         // phpcs:enable Generic.Files.LineLength
 
         return static::_check($check, $regex);
@@ -1060,10 +1060,10 @@ class Validation {
             return false;
         }
         if ($caseInsensitive) {
-            $list = array_map('mb_strtolower', $list);
+            $list = array_map("mb_strtolower", $list);
             $check = mb_strtolower((string)$check);
         } else {
-            $list = array_map('strval', $list);
+            $list = array_map("strval", $list);
         }
 
         return in_array((string)$check, $list, true);
@@ -1076,7 +1076,7 @@ class Validation {
      * @return bool Success
      */
     static bool uuid($check) {
-        $regex = '/^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[0-5][a-fA-F0-9]{3}-[089aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/';
+        $regex = "/^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[0-5][a-fA-F0-9]{3}-[089aAbB][a-fA-F0-9]{3}-[a-fA-F0-9]{12}$/";
 
         return self::_check($check, $regex);
     }
@@ -1138,19 +1138,19 @@ class Validation {
             return false;
         }
 
-        if (!function_exists('finfo_open')) {
-            throw new LogicException('ext/fileinfo is required for validating file mime types');
+        if (!function_exists("finfo_open")) {
+            throw new LogicException("ext/fileinfo is required for validating file mime types");
         }
 
         if (!is_file(myfile)) {
-            throw new RuntimeException('Cannot validate mimetype for a missing file');
+            throw new RuntimeException("Cannot validate mimetype for a missing file");
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, myfile);
 
         if (!$mime) {
-            throw new RuntimeException('Can not determine the mimetype.');
+            throw new RuntimeException("Can not determine the mimetype.");
         }
 
         if (is_string($mimeTypes)) {
@@ -1175,7 +1175,7 @@ class Validation {
         if ($check instanceof UploadedFileInterface) {
             // Uploaded files throw exceptions on upload errors.
             try {
-                $uri = $check.getStream().getMetadata('uri');
+                $uri = $check.getStream().getMetadata("uri");
                 if (is_string($uri)) {
                     return $uri;
                 }
@@ -1185,8 +1185,8 @@ class Validation {
                 return false;
             }
         }
-        if (is_array($check) && isset($check['tmp_name'])) {
-            return $check['tmp_name'];
+        if (is_array($check) && isset($check["tmp_name"])) {
+            return $check["tmp_name"];
         }
 
         if (is_string($check)) {
@@ -1205,7 +1205,7 @@ class Validation {
      *
      * @param \Psr\Http\Message\UploadedFileInterface|array|string $check Value to check.
      * @param string $operator See `Validation::comparison()`.
-     * @param string|int $size Size in bytes or human readable string like '5MB'.
+     * @param string|int $size Size in bytes or human readable string like "5MB".
      * @return bool Success
      */
     static bool fileSize($check, string $operator, $size) {
@@ -1233,8 +1233,8 @@ class Validation {
     static bool uploadError($check, bool $allowNoFile = false) {
         if ($check instanceof UploadedFileInterface) {
             $code = $check.getError();
-        } elseif (is_array($check) && isset($check['error'])) {
-            $code = $check['error'];
+        } elseif (is_array($check) && isset($check["error"])) {
+            $code = $check["error"];
         } else {
             $code = $check;
         }
@@ -1267,10 +1267,10 @@ class Validation {
      */
     static bool uploadedFile(myfile, array myOptions = []) {
         myOptions += [
-            'minSize' => null,
-            'maxSize' => null,
-            'types' => null,
-            'optional' => false,
+            "minSize" => null,
+            "maxSize" => null,
+            "types" => null,
+            "optional" => false,
         ];
         if (!is_array(myfile) && !(myfile instanceof UploadedFileInterface)) {
             return false;
@@ -1281,34 +1281,34 @@ class Validation {
             $isUploaded = true;
         }
         if (is_array(myfile)) {
-            myKeys = ['error', 'name', 'size', 'tmp_name', 'type'];
+            myKeys = ["error", "name", "size", "tmp_name", "type"];
             ksort(myfile);
             if (array_keys(myfile) !== myKeys) {
                 return false;
             }
-            myError = (int)myfile['error'];
-            $isUploaded = is_uploaded_file(myfile['tmp_name']);
+            myError = (int)myfile["error"];
+            $isUploaded = is_uploaded_file(myfile["tmp_name"]);
         }
 
-        if (!static::uploadError(myfile, myOptions['optional'])) {
+        if (!static::uploadError(myfile, myOptions["optional"])) {
             return false;
         }
-        if (myOptions['optional'] && myError === UPLOAD_ERR_NO_FILE) {
+        if (myOptions["optional"] && myError === UPLOAD_ERR_NO_FILE) {
             return true;
         }
         if (
-            isset(myOptions['minSize'])
-            && !static::fileSize(myfile, static::COMPARE_GREATER_OR_EQUAL, myOptions['minSize'])
+            isset(myOptions["minSize"])
+            && !static::fileSize(myfile, static::COMPARE_GREATER_OR_EQUAL, myOptions["minSize"])
         ) {
             return false;
         }
         if (
-            isset(myOptions['maxSize'])
-            && !static::fileSize(myfile, static::COMPARE_LESS_OR_EQUAL, myOptions['maxSize'])
+            isset(myOptions["maxSize"])
+            && !static::fileSize(myfile, static::COMPARE_LESS_OR_EQUAL, myOptions["maxSize"])
         ) {
             return false;
         }
-        if (isset(myOptions['types']) && !static::mimeType(myfile, myOptions['types'])) {
+        if (isset(myOptions["types"]) && !static::mimeType(myfile, myOptions["types"])) {
             return false;
         }
 
@@ -1324,9 +1324,9 @@ class Validation {
      * @throws \InvalidArgumentException
      */
     static bool imageSize(myfile, array myOptions) {
-        if (!isset(myOptions['height']) && !isset(myOptions['width'])) {
+        if (!isset(myOptions["height"]) && !isset(myOptions["width"])) {
             throw new InvalidArgumentException(
-                'Invalid image size validation parameters! Missing `width` and / or `height`.'
+                "Invalid image size validation parameters! Missing `width` and / or `height`."
             );
         }
 
@@ -1339,11 +1339,11 @@ class Validation {
         $validHeight = null;
         $validWidth = null;
 
-        if (isset(myOptions['height'])) {
-            $validHeight = self::comparison($height, myOptions['height'][0], myOptions['height'][1]);
+        if (isset(myOptions["height"])) {
+            $validHeight = self::comparison($height, myOptions["height"][0], myOptions["height"][1]);
         }
-        if (isset(myOptions['width'])) {
-            $validWidth = self::comparison($width, myOptions['width'][0], myOptions['width'][1]);
+        if (isset(myOptions["width"])) {
+            $validWidth = self::comparison($width, myOptions["width"][0], myOptions["width"][1]);
         }
         if ($validHeight !== null && $validWidth !== null) {
             return $validHeight && $validWidth;
@@ -1355,7 +1355,7 @@ class Validation {
             return $validWidth;
         }
 
-        throw new InvalidArgumentException('The 2nd argument is missing the `width` and / or `height` options.');
+        throw new InvalidArgumentException("The 2nd argument is missing the `width` and / or `height` options.");
     }
 
     /**
@@ -1368,7 +1368,7 @@ class Validation {
      */
     static bool imageWidth(myfile, string $operator, int $width) {
         return self::imageSize(myfile, [
-            'width' => [
+            "width" => [
                 $operator,
                 $width,
             ],
@@ -1385,7 +1385,7 @@ class Validation {
      */
     static bool imageHeight(myfile, string $operator, int $height) {
         return self::imageSize(myfile, [
-            'height' => [
+            "height" => [
                 $operator,
                 $height,
             ],
@@ -1415,21 +1415,21 @@ class Validation {
         }
 
         myOptions += [
-            'format' => 'both',
-            'type' => 'latLong',
+            "format" => "both",
+            "type" => "latLong",
         ];
-        if (myOptions['type'] !== 'latLong') {
+        if (myOptions["type"] !== "latLong") {
             throw new RuntimeException(sprintf(
-                'Unsupported coordinate type "%s". Use "latLong" instead.',
-                myOptions['type']
+                "Unsupported coordinate type "%s". Use "latLong" instead.",
+                myOptions["type"]
             ));
         }
-        $pattern = '/^' . self::$_pattern['latitude'] . ',\s*' . self::$_pattern['longitude'] . '$/';
-        if (myOptions['format'] === 'long') {
-            $pattern = '/^' . self::$_pattern['longitude'] . '$/';
+        $pattern = "/^" . self::$_pattern["latitude"] . ",\s*" . self::$_pattern["longitude"] . "$/";
+        if (myOptions["format"] === "long") {
+            $pattern = "/^" . self::$_pattern["longitude"] . "$/";
         }
-        if (myOptions['format'] === 'lat') {
-            $pattern = '/^' . self::$_pattern['latitude'] . '$/';
+        if (myOptions["format"] === "lat") {
+            $pattern = "/^" . self::$_pattern["latitude"] . "$/";
         }
 
         return (bool)preg_match($pattern, (string)myValue);
@@ -1445,7 +1445,7 @@ class Validation {
      * @see \Cake\Validation\Validation::geoCoordinate()
      */
     static bool latitude(myValue, array myOptions = []) {
-        myOptions['format'] = 'lat';
+        myOptions["format"] = "lat";
 
         return self::geoCoordinate(myValue, myOptions);
     }
@@ -1460,7 +1460,7 @@ class Validation {
      * @see \Cake\Validation\Validation::geoCoordinate()
      */
     static bool longitude(myValue, array myOptions = []) {
-        myOptions['format'] = 'long';
+        myOptions["format"] = "long";
 
         return self::geoCoordinate(myValue, myOptions);
     }
@@ -1478,7 +1478,7 @@ class Validation {
             return false;
         }
 
-        return strlen(myValue) <= mb_strlen(myValue, 'utf-8');
+        return strlen(myValue) <= mb_strlen(myValue, "utf-8");
     }
 
     /**
@@ -1489,7 +1489,7 @@ class Validation {
      * # Options
      *
      * - `extended` - Disallow bytes higher within the basic multilingual plane.
-     *   MySQL's older utf8 encoding type does not allow characters above
+     *   MySQL"s older utf8 encoding type does not allow characters above
      *   the basic multilingual plane. Defaults to false.
      *
      * @param mixed myValue The value to check
@@ -1500,12 +1500,12 @@ class Validation {
         if (!is_string(myValue)) {
             return false;
         }
-        myOptions += ['extended' => false];
-        if (myOptions['extended']) {
+        myOptions += ["extended" => false];
+        if (myOptions["extended"]) {
             return true;
         }
 
-        return preg_match('/[\x{10000}-\x{10FFFF}]/u', myValue) === 0;
+        return preg_match("/[\x{10000}-\x{10FFFF}]/u", myValue) === 0;
     }
 
     /**
@@ -1526,7 +1526,7 @@ class Validation {
             return false;
         }
 
-        return (bool)preg_match('/^-?[0-9]+$/', myValue);
+        return (bool)preg_match("/^-?[0-9]+$/", myValue);
     }
 
     /**
@@ -1559,7 +1559,7 @@ class Validation {
      * @return bool Success
      */
     static bool hexColor($check) {
-        return static::_check($check, '/^#[0-9a-f]{6}$/iD');
+        return static::_check($check, "/^#[0-9a-f]{6}$/iD");
     }
 
     /**
@@ -1573,7 +1573,7 @@ class Validation {
     static bool iban($check) {
         if (
             !is_string($check) ||
-            !preg_match('/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/', $check)
+            !preg_match("/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/", $check)
         ) {
             return false;
         }
@@ -1581,12 +1581,12 @@ class Validation {
         myCountry = substr($check, 0, 2);
         $checkInt = intval(substr($check, 2, 2));
         $account = substr($check, 4);
-        $search = range('A', 'Z');
+        $search = range("A", "Z");
         $replace = [];
         foreach (range(10, 35) as $tmp) {
             $replace[] = strval($tmp);
         }
-        $numStr = str_replace($search, $replace, $account . myCountry . '00');
+        $numStr = str_replace($search, $replace, $account . myCountry . "00");
         $checksum = intval(substr($numStr, 0, 1));
         $numStrLength = strlen($numStr);
         for ($pos = 1; $pos < $numStrLength; $pos++) {
@@ -1608,38 +1608,38 @@ class Validation {
      */
     protected static auto _getDateString(array myValue): string
     {
-        $formatted = '';
+        $formatted = "";
         if (
-            isset(myValue['year'], myValue['month'], myValue['day']) &&
+            isset(myValue["year"], myValue["month"], myValue["day"]) &&
             (
-                is_numeric(myValue['year']) &&
-                is_numeric(myValue['month']) &&
-                is_numeric(myValue['day'])
+                is_numeric(myValue["year"]) &&
+                is_numeric(myValue["month"]) &&
+                is_numeric(myValue["day"])
             )
         ) {
-            $formatted .= sprintf('%d-%02d-%02d ', myValue['year'], myValue['month'], myValue['day']);
+            $formatted .= sprintf("%d-%02d-%02d ", myValue["year"], myValue["month"], myValue["day"]);
         }
 
-        if (isset(myValue['hour'])) {
-            if (isset(myValue['meridian']) && (int)myValue['hour'] === 12) {
-                myValue['hour'] = 0;
+        if (isset(myValue["hour"])) {
+            if (isset(myValue["meridian"]) && (int)myValue["hour"] === 12) {
+                myValue["hour"] = 0;
             }
-            if (isset(myValue['meridian'])) {
-                myValue['hour'] = strtolower(myValue['meridian']) === 'am' ? myValue['hour'] : myValue['hour'] + 12;
+            if (isset(myValue["meridian"])) {
+                myValue["hour"] = strtolower(myValue["meridian"]) === "am" ? myValue["hour"] : myValue["hour"] + 12;
             }
-            myValue += ['minute' => 0, 'second' => 0, 'microsecond' => 0];
+            myValue += ["minute" => 0, "second" => 0, "microsecond" => 0];
             if (
-                is_numeric(myValue['hour']) &&
-                is_numeric(myValue['minute']) &&
-                is_numeric(myValue['second']) &&
-                is_numeric(myValue['microsecond'])
+                is_numeric(myValue["hour"]) &&
+                is_numeric(myValue["minute"]) &&
+                is_numeric(myValue["second"]) &&
+                is_numeric(myValue["microsecond"])
             ) {
                 $formatted .= sprintf(
-                    '%02d:%02d:%02d.%06d',
-                    myValue['hour'],
-                    myValue['minute'],
-                    myValue['second'],
-                    myValue['microsecond']
+                    "%02d:%02d:%02d.%06d",
+                    myValue["hour"],
+                    myValue["minute"],
+                    myValue["second"],
+                    myValue["microsecond"]
                 );
             }
         }
@@ -1655,27 +1655,27 @@ class Validation {
     protected static auto _populateIp(): void
     {
         // phpcs:disable Generic.Files.LineLength
-        if (!isset(static::$_pattern['IPv6'])) {
-            $pattern = '((([0-9A-Fa-f]{1,4}:){7}(([0-9A-Fa-f]{1,4})|:))|(([0-9A-Fa-f]{1,4}:){6}';
-            $pattern .= '(:|((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})';
-            $pattern .= '|(:[0-9A-Fa-f]{1,4})))|(([0-9A-Fa-f]{1,4}:){5}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})';
-            $pattern .= '(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)|((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:)';
-            $pattern .= '{4}(:[0-9A-Fa-f]{1,4}){0,1}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2}))';
-            $pattern .= '{3})?)|((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:){3}(:[0-9A-Fa-f]{1,4}){0,2}';
-            $pattern .= '((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)|';
-            $pattern .= '((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:){2}(:[0-9A-Fa-f]{1,4}){0,3}';
-            $pattern .= '((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2}))';
-            $pattern .= '{3})?)|((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:)(:[0-9A-Fa-f]{1,4})';
-            $pattern .= '{0,4}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)';
-            $pattern .= '|((:[0-9A-Fa-f]{1,4}){1,2})))|(:(:[0-9A-Fa-f]{1,4}){0,5}((:((25[0-5]|2[0-4]';
-            $pattern .= '\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)|((:[0-9A-Fa-f]{1,4})';
-            $pattern .= '{1,2})))|(((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})))(%.+)?';
+        if (!isset(static::$_pattern["IPv6"])) {
+            $pattern = "((([0-9A-Fa-f]{1,4}:){7}(([0-9A-Fa-f]{1,4})|:))|(([0-9A-Fa-f]{1,4}:){6}";
+            $pattern .= "(:|((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})";
+            $pattern .= "|(:[0-9A-Fa-f]{1,4})))|(([0-9A-Fa-f]{1,4}:){5}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})";
+            $pattern .= "(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)|((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:)";
+            $pattern .= "{4}(:[0-9A-Fa-f]{1,4}){0,1}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2}))";
+            $pattern .= "{3})?)|((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:){3}(:[0-9A-Fa-f]{1,4}){0,2}";
+            $pattern .= "((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)|";
+            $pattern .= "((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:){2}(:[0-9A-Fa-f]{1,4}){0,3}";
+            $pattern .= "((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2}))";
+            $pattern .= "{3})?)|((:[0-9A-Fa-f]{1,4}){1,2})))|(([0-9A-Fa-f]{1,4}:)(:[0-9A-Fa-f]{1,4})";
+            $pattern .= "{0,4}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)";
+            $pattern .= "|((:[0-9A-Fa-f]{1,4}){1,2})))|(:(:[0-9A-Fa-f]{1,4}){0,5}((:((25[0-5]|2[0-4]";
+            $pattern .= "\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)|((:[0-9A-Fa-f]{1,4})";
+            $pattern .= "{1,2})))|(((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})))(%.+)?";
 
-            static::$_pattern['IPv6'] = $pattern;
+            static::$_pattern["IPv6"] = $pattern;
         }
-        if (!isset(static::$_pattern['IPv4'])) {
-            $pattern = '(?:(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])';
-            static::$_pattern['IPv4'] = $pattern;
+        if (!isset(static::$_pattern["IPv4"])) {
+            $pattern = "(?:(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])";
+            static::$_pattern["IPv4"] = $pattern;
         }
         // phpcs:enable Generic.Files.LineLength
     }

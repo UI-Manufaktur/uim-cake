@@ -1,10 +1,10 @@
 module uim.cake.validations;
 
-/**
- * Describes objects that can be validated by passing a Validator object.
- */
-interface IValidatable
-{
+@safe:
+import uim.cake;
+
+// Describes objects that can be validated by passing a Validator object.
+interface IValidatable {
     /**
      * Validates the internal properties using a validator object and returns any
      * validation errors found.

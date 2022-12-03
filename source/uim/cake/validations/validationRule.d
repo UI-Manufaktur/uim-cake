@@ -1,19 +1,10 @@
 
 
-/**
- * ValidationRule.
- *
- * Provides the Model validation logic.
- *
+// ValidationRule - Provides the Model validation logic.
+module uim.cake.validations;
 
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         2.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.validations;
-
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * ValidationRule object. Represents a validation method, error message and
@@ -29,21 +20,21 @@ class ValidationRule
     protected $_rule;
 
     /**
-     * The 'on' key
+     * The "on" key
      *
      * @var callable|string
      */
     protected $_on;
 
     /**
-     * The 'last' key
+     * The "last" key
      *
      * @var bool
      */
     protected $_last = false;
 
     /**
-     * The 'message' key
+     * The "message" key
      *
      * @var string
      */
@@ -55,7 +46,7 @@ class ValidationRule
      *
      * @var string
      */
-    protected $_provider = 'default';
+    protected $_provider = "default";
 
     /**
      * Extra arguments to be passed to the validation method
@@ -100,7 +91,7 @@ class ValidationRule
      * callable for the configured scope
      */
     function process(myValue, array $providers, array $context = []) {
-        $context += ['data' => [], 'newRecord' => true, 'providers' => $providers];
+        $context += ["data" => [], "newRecord" => true, "providers" => $providers];
 
         if (this._skip($context)) {
             return true;
@@ -118,10 +109,10 @@ class ValidationRule
         if (!$isCallable) {
             /** @psalm-suppress PossiblyInvalidArgument */
             myMessage = sprintf(
-                'Unable to call method "%s" in "%s" provider for field "%s"',
+                "Unable to call method "%s" in "%s" provider for field "%s"",
                 this._rule,
                 this._provider,
-                $context['field']
+                $context["field"]
             );
             throw new InvalidArgumentException(myMessage);
         }
@@ -159,7 +150,7 @@ class ValidationRule
             return !$function($context);
         }
 
-        $newRecord = $context['newRecord'];
+        $newRecord = $context["newRecord"];
         if (!empty(this._on)) {
             return (this._on === Validator::WHEN_CREATE && !$newRecord)
                 || (this._on === Validator::WHEN_UPDATE && $newRecord);
@@ -180,11 +171,11 @@ class ValidationRule
             if (empty(myValue)) {
                 continue;
             }
-            if (myKey === 'rule' && is_array(myValue) && !is_callable(myValue)) {
+            if (myKey === "rule" && is_array(myValue) && !is_callable(myValue)) {
                 this._pass = array_slice(myValue, 1);
                 myValue = array_shift(myValue);
             }
-            if (in_array(myKey, ['rule', 'on', 'message', 'last', 'provider', 'pass'], true)) {
+            if (in_array(myKey, ["rule", "on", "message", "last", "provider", "pass"], true)) {
                 this.{"_myKey"} = myValue;
             }
         }
@@ -197,7 +188,7 @@ class ValidationRule
      * @return mixed
      */
     auto get(string $property) {
-        $property = '_' . $property;
+        $property = "_" . $property;
 
         return this.{$property} ?? null;
     }

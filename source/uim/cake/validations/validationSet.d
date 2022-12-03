@@ -1,19 +1,7 @@
+module uim.cake.validations;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         2.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.validations;
-
-use ArrayAccess;
-use ArrayIterator;
-use Countable;
-use IteratorAggregate;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * ValidationSet object. Holds all validation rules for a field and exposes
@@ -54,7 +42,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
     /**
      * Sets whether a field is required to be present in data array.
      *
-     * @param callable|string|bool $validatePresent Valid values are true, false, 'create', 'update' or a callable.
+     * @param callable|string|bool $validatePresent Valid values are true, false, "create", "update" or a callable.
      * @return this
      */
     function requirePresence($validatePresent) {
@@ -76,7 +64,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * Sets whether a field value is allowed to be empty.
      *
      * @param callable|string|bool $allowEmpty Valid values are true, false,
-     * 'create', 'update' or a callable.
+     * "create", "update" or a callable.
      * @return this
      */
     function allowEmpty($allowEmpty) {
@@ -117,8 +105,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * ```
      *      $set
-     *          .add('notBlank', ['rule' => 'notBlank'])
-     *          .add('inRange', ['rule' => ['between', 4, 10])
+     *          .add("notBlank", ["rule" => "notBlank"])
+     *          .add("inRange", ["rule" => ["between", 4, 10])
      * ```
      *
      * @param string myName The name under which the rule should be set
@@ -141,8 +129,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * ```
      *      $set
-     *          .remove('notBlank')
-     *          .remove('inRange')
+     *          .remove("notBlank")
+     *          .remove("inRange")
      * ```
      *
      * @param string myName The name under which the rule should be unset

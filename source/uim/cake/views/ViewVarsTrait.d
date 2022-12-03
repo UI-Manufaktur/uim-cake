@@ -47,9 +47,9 @@ trait ViewVarsTrait {
             myBuilder.setClassName($viewClass);
         }
 
-        foreach (['name', 'plugin'] as $prop) {
+        foreach (["name", "plugin"] as $prop) {
             if (isset(this.{$prop})) {
-                $method = 'set' . ucfirst($prop);
+                $method = "set" . ucfirst($prop);
                 myBuilder.{$method}(this.{$prop});
             }
         }
@@ -68,7 +68,7 @@ trait ViewVarsTrait {
      *
      * @param array|string myName A string or an array of data.
      * @param mixed myValue Value in case myName is a string (which then works as the key).
-     *   Unused if myName is an associative array, otherwise serves as the values to myName's keys.
+     *   Unused if myName is an associative array, otherwise serves as the values to myName"s keys.
      * @return this
      */
     auto set(myName, myValue = null) {

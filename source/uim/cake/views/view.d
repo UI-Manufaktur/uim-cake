@@ -28,7 +28,7 @@ use Throwable;
 /**
  * View, the V in the MVC triad. View interacts with Helpers and view variables passed
  * in from the controller to render the results of the controller action. Often this is HTML,
- * but can also take the form of JSON, XML, PDF's or streaming files.
+ * but can also take the form of JSON, XML, PDF"s or streaming files.
  *
  * UIM uses a two-step-view pattern. This means that the template content is rendered first,
  * and then inserted into the selected layout. This also means you can pass data from the template to the
@@ -39,7 +39,7 @@ use Throwable;
  * ```
  * function beforeRender(\Cake\Event\IEvent myEvent)
  * {
- *      this.viewBuilder().setTheme('SuperHot');
+ *      this.viewBuilder().setTheme("SuperHot");
  * }
  * ```
  *
@@ -91,7 +91,7 @@ class View : IEventDispatcher {
     protected myPlugin;
 
     // Name of the controller that created the View if any.
-    protected string myName = '';
+    protected string myName = "";
 
     /**
      * An array of names of built-in helpers to include.
@@ -107,7 +107,7 @@ class View : IEventDispatcher {
      *
      * @var string
      */
-    protected myTemplate = '';
+    protected myTemplate = "";
 
     /**
      * The name of the layout file to render the template inside of. The name specified
@@ -116,10 +116,10 @@ class View : IEventDispatcher {
      *
      * @var string
      */
-    protected $layout = 'default';
+    protected $layout = "default";
 
     /**
-     * Turns on or off UIM's conventional mode of applying layout files. On by default.
+     * Turns on or off UIM"s conventional mode of applying layout files. On by default.
      * Setting to off means that layouts will not be automatically applied to rendered templates.
      *
      * @var bool
@@ -138,7 +138,7 @@ class View : IEventDispatcher {
      *
      * @var string
      */
-    protected $_ext = '.php';
+    protected $_ext = ".php";
 
     /**
      * Sub-directory for this template file. This is often used for extension based routing.
@@ -146,7 +146,7 @@ class View : IEventDispatcher {
      *
      * @var string
      */
-    protected $subDir = '';
+    protected $subDir = "";
 
     /**
      * The view theme to use.
@@ -172,7 +172,7 @@ class View : IEventDispatcher {
      * @var string
      * @see \Cake\View\View::element()
      */
-    protected $elementCache = 'default';
+    protected $elementCache = "default";
 
     /**
      * List of variables to collect from the associated controller.
@@ -180,8 +180,8 @@ class View : IEventDispatcher {
      * @var array<string>
      */
     protected $_passedVars = [
-        'viewVars', 'autoLayout', 'helpers', 'template', 'layout', 'name', 'theme',
-        'layoutPath', 'templatePath', 'plugin',
+        "viewVars", "autoLayout", "helpers", "template", "layout", "name", "theme",
+        "layoutPath", "templatePath", "plugin",
     ];
 
     /**
@@ -225,7 +225,7 @@ class View : IEventDispatcher {
      *
      * @var string
      */
-    protected $_currentType = '';
+    protected $_currentType = "";
 
     /**
      * Content stack, used for nested templates that all use View::extend();
@@ -243,39 +243,39 @@ class View : IEventDispatcher {
     protected $_viewBlockClass = ViewBlock::class;
 
     /**
-     * Constant for view file type 'template'.
+     * Constant for view file type "template".
      *
      * @var string
      */
-    public const TYPE_TEMPLATE = 'template';
+    public const TYPE_TEMPLATE = "template";
 
     /**
-     * Constant for view file type 'element'
+     * Constant for view file type "element"
      *
      * @var string
      */
-    public const TYPE_ELEMENT = 'element';
+    public const TYPE_ELEMENT = "element";
 
     /**
-     * Constant for view file type 'layout'
+     * Constant for view file type "layout"
      *
      * @var string
      */
-    public const TYPE_LAYOUT = 'layout';
+    public const TYPE_LAYOUT = "layout";
 
     /**
      * Constant for type used for App::path().
      *
      * @var string
      */
-    public const NAME_TEMPLATE = 'templates';
+    public const NAME_TEMPLATE = "templates";
 
     /**
      * Constant for folder name containing files for overriding plugin templates.
      *
      * @var string
      */
-    public const PLUGIN_TEMPLATE_FOLDER = 'plugin';
+    public const PLUGIN_TEMPLATE_FOLDER = "plugin";
 
     /**
      * Constructor
@@ -306,7 +306,7 @@ class View : IEventDispatcher {
             this.setEventManager(myEventManager);
         }
         if (myRequest === null) {
-            myRequest = Router::getRequest() ?: new ServerRequest(['base' => '', 'url' => '', 'webroot' => '/']);
+            myRequest = Router::getRequest() ?: new ServerRequest(["base" => "", "url" => "", "webroot" => "/"]);
         }
         this.request = myRequest;
         this.response = $response ?: new Response();
@@ -345,14 +345,14 @@ class View : IEventDispatcher {
      * based on the contents of the request. The properties that get set are:
      *
      * - this.request - To the myRequest parameter
-     * - this.plugin - To the value returned by myRequest.getParam('plugin')
+     * - this.plugin - To the value returned by myRequest.getParam("plugin")
      *
      * @param \Cake\Http\ServerRequest myRequest Request instance.
      * @return this
      */
     auto setRequest(ServerRequest myRequest) {
         this.request = myRequest;
-        this.plugin = myRequest.getParam('plugin');
+        this.plugin = myRequest.getParam("plugin");
 
         return this;
     }
@@ -367,7 +367,7 @@ class View : IEventDispatcher {
     mixin(OProperty!("string", "layoutPath");
     
     /**
-     * Returns if UIM's conventional mode of applying layout files is enabled.
+     * Returns if UIM"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      *
      * @return bool
@@ -377,7 +377,7 @@ class View : IEventDispatcher {
     }
 
     /**
-     * Turns on or off UIM's conventional mode of applying layout files.
+     * Turns on or off UIM"s conventional mode of applying layout files.
      * On by default. Setting to off means that layouts will not be
      * automatically applied to rendered views.
      *
@@ -391,7 +391,7 @@ class View : IEventDispatcher {
     }
 
     /**
-     * Turns off UIM's conventional mode of applying layout files.
+     * Turns off UIM"s conventional mode of applying layout files.
      * Layouts will not be automatically applied to rendered views.
      *
      * @return this
@@ -495,7 +495,7 @@ class View : IEventDispatcher {
 
         if (isset(this.viewVars["_{myKey}"])) {
             deprecationWarning(sprintf(
-                'Setting special view var "_%s" is deprecated. Use ViewBuilder::setOption(\'%s\', myValue) instead.',
+                "Setting special view var "_%s" is deprecated. Use ViewBuilder::setOption(\"%s\", myValue) instead.",
                 myKey,
                 myKey
             ));
@@ -527,7 +527,7 @@ class View : IEventDispatcher {
      * - `callbacks` - Set to true to fire beforeRender and afterRender helper callbacks for this element.
      *   Defaults to false.
      * - `ignoreMissing` - Used to allow missing elements. Set to true to not throw exceptions.
-     * - `plugin` - setting to false will force to use the application's element from plugin templates, when the
+     * - `plugin` - setting to false will force to use the application"s element from plugin templates, when the
      *   plugin has element with same name. Defaults to true
      * @return string Rendered Element
      * @throws \Cake\View\Exception\MissingElementException When an element is missing and `ignoreMissing`
@@ -536,28 +536,28 @@ class View : IEventDispatcher {
      */
     function element(string myName, array myData = [], array myOptions = []): string
     {
-        myOptions += ['callbacks' => false, 'cache' => null, 'plugin' => null, 'ignoreMissing' => false];
-        if (isset(myOptions['cache'])) {
-            myOptions['cache'] = this._elementCache(
+        myOptions += ["callbacks" => false, "cache" => null, "plugin" => null, "ignoreMissing" => false];
+        if (isset(myOptions["cache"])) {
+            myOptions["cache"] = this._elementCache(
                 myName,
                 myData,
-                array_diff_key(myOptions, ['callbacks' => false, 'plugin' => null, 'ignoreMissing' => null])
+                array_diff_key(myOptions, ["callbacks" => false, "plugin" => null, "ignoreMissing" => null])
             );
         }
 
-        myPluginCheck = myOptions['plugin'] !== false;
+        myPluginCheck = myOptions["plugin"] !== false;
         myfile = this._getElementFileName(myName, myPluginCheck);
-        if (myfile && myOptions['cache']) {
+        if (myfile && myOptions["cache"]) {
             return this.cache(function () use (myfile, myData, myOptions): void {
                 echo this._renderElement(myfile, myData, myOptions);
-            }, myOptions['cache']);
+            }, myOptions["cache"]);
         }
         if (myfile) {
             return this._renderElement(myfile, myData, myOptions);
         }
 
-        if (myOptions['ignoreMissing']) {
-            return '';
+        if (myOptions["ignoreMissing"]) {
+            return "";
         }
 
         [myPlugin, $elementName] = this.pluginSplit(myName, myPluginCheck);
@@ -577,15 +577,15 @@ class View : IEventDispatcher {
      * @param callable $block The block of code that you want to cache the output of.
      * @param array<string, mixed> myOptions The options defining the cache key etc.
      * @return string The rendered content.
-     * @throws \RuntimeException When myOptions is lacking a 'key' option.
+     * @throws \RuntimeException When myOptions is lacking a "key" option.
      */
     function cache(callable $block, array myOptions = []): string
     {
-        myOptions += ['key' => '', 'config' => this.elementCache];
-        if (empty(myOptions['key'])) {
-            throw new RuntimeException('Cannot cache content with an empty key');
+        myOptions += ["key" => "", "config" => this.elementCache];
+        if (empty(myOptions["key"])) {
+            throw new RuntimeException("Cannot cache content with an empty key");
         }
-        myResult = Cache::read(myOptions['key'], myOptions['config']);
+        myResult = Cache::read(myOptions["key"], myOptions["config"]);
         if (myResult) {
             return myResult;
         }
@@ -605,7 +605,7 @@ class View : IEventDispatcher {
 
         myResult = ob_get_clean();
 
-        Cache::write(myOptions['key'], myResult, myOptions['config']);
+        Cache::write(myOptions["key"], myResult, myOptions["config"]);
 
         return myResult;
     }
@@ -648,7 +648,7 @@ class View : IEventDispatcher {
      */
     function render(Nullable!string myTemplate = null, $layout = null): string
     {
-        $defaultLayout = '';
+        $defaultLayout = "";
         $defaultAutoLayout = null;
         if ($layout === false) {
             $defaultAutoLayout = this.autoLayout;
@@ -660,19 +660,19 @@ class View : IEventDispatcher {
 
         myTemplateFileName = this._getTemplateFileName(myTemplate);
         this._currentType = static::TYPE_TEMPLATE;
-        this.dispatchEvent('View.beforeRender', [myTemplateFileName]);
-        this.Blocks.set('content', this._render(myTemplateFileName));
-        this.dispatchEvent('View.afterRender', [myTemplateFileName]);
+        this.dispatchEvent("View.beforeRender", [myTemplateFileName]);
+        this.Blocks.set("content", this._render(myTemplateFileName));
+        this.dispatchEvent("View.afterRender", [myTemplateFileName]);
 
         if (this.autoLayout) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
-                    'View::$layout must be a non-empty string.' .
-                    'To disable layout rendering use method View::disableAutoLayout() instead.'
+                    "View::$layout must be a non-empty string." .
+                    "To disable layout rendering use method View::disableAutoLayout() instead."
                 );
             }
 
-            this.Blocks.set('content', this.renderLayout('', this.layout));
+            this.Blocks.set("content", this.renderLayout("", this.layout));
         }
         if ($layout !== null) {
             this.layout = $defaultLayout;
@@ -681,7 +681,7 @@ class View : IEventDispatcher {
             this.autoLayout = $defaultAutoLayout;
         }
 
-        return this.Blocks.get('content');
+        return this.Blocks.get("content");
     }
 
     /**
@@ -701,23 +701,23 @@ class View : IEventDispatcher {
         $layoutFileName = this._getLayoutFileName($layout);
 
         if (!empty(myContents)) {
-            this.Blocks.set('content', myContents);
+            this.Blocks.set("content", myContents);
         }
 
-        this.dispatchEvent('View.beforeLayout', [$layoutFileName]);
+        this.dispatchEvent("View.beforeLayout", [$layoutFileName]);
 
-        $title = this.Blocks.get('title');
+        $title = this.Blocks.get("title");
         if ($title == "") {
-            $title = Inflector::humanize(str_replace(DIRECTORY_SEPARATOR, '/', this.templatePath));
-            this.Blocks.set('title', $title);
+            $title = Inflector::humanize(str_replace(DIRECTORY_SEPARATOR, "/", this.templatePath));
+            this.Blocks.set("title", $title);
         }
 
         this._currentType = static::TYPE_LAYOUT;
-        this.Blocks.set('content', this._render($layoutFileName));
+        this.Blocks.set("content", this._render($layoutFileName));
 
-        this.dispatchEvent('View.afterLayout', [$layoutFileName]);
+        this.dispatchEvent("View.afterLayout", [$layoutFileName]);
 
-        return this.Blocks.get('content');
+        return this.Blocks.get("content");
     }
 
     /**
@@ -746,7 +746,7 @@ class View : IEventDispatcher {
      *
      * @param array|string myName A string or an array of data.
      * @param mixed myValue Value in case myName is a string (which then works as the key).
-     *   Unused if myName is an associative array, otherwise serves as the values to myName's keys.
+     *   Unused if myName is an associative array, otherwise serves as the values to myName"s keys.
      * @return this
      * @throws \RuntimeException If the array combine operation failed.
      */
@@ -757,7 +757,7 @@ class View : IEventDispatcher {
                 myData = array_combine(myName, myValue);
                 if (myData === false) {
                     throw new RuntimeException(
-                        'Invalid data provided for array_combine() to work: Both myName and myValue require same count.'
+                        "Invalid data provided for array_combine() to work: Both myName and myValue require same count."
                     );
                 }
             } else {
@@ -783,22 +783,22 @@ class View : IEventDispatcher {
     }
 
     /**
-     * Start capturing output for a 'block'
+     * Start capturing output for a "block"
      *
      * You can use start on a block multiple times to
      * append or prepend content in a capture mode.
      *
      * ```
      * // Append content to an existing block.
-     * this.start('content');
-     * echo this.fetch('content');
-     * echo 'Some new content';
+     * this.start("content");
+     * echo this.fetch("content");
+     * echo "Some new content";
      * this.end();
      *
      * // Prepend content to an existing block
-     * this.start('content');
-     * echo 'Some new content';
-     * echo this.fetch('content');
+     * this.start("content");
+     * echo "Some new content";
+     * echo this.fetch("content");
      * this.end();
      * ```
      *
@@ -871,21 +871,21 @@ class View : IEventDispatcher {
      * @see \Cake\View\ViewBlock::set()
      */
     function reset(string myName) {
-        this.assign(myName, '');
+        this.assign(myName, "");
 
         return this;
     }
 
     /**
      * Fetch the content for a block. If a block is
-     * empty or undefined '' will be returned.
+     * empty or undefined "" will be returned.
      *
      * @param string myName Name of the block
      * @param string $default Default text
      * @return string The block content or $default if the block does not exist.
      * @see \Cake\View\ViewBlock::get()
      */
-    function fetch(string myName, string $default = ''): string
+    function fetch(string myName, string $default = ""): string
     {
         return this.Blocks.get(myName, $default);
     }
@@ -916,13 +916,13 @@ class View : IEventDispatcher {
      * Provides template or element extension/inheritance. Templates can : a
      * parent template and populate blocks in the parent template.
      *
-     * @param string myName The template or element to 'extend' the current one with.
+     * @param string myName The template or element to "extend" the current one with.
      * @return this
      * @throws \LogicException when you extend a template with itself or make extend loops.
-     * @throws \LogicException when you extend an element which doesn't exist
+     * @throws \LogicException when you extend an element which doesn"t exist
      */
     function extend(string myName) {
-        myType = myName[0] === '/' ? static::TYPE_TEMPLATE : this._currentType;
+        myType = myName[0] === "/" ? static::TYPE_TEMPLATE : this._currentType;
         switch (myType) {
             case static::TYPE_ELEMENT:
                 $parent = this._getElementFileName(myName);
@@ -931,7 +931,7 @@ class View : IEventDispatcher {
                     myPaths = this._paths(myPlugin);
                     $defaultPath = myPaths[0] . static::TYPE_ELEMENT . DIRECTORY_SEPARATOR;
                     throw new LogicException(sprintf(
-                        'You cannot extend an element which does not exist (%s).',
+                        "You cannot extend an element which does not exist (%s).",
                         $defaultPath . myName . this._ext
                     ));
                 }
@@ -944,10 +944,10 @@ class View : IEventDispatcher {
         }
 
         if ($parent === this._current) {
-            throw new LogicException('You cannot have templates extend themselves.');
+            throw new LogicException("You cannot have templates extend themselves.");
         }
         if (isset(this._parents[$parent]) && this._parents[$parent] === this._current) {
-            throw new LogicException('You cannot have templates extend in a loop.');
+            throw new LogicException("You cannot have templates extend in a loop.");
         }
         this._parents[this._current] = $parent;
 
@@ -990,7 +990,7 @@ class View : IEventDispatcher {
         $registry = this.helpers();
         $helpers = $registry.normalizeArray(this.helpers);
         foreach ($helpers as $properties) {
-            this.loadHelper($properties['class'], $properties['config']);
+            this.loadHelper($properties["class"], $properties["config"]);
         }
 
         return this;
@@ -1016,28 +1016,28 @@ class View : IEventDispatcher {
         this._current = myTemplateFile;
         $initialBlocks = count(this.Blocks.unclosed());
 
-        this.dispatchEvent('View.beforeRenderFile', [myTemplateFile]);
+        this.dispatchEvent("View.beforeRenderFile", [myTemplateFile]);
 
         myContents = this._evaluate(myTemplateFile, myData);
 
-        $afterEvent = this.dispatchEvent('View.afterRenderFile', [myTemplateFile, myContents]);
+        $afterEvent = this.dispatchEvent("View.afterRenderFile", [myTemplateFile, myContents]);
         if ($afterEvent.getResult() !== null) {
             myContents = $afterEvent.getResult();
         }
 
         if (isset(this._parents[myTemplateFile])) {
-            this._stack[] = this.fetch('content');
-            this.assign('content', myContents);
+            this._stack[] = this.fetch("content");
+            this.assign("content", myContents);
 
             myContents = this._render(this._parents[myTemplateFile]);
-            this.assign('content', array_pop(this._stack));
+            this.assign("content", array_pop(this._stack));
         }
 
         $remainingBlocks = count(this.Blocks.unclosed());
 
         if ($initialBlocks !== $remainingBlocks) {
             throw new LogicException(sprintf(
-                'The "%s" block was left open. Blocks are not allowed to cross files.',
+                "The "%s" block was left open. Blocks are not allowed to cross files.",
                 (string)this.Blocks.active()
             ));
         }
@@ -1130,7 +1130,7 @@ class View : IEventDispatcher {
     }
 
     /**
-     * Returns the View's controller name.
+     * Returns the View"s controller name.
      *
      * @return string
      * @since 3.7.7
@@ -1179,7 +1179,7 @@ class View : IEventDispatcher {
     }
 
     /**
-     * Returns filename of given action's template file as a string.
+     * Returns filename of given action"s template file as a string.
      * CamelCased action names will be under_scored by default.
      * This means that you can have LongActionNames that refer to
      * long_action_names.php templates. You can change the inflection rule by
@@ -1192,16 +1192,16 @@ class View : IEventDispatcher {
      */
     protected auto _getTemplateFileName(Nullable!string myName = null): string
     {
-        myTemplatePath = $subDir = '';
+        myTemplatePath = $subDir = "";
 
         if (this.templatePath) {
             myTemplatePath = this.templatePath . DIRECTORY_SEPARATOR;
         }
-        if (this.subDir !== '') {
+        if (this.subDir !== "") {
             $subDir = this.subDir . DIRECTORY_SEPARATOR;
             // Check if templatePath already terminates with subDir
             if (myTemplatePath != $subDir && substr(myTemplatePath, -strlen($subDir)) === $subDir) {
-                $subDir = '';
+                $subDir = "";
             }
         }
 
@@ -1210,16 +1210,16 @@ class View : IEventDispatcher {
         }
 
         if (empty(myName)) {
-            throw new RuntimeException('Template name not provided');
+            throw new RuntimeException("Template name not provided");
         }
 
         [myPlugin, myName] = this.pluginSplit(myName);
-        myName = str_replace('/', DIRECTORY_SEPARATOR, myName);
+        myName = str_replace("/", DIRECTORY_SEPARATOR, myName);
 
-        if (strpos(myName, DIRECTORY_SEPARATOR) === false && myName !== '' && myName[0] !== '.') {
+        if (strpos(myName, DIRECTORY_SEPARATOR) === false && myName !== "" && myName[0] !== ".") {
             myName = myTemplatePath . $subDir . this._inflectTemplateFileName(myName);
         } elseif (strpos(myName, DIRECTORY_SEPARATOR) !== false) {
-            if (myName[0] === DIRECTORY_SEPARATOR || myName[1] === ':') {
+            if (myName[0] === DIRECTORY_SEPARATOR || myName[1] === ":") {
                 myName = trim(myName, DIRECTORY_SEPARATOR);
             } elseif (!myPlugin || this.templatePath !== this.name) {
                 myName = myTemplatePath . $subDir . myName;
@@ -1263,13 +1263,13 @@ class View : IEventDispatcher {
      */
     protected auto _checkFilePath(string myfile, string myPath): string
     {
-        if (strpos(myfile, '..') === false) {
+        if (strpos(myfile, "..") === false) {
             return myfile;
         }
         $absolute = realpath(myfile);
         if (strpos($absolute, myPath) !== 0) {
             throw new InvalidArgumentException(sprintf(
-                'Cannot use "%s" as a template, it is not within any view template path.',
+                "Cannot use "%s" as a template, it is not within any view template path.",
                 myfile
             ));
         }
@@ -1315,8 +1315,8 @@ class View : IEventDispatcher {
         if (myName === null) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
-                    'View::$layout must be a non-empty string.' .
-                    'To disable layout rendering use method View::disableAutoLayout() instead.'
+                    "View::$layout must be a non-empty string." .
+                    "To disable layout rendering use method View::disableAutoLayout() instead."
                 );
             }
             myName = this.layout;
@@ -1341,7 +1341,7 @@ class View : IEventDispatcher {
      * @return \Generator
      */
     protected auto getLayoutPaths(Nullable!string myPlugin) {
-        $subDir = '';
+        $subDir = "";
         if (this.layoutPath) {
             $subDir = this.layoutPath . DIRECTORY_SEPARATOR;
         }
@@ -1358,8 +1358,8 @@ class View : IEventDispatcher {
      * Finds an element filename, returns false on failure.
      *
      * @param string myName The name of the element to find.
-     * @param bool myPluginCheck - if false will ignore the request's plugin if parsed plugin is not loaded
-     * @return string|false Either a string to the element filename or false when one can't be found.
+     * @param bool myPluginCheck - if false will ignore the request"s plugin if parsed plugin is not loaded
+     * @return string|false Either a string to the element filename or false when one can"t be found.
      */
     protected auto _getElementFileName(string myName, bool myPluginCheck = true) {
         [myPlugin, myName] = this.pluginSplit(myName, myPluginCheck);
@@ -1403,9 +1403,9 @@ class View : IEventDispatcher {
     protected auto _getSubPaths(string $basePath): array
     {
         myPaths = [$basePath];
-        if (this.request.getParam('prefix')) {
-            $prefixPath = explode('/', this.request.getParam('prefix'));
-            myPath = '';
+        if (this.request.getParam("prefix")) {
+            $prefixPath = explode("/", this.request.getParam("prefix"));
+            myPath = "";
             foreach ($prefixPath as $prefixPart) {
                 myPath .= Inflector::camelize($prefixPart) . DIRECTORY_SEPARATOR;
 
@@ -1470,7 +1470,7 @@ class View : IEventDispatcher {
             $themePaths,
             myPluginPaths,
             myTemplatePaths,
-            App::core('templates')
+            App::core("templates")
         );
 
         if (myPlugin !== null) {
@@ -1491,10 +1491,10 @@ class View : IEventDispatcher {
      */
     protected auto _elementCache(string myName, array myData, array myOptions): array
     {
-        if (isset(myOptions['cache']['key'], myOptions['cache']['config'])) {
+        if (isset(myOptions["cache"]["key"], myOptions["cache"]["config"])) {
             /** @psalm-var array{key:string, config:string}*/
-            $cache = myOptions['cache'];
-            $cache['key'] = 'element_' . $cache['key'];
+            $cache = myOptions["cache"];
+            $cache["key"] = "element_" . $cache["key"];
 
             return $cache;
         }
@@ -1503,25 +1503,25 @@ class View : IEventDispatcher {
 
         myPluginKey = null;
         if (myPlugin) {
-            myPluginKey = str_replace('/', '_', Inflector::underscore(myPlugin));
+            myPluginKey = str_replace("/", "_", Inflector::underscore(myPlugin));
         }
-        $elementKey = str_replace(['\\', '/'], '_', myName);
+        $elementKey = str_replace(["\\", "/"], "_", myName);
 
-        $cache = myOptions['cache'];
-        unset(myOptions['cache']);
+        $cache = myOptions["cache"];
+        unset(myOptions["cache"]);
         myKeys = array_merge(
             [myPluginKey, $elementKey],
             array_keys(myOptions),
             array_keys(myData)
         );
         myConfig = [
-            'config' => this.elementCache,
-            'key' => implode('_', myKeys),
+            "config" => this.elementCache,
+            "key" => implode("_", myKeys),
         ];
         if (is_array($cache)) {
             myConfig = $cache + myConfig;
         }
-        myConfig['key'] = 'element_' . myConfig['key'];
+        myConfig["key"] = "element_" . myConfig["key"];
 
         return myConfig;
     }
@@ -1543,14 +1543,14 @@ class View : IEventDispatcher {
         $restore = this._currentType;
         this._currentType = static::TYPE_ELEMENT;
 
-        if (myOptions['callbacks']) {
-            this.dispatchEvent('View.beforeRender', [myfile]);
+        if (myOptions["callbacks"]) {
+            this.dispatchEvent("View.beforeRender", [myfile]);
         }
 
         $element = this._render(myfile, array_merge(this.viewVars, myData));
 
-        if (myOptions['callbacks']) {
-            this.dispatchEvent('View.afterRender', [myfile, $element]);
+        if (myOptions["callbacks"]) {
+            this.dispatchEvent("View.afterRender", [myfile, $element]);
         }
 
         this._currentType = $restore;

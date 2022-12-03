@@ -1,10 +1,10 @@
 module uim.cake.validations;
 
-/**
- * Provides methods for managing multiple validators.
- */
-interface ValidatorAwareInterface
-{
+@safe:
+import uim.cake;
+
+// Provides methods for managing multiple validators.
+interface ValidatorAwareInterface {
     /**
      * Returns the validation rules tagged with myName.
      *

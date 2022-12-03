@@ -8,12 +8,12 @@ module uim.cakeews;
 class AjaxView : View
 {
 
-    protected $layout = 'ajax';
+    protected $layout = "ajax";
 
 
     function initialize(): void
     {
         super.initialize();
-        this.setResponse(this.getResponse().withType('ajax'));
+        this.setResponse(this.getResponse().withType("ajax"));
     }
 }

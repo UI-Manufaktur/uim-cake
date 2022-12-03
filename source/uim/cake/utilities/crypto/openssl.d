@@ -13,7 +13,7 @@ import uim.cake;
  */
 class OpenSsl {
 
-    protected const string METHOD_AES_256_CBC = 'aes-256-cbc';
+    protected const string METHOD_AES_256_CBC = "aes-256-cbc";
 
     /**
      * Encrypt a value using AES-256.
@@ -50,8 +50,8 @@ class OpenSsl {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
 
-        $iv = mb_substr($cipher, 0, $ivSize, '8bit');
-        $cipher = mb_substr($cipher, $ivSize, null, '8bit');
+        $iv = mb_substr($cipher, 0, $ivSize, "8bit");
+        $cipher = mb_substr($cipher, $ivSize, null, "8bit");
 
         myValue = openssl_decrypt($cipher, $method, myKey, OPENSSL_RAW_DATA, $iv);
         if (myValue === false) {

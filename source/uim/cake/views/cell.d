@@ -32,10 +32,10 @@ abstract class Cell : IEventDispatcher
      *
      * @var string
      */
-    public const TEMPLATE_FOLDER = 'cell';
+    public const TEMPLATE_FOLDER = "cell";
 
     /**
-     * Instance of the View created during rendering. Won't be set until after
+     * Instance of the View created during rendering. Won"t be set until after
      * Cell::__toString()/render() is called.
      *
      * @var \Cake\View\View
@@ -59,21 +59,21 @@ abstract class Cell : IEventDispatcher
     protected $response;
 
     /**
-     * The cell's action to invoke.
+     * The cell"s action to invoke.
      *
      * @var string
      */
     protected $action;
 
     /**
-     * Arguments to pass to cell's action.
+     * Arguments to pass to cell"s action.
      *
      * @var array
      */
     protected $args = [];
 
     /**
-     * List of valid options (constructor's fourth arguments)
+     * List of valid options (constructor"s fourth arguments)
      * Override this property in subclasses to allow
      * which options you want set as properties in your Cell.
      *
@@ -107,16 +107,16 @@ abstract class Cell : IEventDispatcher
         }
         this.request = myRequest;
         this.response = $response;
-        this.modelFactory('Table', [this.getTableLocator(), 'get']);
+        this.modelFactory("Table", [this.getTableLocator(), "get"]);
 
-        this._validCellOptions = array_merge(['action', 'args'], this._validCellOptions);
+        this._validCellOptions = array_merge(["action", "args"], this._validCellOptions);
         foreach (this._validCellOptions as $var) {
             if (isset($cellOptions[$var])) {
                 this.{$var} = $cellOptions[$var];
             }
         }
-        if (!empty($cellOptions['cache'])) {
-            this._cache = $cellOptions['cache'];
+        if (!empty($cellOptions["cache"])) {
+            this._cache = $cellOptions["cache"];
         }
 
         this.initialize();
@@ -157,7 +157,7 @@ abstract class Cell : IEventDispatcher
                 $reflect.invokeArgs(this, this.args);
             } catch (ReflectionException $e) {
                 throw new BadMethodCallException(sprintf(
-                    'Class %s does not have a "%s" method.',
+                    "Class %s does not have a "%s" method.",
                     static::class,
                     this.action
                 ));
@@ -170,13 +170,13 @@ abstract class Cell : IEventDispatcher
             }
 
             myClassName = static::class;
-            myNamePrefix = '\View\Cell\\';
+            myNamePrefix = "\View\Cell\\";
             /** @psalm-suppress PossiblyFalseOperand */
             myName = substr(myClassName, strpos(myClassName, myNamePrefix) + strlen(myNamePrefix));
             myName = substr(myName, 0, -4);
             if (!myBuilder.getTemplatePath()) {
                 myBuilder.setTemplatePath(
-                    static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, myName)
+                    static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . str_replace("\\", DIRECTORY_SEPARATOR, myName)
                 );
             }
             myTemplate = myBuilder.getTemplate();
@@ -188,8 +188,8 @@ abstract class Cell : IEventDispatcher
                 $attributes = $e.getAttributes();
                 throw new MissingCellTemplateException(
                     myName,
-                    $attributes['file'],
-                    $attributes['paths'],
+                    $attributes["file"],
+                    $attributes["paths"],
                     null,
                     $e
                 );
@@ -197,7 +197,7 @@ abstract class Cell : IEventDispatcher
         };
 
         if ($cache) {
-            return Cache::remember($cache['key'], $render, $cache['config']);
+            return Cache::remember($cache["key"], $render, $cache["config"]);
         }
 
         return $render();
@@ -217,12 +217,12 @@ abstract class Cell : IEventDispatcher
         if (empty(this._cache)) {
             return [];
         }
-        myTemplate = myTemplate ?: 'default';
-        myKey = 'cell_' . Inflector::underscore(static::class) . '_' . $action . '_' . myTemplate;
-        myKey = str_replace('\\', '_', myKey);
+        myTemplate = myTemplate ?: "default";
+        myKey = "cell_" . Inflector::underscore(static::class) . "_" . $action . "_" . myTemplate;
+        myKey = str_replace("\\", "_", myKey);
         $default = [
-            'config' => 'default',
-            'key' => myKey,
+            "config" => "default",
+            "key" => myKey,
         ];
         if (this._cache === true) {
             return $default;
@@ -249,16 +249,16 @@ abstract class Cell : IEventDispatcher
             return this.render();
         } catch (Exception $e) {
             trigger_error(sprintf(
-                'Could not render cell - %s [%s, line %d]',
+                "Could not render cell - %s [%s, line %d]",
                 $e.getMessage(),
                 $e.getFile(),
                 $e.getLine()
             ), E_USER_WARNING);
 
-            return '';
+            return "";
         } catch (Error $e) {
             throw new Error(sprintf(
-                'Could not render cell - %s [%s, line %d]',
+                "Could not render cell - %s [%s, line %d]",
                 $e.getMessage(),
                 $e.getFile(),
                 $e.getLine()
@@ -274,11 +274,11 @@ abstract class Cell : IEventDispatcher
     auto __debugInfo(): array
     {
         return [
-            'action' => this.action,
-            'args' => this.args,
-            'request' => this.request,
-            'response' => this.response,
-            'viewBuilder' => this.viewBuilder(),
+            "action" => this.action,
+            "args" => this.args,
+            "request" => this.request,
+            "response" => this.response,
+            "viewBuilder" => this.viewBuilder(),
         ];
     }
 }

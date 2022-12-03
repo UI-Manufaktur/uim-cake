@@ -24,9 +24,9 @@ class FormContext : IContext
      */
     this(array $context) {
         $context += [
-            'entity' => null,
+            "entity" => null,
         ];
-        this._form = $context['entity'];
+        this._form = $context["entity"];
     }
 
     /**
@@ -37,7 +37,7 @@ class FormContext : IContext
      */
     function primaryKey(): array
     {
-        deprecationWarning('`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.');
+        deprecationWarning("`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.");
 
         return [];
     }
@@ -61,8 +61,8 @@ class FormContext : IContext
 
     function val(string myField, array myOptions = []) {
         myOptions += [
-            'default' => null,
-            'schemaDefault' => true,
+            "default" => null,
+            "schemaDefault" => true,
         ];
 
         $val = this._form.getData(myField);
@@ -70,8 +70,8 @@ class FormContext : IContext
             return $val;
         }
 
-        if (myOptions['default'] !== null || !myOptions['schemaDefault']) {
-            return myOptions['default'];
+        if (myOptions["default"] !== null || !myOptions["schemaDefault"]) {
+            return myOptions["default"];
         }
 
         return this._schemaDefault(myField);
@@ -86,7 +86,7 @@ class FormContext : IContext
     protected auto _schemaDefault(string myField) {
         myField = this._form.getSchema().field(myField);
         if (myField) {
-            return myField['default'];
+            return myField["default"];
         }
 
         return null;
@@ -99,7 +99,7 @@ class FormContext : IContext
         if (!$validator.hasField(myField)) {
             return null;
         }
-        if (this.type(myField) !== 'boolean') {
+        if (this.type(myField) !== "boolean") {
             return !$validator.isEmptyAllowed(myField, this.isCreate());
         }
 
@@ -109,7 +109,7 @@ class FormContext : IContext
 
     auto getRequiredMessage(string myField): Nullable!string
     {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
 
         $validator = this._form.getValidator();
         myFieldName = array_pop($parts);
@@ -133,14 +133,14 @@ class FormContext : IContext
             return null;
         }
         foreach ($validator.field(myField).rules() as $rule) {
-            if ($rule.get('rule') === 'maxLength') {
-                return $rule.get('pass')[0];
+            if ($rule.get("rule") === "maxLength") {
+                return $rule.get("pass")[0];
             }
         }
 
         $attributes = this.attributes(myField);
-        if (!empty($attributes['length'])) {
-            return $attributes['length'];
+        if (!empty($attributes["length"])) {
+            return $attributes["length"];
         }
 
         return null;

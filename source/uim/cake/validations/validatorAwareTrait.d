@@ -1,16 +1,7 @@
+module uim.cake.validations;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.0.3
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.validations;
-
-import uim.cakeents\IEventDispatcher;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * A trait that provides methods for building and
@@ -55,19 +46,19 @@ trait ValidatorAwareTrait
      * If a validator has not been set earlier, this method will build a valiator
      * using a method inside your class.
      *
-     * For example, if you wish to create a validation set called 'forSubscription',
+     * For example, if you wish to create a validation set called "forSubscription",
      * you will need to create a method in your Table subclass as follows:
      *
      * ```
      * function validationForSubscription($validator)
      * {
      *     return $validator
-     *         .add('email', 'valid-email', ['rule' => 'email'])
-     *         .add('password', 'valid', ['rule' => 'notBlank'])
-     *         .requirePresence('username');
+     *         .add("email", "valid-email", ["rule" => "email"])
+     *         .add("password", "valid", ["rule" => "notBlank"])
+     *         .requirePresence("username");
      * }
      *
-     * $validator = this.getValidator('forSubscription');
+     * $validator = this.getValidator("forSubscription");
      * ```
      *
      * You can implement the method in `validationDefault` in your Table subclass
@@ -104,24 +95,24 @@ trait ValidatorAwareTrait
      */
     protected auto createValidator(string myName): Validator
     {
-        $method = 'validation' . ucfirst(myName);
+        $method = "validation" . ucfirst(myName);
         if (!this.validationMethodExists($method)) {
-            myMessage = sprintf('The %s::%s() validation method does not exists.', static::class, $method);
+            myMessage = sprintf("The %s::%s() validation method does not exists.", static::class, $method);
             throw new RuntimeException(myMessage);
         }
 
         $validator = new this._validatorClass();
         $validator = this.$method($validator);
         if (this instanceof IEventDispatcher) {
-            myEvent = defined(static::class . '::BUILD_VALIDATOR_EVENT')
+            myEvent = defined(static::class . "::BUILD_VALIDATOR_EVENT")
                 ? static::BUILD_VALIDATOR_EVENT
-                : 'Model.buildValidator';
-            this.dispatchEvent(myEvent, compact('validator', 'name'));
+                : "Model.buildValidator";
+            this.dispatchEvent(myEvent, compact("validator", "name"));
         }
 
         if (!$validator instanceof Validator) {
             throw new RuntimeException(sprintf(
-                'The %s::%s() validation method must return an instance of %s.',
+                "The %s::%s() validation method must return an instance of %s.",
                 static::class,
                 $method,
                 Validator::class
@@ -139,10 +130,10 @@ trait ValidatorAwareTrait
      * ```
      * $validator = new \Cake\Validation\Validator();
      * $validator
-     *     .add('email', 'valid-email', ['rule' => 'email'])
-     *     .add('password', 'valid', ['rule' => 'notBlank'])
-     *     .allowEmpty('bio');
-     * this.setValidator('forSubscription', $validator);
+     *     .add("email", "valid-email", ["rule" => "email"])
+     *     .add("password", "valid", ["rule" => "notBlank"])
+     *     .allowEmpty("bio");
+     * this.setValidator("forSubscription", $validator);
      * ```
      *
      * @param string myName The name of a validator to be set.
@@ -163,7 +154,7 @@ trait ValidatorAwareTrait
      * @return bool
      */
     bool hasValidator(string myName) {
-        $method = 'validation' . ucfirst(myName);
+        $method = "validation" . ucfirst(myName);
         if (this.validationMethodExists($method)) {
             return true;
         }

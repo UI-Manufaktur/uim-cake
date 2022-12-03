@@ -167,7 +167,7 @@ class ViewBuilder : JsonSerializable, Serializable
     mixin(OProperty!("string", "layoutPath"));
 
     /**
-     * Turns on or off UIM's conventional mode of applying layout files.
+     * Turns on or off UIM"s conventional mode of applying layout files.
      * On by default. Setting to off means that layouts will not be
      * automatically applied to rendered views.
      *
@@ -181,7 +181,7 @@ class ViewBuilder : JsonSerializable, Serializable
     }
 
     /**
-     * Turns off UIM's conventional mode of applying layout files.
+     * Turns off UIM"s conventional mode of applying layout files.
      *
      * Setting to off means that layouts will not be automatically applied to
      * rendered views.
@@ -195,7 +195,7 @@ class ViewBuilder : JsonSerializable, Serializable
     }
 
     /**
-     * Returns if UIM's conventional mode of applying layout files is enabled.
+     * Returns if UIM"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      *
      * @return bool
@@ -275,7 +275,7 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     auto setHelpers(array $helpers, bool myMerge = true) {
         if (myMerge) {
-            deprecationWarning('The myMerge param is deprecated, use addHelper()/addHelpers() instead.');
+            deprecationWarning("The myMerge param is deprecated, use addHelper()/addHelpers() instead.");
             $helpers = array_merge(this._helpers, $helpers);
         }
         this._helpers = $helpers;
@@ -484,33 +484,33 @@ class ViewBuilder : JsonSerializable, Serializable
     ): View {
         myClassName = this._className;
         if (myClassName === null) {
-            myClassName = App::className('App', 'View', 'View') ?? View::class;
-        } elseif (myClassName === 'View') {
-            myClassName = App::className(myClassName, 'View');
+            myClassName = App::className("App", "View", "View") ?? View::class;
+        } elseif (myClassName === "View") {
+            myClassName = App::className(myClassName, "View");
         } else {
-            myClassName = App::className(myClassName, 'View', 'View');
+            myClassName = App::className(myClassName, "View", "View");
         }
         if (myClassName === null) {
-            throw new MissingViewException(['class' => this._className]);
+            throw new MissingViewException(["class" => this._className]);
         }
 
         if (!empty($vars)) {
             deprecationWarning(
-                'The $vars argument is deprecated. Use the setVar()/setVars() methods instead.'
+                "The $vars argument is deprecated. Use the setVar()/setVars() methods instead."
             );
         }
 
         myData = [
-            'name' => this._name,
-            'templatePath' => this._templatePath,
-            'template' => this._template,
-            'plugin' => this._plugin,
-            'theme' => this._theme,
-            'layout' => this._layout,
-            'autoLayout' => this._autoLayout,
-            'layoutPath' => this._layoutPath,
-            'helpers' => this._helpers,
-            'viewVars' => $vars + this._vars,
+            "name" => this._name,
+            "templatePath" => this._templatePath,
+            "template" => this._template,
+            "plugin" => this._plugin,
+            "theme" => this._theme,
+            "layout" => this._layout,
+            "autoLayout" => this._autoLayout,
+            "layoutPath" => this._layoutPath,
+            "helpers" => this._helpers,
+            "viewVars" => $vars + this._vars,
         ];
         myData += this._options;
 
@@ -534,8 +534,8 @@ class ViewBuilder : JsonSerializable, Serializable
     function jsonSerialize(): array
     {
         $properties = [
-            '_templatePath', '_template', '_plugin', '_theme', '_layout', '_autoLayout',
-            '_layoutPath', '_name', '_className', '_options', '_helpers', '_vars',
+            "_templatePath", "_template", "_plugin", "_theme", "_layout", "_autoLayout",
+            "_layoutPath", "_name", "_className", "_options", "_helpers", "_vars",
         ];
 
         $array = [];
@@ -544,7 +544,7 @@ class ViewBuilder : JsonSerializable, Serializable
             $array[$property] = this.{$property};
         }
 
-        array_walk_recursive($array['_vars'], [this, '_checkViewVars']);
+        array_walk_recursive($array["_vars"], [this, "_checkViewVars"]);
 
         return array_filter($array, function ($i) {
             return !is_array($i) && strlen((string)$i) || !empty($i);
@@ -571,9 +571,9 @@ class ViewBuilder : JsonSerializable, Serializable
             $item instanceof PDO
         ) {
             throw new RuntimeException(sprintf(
-                'Failed serializing the `%s` %s in the `%s` view var',
+                "Failed serializing the `%s` %s in the `%s` view var",
                 is_resource($item) ? get_resource_type($item) : get_class($item),
-                is_resource($item) ? 'resource' : 'object',
+                is_resource($item) ? "resource" : "object",
                 myKey
             ));
         }

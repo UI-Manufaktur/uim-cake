@@ -15,21 +15,21 @@ class ViewBlock
      *
      * @var string
      */
-    public const OVERRIDE = 'override';
+    public const OVERRIDE = "override";
 
     /**
      * Append content
      *
      * @var string
      */
-    public const APPEND = 'append';
+    public const APPEND = "append";
 
     /**
      * Prepend content
      *
      * @var string
      */
-    public const PREPEND = 'prepend';
+    public const PREPEND = "prepend";
 
     /**
      * Block content. An array of blocks indexed by name.
@@ -54,10 +54,10 @@ class ViewBlock
     protected $_discardActiveBufferOnEnd = false;
 
     /**
-     * Start capturing output for a 'block'
+     * Start capturing output for a "block"
      *
      * Blocks allow you to create slots or blocks of dynamic content in the layout.
-     * view files can implement some or all of a layout's slots.
+     * view files can implement some or all of a layout"s slots.
      *
      * You can end capturing blocks using View::end(). Blocks can be output
      * using View::get();
@@ -72,7 +72,7 @@ class ViewBlock
     function start(string myName, string myMode = ViewBlock::OVERRIDE): void
     {
         if (array_key_exists(myName, this._active)) {
-            throw new CakeException(sprintf("A view block with the name '%s' is already/still open.", myName));
+            throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", myName));
         }
         this._active[myName] = myMode;
         ob_start();
@@ -132,7 +132,7 @@ class ViewBlock
         }
 
         if (!isset(this._blocks[myName])) {
-            this._blocks[myName] = '';
+            this._blocks[myName] = "";
         }
         if (myMode === ViewBlock::PREPEND) {
             this._blocks[myName] = myValue . this._blocks[myName];
@@ -162,7 +162,7 @@ class ViewBlock
      * @param string $default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    auto get(string myName, string $default = ''): string
+    auto get(string myName, string $default = ""): string
     {
         return this._blocks[myName] ?? $default;
     }

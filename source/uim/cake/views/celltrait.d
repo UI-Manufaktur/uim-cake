@@ -16,17 +16,17 @@ trait CellTrait
      *
      * ```
      * // Taxonomy\View\Cell\TagCloudCell::smallList()
-     * $cell = this.cell('Taxonomy.TagCloud::smallList', ['limit' => 10]);
+     * $cell = this.cell("Taxonomy.TagCloud::smallList", ["limit" => 10]);
      *
      * // App\View\Cell\TagCloudCell::smallList()
-     * $cell = this.cell('TagCloud::smallList', ['limit' => 10]);
+     * $cell = this.cell("TagCloud::smallList", ["limit" => 10]);
      * ```
      *
      * The `display` action will be used by default when no action is provided:
      *
      * ```
      * // Taxonomy\View\Cell\TagCloudCell::display()
-     * $cell = this.cell('Taxonomy.TagCloud');
+     * $cell = this.cell("Taxonomy.TagCloud");
      * ```
      *
      * Cells are not rendered until they are echoed.
@@ -34,32 +34,32 @@ trait CellTrait
      * @param string $cell You must indicate cell name, and optionally a cell action. e.g.: `TagCloud::smallList` will
      *  invoke `View\Cell\TagCloudCell::smallList()`, `display` action will be invoked by default when none is provided.
      * @param array myData Additional arguments for cell method. e.g.:
-     *    `cell('TagCloud::smallList', ['a1' => 'v1', 'a2' => 'v2'])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
-     * @param array<string, mixed> myOptions Options for Cell's constructor
+     *    `cell("TagCloud::smallList", ["a1" => "v1", "a2" => "v2"])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
+     * @param array<string, mixed> myOptions Options for Cell"s constructor
      * @return \Cake\View\Cell The cell instance
      * @throws \Cake\View\Exception\MissingCellException If Cell class was not found.
      */
     protected auto cell(string $cell, array myData = [], array myOptions = []): Cell
     {
-        $parts = explode('::', $cell);
+        $parts = explode("::", $cell);
 
         if (count($parts) === 2) {
             [myPluginAndCell, $action] = [$parts[0], $parts[1]];
         } else {
-            [myPluginAndCell, $action] = [$parts[0], 'display'];
+            [myPluginAndCell, $action] = [$parts[0], "display"];
         }
 
         [myPlugin] = pluginSplit(myPluginAndCell);
-        myClassName = App::className(myPluginAndCell, 'View/Cell', 'Cell');
+        myClassName = App::className(myPluginAndCell, "View/Cell", "Cell");
 
         if (!myClassName) {
-            throw new MissingCellException(['className' => myPluginAndCell . 'Cell']);
+            throw new MissingCellException(["className" => myPluginAndCell . "Cell"]);
         }
 
         if (!empty(myData)) {
             myData = array_values(myData);
         }
-        myOptions = ['action' => $action, 'args' => myData] + myOptions;
+        myOptions = ["action" => $action, "args" => myData] + myOptions;
         $cell = this._createCell(myClassName, $action, myPlugin, myOptions);
 
         return $cell;
@@ -101,7 +101,7 @@ trait CellTrait
             return $instance;
         }
 
-        if (method_exists(this, 'viewBuilder')) {
+        if (method_exists(this, "viewBuilder")) {
             myBuilder.setTheme(this.viewBuilder().getTheme());
 
             if (this.viewBuilder().getClassName() !== null) {
