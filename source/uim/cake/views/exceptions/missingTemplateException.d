@@ -37,7 +37,7 @@ class MissingTemplateException : CakeException
     /**
      * @var string
      */
-    protected myType = 'Template';
+    protected myType = "Template";
 
     /**
      * Constructor
@@ -88,8 +88,8 @@ class MissingTemplateException : CakeException
     auto getAttributes(): array
     {
         return [
-            'file' => this.filename,
-            'paths' => this.paths,
+            "file" => this.filename,
+            "paths" => this.paths,
         ];
     }
 }

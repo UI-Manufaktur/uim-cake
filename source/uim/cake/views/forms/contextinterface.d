@@ -8,7 +8,7 @@ interface IContext
     /**
      * @var array<string>
      */
-    public const VALID_ATTRIBUTES = ['length', 'precision', 'comment', 'null', 'default'];
+    public const VALID_ATTRIBUTES = ["length", "precision", "comment", "null", "default"];
 
     /**
      * Get the fields used in the context as a primary key.
@@ -42,7 +42,7 @@ interface IContext
      *   - `default`: Default value to return if no value found in data or
      *     context record.
      *   - `schemaDefault`: Boolean indicating whether default value from
-     *     context's schema should be used if it's not explicitly provided.
+     *     context"s schema should be used if it"s not explicitly provided.
      *
      * @param string myField A dot separated path to the field a value
      * @param array<string, mixed> myOptions Options.
@@ -52,9 +52,9 @@ interface IContext
     function val(string myField, array myOptions = []);
 
     /**
-     * Check if a given field is 'required'.
+     * Check if a given field is "required".
      *
-     * In this context class, this is simply defined by the 'required' array.
+     * In this context class, this is simply defined by the "required" array.
      *
      * @param string myField A dot separated path to check required-ness for.
      * @return bool|null

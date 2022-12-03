@@ -1,32 +1,13 @@
+module uim.cakeews\Exception;
 
+@safe:
+import uim.cake;;
 
-/**
-
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @since         3.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeews\Exception;
-
-use Throwable;
-
-/**
- * Used when a template file for a cell cannot be found.
- */
-class MissingCellTemplateException : MissingTemplateException
-{
-    /**
-     * @var string
-     */
+// Used when a template file for a cell cannot be found.
+class MissingCellTemplateException : MissingTemplateException {
     protected string myName;
 
-    /**
-     * @var string
-     */
-    protected myType = 'Cell template';
+    protected string myType = "Cell template";
 
     /**
      * Constructor
@@ -58,9 +39,9 @@ class MissingCellTemplateException : MissingTemplateException
     auto getAttributes(): array
     {
         return [
-            'name' => this.name,
-            'file' => this.file,
-            'paths' => this.paths,
+            "name" => this.name,
+            "file" => this.file,
+            "paths" => this.paths,
         ];
     }
 }

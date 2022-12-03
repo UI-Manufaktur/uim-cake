@@ -28,8 +28,8 @@ use Traversable;
  *   If this is null the table name(s) will be determined using naming
  *   conventions.
  * - `validator` Either the Validation\Validator to use, or the name of the
- *   validation method to call on the table object. For example 'default'.
- *   Defaults to 'default'. Can be an array of table alias=>validators when
+ *   validation method to call on the table object. For example "default".
+ *   Defaults to "default". Can be an array of table alias=>validators when
  *   dealing with associated forms.
  */
 class EntityContext : IContext
@@ -79,9 +79,9 @@ class EntityContext : IContext
      */
     this(array $context) {
         $context += [
-            'entity' => null,
-            'table' => null,
-            'validator' => [],
+            "entity" => null,
+            "table" => null,
+            "validator" => [],
         ];
         this._context = $context;
         this._prepare();
@@ -105,9 +105,9 @@ class EntityContext : IContext
     protected auto _prepare(): void
     {
         /** @var \Cake\ORM\Table|null myTable */
-        myTable = this._context['table'];
+        myTable = this._context["table"];
         /** @var \Cake\Datasource\IEntity|iterable $entity */
-        $entity = this._context['entity'];
+        $entity = this._context["entity"];
         if (empty(myTable)) {
             if (is_iterable($entity)) {
                 foreach ($entity as $e) {
@@ -126,13 +126,13 @@ class EntityContext : IContext
                 myTable = Inflector::pluralize($entityClass);
             }
         }
-        if (is_string(myTable) && myTable !== '') {
+        if (is_string(myTable) && myTable !== "") {
             myTable = this.getTableLocator().get(myTable);
         }
 
         if (!(myTable instanceof Table)) {
             throw new RuntimeException(
-                'Unable to find table class for current entity.'
+                "Unable to find table class for current entity."
             );
         }
         this._isCollection = (
@@ -147,14 +147,14 @@ class EntityContext : IContext
     /**
      * Get the primary key data for the context.
      *
-     * Gets the primary key columns from the root entity's schema.
+     * Gets the primary key columns from the root entity"s schema.
      *
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
     function primaryKey(): array
     {
-        deprecationWarning('`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.');
+        deprecationWarning("`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.");
 
         return (array)this._tables[this._rootName].getPrimaryKey();
     }
@@ -162,7 +162,7 @@ class EntityContext : IContext
     /**
      * Get the primary key data for the context.
      *
-     * Gets the primary key columns from the root entity's schema.
+     * Gets the primary key columns from the root entity"s schema.
      *
      * @return array<string>
      */
@@ -173,7 +173,7 @@ class EntityContext : IContext
 
 
     bool isPrimaryKey(string myField) {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
         myTable = this._getTable($parts);
         if (!myTable) {
             return false;
@@ -186,7 +186,7 @@ class EntityContext : IContext
     /**
      * Check whether this form is a create or update.
      *
-     * If the context is for a single entity, the entity's isNew() method will
+     * If the context is for a single entity, the entity"s isNew() method will
      * be used. If isNew() returns null, a create operation will be assumed.
      *
      * If the context is for a collection or array the first object in the
@@ -195,7 +195,7 @@ class EntityContext : IContext
      * @return bool
      */
     bool isCreate() {
-        $entity = this._context['entity'];
+        $entity = this._context["entity"];
         if (is_iterable($entity)) {
             foreach ($entity as $e) {
                 $entity = $e;
@@ -220,22 +220,22 @@ class EntityContext : IContext
      *   - `default`: Default value to return if no value found in data or
      *     entity.
      *   - `schemaDefault`: Boolean indicating whether default value from table
-     *     schema should be used if it's not explicitly provided.
+     *     schema should be used if it"s not explicitly provided.
      * @return mixed The value of the field or null on a miss.
      */
     function val(string myField, array myOptions = []) {
         myOptions += [
-            'default' => null,
-            'schemaDefault' => true,
+            "default" => null,
+            "schemaDefault" => true,
         ];
 
-        if (empty(this._context['entity'])) {
-            return myOptions['default'];
+        if (empty(this._context["entity"])) {
+            return myOptions["default"];
         }
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
         $entity = this.entity($parts);
 
-        if ($entity && end($parts) === '_ids') {
+        if ($entity && end($parts) === "_ids") {
             return this._extractMultiple($entity, $parts);
         }
 
@@ -254,11 +254,11 @@ class EntityContext : IContext
                 return $val;
             }
             if (
-                myOptions['default'] !== null
-                || !myOptions['schemaDefault']
+                myOptions["default"] !== null
+                || !myOptions["schemaDefault"]
                 || !$entity.isNew()
             ) {
-                return myOptions['default'];
+                return myOptions["default"];
             }
 
             return this._schemaDefault($parts);
@@ -266,7 +266,7 @@ class EntityContext : IContext
         if (is_array($entity) || $entity instanceof ArrayAccess) {
             myKey = array_pop($parts);
 
-            return $entity[myKey] ?? myOptions['default'];
+            return $entity[myKey] ?? myOptions["default"];
         }
 
         return null;
@@ -306,7 +306,7 @@ class EntityContext : IContext
             return null;
         }
         myTable = this._getTable(myPath, false);
-        $primary = myTable ? (array)myTable.getPrimaryKey() : ['id'];
+        $primary = myTable ? (array)myTable.getPrimaryKey() : ["id"];
 
         return (new Collection(myValues)).extract($primary[0]).toArray();
     }
@@ -326,14 +326,14 @@ class EntityContext : IContext
      */
     function entity(?array myPath = null) {
         if (myPath === null) {
-            return this._context['entity'];
+            return this._context["entity"];
         }
 
         $oneElement = count(myPath) === 1;
         if ($oneElement && this._isCollection) {
             return null;
         }
-        $entity = this._context['entity'];
+        $entity = this._context["entity"];
         if ($oneElement) {
             return $entity;
         }
@@ -348,7 +348,7 @@ class EntityContext : IContext
             $prop = myPath[$i];
             $next = this._getProp($entity, $prop);
             $isLast = ($i === $last);
-            if (!$isLast && $next === null && $prop !== '_ids') {
+            if (!$isLast && $next === null && $prop !== "_ids") {
                 myTable = this._getTable(myPath);
                 if (myTable) {
                     return myTable.newEmptyEntity();
@@ -365,8 +365,8 @@ class EntityContext : IContext
             $entity = $next;
         }
         throw new RuntimeException(sprintf(
-            'Unable to fetch property "%s"',
-            implode('.', myPath)
+            "Unable to fetch property "%s"",
+            implode(".", myPath)
         ));
     }
 
@@ -384,17 +384,17 @@ class EntityContext : IContext
      */
     protected auto leafEntity(myPath = null) {
         if (myPath === null) {
-            return this._context['entity'];
+            return this._context["entity"];
         }
 
         $oneElement = count(myPath) === 1;
         if ($oneElement && this._isCollection) {
             throw new RuntimeException(sprintf(
-                'Unable to fetch property "%s"',
-                implode('.', myPath)
+                "Unable to fetch property "%s"",
+                implode(".", myPath)
             ));
         }
-        $entity = this._context['entity'];
+        $entity = this._context["entity"];
         if ($oneElement) {
             return [$entity, myPath];
         }
@@ -431,8 +431,8 @@ class EntityContext : IContext
             $entity = $next;
         }
         throw new RuntimeException(sprintf(
-            'Unable to fetch property "%s"',
-            implode('.', myPath)
+            "Unable to fetch property "%s"",
+            implode(".", myPath)
         ));
     }
 
@@ -471,7 +471,7 @@ class EntityContext : IContext
      */
     function isRequired(string myField): ?bool
     {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
         $entity = this.entity($parts);
 
         $isNew = true;
@@ -484,7 +484,7 @@ class EntityContext : IContext
         if (!$validator.hasField(myFieldName)) {
             return null;
         }
-        if (this.type(myField) !== 'boolean') {
+        if (this.type(myField) !== "boolean") {
             return !$validator.isEmptyAllowed(myFieldName, $isNew);
         }
 
@@ -494,7 +494,7 @@ class EntityContext : IContext
 
     auto getRequiredMessage(string myField): Nullable!string
     {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
 
         $validator = this._getValidator($parts);
         myFieldName = array_pop($parts);
@@ -518,21 +518,21 @@ class EntityContext : IContext
      */
     auto getMaxLength(string myField): Nullable!int
     {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
         $validator = this._getValidator($parts);
         myFieldName = array_pop($parts);
 
         if ($validator.hasField(myFieldName)) {
             foreach ($validator.field(myFieldName).rules() as $rule) {
-                if ($rule.get('rule') === 'maxLength') {
-                    return $rule.get('pass')[0];
+                if ($rule.get("rule") === "maxLength") {
+                    return $rule.get("pass")[0];
                 }
             }
         }
 
         $attributes = this.attributes(myField);
-        if (!empty($attributes['length'])) {
-            return (int)$attributes['length'];
+        if (!empty($attributes["length"])) {
+            return (int)$attributes["length"];
         }
 
         return null;
@@ -547,7 +547,7 @@ class EntityContext : IContext
      */
     function fieldNames(): array
     {
-        myTable = this._getTable('0');
+        myTable = this._getTable("0");
         if (!myTable) {
             return [];
         }
@@ -568,12 +568,12 @@ class EntityContext : IContext
         myKeyParts = array_filter(array_slice($parts, 0, -1), function ($part) {
             return !is_numeric($part);
         });
-        myKey = implode('.', myKeyParts);
+        myKey = implode(".", myKeyParts);
         $entity = this.entity($parts) ?: null;
 
         if (isset(this._validator[myKey])) {
             if (is_object($entity)) {
-                this._validator[myKey].setProvider('entity', $entity);
+                this._validator[myKey].setProvider("entity", $entity);
             }
 
             return this._validator[myKey];
@@ -581,21 +581,21 @@ class EntityContext : IContext
 
         myTable = this._getTable($parts);
         if (!myTable) {
-            throw new RuntimeException('Validator not found: ' . myKey);
+            throw new RuntimeException("Validator not found: " . myKey);
         }
         myAlias = myTable.getAlias();
 
-        $method = 'default';
-        if (is_string(this._context['validator'])) {
-            $method = this._context['validator'];
-        } elseif (isset(this._context['validator'][myAlias])) {
-            $method = this._context['validator'][myAlias];
+        $method = "default";
+        if (is_string(this._context["validator"])) {
+            $method = this._context["validator"];
+        } elseif (isset(this._context["validator"][myAlias])) {
+            $method = this._context["validator"][myAlias];
         }
 
         $validator = myTable.getValidator($method);
 
         if (is_object($entity)) {
-            $validator.setProvider('entity', $entity);
+            $validator.setProvider("entity", $entity);
         }
 
         return this._validator[myKey] = $validator;
@@ -619,7 +619,7 @@ class EntityContext : IContext
             return !is_numeric($part);
         }), 0, -1);
 
-        myPath = implode('.', $normalized);
+        myPath = implode(".", $normalized);
         if (isset(this._tables[myPath])) {
             return this._tables[myPath];
         }
@@ -631,7 +631,7 @@ class EntityContext : IContext
         myTable = this._tables[this._rootName];
         $assoc = null;
         foreach ($normalized as $part) {
-            if ($part === '_joinData') {
+            if ($part === "_joinData") {
                 if ($assoc !== null) {
                     myTable = $assoc.junction();
                     $assoc = null;
@@ -665,7 +665,7 @@ class EntityContext : IContext
      */
     function type(string myField): Nullable!string
     {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
         myTable = this._getTable($parts);
         if (!myTable) {
             return null;
@@ -682,7 +682,7 @@ class EntityContext : IContext
      */
     function attributes(string myField): array
     {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
         myTable = this._getTable($parts);
         if (!myTable) {
             return [];
@@ -712,7 +712,7 @@ class EntityContext : IContext
      */
     function error(string myField): array
     {
-        $parts = explode('.', myField);
+        $parts = explode(".", myField);
         try {
             [$entity, $remainingParts] = this.leafEntity($parts);
         } catch (RuntimeException $e) {
@@ -723,7 +723,7 @@ class EntityContext : IContext
         }
 
         if ($entity instanceof IEntity) {
-            myError = $entity.getError(implode('.', $remainingParts));
+            myError = $entity.getError(implode(".", $remainingParts));
             if (myError) {
                 return myError;
             }
