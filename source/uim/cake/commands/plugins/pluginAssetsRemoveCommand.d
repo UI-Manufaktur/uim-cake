@@ -34,7 +34,7 @@ class PluginAssetsRemoveCommand : Command {
         myName = $args.getArgument("name");
         myPlugins = this._list(myName);
 
-        foreach (myPlugins as myPlugin => myConfig) {
+        foreach (myPlugins as myPlugin: myConfig) {
             this.io.out();
             this.io.out("For plugin: " . myPlugin);
             this.io.hr();

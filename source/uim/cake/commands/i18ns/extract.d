@@ -360,8 +360,8 @@ class I18nExtractCommand : Command {
             "help":"Extract messages from the CakePHP core libraries.",
             "choices":["yes", "no"],
 =======
-            "help" => "Extract messages from the UIM core libraries.",
-            "choices" => ["yes", "no"],
+            "help": "Extract messages from the UIM core libraries.",
+            "choices": ["yes", "no"],
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
         ]).addOption("no-location", [
             "boolean":true,
@@ -419,7 +419,7 @@ class I18nExtractCommand : Command {
                 }
                 unset($allTokens);
 
-                foreach ($functions as $functionName => $map) {
+                foreach ($functions as $functionName: $map) {
                     this._parse($io, $functionName, $map);
                 }
             }
@@ -507,16 +507,16 @@ class I18nExtractCommand : Command {
             return strlen($a) - strlen($b);
         });
 
-        foreach (this._translations as $domain => $translations) {
-            foreach ($translations as $msgid => $contexts) {
-                foreach ($contexts as $context => $details) {
+        foreach (this._translations as $domain: $translations) {
+            foreach ($translations as $msgid: $contexts) {
+                foreach ($contexts as $context: $details) {
                     $plural = $details["msgid_plural"];
                     myfiles = $details["references"];
                     $header = "";
 
                     if (!$args.getOption("no-location")) {
                         $occurrences = [];
-                        foreach (myfiles as myfile => $lines) {
+                        foreach (myfiles as myfile: $lines) {
                             $lines = array_unique($lines);
                             foreach ($lines as $line) {
                                 $occurrences[] = myfile . ":" . $line;
@@ -582,10 +582,10 @@ class I18nExtractCommand : Command {
         if ($args.getOption("overwrite")) {
             $overwriteAll = true;
         }
-        foreach (this._storage as $domain => $sentences) {
+        foreach (this._storage as $domain: $sentences) {
             $output = this._writeHeader($domain);
             $headerLength = strlen($output);
-            foreach ($sentences as $sentence => $header) {
+            foreach ($sentences as $sentence: $header) {
                 $output .= $header . $sentence;
             }
 

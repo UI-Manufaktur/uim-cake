@@ -44,7 +44,7 @@ class CompletionCommand : Command : ICommandCollectionAware
             "fuzzy":"Does nothing. Only for backwards compatibility",
         ];
         myModeHelp = "";
-        foreach (myModes as myKey => $help) {
+        foreach (myModes as myKey: $help) {
             myModeHelp .= "- <info>{myKey}</info> {$help}\n";
         }
 
@@ -108,7 +108,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      */
     protected int getCommands(Arguments $args, ConsoleIo $io) {
         myOptions = [];
-        foreach (this.commands as myKey => myValue) {
+        foreach (this.commands as myKey: myValue) {
             $parts = explode(" ", myKey);
             myOptions[] = $parts[0];
         }
@@ -132,7 +132,7 @@ class CompletionCommand : Command : ICommandCollectionAware
         }
 
         myOptions = [];
-        foreach (this.commands as myKey => myValue) {
+        foreach (this.commands as myKey: myValue) {
             $parts = explode(" ", myKey);
             if ($parts[0] !== myName) {
                 continue;
@@ -211,7 +211,7 @@ class CompletionCommand : Command : ICommandCollectionAware
         $subcommand = $args.getArgument("subcommand");
 
         myOptions = [];
-        foreach (this.commands as myKey => myValue) {
+        foreach (this.commands as myKey: myValue) {
             $parts = explode(" ", myKey);
             if ($parts[0] !== myName) {
                 continue;
@@ -244,7 +244,7 @@ class CompletionCommand : Command : ICommandCollectionAware
             }
 
             if ($parser) {
-                foreach ($parser.options() as myName => $option) {
+                foreach ($parser.options() as myName: $option) {
                     myOptions[] = "--myName";
                     $short = $option.short();
                     if ($short) {

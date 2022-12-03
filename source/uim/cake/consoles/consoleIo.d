@@ -294,7 +294,7 @@ class ConsoleIo
      */
     protected auto wrapMessageWithType(string myMessageType, myMessage) {
         if (is_array(myMessage)) {
-            foreach (myMessage as $k => $v) {
+            foreach (myMessage as $k: $v) {
                 myMessage[$k] = "<{myMessageType}>{$v}</{myMessageType}>";
             }
         } else {

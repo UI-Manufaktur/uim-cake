@@ -49,7 +49,7 @@ class SortIterator : Collection
 
         $callback = this._propertyExtractor($callback);
         myResults = [];
-        foreach (myItems as myKey => $val) {
+        foreach (myItems as myKey: $val) {
             $val = $callback($val);
             if ($val instanceof IDateTime && myType === \SORT_NUMERIC) {
                 $val = $val.format("U");

@@ -72,7 +72,7 @@ class ReplaceIterator : Collection
         $callback = this._callback;
         $res = [];
 
-        foreach ($iterator as $k => $v) {
+        foreach ($iterator as $k: $v) {
             $res[$k] = $callback($v, $k, $iterator);
         }
 

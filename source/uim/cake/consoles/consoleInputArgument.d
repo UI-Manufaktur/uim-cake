@@ -49,7 +49,7 @@ class ConsoleInputArgument
      */
     this(myName, $help = "", $required = false, $choices = []) {
         if (is_array(myName) && isset(myName["name"])) {
-            foreach (myName as myKey => myValue) {
+            foreach (myName as myKey: myValue) {
                 this.{"_" . myKey} = myValue;
             }
         } else {
