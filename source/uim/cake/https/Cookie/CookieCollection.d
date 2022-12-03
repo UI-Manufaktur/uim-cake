@@ -81,7 +81,7 @@ class CookieCollection : IteratorAggregate, Countable
     static function createFromServerRequest(IServerRequest myRequest) {
         myData = myRequest.getCookieParams();
         $cookies = [];
-        foreach (myData as myName => myValue) {
+        foreach (myData as myName: myValue) {
             $cookies[] = new Cookie(myName, myValue);
         }
 
@@ -164,7 +164,7 @@ class CookieCollection : IteratorAggregate, Countable
     function remove(string myName) {
         $new = clone this;
         myKey = mb_strtolower(myName);
-        foreach ($new.cookies as $i => $cookie) {
+        foreach ($new.cookies as $i: $cookie) {
             if (mb_strtolower($cookie.getName()) === myKey) {
                 unset($new.cookies[$i]);
             }
@@ -182,7 +182,7 @@ class CookieCollection : IteratorAggregate, Countable
      */
     protected auto checkCookies(array $cookies): void
     {
-        foreach ($cookies as $index => $cookie) {
+        foreach ($cookies as $index: $cookie) {
             if (!$cookie instanceof CookieInterface) {
                 throw new InvalidArgumentException(
                     sprintf(
@@ -228,7 +228,7 @@ class CookieCollection : IteratorAggregate, Countable
         );
         $cookies = array_merge($cookies, $extraCookies);
         $cookiePairs = [];
-        foreach ($cookies as myKey => myValue) {
+        foreach ($cookies as myKey: myValue) {
             $cookie = sprintf("%s=%s", rawurlencode(myKey), rawurlencode(myValue));
             $size = strlen($cookie);
             if ($size > 4096) {
@@ -324,7 +324,7 @@ class CookieCollection : IteratorAggregate, Countable
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         $hostPattern = "/" . preg_quote($host, "/") . "$/";
 
-        foreach (this.cookies as $i => $cookie) {
+        foreach (this.cookies as $i: $cookie) {
             if (!$cookie.isExpired($time)) {
                 continue;
             }

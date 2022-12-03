@@ -306,7 +306,7 @@ class Session
             return;
         }
 
-        foreach (myOptions as $setting => myValue) {
+        foreach (myOptions as $setting: myValue) {
             if (ini_set($setting, (string)myValue) === false) {
                 throw new RuntimeException(
                     sprintf("Unable to configure the session, setting %s failed.", $setting)
@@ -484,11 +484,11 @@ class Session
         }
 
         if (!is_array(myName)) {
-            myName = [myName => myValue];
+            myName = [myName: myValue];
         }
 
         myData = $_SESSION ?? [];
-        foreach (myName as myKey => $val) {
+        foreach (myName as myKey: $val) {
             myData = Hash::insert(myData, myKey, $val);
         }
 
@@ -534,20 +534,20 @@ class Session
     /**
      * Used to write new data to _SESSION, since PHP doesn"t like us setting the _SESSION var itself.
      *
-     * @param array $old Set of old variables => values
-     * @param array $new New set of variable => value
+     * @param array $old Set of old variables: values
+     * @param array $new New set of variable: value
      * @return void
      */
     protected auto _overwrite(array &$old, array $new): void
     {
         if (!empty($old)) {
-            foreach ($old as myKey => $var) {
+            foreach ($old as myKey: $var) {
                 if (!isset($new[myKey])) {
                     unset($old[myKey]);
                 }
             }
         }
-        foreach ($new as myKey => $var) {
+        foreach ($new as myKey: $var) {
             $old[myKey] = $var;
         }
     }

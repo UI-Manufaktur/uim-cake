@@ -31,7 +31,7 @@ class Schema
      * @return this
      */
     function addFields(array myFields) {
-        foreach (myFields as myName => $attrs) {
+        foreach (myFields as myName: $attrs) {
             this.addField(myName, $attrs);
         }
 

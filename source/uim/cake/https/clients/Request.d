@@ -33,8 +33,8 @@ class Request : Message : RequestInterface
             "Connection":"close",
             "User-Agent":ini_get("user_agent") ?: "CakePHP",
 =======
-            "Connection" => "close",
-            "User-Agent" => ini_get("user_agent") ?: "UIM",
+            "Connection": "close",
+            "User-Agent": ini_get("user_agent") ?: "UIM",
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
         ];
         this.addHeaders($headers);
@@ -55,7 +55,7 @@ class Request : Message : RequestInterface
      */
     protected auto addHeaders(array $headers): void
     {
-        foreach ($headers as myKey => $val) {
+        foreach ($headers as myKey: $val) {
             $normalized = strtolower(myKey);
             this.headers[myKey] = (array)$val;
             this.headerNames[$normalized] = myKey;

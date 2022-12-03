@@ -90,13 +90,13 @@ class Stream : AdapterInterface
     function createResponses(array $headers, string myContents): array
     {
         $indexes = $responses = [];
-        foreach ($headers as $i => $header) {
+        foreach ($headers as $i: $header) {
             if (strtoupper(substr($header, 0, 5)) === "HTTP/") {
                 $indexes[] = $i;
             }
         }
         $last = count($indexes) - 1;
-        foreach ($indexes as $i => $start) {
+        foreach ($indexes as $i: $start) {
             /** @psalm-suppress InvalidOperand */
             $end = isset($indexes[$i + 1]) ? $indexes[$i + 1] - $start : null;
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -140,7 +140,7 @@ class Stream : AdapterInterface
      */
     protected void _buildHeaders(RequestInterface myRequest, array myOptions) {
         $headers = [];
-        foreach (myRequest.getHeaders() as myName => myValues) {
+        foreach (myRequest.getHeaders() as myName: myValues) {
             $headers[] = sprintf("%s: %s", myName, implode(", ", myValues));
         }
         this._contextOptions["header"] = implode("\r\n", $headers);

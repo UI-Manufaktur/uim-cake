@@ -78,16 +78,16 @@ class Curl : AdapterInterface
     function buildOptions(RequestInterface myRequest, array myOptions): array
     {
         $headers = [];
-        foreach (myRequest.getHeaders() as myKey => myValues) {
+        foreach (myRequest.getHeaders() as myKey: myValues) {
             $headers[] = myKey . ": " . implode(", ", myValues);
         }
 
         $out = [
-            CURLOPT_URL => (string)myRequest.getUri(),
-            CURLOPT_HTTP_VERSION => this.getProtocolVersion(myRequest),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER => true,
-            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_URL: (string)myRequest.getUri(),
+            CURLOPT_HTTP_VERSION: this.getProtocolVersion(myRequest),
+            CURLOPT_RETURNTRANSFER: true,
+            CURLOPT_HEADER: true,
+            CURLOPT_HTTPHEADER: $headers,
         ];
         switch (myRequest.getMethod()) {
             case Request::METHOD_GET:
@@ -134,7 +134,7 @@ class Curl : AdapterInterface
             "ssl_local_cert":CURLOPT_SSLCERT,
             "ssl_passphrase":CURLOPT_SSLCERTPASSWD,
         ];
-        foreach ($optionMap as $option => $curlOpt) {
+        foreach ($optionMap as $option: $curlOpt) {
             if (isset(myOptions[$option])) {
                 $out[$curlOpt] = myOptions[$option];
             }
@@ -148,7 +148,7 @@ class Curl : AdapterInterface
         }
         if (isset(myOptions["curl"]) && is_array(myOptions["curl"])) {
             // Can"t use array_merge() because keys will be re-ordered.
-            foreach (myOptions["curl"] as myKey => myValue) {
+            foreach (myOptions["curl"] as myKey: myValue) {
                 $out[myKey] = myValue;
             }
         }

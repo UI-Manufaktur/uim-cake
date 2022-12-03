@@ -75,14 +75,14 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             "session":$session,
             "input":$server["CAKEPHP_INPUT"] ?? null,
 =======
-            "environment" => $server,
-            "uri" => $uri,
-            "cookies" => $cookies ?: $_COOKIE,
-            "query" => myQuery ?: $_GET,
-            "webroot" => $uri.webroot,
-            "base" => $uri.base,
-            "session" => $session,
-            "input" => $server["UIM_INPUT"] ?? null,
+            "environment": $server,
+            "uri": $uri,
+            "cookies": $cookies ?: $_COOKIE,
+            "query": myQuery ?: $_GET,
+            "webroot": $uri.webroot,
+            "base": $uri.base,
+            "session": $session,
+            "input": $server["UIM_INPUT"] ?? null,
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
         ]);
 
@@ -160,7 +160,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         } else {
             // Make a flat map that can be inserted into body for BC.
             myfileMap = Hash::flatten(myfiles);
-            foreach (myfileMap as myKey => myfile) {
+            foreach (myfileMap as myKey: myfile) {
                 myError = myfile.getError();
                 $tmpName = "";
                 if (myError === UPLOAD_ERR_OK) {

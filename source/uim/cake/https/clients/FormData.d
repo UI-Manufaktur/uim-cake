@@ -104,7 +104,7 @@ class FormData : Countable
      * @return this
      */
     function addMany(array myData) {
-        foreach (myData as myName => myValue) {
+        foreach (myData as myName: myValue) {
             this.add(myName, myValue);
         }
 
@@ -159,7 +159,7 @@ class FormData : Countable
      */
     function addRecursive(string myName, myValue): void
     {
-        foreach (myValue as myKey => myValue) {
+        foreach (myValue as myKey: myValue) {
             myKey = myName . "[" . myKey . "]";
             this.add(myKey, myValue);
         }

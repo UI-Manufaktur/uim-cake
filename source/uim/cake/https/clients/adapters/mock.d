@@ -60,7 +60,7 @@ class Mock : AdapterInterface
         $method = myRequest.getMethod();
         myRequestUri = (string)myRequest.getUri();
 
-        foreach (this.responses as $index => $mock) {
+        foreach (this.responses as $index: $mock) {
             if ($method !== $mock["request"].getMethod()) {
                 continue;
             }

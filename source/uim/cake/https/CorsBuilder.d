@@ -73,7 +73,7 @@ class CorsBuilder
         }
 
         if (isset(this._headers["Access-Control-Allow-Origin"])) {
-            foreach (this._headers as myKey => myValue) {
+            foreach (this._headers as myKey: myValue) {
                 $response = $response.withHeader(myKey, myValue);
             }
         }

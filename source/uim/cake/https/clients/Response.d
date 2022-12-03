@@ -415,7 +415,7 @@ class Response : Message : IResponse
     protected auto _getHeaders(): array
     {
         $out = [];
-        foreach (this.headers as myKey => myValues) {
+        foreach (this.headers as myKey: myValues) {
             $out[myKey] = implode(",", myValues);
         }
 

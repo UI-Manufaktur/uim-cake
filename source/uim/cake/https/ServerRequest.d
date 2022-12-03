@@ -538,7 +538,7 @@ class ServerRequest : IServerRequest
      * @return bool Whether the request is the type you are checking.
      */
     protected bool _headerDetector(array $detect) {
-        foreach ($detect["header"] as $header => myValue) {
+        foreach ($detect["header"] as $header: myValue) {
             $header = this.getEnv("http_" . $header);
             if ($header !== null) {
                 if (!is_string(myValue) && !is_bool(myValue) && is_callable(myValue)) {
@@ -737,7 +737,7 @@ class ServerRequest : IServerRequest
     auto getHeaders(): array
     {
         $headers = [];
-        foreach (this._environment as myKey => myValue) {
+        foreach (this._environment as myKey: myValue) {
             myName = null;
             if (strpos(myKey, "HTTP_") === 0) {
                 myName = substr(myKey, 5);
@@ -1061,7 +1061,7 @@ class ServerRequest : IServerRequest
      * Generally you want to use {@link \Cake\Http\ServerRequest::accepts()} to get a simple list
      * of the accepted content types.
      *
-     * @return array An array of `prefValue => [content/types]`
+     * @return array An array of `prefValue: [content/types]`
      */
     function parseAccept(): array
     {
@@ -1660,7 +1660,7 @@ class ServerRequest : IServerRequest
      * @throws \InvalidArgumentException If any leaf elements are not valid files.
      */
     protected void validateUploadedFiles(array $uploadedFiles, string myPath) {
-        foreach ($uploadedFiles as myKey => myfile) {
+        foreach ($uploadedFiles as myKey: myfile) {
             if (is_array(myfile)) {
                 this.validateUploadedFiles(myfile, myKey . ".");
                 continue;

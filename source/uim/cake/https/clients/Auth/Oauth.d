@@ -295,7 +295,7 @@ class Oauth
     protected auto _normalizeData(array $args, string myPath = ""): array
     {
         myData = [];
-        foreach ($args as myKey => myValue) {
+        foreach ($args as myKey: myValue) {
             if (myPath) {
                 // Fold string keys with [].
                 // Numeric keys result in a=b&a=c. While this isn"t
@@ -326,7 +326,7 @@ class Oauth
     protected string _buildAuth(array myData) {
         $out = "OAuth ";
         myParams = [];
-        foreach (myData as myKey => myValue) {
+        foreach (myData as myKey: myValue) {
             myParams[] = myKey . "="" . this._encode((string)myValue) . """;
         }
         $out .= implode(",", myParams);

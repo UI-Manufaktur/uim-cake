@@ -178,7 +178,7 @@ class ResponseEmitter : EmitterInterface
             $cookies = iterator_to_array($response.getCookieCollection());
         }
 
-        foreach ($response.getHeaders() as myName => myValues) {
+        foreach ($response.getHeaders() as myName: myValues) {
             if (strtolower(myName) === "set-cookie") {
                 $cookies = array_merge($cookies, myValues);
                 continue;
