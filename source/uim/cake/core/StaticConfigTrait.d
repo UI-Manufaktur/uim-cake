@@ -52,7 +52,7 @@ trait StaticConfigTrait
      * ```
      *
      * @param array<string, mixed>|string myKey The name of the configuration, or an array of multiple configs.
-     * @param object|array<string, mixed>|null myConfig An array of name => configuration data for adapter.
+     * @param object|array<string, mixed>|null myConfig An array of name: configuration data for adapter.
      * @throws \BadMethodCallException When trying to modify an existing config.
      * @throws \LogicException When trying to store an invalid structured config array.
      * @return void
@@ -62,7 +62,7 @@ trait StaticConfigTrait
             if (!is_array(myKey)) {
                 throw new LogicException("If config is null, key must be an array.");
             }
-            foreach (myKey as myName => $settings) {
+            foreach (myKey as myName: $settings) {
                 static::setConfig(myName, $settings);
             }
 
@@ -235,7 +235,7 @@ REGEXP;
         }
 
         $exists = [];
-        foreach ($parsed as $k => $v) {
+        foreach ($parsed as $k: $v) {
             if (is_int($k)) {
                 unset($parsed[$k]);
             } elseif (strpos($k, "_") === 0) {
@@ -255,7 +255,7 @@ REGEXP;
 
         parse_str(myQuery, myQueryArgs);
 
-        foreach (myQueryArgs as myKey => myValue) {
+        foreach (myQueryArgs as myKey: myValue) {
             if (myValue === "true") {
                 myQueryArgs[myKey] = true;
             } elseif (myValue === "false") {

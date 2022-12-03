@@ -39,8 +39,8 @@ class ConnectionRegistry : ObjectRegistry
     protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
     {
         throw new MissingDatasourceException([
-            "class" => myClass,
-            "plugin" => myPlugin,
+            "class": myClass,
+            "plugin": myPlugin,
         ]);
     }
 

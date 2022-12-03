@@ -47,10 +47,10 @@ class ConnectionManager
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        "mysql" => Mysql::class,
-        "postgres" => Postgres::class,
-        "sqlite" => Sqlite::class,
-        "sqlserver" => Sqlserver::class,
+        "mysql": Mysql::class,
+        "postgres": Postgres::class,
+        "sqlite": Sqlite::class,
+        "sqlserver": Sqlserver::class,
     ];
 
     /**
@@ -66,7 +66,7 @@ class ConnectionManager
      * The connection will not be constructed until it is first used.
      *
      * @param array<string, mixed>|string myKey The name of the connection config, or an array of multiple configs.
-     * @param array<string, mixed>|null myConfig An array of name => config data for adapter.
+     * @param array<string, mixed>|null myConfig An array of name: config data for adapter.
      * @return void
      * @throws \Cake\Core\Exception\CakeException When trying to modify an existing config.
      * @see \Cake\Core\StaticConfigTrait::config()
@@ -185,7 +185,7 @@ class ConnectionManager
             myName = static::$_aliasMap[myName];
         }
         if (empty(static::$_config[myName])) {
-            throw new MissingDatasourceConfigException(["name" => myName]);
+            throw new MissingDatasourceConfigException(["name": myName]);
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(static::$_registry)) {

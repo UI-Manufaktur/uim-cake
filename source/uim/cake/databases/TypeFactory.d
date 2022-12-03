@@ -16,27 +16,27 @@ class TypeFactory
      * @psalm-var array<string, class-string<\Cake\Database\TypeInterface>>
      */
     protected static $_types = [
-        "tinyinteger" => Type\IntegerType::class,
-        "smallinteger" => Type\IntegerType::class,
-        "integer" => Type\IntegerType::class,
-        "biginteger" => Type\IntegerType::class,
-        "binary" => Type\BinaryType::class,
-        "binaryuuid" => Type\BinaryUuidType::class,
-        "boolean" => Type\BoolType::class,
-        "date" => Type\DateType::class,
-        "datetime" => Type\DateTimeType::class,
-        "datetimefractional" => Type\DateTimeFractionalType::class,
-        "decimal" => Type\DecimalType::class,
-        "float" => Type\FloatType::class,
-        "json" => Type\JsonType::class,
-        "string" => Type\StringType::class,
-        "char" => Type\StringType::class,
-        "text" => Type\StringType::class,
-        "time" => Type\TimeType::class,
-        "timestamp" => Type\DateTimeType::class,
-        "timestampfractional" => Type\DateTimeFractionalType::class,
-        "timestamptimezone" => Type\DateTimeTimezoneType::class,
-        "uuid" => Type\UuidType::class,
+        "tinyinteger": Type\IntegerType::class,
+        "smallinteger": Type\IntegerType::class,
+        "integer": Type\IntegerType::class,
+        "biginteger": Type\IntegerType::class,
+        "binary": Type\BinaryType::class,
+        "binaryuuid": Type\BinaryUuidType::class,
+        "boolean": Type\BoolType::class,
+        "date": Type\DateType::class,
+        "datetime": Type\DateTimeType::class,
+        "datetimefractional": Type\DateTimeFractionalType::class,
+        "decimal": Type\DecimalType::class,
+        "float": Type\FloatType::class,
+        "json": Type\JsonType::class,
+        "string": Type\StringType::class,
+        "char": Type\StringType::class,
+        "text": Type\StringType::class,
+        "time": Type\TimeType::class,
+        "timestamp": Type\DateTimeType::class,
+        "timestampfractional": Type\DateTimeFractionalType::class,
+        "timestamptimezone": Type\DateTimeTimezoneType::class,
+        "uuid": Type\UuidType::class,
     ];
 
     /**
@@ -73,7 +73,7 @@ class TypeFactory
     static function buildAll(): array
     {
         myResult = [];
-        foreach (static::$_types as myName => myType) {
+        foreach (static::$_types as myName: myType) {
             myResult[myName] = static::$_builtTypes[myName] ?? static::build(myName);
         }
 

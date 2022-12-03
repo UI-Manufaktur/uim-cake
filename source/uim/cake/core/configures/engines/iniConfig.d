@@ -89,7 +89,7 @@ class IniConfig : ConfigEngineInterface
             myValues = this._parseNestedValues(myContentss[this._section]);
         } else {
             myValues = [];
-            foreach (myContentss as $section => $attribs) {
+            foreach (myContentss as $section: $attribs) {
                 if (is_array($attribs)) {
                     myValues[$section] = this._parseNestedValues($attribs);
                 } else {
@@ -110,7 +110,7 @@ class IniConfig : ConfigEngineInterface
      */
     protected auto _parseNestedValues(array myValues): array
     {
-        foreach (myValues as myKey => myValue) {
+        foreach (myValues as myKey: myValue) {
             if (myValue === "1") {
                 myValue = true;
             }
@@ -138,7 +138,7 @@ class IniConfig : ConfigEngineInterface
      */
     bool dump(string myKey, array myData) {
         myResult = [];
-        foreach (myData as $k => myValue) {
+        foreach (myData as $k: myValue) {
             $isSection = false;
             /** @psalm-suppress InvalidArrayAccess */
             if ($k[0] !== "[") {
@@ -147,7 +147,7 @@ class IniConfig : ConfigEngineInterface
             }
             if (is_array(myValue)) {
                 $kValues = Hash::flatten(myValue, ".");
-                foreach ($kValues as $k2 => $v) {
+                foreach ($kValues as $k2: $v) {
                     myResult[] = "$k2 = " . this._value($v);
                 }
             }

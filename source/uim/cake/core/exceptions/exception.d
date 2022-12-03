@@ -95,7 +95,7 @@ class CakeException : RuntimeException
             return this._responseHeaders = $header;
         }
 
-        return this._responseHeaders = [$header => myValue];
+        return this._responseHeaders = [$header: myValue];
     }
 }
 

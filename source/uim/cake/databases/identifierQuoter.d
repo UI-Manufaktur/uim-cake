@@ -117,7 +117,7 @@ class IdentifierQuoter
     protected auto _basicQuoter(array $part): array
     {
         myResult = [];
-        foreach ($part as myAlias => myValue) {
+        foreach ($part as myAlias: myValue) {
             myValue = !is_string(myValue) ? myValue : this._driver.quoteIdentifier(myValue);
             myAlias = is_numeric(myAlias) ? myAlias : this._driver.quoteIdentifier(myAlias);
             myResult[myAlias] = myValue;

@@ -55,7 +55,7 @@ class FieldTypeConverter
         $simpleMap = $batchingMap = [];
         $simpleResult = $batchingResult = [];
 
-        foreach (myTypes as $k => myType) {
+        foreach (myTypes as $k: myType) {
             if (myType instanceof IOptionalConvert && !myType.requiresToPhpCast()) {
                 continue;
             }
@@ -68,7 +68,7 @@ class FieldTypeConverter
             $simpleMap[$k] = myType;
         }
 
-        foreach ($map as myField => myType) {
+        foreach ($map as myField: myType) {
             if (isset($simpleMap[myType])) {
                 $simpleResult[myField] = $simpleMap[myType];
                 continue;
@@ -80,7 +80,7 @@ class FieldTypeConverter
 
         // Using batching when there is only a couple for the type is actually slower,
         // so, let"s check for that case here.
-        foreach ($batchingResult as myType => myFields) {
+        foreach ($batchingResult as myType: myFields) {
             if (count(myFields) > 2) {
                 continue;
             }
@@ -106,13 +106,13 @@ class FieldTypeConverter
     auto __invoke(array $row): array
     {
         if (!empty(this._typeMap)) {
-            foreach (this._typeMap as myField => myType) {
+            foreach (this._typeMap as myField: myType) {
                 $row[myField] = myType.toPHP($row[myField], this._driver);
             }
         }
 
         if (!empty(this.batchingTypeMap)) {
-            foreach (this.batchingTypeMap as $t => myFields) {
+            foreach (this.batchingTypeMap as $t: myFields) {
                 /** @psalm-suppress PossiblyUndefinedMethod */
                 $row = this.types[$t].manyToPHP($row, myFields, this._driver);
             }

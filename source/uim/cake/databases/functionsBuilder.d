@@ -136,7 +136,7 @@ class FunctionsBuilder
         }
 
         $expression = new FunctionExpression("CAST", this.toLiteralParam(myField));
-        $expression.setConjunction(" AS").add([myType => "literal"]);
+        $expression.setConjunction(" AS").add([myType: "literal"]);
 
         return $expression;
     }
@@ -178,7 +178,7 @@ class FunctionsBuilder
     function extract(string $part, $expression, array myTypes = []): FunctionExpression
     {
         $expression = new FunctionExpression("EXTRACT", this.toLiteralParam($expression), myTypes, "integer");
-        $expression.setConjunction(" FROM").add([$part => "literal"], [], true);
+        $expression.setConjunction(" FROM").add([$part: "literal"], [], true);
 
         return $expression;
     }
@@ -199,7 +199,7 @@ class FunctionsBuilder
         }
         $interval = myValue . " " . $unit;
         $expression = new FunctionExpression("DATE_ADD", this.toLiteralParam($expression), myTypes, "datetime");
-        $expression.setConjunction(", INTERVAL").add([$interval => "literal"]);
+        $expression.setConjunction(", INTERVAL").add([$interval: "literal"]);
 
         return $expression;
     }
@@ -274,7 +274,7 @@ class FunctionsBuilder
      */
     function lag($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
-        myParams = this.toLiteralParam($expression) + [$offset => "literal"];
+        myParams = this.toLiteralParam($expression) + [$offset: "literal"];
         if ($default !== null) {
             myParams[] = $default;
         }
@@ -298,7 +298,7 @@ class FunctionsBuilder
      */
     function lead($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
-        myParams = this.toLiteralParam($expression) + [$offset => "literal"];
+        myParams = this.toLiteralParam($expression) + [$offset: "literal"];
         if ($default !== null) {
             myParams[] = $default;
         }
@@ -349,7 +349,7 @@ class FunctionsBuilder
      */
     protected auto toLiteralParam($expression) {
         if (is_string($expression)) {
-            return [$expression => "literal"];
+            return [$expression: "literal"];
         }
 
         return [$expression];

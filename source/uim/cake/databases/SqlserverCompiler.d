@@ -116,11 +116,11 @@ class SqlserverCompiler : QueryCompiler
     protected auto _buildHavingPart($parts, myQuery, $binder) {
         $selectParts = myQuery.clause("select");
 
-        foreach ($selectParts as $selectKey => $selectPart) {
+        foreach ($selectParts as $selectKey: $selectPart) {
             if (!$selectPart instanceof FunctionExpression) {
                 continue;
             }
-            foreach ($parts as $k => $p) {
+            foreach ($parts as $k: $p) {
                 if (!is_string($p)) {
                     continue;
                 }

@@ -310,7 +310,7 @@ class Query : IExpression, IteratorAggregate
      * @return this
      */
     function traverse($callback) {
-        foreach (this._parts as myName => $part) {
+        foreach (this._parts as myName: $part) {
             $callback($part, myName);
         }
 
@@ -689,7 +689,7 @@ class Query : IExpression, IteratorAggregate
 
         $joins = [];
         $i = count(this._parts["join"]);
-        foreach (myTables as myAlias => $t) {
+        foreach (myTables as myAlias: $t) {
             if (!is_array($t)) {
                 $t = ["table":$t, "conditions":this.newExpr()];
             }
@@ -841,7 +841,7 @@ class Query : IExpression, IteratorAggregate
          * @psalm-suppress InvalidReturnStatement
          */
         return [
-            myAlias => [
+            myAlias: [
                 "table":myTable,
                 "conditions":$conditions,
                 "type":myType,
@@ -2276,14 +2276,14 @@ class Query : IExpression, IteratorAggregate
         if (this._selectTypeMap !== null) {
             this._selectTypeMap = clone this._selectTypeMap;
         }
-        foreach (this._parts as myName => $part) {
+        foreach (this._parts as myName: $part) {
             if (empty($part)) {
                 continue;
             }
             if (is_array($part)) {
-                foreach ($part as $i => $piece) {
+                foreach ($part as $i: $piece) {
                     if (is_array($piece)) {
-                        foreach ($piece as $j => myValue) {
+                        foreach ($piece as $j: myValue) {
                             if (myValue instanceof IExpression) {
                                 /** @psalm-suppress PossiblyUndefinedMethod */
                                 this._parts[myName][$i][$j] = clone myValue;
