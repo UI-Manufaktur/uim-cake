@@ -110,7 +110,7 @@ class EventManager : IEventManager
      */
     protected auto _attachSubscriber(IEventListener $subscriber): void
     {
-        foreach ($subscriber.implementedEvents() as myEventKey => $function) {
+        foreach ($subscriber.implementedEvents() as myEventKey: $function) {
             myOptions = [];
             $method = $function;
             if (is_array($function) && isset($function["callable"])) {
@@ -190,8 +190,8 @@ class EventManager : IEventManager
             return this;
         }
 
-        foreach (this._listeners[myEventKey] as $priority => $callables) {
-            foreach ($callables as $k => $callback) {
+        foreach (this._listeners[myEventKey] as $priority: $callables) {
+            foreach ($callables as $k: $callback) {
                 if ($callback["callable"] === $callable) {
                     unset(this._listeners[myEventKey][$priority][$k]);
                     break;
@@ -216,9 +216,9 @@ class EventManager : IEventManager
             return;
         }
         if (!empty(myEventKey)) {
-            myEvents = [myEventKey => myEvents[myEventKey]];
+            myEvents = [myEventKey: myEvents[myEventKey]];
         }
-        foreach (myEvents as myKey => $function) {
+        foreach (myEvents as myKey: $function) {
             if (is_array($function)) {
                 if (is_numeric(key($function))) {
                     foreach ($function as $handler) {
@@ -423,7 +423,7 @@ class EventManager : IEventManager
         $properties = get_object_vars(this);
         $properties["_generalManager"] = "(object) EventManager";
         $properties["_listeners"] = [];
-        foreach (this._listeners as myKey => $priorities) {
+        foreach (this._listeners as myKey: $priorities) {
             $listenerCount = 0;
             foreach ($priorities as $listeners) {
                 $listenerCount += count($listeners);

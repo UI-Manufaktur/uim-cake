@@ -104,7 +104,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * The conventional method map is:
      *
-     * - Form.buildValidator => buildValidator
+     * - Form.buildValidator: buildValidator
      *
      * @return array<string, mixed>
      */
@@ -112,7 +112,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     {
         if (method_exists(this, "buildValidator")) {
             return [
-                self::BUILD_VALIDATOR_EVENT => "buildValidator",
+                self::BUILD_VALIDATOR_EVENT: "buildValidator",
             ];
         }
 
@@ -305,11 +305,11 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
     auto set(myName, myValue = null) {
         $write = myName;
         if (!is_array(myName)) {
-            $write = [myName => myValue];
+            $write = [myName: myValue];
         }
 
         /** @psalm-suppress PossiblyInvalidIterator */
-        foreach ($write as myKey => $val) {
+        foreach ($write as myKey: $val) {
             this._data = Hash::insert(this._data, myKey, $val);
         }
 

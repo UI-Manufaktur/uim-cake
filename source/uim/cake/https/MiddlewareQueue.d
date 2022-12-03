@@ -163,7 +163,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     function insertBefore(string myClass, $middleware) {
         $found = false;
         $i = 0;
-        foreach (this.queue as $i => $object) {
+        foreach (this.queue as $i: $object) {
             /** @psalm-suppress ArgumentTypeCoercion */
             if (
                 (
@@ -196,7 +196,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     function insertAfter(string myClass, $middleware) {
         $found = false;
         $i = 0;
-        foreach (this.queue as $i => $object) {
+        foreach (this.queue as $i: $object) {
             /** @psalm-suppress ArgumentTypeCoercion */
             if (
                 (

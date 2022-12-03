@@ -86,7 +86,7 @@ interface IRepository
      * This method will *not* trigger beforeSave/afterSave events. If you need those
      * first load a collection of records and update them.
      *
-     * @param \Cake\Database\Expression\QueryExpression|\Closure|array|string myFields A hash of field => new value.
+     * @param \Cake\Database\Expression\QueryExpression|\Closure|array|string myFields A hash of field: new value.
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Count Returns the affected rows.

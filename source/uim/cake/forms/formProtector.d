@@ -287,7 +287,7 @@ class FormProtector
         $multi = $lockedFields = [];
         $isUnlocked = false;
 
-        foreach (myFieldList as $i => myKey) {
+        foreach (myFieldList as $i: myKey) {
             if (is_string(myKey) && preg_match("/(\.\d+){1,10}$/", myKey)) {
                 $multi[$i] = preg_replace("/(\.\d+){1,10}$/", "", myKey);
                 unset(myFieldList[$i]);
@@ -306,7 +306,7 @@ class FormProtector
             )
         );
 
-        foreach (myFieldList as $i => myKey) {
+        foreach (myFieldList as $i: myKey) {
             $isLocked = in_array(myKey, $locked, true);
 
             if (!empty($unlockedFields)) {
@@ -367,7 +367,7 @@ class FormProtector
         $unlockedFields = this.unlockedFields;
 
         $locked = [];
-        foreach (myFields as myKey => myValue) {
+        foreach (myFields as myKey: myValue) {
             if (is_numeric(myValue)) {
                 myValue = (string)myValue;
             }
@@ -507,7 +507,7 @@ class FormProtector
         string $stringKeyMessage
     ): array {
         myMessages = [];
-        foreach (myDataFields as myKey => myValue) {
+        foreach (myDataFields as myKey: myValue) {
             if (is_int(myKey)) {
                 $foundKey = array_search(myValue, $expectedFields, true);
                 if ($foundKey === false) {
@@ -539,7 +539,7 @@ class FormProtector
         }
 
         $expectedFieldNames = [];
-        foreach ($expectedFields as myKey => $expectedField) {
+        foreach ($expectedFields as myKey: $expectedField) {
             if (is_int(myKey)) {
                 $expectedFieldNames[] = $expectedField;
             } else {

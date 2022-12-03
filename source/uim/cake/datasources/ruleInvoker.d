@@ -113,7 +113,7 @@ class RuleInvoker
             myMessage = $pass;
         }
         if (this.name) {
-            myMessage = [this.name => myMessage];
+            myMessage = [this.name: myMessage];
         } else {
             myMessage = [myMessage];
         }

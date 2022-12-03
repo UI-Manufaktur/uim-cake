@@ -687,7 +687,7 @@ class Debugger
         $remaining = $context.remainingDepth();
         if ($remaining >= 0) {
             $outputMask = static::outputMask();
-            foreach ($var as myKey => $val) {
+            foreach ($var as myKey: $val) {
                 if (array_key_exists(myKey, $outputMask)) {
                     myNode = new ScalarNode("string", $outputMask[myKey]);
                 } elseif ($val !== $var) {
@@ -732,7 +732,7 @@ class Debugger
         if ($remaining > 0) {
             if (method_exists($var, "__debugInfo")) {
                 try {
-                    foreach ($var.__debugInfo() as myKey => $val) {
+                    foreach ($var.__debugInfo() as myKey: $val) {
                         myNode.addProperty(new PropertyNode(""{myKey}"", null, static::export($val, $context)));
                     }
 
@@ -744,7 +744,7 @@ class Debugger
 
             $outputMask = static::outputMask();
             $objectVars = get_object_vars($var);
-            foreach ($objectVars as myKey => myValue) {
+            foreach ($objectVars as myKey: myValue) {
                 if (array_key_exists(myKey, $outputMask)) {
                     myValue = $outputMask[myKey];
                 }
@@ -757,10 +757,10 @@ class Debugger
             $ref = new ReflectionObject($var);
 
             $filters = [
-                ReflectionProperty::IS_PROTECTED => "protected",
-                ReflectionProperty::IS_PRIVATE => "private",
+                ReflectionProperty::IS_PROTECTED: "protected",
+                ReflectionProperty::IS_PRIVATE: "private",
             ];
-            foreach ($filters as $filter => $visibility) {
+            foreach ($filters as $filter: $visibility) {
                 $reflectionProperties = $ref.getProperties($filter);
                 foreach ($reflectionProperties as $reflectionProperty) {
                     $reflectionProperty.setAccessible(true);
@@ -912,7 +912,7 @@ class Debugger
         $links = [];
         $info = "";
 
-        foreach ((array)myData["context"] as $var => myValue) {
+        foreach ((array)myData["context"] as $var: myValue) {
             $context[] = "\${$var} = " . static::exportVar(myValue, 3);
         }
 
@@ -932,7 +932,7 @@ class Debugger
         $tpl = this._templates[this._outputFormat] + this._templates["base"];
 
         if (isset($tpl["links"])) {
-            foreach ($tpl["links"] as myKey => $val) {
+            foreach ($tpl["links"] as myKey: $val) {
                 $links[myKey] = Text::insert($val, myData, $insertOpts);
             }
         }
@@ -942,14 +942,14 @@ class Debugger
         }
 
         $infoData = compact("code", "context", "trace");
-        foreach ($infoData as myKey => myValue) {
+        foreach ($infoData as myKey: myValue) {
             if (empty(myValue) || !isset($tpl[myKey])) {
                 continue;
             }
             if (is_array(myValue)) {
                 myValue = implode("\n", myValue);
             }
-            $info .= Text::insert($tpl[myKey], [myKey => myValue] + myData, $insertOpts);
+            $info .= Text::insert($tpl[myKey], [myKey: myValue] + myData, $insertOpts);
         }
         $links = implode(" ", $links);
 

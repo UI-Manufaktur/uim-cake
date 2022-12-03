@@ -92,15 +92,15 @@ class ExceptionRenderer : ExceptionRendererInterface
      */
     protected myExceptionHttpCodes = [
         // Controller exceptions
-        InvalidParameterException::class => 404,
-        MissingActionException::class => 404,
+        InvalidParameterException::class: 404,
+        MissingActionException::class: 404,
         // Datasource exceptions
-        PageOutOfBoundsException::class => 404,
-        RecordNotFoundException::class => 404,
+        PageOutOfBoundsException::class: 404,
+        RecordNotFoundException::class: 404,
         // Http exceptions
-        MissingControllerException::class => 404,
+        MissingControllerException::class: 404,
         // Routing exceptions
-        MissingRouteException::class => 404,
+        MissingRouteException::class: 404,
     ];
 
     /**
@@ -217,12 +217,12 @@ class ExceptionRenderer : ExceptionRendererInterface
 
         if (myException instanceof CakeException) {
             /** @psalm-suppress DeprecatedMethod */
-            foreach ((array)myException.responseHeader() as myKey => myValue) {
+            foreach ((array)myException.responseHeader() as myKey: myValue) {
                 $response = $response.withHeader(myKey, myValue);
             }
         }
         if (myException instanceof HttpException) {
-            foreach (myException.getHeaders() as myName => myValue) {
+            foreach (myException.getHeaders() as myName: myValue) {
                 $response = $response.withHeader(myName, myValue);
             }
         }

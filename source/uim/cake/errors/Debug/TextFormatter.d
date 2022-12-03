@@ -120,9 +120,9 @@ TEXT;
             $visibility = $property.getVisibility();
             myName = $property.getName();
             if ($visibility && $visibility !== "public") {
-                $props[] = "[{$visibility}] {myName} => " . this.export($property.getValue(), $indent);
+                $props[] = "[{$visibility}] {myName}: " . this.export($property.getValue(), $indent);
             } else {
-                $props[] = "{myName} => " . this.export($property.getValue(), $indent);
+                $props[] = "{myName}: " . this.export($property.getValue(), $indent);
             }
         }
         if (count($props)) {

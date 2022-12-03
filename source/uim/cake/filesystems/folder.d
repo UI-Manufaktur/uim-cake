@@ -83,8 +83,8 @@ class Folder
      * @var array<string>
      */
     protected $_fsorts = [
-        self::SORT_NAME => "getPathname",
-        self::SORT_TIME => "getCTime",
+        self::SORT_NAME: "getPathname",
+        self::SORT_TIME: "getCTime",
     ];
 
     /**
@@ -544,7 +544,7 @@ class Folder
          * @var string $itemPath
          * @var \RecursiveDirectoryIterator $fsIterator
          */
-        foreach ($iterator as $itemPath => $fsIterator) {
+        foreach ($iterator as $itemPath: $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator.getSubPathname();
                 if ($subPathName[0] === "." || strpos($subPathName, DIRECTORY_SEPARATOR . ".") !== false) {
