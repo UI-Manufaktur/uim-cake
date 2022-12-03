@@ -1,4 +1,4 @@
-module uim.cakeility;
+module uim.cake.uilities;
 
 import uim.cake.core.exceptions\CakeException;
 use InvalidArgumentException;

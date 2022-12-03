@@ -1,4 +1,4 @@
-module uim.cakeility;
+module uim.cake.uilities;
 
 /**
  * Provides features for merging object properties recursively with

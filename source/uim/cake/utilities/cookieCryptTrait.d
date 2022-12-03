@@ -1,15 +1,7 @@
+module uim.cake.uilities;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.1.6
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeility;
-
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Cookie Crypt Trait.

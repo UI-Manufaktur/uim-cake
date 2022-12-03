@@ -1,4 +1,7 @@
-module uim.cakeilities.Crypto;
+module uim.cake.uilities.Crypto;
+
+@safe:
+import uim.cake;
 
 /**
  * OpenSSL implementation of crypto features for Cake\Utility\Security
@@ -8,12 +11,9 @@ module uim.cakeilities.Crypto;
  *
  * @internal
  */
-class OpenSsl
-{
-    /**
-     * @var string
-     */
-    protected const METHOD_AES_256_CBC = 'aes-256-cbc';
+class OpenSsl {
+
+    protected const string METHOD_AES_256_CBC = 'aes-256-cbc';
 
     /**
      * Encrypt a value using AES-256.

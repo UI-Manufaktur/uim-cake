@@ -1,6 +1,7 @@
+module uim.cake.utilities.bootstrap;
 
-
-import uim.cakeilities.Inflector;
+@safe:
+import uim.cake;
 
 // Store the initial state
 Inflector::reset();

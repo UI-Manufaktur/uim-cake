@@ -1,5 +1,5 @@
 
-module uim.cakeility;
+module uim.cake.uilities;
 
 /**
  * Pluralize and singularize English words.

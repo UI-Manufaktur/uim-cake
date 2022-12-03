@@ -7,7 +7,7 @@
  * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeility;
+ */module uim.cake.uilities;
 
 import uim.cakeilities.Crypto\OpenSsl;
 use InvalidArgumentException;
