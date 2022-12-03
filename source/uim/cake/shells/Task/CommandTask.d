@@ -28,26 +28,26 @@ class CommandTask : Shell
      * @return array
      */
     auto getShellList() {
-        $skipFiles = ['app'];
-        myHiddenCommands = ['command_list', 'completion'];
+        $skipFiles = ["app"];
+        myHiddenCommands = ["command_list", "completion"];
         myPlugins = Plugin::loaded();
-        myShellList = array_fill_keys(myPlugins, null) + ['CORE' => null, 'app' => null];
+        myShellList = array_fill_keys(myPlugins, null) + ["CORE" => null, "app" => null];
 
-        $appPath = App::classPath('Shell');
-        myShellList = this._findShells(myShellList, $appPath[0], 'app', $skipFiles);
+        $appPath = App::classPath("Shell");
+        myShellList = this._findShells(myShellList, $appPath[0], "app", $skipFiles);
 
-        $appPath = App::classPath('Command');
-        myShellList = this._findShells(myShellList, $appPath[0], 'app', $skipFiles);
+        $appPath = App::classPath("Command");
+        myShellList = this._findShells(myShellList, $appPath[0], "app", $skipFiles);
 
-        $skipCore = array_merge($skipFiles, myHiddenCommands, myShellList['app']);
+        $skipCore = array_merge($skipFiles, myHiddenCommands, myShellList["app"]);
         $corePath = dirname(__DIR__);
-        myShellList = this._findShells(myShellList, $corePath, 'CORE', $skipCore);
+        myShellList = this._findShells(myShellList, $corePath, "CORE", $skipCore);
 
-        $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Command';
-        myShellList = this._findShells(myShellList, $corePath, 'CORE', $skipCore);
+        $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "Command";
+        myShellList = this._findShells(myShellList, $corePath, "CORE", $skipCore);
 
         foreach (myPlugins as myPlugin) {
-            myPluginPath = Plugin::classPath(myPlugin) . 'Shell';
+            myPluginPath = Plugin::classPath(myPlugin) . "Shell";
             myShellList = this._findShells(myShellList, myPluginPath, myPlugin, []);
         }
 
@@ -84,7 +84,7 @@ class CommandTask : Shell
         myShellList[myType] = myShellList[myType] ?? [];
 
         foreach (myShells as myShell) {
-            myName = Inflector::underscore(preg_replace('/(Shell|Command)$/', '', myShell));
+            myName = Inflector::underscore(preg_replace("/(Shell|Command)$/", "", myShell));
             if (!in_array(myName, $skip, true)) {
                 myShellList[myType][] = myName;
             }
@@ -108,11 +108,11 @@ class CommandTask : Shell
         }
 
         $fs = new Filesystem();
-        myfiles = $fs.find($dir, '/\.php$/');
+        myfiles = $fs.find($dir, "/\.php$/");
 
         myShells = [];
         foreach (myfiles as myfile) {
-            myShells[] = myfile.getBasename('.php');
+            myShells[] = myfile.getBasename(".php");
         }
 
         sort(myShells);

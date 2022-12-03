@@ -199,7 +199,7 @@ interface IEntity : ArrayAccess, JsonSerializable
     /**
      * Get the list of visible fields.
      *
-     * @return array<string> A list of fields that are 'visible' in all representations.
+     * @return array<string> A list of fields that are "visible" in all representations.
      */
     auto getVisible(): array;
 

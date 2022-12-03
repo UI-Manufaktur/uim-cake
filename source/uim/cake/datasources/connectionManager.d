@@ -47,10 +47,10 @@ class ConnectionManager
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        'mysql' => Mysql::class,
-        'postgres' => Postgres::class,
-        'sqlite' => Sqlite::class,
-        'sqlserver' => Sqlserver::class,
+        "mysql" => Mysql::class,
+        "postgres" => Postgres::class,
+        "sqlite" => Sqlite::class,
+        "sqlserver" => Sqlserver::class,
     ];
 
     /**
@@ -74,7 +74,7 @@ class ConnectionManager
     static auto setConfig(myKey, myConfig = null): void
     {
         if (is_array(myConfig)) {
-            myConfig['name'] = myKey;
+            myConfig["name"] = myKey;
         }
 
         static::_setConfig(myKey, myConfig);
@@ -87,13 +87,13 @@ class ConnectionManager
      * The following is an example of its usage:
      *
      * ```
-     * $dsn = 'mysql://user:pass@localhost/database';
+     * $dsn = "mysql://user:pass@localhost/database";
      * myConfig = ConnectionManager::parseDsn($dsn);
      *
-     * $dsn = 'Cake\Database\Driver\Mysql://localhost:3306/database?className=Cake\Database\Connection';
+     * $dsn = "Cake\Database\Driver\Mysql://localhost:3306/database?className=Cake\Database\Connection";
      * myConfig = ConnectionManager::parseDsn($dsn);
      *
-     * $dsn = 'Cake\Database\Connection://localhost:3306/database?driver=Cake\Database\Driver\Mysql';
+     * $dsn = "Cake\Database\Connection://localhost:3306/database?driver=Cake\Database\Driver\Mysql";
      * myConfig = ConnectionManager::parseDsn($dsn);
      * ```
      *
@@ -109,16 +109,16 @@ class ConnectionManager
     {
         myConfig = static::_parseDsn(myConfig);
 
-        if (isset(myConfig['path']) && empty(myConfig['database'])) {
-            myConfig['database'] = substr(myConfig['path'], 1);
+        if (isset(myConfig["path"]) && empty(myConfig["database"])) {
+            myConfig["database"] = substr(myConfig["path"], 1);
         }
 
-        if (empty(myConfig['driver'])) {
-            myConfig['driver'] = myConfig['className'];
-            myConfig['className'] = Connection::class;
+        if (empty(myConfig["driver"])) {
+            myConfig["driver"] = myConfig["className"];
+            myConfig["className"] = Connection::class;
         }
 
-        unset(myConfig['path']);
+        unset(myConfig["path"]);
 
         return myConfig;
     }
@@ -131,7 +131,7 @@ class ConnectionManager
      * connections with their test variant.
      *
      * Defined aliases will take precedence over normal connection names. For example,
-     * if you alias 'default' to 'test', fetching 'default' will always return the 'test'
+     * if you alias "default" to "test", fetching "default" will always return the "test"
      * connection as long as the alias is defined.
      *
      * You can remove aliases with ConnectionManager::dropAlias().
@@ -139,8 +139,8 @@ class ConnectionManager
      * ### Usage
      *
      * ```
-     * // Make 'things' resolve to 'test_things' connection
-     * ConnectionManager::alias('test_things', 'things');
+     * // Make "things" resolve to "test_things" connection
+     * ConnectionManager::alias("test_things", "things");
      * ```
      *
      * @param string $source The existing connection to alias.
@@ -185,7 +185,7 @@ class ConnectionManager
             myName = static::$_aliasMap[myName];
         }
         if (empty(static::$_config[myName])) {
-            throw new MissingDatasourceConfigException(['name' => myName]);
+            throw new MissingDatasourceConfigException(["name" => myName]);
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(static::$_registry)) {

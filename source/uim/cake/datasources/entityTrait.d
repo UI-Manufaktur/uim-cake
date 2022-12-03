@@ -87,20 +87,20 @@ trait EntityTrait
      * field name points to a boolean indicating its status. An empty array
      * means no fields are accessible
      *
-     * The special field '\*' can also be mapped, meaning that any other field
-     * not defined in the map will take its value. For example, `'*' => true`
+     * The special field "\*" can also be mapped, meaning that any other field
+     * not defined in the map will take its value. For example, `"*" => true`
      * means that any field not defined in the map will be accessible by default
      *
      * @var array<bool>
      */
-    protected $_accessible = ['*' => true];
+    protected $_accessible = ["*" => true];
 
     /**
      * The alias of the repository this entity came from
      *
      * @var string
      */
-    protected $_registryAlias = '';
+    protected $_registryAlias = "";
 
     /**
      * Magic getter to access fields that have been set in this entity
@@ -153,7 +153,7 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity.set('name', 'Andrew');
+     * $entity.set("name", "Andrew");
      * ```
      *
      * It is also possible to mass-assign multiple fields to this entity
@@ -163,7 +163,7 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity.set(['name' => 'andrew', 'id' => 1]);
+     * $entity.set(["name" => "andrew", "id" => 1]);
      * echo $entity.name // prints andrew
      * echo $entity.id // prints 1
      * ```
@@ -173,8 +173,8 @@ trait EntityTrait
      * `myOptions` parameter:
      *
      * ```
-     * $entity.set('name', 'Andrew', ['setter' => false]);
-     * $entity.set(['name' => 'Andrew', 'id' => 1], ['setter' => false]);
+     * $entity.set("name", "Andrew", ["setter" => false]);
+     * $entity.set(["name" => "Andrew", "id" => 1], ["setter" => false]);
      * ```
      *
      * Mass assignment should be treated carefully when accepting user input, by default
@@ -182,14 +182,14 @@ trait EntityTrait
      * the guarding for a single set call with the `guard` option:
      *
      * ```
-     * $entity.set(['name' => 'Andrew', 'id' => 1], ['guard' => false]);
+     * $entity.set(["name" => "Andrew", "id" => 1], ["guard" => false]);
      * ```
      *
      * You do not need to use the guard option when assigning fields individually:
      *
      * ```
      * // No need to use the guard option.
-     * $entity.set('name', 'Andrew');
+     * $entity.set("name", "Andrew");
      * ```
      *
      * @param array<string, mixed>|string myField the name of field to set or a list of
@@ -202,7 +202,7 @@ trait EntityTrait
      * @throws \InvalidArgumentException
      */
     auto set(myField, myValue = null, array myOptions = []) {
-        if (is_string(myField) && myField !== '') {
+        if (is_string(myField) && myField !== "") {
             $guard = false;
             myField = [myField => myValue];
         } else {
@@ -211,13 +211,13 @@ trait EntityTrait
         }
 
         if (!is_array(myField)) {
-            throw new InvalidArgumentException('Cannot set an empty field');
+            throw new InvalidArgumentException("Cannot set an empty field");
         }
-        myOptions += ['setter' => true, 'guard' => $guard];
+        myOptions += ["setter" => true, "guard" => $guard];
 
         foreach (myField as myName => myValue) {
             myName = (string)myName;
-            if (myOptions['guard'] === true && !this.isAccessible(myName)) {
+            if (myOptions["guard"] === true && !this.isAccessible(myName)) {
                 continue;
             }
 
@@ -231,12 +231,12 @@ trait EntityTrait
                 this._original[myName] = this._fields[myName];
             }
 
-            if (!myOptions['setter']) {
+            if (!myOptions["setter"]) {
                 this._fields[myName] = myValue;
                 continue;
             }
 
-            $setter = static::_accessor(myName, 'set');
+            $setter = static::_accessor(myName, "set");
             if ($setter) {
                 myValue = this.{$setter}(myValue);
             }
@@ -255,11 +255,11 @@ trait EntityTrait
      */
     function &get(string myField) {
         if (myField == "") {
-            throw new InvalidArgumentException('Cannot get an empty field');
+            throw new InvalidArgumentException("Cannot get an empty field");
         }
 
         myValue = null;
-        $method = static::_accessor(myField, 'get');
+        $method = static::_accessor(myField, "get");
 
         if (isset(this._fields[myField])) {
             myValue = &this._fields[myField];
@@ -283,7 +283,7 @@ trait EntityTrait
      */
     auto getOriginal(string myField) {
         if (myField == "") {
-            throw new InvalidArgumentException('Cannot get an empty field');
+            throw new InvalidArgumentException("Cannot get an empty field");
         }
         if (array_key_exists(myField, this._original)) {
             return this._original[myField];
@@ -317,16 +317,16 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity = new Entity(['id' => 1, 'name' => null]);
-     * $entity.has('id'); // true
-     * $entity.has('name'); // false
-     * $entity.has('last_name'); // false
+     * $entity = new Entity(["id" => 1, "name" => null]);
+     * $entity.has("id"); // true
+     * $entity.has("name"); // false
+     * $entity.has("last_name"); // false
      * ```
      *
      * You can check multiple fields by passing an array:
      *
      * ```
-     * $entity.has(['name', 'last_name']);
+     * $entity.has(["name", "last_name"]);
      * ```
      *
      * All fields must not be null to get a truthy result.
@@ -352,7 +352,7 @@ trait EntityTrait
      * This is not working like the PHP `empty()` function. The method will
      * return true for:
      *
-     * - `''` (empty string)
+     * - `""` (empty string)
      * - `null`
      * - `[]`
      *
@@ -404,8 +404,8 @@ trait EntityTrait
      * ### Examples:
      *
      * ```
-     * $entity.unset('name');
-     * $entity.unset(['name', 'last_name']);
+     * $entity.unset("name");
+     * $entity.unset(["name", "last_name"]);
      * ```
      *
      * @param array<string>|string myField The field to unset.
@@ -428,7 +428,7 @@ trait EntityTrait
      * @return this
      */
     function unsetProperty(myField) {
-        deprecationWarning('EntityTrait::unsetProperty() is deprecated. Use unset() instead.');
+        deprecationWarning("EntityTrait::unsetProperty() is deprecated. Use unset() instead.");
 
         return this.unset(myField);
     }
@@ -499,7 +499,7 @@ trait EntityTrait
      * The list of visible fields is all standard fields
      * plus virtual fields minus hidden fields.
      *
-     * @return array<string> A list of fields that are 'visible' in all
+     * @return array<string> A list of fields that are "visible" in all
      *     representations.
      */
     auto getVisible(): array
@@ -602,7 +602,7 @@ trait EntityTrait
      * Accessor methods (available or not) are cached in $_accessors
      *
      * @param string $property the field name to derive getter name from
-     * @param string myType the accessor type ('get' or 'set')
+     * @param string myType the accessor type ("get" or "set")
      * @return string method name or empty string (no method available)
      */
     protected static string _accessor(string $property, string myType) {
@@ -613,16 +613,16 @@ trait EntityTrait
         }
 
         if (!empty(static::$_accessors[myClass])) {
-            return static::$_accessors[myClass][myType][$property] = '';
+            return static::$_accessors[myClass][myType][$property] = "";
         }
 
         if (static::class === Entity::class) {
-            return '';
+            return "";
         }
 
         foreach (get_class_methods(myClass) as $method) {
             $prefix = substr($method, 1, 3);
-            if ($method[0] !== '_' || ($prefix !== 'get' && $prefix !== 'set')) {
+            if ($method[0] !== "_" || ($prefix !== "get" && $prefix !== "set")) {
                 continue;
             }
             myField = lcfirst(substr($method, 4));
@@ -634,7 +634,7 @@ trait EntityTrait
         }
 
         if (!isset(static::$_accessors[myClass][myType][$property])) {
-            static::$_accessors[myClass][myType][$property] = '';
+            static::$_accessors[myClass][myType][$property] = "";
         }
 
         return static::$_accessors[myClass][myType][$property];
@@ -791,7 +791,7 @@ trait EntityTrait
      */
     bool isNew() {
         if (func_num_args()) {
-            deprecationWarning('Using isNew() as setter is deprecated. Use setNew() instead.');
+            deprecationWarning("Using isNew() as setter is deprecated. Use setNew() instead.");
 
             this.setNew(func_get_arg(0));
         }
@@ -865,7 +865,7 @@ trait EntityTrait
      *
      * ```
      * // Sets the error messages for multiple fields at once
-     * $entity.setErrors(['salary' => ['message'], 'name' => ['another message']]);
+     * $entity.setErrors(["salary" => ["message"], "name" => ["another message"]]);
      * ```
      *
      * @param array myErrors The array of errors to set.
@@ -906,7 +906,7 @@ trait EntityTrait
      *
      * ```
      * // Sets the error messages for a single field
-     * $entity.setError('salary', ['must be numeric', 'must be a positive number']);
+     * $entity.setError("salary", ["must be numeric", "must be a positive number"]);
      * ```
      *
      * @param string myField The field to get errors for, or the array of errors to set.
@@ -931,7 +931,7 @@ trait EntityTrait
     protected auto _nestedErrors(string myField): array
     {
         // Only one path element, check for nested entity with error.
-        if (strpos(myField, '.') === false) {
+        if (strpos(myField, ".") === false) {
             return this._readError(this.get(myField));
         }
         // Try reading the errors data with field as a simple path
@@ -939,7 +939,7 @@ trait EntityTrait
         if (myError !== null) {
             return myError;
         }
-        myPath = explode('.', myField);
+        myPath = explode(".", myField);
 
         // Traverse down the related entities/arrays for
         // the relevant entity.
@@ -1086,7 +1086,7 @@ trait EntityTrait
      * Stores whether a field value can be changed or set in this entity.
      * The special field `*` can also be marked as accessible or protected, meaning
      * that any other field specified before will take its value. For example
-     * `$entity.setAccess('*', true)` means that any field not specified already
+     * `$entity.setAccess("*", true)` means that any field not specified already
      * will be accessible by default.
      *
      * You can also call this method with an array of fields, in which case they
@@ -1095,10 +1095,10 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity.setAccess('id', true); // Mark id as not protected
-     * $entity.setAccess('author_id', false); // Mark author_id as protected
-     * $entity.setAccess(['id', 'user_id'], true); // Mark both fields as accessible
-     * $entity.setAccess('*', false); // Mark all fields as protected
+     * $entity.setAccess("id", true); // Mark id as not protected
+     * $entity.setAccess("author_id", false); // Mark author_id as protected
+     * $entity.setAccess(["id", "user_id"], true); // Mark both fields as accessible
+     * $entity.setAccess("*", false); // Mark all fields as protected
      * ```
      *
      * @param array<string>|string myField Single or list of fields to change its accessibility
@@ -1107,11 +1107,11 @@ trait EntityTrait
      * @return this
      */
     auto setAccess(myField, bool $set) {
-        if (myField === '*') {
+        if (myField === "*") {
             this._accessible = array_map(function ($p) use ($set) {
                 return $set;
             }, this._accessible);
-            this._accessible['*'] = $set;
+            this._accessible["*"] = $set;
 
             return this;
         }
@@ -1140,7 +1140,7 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity.isAccessible('id'); // Returns whether it can be set or not
+     * $entity.isAccessible("id"); // Returns whether it can be set or not
      * ```
      *
      * @param string myField Field name to check
@@ -1150,7 +1150,7 @@ trait EntityTrait
     bool isAccessible(string myField) {
         myValue = this._accessible[myField] ?? null;
 
-        return (myValue === null && !empty(this._accessible['*'])) || myValue;
+        return (myValue === null && !empty(this._accessible["*"])) || myValue;
     }
 
     /**
@@ -1193,15 +1193,15 @@ trait EntityTrait
         }
 
         return myFields + [
-            '[new]' => this.isNew(),
-            '[accessible]' => this._accessible,
-            '[dirty]' => this._dirty,
-            '[original]' => this._original,
-            '[virtual]' => this._virtual,
-            '[hasErrors]' => this.hasErrors(),
-            '[errors]' => this._errors,
-            '[invalid]' => this._invalid,
-            '[repository]' => this._registryAlias,
+            "[new]" => this.isNew(),
+            "[accessible]" => this._accessible,
+            "[dirty]" => this._dirty,
+            "[original]" => this._original,
+            "[virtual]" => this._virtual,
+            "[hasErrors]" => this.hasErrors(),
+            "[errors]" => this._errors,
+            "[invalid]" => this._invalid,
+            "[repository]" => this._registryAlias,
         ];
     }
 }

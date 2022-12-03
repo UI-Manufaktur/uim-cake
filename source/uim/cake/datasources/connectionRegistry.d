@@ -23,7 +23,7 @@ class ConnectionRegistry : ObjectRegistry
      */
     protected auto _resolveClassName(string myClass): Nullable!string
     {
-        return App::className(myClass, 'Datasource');
+        return App::className(myClass, "Datasource");
     }
 
     /**
@@ -39,8 +39,8 @@ class ConnectionRegistry : ObjectRegistry
     protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
     {
         throw new MissingDatasourceException([
-            'class' => myClass,
-            'plugin' => myPlugin,
+            "class" => myClass,
+            "plugin" => myPlugin,
         ]);
     }
 
@@ -66,7 +66,7 @@ class ConnectionRegistry : ObjectRegistry
             return myClass;
         }
 
-        unset(myConfig['className']);
+        unset(myConfig["className"]);
 
         /** @var \Cake\Datasource\ConnectionInterface */
         return new myClass(myConfig);

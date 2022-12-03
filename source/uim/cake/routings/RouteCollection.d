@@ -69,16 +69,16 @@ class RouteCollection
     function add(Route $route, array myOptions = []): void
     {
         // Explicit names
-        if (isset(myOptions['_name'])) {
-            if (isset(this._named[myOptions['_name']])) {
-                $matched = this._named[myOptions['_name']];
+        if (isset(myOptions["_name"])) {
+            if (isset(this._named[myOptions["_name"]])) {
+                $matched = this._named[myOptions["_name"]];
                 throw new DuplicateNamedRouteException([
-                    'name' => myOptions['_name'],
-                    'url' => $matched.template,
-                    'duplicate' => $matched,
+                    "name" => myOptions["_name"],
+                    "url" => $matched.template,
+                    "duplicate" => $matched,
                 ]);
             }
-            this._named[myOptions['_name']] = $route;
+            this._named[myOptions["_name"]] = $route;
         }
 
         // Generated names.
@@ -104,7 +104,7 @@ class RouteCollection
      * @return array An array of request parameters parsed from the URL.
      * @throws \Cake\Routing\Exception\MissingRouteException When a URL has no matching route.
      */
-    function parse(string myUrl, string $method = ''): array
+    function parse(string myUrl, string $method = ""): array
     {
         $decoded = urldecode(myUrl);
 
@@ -117,8 +117,8 @@ class RouteCollection
             }
 
             myQueryParameters = [];
-            if (strpos(myUrl, '?') !== false) {
-                [myUrl, $qs] = explode('?', myUrl, 2);
+            if (strpos(myUrl, "?") !== false) {
+                [myUrl, $qs] = explode("?", myUrl, 2);
                 parse_str($qs, myQueryParameters);
             }
 
@@ -128,19 +128,19 @@ class RouteCollection
                     continue;
                 }
                 if (myQueryParameters) {
-                    $r['?'] = myQueryParameters;
+                    $r["?"] = myQueryParameters;
                 }
 
                 return $r;
             }
         }
 
-        myExceptionProperties = ['url' => myUrl];
-        if ($method !== '') {
+        myExceptionProperties = ["url" => myUrl];
+        if ($method !== "") {
             // Ensure that if the method is included, it is the first element of
             // the array, to match the order that the strings are printed in the
             // MissingRouteException error message, $_messageTemplateWithMethod.
-            myExceptionProperties = array_merge(['method' => $method], myExceptionProperties);
+            myExceptionProperties = array_merge(["method" => $method], myExceptionProperties);
         }
         throw new MissingRouteException(myExceptionProperties);
     }
@@ -172,18 +172,18 @@ class RouteCollection
                 }
                 if ($uri.getQuery()) {
                     parse_str($uri.getQuery(), myQueryParameters);
-                    $r['?'] = myQueryParameters;
+                    $r["?"] = myQueryParameters;
                 }
 
                 return $r;
             }
         }
-        throw new MissingRouteException(['url' => myUrlPath]);
+        throw new MissingRouteException(["url" => myUrlPath]);
     }
 
     /**
      * Get the set of names from the myUrl. Accepts both older style array urls,
-     * and newer style urls containing '_name'
+     * and newer style urls containing "_name"
      *
      * @param array myUrl The url to match.
      * @return array<string> The set of names of the url
@@ -191,21 +191,21 @@ class RouteCollection
     protected auto _getNames(array myUrl): array
     {
         myPlugin = false;
-        if (isset(myUrl['plugin']) && myUrl['plugin'] !== false) {
-            myPlugin = strtolower(myUrl['plugin']);
+        if (isset(myUrl["plugin"]) && myUrl["plugin"] !== false) {
+            myPlugin = strtolower(myUrl["plugin"]);
         }
         $prefix = false;
-        if (isset(myUrl['prefix']) && myUrl['prefix'] !== false) {
-            $prefix = strtolower(myUrl['prefix']);
+        if (isset(myUrl["prefix"]) && myUrl["prefix"] !== false) {
+            $prefix = strtolower(myUrl["prefix"]);
         }
-        $controller = isset(myUrl['controller']) ? strtolower(myUrl['controller']) : null;
-        $action = strtolower(myUrl['action']);
+        $controller = isset(myUrl["controller"]) ? strtolower(myUrl["controller"]) : null;
+        $action = strtolower(myUrl["action"]);
 
         myNames = [
             "${controller}:${action}",
             "${controller}:_action",
             "_controller:${action}",
-            '_controller:_action',
+            "_controller:_action",
         ];
 
         // No prefix, no plugin
@@ -223,7 +223,7 @@ class RouteCollection
                 "_plugin.${controller}:${action}",
                 "_plugin.${controller}:_action",
                 "_plugin._controller:${action}",
-                '_plugin._controller:_action',
+                "_plugin._controller:_action",
             ];
         }
 
@@ -237,7 +237,7 @@ class RouteCollection
                 "_prefix:${controller}:${action}",
                 "_prefix:${controller}:_action",
                 "_prefix:_controller:${action}",
-                '_prefix:_controller:_action',
+                "_prefix:_controller:_action",
             ];
         }
 
@@ -259,7 +259,7 @@ class RouteCollection
             "_prefix:_plugin.${controller}:${action}",
             "_prefix:_plugin.${controller}:_action",
             "_prefix:_plugin._controller:${action}",
-            '_prefix:_plugin._controller:_action',
+            "_prefix:_plugin._controller:_action",
         ];
     }
 
@@ -277,9 +277,9 @@ class RouteCollection
      */
     string match(array myUrl, array $context) {
         // Named routes support optimization.
-        if (isset(myUrl['_name'])) {
-            myName = myUrl['_name'];
-            unset(myUrl['_name']);
+        if (isset(myUrl["_name"])) {
+            myName = myUrl["_name"];
+            unset(myUrl["_name"]);
             if (isset(this._named[myName])) {
                 $route = this._named[myName];
                 $out = $route.match(myUrl + $route.defaults, $context);
@@ -287,12 +287,12 @@ class RouteCollection
                     return $out;
                 }
                 throw new MissingRouteException([
-                    'url' => myName,
-                    'context' => $context,
-                    'message' => "A named route was found for `{myName}`, but matching failed.",
+                    "url" => myName,
+                    "context" => $context,
+                    "message" => "A named route was found for `{myName}`, but matching failed.",
                 ]);
             }
-            throw new MissingRouteException(['url' => myName, 'context' => $context]);
+            throw new MissingRouteException(["url" => myName, "context" => $context]);
         }
 
         foreach (this._getNames(myUrl) as myName) {
@@ -302,11 +302,11 @@ class RouteCollection
             foreach (this._routeTable[myName] as $route) {
                 $match = $route.match(myUrl, $context);
                 if ($match) {
-                    return $match === '/' ? $match : trim($match, '/');
+                    return $match === "/" ? $match : trim($match, "/");
                 }
             }
         }
-        throw new MissingRouteException(['url' => var_export(myUrl, true), 'context' => $context]);
+        throw new MissingRouteException(["url" => var_export(myUrl, true), "context" => $context]);
     }
 
     /**
@@ -320,7 +320,7 @@ class RouteCollection
 
         return array_reduce(
             this._paths,
-            'array_merge',
+            "array_merge",
             []
         );
     }
@@ -392,13 +392,13 @@ class RouteCollection
      */
     function middlewareGroup(string myName, array $middlewareNames) {
         if (this.hasMiddleware(myName)) {
-            myMessage = "Cannot add middleware group 'myName'. A middleware by this name has already been registered.";
+            myMessage = "Cannot add middleware group "myName". A middleware by this name has already been registered.";
             throw new RuntimeException(myMessage);
         }
 
         foreach ($middlewareNames as $middlewareName) {
             if (!this.hasMiddleware($middlewareName)) {
-                myMessage = "Cannot add '$middlewareName' middleware to group 'myName'. It has not been registered.";
+                myMessage = "Cannot add "$middlewareName" middleware to group "myName". It has not been registered.";
                 throw new RuntimeException(myMessage);
             }
         }
@@ -456,7 +456,7 @@ class RouteCollection
             }
             if (!this.hasMiddleware(myName)) {
                 throw new RuntimeException(sprintf(
-                    "The middleware named '%s' has not been registered. Use registerMiddleware() to define it.",
+                    "The middleware named "%s" has not been registered. Use registerMiddleware() to define it.",
                     myName
                 ));
             }

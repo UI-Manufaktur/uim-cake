@@ -45,42 +45,42 @@ class Router
      *
      * @var string
      */
-    public const ACTION = 'index|show|add|create|edit|update|remove|del|delete|view|item';
+    public const ACTION = "index|show|add|create|edit|update|remove|del|delete|view|item";
 
     /**
      * Regular expression for years
      *
      * @var string
      */
-    public const YEAR = '[12][0-9]{3}';
+    public const YEAR = "[12][0-9]{3}";
 
     /**
      * Regular expression for months
      *
      * @var string
      */
-    public const MONTH = '0[1-9]|1[012]';
+    public const MONTH = "0[1-9]|1[012]";
 
     /**
      * Regular expression for days
      *
      * @var string
      */
-    public const DAY = '0[1-9]|[12][0-9]|3[01]';
+    public const DAY = "0[1-9]|[12][0-9]|3[01]";
 
     /**
      * Regular expression for auto increment IDs
      *
      * @var string
      */
-    public const ID = '[0-9]+';
+    public const ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
      *
      * @var string
      */
-    public const UUID = '[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}';
+    public const UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
      * The route collection routes would be added to.
@@ -102,12 +102,12 @@ class Router
      * @var array<string, string>
      */
     protected static $_namedExpressions = [
-        'Action' => Router::ACTION,
-        'Year' => Router::YEAR,
-        'Month' => Router::MONTH,
-        'Day' => Router::DAY,
-        'ID' => Router::ID,
-        'UUID' => Router::UUID,
+        "Action" => Router::ACTION,
+        "Year" => Router::YEAR,
+        "Month" => Router::MONTH,
+        "Day" => Router::DAY,
+        "ID" => Router::ID,
+        "UUID" => Router::UUID,
     ];
 
     /**
@@ -196,10 +196,10 @@ class Router
     static function connect($route, $defaults = [], myOptions = []): void
     {
         deprecationWarning(
-            '`Router::connect()` is deprecated, use the non-static method `RouteBuilder::connect()` instead.'
+            "`Router::connect()` is deprecated, use the non-static method `RouteBuilder::connect()` instead."
         );
 
-        static::scope('/', function ($routes) use ($route, $defaults, myOptions): void {
+        static::scope("/", function ($routes) use ($route, $defaults, myOptions): void {
             /** @var \Cake\Routing\RouteBuilder $routes */
             $routes.connect($route, $defaults, myOptions);
         });
@@ -227,14 +227,14 @@ class Router
     {
         static::$_request = myRequest;
 
-        static::$_requestContext['_base'] = myRequest.getAttribute('base');
-        static::$_requestContext['params'] = myRequest.getAttribute('params', []);
+        static::$_requestContext["_base"] = myRequest.getAttribute("base");
+        static::$_requestContext["params"] = myRequest.getAttribute("params", []);
 
         $uri = myRequest.getUri();
         static::$_requestContext += [
-            '_scheme' => $uri.getScheme(),
-            '_host' => $uri.getHost(),
-            '_port' => $uri.getPort(),
+            "_scheme" => $uri.getScheme(),
+            "_host" => $uri.getHost(),
+            "_port" => $uri.getPort(),
         ];
     }
 
@@ -263,7 +263,7 @@ class Router
             return;
         }
         foreach (static::$_initialState as myKey => $val) {
-            if (myKey !== '_initialState') {
+            if (myKey !== "_initialState") {
                 static::${myKey} = $val;
             }
         }
@@ -273,7 +273,7 @@ class Router
     /**
      * Reset routes and related state.
      *
-     * Similar to reload() except that this doesn't reset all global state,
+     * Similar to reload() except that this doesn"t reset all global state,
      * as that leads to incorrect behavior in some plugin test case scenarios.
      *
      * This method will reset:
@@ -312,8 +312,8 @@ class Router
      *
      * ```
      * Router::addUrlFilter(function (myParams, myRequest) {
-     *  if (myRequest.getParam('lang') && !isset(myParams['lang'])) {
-     *    myParams['lang'] = myRequest.getParam('lang');
+     *  if (myRequest.getParam("lang") && !isset(myParams["lang"])) {
+     *    myParams["lang"] = myRequest.getParam("lang");
      *  }
      *  return myParams;
      * });
@@ -349,7 +349,7 @@ class Router
                     $ref = new ReflectionFunction($filter);
                 }
                 myMessage = sprintf(
-                    'URL filter defined in %s on line %s could not be applied. The filter failed with: %s',
+                    "URL filter defined in %s on line %s could not be applied. The filter failed with: %s",
                     $ref.getFileName(),
                     $ref.getStartLine(),
                     $e.getMessage()
@@ -368,17 +368,17 @@ class Router
      *
      * ### Usage
      *
-     * - `Router::url('/posts/edit/1');` Returns the string with the base dir prepended.
+     * - `Router::url("/posts/edit/1");` Returns the string with the base dir prepended.
      *   This usage does not use reverser routing.
-     * - `Router::url(['controller' => 'Posts', 'action' => 'edit']);` Returns a URL
+     * - `Router::url(["controller" => "Posts", "action" => "edit"]);` Returns a URL
      *   generated through reverse routing.
-     * - `Router::url(['_name' => 'custom-name', ...]);` Returns a URL generated
+     * - `Router::url(["_name" => "custom-name", ...]);` Returns a URL generated
      *   through reverse routing. This form allows you to leverage named routes.
      *
-     * There are a few 'special' parameters that can change the final URL string that is generated
+     * There are a few "special" parameters that can change the final URL string that is generated
      *
      * - `_base` - Set to false to remove the base path from the generated URL. If your application
-     *   is not in the root directory, this can be used to generate URLs that are 'cake relative'.
+     *   is not in the root directory, this can be used to generate URLs that are "cake relative".
      *   cake relative URLs are required when using requestAction.
      * - `_scheme` - Set to create links on different schemes like `webcal` or `ftp`. Defaults
      *   to the current scheme.
@@ -391,7 +391,7 @@ class Router
      *   to specify it.
      *
      * @param \Psr\Http\Message\UriInterface|array|string|null myUrl An array specifying any of the following:
-     *   'controller', 'action', 'plugin' additionally, you can provide routed
+     *   "controller", "action", "plugin" additionally, you can provide routed
      *   elements or query string parameters. If string it can be name any valid url
      *   string or it can be an UriInterface instance.
      * @param bool $full If true, the full base URL will be prepended to the result.
@@ -403,11 +403,11 @@ class Router
         $context = static::$_requestContext;
         myRequest = static::getRequest();
 
-        $context['_base'] = $context['_base'] ?? Configure::read('App.base') ?: '';
+        $context["_base"] = $context["_base"] ?? Configure::read("App.base") ?: "";
 
         if (empty(myUrl)) {
-            $here = myRequest ? myRequest.getRequestTarget() : '/';
-            $output = $context['_base'] . $here;
+            $here = myRequest ? myRequest.getRequestTarget() : "/";
+            $output = $context["_base"] . $here;
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
             }
@@ -416,92 +416,92 @@ class Router
         }
 
         myParams = [
-            'plugin' => null,
-            'controller' => null,
-            'action' => 'index',
-            '_ext' => null,
+            "plugin" => null,
+            "controller" => null,
+            "action" => "index",
+            "_ext" => null,
         ];
-        if (!empty($context['params'])) {
-            myParams = $context['params'];
+        if (!empty($context["params"])) {
+            myParams = $context["params"];
         }
 
-        $frag = '';
+        $frag = "";
 
         if (is_array(myUrl)) {
-            if (isset(myUrl['_path'])) {
+            if (isset(myUrl["_path"])) {
                 myUrl = self::unwrapShortString(myUrl);
             }
 
-            if (isset(myUrl['_ssl'])) {
-                myUrl['_scheme'] = myUrl['_ssl'] === true ? 'https' : 'http';
+            if (isset(myUrl["_ssl"])) {
+                myUrl["_scheme"] = myUrl["_ssl"] === true ? "https" : "http";
             }
 
-            if (isset(myUrl['_full']) && myUrl['_full'] === true) {
+            if (isset(myUrl["_full"]) && myUrl["_full"] === true) {
                 $full = true;
             }
-            if (isset(myUrl['#'])) {
-                $frag = '#' . myUrl['#'];
+            if (isset(myUrl["#"])) {
+                $frag = "#" . myUrl["#"];
             }
-            unset(myUrl['_ssl'], myUrl['_full'], myUrl['#']);
+            unset(myUrl["_ssl"], myUrl["_full"], myUrl["#"]);
 
             myUrl = static::_applyUrlFilters(myUrl);
 
-            if (!isset(myUrl['_name'])) {
+            if (!isset(myUrl["_name"])) {
                 // Copy the current action if the controller is the current one.
                 if (
-                    empty(myUrl['action']) &&
+                    empty(myUrl["action"]) &&
                     (
-                        empty(myUrl['controller']) ||
-                        myParams['controller'] === myUrl['controller']
+                        empty(myUrl["controller"]) ||
+                        myParams["controller"] === myUrl["controller"]
                     )
                 ) {
-                    myUrl['action'] = myParams['action'];
+                    myUrl["action"] = myParams["action"];
                 }
 
                 // Keep the current prefix around if none set.
-                if (isset(myParams['prefix']) && !isset(myUrl['prefix'])) {
-                    myUrl['prefix'] = myParams['prefix'];
+                if (isset(myParams["prefix"]) && !isset(myUrl["prefix"])) {
+                    myUrl["prefix"] = myParams["prefix"];
                 }
 
                 myUrl += [
-                    'plugin' => myParams['plugin'],
-                    'controller' => myParams['controller'],
-                    'action' => 'index',
-                    '_ext' => null,
+                    "plugin" => myParams["plugin"],
+                    "controller" => myParams["controller"],
+                    "action" => "index",
+                    "_ext" => null,
                 ];
             }
 
             // If a full URL is requested with a scheme the host should default
             // to App.fullBaseUrl to avoid corrupt URLs
-            if ($full && isset(myUrl['_scheme']) && !isset(myUrl['_host'])) {
-                myUrl['_host'] = $context['_host'];
+            if ($full && isset(myUrl["_scheme"]) && !isset(myUrl["_host"])) {
+                myUrl["_host"] = $context["_host"];
             }
-            $context['params'] = myParams;
+            $context["params"] = myParams;
 
             $output = static::$_collection.match(myUrl, $context);
         } else {
             myUrl = (string)myUrl;
 
             $plainString = (
-                strpos(myUrl, 'javascript:') === 0 ||
-                strpos(myUrl, 'mailto:') === 0 ||
-                strpos(myUrl, 'tel:') === 0 ||
-                strpos(myUrl, 'sms:') === 0 ||
-                strpos(myUrl, '#') === 0 ||
-                strpos(myUrl, '?') === 0 ||
-                strpos(myUrl, '//') === 0 ||
-                strpos(myUrl, '://') !== false
+                strpos(myUrl, "javascript:") === 0 ||
+                strpos(myUrl, "mailto:") === 0 ||
+                strpos(myUrl, "tel:") === 0 ||
+                strpos(myUrl, "sms:") === 0 ||
+                strpos(myUrl, "#") === 0 ||
+                strpos(myUrl, "?") === 0 ||
+                strpos(myUrl, "//") === 0 ||
+                strpos(myUrl, "://") !== false
             );
 
             if ($plainString) {
                 return myUrl;
             }
-            $output = $context['_base'] . myUrl;
+            $output = $context["_base"] . myUrl;
         }
 
-        $protocol = preg_match('#^[a-z][a-z0-9+\-.]*\://#i', $output);
+        $protocol = preg_match("#^[a-z][a-z0-9+\-.]*\://#i", $output);
         if ($protocol === 0) {
-            $output = str_replace('//', '/', '/' . $output);
+            $output = str_replace("//", "/", "/" . $output);
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
             }
@@ -527,7 +527,7 @@ class Router
      * @return string Full translated URL with base path.
      */
     static string pathUrl(string myPath, array myParams = [], bool $full = false) {
-        return static::url(['_path' => myPath] + myParams, $full);
+        return static::url(["_path" => myPath] + myParams, $full);
     }
 
     /**
@@ -539,7 +539,7 @@ class Router
      *
      * @see Router::url()
      * @param array|string|null myUrl An array specifying any of the following:
-     *   'controller', 'action', 'plugin' additionally, you can provide routed
+     *   "controller", "action", "plugin" additionally, you can provide routed
      *   elements or query string parameters. If string it can be name any valid url
      *   string.
      * @param bool $full If true, the full base URL will be prepended to the result.
@@ -578,22 +578,22 @@ class Router
 
         if ($base !== null) {
             static::$_fullBaseUrl = $base;
-            Configure.write('App.fullBaseUrl', $base);
+            Configure.write("App.fullBaseUrl", $base);
         } else {
-            $base = (string)Configure::read('App.fullBaseUrl');
+            $base = (string)Configure::read("App.fullBaseUrl");
 
             // If App.fullBaseUrl is empty but context is set from request through setRequest()
-            if (!$base && !empty(static::$_requestContext['_host'])) {
+            if (!$base && !empty(static::$_requestContext["_host"])) {
                 $base = sprintf(
-                    '%s://%s',
-                    static::$_requestContext['_scheme'],
-                    static::$_requestContext['_host']
+                    "%s://%s",
+                    static::$_requestContext["_scheme"],
+                    static::$_requestContext["_host"]
                 );
-                if (!empty(static::$_requestContext['_port'])) {
-                    $base .= ':' . static::$_requestContext['_port'];
+                if (!empty(static::$_requestContext["_port"])) {
+                    $base .= ":" . static::$_requestContext["_port"];
                 }
 
-                Configure.write('App.fullBaseUrl', $base);
+                Configure.write("App.fullBaseUrl", $base);
 
                 return static::$_fullBaseUrl = $base;
             }
@@ -603,9 +603,9 @@ class Router
 
         $parts = parse_url(static::$_fullBaseUrl);
         static::$_requestContext = [
-            '_scheme' => $parts['scheme'] ?? null,
-            '_host' => $parts['host'] ?? null,
-            '_port' => $parts['port'] ?? null,
+            "_scheme" => $parts["scheme"] ?? null,
+            "_host" => $parts["host"] ?? null,
+            "_port" => $parts["port"] ?? null,
         ] + static::$_requestContext;
 
         return static::$_fullBaseUrl;
@@ -614,8 +614,8 @@ class Router
     /**
      * Reverses a parsed parameter array into an array.
      *
-     * Works similarly to Router::url(), but since parsed URL's contain additional
-     * keys like 'pass', '_matchedRoute' etc. those keys need to be specially
+     * Works similarly to Router::url(), but since parsed URL"s contain additional
+     * keys like "pass", "_matchedRoute" etc. those keys need to be specially
      * handled in order to reverse a params array into a string URL.
      *
      * @param \Cake\Http\ServerRequest|array myParams The params array or
@@ -626,15 +626,15 @@ class Router
     {
         if (myParams instanceof ServerRequest) {
             myQueryString = myParams.getQueryParams();
-            myParams = myParams.getAttribute('params');
-            myParams['?'] = myQueryString;
+            myParams = myParams.getAttribute("params");
+            myParams["?"] = myQueryString;
         }
-        $pass = myParams['pass'] ?? [];
+        $pass = myParams["pass"] ?? [];
 
         unset(
-            myParams['pass'],
-            myParams['_matchedRoute'],
-            myParams['_name']
+            myParams["pass"],
+            myParams["_matchedRoute"],
+            myParams["_name"]
         );
         myParams = array_merge(myParams, $pass);
 
@@ -644,8 +644,8 @@ class Router
     /**
      * Reverses a parsed parameter array into a string.
      *
-     * Works similarly to Router::url(), but since parsed URL's contain additional
-     * keys like 'pass', '_matchedRoute' etc. those keys need to be specially
+     * Works similarly to Router::url(), but since parsed URL"s contain additional
+     * keys like "pass", "_matchedRoute" etc. those keys need to be specially
      * handled in order to reverse a params array into a string URL.
      *
      * @param \Cake\Http\ServerRequest|array myParams The params array or
@@ -663,36 +663,36 @@ class Router
     /**
      * Normalizes a URL for purposes of comparison.
      *
-     * Will strip the base path off and replace any double /'s.
+     * Will strip the base path off and replace any double /"s.
      * It will not unify the casing and underscoring of the input value.
      *
      * @param array|string myUrl URL to normalize Either an array or a string URL.
      * @return string Normalized URL
      */
-    static string normalize(myUrl = '/') {
+    static string normalize(myUrl = "/") {
         if (is_array(myUrl)) {
             myUrl = static::url(myUrl);
         }
-        if (preg_match('/^[a-z\-]+:\/\//', myUrl)) {
+        if (preg_match("/^[a-z\-]+:\/\//", myUrl)) {
             return myUrl;
         }
         myRequest = static::getRequest();
 
         if (myRequest) {
-            $base = myRequest.getAttribute('base', '');
-            if ($base !== '' && stristr(myUrl, $base)) {
-                myUrl = preg_replace('/^' . preg_quote($base, '/') . '/', '', myUrl, 1);
+            $base = myRequest.getAttribute("base", "");
+            if ($base !== "" && stristr(myUrl, $base)) {
+                myUrl = preg_replace("/^" . preg_quote($base, "/") . "/", "", myUrl, 1);
             }
         }
-        myUrl = '/' . myUrl;
+        myUrl = "/" . myUrl;
 
-        while (strpos(myUrl, '//') !== false) {
-            myUrl = str_replace('//', '/', myUrl);
+        while (strpos(myUrl, "//") !== false) {
+            myUrl = str_replace("//", "/", myUrl);
         }
-        myUrl = preg_replace('/(?:(\/$))/', '', myUrl);
+        myUrl = preg_replace("/(?:(\/$))/", "", myUrl);
 
         if (empty(myUrl)) {
-            return '/';
+            return "/";
         }
 
         return myUrl;
@@ -704,7 +704,7 @@ class Router
      * Instructs the router to parse out file extensions
      * from the URL. For example, http://example.com/posts.rss would yield a file
      * extension of "rss". The file extension itself is made available in the
-     * controller as `this.request.getParam('_ext')`, and is used by the RequestHandler
+     * controller as `this.request.getParam("_ext")`, and is used by the RequestHandler
      * component to automatically switch to alternate layouts and templates, and
      * load helpers corresponding to the given content, i.e. RssHelper. Switching
      * layouts and helpers requires that the chosen extension has a defined mime type
@@ -743,14 +743,14 @@ class Router
     static function createRouteBuilder(string myPath, array myOptions = []): RouteBuilder
     {
         $defaults = [
-            'routeClass' => static::defaultRouteClass(),
-            'extensions' => static::$_defaultExtensions,
+            "routeClass" => static::defaultRouteClass(),
+            "extensions" => static::$_defaultExtensions,
         ];
         myOptions += $defaults;
 
         return new RouteBuilder(static::$_collection, myPath, [], [
-            'routeClass' => myOptions['routeClass'],
-            'extensions' => myOptions['extensions'],
+            "routeClass" => myOptions["routeClass"],
+            "extensions" => myOptions["extensions"],
         ]);
     }
 
@@ -777,8 +777,8 @@ class Router
      * ### Example
      *
      * ```
-     * Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
-     *    $routes.connect('/', ['controller' => 'Articles']);
+     * Router::scope("/blog", ["plugin" => "Blog"], function ($routes) {
+     *    $routes.connect("/", ["controller" => "Articles"]);
      * });
      * ```
      *
@@ -800,15 +800,15 @@ class Router
     static function scope(string myPath, myParams = [], $callback = null): void
     {
         deprecationWarning(
-            '`Router::scope()` is deprecated, use the non-static method `RouteBuilder::scope()` instead.'
+            "`Router::scope()` is deprecated, use the non-static method `RouteBuilder::scope()` instead."
         );
 
         myOptions = [];
         if (is_array(myParams)) {
             myOptions = myParams;
-            unset(myParams['routeClass'], myParams['extensions']);
+            unset(myParams["routeClass"], myParams["extensions"]);
         }
-        myBuilder = static::createRouteBuilder('/', myOptions);
+        myBuilder = static::createRouteBuilder("/", myOptions);
         myBuilder.scope(myPath, myParams, $callback);
     }
 
@@ -819,7 +819,7 @@ class Router
      * relevant prefix information.
      *
      * The path parameter is used to generate the routing parameter name.
-     * For example a path of `admin` would result in `'prefix' => 'Admin'` being
+     * For example a path of `admin` would result in `"prefix" => "Admin"` being
      * applied to all connected routes.
      *
      * The prefix name will be inflected to the dasherized version to create
@@ -839,7 +839,7 @@ class Router
     static function prefix(string myName, myParams = [], $callback = null): void
     {
         deprecationWarning(
-            '`Router::prefix()` is deprecated, use the non-static method `RouteBuilder::prefix()` instead.'
+            "`Router::prefix()` is deprecated, use the non-static method `RouteBuilder::prefix()` instead."
         );
 
         if (!is_array(myParams)) {
@@ -847,10 +847,10 @@ class Router
             myParams = [];
         }
 
-        myPath = myParams['path'] ?? '/' . Inflector::dasherize(myName);
-        unset(myParams['path']);
+        myPath = myParams["path"] ?? "/" . Inflector::dasherize(myName);
+        unset(myParams["path"]);
 
-        myParams = array_merge(myParams, ['prefix' => Inflector::camelize(myName)]);
+        myParams = array_merge(myParams, ["prefix" => Inflector::camelize(myName)]);
         static::scope(myPath, myParams, $callback);
     }
 
@@ -876,17 +876,17 @@ class Router
     static function plugin(string myName, myOptions = [], $callback = null): void
     {
         deprecationWarning(
-            '`Router::plugin()` is deprecated, use the non-static method `RouteBuilder::plugin()` instead.'
+            "`Router::plugin()` is deprecated, use the non-static method `RouteBuilder::plugin()` instead."
         );
 
         if (!is_array(myOptions)) {
             $callback = myOptions;
             myOptions = [];
         }
-        myParams = ['plugin' => myName];
-        myPath = myOptions['path'] ?? '/' . Inflector::dasherize(myName);
-        if (isset(myOptions['_namePrefix'])) {
-            myParams['_namePrefix'] = myOptions['_namePrefix'];
+        myParams = ["plugin" => myName];
+        myPath = myOptions["path"] ?? "/" . Inflector::dasherize(myName);
+        if (isset(myOptions["_namePrefix"])) {
+            myParams["_namePrefix"] = myOptions["_namePrefix"];
         }
         static::scope(myPath, myParams, $callback);
     }
@@ -929,19 +929,19 @@ class Router
      * @return array
      */
     protected static function unwrapShortString(array myUrl) {
-        foreach (['plugin', 'prefix', 'controller', 'action'] as myKey) {
+        foreach (["plugin", "prefix", "controller", "action"] as myKey) {
             if (array_key_exists(myKey, myUrl)) {
                 throw new InvalidArgumentException(
                     "`myKey` cannot be used when defining route targets with a string route path."
                 );
             }
         }
-        myUrl += static::parseRoutePath(myUrl['_path']);
+        myUrl += static::parseRoutePath(myUrl["_path"]);
         myUrl += [
-            'plugin' => false,
-            'prefix' => false,
+            "plugin" => false,
+            "prefix" => false,
         ];
-        unset(myUrl['_path']);
+        unset(myUrl["_path"]);
 
         return myUrl;
     }
@@ -964,13 +964,13 @@ class Router
             return static::$_routePaths[myUrl];
         }
 
-        $regex = '#^
+        $regex = "#^
             (?:(?<plugin>[a-z0-9]+(?:/[a-z0-9]+)*)\.)?
             (?:(?<prefix>[a-z0-9]+(?:/[a-z0-9]+)*)/)?
             (?<controller>[a-z0-9]+)
             ::
             (?<action>[a-z0-9_]+)
-            $#ix';
+            $#ix";
 
         if (!preg_match($regex, myUrl, $matches)) {
             throw new InvalidArgumentException("Could not parse a string route path `{myUrl}`.");
@@ -978,14 +978,14 @@ class Router
 
         $defaults = [];
 
-        if ($matches['plugin'] !== '') {
-            $defaults['plugin'] = $matches['plugin'];
+        if ($matches["plugin"] !== "") {
+            $defaults["plugin"] = $matches["plugin"];
         }
-        if ($matches['prefix'] !== '') {
-            $defaults['prefix'] = $matches['prefix'];
+        if ($matches["prefix"] !== "") {
+            $defaults["prefix"] = $matches["prefix"];
         }
-        $defaults['controller'] = $matches['controller'];
-        $defaults['action'] = $matches['action'];
+        $defaults["controller"] = $matches["controller"];
+        $defaults["action"] = $matches["action"];
 
         static::$_routePaths[myUrl] = $defaults;
 

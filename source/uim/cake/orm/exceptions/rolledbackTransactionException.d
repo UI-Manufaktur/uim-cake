@@ -21,6 +21,6 @@ class RolledbackTransactionException : CakeException
     /**
      * @var string
      */
-    protected $_messageTemplate = 'The afterSave event in "%s" is aborting the transaction'
-        . ' before the save process is done.';
+    protected $_messageTemplate = "The afterSave event in "%s" is aborting the transaction"
+        . " before the save process is done.";
 }

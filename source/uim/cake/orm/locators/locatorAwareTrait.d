@@ -9,7 +9,7 @@ import uim.cake.orm.Table;
  */
 trait LocatorAwareTrait
 {
-    // This object's default table alias.
+    // This object"s default table alias.
     protected Nullable!string $defaultTable = null;
 
     /**
@@ -40,7 +40,7 @@ trait LocatorAwareTrait
     {
         if (this._tableLocator === null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
-            this._tableLocator = FactoryLocator::get('Table');
+            this._tableLocator = FactoryLocator::get("Table");
         }
 
         /** @var \Cake\ORM\Locator\ILocator */
@@ -63,7 +63,7 @@ trait LocatorAwareTrait
     {
         myAlias = myAlias ?? this.defaultTable;
         if (myAlias === null) {
-            throw new CakeException('You must provide an `myAlias` or set the `$defaultTable` property.');
+            throw new CakeException("You must provide an `myAlias` or set the `$defaultTable` property.");
         }
 
         return this.getTableLocator().get(myAlias, myOptions);

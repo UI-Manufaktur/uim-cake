@@ -17,19 +17,19 @@ class Xml {
      * Building XML from a string:
      *
      * ```
-     * $xml = Xml::build('<example>text</example>');
+     * $xml = Xml::build("<example>text</example>");
      * ```
      *
      * Building XML from string (output DOMDocument):
      *
      * ```
-     * $xml = Xml::build('<example>text</example>', ['return' => 'domdocument']);
+     * $xml = Xml::build("<example>text</example>", ["return" => "domdocument"]);
      * ```
      *
      * Building XML from a file path:
      *
      * ```
-     * $xml = Xml::build('/path/to/an/xml/file.xml');
+     * $xml = Xml::build("/path/to/an/xml/file.xml");
      * ```
      *
      * Building XML from a remote URL:
@@ -38,7 +38,7 @@ class Xml {
      * import uim.caketps\Client;
      *
      * $http = new Client();
-     * $response = $http.get('http://example.com/example.xml');
+     * $response = $http.get("http://example.com/example.xml");
      * $xml = Xml::build($response.body());
      * ```
      *
@@ -46,15 +46,15 @@ class Xml {
      *
      * ```
      *  myValue = [
-     *      'tags' => [
-     *          'tag' => [
+     *      "tags" => [
+     *          "tag" => [
      *              [
-     *                  'id' => '1',
-     *                  'name' => 'defect'
+     *                  "id" => "1",
+     *                  "name" => "defect"
      *              ],
      *              [
-     *                  'id' => '2',
-     *                  'name' => 'enhancement'
+     *                  "id" => "2",
+     *                  "name" => "enhancement"
      *              ]
      *          ]
      *      ]
@@ -66,7 +66,7 @@ class Xml {
      *
      * ### Options
      *
-     * - `return` Can be 'simplexml' to return object of SimpleXMLElement or 'domdocument' to return DOMDocument.
+     * - `return` Can be "simplexml" to return object of SimpleXMLElement or "domdocument" to return DOMDocument.
      * - `loadEntities` Defaults to false. Set to true to enable loading of `<!ENTITY` definitions. This
      *   is disabled by default for security reasons.
      * - `readFile` Set to true to enable file reading. This is disabled by default to prevent
@@ -82,10 +82,10 @@ class Xml {
      */
     static function build($input, array myOptions = []) {
         $defaults = [
-            'return' => 'simplexml',
-            'loadEntities' => false,
-            'readFile' => false,
-            'parseHuge' => false,
+            "return" => "simplexml",
+            "loadEntities" => false,
+            "readFile" => false,
+            "parseHuge" => false,
         ];
         myOptions += $defaults;
 
@@ -93,7 +93,7 @@ class Xml {
             return static::fromArray($input, myOptions);
         }
 
-        if (myOptions['readFile'] && file_exists($input)) {
+        if (myOptions["readFile"] && file_exists($input)) {
             return static::_loadXml(file_get_contents($input), myOptions);
         }
 
@@ -102,11 +102,11 @@ class Xml {
             throw new XmlException("Invalid input. {myType} cannot be parsed as XML.");
         }
 
-        if (strpos($input, '<') !== false) {
+        if (strpos($input, "<") !== false) {
             return static::_loadXml($input, myOptions);
         }
 
-        throw new XmlException('XML cannot be read.');
+        throw new XmlException("XML cannot be read.");
     }
 
     /**
@@ -122,7 +122,7 @@ class Xml {
             $input,
             myOptions,
             function ($input, myOptions, $flags) {
-                if (myOptions['return'] === 'simplexml' || myOptions['return'] === 'simplexmlelement') {
+                if (myOptions["return"] === "simplexml" || myOptions["return"] === "simplexmlelement") {
                     $flags |= LIBXML_NOCDATA;
                     $xml = new SimpleXMLElement($input, $flags);
                 } else {
@@ -145,8 +145,8 @@ class Xml {
      */
     static function loadHtml(string $input, array myOptions = []) {
         $defaults = [
-            'return' => 'simplexml',
-            'loadEntities' => false,
+            "return" => "simplexml",
+            "loadEntities" => false,
         ];
         myOptions += $defaults;
 
@@ -157,7 +157,7 @@ class Xml {
                 $xml = new DOMDocument();
                 $xml.loadHTML($input, $flags);
 
-                if (myOptions['return'] === 'simplexml' || myOptions['return'] === 'simplexmlelement') {
+                if (myOptions["return"] === "simplexml" || myOptions["return"] === "simplexmlelement") {
                     $xml = simplexml_import_dom($xml);
                 }
 
@@ -177,21 +177,21 @@ class Xml {
      */
     protected static function load(string $input, array myOptions, Closure $callable) {
         $flags = 0;
-        if (!empty(myOptions['parseHuge'])) {
+        if (!empty(myOptions["parseHuge"])) {
             $flags |= LIBXML_PARSEHUGE;
         }
 
         $internalErrors = libxml_use_internal_errors(true);
-        if (LIBXML_VERSION < 20900 && !myOptions['loadEntities']) {
+        if (LIBXML_VERSION < 20900 && !myOptions["loadEntities"]) {
             $previousDisabledEntityLoader = libxml_disable_entity_loader(true);
-        } elseif (myOptions['loadEntities']) {
+        } elseif (myOptions["loadEntities"]) {
             $flags |= LIBXML_NOENT;
         }
 
         try {
             return $callable($input, myOptions, $flags);
         } catch (Exception $e) {
-            throw new XmlException('Xml cannot be read. ' . $e.getMessage(), null, $e);
+            throw new XmlException("Xml cannot be read. " . $e.getMessage(), null, $e);
         } finally {
             if (isset($previousDisabledEntityLoader)) {
                 libxml_disable_entity_loader($previousDisabledEntityLoader);
@@ -205,33 +205,33 @@ class Xml {
      *
      * ### Options
      *
-     * - `format` If create children ('tags') or attributes ('attributes').
+     * - `format` If create children ("tags") or attributes ("attributes").
      * - `pretty` Returns formatted Xml when set to `true`. Defaults to `false`
      * - `version` Version of XML document. Default is 1.0.
      * - `encoding` Encoding of XML document. If null remove from XML header.
-     *    Defaults to the application's encoding
-     * - `return` If return object of SimpleXMLElement ('simplexml')
-     *   or DOMDocument ('domdocument'). Default is SimpleXMLElement.
+     *    Defaults to the application"s encoding
+     * - `return` If return object of SimpleXMLElement ("simplexml")
+     *   or DOMDocument ("domdocument"). Default is SimpleXMLElement.
      *
      * Using the following data:
      *
      * ```
      * myValue = [
-     *    'root' => [
-     *        'tag' => [
-     *            'id' => 1,
-     *            'value' => 'defect',
-     *            '@' => 'description'
+     *    "root" => [
+     *        "tag" => [
+     *            "id" => 1,
+     *            "value" => "defect",
+     *            "@" => "description"
      *         ]
      *     ]
      * ];
      * ```
      *
-     * Calling `Xml::fromArray(myValue, 'tags');` Will generate:
+     * Calling `Xml::fromArray(myValue, "tags");` Will generate:
      *
      * `<root><tag><id>1</id><value>defect</value>description</tag></root>`
      *
-     * And calling `Xml::fromArray(myValue, 'attributes');` Will generate:
+     * And calling `Xml::fromArray(myValue, "attributes");` Will generate:
      *
      * `<root><tag id="1" value="defect">description</tag></root>`
      *
@@ -241,34 +241,34 @@ class Xml {
      * @throws \Cake\Utility\Exception\XmlException
      */
     static function fromArray($input, array myOptions = []) {
-        if (is_object($input) && method_exists($input, 'toArray') && is_callable([$input, 'toArray'])) {
+        if (is_object($input) && method_exists($input, "toArray") && is_callable([$input, "toArray"])) {
             $input = $input.toArray();
         }
         if (!is_array($input) || count($input) !== 1) {
-            throw new XmlException('Invalid input.');
+            throw new XmlException("Invalid input.");
         }
         myKey = key($input);
         if (is_int(myKey)) {
-            throw new XmlException('The key of input must be alphanumeric');
+            throw new XmlException("The key of input must be alphanumeric");
         }
 
         $defaults = [
-            'format' => 'tags',
-            'version' => '1.0',
-            'encoding' => mb_internal_encoding(),
-            'return' => 'simplexml',
-            'pretty' => false,
+            "format" => "tags",
+            "version" => "1.0",
+            "encoding" => mb_internal_encoding(),
+            "return" => "simplexml",
+            "pretty" => false,
         ];
         myOptions += $defaults;
 
-        $dom = new DOMDocument(myOptions['version'], myOptions['encoding']);
-        if (myOptions['pretty']) {
+        $dom = new DOMDocument(myOptions["version"], myOptions["encoding"]);
+        if (myOptions["pretty"]) {
             $dom.formatOutput = true;
         }
-        self::_fromArray($dom, $dom, $input, myOptions['format']);
+        self::_fromArray($dom, $dom, $input, myOptions["format"]);
 
-        myOptions['return'] = strtolower(myOptions['return']);
-        if (myOptions['return'] === 'simplexml' || myOptions['return'] === 'simplexmlelement') {
+        myOptions["return"] = strtolower(myOptions["return"]);
+        if (myOptions["return"] === "simplexml" || myOptions["return"] === "simplexmlelement") {
             return new SimpleXMLElement($dom.saveXML());
         }
 
@@ -281,7 +281,7 @@ class Xml {
      * @param \DOMDocument $dom Handler to DOMDocument
      * @param \DOMDocument|\DOMElement myNode Handler to DOMElement (child)
      * @param array myData Array of data to append to the myNode.
-     * @param string $format Either 'attributes' or 'tags'. This determines where nested keys go.
+     * @param string $format Either "attributes" or "tags". This determines where nested keys go.
      * @return void
      * @throws \Cake\Utility\Exception\XmlException
      */
@@ -292,7 +292,7 @@ class Xml {
         }
         foreach (myData as myKey => myValue) {
             if (is_string(myKey)) {
-                if (is_object(myValue) && method_exists(myValue, 'toArray') && is_callable([myValue, 'toArray'])) {
+                if (is_object(myValue) && method_exists(myValue, "toArray") && is_callable([myValue, "toArray"])) {
                     myValue = myValue.toArray();
                 }
 
@@ -300,27 +300,27 @@ class Xml {
                     if (is_bool(myValue)) {
                         myValue = (int)myValue;
                     } elseif (myValue === null) {
-                        myValue = '';
+                        myValue = "";
                     }
-                    $ismodule = strpos(myKey, 'xmlns:');
+                    $ismodule = strpos(myKey, "xmlns:");
                     if ($ismodule !== false) {
                         /** @psalm-suppress PossiblyUndefinedMethod */
-                        myNode.setAttributeNS('http://www.w3.org/2000/xmlns/', myKey, (string)myValue);
+                        myNode.setAttributeNS("http://www.w3.org/2000/xmlns/", myKey, (string)myValue);
                         continue;
                     }
-                    if (myKey[0] !== '@' && $format === 'tags') {
+                    if (myKey[0] !== "@" && $format === "tags") {
                         if (!is_numeric(myValue)) {
                             // Escape special characters
                             // https://www.w3.org/TR/REC-xml/#syntax
                             // https://bugs.php.net/bug.php?id=36795
-                            $child = $dom.createElement(myKey, '');
+                            $child = $dom.createElement(myKey, "");
                             $child.appendChild(new DOMText((string)myValue));
                         } else {
                             $child = $dom.createElement(myKey, (string)myValue);
                         }
                         myNode.appendChild($child);
                     } else {
-                        if (myKey[0] === '@') {
+                        if (myKey[0] === "@") {
                             myKey = substr(myKey, 1);
                         }
                         $attribute = $dom.createAttribute(myKey);
@@ -328,23 +328,23 @@ class Xml {
                         myNode.appendChild($attribute);
                     }
                 } else {
-                    if (myKey[0] === '@') {
-                        throw new XmlException('Invalid array');
+                    if (myKey[0] === "@") {
+                        throw new XmlException("Invalid array");
                     }
-                    if (is_numeric(implode('', array_keys(myValue)))) {
+                    if (is_numeric(implode("", array_keys(myValue)))) {
 // List
                         foreach (myValue as $item) {
-                            $itemData = compact('dom', 'node', 'key', 'format');
-                            $itemData['value'] = $item;
+                            $itemData = compact("dom", "node", "key", "format");
+                            $itemData["value"] = $item;
                             static::_createChild($itemData);
                         }
                     } else {
 // Struct
-                        static::_createChild(compact('dom', 'node', 'key', 'value', 'format'));
+                        static::_createChild(compact("dom", "node", "key", "value", "format"));
                     }
                 }
             } else {
-                throw new XmlException('Invalid array');
+                throw new XmlException("Invalid array");
             }
         }
     }
@@ -358,33 +358,33 @@ class Xml {
     protected static auto _createChild(array myData): void
     {
         myData += [
-            'dom' => null,
-            'node' => null,
-            'key' => null,
-            'value' => null,
-            'format' => null,
+            "dom" => null,
+            "node" => null,
+            "key" => null,
+            "value" => null,
+            "format" => null,
         ];
 
-        myValue = myData['value'];
-        $dom = myData['dom'];
-        myKey = myData['key'];
-        $format = myData['format'];
-        myNode = myData['node'];
+        myValue = myData["value"];
+        $dom = myData["dom"];
+        myKey = myData["key"];
+        $format = myData["format"];
+        myNode = myData["node"];
 
         $childNS = $childValue = null;
-        if (is_object(myValue) && method_exists(myValue, 'toArray') && is_callable([myValue, 'toArray'])) {
+        if (is_object(myValue) && method_exists(myValue, "toArray") && is_callable([myValue, "toArray"])) {
             myValue = myValue.toArray();
         }
         if (is_array(myValue)) {
-            if (isset(myValue['@'])) {
-                $childValue = (string)myValue['@'];
-                unset(myValue['@']);
+            if (isset(myValue["@"])) {
+                $childValue = (string)myValue["@"];
+                unset(myValue["@"]);
             }
-            if (isset(myValue['xmlns:'])) {
-                $childNS = myValue['xmlns:'];
-                unset(myValue['xmlns:']);
+            if (isset(myValue["xmlns:"])) {
+                $childNS = myValue["xmlns:"];
+                unset(myValue["xmlns:"]);
             }
-        } elseif (!empty(myValue) || myValue === 0 || myValue === '0') {
+        } elseif (!empty(myValue) || myValue === 0 || myValue === "0") {
             $childValue = (string)myValue;
         }
 
@@ -393,7 +393,7 @@ class Xml {
             $child.appendChild($dom.createTextNode($childValue));
         }
         if ($childNS) {
-            $child.setAttribute('xmlns', $childNS);
+            $child.setAttribute("xmlns", $childNS);
         }
 
         static::_fromArray($dom, $child, myValue, $format);
@@ -413,11 +413,11 @@ class Xml {
             $obj = simplexml_import_dom($obj);
         }
         if (!($obj instanceof SimpleXMLElement)) {
-            throw new XmlException('The input is not instance of SimpleXMLElement, DOMDocument or DOMNode.');
+            throw new XmlException("The input is not instance of SimpleXMLElement, DOMDocument or DOMNode.");
         }
         myResult = [];
-        $modules = array_merge(['' => ''], $obj.getmodules(true));
-        static::_toArray($obj, myResult, '', array_keys($modules));
+        $modules = array_merge(["" => ""], $obj.getmodules(true));
+        static::_toArray($obj, myResult, "", array_keys($modules));
 
         return myResult;
     }
@@ -442,9 +442,9 @@ class Xml {
              */
             foreach ($xml.attributes($module, true) as myKey => myValue) {
                 if (!empty($module)) {
-                    myKey = $module . ':' . myKey;
+                    myKey = $module . ":" . myKey;
                 }
-                myData['@' . myKey] = (string)myValue;
+                myData["@" . myKey] = (string)myValue;
             }
 
             foreach ($xml.children($module, true) as $child) {
@@ -456,12 +456,12 @@ class Xml {
         $asString = trim((string)$xml);
         if (empty(myData)) {
             myData = $asString;
-        } elseif ($asString !== '') {
-            myData['@'] = $asString;
+        } elseif ($asString !== "") {
+            myData["@"] = $asString;
         }
 
         if (!empty($ns)) {
-            $ns .= ':';
+            $ns .= ":";
         }
         myName = $ns . $xml.getName();
         if (isset($parentData[myName])) {

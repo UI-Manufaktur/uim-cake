@@ -17,7 +17,7 @@ trait CookieCryptTrait
      *
      * @var array<string>
      */
-    protected $_validCiphers = ['aes'];
+    protected $_validCiphers = ["aes"];
 
     /**
      * Returns the encryption key to be used.
@@ -43,12 +43,12 @@ trait CookieCryptTrait
             return myValue;
         }
         this._checkCipher($encrypt);
-        $prefix = 'Q2FrZQ==.';
-        $cipher = '';
+        $prefix = "Q2FrZQ==.";
+        $cipher = "";
         if (myKey === null) {
             myKey = this._getCookieEncryptionKey();
         }
-        if ($encrypt === 'aes') {
+        if ($encrypt === "aes") {
             $cipher = Security::encrypt(myValue, myKey);
         }
 
@@ -66,8 +66,8 @@ trait CookieCryptTrait
     {
         if (!in_array($encrypt, this._validCiphers, true)) {
             $msg = sprintf(
-                'Invalid encryption cipher. Must be one of %s or false.',
-                implode(', ', this._validCiphers)
+                "Invalid encryption cipher. Must be one of %s or false.",
+                implode(", ", this._validCiphers)
             );
             throw new RuntimeException($msg);
         }
@@ -107,28 +107,28 @@ trait CookieCryptTrait
             return this._explode(myValue);
         }
         this._checkCipher($encrypt);
-        $prefix = 'Q2FrZQ==.';
+        $prefix = "Q2FrZQ==.";
         $prefixLength = strlen($prefix);
 
         if (strncmp(myValue, $prefix, $prefixLength) !== 0) {
-            return '';
+            return "";
         }
 
         myValue = base64_decode(substr(myValue, $prefixLength), true);
 
         if (myValue === false || myValue == "") {
-            return '';
+            return "";
         }
 
         if (myKey === null) {
             myKey = this._getCookieEncryptionKey();
         }
-        if ($encrypt === 'aes') {
+        if ($encrypt === "aes") {
             myValue = Security::decrypt(myValue, myKey);
         }
 
         if (myValue === null) {
-            return '';
+            return "";
         }
 
         return this._explode(myValue);
@@ -153,14 +153,14 @@ trait CookieCryptTrait
      */
     protected auto _explode(string $string) {
         $first = substr($string, 0, 1);
-        if ($first === '{' || $first === '[') {
+        if ($first === "{" || $first === "[") {
             $ret = json_decode($string, true);
 
             return $ret ?? $string;
         }
         $array = [];
-        foreach (explode(',', $string) as $pair) {
-            myKey = explode('|', $pair);
+        foreach (explode(",", $string) as $pair) {
+            myKey = explode("|", $pair);
             if (!isset(myKey[1])) {
                 return myKey[0];
             }

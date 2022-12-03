@@ -17,9 +17,9 @@ class TableHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'headers' => true,
-        'rowSeparator' => false,
-        'headerStyle' => 'info',
+        "headers" => true,
+        "rowSeparator" => false,
+        "headerStyle" => "info",
     ];
 
     /**
@@ -54,13 +54,13 @@ class TableHelper : Helper
             return 0;
         }
 
-        if (strpos($text, '<') === false && strpos($text, '>') === false) {
+        if (strpos($text, "<") === false && strpos($text, ">") === false) {
             return mb_strwidth($text);
         }
 
         $styles = this._io.styles();
-        $tags = implode('|', array_keys($styles));
-        $text = preg_replace('#</?(?:' . $tags . ')>#', '', $text);
+        $tags = implode("|", array_keys($styles));
+        $text = preg_replace("#</?(?:" . $tags . ")>#", "", $text);
 
         return mb_strwidth($text);
     }
@@ -73,11 +73,11 @@ class TableHelper : Helper
      */
     protected auto _rowSeparator(array $widths): void
     {
-        $out = '';
+        $out = "";
         foreach ($widths as $column) {
-            $out .= '+' . str_repeat('-', $column + 2);
+            $out .= "+" . str_repeat("-", $column + 2);
         }
-        $out .= '+';
+        $out .= "+";
         this._io.out($out);
     }
 
@@ -95,24 +95,24 @@ class TableHelper : Helper
             return;
         }
 
-        $out = '';
+        $out = "";
         foreach (array_values($row) as $i => $column) {
             $column = (string)$column;
             $pad = $widths[$i] - this._cellWidth($column);
-            if (!empty(myOptions['style'])) {
-                $column = this._addStyle($column, myOptions['style']);
+            if (!empty(myOptions["style"])) {
+                $column = this._addStyle($column, myOptions["style"]);
             }
-            if ($column !== '' && preg_match('#(.*)<text-right>.+</text-right>(.*)#', $column, $matches)) {
-                if ($matches[1] !== '' || $matches[2] !== '') {
-                    throw new UnexpectedValueException('You cannot include text before or after the text-right tag.');
+            if ($column !== "" && preg_match("#(.*)<text-right>.+</text-right>(.*)#", $column, $matches)) {
+                if ($matches[1] !== "" || $matches[2] !== "") {
+                    throw new UnexpectedValueException("You cannot include text before or after the text-right tag.");
                 }
-                $column = str_replace(['<text-right>', '</text-right>'], '', $column);
-                $out .= '| ' . str_repeat(' ', $pad) . $column . ' ';
+                $column = str_replace(["<text-right>", "</text-right>"], "", $column);
+                $out .= "| " . str_repeat(" ", $pad) . $column . " ";
             } else {
-                $out .= '| ' . $column . str_repeat(' ', $pad) . ' ';
+                $out .= "| " . $column . str_repeat(" ", $pad) . " ";
             }
         }
-        $out .= '|';
+        $out .= "|";
         this._io.out($out);
     }
 
@@ -131,14 +131,14 @@ class TableHelper : Helper
             return;
         }
 
-        this._io.setStyle('text-right', ['text' => null]);
+        this._io.setStyle("text-right", ["text" => null]);
 
         myConfig = this.getConfig();
         $widths = this._calculateWidths($args);
 
         this._rowSeparator($widths);
-        if (myConfig['headers'] === true) {
-            this._render(array_shift($args), $widths, ['style' => myConfig['headerStyle']]);
+        if (myConfig["headers"] === true) {
+            this._render(array_shift($args), $widths, ["style" => myConfig["headerStyle"]]);
             this._rowSeparator($widths);
         }
 
@@ -148,11 +148,11 @@ class TableHelper : Helper
 
         foreach ($args as $line) {
             this._render($line, $widths);
-            if (myConfig['rowSeparator'] === true) {
+            if (myConfig["rowSeparator"] === true) {
                 this._rowSeparator($widths);
             }
         }
-        if (myConfig['rowSeparator'] !== true) {
+        if (myConfig["rowSeparator"] !== true) {
             this._rowSeparator($widths);
         }
     }
@@ -166,6 +166,6 @@ class TableHelper : Helper
      */
     protected auto _addStyle(string $text, string $style): string
     {
-        return '<' . $style . '>' . $text . '</' . $style . '>';
+        return "<" . $style . ">" . $text . "</" . $style . ">";
     }
 }

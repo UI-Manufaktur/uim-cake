@@ -55,8 +55,8 @@ trait MergeVariablesTrait
         thisValue = this.{$property};
         $isAssoc = false;
         if (
-            isset(myOptions['associative']) &&
-            in_array($property, (array)myOptions['associative'], true)
+            isset(myOptions["associative"]) &&
+            in_array($property, (array)myOptions["associative"], true)
         ) {
             $isAssoc = true;
         }
@@ -82,7 +82,7 @@ trait MergeVariablesTrait
      * Merge each of the keys in a property together.
      *
      * @param array $current The current merged value.
-     * @param array $parent The parent class' value.
+     * @param array $parent The parent class" value.
      * @param bool $isAssoc Whether the merging should be done in associative mode.
      * @return array The updated value.
      */

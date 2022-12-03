@@ -73,7 +73,7 @@ interface ConnectionInterface : ILoggerAware
      *
      * ```
      * myConnection.transactional(function (myConnection) {
-     *   myConnection.newQuery().delete('users').execute();
+     *   myConnection.newQuery().delete("users").execute();
      * });
      * ```
      *
@@ -93,7 +93,7 @@ interface ConnectionInterface : ILoggerAware
      *
      * ```
      * myConnection.disableConstraints(function (myConnection) {
-     *   myConnection.newQuery().delete('users').execute();
+     *   myConnection.newQuery().delete("users").execute();
      * });
      * ```
      *

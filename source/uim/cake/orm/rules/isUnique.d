@@ -51,21 +51,21 @@ class IsUnique
         }
 
         myFields = $entity.extract(this._fields);
-        if (this._options['allowMultipleNulls'] && array_filter(myFields, 'is_null')) {
+        if (this._options["allowMultipleNulls"] && array_filter(myFields, "is_null")) {
             return true;
         }
 
-        myAlias = myOptions['repository'].getAlias();
+        myAlias = myOptions["repository"].getAlias();
         $conditions = this._alias(myAlias, myFields);
         if ($entity.isNew() === false) {
-            myKeys = (array)myOptions['repository'].getPrimaryKey();
+            myKeys = (array)myOptions["repository"].getPrimaryKey();
             myKeys = this._alias(myAlias, $entity.extract(myKeys));
             if (Hash::filter(myKeys)) {
-                $conditions['NOT'] = myKeys;
+                $conditions["NOT"] = myKeys;
             }
         }
 
-        return !myOptions['repository'].exists($conditions);
+        return !myOptions["repository"].exists($conditions);
     }
 
     /**

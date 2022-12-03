@@ -17,10 +17,10 @@ import uim.cake.orm.locators\ILocator;
  * an instance is made, the instances *will not* be updated.
  *
  * ```
- * TableRegistry::getTableLocator().setConfig('Users', ['table' => 'my_users']);
+ * TableRegistry::getTableLocator().setConfig("Users", ["table" => "my_users"]);
  *
  * // Prior to 3.6.0
- * TableRegistry::config('Users', ['table' => 'my_users']);
+ * TableRegistry::config("Users", ["table" => "my_users"]);
  * ```
  *
  * Configuration data is stored *per alias* if you use the same table with
@@ -34,10 +34,10 @@ import uim.cake.orm.locators\ILocator;
  * helps make cyclic references easier to solve.
  *
  * ```
- * myTable = TableRegistry::getTableLocator().get('Users', myConfig);
+ * myTable = TableRegistry::getTableLocator().get("Users", myConfig);
  *
  * // Prior to 3.6.0
- * myTable = TableRegistry::get('Users', myConfig);
+ * myTable = TableRegistry::get("Users", myConfig);
  * ```
  */
 class TableRegistry
@@ -50,7 +50,7 @@ class TableRegistry
     static auto getTableLocator(): ILocator
     {
         /** @var \Cake\ORM\Locator\ILocator */
-        return FactoryLocator::get('Table');
+        return FactoryLocator::get("Table");
     }
 
     /**
@@ -61,7 +61,7 @@ class TableRegistry
      */
     static auto setTableLocator(ILocator myTableLocator): void
     {
-        FactoryLocator::add('Table', myTableLocator);
+        FactoryLocator::add("Table", myTableLocator);
     }
 
     /**
