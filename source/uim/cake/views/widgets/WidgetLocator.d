@@ -83,8 +83,8 @@ class WidgetLocator
      *
      * ```
      * $registry.add([
-     *   'label' => new MyLabelWidget(myTemplates),
-     *   'checkbox' => ['Fancy.MyCheckbox', 'label']
+     *   "label" => new MyLabelWidget(myTemplates),
+     *   "checkbox" => ["Fancy.MyCheckbox", "label"]
      * ]);
      * ```
      *
@@ -108,7 +108,7 @@ class WidgetLocator
 
             if (is_object($widget) && !($widget instanceof WidgetInterface)) {
                 throw new RuntimeException(sprintf(
-                    'Widget objects must implement `%s`. Got `%s` instance instead.',
+                    "Widget objects must implement `%s`. Got `%s` instance instead.",
                     WidgetInterface::class,
                     getTypeName($widget)
                 ));
@@ -137,11 +137,11 @@ class WidgetLocator
     auto get(string myName): WidgetInterface
     {
         if (!isset(this._widgets[myName])) {
-            if (empty(this._widgets['_default'])) {
-                throw new RuntimeException(sprintf('Unknown widget `%s`', myName));
+            if (empty(this._widgets["_default"])) {
+                throw new RuntimeException(sprintf("Unknown widget `%s`", myName));
             }
 
-            myName = '_default';
+            myName = "_default";
         }
 
         if (this._widgets[myName] instanceof WidgetInterface) {
@@ -175,19 +175,19 @@ class WidgetLocator
         }
 
         if (!is_array(myConfig)) {
-            throw new RuntimeException('Widget config must be a string or array.');
+            throw new RuntimeException("Widget config must be a string or array.");
         }
 
         myClass = array_shift(myConfig);
-        myClassName = App::className(myClass, 'View/Widget', 'Widget');
+        myClassName = App::className(myClass, "View/Widget", "Widget");
         if (myClassName === null) {
-            throw new RuntimeException(sprintf('Unable to locate widget class "%s"', myClass));
+            throw new RuntimeException(sprintf("Unable to locate widget class "%s"", myClass));
         }
         if (count(myConfig)) {
             $reflection = new ReflectionClass(myClassName);
             $arguments = [this._templates];
             foreach (myConfig as $requirement) {
-                if ($requirement === '_view') {
+                if ($requirement === "_view") {
                     $arguments[] = this._view;
                 } else {
                     $arguments[] = this.get($requirement);

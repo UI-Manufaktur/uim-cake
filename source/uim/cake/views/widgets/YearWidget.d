@@ -19,12 +19,12 @@ class YearWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'val' => null,
-        'min' => null,
-        'max' => null,
-        'order' => 'desc',
-        'templateVars' => [],
+        "name" => "",
+        "val" => null,
+        "min" => null,
+        "max" => null,
+        "order" => "desc",
+        "templateVars" => [],
     ];
 
     /**
@@ -56,38 +56,38 @@ class YearWidget : BasicWidget
     {
         myData += this.mergeDefaults(myData, $context);
 
-        if (empty(myData['min'])) {
-            myData['min'] = date('Y', strtotime('-5 years'));
+        if (empty(myData["min"])) {
+            myData["min"] = date("Y", strtotime("-5 years"));
         }
 
-        if (empty(myData['max'])) {
-            myData['max'] = date('Y', strtotime('+5 years'));
+        if (empty(myData["max"])) {
+            myData["max"] = date("Y", strtotime("+5 years"));
         }
 
-        myData['min'] = (int)myData['min'];
-        myData['max'] = (int)myData['max'];
+        myData["min"] = (int)myData["min"];
+        myData["max"] = (int)myData["max"];
 
-        if (myData['val'] instanceof IDateTime) {
-            myData['val'] = myData['val'].format('Y');
+        if (myData["val"] instanceof IDateTime) {
+            myData["val"] = myData["val"].format("Y");
         }
 
-        if (!empty(myData['val'])) {
-            myData['min'] = min((int)myData['val'], myData['min']);
-            myData['max'] = max((int)myData['val'], myData['max']);
+        if (!empty(myData["val"])) {
+            myData["min"] = min((int)myData["val"], myData["min"]);
+            myData["max"] = max((int)myData["val"], myData["max"]);
         }
 
-        if (myData['max'] < myData['min']) {
-            throw new InvalidArgumentException('Max year cannot be less than min year');
+        if (myData["max"] < myData["min"]) {
+            throw new InvalidArgumentException("Max year cannot be less than min year");
         }
 
-        if (myData['order'] === 'desc') {
-            myData['options'] = range(myData['max'], myData['min']);
+        if (myData["order"] === "desc") {
+            myData["options"] = range(myData["max"], myData["min"]);
         } else {
-            myData['options'] = range(myData['min'], myData['max']);
+            myData["options"] = range(myData["min"], myData["max"]);
         }
-        myData['options'] = array_combine(myData['options'], myData['options']);
+        myData["options"] = array_combine(myData["options"], myData["options"]);
 
-        unset(myData['order'], myData['min'], myData['max']);
+        unset(myData["order"], myData["min"], myData["max"]);
 
         return this._select.render(myData, $context);
     }
