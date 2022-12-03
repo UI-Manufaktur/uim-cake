@@ -1,23 +1,10 @@
+module uim.cake.uilities;
 
+@safe:
+import uim.cake;
 
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.uilities;
-
-import uim.cakeilities.Crypto\OpenSsl;
-use InvalidArgumentException;
-use RuntimeException;
-
-/**
- * Security Library contains utility methods related to security
- */
-class Security
-{
+// Security Library contains utility methods related to security
+class Security {
     /**
      * Default hash method. If `myType` param for `Security::hash()` is not specified
      * this value is used. Defaults to "sha1".

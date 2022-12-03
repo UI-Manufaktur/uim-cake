@@ -1,49 +1,25 @@
-module uim.cakelidations;
+module uim.cake.validations;
 
-import uim.cake8n\FrozenTime;
-import uim.cakeilities.Text;
-use Countable;
-use IDateTime;
-use InvalidArgumentException;
-use LogicException;
-use NumberFormatter;
-use Psr\Http\Message\UploadedFileInterface;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Validation Class. Used for validation of model data
  *
  * Offers different validation methods.
  */
-class Validation
-{
-    /**
-     * Default locale
-     *
-     * @var string
-     */
-    public const DEFAULT_LOCALE = 'en_US';
+class Validation {
+    //  Default locale
+    public const string DEFAULT_LOCALE = 'en_US';
 
-    /**
-     * Same as operator.
-     *
-     * @var string
-     */
-    public const COMPARE_SAME = '===';
+    // Same as operator.
+    public const string COMPARE_SAME = '===';
 
-    /**
-     * Not same as comparison operator.
-     *
-     * @var string
-     */
-    public const COMPARE_NOT_SAME = '!==';
+    // Not same as comparison operator.
+    public const string COMPARE_NOT_SAME = '!==';
 
-    /**
-     * Equal to comparison operator.
-     *
-     * @var string
-     */
-    public const COMPARE_EQUAL = '==';
+    // Equal to comparison operator.
+    public const string COMPARE_EQUAL = '==';
 
     /**
      * Not equal to comparison operator.
@@ -66,36 +42,21 @@ class Validation
      */
     public const COMPARE_GREATER_OR_EQUAL = '>=';
 
-    /**
-     * Less than comparison operator.
-     *
-     * @var string
-     */
-    public const COMPARE_LESS = '<';
+    // Less than comparison operator.
+    public const string COMPARE_LESS = '<';
 
-    /**
-     * Less than or equal to comparison operator.
-     *
-     * @var string
-     */
-    public const COMPARE_LESS_OR_EQUAL = '<=';
+    // Less than or equal to comparison operator.
+    public const string COMPARE_LESS_OR_EQUAL = '<=';
 
-    /**
-     * @var array<string>
-     */
-    protected const COMPARE_STRING = [
+    protected const string[] COMPARE_STRING = [
         self::COMPARE_EQUAL,
         self::COMPARE_NOT_EQUAL,
         self::COMPARE_SAME,
         self::COMPARE_NOT_SAME,
     ];
 
-    /**
-     * Datetime ISO8601 format
-     *
-     * @var string
-     */
-    public const DATETIME_ISO8601 = 'iso8601';
+    // Datetime ISO8601 format
+    public const string DATETIME_ISO8601 = 'iso8601';
 
     /**
      * Some complex patterns needed in multiple places

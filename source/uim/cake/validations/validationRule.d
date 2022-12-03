@@ -11,7 +11,7 @@
  * @link          https://UIM.org UIM(tm) Project
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakelidations;
+ */module uim.cake.validations;
 
 use InvalidArgumentException;
 

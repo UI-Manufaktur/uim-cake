@@ -1,4 +1,4 @@
-module uim.cakelidations;
+module uim.cake.validations;
 
 use ReflectionClass;
 

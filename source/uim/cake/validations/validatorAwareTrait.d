@@ -7,7 +7,7 @@
  * @link          https://UIM.org UIM(tm) Project
  * @since         3.0.3
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakelidations;
+ */module uim.cake.validations;
 
 import uim.cakeents\IEventDispatcher;
 use RuntimeException;

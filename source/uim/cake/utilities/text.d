@@ -1,14 +1,10 @@
-module uim.cake.uilities;
+module uim.cake.utilities;
 
-import uim.cake.core.exceptions\CakeException;
-use InvalidArgumentException;
-use Transliterator;
+@safe:
+import uim.cake;
 
-/**
- * Text handling methods.
- */
-class Text
-{
+// Text handling methods.
+class Text {
     /**
      * Default transliterator.
      *
@@ -28,9 +24,9 @@ class Text
      *
      * @var array<string>
      */
-    protected static $_defaultHtmlNoCount = [
+    protected static string[] _defaultHtmlNoCount = [
         "style",
-        "script",
+        "script"
     ];
 
     /**
@@ -597,7 +593,7 @@ class Text
             preg_match_all("/(<\/?([\w+]+)[^>]*>)?([^<>]*)/", $text, $tags, PREG_SET_ORDER);
             foreach ($tags as $tag) {
                 myContentsLength = 0;
-                if (!in_array($tag[2], static::$_defaultHtmlNoCount, true)) {
+                if (!in_array($tag[2], static::_defaultHtmlNoCount, true)) {
                     myContentsLength = self::_strlen($tag[3], myOptions);
                 }
 

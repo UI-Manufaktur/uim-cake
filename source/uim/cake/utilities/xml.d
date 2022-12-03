@@ -1,29 +1,14 @@
+module uim.cake.utilities;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         0.10.3
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.uilities;
-
-import uim.cakeilities.Exception\XmlException;
-use Closure;
-use DOMDocument;
-use DOMNode;
-use DOMText;
-use Exception;
-use SimpleXMLElement;
+@safe:
+import uim.cake;
 
 /**
  * XML handling for UIM.
  *
  * The methods in these classes enable the datasources that use XML to work.
  */
-class Xml
-{
+class Xml {
     /**
      * Initialize SimpleXMLElement or DOMDocument from a given XML string, file path, URL or array.
      *
