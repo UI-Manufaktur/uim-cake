@@ -120,7 +120,7 @@ class Paginator : PaginatorInterface
 <<<<<<< HEAD
      *   return $q.where(["name":"CakePHP"])
 =======
-     *   return $q.where(["name" => "UIM"])
+     *   return $q.where(["name": "UIM"])
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
      * });
      * myResults = $paginator.paginate(myQuery);
@@ -171,7 +171,7 @@ class Paginator : PaginatorInterface
 
         $pagingParams = this.buildParams(myData);
         myAlias = $object.getAlias();
-        this._pagingParams = [myAlias => $pagingParams];
+        this._pagingParams = [myAlias: $pagingParams];
         if ($pagingParams["requestedPage"] > $pagingParams["page"]) {
             throw new PageOutOfBoundsException([
                 "requestedPage":$pagingParams["requestedPage"],
@@ -537,7 +537,7 @@ class Paginator : PaginatorInterface
                 $order = this._removeAliases($order, $object.getAlias());
             }
 
-            myOptions["order"] = [myOptions["sort"] => $direction] + $order;
+            myOptions["order"] = [myOptions["sort"]: $direction] + $order;
         } else {
             myOptions["sort"] = null;
         }
@@ -588,7 +588,7 @@ class Paginator : PaginatorInterface
     protected auto _removeAliases(array myFields, string myModel): array
     {
         myResult = [];
-        foreach (myFields as myField => $sort) {
+        foreach (myFields as myField: $sort) {
             if (strpos(myField, ".") === false) {
                 myResult[myField] = $sort;
                 continue;
@@ -619,7 +619,7 @@ class Paginator : PaginatorInterface
     {
         myTableAlias = $object.getAlias();
         myTableOrder = [];
-        foreach ($order as myKey => myValue) {
+        foreach ($order as myKey: myValue) {
             if (is_numeric(myKey)) {
                 myTableOrder[] = myValue;
                 continue;

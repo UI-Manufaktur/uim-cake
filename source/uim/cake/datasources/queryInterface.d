@@ -36,7 +36,7 @@ interface QueryInterface
     function select(myFields, bool $overwrite = false);
 
     /**
-     * Returns a key => value array representing a single aliased field
+     * Returns a key: value array representing a single aliased field
      * that can be passed directly to the select() method.
      * The key will contain the alias and the value the actual field name.
      *

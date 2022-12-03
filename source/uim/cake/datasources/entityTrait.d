@@ -88,12 +88,12 @@ trait EntityTrait
      * means no fields are accessible
      *
      * The special field "\*" can also be mapped, meaning that any other field
-     * not defined in the map will take its value. For example, `"*" => true`
+     * not defined in the map will take its value. For example, `"*": true`
      * means that any field not defined in the map will be accessible by default
      *
      * @var array<bool>
      */
-    protected $_accessible = ["*" => true];
+    protected $_accessible = ["*": true];
 
     /**
      * The alias of the repository this entity came from
@@ -158,12 +158,12 @@ trait EntityTrait
      *
      * It is also possible to mass-assign multiple fields to this entity
      * with one call by passing a hashed array as fields in the form of
-     * field => value pairs
+     * field: value pairs
      *
      * ### Example:
      *
      * ```
-     * $entity.set(["name" => "andrew", "id" => 1]);
+     * $entity.set(["name": "andrew", "id": 1]);
      * echo $entity.name // prints andrew
      * echo $entity.id // prints 1
      * ```
@@ -173,8 +173,8 @@ trait EntityTrait
      * `myOptions` parameter:
      *
      * ```
-     * $entity.set("name", "Andrew", ["setter" => false]);
-     * $entity.set(["name" => "Andrew", "id" => 1], ["setter" => false]);
+     * $entity.set("name", "Andrew", ["setter": false]);
+     * $entity.set(["name": "Andrew", "id": 1], ["setter": false]);
      * ```
      *
      * Mass assignment should be treated carefully when accepting user input, by default
@@ -182,7 +182,7 @@ trait EntityTrait
      * the guarding for a single set call with the `guard` option:
      *
      * ```
-     * $entity.set(["name" => "Andrew", "id" => 1], ["guard" => false]);
+     * $entity.set(["name": "Andrew", "id": 1], ["guard": false]);
      * ```
      *
      * You do not need to use the guard option when assigning fields individually:
@@ -204,7 +204,7 @@ trait EntityTrait
     auto set(myField, myValue = null, array myOptions = []) {
         if (is_string(myField) && myField !== "") {
             $guard = false;
-            myField = [myField => myValue];
+            myField = [myField: myValue];
         } else {
             $guard = true;
             myOptions = (array)myValue;
@@ -213,9 +213,9 @@ trait EntityTrait
         if (!is_array(myField)) {
             throw new InvalidArgumentException("Cannot set an empty field");
         }
-        myOptions += ["setter" => true, "guard" => $guard];
+        myOptions += ["setter": true, "guard": $guard];
 
-        foreach (myField as myName => myValue) {
+        foreach (myField as myName: myValue) {
             myName = (string)myName;
             if (myOptions["guard"] === true && !this.isAccessible(myName)) {
                 continue;
@@ -301,7 +301,7 @@ trait EntityTrait
     {
         $originals = this._original;
         $originalKeys = array_keys($originals);
-        foreach (this._fields as myKey => myValue) {
+        foreach (this._fields as myKey: myValue) {
             if (!in_array(myKey, $originalKeys, true)) {
                 $originals[myKey] = myValue;
             }
@@ -317,7 +317,7 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity = new Entity(["id" => 1, "name" => null]);
+     * $entity = new Entity(["id": 1, "name": null]);
      * $entity.has("id"); // true
      * $entity.has("name"); // false
      * $entity.has("last_name"); // false
@@ -526,7 +526,7 @@ trait EntityTrait
             myValue = this.get(myField);
             if (is_array(myValue)) {
                 myResult[myField] = [];
-                foreach (myValue as $k => $entity) {
+                foreach (myValue as $k: $entity) {
                     if ($entity instanceof IEntity) {
                         myResult[myField][$k] = $entity.toArray();
                     } else {
@@ -774,7 +774,7 @@ trait EntityTrait
      */
     auto setNew(bool $new) {
         if ($new) {
-            foreach (this._fields as $k => $p) {
+            foreach (this._fields as $k: $p) {
                 this._dirty[$k] = true;
             }
         }
@@ -865,7 +865,7 @@ trait EntityTrait
      *
      * ```
      * // Sets the error messages for multiple fields at once
-     * $entity.setErrors(["salary" => ["message"], "name" => ["another message"]]);
+     * $entity.setErrors(["salary": ["message"], "name": ["another message"]]);
      * ```
      *
      * @param array myErrors The array of errors to set.
@@ -874,15 +874,15 @@ trait EntityTrait
      */
     auto setErrors(array myErrors, bool $overwrite = false) {
         if ($overwrite) {
-            foreach (myErrors as $f => myError) {
+            foreach (myErrors as $f: myError) {
                 this._errors[$f] = (array)myError;
             }
 
             return this;
         }
 
-        foreach (myErrors as $f => myError) {
-            this._errors += [$f => []];
+        foreach (myErrors as $f: myError) {
+            this._errors += [$f: []];
 
             // String messages are appended to the list,
             // while more complex error structures need their
@@ -890,7 +890,7 @@ trait EntityTrait
             if (is_string(myError)) {
                 this._errors[$f][] = myError;
             } else {
-                foreach (myError as $k => $v) {
+                foreach (myError as $k: $v) {
                     this._errors[$f][$k] = $v;
                 }
             }
@@ -919,7 +919,7 @@ trait EntityTrait
             myErrors = [myErrors];
         }
 
-        return this.setErrors([myField => myErrors], $overwrite);
+        return this.setErrors([myField: myErrors], $overwrite);
     }
 
     /**
@@ -1058,12 +1058,12 @@ trait EntityTrait
      * @return this
      */
     auto setInvalid(array myFields, bool $overwrite = false) {
-        foreach (myFields as myField => myValue) {
+        foreach (myFields as myField: myValue) {
             if ($overwrite === true) {
                 this._invalid[myField] = myValue;
                 continue;
             }
-            this._invalid += [myField => myValue];
+            this._invalid += [myField: myValue];
         }
 
         return this;
@@ -1193,15 +1193,15 @@ trait EntityTrait
         }
 
         return myFields + [
-            "[new]" => this.isNew(),
-            "[accessible]" => this._accessible,
-            "[dirty]" => this._dirty,
-            "[original]" => this._original,
-            "[virtual]" => this._virtual,
-            "[hasErrors]" => this.hasErrors(),
-            "[errors]" => this._errors,
-            "[invalid]" => this._invalid,
-            "[repository]" => this._registryAlias,
+            "[new]": this.isNew(),
+            "[accessible]": this._accessible,
+            "[dirty]": this._dirty,
+            "[original]": this._original,
+            "[virtual]": this._virtual,
+            "[hasErrors]": this.hasErrors(),
+            "[errors]": this._errors,
+            "[invalid]": this._invalid,
+            "[repository]": this._registryAlias,
         ];
     }
 }
