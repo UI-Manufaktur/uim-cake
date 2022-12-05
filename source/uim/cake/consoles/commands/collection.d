@@ -24,11 +24,11 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Constructor
      *
-     * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands The map of commands to add to the collection.
+     * @param $commands The map of commands to add to the collection.
      */
-    this(array $commands = []) {
-        foreach ($commands as myName: $command) {
-            this.add(myName, $command);
+    this(ICommand[string] someCommands) {
+        foreach (myName, aCommand; someCommands) {
+            this.add(myName, aCommand);
         }
     }
 
@@ -36,12 +36,12 @@ class CommandCollection : IteratorAggregate, Countable
      * Add a command to the collection
      *
      * @param string myName The name of the command you want to map.
-     * @param \Cake\Console\ICommand|\Cake\Console\Shell|string $command The command to map.
+     * @param ICommand|\Cake\Console\Shell|string $command The command to map.
      *   Can be a FQCN, Shell instance or ICommand instance.
      * @return this
      * @throws \InvalidArgumentException
      */
-    function add(string myName, $command) {
+    function add(string myName, ICommand $command) {
         if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, ICommand::class)) {
             myClass = is_string($command) ? $command : get_class($command);
             throw new InvalidArgumentException(sprintf(
@@ -127,7 +127,6 @@ class CommandCollection : IteratorAggregate, Countable
 
     /**
      * Implementation of Countable.
-     *
      * Get the number of commands in the collection.
      */
     int count() {
@@ -208,7 +207,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @return array<string> Command names
      */
-    function keys(): array {
+    string[] keys() {
         return array_keys(this.commands);
     }
 }

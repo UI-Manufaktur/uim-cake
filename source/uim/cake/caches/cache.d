@@ -447,18 +447,16 @@ class Cache
 
     /**
      * Delete all keys from the cache from all configurations.
-     *
-     * @return array<string, bool> Status code. For each configuration, it reports the status of the operation
+     * @return Status code. For each configuration, it reports the status of the operation
      */
-    static function clearAll(): array
-    {
-        $status = [];
+    static function clearAll() {
+        bool[string] results;
 
         foreach (self::configured() as myConfig) {
-            $status[myConfig] = self::clear(myConfig);
+            results[myConfig] = self::clear(myConfig);
         }
 
-        return $status;
+        return results;
     }
 
     /**

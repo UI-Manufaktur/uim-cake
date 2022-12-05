@@ -183,10 +183,9 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Get the list of loaded objects.
      *
-     * @return array<string> List of object names.
+     * @return List of object names.
      */
-    function loaded(): array
-    {
+    string[] loaded() {
         return array_keys(this._loaded);
     }
 

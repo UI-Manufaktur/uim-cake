@@ -94,10 +94,9 @@ if (!function_exists("moduleSplit")) {
      * Commonly used like `list($module, myClassName) = moduleSplit(myClass);`.
      *
      * @param string myClass The full class name, ie `Cake\Core\App`.
-     * @return array<string> Array with 2 indexes. 0: module, 1: classname.
+     * @returnArray with 2 indexes. 0: module, 1: classname.
      */
-    function moduleSplit(string myClass): array
-    {
+    string[] moduleSplit(string myClass) {
         $pos = strrpos(myClass, "\\");
         if ($pos === false) {
             return ["", myClass];

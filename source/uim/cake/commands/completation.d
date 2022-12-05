@@ -165,10 +165,9 @@ class CompletionCommand : Command : ICommandCollectionAware
      * Reflect the subcommands names out of a shell.
      *
      * @param \Cake\Console\Shell myShell The shell to get commands for
-     * @return array<string> A list of commands
+     * @return A list of commands
      */
-    protected auto shellSubcommands(Shell myShell): array
-    {
+    protected string[] shellSubcommands(Shell myShell) {
         myShell.initialize();
         myShell.loadTasks();
 

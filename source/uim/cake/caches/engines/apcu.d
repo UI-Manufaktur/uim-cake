@@ -162,12 +162,10 @@ class ApcuEngine : CacheEngine
      * If the group initial value was not found, then it initializes
      * the group accordingly.
      *
-     * @return array<string>
      * @link https://secure.php.net/manual/en/function.apcu-fetch.php
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
-    function groups(): array
-    {
+    string[] groups() {
         if (empty(this._compiledGroupNames)) {
             foreach (this._config["groups"] as myGroup) {
                 this._compiledGroupNames[] = this._config["prefix"] . myGroup;

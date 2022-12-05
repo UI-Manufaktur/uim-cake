@@ -3,45 +3,18 @@ module uim.cake.console;
 @safe:
 import uim.cake;
 
-import uim.cake.command\VersionCommand;
-import uim.cake.console.command\HelpCommand;
-import uim.cake.console.exceptions\MissingOptionException;
-import uim.cake.console.exceptions\StopException;
-import uim.cake.core.IConsoleApplication;
-import uim.cake.core.ContainerApplicationInterface;
-import uim.cake.core.PluginApplicationInterface;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakeents\EventManager;
-import uim.cakeents\IEventManager;
-import uim.cakeutings\Router;
-import uim.cakeutings\RoutingApplicationInterface;
-import uim.cakeilities.Inflector;
-use InvalidArgumentException;
-use RuntimeException;
-
-/**
- * Run CLI commands for the provided application.
- */
-class CommandRunner : IEventDispatcher
-{
+// Run CLI commands for the provided application.
+class CommandRunner : IEventDispatcher {
     use EventDispatcherTrait;
 
-    /**
-     * The application console commands are being run for.
-     *
-     * @var \Cake\Core\IConsoleApplication
-     */
-    protected $app;
+    // The application console commands are being run for.
+    protected IConsoleApplication _app;
 
-    /**
-     * The application console commands are being run for.
+    // The application console commands are being run for.
      */
-    protected ICommandFactory $factory;
+    protected ICommandFactory _factory;
 
-    /**
-     * The root command name. Defaults to `cake`.
-     */
+    // The root command name. Defaults to `cake`.
     protected string $root;
 
     /**
@@ -52,18 +25,18 @@ class CommandRunner : IEventDispatcher
     /**
      * Constructor
      *
-     * @param \Cake\Core\IConsoleApplication $app The application to run CLI commands for.
+     * @param \Cake\Core\IConsoleApplication _app The application to run CLI commands for.
      * @param string $root The root command name to be removed from argv.
-     * @param \Cake\Console\ICommandFactory|null $factory Command factory instance.
+     * @param \Cake\Console\ICommandFactory|null _factory Command factory instance.
      */
     this(
-        IConsoleApplication $app,
+        IConsoleApplication _app,
         string $root = "cake",
-        ?ICommandFactory $factory = null
+        ?ICommandFactory _factory = null
     ) {
-        this.app = $app;
+        this.app = _app;
         this.root = $root;
-        this.factory = $factory;
+        this.factory = _factory;
         this.aliases = [
             "--version":"version",
             "--help":"help",
