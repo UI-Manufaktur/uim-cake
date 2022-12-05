@@ -123,13 +123,8 @@ class AssociationCollection : IteratorAggregate
         return isset(this._items[myAlias]);
     }
 
-    /**
-     * Get the names of all the associations in the collection.
-     *
-     * @return array<string>
-     */
-    function keys(): array
-    {
+    // Get the names of all the associations in the collection.
+    string[] keys() {
         return array_keys(this._items);
     }
 

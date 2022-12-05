@@ -554,12 +554,8 @@ class HasMany : Association
         return !empty(myOptions["matching"]);
     }
 
-    /**
-     * Gets the name of the field representing the foreign key to the source table.
-     *
-     * @return array<string>|string
-     */
-    auto getForeignKey() {
+    // Gets the name of the field representing the foreign key to the source table.
+    string[] getForeignKey() {
         if (this._foreignKey === null) {
             this._foreignKey = this._modelKey(this.getSource().getTable());
         }

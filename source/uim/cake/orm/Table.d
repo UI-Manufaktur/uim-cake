@@ -607,12 +607,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         return this;
     }
 
-    /**
-     * Returns the primary key field name.
-     *
-     * @return array<string>|string
-     */
-    auto getPrimaryKey() {
+    // Returns the primary key field name.
+    string[] getPrimaryKey() {
         if (this._primaryKey === null) {
             myKey = this.getSchema().getPrimaryKey();
             if (count(myKey) === 1) {
@@ -636,12 +632,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         return this;
     }
 
-    /**
-     * Returns the display field.
-     *
-     * @return array<string>|string|null
-     */
-    auto getDisplayField() {
+    // Returns the display field.
+    string[] getDisplayField() {
         if (this._displayField === null) {
             $schema = this.getSchema();
             this._displayField = this.getPrimaryKey();

@@ -130,9 +130,8 @@ class SelectWithPivotLoader : SelectLoader
      * which the filter should be applied
      *
      * @param array<string, mixed> myOptions the options to use for getting the link field.
-     * @return array<string>|string
      */
-    protected auto _linkField(array myOptions) {
+    protected string[] _linkField(array myOptions) {
         $links = [];
         myName = this.junctionAssociationName;
 

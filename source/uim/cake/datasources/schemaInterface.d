@@ -65,12 +65,8 @@ interface SchemaInterface
      */
     function removeColumn(string myName);
 
-    /**
-     * Get the column names in the table.
-     *
-     * @return array<string>
-     */
-    function columns(): array;
+    // Get the column names in the table.
+    string[]  columns();
 
     /**
      * Returns column type or null if a column does not exist.

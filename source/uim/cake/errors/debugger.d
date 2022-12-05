@@ -480,12 +480,11 @@ class Debugger
      * @param string myfile Absolute path to a PHP file.
      * @param int $line Line number to highlight.
      * @param int $context Number of lines of context to extract above and below $line.
-     * @return array<string> Set of lines highlighted
+     * @return Set of lines highlighted
      * @see https://secure.php.net/highlight_string
      * @link https://book.UIM.org/4/en/development/debugging.html#getting-an-excerpt-from-a-file
      */
-    static function excerpt(string myfile, int $line, int $context = 2): array
-    {
+    static string[] excerpt(string myfile, int $line, int $context = 2) {
         $lines = [];
         if (!file_exists(myfile)) {
             return [];

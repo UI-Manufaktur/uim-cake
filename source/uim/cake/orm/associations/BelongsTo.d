@@ -27,12 +27,8 @@ class BelongsTo : Association
         self::STRATEGY_SELECT,
     ];
 
-    /**
-     * Gets the name of the field representing the foreign key to the target table.
-     *
-     * @return array<string>|string
-     */
-    auto getForeignKey() {
+    // Gets the name of the field representing the foreign key to the target table.
+    string[] getForeignKey() {
         if (this._foreignKey === null) {
             this._foreignKey = this._modelKey(this.getTarget().getAlias());
         }

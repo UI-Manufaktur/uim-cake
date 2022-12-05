@@ -343,10 +343,9 @@ class SelectLoader
      * which the filter should be applied
      *
      * @param array<string, mixed> myOptions The options for getting the link field.
-     * @return array<string>|string
      * @throws \RuntimeException
      */
-    protected auto _linkField(array myOptions) {
+    protected string[] _linkField(array myOptions) {
         $links = [];
         myName = this.alias;
 

@@ -448,22 +448,18 @@ abstract class Association
         return this._bindingKey;
     }
 
-    /**
-     * Gets the name of the field representing the foreign key to the target table.
-     *
-     * @return array<string>|string
-     */
-    auto getForeignKey() {
+    // Gets the name of the field representing the foreign key to the target table.
+    string[] getForeignKey() {
         return this._foreignKey;
     }
 
     /**
      * Sets the name of the field representing the foreign key to the target table.
      *
-     * @param array<string>|string myKey the key or keys to be used to link both tables together
+     * @param myKey the key or keys to be used to link both tables together
      * @return this
      */
-    auto setForeignKey(myKey) {
+    auto setForeignKey(string[] myKey) {
         this._foreignKey = myKey;
 
         return this;

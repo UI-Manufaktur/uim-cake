@@ -140,10 +140,10 @@ class FormProtector
      * fieldname parts like ["Model", "field"] is returned.
      *
      * @param string myName The form inputs name attribute.
-     * @return array<string> Array of field name params like ["Model.field"] or
+     * @return Array of field name params like ["Model.field"] or
      *   ["Model", "field"] for array fields or empty array if myName is empty.
      */
-    protected auto getFieldNameArray(string myName): array
+    protected string[] getFieldNameArray(string myName): array
     {
         if (empty(myName) && myName !== "0") {
             return [];
@@ -336,11 +336,9 @@ class FormProtector
 
     /**
      * Get the sorted unlocked string
-     *
      * @param array $formData Data array
-     * @return array<string>
      */
-    protected auto sortedUnlockedFields(array $formData): array
+    protected string[] sortedUnlockedFields(array $formData): array
     {
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
         if (empty($unlocked)) {
@@ -468,11 +466,11 @@ class FormProtector
      * @param array $expectedFields Fields array, containing the expected fields we should have in POST
      * @param string $intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
      * @param string $stringKeyMessage Message string if tampered found in
-     *  data fields indexed by string (protected).
+     * return data fields indexed by string (protected).
      * @param string $missingMessage Message string if missing field
-     * @return array<string> Messages
+     * @return Messages
      */
-    protected auto debugCheckFields(
+    protected string[] debugCheckFields(
         array myDataFields,
         array $expectedFields = [],
         string $intKeyMessage = "",
