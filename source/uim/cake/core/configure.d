@@ -242,13 +242,8 @@ class Configure
         return isset(static::$_engines[myName]);
     }
 
-    /**
-     * Gets the names of the configured Engine objects.
-     *
-     * @return array<string>
-     */
-    static function configured(): array
-    {
+    // Gets the names of the configured Engine objects.
+    static string[] configured() {
         $engines = array_keys(static::$_engines);
 
         return array_map(function (myKey) {
