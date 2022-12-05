@@ -1,12 +1,13 @@
-module uim.caketh;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.auths.authenticates.digest;
 
 @safe:
 import uim.cake
 
-/* import uim.cake.controllerss.componentsRegistry;
-import uim.caketps\ServerRequest;
-import uim.cakeilities.Security;
- */
 /**
  * Digest Authentication adapter for AuthComponent.
  *
@@ -251,7 +252,6 @@ class DigestAuthenticate : BasicAuthenticate
      * Check the nonce to ensure it is valid and not expired.
      *
      * @param string $nonce The nonce value to check.
-     * @return bool
      */
     protected bool validNonce(string $nonce) {
         myValue = base64_decode($nonce);
