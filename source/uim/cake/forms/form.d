@@ -273,7 +273,6 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * Used by `execute()` to execute the form"s action.
      *
      * @param array myData Form data.
-     * @return bool
      */
     protected bool _execute(array myData) {
         return true;

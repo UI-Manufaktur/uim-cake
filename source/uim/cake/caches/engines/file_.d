@@ -378,7 +378,6 @@ class FileEngine : CacheEngine {
     /**
      * Determine if cache directory is writable
      *
-     * @return bool
      */
     protected bool _active() {
         $dir = new SplFileInfo(this._config["path"]);

@@ -262,7 +262,6 @@ class RulesChecker
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      * @param array<\Cake\Datasource\RuleInvoker> $rules The list of rules that must be checked.
-     * @return bool
      */
     protected bool _checkRules(IEntity $entity, array myOptions = [], array $rules = []) {
         $success = true;

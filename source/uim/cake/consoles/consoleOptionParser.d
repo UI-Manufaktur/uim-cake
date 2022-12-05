@@ -865,7 +865,6 @@ class ConsoleOptionParser
      * Check to see if myName has an option (short/long) defined for it.
      *
      * @param string myName The name of the option.
-     * @return bool
      */
     protected bool _optionExists(string myName) {
         if (substr(myName, 0, 2) === "--") {

@@ -136,7 +136,6 @@ trait PluginAssetsTrait
      * Remove folder/symlink.
      *
      * @param array<string, mixed> myConfig Plugin config.
-     * @return bool
      */
     protected bool _remove(array myConfig) {
         if (myConfig["moduled"] && !is_dir(myConfig["destDir"])) {
@@ -189,7 +188,6 @@ trait PluginAssetsTrait
      * Create directory
      *
      * @param string $dir Directory name
-     * @return bool
      */
     protected bool _createDirectory(string $dir) {
         $old = umask(0);
@@ -214,7 +212,6 @@ trait PluginAssetsTrait
      *
      * @param string myTarget Target directory
      * @param string $link Link name
-     * @return bool
      */
     protected bool _createSymlink(string myTarget, string $link) {
         // phpcs:disable
@@ -235,7 +232,6 @@ trait PluginAssetsTrait
      *
      * @param string $source Source directory
      * @param string $destination Destination directory
-     * @return bool
      */
     protected bool _copyDirectory(string $source, string $destination) {
         $fs = new Filesystem();

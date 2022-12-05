@@ -2448,7 +2448,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param \Cake\Validation\ValidationSet myField The set of rules for a field.
      * @param array<string, mixed> $context A key value list of data containing the validation context.
-     * @return bool
      */
     protected bool _checkPresence(ValidationSet myField, array $context) {
         $required = myField.isPresenceRequired();
@@ -2471,7 +2470,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param \Cake\Validation\ValidationSet myField the set of rules for a field
      * @param array<string, mixed> $context a key value list of data containing the validation context.
-     * @return bool
      */
     protected bool _canBeEmpty(ValidationSet myField, array $context) {
         $allowed = myField.isEmptyAllowed();
@@ -2505,7 +2503,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param mixed myData Value to check against.
      * @param int $flags A bitmask of EMPTY_* flags which specify what is empty
-     * @return bool
      */
     protected bool isEmpty(myData, int $flags) {
         if (myData === null) {

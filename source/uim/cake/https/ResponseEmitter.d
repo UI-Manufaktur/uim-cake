@@ -214,7 +214,6 @@ class ResponseEmitter : EmitterInterface
      * Helper methods to set cookie.
      *
      * @param \Cake\Http\Cookie\CookieInterface|string $cookie Cookie.
-     * @return bool
      */
     protected bool setCookie($cookie) {
         if (is_string($cookie)) {

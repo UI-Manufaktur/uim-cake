@@ -66,7 +66,6 @@ class CheckboxWidget : BasicWidget
      * Checks whether the checkbox should be checked.
      *
      * @param array<string, mixed> myData Data to look at and determine checked state.
-     * @return bool
      */
     protected bool _isChecked(array myData) {
         if (array_key_exists('checked', myData)) {

@@ -590,7 +590,6 @@ class Session
     /**
      * Returns whether a session exists
      *
-     * @return bool
      */
     protected bool _hasSession() {
         return !ini_get("session.use_cookies")
@@ -631,7 +630,6 @@ class Session
      * Returns true if the session is no longer valid because the last time it was
      * accessed was after the configured timeout.
      *
-     * @return bool
      */
     protected bool _timedOut() {
         $time = this.read("Config.time");

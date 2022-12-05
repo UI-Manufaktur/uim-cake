@@ -523,7 +523,6 @@ class HasMany : Association
      *
      * @param \Cake\ORM\Table myTable the table containing the foreign key
      * @param array $properties the list of fields that compose the foreign key
-     * @return bool
      */
     protected bool _foreignKeyAcceptsNull(Table myTable, array $properties) {
         return !in_array(

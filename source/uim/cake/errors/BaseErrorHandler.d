@@ -267,7 +267,6 @@ abstract class BaseErrorHandler
      *
      * @param string|int $level The level name of the log.
      * @param array myData Array of error data.
-     * @return bool
      */
     protected bool _logError($level, array myData) {
         myMessage = sprintf(

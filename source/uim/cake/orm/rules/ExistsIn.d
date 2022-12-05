@@ -133,7 +133,6 @@ class ExistsIn
      *
      * @param \Cake\Datasource\IEntity $entity The entity to check.
      * @param \Cake\ORM\Table $source The table to use schema from.
-     * @return bool
      */
     protected bool _fieldsAreNull(IEntity $entity, Table $source) {
         $nulls = 0;

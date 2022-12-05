@@ -814,7 +814,6 @@ class I18nExtractCommand : Command {
      * Returns whether this execution is meant to extract string only from directories in folder represented by the
      * APP constant, i.e. this task is extracting strings from same application.
      *
-     * @return bool
      */
     protected bool _isExtractingApp() {
         /** @psalm-suppress UndefinedConstant */
