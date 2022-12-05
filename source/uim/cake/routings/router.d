@@ -167,11 +167,10 @@ class Router
     /**
      * Gets the named route patterns for use in config/routes.php
      *
-     * @return array<string, string> Named route elements
+     * @return Named route elements
      * @see \Cake\Routing\Router::$_namedExpressions
      */
-    static auto getNamedExpressions(): array
-    {
+    static STRINGAA getNamedExpressions() {
         return static::$_namedExpressions;
     }
 
@@ -956,9 +955,8 @@ class Router
      * - Vendor/Cms.Management/Admin/Articles::view
      *
      * @param string myUrl Route path in [Plugin.][Prefix/]Controller::action format
-     * @return array<string, string>
      */
-    static function parseRoutePath(string myUrl): array
+    static STRINGAA parseRoutePath(string myUrl): array
     {
         if (isset(static::$_routePaths[myUrl])) {
             return static::$_routePaths[myUrl];

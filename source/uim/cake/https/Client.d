@@ -631,12 +631,11 @@ class Client : ClientInterface
      *
      * @phpstan-param non-empty-string myType
      * @param string myType short type alias or full mimetype.
-     * @return array<string, string> Headers to set on the request.
+     * @return Headers to set on the request.
      * @throws \Cake\Core\Exception\CakeException When an unknown type alias is used.
      * @psalm-return array<non-empty-string, non-empty-string>
      */
-    protected auto _typeHeaders(string myType): array
-    {
+    protected STRINGAA _typeHeaders(string myType) {
         if (strpos(myType, "/") !== false) {
             return [
                 "Accept":myType,

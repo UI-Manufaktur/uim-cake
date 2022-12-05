@@ -7,7 +7,7 @@ import uim.cake.command\VersionCommand;
 import uim.cake.console.command\HelpCommand;
 import uim.cake.console.exceptions\MissingOptionException;
 import uim.cake.console.exceptions\StopException;
-import uim.cake.core.ConsoleApplicationInterface;
+import uim.cake.core.IConsoleApplication;
 import uim.cake.core.ContainerApplicationInterface;
 import uim.cake.core.PluginApplicationInterface;
 import uim.cakeents\IEventDispatcher;
@@ -30,40 +30,34 @@ class CommandRunner : IEventDispatcher
     /**
      * The application console commands are being run for.
      *
-     * @var \Cake\Core\ConsoleApplicationInterface
+     * @var \Cake\Core\IConsoleApplication
      */
     protected $app;
 
     /**
      * The application console commands are being run for.
-     *
-     * @var \Cake\Console\ICommandFactory|null
      */
-    protected $factory;
+    protected ICommandFactory $factory;
 
     /**
      * The root command name. Defaults to `cake`.
-     *
-     * @var string
      */
-    protected $root;
+    protected string $root;
 
     /**
      * Alias mappings.
-     *
-     * @var array<string>
      */
-    protected myAliases = [];
+    protected string[] myAliases;
 
     /**
      * Constructor
      *
-     * @param \Cake\Core\ConsoleApplicationInterface $app The application to run CLI commands for.
+     * @param \Cake\Core\IConsoleApplication $app The application to run CLI commands for.
      * @param string $root The root command name to be removed from argv.
      * @param \Cake\Console\ICommandFactory|null $factory Command factory instance.
      */
     this(
-        ConsoleApplicationInterface $app,
+        IConsoleApplication $app,
         string $root = "cake",
         ?ICommandFactory $factory = null
     ) {
@@ -183,11 +177,8 @@ class CommandRunner : IEventDispatcher
 
     /**
      * Get the application"s event manager or the global one.
-     *
-     * @return \Cake\Event\IEventManager
      */
-    auto getEventManager(): IEventManager
-    {
+    IEventManager getEventManager() {
         if (this.app instanceof PluginApplicationInterface) {
             return this.app.getEventManager();
         }
@@ -201,7 +192,7 @@ class CommandRunner : IEventDispatcher
      * If the application does not support events and this method is used as
      * a setter, an exception will be raised.
      *
-     * @param \Cake\Event\IEventManager myEventManager The event manager to set.
+     * @param myEventManager The event manager to set.
      * @return this
      * @throws \InvalidArgumentException
      */

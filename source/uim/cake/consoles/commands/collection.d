@@ -19,7 +19,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @psalm-var array<string, \Cake\Console\Shell|\Cake\Console\ICommand|class-string>
      * @psalm-suppress DeprecatedClass
      */
-    protected $commands = [];
+    protected ICommand commands = [];
 
     /**
      * Constructor
@@ -143,10 +143,9 @@ class CommandCollection : IteratorAggregate, Countable
      * the long name (`plugin.command`) will be returned.
      *
      * @param string myPlugin The plugin to scan.
-     * @return array<string, string> Discovered plugin commands.
+     * @return Discovered plugin commands.
      */
-    function discoverPlugin(string myPlugin): array
-    {
+    STRINGAA discoverPlugin(string myPlugin) {
         $scanner = new CommandScanner();
         myShells = $scanner.scanPlugin(myPlugin);
 
@@ -157,10 +156,9 @@ class CommandCollection : IteratorAggregate, Countable
      * Resolve names based on existing commands
      *
      * @param array $input The results of a CommandScanner operation.
-     * @return array<string, string> A flat map of command names: class names.
+     * @return A flat map of command names: class names.
      */
-    protected auto resolveNames(array $input): array
-    {
+    protected STRINGAA resolveNames(array $input) {
         $out = [];
         foreach ($input as $info) {
             myName = $info["name"];
@@ -194,10 +192,9 @@ class CommandCollection : IteratorAggregate, Countable
      * Commands defined in the application will overwrite commands with
      * the same name provided by UIM.
      *
-     * @return array<string, string> An array of command names and their classes.
+     * @return An array of command names and their classes.
      */
-    function autoDiscover(): array
-    {
+    STRINGAA autoDiscover() {
         $scanner = new CommandScanner();
 
         $core = this.resolveNames($scanner.scanCore());
@@ -211,8 +208,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @return array<string> Command names
      */
-    function keys(): array
-    {
+    function keys(): array {
         return array_keys(this.commands);
     }
 }

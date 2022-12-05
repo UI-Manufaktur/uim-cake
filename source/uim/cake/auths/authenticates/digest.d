@@ -203,10 +203,9 @@ class DigestAuthenticate : BasicAuthenticate
      * Generate the login headers
      *
      * @param \Cake\Http\ServerRequest myRequest Request object.
-     * @return array<string, string> Headers for logging in.
+     * @return Headers for logging in.
      */
-    function loginHeaders(ServerRequest myRequest): array
-    {
+    STRINGAA loginHeaders(ServerRequest myRequest) {
         $realm = this._config["realm"] ?: myRequest.getEnv("SERVER_NAME");
 
         myOptions = [
@@ -225,9 +224,9 @@ class DigestAuthenticate : BasicAuthenticate
         foreach (myOptions as $k: $v) {
             if (is_bool($v)) {
                 $v = $v ? "true" : "false";
-                $opts[] = sprintf("%s=%s", $k, $v);
+                $opts[] = "%s=%s".format($k, $v);
             } else {
-                $opts[] = sprintf("%s="%s"", $k, $v);
+                $opts[] = ˋ%s="%s"ˋ.format($k, $v);
             }
         }
 

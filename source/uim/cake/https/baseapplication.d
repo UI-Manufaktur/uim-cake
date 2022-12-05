@@ -12,7 +12,7 @@ module uim.cake.https;
 
 import uim.cake.console.commandCollection;
 import uim.cake.controller\ControllerFactory;
-import uim.cake.core.ConsoleApplicationInterface;
+import uim.cake.core.IConsoleApplication;
 import uim.cake.core.Container;
 import uim.cake.core.ContainerApplicationInterface;
 import uim.cake.core.IContainer;
@@ -43,7 +43,7 @@ use Psr\Http\Message\IServerRequest;
  * of middleware, and delegates request/response handling to the correct controller.
  */
 abstract class BaseApplication :
-    ConsoleApplicationInterface,
+    IConsoleApplication,
     ContainerApplicationInterface,
     HttpApplicationInterface,
     PluginApplicationInterface,

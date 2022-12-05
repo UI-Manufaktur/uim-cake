@@ -216,11 +216,8 @@ class Debugger
 
     /**
      * Reads the current output masking.
-     *
-     * @return array<string, string>
      */
-    static function outputMask(): array
-    {
+    static STRINGAA outputMask() {
         return static::configInstance("outputMask");
     }
 

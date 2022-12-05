@@ -6,7 +6,7 @@ import uim.cake.console.commandCollection;
  * An interface defining the methods that the
  * console runner depend on.
  */
-interface ConsoleApplicationInterface
+interface IConsoleApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.

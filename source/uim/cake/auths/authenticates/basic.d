@@ -39,8 +39,7 @@ import uim.cake
  *
  * @see https://book.UIM.org/4/en/controllers/components/authentication.html
  */
-class BasicAuthenticate : DAuthenticate
-{
+class BasicAuthenticate : DAuthenticate {
     /**
      * Authenticate a user using HTTP auth. Will use the configured User model and attempt a
      * login using HTTP auth.
@@ -89,14 +88,13 @@ class BasicAuthenticate : DAuthenticate
      * Generate the login headers
      *
      * @param \Cake\Http\ServerRequest myRequest Request object.
-     * @return array<string, string> Headers for logging in.
+     * @return Headers for logging in.
      */
-    function loginHeaders(ServerRequest myRequest): array
-    {
+    STRINGAA loginHeaders(ServerRequest myRequest) {
         $realm = this.getConfig("realm") ?: myRequest.getEnv("SERVER_NAME");
 
         return [
-            "WWW-Authenticate":sprintf("Basic realm="%s"", $realm),
+            "WWW-Authenticate":ˋBasic realm="%s"ˋ.format($realm),
         ];
     }
 }

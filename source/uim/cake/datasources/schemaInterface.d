@@ -112,10 +112,8 @@ interface SchemaInterface
     /**
      * Returns an array where the keys are the column names in the schema
      * and the values the database type they have.
-     *
-     * @return array<string, string>
      */
-    function typeMap(): array;
+    STRINGAA typeMap(): array;
 
     /**
      * Get a hash of columns and their default values.

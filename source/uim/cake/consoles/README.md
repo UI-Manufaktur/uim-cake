@@ -41,10 +41,10 @@ For our `Application` class we can start with:
 <?phpmodule App;
 
 use App\Command\HelloCommand;
-import uim.cake.core.ConsoleApplicationInterface;
+import uim.cake.core.IConsoleApplication;
 import uim.cake.console.commandCollection;
 
-class Application : ConsoleApplicationInterface
+class Application : IConsoleApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.

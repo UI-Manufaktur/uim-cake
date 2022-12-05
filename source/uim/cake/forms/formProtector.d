@@ -41,11 +41,11 @@ class FormProtector
      * Validate submitted form data.
      *
      * @param mixed $formData Form data.
-     * @param string myUrl URL form was POSTed to.
+     * @param string anURL URL form was POSTed to.
      * @param string $sessionId Session id for hash generation.
      * @return bool
      */
-    bool validate($formData, string myUrl, string $sessionId) {
+    bool validate($formData, string anURL, string $sessionId) {
         this.debugMessage = null;
 
         $extractedToken = this.extractToken($formData);
@@ -57,7 +57,7 @@ class FormProtector
         $generatedToken = this.generateHash(
             $hashParts["fields"],
             $hashParts["unlockedFields"],
-            myUrl,
+            anURL,
             $sessionId
         );
 
@@ -356,13 +356,12 @@ class FormProtector
     /**
      * Generate the token data.
      *
-     * @param string myUrl Form URL.
+     * @param string anURL Form URL.
      * @param string $sessionId Session Id.
-     * @return array<string, string> The token data.
+     * @return The token data.
      * @psalm-return array{fields: string, unlocked: string, debug: string}
      */
-    function buildTokenData(string myUrl = "", string $sessionId = ""): array
-    {
+    STRINGAA buildTokenData(string anURL = "", string $sessionId = "") {
         myFields = this.fields;
         $unlockedFields = this.unlockedFields;
 
@@ -382,14 +381,14 @@ class FormProtector
         ksort($locked, SORT_STRING);
         myFields += $locked;
 
-        myFields = this.generateHash(myFields, $unlockedFields, myUrl, $sessionId);
+        myFields = this.generateHash(myFields, $unlockedFields, anURL, $sessionId);
         $locked = implode("|", array_keys($locked));
 
         return [
             "fields":urlencode(myFields . ":" . $locked),
             "unlocked":urlencode(implode("|", $unlockedFields)),
             "debug":urlencode(json_encode([
-                myUrl,
+                anURL,
                 this.fields,
                 this.unlockedFields,
             ])),
@@ -401,13 +400,13 @@ class FormProtector
      *
      * @param array myFields Fields list.
      * @param array $unlockedFields Unlocked fields.
-     * @param string myUrl Form URL.
+     * @param string anURL Form URL.
      * @param string $sessionId Session Id.
      * @return string
      */
-    protected auto generateHash(array myFields, array $unlockedFields, string myUrl, string $sessionId) {
+    protected auto generateHash(array myFields, array $unlockedFields, string anURL, string $sessionId) {
         $hashParts = [
-            myUrl,
+            anURL,
             serialize(myFields),
             implode("|", $unlockedFields),
             $sessionId,
@@ -434,9 +433,9 @@ class FormProtector
             return "Invalid form protection debug token.";
         }
         $expectedUrl = Hash::get($expectedParts, 0);
-        myUrl = Hash::get($hashParts, "url");
-        if ($expectedUrl !== myUrl) {
-            myMessages[] = sprintf("URL mismatch in POST data (expected `%s` but found `%s`)", $expectedUrl, myUrl);
+        anURL = Hash::get($hashParts, "url");
+        if ($expectedUrl !== anURL) {
+            myMessages[] = sprintf("URL mismatch in POST data (expected `%s` but found `%s`)", $expectedUrl, anURL);
         }
         $expectedFields = Hash::get($expectedParts, 1);
         myDataFields = Hash::get($hashParts, "fields") ?: [];
