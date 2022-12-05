@@ -73,7 +73,6 @@ class Plugin
      *
      * @param string myPlugin Plugin name.
      * @return bool
-
      */
     static bool isLoaded(string myPlugin) {
         return static::getCollection().has(myPlugin);
@@ -81,11 +80,9 @@ class Plugin
 
     /**
      * Return a list of loaded plugins.
-     *
-     * @return array<string> A list of plugins that have been loaded
+     * @return A list of plugins that have been loaded
      */
-    static function loaded(): array
-    {
+    static string[] loaded() {
         string[] myNames;
         foreach (static::getCollection() as myPlugin) {
             myNames[] = myPlugin.getName();

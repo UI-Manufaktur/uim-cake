@@ -396,11 +396,8 @@ class Paginator : PaginatorInterface
 
     /**
      * Shim method for reading the deprecated whitelist or allowedParameters options
-     *
-     * @return array<string>
      */
-    protected auto getAllowedParameters(): array
-    {
+    protected string[] getAllowedParameters() {
         $allowed = this.getConfig("allowedParameters");
         if (!$allowed) {
             $allowed = [];

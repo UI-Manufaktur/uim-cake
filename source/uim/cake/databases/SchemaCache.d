@@ -34,10 +34,9 @@ class SchemaCache
      * Build metadata.
      *
      * @param string|null myName The name of the table to build cache data for.
-     * @return array<string> Returns a list build table caches
+     * @return Returns a list build table caches
      */
-    function build(Nullable!string myName = null): array
-    {
+    string[] build(Nullable!string myName = null) {
         if (myName) {
             myTables = [myName];
         } else {
@@ -56,10 +55,9 @@ class SchemaCache
      * Clear metadata.
      *
      * @param string|null myName The name of the table to clear cache data for.
-     * @return array<string> Returns a list of cleared table caches
+     * @return Returns a list of cleared table caches
      */
-    function clear(Nullable!string myName = null): array
-    {
+    string[] clear(Nullable!string myName = null) {
         if (myName) {
             myTables = [myName];
         } else {

@@ -483,13 +483,8 @@ trait EntityTrait
         return this;
     }
 
-    /**
-     * Gets the virtual fields on this entity.
-     *
-     * @return array<string>
-     */
-    auto getVirtual(): array
-    {
+    // Gets the virtual fields on this entity.
+    string[] getVirtual() {
         return this._virtual;
     }
 
@@ -499,11 +494,10 @@ trait EntityTrait
      * The list of visible fields is all standard fields
      * plus virtual fields minus hidden fields.
      *
-     * @return array<string> A list of fields that are "visible" in all
+     * @return A list of fields that are "visible" in all
      *     representations.
      */
-    auto getVisible(): array
-    {
+    string[] getVisible() {
         myFields = array_keys(this._fields);
         myFields = array_merge(myFields, this._virtual);
 
@@ -738,13 +732,8 @@ trait EntityTrait
         return isset(this._dirty[myField]);
     }
 
-    /**
-     * Gets the dirty fields.
-     *
-     * @return array<string>
-     */
-    auto getDirty(): array
-    {
+    // Gets the dirty fields.
+    string[] getDirty() {
         return array_keys(this._dirty);
     }
 

@@ -23,10 +23,8 @@ interface IEntity : ArrayAccess, JsonSerializable
 
     /**
      * Gets the hidden fields.
-     *
-     * @return array<string>
      */
-    auto getHidden(): array;
+    string[] getHidden();
 
     /**
      * Sets the virtual fields on this entity.
@@ -198,10 +196,9 @@ interface IEntity : ArrayAccess, JsonSerializable
 
     /**
      * Get the list of visible fields.
-     *
-     * @return array<string> A list of fields that are "visible" in all representations.
+     * @return A list of fields that are "visible" in all representations.
      */
-    auto getVisible(): array;
+    string[] getVisible();
 
     /**
      * Returns an array with all the visible fields set in this entity.
