@@ -61,10 +61,8 @@ class RouteBuilder
 
     /**
      * The path prefix scope that this collection uses.
-     *
-     * @var string
      */
-    protected $_path;
+    protected string $_path;
 
     /**
      * The scope parameters if there are any.
@@ -153,22 +151,17 @@ class RouteBuilder
      * Future routes connected in through this builder will have the connected
      * extensions applied. However, setting extensions does not modify existing routes.
      *
-     * @param array<string>|string $extensions The extensions to set.
+     * @param $extensions The extensions to set.
      * @return this
      */
-    auto setExtensions($extensions) {
+    auto setExtensions(string[] $extensions) {
         this._extensions = (array)$extensions;
 
         return this;
     }
 
-    /**
-     * Get the extensions in this route builder"s scope.
-     *
-     * @return array<string>
-     */
-    auto getExtensions(): array
-    {
+    // Get the extensions in this route builder"s scope.
+    string[] getExtensions() {
         return this._extensions;
     }
 

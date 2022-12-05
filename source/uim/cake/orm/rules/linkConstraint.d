@@ -110,9 +110,9 @@ class LinkConstraint
      *
      * @param array<string> myFields The fields that should be aliased.
      * @param \Cake\ORM\Table $source The object to use for aliasing.
-     * @return array<string> The aliased fields
+     * @return The aliased fields
      */
-    protected auto _aliasFields(array myFields, Table $source): array
+    protected string[] _aliasFields(array myFields, Table $source): array
     {
         foreach (myFields as myKey => myValue) {
             myFields[myKey] = $source.aliasField(myValue);

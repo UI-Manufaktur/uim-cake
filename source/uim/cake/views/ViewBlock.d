@@ -201,10 +201,9 @@ class ViewBlock
     /**
      * Get the unclosed/active blocks. Key is name, value is mode.
      *
-     * @return array<string> An array of unclosed blocks.
+     * @return An array of unclosed blocks.
      */
-    function unclosed(): array
-    {
+    string[] unclosed() {
         return this._active;
     }
 }
