@@ -1,4 +1,4 @@
-module uim.cakerors\Debug;
+module uim.cake.errors\Debug;
 
 /**
  * Interface for formatters used by Debugger::exportVar()
