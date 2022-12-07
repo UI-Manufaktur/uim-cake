@@ -1,4 +1,4 @@
-module uim.cake.collectionss.iterators.nest;
+module uim.cake.collections.iterators.nest;
 
 @safe:
 import uim.cake;

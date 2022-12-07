@@ -1,4 +1,4 @@
-module uim.cake.collectionss.iterators.mapreduce;
+module uim.cake.collections.iterators.mapreduce;
 
 @safe:
 import uim.cake;

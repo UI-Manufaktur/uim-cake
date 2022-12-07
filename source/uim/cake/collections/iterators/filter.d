@@ -1,4 +1,4 @@
-module uim.cake.collectionss.iterators.filter;
+module uim.cake.collections.iterators.filter;
 
 @safe:
 import uim.cake;

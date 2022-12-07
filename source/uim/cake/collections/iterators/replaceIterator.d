@@ -1,4 +1,4 @@
-module uim.cake.collectionss.iterators.replaceiterator;
+module uim.cake.collections.iterators.replaceiterator;
 
 @safe:
 import uim.cake;

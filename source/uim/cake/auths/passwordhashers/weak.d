@@ -4,7 +4,7 @@ module uim.caketh;
 import uim.cake
 
 /* import uim.cake.core.Configure;
-import uim.cakerors\Debugger;
+import uim.cake.errors\Debugger;
 import uim.cakeilities.Security;
  */
 /**

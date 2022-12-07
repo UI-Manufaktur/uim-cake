@@ -1,27 +1,7 @@
 module uim.cake.collections;
 
-use AppendIterator;
-use ArrayIterator;
-import uim.cake.collections.iIterator\BufferedIterator;
-import uim.cake.collections.iIterator\ExtractIterator;
-import uim.cake.collections.iIterator\FilterIterator;
-import uim.cake.collections.iIterator\InsertIterator;
-import uim.cake.collections.iIterator\MapReduce;
-import uim.cake.collections.iIterator\NestIterator;
-import uim.cake.collections.iIterator\ReplaceIterator;
-import uim.cake.collections.iIterator\SortIterator;
-import uim.cake.collections.iIterator\StoppableIterator;
-import uim.cake.collections.iIterator\TreeIterator;
-import uim.cake.collections.iIterator\UnfoldIterator;
-import uim.cake.collections.iIterator\ZipIterator;
-use Countable;
-use InvalidArgumentException;
-use LimitIterator;
-use LogicException;
-use OuterIterator;
-use RecursiveIteratorIterator;
-use RuntimeException;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Offers a handful of methods to manipulate iterators
