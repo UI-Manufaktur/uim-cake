@@ -22,7 +22,7 @@ class NumberHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'engine': Number::class,
+        "engine": Number::class,
     ];
 
     /**
@@ -50,9 +50,9 @@ class NumberHelper : Helper
         myConfig = this._config;
 
         /** @psalm-var class-string<\Cake\I18n\Number>|null $engineClass */
-        $engineClass = App::className(myConfig['engine'], 'Utility');
+        $engineClass = App::className(myConfig["engine"], "Utility");
         if ($engineClass === null) {
-            throw new CakeException(sprintf('Class for %s could not be found', myConfig['engine']));
+            throw new CakeException(sprintf("Class for %s could not be found", myConfig["engine"]));
         }
 
         this._engine = new $engineClass(myConfig);
@@ -79,7 +79,7 @@ class NumberHelper : Helper
      * @see \Cake\I18n\Number::precision()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
-    function precision($number, int $precision = 3, array myOptions = []): string
+    string precision($number, int $precision = 3, array myOptions = [])
     {
         return this._engine.precision($number, $precision, myOptions);
     }
@@ -92,7 +92,7 @@ class NumberHelper : Helper
      * @see \Cake\I18n\Number::toReadableSize()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#interacting-with-human-readable-values
      */
-    function toReadableSize($size): string
+    string toReadableSize($size)
     {
         return this._engine.toReadableSize($size);
     }
@@ -111,7 +111,7 @@ class NumberHelper : Helper
      * @see \Cake\I18n\Number::toPercentage()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-percentages
      */
-    function toPercentage($number, int $precision = 2, array myOptions = []): string
+    string toPercentage($number, int $precision = 2, array myOptions = [])
     {
         return this._engine.toPercentage($number, $precision, myOptions);
     }
@@ -124,8 +124,8 @@ class NumberHelper : Helper
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. '['
-     * - `after` - The string to place after decimal numbers, e.g. ']'
+     * - `before` - The string to place before whole numbers, e.g. "["
+     * - `after` - The string to place after decimal numbers, e.g. "]"
      * - `escape` - Whether to escape html in resulting string
      *
      * @param string|float $number A floating point number.
@@ -133,12 +133,12 @@ class NumberHelper : Helper
      * @return string Formatted number
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-numbers
      */
-    function format($number, array myOptions = []): string
+    string format($number, array myOptions = [])
     {
         $formatted = this._engine.format($number, myOptions);
-        myOptions += ['escape': true];
+        myOptions += ["escape": true];
 
-        return myOptions['escape'] ? h($formatted) : $formatted;
+        return myOptions["escape"] ? h($formatted) : $formatted;
     }
 
     /**
@@ -149,10 +149,10 @@ class NumberHelper : Helper
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
      * - `fractionSymbol` - The currency symbol to use for fractional numbers.
      * - `fractionPosition` - The position the fraction symbol should be placed
-     *    valid options are 'before' & 'after'.
+     *    valid options are "before" & "after".
      * - `before` - Text to display before the rendered number
      * - `after` - Text to display after the rendered number
-     * - `zero` - The text to use for zero values, can be a string or a number. e.g. 0, 'Free!'
+     * - `zero` - The text to use for zero values, can be a string or a number. e.g. 0, "Free!"
      * - `places` - Number of decimal places to use. e.g. 2
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `pattern` - An ICU number pattern to use for formatting the number. e.g #,##0.00
@@ -161,16 +161,16 @@ class NumberHelper : Helper
      * - `escape` - Whether to escape html in resulting string
      *
      * @param string|float $number Value to format.
-     * @param string|null $currency International currency name such as 'USD', 'EUR', 'JPY', 'CAD'
+     * @param string|null $currency International currency name such as "USD", "EUR", "JPY", "CAD"
      * @param array<string, mixed> myOptions Options list.
      * @return string Number formatted as a currency.
      */
-    function currency($number, Nullable!string $currency = null, array myOptions = []): string
+    string currency($number, Nullable!string $currency = null, array myOptions = [])
     {
         $formatted = this._engine.currency($number, $currency, myOptions);
-        myOptions += ['escape': true];
+        myOptions += ["escape": true];
 
-        return myOptions['escape'] ? h($formatted) : $formatted;
+        return myOptions["escape"] ? h($formatted) : $formatted;
     }
 
     /**
@@ -181,20 +181,20 @@ class NumberHelper : Helper
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. '['
-     * - `after` - The string to place after decimal numbers, e.g. ']'
+     * - `before` - The string to place before whole numbers, e.g. "["
+     * - `after` - The string to place after decimal numbers, e.g. "]"
      * - `escape` - Set to false to prevent escaping
      *
      * @param string|float myValue A floating point number
      * @param array<string, mixed> myOptions Options list.
      * @return string formatted delta
      */
-    function formatDelta(myValue, array myOptions = []): string
+    string formatDelta(myValue, array myOptions = [])
     {
         $formatted = this._engine.formatDelta(myValue, myOptions);
-        myOptions += ['escape': true];
+        myOptions += ["escape": true];
 
-        return myOptions['escape'] ? h($formatted) : $formatted;
+        return myOptions["escape"] ? h($formatted) : $formatted;
     }
 
     /**
@@ -209,7 +209,7 @@ class NumberHelper : Helper
     function defaultCurrency($currency): Nullable!string
     {
         deprecationWarning(
-            'NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead.'
+            "NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead."
         );
 
         return this._engine.defaultCurrency($currency);
@@ -232,7 +232,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions An array with options.
      * @return string formatted number
      */
-    function ordinal(myValue, array myOptions = []): string
+    string ordinal(myValue, array myOptions = [])
     {
         return this._engine.ordinal(myValue, myOptions);
     }

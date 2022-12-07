@@ -16,11 +16,11 @@ class CheckboxWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'value': 1,
-        'val': null,
-        'disabled': false,
-        'templateVars': [],
+        "name": "",
+        "value": 1,
+        "val": null,
+        "disabled": false,
+        "templateVars": [],
     ];
 
     /**
@@ -29,9 +29,9 @@ class CheckboxWidget : BasicWidget
      * Data supports the following keys:
      *
      * - `name` - The name of the input.
-     * - `value` - The value attribute. Defaults to '1'.
+     * - `value` - The value attribute. Defaults to "1".
      * - `val` - The current value. If it matches `value` the checkbox will be checked.
-     *   You can also use the 'checked' attribute to make the checkbox checked.
+     *   You can also use the "checked" attribute to make the checkbox checked.
      * - `disabled` - Whether the checkbox should be disabled.
      *
      * Any other attributes passed in will be treated as HTML attributes.
@@ -45,20 +45,20 @@ class CheckboxWidget : BasicWidget
         myData += this.mergeDefaults(myData, $context);
 
         if (this._isChecked(myData)) {
-            myData['checked'] = true;
+            myData["checked"] = true;
         }
-        unset(myData['val']);
+        unset(myData["val"]);
 
         $attrs = this._templates.formatAttributes(
             myData,
-            ['name', 'value']
+            ["name", "value"]
         );
 
-        return this._templates.format('checkbox', [
-            'name': myData['name'],
-            'value': myData['value'],
-            'templateVars': myData['templateVars'],
-            'attrs': $attrs,
+        return this._templates.format("checkbox", [
+            "name": myData["name"],
+            "value": myData["value"],
+            "templateVars": myData["templateVars"],
+            "attrs": $attrs,
         ]);
     }
 
@@ -68,10 +68,10 @@ class CheckboxWidget : BasicWidget
      * @param array<string, mixed> myData Data to look at and determine checked state.
      */
     protected bool _isChecked(array myData) {
-        if (array_key_exists('checked', myData)) {
-            return (bool)myData['checked'];
+        if (array_key_exists("checked", myData)) {
+            return (bool)myData["checked"];
         }
 
-        return (string)myData['val'] === (string)myData['value'];
+        return (string)myData["val"] === (string)myData["value"];
     }
 }

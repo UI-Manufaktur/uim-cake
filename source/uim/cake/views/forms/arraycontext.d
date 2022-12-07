@@ -335,7 +335,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path
      * @return string A string with stripped numeric nesting
      */
-    protected auto stripNesting(string myField): string
+    protected string stripNesting(string myField)
     {
         return preg_replace("/\.\d*\./", ".", myField);
     }

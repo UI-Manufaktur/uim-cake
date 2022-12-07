@@ -46,7 +46,7 @@ trait StringTemplateTrait
      * @param array<string, mixed> myData The data to insert.
      * @return string
      */
-    function formatTemplate(string myName, array myData): string
+    string formatTemplate(string myName, array myData)
     {
         return this.templater().format(myName, myData);
     }

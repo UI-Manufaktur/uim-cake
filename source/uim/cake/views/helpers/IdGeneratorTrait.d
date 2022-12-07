@@ -8,19 +8,11 @@ import uim.cakeilities.Text;
  */
 trait IdGeneratorTrait
 {
-    /**
-     * Prefix for id attribute.
-     *
-     * @var string|null
-     */
-    protected $_idPrefix;
+    // Prefix for id attribute.
+    protected string $_idPrefix;
 
-    /**
-     * A list of id suffixes used in the current rendering.
-     *
-     * @var array<string>
-     */
-    protected $_idSuffixes = [];
+    // A list of id suffixes used in the current rendering.
+    protected string[] $_idSuffixes = [];
 
     /**
      * Clear the stored ID suffixes.
@@ -35,31 +27,31 @@ trait IdGeneratorTrait
     /**
      * Generate an ID attribute for an element.
      *
-     * Ensures that id's for a given set of fields are unique.
+     * Ensures that id"s for a given set of fields are unique.
      *
      * @param string myName The ID attribute name.
      * @param string $val The ID attribute value.
      * @return string Generated id.
      */
-    protected auto _id(string myName, string $val): string
+    protected string _id(string myName, string $val)
     {
         myName = this._domId(myName);
         $suffix = this._idSuffix($val);
 
-        return trim(myName . '-' . $suffix, '-');
+        return trim(myName . "-" . $suffix, "-");
     }
 
     /**
      * Generate an ID suffix.
      *
-     * Ensures that id's for a given set of fields are unique.
+     * Ensures that id"s for a given set of fields are unique.
      *
      * @param string $val The ID attribute value.
      * @return string Generated id suffix.
      */
-    protected auto _idSuffix(string $val): string
+    protected string _idSuffix(string $val)
     {
-        $idSuffix = mb_strtolower(str_replace(['/', '@', '<', '>', ' ', '"', '\''], '-', $val));
+        $idSuffix = mb_strtolower(str_replace(["/", "@", "<", ">", " ", """, "\""], "-", $val));
         myCount = 1;
         $check = $idSuffix;
         while (in_array($check, this._idSuffixes, true)) {
@@ -76,11 +68,11 @@ trait IdGeneratorTrait
      * @param string myValue The value to convert into an ID.
      * @return string The generated id.
      */
-    protected auto _domId(string myValue): string
+    protected string _domId(string myValue)
     {
-        $domId = mb_strtolower(Text::slug(myValue, '-'));
+        $domId = mb_strtolower(Text::slug(myValue, "-"));
         if (this._idPrefix) {
-            $domId = this._idPrefix . '-' . $domId;
+            $domId = this._idPrefix . "-" . $domId;
         }
 
         return $domId;

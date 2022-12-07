@@ -4,7 +4,7 @@ import uim.cake.views.Form\IContext;
 import uim.cake.views.StringTemplate;
 
 /**
- * Form 'widget' for creating labels.
+ * Form "widget" for creating labels.
  *
  * Generally this element is used by other widgets,
  * and FormHelper itself.
@@ -23,7 +23,7 @@ class LabelWidget : WidgetInterface
      *
      * @var string
      */
-    protected $_labelTemplate = 'label';
+    protected $_labelTemplate = "label";
 
     /**
      * Constructor.
@@ -57,19 +57,19 @@ class LabelWidget : WidgetInterface
     function render(array myData, IContext $context): string
     {
         myData += [
-            'text': '',
-            'input': '',
-            'hidden': '',
-            'escape': true,
-            'templateVars': [],
+            "text": "",
+            "input": "",
+            "hidden": "",
+            "escape": true,
+            "templateVars": [],
         ];
 
         return this._templates.format(this._labelTemplate, [
-            'text': myData['escape'] ? h(myData['text']) : myData['text'],
-            'input': myData['input'],
-            'hidden': myData['hidden'],
-            'templateVars': myData['templateVars'],
-            'attrs': this._templates.formatAttributes(myData, ['text', 'input', 'hidden']),
+            "text": myData["escape"] ? h(myData["text"]) : myData["text"],
+            "input": myData["input"],
+            "hidden": myData["hidden"],
+            "templateVars": myData["templateVars"],
+            "attrs": this._templates.formatAttributes(myData, ["text", "input", "hidden"]),
         ]);
     }
 

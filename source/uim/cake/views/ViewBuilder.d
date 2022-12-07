@@ -589,7 +589,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string
      */
-    function serialize(): string
+    string serialize()
     {
         $array = this.jsonSerialize();
 

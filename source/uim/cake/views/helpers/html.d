@@ -19,7 +19,7 @@ class HtmlHelper : Helper {
      *
      * @var array
      */
-    protected $helpers = ['Url'];
+    protected $helpers = ["Url"];
 
     /**
      * Default config for this class
@@ -27,36 +27,36 @@ class HtmlHelper : Helper {
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'templates': [
-            'meta': '<meta{{attrs}}/>',
-            'metalink': '<link href="{{url}}"{{attrs}}/>',
-            'link': '<a href="{{url}}"{{attrs}}>{{content}}</a>',
-            'mailto': '<a href="mailto:{{url}}"{{attrs}}>{{content}}</a>',
-            'image': '<img src="{{url}}"{{attrs}}/>',
-            'tableheader': '<th{{attrs}}>{{content}}</th>',
-            'tableheaderrow': '<tr{{attrs}}>{{content}}</tr>',
-            'tablecell': '<td{{attrs}}>{{content}}</td>',
-            'tablerow': '<tr{{attrs}}>{{content}}</tr>',
-            'block': '<div{{attrs}}>{{content}}</div>',
-            'blockstart': '<div{{attrs}}>',
-            'blockend': '</div>',
-            'tag': '<{{tag}}{{attrs}}>{{content}}</{{tag}}>',
-            'tagstart': '<{{tag}}{{attrs}}>',
-            'tagend': '</{{tag}}>',
-            'tagselfclosing': '<{{tag}}{{attrs}}/>',
-            'para': '<p{{attrs}}>{{content}}</p>',
-            'parastart': '<p{{attrs}}>',
-            'css': '<link rel="{{rel}}" href="{{url}}"{{attrs}}/>',
-            'style': '<style{{attrs}}>{{content}}</style>',
-            'charset': '<meta charset="{{charset}}"/>',
-            'ul': '<ul{{attrs}}>{{content}}</ul>',
-            'ol': '<ol{{attrs}}>{{content}}</ol>',
-            'li': '<li{{attrs}}>{{content}}</li>',
-            'javascriptblock': '<script{{attrs}}>{{content}}</script>',
-            'javascriptstart': '<script>',
-            'javascriptlink': '<script src="{{url}}"{{attrs}}></script>',
-            'javascriptend': '</script>',
-            'confirmJs': '{{confirm}}',
+        "templates": [
+            "meta": "<meta{{attrs}}/>",
+            "metalink": "<link href="{{url}}"{{attrs}}/>",
+            "link": "<a href="{{url}}"{{attrs}}>{{content}}</a>",
+            "mailto": "<a href="mailto:{{url}}"{{attrs}}>{{content}}</a>",
+            "image": "<img src="{{url}}"{{attrs}}/>",
+            "tableheader": "<th{{attrs}}>{{content}}</th>",
+            "tableheaderrow": "<tr{{attrs}}>{{content}}</tr>",
+            "tablecell": "<td{{attrs}}>{{content}}</td>",
+            "tablerow": "<tr{{attrs}}>{{content}}</tr>",
+            "block": "<div{{attrs}}>{{content}}</div>",
+            "blockstart": "<div{{attrs}}>",
+            "blockend": "</div>",
+            "tag": "<{{tag}}{{attrs}}>{{content}}</{{tag}}>",
+            "tagstart": "<{{tag}}{{attrs}}>",
+            "tagend": "</{{tag}}>",
+            "tagselfclosing": "<{{tag}}{{attrs}}/>",
+            "para": "<p{{attrs}}>{{content}}</p>",
+            "parastart": "<p{{attrs}}>",
+            "css": "<link rel="{{rel}}" href="{{url}}"{{attrs}}/>",
+            "style": "<style{{attrs}}>{{content}}</style>",
+            "charset": "<meta charset="{{charset}}"/>",
+            "ul": "<ul{{attrs}}>{{content}}</ul>",
+            "ol": "<ol{{attrs}}>{{content}}</ol>",
+            "li": "<li{{attrs}}>{{content}}</li>",
+            "javascriptblock": "<script{{attrs}}>{{content}}</script>",
+            "javascriptstart": "<script>",
+            "javascriptlink": "<script src="{{url}}"{{attrs}}></script>",
+            "javascriptend": "</script>",
+            "confirmJs": "{{confirm}}",
         ],
     ];
 
@@ -80,25 +80,25 @@ class HtmlHelper : Helper {
      * Create a meta tag that is output inline:
      *
      * ```
-     * this.Html.meta('icon', 'favicon.ico');
+     * this.Html.meta("icon", "favicon.ico");
      * ```
      *
      * Append the meta tag to custom view block "meta":
      *
      * ```
-     * this.Html.meta('description', 'A great page', ['block': true]);
+     * this.Html.meta("description", "A great page", ["block": true]);
      * ```
      *
      * Append the meta tag to custom view block:
      *
      * ```
-     * this.Html.meta('description', 'A great page', ['block': 'metaTags']);
+     * this.Html.meta("description", "A great page", ["block": "metaTags"]);
      * ```
      *
      * Create a custom meta tag:
      *
      * ```
-     * this.Html.meta(['property': 'og:site_name', 'content': 'UIM']);
+     * this.Html.meta(["property": "og:site_name", "content": "UIM"]);
      * ```
      *
      * ### Options
@@ -118,73 +118,73 @@ class HtmlHelper : Helper {
     {
         if (!is_array(myType)) {
             myTypes = [
-                'rss': ['type': 'application/rss+xml', 'rel': 'alternate', 'title': myType, 'link': myContents],
-                'atom': ['type': 'application/atom+xml', 'title': myType, 'link': myContents],
-                'icon': ['type': 'image/x-icon', 'rel': 'icon', 'link': myContents],
-                'keywords': ['name': 'keywords', 'content': myContents],
-                'description': ['name': 'description', 'content': myContents],
-                'robots': ['name': 'robots', 'content': myContents],
-                'viewport': ['name': 'viewport', 'content': myContents],
-                'canonical': ['rel': 'canonical', 'link': myContents],
-                'next': ['rel': 'next', 'link': myContents],
-                'prev': ['rel': 'prev', 'link': myContents],
-                'first': ['rel': 'first', 'link': myContents],
-                'last': ['rel': 'last', 'link': myContents],
+                "rss": ["type": "application/rss+xml", "rel": "alternate", "title": myType, "link": myContents],
+                "atom": ["type": "application/atom+xml", "title": myType, "link": myContents],
+                "icon": ["type": "image/x-icon", "rel": "icon", "link": myContents],
+                "keywords": ["name": "keywords", "content": myContents],
+                "description": ["name": "description", "content": myContents],
+                "robots": ["name": "robots", "content": myContents],
+                "viewport": ["name": "viewport", "content": myContents],
+                "canonical": ["rel": "canonical", "link": myContents],
+                "next": ["rel": "next", "link": myContents],
+                "prev": ["rel": "prev", "link": myContents],
+                "first": ["rel": "first", "link": myContents],
+                "last": ["rel": "last", "link": myContents],
             ];
 
-            if (myType === 'icon' && myContents === null) {
-                myTypes['icon']['link'] = 'favicon.ico';
+            if (myType === "icon" && myContents === null) {
+                myTypes["icon"]["link"] = "favicon.ico";
             }
 
             if (isset(myTypes[myType])) {
                 myType = myTypes[myType];
-            } elseif (!isset(myOptions['type']) && myContents !== null) {
-                if (is_array(myContents) && isset(myContents['_ext'])) {
-                    myType = myTypes[myContents['_ext']];
+            } elseif (!isset(myOptions["type"]) && myContents !== null) {
+                if (is_array(myContents) && isset(myContents["_ext"])) {
+                    myType = myTypes[myContents["_ext"]];
                 } else {
-                    myType = ['name': myType, 'content': myContents];
+                    myType = ["name": myType, "content": myContents];
                 }
-            } elseif (isset(myOptions['type'], myTypes[myOptions['type']])) {
-                myType = myTypes[myOptions['type']];
-                unset(myOptions['type']);
+            } elseif (isset(myOptions["type"], myTypes[myOptions["type"]])) {
+                myType = myTypes[myOptions["type"]];
+                unset(myOptions["type"]);
             } else {
                 myType = [];
             }
         }
 
-        myOptions += myType + ['block': null];
-        $out = '';
+        myOptions += myType + ["block": null];
+        $out = "";
 
-        if (isset(myOptions['link'])) {
-            if (is_array(myOptions['link'])) {
-                myOptions['link'] = this.Url.build(myOptions['link']);
+        if (isset(myOptions["link"])) {
+            if (is_array(myOptions["link"])) {
+                myOptions["link"] = this.Url.build(myOptions["link"]);
             } else {
-                myOptions['link'] = this.Url.assetUrl(myOptions['link']);
+                myOptions["link"] = this.Url.assetUrl(myOptions["link"]);
             }
-            if (isset(myOptions['rel']) && myOptions['rel'] === 'icon') {
-                $out = this.formatTemplate('metalink', [
-                    'url': myOptions['link'],
-                    'attrs': this.templater().formatAttributes(myOptions, ['block', 'link']),
+            if (isset(myOptions["rel"]) && myOptions["rel"] === "icon") {
+                $out = this.formatTemplate("metalink", [
+                    "url": myOptions["link"],
+                    "attrs": this.templater().formatAttributes(myOptions, ["block", "link"]),
                 ]);
-                myOptions['rel'] = 'shortcut icon';
+                myOptions["rel"] = "shortcut icon";
             }
-            $out .= this.formatTemplate('metalink', [
-                'url': myOptions['link'],
-                'attrs': this.templater().formatAttributes(myOptions, ['block', 'link']),
+            $out .= this.formatTemplate("metalink", [
+                "url": myOptions["link"],
+                "attrs": this.templater().formatAttributes(myOptions, ["block", "link"]),
             ]);
         } else {
-            $out = this.formatTemplate('meta', [
-                'attrs': this.templater().formatAttributes(myOptions, ['block', 'type']),
+            $out = this.formatTemplate("meta", [
+                "attrs": this.templater().formatAttributes(myOptions, ["block", "type"]),
             ]);
         }
 
-        if (empty(myOptions['block'])) {
+        if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions['block'] === true) {
-            myOptions['block'] = __FUNCTION__;
+        if (myOptions["block"] === true) {
+            myOptions["block"] = __FUNCTION__;
         }
-        this._View.append(myOptions['block'], $out);
+        this._View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -197,14 +197,14 @@ class HtmlHelper : Helper {
      * @return string A meta tag containing the specified character set.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-charset-tags
      */
-    function charset(Nullable!string $charset = null): string
+    string charset(Nullable!string $charset = null)
     {
         if (empty($charset)) {
-            $charset = strtolower((string)Configure::read('App.encoding'));
+            $charset = strtolower((string)Configure::read("App.encoding"));
         }
 
-        return this.formatTemplate('charset', [
-            'charset': !empty($charset) ? $charset : 'utf-8',
+        return this.formatTemplate("charset", [
+            "charset": !empty($charset) ? $charset : "utf-8",
         ]);
     }
 
@@ -232,12 +232,12 @@ class HtmlHelper : Helper {
      * @return string An `<a />` element.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
-    function link($title, myUrl = null, array myOptions = []): string
+    string link($title, myUrl = null, array myOptions = [])
     {
         $escapeTitle = true;
         if (myUrl !== null) {
             myUrl = this.Url.build(myUrl, myOptions);
-            unset(myOptions['fullBase']);
+            unset(myOptions["fullBase"]);
         } else {
             myUrl = this.Url.build($title);
             $title = htmlspecialchars_decode(myUrl, ENT_QUOTES);
@@ -245,11 +245,11 @@ class HtmlHelper : Helper {
             $escapeTitle = false;
         }
 
-        if (isset(myOptions['escapeTitle'])) {
-            $escapeTitle = myOptions['escapeTitle'];
-            unset(myOptions['escapeTitle']);
-        } elseif (isset(myOptions['escape'])) {
-            $escapeTitle = myOptions['escape'];
+        if (isset(myOptions["escapeTitle"])) {
+            $escapeTitle = myOptions["escapeTitle"];
+            unset(myOptions["escapeTitle"]);
+        } elseif (isset(myOptions["escape"])) {
+            $escapeTitle = myOptions["escape"];
         }
 
         if ($escapeTitle === true) {
@@ -261,23 +261,23 @@ class HtmlHelper : Helper {
 
         myTemplater = this.templater();
         $confirmMessage = null;
-        if (isset(myOptions['confirm'])) {
-            $confirmMessage = myOptions['confirm'];
-            unset(myOptions['confirm']);
+        if (isset(myOptions["confirm"])) {
+            $confirmMessage = myOptions["confirm"];
+            unset(myOptions["confirm"]);
         }
         if ($confirmMessage) {
-            $confirm = this._confirm('return true;', 'return false;');
-            myOptions['data-confirm-message'] = $confirmMessage;
-            myOptions['onclick'] = myTemplater.format('confirmJs', [
-                'confirmMessage': h($confirmMessage),
-                'confirm': $confirm,
+            $confirm = this._confirm("return true;", "return false;");
+            myOptions["data-confirm-message"] = $confirmMessage;
+            myOptions["onclick"] = myTemplater.format("confirmJs", [
+                "confirmMessage": h($confirmMessage),
+                "confirm": $confirm,
             ]);
         }
 
-        return myTemplater.format('link', [
-            'url': myUrl,
-            'attrs': myTemplater.formatAttributes(myOptions),
-            'content': $title,
+        return myTemplater.format("link", [
+            "url": myUrl,
+            "attrs": myTemplater.formatAttributes(myOptions),
+            "content": $title,
         ]);
     }
 
@@ -300,9 +300,9 @@ class HtmlHelper : Helper {
      * @see \Cake\Routing\Router::pathUrl()
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
-    function linkFromPath(string $title, string myPath, array myParams = [], array myOptions = []): string
+    string linkFromPath(string $title, string myPath, array myParams = [], array myOptions = [])
     {
-        return this.link($title, ['_path': myPath] + myParams, myOptions);
+        return this.link($title, ["_path": myPath] + myParams, myOptions);
     }
 
     /**
@@ -313,25 +313,25 @@ class HtmlHelper : Helper {
      * Include one CSS file:
      *
      * ```
-     * echo this.Html.css('styles.css');
+     * echo this.Html.css("styles.css");
      * ```
      *
      * Include multiple CSS files:
      *
      * ```
-     * echo this.Html.css(['one.css', 'two.css']);
+     * echo this.Html.css(["one.css", "two.css"]);
      * ```
      *
      * Add the stylesheet to view block "css":
      *
      * ```
-     * this.Html.css('styles.css', ['block': true]);
+     * this.Html.css("styles.css", ["block": true]);
      * ```
      *
      * Add the stylesheet to a custom block:
      *
      * ```
-     * this.Html.css('styles.css', ['block': 'layoutCss']);
+     * this.Html.css("styles.css", ["block": "layoutCss"]);
      * ```
      *
      * ### Options
@@ -342,7 +342,7 @@ class HtmlHelper : Helper {
      *   files  will only be included once, use false to allow the same
      *   css to be included more than once per request.
      * - `plugin` False value will prevent parsing path as a plugin
-     * - `rel` Defaults to 'stylesheet'. If equal to 'import' the stylesheet will be imported.
+     * - `rel` Defaults to "stylesheet". If equal to "import" the stylesheet will be imported.
      * - `fullBase` If true the URL will get a full address for the css file.
      *
      * All other options will be treated as HTML attributes. If the request contains a
@@ -350,7 +350,7 @@ class HtmlHelper : Helper {
      * generated HTML.
      *
      * @param array<string>|string myPath The name of a CSS style sheet or an array containing names of
-     *   CSS stylesheets. If `myPath` is prefixed with '/', the path will be relative to the webroot
+     *   CSS stylesheets. If `myPath` is prefixed with "/", the path will be relative to the webroot
      *   of your application. Otherwise, the path will be relative to your CSS path, usually webroot/css.
      * @param array<string, mixed> myOptions Array of options and HTML arguments.
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
@@ -359,18 +359,18 @@ class HtmlHelper : Helper {
     function css(myPath, array myOptions = []): Nullable!string
     {
         myOptions += [
-            'once': true,
-            'block': null,
-            'rel': 'stylesheet',
-            'nonce': this._View.getRequest().getAttribute('cspStyleNonce'),
+            "once": true,
+            "block": null,
+            "rel": "stylesheet",
+            "nonce": this._View.getRequest().getAttribute("cspStyleNonce"),
         ];
 
         if (is_array(myPath)) {
-            $out = '';
+            $out = "";
             foreach (myPath as $i) {
                 $out .= "\n\t" . (string)this.css($i, myOptions);
             }
-            if (empty(myOptions['block'])) {
+            if (empty(myOptions["block"])) {
                 return $out . "\n";
             }
 
@@ -378,35 +378,35 @@ class HtmlHelper : Helper {
         }
 
         myUrl = this.Url.css(myPath, myOptions);
-        myOptions = array_diff_key(myOptions, ['fullBase': null, 'pathPrefix': null]);
+        myOptions = array_diff_key(myOptions, ["fullBase": null, "pathPrefix": null]);
 
-        if (myOptions['once'] && isset(this._includedAssets[__METHOD__][myPath])) {
+        if (myOptions["once"] && isset(this._includedAssets[__METHOD__][myPath])) {
             return null;
         }
-        unset(myOptions['once']);
+        unset(myOptions["once"]);
         this._includedAssets[__METHOD__][myPath] = true;
 
         myTemplater = this.templater();
-        if (myOptions['rel'] === 'import') {
-            $out = myTemplater.format('style', [
-                'attrs': myTemplater.formatAttributes(myOptions, ['rel', 'block']),
-                'content': '@import url(' . myUrl . ');',
+        if (myOptions["rel"] === "import") {
+            $out = myTemplater.format("style", [
+                "attrs": myTemplater.formatAttributes(myOptions, ["rel", "block"]),
+                "content": "@import url(" . myUrl . ");",
             ]);
         } else {
-            $out = myTemplater.format('css', [
-                'rel': myOptions['rel'],
-                'url': myUrl,
-                'attrs': myTemplater.formatAttributes(myOptions, ['rel', 'block']),
+            $out = myTemplater.format("css", [
+                "rel": myOptions["rel"],
+                "url": myUrl,
+                "attrs": myTemplater.formatAttributes(myOptions, ["rel", "block"]),
             ]);
         }
 
-        if (empty(myOptions['block'])) {
+        if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions['block'] === true) {
-            myOptions['block'] = __FUNCTION__;
+        if (myOptions["block"] === true) {
+            myOptions["block"] = __FUNCTION__;
         }
-        this._View.append(myOptions['block'], $out);
+        this._View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -422,19 +422,19 @@ class HtmlHelper : Helper {
      * Include one script file:
      *
      * ```
-     * echo this.Html.script('styles.js');
+     * echo this.Html.script("styles.js");
      * ```
      *
      * Include multiple script files:
      *
      * ```
-     * echo this.Html.script(['one.js', 'two.js']);
+     * echo this.Html.script(["one.js", "two.js"]);
      * ```
      *
      * Add the script file to a custom block:
      *
      * ```
-     * this.Html.script('styles.js', ['block': 'bodyScript']);
+     * this.Html.script("styles.js", ["block": "bodyScript"]);
      * ```
      *
      * ### Options
@@ -459,18 +459,18 @@ class HtmlHelper : Helper {
     function script(myUrl, array myOptions = []): Nullable!string
     {
         $defaults = [
-            'block': null,
-            'once': true,
-            'nonce': this._View.getRequest().getAttribute('cspScriptNonce'),
+            "block": null,
+            "once": true,
+            "nonce": this._View.getRequest().getAttribute("cspScriptNonce"),
         ];
         myOptions += $defaults;
 
         if (is_array(myUrl)) {
-            $out = '';
+            $out = "";
             foreach (myUrl as $i) {
                 $out .= "\n\t" . (string)this.script($i, myOptions);
             }
-            if (empty(myOptions['block'])) {
+            if (empty(myOptions["block"])) {
                 return $out . "\n";
             }
 
@@ -478,25 +478,25 @@ class HtmlHelper : Helper {
         }
 
         myUrl = this.Url.script(myUrl, myOptions);
-        myOptions = array_diff_key(myOptions, ['fullBase': null, 'pathPrefix': null]);
+        myOptions = array_diff_key(myOptions, ["fullBase": null, "pathPrefix": null]);
 
-        if (myOptions['once'] && isset(this._includedAssets[__METHOD__][myUrl])) {
+        if (myOptions["once"] && isset(this._includedAssets[__METHOD__][myUrl])) {
             return null;
         }
         this._includedAssets[__METHOD__][myUrl] = true;
 
-        $out = this.formatTemplate('javascriptlink', [
-            'url': myUrl,
-            'attrs': this.templater().formatAttributes(myOptions, ['block', 'once']),
+        $out = this.formatTemplate("javascriptlink", [
+            "url": myUrl,
+            "attrs": this.templater().formatAttributes(myOptions, ["block", "once"]),
         ]);
 
-        if (empty(myOptions['block'])) {
+        if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions['block'] === true) {
-            myOptions['block'] = __FUNCTION__;
+        if (myOptions["block"] === true) {
+            myOptions["block"] = __FUNCTION__;
         }
-        this._View.append(myOptions['block'], $out);
+        this._View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -512,25 +512,25 @@ class HtmlHelper : Helper {
      * @param string $script The script to wrap
      * @param array<string, mixed> myOptions The options to use. Options not listed above will be
      *    treated as HTML attributes.
-     * @return string|null String or null depending on the value of `myOptions['block']`
+     * @return string|null String or null depending on the value of `myOptions["block"]`
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
     function scriptBlock(string $script, array myOptions = []): Nullable!string
     {
-        myOptions += ['block': null, 'nonce': this._View.getRequest().getAttribute('cspScriptNonce')];
+        myOptions += ["block": null, "nonce": this._View.getRequest().getAttribute("cspScriptNonce")];
 
-        $out = this.formatTemplate('javascriptblock', [
-            'attrs': this.templater().formatAttributes(myOptions, ['block']),
-            'content': $script,
+        $out = this.formatTemplate("javascriptblock", [
+            "attrs": this.templater().formatAttributes(myOptions, ["block"]),
+            "content": $script,
         ]);
 
-        if (empty(myOptions['block'])) {
+        if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions['block'] === true) {
-            myOptions['block'] = 'script';
+        if (myOptions["block"] === true) {
+            myOptions["block"] = "script";
         }
-        this._View.append(myOptions['block'], $out);
+        this._View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -578,10 +578,10 @@ class HtmlHelper : Helper {
      * ### Usage:
      *
      * ```
-     * echo this.Html.style(['margin': '10px', 'padding': '10px'], true);
+     * echo this.Html.style(["margin": "10px", "padding": "10px"], true);
      *
      * // creates
-     * 'margin:10px;padding:10px;'
+     * "margin:10px;padding:10px;"
      * ```
      *
      * @param array<string, string> myData Style data array, keys will be used as property names, values as property values.
@@ -589,14 +589,14 @@ class HtmlHelper : Helper {
      * @return string CSS styling data
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-css-programatically
      */
-    function style(array myData, bool $oneLine = true): string
+    string style(array myData, bool $oneLine = true)
     {
         $out = [];
         foreach (myData as myKey: myValue) {
-            $out[] = myKey . ':' . myValue . ';';
+            $out[] = myKey . ":" . myValue . ";";
         }
         if ($oneLine) {
-            return implode(' ', $out);
+            return implode(" ", $out);
         }
 
         return implode("\n", $out);
@@ -612,19 +612,19 @@ class HtmlHelper : Helper {
      * Create a regular image:
      *
      * ```
-     * echo this.Html.image('cake_icon.png', ['alt': 'UIM']);
+     * echo this.Html.image("cake_icon.png", ["alt": "UIM"]);
      * ```
      *
      * Create an image link:
      *
      * ```
-     * echo this.Html.image('cake_icon.png', ['alt': 'UIM', 'url': 'https://UIM.org']);
+     * echo this.Html.image("cake_icon.png", ["alt": "UIM", "url": "https://UIM.org"]);
      * ```
      *
      * ### Options:
      *
      * - `url` If provided an image link will be generated and the link will point at
-     *   `myOptions['url']`.
+     *   `myOptions["url"]`.
      * - `fullBase` If true the src attribute will get a full address for the image file.
      * - `plugin` False value will prevent parsing path as a plugin
      *
@@ -633,36 +633,36 @@ class HtmlHelper : Helper {
      * @return string completed img tag
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-images
      */
-    function image(myPath, array myOptions = []): string
+    string image(myPath, array myOptions = [])
     {
         if (is_string(myPath)) {
             myPath = this.Url.image(myPath, myOptions);
         } else {
             myPath = this.Url.build(myPath, myOptions);
         }
-        myOptions = array_diff_key(myOptions, ['fullBase': null, 'pathPrefix': null]);
+        myOptions = array_diff_key(myOptions, ["fullBase": null, "pathPrefix": null]);
 
-        if (!isset(myOptions['alt'])) {
-            myOptions['alt'] = '';
+        if (!isset(myOptions["alt"])) {
+            myOptions["alt"] = "";
         }
 
         myUrl = false;
-        if (!empty(myOptions['url'])) {
-            myUrl = myOptions['url'];
-            unset(myOptions['url']);
+        if (!empty(myOptions["url"])) {
+            myUrl = myOptions["url"];
+            unset(myOptions["url"]);
         }
 
         myTemplater = this.templater();
-        $image = myTemplater.format('image', [
-            'url': myPath,
-            'attrs': myTemplater.formatAttributes(myOptions),
+        $image = myTemplater.format("image", [
+            "url": myPath,
+            "attrs": myTemplater.formatAttributes(myOptions),
         ]);
 
         if (myUrl) {
-            return myTemplater.format('link', [
-                'url': this.Url.build(myUrl),
-                'attrs': null,
-                'content': $image,
+            return myTemplater.format("link", [
+                "url": this.Url.build(myUrl),
+                "attrs": null,
+                "content": $image,
             ]);
         }
 
@@ -679,7 +679,7 @@ class HtmlHelper : Helper {
      * @return string Completed table headers
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-table-headings
      */
-    function tableHeaders(array myNames, ?array $trOptions = null, ?array $thOptions = null): string
+    string tableHeaders(array myNames, ?array $trOptions = null, ?array $thOptions = null)
     {
         $out = [];
         foreach (myNames as $arg) {
@@ -694,17 +694,17 @@ class HtmlHelper : Helper {
                 $attrs = current($arg);
             }
 
-            $out[] = this.formatTemplate('tableheader', [
-                'attrs': this.templater().formatAttributes($attrs),
-                'content': myContents,
+            $out[] = this.formatTemplate("tableheader", [
+                "attrs": this.templater().formatAttributes($attrs),
+                "content": myContents,
             ]);
         }
 
-        return this.tableRow(implode(' ', $out), (array)$trOptions);
+        return this.tableRow(implode(" ", $out), (array)$trOptions);
     }
 
     /**
-     * Returns a formatted string of table rows (TR's with TD's in them).
+     * Returns a formatted string of table rows (TR"s with TD"s in them).
      *
      * @param array|string myData Array of table data
      * @param array<string, mixed>|bool|null $oddTrOptions HTML options for odd TR elements if true useCount is used
@@ -715,13 +715,13 @@ class HtmlHelper : Helper {
      * @return string Formatted HTML
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-table-cells
      */
-    function tableCells(
+    string tableCells(
         myData,
         $oddTrOptions = null,
         $evenTrOptions = null,
         bool $useCount = false,
         bool $continueOddEven = true
-    ): string {
+    ) {
         if (!is_array(myData)) {
             myData = [[myData]];
         } elseif (empty(myData[0]) || !is_array(myData[0])) {
@@ -751,7 +751,7 @@ class HtmlHelper : Helper {
             $opts = myCount % 2 ? $oddTrOptions : $evenTrOptions;
             /** @var array<string, mixed> myOptions */
             myOptions = (array)$opts;
-            $out[] = this.tableRow(implode(' ', $cellsOut), myOptions);
+            $out[] = this.tableRow(implode(" ", $cellsOut), myOptions);
         }
 
         return implode("\n", $out);
@@ -781,10 +781,10 @@ class HtmlHelper : Helper {
 
             if ($useCount) {
                 $i += 1;
-                if (isset($cellOptions['class'])) {
-                    $cellOptions['class'] .= ' column-' . $i;
+                if (isset($cellOptions["class"])) {
+                    $cellOptions["class"] .= " column-" . $i;
                 } else {
-                    $cellOptions['class'] = 'column-' . $i;
+                    $cellOptions["class"] = "column-" . $i;
                 }
             }
 
@@ -801,11 +801,11 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions HTML attributes.
      * @return string
      */
-    function tableRow(string myContents, array myOptions = []): string
+    string tableRow(string myContents, array myOptions = [])
     {
-        return this.formatTemplate('tablerow', [
-            'attrs': this.templater().formatAttributes(myOptions),
-            'content': myContents,
+        return this.formatTemplate("tablerow", [
+            "attrs": this.templater().formatAttributes(myOptions),
+            "content": myContents,
         ]);
     }
 
@@ -816,11 +816,11 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions HTML attributes.
      * @return string
      */
-    function tableCell(string myContents, array myOptions = []): string
+    string tableCell(string myContents, array myOptions = [])
     {
-        return this.formatTemplate('tablecell', [
-            'attrs': this.templater().formatAttributes(myOptions),
-            'content': myContents,
+        return this.formatTemplate("tablecell", [
+            "attrs": this.templater().formatAttributes(myOptions),
+            "content": myContents,
         ]);
     }
 
@@ -837,22 +837,22 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag, see above.
      * @return string The formatted tag element
      */
-    function tag(string myName, Nullable!string $text = null, array myOptions = []): string
+    string tag(string myName, Nullable!string $text = null, array myOptions = [])
     {
-        if (isset(myOptions['escape']) && myOptions['escape']) {
+        if (isset(myOptions["escape"]) && myOptions["escape"]) {
             $text = h($text);
-            unset(myOptions['escape']);
+            unset(myOptions["escape"]);
         }
         if ($text === null) {
-            $tag = 'tagstart';
+            $tag = "tagstart";
         } else {
-            $tag = 'tag';
+            $tag = "tag";
         }
 
         return this.formatTemplate($tag, [
-            'attrs': this.templater().formatAttributes(myOptions),
-            'tag': myName,
-            'content': $text,
+            "attrs": this.templater().formatAttributes(myOptions),
+            "tag": myName,
+            "content": $text,
         ]);
     }
 
@@ -869,13 +869,13 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
      */
-    function div(Nullable!string myClass = null, Nullable!string $text = null, array myOptions = []): string
+    string div(Nullable!string myClass = null, Nullable!string $text = null, array myOptions = [])
     {
         if (!empty(myClass)) {
-            myOptions['class'] = myClass;
+            myOptions["class"] = myClass;
         }
 
-        return this.tag('div', $text, myOptions);
+        return this.tag("div", $text, myOptions);
     }
 
     /**
@@ -890,22 +890,22 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the P tag
      * @return string The formatted P element
      */
-    function para(Nullable!string myClass, Nullable!string $text, array myOptions = []): string
+    string para(Nullable!string myClass, Nullable!string $text, array myOptions = [])
     {
-        if (!empty(myOptions['escape'])) {
+        if (!empty(myOptions["escape"])) {
             $text = h($text);
         }
         if (myClass) {
-            myOptions['class'] = myClass;
+            myOptions["class"] = myClass;
         }
-        $tag = 'para';
+        $tag = "para";
         if ($text === null) {
-            $tag = 'parastart';
+            $tag = "parastart";
         }
 
         return this.formatTemplate($tag, [
-            'attrs': this.templater().formatAttributes(myOptions),
-            'content': $text,
+            "attrs": this.templater().formatAttributes(myOptions),
+            "content": $text,
         ]);
     }
 
@@ -917,7 +917,7 @@ class HtmlHelper : Helper {
      * Using an audio file:
      *
      * ```
-     * echo this.Html.media('audio.mp3', ['fullBase': true]);
+     * echo this.Html.media("audio.mp3", ["fullBase": true]);
      * ```
      *
      * Outputs:
@@ -929,7 +929,7 @@ class HtmlHelper : Helper {
      * Using a video file:
      *
      * ```
-     * echo this.Html.media('video.mp4', ['text': 'Fallback text']);
+     * echo this.Html.media("video.mp4", ["text": "Fallback text"]);
      * ```
      *
      * Outputs:
@@ -942,8 +942,8 @@ class HtmlHelper : Helper {
      *
      * ```
      * echo this.Html.media(
-     *      ['video.mp4', ['src': 'video.ogv', 'type': "video/ogg; codecs='theora, vorbis'"]],
-     *      ['tag': 'video', 'autoplay']
+     *      ["video.mp4", ["src": "video.ogv", "type": "video/ogg; codecs="theora, vorbis""]],
+     *      ["tag": "video", "autoplay"]
      * );
      * ```
      *
@@ -952,92 +952,92 @@ class HtmlHelper : Helper {
      * ```
      * <video autoplay="autoplay">
      *      <source src="/files/video.mp4" type="video/mp4"/>
-     *      <source src="/files/video.ogv" type="video/ogv; codecs='theora, vorbis'"/>
+     *      <source src="/files/video.ogv" type="video/ogv; codecs="theora, vorbis""/>
      * </video>
      * ```
      *
      * ### Options
      *
      * - `tag` Type of media element to generate, either "audio" or "video".
-     *  If tag is not provided it's guessed based on file's mime type.
+     *  If tag is not provided it"s guessed based on file"s mime type.
      * - `text` Text to include inside the audio/video tag
-     * - `pathPrefix` Path prefix to use for relative URLs, defaults to 'files/'
+     * - `pathPrefix` Path prefix to use for relative URLs, defaults to "files/"
      * - `fullBase` If provided the src attribute will get a full address including domain name
      *
-     * @param array|string myPath Path to the video file, relative to the webroot/{myOptions['pathPrefix']} directory.
+     * @param array|string myPath Path to the video file, relative to the webroot/{myOptions["pathPrefix"]} directory.
      *  Or an array where each item itself can be a path string or an associate array containing keys `src` and `type`
      * @param array<string, mixed> myOptions Array of HTML attributes, and special options above.
      * @return string Generated media element
      */
-    function media(myPath, array myOptions = []): string
+    string media(myPath, array myOptions = [])
     {
         myOptions += [
-            'tag': null,
-            'pathPrefix': 'files/',
-            'text': '',
+            "tag": null,
+            "pathPrefix": "files/",
+            "text": "",
         ];
 
-        if (!empty(myOptions['tag'])) {
-            $tag = myOptions['tag'];
+        if (!empty(myOptions["tag"])) {
+            $tag = myOptions["tag"];
         } else {
             $tag = null;
         }
 
         if (is_array(myPath)) {
-            $sourceTags = '';
+            $sourceTags = "";
             foreach (myPath as &$source) {
                 if (is_string($source)) {
                     $source = [
-                        'src': $source,
+                        "src": $source,
                     ];
                 }
-                if (!isset($source['type'])) {
-                    $ext = pathinfo($source['src'], PATHINFO_EXTENSION);
-                    $source['type'] = this._View.getResponse().getMimeType($ext);
+                if (!isset($source["type"])) {
+                    $ext = pathinfo($source["src"], PATHINFO_EXTENSION);
+                    $source["type"] = this._View.getResponse().getMimeType($ext);
                 }
-                $source['src'] = this.Url.assetUrl($source['src'], myOptions);
-                $sourceTags .= this.formatTemplate('tagselfclosing', [
-                    'tag': 'source',
-                    'attrs': this.templater().formatAttributes($source),
+                $source["src"] = this.Url.assetUrl($source["src"], myOptions);
+                $sourceTags .= this.formatTemplate("tagselfclosing", [
+                    "tag": "source",
+                    "attrs": this.templater().formatAttributes($source),
                 ]);
             }
             unset($source);
-            myOptions['text'] = $sourceTags . myOptions['text'];
-            unset(myOptions['fullBase']);
+            myOptions["text"] = $sourceTags . myOptions["text"];
+            unset(myOptions["fullBase"]);
         } else {
-            if (empty(myPath) && !empty(myOptions['src'])) {
-                myPath = myOptions['src'];
+            if (empty(myPath) && !empty(myOptions["src"])) {
+                myPath = myOptions["src"];
             }
-            myOptions['src'] = this.Url.assetUrl(myPath, myOptions);
+            myOptions["src"] = this.Url.assetUrl(myPath, myOptions);
         }
 
         if ($tag === null) {
             if (is_array(myPath)) {
-                $mimeType = myPath[0]['type'];
+                $mimeType = myPath[0]["type"];
             } else {
                 /** @var string $mimeType */
                 $mimeType = this._View.getResponse().getMimeType(pathinfo(myPath, PATHINFO_EXTENSION));
             }
-            if (preg_match('#^video/#', $mimeType)) {
-                $tag = 'video';
+            if (preg_match("#^video/#", $mimeType)) {
+                $tag = "video";
             } else {
-                $tag = 'audio';
+                $tag = "audio";
             }
         }
 
-        if (isset(myOptions['poster'])) {
-            myOptions['poster'] = this.Url.assetUrl(
-                myOptions['poster'],
-                ['pathPrefix': Configure::read('App.imageBaseUrl')] + myOptions
+        if (isset(myOptions["poster"])) {
+            myOptions["poster"] = this.Url.assetUrl(
+                myOptions["poster"],
+                ["pathPrefix": Configure::read("App.imageBaseUrl")] + myOptions
             );
         }
-        $text = myOptions['text'];
+        $text = myOptions["text"];
 
         myOptions = array_diff_key(myOptions, [
-            'tag': null,
-            'fullBase': null,
-            'pathPrefix': null,
-            'text': null,
+            "tag": null,
+            "fullBase": null,
+            "pathPrefix": null,
+            "text": null,
         ]);
 
         return this.tag($tag, $text, myOptions);
@@ -1061,14 +1061,14 @@ class HtmlHelper : Helper {
      * @return string The nested list
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-nested-lists
      */
-    function nestedList(array $list, array myOptions = [], array $itemOptions = []): string
+    string nestedList(array $list, array myOptions = [], array $itemOptions = [])
     {
-        myOptions += ['tag': 'ul'];
+        myOptions += ["tag": "ul"];
         myItems = this._nestedListItem($list, myOptions, $itemOptions);
 
-        return this.formatTemplate(myOptions['tag'], [
-            'attrs': this.templater().formatAttributes(myOptions, ['tag']),
-            'content': myItems,
+        return this.formatTemplate(myOptions["tag"], [
+            "attrs": this.templater().formatAttributes(myOptions, ["tag"]),
+            "content": myItems,
         ]);
     }
 
@@ -1081,23 +1081,23 @@ class HtmlHelper : Helper {
      * @return string The nested list element
      * @see \Cake\View\Helper\HtmlHelper::nestedList()
      */
-    protected auto _nestedListItem(array myItems, array myOptions, array $itemOptions): string
+    protected string _nestedListItem(array myItems, array myOptions, array $itemOptions)
     {
-        $out = '';
+        $out = "";
 
         $index = 1;
         foreach (myItems as myKey: $item) {
             if (is_array($item)) {
                 $item = myKey . this.nestedList($item, myOptions, $itemOptions);
             }
-            if (isset($itemOptions['even']) && $index % 2 === 0) {
-                $itemOptions['class'] = $itemOptions['even'];
-            } elseif (isset($itemOptions['odd']) && $index % 2 !== 0) {
-                $itemOptions['class'] = $itemOptions['odd'];
+            if (isset($itemOptions["even"]) && $index % 2 === 0) {
+                $itemOptions["class"] = $itemOptions["even"];
+            } elseif (isset($itemOptions["odd"]) && $index % 2 !== 0) {
+                $itemOptions["class"] = $itemOptions["odd"];
             }
-            $out .= this.formatTemplate('li', [
-                'attrs': this.templater().formatAttributes($itemOptions, ['even', 'odd']),
-                'content': $item,
+            $out .= this.formatTemplate("li", [
+                "attrs": this.templater().formatAttributes($itemOptions, ["even", "odd"]),
+                "content": $item,
             ]);
             $index++;
         }

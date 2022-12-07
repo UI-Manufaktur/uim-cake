@@ -29,12 +29,12 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'val': null,
-        'type': 'datetime-local',
-        'escape': true,
-        'timezone': null,
-        'templateVars': [],
+        "name": "",
+        "val": null,
+        "type": "datetime-local",
+        "escape": true,
+        "timezone": null,
+        "templateVars": [],
     ];
 
     /**
@@ -43,11 +43,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string>
      */
     protected $formatMap = [
-        'datetime-local': 'Y-m-d\TH:i:s',
-        'date': 'Y-m-d',
-        'time': 'H:i:s',
-        'month': 'Y-m',
-        'week': 'Y-\WW',
+        "datetime-local": "Y-m-d\TH:i:s",
+        "date": "Y-m-d",
+        "time": "H:i:s",
+        "month": "Y-m",
+        "week": "Y-\WW",
     ];
 
     /**
@@ -58,11 +58,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaultStep = [
-        'datetime-local': '1',
-        'date': null,
-        'time': '1',
-        'month': null,
-        'week': null,
+        "datetime-local": "1",
+        "date": null,
+        "time": "1",
+        "month": null,
+        "week": null,
     ];
 
     /**
@@ -89,29 +89,29 @@ class DateTimeWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
-    function render(array myData, IContext $context): string
+    string render(array myData, IContext $context)
     {
         myData += this.mergeDefaults(myData, $context);
 
-        if (!isset(this.formatMap[myData['type']])) {
+        if (!isset(this.formatMap[myData["type"]])) {
             throw new InvalidArgumentException(sprintf(
-                'Invalid type `%s` for input tag, expected datetime-local, date, time, month or week',
-                myData['type']
+                "Invalid type `%s` for input tag, expected datetime-local, date, time, month or week",
+                myData["type"]
             ));
         }
 
-        myData = this.setStep(myData, $context, myData['fieldName'] ?? '');
+        myData = this.setStep(myData, $context, myData["fieldName"] ?? "");
 
-        myData['value'] = this.formatDateTime(myData['val'], myData);
-        unset(myData['val'], myData['timezone'], myData['format']);
+        myData["value"] = this.formatDateTime(myData["val"], myData);
+        unset(myData["val"], myData["timezone"], myData["format"]);
 
-        return this._templates.format('input', [
-            'name': myData['name'],
-            'type': myData['type'],
-            'templateVars': myData['templateVars'],
-            'attrs': this._templates.formatAttributes(
+        return this._templates.format("input", [
+            "name": myData["name"],
+            "type": myData["type"],
+            "templateVars": myData["templateVars"],
+            "attrs": this._templates.formatAttributes(
                 myData,
-                ['name', 'type']
+                ["name", "type"]
             ),
         ]);
     }
@@ -126,17 +126,17 @@ class DateTimeWidget : BasicWidget
      */
     protected auto setStep(array myData, IContext $context, string myFieldName): array
     {
-        if (array_key_exists('step', myData)) {
+        if (array_key_exists("step", myData)) {
             return myData;
         }
 
-        if (isset(myData['format'])) {
-            myData['step'] = null;
+        if (isset(myData["format"])) {
+            myData["step"] = null;
         } else {
-            myData['step'] = this.defaultStep[myData['type']];
+            myData["step"] = this.defaultStep[myData["type"]];
         }
 
-        if (empty(myData['fieldName'])) {
+        if (empty(myData["fieldName"])) {
             return myData;
         }
 
@@ -148,7 +148,7 @@ class DateTimeWidget : BasicWidget
         ];
 
         if (in_array($dbType, $fractionalTypes, true)) {
-            myData['step'] = '0.001';
+            myData["step"] = "0.001";
         }
 
         return myData;
@@ -162,10 +162,10 @@ class DateTimeWidget : BasicWidget
      * @return string
      * @throws \InvalidArgumentException If invalid input type is passed.
      */
-    protected auto formatDateTime(myValue, array myOptions): string
+    protected string formatDateTime(myValue, array myOptions)
     {
         if (myValue == "" || myValue === null) {
-            return '';
+            return "";
         }
 
         try {
@@ -174,7 +174,7 @@ class DateTimeWidget : BasicWidget
             } elseif (is_string(myValue) && !is_numeric(myValue)) {
                 $dateTime = new DateTime(myValue);
             } elseif (is_int(myValue) || is_numeric(myValue)) {
-                $dateTime = new DateTime('@' . myValue);
+                $dateTime = new DateTime("@" . myValue);
             } else {
                 $dateTime = new DateTime();
             }
@@ -182,8 +182,8 @@ class DateTimeWidget : BasicWidget
             $dateTime = new DateTime();
         }
 
-        if (isset(myOptions['timezone'])) {
-            $timezone = myOptions['timezone'];
+        if (isset(myOptions["timezone"])) {
+            $timezone = myOptions["timezone"];
             if (!$timezone instanceof DateTimeZone) {
                 $timezone = new DateTimeZone($timezone);
             }
@@ -191,17 +191,17 @@ class DateTimeWidget : BasicWidget
             $dateTime = $dateTime.setTimezone($timezone);
         }
 
-        if (isset(myOptions['format'])) {
-            $format = myOptions['format'];
+        if (isset(myOptions["format"])) {
+            $format = myOptions["format"];
         } else {
-            $format = this.formatMap[myOptions['type']];
+            $format = this.formatMap[myOptions["type"]];
 
             if (
-                myOptions['type'] === 'datetime-local'
-                && is_numeric(myOptions['step'])
-                && myOptions['step'] < 1
+                myOptions["type"] === "datetime-local"
+                && is_numeric(myOptions["step"])
+                && myOptions["step"] < 1
             ) {
-                $format = 'Y-m-d\TH:i:s.v';
+                $format = "Y-m-d\TH:i:s.v";
             }
         }
 
@@ -213,10 +213,10 @@ class DateTimeWidget : BasicWidget
      */
     function secureFields(array myData): array
     {
-        if (!isset(myData['name']) || myData['name'] == "") {
+        if (!isset(myData["name"]) || myData["name"] == "") {
             return [];
         }
 
-        return [myData['name']];
+        return [myData["name"]];
     }
 }

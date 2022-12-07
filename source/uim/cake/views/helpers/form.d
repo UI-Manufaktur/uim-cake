@@ -27,7 +27,7 @@ class FormHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ['Url', 'Html'];
+    protected $helpers = ["Url", "Html"];
 
     /**
      * Default config for the helper.
@@ -35,96 +35,96 @@ class FormHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'idPrefix': null,
-        'errorClass': 'form-error',
-        'typeMap': [
-            'string': 'text',
-            'text': 'textarea',
-            'uuid': 'string',
-            'datetime': 'datetime',
-            'datetimefractional': 'datetime',
-            'timestamp': 'datetime',
-            'timestampfractional': 'datetime',
-            'timestamptimezone': 'datetime',
-            'date': 'date',
-            'time': 'time',
-            'year': 'year',
-            'boolean': 'checkbox',
-            'float': 'number',
-            'integer': 'number',
-            'tinyinteger': 'number',
-            'smallinteger': 'number',
-            'decimal': 'number',
-            'binary': 'file',
+        "idPrefix": null,
+        "errorClass": "form-error",
+        "typeMap": [
+            "string": "text",
+            "text": "textarea",
+            "uuid": "string",
+            "datetime": "datetime",
+            "datetimefractional": "datetime",
+            "timestamp": "datetime",
+            "timestampfractional": "datetime",
+            "timestamptimezone": "datetime",
+            "date": "date",
+            "time": "time",
+            "year": "year",
+            "boolean": "checkbox",
+            "float": "number",
+            "integer": "number",
+            "tinyinteger": "number",
+            "smallinteger": "number",
+            "decimal": "number",
+            "binary": "file",
         ],
-        'templates': [
+        "templates": [
             // Used for button elements in button().
-            'button': '<button{{attrs}}>{{text}}</button>',
+            "button": "<button{{attrs}}>{{text}}</button>",
             // Used for checkboxes in checkbox() and multiCheckbox().
-            'checkbox': '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+            "checkbox": "<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>",
             // Input group wrapper for checkboxes created via control().
-            'checkboxFormGroup': '{{label}}',
+            "checkboxFormGroup": "{{label}}",
             // Wrapper container for checkboxes.
-            'checkboxWrapper': '<div class="checkbox">{{label}}</div>',
+            "checkboxWrapper": "<div class="checkbox">{{label}}</div>",
             // Error message wrapper elements.
-            'error': '<div class="error-message" id="{{id}}">{{content}}</div>',
+            "error": "<div class="error-message" id="{{id}}">{{content}}</div>",
             // Container for error items.
-            'errorList': '<ul>{{content}}</ul>',
+            "errorList": "<ul>{{content}}</ul>",
             // Error item wrapper.
-            'errorItem': '<li>{{text}}</li>',
+            "errorItem": "<li>{{text}}</li>",
             // File input used by file().
-            'file': '<input type="file" name="{{name}}"{{attrs}}>',
+            "file": "<input type="file" name="{{name}}"{{attrs}}>",
             // Fieldset element used by allControls().
-            'fieldset': '<fieldset{{attrs}}>{{content}}</fieldset>',
+            "fieldset": "<fieldset{{attrs}}>{{content}}</fieldset>",
             // Open tag used by create().
-            'formStart': '<form{{attrs}}>',
+            "formStart": "<form{{attrs}}>",
             // Close tag used by end().
-            'formEnd': '</form>',
+            "formEnd": "</form>",
             // General grouping container for control(). Defines input/label ordering.
-            'formGroup': '{{label}}{{input}}',
+            "formGroup": "{{label}}{{input}}",
             // Wrapper content used to hide other content.
-            'hiddenBlock': '<div style="display:none;">{{content}}</div>',
+            "hiddenBlock": "<div style="display:none;">{{content}}</div>",
             // Generic input element.
-            'input': '<input type="{{type}}" name="{{name}}"{{attrs}}/>',
+            "input": "<input type="{{type}}" name="{{name}}"{{attrs}}/>",
             // Submit input element.
-            'inputSubmit': '<input type="{{type}}"{{attrs}}/>',
+            "inputSubmit": "<input type="{{type}}"{{attrs}}/>",
             // Container element used by control().
-            'inputContainer': '<div class="input {{type}}{{required}}">{{content}}</div>',
+            "inputContainer": "<div class="input {{type}}{{required}}">{{content}}</div>",
             // Container element used by control() when a field has an error.
-            'inputContainerError': '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>',
+            "inputContainerError": "<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>",
             // Label element when inputs are not nested inside the label.
-            'label': '<label{{attrs}}>{{text}}</label>',
+            "label": "<label{{attrs}}>{{text}}</label>",
             // Label element used for radio and multi-checkbox inputs.
-            'nestingLabel': '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+            "nestingLabel": "{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>",
             // Legends created by allControls()
-            'legend': '<legend>{{text}}</legend>',
+            "legend": "<legend>{{text}}</legend>",
             // Multi-Checkbox input set title element.
-            'multicheckboxTitle': '<legend>{{text}}</legend>',
+            "multicheckboxTitle": "<legend>{{text}}</legend>",
             // Multi-Checkbox wrapping container.
-            'multicheckboxWrapper': '<fieldset{{attrs}}>{{content}}</fieldset>',
+            "multicheckboxWrapper": "<fieldset{{attrs}}>{{content}}</fieldset>",
             // Option element used in select pickers.
-            'option': '<option value="{{value}}"{{attrs}}>{{text}}</option>',
+            "option": "<option value="{{value}}"{{attrs}}>{{text}}</option>",
             // Option group element used in select pickers.
-            'optgroup': '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
+            "optgroup": "<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>",
             // Select element,
-            'select': '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+            "select": "<select name="{{name}}"{{attrs}}>{{content}}</select>",
             // Multi-select element,
-            'selectMultiple': '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+            "selectMultiple": "<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>",
             // Radio input element,
-            'radio': '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+            "radio": "<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>",
             // Wrapping container for radio input/label,
-            'radioWrapper': '{{label}}',
+            "radioWrapper": "{{label}}",
             // Textarea input element,
-            'textarea': '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+            "textarea": "<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>",
             // Container for submit buttons.
-            'submitContainer': '<div class="submit">{{content}}</div>',
+            "submitContainer": "<div class="submit">{{content}}</div>",
             // Confirm javascript template for postLink()
-            'confirmJs': '{{confirm}}',
+            "confirmJs": "{{confirm}}",
             // selected class
-            'selectedClass': 'selected',
+            "selectedClass": "selected",
         ],
         // set HTML5 validation message to custom required/empty messages
-        'autoSetCustomValidity': true,
+        "autoSetCustomValidity": true,
     ];
 
     /**
@@ -133,18 +133,18 @@ class FormHelper : Helper
      * @var array<string, array<string>>
      */
     protected $_defaultWidgets = [
-        'button': ['Button'],
-        'checkbox': ['Checkbox'],
-        'file': ['File'],
-        'label': ['Label'],
-        'nestingLabel': ['NestingLabel'],
-        'multicheckbox': ['MultiCheckbox', 'nestingLabel'],
-        'radio': ['Radio', 'nestingLabel'],
-        'select': ['SelectBox'],
-        'textarea': ['Textarea'],
-        'datetime': ['DateTime', 'select'],
-        'year': ['Year', 'select'],
-        '_default': ['Basic'],
+        "button": ["Button"],
+        "checkbox": ["Checkbox"],
+        "file": ["File"],
+        "label": ["Label"],
+        "nestingLabel": ["NestingLabel"],
+        "multicheckbox": ["MultiCheckbox", "nestingLabel"],
+        "radio": ["Radio", "nestingLabel"],
+        "select": ["SelectBox"],
+        "textarea": ["Textarea"],
+        "datetime": ["DateTime", "select"],
+        "year": ["Year", "select"],
+        "_default": ["Basic"],
     ];
 
     /**
@@ -153,7 +153,7 @@ class FormHelper : Helper
      *
      * @var string
      */
-    public const SECURE_SKIP = 'skip';
+    public const SECURE_SKIP = "skip";
 
     /**
      * Defines the type of form being created. Set by FormHelper::create().
@@ -189,18 +189,18 @@ class FormHelper : Helper
      *
      * @var string
      */
-    protected $_lastAction = '';
+    protected $_lastAction = "";
 
     /**
      * The supported sources that can be used to populate input values.
      *
      * `context` - Corresponds to `IContext` instances.
      * `data` - Corresponds to request data (POST/PUT).
-     * `query` - Corresponds to request's query string.
+     * `query` - Corresponds to request"s query string.
      *
      * @var array<string>
      */
-    protected $supportedValueSources = ['context', 'data', 'query'];
+    protected $supportedValueSources = ["context", "data", "query"];
 
     /**
      * The default sources.
@@ -208,14 +208,14 @@ class FormHelper : Helper
      * @see FormHelper::$supportedValueSources for valid values.
      * @var array<string>
      */
-    protected $_valueSources = ['data', 'context'];
+    protected $_valueSources = ["data", "context"];
 
     /**
      * Grouped input types.
      *
      * @var array<string>
      */
-    protected $_groupedInputTypes = ['radio', 'multicheckbox'];
+    protected $_groupedInputTypes = ["radio", "multicheckbox"];
 
     /**
      * Form protector
@@ -233,21 +233,21 @@ class FormHelper : Helper
     this(View $view, array myConfig = []) {
         $locator = null;
         $widgets = this._defaultWidgets;
-        if (isset(myConfig['locator'])) {
-            $locator = myConfig['locator'];
-            unset(myConfig['locator']);
+        if (isset(myConfig["locator"])) {
+            $locator = myConfig["locator"];
+            unset(myConfig["locator"]);
         }
-        if (isset(myConfig['widgets'])) {
-            if (is_string(myConfig['widgets'])) {
-                myConfig['widgets'] = (array)myConfig['widgets'];
+        if (isset(myConfig["widgets"])) {
+            if (is_string(myConfig["widgets"])) {
+                myConfig["widgets"] = (array)myConfig["widgets"];
             }
-            $widgets = myConfig['widgets'] + $widgets;
-            unset(myConfig['widgets']);
+            $widgets = myConfig["widgets"] + $widgets;
+            unset(myConfig["widgets"]);
         }
 
-        if (isset(myConfig['groupedInputTypes'])) {
-            this._groupedInputTypes = myConfig['groupedInputTypes'];
-            unset(myConfig['groupedInputTypes']);
+        if (isset(myConfig["groupedInputTypes"])) {
+            this._groupedInputTypes = myConfig["groupedInputTypes"];
+            unset(myConfig["groupedInputTypes"]);
         }
 
         super.this($view, myConfig);
@@ -256,7 +256,7 @@ class FormHelper : Helper
             $locator = new WidgetLocator(this.templater(), this._View, $widgets);
         }
         this.setWidgetLocator($locator);
-        this._idPrefix = this.getConfig('idPrefix');
+        this._idPrefix = this.getConfig("idPrefix");
     }
 
     /**
@@ -310,16 +310,16 @@ class FormHelper : Helper
      * ### Options:
      *
      * - `type` Form method defaults to autodetecting based on the form context. If
-     *   the form context's isCreate() method returns false, a PUT request will be done.
-     * - `method` Set the form's method attribute explicitly.
+     *   the form context"s isCreate() method returns false, a PUT request will be done.
+     * - `method` Set the form"s method attribute explicitly.
      * - `url` The URL the form submits to. Can be a string or a URL array.
-     * - `encoding` Set the accept-charset encoding for the form. Defaults to `Configure::read('App.encoding')`
+     * - `encoding` Set the accept-charset encoding for the form. Defaults to `Configure::read("App.encoding")`
      * - `enctype` Set the form encoding explicitly. By default `type: file` will set `enctype`
      *   to `multipart/form-data`.
      * - `templates` The templates you want to use for this form. Any templates will be merged on top of
      *   the already loaded templates. This option can either be a filename in /config that contains
      *   the templates you want to load, or an array of templates to use.
-     * - `context` Additional options for the context class. For example the EntityContext accepts a 'table'
+     * - `context` Additional options for the context class. For example the EntityContext accepts a "table"
      *   option that allows you to set the specific Table class the form should be based on.
      * - `idPrefix` Prefix for generated ID attributes.
      * - `valueSources` The sources that values should be read from. See FormHelper::setValueSources()
@@ -332,50 +332,50 @@ class FormHelper : Helper
      * @return string An formatted opening FORM tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#Cake\View\Helper\FormHelper::create
      */
-    function create($context = null, array myOptions = []): string
+    string create($context = null, array myOptions = [])
     {
-        $append = '';
+        $append = "";
 
         if ($context instanceof IContext) {
             this.context($context);
         } else {
-            if (empty(myOptions['context'])) {
-                myOptions['context'] = [];
+            if (empty(myOptions["context"])) {
+                myOptions["context"] = [];
             }
-            myOptions['context']['entity'] = $context;
-            $context = this._getContext(myOptions['context']);
-            unset(myOptions['context']);
+            myOptions["context"]["entity"] = $context;
+            $context = this._getContext(myOptions["context"]);
+            unset(myOptions["context"]);
         }
 
         $isCreate = $context.isCreate();
 
         myOptions += [
-            'type': $isCreate ? 'post' : 'put',
-            'url': null,
-            'encoding': strtolower(Configure::read('App.encoding')),
-            'templates': null,
-            'idPrefix': null,
-            'valueSources': null,
+            "type": $isCreate ? "post" : "put",
+            "url": null,
+            "encoding": strtolower(Configure::read("App.encoding")),
+            "templates": null,
+            "idPrefix": null,
+            "valueSources": null,
         ];
 
-        if (isset(myOptions['valueSources'])) {
-            this.setValueSources(myOptions['valueSources']);
-            unset(myOptions['valueSources']);
+        if (isset(myOptions["valueSources"])) {
+            this.setValueSources(myOptions["valueSources"]);
+            unset(myOptions["valueSources"]);
         }
 
-        if (myOptions['idPrefix'] !== null) {
-            this._idPrefix = myOptions['idPrefix'];
+        if (myOptions["idPrefix"] !== null) {
+            this._idPrefix = myOptions["idPrefix"];
         }
         myTemplater = this.templater();
 
-        if (!empty(myOptions['templates'])) {
+        if (!empty(myOptions["templates"])) {
             myTemplater.push();
-            $method = is_string(myOptions['templates']) ? 'load' : 'add';
-            myTemplater.{$method}(myOptions['templates']);
+            $method = is_string(myOptions["templates"]) ? "load" : "add";
+            myTemplater.{$method}(myOptions["templates"]);
         }
-        unset(myOptions['templates']);
+        unset(myOptions["templates"]);
 
-        if (myOptions['url'] === false) {
+        if (myOptions["url"] === false) {
             myUrl = this._View.getRequest().getRequestTarget();
             $action = null;
         } else {
@@ -384,50 +384,50 @@ class FormHelper : Helper
         }
 
         this._lastAction(myUrl);
-        unset(myOptions['url'], myOptions['idPrefix']);
+        unset(myOptions["url"], myOptions["idPrefix"]);
 
         $htmlAttributes = [];
-        switch (strtolower(myOptions['type'])) {
-            case 'get':
-                $htmlAttributes['method'] = 'get';
+        switch (strtolower(myOptions["type"])) {
+            case "get":
+                $htmlAttributes["method"] = "get";
                 break;
             // Set enctype for form
-            case 'file':
-                $htmlAttributes['enctype'] = 'multipart/form-data';
-                myOptions['type'] = $isCreate ? 'post' : 'put';
+            case "file":
+                $htmlAttributes["enctype"] = "multipart/form-data";
+                myOptions["type"] = $isCreate ? "post" : "put";
             // Move on
-            case 'put':
+            case "put":
             // Move on
-            case 'delete':
+            case "delete":
             // Set patch method
-            case 'patch':
-                $append .= this.hidden('_method', [
-                    'name': '_method',
-                    'value': strtoupper(myOptions['type']),
-                    'secure': static::SECURE_SKIP,
+            case "patch":
+                $append .= this.hidden("_method", [
+                    "name": "_method",
+                    "value": strtoupper(myOptions["type"]),
+                    "secure": static::SECURE_SKIP,
                 ]);
             // Default to post method
             default:
-                $htmlAttributes['method'] = 'post';
+                $htmlAttributes["method"] = "post";
         }
-        if (isset(myOptions['method'])) {
-            $htmlAttributes['method'] = strtolower(myOptions['method']);
+        if (isset(myOptions["method"])) {
+            $htmlAttributes["method"] = strtolower(myOptions["method"]);
         }
-        if (isset(myOptions['enctype'])) {
-            $htmlAttributes['enctype'] = strtolower(myOptions['enctype']);
+        if (isset(myOptions["enctype"])) {
+            $htmlAttributes["enctype"] = strtolower(myOptions["enctype"]);
         }
 
-        this.requestType = strtolower(myOptions['type']);
+        this.requestType = strtolower(myOptions["type"]);
 
-        if (!empty(myOptions['encoding'])) {
-            $htmlAttributes['accept-charset'] = myOptions['encoding'];
+        if (!empty(myOptions["encoding"])) {
+            $htmlAttributes["accept-charset"] = myOptions["encoding"];
         }
-        unset(myOptions['type'], myOptions['encoding']);
+        unset(myOptions["type"], myOptions["encoding"]);
 
         $htmlAttributes += myOptions;
 
-        if (this.requestType !== 'get') {
-            $formTokenData = this._View.getRequest().getAttribute('formTokenData');
+        if (this.requestType !== "get") {
+            $formTokenData = this._View.getRequest().getAttribute("formTokenData");
             if ($formTokenData !== null) {
                 this.formProtector = this.createFormProtector($formTokenData);
             }
@@ -436,14 +436,14 @@ class FormHelper : Helper
         }
 
         if (!empty($append)) {
-            $append = myTemplater.format('hiddenBlock', ['content': $append]);
+            $append = myTemplater.format("hiddenBlock", ["content": $append]);
         }
 
-        $actionAttr = myTemplater.formatAttributes(['action': $action, 'escape': false]);
+        $actionAttr = myTemplater.formatAttributes(["action": $action, "escape": false]);
 
-        return this.formatTemplate('formStart', [
-            'attrs': myTemplater.formatAttributes($htmlAttributes) . $actionAttr,
-            'templateVars': myOptions['templateVars'] ?? [],
+        return this.formatTemplate("formStart", [
+            "attrs": myTemplater.formatAttributes($htmlAttributes) . $actionAttr,
+            "templateVars": myOptions["templateVars"] ?? [],
         ]) . $append;
     }
 
@@ -457,25 +457,25 @@ class FormHelper : Helper
     protected auto _formUrl(IContext $context, array myOptions) {
         myRequest = this._View.getRequest();
 
-        if (myOptions['url'] === null) {
+        if (myOptions["url"] === null) {
             return myRequest.getRequestTarget();
         }
 
         if (
-            is_string(myOptions['url']) ||
-            (is_array(myOptions['url']) &&
-            isset(myOptions['url']['_name']))
+            is_string(myOptions["url"]) ||
+            (is_array(myOptions["url"]) &&
+            isset(myOptions["url"]["_name"]))
         ) {
-            return myOptions['url'];
+            return myOptions["url"];
         }
 
         $actionDefaults = [
-            'plugin': this._View.getPlugin(),
-            'controller': myRequest.getParam('controller'),
-            'action': myRequest.getParam('action'),
+            "plugin": this._View.getPlugin(),
+            "controller": myRequest.getParam("controller"),
+            "action": myRequest.getParam("action"),
         ];
 
-        $action = (array)myOptions['url'] + $actionDefaults;
+        $action = (array)myOptions["url"] + $actionDefaults;
 
         return $action;
     }
@@ -490,9 +490,9 @@ class FormHelper : Helper
     {
         $action = Router::url(myUrl, true);
         myQuery = parse_url($action, PHP_URL_QUERY);
-        myQuery = myQuery ? '?' . myQuery : '';
+        myQuery = myQuery ? "?" . myQuery : "";
 
-        myPath = parse_url($action, PHP_URL_PATH) ?: '';
+        myPath = parse_url($action, PHP_URL_PATH) ?: "";
         this._lastAction = myPath . myQuery;
     }
 
@@ -502,19 +502,19 @@ class FormHelper : Helper
      *
      * @return string
      */
-    protected auto _csrfField(): string
+    protected string _csrfField()
     {
         myRequest = this._View.getRequest();
 
-        $csrfToken = myRequest.getAttribute('csrfToken');
+        $csrfToken = myRequest.getAttribute("csrfToken");
         if (!$csrfToken) {
-            return '';
+            return "";
         }
 
-        return this.hidden('_csrfToken', [
-            'value': $csrfToken,
-            'secure': static::SECURE_SKIP,
-            'autocomplete': 'off',
+        return this.hidden("_csrfToken", [
+            "value": $csrfToken,
+            "secure": static::SECURE_SKIP,
+            "autocomplete": "off",
         ]);
     }
 
@@ -529,20 +529,20 @@ class FormHelper : Helper
      * @return string A closing FORM tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#closing-the-form
      */
-    function end(array $secureAttributes = []): string
+    string end(array $secureAttributes = [])
     {
-        $out = '';
+        $out = "";
 
-        if (this.requestType !== 'get' && this._View.getRequest().getAttribute('formTokenData') !== null) {
+        if (this.requestType !== "get" && this._View.getRequest().getAttribute("formTokenData") !== null) {
             $out .= this.secure([], $secureAttributes);
         }
-        $out .= this.formatTemplate('formEnd', []);
+        $out .= this.formatTemplate("formEnd", []);
 
         this.templater().pop();
         this.requestType = null;
         this._context = null;
-        this._valueSources = ['data', 'context'];
-        this._idPrefix = this.getConfig('idPrefix');
+        this._valueSources = ["data", "context"];
+        this._idPrefix = this.getConfig("idPrefix");
         this.formProtector = null;
 
         return $out;
@@ -554,7 +554,7 @@ class FormHelper : Helper
      *
      * If $secureAttributes is set, these HTML attributes will be merged into
      * the hidden input tags generated for the Security Component. This is
-     * especially useful to set HTML5 attributes like 'form'.
+     * especially useful to set HTML5 attributes like "form".
      *
      * @param array myFields If set specifies the list of fields to be added to
      *    FormProtector for generating the hash.
@@ -565,7 +565,7 @@ class FormHelper : Helper
      */
     string secure(array myFields = [], array $secureAttributes = []) {
         if (!this.formProtector) {
-            return '';
+            return "";
         }
 
         foreach (myFields as myField: myValue) {
@@ -576,34 +576,34 @@ class FormHelper : Helper
             this.formProtector.addField(myField, true, myValue);
         }
 
-        $debugSecurity = (bool)Configure::read('debug');
-        if (isset($secureAttributes['debugSecurity'])) {
-            $debugSecurity = $debugSecurity && $secureAttributes['debugSecurity'];
-            unset($secureAttributes['debugSecurity']);
+        $debugSecurity = (bool)Configure::read("debug");
+        if (isset($secureAttributes["debugSecurity"])) {
+            $debugSecurity = $debugSecurity && $secureAttributes["debugSecurity"];
+            unset($secureAttributes["debugSecurity"]);
         }
-        $secureAttributes['secure'] = static::SECURE_SKIP;
-        $secureAttributes['autocomplete'] = 'off';
+        $secureAttributes["secure"] = static::SECURE_SKIP;
+        $secureAttributes["autocomplete"] = "off";
 
         $tokenData = this.formProtector.buildTokenData(
             this._lastAction,
             this._View.getRequest().getSession().id()
         );
         $tokenFields = array_merge($secureAttributes, [
-            'value': $tokenData['fields'],
+            "value": $tokenData["fields"],
         ]);
-        $out = this.hidden('_Token.fields', $tokenFields);
+        $out = this.hidden("_Token.fields", $tokenFields);
         $tokenUnlocked = array_merge($secureAttributes, [
-            'value': $tokenData['unlocked'],
+            "value": $tokenData["unlocked"],
         ]);
-        $out .= this.hidden('_Token.unlocked', $tokenUnlocked);
+        $out .= this.hidden("_Token.unlocked", $tokenUnlocked);
         if ($debugSecurity) {
             $tokenDebug = array_merge($secureAttributes, [
-                'value': $tokenData['debug'],
+                "value": $tokenData["debug"],
             ]);
-            $out .= this.hidden('_Token.debug', $tokenDebug);
+            $out .= this.hidden("_Token.debug", $tokenDebug);
         }
 
-        return this.formatTemplate('hiddenBlock', ['content': $out]);
+        return this.formatTemplate("hiddenBlock", ["content": $out]);
     }
 
     /**
@@ -646,8 +646,8 @@ class FormHelper : Helper
     {
         if (this.formProtector === null) {
             throw new CakeException(
-                '`FormProtector` instance has not been created. Ensure you have loaded the `FormProtectionComponent`'
-                . ' in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`.'
+                "`FormProtector` instance has not been created. Ensure you have loaded the `FormProtectionComponent`"
+                . " in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`."
             );
         }
 
@@ -666,7 +666,7 @@ class FormHelper : Helper
     }
 
     /**
-     * Returns a formatted error message for given form field, '' if no errors.
+     * Returns a formatted error message for given form field, "" if no errors.
      *
      * Uses the `error`, `errorList` and `errorItem` templates. The `errorList` and
      * `errorItem` templates are used to format multiple error messages per field.
@@ -679,18 +679,18 @@ class FormHelper : Helper
      * @param array|string|null $text Error message as string or array of messages. If an array,
      *   it should be a hash of key names: messages.
      * @param array<string, mixed> myOptions See above.
-     * @return string Formatted errors or ''.
+     * @return string Formatted errors or "".
      * @link https://book.UIM.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
     string error(string myField, $text = null, array myOptions = []) {
-        if (substr(myField, -5) === '._ids') {
+        if (substr(myField, -5) === "._ids") {
             myField = substr(myField, 0, -5);
         }
-        myOptions += ['escape': true];
+        myOptions += ["escape": true];
 
         $context = this._getContext();
         if (!$context.hasError(myField)) {
-            return '';
+            return "";
         }
         myError = $context.error(myField);
 
@@ -712,28 +712,28 @@ class FormHelper : Helper
             myError = $text;
         }
 
-        if (myOptions['escape']) {
+        if (myOptions["escape"]) {
             myError = h(myError);
-            unset(myOptions['escape']);
+            unset(myOptions["escape"]);
         }
 
         if (is_array(myError)) {
             if (count(myError) > 1) {
                 myErrorText = [];
                 foreach (myError as $err) {
-                    myErrorText[] = this.formatTemplate('errorItem', ['text': $err]);
+                    myErrorText[] = this.formatTemplate("errorItem", ["text": $err]);
                 }
-                myError = this.formatTemplate('errorList', [
-                    'content': implode('', myErrorText),
+                myError = this.formatTemplate("errorList", [
+                    "content": implode("", myErrorText),
                 ]);
             } else {
                 myError = array_pop(myError);
             }
         }
 
-        return this.formatTemplate('error', [
-            'content': myError,
-            'id': this._domId(myField) . '-error',
+        return this.formatTemplate("error", [
+            "content": myError,
+            "id": this._domId(myField) . "-error",
         ]);
     }
 
@@ -755,22 +755,22 @@ class FormHelper : Helper
      * The text and for attribute are generated off of the fieldname
      *
      * ```
-     * echo this.Form.label('published');
+     * echo this.Form.label("published");
      * <label for="PostPublished">Published</label>
      * ```
      *
      * Custom text:
      *
      * ```
-     * echo this.Form.label('published', 'Publish');
+     * echo this.Form.label("published", "Publish");
      * <label for="published">Publish</label>
      * ```
      *
      * Custom attributes:
      *
      * ```
-     * echo this.Form.label('published', 'Publish', [
-     *   'for': 'post-publish'
+     * echo this.Form.label("published", "Publish", [
+     *   "for": "post-publish"
      * ]);
      * <label for="post-publish">Publish</label>
      * ```
@@ -778,9 +778,9 @@ class FormHelper : Helper
      * Nesting an input tag:
      *
      * ```
-     * echo this.Form.label('published', 'Publish', [
-     *   'for': 'published',
-     *   'input': this.text('published'),
+     * echo this.Form.label("published", "Publish", [
+     *   "for": "published",
+     *   "input": this.text("published"),
      * ]);
      * <label for="post-publish">Publish <input type="text" name="published"></label>
      * ```
@@ -798,38 +798,38 @@ class FormHelper : Helper
     string label(string myFieldName, Nullable!string $text = null, array myOptions = []) {
         if ($text === null) {
             $text = myFieldName;
-            if (substr($text, -5) === '._ids') {
+            if (substr($text, -5) === "._ids") {
                 $text = substr($text, 0, -5);
             }
-            if (strpos($text, '.') !== false) {
-                myFieldElements = explode('.', $text);
+            if (strpos($text, ".") !== false) {
+                myFieldElements = explode(".", $text);
                 $text = array_pop(myFieldElements);
             }
-            if (substr($text, -3) === '_id') {
+            if (substr($text, -3) === "_id") {
                 $text = substr($text, 0, -3);
             }
             $text = __(Inflector::humanize(Inflector::underscore($text)));
         }
 
-        if (isset(myOptions['for'])) {
-            $labelFor = myOptions['for'];
-            unset(myOptions['for']);
+        if (isset(myOptions["for"])) {
+            $labelFor = myOptions["for"];
+            unset(myOptions["for"]);
         } else {
             $labelFor = this._domId(myFieldName);
         }
         $attrs = myOptions + [
-            'for': $labelFor,
-            'text': $text,
+            "for": $labelFor,
+            "text": $text,
         ];
-        if (isset(myOptions['input'])) {
-            if (is_array(myOptions['input'])) {
-                $attrs = myOptions['input'] + $attrs;
+        if (isset(myOptions["input"])) {
+            if (is_array(myOptions["input"])) {
+                $attrs = myOptions["input"] + $attrs;
             }
 
-            return this.widget('nestingLabel', $attrs);
+            return this.widget("nestingLabel", $attrs);
         }
 
-        return this.widget('label', $attrs);
+        return this.widget("label", $attrs);
     }
 
     /**
@@ -839,14 +839,14 @@ class FormHelper : Helper
      * You can customize individual controls through `myFields`.
      * ```
      * this.Form.allControls([
-     *   'name': ['label': 'custom label']
+     *   "name": ["label": "custom label"]
      * ]);
      * ```
      *
      * You can exclude fields by specifying them as `false`:
      *
      * ```
-     * this.Form.allControls(['title': false]);
+     * this.Form.allControls(["title": false]);
      * ```
      *
      * In the above example, no field would be generated for the title field.
@@ -882,8 +882,8 @@ class FormHelper : Helper
      * You can customize individual controls through `myFields`.
      * ```
      * this.Form.controls([
-     *   'name': ['label': 'custom label'],
-     *   'email'
+     *   "name": ["label": "custom label"],
+     *   "email"
      * ]);
      * ```
      *
@@ -902,7 +902,7 @@ class FormHelper : Helper
     string controls(array myFields, array myOptions = []) {
         myFields = Hash::normalize(myFields);
 
-        $out = '';
+        $out = "";
         foreach (myFields as myName: $opts) {
             if ($opts === false) {
                 continue;
@@ -927,34 +927,34 @@ class FormHelper : Helper
      *    to customize the legend text.
      * @return string Completed form inputs.
      */
-    string fieldset(string myFields = '', array myOptions = []) {
-        $legend = myOptions['legend'] ?? true;
-        myFieldset = myOptions['fieldset'] ?? true;
+    string fieldset(string myFields = "", array myOptions = []) {
+        $legend = myOptions["legend"] ?? true;
+        myFieldset = myOptions["fieldset"] ?? true;
         $context = this._getContext();
         $out = myFields;
 
         if ($legend === true) {
             $isCreate = $context.isCreate();
             myModelName = Inflector::humanize(
-                Inflector::singularize(this._View.getRequest().getParam('controller'))
+                Inflector::singularize(this._View.getRequest().getParam("controller"))
             );
             if (!$isCreate) {
-                $legend = __d('cake', 'Edit {0}', myModelName);
+                $legend = __d("cake", "Edit {0}", myModelName);
             } else {
-                $legend = __d('cake', 'New {0}', myModelName);
+                $legend = __d("cake", "New {0}", myModelName);
             }
         }
 
         if (myFieldset !== false) {
             if ($legend) {
-                $out = this.formatTemplate('legend', ['text': $legend]) . $out;
+                $out = this.formatTemplate("legend", ["text": $legend]) . $out;
             }
 
-            myFieldsetParams = ['content': $out, 'attrs': ''];
+            myFieldsetParams = ["content": $out, "attrs": ""];
             if (is_array(myFieldset) && !empty(myFieldset)) {
-                myFieldsetParams['attrs'] = this.templater().formatAttributes(myFieldset);
+                myFieldsetParams["attrs"] = this.templater().formatAttributes(myFieldset);
             }
-            $out = this.formatTemplate('fieldset', myFieldsetParams);
+            $out = this.formatTemplate("fieldset", myFieldsetParams);
         }
 
         return $out;
@@ -967,10 +967,10 @@ class FormHelper : Helper
      *
      * See each field type method for more information. Any options that are part of
      * $attributes or myOptions for the different **type** methods can be included in `myOptions` for control().
-     * Additionally, any unknown keys that are not in the list below, or part of the selected type's options
+     * Additionally, any unknown keys that are not in the list below, or part of the selected type"s options
      * will be treated as a regular HTML attribute for the generated input.
      *
-     * - `type` - Force the type of widget you want. e.g. `type: 'select'`
+     * - `type` - Force the type of widget you want. e.g. `type: "select"`
      * - `label` - Either a string label, or an array of options for the label. See FormHelper::label().
      * - `options` - For widgets that take options e.g. radio, select.
      * - `error` - Control the error message that is produced. Set to `false` to disable any kind of error reporting
@@ -983,7 +983,7 @@ class FormHelper : Helper
      *   the already loaded templates. This option can either be a filename in /config that contains
      *   the templates you want to load, or an array of templates to use.
      * - `labelOptions` - Either `false` to disable label around nestedWidgets e.g. radio, multicheckbox or an array
-     *   of attributes for the label tag. `selected` will be added to any classes e.g. `class: 'myclass'` where
+     *   of attributes for the label tag. `selected` will be added to any classes e.g. `class: "myclass"` where
      *   widget is checked
      *
      * @param string myFieldName This should be "modelname.fieldname"
@@ -995,89 +995,89 @@ class FormHelper : Helper
      */
     string control(string myFieldName, array myOptions = []) {
         myOptions += [
-            'type': null,
-            'label': null,
-            'error': null,
-            'required': null,
-            'options': null,
-            'templates': [],
-            'templateVars': [],
-            'labelOptions': true,
+            "type": null,
+            "label": null,
+            "error": null,
+            "required": null,
+            "options": null,
+            "templates": [],
+            "templateVars": [],
+            "labelOptions": true,
         ];
         myOptions = this._parseOptions(myFieldName, myOptions);
-        myOptions += ['id': this._domId(myFieldName)];
+        myOptions += ["id": this._domId(myFieldName)];
 
         myTemplater = this.templater();
-        $newTemplates = myOptions['templates'];
+        $newTemplates = myOptions["templates"];
 
         if ($newTemplates) {
             myTemplater.push();
-            myTemplateMethod = is_string(myOptions['templates']) ? 'load' : 'add';
-            myTemplater.{myTemplateMethod}(myOptions['templates']);
+            myTemplateMethod = is_string(myOptions["templates"]) ? "load" : "add";
+            myTemplater.{myTemplateMethod}(myOptions["templates"]);
         }
-        unset(myOptions['templates']);
+        unset(myOptions["templates"]);
 
-        // Hidden inputs don't need aria.
-        // Multiple checkboxes can't have aria generated for them at this layer.
-        if (myOptions['type'] !== 'hidden' && (myOptions['type'] !== 'select' && !isset(myOptions['multiple']))) {
+        // Hidden inputs don"t need aria.
+        // Multiple checkboxes can"t have aria generated for them at this layer.
+        if (myOptions["type"] !== "hidden" && (myOptions["type"] !== "select" && !isset(myOptions["multiple"]))) {
             $isFieldError = this.isFieldError(myFieldName);
             myOptions += [
-                'aria-required': myOptions['required'] == true ? 'true' : null,
-                'aria-invalid': $isFieldError ? 'true' : null,
+                "aria-required": myOptions["required"] == true ? "true" : null,
+                "aria-invalid": $isFieldError ? "true" : null,
             ];
-            // Don't include aria-describedby unless we have a good chance of
+            // Don"t include aria-describedby unless we have a good chance of
             // having error message show up.
             if (
-                strpos(myTemplater.get('error'), '{{id}}') !== false &&
-                strpos(myTemplater.get('inputContainerError'), '{{error}}') !== false
+                strpos(myTemplater.get("error"), "{{id}}") !== false &&
+                strpos(myTemplater.get("inputContainerError"), "{{error}}") !== false
             ) {
                 myOptions += [
-                   'aria-describedby': $isFieldError ? this._domId(myFieldName) . '-error' : null,
+                   "aria-describedby": $isFieldError ? this._domId(myFieldName) . "-error" : null,
                 ];
             }
-            if (isset(myOptions['placeholder']) && myOptions['label'] === false) {
+            if (isset(myOptions["placeholder"]) && myOptions["label"] === false) {
                 myOptions += [
-                    'aria-label': myOptions['placeholder'],
+                    "aria-label": myOptions["placeholder"],
                 ];
             }
         }
 
         myError = null;
-        myErrorSuffix = '';
-        if (myOptions['type'] !== 'hidden' && myOptions['error'] !== false) {
-            if (is_array(myOptions['error'])) {
-                myError = this.error(myFieldName, myOptions['error'], myOptions['error']);
+        myErrorSuffix = "";
+        if (myOptions["type"] !== "hidden" && myOptions["error"] !== false) {
+            if (is_array(myOptions["error"])) {
+                myError = this.error(myFieldName, myOptions["error"], myOptions["error"]);
             } else {
-                myError = this.error(myFieldName, myOptions['error']);
+                myError = this.error(myFieldName, myOptions["error"]);
             }
-            myErrorSuffix = empty(myError) ? '' : 'Error';
-            unset(myOptions['error']);
+            myErrorSuffix = empty(myError) ? "" : "Error";
+            unset(myOptions["error"]);
         }
 
-        $label = myOptions['label'];
-        unset(myOptions['label']);
+        $label = myOptions["label"];
+        unset(myOptions["label"]);
 
-        $labelOptions = myOptions['labelOptions'];
-        unset(myOptions['labelOptions']);
+        $labelOptions = myOptions["labelOptions"];
+        unset(myOptions["labelOptions"]);
 
         $nestedInput = false;
-        if (myOptions['type'] === 'checkbox') {
+        if (myOptions["type"] === "checkbox") {
             $nestedInput = true;
         }
-        $nestedInput = myOptions['nestedInput'] ?? $nestedInput;
-        unset(myOptions['nestedInput']);
+        $nestedInput = myOptions["nestedInput"] ?? $nestedInput;
+        unset(myOptions["nestedInput"]);
 
         if (
             $nestedInput === true
-            && myOptions['type'] === 'checkbox'
-            && !array_key_exists('hiddenField', myOptions)
+            && myOptions["type"] === "checkbox"
+            && !array_key_exists("hiddenField", myOptions)
             && $label !== false
         ) {
-            myOptions['hiddenField'] = '_split';
+            myOptions["hiddenField"] = "_split";
         }
 
-        $input = this._getInput(myFieldName, myOptions + ['labelOptions': $labelOptions]);
-        if (myOptions['type'] === 'hidden' || myOptions['type'] === 'submit') {
+        $input = this._getInput(myFieldName, myOptions + ["labelOptions": $labelOptions]);
+        if (myOptions["type"] === "hidden" || myOptions["type"] === "submit") {
             if ($newTemplates) {
                 myTemplater.pop();
             }
@@ -1085,17 +1085,17 @@ class FormHelper : Helper
             return $input;
         }
 
-        $label = this._getLabel(myFieldName, compact('input', 'label', 'error', 'nestedInput') + myOptions);
+        $label = this._getLabel(myFieldName, compact("input", "label", "error", "nestedInput") + myOptions);
         if ($nestedInput) {
-            myResult = this._groupTemplate(compact('label', 'error', 'options'));
+            myResult = this._groupTemplate(compact("label", "error", "options"));
         } else {
-            myResult = this._groupTemplate(compact('input', 'label', 'error', 'options'));
+            myResult = this._groupTemplate(compact("input", "label", "error", "options"));
         }
         myResult = this._inputContainerTemplate([
-            'content': myResult,
-            'error': myError,
-            'errorSuffix': myErrorSuffix,
-            'options': myOptions,
+            "content": myResult,
+            "error": myError,
+            "errorSuffix": myErrorSuffix,
+            "options": myOptions,
         ]);
 
         if ($newTemplates) {
@@ -1112,16 +1112,16 @@ class FormHelper : Helper
      * @return string The generated group template
      */
     protected string _groupTemplate(array myOptions) {
-        myGroupTemplate = myOptions['options']['type'] . 'FormGroup';
+        myGroupTemplate = myOptions["options"]["type"] . "FormGroup";
         if (!this.templater().get(myGroupTemplate)) {
-            myGroupTemplate = 'formGroup';
+            myGroupTemplate = "formGroup";
         }
 
         return this.formatTemplate(myGroupTemplate, [
-            'input': myOptions['input'] ?? [],
-            'label': myOptions['label'],
-            'error': myOptions['error'],
-            'templateVars': myOptions['options']['templateVars'] ?? [],
+            "input": myOptions["input"] ?? [],
+            "label": myOptions["label"],
+            "error": myOptions["error"],
+            "templateVars": myOptions["options"]["templateVars"] ?? [],
         ]);
     }
 
@@ -1132,17 +1132,17 @@ class FormHelper : Helper
      * @return string The generated input container template
      */
     protected string _inputContainerTemplate(array myOptions) {
-        $inputContainerTemplate = myOptions['options']['type'] . 'Container' . myOptions['errorSuffix'];
+        $inputContainerTemplate = myOptions["options"]["type"] . "Container" . myOptions["errorSuffix"];
         if (!this.templater().get($inputContainerTemplate)) {
-            $inputContainerTemplate = 'inputContainer' . myOptions['errorSuffix'];
+            $inputContainerTemplate = "inputContainer" . myOptions["errorSuffix"];
         }
 
         return this.formatTemplate($inputContainerTemplate, [
-            'content': myOptions['content'],
-            'error': myOptions['error'],
-            'required': myOptions['options']['required'] ? ' required' : '',
-            'type': myOptions['options']['type'],
-            'templateVars': myOptions['options']['templateVars'] ?? [],
+            "content": myOptions["content"],
+            "error": myOptions["error"],
+            "required": myOptions["options"]["required"] ? " required" : "",
+            "type": myOptions["options"]["type"],
+            "templateVars": myOptions["options"]["templateVars"] ?? [],
         ]);
     }
 
@@ -1152,27 +1152,27 @@ class FormHelper : Helper
      * @param string myFieldName the field name
      * @param array<string, mixed> myOptions The options for the input element
      * @return array|string The generated input element string
-     *  or array if checkbox() is called with option 'hiddenField' set to '_split'.
+     *  or array if checkbox() is called with option "hiddenField" set to "_split".
      */
     protected auto _getInput(string myFieldName, array myOptions) {
-        $label = myOptions['labelOptions'];
-        unset(myOptions['labelOptions']);
-        switch (strtolower(myOptions['type'])) {
-            case 'select':
-            case 'radio':
-            case 'multicheckbox':
-                $opts = myOptions['options'];
+        $label = myOptions["labelOptions"];
+        unset(myOptions["labelOptions"]);
+        switch (strtolower(myOptions["type"])) {
+            case "select":
+            case "radio":
+            case "multicheckbox":
+                $opts = myOptions["options"];
                 if ($opts == null) {
                     $opts = [];
                 }
-                unset(myOptions['options']);
+                unset(myOptions["options"]);
 
-                return this.{myOptions['type']}(myFieldName, $opts, myOptions + ['label': $label]);
-            case 'input':
-                throw new RuntimeException("Invalid type 'input' used for field 'myFieldName'");
+                return this.{myOptions["type"]}(myFieldName, $opts, myOptions + ["label": $label]);
+            case "input":
+                throw new RuntimeException("Invalid type "input" used for field "myFieldName"");
 
             default:
-                return this.{myOptions['type']}(myFieldName, myOptions);
+                return this.{myOptions["type"]}(myFieldName, myOptions);
         }
     }
 
@@ -1186,9 +1186,9 @@ class FormHelper : Helper
     protected auto _parseOptions(string myFieldName, array myOptions): array
     {
         $needsMagicType = false;
-        if (empty(myOptions['type'])) {
+        if (empty(myOptions["type"])) {
             $needsMagicType = true;
-            myOptions['type'] = this._inputType(myFieldName, myOptions);
+            myOptions["type"] = this._inputType(myFieldName, myOptions);
         }
 
         myOptions = this._magicOptions(myFieldName, myOptions, $needsMagicType);
@@ -1209,36 +1209,36 @@ class FormHelper : Helper
         $context = this._getContext();
 
         if ($context.isPrimaryKey(myFieldName)) {
-            return 'hidden';
+            return "hidden";
         }
 
-        if (substr(myFieldName, -3) === '_id') {
-            return 'select';
+        if (substr(myFieldName, -3) === "_id") {
+            return "select";
         }
 
-        myType = 'text';
+        myType = "text";
         $internalType = $context.type(myFieldName);
-        $map = this._config['typeMap'];
+        $map = this._config["typeMap"];
         if ($internalType !== null && isset($map[$internalType])) {
             myType = $map[$internalType];
         }
-        myFieldName = array_slice(explode('.', myFieldName), -1)[0];
+        myFieldName = array_slice(explode(".", myFieldName), -1)[0];
 
         switch (true) {
-            case isset(myOptions['checked']):
-                return 'checkbox';
-            case isset(myOptions['options']):
-                return 'select';
-            case in_array(myFieldName, ['passwd', 'password'], true):
-                return 'password';
-            case in_array(myFieldName, ['tel', 'telephone', 'phone'], true):
-                return 'tel';
-            case myFieldName === 'email':
-                return 'email';
-            case isset(myOptions['rows']) || isset(myOptions['cols']):
-                return 'textarea';
-            case myFieldName === 'year':
-                return 'year';
+            case isset(myOptions["checked"]):
+                return "checkbox";
+            case isset(myOptions["options"]):
+                return "select";
+            case in_array(myFieldName, ["passwd", "password"], true):
+                return "password";
+            case in_array(myFieldName, ["tel", "telephone", "phone"], true):
+                return "tel";
+            case myFieldName === "email":
+                return "email";
+            case isset(myOptions["rows"]) || isset(myOptions["cols"]):
+                return "textarea";
+            case myFieldName === "year":
+                return "year";
         }
 
         return myType;
@@ -1246,7 +1246,7 @@ class FormHelper : Helper
 
     /**
      * Selects the variable containing the options for a select field if present,
-     * and sets the value to the 'options' key in the options array.
+     * and sets the value to the "options" key in the options array.
      *
      * @param string myFieldName The name of the field to find options for.
      * @param array<string, mixed> myOptions Options list.
@@ -1254,18 +1254,18 @@ class FormHelper : Helper
      */
     protected auto _optionsOptions(string myFieldName, array myOptions): array
     {
-        if (isset(myOptions['options'])) {
+        if (isset(myOptions["options"])) {
             return myOptions;
         }
 
         $pluralize = true;
-        if (substr(myFieldName, -5) === '._ids') {
+        if (substr(myFieldName, -5) === "._ids") {
             myFieldName = substr(myFieldName, 0, -5);
             $pluralize = false;
-        } elseif (substr(myFieldName, -3) === '_id') {
+        } elseif (substr(myFieldName, -3) === "_id") {
             myFieldName = substr(myFieldName, 0, -3);
         }
-        myFieldName = array_slice(explode('.', myFieldName), -1)[0];
+        myFieldName = array_slice(explode(".", myFieldName), -1)[0];
 
         $varName = Inflector::variable(
             $pluralize ? Inflector::pluralize(myFieldName) : myFieldName
@@ -1274,10 +1274,10 @@ class FormHelper : Helper
         if (!is_iterable($varOptions)) {
             return myOptions;
         }
-        if (myOptions['type'] !== 'radio') {
-            myOptions['type'] = 'select';
+        if (myOptions["type"] !== "radio") {
+            myOptions["type"] = "select";
         }
-        myOptions['options'] = $varOptions;
+        myOptions["options"] = $varOptions;
 
         return myOptions;
     }
@@ -1288,27 +1288,27 @@ class FormHelper : Helper
      * @param string myFieldName The name of the field to generate options for.
      * @param array<string, mixed> myOptions Options list.
      * @param bool $allowOverride Whether it is allowed for this method to
-     * overwrite the 'type' key in options.
+     * overwrite the "type" key in options.
      * @return array<string, mixed>
      */
     protected auto _magicOptions(string myFieldName, array myOptions, bool $allowOverride): array
     {
         myOptions += [
-            'templateVars': [],
+            "templateVars": [],
         ];
 
         myOptions = this.setRequiredAndCustomValidity(myFieldName, myOptions);
 
-        myTypesWithOptions = ['text', 'number', 'radio', 'select'];
-        $magicOptions = (in_array(myOptions['type'], ['radio', 'select'], true) || $allowOverride);
-        if ($magicOptions && in_array(myOptions['type'], myTypesWithOptions, true)) {
+        myTypesWithOptions = ["text", "number", "radio", "select"];
+        $magicOptions = (in_array(myOptions["type"], ["radio", "select"], true) || $allowOverride);
+        if ($magicOptions && in_array(myOptions["type"], myTypesWithOptions, true)) {
             myOptions = this._optionsOptions(myFieldName, myOptions);
         }
 
-        if ($allowOverride && substr(myFieldName, -5) === '._ids') {
-            myOptions['type'] = 'select';
-            if (!isset(myOptions['multiple']) || (myOptions['multiple'] && myOptions['multiple'] !== 'checkbox')) {
-                myOptions['multiple'] = true;
+        if ($allowOverride && substr(myFieldName, -5) === "._ids") {
+            myOptions["type"] = "select";
+            if (!isset(myOptions["multiple"]) || (myOptions["multiple"] && myOptions["multiple"] !== "checkbox")) {
+                myOptions["multiple"] = true;
             }
         }
 
@@ -1325,21 +1325,21 @@ class FormHelper : Helper
     protected auto setRequiredAndCustomValidity(string myFieldName, array myOptions) {
         $context = this._getContext();
 
-        if (!isset(myOptions['required']) && myOptions['type'] !== 'hidden') {
-            myOptions['required'] = $context.isRequired(myFieldName);
+        if (!isset(myOptions["required"]) && myOptions["type"] !== "hidden") {
+            myOptions["required"] = $context.isRequired(myFieldName);
         }
 
         myMessage = $context.getRequiredMessage(myFieldName);
         myMessage = h(myMessage);
 
-        if (myOptions['required'] && myMessage) {
-            myOptions['templateVars']['customValidityMessage'] = myMessage;
+        if (myOptions["required"] && myMessage) {
+            myOptions["templateVars"]["customValidityMessage"] = myMessage;
 
-            if (this.getConfig('autoSetCustomValidity')) {
-                myOptions['data-validity-message'] = myMessage;
-                myOptions['oninvalid'] = "this.setCustomValidity(''); "
-                    . 'if (!this.value) this.setCustomValidity(this.dataset.validityMessage)';
-                myOptions['oninput'] = "this.setCustomValidity('')";
+            if (this.getConfig("autoSetCustomValidity")) {
+                myOptions["data-validity-message"] = myMessage;
+                myOptions["oninvalid"] = "this.setCustomValidity(""); "
+                    . "if (!this.value) this.setCustomValidity(this.dataset.validityMessage)";
+                myOptions["oninput"] = "this.setCustomValidity("")";
             }
         }
 
@@ -1354,14 +1354,14 @@ class FormHelper : Helper
      * @return string|false Generated label element or false.
      */
     protected auto _getLabel(string myFieldName, array myOptions) {
-        if (myOptions['type'] === 'hidden') {
+        if (myOptions["type"] === "hidden") {
             return false;
         }
 
-        $label = myOptions['label'] ?? null;
+        $label = myOptions["label"] ?? null;
 
-        if ($label === false && myOptions['type'] === 'checkbox') {
-            return myOptions['input'];
+        if ($label === false && myOptions["type"] === "checkbox") {
+            return myOptions["input"];
         }
         if ($label === false) {
             return false;
@@ -1397,30 +1397,30 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Options for the label element.
      * @return string Generated label element
      */
-    protected auto _inputLabel(string myFieldName, $label = null, array myOptions = []): string
+    protected string _inputLabel(string myFieldName, $label = null, array myOptions = [])
     {
-        myOptions += ['id': null, 'input': null, 'nestedInput': false, 'templateVars': []];
-        $labelAttributes = ['templateVars': myOptions['templateVars']];
+        myOptions += ["id": null, "input": null, "nestedInput": false, "templateVars": []];
+        $labelAttributes = ["templateVars": myOptions["templateVars"]];
         if (is_array($label)) {
             $labelText = null;
-            if (isset($label['text'])) {
-                $labelText = $label['text'];
-                unset($label['text']);
+            if (isset($label["text"])) {
+                $labelText = $label["text"];
+                unset($label["text"]);
             }
             $labelAttributes = array_merge($labelAttributes, $label);
         } else {
             $labelText = $label;
         }
 
-        $labelAttributes['for'] = myOptions['id'];
-        if (in_array(myOptions['type'], this._groupedInputTypes, true)) {
-            $labelAttributes['for'] = false;
+        $labelAttributes["for"] = myOptions["id"];
+        if (in_array(myOptions["type"], this._groupedInputTypes, true)) {
+            $labelAttributes["for"] = false;
         }
-        if (myOptions['nestedInput']) {
-            $labelAttributes['input'] = myOptions['input'];
+        if (myOptions["nestedInput"]) {
+            $labelAttributes["input"] = myOptions["input"];
         }
-        if (isset(myOptions['escape'])) {
-            $labelAttributes['escape'] = myOptions['escape'];
+        if (isset(myOptions["escape"])) {
+            $labelAttributes["escape"] = myOptions["escape"];
         }
 
         return this.label(myFieldName, $labelText, $labelAttributes);
@@ -1434,7 +1434,7 @@ class FormHelper : Helper
      * - `value` - the value of the checkbox
      * - `checked` - boolean indicate that this checkbox is checked.
      * - `hiddenField` - boolean to indicate if you want the results of checkbox() to include
-     *    a hidden input with a value of ''.
+     *    a hidden input with a value of "".
      * - `disabled` - create a disabled input.
      * - `default` - Set the default value for the checkbox. This allows you to start checkboxes
      *    as checked, without having to check the POST data. A matching POST data value, will overwrite
@@ -1446,38 +1446,38 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-checkboxes
      */
     function checkbox(string myFieldName, array myOptions = []) {
-        myOptions += ['hiddenField': true, 'value': 1];
+        myOptions += ["hiddenField": true, "value": 1];
 
         // Work around value=>val translations.
-        myValue = myOptions['value'];
-        unset(myOptions['value']);
+        myValue = myOptions["value"];
+        unset(myOptions["value"]);
         myOptions = this._initInputField(myFieldName, myOptions);
-        myOptions['value'] = myValue;
+        myOptions["value"] = myValue;
 
-        $output = '';
-        if (myOptions['hiddenField']) {
+        $output = "";
+        if (myOptions["hiddenField"]) {
             myHiddenOptions = [
-                'name': myOptions['name'],
-                'value': myOptions['hiddenField'] !== true
-                    && myOptions['hiddenField'] !== '_split'
-                    ? myOptions['hiddenField'] : '0',
-                'form': myOptions['form'] ?? null,
-                'secure': false,
+                "name": myOptions["name"],
+                "value": myOptions["hiddenField"] !== true
+                    && myOptions["hiddenField"] !== "_split"
+                    ? myOptions["hiddenField"] : "0",
+                "form": myOptions["form"] ?? null,
+                "secure": false,
             ];
-            if (isset(myOptions['disabled']) && myOptions['disabled']) {
-                myHiddenOptions['disabled'] = 'disabled';
+            if (isset(myOptions["disabled"]) && myOptions["disabled"]) {
+                myHiddenOptions["disabled"] = "disabled";
             }
             $output = this.hidden(myFieldName, myHiddenOptions);
         }
 
-        if (myOptions['hiddenField'] === '_split') {
-            unset(myOptions['hiddenField'], myOptions['type']);
+        if (myOptions["hiddenField"] === "_split") {
+            unset(myOptions["hiddenField"], myOptions["type"]);
 
-            return ['hidden': $output, 'input': this.widget('checkbox', myOptions)];
+            return ["hidden": $output, "input": this.widget("checkbox", myOptions)];
         }
-        unset(myOptions['hiddenField'], myOptions['type']);
+        unset(myOptions["hiddenField"], myOptions["type"]);
 
-        return $output . this.widget('checkbox', myOptions);
+        return $output . this.widget("checkbox", myOptions);
     }
 
     /**
@@ -1487,14 +1487,14 @@ class FormHelper : Helper
      *
      * - `value` - Indicates the value when this radio button is checked.
      * - `label` - Either `false` to disable label around the widget or an array of attributes for
-     *    the label tag. `selected` will be added to any classes e.g. `'class': 'myclass'` where widget
+     *    the label tag. `selected` will be added to any classes e.g. `"class": "myclass"` where widget
      *    is checked
      * - `hiddenField` - boolean to indicate if you want the results of radio() to include
-     *    a hidden input with a value of ''. This is useful for creating radio sets that are non-continuous.
+     *    a hidden input with a value of "". This is useful for creating radio sets that are non-continuous.
      * - `disabled` - Set to `true` or `disabled` to disable all the radio buttons. Use an array of
      *   values to disable specific radio buttons.
-     * - `empty` - Set to `true` to create an input with the value '' as the first option. When `true`
-     *   the radio label will be 'empty'. Set this option to a string to control the label value.
+     * - `empty` - Set to `true` to create an input with the value "" as the first option. When `true`
+     *   the radio label will be "empty". Set this option to a string to control the label value.
      *
      * @param string myFieldName Name of a field, like this "modelname.fieldname"
      * @param iterable myOptions Radio button options array.
@@ -1502,23 +1502,23 @@ class FormHelper : Helper
      * @return string Completed radio widget set.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-radio-buttons
      */
-    function radio(string myFieldName, iterable myOptions = [], array $attributes = []): string
+    string radio(string myFieldName, iterable myOptions = [], array $attributes = [])
     {
-        $attributes['options'] = myOptions;
-        $attributes['idPrefix'] = this._idPrefix;
+        $attributes["options"] = myOptions;
+        $attributes["idPrefix"] = this._idPrefix;
         $attributes = this._initInputField(myFieldName, $attributes);
 
-        myHiddenField = $attributes['hiddenField'] ?? true;
-        unset($attributes['hiddenField']);
+        myHiddenField = $attributes["hiddenField"] ?? true;
+        unset($attributes["hiddenField"]);
 
-        $radio = this.widget('radio', $attributes);
+        $radio = this.widget("radio", $attributes);
 
-        myHidden = '';
+        myHidden = "";
         if (myHiddenField) {
             myHidden = this.hidden(myFieldName, [
-                'value': myHiddenField === true ? '' : myHiddenField,
-                'form': $attributes['form'] ?? null,
-                'name': $attributes['name'],
+                "value": myHiddenField === true ? "" : myHiddenField,
+                "form": $attributes["form"] ?? null,
+                "name": $attributes["name"],
             ]);
         }
 
@@ -1533,7 +1533,7 @@ class FormHelper : Helper
      * ### Usage
      *
      * ```
-     * this.Form.search('User.query', ['value': 'test']);
+     * this.Form.search("User.query", ["value": "test"]);
      * ```
      *
      * Will make an input like:
@@ -1550,13 +1550,13 @@ class FormHelper : Helper
      */
     auto __call(string $method, array myParams) {
         if (empty(myParams)) {
-            throw new CakeException(sprintf('Missing field name for FormHelper::%s', $method));
+            throw new CakeException(sprintf("Missing field name for FormHelper::%s", $method));
         }
         myOptions = myParams[1] ?? [];
-        myOptions['type'] = myOptions['type'] ?? $method;
+        myOptions["type"] = myOptions["type"] ?? $method;
         myOptions = this._initInputField(myParams[0], myOptions);
 
-        return this.widget(myOptions['type'], myOptions);
+        return this.widget(myOptions["type"], myOptions);
     }
 
     /**
@@ -1573,9 +1573,9 @@ class FormHelper : Helper
      */
     string textarea(string myFieldName, array myOptions = []) {
         myOptions = this._initInputField(myFieldName, myOptions);
-        unset(myOptions['type']);
+        unset(myOptions["type"]);
 
-        return this.widget('textarea', myOptions);
+        return this.widget("textarea", myOptions);
     }
 
     /**
@@ -1586,29 +1586,29 @@ class FormHelper : Helper
      * @return string A generated hidden input
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-hidden-inputs
      */
-    function hidden(string myFieldName, array myOptions = []): string
+    string hidden(string myFieldName, array myOptions = [])
     {
-        myOptions += ['required': false, 'secure': true];
+        myOptions += ["required": false, "secure": true];
 
-        $secure = myOptions['secure'];
-        unset(myOptions['secure']);
+        $secure = myOptions["secure"];
+        unset(myOptions["secure"]);
 
         myOptions = this._initInputField(myFieldName, array_merge(
             myOptions,
-            ['secure': static::SECURE_SKIP]
+            ["secure": static::SECURE_SKIP]
         ));
 
         if ($secure === true && this.formProtector) {
             this.formProtector.addField(
-                myOptions['name'],
+                myOptions["name"],
                 true,
-                myOptions['val'] === false ? '0' : (string)myOptions['val']
+                myOptions["val"] === false ? "0" : (string)myOptions["val"]
             );
         }
 
-        myOptions['type'] = 'hidden';
+        myOptions["type"] = "hidden";
 
-        return this.widget('hidden', myOptions);
+        return this.widget("hidden", myOptions);
     }
 
     /**
@@ -1619,14 +1619,14 @@ class FormHelper : Helper
      * @return string A generated file input.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-file-inputs
      */
-    function file(string myFieldName, array myOptions = []): string
+    string file(string myFieldName, array myOptions = [])
     {
-        myOptions += ['secure': true];
+        myOptions += ["secure": true];
         myOptions = this._initInputField(myFieldName, myOptions);
 
-        unset(myOptions['type']);
+        unset(myOptions["type"]);
 
-        return this.widget('file', myOptions);
+        return this.widget("file", myOptions);
     }
 
     /**
@@ -1639,34 +1639,34 @@ class FormHelper : Helper
      * - `escape` - HTML entity encode the attributes of button tag. Defaults to true.
      * - `confirm` - Confirm message to show. Form execution will only continue if confirmed then.
      *
-     * @param string $title The button's caption. Not automatically HTML encoded
+     * @param string $title The button"s caption. Not automatically HTML encoded
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string A HTML button tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-button-elements
      */
-    function button(string $title, array myOptions = []): string
+    string button(string $title, array myOptions = [])
     {
         myOptions += [
-            'type': 'submit',
-            'escapeTitle': true,
-            'escape': true,
-            'secure': false,
-            'confirm': null,
+            "type": "submit",
+            "escapeTitle": true,
+            "escape": true,
+            "secure": false,
+            "confirm": null,
         ];
-        myOptions['text'] = $title;
+        myOptions["text"] = $title;
 
-        $confirmMessage = myOptions['confirm'];
-        unset(myOptions['confirm']);
+        $confirmMessage = myOptions["confirm"];
+        unset(myOptions["confirm"]);
         if ($confirmMessage) {
-            $confirm = this._confirm('return true;', 'return false;');
-            myOptions['data-confirm-message'] = $confirmMessage;
-            myOptions['onclick'] = this.templater().format('confirmJs', [
-                'confirmMessage': h($confirmMessage),
-                'confirm': $confirm,
+            $confirm = this._confirm("return true;", "return false;");
+            myOptions["data-confirm-message"] = $confirmMessage;
+            myOptions["onclick"] = this.templater().format("confirmJs", [
+                "confirmMessage": h($confirmMessage),
+                "confirm": $confirm,
             ]);
         }
 
-        return this.widget('button', myOptions);
+        return this.widget("button", myOptions);
     }
 
     /**
@@ -1678,35 +1678,35 @@ class FormHelper : Helper
      * ### Options:
      *
      * - `data` - Array with key/value to pass in input hidden
-     * - `method` - Request method to use. Set to 'delete' or others to simulate
-     *   HTTP/1.1 DELETE (or others) request. Defaults to 'post'.
+     * - `method` - Request method to use. Set to "delete" or others to simulate
+     *   HTTP/1.1 DELETE (or others) request. Defaults to "post".
      * - `form` - Array with any option that FormHelper::create() can take
      * - Other options is the same of button method.
      * - `confirm` - Confirm message to show. Form execution will only continue if confirmed then.
      *
-     * @param string $title The button's caption. Not automatically HTML encoded
+     * @param string $title The button"s caption. Not automatically HTML encoded
      * @param array|string myUrl URL as string or array
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string A HTML button tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    function postButton(string $title, myUrl, array myOptions = []): string
+    string postButton(string $title, myUrl, array myOptions = [])
     {
-        $formOptions = ['url': myUrl];
-        if (isset(myOptions['method'])) {
-            $formOptions['type'] = myOptions['method'];
-            unset(myOptions['method']);
+        $formOptions = ["url": myUrl];
+        if (isset(myOptions["method"])) {
+            $formOptions["type"] = myOptions["method"];
+            unset(myOptions["method"]);
         }
-        if (isset(myOptions['form']) && is_array(myOptions['form'])) {
-            $formOptions = myOptions['form'] + $formOptions;
-            unset(myOptions['form']);
+        if (isset(myOptions["form"]) && is_array(myOptions["form"])) {
+            $formOptions = myOptions["form"] + $formOptions;
+            unset(myOptions["form"]);
         }
         $out = this.create(null, $formOptions);
-        if (isset(myOptions['data']) && is_array(myOptions['data'])) {
-            foreach (Hash::flatten(myOptions['data']) as myKey: myValue) {
-                $out .= this.hidden(myKey, ['value': myValue]);
+        if (isset(myOptions["data"]) && is_array(myOptions["data"])) {
+            foreach (Hash::flatten(myOptions["data"]) as myKey: myValue) {
+                $out .= this.hidden(myKey, ["value": myValue]);
             }
-            unset(myOptions['data']);
+            unset(myOptions["data"]);
         }
         $out .= this.button($title, myOptions);
         $out .= this.end();
@@ -1728,8 +1728,8 @@ class FormHelper : Helper
      * ### Options:
      *
      * - `data` - Array with key/value to pass in input hidden
-     * - `method` - Request method to use. Set to 'delete' to simulate
-     *   HTTP/1.1 DELETE request. Defaults to 'post'.
+     * - `method` - Request method to use. Set to "delete" to simulate
+     *   HTTP/1.1 DELETE request. Defaults to "post".
      * - `confirm` - Confirm message to show. Form execution will only continue if confirmed then.
      * - `block` - Set to true to append form to view block "postLink" or provide
      *   custom block name.
@@ -1743,28 +1743,28 @@ class FormHelper : Helper
      * @return string An `<a />` element.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    function postLink(string $title, myUrl = null, array myOptions = []): string
+    string postLink(string $title, myUrl = null, array myOptions = [])
     {
-        myOptions += ['block': null, 'confirm': null];
+        myOptions += ["block": null, "confirm": null];
 
-        myRequestMethod = 'POST';
-        if (!empty(myOptions['method'])) {
-            myRequestMethod = strtoupper(myOptions['method']);
-            unset(myOptions['method']);
+        myRequestMethod = "POST";
+        if (!empty(myOptions["method"])) {
+            myRequestMethod = strtoupper(myOptions["method"]);
+            unset(myOptions["method"]);
         }
 
-        $confirmMessage = myOptions['confirm'];
-        unset(myOptions['confirm']);
+        $confirmMessage = myOptions["confirm"];
+        unset(myOptions["confirm"]);
 
-        $formName = str_replace('.', '', uniqid('post_', true));
+        $formName = str_replace(".", "", uniqid("post_", true));
         $formOptions = [
-            'name': $formName,
-            'style': 'display:none;',
-            'method': 'post',
+            "name": $formName,
+            "style": "display:none;",
+            "method": "post",
         ];
-        if (isset(myOptions['target'])) {
-            $formOptions['target'] = myOptions['target'];
-            unset(myOptions['target']);
+        if (isset(myOptions["target"])) {
+            $formOptions["target"] = myOptions["target"];
+            unset(myOptions["target"]);
         }
         myTemplater = this.templater();
 
@@ -1773,62 +1773,62 @@ class FormHelper : Helper
         $restoreFormProtector = this.formProtector;
 
         $action = myTemplater.formatAttributes([
-            'action': this.Url.build(myUrl),
-            'escape': false,
+            "action": this.Url.build(myUrl),
+            "escape": false,
         ]);
 
-        $out = this.formatTemplate('formStart', [
-            'attrs': myTemplater.formatAttributes($formOptions) . $action,
+        $out = this.formatTemplate("formStart", [
+            "attrs": myTemplater.formatAttributes($formOptions) . $action,
         ]);
-        $out .= this.hidden('_method', [
-            'value': myRequestMethod,
-            'secure': static::SECURE_SKIP,
+        $out .= this.hidden("_method", [
+            "value": myRequestMethod,
+            "secure": static::SECURE_SKIP,
         ]);
         $out .= this._csrfField();
 
-        $formTokenData = this._View.getRequest().getAttribute('formTokenData');
+        $formTokenData = this._View.getRequest().getAttribute("formTokenData");
         if ($formTokenData !== null) {
             this.formProtector = this.createFormProtector($formTokenData);
         }
 
         myFields = [];
-        if (isset(myOptions['data']) && is_array(myOptions['data'])) {
-            foreach (Hash::flatten(myOptions['data']) as myKey: myValue) {
+        if (isset(myOptions["data"]) && is_array(myOptions["data"])) {
+            foreach (Hash::flatten(myOptions["data"]) as myKey: myValue) {
                 myFields[myKey] = myValue;
-                $out .= this.hidden(myKey, ['value': myValue, 'secure': static::SECURE_SKIP]);
+                $out .= this.hidden(myKey, ["value": myValue, "secure": static::SECURE_SKIP]);
             }
-            unset(myOptions['data']);
+            unset(myOptions["data"]);
         }
         $out .= this.secure(myFields);
-        $out .= this.formatTemplate('formEnd', []);
+        $out .= this.formatTemplate("formEnd", []);
 
         this._lastAction = $restoreAction;
         this.formProtector = $restoreFormProtector;
 
-        if (myOptions['block']) {
-            if (myOptions['block'] === true) {
-                myOptions['block'] = __FUNCTION__;
+        if (myOptions["block"]) {
+            if (myOptions["block"] === true) {
+                myOptions["block"] = __FUNCTION__;
             }
-            this._View.append(myOptions['block'], $out);
-            $out = '';
+            this._View.append(myOptions["block"], $out);
+            $out = "";
         }
-        unset(myOptions['block']);
+        unset(myOptions["block"]);
 
-        myUrl = '#';
-        $onClick = 'document.' . $formName . '.submit();';
+        myUrl = "#";
+        $onClick = "document." . $formName . ".submit();";
         if ($confirmMessage) {
-            $onClick = this._confirm($onClick, '');
-            $onClick = $onClick . 'event.returnValue = false; return false;';
-            $onClick = this.templater().format('confirmJs', [
-                'confirmMessage': h($confirmMessage),
-                'formName': $formName,
-                'confirm': $onClick,
+            $onClick = this._confirm($onClick, "");
+            $onClick = $onClick . "event.returnValue = false; return false;";
+            $onClick = this.templater().format("confirmJs", [
+                "confirmMessage": h($confirmMessage),
+                "formName": $formName,
+                "confirm": $onClick,
             ]);
-            myOptions['data-confirm-message'] = $confirmMessage;
+            myOptions["data-confirm-message"] = $confirmMessage;
         } else {
-            $onClick .= ' event.returnValue = false; return false;';
+            $onClick .= " event.returnValue = false; return false;";
         }
-        myOptions['onclick'] = $onClick;
+        myOptions["onclick"] = $onClick;
 
         $out .= this.Html.link($title, myUrl, myOptions);
 
@@ -1842,7 +1842,7 @@ class FormHelper : Helper
      *
      * ### Options
      *
-     * - `type` - Set to 'reset' for reset inputs. Defaults to 'submit'
+     * - `type` - Set to "reset" for reset inputs. Defaults to "submit"
      * - `templateVars` - Additional template variables for the input element and its container.
      * - Other attributes will be assigned to the input element.
      *
@@ -1854,40 +1854,40 @@ class FormHelper : Helper
      * @return string A HTML submit button
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    function submit(Nullable!string $caption = null, array myOptions = []): string
+    string submit(Nullable!string $caption = null, array myOptions = [])
     {
         if ($caption === null) {
-            $caption = __d('cake', 'Submit');
+            $caption = __d("cake", "Submit");
         }
         myOptions += [
-            'type': 'submit',
-            'secure': false,
-            'templateVars': [],
+            "type": "submit",
+            "secure": false,
+            "templateVars": [],
         ];
 
-        if (isset(myOptions['name']) && this.formProtector) {
+        if (isset(myOptions["name"]) && this.formProtector) {
             this.formProtector.addField(
-                myOptions['name'],
-                myOptions['secure']
+                myOptions["name"],
+                myOptions["secure"]
             );
         }
-        unset(myOptions['secure']);
+        unset(myOptions["secure"]);
 
-        $isUrl = strpos($caption, '://') !== false;
-        $isImage = preg_match('/\.(jpg|jpe|jpeg|gif|png|ico)$/', $caption);
+        $isUrl = strpos($caption, "://") !== false;
+        $isImage = preg_match("/\.(jpg|jpe|jpeg|gif|png|ico)$/", $caption);
 
-        myType = myOptions['type'];
-        unset(myOptions['type']);
+        myType = myOptions["type"];
+        unset(myOptions["type"]);
 
         if ($isUrl || $isImage) {
-            myType = 'image';
+            myType = "image";
 
             if (this.formProtector) {
-                $unlockFields = ['x', 'y'];
-                if (isset(myOptions['name'])) {
+                $unlockFields = ["x", "y"];
+                if (isset(myOptions["name"])) {
                     $unlockFields = [
-                        myOptions['name'] . '_x',
-                        myOptions['name'] . '_y',
+                        myOptions["name"] . "_x",
+                        myOptions["name"] . "_y",
                     ];
                 }
                 foreach ($unlockFields as $ignore) {
@@ -1897,28 +1897,28 @@ class FormHelper : Helper
         }
 
         if ($isUrl) {
-            myOptions['src'] = $caption;
+            myOptions["src"] = $caption;
         } elseif ($isImage) {
-            if ($caption[0] !== '/') {
-                myUrl = this.Url.webroot(Configure::read('App.imageBaseUrl') . $caption);
+            if ($caption[0] !== "/") {
+                myUrl = this.Url.webroot(Configure::read("App.imageBaseUrl") . $caption);
             } else {
-                myUrl = this.Url.webroot(trim($caption, '/'));
+                myUrl = this.Url.webroot(trim($caption, "/"));
             }
             myUrl = this.Url.assetTimestamp(myUrl);
-            myOptions['src'] = myUrl;
+            myOptions["src"] = myUrl;
         } else {
-            myOptions['value'] = $caption;
+            myOptions["value"] = $caption;
         }
 
-        $input = this.formatTemplate('inputSubmit', [
-            'type': myType,
-            'attrs': this.templater().formatAttributes(myOptions),
-            'templateVars': myOptions['templateVars'],
+        $input = this.formatTemplate("inputSubmit", [
+            "type": myType,
+            "attrs": this.templater().formatAttributes(myOptions),
+            "templateVars": myOptions["templateVars"],
         ]);
 
-        return this.formatTemplate('submitContainer', [
-            'content': $input,
-            'templateVars': myOptions['templateVars'],
+        return this.formatTemplate("submitContainer", [
+            "content": $input,
+            "templateVars": myOptions["templateVars"],
         ]);
     }
 
@@ -1927,7 +1927,7 @@ class FormHelper : Helper
      *
      * ### Attributes:
      *
-     * - `multiple` - show a multiple select box. If set to 'checkbox' multiple checkboxes will be
+     * - `multiple` - show a multiple select box. If set to "checkbox" multiple checkboxes will be
      *   created instead.
      * - `empty` - If true, the empty select option is shown. If a string,
      *   that string is displayed as the empty element.
@@ -1941,20 +1941,20 @@ class FormHelper : Helper
      * A simple array will create normal options:
      *
      * ```
-     * myOptions = [1: 'one', 2: 'two'];
-     * this.Form.select('Model.field', myOptions));
+     * myOptions = [1: "one", 2: "two"];
+     * this.Form.select("Model.field", myOptions));
      * ```
      *
      * While a nested options array will create optgroups with options inside them.
      * ```
      * myOptions = [
-     *  1: 'bill',
-     *     'fred': [
-     *         2: 'fred',
-     *         3: 'fred jr.'
+     *  1: "bill",
+     *     "fred": [
+     *         2: "fred",
+     *         3: "fred jr."
      *     ]
      * ];
-     * this.Form.select('Model.field', myOptions);
+     * this.Form.select("Model.field", myOptions);
      * ```
      *
      * If you have multiple options that need to have the same value attribute, you can
@@ -1962,70 +1962,70 @@ class FormHelper : Helper
      *
      * ```
      * myOptions = [
-     *     ['text': 'United states', 'value': 'USA'],
-     *     ['text': 'USA', 'value': 'USA'],
+     *     ["text": "United states", "value": "USA"],
+     *     ["text": "USA", "value": "USA"],
      * ];
      * ```
      *
      * @param string myFieldName Name attribute of the SELECT
-     * @param iterable myOptions Array of the OPTION elements (as 'value'=>'Text' pairs) to be used in the
+     * @param iterable myOptions Array of the OPTION elements (as "value"=>"Text" pairs) to be used in the
      *   SELECT element
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
      * @see \Cake\View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-select-pickers
      */
-    function select(string myFieldName, iterable myOptions = [], array $attributes = []): string
+    string select(string myFieldName, iterable myOptions = [], array $attributes = [])
     {
         $attributes += [
-            'disabled': null,
-            'escape': true,
-            'hiddenField': true,
-            'multiple': null,
-            'secure': true,
-            'empty': null,
+            "disabled": null,
+            "escape": true,
+            "hiddenField": true,
+            "multiple": null,
+            "secure": true,
+            "empty": null,
         ];
 
-        if ($attributes['empty'] === null && $attributes['multiple'] !== 'checkbox') {
+        if ($attributes["empty"] === null && $attributes["multiple"] !== "checkbox") {
             $required = this._getContext().isRequired(myFieldName);
-            $attributes['empty'] = $required === null ? false : !$required;
+            $attributes["empty"] = $required === null ? false : !$required;
         }
 
-        if ($attributes['multiple'] === 'checkbox') {
-            unset($attributes['multiple'], $attributes['empty']);
+        if ($attributes["multiple"] === "checkbox") {
+            unset($attributes["multiple"], $attributes["empty"]);
 
             return this.multiCheckbox(myFieldName, myOptions, $attributes);
         }
 
-        unset($attributes['label']);
+        unset($attributes["label"]);
 
-        // Secure the field if there are options, or it's a multi select.
-        // Single selects with no options don't submit, but multiselects do.
+        // Secure the field if there are options, or it"s a multi select.
+        // Single selects with no options don"t submit, but multiselects do.
         if (
-            $attributes['secure'] &&
+            $attributes["secure"] &&
             empty(myOptions) &&
-            empty($attributes['empty']) &&
-            empty($attributes['multiple'])
+            empty($attributes["empty"]) &&
+            empty($attributes["multiple"])
         ) {
-            $attributes['secure'] = false;
+            $attributes["secure"] = false;
         }
 
         $attributes = this._initInputField(myFieldName, $attributes);
-        $attributes['options'] = myOptions;
+        $attributes["options"] = myOptions;
 
-        myHidden = '';
-        if ($attributes['multiple'] && $attributes['hiddenField']) {
+        myHidden = "";
+        if ($attributes["multiple"] && $attributes["hiddenField"]) {
             myHiddenAttributes = [
-                'name': $attributes['name'],
-                'value': '',
-                'form': $attributes['form'] ?? null,
-                'secure': false,
+                "name": $attributes["name"],
+                "value": "",
+                "form": $attributes["form"] ?? null,
+                "secure": false,
             ];
             myHidden = this.hidden(myFieldName, myHiddenAttributes);
         }
-        unset($attributes['hiddenField'], $attributes['type']);
+        unset($attributes["hiddenField"], $attributes["type"]);
 
-        return myHidden . this.widget('select', $attributes);
+        return myHidden . this.widget("select", $attributes);
     }
 
     /**
@@ -2035,49 +2035,49 @@ class FormHelper : Helper
      *
      * - `escape` - If true contents of options will be HTML entity encoded. Defaults to true.
      * - `val` The selected value of the input.
-     * - `class` - When using multiple = checkbox the class name to apply to the divs. Defaults to 'checkbox'.
+     * - `class` - When using multiple = checkbox the class name to apply to the divs. Defaults to "checkbox".
      * - `disabled` - Control the disabled attribute. When creating checkboxes, `true` will disable all checkboxes.
      *   You can also set disabled to a list of values you want to disable when creating checkboxes.
      * - `hiddenField` - Set to false to remove the hidden field that ensures a value
      *   is always submitted.
      * - `label` - Either `false` to disable label around the widget or an array of attributes for
-     *   the label tag. `selected` will be added to any classes e.g. `'class': 'myclass'` where
+     *   the label tag. `selected` will be added to any classes e.g. `"class": "myclass"` where
      *   widget is checked
      *
      * Can be used in place of a select box with the multiple attribute.
      *
      * @param string myFieldName Name attribute of the SELECT
      * @param iterable myOptions Array of the OPTION elements
-     *   (as 'value'=>'Text' pairs) to be used in the checkboxes element.
+     *   (as "value"=>"Text" pairs) to be used in the checkboxes element.
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
      * @see \Cake\View\Helper\FormHelper::select() for supported option formats.
      */
-    function multiCheckbox(string myFieldName, iterable myOptions, array $attributes = []): string
+    string multiCheckbox(string myFieldName, iterable myOptions, array $attributes = [])
     {
         $attributes += [
-            'disabled': null,
-            'escape': true,
-            'hiddenField': true,
-            'secure': true,
+            "disabled": null,
+            "escape": true,
+            "hiddenField": true,
+            "secure": true,
         ];
         $attributes = this._initInputField(myFieldName, $attributes);
-        $attributes['options'] = myOptions;
-        $attributes['idPrefix'] = this._idPrefix;
+        $attributes["options"] = myOptions;
+        $attributes["idPrefix"] = this._idPrefix;
 
-        myHidden = '';
-        if ($attributes['hiddenField']) {
+        myHidden = "";
+        if ($attributes["hiddenField"]) {
             myHiddenAttributes = [
-                'name': $attributes['name'],
-                'value': '',
-                'secure': false,
-                'disabled': $attributes['disabled'] === true || $attributes['disabled'] === 'disabled',
+                "name": $attributes["name"],
+                "value": "",
+                "secure": false,
+                "disabled": $attributes["disabled"] === true || $attributes["disabled"] === "disabled",
             ];
             myHidden = this.hidden(myFieldName, myHiddenAttributes);
         }
-        unset($attributes['hiddenField']);
+        unset($attributes["hiddenField"]);
 
-        return myHidden . this.widget('multicheckbox', $attributes);
+        return myHidden . this.widget("multicheckbox", $attributes);
     }
 
     /**
@@ -2088,7 +2088,7 @@ class FormHelper : Helper
      * - `empty` - If true, the empty select option is shown. If a string,
      *   that string is displayed as the empty element.
      * - `order` - Ordering of year values in select options.
-     *   Possible values 'asc', 'desc'. Default 'desc'
+     *   Possible values "asc", "desc". Default "desc"
      * - `value` The selected value of the input.
      * - `max` The max year to appear in the select element.
      * - `min` The min year to appear in the select element.
@@ -2098,15 +2098,15 @@ class FormHelper : Helper
      * @return string Completed year select input
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-year-inputs
      */
-    function year(string myFieldName, array myOptions = []): string
+    string year(string myFieldName, array myOptions = [])
     {
         myOptions += [
-            'empty': true,
+            "empty": true,
         ];
         myOptions = this._initInputField(myFieldName, myOptions);
-        unset(myOptions['type']);
+        unset(myOptions["type"]);
 
-        return this.widget('year', myOptions);
+        return this.widget("year", myOptions);
     }
 
     /**
@@ -2120,16 +2120,16 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      * @return string
      */
-    function month(string myFieldName, array myOptions = []): string
+    string month(string myFieldName, array myOptions = [])
     {
         myOptions += [
-            'value': null,
+            "value": null,
         ];
 
         myOptions = this._initInputField(myFieldName, myOptions);
-        myOptions['type'] = 'month';
+        myOptions["type"] = "month";
 
-        return this.widget('datetime', myOptions);
+        return this.widget("datetime", myOptions);
     }
 
     /**
@@ -2144,16 +2144,16 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      * @return string
      */
-    function dateTime(string myFieldName, array myOptions = []): string
+    string dateTime(string myFieldName, array myOptions = [])
     {
         myOptions += [
-            'value': null,
+            "value": null,
         ];
         myOptions = this._initInputField(myFieldName, myOptions);
-        myOptions['type'] = 'datetime-local';
-        myOptions['fieldName'] = myFieldName;
+        myOptions["type"] = "datetime-local";
+        myOptions["fieldName"] = myFieldName;
 
-        return this.widget('datetime', myOptions);
+        return this.widget("datetime", myOptions);
     }
 
     /**
@@ -2167,15 +2167,15 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      * @return string
      */
-    function time(string myFieldName, array myOptions = []): string
+    string time(string myFieldName, array myOptions = [])
     {
         myOptions += [
-            'value': null,
+            "value": null,
         ];
         myOptions = this._initInputField(myFieldName, myOptions);
-        myOptions['type'] = 'time';
+        myOptions["type"] = "time";
 
-        return this.widget('datetime', myOptions);
+        return this.widget("datetime", myOptions);
     }
 
     /**
@@ -2189,16 +2189,16 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      * @return string
      */
-    function date(string myFieldName, array myOptions = []): string
+    string date(string myFieldName, array myOptions = [])
     {
         myOptions += [
-            'value': null,
+            "value": null,
         ];
 
         myOptions = this._initInputField(myFieldName, myOptions);
-        myOptions['type'] = 'date';
+        myOptions["type"] = "date";
 
-        return this.widget('datetime', myOptions);
+        return this.widget("datetime", myOptions);
     }
 
     /**
@@ -2210,13 +2210,13 @@ class FormHelper : Helper
      * - `secure` - boolean whether the field should be added to the security fields.
      *   Disabling the field using the `disabled` option, will also omit the field from being
      *   part of the hashed key.
-     * - `default` - mixed - The value to use if there is no value in the form's context.
+     * - `default` - mixed - The value to use if there is no value in the form"s context.
      * - `disabled` - mixed - Either a boolean indicating disabled state, or the string in
      *   a numerically indexed value.
      * - `id` - mixed - If `true` it will be auto generated based on field name.
      *
-     * This method will convert a numerically indexed 'disabled' into an associative
-     * array value. FormHelper's internals expect associative options.
+     * This method will convert a numerically indexed "disabled" into an associative
+     * array value. FormHelper"s internals expect associative options.
      *
      * The output of this function is a more complete set of input attributes that
      * can be passed to a form widget to generate the actual input.
@@ -2227,57 +2227,57 @@ class FormHelper : Helper
      */
     protected auto _initInputField(string myField, array myOptions = []): array
     {
-        myOptions += ['fieldName': myField];
+        myOptions += ["fieldName": myField];
 
-        if (!isset(myOptions['secure'])) {
-            myOptions['secure'] = this._View.getRequest().getAttribute('formTokenData') === null ? false : true;
+        if (!isset(myOptions["secure"])) {
+            myOptions["secure"] = this._View.getRequest().getAttribute("formTokenData") === null ? false : true;
         }
         $context = this._getContext();
 
-        if (isset(myOptions['id']) && myOptions['id'] === true) {
-            myOptions['id'] = this._domId(myField);
+        if (isset(myOptions["id"]) && myOptions["id"] === true) {
+            myOptions["id"] = this._domId(myField);
         }
 
-        $disabledIndex = array_search('disabled', myOptions, true);
+        $disabledIndex = array_search("disabled", myOptions, true);
         if (is_int($disabledIndex)) {
-            deprecationWarning('Using non-associative options is deprecated, use `\'disabled\': true` instead.');
+            deprecationWarning("Using non-associative options is deprecated, use `\"disabled\": true` instead.");
             unset(myOptions[$disabledIndex]);
-            myOptions['disabled'] = true;
+            myOptions["disabled"] = true;
         }
 
-        if (!isset(myOptions['name'])) {
-            $endsWithBrackets = '';
-            if (substr(myField, -2) === '[]') {
+        if (!isset(myOptions["name"])) {
+            $endsWithBrackets = "";
+            if (substr(myField, -2) === "[]") {
                 myField = substr(myField, 0, -2);
-                $endsWithBrackets = '[]';
+                $endsWithBrackets = "[]";
             }
-            $parts = explode('.', myField);
+            $parts = explode(".", myField);
             $first = array_shift($parts);
-            myOptions['name'] = $first . (!empty($parts) ? '[' . implode('][', $parts) . ']' : '') . $endsWithBrackets;
+            myOptions["name"] = $first . (!empty($parts) ? "[" . implode("][", $parts) . "]" : "") . $endsWithBrackets;
         }
 
-        if (isset(myOptions['value']) && !isset(myOptions['val'])) {
-            myOptions['val'] = myOptions['value'];
-            unset(myOptions['value']);
+        if (isset(myOptions["value"]) && !isset(myOptions["val"])) {
+            myOptions["val"] = myOptions["value"];
+            unset(myOptions["value"]);
         }
-        if (!isset(myOptions['val'])) {
+        if (!isset(myOptions["val"])) {
             $valOptions = [
-                'default': myOptions['default'] ?? null,
-                'schemaDefault': myOptions['schemaDefault'] ?? true,
+                "default": myOptions["default"] ?? null,
+                "schemaDefault": myOptions["schemaDefault"] ?? true,
             ];
-            myOptions['val'] = this.getSourceValue(myField, $valOptions);
+            myOptions["val"] = this.getSourceValue(myField, $valOptions);
         }
-        if (!isset(myOptions['val']) && isset(myOptions['default'])) {
-            myOptions['val'] = myOptions['default'];
+        if (!isset(myOptions["val"]) && isset(myOptions["default"])) {
+            myOptions["val"] = myOptions["default"];
         }
-        unset(myOptions['value'], myOptions['default']);
+        unset(myOptions["value"], myOptions["default"]);
 
         if ($context.hasError(myField)) {
-            myOptions = this.addClass(myOptions, this._config['errorClass']);
+            myOptions = this.addClass(myOptions, this._config["errorClass"]);
         }
         $isDisabled = this._isDisabled(myOptions);
         if ($isDisabled) {
-            myOptions['secure'] = self::SECURE_SKIP;
+            myOptions["secure"] = self::SECURE_SKIP;
         }
 
         return myOptions;
@@ -2290,25 +2290,25 @@ class FormHelper : Helper
      * @return bool Whether the field is disabled.
      */
     protected bool _isDisabled(array myOptions) {
-        if (!isset(myOptions['disabled'])) {
+        if (!isset(myOptions["disabled"])) {
             return false;
         }
-        if (is_scalar(myOptions['disabled'])) {
-            return myOptions['disabled'] === true || myOptions['disabled'] === 'disabled';
+        if (is_scalar(myOptions["disabled"])) {
+            return myOptions["disabled"] === true || myOptions["disabled"] === "disabled";
         }
-        if (!isset(myOptions['options'])) {
+        if (!isset(myOptions["options"])) {
             return false;
         }
-        if (is_array(myOptions['options'])) {
+        if (is_array(myOptions["options"])) {
             // Simple list options
-            $first = myOptions['options'][array_keys(myOptions['options'])[0]];
+            $first = myOptions["options"][array_keys(myOptions["options"])[0]];
             if (is_scalar($first)) {
-                return array_diff(myOptions['options'], myOptions['disabled']) === [];
+                return array_diff(myOptions["options"], myOptions["disabled"]) === [];
             }
             // Complex option types
             if (is_array($first)) {
-                $disabled = array_filter(myOptions['options'], function ($i) use (myOptions) {
-                    return in_array($i['value'], myOptions['disabled'], true);
+                $disabled = array_filter(myOptions["options"], function ($i) use (myOptions) {
+                    return in_array($i["value"], myOptions["disabled"], true);
                 });
 
                 return count($disabled) > 0;
@@ -2370,7 +2370,7 @@ class FormHelper : Helper
         if (isset(this._context) && empty(myData)) {
             return this._context;
         }
-        myData += ['entity': null];
+        myData += ["entity": null];
 
         return this._context = this.contextFactory()
             .get(this._View.getRequest(), myData);
@@ -2381,7 +2381,7 @@ class FormHelper : Helper
      *
      * Allows you to add or replace widget instances with custom code.
      *
-     * @param string myName The name of the widget. e.g. 'text'.
+     * @param string myName The name of the widget. e.g. "text".
      * @param \Cake\View\Widget\WidgetInterface|array $spec Either a string class
      *   name or an object implementing the WidgetInterface.
      * @return void
@@ -2399,22 +2399,22 @@ class FormHelper : Helper
      * widgets you should use this method render the widget without the label
      * or wrapping div.
      *
-     * @param string myName The name of the widget. e.g. 'text'.
+     * @param string myName The name of the widget. e.g. "text".
      * @param array myData The data to render.
      * @return string
      */
-    function widget(string myName, array myData = []): string
+    string widget(string myName, array myData = [])
     {
         $secure = null;
-        if (isset(myData['secure'])) {
-            $secure = myData['secure'];
-            unset(myData['secure']);
+        if (isset(myData["secure"])) {
+            $secure = myData["secure"];
+            unset(myData["secure"]);
         }
         $widget = this._locator.get(myName);
         $out = $widget.render(myData, this.context());
         if (
             this.formProtector !== null &&
-            isset(myData['name']) &&
+            isset(myData["name"]) &&
             $secure !== null &&
             $secure !== self::SECURE_SKIP
         ) {
@@ -2435,7 +2435,7 @@ class FormHelper : Helper
      */
     function resetTemplates(): void
     {
-        this.setTemplates(this._defaultConfig['templates']);
+        this.setTemplates(this._defaultConfig["templates"]);
     }
 
     /**
@@ -2451,7 +2451,7 @@ class FormHelper : Helper
     /**
      * Gets the value sources.
      *
-     * Returns a list, but at least one item, of valid sources, such as: `'context'`, `'data'` and `'query'`.
+     * Returns a list, but at least one item, of valid sources, such as: `"context"`, `"data"` and `"query"`.
      *
      * @return array<string> List of value sources.
      */
@@ -2473,9 +2473,9 @@ class FormHelper : Helper
 
         if ($diff) {
             throw new InvalidArgumentException(sprintf(
-                'Invalid value source(s): %s. Valid values are: %s',
-                implode(', ', $diff),
-                implode(', ', this.supportedValueSources)
+                "Invalid value source(s): %s. Valid values are: %s",
+                implode(", ", $diff),
+                implode(", ", this.supportedValueSources)
             ));
         }
     }
@@ -2509,11 +2509,11 @@ class FormHelper : Helper
      */
     auto getSourceValue(string myFieldname, array myOptions = []) {
         myValueMap = [
-            'data': 'getData',
-            'query': 'getQuery',
+            "data": "getData",
+            "query": "getQuery",
         ];
         foreach (this.getValueSources() as myValuesSource) {
-            if (myValuesSource === 'context') {
+            if (myValuesSource === "context") {
                 $val = this._getContext().val(myFieldname, myOptions);
                 if ($val !== null) {
                     return $val;

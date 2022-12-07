@@ -17,7 +17,7 @@ class UrlHelper : Helper
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        'assetUrlClassName': Asset::class,
+        "assetUrlClassName": Asset::class,
     ];
 
     /**
@@ -37,12 +37,12 @@ class UrlHelper : Helper
     function initialize(array myConfig): void
     {
         super.initialize(myConfig);
-        $engineClassConfig = this.getConfig('assetUrlClassName');
+        $engineClassConfig = this.getConfig("assetUrlClassName");
 
         /** @psalm-var class-string<\Cake\Routing\Asset>|null $engineClass */
-        $engineClass = App::className($engineClassConfig, 'Routing');
+        $engineClass = App::className($engineClassConfig, "Routing");
         if ($engineClass === null) {
-            throw new CakeException(sprintf('Class for %s could not be found', $engineClassConfig));
+            throw new CakeException(sprintf("Class for %s could not be found", $engineClassConfig));
         }
 
         this._assetUrlClassName = $engineClass;
@@ -63,16 +63,16 @@ class UrlHelper : Helper
      * @param array<string, mixed> myOptions Array of options.
      * @return string Full translated URL with base path.
      */
-    function build(myUrl = null, array myOptions = []): string
+    string build(myUrl = null, array myOptions = [])
     {
         $defaults = [
-            'fullBase': false,
-            'escape': true,
+            "fullBase": false,
+            "escape": true,
         ];
         myOptions += $defaults;
 
-        myUrl = Router::url(myUrl, myOptions['fullBase']);
-        if (myOptions['escape']) {
+        myUrl = Router::url(myUrl, myOptions["fullBase"]);
+        if (myOptions["escape"]) {
             /** @var string myUrl */
             myUrl = h(myUrl);
         }
@@ -96,9 +96,9 @@ class UrlHelper : Helper
      * @return string Full translated URL with base path.
      * @see \Cake\Routing\Router::pathUrl()
      */
-    function buildFromPath(string myPath, array myParams = [], array myOptions = []): string
+    string buildFromPath(string myPath, array myParams = [], array myOptions = [])
     {
-        return this.build(['_path': myPath] + myParams, myOptions);
+        return this.build(["_path": myPath] + myParams, myOptions);
     }
 
     /**
@@ -114,13 +114,13 @@ class UrlHelper : Helper
      *   `plugin` False value will prevent parsing path as a plugin
      *   `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *        Set to false to skip timestamp generation.
-     *        Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *        Set to true to apply timestamps when debug is true. Set to "force" to always
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    function image(string myPath, array myOptions = []): string
+    string image(string myPath, array myOptions = [])
     {
-        myOptions += ['theme': this._View.getTheme()];
+        myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::imageUrl(myPath, myOptions));
     }
@@ -139,13 +139,13 @@ class UrlHelper : Helper
      *   `plugin` False value will prevent parsing path as a plugin
      *   `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *        Set to false to skip timestamp generation.
-     *        Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *        Set to true to apply timestamps when debug is true. Set to "force" to always
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    function css(string myPath, array myOptions = []): string
+    string css(string myPath, array myOptions = [])
     {
-        myOptions += ['theme': this._View.getTheme()];
+        myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::cssUrl(myPath, myOptions));
     }
@@ -164,13 +164,13 @@ class UrlHelper : Helper
      *   `plugin` False value will prevent parsing path as a plugin
      *   `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *        Set to false to skip timestamp generation.
-     *        Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *        Set to true to apply timestamps when debug is true. Set to "force" to always
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    function script(string myPath, array myOptions = []): string
+    string script(string myPath, array myOptions = [])
     {
-        myOptions += ['theme': this._View.getTheme()];
+        myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::scriptUrl(myPath, myOptions));
     }
@@ -190,30 +190,30 @@ class UrlHelper : Helper
      * - `plugin` False value will prevent parsing path as a plugin
      * - `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *    Set to false to skip timestamp generation.
-     *    Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *    Set to true to apply timestamps when debug is true. Set to "force" to always
      *    enable timestamping regardless of debug value.
      *
      * @param string myPath Path string or URL array
      * @param array<string, mixed> myOptions Options array.
      * @return string Generated URL
      */
-    function assetUrl(string myPath, array myOptions = []): string
+    string assetUrl(string myPath, array myOptions = [])
     {
-        myOptions += ['theme': this._View.getTheme()];
+        myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::url(myPath, myOptions));
     }
 
     /**
      * Adds a timestamp to a file based resource based on the value of `Asset.timestamp` in
-     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp === 'force'
+     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp === "force"
      * a timestamp will be added.
      *
      * @param string myPath The file path to timestamp, the path must be inside `App.wwwRoot` in Configure.
      * @param string|bool $timestamp If set will overrule the value of `Asset.timestamp` in Configure.
      * @return string Path with a timestamp added, or not.
      */
-    function assetTimestamp(string myPath, $timestamp = null): string
+    string assetTimestamp(string myPath, $timestamp = null)
     {
         return h(this._assetUrlClassName::assetTimestamp(myPath, $timestamp));
     }
@@ -224,9 +224,9 @@ class UrlHelper : Helper
      * @param string myfile The file to create a webroot path to.
      * @return string Web accessible path to file.
      */
-    function webroot(string myfile): string
+    string webroot(string myfile)
     {
-        myOptions = ['theme': this._View.getTheme()];
+        myOptions = ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::webroot(myfile, myOptions));
     }

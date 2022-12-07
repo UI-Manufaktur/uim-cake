@@ -162,7 +162,7 @@ class ViewBlock
      * @param string $default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    auto get(string myName, string $default = ""): string
+    string get(string myName, string $default = "")
     {
         return this._blocks[myName] ?? $default;
     }

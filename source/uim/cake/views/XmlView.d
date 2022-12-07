@@ -92,7 +92,7 @@ class XmlView : SerializedView
     /**
      * @inheritDoc
      */
-    protected auto _serialize($serialize): string
+    protected string _serialize($serialize)
     {
         $rootNode = this.getConfig("rootNode", "response");
 

@@ -37,7 +37,7 @@ class ButtonWidget : WidgetInterface
      *   do not escape their contents by default.
      * - `escapeTitle` Set to false to disable escaping of button text.
      * - `escape` Set to false to disable escaping of attributes.
-     * - `type` The button type defaults to 'submit'.
+     * - `type` The button type defaults to "submit".
      *
      * Any other keys provided in myData will be converted into HTML attributes.
      *
@@ -48,27 +48,27 @@ class ButtonWidget : WidgetInterface
     function render(array myData, IContext $context): string
     {
         myData += [
-            'text': '',
-            'type': 'submit',
-            'escapeTitle': true,
-            'escape': true,
-            'templateVars': [],
+            "text": "",
+            "type": "submit",
+            "escapeTitle": true,
+            "escape": true,
+            "templateVars": [],
         ];
 
-        return this._templates.format('button', [
-            'text': myData['escapeTitle'] ? h(myData['text']) : myData['text'],
-            'templateVars': myData['templateVars'],
-            'attrs': this._templates.formatAttributes(myData, ['text', 'escapeTitle']),
+        return this._templates.format("button", [
+            "text": myData["escapeTitle"] ? h(myData["text"]) : myData["text"],
+            "templateVars": myData["templateVars"],
+            "attrs": this._templates.formatAttributes(myData, ["text", "escapeTitle"]),
         ]);
     }
 
 
     function secureFields(array myData): array
     {
-        if (!isset(myData['name']) || myData['name'] == "") {
+        if (!isset(myData["name"]) || myData["name"] == "") {
             return [];
         }
 
-        return [myData['name']];
+        return [myData["name"]];
     }
 }

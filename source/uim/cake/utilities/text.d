@@ -568,7 +568,7 @@ class Text {
      * @return string Trimmed string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#truncating-text
      */
-    static function truncate(string $text, int $length = 100, array myOptions = []): string
+    static string truncate(string $text, int $length = 100, array myOptions = [])
     {
         $default = [
             "ellipsis": "...", 
@@ -672,7 +672,7 @@ class Text {
      * @return string Trimmed string.
      * @see \Cake\Utility\Text::truncate()
      */
-    static function truncateByWidth(string $text, int $length = 100, array myOptions = []): string
+    static string truncateByWidth(string $text, int $length = 100, array myOptions = [])
     {
         return static::truncate($text, $length, ["trimWidth":true] + myOptions);
     }
@@ -728,7 +728,7 @@ class Text {
      * @param array<string, mixed> myOptions An array of options.
      * @return string
      */
-    protected static auto _substr(string $text, int $start, Nullable!int $length, array myOptions): string
+    protected static string _substr(string $text, int $start, Nullable!int $length, array myOptions)
     {
         if (empty(myOptions["trimWidth"])) {
             $substr = "mb_substr";
@@ -816,7 +816,7 @@ class Text {
      * @param string $text The input text
      * @return string
      */
-    protected static auto _removeLastWord(string $text): string
+    protected static string _removeLastWord(string $text)
     {
         $spacepos = mb_strrpos($text, " ");
 
@@ -846,7 +846,7 @@ class Text {
      * @return string Modified string
      * @link https://book.UIM.org/4/en/core-libraries/text.html#extracting-an-excerpt
      */
-    static function excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "..."): string
+    static string excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "...")
     {
         if (empty($text) || empty($phrase)) {
             return static::truncate($text, $radius * 2, ["ellipsis":$ellipsis]);
@@ -889,7 +889,7 @@ class Text {
      * @return string The glued together string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
-    static function toList(array $list, Nullable!string $and = null, string $separator = ", "): string
+    static string toList(array $list, Nullable!string $and = null, string $separator = ", ")
     {
         if ($and === null) {
             $and = __d("cake", "and");
@@ -968,7 +968,7 @@ class Text {
      * @param array $array Array
      * @return string
      */
-    static function ascii(array $array): string
+    static string ascii(array $array)
     {
         $ascii = "";
 
@@ -1054,7 +1054,7 @@ class Text {
      *
      * @return string Transliterator identifier.
      */
-    static auto getTransliteratorId(): string
+    static string getTransliteratorId()
     {
         return static::$_defaultTransliteratorId;
     }
@@ -1087,7 +1087,7 @@ class Text {
      * @return string
      * @see https://secure.php.net/manual/en/transliterator.transliterate.php
      */
-    static function transliterate(string $string, $transliterator = null): string
+    static string transliterate(string $string, $transliterator = null)
     {
         if (empty($transliterator)) {
             $transliterator = static::$_defaultTransliterator ?: static::$_defaultTransliteratorId;
@@ -1122,7 +1122,7 @@ class Text {
      * @see setTransliterator()
      * @see setTransliteratorId()
      */
-    static function slug(string $string, myOptions = []): string
+    static string slug(string $string, myOptions = [])
     {
         if (is_string(myOptions)) {
             myOptions = ["replacement":myOptions];

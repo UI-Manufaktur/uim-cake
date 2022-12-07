@@ -93,7 +93,7 @@ class JsonView : SerializedView
      * @param string|false|null $layout The layout being rendered.
      * @return string The rendered view.
      */
-    function render(Nullable!string myTemplate = null, $layout = null): string
+    string render(Nullable!string myTemplate = null, $layout = null)
     {
         $return = super.render(myTemplate, $layout);
 
@@ -112,7 +112,7 @@ class JsonView : SerializedView
     }
 
 
-    protected auto _serialize($serialize): string
+    protected string _serialize($serialize)
     {
         myData = this._dataToSerialize($serialize);
 
