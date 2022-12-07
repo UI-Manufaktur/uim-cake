@@ -1,15 +1,8 @@
 
 module uim.cakeuting.router;
 
-import uim.cake.core.Configure;
-import uim.caketps\ServerRequest;
-import uim.cakeutings\Exception\MissingRouteException;
-import uim.cakeilities.Inflector;
-use InvalidArgumentException;
-use ReflectionFunction;
-use ReflectionMethod;
-use RuntimeException;
-use Throwable;
+@safe:
+import uim.cake;
 
 /**
  * Parses the request URL into controller, action, and parameters. Uses the connected routes

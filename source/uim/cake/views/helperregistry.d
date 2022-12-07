@@ -1,10 +1,7 @@
-module uim.cakeews;
+module uim.cake.views;
 
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakeews\Exception\MissingHelperException;
+@safe:
+import uim.cake;
 
 /**
  * HelperRegistry is used as a registry for loaded helpers and handles loading

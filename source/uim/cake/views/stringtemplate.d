@@ -1,10 +1,7 @@
-module uim.cakeews;
+module uim.cake.views;
 
-import uim.cake.core.Configure\Engine\PhpConfig;
-import uim.cake.core.exceptions\CakeException;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cakeilities.Hash;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Provides an interface for registering and inserting

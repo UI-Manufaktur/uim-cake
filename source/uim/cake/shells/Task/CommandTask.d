@@ -1,27 +1,12 @@
 
 
-/**
+module uim.cake.shells.Task;
 
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         2.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeell\Task;
+@safe:
+import uim.cake;
 
-import uim.cake.console.Shell;
-import uim.cake.core.App;
-import uim.cake.core.Plugin;
-import uim.cakelesystem\Filesystem;
-import uim.cakeilities.Inflector;
-
-/**
- * Base class for Shell Command reflection.
- *
- * @internal
- */
-class CommandTask : Shell
-{
+// Base class for Shell Command reflection.
+class CommandTask : Shell {
     /**
      * Gets the shell command listing.
      *

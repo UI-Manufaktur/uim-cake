@@ -1,4 +1,4 @@
-module uim.cakeews;
+module uim.cake.views;
 
 /**
  * Adds string template functionality to any class by providing methods to

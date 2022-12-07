@@ -1,30 +1,7 @@
-
-
-module uim.cakeews;
+module uim.cake.views;
 
 @safe:
-import uim.cake
-
-/* import uim.cake.caches\Cache;
-import uim.cake.core.App;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.core.Plugin;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakeents\EventManager;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakegs\LogTrait;
-import uim.cakeutings\Router;
-import uim.cakeility\Inflector;
-import uim.cakeews.exceptions\MissingElementException;
-import uim.cakeews.exceptions\MissingLayoutException;
-import uim.cakeews.exceptions\MissingTemplateException;
-use InvalidArgumentException;
-use LogicException;
-use RuntimeException;
-use Throwable;
- */
+import uim.cake;
 /**
  * View, the V in the MVC triad. View interacts with Helpers and view variables passed
  * in from the controller to render the results of the controller action. Often this is HTML,

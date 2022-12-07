@@ -1,5 +1,5 @@
 
-module uim.cakeell\Helper;
+module uim.cake.shells.Helper;
 
 import uim.cake.console.Helper;
 use RuntimeException;

@@ -1,14 +1,7 @@
 module uim.cake.orm.behaviors;
 
-import uim.cake.I18n\I18n;
-import uim.cake.orm.behaviors;
-import uim.cake.orm.behaviors\Translate\EavStrategy;
-import uim.cake.orm.behaviors\Translate\TranslateStrategyInterface;
-import uim.cake.orm.Marshaller;
-import uim.cake.orm.PropertyMarshalInterface;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Inflector;
+@safe:
+import uim.cake;
 
 /**
  * This behavior provides a way to translate dynamic data by keeping translations

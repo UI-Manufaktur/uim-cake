@@ -1,16 +1,7 @@
 module uim.cake.orm.behaviors\Translate;
 
-use ArrayObject;
-import uim.cake.collections\Collection;
-import uim.cake.collections\ICollection;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.datasources\IEntity;
-import uim.cake.events\IEvent;
-import uim.cake.orm.Entity;
-import uim.cake.orm.locators\LocatorAwareTrait;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Hash;
+@safe:
+import uim.cake;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations

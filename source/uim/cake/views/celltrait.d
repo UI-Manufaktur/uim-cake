@@ -1,8 +1,8 @@
-module uim.cakeews;
+module uim.cake.views;
 
 import uim.cake.core.App;
 import uim.cakeilities.Inflector;
-import uim.cakeews\Exception\MissingCellException;
+import uim.cake.views.Exception\MissingCellException;
 
 /**
  * Provides cell() method for usage in Controller and View classes.

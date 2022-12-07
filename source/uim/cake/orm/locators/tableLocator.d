@@ -1,14 +1,7 @@
 module uim.cake.orm.locators;
 
-import uim.cake.core.App;
-import uim.cake.datasources\ConnectionManager;
-import uim.cake.datasources\Locator\AbstractLocator;
-import uim.cake.datasources\IRepository;
-import uim.cake.orm.associationsCollection;
-import uim.cake.orm.Exception\MissingTableClassException;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Inflector;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Provides a default registry/factory for Table objects.

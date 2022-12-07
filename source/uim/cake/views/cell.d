@@ -1,4 +1,4 @@
-module uim.cakeews;
+module uim.cake.views;
 
 use BadMethodCallException;
 import uim.cake.caches\Cache;
@@ -10,8 +10,8 @@ import uim.caketps\Response;
 import uim.caketps\ServerRequest;
 import uim.cakem.Locator\LocatorAwareTrait;
 import uim.cakeilities.Inflector;
-import uim.cakeews\Exception\MissingCellTemplateException;
-import uim.cakeews\Exception\MissingTemplateException;
+import uim.cake.views.Exception\MissingCellTemplateException;
+import uim.cake.views.Exception\MissingTemplateException;
 use Error;
 use Exception;
 use ReflectionException;
