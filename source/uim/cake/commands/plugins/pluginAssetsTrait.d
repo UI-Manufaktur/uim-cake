@@ -35,7 +35,7 @@ trait PluginAssetsTrait
      */
     protected auto _list(Nullable!string myName = null): array
     {
-        if (myName === null) {
+        if (myName == null) {
             myPluginsList = Plugin::loaded();
         } else {
             myPluginsList = [myName];
@@ -160,7 +160,7 @@ trait PluginAssetsTrait
 
         if (is_link($dest)) {
             // phpcs:ignore
-            $success = DS === "\\" ? @rmdir($dest) : @unlink($dest);
+            $success = DS == "\\" ? @rmdir($dest) : @unlink($dest);
             if ($success) {
                 this.io.out("Unlinked " . $dest);
 

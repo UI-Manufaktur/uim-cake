@@ -53,7 +53,7 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
     function create(IServerRequest myRequest): Controller
     {
         myClassName = this.getControllerClass(myRequest);
-        if (myClassName === null) {
+        if (myClassName == null) {
             throw this.missingController(myRequest);
         }
 
@@ -185,7 +185,7 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
                 if (myType instanceof ReflectionNamedType) {
                     myTypedArgument = this.coerceStringToType($argument, myType);
 
-                    if (myTypedArgument === null) {
+                    if (myTypedArgument == null) {
                         throw new InvalidParameterException([
                             "template":"failed_coercion",
                             "passed":$argument,
@@ -244,7 +244,7 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
             case "int":
                 return ctype_digit($argument) ? (int)$argument : null;
             case "bool":
-                return $argument === "0" ? false : ($argument === "1" ? true : null);
+                return $argument == "0" ? false : ($argument == "1" ? true : null);
             case "array":
                 return explode(",", $argument);
         }
@@ -278,7 +278,7 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
                     "Prefix inflection will be removed in 5.0"
                 );
 
-                if (strpos($prefix, "/") === false) {
+                if (strpos($prefix, "/") == false) {
                     $module .= "/" . Inflector::camelize($prefix);
                 } else {
                     $prefixes = array_map(
@@ -302,7 +302,7 @@ class ControllerFactory : IControllerFactory, RequestHandlerInterface
             strpos($controller, "\\") !== false ||
             strpos($controller, "/") !== false ||
             strpos($controller, ".") !== false ||
-            $firstChar === strtolower($firstChar)
+            $firstChar == strtolower($firstChar)
         ) {
             throw this.missingController(myRequest);
         }

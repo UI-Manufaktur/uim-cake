@@ -76,7 +76,7 @@ class ConsoleInputArgument
      * @param \Cake\Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      */
     bool isEqualTo(ConsoleInputArgument $argument) {
-        return this.usage() === $argument.usage();
+        return this.usage() == $argument.usage();
     }
 
     /**

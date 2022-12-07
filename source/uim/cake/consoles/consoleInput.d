@@ -31,7 +31,7 @@ class ConsoleInput
      * @param string $handle The location of the stream to use as input.
      */
     this(string $handle = "php://stdin") {
-        this._canReadline = (extension_loaded("readline") && $handle === "php://stdin");
+        this._canReadline = (extension_loaded("readline") && $handle == "php://stdin");
         this._input = fopen($handle, "rb");
     }
 
@@ -51,7 +51,7 @@ class ConsoleInput
             $line = fgets(this._input);
         }
 
-        if ($line === false) {
+        if ($line == false) {
             return null;
         }
 

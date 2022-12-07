@@ -169,11 +169,11 @@ class Controller : IEventListener, IEventDispatcher
     ) {
         if (myName !== null) {
             this.name = myName;
-        } elseif (this.name === null && myRequest) {
+        } elseif (this.name == null && myRequest) {
             this.name = myRequest.getParam("controller");
         }
 
-        if (this.name === null) {
+        if (this.name == null) {
             [, myName] = moduleSplit(static::class);
             this.name = substr(myName, 0, -10);
         }
@@ -191,7 +191,7 @@ class Controller : IEventListener, IEventDispatcher
             this.modelClass = this.defaultTable;
         }
 
-        if (this.modelClass === null) {
+        if (this.modelClass == null) {
             myPlugin = this.request.getParam("plugin");
             myModelClass = (myPlugin ? myPlugin . "." : "") . this.name;
             this._setModelClass(myModelClass);
@@ -247,7 +247,7 @@ class Controller : IEventListener, IEventDispatcher
             return this._components = $components;
         }
 
-        if (this._components === null) {
+        if (this._components == null) {
             this._components = new ComponentRegistry(this);
         }
 
@@ -286,13 +286,13 @@ class Controller : IEventListener, IEventDispatcher
      */
     auto __get(string myName) {
         if (!empty(this.modelClass)) {
-            if (strpos(this.modelClass, "\\") === false) {
+            if (strpos(this.modelClass, "\\") == false) {
                 [, myClass] = pluginSplit(this.modelClass, true);
             } else {
                 myClass = App::shortName(this.modelClass, "Model/Table", "Table");
             }
 
-            if (myClass === myName) {
+            if (myClass == myName) {
                 return this.loadModel();
             }
         }
@@ -320,7 +320,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param mixed myValue Value to set.
      */
     void __set(string propertyName, myValue) {
-        if (propertyName === "components") {
+        if (propertyName == "components") {
             triggerWarning(
                 "Support for loading components using $components property is removed. " .
                 "Use this.loadComponent() instead in initialize()."
@@ -329,7 +329,7 @@ class Controller : IEventListener, IEventDispatcher
             return;
         }
 
-        if (propertyName === "helpers") {
+        if (propertyName == "helpers") {
             triggerWarning(
                 "Support for loading helpers using $helpers property is removed. " .
                 "Use this.viewBuilder().setHelpers() instead."
@@ -513,7 +513,7 @@ class Controller : IEventListener, IEventDispatcher
                 getTypeName(myResult)
             ));
         }
-        if (myResult === null && this.isAutoRenderEnabled()) {
+        if (myResult == null && this.isAutoRenderEnabled()) {
             myResult = this.render();
         }
         if (myResult) {
@@ -721,7 +721,7 @@ class Controller : IEventListener, IEventDispatcher
             return this.response;
         }
 
-        if (myBuilder.getTemplate() === null) {
+        if (myBuilder.getTemplate() == null) {
             myBuilder.setTemplate(this.request.getParam("action"));
         }
 
@@ -758,10 +758,10 @@ class Controller : IEventListener, IEventDispatcher
      */
     string referer($default = "/", bool $local = true) {
         $referer = this.request.referer($local);
-        if ($referer === null) {
+        if ($referer == null) {
             myUrl = Router::url($default, !$local);
             $base = this.request.getAttribute("base");
-            if ($local && $base && strpos(myUrl, $base) === 0) {
+            if ($local && $base && strpos(myUrl, $base) == 0) {
                 myUrl = substr(myUrl, strlen($base));
                 if (myUrl[0] !== "/") {
                     myUrl = "/" . myUrl;
@@ -796,7 +796,7 @@ class Controller : IEventListener, IEventDispatcher
             myTable = $object;
         }
 
-        if (is_string($object) || $object === null) {
+        if (is_string($object) || $object == null) {
             $try = [$object, this.modelClass];
             foreach ($try as myTableName) {
                 if (empty(myTableName)) {
@@ -838,7 +838,7 @@ class Controller : IEventListener, IEventDispatcher
             return false;
         }
 
-        return $method.isPublic() && $method.getName() === $action;
+        return $method.isPublic() && $method.getName() == $action;
     }
 
     /**

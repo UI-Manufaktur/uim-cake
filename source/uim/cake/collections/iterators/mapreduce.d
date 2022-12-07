@@ -71,7 +71,7 @@ class MapReduce : IteratorAggregate {
      * ```
      *  myData = new \ArrayObject([1, 2, 3, 4, 5, 3]);
      *  $mapper = function (myValue, myKey, $mr) {
-     *      myType = (myValue % 2 === 0) ? "even" : "odd";
+     *      myType = (myValue % 2 == 0) ? "even" : "odd";
      *      $mr.emitIntermediate(myValue, myType);
      *  };
      *

@@ -655,9 +655,9 @@ class ConsoleOptionParser
             if (isset(this._subcommands[$token])) {
                 continue;
             }
-            if (substr($token, 0, 2) === "--") {
+            if (substr($token, 0, 2) == "--") {
                 myParams = this._parseLongOption($token, myParams);
-            } elseif (substr($token, 0, 1) === "-") {
+            } elseif (substr($token, 0, 1) == "-") {
                 myParams = this._parseShortOption($token, myParams);
             } else {
                 $args = this._parseArg($token, $args);
@@ -704,14 +704,14 @@ class ConsoleOptionParser
      * @return string Generated help.
      */
     function help(Nullable!string $subcommand = null, string $format = "text", int $width = 72) {
-        if ($subcommand === null) {
+        if ($subcommand == null) {
             $formatter = new HelpFormatter(this);
             $formatter.setAlias(this.rootName);
 
-            if ($format === "text") {
+            if ($format == "text") {
                 return $formatter.text($width);
             }
-            if ($format === "xml") {
+            if ($format == "xml") {
                 return (string)$formatter.xml();
             }
         }
@@ -867,10 +867,10 @@ class ConsoleOptionParser
      * @param string myName The name of the option.
      */
     protected bool _optionExists(string myName) {
-        if (substr(myName, 0, 2) === "--") {
+        if (substr(myName, 0, 2) == "--") {
             return isset(this._options[substr(myName, 2)]);
         }
-        if (myName[0] === "-" && myName[1] !== "-") {
+        if (myName[0] == "-" && myName[1] !== "-") {
             return isset(this._shortOptions[myName[1]]);
         }
 

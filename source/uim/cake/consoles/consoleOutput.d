@@ -145,9 +145,9 @@ class ConsoleOutput
 
         if (
             (
-                DIRECTORY_SEPARATOR === "\\" &&
-                strpos(strtolower(php_uname("v")), "windows 10") === false &&
-                strpos(strtolower((string)env("SHELL")), "bash.exe") === false &&
+                DIRECTORY_SEPARATOR == "\\" &&
+                strpos(strtolower(php_uname("v")), "windows 10") == false &&
+                strpos(strtolower((string)env("SHELL")), "bash.exe") == false &&
                 !(bool)env("ANSICON") &&
                 env("ConEmuANSI") !== "ON"
             ) ||
@@ -186,10 +186,10 @@ class ConsoleOutput
      * @return string String with color codes added.
      */
     string styleText(string $text) {
-        if (this._outputAs === static::RAW) {
+        if (this._outputAs == static::RAW) {
             return $text;
         }
-        if (this._outputAs === static::PLAIN) {
+        if (this._outputAs == static::PLAIN) {
             $tags = implode("|", array_keys(static::$_styles));
 
             return preg_replace("#</?(?:" . $tags . ")>#", "", $text);

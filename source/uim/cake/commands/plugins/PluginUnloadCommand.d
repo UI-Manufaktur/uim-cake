@@ -62,7 +62,7 @@ class PluginUnloadCommand : Command {
         myContents = file_get_contents($app);
         $newContent = preg_replace(myFinder, "", myContents);
 
-        if ($newContent === myContents) {
+        if ($newContent == myContents) {
             return false;
         }
 

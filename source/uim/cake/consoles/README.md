@@ -101,7 +101,7 @@ class HelloCommand : BaseCommand {
     auto execute(Arguments $args, ConsoleIo $io): Nullable!int
     {
         $color = $args.getOption("color");
-        if ($color === "none") {
+        if ($color == "none") {
             $io.out("Hello {$args.getArgument("name")}");
         } elseif ($color == "green") {
             $io.out("<success>Hello {$args.getArgument("name")}</success>");

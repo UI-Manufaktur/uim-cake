@@ -69,7 +69,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware
             }
             $module = str_replace("\\", "/", $matches[1]);
             $prefix = "App";
-            if ($module === "Cake") {
+            if ($module == "Cake") {
                 $prefix = "CakePHP";
             } elseif (in_array($module, myPlugins, true)) {
                 $prefix = $module;

@@ -73,7 +73,7 @@ class Arguments
      */
 <<<<<<< HEAD
     bool hasArgumentAt(int $index) {
-=======
+=====
     bool hasArgumentAt(int $index) {
 >>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         return isset(this.args[$index]);
@@ -86,11 +86,11 @@ class Arguments
      */
 <<<<<<< HEAD
     bool hasArgument(string myName) {
-=======
+=====
     bool hasArgument(string myName) {
 >>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         $offset = array_search(myName, this.argNames, true);
-        if ($offset === false) {
+        if ($offset == false) {
             return false;
         }
 
@@ -106,7 +106,7 @@ class Arguments
     auto getArgument(string myName): Nullable!string
     {
         $offset = array_search(myName, this.argNames, true);
-        if ($offset === false || !isset(this.args[$offset])) {
+        if ($offset == false || !isset(this.args[$offset])) {
             return null;
         }
 
@@ -140,7 +140,7 @@ class Arguments
      */
 <<<<<<< HEAD
     bool hasOption(string myName) {
-=======
+=====
     bool hasOption(string myName) {
 >>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         return isset(this.options[myName]);

@@ -124,18 +124,18 @@ class I18nExtractCommand : Command {
                 implode(", ", $currentPaths)
             );
             $response = $io.ask(myMessage, $defaultPaths[$defaultPathIndex] ?? "D");
-            if (strtoupper($response) === "Q") {
+            if (strtoupper($response) == "Q") {
                 $io.err("Extract Aborted");
                 this.abort();
 
                 return;
             }
-            if (strtoupper($response) === "D" && count(this._paths)) {
+            if (strtoupper($response) == "D" && count(this._paths)) {
                 $io.out();
 
                 return;
             }
-            if (strtoupper($response) === "D") {
+            if (strtoupper($response) == "D") {
                 $io.warning("No directories selected. Please choose a directory.");
             } elseif (is_dir($response)) {
                 this._paths[] = $response;
@@ -173,14 +173,14 @@ class I18nExtractCommand : Command {
         }
 
         if ($args.hasOption("extract-core")) {
-            this._extractCore = !(strtolower((string)$args.getOption("extract-core")) === "no");
+            this._extractCore = !(strtolower((string)$args.getOption("extract-core")) == "no");
         } else {
             $response = $io.askChoice(
                 "Would you like to extract the messages from the UIM core?",
                 ["y", "n"],
                 "n"
             );
-            this._extractCore = strtolower($response) === "y";
+            this._extractCore = strtolower($response) == "y";
         }
 
         if ($args.hasOption("exclude-plugins") && this._isExtractingApp()) {
@@ -208,7 +208,7 @@ class I18nExtractCommand : Command {
                     myMessage,
                     $localePaths[0]
                 );
-                if (strtoupper($response) === "Q") {
+                if (strtoupper($response) == "Q") {
                     $io.err("Extract Aborted");
 
                     return static::CODE_ERROR;
@@ -228,7 +228,7 @@ class I18nExtractCommand : Command {
         }
 
         if ($args.hasOption("merge")) {
-            this._merge = !(strtolower((string)$args.getOption("merge")) === "no");
+            this._merge = !(strtolower((string)$args.getOption("merge")) == "no");
         } else {
             $io.out();
             $response = $io.askChoice(
@@ -236,7 +236,7 @@ class I18nExtractCommand : Command {
                 ["y", "n"],
                 "n"
             );
-            this._merge = strtolower($response) === "y";
+            this._merge = strtolower($response) == "y";
         }
 
         this._markerError = (bool)$args.getOption("marker-error");
@@ -359,7 +359,7 @@ class I18nExtractCommand : Command {
 <<<<<<< HEAD
             "help":"Extract messages from the CakePHP core libraries.",
             "choices":["yes", "no"],
-=======
+=====
             "help": "Extract messages from the UIM core libraries.",
             "choices": ["yes", "no"],
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
@@ -408,7 +408,7 @@ class I18nExtractCommand : Command {
 
             $code = file_get_contents(myfile);
 
-            if (preg_match($pattern, $code) === 1) {
+            if (preg_match($pattern, $code) == 1) {
                 $allTokens = token_get_all($code);
 
                 this._tokens = [];
@@ -451,14 +451,14 @@ class I18nExtractCommand : Command {
             }
 
             [myType, $string, $line] = myCountToken;
-            if ((myType === T_STRING) && ($string === $functionName) && ($firstParenthesis === "(")) {
+            if ((myType == T_STRING) && ($string == $functionName) && ($firstParenthesis == "(")) {
                 $position = myCount;
                 $depth = 0;
 
                 while (!$depth) {
-                    if (this._tokens[$position] === "(") {
+                    if (this._tokens[$position] == "(") {
                         $depth++;
-                    } elseif (this._tokens[$position] === ")") {
+                    } elseif (this._tokens[$position] == ")") {
                         $depth--;
                     }
                     $position++;
@@ -467,7 +467,7 @@ class I18nExtractCommand : Command {
                 $mapCount = count($map);
                 $strings = this._getStrings($position, $mapCount);
 
-                if ($mapCount === count($strings)) {
+                if ($mapCount == count($strings)) {
                     $singular = "";
                     $plural = $context = null;
                     $vars = array_combine($map, $strings);
@@ -533,7 +533,7 @@ class I18nExtractCommand : Command {
                     if ($context !== "") {
                         $sentence .= "msgctxt \"{$context}\"\n";
                     }
-                    if ($plural === false) {
+                    if ($plural == false) {
                         $sentence .= "msgid \"{$msgid}\"\n";
                         $sentence .= "msgstr \"\"\n\n";
                     } else {
@@ -598,26 +598,26 @@ class I18nExtractCommand : Command {
             myfilename = str_replace("/", "_", $domain) . ".pot";
             $outputPath = this._output . myfilename;
 
-            if (this.checkUnchanged($outputPath, $headerLength, $output) === true) {
+            if (this.checkUnchanged($outputPath, $headerLength, $output) == true) {
                 $io.out(myfilename . " is unchanged. Skipping.");
                 continue;
             }
 
             $response = "";
-            while ($overwriteAll === false && file_exists($outputPath) && strtoupper($response) !== "Y") {
+            while ($overwriteAll == false && file_exists($outputPath) && strtoupper($response) !== "Y") {
                 $io.out();
                 $response = $io.askChoice(
                     sprintf("Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll", myfilename),
                     ["y", "n", "a"],
                     "y"
                 );
-                if (strtoupper($response) === "N") {
+                if (strtoupper($response) == "N") {
                     $response = "";
                     while (!$response) {
                         $response = $io.ask("What would you like to name this file?", "new_" . myfilename);
                         myfilename = $response;
                     }
-                } elseif (strtoupper($response) === "A") {
+                } elseif (strtoupper($response) == "A") {
                     $overwriteAll = true;
                 }
             }
@@ -633,7 +633,7 @@ class I18nExtractCommand : Command {
      * @return string Translation template header
      */
     protected string _writeHeader(string $domain) {
-        $projectIdVersion = $domain === "cake" ? "UIM " . Configure::version() : "PROJECT VERSION";
+        $projectIdVersion = $domain == "cake" ? "UIM " . Configure::version() : "PROJECT VERSION";
 
         $output = "# LANGUAGE translation of UIM Application\n";
         $output .= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
@@ -673,7 +673,7 @@ class I18nExtractCommand : Command {
         $oldChecksum = sha1((string)substr($oldFileContent, $headerLength));
         $newChecksum = sha1((string)substr($newFileContent, $headerLength));
 
-        return $oldChecksum === $newChecksum;
+        return $oldChecksum == $newChecksum;
     }
 
     /**
@@ -689,27 +689,27 @@ class I18nExtractCommand : Command {
         myCount = 0;
         while (
             myCount < myTarget
-            && (this._tokens[$position] === ","
-                || this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING
-                || this._tokens[$position][0] === T_LNUMBER
+            && (this._tokens[$position] == ","
+                || this._tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING
+                || this._tokens[$position][0] == T_LNUMBER
             )
         ) {
             myCount = count($strings);
-            if (this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING && this._tokens[$position + 1] === ".") {
+            if (this._tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING && this._tokens[$position + 1] == ".") {
                 $string = "";
                 while (
-                    this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING
-                    || this._tokens[$position] === "."
+                    this._tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING
+                    || this._tokens[$position] == "."
                 ) {
-                    if (this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING) {
+                    if (this._tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING) {
                         $string .= this._formatString(this._tokens[$position][1]);
                     }
                     $position++;
                 }
                 $strings[] = $string;
-            } elseif (this._tokens[$position][0] === T_CONSTANT_ENCAPSED_STRING) {
+            } elseif (this._tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING) {
                 $strings[] = this._formatString(this._tokens[$position][1]);
-            } elseif (this._tokens[$position][0] === T_LNUMBER) {
+            } elseif (this._tokens[$position][0] == T_LNUMBER) {
                 $strings[] = this._tokens[$position][1];
             }
             $position++;
@@ -727,7 +727,7 @@ class I18nExtractCommand : Command {
     protected string _formatString(string $string) {
         $quote = substr($string, 0, 1);
         $string = substr($string, 1, -1);
-        if ($quote === """) {
+        if ($quote == """) {
             $string = stripcslashes($string);
         } else {
             $string = strtr($string, ["\\"":""", "\\\\":"\\"]);
@@ -747,7 +747,7 @@ class I18nExtractCommand : Command {
      * @param int myCount Count
      */
     protected void _markerError($io, string myfile, int $line, string $marker, int myCount) {
-        if (strpos(this._file, CAKE_CORE_INCLUDE_PATH) === false) {
+        if (strpos(this._file, CAKE_CORE_INCLUDE_PATH) == false) {
             this._countMarkerError++;
         }
 
@@ -765,11 +765,11 @@ class I18nExtractCommand : Command {
                 $io.err(this._tokens[myCount][1], 0);
             } else {
                 $io.err(this._tokens[myCount], 0);
-                if (this._tokens[myCount] === "(") {
+                if (this._tokens[myCount] == "(") {
                     $parenthesis++;
                 }
 
-                if (this._tokens[myCount] === ")") {
+                if (this._tokens[myCount] == ")") {
                     $parenthesis--;
                 }
             }
@@ -817,7 +817,7 @@ class I18nExtractCommand : Command {
      */
     protected bool _isExtractingApp() {
         /** @psalm-suppress UndefinedConstant */
-        return this._paths === [APP];
+        return this._paths == [APP];
     }
 
     /**

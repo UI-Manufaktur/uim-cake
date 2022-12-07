@@ -51,13 +51,13 @@ class SortIterator : Collection
         myResults = [];
         foreach (myItems as myKey: $val) {
             $val = $callback($val);
-            if ($val instanceof IDateTime && myType === \SORT_NUMERIC) {
+            if ($val instanceof IDateTime && myType == \SORT_NUMERIC) {
                 $val = $val.format("U");
             }
             myResults[myKey] = $val;
         }
 
-        $dir === SORT_DESC ? arsort(myResults, myType) : asort(myResults, myType);
+        $dir == SORT_DESC ? arsort(myResults, myType) : asort(myResults, myType);
 
         foreach (array_keys(myResults) as myKey) {
             myResults[myKey] = myItems[myKey];

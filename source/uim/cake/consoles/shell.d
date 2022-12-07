@@ -235,7 +235,7 @@ class Shell {
      * @return true
      */
     bool loadTasks() {
-        if (this.tasks === true || empty(this.tasks)) {
+        if (this.tasks == true || empty(this.tasks)) {
             return true;
         }
         this._taskMap = this.Tasks.normalizeArray(this.tasks);
@@ -254,7 +254,7 @@ class Shell {
     protected void _validateTasks() {
         foreach (this._taskMap as $taskName: $task) {
             myClass = App::className($task["class"], "Shell/Task", "Task");
-            if (myClass === null) {
+            if (myClass == null) {
                 throw new RuntimeException(sprintf(
                     "Task `%s` not found. Maybe you made a typo or a plugin is missing or not loaded?",
                     $taskName
@@ -359,7 +359,7 @@ class Shell {
     {
         $extra = [];
 
-        if (is_string($args[0]) && count($args) === 1) {
+        if (is_string($args[0]) && count($args) == 1) {
             $args = explode(" ", $args[0]);
 
             return [$args, $extra];
@@ -431,7 +431,7 @@ class Shell {
         $method = Inflector::camelize((string)$command);
         $isMethod = this.hasMethod($method);
 
-        if ($isMethod && $autoMethod && count($subcommands) === 0) {
+        if ($isMethod && $autoMethod && count($subcommands) == 0) {
             array_shift(this.args);
             this.startup();
 
@@ -495,7 +495,7 @@ class Shell {
      */
     protected auto _displayHelp(Nullable!string $command = null) {
         $format = "text";
-        if (!empty(this.args[0]) && this.args[0] === "xml") {
+        if (!empty(this.args[0]) && this.args[0] == "xml") {
             $format = "xml";
             this._io.setOutputAs(ConsoleOutput::RAW);
         } else {
@@ -745,7 +745,7 @@ class Shell {
             return;
         }
 
-        if (DIRECTORY_SEPARATOR === "/") {
+        if (DIRECTORY_SEPARATOR == "/") {
             passthru("clear");
         } else {
             passthru("cls");
@@ -776,13 +776,13 @@ class Shell {
             this._io.out(sprintf("<warning>File `%s` exists</warning>", myPath));
             myKey = this._io.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
 
-            if (strtolower(myKey) === "q") {
+            if (strtolower(myKey) == "q") {
                 this._io.out("<error>Quitting</error>.", 2);
                 this._stop();
 
                 return false;
             }
-            if (strtolower(myKey) === "a") {
+            if (strtolower(myKey) == "a") {
                 this.params["force"] = true;
                 myKey = "y";
             }

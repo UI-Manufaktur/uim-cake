@@ -244,9 +244,9 @@ class ConsoleInputOption
             $short = "-" . this._short;
         }
         $default = this._default;
-        if ($default === true) {
+        if ($default == true) {
             $default = "true";
-        } elseif ($default === false) {
+        } elseif ($default == false) {
             $default = "false";
         }
         $option.addAttribute("short", $short);

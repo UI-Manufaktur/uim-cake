@@ -259,7 +259,7 @@ class AuthComponent : Component : IEventDispatcher
         $controller = myEvent.getSubject();
 
         $action = $controller.getRequest().getParam("action");
-        if ($action === null || !$controller.isAction($action)) {
+        if ($action == null || !$controller.isAction($action)) {
             return null;
         }
 
@@ -341,7 +341,7 @@ class AuthComponent : Component : IEventDispatcher
         }
         $response = $controller.getResponse();
         $auth = end(this._authenticateObjects);
-        if ($auth === false) {
+        if ($auth == false) {
             throw new CakeException("At least one authenticate object must be available.");
         }
         myResult = $auth.unauthenticated($controller.getRequest(), $response);
@@ -369,14 +369,14 @@ class AuthComponent : Component : IEventDispatcher
         myUrlToRedirectBackTo = this._getUrlToRedirectBackTo();
 
         $loginAction = this._config["loginAction"];
-        if (myUrlToRedirectBackTo === "/") {
+        if (myUrlToRedirectBackTo == "/") {
             return $loginAction;
         }
 
         if (is_array($loginAction)) {
             $loginAction["?"][static::QUERY_STRING_REDIRECT] = myUrlToRedirectBackTo;
         } else {
-            $char = strpos($loginAction, "?") === false ? "?" : "&";
+            $char = strpos($loginAction, "?") == false ? "?" : "&";
             $loginAction .= $char . static::QUERY_STRING_REDIRECT . "=" . urlencode(myUrlToRedirectBackTo);
         }
 
@@ -394,7 +394,7 @@ class AuthComponent : Component : IEventDispatcher
         myUrl = Router::normalize($uri.getPath());
         $loginAction = Router::normalize(this._config["loginAction"]);
 
-        return $loginAction === myUrl;
+        return $loginAction == myUrl;
     }
 
     /**
@@ -406,12 +406,12 @@ class AuthComponent : Component : IEventDispatcher
      */
     protected auto _unauthorized(Controller $controller): ?Response
     {
-        if (this._config["unauthorizedRedirect"] === false) {
+        if (this._config["unauthorizedRedirect"] == false) {
             throw new ForbiddenException(this._config["authError"]);
         }
 
         this.flash(this._config["authError"]);
-        if (this._config["unauthorizedRedirect"] === true) {
+        if (this._config["unauthorizedRedirect"] == true) {
             $default = "/";
             if (!empty(this._config["loginRedirect"])) {
                 $default = this._config["loginRedirect"];
@@ -484,7 +484,7 @@ class AuthComponent : Component : IEventDispatcher
             this.constructAuthorize();
         }
         foreach (this._authorizeObjects as $authorizer) {
-            if ($authorizer.authorize(myUser, myRequest) === true) {
+            if ($authorizer.authorize(myUser, myRequest) == true) {
                 this._authorizationProvider = $authorizer;
 
                 return true;
@@ -520,7 +520,7 @@ class AuthComponent : Component : IEventDispatcher
                 myClass = myAlias;
             }
             myClassName = App::className(myClass, "Auth", "Authorize");
-            if (myClassName === null) {
+            if (myClassName == null) {
                 throw new CakeException(sprintf("Authorization adapter "%s" was not found.", myClass));
             }
             if (!method_exists(myClassName, "authorize")) {
@@ -568,7 +568,7 @@ class AuthComponent : Component : IEventDispatcher
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-public
      */
     void allow($actions = null) {
-        if ($actions === null) {
+        if ($actions == null) {
             $controller = this._registry.getController();
             this.allowedActions = get_class_methods($controller);
 
@@ -598,7 +598,7 @@ class AuthComponent : Component : IEventDispatcher
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
     void deny($actions = null) {
-        if ($actions === null) {
+        if ($actions == null) {
             this.allowedActions = [];
 
             return;
@@ -660,7 +660,7 @@ class AuthComponent : Component : IEventDispatcher
             return null;
         }
 
-        if (myKey === null) {
+        if (myKey == null) {
             return myUser;
         }
 
@@ -722,7 +722,7 @@ class AuthComponent : Component : IEventDispatcher
      */
     string redirectUrl(myUrl = null) {
         $redirectUrl = this.getController().getRequest().getQuery(static::QUERY_STRING_REDIRECT);
-        if ($redirectUrl && (substr($redirectUrl, 0, 1) !== "/" || substr($redirectUrl, 0, 2) === "//")) {
+        if ($redirectUrl && (substr($redirectUrl, 0, 1) !== "/" || substr($redirectUrl, 0, 2) == "//")) {
             $redirectUrl = null;
         }
 
@@ -731,7 +731,7 @@ class AuthComponent : Component : IEventDispatcher
         } elseif ($redirectUrl) {
             if (
                 this._config["loginAction"]
-                && Router::normalize($redirectUrl) === Router::normalize(this._config["loginAction"])
+                && Router::normalize($redirectUrl) == Router::normalize(this._config["loginAction"])
             ) {
                 $redirectUrl = this._config["loginRedirect"];
             }
@@ -807,7 +807,7 @@ class AuthComponent : Component : IEventDispatcher
                 myClass = myAlias;
             }
             myClassName = App::className(myClass, "Auth", "Authenticate");
-            if (myClassName === null) {
+            if (myClassName == null) {
                 throw new CakeException(sprintf("Authentication adapter "%s" was not found.", myClass));
             }
             if (!method_exists(myClassName, "authenticate")) {
@@ -849,7 +849,7 @@ class AuthComponent : Component : IEventDispatcher
             unset(myConfig["className"]);
         }
         myClassName = App::className(myClass, "Auth/Storage", "Storage");
-        if (myClassName === null) {
+        if (myClassName == null) {
             throw new CakeException(sprintf("Auth storage adapter "%s" was not found.", myClass));
         }
         myRequest = this.getController().getRequest();
@@ -867,7 +867,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return mixed
      */
     auto __get(string myName) {
-        if (myName === "sessionKey") {
+        if (myName == "sessionKey") {
             return this.storage().getConfig("key");
         }
 
@@ -881,10 +881,10 @@ class AuthComponent : Component : IEventDispatcher
      * @param mixed myValue Value to set.
      */
     void __set(string myName, myValue) {
-        if (myName === "sessionKey") {
+        if (myName == "sessionKey") {
             this._storage = null;
 
-            if (myValue === false) {
+            if (myValue == false) {
                 this.setConfig("storage", "Memory");
 
                 return;
@@ -920,7 +920,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param string|false myMessage The message to set. False to skip.
      */
     void flash(myMessage) {
-        if (myMessage === false) {
+        if (myMessage == false) {
             return;
         }
 

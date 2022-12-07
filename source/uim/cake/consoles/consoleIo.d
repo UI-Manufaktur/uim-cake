@@ -480,7 +480,7 @@ class ConsoleIo {
         this._out.write("<question>" . $prompt . "</question>myOptionsText\n$defaultText> ", 0);
         myResult = this._in.read();
 
-        myResult = myResult === null ? "" : trim(myResult);
+        myResult = myResult == null ? "" : trim(myResult);
         if ($default !== null && myResult == "") {
             return $default;
         }
@@ -503,11 +503,11 @@ class ConsoleIo {
     void setLoggers(myEnable) {
         Log::drop("stdout");
         Log::drop("stderr");
-        if (myEnable === false) {
+        if (myEnable == false) {
             return;
         }
         $outLevels = ["notice", "info"];
-        if (myEnable === static::VERBOSE || myEnable === true) {
+        if (myEnable == static::VERBOSE || myEnable == true) {
             $outLevels[] = "debug";
         }
         if (myEnable !== static::QUIET) {
@@ -563,16 +563,16 @@ class ConsoleIo {
         this.out();
         $forceOverwrite = $forceOverwrite || this.forceOverwrite;
 
-        if (file_exists(myPath) && $forceOverwrite === false) {
+        if (file_exists(myPath) && $forceOverwrite == false) {
             this.warning("File `{myPath}` exists");
             myKey = this.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
             myKey = strtolower(myKey);
 
-            if (myKey === "q") {
+            if (myKey == "q") {
                 this.error("Quitting.", 2);
                 throw new StopException("Not creating file. Quitting.");
             }
-            if (myKey === "a") {
+            if (myKey == "a") {
                 this.forceOverwrite = true;
                 myKey = "y";
             }

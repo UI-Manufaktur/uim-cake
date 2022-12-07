@@ -127,7 +127,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      */
     protected int getSubcommands(Arguments $args, ConsoleIo $io) {
         myName = $args.getArgument("command");
-        if (myName === null || myName == "") {
+        if (myName == null || myName == "") {
             return static::CODE_SUCCESS;
         }
 
@@ -178,7 +178,7 @@ class CompletionCommand : Command : ICommandCollectionAware
 
         // If there are no formal subcommands all methods
         // on a shell are "subcommands"
-        if (count($subcommands) === 0) {
+        if (count($subcommands) == 0) {
             /** @psalm-suppress DeprecatedClass */
             $coreShellReflection = new ReflectionClass(Shell::class);
             $reflection = new ReflectionClass(myShell);
