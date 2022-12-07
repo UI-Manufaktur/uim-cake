@@ -1,16 +1,7 @@
-module uim.cakeews;
+module uim.cake.views;
 
-import uim.cake.core.App;
-import uim.cakeents\IEventManager;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakeews.exceptions\MissingViewException;
-use Closure;
-use Exception;
-use JsonSerializable;
-use PDO;
-use RuntimeException;
-use Serializable;
+@safe:
+import uim.cake;
 
 /**
  * Provides an API for iteratively building a view up.

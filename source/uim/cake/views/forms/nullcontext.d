@@ -1,4 +1,4 @@
-module uim.cakeews.forms;
+module uim.cake.views.forms;
 
 /**
  * Provides a context provider that does nothing.

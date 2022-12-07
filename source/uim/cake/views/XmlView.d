@@ -1,4 +1,4 @@
-module uim.cakeews;
+module uim.cake.views;
 
 @safe:
 import uim.cake

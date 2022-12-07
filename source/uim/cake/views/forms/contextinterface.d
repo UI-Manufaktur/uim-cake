@@ -1,4 +1,4 @@
-module uim.cakeews.forms;
+module uim.cake.views.forms;
 
 /**
  * Interface for FormHelper context implementations.

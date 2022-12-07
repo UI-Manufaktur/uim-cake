@@ -1,4 +1,4 @@
-module uim.cakeews.exceptions;
+module uim.cake.views.exceptions;
 
 @safe:
 import uim.cake;

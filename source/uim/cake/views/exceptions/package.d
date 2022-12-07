@@ -1,1 +1,1 @@
-module uim.cakeews.exceptions;
+module uim.cake.views.exceptions;

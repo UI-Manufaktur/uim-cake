@@ -1,16 +1,7 @@
-module uim.cakeews.forms;
+module uim.cake.views.forms;
 
-use ArrayAccess;
-import uim.cake.collections\Collection;
-import uim.cake.datasources\IEntity;
-import uim.cake.datasources\InvalidPropertyInterface;
-import uim.cakem.Entity;
-import uim.cakem.Locator\LocatorAwareTrait;
-import uim.cakem.Table;
-import uim.cakeilities.Inflector;
-import uim.cake.validations\Validator;
-use RuntimeException;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Provides a form context around a single entity and its relations.
@@ -32,8 +23,7 @@ use Traversable;
  *   Defaults to "default". Can be an array of table alias=>validators when
  *   dealing with associated forms.
  */
-class EntityContext : IContext
-{
+class EntityContext : IContext {
     use LocatorAwareTrait;
 
     /**

@@ -1,4 +1,4 @@
-module uim.cakeews.forms;
+module uim.cake.views.forms;
 
 import uim.cakeilities.Hash;
 

@@ -1,19 +1,7 @@
+module uim.cake.views.forms;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeews.forms;
-
-import uim.cake.collections\Collection;
-import uim.cake.datasources\IEntity;
-import uim.cakerms\Form;
-import uim.caketps\ServerRequest;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Factory for getting form context instance based on provided data.
