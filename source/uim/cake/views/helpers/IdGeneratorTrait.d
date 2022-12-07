@@ -1,6 +1,7 @@
 module uim.cake.views.Helper;
 
-import uim.cakeilities.Text;
+@safe:
+import uim.cake;
 
 /**
  * A trait that provides id generating methods to be

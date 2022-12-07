@@ -225,7 +225,7 @@ class EntityContext : IContext {
         $parts = explode(".", myField);
         $entity = this.entity($parts);
 
-        if ($entity && end($parts) === "_ids") {
+        if ($entity && end($parts) == "_ids") {
             return this._extractMultiple($entity, $parts);
         }
 
@@ -270,7 +270,7 @@ class EntityContext : IContext {
      */
     protected auto _schemaDefault(array $parts) {
         myTable = this._getTable($parts);
-        if (myTable === null) {
+        if (myTable == null) {
             return null;
         }
         myField = end($parts);
@@ -315,11 +315,11 @@ class EntityContext : IContext {
      * @throws \RuntimeException When properties cannot be read.
      */
     function entity(?array myPath = null) {
-        if (myPath === null) {
+        if (myPath == null) {
             return this._context["entity"];
         }
 
-        $oneElement = count(myPath) === 1;
+        $oneElement = count(myPath) == 1;
         if ($oneElement && this._isCollection) {
             return null;
         }
@@ -328,7 +328,7 @@ class EntityContext : IContext {
             return $entity;
         }
 
-        if (myPath[0] === this._rootName) {
+        if (myPath[0] == this._rootName) {
             myPath = array_slice(myPath, 1);
         }
 
@@ -337,8 +337,8 @@ class EntityContext : IContext {
         for ($i = 0; $i < $len; $i++) {
             $prop = myPath[$i];
             $next = this._getProp($entity, $prop);
-            $isLast = ($i === $last);
-            if (!$isLast && $next === null && $prop !== "_ids") {
+            $isLast = ($i == $last);
+            if (!$isLast && $next == null && $prop !== "_ids") {
                 myTable = this._getTable(myPath);
                 if (myTable) {
                     return myTable.newEmptyEntity();
@@ -373,11 +373,11 @@ class EntityContext : IContext {
      * @throws \RuntimeException When properties cannot be read.
      */
     protected auto leafEntity(myPath = null) {
-        if (myPath === null) {
+        if (myPath == null) {
             return this._context["entity"];
         }
 
-        $oneElement = count(myPath) === 1;
+        $oneElement = count(myPath) == 1;
         if ($oneElement && this._isCollection) {
             throw new RuntimeException(sprintf(
                 "Unable to fetch property "%s"",
@@ -389,7 +389,7 @@ class EntityContext : IContext {
             return [$entity, myPath];
         }
 
-        if (myPath[0] === this._rootName) {
+        if (myPath[0] == this._rootName) {
             myPath = array_slice(myPath, 1);
         }
 
@@ -442,7 +442,7 @@ class EntityContext : IContext {
         }
         if (myTarget instanceof Traversable) {
             foreach (myTarget as $i => $val) {
-                if ((string)$i === myField) {
+                if ((string)$i == myField) {
                     return $val;
                 }
             }
@@ -514,7 +514,7 @@ class EntityContext : IContext {
 
         if ($validator.hasField(myFieldName)) {
             foreach ($validator.field(myFieldName).rules() as $rule) {
-                if ($rule.get("rule") === "maxLength") {
+                if ($rule.get("rule") == "maxLength") {
                     return $rule.get("pass")[0];
                 }
             }
@@ -601,7 +601,7 @@ class EntityContext : IContext {
      */
     protected auto _getTable($parts, $fallback = true): ?Table
     {
-        if (!is_array($parts) || count($parts) === 1) {
+        if (!is_array($parts) || count($parts) == 1) {
             return this._tables[this._rootName];
         }
 
@@ -614,14 +614,14 @@ class EntityContext : IContext {
             return this._tables[myPath];
         }
 
-        if (current($normalized) === this._rootName) {
+        if (current($normalized) == this._rootName) {
             $normalized = array_slice($normalized, 1);
         }
 
         myTable = this._tables[this._rootName];
         $assoc = null;
         foreach ($normalized as $part) {
-            if ($part === "_joinData") {
+            if ($part == "_joinData") {
                 if ($assoc !== null) {
                     myTable = $assoc.junction();
                     $assoc = null;
@@ -632,7 +632,7 @@ class EntityContext : IContext {
                 $assoc = $associationCollection.getByProperty($part);
             }
 
-            if ($assoc === null) {
+            if ($assoc == null) {
                 if ($fallback) {
                     break;
                 }
@@ -708,7 +708,7 @@ class EntityContext : IContext {
         } catch (RuntimeException $e) {
             return [];
         }
-        if (count($remainingParts) === 0) {
+        if (count($remainingParts) == 0) {
             return $entity.getErrors();
         }
 

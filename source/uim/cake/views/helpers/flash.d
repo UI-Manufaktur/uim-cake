@@ -54,7 +54,7 @@ class FlashHelper : Helper
     function render(string myKey = "flash", array myOptions = []): Nullable!string
     {
         myMessages = this._View.getRequest().getFlash().consume(myKey);
-        if (myMessages === null) {
+        if (myMessages == null) {
             return null;
         }
 

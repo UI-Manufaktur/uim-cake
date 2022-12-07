@@ -176,14 +176,14 @@ class WidgetLocator
 
         myClass = array_shift(myConfig);
         myClassName = App::className(myClass, "View/Widget", "Widget");
-        if (myClassName === null) {
+        if (myClassName == null) {
             throw new RuntimeException(sprintf("Unable to locate widget class "%s"", myClass));
         }
         if (count(myConfig)) {
             $reflection = new ReflectionClass(myClassName);
             $arguments = [this._templates];
             foreach (myConfig as $requirement) {
-                if ($requirement === "_view") {
+                if ($requirement == "_view") {
                     $arguments[] = this._view;
                 } else {
                     $arguments[] = this.get($requirement);

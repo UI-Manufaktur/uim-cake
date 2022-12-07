@@ -73,7 +73,7 @@ abstract class SerializedView : View
     {
         $serialize = this.getConfig("serialize", false);
 
-        if ($serialize === true) {
+        if ($serialize == true) {
             myOptions = array_map(
                 function ($v) {
                     return "_" . $v;

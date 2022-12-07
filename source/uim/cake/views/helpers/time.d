@@ -1,19 +1,7 @@
+module uim.cake.views.Helper;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.views.Helper;
-
-import uim.cake8n\FrozenTime;
-import uim.cake.views.Helper;
-import uim.cake.views.StringTemplateTrait;
-use IDateTime;
-use Exception;
+@safe:
+import uim.cake;
 
 /**
  * Time Helper class for easy use of time data.
@@ -358,7 +346,7 @@ class TimeHelper : Helper
      * @see \Cake\I18n\Time::i18nFormat()
      */
     function i18nFormat($date, $format = null, $invalid = false, $timezone = null) {
-        if ($date === null) {
+        if ($date == null) {
             return $invalid;
         }
         $timezone = this._getTimezone($timezone);
@@ -368,7 +356,7 @@ class TimeHelper : Helper
 
             return $time.i18nFormat($format, $timezone);
         } catch (Exception $e) {
-            if ($invalid === false) {
+            if ($invalid == false) {
                 throw $e;
             }
 

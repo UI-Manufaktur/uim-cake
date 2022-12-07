@@ -292,8 +292,8 @@ class FormHelper : Helper
      */
     function contextFactory(?ContextFactory $instance = null, array $contexts = []): ContextFactory
     {
-        if ($instance === null) {
-            if (this._contextFactory === null) {
+        if ($instance == null) {
+            if (this._contextFactory == null) {
                 this._contextFactory = ContextFactory::createWithDefaults($contexts);
             }
 
@@ -375,7 +375,7 @@ class FormHelper : Helper
         }
         unset(myOptions["templates"]);
 
-        if (myOptions["url"] === false) {
+        if (myOptions["url"] == false) {
             myUrl = this._View.getRequest().getRequestTarget();
             $action = null;
         } else {
@@ -457,7 +457,7 @@ class FormHelper : Helper
     protected auto _formUrl(IContext $context, array myOptions) {
         myRequest = this._View.getRequest();
 
-        if (myOptions["url"] === null) {
+        if (myOptions["url"] == null) {
             return myRequest.getRequestTarget();
         }
 
@@ -644,7 +644,7 @@ class FormHelper : Helper
      */
     auto getFormProtector(): FormProtector
     {
-        if (this.formProtector === null) {
+        if (this.formProtector == null) {
             throw new CakeException(
                 "`FormProtector` instance has not been created. Ensure you have loaded the `FormProtectionComponent`"
                 . " in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`."
@@ -683,7 +683,7 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
     string error(string myField, $text = null, array myOptions = []) {
-        if (substr(myField, -5) === "._ids") {
+        if (substr(myField, -5) == "._ids") {
             myField = substr(myField, 0, -5);
         }
         myOptions += ["escape": true];
@@ -796,16 +796,16 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-labels
      */
     string label(string myFieldName, Nullable!string $text = null, array myOptions = []) {
-        if ($text === null) {
+        if ($text == null) {
             $text = myFieldName;
-            if (substr($text, -5) === "._ids") {
+            if (substr($text, -5) == "._ids") {
                 $text = substr($text, 0, -5);
             }
             if (strpos($text, ".") !== false) {
                 myFieldElements = explode(".", $text);
                 $text = array_pop(myFieldElements);
             }
-            if (substr($text, -3) === "_id") {
+            if (substr($text, -3) == "_id") {
                 $text = substr($text, 0, -3);
             }
             $text = __(Inflector::humanize(Inflector::underscore($text)));
@@ -904,7 +904,7 @@ class FormHelper : Helper
 
         $out = "";
         foreach (myFields as myName: $opts) {
-            if ($opts === false) {
+            if ($opts == false) {
                 continue;
             }
 
@@ -933,7 +933,7 @@ class FormHelper : Helper
         $context = this._getContext();
         $out = myFields;
 
-        if ($legend === true) {
+        if ($legend == true) {
             $isCreate = $context.isCreate();
             myModelName = Inflector::humanize(
                 Inflector::singularize(this._View.getRequest().getParam("controller"))
@@ -1035,7 +1035,7 @@ class FormHelper : Helper
                    "aria-describedby": $isFieldError ? this._domId(myFieldName) . "-error" : null,
                 ];
             }
-            if (isset(myOptions["placeholder"]) && myOptions["label"] === false) {
+            if (isset(myOptions["placeholder"]) && myOptions["label"] == false) {
                 myOptions += [
                     "aria-label": myOptions["placeholder"],
                 ];
@@ -1061,15 +1061,15 @@ class FormHelper : Helper
         unset(myOptions["labelOptions"]);
 
         $nestedInput = false;
-        if (myOptions["type"] === "checkbox") {
+        if (myOptions["type"] == "checkbox") {
             $nestedInput = true;
         }
         $nestedInput = myOptions["nestedInput"] ?? $nestedInput;
         unset(myOptions["nestedInput"]);
 
         if (
-            $nestedInput === true
-            && myOptions["type"] === "checkbox"
+            $nestedInput == true
+            && myOptions["type"] == "checkbox"
             && !array_key_exists("hiddenField", myOptions)
             && $label !== false
         ) {
@@ -1077,7 +1077,7 @@ class FormHelper : Helper
         }
 
         $input = this._getInput(myFieldName, myOptions + ["labelOptions": $labelOptions]);
-        if (myOptions["type"] === "hidden" || myOptions["type"] === "submit") {
+        if (myOptions["type"] == "hidden" || myOptions["type"] == "submit") {
             if ($newTemplates) {
                 myTemplater.pop();
             }
@@ -1212,7 +1212,7 @@ class FormHelper : Helper
             return "hidden";
         }
 
-        if (substr(myFieldName, -3) === "_id") {
+        if (substr(myFieldName, -3) == "_id") {
             return "select";
         }
 
@@ -1233,11 +1233,11 @@ class FormHelper : Helper
                 return "password";
             case in_array(myFieldName, ["tel", "telephone", "phone"], true):
                 return "tel";
-            case myFieldName === "email":
+            case myFieldName == "email":
                 return "email";
             case isset(myOptions["rows"]) || isset(myOptions["cols"]):
                 return "textarea";
-            case myFieldName === "year":
+            case myFieldName == "year":
                 return "year";
         }
 
@@ -1259,10 +1259,10 @@ class FormHelper : Helper
         }
 
         $pluralize = true;
-        if (substr(myFieldName, -5) === "._ids") {
+        if (substr(myFieldName, -5) == "._ids") {
             myFieldName = substr(myFieldName, 0, -5);
             $pluralize = false;
-        } elseif (substr(myFieldName, -3) === "_id") {
+        } elseif (substr(myFieldName, -3) == "_id") {
             myFieldName = substr(myFieldName, 0, -3);
         }
         myFieldName = array_slice(explode(".", myFieldName), -1)[0];
@@ -1305,7 +1305,7 @@ class FormHelper : Helper
             myOptions = this._optionsOptions(myFieldName, myOptions);
         }
 
-        if ($allowOverride && substr(myFieldName, -5) === "._ids") {
+        if ($allowOverride && substr(myFieldName, -5) == "._ids") {
             myOptions["type"] = "select";
             if (!isset(myOptions["multiple"]) || (myOptions["multiple"] && myOptions["multiple"] !== "checkbox")) {
                 myOptions["multiple"] = true;
@@ -1354,16 +1354,16 @@ class FormHelper : Helper
      * @return string|false Generated label element or false.
      */
     protected auto _getLabel(string myFieldName, array myOptions) {
-        if (myOptions["type"] === "hidden") {
+        if (myOptions["type"] == "hidden") {
             return false;
         }
 
         $label = myOptions["label"] ?? null;
 
-        if ($label === false && myOptions["type"] === "checkbox") {
+        if ($label == false && myOptions["type"] == "checkbox") {
             return myOptions["input"];
         }
-        if ($label === false) {
+        if ($label == false) {
             return false;
         }
 
@@ -1470,7 +1470,7 @@ class FormHelper : Helper
             $output = this.hidden(myFieldName, myHiddenOptions);
         }
 
-        if (myOptions["hiddenField"] === "_split") {
+        if (myOptions["hiddenField"] == "_split") {
             unset(myOptions["hiddenField"], myOptions["type"]);
 
             return ["hidden": $output, "input": this.widget("checkbox", myOptions)];
@@ -1516,7 +1516,7 @@ class FormHelper : Helper
         myHidden = "";
         if (myHiddenField) {
             myHidden = this.hidden(myFieldName, [
-                "value": myHiddenField === true ? "" : myHiddenField,
+                "value": myHiddenField == true ? "" : myHiddenField,
                 "form": $attributes["form"] ?? null,
                 "name": $attributes["name"],
             ]);
@@ -1598,11 +1598,11 @@ class FormHelper : Helper
             ["secure": static::SECURE_SKIP]
         ));
 
-        if ($secure === true && this.formProtector) {
+        if ($secure == true && this.formProtector) {
             this.formProtector.addField(
                 myOptions["name"],
                 true,
-                myOptions["val"] === false ? "0" : (string)myOptions["val"]
+                myOptions["val"] == false ? "0" : (string)myOptions["val"]
             );
         }
 
@@ -1806,7 +1806,7 @@ class FormHelper : Helper
         this.formProtector = $restoreFormProtector;
 
         if (myOptions["block"]) {
-            if (myOptions["block"] === true) {
+            if (myOptions["block"] == true) {
                 myOptions["block"] = __FUNCTION__;
             }
             this._View.append(myOptions["block"], $out);
@@ -1856,7 +1856,7 @@ class FormHelper : Helper
      */
     string submit(Nullable!string $caption = null, array myOptions = [])
     {
-        if ($caption === null) {
+        if ($caption == null) {
             $caption = __d("cake", "Submit");
         }
         myOptions += [
@@ -1986,12 +1986,12 @@ class FormHelper : Helper
             "empty": null,
         ];
 
-        if ($attributes["empty"] === null && $attributes["multiple"] !== "checkbox") {
+        if ($attributes["empty"] == null && $attributes["multiple"] !== "checkbox") {
             $required = this._getContext().isRequired(myFieldName);
-            $attributes["empty"] = $required === null ? false : !$required;
+            $attributes["empty"] = $required == null ? false : !$required;
         }
 
-        if ($attributes["multiple"] === "checkbox") {
+        if ($attributes["multiple"] == "checkbox") {
             unset($attributes["multiple"], $attributes["empty"]);
 
             return this.multiCheckbox(myFieldName, myOptions, $attributes);
@@ -2071,7 +2071,7 @@ class FormHelper : Helper
                 "name": $attributes["name"],
                 "value": "",
                 "secure": false,
-                "disabled": $attributes["disabled"] === true || $attributes["disabled"] === "disabled",
+                "disabled": $attributes["disabled"] == true || $attributes["disabled"] == "disabled",
             ];
             myHidden = this.hidden(myFieldName, myHiddenAttributes);
         }
@@ -2230,11 +2230,11 @@ class FormHelper : Helper
         myOptions += ["fieldName": myField];
 
         if (!isset(myOptions["secure"])) {
-            myOptions["secure"] = this._View.getRequest().getAttribute("formTokenData") === null ? false : true;
+            myOptions["secure"] = this._View.getRequest().getAttribute("formTokenData") == null ? false : true;
         }
         $context = this._getContext();
 
-        if (isset(myOptions["id"]) && myOptions["id"] === true) {
+        if (isset(myOptions["id"]) && myOptions["id"] == true) {
             myOptions["id"] = this._domId(myField);
         }
 
@@ -2247,7 +2247,7 @@ class FormHelper : Helper
 
         if (!isset(myOptions["name"])) {
             $endsWithBrackets = "";
-            if (substr(myField, -2) === "[]") {
+            if (substr(myField, -2) == "[]") {
                 myField = substr(myField, 0, -2);
                 $endsWithBrackets = "[]";
             }
@@ -2294,7 +2294,7 @@ class FormHelper : Helper
             return false;
         }
         if (is_scalar(myOptions["disabled"])) {
-            return myOptions["disabled"] === true || myOptions["disabled"] === "disabled";
+            return myOptions["disabled"] == true || myOptions["disabled"] == "disabled";
         }
         if (!isset(myOptions["options"])) {
             return false;
@@ -2303,7 +2303,7 @@ class FormHelper : Helper
             // Simple list options
             $first = myOptions["options"][array_keys(myOptions["options"])[0]];
             if (is_scalar($first)) {
-                return array_diff(myOptions["options"], myOptions["disabled"]) === [];
+                return array_diff(myOptions["options"], myOptions["disabled"]) == [];
             }
             // Complex option types
             if (is_array($first)) {
@@ -2513,7 +2513,7 @@ class FormHelper : Helper
             "query": "getQuery",
         ];
         foreach (this.getValueSources() as myValuesSource) {
-            if (myValuesSource === "context") {
+            if (myValuesSource == "context") {
                 $val = this._getContext().val(myFieldname, myOptions);
                 if ($val !== null) {
                     return $val;

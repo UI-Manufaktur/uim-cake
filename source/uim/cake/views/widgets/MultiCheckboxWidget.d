@@ -186,7 +186,7 @@ class MultiCheckboxWidget : BasicWidget
             ),
         ]);
 
-        if ($checkbox["label"] === false && strpos(this._templates.get("checkboxWrapper"), "{{input}}") === false) {
+        if ($checkbox["label"] == false && strpos(this._templates.get("checkboxWrapper"), "{{input}}") == false) {
             $label = $input;
         } else {
             $labelAttrs = is_array($checkbox["label"]) ? $checkbox["label"] : [];
@@ -220,11 +220,11 @@ class MultiCheckboxWidget : BasicWidget
      * @param array<string>|string|int|false|null $selected The selected values.
      */
     protected bool _isSelected(string myKey, $selected) {
-        if ($selected === null) {
+        if ($selected == null) {
             return false;
         }
         if (!is_array($selected)) {
-            return myKey === (string)$selected;
+            return myKey == (string)$selected;
         }
         $strict = !is_numeric(myKey);
 
@@ -238,10 +238,10 @@ class MultiCheckboxWidget : BasicWidget
      * @param mixed $disabled The disabled values.
      */
     protected bool _isDisabled(string myKey, $disabled) {
-        if ($disabled === null || $disabled === false) {
+        if ($disabled == null || $disabled == false) {
             return false;
         }
-        if ($disabled === true || is_string($disabled)) {
+        if ($disabled == true || is_string($disabled)) {
             return true;
         }
         $strict = !is_numeric(myKey);

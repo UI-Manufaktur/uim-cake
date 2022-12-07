@@ -1,11 +1,7 @@
 module uim.cake.views.Helper;
 
-import uim.cakeilities.Hash;
-import uim.cakeilities.Inflector;
-import uim.cake.views.Helper;
-import uim.cake.views.StringTemplate;
-import uim.cake.views.StringTemplateTrait;
-import uim.cake.views.View;
+@safe:
+import uim.cake;
 
 /**
  * Pagination Helper class for easy generation of pagination links.
@@ -233,7 +229,7 @@ class PaginatorHelper : Helper
             $dir = strtolower(myOptions["direction"]);
         }
 
-        if ($dir === "desc") {
+        if ($dir == "desc") {
             return "desc";
         }
 
@@ -257,7 +253,7 @@ class PaginatorHelper : Helper
             myTemplate = myTemplates["disabled"];
         }
 
-        if (!myEnabled && $text === false) {
+        if (!myEnabled && $text == false) {
             return "";
         }
         $text = myOptions["escape"] ? h($text) : $text;
@@ -432,19 +428,19 @@ class PaginatorHelper : Helper
             myTable = myModel;
         }
         $isSorted = (
-            $sortKey === myTable . "." . myField ||
-            $sortKey === myModel . "." . myKey ||
-            myTable . "." . myField === myModel . "." . $sortKey
+            $sortKey == myTable . "." . myField ||
+            $sortKey == myModel . "." . myKey ||
+            myTable . "." . myField == myModel . "." . $sortKey
         );
 
         myTemplate = "sort";
         $dir = $defaultDir;
         if ($isSorted) {
             if ($locked) {
-                myTemplate = $dir === "asc" ? "sortDescLocked" : "sortAscLocked";
+                myTemplate = $dir == "asc" ? "sortDescLocked" : "sortAscLocked";
             } else {
-                $dir = this.sortDir(myOptions["model"]) === "asc" ? "desc" : "asc";
-                myTemplate = $dir === "asc" ? "sortDesc" : "sortAsc";
+                $dir = this.sortDir(myOptions["model"]) == "asc" ? "desc" : "asc";
+                myTemplate = $dir == "asc" ? "sortDesc" : "sortAsc";
             }
         }
         if (is_array($title) && array_key_exists($dir, $title)) {
@@ -508,14 +504,14 @@ class PaginatorHelper : Helper
         if (
             !empty($paging["sort"])
             && !empty(myOptions["sort"])
-            && strpos(myOptions["sort"], ".") === false
+            && strpos(myOptions["sort"], ".") == false
         ) {
             $paging["sort"] = this._removeAlias($paging["sort"], myModel = null);
         }
         if (
             !empty($paging["sortDefault"])
             && !empty(myOptions["sort"])
-            && strpos(myOptions["sort"], ".") === false
+            && strpos(myOptions["sort"], ".") == false
         ) {
             $paging["sortDefault"] = this._removeAlias($paging["sortDefault"], myModel);
         }
@@ -525,14 +521,14 @@ class PaginatorHelper : Helper
             ["page": null, "limit": null, "sort": null, "direction": null]
         );
 
-        if (!empty(myOptions["page"]) && myOptions["page"] === 1) {
+        if (!empty(myOptions["page"]) && myOptions["page"] == 1) {
             myOptions["page"] = null;
         }
 
         if (
             isset($paging["sortDefault"], $paging["directionDefault"], myOptions["sort"], myOptions["direction"])
-            && myOptions["sort"] === $paging["sortDefault"]
-            && strtolower(myOptions["direction"]) === strtolower($paging["directionDefault"])
+            && myOptions["sort"] == $paging["sortDefault"]
+            && strtolower(myOptions["direction"]) == strtolower($paging["directionDefault"])
         ) {
             myOptions["sort"] = myOptions["direction"] = null;
         }
@@ -576,13 +572,13 @@ class PaginatorHelper : Helper
     {
         $currentModel = myModel ?: this.defaultModel();
 
-        if (strpos(myField, ".") === false) {
+        if (strpos(myField, ".") == false) {
             return myField;
         }
 
         [myAlias, $currentField] = explode(".", myField);
 
-        if (myAlias === $currentModel) {
+        if (myAlias == $currentModel) {
             return $currentField;
         }
 
@@ -622,7 +618,7 @@ class PaginatorHelper : Helper
      */
     bool hasPage(int $page = 1, Nullable!string myModel = null) {
         $paging = this.params(myModel);
-        if ($paging === []) {
+        if ($paging == []) {
             return false;
         }
 
@@ -963,7 +959,7 @@ class PaginatorHelper : Helper
         $out .= myOptions["before"];
 
         for ($i = 1; $i <= myParams["pageCount"]; $i++) {
-            if ($i === myParams["page"]) {
+            if ($i == myParams["page"]) {
                 $out .= myTemplater.format("current", [
                     "text": this.Number.format(myParams["page"]),
                     "url": this.generateUrl(["page": $i], myOptions["model"], myOptions["url"]),
@@ -1176,7 +1172,7 @@ class PaginatorHelper : Helper
 
         $out = implode($links);
 
-        if (myOptions["block"] === true) {
+        if (myOptions["block"] == true) {
             myOptions["block"] = __FUNCTION__;
         }
 

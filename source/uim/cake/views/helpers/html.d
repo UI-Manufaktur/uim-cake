@@ -132,7 +132,7 @@ class HtmlHelper : Helper {
                 "last": ["rel": "last", "link": myContents],
             ];
 
-            if (myType === "icon" && myContents === null) {
+            if (myType == "icon" && myContents == null) {
                 myTypes["icon"]["link"] = "favicon.ico";
             }
 
@@ -161,7 +161,7 @@ class HtmlHelper : Helper {
             } else {
                 myOptions["link"] = this.Url.assetUrl(myOptions["link"]);
             }
-            if (isset(myOptions["rel"]) && myOptions["rel"] === "icon") {
+            if (isset(myOptions["rel"]) && myOptions["rel"] == "icon") {
                 $out = this.formatTemplate("metalink", [
                     "url": myOptions["link"],
                     "attrs": this.templater().formatAttributes(myOptions, ["block", "link"]),
@@ -181,7 +181,7 @@ class HtmlHelper : Helper {
         if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions["block"] === true) {
+        if (myOptions["block"] == true) {
             myOptions["block"] = __FUNCTION__;
         }
         this._View.append(myOptions["block"], $out);
@@ -252,7 +252,7 @@ class HtmlHelper : Helper {
             $escapeTitle = myOptions["escape"];
         }
 
-        if ($escapeTitle === true) {
+        if ($escapeTitle == true) {
             $title = h($title);
         } elseif (is_string($escapeTitle)) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -387,7 +387,7 @@ class HtmlHelper : Helper {
         this._includedAssets[__METHOD__][myPath] = true;
 
         myTemplater = this.templater();
-        if (myOptions["rel"] === "import") {
+        if (myOptions["rel"] == "import") {
             $out = myTemplater.format("style", [
                 "attrs": myTemplater.formatAttributes(myOptions, ["rel", "block"]),
                 "content": "@import url(" . myUrl . ");",
@@ -403,7 +403,7 @@ class HtmlHelper : Helper {
         if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions["block"] === true) {
+        if (myOptions["block"] == true) {
             myOptions["block"] = __FUNCTION__;
         }
         this._View.append(myOptions["block"], $out);
@@ -493,7 +493,7 @@ class HtmlHelper : Helper {
         if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions["block"] === true) {
+        if (myOptions["block"] == true) {
             myOptions["block"] = __FUNCTION__;
         }
         this._View.append(myOptions["block"], $out);
@@ -527,7 +527,7 @@ class HtmlHelper : Helper {
         if (empty(myOptions["block"])) {
             return $out;
         }
-        if (myOptions["block"] === true) {
+        if (myOptions["block"] == true) {
             myOptions["block"] = "script";
         }
         this._View.append(myOptions["block"], $out);
@@ -728,12 +728,12 @@ class HtmlHelper : Helper {
             myData = [myData];
         }
 
-        if ($oddTrOptions === true) {
+        if ($oddTrOptions == true) {
             $useCount = true;
             $oddTrOptions = null;
         }
 
-        if ($evenTrOptions === false) {
+        if ($evenTrOptions == false) {
             $continueOddEven = false;
             $evenTrOptions = null;
         }
@@ -843,7 +843,7 @@ class HtmlHelper : Helper {
             $text = h($text);
             unset(myOptions["escape"]);
         }
-        if ($text === null) {
+        if ($text == null) {
             $tag = "tagstart";
         } else {
             $tag = "tag";
@@ -899,7 +899,7 @@ class HtmlHelper : Helper {
             myOptions["class"] = myClass;
         }
         $tag = "para";
-        if ($text === null) {
+        if ($text == null) {
             $tag = "parastart";
         }
 
@@ -1011,7 +1011,7 @@ class HtmlHelper : Helper {
             myOptions["src"] = this.Url.assetUrl(myPath, myOptions);
         }
 
-        if ($tag === null) {
+        if ($tag == null) {
             if (is_array(myPath)) {
                 $mimeType = myPath[0]["type"];
             } else {
@@ -1090,7 +1090,7 @@ class HtmlHelper : Helper {
             if (is_array($item)) {
                 $item = myKey . this.nestedList($item, myOptions, $itemOptions);
             }
-            if (isset($itemOptions["even"]) && $index % 2 === 0) {
+            if (isset($itemOptions["even"]) && $index % 2 == 0) {
                 $itemOptions["class"] = $itemOptions["even"];
             } elseif (isset($itemOptions["odd"]) && $index % 2 !== 0) {
                 $itemOptions["class"] = $itemOptions["odd"];

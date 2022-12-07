@@ -149,7 +149,7 @@ class StringTemplate {
         }
         foreach (myTemplates as myName) {
             myTemplate = this.get(myName);
-            if (myTemplate === null) {
+            if (myTemplate == null) {
                 this._compiled[myName] = [null, null];
             }
 

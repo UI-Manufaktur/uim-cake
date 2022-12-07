@@ -62,14 +62,14 @@ class BasicWidget : WidgetInterface
 
         myData["value"] = myData["val"];
         unset(myData["val"]);
-        if (myData["value"] === false) {
+        if (myData["value"] == false) {
             // explicitly convert to 0 to avoid empty string which is marshaled as null
             myData["value"] = "0";
         }
 
         myFieldName = myData["fieldName"] ?? null;
         if (myFieldName) {
-            if (myData["type"] === "number" && !isset(myData["step"])) {
+            if (myData["type"] == "number" && !isset(myData["step"])) {
                 myData = this.setStep(myData, $context, myFieldName);
             }
 
@@ -168,10 +168,10 @@ class BasicWidget : WidgetInterface
         $dbType = $context.type(myFieldName);
         myFieldDef = $context.attributes(myFieldName);
 
-        if ($dbType === "decimal" && isset(myFieldDef["precision"])) {
+        if ($dbType == "decimal" && isset(myFieldDef["precision"])) {
             $decimalPlaces = myFieldDef["precision"];
             myData["step"] = sprintf("%." . $decimalPlaces . "F", pow(10, -1 * $decimalPlaces));
-        } elseif ($dbType === "float") {
+        } elseif ($dbType == "float") {
             myData["step"] = "any";
         }
 

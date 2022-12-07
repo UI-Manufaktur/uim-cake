@@ -1,10 +1,7 @@
 module uim.cake.views.Helper;
 
-import uim.cake.core.App;
-import uim.cake.core.exceptions\CakeException;
-import uim.cake8n\Number;
-import uim.cake.views.Helper;
-import uim.cake.views.View;
+@safe:
+import uim.cake;
 
 /**
  * Number helper library.
@@ -51,7 +48,7 @@ class NumberHelper : Helper
 
         /** @psalm-var class-string<\Cake\I18n\Number>|null $engineClass */
         $engineClass = App::className(myConfig["engine"], "Utility");
-        if ($engineClass === null) {
+        if ($engineClass == null) {
             throw new CakeException(sprintf("Class for %s could not be found", myConfig["engine"]));
         }
 

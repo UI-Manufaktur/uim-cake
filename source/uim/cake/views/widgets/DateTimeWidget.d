@@ -1,12 +1,7 @@
 module uim.cake.views.Widget;
 
-import uim.cake.databases.Schema\TableSchema;
-import uim.cake.views.Form\IContext;
-use DateTime;
-use IDateTime;
-use DateTimeZone;
-use Exception;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Input widget class for generating a date time input widget.
@@ -14,8 +9,7 @@ use InvalidArgumentException;
  * This class is usually used internally by `Cake\View\Helper\FormHelper`,
  * it but can be used to generate standalone date time inputs.
  */
-class DateTimeWidget : BasicWidget
-{
+class DateTimeWidget : BasicWidget {
     /**
      * Template instance.
      *
@@ -89,8 +83,7 @@ class DateTimeWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
-    string render(array myData, IContext $context)
-    {
+    string render(array myData, IContext $context) {
         myData += this.mergeDefaults(myData, $context);
 
         if (!isset(this.formatMap[myData["type"]])) {
@@ -162,9 +155,8 @@ class DateTimeWidget : BasicWidget
      * @return string
      * @throws \InvalidArgumentException If invalid input type is passed.
      */
-    protected string formatDateTime(myValue, array myOptions)
-    {
-        if (myValue == "" || myValue === null) {
+    protected string formatDateTime(myValue, array myOptions) {
+        if (myValue == "" || myValue == null) {
             return "";
         }
 
@@ -192,15 +184,14 @@ class DateTimeWidget : BasicWidget
         }
 
         if (isset(myOptions["format"])) {
-            $format = myOptions["format"];
+          $format = myOptions["format"];
         } else {
             $format = this.formatMap[myOptions["type"]];
 
             if (
-                myOptions["type"] === "datetime-local"
+                myOptions["type"] == "datetime-local"
                 && is_numeric(myOptions["step"])
-                && myOptions["step"] < 1
-            ) {
+                && myOptions["step"] < 1) {
                 $format = "Y-m-d\TH:i:s.v";
             }
         }

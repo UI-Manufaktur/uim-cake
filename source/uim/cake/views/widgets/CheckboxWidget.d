@@ -72,6 +72,6 @@ class CheckboxWidget : BasicWidget
             return (bool)myData["checked"];
         }
 
-        return (string)myData["val"] === (string)myData["value"];
+        return (string)myData["val"] == (string)myData["value"];
     }
 }

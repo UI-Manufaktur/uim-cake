@@ -133,7 +133,7 @@ class FormContext : IContext
             return null;
         }
         foreach ($validator.field(myField).rules() as $rule) {
-            if ($rule.get("rule") === "maxLength") {
+            if ($rule.get("rule") == "maxLength") {
                 return $rule.get("pass")[0];
             }
         }

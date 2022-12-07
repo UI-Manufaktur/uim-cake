@@ -282,7 +282,7 @@ class View : IEventDispatcher {
         if (myEventManager !== null) {
             this.setEventManager(myEventManager);
         }
-        if (myRequest === null) {
+        if (myRequest == null) {
             myRequest = Router::getRequest() ?: new ServerRequest(["base" => "", "url" => "", "webroot" => "/"]);
         }
         this.request = myRequest;
@@ -627,7 +627,7 @@ class View : IEventDispatcher {
     {
         $defaultLayout = "";
         $defaultAutoLayout = null;
-        if ($layout === false) {
+        if ($layout == false) {
             $defaultAutoLayout = this.autoLayout;
             this.autoLayout = false;
         } elseif ($layout !== null) {
@@ -732,7 +732,7 @@ class View : IEventDispatcher {
             if (is_array(myValue)) {
                 /** @var array|false myData */
                 myData = array_combine(myName, myValue);
-                if (myData === false) {
+                if (myData == false) {
                     throw new RuntimeException(
                         "Invalid data provided for array_combine() to work: Both myName and myValue require same count."
                     );
@@ -899,7 +899,7 @@ class View : IEventDispatcher {
      * @throws \LogicException when you extend an element which doesn"t exist
      */
     function extend(string myName) {
-        myType = myName[0] === "/" ? static::TYPE_TEMPLATE : this._currentType;
+        myType = myName[0] == "/" ? static::TYPE_TEMPLATE : this._currentType;
         switch (myType) {
             case static::TYPE_ELEMENT:
                 $parent = this._getElementFileName(myName);
@@ -920,10 +920,10 @@ class View : IEventDispatcher {
                 $parent = this._getTemplateFileName(myName);
         }
 
-        if ($parent === this._current) {
+        if ($parent == this._current) {
             throw new LogicException("You cannot have templates extend themselves.");
         }
-        if (isset(this._parents[$parent]) && this._parents[$parent] === this._current) {
+        if (isset(this._parents[$parent]) && this._parents[$parent] == this._current) {
             throw new LogicException("You cannot have templates extend in a loop.");
         }
         this._parents[this._current] = $parent;
@@ -1057,7 +1057,7 @@ class View : IEventDispatcher {
      */
     function helpers(): HelperRegistry
     {
-        if (this._helpers === null) {
+        if (this._helpers == null) {
             this._helpers = new HelperRegistry(this);
         }
 
@@ -1177,12 +1177,12 @@ class View : IEventDispatcher {
         if (this.subDir !== "") {
             $subDir = this.subDir . DIRECTORY_SEPARATOR;
             // Check if templatePath already terminates with subDir
-            if (myTemplatePath != $subDir && substr(myTemplatePath, -strlen($subDir)) === $subDir) {
+            if (myTemplatePath != $subDir && substr(myTemplatePath, -strlen($subDir)) == $subDir) {
                 $subDir = "";
             }
         }
 
-        if (myName === null) {
+        if (myName == null) {
             myName = this.template;
         }
 
@@ -1193,10 +1193,10 @@ class View : IEventDispatcher {
         [myPlugin, myName] = this.pluginSplit(myName);
         myName = str_replace("/", DIRECTORY_SEPARATOR, myName);
 
-        if (strpos(myName, DIRECTORY_SEPARATOR) === false && myName !== "" && myName[0] !== ".") {
+        if (strpos(myName, DIRECTORY_SEPARATOR) == false && myName !== "" && myName[0] !== ".") {
             myName = myTemplatePath . $subDir . this._inflectTemplateFileName(myName);
         } elseif (strpos(myName, DIRECTORY_SEPARATOR) !== false) {
-            if (myName[0] === DIRECTORY_SEPARATOR || myName[1] === ":") {
+            if (myName[0] == DIRECTORY_SEPARATOR || myName[1] == ":") {
                 myName = trim(myName, DIRECTORY_SEPARATOR);
             } elseif (!myPlugin || this.templatePath !== this.name) {
                 myName = myTemplatePath . $subDir . myName;
@@ -1240,7 +1240,7 @@ class View : IEventDispatcher {
      */
     protected string _checkFilePath(string myfile, string myPath)
     {
-        if (strpos(myfile, "..") === false) {
+        if (strpos(myfile, "..") == false) {
             return myfile;
         }
         $absolute = realpath(myfile);
@@ -1289,7 +1289,7 @@ class View : IEventDispatcher {
      */
     protected string _getLayoutFileName(Nullable!string myName = null)
     {
-        if (myName === null) {
+        if (myName == null) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
                     "View::$layout must be a non-empty string." .
@@ -1405,8 +1405,8 @@ class View : IEventDispatcher {
      */
     protected auto _paths(Nullable!string myPlugin = null, bool $cached = true): array
     {
-        if ($cached === true) {
-            if (myPlugin === null && !empty(this._paths)) {
+        if ($cached == true) {
+            if (myPlugin == null && !empty(this._paths)) {
                 return this._paths;
             }
             if (myPlugin !== null && isset(this._pathsForPlugin[myPlugin])) {

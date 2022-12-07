@@ -89,7 +89,7 @@ class RadioWidget : BasicWidget
         }
 
         if (!empty(myData["empty"])) {
-            $empty = myData["empty"] === true ? "empty" : myData["empty"];
+            $empty = myData["empty"] == true ? "empty" : myData["empty"];
             myOptions = ["": $empty] + myOptions;
         }
         unset(myData["empty"]);
@@ -114,7 +114,7 @@ class RadioWidget : BasicWidget
         if (!$disabled) {
             return false;
         }
-        if ($disabled === true) {
+        if ($disabled == true) {
             return true;
         }
         $isNumeric = is_numeric($radio["value"]);
@@ -159,7 +159,7 @@ class RadioWidget : BasicWidget
         if (isset(myData["val"]) && is_bool(myData["val"])) {
             myData["val"] = myData["val"] ? 1 : 0;
         }
-        if (isset(myData["val"]) && (string)myData["val"] === (string)$radio["value"]) {
+        if (isset(myData["val"]) && (string)myData["val"] == (string)$radio["value"]) {
             $radio["checked"] = true;
             $radio["templateVars"]["activeClass"] = "active";
         }
@@ -196,8 +196,8 @@ class RadioWidget : BasicWidget
         );
 
         if (
-            $label === false &&
-            strpos(this._templates.get("radioWrapper"), "{{input}}") === false
+            $label == false &&
+            strpos(this._templates.get("radioWrapper"), "{{input}}") == false
         ) {
             $label = $input;
         }
@@ -225,7 +225,7 @@ class RadioWidget : BasicWidget
     protected auto _renderLabel(array $radio, $label, $input, $context, $escape) {
         if (isset($radio["label"])) {
             $label = $radio["label"];
-        } elseif ($label === false) {
+        } elseif ($label == false) {
             return false;
         }
         $labelAttrs = is_array($label) ? $label : [];

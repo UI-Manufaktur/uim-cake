@@ -1,6 +1,7 @@
 module uim.cake.views.forms;
 
-import uim.cakeilities.Hash;
+@safe:
+import uim.cake;
 
 /**
  * Provides a basic array based context provider for FormHelper.
@@ -104,7 +105,7 @@ class ArrayContext : IContext
             return [];
         }
         foreach (this._context["schema"]["_constraints"] as myData) {
-            if (isset(myData["type"]) && myData["type"] === "primary") {
+            if (isset(myData["type"]) && myData["type"] == "primary") {
                 return (array)(myData["columns"] ?? []);
             }
         }
@@ -195,11 +196,11 @@ class ArrayContext : IContext
 
         $required = Hash::get(this._context["required"], myField);
 
-        if ($required === null) {
+        if ($required == null) {
             $required = Hash::get(this._context["required"], this.stripNesting(myField));
         }
 
-        if (!empty($required) || $required === "0") {
+        if (!empty($required) || $required == "0") {
             return true;
         }
 
@@ -213,15 +214,15 @@ class ArrayContext : IContext
             return null;
         }
         $required = Hash::get(this._context["required"], myField);
-        if ($required === null) {
+        if ($required == null) {
             $required = Hash::get(this._context["required"], this.stripNesting(myField));
         }
 
-        if ($required === false) {
+        if ($required == false) {
             return null;
         }
 
-        if ($required === true) {
+        if ($required == true) {
             $required = __d("cake", "This field cannot be left empty");
         }
 
@@ -268,7 +269,7 @@ class ArrayContext : IContext
         }
 
         $schema = Hash::get(this._context["schema"], myField);
-        if ($schema === null) {
+        if ($schema == null) {
             $schema = Hash::get(this._context["schema"], this.stripNesting(myField));
         }
 
@@ -287,7 +288,7 @@ class ArrayContext : IContext
             return [];
         }
         $schema = Hash::get(this._context["schema"], myField);
-        if ($schema === null) {
+        if ($schema == null) {
             $schema = Hash::get(this._context["schema"], this.stripNesting(myField));
         }
 

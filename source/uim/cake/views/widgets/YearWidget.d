@@ -78,7 +78,7 @@ class YearWidget : BasicWidget
             throw new InvalidArgumentException("Max year cannot be less than min year");
         }
 
-        if (myData["order"] === "desc") {
+        if (myData["order"] == "desc") {
             myData["options"] = range(myData["max"], myData["min"]);
         } else {
             myData["options"] = range(myData["min"], myData["max"]);

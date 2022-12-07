@@ -1,10 +1,7 @@
 module uim.cake.views.Helper;
 
-import uim.cake.core.App;
-import uim.cake.core.exceptions\CakeException;
-import uim.cakeutings\Asset;
-import uim.cakeutings\Router;
-import uim.cake.views.Helper;
+@safe:
+import uim.cake;
 
 /**
  * UrlHelper class for generating URLs.
@@ -41,7 +38,7 @@ class UrlHelper : Helper
 
         /** @psalm-var class-string<\Cake\Routing\Asset>|null $engineClass */
         $engineClass = App::className($engineClassConfig, "Routing");
-        if ($engineClass === null) {
+        if ($engineClass == null) {
             throw new CakeException(sprintf("Class for %s could not be found", $engineClassConfig));
         }
 
@@ -206,7 +203,7 @@ class UrlHelper : Helper
 
     /**
      * Adds a timestamp to a file based resource based on the value of `Asset.timestamp` in
-     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp === "force"
+     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp == "force"
      * a timestamp will be added.
      *
      * @param string myPath The file path to timestamp, the path must be inside `App.wwwRoot` in Configure.

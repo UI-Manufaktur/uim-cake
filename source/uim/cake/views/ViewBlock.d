@@ -100,7 +100,7 @@ class ViewBlock
         myMode = end(this._active);
         $active = key(this._active);
         myContents = ob_get_clean();
-        if (myMode === ViewBlock::OVERRIDE) {
+        if (myMode == ViewBlock::OVERRIDE) {
             this._blocks[$active] = (string)myContents;
         } else {
             this.concat($active, myContents, myMode);
@@ -125,7 +125,7 @@ class ViewBlock
      */
     function concat(string myName, myValue = null, myMode = ViewBlock::APPEND): void
     {
-        if (myValue === null) {
+        if (myValue == null) {
             this.start(myName, myMode);
 
             return;
@@ -134,7 +134,7 @@ class ViewBlock
         if (!isset(this._blocks[myName])) {
             this._blocks[myName] = "";
         }
-        if (myMode === ViewBlock::PREPEND) {
+        if (myMode == ViewBlock::PREPEND) {
             this._blocks[myName] = myValue . this._blocks[myName];
         } else {
             this._blocks[myName] .= myValue;

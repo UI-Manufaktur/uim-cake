@@ -1,20 +1,7 @@
+module uim.cake.views.Helper;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.views.Helper;
-
-import uim.cake.core.App;
-import uim.cake.core.exceptions\CakeException;
-import uim.cakeilities.Security;
-import uim.cakeilities.Text;
-import uim.cake.views.Helper;
-import uim.cake.views.View;
+@safe:
+import uim.cake;
 
 /**
  * Text helper library.
@@ -77,7 +64,7 @@ class TextHelper : Helper
 
         /** @psalm-var class-string<\Cake\Utility\Text>|null $engineClass */
         $engineClass = App::className(myConfig["engine"], "Utility");
-        if ($engineClass === null) {
+        if ($engineClass == null) {
             throw new CakeException(sprintf("Class for %s could not be found", myConfig["engine"]));
         }
 

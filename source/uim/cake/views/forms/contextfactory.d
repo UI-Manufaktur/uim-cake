@@ -74,7 +74,7 @@ class ContextFactory
             [
                 "type" => "null",
                 "callable" => function (myRequest, myData) {
-                    if (myData["entity"] === null) {
+                    if (myData["entity"] == null) {
                         return new NullContext(myData);
                     }
                 },

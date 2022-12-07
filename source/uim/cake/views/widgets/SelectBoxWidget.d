@@ -166,7 +166,7 @@ class SelectBoxWidget : BasicWidget
      */
     protected auto _emptyValue(myValue): array
     {
-        if (myValue === true) {
+        if (myValue == true) {
             return ["": ""];
         }
         if (is_scalar(myValue)) {
@@ -291,13 +291,13 @@ class SelectBoxWidget : BasicWidget
      * @param array<string>|string|int|false|null $selected The selected values.
      */
     protected bool _isSelected(string myKey, $selected) {
-        if ($selected === null) {
+        if ($selected == null) {
             return false;
         }
         if (!is_array($selected)) {
-            $selected = $selected === false ? "0" : $selected;
+            $selected = $selected == false ? "0" : $selected;
 
-            return myKey === (string)$selected;
+            return myKey == (string)$selected;
         }
         $strict = !is_numeric(myKey);
 
@@ -311,7 +311,7 @@ class SelectBoxWidget : BasicWidget
      * @param array<string>|null $disabled The disabled values.
      */
     protected bool _isDisabled(string myKey, ?array $disabled) {
-        if ($disabled === null) {
+        if ($disabled == null) {
             return false;
         }
         $strict = !is_numeric(myKey);
