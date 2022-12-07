@@ -1,13 +1,7 @@
-module uim.caketh;
+module uim.cake.auth;
 
 @safe:
-import uim.cake
-
-/* import uim.cake.controllerss.componentsRegistry;
-import uim.cake.controllers\Controller;
-import uim.cake.core.exceptions\CakeException;
-import uim.caketps\ServerRequest;
- */
+import uim.cake;
 /**
  * An authorization adapter for AuthComponent. Provides the ability to authorize
  * using a controller callback. Your controller"s isAuthorized() method should

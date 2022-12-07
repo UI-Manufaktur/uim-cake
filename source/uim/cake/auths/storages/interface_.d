@@ -1,4 +1,4 @@
-module uim.caketh\Storage;
+module uim.cake.auth\Storage;
 
 @safe:
 import uim.cake

@@ -1,4 +1,4 @@
-module uim.caketh;
+module uim.cake.auth;
 
 @safe:
 import uim.cake

@@ -14,7 +14,7 @@ import uim.caketps\ServerRequest;
 import uim.cakegs\LogTrait;
 import uim.cakem.Locator\LocatorAwareTrait;
 import uim.cakeutings\Router;
-import uim.cakeews\ViewVarsTrait;
+import uim.cake.views.ViewVarsTrait;
 use Closure;
 use Psr\Http\Message\IResponse;
 use ReflectionClass;

@@ -1,12 +1,7 @@
 module uim.cake.ORM;
 
-import uim.cake.collections\Collection;
-import uim.cake.collections\CollectionTrait;
-import uim.cake.databases.exceptions\DatabaseException;
-import uim.cake.databases.IStatement;
-import uim.cake.datasources\IEntity;
-import uim.cake.datasources\ResultSetInterface;
-use SplFixedArray;
+@safe:
+import uim.cake;
 
 /**
  * Represents the results obtained after executing a query for a specific table

@@ -1,8 +1,7 @@
 module uim.cake.ORM;
 
-import uim.cake.datasources\IEntity;
-import uim.cake.datasources\EntityTrait;
-import uim.cake.datasources\InvalidPropertyInterface;
+@safe:
+import uim.cake;
 
 /**
  * An entity represents a single result row from a repository. It exposes the

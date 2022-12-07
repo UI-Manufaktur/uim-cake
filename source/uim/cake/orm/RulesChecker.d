@@ -1,12 +1,7 @@
 module uim.cake.ORM;
 
-import uim.cake.datasources\RuleInvoker;
-import uim.cake.datasources\RulesChecker as BaseRulesChecker;
-import uim.cake.orm.Rule\ExistsIn;
-import uim.cake.orm.Rule\IsUnique;
-import uim.cake.orm.Rule\LinkConstraint;
-import uim.cake.orm.Rule\ValidCount;
-import uim.cake.utilities.Inflector;
+@safe:
+import uim.cake;
 
 /**
  * ORM flavoured rules checker.

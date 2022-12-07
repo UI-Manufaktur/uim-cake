@@ -1,35 +1,7 @@
 module uim.cake.ORM;
 
-use ArrayObject;
-use BadMethodCallException;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.databases.Connection;
-import uim.cake.databases.Schema\TableSchemaInterface;
-import uim.cake.databases.TypeFactory;
-import uim.cake.datasources\ConnectionManager;
-import uim.cake.datasources\IEntity;
-import uim.cake.datasources\Exception\InvalidPrimaryKeyException;
-import uim.cake.datasources\IRepository;
-import uim.cake.datasources\RulesAwareTrait;
-import uim.cake.events\IEventDispatcher;
-import uim.cake.events\EventDispatcherTrait;
-import uim.cake.events\IEventListener;
-import uim.cake.events\EventManager;
-import uim.cake.orm.associations\BelongsTo;
-import uim.cake.orm.associations\BelongsToMany;
-import uim.cake.orm.associations\HasMany;
-import uim.cake.orm.associations\HasOne;
-import uim.cake.orm.Exception\MissingEntityException;
-import uim.cake.orm.Exception\PersistenceFailedException;
-import uim.cake.orm.Exception\RolledbackTransactionException;
-import uim.cake.orm.Rule\IsUnique;
-import uim.cake.utilities.Inflector;
-import uim.cake.validations\ValidatorAwareInterface;
-import uim.cake.validations\ValidatorAwareTrait;
-use Exception;
-use InvalidArgumentException;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Represents a single database table.

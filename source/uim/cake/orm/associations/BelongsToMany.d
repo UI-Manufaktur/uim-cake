@@ -1,19 +1,7 @@
 module uim.cake.orm.associations;
 
-import uim.cake.core.App;
-import uim.cake.databases.expressions\IdentifierExpression;
-import uim.cake.databases.expressions\QueryExpression;
-import uim.cake.databases.IExpression;
-import uim.cake.datasources\IEntity;
-import uim.cake.orm.associations;
-import uim.cake.orm.associations\Loader\SelectWithPivotLoader;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Hash;
-import uim.cake.utilities.Inflector;
-use Closure;
-use InvalidArgumentException;
-use SplObjectStorage;
+@safe:
+import uim.cake;
 
 /**
  * Represents an M - N relationship where there exists a junction - or join - table
