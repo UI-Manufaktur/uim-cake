@@ -76,7 +76,7 @@ class Configure
         }
 
         if (isset(myConfig["debug"])) {
-            if (static::$_hasIniSet === null) {
+            if (static::$_hasIniSet == null) {
                 static::$_hasIniSet = function_exists("ini_set");
             }
             if (static::$_hasIniSet) {
@@ -101,7 +101,7 @@ class Configure
      * @link https://book.UIM.org/4/en/development/configuration.html#reading-configuration-data
      */
     static function read(Nullable!string $var = null, $default = null) {
-        if ($var === null) {
+        if ($var == null) {
             return static::$_values;
         }
 
@@ -197,7 +197,7 @@ class Configure
      * @return array|string|null
      */
     static function consume(string $var) {
-        if (strpos($var, ".") === false) {
+        if (strpos($var, ".") == false) {
             if (!isset(static::$_values[$var])) {
                 return null;
             }
@@ -417,7 +417,7 @@ class Configure
      * @throws \RuntimeException
      */
     static bool store(string myName, string $cacheConfig = "default", ?array myData = null) {
-        if (myData === null) {
+        if (myData == null) {
             myData = static::$_values;
         }
         if (!class_exists(Cache::class)) {

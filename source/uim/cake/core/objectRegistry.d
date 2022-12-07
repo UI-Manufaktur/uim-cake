@@ -80,7 +80,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         myClassName = myName;
         if (is_string(myName)) {
             myClassName = this._resolveClassName(myName);
-            if (myClassName === null) {
+            if (myClassName == null) {
                 [myPlugin, myName] = pluginSplit(myName);
                 this._throwMissingClassError(myName, myPlugin);
             }

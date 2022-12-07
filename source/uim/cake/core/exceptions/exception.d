@@ -82,7 +82,7 @@ class CakeException : RuntimeException
      */
     function responseHeader($header = null, myValue = null): ?array
     {
-        if ($header === null) {
+        if ($header == null) {
             return this._responseHeaders;
         }
 

@@ -119,9 +119,9 @@ class QueryCompiler
     {
         return function ($part, $partName) use (&mySql, myQuery, $binder) {
             if (
-                $part === null ||
+                $part == null ||
                 (is_array($part) && empty($part)) ||
-                ($part instanceof Countable && count($part) === 0)
+                ($part instanceof Countable && count($part) == 0)
             ) {
                 return;
             }
@@ -198,7 +198,7 @@ class QueryCompiler
             $normalized[] = $p;
         }
 
-        if ($distinct === true) {
+        if ($distinct == true) {
             $distinct = "DISTINCT ";
         }
 
@@ -306,7 +306,7 @@ class QueryCompiler
             if ($part instanceof IExpression) {
                 $part = $part.sql($binder);
             }
-            if ($part[0] === "(") {
+            if ($part[0] == "(") {
                 $part = substr($part, 1, -1);
             }
             $set[] = $part;
@@ -328,7 +328,7 @@ class QueryCompiler
     protected string _buildUnionPart(array $parts, Query myQuery, ValueBinder $binder) {
         $parts = array_map(function ($p) use ($binder) {
             $p["query"] = $p["query"].sql($binder);
-            $p["query"] = $p["query"][0] === "(" ? trim($p["query"], "()") : $p["query"];
+            $p["query"] = $p["query"][0] == "(" ? trim($p["query"], "()") : $p["query"];
             $prefix = $p["all"] ? "ALL " : "";
             if (this._orderedUnion) {
                 return "{$prefix}({$p["query"]})";
@@ -402,7 +402,7 @@ class QueryCompiler
      * @return string SQL fragment.
      */
     protected string _buildModifierPart(array $parts, Query myQuery, ValueBinder $binder) {
-        if ($parts === []) {
+        if ($parts == []) {
             return "";
         }
 

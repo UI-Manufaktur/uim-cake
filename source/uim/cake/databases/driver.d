@@ -146,7 +146,7 @@ abstract class Driver : IDriver
      * Returns connected server version.
      */
     string version() {
-        if (this._version === null) {
+        if (this._version == null) {
             this.connect();
             this._version = (string)this._connection.getAttribute(PDO::ATTR_SERVER_VERSION);
         }
@@ -160,7 +160,7 @@ abstract class Driver : IDriver
      * @return \PDO
      */
     auto getConnection() {
-        if (this._connection === null) {
+        if (this._connection == null) {
             throw new MissingConnectionException([
                 "driver":App::shortName(static::class, "Database/Driver"),
                 "reason":"Unknown",
@@ -305,13 +305,13 @@ abstract class Driver : IDriver
      * @inheritDoc
      */
     string schemaValue(myValue) {
-        if (myValue === null) {
+        if (myValue == null) {
             return "NULL";
         }
-        if (myValue === false) {
+        if (myValue == false) {
             return "FALSE";
         }
-        if (myValue === true) {
+        if (myValue == true) {
             return "TRUE";
         }
         if (is_float(myValue)) {
@@ -321,13 +321,13 @@ abstract class Driver : IDriver
         if (
             (
                 is_int(myValue) ||
-                myValue === "0"
+                myValue == "0"
             ) ||
             (
                 is_numeric(myValue) &&
-                strpos(myValue, ",") === false &&
+                strpos(myValue, ",") == false &&
                 substr(myValue, 0, 1) !== "0" &&
-                strpos(myValue, "e") === false
+                strpos(myValue, "e") == false
             )
         ) {
             return (string)myValue;
@@ -360,7 +360,7 @@ abstract class Driver : IDriver
      * @inheritDoc
      */
     bool isConnected() {
-        if (this._connection === null) {
+        if (this._connection == null) {
             $connected = false;
         } else {
             try {

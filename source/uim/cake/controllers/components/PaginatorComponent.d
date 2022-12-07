@@ -149,7 +149,7 @@ class PaginatorComponent : Component
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
 <<<<<<< HEAD
      *   return $q.where(["name":"CakePHP"])
-=======
+=====
      *   return $q.where(["name": "UIM"])
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
      * });

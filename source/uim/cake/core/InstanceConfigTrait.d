@@ -120,7 +120,7 @@ trait InstanceConfigTrait
      */
     auto getConfigOrFail(string myKey) {
         myConfig = this.getConfig(myKey);
-        if (myConfig === null) {
+        if (myConfig == null) {
             throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", myKey));
         }
 
@@ -171,11 +171,11 @@ trait InstanceConfigTrait
      * @return mixed
      */
     protected auto _configRead(Nullable!string myKey) {
-        if (myKey === null) {
+        if (myKey == null) {
             return this._config;
         }
 
-        if (strpos(myKey, ".") === false) {
+        if (strpos(myKey, ".") == false) {
             return this._config[myKey] ?? null;
         }
 
@@ -204,7 +204,7 @@ trait InstanceConfigTrait
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
     protected void _configWrite(myKey, myValue, myMerge = false) {
-        if (is_string(myKey) && myValue === null) {
+        if (is_string(myKey) && myValue == null) {
             this._configDelete(myKey);
 
             return;
@@ -212,7 +212,7 @@ trait InstanceConfigTrait
 
         if (myMerge) {
             $update = is_array(myKey) ? myKey : [myKey: myValue];
-            if (myMerge === "shallow") {
+            if (myMerge == "shallow") {
                 this._config = array_merge(this._config, Hash::expand($update));
             } else {
                 this._config = Hash::merge(this._config, Hash::expand($update));
@@ -229,7 +229,7 @@ trait InstanceConfigTrait
             return;
         }
 
-        if (strpos(myKey, ".") === false) {
+        if (strpos(myKey, ".") == false) {
             this._config[myKey] = myValue;
 
             return;
@@ -259,7 +259,7 @@ trait InstanceConfigTrait
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
     protected void _configDelete(string myKey) {
-        if (strpos(myKey, ".") === false) {
+        if (strpos(myKey, ".") == false) {
             unset(this._config[myKey]);
 
             return;
@@ -278,7 +278,7 @@ trait InstanceConfigTrait
                 break;
             }
 
-            if ($i === $length - 1) {
+            if ($i == $length - 1) {
                 unset($update[$k]);
                 break;
             }

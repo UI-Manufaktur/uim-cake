@@ -300,7 +300,7 @@ class Query : IExpression, IteratorAggregate
      * ### Example
      * ```
      * myQuery.select(["title"]).from("articles").traverse(function (myValue, $clause) {
-     *     if ($clause === "select") {
+     *     if ($clause == "select") {
      *         var_dump(myValue);
      *     }
      * });
@@ -331,7 +331,7 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * myQuery.select(["title"]).from("articles").traverse(function (myValue, $clause) {
-     *     if ($clause === "select") {
+     *     if ($clause == "select") {
      *         var_dump(myValue);
      *     }
      * }, ["select", "from"]);
@@ -498,7 +498,7 @@ class Query : IExpression, IteratorAggregate
      * @return this
      */
     function distinct($on = [], $overwrite = false) {
-        if ($on === []) {
+        if ($on == []) {
             $on = true;
         } elseif (is_string($on)) {
             $on = [$on];
@@ -1450,7 +1450,7 @@ class Query : IExpression, IteratorAggregate
             this.limit($limit);
         }
         $limit = this.clause("limit");
-        if ($limit === null) {
+        if ($limit == null) {
             $limit = 25;
             this.limit($limit);
         }
@@ -1856,7 +1856,7 @@ class Query : IExpression, IteratorAggregate
      */
     function func(): FunctionsBuilder
     {
-        if (this._functionsBuilder === null) {
+        if (this._functionsBuilder == null) {
             this._functionsBuilder = new FunctionsBuilder();
         }
 
@@ -1874,7 +1874,7 @@ class Query : IExpression, IteratorAggregate
      */
     #[\ReturnTypeWillChange]
     auto getIterator() {
-        if (this._iterator === null || this._dirty) {
+        if (this._iterator == null || this._dirty) {
             this._iterator = this.execute();
         }
 
@@ -2047,7 +2047,7 @@ class Query : IExpression, IteratorAggregate
      */
     auto getValueBinder(): ValueBinder
     {
-        if (this._valueBinder === null) {
+        if (this._valueBinder == null) {
             this._valueBinder = new ValueBinder();
         }
 
@@ -2141,7 +2141,7 @@ class Query : IExpression, IteratorAggregate
      */
     auto getSelectTypeMap(): TypeMap
     {
-        if (this._selectTypeMap === null) {
+        if (this._selectTypeMap == null) {
             this._selectTypeMap = new TypeMap();
         }
 
@@ -2236,7 +2236,7 @@ class Query : IExpression, IteratorAggregate
             $append = $append(this.newExpr(), this);
         }
 
-        if ($expression.getConjunction() === $conjunction) {
+        if ($expression.getConjunction() == $conjunction) {
             $expression.add($append, myTypes);
         } else {
             $expression = this.newExpr()

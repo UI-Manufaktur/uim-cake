@@ -103,7 +103,7 @@ class App {
         aClassType = "/" . aClassType . "/";
 
         $pos = strrpos(aClassName, aClassType);
-        if ($pos === false) {
+        if ($pos == false) {
             return aClassName;
         }
 
@@ -167,16 +167,16 @@ class App {
      */
     static function path(string aClassType, Nullable!string myPlugin = null): array
     {
-        if (myPlugin === null && aClassType[0] === strtolower(aClassType[0])) {
+        if (myPlugin == null && aClassType[0] == strtolower(aClassType[0])) {
             return (array)Configure::read("App.paths." . aClassType);
         }
 
-        if (aClassType === "templates") {
+        if (aClassType == "templates") {
             /** @psalm-suppress PossiblyNullArgument */
             return [Plugin::templatePath(myPlugin)];
         }
 
-        if (aClassType === "locales") {
+        if (aClassType == "locales") {
             /** @psalm-suppress PossiblyNullArgument */
             return [Plugin::path(myPlugin) . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR];
         }
@@ -235,7 +235,7 @@ class App {
      * @return array<string> Full path to package
      */
     static string[] core(string aClassType) {
-        if (aClassType === "templates") {
+        if (aClassType == "templates") {
             return [CORE_PATH . "templates" . DIRECTORY_SEPARATOR];
         }
 

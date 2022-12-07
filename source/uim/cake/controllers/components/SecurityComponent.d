@@ -90,7 +90,7 @@ class SecurityComponent : Component
         try {
             this._secureRequired($controller);
 
-            if (this._action === this._config["blackHoleCallback"]) {
+            if (this._action == this._config["blackHoleCallback"]) {
                 throw new AuthSecurityException(sprintf(
                     "Action %s is defined as the blackhole callback.",
                     this._action
@@ -193,7 +193,7 @@ class SecurityComponent : Component
 
         $requireSecure = this._config["requireSecure"];
         if (
-            ($requireSecure[0] === "*" ||
+            ($requireSecure[0] == "*" ||
                 in_array(this._action, $requireSecure, true)
             ) &&
             !$controller.getRequest().is("ssl")
@@ -343,7 +343,7 @@ class SecurityComponent : Component
                 foreach ($unlockedFields as $off) {
                     $off = explode(".", $off);
                     myField = array_values(array_intersect(explode(".", myKey), $off));
-                    $isUnlocked = (myField === $off);
+                    $isUnlocked = (myField == $off);
                     if ($isUnlocked) {
                         break;
                     }
@@ -521,7 +521,7 @@ class SecurityComponent : Component
         foreach (myDataFields as myKey: myValue) {
             if (is_int(myKey)) {
                 $foundKey = array_search(myValue, $expectedFields, true);
-                if ($foundKey === false) {
+                if ($foundKey == false) {
                     myMessages[] = sprintf($intKeyMessage, myValue);
                 } else {
                     unset($expectedFields[$foundKey]);
@@ -545,7 +545,7 @@ class SecurityComponent : Component
      * @return string|null Error message about expected fields
      */
     protected string _debugExpectedFields(array $expectedFields = [], string $missingMessage = "") {
-        if (count($expectedFields) === 0) {
+        if (count($expectedFields) == 0) {
             return null;
         }
 

@@ -39,9 +39,9 @@ class IdentifierQuoter
         $binder = myQuery.getValueBinder();
         myQuery.setValueBinder(null);
 
-        if (myQuery.type() === "insert") {
+        if (myQuery.type() == "insert") {
             this._quoteInsert(myQuery);
-        } elseif (myQuery.type() === "update") {
+        } elseif (myQuery.type() == "update") {
             this._quoteUpdate(myQuery);
         } else {
             this._quoteParts(myQuery);
@@ -229,7 +229,7 @@ class IdentifierQuoter
 
                 return $part;
             }
-            if (is_string($part) && strpos($part, " ") === false) {
+            if (is_string($part) && strpos($part, " ") == false) {
                 return this._driver.quoteIdentifier($part);
             }
 

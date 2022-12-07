@@ -112,7 +112,7 @@ class RequestHandlerComponent : Component
      */
     protected void _setExtension(ServerRequest myRequest, Response $response) {
         $accept = myRequest.parseAccept();
-        if (empty($accept) || current($accept)[0] === "text/html") {
+        if (empty($accept) || current($accept)[0] == "text/html") {
             return;
         }
 
@@ -298,7 +298,7 @@ class RequestHandlerComponent : Component
         }
 
         [myContentsType] = explode(";", myRequest.contentType() ?? "");
-        if (myType === null) {
+        if (myType == null) {
             return $controller.getResponse().mapType(myContentsType);
         }
 
@@ -306,7 +306,7 @@ class RequestHandlerComponent : Component
             return null;
         }
 
-        return myType === $controller.getResponse().mapType(myContentsType);
+        return myType == $controller.getResponse().mapType(myContentsType);
     }
 
     /**
@@ -330,7 +330,7 @@ class RequestHandlerComponent : Component
 
         $acceptRaw = $controller.getRequest().parseAccept();
         if (empty($acceptRaw)) {
-            return myType ? myType === this.ext : this.ext;
+            return myType ? myType == this.ext : this.ext;
         }
 
         /** @var array $accepts */
@@ -344,7 +344,7 @@ class RequestHandlerComponent : Component
         }
 
         myTypes = (array)myType;
-        if (count(myTypes) === 1) {
+        if (count(myTypes) == 1) {
             if (this.ext) {
                 return in_array(this.ext, myTypes, true);
             }
@@ -401,7 +401,7 @@ class RequestHandlerComponent : Component
         }
 
         $viewClass = null;
-        if (myBuilder.getClassName() === null) {
+        if (myBuilder.getClassName() == null) {
             $viewClass = App::className($view, "View", "View");
         }
 
@@ -447,7 +447,7 @@ class RequestHandlerComponent : Component
         $controller = this.getController();
         $response = $controller.getResponse();
 
-        if (strpos(myType, "/") === false) {
+        if (strpos(myType, "/") == false) {
             $cType = $response.getMimeType(myType);
         }
         if (is_array($cType)) {

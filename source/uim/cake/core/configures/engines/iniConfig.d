@@ -64,7 +64,7 @@ class IniConfig : ConfigEngineInterface
      *     all sections in the ini file.
      */
     this(Nullable!string myPath = null, Nullable!string $section = null) {
-        if (myPath === null) {
+        if (myPath == null) {
             myPath = CONFIG;
         }
         this._path = myPath;
@@ -111,7 +111,7 @@ class IniConfig : ConfigEngineInterface
     protected auto _parseNestedValues(array myValues): array
     {
         foreach (myValues as myKey: myValue) {
-            if (myValue === "1") {
+            if (myValue == "1") {
                 myValue = true;
             }
             if (myValue == "") {
@@ -169,13 +169,13 @@ class IniConfig : ConfigEngineInterface
      * @return string String value for ini file.
      */
     protected string _value(myValue) {
-        if (myValue === null) {
+        if (myValue == null) {
             return "null";
         }
-        if (myValue === true) {
+        if (myValue == true) {
             return "true";
         }
-        if (myValue === false) {
+        if (myValue == false) {
             return "false";
         }
 

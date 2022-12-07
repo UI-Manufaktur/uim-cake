@@ -169,7 +169,7 @@ class Connection : ConnectionInterface
         if (is_string(myDriver)) {
             /** @psalm-var class-string<\Cake\Database\IDriver>|null myClassName */
             myClassName = App::className(myDriver, "Database/Driver");
-            if (myClassName === null) {
+            if (myClassName == null) {
                 throw new MissingDriverException(["driver":myDriver]);
             }
             myDriver = new myClassName(myConfig);
@@ -465,7 +465,7 @@ class Connection : ConnectionInterface
             return false;
         }
 
-        if (this._transactionLevel === 0) {
+        if (this._transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
                 /** @var \Cake\Database\Exception\NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
@@ -503,10 +503,10 @@ class Connection : ConnectionInterface
         }
 
         $useSavePoint = this.isSavePointsEnabled();
-        if ($toBeginning === null) {
+        if ($toBeginning == null) {
             $toBeginning = !$useSavePoint;
         }
-        if (this._transactionLevel === 0 || $toBeginning) {
+        if (this._transactionLevel == 0 || $toBeginning) {
             this._transactionLevel = 0;
             this._transactionStarted = false;
             this.nestedTransactionRollbackException = null;
@@ -521,7 +521,7 @@ class Connection : ConnectionInterface
         $savePoint = this._transactionLevel--;
         if ($useSavePoint) {
             this.rollbackSavepoint($savePoint);
-        } elseif (this.nestedTransactionRollbackException === null) {
+        } elseif (this.nestedTransactionRollbackException == null) {
             this.nestedTransactionRollbackException = new NestedTransactionRollbackException();
         }
 
@@ -538,7 +538,7 @@ class Connection : ConnectionInterface
      * @return this
      */
     function enableSavePoints(bool myEnable = true) {
-        if (myEnable === false) {
+        if (myEnable == false) {
             this._useSavePoints = false;
         } else {
             this._useSavePoints = this._driver.supports(IDriver::FEATURE_SAVEPOINT);
@@ -641,7 +641,7 @@ class Connection : ConnectionInterface
             throw $e;
         }
 
-        if (myResult === false) {
+        if (myResult == false) {
             this.rollback(false);
 
             return false;
