@@ -133,7 +133,7 @@ class DigestAuthenticate : BasicAuthenticate
         $digest = myRequest.getEnv("PHP_AUTH_DIGEST");
         if (empty($digest) && function_exists("apache_request_headers")) {
             $headers = apache_request_headers();
-            if (!empty($headers["Authorization"]) && substr($headers["Authorization"], 0, 7) === "Digest ") {
+            if (!empty($headers["Authorization"]) && substr($headers["Authorization"], 0, 7) == "Digest ") {
                 $digest = substr($headers["Authorization"], 7);
             }
         }
@@ -152,7 +152,7 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function parseAuthData(string $digest): ?array
     {
-        if (substr($digest, 0, 7) === "Digest ") {
+        if (substr($digest, 0, 7) == "Digest ") {
             $digest = substr($digest, 7);
         }
         myKeys = $match = [];
@@ -254,7 +254,7 @@ class DigestAuthenticate : BasicAuthenticate
      */
     protected bool validNonce(string $nonce) {
         myValue = base64_decode($nonce);
-        if (myValue === false) {
+        if (myValue == false) {
             return false;
         }
         $parts = explode(":", myValue);

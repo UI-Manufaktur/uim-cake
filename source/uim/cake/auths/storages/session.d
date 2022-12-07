@@ -100,11 +100,11 @@ class SessionStorage : IStorage {
 
 
     function redirectUrl(myUrl = null) {
-        if (myUrl === null) {
+        if (myUrl == null) {
             return this._session.read(this._config["redirect"]);
         }
 
-        if (myUrl === false) {
+        if (myUrl == false) {
             this._session.delete(this._config["redirect"]);
 
             return null;

@@ -76,7 +76,7 @@ class ArrayEngine : CacheEngine
      * @return int|false New incremented value, false otherwise
      */
     function increment(string myKey, int $offset = 1) {
-        if (this.get(myKey) === null) {
+        if (this.get(myKey) == null) {
             this.set(myKey, 0);
         }
         myKey = this._key(myKey);
@@ -93,7 +93,7 @@ class ArrayEngine : CacheEngine
      * @return int|false New decremented value, false otherwise
      */
     function decrement(string myKey, int $offset = 1) {
-        if (this.get(myKey) === null) {
+        if (this.get(myKey) == null) {
             this.set(myKey, 0);
         }
         myKey = this._key(myKey);

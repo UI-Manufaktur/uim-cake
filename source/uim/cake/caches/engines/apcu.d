@@ -65,7 +65,7 @@ class ApcuEngine : CacheEngine
      */
     auto get(myKey, $default = null) {
         myValue = apcu_fetch(this._key(myKey), $success);
-        if ($success === false) {
+        if ($success == false) {
             return $default;
         }
 
@@ -133,7 +133,7 @@ class ApcuEngine : CacheEngine
 
         $cache = apcu_cache_info(); // Raises warning by itself already
         foreach ($cache["cache_list"] as myKey) {
-            if (strpos(myKey["info"], this._config["prefix"]) === 0) {
+            if (strpos(myKey["info"], this._config["prefix"]) == 0) {
                 apcu_delete(myKey["info"]);
             }
         }
@@ -178,7 +178,7 @@ class ApcuEngine : CacheEngine
             foreach (this._compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     myValue = 1;
-                    if (apcu_store(myGroup, myValue) === false) {
+                    if (apcu_store(myGroup, myValue) == false) {
                         this.warning(
                             sprintf("Failed to store key "%s" with value "%s" into APCu cache.", myGroup, myValue)
                         );

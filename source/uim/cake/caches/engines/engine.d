@@ -80,7 +80,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException When the key is not valid.
      */
     protected void ensureValidKey(myKey) {
-        if (!is_string(myKey) || strlen(myKey) === 0) {
+        if (!is_string(myKey) || strlen(myKey) == 0) {
             throw new InvalidArgumentException("A cache key must be a non-empty string.");
         }
     }
@@ -97,12 +97,12 @@ abstract class CacheEngine : ICache, ICacheEngine
         if (!is_iterable($iterable)) {
             throw new InvalidArgumentException(sprintf(
                 "A cache %s must be either an array or a Traversable.",
-                $check === self::CHECK_VALUE ? "key set" : "set"
+                $check == self::CHECK_VALUE ? "key set" : "set"
             ));
         }
 
         foreach ($iterable as myKey: myValue) {
-            if ($check === self::CHECK_VALUE) {
+            if ($check == self::CHECK_VALUE) {
                 this.ensureValidKey(myValue);
             } else {
                 this.ensureValidKey(myKey);
@@ -152,7 +152,7 @@ abstract class CacheEngine : ICache, ICacheEngine
         try {
             foreach (myValues as myKey: myValue) {
                 $success = this.set(myKey, myValue);
-                if ($success === false) {
+                if ($success == false) {
                     return false;
                 }
             }
@@ -178,7 +178,7 @@ abstract class CacheEngine : ICache, ICacheEngine
 
         foreach (myKeys as myKey) {
             myResult = this.delete(myKey);
-            if (myResult === false) {
+            if (myResult == false) {
                 return false;
             }
         }
@@ -271,7 +271,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      */
     bool add(string myKey, myValue) {
         $cachedValue = this.get(myKey);
-        if ($cachedValue === null) {
+        if ($cachedValue == null) {
             return this.set(myKey, myValue);
         }
 
@@ -344,7 +344,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return int
      */
     protected int duration($ttl) {
-        if ($ttl === null) {
+        if ($ttl == null) {
             return this._config["duration"];
         }
         if (is_int($ttl)) {

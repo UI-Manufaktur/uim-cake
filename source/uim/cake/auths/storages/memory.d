@@ -39,11 +39,11 @@ class MemoryStorage : IStorage
 
 
     function redirectUrl(myUrl = null) {
-        if (myUrl === null) {
+        if (myUrl == null) {
             return this._redirectUrl;
         }
 
-        if (myUrl === false) {
+        if (myUrl == false) {
             this._redirectUrl = null;
 
             return null;

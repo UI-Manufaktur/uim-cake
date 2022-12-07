@@ -45,6 +45,6 @@ class WeakPasswordHasher : AbstractPasswordHasher
      * @return bool True if hashes match else false.
      */
     bool check(string myPassword, string myHashedPassword) {
-        return myHashedPassword === this.hash(myPassword);
+        return myHashedPassword == this.hash(myPassword);
     }
 }

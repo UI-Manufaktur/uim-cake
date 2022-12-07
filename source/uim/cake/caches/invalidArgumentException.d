@@ -8,7 +8,7 @@ module uim.cake.caches.invalidargumentexception;;
 
 @safe:
 import uim.cake;
-=======
+=====
 module uim.cake.caches.invalidargumentexception;
 
 @safe:

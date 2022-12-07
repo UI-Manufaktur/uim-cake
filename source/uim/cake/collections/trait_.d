@@ -34,7 +34,7 @@ trait CollectionTrait
 
 
     ICollection filter(?callable $callback = null) {
-        if ($callback === null) {
+        if ($callback == null) {
             $callback = function ($v) {
                 return (bool)$v;
             };
@@ -64,7 +64,7 @@ trait CollectionTrait
 
     bool some(callable $callback) {
         foreach (this.optimizeUnwrap() as myKey: myValue) {
-            if ($callback(myValue, myKey) === true) {
+            if ($callback(myValue, myKey) == true) {
                 return true;
             }
         }
@@ -75,7 +75,7 @@ trait CollectionTrait
 
     bool contains(myValue) {
         foreach (this.optimizeUnwrap() as $v) {
-            if (myValue === $v) {
+            if (myValue == $v) {
                 return true;
             }
         }
@@ -145,7 +145,7 @@ trait CollectionTrait
                 return [myCount + 1, $sum + $current];
             }, [0, 0]);
 
-        if (myResult[0] === 0) {
+        if (myResult[0] == 0) {
             return null;
         }
 
@@ -162,7 +162,7 @@ trait CollectionTrait
         sort(myValues);
         myCount = count(myValues);
 
-        if (myCount === 0) {
+        if (myCount == 0) {
             return null;
         }
 
@@ -186,7 +186,7 @@ trait CollectionTrait
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
-            if (myPathValue === null) {
+            if (myPathValue == null) {
                 throw new InvalidArgumentException(
                     "Cannot group by path that does not exist or contains a null value. " .
                     "Use a callback to return a default value for that path."
@@ -204,7 +204,7 @@ trait CollectionTrait
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
-            if (myPathValue === null) {
+            if (myPathValue == null) {
                 throw new InvalidArgumentException(
                     "Cannot index by path that does not exist or contains a null value. " .
                     "Use a callback to return a default value for that path."
@@ -235,7 +235,7 @@ trait CollectionTrait
 
 
     function sumOf(myPath = null) {
-        if (myPath === null) {
+        if (myPath == null) {
             return array_sum(this.toList());
         }
 
@@ -298,7 +298,7 @@ trait CollectionTrait
 
         if ($iterator instanceof Countable) {
             myCount = count($iterator);
-            if (myCount === 0) {
+            if (myCount == 0) {
                 return null;
             }
             /** @var iterable $iterator */
@@ -327,7 +327,7 @@ trait CollectionTrait
         if ($iterator instanceof Countable) {
             myCount = count($iterator);
 
-            if (myCount === 0) {
+            if (myCount == 0) {
                 return this.newCollection([]);
             }
 
@@ -542,7 +542,7 @@ trait CollectionTrait
         }
         // RecursiveIteratorIterator can return duplicate key values causing
         // data loss when converted into an array
-        if ($keepKeys && get_class($iterator) === RecursiveIteratorIterator::class) {
+        if ($keepKeys && get_class($iterator) == RecursiveIteratorIterator::class) {
             $keepKeys = false;
         }
 
@@ -618,7 +618,7 @@ trait CollectionTrait
 
 
     ICollection unfold(?callable $callback = null) {
-        if ($callback === null) {
+        if ($callback == null) {
             $callback = function ($item) {
                 return $item;
             };
@@ -710,7 +710,7 @@ trait CollectionTrait
     {
         $iterator = this;
         while (
-            get_class($iterator) === Collection::class
+            get_class($iterator) == Collection::class
             && $iterator instanceof OuterIterator
         ) {
             $iterator = $iterator.getInnerIterator();
@@ -759,20 +759,20 @@ trait CollectionTrait
 
         $changeIndex = $lastIndex;
 
-        while (!($changeIndex === 0 && $currentIndexes[0] === myCollectionArraysCounts[0])) {
+        while (!($changeIndex == 0 && $currentIndexes[0] == myCollectionArraysCounts[0])) {
             $currentCombination = array_map(function (myValue, myKeys, $index) {
                 return myValue[myKeys[$index]];
             }, myCollectionArrays, myCollectionArraysKeys, $currentIndexes);
 
-            if ($filter === null || $filter($currentCombination)) {
-                myResult[] = $operation === null ? $currentCombination : $operation($currentCombination);
+            if ($filter == null || $filter($currentCombination)) {
+                myResult[] = $operation == null ? $currentCombination : $operation($currentCombination);
             }
 
             $currentIndexes[$lastIndex]++;
 
             for (
                 $changeIndex = $lastIndex;
-                $currentIndexes[$changeIndex] === myCollectionArraysCounts[$changeIndex] && $changeIndex > 0;
+                $currentIndexes[$changeIndex] == myCollectionArraysCounts[$changeIndex] && $changeIndex > 0;
                 $changeIndex--
             ) {
                 $currentIndexes[$changeIndex] = 0;
@@ -833,7 +833,7 @@ trait CollectionTrait
         /** @var \ArrayObject $iterator */
         $iterator = this.unwrap();
 
-        if (get_class($iterator) === ArrayIterator::class) {
+        if (get_class($iterator) == ArrayIterator::class) {
             $iterator = $iterator.getArrayCopy();
         }
 

@@ -80,7 +80,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * Rewinds the collection
      */
     void rewind() {
-        if (this._index === 0 && !this._started) {
+        if (this._index == 0 && !this._started) {
             this._started = true;
             super.rewind();
 

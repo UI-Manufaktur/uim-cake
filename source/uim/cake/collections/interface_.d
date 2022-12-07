@@ -41,7 +41,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myCollection = (new Collection([1, 2, 3])).filter(function (myValue, myKey) {
-     *  return myValue % 2 === 0;
+     *  return myValue % 2 == 0;
      * });
      * ```
      *
@@ -67,7 +67,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myCollection = (new Collection([1, 2, 3])).reject(function (myValue, myKey) {
-     *  return myValue % 2 === 0;
+     *  return myValue % 2 == 0;
      * });
      * ```
      *
@@ -146,7 +146,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * myCollection = (new Collection($people)).map(function ($person, myKey) {
-     *  return $person.gender === "female";
+     *  return $person.gender == "female";
      * });
      * ```
      *

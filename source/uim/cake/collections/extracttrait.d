@@ -51,7 +51,7 @@ trait ExtractTrait
         myCollectionTransform = false;
 
         foreach ($parts as $i: $column) {
-            if ($column === "{*}") {
+            if ($column == "{*}") {
                 myCollectionTransform = true;
                 continue;
             }

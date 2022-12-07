@@ -117,7 +117,7 @@ class RedisEngine : CacheEngine
         myValue = this.serialize(myValue);
 
         $duration = this.duration($ttl);
-        if ($duration === 0) {
+        if ($duration == 0) {
             return this._Redis.set(myKey, myValue);
         }
 
@@ -134,7 +134,7 @@ class RedisEngine : CacheEngine
      */
     auto get(myKey, $default = null) {
         myValue = this._Redis.get(this._key(myKey));
-        if (myValue === false) {
+        if (myValue == false) {
             return $default;
         }
 
@@ -206,7 +206,7 @@ class RedisEngine : CacheEngine
         while (true) {
             myKeys = this._Redis.scan($iterator, $pattern);
 
-            if (myKeys === false) {
+            if (myKeys == false) {
                 break;
             }
 

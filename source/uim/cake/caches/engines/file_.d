@@ -4,7 +4,7 @@
 *	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
 *	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
 **********************************************************************************************************/
-=======
+=====
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
 module uim.cake.caches.engines.file_;
 
@@ -70,7 +70,7 @@ class FileEngine : CacheEngine {
     bool init(array myConfig = []) {
         super.init(myConfig);
 
-        if (this._config["path"] === null) {
+        if (this._config["path"] == null) {
             this._config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
         }
         if (substr(this._config["path"], -1) !== DIRECTORY_SEPARATOR) {
@@ -100,7 +100,7 @@ class FileEngine : CacheEngine {
 
         myDataId = this._key(myDataId);
 
-        if (this._setKey(myDataId, true) === false) {
+        if (this._setKey(myDataId, true) == false) {
             return false;
         }
 
@@ -141,7 +141,7 @@ class FileEngine : CacheEngine {
     auto get(myDataId, $default = null) {
         myDataId = this._key(myDataId);
 
-        if (!this._init || this._setKey(myDataId) === false) {
+        if (!this._init || this._setKey(myDataId) == false) {
             return $default;
         }
 
@@ -194,7 +194,7 @@ class FileEngine : CacheEngine {
     bool delete(myDataId) {
         myDataId = this._key(myDataId);
 
-        if (this._setKey(myDataId) === false || !this._init) {
+        if (this._setKey(myDataId) == false || !this._init) {
             return false;
         }
 
@@ -351,7 +351,7 @@ class FileEngine : CacheEngine {
         if (
             empty(this._File) ||
             this._File.getBasename() !== myKey ||
-            this._File.valid() === false
+            this._File.valid() == false
         ) {
             $exists = is_file(myPath.getPathname());
             try {
@@ -441,8 +441,8 @@ class FileEngine : CacheEngine {
                 }
 
                 $hasPrefix = $prefix == ""
-                    || strpos($current.getBasename(), $prefix) === 0;
-                if ($hasPrefix === false) {
+                    || strpos($current.getBasename(), $prefix) == 0;
+                if ($hasPrefix == false) {
                     return false;
                 }
 

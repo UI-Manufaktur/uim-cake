@@ -82,7 +82,7 @@ abstract class DAuthenticate : IEventListener {
     protected auto _findUser(string myUsername, Nullable!string myPassword = null) {
         myResult = this._query(myUsername).first();
 
-        if (myResult === null) {
+        if (myResult == null) {
             // Waste time hashing the password, to prevent
             // timing side-channels. However, don"t hash
             // null passwords as authentication systems
@@ -101,7 +101,7 @@ abstract class DAuthenticate : IEventListener {
             myHasher = this.passwordHasher();
             myHashedPassword = myResult.get(myPasswordField);
 
-            if (myHashedPassword === null || myHashedPassword == "") {
+            if (myHashedPassword == null || myHashedPassword == "") {
                 // Waste time hashing the password, to prevent
                 // timing side-channels to distinguish whether
                 // user has password or not.
@@ -118,7 +118,7 @@ abstract class DAuthenticate : IEventListener {
             myResult.unset(myPasswordField);
         }
         myHidden = myResult.getHidden();
-        if (myPassword === null && in_array(myPasswordField, myHidden, true)) {
+        if (myPassword == null && in_array(myPasswordField, myHidden, true)) {
             myKey = array_search(myPasswordField, myHidden, true);
             unset(myHidden[myKey]);
             myResult.setHidden(myHidden);

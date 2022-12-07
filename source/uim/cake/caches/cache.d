@@ -5,7 +5,7 @@
 *	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
 **********************************************************************************************************/
 module uim.cake.caches.cache;
-=======
+=====
 module uim.cake.caches.cache;
 
 @safe:
@@ -106,7 +106,7 @@ class Cache
      */
     static auto getRegistry(): CacheRegistry
     {
-        if (static::$_registry === null) {
+        if (static::$_registry == null) {
             static::$_registry = new CacheRegistry();
         }
 
@@ -155,11 +155,11 @@ class Cache
                 return;
             }
 
-            if (myConfig["fallback"] === false) {
+            if (myConfig["fallback"] == false) {
                 throw $e;
             }
 
-            if (myConfig["fallback"] === myName) {
+            if (myConfig["fallback"] == myName) {
                 throw new InvalidArgumentException(sprintf(
                     ""%s" cache configuration cannot fallback to itself.",
                     myName
@@ -253,7 +253,7 @@ class Cache
 
         $backend = static::pool(myConfig);
         $success = $backend.set(myKey, myValue);
-        if ($success === false && myValue !== "") {
+        if ($success == false && myValue !== "") {
             trigger_error(
                 sprintf(
                     "%s cache was unable to write "%s" to %s cache",
@@ -491,7 +491,7 @@ class Cache
         foreach (static::configured() as myConfig) {
             static::pool(myConfig);
         }
-        if (myGroup === null) {
+        if (myGroup == null) {
             return static::$_groups;
         }
 

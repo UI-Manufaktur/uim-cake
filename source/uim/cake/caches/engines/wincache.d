@@ -62,7 +62,7 @@ class WincacheEngine : CacheEngine {
      */
     auto get(myKey, $default = null) {
         myValue = wincache_ucache_get(this._key(myKey), $success);
-        if ($success === false) {
+        if ($success == false) {
             return $default;
         }
 
@@ -118,7 +118,7 @@ class WincacheEngine : CacheEngine {
         $cacheKeys = $info["ucache_entries"];
         unset($info);
         foreach ($cacheKeys as myKey) {
-            if (strpos(myKey["key_name"], this._config["prefix"]) === 0) {
+            if (strpos(myKey["key_name"], this._config["prefix"]) == 0) {
                 wincache_ucache_delete(myKey["key_name"]);
             }
         }

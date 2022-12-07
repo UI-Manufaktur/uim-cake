@@ -11,7 +11,7 @@ import uim.cake;
  *  function isAuthorized(myUser)
  *  {
  *      if (this.request.getParam("admin")) {
- *          return myUser["role"] === "admin";
+ *          return myUser["role"] == "admin";
  *      }
  *      return !empty(myUser);
  *  }
