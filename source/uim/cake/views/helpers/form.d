@@ -563,8 +563,7 @@ class FormHelper : Helper
      * @return string A hidden input field with a security hash, or empty string when
      *   secured forms are not in use.
      */
-    function secure(array myFields = [], array $secureAttributes = []): string
-    {
+    string secure(array myFields = [], array $secureAttributes = []) {
         if (!this.formProtector) {
             return '';
         }
@@ -683,8 +682,7 @@ class FormHelper : Helper
      * @return string Formatted errors or ''.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
-    function error(string myField, $text = null, array myOptions = []): string
-    {
+    string error(string myField, $text = null, array myOptions = []) {
         if (substr(myField, -5) === '._ids') {
             myField = substr(myField, 0, -5);
         }
@@ -797,8 +795,7 @@ class FormHelper : Helper
      * @return string The formatted LABEL element
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-labels
      */
-    function label(string myFieldName, Nullable!string $text = null, array myOptions = []): string
-    {
+    string label(string myFieldName, Nullable!string $text = null, array myOptions = []) {
         if ($text === null) {
             $text = myFieldName;
             if (substr($text, -5) === '._ids') {
@@ -866,8 +863,7 @@ class FormHelper : Helper
      * @return string Completed form controls.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#generating-entire-forms
      */
-    function allControls(array myFields = [], array myOptions = []): string
-    {
+    string allControls(array myFields = [], array myOptions = []) {
         $context = this._getContext();
 
         myModelFields = $context.fieldNames();
@@ -903,8 +899,7 @@ class FormHelper : Helper
      * @return string Completed form inputs.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#generating-entire-forms
      */
-    function controls(array myFields, array myOptions = []): string
-    {
+    string controls(array myFields, array myOptions = []) {
         myFields = Hash::normalize(myFields);
 
         $out = '';
@@ -932,8 +927,7 @@ class FormHelper : Helper
      *    to customize the legend text.
      * @return string Completed form inputs.
      */
-    function fieldset(string myFields = '', array myOptions = []): string
-    {
+    string fieldset(string myFields = '', array myOptions = []) {
         $legend = myOptions['legend'] ?? true;
         myFieldset = myOptions['fieldset'] ?? true;
         $context = this._getContext();
@@ -999,8 +993,7 @@ class FormHelper : Helper
      * @psalm-suppress InvalidReturnType
      * @psalm-suppress InvalidReturnStatement
      */
-    function control(string myFieldName, array myOptions = []): string
-    {
+    string control(string myFieldName, array myOptions = []) {
         myOptions += [
             'type': null,
             'label': null,
@@ -1118,8 +1111,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions The options for group template
      * @return string The generated group template
      */
-    protected auto _groupTemplate(array myOptions): string
-    {
+    protected string _groupTemplate(array myOptions) {
         myGroupTemplate = myOptions['options']['type'] . 'FormGroup';
         if (!this.templater().get(myGroupTemplate)) {
             myGroupTemplate = 'formGroup';
@@ -1139,8 +1131,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions The options for input container template
      * @return string The generated input container template
      */
-    protected auto _inputContainerTemplate(array myOptions): string
-    {
+    protected string _inputContainerTemplate(array myOptions) {
         $inputContainerTemplate = myOptions['options']['type'] . 'Container' . myOptions['errorSuffix'];
         if (!this.templater().get($inputContainerTemplate)) {
             $inputContainerTemplate = 'inputContainer' . myOptions['errorSuffix'];
@@ -1214,8 +1205,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions the options passed to the input method
      * @return string
      */
-    protected auto _inputType(string myFieldName, array myOptions): string
-    {
+    protected string _inputType(string myFieldName, array myOptions) {
         $context = this._getContext();
 
         if ($context.isPrimaryKey(myFieldName)) {
@@ -1581,8 +1571,7 @@ class FormHelper : Helper
      * @return string A generated HTML text input element
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-textareas
      */
-    function textarea(string myFieldName, array myOptions = []): string
-    {
+    string textarea(string myFieldName, array myOptions = []) {
         myOptions = this._initInputField(myFieldName, myOptions);
         unset(myOptions['type']);
 

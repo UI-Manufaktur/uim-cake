@@ -238,8 +238,7 @@ class BreadcrumbsHelper : Helper
      * If you use the default for this option (empty), it will not render a separator.
      * @return string The breadcrumbs trail
      */
-    function render(array $attributes = [], array $separator = []): string
-    {
+    string render(array $attributes = [], array $separator = []) {
         if (!this.crumbs) {
             return '';
         }
