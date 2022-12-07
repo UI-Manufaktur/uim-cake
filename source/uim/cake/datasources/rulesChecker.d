@@ -207,15 +207,15 @@ class RulesChecker
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
     bool check(IEntity $entity, string myMode, array myOptions = []) {
-        if (myMode === self::CREATE) {
+        if (myMode == self::CREATE) {
             return this.checkCreate($entity, myOptions);
         }
 
-        if (myMode === self::UPDATE) {
+        if (myMode == self::UPDATE) {
             return this.checkUpdate($entity, myOptions);
         }
 
-        if (myMode === self::DELETE) {
+        if (myMode == self::DELETE) {
             return this.checkDelete($entity, myOptions);
         }
 

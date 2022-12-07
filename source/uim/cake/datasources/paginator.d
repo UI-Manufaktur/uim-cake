@@ -119,7 +119,7 @@ class Paginator : PaginatorInterface
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
 <<<<<<< HEAD
      *   return $q.where(["name":"CakePHP"])
-=======
+=====
      *   return $q.where(["name": "UIM"])
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
      * });
@@ -156,7 +156,7 @@ class Paginator : PaginatorInterface
         if ($object instanceof QueryInterface) {
             myQuery = $object;
             $object = myQuery.getRepository();
-            if ($object === null) {
+            if ($object == null) {
                 throw new CakeException("No repository set for query.");
             }
         }
@@ -192,7 +192,7 @@ class Paginator : PaginatorInterface
      */
     protected auto getQuery(IRepository $object, ?QueryInterface myQuery, array myData): QueryInterface
     {
-        if (myQuery === null) {
+        if (myQuery == null) {
             myQuery = $object.find(myData["finder"], myData["options"]);
         } else {
             myQuery.applyOptions(myData["options"]);
@@ -284,7 +284,7 @@ class Paginator : PaginatorInterface
         if (myParams["count"] !== null) {
             $pageCount = max((int)ceil(myParams["count"] / myParams["perPage"]), 1);
             $page = min($page, $pageCount);
-        } elseif (myParams["current"] === 0 && myParams["requestedPage"] > 1) {
+        } elseif (myParams["current"] == 0 && myParams["requestedPage"] > 1) {
             $page = 1;
         }
 
@@ -326,7 +326,7 @@ class Paginator : PaginatorInterface
     protected auto addPrevNextParams(array myParams, array myData): array
     {
         myParams["prevPage"] = myParams["page"] > 1;
-        if (myParams["count"] === null) {
+        if (myParams["count"] == null) {
             myParams["nextPage"] = true;
         } else {
             myParams["nextPage"] = myParams["count"] > myParams["page"] * myParams["perPage"];
@@ -348,7 +348,7 @@ class Paginator : PaginatorInterface
         $order = (array)myData["options"]["order"];
         $sortDefault = $directionDefault = false;
 
-        if (!empty($defaults["order"]) && count($defaults["order"]) === 1) {
+        if (!empty($defaults["order"]) && count($defaults["order"]) == 1) {
             $sortDefault = key($defaults["order"]);
             $directionDefault = current($defaults["order"]);
         }
@@ -527,7 +527,7 @@ class Paginator : PaginatorInterface
             }
 
             $order = isset(myOptions["order"]) && is_array(myOptions["order"]) ? myOptions["order"] : [];
-            if ($order && myOptions["sort"] && strpos(myOptions["sort"], ".") === false) {
+            if ($order && myOptions["sort"] && strpos(myOptions["sort"], ".") == false) {
                 $order = this._removeAliases($order, $object.getAlias());
             }
 
@@ -560,8 +560,8 @@ class Paginator : PaginatorInterface
         }
 
         if (
-            myOptions["sort"] === null
-            && count(myOptions["order"]) === 1
+            myOptions["sort"] == null
+            && count(myOptions["order"]) == 1
             && !is_numeric(key(myOptions["order"]))
         ) {
             myOptions["sort"] = key(myOptions["order"]);
@@ -583,14 +583,14 @@ class Paginator : PaginatorInterface
     {
         myResult = [];
         foreach (myFields as myField: $sort) {
-            if (strpos(myField, ".") === false) {
+            if (strpos(myField, ".") == false) {
                 myResult[myField] = $sort;
                 continue;
             }
 
             [myAlias, $currentField] = explode(".", myField);
 
-            if (myAlias === myModel) {
+            if (myAlias == myModel) {
                 myResult[$currentField] = $sort;
                 continue;
             }
@@ -624,7 +624,7 @@ class Paginator : PaginatorInterface
             if (strpos(myKey, ".") !== false) {
                 [myAlias, myField] = explode(".", myKey);
             }
-            $correctAlias = (myTableAlias === myAlias);
+            $correctAlias = (myTableAlias == myAlias);
 
             if ($correctAlias && $allowed) {
                 // Disambiguate fields in schema. As id is quite common.

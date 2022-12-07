@@ -172,8 +172,8 @@ function createCollapsibles(nodes) {
     collapser.addEventListener("click", function (event) {
       event.preventDefault();
       event.stopPropagation();
-      node.dataset.hidden = node.dataset.hidden === "true" ? "false" : "true";
-      collapser.dataset.open = collapser.dataset.open === "true" ? "false" : "true";
+      node.dataset.hidden = node.dataset.hidden == "true" ? "false" : "true";
+      collapser.dataset.open = collapser.dataset.open == "true" ? "false" : "true";
     });
 
     node.parentNode.insertBefore(collapser, node);
@@ -201,7 +201,7 @@ function attachRefEvents(nodes) {
 function openPath(container, target) {
   // Open the target element
   var expander = target.querySelector(".cake-dbg-collapse");
-  if (expander.dataset.open === "false") {
+  if (expander.dataset.open == "false") {
     expander.click();
   }
   container.querySelectorAll(".cake-dbg-object").forEach(function (el) {
@@ -218,7 +218,7 @@ function openPath(container, target) {
     }
     if (parent.classList.contains("cake-dbg-object") || parent.classList.contains("cake-dbg-array")) {
       expander = parent.querySelector(".cake-dbg-collapse");
-      if (expander.dataset.open === "false") {
+      if (expander.dataset.open == "false") {
         expander.click();
       }
     }

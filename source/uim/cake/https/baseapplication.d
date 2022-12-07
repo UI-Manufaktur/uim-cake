@@ -225,7 +225,7 @@ abstract class BaseApplication :
      */
     auto getContainer(): IContainer
     {
-        if (this.container === null) {
+        if (this.container == null) {
             this.container = this.buildContainer();
         }
 
@@ -277,7 +277,7 @@ abstract class BaseApplication :
     function handle(
         IServerRequest myRequest
     ): IResponse {
-        if (this.controllerFactory === null) {
+        if (this.controllerFactory == null) {
             this.controllerFactory = new ControllerFactory(this.getContainer());
         }
 

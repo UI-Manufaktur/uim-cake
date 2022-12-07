@@ -159,7 +159,7 @@ trait QueryTrait
      * @return this
      */
     function cache(myKey, myConfig = "default") {
-        if (myKey === false) {
+        if (myKey == false) {
             this._cache = null;
 
             return this;
@@ -203,7 +203,7 @@ trait QueryTrait
      */
     function aliasField(string myField, Nullable!string myAlias = null): array
     {
-        if (strpos(myField, ".") === false) {
+        if (strpos(myField, ".") == false) {
             myAlias = myAlias ?: this.getRepository().getAlias();
             myAliasedField = myAlias . "." . myField;
         } else {
@@ -257,7 +257,7 @@ trait QueryTrait
         if (this._cache) {
             myResults = this._cache.fetch(this);
         }
-        if (myResults === null) {
+        if (myResults == null) {
             myResults = this._decorateResults(this._execute());
             if (this._cache) {
                 this._cache.store(this, myResults);
@@ -298,7 +298,7 @@ trait QueryTrait
         if ($overwrite) {
             this._mapReduce = [];
         }
-        if ($mapper === null) {
+        if ($mapper == null) {
             if (!$overwrite) {
                 throw new InvalidArgumentException("$mapper can be null only when $overwrite is true.");
             }
@@ -413,10 +413,10 @@ trait QueryTrait
      * @throws \InvalidArgumentException
      */
     function formatResults(?callable $formatter = null, myMode = self::APPEND) {
-        if (myMode === self::OVERWRITE) {
+        if (myMode == self::OVERWRITE) {
             this._formatters = [];
         }
-        if ($formatter === null) {
+        if ($formatter == null) {
             if (myMode !== self::OVERWRITE) {
                 throw new InvalidArgumentException("$formatter can be null only when myMode is overwrite.");
             }
@@ -424,7 +424,7 @@ trait QueryTrait
             return this;
         }
 
-        if (myMode === self::PREPEND) {
+        if (myMode == self::PREPEND) {
             array_unshift(this._formatters, $formatter);
 
             return this;

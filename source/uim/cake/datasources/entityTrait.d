@@ -217,7 +217,7 @@ trait EntityTrait
 
         foreach (myField as myName: myValue) {
             myName = (string)myName;
-            if (myOptions["guard"] === true && !this.isAccessible(myName)) {
+            if (myOptions["guard"] == true && !this.isAccessible(myName)) {
                 continue;
             }
 
@@ -338,7 +338,7 @@ trait EntityTrait
      */
     bool has(myField) {
         foreach ((array)myField as $prop) {
-            if (this.get($prop) === null) {
+            if (this.get($prop) == null) {
                 return false;
             }
         }
@@ -363,7 +363,7 @@ trait EntityTrait
     bool isEmpty(string myField) {
         myValue = this.get(myField);
         if (
-            myValue === null ||
+            myValue == null ||
             (
                 is_array(myValue) &&
                 empty(myValue) ||
@@ -441,7 +441,7 @@ trait EntityTrait
      * @return this
      */
     auto setHidden(array myFields, bool myMerge = false) {
-        if (myMerge === false) {
+        if (myMerge == false) {
             this._hidden = myFields;
 
             return this;
@@ -471,7 +471,7 @@ trait EntityTrait
      * @return this
      */
     auto setVirtual(array myFields, bool myMerge = false) {
-        if (myMerge === false) {
+        if (myMerge == false) {
             this._virtual = myFields;
 
             return this;
@@ -610,7 +610,7 @@ trait EntityTrait
             return static::$_accessors[myClass][myType][$property] = "";
         }
 
-        if (static::class === Entity::class) {
+        if (static::class == Entity::class) {
             return "";
         }
 
@@ -706,7 +706,7 @@ trait EntityTrait
      * @return this
      */
     auto setDirty(string myField, bool $isDirty = true) {
-        if ($isDirty === false) {
+        if ($isDirty == false) {
             unset(this._dirty[myField]);
 
             return this;
@@ -725,7 +725,7 @@ trait EntityTrait
      * @return bool Whether the field was changed or not
      */
     bool isDirty(Nullable!string myField = null) {
-        if (myField === null) {
+        if (myField == null) {
             return !empty(this._dirty);
         }
 
@@ -798,7 +798,7 @@ trait EntityTrait
             return true;
         }
 
-        if ($includeNested === false) {
+        if ($includeNested == false) {
             return false;
         }
 
@@ -920,7 +920,7 @@ trait EntityTrait
     protected auto _nestedErrors(string myField): array
     {
         // Only one path element, check for nested entity with error.
-        if (strpos(myField, ".") === false) {
+        if (strpos(myField, ".") == false) {
             return this._readError(this.get(myField));
         }
         // Try reading the errors data with field as a simple path
@@ -1048,7 +1048,7 @@ trait EntityTrait
      */
     auto setInvalid(array myFields, bool $overwrite = false) {
         foreach (myFields as myField: myValue) {
-            if ($overwrite === true) {
+            if ($overwrite == true) {
                 this._invalid[myField] = myValue;
                 continue;
             }
@@ -1096,7 +1096,7 @@ trait EntityTrait
      * @return this
      */
     auto setAccess(myField, bool $set) {
-        if (myField === "*") {
+        if (myField == "*") {
             this._accessible = array_map(function ($p) use ($set) {
                 return $set;
             }, this._accessible);
@@ -1139,7 +1139,7 @@ trait EntityTrait
     bool isAccessible(string myField) {
         myValue = this._accessible[myField] ?? null;
 
-        return (myValue === null && !empty(this._accessible["*"])) || myValue;
+        return (myValue == null && !empty(this._accessible["*"])) || myValue;
     }
 
     /**

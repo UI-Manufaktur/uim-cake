@@ -94,7 +94,7 @@ class EventList : ArrayAccess, Countable
      */
     bool hasEvent(string myName) {
         foreach (this._events as myEvent) {
-            if (myEvent.getName() === myName) {
+            if (myEvent.getName() == myName) {
                 return true;
             }
         }

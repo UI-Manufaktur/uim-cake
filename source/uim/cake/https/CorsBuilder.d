@@ -96,7 +96,7 @@ class CorsBuilder
             if (!preg_match($domain["preg"], this._origin)) {
                 continue;
             }
-            myValue = $domain["original"] === "*" ? "*" : this._origin;
+            myValue = $domain["original"] == "*" ? "*" : this._origin;
             this._headers["Access-Control-Allow-Origin"] = myValue;
             break;
         }
@@ -114,13 +114,13 @@ class CorsBuilder
     {
         myResult = [];
         foreach ($domains as $domain) {
-            if ($domain === "*") {
+            if ($domain == "*") {
                 myResult[] = ["preg":"@.@", "original":"*"];
                 continue;
             }
 
             $original = $preg = $domain;
-            if (strpos($domain, "://") === false) {
+            if (strpos($domain, "://") == false) {
                 $preg = (this._isSsl ? "https://" : "http://") . $domain;
             }
             $preg = "@^" . str_replace("\*", ".*", preg_quote($preg, "@")) . "$@";

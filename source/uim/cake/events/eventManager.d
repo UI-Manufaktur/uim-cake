@@ -85,7 +85,7 @@ class EventManager : IEventManager
         }
 
         $argCount = func_num_args();
-        if ($argCount === 2) {
+        if ($argCount == 2) {
             this._listeners[myEventKey][static::$defaultPriority][] = [
                 "callable":myOptions,
             ];
@@ -180,7 +180,7 @@ class EventManager : IEventManager
             return this;
         }
 
-        if ($callable === null) {
+        if ($callable == null) {
             unset(this._listeners[myEventKey]);
 
             return this;
@@ -192,7 +192,7 @@ class EventManager : IEventManager
 
         foreach (this._listeners[myEventKey] as $priority: $callables) {
             foreach ($callables as $k: $callback) {
-                if ($callback["callable"] === $callable) {
+                if ($callback["callable"] == $callable) {
                     unset(this._listeners[myEventKey][$priority][$k]);
                     break;
                 }
@@ -259,7 +259,7 @@ class EventManager : IEventManager
                 break;
             }
             myResult = this._callListener($listener["callable"], myEvent);
-            if (myResult === false) {
+            if (myResult == false) {
                 myEvent.stopPropagation();
             }
             if (myResult !== null) {

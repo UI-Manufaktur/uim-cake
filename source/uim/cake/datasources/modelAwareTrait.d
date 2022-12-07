@@ -56,7 +56,7 @@ trait ModelAwareTrait
      */
     protected auto _setModelClass(string myName): void
     {
-        if (this.modelClass === null) {
+        if (this.modelClass == null) {
             this.modelClass = myName;
         }
     }
@@ -88,7 +88,7 @@ trait ModelAwareTrait
         myModelType = myModelType ?? this.getModelType();
 
         myOptions = [];
-        if (strpos(myModelClass, "\\") === false) {
+        if (strpos(myModelClass, "\\") == false) {
             [, myAlias] = pluginSplit(myModelClass, true);
         } else {
             myOptions["className"] = myModelClass;

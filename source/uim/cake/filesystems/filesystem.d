@@ -43,7 +43,7 @@ class Filesystem
             | FilesystemIterator::SKIP_DOTS;
         $directory = new FilesystemIterator(myPath, $flags);
 
-        if ($filter === null) {
+        if ($filter == null) {
             return $directory;
         }
 
@@ -70,7 +70,7 @@ class Filesystem
         $dirFilter = new RecursiveCallbackFilterIterator(
             $directory,
             function (SplFileInfo $current) {
-                if ($current.getFilename()[0] === "." && $current.isDir()) {
+                if ($current.getFilename()[0] == "." && $current.isDir()) {
                     return false;
                 }
 
@@ -83,7 +83,7 @@ class Filesystem
             RecursiveIteratorIterator::CHILD_FIRST
         );
 
-        if ($filter === null) {
+        if ($filter == null) {
             return $flatten;
         }
 
@@ -131,7 +131,7 @@ class Filesystem
             $success = @file_put_contents(myfilename, myContents, LOCK_EX);
         }
 
-        if ($success === false) {
+        if ($success == false) {
             throw new CakeException(sprintf("Failed dumping content to file `%s`", $dir));
         }
 
@@ -156,7 +156,7 @@ class Filesystem
 
         $old = umask(0);
         // phpcs:ignore
-        if (@mkdir($dir, myMode, true) === false) {
+        if (@mkdir($dir, myMode, true) == false) {
             umask($old);
             throw new CakeException(sprintf("Failed to create directory "%s"", $dir));
         }
@@ -187,8 +187,8 @@ class Filesystem
 
         myResult = true;
         foreach ($iterator as myfileInfo) {
-            $isWindowsLink = DIRECTORY_SEPARATOR === "\\" && myfileInfo.getType() === "link";
-            if (myfileInfo.getType() === self::TYPE_DIR || $isWindowsLink) {
+            $isWindowsLink = DIRECTORY_SEPARATOR == "\\" && myfileInfo.getType() == "link";
+            if (myfileInfo.getType() == self::TYPE_DIR || $isWindowsLink) {
                 // phpcs:ignore
                 myResult = myResult && @rmdir(myfileInfo.getPathname());
                 unset(myfileInfo);

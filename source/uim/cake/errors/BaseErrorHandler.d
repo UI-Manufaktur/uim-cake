@@ -74,7 +74,7 @@ abstract class BaseErrorHandler
         set_error_handler([this, "handleError"], $level);
         set_exception_handler([this, "handleException"]);
         register_shutdown_function(function (): void {
-            if ((PHP_SAPI === "cli" || PHP_SAPI === "phpdbg") && this._handled) {
+            if ((PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") && this._handled) {
                 return;
             }
             $megabytes = this._config["extraFatalErrorMemory"] ?? 4;
@@ -131,7 +131,7 @@ abstract class BaseErrorHandler
         }
         this._handled = true;
         [myError, $log] = static::mapErrorCode($code);
-        if ($log === LOG_ERR) {
+        if ($log == LOG_ERR) {
             /** @psalm-suppress PossiblyNullArgument */
             return this.handleFatalError($code, $description, myfile, $line);
         }
@@ -242,22 +242,22 @@ abstract class BaseErrorHandler
      */
     void increaseMemoryLimit(int $additionalKb) {
         $limit = ini_get("memory_limit");
-        if ($limit === false || $limit == "" || $limit === "-1") {
+        if ($limit == false || $limit == "" || $limit == "-1") {
             return;
         }
         $limit = trim($limit);
         $units = strtoupper(substr($limit, -1));
         $current = (int)substr($limit, 0, strlen($limit) - 1);
-        if ($units === "M") {
+        if ($units == "M") {
             $current *= 1024;
             $units = "K";
         }
-        if ($units === "G") {
+        if ($units == "G") {
             $current = $current * 1024 * 1024;
             $units = "K";
         }
 
-        if ($units === "K") {
+        if ($units == "K") {
             ini_set("memory_limit", ceil($current + $additionalKb) . "K");
         }
     }
@@ -309,7 +309,7 @@ abstract class BaseErrorHandler
      * @return \Cake\Error\IErrorLogger
      */
     auto getLogger() {
-        if (this.logger === null) {
+        if (this.logger == null) {
             /** @var \Cake\Error\IErrorLogger $logger */
             $logger = new this._config["errorLogger"](this._config);
 

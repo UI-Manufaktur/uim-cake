@@ -171,7 +171,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      */
     protected auto getErrorHandler(): ErrorHandler
     {
-        if (this.errorHandler === null) {
+        if (this.errorHandler == null) {
             /** @var class-string<\Cake\Error\ErrorHandler> myClassName */
             myClassName = App::className("ErrorHandler", "Error");
             this.errorHandler = new myClassName(this.getConfig());

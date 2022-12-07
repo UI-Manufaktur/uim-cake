@@ -167,7 +167,7 @@ class Client : ClientInterface
         this.setConfig(myConfig);
 
         $adapter = this._config["adapter"];
-        if ($adapter === null) {
+        if ($adapter == null) {
             $adapter = Curl::class;
 
             if (!extension_loaded("curl")) {
@@ -207,7 +207,7 @@ class Client : ClientInterface
     static function createFromUrl(string myUrl) {
         $parts = parse_url(myUrl);
 
-        if ($parts === false) {
+        if ($parts == false) {
             throw new InvalidArgumentException("String " . myUrl . " did not parse");
         }
 
@@ -561,7 +561,7 @@ class Client : ClientInterface
         myOptions += $defaults;
 
         if (myQuery) {
-            $q = strpos(myUrl, "?") === false ? "?" : "&";
+            $q = strpos(myUrl, "?") == false ? "?" : "&";
             myUrl .= $q;
             myUrl .= is_string(myQuery) ? myQuery : http_build_query(myQuery, "", "&", PHP_QUERY_RFC3986);
         }

@@ -203,7 +203,7 @@ class Debugger
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
     static function configInstance(myKey = null, myValue = null, bool myMerge = true) {
-        if (myKey === null) {
+        if (myKey == null) {
             return static::getInstance().getConfig(myKey);
         }
 
@@ -417,9 +417,9 @@ class Debugger
             if (in_array($signature, myOptions["exclude"], true)) {
                 continue;
             }
-            if (myOptions["format"] === "points" && $trace["file"] !== "[internal]") {
+            if (myOptions["format"] == "points" && $trace["file"] !== "[internal]") {
                 $back[] = ["file":$trace["file"], "line":$trace["line"]];
-            } elseif (myOptions["format"] === "array") {
+            } elseif (myOptions["format"] == "array") {
                 $back[] = $trace;
             } else {
                 if (isset($self._templates[myOptions["format"]]["traceLine"])) {
@@ -434,7 +434,7 @@ class Debugger
             }
         }
 
-        if (myOptions["format"] === "array" || myOptions["format"] === "points") {
+        if (myOptions["format"] == "array" || myOptions["format"] == "points") {
             return $back;
         }
 
@@ -450,13 +450,13 @@ class Debugger
      * @return string Normalized path
      */
     static string trimPath(string myPath) {
-        if (defined("APP") && strpos(myPath, APP) === 0) {
+        if (defined("APP") && strpos(myPath, APP) == 0) {
             return str_replace(APP, "APP/", myPath);
         }
-        if (defined("CAKE_CORE_INCLUDE_PATH") && strpos(myPath, CAKE_CORE_INCLUDE_PATH) === 0) {
+        if (defined("CAKE_CORE_INCLUDE_PATH") && strpos(myPath, CAKE_CORE_INCLUDE_PATH) == 0) {
             return str_replace(CAKE_CORE_INCLUDE_PATH, "CORE", myPath);
         }
-        if (defined("ROOT") && strpos(myPath, ROOT) === 0) {
+        if (defined("ROOT") && strpos(myPath, ROOT) == 0) {
             return str_replace(ROOT, "ROOT", myPath);
         }
 
@@ -505,7 +505,7 @@ class Debugger
                 continue;
             }
             $string = str_replace(["\r\n", "\n"], "", static::_highlight(myData[$i]));
-            if ($i === $line) {
+            if ($i == $line) {
                 $lines[] = "<span class="code-highlight">" . $string . "</span>";
             } else {
                 $lines[] = $string;
@@ -527,7 +527,7 @@ class Debugger
             return htmlentities($str);
         }
         $added = false;
-        if (strpos($str, "<?php") === false) {
+        if (strpos($str, "<?php") == false) {
             $added = true;
             $str = "<?php \n" . $str;
         }
@@ -967,15 +967,15 @@ class Debugger
     static string getType($var) {
         myType = getTypeName($var);
 
-        if (myType === "NULL") {
+        if (myType == "NULL") {
             return "null";
         }
 
-        if (myType === "double") {
+        if (myType == "double") {
             return "float";
         }
 
-        if (myType === "unknown type") {
+        if (myType == "unknown type") {
             return "unknown";
         }
 
@@ -1044,7 +1044,7 @@ class Debugger
     static function checkSecurityKeys(): void
     {
         $salt = Security::getSalt();
-        if ($salt === "__SALT__" || strlen($salt) < 32) {
+        if ($salt == "__SALT__" || strlen($salt) < 32) {
             trigger_error(
                 "Please change the value of `Security.salt` in `ROOT/config/app_local.php` " .
                 "to a random value of at least 32 characters.",

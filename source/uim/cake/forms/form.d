@@ -144,7 +144,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      */
     auto getSchema(): Schema
     {
-        if (this._schema === null) {
+        if (this._schema == null) {
             this._schema = this._buildSchema(new this._schemaClass());
         }
 
@@ -199,7 +199,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
         this._errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
             .validate(myData);
 
-        return count(this._errors) === 0;
+        return count(this._errors) == 0;
     }
 
     /**
@@ -258,11 +258,11 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
 
         myOptions += ["validate":true];
 
-        if (myOptions["validate"] === false) {
+        if (myOptions["validate"] == false) {
             return this._execute(myData);
         }
 
-        $validator = myOptions["validate"] === true ? static::DEFAULT_VALIDATOR : myOptions["validate"];
+        $validator = myOptions["validate"] == true ? static::DEFAULT_VALIDATOR : myOptions["validate"];
 
         return this.validate(myData, $validator) ? this._execute(myData) : false;
     }
@@ -286,7 +286,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return mixed
      */
     auto getData(Nullable!string myField = null) {
-        if (myField === null) {
+        if (myField == null) {
             return this._data;
         }
 

@@ -104,8 +104,8 @@ class RuleInvoker
     bool __invoke(IEntity $entity, array $scope) {
         $rule = this.rule;
         $pass = $rule($entity, this.options + $scope);
-        if ($pass === true || empty(this.options["errorField"])) {
-            return $pass === true;
+        if ($pass == true || empty(this.options["errorField"])) {
+            return $pass == true;
         }
 
         myMessage = this.options["message"] ?? "invalid";
@@ -125,6 +125,6 @@ class RuleInvoker
             $entity.setInvalidField(myErrorField, $invalidValue);
         }
 
-        return $pass === true;
+        return $pass == true;
     }
 }
