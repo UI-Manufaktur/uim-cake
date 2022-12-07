@@ -38,7 +38,7 @@ trait LocatorAwareTrait
      */
     auto getTableLocator(): ILocator
     {
-        if (this._tableLocator === null) {
+        if (this._tableLocator == null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
             this._tableLocator = FactoryLocator::get("Table");
         }
@@ -62,7 +62,7 @@ trait LocatorAwareTrait
     function fetchTable(Nullable!string myAlias = null, array myOptions = []): Table
     {
         myAlias = myAlias ?? this.defaultTable;
-        if (myAlias === null) {
+        if (myAlias == null) {
             throw new CakeException("You must provide an `myAlias` or set the `$defaultTable` property.");
         }
 

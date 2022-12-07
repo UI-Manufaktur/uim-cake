@@ -122,7 +122,7 @@ class Xml {
             $input,
             myOptions,
             function ($input, myOptions, $flags) {
-                if (myOptions["return"] === "simplexml" || myOptions["return"] === "simplexmlelement") {
+                if (myOptions["return"] == "simplexml" || myOptions["return"] == "simplexmlelement") {
                     $flags |= LIBXML_NOCDATA;
                     $xml = new SimpleXMLElement($input, $flags);
                 } else {
@@ -157,7 +157,7 @@ class Xml {
                 $xml = new DOMDocument();
                 $xml.loadHTML($input, $flags);
 
-                if (myOptions["return"] === "simplexml" || myOptions["return"] === "simplexmlelement") {
+                if (myOptions["return"] == "simplexml" || myOptions["return"] == "simplexmlelement") {
                     $xml = simplexml_import_dom($xml);
                 }
 
@@ -268,7 +268,7 @@ class Xml {
         self::_fromArray($dom, $dom, $input, myOptions["format"]);
 
         myOptions["return"] = strtolower(myOptions["return"]);
-        if (myOptions["return"] === "simplexml" || myOptions["return"] === "simplexmlelement") {
+        if (myOptions["return"] == "simplexml" || myOptions["return"] == "simplexmlelement") {
             return new SimpleXMLElement($dom.saveXML());
         }
 
@@ -299,7 +299,7 @@ class Xml {
                 if (!is_array(myValue)) {
                     if (is_bool(myValue)) {
                         myValue = (int)myValue;
-                    } elseif (myValue === null) {
+                    } elseif (myValue == null) {
                         myValue = "";
                     }
                     $ismodule = strpos(myKey, "xmlns:");
@@ -308,7 +308,7 @@ class Xml {
                         myNode.setAttributeNS("http://www.w3.org/2000/xmlns/", myKey, (string)myValue);
                         continue;
                     }
-                    if (myKey[0] !== "@" && $format === "tags") {
+                    if (myKey[0] !== "@" && $format == "tags") {
                         if (!is_numeric(myValue)) {
                             // Escape special characters
                             // https://www.w3.org/TR/REC-xml/#syntax
@@ -320,7 +320,7 @@ class Xml {
                         }
                         myNode.appendChild($child);
                     } else {
-                        if (myKey[0] === "@") {
+                        if (myKey[0] == "@") {
                             myKey = substr(myKey, 1);
                         }
                         $attribute = $dom.createAttribute(myKey);
@@ -328,7 +328,7 @@ class Xml {
                         myNode.appendChild($attribute);
                     }
                 } else {
-                    if (myKey[0] === "@") {
+                    if (myKey[0] == "@") {
                         throw new XmlException("Invalid array");
                     }
                     if (is_numeric(implode("", array_keys(myValue)))) {
@@ -384,7 +384,7 @@ class Xml {
                 $childNS = myValue["xmlns:"];
                 unset(myValue["xmlns:"]);
             }
-        } elseif (!empty(myValue) || myValue === 0 || myValue === "0") {
+        } elseif (!empty(myValue) || myValue == 0 || myValue == "0") {
             $childValue = (string)myValue;
         }
 

@@ -54,7 +54,7 @@ class TableHelper : Helper
             return 0;
         }
 
-        if (strpos($text, "<") === false && strpos($text, ">") === false) {
+        if (strpos($text, "<") == false && strpos($text, ">") == false) {
             return mb_strwidth($text);
         }
 
@@ -91,7 +91,7 @@ class TableHelper : Helper
      */
     protected auto _render(array $row, array $widths, array myOptions = []): void
     {
-        if (count($row) === 0) {
+        if (count($row) == 0) {
             return;
         }
 
@@ -137,7 +137,7 @@ class TableHelper : Helper
         $widths = this._calculateWidths($args);
 
         this._rowSeparator($widths);
-        if (myConfig["headers"] === true) {
+        if (myConfig["headers"] == true) {
             this._render(array_shift($args), $widths, ["style" => myConfig["headerStyle"]]);
             this._rowSeparator($widths);
         }
@@ -148,7 +148,7 @@ class TableHelper : Helper
 
         foreach ($args as $line) {
             this._render($line, $widths);
-            if (myConfig["rowSeparator"] === true) {
+            if (myConfig["rowSeparator"] == true) {
                 this._rowSeparator($widths);
             }
         }

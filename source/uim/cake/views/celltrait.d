@@ -43,7 +43,7 @@ trait CellTrait
     {
         $parts = explode("::", $cell);
 
-        if (count($parts) === 2) {
+        if (count($parts) == 2) {
             [myPluginAndCell, $action] = [$parts[0], $parts[1]];
         } else {
             [myPluginAndCell, $action] = [$parts[0], "display"];

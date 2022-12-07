@@ -124,7 +124,7 @@ class ValidationRule
             myResult = $callable(myValue, $context);
         }
 
-        if (myResult === false) {
+        if (myResult == false) {
             return this._message ?: false;
         }
 
@@ -152,8 +152,8 @@ class ValidationRule
 
         $newRecord = $context["newRecord"];
         if (!empty(this._on)) {
-            return (this._on === Validator::WHEN_CREATE && !$newRecord)
-                || (this._on === Validator::WHEN_UPDATE && $newRecord);
+            return (this._on == Validator::WHEN_CREATE && !$newRecord)
+                || (this._on == Validator::WHEN_UPDATE && $newRecord);
         }
 
         return false;
@@ -171,7 +171,7 @@ class ValidationRule
             if (empty(myValue)) {
                 continue;
             }
-            if (myKey === "rule" && is_array(myValue) && !is_callable(myValue)) {
+            if (myKey == "rule" && is_array(myValue) && !is_callable(myValue)) {
                 this._pass = array_slice(myValue, 1);
                 myValue = array_shift(myValue);
             }

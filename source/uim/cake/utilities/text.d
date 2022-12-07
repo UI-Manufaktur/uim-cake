@@ -98,28 +98,28 @@ class Text {
                 mb_strpos(myData, $rightBound, $offset),
             ];
             for ($i = 0; $i < 3; $i++) {
-                if ($offsets[$i] !== false && ($offsets[$i] < $tmpOffset || $tmpOffset === -1)) {
+                if ($offsets[$i] !== false && ($offsets[$i] < $tmpOffset || $tmpOffset == -1)) {
                     $tmpOffset = $offsets[$i];
                 }
             }
             if ($tmpOffset !== -1) {
                 $buffer .= mb_substr(myData, $offset, $tmpOffset - $offset);
                 $char = mb_substr(myData, $tmpOffset, 1);
-                if (!$depth && $char === $separator) {
+                if (!$depth && $char == $separator) {
                     myResults[] = $buffer;
                     $buffer = "";
                 } else {
                     $buffer .= $char;
                 }
                 if ($leftBound !== $rightBound) {
-                    if ($char === $leftBound) {
+                    if ($char == $leftBound) {
                         $depth++;
                     }
-                    if ($char === $rightBound) {
+                    if ($char == $rightBound) {
                         $depth--;
                     }
                 } else {
-                    if ($char === $leftBound) {
+                    if ($char == $leftBound) {
                         if (!$open) {
                             $depth++;
                             $open = true;
@@ -197,7 +197,7 @@ class Text {
         }
 
         $format = myOptions["format"];
-        if ($format === null) {
+        if ($format == null) {
             $format = sprintf(
                 "/(?<!%s)%s%%s%s/",
                 preg_quote(myOptions["escape"], "/"),
@@ -246,7 +246,7 @@ class Text {
         if (!$clean) {
             return $str;
         }
-        if ($clean === true) {
+        if ($clean == true) {
             $clean = ["method":"text"];
         }
         if (!is_array($clean)) {
@@ -352,7 +352,7 @@ class Text {
         }
         myOptions += ["width":72, "wordWrap":true, "indent":null, "indentAt":0];
 
-        if (!empty(myOptions["indentAt"]) && myOptions["indentAt"] === 0) {
+        if (!empty(myOptions["indentAt"]) && myOptions["indentAt"] == 0) {
             $indentLength = !empty(myOptions["indent"]) ? strlen(myOptions["indent"]) : 0;
             myOptions["width"] -= $indentLength;
 
@@ -435,10 +435,10 @@ class Text {
             $nextChar = mb_substr($text, $width, 1);
             if ($nextChar !== " ") {
                 $breakAt = mb_strrpos($part, " ");
-                if ($breakAt === false) {
+                if ($breakAt == false) {
                     $breakAt = mb_strpos($text, " ", $width);
                 }
-                if ($breakAt === false) {
+                if ($breakAt == false) {
                     $parts[] = trim($text);
                     break;
                 }
@@ -543,7 +543,7 @@ class Text {
         $truncate = mb_substr($text, mb_strlen($text) - $length + mb_strlen($ellipsis));
         if (!myOptions["exact"]) {
             $spacepos = mb_strpos($truncate, " ");
-            $truncate = $spacepos === false ? "" : trim(mb_substr($truncate, $spacepos));
+            $truncate = $spacepos == false ? "" : trim(mb_substr($truncate, $spacepos));
         }
 
         return $ellipsis . $truncate;
@@ -574,7 +574,7 @@ class Text {
             "ellipsis": "...", 
             "exact": "true", "html":false, "trimWidth":false,
         ];
-        if (!empty(myOptions["html"]) && strtolower((string)mb_internal_encoding()) === "utf-8") {
+        if (!empty(myOptions["html"]) && strtolower((string)mb_internal_encoding()) == "utf-8") {
             $default["ellipsis"] = "\xe2\x80\xa6";
         }
         myOptions += $default;
@@ -747,7 +747,7 @@ class Text {
             return "";
         }
 
-        if ($length === null) {
+        if ($length == null) {
             $length = self::_strlen($text, myOptions);
         }
 
@@ -788,7 +788,7 @@ class Text {
             $len = self::_strlen($part, myOptions);
             if ($offset !== 0 || $totalLength + $len > $length) {
                 if (
-                    strpos($part, "&") === 0
+                    strpos($part, "&") == 0
                     && preg_match($pattern, $part)
                     && $part !== html_entity_decode($part, ENT_HTML5 | ENT_QUOTES, "UTF-8")
                 ) {
@@ -825,7 +825,7 @@ class Text {
 
             // Some languages are written without word separation.
             // We recognize a string as a word if it doesn"t contain any full-width characters.
-            if (mb_strwidth($lastWord) === mb_strlen($lastWord)) {
+            if (mb_strwidth($lastWord) == mb_strlen($lastWord)) {
                 $text = mb_substr($text, 0, $spacepos);
             }
 
@@ -858,7 +858,7 @@ class Text {
         $textLen = mb_strlen($text);
 
         $pos = mb_stripos($text, $phrase);
-        if ($pos === false) {
+        if ($pos == false) {
             return mb_substr($text, 0, $radius) . $ellipsis;
         }
 
@@ -891,7 +891,7 @@ class Text {
      */
     static string toList(array $list, Nullable!string $and = null, string $separator = ", ")
     {
-        if ($and === null) {
+        if ($and == null) {
             $and = __d("cake", "and");
         }
         if (count($list) > 1) {
@@ -946,8 +946,8 @@ class Text {
                 }
                 myValues[] = myValue;
 
-                if (count(myValues) === $find) {
-                    if ($find === 3) {
+                if (count(myValues) == $find) {
+                    if ($find == 3) {
                         $map[] = ((myValues[0] % 16) * 4096) + ((myValues[1] % 64) * 64) + (myValues[2] % 64);
                     } else {
                         $map[] = ((myValues[0] % 32) * 64) + (myValues[1] % 64);
@@ -1005,7 +1005,7 @@ class Text {
 
         $l = -2;
         $i = array_search(substr($size, -2), ["KB", "MB", "GB", "TB", "PB"], true);
-        if ($i === false) {
+        if ($i == false) {
             $l = -1;
             $i = array_search(substr($size, -1), ["K", "M", "G", "T", "P"], true);
         }
@@ -1015,7 +1015,7 @@ class Text {
             return (int)($size * pow(1024, $i + 1));
         }
 
-        if (substr($size, -1) === "B" && ctype_digit(substr($size, 0, -1))) {
+        if (substr($size, -1) == "B" && ctype_digit(substr($size, 0, -1))) {
             $size = substr($size, 0, -1);
 
             return (int)$size;
@@ -1068,7 +1068,7 @@ class Text {
     static auto setTransliteratorId(string $transliteratorId): void
     {
         $transliterator = transliterator_create($transliteratorId);
-        if ($transliterator === null) {
+        if ($transliterator == null) {
             throw new CakeException("Unable to create transliterator for id: " . $transliteratorId);
         }
 
@@ -1094,7 +1094,7 @@ class Text {
         }
 
         $return = transliterator_transliterate($transliterator, $string);
-        if ($return === false) {
+        if ($return == false) {
             throw new CakeException(sprintf("Unable to transliterate string: %s", $string));
         }
 

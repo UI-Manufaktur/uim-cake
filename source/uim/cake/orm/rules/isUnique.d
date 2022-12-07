@@ -57,7 +57,7 @@ class IsUnique
 
         myAlias = myOptions["repository"].getAlias();
         $conditions = this._alias(myAlias, myFields);
-        if ($entity.isNew() === false) {
+        if ($entity.isNew() == false) {
             myKeys = (array)myOptions["repository"].getPrimaryKey();
             myKeys = this._alias(myAlias, $entity.extract(myKeys));
             if (Hash::filter(myKeys)) {

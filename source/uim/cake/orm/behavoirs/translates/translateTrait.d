@@ -18,7 +18,7 @@ trait TranslateTrait
      * @return \Cake\Datasource\IEntity|this
      */
     function translation(string myLanguage) {
-        if (myLanguage === this.get("_locale")) {
+        if (myLanguage == this.get("_locale")) {
             return this;
         }
 

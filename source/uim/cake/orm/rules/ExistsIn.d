@@ -86,7 +86,7 @@ class ExistsIn
             $realTarget = myTarget;
         }
 
-        if (!empty(myOptions["_sourceTable"]) && $realTarget === myOptions["_sourceTable"]) {
+        if (!empty(myOptions["_sourceTable"]) && $realTarget == myOptions["_sourceTable"]) {
             return true;
         }
 
@@ -108,7 +108,7 @@ class ExistsIn
         if (this._options["allowNullableNulls"]) {
             $schema = $source.getSchema();
             foreach (myFields as $i: myField) {
-                if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) === null) {
+                if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) == null) {
                     unset($bindingKey[$i], myFields[$i]);
                 }
             }
@@ -138,11 +138,11 @@ class ExistsIn
         $nulls = 0;
         $schema = $source.getSchema();
         foreach (this._fields as myField) {
-            if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) === null) {
+            if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) == null) {
                 $nulls++;
             }
         }
 
-        return $nulls === count(this._fields);
+        return $nulls == count(this._fields);
     }
 }

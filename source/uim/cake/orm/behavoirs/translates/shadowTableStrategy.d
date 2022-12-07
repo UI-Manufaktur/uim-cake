@@ -108,7 +108,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
         $locale = Hash::get(myOptions, "locale", this.getLocale());
         myConfig = this.getConfig();
 
-        if ($locale === myConfig["defaultLocale"]) {
+        if ($locale == myConfig["defaultLocale"]) {
             return;
         }
 
@@ -328,17 +328,17 @@ class ShadowTableStrategy : TranslateStrategyInterface
         // Check early if empty translations are present in the entity.
         // If this is the case, unset them to prevent persistence.
         // This only applies if this._config["allowEmptyTranslations"] is false
-        if (this._config["allowEmptyTranslations"] === false) {
+        if (this._config["allowEmptyTranslations"] == false) {
             this.unsetEmptyFields($entity);
         }
 
         this.bundleTranslatedFields($entity);
         $bundled = $entity.get("_i18n") ?: [];
-        $noBundled = count($bundled) === 0;
+        $noBundled = count($bundled) == 0;
 
         // No additional translation records need to be saved,
         // as the entity is in the default locale.
-        if ($noBundled && $locale === this.getConfig("defaultLocale")) {
+        if ($noBundled && $locale == this.getConfig("defaultLocale")) {
             return;
         }
 
@@ -423,7 +423,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param string myField Field name to be aliased.
      */
     string translationField(string myField) {
-        if (this.getLocale() === this.getConfig("defaultLocale")) {
+        if (this.getLocale() == this.getConfig("defaultLocale")) {
             return this.table.aliasField(myField);
         }
 
@@ -448,7 +448,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
         return myResults.map(function ($row) use ($allowEmpty, $locale) {
             /** @var \Cake\Datasource\IEntity|array|null $row */
-            if ($row === null) {
+            if ($row == null) {
                 return $row;
             }
 
@@ -476,7 +476,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
             myKeys = $hydrated ? $translation.getVisible() : array_keys($translation);
 
             foreach (myKeys as myField) {
-                if (myField === "locale") {
+                if (myField == "locale") {
                     $row["_locale"] = $translation[myField];
                     continue;
                 }

@@ -124,7 +124,7 @@ class RouteCollection
 
             foreach ($routes as $route) {
                 $r = $route.parse(myUrl, $method);
-                if ($r === null) {
+                if ($r == null) {
                     continue;
                 }
                 if (myQueryParameters) {
@@ -167,7 +167,7 @@ class RouteCollection
 
             foreach ($routes as $route) {
                 $r = $route.parseRequest(myRequest);
-                if ($r === null) {
+                if ($r == null) {
                     continue;
                 }
                 if ($uri.getQuery()) {
@@ -209,12 +209,12 @@ class RouteCollection
         ];
 
         // No prefix, no plugin
-        if ($prefix === false && myPlugin === false) {
+        if ($prefix == false && myPlugin == false) {
             return myNames;
         }
 
         // Only a plugin
-        if ($prefix === false) {
+        if ($prefix == false) {
             return [
                 "${plugin}.${controller}:${action}",
                 "${plugin}.${controller}:_action",
@@ -228,7 +228,7 @@ class RouteCollection
         }
 
         // Only a prefix
-        if (myPlugin === false) {
+        if (myPlugin == false) {
             return [
                 "${prefix}:${controller}:${action}",
                 "${prefix}:${controller}:_action",
@@ -302,7 +302,7 @@ class RouteCollection
             foreach (this._routeTable[myName] as $route) {
                 $match = $route.match(myUrl, $context);
                 if ($match) {
-                    return $match === "/" ? $match : trim($match, "/");
+                    return $match == "/" ? $match : trim($match, "/");
                 }
             }
         }

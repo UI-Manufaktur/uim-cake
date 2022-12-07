@@ -149,7 +149,7 @@ class Router
      */
     static function defaultRouteClass(Nullable!string $routeClass = null): Nullable!string
     {
-        if ($routeClass === null) {
+        if ($routeClass == null) {
             return static::$_defaultRouteClass;
         }
         static::$_defaultRouteClass = $routeClass;
@@ -425,10 +425,10 @@ class Router
             }
 
             if (isset(myUrl["_ssl"])) {
-                myUrl["_scheme"] = myUrl["_ssl"] === true ? "https" : "http";
+                myUrl["_scheme"] = myUrl["_ssl"] == true ? "https" : "http";
             }
 
-            if (isset(myUrl["_full"]) && myUrl["_full"] === true) {
+            if (isset(myUrl["_full"]) && myUrl["_full"] == true) {
                 $full = true;
             }
             if (isset(myUrl["#"])) {
@@ -444,7 +444,7 @@ class Router
                     empty(myUrl["action"]) &&
                     (
                         empty(myUrl["controller"]) ||
-                        myParams["controller"] === myUrl["controller"]
+                        myParams["controller"] == myUrl["controller"]
                     )
                 ) {
                     myUrl["action"] = myParams["action"];
@@ -475,13 +475,13 @@ class Router
             myUrl = (string)myUrl;
 
             $plainString = (
-                strpos(myUrl, "javascript:") === 0 ||
-                strpos(myUrl, "mailto:") === 0 ||
-                strpos(myUrl, "tel:") === 0 ||
-                strpos(myUrl, "sms:") === 0 ||
-                strpos(myUrl, "#") === 0 ||
-                strpos(myUrl, "?") === 0 ||
-                strpos(myUrl, "//") === 0 ||
+                strpos(myUrl, "javascript:") == 0 ||
+                strpos(myUrl, "mailto:") == 0 ||
+                strpos(myUrl, "tel:") == 0 ||
+                strpos(myUrl, "sms:") == 0 ||
+                strpos(myUrl, "#") == 0 ||
+                strpos(myUrl, "?") == 0 ||
+                strpos(myUrl, "//") == 0 ||
                 strpos(myUrl, "://") !== false
             );
 
@@ -492,7 +492,7 @@ class Router
         }
 
         $protocol = preg_match("#^[a-z][a-z0-9+\-.]*\://#i", $output);
-        if ($protocol === 0) {
+        if ($protocol == 0) {
             $output = str_replace("//", "/", "/" . $output);
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
@@ -564,7 +564,7 @@ class Router
      * @return string
      */
     static string fullBaseUrl(Nullable!string $base = null) {
-        if ($base === null && static::$_fullBaseUrl !== null) {
+        if ($base == null && static::$_fullBaseUrl !== null) {
             return static::$_fullBaseUrl;
         }
 
@@ -713,7 +713,7 @@ class Router
     static function extensions($extensions = null, myMerge = true): array
     {
         myCollection = static::$_collection;
-        if ($extensions === null) {
+        if ($extensions == null) {
             return array_unique(array_merge(static::$_defaultExtensions, myCollection.getExtensions()));
         }
 

@@ -137,7 +137,7 @@ class Security {
      * @psalm-suppress MoreSpecificReturnType
      */
     static function engine($instance = null) {
-        if ($instance === null && static::$_instance === null) {
+        if ($instance == null && static::$_instance == null) {
             if (extension_loaded("openssl")) {
                 $instance = new OpenSsl();
             }
@@ -172,7 +172,7 @@ class Security {
     static string encrypt(string $plain, string myKey, Nullable!string $hmacSalt = null) {
         self::_checkKey(myKey, "encrypt()");
 
-        if ($hmacSalt === null) {
+        if ($hmacSalt == null) {
             $hmacSalt = static::getSalt();
         }
         // Generate the encryption and hmac key.
@@ -218,7 +218,7 @@ class Security {
         if (empty($cipher)) {
             throw new InvalidArgumentException("The data to decrypt cannot be empty.");
         }
-        if ($hmacSalt === null) {
+        if ($hmacSalt == null) {
             $hmacSalt = static::getSalt();
         }
 
@@ -259,7 +259,7 @@ class Security {
      * @return string The currently configured salt
      */
     static string getSalt() {
-        if (static::$_salt === null) {
+        if (static::$_salt == null) {
             throw new RuntimeException(
                 "Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`."
             );

@@ -46,7 +46,7 @@ class Hash
             );
         }
 
-        if (empty(myData) || myPath === null) {
+        if (empty(myData) || myPath == null) {
             return $default;
         }
 
@@ -135,7 +135,7 @@ class Hash
             return myData !== null ? (array)myData : [];
         }
 
-        if (strpos(myPath, "[") === false) {
+        if (strpos(myPath, "[") == false) {
             $tokens = explode(".", myPath);
         } else {
             $tokens = Text::tokenize(myPath, ".", "[", "]");
@@ -218,7 +218,7 @@ class Hash
             case "{*}":
                 return true;
             default:
-                return is_numeric($token) ? (myKey == $token) : myKey === $token;
+                return is_numeric($token) ? (myKey == $token) : myKey == $token;
         }
     }
 
@@ -268,18 +268,18 @@ class Hash
             }
 
             // Pattern matches and other operators.
-            if ($op === "=" && $val && $val[0] === "/") {
+            if ($op == "=" && $val && $val[0] == "/") {
                 if (!preg_match($val, $prop)) {
                     return false;
                 }
                 // phpcs:disable
             } elseif (
-                ($op === "=" && $prop != $val) ||
-                ($op === "!=" && $prop == $val) ||
-                ($op === ">" && $prop <= $val) ||
-                ($op === "<" && $prop >= $val) ||
-                ($op === ">=" && $prop < $val) ||
-                ($op === "<=" && $prop > $val)
+                ($op == "=" && $prop != $val) ||
+                ($op == "!=" && $prop == $val) ||
+                ($op == ">" && $prop <= $val) ||
+                ($op == "<" && $prop >= $val) ||
+                ($op == ">=" && $prop < $val) ||
+                ($op == "<=" && $prop > $val)
                 // phpcs:enable
             ) {
                 return false;
@@ -301,8 +301,8 @@ class Hash
      */
     static function insert(array myData, string myPath, myValues = null): array
     {
-        $noTokens = strpos(myPath, "[") === false;
-        if ($noTokens && strpos(myPath, ".") === false) {
+        $noTokens = strpos(myPath, "[") == false;
+        if ($noTokens && strpos(myPath, ".") == false) {
             myData[myPath] = myValues;
 
             return myData;
@@ -314,7 +314,7 @@ class Hash
             $tokens = Text::tokenize(myPath, ".", "[", "]");
         }
 
-        if ($noTokens && strpos(myPath, "{") === false) {
+        if ($noTokens && strpos(myPath, "{") == false) {
             return static::_simpleOp("insert", myData, $tokens, myValues);
         }
 
@@ -352,8 +352,8 @@ class Hash
         myCount = count(myPath);
         $last = myCount - 1;
         foreach (myPath as $i => myKey) {
-            if ($op === "insert") {
-                if ($i === $last) {
+            if ($op == "insert") {
+                if ($i == $last) {
                     $_list[myKey] = myValues;
 
                     return myData;
@@ -363,8 +363,8 @@ class Hash
                 if (!is_array($_list)) {
                     $_list = [];
                 }
-            } elseif ($op === "remove") {
-                if ($i === $last) {
+            } elseif ($op == "remove") {
+                if ($i == $last) {
                     if (is_array($_list)) {
                         unset($_list[myKey]);
                     }
@@ -393,10 +393,10 @@ class Hash
      */
     static function remove(array myData, string myPath): array
     {
-        $noTokens = strpos(myPath, "[") === false;
-        $noExpansion = strpos(myPath, "{") === false;
+        $noTokens = strpos(myPath, "[") == false;
+        $noExpansion = strpos(myPath, "{") == false;
 
-        if ($noExpansion && $noTokens && strpos(myPath, ".") === false) {
+        if ($noExpansion && $noTokens && strpos(myPath, ".") == false) {
             unset(myData[myPath]);
 
             return myData;
@@ -462,7 +462,7 @@ class Hash
             $format = array_shift(myKeyPath);
             /** @var array myKeys */
             myKeys = static::format(myData, myKeyPath, $format);
-        } elseif (myKeyPath === null) {
+        } elseif (myKeyPath == null) {
             myKeys = myKeyPath;
         } else {
             /** @var array myKeys */
@@ -482,7 +482,7 @@ class Hash
             $vals = static::extract(myData, myValuePath);
         }
         if (empty($vals)) {
-            $vals = array_fill(0, myKeys === null ? count(myData) : count(myKeys), null);
+            $vals = array_fill(0, myKeys == null ? count(myData) : count(myKeys), null);
         }
 
         if (is_array(myKeys) && count(myKeys) !== count($vals)) {
@@ -499,7 +499,7 @@ class Hash
                 for ($i = 0; $i < $c; $i++) {
                     myGroup[$i] = myGroup[$i] ?? 0;
                     $out[myGroup[$i]] = $out[myGroup[$i]] ?? [];
-                    if (myKeys === null) {
+                    if (myKeys == null) {
                         $out[myGroup[$i]][] = $vals[$i];
                     } else {
                         $out[myGroup[$i]][myKeys[$i]] = $vals[$i];
@@ -654,7 +654,7 @@ class Hash
      * @return bool
      */
     protected static bool _filter($var) {
-        return $var === 0 || $var === 0.0 || $var === "0" || !empty($var);
+        return $var == 0 || $var == 0.0 || $var == "0" || !empty($var);
     }
 
     /**
@@ -782,12 +782,12 @@ class Hash
 
                     if (
                         !empty($curMerge[1][myKey])
-                        && (array)$curMerge[1][myKey] === $curMerge[1][myKey]
-                        && (array)$val === $val
+                        && (array)$curMerge[1][myKey] == $curMerge[1][myKey]
+                        && (array)$val == $val
                     ) {
                         // Recurse into the current merge data as it is an array.
                         $stack[] = [&$val, &$curMerge[1][myKey]];
-                    } elseif ((int)myKey === myKey && isset($curMerge[1][myKey])) {
+                    } elseif ((int)myKey == myKey && isset($curMerge[1][myKey])) {
                         $curMerge[1][] = $val;
                     } else {
                         $curMerge[1][myKey] = $val;
@@ -811,7 +811,7 @@ class Hash
             return false;
         }
 
-        return myData === array_filter(myData, "is_numeric");
+        return myData == array_filter(myData, "is_numeric");
     }
 
     /**
@@ -998,7 +998,7 @@ class Hash
             $dir = strtolower($dir);
         }
         if (!in_array($dir, [\SORT_ASC, \SORT_DESC], true)) {
-            $dir = $dir === "asc" ? \SORT_ASC : \SORT_DESC;
+            $dir = $dir == "asc" ? \SORT_ASC : \SORT_DESC;
         }
 
         $ignoreCase = false;
@@ -1011,13 +1011,13 @@ class Hash
         }
         myType = strtolower(myType);
 
-        if (myType === "numeric") {
+        if (myType == "numeric") {
             myType = \SORT_NUMERIC;
-        } elseif (myType === "string") {
+        } elseif (myType == "string") {
             myType = \SORT_STRING;
-        } elseif (myType === "natural") {
+        } elseif (myType == "natural") {
             myType = \SORT_NATURAL;
-        } elseif (myType === "locale") {
+        } elseif (myType == "locale") {
             myType = \SORT_LOCALE_STRING;
         } else {
             myType = \SORT_REGULAR;

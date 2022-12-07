@@ -598,7 +598,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function remove(string myField, Nullable!string $rule = null) {
-        if ($rule === null) {
+        if ($rule == null) {
             unset(this._fields[myField]);
         } else {
             this.field(myField).remove($rule);
@@ -698,7 +698,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * ```
      * $validator.allowEmpty("email", function ($context) {
-     *  return !$context["newRecord"] || $context["data"]["role"] === "admin";
+     *  return !$context["newRecord"] || $context["data"]["role"] == "admin";
      * });
      * ```
      *
@@ -782,7 +782,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * ```
      * $validator.allowEmpty("email", Validator::EMPTY_STRING, function ($context) {
-     *   return !$context["newRecord"] || $context["data"]["role"] === "admin";
+     *   return !$context["newRecord"] || $context["data"]["role"] == "admin";
      * });
      * ```
      *
@@ -1201,8 +1201,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return callable|string|bool
      */
     protected auto invertWhenClause($when) {
-        if ($when === static::WHEN_CREATE || $when === static::WHEN_UPDATE) {
-            return $when === static::WHEN_CREATE ? static::WHEN_UPDATE : static::WHEN_CREATE;
+        if ($when == static::WHEN_CREATE || $when == static::WHEN_UPDATE) {
+            return $when == static::WHEN_CREATE ? static::WHEN_UPDATE : static::WHEN_CREATE;
         }
         if (is_callable($when)) {
             return function ($context) use ($when) {
@@ -2424,7 +2424,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         }
 
         foreach (this._fields[myField] as $rule) {
-            if ($rule.get("rule") === "notBlank" && $rule.get("message")) {
+            if ($rule.get("rule") == "notBlank" && $rule.get("message")) {
                 return $rule.get("message");
             }
         }
@@ -2448,8 +2448,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
         $newRecord = $context["newRecord"];
         if (in_array($required, [static::WHEN_CREATE, static::WHEN_UPDATE], true)) {
-            return ($required === static::WHEN_CREATE && !$newRecord) ||
-                ($required === static::WHEN_UPDATE && $newRecord);
+            return ($required == static::WHEN_CREATE && !$newRecord) ||
+                ($required == static::WHEN_UPDATE && $newRecord);
         }
 
         return !$required;
@@ -2470,8 +2470,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
         $newRecord = $context["newRecord"];
         if (in_array($allowed, [static::WHEN_CREATE, static::WHEN_UPDATE], true)) {
-            $allowed = ($allowed === static::WHEN_CREATE && $newRecord) ||
-                ($allowed === static::WHEN_UPDATE && !$newRecord);
+            $allowed = ($allowed == static::WHEN_CREATE && $newRecord) ||
+                ($allowed == static::WHEN_UPDATE && !$newRecord);
         }
 
         return (bool)$allowed;
@@ -2495,7 +2495,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param int $flags A bitmask of EMPTY_* flags which specify what is empty
      */
     protected bool isEmpty(myData, int $flags) {
-        if (myData === null) {
+        if (myData == null) {
             return true;
         }
 
@@ -2504,7 +2504,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         }
 
         $arrayTypes = self::EMPTY_ARRAY | self::EMPTY_DATE | self::EMPTY_TIME;
-        if (myData === [] && ($flags & $arrayTypes)) {
+        if (myData == [] && ($flags & $arrayTypes)) {
             return true;
         }
 
@@ -2512,7 +2512,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             if (
                 ($flags & self::EMPTY_FILE)
                 && isset(myData["name"], myData["type"], myData["tmp_name"], myData["error"])
-                && (int)myData["error"] === UPLOAD_ERR_NO_FILE
+                && (int)myData["error"] == UPLOAD_ERR_NO_FILE
             ) {
                 return true;
             }
@@ -2539,7 +2539,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         if (
             ($flags & self::EMPTY_FILE)
             && myData instanceof UploadedFileInterface
-            && myData.getError() === UPLOAD_ERR_NO_FILE
+            && myData.getError() == UPLOAD_ERR_NO_FILE
         ) {
             return true;
         }
@@ -2573,12 +2573,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
          */
         foreach ($rules as myName => $rule) {
             myResult = $rule.process(myData[myField], this._providers, compact("newRecord", "data", "field"));
-            if (myResult === true) {
+            if (myResult == true) {
                 continue;
             }
 
             myErrors[myName] = myMessage;
-            if (is_array(myResult) && myName === static::NESTED) {
+            if (is_array(myResult) && myName == static::NESTED) {
                 myErrors = myResult;
             }
             if (is_string(myResult)) {

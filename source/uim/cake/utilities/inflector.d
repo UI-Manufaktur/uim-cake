@@ -230,7 +230,7 @@ class Inflector
 
         if ($reset) {
             static::${$var} = $rules;
-        } elseif (myType === "uninflected") {
+        } elseif (myType == "uninflected") {
             static::$_uninflected = array_merge(
                 $rules,
                 static::$_uninflected
@@ -361,7 +361,7 @@ class Inflector
 
         myResult = static::_cache($cacheKey, $string);
 
-        if (myResult === false) {
+        if (myResult == false) {
             myResult = str_replace(" ", "", static::humanize($string, $delimiter));
             static::_cache($cacheKey, $string, myResult);
         }
@@ -408,7 +408,7 @@ class Inflector
 
         myResult = static::_cache($cacheKey, $string);
 
-        if (myResult === false) {
+        if (myResult == false) {
             myResult = explode(" ", str_replace($delimiter, " ", $string));
             foreach (myResult as &$word) {
                 $word = mb_strtoupper(mb_substr($word, 0, 1)) . mb_substr($word, 1);
@@ -432,7 +432,7 @@ class Inflector
 
         myResult = static::_cache($cacheKey, $string);
 
-        if (myResult === false) {
+        if (myResult == false) {
             myResult = mb_strtolower(preg_replace("/(?<=\\w)([A-Z])/", $delimiter . "\\1", $string));
             static::_cache($cacheKey, $string, myResult);
         }
@@ -450,7 +450,7 @@ class Inflector
     static string tableize(string myClassName) {
         myResult = static::_cache(__FUNCTION__, myClassName);
 
-        if (myResult === false) {
+        if (myResult == false) {
             myResult = static::pluralize(static::underscore(myClassName));
             static::_cache(__FUNCTION__, myClassName, myResult);
         }
@@ -468,7 +468,7 @@ class Inflector
     static string classify(string myTableName) {
         myResult = static::_cache(__FUNCTION__, myTableName);
 
-        if (myResult === false) {
+        if (myResult == false) {
             myResult = static::camelize(static::singularize(myTableName));
             static::_cache(__FUNCTION__, myTableName, myResult);
         }
@@ -486,7 +486,7 @@ class Inflector
     static string variable(string $string) {
         myResult = static::_cache(__FUNCTION__, $string);
 
-        if (myResult === false) {
+        if (myResult == false) {
             $camelized = static::camelize(static::underscore($string));
             $replace = strtolower(substr($camelized, 0, 1));
             myResult = $replace . substr($camelized, 1);

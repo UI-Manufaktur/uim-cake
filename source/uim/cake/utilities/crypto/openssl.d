@@ -54,7 +54,7 @@ class OpenSsl {
         $cipher = mb_substr($cipher, $ivSize, null, "8bit");
 
         myValue = openssl_decrypt($cipher, $method, myKey, OPENSSL_RAW_DATA, $iv);
-        if (myValue === false) {
+        if (myValue == false) {
             return null;
         }
 

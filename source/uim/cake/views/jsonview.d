@@ -99,7 +99,7 @@ class JsonView : SerializedView
 
         $jsonp = this.getConfig("jsonp");
         if ($jsonp) {
-            if ($jsonp === true) {
+            if ($jsonp == true) {
                 $jsonp = "callback";
             }
             if (this.request.getQuery($jsonp)) {
@@ -117,9 +117,9 @@ class JsonView : SerializedView
         myData = this._dataToSerialize($serialize);
 
         $jsonOptions = this.getConfig("jsonOptions");
-        if ($jsonOptions === null) {
+        if ($jsonOptions == null) {
             $jsonOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_PARTIAL_OUTPUT_ON_ERROR;
-        } elseif ($jsonOptions === false) {
+        } elseif ($jsonOptions == false) {
             $jsonOptions = 0;
         }
 
@@ -132,7 +132,7 @@ class JsonView : SerializedView
         }
 
         $return = json_encode(myData, $jsonOptions);
-        if ($return === false) {
+        if ($return == false) {
             throw new RuntimeException(json_last_error_msg(), json_last_error());
         }
 

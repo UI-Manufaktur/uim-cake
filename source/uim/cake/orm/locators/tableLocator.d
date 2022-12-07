@@ -59,7 +59,7 @@ class TableLocator : AbstractLocator : ILocator
      *   If none provided, the default `Model\Table` under your app"s module is used.
      */
     this(?array myLocations = null) {
-        if (myLocations === null) {
+        if (myLocations == null) {
             myLocations = [
                 "Model/Table",
             ];
@@ -125,7 +125,7 @@ class TableLocator : AbstractLocator : ILocator
 
     auto getConfig(Nullable!string myAlias = null): array
     {
-        if (myAlias === null) {
+        if (myAlias == null) {
             return this._config;
         }
 
@@ -176,7 +176,7 @@ class TableLocator : AbstractLocator : ILocator
 
 
     protected auto createInstance(string myAlias, array myOptions) {
-        if (strpos(myAlias, "\\") === false) {
+        if (strpos(myAlias, "\\") == false) {
             [, myClassAlias] = pluginSplit(myAlias);
             myOptions = ["alias": myClassAlias] + myOptions;
         } elseif (!isset(myOptions["alias"])) {
@@ -197,7 +197,7 @@ class TableLocator : AbstractLocator : ILocator
             if (empty(myOptions["className"])) {
                 myOptions["className"] = myAlias;
             }
-            if (!isset(myOptions["table"]) && strpos(myOptions["className"], "\\") === false) {
+            if (!isset(myOptions["table"]) && strpos(myOptions["className"], "\\") == false) {
                 [, myTable] = pluginSplit(myOptions["className"]);
                 myOptions["table"] = Inflector::underscore(myTable);
             }
@@ -205,7 +205,7 @@ class TableLocator : AbstractLocator : ILocator
         } else {
             myMessage = myOptions["className"] ?? myAlias;
             myMessage = "`" . myMessage . "`";
-            if (strpos(myMessage, "\\") === false) {
+            if (strpos(myMessage, "\\") == false) {
                 myMessage = "for alias " . myMessage;
             }
             throw new MissingTableClassException([myMessage]);
@@ -229,7 +229,7 @@ class TableLocator : AbstractLocator : ILocator
         myOptions["registryAlias"] = myAlias;
         $instance = this._create(myOptions);
 
-        if (myOptions["className"] === this.fallbackClassName) {
+        if (myOptions["className"] == this.fallbackClassName) {
             this._fallbacked[myAlias] = $instance;
         }
 

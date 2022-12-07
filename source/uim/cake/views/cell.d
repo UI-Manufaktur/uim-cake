@@ -1,21 +1,7 @@
 module uim.cake.views;
 
-use BadMethodCallException;
-import uim.cake.caches\Cache;
-import uim.cake.datasources\ModelAwareTrait;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakeents\IEventManager;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakem.Locator\LocatorAwareTrait;
-import uim.cakeilities.Inflector;
-import uim.cake.views.Exception\MissingCellTemplateException;
-import uim.cake.views.Exception\MissingTemplateException;
-use Error;
-use Exception;
-use ReflectionException;
-use ReflectionMethod;
+@safe:
+import uim.cake;
 
 /**
  * Cell base.
@@ -224,7 +210,7 @@ abstract class Cell : IEventDispatcher
             "config" => "default",
             "key" => myKey,
         ];
-        if (this._cache === true) {
+        if (this._cache == true) {
             return $default;
         }
 

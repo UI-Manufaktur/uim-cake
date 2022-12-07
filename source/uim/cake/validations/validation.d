@@ -13,7 +13,7 @@ class Validation {
     public const string DEFAULT_LOCALE = "en_US";
 
     // Same as operator.
-    public const string COMPARE_SAME = "===";
+    public const string COMPARE_SAME = "==";
 
     // Not same as comparison operator.
     public const string COMPARE_NOT_SAME = "!==";
@@ -221,7 +221,7 @@ class Validation {
                     return static::luhn($check);
                 }
             }
-        } elseif (myType === "all") {
+        } elseif (myType == "all") {
             foreach ($cards["all"] as myValue) {
                 $regex = myValue;
 
@@ -263,7 +263,7 @@ class Validation {
      *
      * @param string|int $check1 The left value to compare.
      * @param string $operator Can be one of following operator strings:
-     *   ">", "<", ">=", "<=", "==", "!=", "===" and "!==". You can use one of
+     *   ">", "<", ">=", "<=", "==", "!=", "==" and "!==". You can use one of
      *   the Validation::COMPARE_* constants.
      * @param string|int $check2 The right value to compare.
      * @return bool Success
@@ -308,7 +308,7 @@ class Validation {
                 }
                 break;
             case static::COMPARE_SAME:
-                if ($check1 === $check2) {
+                if ($check1 == $check2) {
                     return true;
                 }
                 break;
@@ -390,7 +390,7 @@ class Validation {
         if (!is_scalar($check)) {
             return false;
         }
-        if ($regex === null) {
+        if ($regex == null) {
             static::myErrors[] = "You must define a regular expression for Validation::custom()";
 
             return false;
@@ -478,7 +478,7 @@ class Validation {
 
         $format = is_array($format) ? array_values($format) : [$format];
         foreach ($format as myKey) {
-            if (static::_check($check, $regex[myKey]) === true) {
+            if (static::_check($check, $regex[myKey]) == true) {
                 return true;
             }
         }
@@ -507,10 +507,10 @@ class Validation {
         if (is_object($check)) {
             return false;
         }
-        if (is_array($dateFormat) && count($dateFormat) === 1) {
+        if (is_array($dateFormat) && count($dateFormat) == 1) {
             $dateFormat = reset($dateFormat);
         }
-        if ($dateFormat === static::DATETIME_ISO8601 && !static::iso8601($check)) {
+        if ($dateFormat == static::DATETIME_ISO8601 && !static::iso8601($check)) {
             return false;
         }
 
@@ -523,7 +523,7 @@ class Validation {
         if (!empty($parts) && count($parts) > 1) {
             $date = rtrim(array_shift($parts), ",");
             $time = implode(" ", $parts);
-            if ($dateFormat === static::DATETIME_ISO8601) {
+            if ($dateFormat == static::DATETIME_ISO8601) {
                 $dateFormat = "ymd";
                 $time = preg_split("/[TZ\-\+\.]/", $time);
                 $time = array_shift($time);
@@ -687,16 +687,16 @@ class Validation {
             return false;
         }
 
-        if ($regex === null) {
+        if ($regex == null) {
             $lnum = "[0-9]+";
             $dnum = "[0-9]*[\.]{$lnum}";
             $sign = "[+-]?";
             $exp = "(?:[eE]{$sign}{$lnum})?";
 
-            if ($places === null) {
+            if ($places == null) {
                 $regex = "/^{$sign}(?:{$lnum}|{$dnum}){$exp}$/";
-            } elseif ($places === true) {
-                if (is_float($check) && floor($check) === $check) {
+            } elseif ($places == true) {
+                if (is_float($check) && floor($check) == $check) {
                     $check = sprintf("%.1f", $check);
                 }
                 $regex = "/^{$sign}{$dnum}{$exp}$/";
@@ -741,16 +741,16 @@ class Validation {
             return false;
         }
 
-        if ($regex === null) {
+        if ($regex == null) {
             // phpcs:ignore Generic.Files.LineLength
             $regex = "/^[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+(?:\.[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+)*@" . self::$_pattern["hostname"] . "$/ui";
         }
         $return = static::_check($check, $regex);
-        if ($deep === false || $deep === null) {
+        if ($deep == false || $deep == null) {
             return $return;
         }
 
-        if ($return === true && preg_match("/@(" . static::$_pattern["hostname"] . ")$/i", $check, $regs)) {
+        if ($return == true && preg_match("/@(" . static::$_pattern["hostname"] . ")$/i", $check, $regs)) {
             if (function_exists("getmxrr") && getmxrr($regs[1], $mxhosts)) {
                 return true;
             }
@@ -772,7 +772,7 @@ class Validation {
      * @return bool Success
      */
     static bool equalTo($check, $comparedTo) {
-        return $check === $comparedTo;
+        return $check == $comparedTo;
     }
 
     /**
@@ -797,7 +797,7 @@ class Validation {
 
         $extension = strtolower(pathinfo($check, PATHINFO_EXTENSION));
         foreach ($extensions as myValue) {
-            if ($extension === strtolower(myValue)) {
+            if ($extension == strtolower(myValue)) {
                 return true;
             }
         }
@@ -819,10 +819,10 @@ class Validation {
 
         myType = strtolower(myType);
         $flags = 0;
-        if (myType === "ipv4") {
+        if (myType == "ipv4") {
             $flags = FILTER_FLAG_IPV4;
         }
-        if (myType === "ipv6") {
+        if (myType == "ipv6") {
             $flags = FILTER_FLAG_IPV6;
         }
 
@@ -898,7 +898,7 @@ class Validation {
      */
     static bool money($check, string $symbolPosition = "left") {
         $money = "(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{1,2})?";
-        if ($symbolPosition === "right") {
+        if ($symbolPosition == "right") {
             $regex = "/^" . $money . "(?<!\x{00a2})\p{Sc}?$/u";
         } else {
             $regex = "/^(?!\x{00a2})\p{Sc}?" . $money . "$/u";
@@ -1100,7 +1100,7 @@ class Validation {
      * @see https://en.wikipedia.org/wiki/Luhn_algorithm
      */
     static bool luhn($check) {
-        if (!is_scalar($check) || (int)$check === 0) {
+        if (!is_scalar($check) || (int)$check == 0) {
             return false;
         }
         $sum = 0;
@@ -1116,7 +1116,7 @@ class Validation {
             $sum += $number < 10 ? $number : $number - 9;
         }
 
-        return $sum % 10 === 0;
+        return $sum % 10 == 0;
     }
 
     /**
@@ -1134,7 +1134,7 @@ class Validation {
      */
     static bool mimeType($check, $mimeTypes = []) {
         myfile = static::getFilename($check);
-        if (myfile === false) {
+        if (myfile == false) {
             return false;
         }
 
@@ -1210,7 +1210,7 @@ class Validation {
      */
     static bool fileSize($check, string $operator, $size) {
         myfile = static::getFilename($check);
-        if (myfile === false) {
+        if (myfile == false) {
             return false;
         }
 
@@ -1242,7 +1242,7 @@ class Validation {
             return in_array((int)$code, [UPLOAD_ERR_OK, UPLOAD_ERR_NO_FILE], true);
         }
 
-        return (int)$code === UPLOAD_ERR_OK;
+        return (int)$code == UPLOAD_ERR_OK;
     }
 
     /**
@@ -1293,7 +1293,7 @@ class Validation {
         if (!static::uploadError(myfile, myOptions["optional"])) {
             return false;
         }
-        if (myOptions["optional"] && myError === UPLOAD_ERR_NO_FILE) {
+        if (myOptions["optional"] && myError == UPLOAD_ERR_NO_FILE) {
             return true;
         }
         if (
@@ -1331,7 +1331,7 @@ class Validation {
         }
 
         myfile = static::getFilename(myfile);
-        if (myfile === false) {
+        if (myfile == false) {
             return false;
         }
 
@@ -1425,10 +1425,10 @@ class Validation {
             ));
         }
         $pattern = "/^" . self::$_pattern["latitude"] . ",\s*" . self::$_pattern["longitude"] . "$/";
-        if (myOptions["format"] === "long") {
+        if (myOptions["format"] == "long") {
             $pattern = "/^" . self::$_pattern["longitude"] . "$/";
         }
-        if (myOptions["format"] === "lat") {
+        if (myOptions["format"] == "lat") {
             $pattern = "/^" . self::$_pattern["latitude"] . "$/";
         }
 
@@ -1505,7 +1505,7 @@ class Validation {
             return true;
         }
 
-        return preg_match("/[\x{10000}-\x{10FFFF}]/u", myValue) === 0;
+        return preg_match("/[\x{10000}-\x{10FFFF}]/u", myValue) == 0;
     }
 
     /**
@@ -1595,7 +1595,7 @@ class Validation {
             $checksum %= 97;
         }
 
-        return $checkInt === 98 - $checksum;
+        return $checkInt == 98 - $checksum;
     }
 
     /**
@@ -1621,11 +1621,11 @@ class Validation {
         }
 
         if (isset(myValue["hour"])) {
-            if (isset(myValue["meridian"]) && (int)myValue["hour"] === 12) {
+            if (isset(myValue["meridian"]) && (int)myValue["hour"] == 12) {
                 myValue["hour"] = 0;
             }
             if (isset(myValue["meridian"])) {
-                myValue["hour"] = strtolower(myValue["meridian"]) === "am" ? myValue["hour"] : myValue["hour"] + 12;
+                myValue["hour"] = strtolower(myValue["meridian"]) == "am" ? myValue["hour"] : myValue["hour"] + 12;
             }
             myValue += ["minute" => 0, "second" => 0, "microsecond" => 0];
             if (
