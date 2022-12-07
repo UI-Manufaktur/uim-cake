@@ -199,7 +199,7 @@ class Behavior : IEventListener
         if (!isset($defaults[myKey], myConfig[myKey])) {
             return myConfig;
         }
-        if (isset(myConfig[myKey]) && myConfig[myKey] === []) {
+        if (isset(myConfig[myKey]) && myConfig[myKey] == []) {
             this.setConfig(myKey, [], false);
             unset(myConfig[myKey]);
 
@@ -283,7 +283,7 @@ class Behavior : IEventListener
             if (!method_exists(this, $method)) {
                 continue;
             }
-            if ($priority === null) {
+            if ($priority == null) {
                 myEvents[myEvent] = $method;
             } else {
                 myEvents[myEvent] = [
@@ -412,7 +412,7 @@ class Behavior : IEventListener
                 continue;
             }
 
-            if (substr($methodName, 0, 4) === "find") {
+            if (substr($methodName, 0, 4) == "find") {
                 $return["finders"][lcfirst(substr($methodName, 4))] = $methodName;
             } else {
                 $return["methods"][$methodName] = $methodName;

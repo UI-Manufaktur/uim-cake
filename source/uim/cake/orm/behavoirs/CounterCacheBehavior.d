@@ -101,7 +101,7 @@ class CounterCacheBehavior : Behavior
      * @return void
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] === true) {
+        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] == true) {
             return;
         }
 
@@ -118,7 +118,7 @@ class CounterCacheBehavior : Behavior
                 if (
                     !is_callable(myConfig) &&
                     isset(myConfig["ignoreDirty"]) &&
-                    myConfig["ignoreDirty"] === true &&
+                    myConfig["ignoreDirty"] == true &&
                     $entity.$entityAlias.isDirty(myField)
                 ) {
                     this._ignoreDirty[$registryAlias][myField] = true;
@@ -139,7 +139,7 @@ class CounterCacheBehavior : Behavior
      */
     function afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions): void
     {
-        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] === true) {
+        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] == true) {
             return;
         }
 
@@ -158,7 +158,7 @@ class CounterCacheBehavior : Behavior
      * @return void
      */
     function afterDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] === true) {
+        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] == true) {
             return;
         }
 
@@ -200,7 +200,7 @@ class CounterCacheBehavior : Behavior
         myCountConditions = $entity.extract($foreignKeys);
 
         foreach (myCountConditions as myField: myValue) {
-            if (myValue === null) {
+            if (myValue == null) {
                 myCountConditions[myField . " IS"] = myValue;
                 unset(myCountConditions[myField]);
             }
@@ -222,7 +222,7 @@ class CounterCacheBehavior : Behavior
 
             if (
                 isset(this._ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField]) &&
-                this._ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField] === true
+                this._ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField] == true
             ) {
                 continue;
             }

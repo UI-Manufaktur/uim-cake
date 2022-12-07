@@ -29,7 +29,7 @@ class BelongsTo : Association
 
     // Gets the name of the field representing the foreign key to the target table.
     string[] getForeignKey() {
-        if (this._foreignKey === null) {
+        if (this._foreignKey == null) {
             this._foreignKey = this._modelKey(this.getTarget().getAlias());
         }
 
@@ -69,7 +69,7 @@ class BelongsTo : Association
      * @return bool
      */
     bool isOwningSide(Table $side) {
-        return $side === this.getTarget();
+        return $side == this.getTarget();
     }
 
     /**

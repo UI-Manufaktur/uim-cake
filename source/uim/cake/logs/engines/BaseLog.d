@@ -127,7 +127,7 @@ abstract class BaseLog : AbstractLogger
      * @return string
      */
     protected string interpolate(string myMessage, array $context = []) {
-        if (strpos(myMessage, "{") === false && strpos(myMessage, "}") === false) {
+        if (strpos(myMessage, "{") == false && strpos(myMessage, "}") == false) {
             return myMessage;
         }
 

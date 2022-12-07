@@ -198,7 +198,7 @@ class ResultSet : ResultSetInterface
      */
     function rewind(): void
     {
-        if (this._index === 0) {
+        if (this._index == 0) {
             return;
         }
 
@@ -404,12 +404,12 @@ class ResultSet : ResultSetInterface
      * @return mixed
      */
     protected auto _fetchResult() {
-        if (this._statement === null) {
+        if (this._statement == null) {
             return false;
         }
 
         $row = this._statement.fetch("assoc");
-        if ($row === false) {
+        if ($row == false) {
             return $row;
         }
 

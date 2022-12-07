@@ -184,13 +184,13 @@ class RulesChecker : BaseRulesChecker
         if ($association instanceof Association) {
             $associationAlias = $association.getName();
 
-            if (myErrorField === null) {
+            if (myErrorField == null) {
                 myErrorField = $association.getProperty();
             }
         } elseif (is_string($association)) {
             $associationAlias = $association;
 
-            if (myErrorField === null) {
+            if (myErrorField == null) {
                 myRepository = this._options["repository"] ?? null;
                 if (myRepository instanceof Table) {
                     $association = myRepository.getAssociation($association);

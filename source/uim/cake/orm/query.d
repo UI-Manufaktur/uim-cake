@@ -293,7 +293,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      */
     auto getEagerLoader(): EagerLoader
     {
-        if (this._eagerLoader === null) {
+        if (this._eagerLoader == null) {
             this._eagerLoader = new EagerLoader();
         }
 
@@ -418,7 +418,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      */
     function contain($associations, $override = false) {
         $loader = this.getEagerLoader();
-        if ($override === true) {
+        if ($override == true) {
             this.clearContain();
         }
 
@@ -476,7 +476,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
             $association = myTable.getAssociation(myName);
             myTarget = $association.getTarget();
             $primary = (array)myTarget.getPrimaryKey();
-            if (empty($primary) || myTypeMap.type(myTarget.aliasField($primary[0])) === null) {
+            if (empty($primary) || myTypeMap.type(myTarget.aliasField($primary[0])) == null) {
                 this.addDefaultTypes(myTarget);
             }
             if (!empty($nested)) {
@@ -884,7 +884,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * value is returned
      */
     int count() {
-        if (this._resultsCount === null) {
+        if (this._resultsCount == null) {
             this._resultsCount = this._performCount();
         }
 
@@ -924,7 +924,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
 
         if (!$complex && this._valueBinder !== null) {
             $order = this.clause("order");
-            $complex = $order === null ? false : $order.hasNestedExpression();
+            $complex = $order == null ? false : $order.hasNestedExpression();
         }
 
         myCount = ["count": myQuery.func().count("*")];
@@ -945,7 +945,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
         myResult = $statement.fetch("assoc");
         $statement.closeCursor();
 
-        if (myResult === false) {
+        if (myResult == false) {
             return 0;
         }
 
@@ -1054,7 +1054,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * Will not trigger more than once, and only for select queries.
      */
     void triggerBeforeFind() {
-        if (!this._beforeFindFired && this._type === "select") {
+        if (!this._beforeFindFired && this._type == "select") {
             this._beforeFindFired = true;
 
             myRepository = this.getRepository();
@@ -1133,7 +1133,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
 
         myRepository = this.getRepository();
 
-        if (!count($select) || this._autoFields === true) {
+        if (!count($select) || this._autoFields == true) {
             this._hasFields = false;
             this.select(myRepository.getSchema().columns());
             $select = this.clause("select");
@@ -1274,7 +1274,7 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * @throws \BadMethodCallException if the method is called for a non-select query
      */
     auto __call(string $method, array $arguments) {
-        if (this.type() === "select") {
+        if (this.type() == "select") {
             return this._call($method, $arguments);
         }
 

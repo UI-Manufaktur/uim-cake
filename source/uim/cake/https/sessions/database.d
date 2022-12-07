@@ -119,7 +119,7 @@ class DatabaseSession : SessionHandlerInterface
 
         $session = stream_get_contents(myResult["data"]);
 
-        if ($session === false) {
+        if ($session == false) {
             return "";
         }
 

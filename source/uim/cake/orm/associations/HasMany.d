@@ -71,7 +71,7 @@ class HasMany : Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      */
     bool isOwningSide(Table $side) {
-        return $side === this.getSource();
+        return $side == this.getSource();
     }
 
     /**
@@ -143,7 +143,7 @@ class HasMany : Association
         myOptions["_sourceTable"] = this.getSource();
 
         if (
-            this._saveStrategy === self::SAVE_REPLACE &&
+            this._saveStrategy == self::SAVE_REPLACE &&
             !this._unlinkAssociated($foreignKeyReference, $entity, this.getTarget(), myTargetEntities, myOptions)
         ) {
             return false;
@@ -319,7 +319,7 @@ class HasMany : Association
         } else {
             myOptions += ["cleanProperty":true];
         }
-        if (count(myTargetEntities) === 0) {
+        if (count(myTargetEntities) == 0) {
             return;
         }
 
@@ -547,7 +547,7 @@ class HasMany : Association
 
     // Gets the name of the field representing the foreign key to the source table.
     string[] getForeignKey() {
-        if (this._foreignKey === null) {
+        if (this._foreignKey == null) {
             this._foreignKey = this._modelKey(this.getSource().getTable());
         }
 

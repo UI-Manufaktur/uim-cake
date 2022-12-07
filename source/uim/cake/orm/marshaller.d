@@ -227,7 +227,7 @@ class Marshaller
         }
 
         $validator = null;
-        if (myOptions["validate"] === true) {
+        if (myOptions["validate"] == true) {
             $validator = this._table.getValidator();
         } elseif (is_string(myOptions["validate"])) {
             $validator = this._table.getValidator(myOptions["validate"]);
@@ -241,7 +241,7 @@ class Marshaller
             $validator = myOptions["validate"];
         }
 
-        if ($validator === null) {
+        if ($validator == null) {
             throw new RuntimeException(
                 sprintf("validate must be a boolean, a string or an object. Got %s.", getTypeName(myOptions["validate"]))
             );
@@ -293,7 +293,7 @@ class Marshaller
         if (in_array(myType, myTypes, true)) {
             return $marshaller.one(myValue, myOptions);
         }
-        if (myType === Association::ONE_TO_MANY || myType === Association::MANY_TO_MANY) {
+        if (myType == Association::ONE_TO_MANY || myType == Association::MANY_TO_MANY) {
             $hasIds = array_key_exists("_ids", myValue);
             $onlyIds = array_key_exists("onlyIds", myOptions) && myOptions["onlyIds"];
 
@@ -304,7 +304,7 @@ class Marshaller
                 return [];
             }
         }
-        if (myType === Association::MANY_TO_MANY) {
+        if (myType == Association::MANY_TO_MANY) {
             /** @psalm-suppress ArgumentTypeCoercion */
             return $marshaller._belongsToMany($assoc, myValue, myOptions);
         }
@@ -376,9 +376,9 @@ class Marshaller
             if (!is_array($row)) {
                 continue;
             }
-            if (array_intersect_key($primaryKey, $row) === $primaryKey) {
+            if (array_intersect_key($primaryKey, $row) == $primaryKey) {
                 myKeys = array_intersect_key($row, $primaryKey);
-                if (count(myKeys) === $primaryCount) {
+                if (count(myKeys) == $primaryCount) {
                     $rowConditions = [];
                     foreach (myKeys as myKey: myValue) {
                         $rowConditions[][myTarget.aliasField(myKey)] = myValue;
@@ -557,11 +557,11 @@ class Marshaller
                 if (
                     (
                         is_scalar(myValue)
-                        && $original === myValue
+                        && $original == myValue
                     )
                     || (
-                        myValue === null
-                        && $original === myValue
+                        myValue == null
+                        && $original == myValue
                     )
                     || (
                         is_object(myValue)
@@ -676,7 +676,7 @@ class Marshaller
                 return explode(";", (string)myKey);
             })
             .filter(function (myKeys) use ($primary) {
-                return count(Hash::filter(myKeys)) === count($primary);
+                return count(Hash::filter(myKeys)) == count($primary);
             })
             .reduce(function ($conditions, myKeys) use ($primary) {
                 myFields = array_map([this._table, "aliasField"], $primary);
@@ -731,12 +731,12 @@ class Marshaller
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
             return $marshaller.merge($original, myValue, myOptions);
         }
-        if (myType === Association::MANY_TO_MANY) {
+        if (myType == Association::MANY_TO_MANY) {
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
             return $marshaller._mergeBelongsToMany($original, $assoc, myValue, myOptions);
         }
 
-        if (myType === Association::ONE_TO_MANY) {
+        if (myType == Association::ONE_TO_MANY) {
             $hasIds = array_key_exists("_ids", myValue);
             $onlyIds = array_key_exists("onlyIds", myOptions) && myOptions["onlyIds"];
             if ($hasIds && is_array(myValue["_ids"])) {

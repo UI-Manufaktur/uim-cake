@@ -142,7 +142,7 @@ class SelectLoader
     {
         myKey = this._linkField(myOptions);
         $filter = myOptions["keys"];
-        $useSubquery = myOptions["strategy"] === Association::STRATEGY_SUBQUERY;
+        $useSubquery = myOptions["strategy"] == Association::STRATEGY_SUBQUERY;
         myFinder = this.finder;
         myOptions["fields"] = myOptions["fields"] ?? [];
 
@@ -349,7 +349,7 @@ class SelectLoader
         $links = [];
         myName = this.alias;
 
-        if (myOptions["foreignKey"] === false && this.associationType === Association::ONE_TO_MANY) {
+        if (myOptions["foreignKey"] == false && this.associationType == Association::ONE_TO_MANY) {
             $msg = "Cannot have foreignKey = false for hasMany associations. " .
                    "You must provide a foreignKey column.";
             throw new RuntimeException($msg);
@@ -363,7 +363,7 @@ class SelectLoader
             $links[] = sprintf("%s.%s", myName, myKey);
         }
 
-        if (count($links) === 1) {
+        if (count($links) == 1) {
             return $links[0];
         }
 
@@ -414,7 +414,7 @@ class SelectLoader
     {
         myKeys = (array)this.bindingKey;
 
-        if (this.associationType === Association::MANY_TO_ONE) {
+        if (this.associationType == Association::MANY_TO_ONE) {
             myKeys = (array)this.foreignKey;
         }
 
@@ -478,7 +478,7 @@ class SelectLoader
      */
     protected auto _resultInjector(Query $fetchQuery, array myResultMap, array myOptions): Closure
     {
-        myKeys = this.associationType === Association::MANY_TO_ONE ?
+        myKeys = this.associationType == Association::MANY_TO_ONE ?
             this.foreignKey :
             this.bindingKey;
 

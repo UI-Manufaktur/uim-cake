@@ -219,7 +219,7 @@ class EagerLoader
      * @return this
      */
     auto setMatching(string $associationPath, ?callable myBuilder = null, array myOptions = []) {
-        if (this._matching === null) {
+        if (this._matching == null) {
             this._matching = new static();
         }
 
@@ -249,7 +249,7 @@ class EagerLoader
      */
     auto getMatching(): array
     {
-        if (this._matching === null) {
+        if (this._matching == null) {
             this._matching = new static();
         }
 
@@ -386,7 +386,7 @@ class EagerLoader
      */
     function attachAssociations(Query myQuery, Table myRepository, bool $includeFields): void
     {
-        if (empty(this._containments) && this._matching === null) {
+        if (empty(this._containments) && this._matching == null) {
             return;
         }
 
@@ -470,7 +470,7 @@ class EagerLoader
 
         if (
             isset(myOptions["matching"]) &&
-            myOptions["matching"] === true
+            myOptions["matching"] == true
         ) {
             myPaths["propertyPath"] = "_matchingData." . myAlias;
         } else {
@@ -611,7 +611,7 @@ class EagerLoader
         [$collected, $statement] = this._collectKeys($external, myQuery, $statement);
 
         // No records found, skip trying to attach associations.
-        if (empty($collected) && $statement.count() === 0) {
+        if (empty($collected) && $statement.count() == 0) {
             return $statement;
         }
 
@@ -628,7 +628,7 @@ class EagerLoader
                 // Nested paths are not subject to this condition because they could
                 // be attached to joined associations.
                 if (
-                    strpos(myPath, ".") === false &&
+                    strpos(myPath, ".") == false &&
                     (!array_key_exists(myPath, $collected) || !array_key_exists(myAlias, $collected[myPath]))
                 ) {
                     myMessage = "Unable to load `{myPath}` association. Ensure foreign key in `{myAlias}` is selected.";
@@ -769,7 +769,7 @@ class EagerLoader
             }
 
             $source = $instance.getSource();
-            myKeys = $instance.type() === Association::MANY_TO_ONE ?
+            myKeys = $instance.type() == Association::MANY_TO_ONE ?
                 (array)$instance.getForeignKey() :
                 (array)$instance.getBindingKey();
 
@@ -778,7 +778,7 @@ class EagerLoader
             foreach (myKeys as myKey) {
                 $pkFields[] = key(myQuery.aliasField(myKey, myAlias));
             }
-            $collectKeys[$meta.aliasPath()] = [myAlias, $pkFields, count($pkFields) === 1];
+            $collectKeys[$meta.aliasPath()] = [myAlias, $pkFields, count($pkFields) == 1];
         }
         if (empty($collectKeys)) {
             return [[], $statement];
@@ -804,7 +804,7 @@ class EagerLoader
         myKeys = [];
         foreach (($statement.fetchAll("assoc") ?: []) as myResult) {
             foreach ($collectKeys as $nestKey: $parts) {
-                if ($parts[2] === true) {
+                if ($parts[2] == true) {
                     // Missed joins will have null in the results.
                     if (!array_key_exists($parts[1][0], myResult)) {
                         continue;

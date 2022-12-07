@@ -335,7 +335,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * This can include the database schema name if set using `setTable()`.
      */
     string getTable() {
-        if (this._table === null) {
+        if (this._table == null) {
             myTable = moduleSplit(static::class);
             myTable = substr(end(myTable), 0, -5);
             if (!myTable) {
@@ -363,7 +363,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Returns the table alias.
      */
     string getAlias() {
-        if (this._alias === null) {
+        if (this._alias == null) {
             myAlias = moduleSplit(static::class);
             myAlias = substr(end(myAlias), 0, -5) ?: this.getTable();
             this._alias = myAlias;
@@ -404,7 +404,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Returns the table registry key used to create this table instance.
      */
     string getRegistryAlias() {
-        if (this._registryAlias === null) {
+        if (this._registryAlias == null) {
             this._registryAlias = this.getAlias();
         }
 
@@ -446,7 +446,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     auto getSchema(): TableSchemaInterface
     {
-        if (this._schema === null) {
+        if (this._schema == null) {
             this._schema = this._initializeSchema(
                 this.getConnection()
                     .getSchemaCollection()
@@ -502,7 +502,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     protected auto checkAliasLengths(): void
     {
-        if (this._schema === null) {
+        if (this._schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
         }
 
@@ -510,7 +510,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         if (method_exists(this.getConnection().getDriver(), "getMaxAliasLength")) {
             $maxLength = this.getConnection().getDriver().getMaxAliasLength();
         }
-        if ($maxLength === null) {
+        if ($maxLength == null) {
             return;
         }
 
@@ -581,9 +581,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
     // Returns the primary key field name.
     string[] getPrimaryKey() {
-        if (this._primaryKey === null) {
+        if (this._primaryKey == null) {
             myKey = this.getSchema().getPrimaryKey();
-            if (count(myKey) === 1) {
+            if (count(myKey) == 1) {
                 myKey = myKey[0];
             }
             this._primaryKey = myKey;
@@ -606,7 +606,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
     // Returns the display field.
     string[] getDisplayField() {
-        if (this._displayField === null) {
+        if (this._displayField == null) {
             $schema = this.getSchema();
             this._displayField = this.getPrimaryKey();
             foreach (["title", "name", "label"] as myField) {
@@ -632,7 +632,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             $self = static::class;
             $parts = explode("\\", $self);
 
-            if ($self === self::class || count($parts) < 3) {
+            if ($self == self::class || count($parts) < 3) {
                 return this._entityClass = $default;
             }
 
@@ -664,7 +664,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     auto setEntityClass(string myName) {
         /** @psalm-var class-string<\Cake\Datasource\IEntity>|null */
         myClass = App::className(myName, "Model/Entity");
-        if (myClass === null) {
+        if (myClass == null) {
             throw new MissingEntityException([myName]);
         }
 
@@ -858,7 +858,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     protected auto findAssociation(string myName): ?Association
     {
-        if (strpos(myName, ".") === false) {
+        if (strpos(myName, ".") == false) {
             return this._associations.get(myName);
         }
 
@@ -1296,7 +1296,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
                 (array)myOptions["groupField"]
             );
             $columns = this.getSchema().columns();
-            if (count(myFields) === count(array_intersect(myFields, $columns))) {
+            if (count(myFields) == count(array_intersect(myFields, $columns))) {
                 myQuery.select(myFields);
             }
         }
@@ -1376,7 +1376,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
                 continue;
             }
 
-            if (count(myOptions[myField]) === 1) {
+            if (count(myOptions[myField]) == 1) {
                 myOptions[myField] = current(myOptions[myField]);
                 continue;
             }
@@ -1575,7 +1575,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
         myResult = this.save($entity, myOptions);
 
-        if (myResult === false) {
+        if (myResult == false) {
             throw new PersistenceFailedException($entity, ["findOrCreate"]);
         }
 
@@ -1766,7 +1766,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return false;
         }
 
-        if ($entity.isNew() === false && !$entity.isDirty()) {
+        if ($entity.isNew() == false && !$entity.isDirty()) {
             return $entity;
         }
 
@@ -1801,7 +1801,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     function saveOrFail(IEntity $entity, myOptions = []): IEntity
     {
         $saved = this.save($entity, myOptions);
-        if ($saved === false) {
+        if ($saved == false) {
             throw new PersistenceFailedException($entity, ["save"]);
         }
 
@@ -1840,7 +1840,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
         if (myEvent.isStopped()) {
             myResult = myEvent.getResult();
-            if (myResult === null) {
+            if (myResult == null) {
                 return false;
             }
 
@@ -2038,7 +2038,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return $entity;
         }
 
-        if (count($primaryColumns) === 0) {
+        if (count($primaryColumns) == 0) {
             $entityClass = get_class($entity);
             myTable = this.getTable();
             myMessage = "Cannot update `$entityClass`. The `myTable` has no primary key.";
@@ -2058,7 +2058,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             .execute();
 
         $success = false;
-        if ($statement.errorCode() === "00000") {
+        if ($statement.errorCode() == "00000") {
             $success = $entity;
         }
         $statement.closeCursor();
@@ -2140,7 +2140,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
                 .transactional(function () use ($entities, myOptions, &$isNew, &$failed) {
                     foreach ($entities as myKey: $entity) {
                         $isNew[myKey] = $entity.isNew();
-                        if (this.save($entity, myOptions) === false) {
+                        if (this.save($entity, myOptions) == false) {
                             $failed = $entity;
 
                             return false;
@@ -2289,7 +2289,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return null;
         }, myOptions["atomic"]);
 
-        if ($failed === null && this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        if ($failed == null && this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent("Model.afterDeleteCommit", [
                     "entity": $entity,
@@ -2313,7 +2313,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     bool deleteOrFail(IEntity $entity, myOptions = []) {
         $deleted = this.delete($entity, myOptions);
-        if ($deleted === false) {
+        if ($deleted == false) {
             throw new PersistenceFailedException($entity, ["delete"]);
         }
 
@@ -2473,7 +2473,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             );
         }
 
-        if ($hasOr === false && $hasAnd === false) {
+        if ($hasOr == false && $hasAnd == false) {
             $conditions = $makeConditions([myFields], $args);
         } elseif ($hasOr !== false) {
             myFields = explode("_or_", myFields);
@@ -2814,7 +2814,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return bool True if the value is unique, or false if a non-scalar, non-unique value was given.
      */
     bool validateUnique(myValue, array myOptions, ?array $context = null) {
-        if ($context === null) {
+        if ($context == null) {
             $context = myOptions;
         }
         $entity = new Entity(

@@ -145,7 +145,7 @@ class BelongsToMany : Association
 
     // Gets the name of the field representing the foreign key to the target table.
     string[] getTargetForeignKey() {
-        if (this._targetForeignKey === null) {
+        if (this._targetForeignKey == null) {
             this._targetForeignKey = this._modelKey(this.getTarget().getAlias());
         }
 
@@ -165,7 +165,7 @@ class BelongsToMany : Association
 
     // Gets the name of the field representing the foreign key to the source table.
     string[] getForeignKey() {
-        if (this._foreignKey === null) {
+        if (this._foreignKey == null) {
             this._foreignKey = this._modelKey(this.getSource().getTable());
         }
 
@@ -214,14 +214,14 @@ class BelongsToMany : Association
      */
     function junction(myTable = null): Table
     {
-        if (myTable === null && this._junctionTable !== null) {
+        if (myTable == null && this._junctionTable !== null) {
             return this._junctionTable;
         }
 
         myTableLocator = this.getTableLocator();
-        if (myTable === null && this._through) {
+        if (myTable == null && this._through) {
             myTable = this._through;
-        } elseif (myTable === null) {
+        } elseif (myTable == null) {
             myTableName = this._junctionTableName();
             myTableAlias = Inflector::camelize(myTableName);
 
@@ -243,7 +243,7 @@ class BelongsToMany : Association
 
         $source = this.getSource();
         myTarget = this.getTarget();
-        if ($source.getAlias() === myTarget.getAlias()) {
+        if ($source.getAlias() == myTarget.getAlias()) {
             throw new InvalidArgumentException(sprintf(
                 "The `%s` association on `%s` cannot target the same table.",
                 this.getName(),
@@ -637,7 +637,7 @@ class BelongsToMany : Association
             myTargetEntity = [];
         }
 
-        if ($strategy === self::SAVE_APPEND) {
+        if ($strategy == self::SAVE_APPEND) {
             return this._saveTarget($entity, myTargetEntity, myOptions);
         }
 
@@ -696,7 +696,7 @@ class BelongsToMany : Association
             if (!empty(myOptions["atomic"])) {
                 $original[$k].setErrors($entity.getErrors());
             }
-            if ($saved === false) {
+            if ($saved == false) {
                 return false;
             }
         }
@@ -944,7 +944,7 @@ class BelongsToMany : Association
         $matching = [];
         myAlias = this.getAlias() . ".";
         foreach ($conditions as myField: myValue) {
-            if (is_string(myField) && strpos(myField, myAlias) === 0) {
+            if (is_string(myField) && strpos(myField, myAlias) == 0) {
                 $matching[myField] = myValue;
             } elseif (is_int(myField) || myValue instanceof IExpression) {
                 $matching[myField] = myValue;
@@ -973,7 +973,7 @@ class BelongsToMany : Association
         myAlias = this._junctionAssociationName() . ".";
         foreach ($conditions as myField: myValue) {
             $isString = is_string(myField);
-            if ($isString && strpos(myField, myAlias) === 0) {
+            if ($isString && strpos(myField, myAlias) == 0) {
                 $matching[myField] = myValue;
             }
             // Assume that operators contain junction conditions.
@@ -1026,7 +1026,7 @@ class BelongsToMany : Association
     protected auto _appendJunctionJoin(Query myQuery, ?array $conditions = null): Query
     {
         $junctionTable = this.junction();
-        if ($conditions === null) {
+        if ($conditions == null) {
             $belongsTo = $junctionTable.getAssociation(this.getTarget().getAlias());
             $conditions = $belongsTo._joinCondition([
                 "foreignKey":this.getTargetForeignKey(),
@@ -1140,7 +1140,7 @@ class BelongsToMany : Association
 
                 $jointEntities = this._collectJointEntities($sourceEntity, myTargetEntities);
                 $inserts = this._diffLinks($existing, $jointEntities, myTargetEntities, myOptions);
-                if ($inserts === false) {
+                if ($inserts == false) {
                     return false;
                 }
 
@@ -1203,7 +1203,7 @@ class BelongsToMany : Association
             myFields = myResult.extract(myKeys);
             $found = false;
             foreach ($indexed as $i: myData) {
-                if (myFields === myData) {
+                if (myFields == myData) {
                     unset($indexed[$i]);
                     $found = true;
                     break;
@@ -1223,7 +1223,7 @@ class BelongsToMany : Association
             }
             myKey = array_values($entity.extract($primary));
             foreach ($present as $i: myData) {
-                if (myKey === myData && !$entity.get($jointProperty)) {
+                if (myKey == myData && !$entity.get($jointProperty)) {
                     unset(myTargetEntities[$k], $present[$i]);
                     break;
                 }
@@ -1359,7 +1359,7 @@ class BelongsToMany : Association
      * @return string
      */
     protected string _junctionTableName(Nullable!string myName = null) {
-        if (myName === null) {
+        if (myName == null) {
             if (empty(this._junctionTableName)) {
                 myTablesNames = array_map("Cake\Utility\Inflector::underscore", [
                     this.getSource().getTable(),

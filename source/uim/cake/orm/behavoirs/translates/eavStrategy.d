@@ -141,7 +141,7 @@ class EavStrategy : TranslateStrategyInterface
     function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions) {
         $locale = Hash::get(myOptions, "locale", this.getLocale());
 
-        if ($locale === this.getConfig("defaultLocale")) {
+        if ($locale == this.getConfig("defaultLocale")) {
             return;
         }
 
@@ -210,17 +210,17 @@ class EavStrategy : TranslateStrategyInterface
         // Check early if empty translations are present in the entity.
         // If this is the case, unset them to prevent persistence.
         // This only applies if this._config["allowEmptyTranslations"] is false
-        if (this._config["allowEmptyTranslations"] === false) {
+        if (this._config["allowEmptyTranslations"] == false) {
             this.unsetEmptyFields($entity);
         }
 
         this.bundleTranslatedFields($entity);
         $bundled = $entity.get("_i18n") ?: [];
-        $noBundled = count($bundled) === 0;
+        $noBundled = count($bundled) == 0;
 
         // No additional translation records need to be saved,
         // as the entity is in the default locale.
-        if ($noBundled && $locale === this.getConfig("defaultLocale")) {
+        if ($noBundled && $locale == this.getConfig("defaultLocale")) {
             return;
         }
 
@@ -304,7 +304,7 @@ class EavStrategy : TranslateStrategyInterface
      */
     string translationField(string myField) {
         myTable = this.table;
-        if (this.getLocale() === this.getConfig("defaultLocale")) {
+        if (this.getLocale() == this.getConfig("defaultLocale")) {
             return myTable.aliasField(myField);
         }
         $associationName = myTable.getAlias() . "_" . myField . "_translation";
@@ -327,7 +327,7 @@ class EavStrategy : TranslateStrategyInterface
     protected auto rowMapper(myResults, $locale) {
         return myResults.map(function ($row) use ($locale) {
             /** @var \Cake\Datasource\IEntity|array|null $row */
-            if ($row === null) {
+            if ($row == null) {
                 return $row;
             }
             $hydrated = !is_array($row);
@@ -336,7 +336,7 @@ class EavStrategy : TranslateStrategyInterface
                 myName = myField . "_translation";
                 $translation = $row[myName] ?? null;
 
-                if ($translation === null || $translation === false) {
+                if ($translation == null || $translation == false) {
                     unset($row[myName]);
                     continue;
                 }

@@ -354,7 +354,7 @@ abstract class Association
      */
     auto getTarget(): Table
     {
-        if (this._targetTable === null) {
+        if (this._targetTable == null) {
             if (strpos(this._className, ".")) {
                 [myPlugin] = pluginSplit(this._className, true);
                 $registryAlias = (string)myPlugin . this._name;
@@ -381,7 +381,7 @@ abstract class Association
 
                     throw new RuntimeException(sprintf(
                         myErrorMessage,
-                        this._sourceTable === null ? "null" : get_class(this._sourceTable),
+                        this._sourceTable == null ? "null" : get_class(this._sourceTable),
                         this.getName(),
                         this.type(),
                         get_class(this._targetTable),
@@ -439,7 +439,7 @@ abstract class Association
      * @return array<string>|string
      */
     auto getBindingKey() {
-        if (this._bindingKey === null) {
+        if (this._bindingKey == null) {
             this._bindingKey = this.isOwningSide(this.getSource()) ?
                 this.getSource().getPrimaryKey() :
                 this.getTarget().getPrimaryKey();
@@ -501,7 +501,7 @@ abstract class Association
     bool canBeJoined(array myOptions = []) {
         $strategy = myOptions["strategy"] ?? this.getStrategy();
 
-        return $strategy === this::STRATEGY_JOIN;
+        return $strategy == this::STRATEGY_JOIN;
     }
 
     /**
@@ -672,7 +672,7 @@ abstract class Association
         ];
 
         // This is set by joinWith to disable matching results
-        if (myOptions["fields"] === false) {
+        if (myOptions["fields"] == false) {
             myOptions["fields"] = [];
             myOptions["includeFields"] = false;
         }
@@ -701,7 +701,7 @@ abstract class Association
 
         if (
             !empty(myOptions["matching"]) &&
-            this._strategy === static::STRATEGY_JOIN &&
+            this._strategy == static::STRATEGY_JOIN &&
             $dummy.getContain()
         ) {
             throw new RuntimeException(
@@ -872,7 +872,7 @@ abstract class Association
     bool requiresKeys(array myOptions = []) {
         $strategy = myOptions["strategy"] ?? this.getStrategy();
 
-        return $strategy === static::STRATEGY_SELECT;
+        return $strategy == static::STRATEGY_SELECT;
     }
 
     /**
@@ -898,7 +898,7 @@ abstract class Association
      */
     protected auto _appendFields(Query myQuery, Query $surrogate, array myOptions): void
     {
-        if (myQuery.getEagerLoader().isAutoFieldsEnabled() === false) {
+        if (myQuery.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
         }
 

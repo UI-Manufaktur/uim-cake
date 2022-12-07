@@ -82,7 +82,7 @@ class TreeBehavior : Behavior
         $dirty = $entity.isDirty(myConfig["parent"]);
         $level = myConfig["level"];
 
-        if ($parent && $entity.get($primaryKey) === $parent) {
+        if ($parent && $entity.get($primaryKey) == $parent) {
             throw new RuntimeException("Cannot set a node"s parent as itself");
         }
 
@@ -159,7 +159,7 @@ class TreeBehavior : Behavior
     {
         myConfig = this.getConfig();
 
-        if ($entity.get(myConfig["left"]) + 1 === $entity.get(myConfig["right"])) {
+        if ($entity.get(myConfig["left"]) + 1 == $entity.get(myConfig["right"])) {
             return;
         }
 
@@ -430,7 +430,7 @@ class TreeBehavior : Behavior
             throw new InvalidArgumentException("The "for" key is required for find("children")");
         }
 
-        if (myQuery.clause("order") === null) {
+        if (myQuery.clause("order") == null) {
             myQuery.order([$left: "ASC"]);
         }
 
@@ -544,7 +544,7 @@ class TreeBehavior : Behavior
 
         myNode.set(myConfig["parent"], null);
 
-        if ($right - $left === 1) {
+        if ($right - $left == 1) {
             return this._table.save(myNode);
         }
 
@@ -847,7 +847,7 @@ class TreeBehavior : Behavior
             .orderDesc($rightField)
             .first();
 
-        if ($edge === null || empty($edge[myField])) {
+        if ($edge == null || empty($edge[myField])) {
             return 0;
         }
 
@@ -926,7 +926,7 @@ class TreeBehavior : Behavior
         myConfig = this.getConfig();
         myFields = [myConfig["left"], myConfig["right"]];
         myValues = array_filter($entity.extract(myFields));
-        if (count(myValues) === count(myFields)) {
+        if (count(myValues) == count(myFields)) {
             return;
         }
 
@@ -970,7 +970,7 @@ class TreeBehavior : Behavior
             .where([$primaryKey: $id])
             .first();
 
-        if ($entity === null) {
+        if ($entity == null) {
             return false;
         }
 

@@ -105,7 +105,7 @@ class AssociationCollection : IteratorAggregate
     auto getByProperty(string $prop): ?Association
     {
         foreach (this._items as $assoc) {
-            if ($assoc.getProperty() === $prop) {
+            if ($assoc.getProperty() == $prop) {
                 return $assoc;
             }
         }
@@ -329,7 +329,7 @@ class AssociationCollection : IteratorAggregate
      */
     function normalizeKeys(myKeys): array
     {
-        if (myKeys === true) {
+        if (myKeys == true) {
             myKeys = this.keys();
         }
 

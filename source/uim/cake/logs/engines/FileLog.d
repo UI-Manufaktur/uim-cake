@@ -160,7 +160,7 @@ class FileLog : BaseLog
 
         if (this._file) {
             myfilename = this._file;
-        } elseif ($level === "error" || $level === "warning") {
+        } elseif ($level == "error" || $level == "warning") {
             myfilename = "error.log";
         } elseif (in_array($level, $debugTypes, true)) {
             myfilename = "debug.log";
@@ -192,7 +192,7 @@ class FileLog : BaseLog
         }
 
         $rotate = this._config["rotate"];
-        if ($rotate === 0) {
+        if ($rotate == 0) {
             myResult = unlink(myfilePath);
         } else {
             myResult = rename(myfilePath, myfilePath . "." . time());

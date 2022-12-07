@@ -263,7 +263,7 @@ class SmtpTransport : AbstractTransport
         myPassword = this._config["password"];
 
         $replyCode = this._authPlain(myUsername, myPassword);
-        if ($replyCode === "235") {
+        if ($replyCode == "235") {
             return;
         }
 
@@ -298,7 +298,7 @@ class SmtpTransport : AbstractTransport
     protected auto _authLogin(string myUsername, string myPassword): void
     {
         $replyCode = this._smtpSend("AUTH LOGIN", "334|500|502|504");
-        if ($replyCode === "334") {
+        if ($replyCode == "334") {
             try {
                 this._smtpSend(base64_encode(myUsername), "334");
             } catch (SocketException $e) {
@@ -309,7 +309,7 @@ class SmtpTransport : AbstractTransport
             } catch (SocketException $e) {
                 throw new SocketException("SMTP server did not accept the password.", null, $e);
             }
-        } elseif ($replyCode === "504") {
+        } elseif ($replyCode == "504") {
             throw new SocketException("SMTP authentication method not allowed, check if SMTP server requires TLS.");
         } else {
             throw new SocketException(
@@ -379,7 +379,7 @@ class SmtpTransport : AbstractTransport
         $lines = myMessage.getBody();
         myMessages = [];
         foreach ($lines as $line) {
-            if (!empty($line) && ($line[0] === ".")) {
+            if (!empty($line) && ($line[0] == ".")) {
                 myMessages[] = "." . $line;
             } else {
                 myMessages[] = $line;
@@ -480,7 +480,7 @@ class SmtpTransport : AbstractTransport
             $startTime = time();
             while (substr($response, -2) !== "\r\n" && (time() - $startTime < $timeout)) {
                 $bytes = this._socket().read();
-                if ($bytes === null) {
+                if ($bytes == null) {
                     break;
                 }
                 $response .= $bytes;
@@ -496,7 +496,7 @@ class SmtpTransport : AbstractTransport
             this._bufferResponseLines($responseLines);
 
             if (preg_match("/^(" . $checkCode . ")(.)/", $response, $code)) {
-                if ($code[2] === "-") {
+                if ($code[2] == "-") {
                     continue;
                 }
 
@@ -516,7 +516,7 @@ class SmtpTransport : AbstractTransport
      */
     protected auto _socket(): Socket
     {
-        if (this._socket === null) {
+        if (this._socket == null) {
             throw new RuntimeException("Socket is null, but must be set.");
         }
 

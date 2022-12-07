@@ -84,8 +84,8 @@ class SelectWithPivotLoader : SelectLoader
             myQuery = myQueryBuilder(myQuery);
         }
 
-        if (myQuery.isAutoFieldsEnabled() === null) {
-            myQuery.enableAutoFields(myQuery.clause("select") === []);
+        if (myQuery.isAutoFieldsEnabled() == null) {
+            myQuery.enableAutoFields(myQuery.clause("select") == []);
         }
 
         // Ensure that association conditions are applied
@@ -139,7 +139,7 @@ class SelectWithPivotLoader : SelectLoader
             $links[] = sprintf("%s.%s", myName, myKey);
         }
 
-        if (count($links) === 1) {
+        if (count($links) == 1) {
             return $links[0];
         }
 
