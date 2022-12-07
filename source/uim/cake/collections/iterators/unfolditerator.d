@@ -1,4 +1,4 @@
-module uim.cake.collectionss.iterators.unfolditerator;
+module uim.cake.collections.iterators.unfolditerator;
 
 @safe:
 import uim.cake;

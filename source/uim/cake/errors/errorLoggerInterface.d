@@ -1,4 +1,4 @@
-module uim.cakerors.errorlogger;
+module uim.cake.errors.errorlogger;
 
 use Psr\Http\Message\IServerRequest;
 use Throwable;

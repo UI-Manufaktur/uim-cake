@@ -1,4 +1,4 @@
-module uim.cakerors;
+module uim.cake.errors;
 
 use Psr\Http\Message\IResponse;
 

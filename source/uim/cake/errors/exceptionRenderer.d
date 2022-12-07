@@ -1,30 +1,7 @@
-module uim.cakerors;
+module uim.cake.errors;
 
-import uim.cake.controllers\Controller;
-import uim.cake.controllers\ControllerFactory;
-import uim.cake.controllers\Exception\InvalidParameterException;
-import uim.cake.controllers\Exception\MissingActionException;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Container;
-import uim.cake.core.exceptions\CakeException;
-import uim.cake.core.exceptions\MissingPluginException;
-import uim.cake.datasources\Exception\PageOutOfBoundsException;
-import uim.cake.datasources\Exception\RecordNotFoundException;
-import uim.cakeents\Event;
-import uim.caketps\Exception\HttpException;
-import uim.caketps\Exception\MissingControllerException;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.caketps\ServerRequestFactory;
-import uim.cakeutings\Exception\MissingRouteException;
-import uim.cakeutings\Router;
-import uim.cakeilities.Inflector;
-import uim.cakeews\Exception\MissingLayoutException;
-import uim.cakeews\Exception\MissingTemplateException;
-use PDOException;
-use Psr\Http\Message\IResponse;
-use Throwable;
+@safe:
+import uim.safe;
 
 /**
  * Exception Renderer.
@@ -197,10 +174,9 @@ class ExceptionRenderer : ExceptionRendererInterface
     /**
      * Renders the response for the exception.
      *
-     * @return \Cake\Http\Response The response to be sent.
+     * @return The response to be sent.
      */
-    function render(): IResponse
-    {
+    IResponse render() {
         myException = this.error;
         $code = this.getHttpCode(myException);
         $method = this._method(myException);
@@ -351,7 +327,7 @@ class ExceptionRenderer : ExceptionRendererInterface
      * @param \Throwable myException Exception.
      * @return int A valid HTTP status code.
      */
-    protected auto getHttpCode(Throwable myException): int
+    protected int getHttpCode(Throwable myException)
     {
         if (myException instanceof HttpException) {
             return myException.getCode();

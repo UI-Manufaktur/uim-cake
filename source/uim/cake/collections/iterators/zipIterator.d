@@ -1,12 +1,8 @@
 
-module uim.cake.collectionss.iterators;
+module uim.cake.collections.iterators;
 
-import uim.cake.collections\Collection;
-import uim.cake.collections\ICollection;
-import uim.cake.collections\CollectionTrait;
-use MultipleIterator;
-use Serializable;
-
+@safe:
+import uim.cake;
 /**
  * Creates an iterator that returns elements grouped in pairs
  *
