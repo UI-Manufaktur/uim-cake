@@ -7,11 +7,11 @@
  * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeews\Helper;
+ */module uim.cake.views.Helper;
 
 import uim.cake8n\FrozenTime;
-import uim.cakeews\Helper;
-import uim.cakeews\StringTemplateTrait;
+import uim.cake.views.Helper;
+import uim.cake.views.StringTemplateTrait;
 use IDateTime;
 use Exception;
 

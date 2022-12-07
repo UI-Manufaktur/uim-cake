@@ -1,10 +1,10 @@
-module uim.cakeews\Helper;
+module uim.cake.views.Helper;
 
 import uim.cake.core.App;
 import uim.cake.core.exceptions\CakeException;
 import uim.cakeutings\Asset;
 import uim.cakeutings\Router;
-import uim.cakeews\Helper;
+import uim.cake.views.Helper;
 
 /**
  * UrlHelper class for generating URLs.

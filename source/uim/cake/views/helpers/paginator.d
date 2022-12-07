@@ -1,11 +1,11 @@
-module uim.cakeews\Helper;
+module uim.cake.views.Helper;
 
 import uim.cakeilities.Hash;
 import uim.cakeilities.Inflector;
-import uim.cakeews\Helper;
-import uim.cakeews\StringTemplate;
-import uim.cakeews\StringTemplateTrait;
-import uim.cakeews\View;
+import uim.cake.views.Helper;
+import uim.cake.views.StringTemplate;
+import uim.cake.views.StringTemplateTrait;
+import uim.cake.views.View;
 
 /**
  * Pagination Helper class for easy generation of pagination links.

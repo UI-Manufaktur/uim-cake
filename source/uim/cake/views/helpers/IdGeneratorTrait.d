@@ -1,4 +1,4 @@
-module uim.cakeews\Helper;
+module uim.cake.views.Helper;
 
 import uim.cakeilities.Text;
 

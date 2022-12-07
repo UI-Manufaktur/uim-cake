@@ -1,9 +1,7 @@
-module uim.cakeews.widgets;
+module uim.cake.views.widgets;
 
-import uim.cakeews.forms\IContext;
-import uim.cakeews\StringTemplate;
-use IDateTime;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Input widget class for generating a calendar year select box.

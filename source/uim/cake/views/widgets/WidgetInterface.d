@@ -1,6 +1,6 @@
-module uim.cakeews\Widget;
+module uim.cake.views.Widget;
 
-import uim.cakeews\Form\IContext;
+import uim.cake.views.Form\IContext;
 
 /**
  * Interface for input widgets.

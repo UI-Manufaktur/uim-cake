@@ -1,6 +1,6 @@
-module uim.cakeews.widgets;
+module uim.cake.views.widgets;
 
-import uim.cakeews.forms\IContext;
+import uim.cake.views.forms\IContext;
 
 /**
  * Input widget for creating checkbox widgets.

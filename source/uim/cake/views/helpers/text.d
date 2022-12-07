@@ -7,14 +7,14 @@
  * @link          https://UIM.org UIM(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeews\Helper;
+ */module uim.cake.views.Helper;
 
 import uim.cake.core.App;
 import uim.cake.core.exceptions\CakeException;
 import uim.cakeilities.Security;
 import uim.cakeilities.Text;
-import uim.cakeews\Helper;
-import uim.cakeews\View;
+import uim.cake.views.Helper;
+import uim.cake.views.View;
 
 /**
  * Text helper library.

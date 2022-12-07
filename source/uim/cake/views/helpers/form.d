@@ -1,28 +1,7 @@
+module uim.cake.views.Helper;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cakeews\Helper;
-
-import uim.cake.core.Configure;
-import uim.cake.core.exceptions\CakeException;
-import uim.cakerms\FormProtector;
-import uim.cakeutings\Router;
-import uim.cakeilities.Hash;
-import uim.cakeilities.Inflector;
-import uim.cakeews.forms\ContextFactory;
-import uim.cakeews.forms\IContext;
-import uim.cakeews\Helper;
-import uim.cakeews\StringTemplateTrait;
-import uim.cakeews\View;
-import uim.cakeews.widgets\WidgetLocator;
-use InvalidArgumentException;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Form helper library.

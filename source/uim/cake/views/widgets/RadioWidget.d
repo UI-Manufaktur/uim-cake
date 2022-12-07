@@ -1,8 +1,8 @@
-module uim.cakeews\Widget;
+module uim.cake.views.Widget;
 
-import uim.cakeews\Form\IContext;
-import uim.cakeews\Helper\IdGeneratorTrait;
-import uim.cakeews\StringTemplate;
+import uim.cake.views.Form\IContext;
+import uim.cake.views.Helper\IdGeneratorTrait;
+import uim.cake.views.StringTemplate;
 use Traversable;
 
 /**

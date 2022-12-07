@@ -1,4 +1,4 @@
-module uim.cakeews\Widget;
+module uim.cake.views.Widget;
 
 /**
  * Form 'widget' for creating labels that contain their input.

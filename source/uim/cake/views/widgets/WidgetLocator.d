@@ -1,11 +1,7 @@
-module uim.cakeews\Widget;
+module uim.cake.views.Widget;
 
-import uim.cake.core.App;
-import uim.cake.core.Configure\Engine\PhpConfig;
-import uim.cakeews\StringTemplate;
-import uim.cakeews\View;
-use ReflectionClass;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * A registry/factory for input widgets.

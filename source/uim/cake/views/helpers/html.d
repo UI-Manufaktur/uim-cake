@@ -1,8 +1,7 @@
-module uim.cakeews\Helper;
+module uim.cake.views.Helper;
 
-import uim.cake.core.Configure;
-import uim.cakeews\Helper;
-import uim.cakeews\StringTemplateTrait;
+@safe:
+import uim.cake;
 
 /**
  * Html Helper class for easy use of HTML widgets.
@@ -12,8 +11,7 @@ import uim.cakeews\StringTemplateTrait;
  * @property \Cake\View\Helper\UrlHelper myUrl
  * @link https://book.UIM.org/4/en/views/helpers/html.html
  */
-class HtmlHelper : Helper
-{
+class HtmlHelper : Helper {
     use StringTemplateTrait;
 
     /**

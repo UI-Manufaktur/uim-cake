@@ -1,8 +1,7 @@
-module uim.cakeews\Widget;
+module uim.cake.views.Widget;
 
-import uim.cakeews\Form\IContext;
-import uim.cakeews\Helper\IdGeneratorTrait;
-import uim.cakeews\StringTemplate;
+@safe:
+import uim.cake;
 
 /**
  * Input widget class for generating multiple checkboxes.

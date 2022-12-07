@@ -1,7 +1,7 @@
-module uim.cakeews\Widget;
+module uim.cake.views.Widget;
 
 import uim.cake.databases.Schema\TableSchema;
-import uim.cakeews\Form\IContext;
+import uim.cake.views.Form\IContext;
 use DateTime;
 use IDateTime;
 use DateTimeZone;

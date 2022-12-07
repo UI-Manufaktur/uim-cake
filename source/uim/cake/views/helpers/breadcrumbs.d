@@ -1,8 +1,7 @@
-module uim.cakeews\Helper;
+module uim.cake.views.Helper;
 
-import uim.cakeews\Helper;
-import uim.cakeews\StringTemplateTrait;
-use LogicException;
+@safe:
+import uim.cake;
 
 /**
  * BreadcrumbsHelper to register and display a breadcrumb trail for your views
