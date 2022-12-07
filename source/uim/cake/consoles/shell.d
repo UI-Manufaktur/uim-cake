@@ -1,20 +1,7 @@
 module uim.cake.console;
 
-import uim.cake.console.exceptions\ConsoleException;
-import uim.cake.console.exceptions\StopException;
-import uim.cake.core.App;
-import uim.cake.core.exceptions\CakeException;
-import uim.cake.datasources\ModelAwareTrait;
-import uim.cakelesystem\Filesystem;
-import uim.cakegs\LogTrait;
-import uim.cakem.Locator\LocatorAwareTrait;
-import uim.cakem.Locator\ILocator;
-import uim.cakeilities.Inflector;
-import uim.cakeilities.MergeVariablesTrait;
-import uim.cakeilities.Text;
-use ReflectionException;
-use ReflectionMethod;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Base class for command-line utilities for automating programmer chores.
@@ -32,38 +19,28 @@ class Shell {
 
     /**
      * Default error code
-     *
-     * @var int
-     */
-    public const CODE_ERROR = 1;
+    */
+    public const int CODE_ERROR = 1;
 
     /**
      * Default success code
-     *
-     * @var int
-     */
-    public const CODE_SUCCESS = 0;
+    */
+    public const int CODE_SUCCESS = 0;
 
     /**
      * Output constant making verbose shells.
-     *
-     * @var int
-     */
-    public const VERBOSE = ConsoleIo::VERBOSE;
+    */
+    public const int VERBOSE = ConsoleIo::VERBOSE;
 
     /**
      * Output constant for making normal shells.
-     *
-     * @var int
-     */
-    public const NORMAL = ConsoleIo::NORMAL;
+    */
+    public const int NORMAL = ConsoleIo::NORMAL;
 
     /**
      * Output constants for making quiet shells.
-     *
-     * @var int
-     */
-    public const QUIET = ConsoleIo::QUIET;
+    */
+    public const int QUIET = ConsoleIo::QUIET;
 
     /**
      * An instance of ConsoleOptionParser that has been configured for this class.

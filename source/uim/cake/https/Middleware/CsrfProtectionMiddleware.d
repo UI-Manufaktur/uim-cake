@@ -79,10 +79,8 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      *
      * We are currently using sha1 for the hmac which
      * creates 40 bytes.
-     *
-     * @var int
-     */
-    public const TOKEN_WITH_CHECKSUM_LENGTH = 56;
+    */
+    public const int TOKEN_WITH_CHECKSUM_LENGTH = 56;
 
     /**
      * Constructor

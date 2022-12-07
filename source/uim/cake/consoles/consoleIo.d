@@ -1,10 +1,7 @@
 module uim.cake.console;
 
-import uim.cake.console.exceptions\StopException;
-import uim.cakegs\Engine\ConsoleLog;
-import uim.cakegs\Log;
-use RuntimeException;
-use SplFileObject;
+@safe:
+import uim.cake;
 
 /**
  * A wrapper around the various IO operations shell tasks need to do.
@@ -13,28 +10,21 @@ use SplFileObject;
  * consistent interface for shells to use. This class also makes mocking streams
  * easy to do in unit tests.
  */
-class ConsoleIo
-{
+class ConsoleIo {
     /**
      * Output constant making verbose shells.
-     *
-     * @var int
      */
-    public const VERBOSE = 2;
+    public const int VERBOSE = 2;
 
     /**
      * Output constant for making normal shells.
-     *
-     * @var int
      */
-    public const NORMAL = 1;
+    public const int NORMAL = 1;
 
     /**
      * Output constants for making quiet shells.
-     *
-     * @var int
      */
-    public const QUIET = 0;
+    public const int QUIET = 0;
 
     /**
      * The output stream

@@ -18,10 +18,8 @@ class ServerCommand : Command {
 
     /**
      * Default ListenPort
-     *
-     * @var int
-     */
-    public const DEFAULT_PORT = 8765;
+    */
+    public const int DEFAULT_PORT = 8765;
 
     /**
      * server host

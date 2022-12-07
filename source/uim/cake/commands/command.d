@@ -1,11 +1,7 @@
 module uim.cake.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.BaseCommand;
-import uim.cake.console.consoleIo;
-import uim.cake.datasources\ModelAwareTrait;
-import uim.cakegs\LogTrait;
-import uim.cakem.Locator\LocatorAwareTrait;
+@safe:
+import uim.cake;
 
 /**
  * Base class for commands using the full stack

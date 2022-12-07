@@ -10,66 +10,48 @@ class Message
 {
     /**
      * HTTP 200 code
-     *
-     * @var int
-     */
-    public const STATUS_OK = 200;
+    */
+    public const int STATUS_OK = 200;
 
     /**
      * HTTP 201 code
-     *
-     * @var int
-     */
-    public const STATUS_CREATED = 201;
+    */
+    public const int STATUS_CREATED = 201;
 
     /**
      * HTTP 202 code
-     *
-     * @var int
-     */
-    public const STATUS_ACCEPTED = 202;
+    */
+    public const int STATUS_ACCEPTED = 202;
 
     /**
      * HTTP 203 code
-     *
-     * @var int
-     */
-    public const STATUS_NON_AUTHORITATIVE_INFORMATION = 203;
+    */
+    public const int STATUS_NON_AUTHORITATIVE_INFORMATION = 203;
 
     /**
      * HTTP 204 code
-     *
-     * @var int
-     */
-    public const STATUS_NO_CONTENT = 204;
+    */
+    public const int STATUS_NO_CONTENT = 204;
 
     /**
      * HTTP 301 code
-     *
-     * @var int
-     */
-    public const STATUS_MOVED_PERMANENTLY = 301;
+    */
+    public const int STATUS_MOVED_PERMANENTLY = 301;
 
     /**
      * HTTP 302 code
-     *
-     * @var int
-     */
-    public const STATUS_FOUND = 302;
+    */
+    public const int STATUS_FOUND = 302;
 
     /**
      * HTTP 303 code
-     *
-     * @var int
-     */
-    public const STATUS_SEE_OTHER = 303;
+    */
+    public const int STATUS_SEE_OTHER = 303;
 
     /**
      * HTTP 307 code
-     *
-     * @var int
-     */
-    public const STATUS_TEMPORARY_REDIRECT = 307;
+    */
+    public const int STATUS_TEMPORARY_REDIRECT = 307;
 
     /**
      * HTTP GET method

@@ -29,28 +29,22 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * A flag for allowEmptyFor()
      *
      * When `null` is given, it will be recognized as empty.
-     *
-     * @var int
-     */
-    public const EMPTY_NULL = 0;
+    */
+    public const int EMPTY_NULL = 0;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an empty string is given, it will be recognized as empty.
-     *
-     * @var int
-     */
-    public const EMPTY_STRING = 1;
+    */
+    public const int EMPTY_STRING = 1;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an empty array is given, it will be recognized as empty.
-     *
-     * @var int
-     */
-    public const EMPTY_ARRAY = 2;
+    */
+    public const int EMPTY_ARRAY = 2;
 
     /**
      * A flag for allowEmptyFor()
@@ -61,10 +55,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * When an instance of \Psr\Http\Message\UploadedFileInterface is given the
      * return value of it"s getError() method must be equal to `UPLOAD_ERR_NO_FILE`.
-     *
-     * @var int
-     */
-    public const EMPTY_FILE = 4;
+    */
+    public const int EMPTY_FILE = 4;
 
     /**
      * A flag for allowEmptyFor()
@@ -84,10 +76,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
     /**
      * A combination of the all EMPTY_* flags
-     *
-     * @var int
-     */
-    public const EMPTY_ALL = self::EMPTY_STRING
+    */
+    public const int EMPTY_ALL = self::EMPTY_STRING
         | self::EMPTY_ARRAY
         | self::EMPTY_FILE
         | self::EMPTY_DATE

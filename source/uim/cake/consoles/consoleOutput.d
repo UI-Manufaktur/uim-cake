@@ -33,24 +33,18 @@ class ConsoleOutput
 {
     /**
      * Raw output constant - no modification of output text.
-     *
-     * @var int
-     */
-    public const RAW = 0;
+    */
+    public const int RAW = 0;
 
     /**
      * Plain output - tags will be stripped.
-     *
-     * @var int
-     */
-    public const PLAIN = 1;
+    */
+    public const int PLAIN = 1;
 
     /**
      * Color output - Convert known tags in to ANSI color escape codes.
-     *
-     * @var int
-     */
-    public const COLOR = 2;
+    */
+    public const int COLOR = 2;
 
     /**
      * Constant for a newline.

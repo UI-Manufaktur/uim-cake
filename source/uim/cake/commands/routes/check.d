@@ -1,12 +1,7 @@
 module uim.cake.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.caketps\Exception\RedirectException;
-import uim.caketps\ServerRequest;
-import uim.cakeutings\Exception\MissingRouteException;
-import uim.cakeutings\Router;
+@safe:
+import uim.cake;
 
 /**
  * Provides interactive CLI tool for testing routes.
