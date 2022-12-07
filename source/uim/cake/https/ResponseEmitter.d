@@ -179,7 +179,7 @@ class ResponseEmitter : EmitterInterface
         }
 
         foreach ($response.getHeaders() as myName: myValues) {
-            if (strtolower(myName) === "set-cookie") {
+            if (strtolower(myName) == "set-cookie") {
                 $cookies = array_merge($cookies, myValues);
                 continue;
             }
@@ -253,7 +253,7 @@ class ResponseEmitter : EmitterInterface
      */
     protected auto flush(Nullable!int $maxBufferLevel = null): void
     {
-        if ($maxBufferLevel === null) {
+        if ($maxBufferLevel == null) {
             $maxBufferLevel = ob_get_level();
         }
 
@@ -276,7 +276,7 @@ class ResponseEmitter : EmitterInterface
                 $matches["unit"],
                 (int)$matches["first"],
                 (int)$matches["last"],
-                $matches["length"] === "*" ? "*" : (int)$matches["length"],
+                $matches["length"] == "*" ? "*" : (int)$matches["length"],
             ];
         }
 

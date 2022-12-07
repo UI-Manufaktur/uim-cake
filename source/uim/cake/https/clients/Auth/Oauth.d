@@ -270,7 +270,7 @@ class Oauth
 
         $post = [];
         myContentsType = myRequest.getHeaderLine("Content-Type");
-        if (myContentsType == "" || myContentsType === "application/x-www-form-urlencoded") {
+        if (myContentsType == "" || myContentsType == "application/x-www-form-urlencoded") {
             parse_str((string)myRequest.getBody(), $post);
         }
         $args = array_merge(myQueryArgs, $oauthValues, $post);

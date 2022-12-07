@@ -100,14 +100,14 @@ class Mock : AdapterInterface
      */
     protected bool urlMatches(string myRequestUri, RequestInterface $mock) {
         $mockUri = (string)$mock.getUri();
-        if (myRequestUri === $mockUri) {
+        if (myRequestUri == $mockUri) {
             return true;
         }
         $starPosition = strrpos($mockUri, "/%2A");
-        if ($starPosition === strlen($mockUri) - 4) {
+        if ($starPosition == strlen($mockUri) - 4) {
             $mockUri = substr($mockUri, 0, $starPosition);
 
-            return strpos(myRequestUri, $mockUri) === 0;
+            return strpos(myRequestUri, $mockUri) == 0;
         }
 
         return false;

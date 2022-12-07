@@ -74,7 +74,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             "base":$uri.base,
             "session":$session,
             "input":$server["CAKEPHP_INPUT"] ?? null,
-=======
+=====
             "environment": $server,
             "uri": $uri,
             "cookies": $cookies ?: $_COOKIE,
@@ -111,7 +111,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
         if (
             in_array($method, ["PUT", "DELETE", "PATCH"], true) &&
-            strpos((string)myRequest.contentType(), "application/x-www-form-urlencoded") === 0
+            strpos((string)myRequest.contentType(), "application/x-www-form-urlencoded") == 0
         ) {
             myData = (string)myRequest.getBody();
             parse_str(myData, $parsedBody);
@@ -163,7 +163,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             foreach (myfileMap as myKey: myfile) {
                 myError = myfile.getError();
                 $tmpName = "";
-                if (myError === UPLOAD_ERR_OK) {
+                if (myError == UPLOAD_ERR_OK) {
                     $tmpName = myfile.getStream().getMetadata("uri");
                 }
                 $parsedBody = Hash::insert($parsedBody, (string)myKey, [
@@ -272,20 +272,20 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     protected static function updatePath(string $base, UriInterface $uri): UriInterface
     {
         myPath = $uri.getPath();
-        if ($base !== "" && strpos(myPath, $base) === 0) {
+        if ($base !== "" && strpos(myPath, $base) == 0) {
             myPath = substr(myPath, strlen($base));
         }
-        if (myPath === "/index.php" && $uri.getQuery()) {
+        if (myPath == "/index.php" && $uri.getQuery()) {
             myPath = $uri.getQuery();
         }
-        if (empty(myPath) || myPath === "/" || myPath === "//" || myPath === "/index.php") {
+        if (empty(myPath) || myPath == "/" || myPath == "//" || myPath == "/index.php") {
             myPath = "/";
         }
         $endsWithIndex = "/" . (Configure::read("App.webroot") ?: "webroot") . "/index.php";
         $endsWithLength = strlen($endsWithIndex);
         if (
             strlen(myPath) >= $endsWithLength &&
-            substr(myPath, -$endsWithLength) === $endsWithIndex
+            substr(myPath, -$endsWithLength) == $endsWithIndex
         ) {
             myPath = "/";
         }
@@ -324,11 +324,11 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             if ($indexPos !== false) {
                 $base = substr($base, 0, $indexPos) . "/" . $webroot;
             }
-            if ($webroot === basename($base)) {
+            if ($webroot == basename($base)) {
                 $base = dirname($base);
             }
 
-            if ($base === DIRECTORY_SEPARATOR || $base === ".") {
+            if ($base == DIRECTORY_SEPARATOR || $base == ".") {
                 $base = "";
             }
             $base = implode("/", array_map("rawurlencode", explode("/", $base)));
@@ -339,7 +339,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         myfile = "/" . basename($baseUrl);
         $base = dirname($baseUrl);
 
-        if ($base === DIRECTORY_SEPARATOR || $base === ".") {
+        if ($base == DIRECTORY_SEPARATOR || $base == ".") {
             $base = "";
         }
         $webrootDir = $base . "/";
@@ -348,7 +348,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $docRootContainsWebroot = strpos($docRoot, $webroot);
 
         if (!empty($base) || !$docRootContainsWebroot) {
-            if (strpos($webrootDir, "/" . $webroot . "/") === false) {
+            if (strpos($webrootDir, "/" . $webroot . "/") == false) {
                 $webrootDir .= $webroot . "/";
             }
         }

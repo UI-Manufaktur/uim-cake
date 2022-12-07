@@ -66,14 +66,14 @@ class HttpsEnforcerMiddleware : MiddlewareInterface
     function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
     {
         if (
-            myRequest.getUri().getScheme() === "https"
+            myRequest.getUri().getScheme() == "https"
             || (this.config["disableOnDebug"]
                 && Configure::read("debug"))
         ) {
             return $handler.handle(myRequest);
         }
 
-        if (this.config["redirect"] && myRequest.getMethod() === "GET") {
+        if (this.config["redirect"] && myRequest.getMethod() == "GET") {
             $uri = myRequest.getUri().withScheme("https");
             $base = myRequest.getAttribute("base");
             if ($base) {

@@ -89,7 +89,7 @@ class FlashMessage
 
         if (!myOptions["duplicate"]) {
             foreach (myMessages as $existingMessage) {
-                if ($existingMessage["message"] === myMessage) {
+                if ($existingMessage["message"] == myMessage) {
                     return;
                 }
             }

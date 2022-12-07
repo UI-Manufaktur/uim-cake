@@ -32,14 +32,14 @@ class Request : Message : RequestInterface
 <<<<<<< HEAD
             "Connection":"close",
             "User-Agent":ini_get("user_agent") ?: "CakePHP",
-=======
+=====
             "Connection": "close",
             "User-Agent": ini_get("user_agent") ?: "UIM",
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
         ];
         this.addHeaders($headers);
 
-        if (myData === null) {
+        if (myData == null) {
             this.stream = new Stream("php://memory", "rw");
         } else {
             this.setContent(myData);

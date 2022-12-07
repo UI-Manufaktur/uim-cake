@@ -148,7 +148,7 @@ class Cookie : CookieInterface
         this.httpOnly = $httpOnly ?? static::$defaults["httponly"];
         this.path = myPath ?? static::$defaults["path"];
         this.secure = $secure ?? static::$defaults["secure"];
-        if ($sameSite === null) {
+        if ($sameSite == null) {
             this.sameSite = static::$defaults["samesite"];
         } else {
             this.validateSameSiteValue($sameSite);
@@ -224,7 +224,7 @@ class Cookie : CookieInterface
      */
     protected static function dateTimeInstance($expires): ?IDateTime
     {
-        if ($expires === null) {
+        if ($expires == null) {
             return null;
         }
 
@@ -586,7 +586,7 @@ class Cookie : CookieInterface
      * @return bool
      */
     bool check(string myPath) {
-        if (this.isExpanded === false) {
+        if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             this.value = this._expand(this.value);
         }
@@ -604,7 +604,7 @@ class Cookie : CookieInterface
      */
     function withAddedValue(string myPath, myValue) {
         $new = clone this;
-        if ($new.isExpanded === false) {
+        if ($new.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $new.value = $new._expand($new.value);
         }
@@ -623,7 +623,7 @@ class Cookie : CookieInterface
      */
     function withoutAddedValue(string myPath) {
         $new = clone this;
-        if ($new.isExpanded === false) {
+        if ($new.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $new.value = $new._expand($new.value);
         }
@@ -644,12 +644,12 @@ class Cookie : CookieInterface
      * @return mixed
      */
     function read(Nullable!string myPath = null) {
-        if (this.isExpanded === false) {
+        if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             this.value = this._expand(this.value);
         }
 
-        if (myPath === null) {
+        if (myPath == null) {
             return this.value;
         }
 
@@ -711,7 +711,7 @@ class Cookie : CookieInterface
     protected auto _expand(string $string) {
         this.isExpanded = true;
         $first = substr($string, 0, 1);
-        if ($first === "{" || $first === "[") {
+        if ($first == "{" || $first == "[") {
             $ret = json_decode($string, true);
 
             return $ret ?? $string;

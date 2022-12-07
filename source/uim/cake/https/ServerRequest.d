@@ -352,7 +352,7 @@ class ServerRequest : IServerRequest
 
             if ($trusted) {
                 $trusted = array_diff($addresses, this.trustedProxies);
-                $trusted = (count($trusted) === 1);
+                $trusted = (count($trusted) == 1);
             }
 
             if ($trusted) {
@@ -405,9 +405,9 @@ class ServerRequest : IServerRequest
 
         $base = Configure::read("App.fullBaseUrl") . this.webroot;
         if (!empty($ref) && !empty($base)) {
-            if ($local && strpos($ref, $base) === 0) {
+            if ($local && strpos($ref, $base) == 0) {
                 $ref = substr($ref, strlen($base));
-                if ($ref == "" || strpos($ref, "//") === 0) {
+                if ($ref == "" || strpos($ref, "//") == 0) {
                     $ref = "/";
                 }
                 if ($ref[0] !== "/") {
@@ -433,7 +433,7 @@ class ServerRequest : IServerRequest
      * @throws \BadMethodCallException when an invalid method is called.
      */
     auto __call(string myName, array myParams) {
-        if (strpos(myName, "is") === 0) {
+        if (strpos(myName, "is") == 0) {
             myType = strtolower(substr(myName, 2));
 
             array_unshift(myParams, myType);
@@ -545,7 +545,7 @@ class ServerRequest : IServerRequest
                     return myValue($header);
                 }
 
-                return $header === myValue;
+                return $header == myValue;
             }
         }
 
@@ -739,10 +739,10 @@ class ServerRequest : IServerRequest
         $headers = [];
         foreach (this._environment as myKey: myValue) {
             myName = null;
-            if (strpos(myKey, "HTTP_") === 0) {
+            if (strpos(myKey, "HTTP_") == 0) {
                 myName = substr(myKey, 5);
             }
-            if (strpos(myKey, "CONTENT_") === 0) {
+            if (strpos(myKey, "CONTENT_") == 0) {
                 myName = myKey;
             }
             if (myName !== null) {
@@ -1047,7 +1047,7 @@ class ServerRequest : IServerRequest
         foreach ($raw as myTypes) {
             $accept = array_merge($accept, myTypes);
         }
-        if (myType === null) {
+        if (myType == null) {
             return $accept;
         }
 
@@ -1094,7 +1094,7 @@ class ServerRequest : IServerRequest
             }
             $accept = array_merge($accept, myLanguages);
         }
-        if (myLanguage === null) {
+        if (myLanguage == null) {
             return $accept;
         }
 
@@ -1160,7 +1160,7 @@ class ServerRequest : IServerRequest
      * @see ServerRequest::getQueryParams()
      */
     auto getQuery(Nullable!string myName = null, $default = null) {
-        if (myName === null) {
+        if (myName == null) {
             return this.query;
         }
 
@@ -1200,7 +1200,7 @@ class ServerRequest : IServerRequest
      * @return mixed The value being read.
      */
     auto getData(Nullable!string myName = null, $default = null) {
-        if (myName === null) {
+        if (myName == null) {
             return this.data;
         }
         if (!is_array(this.data) && myName) {
@@ -1577,7 +1577,7 @@ class ServerRequest : IServerRequest
      */
     auto getAttribute(myName, $default = null) {
         if (in_array(myName, this.emulatedAttributes, true)) {
-            if (myName === "here") {
+            if (myName == "here") {
                 return this.base . this.uri.getPath();
             }
 
@@ -1784,7 +1784,7 @@ class ServerRequest : IServerRequest
 
     // Get the path of current request.
     string getPath() {
-        if (this.requestTarget === null) {
+        if (this.requestTarget == null) {
             return this.uri.getPath();
         }
 

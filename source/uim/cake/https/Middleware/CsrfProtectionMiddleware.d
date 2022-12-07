@@ -112,7 +112,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
         if (
             $hasData
             && this.skipCheckCallback !== null
-            && call_user_func(this.skipCheckCallback, myRequest) === true
+            && call_user_func(this.skipCheckCallback, myRequest) == true
         ) {
             myRequest = this._unsetTokenField(myRequest);
 
@@ -138,7 +138,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
             }
         }
 
-        if ($method === "GET" && $cookieData === null) {
+        if ($method == "GET" && $cookieData == null) {
             $token = this.createToken();
             myRequest = myRequest.withAttribute("csrfToken", this.saltToken($token));
             /** @var mixed $response */
@@ -227,7 +227,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      * @param string $token The token to test.
      */
     protected bool isHexadecimalToken(string $token) {
-        return preg_match("/^[a-f0-9]{" . static::TOKEN_WITH_CHECKSUM_LENGTH . "}$/", $token) === 1;
+        return preg_match("/^[a-f0-9]{" . static::TOKEN_WITH_CHECKSUM_LENGTH . "}$/", $token) == 1;
     }
 
     /**
@@ -254,7 +254,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
             return $token;
         }
         $decoded = base64_decode($token, true);
-        if ($decoded === false) {
+        if ($decoded == false) {
             throw new InvalidArgumentException("Invalid token data.");
         }
 
@@ -283,7 +283,7 @@ class CsrfProtectionMiddleware : MiddlewareInterface
             return $token;
         }
         $decoded = base64_decode($token, true);
-        if ($decoded === false || strlen($decoded) !== static::TOKEN_WITH_CHECKSUM_LENGTH * 2) {
+        if ($decoded == false || strlen($decoded) !== static::TOKEN_WITH_CHECKSUM_LENGTH * 2) {
             return $token;
         }
         $salted = substr($decoded, 0, static::TOKEN_WITH_CHECKSUM_LENGTH);

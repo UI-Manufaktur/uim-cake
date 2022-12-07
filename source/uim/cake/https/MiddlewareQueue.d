@@ -63,7 +63,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     {
         if (is_string($middleware)) {
             myClassName = App::className($middleware, "Middleware", "Middleware");
-            if (myClassName === null) {
+            if (myClassName == null) {
                 throw new RuntimeException(sprintf(
                     "Middleware "%s" was not found.",
                     $middleware
@@ -168,7 +168,7 @@ class MiddlewareQueue : Countable, SeekableIterator
             if (
                 (
                     is_string($object)
-                    && $object === myClass
+                    && $object == myClass
                 )
                 || is_a($object, myClass)
             ) {
@@ -201,7 +201,7 @@ class MiddlewareQueue : Countable, SeekableIterator
             if (
                 (
                     is_string($object)
-                    && $object === myClass
+                    && $object == myClass
                 )
                 || is_a($object, myClass)
             ) {

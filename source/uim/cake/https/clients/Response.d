@@ -112,7 +112,7 @@ class Response : Message : IResponse
      */
     this(array $headers = [], string $body = "") {
         this._parseHeaders($headers);
-        if (this.getHeaderLine("Content-Encoding") === "gzip") {
+        if (this.getHeaderLine("Content-Encoding") == "gzip") {
             $body = this._decodeGzipBody($body);
         }
         $stream = new Stream("php://memory", "wb+");
@@ -137,11 +137,11 @@ class Response : Message : IResponse
         }
         $offset = 0;
         // Look for gzip "signature"
-        if (substr($body, 0, 2) === "\x1f\x8b") {
+        if (substr($body, 0, 2) == "\x1f\x8b") {
             $offset = 2;
         }
         // Check the format byte
-        if (substr($body, $offset, 1) === "\x08") {
+        if (substr($body, $offset, 1) == "\x08") {
             return gzinflate(substr($body, $offset + 8));
         }
 
@@ -158,14 +158,14 @@ class Response : Message : IResponse
      */
     protected void _parseHeaders(array $headers) {
         foreach ($headers as myValue) {
-            if (substr(myValue, 0, 5) === "HTTP/") {
+            if (substr(myValue, 0, 5) == "HTTP/") {
                 preg_match("/HTTP\/([\d.]+) ([0-9]+)(.*)/i", myValue, $matches);
                 this.protocol = $matches[1];
                 this.code = (int)$matches[2];
                 this.reasonPhrase = trim($matches[3]);
                 continue;
             }
-            if (strpos(myValue, ":") === false) {
+            if (strpos(myValue, ":") == false) {
                 continue;
             }
             [myName, myValue] = explode(":", myValue, 2);

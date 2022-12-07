@@ -45,7 +45,7 @@ class Curl : AdapterInterface
 
         /** @var string|false $body */
         $body = this.exec($ch);
-        if ($body === false) {
+        if ($body == false) {
             myErrorCode = curl_errno($ch);
             myError = curl_error($ch);
             curl_close($ch);

@@ -224,7 +224,7 @@ class Session
         }
 
         this._lifetime = (int)ini_get("session.gc_maxlifetime");
-        this._isCLI = (PHP_SAPI === "cli" || PHP_SAPI === "phpdbg");
+        this._isCLI = (PHP_SAPI == "cli" || PHP_SAPI == "phpdbg");
         session_register_shutdown();
     }
 
@@ -247,7 +247,7 @@ class Session
      */
     function engine(myClass = null, array myOptions = []): ?SessionHandlerInterface
     {
-        if (myClass === null) {
+        if (myClass == null) {
             return this._engine;
         }
         if (myClass instanceof SessionHandlerInterface) {
@@ -302,12 +302,12 @@ class Session
      */
     function options(array myOptions): void
     {
-        if (session_status() === \PHP_SESSION_ACTIVE || headers_sent()) {
+        if (session_status() == \PHP_SESSION_ACTIVE || headers_sent()) {
             return;
         }
 
         foreach (myOptions as $setting: myValue) {
-            if (ini_set($setting, (string)myValue) === false) {
+            if (ini_set($setting, (string)myValue) == false) {
                 throw new RuntimeException(
                     sprintf("Unable to configure the session, setting %s failed.", $setting)
                 );
@@ -333,7 +333,7 @@ class Session
             return this._started = true;
         }
 
-        if (session_status() === \PHP_SESSION_ACTIVE) {
+        if (session_status() == \PHP_SESSION_ACTIVE) {
             throw new RuntimeException("Session was already started");
         }
 
@@ -387,7 +387,7 @@ class Session
      * @return bool True if session has been started.
      */
     bool started() {
-        return this._started || session_status() === \PHP_SESSION_ACTIVE;
+        return this._started || session_status() == \PHP_SESSION_ACTIVE;
     }
 
     /**
@@ -405,7 +405,7 @@ class Session
             return false;
         }
 
-        if (myName === null) {
+        if (myName == null) {
             return (bool)$_SESSION;
         }
 
@@ -429,7 +429,7 @@ class Session
             return $default;
         }
 
-        if (myName === null) {
+        if (myName == null) {
             return $_SESSION ?: [];
         }
 
@@ -563,7 +563,7 @@ class Session
             this.start();
         }
 
-        if (!this._isCLI && session_status() === \PHP_SESSION_ACTIVE) {
+        if (!this._isCLI && session_status() == \PHP_SESSION_ACTIVE) {
             session_destroy();
         }
 

@@ -489,14 +489,14 @@ class Response : IResponse
         if (
             this._charset &&
             (
-                strpos(myType, "text/") === 0 ||
+                strpos(myType, "text/") == 0 ||
                 in_array(myType, $allowed, true)
             )
         ) {
             $charset = true;
         }
 
-        if ($charset && strpos(myType, ";") === false) {
+        if ($charset && strpos(myType, ";") == false) {
             this._setHeader("Content-Type", "{myType}; charset={this._charset}");
         } else {
             this._setHeader("Content-Type", myType);
@@ -514,7 +514,7 @@ class Response : IResponse
      */
     function withLocation(string myUrl) {
         $new = this.withHeader("Location", myUrl);
-        if ($new._status === 200) {
+        if ($new._status == 200) {
             $new._status = 302;
         }
 
@@ -704,7 +704,7 @@ class Response : IResponse
         if ($mapped) {
             return is_array($mapped) ? current($mapped) : $mapped;
         }
-        if (strpos(myContentsType, "/") === false) {
+        if (strpos(myContentsType, "/") == false) {
             throw new InvalidArgumentException(sprintf(""%s" is an invalid content type.", myContentsType));
         }
 
@@ -787,7 +787,7 @@ class Response : IResponse
     function withCache($since, $time = "+1 day") {
         if (!is_int($time)) {
             $time = strtotime($time);
-            if ($time === false) {
+            if ($time == false) {
                 throw new InvalidArgumentException(
                     "Invalid time parameter. Ensure your time value can be parsed by strtotime"
                 );
@@ -891,7 +891,7 @@ class Response : IResponse
     {
         $control = "";
         foreach (this._cacheDirectives as myKey: $val) {
-            $control .= $val === true ? myKey : sprintf("%s=%s", myKey, $val);
+            $control .= $val == true ? myKey : sprintf("%s=%s", myKey, $val);
             $control .= ", ";
         }
         $control = rtrim($control, ", ");
@@ -1080,7 +1080,7 @@ class Response : IResponse
      */
     bool outputCompressed() {
         return strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false
-            && (ini_get("zlib.output_compression") === "1" || in_array("ob_gzhandler", ob_list_handlers(), true));
+            && (ini_get("zlib.output_compression") == "1" || in_array("ob_gzhandler", ob_list_handlers(), true));
     }
 
     /**
@@ -1165,9 +1165,9 @@ class Response : IResponse
         $modifiedSince = myRequest.getHeaderLine("If-Modified-Since");
         $timeMatches = null;
         if ($modifiedSince && this.hasHeader("Last-Modified")) {
-            $timeMatches = strtotime(this.getHeaderLine("Last-Modified")) === strtotime($modifiedSince);
+            $timeMatches = strtotime(this.getHeaderLine("Last-Modified")) == strtotime($modifiedSince);
         }
-        if ($etagMatches === null && $timeMatches === null) {
+        if ($etagMatches == null && $timeMatches == null) {
             return false;
         }
         $notModified = $etagMatches !== false && $timeMatches !== false;
@@ -1364,7 +1364,7 @@ class Response : IResponse
 
         $extension = strtolower(myfile.getExtension());
         $mapped = this.getMimeType($extension);
-        if ((!$extension || !$mapped) && myOptions["download"] === null) {
+        if ((!$extension || !$mapped) && myOptions["download"] == null) {
             myOptions["download"] = true;
         }
 

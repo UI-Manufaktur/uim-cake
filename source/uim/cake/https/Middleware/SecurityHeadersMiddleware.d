@@ -151,7 +151,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
     auto setXFrameOptions(string $option = self::SAMEORIGIN, Nullable!string myUrl = null) {
         this.checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
-        if ($option === self::ALLOW_FROM) {
+        if ($option == self::ALLOW_FROM) {
             if (empty(myUrl)) {
                 throw new InvalidArgumentException("The 2nd arg myUrl can not be empty when `allow-from` is used");
             }
@@ -171,7 +171,7 @@ class SecurityHeadersMiddleware : MiddlewareInterface
      * @return this
      */
     auto setXssProtection(string myMode = self::XSS_BLOCK) {
-        if (myMode === self::XSS_BLOCK) {
+        if (myMode == self::XSS_BLOCK) {
             myMode = self::XSS_ENABLED_BLOCK;
         }
 
