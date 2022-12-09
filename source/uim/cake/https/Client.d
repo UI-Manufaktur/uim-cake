@@ -223,11 +223,11 @@ class Client : ClientInterface
     /**
      * Adds a cookie to the Client collection.
      *
-     * @param \Cake\Http\Cookie\CookieInterface $cookie Cookie object.
+     * @param \Cake\Http\Cookie\ICookie $cookie Cookie object.
      * @return this
      * @throws \InvalidArgumentException
      */
-    function addCookie(CookieInterface $cookie) {
+    function addCookie(ICookie $cookie) {
         if (!$cookie.getDomain() || !$cookie.getPath()) {
             throw new InvalidArgumentException("Cookie must have a domain and a path set.");
         }

@@ -2,7 +2,7 @@ module uim.cake.https;
 
 import uim.cake.core.Configure;
 import uim.cake.https\Cookie\CookieCollection;
-import uim.cake.https\Cookie\CookieInterface;
+import uim.cake.https\Cookie\ICookie;
 import uim.cake.https\Exception\NotFoundException;
 use DateTime;
 use IDateTime;
@@ -1199,10 +1199,10 @@ class Response : IResponse
      * $response = $response.withCookie(new Cookie("remember_me", 1));
      * ```
      *
-     * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
+     * @param \Cake\Http\Cookie\ICookie $cookie cookie object
      * @return static
      */
-    function withCookie(CookieInterface $cookie) {
+    function withCookie(ICookie $cookie) {
         $new = clone this;
         $new._cookies = $new._cookies.add($cookie);
 
@@ -1219,10 +1219,10 @@ class Response : IResponse
      * $response = $response.withExpiredCookie(new Cookie("remember_me"));
      * ```
      *
-     * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
+     * @param \Cake\Http\Cookie\ICookie $cookie cookie object
      * @return static
      */
-    function withExpiredCookie(CookieInterface $cookie) {
+    function withExpiredCookie(ICookie $cookie) {
         $cookie = $cookie.withExpired();
 
         $new = clone this;

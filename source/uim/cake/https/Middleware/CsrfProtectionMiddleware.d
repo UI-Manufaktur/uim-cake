@@ -2,7 +2,7 @@ module uim.cake.https\Middleware;
 
 use ArrayAccess;
 import uim.cake.https\Cookie\Cookie;
-import uim.cake.https\Cookie\CookieInterface;
+import uim.cake.https\Cookie\ICookie;
 import uim.cake.https\Exception\InvalidCsrfTokenException;
 import uim.cake.https\Response;
 import uim.cake.utilities.Hash;
@@ -41,8 +41,8 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      *  - `secure` Whether the cookie will be set with the Secure flag. Defaults to false.
      *  - `httponly` Whether the cookie will be set with the HttpOnly flag. Defaults to false.
      *  - `samesite` "SameSite" attribute for cookies. Defaults to `null`.
-     *    Valid values: `CookieInterface::SAMESITE_LAX`, `CookieInterface::SAMESITE_STRICT`,
-     *    `CookieInterface::SAMESITE_NONE` or `null`.
+     *    Valid values: `ICookie::SAMESITE_LAX`, `ICookie::SAMESITE_STRICT`,
+     *    `ICookie::SAMESITE_NONE` or `null`.
      *  - `field` The form field to check. Changing this will also require configuring
      *    FormHelper.
      *
@@ -394,9 +394,9 @@ class CsrfProtectionMiddleware : MiddlewareInterface
      *
      * @param string myValue Cookie value
      * @param \Psr\Http\Message\IServerRequest myRequest The request object.
-     * @return \Cake\Http\Cookie\CookieInterface
+     * @return \Cake\Http\Cookie\ICookie
      */
-    protected auto _createCookie(string myValue, IServerRequest myRequest): CookieInterface
+    protected auto _createCookie(string myValue, IServerRequest myRequest): ICookie
     {
         $cookie = Cookie::create(
             this._config["cookieName"],

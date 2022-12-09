@@ -200,7 +200,7 @@ class ResponseEmitter : EmitterInterface
     /**
      * Emit cookies using setcookie()
      *
-     * @param array<\Cake\Http\Cookie\CookieInterface|string> $cookies An array of cookies.
+     * @param array<\Cake\Http\Cookie\ICookie|string> $cookies An array of cookies.
      * @return void
      */
     protected auto emitCookies(array $cookies): void
@@ -213,7 +213,7 @@ class ResponseEmitter : EmitterInterface
     /**
      * Helper methods to set cookie.
      *
-     * @param \Cake\Http\Cookie\CookieInterface|string $cookie Cookie.
+     * @param \Cake\Http\Cookie\ICookie|string $cookie Cookie.
      */
     protected bool setCookie($cookie) {
         if (is_string($cookie)) {

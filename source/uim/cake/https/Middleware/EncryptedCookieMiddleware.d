@@ -121,7 +121,7 @@ class EncryptedCookieMiddleware : MiddlewareInterface
      */
     protected auto encodeCookies(Response $response): Response
     {
-        /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
+        /** @var array<\Cake\Http\Cookie\ICookie> $cookies */
         $cookies = $response.getCookieCollection();
         foreach ($cookies as $cookie) {
             if (in_array($cookie.getName(), this.cookieNames, true)) {
@@ -141,7 +141,7 @@ class EncryptedCookieMiddleware : MiddlewareInterface
      */
     protected auto encodeSetCookieHeader(IResponse $response): IResponse
     {
-        /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
+        /** @var array<\Cake\Http\Cookie\ICookie> $cookies */
         $cookies = CookieCollection::createFromHeader($response.getHeader("Set-Cookie"));
         $header = [];
         foreach ($cookies as $cookie) {

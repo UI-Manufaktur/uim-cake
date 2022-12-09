@@ -3,7 +3,7 @@ module uim.cake.https\Cookie;
 /**
  * Cookie Interface
  */
-interface CookieInterface
+interface ICookie
 {
     /**
      * Expires attribute format.
@@ -204,7 +204,7 @@ interface CookieInterface
      * Create a cookie with an updated SameSite option.
      *
      * @param string|null $sameSite Value for to set for Samesite option.
-     *   One of CookieInterface::SAMESITE_* constants.
+     *   One of ICookie::SAMESITE_* constants.
      * @return static
      */
     function withSameSite(Nullable!string $sameSite);

@@ -36,14 +36,14 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Cookie objects
      *
-     * @var array<\Cake\Http\Cookie\CookieInterface>
+     * @var array<\Cake\Http\Cookie\ICookie>
      */
     protected $cookies = [];
 
     /**
      * Constructor
      *
-     * @param array<\Cake\Http\Cookie\CookieInterface> $cookies Array of cookie objects
+     * @param array<\Cake\Http\Cookie\ICookie> $cookies Array of cookie objects
      */
     this(array $cookies = []) {
         this.checkCookies($cookies);
@@ -102,10 +102,10 @@ class CookieCollection : IteratorAggregate, Countable
      * cookies if a cookie collection is used for cookies across multiple
      * domains. This can impact how get(), has() and remove() behave.
      *
-     * @param \Cake\Http\Cookie\CookieInterface $cookie Cookie instance to add.
+     * @param \Cake\Http\Cookie\ICookie $cookie Cookie instance to add.
      * @return static
      */
-    function add(CookieInterface $cookie) {
+    function add(ICookie $cookie) {
         $new = clone this;
         $new.cookies[$cookie.getId()] = $cookie;
 
@@ -116,10 +116,10 @@ class CookieCollection : IteratorAggregate, Countable
      * Get the first cookie by name.
      *
      * @param string myName The name of the cookie.
-     * @return \Cake\Http\Cookie\CookieInterface
+     * @return \Cake\Http\Cookie\ICookie
      * @throws \InvalidArgumentException If cookie not found.
      */
-    auto get(string myName): CookieInterface
+    auto get(string myName): ICookie
     {
         myKey = mb_strtolower(myName);
         foreach (this.cookies as $cookie) {
@@ -176,14 +176,14 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Checks if only valid cookie objects are in the array
      *
-     * @param array<\Cake\Http\Cookie\CookieInterface> $cookies Array of cookie objects
+     * @param array<\Cake\Http\Cookie\ICookie> $cookies Array of cookie objects
      * @return void
      * @throws \InvalidArgumentException
      */
     protected auto checkCookies(array $cookies): void
     {
         foreach ($cookies as $index: $cookie) {
-            if (!$cookie instanceof CookieInterface) {
+            if (!$cookie instanceof ICookie) {
                 throw new InvalidArgumentException(
                     sprintf(
                         "Expected `%s[]` as $cookies but instead got `%s` at index %d",
@@ -199,7 +199,7 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Gets the iterator
      *
-     * @return \Traversable<string, \Cake\Http\Cookie\CookieInterface>
+     * @return \Traversable<string, \Cake\Http\Cookie\ICookie>
      */
     auto getIterator(): Traversable
     {

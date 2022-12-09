@@ -1,10 +1,7 @@
 module uim.cake.https\Cookie;
 
-import uim.cake.utilities.Hash;
-use DateTimeImmutable;
-use IDateTime;
-use DateTimeZone;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Cookie object to build a cookie and turn it into a header value
@@ -32,7 +29,7 @@ use InvalidArgumentException;
  * @see \Cake\Http\Cookie\CookieCollection for working with collections of cookies.
  * @see \Cake\Http\Response::getCookieCollection() for working with response cookies.
  */
-class Cookie : CookieInterface
+class Cookie : ICookie
 {
     /**
      * Cookie name
@@ -173,8 +170,8 @@ class Cookie : CookieInterface
      * - `domain`: Domain name string. Defaults to `""`.
      * - `httponly`: Boolean. Defaults to `false`.
      * - `secure`: Boolean. Defaults to `false`.
-     * - `samesite`: Can be one of `CookieInterface::SAMESITE_LAX`, `CookieInterface::SAMESITE_STRICT`,
-     *    `CookieInterface::SAMESITE_NONE` or `null`. Defaults to `null`.
+     * - `samesite`: Can be one of `ICookie::SAMESITE_LAX`, `ICookie::SAMESITE_STRICT`,
+     *    `ICookie::SAMESITE_NONE` or `null`. Defaults to `null`.
      *
      * @param array<string, mixed> myOptions Default options.
      * @return void
@@ -293,7 +290,7 @@ class Cookie : CookieInterface
         if (isset(myData["samesite"])) {
             // Ignore invalid value when parsing headers
             // https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1
-            if (!in_array(myData["samesite"], CookieInterface::SAMESITE_VALUES, true)) {
+            if (!in_array(myData["samesite"], ICookie::SAMESITE_VALUES, true)) {
                 unset(myData["samesite"]);
             }
         }
@@ -569,9 +566,9 @@ class Cookie : CookieInterface
      * @throws \InvalidArgumentException
      */
     protected static function validateSameSiteValue(string $sameSite) {
-        if (!in_array($sameSite, CookieInterface::SAMESITE_VALUES, true)) {
+        if (!in_array($sameSite, ICookie::SAMESITE_VALUES, true)) {
             throw new InvalidArgumentException(
-                "Samesite value must be either of: " . implode(", ", CookieInterface::SAMESITE_VALUES)
+                "Samesite value must be either of: " . implode(", ", ICookie::SAMESITE_VALUES)
             );
         }
     }

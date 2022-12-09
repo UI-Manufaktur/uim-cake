@@ -1,9 +1,7 @@
 module uim.cake.https.clients\Exception;
 
-use Psr\Http\Client\NetworkExceptionInterface;
-use Psr\Http\Message\RequestInterface;
-use RuntimeException;
-use Throwable;
+@safe:
+import uim.cake;
 
 /**
  * Thrown when the request cannot be completed because of network issues.

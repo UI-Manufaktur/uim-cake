@@ -1,26 +1,7 @@
+module uim.cake.https.clients.adapters;
 
-
-/**
-
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.7.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.https.clients.adapters;
-
-import uim.cake.https.clients.adaptersInterface;
-import uim.cake.https.clients\Exception\ClientException;
-import uim.cake.https.clients\Exception\NetworkException;
-import uim.cake.https.clients\Exception\RequestException;
-import uim.cake.https.clients\Request;
-import uim.cake.https.clients\Response;
-import uim.cake.https\Exception\HttpException;
-use Composer\CaBundle\CaBundle;
-use Psr\Http\Message\RequestInterface;
+@safe:
+import uim.cake;
 
 /**
  * : sending Cake\Http\Client\Request via ext/curl.
