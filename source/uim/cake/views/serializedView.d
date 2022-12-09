@@ -11,10 +11,8 @@ abstract class SerializedView : View
 {
     /**
      * Response type.
-     *
-     * @var string
      */
-    protected $_responseType;
+    protected string $_responseType;
 
     /**
      * Default config options.

@@ -44,24 +44,18 @@ class JsonView : SerializedView
 {
     /**
      * JSON layouts are located in the JSON subdirectory of `Layouts/`
-     *
-     * @var string
      */
-    protected $layoutPath = "json";
+    protected string $layoutPath = "json";
 
     /**
      * JSON views are located in the "json" subdirectory for controllers" views.
-     *
-     * @var string
      */
-    protected $subDir = "json";
+    protected string $subDir = "json";
 
     /**
      * Response type.
-     *
-     * @var string
      */
-    protected $_responseType = "json";
+    protected string $_responseType = "json";
 
     /**
      * Default config options.

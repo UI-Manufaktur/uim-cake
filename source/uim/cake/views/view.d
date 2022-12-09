@@ -82,19 +82,15 @@ class View : IEventDispatcher {
     /**
      * The name of the template file to render. The name specified
      * is the filename in `templates/<SubFolder>/` without the .php extension.
-     *
-     * @var string
      */
-    protected myTemplate = "";
+    protected string myTemplate = "";
 
     /**
      * The name of the layout file to render the template inside of. The name specified
      * is the filename of the layout in `templates/layout/` without the .php
      * extension.
-     *
-     * @var string
      */
-    protected $layout = "default";
+    protected string $layout = "default";
 
     /**
      * Turns on or off UIM"s conventional mode of applying layout files. On by default.
@@ -113,18 +109,14 @@ class View : IEventDispatcher {
 
     /**
      * File extension. Defaults to ".php".
-     *
-     * @var string
      */
-    protected $_ext = ".php";
+    protected string $_ext = ".php";
 
     /**
      * Sub-directory for this template file. This is often used for extension based routing.
      * Eg. With an `xml` extension, $subDir would be `xml/`
-     *
-     * @var string
      */
-    protected $subDir = "";
+    protected string $subDir = "";
 
     /**
      * The view theme to use.
@@ -192,18 +184,14 @@ class View : IEventDispatcher {
 
     /**
      * The currently rendering view file. Used for resolving parent files.
-     *
-     * @var string
      */
-    protected $_current;
+    protected string $_current;
 
     /**
      * Currently rendering an element. Used for finding parent fragments
      * for elements.
-     *
-     * @var string
      */
-    protected $_currentType = "";
+    protected string $_currentType = "";
 
     /**
      * Content stack, used for nested templates that all use View::extend();

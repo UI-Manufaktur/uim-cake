@@ -184,10 +184,8 @@ class FormHelper : Helper
     /**
      * The action attribute value of the last created form.
      * Used to make form/request specific hashes for form tampering protection.
-     *
-     * @var string
      */
-    protected $_lastAction = "";
+    protected string $_lastAction = "";
 
     /**
      * The supported sources that can be used to populate input values.

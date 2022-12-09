@@ -35,10 +35,8 @@ class EntityContext : IContext {
 
     /**
      * The name of the top level entity/table object.
-     *
-     * @var string
      */
-    protected $_rootName;
+    protected string $_rootName;
 
     /**
      * Boolean to track whether the entity is a

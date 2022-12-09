@@ -13,8 +13,6 @@ class NestingLabelWidget : LabelWidget
 {
     /**
      * The template to use.
-     *
-     * @var string
      */
-    protected $_labelTemplate = "nestingLabel";
+    protected string $_labelTemplate = "nestingLabel";
 }
