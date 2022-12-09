@@ -222,38 +222,28 @@ class View : IEventDispatcher {
 
     /**
      * Constant for view file type "template".
-     *
-     * @var string
      */
-    public const TYPE_TEMPLATE = "template";
+    public const string TYPE_TEMPLATE = "template";
 
     /**
      * Constant for view file type "element"
-     *
-     * @var string
      */
-    public const TYPE_ELEMENT = "element";
+    public const string TYPE_ELEMENT = "element";
 
     /**
      * Constant for view file type "layout"
-     *
-     * @var string
      */
-    public const TYPE_LAYOUT = "layout";
+    public const string TYPE_LAYOUT = "layout";
 
     /**
      * Constant for type used for App::path().
-     *
-     * @var string
      */
-    public const NAME_TEMPLATE = "templates";
+    public const string NAME_TEMPLATE = "templates";
 
     /**
      * Constant for folder name containing files for overriding plugin templates.
-     *
-     * @var string
      */
-    public const PLUGIN_TEMPLATE_FOLDER = "plugin";
+    public const string PLUGIN_TEMPLATE_FOLDER = "plugin";
 
     /**
      * Constructor

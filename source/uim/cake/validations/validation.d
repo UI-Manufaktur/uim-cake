@@ -23,24 +23,18 @@ class Validation {
 
     /**
      * Not equal to comparison operator.
-     *
-     * @var string
      */
-    public const COMPARE_NOT_EQUAL = "!=";
+    public const string COMPARE_NOT_EQUAL = "!=";
 
     /**
      * Greater than comparison operator.
-     *
-     * @var string
      */
-    public const COMPARE_GREATER = ">";
+    public const string COMPARE_GREATER = ">";
 
     /**
      * Greater than or equal to comparison operator.
-     *
-     * @var string
      */
-    public const COMPARE_GREATER_OR_EQUAL = ">=";
+    public const string COMPARE_GREATER_OR_EQUAL = ">=";
 
     // Less than comparison operator.
     public const string COMPARE_LESS = "<";

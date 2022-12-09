@@ -15,10 +15,8 @@ abstract class Cell : IEventDispatcher
 
     /**
      * Constant for folder name containing cell templates.
-     *
-     * @var string
      */
-    public const TEMPLATE_FOLDER = "cell";
+    public const string TEMPLATE_FOLDER = "cell";
 
     /**
      * Instance of the View created during rendering. Won"t be set until after

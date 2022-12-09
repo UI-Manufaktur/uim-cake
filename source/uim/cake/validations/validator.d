@@ -14,10 +14,8 @@ import uim.cake;
 class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * By using "create" you can make fields required when records are first created.
-     *
-     * @var string
      */
-    public const WHEN_CREATE = "create";
+    public const string WHEN_CREATE = "create";
 
     // By using "update", you can make fields required when they are updated.
     public const string WHEN_UPDATE = "update";
