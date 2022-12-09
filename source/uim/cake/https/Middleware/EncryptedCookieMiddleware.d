@@ -35,17 +35,13 @@ class EncryptedCookieMiddleware : MiddlewareInterface
 
     /**
      * Encryption key to use.
-     *
-     * @var string
      */
-    protected myKey;
+    protected string myKey;
 
     /**
      * Encryption type.
-     *
-     * @var string
      */
-    protected $cipherType;
+    protected string $cipherType;
 
     /**
      * Constructor

@@ -20,10 +20,8 @@ class Router
 {
     /**
      * Default route class.
-     *
-     * @var string
      */
-    protected static $_defaultRouteClass = Route\Route::class;
+    protected string static $_defaultRouteClass = Route\Route::class;
 
     /**
      * Contains the base string that will be applied to all generated URLs

@@ -17,9 +17,8 @@
 class Translator
 {
     /**
-     * @var string
      */
-    public const PLURAL_PREFIX = "p:";
+    public const string PLURAL_PREFIX = "p:";
 
     /**
      * A fallback translator.
@@ -37,10 +36,8 @@ class Translator
 
     /**
      * The locale being used for translations.
-     *
-     * @var string
      */
-    protected $locale;
+    protected string $locale;
 
     /**
      * The Package containing keys and translations.

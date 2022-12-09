@@ -61,17 +61,13 @@ abstract class Association
     /**
      * Name given to the association, it usually represents the alias
      * assigned to the target associated table
-     *
-     * @var string
      */
-    protected $_name;
+    protected string $_name;
 
     /**
      * The class name of the target table object
-     *
-     * @var string
      */
-    protected $_className;
+    protected string $_className;
 
     /**
      * The field name in the owning side table that is used to match with the foreignKey
@@ -127,26 +123,20 @@ abstract class Association
 
     /**
      * The type of join to be used when adding the association to a query
-     *
-     * @var string
      */
-    protected $_joinType = Query::JOIN_TYPE_LEFT;
+    protected string $_joinType = Query::JOIN_TYPE_LEFT;
 
     /**
      * The property name that should be filled with data from the target table
      * in the source table record.
-     *
-     * @var string
      */
-    protected $_propertyName;
+    protected string $_propertyName;
 
     /**
      * The strategy name to be used to fetch associated records. Some association
      * types might not implement but one strategy to fetch records.
-     *
-     * @var string
      */
-    protected $_strategy = self::STRATEGY_JOIN;
+    protected string $_strategy = self::STRATEGY_JOIN;
 
     /**
      * The default finder name to use for fetching rows from the target table

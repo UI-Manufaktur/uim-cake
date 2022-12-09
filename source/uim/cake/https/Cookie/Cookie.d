@@ -33,10 +33,8 @@ class Cookie : ICookie
 {
     /**
      * Cookie name
-     *
-     * @var string
      */
-    protected myName = "";
+    protected string myName = "";
 
     /**
      * Raw Cookie value.
@@ -61,17 +59,13 @@ class Cookie : ICookie
 
     /**
      * Path
-     *
-     * @var string
      */
-    protected myPath = "/";
+    protected string myPath = "/";
 
     /**
      * Domain
-     *
-     * @var string
      */
-    protected $domain = "";
+    protected string $domain = "";
 
     /**
      * Secure

@@ -20,10 +20,8 @@ class ValidCount
 {
     /**
      * The field to check
-     *
-     * @var string
      */
-    protected $_field;
+    protected string $_field;
 
     /**
      * Constructor.

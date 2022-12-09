@@ -43,10 +43,8 @@ class ResultSet : ResultSetInterface
 
     /**
      * The default table alias
-     *
-     * @var string
      */
-    protected $_defaultAlias;
+    protected string $_defaultAlias;
 
     /**
      * List of associations that should be placed under the `_matchingData`
@@ -102,10 +100,8 @@ class ResultSet : ResultSetInterface
 
     /**
      * The fully moduled name of the class to use for hydrating results
-     *
-     * @var string
      */
-    protected $_entityClass;
+    protected string $_entityClass;
 
     /**
      * Whether to buffer results fetched from the statement

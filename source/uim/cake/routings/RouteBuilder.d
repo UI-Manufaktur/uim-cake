@@ -43,10 +43,8 @@ class RouteBuilder
 
     /**
      * Default route class to use if none is provided in connect() options.
-     *
-     * @var string
      */
-    protected $_routeClass = Route::class;
+    protected string $_routeClass = Route::class;
 
     /**
      * The extensions that should be set into the routes connected.
@@ -69,10 +67,8 @@ class RouteBuilder
 
     /**
      * Name prefix for connected routes.
-     *
-     * @var string
      */
-    protected $_namePrefix = "";
+    protected string $_namePrefix = "";
 
     /**
      * The route collection routes should be added to.

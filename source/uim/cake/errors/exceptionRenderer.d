@@ -38,17 +38,13 @@ class ExceptionRenderer : IExceptionRenderer
 
     /**
      * Template to render for {@link \Cake\Core\Exception\CakeException}
-     *
-     * @var string
      */
-    protected myTemplate = "";
+    protected string myTemplate = "";
 
     /**
      * The method corresponding to the Exception this object is for.
-     *
-     * @var string
      */
-    protected $method = "";
+    protected string $method = "";
 
     /**
      * If set, this will be request used to create the controller that will render

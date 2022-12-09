@@ -85,10 +85,8 @@ class Response : Message : IResponse
 
     /**
      * The reason phrase for the status code
-     *
-     * @var string
      */
-    protected $reasonPhrase;
+    protected string $reasonPhrase;
 
     /**
      * Cached decoded XML data.

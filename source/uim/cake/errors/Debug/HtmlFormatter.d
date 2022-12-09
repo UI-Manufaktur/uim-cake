@@ -16,10 +16,8 @@ class HtmlFormatter : IFormatter
 
     /**
      * Random id so that HTML ids are not shared between dump outputs.
-     *
-     * @var string
      */
-    protected $id;
+    protected string $id;
 
     /**
      * Constructor.

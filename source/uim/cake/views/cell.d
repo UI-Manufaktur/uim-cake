@@ -44,10 +44,8 @@ abstract class Cell : IEventDispatcher
 
     /**
      * The cell"s action to invoke.
-     *
-     * @var string
      */
-    protected $action;
+    protected string $action;
 
     /**
      * Arguments to pass to cell"s action.

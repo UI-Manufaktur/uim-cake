@@ -23,17 +23,13 @@ class BelongsToMany : Association
 
     /**
      * The type of join to be used when adding the association to a query
-     *
-     * @var string
      */
-    protected $_joinType = Query::JOIN_TYPE_INNER;
+    protected string $_joinType = Query::JOIN_TYPE_INNER;
 
     /**
      * The strategy name to be used to fetch associated records.
-     *
-     * @var string
      */
-    protected $_strategy = self::STRATEGY_SELECT;
+    protected string $_strategy = self::STRATEGY_SELECT;
 
     /**
      * Junction table instance
@@ -44,33 +40,25 @@ class BelongsToMany : Association
 
     /**
      * Junction table name
-     *
-     * @var string
      */
-    protected $_junctionTableName;
+    protected string $_junctionTableName;
 
     /**
      * The name of the hasMany association from the target table
      * to the junction table
-     *
-     * @var string
      */
-    protected $_junctionAssociationName;
+    protected string $_junctionAssociationName;
 
     /**
      * The name of the property to be set containing data from the junction table
      * once a record from the target table is hydrated
-     *
-     * @var string
      */
-    protected $_junctionProperty = "_joinData";
+    protected string $_junctionProperty = "_joinData";
 
     /**
      * Saving strategy to be used by this association
-     *
-     * @var string
      */
-    protected $_saveStrategy = self::SAVE_REPLACE;
+    protected string $_saveStrategy = self::SAVE_REPLACE;
 
     /**
      * The name of the field representing the foreign key to the target table
