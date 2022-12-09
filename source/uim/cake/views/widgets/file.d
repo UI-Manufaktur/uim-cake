@@ -1,7 +1,7 @@
-module uim.cake.views.Widget;
+module uim.cake.views.widgets;
 
-import uim.cake.core.Configure;
-import uim.cake.views.Form\IContext;
+@safe:
+import uim.cake;
 
 /**
  * Input widget class for generating a file upload control.

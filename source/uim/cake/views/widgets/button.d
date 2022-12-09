@@ -1,7 +1,7 @@
-module uim.cake.views.widgets;
+module uim.cake.views.widgetss;
 
-import uim.cake.views.forms\IContext;
-import uim.cake.views.StringTemplate;
+@safe:
+import uim.cake;
 
 /**
  * Button input class
@@ -10,7 +10,7 @@ import uim.cake.views.StringTemplate;
  * If you need to make basic submit inputs with type=submit,
  * use the Basic input widget.
  */
-class ButtonWidget : WidgetInterface
+class ButtonWidget : IWidget
 {
     /**
      * StringTemplate instance.

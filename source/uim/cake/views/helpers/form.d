@@ -2382,8 +2382,8 @@ class FormHelper : Helper
      * Allows you to add or replace widget instances with custom code.
      *
      * @param string myName The name of the widget. e.g. "text".
-     * @param \Cake\View\Widget\WidgetInterface|array $spec Either a string class
-     *   name or an object implementing the WidgetInterface.
+     * @param \Cake\View\Widget\IWidget|array $spec Either a string class
+     *   name or an object implementing the IWidget.
      * @return void
      */
     function addWidget(string myName, $spec): void

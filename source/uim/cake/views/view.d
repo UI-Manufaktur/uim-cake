@@ -2,6 +2,7 @@ module uim.cake.views;
 
 @safe:
 import uim.cake;
+
 /**
  * View, the V in the MVC triad. View interacts with Helpers and view variables passed
  * in from the controller to render the results of the controller action. Often this is HTML,

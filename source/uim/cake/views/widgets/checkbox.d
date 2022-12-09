@@ -1,6 +1,7 @@
-module uim.cake.views.widgets;
+module uim.cake.views.widgetss;
 
-import uim.cake.views.forms\IContext;
+@safe:
+import uim.cake;
 
 /**
  * Input widget for creating checkbox widgets.

@@ -1,7 +1,7 @@
-module uim.cake.views.widgets;
+module uim.cake.views.widgetss;
 
-import uim.cake.views.forms\IContext;
-import uim.cake.views.StringTemplate;
+@safe:
+import uim.cake;
 
 /**
  * Basic input class.
@@ -10,7 +10,7 @@ import uim.cake.views.StringTemplate;
  * input elements like hidden, text, email, tel and other
  * types.
  */
-class BasicWidget : WidgetInterface
+class BasicWidget : IWidget
 {
     /**
      * StringTemplate instance.
