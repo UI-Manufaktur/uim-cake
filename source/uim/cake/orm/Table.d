@@ -105,38 +105,28 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
     /**
      * Name of default validation set.
-     *
-     * @var string
      */
-    public const DEFAULT_VALIDATOR = "default";
+    public const string DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
-     *
-     * @var string
      */
-    public const VALIDATOR_PROVIDER_NAME = "table";
+    public const string VALIDATOR_PROVIDER_NAME = "table";
 
     /**
      * The name of the event dispatched when a validator has been built.
-     *
-     * @var string
      */
-    public const BUILD_VALIDATOR_EVENT = "Model.buildValidator";
+    public const string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
 
     /**
      * The rules class name that is used.
-     *
-     * @var string
      */
-    public const RULES_CLASS = RulesChecker::class;
+    public const string RULES_CLASS = RulesChecker::class;
 
     /**
      * The IsUnique class name that is used.
-     *
-     * @var string
      */
-    public const IS_UNIQUE_CLASS = IsUnique::class;
+    public const string IS_UNIQUE_CLASS = IsUnique::class;
 
     /**
      * Name of the table as it can be found in the database

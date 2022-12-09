@@ -13,17 +13,13 @@ class BelongsToMany : Association
 {
     /**
      * Saving strategy that will only append to the links set
-     *
-     * @var string
      */
-    public const SAVE_APPEND = "append";
+    public const string SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
-     *
-     * @var string
      */
-    public const SAVE_REPLACE = "replace";
+    public const string SAVE_REPLACE = "replace";
 
     /**
      * The type of join to be used when adding the association to a query

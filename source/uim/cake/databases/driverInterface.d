@@ -3,7 +3,6 @@ module uim.cake.databases;
 @safe:
 import uim.cake;
 
-
 /**
  * Interface for database driver.
  *
@@ -13,54 +12,26 @@ import uim.cake;
  * @method bool inTransaction() Returns whether a transaction is active.
  */
 interface IDriver {
-    /**
-     * Common Table Expressions (with clause) support.
-     *
-     * @var string
-     */
-    public const FEATURE_CTE = "cte";
+    // Common Table Expressions (with clause) support.
+    public const string FEATURE_CTE = "cte";
 
-    /**
-     * Disabling constraints without being in transaction support.
-     *
-     * @var string
-     */
-    public const FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION = "disable-constraint-without-transaction";
+    // Disabling constraints without being in transaction support.
+    public const string FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION = "disable-constraint-without-transaction";
 
-    /**
-     * Native JSON data type support.
-     *
-     * @var string
-     */
-    public const FEATURE_JSON = "json";
+    // Native JSON data type support.
+    public const string FEATURE_JSON = "json";
 
-    /**
-     * PDO::quote() support.
-     *
-     * @var string
-     */
-    public const FEATURE_QUOTE = "quote";
+    // PDO::quote() support.
+    public const string FEATURE_QUOTE = "quote";
 
-    /**
-     * Transaction savepoint support.
-     *
-     * @var string
-     */
-    public const FEATURE_SAVEPOINT = "savepoint";
+    // Transaction savepoint support.
+    public const string FEATURE_SAVEPOINT = "savepoint";
 
-    /**
-     * Truncate with foreign keys attached support.
-     *
-     * @var string
-     */
-    public const FEATURE_TRUNCATE_WITH_CONSTRAINTS = "truncate-with-constraints";
+    // Truncate with foreign keys attached support.
+    public const string FEATURE_TRUNCATE_WITH_CONSTRAINTS = "truncate-with-constraints";
 
-    /**
-     * Window function support (all or partial clauses).
-     *
-     * @var string
-     */
-    public const FEATURE_WINDOW = "window";
+    // Window function support (all or partial clauses).
+    public const string FEATURE_WINDOW = "window";
 
     /**
      * Establishes a connection to the database server.
@@ -70,10 +41,7 @@ interface IDriver {
      */
     bool connect();
 
-    /**
-     * Disconnects from database server.
-     *
-     */
+    // Disconnects from database server.
     void disconnect() void;
 
     /**
@@ -133,7 +101,6 @@ interface IDriver {
 
     /**
      * Get the SQL for rollingback a save point.
-     *
      * @param string|int myName Save point name or id
      */
     string rollbackSavePointSQL(myName);
@@ -143,9 +110,7 @@ interface IDriver {
      */
     string disableForeignKeySQL();
 
-    /**
-     * Get the SQL for enabling foreign keys.
-     */
+    // Get the SQL for enabling foreign keys.
     string enableForeignKeySQL();
 
     /**

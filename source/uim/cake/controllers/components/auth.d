@@ -44,17 +44,13 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * The query string key used for remembering the referred page when getting
      * redirected to login.
-     *
-     * @var string
      */
-    public const QUERY_STRING_REDIRECT = "redirect";
+    public const string QUERY_STRING_REDIRECT = "redirect";
 
     /**
      * Constant for "all"
-     *
-     * @var string
      */
-    public const ALL = "all";
+    public const string ALL = "all";
 
     /**
      * Default config
