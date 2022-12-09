@@ -1,5 +1,8 @@
 module uim.cake.views;
 
+@safe:
+import uim.cake;
+
 /**
  * Adds string template functionality to any class by providing methods to
  * load and parse string templates.

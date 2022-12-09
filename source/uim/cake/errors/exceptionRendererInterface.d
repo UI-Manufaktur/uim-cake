@@ -1,11 +1,12 @@
 module uim.cake.errors;
 
-use Psr\Http\Message\IResponse;
+@safe:
+import uim.cake;
 
 /**
- * Interface ExceptionRendererInterface
+ * Interface IExceptionRenderer
  */
-interface ExceptionRendererInterface
+interface IExceptionRenderer
 {
     /**
      * Renders the response for the exception.

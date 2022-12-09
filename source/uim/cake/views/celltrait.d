@@ -1,14 +1,10 @@
 module uim.cake.views;
 
-import uim.cake.core.App;
-import uim.cakeilities.Inflector;
-import uim.cake.views.Exception\MissingCellException;
+@safe:
+import uim.cake;
 
-/**
- * Provides cell() method for usage in Controller and View classes.
- */
-trait CellTrait
-{
+// Provides cell() method for usage in Controller and View classes.
+trait CellTrait {
     /**
      * Renders the given cell.
      *

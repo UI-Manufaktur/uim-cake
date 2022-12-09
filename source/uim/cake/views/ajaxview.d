@@ -1,5 +1,8 @@
 module uim.cake.views;
 
+@safe:
+import uim.cake;
+
 /**
  * A view class that is used for AJAX responses.
  * Currently, only switches the default layout and sets the response type - which just maps to

@@ -20,7 +20,7 @@ interface PluginApplicationInterface : IEventDispatcher
      * instance of `Cake\Core\BasePlugin` will be used. This generated class will have
      * all plugin hooks enabled.
      *
-     * @param \Cake\Core\PluginInterface|string myName The plugin name or plugin object.
+     * @param \Cake\Core\IPlugin|string myName The plugin name or plugin object.
      * @param array<string, mixed> myConfig The configuration data for the plugin if using a string for myName
      * @return this
      */

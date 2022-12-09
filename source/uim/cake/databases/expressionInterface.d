@@ -1,12 +1,10 @@
 module uim.cake.databases;
 
-use Closure;
+@safe:
+import uim.cake;
 
-/**
- * An interface used by Expression objects.
- */
-interface IExpression
-{
+// An interface used by Expression objects.
+interface IExpression {
     /**
      * Converts the Node into a SQL string fragment.
      *

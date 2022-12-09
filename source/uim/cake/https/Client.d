@@ -1,22 +1,7 @@
 module uim.cake.https;
 
-import uim.cake.core.App;
-import uim.cake.core.exceptions\CakeException;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.https.clients.adapters\Curl;
-import uim.cake.https.clients.adapters\Mock as MockAdapter;
-import uim.cake.https.clients.adapters\Stream;
-import uim.cake.https.clients.adaptersInterface;
-import uim.cake.https.clients\Request;
-import uim.cake.https.clients\Response;
-import uim.cake.https\Cookie\CookieCollection;
-import uim.cake.https\Cookie\CookieInterface;
-import uim.cake.utilities.Hash;
-use InvalidArgumentException;
-use Laminas\Diactoros\Uri;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\IResponse;
+@safe:
+import uim.cake;
 
 /**
  * The end user interface for doing HTTP requests.

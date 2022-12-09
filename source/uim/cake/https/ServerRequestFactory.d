@@ -1,23 +1,7 @@
+module uim.cake.https;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.https;
-
-import uim.cake.core.Configure;
-import uim.cake.utilities.Hash;
-use Psr\Http\Message\ServerRequestFactoryInterface;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Message\UriInterface;
-use function Laminas\Diactoros\marshalHeadersFromSapi;
-use function Laminas\Diactoros\marshalUriFromSapi;
-use function Laminas\Diactoros\normalizeServer;
-use function Laminas\Diactoros\normalizeUploadedFiles;
+@safe:
+import uim.cake;
 
 /**
  * Factory for making ServerRequest instances.

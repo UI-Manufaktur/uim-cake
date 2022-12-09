@@ -1,8 +1,8 @@
 module uim.cake.databases;
 
-import uim.cake.databases.Schema\SchemaDialect;
-import uim.cake.databases.Schema\TableSchema;
-use Closure;
+@safe:
+import uim.cake;
+
 
 /**
  * Interface for database driver.

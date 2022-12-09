@@ -20,7 +20,7 @@ import uim.safe;
  * Using a subclass of ExceptionRenderer gives you full control over how Exceptions are rendered, you
  * can configure your class in your config/app.php.
  */
-class ExceptionRenderer : ExceptionRendererInterface
+class ExceptionRenderer : IExceptionRenderer
 {
     /**
      * The exception being handled.

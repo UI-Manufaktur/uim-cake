@@ -1,7 +1,7 @@
 module uim.cake.views;
 
-import uim.cake.core.Configure;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * A view class that is used for JSON responses.

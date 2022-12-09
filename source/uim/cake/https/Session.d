@@ -1,19 +1,7 @@
+module uim.cake.https;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.https;
-
-import uim.cake.core.App;
-import uim.cake.utilities.Hash;
-use InvalidArgumentException;
-use RuntimeException;
-use SessionHandlerInterface;
+@safe:
+import uim.cake;
 
 /**
  * This class is a wrapper for the native PHP session functions. It provides

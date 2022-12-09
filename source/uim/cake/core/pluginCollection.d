@@ -25,7 +25,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Plugin list
      *
-     * @var array<\Cake\Core\PluginInterface>
+     * @var array<\Cake\Core\IPlugin>
      */
     protected myPlugins = [];
 
@@ -53,7 +53,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Constructor
      *
-     * @param array<\Cake\Core\PluginInterface> myPlugins The map of plugins to add to the collection.
+     * @param array<\Cake\Core\IPlugin> myPlugins The map of plugins to add to the collection.
      */
     this(array myPlugins = []) {
         foreach (myPlugins as myPlugin) {
@@ -127,10 +127,10 @@ class PluginCollection : Iterator, Countable
      *
      * Plugins will be keyed by their names.
      *
-     * @param \Cake\Core\PluginInterface myPlugin The plugin to load.
+     * @param \Cake\Core\IPlugin myPlugin The plugin to load.
      * @return this
      */
-    function add(PluginInterface myPlugin) {
+    function add(IPlugin myPlugin) {
         myName = myPlugin.getName();
         this.plugins[myName] = myPlugin;
         this.names = array_keys(this.plugins);
@@ -177,10 +177,10 @@ class PluginCollection : Iterator, Countable
      * and that plugins loaded this way may miss some hook methods.
      *
      * @param string myName The plugin to get.
-     * @return \Cake\Core\PluginInterface The plugin.
+     * @return \Cake\Core\IPlugin The plugin.
      * @throws \Cake\Core\Exception\MissingPluginException when unknown plugins are fetched.
      */
-    PluginInterface get(string myName) {
+    IPlugin get(string myName) {
         if (this.has(myName)) {
             return this.plugins[myName];
         }
@@ -196,18 +196,18 @@ class PluginCollection : Iterator, Countable
      *
      * @param string myName The plugin name or classname
      * @param array<string, mixed> myConfig Configuration options for the plugin.
-     * @return \Cake\Core\PluginInterface
+     * @return \Cake\Core\IPlugin
      * @throws \Cake\Core\Exception\MissingPluginException When plugin instance could not be created.
      */
-    function create(string myName, array myConfig = []): PluginInterface
+    function create(string myName, array myConfig = []): IPlugin
     {
         if (strpos(myName, "\\") !== false) {
-            /** @var \Cake\Core\PluginInterface */
+            /** @var \Cake\Core\IPlugin */
             return new myName(myConfig);
         }
 
         myConfig += ["name":myName];
-        /** @var class-string<\Cake\Core\PluginInterface> myClassName */
+        /** @var class-string<\Cake\Core\IPlugin> myClassName */
         myClassName = str_replace("/", "\\", myName) . "\\" . "Plugin";
         if (!class_exists(myClassName)) {
             myClassName = BasePlugin::class;
@@ -246,9 +246,9 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      *
-     * @return \Cake\Core\PluginInterface
+     * @return \Cake\Core\IPlugin
      */
-    function current(): PluginInterface
+    function current(): IPlugin
     {
         $position = this.positions[this.loopDepth];
         myName = this.names[$position];
@@ -281,12 +281,12 @@ class PluginCollection : Iterator, Countable
      * Filter the plugins to those with the named hook enabled.
      *
      * @param string $hook The hook to filter plugins by
-     * @return \Generator<\Cake\Core\PluginInterface> A generator containing matching plugins.
+     * @return \Generator<\Cake\Core\IPlugin> A generator containing matching plugins.
      * @throws \InvalidArgumentException on invalid hooks
      */
     function with(string $hook): Generator
     {
-        if (!in_array($hook, PluginInterface::VALID_HOOKS, true)) {
+        if (!in_array($hook, IPlugin::VALID_HOOKS, true)) {
             throw new InvalidArgumentException("The `{$hook}` hook is not a known plugin hook.");
         }
         foreach (this as myPlugin) {

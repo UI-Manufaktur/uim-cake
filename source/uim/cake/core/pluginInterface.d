@@ -17,7 +17,7 @@ import uim.cakeutings\RouteBuilder;
  * @method void services(\Cake\Core\IContainer myContainer) Register plugin services to
  *   the application"s container
  */
-interface PluginInterface
+interface IPlugin
 {
     /**
      * List of valid hooks.

@@ -40,7 +40,7 @@ class ErrorHandlerMiddleware : MiddlewareInterface
      *
      * - `trace` Should error logs include stack traces?
      * - `exceptionRenderer` The renderer instance or class name to use or a callable factory
-     *   which returns a \Cake\Error\ExceptionRendererInterface instance.
+     *   which returns a \Cake\Error\IExceptionRenderer instance.
      *   Defaults to \Cake\Error\ExceptionRenderer
      *
      * @var array<string, mixed>

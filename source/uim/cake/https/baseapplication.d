@@ -128,7 +128,7 @@ abstract class BaseApplication :
      *
      * If it isn"t available, ignore it.
      *
-     * @param \Cake\Core\PluginInterface|string myName The plugin name or plugin object.
+     * @param \Cake\Core\IPlugin|string myName The plugin name or plugin object.
      * @param array<string, mixed> myConfig The configuration data for the plugin if using a string for myName
      * @return this
      */

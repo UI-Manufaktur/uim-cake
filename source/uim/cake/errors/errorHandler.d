@@ -128,17 +128,17 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param \Throwable myException The exception being rendered.
      * @param \Psr\Http\Message\IServerRequest|null myRequest The request.
-     * @return \Cake\Error\ExceptionRendererInterface The exception renderer.
+     * @return \Cake\Error\IExceptionRenderer The exception renderer.
      * @throws \RuntimeException When the renderer class cannot be found.
      */
     auto getRenderer(
         Throwable myException,
         ?IServerRequest myRequest = null
-    ): ExceptionRendererInterface {
+    ): IExceptionRenderer {
         $renderer = this._config["exceptionRenderer"];
 
         if (is_string($renderer)) {
-            /** @var class-string<\Cake\Error\ExceptionRendererInterface>|null myClass */
+            /** @var class-string<\Cake\Error\IExceptionRenderer>|null myClass */
             myClass = App::className($renderer, "Error");
             if (!myClass) {
                 throw new RuntimeException(sprintf(

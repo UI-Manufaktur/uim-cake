@@ -99,10 +99,10 @@ class StringTemplate {
      *
      */
     void push() {
-        this._configStack[] = [
-            this._config,
-            this._compiled,
-        ];
+      this._configStack[] = [
+          this._config,
+          this._compiled,
+      ];
     }
 
     /**
@@ -110,10 +110,10 @@ class StringTemplate {
      *
      */
     void pop() {
-        if (empty(this._configStack)) {
-            return;
-        }
-        [this._config, this._compiled] = array_pop(this._configStack);
+      if (empty(this._configStack)) {
+          return;
+      }
+      [this._config, this._compiled] = array_pop(this._configStack);
     }
 
     /**
@@ -132,10 +132,10 @@ class StringTemplate {
      * @return this
      */
     function add(array myTemplates) {
-        this.setConfig(myTemplates);
-        this._compileTemplates(array_keys(myTemplates));
+      this.setConfig(myTemplates);
+      this._compileTemplates(array_keys(myTemplates));
 
-        return this;
+      return this;
     }
 
     /**
@@ -144,22 +144,22 @@ class StringTemplate {
      * @param array<string> myTemplates The template names to compile. If empty all templates will be compiled.
      */
     protected void _compileTemplates(array myTemplates = []) {
-        if (empty(myTemplates)) {
-            myTemplates = array_keys(this._config);
+      if (empty(myTemplates)) {
+          myTemplates = array_keys(this._config);
+      }
+      foreach (myTemplates as myName) {
+        myTemplate = this.get(myName);
+        if (myTemplate == null) {
+            this._compiled[myName] = [null, null];
         }
-        foreach (myTemplates as myName) {
-            myTemplate = this.get(myName);
-            if (myTemplate == null) {
-                this._compiled[myName] = [null, null];
-            }
 
-            myTemplate = str_replace("%", "%%", myTemplate);
-            preg_match_all("#\{\{([\w\._]+)\}\}#", myTemplate, $matches);
-            this._compiled[myName] = [
-                str_replace($matches[0], "%s", myTemplate),
-                $matches[1],
-            ];
-        }
+        myTemplate = str_replace("%", "%%", myTemplate);
+        preg_match_all("#\{\{([\w\._]+)\}\}#", myTemplate, $matches);
+        this._compiled[myName] = [
+            str_replace($matches[0], "%s", myTemplate),
+            $matches[1],
+        ];
+      }
     }
 
     /**
@@ -199,7 +199,7 @@ class StringTemplate {
      * @return string Formatted string
      * @throws \RuntimeException If template not found.
      */
-    function format(string myName, array myData): string
+    string format(string myName, array myData)
     {
         if (!isset(this._compiled[myName])) {
             throw new RuntimeException("Cannot find template named "myName".");
@@ -248,7 +248,7 @@ class StringTemplate {
      * @param array<string>|null $exclude Array of options to be excluded, the options here will not be part of the return.
      * @return string Composed attributes.
      */
-    function formatAttributes(?array myOptions, ?array $exclude = null): string
+    string formatAttributes(?array myOptions, ?array $exclude = null)
     {
         $insertBefore = " ";
         myOptions = (array)myOptions + ["escape" => true];
@@ -281,7 +281,7 @@ class StringTemplate {
      * @param bool $escape Define if the value must be escaped
      * @return string The composed attribute.
      */
-    protected auto _formatAttribute(string myKey, myValue, $escape = true): string
+    protected string _formatAttribute(string myKey, myValue, $escape = true)
     {
         if (is_array(myValue)) {
             myValue = implode(" ", myValue);
