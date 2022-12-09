@@ -1,4 +1,4 @@
-module uim.cake.views.Widget;
+module uim.cake.views.widgets;
 
 @safe:
 import uim.cake;
@@ -90,7 +90,7 @@ class WidgetLocator
      *
      * @param array $widgets Array of widgets to use.
      * @return void
-     * @throws \RuntimeException When class does not implement WidgetInterface.
+     * @throws \RuntimeException When class does not implement IWidget.
      */
     function add(array $widgets): void
     {
@@ -102,10 +102,10 @@ class WidgetLocator
                 continue;
             }
 
-            if (is_object($widget) && !($widget instanceof WidgetInterface)) {
+            if (is_object($widget) && !($widget instanceof IWidget)) {
                 throw new RuntimeException(sprintf(
                     "Widget objects must implement `%s`. Got `%s` instance instead.",
-                    WidgetInterface::class,
+                    IWidget::class,
                     getTypeName($widget)
                 ));
             }
@@ -127,10 +127,10 @@ class WidgetLocator
      * the `_default` widget is undefined.
      *
      * @param string myName The widget name to get.
-     * @return \Cake\View\Widget\WidgetInterface WidgetInterface instance.
+     * @return \Cake\View\Widget\IWidget IWidget instance.
      * @throws \RuntimeException when widget is undefined.
      */
-    auto get(string myName): WidgetInterface
+    auto get(string myName): IWidget
     {
         if (!isset(this._widgets[myName])) {
             if (empty(this._widgets["_default"])) {
@@ -140,7 +140,7 @@ class WidgetLocator
             myName = "_default";
         }
 
-        if (this._widgets[myName] instanceof WidgetInterface) {
+        if (this._widgets[myName] instanceof IWidget) {
             return this._widgets[myName];
         }
 
@@ -161,10 +161,10 @@ class WidgetLocator
      * Resolves a widget spec into an instance.
      *
      * @param mixed myConfig The widget config.
-     * @return \Cake\View\Widget\WidgetInterface Widget instance.
+     * @return \Cake\View\Widget\IWidget Widget instance.
      * @throws \ReflectionException
      */
-    protected auto _resolveWidget(myConfig): WidgetInterface
+    protected auto _resolveWidget(myConfig): IWidget
     {
         if (is_string(myConfig)) {
             myConfig = [myConfig];
@@ -189,10 +189,10 @@ class WidgetLocator
                     $arguments[] = this.get($requirement);
                 }
             }
-            /** @var \Cake\View\Widget\WidgetInterface $instance */
+            /** @var \Cake\View\Widget\IWidget $instance */
             $instance = $reflection.newInstanceArgs($arguments);
         } else {
-            /** @var \Cake\View\Widget\WidgetInterface $instance */
+            /** @var \Cake\View\Widget\IWidget $instance */
             $instance = new myClassName(this._templates);
         }
 

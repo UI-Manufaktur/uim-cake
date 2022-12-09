@@ -1,4 +1,7 @@
-module uim.cake.views.Widget;
+module uim.cake.views.widgets;
+
+@safe:
+import uim.cake;
 
 /**
  * Form "widget" for creating labels that contain their input.

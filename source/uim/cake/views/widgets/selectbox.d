@@ -1,7 +1,7 @@
-module uim.cake.views.Widget;
+module uim.cake.views.widgets;
 
-import uim.cake.views.Form\IContext;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Input widget class for generating a selectbox.
