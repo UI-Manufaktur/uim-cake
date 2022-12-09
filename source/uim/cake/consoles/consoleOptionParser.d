@@ -115,10 +115,8 @@ class ConsoleOptionParser
 
     /**
      * Command name.
-     *
-     * @var string
      */
-    protected $_command = "";
+    protected string $_command = "";
 
     /**
      * Array of args (argv).

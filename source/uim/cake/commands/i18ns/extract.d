@@ -43,10 +43,8 @@ class I18nExtractCommand : Command {
 
     /**
      * Current file being processed
-     *
-     * @var string
      */
-    protected $_file = "";
+    protected string $_file = "";
 
     /**
      * Contains all content waiting to be written
@@ -71,10 +69,8 @@ class I18nExtractCommand : Command {
 
     /**
      * Destination path
-     *
-     * @var string
      */
-    protected $_output = "";
+    protected string $_output = "";
 
     /**
      * An array of directories to exclude.

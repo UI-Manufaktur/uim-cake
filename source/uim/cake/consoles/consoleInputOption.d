@@ -13,24 +13,18 @@ class ConsoleInputOption
 {
     /**
      * Name of the option
-     *
-     * @var string
      */
-    protected $_name;
+    protected string $_name;
 
     /**
      * Short (1 character) alias for the option.
-     *
-     * @var string
      */
-    protected $_short;
+    protected string $_short;
 
     /**
      * Help text for the option.
-     *
-     * @var string
      */
-    protected $_help;
+    protected string $_help;
 
     /**
      * Is the option a boolean option. Boolean options do not consume a parameter.

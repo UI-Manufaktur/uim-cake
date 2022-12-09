@@ -25,19 +25,16 @@ class Query : IExpression, IteratorAggregate
     use TypeMapTrait;
 
     /**
-     * @var string
      */
-    public const JOIN_TYPE_INNER = "INNER";
+    public const string JOIN_TYPE_INNER = "INNER";
 
     /**
-     * @var string
      */
-    public const JOIN_TYPE_LEFT = "LEFT";
+    public const string JOIN_TYPE_LEFT = "LEFT";
 
     /**
-     * @var string
      */
-    public const JOIN_TYPE_RIGHT = "RIGHT";
+    public const string JOIN_TYPE_RIGHT = "RIGHT";
 
     /**
      * Connection instance to be used to execute this query.
@@ -48,10 +45,8 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Type of this query (select, insert, update, delete).
-     *
-     * @var string
      */
-    protected $_type = "select";
+    protected string $_type = "select";
 
     /**
      * List of SQL parts that will be used to build this query.

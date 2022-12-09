@@ -34,10 +34,8 @@ class PhpConfig : IConfigEngine
 
     /**
      * File extension.
-     *
-     * @var string
      */
-    protected $_extension = ".php";
+    protected string $_extension = ".php";
 
     /**
      * Constructor for PHP Config file reading.

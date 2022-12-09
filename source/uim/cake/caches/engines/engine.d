@@ -44,10 +44,8 @@ abstract class CacheEngine : ICache, ICacheEngine
     /**
      * Contains the compiled string with all group
      * prefixes to be prepended to every key in this cache engine
-     *
-     * @var string
      */
-    protected $_groupPrefix = "";
+    protected string $_groupPrefix = "";
 
     /**
      * Initialize the cache engine

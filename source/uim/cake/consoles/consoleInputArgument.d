@@ -13,17 +13,13 @@ class ConsoleInputArgument
 {
     /**
      * Name of the argument.
-     *
-     * @var string
      */
-    protected $_name;
+    protected string $_name;
 
     /**
      * Help string
-     *
-     * @var string
      */
-    protected $_help;
+    protected string $_help;
 
     /**
      * Is this option required?

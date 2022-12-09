@@ -67,10 +67,8 @@ class SecurityComponent : Component
 
     /**
      * Holds the current action of the controller
-     *
-     * @var string
      */
-    protected $_action;
+    protected string $_action;
 
     /**
      * Component startup. All security checking happens here.

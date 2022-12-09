@@ -60,38 +60,28 @@ class BasePlugin : IPlugin
 
     /**
      * The path to this plugin.
-     *
-     * @var string
      */
-    protected myPath;
+    protected string myPath;
 
     /**
      * The class path for this plugin.
-     *
-     * @var string
      */
-    protected myClassPath;
+    protected string myClassPath;
 
     /**
      * The config path for this plugin.
-     *
-     * @var string
      */
-    protected myConfigPath;
+    protected string myConfigPath;
 
     /**
      * The templates path for this plugin.
-     *
-     * @var string
      */
-    protected myTemplatePath;
+    protected string myTemplatePath;
 
     /**
      * The name of this plugin
-     *
-     * @var string
      */
-    protected string myName;
+    protected string string myName;
 
     /**
      * Constructor

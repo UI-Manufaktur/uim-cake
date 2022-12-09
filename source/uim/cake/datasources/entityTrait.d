@@ -97,10 +97,8 @@ trait EntityTrait
 
     /**
      * The alias of the repository this entity came from
-     *
-     * @var string
      */
-    protected $_registryAlias = "";
+    protected string $_registryAlias = "";
 
     /**
      * Magic getter to access fields that have been set in this entity

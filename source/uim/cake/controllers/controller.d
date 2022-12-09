@@ -83,10 +83,8 @@ class Controller : IEventListener, IEventDispatcher
      * The name of this controller. Controller names are plural, named after the model they manipulate.
      *
      * Set automatically using conventions in Controller::this().
-     *
-     * @var string
      */
-    protected string myName;
+    protected string string myName;
 
     /**
      * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.

@@ -9,10 +9,8 @@ class MissingOptionException : ConsoleException
 {
     /**
      * The requested thing that was not found.
-     *
-     * @var string
      */
-    protected myRequested = "";
+    protected string myRequested = "";
 
     /**
      * The valid suggestions.

@@ -34,10 +34,8 @@ class InsertIterator : Collection {
 
     /**
      * The property name to which values will be assigned
-     *
-     * @var string
      */
-    protected $_target;
+    protected string $_target;
 
     /**
      * Constructs a new collection that will dynamically add properties to it out of

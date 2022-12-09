@@ -21,10 +21,8 @@ class ServerCommand : Command {
 
     /**
      * server host
-     *
-     * @var string
      */
-    protected $_host = self::DEFAULT_HOST;
+    protected string $_host = self::DEFAULT_HOST;
 
     /**
      * listen port
@@ -35,17 +33,13 @@ class ServerCommand : Command {
 
     /**
      * document root
-     *
-     * @var string
      */
-    protected $_documentRoot = WWW_ROOT;
+    protected string $_documentRoot = WWW_ROOT;
 
     /**
      * ini path
-     *
-     * @var string
      */
-    protected $_iniPath = "";
+    protected string $_iniPath = "";
 
     /**
      * Starts up the Command and displays the welcome message.
