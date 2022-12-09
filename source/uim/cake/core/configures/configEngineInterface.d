@@ -1,18 +1,9 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         1.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.core.Configure;
+module uim.cake.core.Configure;
 
 /**
  * An interface for creating objects compatible with Configure::load()
  */
-interface ConfigEngineInterface
+interface IConfigEngine
 {
     /**
      * Read a configuration file/storage key

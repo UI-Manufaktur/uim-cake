@@ -1,6 +1,6 @@
 module uim.cake.core.Configure\Engine;
 
-import uim.cake.core.Configure\ConfigEngineInterface;
+import uim.cake.core.Configure\IConfigEngine;
 import uim.cake.core.Configure\FileConfigTrait;
 import uim.cake.core.exceptions\CakeException;
 
@@ -22,7 +22,7 @@ import uim.cake.core.exceptions\CakeException;
  * }
  * ```
  */
-class JsonConfig : ConfigEngineInterface
+class JsonConfig : IConfigEngine
 {
     use FileConfigTrait;
 

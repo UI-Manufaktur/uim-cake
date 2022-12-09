@@ -1,7 +1,7 @@
 module uim.cake.core;
 
 import uim.cake.caches\Cache;
-import uim.cake.core.Configure\ConfigEngineInterface;
+import uim.cake.core.Configure\IConfigEngine;
 import uim.cake.core.Configure\Engine\PhpConfig;
 import uim.cake.core.exceptions\CakeException;
 import uim.cakeilities.Hash;
@@ -31,7 +31,7 @@ class Configure
      * Configured engine classes, used to load config files from resources
      *
      * @see \Cake\Core\Configure::load()
-     * @var array<\Cake\Core\Configure\ConfigEngineInterface>
+     * @var array<\Cake\Core\Configure\IConfigEngine>
      */
     protected static $_engines = [];
 
@@ -225,10 +225,10 @@ class Configure
      *
      * @param string myName The name of the engine being configured. This alias is used later to
      *   read values from a specific engine.
-     * @param \Cake\Core\Configure\ConfigEngineInterface $engine The engine to append.
+     * @param \Cake\Core\Configure\IConfigEngine $engine The engine to append.
      * @return void
      */
-    static void config(string myName, ConfigEngineInterface $engine) {
+    static void config(string myName, IConfigEngine $engine) {
         static::$_engines[myName] = $engine;
     }
 
@@ -364,9 +364,9 @@ class Configure
      * Will create new PhpConfig for default if not configured yet.
      *
      * @param string myConfig The name of the configured adapter
-     * @return \Cake\Core\Configure\ConfigEngineInterface|null Engine instance or null
+     * @return \Cake\Core\Configure\IConfigEngine|null Engine instance or null
      */
-    protected static auto _getEngine(string myConfig): ?ConfigEngineInterface
+    protected static auto _getEngine(string myConfig): ?IConfigEngine
     {
         if (!isset(static::$_engines[myConfig])) {
             if (myConfig !== "default") {

@@ -1,6 +1,6 @@
 module uim.cake.core.Configure\Engine;
 
-import uim.cake.core.Configure\ConfigEngineInterface;
+import uim.cake.core.Configure\IConfigEngine;
 import uim.cake.core.Configure\FileConfigTrait;
 import uim.cakeilities.Hash;
 
@@ -37,7 +37,7 @@ import uim.cakeilities.Hash;
  *
  * @see https://secure.php.net/parse_ini_file
  */
-class IniConfig : ConfigEngineInterface
+class IniConfig : IConfigEngine
 {
     use FileConfigTrait;
 

@@ -1,6 +1,6 @@
 module uim.cake.core.Configure\Engine;
 
-import uim.cake.core.Configure\ConfigEngineInterface;
+import uim.cake.core.Configure\IConfigEngine;
 import uim.cake.core.Configure\FileConfigTrait;
 import uim.cake.core.exceptions\CakeException;
 
@@ -28,7 +28,7 @@ import uim.cake.core.exceptions\CakeException;
  *
  * @see \Cake\Core\Configure::load() for how to load custom configuration files.
  */
-class PhpConfig : ConfigEngineInterface
+class PhpConfig : IConfigEngine
 {
     use FileConfigTrait;
 
