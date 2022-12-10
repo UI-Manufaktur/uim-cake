@@ -48,10 +48,8 @@ abstract class DAuthenticate : IEventListener {
     /**
      * Whether the user authenticated by this class
      * requires their password to be rehashed with another algorithm.
-     *
-     * @var bool
      */
-    protected $_needsPasswordRehash = false;
+    protected bool $_needsPasswordRehash = false;
 
     /**
      * Constructor
@@ -156,8 +154,7 @@ abstract class DAuthenticate : IEventListener {
      * @throws \RuntimeException If password hasher class not found or
      *   it does not extend AbstractPasswordHasher
      */
-    function passwordHasher(): AbstractPasswordHasher
-    {
+    AbstractPasswordHasher passwordHasher() {
         if (this._passwordHasher !== null) {
             return this._passwordHasher;
         }
