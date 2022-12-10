@@ -1355,11 +1355,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * composite keys when comparing values.
      *
      * @param array<string, mixed> myOptions the original options passed to a finder
-     * @param array<string> myKeys the keys to check in myOptions to build matchers from
+     * @param myKeys the keys to check in myOptions to build matchers from
      * the associated value
      * @return array
      */
-    protected auto _setFieldMatchers(array myOptions, array myKeys): array
+    protected auto _setFieldMatchers(array myOptions, string[] myKeys): array
     {
         foreach (myKeys as myField) {
             if (!is_array(myOptions[myField])) {
@@ -1997,10 +1997,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Note: The ORM will not generate primary key values for composite primary keys.
      * You can overwrite _newId() in your table class.
      *
-     * @param array<string> $primary The primary key columns to get a new ID for.
+     * @param $primary The primary key columns to get a new ID for.
      * @return string|null Either null or the primary key value or a list of primary key values.
      */
-    protected auto _newId(array $primary) {
+    protected auto _newId(string[] $primary) {
         if (!$primary || count($primary) > 1) {
             return null;
         }

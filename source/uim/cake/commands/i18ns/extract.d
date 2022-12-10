@@ -22,24 +22,16 @@ class I18nExtractCommand : Command {
 
     /**
      * Paths to use when looking for strings
-     *
-     * @var array<string>
      */
-    protected $_paths = [];
+    protected string[] $_paths;
 
     /**
      * Files from where to extract
-     *
-     * @var array<string>
      */
-    protected $_files = [];
+    protected string[] $_files;
 
-    /**
-     * Merge all domain strings into the default.pot file
-     *
-     * @var bool
-     */
-    protected $_merge = false;
+    // Merge all domain strings into the default.pot file
+    protected bool $_merge = false;
 
     /**
      * Current file being processed

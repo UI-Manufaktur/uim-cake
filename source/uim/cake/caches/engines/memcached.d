@@ -68,10 +68,7 @@ class MemcachedEngine : CacheEngine
      */
     protected $_serializers = [];
 
-    /**
-     * @var array<string>
-     */
-    protected $_compiledGroupNames = [];
+    protected string[] $_compiledGroupNames = [];
 
     /**
      * Initialize the Cache Engine

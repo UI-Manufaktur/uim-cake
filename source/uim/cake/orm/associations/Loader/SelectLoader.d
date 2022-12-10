@@ -207,11 +207,11 @@ class SelectLoader
      * If the required fields are missing, throws an exception.
      *
      * @param \Cake\ORM\Query $fetchQuery The association fetching query
-     * @param array<string> myKey The foreign key fields to check
+     * @param myKey The foreign key fields to check
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected auto _assertFieldsPresent(Query $fetchQuery, array myKey): void
+    protected auto _assertFieldsPresent(Query $fetchQuery, string[] myKey): void
     {
         $select = $fetchQuery.aliasFields($fetchQuery.clause("select"));
         if (empty($select)) {
@@ -306,12 +306,12 @@ class SelectLoader
      * from myKeys with the tuple values in $filter using the provided operator.
      *
      * @param \Cake\ORM\Query myQuery Target table"s query
-     * @param array<string> myKeys the fields that should be used for filtering
+     * @param myKeys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for myKey
      * @param string $operator The operator for comparing the tuples
      * @return \Cake\Database\Expression\TupleComparison
      */
-    protected auto _createTupleCondition(Query myQuery, array myKeys, $filter, $operator): TupleComparison
+    protected auto _createTupleCondition(Query myQuery, string[] myKeys, $filter, $operator): TupleComparison
     {
         myTypes = [];
         $defaults = myQuery.getDefaultTypes();
@@ -496,11 +496,11 @@ class SelectLoader
      * be done with multiple foreign keys
      *
      * @param array<string, mixed> myResultMap A keyed arrays containing the target table
-     * @param array<string> $sourceKeys An array with aliased keys to match
+     * @param $sourceKeys An array with aliased keys to match
      * @param string $nestKey The key under which results should be nested
      * @return \Closure
      */
-    protected auto _multiKeysInjector(array myResultMap, array $sourceKeys, string $nestKey): Closure
+    protected auto _multiKeysInjector(array myResultMap, string[] $sourceKeys, string $nestKey): Closure
     {
         return function ($row) use (myResultMap, $sourceKeys, $nestKey) {
             myValues = [];

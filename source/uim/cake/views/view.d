@@ -728,11 +728,10 @@ class View : IEventDispatcher {
     /**
      * Get the names of all the existing blocks.
      *
-     * @return array<string> An array containing the blocks.
+     * @return An array containing the blocks.
      * @see \Cake\View\ViewBlock::keys()
      */
-    function blocks(): array
-    {
+    string[] blocks() {
         return this.Blocks.keys();
     }
 
@@ -1377,10 +1376,9 @@ class View : IEventDispatcher {
      *
      * @param string|null myPlugin Optional plugin name to scan for view files.
      * @param bool $cached Set to false to force a refresh of view paths. Default true.
-     * @return array<string> paths
+     * @return paths
      */
-    protected auto _paths(Nullable!string myPlugin = null, bool $cached = true): array
-    {
+    protected string[] _paths(Nullable!string myPlugin = null, bool $cached = true) {
         if ($cached == true) {
             if (myPlugin == null && !empty(this._paths)) {
                 return this._paths;

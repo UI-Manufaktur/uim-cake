@@ -105,10 +105,10 @@ class CorsBuilder
     /**
      * Normalize the origin to regular expressions and put in an array format
      *
-     * @param array<string> $domains Domain names to normalize.
+     * @param $domains Domain names to normalize.
      * @return array
      */
-    protected auto _normalizeDomains(array $domains): array
+    protected auto _normalizeDomains(string[] $domains): array
     {
         myResult = [];
         foreach ($domains as $domain) {
@@ -131,10 +131,10 @@ class CorsBuilder
     /**
      * Set the list of allowed HTTP Methods.
      *
-     * @param array<string> $methods The allowed HTTP methods
+     * @param $methods The allowed HTTP methods
      * @return this
      */
-    function allowMethods(array $methods) {
+    function allowMethods(string[] $methods) {
         this._headers["Access-Control-Allow-Methods"] = implode(", ", $methods);
 
         return this;
@@ -154,10 +154,10 @@ class CorsBuilder
     /**
      * Allowed headers that can be sent in CORS requests.
      *
-     * @param array<string> $headers The list of headers to accept in CORS requests.
+     * @param $headers The list of headers to accept in CORS requests.
      * @return this
      */
-    function allowHeaders(array $headers) {
+    function allowHeaders(string[] $headers) {
         this._headers["Access-Control-Allow-Headers"] = implode(", ", $headers);
 
         return this;

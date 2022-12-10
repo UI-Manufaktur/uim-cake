@@ -24,14 +24,14 @@ class MissingOptionException : ConsoleException
      *
      * @param string myMessage The string message.
      * @param string myRequested The requested value.
-     * @param array<string> $suggestions The list of potential values that were valid.
+     * @param $suggestions The list of potential values that were valid.
      * @param int|null $code The exception code if relevant.
      * @param \Throwable|null $previous the previous exception.
      */
     this(
         string myMessage,
         string myRequested = "",
-        array $suggestions = [],
+        string[] $suggestions = [],
         Nullable!int $code = null,
         ?Throwable $previous = null
     ) {
@@ -67,11 +67,10 @@ class MissingOptionException : ConsoleException
      * Find the best match for requested in suggestions
      *
      * @param string $needle Unknown option name trying to be used.
-     * @param array<string> $haystack Suggestions to look through.
+     * @param $haystack Suggestions to look through.
      * @return string The best match
      */
-    protected auto findClosestItem($needle, $haystack): Nullable!string
-    {
+    protected Nullable!string findClosestItem($needle, string[] $haystack) {
         $bestGuess = null;
         foreach ($haystack as $item) {
             if (preg_match("/^" . $needle . "/", $item)) {

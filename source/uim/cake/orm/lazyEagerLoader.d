@@ -98,10 +98,10 @@ class LazyEagerLoader
      * Returns a map of property names where the association results should be injected
      * in the top level entities.
      *
-     * @param \Cake\ORM\Table $source The table having the top level associations
-     * @param array<string> $associations The name of the top level associations
+     * @param $source The table having the top level associations
+     * @param $associations The name of the top level associations
      */
-    protected string[] _getPropertyMap(Table $source, array $associations): array
+    protected string[] _getPropertyMap(Table $source, string[] $associations): array
     {
         $map = [];
         myContainer = $source.associations();
@@ -119,11 +119,11 @@ class LazyEagerLoader
      *
      * @param \Traversable|array<\Cake\Datasource\IEntity> $objects The original list of entities
      * @param \Cake\ORM\Query myResults The loaded results
-     * @param array<string> $associations The top level associations that were loaded
+     * @param $associations The top level associations that were loaded
      * @param \Cake\ORM\Table $source The table where the entities came from
      * @return array
      */
-    protected auto _injectResults(iterable $objects, myResults, array $associations, Table $source): array
+    protected auto _injectResults(iterable $objects, myResults, string[] $associations, Table $source): array
     {
         $injected = [];
         $properties = this._getPropertyMap($source, $associations);

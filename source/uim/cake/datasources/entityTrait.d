@@ -434,11 +434,11 @@ trait EntityTrait
     /**
      * Sets hidden fields.
      *
-     * @param array<string> myFields An array of fields to hide from array exports.
+     * @param myFields An array of fields to hide from array exports.
      * @param bool myMerge Merge the new fields with the existing. By default false.
      * @return this
      */
-    auto setHidden(array myFields, bool myMerge = false) {
+    auto setHidden(string[] myFields, bool myMerge = false) {
         if (myMerge == false) {
             this._hidden = myFields;
 
@@ -459,11 +459,11 @@ trait EntityTrait
     /**
      * Sets the virtual fields on this entity.
      *
-     * @param array<string> myFields An array of fields to treat as virtual.
+     * @param myFields An array of fields to treat as virtual.
      * @param bool myMerge Merge the new fields with the existing. By default false.
      * @return this
      */
-    auto setVirtual(array myFields, bool myMerge = false) {
+    auto setVirtual(string[] myFields, bool myMerge = false) {
         if (myMerge == false) {
             this._virtual = myFields;
 
@@ -631,11 +631,11 @@ trait EntityTrait
      * Returns an array with the requested fields
      * stored in this entity, indexed by field name
      *
-     * @param array<string> myFields list of fields to be returned
+     * @param myFields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
      * @return array
      */
-    function extract(array myFields, bool $onlyDirty = false): array
+    function extract(string[] myFields, bool $onlyDirty = false): array
     {
         myResult = [];
         foreach (myFields as myField) {
@@ -654,10 +654,10 @@ trait EntityTrait
      * Fields that are unchanged from their original value will be included in the
      * return of this method.
      *
-     * @param array<string> myFields List of fields to be returned
+     * @param myFields List of fields to be returned
      * @return array
      */
-    function extractOriginal(array myFields): array
+    function extractOriginal(string[] myFields): array
     {
         myResult = [];
         foreach (myFields as myField) {
@@ -674,13 +674,13 @@ trait EntityTrait
      * This method will only return fields that have been modified since
      * the entity was built. Unchanged fields will be omitted.
      *
-     * @param array<string> myFields List of fields to be returned
+     * @param myFields List of fields to be returned
      * @return array
      */
-    function extractOriginalChanged(array myFields): array
+    function extractOriginalChanged(string[] myFields): array
     {
         myResult = [];
-        foreach (myFields as myField) {
+        foreach (myField; myFields) {
             $original = this.getOriginal(myField);
             if ($original !== this.get(myField)) {
                 myResult[myField] = $original;

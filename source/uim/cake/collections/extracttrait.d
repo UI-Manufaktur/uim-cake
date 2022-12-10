@@ -88,10 +88,10 @@ trait ExtractTrait
      * by iterating over the column names contained in myPath
      *
      * @param \ArrayAccess|array myData Data.
-     * @param array<string> $parts Path to extract from.
+     * @param $parts Path to extract from.
      * @return mixed
      */
-    protected auto _simpleExtract(myData, array $parts) {
+    protected auto _simpleExtract(myData, string[] $parts) {
         myValue = null;
         foreach ($parts as $column) {
             if (!isset(myData[$column])) {

@@ -45,10 +45,10 @@ class CommandTask : Shell {
      * @param array<string, mixed> myShellList The shell listing array.
      * @param string myPath The path to look in.
      * @param string myKey The key to add shells to
-     * @param array<string> $skip A list of commands to exclude.
+     * @param $skip A list of commands to exclude.
      * @return array<string, mixed> The updated list of shells.
      */
-    protected auto _findShells(array myShellList, string myPath, string myKey, array $skip): array
+    protected auto _findShells(array myShellList, string myPath, string myKey, string[] $skip): array
     {
         myShells = this._scanDir(myPath);
 
@@ -59,12 +59,12 @@ class CommandTask : Shell {
      * Scan the provided paths for shells, and append them into myShellList
      *
      * @param string myType The type of object.
-     * @param array<string> myShells The shell names.
+     * @param myShells The shell names.
      * @param array<string, mixed> myShellList List of shells.
-     * @param array<string> $skip List of command names to skip.
+     * @param $skip List of command names to skip.
      * @return array<string, mixed> The updated myShellList
      */
-    protected auto _appendShells(string myType, array myShells, array myShellList, array $skip): array
+    protected auto _appendShells(string myType, string[] myShells, array myShellList, string[] $skip): array
     {
         myShellList[myType] = myShellList[myType] ?? [];
 
@@ -84,10 +84,9 @@ class CommandTask : Shell {
      * should be within them.
      *
      * @param string $dir The directory to read.
-     * @return array<string> The list of shell classnames based on conventions.
+     * @return The list of shell classnames based on conventions.
      */
-    protected auto _scanDir(string $dir): array
-    {
+    protected string[] _scanDir(string $dir) {
         if (!is_dir($dir)) {
             return [];
         }

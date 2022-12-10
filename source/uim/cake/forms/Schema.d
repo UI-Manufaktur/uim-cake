@@ -71,10 +71,9 @@ class Schema
     /**
      * Get the list of fields in the schema.
      *
-     * @return array<string> The list of field names.
+     * @return The list of field names.
      */
-    function fields(): array
-    {
+    string[] fields() {
         return array_keys(this._fields);
     }
 

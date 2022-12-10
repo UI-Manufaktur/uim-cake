@@ -324,35 +324,29 @@ class RouteCollection
         );
     }
 
-    /**
-     * Get the connected named routes.
-     *
-     * @return array<\Cake\Routing\Route\Route>
-     */
-    function named(): array
-    {
+    // Get the connected named routes.
+    Route[] named() {
         return this._named;
     }
 
     /**
      * Get the extensions that can be handled.
      *
-     * @return array<string> The valid extensions.
+     * @return The valid extensions.
      */
-    auto getExtensions(): array
-    {
+    string[] getExtensions() {
         return this._extensions;
     }
 
     /**
      * Set the extensions that the route collection can handle.
      *
-     * @param array<string> $extensions The list of extensions to set.
+     * @param $extensions The list of extensions to set.
      * @param bool myMerge Whether to merge with or override existing extensions.
      *   Defaults to `true`.
      * @return this
      */
-    auto setExtensions(array $extensions, bool myMerge = true) {
+    auto setExtensions(string[] $extensions, bool myMerge = true) {
         if (myMerge) {
             $extensions = array_unique(array_merge(
                 this._extensions,
@@ -385,11 +379,11 @@ class RouteCollection
      * Add middleware to a middleware group
      *
      * @param string myName Name of the middleware group
-     * @param array<string> $middlewareNames Names of the middleware
+     * @param $middlewareNames Names of the middleware
      * @return this
      * @throws \RuntimeException
      */
-    function middlewareGroup(string myName, array $middlewareNames) {
+    function middlewareGroup(string myName, string[] $middlewareNames) {
         if (this.hasMiddleware(myName)) {
             myMessage = "Cannot add middleware group "myName". A middleware by this name has already been registered.";
             throw new RuntimeException(myMessage);
@@ -440,12 +434,12 @@ class RouteCollection
     /**
      * Get an array of middleware given a list of names
      *
-     * @param array<string> myNames The names of the middleware or groups to fetch
+     * @param myNames The names of the middleware or groups to fetch
      * @return array An array of middleware. If any of the passed names are groups,
      *   the groups middleware will be flattened into the returned list.
      * @throws \RuntimeException when a requested middleware does not exist.
      */
-    auto getMiddleware(array myNames): array
+    auto getMiddleware(string[] myNames): array
     {
         $out = [];
         foreach (myNames as myName) {

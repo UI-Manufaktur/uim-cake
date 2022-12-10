@@ -26,12 +26,12 @@ class RulesChecker : BaseRulesChecker
      *
      * - `allowMultipleNulls` Allows any field to have multiple null values. Defaults to false.
      *
-     * @param array<string> myFields The list of fields to check for uniqueness.
+     * @param myFields The list of fields to check for uniqueness.
      * @param array<string, mixed>|string|null myMessage The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return \Cake\Datasource\RuleInvoker
      */
-    function isUnique(array myFields, myMessage = null): RuleInvoker
+    function isUnique(string[] myFields, myMessage = null): RuleInvoker
     {
         myOptions = is_array(myMessage) ? myMessage : ["message":myMessage];
         myMessage = myOptions["message"] ?? null;

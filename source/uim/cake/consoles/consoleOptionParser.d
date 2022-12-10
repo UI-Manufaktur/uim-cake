@@ -880,8 +880,7 @@ class ConsoleOptionParser
      * @return array<string> Args
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    protected auto _parseArg(string $argument, array $args): array
-    {
+    protected string[] _parseArg(string $argument, array $args) {
         if (empty(this._args)) {
             $args[] = $argument;
 

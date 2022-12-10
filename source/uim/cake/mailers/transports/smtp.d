@@ -177,10 +177,10 @@ class SmtpTransport : AbstractTransport
     /**
      * Parses and stores the response lines in `"code":"message"` format.
      *
-     * @param array<string> $responseLines Response lines to parse.
+     * @param $responseLines Response lines to parse.
      * @return void
      */
-    protected auto _bufferResponseLines(array $responseLines): void
+    protected auto _bufferResponseLines(string[] $responseLines): void
     {
         $response = [];
         foreach ($responseLines as $responseLine) {

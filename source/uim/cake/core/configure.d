@@ -341,12 +341,12 @@ class Configure
      * @param string myKey The identifier to create in the config adapter.
      *   This could be a filename or a cache key depending on the adapter being used.
      * @param string myConfig The name of the configured adapter to dump data with.
-     * @param array<string> myKeys The name of the top-level keys you want to dump.
+     * @param myKeys The name of the top-level keys you want to dump.
      *   This allows you save only some data stored in Configure.
      * @return bool Success
      * @throws \Cake\Core\Exception\CakeException if the adapter does not implement a `dump` method.
      */
-    static bool dump(string myKey, string myConfig = "default", array myKeys = []) {
+    static bool dump(string myKey, string myConfig = "default", string[] myKeys = []) {
         $engine = static::_getEngine(myConfig);
         if (!$engine) {
             throw new CakeException(sprintf("There is no "%s" config engine.", myConfig));

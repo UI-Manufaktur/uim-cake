@@ -14,11 +14,11 @@ trait MergeVariablesTrait
      * - `associative` - A list of properties that should be treated as associative arrays.
      *   Properties in this list will be passed through Hash::normalize() before merging.
      *
-     * @param array<string> $properties An array of properties and the merge strategy for them.
+     * @param $properties An array of properties and the merge strategy for them.
      * @param array<string, mixed> myOptions The options to use when merging properties.
      * @return void
      */
-    protected auto _mergeVars(array $properties, array myOptions = []): void
+    protected auto _mergeVars(string[] $properties, array myOptions = []): void
     {
         myClass = static::class;
         $parents = [];
@@ -46,11 +46,11 @@ trait MergeVariablesTrait
      * Merge a single property with the values declared in all parent classes.
      *
      * @param string $property The name of the property being merged.
-     * @param array<string> $parentClasses An array of classes you want to merge with.
+     * @param $parentClasses An array of classes you want to merge with.
      * @param array<string, mixed> myOptions Options for merging the property, see _mergeVars()
      * @return void
      */
-    protected auto _mergeProperty(string $property, array $parentClasses, array myOptions): void
+    protected auto _mergeProperty(string $property, string[] $parentClasses, array myOptions): void
     {
         thisValue = this.{$property};
         $isAssoc = false;

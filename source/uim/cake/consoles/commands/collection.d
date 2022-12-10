@@ -205,7 +205,7 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Get the list of available command names.
      *
-     * @return array<string> Command names
+     * @return Command names
      */
     string[] keys() {
         return array_keys(this.commands);

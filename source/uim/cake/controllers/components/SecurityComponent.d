@@ -386,10 +386,10 @@ class SecurityComponent : Component
      * Create a message for humans to understand why Security token is not matching
      *
      * @param \Cake\Controller\Controller $controller Instantiating controller
-     * @param array<string> $hashParts Elements used to generate the Token hash
+     * @param $hashParts Elements used to generate the Token hash
      * @return string Message explaining why the tokens are not matching
      */
-    protected string _debugPostTokenNotMatching(Controller $controller, array $hashParts) {
+    protected string _debugPostTokenNotMatching(Controller $controller, string[] $hashParts) {
         myMessages = [];
         $expectedParts = json_decode(urldecode($controller.getRequest().getData("_Token.debug")), true);
         if (!is_array($expectedParts) || count($expectedParts) !== 3) {
@@ -439,9 +439,9 @@ class SecurityComponent : Component
      * @param string $stringKeyMessage Message string if tampered found in
      *  data fields indexed by string (protected).
      * @param string $missingMessage Message string if missing field
-     * @return array<string> Messages
+     * @return Messages
      */
-    protected auto _debugCheckFields(
+    protected string[] _debugCheckFields(
         array myDataFields,
         array $expectedFields = [],
         string $intKeyMessage = "",
@@ -503,9 +503,9 @@ class SecurityComponent : Component
      * @param string $intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
      * @param string $stringKeyMessage Message string if tampered found in
      *   data fields indexed by string (protected)
-     * @return array<string> Error messages
+     * @return Error messages
      */
-    protected auto _matchExistingFields(
+    protected string[] _matchExistingFields(
         array myDataFields,
         array &$expectedFields,
         string $intKeyMessage,

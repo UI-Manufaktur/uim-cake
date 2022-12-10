@@ -773,10 +773,10 @@ class Validation {
      * Checks that value has a valid file extension.
      *
      * @param \Psr\Http\Message\UploadedFileInterface|array|string $check Value to check
-     * @param array<string> $extensions file extensions to allow. By default extensions are "gif", "jpeg", "png", "jpg"
+     * @param $extensions file extensions to allow. By default extensions are "gif", "jpeg", "png", "jpg"
      * @return bool Success
      */
-    static function extension($check, array $extensions = ["gif", "jpeg", "png", "jpg"]) {
+    static function extension($check, string[] $extensions = ["gif", "jpeg", "png", "jpg"]) {
         if ($check instanceof UploadedFileInterface) {
             $check = $check.getClientFilename();
         } elseif (is_array($check) && isset($check["name"])) {
@@ -1045,11 +1045,11 @@ class Validation {
      * Checks if a value is in a given list. Comparison is case sensitive by default.
      *
      * @param mixed $check Value to check.
-     * @param array<string> $list List to check against.
+     * @param $list List to check against.
      * @param bool $caseInsensitive Set to true for case insensitive comparison.
      * @return bool Success.
      */
-    static bool inList($check, array $list, bool $caseInsensitive = false) {
+    static bool inList($check, string[] $list, bool $caseInsensitive = false) {
         if (!is_scalar($check)) {
             return false;
         }

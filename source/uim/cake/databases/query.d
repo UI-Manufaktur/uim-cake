@@ -333,10 +333,10 @@ class Query : IExpression, IteratorAggregate
      * ```
      *
      * @param callable $visitor A function or callable to be executed for each part
-     * @param array<string> $parts The list of query parts to traverse
+     * @param $parts The list of query parts to traverse
      * @return this
      */
-    function traverseParts(callable $visitor, array $parts) {
+    function traverseParts(callable $visitor, string[] $parts) {
         foreach ($parts as myName) {
             $visitor(this._parts[myName], myName);
         }

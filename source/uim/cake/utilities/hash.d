@@ -341,11 +341,11 @@ class Hash
      *
      * @param string $op The operation to do.
      * @param array myData The data to operate on.
-     * @param array<string> myPath The path to work on.
+     * @param myPath The path to work on.
      * @param mixed myValues The values to insert when doing inserts.
      * @return array data.
      */
-    protected static auto _simpleOp(string $op, array myData, array myPath, myValues = null): array
+    protected static auto _simpleOp(string $op, array myData, string[] myPath, myValues = null): array
     {
         $_list = &myData;
 
@@ -529,15 +529,14 @@ class Hash
      * The `$format` string can use any format options that `vsprintf()` and `sprintf()` do.
      *
      * @param array myData Source array from which to extract the data
-     * @param array<string> myPaths An array containing one or more Hash::extract()-style key paths
+     * @param myPaths An array containing one or more Hash::extract()-style key paths
      * @param string $format Format string into which values will be inserted, see sprintf()
-     * @return array<string>|null An array of strings extracted from `myPath` and formatted with `$format`
+     * @return An array of strings extracted from `myPath` and formatted with `$format`
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::format
      * @see sprintf()
      * @see \Cake\Utility\Hash::extract()
      */
-    static function format(array myData, array myPaths, string $format): ?array
-    {
+    static string[] format(array myData, string[] myPaths, string $format) {
         $extracted = [];
         myCount = count(myPaths);
 

@@ -57,10 +57,10 @@ class CommandRunner : IEventDispatcher {
      * $runner.setAliases(["--version":"version"]);
      * ```
      *
-     * @param array<string> myAliases The map of aliases to replace.
+     * @param myAliases The map of aliases to replace.
      * @return this
      */
-    auto setAliases(array myAliases) {
+    auto setAliases(string[] myAliases) {
         this.aliases = myAliases;
 
         return this;

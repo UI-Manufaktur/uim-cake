@@ -372,9 +372,9 @@ class ServerRequest : IServerRequest
     /**
      * register trusted proxies
      *
-     * @param array<string> $proxies ips list of trusted proxies
+     * @param $proxies ips list of trusted proxies
      */
-    void setTrustedProxies(array $proxies) {
+    void setTrustedProxies(string[] $proxies) {
         this.trustedProxies = $proxies;
         this.trustProxy = true;
     }
@@ -594,11 +594,11 @@ class ServerRequest : IServerRequest
      * See Request::is() for how to add additional types and the
      * built-in types.
      *
-     * @param array<string> myTypes The types to check.
+     * @param myTypes The types to check.
      * @return bool Success.
      * @see \Cake\Http\ServerRequest::is()
      */
-    bool isAll(array myTypes) {
+    bool isAll(string[] myTypes) {
         foreach (myTypes as myType) {
             if (!this.is(myType)) {
                 return false;
@@ -766,11 +766,11 @@ class ServerRequest : IServerRequest
      * is not present an empty array will be returned.
      *
      * @param string myName The header you want to get (case-insensitive)
-     * @return array<string> An associative array of headers and their values.
+     * @return An associative array of headers and their values.
      *   If the header doesn"t exist, an empty array will be returned.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    auto getHeader(myName): array
+    string[] getHeader(myName): array
     {
         myName = this.normalizeHeaderName(myName);
         if (isset(this._environment[myName])) {
@@ -995,9 +995,9 @@ class ServerRequest : IServerRequest
      *
      * @param int $tldLength Number of segments your tld contains. For example: `example.com` contains 1 tld.
      *   While `example.co.uk` contains 2.
-     * @return array<string> An array of subdomains.
+     * @return An array of subdomains.
      */
-    function subdomains(int $tldLength = 1): array
+    string[] subdomains(int $tldLength = 1): array
     {
         $host = this.host();
         if (empty($host)) {

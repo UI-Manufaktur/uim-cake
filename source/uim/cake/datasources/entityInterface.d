@@ -15,11 +15,11 @@ interface IEntity : ArrayAccess, JsonSerializable
     /**
      * Sets hidden fields.
      *
-     * @param array<string> myFields An array of fields to hide from array exports.
+     * @param myFields An array of fields to hide from array exports.
      * @param bool myMerge Merge the new fields with the existing. By default false.
      * @return this
      */
-    auto setHidden(array myFields, bool myMerge = false);
+    auto setHidden(string[] myFields, bool myMerge = false);
 
     /**
      * Gets the hidden fields.
@@ -29,7 +29,7 @@ interface IEntity : ArrayAccess, JsonSerializable
     /**
      * Sets the virtual fields on this entity.
      *
-     * @param array<string> myFields An array of fields to treat as virtual.
+     * @param myFields An array of fields to treat as virtual.
      * @param bool myMerge Merge the new fields with the existing. By default false.
      * @return this
      */
@@ -132,19 +132,19 @@ interface IEntity : ArrayAccess, JsonSerializable
      * Returns an array with the requested original fields
      * stored in this entity, indexed by field name.
      *
-     * @param array<string> myFields List of fields to be returned
+     * @param string[] myFields List of fields to be returned
      * @return array
      */
-    function extractOriginal(array myFields): array;
+    function extractOriginal(string[] myFields): array;
 
     /**
      * Returns an array with only the original fields
      * stored in this entity, indexed by field name.
      *
-     * @param array<string> myFields List of fields to be returned
+     * @param myFields List of fields to be returned
      * @return array
      */
-    function extractOriginalChanged(array myFields): array;
+    function extractOriginalChanged(string[] myFields): array;
 
     /**
      * Sets one or multiple fields to the specified value
@@ -214,11 +214,11 @@ interface IEntity : ArrayAccess, JsonSerializable
      * Returns an array with the requested fields
      * stored in this entity, indexed by field name
      *
-     * @param array<string> myFields list of fields to be returned
+     * @param myFields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
      * @return array
      */
-    function extract(array myFields, bool $onlyDirty = false): array;
+    function extract(string[] myFields, bool $onlyDirty = false): array;
 
     /**
      * Sets the entire entity as clean, which means that it will appear as

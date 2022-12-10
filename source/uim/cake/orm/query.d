@@ -228,12 +228,12 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * pass overwrite boolean true which will reset the select clause removing all previous additions.
      *
      * @param \Cake\ORM\Table|\Cake\ORM\Association myTable The table to use to get an array of columns
-     * @param array<string> $excludedFields The un-aliased column names you do not want selected from myTable
+     * @param $excludedFields The un-aliased column names you do not want selected from myTable
      * @param bool $overwrite Whether to reset/remove previous selected fields
      * @return this
      * @throws \InvalidArgumentException If Association|Table is not passed in first argument
      */
-    function selectAllExcept(myTable, array $excludedFields, bool $overwrite = false) {
+    function selectAllExcept(myTable, string[] $excludedFields, bool $overwrite = false) {
         if (myTable instanceof Association) {
             myTable = myTable.getTarget();
         }

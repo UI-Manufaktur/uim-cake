@@ -1644,14 +1644,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a date format validation rule to a field.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param array<string> $formats A list of accepted date formats.
+     * @param $formats A list of accepted date formats.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see \Cake\Validation\Validation::date()
      * @return this
      */
-    function date(string myField, array $formats = ["ymd"], Nullable!string myMessage = null, $when = null) {
+    function date(string myField, string[] $formats = ["ymd"], Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "date", $extra + [

@@ -971,10 +971,10 @@ class RouteBuilder
      * Apply a set of middleware to a group
      *
      * @param string myName Name of the middleware group
-     * @param array<string> $middlewareNames Names of the middleware
+     * @param $middlewareNames Names of the middleware
      * @return this
      */
-    function middlewareGroup(string myName, array $middlewareNames) {
+    function middlewareGroup(string myName, string[] $middlewareNames) {
         this._collection.middlewareGroup(myName, $middlewareNames);
 
         return this;

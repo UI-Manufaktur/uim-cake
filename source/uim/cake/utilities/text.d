@@ -71,14 +71,14 @@ class Text {
      * @param string $separator The token to split the data on.
      * @param string $leftBound The left boundary to ignore separators in.
      * @param string $rightBound The right boundary to ignore separators in.
-     * @return array<string> Array of tokens in myData.
+     * @return Array of tokens in myData.
      */
-    static function tokenize(
+    static string[] tokenize(
         string myData,
         string $separator = ",",
         string $leftBound = "(",
         string $rightBound = ")"
-    ): array {
+    ) {
         if (empty(myData)) {
             return [];
         }
@@ -883,13 +883,13 @@ class Text {
     /**
      * Creates a comma separated list where the last two items are joined with "and", forming natural language.
      *
-     * @param array<string> $list The list to be joined.
+     * @param $list The list to be joined.
      * @param string|null $and The word used to join the last and second last items together with. Defaults to "and".
      * @param string $separator The separator used to join all the other items together. Defaults to ", ".
      * @return string The glued together string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
-    static string toList(array $list, Nullable!string $and = null, string $separator = ", ")
+    static string toList(string[] $list, Nullable!string $and = null, string $separator = ", ")
     {
         if ($and == null) {
             $and = __d("cake", "and");

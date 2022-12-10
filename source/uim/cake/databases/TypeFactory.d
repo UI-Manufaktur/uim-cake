@@ -110,11 +110,11 @@ class TypeFactory
     /**
      * Set type to classname mapping.
      *
-     * @param array<string> $map List of types to be mapped.
+     * @param $map List of types to be mapped.
      * @return void
      * @psalm-param array<string, class-string<\Cake\Database\TypeInterface>> $map
      */
-    static auto setMap(array $map): void
+    static auto setMap(string[] $map): void
     {
         static::$_types = $map;
         static::$_builtTypes = [];

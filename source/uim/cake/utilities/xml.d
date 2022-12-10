@@ -428,10 +428,10 @@ class Xml {
      * @param \SimpleXMLElement $xml SimpleXMLElement object
      * @param array $parentData Parent array with data
      * @param string $ns module of current child
-     * @param array<string> $modules List of modules in XML
+     * @param $modules List of modules in XML
      * @return void
      */
-    protected static auto _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, array $modules): void
+    protected static auto _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, string[] $modules): void
     {
         myData = [];
 
