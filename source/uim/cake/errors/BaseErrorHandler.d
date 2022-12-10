@@ -50,7 +50,6 @@ abstract class BaseErrorHandler
      *
      * @param array myError An array of error data.
      * @param bool $debug Whether the app is in debug mode.
-     * @return void
      */
     abstract protected void _displayError(array myError, bool $debug);
 
@@ -61,7 +60,6 @@ abstract class BaseErrorHandler
      * desired for the runtime they operate in.
      *
      * @param \Throwable myException The uncaught exception.
-     * @return void
      */
     abstract protected void _displayException(Throwable myException);
 
@@ -174,7 +172,6 @@ abstract class BaseErrorHandler
      * for backwards compatibility purposes.
      *
      * @param \Throwable myException The exception to handle
-     * @return void
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
     void wrapAndHandleException(Throwable myException) {

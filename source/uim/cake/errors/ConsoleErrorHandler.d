@@ -38,11 +38,10 @@ class ConsoleErrorHandler : BaseErrorHandler
      * and logs messages if Configure::read("debug") is false.
      *
      * @param \Throwable myException Exception instance.
-     * @return void
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    function handleException(Throwable myException): void
+    void handleException(Throwable myException)
     {
         this._displayException(myException);
         this.logException(myException);
@@ -58,9 +57,8 @@ class ConsoleErrorHandler : BaseErrorHandler
      * Prints an exception to stderr.
      *
      * @param \Throwable myException The exception to handle
-     * @return void
      */
-    protected auto _displayException(Throwable myException): void
+    protected void _displayException(Throwable myException)
     {
         myErrorName = "Exception:";
         if (myException instanceof FatalErrorException) {
@@ -84,9 +82,8 @@ class ConsoleErrorHandler : BaseErrorHandler
      *
      * @param array myError An array of error data.
      * @param bool $debug Whether the app is in debug mode.
-     * @return void
      */
-    protected auto _displayError(array myError, bool $debug): void
+    protected void _displayError(array myError, bool $debug)
     {
         myMessage = sprintf(
             "%s\nIn [%s, line %s]",
@@ -105,11 +102,9 @@ class ConsoleErrorHandler : BaseErrorHandler
     /**
      * Stop the execution and set the exit code for the process.
      *
-     * @param int $code The exit code.
-     * @return void
+     * @param int stopCode The exit code.
      */
-    protected auto _stop(int $code): void
-    {
-        exit($code);
+    protected void _stop(int exitCode) {
+        exit(exitCode);
     }
 }

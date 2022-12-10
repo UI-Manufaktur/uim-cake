@@ -50,9 +50,8 @@ trait ModelAwareTrait
      * If the property is already set it will not be overwritten
      *
      * @param string myName Class name.
-     * @return void
      */
-    protected auto _setModelClass(string myName): void
+    protected void _setModelClass(string myName)
     {
         if (this.modelClass == null) {
             this.modelClass = myName;
@@ -122,9 +121,8 @@ trait ModelAwareTrait
      *
      * @param string myType The name of the repository type the factory function is for.
      * @param \Cake\Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
-     * @return void
      */
-    function modelFactory(string myType, $factory): void
+    void modelFactory(string myType, $factory)
     {
         if (!$factory instanceof ILocator && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(

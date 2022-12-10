@@ -57,7 +57,6 @@ class IdentifierQuoter
      * Quotes identifiers inside expression objects
      *
      * @param \Cake\Database\IExpression $expression The expression object to walk and quote.
-     * @return void
      */
     void quoteExpression(IExpression $expression)
     {
@@ -84,9 +83,8 @@ class IdentifierQuoter
      * Quotes all identifiers in each of the clauses of a query
      *
      * @param \Cake\Database\Query myQuery The query to quote.
-     * @return void
      */
-    protected auto _quoteParts(Query myQuery): void
+    protected void _quoteParts(Query myQuery)
     {
         foreach (["distinct", "select", "from", "group"] as $part) {
             myContentss = myQuery.clause($part);
@@ -157,9 +155,8 @@ class IdentifierQuoter
      * Quotes the table name and columns for an insert query
      *
      * @param \Cake\Database\Query myQuery The insert query to quote.
-     * @return void
      */
-    protected auto _quoteInsert(Query myQuery): void
+    protected auto _quoteInsert(Query myQuery)
     {
         $insert = myQuery.clause("insert");
         if (!isset($insert[0]) || !isset($insert[1])) {
@@ -179,9 +176,8 @@ class IdentifierQuoter
      * Quotes the table name for an update query
      *
      * @param \Cake\Database\Query myQuery The update query to quote.
-     * @return void
      */
-    protected auto _quoteUpdate(Query myQuery): void
+    protected void _quoteUpdate(Query myQuery)
     {
         myTable = myQuery.clause("update")[0];
 
@@ -194,9 +190,8 @@ class IdentifierQuoter
      * Quotes identifiers in expression objects implementing the field interface
      *
      * @param \Cake\Database\Expression\FieldInterface $expression The expression to quote.
-     * @return void
      */
-    protected auto _quoteComparison(FieldInterface $expression): void
+    protected void _quoteComparison(FieldInterface $expression)
     {
         myField = $expression.getField();
         if (is_string(myField)) {
@@ -219,9 +214,8 @@ class IdentifierQuoter
      * and will not have identifiers quoted.
      *
      * @param \Cake\Database\Expression\OrderByExpression $expression The expression to quote.
-     * @return void
      */
-    protected auto _quoteOrderBy(OrderByExpression $expression): void
+    protected void _quoteOrderBy(OrderByExpression $expression)
     {
         $expression.iterateParts(function ($part, &myField) {
             if (is_string(myField)) {
@@ -241,9 +235,8 @@ class IdentifierQuoter
      * Quotes identifiers in "order by" expression objects
      *
      * @param \Cake\Database\Expression\IdentifierExpression $expression The identifiers to quote.
-     * @return void
      */
-    protected auto _quoteIdentifierExpression(IdentifierExpression $expression): void
+    protected void _quoteIdentifierExpression(IdentifierExpression $expression)
     {
         $expression.setIdentifier(
             this._driver.quoteIdentifier($expression.getIdentifier())

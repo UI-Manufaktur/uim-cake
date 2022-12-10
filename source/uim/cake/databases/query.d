@@ -1988,9 +1988,8 @@ class Query : IExpression, IteratorAggregate
      *   array of expressions.
      * @param \Closure $callback The callback to be executed for each IExpression
      *   found inside this query.
-     * @return void
      */
-    protected auto _expressionsVisitor($expression, Closure $callback): void
+    protected void _expressionsVisitor($expression, Closure $callback)
     {
         if (is_array($expression)) {
             foreach ($expression as $e) {
@@ -2216,9 +2215,8 @@ class Query : IExpression, IteratorAggregate
      *   to append.
      * @param string $conjunction type of conjunction to be used to operate part
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
-     * @return void
      */
-    protected auto _conjugate(string $part, $append, $conjunction, array myTypes): void
+    protected void _conjugate(string $part, $append, $conjunction, array myTypes)
     {
         $expression = this._parts[$part] ?: this.newExpr();
         if (empty($append)) {
@@ -2246,10 +2244,8 @@ class Query : IExpression, IteratorAggregate
     /**
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching.
-     *
-     * @return void
      */
-    protected auto _dirty(): void
+    protected void _dirty()
     {
         this._dirty = true;
 
@@ -2258,12 +2254,8 @@ class Query : IExpression, IteratorAggregate
         }
     }
 
-    /**
-     * Handles clearing iterator and cloning all expressions and value binders.
-     *
-     * @return void
-     */
-    auto __clone() {
+    // Handles clearing iterator and cloning all expressions and value binders.
+    void __clone() {
         this._iterator = null;
         if (this._valueBinder !== null) {
             this._valueBinder = clone this._valueBinder;

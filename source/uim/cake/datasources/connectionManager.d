@@ -67,11 +67,10 @@ class ConnectionManager
      *
      * @param array<string, mixed>|string myKey The name of the connection config, or an array of multiple configs.
      * @param array<string, mixed>|null myConfig An array of name: config data for adapter.
-     * @return void
      * @throws \Cake\Core\Exception\CakeException When trying to modify an existing config.
      * @see \Cake\Core\StaticConfigTrait::config()
      */
-    static auto setConfig(myKey, myConfig = null): void
+    static void setConfig(myKey, myConfig = null)
     {
         if (is_array(myConfig)) {
             myConfig["name"] = myKey;
@@ -145,9 +144,8 @@ class ConnectionManager
      *
      * @param string $source The existing connection to alias.
      * @param string myAlias The alias name that resolves to `$source`.
-     * @return void
      */
-    static function alias(string $source, string myAlias): void
+    static void alias(string $source, string myAlias)
     {
         static::$_aliasMap[myAlias] = $source;
     }
@@ -159,9 +157,8 @@ class ConnectionManager
      * connection may fail if there is no other connection with that name.
      *
      * @param string myAlias The connection alias to drop
-     * @return void
      */
-    static function dropAlias(string myAlias): void
+    static void dropAlias(string myAlias)
     {
         unset(static::$_aliasMap[myAlias]);
     }

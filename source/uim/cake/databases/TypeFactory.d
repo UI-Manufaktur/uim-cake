@@ -85,9 +85,8 @@ class TypeFactory
      *
      * @param string myName The type identifier you want to set.
      * @param \Cake\Database\TypeInterface $instance The type instance you want to set.
-     * @return void
      */
-    static auto set(string myName, TypeInterface $instance): void
+    static void set(string myName, TypeInterface $instance)
     {
         static::$_builtTypes[myName] = $instance;
         static::$_types[myName] = get_class($instance);
@@ -98,10 +97,9 @@ class TypeFactory
      *
      * @param string myType Name of type to map.
      * @param string myClassName The classname to register.
-     * @return void
      * @psalm-param class-string<\Cake\Database\TypeInterface> myClassName
      */
-    static function map(string myType, string myClassName): void
+    static void map(string myType, string myClassName)
     {
         static::$_types[myType] = myClassName;
         unset(static::$_builtTypes[myType]);
@@ -111,10 +109,9 @@ class TypeFactory
      * Set type to classname mapping.
      *
      * @param $map List of types to be mapped.
-     * @return void
      * @psalm-param array<string, class-string<\Cake\Database\TypeInterface>> $map
      */
-    static auto setMap(string[] $map): void
+    static void setMap(string[] $map)
     {
         static::$_types = $map;
         static::$_builtTypes = [];
@@ -136,10 +133,8 @@ class TypeFactory
 
     /**
      * Clears out all created instances and mapped types classes, useful for testing
-     *
-     * @return void
      */
-    static function clear(): void
+    static void clear()
     {
         static::$_types = [];
         static::$_builtTypes = [];

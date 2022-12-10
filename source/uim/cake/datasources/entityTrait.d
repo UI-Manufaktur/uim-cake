@@ -115,9 +115,8 @@ trait EntityTrait
      *
      * @param string myField The name of the field to set
      * @param mixed myValue The value to set to the field
-     * @return void
      */
-    auto __set(string myField, myValue): void
+    void __set(string myField, myValue)
     {
         this.set(myField, myValue);
     }
@@ -138,9 +137,8 @@ trait EntityTrait
      * Removes a field from this entity
      *
      * @param string myField The field to unset
-     * @return void
      */
-    auto __unset(string myField): void
+    void __unset(string myField)
     {
         this.unset(myField);
     }
@@ -566,10 +564,8 @@ trait EntityTrait
      *
      * @param string $offset The offset to set.
      * @param mixed myValue The value to set.
-     * @return void
      */
-    function offsetSet($offset, myValue): void
-    {
+    void offsetSet($offset, myValue) {
         this.set($offset, myValue);
     }
 
@@ -577,10 +573,8 @@ trait EntityTrait
      * : unset(myResult[$offset]);
      *
      * @param string $offset The offset to remove.
-     * @return void
      */
-    function offsetUnset($offset): void
-    {
+    void offsetUnset($offset) {
         this.unset($offset);
     }
 
@@ -734,10 +728,8 @@ trait EntityTrait
      * Sets the entire entity as clean, which means that it will appear as
      * no fields being modified or added at all. This is an useful call
      * for an initial object hydration
-     *
-     * @return void
      */
-    function clean(): void
+    void clean()
     {
         this._dirty = [];
         this._errors = [];

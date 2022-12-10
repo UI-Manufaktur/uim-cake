@@ -33,10 +33,9 @@ class ConnectionRegistry : ObjectRegistry
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the datasource is missing in.
-     * @return void
      * @throws \Cake\Datasource\Exception\MissingDatasourceException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin)
     {
         throw new MissingDatasourceException([
             "class": myClass,
