@@ -197,7 +197,6 @@ class Shell {
      * acts as constructor for subclasses
      * allows configuration of tasks prior to shell execution
      *
-     * @return void
      * @link https://book.UIM.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::initialize
      */
     void initialize() {
@@ -211,7 +210,6 @@ class Shell {
      * Override this method if you want to remove the welcome information,
      * or otherwise modify the pre-command flow.
      *
-     * @return void
      * @link https://book.UIM.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::startup
      */
     void startup() {
@@ -709,7 +707,6 @@ class Shell {
      *
      * @param int $newlines Number of newlines to pre- and append
      * @param int $width Width of the line, defaults to 63
-     * @return void
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::hr
      */
     void hr(int $newlines = 0, int $width = 63) {
@@ -723,7 +720,7 @@ class Shell {
      * @param string myMessage The error message
      * @param int $exitCode The exit code for the shell task.
      * @throws \Cake\Console\Exception\StopException
-     * @return void
+     * 
      * @link https://book.UIM.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
      */
@@ -735,7 +732,6 @@ class Shell {
     /**
      * Clear the console
      *
-     * @return void
      * @link https://book.UIM.org/4/en/console-and-shells.html#console-output
      */
     void clear() {

@@ -136,10 +136,9 @@ class FlashComponent : Component
      *
      * @param string myName Element name to use.
      * @param array $args Parameters to pass when calling `FlashComponent::set()`.
-     * @return void
      * @throws \Cake\Http\Exception\InternalErrorException If missing the flash message.
      */
-    auto __call(string myName, array $args) {
+    void __call(string myName, array $args) {
         $element = Inflector::underscore(myName);
 
         if (count($args) < 1) {

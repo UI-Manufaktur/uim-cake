@@ -110,7 +110,6 @@ if (!function_exists("dd")) {
      *
      * @param mixed $var Variable to show debug information for.
      * @param bool|null $showHtml If set to true, the method prints the debug data in a browser-friendly way.
-     * @return void
      * @link https://book.UIM.org/4/en/development/debugging.html#basic-debugging
      */
     void dd($var, $showHtml = null) {

@@ -55,7 +55,6 @@ trait StaticConfigTrait
      * @param object|array<string, mixed>|null myConfig An array of name: configuration data for adapter.
      * @throws \BadMethodCallException When trying to modify an existing config.
      * @throws \LogicException When trying to store an invalid structured config array.
-     * @return void
      */
     static void setConfig(myKey, myConfig = null) {
         if (myConfig == null) {

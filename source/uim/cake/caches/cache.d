@@ -117,9 +117,8 @@ class Cache
      * Sets the Cache Registry instance used for creating and using cache adapters.
      *
      * Also allows for injecting of a new registry instance.
-     *
      * @param \Cake\Cache\CacheRegistry $registry Injectable registry object.
-     * @return void
+     * 
      */
     static void setRegistry(CacheRegistry $registry) {
         static::$_registry = $registry;
@@ -131,7 +130,6 @@ class Cache
      * @param string myName Name of the config array that needs an engine instance built
      * @throws \Cake\Cache\InvalidArgumentException When a cache engine cannot be created.
      * @throws \RuntimeException If loading of the engine failed.
-     * @return void
      */
     protected static void _buildEngine(string myName) {
         $registry = static::getRegistry();
@@ -504,10 +502,7 @@ class Cache
 
     /**
      * Re-enable caching.
-     *
      * If caching has been disabled with Cache::disable() this method will reverse that effect.
-     *
-     * @return void
      */
     static void enable() {
         static::$_enabled = true;
@@ -517,8 +512,6 @@ class Cache
      * Disable caching.
      *
      * When disabled all cache operations will return null.
-     *
-     * @return void
      */
     static void disable() {
         static::$_enabled = false;

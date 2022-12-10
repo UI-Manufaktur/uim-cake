@@ -248,10 +248,8 @@ class PaginatorComponent : Component
 
     /**
      * Set paging params to request instance.
-     *
-     * @return void
      */
-    protected auto _setPagingParams(): void
+    protected void _setPagingParams()
     {
         $controller = this.getController();
         myRequest = $controller.getRequest();

@@ -299,7 +299,6 @@ class ConsoleOutput
      * Set the output type on how formatting tags are treated.
      *
      * @param int myType The output type to use. Should be one of the class constants.
-     * @return void
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
     void setOutputAs(int myType) {

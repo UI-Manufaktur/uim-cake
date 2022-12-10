@@ -105,7 +105,6 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * property so that services can be located.
      *
      * @param \Cake\Core\IContainer myContainer The container to add services to.
-     * @return void
      */
     abstract void services(IContainer myContainer);
 }

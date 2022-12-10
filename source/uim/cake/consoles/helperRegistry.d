@@ -58,7 +58,6 @@ class HelperRegistry : ObjectRegistry
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the helper is missing in.
-     * @return void
      * @throws \Cake\Console\Exception\MissingHelperException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {

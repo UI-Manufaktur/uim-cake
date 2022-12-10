@@ -200,7 +200,6 @@ trait InstanceConfigTrait
      * @param mixed myValue Value to write.
      * @param string|bool myMerge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
-     * @return void
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
     protected void _configWrite(myKey, myValue, myMerge = false) {
@@ -255,7 +254,6 @@ trait InstanceConfigTrait
      * Deletes a single config key.
      *
      * @param string myKey Key to delete.
-     * @return void
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
     protected void _configDelete(string myKey) {

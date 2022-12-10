@@ -181,7 +181,6 @@ class MemcachedEngine : CacheEngine
     /**
      * Settings the memcached instance
      *
-     * @return void
      * @throws \InvalidArgumentException When the Memcached extension is not built
      *   with the desired serializer engine.
      */

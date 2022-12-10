@@ -74,7 +74,6 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Ensure the validity of the given cache key.
      *
      * @param string myKey Key to check.
-     * @return void
      * @throws \Cake\Cache\InvalidArgumentException When the key is not valid.
      */
     protected void ensureValidKey(myKey) {
@@ -88,7 +87,6 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @param iterable $iterable The iterable to check.
      * @param string $check Whether to check keys or values.
-     * @return void
      * @throws \Cake\Cache\InvalidArgumentException
      */
     protected void ensureValidType($iterable, string $check = self::CHECK_VALUE) {

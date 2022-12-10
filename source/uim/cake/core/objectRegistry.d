@@ -109,7 +109,6 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @param string myName The name of the alias in the registry.
      * @param array<string, mixed> myConfig The config data for the new instance.
-     * @return void
      * @throws \RuntimeException When a duplicate is found.
      */
     protected void _checkDuplicate(string myName, array myConfig) {
@@ -160,7 +159,6 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @param string myClass The class that is missing.
      * @param string|null myPlugin The plugin myClass is missing from.
-     * @return void
      * @throws \Exception
      */
     abstract protected void _throwMissingClassError(string myClass, Nullable!string myPlugin);
@@ -241,9 +239,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string myName Name of a property to set.
      * @param object $object Object to set.
      * @psalm-param TObject $object
-     * @return void
      */
-    auto __set(string myName, $object) {
+    void __set(string myName, $object) {
         this.set(myName, $object);
     }
 

@@ -145,7 +145,6 @@ class MapReduce : IteratorAggregate {
      * and call the mapper function for each , then for each intermediate
      * bucket created during the Map phase call the reduce function.
      *
-     * @return void
      * @throws \LogicException if emitIntermediate was called but no reducer function
      * was provided
      */

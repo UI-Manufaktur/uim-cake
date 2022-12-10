@@ -28,12 +28,10 @@ class CacheRegistry : ObjectRegistry
 
     /**
      * Throws an exception when a cache engine is missing.
-     *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the cache is missing in.
-     * @return void
      * @throws \BadMethodCallException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {

@@ -183,7 +183,6 @@ class RequestHandlerComponent : Component
      *   set that Content-type in the response header.
      *
      * @param \Cake\Event\IEvent myEvent The Controller.beforeRender event.
-     * @return void
      * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
      */
     void beforeRender(IEvent myEvent) {
@@ -381,7 +380,6 @@ class RequestHandlerComponent : Component
      * @param \Cake\Controller\Controller $controller A reference to a controller object
      * @param string myType Type of response to send (e.g: "ajax")
      * @param array<string, mixed> myOptions Array of options to use
-     * @return void
      * @see \Cake\Controller\Component\RequestHandlerComponent::respondAs()
      */
     void renderAs(Controller $controller, string myType, array myOptions = []) {

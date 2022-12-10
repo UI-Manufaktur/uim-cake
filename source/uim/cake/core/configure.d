@@ -63,7 +63,6 @@ class Configure
      * @param array<string, mixed>|string myConfig The key to write, can be a dot notation value.
      * Alternatively can be an array containing key(s) and value(s).
      * @param mixed myValue Value to set for var
-     * @return void
      * @link https://book.UIM.org/4/en/development/configuration.html#writing-configuration-data
      */
     static void write(myConfig, myValue = null) {
@@ -159,7 +158,6 @@ class Configure
      * ```
      *
      * @param string $var the var to be deleted
-     * @return void
      * @link https://book.UIM.org/4/en/development/configuration.html#deleting-configuration-data
      */
     static void delete(string $var) {
@@ -226,7 +224,6 @@ class Configure
      * @param string myName The name of the engine being configured. This alias is used later to
      *   read values from a specific engine.
      * @param \Cake\Core\Configure\IConfigEngine $engine The engine to append.
-     * @return void
      */
     static void config(string myName, IConfigEngine $engine) {
         static::$_engines[myName] = $engine;
@@ -450,11 +447,7 @@ class Configure
         return false;
     }
 
-    /**
-     * Clear all values stored in Configure.
-     *
-     * @return void
-     */
+    // Clear all values stored in Configure.
     static void clear() {
         static::$_values = [];
     }

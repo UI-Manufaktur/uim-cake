@@ -47,7 +47,6 @@ class ServerCommand : Command {
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
-     * @return void
      * @link https://book.UIM.org/4/en/console-and-shells.html#hook-methods
      */
     protected void startup(Arguments $args, ConsoleIo $io) {

@@ -560,7 +560,6 @@ class AuthComponent : Component : IEventDispatcher
      * ```
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
-     * @return void
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-public
      */
     void allow($actions = null) {
@@ -589,7 +588,6 @@ class AuthComponent : Component : IEventDispatcher
      * to remove all items from the allowed list
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
-     * @return void
      * @see \Cake\Controller\Component\AuthComponent::allow()
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
@@ -615,7 +613,6 @@ class AuthComponent : Component : IEventDispatcher
      * instance to AuthComponent::storage().
      *
      * @param \ArrayAccess|array myUser User data.
-     * @return void
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#identifying-users-and-logging-them-in
      */
     void setUser(myUser) {

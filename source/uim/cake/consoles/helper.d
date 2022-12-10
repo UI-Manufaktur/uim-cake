@@ -42,7 +42,6 @@ abstract class Helper
      * This method should output content using `this._io`.
      *
      * @param array $args The arguments for the helper.
-     * @return void
      */
     abstract void output(array $args);
 }

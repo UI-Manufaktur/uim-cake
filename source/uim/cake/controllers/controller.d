@@ -499,7 +499,6 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param \Closure $action The action closure.
      * @param array $args The arguments to be passed when invoking action.
-     * @return void
      * @throws \UnexpectedValueException If return value of action is not `null` or `IResponse` instance.
      */
     void invokeAction(Closure $action, array $args) {
@@ -526,10 +525,9 @@ class Controller : IEventListener, IEventDispatcher
      * @param array<string, mixed> myOptions Valid options:
      *  - `only`: (array|string) Only run the middleware for specified actions.
      *  - `except`: (array|string) Run the middleware for all actions except the specified ones.
-     * @return void
      * @psalm-param array{only?: array|string, except?: array|string} myOptions
      */
-    function middleware($middleware, array myOptions = []) {
+    void middleware($middleware, array myOptions = []) {
         this.middlewares[] = [
             "middleware":$middleware,
             "options":myOptions,

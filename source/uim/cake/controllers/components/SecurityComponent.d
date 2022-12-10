@@ -176,7 +176,6 @@ class SecurityComponent : Component
      * Check if access requires secure connection
      *
      * @param \Cake\Controller\Controller $controller Instantiating controller
-     * @return void
      * @throws \Cake\Controller\Exception\SecurityException
      */
     protected void _secureRequired(Controller $controller) {
@@ -204,7 +203,6 @@ class SecurityComponent : Component
      * Validate submitted form
      *
      * @param \Cake\Controller\Controller $controller Instantiating controller
-     * @return void
      * @throws \Cake\Controller\Exception\AuthSecurityException
      */
     protected void _validatePost(Controller $controller) {

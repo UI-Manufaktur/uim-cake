@@ -91,9 +91,8 @@ class ShellDispatcher
     /**
      * Clear any aliases that have been set.
      *
-     * @return void
      */
-    static function resetAliases() {
+    static void resetAliases() {
         static::$_aliases = [];
     }
 
@@ -113,7 +112,6 @@ class ShellDispatcher
     /**
      * Defines current working environment.
      *
-     * @return void
      * @throws \Cake\Core\Exception\CakeException
      */
     protected void _initEnvironment() {
@@ -128,12 +126,8 @@ class ShellDispatcher
         this.shiftArgs();
     }
 
-    /**
-     * Initializes the environment and loads the UIM core.
-     *
-     * @return void
-     */
-    protected auto _bootstrap() {
+    // Initializes the environment and loads the UIM core.
+    protected void _bootstrap() {
         if (!Configure::read("App.fullBaseUrl")) {
             Configure.write("App.fullBaseUrl", "http://localhost");
         }

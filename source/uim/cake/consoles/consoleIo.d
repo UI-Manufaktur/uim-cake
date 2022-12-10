@@ -266,7 +266,6 @@ class ConsoleIo {
      *
      * @param string myMessage Error message.
      * @param int $code Error code.
-     * @return void
      * @throws \Cake\Console\Exception\StopException
      */
     void abort(myMessage, $code = ICommand::CODE_ERROR) {
@@ -380,7 +379,6 @@ class ConsoleIo {
      * Change the output mode of the stdout stream
      *
      * @param int myMode The output mode.
-     * @return void
      * @see \Cake\Console\ConsoleOutput::setOutputAs()
      */
     void setOutputAs(int myMode) {
@@ -415,7 +413,6 @@ class ConsoleIo {
      *
      * @param string $style The style to set.
      * @param array $definition The array definition of the style to change or create.
-     * @return void
      * @see \Cake\Console\ConsoleOutput::setStyle()
      */
     void setStyle(string $style, array $definition) {

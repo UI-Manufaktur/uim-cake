@@ -59,7 +59,7 @@ class IdentifierQuoter
      * @param \Cake\Database\IExpression $expression The expression object to walk and quote.
      * @return void
      */
-    function quoteExpression(IExpression $expression): void
+    void quoteExpression(IExpression $expression)
     {
         if ($expression instanceof FieldInterface) {
             this._quoteComparison($expression);
