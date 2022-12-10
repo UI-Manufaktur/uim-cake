@@ -186,10 +186,9 @@ class RouteCollection
      * and newer style urls containing "_name"
      *
      * @param array myUrl The url to match.
-     * @return array<string> The set of names of the url
+     * @return The set of names of the url
      */
-    protected auto _getNames(array myUrl): array
-    {
+    protected string[] _getNames(array myUrl) {
         myPlugin = false;
         if (isset(myUrl["plugin"]) && myUrl["plugin"] !== false) {
             myPlugin = strtolower(myUrl["plugin"]);

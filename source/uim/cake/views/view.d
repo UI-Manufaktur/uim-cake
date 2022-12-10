@@ -678,11 +678,9 @@ class View : IEventDispatcher {
 
     /**
      * Returns a list of variables available in the current View context
-     *
-     * @return array<string> Array of the set view variable names.
+     * @return Array of the set view variable names.
      */
-    auto getVars(): array
-    {
+    string[] getVars() {
         return array_keys(this.viewVars);
     }
 
@@ -1354,10 +1352,9 @@ class View : IEventDispatcher {
      * and layouts.
      *
      * @param string $basePath Base path on which to get the prefixed one.
-     * @return array<string> Array with all the templates paths.
+     * @return Array with all the templates paths.
      */
-    protected auto _getSubPaths(string $basePath): array
-    {
+    protected string[] _getSubPaths(string $basePath) {
         myPaths = [$basePath];
         if (this.request.getParam("prefix")) {
             $prefixPath = explode("/", this.request.getParam("prefix"));

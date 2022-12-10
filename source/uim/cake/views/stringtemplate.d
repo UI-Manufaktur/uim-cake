@@ -310,9 +310,8 @@ class StringTemplate {
      * @param array|string $input The array or string to add the class to
      * @param array<string>|string $newClass the new class or classes to add
      * @param string $useIndex if you are inputting an array with an element other than default of "class".
-     * @return array<string>|string
      */
-    function addClass($input, $newClass, string $useIndex = "class") {
+    string[] addClass($input, $newClass, string $useIndex = "class") {
         // NOOP
         if (empty($newClass)) {
             return $input;
