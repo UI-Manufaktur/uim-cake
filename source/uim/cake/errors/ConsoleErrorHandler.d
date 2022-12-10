@@ -9,14 +9,9 @@ use Throwable;
  * Error Handler for Cake console. Does simple printing of the
  * exception that occurred and the stack trace of the error.
  */
-class ConsoleErrorHandler : BaseErrorHandler
-{
-    /**
-     * Standard error stream.
-     *
-     * @var \Cake\Console\ConsoleOutput
-     */
-    protected $_stderr;
+class ConsoleErrorHandler : BaseErrorHandler {
+    // Standard error stream.
+    protected ConsoleOutput $_stderr;
 
     /**
      * Constructor
@@ -41,8 +36,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    void handleException(Throwable myException)
-    {
+    void handleException(Throwable myException) {
         this._displayException(myException);
         this.logException(myException);
 
@@ -58,8 +52,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      *
      * @param \Throwable myException The exception to handle
      */
-    protected void _displayException(Throwable myException)
-    {
+    protected void _displayException(Throwable myException) {
         myErrorName = "Exception:";
         if (myException instanceof FatalErrorException) {
             myErrorName = "Fatal Error:";
@@ -83,8 +76,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      * @param array myError An array of error data.
      * @param bool $debug Whether the app is in debug mode.
      */
-    protected void _displayError(array myError, bool $debug)
-    {
+    protected void _displayError(array myError, bool $debug) {
         myMessage = sprintf(
             "%s\nIn [%s, line %s]",
             myError["description"],
