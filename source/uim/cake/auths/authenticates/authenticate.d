@@ -35,12 +35,8 @@ abstract class DAuthenticate : IEventListener {
         "passwordHasher":"Default",
     ];
 
-    /**
-     * A Component registry, used to get more components.
-     *
-     * @var \Cake\Controller\ComponentRegistry
-     */
-    protected $_registry;
+    // A Component registry, used to get more components.
+    protected ComponentRegistry $_registry;
 
     /**
      * Password hasher instance.

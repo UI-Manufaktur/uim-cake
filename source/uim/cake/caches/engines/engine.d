@@ -300,7 +300,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Whitespace in keys will be replaced.
      *
      * @param string myKey the key passed over
-     * @return string Prefixed key with potentially unsafe characters replaced.
+     * @return  Prefixed key with potentially unsafe characters replaced.
      * @throws \Cake\Cache\InvalidArgumentException If key"s value is invalid.
      */
     protected string _key(myKey) {

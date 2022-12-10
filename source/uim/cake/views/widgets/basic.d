@@ -10,14 +10,9 @@ import uim.cake;
  * input elements like hidden, text, email, tel and other
  * types.
  */
-class BasicWidget : IWidget
-{
-    /**
-     * StringTemplate instance.
-     *
-     * @var \Cake\View\StringTemplate
-     */
-    protected $_templates;
+class BasicWidget : IWidget {
+    // StringTemplate instance.
+    protected StringTemplate $_templates;
 
     /**
      * Data defaults.
@@ -56,8 +51,7 @@ class BasicWidget : IWidget
      * @param \Cake\View\Form\IContext $context The current form context.
      * @return string
      */
-    function render(array myData, IContext $context): string
-    {
+    string render(array myData, IContext $context) {
         myData = this.mergeDefaults(myData, $context);
 
         myData["value"] = myData["val"];

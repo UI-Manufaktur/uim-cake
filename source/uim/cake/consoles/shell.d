@@ -585,7 +585,7 @@ class Shell {
      *
      * @param string $text Text the text to format.
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
-     * @return string Wrapped / indented text
+     * @return Wrapped / indented text
      * @see \Cake\Utility\Text::wrap()
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::wrapText
      */
@@ -807,7 +807,7 @@ class Shell {
      * Makes absolute file path easier to read
      *
      * @param string myfile Absolute file path
-     * @return string short path
+     * @return short path
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::shortPath
      */
     string shortPath(string absoluteFilePath) {

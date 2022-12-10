@@ -9,31 +9,24 @@ use SimpleXMLElement;
  *
  * @see \Cake\Console\ConsoleOptionParser::addArgument()
  */
-class ConsoleInputArgument
-{
-    /**
-     * Name of the argument.
-     */
-    protected string $_name;
+class ConsoleInputArgument {
+    // Name of the argument.
+    protected string _name;
+    // Get the value of the name attribute.
+    @property string name() {
+        return _name;
+    }
 
     /**
      * Help string
      */
     protected string $_help;
 
-    /**
-     * Is this option required?
-     *
-     * @var bool
-     */
-    protected $_required;
+    // Is this option required?
+    protected bool $_required;
 
-    /**
-     * An array of valid choices for this argument.
-     *
-     * @var array<string>
-     */
-    protected $_choices;
+    // An array of valid choices for this argument.
+    protected string[] $_choices;
 
     /**
      * Make a new Input Argument
@@ -50,21 +43,13 @@ class ConsoleInputArgument
             }
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-            this._name = myName;
+            _name = myName;
             this._help = $help;
             this._required = $required;
             this._choices = $choices;
         }
     }
 
-    /**
-     * Get the value of the name attribute.
-     *
-     * @return string Value of this._name.
-     */
-    string name() {
-        return this._name;
-    }
 
     /**
      * Checks if this argument is equal to another argument.
@@ -81,7 +66,7 @@ class ConsoleInputArgument
      * @param int $width The width to make the name of the option.
      */
     string help(int $width = 0) {
-        myName = this._name;
+        string myName = this.name;
         if (strlen(myName) < $width) {
             myName = str_pad(myName, $width, " ");
         }
@@ -96,11 +81,9 @@ class ConsoleInputArgument
         return sprintf("%s%s%s", myName, this._help, $optional);
     }
 
-    /**
-     * Get the usage value for this argument
-     */
+    // Get the usage value for this argument
     string usage() {
-        myName = this._name;
+        string myName = name;
         if (this._choices) {
             myName = implode("|", this._choices);
         }
@@ -134,7 +117,7 @@ class ConsoleInputArgument
                 sprintf(
                     ""%s" is not a valid value for %s. Please use one of "%s"",
                     myValue,
-                    this._name,
+                    name,
                     implode(", ", this._choices)
                 )
             );
@@ -152,7 +135,7 @@ class ConsoleInputArgument
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent.addChild("argument");
-        $option.addAttribute("name", this._name);
+        $option.addAttribute("name", name);
         $option.addAttribute("help", this._help);
         $option.addAttribute("required", (string)(int)this.isRequired());
         $choices = $option.addChild("choices");

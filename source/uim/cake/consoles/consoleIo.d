@@ -369,7 +369,7 @@ class ConsoleIo {
      *
      * @param string $prompt Prompt text.
      * @param string|null $default Default input value.
-     * @return string Either the default value, or the user-provided input.
+     * @return Either the default value, or the user-provided input.
      */
     string ask(string $prompt, Nullable!string $default = null) {
         return this._getInput($prompt, null, $default);
@@ -425,7 +425,7 @@ class ConsoleIo {
      * @param string $prompt Prompt text.
      * @param array<string>|string myOptions Array or string of options.
      * @param string|null $default Default input value.
-     * @return string Either the default value, or the user-provided input.
+     * @return Either the default value, or the user-provided input.
      */
     string askChoice(string $prompt, myOptions, Nullable!string $default = null) {
         if (is_string(myOptions)) {
@@ -458,7 +458,7 @@ class ConsoleIo {
      * @param string $prompt Prompt text.
      * @param string|null myOptions String of options. Pass null to omit.
      * @param string|null $default Default input value. Pass null to omit.
-     * @return string Either the default value, or the user-provided input.
+     * @return Either the default value, or the user-provided input.
      */
     protected string _getInput(string $prompt, Nullable!string myOptions, Nullable!string $default) {
         if (!this.interactive) {

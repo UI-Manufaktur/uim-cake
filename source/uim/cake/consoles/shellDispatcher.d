@@ -308,7 +308,7 @@ class ShellDispatcher
      * If the input matches an alias, return the aliased shell name
      *
      * @param string myShell Optionally the name of a plugin or alias
-     * @return string Shell name with plugin prefix
+     * @return Shell name with plugin prefix
      */
     protected string _handleAlias(string myShell) {
         myAliased = static::alias(myShell);

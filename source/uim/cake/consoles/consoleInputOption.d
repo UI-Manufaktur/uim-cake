@@ -14,17 +14,17 @@ class ConsoleInputOption
     /**
      * Name of the option
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * Short (1 character) alias for the option.
      */
-    protected string $_short;
+    protected string _short;
 
     /**
      * Help text for the option.
      */
-    protected string $_help;
+    protected string _help;
 
     /**
      * Is the option a boolean option. Boolean options do not consume a parameter.
@@ -84,7 +84,7 @@ class ConsoleInputOption
         bool $multiple = false,
         bool $required = false
     ) {
-        this._name = myName;
+        _name = myName;
         this._short = $short;
         this._help = $help;
         this._boolean = $isBoolean;
@@ -105,20 +105,12 @@ class ConsoleInputOption
         }
     }
 
-    /**
-     * Get the value of the name attribute.
-     *
-     * @return string Value of this._name.
-     */
+    // Get the value of the name attribute.
     string name() {
-        return this._name;
+        return _name;
     }
 
-    /**
-     * Get the value of the short attribute.
-     *
-     * @return string Value of this._short.
-     */
+    /7 Get the value of the short attribute.
     string short() {
         return this._short;
     }
@@ -139,7 +131,7 @@ class ConsoleInputOption
         if (this._short !== "") {
             $short = ", -" . this._short;
         }
-        myName = sprintf("--%s%s", this._name, $short);
+        myName = sprintf("--%s%s", name, $short);
         if (strlen(myName) < $width) {
             myName = str_pad(myName, $width, " ");
         }
@@ -155,7 +147,7 @@ class ConsoleInputOption
      * Get the usage value for this option
      */
     string usage() {
-        myName = this._short == "" ? "--" . this._name : "-" . this._short;
+        myName = this._short == "" ? "--" . name : "-" . this._short;
         $default = "";
         if (this._default !== null && !is_bool(this._default) && this._default !== "") {
             $default = " " . this._default;
@@ -202,7 +194,6 @@ class ConsoleInputOption
      * Check that a value is a valid choice for this option.
      *
      * @param string|bool myValue The choice to validate.
-     * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
     bool validChoice(myValue) {
@@ -214,7 +205,7 @@ class ConsoleInputOption
                 sprintf(
                     ""%s" is not a valid value for --%s. Please use one of "%s"",
                     (string)myValue,
-                    this._name,
+                    name,
                     implode(", ", this._choices)
                 )
             );
@@ -232,7 +223,7 @@ class ConsoleInputOption
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent.addChild("option");
-        $option.addAttribute("name", "--" . this._name);
+        $option.addAttribute("name", "--" . name);
         $short = "";
         if (this._short !== "") {
             $short = "-" . this._short;

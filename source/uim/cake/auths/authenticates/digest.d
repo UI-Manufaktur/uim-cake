@@ -177,7 +177,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param array<string, mixed> $digest Digest information containing data from DigestAuthenticate::parseAuthData().
      * @param string myPassword The digest hash password generated with DigestAuthenticate::password()
      * @param string $method Request method
-     * @return string Response hash
+     * @return  Response hash
      */
     string generateResponseHash(array $digest, string myPassword, string $method) {
         return md5(
@@ -193,7 +193,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string myUsername The username to use in the digest hash.
      * @param string myPassword The unhashed password to make a digest hash for.
      * @param string $realm The realm the password is for.
-     * @return string the hashed password that can later be used with Digest authentication.
+     * @return the hashed password that can later be used with Digest authentication.
      */
     static string password(string myUsername, string myPassword, string $realm) {
         return md5(myUsername . ":" . $realm . ":" . myPassword);

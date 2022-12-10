@@ -27,20 +27,20 @@ use LogicException;
  * Calling options can be done using syntax similar to most *nix command line tools. Long options
  * cane either include an `=` or leave it out.
  *
- * `cake my_command --connection default --name=something`
+ * `cake my_commandName --connection default --name=something`
  *
  * Short options can be defined singly or in groups.
  *
- * `cake my_command -cn`
+ * `cake my_commandName -cn`
  *
  * Short options can be combined into groups as seen above. Each letter in a group
  * will be treated as a separate option. The previous example is equivalent to:
  *
- * `cake my_command -c -n`
+ * `cake my_commandName -c -n`
  *
  * Short options can also accept values:
  *
- * `cake my_command -c default`
+ * `cake my_commandName -c default`
  *
  * ### Positional arguments
  *
@@ -63,17 +63,15 @@ class ConsoleOptionParser
      * Description text - displays before options when help is generated
      *
      * @see \Cake\Console\ConsoleOptionParser::description()
-     * @var string
      */
-    protected $_description = "";
+    protected string $_description = "";
 
     /**
      * Epilog text - displays after options when help is generated
      *
      * @see \Cake\Console\ConsoleOptionParser::epilog()
-     * @var string
      */
-    protected $_epilog = "";
+    protected string $_epilog = "";
 
     /**
      * Option definitions.
@@ -113,10 +111,8 @@ class ConsoleOptionParser
      */
     protected $_subcommandSort = true;
 
-    /**
-     * Command name.
-     */
-    protected string $_command = "";
+    // Command name.
+    protected string $_commandName = "";
 
     /**
      * Array of args (argv).
@@ -225,7 +221,7 @@ class ConsoleOptionParser
     function toArray(): array
     {
         myResult = [
-            "command":this._command,
+            "command":_commandName,
             "arguments":this._args,
             "options":this._options,
             "subcommands":this._subcommands,
@@ -272,18 +268,14 @@ class ConsoleOptionParser
      * @return this
      */
     auto setCommand(string $text) {
-        this._command = Inflector::underscore($text);
+        _commandName = Inflector::underscore($text);
 
         return this;
     }
 
-    /**
-     * Gets the command name for shell/task.
-     *
-     * @return string The value of the command.
-     */
+    // Gets the command name for shell/task.
     string getCommand() {
-        return this._command;
+        return _commandName;
     }
 
     /**
@@ -302,11 +294,7 @@ class ConsoleOptionParser
         return this;
     }
 
-    /**
-     * Gets the description text for shell/task.
-     *
-     * @return string The value of the description
-     */
+    // Gets the description text for shell/task.
     string getDescription() {
         return this._description;
     }
@@ -319,6 +307,7 @@ class ConsoleOptionParser
      *   be imploded with "\n".
      * @return this
      */
+    auto setEpilog(stringtext) { 
     auto setEpilog($text) {
         if (is_array($text)) {
             $text = implode("\n", $text);
@@ -328,12 +317,8 @@ class ConsoleOptionParser
         return this;
     }
 
-    /**
-     * Gets the epilog.
-     *
-     * @return string The value of the epilog.
-     */
-    string getEpilog() {
+    // Gets the epilog.
+    string epilog() {
         return this._epilog;
     }
 
@@ -695,9 +680,9 @@ class ConsoleOptionParser
      *    That subcommands help will be shown instead.
      * @param string $format Define the output format, can be text or XML
      * @param int $width The width to format user content to. Defaults to 72
-     * @return string Generated help.
+     * @return  Generated help.
      */
-    function help(Nullable!string $subcommand = null, string $format = "text", int $width = 72) {
+    string help(Nullable!string $subcommand = null, string $format = "text", int $width = 72) {
         if ($subcommand == null) {
             $formatter = new HelpFormatter(this);
             $formatter.setAlias(this.rootName);
@@ -903,7 +888,7 @@ class ConsoleOptionParser
     /**
      * Find the next token in the argv set.
      *
-     * @return string next token or ""
+     * @return next token or ""
      */
     protected string _nextToken() {
         return this._tokens[0] ?? "";

@@ -617,8 +617,8 @@ class I18nExtractCommand : Command {
     /**
      * Build the translation template header
      *
-     * @param string $domain Domain
-     * @return string Translation template header
+     * @param $domain Domain
+     * @return Translation template header
      */
     protected string _writeHeader(string $domain) {
         $projectIdVersion = $domain == "cake" ? "UIM " . Configure::version() : "PROJECT VERSION";
@@ -710,7 +710,7 @@ class I18nExtractCommand : Command {
      * Format a string to be added as a translatable string
      *
      * @param string $string String to format
-     * @return string Formatted string
+     * @return  Formatted string
      */
     protected string _formatString(string $string) {
         $quote = substr($string, 0, 1);

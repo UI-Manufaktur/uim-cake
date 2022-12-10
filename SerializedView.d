@@ -29,18 +29,13 @@ abstract class SerializedView : View {
         "serialize":null,
     ];
 
-
     override void initialize() {
       super.initialize();
       this.setResponse(this.getResponse().withType(this._responseType));
     }
 
-    /**
-     * Load helpers only if serialization is disabled.
-     *
-     * @return this
-     */
-    function loadHelpers() {
+    // Load helpers only if serialization is disabled.
+    auto loadHelpers() {
         if (!this.getConfig("serialize")) {
             super.loadHelpers();
         }
@@ -62,7 +57,7 @@ abstract class SerializedView : View {
      *
      * @param string|null myTemplate The template being rendered.
      * @param string|false|null $layout The layout being rendered.
-     * @return string The rendered view.
+     * @return The rendered view.
      * @throws \Cake\View\Exception\SerializationFailureException When serialization fails.
      */
     string render(Nullable!string myTemplate = null, $layout = null) {

@@ -181,7 +181,7 @@ class ConsoleOutput
      * Apply styling to text.
      *
      * @param string $text Text with styling tags.
-     * @return string String with color codes added.
+     * @return String with color codes added.
      */
     string styleText(string $text) {
         if (this._outputAs == static::RAW) {
@@ -204,7 +204,6 @@ class ConsoleOutput
      * Replace tags with color codes.
      *
      * @param array<string, string> $matches An array of matches to replace.
-     * @return string
      */
     protected string _replaceTags(array $matches) {
         $style = this.getStyle($matches["tag"]);
@@ -233,7 +232,7 @@ class ConsoleOutput
      * Writes a message to the output stream.
      *
      * @param string myMessage Message to write.
-     * @return int The number of bytes returned from writing to output.
+     * @return The number of bytes returned from writing to output.
      */
     protected int _write(string myMessage) {
         return (int)fwrite(this._output, myMessage);
