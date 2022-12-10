@@ -40,11 +40,11 @@ class ConsoleErrorHandler : BaseErrorHandler {
         this._displayException(myException);
         this.logException(myException);
 
-        $exitCode = Command::CODE_ERROR;
+        int exitCode = Command::CODE_ERROR;
         if (myException instanceof ConsoleException) {
-            $exitCode = myException.getCode();
+            exitCode = myException.getCode();
         }
-        this._stop($exitCode);
+        this._stop(exitCode);
     }
 
     /**
