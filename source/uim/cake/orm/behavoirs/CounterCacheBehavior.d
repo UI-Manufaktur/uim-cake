@@ -137,7 +137,7 @@ class CounterCacheBehavior : Behavior
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
-    function afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions): void
+    void afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)
     {
         if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] == true) {
             return;
@@ -172,7 +172,7 @@ class CounterCacheBehavior : Behavior
      * @param \Cake\Datasource\IEntity $entity Entity.
      * @return void
      */
-    protected auto _processAssociations(IEvent myEvent, IEntity $entity): void
+    protected void _processAssociations(IEvent myEvent, IEntity $entity)
     {
         foreach (this._config as $assoc: $settings) {
             $assoc = this._table.getAssociation($assoc);
@@ -190,12 +190,12 @@ class CounterCacheBehavior : Behavior
      * @return void
      * @throws \RuntimeException If invalid callable is passed.
      */
-    protected auto _processAssociation(
+    protected void _processAssociation(
         IEvent myEvent,
         IEntity $entity,
         Association $assoc,
         array $settings
-    ): void {
+    ) {
         $foreignKeys = (array)$assoc.getForeignKey();
         myCountConditions = $entity.extract($foreignKeys);
 

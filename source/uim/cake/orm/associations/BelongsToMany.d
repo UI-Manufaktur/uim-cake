@@ -258,7 +258,7 @@ class BelongsToMany : Association
      * @param \Cake\ORM\Table myTarget The target table.
      * @return void
      */
-    protected auto _generateTargetAssociations(Table $junction, Table $source, Table myTarget): void
+    protected void _generateTargetAssociations(Table $junction, Table $source, Table myTarget)
     {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
@@ -304,7 +304,7 @@ class BelongsToMany : Association
      * @param \Cake\ORM\Table $source The source table.
      * @return void
      */
-    protected auto _generateSourceAssociations(Table $junction, Table $source): void
+    protected void _generateSourceAssociations(Table $junction, Table $source)
     {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
@@ -341,7 +341,7 @@ class BelongsToMany : Association
      * @return void
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
-    protected auto _generateJunctionAssociations(Table $junction, Table $source, Table myTarget): void
+    protected void _generateJunctionAssociations(Table $junction, Table $source, Table myTarget)
     {
         $tAlias = myTarget.getAlias();
         $sAlias = $source.getAlias();
@@ -389,7 +389,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions Any extra options or overrides to be taken in account
      * @return void
      */
-    function attachTo(Query myQuery, array myOptions = []): void
+    void attachTo(Query myQuery, array myOptions = [])
     {
         if (!empty(myOptions["negateMatch"])) {
             this._appendNotMatching(myQuery, myOptions);
@@ -423,7 +423,7 @@ class BelongsToMany : Association
     }
 
 
-    protected auto _appendNotMatching(Query myQuery, array myOptions): void
+    protected void _appendNotMatching(Query myQuery, array myOptions)
     {
         if (empty(myOptions["negateMatch"])) {
             return;
@@ -846,7 +846,7 @@ class BelongsToMany : Association
         $property = this.getProperty();
 
         this.junction().getConnection().transactional(
-            function () use ($sourceEntity, myTargetEntities, myOptions): void {
+            void () use ($sourceEntity, myTargetEntities, myOptions) {
                 $links = this._collectJointEntities($sourceEntity, myTargetEntities);
                 foreach ($links as $entity) {
                     this._junctionTable.delete($entity, myOptions);
@@ -1365,7 +1365,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions original list of options passed in constructor
      * @return void
      */
-    protected auto _options(array myOptions): void
+    protected void _options(array myOptions)
     {
         if (!empty(myOptions["targetForeignKey"])) {
             this.setTargetForeignKey(myOptions["targetForeignKey"]);

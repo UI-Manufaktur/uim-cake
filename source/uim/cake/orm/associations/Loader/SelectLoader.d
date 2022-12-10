@@ -211,7 +211,7 @@ class SelectLoader
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected auto _assertFieldsPresent(Query $fetchQuery, string[] myKey): void
+    protected void _assertFieldsPresent(Query $fetchQuery, string[] myKey)
     {
         $select = $fetchQuery.aliasFields($fetchQuery.clause("select"));
         if (empty($select)) {
@@ -410,7 +410,7 @@ class SelectLoader
         $order = myQuery.clause("order");
         if ($order) {
             $columns = myQuery.clause("select");
-            $order.iterateParts(function ($direction, myField) use (&myFields, $columns): void {
+            $order.iterateParts(void ($direction, myField) use (&myFields, $columns) {
                 if (isset($columns[myField])) {
                     myFields[myField] = $columns[myField];
                 }

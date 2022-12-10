@@ -73,7 +73,7 @@ abstract class BaseErrorHandler
         error_reporting($level);
         set_error_handler([this, "handleError"], $level);
         set_exception_handler([this, "handleException"]);
-        register_shutdown_function(function (): void {
+        register_shutdown_function(void () {
             if ((PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") && this._handled) {
                 return;
             }

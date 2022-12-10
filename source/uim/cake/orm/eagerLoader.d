@@ -159,7 +159,7 @@ class EagerLoader
      *
      * @return void
      */
-    function clearContain(): void
+    void clearContain()
     {
         this._containments = [];
         this._normalized = null;
@@ -384,7 +384,7 @@ class EagerLoader
      * per association in the containments array
      * @return void
      */
-    function attachAssociations(Query myQuery, Table myRepository, bool $includeFields): void
+    void attachAssociations(Query myQuery, Table myRepository, bool $includeFields)
     {
         if (empty(this._containments) && this._matching == null) {
             return;
@@ -516,7 +516,7 @@ class EagerLoader
      *
      * @return void
      */
-    protected auto _fixStrategies(): void
+    protected void _fixStrategies()
     {
         foreach (this._aliasList as myAliases) {
             foreach (myAliases as myConfigs) {
@@ -540,7 +540,7 @@ class EagerLoader
      * @param \Cake\ORM\EagerLoadable $loadable The association config
      * @return void
      */
-    protected auto _correctStrategy(EagerLoadable $loadable): void
+    protected void _correctStrategy(EagerLoadable $loadable)
     {
         myConfig = $loadable.getConfig();
         $currentStrategy = myConfig["strategy"] ??
@@ -735,12 +735,12 @@ class EagerLoader
      * If not passed, the default property for the association will be used.
      * @return void
      */
-    function addToJoinsMap(
+    void addToJoinsMap(
         string myAlias,
         Association $assoc,
         bool $asMatching = false,
         Nullable!string myTargetProperty = null
-    ): void {
+    ) {
         this._joinsMap[myAlias] = new EagerLoadable(myAlias, [
             "aliasPath":myAlias,
             "instance":$assoc,

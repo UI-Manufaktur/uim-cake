@@ -58,7 +58,7 @@ class TreeBehavior : Behavior
     ];
 
 
-    function initialize(array myConfig): void
+    void initialize(array myConfig)
     {
         this._config["leftField"] = new IdentifierExpression(this._config["left"]);
         this._config["rightField"] = new IdentifierExpression(this._config["right"]);
@@ -155,7 +155,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\IEntity $entity The entity whose descendants need to be updated.
      * @return void
      */
-    protected auto _setChildrenLevel(IEntity $entity): void
+    protected void _setChildrenLevel(IEntity $entity)
     {
         myConfig = this.getConfig();
 
@@ -226,7 +226,7 @@ class TreeBehavior : Behavior
      * @return void
      * @throws \RuntimeException if the parent to set to the entity is not valid
      */
-    protected auto _setParent(IEntity $entity, $parent): void
+    protected void _setParent(IEntity $entity, $parent)
     {
         myConfig = this.getConfig();
         $parentNode = this._getNode($parent);
@@ -286,7 +286,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\IEntity $entity The entity to set as a new root
      * @return void
      */
-    protected auto _setAsRoot(IEntity $entity): void
+    protected void _setAsRoot(IEntity $entity)
     {
         myConfig = this.getConfig();
         $edge = this._getMax();
@@ -319,7 +319,7 @@ class TreeBehavior : Behavior
      *
      * @return void
      */
-    protected auto _unmarkInternalTree(): void
+    protected void _unmarkInternalTree()
     {
         myConfig = this.getConfig();
         this._table.updateAll(
@@ -788,9 +788,9 @@ class TreeBehavior : Behavior
      *
      * @return void
      */
-    function recover(): void
+    void recover()
     {
-        this._table.getConnection().transactional(function (): void {
+        this._table.getConnection().transactional(void () {
             this._recoverTree();
         });
     }
@@ -866,7 +866,7 @@ class TreeBehavior : Behavior
      * modified by future calls to this function.
      * @return void
      */
-    protected auto _sync(int $shift, string $dir, string $conditions, bool $mark = false): void
+    protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false)
     {
         myConfig = this._config;
 
@@ -921,7 +921,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\IEntity $entity The entity to ensure fields for
      * @return void
      */
-    protected auto _ensureFields(IEntity $entity): void
+    protected void _ensureFields(IEntity $entity)
     {
         myConfig = this.getConfig();
         myFields = [myConfig["left"], myConfig["right"]];

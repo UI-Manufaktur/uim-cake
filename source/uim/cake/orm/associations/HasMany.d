@@ -300,7 +300,7 @@ class HasMany : Association
      * any of them is lacking a primary key value
      * @return void
      */
-    function unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = []): void
+    void unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = [])
     {
         if (is_bool(myOptions)) {
             myOptions = [
@@ -471,7 +471,7 @@ class HasMany : Association
         if ($mustBeDependent) {
             if (this._cascadeCallbacks) {
                 $conditions = new QueryExpression($conditions);
-                $conditions.traverse(function ($entry) use (myTarget): void {
+                $conditions.traverse(void ($entry) use (myTarget) {
                     if ($entry instanceof FieldInterface) {
                         myField = $entry.getField();
                         if (is_string(myField)) {
@@ -582,7 +582,7 @@ class HasMany : Association
      * @param array<string, mixed> myOptions original list of options passed in constructor
      * @return void
      */
-    protected auto _options(array myOptions): void
+    protected void _options(array myOptions)
     {
         if (!empty(myOptions["saveStrategy"])) {
             this.setSaveStrategy(myOptions["saveStrategy"]);

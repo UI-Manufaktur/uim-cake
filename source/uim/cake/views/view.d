@@ -281,7 +281,7 @@ class View : IEventDispatcher {
      *
      * @return void
      */
-    function initialize(): void
+    void initialize()
     {
     }
 
@@ -504,7 +504,7 @@ class View : IEventDispatcher {
         myPluginCheck = myOptions["plugin"] !== false;
         myfile = this._getElementFileName(myName, myPluginCheck);
         if (myfile && myOptions["cache"]) {
-            return this.cache(function () use (myfile, myData, myOptions): void {
+            return this.cache(void () use (myfile, myData, myOptions) {
                 echo this._renderElement(myfile, myData, myOptions);
             }, myOptions["cache"]);
         }

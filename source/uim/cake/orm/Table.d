@@ -300,7 +300,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param array<string, mixed> myConfig Configuration options passed to the constructor
      * @return void
      */
-    function initialize(array myConfig): void
+    void initialize(array myConfig)
     {
     }
 
@@ -490,7 +490,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return void
      * @throws \RuntimeException When an alias combination is too long
      */
-    protected auto checkAliasLengths(): void
+    protected void checkAliasLengths()
     {
         if (this._schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
@@ -2113,7 +2113,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
 
         /** @var array<bool> $isNew */
         $isNew = [];
-        $cleanup = function ($entities) use (&$isNew): void {
+        $cleanup = void ($entities) use (&$isNew) {
             /** @var array<\Cake\Datasource\IEntity> $entities */
             foreach ($entities as myKey: $entity) {
                 if (isset($isNew[myKey]) && $isNew[myKey]) {
