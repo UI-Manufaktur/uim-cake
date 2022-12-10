@@ -151,11 +151,8 @@ class EntityContext : IContext {
      * Get the primary key data for the context.
      *
      * Gets the primary key columns from the root entity"s schema.
-     *
-     * @return array<string>
      */
-    auto getPrimaryKey(): array
-    {
+    string[] getPrimaryKey() {
         return (array)this._tables[this._rootName].getPrimaryKey();
     }
 
@@ -531,10 +528,9 @@ class EntityContext : IContext {
      *
      * If the context is for an array of entities, the 0th index will be used.
      *
-     * @return array<string> Array of field names in the table/entity.
+     * @return Array of field names in the table/entity.
      */
-    function fieldNames(): array
-    {
+    string[] fieldNames() {
         myTable = this._getTable("0");
         if (!myTable) {
             return [];
@@ -548,11 +544,9 @@ class EntityContext : IContext {
      * conventions.
      *
      * @param array $parts Each one of the parts in a path for a field name
-     * @return \Cake\Validation\Validator
      * @throws \RuntimeException If validator cannot be retrieved based on the parts.
      */
-    protected auto _getValidator(array $parts): Validator
-    {
+    protected Validator _getValidator(array $parts) {
         myKeyParts = array_filter(array_slice($parts, 0, -1), function ($part) {
             return !is_numeric($part);
         });

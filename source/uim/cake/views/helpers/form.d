@@ -1438,10 +1438,9 @@ class FormHelper : Helper
      *
      * @param string myFieldName Name of a field, like this "modelname.fieldname"
      * @param array<string, mixed> myOptions Array of HTML attributes.
-     * @return array<string>|string An HTML text input element.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-checkboxes
      */
-    function checkbox(string myFieldName, array myOptions = []) {
+    string[] checkbox(string myFieldName, array myOptions = []) {
         myOptions += ["hiddenField": true, "value": 1];
 
         // Work around value=>val translations.
@@ -2449,10 +2448,9 @@ class FormHelper : Helper
      *
      * Returns a list, but at least one item, of valid sources, such as: `"context"`, `"data"` and `"query"`.
      *
-     * @return array<string> List of value sources.
+     * @return List of value sources.
      */
-    auto getValueSources(): array
-    {
+    string[] getValueSources() {
         return this._valueSources;
     }
 
@@ -2463,8 +2461,7 @@ class FormHelper : Helper
      * @return void
      * @throws \InvalidArgumentException If sources list contains invalid value.
      */
-    protected auto validateValueSources(array $sources): void
-    {
+    protected void validateValueSources(array $sources) {
         $diff = array_diff($sources, this.supportedValueSources);
 
         if ($diff) {
