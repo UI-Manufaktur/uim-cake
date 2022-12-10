@@ -280,9 +280,9 @@ class ConsoleIo {
      *
      * @param string myMessageType The message type, e.g. "warning".
      * @param array<string>|string myMessage The message to wrap.
-     * @return array<string>|string The message wrapped with the given message type.
+     * @return The message wrapped with the given message type.
      */
-    protected auto wrapMessageWithType(string myMessageType, myMessage) {
+    protected string[] wrapMessageWithType(string myMessageType, myMessage) {
         if (is_array(myMessage)) {
             foreach (myMessage as $k: $v) {
                 myMessage[$k] = "<{myMessageType}>{$v}</{myMessageType}>";

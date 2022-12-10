@@ -595,12 +595,8 @@ class ConsoleOptionParser
         return this._args;
     }
 
-    /**
-     * Get the list of argument names.
-     *
-     * @return array<string>
-     */
-    function argumentNames() {
+    // Get the list of argument names.
+    string[] argumentNames() {
         $out = [];
         foreach (this._args as $arg) {
             $out[] = $arg.name();

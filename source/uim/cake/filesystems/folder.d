@@ -229,10 +229,9 @@ class Folder
      *
      * @param string $regexpPattern Preg_match pattern (Defaults to: .*)
      * @param string|bool $sort Whether results should be sorted.
-     * @return array<string> Files that match given pattern
+     * @return Files that match given pattern
      */
-    function find(string $regexpPattern = ".*", $sort = false): array
-    {
+    string[] find(string $regexpPattern = ".*", $sort = false) {
         [, myfiles] = this.read($sort);
 
         return array_values(preg_grep("/^" . $regexpPattern . "$/i", myfiles));

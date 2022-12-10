@@ -379,13 +379,8 @@ class ServerRequest : IServerRequest
         this.trustProxy = true;
     }
 
-    /**
-     * Get trusted proxies
-     *
-     * @return array<string>
-     */
-    auto getTrustedProxies(): array
-    {
+    // Get trusted proxies
+    string[] getTrustedProxies() {
         return this.trustedProxies;
     }
 

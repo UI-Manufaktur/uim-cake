@@ -46,23 +46,13 @@ class ArrayLog : BaseLog
         this.content[] = this.formatter.format($level, myMessage, $context);
     }
 
-    /**
-     * Read the internal storage
-     *
-     * @return array<string>
-     */
-    function read(): array
-    {
+    // Read the internal storage
+    string[] read() {
         return this.content;
     }
 
-    /**
-     * Reset internal storage.
-     *
-     * @return void
-     */
-    function clear(): void
-    {
+    // Reset internal storage.
+    void clear() {
         this.content = [];
     }
 }

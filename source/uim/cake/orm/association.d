@@ -411,10 +411,8 @@ abstract class Association
     /**
      * Gets the name of the field representing the binding field with the target table.
      * When not manually specified the primary key of the owning side table is used.
-     *
-     * @return array<string>|string
      */
-    auto getBindingKey() {
+    string[] getBindingKey() {
         if (this._bindingKey == null) {
             this._bindingKey = this.isOwningSide(this.getSource()) ?
                 this.getSource().getPrimaryKey() :

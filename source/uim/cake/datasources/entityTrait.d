@@ -451,13 +451,8 @@ trait EntityTrait
         return this;
     }
 
-    /**
-     * Gets the hidden fields.
-     *
-     * @return array<string>
-     */
-    auto getHidden(): array
-    {
+    // Gets the hidden fields.
+    string[] getHidden() {
         return this._hidden;
     }
 

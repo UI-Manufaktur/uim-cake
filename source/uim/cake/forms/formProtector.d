@@ -495,9 +495,9 @@ class FormProtector
      * @param string $intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
      * @param string $stringKeyMessage Message string if tampered found in
      *   data fields indexed by string (protected)
-     * @return array<string> Error messages
+     * @return Error messages
      */
-    protected auto matchExistingFields(
+    protected string[] matchExistingFields(
         array myDataFields,
         array &$expectedFields,
         string $intKeyMessage,

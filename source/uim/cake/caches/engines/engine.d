@@ -290,11 +290,8 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Does whatever initialization for each group is required
      * and returns the `group value` for each of them, this is
      * the token representing each group in the cache key
-     *
-     * @return array<string>
      */
-    function groups(): array
-    {
+    string[] groups() {
         return this._config["groups"];
     }
 

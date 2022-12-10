@@ -85,22 +85,13 @@ abstract class BaseLog : AbstractLogger
         this.formatter = $formatter;
     }
 
-    /**
-     * Get the levels this logger is interested in.
-     *
-     * @return array<string>
-     */
-    function levels(): array
-    {
+    // Get the levels this logger is interested in.
+    string[] levels() {
         return this._config["levels"];
     }
 
-    /**
-     * Get the scopes this logger is interested in.
-     *
-     * @return array<string>|false
-     */
-    function scopes() {
+    // Get the scopes this logger is interested in.
+    string[] scopes() {
         return this._config["scopes"];
     }
 

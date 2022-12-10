@@ -264,11 +264,9 @@ class SecurityComponent : Component
 
     /**
      * Return hash parts for the Token generation
-     *
      * @param \Cake\Controller\Controller $controller Instantiating controller
-     * @return array<string>
      */
-    protected auto _hashParts(Controller $controller): array
+    protected string[] _hashParts(Controller $controller)
     {
         myRequest = $controller.getRequest();
 

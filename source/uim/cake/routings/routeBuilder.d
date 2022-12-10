@@ -80,10 +80,8 @@ class RouteBuilder
     /**
      * The list of middleware that routes in this builder get
      * added during construction.
-     *
-     * @var array<string>
      */
-    protected $middleware = [];
+    protected string[] $middleware;
 
     /**
      * Constructor
