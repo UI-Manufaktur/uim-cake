@@ -12,10 +12,8 @@ interface IContext
 
     /**
      * Get the fields used in the context as a primary key.
-     *
-     * @return array<string>
      */
-    auto getPrimaryKey(): array;
+    string[] primaryKeys();
 
     /**
      * Returns true if the passed field name is part of the primary key for this context
@@ -26,11 +24,7 @@ interface IContext
      */
     bool isPrimaryKey(string myField);
 
-    /**
-     * Returns whether this form is for a create operation.
-     *
-     * @return bool
-     */
+    // Returns whether this form is for a create operation.
     bool isCreate();
 
     /**
@@ -80,9 +74,9 @@ interface IContext
     /**
      * Get the field names of the top level object in this context.
      *
-     * @return array<string> A list of the field names in the context.
+     * @return A list of the field names in the context.
      */
-    function fieldNames(): array;
+    string[] fieldNames();
 
     /**
      * Get the abstract field type for a given field name.
@@ -105,7 +99,7 @@ interface IContext
      * Check whether a field has an error attached to it
      *
      * @param string myField A dot separated path to check errors on.
-     * @return bool Returns true if the errors for the field are not empty.
+     * @return Returns true if the errors for the field are not empty.
      */
     bool hasError(string myField);
 

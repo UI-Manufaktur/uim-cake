@@ -168,7 +168,7 @@ class TimeHelper : Helper
      * @return array<string>|int 1, 2, 3, or 4 quarter of year or array if $range true
      * @see \Cake\I18n\Time::toQuarter()
      */
-    function toQuarter($dateString, $range = false) {
+    string[] toQuarter($dateString, $range = false) {
         return (new FrozenTime($dateString)).toQuarter($range);
     }
 

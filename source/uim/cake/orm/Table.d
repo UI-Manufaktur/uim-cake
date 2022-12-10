@@ -570,7 +570,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     }
 
     // Returns the primary key field name.
-    string[] getPrimaryKey() {
+    string[] primaryKeys() {
         if (this._primaryKey == null) {
             myKey = this.getSchema().getPrimaryKey();
             if (count(myKey) == 1) {

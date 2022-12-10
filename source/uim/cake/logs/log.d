@@ -227,10 +227,9 @@ class Log
      * Call this method to obtain current
      * level configuration.
      *
-     * @return array<string> Active log levels
+     * @return Active log levels
      */
-    static function levels(): array
-    {
+    static string[] levels() {
         return static::$_levels;
     }
 

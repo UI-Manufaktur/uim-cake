@@ -114,10 +114,9 @@ class MultiCheckboxWidget : BasicWidget
      *
      * @param array<string, mixed> myData The data array defining the checkboxes.
      * @param \Cake\View\Form\IContext $context The current form context.
-     * @return array<string> An array of rendered inputs.
+     * @return An array of rendered inputs.
      */
-    protected auto _renderInputs(array myData, IContext $context): array
-    {
+    protected string[] _renderInputs(array myData, IContext $context) {
         $out = [];
         foreach (myData["options"] as myKey: $val) {
             // Grouped inputs in a fieldset.

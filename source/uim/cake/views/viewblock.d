@@ -166,7 +166,6 @@ class ViewBlock
      * Check if a block exists
      *
      * @param string myName Name of the block
-     * @return bool
      */
     bool exists(string myName) {
         return isset(this._blocks[myName]);
@@ -174,8 +173,7 @@ class ViewBlock
 
     /**
      * Get the names of all the existing blocks.
-     *
-     * @return array<string> An array containing the blocks.
+     * @return An array containing the blocks.
      */
     string[] keys() {
         return array_keys(this._blocks);

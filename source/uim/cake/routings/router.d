@@ -694,10 +694,9 @@ class Router
      * @param array<string>|string|null $extensions List of extensions to be added.
      * @param bool myMerge Whether to merge with or override existing extensions.
      *   Defaults to `true`.
-     * @return array<string> Array of extensions Router is configured to parse.
+     * @return Array of extensions Router is configured to parse.
      */
-    static function extensions($extensions = null, myMerge = true): array
-    {
+    static string[] extensions($extensions = null, myMerge = true) {
         myCollection = static::$_collection;
         if ($extensions == null) {
             return array_unique(array_merge(static::$_defaultExtensions, myCollection.getExtensions()));

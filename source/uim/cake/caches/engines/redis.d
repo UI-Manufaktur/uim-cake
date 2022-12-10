@@ -244,11 +244,8 @@ class RedisEngine : CacheEngine
      * Returns the `group value` for each of the configured groups
      * If the group initial value was not found, then it initializes
      * the group accordingly.
-     *
-     * @return array<string>
      */
-    function groups(): array
-    {
+    string[] groups() {
         myResult = [];
         foreach (this._config["groups"] as myGroup) {
             myValue = this._Redis.get(this._config["prefix"] . myGroup);

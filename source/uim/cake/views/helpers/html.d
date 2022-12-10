@@ -765,10 +765,8 @@ class HtmlHelper : Helper {
      *
      * @param array $line Line data to render.
      * @param bool $useCount Renders the count into the row. Default is false.
-     * @return array<string>
      */
-    protected auto _renderCells(array $line, bool $useCount = false): array
-    {
+    protected string[] _renderCells(array $line, bool $useCount = false) {
         $i = 0;
         $cellsOut = [];
         foreach ($line as $cell) {

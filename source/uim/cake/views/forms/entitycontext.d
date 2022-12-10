@@ -136,12 +136,9 @@ class EntityContext : IContext {
      * Get the primary key data for the context.
      *
      * Gets the primary key columns from the root entity"s schema.
-     *
-     * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    function primaryKey(): array
-    {
+    string[] primaryKey() {
         deprecationWarning("`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.");
 
         return (array)this._tables[this._rootName].getPrimaryKey();
@@ -152,7 +149,7 @@ class EntityContext : IContext {
      *
      * Gets the primary key columns from the root entity"s schema.
      */
-    string[] getPrimaryKey() {
+    string[] primaryKeys() {
         return (array)this._tables[this._rootName].getPrimaryKey();
     }
 

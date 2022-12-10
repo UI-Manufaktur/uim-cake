@@ -129,12 +129,9 @@ class SelectBoxWidget : BasicWidget
 
     /**
      * Render the contents of the select element.
-     *
      * @param array<string, mixed> myData The context for rendering a select.
-     * @return array<string>
      */
-    protected auto _renderContent(array myData): array
-    {
+    protected string[] _renderContent(array myData) {
         myOptions = myData["options"];
 
         if (myOptions instanceof Traversable) {
@@ -225,10 +222,9 @@ class SelectBoxWidget : BasicWidget
      * @param array|string|null $selected The options to select.
      * @param array myTemplateVars Additional template variables.
      * @param bool $escape Toggle HTML escaping.
-     * @return array<string> Option elements.
+     * @return Option elements.
      */
-    protected auto _renderOptions(iterable myOptions, ?array $disabled, $selected, myTemplateVars, $escape): array
-    {
+    protected string[] _renderOptions(iterable myOptions, ?array $disabled, $selected, myTemplateVars, $escape) {
         $out = [];
         foreach (myOptions as myKey: $val) {
             // Option groups

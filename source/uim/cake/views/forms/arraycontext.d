@@ -88,13 +88,8 @@ class ArrayContext : IContext
         return this.getPrimaryKey();
     }
 
-    /**
-     * Get the fields used in the context as a primary key.
-     *
-     * @return array<string>
-     */
-    auto getPrimaryKey(): array
-    {
+    // Get the fields used in the context as a primary key.
+    string[] primaryKeys() {
         if (
             empty(this._context["schema"]["_constraints"]) ||
             !is_array(this._context["schema"]["_constraints"])
