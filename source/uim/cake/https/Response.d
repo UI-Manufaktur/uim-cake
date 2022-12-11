@@ -1,18 +1,7 @@
 module uim.cake.https;
 
-import uim.cake.core.Configure;
-import uim.cake.https\Cookie\CookieCollection;
-import uim.cake.https\Cookie\ICookie;
-import uim.cake.https\Exception\NotFoundException;
-use DateTime;
-use IDateTime;
-use DateTimeZone;
-use InvalidArgumentException;
-use Laminas\Diactoros\MessageTrait;
-use Laminas\Diactoros\Stream;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\StreamInterface;
-use SplFileInfo;
+@safe:
+import uim.cake;
 
 /**
  * Responses contain the response text, status and headers of a HTTP response.

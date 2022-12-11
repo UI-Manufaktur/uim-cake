@@ -1,6 +1,7 @@
 module uim.cake.https\Exception;
 
-use Throwable;
+@safe:
+import uim.cake;
 
 /**
  * Represents an HTTP 409 error.

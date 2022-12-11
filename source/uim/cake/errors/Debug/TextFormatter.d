@@ -1,6 +1,7 @@
 module uim.cake.errors\Debug;
 
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * A Debugger formatter for generating unstyled plain text output.

@@ -1,7 +1,7 @@
 module uim.cake.https.clients\Exception;
 
-use Psr\Http\Client\ClientExceptionInterface;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Thrown when a request cannot be sent or response cannot be parsed into a PSR-7 response object.

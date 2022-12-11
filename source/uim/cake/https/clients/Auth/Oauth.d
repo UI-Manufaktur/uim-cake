@@ -1,10 +1,7 @@
 module uim.cake.https.clients\Auth;
 
-import uim.cake.core.exceptions\CakeException;
-import uim.cake.https.clients\Request;
-import uim.cake.utilities.Security;
-use Psr\Http\Message\UriInterface;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Oauth 1 authentication strategy for Cake\Http\Client

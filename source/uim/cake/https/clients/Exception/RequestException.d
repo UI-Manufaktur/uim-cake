@@ -1,9 +1,7 @@
 module uim.cake.https.clients\Exception;
 
-use Psr\Http\Client\RequestExceptionInterface;
-use Psr\Http\Message\RequestInterface;
-use RuntimeException;
-use Throwable;
+@safe:
+import uim.cake;
 
 /**
  * Exception for when a request failed.

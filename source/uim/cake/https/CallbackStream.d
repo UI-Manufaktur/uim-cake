@@ -1,7 +1,7 @@
 module uim.cake.https;
 
-use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
-
+@safe:
+import uim.cake;
 /**
  * Implementation of PSR HTTP streams.
  *

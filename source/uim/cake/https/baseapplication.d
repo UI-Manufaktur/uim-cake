@@ -1,35 +1,7 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 module uim.cake.https;
 
-import uim.cake.console.commandCollection;
-import uim.cake.controller\ControllerFactory;
-import uim.cake.core.IConsoleApplication;
-import uim.cake.core.Container;
-import uim.cake.core.ContainerApplicationInterface;
-import uim.cake.core.IContainer;
-import uim.cake.core.exceptions\MissingPluginException;
-import uim.cake.core.HttpApplicationInterface;
-import uim.cake.core.Plugin;
-import uim.cake.core.PluginApplicationInterface;
-import uim.cake.core.PluginCollection;
-import uim.cake.events\EventDispatcherTrait;
-import uim.cake.events\EventManager;
-import uim.cake.events\IEventManager;
-import uim.cake.routings\RouteBuilder;
-import uim.cake.routings\Router;
-import uim.cake.routings\RoutingApplicationInterface;
-use Closure;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+@safe:
+import uim.cake;
 
 /**
  * Base class for full-stack applications

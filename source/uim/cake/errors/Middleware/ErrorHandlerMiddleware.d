@@ -1,19 +1,7 @@
 module uim.cake.errors\Middleware;
 
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.errors\ErrorHandler;
-import uim.cake.errors\ExceptionRenderer;
-import uim.caketps\Exception\RedirectException;
-import uim.caketps\Response;
-use InvalidArgumentException;
-use Laminas\Diactoros\Response\RedirectResponse;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\IRequestHandler;
-use Throwable;
+@safe:
+import uim.cake;
 
 /**
  * Error handling middleware.

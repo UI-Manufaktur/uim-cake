@@ -1,22 +1,7 @@
+module uim.cake.https;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.3.5
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- *
- * Parts of this file are derived from Zend-Diactoros
- * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (https://www.zend.com/)
- * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
- */module uim.cake.https;
-
-import uim.cake.https\Cookie\Cookie;
-use Laminas\Diactoros\RelativeStream;
-use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
-use Psr\Http\Message\IResponse;
+@safe:
+import uim.cake;
 
 /**
  * Emits a Response to the PHP Server API.
