@@ -11,12 +11,8 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
 {
     use CollectionTrait;
 
-    /**
-     * The iteration mode
-     *
-     * @var int
-     */
-    protected $_mode;
+    // The iteration mode
+v    protected int _mode;
 
     /**
      * Constructor

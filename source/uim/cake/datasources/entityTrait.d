@@ -1,11 +1,7 @@
 module uim.cake.datasources;
 
-import uim.cake.collections\Collection;
-import uim.cakem.Entity;
-import uim.cakeilities.Hash;
-import uim.cakeilities.Inflector;
-use InvalidArgumentException;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * An entity represents a single result row from a repository. It exposes the
@@ -25,32 +21,26 @@ trait EntityTrait
      *
      * @var array<string, mixed>
      */
-    protected $_original = [];
+    protected $_original = ;
 
     /**
      * List of field names that should **not** be included in JSON or Array
      * representations of this Entity.
-     *
-     * @var array<string>
      */
-    protected $_hidden = [];
+    protected string[] _hidden;
 
     /**
      * List of computed or virtual fields that **should** be included in JSON or array
      * representations of this Entity. If a field is present in both _hidden and _virtual
      * the field will **not** be in the array/JSON versions of the entity.
-     *
-     * @var array<string>
      */
-    protected $_virtual = [];
+    protected string[] _virtual = [];
 
     /**
      * Holds a list of the fields that were modified or added after this object
      * was originally created.
-     *
-     * @var array<bool>
      */
-    protected $_dirty = [];
+    protected bool[] _dirty;
 
     /**
      * Holds a cached list of getters/setters per class
@@ -90,10 +80,8 @@ trait EntityTrait
      * The special field "\*" can also be mapped, meaning that any other field
      * not defined in the map will take its value. For example, `"*": true`
      * means that any field not defined in the map will be accessible by default
-     *
-     * @var array<bool>
      */
-    protected $_accessible = ["*": true];
+    protected bool[] _accessible = ["*": true];
 
     /**
      * The alias of the repository this entity came from

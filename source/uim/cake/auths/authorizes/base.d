@@ -14,12 +14,8 @@ import uim.cake
  * @see \Cake\Controller\Component\AuthComponent::$authenticate
  */
 abstract class BaseAuthorize {
-    /**
-     * ComponentRegistry instance for getting more components.
-     *
-     * @var \Cake\Controller\ComponentRegistry
-     */
-    protected $_registry;
+    // ComponentRegistry instance for getting more components.
+    protected ComponentRegistry _registry;
 
     /**
      * Default config for authorize objects.

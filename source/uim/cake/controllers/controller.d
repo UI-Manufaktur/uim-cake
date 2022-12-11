@@ -1,27 +1,8 @@
 
 module uim.cake.controllers;
 
-import uim.cake.controllers\Exception\MissingActionException;
-import uim.cake.core.App;
-import uim.cake.datasources\ModelAwareTrait;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakeents\IEvent;
-import uim.cakeents\IEventListener;
-import uim.cakeents\IEventManager;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakegs\LogTrait;
-import uim.cakem.Locator\LocatorAwareTrait;
-import uim.cakeutings\Router;
-import uim.cake.views.ViewVarsTrait;
-use Closure;
-use Psr\Http\Message\IResponse;
-use ReflectionClass;
-use ReflectionException;
-use ReflectionMethod;
-use RuntimeException;
-use UnexpectedValueException;
+@safe:
+import uim.cake;
 
 /**
  * Application controller class for organization of business logic.

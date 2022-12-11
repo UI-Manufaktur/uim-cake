@@ -1,7 +1,7 @@
 module uim.cake.databases;
 
-import uim.cake.databases.Exception\DatabaseException;
-import uim.cake.databases.Expression\FunctionExpression;
+@safe:
+import uim.cake;
 
 /**
  * Responsible for compiling a Query object into its SQL representation
@@ -11,16 +11,9 @@ import uim.cake.databases.Expression\FunctionExpression;
  */
 class SqlserverCompiler : QueryCompiler
 {
-    /**
-     * SQLserver does not support ORDER BY in UNION queries.
-     *
-     * @var bool
-     */
-    protected $_orderedUnion = false;
+    // SQLserver does not support ORDER BY in UNION queries.
+    protected bool _orderedUnion = false;
 
-    /**
-     * @inheritDoc
-     */
     protected $_templates = [
         "delete":"DELETE",
         "where":" WHERE %s",
@@ -30,9 +23,6 @@ class SqlserverCompiler : QueryCompiler
         "epilog":" %s",
     ];
 
-    /**
-     * @inheritDoc
-     */
     protected $_selectParts = [
         "with", "select", "from", "join", "where", "group", "having", "window", "order",
         "offset", "limit", "union", "epilog",

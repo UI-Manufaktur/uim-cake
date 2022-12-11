@@ -6,7 +6,7 @@
 module uim.cake.auths.storages.session;
 
 @safe:
-import uim.cake
+import uim.cake;
 
 // Session based persistent storage for authenticated user record.
 class SessionStorage : IStorage {
@@ -21,12 +21,8 @@ class SessionStorage : IStorage {
      */
     protected $_user;
 
-    /**
-     * Session object.
-     *
-     * @var \Cake\Http\Session
-     */
-    protected $_session;
+    // Session object.
+    protected Session _session;
 
     /**
      * Default configuration for this class.

@@ -1,16 +1,14 @@
 module uim.cake.databases;
 
-import uim.cake.databases.Exception\DatabaseException;
-use Closure;
-use Countable;
+@safe:
+import uim.cake;
 
 /**
  * Responsible for compiling a Query object into its SQL representation
  *
  * @internal
  */
-class QueryCompiler
-{
+class QueryCompiler {
     /**
      * List of sprintf templates that will be used for compiling the SQL for
      * this query. There are some clauses that can be built as just as the

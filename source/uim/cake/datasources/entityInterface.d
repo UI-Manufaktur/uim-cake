@@ -1,7 +1,7 @@
 module uim.cake.datasources;
 
-use ArrayAccess;
-use JsonSerializable;
+@safe:
+import uim.cake;
 
 /**
  * Describes the methods that any class representing a data storage should

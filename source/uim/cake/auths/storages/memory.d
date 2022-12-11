@@ -29,12 +29,12 @@ class MemoryStorage : IStorage
 
 
     void write(myUser) {
-        this._user = myUser;
+        _user = myUser;
     }
 
 
     void delete() {
-        this._user = null;
+        ._user = null;
     }
 
 
