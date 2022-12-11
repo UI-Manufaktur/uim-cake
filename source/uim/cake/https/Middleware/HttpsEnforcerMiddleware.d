@@ -16,7 +16,7 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 
 /**
  * Enforces use of HTTPS (SSL) for requests.
@@ -59,11 +59,11 @@ class HttpsEnforcerMiddleware : IMiddleware
      * same URL with https or throws an exception.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
+     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
      * @throws \Cake\Http\Exception\BadRequestException
      */
-    function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
+    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {
         if (
             myRequest.getUri().getScheme() == "https"

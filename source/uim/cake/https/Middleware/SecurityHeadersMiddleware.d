@@ -4,7 +4,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 
 /**
  * Handles common security headers in a convenient way
@@ -225,10 +225,10 @@ class SecurityHeadersMiddleware : IMiddleware
      * Serve assets if the path matches one.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
+     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
+    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {
         $response = $handler.handle(myRequest);
         foreach (this.headers as $header: myValue) {

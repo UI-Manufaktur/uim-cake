@@ -12,7 +12,7 @@ import uim.cakeilities.Inflector;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 use ReflectionClass;
 use ReflectionFunction;
 use ReflectionNamedType;
@@ -22,7 +22,7 @@ use ReflectionNamedType;
  *
  * @: \Cake\Http\IControllerFactory<\Cake\Controller\Controller>
  */
-class ControllerFactory : IControllerFactory, RequestHandlerInterface
+class ControllerFactory : IControllerFactory, IRequestHandler
 {
     /**
      * @var \Cake\Core\IContainer

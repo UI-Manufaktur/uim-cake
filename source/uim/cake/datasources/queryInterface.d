@@ -1,13 +1,3 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.1
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
 module uim.cake.datasources;
 
 /**
@@ -18,8 +8,7 @@ module uim.cake.datasources;
  * @method \Cake\Datasource\IEntity|array firstOrFail() Get the first result from the executing query or raise an exception.
  *   {@see \Cake\Database\Query::firstOrFail()}
  */
-interface IQuery
-{
+interface IQuery {
     /**
      * Adds fields to be selected from datasource.
      *
@@ -176,14 +165,15 @@ interface IQuery
      * ### Examples
      *
      * ```
-     *  myQuery.offset(10) // generates OFFSET 10
-     *  myQuery.offset(myQuery.newExpr().add(["1 + 1"])); // OFFSET (1 + 1)
+     *  myQuery.offsetRecords(10) // generates OFFSET 10
+     *  myQuery.offsetRecords(myQuery.newExpr().add(["1 + 1"])); // OFFSET (1 + 1)
      * ```
      *
-     * @param \Cake\Database\IExpression|int|null $offset number of records to be skipped
+     * @param offsetRecords number of records to be skipped
      * @return this
      */
-    function offset($offset);
+    function offset(IExpression offsetRecords);
+    function offset(int offsetRecords);
 
     /**
      * Adds a single or multiple fields to be used in the ORDER clause for this query.

@@ -12,7 +12,7 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 use Throwable;
 
 /**
@@ -100,10 +100,10 @@ class ErrorHandlerMiddleware : IMiddleware
      * Wrap the remaining middleware with error handling.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
+     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
+    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {
         try {
             return $handler.handle(myRequest);

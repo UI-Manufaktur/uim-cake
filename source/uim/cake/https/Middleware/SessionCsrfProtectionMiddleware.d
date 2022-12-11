@@ -18,7 +18,7 @@ import uim.cake.utilities.Security;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 use RuntimeException;
 
 /**
@@ -82,10 +82,10 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * Checks and sets the CSRF token depending on the HTTP verb.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
+     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
+    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {
         $method = myRequest.getMethod();
         $hasData = in_array($method, ["PUT", "POST", "DELETE", "PATCH"], true)

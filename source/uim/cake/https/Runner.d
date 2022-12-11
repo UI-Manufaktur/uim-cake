@@ -11,13 +11,13 @@
 
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 
 /**
  * Executes the middleware queue and provides the `next` callable
  * that allows the queue to be iterated.
  */
-class Runner : RequestHandlerInterface
+class Runner : IRequestHandler
 {
     /**
      * The middleware queue being run.
@@ -29,20 +29,20 @@ class Runner : RequestHandlerInterface
     /**
      * Fallback handler to use if middleware queue does not generate response.
      *
-     * @var \Psr\Http\Server\RequestHandlerInterface|null
+     * @var \Psr\Http\Server\IRequestHandler|null
      */
     protected $fallbackHandler;
 
     /**
      * @param \Cake\Http\MiddlewareQueue $queue The middleware queue
      * @param \Psr\Http\Message\IServerRequest myRequest The Server Request
-     * @param \Psr\Http\Server\RequestHandlerInterface|null $fallbackHandler Fallback request handler.
+     * @param \Psr\Http\Server\IRequestHandler|null $fallbackHandler Fallback request handler.
      * @return \Psr\Http\Message\IResponse A response object
      */
     function run(
         MiddlewareQueue $queue,
         IServerRequest myRequest,
-        ?RequestHandlerInterface $fallbackHandler = null
+        ?IRequestHandler $fallbackHandler = null
     ): IResponse {
         this.queue = $queue;
         this.queue.rewind();

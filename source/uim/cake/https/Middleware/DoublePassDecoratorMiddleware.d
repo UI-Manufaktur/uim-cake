@@ -4,7 +4,7 @@ import uim.cake.https\Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 
 /**
  * Decorate double-pass middleware as PSR-15 middleware.
@@ -53,10 +53,10 @@ class DoublePassDecoratorMiddleware : IMiddleware
      * Run the internal double pass callable to process an incoming server request.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest Request instance.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler Request handler instance.
+     * @param \Psr\Http\Server\IRequestHandler $handler Request handler instance.
      * @return \Psr\Http\Message\IResponse
      */
-    function process(IServerRequest myRequest, RequestHandlerInterface $handler): IResponse
+    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {
         return (this.callable)(
             myRequest,

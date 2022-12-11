@@ -1,13 +1,13 @@
 module uim.cake.core;
 
 import uim.caketps\MiddlewareQueue;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\IRequestHandler;
 
 /**
  * An interface defining the methods that the
  * http server depend on.
  */
-interface HttpApplicationInterface : RequestHandlerInterface
+interface HttpApplicationInterface : IRequestHandler
 {
     /**
      * Load all the application configuration and bootstrap logic.
