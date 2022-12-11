@@ -5,7 +5,7 @@ import uim.cake.https\Response;
 import uim.cake.utilities.CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -22,7 +22,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * The encryption types and padding are compatible with those used by CookieComponent
  * for backwards compatibility.
  */
-class EncryptedCookieMiddleware : MiddlewareInterface
+class EncryptedCookieMiddleware : IMiddleware
 {
     use CookieCryptTrait;
 

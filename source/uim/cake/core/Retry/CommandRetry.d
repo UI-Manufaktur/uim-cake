@@ -13,7 +13,7 @@ class CommandRetry
     /**
      * The strategy to follow should the executed action fail.
      *
-     * @var \Cake\Core\Retry\RetryStrategyInterface
+     * @var \Cake\Core\Retry\IRetryStrategy
      */
     protected $strategy;
 
@@ -24,10 +24,10 @@ class CommandRetry
     /**
      * Creates the CommandRetry object with the given strategy and retry count
      *
-     * @param \Cake\Core\Retry\RetryStrategyInterface $strategy The strategy to follow should the action fail
+     * @param \Cake\Core\Retry\IRetryStrategy $strategy The strategy to follow should the action fail
      * @param int $maxRetries The maximum number of retry attempts allowed
      */
-    this(RetryStrategyInterface $strategy, int $maxRetries = 1) {
+    this(IRetryStrategy $strategy, int $maxRetries = 1) {
         this.strategy = $strategy;
         this.maxRetries = $maxRetries;
     }

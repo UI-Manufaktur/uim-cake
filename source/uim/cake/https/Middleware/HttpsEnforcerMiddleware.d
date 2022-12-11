@@ -15,13 +15,13 @@ import uim.cake.https\Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Enforces use of HTTPS (SSL) for requests.
  */
-class HttpsEnforcerMiddleware : MiddlewareInterface
+class HttpsEnforcerMiddleware : IMiddleware
 {
     /**
      * Configuration.

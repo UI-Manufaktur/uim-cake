@@ -16,7 +16,7 @@ import uim.cake.utilities.Xml;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -25,7 +25,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Enables JSON and XML request payloads to be parsed into the request"s body.
  * You can also add your own request body parsers using the `addParser()` method.
  */
-class BodyParserMiddleware : MiddlewareInterface
+class BodyParserMiddleware : IMiddleware
 {
     /**
      * Registered Parsers

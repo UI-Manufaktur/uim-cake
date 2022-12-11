@@ -15,7 +15,7 @@ import uim.cake.core.InstanceConfigTrait;
 use ParagonIE\CSPBuilder\CSPBuilder;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
 
@@ -27,7 +27,7 @@ use RuntimeException;
  * - `scriptNonce` Enable to have a nonce policy added to the script-src directive.
  * - `styleNonce` Enable to have a nonce policy added to the style-src directive.
  */
-class CspMiddleware : MiddlewareInterface
+class CspMiddleware : IMiddleware
 {
     use InstanceConfigTrait;
 

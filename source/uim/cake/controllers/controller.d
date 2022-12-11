@@ -141,7 +141,7 @@ class Controller : IEventListener, IEventDispatcher
      * Middlewares list.
      *
      * @var array
-     * @psalm-var array<int, array{middleware:\Psr\Http\Server\MiddlewareInterface|\Closure|string, options:array{only?: array|string, except?: array|string}}>
+     * @psalm-var array<int, array{middleware:\Psr\Http\Server\IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
      */
     protected $middlewares = [];
 
@@ -521,7 +521,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Register middleware for the controller.
      *
-     * @param \Psr\Http\Server\MiddlewareInterface|\Closure|string $middleware Middleware.
+     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware Middleware.
      * @param array<string, mixed> myOptions Valid options:
      *  - `only`: (array|string) Only run the middleware for specified actions.
      *  - `except`: (array|string) Run the middleware for all actions except the specified ones.

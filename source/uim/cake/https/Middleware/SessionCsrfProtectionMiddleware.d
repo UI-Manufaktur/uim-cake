@@ -17,7 +17,7 @@ import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
 
@@ -39,7 +39,7 @@ use RuntimeException;
  *
  * @see https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#sychronizer-token-pattern
  */
-class SessionCsrfProtectionMiddleware : MiddlewareInterface
+class SessionCsrfProtectionMiddleware : IMiddleware
 {
     /**
      * Config for the CSRF handling.
