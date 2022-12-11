@@ -67,9 +67,9 @@ interface IQuery
      * ResultSetDecorator is a traversable object that : the methods found
      * on Cake\Collection\Collection.
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    function all(): ResultSetInterface;
+    function all(): IResultSet;
 
     /**
      * Populates or adds parts to current query clauses using an array.

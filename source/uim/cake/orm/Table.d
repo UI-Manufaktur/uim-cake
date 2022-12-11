@@ -2063,9 +2063,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
      * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity>|false False on failure, entities list on success.
+     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false False on failure, entities list on success.
      * @throws \Exception
      */
     function saveMany(iterable $entities, myOptions = []) {
@@ -2083,9 +2083,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> Entities list.
+     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Exception
      * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      */
@@ -2095,11 +2095,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     }
 
     /**
-     * @param \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
      * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
-     * @return \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> Entities list.
+     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      */
     protected auto _saveMany(iterable $entities, myOptions = []): iterable
     {
@@ -2216,9 +2216,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity>|false Entities list
+     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false Entities list
      *   on success, false on failure.
      * @see \Cake\ORM\Table::delete() for options and events related to this method.
      */
@@ -2239,9 +2239,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> Entities list.
+     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Cake\ORM\Exception\PersistenceFailedException
      * @see \Cake\ORM\Table::delete() for options and events related to this method.
      */
@@ -2257,7 +2257,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     }
 
     /**
-     * @param \Cake\Datasource\ResultSetInterface|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used.
      * @return \Cake\Datasource\IEntity|null
      */

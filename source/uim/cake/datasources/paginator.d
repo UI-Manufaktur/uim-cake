@@ -147,10 +147,10 @@ class Paginator : PaginatorInterface
      *   to paginate.
      * @param array myParams Request params
      * @param array $settings The settings/configuration used for pagination.
-     * @return \Cake\Datasource\ResultSetInterface Query results
+     * @return \Cake\Datasource\IResultSet Query results
      * @throws \Cake\Datasource\Exception\PageOutOfBoundsException
      */
-    function paginate(object $object, array myParams = [], array $settings = []): ResultSetInterface
+    function paginate(object $object, array myParams = [], array $settings = []): IResultSet
     {
         myQuery = null;
         if ($object instanceof IQuery) {

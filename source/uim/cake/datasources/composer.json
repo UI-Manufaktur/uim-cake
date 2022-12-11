@@ -31,7 +31,7 @@
     },
     "suggest": {
         "UIM/utility": "If you decide to use EntityTrait.",
-        "UIM/collection": "If you decide to use ResultSetInterface.",
+        "UIM/collection": "If you decide to use IResultSet.",
         "UIM/cache": "If you decide to use Query caching."
     },
     "autoload": {

@@ -4,7 +4,7 @@ import uim.cake.controllerss.components;
 import uim.cake.controllerss.componentsRegistry;
 import uim.cake.datasources\Exception\PageOutOfBoundsException;
 import uim.cake.datasources\Paginator;
-import uim.cake.datasources\ResultSetInterface;
+import uim.cake.datasources\IResultSet;
 import uim.caketps\Exception\NotFoundException;
 use InvalidArgumentException;
 
@@ -174,10 +174,10 @@ class PaginatorComponent : Component
      *
      * @param \Cake\Datasource\IRepository|\Cake\Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return \Cake\Datasource\ResultSetInterface Query results
+     * @return \Cake\Datasource\IResultSet Query results
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    function paginate(object $object, array $settings = []): ResultSetInterface
+    function paginate(object $object, array $settings = []): IResultSet
     {
         myRequest = this._registry.getController().getRequest();
 

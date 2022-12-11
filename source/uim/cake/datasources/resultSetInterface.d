@@ -7,6 +7,6 @@ use Serializable;
 /**
  * Describes how a collection of datasource results should look like
  */
-interface ResultSetInterface : ICollection, Countable, Serializable
+interface IResultSet : ICollection, Countable, Serializable
 {
 }

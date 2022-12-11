@@ -21,13 +21,13 @@ repository pattern and is compatible with the UIM framework:
 
 * `IRepository` - Describes the methods for a base repository class.
 * `IEntity` - Describes the methods for a single result object.
-* `ResultSetInterface` - Represents the idea of a collection of Entities as a result of a query.
+* `IResultSet` - Represents the idea of a collection of Entities as a result of a query.
 
 Additionally, this package provides a few traits and classes you can use in your own implementations:
 
 * `EntityTrait` - Contains the default implementation for the `IEntity`.
 * `QueryTrait` - Exposes the methods for creating a query object capable of returning decoratable collections.
-* `ResultSetDecorator` - Decorates any traversable object, so it complies with `ResultSetInterface`.
+* `ResultSetDecorator` - Decorates any traversable object, so it complies with `IResultSet`.
 
 
 ## Connections

@@ -9,7 +9,7 @@ import uim.cake;
  * the query, casting each field to the correct type and executing the extra
  * queries required for eager loading external associations.
  */
-class ResultSet : ResultSetInterface
+class ResultSet : IResultSet
 {
     use CollectionTrait;
 

@@ -783,7 +783,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param \Cake\ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return \Cake\ORM\ResultSet|\Cake\Datasource\ResultSetInterface Query results
+     * @return \Cake\ORM\ResultSet|\Cake\Datasource\IResultSet Query results
      * @link https://book.UIM.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */

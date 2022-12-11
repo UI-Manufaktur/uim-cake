@@ -320,7 +320,7 @@ class EavStrategy : TranslateStrategyInterface
      * Modifies the results from a table find in order to merge the translated fields
      * into each entity for a given locale.
      *
-     * @param \Cake\Datasource\ResultSetInterface myResults Results to map.
+     * @param \Cake\Datasource\IResultSet myResults Results to map.
      * @param string $locale Locale string
      * @return \Cake\Collection\ICollection
      */
@@ -363,7 +363,7 @@ class EavStrategy : TranslateStrategyInterface
      * Modifies the results from a table find in order to merge full translation
      * records into each entity under the `_translations` key.
      *
-     * @param \Cake\Datasource\ResultSetInterface myResults Results to modify.
+     * @param \Cake\Datasource\IResultSet myResults Results to modify.
      * @return \Cake\Collection\ICollection
      */
     ICollection groupTranslations(myResults) {

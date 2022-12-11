@@ -10,7 +10,7 @@ import uim.cake.databases.TypeMap;
 import uim.cake.databases.ValueBinder;
 import uim.cake.datasources\IQuery;
 import uim.cake.datasources\QueryTrait;
-import uim.cake.datasources\ResultSetInterface;
+import uim.cake.datasources\IResultSet;
 use InvalidArgumentException;
 use JsonSerializable;
 use RuntimeException;
@@ -1034,10 +1034,10 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * {@inheritDoc}
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      * @throws \RuntimeException if this method is called on a non-select Query.
      */
-    function all(): ResultSetInterface
+    function all(): IResultSet
     {
         if (this._type !== "select" && this._type !== null) {
             throw new RuntimeException(
@@ -1080,9 +1080,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * This will also setup the correct statement class in order to eager load deep
      * associations.
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    protected auto _execute(): ResultSetInterface
+    protected auto _execute(): IResultSet
     {
         this.triggerBeforeFind();
         if (this._results) {
@@ -1305,9 +1305,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * Part of JsonSerializable interface.
      *
-     * @return \Cake\Datasource\ResultSetInterface The data to convert to JSON.
+     * @return \Cake\Datasource\IResultSet The data to convert to JSON.
      */
-    function jsonSerialize(): ResultSetInterface
+    function jsonSerialize(): IResultSet
     {
         return this.all();
     }
@@ -1355,9 +1355,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Decorates the results iterator with MapReduce routines and formatters
      *
      * @param \Traversable myResult Original results
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    protected auto _decorateResults(Traversable myResult): ResultSetInterface
+    protected auto _decorateResults(Traversable myResult): IResultSet
     {
         myResult = this._applyDecorators(myResult);
 
