@@ -1,8 +1,7 @@
 module uim.cake.datasources;
 
-import uim.cake.collections\ICollection;
-use Countable;
-use Serializable;
+@safe:
+import uim.cake;
 
 /**
  * Describes how a collection of datasource results should look like

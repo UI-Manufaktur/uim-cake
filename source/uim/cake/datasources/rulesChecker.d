@@ -1,6 +1,7 @@
 module uim.cake.datasources;
 
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Contains logic for storing and checking rules on entities

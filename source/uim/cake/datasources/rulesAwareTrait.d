@@ -1,16 +1,7 @@
+module uim.cake.datasources;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.0.7
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.datasources;
-
-use ArrayObject;
-import uim.cakeents\IEventDispatcher;
+@safe:
+import uim.cake;
 
 /**
  * A trait that allows a class to build and apply application.

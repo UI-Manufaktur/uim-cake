@@ -1,9 +1,7 @@
 module uim.cake.datasources;
 
-import uim.cake.datasources\Exception\MissingModelException;
-import uim.cake.datasources\Locator\ILocator;
-use InvalidArgumentException;
-use UnexpectedValueException;
+@safe:
+import uim.cake;
 
 /**
  * Provides functionality for loading table classes

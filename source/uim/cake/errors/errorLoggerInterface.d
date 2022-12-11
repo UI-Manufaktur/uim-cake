@@ -1,7 +1,7 @@
 module uim.cake.errors.errorlogger;
 
-use Psr\Http\Message\IServerRequest;
-use Throwable;
+@safe:
+import uim.cake;
 
 /**
  * Interface for error logging handlers.

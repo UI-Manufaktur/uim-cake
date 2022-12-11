@@ -1,6 +1,7 @@
 module uim.cake.errors\Debug;
 
-use SplObjectStorage;
+@safe:
+import uim.cake;
 
 /**
  * Context tracking for Debugger::exportVar()

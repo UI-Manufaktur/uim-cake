@@ -1,7 +1,7 @@
 module uim.cake.errors;
 
-import uim.cake.core.exceptions\CakeException;
-use Throwable;
+@safe:
+import uim.cake;
 
 /**
  * Represents a fatal error

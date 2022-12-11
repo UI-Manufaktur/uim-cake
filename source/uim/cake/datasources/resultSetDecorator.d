@@ -1,7 +1,7 @@
 module uim.cake.datasources;
 
-import uim.cake.collections\Collection;
-use Countable;
+@safe:
+import uim.cake;
 
 /**
  * Generic ResultSet decorator. This will make any traversable object appear to

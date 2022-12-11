@@ -1,10 +1,7 @@
 module uim.cake.datasources;
 
-use BadMethodCallException;
-import uim.cake.collections.iIterator\MapReduce;
-import uim.cake.datasources\Exception\RecordNotFoundException;
-use InvalidArgumentException;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * Contains the characteristics for an object that is attached to a repository and
