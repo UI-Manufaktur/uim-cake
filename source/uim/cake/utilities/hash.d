@@ -1,16 +1,7 @@
+module uim.cake.uilities;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @since         2.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.uilities;
-
-use ArrayAccess;
-use InvalidArgumentException;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Library of array functions for manipulating and extracting data
@@ -23,8 +14,7 @@ use RuntimeException;
  *
  * @link https://book.UIM.org/4/en/core-libraries/hash.html
  */
-class Hash
-{
+class Hash {
     /**
      * Get a single value specified by myPath out of myData.
      * Does not support the full dot notation feature set,

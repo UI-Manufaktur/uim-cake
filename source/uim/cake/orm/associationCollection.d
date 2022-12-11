@@ -1,12 +1,7 @@
 module uim.cake.ORM;
 
-use ArrayIterator;
-import uim.cake.datasources\IEntity;
-import uim.cake.orm.locators\LocatorAwareTrait;
-import uim.cake.orm.locators\ILocator;
-use InvalidArgumentException;
-use IteratorAggregate;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * A container/collection for association classes.

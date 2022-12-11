@@ -1,9 +1,7 @@
-
-
 module uim.cake.shells.Helper;
 
-import uim.cake.console.Helper;
-use UnexpectedValueException;
+@safe:
+import uim.cake;
 
 /**
  * Create a visually pleasing ASCII art table

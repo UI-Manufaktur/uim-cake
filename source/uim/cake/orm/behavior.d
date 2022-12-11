@@ -1,10 +1,7 @@
 module uim.cake.ORM;
 
-import uim.cake.core.exceptions\CakeException;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.events\IEventListener;
-use ReflectionClass;
-use ReflectionMethod;
+@safe:
+import uim.cake;
 
 /**
  * Base class for behaviors.

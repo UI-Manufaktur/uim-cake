@@ -1,8 +1,8 @@
 
 module uim.cake.shells.Helper;
 
-import uim.cake.console.Helper;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Create a progress bar using a supplied callback.
