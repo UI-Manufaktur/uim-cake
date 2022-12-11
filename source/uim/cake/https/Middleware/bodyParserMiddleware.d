@@ -1,23 +1,7 @@
+module uim.cake.https\Middleware;
 
-
-/**
- * UIM(tm) : Rapid Development Framework (http://UIM.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://UIM.org UIM(tm) Project
- * @since         3.6.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.https\Middleware;
-
-import uim.cake.https\Exception\BadRequestException;
-import uim.cake.utilities.Exception\XmlException;
-import uim.cake.utilities.Xml;
-use Closure;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\IRequestHandler;
+@safe:
+import uim.cake
 
 /**
  * Parse encoded request body data.

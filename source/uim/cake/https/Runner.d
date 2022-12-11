@@ -1,17 +1,7 @@
+module uim.cake.https;
 
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         3.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.https;
-
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IRequestHandler;
+@safe:
+import uim.cake
 
 /**
  * Executes the middleware queue and provides the `next` callable
