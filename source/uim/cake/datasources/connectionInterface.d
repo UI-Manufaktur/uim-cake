@@ -24,7 +24,7 @@ use Psr\SimpleCache\ICache;
  * @method \Cake\Database\IStatement query(string mySql) Executes a SQL statement and returns the Statement
  *   object as result. {@see \Cake\Database\Connnection::query()}
  */
-interface ConnectionInterface : ILoggerAware
+interface IConnection : ILoggerAware
 {
     /**
      * Gets the current logger object.

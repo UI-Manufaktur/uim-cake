@@ -4,14 +4,9 @@ module uim.cake.console.commands.help;
 import uim.cake;
 
 // Print out command list
-class HelpCommand : BaseCommand : ICommandCollectionAware
-{
-    /**
-     * The command collection to get help on.
-     *
-     * @var \Cake\Console\CommandCollection
-     */
-    protected $commands;
+class HelpCommand : BaseCommand : ICommandCollectionAware {
+    // The command collection to get help on.
+    protected CommandCollection commands;
 
     void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;

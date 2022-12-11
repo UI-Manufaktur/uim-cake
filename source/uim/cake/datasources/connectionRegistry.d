@@ -8,7 +8,7 @@ import uim.cake.datasources\Exception\MissingDatasourceException;
  * A registry object for connection instances.
  *
  * @see \Cake\Datasource\ConnectionManager
- * @extends \Cake\Core\ObjectRegistry<\Cake\Datasource\ConnectionInterface>
+ * @extends \Cake\Core\ObjectRegistry<\Cake\Datasource\IConnection>
  */
 class ConnectionRegistry : ObjectRegistry
 {
@@ -51,10 +51,10 @@ class ConnectionRegistry : ObjectRegistry
      * If a callable is passed as first argument, The returned value of this
      * function will be the result of the callable.
      *
-     * @param \Cake\Datasource\ConnectionInterface|callable|string myClass The classname or object to make.
+     * @param \Cake\Datasource\IConnection|callable|string myClass The classname or object to make.
      * @param string myAlias The alias of the object.
      * @param array<string, mixed> myConfig An array of settings to use for the datasource.
-     * @return \Cake\Datasource\ConnectionInterface A connection with the correct settings.
+     * @return \Cake\Datasource\IConnection A connection with the correct settings.
      */
     protected auto _create(myClass, string myAlias, array myConfig) {
         if (is_callable(myClass)) {
@@ -67,7 +67,7 @@ class ConnectionRegistry : ObjectRegistry
 
         unset(myConfig["className"]);
 
-        /** @var \Cake\Datasource\ConnectionInterface */
+        /** @var \Cake\Datasource\IConnection */
         return new myClass(myConfig);
     }
 

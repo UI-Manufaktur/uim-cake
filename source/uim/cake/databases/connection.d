@@ -7,7 +7,7 @@ import uim.cake;
 /**
  * Represents a connection with a database server.
  */
-class Connection : ConnectionInterface
+class Connection : IConnection
 {
     use TypeConverterTrait;
 
