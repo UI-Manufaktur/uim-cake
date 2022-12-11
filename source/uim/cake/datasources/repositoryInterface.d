@@ -46,7 +46,7 @@ interface IRepository
      *
      * @param string myType the type of query to perform
      * @param array<string, mixed> myOptions An array that will be passed to Query::applyOptions()
-     * @return \Cake\Datasource\QueryInterface
+     * @return \Cake\Datasource\IQuery
      */
     function find(string myType = "all", array myOptions = []);
 
@@ -75,7 +75,7 @@ interface IRepository
     /**
      * Creates a new Query instance for this repository
      *
-     * @return \Cake\Datasource\QueryInterface
+     * @return \Cake\Datasource\IQuery
      */
     function query();
 

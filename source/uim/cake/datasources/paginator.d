@@ -143,7 +143,7 @@ class Paginator : PaginatorInterface
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param \Cake\Datasource\IRepository|\Cake\Datasource\QueryInterface $object The repository or query
+     * @param \Cake\Datasource\IRepository|\Cake\Datasource\IQuery $object The repository or query
      *   to paginate.
      * @param array myParams Request params
      * @param array $settings The settings/configuration used for pagination.
@@ -153,7 +153,7 @@ class Paginator : PaginatorInterface
     function paginate(object $object, array myParams = [], array $settings = []): ResultSetInterface
     {
         myQuery = null;
-        if ($object instanceof QueryInterface) {
+        if ($object instanceof IQuery) {
             myQuery = $object;
             $object = myQuery.getRepository();
             if ($object == null) {
@@ -186,11 +186,11 @@ class Paginator : PaginatorInterface
      * Get query for fetching paginated results.
      *
      * @param \Cake\Datasource\IRepository $object Repository instance.
-     * @param \Cake\Datasource\QueryInterface|null myQuery Query Instance.
+     * @param \Cake\Datasource\IQuery|null myQuery Query Instance.
      * @param array<string, mixed> myData Pagination data.
-     * @return \Cake\Datasource\QueryInterface
+     * @return \Cake\Datasource\IQuery
      */
-    protected auto getQuery(IRepository $object, ?QueryInterface myQuery, array myData): QueryInterface
+    protected auto getQuery(IRepository $object, ?IQuery myQuery, array myData): IQuery
     {
         if (myQuery == null) {
             myQuery = $object.find(myData["finder"], myData["options"]);
@@ -204,11 +204,11 @@ class Paginator : PaginatorInterface
     /**
      * Get total count of records.
      *
-     * @param \Cake\Datasource\QueryInterface myQuery Query instance.
+     * @param \Cake\Datasource\IQuery myQuery Query instance.
      * @param array myData Pagination data.
      * @return int|null
      */
-    protected auto getCount(QueryInterface myQuery, array myData): Nullable!int
+    protected auto getCount(IQuery myQuery, array myData): Nullable!int
     {
         return myQuery.count();
     }

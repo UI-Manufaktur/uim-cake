@@ -8,7 +8,7 @@ import uim.cake.databases.Query as DatabaseQuery;
 import uim.cake.databases.TypedResultInterface;
 import uim.cake.databases.TypeMap;
 import uim.cake.databases.ValueBinder;
-import uim.cake.datasources\QueryInterface;
+import uim.cake.datasources\IQuery;
 import uim.cake.datasources\QueryTrait;
 import uim.cake.datasources\ResultSetInterface;
 use InvalidArgumentException;
@@ -61,7 +61,7 @@ use Traversable;
  * @method \Cake\Collection\ICollection chunk(int $size) Groups the results in arrays of $size rows each.
  * @method bool isEmpty() Returns true if this query found no results.
  */
-class Query : DatabaseQuery : JsonSerializable, QueryInterface
+class Query : DatabaseQuery : JsonSerializable, IQuery
 {
     use QueryTrait {
         cache as private _cache;

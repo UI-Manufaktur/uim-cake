@@ -18,7 +18,7 @@ module uim.cake.datasources;
  * @method \Cake\Datasource\IEntity|array firstOrFail() Get the first result from the executing query or raise an exception.
  *   {@see \Cake\Database\Query::firstOrFail()}
  */
-interface QueryInterface
+interface IQuery
 {
     /**
      * Adds fields to be selected from datasource.

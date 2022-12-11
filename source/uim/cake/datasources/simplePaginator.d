@@ -13,11 +13,11 @@ class SimplePaginator : Paginator
     /**
      * Simple pagination does not perform any count query, so this method returns `null`.
      *
-     * @param \Cake\Datasource\QueryInterface myQuery Query instance.
+     * @param \Cake\Datasource\IQuery myQuery Query instance.
      * @param array myData Pagination data.
      * @return int|null
      */
-    protected auto getCount(QueryInterface myQuery, array myData): Nullable!int
+    protected auto getCount(IQuery myQuery, array myData): Nullable!int
     {
         return null;
     }
