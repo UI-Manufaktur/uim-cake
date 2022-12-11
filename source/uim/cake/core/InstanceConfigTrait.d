@@ -1,29 +1,19 @@
 module uim.cake.core;
 
-import uim.cake.core.exceptions\CakeException;
-import uim.cakeilities.Hash;
-use InvalidArgumentException;
+@safe:
+import uim.cake
 
 /**
  * A trait for reading and writing instance config
  *
  * Implementing objects are expected to declare a `$_defaultConfig` property.
  */
-trait InstanceConfigTrait
-{
-    /**
-     * Runtime config
-     *
-     * @var array<string, mixed>
-     */
-    protected $_config = [];
+trait InstanceConfigTrait {
+    // Runtime config
+    protected array<string, mixed> _config = [];
 
-    /**
-     * Whether the config property has already been configured with defaults
-     *
-     * @var bool
-     */
-    protected $_configInitialized = false;
+    // Whether the config property has already been configured with defaults
+    protected bool _configInitialized = false;
 
     /**
      * Sets the config.

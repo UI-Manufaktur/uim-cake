@@ -22,15 +22,9 @@ import uim.cake;
  *
  * @see \Cake\Controller\Component\AuthComponent::$authenticate
  */
-class ControllerAuthorize : BaseAuthorize
-{
-    /**
-     * Controller for the request.
-     *
-     * @var \Cake\Controller\Controller
-     */
-    protected $_Controller;
-
+class ControllerAuthorize : BaseAuthorize {
+    // Controller for the request.
+    protected Controller _Controller;
 
     this(ComponentRegistry $registry, array myConfig = []) {
         super.this($registry, myConfig);
@@ -44,8 +38,7 @@ class ControllerAuthorize : BaseAuthorize
      * @param \Cake\Controller\Controller|null $controller null to get, a controller to set.
      * @return \Cake\Controller\Controller
      */
-    function controller(?Controller $controller = null): Controller
-    {
+    Controller controller(?Controller $controller = null) {
         if ($controller) {
             this._Controller = $controller;
         }

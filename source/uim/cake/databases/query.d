@@ -111,10 +111,8 @@ class Query : IExpression, IteratorAggregate
      * Indicates whether internal state of this query was changed, this is used to
      * discard internal cached objects such as the transformed query or the reference
      * to the executed statement.
-     *
-     * @var bool
      */
-    protected $_dirty = false;
+    protected bool _dirty = false;
 
     /**
      * A list of callback functions to be called to alter each row from resulting
@@ -125,12 +123,8 @@ class Query : IExpression, IteratorAggregate
      */
     protected $_resultDecorators = [];
 
-    /**
-     * Statement object resulting from executing this query.
-     *
-     * @var \Cake\Database\IStatement|null
-     */
-    protected $_iterator;
+    // Statement object resulting from executing this query.
+    protected IStatement _iterator;
 
     /**
      * The object responsible for generating query placeholders and temporarily store values
@@ -140,34 +134,17 @@ class Query : IExpression, IteratorAggregate
      */
     protected $_valueBinder;
 
-    /**
-     * Instance of functions builder object used for generating arbitrary SQL functions.
-     *
-     * @var \Cake\Database\FunctionsBuilder|null
-     */
-    protected $_functionsBuilder;
+    // Instance of functions builder object used for generating arbitrary SQL functions.
+    protected FunctionsBuilder _functionsBuilder;
 
-    /**
-     * Boolean for tracking whether buffered results
-     * are enabled.
-     *
-     * @var bool
-     */
-    protected $_useBufferedResults = true;
+    // Boolean for tracking whether buffered results are enabled.
+    protected bool _useBufferedResults = true;
 
-    /**
-     * The Type map for fields in the select clause
-     *
-     * @var \Cake\Database\TypeMap|null
-     */
-    protected $_selectTypeMap;
+    // The Type map for fields in the select clause
+    protected TypeMap _selectTypeMap;
 
-    /**
-     * Tracking flag to disable casting
-     *
-     * @var bool
-     */
-    protected myTypeCastEnabled = true;
+    // Tracking flag to disable casting
+    protected bool myTypeCastEnabled = true;
 
     /**
      * Constructor.

@@ -29,26 +29,14 @@ class PluginCollection : Iterator, Countable
      */
     protected myPlugins = [];
 
-    /**
-     * Names of plugins
-     *
-     * @var array<string>
-     */
-    protected myNames = [];
+    // Names of plugins
+    protected string[] myNames;
 
-    /**
-     * Iterator position stack.
-     *
-     * @var array<int>
-     */
-    protected $positions = [];
+    // Iterator position stack.
+    protected int[] positions = ;
 
-    /**
-     * Loop depth
-     *
-     * @var int
-     */
-    protected $loopDepth = -1;
+    // Loop depth
+    protected int loopDepth = -1;
 
     /**
      * Constructor

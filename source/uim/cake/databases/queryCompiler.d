@@ -18,7 +18,7 @@ class QueryCompiler
      *
      * @var array<string, string>
      */
-    protected $_templates = [
+    protected STRINGAA _templates = [
         "delete":"DELETE",
         "where":" WHERE %s",
         "group":" GROUP BY %s ",
@@ -29,12 +29,8 @@ class QueryCompiler
         "epilog":" %s",
     ];
 
-    /**
-     * The list of query clauses to traverse for generating a SELECT statement
-     *
-     * @var array<string>
-     */
-    protected $_selectParts = [
+    // The list of query clauses to traverse for generating a SELECT statement
+    protected string[] _selectParts = [
         "with", "select", "from", "join", "where", "group", "having", "window", "order",
         "limit", "offset", "union", "epilog",
     ];
@@ -45,30 +41,19 @@ class QueryCompiler
      * @var array<string>
      * @deprecated Not used.
      */
-    protected $_updateParts = ["with", "update", "set", "where", "epilog"];
+    protected string[] _updateParts = ["with", "update", "set", "where", "epilog"];
 
-    /**
-     * The list of query clauses to traverse for generating a DELETE statement
-     *
-     * @var array<string>
-     */
-    protected $_deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
+    // The list of query clauses to traverse for generating a DELETE statement
+    protected string[] _deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
 
-    /**
-     * The list of query clauses to traverse for generating an INSERT statement
-     *
-     * @var array<string>
-     */
-    protected $_insertParts = ["with", "insert", "values", "epilog"];
+    // The list of query clauses to traverse for generating an INSERT statement
+    protected string[] _insertParts = ["with", "insert", "values", "epilog"];
 
     /**
      * Indicate whether this query dialect supports ordered unions.
-     *
      * Overridden in subclasses.
-     *
-     * @var bool
      */
-    protected $_orderedUnion = true;
+    protected bool _orderedUnion = true;
 
     /**
      * Indicate whether aliases in SELECT clause need to be always quoted.

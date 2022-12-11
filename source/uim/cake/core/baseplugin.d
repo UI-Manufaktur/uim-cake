@@ -30,57 +30,31 @@ class BasePlugin : IPlugin
      */
     protected $bootstrapEnabled = true;
 
-    /**
-     * Console middleware
-     *
-     * @var bool
-     */
-    protected $consoleEnabled = true;
+    // Console middleware
+    protected bool consoleEnabled = true;
 
-    /**
-     * Enable middleware
-     *
-     * @var bool
-     */
-    protected $middlewareEnabled = true;
+    // Enable middleware
+    protected bool middlewareEnabled = true;
 
-    /**
-     * Register container services
-     *
-     * @var bool
-     */
-    protected $servicesEnabled = true;
+    // Register container services
+    protected bool servicesEnabled = true;
 
-    /**
-     * Load routes or not
-     *
-     * @var bool
-     */
-    protected $routesEnabled = true;
+    // Load routes or not
+    protected bool routesEnabled = true;
 
-    /**
-     * The path to this plugin.
-     */
+    // The path to this plugin.
     protected string myPath;
 
-    /**
-     * The class path for this plugin.
-     */
+    // The class path for this plugin.
     protected string myClassPath;
 
-    /**
-     * The config path for this plugin.
-     */
+    // The config path for this plugin.
     protected string myConfigPath;
 
-    /**
-     * The templates path for this plugin.
-     */
+    // The templates path for this plugin.
     protected string myTemplatePath;
 
-    /**
-     * The name of this plugin
-     */
+    // The name of this plugin
     protected string string myName;
 
     /**
@@ -103,18 +77,13 @@ class BasePlugin : IPlugin
         this.initialize();
     }
 
-    /**
-     * Initialization hook called from constructor.
-     *
-     */
+    // Initialization hook called from constructor.
     void initialize() {
     }
 
+    @property string Name() {
+        if (_name) return _name;
 
-    string getName() {
-        if (this.name) {
-            return this.name;
-        }
         $parts = explode("\\", static::class);
         array_pop($parts);
         this.name = implode("/", $parts);
@@ -123,10 +92,9 @@ class BasePlugin : IPlugin
     }
 
 
-    string getPath() {
-        if (this.path) {
-            return this.path;
-        }
+    @property string Path() {
+        if (_path) return _path;
+
         $reflection = new ReflectionClass(this);
         myPath = dirname($reflection.getFileName());
 
@@ -140,31 +108,28 @@ class BasePlugin : IPlugin
     }
 
 
-    string getConfigPath() {
-        if (this.configPath) {
-            return this.configPath;
-        }
-        myPath = this.getPath();
+    @property string ConfigPath() {
+        if (_configPath) return configPath;
+
+        auto myPath = this.path();
 
         return myPath . "config" . DIRECTORY_SEPARATOR;
     }
 
 
-    string getClassPath() {
-        if (this.classPath) {
-            return this.classPath;
-        }
-        myPath = this.getPath();
+    @property string classPath() {
+        if (_classPath) return _classPath;
+
+        auto myPath = this.path();
 
         return myPath . "src" . DIRECTORY_SEPARATOR;
     }
 
 
-    string getTemplatePath() {
-        if (this.templatePath) {
-            return this.templatePath;
-        }
-        myPath = this.getPath();
+    @property string TemplatePath() {
+        if (_templatePath) return _templatePath;
+        
+        auto myPath = this.path();
 
         return this.templatePath = myPath . "templates" . DIRECTORY_SEPARATOR;
     }
