@@ -289,7 +289,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    function clear(): void
+    void clear()
     {
         super.clear();
 
@@ -305,14 +305,12 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @return array<\Cake\ORM\Table>
      */
-    function genericInstances(): array
-    {
+    function genericInstances(): array {
         return this._fallbacked;
     }
 
 
-    function remove(string myAlias): void
-    {
+    void remove(string myAlias) {
         super.remove(myAlias);
 
         unset(this._fallbacked[myAlias]);

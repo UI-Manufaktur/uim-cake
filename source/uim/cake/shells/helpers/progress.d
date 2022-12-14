@@ -52,10 +52,8 @@ class ProgressHelper : Helper
      * - `callback` The callback that will be called in a loop to advance the progress bar.
      *
      * @param array $args The arguments/options to use when outputing the progress bar.
-     * @return void
      */
-    function output(array $args): void
-    {
+    void output(array $args) {
         $args += ["callback" => null];
         if (isset($args[0])) {
             $args["callback"] = $args[0];

@@ -758,10 +758,8 @@ class Hash {
      *
      * @param array $stack The stack of operations to work with.
      * @param array $return The return value to operate on.
-     * @return void
      */
-    protected static auto _merge(array $stack, array &$return): void
-    {
+    protected static void _merge(array $stack, array &$return) {
         while (!empty($stack)) {
             foreach ($stack as $curKey => &$curMerge) {
                 foreach ($curMerge[0] as myKey => &$val) {

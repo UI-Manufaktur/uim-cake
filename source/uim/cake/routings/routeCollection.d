@@ -64,10 +64,8 @@ class RouteCollection
      * @param \Cake\Routing\Route\Route $route The route object to add.
      * @param array<string, mixed> myOptions Additional options for the route. Primarily for the
      *   `_name` option, which enables named routes.
-     * @return void
      */
-    function add(Route $route, array myOptions = []): void
-    {
+    void add(Route $route, array myOptions = []) {
         // Explicit names
         if (isset(myOptions["_name"])) {
             if (isset(this._named[myOptions["_name"]])) {

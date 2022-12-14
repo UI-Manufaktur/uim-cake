@@ -222,9 +222,8 @@ class Inflector
      * @param array $rules Array of rules to be added.
      * @param bool $reset If true, will unset default inflections for all
      *        new rules that are being defined in $rules.
-     * @return void
      */
-    static function rules(string myType, array $rules, bool $reset = false): void
+    static void rules(string myType, array $rules, bool $reset = false)
     {
         $var = "_" . myType;
 

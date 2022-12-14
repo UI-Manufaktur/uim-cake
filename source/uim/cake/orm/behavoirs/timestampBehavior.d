@@ -59,10 +59,8 @@ class TimestampBehavior : Behavior
      * overwrite the events to listen on
      *
      * @param array<string, mixed> myConfig The config for this behavior.
-     * @return void
      */
-    function initialize(array myConfig): void
-    {
+    void initialize(array myConfig) {
         if (isset(myConfig["events"])) {
             this.setConfig("events", myConfig["events"], false);
         }
@@ -185,7 +183,7 @@ class TimestampBehavior : Behavior
      * @param bool $refreshTimestamp Whether to refresh timestamp.
      * @return void
      */
-    protected auto _updateField(IEntity $entity, string myField, bool $refreshTimestamp): void
+    protected void _updateField(IEntity $entity, string myField, bool $refreshTimestamp)
     {
         if ($entity.isDirty(myField)) {
             return;

@@ -59,11 +59,9 @@ trait CookieCryptTrait
      * Helper method for validating encryption cipher names.
      *
      * @param string $encrypt The cipher name.
-     * @return void
      * @throws \RuntimeException When an invalid cipher is provided.
      */
-    protected auto _checkCipher(string $encrypt): void
-    {
+    protected void _checkCipher(string $encrypt) {
         if (!in_array($encrypt, this._validCiphers, true)) {
             $msg = sprintf(
                 "Invalid encryption cipher. Must be one of %s or false.",

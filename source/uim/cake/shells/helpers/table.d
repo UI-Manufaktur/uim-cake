@@ -67,10 +67,8 @@ class TableHelper : Helper
      * Output a row separator.
      *
      * @param array<int> $widths The widths of each column to output.
-     * @return void
      */
-    protected auto _rowSeparator(array $widths): void
-    {
+    protected void _rowSeparator(array $widths) {
         $out = "";
         foreach ($widths as $column) {
             $out .= "+" . str_repeat("-", $column + 2);
@@ -87,7 +85,7 @@ class TableHelper : Helper
      * @param array<string, mixed> myOptions Options to be passed.
      * @return void
      */
-    protected auto _render(array $row, array $widths, array myOptions = []): void
+    protected void _render(array $row, array $widths, array myOptions = [])
     {
         if (count($row) == 0) {
             return;
@@ -121,9 +119,8 @@ class TableHelper : Helper
      * in the array. The keys will not be used to align data.
      *
      * @param array $args The data to render out.
-     * @return void
      */
-    function output(array $args): void
+    void output(array $args)
     {
         if (empty($args)) {
             return;

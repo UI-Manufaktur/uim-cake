@@ -116,8 +116,7 @@ class SelectWithPivotLoader : SelectLoader
     }
 
 
-    protected auto _assertFieldsPresent(Query $fetchQuery, array myKey): void
-    {
+    protected void _assertFieldsPresent(Query $fetchQuery, array myKey) {
         // _buildQuery() manually adds in required fields from junction table
     }
 

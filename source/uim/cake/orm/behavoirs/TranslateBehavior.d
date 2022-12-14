@@ -96,10 +96,8 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * Initialize hook
      *
      * @param array<string, mixed> myConfig The config for this behavior.
-     * @return void
      */
-    function initialize(array myConfig): void
-    {
+    void initialize(array myConfig) {
         this.getStrategy();
     }
 

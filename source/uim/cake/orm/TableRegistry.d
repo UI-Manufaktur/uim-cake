@@ -59,7 +59,7 @@ class TableRegistry
      * @param \Cake\ORM\Locator\ILocator myTableLocator Instance of a locator to use.
      * @return void
      */
-    static auto setTableLocator(ILocator myTableLocator): void
+    static void setTableLocator(ILocator myTableLocator)
     {
         FactoryLocator::add("Table", myTableLocator);
     }
@@ -110,19 +110,16 @@ class TableRegistry
      * @return void
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::remove()} instead. Will be removed in 5.0
      */
-    static function remove(string myAlias): void
+    static void remove(string myAlias)
     {
         static::getTableLocator().remove(myAlias);
     }
 
     /**
      * Clears the registry of configuration and instances.
-     *
-     * @return void
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::clear()} instead. Will be removed in 5.0
      */
-    static function clear(): void
-    {
+    static void clear() {
         static::getTableLocator().clear();
     }
 }
