@@ -53,7 +53,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @param \Cake\ORM\Table myTable The table this registry is attached to.
      * @return void
      */
-    auto setTable(Table myTable): void
+    void setTable(Table myTable)
     {
         this._table = myTable;
         this.setEventManager(myTable.getEventManager());
@@ -94,11 +94,9 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the behavior is missing in.
-     * @return void
      * @throws \Cake\ORM\Exception\MissingBehaviorException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
-    {
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingBehaviorException([
             "class":myClass . "Behavior",
             "plugin":myPlugin,
@@ -117,8 +115,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return \Cake\ORM\Behavior The constructed behavior class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected auto _create(myClass, string myAlias, array myConfig): Behavior
-    {
+    protected Behavior _create(myClass, string myAlias, array myConfig) {
         /** @var \Cake\ORM\Behavior $instance */
         $instance = new myClass(this._table, myConfig);
         myEnable = myConfig["enabled"] ?? true;

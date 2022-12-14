@@ -176,11 +176,8 @@ class ResultSet : IResultSet
      * Advances the iterator pointer to the next record
      *
      * Part of Iterator interface.
-     *
-     * @return void
      */
-    function next(): void
-    {
+    void next() {
         this._index++;
     }
 
@@ -192,7 +189,7 @@ class ResultSet : IResultSet
      * @throws \Cake\Database\Exception\DatabaseException
      * @return void
      */
-    function rewind(): void
+    function rewind()
     {
         if (this._index == 0) {
             return;
@@ -300,7 +297,7 @@ class ResultSet : IResultSet
      * @param string $serialized Serialized object
      * @return void
      */
-    function unserialize($serialized) {
+    void unserialize($serialized) {
         this.__unserialize((array)(unserialize($serialized) ?: []));
     }
 
@@ -310,7 +307,7 @@ class ResultSet : IResultSet
      * @param array myData Data array.
      * @return void
      */
-    auto __unserialize(array myData): void
+    void __unserialize(array myData)
     {
         this._results = SplFixedArray::fromArray(myData);
         this._useBuffering = true;
@@ -346,7 +343,7 @@ class ResultSet : IResultSet
      * @param \Cake\ORM\Query myQuery The query from where to derive the associations
      * @return void
      */
-    protected auto _calculateAssociationMap(Query myQuery): void
+    protected void _calculateAssociationMap(Query myQuery)
     {
         $map = myQuery.getEagerLoader().associationsMap(this._defaultTable);
         this._matchingMap = (new Collection($map))
@@ -367,7 +364,7 @@ class ResultSet : IResultSet
      * @param \Cake\ORM\Query myQuery The query from where to derive the column map
      * @return void
      */
-    protected auto _calculateColumnMap(Query myQuery): void
+    protected void _calculateColumnMap(Query myQuery)
     {
         $map = [];
         foreach (myQuery.clause("select") as myKey: myField) {

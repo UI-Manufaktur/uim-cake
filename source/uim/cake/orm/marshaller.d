@@ -849,10 +849,8 @@ class Marshaller
      * @param \Cake\Datasource\IEntity $entity The entity that was marshaled.
      * @param array myData readOnly myData to use.
      * @param array<string, mixed> myOptions List of options that are readOnly.
-     * @return void
      */
-    protected auto dispatchAfterMarshal(IEntity $entity, array myData, array myOptions = []): void
-    {
+    protected void dispatchAfterMarshal(IEntity $entity, array myData, array myOptions = []) {
         myData = new ArrayObject(myData);
         myOptions = new ArrayObject(myOptions);
         this._table.dispatchEvent("Model.afterMarshal", compact("entity", "data", "options"));

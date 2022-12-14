@@ -98,20 +98,17 @@ class TableRegistry
      * @return \Cake\ORM\Table
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::set()} instead. Will be removed in 5.0
      */
-    static auto set(string myAlias, Table $object): Table
-    {
-        return static::getTableLocator().set(myAlias, $object);
+    static Table set(string myAlias, Table tableObject) {
+        return static::getTableLocator().set(myAlias, tableObject);
     }
 
     /**
      * Removes an instance from the registry.
      *
      * @param string myAlias The alias to remove.
-     * @return void
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::remove()} instead. Will be removed in 5.0
      */
-    static void remove(string myAlias)
-    {
+    static void remove(string myAlias) {
         static::getTableLocator().remove(myAlias);
     }
 

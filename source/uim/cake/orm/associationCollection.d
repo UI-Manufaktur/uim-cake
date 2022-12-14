@@ -161,11 +161,8 @@ class AssociationCollection : IteratorAggregate
      * Remove all registered associations.
      *
      * Once removed associations will no longer be reachable
-     *
-     * @return void
      */
-    function removeAll(): void
-    {
+    void removeAll() {
         foreach (this._items as myAlias: $object) {
             this.remove(myAlias);
         }

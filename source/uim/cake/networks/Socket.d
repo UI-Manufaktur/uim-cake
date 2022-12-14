@@ -206,7 +206,7 @@ class Socket
      * @param string $host The host name being connected to.
      * @return void
      */
-    protected auto _setSslContext(string $host): void
+    protected void _setSslContext(string $host)
     {
         foreach (this._config as myKey: myValue) {
             if (substr(myKey, 0, 4) !== "ssl_") {
@@ -241,10 +241,8 @@ class Socket
      *
      * @param int $code Code number.
      * @param string myMessage Message.
-     * @return void
      */
-    protected auto _connectionErrorHandler(int $code, string myMessage): void
-    {
+    protected void _connectionErrorHandler(int $code, string myMessage) {
         this._connectionErrors[] = myMessage;
     }
 
@@ -323,7 +321,7 @@ class Socket
      * @param string $errStr Error string
      * @return void
      */
-    auto setLastError(Nullable!int $errNum, string $errStr): void
+    void setLastError(Nullable!int $errNum, string $errStr)
     {
         this.lastError = ["num":$errNum, "str":$errStr];
     }
@@ -415,7 +413,7 @@ class Socket
      * @param array|null $state Array with key and values to reset
      * @return void
      */
-    function reset(?array $state = null): void
+    void reset(?array $state = null)
     {
         if (empty($state)) {
             static $initialState = [];
@@ -441,7 +439,7 @@ class Socket
      * @throws \Cake\Network\Exception\SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
-    function enableCrypto(string myType, string $clientOrServer = "client", bool myEnable = true): void
+    void enableCrypto(string myType, string $clientOrServer = "client", bool myEnable = true)
     {
         if (!array_key_exists(myType . "_" . $clientOrServer, this._encryptMethods)) {
             throw new InvalidArgumentException("Invalid encryption scheme chosen");

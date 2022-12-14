@@ -89,7 +89,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param array $associations An associations array.
      * @return void
      */
-    protected auto _associated(Table myTable, array $associations): void
+    protected void _associated(Table myTable, array $associations)
     {
         foreach ($associations as myKey: $associated) {
             if (is_int(myKey)) {
@@ -110,10 +110,8 @@ class SaveOptionsBuilder : ArrayObject
      * @throws \RuntimeException If no such association exists for the given table.
      * @param \Cake\ORM\Table myTable Table object.
      * @param string $association Association name.
-     * @return void
      */
-    protected auto _checkAssociation(Table myTable, string $association): void
-    {
+    protected void _checkAssociation(Table myTable, string $association) {
         if (!myTable.associations().has($association)) {
             throw new RuntimeException(sprintf(
                 "Table `%s` is not associated with `%s`",

@@ -126,10 +126,8 @@ class EagerLoadable
      *
      * @param string myName The association name.
      * @param \Cake\ORM\EagerLoadable $association The association to load.
-     * @return void
      */
-    function addAssociation(string myName, EagerLoadable $association): void
-    {
+    void addAssociation(string myName, EagerLoadable $association) {
         this._associations[myName] = $association;
     }
 

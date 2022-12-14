@@ -600,7 +600,7 @@ abstract class Association
      * @param array<string, mixed> myOptions List of options used for initialization
      * @return void
      */
-    protected auto _options(array myOptions): void
+    protected void _options(array myOptions)
     {
     }
 
@@ -630,7 +630,7 @@ abstract class Association
      * @return void
      * @throws \RuntimeException Unable to build the query or associations.
      */
-    function attachTo(Query myQuery, array myOptions = []): void
+    void attachTo(Query myQuery, array myOptions = [])
     {
         myTarget = this.getTarget();
         myTable = myTarget.getTable();
@@ -706,7 +706,7 @@ abstract class Association
      * @param array<string, mixed> myOptions Options array containing the `negateMatch` key.
      * @return void
      */
-    protected auto _appendNotMatching(Query myQuery, array myOptions): void
+    protected void _appendNotMatching(Query myQuery, array myOptions)
     {
         myTarget = this._targetTable;
         if (!empty(myOptions["negateMatch"])) {
@@ -856,7 +856,7 @@ abstract class Association
      * @param \Cake\ORM\Query myQuery the query this association is attaching itself to
      * @return void
      */
-    protected auto _dispatchBeforeFind(Query myQuery): void
+    protected void _dispatchBeforeFind(Query myQuery)
     {
         myQuery.triggerBeforeFind();
     }
@@ -870,7 +870,7 @@ abstract class Association
      * @param array<string, mixed> myOptions options passed to the method `attachTo`
      * @return void
      */
-    protected auto _appendFields(Query myQuery, Query $surrogate, array myOptions): void
+    protected void _appendFields(Query myQuery, Query $surrogate, array myOptions)
     {
         if (myQuery.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
@@ -900,10 +900,8 @@ abstract class Association
      * @param \Cake\ORM\Query $surrogate the query having formatters for the associated
      * target table.
      * @param array<string, mixed> myOptions options passed to the method `attachTo`
-     * @return void
      */
-    protected auto _formatAssociationResults(Query myQuery, Query $surrogate, array myOptions): void
-    {
+    protected void _formatAssociationResults(Query myQuery, Query $surrogate, array myOptions) {
         $formatters = $surrogate.getResultFormatters();
 
         if (!$formatters || empty(myOptions["propertyPath"])) {
@@ -956,7 +954,7 @@ abstract class Association
      * @param array<string, mixed> myOptions options passed to the method `attachTo`
      * @return void
      */
-    protected auto _bindNewAssociations(Query myQuery, Query $surrogate, array myOptions): void
+    protected void _bindNewAssociations(Query myQuery, Query $surrogate, array myOptions)
     {
         $loader = $surrogate.getEagerLoader();
         $contain = $loader.getContain();

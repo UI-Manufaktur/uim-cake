@@ -156,7 +156,7 @@ class Behavior : IEventListener
      * @param array<string, mixed> myConfig The configuration settings provided to this behavior.
      * @return void
      */
-    function initialize(array myConfig): void
+    void initialize(array myConfig)
     {
     }
 
@@ -224,7 +224,7 @@ class Behavior : IEventListener
      * @return void
      * @throws \Cake\Core\Exception\CakeException if config are invalid
      */
-    function verifyConfig(): void
+    void verifyConfig()
     {
         myKeys = ["implementedFinders", "implementedMethods"];
         foreach (myKeys as myKey) {
