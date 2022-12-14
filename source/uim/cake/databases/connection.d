@@ -123,17 +123,10 @@ class Connection : IConnection
         }
     }
 
-    /**
-     * @inheritDoc
-     */
-    function config(): array
-    {
+    array config() {
         return this._config;
     }
 
-    /**
-     * @inheritDoc
-     */
     string configName() {
         return this._config["name"] ?? "";
     }
@@ -855,7 +848,7 @@ class Connection : IConnection
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         $secrets = [
             "password":"*****",

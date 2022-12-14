@@ -148,7 +148,6 @@ class PaginatorComponent : Component
      * ```
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
      *   return $q.where(["name": "UIM"])
-
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```

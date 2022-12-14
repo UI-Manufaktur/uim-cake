@@ -72,7 +72,7 @@ class IniConfig : IConfigEngine
      * @throws \Cake\Core\Exception\CakeException when files don"t exist.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    function read(string myKey): array
+    array read(string myKey)
     {
         myfile = this._getFilePath(myKey, true);
 
@@ -100,9 +100,8 @@ class IniConfig : IConfigEngine
      * @param array myValues Values to be exploded.
      * @return array Array of values exploded
      */
-    protected auto _parseNestedValues(array myValues): array
-    {
-        foreach (myValues as myKey: myValue) {
+    protected array _parseNestedValues(array myValues) {
+        foreach (myKey, myValue; myValues) {
             if (myValue == "1") {
                 myValue = true;
             }

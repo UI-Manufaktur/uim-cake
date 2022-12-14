@@ -409,11 +409,7 @@ abstract class Driver : IDriver
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function compileQuery(Query myQuery, ValueBinder $binder): array
-    {
+    array compileQuery(Query myQuery, ValueBinder $binder) {
         $processor = this.newCompiler();
         $translator = this.queryTranslator(myQuery.type());
         myQuery = $translator(myQuery);
@@ -475,7 +471,7 @@ abstract class Driver : IDriver
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "connected":this._connection !== null,

@@ -15,7 +15,7 @@ interface IConfigEngine
      * @param string myKey Key to read.
      * @return array An array of data to merge into the runtime configuration
      */
-    function read(string myKey): array;
+    array read(string myKey);
 
     /**
      * Dumps the configure data into the storage key/file of the given `myKey`.

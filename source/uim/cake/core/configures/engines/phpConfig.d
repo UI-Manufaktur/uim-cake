@@ -61,8 +61,7 @@ class PhpConfig : IConfigEngine
      * @throws \Cake\Core\Exception\CakeException when files don"t exist or they don"t contain `myConfig`.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    function read(string myKey): array
-    {
+    array read(string myKey) {
         myfile = this._getFilePath(myKey, true);
 
         myConfig = null;

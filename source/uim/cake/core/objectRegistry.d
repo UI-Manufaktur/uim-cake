@@ -260,10 +260,9 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param array $objects Array of child objects to normalize.
      * @return array<string, array> Array of normalized objects.
      */
-    function normalizeArray(array $objects): array
-    {
+    array normalizeArray(array $objects) {
         $normal = [];
-        foreach ($objects as $i: $objectName) {
+        foreach ($i, $objectName; $objects) {
             myConfig = [];
             if (!is_int($i)) {
                 myConfig = (array)$objectName;
@@ -371,7 +370,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         $properties = get_object_vars(this);
         if (isset($properties["_loaded"])) {

@@ -56,8 +56,7 @@ class JsonConfig : IConfigEngine
      *   files contain ".." (as this could lead to abusive reads) or when there
      *   is an error parsing the JSON string.
      */
-    function read(string myKey): array
-    {
+    array read(string myKey) {
         myfile = this._getFilePath(myKey, true);
 
         myValues = json_decode(file_get_contents(myfile), true);

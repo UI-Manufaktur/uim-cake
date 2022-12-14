@@ -56,13 +56,8 @@ class CakeException : RuntimeException
         super.this(myMessage, $code ?? this._defaultCode, $previous);
     }
 
-    /**
-     * Get the passed in attributes
-     *
-     * @return array
-     */
-    auto getAttributes(): array
-    {
+    // Get the passed in attributes
+    array getAttributes() {
         return this._attributes;
     }
 

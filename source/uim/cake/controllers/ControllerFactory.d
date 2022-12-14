@@ -137,7 +137,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @param array $passedParams Params passed by the router.
      * @return array
      */
-    protected auto getActionArgs(Closure $action, array $passedParams): array
+    protected array getActionArgs(Closure $action, array $passedParams)
     {
         $resolved = [];
         $function = new ReflectionFunction($action);

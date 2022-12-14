@@ -351,8 +351,7 @@ class Shell {
      * @return array First value has to be an array of the command arguments.
      * Second value has to be an array of extra parameter to pass on to the dispatcher
      */
-    function parseDispatchArguments(array $args): array
-    {
+    array parseDispatchArguments(array $args) {
         $extra = [];
 
         if (is_string($args[0]) && count($args) == 1) {

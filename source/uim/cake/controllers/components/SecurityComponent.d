@@ -118,7 +118,7 @@ class SecurityComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         return [
             "Controller.startup":"startup",
@@ -290,7 +290,7 @@ class SecurityComponent : Component
      * @param array $check Data array
      * @return array
      */
-    protected auto _fieldsList(array $check): array
+    protected array _fieldsList(array $check)
     {
         $locked = "";
         $token = urldecode($check["_Token"]["fields"]);
@@ -445,7 +445,7 @@ class SecurityComponent : Component
         string $intKeyMessage = "",
         string $stringKeyMessage = "",
         string $missingMessage = ""
-    ): array {
+    ) {
         myMessages = this._matchExistingFields(myDataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = this._debugExpectedFields($expectedFields, $missingMessage);
         if ($expectedFieldsMessage !== null) {
@@ -508,7 +508,7 @@ class SecurityComponent : Component
         array &$expectedFields,
         string $intKeyMessage,
         string $stringKeyMessage
-    ): array {
+    ) {
         myMessages = [];
         foreach (myDataFields as myKey: myValue) {
             if (is_int(myKey)) {
