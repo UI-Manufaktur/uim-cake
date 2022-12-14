@@ -168,10 +168,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $index name of the rule
      * @param \Cake\Validation\ValidationRule|array $rule Rule to add to $index
-     * @return void
      */
-    function offsetSet($index, $rule): void
-    {
+    void offsetSet($index, $rule) {
         this.add($index, $rule);
     }
 
@@ -179,10 +177,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * Unsets a validation rule
      *
      * @param string $index name of the rule
-     * @return void
      */
-    function offsetUnset($index): void
-    {
+    void offsetUnset($index) {
         unset(this._rules[$index]);
     }
 

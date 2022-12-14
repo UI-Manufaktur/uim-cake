@@ -31,8 +31,7 @@ abstract class SerializedView : View
     ];
 
 
-    function initialize(): void
-    {
+    void initialize() {
         super.initialize();
         this.setResponse(this.getResponse().withType(this._responseType));
     }

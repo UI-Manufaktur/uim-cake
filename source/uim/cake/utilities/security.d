@@ -73,7 +73,7 @@ class Security {
      * @return void
      * @see \Cake\Utility\Security::hash()
      */
-    static auto setHash(string $hash): void
+    static void setHash(string $hash)
     {
         static::$hashType = $hash;
     }
@@ -193,7 +193,7 @@ class Security {
      * @return void
      * @throws \InvalidArgumentException When key length is not 256 bit/32 bytes
      */
-    protected static auto _checkKey(string myKey, string $method): void
+    protected static void _checkKey(string myKey, string $method)
     {
         if (mb_strlen(myKey, "8bit") < 32) {
             throw new InvalidArgumentException(
@@ -269,14 +269,11 @@ class Security {
     }
 
     /**
-     * Sets the HMAC salt to be used for encryption/decryption
-     * routines.
+     * Sets the HMAC salt to be used for encryption/decryption routines.
      *
      * @param string $salt The salt to use for encryption routines.
-     * @return void
      */
-    static auto setSalt(string $salt): void
-    {
+    static void setSalt(string $salt) {
         static::$_salt = $salt;
     }
 }

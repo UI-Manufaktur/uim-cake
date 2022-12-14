@@ -1044,7 +1044,7 @@ class Text {
      * @param \Transliterator $transliterator A `Transliterator` instance.
      * @return void
      */
-    static auto setTransliterator(Transliterator $transliterator): void
+    static void setTransliterator(Transliterator $transliterator)
     {
         static::$_defaultTransliterator = $transliterator;
     }
@@ -1065,7 +1065,7 @@ class Text {
      * @param string $transliteratorId Transliterator identifier.
      * @return void
      */
-    static auto setTransliteratorId(string $transliteratorId): void
+    static void setTransliteratorId(string $transliteratorId)
     {
         $transliterator = transliterator_create($transliteratorId);
         if ($transliterator == null) {

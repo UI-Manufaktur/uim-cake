@@ -129,10 +129,8 @@ class PaginatorHelper : Helper
      *
      * @param array<string, mixed> myOptions Default options for pagination links.
      *   See PaginatorHelper::myOptions for list of keys.
-     * @return void
      */
-    function options(array myOptions = []): void
-    {
+    void options(array myOptions = []) {
         myRequest = this._View.getRequest();
 
         if (!empty(myOptions["paging"])) {

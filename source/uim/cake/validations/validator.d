@@ -324,7 +324,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @psalm-param object|class-string $object
      * @return void
      */
-    static function addDefaultProvider(string myName, $object): void
+    static void addDefaultProvider(string myName, $object)
     {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
@@ -382,10 +382,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param string myField name of the field to set
      * @param \Cake\Validation\ValidationSet|array $rules set of rules to apply to field
-     * @return void
      */
-    function offsetSet(myField, $rules): void
-    {
+    void offsetSet(myField, $rules) {
         if (!$rules instanceof ValidationSet) {
             $set = new ValidationSet();
             foreach ($rules as myName => $rule) {
@@ -402,7 +400,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param string myField name of the field to unset
      * @return void
      */
-    function offsetUnset(myField): void
+    void offsetUnset(myField)
     {
         unset(this._fields[myField]);
     }

@@ -285,7 +285,7 @@ class Xml {
      * @return void
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static auto _fromArray(DOMDocument $dom, myNode, &myData, $format): void
+    protected static void _fromArray(DOMDocument $dom, myNode, &myData, $format)
     {
         if (empty(myData) || !is_array(myData)) {
             return;
@@ -353,10 +353,8 @@ class Xml {
      * Helper to _fromArray(). It will create children of arrays
      *
      * @param array<string, mixed> myData Array with information to create children
-     * @return void
      */
-    protected static auto _createChild(array myData): void
-    {
+    protected static void _createChild(array myData) {
         myData += [
             "dom" => null,
             "node" => null,
@@ -431,7 +429,7 @@ class Xml {
      * @param $modules List of modules in XML
      * @return void
      */
-    protected static auto _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, string[] $modules): void
+    protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, string[] $modules)
     {
         myData = [];
 

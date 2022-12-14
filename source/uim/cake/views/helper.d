@@ -180,10 +180,8 @@ class Helper : IEventListener
      * Implement this method to avoid having to overwrite the constructor and call parent.
      *
      * @param array<string, mixed> myConfig The configuration settings provided to this helper.
-     * @return void
      */
-    function initialize(array myConfig): void
-    {
+    void initialize(array myConfig) {
     }
 
     /**
@@ -192,8 +190,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
-    {
+    auto __debugInfo(): array {
         return [
             "helpers" => this.helpers,
             "implementedEvents" => this.implementedEvents(),

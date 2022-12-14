@@ -102,11 +102,9 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the helper is missing in.
-     * @return void
      * @throws \Cake\View\Exception\MissingHelperException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
-    {
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingHelperException([
             "class" => myClass . "Helper",
             "plugin" => myPlugin,

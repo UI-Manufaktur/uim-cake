@@ -191,7 +191,7 @@ class Inflector
      *
      * @return void
      */
-    static function reset(): void
+    static void reset()
     {
         if (empty(static::$_initialState)) {
             static::$_initialState = get_class_vars(self::class);

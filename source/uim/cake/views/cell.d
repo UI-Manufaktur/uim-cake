@@ -109,11 +109,8 @@ abstract class Cell : IEventDispatcher
      *
      * Implement this method to avoid having to overwrite
      * the constructor and calling super.this().
-     *
-     * @return void
      */
-    function initialize(): void
-    {
+    void initialize() {
     }
 
     /**

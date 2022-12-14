@@ -8,14 +8,11 @@ import uim.cake;
  * Currently, only switches the default layout and sets the response type - which just maps to
  * text/html by default.
  */
-class AjaxView : View
-{
+class AjaxView : View {
 
     protected $layout = "ajax";
 
-
-    function initialize(): void
-    {
+    void initialize() {
         super.initialize();
         this.setResponse(this.getResponse().withType("ajax"));
     }
