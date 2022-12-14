@@ -108,7 +108,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\IEventListener $subscriber Event listener.
      * @return void
      */
-    protected auto _attachSubscriber(IEventListener $subscriber): void
+    protected void _attachSubscriber(IEventListener $subscriber)
     {
         foreach ($subscriber.implementedEvents() as myEventKey: $function) {
             myOptions = [];
@@ -209,8 +209,7 @@ class EventManager : IEventManager
      * @param string|null myEventKey optional event key name to unsubscribe the listener from
      * @return void
      */
-    protected auto _detachSubscriber(IEventListener $subscriber, Nullable!string myEventKey = null): void
-    {
+    protected void _detachSubscriber(IEventListener $subscriber, Nullable!string myEventKey = null) {
         myEvents = $subscriber.implementedEvents();
         if (!empty(myEventKey) && empty(myEvents[myEventKey])) {
             return;

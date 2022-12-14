@@ -288,7 +288,7 @@ class Session
      * @return void
      * @throws \RuntimeException if any directive could not be set
      */
-    function options(array myOptions): void
+    void options(array myOptions)
     {
         if (session_status() == \PHP_SESSION_ACTIVE || headers_sent()) {
             return;
@@ -465,7 +465,7 @@ class Session
      * @param mixed myValue Value to write
      * @return void
      */
-    function write(myName, myValue = null): void
+    void write(myName, myValue = null)
     {
         if (!this.started()) {
             this.start();
@@ -512,7 +512,7 @@ class Session
      * @param string myName Session variable to remove
      * @return void
      */
-    function delete(string myName): void
+    void delete(string myName)
     {
         if (this.check(myName)) {
             this._overwrite($_SESSION, Hash::remove($_SESSION, myName));
@@ -526,7 +526,7 @@ class Session
      * @param array $new New set of variable: value
      * @return void
      */
-    protected auto _overwrite(array &$old, array $new): void
+    protected void _overwrite(array &$old, array $new)
     {
         if (!empty($old)) {
             foreach ($old as myKey: $var) {
@@ -545,7 +545,7 @@ class Session
      *
      * @return void
      */
-    function destroy(): void
+    void destroy()
     {
         if (this._hasSession() && !this.started()) {
             this.start();
@@ -565,20 +565,15 @@ class Session
      * Optionally it also clears the session id and renews the session.
      *
      * @param bool $renew If session should be renewed, as well. Defaults to false.
-     * @return void
      */
-    function clear(bool $renew = false): void
-    {
+    void clear(bool $renew = false) {
         $_SESSION = [];
         if ($renew) {
             this.renew();
         }
     }
 
-    /**
-     * Returns whether a session exists
-     *
-     */
+    // Returns whether a session exists
     protected bool _hasSession() {
         return !ini_get("session.use_cookies")
             || isset($_COOKIE[session_name()])
@@ -591,7 +586,7 @@ class Session
      *
      * @return void
      */
-    function renew(): void
+    void renew()
     {
         if (!this._hasSession() || this._isCLI) {
             return;

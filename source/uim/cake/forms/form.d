@@ -44,18 +44,16 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
 
     /**
      * Schema class.
-     *
-     * @var string
      * @psalm-var class-string<\Cake\Form\Schema>
      */
-    protected $_schemaClass = Schema::class;
+    protected string $_schemaClass = Schema::class;
 
     /**
      * The schema used by this form.
      *
      * @var \Cake\Form\Schema|null
      */
-    protected $_schema;
+    protected Schema $_schema;
 
     /**
      * The errors if any
@@ -64,12 +62,8 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      */
     protected $_errors = [];
 
-    /**
-     * Form"s data.
-     *
-     * @var array
-     */
-    protected $_data = [];
+    // Form"s data.
+    protected array $_data = [];
 
     /**
      * Constructor

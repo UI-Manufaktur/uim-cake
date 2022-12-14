@@ -51,10 +51,8 @@ class Request : Message : RequestInterface
      *
      * @phpstan-param array<non-empty-string, non-empty-string> $headers
      * @param array<string, string> $headers The headers to add.
-     * @return void
      */
-    protected auto addHeaders(array $headers): void
-    {
+    protected void addHeaders(array $headers) {
         foreach ($headers as myKey: $val) {
             $normalized = strtolower(myKey);
             this.headers[myKey] = (array)$val;

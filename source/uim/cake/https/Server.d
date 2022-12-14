@@ -96,7 +96,7 @@ class Server : IEventDispatcher
      *
      * @return void
      */
-    protected auto bootstrap(): void
+    protected void bootstrap()
     {
         this.app.bootstrap();
         if (this.app instanceof PluginApplicationInterface) {
@@ -110,10 +110,8 @@ class Server : IEventDispatcher
      * @param \Psr\Http\Message\IResponse $response The response to emit
      * @param \Laminas\HttpHandlerRunner\Emitter\EmitterInterface|null $emitter The emitter to use.
      *   When null, a SAPI Stream Emitter will be used.
-     * @return void
      */
-    function emit(IResponse $response, ?EmitterInterface $emitter = null): void
-    {
+    void emit(IResponse $response, ?EmitterInterface $emitter = null) {
         if (!$emitter) {
             $emitter = new ResponseEmitter();
         }

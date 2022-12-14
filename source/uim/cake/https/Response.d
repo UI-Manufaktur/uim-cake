@@ -440,13 +440,8 @@ class Response : IResponse
         this._cookies = new CookieCollection();
     }
 
-    /**
-     * Creates the stream object.
-     *
-     * @return void
-     */
-    protected auto _createStream(): void
-    {
+    // Creates the stream object.
+    protected void _createStream() {
         this.stream = new Stream(this._streamTarget, this._streamMode);
     }
 
@@ -457,7 +452,7 @@ class Response : IResponse
      * @param string myType The type to set.
      * @return void
      */
-    protected auto _setContentType(string myType): void
+    protected void _setContentType(string myType)
     {
         if (in_array(this._status, [304, 204], true)) {
             this._clearHeader("Content-Type");
@@ -510,10 +505,8 @@ class Response : IResponse
      * @phpstan-param non-empty-string $header
      * @param string $header Header key.
      * @param string myValue Header value.
-     * @return void
      */
-    protected auto _setHeader(string $header, string myValue): void
-    {
+    protected void _setHeader(string $header, string myValue) {
         $normalized = strtolower($header);
         this.headerNames[$normalized] = $header;
         this.headers[$header] = [myValue];
@@ -526,7 +519,7 @@ class Response : IResponse
      * @param string $header Header key.
      * @return void
      */
-    protected auto _clearHeader(string $header): void
+    protected void _clearHeader(string $header)
     {
         $normalized = strtolower($header);
         if (!isset(this.headerNames[$normalized])) {
@@ -592,7 +585,7 @@ class Response : IResponse
      * @return void
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    protected auto _setStatus(int $code, string $reasonPhrase = ""): void
+    protected void _setStatus(int $code, string $reasonPhrase = "")
     {
         if ($code < static::STATUS_CODE_MIN || $code > static::STATUS_CODE_MAX) {
             throw new InvalidArgumentException(sprintf(
@@ -641,7 +634,7 @@ class Response : IResponse
      * @param array<string>|string $mimeType Definition of the mime type.
      * @return void
      */
-    auto setTypeMap(string myType, $mimeType): void
+    void setTypeMap(string myType, $mimeType)
     {
         this._mimeTypes[myType] = $mimeType;
     }
@@ -870,7 +863,7 @@ class Response : IResponse
      *
      * @return void
      */
-    protected auto _setCacheControl(): void
+    protected void _setCacheControl()
     {
         $control = "";
         foreach (this._cacheDirectives as myKey: $val) {
@@ -934,7 +927,7 @@ class Response : IResponse
      *
      * @return void
      */
-    function notModified(): void
+    void notModified()
     {
         this._createStream();
         this._setStatus(304);
@@ -1445,7 +1438,7 @@ class Response : IResponse
      * @param string $httpRange The range to use.
      * @return void
      */
-    protected auto _fileRange(SplFileInfo myfile, string $httpRange): void
+    protected void _fileRange(SplFileInfo myfile, string $httpRange)
     {
         myfileSize = myfile.getSize();
         $lastByte = myfileSize - 1;

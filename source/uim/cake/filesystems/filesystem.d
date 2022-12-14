@@ -109,11 +109,9 @@ class Filesystem
      *
      * @param string myfilename File path.
      * @param string myContents Content to dump.
-     * @return void
      * @throws \Cake\Core\Exception\CakeException When dumping fails.
      */
-    function dumpFile(string myfilename, string myContents): void
-    {
+    void dumpFile(string myfilename, string myContents) {
         $dir = dirname(myfilename);
         if (!is_dir($dir)) {
             this.mkdir($dir);
@@ -146,7 +144,7 @@ class Filesystem
      * @return void
      * @throws \Cake\Core\Exception\CakeException When directory creation fails.
      */
-    function mkdir(string $dir, int myMode = 0755): void
+    void mkdir(string $dir, int myMode = 0755)
     {
         if (is_dir($dir)) {
             return;

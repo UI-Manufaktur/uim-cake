@@ -468,7 +468,7 @@ class Client : ClientInterface
      *
      * @return void
      */
-    static function clearMockResponses(): void
+    static void clearMockResponses()
     {
         static::$_mockAdapter = null;
     }
@@ -491,10 +491,8 @@ class Client : ClientInterface
      * @param string myUrl The URL being matched. See above for examples.
      * @param \Cake\Http\Client\Response $response The response that matches the request.
      * @param array<string, mixed> myOptions See above.
-     * @return void
      */
-    static function addMockResponse(string $method, string myUrl, Response $response, array myOptions = []): void
-    {
+    static void addMockResponse(string $method, string myUrl, Response $response, array myOptions = []) {
         if (!static::$_mockAdapter) {
             static::$_mockAdapter = new MockAdapter();
         }
