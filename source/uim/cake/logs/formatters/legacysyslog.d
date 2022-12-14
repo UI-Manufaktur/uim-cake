@@ -1,14 +1,9 @@
-
-
-/**
- * UIM(tm) :  Rapid Development Framework (https://UIM.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakefoundation.org UIM(tm) Project
- * @since         4.3.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.logs.formatters;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.logs.formatters;
 
 /**
  * @deprecated 4.3.0 Create a custom formatter and set it with `formatter` config instead.

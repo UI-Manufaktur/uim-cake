@@ -5,9 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.logs.engines;
 
-import uim.cake.console.consoleOutput;
-import uim.cake.logs.formatters\DefaultFormatter;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Console logging. Writes logs to console output.

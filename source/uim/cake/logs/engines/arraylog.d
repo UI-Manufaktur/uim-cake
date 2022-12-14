@@ -5,7 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.logs.engines;
 
-import uim.cake.logs.formatters\DefaultFormatter;
+@safe:
+import uim.cake;
 
 /**
  * Array logger.

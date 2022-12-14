@@ -5,20 +5,11 @@
 **********************************************************************************************************/
 module uim.cake.logs.engines;
 
-use ArrayObject;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.logs.formatters\AbstractFormatter;
-import uim.cake.logs.formatters\DefaultFormatter;
-use InvalidArgumentException;
-use JsonSerializable;
-use Psr\Log\AbstractLogger;
-use Serializable;
+@safe:
+import uim.cake;
 
-/**
- * Base log engine class.
- */
-abstract class BaseLog : AbstractLogger
-{
+// Base log engine class.
+abstract class BaseLog : AbstractLogger {
     use InstanceConfigTrait;
 
     /**

@@ -5,9 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.logs.engines;
 
-import uim.cake.core.Configure;
-import uim.cake.logs.formatters\DefaultFormatter;
-import uim.cake.utilities.Text;
+@safe:
+import uim.cake;
 
 /**
  * File Storage stream for Logging. Writes logs to different files

@@ -5,14 +5,11 @@
 **********************************************************************************************************/
 module uim.cake.logs.engines;
 
-import uim.cake.logs.formatters\DefaultFormatter;
-import uim.cake.logs.formatters\LegacySyslogFormatter;
+@safe:
+import uim.cake;
 
-/**
- * Syslog stream for Logging. Writes logs to the system logger
- */
-class SyslogLog : BaseLog
-{
+// Syslog stream for Logging. Writes logs to the system logger
+class SyslogLog : BaseLog {
     /**
      * Default config for this class
      *
