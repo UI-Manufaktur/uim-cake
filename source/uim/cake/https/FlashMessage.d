@@ -7,8 +7,7 @@ use Throwable;
  * The FlashMessage class provides a way for you to write a flash variable
  * to the session, to be rendered in a view with the FlashHelper.
  */
-class FlashMessage
-{
+class FlashMessage {
     use InstanceConfigTrait;
 
     /**
@@ -63,7 +62,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::$_defaultConfig For default values for the options.
      */
-    auto set(myMessage, array myOptions = []): void
+    void set(myMessage, array myOptions = [])
     {
         myOptions += (array)this.getConfig();
 
@@ -119,7 +118,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    auto setExceptionMessage(Throwable myException, array myOptions = []): void
+    void setExceptionMessage(Throwable myException, array myOptions = [])
     {
         myOptions["element"] = myOptions["element"] ?? "error";
         myOptions["params"]["code"] = myOptions["params"]["code"] ?? myException.getCode();
@@ -149,7 +148,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function success(string myMessage, array myOptions = []): void
+    void success(string myMessage, array myOptions = [])
     {
         myOptions["element"] = "success";
         this.set(myMessage, myOptions);
@@ -165,7 +164,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function error(string myMessage, array myOptions = []): void
+    void error(string myMessage, array myOptions = [])
     {
         myOptions["element"] = "error";
         this.set(myMessage, myOptions);
@@ -181,7 +180,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function warning(string myMessage, array myOptions = []): void
+    void warning(string myMessage, array myOptions = [])
     {
         myOptions["element"] = "warning";
         this.set(myMessage, myOptions);
@@ -194,11 +193,9 @@ class FlashMessage
      *
      * @param string myMessage Message to flash.
      * @param array<string, mixed> myOptions An array of options.
-     * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function info(string myMessage, array myOptions = []): void
-    {
+    void info(string myMessage, array myOptions = []) {
         myOptions["element"] = "info";
         this.set(myMessage, myOptions);
     }
