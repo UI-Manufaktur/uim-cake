@@ -1,6 +1,12 @@
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
 module uim.cake.databases;
 
-import uim.cake.databases.Schema\CachedCollection;
+@safe:
+import uim.cake;
 
 /**
  * Schema Cache.
@@ -12,8 +18,7 @@ import uim.cake.databases.Schema\CachedCollection;
  *
  * @link https://en.wikipedia.org/wiki/Thundering_herd_problem About the thundering herd problem
  */
-class SchemaCache
-{
+class SchemaCache {
     /**
      * Schema
      *
