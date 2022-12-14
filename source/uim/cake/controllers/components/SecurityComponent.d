@@ -1,13 +1,9 @@
-
-
-/**
-
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://UIM.org UIM(tm) Project
- * @since         0.10.8
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.controllerss.components;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.controllerss.components;
 
 import uim.cake.controllerss.components;
 import uim.cake.controllers\Controller;
