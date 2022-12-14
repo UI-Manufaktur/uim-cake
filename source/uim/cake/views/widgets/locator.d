@@ -63,9 +63,8 @@ class WidgetLocator
      * widgets.
      *
      * @param string myfile The file to load
-     * @return void
      */
-    function load(string myfile): void
+    void load(string myfile)
     {
         $loader = new PhpConfig();
         $widgets = $loader.read(myfile);
@@ -89,10 +88,9 @@ class WidgetLocator
      * with plugin notation, or fully moduled class names.
      *
      * @param array $widgets Array of widgets to use.
-     * @return void
      * @throws \RuntimeException When class does not implement IWidget.
      */
-    function add(array $widgets): void
+    void add(array $widgets)
     {
         myfiles = [];
 
@@ -147,13 +145,8 @@ class WidgetLocator
         return this._widgets[myName] = this._resolveWidget(this._widgets[myName]);
     }
 
-    /**
-     * Clear the registry and reset the widgets.
-     *
-     * @return void
-     */
-    function clear(): void
-    {
+    // Clear the registry and reset the widgets.
+    void clear() {
         this._widgets = [];
     }
 
@@ -164,8 +157,7 @@ class WidgetLocator
      * @return \Cake\View\Widget\IWidget Widget instance.
      * @throws \ReflectionException
      */
-    protected auto _resolveWidget(myConfig): IWidget
-    {
+    protected IWidget _resolveWidget(myConfig) {
         if (is_string(myConfig)) {
             myConfig = [myConfig];
         }

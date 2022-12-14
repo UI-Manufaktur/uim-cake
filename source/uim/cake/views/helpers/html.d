@@ -546,11 +546,9 @@ class HtmlHelper : Helper {
      *   custom block name.
      *
      * @param array<string, mixed> myOptions Options for the code block.
-     * @return void
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    function scriptStart(array myOptions = []): void
-    {
+    void scriptStart(array myOptions = []) {
         this._scriptBlockOptions = myOptions;
         ob_start();
     }

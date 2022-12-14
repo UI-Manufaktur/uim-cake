@@ -482,7 +482,7 @@ class FormHelper : Helper
      * @param array|string|null myUrl The URL of the last form.
      * @return void
      */
-    protected auto _lastAction(myUrl = null): void
+    protected void _lastAction(myUrl = null)
     {
         $action = Router::url(myUrl, true);
         myQuery = parse_url($action, PHP_URL_QUERY);
@@ -2328,7 +2328,7 @@ class FormHelper : Helper
      *   when the form context is the correct type.
      * @return void
      */
-    function addContextProvider(string myType, callable $check): void
+    void addContextProvider(string myType, callable $check)
     {
         this.contextFactory().addProvider(myType, $check);
     }
@@ -2381,7 +2381,7 @@ class FormHelper : Helper
      *   name or an object implementing the IWidget.
      * @return void
      */
-    function addWidget(string myName, $spec): void
+    void addWidget(string myName, $spec)
     {
         this._locator.add([myName: $spec]);
     }
@@ -2425,11 +2425,8 @@ class FormHelper : Helper
      * Restores the default values built into FormHelper.
      *
      * This method will not reset any templates set in custom widgets.
-     *
-     * @return void
      */
-    function resetTemplates(): void
-    {
+    void resetTemplates() {
         this.setTemplates(this._defaultConfig["templates"]);
     }
 

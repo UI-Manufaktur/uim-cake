@@ -87,10 +87,9 @@ class EntityContext : IContext {
      * naming conventions. This inference will work with a number of common objects
      * like arrays, Collection objects and ResultSets.
      *
-     * @return void
      * @throws \RuntimeException When a table object cannot be located/inferred.
      */
-    protected auto _prepare(): void
+    protected void _prepare()
     {
         /** @var \Cake\ORM\Table|null myTable */
         myTable = this._context["table"];

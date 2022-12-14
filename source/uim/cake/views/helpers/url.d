@@ -29,10 +29,8 @@ class UrlHelper : Helper
      * Check proper configuration
      *
      * @param array<string, mixed> myConfig The configuration settings provided to this helper.
-     * @return void
      */
-    function initialize(array myConfig): void
-    {
+    void initialize(array myConfig) {
         super.initialize(myConfig);
         $engineClassConfig = this.getConfig("assetUrlClassName");
 

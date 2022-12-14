@@ -547,11 +547,9 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @param mixed $item Reference to the view var value.
      * @param string myKey View var key.
-     * @return void
      * @throws \RuntimeException
      */
-    protected auto _checkViewVars(&$item, string myKey): void
-    {
+    protected void _checkViewVars(&$item, string myKey) {
         if ($item instanceof Exception) {
             $item = (string)$item;
         }
@@ -584,13 +582,8 @@ class ViewBuilder : JsonSerializable, Serializable
         return this;
     }
 
-    /**
-     * Serializes the view builder object.
-     *
-     * @return string
-     */
-    string serialize()
-    {
+    // Serializes the view builder object.
+    string serialize() {
         $array = this.jsonSerialize();
 
         return serialize($array);
@@ -610,10 +603,8 @@ class ViewBuilder : JsonSerializable, Serializable
      * Unserializes the view builder object.
      *
      * @param string myData Serialized string.
-     * @return void
      */
-    function unserialize(myData): void
-    {
+    void unserialize(myData) {
         this.createFromArray(unserialize(myData));
     }
 
@@ -621,10 +612,8 @@ class ViewBuilder : JsonSerializable, Serializable
      * Magic method used to rebuild the view builder object.
      *
      * @param array<string, mixed> myData Data array.
-     * @return void
      */
-    auto __unserialize(array myData): void
-    {
+    void __unserialize(array myData) {
         this.createFromArray(myData);
     }
 }

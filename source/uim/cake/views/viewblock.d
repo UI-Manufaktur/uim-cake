@@ -64,8 +64,7 @@ class ViewBlock
      * @throws \Cake\Core\Exception\CakeException When starting a block twice
      * @return void
      */
-    function start(string myName, string myMode = ViewBlock::OVERRIDE): void
-    {
+    void start(string myName, string myMode = ViewBlock::OVERRIDE) {
         if (array_key_exists(myName, this._active)) {
             throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", myName));
         }
@@ -79,7 +78,7 @@ class ViewBlock
      * @return void
      * @see \Cake\View\ViewBlock::start()
      */
-    function end(): void
+    void end()
     {
         if (this._discardActiveBufferOnEnd) {
             this._discardActiveBufferOnEnd = false;
@@ -118,7 +117,7 @@ class ViewBlock
      *   If ViewBlock::PREPEND it will be prepended.
      * @return void
      */
-    function concat(string myName, myValue = null, myMode = ViewBlock::APPEND): void
+    void concat(string myName, myValue = null, myMode = ViewBlock::APPEND)
     {
         if (myValue == null) {
             this.start(myName, myMode);
@@ -145,7 +144,7 @@ class ViewBlock
      *   to string.
      * @return void
      */
-    auto set(string myName, myValue): void
+    void set(string myName, myValue)
     {
         this._blocks[myName] = (string)myValue;
     }
