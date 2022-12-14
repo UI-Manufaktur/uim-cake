@@ -1,24 +1,16 @@
-
-
-/**
-
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @since         3.4.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.orm.Exception;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.orm.Exception;
 
 import uim.cake.core.exceptions\CakeException;
 import uim.cake.datasources\IEntity;
 import uim.cake.utilities.Hash;
 use Throwable;
 
-/**
- * Used when a strict save or delete fails
- */
+// Used when a strict save or delete fails
 class PersistenceFailedException : CakeException
 {
     /**

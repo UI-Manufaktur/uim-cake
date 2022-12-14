@@ -1,14 +1,9 @@
-
-
-/**
- * UIM(tm) : Rapid Development Framework (http://UIM.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://UIM.org UIM(tm) Project
- * @since         4.2.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */module uim.cake.https\Middleware;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.https\Middleware;
 
 use ArrayAccess;
 import uim.cake.https\Exception\InvalidCsrfTokenException;
