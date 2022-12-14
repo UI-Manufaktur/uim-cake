@@ -48,10 +48,9 @@ class YearWidget : BasicWidget
      *
      * @param array<string, mixed> myData Data to render with.
      * @param \Cake\View\Form\IContext $context The current form context.
-     * @return string A generated select box.
+     * @return A generated select box.
      */
-    function render(array myData, IContext $context): string
-    {
+    string render(array myData, IContext $context) {
         myData += this.mergeDefaults(myData, $context);
 
         if (empty(myData["min"])) {

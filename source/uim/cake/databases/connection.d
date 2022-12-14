@@ -681,7 +681,7 @@ class Connection : IConnection
      *
      * @param mixed myValue The value to quote.
      * @param \Cake\Database\TypeInterface|string|int myType Type to be used for determining kind of quoting to perform
-     * @return string Quoted value
+     * @return  Quoted value
      */
     string quote(myValue, myType = "string") {
         [myValue, myType] = this.cast(myValue, myType);
@@ -704,7 +704,7 @@ class Connection : IConnection
      *
      * This does not require `supportsQuoting()` to work.
      *
-     * @param string myIdentifier The identifier to quote.
+     * @param myIdentifier The identifier to quote.
      */
     string quoteIdentifier(string myIdentifier) {
         return this._driver.quoteIdentifier(myIdentifier);

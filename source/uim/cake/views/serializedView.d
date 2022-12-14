@@ -63,11 +63,10 @@ abstract class SerializedView : View
      *
      * @param string|null myTemplate The template being rendered.
      * @param string|false|null $layout The layout being rendered.
-     * @return string The rendered view.
+     * @return The rendered view.
      * @throws \Cake\View\Exception\SerializationFailureException When serialization fails.
      */
-    function render(Nullable!string myTemplate = null, $layout = null): string
-    {
+    string render(Nullable!string myTemplate = null, $layout = null) {
         $serialize = this.getConfig("serialize", false);
 
         if ($serialize == true) {

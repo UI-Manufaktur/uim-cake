@@ -39,8 +39,7 @@ class TextareaWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
-    function render(array myData, IContext $context): string
-    {
+    string render(array myData, IContext $context) {
         myData += this.mergeDefaults(myData, $context);
 
         if (

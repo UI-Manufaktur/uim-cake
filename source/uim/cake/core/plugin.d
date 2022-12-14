@@ -1,5 +1,7 @@
 module uim.cake.core;
 
+@safe:
+import uim.cake;
 /**
  * Plugin is used to load and locate plugins.
  *
@@ -7,8 +9,7 @@ module uim.cake.core;
  *
  * @link https://book.UIM.org/4/en/plugins.html
  */
-class Plugin
-{
+class Plugin {
     /**
      * Holds a list of all loaded plugins and their configuration
      *
@@ -20,7 +21,7 @@ class Plugin
      * Returns the filesystem path for a plugin
      *
      * @param string myName name of the plugin in CamelCase format
-     * @return string path to the plugin folder
+     * @return path to the plugin folder
      * @throws \Cake\Core\Exception\MissingPluginException If the folder for plugin was not found
      *   or plugin has not been loaded.
      */

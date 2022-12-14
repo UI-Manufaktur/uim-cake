@@ -1,17 +1,16 @@
 module uim.cake.core;
 
-import uim.cakeilities.Inflector;
+@safe:
+import uim.cake;
 
-/**
- * Provides methods that allow other classes access to conventions based inflections.
- */
-trait ConventionsTrait
-{
+// Provides methods that allow other classes access to conventions based inflections.
+
+trait ConventionsTrait {
     /**
      * Creates a fixture name
      *
      * @param string myName Model class name
-     * @return string Singular model key
+     * @return Singular model key
      */
     protected string _fixtureName(string myName) {
         return Inflector::camelize(myName);
@@ -45,7 +44,7 @@ trait ConventionsTrait
      * Creates the proper model name from a foreign key
      *
      * @param string myKey Foreign key
-     * @return string Model name
+     * @return Model name
      */
     protected string _modelNameFromKey(string myKey) {
         myKey = str_replace("_id", "", myKey);
@@ -77,7 +76,7 @@ trait ConventionsTrait
      * Creates the singular human name used in views
      *
      * @param string myName Controller name
-     * @return string Singular human name
+     * @return Singular human name
      */
     protected string _singularHumanName(string myName) {
         return Inflector::humanize(Inflector::underscore(Inflector::singularize(myName)));
@@ -107,7 +106,7 @@ trait ConventionsTrait
      * Find the correct path for a plugin. Scans myPluginPaths for the plugin you want.
      *
      * @param string myPluginName Name of the plugin you want ie. DebugKit
-     * @return string path path to the correct plugin.
+     * @return path path to the correct plugin.
      */
     protected string _pluginPath(string myPluginName) {
         if (Plugin::isLoaded(myPluginName)) {
@@ -121,7 +120,7 @@ trait ConventionsTrait
      * Return plugin"s module
      *
      * @param string myPluginName Plugin name
-     * @return string Plugin"s module
+     * @return Plugin"s module
      */
     protected string _pluginmodule(string myPluginName) {
         return str_replace("/", "\\", myPluginName);

@@ -19,7 +19,7 @@ trait FileConfigTrait
      * @param string myKey The identifier to write to. If the key has a . it will be treated
      *  as a plugin prefix.
      * @param bool $checkExists Whether to check if file exists. Defaults to false.
-     * @return string Full file path
+     * @return  Full file path
      * @throws \Cake\Core\Exception\CakeException When files don"t exist or when
      *  files contain ".." as this could lead to abusive reads.
      */

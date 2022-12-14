@@ -24,11 +24,10 @@ class OpenSsl {
      *
      * @param string $plain The value to encrypt.
      * @param string myKey The 256 bit/32 byte key to use as a cipher key.
-     * @return string Encrypted data.
+     * @return Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function encrypt(string $plain, string myKey): string
-    {
+    static string encrypt(string $plain, string myKey) {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
 

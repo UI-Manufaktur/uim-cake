@@ -158,17 +158,14 @@ class IniConfig : IConfigEngine
      * Converts a value into the ini equivalent
      *
      * @param mixed myValue Value to export.
-     * @return string String value for ini file.
+     * @return String value for ini file.
      */
-    protected string _value(myValue) {
+    protected string _value(bool aValue) {
+        return aValue ? "true" : "false";
+    }
+    protected string _value(T myValue) {
         if (myValue == null) {
             return "null";
-        }
-        if (myValue == true) {
-            return "true";
-        }
-        if (myValue == false) {
-            return "false";
         }
 
         return (string)myValue;
