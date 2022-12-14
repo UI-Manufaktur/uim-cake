@@ -30,10 +30,9 @@ class TableHelper : Helper {
      * @param array $rows The rows on which the columns width will be calculated on.
      * @return array<int>
      */
-    protected auto _calculateWidths(array $rows): array
-    {
+    protected array _calculateWidths(array someRows) {
         $widths = [];
-        foreach ($rows as $line) {
+        foreach (line; someRows) {
             foreach (array_values($line) as $k => $v) {
                 $columnLength = this._cellWidth((string)$v);
                 if ($columnLength >= ($widths[$k] ?? 0)) {
@@ -69,7 +68,6 @@ class TableHelper : Helper {
 
     /**
      * Output a row separator.
-     *
      * @param array<int> $widths The widths of each column to output.
      */
     protected void _rowSeparator(array $widths) {
@@ -89,8 +87,7 @@ class TableHelper : Helper {
      * @param array<string, mixed> myOptions Options to be passed.
      * @return void
      */
-    protected void _render(array $row, array $widths, array myOptions = [])
-    {
+    protected void _render(array $row, array $widths, array myOptions = []) {
         if (count($row) == 0) {
             return;
         }
@@ -124,8 +121,7 @@ class TableHelper : Helper {
      *
      * @param array $args The data to render out.
      */
-    void output(array $args)
-    {
+    void output(array $args) {
         if (empty($args)) {
             return;
         }
