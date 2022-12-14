@@ -3,8 +3,8 @@ module uim.cake.command;
 import uim.cake.console.Arguments;
 import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
-import uim.cakeutings\Exception\MissingRouteException;
-import uim.cakeutings\Router;
+import uim.cake.routings\Exception\MissingRouteException;
+import uim.cake.routings\Router;
 
 /**
  * Provides interactive CLI tools for URL generation

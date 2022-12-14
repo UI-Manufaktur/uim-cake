@@ -1,1 +1,1 @@
-module uim.cakeutings;
+module uim.cake.routings;

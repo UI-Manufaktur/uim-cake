@@ -3,11 +3,10 @@
 *	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
 *	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
 **********************************************************************************************************/
-module uim.cakeutings;
+module uim.cake.routings;
 
 @safe:
 import uim.cake;
-
 
 /**
  * Provides features for building routes inside scopes.
@@ -15,8 +14,7 @@ import uim.cake;
  * Gives an easy to use way to build routes and append them
  * into a route collection.
  */
-class RouteBuilder
-{
+class RouteBuilder {
     /**
      * Regular expression for auto increment IDs
      */

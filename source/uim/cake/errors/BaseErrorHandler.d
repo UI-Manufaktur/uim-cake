@@ -2,7 +2,7 @@ module uim.cake.errors;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cakeutings\Router;
+import uim.cake.routings\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 use Throwable;

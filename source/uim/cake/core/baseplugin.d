@@ -7,7 +7,7 @@ module uim.cake.core;
 
 import uim.cake.console.commandCollection;
 import uim.caketps\MiddlewareQueue;
-import uim.cakeutings\RouteBuilder;
+import uim.cake.routings\RouteBuilder;
 use Closure;
 use InvalidArgumentException;
 use ReflectionClass;

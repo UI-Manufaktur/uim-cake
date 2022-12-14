@@ -6,7 +6,7 @@ import uim.cakeents\IEvent;
 import uim.cakerm\FormProtector;
 import uim.caketps\Exception\BadRequestException;
 import uim.caketps\Response;
-import uim.cakeutings\Router;
+import uim.cake.routings\Router;
 use Closure;
 
 /**
