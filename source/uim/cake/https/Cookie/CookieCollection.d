@@ -155,11 +155,9 @@ class CookieCollection : IteratorAggregate, Countable
      * Checks if only valid cookie objects are in the array
      *
      * @param array<\Cake\Http\Cookie\ICookie> $cookies Array of cookie objects
-     * @return void
      * @throws \InvalidArgumentException
      */
-    protected auto checkCookies(array $cookies): void
-    {
+    protected void checkCookies(array $cookies) {
         foreach ($cookies as $index: $cookie) {
             if (!$cookie instanceof ICookie) {
                 throw new InvalidArgumentException(
@@ -297,7 +295,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string myPath The path to check for expired cookies on.
      * @return void
      */
-    protected auto removeExpiredCookies(string $host, string myPath): void
+    protected void removeExpiredCookies(string $host, string myPath)
     {
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         $hostPattern = "/" . preg_quote($host, "/") . "$/";

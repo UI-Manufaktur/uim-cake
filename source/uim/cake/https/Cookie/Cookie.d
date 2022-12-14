@@ -170,7 +170,7 @@ class Cookie : ICookie
      * @param array<string, mixed> myOptions Default options.
      * @return void
      */
-    static auto setDefaults(array myOptions): void
+    static void setDefaults(array myOptions)
     {
         if (isset(myOptions["expires"])) {
             myOptions["expires"] = static::dateTimeInstance(myOptions["expires"]);
@@ -358,11 +358,10 @@ class Cookie : ICookie
      * Validates the cookie name
      *
      * @param string myName Name of the cookie
-     * @return void
      * @throws \InvalidArgumentException
      * @link https://tools.ietf.org/html/rfc2616#section-2.2 Rules for naming cookies.
      */
-    protected auto validateName(string myName): void
+    protected void validateName(string myName)
     {
         if (preg_match("/[=,;\t\r\n\013\014]/", myName)) {
             throw new InvalidArgumentException(
@@ -418,7 +417,7 @@ class Cookie : ICookie
      * @param array|string myValue The value to store.
      * @return void
      */
-    protected auto _setValue(myValue): void
+    protected void _setValue(myValue)
     {
         this.isExpanded = is_array(myValue);
         this.value = myValue;

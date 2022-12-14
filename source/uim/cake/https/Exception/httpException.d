@@ -36,21 +36,17 @@ class HttpException : CakeException
      *
      * @param string $header Header name
      * @param array<string>|string|null myValue Header value
-     * @return void
      */
-    auto setHeader(string $header, myValue = null): void
-    {
-        this.headers[$header] = myValue;
+    void setHeader(string aHeader, myValue = null) {
+        this.headers[aHeader] = myValue;
     }
 
     /**
      * Sets HTTP response headers.
      *
      * @param array $headers Array of header name and value pairs.
-     * @return void
      */
-    auto setHeaders(array $headers): void
-    {
+    void setHeaders(array $headers) {
         this.headers = $headers;
     }
 

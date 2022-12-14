@@ -42,11 +42,9 @@ class LogEngineRegistry : ObjectRegistry
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the logger is missing in.
-     * @return void
      * @throws \RuntimeException
      */
-    protected auto _throwMissingClassError(string myClass, Nullable!string myPlugin): void
-    {
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new RuntimeException(sprintf("Could not load class %s", myClass));
     }
 

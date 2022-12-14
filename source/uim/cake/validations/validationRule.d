@@ -159,10 +159,8 @@ class ValidationRule
      * Sets the rule properties from the rule entry in validate
      *
      * @param array $validator [optional]
-     * @return void
      */
-    protected auto _addValidatorProps(array $validator = []): void
-    {
+    protected void _addValidatorProps(array $validator = []) {
         foreach ($validator as myKey => myValue) {
             if (empty(myValue)) {
                 continue;

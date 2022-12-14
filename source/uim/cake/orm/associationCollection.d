@@ -150,10 +150,8 @@ class AssociationCollection : IteratorAggregate
      * Once removed the association will no longer be reachable
      *
      * @param string myAlias The alias name.
-     * @return void
      */
-    function remove(string myAlias): void
-    {
+    void remove(string myAlias) {
         unset(this._items[myAlias]);
     }
 

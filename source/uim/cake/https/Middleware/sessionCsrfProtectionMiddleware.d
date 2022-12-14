@@ -224,10 +224,9 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to validate against.
      * @param \Cake\Http\Session $session The session instance.
-     * @return void
      * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected auto validateToken(IServerRequest myRequest, Session $session): void
+    protected void validateToken(IServerRequest myRequest, Session $session)
     {
         $token = $session.read(this._config["key"]);
         if (!$token || !is_string($token)) {

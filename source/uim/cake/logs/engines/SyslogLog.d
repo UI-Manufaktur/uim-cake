@@ -109,7 +109,7 @@ class SyslogLog : BaseLog
      * @return void
      * @see \Cake\Log\Log::$_levels
      */
-    function log($level, myMessage, array $context = []): void
+    void log($level, myMessage, array $context = [])
     {
         if (!this._open) {
             myConfig = this._config;
@@ -135,10 +135,8 @@ class SyslogLog : BaseLog
      * @param string $ident the prefix to add to all messages logged
      * @param int myOptions the options flags to be used for logged messages
      * @param int $facility the stream or facility to log to
-     * @return void
      */
-    protected auto _open(string $ident, int myOptions, int $facility): void
-    {
+    protected void _open(string $ident, int myOptions, int $facility) {
         openlog($ident, myOptions, $facility);
     }
 
