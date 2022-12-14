@@ -5,17 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.controllerss.components;
 
-import uim.cake.controllerss.components;
-import uim.cake.controllerss.componentsRegistry;
-import uim.cake.controllers\Controller;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cakeents\IEvent;
-import uim.caketps\Exception\NotFoundException;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakeutings\Router;
-import uim.cakeilities.Inflector;
+@safe:
+import uim.cake;
 
 /**
  * Request object handling for alternative HTTP requests.
@@ -28,8 +19,7 @@ import uim.cakeilities.Inflector;
  *
  * @link https://book.UIM.org/4/en/controllers/components/request-handling.html
  */
-class RequestHandlerComponent : Component
-{
+class RequestHandlerComponent : Component {
     /**
      * Contains the file extension parsed out by the Router
      *

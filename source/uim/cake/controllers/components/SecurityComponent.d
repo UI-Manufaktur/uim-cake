@@ -5,18 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.controllerss.components;
 
-import uim.cake.controllerss.components;
-import uim.cake.controllers\Controller;
-import uim.cake.controllers\Exception\AuthSecurityException;
-import uim.cake.controllers\Exception\SecurityException;
-import uim.cake.core.Configure;
-import uim.cakeents\IEvent;
-import uim.caketps\Exception\BadRequestException;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakeutings\Router;
-import uim.cakeilities.Hash;
-import uim.cakeilities.Security;
+@safe:
+import uim.cake;
 
 /**
  * The Security Component creates an easy way to integrate tighter security in
@@ -29,8 +19,7 @@ import uim.cakeilities.Security;
  * @deprecated 4.0.0 Use {@link FormProtectionComponent} instead, for form tampering protection
  *   or {@link HttpsEnforcerMiddleware} to enforce use of HTTPS (SSL) for requests.
  */
-class SecurityComponent : Component
-{
+class SecurityComponent : Component {
     /**
      * Default message used for exceptions thrown
      */

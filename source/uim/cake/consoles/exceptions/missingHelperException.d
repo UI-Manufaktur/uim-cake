@@ -5,13 +5,10 @@
 **********************************************************************************************************/
 module uim.cake.console\Exception;
 
-/**
- * Used when a Helper cannot be found.
- */
-class MissingHelperException : ConsoleException
-{
-    /**
-     * @var string
-     */
-    protected $_messageTemplate = "Helper class %s could not be found.";
+@safe:
+import uim.cake;
+
+// Used when a Helper cannot be found.
+class MissingHelperException : ConsoleException {
+    protected string $_messageTemplate = "Helper class %s could not be found.";
 }

@@ -5,6 +5,9 @@
 **********************************************************************************************************/
 module uim.cake.console\Exception;
 
+@safe:
+import uim.cake;
+
 /**
  * Exception class for halting errors in console tasks
  *
@@ -12,6 +15,5 @@ module uim.cake.console\Exception;
  * @see \Cake\Console\Shell::error()
  * @see \Cake\Command\BaseCommand::abort()
  */
-class StopException : ConsoleException
-{
+class StopException : ConsoleException {
 }

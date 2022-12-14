@@ -5,13 +5,11 @@
 **********************************************************************************************************/
 module uim.cake.controllers\Exception;
 
-import uim.cake.core.exceptions\CakeException;
+@safe:
+import uim.cake;
 
-/**
- * Used when a component cannot be found.
- */
-class MissingComponentException : CakeException
-{
+// Used when a component cannot be found.
+class MissingComponentException : CakeException {
 
     protected $_messageTemplate = "Component class %s could not be found.";
 }

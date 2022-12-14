@@ -5,13 +5,10 @@
 **********************************************************************************************************/
 module uim.cake.console\Exception;
 
-/**
- * Used when a Task cannot be found.
- */
-class MissingTaskException : ConsoleException
-{
-    /**
-     * @var string
-     */
-    protected $_messageTemplate = "Task class %s could not be found.";
+@safe:
+import uim.cake;
+
+// Used when a Task cannot be found.
+class MissingTaskException : ConsoleException {
+    protected string $_messageTemplate = "Task class %s could not be found.";
 }

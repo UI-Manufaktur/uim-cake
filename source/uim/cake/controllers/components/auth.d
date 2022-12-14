@@ -5,21 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.controllerss.components;
 
-import uim.cake.auth\BaseAuthenticate;
-import uim.cake.auth\BaseAuthorize;
-import uim.cake.auth\Storage\IStorage;
-import uim.cake.controllerss.components;
-import uim.cake.controllers\Controller;
-import uim.cake.core.App;
-import uim.cake.core.exceptions\CakeException;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\EventDispatcherTrait;
-import uim.cakeents\IEvent;
-import uim.caketps\Exception\ForbiddenException;
-import uim.caketps\Response;
-import uim.caketps\ServerRequest;
-import uim.cakeutings\Router;
-import uim.cakeilities.Hash;
+@safe:
+import uim.cake;
 
 /**
  * Authentication control component class.
