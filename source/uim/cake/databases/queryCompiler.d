@@ -333,7 +333,7 @@ class QueryCompiler {
      * @param array $parts The insert parts.
      * @param \Cake\Database\Query myQuery The query that is being compiled
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string SQL fragment.
+     * @return SQL fragment.
      */
     protected string _buildInsertPart(array $parts, Query myQuery, ValueBinder $binder) {
         if (!isset($parts[0])) {
@@ -355,7 +355,7 @@ class QueryCompiler {
      * @param array $parts The values parts.
      * @param \Cake\Database\Query myQuery The query that is being compiled
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string SQL fragment.
+     * @return SQL fragment.
      */
     protected string _buildValuesPart(array $parts, Query myQuery, ValueBinder $binder) {
         return implode("", this._stringifyExpressions($parts, $binder));
@@ -367,7 +367,7 @@ class QueryCompiler {
      * @param array $parts The update parts.
      * @param \Cake\Database\Query myQuery The query that is being compiled
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string SQL fragment.
+     * @return SQL fragment.
      */
     protected string _buildUpdatePart(array $parts, Query myQuery, ValueBinder $binder) {
         myTable = this._stringifyExpressions($parts, $binder);
@@ -382,7 +382,7 @@ class QueryCompiler {
      * @param array $parts The query modifier parts
      * @param \Cake\Database\Query myQuery The query that is being compiled
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string SQL fragment.
+     * @return SQL fragment.
      */
     protected string _buildModifierPart(array $parts, Query myQuery, ValueBinder $binder) {
         if ($parts == []) {
@@ -398,7 +398,7 @@ class QueryCompiler {
      *
      * @param array $expressions list of strings and IExpression objects
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
-     * @param bool $wrap Whether to wrap each expression object with parenthesis
+     * @param $wrap Whether to wrap each expression object with parenthesis
      * @return array
      */
     protected auto _stringifyExpressions(array $expressions, ValueBinder $binder, bool $wrap = true): array

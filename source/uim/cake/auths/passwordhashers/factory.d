@@ -19,8 +19,7 @@ class PasswordHasherFactory {
      * @throws \RuntimeException If password hasher class not found or
      *   it does not extend {@link \Cake\Auth\AbstractPasswordHasher}
      */
-    static function build(myPasswordHasher): AbstractPasswordHasher
-    {
+    static AbstractPasswordHasher build(myPasswordHasher) {
         myConfig = [];
         if (is_string(myPasswordHasher)) {
             myClass = myPasswordHasher;

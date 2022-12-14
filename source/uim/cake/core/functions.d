@@ -1,11 +1,9 @@
-
+module uim.cake.core.functions;
 
 import uim.cake.core.Configure;
 
 if (!defined("DS")) {
-    /**
-     * Defines DS as short form of DIRECTORY_SEPARATOR.
-     */
+    // Defines DS as short form of DIRECTORY_SEPARATOR.
     define("DS", DIRECTORY_SEPARATOR);
 }
 

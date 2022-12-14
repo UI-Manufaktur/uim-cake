@@ -57,18 +57,11 @@ import uim.cake;
  *
  * @see config/app.php for configuration settings
  */
-class Cache
-{
+class Cache {
     use StaticConfigTrait;
 
-    /**
-     * An array mapping URL schemes to fully qualified caching engine
-     * class names.
-     *
-     * @var array<string, string>
-     * @psalm-var array<string, class-string>
-     */
-    protected static $_dsnClassMap = [
+    // An array mapping URL schemes to fully qualified caching engine class names.
+    protected static STRINGAA $_dsnClassMap = [
         "array":Engine\ArrayEngine::class,
         "apcu":Engine\ApcuEngine::class,
         "file":Engine\FileEngine::class,
@@ -78,34 +71,21 @@ class Cache
         "wincache":Engine\WincacheEngine::class,
     ];
 
-    /**
-     * Flag for tracking whether caching is enabled.
-     *
-     * @var bool
-     */
-    protected static $_enabled = true;
+    // Flag for tracking whether caching is enabled.
+    protected static bool $_enabled = true;
 
-    /**
-     * Group to Config mapping
-     *
-     * @var array<string, array>
-     */
-    protected static $_groups = [];
+    // Group to Config mapping
+    protected static array<string, array> $_groups = [];
 
-    /**
-     * Cache Registry used for creating and using cache adapters.
-     *
-     * @var \Cake\Cache\CacheRegistry|null
-     */
-    protected static $_registry;
+    // Cache Registry used for creating and using cache adapters.
+    protected static CacheRegistry $_registry;
 
     /**
      * Returns the Cache Registry instance used for creating and using cache adapters.
      *
      * @return \Cake\Cache\CacheRegistry
      */
-    static auto getRegistry(): CacheRegistry
-    {
+    static CacheRegistry getRegistry() {
         if (static::$_registry == null) {
             static::$_registry = new CacheRegistry();
         }
@@ -341,8 +321,7 @@ class Cache
      *   the cached data or false if cached data could not be retrieved.
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    static function readMany(iterable myKeys, string myConfig = "default"): iterable
-    {
+    static iterable readMany(iterable myKeys, string myConfig = "default") {
         return static::pool(myConfig).getMultiple(myKeys);
     }
 

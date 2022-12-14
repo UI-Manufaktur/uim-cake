@@ -96,7 +96,7 @@ trait ConventionsTrait {
      * Creates the plural human name used in views
      *
      * @param string myName Controller name
-     * @return string Plural human name
+     * string Plural human name
      */
     protected string _pluralHumanName(string myName) {
         return Inflector::humanize(Inflector::underscore(myName));
@@ -105,7 +105,7 @@ trait ConventionsTrait {
     /**
      * Find the correct path for a plugin. Scans myPluginPaths for the plugin you want.
      *
-     * @param string myPluginName Name of the plugin you want ie. DebugKit
+     * @param myPluginName Name of the plugin you want ie. DebugKit
      * @return path path to the correct plugin.
      */
     protected string _pluginPath(string myPluginName) {

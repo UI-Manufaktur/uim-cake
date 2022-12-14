@@ -150,7 +150,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $digest The raw digest authentication headers.
      * @return array|null An array of digest authentication headers
      */
-    function parseAuthData(string $digest): ?array
+    ?array parseAuthData(string $digest)
     {
         if (substr($digest, 0, 7) == "Digest ") {
             $digest = substr($digest, 7);
@@ -177,7 +177,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param array<string, mixed> $digest Digest information containing data from DigestAuthenticate::parseAuthData().
      * @param string myPassword The digest hash password generated with DigestAuthenticate::password()
      * @param string $method Request method
-     * @return  Response hash
+     * @return Response hash
      */
     string generateResponseHash(array $digest, string myPassword, string $method) {
         return md5(

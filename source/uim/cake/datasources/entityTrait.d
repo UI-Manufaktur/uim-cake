@@ -572,7 +572,7 @@ trait EntityTrait
      *
      * @param string $property the field name to derive getter name from
      * @param string myType the accessor type ("get" or "set")
-     * @return string method name or empty string (no method available)
+     * return method name or empty string (no method available)
      */
     protected static string _accessor(string $property, string myType) {
         myClass = static::class;

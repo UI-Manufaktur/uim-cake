@@ -123,8 +123,7 @@ abstract class DAuthenticate : IEventListener {
      * @param string myUsername The username/identifier.
      * @return \Cake\ORM\Query
      */
-    protected auto _query(string myUsername): Query
-    {
+    protected Query _query(string myUsername) {
         myConfig = this._config;
         myTable = this.getTableLocator().get(myConfig["userModel"]);
 

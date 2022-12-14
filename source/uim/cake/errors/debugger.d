@@ -277,7 +277,7 @@ class Debugger
      *
      * @param string myfile The file to create a link for.
      * @param int $line The line number to create a link for.
-     * @return string The formatted URL.
+     * @return The formatted URL.
      */
     static string editorUrl(string myfile, int $line) {
         $instance = static::getInstance();
@@ -590,7 +590,7 @@ class Debugger
      *
      * @param mixed $var Variable to convert.
      * @param int $maxDepth The depth to output to. Defaults to 3.
-     * @return string Variable as a formatted string
+     * @return Variable as a formatted string
      */
     static string exportVar($var, int $maxDepth = 3) {
         $context = new DebugContext($maxDepth);
@@ -783,8 +783,7 @@ class Debugger
 
     /**
      * Get the output format for Debugger error rendering.
-     *
-     * @return string Returns the current format when getting.
+     * @return Returns the current format when getting.
      */
     static string getOutputFormat() {
         return Debugger::getInstance()._outputFormat;
@@ -1024,7 +1023,7 @@ class Debugger
      * - Convert newlines into `<br />`
      *
      * @param string myMessage The string message to format.
-     * @return string Formatted message.
+     * @return Formatted message.
      */
     static function formatHtmlMessage(string myMessage) {
         myMessage = h(myMessage);

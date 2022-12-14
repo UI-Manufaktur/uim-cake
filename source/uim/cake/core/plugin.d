@@ -34,7 +34,7 @@ class Plugin {
      * Returns the filesystem path for plugin"s folder containing class files.
      *
      * @param string myName name of the plugin in CamelCase format.
-     * @return string Path to the plugin folder containing class files.
+     * @return Path to the plugin folder containing class files.
      * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
      */
     static string classPath(string myName) {
@@ -47,7 +47,7 @@ class Plugin {
      * Returns the filesystem path for plugin"s folder containing config files.
      *
      * @param string myName name of the plugin in CamelCase format.
-     * @return string Path to the plugin folder containing config files.
+     * @return Path to the plugin folder containing config files.
      * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
      */
     static string configPath(string myName) {
@@ -60,7 +60,7 @@ class Plugin {
      * Returns the filesystem path for plugin"s folder containing template files.
      *
      * @param string myName name of the plugin in CamelCase format.
-     * @return string Path to the plugin folder containing template files.
+     * @return Path to the plugin folder containing template files.
      * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
      */
     static string templatePath(string myName) {
@@ -71,9 +71,7 @@ class Plugin {
 
     /**
      * Returns true if the plugin myPlugin is already loaded.
-     *
      * @param string myPlugin Plugin name.
-     * @return bool
      */
     static bool isLoaded(string myPlugin) {
         return static::getCollection().has(myPlugin);
@@ -101,8 +99,7 @@ class Plugin {
      *
      * @return \Cake\Core\PluginCollection
      */
-    static auto getCollection(): PluginCollection
-    {
+    static auto getCollection(): PluginCollection {
         if (!isset(static::myPlugins)) {
             static::myPlugins = new PluginCollection();
         }
