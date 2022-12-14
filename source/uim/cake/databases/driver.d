@@ -417,19 +417,11 @@ abstract class Driver : IDriver
         return [myQuery, $processor.compile(myQuery, $binder)];
     }
 
-    /**
-     * @inheritDoc
-     */
-    function newCompiler(): QueryCompiler
-    {
+    QueryCompiler newCompiler() {
         return new QueryCompiler();
     }
 
-    /**
-     * @inheritDoc
-     */
-    function newTableSchema(string myTable, array $columns = []): TableSchema
-    {
+    TableSchema newTableSchema(string myTable, array $columns = []) {
         myClassName = TableSchema::class;
         if (isset(this._config["tableSchema"])) {
             /** @var class-string<\Cake\Database\Schema\TableSchema> myClassName */
@@ -471,10 +463,9 @@ abstract class Driver : IDriver
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
-        return [
-            "connected":this._connection !== null,
-        ];
+    array __debugInfo() {
+      return [
+          "connected":this._connection !== null,
+      ];
     }
 }

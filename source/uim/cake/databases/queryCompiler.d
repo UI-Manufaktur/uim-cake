@@ -401,8 +401,7 @@ class QueryCompiler {
      * @param $wrap Whether to wrap each expression object with parenthesis
      * @return array
      */
-    protected auto _stringifyExpressions(array $expressions, ValueBinder $binder, bool $wrap = true): array
-    {
+    protected array _stringifyExpressions(array $expressions, ValueBinder $binder, bool $wrap = true) {
         myResult = [];
         foreach ($expressions as $k: $expression) {
             if ($expression instanceof IExpression) {

@@ -796,11 +796,9 @@ class Query : IExpression, IteratorAggregate
      * @param \Cake\Database\IExpression|array|string $conditions The conditions
      * to use for joining.
      * @param string myType the join type to use
-     * @return array
      * @psalm-suppress InvalidReturnType
      */
-    protected auto _makeJoin(myTable, $conditions, myType): array
-    {
+    protected array _makeJoin(myTable, $conditions, myType) {
         myAlias = myTable;
 
         if (is_array(myTable)) {
@@ -2278,7 +2276,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         try {
             set_error_handler(

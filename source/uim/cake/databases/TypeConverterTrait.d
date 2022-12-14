@@ -14,8 +14,7 @@ trait TypeConverterTrait
      * @return array list containing converted value and internal type
      * @pslam-return array{mixed, int}
      */
-    function cast(myValue, myType = "string"): array
-    {
+    array cast(myValue, myType = "string") {
         if (is_string(myType)) {
             myType = TypeFactory::build(myType);
         }

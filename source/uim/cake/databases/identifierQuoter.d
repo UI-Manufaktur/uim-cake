@@ -112,7 +112,7 @@ class IdentifierQuoter
      * @param array $part the part of the query to quote
      * @return array
      */
-    protected auto _basicQuoter(array $part): array
+    protected array _basicQuoter(array $part)
     {
         myResult = [];
         foreach ($part as myAlias: myValue) {
@@ -125,14 +125,11 @@ class IdentifierQuoter
     }
 
     /**
-     * Quotes both the table and alias for an array of joins as stored in a Query
-     * object
+     * Quotes both the table and alias for an array of joins as stored in a Query object
      *
      * @param array $joins The joins to quote.
-     * @return array
      */
-    protected auto _quoteJoins(array $joins): array
-    {
+    protected array _quoteJoins(array $joins) {
         myResult = [];
         foreach ($joins as myValue) {
             myAlias = "";

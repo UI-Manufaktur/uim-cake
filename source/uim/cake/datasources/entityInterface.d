@@ -66,20 +66,15 @@ interface IEntity : ArrayAccess, JsonSerializable
      */
     bool hasErrors(bool $includeNested = true);
 
-    /**
-     * Returns all validation errors.
-     *
-     * @return array
-     */
-    auto getErrors(): array;
+    // Returns all validation errors.
+    array getErrors();
 
     /**
      * Returns validation errors of a field
      *
      * @param string myField Field name to get the errors from
-     * @return array
      */
-    auto getError(string myField): array;
+    array getError(string myField);
 
     /**
      * Sets error messages to the entity
@@ -133,18 +128,16 @@ interface IEntity : ArrayAccess, JsonSerializable
      * stored in this entity, indexed by field name.
      *
      * @param string[] myFields List of fields to be returned
-     * @return array
      */
-    function extractOriginal(string[] myFields): array;
+    array extractOriginal(string[] myFields);
 
     /**
      * Returns an array with only the original fields
      * stored in this entity, indexed by field name.
      *
      * @param myFields List of fields to be returned
-     * @return array
      */
-    function extractOriginalChanged(string[] myFields): array;
+    array extractOriginalChanged(string[] myFields);
 
     /**
      * Sets one or multiple fields to the specified value
@@ -175,12 +168,8 @@ interface IEntity : ArrayAccess, JsonSerializable
      */
     auto getOriginal(string myField);
 
-    /**
-     * Gets all original values of the entity.
-     *
-     * @return array
-     */
-    auto getOriginalValues(): array;
+    // Gets all original values of the entity.
+    array getOriginalValues();
 
     // Returns whether this entity contains a field named myField regardless of if it is empty.
     // array<string>|string myField The field to check.
@@ -205,10 +194,8 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * *Note* hidden fields are not visible, and will not be output
      * by toArray().
-     *
-     * @return array
      */
-    function toArray(): array;
+    array toArray();
 
     /**
      * Returns an array with the requested fields
@@ -218,7 +205,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param bool $onlyDirty Return the requested field only if it is dirty
      * @return array
      */
-    function extract(string[] myFields, bool $onlyDirty = false): array;
+    array extract(string[] myFields, bool $onlyDirty = false);
 
     /**
      * Sets the entire entity as clean, which means that it will appear as

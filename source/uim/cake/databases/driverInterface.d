@@ -224,7 +224,7 @@ interface IDriver {
      * @return array containing 2 entries. The first entity is the transformed query
      * and the second one the compiled SQL.
      */
-    function compileQuery(Query myQuery, ValueBinder $binder): array;
+    array compileQuery(Query myQuery, ValueBinder $binder);
 
     // Returns an instance of a QueryCompiler.
     QueryCompiler newCompiler();

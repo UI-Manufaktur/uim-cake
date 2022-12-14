@@ -70,8 +70,7 @@ class TypeFactory
      *
      * @return array<\Cake\Database\TypeInterface>
      */
-    static function buildAll(): array
-    {
+    static array buildAll() {
         myResult = [];
         foreach (static::$_types as myName: myType) {
             myResult[myName] = static::$_builtTypes[myName] ?? static::build(myName);

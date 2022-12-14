@@ -55,10 +55,8 @@ interface IConnection : ILoggerAware
 
     /**
      * Get the configuration data used to create the connection.
-     *
-     * @return array
      */
-    function config(): array;
+    array config();
 
     /**
      * Executes a callable function inside a transaction, if any exception occurs
