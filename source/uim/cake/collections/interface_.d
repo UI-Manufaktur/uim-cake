@@ -768,10 +768,8 @@ interface ICollection : Iterator, JsonSerializable
     /**
      * Returns an numerically-indexed array representation of the results.
      * This is equivalent to calling `toArray(false)`
-     *
-     * @return array
      */
-    function toList(): array;
+    array toList();
 
     /**
      * Returns the data that can be converted to JSON. This returns the same data
@@ -781,7 +779,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return array The data to convert to JSON
      */
-    function jsonSerialize(): array;
+    array jsonSerialize();
 
     /**
      * Iterates once all elements in this collection and executes all stacked

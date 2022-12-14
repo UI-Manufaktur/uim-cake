@@ -463,8 +463,7 @@ class Cache {
      * @return array<string, array> Map of group and all configuration that has the same group
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    static function groupConfigs(Nullable!string myGroup = null): array
-    {
+    static array groupConfigs(Nullable!string myGroup = null) {
         foreach (static::configured() as myConfig) {
             static::pool(myConfig);
         }

@@ -160,13 +160,8 @@ class BufferedIterator : Collection : Countable, Serializable
         return serialize(this._buffer);
     }
 
-    /**
-     * Magic method used for serializing the iterator instance.
-     *
-     * @return array
-     */
-    auto __serialize(): array
-    {
+    // Magic method used for serializing the iterator instance.
+    array __serialize() {
         if (!this._finished) {
             this.count();
         }

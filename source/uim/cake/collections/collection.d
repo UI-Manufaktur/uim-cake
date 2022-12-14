@@ -29,12 +29,8 @@ class Collection : IteratorIterator : ICollection, Serializable {
       return serialize(this.buffered());
     }
 
-    /**
-     * Returns an array for serializing this of this object.
-     *
-     * @return array
-     */
-    auto __serialize(): array {
+    // Returns an array for serializing this of this object.
+    array __serialize() {
         return this.buffered().toArray();
     }
 

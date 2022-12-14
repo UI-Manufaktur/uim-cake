@@ -45,8 +45,7 @@ class RoutesGenerateCommand : Command {
      * @param array<string> $args The arguments to split.
      * @return array<string|bool>
      */
-    protected auto _splitArgs(array $args): array
-    {
+    protected array _splitArgs(array $args) {
         $out = [];
         foreach ($args as $arg) {
             if (strpos($arg, ":") !== false) {

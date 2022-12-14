@@ -118,8 +118,7 @@ class Arguments
      *
      * @return array<string, string|int|bool|null>
      */
-    auto getOptions(): array
-    {
+    array getOptions() {
         return this.options;
     }
 

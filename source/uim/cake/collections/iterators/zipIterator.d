@@ -87,13 +87,8 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
         return serialize(this._iterators);
     }
 
-    /**
-     * Magic method used for serializing the iterator instance.
-     *
-     * @return array
-     */
-    auto __serialize(): array
-    {
+    // Magic method used for serializing the iterator instance.
+    array __serialize() {
         return this._iterators;
     }
 

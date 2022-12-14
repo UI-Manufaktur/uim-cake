@@ -556,8 +556,7 @@ trait CollectionTrait
     }
 
 
-    function jsonSerialize(): array
-    {
+    array jsonSerialize() {
         return this.toArray();
     }
 

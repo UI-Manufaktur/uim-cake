@@ -232,7 +232,7 @@ class MemcachedEngine : CacheEngine
      * @param string $server The server address string.
      * @return array Array containing host, port
      */
-    function parseServerString(string $server): array
+    array parseServerString(string $server)
     {
         $socketTransport = "unix://";
         if (strpos($server, $socketTransport) == 0) {
@@ -332,8 +332,7 @@ class MemcachedEngine : CacheEngine
      * @return array An array containing, for each of the given myKeys, the cached data or
      *   false if cached data could not be retrieved.
      */
-    auto getMultiple(myKeys, $default = null): array
-    {
+    array getMultiple(myKeys, $default = null) {
         $cacheKeys = [];
         foreach (myKeys as myKey) {
             $cacheKeys[myKey] = this._key(myKey);
