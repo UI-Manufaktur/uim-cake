@@ -1,18 +1,12 @@
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
 module uim.cake.databases;
 
-import uim.cake.databases.Exception\DatabaseException;
-import uim.cake.databases.Expression\CommonTableExpression;
-import uim.cake.databases.Expression\IdentifierExpression;
-import uim.cake.databases.Expression\OrderByExpression;
-import uim.cake.databases.Expression\OrderClauseExpression;
-import uim.cake.databases.Expression\QueryExpression;
-import uim.cake.databases.Expression\ValuesExpression;
-import uim.cake.databases.Expression\WindowExpression;
-import uim.cake.databases.Statement\CallbackStatement;
-use Closure;
-use InvalidArgumentException;
-use IteratorAggregate;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * This class represents a Relational database SQL Query. A query can be of
@@ -20,20 +14,13 @@ use RuntimeException;
  * for dynamically constructing each query part, execute it and transform it
  * to a specific SQL dialect.
  */
-class Query : IExpression, IteratorAggregate
-{
+class Query : IExpression, IteratorAggregate {
     use TypeMapTrait;
 
-    /**
-     */
     public const string JOIN_TYPE_INNER = "INNER";
 
-    /**
-     */
     public const string JOIN_TYPE_LEFT = "LEFT";
 
-    /**
-     */
     public const string JOIN_TYPE_RIGHT = "RIGHT";
 
     /**

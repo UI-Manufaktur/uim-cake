@@ -3,7 +3,6 @@ module uim.cake.collections.iterators.unfolditerator;
 @safe:
 import uim.cake;
 
-
 /**
  * An iterator that can be used to generate nested iterators out of a collection
  * of items by applying an function to each of the elements in this iterator.
@@ -11,8 +10,7 @@ import uim.cake;
  * @internal
  * @see \Cake\Collection\Collection::unfold()
  */
-class UnfoldIterator : IteratorIterator : RecursiveIterator
-{
+class UnfoldIterator : IteratorIterator : RecursiveIterator {
     /**
      * A function that is passed each element in this iterator and
      * must return an array or Traversable object.

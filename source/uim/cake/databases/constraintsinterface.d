@@ -3,7 +3,6 @@ module uim.cake.databases;
 @safe:
 import uim.cake;
 
-
 /**
  * Defines the interface for a fixture that needs to manage constraints.
  *
@@ -11,8 +10,7 @@ import uim.cake;
  * this interface, the FixtureManager will use these methods to manage
  * a fixtures constraints.
  */
-interface ConstraintsInterface
-{
+interface IConstraints {
     /**
      * Build and execute SQL queries necessary to create the constraints for the
      * fixture

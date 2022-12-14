@@ -1,6 +1,12 @@
-module uim.cake.databases;
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
+module uim.cake.databases.postgrescompiler;
 
-import uim.cake.databases.Expression\FunctionExpression;
+@safe:
+import uim.cake;
 
 /**
  * Responsible for compiling a Query object into its SQL representation
@@ -8,20 +14,13 @@ import uim.cake.databases.Expression\FunctionExpression;
  *
  * @internal
  */
-class PostgresCompiler : QueryCompiler
-{
+class PostgresCompiler : QueryCompiler {
     /**
      * Always quote aliases in SELECT clause.
-     *
      * Postgres auto converts unquoted identifiers to lower case.
-     *
-     * @var bool
      */
-    protected $_quotedSelectAliases = true;
+    protected bool $_quotedSelectAliases = true;
 
-    /**
-     * @inheritDoc
-     */
     protected $_templates = [
         "delete":"DELETE",
         "where":" WHERE %s",

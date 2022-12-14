@@ -3,12 +3,8 @@ module uim.cake.databases;
 @safe:
 import uim.cake;
 
-
-/**
- * Represents a connection with a database server.
- */
-class Connection : IConnection
-{
+// Represents a connection with a database server.
+class Connection : IConnection {
     use TypeConverterTrait;
 
     /**
@@ -26,27 +22,17 @@ class Connection : IConnection
      */
     protected $_driver;
 
-    /**
-     * Contains how many nested transactions have been started.
-     *
-     * @var int
-     */
-    protected $_transactionLevel = 0;
+    // Contains how many nested transactions have been started.
+    protected int $_transactionLevel = 0;
 
-    /**
-     * Whether a transaction is active in this connection.
-     *
-     * @var bool
-     */
-    protected $_transactionStarted = false;
+    // Whether a transaction is active in this connection.
+    protected bool $_transactionStarted = false;
 
     /**
      * Whether this connection can and should use savepoints for nested
      * transactions.
-     *
-     * @var bool
      */
-    protected $_useSavePoints = false;
+    protected bool $_useSavePoints = false;
 
     /**
      * Whether to log queries generated during this connection.
