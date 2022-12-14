@@ -218,12 +218,12 @@ class ConsoleOptionParser
      *
      * @return array<string, mixed>
      */
-    function toArray(): array
+    array toArray()
     {
         myResult = [
             "command":_commandName,
             "arguments":this._args,
-            "options":this._options,
+            "options":_options,
             "subcommands":this._subcommands,
             "description":this._description,
             "epilog":this._epilog,
@@ -391,8 +391,8 @@ class ConsoleOptionParser
                 myOptions["required"]
             );
         }
-        this._options[myName] = $option;
-        asort(this._options);
+        _options[myName] = $option;
+        asort(_options);
         if ($option.short()) {
             this._shortOptions[$option.short()] = myName;
             asort(this._shortOptions);
@@ -408,7 +408,7 @@ class ConsoleOptionParser
      * @return this
      */
     function removeOption(string myName) {
-        unset(this._options[myName]);
+        unset(_options[myName]);
 
         return this;
     }
@@ -596,7 +596,7 @@ class ConsoleOptionParser
      * @return array<string, \Cake\Console\ConsoleInputOption>
      */
     function options() {
-        return this._options;
+        return _options;
     }
 
     /**
@@ -617,7 +617,7 @@ class ConsoleOptionParser
      * @return array [myParams, $args]
      * @throws \Cake\Console\Exception\ConsoleException When an invalid parameter is encountered.
      */
-    function parse(array $argv): array
+    array parse(array $argv)
     {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         if (isset(this._subcommands[$command])) {
@@ -649,7 +649,7 @@ class ConsoleOptionParser
                 );
             }
         }
-        foreach (this._options as $option) {
+        foreach (_options as $option) {
             myName = $option.name();
             $isBoolean = $option.isBoolean();
             $default = $option.defaultValue();
@@ -753,7 +753,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> myParams The params to append the parsed value into
      * @return array Params with $option added in.
      */
-    protected auto _parseLongOption(string $option, array myParams): array
+    protected array _parseLongOption(string $option, array myParams)
     {
         myName = substr($option, 2);
         if (strpos(myName, "=") !== false) {
@@ -774,7 +774,7 @@ class ConsoleOptionParser
      * @return array<string, mixed> Params with $option added in.
      * @throws \Cake\Console\Exception\ConsoleException When unknown short options are encountered.
      */
-    protected auto _parseShortOption(string $option, array myParams): array
+    protected array _parseShortOption(string $option, array myParams)
     {
         myKey = substr($option, 1);
         if (strlen(myKey) > 1) {
@@ -808,16 +808,15 @@ class ConsoleOptionParser
      * @return array<string, mixed> Params with $option added in.
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    protected auto _parseOption(string myName, array myParams): array
-    {
-        if (!isset(this._options[myName])) {
+    protected array _parseOption(string myName, array myParams) {
+        if (myName !in _options) {
             throw new MissingOptionException(
                 "Unknown option `{myName}`.",
                 myName,
-                array_keys(this._options)
+                array_keys(_options)
             );
         }
-        $option = this._options[myName];
+        $option = _options[myName];
         $isBoolean = $option.isBoolean();
         $nextValue = this._nextToken();
         $emptyNextValue = (empty($nextValue) && $nextValue !== "0");
@@ -847,7 +846,7 @@ class ConsoleOptionParser
      */
     protected bool _optionExists(string myName) {
         if (substr(myName, 0, 2) == "--") {
-            return isset(this._options[substr(myName, 2)]);
+            return isset(_options[substr(myName, 2)]);
         }
         if (myName[0] == "-" && myName[1] !== "-") {
             return isset(this._shortOptions[myName[1]]);

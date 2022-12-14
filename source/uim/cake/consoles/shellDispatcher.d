@@ -211,8 +211,7 @@ class ShellDispatcher
      *
      * @return array the resultant list of aliases
      */
-    function addShortPluginAliases(): array
-    {
+    array addShortPluginAliases() {
         myPlugins = Plugin::loaded();
 
         $io = new ConsoleIo();

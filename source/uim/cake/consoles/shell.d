@@ -850,8 +850,7 @@ class Shell {
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
-    {
+    array __debugInfo() {
         return [
             "name":this.name,
             "plugin":this.plugin,

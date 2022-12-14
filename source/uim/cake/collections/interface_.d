@@ -763,7 +763,7 @@ interface ICollection : Iterator, JsonSerializable
      * can help getting all items if keys are not important in the result.
      * @return array
      */
-    function toArray(bool $keepKeys = true): array;
+    array toArray(bool $keepKeys = true);
 
     /**
      * Returns an numerically-indexed array representation of the results.

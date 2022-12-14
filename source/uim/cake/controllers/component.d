@@ -143,8 +143,7 @@ class Component : IEventListener
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
-    {
+    array implementedEvents() {
         myEventMap = [
             "Controller.initialize":"beforeFilter",
             "Controller.startup":"startup",
@@ -176,7 +175,7 @@ class Component : IEventListener
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "components":this.components,

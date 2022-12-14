@@ -70,7 +70,7 @@ class PaginatorComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         return [];
     }
@@ -147,11 +147,8 @@ class PaginatorComponent : Component
      *
      * ```
      * myQuery = this.Articles.find("popular").matching("Tags", function ($q) {
-<<<<<<< HEAD
-     *   return $q.where(["name":"CakePHP"])
-=====
      *   return $q.where(["name": "UIM"])
->>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
+
      * });
      * myResults = $paginator.paginate(myQuery);
      * ```
@@ -214,9 +211,8 @@ class PaginatorComponent : Component
      * @param array<string, mixed> $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
-    function mergeOptions(string myAlias, array $settings): array
-    {
-        myRequest = this._registry.getController().getRequest();
+    array mergeOptions(string myAlias, array $settings) {
+        auto myRequest = this._registry.getController().getRequest();
 
         return this._paginator.mergeOptions(
             myRequest.getQueryParams(),
@@ -231,7 +227,7 @@ class PaginatorComponent : Component
      * @return this
      */
     auto setPaginator(Paginator $paginator) {
-        this._paginator = $paginator;
+        _paginator = $paginator;
 
         return this;
     }
@@ -241,9 +237,8 @@ class PaginatorComponent : Component
      *
      * @return \Cake\Datasource\Paginator
      */
-    auto getPaginator(): Paginator
-    {
-        return this._paginator;
+    auto getPaginator() {
+        return _paginator;
     }
 
     /**

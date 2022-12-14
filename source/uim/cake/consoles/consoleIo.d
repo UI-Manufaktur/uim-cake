@@ -391,8 +391,7 @@ class ConsoleIo {
      * @return array
      * @see \Cake\Console\ConsoleOutput::styles()
      */
-    function styles(): array
-    {
+    array styles() {
         return this._out.styles();
     }
 
@@ -403,8 +402,7 @@ class ConsoleIo {
      * @return array
      * @see \Cake\Console\ConsoleOutput::getStyle()
      */
-    auto getStyle(string $style): array
-    {
+    array getStyle(string $style) {
         return this._out.getStyle($style);
     }
 

@@ -19,8 +19,7 @@ class CommandScanner
      *
      * @return array A list of command metadata.
      */
-    function scanCore(): array
-    {
+    array scanCore() {
         $coreShells = this.scanDir(
             dirname(__DIR__) . DIRECTORY_SEPARATOR . "Shell" . DIRECTORY_SEPARATOR,
             "Cake\Shell\\",
@@ -42,8 +41,7 @@ class CommandScanner
      *
      * @return array A list of command metadata.
      */
-    function scanApp(): array
-    {
+    array scanApp() {
         $appmodule = Configure::read("App.module");
         $appShells = this.scanDir(
             App::classPath("Shell")[0],
@@ -67,7 +65,7 @@ class CommandScanner
      * @param string myPlugin The named plugin.
      * @return array A list of command metadata.
      */
-    function scanPlugin(string myPlugin): array
+    array scanPlugin(string myPlugin)
     {
         if (!Plugin::isLoaded(myPlugin)) {
             return [];
@@ -92,7 +90,7 @@ class CommandScanner
      * @param $hide A list of command names to hide as they are internal commands.
      * @return array The list of shell info arrays based on scanning the filesystem and inflection.
      */
-    protected auto scanDir(string myPath, string $module, string $prefix, string[] $hide): array
+    protected array scanDir(string myPath, string $module, string $prefix, string[] $hide)
     {
         if (!is_dir(myPath)) {
             return [];

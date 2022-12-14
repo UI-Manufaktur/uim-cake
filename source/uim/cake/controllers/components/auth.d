@@ -297,8 +297,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
-    {
+    array implementedEvents() {
         return [
             "Controller.initialize":"authCheck",
             "Controller.startup":"startup",

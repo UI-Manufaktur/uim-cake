@@ -102,8 +102,7 @@ class FormProtectionComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
-    {
+    array implementedEvents() {
         return [
             "Controller.startup":"startup",
         ];
@@ -141,8 +140,7 @@ class FormProtectionComponent : Component
      * @param \Cake\Http\Exception\BadRequestException myException Exception instance.
      * @return \Cake\Http\Response|null
      */
-    protected auto executeCallback(Closure $callback, BadRequestException myException): ?Response
-    {
+    protected auto executeCallback(Closure $callback, BadRequestException myException): ?Response {
         return $callback(myException);
     }
 }
