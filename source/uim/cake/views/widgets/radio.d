@@ -74,10 +74,8 @@ class RadioWidget : BasicWidget
      *
      * @param array<string, mixed> myData The data to build radio buttons with.
      * @param \Cake\View\Form\IContext $context The current form context.
-     * @return string
      */
-    function render(array myData, IContext $context): string
-    {
+    string render(array myData, IContext $context) {
         myData += this.mergeDefaults(myData, $context);
 
         if (myData["options"] instanceof Traversable) {
@@ -129,7 +127,7 @@ class RadioWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context The form context
      * @return string
      */
-    protected auto _renderInput($val, $text, myData, $context): string
+    protected string _renderInput($val, $text, myData, $context)
     {
         $escape = myData["escape"];
         if (is_array($text) && isset($text["text"], $text["value"])) {

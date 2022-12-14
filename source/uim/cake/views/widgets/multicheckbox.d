@@ -99,7 +99,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context The current form context.
      * @return string
      */
-    function render(array myData, IContext $context): string
+    string render(array myData, IContext $context)
     {
         myData += this.mergeDefaults(myData, $context);
 
@@ -173,7 +173,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context Context object.
      * @return string
      */
-    protected auto _renderInput(array $checkbox, IContext $context): string
+    protected string _renderInput(array $checkbox, IContext $context)
     {
         $input = this._templates.format("checkbox", [
             "name": $checkbox["name"] . "[]",

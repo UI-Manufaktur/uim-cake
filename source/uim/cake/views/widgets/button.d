@@ -43,10 +43,8 @@ class ButtonWidget : IWidget
      *
      * @param array<string, mixed> myData The data to build a button with.
      * @param \Cake\View\Form\IContext $context The current form context.
-     * @return string
      */
-    function render(array myData, IContext $context): string
-    {
+    string render(array myData, IContext $context) {
         myData += [
             "text": "",
             "type": "submit",

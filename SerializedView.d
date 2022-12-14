@@ -46,11 +46,11 @@ abstract class SerializedView : View {
     /**
      * Serialize view vars.
      *
-     * @param array|string $serialize The name(s) of the view variable(s) that
+     * @param string array $serialize The name(s) of the view variable(s) that
      *   need(s) to be serialized
      * @return string The serialized data.
      */
-    abstract protected string _serialize($serialize);
+    abstract protected string _serialize(string89 serializeNames...);
 
     /**
      * Render view template or return serialized data.

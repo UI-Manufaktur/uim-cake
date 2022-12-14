@@ -52,8 +52,7 @@ class LabelWidget : IWidget
      * @param \Cake\View\Form\IContext $context The current form context.
      * @return string
      */
-    function render(array myData, IContext $context): string
-    {
+    string render(array myData, IContext $context) {
         myData += [
             "text": "",
             "input": "",

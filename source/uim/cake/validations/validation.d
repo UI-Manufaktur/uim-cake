@@ -1600,8 +1600,7 @@ class Validation {
      * @param array<string, mixed> myValue The array representing a date or datetime.
      * @return string
      */
-    protected static auto _getDateString(array myValue): string
-    {
+    protected static string _getDateString(array myValue) {
         $formatted = "";
         if (
             isset(myValue["year"], myValue["month"], myValue["day"]) &&

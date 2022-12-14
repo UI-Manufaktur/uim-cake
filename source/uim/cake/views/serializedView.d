@@ -56,7 +56,7 @@ abstract class SerializedView : View
      *   need(s) to be serialized
      * @return string The serialized data.
      */
-    abstract protected auto _serialize($serialize): string;
+    abstract protected string _serialize($serialize);
 
     /**
      * Render view template or return serialized data.

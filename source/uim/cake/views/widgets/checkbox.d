@@ -41,8 +41,7 @@ class CheckboxWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context The current form context.
      * @return string Generated HTML string.
      */
-    function render(array myData, IContext $context): string
-    {
+    string render(array myData, IContext $context) {
         myData += this.mergeDefaults(myData, $context);
 
         if (this._isChecked(myData)) {
