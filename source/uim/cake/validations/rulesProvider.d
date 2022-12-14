@@ -5,7 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.validations;
 
-use ReflectionClass;
+@safe:
+import uim.cake;
 
 /**
  * A Proxy class used to remove any extra arguments when the user intended to call
@@ -13,8 +14,7 @@ use ReflectionClass;
  *
  * @method bool extension(mixed $check, array $extensions, array $context = [])
  */
-class RulesProvider
-{
+class RulesProvider {
     /**
      * The class/object to proxy.
      *

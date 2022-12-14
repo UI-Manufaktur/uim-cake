@@ -1,3 +1,8 @@
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
 module uim.cake.shells.Helper;
 
 @safe:
@@ -7,8 +12,7 @@ import uim.cake;
  * Create a visually pleasing ASCII art table
  * from 2 dimensional array data.
  */
-class TableHelper : Helper
-{
+class TableHelper : Helper {
     /**
      * Default config for this helper.
      *

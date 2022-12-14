@@ -1,10 +1,12 @@
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
 module uim.cakeutings;
 
-import uim.cakeutings\Exception\DuplicateNamedRouteException;
-import uim.cakeutings\Exception\MissingRouteException;
-import uim.cakeutings\Route\Route;
-use Psr\Http\Message\IServerRequest;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Contains a collection of routes.

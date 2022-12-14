@@ -1,14 +1,13 @@
+/*********************************************************************************************************
+*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
+*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
+*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+**********************************************************************************************************/
 module uim.cakeutings;
 
-use BadMethodCallException;
-import uim.cake.core.App;
-import uim.cake.core.exceptions\MissingPluginException;
-import uim.cake.core.Plugin;
-import uim.cakeutings\Route\RedirectRoute;
-import uim.cakeutings\Route\Route;
-import uim.cakeilities.Inflector;
-use InvalidArgumentException;
-use RuntimeException;
+@safe:
+import uim.cake;
+
 
 /**
  * Provides features for building routes inside scopes.
