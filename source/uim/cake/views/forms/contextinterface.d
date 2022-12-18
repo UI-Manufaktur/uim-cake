@@ -69,7 +69,7 @@ interface IContext
      * @param string myField Field name.
      * @return int|null
      */
-    auto getMaxLength(string myField): Nullable!int;
+    Nullable!int getMaxLength(string myField);
 
     /**
      * Get the field names of the top level object in this context.

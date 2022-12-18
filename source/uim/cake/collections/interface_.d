@@ -1060,7 +1060,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return \Traversable
      */
-    function unwrap(): Traversable;
+    Traversable unwrap();
 
     /**
      * Transpose rows and columns into columns and rows

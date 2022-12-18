@@ -8,8 +8,7 @@ import uim.cake;
  * passing a callback function to each of the elements and taking them out if
  * it does not return true.
  */
-class FilterIterator : Collection
-{
+class FilterIterator : Collection {
     /**
      * The callback used to filter the elements in this collection
      *
@@ -39,8 +38,7 @@ class FilterIterator : Collection
     }
 
 
-    function unwrap(): Traversable
-    {
+    Traversable unwrap() {
         /** @var \IteratorIterator $filter */
         $filter = this.getInnerIterator();
         $iterator = $filter.getInnerIterator();

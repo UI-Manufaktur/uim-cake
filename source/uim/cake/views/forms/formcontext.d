@@ -123,8 +123,7 @@ class FormContext : IContext
     }
 
 
-    auto getMaxLength(string myField): Nullable!int
-    {
+    Nullable!int getMaxLength(string myField) {
         $validator = this._form.getValidator();
         if (!$validator.hasField(myField)) {
             return null;

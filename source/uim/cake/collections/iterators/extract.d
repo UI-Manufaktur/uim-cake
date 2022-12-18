@@ -57,8 +57,7 @@ class ExtractIterator : Collection
     }
 
 
-    function unwrap(): Traversable
-    {
+    Traversable unwrap() {
         $iterator = this.getInnerIterator();
 
         if ($iterator instanceof ICollection) {

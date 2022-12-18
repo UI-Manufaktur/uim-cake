@@ -128,8 +128,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param \Cake\Http\ServerRequest myRequest Request object.
      * @return array<string, mixed>|null Array of digest information.
      */
-    protected auto _getDigest(ServerRequest myRequest): ?array
-    {
+    protected ?array _getDigest(ServerRequest myRequest) {
         $digest = myRequest.getEnv("PHP_AUTH_DIGEST");
         if (empty($digest) && function_exists("apache_request_headers")) {
             $headers = apache_request_headers();

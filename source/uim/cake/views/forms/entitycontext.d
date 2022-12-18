@@ -497,8 +497,7 @@ class EntityContext : IContext {
      * @param string myField The dot separated path to the field you want to check.
      * @return int|null
      */
-    auto getMaxLength(string myField): Nullable!int
-    {
+    Nullable!int getMaxLength(string myField) {
         $parts = explode(".", myField);
         $validator = this._getValidator($parts);
         myFieldName = array_pop($parts);

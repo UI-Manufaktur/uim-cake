@@ -178,8 +178,7 @@ class Shell {
      *
      * @return \Cake\Console\ConsoleIo The current ConsoleIo object.
      */
-    auto getIo(): ConsoleIo
-    {
+    ConsoleIo getIo() {
         return this._io;
     }
 
@@ -599,8 +598,7 @@ class Shell {
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    function verbose(myMessage, int $newlines = 1): Nullable!int
-    {
+    Nullable!int verbose(myMessage, int $newlines = 1) {
         return this._io.verbose(myMessage, $newlines);
     }
 
@@ -611,8 +609,7 @@ class Shell {
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    function quiet(myMessage, int $newlines = 1): Nullable!int
-    {
+    Nullable!int quiet(myMessage, int $newlines = 1) {
         return this._io.quiet(myMessage, $newlines);
     }
 

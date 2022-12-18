@@ -229,8 +229,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path to check required-ness for.
      * @return int|null
      */
-    auto getMaxLength(string myField): Nullable!int
-    {
+    Nullable!int getMaxLength(string myField) {
         if (!is_array(this._context["schema"])) {
             return null;
         }

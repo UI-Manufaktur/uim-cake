@@ -108,8 +108,7 @@ class MapReduce : IteratorAggregate {
      *
      * @return \Traversable
      */
-    auto getIterator(): Traversable
-    {
+    Traversable getIterator() {
         if (!this._executed) {
             this._execute();
         }

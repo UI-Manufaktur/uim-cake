@@ -60,8 +60,7 @@ class NullContext : IContext
     }
 
 
-    auto getMaxLength(string myField): Nullable!int
-    {
+    Nullable!int getMaxLength(string myField) {
         return null;
     }
 
