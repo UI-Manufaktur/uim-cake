@@ -9,8 +9,7 @@ import uim.cake;
  * Used by Cake\Http\Client to contain request information
  * for making requests.
  */
-class Request : Message : RequestInterface
-{
+class Request : Message : IRequest {
     use RequestTrait;
 
     /**
