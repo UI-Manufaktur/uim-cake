@@ -5,8 +5,7 @@ import uim.cake;
 /**
  * Object wrapper for interacting with stdin
  */
-class ConsoleInput
-{
+class ConsoleInput {
     /**
      * Input value.
      *
