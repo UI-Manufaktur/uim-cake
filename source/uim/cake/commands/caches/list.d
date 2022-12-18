@@ -36,13 +36,12 @@ class CacheListCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
-    {
-        $engines = Cache::configured();
-        foreach ($engines as $engine) {
-            $io.out("- $engine");
-        }
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+      $engines = Cache::configured();
+      foreach ($engines as $engine) {
+          $io.out("- $engine");
+      }
 
-        return static::CODE_SUCCESS;
+      return static::CODE_SUCCESS;
     }
 }

@@ -25,8 +25,7 @@ class SchemacacheBuildCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
-    {
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
         try {
             /** @var \Cake\Database\Connection myConnection */
             myConnection = ConnectionManager::get((string)$args.getOption("connection"));

@@ -437,8 +437,7 @@ abstract class Driver : IDriver
      *
      * @return int|null Maximum alias length or null if no limit
      */
-    auto getMaxAliasLength(): Nullable!int
-    {
+    Nullable!int getMaxAliasLength() {
         return static::MAX_ALIAS_LENGTH;
     }
 

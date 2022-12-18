@@ -630,7 +630,7 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
-    function out(myMessage, int $newlines = 1, int $level = Shell::NORMAL): Nullable!int
+    Nullable!int out(myMessage, int $newlines = 1, int $level = Shell::NORMAL)
     {
         return this._io.out(myMessage, $newlines, $level);
     }
@@ -656,7 +656,7 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
-    function info(myMessage, int $newlines = 1, int $level = Shell::NORMAL): Nullable!int
+    Nullable!int info(myMessage, int $newlines = 1, int $level = Shell::NORMAL)
     {
         return this._io.info(myMessage, $newlines, $level);
     }
@@ -682,8 +682,7 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
-    function success(myMessage, int $newlines = 1, int $level = Shell::NORMAL): Nullable!int
-    {
+    Nullable!int success(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
         return this._io.success(myMessage, $newlines, $level);
     }
 

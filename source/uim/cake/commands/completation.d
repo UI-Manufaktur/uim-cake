@@ -80,7 +80,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
+    Nullable!int execute(Arguments $args, ConsoleIo $io)
     {
         myMode = $args.getArgument("mode");
         switch (myMode) {
@@ -204,8 +204,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    protected auto getOptions(Arguments $args, ConsoleIo $io): Nullable!int
-    {
+    protected Nullable!int getOptions(Arguments $args, ConsoleIo $io) {
         myName = $args.getArgument("command");
         $subcommand = $args.getArgument("subcommand");
 
