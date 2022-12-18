@@ -1,7 +1,7 @@
 module uim.cake.https.clients\Auth;
 
-import uim.cake.https.clients;
-import uim.cake.https.clients\Request;
+@safe:
+import uim.cake;
 
 /**
  * Digest authentication adapter for Cake\Http\Client

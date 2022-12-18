@@ -1,0 +1,34 @@
+module uim.cake.errors\Debug;
+
+/**
+ * Debug node for special messages like errors or recursion warnings.
+ */
+class SpecialNode : INode
+{
+    /**
+     * @var string
+     */
+    private myValue;
+
+    /**
+     * Constructor
+     *
+     * @param string myValue The message/value to include in dump results.
+     */
+    this(string myValue) {
+        this.value = myValue;
+    }
+
+    /**
+     * Get the message/value
+     */
+    string getValue() {
+        return this.value;
+    }
+
+
+    auto getChildren(): array
+    {
+        return [];
+    }
+}

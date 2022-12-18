@@ -1,6 +1,7 @@
 module uim.cake.https.clients\Auth;
 
-import uim.cake.https.clients\Request;
+@safe:
+import uim.cake;
 
 /**
  * Basic authentication adapter for Cake\Http\Client
