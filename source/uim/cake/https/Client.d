@@ -115,7 +115,7 @@ class Client : ClientInterface
     /**
      * Adapter for sending requests.
      *
-     * @var \Cake\Http\Client\AdapterInterface
+     * @var \Cake\Http\Client\IAdapter
      */
     protected $_adapter;
 
@@ -166,8 +166,8 @@ class Client : ClientInterface
             $adapter = new $adapter();
         }
 
-        if (!$adapter instanceof AdapterInterface) {
-            throw new InvalidArgumentException("Adapter must be an instance of Cake\Http\Client\AdapterInterface");
+        if (!$adapter instanceof IAdapter) {
+            throw new InvalidArgumentException("Adapter must be an instance of Cake\Http\Client\IAdapter");
         }
         this._adapter = $adapter;
 

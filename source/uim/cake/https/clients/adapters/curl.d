@@ -11,7 +11,7 @@ import uim.cake;
  * can be set via the `curl` option key when making requests or configuring
  * a client.
  */
-class Curl : AdapterInterface
+class Curl : IAdapter
 {
 
     function send(RequestInterface myRequest, array myOptions): array

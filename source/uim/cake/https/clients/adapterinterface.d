@@ -9,7 +9,7 @@ module uim.cake.https.clients;
 import uim.cake;
 
 // Http client adapter interface.
-interface AdapterInterface {
+interface IAdapter {
     /**
      * Send a request and get a response back.
      *

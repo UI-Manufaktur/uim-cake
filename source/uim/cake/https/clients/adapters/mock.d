@@ -15,7 +15,7 @@ use Psr\Http\Message\RequestInterface;
  *
  * @internal
  */
-class Mock : AdapterInterface
+class Mock : IAdapter
 {
     /**
      * List of mocked responses.

@@ -9,7 +9,7 @@ import uim.cake;
  *
  * This approach and implementation is partly inspired by Aura.Http
  */
-class Stream : AdapterInterface
+class Stream : IAdapter
 {
     /**
      * Context resource used by the stream API.

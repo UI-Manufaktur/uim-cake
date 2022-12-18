@@ -1,10 +1,7 @@
 module uim.cake.https\Middleware;
 
-import uim.cake.https\Response;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\IRequestHandler;
+@safe:
+import uim.cake;
 
 /**
  * Decorate double-pass middleware as PSR-15 middleware.
