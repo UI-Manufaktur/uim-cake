@@ -27,16 +27,15 @@ class PluginAssetsCopyCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
-    {
-        this.io = $io;
-        this.args = $args;
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+      this.io = $io;
+      this.args = $args;
 
-        myName = $args.getArgument("name");
-        $overwrite = (bool)$args.getOption("overwrite");
-        this._process(this._list(myName), true, $overwrite);
+      myName = $args.getArgument("name");
+      $overwrite = (bool)$args.getOption("overwrite");
+      this._process(this._list(myName), true, $overwrite);
 
-        return static::CODE_SUCCESS;
+      return static::CODE_SUCCESS;
     }
 
     /**

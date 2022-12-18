@@ -272,8 +272,7 @@ class CommandRunner : IEventDispatcher {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null Exit code
      */
-    protected auto runCommand(ICommand $command, array $argv, ConsoleIo $io): Nullable!int
-    {
+    protected Nullable!int runCommand(ICommand $command, array $argv, ConsoleIo $io) {
         try {
             return $command.run($argv, $io);
         } catch (StopException $e) {

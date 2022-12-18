@@ -12,7 +12,6 @@ import uim.cake.console.consoleOptionParser;
 class PluginAssetsSymlinkCommand : Command {
     use PluginAssetsTrait;
 
-
     static string defaultName() {
         return "plugin assets symlink";
     }
@@ -28,16 +27,15 @@ class PluginAssetsSymlinkCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
-    {
-        this.io = $io;
-        this.args = $args;
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+      this.io = $io;
+      this.args = $args;
 
-        myName = $args.getArgument("name");
-        $overwrite = (bool)$args.getOption("overwrite");
-        this._process(this._list(myName), false, $overwrite);
+      myName = $args.getArgument("name");
+      $overwrite = (bool)$args.getOption("overwrite");
+      this._process(this._list(myName), false, $overwrite);
 
-        return static::CODE_SUCCESS;
+      return static::CODE_SUCCESS;
     }
 
     /**
@@ -48,17 +46,17 @@ class PluginAssetsSymlinkCommand : Command {
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser.setDescription([
-            "Symlink (copy as fallback) plugin assets to app\"s webroot.",
-        ]).addArgument("name", [
-            "help":"A specific plugin you want to symlink assets for.",
-            "optional":true,
-        ]).addOption("overwrite", [
-            "help":"Overwrite existing symlink / folder / files.",
-            "default":false,
-            "boolean":true,
-        ]);
+      $parser.setDescription([
+          "Symlink (copy as fallback) plugin assets to app\"s webroot.",
+      ]).addArgument("name", [
+          "help":"A specific plugin you want to symlink assets for.",
+          "optional":true,
+      ]).addOption("overwrite", [
+          "help":"Overwrite existing symlink / folder / files.",
+          "default":false,
+          "boolean":true,
+      ]);
 
-        return $parser;
+      return $parser;
     }
 }

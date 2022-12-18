@@ -118,7 +118,7 @@ interface ICookie
      *
      * @return int|null The expiry time as an integer.
      */
-    auto getExpiresTimestamp(): Nullable!int;
+    Nullable!int getExpiresTimestamp();
 
     /**
      * Builds the expiration value part of the header string

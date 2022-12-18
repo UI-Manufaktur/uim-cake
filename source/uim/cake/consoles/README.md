@@ -84,30 +84,29 @@ import uim.cake.console.consoleOptionParser;
 class HelloCommand : BaseCommand {
     protected auto buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser
-            .addArgument("name", [
-                "required":true,
-                "help":"The name to say hello to",
-            ])
-            .addOption("color", [
-                "choices":["none", "green"],
-                "default":"none",
-                "help":"The color to use."
-            ]);
+      $parser
+          .addArgument("name", [
+              "required":true,
+              "help":"The name to say hello to",
+          ])
+          .addOption("color", [
+              "choices":["none", "green"],
+              "default":"none",
+              "help":"The color to use."
+          ]);
 
-        return $parser;
+      return $parser;
     }
 
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
-    {
-        $color = $args.getOption("color");
-        if ($color == "none") {
-            $io.out("Hello {$args.getArgument("name")}");
-        } elseif ($color == "green") {
-            $io.out("<success>Hello {$args.getArgument("name")}</success>");
-        }
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+      $color = $args.getOption("color");
+      if ($color == "none") {
+          $io.out("Hello {$args.getArgument("name")}");
+      } elseif ($color == "green") {
+          $io.out("<success>Hello {$args.getArgument("name")}</success>");
+      }
 
-        return static::CODE_SUCCESS;
+      return static::CODE_SUCCESS;
     }
 }
 ```

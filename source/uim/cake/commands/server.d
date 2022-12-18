@@ -9,19 +9,13 @@ import uim.cake.core.Configure;
  * built-in Server command
  */
 class ServerCommand : Command {
-    /**
-     * Default ServerHost
-     */
+    // Default ServerHost
     public const string DEFAULT_HOST = "localhost";
 
-    /**
-     * Default ListenPort
-    */
+    // Default ListenPort
     public const int DEFAULT_PORT = 8765;
 
-    /**
-     * server host
-     */
+    // server host
     protected string $_host = self::DEFAULT_HOST;
 
     /**
@@ -31,14 +25,10 @@ class ServerCommand : Command {
      */
     protected $_port = self::DEFAULT_PORT;
 
-    /**
-     * document root
-     */
+    // document root
     protected string $_documentRoot = WWW_ROOT;
 
-    /**
-     * ini path
-     */
+    // ini path
     protected string $_iniPath = "";
 
     /**
@@ -93,30 +83,29 @@ class ServerCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
-    {
-        this.startup($args, $io);
-        $phpBinary = (string)env("PHP", "php");
-        $command = sprintf(
-            "%s -S %s:%d -t %s",
-            $phpBinary,
-            this._host,
-            this._port,
-            escapeshellarg(this._documentRoot)
-        );
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+      this.startup($args, $io);
+      $phpBinary = (string)env("PHP", "php");
+      $command = sprintf(
+        "%s -S %s:%d -t %s",
+        $phpBinary,
+        this._host,
+        this._port,
+        escapeshellarg(this._documentRoot)
+      );
 
-        if (!empty(this._iniPath)) {
-            $command = sprintf("%s -c %s", $command, this._iniPath);
-        }
+      if (!empty(this._iniPath)) {
+        $command = sprintf("%s -c %s", $command, this._iniPath);
+      }
 
-        $command = sprintf("%s %s", $command, escapeshellarg(this._documentRoot . "/index.php"));
+      $command = sprintf("%s %s", $command, escapeshellarg(this._documentRoot . "/index.php"));
 
-        $port = ":" . this._port;
-        $io.out(sprintf("built-in server is running in http://%s%s/", this._host, $port));
-        $io.out("You can exit with <info>`CTRL-C`</info>");
-        system($command);
+      $port = ":" . this._port;
+      $io.out(sprintf("built-in server is running in http://%s%s/", this._host, $port));
+      $io.out("You can exit with <info>`CTRL-C`</info>");
+      system($command);
 
-        return static::CODE_SUCCESS;
+      return static::CODE_SUCCESS;
     }
 
     /**
@@ -127,23 +116,23 @@ class ServerCommand : Command {
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser.setDescription([
-            "PHP Built-in Server for UIM",
-            "<warning>[WARN] Don\"t use this in a production environment</warning>",
-        ]).addOption("host", [
-            "short":"H",
-            "help":"ServerHost",
-        ]).addOption("port", [
-            "short":"p",
-            "help":"ListenPort",
-        ]).addOption("ini_path", [
-            "short":"I",
-            "help":"php.ini path",
-        ]).addOption("document_root", [
-            "short":"d",
-            "help":"DocumentRoot",
-        ]);
+      $parser.setDescription([
+          "PHP Built-in Server for UIM",
+          "<warning>[WARN] Don\"t use this in a production environment</warning>",
+      ]).addOption("host", [
+          "short":"H",
+          "help":"ServerHost",
+      ]).addOption("port", [
+          "short":"p",
+          "help":"ListenPort",
+      ]).addOption("ini_path", [
+          "short":"I",
+          "help":"php.ini path",
+      ]).addOption("document_root", [
+          "short":"d",
+          "help":"DocumentRoot",
+      ]);
 
-        return $parser;
+      return $parser;
     }
 }

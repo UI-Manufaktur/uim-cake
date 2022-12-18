@@ -19,8 +19,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    auto execute(Arguments $args, ConsoleIo $io): Nullable!int
-    {
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
         $commands = this.commands.getIterator();
         if ($commands instanceof ArrayIterator) {
             $commands.ksort();
