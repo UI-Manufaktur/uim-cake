@@ -1,7 +1,7 @@
 module uim.cake.https.clients;
 
-use Countable;
-use finfo;
+@safe:
+import uim.cake;
 
 /**
  * Provides an interface for building
@@ -10,8 +10,7 @@ use finfo;
  * Used by Http\Client to upload POST/PUT data
  * and files.
  */
-class FormData : Countable
-{
+class FormData : Countable {
     /**
      * Boundary marker.
      */
