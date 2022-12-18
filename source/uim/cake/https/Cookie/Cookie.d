@@ -485,26 +485,25 @@ class Cookie : ICookie
 
 
     auto getExpiry() {
-        return this.expiresAt;
+      return this.expiresAt;
     }
 
 
-    auto getExpiresTimestamp(): Nullable!int
-    {
-        if (!this.expiresAt) {
-            return null;
-        }
+    Nullable!int getExpiresTimestamp() {
+      if (!this.expiresAt) {
+          return null;
+      }
 
-        return (int)this.expiresAt.format("U");
+      return (int)this.expiresAt.format("U");
     }
 
 
     string getFormattedExpires() {
-        if (!this.expiresAt) {
-            return "";
-        }
+      if (!this.expiresAt) {
+          return "";
+      }
 
-        return this.expiresAt.format(static::EXPIRES_FORMAT);
+      return this.expiresAt.format(static::EXPIRES_FORMAT);
     }
 
 
@@ -559,11 +558,11 @@ class Cookie : ICookie
      * @throws \InvalidArgumentException
      */
     protected static function validateSameSiteValue(string $sameSite) {
-        if (!in_array($sameSite, ICookie::SAMESITE_VALUES, true)) {
-            throw new InvalidArgumentException(
-                "Samesite value must be either of: " . implode(", ", ICookie::SAMESITE_VALUES)
-            );
-        }
+      if (!in_array($sameSite, ICookie::SAMESITE_VALUES, true)) {
+        throw new InvalidArgumentException(
+            "Samesite value must be either of: " . implode(", ", ICookie::SAMESITE_VALUES)
+        );
+      }
     }
 
     /**
@@ -593,16 +592,16 @@ class Cookie : ICookie
      * @return static
      */
     function withAddedValue(string myPath, myValue) {
-        $new = clone this;
-        if ($new.isExpanded == false) {
-            /** @psalm-suppress PossiblyInvalidArgument */
-            $new.value = $new._expand($new.value);
-        }
+      $new = clone this;
+      if ($new.isExpanded == false) {
+          /** @psalm-suppress PossiblyInvalidArgument */
+          $new.value = $new._expand($new.value);
+      }
 
-        /** @psalm-suppress PossiblyInvalidArgument */
-        $new.value = Hash::insert($new.value, myPath, myValue);
+      /** @psalm-suppress PossiblyInvalidArgument */
+      $new.value = Hash::insert($new.value, myPath, myValue);
 
-        return $new;
+      return $new;
     }
 
     /**

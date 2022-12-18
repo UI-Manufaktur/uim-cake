@@ -207,8 +207,7 @@ class Paginator : PaginatorInterface
      * @param array myData Pagination data.
      * @return int|null
      */
-    protected auto getCount(IQuery myQuery, array myData): Nullable!int
-    {
+    protected Nullable!int getCount(IQuery myQuery, array myData) {
         return myQuery.count();
     }
 
