@@ -5,13 +5,11 @@
 **********************************************************************************************************/
 module uim.cake.https\Exception;
 
-use Throwable;
+@safe:
+import uim.cake;
 
-/**
- * Represents an HTTP 410 error.
- */
-class GoneException : HttpException
-{
+// Represents an HTTP 410 error.
+class GoneException : HttpException {
 
     protected $_defaultCode = 410;
 

@@ -15,9 +15,7 @@ interface ICookie {
      */
     public const string SAMESITE_LAX = "Lax";
 
-    /**
-     * SameSite attribute value: Strict
-     */
+    // SameSite attribute value: Strict
     public const string SAMESITE_STRICT = "Strict";
 
     /**

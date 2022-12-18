@@ -5,13 +5,11 @@
 **********************************************************************************************************/
 module uim.cake.https\Exception;
 
-use Throwable;
+@safe:
+import uim.cake;
 
-/**
- * Represents an HTTP 403 error.
- */
-class ForbiddenException : HttpException
-{
+// Represents an HTTP 403 error.
+class ForbiddenException : HttpException {
 
     protected $_defaultCode = 403;
 

@@ -5,13 +5,11 @@
 **********************************************************************************************************/
 module uim.cake.https\Exception;
 
-use Throwable;
+@safe:
+import uim.cake;
 
-/**
- * Represents an HTTP 500 error.
- */
-class InternalErrorException : HttpException
-{
+// Represents an HTTP 500 error.
+class InternalErrorException : HttpException {
     /**
      * Constructor
      *

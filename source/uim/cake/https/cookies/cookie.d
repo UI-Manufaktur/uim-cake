@@ -1,4 +1,4 @@
-module uim.cake.https\Cookie;
+module uim.cake.https.cookies.cookie;
 
 @safe:
 import uim.cake;

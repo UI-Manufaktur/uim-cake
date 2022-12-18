@@ -1,4 +1,4 @@
-module uim.cake.https\Cookie;
+module uim.cake.https.cookies.collection;
 
 @safe:
 import uim.cake;
@@ -9,8 +9,7 @@ import uim.cake;
  * Provides an immutable collection of cookies objects. Adding or removing
  * to a collection returns a *new* collection that you must retain.
  */
-class CookieCollection : IteratorAggregate, Countable
-{
+class CookieCollection : IteratorAggregate, Countable {
     /**
      * Cookie objects
      *
