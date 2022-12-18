@@ -5,8 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.console;
 
-use InvalidArgumentException;
-use SimpleXMLElement;
+@safe:
+import uim.cake;
 
 /**
  * An object to represent a single subcommand used in the command line.
@@ -15,9 +15,7 @@ use SimpleXMLElement;
  * @see \Cake\Console\ConsoleOptionParser::addSubcommand()
  */
 class ConsoleInputSubCommand {
-    /**
-     * Name of the subcommand
-     */
+    // Name of the subcommand
     protected string $_name = "";
 
     /**

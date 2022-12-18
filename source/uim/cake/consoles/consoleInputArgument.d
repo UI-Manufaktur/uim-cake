@@ -1,7 +1,7 @@
 module uim.cake.console;
 
-import uim.cake.console.exceptions\ConsoleException;
-use SimpleXMLElement;
+@safe:
+import uim.cake;
 
 /**
  * An object to represent a single argument used in the command line.

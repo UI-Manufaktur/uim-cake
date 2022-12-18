@@ -1,9 +1,7 @@
 module uim.cake.console;
 
-import uim.cake.console.exceptions\ConsoleException;
-import uim.cake.console.exceptions\MissingOptionException;
-import uim.cakeilities.Inflector;
-use LogicException;
+@safe:
+import uim.cake;
 
 /**
  * Handles parsing the ARGV in the command line and provides support

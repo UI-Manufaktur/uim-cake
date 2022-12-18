@@ -1,16 +1,9 @@
 module uim.cake.commands;
 
-import uim.cake.caches\Cache;
-import uim.cake.caches.engines\ApcuEngine;
-import uim.cake.caches.engines\WincacheEngine;
-import uim.cake.caches\InvalidArgumentException;
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
+@safe:
+import uim.cake;
 
-/**
- * CacheClear command.
- */
+// CacheClear command.
 class CacheClearCommand : Command {
 
     static string defaultName() {

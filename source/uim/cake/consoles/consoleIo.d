@@ -11,19 +11,13 @@ import uim.cake;
  * easy to do in unit tests.
  */
 class ConsoleIo {
-    /**
-     * Output constant making verbose shells.
-     */
+    // Output constant making verbose shells.
     public const int VERBOSE = 2;
 
-    /**
-     * Output constant for making normal shells.
-     */
+    // Output constant for making normal shells.
     public const int NORMAL = 1;
 
-    /**
-     * Output constants for making quiet shells.
-     */
+    // Output constants for making quiet shells.
     public const int QUIET = 0;
 
     /**
@@ -47,19 +41,11 @@ class ConsoleIo {
      */
     protected $_in;
 
-    /**
-     * The helper registry.
-     *
-     * @var \Cake\Console\HelperRegistry
-     */
-    protected $_helpers;
+    // The helper registry.
+    protected HelperRegistry $_helpers;
 
-    /**
-     * The current output level.
-     *
-     * @var int
-     */
-    protected $_level = self::NORMAL;
+    // The current output level.
+    protected int $_level = self::NORMAL;
 
     /**
      * The number of bytes last written to the output stream
@@ -79,7 +65,7 @@ class ConsoleIo {
     /**
      * @var bool
      */
-    protected $interactive = true;
+    protected bool $interactive = true;
 
     /**
      * Constructor
@@ -102,9 +88,6 @@ class ConsoleIo {
         this._helpers.setIo(this);
     }
 
-    /**
-     * @param bool myValue Value
-     */
     void setInteractive(bool myValue) {
         this.interactive = myValue;
     }
@@ -401,7 +384,7 @@ class ConsoleIo {
      * @see \Cake\Console\ConsoleOutput::getStyle()
      */
     array getStyle(string $style) {
-        return this._out.getStyle($style);
+      return this._out.getStyle($style);
     }
 
     /**

@@ -1,12 +1,9 @@
-module uim.cake.command;
+module uim.cake.command.i18ns.i18n;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
+@safe:
+import uim.cake;
 
-/**
- * Command for interactive I18N management.
- */
+// Command for interactive I18N management.
 class I18nCommand : Command {
     /**
      * Execute interactive mode

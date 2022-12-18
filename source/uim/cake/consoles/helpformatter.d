@@ -1,7 +1,7 @@
 module uim.cake.console;
 
-import uim.cakeilities.Text;
-use SimpleXMLElement;
+@safe:
+import uim.cake;
 
 /**
  * HelpFormatter formats help for console shells. Can format to either
@@ -12,8 +12,7 @@ use SimpleXMLElement;
  *
  * Xml output is useful for integration with other tools like IDE"s or other build tools.
  */
-class HelpFormatter
-{
+class HelpFormatter {
     /**
      * The maximum number of arguments shown when generating usage.
      *

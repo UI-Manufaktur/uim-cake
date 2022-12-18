@@ -1,10 +1,10 @@
-module uim.cake.https\Cookie;
+module uim.cake.https.cookies.interface_;
 
-/**
- * Cookie Interface
- */
-interface ICookie
-{
+@safe:
+import uim.cake;
+
+// Cookie Interface
+interface ICookie {
     /**
      * Expires attribute format.
      */

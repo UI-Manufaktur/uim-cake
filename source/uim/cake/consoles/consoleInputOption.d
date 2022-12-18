@@ -1,7 +1,7 @@
-module uim.cake.console;
+module uim.cake.consoles.consoleinputoption;
 
-import uim.cake.console.exceptions\ConsoleException;
-use SimpleXMLElement;
+@safe:
+import uim.cake;
 
 /**
  * An object to represent a single option used in the command line.
@@ -9,29 +9,18 @@ use SimpleXMLElement;
  *
  * @see \Cake\Console\ConsoleOptionParser::addOption()
  */
-class ConsoleInputOption
-{
-    /**
-     * Name of the option
-     */
+class ConsoleInputOption {
+    // Name of the option
     protected string _name;
 
-    /**
-     * Short (1 character) alias for the option.
-     */
+    // Short (1 character) alias for the option.
     protected string _short;
 
-    /**
-     * Help text for the option.
-     */
+    // Help text for the option.
     protected string _help;
 
-    /**
-     * Is the option a boolean option. Boolean options do not consume a parameter.
-     *
-     * @var bool
-     */
-    protected $_boolean;
+    // Is the option a boolean option. Boolean options do not consume a parameter.
+    protected bool $_boolean;
 
     /**
      * Default value for the option
@@ -40,12 +29,8 @@ class ConsoleInputOption
      */
     protected $_default;
 
-    /**
-     * Can the option accept multiple value definition.
-     *
-     * @var bool
-     */
-    protected $_multiple;
+    // Can the option accept multiple value definition.
+    protected bool $_multiple;
 
     /**
      * An array of choices for the option.
@@ -54,12 +39,8 @@ class ConsoleInputOption
      */
     protected $_choices;
 
-    /**
-     * Is the option required.
-     *
-     * @var bool
-     */
-    protected $required;
+    // Is the option required.
+    protected bool $required;
 
     /**
      * Make a new Input Option
@@ -75,14 +56,14 @@ class ConsoleInputOption
      * @throws \Cake\Console\Exception\ConsoleException
      */
     this(
-        string myName,
-        string $short = "",
-        string $help = "",
-        bool $isBoolean = false,
-        $default = null,
-        array $choices = [],
-        bool $multiple = false,
-        bool $required = false
+      string myName,
+      string $short = "",
+      string $help = "",
+      bool $isBoolean = false,
+      $default = null,
+      array $choices = [],
+      bool $multiple = false,
+      bool $required = false
     ) {
         _name = myName;
         this._short = $short;
@@ -99,9 +80,9 @@ class ConsoleInputOption
         }
 
         if (strlen(this._short) > 1) {
-            throw new ConsoleException(
-                sprintf("Short option "%s" is invalid, short options must be one letter.", this._short)
-            );
+          throw new ConsoleException(
+            sprintf("Short option "%s" is invalid, short options must be one letter.", this._short)
+          );
         }
     }
 
@@ -110,7 +91,7 @@ class ConsoleInputOption
         return _name;
     }
 
-    /7 Get the value of the short attribute.
+    // Get the value of the short attribute.
     string short() {
         return this._short;
     }

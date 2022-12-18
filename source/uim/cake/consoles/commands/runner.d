@@ -244,24 +244,24 @@ class CommandRunner : IEventDispatcher {
      * @throws \Cake\Console\Exception\MissingOptionException
      */
     protected string resolveName(CommandCollection $commands, ConsoleIo $io, Nullable!string myName) {
-        if (!myName) {
-            $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);
-            myName = "help";
-        }
-        myName = this.aliases[myName] ?? myName;
-        if (!$commands.has(myName)) {
-            myName = Inflector::underscore(myName);
-        }
-        if (!$commands.has(myName)) {
-            throw new MissingOptionException(
-                "Unknown command `{this.root} {myName}`. " .
-                "Run `{this.root} --help` to get the list of commands.",
-                myName,
-                $commands.keys()
-            );
-        }
+      if (!myName) {
+        $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);
+        myName = "help";
+      }
+      myName = this.aliases[myName] ?? myName;
+      if (!$commands.has(myName)) {
+          myName = Inflector::underscore(myName);
+      }
+      if (!$commands.has(myName)) {
+          throw new MissingOptionException(
+              "Unknown command `{this.root} {myName}`. " .
+              "Run `{this.root} --help` to get the list of commands.",
+              myName,
+              $commands.keys()
+          );
+      }
 
-        return myName;
+      return myName;
     }
 
     /**
@@ -273,11 +273,11 @@ class CommandRunner : IEventDispatcher {
      * @return int|null Exit code
      */
     protected Nullable!int runCommand(ICommand $command, array $argv, ConsoleIo $io) {
-        try {
-            return $command.run($argv, $io);
-        } catch (StopException $e) {
-            return $e.getCode();
-        }
+      try {
+          return $command.run($argv, $io);
+      } catch (StopException $e) {
+          return $e.getCode();
+      }
     }
 
     /**

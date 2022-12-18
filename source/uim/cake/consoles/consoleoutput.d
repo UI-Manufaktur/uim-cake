@@ -1,6 +1,7 @@
 module uim.cake.console;
 
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Object wrapper for outputting information from a shell application.
@@ -29,21 +30,16 @@ use InvalidArgumentException;
  * See ConsoleOutput::styles() to learn more about defining your own styles. Nested styles are not supported
  * at this time.
  */
-class ConsoleOutput
-{
+class ConsoleOutput {
     /**
      * Raw output constant - no modification of output text.
     */
     public const int RAW = 0;
 
-    /**
-     * Plain output - tags will be stripped.
-    */
+    // Plain output - tags will be stripped.
     public const int PLAIN = 1;
 
-    /**
-     * Color output - Convert known tags in to ANSI color escape codes.
-    */
+    // Color output - Convert known tags in to ANSI color escape codes.
     public const int COLOR = 2;
 
     /**
@@ -307,12 +303,10 @@ class ConsoleOutput
         this._outputAs = myType;
     }
 
-    /**
-     * Clean up and close handles
-     */
+    // Clean up and close handles
     auto __destruct() {
-        if (is_resource(this._output)) {
-            fclose(this._output);
-        }
+      if (is_resource(this._output)) {
+        fclose(this._output);
+      }
     }
 }

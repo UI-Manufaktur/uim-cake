@@ -1,6 +1,7 @@
 module uim.cake.console;
 
-import uim.cake.core.InstanceConfigTrait;
+@safe:
+import uim.cake;
 
 /**
  * Base class for Helpers.
@@ -9,8 +10,7 @@ import uim.cake.core.InstanceConfigTrait;
  * of Console output logic. For example creating tables,
  * progress bars or ascii art.
  */
-abstract class Helper
-{
+abstract class Helper {
     use InstanceConfigTrait;
 
     /**
