@@ -1,8 +1,7 @@
-module uim.cake.https.clients;
+module uim.cake.https.clients.request;
 
-use Laminas\Diactoros\RequestTrait;
-use Laminas\Diactoros\Stream;
-use Psr\Http\Message\RequestInterface;
+@safe:
+import uim.cake;
 
 /**
  * : methods for HTTP requests.

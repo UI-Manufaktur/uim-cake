@@ -1,11 +1,7 @@
-module uim.baklava.https\Client;
+module uim.baklava.https.clients.response;
 
-import uim.baklava.https\Cookie\CookieCollection;
-use Laminas\Diactoros\MessageTrait;
-use Laminas\Diactoros\Stream;
-use Psr\Http\Message\IResponse;
-use RuntimeException;
-use SimpleXMLElement;
+@safe:
+import uim.cake;
 
 /**
  * : methods for HTTP responses.

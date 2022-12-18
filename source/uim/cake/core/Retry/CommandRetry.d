@@ -1,6 +1,7 @@
-module uim.cake.core.Retry;
+module uim.cake.core.retry.commandretry;
 
-use Exception;
+@safe:
+import uim.cake;
 
 /**
  * Allows any action to be retried in case of an exception.
@@ -8,8 +9,7 @@ use Exception;
  * This class can be parametrized with a strategy, which will be followed
  * to determine whether the action should be retried.
  */
-class CommandRetry
-{
+class CommandRetry {
     /**
      * The strategy to follow should the executed action fail.
      *

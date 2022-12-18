@@ -5,13 +5,11 @@
 **********************************************************************************************************/
 module uim.cake.https.clients;
 
-use Psr\Http\Message\RequestInterface;
+@safe:
+import uim.cake;
 
-/**
- * Http client adapter interface.
- */
-interface AdapterInterface
-{
+// Http client adapter interface.
+interface AdapterInterface {
     /**
      * Send a request and get a response back.
      *
