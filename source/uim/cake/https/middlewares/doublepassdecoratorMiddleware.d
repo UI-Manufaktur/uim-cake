@@ -13,7 +13,7 @@ import uim.cake;
  *     IServerRequest myRequest,
  *     IResponse $response,
  *     callable $next
- * ): IResponse
+ * )IResponse
  * ```
  *
  * or a class with `__invoke()` method with same signature as above.
@@ -53,8 +53,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
      * @param \Psr\Http\Server\IRequestHandler $handler Request handler instance.
      * @return \Psr\Http\Message\IResponse
      */
-    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
-    {
+    IResponse process(IServerRequest myRequest, IRequestHandler $handler) {
         return (this.callable)(
             myRequest,
             new Response(),
@@ -68,7 +67,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
      * @internal
      * @return callable
      */
-    auto getCallable(): callable
+    callable getCallable()
     {
         return this.callable;
     }

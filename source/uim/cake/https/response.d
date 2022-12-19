@@ -1304,8 +1304,7 @@ class Response : IResponse
      * @return \Cake\Http\CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */
-    function cors(ServerRequest myRequest): CorsBuilder
-    {
+    CorsBuilder cors(ServerRequest myRequest) {
         $origin = myRequest.getHeaderLine("Origin");
         $ssl = myRequest.is("ssl");
 

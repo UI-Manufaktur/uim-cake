@@ -90,7 +90,7 @@ class SelectLoader
      * @param array<string, mixed> myOptions Same options as `Association::eagerLoader()`
      * @return \Closure
      */
-    function buildEagerLoader(array myOptions): Closure
+    Closure buildEagerLoader(array myOptions)
     {
         myOptions += this._defaultOptions();
         $fetchQuery = this._buildQuery(myOptions);
@@ -462,7 +462,7 @@ class SelectLoader
      * @param array<string, mixed> myOptions The options passed to the eagerLoader method
      * @return \Closure
      */
-    protected auto _resultInjector(Query $fetchQuery, array myResultMap, array myOptions): Closure
+    protected Closure _resultInjector(Query $fetchQuery, array myResultMap, array myOptions)
     {
         myKeys = this.associationType == Association::MANY_TO_ONE ?
             this.foreignKey :
@@ -500,7 +500,7 @@ class SelectLoader
      * @param string $nestKey The key under which results should be nested
      * @return \Closure
      */
-    protected auto _multiKeysInjector(array myResultMap, string[] $sourceKeys, string $nestKey): Closure
+    protected Closure _multiKeysInjector(array myResultMap, string[] $sourceKeys, string $nestKey)
     {
         return function ($row) use (myResultMap, $sourceKeys, $nestKey) {
             myValues = [];

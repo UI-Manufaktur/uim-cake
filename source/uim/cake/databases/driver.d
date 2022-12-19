@@ -261,7 +261,7 @@ abstract class Driver : IDriver
     }
 
     
-    abstract function queryTranslator(string myType): Closure;
+    abstract Closure queryTranslator(string myType);
 
     
     abstract function schemaDialect(): SchemaDialect;

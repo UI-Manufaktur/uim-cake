@@ -286,7 +286,7 @@ class FormHelper : Helper
      * @param array $contexts An array of context providers.
      * @return \Cake\View\Form\ContextFactory
      */
-    function contextFactory(?ContextFactory $instance = null, array $contexts = []): ContextFactory
+    ContextFactory contextFactory(?ContextFactory $instance = null, array $contexts = [])
     {
         if ($instance == null) {
             if (this._contextFactory == null) {
@@ -622,7 +622,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $formTokenData Token data.
      * @return \Cake\Form\FormProtector
      */
-    protected auto createFormProtector(array $formTokenData): FormProtector
+    protected FormProtector createFormProtector(array $formTokenData)
     {
         $session = this._View.getRequest().getSession();
         $session.start();
@@ -638,7 +638,7 @@ class FormHelper : Helper
      * @return \Cake\Form\FormProtector
      * @throws \Cake\Core\Exception\CakeException
      */
-    auto getFormProtector(): FormProtector
+    FormProtector getFormProtector(): 
     {
         if (this.formProtector == null) {
             throw new CakeException(
@@ -1179,7 +1179,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return array<string, mixed> Options
      */
-    protected auto _parseOptions(string myFieldName, array myOptions): array
+    protected auto _parseOptions(string myFieldName, array myOptions)array
     {
         $needsMagicType = false;
         if (empty(myOptions["type"])) {
@@ -1248,7 +1248,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return array
      */
-    protected auto _optionsOptions(string myFieldName, array myOptions): array
+    protected array _optionsOptions(string myFieldName, array myOptions)
     {
         if (isset(myOptions["options"])) {
             return myOptions;
@@ -1287,7 +1287,7 @@ class FormHelper : Helper
      * overwrite the "type" key in options.
      * @return array<string, mixed>
      */
-    protected auto _magicOptions(string myFieldName, array myOptions, bool $allowOverride): array
+    protected array _magicOptions(string myFieldName, array myOptions, bool $allowOverride)
     {
         myOptions += [
             "templateVars": [],
@@ -2220,7 +2220,7 @@ class FormHelper : Helper
      * @param array<string, mixed>|array<string> myOptions Array of options to append options into.
      * @return array<string, mixed> Array of options for the input.
      */
-    protected auto _initInputField(string myField, array myOptions = []): array
+    protected array _initInputField(string myField, array myOptions = [])
     {
         myOptions += ["fieldName": myField];
 
@@ -2341,7 +2341,7 @@ class FormHelper : Helper
      * @param \Cake\View\Form\IContext|null $context Either the new context when setting, or null to get.
      * @return \Cake\View\Form\IContext The context for the form.
      */
-    function context(?IContext $context = null): IContext
+    IContext context(?IContext $context = null)
     {
         if ($context instanceof IContext) {
             this._context = $context;
@@ -2360,7 +2360,7 @@ class FormHelper : Helper
      * @throws \RuntimeException when the context class does not implement the
      *   IContext.
      */
-    protected auto _getContext(myData = []): IContext
+    protected IContext _getContext(myData = [])
     {
         if (isset(this._context) && empty(myData)) {
             return this._context;
@@ -2435,7 +2435,7 @@ class FormHelper : Helper
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         return [];
     }

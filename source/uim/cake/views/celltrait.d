@@ -35,7 +35,7 @@ trait CellTrait {
      * @return \Cake\View\Cell The cell instance
      * @throws \Cake\View\Exception\MissingCellException If Cell class was not found.
      */
-    protected auto cell(string $cell, array myData = [], array myOptions = []): Cell
+    protected Cell cell(string $cell, array myData = [], array myOptions = [])
     {
         $parts = explode("::", $cell);
 
@@ -70,7 +70,7 @@ trait CellTrait {
      * @param array<string, mixed> myOptions The constructor options for the cell.
      * @return \Cake\View\Cell
      */
-    protected auto _createCell(string myClassName, string $action, Nullable!string myPlugin, array myOptions): Cell
+    protected auto _createCell(string myClassName, string $action, Nullable!string myPlugin, array myOptions)Cell
     {
         /** @var \Cake\View\Cell $instance */
         $instance = new myClassName(this.request, this.response, this.getEventManager(), myOptions);

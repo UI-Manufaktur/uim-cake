@@ -1127,7 +1127,7 @@ abstract class Association
      * @param array<string, mixed> myOptions The options for eager loading.
      * @return \Closure
      */
-    abstract function eagerLoader(array myOptions): Closure;
+    abstract Closure eagerLoader(array myOptions);
 
     /**
      * Handles cascading a delete from an associated model.

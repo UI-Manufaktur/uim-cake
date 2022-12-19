@@ -593,7 +593,7 @@ class HasMany : Association
     }
 
 
-    function eagerLoader(array myOptions): Closure
+    Closure eagerLoader(array myOptions)
     {
         $loader = new SelectLoader([
             "alias":this.getAlias(),

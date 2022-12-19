@@ -479,7 +479,7 @@ class BelongsToMany : Association
     }
 
 
-    function eagerLoader(array myOptions): Closure
+    Closure eagerLoader(array myOptions)
     {
         myName = this._junctionAssociationName();
         $loader = new SelectWithPivotLoader([
