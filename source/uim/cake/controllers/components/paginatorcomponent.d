@@ -51,10 +51,10 @@ class PaginatorComponent : Component
             if (!myConfig["paginator"] instanceof Paginator) {
                 throw new InvalidArgumentException("Paginator must be an instance of " . Paginator::class);
             }
-            this._paginator = myConfig["paginator"];
+            _paginator = myConfig["paginator"];
             unset(myConfig["paginator"]);
         } else {
-            this._paginator = new Paginator();
+            _paginator = new Paginator();
         }
 
         super.this($registry, myConfig);
@@ -168,18 +168,18 @@ class PaginatorComponent : Component
      * @throws \Cake\Http\Exception\NotFoundException
      */
     IResultSet paginate(object $object, array $settings = []) {
-        myRequest = this._registry.getController().getRequest();
+        myRequest = _registry.getController().getRequest();
 
         try {
-            myResults = this._paginator.paginate(
+            myResults = _paginator.paginate(
                 $object,
                 myRequest.getQueryParams(),
                 $settings
             );
 
-            this._setPagingParams();
+            _setPagingParams();
         } catch (PageOutOfBoundsException $e) {
-            this._setPagingParams();
+            _setPagingParams();
 
             throw new NotFoundException(null, null, $e);
         }
@@ -204,11 +204,11 @@ class PaginatorComponent : Component
      * @return array<string, mixed> Array of merged options.
      */
     array mergeOptions(string myAlias, array $settings) {
-        auto myRequest = this._registry.getController().getRequest();
+        auto myRequest = _registry.getController().getRequest();
 
-        return this._paginator.mergeOptions(
+        return _paginator.mergeOptions(
             myRequest.getQueryParams(),
-            this._paginator.getDefaults(myAlias, $settings)
+            _paginator.getDefaults(myAlias, $settings)
         );
     }
 
@@ -239,7 +239,7 @@ class PaginatorComponent : Component
     protected void _setPagingParams() {
         $controller = this.getController();
         myRequest = $controller.getRequest();
-        $paging = this._paginator.getPagingParams() + (array)myRequest.getAttribute("paging", []);
+        $paging = _paginator.getPagingParams() + (array)myRequest.getAttribute("paging", []);
 
         $controller.setRequest(myRequest.withAttribute("paging", $paging));
     }
@@ -253,7 +253,7 @@ class PaginatorComponent : Component
      * @return this
      */
     auto setConfig(myKey, myValue = null, myMerge = true) {
-        this._paginator.setConfig(myKey, myValue, myMerge);
+        _paginator.setConfig(myKey, myValue, myMerge);
 
         return this;
     }
@@ -266,7 +266,7 @@ class PaginatorComponent : Component
      * @return mixed Config value being read.
      */
     auto getConfig(Nullable!string myKey = null, $default = null) {
-        return this._paginator.getConfig(myKey, $default);
+        return _paginator.getConfig(myKey, $default);
     }
 
     /**
@@ -277,7 +277,7 @@ class PaginatorComponent : Component
      * @return this
      */
     function configShallow(myKey, myValue = null) {
-        this._paginator.configShallow(myKey, null);
+        _paginator.configShallow(myKey, null);
 
         return this;
     }
@@ -290,6 +290,6 @@ class PaginatorComponent : Component
      * @return mixed
      */
     auto __call(string $method, array $args) {
-        return this._paginator.{$method}(...$args);
+        return _paginator.{$method}(...$args);
     }
 }

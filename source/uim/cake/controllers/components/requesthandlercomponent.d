@@ -136,7 +136,7 @@ class RequestHandlerComponent : Component {
 
         this.ext = myRequest.getParam("_ext");
         if (!this.ext || in_array(this.ext, ["html", "htm"], true)) {
-            this._setExtension(myRequest, $response);
+            _setExtension(myRequest, $response);
         }
 
         $isAjax = myRequest.is("ajax");
@@ -186,7 +186,7 @@ class RequestHandlerComponent : Component {
         }
 
         if (
-            this._config["checkHttpCache"] &&
+            _config["checkHttpCache"] &&
             $response.checkNotModified($controller.getRequest())
         ) {
             $controller.setResponse($response);
@@ -391,17 +391,17 @@ class RequestHandlerComponent : Component {
         if ($viewClass) {
             myBuilder.setClassName($viewClass);
         } else {
-            if (!this._renderType) {
+            if (!_renderType) {
                 myBuilder.setTemplatePath((string)myBuilder.getTemplatePath() . DIRECTORY_SEPARATOR . myType);
             } else {
                 myBuilder.setTemplatePath(preg_replace(
-                    "/([\/\\\\]{this._renderType})$/",
+                    "/([\/\\\\]{_renderType})$/",
                     DIRECTORY_SEPARATOR . myType,
                     (string)myBuilder.getTemplatePath()
                 ));
             }
 
-            this._renderType = myType;
+            _renderType = myType;
             myBuilder.setLayoutPath(myType);
         }
 

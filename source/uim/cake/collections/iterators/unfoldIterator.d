@@ -38,9 +38,9 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
      * out of which the nested iterators will be yielded.
      */
     this(Traversable myItems, callable $unfolder) {
-        this._unfolder = $unfolder;
+        _unfolder = $unfolder;
         super.this(myItems);
-        this._innerIterator = this.getInnerIterator();
+        _innerIterator = this.getInnerIterator();
     }
 
     /**
@@ -60,8 +60,8 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
     RecursiveIterator getChildren() {
         $current = this.current();
         myKey = this.key();
-        $unfolder = this._unfolder;
+        $unfolder = _unfolder;
 
-        return new NoChildrenIterator($unfolder($current, myKey, this._innerIterator));
+        return new NoChildrenIterator($unfolder($current, myKey, _innerIterator));
     }
 }

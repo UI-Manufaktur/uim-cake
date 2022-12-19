@@ -44,9 +44,9 @@ class ConsoleInputArgument {
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
             _name = myName;
-            this._help = $help;
-            this._required = $required;
-            this._choices = $choices;
+            _help = $help;
+            _required = $required;
+            _choices = $choices;
         }
     }
 
@@ -74,18 +74,18 @@ class ConsoleInputArgument {
         if (!this.isRequired()) {
             $optional = " <comment>(optional)</comment>";
         }
-        if (this._choices) {
-            $optional .= sprintf(" <comment>(choices: %s)</comment>", implode("|", this._choices));
+        if (_choices) {
+            $optional .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
 
-        return sprintf("%s%s%s", myName, this._help, $optional);
+        return sprintf("%s%s%s", myName, _help, $optional);
     }
 
     // Get the usage value for this argument
     string usage() {
         string myName = name;
-        if (this._choices) {
-            myName = implode("|", this._choices);
+        if (_choices) {
+            myName = implode("|", _choices);
         }
         myName = "<" . myName . ">";
         if (!this.isRequired()) {
@@ -98,7 +98,7 @@ class ConsoleInputArgument {
     /**
      * Check if this argument is a required argument
     bool isRequired() {
-        return this._required;
+        return _required;
     }
 
     /**
@@ -109,16 +109,16 @@ class ConsoleInputArgument {
      * @throws \Cake\Console\Exception\ConsoleException
      */
     bool validChoice(string myValue) {
-        if (empty(this._choices)) {
+        if (empty(_choices)) {
             return true;
         }
-        if (!in_array(myValue, this._choices, true)) {
+        if (!in_array(myValue, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     ""%s" is not a valid value for %s. Please use one of "%s"",
                     myValue,
                     name,
-                    implode(", ", this._choices)
+                    implode(", ", _choices)
                 )
             );
         }
@@ -136,10 +136,10 @@ class ConsoleInputArgument {
     {
         $option = $parent.addChild("argument");
         $option.addAttribute("name", name);
-        $option.addAttribute("help", this._help);
+        $option.addAttribute("help", _help);
         $option.addAttribute("required", (string)(int)this.isRequired());
         $choices = $option.addChild("choices");
-        foreach ($valid; this._choices) {
+        foreach ($valid; _choices) {
             $choices.addChild("choice", $valid);
         }
 

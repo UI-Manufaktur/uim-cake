@@ -173,7 +173,7 @@ class Controller : IEventListener, IEventDispatcher
         if (this.modelClass == null) {
             myPlugin = this.request.getParam("plugin");
             myModelClass = (myPlugin ? myPlugin . "." : "") . this.name;
-            this._setModelClass(myModelClass);
+            _setModelClass(myModelClass);
 
             this.defaultTable = myModelClass;
         }
@@ -213,7 +213,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Get the component registry for this controller.
      *
-     * If called with the first parameter, it will be set as the controller this._components property
+     * If called with the first parameter, it will be set as the controller _components property
      *
      * @param \Cake\Controller\ComponentRegistry|null $components Component registry.
      * @return \Cake\Controller\ComponentRegistry
@@ -222,14 +222,14 @@ class Controller : IEventListener, IEventDispatcher
         if ($components !== null) {
             $components.setController(this);
 
-            return this._components = $components;
+            return _components = $components;
         }
 
-        if (this._components == null) {
-            this._components = new ComponentRegistry(this);
+        if (_components == null) {
+            _components = new ComponentRegistry(this);
         }
 
-        return this._components;
+        return _components;
     }
 
     /**
@@ -669,7 +669,7 @@ class Controller : IEventListener, IEventDispatcher
     Response render(Nullable!string myTemplate = null, Nullable!string $layout = null) {
       myBuilder = this.viewBuilder();
       if (!myBuilder.getTemplatePath()) {
-          myBuilder.setTemplatePath(this._templatePath());
+          myBuilder.setTemplatePath(_templatePath());
       }
 
       this.autoRender = false;

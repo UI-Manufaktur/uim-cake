@@ -85,12 +85,12 @@ class Component : IEventListener
      * @param array<string, mixed> myConfig Array of configuration settings.
      */
     this(ComponentRegistry $registry, array myConfig = []) {
-        this._registry = $registry;
+        _registry = $registry;
 
         this.setConfig(myConfig);
 
         if (this.components) {
-            this._componentMap = $registry.normalizeArray(this.components);
+            _componentMap = $registry.normalizeArray(this.components);
         }
         this.initialize(myConfig);
     }
@@ -101,7 +101,7 @@ class Component : IEventListener
      * @return \Cake\Controller\Controller The bound controller.
      */
     Controller getController() {
-        return this._registry.getController();
+        return _registry.getController();
     }
 
     /**
@@ -122,9 +122,9 @@ class Component : IEventListener
      * @return \Cake\Controller\Component|null A Component object or null.
      */
     auto __get(string myName) {
-        if (isset(this._componentMap[myName]) && !isset(this.{myName})) {
-            myConfig = (array)this._componentMap[myName]["config"] + ["enabled":false];
-            this.{myName} = this._registry.load(this._componentMap[myName]["class"], myConfig);
+        if (isset(_componentMap[myName]) && !isset(this.{myName})) {
+            myConfig = (array)_componentMap[myName]["config"] + ["enabled":false];
+            this.{myName} = _registry.load(_componentMap[myName]["class"], myConfig);
         }
 
         return this.{myName} ?? null;

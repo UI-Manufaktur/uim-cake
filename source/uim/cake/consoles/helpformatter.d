@@ -45,7 +45,7 @@ class HelpFormatter {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser help is being generated for.
      */
     this(ConsoleOptionParser $parser) {
-        this._parser = $parser;
+        _parser = $parser;
     }
 
     /**
@@ -54,7 +54,7 @@ class HelpFormatter {
      * @param string myAlias The alias
      */
     void setAlias(string myAlias) {
-        this._alias = myAlias;
+        _alias = myAlias;
     }
 
     /**
@@ -63,7 +63,7 @@ class HelpFormatter {
      * @param int $width The width of the help output.
      */
     string text(int $width = 72) {
-        $parser = this._parser;
+        $parser = _parser;
         $out = [];
         $description = $parser.getDescription();
         if (!empty($description)) {
@@ -71,13 +71,13 @@ class HelpFormatter {
             $out[] = "";
         }
         $out[] = "<info>Usage:</info>";
-        $out[] = this._generateUsage();
+        $out[] = _generateUsage();
         $out[] = "";
         $subcommands = $parser.subcommands();
         if (!empty($subcommands)) {
             $out[] = "<info>Subcommands:</info>";
             $out[] = "";
-            $max = this._getMaxLength($subcommands) + 2;
+            $max = _getMaxLength($subcommands) + 2;
             foreach ($subcommands as $command) {
                 $out[] = Text::wrapBlock($command.help($max), [
                     "width":$width,
@@ -87,7 +87,7 @@ class HelpFormatter {
             }
             $out[] = "";
             $out[] = sprintf(
-                "To see help on a subcommand use <info>`" . this._alias . " %s [subcommand] --help`</info>",
+                "To see help on a subcommand use <info>`" . _alias . " %s [subcommand] --help`</info>",
                 $parser.getCommand()
             );
             $out[] = "";
@@ -95,7 +95,7 @@ class HelpFormatter {
 
         myOptions = $parser.options();
         if (myOptions) {
-            $max = this._getMaxLength(myOptions) + 8;
+            $max = _getMaxLength(myOptions) + 8;
             $out[] = "<info>Options:</info>";
             $out[] = "";
             foreach (myOptions as $option) {
@@ -110,7 +110,7 @@ class HelpFormatter {
 
         $arguments = $parser.arguments();
         if (!empty($arguments)) {
-            $max = this._getMaxLength($arguments) + 2;
+            $max = _getMaxLength($arguments) + 2;
             $out[] = "<info>Arguments:</info>";
             $out[] = "";
             foreach ($arguments as $argument) {
@@ -137,24 +137,24 @@ class HelpFormatter {
      * be indicated with []
      */
     protected string _generateUsage() {
-        $usage = [this._alias . " " . this._parser.getCommand()];
-        $subcommands = this._parser.subcommands();
+        $usage = [_alias . " " . _parser.getCommand()];
+        $subcommands = _parser.subcommands();
         if (!empty($subcommands)) {
             $usage[] = "[subcommand]";
         }
         myOptions = [];
-        foreach (this._parser.options() as $option) {
+        foreach (_parser.options() as $option) {
             myOptions[] = $option.usage();
         }
-        if (count(myOptions) > this._maxOptions) {
+        if (count(myOptions) > _maxOptions) {
             myOptions = ["[options]"];
         }
         $usage = array_merge($usage, myOptions);
         $args = [];
-        foreach (this._parser.arguments() as $argument) {
+        foreach (_parser.arguments() as $argument) {
             $args[] = $argument.usage();
         }
-        if (count($args) > this._maxArgs) {
+        if (count($args) > _maxArgs) {
             $args = ["[arguments]"];
         }
         $usage = array_merge($usage, $args);
@@ -184,7 +184,7 @@ class HelpFormatter {
      * @return \SimpleXMLElement|string See $string
      */
     function xml(bool $string = true) {
-        $parser = this._parser;
+        $parser = _parser;
         $xml = new SimpleXMLElement("<shell></shell>");
         $xml.addChild("command", $parser.getCommand());
         $xml.addChild("description", $parser.getDescription());

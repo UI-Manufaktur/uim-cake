@@ -28,7 +28,7 @@ class InvalidParameterException : CakeException
      */
     this(myMessage = "", Nullable!int $code = null, ?Throwable $previous = null) {
         if (is_array(myMessage)) {
-            this._messageTemplate = this.templates[myMessage["template"]] ?? "";
+            _messageTemplate = this.templates[myMessage["template"]] ?? "";
             unset(myMessage["template"]);
         }
         super.this(myMessage, $code, $previous);

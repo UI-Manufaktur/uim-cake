@@ -135,7 +135,7 @@ class ConsoleOutput {
      * @param string $stream The identifier of the stream to write output to.
      */
     this(string $stream = "php://stdout") {
-        this._output = fopen($stream, "wb");
+        _output = fopen($stream, "wb");
 
         if (
             (
@@ -147,13 +147,13 @@ class ConsoleOutput {
             ) ||
             (
                 function_exists("posix_isatty") &&
-                !posix_isatty(this._output)
+                !posix_isatty(_output)
             ) ||
             (
                 env("NO_COLOR") !== null
             )
         ) {
-            this._outputAs = self::PLAIN;
+            _outputAs = self::PLAIN;
         }
     }
 
@@ -170,7 +170,7 @@ class ConsoleOutput {
             myMessage = implode(static::LF, myMessage);
         }
 
-        return this._write(this.styleText(myMessage . str_repeat(static::LF, $newlines)));
+        return _write(this.styleText(myMessage . str_repeat(static::LF, $newlines)));
     }
 
     /**
@@ -180,10 +180,10 @@ class ConsoleOutput {
      * @return String with color codes added.
      */
     string styleText(string $text) {
-        if (this._outputAs == static::RAW) {
+        if (_outputAs == static::RAW) {
             return $text;
         }
-        if (this._outputAs == static::PLAIN) {
+        if (_outputAs == static::PLAIN) {
             $tags = implode("|", array_keys(static::$_styles));
 
             return preg_replace("#</?(?:" . $tags . ")>#", "", $text);
@@ -231,7 +231,7 @@ class ConsoleOutput {
      * @return The number of bytes returned from writing to output.
      */
     protected int _write(string myMessage) {
-        return (int)fwrite(this._output, myMessage);
+        return (int)fwrite(_output, myMessage);
     }
 
     /**
@@ -285,7 +285,7 @@ class ConsoleOutput {
      * Get the output type on how formatting tags are treated.
      */
     int getOutputAs() {
-        return this._outputAs;
+        return _outputAs;
     }
 
     /**
@@ -299,13 +299,13 @@ class ConsoleOutput {
             throw new InvalidArgumentException(sprintf("Invalid output type "%s".", myType));
         }
 
-        this._outputAs = myType;
+        _outputAs = myType;
     }
 
     // Clean up and close handles
     auto __destruct() {
-      if (is_resource(this._output)) {
-        fclose(this._output);
+      if (is_resource(_output)) {
+        fclose(_output);
       }
     }
 }

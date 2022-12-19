@@ -69,20 +69,20 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
             [, $objName] = pluginSplit(myName);
         }
 
-        $loaded = isset(this._loaded[$objName]);
+        $loaded = isset(_loaded[$objName]);
         if ($loaded && !empty(myConfig)) {
-            this._checkDuplicate($objName, myConfig);
+            _checkDuplicate($objName, myConfig);
         }
         if ($loaded) {
-            return this._loaded[$objName];
+            return _loaded[$objName];
         }
 
         myClassName = myName;
         if (is_string(myName)) {
-            myClassName = this._resolveClassName(myName);
+            myClassName = _resolveClassName(myName);
             if (myClassName == null) {
                 [myPlugin, myName] = pluginSplit(myName);
-                this._throwMissingClassError(myName, myPlugin);
+                _throwMissingClassError(myName, myPlugin);
             }
         }
 
@@ -90,8 +90,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
          * @psalm-var TObject $instance
          * @psalm-suppress PossiblyNullArgument
          **/
-        $instance = this._create(myClassName, $objName, myConfig);
-        this._loaded[$objName] = $instance;
+        $instance = _create(myClassName, $objName, myConfig);
+        _loaded[$objName] = $instance;
 
         return $instance;
     }
@@ -112,7 +112,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @throws \RuntimeException When a duplicate is found.
      */
     protected void _checkDuplicate(string myName, array myConfig) {
-        $existing = this._loaded[myName];
+        $existing = _loaded[myName];
         $msg = sprintf("The "%s" alias has already been loaded.", myName);
         $hasConfig = method_exists($existing, "getConfig");
         if (!$hasConfig) {
@@ -184,7 +184,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return List of object names.
      */
     string[] loaded() {
-        return array_keys(this._loaded);
+        return array_keys(_loaded);
     }
 
     /**
@@ -194,7 +194,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return bool True is object is loaded else false.
      */
     bool has(string myName) {
-        return isset(this._loaded[myName]);
+        return isset(_loaded[myName]);
     }
 
     /**
@@ -206,11 +206,11 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-return TObject
      */
     auto get(string myName) {
-        if (!isset(this._loaded[myName])) {
+        if (!isset(_loaded[myName])) {
             throw new RuntimeException(sprintf("Unknown object "%s"", myName));
         }
 
-        return this._loaded[myName];
+        return _loaded[myName];
     }
 
     /**
@@ -221,7 +221,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-return TObject|null
      */
     auto __get(string myName) {
-        return this._loaded[myName] ?? null;
+        return _loaded[myName] ?? null;
     }
 
     /**
@@ -287,7 +287,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return this
      */
     function reset() {
-        foreach (array_keys(this._loaded) as myName) {
+        foreach (array_keys(_loaded) as myName) {
             this.unload((string)myName);
         }
 
@@ -310,13 +310,13 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         [, $objName] = pluginSplit(myName);
 
         // Just call unload if the object was loaded before
-        if (array_key_exists(myName, this._loaded)) {
+        if (array_key_exists(myName, _loaded)) {
             this.unload(myName);
         }
         if (this instanceof IEventDispatcher && $object instanceof IEventListener) {
             this.getEventManager().on($object);
         }
-        this._loaded[$objName] = $object;
+        _loaded[$objName] = $object;
 
         /** @psalm-suppress LessSpecificReturnStatement */
         return this;
@@ -332,16 +332,16 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-suppress MoreSpecificReturnType
      */
     function unload(string myName) {
-        if (empty(this._loaded[myName])) {
+        if (empty(_loaded[myName])) {
             [myPlugin, myName] = pluginSplit(myName);
-            this._throwMissingClassError(myName, myPlugin);
+            _throwMissingClassError(myName, myPlugin);
         }
 
-        $object = this._loaded[myName];
+        $object = _loaded[myName];
         if (this instanceof IEventDispatcher && $object instanceof IEventListener) {
             this.getEventManager().off($object);
         }
-        unset(this._loaded[myName]);
+        unset(_loaded[myName]);
 
         /** @psalm-suppress LessSpecificReturnStatement */
         return this;
@@ -354,14 +354,14 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-return \Traversable<string, TObject>
      */
     Traversable getIterator() {
-        return new ArrayIterator(this._loaded);
+        return new ArrayIterator(_loaded);
     }
 
     /**
      * Returns the number of loaded objects.
      */
     int count() {
-        return count(this._loaded);
+        return count(_loaded);
     }
 
     /**

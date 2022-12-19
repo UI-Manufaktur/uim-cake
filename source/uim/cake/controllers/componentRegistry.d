@@ -42,11 +42,11 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @return \Cake\Controller\Controller Controller instance or null if not set.
      */
     Controller getController() {
-        if (this._controller == null) {
+        if (_controller == null) {
             throw new CakeException("Controller not set for ComponentRegistry");
         }
 
-        return this._controller;
+        return _controller;
     }
 
     /**
@@ -56,7 +56,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @return this
      */
     auto setController(Controller $controller) {
-        this._controller = $controller;
+        _controller = $controller;
         this.setEventManager($controller.getEventManager());
 
         return this;

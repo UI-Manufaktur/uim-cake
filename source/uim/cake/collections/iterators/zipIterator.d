@@ -55,11 +55,11 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
             return (new Collection(myItems)).unwrap();
         }, $sets);
 
-        this._callback = $callable;
+        _callback = $callable;
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
         foreach ($sets as $set) {
-            this._iterators[] = $set;
+            _iterators[] = $set;
             this.attachIterator($set);
         }
     }
@@ -72,11 +72,11 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      */
     #[\ReturnTypeWillChange]
     function current() {
-        if (this._callback == null) {
+        if (_callback == null) {
             return super.current();
         }
 
-        return call_user_func_array(this._callback, super.current());
+        return call_user_func_array(_callback, super.current());
     }
 
     /**
@@ -84,12 +84,12 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * to reconstruct it
      */
     string serialize() {
-        return serialize(this._iterators);
+        return serialize(_iterators);
     }
 
     // Magic method used for serializing the iterator instance.
     array __serialize() {
-        return this._iterators;
+        return _iterators;
     }
 
     /**
@@ -99,8 +99,8 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      */
     void unserialize($iterators) {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
-        this._iterators = unserialize($iterators);
-        foreach ($it; this._iterators) {
+        _iterators = unserialize($iterators);
+        foreach ($it; _iterators) {
             this.attachIterator($it);
         }
     }
@@ -113,8 +113,8 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
     void __unserialize(array myData) {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
-        this._iterators = myData;
-        foreach ($it; this._iterators) {
+        _iterators = myData;
+        foreach ($it; _iterators) {
             this.attachIterator($it);
         }
     }

@@ -55,25 +55,25 @@ class ConsoleInputSubCommand {
             $parser = ConsoleOptionParser::buildFromArray($parser);
         }
 
-        this._name = myName;
-        this._help = $help;
-        this._parser = $parser;
+        _name = myName;
+        _help = $help;
+        _parser = $parser;
     }
 
     /**
      * Get the value of the name attribute.
      *
-     * @return string Value of this._name.
+     * @return string Value of _name.
      */
     string name() {
-        return this._name;
+        return _name;
     }
 
     /**
      * Get the raw help string for this command
      */
     string getRawHelp() {
-        return this._help;
+        return _help;
     }
 
     /**
@@ -82,12 +82,12 @@ class ConsoleInputSubCommand {
      * @param int $width The width to make the name of the subcommand.
      */
     string help(int $width = 0) {
-        myName = this._name;
+        myName = _name;
         if (strlen(myName) < $width) {
             myName = str_pad(myName, $width, " ");
         }
 
-        return myName . this._help;
+        return myName . _help;
     }
 
     /**
@@ -96,7 +96,7 @@ class ConsoleInputSubCommand {
      * @return \Cake\Console\ConsoleOptionParser|null
      */
     ?ConsoleOptionParser parser() {
-        return this._parser;
+        return _parser;
     }
 
     /**
@@ -107,8 +107,8 @@ class ConsoleInputSubCommand {
      */
     SimpleXMLElement xml(SimpleXMLElement $parent) {
         $command = $parent.addChild("command");
-        $command.addAttribute("name", this._name);
-        $command.addAttribute("help", this._help);
+        $command.addAttribute("name", _name);
+        $command.addAttribute("help", _help);
 
         return $parent;
     }

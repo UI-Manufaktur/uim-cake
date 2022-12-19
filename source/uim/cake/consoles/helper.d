@@ -34,12 +34,12 @@ abstract class Helper {
      * @param array<string, mixed> myConfig The settings for this helper.
      */
     this(ConsoleIo $io, array myConfig = []) {
-        this._io = $io;
+        _io = $io;
         this.setConfig(myConfig);
     }
 
     /**
-     * This method should output content using `this._io`.
+     * This method should output content using `_io`.
      *
      * @param array $args The arguments for the helper.
      */

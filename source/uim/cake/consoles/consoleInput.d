@@ -30,8 +30,8 @@ class ConsoleInput {
      * @param string $handle The location of the stream to use as input.
      */
     this(string $handle = "php://stdin") {
-        this._canReadline = (extension_loaded("readline") && $handle == "php://stdin");
-        this._input = fopen($handle, "rb");
+        _canReadline = (extension_loaded("readline") && $handle == "php://stdin");
+        _input = fopen($handle, "rb");
     }
 
     /**
@@ -40,14 +40,14 @@ class ConsoleInput {
      * @return string|null The value of the stream. Null on EOF.
      */
     string read() {
-        if (this._canReadline) {
+        if (_canReadline) {
             $line = readline("");
 
             if ($line !== false && $line !== "") {
                 readline_add_history($line);
             }
         } else {
-            $line = fgets(this._input);
+            $line = fgets(_input);
         }
 
         if ($line == false) {
@@ -64,7 +64,7 @@ class ConsoleInput {
      * @return bool True for data available, false otherwise
      */
     bool dataAvailable(int $timeout = 0) {
-        $readFds = [this._input];
+        $readFds = [_input];
         $writeFds = null;
         myErrorFds = null;
 

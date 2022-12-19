@@ -33,7 +33,7 @@ class PluginAssetsCopyCommand : Command {
 
       myName = $args.getArgument("name");
       $overwrite = (bool)$args.getOption("overwrite");
-      this._process(this._list(myName), true, $overwrite);
+      _process(_list(myName), true, $overwrite);
 
       return static::CODE_SUCCESS;
     }

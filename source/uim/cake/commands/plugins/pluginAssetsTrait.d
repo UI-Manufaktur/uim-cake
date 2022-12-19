@@ -91,14 +91,14 @@ trait PluginAssetsTrait
             if (
                 myConfig["moduled"] &&
                 !is_dir(myConfig["destDir"]) &&
-                !this._createDirectory(myConfig["destDir"])
+                !_createDirectory(myConfig["destDir"])
             ) {
                 continue;
             }
 
             auto myDestination = myConfig["destDir"] . myConfig["link"];
             if (file_exists(myDestination)) {
-                if (shouldOverwrite && !this._remove(myConfig)) {
+                if (shouldOverwrite && !_remove(myConfig)) {
                     continue;
                 } elseif (!shouldOverwrite) {
                     this.io.verbose(
@@ -111,7 +111,7 @@ trait PluginAssetsTrait
             }
 
             if (!shouldCopy) {
-                myResult = this._createSymlink(
+                myResult = _createSymlink(
                     myConfig["srcPath"],
                     myDestination
                 );
@@ -120,7 +120,7 @@ trait PluginAssetsTrait
                 }
             }
 
-            this._copyDirectory(
+            _copyDirectory(
                 myConfig["srcPath"],
                 myDestination
             );

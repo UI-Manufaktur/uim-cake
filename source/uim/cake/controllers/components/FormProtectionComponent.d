@@ -64,15 +64,15 @@ class FormProtectionComponent : Component
         $hasData = (myData || myRequest.is(["put", "post", "delete", "patch"]));
 
         if (
-            !in_array(myRequest.getParam("action"), this._config["unlockedActions"], true)
+            !in_array(myRequest.getParam("action"), _config["unlockedActions"], true)
             && $hasData
-            && this._config["validate"]
+            && _config["validate"]
         ) {
             $session = myRequest.getSession();
             $session.start();
             myUrl = Router::url(myRequest.getRequestTarget());
 
-            $formProtector = new FormProtector(this._config);
+            $formProtector = new FormProtector(_config);
             $isValid = $formProtector.validate(myData, myUrl, $session.id());
 
             if (!$isValid) {
@@ -81,7 +81,7 @@ class FormProtectionComponent : Component
         }
 
         $token = [
-            "unlockedFields":this._config["unlockedFields"],
+            "unlockedFields":_config["unlockedFields"],
         ];
         myRequest = myRequest.withAttribute("formTokenData", [
             "unlockedFields":$token["unlockedFields"],
@@ -126,8 +126,8 @@ class FormProtectionComponent : Component
             myException = new BadRequestException(static::DEFAULT_EXCEPTION_MESSAGE);
         }
 
-        if (this._config["validationFailureCallback"]) {
-            return this.executeCallback(this._config["validationFailureCallback"], myException);
+        if (_config["validationFailureCallback"]) {
+            return this.executeCallback(_config["validationFailureCallback"], myException);
         }
 
         throw myException;

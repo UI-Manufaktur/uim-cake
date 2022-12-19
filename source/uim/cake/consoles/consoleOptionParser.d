@@ -218,11 +218,11 @@ class ConsoleOptionParser {
     array toArray() {
         myResult = [
             "command":_commandName,
-            "arguments":this._args,
+            "arguments":_args,
             "options":_options,
-            "subcommands":this._subcommands,
-            "description":this._description,
-            "epilog":this._epilog,
+            "subcommands":_subcommands,
+            "description":_description,
+            "epilog":_epilog,
         ];
 
         return myResult;
@@ -285,14 +285,14 @@ class ConsoleOptionParser {
         if (is_array($text)) {
             $text = implode("\n", $text);
         }
-        this._description = $text;
+        _description = $text;
 
         return this;
     }
 
     // Gets the description text for shell/task.
     string getDescription() {
-        return this._description;
+        return _description;
     }
 
     /**
@@ -308,14 +308,14 @@ class ConsoleOptionParser {
         if (is_array($text)) {
             $text = implode("\n", $text);
         }
-        this._epilog = $text;
+        _epilog = $text;
 
         return this;
     }
 
     // Gets the epilog.
     string epilog() {
-        return this._epilog;
+        return _epilog;
     }
 
     /**
@@ -325,7 +325,7 @@ class ConsoleOptionParser {
      * @return this
      */
     function enableSubcommandSort(bool myValue = true) {
-        this._subcommandSort = myValue;
+        _subcommandSort = myValue;
 
         return this;
     }
@@ -334,7 +334,7 @@ class ConsoleOptionParser {
      * Checks whether sorting is enabled for subcommands.
      */
     bool isSubcommandSortEnabled() {
-        return this._subcommandSort;
+        return _subcommandSort;
     }
 
     /**
@@ -390,8 +390,8 @@ class ConsoleOptionParser {
         _options[myName] = $option;
         asort(_options);
         if ($option.short()) {
-            this._shortOptions[$option.short()] = myName;
-            asort(this._shortOptions);
+            _shortOptions[$option.short()] = myName;
+            asort(_shortOptions);
         }
 
         return this;
@@ -430,12 +430,12 @@ class ConsoleOptionParser {
     function addArgument(myName, array myParams = []) {
         if (myName instanceof ConsoleInputArgument) {
             $arg = myName;
-            $index = count(this._args);
+            $index = count(_args);
         } else {
             $defaults = [
                 "name":myName,
                 "help":"",
-                "index":count(this._args),
+                "index":count(_args),
                 "required":false,
                 "choices":[],
             ];
@@ -444,7 +444,7 @@ class ConsoleOptionParser {
             unset(myOptions["index"]);
             $arg = new ConsoleInputArgument(myOptions);
         }
-        foreach (this._args as $a) {
+        foreach (_args as $a) {
             if ($a.isEqualTo($arg)) {
                 return this;
             }
@@ -452,8 +452,8 @@ class ConsoleOptionParser {
                 throw new LogicException("A required argument cannot follow an optional one");
             }
         }
-        this._args[$index] = $arg;
-        ksort(this._args);
+        _args[$index] = $arg;
+        ksort(_args);
 
         return this;
     }
@@ -529,9 +529,9 @@ class ConsoleOptionParser {
 
             $command = new ConsoleInputSubcommand(myOptions);
         }
-        this._subcommands[myName] = $command;
-        if (this._subcommandSort) {
-            asort(this._subcommands);
+        _subcommands[myName] = $command;
+        if (_subcommandSort) {
+            asort(_subcommands);
         }
 
         return this;
@@ -544,7 +544,7 @@ class ConsoleOptionParser {
      * @return this
      */
     function removeSubcommand(string myName) {
-        unset(this._subcommands[myName]);
+        unset(_subcommands[myName]);
 
         return this;
     }
@@ -573,13 +573,13 @@ class ConsoleOptionParser {
      * @return array<\Cake\Console\ConsoleInputArgument>
      */
     function arguments() {
-        return this._args;
+        return _args;
     }
 
     // Get the list of argument names.
     string[] argumentNames() {
         $out = [];
-        foreach (this._args as $arg) {
+        foreach (_args as $arg) {
             $out[] = $arg.name();
         }
 
@@ -601,7 +601,7 @@ class ConsoleOptionParser {
      * @return array<string, \Cake\Console\ConsoleInputSubcommand>
      */
     function subcommands() {
-        return this._subcommands;
+        return _subcommands;
     }
 
     /**
@@ -615,29 +615,29 @@ class ConsoleOptionParser {
      */
     array parse(array $argv) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
-        if (isset(this._subcommands[$command])) {
+        if (isset(_subcommands[$command])) {
             array_shift($argv);
         }
-        if (isset(this._subcommands[$command]) && this._subcommands[$command].parser()) {
+        if (isset(_subcommands[$command]) && _subcommands[$command].parser()) {
             /** @psalm-suppress PossiblyNullReference */
-            return this._subcommands[$command].parser().parse($argv);
+            return _subcommands[$command].parser().parse($argv);
         }
         myParams = $args = [];
-        this._tokens = $argv;
-        while (($token = array_shift(this._tokens)) !== null) {
+        _tokens = $argv;
+        while (($token = array_shift(_tokens)) !== null) {
             $token = (string)$token;
-            if (isset(this._subcommands[$token])) {
+            if (isset(_subcommands[$token])) {
                 continue;
             }
             if (substr($token, 0, 2) == "--") {
-                myParams = this._parseLongOption($token, myParams);
+                myParams = _parseLongOption($token, myParams);
             } elseif (substr($token, 0, 1) == "-") {
-                myParams = this._parseShortOption($token, myParams);
+                myParams = _parseShortOption($token, myParams);
             } else {
-                $args = this._parseArg($token, $args);
+                $args = _parseArg($token, $args);
             }
         }
-        foreach (this._args as $i: $arg) {
+        foreach (_args as $i: $arg) {
             if ($arg.isRequired() && !isset($args[$i]) && empty(myParams["help"])) {
                 throw new ConsoleException(
                     sprintf("Missing required argument. The `%s` argument is required.", $arg.name())
@@ -691,8 +691,8 @@ class ConsoleOptionParser {
         }
         $subcommand = (string)$subcommand;
 
-        if (isset(this._subcommands[$subcommand])) {
-            $command = this._subcommands[$subcommand];
+        if (isset(_subcommands[$subcommand])) {
+            $command = _subcommands[$subcommand];
             $subparser = $command.parser();
 
             // Generate a parser as the subcommand didn"t define one.
@@ -741,7 +741,7 @@ class ConsoleOptionParser {
     }
 
     /**
-     * Parse the value for a long option out of this._tokens. Will handle
+     * Parse the value for a long option out of _tokens. Will handle
      * options with an `=` in them.
      *
      * @param string $option The option to parse.
@@ -752,14 +752,14 @@ class ConsoleOptionParser {
         myName = substr($option, 2);
         if (indexOf(myName, "=") !== false) {
             [myName, myValue] = explode("=", myName, 2);
-            array_unshift(this._tokens, myValue);
+            array_unshift(_tokens, myValue);
         }
 
-        return this._parseOption(myName, myParams);
+        return _parseOption(myName, myParams);
     }
 
     /**
-     * Parse the value for a short option out of this._tokens
+     * Parse the value for a short option out of _tokens
      * If the $option is a combination of multiple shortcuts like -otf
      * they will be shifted onto the token stack and parsed individually.
      *
@@ -774,12 +774,12 @@ class ConsoleOptionParser {
             $flags = str_split(myKey);
             myKey = $flags[0];
             for ($i = 1, $len = count($flags); $i < $len; $i++) {
-                array_unshift(this._tokens, "-" . $flags[$i]);
+                array_unshift(_tokens, "-" . $flags[$i]);
             }
         }
-        if (!isset(this._shortOptions[myKey])) {
+        if (!isset(_shortOptions[myKey])) {
             myOptions = [];
-            foreach (this._shortOptions as $short: $long) {
+            foreach (_shortOptions as $short: $long) {
                 myOptions[] = "{$short} (short for `--{$long}`)";
             }
             throw new MissingOptionException(
@@ -788,9 +788,9 @@ class ConsoleOptionParser {
                 myOptions
             );
         }
-        myName = this._shortOptions[myKey];
+        myName = _shortOptions[myKey];
 
-        return this._parseOption(myName, myParams);
+        return _parseOption(myName, myParams);
     }
 
     /**
@@ -811,10 +811,10 @@ class ConsoleOptionParser {
         }
         $option = _options[myName];
         $isBoolean = $option.isBoolean();
-        $nextValue = this._nextToken();
+        $nextValue = _nextToken();
         $emptyNextValue = (empty($nextValue) && $nextValue !== "0");
-        if (!$isBoolean && !$emptyNextValue && !this._optionExists($nextValue)) {
-            array_shift(this._tokens);
+        if (!$isBoolean && !$emptyNextValue && !_optionExists($nextValue)) {
+            array_shift(_tokens);
             myValue = $nextValue;
         } elseif ($isBoolean) {
             myValue = true;
@@ -842,7 +842,7 @@ class ConsoleOptionParser {
             return isset(_options[substr(myName, 2)]);
         }
         if (myName[0] == "-" && myName[1] !== "-") {
-            return isset(this._shortOptions[myName[1]]);
+            return isset(_shortOptions[myName[1]]);
         }
 
         return false;
@@ -858,20 +858,20 @@ class ConsoleOptionParser {
      * @throws \Cake\Console\Exception\ConsoleException
      */
     protected string[] _parseArg(string $argument, array $args) {
-        if (empty(this._args)) {
+        if (empty(_args)) {
             $args[] = $argument;
 
             return $args;
         }
         $next = count($args);
-        if (!isset(this._args[$next])) {
-            $expected = count(this._args);
+        if (!isset(_args[$next])) {
+            $expected = count(_args);
             throw new ConsoleException(
                 "Received too many arguments. Got {$next} but only {$expected} arguments are defined."
             );
         }
 
-        this._args[$next].validChoice($argument);
+        _args[$next].validChoice($argument);
         $args[] = $argument;
 
         return $args;
@@ -883,6 +883,6 @@ class ConsoleOptionParser {
      * @return next token or ""
      */
     protected string _nextToken() {
-        return this._tokens[0] ?? "";
+        return _tokens[0] ?? "";
     }
 }

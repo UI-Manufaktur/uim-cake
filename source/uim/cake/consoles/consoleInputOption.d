@@ -66,22 +66,22 @@ class ConsoleInputOption {
       bool $required = false
     ) {
         _name = myName;
-        this._short = $short;
-        this._help = $help;
-        this._boolean = $isBoolean;
-        this._choices = $choices;
-        this._multiple = $multiple;
+        _short = $short;
+        _help = $help;
+        _boolean = $isBoolean;
+        _choices = $choices;
+        _multiple = $multiple;
         this.required = $required;
 
         if ($isBoolean) {
-            this._default = (bool)$default;
+            _default = (bool)$default;
         } elseif ($default !== null) {
-            this._default = (string)$default;
+            _default = (string)$default;
         }
 
-        if (strlen(this._short) > 1) {
+        if (strlen(_short) > 1) {
           throw new ConsoleException(
-            sprintf("Short option "%s" is invalid, short options must be one letter.", this._short)
+            sprintf("Short option "%s" is invalid, short options must be one letter.", _short)
           );
         }
     }
@@ -93,7 +93,7 @@ class ConsoleInputOption {
 
     // Get the value of the short attribute.
     string short() {
-        return this._short;
+        return _short;
     }
 
     /**
@@ -103,14 +103,14 @@ class ConsoleInputOption {
      */
     string help(int $width = 0) {
         $default = $short = "";
-        if (this._default && this._default !== true) {
-            $default = sprintf(" <comment>(default: %s)</comment>", this._default);
+        if (_default && _default !== true) {
+            $default = sprintf(" <comment>(default: %s)</comment>", _default);
         }
-        if (this._choices) {
-            $default .= sprintf(" <comment>(choices: %s)</comment>", implode("|", this._choices));
+        if (_choices) {
+            $default .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
-        if (this._short !== "") {
-            $short = ", -" . this._short;
+        if (_short !== "") {
+            $short = ", -" . _short;
         }
         myName = sprintf("--%s%s", name, $short);
         if (strlen(myName) < $width) {
@@ -121,20 +121,20 @@ class ConsoleInputOption {
             $required = " <comment>(required)</comment>";
         }
 
-        return sprintf("%s%s%s%s", myName, this._help, $default, $required);
+        return sprintf("%s%s%s%s", myName, _help, $default, $required);
     }
 
     /**
      * Get the usage value for this option
      */
     string usage() {
-        myName = this._short == "" ? "--" . name : "-" . this._short;
+        myName = _short == "" ? "--" . name : "-" . _short;
         $default = "";
-        if (this._default !== null && !is_bool(this._default) && this._default !== "") {
-            $default = " " . this._default;
+        if (_default !== null && !is_bool(_default) && _default !== "") {
+            $default = " " . _default;
         }
-        if (this._choices) {
-            $default = " " . implode("|", this._choices);
+        if (_choices) {
+            $default = " " . implode("|", _choices);
         }
         myTemplate = "[%s%s]";
         if (this.isRequired()) {
@@ -150,7 +150,7 @@ class ConsoleInputOption {
      * @return string|bool|null
      */
     function defaultValue() {
-        return this._default;
+        return _default;
     }
 
     /**
@@ -162,13 +162,13 @@ class ConsoleInputOption {
     /**
      * Check if this option is a boolean option
     bool isBoolean() {
-        return this._boolean;
+        return _boolean;
     }
 
     /**
      * Check if this option accepts multiple values.
     bool acceptsMultiple() {
-        return this._multiple;
+        return _multiple;
     }
 
     /**
@@ -178,16 +178,16 @@ class ConsoleInputOption {
      * @throws \Cake\Console\Exception\ConsoleException
      */
     bool validChoice(myValue) {
-        if (empty(this._choices)) {
+        if (empty(_choices)) {
             return true;
         }
-        if (!in_array(myValue, this._choices, true)) {
+        if (!in_array(myValue, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     ""%s" is not a valid value for --%s. Please use one of "%s"",
                     (string)myValue,
                     name,
-                    implode(", ", this._choices)
+                    implode(", ", _choices)
                 )
             );
         }
@@ -206,22 +206,22 @@ class ConsoleInputOption {
         $option = $parent.addChild("option");
         $option.addAttribute("name", "--" . name);
         $short = "";
-        if (this._short !== "") {
-            $short = "-" . this._short;
+        if (_short !== "") {
+            $short = "-" . _short;
         }
-        $default = this._default;
+        $default = _default;
         if ($default == true) {
             $default = "true";
         } elseif ($default == false) {
             $default = "false";
         }
         $option.addAttribute("short", $short);
-        $option.addAttribute("help", this._help);
-        $option.addAttribute("boolean", (string)(int)this._boolean);
+        $option.addAttribute("help", _help);
+        $option.addAttribute("boolean", (string)(int)_boolean);
         $option.addAttribute("required", (string)(int)this.required);
         $option.addChild("default", (string)$default);
         $choices = $option.addChild("choices");
-        foreach (this._choices as $valid) {
+        foreach (_choices as $valid) {
             $choices.addChild("choice", $valid);
         }
 

@@ -45,12 +45,12 @@ trait InstanceConfigTrait {
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
     auto setConfig(myKey, myValue = null, myMerge = true) {
-        if (!this._configInitialized) {
-            this._config = this._defaultConfig;
-            this._configInitialized = true;
+        if (!_configInitialized) {
+            _config = _defaultConfig;
+            _configInitialized = true;
         }
 
-        this._configWrite(myKey, myValue, myMerge);
+        _configWrite(myKey, myValue, myMerge);
 
         return this;
     }
@@ -89,12 +89,12 @@ trait InstanceConfigTrait {
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
     auto getConfig(Nullable!string myKey = null, $default = null) {
-        if (!this._configInitialized) {
-            this._config = this._defaultConfig;
-            this._configInitialized = true;
+        if (!_configInitialized) {
+            _config = _defaultConfig;
+            _configInitialized = true;
         }
 
-        $return = this._configRead(myKey);
+        $return = _configRead(myKey);
 
         return $return ?? $default;
     }
@@ -144,12 +144,12 @@ trait InstanceConfigTrait {
      * @return this
      */
     function configShallow(myKey, myValue = null) {
-        if (!this._configInitialized) {
-            this._config = this._defaultConfig;
-            this._configInitialized = true;
+        if (!_configInitialized) {
+            _config = _defaultConfig;
+            _configInitialized = true;
         }
 
-        this._configWrite(myKey, myValue, "shallow");
+        _configWrite(myKey, myValue, "shallow");
 
         return this;
     }
@@ -162,14 +162,14 @@ trait InstanceConfigTrait {
      */
     protected auto _configRead(Nullable!string myKey) {
         if (myKey == null) {
-            return this._config;
+            return _config;
         }
 
         if (indexOf(myKey, ".") == false) {
-            return this._config[myKey] ?? null;
+            return _config[myKey] ?? null;
         }
 
-        $return = this._config;
+        $return = _config;
 
         foreach (explode(".", myKey) as $k) {
             if (!is_array($return) || !isset($return[$k])) {
@@ -194,7 +194,7 @@ trait InstanceConfigTrait {
      */
     protected void _configWrite(myKey, myValue, myMerge = false) {
         if (is_string(myKey) && myValue == null) {
-            this._configDelete(myKey);
+            _configDelete(myKey);
 
             return;
         }
@@ -202,9 +202,9 @@ trait InstanceConfigTrait {
         if (myMerge) {
             $update = is_array(myKey) ? myKey : [myKey: myValue];
             if (myMerge == "shallow") {
-                this._config = array_merge(this._config, Hash::expand($update));
+                _config = array_merge(_config, Hash::expand($update));
             } else {
-                this._config = Hash::merge(this._config, Hash::expand($update));
+                _config = Hash::merge(_config, Hash::expand($update));
             }
 
             return;
@@ -212,19 +212,19 @@ trait InstanceConfigTrait {
 
         if (is_array(myKey)) {
             foreach (myKey as $k: $val) {
-                this._configWrite($k, $val);
+                _configWrite($k, $val);
             }
 
             return;
         }
 
         if (indexOf(myKey, ".") == false) {
-            this._config[myKey] = myValue;
+            _config[myKey] = myValue;
 
             return;
         }
 
-        $update = &this._config;
+        $update = &_config;
         $stack = explode(".", myKey);
 
         foreach ($stack as $k) {
@@ -248,12 +248,12 @@ trait InstanceConfigTrait {
      */
     protected void _configDelete(string myKey) {
         if (indexOf(myKey, ".") == false) {
-            unset(this._config[myKey]);
+            unset(_config[myKey]);
 
             return;
         }
 
-        $update = &this._config;
+        $update = &_config;
         $stack = explode(".", myKey);
         $length = count($stack);
 

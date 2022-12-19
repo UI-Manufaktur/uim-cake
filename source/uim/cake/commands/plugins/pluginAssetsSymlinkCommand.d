@@ -33,7 +33,7 @@ class PluginAssetsSymlinkCommand : Command {
 
       myName = $args.getArgument("name");
       $overwrite = (bool)$args.getOption("overwrite");
-      this._process(this._list(myName), false, $overwrite);
+      _process(_list(myName), false, $overwrite);
 
       return static::CODE_SUCCESS;
     }

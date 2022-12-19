@@ -48,7 +48,7 @@ class ShellDispatcher
         this.addShortPluginAliases();
 
         if ($bootstrap) {
-            this._initEnvironment();
+            _initEnvironment();
         }
     }
 
@@ -115,7 +115,7 @@ class ShellDispatcher
      * @throws \Cake\Core\Exception\CakeException
      */
     protected void _initEnvironment() {
-        this._bootstrap();
+        _bootstrap();
 
         if (function_exists("ini_set")) {
             ini_set("html_errors", "0");
@@ -148,7 +148,7 @@ class ShellDispatcher
      */
     int dispatch(array $extra = []) {
         try {
-            myResult = this._dispatch($extra);
+            myResult = _dispatch($extra);
         } catch (StopException $e) {
             $code = $e.getCode();
 
@@ -287,10 +287,10 @@ class ShellDispatcher
      * @throws \Cake\Console\Exception\MissingShellException when errors are encountered.
      */
     Shell findShell(string myShell) {
-        myClassName = this._shellExists(myShell);
+        myClassName = _shellExists(myShell);
         if (!myClassName) {
-            myShell = this._handleAlias(myShell);
-            myClassName = this._shellExists(myShell);
+            myShell = _handleAlias(myShell);
+            myClassName = _shellExists(myShell);
         }
 
         if (!myClassName) {
@@ -299,7 +299,7 @@ class ShellDispatcher
             ]);
         }
 
-        return this._createShell(myClassName, myShell);
+        return _createShell(myClassName, myShell);
     }
 
     /**

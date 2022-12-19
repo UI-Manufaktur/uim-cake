@@ -81,11 +81,11 @@ class ConsoleIo {
         ?ConsoleInput $in = null,
         ?HelperRegistry $helpers = null
     ) {
-        this._out = $out ?: new ConsoleOutput("php://stdout");
-        this._err = $err ?: new ConsoleOutput("php://stderr");
-        this._in = $in ?: new ConsoleInput("php://stdin");
-        this._helpers = $helpers ?: new HelperRegistry();
-        this._helpers.setIo(this);
+        _out = $out ?: new ConsoleOutput("php://stdout");
+        _err = $err ?: new ConsoleOutput("php://stderr");
+        _in = $in ?: new ConsoleInput("php://stdin");
+        _helpers = $helpers ?: new HelperRegistry();
+        _helpers.setIo(this);
     }
 
     void setInteractive(bool myValue) {
@@ -100,10 +100,10 @@ class ConsoleIo {
      */
     int level(Nullable!int $level = null) {
         if ($level !== null) {
-            this._level = $level;
+            _level = $level;
         }
 
-        return this._level;
+        return _level;
     }
 
     /**
@@ -148,10 +148,10 @@ class ConsoleIo {
      *   or null if provided $level is greater than current level.
      */
     Nullable!int out(myMessage = "", int $newlines = 1, int $level = self::NORMAL) {
-        if ($level <= this._level) {
-            this._lastWritten = this._out.write(myMessage, $newlines);
+        if ($level <= _level) {
+            _lastWritten = _out.write(myMessage, $newlines);
 
-            return this._lastWritten;
+            return _lastWritten;
         }
 
         return null;
@@ -284,7 +284,7 @@ class ConsoleIo {
      *    length of the last message output.
      */
     void overwrite(myMessage, int $newlines = 1, Nullable!int $size = null) {
-        $size = $size ?: this._lastWritten;
+        $size = $size ?: _lastWritten;
 
         // Output backspaces.
         this.out(str_repeat("\x08", $size), 0);
@@ -304,7 +304,7 @@ class ConsoleIo {
         // is shorter than the old content the next overwrite
         // will work.
         if ($fill > 0) {
-            this._lastWritten = $newBytes + $fill;
+            _lastWritten = $newBytes + $fill;
         }
     }
 
@@ -317,7 +317,7 @@ class ConsoleIo {
      * @return int The number of bytes returned from writing to stderr.
      */
     int err(myMessage = "", int $newlines = 1) {
-        return this._err.write(myMessage, $newlines);
+        return _err.write(myMessage, $newlines);
     }
 
     /**
@@ -349,7 +349,7 @@ class ConsoleIo {
      * @return Either the default value, or the user-provided input.
      */
     string ask(string $prompt, Nullable!string $default = null) {
-        return this._getInput($prompt, null, $default);
+        return _getInput($prompt, null, $default);
     }
 
     /**
@@ -359,7 +359,7 @@ class ConsoleIo {
      * @see \Cake\Console\ConsoleOutput::setOutputAs()
      */
     void setOutputAs(int myMode) {
-        this._out.setOutputAs(myMode);
+        _out.setOutputAs(myMode);
     }
 
     /**
@@ -369,7 +369,7 @@ class ConsoleIo {
      * @see \Cake\Console\ConsoleOutput::styles()
      */
     array styles() {
-        return this._out.styles();
+        return _out.styles();
     }
 
     /**
@@ -380,7 +380,7 @@ class ConsoleIo {
      * @see \Cake\Console\ConsoleOutput::getStyle()
      */
     array getStyle(string $style) {
-      return this._out.getStyle($style);
+      return _out.getStyle($style);
     }
 
     /**
@@ -391,7 +391,7 @@ class ConsoleIo {
      * @see \Cake\Console\ConsoleOutput::setStyle()
      */
     void setStyle(string $style, array $definition) {
-        this._out.setStyle($style, $definition);
+        _out.setStyle($style, $definition);
     }
 
     /**
@@ -421,7 +421,7 @@ class ConsoleIo {
         );
         $in = "";
         while ($in == "" || !in_array($in, myOptions, true)) {
-            $in = this._getInput($prompt, $printOptions, $default);
+            $in = _getInput($prompt, $printOptions, $default);
         }
 
         return $in;
@@ -449,8 +449,8 @@ class ConsoleIo {
         if ($default !== null) {
             $defaultText = "[$default] ";
         }
-        this._out.write("<question>" . $prompt . "</question>myOptionsText\n$defaultText> ", 0);
-        myResult = this._in.read();
+        _out.write("<question>" . $prompt . "</question>myOptionsText\n$defaultText> ", 0);
+        myResult = _in.read();
 
         myResult = myResult == null ? "" : trim(myResult);
         if ($default !== null && myResult == "") {
@@ -485,13 +485,13 @@ class ConsoleIo {
         if (myEnable !== static::QUIET) {
             $stdout = new ConsoleLog([
                 "types":$outLevels,
-                "stream":this._out,
+                "stream":_out,
             ]);
             Log::setConfig("stdout", ["engine":$stdout]);
         }
         $stderr = new ConsoleLog([
             "types":["emergency", "alert", "critical", "error", "warning"],
-            "stream":this._err,
+            "stream":_err,
         ]);
         Log::setConfig("stderr", ["engine":$stderr]);
     }
@@ -510,7 +510,7 @@ class ConsoleIo {
     {
         myName = ucfirst(myName);
 
-        return this._helpers.load(myName, myConfig);
+        return _helpers.load(myName, myConfig);
     }
 
     /**

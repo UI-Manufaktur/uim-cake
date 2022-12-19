@@ -24,7 +24,7 @@ class RoutesGenerateCommand : Command {
      */
     Nullable!int execute(Arguments $args, ConsoleIo $io) {
         try {
-            $args = this._splitArgs($args.getArguments());
+            $args = _splitArgs($args.getArguments());
             myUrl = Router::url($args);
             $io.out("> myUrl");
             $io.out();

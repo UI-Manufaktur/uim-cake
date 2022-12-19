@@ -145,13 +145,13 @@ class Shell {
             [, myClass] = moduleSplit(static::class);
             this.name = str_replace(["Shell", "Task"], "", myClass);
         }
-        this._io = $io ?: new ConsoleIo();
-        this._tableLocator = $locator;
+        _io = $io ?: new ConsoleIo();
+        _tableLocator = $locator;
 
         this.modelFactory("Table", [this.getTableLocator(), "get"]);
         this.Tasks = new TaskRegistry(this);
 
-        this._mergeVars(
+        _mergeVars(
             ["tasks"],
             ["associative":["tasks"]]
         );
@@ -179,7 +179,7 @@ class Shell {
      * @return \Cake\Console\ConsoleIo The current ConsoleIo object.
      */
     ConsoleIo getIo() {
-        return this._io;
+        return _io;
     }
 
     /**
@@ -188,7 +188,7 @@ class Shell {
      * @param \Cake\Console\ConsoleIo $io The ConsoleIo object to use.
      */
     void setIo(ConsoleIo $io) {
-        this._io = $io;
+        _io = $io;
     }
 
     /**
@@ -213,7 +213,7 @@ class Shell {
      */
     void startup() {
         if (!this.param("requested")) {
-            this._welcome();
+            _welcome();
         }
     }
 
@@ -233,10 +233,10 @@ class Shell {
         if (this.tasks == true || empty(this.tasks)) {
             return true;
         }
-        this._taskMap = this.Tasks.normalizeArray(this.tasks);
-        this.taskNames = array_merge(this.taskNames, array_keys(this._taskMap));
+        _taskMap = this.Tasks.normalizeArray(this.tasks);
+        this.taskNames = array_merge(this.taskNames, array_keys(_taskMap));
 
-        this._validateTasks();
+        _validateTasks();
 
         return true;
     }
@@ -247,7 +247,7 @@ class Shell {
      * @throws \RuntimeException
      */
     protected void _validateTasks() {
-        foreach (this._taskMap as $taskName: $task) {
+        foreach (_taskMap as $taskName: $task) {
             myClass = App::className($task["class"], "Shell/Task", "Task");
             if (myClass == null) {
                 throw new RuntimeException(sprintf(
@@ -266,7 +266,7 @@ class Shell {
      * @link https://book.UIM.org/4/en/console-and-shells.html#shell-tasks
      */
     bool hasTask(string $task) {
-        return isset(this._taskMap[Inflector::camelize($task)]);
+        return isset(_taskMap[Inflector::camelize($task)]);
     }
 
     /**
@@ -415,10 +415,10 @@ class Shell {
         }
 
         this.params = array_merge(this.params, $extra);
-        this._setOutputLevel();
+        _setOutputLevel();
         this.command = $command;
         if ($command && !empty(this.params["help"])) {
-            return this._displayHelp($command);
+            return _displayHelp($command);
         }
 
         $subcommands = this.OptionParser.subcommands();
@@ -454,7 +454,7 @@ class Shell {
 
         this.err("No subcommand provided. Choose one of the available subcommands.", 2);
         try {
-            this._io.err(this.OptionParser.help($command));
+            _io.err(this.OptionParser.help($command));
         } catch (ConsoleException $e) {
             this.err("Error: " . $e.getMessage());
         }
@@ -470,14 +470,14 @@ class Shell {
      *
      */
     protected void _setOutputLevel() {
-        this._io.setLoggers(ConsoleIo::NORMAL);
+        _io.setLoggers(ConsoleIo::NORMAL);
         if (!empty(this.params["quiet"])) {
-            this._io.level(ConsoleIo::QUIET);
-            this._io.setLoggers(ConsoleIo::QUIET);
+            _io.level(ConsoleIo::QUIET);
+            _io.setLoggers(ConsoleIo::QUIET);
         }
         if (!empty(this.params["verbose"])) {
-            this._io.level(ConsoleIo::VERBOSE);
-            this._io.setLoggers(ConsoleIo::VERBOSE);
+            _io.level(ConsoleIo::VERBOSE);
+            _io.setLoggers(ConsoleIo::VERBOSE);
         }
     }
 
@@ -491,9 +491,9 @@ class Shell {
         $format = "text";
         if (!empty(this.args[0]) && this.args[0] == "xml") {
             $format = "xml";
-            this._io.setOutputAs(ConsoleOutput::RAW);
+            _io.setOutputAs(ConsoleOutput::RAW);
         } else {
-            this._welcome();
+            _welcome();
         }
 
         $subcommands = this.OptionParser.subcommands();
@@ -528,7 +528,7 @@ class Shell {
      */
     auto __get(string myName) {
         if (empty(this.{myName}) && in_array(myName, this.taskNames, true)) {
-            $properties = this._taskMap[myName];
+            $properties = _taskMap[myName];
             this.{myName} = this.Tasks.load($properties["class"], $properties["config"]);
             this.{myName}.args = &this.args;
             this.{myName}.params = &this.params;
@@ -563,10 +563,10 @@ class Shell {
             return $default;
         }
         if (myOptions) {
-            return this._io.askChoice($prompt, myOptions, $default);
+            return _io.askChoice($prompt, myOptions, $default);
         }
 
-        return this._io.ask($prompt, $default);
+        return _io.ask($prompt, $default);
     }
 
     /**
@@ -597,7 +597,7 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      */
     Nullable!int verbose(myMessage, int $newlines = 1) {
-        return this._io.verbose(myMessage, $newlines);
+        return _io.verbose(myMessage, $newlines);
     }
 
     /**
@@ -608,7 +608,7 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      */
     Nullable!int quiet(myMessage, int $newlines = 1) {
-        return this._io.quiet(myMessage, $newlines);
+        return _io.quiet(myMessage, $newlines);
     }
 
     /**
@@ -629,7 +629,7 @@ class Shell {
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
     Nullable!int out(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
-        return this._io.out(myMessage, $newlines, $level);
+        return _io.out(myMessage, $newlines, $level);
     }
 
     /**
@@ -641,7 +641,7 @@ class Shell {
      * @return int The number of bytes returned from writing to stderr.
      */
     int err(myMessage, int $newlines = 1) {
-        return this._io.error(myMessage, $newlines);
+        return _io.error(myMessage, $newlines);
     }
 
     /**
@@ -654,7 +654,7 @@ class Shell {
      * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
     Nullable!int info(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
-        return this._io.info(myMessage, $newlines, $level);
+        return _io.info(myMessage, $newlines, $level);
     }
 
     /**
@@ -666,7 +666,7 @@ class Shell {
      * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::err
      */
     int warn(myMessage, int $newlines = 1) {
-        return this._io.warning(myMessage, $newlines);
+        return _io.warning(myMessage, $newlines);
     }
 
     /**
@@ -679,7 +679,7 @@ class Shell {
      * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
     Nullable!int success(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
-        return this._io.success(myMessage, $newlines, $level);
+        return _io.success(myMessage, $newlines, $level);
     }
 
     /**
@@ -690,7 +690,7 @@ class Shell {
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::nl
      */
     string nl(int $multiplier = 1) {
-        return this._io.nl($multiplier);
+        return _io.nl($multiplier);
     }
 
     /**
@@ -701,7 +701,7 @@ class Shell {
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::hr
      */
     void hr(int $newlines = 0, int $width = 63) {
-        this._io.hr($newlines, $width);
+        _io.hr($newlines, $width);
     }
 
     /**
@@ -716,7 +716,7 @@ class Shell {
      * @psalm-return never-return
      */
     void abort(string myMessage, int $exitCode = self::CODE_ERROR) {
-        this._io.err("<error>" . myMessage . "</error>");
+        _io.err("<error>" . myMessage . "</error>");
         throw new StopException(myMessage, $exitCode);
     }
 
@@ -748,22 +748,22 @@ class Shell {
     bool createFile(string myPath, string myContentss) {
         myPath = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, myPath);
 
-        this._io.out();
+        _io.out();
 
         myfileExists = is_file(myPath);
         if (myfileExists && empty(this.params["force"]) && !this.interactive) {
-            this._io.out("<warning>File exists, skipping</warning>.");
+            _io.out("<warning>File exists, skipping</warning>.");
 
             return false;
         }
 
         if (myfileExists && this.interactive && empty(this.params["force"])) {
-            this._io.out(sprintf("<warning>File `%s` exists</warning>", myPath));
-            myKey = this._io.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
+            _io.out(sprintf("<warning>File `%s` exists</warning>", myPath));
+            myKey = _io.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
 
             if (strtolower(myKey) == "q") {
-                this._io.out("<error>Quitting</error>.", 2);
-                this._stop();
+                _io.out("<error>Quitting</error>.", 2);
+                _stop();
 
                 return false;
             }
@@ -772,7 +772,7 @@ class Shell {
                 myKey = "y";
             }
             if (strtolower(myKey) !== "y") {
-                this._io.out(sprintf("Skip `%s`", myPath), 2);
+                _io.out(sprintf("Skip `%s`", myPath), 2);
 
                 return false;
             }
@@ -784,9 +784,9 @@ class Shell {
             $fs = new Filesystem();
             $fs.dumpFile(myPath, myContentss);
 
-            this._io.out(sprintf("<success>Wrote</success> `%s`", myPath));
+            _io.out(sprintf("<success>Wrote</success> `%s`", myPath));
         } catch (CakeException $e) {
-            this._io.err(sprintf("<error>Could not write to `%s`</error>.", myPath), 2);
+            _io.err(sprintf("<error>Could not write to `%s`</error>.", myPath), 2);
 
             return false;
         }
@@ -820,7 +820,7 @@ class Shell {
      * @return \Cake\Console\Helper The created helper instance.
      */
     Helper helper(string myName, array myConfig = []) {
-        return this._io.helper(myName, myConfig);
+        return _io.helper(myName, myConfig);
     }
 
     /**

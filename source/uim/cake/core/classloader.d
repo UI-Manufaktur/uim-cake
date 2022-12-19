@@ -41,12 +41,12 @@ class ClassLoader
         $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;
         $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . "/";
 
-        this._prefixes[$prefix] = this._prefixes[$prefix] ?? [];
+        _prefixes[$prefix] = _prefixes[$prefix] ?? [];
 
         if ($prepend) {
-            array_unshift(this._prefixes[$prefix], $baseDir);
+            array_unshift(_prefixes[$prefix], $baseDir);
         } else {
-            this._prefixes[$prefix][] = $baseDir;
+            _prefixes[$prefix][] = $baseDir;
         }
     }
 
@@ -64,7 +64,7 @@ class ClassLoader
             $prefix = substr(myClass, 0, $pos + 1);
             $relativeClass = substr(myClass, $pos + 1);
 
-            $mappedFile = this._loadMappedFile($prefix, $relativeClass);
+            $mappedFile = _loadMappedFile($prefix, $relativeClass);
             if ($mappedFile) {
                 return $mappedFile;
             }
@@ -84,14 +84,14 @@ class ClassLoader
      * name of the mapped file that was loaded.
      */
     protected auto _loadMappedFile(string $prefix, string $relativeClass) {
-        if (!isset(this._prefixes[$prefix])) {
+        if (!isset(_prefixes[$prefix])) {
             return false;
         }
 
-        foreach (this._prefixes[$prefix] as $baseDir) {
+        foreach (_prefixes[$prefix] as $baseDir) {
             myfile = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) . ".php";
 
-            if (this._requireFile(myfile)) {
+            if (_requireFile(myfile)) {
                 return myfile;
             }
         }

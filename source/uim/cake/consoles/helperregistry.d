@@ -24,7 +24,7 @@ class HelperRegistry : ObjectRegistry
      * @param \Cake\Console\ConsoleIo $io An io instance.
      */
     void setIo(ConsoleIo $io) {
-        this._io = $io;
+        _io = $io;
     }
 
     /**
@@ -78,6 +78,6 @@ class HelperRegistry : ObjectRegistry
      */
     protected Helper _create(myClass, string myAlias, array myConfig) {
       /** @var \Cake\Console\Helper */
-      return new myClass(this._io, myConfig);
+      return new myClass(_io, myConfig);
     }
 }

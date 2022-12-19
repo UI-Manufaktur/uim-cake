@@ -25,7 +25,7 @@ class TaskRegistry : ObjectRegistry
      * @param \Cake\Console\Shell myShell Shell instance
      */
     this(Shell myShell) {
-        this._Shell = myShell;
+        _Shell = myShell;
     }
 
     /**
@@ -71,6 +71,6 @@ class TaskRegistry : ObjectRegistry
      */
     protected Shell _create(myClass, string myAlias, array myConfig) {
         /** @var \Cake\Console\Shell */
-        return new myClass(this._Shell.getIo());
+        return new myClass(_Shell.getIo());
     }
 }
