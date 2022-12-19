@@ -16,35 +16,35 @@ class MapReduce : IteratorAggregate {
      *
      * @var array
      */
-    protected $_intermediate = [];
+    protected _intermediate = [];
 
     /**
      * Holds the results as emitted during the reduce phase
      *
      * @var array
      */
-    protected $_result = [];
+    protected _result = [];
 
     /**
      * Whether the Map-Reduce routine has been executed already on the data
      *
      * @var bool
      */
-    protected $_executed = false;
+    protected _executed = false;
 
     /**
      * Holds the original data that needs to be processed
      *
      * @var \Traversable
      */
-    protected $_data;
+    protected _data;
 
     /**
      * A callable that will be executed for each record in the original data
      *
      * @var callable
      */
-    protected $_mapper;
+    protected _mapper;
 
     /**
      * A callable that will be executed for each intermediate record emitted during
@@ -52,14 +52,14 @@ class MapReduce : IteratorAggregate {
      *
      * @var callable|null
      */
-    protected $_reducer;
+    protected _reducer;
 
     /**
      * Count of elements emitted during the Reduce phase
      *
      * @var int
      */
-    protected $_counter = 0;
+    protected _counter = 0;
 
     /**
      * Constructor

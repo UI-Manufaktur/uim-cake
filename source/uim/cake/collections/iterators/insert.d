@@ -15,7 +15,7 @@ class InsertIterator : Collection {
      *
      * @var \Cake\Collection\Collection
      */
-    protected $_values;
+    protected _values;
 
     /**
      * Holds whether the values collection is still valid. (has more records)

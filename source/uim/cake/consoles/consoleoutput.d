@@ -52,7 +52,7 @@ class ConsoleOutput {
      *
      * @var resource
      */
-    protected $_output;
+    protected _output;
 
     /**
      * The current output type.
@@ -60,7 +60,7 @@ class ConsoleOutput {
      * @see setOutputAs() For manipulation.
      * @var int
      */
-    protected $_outputAs = self::COLOR;
+    protected _outputAs = self::COLOR;
 
     /**
      * text colors used in colored output.

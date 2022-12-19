@@ -25,21 +25,21 @@ class ConsoleIo {
      *
      * @var \Cake\Console\ConsoleOutput
      */
-    protected $_out;
+    protected _out;
 
     /**
      * The error stream
      *
      * @var \Cake\Console\ConsoleOutput
      */
-    protected $_err;
+    protected _err;
 
     /**
      * The input stream
      *
      * @var \Cake\Console\ConsoleInput
      */
-    protected $_in;
+    protected _in;
 
     // The helper registry.
     protected HelperRegistry $_helpers;
@@ -53,14 +53,14 @@ class ConsoleIo {
      *
      * @var int
      */
-    protected $_lastWritten = 0;
+    protected _lastWritten = 0;
 
     /**
      * Whether files should be overwritten
      *
      * @var bool
      */
-    protected $forceOverwrite = false;
+    protected forceOverwrite = false;
 
     /**
      * @var bool

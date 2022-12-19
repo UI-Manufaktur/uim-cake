@@ -17,14 +17,14 @@ class StoppableIterator : Collection {
      *
      * @var callable
      */
-    protected $_condition;
+    protected _condition;
 
     /**
      * A reference to the internal iterator this object is wrapping.
      *
      * @var \Traversable
      */
-    protected $_innerIterator;
+    protected _innerIterator;
 
     /**
      * Creates an iterator that can be stopped based on a condition provided by a callback.

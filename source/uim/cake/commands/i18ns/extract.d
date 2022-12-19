@@ -41,21 +41,21 @@ class I18nExtractCommand : Command {
      *
      * @var array<string, mixed>
      */
-    protected $_storage = [];
+    protected _storage = [];
 
     /**
      * Extracted tokens
      *
      * @var array
      */
-    protected $_tokens = [];
+    protected _tokens = [];
 
     /**
      * Extracted strings indexed by domain.
      *
      * @var array<string, mixed>
      */
-    protected $_translations = [];
+    protected _translations = [];
 
     /**
      * Destination path
@@ -67,28 +67,28 @@ class I18nExtractCommand : Command {
      *
      * @var array<string>
      */
-    protected $_exclude = [];
+    protected _exclude = [];
 
     /**
      * Holds whether this call should extract the UIM Lib messages
      *
      * @var bool
      */
-    protected $_extractCore = false;
+    protected _extractCore = false;
 
     /**
      * Displays marker error(s) if true
      *
      * @var bool
      */
-    protected $_markerError = false;
+    protected _markerError = false;
 
     /**
      * Count number of marker errors found
      *
      * @var int
      */
-    protected $_countMarkerError = 0;
+    protected _countMarkerError = 0;
 
     /**
      * Method to interact with the user and get path selections.

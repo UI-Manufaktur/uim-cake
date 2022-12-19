@@ -7,7 +7,7 @@ import uim.cake;
 class RedisEngine : CacheEngine
 {
     // Redis wrapper.
-    protected $_Redis;
+    protected _Redis;
 
     /**
      * The default config used unless overridden by runtime configuration

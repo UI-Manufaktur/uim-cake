@@ -23,7 +23,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      *
      * @var array<\Cake\Auth\AbstractPasswordHasher>
      */
-    protected $_hashers = [];
+    protected _hashers = [];
 
     /**
      * Constructor

@@ -23,7 +23,7 @@ class ServerCommand : Command {
      *
      * @var int
      */
-    protected $_port = self::DEFAULT_PORT;
+    protected _port = self::DEFAULT_PORT;
 
     // document root
     protected string _documentRoot = WWW_ROOT;

@@ -25,7 +25,7 @@ abstract class Helper {
      *
      * @var \Cake\Console\ConsoleIo
      */
-    protected $_io;
+    protected _io;
 
     /**
      * Constructor.

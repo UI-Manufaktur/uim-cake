@@ -13,14 +13,14 @@ class MemoryStorage : IStorage
      *
      * @var \ArrayAccess|array|null
      */
-    protected $_user;
+    protected _user;
 
     /**
      * Redirect URL.
      *
      * @var array|string|null
      */
-    protected $_redirectUrl;
+    protected _redirectUrl;
 
 
     function read() {

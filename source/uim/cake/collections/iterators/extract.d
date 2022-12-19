@@ -15,7 +15,7 @@ class ExtractIterator : Collection
      *
      * @var callable
      */
-    protected $_extractor;
+    protected _extractor;
 
     /**
      * Creates the iterator that will return the requested property for each value

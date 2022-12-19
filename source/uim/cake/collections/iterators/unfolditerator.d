@@ -17,14 +17,14 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator {
      *
      * @var callable
      */
-    protected $_unfolder;
+    protected _unfolder;
 
     /**
      * A reference to the internal iterator this object is wrapping.
      *
      * @var \Traversable
      */
-    protected $_innerIterator;
+    protected _innerIterator;
 
     /**
      * Creates the iterator that will generate child iterators from each of the

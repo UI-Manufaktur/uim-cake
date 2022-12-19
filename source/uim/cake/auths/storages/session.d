@@ -19,7 +19,7 @@ class SessionStorage : IStorage {
      *
      * @var \ArrayAccess|array|false|null
      */
-    protected $_user;
+    protected _user;
 
     // Session object.
     protected Session _session;

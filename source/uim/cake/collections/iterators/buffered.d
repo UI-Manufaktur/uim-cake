@@ -11,7 +11,7 @@ class BufferedIterator : Collection : Countable, Serializable
 {
     // The in-memory cache containing results from previous iterators
     // @var \SplDoublyLinkedList
-    protected $_buffer;
+    protected _buffer;
 
     // Points to the next record number that should be fetched
     protected int _index = 0;
@@ -21,14 +21,14 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @var mixed
      */
-    protected $_current;
+    protected _current;
 
     /**
      * Last key obtained from the inner iterator
      *
      * @var mixed
      */
-    protected $_key;
+    protected _key;
 
     /**
      * Whether the internal iterator"s rewind method was already
@@ -36,14 +36,14 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @var bool
      */
-    protected $_started = false;
+    protected _started = false;
 
     /**
      * Whether the internal iterator has reached its end.
      *
      * @var bool
      */
-    protected $_finished = false;
+    protected _finished = false;
 
     /**
      * Maintains an in-memory cache of the results yielded by the internal

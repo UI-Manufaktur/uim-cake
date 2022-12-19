@@ -17,14 +17,14 @@ trait PluginAssetsTrait
      *
      * @var \Cake\Console\Arguments
      */
-    protected $args;
+    protected args;
 
     /**
      * Console IO
      *
      * @var \Cake\Console\ConsoleIo
      */
-    protected $io;
+    protected io;
 
     /**
      * Get list of plugins to process. Plugins without a webroot directory are skipped.

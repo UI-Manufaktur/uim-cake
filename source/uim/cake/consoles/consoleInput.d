@@ -11,7 +11,7 @@ class ConsoleInput {
      *
      * @var resource
      */
-    protected $_input;
+    protected _input;
 
     /**
      * Can this instance use readline?
@@ -22,7 +22,7 @@ class ConsoleInput {
      *
      * @var bool
      */
-    protected $_canReadline;
+    protected _canReadline;
 
     /**
      * Constructor

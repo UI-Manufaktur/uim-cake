@@ -22,14 +22,14 @@ class PluginLoadCommand : Command {
      *
      * @var \Cake\Console\Arguments
      */
-    protected $args;
+    protected args;
 
     /**
      * Console IO
      *
      * @var \Cake\Console\ConsoleIo
      */
-    protected $io;
+    protected io;
 
     /**
      * Execute the command

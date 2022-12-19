@@ -14,7 +14,7 @@ class FilterIterator : Collection {
      *
      * @var callable
      */
-    protected $_callback;
+    protected _callback;
 
     /**
      * Creates a filtered iterator using the callback to determine which items are

@@ -76,14 +76,14 @@ class ConsoleOptionParser {
      * @see \Cake\Console\ConsoleOptionParser::addOption()
      * @var array<string, \Cake\Console\ConsoleInputOption>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Map of short . long options, generated when using addOption()
      *
      * @var array<string, string>
      */
-    protected $_shortOptions = [];
+    protected _shortOptions = [];
 
     /**
      * Positional argument definitions.
@@ -91,7 +91,7 @@ class ConsoleOptionParser {
      * @see \Cake\Console\ConsoleOptionParser::addArgument()
      * @var array<\Cake\Console\ConsoleInputArgument>
      */
-    protected $_args = [];
+    protected _args = [];
 
     /**
      * Subcommands for this Shell.
@@ -99,14 +99,14 @@ class ConsoleOptionParser {
      * @see \Cake\Console\ConsoleOptionParser::addSubcommand()
      * @var array<string, \Cake\Console\ConsoleInputSubcommand>
      */
-    protected $_subcommands = [];
+    protected _subcommands = [];
 
     /**
      * Subcommand sorting option
      *
      * @var bool
      */
-    protected $_subcommandSort = true;
+    protected _subcommandSort = true;
 
     // Command name.
     protected string _commandName = "";
@@ -116,7 +116,7 @@ class ConsoleOptionParser {
      *
      * @var array
      */
-    protected $_tokens = [];
+    protected _tokens = [];
 
     /**
      * Root alias used in help output
@@ -124,7 +124,7 @@ class ConsoleOptionParser {
      * @see \Cake\Console\HelpFormatter::setAlias()
      * @var string
      */
-    protected $rootName = "cake";
+    protected rootName = "cake";
 
     /**
      * Construct an OptionParser so you can define its behavior

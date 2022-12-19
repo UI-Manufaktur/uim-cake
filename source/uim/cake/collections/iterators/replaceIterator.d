@@ -14,7 +14,7 @@ class ReplaceIterator : Collection
      *
      * @var callable
      */
-    protected $_callback;
+    protected _callback;
 
     // A reference to the internal iterator this object is wrapping.
     protected Traversable $_innerIterator;

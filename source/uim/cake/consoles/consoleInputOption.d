@@ -27,7 +27,7 @@ class ConsoleInputOption {
      *
      * @var string|bool|null
      */
-    protected $_default;
+    protected _default;
 
     // Can the option accept multiple value definition.
     protected bool $_multiple;
@@ -37,7 +37,7 @@ class ConsoleInputOption {
      *
      * @var array<string>
      */
-    protected $_choices;
+    protected _choices;
 
     // Is the option required.
     protected bool $required;

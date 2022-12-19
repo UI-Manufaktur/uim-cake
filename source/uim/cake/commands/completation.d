@@ -18,7 +18,7 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * @var \Cake\Console\CommandCollection
      */
-    protected $commands;
+    protected commands;
 
     /**
      * Set the command collection used to get completion data on.

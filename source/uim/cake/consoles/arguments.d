@@ -11,14 +11,14 @@ class Arguments
      *
      * @var array<int, string>
      */
-    protected $argNames;
+    protected argNames;
 
     /**
      * Positional arguments.
      *
      * @var array<int, string>
      */
-    protected $args;
+    protected args;
 
     /**
      * Named options

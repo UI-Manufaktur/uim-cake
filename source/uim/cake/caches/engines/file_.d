@@ -21,7 +21,7 @@ class FileEngine : CacheEngine {
      *
      * @var \SplFileObject|null
      */
-    protected $_File;
+    protected _File;
 
     /**
      * The default config used unless overridden by runtime configuration

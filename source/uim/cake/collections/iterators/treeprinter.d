@@ -16,21 +16,21 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      *
      * @var callable
      */
-    protected $_key;
+    protected _key;
 
     /**
      * A callable to extract the display value
      *
      * @var callable
      */
-    protected $_value;
+    protected _value;
 
     /**
      * Cached value for the current iteration element
      *
      * @var mixed
      */
-    protected $_current;
+    protected _current;
 
     /**
      * The string to use for prefixing the values according to their depth in the tree.

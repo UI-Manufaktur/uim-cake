@@ -19,7 +19,7 @@ class MemcachedEngine : CacheEngine
      *
      * @var \Memcached
      */
-    protected $_Memcached;
+    protected _Memcached;
 
     /**
      * The default config used unless overridden by runtime configuration
@@ -66,7 +66,7 @@ class MemcachedEngine : CacheEngine
      *
      * @var array<string, int>
      */
-    protected $_serializers = [];
+    protected _serializers = [];
 
     protected string[] $_compiledGroupNames = [];
 

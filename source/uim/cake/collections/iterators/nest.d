@@ -10,7 +10,7 @@ class NestIterator : Collection : RecursiveIterator {
      *
      * @var callable|string
      */
-    protected $_nestKey;
+    protected _nestKey;
 
     /**
      * Constructor

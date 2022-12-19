@@ -28,7 +28,7 @@ class ConsoleInputSubCommand {
      *
      * @var \Cake\Console\ConsoleOptionParser|null
      */
-    protected $_parser;
+    protected _parser;
 
     /**
      * Make a new Subcommand
