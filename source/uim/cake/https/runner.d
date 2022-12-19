@@ -14,14 +14,14 @@ class Runner : IRequestHandler
      *
      * @var \Cake\Http\MiddlewareQueue
      */
-    protected $queue;
+    protected queue;
 
     /**
      * Fallback handler to use if middleware queue does not generate response.
      *
      * @var \Psr\Http\Server\IRequestHandler|null
      */
-    protected $fallbackHandler;
+    protected fallbackHandler;
 
     /**
      * @param \Cake\Http\MiddlewareQueue $queue The middleware queue

@@ -61,7 +61,7 @@ class Debugger
      *
      * @var array<string, array<string, mixed>>
      */
-    protected $_templates = [
+    protected _templates = [
         "log":[
             "trace":"{:reference} - {:path}, line {:line}",
             "error":"{:error} ({:code}): {:description} in [{:file}, line {:line}]",
@@ -97,7 +97,7 @@ class Debugger
      *
      * @var array<string, string|callable>
      */
-    protected $editors = [
+    protected editors = [
         "atom":"atom://core/open/file?filename={file}&line={line}",
         "emacs":"emacs://open?url=file://{file}&line={line}",
         "macvim":"mvim://open/?url=file://{file}&line={line}",
@@ -112,7 +112,7 @@ class Debugger
      *
      * @var array
      */
-    protected $_data = [];
+    protected _data = [];
 
     /**
      * Constructor.

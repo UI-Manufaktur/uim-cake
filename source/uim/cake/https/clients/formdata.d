@@ -21,21 +21,21 @@ class FormData : Countable {
      *
      * @var bool
      */
-    protected $_hasFile = false;
+    protected _hasFile = false;
 
     /**
      * Whether this formdata object has a complex part.
      *
      * @var bool
      */
-    protected $_hasComplexPart = false;
+    protected _hasComplexPart = false;
 
     /**
      * The parts in the form data.
      *
      * @var array<\Cake\Http\Client\FormDataPart>
      */
-    protected $_parts = [];
+    protected _parts = [];
 
     /**
      * Get the boundary marker

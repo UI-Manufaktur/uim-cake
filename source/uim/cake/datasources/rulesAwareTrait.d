@@ -20,7 +20,7 @@ trait RulesAwareTrait
      *
      * @var \Cake\Datasource\RulesChecker
      */
-    protected $_rulesChecker;
+    protected _rulesChecker;
 
     /**
      * Returns whether the passed entity complies with all the rules stored in

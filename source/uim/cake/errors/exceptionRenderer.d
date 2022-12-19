@@ -34,7 +34,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * @var \Cake\Controller\Controller
      */
-    protected $controller;
+    protected controller;
 
     /**
      * Template to render for {@link \Cake\Core\Exception\CakeException}

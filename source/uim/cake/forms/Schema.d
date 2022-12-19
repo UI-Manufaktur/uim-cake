@@ -10,14 +10,14 @@ class Schema
      *
      * @var array<string, array<string, mixed>>
      */
-    protected $_fields = [];
+    protected _fields = [];
 
     /**
      * The default values for fields.
      *
      * @var array<string, mixed>
      */
-    protected $_fieldDefaults = [
+    protected _fieldDefaults = [
         "type":null,
         "length":null,
         "precision":null,

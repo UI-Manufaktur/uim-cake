@@ -103,7 +103,7 @@ class Client : ClientInterface
      *
      * @var \Cake\Http\Cookie\CookieCollection
      */
-    protected $_cookies;
+    protected _cookies;
 
     /**
      * Mock adapter for stubbing requests in tests.
@@ -117,7 +117,7 @@ class Client : ClientInterface
      *
      * @var \Cake\Http\Client\IAdapter
      */
-    protected $_adapter;
+    protected _adapter;
 
     /**
      * Create a new HTTP Client.

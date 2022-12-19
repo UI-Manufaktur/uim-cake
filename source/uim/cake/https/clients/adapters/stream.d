@@ -16,35 +16,35 @@ class Stream : IAdapter
      *
      * @var resource|null
      */
-    protected $_context;
+    protected _context;
 
     /**
      * Array of options/content for the HTTP stream context.
      *
      * @var array
      */
-    protected $_contextOptions = [];
+    protected _contextOptions = [];
 
     /**
      * Array of options/content for the SSL stream context.
      *
      * @var array
      */
-    protected $_sslContextOptions = [];
+    protected _sslContextOptions = [];
 
     /**
      * The stream resource.
      *
      * @var resource|null
      */
-    protected $_stream;
+    protected _stream;
 
     /**
      * Connection error list.
      *
      * @var array
      */
-    protected $_connectionErrors = [];
+    protected _connectionErrors = [];
 
 
     array send(RequestInterface myRequest, array myOptions) {

@@ -13,7 +13,7 @@ abstract class AbstractLocator : ILocator
      *
      * @var array<string, \Cake\Datasource\IRepository>
      */
-    protected $instances = [];
+    protected instances = [];
 
     /**
      * Contains a list of options that were passed to get() method.

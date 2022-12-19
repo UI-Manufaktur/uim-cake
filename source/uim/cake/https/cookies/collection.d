@@ -15,7 +15,7 @@ class CookieCollection : IteratorAggregate, Countable {
      *
      * @var array<\Cake\Http\Cookie\ICookie>
      */
-    protected $cookies = [];
+    protected cookies = [];
 
     /**
      * Constructor

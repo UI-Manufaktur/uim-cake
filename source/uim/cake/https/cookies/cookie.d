@@ -48,14 +48,14 @@ class Cookie : ICookie
      *
      * @var bool
      */
-    protected $isExpanded = false;
+    protected isExpanded = false;
 
     /**
      * Expiration time
      *
      * @var \DateTime|\DateTimeImmutable|null
      */
-    protected $expiresAt;
+    protected expiresAt;
 
     /**
      * Path
@@ -72,21 +72,21 @@ class Cookie : ICookie
      *
      * @var bool
      */
-    protected $secure = false;
+    protected secure = false;
 
     /**
      * HTTP only
      *
      * @var bool
      */
-    protected $httpOnly = false;
+    protected httpOnly = false;
 
     /**
      * Samesite
      *
      * @var string|null
      */
-    protected $sameSite = null;
+    protected sameSite = null;
 
     /**
      * Default attributes for a cookie.

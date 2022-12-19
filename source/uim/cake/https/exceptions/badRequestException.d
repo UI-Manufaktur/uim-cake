@@ -7,7 +7,7 @@ import uim.cake;
 class BadRequestException : HttpException
 {
 
-    protected $_defaultCode = 400;
+    protected _defaultCode = 400;
 
     /**
      * Constructor

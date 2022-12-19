@@ -26,12 +26,12 @@ class Server : IEventDispatcher
     /**
      * @var \Cake\Core\HttpApplicationInterface
      */
-    protected $app;
+    protected app;
 
     /**
      * @var \Cake\Http\Runner
      */
-    protected $runner;
+    protected runner;
 
     /**
      * Constructor

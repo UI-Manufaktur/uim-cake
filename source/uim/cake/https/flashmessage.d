@@ -27,7 +27,7 @@ class FlashMessage {
     /**
      * @var \Cake\Http\Session
      */
-    protected $session;
+    protected session;
 
     /**
      * Constructor

@@ -60,7 +60,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      *
      * @var array
      */
-    protected $_errors = [];
+    protected _errors = [];
 
     // Form"s data.
     protected array $_data = [];

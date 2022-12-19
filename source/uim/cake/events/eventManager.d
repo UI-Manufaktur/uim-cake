@@ -29,28 +29,28 @@ class EventManager : IEventManager
      *
      * @var array
      */
-    protected $_listeners = [];
+    protected _listeners = [];
 
     /**
      * Internal flag to distinguish a common manager from the singleton
      *
      * @var bool
      */
-    protected $_isGlobal = false;
+    protected _isGlobal = false;
 
     /**
      * The event list object.
      *
      * @var \Cake\Event\EventList|null
      */
-    protected $_eventList;
+    protected _eventList;
 
     /**
      * Enables automatic adding of events to the event list object if it is present.
      *
      * @var bool
      */
-    protected $_trackEvents = false;
+    protected _trackEvents = false;
 
     /**
      * Returns the globally available instance of a Cake\Event\EventManager

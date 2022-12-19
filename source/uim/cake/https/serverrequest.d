@@ -55,14 +55,14 @@ class ServerRequest : IServerRequest
      *
      * @var array
      */
-    protected $cookies = [];
+    protected cookies = [];
 
     /**
      * Array of environment data.
      *
      * @var array
      */
-    protected $_environment = [];
+    protected _environment = [];
 
     /**
      * Base URL path.
@@ -88,7 +88,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string>
      */
-    protected $trustedProxies = [];
+    protected trustedProxies = [];
 
     /**
      * The built in detectors used with `is()` can be modified with `addDetector()`.
@@ -117,63 +117,63 @@ class ServerRequest : IServerRequest
      *
      * @var array
      */
-    protected $_detectorCache = [];
+    protected _detectorCache = [];
 
     /**
      * Request body stream. Contains php://input unless `input` constructor option is used.
      *
      * @var \Psr\Http\Message\StreamInterface
      */
-    protected $stream;
+    protected stream;
 
     /**
      * Uri instance
      *
      * @var \Psr\Http\Message\UriInterface
      */
-    protected $uri;
+    protected uri;
 
     /**
      * Instance of a Session object relative to this request
      *
      * @var \Cake\Http\Session
      */
-    protected $session;
+    protected session;
 
     /**
      * Instance of a FlashMessage object relative to this request
      *
      * @var \Cake\Http\FlashMessage
      */
-    protected $flash;
+    protected flash;
 
     /**
      * Store the additional attributes attached to the request.
      *
      * @var array
      */
-    protected $attributes = [];
+    protected attributes = [];
 
     /**
      * A list of properties that emulated by the PSR7 attribute methods.
      *
      * @var array<string>
      */
-    protected $emulatedAttributes = ["session", "flash", "webroot", "base", "params", "here"];
+    protected emulatedAttributes = ["session", "flash", "webroot", "base", "params", "here"];
 
     /**
      * Array of Psr\Http\Message\UploadedFileInterface objects.
      *
      * @var array
      */
-    protected $uploadedFiles = [];
+    protected uploadedFiles = [];
 
     /**
      * The HTTP protocol version used.
      *
      * @var string|null
      */
-    protected $protocol;
+    protected protocol;
 
     /**
      * The request target if overridden

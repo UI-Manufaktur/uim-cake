@@ -21,7 +21,7 @@ class CorsBuilder
      *
      * @var \Psr\Http\Message\IMessage
      */
-    protected $_response;
+    protected _response;
 
     /**
      * The request"s Origin header value
@@ -33,14 +33,14 @@ class CorsBuilder
      *
      * @var bool
      */
-    protected $_isSsl;
+    protected _isSsl;
 
     /**
      * The headers that have been queued so far.
      *
      * @var array<string, mixed>
      */
-    protected $_headers = [];
+    protected _headers = [];
 
     /**
      * Constructor.

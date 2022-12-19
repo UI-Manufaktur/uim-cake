@@ -46,42 +46,42 @@ class RulesChecker
      *
      * @var array<\Cake\Datasource\RuleInvoker>
      */
-    protected $_rules = [];
+    protected _rules = [];
 
     /**
      * The list of rules to check during create operations
      *
      * @var array<\Cake\Datasource\RuleInvoker>
      */
-    protected $_createRules = [];
+    protected _createRules = [];
 
     /**
      * The list of rules to check during update operations
      *
      * @var array<\Cake\Datasource\RuleInvoker>
      */
-    protected $_updateRules = [];
+    protected _updateRules = [];
 
     /**
      * The list of rules to check during delete operations
      *
      * @var array<\Cake\Datasource\RuleInvoker>
      */
-    protected $_deleteRules = [];
+    protected _deleteRules = [];
 
     /**
      * List of options to pass to every callable rule
      *
      * @var array
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Whether to use I18n functions for translating default error messages
      *
      * @var bool
      */
-    protected $_useI18n = false;
+    protected _useI18n = false;
 
     /**
      * Constructor. Takes the options to be passed to all rules.

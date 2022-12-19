@@ -70,14 +70,14 @@ class Response : Message : IResponse
      *
      * @var int
      */
-    protected $code;
+    protected code;
 
     /**
      * Cookie Collection instance
      *
      * @var \Cake\Http\Cookie\CookieCollection
      */
-    protected $cookies;
+    protected cookies;
 
     /**
      * The reason phrase for the status code
@@ -89,14 +89,14 @@ class Response : Message : IResponse
      *
      * @var \SimpleXMLElement
      */
-    protected $_xml;
+    protected _xml;
 
     /**
      * Cached decoded JSON data.
      *
      * @var array
      */
-    protected $_json;
+    protected _json;
 
     /**
      * Constructor

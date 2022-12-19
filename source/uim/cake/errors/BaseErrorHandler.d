@@ -33,14 +33,14 @@ abstract class BaseErrorHandler
     /**
      * @var bool
      */
-    protected $_handled = false;
+    protected _handled = false;
 
     /**
      * Exception logger instance.
      *
      * @var \Cake\Error\IErrorLogger|null
      */
-    protected $logger;
+    protected logger;
 
     /**
      * Display an error message in an environment specific way.

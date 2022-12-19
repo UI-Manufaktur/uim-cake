@@ -16,7 +16,7 @@ class Digest
      *
      * @var \Cake\Http\Client
      */
-    protected $_client;
+    protected _client;
 
     /**
      * Constructor

@@ -15,7 +15,7 @@ class ConsoleFormatter : IFormatter
      *
      * @var array<string, string>
      */
-    protected $styles = [
+    protected styles = [
         // bold yellow
         "const":"1;33",
         // green

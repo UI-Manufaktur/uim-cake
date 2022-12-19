@@ -31,7 +31,7 @@ class Response : IResponse
      *
      * @var array<int, string>
      */
-    protected $_statusCodes = [
+    protected _statusCodes = [
         100: "Continue",
         101: "Switching Protocols",
         102: "Processing",
@@ -104,7 +104,7 @@ class Response : IResponse
      *
      * @var array<string, mixed>
      */
-    protected $_mimeTypes = [
+    protected _mimeTypes = [
         "html":["text/html", "*/*"],
         "json":"application/json",
         "xml":["application/xml", "text/xml"],
@@ -347,21 +347,21 @@ class Response : IResponse
      *
      * @var int
      */
-    protected $_status = 200;
+    protected _status = 200;
 
     /**
      * File object for file to be read out as response
      *
      * @var \SplFileInfo|null
      */
-    protected $_file;
+    protected _file;
 
     /**
      * File range. Used for requesting ranges of files.
      *
      * @var array<int>
      */
-    protected $_fileRange = [];
+    protected _fileRange = [];
 
     /**
      * The charset the response body is encoded with
@@ -374,14 +374,14 @@ class Response : IResponse
      *
      * @var array
      */
-    protected $_cacheDirectives = [];
+    protected _cacheDirectives = [];
 
     /**
      * Collection of cookies to send to the client
      *
      * @var \Cake\Http\Cookie\CookieCollection
      */
-    protected $_cookies;
+    protected _cookies;
 
     /**
      * Reason Phrase
@@ -398,7 +398,7 @@ class Response : IResponse
      *
      * @var resource|string
      */
-    protected $_streamTarget = "php://memory";
+    protected _streamTarget = "php://memory";
 
     /**
      * Constructor

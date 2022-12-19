@@ -30,14 +30,14 @@ class MiddlewareQueue : Countable, SeekableIterator
      *
      * @var int
      */
-    protected $position = 0;
+    protected position = 0;
 
     /**
      * The queue of middlewares.
      *
      * @var array<int, mixed>
      */
-    protected $queue = [];
+    protected queue = [];
 
     /**
      * Constructor

@@ -19,7 +19,7 @@ class ResponseEmitter : EmitterInterface
      *
      * @var int
      */
-    protected $maxBufferLength;
+    protected maxBufferLength;
 
     /**
      * Constructor

@@ -40,7 +40,7 @@ abstract class BaseApplication :
      *
      * @var \Cake\Http\IControllerFactory|null
      */
-    protected $controllerFactory;
+    protected controllerFactory;
 
     /**
      * Container

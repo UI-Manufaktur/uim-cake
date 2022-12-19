@@ -28,14 +28,14 @@ class FormProtector
      *
      * @var array<string>
      */
-    protected $unlockedFields = [];
+    protected unlockedFields = [];
 
     /**
      * Error message providing detail for failed validation.
      *
      * @var string|null
      */
-    protected $debugMessage;
+    protected debugMessage;
 
     /**
      * Validate submitted form data.
