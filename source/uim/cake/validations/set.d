@@ -12,14 +12,13 @@ import uim.cake;
  * ValidationSet object. Holds all validation rules for a field and exposes
  * methods to dynamically add or remove validation rules
  */
-class ValidationSet : ArrayAccess, IteratorAggregate, Countable
-{
+class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Holds the ValidationRule objects
      *
-     * @var array<\Cake\Validation\ValidationRule>
+     * @var array<\Cake\Validation\>
      */
-    protected $_rules = [];
+    protected ValidationRule[] $_rules = [];
 
     /**
      * Denotes whether the fieldname key must be present in data array

@@ -102,7 +102,7 @@ import uim.cake;
  * @see \Cake\Event\EventManager for reference on the events system.
  * @link https://book.UIM.org/4/en/orm/table-objects.html#event-list
  */
-class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInterface
+class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 {
     use EventDispatcherTrait;
     use RulesAwareTrait;

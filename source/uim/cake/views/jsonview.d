@@ -54,7 +54,7 @@ class JsonView : SerializedView {
     /**
      * Response type.
      */
-    protected string $_responseType = "json";
+    protected string _responseType = "json";
 
     /**
      * Default config options.

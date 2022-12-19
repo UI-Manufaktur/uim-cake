@@ -9,8 +9,7 @@ import uim.cake;
  *
  * @extends \Cake\Core\ObjectRegistry<\Cake\View\Helper>
  */
-class HelperRegistry : ObjectRegistry : IEventDispatcher
-{
+class HelperRegistry : ObjectRegistry : IEventDispatcher {
     use EventDispatcherTrait;
 
     /**
@@ -18,7 +17,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      *
      * @var \Cake\View\View
      */
-    protected $_View;
+    protected View _View;
 
     /**
      * Constructor

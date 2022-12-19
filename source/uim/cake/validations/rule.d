@@ -6,7 +6,7 @@
 *	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
 *	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
 **********************************************************************************************************/
-module uim.cake.validations;
+module uim.cake.validations.rule;
 
 @safe:
 import uim.cake;
@@ -33,14 +33,10 @@ class ValidationRule
 
     /**
      * The "last" key
-     *
-     * @var bool
      */
-    protected $_last = false;
+    protected bool $_last = false;
 
-    /**
-     * The "message" key
-     */
+    // The "message" key
     protected string $_message;
 
     /**
@@ -166,18 +162,17 @@ class ValidationRule
      * @param array $validator [optional]
      */
     protected void _addValidatorProps(array $validator = []) {
-        foreach ($validator as myKey => myValue) {
-            if (empty(myValue)) {
-                continue;
-            }
-            if (myKey == "rule" && is_array(myValue) && !is_callable(myValue)) {
-                _pass = array_slice(myValue, 1);
-                myValue = array_shift(myValue);
-            }
-            if (in_array(myKey, ["rule", "on", "message", "last", "provider", "pass"], true)) {
-                this.{"_myKey"} = myValue;
-            }
+      foreach (myKey => myValue; $validator) {
+        if (empty(myValue)) continue;
+
+        if (myKey == "rule" && is_array(myValue) && !is_callable(myValue)) {
+            _pass = array_slice(myValue, 1);
+            myValue = array_shift(myValue);
         }
+        if (in_array(myKey, ["rule", "on", "message", "last", "provider", "pass"], true)) {
+            this.{"_myKey"} = myValue;
+        }
+      }
     }
 
     /**
@@ -187,8 +182,8 @@ class ValidationRule
      * @return mixed
      */
     auto get(string $property) {
-        $property = "_" . $property;
+      $property = "_" . $property;
 
-        return this.{$property} ?? null;
+      return this.{$property} ?? null;
     }
 }
