@@ -36,7 +36,7 @@ class BelongsToMany : Association
      *
      * @var \Cake\ORM\Table
      */
-    protected $_junctionTable;
+    protected _junctionTable;
 
     /**
      * Junction table name
@@ -65,21 +65,21 @@ class BelongsToMany : Association
      *
      * @var array<string>|string|null
      */
-    protected $_targetForeignKey;
+    protected _targetForeignKey;
 
     /**
      * The table instance for the junction relation.
      *
      * @var \Cake\ORM\Table|string
      */
-    protected $_through;
+    protected _through;
 
     /**
      * Valid strategies for this type of association
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected _validStrategies = [
         self::STRATEGY_SELECT,
         self::STRATEGY_SUBQUERY,
     ];
@@ -92,28 +92,28 @@ class BelongsToMany : Association
      *
      * @var bool
      */
-    protected $_dependent = true;
+    protected _dependent = true;
 
     /**
      * Filtered conditions that reference the target table.
      *
      * @var array|null
      */
-    protected $_targetConditions;
+    protected _targetConditions;
 
     /**
      * Filtered conditions that reference the junction table.
      *
      * @var array|null
      */
-    protected $_junctionConditions;
+    protected _junctionConditions;
 
     /**
      * Order in which target records should be returned
      *
      * @var mixed
      */
-    protected $_sort;
+    protected _sort;
 
     /**
      * Sets the name of the field representing the foreign key to the target table.

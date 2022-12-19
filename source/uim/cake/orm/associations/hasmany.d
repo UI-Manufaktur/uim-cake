@@ -16,7 +16,7 @@ class HasMany : Association
      *
      * @var mixed
      */
-    protected $_sort;
+    protected _sort;
 
     /**
      * The type of join to be used when adding the association to a query
@@ -33,7 +33,7 @@ class HasMany : Association
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected _validStrategies = [
         self::STRATEGY_SELECT,
         self::STRATEGY_SUBQUERY,
     ];

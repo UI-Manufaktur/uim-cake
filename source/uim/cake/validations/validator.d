@@ -91,7 +91,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @var array<string, \Cake\Validation\ValidationSet>
      */
-    protected $_fields = [];
+    protected _fields = [];
 
     /**
      * An associative array of objects or classes containing methods
@@ -100,7 +100,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @var array<string, object|string>
      * @psalm-var array<string, object|class-string>
      */
-    protected $_providers = [];
+    protected _providers = [];
 
     /**
      * An associative array of objects or classes used as a default provider list
@@ -116,14 +116,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @var array
      */
-    protected $_presenceMessages = [];
+    protected _presenceMessages = [];
 
     /**
      * Whether to use I18n functions for translating default error messages
      *
      * @var bool
      */
-    protected $_useI18n = false;
+    protected _useI18n = false;
 
     /**
      * Contains the validation messages associated with checking the emptiness
@@ -131,21 +131,21 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @var array
      */
-    protected $_allowEmptyMessages = [];
+    protected _allowEmptyMessages = [];
 
     /**
      * Contains the flags which specify what is empty for each corresponding field.
      *
      * @var array
      */
-    protected $_allowEmptyFlags = [];
+    protected _allowEmptyFlags = [];
 
     /**
      * Whether to apply last flag to generated rule(s).
      *
      * @var bool
      */
-    protected $_stopOnFailure = false;
+    protected _stopOnFailure = false;
 
     /**
      * Constructor

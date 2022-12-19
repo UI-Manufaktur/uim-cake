@@ -34,7 +34,7 @@ class Helper : IEventListener
      *
      * @var array
      */
-    protected $helpers = [];
+    protected helpers = [];
 
     /**
      * Default config for this helper.
@@ -48,14 +48,14 @@ class Helper : IEventListener
      *
      * @var array<string, array>
      */
-    protected $_helperMap = [];
+    protected _helperMap = [];
 
     /**
      * The View instance this helper is attached to
      *
      * @var \Cake\View\View
      */
-    protected $_View;
+    protected _View;
 
     /**
      * Default Constructor

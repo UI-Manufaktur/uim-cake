@@ -20,14 +20,14 @@ trait TranslateStrategyTrait {
      *
      * @var string|null
      */
-    protected $locale;
+    protected locale;
 
     /**
      * Instance of Table responsible for translating
      *
      * @var \Cake\ORM\Table
      */
-    protected $translationTable;
+    protected translationTable;
 
     /**
      * Return translation table instance.

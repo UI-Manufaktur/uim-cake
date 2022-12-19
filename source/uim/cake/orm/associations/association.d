@@ -74,14 +74,14 @@ abstract class Association
      *
      * @var array<string>|string|null
      */
-    protected $_bindingKey;
+    protected _bindingKey;
 
     /**
      * The name of the field representing the foreign key to the table to load
      *
      * @var array<string>|string
      */
-    protected $_foreignKey;
+    protected _foreignKey;
 
     /**
      * A list of conditions to be always included when fetching records from
@@ -89,7 +89,7 @@ abstract class Association
      *
      * @var \Closure|array
      */
-    protected $_conditions = [];
+    protected _conditions = [];
 
     /**
      * Whether the records on the target table are dependent on the source table,
@@ -98,28 +98,28 @@ abstract class Association
      *
      * @var bool
      */
-    protected $_dependent = false;
+    protected _dependent = false;
 
     /**
      * Whether cascaded deletes should also fire callbacks.
      *
      * @var bool
      */
-    protected $_cascadeCallbacks = false;
+    protected _cascadeCallbacks = false;
 
     /**
      * Source table instance
      *
      * @var \Cake\ORM\Table
      */
-    protected $_sourceTable;
+    protected _sourceTable;
 
     /**
      * Target table instance
      *
      * @var \Cake\ORM\Table
      */
-    protected $_targetTable;
+    protected _targetTable;
 
     /**
      * The type of join to be used when adding the association to a query
@@ -144,14 +144,14 @@ abstract class Association
      *
      * @var array|string
      */
-    protected $_finder = "all";
+    protected _finder = "all";
 
     /**
      * Valid strategies for this association. Subclasses can narrow this down.
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected _validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
         self::STRATEGY_SUBQUERY,

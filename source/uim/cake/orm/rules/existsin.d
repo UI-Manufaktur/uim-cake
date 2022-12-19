@@ -7,28 +7,27 @@ import uim.cake;
  * Checks that the value provided in a field exists as the primary key of another
  * table.
  */
-class ExistsIn
-{
+class ExistsIn {
     /**
      * The list of fields to check
      *
      * @var array<string>
      */
-    protected $_fields;
+    protected _fields;
 
     /**
      * The repository where the field will be looked for
      *
      * @var \Cake\ORM\Table|\Cake\ORM\Association|string
      */
-    protected $_repository;
+    protected _repository;
 
     /**
      * Options for the constructor
      *
      * @var array<string, mixed>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Constructor.

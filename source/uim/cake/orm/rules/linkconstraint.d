@@ -23,7 +23,7 @@ class LinkConstraint
      *
      * @var \Cake\ORM\Association|string
      */
-    protected $_association;
+    protected _association;
 
     /**
      * The link status that is required to be present in order for the check to succeed.

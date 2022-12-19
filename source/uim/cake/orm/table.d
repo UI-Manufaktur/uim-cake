@@ -138,7 +138,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @var string|null
      */
-    protected $_table;
+    protected _table;
 
     /**
      * Human name giving to this particular instance. Multiple objects representing
@@ -146,49 +146,49 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @var string|null
      */
-    protected $_alias;
+    protected _alias;
 
     /**
      * Connection instance
      *
      * @var \Cake\Database\Connection|null
      */
-    protected $_connection;
+    protected _connection;
 
     /**
      * The schema object containing a description of this table fields
      *
      * @var \Cake\Database\Schema\TableSchemaInterface|null
      */
-    protected $_schema;
+    protected _schema;
 
     /**
      * The name of the field that represents the primary key in the table
      *
      * @var array<string>|string|null
      */
-    protected $_primaryKey;
+    protected _primaryKey;
 
     /**
      * The name of the field that represents a human-readable representation of a row
      *
      * @var array<string>|string|null
      */
-    protected $_displayField;
+    protected _displayField;
 
     /**
      * The associations container for this Table.
      *
      * @var \Cake\ORM\AssociationCollection
      */
-    protected $_associations;
+    protected _associations;
 
     /**
      * BehaviorRegistry for this table
      *
      * @var \Cake\ORM\BehaviorRegistry
      */
-    protected $_behaviors;
+    protected _behaviors;
 
     /**
      * The name of the class that represent a single row for this table
@@ -196,14 +196,14 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @var string
      * @psalm-var class-string<\Cake\Datasource\IEntity>
      */
-    protected $_entityClass;
+    protected _entityClass;
 
     /**
      * Registry key used to create this table object
      *
      * @var string|null
      */
-    protected $_registryAlias;
+    protected _registryAlias;
 
     /**
      * Initializes a new instance

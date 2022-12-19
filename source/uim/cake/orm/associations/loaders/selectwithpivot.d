@@ -30,14 +30,14 @@ class SelectWithPivotLoader : SelectLoader
      *
      * @var \Cake\ORM\Association\HasMany
      */
-    protected $junctionAssoc;
+    protected junctionAssoc;
 
     /**
      * Custom conditions for the junction association
      *
      * @var \Cake\Database\IExpression|\Closure|array|string|null
      */
-    protected $junctionConditions;
+    protected junctionConditions;
 
 
     this(array myOptions) {

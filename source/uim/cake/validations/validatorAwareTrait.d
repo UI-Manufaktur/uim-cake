@@ -39,7 +39,7 @@ trait ValidatorAwareTrait
      *
      * @var array<\Cake\Validation\Validator>
      */
-    protected $_validators = [];
+    protected _validators = [];
 
     /**
      * Returns the validation rules tagged with myName. It is possible to have

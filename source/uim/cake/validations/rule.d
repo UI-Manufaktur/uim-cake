@@ -22,14 +22,14 @@ class ValidationRule
      *
      * @var callable|string
      */
-    protected $_rule;
+    protected _rule;
 
     /**
      * The "on" key
      *
      * @var callable|string
      */
-    protected $_on;
+    protected _on;
 
     /**
      * The "last" key
@@ -50,7 +50,7 @@ class ValidationRule
      *
      * @var array
      */
-    protected $_pass = [];
+    protected _pass = [];
 
     /**
      * Constructor

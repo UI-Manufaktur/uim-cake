@@ -16,7 +16,7 @@ class BelongsTo : Association
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected _validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
     ];

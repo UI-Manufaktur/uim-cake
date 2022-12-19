@@ -36,7 +36,7 @@ class SelectLoader
      *
      * @var array|string
      */
-    protected $foreignKey;
+    protected foreignKey;
 
     /**
      * The strategy to use for loading, either select or subquery

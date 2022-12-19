@@ -23,42 +23,42 @@ class RouteCollection
      *
      * @var array<string, array<\Cake\Routing\Route\Route>>
      */
-    protected $_routeTable = [];
+    protected _routeTable = [];
 
     /**
      * The hash map of named routes that are in this collection.
      *
      * @var array<\Cake\Routing\Route\Route>
      */
-    protected $_named = [];
+    protected _named = [];
 
     /**
      * Routes indexed by path prefix.
      *
      * @var array<string, array<\Cake\Routing\Route\Route>>
      */
-    protected $_paths = [];
+    protected _paths = [];
 
     /**
      * A map of middleware names and the related objects.
      *
      * @var array
      */
-    protected $_middleware = [];
+    protected _middleware = [];
 
     /**
      * A map of middleware group names and the related middleware names.
      *
      * @var array
      */
-    protected $_middlewareGroups = [];
+    protected _middlewareGroups = [];
 
     /**
      * Route extensions
      *
      * @var array<string>
      */
-    protected $_extensions = [];
+    protected _extensions = [];
 
     /**
      * Add a route to the collection.

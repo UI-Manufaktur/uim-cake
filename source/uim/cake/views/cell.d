@@ -24,7 +24,7 @@ abstract class Cell : IEventDispatcher
      *
      * @var \Cake\View\View
      */
-    protected $View;
+    protected View;
 
     /**
      * An instance of a Cake\Http\ServerRequest object that contains information about the current request.
@@ -40,7 +40,7 @@ abstract class Cell : IEventDispatcher
      *
      * @var \Cake\Http\Response
      */
-    protected $response;
+    protected response;
 
     /**
      * The cell"s action to invoke.
@@ -52,7 +52,7 @@ abstract class Cell : IEventDispatcher
      *
      * @var array
      */
-    protected $args = [];
+    protected args = [];
 
     /**
      * List of valid options (constructor"s fourth arguments)
@@ -61,14 +61,14 @@ abstract class Cell : IEventDispatcher
      *
      * @var array<string>
      */
-    protected $_validCellOptions = [];
+    protected _validCellOptions = [];
 
     /**
      * Caching setup.
      *
      * @var array|bool
      */
-    protected $_cache = false;
+    protected _cache = false;
 
     /**
      * Constructor.

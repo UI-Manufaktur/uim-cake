@@ -41,7 +41,7 @@ class TimestampBehavior : Behavior {
      *
      * @var \Cake\I18n\FrozenTime|null
      */
-    protected $_ts;
+    protected _ts;
 
     /**
      * Initialize hook

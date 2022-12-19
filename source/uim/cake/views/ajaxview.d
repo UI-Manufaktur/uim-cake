@@ -10,7 +10,7 @@ import uim.cake;
  */
 class AjaxView : View {
 
-    protected $layout = "ajax";
+    protected layout = "ajax";
 
     void initialize() {
         super.initialize();

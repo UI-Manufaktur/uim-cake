@@ -20,7 +20,7 @@ class IsUnique
      *
      * @var array<string, mixed>
      */
-    protected $_options = ;
+    protected _options = ;
 
     /**
      * Constructor.

@@ -48,7 +48,7 @@ class RouteBuilder {
      *
      * @var array<string>
      */
-    protected $_extensions = [];
+    protected _extensions = [];
 
     /**
      * The path prefix scope that this collection uses.
@@ -60,7 +60,7 @@ class RouteBuilder {
      *
      * @var array
      */
-    protected $_params;
+    protected _params;
 
     /**
      * Name prefix for connected routes.
@@ -72,7 +72,7 @@ class RouteBuilder {
      *
      * @var \Cake\Routing\RouteCollection
      */
-    protected $_collection;
+    protected _collection;
 
     /**
      * The list of middleware that routes in this builder get

@@ -18,10 +18,10 @@ class PersistenceFailedException : CakeException
      *
      * @var \Cake\Datasource\IEntity
      */
-    protected $_entity;
+    protected _entity;
 
 
-    protected $_messageTemplate = "Entity %s failure.";
+    protected _messageTemplate = "Entity %s failure.";
 
     /**
      * Constructor.

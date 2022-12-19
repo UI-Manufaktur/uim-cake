@@ -29,21 +29,21 @@ class ProgressHelper : Helper
      *
      * @var float|int
      */
-    protected $_progress = 0;
+    protected _progress = 0;
 
     /**
      * The total number of "items" to progress through.
      *
      * @var int
      */
-    protected $_total = 0;
+    protected _total = 0;
 
     /**
      * The width of the bar.
      *
      * @var int
      */
-    protected $_width = 0;
+    protected _width = 0;
 
     /**
      * Output a progress bar.

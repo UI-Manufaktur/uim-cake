@@ -15,5 +15,5 @@ class MissingEntityException : CakeException
     /**
      * @var string
      */
-    protected $_messageTemplate = "Entity class %s could not be found.";
+    protected _messageTemplate = "Entity class %s could not be found.";
 }

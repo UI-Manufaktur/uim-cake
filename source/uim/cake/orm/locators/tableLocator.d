@@ -20,14 +20,14 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @var array<string, array|null>
      */
-    protected $_config = [];
+    protected _config = [];
 
     /**
      * Instances that belong to the registry.
      *
      * @var array<string, \Cake\ORM\Table>
      */
-    protected $instances = [];
+    protected instances = [];
 
     /**
      * Contains a list of Table objects that were created out of the
@@ -35,7 +35,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @var array<\Cake\ORM\Table>
      */
-    protected $_fallbacked = [];
+    protected _fallbacked = [];
 
     /**
      * Fallback class to use
@@ -43,14 +43,14 @@ class TableLocator : AbstractLocator : ILocator
      * @var string
      * @psalm-var class-string<\Cake\ORM\Table>
      */
-    protected $fallbackClassName = Table::class;
+    protected fallbackClassName = Table::class;
 
     /**
      * Whether fallback class should be used if a table class could not be found.
      *
      * @var bool
      */
-    protected $allowFallbackClass = true;
+    protected allowFallbackClass = true;
 
     /**
      * Constructor.

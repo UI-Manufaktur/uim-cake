@@ -18,7 +18,7 @@ trait StringTemplateTrait
      *
      * @var \Cake\View\StringTemplate|null
      */
-    protected $_templater;
+    protected _templater;
 
     /**
      * Sets templates to use.

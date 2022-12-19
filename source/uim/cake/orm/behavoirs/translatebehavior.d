@@ -54,7 +54,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @var \Cake\ORM\Behavior\Translate\ITranslateStrategy|null
      */
-    protected $strategy;
+    protected strategy;
 
     /**
      * Constructor
