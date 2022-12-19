@@ -73,8 +73,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @return array<string>
      */
-    array getMethods()
-    {
+    array getMethods() {
         return this.methods;
     }
 
@@ -112,8 +111,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @return array<\Closure>
      */
-    array getParsers()
-    {
+    array getParsers() {
         return this.parsers;
     }
 

@@ -96,8 +96,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         if (method_exists(this, "buildValidator")) {
             return [
                 self::BUILD_VALIDATOR_EVENT: "buildValidator",
@@ -319,8 +318,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         $special = [
             "_schema":this.getSchema().__debugInfo(),
             "_errors":this.getErrors(),

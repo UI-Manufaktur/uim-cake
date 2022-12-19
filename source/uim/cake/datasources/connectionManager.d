@@ -66,8 +66,7 @@ class ConnectionManager
      * @throws \Cake\Core\Exception\CakeException When trying to modify an existing config.
      * @see \Cake\Core\StaticConfigTrait::config()
      */
-    static void setConfig(myKey, myConfig = null)
-    {
+    static void setConfig(myKey, myConfig = null) {
         if (is_array(myConfig)) {
             myConfig["name"] = myKey;
         }
@@ -140,8 +139,7 @@ class ConnectionManager
      * @param string $source The existing connection to alias.
      * @param string myAlias The alias name that resolves to `$source`.
      */
-    static void alias(string $source, string myAlias)
-    {
+    static void alias(string $source, string myAlias) {
         static::$_aliasMap[myAlias] = $source;
     }
 
@@ -153,8 +151,7 @@ class ConnectionManager
      *
      * @param string myAlias The connection alias to drop
      */
-    static void dropAlias(string myAlias)
-    {
+    static void dropAlias(string myAlias) {
         unset(static::$_aliasMap[myAlias]);
     }
 

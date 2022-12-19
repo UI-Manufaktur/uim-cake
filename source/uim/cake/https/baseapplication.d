@@ -74,8 +74,7 @@ abstract class BaseApplication :
     abstract MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 
 
-    MiddlewareQueue pluginMiddleware(MiddlewareQueue $middleware)
-    {
+    MiddlewareQueue pluginMiddleware(MiddlewareQueue $middleware) {
         foreach (this.plugins.with("middleware") as myPlugin) {
             $middleware = myPlugin.middleware($middleware);
         }
@@ -119,8 +118,7 @@ abstract class BaseApplication :
      *
      * @return \Cake\Core\PluginCollection
      */
-    PluginCollection getPlugins()
-    {
+    PluginCollection getPlugins() {
         return this.plugins;
     }
 
@@ -170,14 +168,12 @@ abstract class BaseApplication :
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
-    CommandCollection console(CommandCollection $commands)
-    {
+    CommandCollection console(CommandCollection $commands) {
         return $commands.addMany($commands.autoDiscover());
     }
 
 
-    CommandCollection pluginConsole(CommandCollection $commands)
-    {
+    CommandCollection pluginConsole(CommandCollection $commands) {
         foreach (this.plugins.with("console") as myPlugin) {
             $commands = myPlugin.console($commands);
         }
@@ -193,8 +189,7 @@ abstract class BaseApplication :
      *
      * @return \Cake\Core\IContainer
      */
-    IContainer getContainer()
-    {
+    IContainer getContainer() {
         if (this.container == null) {
             this.container = this.buildContainer();
         }
@@ -210,8 +205,7 @@ abstract class BaseApplication :
      *
      * @return \Cake\Core\IContainer
      */
-    protected IContainer buildContainer()
-    {
+    protected IContainer buildContainer() {
         myContainer = new Container();
         this.services(myContainer);
         foreach (this.plugins.with("services") as myPlugin) {

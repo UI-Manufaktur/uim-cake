@@ -55,8 +55,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return \Psr\Http\Server\IMiddleware
      * @throws \RuntimeException If Middleware not found.
      */
-    protected IMiddleware resolve($middleware)
-    {
+    protected IMiddleware resolve($middleware) {
         if (is_string($middleware)) {
             myClassName = App::className($middleware, "Middleware", "Middleware");
             if (myClassName == null) {
@@ -228,8 +227,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return void
      * @see \SeekableIterator::seek()
      */
-    void seek($position)
-    {
+    void seek($position) {
         if (!isset(this.queue[$position])) {
             throw new OutOfBoundsException("Invalid seek position ($position)");
         }
@@ -243,8 +241,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return void
      * @see \Iterator::rewind()
      */
-    void rewind()
-    {
+    void rewind() {
         this.position = 0;
     }
 
@@ -254,8 +251,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return \Psr\Http\Server\IMiddleware
      * @see \Iterator::current()
      */
-    IMiddleware current()
-    {
+    IMiddleware current() {
         if (!isset(this.queue[this.position])) {
             throw new OutOfBoundsException("Invalid current position (this.position)");
         }

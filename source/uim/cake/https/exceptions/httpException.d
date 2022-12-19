@@ -49,8 +49,7 @@ class HttpException : CakeException {
      *
      * @return array
      */
-    array getHeaders()
-    {
+    array getHeaders() {
         return this.headers;
     }
 }

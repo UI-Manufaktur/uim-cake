@@ -71,8 +71,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\Message\IResponse $response The response to emit
      * @return void
      */
-    protected void emitBody(IResponse $response)
-    {
+    protected void emitBody(IResponse $response) {
         if (in_array($response.getStatusCode(), [204, 304], true)) {
             return;
         }
@@ -97,8 +96,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\Message\IResponse $response The response to emit
      * @return void
      */
-    protected void emitBodyRange(array $range, IResponse $response)
-    {
+    protected void emitBodyRange(array $range, IResponse $response) {
         [, $first, $last] = $range;
 
         $body = $response.getBody();
@@ -134,8 +132,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\Message\IResponse $response The response to emit
      * @return void
      */
-    protected void emitStatusLine(IResponse $response)
-    {
+    protected void emitStatusLine(IResponse $response) {
         $reasonPhrase = $response.getReasonPhrase();
         header(sprintf(
             "HTTP/%s %d%s",
@@ -186,8 +183,7 @@ class ResponseEmitter : EmitterInterface
      * @param array<\Cake\Http\Cookie\ICookie|string> $cookies An array of cookies.
      * @return void
      */
-    protected void emitCookies(array $cookies)
-    {
+    protected void emitCookies(array $cookies) {
         foreach ($cookies as $cookie) {
             this.setCookie($cookie);
         }
@@ -234,8 +230,7 @@ class ResponseEmitter : EmitterInterface
      * @param int|null $maxBufferLevel Flush up to this buffer level.
      * @return void
      */
-    protected void flush(Nullable!int $maxBufferLevel = null)
-    {
+    protected void flush(Nullable!int $maxBufferLevel = null) {
         if ($maxBufferLevel == null) {
             $maxBufferLevel = ob_get_level();
         }

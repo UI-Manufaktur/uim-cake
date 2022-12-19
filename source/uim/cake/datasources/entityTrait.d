@@ -104,8 +104,7 @@ trait EntityTrait
      * @param string myField The name of the field to set
      * @param mixed myValue The value to set to the field
      */
-    void __set(string myField, myValue)
-    {
+    void __set(string myField, myValue) {
         this.set(myField, myValue);
     }
 
@@ -126,8 +125,7 @@ trait EntityTrait
      *
      * @param string myField The field to unset
      */
-    void __unset(string myField)
-    {
+    void __unset(string myField) {
         this.unset(myField);
     }
 
@@ -717,8 +715,7 @@ trait EntityTrait
      * no fields being modified or added at all. This is an useful call
      * for an initial object hydration
      */
-    void clean()
-    {
+    void clean() {
         this._dirty = [];
         this._errors = [];
         this._invalid = [];

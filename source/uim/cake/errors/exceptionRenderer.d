@@ -242,8 +242,7 @@ class ExceptionRenderer : IExceptionRenderer
      * @param \Throwable myException The exception to render.
      * @return \Cake\Http\Response The response to send.
      */
-    protected Response _customMethod(string $method, Throwable myException)
-    {
+    protected Response _customMethod(string $method, Throwable myException) {
         myResult = this.{$method}(myException);
         this._shutdown();
         if (is_string(myResult)) {
@@ -336,8 +335,7 @@ class ExceptionRenderer : IExceptionRenderer
      * @param string myTemplate The template to render.
      * @return \Cake\Http\Response A response object that can be sent.
      */
-    protected Response _outputMessage(string myTemplate)
-    {
+    protected Response _outputMessage(string myTemplate) {
         try {
             this.controller.render(myTemplate);
 
@@ -371,8 +369,7 @@ class ExceptionRenderer : IExceptionRenderer
      * @param string myTemplate The template to render.
      * @return \Cake\Http\Response A response object that can be sent.
      */
-    protected Response _outputMessageSafe(string myTemplate)
-    {
+    protected Response _outputMessageSafe(string myTemplate) {
         myBuilder = this.controller.viewBuilder();
         myBuilder
             .setHelpers([], false)
@@ -395,8 +392,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * @return \Cake\Http\Response The response to serve.
      */
-    protected Response _shutdown()
-    {
+    protected Response _shutdown() {
         this.controller.dispatchEvent("Controller.shutdown");
 
         return this.controller.getResponse();

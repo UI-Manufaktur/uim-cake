@@ -143,8 +143,7 @@ class FormProtector
      * @return Array of field name params like ["Model.field"] or
      *   ["Model", "field"] for array fields or empty array if myName is empty.
      */
-    protected string[] getFieldNameArray(string myName)
-    {
+    protected string[] getFieldNameArray(string myName) {
         if (empty(myName) && myName !== "0") {
             return [];
         }
@@ -251,8 +250,7 @@ class FormProtector
      * @return array
      * @psalm-return array{fields: array, unlockedFields: array}
      */
-    protected array extractHashParts(array $formData)
-    {
+    protected array extractHashParts(array $formData) {
         myFields = this.extractFields($formData);
         $unlockedFields = this.sortedUnlockedFields($formData);
 
@@ -268,8 +266,7 @@ class FormProtector
      * @param array $formData Data array
      * @return array
      */
-    protected array extractFields(array $formData)
-    {
+    protected array extractFields(array $formData) {
         $locked = "";
         $token = urldecode($formData["_Token"]["fields"]);
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
@@ -338,8 +335,7 @@ class FormProtector
      * Get the sorted unlocked string
      * @param array $formData Data array
      */
-    protected string[] sortedUnlockedFields(array $formData)
-    {
+    protected string[] sortedUnlockedFields(array $formData) {
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
         if (empty($unlocked)) {
             return [];
@@ -552,8 +548,7 @@ class FormProtector
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         return [
             "fields":this.fields,
             "unlockedFields":this.unlockedFields,

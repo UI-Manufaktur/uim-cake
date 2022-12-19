@@ -98,8 +98,7 @@ class QueryCompiler {
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
      * @return \Closure
      */
-    protected Closure _sqlCompiler(string &mySql, Query myQuery, ValueBinder $binder)
-    {
+    protected Closure _sqlCompiler(string &mySql, Query myQuery, ValueBinder $binder) {
         return function ($part, $partName) use (&mySql, myQuery, $binder) {
             if (
                 $part == null ||

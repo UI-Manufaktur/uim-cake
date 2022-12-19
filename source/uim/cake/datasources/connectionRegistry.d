@@ -21,8 +21,7 @@ class ConnectionRegistry : ObjectRegistry
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected Nullable!string _resolveClassName(string myClass)
-    {
+    protected Nullable!string _resolveClassName(string myClass) {
         return App::className(myClass, "Datasource");
     }
 
@@ -35,8 +34,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param string|null myPlugin The plugin the datasource is missing in.
      * @throws \Cake\Datasource\Exception\MissingDatasourceException
      */
-    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin)
-    {
+    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingDatasourceException([
             "class": myClass,
             "plugin": myPlugin,

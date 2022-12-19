@@ -106,8 +106,7 @@ class FormDataPart
      * @param string|null $id The content id.
      * @return string|null
      */
-    Nullable!string contentId(Nullable!string $id = null)
-    {
+    Nullable!string contentId(Nullable!string $id = null) {
         if ($id == null) {
             return this._contentId;
         }
@@ -154,8 +153,7 @@ class FormDataPart
      * @param string|null myType The type of encoding the value has.
      * @return string|null
      */
-    Nullable!string transferEncoding(Nullable!string myType)
-    {
+    Nullable!string transferEncoding(Nullable!string myType) {
         if (myType == null) {
             return this._transferEncoding;
         }

@@ -288,8 +288,7 @@ class Session
      * @return void
      * @throws \RuntimeException if any directive could not be set
      */
-    void options(array myOptions)
-    {
+    void options(array myOptions) {
         if (session_status() == \PHP_SESSION_ACTIVE || headers_sent()) {
             return;
         }
@@ -465,8 +464,7 @@ class Session
      * @param mixed myValue Value to write
      * @return void
      */
-    void write(myName, myValue = null)
-    {
+    void write(myName, myValue = null) {
         if (!this.started()) {
             this.start();
         }
@@ -512,8 +510,7 @@ class Session
      * @param string myName Session variable to remove
      * @return void
      */
-    void delete(string myName)
-    {
+    void delete(string myName) {
         if (this.check(myName)) {
             this._overwrite($_SESSION, Hash::remove($_SESSION, myName));
         }
@@ -526,8 +523,7 @@ class Session
      * @param array $new New set of variable: value
      * @return void
      */
-    protected void _overwrite(array &$old, array $new)
-    {
+    protected void _overwrite(array &$old, array $new) {
         if (!empty($old)) {
             foreach ($old as myKey: $var) {
                 if (!isset($new[myKey])) {
@@ -545,8 +541,7 @@ class Session
      *
      * @return void
      */
-    void destroy()
-    {
+    void destroy() {
         if (this._hasSession() && !this.started()) {
             this.start();
         }
@@ -586,8 +581,7 @@ class Session
      *
      * @return void
      */
-    void renew()
-    {
+    void renew() {
         if (!this._hasSession() || this._isCLI) {
             return;
         }

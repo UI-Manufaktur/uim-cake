@@ -176,8 +176,7 @@ class CookieCollection : IteratorAggregate, Countable {
      *
      * @return \Traversable<string, \Cake\Http\Cookie\ICookie>
      */
-    Traversable getIterator()
-    {
+    Traversable getIterator() {
         return new ArrayIterator(this.cookies);
     }
 
@@ -294,8 +293,7 @@ class CookieCollection : IteratorAggregate, Countable {
      * @param string myPath The path to check for expired cookies on.
      * @return void
      */
-    protected void removeExpiredCookies(string $host, string myPath)
-    {
+    protected void removeExpiredCookies(string $host, string myPath) {
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         $hostPattern = "/" . preg_quote($host, "/") . "$/";
 

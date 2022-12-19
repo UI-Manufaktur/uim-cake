@@ -62,8 +62,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::$_defaultConfig For default values for the options.
      */
-    void set(myMessage, array myOptions = [])
-    {
+    void set(myMessage, array myOptions = []) {
         myOptions += (array)this.getConfig();
 
         if (isset(myOptions["escape"]) && !isset(myOptions["params"]["escape"])) {
@@ -118,8 +117,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void setExceptionMessage(Throwable myException, array myOptions = [])
-    {
+    void setExceptionMessage(Throwable myException, array myOptions = []) {
         myOptions["element"] = myOptions["element"] ?? "error";
         myOptions["params"]["code"] = myOptions["params"]["code"] ?? myException.getCode();
 
@@ -148,8 +146,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void success(string myMessage, array myOptions = [])
-    {
+    void success(string myMessage, array myOptions = []) {
         myOptions["element"] = "success";
         this.set(myMessage, myOptions);
     }
@@ -164,8 +161,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void error(string myMessage, array myOptions = [])
-    {
+    void error(string myMessage, array myOptions = []) {
         myOptions["element"] = "error";
         this.set(myMessage, myOptions);
     }
@@ -180,8 +176,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void warning(string myMessage, array myOptions = [])
-    {
+    void warning(string myMessage, array myOptions = []) {
         myOptions["element"] = "warning";
         this.set(myMessage, myOptions);
     }

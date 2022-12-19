@@ -58,8 +58,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\IExpression $expression The expression object to walk and quote.
      */
-    void quoteExpression(IExpression $expression)
-    {
+    void quoteExpression(IExpression $expression) {
         if ($expression instanceof FieldInterface) {
             this._quoteComparison($expression);
 
@@ -84,8 +83,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Query myQuery The query to quote.
      */
-    protected void _quoteParts(Query myQuery)
-    {
+    protected void _quoteParts(Query myQuery) {
         foreach (["distinct", "select", "from", "group"] as $part) {
             myContentss = myQuery.clause($part);
 
@@ -112,8 +110,7 @@ class IdentifierQuoter
      * @param array $part the part of the query to quote
      * @return array
      */
-    protected array _basicQuoter(array $part)
-    {
+    protected array _basicQuoter(array $part) {
         myResult = [];
         foreach ($part as myAlias: myValue) {
             myValue = !is_string(myValue) ? myValue : this._driver.quoteIdentifier(myValue);
@@ -153,8 +150,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Query myQuery The insert query to quote.
      */
-    protected auto _quoteInsert(Query myQuery)
-    {
+    protected auto _quoteInsert(Query myQuery) {
         $insert = myQuery.clause("insert");
         if (!isset($insert[0]) || !isset($insert[1])) {
             return;
@@ -174,8 +170,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Query myQuery The update query to quote.
      */
-    protected void _quoteUpdate(Query myQuery)
-    {
+    protected void _quoteUpdate(Query myQuery) {
         myTable = myQuery.clause("update")[0];
 
         if (is_string(myTable)) {
@@ -188,8 +183,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Expression\FieldInterface $expression The expression to quote.
      */
-    protected void _quoteComparison(FieldInterface $expression)
-    {
+    protected void _quoteComparison(FieldInterface $expression) {
         myField = $expression.getField();
         if (is_string(myField)) {
             $expression.setField(this._driver.quoteIdentifier(myField));
@@ -212,8 +206,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Expression\OrderByExpression $expression The expression to quote.
      */
-    protected void _quoteOrderBy(OrderByExpression $expression)
-    {
+    protected void _quoteOrderBy(OrderByExpression $expression) {
         $expression.iterateParts(function ($part, &myField) {
             if (is_string(myField)) {
                 myField = this._driver.quoteIdentifier(myField);
@@ -233,8 +226,7 @@ class IdentifierQuoter
      *
      * @param \Cake\Database\Expression\IdentifierExpression $expression The identifiers to quote.
      */
-    protected void _quoteIdentifierExpression(IdentifierExpression $expression)
-    {
+    protected void _quoteIdentifierExpression(IdentifierExpression $expression) {
         $expression.setIdentifier(
             this._driver.quoteIdentifier($expression.getIdentifier())
         );

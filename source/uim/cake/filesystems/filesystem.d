@@ -34,8 +34,7 @@ class Filesystem
      * @param int|null $flags Flags for FilesystemIterator::this();
      * @return \Iterator
      */
-    Iterator find(string myPath, $filter = null, Nullable!int $flags = null)
-    {
+    Iterator find(string myPath, $filter = null, Nullable!int $flags = null) {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO
             | FilesystemIterator::SKIP_DOTS;
@@ -58,8 +57,7 @@ class Filesystem
      * @param int|null $flags Flags for FilesystemIterator::this();
      * @return \Iterator
      */
-    Iterator findRecursive(string myPath, $filter = null, Nullable!int $flags = null)
-    {
+    Iterator findRecursive(string myPath, $filter = null, Nullable!int $flags = null) {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO
             | FilesystemIterator::SKIP_DOTS;
@@ -95,8 +93,7 @@ class Filesystem
      * @param mixed $filter Regex string or callback.
      * @return \Iterator
      */
-    protected Iterator filterIterator(Iterator $iterator, $filter)
-    {
+    protected Iterator filterIterator(Iterator $iterator, $filter) {
         if (is_string($filter)) {
             return new RegexIterator($iterator, $filter);
         }
@@ -144,8 +141,7 @@ class Filesystem
      * @return void
      * @throws \Cake\Core\Exception\CakeException When directory creation fails.
      */
-    void mkdir(string $dir, int myMode = 0755)
-    {
+    void mkdir(string $dir, int myMode = 0755) {
         if (is_dir($dir)) {
             return;
         }

@@ -14,8 +14,7 @@ import uim.cake;
 class Curl : IAdapter
 {
 
-    array send(RequestInterface myRequest, array myOptions)
-    {
+    array send(RequestInterface myRequest, array myOptions) {
         if (!extension_loaded("curl")) {
             throw new ClientException("curl extension is not loaded.");
         }
@@ -56,8 +55,7 @@ class Curl : IAdapter
      * @param array<string, mixed> myOptions The client options
      * @return array
      */
-    array buildOptions(RequestInterface myRequest, array myOptions)
-    {
+    array buildOptions(RequestInterface myRequest, array myOptions) {
         $headers = [];
         foreach (myRequest.getHeaders() as myKey: myValues) {
             $headers[] = myKey . ": " . implode(", ", myValues);

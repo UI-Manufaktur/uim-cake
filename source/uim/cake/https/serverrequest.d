@@ -724,8 +724,7 @@ class ServerRequest : IServerRequest
      * @return array<string[]> An associative array of headers and their values.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    array getHeaders()
-    {
+    array getHeaders() {
         $headers = [];
         foreach (this._environment as myKey: myValue) {
             myName = null;
@@ -769,8 +768,7 @@ class ServerRequest : IServerRequest
      *   If the header doesn"t exist, an empty array will be returned.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string[] getHeader(myName)
-    {
+    string[] getHeader(myName) {
         myName = this.normalizeHeaderName(myName);
         if (isset(this._environment[myName])) {
             return (array)this._environment[myName];
@@ -898,8 +896,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    array getServerParams()
-    {
+    array getServerParams() {
         return this._environment;
     }
 
@@ -910,8 +907,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    array getQueryParams()
-    {
+    array getQueryParams() {
         return this.query;
     }
 
@@ -996,8 +992,7 @@ class ServerRequest : IServerRequest
      *   While `example.co.uk` contains 2.
      * @return An array of subdomains.
      */
-    string[] subdomains(int $tldLength = 1)
-    {
+    string[] subdomains(int $tldLength = 1) {
         $host = this.host();
         if (empty($host)) {
             return [];
@@ -1053,8 +1048,7 @@ class ServerRequest : IServerRequest
      *
      * @return array An array of `prefValue: [content/types]`
      */
-    array parseAccept()
-    {
+    array parseAccept() {
         return this._parseAcceptWithQualifier(this.getHeaderLine("Accept"));
     }
 
@@ -1100,8 +1094,7 @@ class ServerRequest : IServerRequest
      * @param string $header Header to parse.
      * @return array
      */
-    protected array _parseAcceptWithQualifier(string $header)
-    {
+    protected array _parseAcceptWithQualifier(string $header) {
         $accept = [];
         $headers = explode(",", $header);
         foreach (array_filter($headers) as myValue) {
@@ -1271,8 +1264,7 @@ class ServerRequest : IServerRequest
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    CookieCollection getCookieCollection()
-    {
+    CookieCollection getCookieCollection() {
         return CookieCollection::createFromServerRequest(this);
     }
 
@@ -1299,8 +1291,7 @@ class ServerRequest : IServerRequest
      *
      * @return array An array of cookie data.
      */
-    array getCookieParams()
-    {
+    array getCookieParams() {
         return this.cookies;
     }
 
@@ -1588,8 +1579,7 @@ class ServerRequest : IServerRequest
      *
      * @return array
      */
-    array getAttributes()
-    {
+    array getAttributes() {
         $emulated = [
             "params":this.params,
             "webroot":this.webroot,
@@ -1621,8 +1611,7 @@ class ServerRequest : IServerRequest
      *
      * @return array
      */
-    array getUploadedFiles()
-    {
+    array getUploadedFiles() {
         return this.uploadedFiles;
     }
 

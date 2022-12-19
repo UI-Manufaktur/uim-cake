@@ -49,8 +49,7 @@ trait ModelAwareTrait
      *
      * @param string myName Class name.
      */
-    protected void _setModelClass(string myName)
-    {
+    protected void _setModelClass(string myName) {
         if (this.modelClass == null) {
             this.modelClass = myName;
         }
@@ -120,8 +119,7 @@ trait ModelAwareTrait
      * @param string myType The name of the repository type the factory function is for.
      * @param \Cake\Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      */
-    void modelFactory(string myType, $factory)
-    {
+    void modelFactory(string myType, $factory) {
         if (!$factory instanceof ILocator && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
                 "`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable."

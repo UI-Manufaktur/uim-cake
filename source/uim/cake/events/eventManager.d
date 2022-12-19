@@ -108,8 +108,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\IEventListener $subscriber Event listener.
      * @return void
      */
-    protected void _attachSubscriber(IEventListener $subscriber)
-    {
+    protected void _attachSubscriber(IEventListener $subscriber) {
         foreach ($subscriber.implementedEvents() as myEventKey: $function) {
             myOptions = [];
             $method = $function;

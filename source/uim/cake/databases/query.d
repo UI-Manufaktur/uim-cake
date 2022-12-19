@@ -181,8 +181,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\IStatement
      */
-    IStatement execute()
-    {
+    IStatement execute() {
         $statement = this._connection.run(this);
         this._iterator = this._decorateStatement($statement);
         this._dirty = false;
@@ -1591,8 +1590,7 @@ class Query : IExpression, IteratorAggregate {
      * @param string myIdentifier The identifier for an expression
      * @return \Cake\Database\IExpression
      */
-    IExpression identifier(string myIdentifier)
-    {
+    IExpression identifier(string myIdentifier) {
         return new IdentifierExpression(myIdentifier);
     }
 
@@ -1782,8 +1780,7 @@ class Query : IExpression, IteratorAggregate {
      * @param \Cake\Database\IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
      * @return \Cake\Database\Expression\QueryExpression
      */
-    QueryExpression newExpr($rawExpression = null)
-    {
+    QueryExpression newExpr($rawExpression = null) {
         $expression = new QueryExpression([], this.getTypeMap());
 
         if ($rawExpression !== null) {
@@ -1806,8 +1803,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\FunctionsBuilder
      */
-    FunctionsBuilder func()
-    {
+    FunctionsBuilder func() {
         if (this._functionsBuilder == null) {
             this._functionsBuilder = new FunctionsBuilder();
         }
@@ -1946,8 +1942,7 @@ class Query : IExpression, IteratorAggregate {
      * @param \Closure $callback The callback to be executed for each IExpression
      *   found inside this query.
      */
-    protected void _expressionsVisitor($expression, Closure $callback)
-    {
+    protected void _expressionsVisitor($expression, Closure $callback) {
         if (is_array($expression)) {
             foreach ($expression as $e) {
                 this._expressionsVisitor($e, $callback);
@@ -1996,8 +1991,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\ValueBinder
      */
-    ValueBinder getValueBinder()
-    {
+    ValueBinder getValueBinder() {
         if (this._valueBinder == null) {
             this._valueBinder = new ValueBinder();
         }
@@ -2090,8 +2084,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\TypeMap
      */
-    TypeMap getSelectTypeMap()
-    {
+    TypeMap getSelectTypeMap() {
         if (this._selectTypeMap == null) {
             this._selectTypeMap = new TypeMap();
         }
@@ -2173,8 +2166,7 @@ class Query : IExpression, IteratorAggregate {
      * @param string $conjunction type of conjunction to be used to operate part
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
      */
-    protected void _conjugate(string $part, $append, $conjunction, array myTypes)
-    {
+    protected void _conjugate(string $part, $append, $conjunction, array myTypes) {
         $expression = this._parts[$part] ?: this.newExpr();
         if (empty($append)) {
             this._parts[$part] = $expression;
@@ -2202,8 +2194,7 @@ class Query : IExpression, IteratorAggregate {
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching.
      */
-    protected void _dirty()
-    {
+    protected void _dirty() {
         this._dirty = true;
 
         if (this._iterator && this._valueBinder) {
@@ -2258,8 +2249,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         try {
             set_error_handler(
                 /** @return no-return */

@@ -271,8 +271,7 @@ class Response : Message : IResponse
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    CookieCollection getCookieCollection()
-    {
+    CookieCollection getCookieCollection() {
         this.buildCookieCollection();
 
         return this.cookies;

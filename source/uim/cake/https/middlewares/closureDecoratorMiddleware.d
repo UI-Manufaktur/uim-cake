@@ -54,8 +54,7 @@ class ClosureDecoratorMiddleware : IMiddleware
      * @internal
      * @return callable
      */
-    callable getCallable()
-    {
+    callable getCallable() {
         return this.callable;
     }
 }

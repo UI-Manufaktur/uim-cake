@@ -83,8 +83,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\IRepository
      */
-    IRepository getRepository()
-    {
+    IRepository getRepository() {
         return this._repository;
     }
 
@@ -198,8 +197,7 @@ trait QueryTrait
      * @param string|null myAlias the alias used to prefix the field
      * @return array
      */
-    array aliasField(string myField, Nullable!string myAlias = null)
-    {
+    array aliasField(string myField, Nullable!string myAlias = null) {
         if (strpos(myField, ".") == false) {
             myAlias = myAlias ?: this.getRepository().getAlias();
             myAliasedField = myAlias . "." . myField;
@@ -244,8 +242,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\IResultSet
      */
-    IResultSet all()
-    {
+    IResultSet all() {
         if (this._results !== null) {
             return this._results;
         }
@@ -270,8 +267,7 @@ trait QueryTrait
      *
      * @return array
      */
-    array toArray()
-    {
+    array toArray() {
         return this.all().toArray();
     }
 
@@ -312,8 +308,7 @@ trait QueryTrait
      *
      * @return array
      */
-    array getMapReducers()
-    {
+    array getMapReducers() {
         return this._mapReduce;
     }
 
@@ -437,8 +432,7 @@ trait QueryTrait
      *
      * @return array<callable>
      */
-    array getResultFormatters()
-    {
+    array getResultFormatters() {
         return this._formatters;
     }
 
@@ -497,8 +491,7 @@ trait QueryTrait
      * @return array
      * @see applyOptions()
      */
-    array getOptions()
-    {
+    array getOptions() {
         return this._options;
     }
 
@@ -549,8 +542,7 @@ trait QueryTrait
      * @param \Traversable myResult Original results
      * @return \Cake\Datasource\IResultSet
      */
-    protected IResultSet _decorateResults(Traversable myResult)
-    {
+    protected IResultSet _decorateResults(Traversable myResult) {
         $decorator = this._decoratorClass();
         foreach (this._mapReduce as $functions) {
             myResult = new MapReduce(myResult, $functions["mapper"], $functions["reducer"]);

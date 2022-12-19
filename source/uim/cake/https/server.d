@@ -92,8 +92,7 @@ class Server : IEventDispatcher
      *
      * @return void
      */
-    protected void bootstrap()
-    {
+    protected void bootstrap() {
         this.app.bootstrap();
         if (this.app instanceof PluginApplicationInterface) {
             this.app.pluginBootstrap();

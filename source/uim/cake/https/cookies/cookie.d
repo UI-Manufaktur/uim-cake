@@ -170,8 +170,7 @@ class Cookie : ICookie
      * @param array<string, mixed> myOptions Default options.
      * @return void
      */
-    static void setDefaults(array myOptions)
-    {
+    static void setDefaults(array myOptions) {
         if (isset(myOptions["expires"])) {
             myOptions["expires"] = static::dateTimeInstance(myOptions["expires"]);
         }
@@ -361,8 +360,7 @@ class Cookie : ICookie
      * @throws \InvalidArgumentException
      * @link https://tools.ietf.org/html/rfc2616#section-2.2 Rules for naming cookies.
      */
-    protected void validateName(string myName)
-    {
+    protected void validateName(string myName) {
         if (preg_match("/[=,;\t\r\n\013\014]/", myName)) {
             throw new InvalidArgumentException(
                 sprintf("The cookie name `%s` contains invalid characters.", myName)
@@ -417,8 +415,7 @@ class Cookie : ICookie
      * @param array|string myValue The value to store.
      * @return void
      */
-    protected void _setValue(myValue)
-    {
+    protected void _setValue(myValue) {
         this.isExpanded = is_array(myValue);
         this.value = myValue;
     }
@@ -533,8 +530,7 @@ class Cookie : ICookie
     }
 
 
-    Nullable!string getSameSite()
-    {
+    Nullable!string getSameSite() {
         return this.sameSite;
     }
 

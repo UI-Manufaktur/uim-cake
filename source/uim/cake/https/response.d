@@ -452,8 +452,7 @@ class Response : IResponse
      * @param string myType The type to set.
      * @return void
      */
-    protected void _setContentType(string myType)
-    {
+    protected void _setContentType(string myType) {
         if (in_array(this._status, [304, 204], true)) {
             this._clearHeader("Content-Type");
 
@@ -519,8 +518,7 @@ class Response : IResponse
      * @param string $header Header key.
      * @return void
      */
-    protected void _clearHeader(string $header)
-    {
+    protected void _clearHeader(string $header) {
         $normalized = strtolower($header);
         if (!isset(this.headerNames[$normalized])) {
             return;
@@ -585,8 +583,7 @@ class Response : IResponse
      * @return void
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    protected void _setStatus(int $code, string $reasonPhrase = "")
-    {
+    protected void _setStatus(int $code, string $reasonPhrase = "") {
         if ($code < static::STATUS_CODE_MIN || $code > static::STATUS_CODE_MAX) {
             throw new InvalidArgumentException(sprintf(
                 "Invalid status code: %s. Use a valid HTTP status code in range 1xx - 5xx.",
@@ -634,8 +631,7 @@ class Response : IResponse
      * @param array<string>|string $mimeType Definition of the mime type.
      * @return void
      */
-    void setTypeMap(string myType, $mimeType)
-    {
+    void setTypeMap(string myType, $mimeType) {
         this._mimeTypes[myType] = $mimeType;
     }
 
@@ -863,8 +859,7 @@ class Response : IResponse
      *
      * @return void
      */
-    protected void _setCacheControl()
-    {
+    protected void _setCacheControl() {
         $control = "";
         foreach (this._cacheDirectives as myKey: $val) {
             $control .= $val == true ? myKey : sprintf("%s=%s", myKey, $val);
@@ -927,8 +922,7 @@ class Response : IResponse
      *
      * @return void
      */
-    void notModified()
-    {
+    void notModified() {
         this._createStream();
         this._setStatus(304);
 
@@ -1023,8 +1017,7 @@ class Response : IResponse
      * @param \IDateTime|string|int|null $time Valid time string or \IDateTime instance.
      * @return \IDateTime
      */
-    protected IDateTime _getUTCDate($time = null)
-    {
+    protected IDateTime _getUTCDate($time = null) {
         if ($time instanceof IDateTime) {
             myResult = clone $time;
         } elseif (is_int($time)) {
@@ -1432,8 +1425,7 @@ class Response : IResponse
      * @param string $httpRange The range to use.
      * @return void
      */
-    protected void _fileRange(SplFileInfo myfile, string $httpRange)
-    {
+    protected void _fileRange(SplFileInfo myfile, string $httpRange) {
         myfileSize = myfile.getSize();
         $lastByte = myfileSize - 1;
         $start = 0;
