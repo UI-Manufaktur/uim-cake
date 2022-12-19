@@ -53,8 +53,7 @@ class PluginAssetsRemoveCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser)
-    {
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription([
             "Remove plugin assets from app\"s webroot.",
         ]).addArgument("name", [

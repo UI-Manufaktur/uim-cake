@@ -103,8 +103,7 @@ class SecurityComponent : Component {
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [
             "Controller.startup":"startup",
         ];
@@ -249,8 +248,7 @@ class SecurityComponent : Component {
      * Return hash parts for the Token generation
      * @param \Cake\Controller\Controller $controller Instantiating controller
      */
-    protected string[] _hashParts(Controller $controller)
-    {
+    protected string[] _hashParts(Controller $controller) {
         myRequest = $controller.getRequest();
 
         // Start the session to ensure we get the correct session id.
@@ -275,8 +273,7 @@ class SecurityComponent : Component {
      * @param array $check Data array
      * @return array
      */
-    protected array _fieldsList(array $check)
-    {
+    protected array _fieldsList(array $check) {
         $locked = "";
         $token = urldecode($check["_Token"]["fields"]);
         $unlocked = this._unlocked($check);
@@ -447,8 +444,7 @@ class SecurityComponent : Component {
      * @param \Cake\Http\ServerRequest myRequest The request object to add into.
      * @return \Cake\Http\ServerRequest The modified request.
      */
-    ServerRequest generateToken(ServerRequest myRequest)
-    {
+    ServerRequest generateToken(ServerRequest myRequest) {
         $token = [
             "unlockedFields":this._config["unlockedFields"],
         ];

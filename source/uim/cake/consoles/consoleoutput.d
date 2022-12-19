@@ -240,8 +240,7 @@ class ConsoleOutput {
      * @param string $style The style to get.
      * @return array The style or empty array.
      */
-    auto getStyle(string $style)
-    {
+    auto getStyle(string $style) {
         return static::$_styles[$style] ?? [];
     }
 

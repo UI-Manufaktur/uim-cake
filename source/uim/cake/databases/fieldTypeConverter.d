@@ -102,8 +102,7 @@ class FieldTypeConverter
      *
      * @param array $row The array with the fields to be casted
      */
-    array __invoke(array $row)
-    {
+    array __invoke(array $row) {
         if (!empty(this._typeMap)) {
             foreach (this._typeMap as myField: myType) {
                 $row[myField] = myType.toPHP($row[myField], this._driver);

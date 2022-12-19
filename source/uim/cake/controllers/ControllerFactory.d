@@ -50,8 +50,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @return \Cake\Controller\Controller
      * @throws \Cake\Http\Exception\MissingControllerException
      */
-    Controller create(IServerRequest myRequest)
-    {
+    Controller create(IServerRequest myRequest) {
         myClassName = this.getControllerClass(myRequest);
         if (myClassName == null) {
             throw this.missingController(myRequest);
@@ -82,8 +81,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
-    IResponse invoke($controller)
-    {
+    IResponse invoke($controller) {
         this.controller = $controller;
 
         $middlewares = $controller.getMiddleware();
@@ -104,8 +102,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @param \Psr\Http\Message\IServerRequest myRequest Request instance.
      * @return \Psr\Http\Message\IResponse
      */
-    IResponse handle(IServerRequest myRequest)
-    {
+    IResponse handle(IServerRequest myRequest) {
         $controller = this.controller;
         /** @psalm-suppress ArgumentTypeCoercion */
         $controller.setRequest(myRequest);
@@ -137,8 +134,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @param array $passedParams Params passed by the router.
      * @return array
      */
-    protected array getActionArgs(Closure $action, array $passedParams)
-    {
+    protected array getActionArgs(Closure $action, array $passedParams) {
         $resolved = [];
         $function = new ReflectionFunction($action);
         foreach ($function.getParameters() as $parameter) {
@@ -259,8 +255,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @return string|null
      * @psalm-return class-string<\Cake\Controller\Controller>|null
      */
-    Nullable!string getControllerClass(ServerRequest myRequest)
-    {
+    Nullable!string getControllerClass(ServerRequest myRequest) {
         myPluginPath = "";
         $module = "Controller";
         $controller = myRequest.getParam("controller", "");

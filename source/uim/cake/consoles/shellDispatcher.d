@@ -286,8 +286,7 @@ class ShellDispatcher
      * @return \Cake\Console\Shell A shell instance.
      * @throws \Cake\Console\Exception\MissingShellException when errors are encountered.
      */
-    Shell findShell(string myShell)
-    {
+    Shell findShell(string myShell) {
         myClassName = this._shellExists(myShell);
         if (!myClassName) {
             myShell = this._handleAlias(myShell);

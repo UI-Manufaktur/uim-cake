@@ -218,8 +218,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param \Cake\Controller\ComponentRegistry|null $components Component registry.
      * @return \Cake\Controller\ComponentRegistry
      */
-    ComponentRegistry components(?ComponentRegistry $components = null)
-    {
+    ComponentRegistry components(?ComponentRegistry $components = null) {
         if ($components !== null) {
             $components.setController(this);
 
@@ -250,8 +249,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Controller\Component
      * @throws \Exception
      */
-    Component loadComponent(string myName, array myConfig = [])
-    {
+    Component loadComponent(string myName, array myConfig = []) {
         [, $prop] = pluginSplit(myName);
 
         return this.{$prop} = this.components().load(myName, myConfig);
@@ -406,8 +404,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\ServerRequest
 
      */
-    ServerRequest getRequest()
-    {
+    ServerRequest getRequest() {
         return this.request;
     }
 
@@ -434,8 +431,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response
 
      */
-    Response getResponse()
-    {
+    Response getResponse() {
         return this.response;
     }
 
@@ -458,8 +454,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Closure
      * @throws \Cake\Controller\Exception\MissingActionException
      */
-    Closure getAction()
-    {
+    Closure getAction() {
         myRequest = this.request;
         $action = myRequest.getParam("action");
 
@@ -520,8 +515,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @return array
      */
-    array getMiddleware()
-    {
+    array getMiddleware() {
         $matching = [];
         $action = this.request.getParam("action");
 

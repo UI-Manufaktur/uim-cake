@@ -62,8 +62,7 @@ class Application : IConsoleApplication
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
-    CommandCollection console(CommandCollection $commands)
-    {
+    CommandCollection console(CommandCollection $commands) {
         $commands.add("hello", HelloCommand::class);
 
         return $commands;

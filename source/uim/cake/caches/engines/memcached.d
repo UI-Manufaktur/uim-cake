@@ -232,8 +232,7 @@ class MemcachedEngine : CacheEngine
      * @param string $server The server address string.
      * @return array Array containing host, port
      */
-    array parseServerString(string $server)
-    {
+    array parseServerString(string $server) {
         $socketTransport = "unix://";
         if (strpos($server, $socketTransport) == 0) {
             return [substr($server, strlen($socketTransport)), 0];

@@ -48,8 +48,7 @@ class CacheRegistry : ObjectRegistry
      * @return \Cake\Cache\CacheEngine The constructed CacheEngine class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
-    protected CacheEngine _create(myClass, string myAlias, array myConfig)
-    {
+    protected CacheEngine _create(myClass, string myAlias, array myConfig) {
         if (is_object(myClass)) {
             $instance = myClass;
         } else {

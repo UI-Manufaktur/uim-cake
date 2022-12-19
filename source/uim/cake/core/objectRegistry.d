@@ -353,8 +353,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return \Traversable
      * @psalm-return \Traversable<string, TObject>
      */
-    Traversable getIterator()
-    {
+    Traversable getIterator() {
         return new ArrayIterator(this._loaded);
     }
 
@@ -370,8 +369,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         $properties = get_object_vars(this);
         if (isset($properties["_loaded"])) {
             $properties["_loaded"] = array_keys($properties["_loaded"]);

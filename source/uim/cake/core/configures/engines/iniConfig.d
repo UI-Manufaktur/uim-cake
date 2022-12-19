@@ -72,8 +72,7 @@ class IniConfig : IConfigEngine
      * @throws \Cake\Core\Exception\CakeException when files don"t exist.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    array read(string myKey)
-    {
+    array read(string myKey) {
         myfile = this._getFilePath(myKey, true);
 
         myContentss = parse_ini_file(myfile, true);

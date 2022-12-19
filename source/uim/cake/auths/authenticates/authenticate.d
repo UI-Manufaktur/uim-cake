@@ -218,8 +218,7 @@ abstract class DAuthenticate : IEventListener {
      *
      * @return array<string, mixed> List of events this class listens to. Defaults to `[]`.
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [];
     }
 }

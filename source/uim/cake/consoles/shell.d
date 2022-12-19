@@ -512,8 +512,7 @@ class Shell {
      * @return \Cake\Console\ConsoleOptionParser
      * @link https://book.UIM.org/4/en/console-and-shells.html#configuring-options-and-generating-help
      */
-    ConsoleOptionParser getOptionParser()
-    {
+    ConsoleOptionParser getOptionParser() {
         myName = (this.plugin ? this.plugin . "." : "") . this.name;
         $parser = new ConsoleOptionParser(myName);
         $parser.setRootName(this.rootName);
@@ -559,8 +558,7 @@ class Shell {
      * @return string|null Either the default value, or the user-provided input.
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::in
      */
-    Nullable!string in(string $prompt, myOptions = null, Nullable!string $default = null)
-    {
+    Nullable!string in(string $prompt, myOptions = null, Nullable!string $default = null) {
         if (!this.interactive) {
             return $default;
         }
@@ -630,8 +628,7 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int out(myMessage, int $newlines = 1, int $level = Shell::NORMAL)
-    {
+    Nullable!int out(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
         return this._io.out(myMessage, $newlines, $level);
     }
 
@@ -656,8 +653,7 @@ class Shell {
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int info(myMessage, int $newlines = 1, int $level = Shell::NORMAL)
-    {
+    Nullable!int info(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
         return this._io.info(myMessage, $newlines, $level);
     }
 
@@ -823,8 +819,7 @@ class Shell {
      * @param array<string, mixed> myConfig Configuration data for the helper.
      * @return \Cake\Console\Helper The created helper instance.
      */
-    Helper helper(string myName, array myConfig = [])
-    {
+    Helper helper(string myName, array myConfig = []) {
         return this._io.helper(myName, myConfig);
     }
 

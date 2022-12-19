@@ -530,8 +530,7 @@ trait CollectionTrait
         return new InsertIterator(this.unwrap(), myPath, myValues);
     }
 
-    array toArray(bool $keepKeys = true)
-    {
+    array toArray(bool $keepKeys = true) {
         $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
             myItems = $iterator.getArrayCopy();
@@ -548,8 +547,7 @@ trait CollectionTrait
     }
 
 
-    array toList()
-    {
+    array toList() {
         return this.toArray(false);
     }
 
@@ -703,8 +701,7 @@ trait CollectionTrait
     }
 
 
-    Traversable unwrap()
-    {
+    Traversable unwrap() {
         $iterator = this;
         while (
             get_class($iterator) == Collection::class

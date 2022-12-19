@@ -65,8 +65,7 @@ class CommandScanner
      * @param string myPlugin The named plugin.
      * @return array A list of command metadata.
      */
-    array scanPlugin(string myPlugin)
-    {
+    array scanPlugin(string myPlugin) {
         if (!Plugin::isLoaded(myPlugin)) {
             return [];
         }
@@ -90,8 +89,7 @@ class CommandScanner
      * @param $hide A list of command names to hide as they are internal commands.
      * @return array The list of shell info arrays based on scanning the filesystem and inflection.
      */
-    protected array scanDir(string myPath, string $module, string $prefix, string[] $hide)
-    {
+    protected array scanDir(string myPath, string $module, string $prefix, string[] $hide) {
         if (!is_dir(myPath)) {
             return [];
         }

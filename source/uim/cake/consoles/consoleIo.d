@@ -126,8 +126,7 @@ class ConsoleIo {
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if current level is less than ConsoleIo::QUIET
      */
-    Nullable!int quiet(myMessage, int $newlines = 1)
-    {
+    Nullable!int quiet(myMessage, int $newlines = 1) {
         return this.out(myMessage, $newlines, self::QUIET);
     }
 
@@ -148,8 +147,7 @@ class ConsoleIo {
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
      */
-    Nullable!int out(myMessage = "", int $newlines = 1, int $level = self::NORMAL)
-    {
+    Nullable!int out(myMessage = "", int $newlines = 1, int $level = self::NORMAL) {
         if ($level <= this._level) {
             this._lastWritten = this._out.write(myMessage, $newlines);
 
@@ -186,8 +184,7 @@ class ConsoleIo {
      *   or null if provided $level is greater than current level.
      * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int comment(myMessage, int $newlines = 1, int $level = self::NORMAL)
-    {
+    Nullable!int comment(myMessage, int $newlines = 1, int $level = self::NORMAL) {
         myMessageType = "comment";
         myMessage = this.wrapMessageWithType(myMessageType, myMessage);
 
@@ -234,8 +231,7 @@ class ConsoleIo {
      *   or null if provided $level is greater than current level.
      * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int success(myMessage, int $newlines = 1, int $level = self::NORMAL)
-    {
+    Nullable!int success(myMessage, int $newlines = 1, int $level = self::NORMAL) {
         myMessageType = "success";
         myMessage = this.wrapMessageWithType(myMessageType, myMessage);
 

@@ -68,8 +68,7 @@ if (!function_exists("pluginSplit")) {
      * @link https://book.UIM.org/4/en/core-libraries/global-constants-and-functions.html#pluginSplit
      * @psalm-return array{string|null, string}
      */
-    array pluginSplit(string myName, bool $dotAppend = false, Nullable!string myPlugin = null)
-    {
+    array pluginSplit(string myName, bool $dotAppend = false, Nullable!string myPlugin = null) {
         if (strpos(myName, ".") !== false) {
             $parts = explode(".", myName, 2);
             if ($dotAppend) {

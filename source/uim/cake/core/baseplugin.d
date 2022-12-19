@@ -188,14 +188,12 @@ class BasePlugin : IPlugin
     }
 
 
-    CommandCollection console(CommandCollection $commands)
-    {
+    CommandCollection console(CommandCollection $commands) {
         return $commands.addMany($commands.discoverPlugin(this.getName()));
     }
 
 
-    MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue)
-    {
+    MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue) {
         return $middlewareQueue;
     }
 

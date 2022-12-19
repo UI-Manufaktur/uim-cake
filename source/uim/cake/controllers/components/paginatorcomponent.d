@@ -65,8 +65,7 @@ class PaginatorComponent : Component
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [];
     }
 
@@ -168,8 +167,7 @@ class PaginatorComponent : Component
      * @return \Cake\Datasource\IResultSet Query results
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    IResultSet paginate(object $object, array $settings = [])
-    {
+    IResultSet paginate(object $object, array $settings = []) {
         myRequest = this._registry.getController().getRequest();
 
         try {
@@ -238,8 +236,7 @@ class PaginatorComponent : Component
     /**
      * Set paging params to request instance.
      */
-    protected void _setPagingParams()
-    {
+    protected void _setPagingParams() {
         $controller = this.getController();
         myRequest = $controller.getRequest();
         $paging = this._paginator.getPagingParams() + (array)myRequest.getAttribute("paging", []);

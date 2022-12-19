@@ -215,8 +215,7 @@ class ConsoleOptionParser {
      *
      * @return array<string, mixed>
      */
-    array toArray()
-    {
+    array toArray() {
         myResult = [
             "command":_commandName,
             "arguments":this._args,
@@ -614,8 +613,7 @@ class ConsoleOptionParser {
      * @return array [myParams, $args]
      * @throws \Cake\Console\Exception\ConsoleException When an invalid parameter is encountered.
      */
-    array parse(array $argv)
-    {
+    array parse(array $argv) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         if (isset(this._subcommands[$command])) {
             array_shift($argv);
@@ -750,8 +748,7 @@ class ConsoleOptionParser {
      * @param array<string, mixed> myParams The params to append the parsed value into
      * @return array Params with $option added in.
      */
-    protected array _parseLongOption(string $option, array myParams)
-    {
+    protected array _parseLongOption(string $option, array myParams) {
         myName = substr($option, 2);
         if (strpos(myName, "=") !== false) {
             [myName, myValue] = explode("=", myName, 2);
@@ -771,8 +768,7 @@ class ConsoleOptionParser {
      * @return array<string, mixed> Params with $option added in.
      * @throws \Cake\Console\Exception\ConsoleException When unknown short options are encountered.
      */
-    protected array _parseShortOption(string $option, array myParams)
-    {
+    protected array _parseShortOption(string $option, array myParams) {
         myKey = substr($option, 1);
         if (strlen(myKey) > 1) {
             $flags = str_split(myKey);

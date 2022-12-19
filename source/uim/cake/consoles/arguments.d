@@ -56,8 +56,7 @@ class Arguments
      * @param int $index The argument index to access.
      * @return string|null The argument value or null
      */
-    Nullable!string getArgumentAt(int $index)
-    {
+    Nullable!string getArgumentAt(int $index) {
         if (this.hasArgumentAt($index)) {
             return this.args[$index];
         }

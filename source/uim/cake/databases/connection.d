@@ -830,8 +830,7 @@ class Connection : IConnection {
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         $secrets = [
             "password":"*****",
             "username":"*****",

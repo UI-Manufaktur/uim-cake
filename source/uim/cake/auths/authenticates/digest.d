@@ -149,8 +149,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $digest The raw digest authentication headers.
      * @return array|null An array of digest authentication headers
      */
-    ?array parseAuthData(string $digest)
-    {
+    ?array parseAuthData(string $digest) {
         if (substr($digest, 0, 7) == "Digest ") {
             $digest = substr($digest, 7);
         }
