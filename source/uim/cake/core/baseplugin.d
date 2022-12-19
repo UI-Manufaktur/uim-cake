@@ -5,12 +5,8 @@
 **********************************************************************************************************/
 module uim.cake.core;
 
-import uim.cake.console.commandCollection;
-import uim.caketps\MiddlewareQueue;
-import uim.cake.routings\RouteBuilder;
-use Closure;
-use InvalidArgumentException;
-use ReflectionClass;
+@safe:
+import uim.cake;
 
 /**
  * Base Plugin Class
@@ -18,8 +14,7 @@ use ReflectionClass;
  * Every plugin should extend from this class or implement the interfaces and
  * include a plugin class in its src root folder.
  */
-class BasePlugin : IPlugin
-{
+class BasePlugin : IPlugin {
     /**
      * Do bootstrapping or not
      *
@@ -52,7 +47,7 @@ class BasePlugin : IPlugin
     protected string myTemplatePath;
 
     // The name of this plugin
-    protected string string myName;
+    protected string myName;
 
     /**
      * Constructor

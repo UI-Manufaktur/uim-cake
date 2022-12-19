@@ -8,8 +8,7 @@ import uim.cake;
  *
  * @method int getCode() Gets the Exception code.
  */
-class CakeException : RuntimeException
-{
+class CakeException : RuntimeException {
     /**
      * Array of attributes that are passed in from the constructor, and
      * made available in the view when a development error is displayed.
@@ -18,9 +17,7 @@ class CakeException : RuntimeException
      */
     protected _attributes = [];
 
-    /**
-     * Template string that has attributes sprintf()"ed into it.
-     */
+    // Template string that has attributes sprintf()"ed into it.
     protected string _messageTemplate = "";
 
     /**
@@ -30,12 +27,8 @@ class CakeException : RuntimeException
      */
     protected _responseHeaders;
 
-    /**
-     * Default exception code
-     *
-     * @var int
-     */
-    protected _defaultCode = 0;
+    // Default exception code
+    protected int _defaultCode = 0;
 
     /**
      * Constructor.
@@ -49,16 +42,16 @@ class CakeException : RuntimeException
      * @param \Throwable|null $previous the previous exception.
      */
     this(myMessage = "", Nullable!int $code = null, ?Throwable $previous = null) {
-        if (is_array(myMessage)) {
-            _attributes = myMessage;
-            myMessage = vsprintf(_messageTemplate, myMessage);
-        }
-        super.this(myMessage, $code ?? _defaultCode, $previous);
+      if (is_array(myMessage)) {
+        _attributes = myMessage;
+        myMessage = vsprintf(_messageTemplate, myMessage);
+      }
+      super.this(myMessage, $code ?? _defaultCode, $previous);
     }
 
     // Get the passed in attributes
     array getAttributes() {
-        return _attributes;
+      return _attributes;
     }
 
     /**
@@ -73,22 +66,21 @@ class CakeException : RuntimeException
      * @deprecated 4.2.0 Use `HttpException::setHeaders()` instead. Response headers
      *   should be set for HttpException only.
      */
-    function responseHeader($header = null, myValue = null): ?array
-    {
-        if ($header == null) {
-            return _responseHeaders;
-        }
+    function responseHeader($header = null, myValue = null): ?array {
+      if ($header == null) {
+          return _responseHeaders;
+      }
 
-        deprecationWarning(
-            "Setting HTTP response headers from Exception directly is deprecated. " .
-            "If your exceptions extend Exception, they must now extend HttpException. " .
-            "You should only set HTTP headers on HttpException instances via the `setHeaders()` method."
-        );
-        if (is_array($header)) {
-            return _responseHeaders = $header;
-        }
+      deprecationWarning(
+          "Setting HTTP response headers from Exception directly is deprecated. " .
+          "If your exceptions extend Exception, they must now extend HttpException. " .
+          "You should only set HTTP headers on HttpException instances via the `setHeaders()` method."
+      );
+      if (is_array($header)) {
+          return _responseHeaders = $header;
+      }
 
-        return _responseHeaders = [$header: myValue];
+      return _responseHeaders = [$header: myValue];
     }
 }
 

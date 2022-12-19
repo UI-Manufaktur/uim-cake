@@ -1,13 +1,7 @@
 module uim.cake.console;
 
-import uim.cake.console.exceptions\MissingShellException;
-import uim.cake.console.exceptions\StopException;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-import uim.cakegs\Log;
-import uim.cake.shells.Task\CommandTask;
-import uim.cakeilities.Inflector;
+@safe:
+import uim.cake;
 
 /**
  * Shell dispatcher handles dispatching CLI commands.
@@ -16,21 +10,12 @@ import uim.cakeilities.Inflector;
  *
  * @deprecated 3.6.0 ShellDispatcher and Shell will be removed in 5.0
  */
-class ShellDispatcher
-{
-    /**
-     * Contains arguments parsed from the command line.
-     *
-     * @var array
-     */
-    public $args = [];
+class ShellDispatcher {
+    // Contains arguments parsed from the command line.
+    public array $args = [];
 
-    /**
-     * List of connected aliases.
-     *
-     * @var array<string, string>
-     */
-    protected static $_aliases = [];
+    // List of connected aliases.
+    protected static STRINGAA $_aliases = [];
 
     /**
      * Constructor

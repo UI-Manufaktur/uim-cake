@@ -1,12 +1,9 @@
-module uim.cake.core.Retry;
+module uim.cake.core.retry.interface_;
 
 @safe:
 import uim.cake;;
 
-/**
- * Used to instruct a CommandRetry object on whether a retry
- * for an action should be performed
- */
+// Used to instruct a CommandRetry object on whether a retry for an action should be performed
 interface IRetryStrategy {
   /**
     * Returns true if the action can be retried, false otherwise.
