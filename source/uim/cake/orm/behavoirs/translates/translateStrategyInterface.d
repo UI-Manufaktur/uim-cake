@@ -1,12 +1,8 @@
 module uim.cake.orm.behaviors\Translate;
 
-use ArrayObject;
-import uim.cake.collections\ICollection;
-import uim.cake.datasources\IEntity;
-import uim.cake.events\IEvent;
-import uim.cake.orm.PropertyMarshalInterface;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
+@safe:
+import uim.cake;
+
 
 /**
  * This interface describes the methods for translate behavior strategies.

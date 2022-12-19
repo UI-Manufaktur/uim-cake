@@ -6,8 +6,7 @@ import uim.cake;
 /**
  * Contains common code needed by TranslateBehavior strategy classes.
  */
-trait TranslateStrategyTrait
-{
+trait TranslateStrategyTrait {
     /**
      * Table instance
      *

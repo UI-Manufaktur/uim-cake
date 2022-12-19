@@ -20,12 +20,8 @@ class ResultSet : IResultSet
      */
     protected $_statement;
 
-    /**
-     * Points to the next record number that should be fetched
-     *
-     * @var int
-     */
-    protected $_index = 0;
+    // Points to the next record number that should be fetched
+    protected int $_index = 0;
 
     /**
      * Last record fetched from the statement

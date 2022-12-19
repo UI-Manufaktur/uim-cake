@@ -1,13 +1,13 @@
 module uim.cake.orm.behaviors\Translate;
 
-import uim.cake.datasources\IEntity;
+@safe:
+import uim.cake;
 
 /**
  * Contains a translation method aimed to help managing multiple translations
  * for an entity.
  */
-trait TranslateTrait
-{
+trait TranslateTrait {
     /**
      * Returns the entity containing the translated fields for this object and for
      * the specified language. If the translation for the passed language is not
