@@ -64,11 +64,11 @@ class Helper : IEventListener
      * @param array<string, mixed> myConfig Configuration settings for the helper.
      */
     this(View $view, array myConfig = []) {
-        this._View = $view;
+        _View = $view;
         this.setConfig(myConfig);
 
         if (!empty(this.helpers)) {
-            this._helperMap = $view.helpers().normalizeArray(this.helpers);
+            _helperMap = $view.helpers().normalizeArray(this.helpers);
         }
 
         this.initialize(myConfig);
@@ -92,9 +92,9 @@ class Helper : IEventListener
      * @return \Cake\View\Helper|null|void Helper instance if helper with provided name exists
      */
     auto __get(string myName) {
-        if (isset(this._helperMap[myName]) && !isset(this.{myName})) {
-            myConfig = ["enabled" => false] + (array)this._helperMap[myName]["config"];
-            this.{myName} = this._View.loadHelper(this._helperMap[myName]["class"], myConfig);
+        if (isset(_helperMap[myName]) && !isset(this.{myName})) {
+            myConfig = ["enabled" => false] + (array)_helperMap[myName]["config"];
+            this.{myName} = _View.loadHelper(_helperMap[myName]["class"], myConfig);
 
             return this.{myName};
         }
@@ -107,7 +107,7 @@ class Helper : IEventListener
      */
     auto getView(): View
     {
-        return this._View;
+        return _View;
     }
 
     /**

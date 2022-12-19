@@ -78,11 +78,11 @@ trait ValidatorAwareTrait
     auto getValidator(Nullable!string myName = null): Validator
     {
         myName = myName ?: static::DEFAULT_VALIDATOR;
-        if (!isset(this._validators[myName])) {
+        if (!isset(_validators[myName])) {
             this.setValidator(myName, this.createValidator(myName));
         }
 
-        return this._validators[myName];
+        return _validators[myName];
     }
 
     /**
@@ -104,7 +104,7 @@ trait ValidatorAwareTrait
             throw new RuntimeException(myMessage);
         }
 
-        $validator = new this._validatorClass();
+        $validator = new _validatorClass();
         $validator = this.$method($validator);
         if (this instanceof IEventDispatcher) {
             myEvent = defined(static::class . "::BUILD_VALIDATOR_EVENT")
@@ -145,7 +145,7 @@ trait ValidatorAwareTrait
      */
     auto setValidator(string myName, Validator $validator) {
         $validator.setProvider(static::VALIDATOR_PROVIDER_NAME, this);
-        this._validators[myName] = $validator;
+        _validators[myName] = $validator;
 
         return this;
     }
@@ -162,7 +162,7 @@ trait ValidatorAwareTrait
             return true;
         }
 
-        return isset(this._validators[myName]);
+        return isset(_validators[myName]);
     }
 
     /**

@@ -33,8 +33,8 @@ class IsUnique
      * @param array<string, mixed> myOptions The options for unique checks.
      */
     this(string[] myFields, array myOptions = []) {
-        this._fields = myFields;
-        this._options = myOptions + this._options;
+        _fields = myFields;
+        _options = myOptions + _options;
     }
 
     /**
@@ -46,20 +46,20 @@ class IsUnique
      * @return bool
      */
     bool __invoke(IEntity $entity, array myOptions) {
-        if (!$entity.extract(this._fields, true)) {
+        if (!$entity.extract(_fields, true)) {
             return true;
         }
 
-        myFields = $entity.extract(this._fields);
-        if (this._options["allowMultipleNulls"] && array_filter(myFields, "is_null")) {
+        myFields = $entity.extract(_fields);
+        if (_options["allowMultipleNulls"] && array_filter(myFields, "is_null")) {
             return true;
         }
 
         myAlias = myOptions["repository"].getAlias();
-        $conditions = this._alias(myAlias, myFields);
+        $conditions = _alias(myAlias, myFields);
         if ($entity.isNew() == false) {
             myKeys = (array)myOptions["repository"].getPrimaryKey();
-            myKeys = this._alias(myAlias, $entity.extract(myKeys));
+            myKeys = _alias(myAlias, $entity.extract(myKeys));
             if (Hash::filter(myKeys)) {
                 $conditions["NOT"] = myKeys;
             }

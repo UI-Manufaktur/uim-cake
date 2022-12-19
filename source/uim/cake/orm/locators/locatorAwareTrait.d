@@ -26,7 +26,7 @@ trait LocatorAwareTrait
      * @return this
      */
     auto setTableLocator(ILocator myTableLocator) {
-        this._tableLocator = myTableLocator;
+        _tableLocator = myTableLocator;
 
         return this;
     }
@@ -38,13 +38,13 @@ trait LocatorAwareTrait
      */
     auto getTableLocator(): ILocator
     {
-        if (this._tableLocator == null) {
+        if (_tableLocator == null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
-            this._tableLocator = FactoryLocator::get("Table");
+            _tableLocator = FactoryLocator::get("Table");
         }
 
         /** @var \Cake\ORM\Locator\ILocator */
-        return this._tableLocator;
+        return _tableLocator;
     }
 
     /**

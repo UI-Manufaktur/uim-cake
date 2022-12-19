@@ -33,7 +33,7 @@ class PersistenceFailedException : CakeException
      * @param \Throwable|null $previous the previous exception.
      */
     this(IEntity $entity, myMessage, Nullable!int $code = null, ?Throwable $previous = null) {
-        this._entity = $entity;
+        _entity = $entity;
         if (is_array(myMessage)) {
             myErrors = [];
             foreach (Hash::flatten($entity.getErrors()) as myField: myError) {
@@ -41,7 +41,7 @@ class PersistenceFailedException : CakeException
             }
             if (myErrors) {
                 myMessage[] = implode(", ", myErrors);
-                this._messageTemplate = "Entity %s failure. Found the following errors (%s).";
+                _messageTemplate = "Entity %s failure. Found the following errors (%s).";
             }
         }
         super.this(myMessage, $code, $previous);
@@ -54,6 +54,6 @@ class PersistenceFailedException : CakeException
      */
     auto getEntity(): IEntity
     {
-        return this._entity;
+        return _entity;
     }
 }

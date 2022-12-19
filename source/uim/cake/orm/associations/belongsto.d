@@ -23,11 +23,11 @@ class BelongsTo : Association
 
     // Gets the name of the field representing the foreign key to the target table.
     string[] getForeignKey() {
-        if (this._foreignKey == null) {
-            this._foreignKey = this._modelKey(this.getTarget().getAlias());
+        if (_foreignKey == null) {
+            _foreignKey = _modelKey(this.getTarget().getAlias());
         }
 
-        return this._foreignKey;
+        return _foreignKey;
     }
 
     /**
@@ -49,7 +49,7 @@ class BelongsTo : Association
      * @return string
      */
     protected string _propertyName() {
-        [, myName] = pluginSplit(this._name);
+        [, myName] = pluginSplit(_name);
 
         return Inflector::underscore(Inflector::singularize(myName));
     }
@@ -118,8 +118,8 @@ class BelongsTo : Association
     protected auto _joinCondition(array myOptions): array
     {
         $conditions = [];
-        $tAlias = this._name;
-        $sAlias = this._sourceTable.getAlias();
+        $tAlias = _name;
+        $sAlias = _sourceTable.getAlias();
         $foreignKey = (array)myOptions["foreignKey"];
         $bindingKey = (array)this.getBindingKey();
 
@@ -132,7 +132,7 @@ class BelongsTo : Association
             $msg = "Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"";
             throw new RuntimeException(sprintf(
                 $msg,
-                this._name,
+                _name,
                 implode(", ", $foreignKey),
                 implode(", ", $bindingKey)
             ));

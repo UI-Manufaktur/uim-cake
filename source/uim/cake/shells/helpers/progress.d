@@ -69,12 +69,12 @@ class ProgressHelper : Helper
 
         $callback = $args["callback"];
 
-        this._io.out("", 0);
-        while (this._progress < this._total) {
+        _io.out("", 0);
+        while (_progress < _total) {
             $callback(this);
             this.draw();
         }
-        this._io.out("");
+        _io.out("");
     }
 
     /**
@@ -89,9 +89,9 @@ class ProgressHelper : Helper
      */
     function init(array $args = []) {
         $args += ["total" => 100, "width" => 80];
-        this._progress = 0;
-        this._width = $args["width"];
-        this._total = $args["total"];
+        _progress = 0;
+        _width = $args["width"];
+        _total = $args["total"];
 
         return this;
     }
@@ -103,7 +103,7 @@ class ProgressHelper : Helper
      * @return this
      */
     function increment($num = 1) {
-        this._progress = min(max(0, this._progress + $num), this._total);
+        _progress = min(max(0, _progress + $num), _total);
 
         return this;
     }
@@ -115,21 +115,21 @@ class ProgressHelper : Helper
      */
     function draw() {
         $numberLen = strlen(" 100%");
-        $complete = round(this._progress / this._total, 2);
-        $barLen = (this._width - $numberLen) * this._progress / this._total;
+        $complete = round(_progress / _total, 2);
+        $barLen = (_width - $numberLen) * _progress / _total;
         $bar = "";
         if ($barLen > 1) {
             $bar = str_repeat("=", (int)$barLen - 1) . ">";
         }
 
-        $pad = ceil(this._width - $numberLen - $barLen);
+        $pad = ceil(_width - $numberLen - $barLen);
         if ($pad > 0) {
             $bar .= str_repeat(" ", (int)$pad);
         }
         $percent = ($complete * 100) . "%";
         $bar .= str_pad($percent, $numberLen, " ", STR_PAD_LEFT);
 
-        this._io.overwrite($bar, 0);
+        _io.overwrite($bar, 0);
 
         return this;
     }

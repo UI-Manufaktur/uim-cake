@@ -45,10 +45,10 @@ class ExistsIn
      */
     this(myFields, myRepository, array myOptions = []) {
         myOptions += ["allowNullableNulls": false];
-        this._options = myOptions;
+        _options = myOptions;
 
-        this._fields = (array)myFields;
-        this._repository = myRepository;
+        _fields = (array)myFields;
+        _repository = myRepository;
     }
 
     /**
@@ -61,21 +61,21 @@ class ExistsIn
      * @return bool
      */
     bool __invoke(IEntity $entity, array myOptions) {
-        if (is_string(this._repository)) {
-            if (!myOptions["repository"].hasAssociation(this._repository)) {
+        if (is_string(_repository)) {
+            if (!myOptions["repository"].hasAssociation(_repository)) {
                 throw new RuntimeException(sprintf(
                     "ExistsIn rule for "%s" is invalid. "%s" is not associated with "%s".",
-                    implode(", ", this._fields),
-                    this._repository,
+                    implode(", ", _fields),
+                    _repository,
                     get_class(myOptions["repository"])
                 ));
             }
-            myRepository = myOptions["repository"].getAssociation(this._repository);
-            this._repository = myRepository;
+            myRepository = myOptions["repository"].getAssociation(_repository);
+            _repository = myRepository;
         }
 
-        myFields = this._fields;
-        $source = myTarget = this._repository;
+        myFields = _fields;
+        $source = myTarget = _repository;
         if (myTarget instanceof Association) {
             $bindingKey = (array)myTarget.getBindingKey();
             $realTarget = myTarget.getTarget();
@@ -95,15 +95,15 @@ class ExistsIn
             $source = $source.getSource();
         }
 
-        if (!$entity.extract(this._fields, true)) {
+        if (!$entity.extract(_fields, true)) {
             return true;
         }
 
-        if (this._fieldsAreNull($entity, $source)) {
+        if (_fieldsAreNull($entity, $source)) {
             return true;
         }
 
-        if (this._options["allowNullableNulls"]) {
+        if (_options["allowNullableNulls"]) {
             $schema = $source.getSchema();
             foreach (myFields as $i: myField) {
                 if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) == null) {
@@ -135,12 +135,12 @@ class ExistsIn
     protected bool _fieldsAreNull(IEntity $entity, Table $source) {
         $nulls = 0;
         $schema = $source.getSchema();
-        foreach (this._fields as myField) {
+        foreach (_fields as myField) {
             if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) == null) {
                 $nulls++;
             }
         }
 
-        return $nulls == count(this._fields);
+        return $nulls == count(_fields);
     }
 }

@@ -105,7 +105,7 @@ class TableLocator : AbstractLocator : ILocator
 
     auto setConfig(myAlias, myOptions = null) {
         if (!is_string(myAlias)) {
-            this._config = myAlias;
+            _config = myAlias;
 
             return this;
         }
@@ -117,7 +117,7 @@ class TableLocator : AbstractLocator : ILocator
             ));
         }
 
-        this._config[myAlias] = myOptions;
+        _config[myAlias] = myOptions;
 
         return this;
     }
@@ -126,10 +126,10 @@ class TableLocator : AbstractLocator : ILocator
     auto getConfig(Nullable!string myAlias = null): array
     {
         if (myAlias == null) {
-            return this._config;
+            return _config;
         }
 
-        return this._config[myAlias] ?? [];
+        return _config[myAlias] ?? [];
     }
 
     /**
@@ -185,12 +185,12 @@ class TableLocator : AbstractLocator : ILocator
             myAlias = substr(myAlias, strrpos(myAlias, "\\") + 1, -5);
         }
 
-        if (isset(this._config[myAlias])) {
-            myOptions += this._config[myAlias];
+        if (isset(_config[myAlias])) {
+            myOptions += _config[myAlias];
         }
 
         $allowFallbackClass = myOptions["allowFallbackClass"] ?? this.allowFallbackClass;
-        myClassName = this._getClassName(myAlias, myOptions);
+        myClassName = _getClassName(myAlias, myOptions);
         if (myClassName) {
             myOptions["className"] = myClassName;
         } elseif ($allowFallbackClass) {
@@ -227,10 +227,10 @@ class TableLocator : AbstractLocator : ILocator
         }
 
         myOptions["registryAlias"] = myAlias;
-        $instance = this._create(myOptions);
+        $instance = _create(myOptions);
 
         if (myOptions["className"] == this.fallbackClassName) {
-            this._fallbacked[myAlias] = $instance;
+            _fallbacked[myAlias] = $instance;
         }
 
         return $instance;
@@ -291,8 +291,8 @@ class TableLocator : AbstractLocator : ILocator
     void clear() {
         super.clear();
 
-        this._fallbacked = [];
-        this._config = [];
+        _fallbacked = [];
+        _config = [];
     }
 
     /**
@@ -304,14 +304,14 @@ class TableLocator : AbstractLocator : ILocator
      * @return array<\Cake\ORM\Table>
      */
     function genericInstances(): array {
-        return this._fallbacked;
+        return _fallbacked;
     }
 
 
     void remove(string myAlias) {
         super.remove(myAlias);
 
-        unset(this._fallbacked[myAlias]);
+        unset(_fallbacked[myAlias]);
     }
 
     /**

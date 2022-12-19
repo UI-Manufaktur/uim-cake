@@ -96,17 +96,17 @@ class RouteBuilder {
      * @param array<string, mixed> myOptions Options list.
      */
     this(RouteCollection myCollection, string myPath, array myParams = [], array myOptions = []) {
-        this._collection = myCollection;
-        this._path = myPath;
-        this._params = myParams;
+        _collection = myCollection;
+        _path = myPath;
+        _params = myParams;
         if (isset(myOptions["routeClass"])) {
-            this._routeClass = myOptions["routeClass"];
+            _routeClass = myOptions["routeClass"];
         }
         if (isset(myOptions["extensions"])) {
-            this._extensions = myOptions["extensions"];
+            _extensions = myOptions["extensions"];
         }
         if (isset(myOptions["namePrefix"])) {
-            this._namePrefix = myOptions["namePrefix"];
+            _namePrefix = myOptions["namePrefix"];
         }
         if (isset(myOptions["middleware"])) {
             this.middleware = (array)myOptions["middleware"];
@@ -120,7 +120,7 @@ class RouteBuilder {
      * @return this
      */
     auto setRouteClass(string $routeClass) {
-        this._routeClass = $routeClass;
+        _routeClass = $routeClass;
 
         return this;
     }
@@ -129,7 +129,7 @@ class RouteBuilder {
      * Get default route class.
      */
     string getRouteClass() {
-        return this._routeClass;
+        return _routeClass;
     }
 
     /**
@@ -142,14 +142,14 @@ class RouteBuilder {
      * @return this
      */
     auto setExtensions(string[] $extensions) {
-        this._extensions = (array)$extensions;
+        _extensions = (array)$extensions;
 
         return this;
     }
 
     // Get the extensions in this route builder"s scope.
     string[] getExtensions() {
-        return this._extensions;
+        return _extensions;
     }
 
     /**
@@ -159,8 +159,8 @@ class RouteBuilder {
      * @return this
      */
     function addExtensions($extensions) {
-        $extensions = array_merge(this._extensions, (array)$extensions);
-        this._extensions = array_unique($extensions);
+        $extensions = array_merge(_extensions, (array)$extensions);
+        _extensions = array_unique($extensions);
 
         return this;
     }
@@ -169,17 +169,17 @@ class RouteBuilder {
      * Get the path this scope is for.
      */
     string path() {
-        $routeKey = indexOf(this._path, "{");
-        if ($routeKey !== false && indexOf(this._path, "}") !== false) {
-            return substr(this._path, 0, $routeKey);
+        $routeKey = indexOf(_path, "{");
+        if ($routeKey !== false && indexOf(_path, "}") !== false) {
+            return substr(_path, 0, $routeKey);
         }
 
-        $routeKey = indexOf(this._path, ":");
+        $routeKey = indexOf(_path, ":");
         if ($routeKey !== false) {
-            return substr(this._path, 0, $routeKey);
+            return substr(_path, 0, $routeKey);
         }
 
-        return this._path;
+        return _path;
     }
 
     /**
@@ -189,7 +189,7 @@ class RouteBuilder {
      */
     function params(): array
     {
-        return this._params;
+        return _params;
     }
 
     /**
@@ -198,7 +198,7 @@ class RouteBuilder {
      * @param string myName Name.
      */
     bool nameExists(string myName) {
-        return array_key_exists(myName, this._collection.named());
+        return array_key_exists(myName, _collection.named());
     }
 
     /**
@@ -211,10 +211,10 @@ class RouteBuilder {
      */
     string namePrefix(Nullable!string myValue = null) {
         if (myValue !== null) {
-            this._namePrefix = myValue;
+            _namePrefix = myValue;
         }
 
-        return this._namePrefix;
+        return _namePrefix;
     }
 
     /**
@@ -345,8 +345,8 @@ class RouteBuilder {
         if (myOptions["prefix"]) {
             $prefix = myOptions["prefix"];
         }
-        if (isset(this._params["prefix"]) && $prefix) {
-            $prefix = this._params["prefix"] . "/" . $prefix;
+        if (isset(_params["prefix"]) && $prefix) {
+            $prefix = _params["prefix"] . "/" . $prefix;
         }
 
         foreach ($resourceMap as $method => myParams) {
@@ -393,7 +393,7 @@ class RouteBuilder {
      */
     auto get(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute("GET", myTemplate, myTarget, myName);
+        return _methodRoute("GET", myTemplate, myTarget, myName);
     }
 
     /**
@@ -407,7 +407,7 @@ class RouteBuilder {
      */
     function post(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute("POST", myTemplate, myTarget, myName);
+        return _methodRoute("POST", myTemplate, myTarget, myName);
     }
 
     /**
@@ -421,7 +421,7 @@ class RouteBuilder {
      */
     function put(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute("PUT", myTemplate, myTarget, myName);
+        return _methodRoute("PUT", myTemplate, myTarget, myName);
     }
 
     /**
@@ -435,7 +435,7 @@ class RouteBuilder {
      */
     function patch(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute("PATCH", myTemplate, myTarget, myName);
+        return _methodRoute("PATCH", myTemplate, myTarget, myName);
     }
 
     /**
@@ -449,7 +449,7 @@ class RouteBuilder {
      */
     function delete(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute("DELETE", myTemplate, myTarget, myName);
+        return _methodRoute("DELETE", myTemplate, myTarget, myName);
     }
 
     /**
@@ -463,7 +463,7 @@ class RouteBuilder {
      */
     function head(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute("HEAD", myTemplate, myTarget, myName);
+        return _methodRoute("HEAD", myTemplate, myTarget, myName);
     }
 
     /**
@@ -477,7 +477,7 @@ class RouteBuilder {
      */
     function options(string myTemplate, myTarget, Nullable!string myName = null): Route
     {
-        return this._methodRoute("OPTIONS", myTemplate, myTarget, myName);
+        return _methodRoute("OPTIONS", myTemplate, myTarget, myName);
     }
 
     /**
@@ -493,20 +493,20 @@ class RouteBuilder {
     protected auto _methodRoute(string $method, string myTemplate, myTarget, Nullable!string myName): Route
     {
         if (myName !== null) {
-            myName = this._namePrefix . myName;
+            myName = _namePrefix . myName;
         }
         myOptions = [
             "_name":myName,
-            "_ext":this._extensions,
+            "_ext":_extensions,
             "_middleware":this.middleware,
-            "routeClass":this._routeClass,
+            "routeClass":_routeClass,
         ];
 
         myTarget = this.parseDefaults(myTarget);
         myTarget["_method"] = $method;
 
-        $route = this._makeRoute(myTemplate, myTarget, myOptions);
-        this._collection.add($route, myOptions);
+        $route = _makeRoute(myTemplate, myTarget, myOptions);
+        _collection.add($route, myOptions);
 
         return $route;
     }
@@ -622,20 +622,20 @@ class RouteBuilder {
     {
         $defaults = this.parseDefaults($defaults);
         if (empty(myOptions["_ext"])) {
-            myOptions["_ext"] = this._extensions;
+            myOptions["_ext"] = _extensions;
         }
         if (empty(myOptions["routeClass"])) {
-            myOptions["routeClass"] = this._routeClass;
+            myOptions["routeClass"] = _routeClass;
         }
-        if (isset(myOptions["_name"]) && this._namePrefix) {
-            myOptions["_name"] = this._namePrefix . myOptions["_name"];
+        if (isset(myOptions["_name"]) && _namePrefix) {
+            myOptions["_name"] = _namePrefix . myOptions["_name"];
         }
         if (empty(myOptions["_middleware"])) {
             myOptions["_middleware"] = this.middleware;
         }
 
-        $route = this._makeRoute($route, $defaults, myOptions);
-        this._collection.add($route, myOptions);
+        $route = _makeRoute($route, $defaults, myOptions);
+        _collection.add($route, myOptions);
 
         return $route;
     }
@@ -676,12 +676,12 @@ class RouteBuilder {
                 ));
             }
 
-            $route = str_replace("//", "/", this._path . $route);
+            $route = str_replace("//", "/", _path . $route);
             if ($route !== "/") {
                 $route = rtrim($route, "/");
             }
 
-            foreach (this._params as $param => $val) {
+            foreach (_params as $param => $val) {
                 if (isset($defaults[$param]) && $param !== "prefix" && $defaults[$param] !== $val) {
                     $msg = "You cannot define routes that conflict with the scope. " .
                         "Scope had %s = %s, while route had %s = %s";
@@ -694,7 +694,7 @@ class RouteBuilder {
                     ));
                 }
             }
-            $defaults += this._params + ["plugin":null];
+            $defaults += _params + ["plugin":null];
             if (!isset($defaults["action"]) && !isset(myOptions["action"])) {
                 $defaults["action"] = "index";
             }
@@ -798,8 +798,8 @@ class RouteBuilder {
             myPath = myParams["path"];
             unset(myParams["path"]);
         }
-        if (isset(this._params["prefix"])) {
-            myName = this._params["prefix"] . "/" . myName;
+        if (isset(_params["prefix"])) {
+            myName = _params["prefix"] . "/" . myName;
         }
         myParams = array_merge(myParams, ["prefix":myName]);
         this.scope(myPath, myParams, $callback);
@@ -876,19 +876,19 @@ class RouteBuilder {
             ));
         }
 
-        if (this._path !== "/") {
-            myPath = this._path . myPath;
+        if (_path !== "/") {
+            myPath = _path . myPath;
         }
-        myNamePrefix = this._namePrefix;
+        myNamePrefix = _namePrefix;
         if (isset(myParams["_namePrefix"])) {
             myNamePrefix .= myParams["_namePrefix"];
         }
         unset(myParams["_namePrefix"]);
 
-        myParams += this._params;
-        myBuilder = new static(this._collection, myPath, myParams, [
-            "routeClass":this._routeClass,
-            "extensions":this._extensions,
+        myParams += _params;
+        myBuilder = new static(_collection, myPath, myParams, [
+            "routeClass":_routeClass,
+            "extensions":_extensions,
             "namePrefix":myNamePrefix,
             "middleware":this.middleware,
         ]);
@@ -907,7 +907,7 @@ class RouteBuilder {
      * @return this
      */
     function fallbacks(Nullable!string $routeClass = null) {
-        $routeClass = $routeClass ?: this._routeClass;
+        $routeClass = $routeClass ?: _routeClass;
         this.connect("/{controller}", ["action":"index"], compact("routeClass"));
         this.connect("/{controller}/{action}/*", [], compact("routeClass"));
 
@@ -926,7 +926,7 @@ class RouteBuilder {
      * @see \Cake\Routing\RouteCollection
      */
     function registerMiddleware(string myName, $middleware) {
-        this._collection.registerMiddleware(myName, $middleware);
+        _collection.registerMiddleware(myName, $middleware);
 
         return this;
     }
@@ -943,7 +943,7 @@ class RouteBuilder {
      */
     function applyMiddleware(string ...myNames) {
         foreach (myNames as myName) {
-            if (!this._collection.middlewareExists(myName)) {
+            if (!_collection.middlewareExists(myName)) {
                 myMessage = "Cannot apply "myName" middleware or middleware group. " .
                     "Use registerMiddleware() to register middleware.";
                 throw new RuntimeException(myMessage);
@@ -972,7 +972,7 @@ class RouteBuilder {
      * @return this
      */
     function middlewareGroup(string myName, string[] $middlewareNames) {
-        this._collection.middlewareGroup(myName, $middlewareNames);
+        _collection.middlewareGroup(myName, $middlewareNames);
 
         return this;
     }

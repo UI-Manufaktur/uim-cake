@@ -91,14 +91,14 @@ abstract class Cell : IEventDispatcher
         this.response = $response;
         this.modelFactory("Table", [this.getTableLocator(), "get"]);
 
-        this._validCellOptions = array_merge(["action", "args"], this._validCellOptions);
-        foreach (this._validCellOptions as $var) {
+        _validCellOptions = array_merge(["action", "args"], _validCellOptions);
+        foreach (_validCellOptions as $var) {
             if (isset($cellOptions[$var])) {
                 this.{$var} = $cellOptions[$var];
             }
         }
         if (!empty($cellOptions["cache"])) {
-            this._cache = $cellOptions["cache"];
+            _cache = $cellOptions["cache"];
         }
 
         this.initialize();
@@ -125,8 +125,8 @@ abstract class Cell : IEventDispatcher
      */
     string render(Nullable!string myTemplate = null) {
         $cache = [];
-        if (this._cache) {
-            $cache = this._cacheConfig(this.action, myTemplate);
+        if (_cache) {
+            $cache = _cacheConfig(this.action, myTemplate);
         }
 
         $render = function () use (myTemplate) {
@@ -192,7 +192,7 @@ abstract class Cell : IEventDispatcher
      */
     protected auto _cacheConfig(string $action, Nullable!string myTemplate = null): array
     {
-        if (empty(this._cache)) {
+        if (empty(_cache)) {
             return [];
         }
         myTemplate = myTemplate ?: "default";
@@ -202,12 +202,12 @@ abstract class Cell : IEventDispatcher
             "config" => "default",
             "key" => myKey,
         ];
-        if (this._cache == true) {
+        if (_cache == true) {
             return $default;
         }
 
         /** @psalm-suppress PossiblyFalseOperand */
-        return this._cache + $default;
+        return _cache + $default;
     }
 
     /**

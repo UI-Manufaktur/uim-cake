@@ -50,13 +50,13 @@ class ShadowTableStrategy : ITranslateStrategy {
         ];
 
         if (isset(myConfig["tableLocator"])) {
-            this._tableLocator = myConfig["tableLocator"];
+            _tableLocator = myConfig["tableLocator"];
         }
 
         this.setConfig(myConfig);
         this.table = myTable;
         this.translationTable = this.getTableLocator().get(
-            this._config["translationTable"],
+            _config["translationTable"],
             ["allowFallbackClass":true]
         );
 
@@ -315,8 +315,8 @@ class ShadowTableStrategy : ITranslateStrategy {
 
         // Check early if empty translations are present in the entity.
         // If this is the case, unset them to prevent persistence.
-        // This only applies if this._config["allowEmptyTranslations"] is false
-        if (this._config["allowEmptyTranslations"] == false) {
+        // This only applies if _config["allowEmptyTranslations"] is false
+        if (_config["allowEmptyTranslations"] == false) {
             this.unsetEmptyFields($entity);
         }
 
@@ -398,7 +398,7 @@ class ShadowTableStrategy : ITranslateStrategy {
     {
         this.translatedFields();
 
-        return this._buildMarshalMap($marshaller, $map, myOptions);
+        return _buildMarshalMap($marshaller, $map, myOptions);
     }
 
     /**
@@ -432,7 +432,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * @return \Cake\Collection\ICollection
      */
     protected auto rowMapper(myResults, $locale) {
-        $allowEmpty = this._config["allowEmptyTranslations"];
+        $allowEmpty = _config["allowEmptyTranslations"];
 
         return myResults.map(function ($row) use ($allowEmpty, $locale) {
             /** @var \Cake\Datasource\IEntity|array|null $row */

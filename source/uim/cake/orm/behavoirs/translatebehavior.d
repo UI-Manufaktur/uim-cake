@@ -147,13 +147,13 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      */
     protected auto createStrategy() {
         myConfig = array_diff_key(
-            this._config,
+            _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
         /** @var class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy> myClassName */
         myClassName = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
-        return new myClassName(this._table, myConfig);
+        return new myClassName(_table, myConfig);
     }
 
     /**

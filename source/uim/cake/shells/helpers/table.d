@@ -34,7 +34,7 @@ class TableHelper : Helper {
         $widths = [];
         foreach (line; someRows) {
             foreach (array_values($line) as $k => $v) {
-                $columnLength = this._cellWidth((string)$v);
+                $columnLength = _cellWidth((string)$v);
                 if ($columnLength >= ($widths[$k] ?? 0)) {
                     $widths[$k] = $columnLength;
                 }
@@ -59,7 +59,7 @@ class TableHelper : Helper {
             return mb_strwidth($text);
         }
 
-        $styles = this._io.styles();
+        $styles = _io.styles();
         $tags = implode("|", array_keys($styles));
         $text = preg_replace("#</?(?:" . $tags . ")>#", "", $text);
 
@@ -76,7 +76,7 @@ class TableHelper : Helper {
             $out .= "+" . str_repeat("-", $column + 2);
         }
         $out .= "+";
-        this._io.out($out);
+        _io.out($out);
     }
 
     /**
@@ -95,9 +95,9 @@ class TableHelper : Helper {
         $out = "";
         foreach (array_values($row) as $i => $column) {
             $column = (string)$column;
-            $pad = $widths[$i] - this._cellWidth($column);
+            $pad = $widths[$i] - _cellWidth($column);
             if (!empty(myOptions["style"])) {
-                $column = this._addStyle($column, myOptions["style"]);
+                $column = _addStyle($column, myOptions["style"]);
             }
             if ($column !== "" && preg_match("#(.*)<text-right>.+</text-right>(.*)#", $column, $matches)) {
                 if ($matches[1] !== "" || $matches[2] !== "") {
@@ -110,7 +110,7 @@ class TableHelper : Helper {
             }
         }
         $out .= "|";
-        this._io.out($out);
+        _io.out($out);
     }
 
     /**
@@ -126,15 +126,15 @@ class TableHelper : Helper {
             return;
         }
 
-        this._io.setStyle("text-right", ["text" => null]);
+        _io.setStyle("text-right", ["text" => null]);
 
         myConfig = this.getConfig();
-        $widths = this._calculateWidths($args);
+        $widths = _calculateWidths($args);
 
-        this._rowSeparator($widths);
+        _rowSeparator($widths);
         if (myConfig["headers"] == true) {
-            this._render(array_shift($args), $widths, ["style" => myConfig["headerStyle"]]);
-            this._rowSeparator($widths);
+            _render(array_shift($args), $widths, ["style" => myConfig["headerStyle"]]);
+            _rowSeparator($widths);
         }
 
         if (empty($args)) {
@@ -142,13 +142,13 @@ class TableHelper : Helper {
         }
 
         foreach ($args as $line) {
-            this._render($line, $widths);
+            _render($line, $widths);
             if (myConfig["rowSeparator"] == true) {
-                this._rowSeparator($widths);
+                _rowSeparator($widths);
             }
         }
         if (myConfig["rowSeparator"] !== true) {
-            this._rowSeparator($widths);
+            _rowSeparator($widths);
         }
     }
 

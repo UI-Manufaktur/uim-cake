@@ -62,7 +62,7 @@ class ValidationRule
      * @param array $validator [optional] The validator properties
      */
     this(array $validator = []) {
-        this._addValidatorProps($validator);
+        _addValidatorProps($validator);
     }
 
     /**
@@ -70,7 +70,7 @@ class ValidationRule
      * after it fails
      */
     bool isLast() {
-        return this._last;
+        return _last;
     }
 
     /**
@@ -94,16 +94,16 @@ class ValidationRule
     function process(myValue, array $providers, array $context = []) {
         $context += ["data" => [], "newRecord" => true, "providers" => $providers];
 
-        if (this._skip($context)) {
+        if (_skip($context)) {
             return true;
         }
 
-        if (!is_string(this._rule) && is_callable(this._rule)) {
-            $callable = this._rule;
+        if (!is_string(_rule) && is_callable(_rule)) {
+            $callable = _rule;
             $isCallable = true;
         } else {
-            $provider = $providers[this._provider];
-            $callable = [$provider, this._rule];
+            $provider = $providers[_provider];
+            $callable = [$provider, _rule];
             $isCallable = is_callable($callable);
         }
 
@@ -111,22 +111,22 @@ class ValidationRule
             /** @psalm-suppress PossiblyInvalidArgument */
             myMessage = sprintf(
                 "Unable to call method "%s" in "%s" provider for field "%s"",
-                this._rule,
-                this._provider,
+                _rule,
+                _provider,
                 $context["field"]
             );
             throw new InvalidArgumentException(myMessage);
         }
 
-        if (this._pass) {
-            $args = array_values(array_merge([myValue], this._pass, [$context]));
+        if (_pass) {
+            $args = array_values(array_merge([myValue], _pass, [$context]));
             myResult = $callable(...$args);
         } else {
             myResult = $callable(myValue, $context);
         }
 
         if (myResult == false) {
-            return this._message ?: false;
+            return _message ?: false;
         }
 
         return myResult;
@@ -145,16 +145,16 @@ class ValidationRule
      * @return bool True if the ValidationRule should be skipped
      */
     protected bool _skip(array $context) {
-        if (!is_string(this._on) && is_callable(this._on)) {
-            $function = this._on;
+        if (!is_string(_on) && is_callable(_on)) {
+            $function = _on;
 
             return !$function($context);
         }
 
         $newRecord = $context["newRecord"];
-        if (!empty(this._on)) {
-            return (this._on == Validator::WHEN_CREATE && !$newRecord)
-                || (this._on == Validator::WHEN_UPDATE && $newRecord);
+        if (!empty(_on)) {
+            return (_on == Validator::WHEN_CREATE && !$newRecord)
+                || (_on == Validator::WHEN_UPDATE && $newRecord);
         }
 
         return false;
@@ -171,7 +171,7 @@ class ValidationRule
                 continue;
             }
             if (myKey == "rule" && is_array(myValue) && !is_callable(myValue)) {
-                this._pass = array_slice(myValue, 1);
+                _pass = array_slice(myValue, 1);
                 myValue = array_shift(myValue);
             }
             if (in_array(myKey, ["rule", "on", "message", "last", "provider", "pass"], true)) {

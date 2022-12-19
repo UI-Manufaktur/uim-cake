@@ -37,8 +37,8 @@ class RulesProvider {
      * @psalm-param object|class-string myClass
      */
     this(myClass = Validation::class) {
-        this._class = myClass;
-        this._reflection = new ReflectionClass(myClass);
+        _class = myClass;
+        _reflection = new ReflectionClass(myClass);
     }
 
     /**
@@ -54,12 +54,12 @@ class RulesProvider {
      * @return bool Whether the validation rule passed
      */
     auto __call(string $method, array $arguments) {
-        $method = this._reflection.getMethod($method);
+        $method = _reflection.getMethod($method);
         $argumentList = $method.getParameters();
         if (array_pop($argumentList).getName() !== "context") {
             $arguments = array_slice($arguments, 0, -1);
         }
-        $object = is_string(this._class) ? null : this._class;
+        $object = is_string(_class) ? null : _class;
 
         return $method.invokeArgs($object, $arguments);
     }

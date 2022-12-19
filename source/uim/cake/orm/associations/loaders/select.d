@@ -91,11 +91,11 @@ class SelectLoader
      * @return \Closure
      */
     Closure buildEagerLoader(array myOptions) {
-        myOptions += this._defaultOptions();
-        $fetchQuery = this._buildQuery(myOptions);
-        myResultMap = this._buildResultMap($fetchQuery, myOptions);
+        myOptions += _defaultOptions();
+        $fetchQuery = _buildQuery(myOptions);
+        myResultMap = _buildResultMap($fetchQuery, myOptions);
 
-        return this._resultInjector($fetchQuery, myResultMap, myOptions);
+        return _resultInjector($fetchQuery, myResultMap, myOptions);
     }
 
     /**
@@ -125,7 +125,7 @@ class SelectLoader
      */
     protected auto _buildQuery(array myOptions): Query
     {
-        myKey = this._linkField(myOptions);
+        myKey = _linkField(myOptions);
         $filter = myOptions["keys"];
         $useSubquery = myOptions["strategy"] == Association::STRATEGY_SUBQUERY;
         myFinder = this.finder;
@@ -134,7 +134,7 @@ class SelectLoader
         /** @var \Cake\ORM\Query myQuery */
         myQuery = myFinder();
         if (isset(myOptions["finder"])) {
-            [myFinderName, $opts] = this._extractFinder(myOptions["finder"]);
+            [myFinderName, $opts] = _extractFinder(myOptions["finder"]);
             myQuery = myQuery.find(myFinderName, $opts);
         }
 
@@ -150,10 +150,10 @@ class SelectLoader
         }
 
         if ($useSubquery) {
-            $filter = this._buildSubquery(myOptions["query"]);
-            $fetchQuery = this._addFilteringJoin($fetchQuery, myKey, $filter);
+            $filter = _buildSubquery(myOptions["query"]);
+            $fetchQuery = _addFilteringJoin($fetchQuery, myKey, $filter);
         } else {
-            $fetchQuery = this._addFilteringCondition($fetchQuery, myKey, $filter);
+            $fetchQuery = _addFilteringCondition($fetchQuery, myKey, $filter);
         }
 
         if (!empty(myOptions["sort"])) {
@@ -168,7 +168,7 @@ class SelectLoader
             $fetchQuery = myOptions["queryBuilder"]($fetchQuery);
         }
 
-        this._assertFieldsPresent($fetchQuery, (array)myKey);
+        _assertFieldsPresent($fetchQuery, (array)myKey);
 
         return $fetchQuery;
     }
@@ -267,7 +267,7 @@ class SelectLoader
         $subquery.select($filter, true);
 
         if (is_array(myKey)) {
-            $conditions = this._createTupleCondition(myQuery, myKey, $filter, "=");
+            $conditions = _createTupleCondition(myQuery, myKey, $filter, "=");
         } else {
             $filter = current($filter);
             $conditions = myQuery.newExpr([myKey: $filter]);
@@ -291,7 +291,7 @@ class SelectLoader
     protected auto _addFilteringCondition(Query myQuery, myKey, $filter): Query
     {
         if (is_array(myKey)) {
-            $conditions = this._createTupleCondition(myQuery, myKey, $filter, "IN");
+            $conditions = _createTupleCondition(myQuery, myKey, $filter, "IN");
         } else {
             $conditions = [myKey . " IN":$filter];
         }
@@ -378,7 +378,7 @@ class SelectLoader
             $filterQuery.offset(null);
         }
 
-        myFields = this._subqueryFields(myQuery);
+        myFields = _subqueryFields(myQuery);
         $filterQuery.select(myFields["select"], true).group(myFields["group"]);
 
         return $filterQuery;
@@ -473,7 +473,7 @@ class SelectLoader
 
         $nestKey = myOptions["nestKey"];
         if (count($sourceKeys) > 1) {
-            return this._multiKeysInjector(myResultMap, $sourceKeys, $nestKey);
+            return _multiKeysInjector(myResultMap, $sourceKeys, $nestKey);
         }
 
         $sourceKey = $sourceKeys[0];

@@ -19,21 +19,21 @@ class CommandTask : Shell {
         myShellList = array_fill_keys(myPlugins, null) + ["CORE" => null, "app" => null];
 
         $appPath = App::classPath("Shell");
-        myShellList = this._findShells(myShellList, $appPath[0], "app", $skipFiles);
+        myShellList = _findShells(myShellList, $appPath[0], "app", $skipFiles);
 
         $appPath = App::classPath("Command");
-        myShellList = this._findShells(myShellList, $appPath[0], "app", $skipFiles);
+        myShellList = _findShells(myShellList, $appPath[0], "app", $skipFiles);
 
         $skipCore = array_merge($skipFiles, myHiddenCommands, myShellList["app"]);
         $corePath = dirname(__DIR__);
-        myShellList = this._findShells(myShellList, $corePath, "CORE", $skipCore);
+        myShellList = _findShells(myShellList, $corePath, "CORE", $skipCore);
 
         $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "Command";
-        myShellList = this._findShells(myShellList, $corePath, "CORE", $skipCore);
+        myShellList = _findShells(myShellList, $corePath, "CORE", $skipCore);
 
         foreach (myPlugins as myPlugin) {
             myPluginPath = Plugin::classPath(myPlugin) . "Shell";
-            myShellList = this._findShells(myShellList, myPluginPath, myPlugin, []);
+            myShellList = _findShells(myShellList, myPluginPath, myPlugin, []);
         }
 
         return array_filter(myShellList);
@@ -50,9 +50,9 @@ class CommandTask : Shell {
      */
     protected auto _findShells(array myShellList, string myPath, string myKey, string[] $skip): array
     {
-        myShells = this._scanDir(myPath);
+        myShells = _scanDir(myPath);
 
-        return this._appendShells(myKey, myShells, myShellList, $skip);
+        return _appendShells(myKey, myShells, myShellList, $skip);
     }
 
     /**

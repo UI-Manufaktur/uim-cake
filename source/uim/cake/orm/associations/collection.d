@@ -28,7 +28,7 @@ class AssociationCollection : IteratorAggregate {
      */
     this(?ILocator myTableLocator = null) {
         if (myTableLocator !== null) {
-            this._tableLocator = myTableLocator;
+            _tableLocator = myTableLocator;
         }
     }
 
@@ -46,7 +46,7 @@ class AssociationCollection : IteratorAggregate {
     {
         [, myAlias] = pluginSplit(myAlias);
 
-        return this._items[myAlias] = $association;
+        return _items[myAlias] = $association;
     }
 
     /**
@@ -85,7 +85,7 @@ class AssociationCollection : IteratorAggregate {
      */
     auto get(string myAlias): ?Association
     {
-        return this._items[myAlias] ?? null;
+        return _items[myAlias] ?? null;
     }
 
     /**
@@ -96,7 +96,7 @@ class AssociationCollection : IteratorAggregate {
      */
     auto getByProperty(string $prop): ?Association
     {
-        foreach (this._items as $assoc) {
+        foreach (_items as $assoc) {
             if ($assoc.getProperty() == $prop) {
                 return $assoc;
             }
@@ -112,12 +112,12 @@ class AssociationCollection : IteratorAggregate {
      * @return bool Whether the association exists.
      */
     bool has(string myAlias) {
-        return isset(this._items[myAlias]);
+        return isset(_items[myAlias]);
     }
 
     // Get the names of all the associations in the collection.
     string[] keys() {
-        return array_keys(this._items);
+        return array_keys(_items);
     }
 
     /**
@@ -131,7 +131,7 @@ class AssociationCollection : IteratorAggregate {
     array getByType(myClass) {
         myClass = array_map("strtolower", (array)myClass);
 
-        $out = array_filter(this._items, function ($assoc) use (myClass) {
+        $out = array_filter(_items, function ($assoc) use (myClass) {
             [, myName] = moduleSplit(get_class($assoc));
 
             return in_array(strtolower(myName), myClass, true);
@@ -148,7 +148,7 @@ class AssociationCollection : IteratorAggregate {
      * @param string myAlias The alias name.
      */
     void remove(string myAlias) {
-        unset(this._items[myAlias]);
+        unset(_items[myAlias]);
     }
 
     /**
@@ -157,7 +157,7 @@ class AssociationCollection : IteratorAggregate {
      * Once removed associations will no longer be reachable
      */
     void removeAll() {
-        foreach (this._items as myAlias: $object) {
+        foreach (_items as myAlias: $object) {
             this.remove(myAlias);
         }
     }
@@ -180,7 +180,7 @@ class AssociationCollection : IteratorAggregate {
             return true;
         }
 
-        return this._saveAssociations(myTable, $entity, $associations, myOptions, false);
+        return _saveAssociations(myTable, $entity, $associations, myOptions, false);
     }
 
     /**
@@ -201,7 +201,7 @@ class AssociationCollection : IteratorAggregate {
             return true;
         }
 
-        return this._saveAssociations(myTable, $entity, $associations, myOptions, true);
+        return _saveAssociations(myTable, $entity, $associations, myOptions, true);
     }
 
     /**
@@ -241,7 +241,7 @@ class AssociationCollection : IteratorAggregate {
             if ($relation.isOwningSide(myTable) !== $owningSide) {
                 continue;
             }
-            if (!this._save($relation, $entity, $nested, myOptions)) {
+            if (!_save($relation, $entity, $nested, myOptions)) {
                 return false;
             }
         }
@@ -284,7 +284,7 @@ class AssociationCollection : IteratorAggregate {
      */
     bool cascadeDelete(IEntity $entity, array myOptions) {
         $noCascade = [];
-        foreach (this._items as $assoc) {
+        foreach (_items as $assoc) {
             if (!$assoc.getCascadeCallbacks()) {
                 $noCascade[] = $assoc;
                 continue;
@@ -322,7 +322,7 @@ class AssociationCollection : IteratorAggregate {
             return [];
         }
 
-        return this._normalizeAssociations(myKeys);
+        return _normalizeAssociations(myKeys);
     }
 
     /**
@@ -331,6 +331,6 @@ class AssociationCollection : IteratorAggregate {
      * @return \Traversable<string, \Cake\ORM\Association>
      */
     Traversable getIterator() {
-        return new ArrayIterator(this._items);
+        return new ArrayIterator(_items);
     }
 }

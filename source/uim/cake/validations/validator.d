@@ -151,8 +151,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Constructor
      */
     this() {
-        this._useI18n = function_exists("__d");
-        this._providers = self::$_defaultProviders;
+        _useI18n = function_exists("__d");
+        _providers = self::$_defaultProviders;
     }
 
     /**
@@ -165,7 +165,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     auto setStopOnFailure(bool $stopOnFailure = true) {
-        this._stopOnFailure = $stopOnFailure;
+        _stopOnFailure = $stopOnFailure;
 
         return this;
     }
@@ -196,13 +196,13 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     {
         myErrors = [];
 
-        foreach (this._fields as myName => myField) {
+        foreach (_fields as myName => myField) {
             myKeyPresent = array_key_exists(myName, myData);
 
-            $providers = this._providers;
+            $providers = _providers;
             $context = compact("data", "newRecord", "field", "providers");
 
-            if (!myKeyPresent && !this._checkPresence(myField, $context)) {
+            if (!myKeyPresent && !_checkPresence(myField, $context)) {
                 myErrors[myName]["_required"] = this.getRequiredMessage(myName);
                 continue;
             }
@@ -210,11 +210,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
                 continue;
             }
 
-            $canBeEmpty = this._canBeEmpty(myField, $context);
+            $canBeEmpty = _canBeEmpty(myField, $context);
 
             $flags = static::EMPTY_NULL;
-            if (isset(this._allowEmptyFlags[myName])) {
-                $flags = this._allowEmptyFlags[myName];
+            if (isset(_allowEmptyFlags[myName])) {
+                $flags = _allowEmptyFlags[myName];
             }
 
             $isEmpty = this.isEmpty(myData[myName], $flags);
@@ -228,7 +228,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
                 continue;
             }
 
-            myResult = this._processRules(myName, myField, myData, $newRecord);
+            myResult = _processRules(myName, myField, myData, $newRecord);
             if (myResult) {
                 myErrors[myName] = myResult;
             }
@@ -248,12 +248,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      */
     function field(string myName, ?ValidationSet $set = null): ValidationSet
     {
-        if (empty(this._fields[myName])) {
+        if (empty(_fields[myName])) {
             $set = $set ?: new ValidationSet();
-            this._fields[myName] = $set;
+            _fields[myName] = $set;
         }
 
-        return this._fields[myName];
+        return _fields[myName];
     }
 
     /**
@@ -263,7 +263,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return bool
      */
     bool hasField(string myName) {
-        return isset(this._fields[myName]);
+        return isset(_fields[myName]);
     }
 
     /**
@@ -285,7 +285,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             ));
         }
 
-        this._providers[myName] = $object;
+        _providers[myName] = $object;
 
         return this;
     }
@@ -298,16 +298,16 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @psalm-return object|class-string|null
      */
     auto getProvider(string myName) {
-        if (isset(this._providers[myName])) {
-            return this._providers[myName];
+        if (isset(_providers[myName])) {
+            return _providers[myName];
         }
         if (myName !== "default") {
             return null;
         }
 
-        this._providers[myName] = new RulesProvider();
+        _providers[myName] = new RulesProvider();
 
-        return this._providers[myName];
+        return _providers[myName];
     }
 
     /**
@@ -357,7 +357,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      */
     function providers(): array
     {
-        return array_keys(this._providers);
+        return array_keys(_providers);
     }
 
     /**
@@ -367,7 +367,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return bool
      */
     bool offsetExists(myField) {
-        return isset(this._fields[myField]);
+        return isset(_fields[myField]);
     }
 
     /**
@@ -395,7 +395,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             }
             $rules = $set;
         }
-        this._fields[myField] = $rules;
+        _fields[myField] = $rules;
     }
 
     /**
@@ -405,7 +405,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return void
      */
     void offsetUnset(myField) {
-        unset(this._fields[myField]);
+        unset(_fields[myField]);
     }
 
     /**
@@ -414,14 +414,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return \Traversable<string, \Cake\Validation\ValidationSet>
      */
     Traversable getIterator() {
-        return new ArrayIterator(this._fields);
+        return new ArrayIterator(_fields);
     }
 
     /**
      * Returns the number of fields having validation rules
      */
     int count() {
-        return count(this._fields);
+        return count(_fields);
     }
 
     /**
@@ -461,7 +461,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             if (is_array($rule)) {
                 $rule += [
                     "rule" => myName,
-                    "last" => this._stopOnFailure,
+                    "last" => _stopOnFailure,
                 ];
             }
             if (!is_string(myName)) {
@@ -597,7 +597,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      */
     function remove(string myField, Nullable!string $rule = null) {
         if ($rule == null) {
-            unset(this._fields[myField]);
+            unset(_fields[myField]);
         } else {
             this.field(myField).remove($rule);
         }
@@ -630,16 +630,16 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         ];
 
         if (!is_array(myField)) {
-            myField = this._convertValidatorToArray(myField, $defaults);
+            myField = _convertValidatorToArray(myField, $defaults);
         }
 
         foreach (myField as myFieldName => $setting) {
-            $settings = this._convertValidatorToArray(myFieldName, $defaults, $setting);
+            $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
             myFieldName = current(array_keys($settings));
 
             this.field(myFieldName).requirePresence($settings[myFieldName]["mode"]);
             if ($settings[myFieldName]["message"]) {
-                this._presenceMessages[myFieldName] = $settings[myFieldName]["message"];
+                _presenceMessages[myFieldName] = $settings[myFieldName]["message"];
             }
         }
 
@@ -726,11 +726,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             "message" => myMessage,
         ];
         if (!is_array(myField)) {
-            myField = this._convertValidatorToArray(myField, $defaults);
+            myField = _convertValidatorToArray(myField, $defaults);
         }
 
         foreach (myField as myFieldName => $setting) {
-            $settings = this._convertValidatorToArray(myFieldName, $defaults, $setting);
+            $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
             myFieldName = array_keys($settings)[0];
             this.allowEmptyFor(
                 myFieldName,
@@ -815,10 +815,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     function allowEmptyFor(string myField, Nullable!int $flags = null, $when = true, Nullable!string myMessage = null) {
         this.field(myField).allowEmpty($when);
         if (myMessage) {
-            this._allowEmptyMessages[myField] = myMessage;
+            _allowEmptyMessages[myField] = myMessage;
         }
         if ($flags !== null) {
-            this._allowEmptyFlags[myField] = $flags;
+            _allowEmptyFlags[myField] = $flags;
         }
 
         return this;
@@ -1170,19 +1170,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         ];
 
         if (!is_array(myField)) {
-            myField = this._convertValidatorToArray(myField, $defaults);
+            myField = _convertValidatorToArray(myField, $defaults);
         }
 
         foreach (myField as myFieldName => $setting) {
-            $settings = this._convertValidatorToArray(myFieldName, $defaults, $setting);
+            $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
             myFieldName = current(array_keys($settings));
 
             $whenSetting = this.invertWhenClause($settings[myFieldName]["when"]);
 
             this.field(myFieldName).allowEmpty($whenSetting);
-            this._allowEmptyFlags[myFieldName] = static::EMPTY_ALL;
+            _allowEmptyFlags[myFieldName] = static::EMPTY_ALL;
             if ($settings[myFieldName]["message"]) {
-                this._allowEmptyMessages[myFieldName] = $settings[myFieldName]["message"];
+                _allowEmptyMessages[myFieldName] = $settings[myFieldName]["message"];
             }
         }
 
@@ -2343,11 +2343,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return bool
      */
     bool isEmptyAllowed(string myField, bool $newRecord) {
-        $providers = this._providers;
+        $providers = _providers;
         myData = [];
         $context = compact("data", "newRecord", "field", "providers");
 
-        return this._canBeEmpty(this.field(myField), $context);
+        return _canBeEmpty(this.field(myField), $context);
     }
 
     /**
@@ -2359,11 +2359,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return bool
      */
     bool isPresenceRequired(string myField, bool $newRecord) {
-        $providers = this._providers;
+        $providers = _providers;
         myData = [];
         $context = compact("data", "newRecord", "field", "providers");
 
-        return !this._checkPresence(this.field(myField), $context);
+        return !_checkPresence(this.field(myField), $context);
     }
 
     /**
@@ -2391,16 +2391,16 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return string|null
      */
     Nullable!string getRequiredMessage(string myField) {
-        if (!isset(this._fields[myField])) {
+        if (!isset(_fields[myField])) {
             return null;
         }
 
         $defaultMessage = "This field is required";
-        if (this._useI18n) {
+        if (_useI18n) {
             $defaultMessage = __d("cake", "This field is required");
         }
 
-        return this._presenceMessages[myField] ?? $defaultMessage;
+        return _presenceMessages[myField] ?? $defaultMessage;
     }
 
     /**
@@ -2410,22 +2410,22 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return string|null
      */
     Nullable!string getNotEmptyMessage(string myField) {
-        if (!isset(this._fields[myField])) {
+        if (!isset(_fields[myField])) {
             return null;
         }
 
         $defaultMessage = "This field cannot be left empty";
-        if (this._useI18n) {
+        if (_useI18n) {
             $defaultMessage = __d("cake", "This field cannot be left empty");
         }
 
-        foreach (this._fields[myField] as $rule) {
+        foreach (_fields[myField] as $rule) {
             if ($rule.get("rule") == "notBlank" && $rule.get("message")) {
                 return $rule.get("message");
             }
         }
 
-        return this._allowEmptyMessages[myField] ?? $defaultMessage;
+        return _allowEmptyMessages[myField] ?? $defaultMessage;
     }
 
     /**
@@ -2560,7 +2560,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         this.getProvider("default");
         myMessage = "The provided value is invalid";
 
-        if (this._useI18n) {
+        if (_useI18n) {
             myMessage = __d("cake", "The provided value is invalid");
         }
 
@@ -2568,7 +2568,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
          * @var \Cake\Validation\ValidationRule $rule
          */
         foreach ($rules as myName => $rule) {
-            myResult = $rule.process(myData[myField], this._providers, compact("newRecord", "data", "field"));
+            myResult = $rule.process(myData[myField], _providers, compact("newRecord", "data", "field"));
             if (myResult == true) {
                 continue;
             }
@@ -2597,7 +2597,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     auto __debugInfo(): array
     {
         myFields = [];
-        foreach (this._fields as myName => myFieldSet) {
+        foreach (_fields as myName => myFieldSet) {
             myFields[myName] = [
                 "isPresenceRequired" => myFieldSet.isPresenceRequired(),
                 "isEmptyAllowed" => myFieldSet.isEmptyAllowed(),
@@ -2606,12 +2606,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         }
 
         return [
-            "_presenceMessages" => this._presenceMessages,
-            "_allowEmptyMessages" => this._allowEmptyMessages,
-            "_allowEmptyFlags" => this._allowEmptyFlags,
-            "_useI18n" => this._useI18n,
-            "_stopOnFailure" => this._stopOnFailure,
-            "_providers" => array_keys(this._providers),
+            "_presenceMessages" => _presenceMessages,
+            "_allowEmptyMessages" => _allowEmptyMessages,
+            "_allowEmptyFlags" => _allowEmptyFlags,
+            "_useI18n" => _useI18n,
+            "_stopOnFailure" => _stopOnFailure,
+            "_providers" => array_keys(_providers),
             "_fields" => myFields,
         ];
     }

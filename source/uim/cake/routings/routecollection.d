@@ -70,25 +70,25 @@ class RouteCollection
     void add(Route $route, array myOptions = []) {
         // Explicit names
         if (isset(myOptions["_name"])) {
-            if (isset(this._named[myOptions["_name"]])) {
-                $matched = this._named[myOptions["_name"]];
+            if (isset(_named[myOptions["_name"]])) {
+                $matched = _named[myOptions["_name"]];
                 throw new DuplicateNamedRouteException([
                     "name" => myOptions["_name"],
                     "url" => $matched.template,
                     "duplicate" => $matched,
                 ]);
             }
-            this._named[myOptions["_name"]] = $route;
+            _named[myOptions["_name"]] = $route;
         }
 
         // Generated names.
         myName = $route.getName();
-        this._routeTable[myName] = this._routeTable[myName] ?? [];
-        this._routeTable[myName][] = $route;
+        _routeTable[myName] = _routeTable[myName] ?? [];
+        _routeTable[myName][] = $route;
 
         // Index path prefixes (for parsing)
         myPath = $route.staticPath();
-        this._paths[myPath][] = $route;
+        _paths[myPath][] = $route;
 
         $extensions = $route.getExtensions();
         if (count($extensions) > 0) {
@@ -109,9 +109,9 @@ class RouteCollection
         $decoded = urldecode(myUrl);
 
         // Sort path segments matching longest paths first.
-        krsort(this._paths);
+        krsort(_paths);
 
-        foreach (this._paths as myPath => $routes) {
+        foreach (_paths as myPath => $routes) {
             if (indexOf($decoded, myPath) !== 0) {
                 continue;
             }
@@ -158,9 +158,9 @@ class RouteCollection
         myUrlPath = urldecode($uri.getPath());
 
         // Sort path segments matching longest paths first.
-        krsort(this._paths);
+        krsort(_paths);
 
-        foreach (this._paths as myPath => $routes) {
+        foreach (_paths as myPath => $routes) {
             if (indexOf(myUrlPath, myPath) !== 0) {
                 continue;
             }
@@ -279,8 +279,8 @@ class RouteCollection
         if (isset(myUrl["_name"])) {
             myName = myUrl["_name"];
             unset(myUrl["_name"]);
-            if (isset(this._named[myName])) {
-                $route = this._named[myName];
+            if (isset(_named[myName])) {
+                $route = _named[myName];
                 $out = $route.match(myUrl + $route.defaults, $context);
                 if ($out) {
                     return $out;
@@ -294,11 +294,11 @@ class RouteCollection
             throw new MissingRouteException(["url" => myName, "context" => $context]);
         }
 
-        foreach (this._getNames(myUrl) as myName) {
-            if (empty(this._routeTable[myName])) {
+        foreach (_getNames(myUrl) as myName) {
+            if (empty(_routeTable[myName])) {
                 continue;
             }
-            foreach (this._routeTable[myName] as $route) {
+            foreach (_routeTable[myName] as $route) {
                 $match = $route.match(myUrl, $context);
                 if ($match) {
                     return $match == "/" ? $match : trim($match, "/");
@@ -315,10 +315,10 @@ class RouteCollection
      */
     function routes(): array
     {
-        krsort(this._paths);
+        krsort(_paths);
 
         return array_reduce(
-            this._paths,
+            _paths,
             "array_merge",
             []
         );
@@ -326,7 +326,7 @@ class RouteCollection
 
     // Get the connected named routes.
     Route[] named() {
-        return this._named;
+        return _named;
     }
 
     /**
@@ -335,7 +335,7 @@ class RouteCollection
      * @return The valid extensions.
      */
     string[] getExtensions() {
-        return this._extensions;
+        return _extensions;
     }
 
     /**
@@ -349,11 +349,11 @@ class RouteCollection
     auto setExtensions(string[] $extensions, bool myMerge = true) {
         if (myMerge) {
             $extensions = array_unique(array_merge(
-                this._extensions,
+                _extensions,
                 $extensions
             ));
         }
-        this._extensions = $extensions;
+        _extensions = $extensions;
 
         return this;
     }
@@ -370,7 +370,7 @@ class RouteCollection
      * @throws \RuntimeException
      */
     function registerMiddleware(string myName, $middleware) {
-        this._middleware[myName] = $middleware;
+        _middleware[myName] = $middleware;
 
         return this;
     }
@@ -396,7 +396,7 @@ class RouteCollection
             }
         }
 
-        this._middlewareGroups[myName] = $middlewareNames;
+        _middlewareGroups[myName] = $middlewareNames;
 
         return this;
     }
@@ -408,7 +408,7 @@ class RouteCollection
      * @return bool
      */
     bool hasMiddlewareGroup(string myName) {
-        return array_key_exists(myName, this._middlewareGroups);
+        return array_key_exists(myName, _middlewareGroups);
     }
 
     /**
@@ -418,7 +418,7 @@ class RouteCollection
      * @return bool
      */
     bool hasMiddleware(string myName) {
-        return isset(this._middleware[myName]);
+        return isset(_middleware[myName]);
     }
 
     /**
@@ -444,7 +444,7 @@ class RouteCollection
         $out = [];
         foreach (myNames as myName) {
             if (this.hasMiddlewareGroup(myName)) {
-                $out = array_merge($out, this.getMiddleware(this._middlewareGroups[myName]));
+                $out = array_merge($out, this.getMiddleware(_middlewareGroups[myName]));
                 continue;
             }
             if (!this.hasMiddleware(myName)) {
@@ -453,7 +453,7 @@ class RouteCollection
                     myName
                 ));
             }
-            $out[] = this._middleware[myName];
+            $out[] = _middleware[myName];
         }
 
         return $out;

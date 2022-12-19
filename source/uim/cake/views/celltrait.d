@@ -55,7 +55,7 @@ trait CellTrait {
             myData = array_values(myData);
         }
         myOptions = ["action" => $action, "args" => myData] + myOptions;
-        $cell = this._createCell(myClassName, $action, myPlugin, myOptions);
+        $cell = _createCell(myClassName, $action, myPlugin, myOptions);
 
         return $cell;
     }

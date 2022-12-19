@@ -105,8 +105,8 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        foreach (this._config as $assoc: $settings) {
-            $assoc = this._table.getAssociation($assoc);
+        foreach (_config as $assoc: $settings) {
+            $assoc = _table.getAssociation($assoc);
             foreach ($settings as myField: myConfig) {
                 if (is_int(myField)) {
                     continue;
@@ -121,7 +121,7 @@ class CounterCacheBehavior : Behavior
                     myConfig["ignoreDirty"] == true &&
                     $entity.$entityAlias.isDirty(myField)
                 ) {
-                    this._ignoreDirty[$registryAlias][myField] = true;
+                    _ignoreDirty[$registryAlias][myField] = true;
                 }
             }
         }
@@ -142,8 +142,8 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        this._processAssociations(myEvent, $entity);
-        this._ignoreDirty = [];
+        _processAssociations(myEvent, $entity);
+        _ignoreDirty = [];
     }
 
     /**
@@ -161,7 +161,7 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        this._processAssociations(myEvent, $entity);
+        _processAssociations(myEvent, $entity);
     }
 
     /**
@@ -172,9 +172,9 @@ class CounterCacheBehavior : Behavior
      * @return void
      */
     protected void _processAssociations(IEvent myEvent, IEntity $entity) {
-        foreach (this._config as $assoc: $settings) {
-            $assoc = this._table.getAssociation($assoc);
-            this._processAssociation(myEvent, $entity, $assoc, $settings);
+        foreach (_config as $assoc: $settings) {
+            $assoc = _table.getAssociation($assoc);
+            _processAssociation(myEvent, $entity, $assoc, $settings);
         }
     }
 
@@ -219,28 +219,28 @@ class CounterCacheBehavior : Behavior
             }
 
             if (
-                isset(this._ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField]) &&
-                this._ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField] == true
+                isset(_ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField]) &&
+                _ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField] == true
             ) {
                 continue;
             }
 
-            if (this._shouldUpdateCount($updateConditions)) {
+            if (_shouldUpdateCount($updateConditions)) {
                 if (myConfig instanceof Closure) {
-                    myCount = myConfig(myEvent, $entity, this._table, false);
+                    myCount = myConfig(myEvent, $entity, _table, false);
                 } else {
-                    myCount = this._getCount(myConfig, myCountConditions);
+                    myCount = _getCount(myConfig, myCountConditions);
                 }
                 if (myCount !== false) {
                     $assoc.getTarget().updateAll([myField: myCount], $updateConditions);
                 }
             }
 
-            if (isset($updateOriginalConditions) && this._shouldUpdateCount($updateOriginalConditions)) {
+            if (isset($updateOriginalConditions) && _shouldUpdateCount($updateOriginalConditions)) {
                 if (myConfig instanceof Closure) {
-                    myCount = myConfig(myEvent, $entity, this._table, true);
+                    myCount = myConfig(myEvent, $entity, _table, true);
                 } else {
-                    myCount = this._getCount(myConfig, myCountOriginalConditions);
+                    myCount = _getCount(myConfig, myCountOriginalConditions);
                 }
                 if (myCount !== false) {
                     $assoc.getTarget().updateAll([myField: myCount], $updateOriginalConditions);
@@ -276,7 +276,7 @@ class CounterCacheBehavior : Behavior
         }
 
         myConfig["conditions"] = array_merge($conditions, myConfig["conditions"] ?? []);
-        myQuery = this._table.find(myFinder, myConfig);
+        myQuery = _table.find(myFinder, myConfig);
 
         return myQuery.count();
     }

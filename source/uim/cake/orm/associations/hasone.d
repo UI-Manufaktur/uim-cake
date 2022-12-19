@@ -27,11 +27,11 @@ class HasOne : Association
 
     // Gets the name of the field representing the foreign key to the target table.
     string[] getForeignKey() {
-        if (this._foreignKey == null) {
-            this._foreignKey = this._modelKey(this.getSource().getAlias());
+        if (_foreignKey == null) {
+            _foreignKey = _modelKey(this.getSource().getAlias());
         }
 
-        return this._foreignKey;
+        return _foreignKey;
     }
 
     /**
@@ -40,7 +40,7 @@ class HasOne : Association
      * @return string
      */
     protected string _propertyName() {
-        [, myName] = pluginSplit(this._name);
+        [, myName] = pluginSplit(_name);
 
         return Inflector::underscore(Inflector::singularize(myName));
     }

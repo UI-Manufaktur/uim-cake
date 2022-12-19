@@ -24,7 +24,7 @@ class ValidCount
      * @param string myField The field to check the count on.
      */
     this(string myField) {
-        this._field = myField;
+        _field = myField;
     }
 
     /**
@@ -35,7 +35,7 @@ class ValidCount
      * @return bool True if successful, else false.
      */
     bool __invoke(IEntity $entity, array myOptions) {
-        myValue = $entity.{this._field};
+        myValue = $entity.{_field};
         if (!is_array(myValue) && !myValue instanceof Countable) {
             return false;
         }
