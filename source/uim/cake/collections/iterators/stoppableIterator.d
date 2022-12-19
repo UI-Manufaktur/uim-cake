@@ -60,32 +60,30 @@ class StoppableIterator : Collection {
         return !$condition($current, myKey, this._innerIterator);
     }
 
+    Traversable unwrap() {
+      $iterator = this._innerIterator;
 
-    function unwrap(): Traversable
-    {
-        $iterator = this._innerIterator;
+      if ($iterator instanceof ICollection) {
+          $iterator = $iterator.unwrap();
+      }
 
-        if ($iterator instanceof ICollection) {
-            $iterator = $iterator.unwrap();
-        }
+      if (get_class($iterator) !== ArrayIterator::class) {
+          return this;
+      }
 
-        if (get_class($iterator) !== ArrayIterator::class) {
-            return this;
-        }
+      // ArrayIterator can be traversed strictly.
+      // Let"s do that for performance gains
 
-        // ArrayIterator can be traversed strictly.
-        // Let"s do that for performance gains
+      $callback = this._condition;
+      $res = [];
 
-        $callback = this._condition;
-        $res = [];
+      foreach ($iterator as $k: $v) {
+          if ($callback($v, $k, $iterator)) {
+              break;
+          }
+          $res[$k] = $v;
+      }
 
-        foreach ($iterator as $k: $v) {
-            if ($callback($v, $k, $iterator)) {
-                break;
-            }
-            $res[$k] = $v;
-        }
-
-        return new ArrayIterator($res);
+      return new ArrayIterator($res);
     }
 }

@@ -17,13 +17,8 @@ class NoChildrenIterator : Collection : RecursiveIterator
         return false;
     }
 
-    /**
-     * Returns a self instance without any elements.
-     *
-     * @return \RecursiveIterator
-     */
-    auto getChildren(): RecursiveIterator
-    {
+    // Returns a self instance without any elements.
+    RecursiveIterator getChildren() {
         return new static([]);
     }
 }

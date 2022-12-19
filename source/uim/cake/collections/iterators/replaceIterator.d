@@ -16,12 +16,8 @@ class ReplaceIterator : Collection
      */
     protected $_callback;
 
-    /**
-     * A reference to the internal iterator this object is wrapping.
-     *
-     * @var \Traversable
-     */
-    protected $_innerIterator;
+    // A reference to the internal iterator this object is wrapping.
+    protected Traversable $_innerIterator;
 
     /**
      * Creates an iterator from another iterator that will modify each of the values
@@ -48,34 +44,33 @@ class ReplaceIterator : Collection
      */
     #[\ReturnTypeWillChange]
     function current() {
-        $callback = this._callback;
+      $callback = this._callback;
 
-        return $callback(super.current(), this.key(), this._innerIterator);
+      return $callback(super.current(), this.key(), this._innerIterator);
     }
 
 
-    function unwrap(): Traversable
-    {
-        $iterator = this._innerIterator;
+    Traversable unwrap() {
+      $iterator = this._innerIterator;
 
-        if ($iterator instanceof ICollection) {
-            $iterator = $iterator.unwrap();
-        }
+      if ($iterator instanceof ICollection) {
+          $iterator = $iterator.unwrap();
+      }
 
-        if (get_class($iterator) !== ArrayIterator::class) {
-            return this;
-        }
+      if (get_class($iterator) !== ArrayIterator::class) {
+          return this;
+      }
 
-        // ArrayIterator can be traversed strictly.
-        // Let"s do that for performance gains
+      // ArrayIterator can be traversed strictly.
+      // Let"s do that for performance gains
 
-        $callback = this._callback;
-        $res = [];
+      $callback = this._callback;
+      $res = [];
 
-        foreach ($iterator as $k: $v) {
-            $res[$k] = $callback($v, $k, $iterator);
-        }
+      foreach ($iterator as $k: $v) {
+          $res[$k] = $callback($v, $k, $iterator);
+      }
 
-        return new ArrayIterator($res);
+      return new ArrayIterator($res);
     }
 }

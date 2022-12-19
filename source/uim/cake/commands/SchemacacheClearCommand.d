@@ -53,20 +53,19 @@ class SchemacacheClearCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
-        $parser.setDescription(
-            "Clear all metadata caches for the connection. If a " .
-            "table name is provided, only that table will be removed."
-        ).addOption("connection", [
-            "help":"The connection to build/clear metadata cache data for.",
-            "short":"c",
-            "default":"default",
-        ]).addArgument("name", [
-            "help":"A specific table you want to clear cached data for.",
-            "optional":true,
-        ]);
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
+      $parser.setDescription(
+          "Clear all metadata caches for the connection. If a " .
+          "table name is provided, only that table will be removed."
+      ).addOption("connection", [
+          "help":"The connection to build/clear metadata cache data for.",
+          "short":"c",
+          "default":"default",
+      ]).addArgument("name", [
+          "help":"A specific table you want to clear cached data for.",
+          "optional":true,
+      ]);
 
-        return $parser;
+      return $parser;
     }
 }

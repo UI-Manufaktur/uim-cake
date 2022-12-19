@@ -70,8 +70,7 @@ class SortIterator : Collection
      *
      * @return \Traversable
      */
-    function unwrap(): Traversable
-    {
+    Traversable unwrap() {
         return this.getInnerIterator();
     }
 }

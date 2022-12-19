@@ -3,12 +3,8 @@ module uim.cake.collections.iterators.nest;
 @safe:
 import uim.cake;
 
-/**
- * A type of collection that is aware of nested items and exposes methods to
- * check or retrieve them
- */
-class NestIterator : Collection : RecursiveIterator
-{
+// A type of collection that is aware of nested items and exposes methods to check or retrieve them
+class NestIterator : Collection : RecursiveIterator {
     /**
      * The name of the property that contains the nested items for each element
      *
@@ -28,21 +24,16 @@ class NestIterator : Collection : RecursiveIterator
         this._nestKey = $nestKey;
     }
 
-    /**
-     * Returns a traversable containing the children for the current item
-     *
-     * @return \RecursiveIterator
-     */
-    auto getChildren(): RecursiveIterator
-    {
-        $property = this._propertyExtractor(this._nestKey);
+    // Returns a traversable containing the children for the current item
+    RecursiveIterator getChildren() {
+      $property = this._propertyExtractor(this._nestKey);
 
-        return new static($property(this.current()), this._nestKey);
+      return new static($property(this.current()), this._nestKey);
     }
 
     /**
      * Returns true if there is an array or a traversable object stored under the
-     * configured nestKey for the current item
+     * configured nestKey for the current item */
     bool hasChildren() {
         $property = this._propertyExtractor(this._nestKey);
         $children = $property(this.current());

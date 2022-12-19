@@ -54,8 +54,7 @@ class ReplaceIterator : Collection
     }
 
 
-    function unwrap(): Traversable
-    {
+    Traversable unwrap() {
         $iterator = this._innerIterator;
 
         if ($iterator instanceof ICollection) {

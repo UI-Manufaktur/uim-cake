@@ -35,8 +35,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    functConsoleOptionParserion buildOptionParser(ConsoleOptionParser $parser) {
         myModes = [
             "commands":"Output a list of available commands",
             "subcommands":"Output a list of available sub-commands for a command",
@@ -80,23 +79,22 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    Nullable!int execute(Arguments $args, ConsoleIo $io)
-    {
-        myMode = $args.getArgument("mode");
-        switch (myMode) {
-            case "commands":
-                return this.getCommands($args, $io);
-            case "subcommands":
-                return this.getSubcommands($args, $io);
-            case "options":
-                return this.getOptions($args, $io);
-            case "fuzzy":
-                return static::CODE_SUCCESS;
-            default:
-                $io.err("Invalid mode chosen.");
-        }
+    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+      myMode = $args.getArgument("mode");
+      switch (myMode) {
+        case "commands":
+            return this.getCommands($args, $io);
+        case "subcommands":
+            return this.getSubcommands($args, $io);
+        case "options":
+            return this.getOptions($args, $io);
+        case "fuzzy":
+            return static::CODE_SUCCESS;
+        default:
+            $io.err("Invalid mode chosen.");
+      }
 
-        return static::CODE_SUCCESS;
+      return static::CODE_SUCCESS;
     }
 
     /**
@@ -104,7 +102,6 @@ class CompletionCommand : Command : ICommandCollectionAware
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
-     * @return int
      */
     protected int getCommands(Arguments $args, ConsoleIo $io) {
         myOptions = [];
