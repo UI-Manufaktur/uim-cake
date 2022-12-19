@@ -5,9 +5,8 @@
 **********************************************************************************************************/
 module uim.cakem.Rule;
 
-import uim.cake.datasources\IEntity;
-import uim.cake.validations\Validation;
-use Countable;
+@safe:
+import uim.cake;
 
 /**
  * Validates the count of associated records.

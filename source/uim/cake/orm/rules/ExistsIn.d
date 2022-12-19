@@ -1,9 +1,7 @@
 module uim.cake.orm.Rule;
 
-import uim.cake.datasources\IEntity;
-import uim.cake.orm.associations;
-import uim.cake.orm.Table;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Checks that the value provided in a field exists as the primary key of another

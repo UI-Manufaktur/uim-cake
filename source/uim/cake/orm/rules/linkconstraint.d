@@ -1,8 +1,7 @@
 module uim.cake.orm.Rule;
 
-import uim.cake.datasources\IEntity;
-import uim.cake.orm.associations;
-import uim.cake.orm.Table;
+@safe:
+import uim.cake;
 
 /**
  * Checks whether links to a given association exist / do not exist.

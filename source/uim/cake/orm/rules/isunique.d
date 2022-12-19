@@ -1,7 +1,7 @@
 module uim.cake.orm.Rule;
 
-import uim.cake.datasources\IEntity;
-import uim.cake.utilities.Hash;
+@safe:
+import uim.cake;
 
 /**
  * Checks that a list of fields from an entity are unique in the table
