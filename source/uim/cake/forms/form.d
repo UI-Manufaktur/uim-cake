@@ -114,7 +114,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return this
      */
     auto setSchema(Schema $schema) {
-        this._schema = $schema;
+        _schema = $schema;
 
         return this;
     }
@@ -131,11 +131,11 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      */
     auto getSchema(): Schema
     {
-        if (this._schema == null) {
-            this._schema = this._buildSchema(new this._schemaClass());
+        if (_schema == null) {
+            _schema = _buildSchema(new _schemaClass());
         }
 
-        return this._schema;
+        return _schema;
     }
 
     /**
@@ -183,10 +183,10 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @throws \RuntimeException If validator is invalid.
      */
     bool validate(array myData, Nullable!string $validator = null) {
-        this._errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
+        _errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
             .validate(myData);
 
-        return count(this._errors) == 0;
+        return count(_errors) == 0;
     }
 
     /**
@@ -198,7 +198,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return array Last set validation errors.
      */
     array getErrors() {
-        return this._errors;
+        return _errors;
     }
 
     /**
@@ -216,7 +216,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return this
      */
     auto setErrors(array myErrors) {
-        this._errors = myErrors;
+        _errors = myErrors;
 
         return this;
     }
@@ -240,17 +240,17 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *   result of the `_execute()` method.
      */
     bool execute(array myData, array myOptions = []) {
-        this._data = myData;
+        _data = myData;
 
         myOptions += ["validate":true];
 
         if (myOptions["validate"] == false) {
-            return this._execute(myData);
+            return _execute(myData);
         }
 
         $validator = myOptions["validate"] == true ? static::DEFAULT_VALIDATOR : myOptions["validate"];
 
-        return this.validate(myData, $validator) ? this._execute(myData) : false;
+        return this.validate(myData, $validator) ? _execute(myData) : false;
     }
 
     /**
@@ -273,10 +273,10 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      */
     auto getData(Nullable!string myField = null) {
         if (myField == null) {
-            return this._data;
+            return _data;
         }
 
-        return Hash::get(this._data, myField);
+        return Hash::get(_data, myField);
     }
 
     /**
@@ -295,7 +295,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
 
         /** @psalm-suppress PossiblyInvalidIterator */
         foreach ($write as myKey: $val) {
-            this._data = Hash::insert(this._data, myKey, $val);
+            _data = Hash::insert(_data, myKey, $val);
         }
 
         return this;
@@ -308,7 +308,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return this
      */
     auto setData(array myData) {
-        this._data = myData;
+        _data = myData;
 
         return this;
     }

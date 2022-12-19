@@ -48,7 +48,7 @@ class FieldTypeConverter
      * @param \Cake\Database\IDriver myDriver The driver to use for the type conversion
      */
     this(TypeMap myTypeMap, IDriver myDriver) {
-        this._driver = myDriver;
+        _driver = myDriver;
         $map = myTypeMap.toArray();
         myTypes = TypeFactory::buildAll();
 
@@ -92,7 +92,7 @@ class FieldTypeConverter
         }
 
         this.types = myTypes;
-        this._typeMap = $simpleResult;
+        _typeMap = $simpleResult;
         this.batchingTypeMap = $batchingResult;
     }
 
@@ -103,16 +103,16 @@ class FieldTypeConverter
      * @param array $row The array with the fields to be casted
      */
     array __invoke(array $row) {
-        if (!empty(this._typeMap)) {
-            foreach (this._typeMap as myField: myType) {
-                $row[myField] = myType.toPHP($row[myField], this._driver);
+        if (!empty(_typeMap)) {
+            foreach (_typeMap as myField: myType) {
+                $row[myField] = myType.toPHP($row[myField], _driver);
             }
         }
 
         if (!empty(this.batchingTypeMap)) {
             foreach (this.batchingTypeMap as $t: myFields) {
                 /** @psalm-suppress PossiblyUndefinedMethod */
-                $row = this.types[$t].manyToPHP($row, myFields, this._driver);
+                $row = this.types[$t].manyToPHP($row, myFields, _driver);
             }
         }
 

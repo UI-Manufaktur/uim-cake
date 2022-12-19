@@ -67,15 +67,15 @@ abstract class BaseErrorHandler
      * Register the error and exception handlers.
      */
     void register() {
-        $level = this._config["errorLevel"] ?? -1;
+        $level = _config["errorLevel"] ?? -1;
         error_reporting($level);
         set_error_handler([this, "handleError"], $level);
         set_exception_handler([this, "handleException"]);
         register_shutdown_function(void () {
-            if ((PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") && this._handled) {
+            if ((PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") && _handled) {
                 return;
             }
-            $megabytes = this._config["extraFatalErrorMemory"] ?? 4;
+            $megabytes = _config["extraFatalErrorMemory"] ?? 4;
             if ($megabytes > 0) {
                 this.increaseMemoryLimit($megabytes * 1024);
             }
@@ -127,7 +127,7 @@ abstract class BaseErrorHandler
         if (!(error_reporting() & $code)) {
             return false;
         }
-        this._handled = true;
+        _handled = true;
         [myError, $log] = static::mapErrorCode($code);
         if ($log == LOG_ERR) {
             /** @psalm-suppress PossiblyNullArgument */
@@ -160,8 +160,8 @@ abstract class BaseErrorHandler
                 "path":Debugger::trimPath((string)myfile),
             ];
         }
-        this._displayError(myData, $debug);
-        this._logError($log, myData);
+        _displayError(myData, $debug);
+        _logError($log, myData);
 
         return true;
     }
@@ -191,10 +191,10 @@ abstract class BaseErrorHandler
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
     void handleException(Throwable myException) {
-        this._displayException(myException);
+        _displayException(myException);
         this.logException(myException);
         $code = myException.getCode() ?: 1;
-        this._stop((int)$code);
+        _stop((int)$code);
     }
 
     /**
@@ -224,7 +224,7 @@ abstract class BaseErrorHandler
             "line":$line,
             "error":"Fatal Error",
         ];
-        this._logError(LOG_ERR, myData);
+        _logError(LOG_ERR, myData);
 
         this.handleException(new FatalErrorException($description, 500, myfile, $line));
 
@@ -275,7 +275,7 @@ abstract class BaseErrorHandler
             myData["line"]
         );
         $context = [];
-        if (!empty(this._config["trace"])) {
+        if (!empty(_config["trace"])) {
             $context["trace"] = Debugger::trace([
                 "start":1,
                 "format":"log",
@@ -293,7 +293,7 @@ abstract class BaseErrorHandler
      * @param \Psr\Http\Message\IServerRequest|null myRequest The current request.
      */
     bool logException(Throwable myException, ?IServerRequest myRequest = null) {
-        if (empty(this._config["log"])) {
+        if (empty(_config["log"])) {
             return false;
         }
 
@@ -308,11 +308,11 @@ abstract class BaseErrorHandler
     auto getLogger() {
         if (this.logger == null) {
             /** @var \Cake\Error\IErrorLogger $logger */
-            $logger = new this._config["errorLogger"](this._config);
+            $logger = new _config["errorLogger"](_config);
 
             if (!$logger instanceof IErrorLogger) {
                 // Set the logger so that the next error can be logged.
-                this.logger = new ErrorLogger(this._config);
+                this.logger = new ErrorLogger(_config);
 
                 $interface = IErrorLogger::class;
                 myType = getTypeName($logger);

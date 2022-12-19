@@ -40,7 +40,7 @@ class JsonConfig : IConfigEngine
         if (myPath == null) {
             myPath = CONFIG;
         }
-        this._path = myPath;
+        _path = myPath;
     }
 
     /**
@@ -57,7 +57,7 @@ class JsonConfig : IConfigEngine
      *   is an error parsing the JSON string.
      */
     array read(string myKey) {
-        myfile = this._getFilePath(myKey, true);
+        myfile = _getFilePath(myKey, true);
 
         myValues = json_decode(file_get_contents(myfile), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -87,7 +87,7 @@ class JsonConfig : IConfigEngine
      * @return bool Success
      */
     bool dump(string myKey, array myData) {
-        myfilename = this._getFilePath(myKey);
+        myfilename = _getFilePath(myKey);
 
         return file_put_contents(myfilename, json_encode(myData, JSON_PRETTY_PRINT)) > 0;
     }

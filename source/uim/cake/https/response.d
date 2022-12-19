@@ -412,37 +412,37 @@ class Response : IResponse
      * @throws \InvalidArgumentException
      */
     this(array myOptions = []) {
-        this._streamTarget = myOptions["streamTarget"] ?? this._streamTarget;
-        this._streamMode = myOptions["streamMode"] ?? this._streamMode;
+        _streamTarget = myOptions["streamTarget"] ?? _streamTarget;
+        _streamMode = myOptions["streamMode"] ?? _streamMode;
         if (isset(myOptions["stream"])) {
             if (!myOptions["stream"] instanceof StreamInterface) {
                 throw new InvalidArgumentException("Stream option must be an object that : StreamInterface");
             }
             this.stream = myOptions["stream"];
         } else {
-            this._createStream();
+            _createStream();
         }
         if (isset(myOptions["body"])) {
             this.stream.write(myOptions["body"]);
         }
         if (isset(myOptions["status"])) {
-            this._setStatus(myOptions["status"]);
+            _setStatus(myOptions["status"]);
         }
         if (!isset(myOptions["charset"])) {
             myOptions["charset"] = Configure::read("App.encoding");
         }
-        this._charset = myOptions["charset"];
+        _charset = myOptions["charset"];
         myType = "text/html";
         if (isset(myOptions["type"])) {
             myType = this.resolveType(myOptions["type"]);
         }
-        this._setContentType(myType);
-        this._cookies = new CookieCollection();
+        _setContentType(myType);
+        _cookies = new CookieCollection();
     }
 
     // Creates the stream object.
     protected void _createStream() {
-        this.stream = new Stream(this._streamTarget, this._streamMode);
+        this.stream = new Stream(_streamTarget, _streamMode);
     }
 
     /**
@@ -453,8 +453,8 @@ class Response : IResponse
      * @return void
      */
     protected void _setContentType(string myType) {
-        if (in_array(this._status, [304, 204], true)) {
-            this._clearHeader("Content-Type");
+        if (in_array(_status, [304, 204], true)) {
+            _clearHeader("Content-Type");
 
             return;
         }
@@ -464,7 +464,7 @@ class Response : IResponse
 
         $charset = false;
         if (
-            this._charset &&
+            _charset &&
             (
                 indexOf(myType, "text/") == 0 ||
                 in_array(myType, $allowed, true)
@@ -474,9 +474,9 @@ class Response : IResponse
         }
 
         if ($charset && indexOf(myType, ";") == false) {
-            this._setHeader("Content-Type", "{myType}; charset={this._charset}");
+            _setHeader("Content-Type", "{myType}; charset={_charset}");
         } else {
-            this._setHeader("Content-Type", myType);
+            _setHeader("Content-Type", myType);
         }
     }
 
@@ -536,7 +536,7 @@ class Response : IResponse
      * @return int Status code.
      */
     int getStatusCode() {
-        return this._status;
+        return _status;
     }
 
     /**
@@ -591,15 +591,15 @@ class Response : IResponse
             ));
         }
 
-        this._status = $code;
-        if ($reasonPhrase == "" && isset(this._statusCodes[$code])) {
-            $reasonPhrase = this._statusCodes[$code];
+        _status = $code;
+        if ($reasonPhrase == "" && isset(_statusCodes[$code])) {
+            $reasonPhrase = _statusCodes[$code];
         }
-        this._reasonPhrase = $reasonPhrase;
+        _reasonPhrase = $reasonPhrase;
 
         // These status codes don"t have bodies and can"t have content-types.
         if (in_array($code, [304, 204], true)) {
-            this._clearHeader("Content-Type");
+            _clearHeader("Content-Type");
         }
     }
 
@@ -617,7 +617,7 @@ class Response : IResponse
      * @return string Reason phrase; must return an empty string if none present.
      */
     string getReasonPhrase() {
-        return this._reasonPhrase;
+        return _reasonPhrase;
     }
 
     /**
@@ -632,7 +632,7 @@ class Response : IResponse
      * @return void
      */
     void setTypeMap(string myType, $mimeType) {
-        this._mimeTypes[myType] = $mimeType;
+        _mimeTypes[myType] = $mimeType;
     }
 
     /**
@@ -692,7 +692,7 @@ class Response : IResponse
      * @return array|string|false String mapped mime type or false if myAlias is not mapped
      */
     auto getMimeType(string myAlias) {
-        return this._mimeTypes[myAlias] ?? false;
+        return _mimeTypes[myAlias] ?? false;
     }
 
     /**
@@ -708,7 +708,7 @@ class Response : IResponse
             return array_map([this, "mapType"], $ctype);
         }
 
-        foreach (this._mimeTypes as myAlias: myTypes) {
+        foreach (_mimeTypes as myAlias: myTypes) {
             if (in_array($ctype, (array)myTypes, true)) {
                 return myAlias;
             }
@@ -721,7 +721,7 @@ class Response : IResponse
      * Returns the current charset.
      */
     string getCharset() {
-        return this._charset;
+        return _charset;
     }
 
     /**
@@ -861,12 +861,12 @@ class Response : IResponse
      */
     protected void _setCacheControl() {
         $control = "";
-        foreach (this._cacheDirectives as myKey: $val) {
+        foreach (_cacheDirectives as myKey: $val) {
             $control .= $val == true ? myKey : sprintf("%s=%s", myKey, $val);
             $control .= ", ";
         }
         $control = rtrim($control, ", ");
-        this._setHeader("Cache-Control", $control);
+        _setHeader("Cache-Control", $control);
     }
 
     /**
@@ -886,7 +886,7 @@ class Response : IResponse
      * @return static
      */
     function withExpires($time) {
-        $date = this._getUTCDate($time);
+        $date = _getUTCDate($time);
 
         return this.withHeader("Expires", $date.format(DATE_RFC7231));
     }
@@ -908,7 +908,7 @@ class Response : IResponse
      * @return static
      */
     function withModified($time) {
-        $date = this._getUTCDate($time);
+        $date = _getUTCDate($time);
 
         return this.withHeader("Last-Modified", $date.format(DATE_RFC7231));
     }
@@ -923,8 +923,8 @@ class Response : IResponse
      * @return void
      */
     void notModified() {
-        this._createStream();
-        this._setStatus(304);
+        _createStream();
+        _setStatus(304);
 
         $remove = [
             "Allow",
@@ -936,7 +936,7 @@ class Response : IResponse
             "Last-Modified",
         ];
         foreach ($remove as $header) {
-            this._clearHeader($header);
+            _clearHeader($header);
         }
     }
 
@@ -1210,11 +1210,11 @@ class Response : IResponse
      * @return array|null Either the cookie data or null
      */
     array getCookie(string myName) {
-      if (!this._cookies.has(myName)) {
+      if (!_cookies.has(myName)) {
         return null;
       }
 
-      return this._cookies.get(myName).toArray();
+      return _cookies.get(myName).toArray();
     }
 
     /**
@@ -1225,7 +1225,7 @@ class Response : IResponse
     array getCookies() {
         $out = [];
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
-        $cookies = this._cookies;
+        $cookies = _cookies;
         foreach ($cookies as $cookie) {
             $out[$cookie.getName()] = $cookie.toArray();
         }
@@ -1239,7 +1239,7 @@ class Response : IResponse
      * @return \Cake\Http\Cookie\CookieCollection
      */
     CookieCollection getCookieCollection() {
-      return this._cookies;
+      return _cookies;
     }
 
     /**
@@ -1412,7 +1412,7 @@ class Response : IResponse
      */
     auto getFile(): ?SplFileInfo
     {
-        return this._file;
+        return _file;
     }
 
     /**
@@ -1446,21 +1446,21 @@ class Response : IResponse
         }
 
         if ($start > $end || $end > $lastByte || $start > $lastByte) {
-            this._setStatus(416);
-            this._setHeader("Content-Range", "bytes 0-" . $lastByte . "/" . myfileSize);
+            _setStatus(416);
+            _setHeader("Content-Range", "bytes 0-" . $lastByte . "/" . myfileSize);
 
             return;
         }
 
         /** @psalm-suppress PossiblyInvalidOperand */
-        this._setHeader("Content-Length", (string)($end - $start + 1));
-        this._setHeader("Content-Range", "bytes " . $start . "-" . $end . "/" . myfileSize);
-        this._setStatus(206);
+        _setHeader("Content-Length", (string)($end - $start + 1));
+        _setHeader("Content-Range", "bytes " . $start . "-" . $end . "/" . myfileSize);
+        _setStatus(206);
         /**
          * @var int $start
          * @var int $end
          */
-        this._fileRange = [$start, $end];
+        _fileRange = [$start, $end];
     }
 
     /**
@@ -1471,13 +1471,13 @@ class Response : IResponse
      */
     array __debugInfo() {
       return [
-        "status":this._status,
+        "status":_status,
         "contentType":this.getType(),
         "headers":this.headers,
-        "file":this._file,
-        "fileRange":this._fileRange,
-        "cookies":this._cookies,
-        "cacheDirectives":this._cacheDirectives,
+        "file":_file,
+        "fileRange":_fileRange,
+        "cookies":_cookies,
+        "cacheDirectives":_cacheDirectives,
         "body":(string)this.getBody(),
       ];
     }

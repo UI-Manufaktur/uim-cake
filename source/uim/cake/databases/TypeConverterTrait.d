@@ -19,8 +19,8 @@ trait TypeConverterTrait
             myType = TypeFactory::build(myType);
         }
         if (myType instanceof TypeInterface) {
-            myValue = myType.toDatabase(myValue, this._driver);
-            myType = myType.toStatement(myValue, this._driver);
+            myValue = myType.toDatabase(myValue, _driver);
+            myType = myType.toStatement(myValue, _driver);
         }
 
         return [myValue, myType];

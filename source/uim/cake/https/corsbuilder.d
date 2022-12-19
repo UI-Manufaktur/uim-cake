@@ -50,9 +50,9 @@ class CorsBuilder
      * @param bool $isSsl Whether the request was over SSL.
      */
     this(IMessage $response, string $origin, bool $isSsl = false) {
-        this._origin = $origin;
-        this._isSsl = $isSsl;
-        this._response = $response;
+        _origin = $origin;
+        _isSsl = $isSsl;
+        _response = $response;
     }
 
     /**
@@ -65,13 +65,13 @@ class CorsBuilder
      */
     function build(): IMessage
     {
-        $response = this._response;
-        if (empty(this._origin)) {
+        $response = _response;
+        if (empty(_origin)) {
             return $response;
         }
 
-        if (isset(this._headers["Access-Control-Allow-Origin"])) {
-            foreach (this._headers as myKey: myValue) {
+        if (isset(_headers["Access-Control-Allow-Origin"])) {
+            foreach (_headers as myKey: myValue) {
                 $response = $response.withHeader(myKey, myValue);
             }
         }
@@ -89,13 +89,13 @@ class CorsBuilder
      * @return this
      */
     function allowOrigin($domains) {
-        $allowed = this._normalizeDomains((array)$domains);
+        $allowed = _normalizeDomains((array)$domains);
         foreach ($allowed as $domain) {
-            if (!preg_match($domain["preg"], this._origin)) {
+            if (!preg_match($domain["preg"], _origin)) {
                 continue;
             }
-            myValue = $domain["original"] == "*" ? "*" : this._origin;
-            this._headers["Access-Control-Allow-Origin"] = myValue;
+            myValue = $domain["original"] == "*" ? "*" : _origin;
+            _headers["Access-Control-Allow-Origin"] = myValue;
             break;
         }
 
@@ -119,7 +119,7 @@ class CorsBuilder
 
             $original = $preg = $domain;
             if (indexOf($domain, "://") == false) {
-                $preg = (this._isSsl ? "https://" : "http://") . $domain;
+                $preg = (_isSsl ? "https://" : "http://") . $domain;
             }
             $preg = "@^" . str_replace("\*", ".*", preg_quote($preg, "@")) . "$@";
             myResult[] = compact("original", "preg");
@@ -135,7 +135,7 @@ class CorsBuilder
      * @return this
      */
     function allowMethods(string[] $methods) {
-        this._headers["Access-Control-Allow-Methods"] = implode(", ", $methods);
+        _headers["Access-Control-Allow-Methods"] = implode(", ", $methods);
 
         return this;
     }
@@ -146,7 +146,7 @@ class CorsBuilder
      * @return this
      */
     function allowCredentials() {
-        this._headers["Access-Control-Allow-Credentials"] = "true";
+        _headers["Access-Control-Allow-Credentials"] = "true";
 
         return this;
     }
@@ -158,7 +158,7 @@ class CorsBuilder
      * @return this
      */
     function allowHeaders(string[] $headers) {
-        this._headers["Access-Control-Allow-Headers"] = implode(", ", $headers);
+        _headers["Access-Control-Allow-Headers"] = implode(", ", $headers);
 
         return this;
     }
@@ -170,7 +170,7 @@ class CorsBuilder
      * @return this
      */
     function exposeHeaders(array $headers) {
-        this._headers["Access-Control-Expose-Headers"] = implode(", ", $headers);
+        _headers["Access-Control-Expose-Headers"] = implode(", ", $headers);
 
         return this;
     }
@@ -182,7 +182,7 @@ class CorsBuilder
      * @return this
      */
     function maxAge($age) {
-        this._headers["Access-Control-Max-Age"] = $age;
+        _headers["Access-Control-Max-Age"] = $age;
 
         return this;
     }

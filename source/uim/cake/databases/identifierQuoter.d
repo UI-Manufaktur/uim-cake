@@ -24,7 +24,7 @@ class IdentifierQuoter
      * @param \Cake\Database\Driver myDriver The driver instance used to do the identifier quoting
      */
     this(Driver myDriver) {
-        this._driver = myDriver;
+        _driver = myDriver;
     }
 
     /**
@@ -40,11 +40,11 @@ class IdentifierQuoter
         myQuery.setValueBinder(null);
 
         if (myQuery.type() == "insert") {
-            this._quoteInsert(myQuery);
+            _quoteInsert(myQuery);
         } elseif (myQuery.type() == "update") {
-            this._quoteUpdate(myQuery);
+            _quoteUpdate(myQuery);
         } else {
-            this._quoteParts(myQuery);
+            _quoteParts(myQuery);
         }
 
         myQuery.traverseExpressions([this, "quoteExpression"]);
@@ -60,19 +60,19 @@ class IdentifierQuoter
      */
     void quoteExpression(IExpression $expression) {
         if ($expression instanceof FieldInterface) {
-            this._quoteComparison($expression);
+            _quoteComparison($expression);
 
             return;
         }
 
         if ($expression instanceof OrderByExpression) {
-            this._quoteOrderBy($expression);
+            _quoteOrderBy($expression);
 
             return;
         }
 
         if ($expression instanceof IdentifierExpression) {
-            this._quoteIdentifierExpression($expression);
+            _quoteIdentifierExpression($expression);
 
             return;
         }
@@ -91,7 +91,7 @@ class IdentifierQuoter
                 continue;
             }
 
-            myResult = this._basicQuoter(myContentss);
+            myResult = _basicQuoter(myContentss);
             if (!empty(myResult)) {
                 myQuery.{$part}(myResult, true);
             }
@@ -99,7 +99,7 @@ class IdentifierQuoter
 
         $joins = myQuery.clause("join");
         if ($joins) {
-            $joins = this._quoteJoins($joins);
+            $joins = _quoteJoins($joins);
             myQuery.join($joins, [], true);
         }
     }
@@ -113,8 +113,8 @@ class IdentifierQuoter
     protected array _basicQuoter(array $part) {
         myResult = [];
         foreach ($part as myAlias: myValue) {
-            myValue = !is_string(myValue) ? myValue : this._driver.quoteIdentifier(myValue);
-            myAlias = is_numeric(myAlias) ? myAlias : this._driver.quoteIdentifier(myAlias);
+            myValue = !is_string(myValue) ? myValue : _driver.quoteIdentifier(myValue);
+            myAlias = is_numeric(myAlias) ? myAlias : _driver.quoteIdentifier(myAlias);
             myResult[myAlias] = myValue;
         }
 
@@ -131,12 +131,12 @@ class IdentifierQuoter
         foreach ($joins as myValue) {
             myAlias = "";
             if (!empty(myValue["alias"])) {
-                myAlias = this._driver.quoteIdentifier(myValue["alias"]);
+                myAlias = _driver.quoteIdentifier(myValue["alias"]);
                 myValue["alias"] = myAlias;
             }
 
             if (is_string(myValue["table"])) {
-                myValue["table"] = this._driver.quoteIdentifier(myValue["table"]);
+                myValue["table"] = _driver.quoteIdentifier(myValue["table"]);
             }
 
             myResult[myAlias] = myValue;
@@ -156,10 +156,10 @@ class IdentifierQuoter
             return;
         }
         [myTable, $columns] = $insert;
-        myTable = this._driver.quoteIdentifier(myTable);
+        myTable = _driver.quoteIdentifier(myTable);
         foreach ($columns as &$column) {
             if (is_scalar($column)) {
-                $column = this._driver.quoteIdentifier((string)$column);
+                $column = _driver.quoteIdentifier((string)$column);
             }
         }
         myQuery.insert($columns).into(myTable);
@@ -174,7 +174,7 @@ class IdentifierQuoter
         myTable = myQuery.clause("update")[0];
 
         if (is_string(myTable)) {
-            myQuery.update(this._driver.quoteIdentifier(myTable));
+            myQuery.update(_driver.quoteIdentifier(myTable));
         }
     }
 
@@ -186,11 +186,11 @@ class IdentifierQuoter
     protected void _quoteComparison(FieldInterface $expression) {
         myField = $expression.getField();
         if (is_string(myField)) {
-            $expression.setField(this._driver.quoteIdentifier(myField));
+            $expression.setField(_driver.quoteIdentifier(myField));
         } elseif (is_array(myField)) {
             $quoted = [];
             foreach (myField as $f) {
-                $quoted[] = this._driver.quoteIdentifier($f);
+                $quoted[] = _driver.quoteIdentifier($f);
             }
             $expression.setField($quoted);
         } elseif (myField instanceof IExpression) {
@@ -209,12 +209,12 @@ class IdentifierQuoter
     protected void _quoteOrderBy(OrderByExpression $expression) {
         $expression.iterateParts(function ($part, &myField) {
             if (is_string(myField)) {
-                myField = this._driver.quoteIdentifier(myField);
+                myField = _driver.quoteIdentifier(myField);
 
                 return $part;
             }
             if (is_string($part) && indexOf($part, " ") == false) {
-                return this._driver.quoteIdentifier($part);
+                return _driver.quoteIdentifier($part);
             }
 
             return $part;
@@ -228,7 +228,7 @@ class IdentifierQuoter
      */
     protected void _quoteIdentifierExpression(IdentifierExpression $expression) {
         $expression.setIdentifier(
-            this._driver.quoteIdentifier($expression.getIdentifier())
+            _driver.quoteIdentifier($expression.getIdentifier())
         );
     }
 }

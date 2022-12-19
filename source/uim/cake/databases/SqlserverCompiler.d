@@ -67,8 +67,8 @@ class SqlserverCompiler : QueryCompiler
             );
         }
         myTable = $parts[0];
-        $columns = this._stringifyExpressions($parts[1], $binder);
-        $modifiers = this._buildModifierPart(myQuery.clause("modifier"), myQuery, $binder);
+        $columns = _stringifyExpressions($parts[1], $binder);
+        $modifiers = _buildModifierPart(myQuery.clause("modifier"), myQuery, $binder);
 
         return sprintf(
             "INSERT%s INTO %s (%s) OUTPUT INSERTED.*",

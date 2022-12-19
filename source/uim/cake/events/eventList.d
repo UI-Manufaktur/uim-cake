@@ -14,7 +14,7 @@ class EventList : ArrayAccess, Countable
      * Empties the list of dispatched events.
      */
     void flush() {
-        this._events = [];
+        _events = [];
     }
 
     /**
@@ -24,7 +24,7 @@ class EventList : ArrayAccess, Countable
      * @return void
      */
     void add(IEvent myEvent) {
-        this._events[] = myEvent;
+        _events[] = myEvent;
     }
 
     /**
@@ -35,7 +35,7 @@ class EventList : ArrayAccess, Countable
      * @return bool True on success or false on failure.
      */
     bool offsetExists($offset) {
-        return isset(this._events[$offset]);
+        return isset(_events[$offset]);
     }
 
     /**
@@ -48,7 +48,7 @@ class EventList : ArrayAccess, Countable
     #[\ReturnTypeWillChange]
     function offsetGet($offset) {
         if (this.offsetExists($offset)) {
-            return this._events[$offset];
+            return _events[$offset];
         }
 
         return null;
@@ -63,7 +63,7 @@ class EventList : ArrayAccess, Countable
      * @return void
      */
     void offsetSet($offset, myValue) {
-        this._events[$offset] = myValue;
+        _events[$offset] = myValue;
     }
 
     /**
@@ -74,7 +74,7 @@ class EventList : ArrayAccess, Countable
      * @return void
      */
     void offsetUnset($offset) {
-        unset(this._events[$offset]);
+        unset(_events[$offset]);
     }
 
     /**
@@ -84,7 +84,7 @@ class EventList : ArrayAccess, Countable
      * @return int The custom count as an integer.
      */
     int count() {
-        return count(this._events);
+        return count(_events);
     }
 
     /**
@@ -93,7 +93,7 @@ class EventList : ArrayAccess, Countable
      * @param string myName Event name.
      */
     bool hasEvent(string myName) {
-        foreach (this._events as myEvent) {
+        foreach (_events as myEvent) {
             if (myEvent.getName() == myName) {
                 return true;
             }

@@ -72,7 +72,7 @@ trait QueryTrait
      * @return this
      */
     function repository(IRepository myRepository) {
-        this._repository = myRepository;
+        _repository = myRepository;
 
         return this;
     }
@@ -84,7 +84,7 @@ trait QueryTrait
      * @return \Cake\Datasource\IRepository
      */
     IRepository getRepository() {
-        return this._repository;
+        return _repository;
     }
 
     /**
@@ -100,7 +100,7 @@ trait QueryTrait
      * @return this
      */
     auto setResult(iterable myResults) {
-        this._results = myResults;
+        _results = myResults;
 
         return this;
     }
@@ -156,11 +156,11 @@ trait QueryTrait
      */
     function cache(myKey, myConfig = "default") {
         if (myKey == false) {
-            this._cache = null;
+            _cache = null;
 
             return this;
         }
-        this._cache = new QueryCacher(myKey, myConfig);
+        _cache = new QueryCacher(myKey, myConfig);
 
         return this;
     }
@@ -169,7 +169,7 @@ trait QueryTrait
      * Returns the current configured query `_eagerLoaded` value
      */
     bool isEagerLoaded() {
-        return this._eagerLoaded;
+        return _eagerLoaded;
     }
 
     /**
@@ -180,7 +180,7 @@ trait QueryTrait
      * @return this
      */
     function eagerLoaded(bool myValue) {
-        this._eagerLoaded = myValue;
+        _eagerLoaded = myValue;
 
         return this;
     }
@@ -243,23 +243,23 @@ trait QueryTrait
      * @return \Cake\Datasource\IResultSet
      */
     IResultSet all() {
-        if (this._results !== null) {
-            return this._results;
+        if (_results !== null) {
+            return _results;
         }
 
         myResults = null;
-        if (this._cache) {
-            myResults = this._cache.fetch(this);
+        if (_cache) {
+            myResults = _cache.fetch(this);
         }
         if (myResults == null) {
-            myResults = this._decorateResults(this._execute());
-            if (this._cache) {
-                this._cache.store(this, myResults);
+            myResults = _decorateResults(_execute());
+            if (_cache) {
+                _cache.store(this, myResults);
             }
         }
-        this._results = myResults;
+        _results = myResults;
 
-        return this._results;
+        return _results;
     }
 
     /**
@@ -289,7 +289,7 @@ trait QueryTrait
      */
     function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false) {
         if ($overwrite) {
-            this._mapReduce = [];
+            _mapReduce = [];
         }
         if ($mapper == null) {
             if (!$overwrite) {
@@ -298,7 +298,7 @@ trait QueryTrait
 
             return this;
         }
-        this._mapReduce[] = compact("mapper", "reducer");
+        _mapReduce[] = compact("mapper", "reducer");
 
         return this;
     }
@@ -309,7 +309,7 @@ trait QueryTrait
      * @return array
      */
     array getMapReducers() {
-        return this._mapReduce;
+        return _mapReduce;
     }
 
     /**
@@ -406,7 +406,7 @@ trait QueryTrait
      */
     function formatResults(?callable $formatter = null, myMode = self::APPEND) {
         if (myMode == self::OVERWRITE) {
-            this._formatters = [];
+            _formatters = [];
         }
         if ($formatter == null) {
             if (myMode !== self::OVERWRITE) {
@@ -417,12 +417,12 @@ trait QueryTrait
         }
 
         if (myMode == self::PREPEND) {
-            array_unshift(this._formatters, $formatter);
+            array_unshift(_formatters, $formatter);
 
             return this;
         }
 
-        this._formatters[] = $formatter;
+        _formatters[] = $formatter;
 
         return this;
     }
@@ -433,7 +433,7 @@ trait QueryTrait
      * @return array<callable>
      */
     array getResultFormatters() {
-        return this._formatters;
+        return _formatters;
     }
 
     /**
@@ -449,7 +449,7 @@ trait QueryTrait
      * @return \Cake\Datasource\IEntity|array|null The first result from the ResultSet.
      */
     function first() {
-        if (this._dirty) {
+        if (_dirty) {
             this.limit(1);
         }
 
@@ -492,7 +492,7 @@ trait QueryTrait
      * @see applyOptions()
      */
     array getOptions() {
-        return this._options;
+        return _options;
     }
 
     /**
@@ -504,7 +504,7 @@ trait QueryTrait
      * @throws \BadMethodCallException if no such method exists in result set
      */
     auto __call(string $method, array $arguments) {
-        myResultSetClass = this._decoratorClass();
+        myResultSetClass = _decoratorClass();
         if (in_array($method, get_class_methods(myResultSetClass), true)) {
             deprecationWarning(sprintf(
                 "Calling result set method `%s()` directly on query instance is deprecated. " .
@@ -543,20 +543,20 @@ trait QueryTrait
      * @return \Cake\Datasource\IResultSet
      */
     protected IResultSet _decorateResults(Traversable myResult) {
-        $decorator = this._decoratorClass();
-        foreach (this._mapReduce as $functions) {
+        $decorator = _decoratorClass();
+        foreach (_mapReduce as $functions) {
             myResult = new MapReduce(myResult, $functions["mapper"], $functions["reducer"]);
         }
 
-        if (!empty(this._mapReduce)) {
+        if (!empty(_mapReduce)) {
             myResult = new $decorator(myResult);
         }
 
-        foreach (this._formatters as $formatter) {
+        foreach (_formatters as $formatter) {
             myResult = $formatter(myResult, this);
         }
 
-        if (!empty(this._formatters) && !(myResult instanceof $decorator)) {
+        if (!empty(_formatters) && !(myResult instanceof $decorator)) {
             myResult = new $decorator(myResult);
         }
 

@@ -63,7 +63,7 @@ abstract class BaseApplication :
     ) {
         this.configDir = rtrim(myConfigDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         this.plugins = Plugin::getCollection();
-        this._eventManager = myEventManager ?: EventManager::instance();
+        _eventManager = myEventManager ?: EventManager::instance();
         this.controllerFactory = $controllerFactory;
     }
 

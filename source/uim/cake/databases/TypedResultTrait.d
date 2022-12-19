@@ -14,7 +14,7 @@ trait TypedResultTrait
      * Gets the type of the value this object will generate.
      */
     string getReturnType() {
-        return this._returnType;
+        return _returnType;
     }
 
     /**
@@ -24,7 +24,7 @@ trait TypedResultTrait
      * @return this
      */
     auto setReturnType(string myType) {
-        this._returnType = myType;
+        _returnType = myType;
 
         return this;
     }

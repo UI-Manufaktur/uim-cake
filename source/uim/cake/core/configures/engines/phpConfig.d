@@ -46,7 +46,7 @@ class PhpConfig : IConfigEngine
         if (myPath == null) {
             myPath = CONFIG;
         }
-        this._path = myPath;
+        _path = myPath;
     }
 
     /**
@@ -62,7 +62,7 @@ class PhpConfig : IConfigEngine
      *  Or when files contain ".." as this could lead to abusive reads.
      */
     array read(string myKey) {
-        myfile = this._getFilePath(myKey, true);
+        myfile = _getFilePath(myKey, true);
 
         myConfig = null;
 
@@ -86,7 +86,7 @@ class PhpConfig : IConfigEngine
     bool dump(string myKey, array myData) {
         myContentss = "<?php" . "\n" . "return " . var_export(myData, true) . ";";
 
-        myfilename = this._getFilePath(myKey);
+        myfilename = _getFilePath(myKey);
 
         return file_put_contents(myfilename, myContentss) > 0;
     }

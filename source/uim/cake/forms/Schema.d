@@ -50,8 +50,8 @@ class Schema
         if (is_string($attrs)) {
             $attrs = ["type":$attrs];
         }
-        $attrs = array_intersect_key($attrs, this._fieldDefaults);
-        this._fields[myName] = $attrs + this._fieldDefaults;
+        $attrs = array_intersect_key($attrs, _fieldDefaults);
+        _fields[myName] = $attrs + _fieldDefaults;
 
         return this;
     }
@@ -63,7 +63,7 @@ class Schema
      * @return this
      */
     function removeField(string myName) {
-        unset(this._fields[myName]);
+        unset(_fields[myName]);
 
         return this;
     }
@@ -74,7 +74,7 @@ class Schema
      * @return The list of field names.
      */
     string[] fields() {
-        return array_keys(this._fields);
+        return array_keys(_fields);
     }
 
     /**
@@ -85,7 +85,7 @@ class Schema
      */
     function field(string myName): ?array
     {
-        return this._fields[myName] ?? null;
+        return _fields[myName] ?? null;
     }
 
     /**
@@ -112,7 +112,7 @@ class Schema
     auto __debugInfo(): array
     {
         return [
-            "_fields":this._fields,
+            "_fields":_fields,
         ];
     }
 }

@@ -117,9 +117,9 @@ class ErrorHandler : BaseErrorHandler
                 Router::getRequest()
             );
             $response = $renderer.render();
-            this._sendResponse($response);
+            _sendResponse($response);
         } catch (Throwable myException) {
-            this._logInternalError(myException);
+            _logInternalError(myException);
         }
     }
 
@@ -135,7 +135,7 @@ class ErrorHandler : BaseErrorHandler
         Throwable myException,
         ?IServerRequest myRequest = null
     ): IExceptionRenderer {
-        $renderer = this._config["exceptionRenderer"];
+        $renderer = _config["exceptionRenderer"];
 
         if (is_string($renderer)) {
             /** @var class-string<\Cake\Error\IExceptionRenderer>|null myClass */
@@ -165,7 +165,7 @@ class ErrorHandler : BaseErrorHandler
     protected auto _logInternalError(Throwable myException): void
     {
         // Disable trace for internal errors.
-        this._config["trace"] = false;
+        _config["trace"] = false;
         myMessage = sprintf(
             "[%s] %s (%s:%s)\n%s", // Keeping same message format
             get_class(myException),

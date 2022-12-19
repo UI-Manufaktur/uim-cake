@@ -183,10 +183,10 @@ class Folder
             return [$dirs, myfiles];
         }
 
-        if (!is_bool($sort) && isset(this._fsorts[$sort])) {
-            $methodName = this._fsorts[$sort];
+        if (!is_bool($sort) && isset(_fsorts[$sort])) {
+            $methodName = _fsorts[$sort];
         } else {
-            $methodName = this._fsorts[self::SORT_NAME];
+            $methodName = _fsorts[self::SORT_NAME];
         }
 
         foreach ($iterator as $item) {
@@ -250,7 +250,7 @@ class Folder
             return [];
         }
         $startsOn = this.path;
-        $out = this._findRecursive($pattern, $sort);
+        $out = _findRecursive($pattern, $sort);
         this.cd($startsOn);
 
         return $out;
@@ -415,12 +415,12 @@ class Folder
             // phpcs:disable
             if (@chmod(myPath, intval(myMode, 8))) {
                 // phpcs:enable
-                this._messages[] = sprintf("%s changed to %s", myPath, myMode);
+                _messages[] = sprintf("%s changed to %s", myPath, myMode);
 
                 return true;
             }
 
-            this._errors[] = sprintf("%s NOT changed to %s", myPath, myMode);
+            _errors[] = sprintf("%s NOT changed to %s", myPath, myMode);
 
             return false;
         }
@@ -440,14 +440,14 @@ class Folder
                     // phpcs:disable
                     if (@chmod($fullpath, intval(myMode, 8))) {
                         // phpcs:enable
-                        this._messages[] = sprintf("%s changed to %s", $fullpath, myMode);
+                        _messages[] = sprintf("%s changed to %s", $fullpath, myMode);
                     } else {
-                        this._errors[] = sprintf("%s NOT changed to %s", $fullpath, myMode);
+                        _errors[] = sprintf("%s NOT changed to %s", $fullpath, myMode);
                     }
                 }
             }
 
-            if (empty(this._errors)) {
+            if (empty(_errors)) {
                 return true;
             }
         }
@@ -597,7 +597,7 @@ class Folder
         }
 
         if (is_file(myPathname)) {
-            this._errors[] = sprintf("%s is a file", myPathname);
+            _errors[] = sprintf("%s is a file", myPathname);
 
             return false;
         }
@@ -609,11 +609,11 @@ class Folder
                 $old = umask(0);
                 umask($old);
                 if (mkdir(myPathname, myMode, true)) {
-                    this._messages[] = sprintf("%s created", myPathname);
+                    _messages[] = sprintf("%s created", myPathname);
 
                     return true;
                 }
-                this._errors[] = sprintf("%s NOT created", myPathname);
+                _errors[] = sprintf("%s NOT created", myPathname);
 
                 return false;
             }
@@ -688,17 +688,17 @@ class Folder
                     // phpcs:disable
                     if (@unlink(myfilePath)) {
                         // phpcs:enable
-                        this._messages[] = sprintf("%s removed", myfilePath);
+                        _messages[] = sprintf("%s removed", myfilePath);
                     } else {
-                        this._errors[] = sprintf("%s NOT removed", myfilePath);
+                        _errors[] = sprintf("%s NOT removed", myfilePath);
                     }
                 } elseif ($item.isDir() && !$item.isDot()) {
                     // phpcs:disable
                     if (@rmdir(myfilePath)) {
                         // phpcs:enable
-                        this._messages[] = sprintf("%s removed", myfilePath);
+                        _messages[] = sprintf("%s removed", myfilePath);
                     } else {
-                        this._errors[] = sprintf("%s NOT removed", myfilePath);
+                        _errors[] = sprintf("%s NOT removed", myfilePath);
 
                         unset($directory, $iterator, $item);
 
@@ -718,9 +718,9 @@ class Folder
             // phpcs:disable
             if (@rmdir(myPath)) {
                 // phpcs:enable
-                this._messages[] = sprintf("%s removed", myPath);
+                _messages[] = sprintf("%s removed", myPath);
             } else {
-                this._errors[] = sprintf("%s NOT removed", myPath);
+                _errors[] = sprintf("%s NOT removed", myPath);
 
                 return false;
             }
@@ -761,7 +761,7 @@ class Folder
         myMode = myOptions["mode"];
 
         if (!this.cd($fromDir)) {
-            this._errors[] = sprintf("%s not found", $fromDir);
+            _errors[] = sprintf("%s not found", $fromDir);
 
             return false;
         }
@@ -771,7 +771,7 @@ class Folder
         }
 
         if (!is_writable($toDir)) {
-            this._errors[] = sprintf("%s not writable", $toDir);
+            _errors[] = sprintf("%s not writable", $toDir);
 
             return false;
         }
@@ -788,9 +788,9 @@ class Folder
                         if (copy($from, $to)) {
                             chmod($to, intval(myMode, 8));
                             touch($to, filemtime($from));
-                            this._messages[] = sprintf("%s copied to %s", $from, $to);
+                            _messages[] = sprintf("%s copied to %s", $from, $to);
                         } else {
-                            this._errors[] = sprintf("%s NOT copied to %s", $from, $to);
+                            _errors[] = sprintf("%s NOT copied to %s", $from, $to);
                         }
                     }
 
@@ -809,11 +809,11 @@ class Folder
                             $old = umask(0);
                             chmod($to, myMode);
                             umask($old);
-                            this._messages[] = sprintf("%s created", $to);
+                            _messages[] = sprintf("%s created", $to);
                             myOptions = ["from":$from] + myOptions;
                             this.copy($to, myOptions);
                         } else {
-                            this._errors[] = sprintf("%s not created", $to);
+                            _errors[] = sprintf("%s not created", $to);
                         }
                     } elseif (is_dir($from) && myOptions["scheme"] == Folder::MERGE) {
                         myOptions = ["from":$from] + myOptions;
@@ -826,7 +826,7 @@ class Folder
             return false;
         }
 
-        return empty(this._errors);
+        return empty(_errors);
     }
 
     /**
@@ -862,9 +862,9 @@ class Folder
      */
     function messages(bool $reset = true): array
     {
-        myMessages = this._messages;
+        myMessages = _messages;
         if ($reset) {
-            this._messages = [];
+            _messages = [];
         }
 
         return myMessages;
@@ -878,9 +878,9 @@ class Folder
      */
     function errors(bool $reset = true): array
     {
-        myErrors = this._errors;
+        myErrors = _errors;
         if ($reset) {
-            this._errors = [];
+            _errors = [];
         }
 
         return myErrors;

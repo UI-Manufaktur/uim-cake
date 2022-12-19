@@ -89,8 +89,8 @@ class RulesChecker
      * @param array<string, mixed> myOptions The options to pass to every rule
      */
     this(array myOptions = []) {
-        this._options = myOptions;
-        this._useI18n = function_exists("__d");
+        _options = myOptions;
+        _useI18n = function_exists("__d");
     }
 
     /**
@@ -113,7 +113,7 @@ class RulesChecker
      * @return this
      */
     function add(callable $rule, myName = null, array myOptions = []) {
-        this._rules[] = this._addError($rule, myName, myOptions);
+        _rules[] = _addError($rule, myName, myOptions);
 
         return this;
     }
@@ -137,7 +137,7 @@ class RulesChecker
      * @return this
      */
     function addCreate(callable $rule, myName = null, array myOptions = []) {
-        this._createRules[] = this._addError($rule, myName, myOptions);
+        _createRules[] = _addError($rule, myName, myOptions);
 
         return this;
     }
@@ -161,7 +161,7 @@ class RulesChecker
      * @return this
      */
     function addUpdate(callable $rule, myName = null, array myOptions = []) {
-        this._updateRules[] = this._addError($rule, myName, myOptions);
+        _updateRules[] = _addError($rule, myName, myOptions);
 
         return this;
     }
@@ -185,7 +185,7 @@ class RulesChecker
      * @return this
      */
     function addDelete(callable $rule, myName = null, array myOptions = []) {
-        this._deleteRules[] = this._addError($rule, myName, myOptions);
+        _deleteRules[] = _addError($rule, myName, myOptions);
 
         return this;
     }
@@ -225,7 +225,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      */
     bool checkCreate(IEntity $entity, array myOptions = []) {
-        return this._checkRules($entity, myOptions, array_merge(this._rules, this._createRules));
+        return _checkRules($entity, myOptions, array_merge(_rules, _createRules));
     }
 
     /**
@@ -236,7 +236,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      */
     bool checkUpdate(IEntity $entity, array myOptions = []) {
-        return this._checkRules($entity, myOptions, array_merge(this._rules, this._updateRules));
+        return _checkRules($entity, myOptions, array_merge(_rules, _updateRules));
     }
 
     /**
@@ -247,7 +247,7 @@ class RulesChecker
      * @param array<string, mixed> myOptions Extra options to pass to checker functions.
      */
     bool checkDelete(IEntity $entity, array myOptions = []) {
-        return this._checkRules($entity, myOptions, this._deleteRules);
+        return _checkRules($entity, myOptions, _deleteRules);
     }
 
     /**
@@ -260,7 +260,7 @@ class RulesChecker
      */
     protected bool _checkRules(IEntity $entity, array myOptions = [], array $rules = []) {
         $success = true;
-        myOptions += this._options;
+        myOptions += _options;
         foreach ($rules as $rule) {
             $success = $rule($entity, myOptions) && $success;
         }

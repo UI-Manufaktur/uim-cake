@@ -170,11 +170,11 @@ class Paginator : PaginatorInterface
 
         $pagingParams = this.buildParams(myData);
         myAlias = $object.getAlias();
-        this._pagingParams = [myAlias: $pagingParams];
+        _pagingParams = [myAlias: $pagingParams];
         if ($pagingParams["requestedPage"] > $pagingParams["page"]) {
             throw new PageOutOfBoundsException([
                 "requestedPage":$pagingParams["requestedPage"],
-                "pagingParams":this._pagingParams,
+                "pagingParams":_pagingParams,
             ]);
         }
 
@@ -229,7 +229,7 @@ class Paginator : PaginatorInterface
 
         myOptions += ["page":1, "scope":null];
         myOptions["page"] = (int)myOptions["page"] < 1 ? 1 : (int)myOptions["page"];
-        [myFinder, myOptions] = this._extractFinder(myOptions);
+        [myFinder, myOptions] = _extractFinder(myOptions);
 
         return compact("defaults", "options", "finder");
     }
@@ -389,7 +389,7 @@ class Paginator : PaginatorInterface
      */
     auto getPagingParams(): array
     {
-        return this._pagingParams;
+        return _pagingParams;
     }
 
     /**
@@ -526,7 +526,7 @@ class Paginator : PaginatorInterface
 
             $order = isset(myOptions["order"]) && is_array(myOptions["order"]) ? myOptions["order"] : [];
             if ($order && myOptions["sort"] && indexOf(myOptions["sort"], ".") == false) {
-                $order = this._removeAliases($order, $object.getAlias());
+                $order = _removeAliases($order, $object.getAlias());
             }
 
             myOptions["order"] = [myOptions["sort"]: $direction] + $order;
@@ -565,7 +565,7 @@ class Paginator : PaginatorInterface
             myOptions["sort"] = key(myOptions["order"]);
         }
 
-        myOptions["order"] = this._prefix($object, myOptions["order"], $sortAllowed);
+        myOptions["order"] = _prefix($object, myOptions["order"], $sortAllowed);
 
         return myOptions;
     }

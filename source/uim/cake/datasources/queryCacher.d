@@ -41,12 +41,12 @@ class QueryCacher
         if (!is_string(myKey) && !(myKey instanceof Closure)) {
             throw new RuntimeException("Cache keys must be strings or callables.");
         }
-        this._key = myKey;
+        _key = myKey;
 
         if (!is_string(myConfig) && !(myConfig instanceof ICache)) {
             throw new RuntimeException("Cache configs must be strings or \Psr\SimpleCache\ICache instances.");
         }
-        this._config = myConfig;
+        _config = myConfig;
     }
 
     /**
@@ -56,8 +56,8 @@ class QueryCacher
      * @return mixed|null Either the cached results or null.
      */
     function fetch(object myQuery) {
-        myKey = this._resolveKey(myQuery);
-        $storage = this._resolveCacher();
+        myKey = _resolveKey(myQuery);
+        $storage = _resolveCacher();
         myResult = $storage.get(myKey);
         if (empty(myResult)) {
             return null;
@@ -74,8 +74,8 @@ class QueryCacher
      * @return bool True if the data was successfully cached, false on failure
      */
     bool store(object myQuery, Traversable myResults) {
-        myKey = this._resolveKey(myQuery);
-        $storage = this._resolveCacher();
+        myKey = _resolveKey(myQuery);
+        $storage = _resolveCacher();
 
         return $storage.set(myKey, myResults);
     }
@@ -88,10 +88,10 @@ class QueryCacher
      * @throws \RuntimeException
      */
     protected string _resolveKey(object myQuery) {
-        if (is_string(this._key)) {
-            return this._key;
+        if (is_string(_key)) {
+            return _key;
         }
-        $func = this._key;
+        $func = _key;
         myKey = $func(myQuery);
         if (!is_string(myKey)) {
             $msg = sprintf("Cache key functions must return a string. Got %s.", var_export(myKey, true));
@@ -107,10 +107,10 @@ class QueryCacher
      * @return \Psr\SimpleCache\ICache
      */
     protected auto _resolveCacher() {
-        if (is_string(this._config)) {
-            return Cache::pool(this._config);
+        if (is_string(_config)) {
+            return Cache::pool(_config);
         }
 
-        return this._config;
+        return _config;
     }
 }

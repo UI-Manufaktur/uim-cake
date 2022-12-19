@@ -50,15 +50,15 @@ class CakeException : RuntimeException
      */
     this(myMessage = "", Nullable!int $code = null, ?Throwable $previous = null) {
         if (is_array(myMessage)) {
-            this._attributes = myMessage;
-            myMessage = vsprintf(this._messageTemplate, myMessage);
+            _attributes = myMessage;
+            myMessage = vsprintf(_messageTemplate, myMessage);
         }
-        super.this(myMessage, $code ?? this._defaultCode, $previous);
+        super.this(myMessage, $code ?? _defaultCode, $previous);
     }
 
     // Get the passed in attributes
     array getAttributes() {
-        return this._attributes;
+        return _attributes;
     }
 
     /**
@@ -76,7 +76,7 @@ class CakeException : RuntimeException
     function responseHeader($header = null, myValue = null): ?array
     {
         if ($header == null) {
-            return this._responseHeaders;
+            return _responseHeaders;
         }
 
         deprecationWarning(
@@ -85,10 +85,10 @@ class CakeException : RuntimeException
             "You should only set HTTP headers on HttpException instances via the `setHeaders()` method."
         );
         if (is_array($header)) {
-            return this._responseHeaders = $header;
+            return _responseHeaders = $header;
         }
 
-        return this._responseHeaders = [$header: myValue];
+        return _responseHeaders = [$header: myValue];
     }
 }
 

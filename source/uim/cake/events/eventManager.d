@@ -79,14 +79,14 @@ class EventManager : IEventManager
 
     function on(myEventKey, myOptions = [], ?callable $callable = null) {
         if (myEventKey instanceof IEventListener) {
-            this._attachSubscriber(myEventKey);
+            _attachSubscriber(myEventKey);
 
             return this;
         }
 
         $argCount = func_num_args();
         if ($argCount == 2) {
-            this._listeners[myEventKey][static::$defaultPriority][] = [
+            _listeners[myEventKey][static::$defaultPriority][] = [
                 "callable":myOptions,
             ];
 
@@ -94,7 +94,7 @@ class EventManager : IEventManager
         }
 
         $priority = myOptions["priority"] ?? static::$defaultPriority;
-        this._listeners[myEventKey][$priority][] = [
+        _listeners[myEventKey][$priority][] = [
             "callable":$callable,
         ];
 
@@ -113,10 +113,10 @@ class EventManager : IEventManager
             myOptions = [];
             $method = $function;
             if (is_array($function) && isset($function["callable"])) {
-                [$method, myOptions] = this._extractCallable($function, $subscriber);
+                [$method, myOptions] = _extractCallable($function, $subscriber);
             } elseif (is_array($function) && is_numeric(key($function))) {
                 foreach ($function as $f) {
-                    [$method, myOptions] = this._extractCallable($f, $subscriber);
+                    [$method, myOptions] = _extractCallable($f, $subscriber);
                     this.on(myEventKey, myOptions, $method);
                 }
                 continue;
@@ -153,7 +153,7 @@ class EventManager : IEventManager
 
     function off(myEventKey, $callable = null) {
         if (myEventKey instanceof IEventListener) {
-            this._detachSubscriber(myEventKey);
+            _detachSubscriber(myEventKey);
 
             return this;
         }
@@ -166,7 +166,7 @@ class EventManager : IEventManager
                 );
             }
 
-            foreach (array_keys(this._listeners) as myName) {
+            foreach (array_keys(_listeners) as myName) {
                 this.off(myName, myEventKey);
             }
 
@@ -174,25 +174,25 @@ class EventManager : IEventManager
         }
 
         if ($callable instanceof IEventListener) {
-            this._detachSubscriber($callable, myEventKey);
+            _detachSubscriber($callable, myEventKey);
 
             return this;
         }
 
         if ($callable == null) {
-            unset(this._listeners[myEventKey]);
+            unset(_listeners[myEventKey]);
 
             return this;
         }
 
-        if (empty(this._listeners[myEventKey])) {
+        if (empty(_listeners[myEventKey])) {
             return this;
         }
 
-        foreach (this._listeners[myEventKey] as $priority: $callables) {
+        foreach (_listeners[myEventKey] as $priority: $callables) {
             foreach ($callables as $k: $callback) {
                 if ($callback["callable"] == $callable) {
-                    unset(this._listeners[myEventKey][$priority][$k]);
+                    unset(_listeners[myEventKey][$priority][$k]);
                     break;
                 }
             }
@@ -240,11 +240,11 @@ class EventManager : IEventManager
 
         $listeners = this.listeners(myEvent.getName());
 
-        if (this._trackEvents) {
+        if (_trackEvents) {
             this.addEventToList(myEvent);
         }
 
-        if (!this._isGlobal && static::instance().isTrackingEvents()) {
+        if (!_isGlobal && static::instance().isTrackingEvents()) {
             static::instance().addEventToList(myEvent);
         }
 
@@ -256,7 +256,7 @@ class EventManager : IEventManager
             if (myEvent.isStopped()) {
                 break;
             }
-            myResult = this._callListener($listener["callable"], myEvent);
+            myResult = _callListener($listener["callable"], myEvent);
             if (myResult == false) {
                 myEvent.stopPropagation();
             }
@@ -285,7 +285,7 @@ class EventManager : IEventManager
     function listeners(string myEventKey): array
     {
         $localListeners = [];
-        if (!this._isGlobal) {
+        if (!_isGlobal) {
             $localListeners = this.prioritisedListeners(myEventKey);
             $localListeners = empty($localListeners) ? [] : $localListeners;
         }
@@ -317,11 +317,11 @@ class EventManager : IEventManager
      */
     function prioritisedListeners(string myEventKey): array
     {
-        if (empty(this._listeners[myEventKey])) {
+        if (empty(_listeners[myEventKey])) {
             return [];
         }
 
-        return this._listeners[myEventKey];
+        return _listeners[myEventKey];
     }
 
     /**
@@ -334,9 +334,9 @@ class EventManager : IEventManager
     {
         $matchPattern = "/" . preg_quote(myEventKeyPattern, "/") . "/";
         $matches = array_intersect_key(
-            this._listeners,
+            _listeners,
             array_flip(
-                preg_grep($matchPattern, array_keys(this._listeners), 0)
+                preg_grep($matchPattern, array_keys(_listeners), 0)
             )
         );
 
@@ -350,7 +350,7 @@ class EventManager : IEventManager
      */
     auto getEventList(): ?EventList
     {
-        return this._eventList;
+        return _eventList;
     }
 
     /**
@@ -360,8 +360,8 @@ class EventManager : IEventManager
      * @return this
      */
     function addEventToList(IEvent myEvent) {
-        if (this._eventList) {
-            this._eventList.add(myEvent);
+        if (_eventList) {
+            _eventList.add(myEvent);
         }
 
         return this;
@@ -374,7 +374,7 @@ class EventManager : IEventManager
      * @return this
      */
     function trackEvents(bool myEnabled) {
-        this._trackEvents = myEnabled;
+        _trackEvents = myEnabled;
 
         return this;
     }
@@ -383,7 +383,7 @@ class EventManager : IEventManager
      * Returns whether this manager is set up to track events
      */
     bool isTrackingEvents() {
-        return this._trackEvents && this._eventList;
+        return _trackEvents && _eventList;
     }
 
     /**
@@ -393,8 +393,8 @@ class EventManager : IEventManager
      * @return this
      */
     auto setEventList(EventList myEventList) {
-        this._eventList = myEventList;
-        this._trackEvents = true;
+        _eventList = myEventList;
+        _trackEvents = true;
 
         return this;
     }
@@ -405,8 +405,8 @@ class EventManager : IEventManager
      * @return this
      */
     function unsetEventList() {
-        this._eventList = null;
-        this._trackEvents = false;
+        _eventList = null;
+        _trackEvents = false;
 
         return this;
     }
@@ -421,17 +421,17 @@ class EventManager : IEventManager
         $properties = get_object_vars(this);
         $properties["_generalManager"] = "(object) EventManager";
         $properties["_listeners"] = [];
-        foreach (this._listeners as myKey: $priorities) {
+        foreach (_listeners as myKey: $priorities) {
             $listenerCount = 0;
             foreach ($priorities as $listeners) {
                 $listenerCount += count($listeners);
             }
             $properties["_listeners"][myKey] = $listenerCount . " listener(s)";
         }
-        if (this._eventList) {
-            myCount = count(this._eventList);
+        if (_eventList) {
+            myCount = count(_eventList);
             for ($i = 0; $i < myCount; $i++) {
-                myEvent = this._eventList[$i];
+                myEvent = _eventList[$i];
                 try {
                     $subject = myEvent.getSubject();
                     $properties["_dispatchedEvents"][] = myEvent.getName() . " with subject " . get_class($subject);

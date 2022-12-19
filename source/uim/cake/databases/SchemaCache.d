@@ -32,7 +32,7 @@ class SchemaCache {
      * @param \Cake\Database\Connection myConnection Connection name to get the schema for or a connection instance
      */
     this(Connection myConnection) {
-        this._schema = this.getSchema(myConnection);
+        _schema = this.getSchema(myConnection);
     }
 
     /**
@@ -45,12 +45,12 @@ class SchemaCache {
         if (myName) {
             myTables = [myName];
         } else {
-            myTables = this._schema.listTables();
+            myTables = _schema.listTables();
         }
 
         foreach (myTables as myTable) {
             /** @psalm-suppress PossiblyNullArgument */
-            this._schema.describe(myTable, ["forceRefresh":true]);
+            _schema.describe(myTable, ["forceRefresh":true]);
         }
 
         return myTables;
@@ -66,14 +66,14 @@ class SchemaCache {
         if (myName) {
             myTables = [myName];
         } else {
-            myTables = this._schema.listTables();
+            myTables = _schema.listTables();
         }
 
-        $cacher = this._schema.getCacher();
+        $cacher = _schema.getCacher();
 
         foreach (myTables as myTable) {
             /** @psalm-suppress PossiblyNullArgument */
-            myKey = this._schema.cacheKey(myTable);
+            myKey = _schema.cacheKey(myTable);
             $cacher.delete(myKey);
         }
 

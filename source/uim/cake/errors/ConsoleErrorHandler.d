@@ -25,7 +25,7 @@ class ConsoleErrorHandler : BaseErrorHandler {
         ];
 
         this.setConfig(myConfig);
-        this._stderr = this._config["stderr"];
+        _stderr = _config["stderr"];
     }
 
     /**
@@ -37,14 +37,14 @@ class ConsoleErrorHandler : BaseErrorHandler {
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
     void handleException(Throwable myException) {
-        this._displayException(myException);
+        _displayException(myException);
         this.logException(myException);
 
         int exitCode = Command::CODE_ERROR;
         if (myException instanceof ConsoleException) {
             exitCode = myException.getCode();
         }
-        this._stop(exitCode);
+        _stop(exitCode);
     }
 
     /**
@@ -65,7 +65,7 @@ class ConsoleErrorHandler : BaseErrorHandler {
             myException.getFile(),
             myException.getLine()
         );
-        this._stderr.write(myMessage);
+        _stderr.write(myMessage);
     }
 
     /**
@@ -88,7 +88,7 @@ class ConsoleErrorHandler : BaseErrorHandler {
             myError["error"],
             myMessage
         );
-        this._stderr.write(myMessage);
+        _stderr.write(myMessage);
     }
 
     /**

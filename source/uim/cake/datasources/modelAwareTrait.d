@@ -99,7 +99,7 @@ trait ModelAwareTrait
             return this.{myAlias};
         }
 
-        $factory = this._modelFactories[myModelType] ?? FactoryLocator::get(myModelType);
+        $factory = _modelFactories[myModelType] ?? FactoryLocator::get(myModelType);
         if ($factory instanceof ILocator) {
             this.{myAlias} = $factory.get(myModelClass, myOptions);
         } else {
@@ -128,14 +128,14 @@ trait ModelAwareTrait
             ));
         }
 
-        this._modelFactories[myType] = $factory;
+        _modelFactories[myType] = $factory;
     }
 
     /**
      * Get the model type to be used by this class
      */
     string getModelType() {
-        return this._modelType;
+        return _modelType;
     }
 
     /**
@@ -145,7 +145,7 @@ trait ModelAwareTrait
      * @return this
      */
     auto setModelType(string myModelType) {
-        this._modelType = myModelType;
+        _modelType = myModelType;
 
         return this;
     }

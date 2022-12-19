@@ -90,7 +90,7 @@ class Connection : IConnection {
      * @param array<string, mixed> myConfig Configuration array.
      */
     this(array myConfig) {
-        this._config = myConfig;
+        _config = myConfig;
 
         myDriver = "";
         if (!empty(myConfig["driver"])) {
@@ -109,17 +109,17 @@ class Connection : IConnection {
      * Disconnects the driver to release the connection.
      */
     auto __destruct() {
-        if (this._transactionStarted && class_exists(Log::class)) {
+        if (_transactionStarted && class_exists(Log::class)) {
             Log::warning("The connection is going to be closed but there is an active transaction.");
         }
     }
 
     array config() {
-        return this._config;
+        return _config;
     }
 
     string configName() {
-        return this._config["name"] ?? "";
+        return _config["name"] ?? "";
     }
 
     /**
@@ -145,7 +145,7 @@ class Connection : IConnection {
             throw new MissingExtensionException(["driver":get_class(myDriver)]);
         }
 
-        this._driver = myDriver;
+        _driver = myDriver;
 
         return this;
     }
@@ -167,7 +167,7 @@ class Connection : IConnection {
      */
     auto getDriver(): IDriver
     {
-        return this._driver;
+        return _driver;
     }
 
     /**
@@ -178,13 +178,13 @@ class Connection : IConnection {
      */
     bool connect() {
         try {
-            return this._driver.connect();
+            return _driver.connect();
         } catch (MissingConnectionException $e) {
             throw $e;
         } catch (Throwable $e) {
             throw new MissingConnectionException(
                 [
-                    "driver":App::shortName(get_class(this._driver), "Database/Driver"),
+                    "driver":App::shortName(get_class(_driver), "Database/Driver"),
                     "reason":$e.getMessage(),
                 ],
                 null,
@@ -198,14 +198,14 @@ class Connection : IConnection {
      *
      */
     void disconnect() {
-        this._driver.disconnect();
+        _driver.disconnect();
     }
 
     /**
      * Returns whether connection to database server was already established.
      */
     bool isConnected() {
-        return this._driver.isConnected();
+        return _driver.isConnected();
     }
 
     /**
@@ -217,10 +217,10 @@ class Connection : IConnection {
     function prepare(myQuery): IStatement
     {
         return this.getDisconnectRetry().run(function () use (myQuery) {
-            $statement = this._driver.prepare(myQuery);
+            $statement = _driver.prepare(myQuery);
 
-            if (this._logQueries) {
-                $statement = this._newLogger($statement);
+            if (_logQueries) {
+                $statement = _newLogger($statement);
             }
 
             return $statement;
@@ -311,7 +311,7 @@ class Connection : IConnection {
      * @return this
      */
     auto setSchemaCollection(SchemaICollection myCollection) {
-        this._schemaCollection = myCollection;
+        _schemaCollection = myCollection;
 
         return this;
     }
@@ -323,19 +323,19 @@ class Connection : IConnection {
      */
     auto getSchemaCollection(): SchemaICollection
     {
-        if (this._schemaCollection !== null) {
-            return this._schemaCollection;
+        if (_schemaCollection !== null) {
+            return _schemaCollection;
         }
 
-        if (!empty(this._config["cacheMetadata"])) {
-            return this._schemaCollection = new CachedCollection(
+        if (!empty(_config["cacheMetadata"])) {
+            return _schemaCollection = new CachedCollection(
                 new SchemaCollection(this),
-                empty(this._config["cacheKeyPrefix"]) ? this.configName() : this._config["cacheKeyPrefix"],
+                empty(_config["cacheKeyPrefix"]) ? this.configName() : _config["cacheKeyPrefix"],
                 this.getCacher()
             );
         }
 
-        return this._schemaCollection = new SchemaCollection(this);
+        return _schemaCollection = new SchemaCollection(this);
     }
 
     /**
@@ -399,25 +399,25 @@ class Connection : IConnection {
      *
      */
     void begin() {
-        if (!this._transactionStarted) {
-            if (this._logQueries) {
+        if (!_transactionStarted) {
+            if (_logQueries) {
                 this.log("BEGIN");
             }
 
             this.getDisconnectRetry().run(void () {
-                this._driver.beginTransaction();
+                _driver.beginTransaction();
             });
 
-            this._transactionLevel = 0;
-            this._transactionStarted = true;
+            _transactionLevel = 0;
+            _transactionStarted = true;
             this.nestedTransactionRollbackException = null;
 
             return;
         }
 
-        this._transactionLevel++;
+        _transactionLevel++;
         if (this.isSavePointsEnabled()) {
-            this.createSavePoint((string)this._transactionLevel);
+            this.createSavePoint((string)_transactionLevel);
         }
     }
 
@@ -427,11 +427,11 @@ class Connection : IConnection {
      * @return bool true on success, false otherwise
      */
     bool commit() {
-        if (!this._transactionStarted) {
+        if (!_transactionStarted) {
             return false;
         }
 
-        if (this._transactionLevel == 0) {
+        if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
                 /** @var \Cake\Database\Exception\NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
@@ -439,19 +439,19 @@ class Connection : IConnection {
                 throw $e;
             }
 
-            this._transactionStarted = false;
+            _transactionStarted = false;
             this.nestedTransactionRollbackException = null;
-            if (this._logQueries) {
+            if (_logQueries) {
                 this.log("COMMIT");
             }
 
-            return this._driver.commitTransaction();
+            return _driver.commitTransaction();
         }
         if (this.isSavePointsEnabled()) {
-            this.releaseSavePoint((string)this._transactionLevel);
+            this.releaseSavePoint((string)_transactionLevel);
         }
 
-        this._transactionLevel--;
+        _transactionLevel--;
 
         return true;
     }
@@ -464,7 +464,7 @@ class Connection : IConnection {
      * @return bool
      */
     bool rollback(?bool $toBeginning = null) {
-        if (!this._transactionStarted) {
+        if (!_transactionStarted) {
             return false;
         }
 
@@ -472,19 +472,19 @@ class Connection : IConnection {
         if ($toBeginning == null) {
             $toBeginning = !$useSavePoint;
         }
-        if (this._transactionLevel == 0 || $toBeginning) {
-            this._transactionLevel = 0;
-            this._transactionStarted = false;
+        if (_transactionLevel == 0 || $toBeginning) {
+            _transactionLevel = 0;
+            _transactionStarted = false;
             this.nestedTransactionRollbackException = null;
-            if (this._logQueries) {
+            if (_logQueries) {
                 this.log("ROLLBACK");
             }
-            this._driver.rollbackTransaction();
+            _driver.rollbackTransaction();
 
             return true;
         }
 
-        $savePoint = this._transactionLevel--;
+        $savePoint = _transactionLevel--;
         if ($useSavePoint) {
             this.rollbackSavepoint($savePoint);
         } elseif (this.nestedTransactionRollbackException == null) {
@@ -505,9 +505,9 @@ class Connection : IConnection {
      */
     function enableSavePoints(bool myEnable = true) {
         if (myEnable == false) {
-            this._useSavePoints = false;
+            _useSavePoints = false;
         } else {
-            this._useSavePoints = this._driver.supports(IDriver::FEATURE_SAVEPOINT);
+            _useSavePoints = _driver.supports(IDriver::FEATURE_SAVEPOINT);
         }
 
         return this;
@@ -519,7 +519,7 @@ class Connection : IConnection {
      * @return this
      */
     function disableSavePoints() {
-        this._useSavePoints = false;
+        _useSavePoints = false;
 
         return this;
     }
@@ -530,7 +530,7 @@ class Connection : IConnection {
      * @return bool true if enabled, false otherwise
      */
     bool isSavePointsEnabled() {
-        return this._useSavePoints;
+        return _useSavePoints;
     }
 
     /**
@@ -539,7 +539,7 @@ class Connection : IConnection {
      * @param string|int myName Save point name or id
      */
     void createSavePoint(myName) {
-        this.execute(this._driver.savePointSQL(myName)).closeCursor();
+        this.execute(_driver.savePointSQL(myName)).closeCursor();
     }
 
     /**
@@ -548,7 +548,7 @@ class Connection : IConnection {
      * @param string|int myName Save point name or id
      */
     void releaseSavePoint(myName) {
-        mySql = this._driver.releaseSavePointSQL(myName);
+        mySql = _driver.releaseSavePointSQL(myName);
         if (mySql) {
             this.execute(mySql).closeCursor();
         }
@@ -560,7 +560,7 @@ class Connection : IConnection {
      * @param string|int myName Save point name or id
      */
     void rollbackSavepoint(myName) {
-        this.execute(this._driver.rollbackSavePointSQL(myName)).closeCursor();
+        this.execute(_driver.rollbackSavePointSQL(myName)).closeCursor();
     }
 
     /**
@@ -569,7 +569,7 @@ class Connection : IConnection {
      */
     void disableForeignKeys() {
         this.getDisconnectRetry().run(void () {
-            this.execute(this._driver.disableForeignKeySQL()).closeCursor();
+            this.execute(_driver.disableForeignKeySQL()).closeCursor();
         });
     }
 
@@ -579,7 +579,7 @@ class Connection : IConnection {
      */
     void enableForeignKeys() {
         this.getDisconnectRetry().run(void () {
-            this.execute(this._driver.enableForeignKeySQL()).closeCursor();
+            this.execute(_driver.enableForeignKeySQL()).closeCursor();
         });
     }
 
@@ -591,7 +591,7 @@ class Connection : IConnection {
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
     bool supportsDynamicConstraints() {
-        return this._driver.supportsDynamicConstraints();
+        return _driver.supportsDynamicConstraints();
     }
 
     
@@ -650,7 +650,7 @@ class Connection : IConnection {
      * @return bool True if a transaction is running else false.
      */
     bool inTransaction() {
-        return this._transactionStarted;
+        return _transactionStarted;
     }
 
     /**
@@ -665,7 +665,7 @@ class Connection : IConnection {
     string quote(myValue, myType = "string") {
         [myValue, myType] = this.cast(myValue, myType);
 
-        return this._driver.quote(myValue, myType);
+        return _driver.quote(myValue, myType);
     }
 
     /**
@@ -674,7 +674,7 @@ class Connection : IConnection {
      * This is not required to use `quoteIdentifier()`.
      */
     bool supportsQuoting() {
-        return this._driver.supports(IDriver::FEATURE_QUOTE);
+        return _driver.supports(IDriver::FEATURE_QUOTE);
     }
 
     /**
@@ -686,7 +686,7 @@ class Connection : IConnection {
      * @param myIdentifier The identifier to quote.
      */
     string quoteIdentifier(string myIdentifier) {
-        return this._driver.quoteIdentifier(myIdentifier);
+        return _driver.quoteIdentifier(myIdentifier);
     }
 
     /**
@@ -698,8 +698,8 @@ class Connection : IConnection {
      *   true to use `_cake_model_` or the name of the cache config to use.
      */
     void cacheMetadata($cache) {
-        this._schemaCollection = null;
-        this._config["cacheMetadata"] = $cache;
+        _schemaCollection = null;
+        _config["cacheMetadata"] = $cache;
         if (is_string($cache)) {
             this.cacher = null;
         }
@@ -719,7 +719,7 @@ class Connection : IConnection {
             return this.cacher;
         }
 
-        myConfigName = this._config["cacheMetadata"] ?? "_cake_model_";
+        myConfigName = _config["cacheMetadata"] ?? "_cake_model_";
         if (!is_string(myConfigName)) {
             myConfigName = "_cake_model_";
         }
@@ -741,7 +741,7 @@ class Connection : IConnection {
      * @return this
      */
     function enableQueryLogging(bool myEnable = true) {
-        this._logQueries = myEnable;
+        _logQueries = myEnable;
 
         return this;
     }
@@ -752,7 +752,7 @@ class Connection : IConnection {
      * @return this
      */
     function disableQueryLogging() {
-        this._logQueries = false;
+        _logQueries = false;
 
         return this;
     }
@@ -761,7 +761,7 @@ class Connection : IConnection {
      * Check if query logging is enabled.
      */
     bool isQueryLoggingEnabled() {
-        return this._logQueries;
+        return _logQueries;
     }
 
     /**
@@ -772,7 +772,7 @@ class Connection : IConnection {
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     auto setLogger(LoggerInterface $logger) {
-        this._logger = $logger;
+        _logger = $logger;
 
         return this;
     }
@@ -784,8 +784,8 @@ class Connection : IConnection {
      */
     auto getLogger(): LoggerInterface
     {
-        if (this._logger !== null) {
-            return this._logger;
+        if (_logger !== null) {
+            return _logger;
         }
 
         if (!class_exists(QueryLogger::class)) {
@@ -795,7 +795,7 @@ class Connection : IConnection {
             );
         }
 
-        return this._logger = new QueryLogger(["connection":this.configName()]);
+        return _logger = new QueryLogger(["connection":this.configName()]);
     }
 
     /**
@@ -818,7 +818,7 @@ class Connection : IConnection {
      */
     protected auto _newLogger(IStatement $statement): LoggingStatement
     {
-        $log = new LoggingStatement($statement, this._driver);
+        $log = new LoggingStatement($statement, _driver);
         $log.setLogger(this.getLogger());
 
         return $log;
@@ -838,17 +838,17 @@ class Connection : IConnection {
             "database":"*****",
             "port":"*****",
         ];
-        $replace = array_intersect_key($secrets, this._config);
-        myConfig = $replace + this._config;
+        $replace = array_intersect_key($secrets, _config);
+        myConfig = $replace + _config;
 
         return [
             "config":myConfig,
-            "driver":this._driver,
-            "transactionLevel":this._transactionLevel,
-            "transactionStarted":this._transactionStarted,
-            "useSavePoints":this._useSavePoints,
-            "logQueries":this._logQueries,
-            "logger":this._logger,
+            "driver":_driver,
+            "transactionLevel":_transactionLevel,
+            "transactionStarted":_transactionStarted,
+            "useSavePoints":_useSavePoints,
+            "logQueries":_logQueries,
+            "logger":_logger,
         ];
     }
 }

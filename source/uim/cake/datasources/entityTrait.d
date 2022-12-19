@@ -206,15 +206,15 @@ trait EntityTrait
             this.setDirty(myName, true);
 
             if (
-                !array_key_exists(myName, this._original) &&
-                array_key_exists(myName, this._fields) &&
-                this._fields[myName] !== myValue
+                !array_key_exists(myName, _original) &&
+                array_key_exists(myName, _fields) &&
+                _fields[myName] !== myValue
             ) {
-                this._original[myName] = this._fields[myName];
+                _original[myName] = _fields[myName];
             }
 
             if (!myOptions["setter"]) {
-                this._fields[myName] = myValue;
+                _fields[myName] = myValue;
                 continue;
             }
 
@@ -222,7 +222,7 @@ trait EntityTrait
             if ($setter) {
                 myValue = this.{$setter}(myValue);
             }
-            this._fields[myName] = myValue;
+            _fields[myName] = myValue;
         }
 
         return this;
@@ -243,8 +243,8 @@ trait EntityTrait
         myValue = null;
         $method = static::_accessor(myField, "get");
 
-        if (isset(this._fields[myField])) {
-            myValue = &this._fields[myField];
+        if (isset(_fields[myField])) {
+            myValue = &_fields[myField];
         }
 
         if ($method) {
@@ -267,8 +267,8 @@ trait EntityTrait
         if (myField == "") {
             throw new InvalidArgumentException("Cannot get an empty field");
         }
-        if (array_key_exists(myField, this._original)) {
-            return this._original[myField];
+        if (array_key_exists(myField, _original)) {
+            return _original[myField];
         }
 
         return this.get(myField);
@@ -281,9 +281,9 @@ trait EntityTrait
      */
     auto getOriginalValues(): array
     {
-        $originals = this._original;
+        $originals = _original;
         $originalKeys = array_keys($originals);
-        foreach (this._fields as myKey: myValue) {
+        foreach (_fields as myKey: myValue) {
             if (!in_array(myKey, $originalKeys, true)) {
                 $originals[myKey] = myValue;
             }
@@ -396,7 +396,7 @@ trait EntityTrait
     function unset(myField) {
         myField = (array)myField;
         foreach (myField as $p) {
-            unset(this._fields[$p], this._original[$p], this._dirty[$p]);
+            unset(_fields[$p], _original[$p], _dirty[$p]);
         }
 
         return this;
@@ -424,20 +424,20 @@ trait EntityTrait
      */
     auto setHidden(string[] myFields, bool myMerge = false) {
         if (myMerge == false) {
-            this._hidden = myFields;
+            _hidden = myFields;
 
             return this;
         }
 
-        myFields = array_merge(this._hidden, myFields);
-        this._hidden = array_unique(myFields);
+        myFields = array_merge(_hidden, myFields);
+        _hidden = array_unique(myFields);
 
         return this;
     }
 
     // Gets the hidden fields.
     string[] getHidden() {
-        return this._hidden;
+        return _hidden;
     }
 
     /**
@@ -449,20 +449,20 @@ trait EntityTrait
      */
     auto setVirtual(string[] myFields, bool myMerge = false) {
         if (myMerge == false) {
-            this._virtual = myFields;
+            _virtual = myFields;
 
             return this;
         }
 
-        myFields = array_merge(this._virtual, myFields);
-        this._virtual = array_unique(myFields);
+        myFields = array_merge(_virtual, myFields);
+        _virtual = array_unique(myFields);
 
         return this;
     }
 
     // Gets the virtual fields on this entity.
     string[] getVirtual() {
-        return this._virtual;
+        return _virtual;
     }
 
     /**
@@ -475,10 +475,10 @@ trait EntityTrait
      *     representations.
      */
     string[] getVisible() {
-        myFields = array_keys(this._fields);
-        myFields = array_merge(myFields, this._virtual);
+        myFields = array_keys(_fields);
+        myFields = array_merge(myFields, _virtual);
 
-        return array_diff(myFields, this._hidden);
+        return array_diff(myFields, _hidden);
     }
 
     /**
@@ -680,13 +680,13 @@ trait EntityTrait
      */
     auto setDirty(string myField, bool $isDirty = true) {
         if ($isDirty == false) {
-            unset(this._dirty[myField]);
+            unset(_dirty[myField]);
 
             return this;
         }
 
-        this._dirty[myField] = true;
-        unset(this._errors[myField], this._invalid[myField]);
+        _dirty[myField] = true;
+        unset(_errors[myField], _invalid[myField]);
 
         return this;
     }
@@ -699,15 +699,15 @@ trait EntityTrait
      */
     bool isDirty(Nullable!string myField = null) {
         if (myField == null) {
-            return !empty(this._dirty);
+            return !empty(_dirty);
         }
 
-        return isset(this._dirty[myField]);
+        return isset(_dirty[myField]);
     }
 
     // Gets the dirty fields.
     string[] getDirty() {
-        return array_keys(this._dirty);
+        return array_keys(_dirty);
     }
 
     /**
@@ -716,10 +716,10 @@ trait EntityTrait
      * for an initial object hydration
      */
     void clean() {
-        this._dirty = [];
-        this._errors = [];
-        this._invalid = [];
-        this._original = [];
+        _dirty = [];
+        _errors = [];
+        _invalid = [];
+        _original = [];
     }
 
     /**
@@ -733,12 +733,12 @@ trait EntityTrait
      */
     auto setNew(bool $new) {
         if ($new) {
-            foreach (this._fields as $k: $p) {
-                this._dirty[$k] = true;
+            foreach (_fields as $k: $p) {
+                _dirty[$k] = true;
             }
         }
 
-        this._new = $new;
+        _new = $new;
 
         return this;
     }
@@ -755,7 +755,7 @@ trait EntityTrait
             this.setNew(func_get_arg(0));
         }
 
-        return this._new;
+        return _new;
     }
 
     /**
@@ -764,7 +764,7 @@ trait EntityTrait
      * @param bool $includeNested true will check nested entities for hasErrors()
      */
     bool hasErrors(bool $includeNested = true) {
-        if (Hash::filter(this._errors)) {
+        if (Hash::filter(_errors)) {
             return true;
         }
 
@@ -772,8 +772,8 @@ trait EntityTrait
             return false;
         }
 
-        foreach (this._fields as myField) {
-            if (this._readHasErrors(myField)) {
+        foreach (_fields as myField) {
+            if (_readHasErrors(myField)) {
                 return true;
             }
         }
@@ -788,14 +788,14 @@ trait EntityTrait
      */
     auto getErrors(): array
     {
-        $diff = array_diff_key(this._fields, this._errors);
+        $diff = array_diff_key(_fields, _errors);
 
-        return this._errors + (new Collection($diff))
+        return _errors + (new Collection($diff))
             .filter(function (myValue) {
                 return is_array(myValue) || myValue instanceof IEntity;
             })
             .map(function (myValue) {
-                return this._readError(myValue);
+                return _readError(myValue);
             })
             .filter()
             .toArray();
@@ -809,12 +809,12 @@ trait EntityTrait
      */
     auto getError(string myField): array
     {
-        myErrors = this._errors[myField] ?? [];
+        myErrors = _errors[myField] ?? [];
         if (myErrors) {
             return myErrors;
         }
 
-        return this._nestedErrors(myField);
+        return _nestedErrors(myField);
     }
 
     /**
@@ -834,23 +834,23 @@ trait EntityTrait
     auto setErrors(array myErrors, bool $overwrite = false) {
         if ($overwrite) {
             foreach (myErrors as $f: myError) {
-                this._errors[$f] = (array)myError;
+                _errors[$f] = (array)myError;
             }
 
             return this;
         }
 
         foreach (myErrors as $f: myError) {
-            this._errors += [$f: []];
+            _errors += [$f: []];
 
             // String messages are appended to the list,
             // while more complex error structures need their
             // keys preserved for nested validator.
             if (is_string(myError)) {
-                this._errors[$f][] = myError;
+                _errors[$f][] = myError;
             } else {
                 foreach (myError as $k: $v) {
-                    this._errors[$f][$k] = $v;
+                    _errors[$f][$k] = $v;
                 }
             }
         }
@@ -891,10 +891,10 @@ trait EntityTrait
     {
         // Only one path element, check for nested entity with error.
         if (indexOf(myField, ".") == false) {
-            return this._readError(this.get(myField));
+            return _readError(this.get(myField));
         }
         // Try reading the errors data with field as a simple path
-        myError = Hash::get(this._errors, myField);
+        myError = Hash::get(_errors, myField);
         if (myError !== null) {
             return myError;
         }
@@ -926,7 +926,7 @@ trait EntityTrait
             }
         }
         if (count(myPath) <= 1) {
-            return this._readError($entity, array_pop(myPath));
+            return _readError($entity, array_pop(myPath));
         }
 
         return [];
@@ -946,7 +946,7 @@ trait EntityTrait
 
         if (is_array($object)) {
             foreach ($object as myValue) {
-                if (this._readHasErrors(myValue)) {
+                if (_readHasErrors(myValue)) {
                     return true;
                 }
             }
@@ -992,7 +992,7 @@ trait EntityTrait
      */
     auto getInvalid(): array
     {
-        return this._invalid;
+        return _invalid;
     }
 
     /**
@@ -1002,7 +1002,7 @@ trait EntityTrait
      * @return mixed|null
      */
     auto getInvalidField(string myField) {
-        return this._invalid[myField] ?? null;
+        return _invalid[myField] ?? null;
     }
 
     /**
@@ -1019,10 +1019,10 @@ trait EntityTrait
     auto setInvalid(array myFields, bool $overwrite = false) {
         foreach (myFields as myField: myValue) {
             if ($overwrite == true) {
-                this._invalid[myField] = myValue;
+                _invalid[myField] = myValue;
                 continue;
             }
-            this._invalid += [myField: myValue];
+            _invalid += [myField: myValue];
         }
 
         return this;
@@ -1036,7 +1036,7 @@ trait EntityTrait
      * @return this
      */
     auto setInvalidField(string myField, myValue) {
-        this._invalid[myField] = myValue;
+        _invalid[myField] = myValue;
 
         return this;
     }
@@ -1067,16 +1067,16 @@ trait EntityTrait
      */
     auto setAccess(myField, bool $set) {
         if (myField == "*") {
-            this._accessible = array_map(function ($p) use ($set) {
+            _accessible = array_map(function ($p) use ($set) {
                 return $set;
-            }, this._accessible);
-            this._accessible["*"] = $set;
+            }, _accessible);
+            _accessible["*"] = $set;
 
             return this;
         }
 
         foreach ((array)myField as $prop) {
-            this._accessible[$prop] = $set;
+            _accessible[$prop] = $set;
         }
 
         return this;
@@ -1090,7 +1090,7 @@ trait EntityTrait
      */
     auto getAccessible(): array
     {
-        return this._accessible;
+        return _accessible;
     }
 
     /**
@@ -1107,16 +1107,16 @@ trait EntityTrait
      */
          */
     bool isAccessible(string myField) {
-        myValue = this._accessible[myField] ?? null;
+        myValue = _accessible[myField] ?? null;
 
-        return (myValue == null && !empty(this._accessible["*"])) || myValue;
+        return (myValue == null && !empty(_accessible["*"])) || myValue;
     }
 
     /**
      * Returns the alias of the repository from which this entity came from.
      */
     string getSource() {
-        return this._registryAlias;
+        return _registryAlias;
     }
 
     /**
@@ -1126,7 +1126,7 @@ trait EntityTrait
      * @return this
      */
     auto setSource(string myAlias) {
-        this._registryAlias = myAlias;
+        _registryAlias = myAlias;
 
         return this;
     }
@@ -1146,21 +1146,21 @@ trait EntityTrait
      */
     auto __debugInfo(): array
     {
-        myFields = this._fields;
-        foreach (this._virtual as myField) {
+        myFields = _fields;
+        foreach (_virtual as myField) {
             myFields[myField] = this.myField;
         }
 
         return myFields + [
             "[new]": this.isNew(),
-            "[accessible]": this._accessible,
-            "[dirty]": this._dirty,
-            "[original]": this._original,
-            "[virtual]": this._virtual,
+            "[accessible]": _accessible,
+            "[dirty]": _dirty,
+            "[original]": _original,
+            "[virtual]": _virtual,
             "[hasErrors]": this.hasErrors(),
-            "[errors]": this._errors,
-            "[invalid]": this._invalid,
-            "[repository]": this._registryAlias,
+            "[errors]": _errors,
+            "[invalid]": _invalid,
+            "[repository]": _registryAlias,
         ];
     }
 }

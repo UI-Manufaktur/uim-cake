@@ -59,8 +59,8 @@ class IniConfig : IConfigEngine
         if (myPath == null) {
             myPath = CONFIG;
         }
-        this._path = myPath;
-        this._section = $section;
+        _path = myPath;
+        _section = $section;
     }
 
     /**
@@ -73,18 +73,18 @@ class IniConfig : IConfigEngine
      *  Or when files contain ".." as this could lead to abusive reads.
      */
     array read(string myKey) {
-        myfile = this._getFilePath(myKey, true);
+        myfile = _getFilePath(myKey, true);
 
         myContentss = parse_ini_file(myfile, true);
-        if (this._section && isset(myContentss[this._section])) {
-            myValues = this._parseNestedValues(myContentss[this._section]);
+        if (_section && isset(myContentss[_section])) {
+            myValues = _parseNestedValues(myContentss[_section]);
         } else {
             myValues = [];
             foreach (myContentss as $section: $attribs) {
                 if (is_array($attribs)) {
-                    myValues[$section] = this._parseNestedValues($attribs);
+                    myValues[$section] = _parseNestedValues($attribs);
                 } else {
-                    $parse = this._parseNestedValues([$attribs]);
+                    $parse = _parseNestedValues([$attribs]);
                     myValues[$section] = array_shift($parse);
                 }
             }
@@ -138,7 +138,7 @@ class IniConfig : IConfigEngine
             if (is_array(myValue)) {
                 $kValues = Hash::flatten(myValue, ".");
                 foreach ($kValues as $k2: $v) {
-                    myResult[] = "$k2 = " . this._value($v);
+                    myResult[] = "$k2 = " . _value($v);
                 }
             }
             if ($isSection) {
@@ -147,7 +147,7 @@ class IniConfig : IConfigEngine
         }
         myContentss = trim(implode("\n", myResult));
 
-        myfilename = this._getFilePath(myKey);
+        myfilename = _getFilePath(myKey);
 
         return file_put_contents(myfilename, myContentss) > 0;
     }

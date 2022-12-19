@@ -86,7 +86,7 @@ class ExceptionRenderer : IExceptionRenderer
     this(Throwable myException, ?ServerRequest myRequest = null) {
         this.error = myException;
         this.request = myRequest;
-        this.controller = this._getController();
+        this.controller = _getController();
     }
 
     /**
@@ -174,15 +174,15 @@ class ExceptionRenderer : IExceptionRenderer
     IResponse render() {
         myException = this.error;
         $code = this.getHttpCode(myException);
-        $method = this._method(myException);
-        myTemplate = this._template(myException, $method, $code);
+        $method = _method(myException);
+        myTemplate = _template(myException, $method, $code);
         this.clearOutput();
 
         if (method_exists(this, $method)) {
-            return this._customMethod($method, myException);
+            return _customMethod($method, myException);
         }
 
-        myMessage = this._message(myException, $code);
+        myMessage = _message(myException, $code);
         myUrl = this.controller.getRequest().getRequestTarget();
         $response = this.controller.getResponse();
 
@@ -232,7 +232,7 @@ class ExceptionRenderer : IExceptionRenderer
         }
         this.controller.setResponse($response);
 
-        return this._outputMessage(myTemplate);
+        return _outputMessage(myTemplate);
     }
 
     /**
@@ -244,7 +244,7 @@ class ExceptionRenderer : IExceptionRenderer
      */
     protected Response _customMethod(string $method, Throwable myException) {
         myResult = this.{$method}(myException);
-        this._shutdown();
+        _shutdown();
         if (is_string(myResult)) {
             myResult = this.controller.getResponse().withStringBody(myResult);
         }
@@ -339,26 +339,26 @@ class ExceptionRenderer : IExceptionRenderer
         try {
             this.controller.render(myTemplate);
 
-            return this._shutdown();
+            return _shutdown();
         } catch (MissingTemplateException $e) {
             $attributes = $e.getAttributes();
             if (
                 $e instanceof MissingLayoutException ||
                 indexOf($attributes["file"], "error500") !== false
             ) {
-                return this._outputMessageSafe("error500");
+                return _outputMessageSafe("error500");
             }
 
-            return this._outputMessage("error500");
+            return _outputMessage("error500");
         } catch (MissingPluginException $e) {
             $attributes = $e.getAttributes();
             if (isset($attributes["plugin"]) && $attributes["plugin"] == this.controller.getPlugin()) {
                 this.controller.setPlugin(null);
             }
 
-            return this._outputMessageSafe("error500");
+            return _outputMessageSafe("error500");
         } catch (Throwable $e) {
-            return this._outputMessageSafe("error500");
+            return _outputMessageSafe("error500");
         }
     }
 

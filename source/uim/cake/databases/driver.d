@@ -76,8 +76,8 @@ abstract class Driver : IDriver
                 "Please pass "username" instead of "login" for connecting to the database"
             );
         }
-        myConfig += this._baseConfig;
-        this._config = myConfig;
+        myConfig += _baseConfig;
+        _config = myConfig;
         if (!empty(myConfig["quoteIdentifiers"])) {
             this.enableAutoQuoting();
         }
@@ -126,20 +126,20 @@ abstract class Driver : IDriver
     function disconnect(): void
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
-        this._connection = null;
-        this._version = null;
+        _connection = null;
+        _version = null;
     }
 
     /**
      * Returns connected server version.
      */
     string version() {
-        if (this._version == null) {
+        if (_version == null) {
             this.connect();
-            this._version = (string)this._connection.getAttribute(PDO::ATTR_SERVER_VERSION);
+            _version = (string)_connection.getAttribute(PDO::ATTR_SERVER_VERSION);
         }
 
-        return this._version;
+        return _version;
     }
 
     /**
@@ -148,14 +148,14 @@ abstract class Driver : IDriver
      * @return \PDO
      */
     auto getConnection() {
-        if (this._connection == null) {
+        if (_connection == null) {
             throw new MissingConnectionException([
                 "driver":App::shortName(static::class, "Database/Driver"),
                 "reason":"Unknown",
             ]);
         }
 
-        return this._connection;
+        return _connection;
     }
 
     /**
@@ -166,7 +166,7 @@ abstract class Driver : IDriver
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     auto setConnection(myConnection) {
-        this._connection = myConnection;
+        _connection = myConnection;
 
         return this;
     }
@@ -178,7 +178,7 @@ abstract class Driver : IDriver
     function prepare(myQuery): IStatement
     {
         this.connect();
-        $statement = this._connection.prepare(myQuery instanceof Query ? myQuery.sql() : myQuery);
+        $statement = _connection.prepare(myQuery instanceof Query ? myQuery.sql() : myQuery);
 
         return new PDOStatement($statement, this);
     }
@@ -186,31 +186,31 @@ abstract class Driver : IDriver
     
     bool beginTransaction() {
         this.connect();
-        if (this._connection.inTransaction()) {
+        if (_connection.inTransaction()) {
             return true;
         }
 
-        return this._connection.beginTransaction();
+        return _connection.beginTransaction();
     }
 
     
     bool commitTransaction() {
         this.connect();
-        if (!this._connection.inTransaction()) {
+        if (!_connection.inTransaction()) {
             return false;
         }
 
-        return this._connection.commit();
+        return _connection.commit();
     }
 
     
     bool rollbackTransaction() {
         this.connect();
-        if (!this._connection.inTransaction()) {
+        if (!_connection.inTransaction()) {
             return false;
         }
 
-        return this._connection.rollBack();
+        return _connection.rollBack();
     }
 
     /**
@@ -219,7 +219,7 @@ abstract class Driver : IDriver
     bool inTransaction() {
         this.connect();
 
-        return this._connection.inTransaction();
+        return _connection.inTransaction();
     }
 
     
@@ -245,7 +245,7 @@ abstract class Driver : IDriver
     string quote(myValue, myType = PDO::PARAM_STR) {
         this.connect();
 
-        return this._connection.quote((string)myValue, myType);
+        return _connection.quote((string)myValue, myType);
     }
 
     /**
@@ -299,32 +299,32 @@ abstract class Driver : IDriver
             return (string)myValue;
         }
 
-        return this._connection.quote((string)myValue, PDO::PARAM_STR);
+        return _connection.quote((string)myValue, PDO::PARAM_STR);
     }
 
     
     string schema() {
-        return this._config["schema"];
+        return _config["schema"];
     }
 
     
     function lastInsertId(Nullable!string myTable = null, Nullable!string $column = null) {
         this.connect();
 
-        if (this._connection instanceof PDO) {
-            return this._connection.lastInsertId(myTable);
+        if (_connection instanceof PDO) {
+            return _connection.lastInsertId(myTable);
         }
 
-        return this._connection.lastInsertId(myTable);
+        return _connection.lastInsertId(myTable);
     }
 
     
     bool isConnected() {
-        if (this._connection == null) {
+        if (_connection == null) {
             $connected = false;
         } else {
             try {
-                $connected = (bool)this._connection.query("SELECT 1");
+                $connected = (bool)_connection.query("SELECT 1");
             } catch (PDOException $e) {
                 $connected = false;
             }
@@ -335,21 +335,21 @@ abstract class Driver : IDriver
 
     
     function enableAutoQuoting(bool myEnable = true) {
-        this._autoQuoting = myEnable;
+        _autoQuoting = myEnable;
 
         return this;
     }
 
     
     function disableAutoQuoting() {
-        this._autoQuoting = false;
+        _autoQuoting = false;
 
         return this;
     }
 
     
     bool isAutoQuotingEnabled() {
-        return this._autoQuoting;
+        return _autoQuoting;
     }
 
     /**
@@ -385,9 +385,9 @@ abstract class Driver : IDriver
 
     TableSchema newTableSchema(string myTable, array $columns = []) {
         myClassName = TableSchema::class;
-        if (isset(this._config["tableSchema"])) {
+        if (isset(_config["tableSchema"])) {
             /** @var class-string<\Cake\Database\Schema\TableSchema> myClassName */
-            myClassName = this._config["tableSchema"];
+            myClassName = _config["tableSchema"];
         }
 
         return new myClassName(myTable, $columns);
@@ -415,7 +415,7 @@ abstract class Driver : IDriver
      */
     auto __destruct() {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
-        this._connection = null;
+        _connection = null;
     }
 
     /**
@@ -426,7 +426,7 @@ abstract class Driver : IDriver
      */
     array __debugInfo() {
       return [
-          "connected":this._connection !== null,
+          "connected":_connection !== null,
       ];
     }
 }

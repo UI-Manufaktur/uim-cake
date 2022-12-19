@@ -33,10 +33,10 @@ trait FileConfigTrait
         if (myPlugin) {
             myfile = Plugin::configPath(myPlugin) . myKey;
         } else {
-            myfile = this._path . myKey;
+            myfile = _path . myKey;
         }
 
-        myfile .= this._extension;
+        myfile .= _extension;
 
         if (!$checkExists || is_file(myfile)) {
             return myfile;
