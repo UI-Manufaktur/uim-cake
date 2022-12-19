@@ -21,7 +21,7 @@ class LabelWidget : IWidget
     /**
      * The template to use.
      */
-    protected string $_labelTemplate = "label";
+    protected string _labelTemplate = "label";
 
     /**
      * Constructor.

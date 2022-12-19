@@ -122,7 +122,7 @@ class RadioWidget : BasicWidget
      * Renders a single radio input and label.
      *
      * @param string|int $val The value of the radio input.
-     * @param array<string, mixed>|string $text The label text, or complex radio type.
+     * @param array<string, mixed>|string text The label text, or complex radio type.
      * @param array<string, mixed> myData Additional options for input generation.
      * @param \Cake\View\Form\IContext $context The form context
      * @return string
@@ -212,7 +212,7 @@ class RadioWidget : BasicWidget
      *
      * @param array<string, mixed> $radio The input properties.
      * @param array<string, mixed>|string|false $label The properties for a label.
-     * @param string $input The input widget.
+     * @param string input The input widget.
      * @param \Cake\View\Form\IContext $context The form context.
      * @param bool $escape Whether to HTML escape the label.
      * @return string|false Generated label.

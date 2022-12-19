@@ -178,7 +178,7 @@ class SelectBoxWidget : BasicWidget
     /**
      * Render the contents of an optgroup element.
      *
-     * @param string $label The optgroup label text
+     * @param string label The optgroup label text
      * @param \ArrayAccess|array $optgroup The opt group data.
      * @param array|null $disabled The options to disable.
      * @param array|string|null $selected The options to select.
@@ -187,7 +187,7 @@ class SelectBoxWidget : BasicWidget
      * @return string Formatted template string
      */
     protected string _renderOptgroup(
-        string $label,
+        string label,
         $optgroup,
         ?array $disabled,
         $selected,
