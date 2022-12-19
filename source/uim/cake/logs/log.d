@@ -161,8 +161,6 @@ class Log
 
     /**
      * Initializes registry and configurations
-     *
-     * @return void
      */
     protected static void _init() {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
