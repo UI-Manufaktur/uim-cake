@@ -216,12 +216,12 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * in order to unset the current locale, and to make the behavior fall back to using the
      * globally configured locale.
      * @return this
-     * @see \Cake\ORM\Behavior\TranslateBehavior::getLocale()
+     * @see \Cake\ORM\Behavior\TranslateBehavior::locale()
      * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
-    auto setLocale(Nullable!string $locale) {
-        this.getStrategy().setLocale($locale);
+    auto locale(Nullable!string $locale) {
+        this.getStrategy().locale($locale);
 
         return this;
     }
@@ -229,15 +229,15 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Returns the current locale.
      *
-     * If no locale has been explicitly set via `setLocale()`, this method will return
+     * If no locale has been explicitly set via `locale()`, this method will return
      * the currently configured global locale.
      *
      * @return string
-     * @see \Cake\I18n\I18n::getLocale()
-     * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
+     * @see \Cake\I18n\I18n::locale()
+     * @see \Cake\ORM\Behavior\TranslateBehavior::locale()
      */
-    string getLocale() {
-        return this.getStrategy().getLocale();
+    string locale() {
+        return this.getStrategy().locale();
     }
 
     /**

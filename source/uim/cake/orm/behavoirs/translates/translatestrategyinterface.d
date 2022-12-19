@@ -31,15 +31,15 @@ interface ITranslateStrategy : IPropertyMarshal
      *   the behavior fall back to using the globally configured locale.
      * @return this
      */
-    auto setLocale(Nullable!string $locale);
+    auto locale(Nullable!string $locale);
 
     /**
      * Returns the current locale.
      *
-     * If no locale has been explicitly set via `setLocale()`, this method will
+     * If no locale has been explicitly set via `locale()`, this method will
      * return the currently configured global locale.
      */
-    string getLocale();
+    string locale();
 
     /**
      * Returns a fully aliased field name for translated fields.
@@ -78,16 +78,14 @@ interface ITranslateStrategy : IPropertyMarshal
      * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
      * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject myOptions the options passed to the save method
-     * @return void
      */
-    function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions);
+    void beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions);
 
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
      * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
      * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
-     * @return void
      */
-    function afterSave(IEvent myEvent, IEntity $entity);
+    void afterSave(IEvent myEvent, IEntity $entity);
 }

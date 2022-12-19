@@ -95,7 +95,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * @return void
      */
     function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions) {
-        $locale = Hash::get(myOptions, "locale", this.getLocale());
+        $locale = Hash::get(myOptions, "locale", this.locale());
         myConfig = this.getConfig();
 
         if ($locale == myConfig["defaultLocale"]) {
@@ -309,7 +309,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * @return void
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        $locale = $entity.get("_locale") ?: this.getLocale();
+        $locale = $entity.get("_locale") ?: this.locale();
         $newOptions = [this.translationTable.getAlias(): ["validate":false]];
         myOptions["associated"] = $newOptions + myOptions["associated"];
 
@@ -411,7 +411,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * @param string myField Field name to be aliased.
      */
     string translationField(string myField) {
-        if (this.getLocale() == this.getConfig("defaultLocale")) {
+        if (this.locale() == this.getConfig("defaultLocale")) {
             return this.table.aliasField(myField);
         }
 

@@ -54,7 +54,7 @@ trait TranslateStrategyTrait {
      *   the behavior fall back to using the globally configured locale.
      * @return this
      */
-    auto setLocale(Nullable!string $locale) {
+    auto locale(Nullable!string $locale) {
         this.locale = $locale;
 
         return this;
@@ -63,15 +63,15 @@ trait TranslateStrategyTrait {
     /**
      * Returns the current locale.
      *
-     * If no locale has been explicitly set via `setLocale()`, this method will return
+     * If no locale has been explicitly set via `locale()`, this method will return
      * the currently configured global locale.
      *
      * @return string
-     * @see \Cake\I18n\I18n::getLocale()
-     * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
+     * @see \Cake\I18n\I18n::locale()
+     * @see \Cake\ORM\Behavior\TranslateBehavior::locale()
      */
-    string getLocale() {
-        return this.locale ?: I18n::getLocale();
+    string locale() {
+        return this.locale ?: I18n::locale();
     }
 
     /**

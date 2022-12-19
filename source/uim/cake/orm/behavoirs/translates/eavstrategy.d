@@ -139,7 +139,7 @@ class EavStrategy : ITranslateStrategy
      * @return void
      */
     function beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions) {
-        $locale = Hash::get(myOptions, "locale", this.getLocale());
+        $locale = Hash::get(myOptions, "locale", this.locale());
 
         if ($locale == this.getConfig("defaultLocale")) {
             return;
@@ -203,7 +203,7 @@ class EavStrategy : ITranslateStrategy
      * @return void
      */
     function beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        $locale = $entity.get("_locale") ?: this.getLocale();
+        $locale = $entity.get("_locale") ?: this.locale();
         $newOptions = [this.translationTable.getAlias(): ["validate":false]];
         myOptions["associated"] = $newOptions + myOptions["associated"];
 
@@ -304,7 +304,7 @@ class EavStrategy : ITranslateStrategy
      */
     string translationField(string myField) {
         myTable = this.table;
-        if (this.getLocale() == this.getConfig("defaultLocale")) {
+        if (this.locale() == this.getConfig("defaultLocale")) {
             return myTable.aliasField(myField);
         }
         $associationName = myTable.getAlias() . "_" . myField . "_translation";
