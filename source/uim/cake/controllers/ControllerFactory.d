@@ -50,7 +50,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @return \Cake\Controller\Controller
      * @throws \Cake\Http\Exception\MissingControllerException
      */
-    function create(IServerRequest myRequest): Controller
+    Controller create(IServerRequest myRequest)
     {
         myClassName = this.getControllerClass(myRequest);
         if (myClassName == null) {
@@ -82,7 +82,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
-    function invoke($controller): IResponse
+    IResponse invoke($controller)
     {
         this.controller = $controller;
 
@@ -104,7 +104,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @param \Psr\Http\Message\IServerRequest myRequest Request instance.
      * @return \Psr\Http\Message\IResponse
      */
-    function handle(IServerRequest myRequest): IResponse
+    IResponse handle(IServerRequest myRequest)
     {
         $controller = this.controller;
         /** @psalm-suppress ArgumentTypeCoercion */

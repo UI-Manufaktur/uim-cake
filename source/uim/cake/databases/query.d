@@ -161,8 +161,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\Connection
      */
-    auto getConnection(): Connection
-    {
+    Connection getConnection() {
         return this._connection;
     }
 

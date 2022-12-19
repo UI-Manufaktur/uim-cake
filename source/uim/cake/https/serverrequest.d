@@ -1271,7 +1271,7 @@ class ServerRequest : IServerRequest
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    auto getCookieCollection(): CookieCollection
+    CookieCollection getCookieCollection()
     {
         return CookieCollection::createFromServerRequest(this);
     }

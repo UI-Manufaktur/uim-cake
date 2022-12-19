@@ -434,7 +434,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response
 
      */
-    auto getResponse(): Response
+    Response getResponse()
     {
         return this.response;
     }
@@ -458,7 +458,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Closure
      * @throws \Cake\Controller\Exception\MissingActionException
      */
-    auto getAction(): Closure
+    Closure getAction()
     {
         myRequest = this.request;
         $action = myRequest.getParam("action");

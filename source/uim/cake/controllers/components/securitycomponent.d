@@ -447,7 +447,7 @@ class SecurityComponent : Component {
      * @param \Cake\Http\ServerRequest myRequest The request object to add into.
      * @return \Cake\Http\ServerRequest The modified request.
      */
-    function generateToken(ServerRequest myRequest): ServerRequest
+    ServerRequest generateToken(ServerRequest myRequest)
     {
         $token = [
             "unlockedFields":this._config["unlockedFields"],

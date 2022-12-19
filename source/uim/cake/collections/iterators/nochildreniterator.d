@@ -22,7 +22,7 @@ class NoChildrenIterator : Collection : RecursiveIterator
      *
      * @return \RecursiveIterator
      */
-    auto getChildren(): RecursiveIterator
+    RecursiveIterator getChildren()
     {
         return new static([]);
     }

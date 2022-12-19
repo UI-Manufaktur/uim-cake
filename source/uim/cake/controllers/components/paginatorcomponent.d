@@ -173,7 +173,7 @@ class PaginatorComponent : Component
      * @return \Cake\Datasource\IResultSet Query results
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    function paginate(object $object, array $settings = []): IResultSet
+    IResultSet paginate(object $object, array $settings = [])
     {
         myRequest = this._registry.getController().getRequest();
 

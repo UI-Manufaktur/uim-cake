@@ -418,7 +418,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return \Cake\Database\Connection
      */
-    auto getConnection(): Connection
+    Connection getConnection()
     {
         if (!this._connection) {
             /** @var \Cake\Database\Connection myConnection */

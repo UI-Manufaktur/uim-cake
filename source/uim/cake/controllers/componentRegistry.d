@@ -41,7 +41,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      *
      * @return \Cake\Controller\Controller Controller instance or null if not set.
      */
-    auto getController(): Controller
+    Controller getController()
     {
         if (this._controller == null) {
             throw new CakeException("Controller not set for ComponentRegistry");
@@ -106,7 +106,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-param class-string myClass
      */
-    protected auto _create(myClass, string myAlias, array myConfig): Component
+    protected Component _create(myClass, string myAlias, array myConfig)
     {
         /** @var \Cake\Controller\Component $instance */
         $instance = new myClass(this, myConfig);
