@@ -48,7 +48,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
     bool set(myKey, myValue, $ttl = null) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         $duration = this.duration($ttl);
 
         return apcu_store(myKey, myValue, $duration);
@@ -64,7 +64,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-fetch.php
      */
     auto get(myKey, $default = null) {
-        myValue = apcu_fetch(this._key(myKey), $success);
+        myValue = apcu_fetch(_key(myKey), $success);
         if ($success == false) {
             return $default;
         }
@@ -81,7 +81,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
     function increment(string myKey, int $offset = 1) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
 
         return apcu_inc(myKey, $offset);
     }
@@ -95,7 +95,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-dec.php
      */
     function decrement(string myKey, int $offset = 1) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
 
         return apcu_dec(myKey, $offset);
     }
@@ -108,7 +108,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
     bool delete(myKey) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
 
         return apcu_delete(myKey);
     }
@@ -123,7 +123,7 @@ class ApcuEngine : CacheEngine
     bool clear() {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
-                "/^" . preg_quote(this._config["prefix"], "/") . "/",
+                "/^" . preg_quote(_config["prefix"], "/") . "/",
                 APC_ITER_NONE
             );
             apcu_delete($iterator);
@@ -133,7 +133,7 @@ class ApcuEngine : CacheEngine
 
         $cache = apcu_cache_info(); // Raises warning by itself already
         foreach ($cache["cache_list"] as myKey) {
-            if (indexOf(myKey["info"], this._config["prefix"]) == 0) {
+            if (indexOf(myKey["info"], _config["prefix"]) == 0) {
                 apcu_delete(myKey["info"]);
             }
         }
@@ -151,8 +151,8 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-add.php
      */
     bool add(string myKey, myValue) {
-        myKey = this._key(myKey);
-        $duration = this._config["duration"];
+        myKey = _key(myKey);
+        $duration = _config["duration"];
 
         return apcu_add(myKey, myValue, $duration);
     }
@@ -166,16 +166,16 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
     string[] groups() {
-        if (empty(this._compiledGroupNames)) {
-            foreach (this._config["groups"] as myGroup) {
-                this._compiledGroupNames[] = this._config["prefix"] . myGroup;
+        if (empty(_compiledGroupNames)) {
+            foreach (_config["groups"] as myGroup) {
+                _compiledGroupNames[] = _config["prefix"] . myGroup;
             }
         }
 
         $success = false;
-        myGroups = apcu_fetch(this._compiledGroupNames, $success);
-        if ($success && count(myGroups) !== count(this._config["groups"])) {
-            foreach (this._compiledGroupNames as myGroup) {
+        myGroups = apcu_fetch(_compiledGroupNames, $success);
+        if ($success && count(myGroups) !== count(_config["groups"])) {
+            foreach (_compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     myValue = 1;
                     if (apcu_store(myGroup, myValue) == false) {
@@ -191,7 +191,7 @@ class ApcuEngine : CacheEngine
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config["groups"] as $i: myGroup) {
+        foreach (_config["groups"] as $i: myGroup) {
             myResult[] = myGroup . myGroups[$i];
         }
 
@@ -208,7 +208,7 @@ class ApcuEngine : CacheEngine
      */
     bool clearGroup(string myGroup) {
         $success = false;
-        apcu_inc(this._config["prefix"] . myGroup, 1, $success);
+        apcu_inc(_config["prefix"] . myGroup, 1, $success);
 
         return $success;
     }

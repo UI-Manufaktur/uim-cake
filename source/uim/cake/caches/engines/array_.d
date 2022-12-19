@@ -35,7 +35,7 @@ class ArrayEngine : CacheEngine
      * @return bool True on success and false on failure.
      */
     bool set(myKey, myValue, $ttl = null) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         $expires = time() + this.duration($ttl);
         this.data[myKey] = ["exp":$expires, "val":myValue];
 
@@ -51,7 +51,7 @@ class ArrayEngine : CacheEngine
      * expired, or if there was an error fetching it.
      */
     auto get(myKey, $default = null) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         if (!isset(this.data[myKey])) {
             return $default;
         }
@@ -79,7 +79,7 @@ class ArrayEngine : CacheEngine
         if (this.get(myKey) == null) {
             this.set(myKey, 0);
         }
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         this.data[myKey]["val"] += $offset;
 
         return this.data[myKey]["val"];
@@ -96,7 +96,7 @@ class ArrayEngine : CacheEngine
         if (this.get(myKey) == null) {
             this.set(myKey, 0);
         }
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         this.data[myKey]["val"] -= $offset;
 
         return this.data[myKey]["val"];
@@ -109,7 +109,7 @@ class ArrayEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete(myKey) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         unset(this.data[myKey]);
 
         return true;
@@ -133,8 +133,8 @@ class ArrayEngine : CacheEngine
      */
     string[] groups() {
         myResult = [];
-        foreach (this._config["groups"] as myGroup) {
-            myKey = this._config["prefix"] . myGroup;
+        foreach (_config["groups"] as myGroup) {
+            myKey = _config["prefix"] . myGroup;
             if (!isset(this.data[myKey])) {
                 this.data[myKey] = ["exp":PHP_INT_MAX, "val":1];
             }
@@ -153,7 +153,7 @@ class ArrayEngine : CacheEngine
      * @return bool success
      */
     bool clearGroup(string myGroup) {
-        myKey = this._config["prefix"] . myGroup;
+        myKey = _config["prefix"] . myGroup;
         if (isset(this.data[myKey])) {
             this.data[myKey]["val"] += 1;
         }

@@ -32,7 +32,7 @@ class FilterIterator : Collection {
             myItems = new Collection(myItems);
         }
 
-        this._callback = $callback;
+        _callback = $callback;
         $wrapper = new CallbackFilterIterator(myItems, $callback);
         super.this($wrapper);
     }
@@ -53,7 +53,7 @@ class FilterIterator : Collection {
 
         // ArrayIterator can be traversed strictly.
         // Let"s do that for performance gains
-        $callback = this._callback;
+        $callback = _callback;
         $res = [];
 
         foreach ($k, $v; $iterator) {

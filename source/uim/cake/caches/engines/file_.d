@@ -63,17 +63,17 @@ class FileEngine : CacheEngine {
     bool init(array myConfig = []) {
       super.init(myConfig);
 
-      if (this._config["path"] == null) {
-          this._config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
+      if (_config["path"] == null) {
+          _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
       }
-      if (substr(this._config["path"], -1) !== DIRECTORY_SEPARATOR) {
-          this._config["path"] .= DIRECTORY_SEPARATOR;
+      if (substr(_config["path"], -1) !== DIRECTORY_SEPARATOR) {
+          _config["path"] .= DIRECTORY_SEPARATOR;
       }
-      if (this._groupPrefix) {
-          this._groupPrefix = this._groupPrefix.replace("_", DIRECTORY_SEPARATOR);
+      if (_groupPrefix) {
+          _groupPrefix = _groupPrefix.replace("_", DIRECTORY_SEPARATOR);
       }
 
-      return this._active();
+      return _active();
     }
 
     /**
@@ -87,38 +87,38 @@ class FileEngine : CacheEngine {
      * @return bool True on success and false on failure.
      */
     bool set(string myDataId, myValue, $ttl = null) {
-        if (myValue == "" || !this._init) {
+        if (myValue == "" || !_init) {
             return false;
         }
 
-        myDataId = this._key(myDataId);
+        myDataId = _key(myDataId);
 
-        if (this._setKey(myDataId, true) == false) {
+        if (_setKey(myDataId, true) == false) {
             return false;
         }
 
-        if (!empty(this._config["serialize"])) {
+        if (!empty(_config["serialize"])) {
             myValue = serialize(myValue);
         }
 
         $expires = time() + this.duration($ttl);
         myContentss = implode([$expires, PHP_EOL, myValue, PHP_EOL]);
 
-        if (this._config["lock"]) {
+        if (_config["lock"]) {
             /** @psalm-suppress PossiblyNullReference */
-            this._File.flock(LOCK_EX);
+            _File.flock(LOCK_EX);
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        this._File.rewind();
-        $success = this._File.ftruncate(0) &&
-            this._File.fwrite(myContentss) &&
-            this._File.fflush();
+        _File.rewind();
+        $success = _File.ftruncate(0) &&
+            _File.fwrite(myContentss) &&
+            _File.fflush();
 
-        if (this._config["lock"]) {
-            this._File.flock(LOCK_UN);
+        if (_config["lock"]) {
+            _File.flock(LOCK_UN);
         }
-        this._File = null;
+        _File = null;
 
         return $success;
     }
@@ -132,45 +132,45 @@ class FileEngine : CacheEngine {
      *   expired, or if there was an error fetching it
      */
     auto get(myDataId, $default = null) {
-        myDataId = this._key(myDataId);
+        myDataId = _key(myDataId);
 
-        if (!this._init || this._setKey(myDataId) == false) {
+        if (!_init || _setKey(myDataId) == false) {
             return $default;
         }
 
-        if (this._config["lock"]) {
+        if (_config["lock"]) {
             /** @psalm-suppress PossiblyNullReference */
-            this._File.flock(LOCK_SH);
+            _File.flock(LOCK_SH);
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        this._File.rewind();
+        _File.rewind();
         $time = time();
-        $cachetime = (int)this._File.current();
+        $cachetime = (int)_File.current();
 
         if ($cachetime < $time) {
-            if (this._config["lock"]) {
-                this._File.flock(LOCK_UN);
+            if (_config["lock"]) {
+                _File.flock(LOCK_UN);
             }
 
             return $default;
         }
 
         myData = "";
-        this._File.next();
-        while (this._File.valid()) {
+        _File.next();
+        while (_File.valid()) {
             /** @psalm-suppress PossiblyInvalidOperand */
-            myData .= this._File.current();
-            this._File.next();
+            myData .= _File.current();
+            _File.next();
         }
 
-        if (this._config["lock"]) {
-            this._File.flock(LOCK_UN);
+        if (_config["lock"]) {
+            _File.flock(LOCK_UN);
         }
 
         myData = trim(myData);
 
-        if (myData !== "" && !empty(this._config["serialize"])) {
+        if (myData !== "" && !empty(_config["serialize"])) {
             myData = unserialize(myData);
         }
 
@@ -185,15 +185,15 @@ class FileEngine : CacheEngine {
      *   exist or couldn"t be removed
      */
     bool delete(myDataId) {
-        myDataId = this._key(myDataId);
+        myDataId = _key(myDataId);
 
-        if (this._setKey(myDataId) == false || !this._init) {
+        if (_setKey(myDataId) == false || !_init) {
             return false;
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        myPath = this._File.getRealPath();
-        this._File = null;
+        myPath = _File.getRealPath();
+        _File = null;
 
         // phpcs:disable
         return @unlink(myPath);
@@ -206,15 +206,15 @@ class FileEngine : CacheEngine {
      * @return bool True if the cache was successfully cleared, false otherwise
      */
     bool clear() {
-        if (!this._init) {
+        if (!_init) {
             return false;
         }
-        this._File = null;
+        _File = null;
 
-        this._clearDirectory(this._config["path"]);
+        _clearDirectory(_config["path"]);
 
         $directory = new RecursiveDirectoryIterator(
-            this._config["path"],
+            _config["path"],
             FilesystemIterator::SKIP_DOTS
         );
         myContentss = new RecursiveIteratorIterator(
@@ -237,7 +237,7 @@ class FileEngine : CacheEngine {
 
             myPath = $realPath . DIRECTORY_SEPARATOR;
             if (!in_array(myPath, $cleared, true)) {
-                this._clearDirectory(myPath);
+                _clearDirectory(myPath);
                 $cleared[] = myPath;
             }
 
@@ -267,10 +267,10 @@ class FileEngine : CacheEngine {
             return;
         }
 
-        $prefixLength = strlen(this._config["prefix"]);
+        $prefixLength = strlen(_config["prefix"]);
 
         while (($entry = $dir.read()) !== false) {
-            if (substr($entry, 0, $prefixLength) !== this._config["prefix"]) {
+            if (substr($entry, 0, $prefixLength) !== _config["prefix"]) {
                 continue;
             }
 
@@ -327,10 +327,10 @@ class FileEngine : CacheEngine {
      */
     protected bool _setKey(string myKey, bool $createKey = false) {
         myGroups = null;
-        if (this._groupPrefix) {
-            myGroups = vsprintf(this._groupPrefix, this.groups());
+        if (_groupPrefix) {
+            myGroups = vsprintf(_groupPrefix, this.groups());
         }
-        $dir = this._config["path"] . myGroups;
+        $dir = _config["path"] . myGroups;
 
         if (!is_dir($dir)) {
             mkdir($dir, 0775, true);
@@ -342,13 +342,13 @@ class FileEngine : CacheEngine {
             return false;
         }
         if (
-            empty(this._File) ||
-            this._File.getBasename() !== myKey ||
-            this._File.valid() == false
+            empty(_File) ||
+            _File.getBasename() !== myKey ||
+            _File.valid() == false
         ) {
             $exists = is_file(myPath.getPathname());
             try {
-                this._File = myPath.openFile("c+");
+                _File = myPath.openFile("c+");
             } catch (Exception $e) {
                 trigger_error($e.getMessage(), E_USER_WARNING);
 
@@ -356,11 +356,11 @@ class FileEngine : CacheEngine {
             }
             unset(myPath);
 
-            if (!$exists && !chmod(this._File.getPathname(), (int)this._config["mask"])) {
+            if (!$exists && !chmod(_File.getPathname(), (int)_config["mask"])) {
                 trigger_error(sprintf(
                     "Could not apply permission mask "%s" on cache file "%s"",
-                    this._File.getPathname(),
-                    this._config["mask"]
+                    _File.getPathname(),
+                    _config["mask"]
                 ), E_USER_WARNING);
             }
         }
@@ -373,7 +373,7 @@ class FileEngine : CacheEngine {
      *
      */
     protected bool _active() {
-        $dir = new SplFileInfo(this._config["path"]);
+        $dir = new SplFileInfo(_config["path"]);
         myPath = $dir.getPathname();
         $success = true;
         if (!is_dir(myPath)) {
@@ -383,11 +383,11 @@ class FileEngine : CacheEngine {
         }
 
         $isWritableDir = ($dir.isDir() && $dir.isWritable());
-        if (!$success || (this._init && !$isWritableDir)) {
-            this._init = false;
+        if (!$success || (_init && !$isWritableDir)) {
+            _init = false;
             trigger_error(sprintf(
                 "%s is not writable",
-                this._config["path"]
+                _config["path"]
             ), E_USER_WARNING);
         }
 
@@ -415,11 +415,11 @@ class FileEngine : CacheEngine {
      * @return bool success
      */
     bool clearGroup(string myGroup) {
-        this._File = null;
+        _File = null;
 
-        $prefix = (string)this._config["prefix"];
+        $prefix = (string)_config["prefix"];
 
-        $directoryIterator = new RecursiveDirectoryIterator(this._config["path"]);
+        $directoryIterator = new RecursiveDirectoryIterator(_config["path"]);
         myContentss = new RecursiveIteratorIterator(
             $directoryIterator,
             RecursiveIteratorIterator::CHILD_FIRST

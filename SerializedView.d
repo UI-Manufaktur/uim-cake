@@ -31,7 +31,7 @@ abstract class SerializedView : View {
 
     override void initialize() {
       super.initialize();
-      this.setResponse(this.getResponse().withType(this._responseType));
+      this.setResponse(this.getResponse().withType(_responseType));
     }
 
     // Load helpers only if serialization is disabled.
@@ -68,7 +68,7 @@ abstract class SerializedView : View {
                 function ($v) {
                     return "_" . $v;
                 },
-                array_keys(this._defaultConfig)
+                array_keys(_defaultConfig)
             );
 
             $serialize = array_diff(
@@ -78,7 +78,7 @@ abstract class SerializedView : View {
         }
         if ($serialize !== false) {
             try {
-                return this._serialize($serialize);
+                return _serialize($serialize);
             } catch (Exception | TypeError $e) {
                 throw new SerializationFailureException(
                     "Serialization of View data failed.",

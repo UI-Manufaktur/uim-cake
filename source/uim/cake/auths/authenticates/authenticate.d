@@ -45,7 +45,7 @@ abstract class DAuthenticate : IEventListener {
      * Whether the user authenticated by this class
      * requires their password to be rehashed with another algorithm.
      */
-    protected bool $_needsPasswordRehash = false;
+    protected bool _needsPasswordRehash = false;
 
     /**
      * Constructor
@@ -54,7 +54,7 @@ abstract class DAuthenticate : IEventListener {
      * @param array<string, mixed> myConfig Array of config to use.
      */
     this(ComponentRegistry $registry, array myConfig = []) {
-        this._registry = $registry;
+        _registry = $registry;
         this.setConfig(myConfig);
     }
 
@@ -70,7 +70,7 @@ abstract class DAuthenticate : IEventListener {
      * @return array<string, mixed>|false Either false on failure, or an array of user data.
      */
     protected auto _findUser(string myUsername, Nullable!string myPassword = null) {
-        myResult = this._query(myUsername).first();
+        myResult = _query(myUsername).first();
 
         if (myResult == null) {
             // Waste time hashing the password, to prevent
@@ -86,7 +86,7 @@ abstract class DAuthenticate : IEventListener {
             return false;
         }
 
-        myPasswordField = this._config["fields"]["password"];
+        myPasswordField = _config["fields"]["password"];
         if (myPassword !== null) {
             myHasher = this.passwordHasher();
             myHashedPassword = myResult.get(myPasswordField);
@@ -104,7 +104,7 @@ abstract class DAuthenticate : IEventListener {
                 return false;
             }
 
-            this._needsPasswordRehash = myHasher.needsRehash(myHashedPassword);
+            _needsPasswordRehash = myHasher.needsRehash(myHashedPassword);
             myResult.unset(myPasswordField);
         }
         myHidden = myResult.getHidden();
@@ -124,7 +124,7 @@ abstract class DAuthenticate : IEventListener {
      * @return \Cake\ORM\Query
      */
     protected Query _query(string myUsername) {
-        myConfig = this._config;
+        myConfig = _config;
         myTable = this.getTableLocator().get(myConfig["userModel"]);
 
         myOptions = [
@@ -150,13 +150,13 @@ abstract class DAuthenticate : IEventListener {
      *   it does not extend AbstractPasswordHasher
      */
     AbstractPasswordHasher passwordHasher() {
-        if (this._passwordHasher !== null) {
-            return this._passwordHasher;
+        if (_passwordHasher !== null) {
+            return _passwordHasher;
         }
 
-        myPasswordHasher = this._config["passwordHasher"];
+        myPasswordHasher = _config["passwordHasher"];
 
-        return this._passwordHasher = PasswordHasherFactory::build(myPasswordHasher);
+        return _passwordHasher = PasswordHasherFactory::build(myPasswordHasher);
     }
 
     /**
@@ -164,7 +164,7 @@ abstract class DAuthenticate : IEventListener {
      * requires to be rehashed with another algorithm
      */
     bool needsPasswordRehash() {
-        return this._needsPasswordRehash;
+        return _needsPasswordRehash;
     }
 
     /**

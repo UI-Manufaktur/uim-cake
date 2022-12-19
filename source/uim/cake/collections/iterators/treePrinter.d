@@ -57,9 +57,9 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
         int myMode = RecursiveIteratorIterator::SELF_FIRST
     ) {
         super.this(myItems, myMode);
-        this._value = this._propertyExtractor(myValuePath);
-        this._key = this._propertyExtractor(myKeyPath);
-        this._spacer = $spacer;
+        _value = _propertyExtractor(myValuePath);
+        _key = _propertyExtractor(myKeyPath);
+        _spacer = $spacer;
     }
 
     /**
@@ -69,18 +69,18 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      */
     #[\ReturnTypeWillChange]
     function key() {
-        $extractor = this._key;
+        $extractor = _key;
 
-        return $extractor(this._fetchCurrent(), super.key(), this);
+        return $extractor(_fetchCurrent(), super.key(), this);
     }
 
     /**
      * Returns the current iteration value
      */
     string current() {
-        $extractor = this._value;
-        $current = this._fetchCurrent();
-        $spacer = str_repeat(this._spacer, this.getDepth());
+        $extractor = _value;
+        $current = _fetchCurrent();
+        $spacer = str_repeat(_spacer, this.getDepth());
 
         return $spacer . $extractor($current, super.key(), this);
     }
@@ -91,7 +91,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      */
     void next() {
         super.next();
-        this._current = null;
+        _current = null;
     }
 
     /**
@@ -100,10 +100,10 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      * @return mixed
      */
     protected auto _fetchCurrent() {
-        if (this._current !== null) {
-            return this._current;
+        if (_current !== null) {
+            return _current;
         }
 
-        return this._current = super.current();
+        return _current = super.current();
     }
 }

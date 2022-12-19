@@ -52,7 +52,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * @param iterable myItems The items to be filtered.
      */
     this(iterable myItems) {
-        this._buffer = new SplDoublyLinkedList();
+        _buffer = new SplDoublyLinkedList();
         super.this(myItems);
     }
 
@@ -63,7 +63,7 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     #[\ReturnTypeWillChange]
     function key() {
-        return this._key;
+        return _key;
     }
 
     /**
@@ -73,31 +73,31 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     #[\ReturnTypeWillChange]
     function current() {
-        return this._current;
+        return _current;
     }
 
     /**
      * Rewinds the collection
      */
     void rewind() {
-        if (this._index == 0 && !this._started) {
-            this._started = true;
+        if (_index == 0 && !_started) {
+            _started = true;
             super.rewind();
 
             return;
         }
 
-        this._index = 0;
+        _index = 0;
     }
 
     /**
      * Returns whether the iterator has more elements
      */
     bool valid() {
-        if (this._buffer.offsetExists(this._index)) {
-            $current = this._buffer.offsetGet(this._index);
-            this._current = $current["value"];
-            this._key = $current["key"];
+        if (_buffer.offsetExists(_index)) {
+            $current = _buffer.offsetGet(_index);
+            _current = $current["value"];
+            _key = $current["key"];
 
             return true;
         }
@@ -105,15 +105,15 @@ class BufferedIterator : Collection : Countable, Serializable
         $valid = super.valid();
 
         if ($valid) {
-            this._current = super.current();
-            this._key = super.key();
-            this._buffer.push([
-                "key":this._key,
-                "value":this._current,
+            _current = super.current();
+            _key = super.key();
+            _buffer.push([
+                "key":_key,
+                "value":_current,
             ]);
         }
 
-        this._finished = !$valid;
+        _finished = !$valid;
 
         return $valid;
     }
@@ -122,13 +122,13 @@ class BufferedIterator : Collection : Countable, Serializable
      * Advances the iterator pointer to the next element
      */
     void next() {
-        this._index++;
+        _index++;
 
         // Don"t move inner iterator if we have more buffer
-        if (this._buffer.offsetExists(this._index)) {
+        if (_buffer.offsetExists(_index)) {
             return;
         }
-        if (!this._finished) {
+        if (!_finished) {
             super.next();
         }
     }
@@ -137,7 +137,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * Returns the number or items in this collection
      */
     int count() {
-        if (!this._started) {
+        if (!_started) {
             this.rewind();
         }
 
@@ -145,7 +145,7 @@ class BufferedIterator : Collection : Countable, Serializable
             this.next();
         }
 
-        return this._buffer.count();
+        return _buffer.count();
     }
 
     /**
@@ -153,20 +153,20 @@ class BufferedIterator : Collection : Countable, Serializable
      * to reconstruct it
      */
     string serialize() {
-        if (!this._finished) {
+        if (!_finished) {
             this.count();
         }
 
-        return serialize(this._buffer);
+        return serialize(_buffer);
     }
 
     // Magic method used for serializing the iterator instance.
     array __serialize() {
-        if (!this._finished) {
+        if (!_finished) {
             this.count();
         }
 
-        return iterator_to_array(this._buffer);
+        return iterator_to_array(_buffer);
     }
 
     /**
@@ -176,9 +176,9 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     void unserialize(myCollection) {
         this.this([]);
-        this._buffer = unserialize(myCollection);
-        this._started = true;
-        this._finished = true;
+        _buffer = unserialize(myCollection);
+        _started = true;
+        _finished = true;
     }
 
     /**
@@ -190,10 +190,10 @@ class BufferedIterator : Collection : Countable, Serializable
         this.this([]);
 
         foreach (myValue; myData) {
-            this._buffer.push(myValue);
+            _buffer.push(myValue);
         }
 
-        this._started = true;
-        this._finished = true;
+        _started = true;
+        _finished = true;
     }
 }

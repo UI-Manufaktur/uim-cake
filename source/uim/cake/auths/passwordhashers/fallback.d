@@ -34,11 +34,11 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      */
     this(array myConfig = []) {
         super.this(myConfig);
-        foreach (this._config["hashers"] as myKey: myHasher) {
+        foreach (_config["hashers"] as myKey: myHasher) {
             if (is_array(myHasher) && !isset(myHasher["className"])) {
                 myHasher["className"] = myKey;
             }
-            this._hashers[] = PasswordHasherFactory::build(myHasher);
+            _hashers[] = PasswordHasherFactory::build(myHasher);
         }
     }
 
@@ -51,7 +51,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @return string|false Password hash or false
      */
     function hash(string myPassword) {
-        return this._hashers[0].hash(myPassword);
+        return _hashers[0].hash(myPassword);
     }
 
     /**
@@ -65,7 +65,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @return bool True if hashes match else false.
      */
     bool check(string myPassword, string myHashedPassword) {
-        foreach (this._hashers as myHasher) {
+        foreach (_hashers as myHasher) {
             if (myHasher.check(myPassword, myHashedPassword)) {
                 return true;
             }
@@ -81,6 +81,6 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @param string myPassword The password to verify
      */
     bool needsRehash(string myPassword) {
-        return this._hashers[0].needsRehash(myPassword);
+        return _hashers[0].needsRehash(myPassword);
     }
 }

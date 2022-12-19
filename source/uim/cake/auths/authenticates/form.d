@@ -63,12 +63,12 @@ class FormAuthenticate : BaseAuthenticate {
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
     function authenticate(ServerRequest myRequest, Response $response) {
-        myFields = this._config["fields"];
-        if (!this._checkFields(myRequest, myFields)) {
+        myFields = _config["fields"];
+        if (!_checkFields(myRequest, myFields)) {
             return false;
         }
 
-        return this._findUser(
+        return _findUser(
             myRequest.getData(myFields["username"]),
             myRequest.getData(myFields["password"])
         );

@@ -31,7 +31,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
         int $flags = 0
     ) {
         super.this(myItems, myMode, $flags);
-        this._mode = myMode;
+        _mode = myMode;
     }
 
     /**
@@ -85,7 +85,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
             myValuePath,
             myKeyPath,
             $spacer,
-            this._mode
+            _mode
         );
     }
 }

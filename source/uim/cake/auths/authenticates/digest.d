@@ -91,12 +91,12 @@ class DigestAuthenticate : BasicAuthenticate
      * @return array<string, mixed>|false Either false or an array of user information
      */
     auto getUser(ServerRequest myRequest) {
-        $digest = this._getDigest(myRequest);
+        $digest = _getDigest(myRequest);
         if (empty($digest)) {
             return false;
         }
 
-        myUser = this._findUser($digest["username"]);
+        myUser = _findUser($digest["username"]);
         if (empty(myUser)) {
             return false;
         }
@@ -105,7 +105,7 @@ class DigestAuthenticate : BasicAuthenticate
             return false;
         }
 
-        myField = this._config["fields"]["password"];
+        myField = _config["fields"]["password"];
         myPassword = myUser[myField];
         unset(myUser[myField]);
 
@@ -204,16 +204,16 @@ class DigestAuthenticate : BasicAuthenticate
      * @return Headers for logging in.
      */
     STRINGAA loginHeaders(ServerRequest myRequest) {
-        $realm = this._config["realm"] ?: myRequest.getEnv("SERVER_NAME");
+        $realm = _config["realm"] ?: myRequest.getEnv("SERVER_NAME");
 
         myOptions = [
             "realm":$realm,
-            "qop":this._config["qop"],
+            "qop":_config["qop"],
             "nonce":this.generateNonce(),
-            "opaque":this._config["opaque"] ?: md5($realm),
+            "opaque":_config["opaque"] ?: md5($realm),
         ];
 
-        $digest = this._getDigest(myRequest);
+        $digest = _getDigest(myRequest);
         if ($digest && isset($digest["nonce"]) && !this.validNonce($digest["nonce"])) {
             myOptions["stale"] = true;
         }

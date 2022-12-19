@@ -24,7 +24,7 @@ class MemoryStorage : IStorage
 
 
     function read() {
-        return this._user;
+        return _user;
     }
 
 
@@ -40,16 +40,16 @@ class MemoryStorage : IStorage
 
     function redirectUrl(myUrl = null) {
         if (myUrl == null) {
-            return this._redirectUrl;
+            return _redirectUrl;
         }
 
         if (myUrl == false) {
-            this._redirectUrl = null;
+            _redirectUrl = null;
 
             return null;
         }
 
-        this._redirectUrl = myUrl;
+        _redirectUrl = myUrl;
 
         return null;
     }

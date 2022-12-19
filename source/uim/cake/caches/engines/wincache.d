@@ -46,7 +46,7 @@ class WincacheEngine : CacheEngine {
      * @return bool True if the data was successfully cached, false on failure
      */
     bool set(myKey, myValue, $ttl = null) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         $duration = this.duration($ttl);
 
         return wincache_ucache_set(myKey, myValue, $duration);
@@ -61,7 +61,7 @@ class WincacheEngine : CacheEngine {
      *   has expired, or if there was an error fetching it
      */
     auto get(myKey, $default = null) {
-        myValue = wincache_ucache_get(this._key(myKey), $success);
+        myValue = wincache_ucache_get(_key(myKey), $success);
         if ($success == false) {
             return $default;
         }
@@ -77,7 +77,7 @@ class WincacheEngine : CacheEngine {
      * @return int|false New incremented value, false otherwise
      */
     function increment(string myKey, int $offset = 1) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
 
         return wincache_ucache_inc(myKey, $offset);
     }
@@ -90,7 +90,7 @@ class WincacheEngine : CacheEngine {
      * @return int|false New decremented value, false otherwise
      */
     function decrement(string myKey, int $offset = 1) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
 
         return wincache_ucache_dec(myKey, $offset);
     }
@@ -102,7 +102,7 @@ class WincacheEngine : CacheEngine {
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete(myKey) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
 
         return wincache_ucache_delete(myKey);
     }
@@ -118,7 +118,7 @@ class WincacheEngine : CacheEngine {
         $cacheKeys = $info["ucache_entries"];
         unset($info);
         foreach ($cacheKeys as myKey) {
-            if (indexOf(myKey["key_name"], this._config["prefix"]) == 0) {
+            if (indexOf(myKey["key_name"], _config["prefix"]) == 0) {
                 wincache_ucache_delete(myKey["key_name"]);
             }
         }
@@ -132,15 +132,15 @@ class WincacheEngine : CacheEngine {
      * the group accordingly.
      */
     string[] groups() {
-        if (empty(this._compiledGroupNames)) {
-            foreach (this._config["groups"] as myGroup) {
-                this._compiledGroupNames[] = this._config["prefix"] . myGroup;
+        if (empty(_compiledGroupNames)) {
+            foreach (_config["groups"] as myGroup) {
+                _compiledGroupNames[] = _config["prefix"] . myGroup;
             }
         }
 
-        myGroups = wincache_ucache_get(this._compiledGroupNames);
-        if (count(myGroups) !== count(this._config["groups"])) {
-            foreach (this._compiledGroupNames as myGroup) {
+        myGroups = wincache_ucache_get(_compiledGroupNames);
+        if (count(myGroups) !== count(_config["groups"])) {
+            foreach (_compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     wincache_ucache_set(myGroup, 1);
                     myGroups[myGroup] = 1;
@@ -151,7 +151,7 @@ class WincacheEngine : CacheEngine {
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config["groups"] as $i: myGroup) {
+        foreach (_config["groups"] as $i: myGroup) {
             myResult[] = myGroup . myGroups[$i];
         }
 
@@ -167,7 +167,7 @@ class WincacheEngine : CacheEngine {
      */
     bool clearGroup(string myGroup) {
         $success = false;
-        wincache_ucache_inc(this._config["prefix"] . myGroup, 1, $success);
+        wincache_ucache_inc(_config["prefix"] . myGroup, 1, $success);
 
         return $success;
     }

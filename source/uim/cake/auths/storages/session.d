@@ -46,7 +46,7 @@ class SessionStorage : IStorage {
      * @param array<string, mixed> myConfig Configuration list.
      */
     this(ServerRequest myRequest, Response $response, array myConfig = []) {
-        this._session = myRequest.getSession();
+        _session = myRequest.getSession();
         this.setConfig(myConfig);
     }
 
@@ -57,15 +57,15 @@ class SessionStorage : IStorage {
      * @psalm-suppress InvalidReturnType
      */
     function read() {
-        if (this._user !== null) {
-            return this._user ?: null;
+        if (_user !== null) {
+            return _user ?: null;
         }
 
         /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-        this._user = this._session.read(this._config["key"]) ?: false;
+        _user = _session.read(_config["key"]) ?: false;
 
         /** @psalm-suppress InvalidReturnStatement */
-        return this._user ?: null;
+        return _user ?: null;
     }
 
     /**
@@ -76,10 +76,10 @@ class SessionStorage : IStorage {
      * @param \ArrayAccess|array myUser User record.
      */
     void write(myUser) {
-        this._user = myUser;
+        _user = myUser;
 
-        this._session.renew();
-        this._session.write(this._config["key"], myUser);
+        _session.renew();
+        _session.write(_config["key"], myUser);
     }
 
     /**
@@ -88,25 +88,25 @@ class SessionStorage : IStorage {
      * The session id is also renewed to help mitigate issues with session replays.
      */
     void delete() {
-        this._user = false;
+        _user = false;
 
-        this._session.delete(this._config["key"]);
-        this._session.renew();
+        _session.delete(_config["key"]);
+        _session.renew();
     }
 
 
     function redirectUrl(myUrl = null) {
         if (myUrl == null) {
-            return this._session.read(this._config["redirect"]);
+            return _session.read(_config["redirect"]);
         }
 
         if (myUrl == false) {
-            this._session.delete(this._config["redirect"]);
+            _session.delete(_config["redirect"]);
 
             return null;
         }
 
-        this._session.write(this._config["redirect"], myUrl);
+        _session.write(_config["redirect"], myUrl);
 
         return null;
     }

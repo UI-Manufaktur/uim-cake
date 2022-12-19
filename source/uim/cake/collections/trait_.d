@@ -182,7 +182,7 @@ trait CollectionTrait
 
 
     ICollection groupBy(myPath) {
-        $callback = this._propertyExtractor(myPath);
+        $callback = _propertyExtractor(myPath);
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
@@ -200,7 +200,7 @@ trait CollectionTrait
 
 
     ICollection indexBy(myPath) {
-        $callback = this._propertyExtractor(myPath);
+        $callback = _propertyExtractor(myPath);
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
@@ -218,7 +218,7 @@ trait CollectionTrait
 
 
     ICollection countBy(myPath) {
-        $callback = this._propertyExtractor(myPath);
+        $callback = _propertyExtractor(myPath);
 
         $mapper = void (myValue, myKey, $mr) use ($callback) {
             /** @var \Cake\collection.iIterator\MapReduce $mr */
@@ -239,7 +239,7 @@ trait CollectionTrait
             return array_sum(this.toList());
         }
 
-        $callback = this._propertyExtractor(myPath);
+        $callback = _propertyExtractor(myPath);
         $sum = 0;
         foreach ($k, $v; this.optimizeUnwrap()) {
             $sum += $callback($v, $k);
@@ -273,7 +273,7 @@ trait CollectionTrait
 
 
     ICollection match(array $conditions) {
-        return this.filter(this._createMatcherFilter($conditions));
+        return this.filter(_createMatcherFilter($conditions));
     }
 
 
@@ -448,9 +448,9 @@ trait CollectionTrait
 
     ICollection combine(myKeyPath, myValuePath, myGroupPath = null) {
         myOptions = [
-            "keyPath":this._propertyExtractor(myKeyPath),
-            "valuePath":this._propertyExtractor(myValuePath),
-            "groupPath":myGroupPath ? this._propertyExtractor(myGroupPath) : null,
+            "keyPath":_propertyExtractor(myKeyPath),
+            "valuePath":_propertyExtractor(myValuePath),
+            "groupPath":myGroupPath ? _propertyExtractor(myGroupPath) : null,
         ];
 
         $mapper = function (myValue, myKey, MapReduce $mapReduce) use (myOptions) {
@@ -484,8 +484,8 @@ trait CollectionTrait
 
     ICollection nest($idPath, $parentPath, string $nestingKey = "children") {
         $parents = [];
-        $idPath = this._propertyExtractor($idPath);
-        $parentPath = this._propertyExtractor($parentPath);
+        $idPath = _propertyExtractor($idPath);
+        $parentPath = _propertyExtractor($parentPath);
         $isObject = true;
 
         $mapper = void ($row, myKey, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey) {
@@ -605,7 +605,7 @@ trait CollectionTrait
 
     ICollection stopWhen($condition) {
         if (!is_callable($condition)) {
-            $condition = this._createMatcherFilter($condition);
+            $condition = _createMatcherFilter($condition);
         }
 
         return new StoppableIterator(this.unwrap(), $condition);

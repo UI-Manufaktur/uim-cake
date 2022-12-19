@@ -53,9 +53,9 @@ class InsertIterator : Collection {
 
         myPath = explode(".", myPath);
         myTarget = array_pop(myPath);
-        this._path = myPath;
-        this._target = myTarget;
-        this._values = myValues;
+        _path = myPath;
+        _target = myTarget;
+        _values = myValues;
     }
 
     /**
@@ -63,10 +63,10 @@ class InsertIterator : Collection {
      */
     void  next() {
         super.next();
-        if (this._validValues) {
-            this._values.next();
+        if (_validValues) {
+            _values.next();
         }
-        this._validValues = this._values.valid();
+        _validValues = _values.valid();
     }
 
     /**
@@ -79,19 +79,19 @@ class InsertIterator : Collection {
     function current() {
         $row = super.current();
 
-        if (!this._validValues) {
+        if (!_validValues) {
             return $row;
         }
 
         $pointer = &$row;
-        foreach ($step; this._path) {
+        foreach ($step; _path) {
             if (!isset($pointer[$step])) {
                 return $row;
             }
             $pointer = &$pointer[$step];
         }
 
-        $pointer[this._target] = this._values.current();
+        $pointer[_target] = _values.current();
 
         return $row;
     }
@@ -101,7 +101,7 @@ class InsertIterator : Collection {
      */
     void rewind() {
         super.rewind();
-        this._values.rewind();
-        this._validValues = this._values.valid();
+        _values.rewind();
+        _validValues = _values.valid();
     }
 }

@@ -27,7 +27,7 @@ v    protected int _mode;
         int $flags = 0
     ) {
         super.this(myItems, myMode, $flags);
-        this._mode = myMode;
+        _mode = myMode;
     }
 
     /**
@@ -81,7 +81,7 @@ v    protected int _mode;
             myValuePath,
             myKeyPath,
             $spacer,
-            this._mode
+            _mode
         );
     }
 }

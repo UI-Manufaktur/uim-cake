@@ -66,7 +66,7 @@ class BasicAuthenticate : DAuthenticate {
             return false;
         }
 
-        return this._findUser(myUsername, $pass);
+        return _findUser(myUsername, $pass);
     }
 
     /**

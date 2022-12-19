@@ -46,7 +46,7 @@ class SortIterator : Collection {
             myItems = iterator_to_array((new Collection(myItems)).unwrap(), false);
         }
 
-        $callback = this._propertyExtractor($callback);
+        $callback = _propertyExtractor($callback);
         myResults = [];
         foreach (myItems as myKey: $val) {
             $val = $callback($val);

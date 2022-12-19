@@ -21,21 +21,21 @@ class NestIterator : Collection : RecursiveIterator {
      */
     this(iterable myItems, $nestKey) {
         super.this(myItems);
-        this._nestKey = $nestKey;
+        _nestKey = $nestKey;
     }
 
     // Returns a traversable containing the children for the current item
     RecursiveIterator getChildren() {
-      $property = this._propertyExtractor(this._nestKey);
+      $property = _propertyExtractor(_nestKey);
 
-      return new static($property(this.current()), this._nestKey);
+      return new static($property(this.current()), _nestKey);
     }
 
     /**
      * Returns true if there is an array or a traversable object stored under the
      * configured nestKey for the current item */
     bool hasChildren() {
-        $property = this._propertyExtractor(this._nestKey);
+        $property = _propertyExtractor(_nestKey);
         $children = $property(this.current());
 
         if (is_array($children)) {

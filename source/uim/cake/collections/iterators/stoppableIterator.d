@@ -39,9 +39,9 @@ class StoppableIterator : Collection {
      * yielded from this iterator.
      */
     this(iterable myItems, callable $condition) {
-        this._condition = $condition;
+        _condition = $condition;
         super.this(myItems);
-        this._innerIterator = this.getInnerIterator();
+        _innerIterator = this.getInnerIterator();
     }
 
     /**
@@ -55,13 +55,13 @@ class StoppableIterator : Collection {
 
         $current = this.current();
         myKey = this.key();
-        $condition = this._condition;
+        $condition = _condition;
 
-        return !$condition($current, myKey, this._innerIterator);
+        return !$condition($current, myKey, _innerIterator);
     }
 
     Traversable unwrap() {
-      $iterator = this._innerIterator;
+      $iterator = _innerIterator;
 
       if ($iterator instanceof ICollection) {
           $iterator = $iterator.unwrap();
@@ -74,7 +74,7 @@ class StoppableIterator : Collection {
       // ArrayIterator can be traversed strictly.
       // Let"s do that for performance gains
 
-      $callback = this._condition;
+      $callback = _condition;
       $res = [];
 
       foreach ($k, $v; $iterator) {

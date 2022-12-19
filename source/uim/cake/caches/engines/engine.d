@@ -59,12 +59,12 @@ abstract class CacheEngine : ICache, ICacheEngine
     bool init(array myConfig = []) {
         this.setConfig(myConfig);
 
-        if (!empty(this._config["groups"])) {
-            sort(this._config["groups"]);
-            this._groupPrefix = str_repeat("%s_", count(this._config["groups"]));
+        if (!empty(_config["groups"])) {
+            sort(_config["groups"]);
+            _groupPrefix = str_repeat("%s_", count(_config["groups"]));
         }
-        if (!is_numeric(this._config["duration"])) {
-            this._config["duration"] = strtotime(this._config["duration"]) - time();
+        if (!is_numeric(_config["duration"])) {
+            _config["duration"] = strtotime(_config["duration"]) - time();
         }
 
         return true;
@@ -289,7 +289,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * the token representing each group in the cache key
      */
     string[] groups() {
-        return this._config["groups"];
+        return _config["groups"];
     }
 
     /**
@@ -306,12 +306,12 @@ abstract class CacheEngine : ICache, ICacheEngine
         this.ensureValidKey(myKey);
 
         $prefix = "";
-        if (this._groupPrefix) {
+        if (_groupPrefix) {
             $prefix = md5(implode("_", this.groups()));
         }
         myKey = preg_replace("/[\s]+/", "_", myKey);
 
-        return this._config["prefix"] . $prefix . myKey;
+        return _config["prefix"] . $prefix . myKey;
     }
 
     /**
@@ -337,7 +337,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      */
     protected int duration($ttl) {
         if ($ttl == null) {
-            return this._config["duration"];
+            return _config["duration"];
         }
         if (is_int($ttl)) {
             return $ttl;

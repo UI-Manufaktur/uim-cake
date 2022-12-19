@@ -60,28 +60,28 @@ class RedisEngine : CacheEngine
 
         super.init(myConfig);
 
-        return this._connect();
+        return _connect();
     }
 
     // Connects to a Redis server
     // True if Redis server was connected
     protected bool _connect() {
         try {
-            this._Redis = new Redis();
-            if (!empty(this._config["unix_socket"])) {
-                result = this._Redis.connect(this._config["unix_socket"]);
-            } elseif (empty(this._config["persistent"])) {
-                result = this._Redis.connect(
-                    this._config["server"],
-                    (int)this._config["port"],
-                    (int)this._config["timeout"]
+            _Redis = new Redis();
+            if (!empty(_config["unix_socket"])) {
+                result = _Redis.connect(_config["unix_socket"]);
+            } elseif (empty(_config["persistent"])) {
+                result = _Redis.connect(
+                    _config["server"],
+                    (int)_config["port"],
+                    (int)_config["timeout"]
                 );
             } else {
-                $persistentId = this._config["port"] . this._config["timeout"] . this._config["database"];
-                result = this._Redis.pconnect(
-                    this._config["server"],
-                    (int)this._config["port"],
-                    (int)this._config["timeout"],
+                $persistentId = _config["port"] . _config["timeout"] . _config["database"];
+                result = _Redis.pconnect(
+                    _config["server"],
+                    (int)_config["port"],
+                    (int)_config["timeout"],
                     $persistentId
                 );
             }
@@ -92,11 +92,11 @@ class RedisEngine : CacheEngine
 
             return false;
         }
-        if (result && this._config["password"]) {
-            result = this._Redis.auth(this._config["password"]);
+        if (result && _config["password"]) {
+            result = _Redis.auth(_config["password"]);
         }
         if (result) {
-            result = this._Redis.select((int)this._config["database"]);
+            result = _Redis.select((int)_config["database"]);
         }
 
         return result;
@@ -113,15 +113,15 @@ class RedisEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure
      */
     bool set(myKey, myValue, $ttl = null) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
         myValue = this.serialize(myValue);
 
         $duration = this.duration($ttl);
         if ($duration == 0) {
-            return this._Redis.set(myKey, myValue);
+            return _Redis.set(myKey, myValue);
         }
 
-        return this._Redis.setEx(myKey, $duration, myValue);
+        return _Redis.setEx(myKey, $duration, myValue);
     }
 
     /**
@@ -133,7 +133,7 @@ class RedisEngine : CacheEngine
      *   expired, or if there was an error fetching it
      */
     auto get(myKey, $default = null) {
-        myValue = this._Redis.get(this._key(myKey));
+        myValue = _Redis.get(_key(myKey));
         if (myValue == false) {
             return $default;
         }
@@ -149,12 +149,12 @@ class RedisEngine : CacheEngine
      * @return int|false New incremented value, false otherwise
      */
     function increment(string myKey, int $offset = 1) {
-        $duration = this._config["duration"];
-        myKey = this._key(myKey);
+        $duration = _config["duration"];
+        myKey = _key(myKey);
 
-        myValue = this._Redis.incrBy(myKey, $offset);
+        myValue = _Redis.incrBy(myKey, $offset);
         if ($duration > 0) {
-            this._Redis.expire(myKey, $duration);
+            _Redis.expire(myKey, $duration);
         }
 
         return myValue;
@@ -168,12 +168,12 @@ class RedisEngine : CacheEngine
      * @return int|false New decremented value, false otherwise
      */
     function decrement(string myKey, int $offset = 1) {
-        $duration = this._config["duration"];
-        myKey = this._key(myKey);
+        $duration = _config["duration"];
+        myKey = _key(myKey);
 
-        myValue = this._Redis.decrBy(myKey, $offset);
+        myValue = _Redis.decrBy(myKey, $offset);
         if ($duration > 0) {
-            this._Redis.expire(myKey, $duration);
+            _Redis.expire(myKey, $duration);
         }
 
         return myValue;
@@ -186,9 +186,9 @@ class RedisEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete(myKey) {
-        myKey = this._key(myKey);
+        myKey = _key(myKey);
 
-        return this._Redis.del(myKey) > 0;
+        return _Redis.del(myKey) > 0;
     }
 
     /**
@@ -197,21 +197,21 @@ class RedisEngine : CacheEngine
      * @return bool True if the cache was successfully cleared, false otherwise
      */
     bool clear() {
-        this._Redis.setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
+        _Redis.setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
         $isAllDeleted = true;
         $iterator = null;
-        $pattern = this._config["prefix"] . "*";
+        $pattern = _config["prefix"] . "*";
 
         while (true) {
-            myKeys = this._Redis.scan($iterator, $pattern);
+            myKeys = _Redis.scan($iterator, $pattern);
 
             if (myKeys == false) {
                 break;
             }
 
             foreach (myKey; myKeys) {
-                $isDeleted = (this._Redis.del(myKey) > 0);
+                $isDeleted = (_Redis.del(myKey) > 0);
                 $isAllDeleted = $isAllDeleted && $isDeleted;
             }
         }
@@ -229,11 +229,11 @@ class RedisEngine : CacheEngine
      * @link https://github.com/phpredis/phpredis#set
      */
     bool add(string myKey, myValue) {
-        $duration = this._config["duration"];
-        myKey = this._key(myKey);
+        $duration = _config["duration"];
+        myKey = _key(myKey);
         myValue = this.serialize(myValue);
 
-        if (this._Redis.set(myKey, myValue, ["nx", "ex":$duration])) {
+        if (_Redis.set(myKey, myValue, ["nx", "ex":$duration])) {
             return true;
         }
 
@@ -247,11 +247,11 @@ class RedisEngine : CacheEngine
      */
     string[] groups() {
         myResult = [];
-        foreach (this._config["groups"] as myGroup) {
-            myValue = this._Redis.get(this._config["prefix"] . myGroup);
+        foreach (_config["groups"] as myGroup) {
+            myValue = _Redis.get(_config["prefix"] . myGroup);
             if (!myValue) {
                 myValue = this.serialize(1);
-                this._Redis.set(this._config["prefix"] . myGroup, myValue);
+                _Redis.set(_config["prefix"] . myGroup, myValue);
             }
             myResult[] = myGroup . myValue;
         }
@@ -267,7 +267,7 @@ class RedisEngine : CacheEngine
      * @return bool success
      */
     bool clearGroup(string myGroup) {
-        return (bool)this._Redis.incr(this._config["prefix"] . myGroup);
+        return (bool)_Redis.incr(_config["prefix"] . myGroup);
     }
 
     /**
@@ -306,8 +306,8 @@ class RedisEngine : CacheEngine
      * Disconnects from the redis server
      */
     auto __destruct() {
-        if (empty(this._config["persistent"]) && this._Redis instanceof Redis) {
-            this._Redis.close();
+        if (empty(_config["persistent"]) && _Redis instanceof Redis) {
+            _Redis.close();
         }
     }
 }

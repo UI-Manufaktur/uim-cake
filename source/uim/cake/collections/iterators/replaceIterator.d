@@ -31,9 +31,9 @@ class ReplaceIterator : Collection
      * @param callable $callback Callback.
      */
     this(iterable myItems, callable $callback) {
-        this._callback = $callback;
+        _callback = $callback;
         super.this(myItems);
-        this._innerIterator = this.getInnerIterator();
+        _innerIterator = this.getInnerIterator();
     }
 
     /**
@@ -44,14 +44,14 @@ class ReplaceIterator : Collection
      */
     #[\ReturnTypeWillChange]
     function current() {
-      $callback = this._callback;
+      $callback = _callback;
 
-      return $callback(super.current(), this.key(), this._innerIterator);
+      return $callback(super.current(), this.key(), _innerIterator);
     }
 
 
     Traversable unwrap() {
-      $iterator = this._innerIterator;
+      $iterator = _innerIterator;
 
       if ($iterator instanceof ICollection) {
           $iterator = $iterator.unwrap();
@@ -64,7 +64,7 @@ class ReplaceIterator : Collection
       // ArrayIterator can be traversed strictly.
       // Let"s do that for performance gains
 
-      $callback = this._callback;
+      $callback = _callback;
       $res = [];
 
       foreach ($k, $v; $iterator) {

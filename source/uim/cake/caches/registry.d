@@ -81,7 +81,7 @@ class CacheRegistry : ObjectRegistry
      * @return this
      */
     function unload(string myName) {
-        unset(this._loaded[myName]);
+        unset(_loaded[myName]);
 
         return this;
     }

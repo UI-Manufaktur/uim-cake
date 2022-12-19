@@ -31,7 +31,7 @@ abstract class BaseAuthorize {
      * @param array<string, mixed> myConfig An array of config. This class does not use any config.
      */
     this(ComponentRegistry $registry, array myConfig = []) {
-        this._registry = $registry;
+        _registry = $registry;
         this.setConfig(myConfig);
     }
 
