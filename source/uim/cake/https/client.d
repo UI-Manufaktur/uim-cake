@@ -405,7 +405,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Options to merge.
      * @return array Options merged with set config.
      */
-    protected auto _mergeOptions(array myOptions): array
+    protected array _mergeOptions(array myOptions)
     {
         return Hash::merge(this._config, myOptions);
     }
@@ -417,7 +417,7 @@ class Client : ClientInterface
      * @return \Psr\Http\Message\IResponse Response instance.
      * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
      */
-    function sendRequest(RequestInterface myRequest): IResponse
+    IResponse sendRequest(RequestInterface myRequest)
     {
         return this.send(myRequest, this._config);
     }
@@ -580,7 +580,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
      * @return \Cake\Http\Client\Request
      */
-    protected auto _createRequest(string $method, string myUrl, myData, myOptions): Request
+    protected Request _createRequest(string $method, string myUrl, myData, myOptions)
     {
         /** @var array<non-empty-string, non-empty-string> $headers */
         $headers = (array)(myOptions["headers"] ?? []);
@@ -648,7 +648,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Array of options containing the "auth" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */
-    protected auto _addAuthentication(Request myRequest, array myOptions): Request
+    protected Request _addAuthentication(Request myRequest, array myOptions)
     {
         $auth = myOptions["auth"];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */
@@ -667,7 +667,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Array of options containing the "proxy" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */
-    protected auto _addProxy(Request myRequest, array myOptions): Request
+    protected Request _addProxy(Request myRequest, array myOptions)
     {
         $auth = myOptions["proxy"];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */

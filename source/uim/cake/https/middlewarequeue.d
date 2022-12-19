@@ -55,7 +55,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return \Psr\Http\Server\IMiddleware
      * @throws \RuntimeException If Middleware not found.
      */
-    protected auto resolve($middleware): IMiddleware
+    protected IMiddleware resolve($middleware)
     {
         if (is_string($middleware)) {
             myClassName = App::className($middleware, "Middleware", "Middleware");
@@ -254,7 +254,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return \Psr\Http\Server\IMiddleware
      * @see \Iterator::current()
      */
-    function current(): IMiddleware
+    IMiddleware current()
     {
         if (!isset(this.queue[this.position])) {
             throw new OutOfBoundsException("Invalid current position (this.position)");

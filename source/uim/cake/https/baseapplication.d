@@ -71,10 +71,10 @@ abstract class BaseApplication :
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
      * @return \Cake\Http\MiddlewareQueue
      */
-    abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
+    abstract MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 
 
-    function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
+    MiddlewareQueue pluginMiddleware(MiddlewareQueue $middleware)
     {
         foreach (this.plugins.with("middleware") as myPlugin) {
             $middleware = myPlugin.middleware($middleware);
@@ -119,7 +119,7 @@ abstract class BaseApplication :
      *
      * @return \Cake\Core\PluginCollection
      */
-    auto getPlugins(): PluginCollection
+    PluginCollection getPlugins()
     {
         return this.plugins;
     }
@@ -144,18 +144,16 @@ abstract class BaseApplication :
      * @param \Cake\Routing\RouteBuilder $routes A route builder to add routes into.
      */
     void routes(RouteBuilder $routes) {
-        // Only load routes if the router is empty
-        if (!Router::routes()) {
-            $return = require this.configDir . "routes.php";
-            if ($return instanceof Closure) {
-                $return($routes);
-            }
+      // Only load routes if the router is empty
+      if (!Router::routes()) {
+        $return = require this.configDir . "routes.php";
+        if ($return instanceof Closure) {
+            $return($routes);
         }
+      }
     }
 
-
-    function pluginRoutes(RouteBuilder $routes): RouteBuilder
-    {
+    RouteBuilder pluginRoutes(RouteBuilder $routes) {
         foreach (this.plugins.with("routes") as myPlugin) {
             myPlugin.routes($routes);
         }
@@ -195,7 +193,7 @@ abstract class BaseApplication :
      *
      * @return \Cake\Core\IContainer
      */
-    auto getContainer(): IContainer
+    IContainer getContainer()
     {
         if (this.container == null) {
             this.container = this.buildContainer();
@@ -212,7 +210,7 @@ abstract class BaseApplication :
      *
      * @return \Cake\Core\IContainer
      */
-    protected auto buildContainer(): IContainer
+    protected IContainer buildContainer()
     {
         myContainer = new Container();
         this.services(myContainer);

@@ -83,7 +83,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\IRepository
      */
-    auto getRepository(): IRepository
+    IRepository getRepository()
     {
         return this._repository;
     }
@@ -198,7 +198,7 @@ trait QueryTrait
      * @param string|null myAlias the alias used to prefix the field
      * @return array
      */
-    function aliasField(string myField, Nullable!string myAlias = null): array
+    array aliasField(string myField, Nullable!string myAlias = null)
     {
         if (strpos(myField, ".") == false) {
             myAlias = myAlias ?: this.getRepository().getAlias();
@@ -244,7 +244,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\IResultSet
      */
-    function all(): IResultSet
+    IResultSet all()
     {
         if (this._results !== null) {
             return this._results;
@@ -270,7 +270,7 @@ trait QueryTrait
      *
      * @return array
      */
-    function toArray(): array
+    array toArray()
     {
         return this.all().toArray();
     }
@@ -312,7 +312,7 @@ trait QueryTrait
      *
      * @return array
      */
-    auto getMapReducers(): array
+    array getMapReducers()
     {
         return this._mapReduce;
     }
@@ -437,7 +437,7 @@ trait QueryTrait
      *
      * @return array<callable>
      */
-    auto getResultFormatters(): array
+    array getResultFormatters()
     {
         return this._formatters;
     }
@@ -497,7 +497,7 @@ trait QueryTrait
      * @return array
      * @see applyOptions()
      */
-    auto getOptions(): array
+    array getOptions()
     {
         return this._options;
     }
@@ -541,7 +541,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\IResultSet
      */
-    abstract protected auto _execute(): IResultSet;
+    abstract protected IResultSet _execute();
 
     /**
      * Decorates the results iterator with MapReduce routines and formatters
@@ -549,7 +549,7 @@ trait QueryTrait
      * @param \Traversable myResult Original results
      * @return \Cake\Datasource\IResultSet
      */
-    protected auto _decorateResults(Traversable myResult): IResultSet
+    protected IResultSet _decorateResults(Traversable myResult)
     {
         $decorator = this._decoratorClass();
         foreach (this._mapReduce as $functions) {

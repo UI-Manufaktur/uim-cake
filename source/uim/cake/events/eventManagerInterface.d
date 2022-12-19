@@ -85,7 +85,7 @@ interface IEventManager
      * @return \Cake\Event\IEvent
      * @triggers myEvent
      */
-    function dispatch(myEvent): IEvent;
+    IEvent dispatch(myEvent);
 
     /**
      * Returns a list of all listeners for an eventKey in the order they should be called
@@ -93,5 +93,5 @@ interface IEventManager
      * @param string myEventKey Event key.
      * @return array
      */
-    function listeners(string myEventKey): array;
+    array listeners(string myEventKey);
 }

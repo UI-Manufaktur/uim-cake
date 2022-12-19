@@ -91,7 +91,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
+    IResponse process(IServerRequest myRequest, IRequestHandler $handler)
     {
         try {
             return $handler.handle(myRequest);
@@ -109,7 +109,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * @param \Psr\Http\Message\IServerRequest myRequest The request.
      * @return \Psr\Http\Message\IResponse A response
      */
-    function handleException(Throwable myException, IServerRequest myRequest): IResponse
+    IResponse handleException(Throwable myException, IServerRequest myRequest)
     {
         myErrorHandler = this.getErrorHandler();
         $renderer = myErrorHandler.getRenderer(myException, myRequest);
@@ -131,7 +131,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * @param \Cake\Http\Exception\RedirectException myException The exception to handle
      * @return \Psr\Http\Message\IResponse Response created from the redirect.
      */
-    function handleRedirect(RedirectException myException): IResponse
+    IResponse handleRedirect(RedirectException myException)
     {
         return new RedirectResponse(
             myException.getMessage(),
@@ -145,7 +145,7 @@ class ErrorHandlerMiddleware : IMiddleware
      *
      * @return \Psr\Http\Message\IResponse A response
      */
-    protected auto handleInternalError(): IResponse
+    protected IResponse handleInternalError()
     {
         $response = new Response(["body":"An Internal Server Error Occurred"]);
 

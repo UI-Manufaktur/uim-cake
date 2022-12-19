@@ -1023,7 +1023,7 @@ class Response : IResponse
      * @param \IDateTime|string|int|null $time Valid time string or \IDateTime instance.
      * @return \IDateTime
      */
-    protected auto _getUTCDate($time = null): IDateTime
+    protected IDateTime _getUTCDate($time = null)
     {
         if ($time instanceof IDateTime) {
             myResult = clone $time;
@@ -1216,24 +1216,20 @@ class Response : IResponse
      * @param string myName The cookie name you want to read.
      * @return array|null Either the cookie data or null
      */
-    auto getCookie(string myName): ?array
-    {
-        if (!this._cookies.has(myName)) {
-            return null;
-        }
+    array getCookie(string myName) {
+      if (!this._cookies.has(myName)) {
+        return null;
+      }
 
-        return this._cookies.get(myName).toArray();
+      return this._cookies.get(myName).toArray();
     }
 
     /**
      * Get all cookies in the response.
      *
      * Returns an associative array of cookie name: cookie data.
-     *
-     * @return array
      */
-    array getCookies()
-    {
+    array getCookies() {
         $out = [];
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
         $cookies = this._cookies;
@@ -1249,9 +1245,8 @@ class Response : IResponse
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    CookieCollection getCookieCollection()
-    {
-        return this._cookies;
+    CookieCollection getCookieCollection() {
+      return this._cookies;
     }
 
     /**

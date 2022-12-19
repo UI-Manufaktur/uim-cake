@@ -17,10 +17,10 @@ use Psr\Http\Message\IServerRequest;
 abstract class MiddlewareApplication : HttpApplicationInterface
 {
 
-    abstract function bootstrap(): void;
+    abstract void bootstrap();
 
 
-    abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
+    abstract MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 
     /**
      * Generate a 404 response as no middleware handled the request.
@@ -28,9 +28,9 @@ abstract class MiddlewareApplication : HttpApplicationInterface
      * @param \Psr\Http\Message\IServerRequest myRequest The request
      * @return \Psr\Http\Message\IResponse
      */
-    function handle(
+    IResponse handle(
         IServerRequest myRequest
-    ): IResponse {
+    ):  {
         return new Response(["body":"Not found", "status":404]);
     }
 }

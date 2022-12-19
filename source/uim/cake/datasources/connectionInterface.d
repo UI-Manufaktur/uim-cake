@@ -24,14 +24,13 @@ use Psr\SimpleCache\ICache;
  * @method \Cake\Database\IStatement query(string mySql) Executes a SQL statement and returns the Statement
  *   object as result. {@see \Cake\Database\Connnection::query()}
  */
-interface IConnection : ILoggerAware
-{
+interface IConnection : ILoggerAware {
     /**
      * Gets the current logger object.
      *
      * @return \Psr\Log\LoggerInterface logger instance
      */
-    auto getLogger(): LoggerInterface;
+    LoggerInterface getLogger();
 
     /**
      * Set a cacher.
@@ -46,7 +45,7 @@ interface IConnection : ILoggerAware
      *
      * @return \Psr\SimpleCache\ICache $cacher Cacher object
      */
-    auto getCacher(): ICache;
+    ICache getCacher();
 
     /**
      * Get the configuration name for this connection.
