@@ -11,7 +11,7 @@ module uim.cake.ORM;
  * This enables behaviors to define behavior for how the properties they provide/manage
  * should be marshalled.
  */
-interface PropertyMarshalInterface
+interface IPropertyMarshal
 {
     /**
      * Build a set of properties that should be included in the marshalling process.

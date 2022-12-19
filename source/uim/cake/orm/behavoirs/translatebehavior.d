@@ -15,7 +15,7 @@ import uim.cake;
  * If you want to bring all or certain languages for each of the fetched records,
  * you can use the custom `translations` finders that is exposed to the table.
  */
-class TranslateBehavior : Behavior : PropertyMarshalInterface
+class TranslateBehavior : Behavior : IPropertyMarshal
 {
     /**
      * Default config

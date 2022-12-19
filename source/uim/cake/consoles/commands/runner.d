@@ -92,7 +92,7 @@ class CommandRunner : IEventDispatcher {
         }
         $commands = this.app.console($commands);
 
-        if (this.app instanceof PluginApplicationInterface) {
+        if (this.app instanceof IPluginApplication) {
             $commands = this.app.pluginConsole($commands);
         }
         this.dispatchEvent("Console.buildCommands", ["commands":$commands]);
@@ -143,7 +143,7 @@ class CommandRunner : IEventDispatcher {
      */
     protected void bootstrap() {
         this.app.bootstrap();
-        if (this.app instanceof PluginApplicationInterface) {
+        if (this.app instanceof IPluginApplication) {
             this.app.pluginBootstrap();
         }
     }
@@ -152,7 +152,7 @@ class CommandRunner : IEventDispatcher {
      * Get the application"s event manager or the global one.
      */
     IEventManager getEventManager() {
-        if (this.app instanceof PluginApplicationInterface) {
+        if (this.app instanceof IPluginApplication) {
             return this.app.getEventManager();
         }
 
@@ -170,7 +170,7 @@ class CommandRunner : IEventDispatcher {
      * @throws \InvalidArgumentException
      */
     auto setEventManager(IEventManager myEventManager) {
-        if (this.app instanceof PluginApplicationInterface) {
+        if (this.app instanceof IPluginApplication) {
             this.app.setEventManager(myEventManager);
 
             return this;
@@ -333,7 +333,7 @@ class CommandRunner : IEventDispatcher {
         myBuilder = Router::createRouteBuilder("/");
 
         this.app.routes(myBuilder);
-        if (this.app instanceof PluginApplicationInterface) {
+        if (this.app instanceof IPluginApplication) {
             this.app.pluginRoutes(myBuilder);
         }
     }

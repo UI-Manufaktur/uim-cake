@@ -26,7 +26,7 @@
         "UIM/utility": "^4.0"
     },
     "suggest": {
-        "UIM/event": "To use PluginApplicationInterface or plugin applications.",
+        "UIM/event": "To use IPluginApplication or plugin applications.",
         "UIM/cache": "To use Configure::store() and restore().",
         "league/container": "To use Container and ServiceProvider classes"
     },

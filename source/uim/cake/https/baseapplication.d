@@ -18,7 +18,7 @@ abstract class BaseApplication :
     IConsoleApplication,
     ContainerApplicationInterface,
     HttpApplicationInterface,
-    PluginApplicationInterface,
+    IPluginApplication,
     RoutingApplicationInterface
 {
     use EventDispatcherTrait;

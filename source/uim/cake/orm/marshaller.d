@@ -101,7 +101,7 @@ class Marshaller
         $behaviors = this._table.behaviors();
         foreach ($behaviors.loaded() as myName) {
             $behavior = $behaviors.get(myName);
-            if ($behavior instanceof PropertyMarshalInterface) {
+            if ($behavior instanceof IPropertyMarshal) {
                 $map += $behavior.buildMarshalMap(this, $map, myOptions);
             }
         }

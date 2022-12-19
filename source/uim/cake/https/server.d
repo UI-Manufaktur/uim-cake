@@ -6,7 +6,7 @@
 module uim.cake.https;
 
 import uim.cake.core.HttpApplicationInterface;
-import uim.cake.core.PluginApplicationInterface;
+import uim.cake.core.IPluginApplication;
 import uim.cake.events\IEventDispatcher;
 import uim.cake.events\EventDispatcherTrait;
 import uim.cake.events\EventManager;
@@ -69,7 +69,7 @@ class Server : IEventDispatcher
         myRequest = myRequest ?: ServerRequestFactory::fromGlobals();
 
         $middleware = this.app.middleware($middlewareQueue ?? new MiddlewareQueue());
-        if (this.app instanceof PluginApplicationInterface) {
+        if (this.app instanceof IPluginApplication) {
             $middleware = this.app.pluginMiddleware($middleware);
         }
 
@@ -94,7 +94,7 @@ class Server : IEventDispatcher
      */
     protected void bootstrap() {
         this.app.bootstrap();
-        if (this.app instanceof PluginApplicationInterface) {
+        if (this.app instanceof IPluginApplication) {
             this.app.pluginBootstrap();
         }
     }

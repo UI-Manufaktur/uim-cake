@@ -180,7 +180,7 @@ class BasePlugin : IPlugin
     }
 
 
-    void bootstrap(PluginApplicationInterface $app) {
+    void bootstrap(IPluginApplication $app) {
         $bootstrap = this.getConfigPath() . "bootstrap.php";
         if (is_file($bootstrap)) {
             require $bootstrap;
