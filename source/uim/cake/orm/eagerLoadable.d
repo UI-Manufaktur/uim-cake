@@ -178,8 +178,7 @@ class EagerLoadable
      *
      * @return string|null
      */
-    Nullable!string propertyPath()
-    {
+    Nullable!string propertyPath() {
         return this._propertyPath;
     }
 

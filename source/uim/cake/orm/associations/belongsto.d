@@ -1,13 +1,7 @@
-module uim.cake.orm.associations;
+module uim.cake.orm.associations.belongsto;
 
-import uim.cake.databases.expressions\IdentifierExpression;
-import uim.cake.datasources\IEntity;
-import uim.cake.orm.associations;
-import uim.cake.orm.associations\Loader\SelectLoader;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Inflector;
-use Closure;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Represents an 1 - N relationship where the source side of the relation is

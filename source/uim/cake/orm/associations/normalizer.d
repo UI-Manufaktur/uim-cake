@@ -1,11 +1,10 @@
-module uim.cake.ORM;
+module uim.cake..orm.associations.normalizer;
 
 /**
  * Contains methods for parsing the associated tables array that is typically
  * passed to a save operation
  */
-trait AssociationsNormalizerTrait
-{
+trait AssociationsNormalizerTrait {
     /**
      * Returns an array out of the original passed associations list where dot notation
      * is transformed into nested arrays so that they can be parsed by other routines

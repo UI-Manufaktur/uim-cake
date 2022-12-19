@@ -1,4 +1,4 @@
-module uim.cake.ORM;
+module uim.cake.orm.associations.collection;
 
 @safe:
 import uim.cake;
@@ -9,10 +9,7 @@ import uim.cake;
  * Contains methods for managing associations, and
  * ordering operations around saving and deleting.
  */
-class AssociationCollection : IteratorAggregate
-{
-    use AssociationsNormalizerTrait;
-    use LocatorAwareTrait;
+class AssociationCollection : IteratorAggregate {
 
     /**
      * Stored associations

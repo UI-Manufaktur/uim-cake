@@ -40,8 +40,7 @@ import uim.cake;
  * string to specify custom query string parameter name which will contain the
  * callback function name.
  */
-class JsonView : SerializedView
-{
+class JsonView : SerializedView {
     /**
      * JSON layouts are located in the JSON subdirectory of `Layouts/`
      */
