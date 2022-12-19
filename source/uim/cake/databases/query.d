@@ -87,12 +87,8 @@ class Query : IExpression, IteratorAggregate {
      */
     protected $_deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
 
-    /**
-     * The list of query clauses to traverse for generating an INSERT statement
-     *
-     * @var array<string>
-     */
-    protected $_insertParts = ["with", "insert", "values", "epilog"];
+    // The list of query clauses to traverse for generating an INSERT statement
+    protected string[] $_insertParts = ["with", "insert", "values", "epilog"];
 
     /**
      * Indicates whether internal state of this query was changed, this is used to

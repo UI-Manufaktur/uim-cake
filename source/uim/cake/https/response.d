@@ -1249,7 +1249,7 @@ class Response : IResponse
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    auto getCookieCollection(): CookieCollection
+    CookieCollection getCookieCollection()
     {
         return this._cookies;
     }

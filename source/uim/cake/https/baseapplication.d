@@ -172,13 +172,13 @@ abstract class BaseApplication :
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
-    function console(CommandCollection $commands): CommandCollection
+    CommandCollection console(CommandCollection $commands)
     {
         return $commands.addMany($commands.autoDiscover());
     }
 
 
-    function pluginConsole(CommandCollection $commands): CommandCollection
+    CommandCollection pluginConsole(CommandCollection $commands)
     {
         foreach (this.plugins.with("console") as myPlugin) {
             $commands = myPlugin.console($commands);

@@ -156,8 +156,7 @@ class Connection : IConnection {
      *
      * @return \Cake\Core\Retry\CommandRetry The retry wrapper
      */
-    auto getDisconnectRetry(): CommandRetry
-    {
+    CommandRetry getDisconnectRetry() {
         return new CommandRetry(new ReconnectStrategy(this));
     }
 

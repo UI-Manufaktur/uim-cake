@@ -215,7 +215,7 @@ class Client : ClientInterface
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    function cookies(): CookieCollection
+    CookieCollection cookies()
     {
         return this._cookies;
     }

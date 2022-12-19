@@ -100,8 +100,7 @@ class Component : IEventListener
      *
      * @return \Cake\Controller\Controller The bound controller.
      */
-    auto getController(): Controller
-    {
+    Controller getController() {
         return this._registry.getController();
     }
 

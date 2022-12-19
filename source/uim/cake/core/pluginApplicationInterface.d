@@ -54,5 +54,5 @@ interface PluginApplicationInterface : IEventDispatcher
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to use.
      * @return \Cake\Console\CommandCollection
      */
-    function pluginConsole(CommandCollection $commands): CommandCollection;
+    CommandCollection pluginConsole(CommandCollection $commands);
 }

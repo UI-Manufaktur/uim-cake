@@ -63,7 +63,7 @@ interface IPlugin
      * @param \Cake\Console\CommandCollection $commands The command collection to update
      * @return \Cake\Console\CommandCollection
      */
-    function console(CommandCollection $commands): CommandCollection;
+    CommandCollection console(CommandCollection $commands);
 
     /**
      * Add middleware for the plugin.

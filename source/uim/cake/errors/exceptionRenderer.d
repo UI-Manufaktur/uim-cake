@@ -98,8 +98,7 @@ class ExceptionRenderer : IExceptionRenderer
      * @return \Cake\Controller\Controller
      * @triggers Controller.startup $controller
      */
-    protected auto _getController(): Controller
-    {
+    protected Controller _getController() {
         myRequest = this.request;
         $routerRequest = Router::getRequest();
         // Fallback to the request in the router or make a new one from
