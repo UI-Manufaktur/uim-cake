@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 /*********************************************************************************************************
 *	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
 *	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
 *	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
 **********************************************************************************************************/
-=====
->>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
 module uim.cake.caches.engines.file_;
 
 @safe:
@@ -52,12 +49,8 @@ class FileEngine : CacheEngine {
         "serialize":true,
     ];
 
-    /**
-     * True unless FileEngine::__active(); fails
-     *
-     * @var bool
-     */
-    protected $_init = true;
+    // True unless FileEngine::__active(); fails
+    protected bool $_init = true;
 
     /**
      * Initialize File Cache Engine
@@ -68,19 +61,19 @@ class FileEngine : CacheEngine {
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(array myConfig = []) {
-        super.init(myConfig);
+      super.init(myConfig);
 
-        if (this._config["path"] == null) {
-            this._config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
-        }
-        if (substr(this._config["path"], -1) !== DIRECTORY_SEPARATOR) {
-            this._config["path"] .= DIRECTORY_SEPARATOR;
-        }
-        if (this._groupPrefix) {
-            this._groupPrefix = this._groupPrefix.replace("_", DIRECTORY_SEPARATOR);
-        }
+      if (this._config["path"] == null) {
+          this._config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
+      }
+      if (substr(this._config["path"], -1) !== DIRECTORY_SEPARATOR) {
+          this._config["path"] .= DIRECTORY_SEPARATOR;
+      }
+      if (this._groupPrefix) {
+          this._groupPrefix = this._groupPrefix.replace("_", DIRECTORY_SEPARATOR);
+      }
 
-        return this._active();
+      return this._active();
     }
 
     /**
