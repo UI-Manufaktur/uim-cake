@@ -25,7 +25,7 @@ class RoutesCheckCommand : Command {
             myRequest = new ServerRequest(["url":myUrl]);
             $route = Router::parseRequest(myRequest);
             myName = null;
-            foreach (Router::routes() as $r) {
+            foreach ($r; Router::routes()) {
                 if ($r.match($route)) {
                     myName = $r.options["_name"] ?? $r.getName();
                     break;

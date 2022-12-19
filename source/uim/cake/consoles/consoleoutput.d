@@ -140,8 +140,8 @@ class ConsoleOutput {
         if (
             (
                 DIRECTORY_SEPARATOR == "\\" &&
-                strpos(strtolower(php_uname("v")), "windows 10") == false &&
-                strpos(strtolower((string)env("SHELL")), "bash.exe") == false &&
+                indexOf(strtolower(php_uname("v")), "windows 10") == false &&
+                indexOf(strtolower((string)env("SHELL")), "bash.exe") == false &&
                 !(bool)env("ANSICON") &&
                 env("ConEmuANSI") !== "ON"
             ) ||
@@ -215,7 +215,7 @@ class ConsoleOutput {
             $styleInfo[] = static::$_backgroundColors[$style["background"]];
         }
         unset($style["text"], $style["background"]);
-        foreach ($style as $option: myValue) {
+        foreach ($option: myValue; $style) {
             if (myValue) {
                 $styleInfo[] = static::$_options[$option];
             }

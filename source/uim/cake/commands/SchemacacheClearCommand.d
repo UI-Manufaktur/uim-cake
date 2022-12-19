@@ -38,7 +38,7 @@ class SchemacacheClearCommand : Command {
         }
         myTables = $cache.clear($args.getArgument("name"));
 
-        foreach (myTables as myTable) {
+        foreach (myTable; myTables) {
             $io.verbose(sprintf("Cleared "%s"", myTable));
         }
 

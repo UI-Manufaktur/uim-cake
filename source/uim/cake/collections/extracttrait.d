@@ -24,7 +24,7 @@ trait ExtractTrait {
 
         $parts = explode(".", myPath);
 
-        if (strpos(myPath, "{*}") !== false) {
+        if (indexOf(myPath, "{*}") !== false) {
             return function ($element) use ($parts) {
                 return this._extract($element, $parts);
             };

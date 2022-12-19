@@ -42,7 +42,7 @@ trait PluginAssetsTrait
 
         myPlugins = [];
 
-        foreach (myPluginsList as myPlugin) {
+        foreach (myPlugin; myPluginsList) {
             myPath = Plugin::path(myPlugin) . "webroot";
             if (!is_dir(myPath)) {
                 this.io.verbose("", 1);
@@ -57,7 +57,7 @@ trait PluginAssetsTrait
             $wwwRoot = Configure::read("App.wwwRoot");
             $dir = $wwwRoot;
             $moduled = false;
-            if (strpos($link, "/") !== false) {
+            if (indexOf($link, "/") !== false) {
                 $moduled = true;
                 $parts = explode("/", $link);
                 $link = array_pop($parts);
@@ -79,11 +79,11 @@ trait PluginAssetsTrait
      * Process plugins
      *
      * @param array<string, mixed> myPlugins List of plugins to process
-     * @param bool $copy Force copy mode. Default false.
-     * @param bool $overwrite Overwrite existing files.
+     * @param bool shouldCopy Force copy mode. Default false.
+     * @param bool shouldOverwrite Overwrite existing files.
      */
-    protected void _process(array myPlugins, bool $copy = false, bool $overwrite = false) {
-        foreach (myPlugins as myPlugin: myConfig) {
+    protected void _process(array myPlugins, bool shouldCopy = false, bool shouldOverwrite = false) {
+        foreach (myPlugin; myConfig; myPlugins) {
             this.io.out();
             this.io.out("For plugin: " . myPlugin);
             this.io.hr();
@@ -96,14 +96,13 @@ trait PluginAssetsTrait
                 continue;
             }
 
-            $dest = myConfig["destDir"] . myConfig["link"];
-
-            if (file_exists($dest)) {
-                if ($overwrite && !this._remove(myConfig)) {
+            auto myDestination = myConfig["destDir"] . myConfig["link"];
+            if (file_exists(myDestination)) {
+                if (shouldOverwrite && !this._remove(myConfig)) {
                     continue;
-                } elseif (!$overwrite) {
+                } elseif (!shouldOverwrite) {
                     this.io.verbose(
-                        $dest . " already exists",
+                        myDestination . " already exists",
                         1
                     );
 
@@ -111,10 +110,10 @@ trait PluginAssetsTrait
                 }
             }
 
-            if (!$copy) {
+            if (!shouldCopy) {
                 myResult = this._createSymlink(
                     myConfig["srcPath"],
-                    $dest
+                    myDestination
                 );
                 if (myResult) {
                     continue;
@@ -123,7 +122,7 @@ trait PluginAssetsTrait
 
             this._copyDirectory(
                 myConfig["srcPath"],
-                $dest
+                myDestination
             );
         }
 
@@ -146,38 +145,38 @@ trait PluginAssetsTrait
             return false;
         }
 
-        $dest = myConfig["destDir"] . myConfig["link"];
+        myDestination = myConfig["destDir"] . myConfig["link"];
 
-        if (!file_exists($dest)) {
+        if (!file_exists(myDestination)) {
             this.io.verbose(
-                $dest . " does not exist",
+                myDestination . " does not exist",
                 1
             );
 
             return false;
         }
 
-        if (is_link($dest)) {
+        if (is_link(myDestination)) {
             // phpcs:ignore
-            $success = DS == "\\" ? @rmdir($dest) : @unlink($dest);
+            $success = DS == "\\" ? @rmdir(myDestination) : @unlink(myDestination);
             if ($success) {
-                this.io.out("Unlinked " . $dest);
+                this.io.out("Unlinked " . myDestination);
 
                 return true;
             } else {
-                this.io.err("Failed to unlink  " . $dest);
+                this.io.err("Failed to unlink  " . myDestination);
 
                 return false;
             }
         }
 
         $fs = new Filesystem();
-        if ($fs.deleteDir($dest)) {
-            this.io.out("Deleted " . $dest);
+        if ($fs.deleteDir(myDestination)) {
+            this.io.out("Deleted " . myDestination);
 
             return true;
         } else {
-            this.io.err("Failed to delete " . $dest);
+            this.io.err("Failed to delete " . myDestination);
 
             return false;
         }
@@ -230,17 +229,17 @@ trait PluginAssetsTrait
      * Copy directory
      *
      * @param string $source Source directory
-     * @param string $destination Destination directory
+     * @param string myDestinationination Destination directory
      */
-    protected bool _copyDirectory(string $source, string $destination) {
+    protected bool _copyDirectory(string $source, string myDestinationination) {
         $fs = new Filesystem();
-        if ($fs.copyDir($source, $destination)) {
-            this.io.out("Copied assets to directory " . $destination);
+        if ($fs.copyDir($source, myDestinationination)) {
+            this.io.out("Copied assets to directory " . myDestinationination);
 
             return true;
         }
 
-        this.io.err("Error copying assets to directory " . $destination);
+        this.io.err("Error copying assets to directory " . myDestinationination);
 
         return false;
     }

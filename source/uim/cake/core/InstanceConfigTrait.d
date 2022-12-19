@@ -165,7 +165,7 @@ trait InstanceConfigTrait {
             return this._config;
         }
 
-        if (strpos(myKey, ".") == false) {
+        if (indexOf(myKey, ".") == false) {
             return this._config[myKey] ?? null;
         }
 
@@ -218,7 +218,7 @@ trait InstanceConfigTrait {
             return;
         }
 
-        if (strpos(myKey, ".") == false) {
+        if (indexOf(myKey, ".") == false) {
             this._config[myKey] = myValue;
 
             return;
@@ -247,7 +247,7 @@ trait InstanceConfigTrait {
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
     protected void _configDelete(string myKey) {
-        if (strpos(myKey, ".") == false) {
+        if (indexOf(myKey, ".") == false) {
             unset(this._config[myKey]);
 
             return;

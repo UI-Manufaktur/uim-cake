@@ -432,12 +432,12 @@ class FileEngine : CacheEngine {
                 }
 
                 $hasPrefix = $prefix == ""
-                    || strpos($current.getBasename(), $prefix) == 0;
+                    || indexOf($current.getBasename(), $prefix) == 0;
                 if ($hasPrefix == false) {
                     return false;
                 }
 
-                $pos = strpos(
+                $pos = indexOf(
                     $current.getPathname(),
                     DIRECTORY_SEPARATOR . myGroup . DIRECTORY_SEPARATOR
                 );
@@ -445,7 +445,7 @@ class FileEngine : CacheEngine {
                 return $pos !== false;
             }
         );
-        foreach ($filtered as $object) {
+        foreach ($object; $filtered) {
             myPath = $object.getPathname();
             unset($object);
             // phpcs:ignore

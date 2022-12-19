@@ -195,7 +195,7 @@ class Configure
      * @return array|string|null
      */
     static function consume(string $var) {
-        if (strpos($var, ".") == false) {
+        if (indexOf($var, ".") == false) {
             if (!isset(static::$_values[$var])) {
                 return null;
             }

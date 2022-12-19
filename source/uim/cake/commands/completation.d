@@ -43,7 +43,7 @@ class CompletionCommand : Command : ICommandCollectionAware
             "fuzzy":"Does nothing. Only for backwards compatibility",
         ];
         myModeHelp = "";
-        foreach (myModes as myKey: $help) {
+        foreach (myKey, $help; myModes) {
             myModeHelp .= "- <info>{myKey}</info> {$help}\n";
         }
 
@@ -206,7 +206,7 @@ class CompletionCommand : Command : ICommandCollectionAware
         $subcommand = $args.getArgument("subcommand");
 
         myOptions = [];
-        foreach (this.commands as myKey: myValue) {
+        foreach (myKey, myValue; this.commands) {
             $parts = explode(" ", myKey);
             if ($parts[0] !== myName) {
                 continue;

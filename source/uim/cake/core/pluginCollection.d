@@ -188,7 +188,7 @@ class PluginCollection : Iterator, Countable
      * @throws \Cake\Core\Exception\MissingPluginException When plugin instance could not be created.
      */
     IPlugin create(string myName, array myConfig = []) {
-        if (strpos(myName, "\\") !== false) {
+        if (indexOf(myName, "\\") !== false) {
             /** @var \Cake\Core\IPlugin */
             return new myName(myConfig);
         }

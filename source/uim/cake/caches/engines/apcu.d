@@ -133,7 +133,7 @@ class ApcuEngine : CacheEngine
 
         $cache = apcu_cache_info(); // Raises warning by itself already
         foreach ($cache["cache_list"] as myKey) {
-            if (strpos(myKey["info"], this._config["prefix"]) == 0) {
+            if (indexOf(myKey["info"], this._config["prefix"]) == 0) {
                 apcu_delete(myKey["info"]);
             }
         }

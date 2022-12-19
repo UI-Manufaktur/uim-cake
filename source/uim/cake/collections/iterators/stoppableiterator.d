@@ -78,7 +78,7 @@ class StoppableIterator : Collection {
         $callback = this._condition;
         $res = [];
 
-        foreach ($iterator as $k: $v) {
+        foreach ($k: $v; $iterator) {
             if ($callback($v, $k, $iterator)) {
                 break;
             }

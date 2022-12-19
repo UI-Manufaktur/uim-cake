@@ -260,7 +260,7 @@ class ConsoleIo {
      */
     protected string[] wrapMessageWithType(string myMessageType, myMessage) {
         if (is_array(myMessage)) {
-            foreach (myMessage as $k: $v) {
+            foreach ($k, $v; myMessage) {
                 myMessage[$k] = "<{myMessageType}>{$v}</{myMessageType}>";
             }
         } else {
@@ -404,9 +404,9 @@ class ConsoleIo {
      */
     string askChoice(string $prompt, myOptions, Nullable!string $default = null) {
         if (is_string(myOptions)) {
-            if (strpos(myOptions, ",")) {
+            if (indexOf(myOptions, ",")) {
                 myOptions = explode(",", myOptions);
-            } elseif (strpos(myOptions, "/")) {
+            } elseif (indexOf(myOptions, "/")) {
                 myOptions = explode("/", myOptions);
             } else {
                 myOptions = [myOptions];

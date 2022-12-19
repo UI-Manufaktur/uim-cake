@@ -69,7 +69,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
                 $prefix = $module;
             }
             $shortestName = this.getShortestName(myNames);
-            if (strpos($shortestName, ".") !== false) {
+            if (indexOf($shortestName, ".") !== false) {
                 [, $shortestName] = explode(".", $shortestName, 2);
             }
 

@@ -1,17 +1,11 @@
 module uim.cake.command;
 
-import uim.cake.caches\Cache;
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
+@safe:
+import uim.cake;
 
-/**
- * CacheClearall command.
- */
+// CacheClearall command.
 class CacheClearallCommand : Command {
-    /**
-     * Get the command name.
-     */
+    // Get the command name.
     static string defaultName() {
         return "cache clear_all";
     }
@@ -38,8 +32,8 @@ class CacheClearallCommand : Command {
      * @return int|null The exit code or null for success
      */
     int execute(Arguments $args, ConsoleIo $io) {
-        $engines = Cache::configured();
-        foreach ($engines as $engine) {
+        auto engines = Cache::configured();
+        foreach ($engine; engines) {
             this.executeCommand(CacheClearCommand::class, [$engine], $io);
         }
 

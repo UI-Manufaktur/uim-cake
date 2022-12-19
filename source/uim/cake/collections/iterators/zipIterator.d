@@ -100,7 +100,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
     void unserialize($iterators) {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
         this._iterators = unserialize($iterators);
-        foreach (this._iterators as $it) {
+        foreach ($it; this._iterators) {
             this.attachIterator($it);
         }
     }
@@ -114,7 +114,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
         this._iterators = myData;
-        foreach (this._iterators as $it) {
+        foreach ($it; this._iterators) {
             this.attachIterator($it);
         }
     }

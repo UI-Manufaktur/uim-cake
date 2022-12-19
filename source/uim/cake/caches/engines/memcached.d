@@ -117,17 +117,15 @@ class MemcachedEngine : CacheEngine
             return true;
         }
 
-        if (this._config["persistent"]) {
-            this._Memcached = new Memcached(this._config["persistent"]);
-        } else {
-            this._Memcached = new Memcached();
-        }
+        this._Memcached = this._config["persistent"] ? 
+          new Memcached(this._config["persistent"])
+          : new Memcached();
         this._setOptions();
 
         $serverList = this._Memcached.getServerList();
         if ($serverList) {
             if (this._Memcached.isPersistent()) {
-                foreach ($serverList as $server) {
+                foreach ($server; $serverList) {
                     if (!in_array($server["host"] . ":" . $server["port"], this._config["servers"], true)) {
                         throw new InvalidArgumentException(
                             "Invalid cache configuration. Multiple persistent cache configurations are detected" .
@@ -234,16 +232,16 @@ class MemcachedEngine : CacheEngine
      */
     array parseServerString(string $server) {
         $socketTransport = "unix://";
-        if (strpos($server, $socketTransport) == 0) {
+        if (indexOf($server, $socketTransport) == 0) {
             return [substr($server, strlen($socketTransport)), 0];
         }
         if (substr($server, 0, 1) == "[") {
-            $position = strpos($server, "]:");
+            $position = indexOf($server, "]:");
             if ($position !== false) {
                 $position++;
             }
         } else {
-            $position = strpos($server, ":");
+            $position = indexOf($server, ":");
         }
         $port = 11211;
         $host = $server;
@@ -296,31 +294,31 @@ class MemcachedEngine : CacheEngine
      * @return bool Whether the write was successful or not.
      */
     bool setMultiple(myValues, $ttl = null) {
-        $cacheData = [];
-        foreach (myValues as myKey: myValue) {
-            $cacheData[this._key(myKey)] = myValue;
-        }
-        $duration = this.duration($ttl);
+      $cacheData = [];
+      foreach (myValues as myKey: myValue) {
+        $cacheData[this._key(myKey)] = myValue;
+      }
+      $duration = this.duration($ttl);
 
-        return this._Memcached.setMulti($cacheData, $duration);
+      return this._Memcached.setMulti($cacheData, $duration);
     }
 
     /**
      * Read a key from the cache
      *
-     * @param string myKey Identifier for the data
+     * @param myKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
-    auto get(myKey, $default = null) {
-        myKey = this._key(myKey);
-        myValue = this._Memcached.get(myKey);
-        if (this._Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
-            return $default;
-        }
+    auto get(string myKey, $default = null) {
+      myKey = this._key(myKey);
+      myValue = this._Memcached.get(myKey);
+      if (this._Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
+          return $default;
+      }
 
-        return myValue;
+      return myValue;
     }
 
     /**
@@ -403,7 +401,7 @@ class MemcachedEngine : CacheEngine
     bool clear() {
         if (auto myKeys = this._Memcached.getAllKeys()) {
             foreach (myKey; myKeys) {
-                if (strpos(myKey, this._config["prefix"]) == 0) {
+                if (indexOf(myKey, this._config["prefix"]) == 0) {
                     this._Memcached.delete(myKey);
                 }
             }

@@ -750,7 +750,7 @@ class ConsoleOptionParser {
      */
     protected array _parseLongOption(string $option, array myParams) {
         myName = substr($option, 2);
-        if (strpos(myName, "=") !== false) {
+        if (indexOf(myName, "=") !== false) {
             [myName, myValue] = explode("=", myName, 2);
             array_unshift(this._tokens, myValue);
         }

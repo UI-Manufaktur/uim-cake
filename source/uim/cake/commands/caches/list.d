@@ -37,7 +37,7 @@ class CacheListCommand : Command {
      */
     Nullable!int execute(Arguments $args, ConsoleIo $io) {
       $engines = Cache::configured();
-      foreach ($engines as $engine) {
+      foreach ($engine; $engines) {
           $io.out("- $engine");
       }
 

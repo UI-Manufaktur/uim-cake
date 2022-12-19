@@ -237,7 +237,7 @@ class SecurityComponent : Component {
         }
 
         $token = urldecode($check["_Token"]["fields"]);
-        if (strpos($token, ":")) {
+        if (indexOf($token, ":")) {
             [$token, ] = explode(":", $token, 2);
         }
 
@@ -278,7 +278,7 @@ class SecurityComponent : Component {
         $token = urldecode($check["_Token"]["fields"]);
         $unlocked = this._unlocked($check);
 
-        if (strpos($token, ":")) {
+        if (indexOf($token, ":")) {
             [, $locked] = explode(":", $token, 2);
         }
         unset($check["_Token"]);

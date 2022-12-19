@@ -22,25 +22,25 @@ class RoutesCommand : Command {
 
         $output = [];
 
-        foreach (Router::routes() as $route) {
-            $methods = $route.defaults["_method"] ?? "";
+        foreach ($route; Router::routes()) {
+          $methods = $route.defaults["_method"] ?? "";
 
-            $item = [
-                $route.options["_name"] ?? $route.getName(),
-                $route.template,
-                $route.defaults["plugin"] ?? "",
-                $route.defaults["prefix"] ?? "",
-                $route.defaults["controller"] ?? "",
-                $route.defaults["action"] ?? "",
-                is_string($methods) ? $methods : implode(", ", $route.defaults["_method"]),
-            ];
+          $item = [
+            $route.options["_name"] ?? $route.getName(),
+            $route.template,
+            $route.defaults["plugin"] ?? "",
+            $route.defaults["prefix"] ?? "",
+            $route.defaults["controller"] ?? "",
+            $route.defaults["action"] ?? "",
+            is_string($methods) ? $methods : implode(", ", $route.defaults["_method"]),
+          ];
 
-            if ($args.getOption("verbose")) {
-                ksort($route.defaults);
-                $item[] = json_encode($route.defaults);
-            }
+          if ($args.getOption("verbose")) {
+            ksort($route.defaults);
+            $item[] = json_encode($route.defaults);
+          }
 
-            $output[] = $item;
+          $output[] = $item;
         }
 
         if ($args.getOption("sort")) {

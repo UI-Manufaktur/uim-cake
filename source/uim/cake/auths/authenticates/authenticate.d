@@ -6,7 +6,7 @@
 module uim.cake.auths.authenticates.authenticate;
 
 @safe:
-import uim.cake
+import uim.cake:
 
 // Base Authentication class with common methods and properties.
 abstract class DAuthenticate : IEventListener {

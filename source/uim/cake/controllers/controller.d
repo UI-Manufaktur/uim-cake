@@ -263,7 +263,7 @@ class Controller : IEventListener, IEventDispatcher
      */
     auto __get(string myName) {
         if (!empty(this.modelClass)) {
-            if (strpos(this.modelClass, "\\") == false) {
+            if (indexOf(this.modelClass, "\\") == false) {
                 [, myClass] = pluginSplit(this.modelClass, true);
             } else {
                 myClass = App::shortName(this.modelClass, "Model/Table", "Table");
@@ -728,7 +728,7 @@ class Controller : IEventListener, IEventDispatcher
         if ($referer == null) {
             myUrl = Router::url($default, !$local);
             $base = this.request.getAttribute("base");
-            if ($local && $base && strpos(myUrl, $base) == 0) {
+            if ($local && $base && indexOf(myUrl, $base) == 0) {
                 myUrl = substr(myUrl, strlen($base));
                 if (myUrl[0] !== "/") {
                     myUrl = "/" . myUrl;

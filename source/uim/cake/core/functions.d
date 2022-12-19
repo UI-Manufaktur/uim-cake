@@ -69,7 +69,7 @@ if (!function_exists("pluginSplit")) {
      * @psalm-return array{string|null, string}
      */
     array pluginSplit(string myName, bool $dotAppend = false, Nullable!string myPlugin = null) {
-        if (strpos(myName, ".") !== false) {
+        if (indexOf(myName, ".") !== false) {
             $parts = explode(".", myName, 2);
             if ($dotAppend) {
                 $parts[0] .= ".";
@@ -176,7 +176,7 @@ if (!function_exists("env")) {
                 return !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off";
             }
 
-            return strpos((string)env("SCRIPT_URI"), "https://") == 0;
+            return indexOf((string)env("SCRIPT_URI"), "https://") == 0;
         }
 
         if (myKey == "SCRIPT_NAME" && env("CGI_MODE") && isset($_ENV["SCRIPT_URL"])) {
@@ -204,7 +204,7 @@ if (!function_exists("env")) {
                 myName = (string)env("SCRIPT_NAME");
                 myfilename = (string)env("SCRIPT_FILENAME");
                 $offset = 0;
-                if (!strpos(myName, ".php")) {
+                if (!indexOf(myName, ".php")) {
                     $offset = 4;
                 }
 

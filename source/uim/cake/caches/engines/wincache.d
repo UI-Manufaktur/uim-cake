@@ -118,7 +118,7 @@ class WincacheEngine : CacheEngine {
         $cacheKeys = $info["ucache_entries"];
         unset($info);
         foreach ($cacheKeys as myKey) {
-            if (strpos(myKey["key_name"], this._config["prefix"]) == 0) {
+            if (indexOf(myKey["key_name"], this._config["prefix"]) == 0) {
                 wincache_ucache_delete(myKey["key_name"]);
             }
         }

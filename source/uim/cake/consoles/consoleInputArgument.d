@@ -38,7 +38,7 @@ class ConsoleInputArgument {
      */
     this(myName, $help = "", $required = false, $choices = []) {
         if (is_array(myName) && isset(myName["name"])) {
-            foreach (myName as myKey: myValue) {
+            foreach (myKey, myValue; myName) {
                 this.{"_" . myKey} = myValue;
             }
         } else {
@@ -139,7 +139,7 @@ class ConsoleInputArgument {
         $option.addAttribute("help", this._help);
         $option.addAttribute("required", (string)(int)this.isRequired());
         $choices = $option.addChild("choices");
-        foreach (this._choices as $valid) {
+        foreach ($valid; this._choices) {
             $choices.addChild("choice", $valid);
         }
 

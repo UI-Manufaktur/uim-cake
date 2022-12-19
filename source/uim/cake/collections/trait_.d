@@ -111,7 +111,7 @@ trait CollectionTrait
 
     ICollection extract(myPath) {
         $extractor = new ExtractIterator(this.unwrap(), myPath);
-        if (is_string(myPath) && strpos(myPath, "{*}") !== false) {
+        if (is_string(myPath) && indexOf(myPath, "{*}") !== false) {
             $extractor = $extractor
                 .filter(function (myData) {
                     return myData !== null && (myData instanceof Traversable || is_array(myData));
@@ -241,7 +241,7 @@ trait CollectionTrait
 
         $callback = this._propertyExtractor(myPath);
         $sum = 0;
-        foreach (this.optimizeUnwrap() as $k: $v) {
+        foreach ($k, $v; this.optimizeUnwrap()) {
             $sum += $callback($v, $k);
         }
 
@@ -564,7 +564,7 @@ trait CollectionTrait
 
     ICollection lazy() {
         $generator = function () {
-            foreach (this.unwrap() as $k: $v) {
+            foreach ($k; $v; this.unwrap()) {
                 yield $k: $v;
             }
         };

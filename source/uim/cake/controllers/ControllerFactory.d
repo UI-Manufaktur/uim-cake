@@ -273,7 +273,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
                     "Prefix inflection will be removed in 5.0"
                 );
 
-                if (strpos($prefix, "/") == false) {
+                if (indexOf($prefix, "/") == false) {
                     $module .= "/" . Inflector::camelize($prefix);
                 } else {
                     $prefixes = array_map(
@@ -294,9 +294,9 @@ class ControllerFactory : IControllerFactory, IRequestHandler
         // controller names as they allow direct references to
         // be created.
         if (
-            strpos($controller, "\\") !== false ||
-            strpos($controller, "/") !== false ||
-            strpos($controller, ".") !== false ||
+            indexOf($controller, "\\") !== false ||
+            indexOf($controller, "/") !== false ||
+            indexOf($controller, ".") !== false ||
             $firstChar == strtolower($firstChar)
         ) {
             throw this.missingController(myRequest);

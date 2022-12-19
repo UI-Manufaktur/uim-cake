@@ -430,7 +430,7 @@ class RequestHandlerComponent : Component {
         $controller = this.getController();
         $response = $controller.getResponse();
 
-        if (strpos(myType, "/") == false) {
+        if (indexOf(myType, "/") == false) {
             $cType = $response.getMimeType(myType);
         }
         if (is_array($cType)) {

@@ -84,7 +84,7 @@ class InsertIterator : Collection {
         }
 
         $pointer = &$row;
-        foreach (this._path as $step) {
+        foreach ($step; this._path) {
             if (!isset($pointer[$step])) {
                 return $row;
             }

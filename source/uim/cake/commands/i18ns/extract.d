@@ -282,7 +282,7 @@ class I18nExtractCommand : Command {
         $io.out("Extracting...");
         $io.hr();
         $io.out("Paths:");
-        foreach (this._paths as myPath) {
+        foreach (myPath; this._paths) {
             $io.out("   " . myPath);
         }
         $io.out("Output Directory: " . this._output);
@@ -384,7 +384,7 @@ class I18nExtractCommand : Command {
         ];
         $pattern = "/(" . implode("|", array_keys($functions)) . ")\s*\(/";
 
-        foreach (this._files as myfile) {
+        foreach (myfile; this._files) {
             this._file = myfile;
             if ($isVerbose) {
                 $io.verbose(sprintf("Processing %s...", myfile));
@@ -396,7 +396,7 @@ class I18nExtractCommand : Command {
                 $allTokens = token_get_all($code);
 
                 this._tokens = [];
-                foreach ($allTokens as $token) {
+                foreach ($token; $allTokens) {
                     if (!is_array($token) || ($token[0] !== T_WHITESPACE && $token[0] !== T_INLINE_HTML)) {
                         this._tokens[] = $token;
                     }
@@ -491,16 +491,16 @@ class I18nExtractCommand : Command {
             return strlen($a) - strlen($b);
         });
 
-        foreach (this._translations as $domain: $translations) {
-            foreach ($translations as $msgid: $contexts) {
-                foreach ($contexts as $context: $details) {
+        foreach ($domain: $translations; this._translations) {
+            foreach ($msgid: $contexts; $translations) {
+                foreach ($context, $details; $contexts) {
                     $plural = $details["msgid_plural"];
                     myfiles = $details["references"];
                     $header = "";
 
                     if (!$args.getOption("no-location")) {
                         $occurrences = [];
-                        foreach (myfiles as myfile: $lines) {
+                        foreach (myfile, $lines; myfiles) {
                             $lines = array_unique($lines);
                             foreach ($lines as $line) {
                                 $occurrences[] = myfile . ":" . $line;
@@ -566,15 +566,15 @@ class I18nExtractCommand : Command {
         if ($args.getOption("overwrite")) {
             $overwriteAll = true;
         }
-        foreach (this._storage as $domain: $sentences) {
+        foreach ($domain, $sentences; this._storage) {
             $output = this._writeHeader($domain);
             $headerLength = strlen($output);
-            foreach ($sentences as $sentence: $header) {
+            foreach ($sentence, $header; $sentences) {
                 $output .= $header . $sentence;
             }
 
             // Remove vendor prefix if present.
-            $slashPosition = strpos($domain, "/");
+            $slashPosition = indexOf($domain, "/");
             if ($slashPosition !== false) {
                 $domain = substr($domain, $slashPosition + 1);
             }
@@ -730,7 +730,7 @@ class I18nExtractCommand : Command {
      * @param int myCount Count
      */
     protected void _markerError($io, string myfile, int $line, string $marker, int myCount) {
-        if (strpos(this._file, CAKE_CORE_INCLUDE_PATH) == false) {
+        if (indexOf(this._file, CAKE_CORE_INCLUDE_PATH) == false) {
             this._countMarkerError++;
         }
 
@@ -769,7 +769,7 @@ class I18nExtractCommand : Command {
         $pattern = false;
         if (!empty(this._exclude)) {
             $exclude = [];
-            foreach (this._exclude as $e) {
+            foreach ($e; this._exclude) 
                 if (DIRECTORY_SEPARATOR !== "\\" && $e[0] !== DIRECTORY_SEPARATOR) {
                     $e = DIRECTORY_SEPARATOR . $e;
                 }
