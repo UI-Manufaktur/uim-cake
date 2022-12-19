@@ -28,14 +28,14 @@ class ClassLoader
     /**
      * Adds a base directory for a module prefix.
      *
-     * @param string $prefix The module prefix.
-     * @param string $baseDir A base directory for class files in the
+     * @param string prefix The module prefix.
+     * @param string baseDir A base directory for class files in the
      * module.
      * @param bool $prepend If true, prepend the base directory to the stack
      * instead of appending it; this causes it to be searched first rather
      * than last.
      */
-    void addmodule(string $prefix, string $baseDir, bool $prepend = false) {
+    void addmodule(string prefix, string baseDir, bool $prepend = false) {
         $prefix = trim($prefix, "\\") . "\\";
 
         $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;
@@ -78,12 +78,12 @@ class ClassLoader
     /**
      * Load the mapped file for a module prefix and relative class.
      *
-     * @param string $prefix The module prefix.
-     * @param string $relativeClass The relative class name.
+     * @param string prefix The module prefix.
+     * @param string relativeClass The relative class name.
      * @return string|false Boolean false if no mapped file can be loaded, or the
      * name of the mapped file that was loaded.
      */
-    protected auto _loadMappedFile(string $prefix, string $relativeClass) {
+    protected auto _loadMappedFile(string prefix, string relativeClass) {
         if (!isset(_prefixes[$prefix])) {
             return false;
         }

@@ -285,11 +285,11 @@ class PaginatorComponent : Component
     /**
      * Proxy method calls to Paginator.
      *
-     * @param string $method Method name.
+     * @param string method Method name.
      * @param array $args Method arguments.
      * @return mixed
      */
-    auto __call(string $method, array $args) {
+    auto __call(string method, array $args) {
         return _paginator.{$method}(...$args);
     }
 }

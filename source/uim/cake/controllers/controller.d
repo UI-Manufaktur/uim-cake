@@ -497,7 +497,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Register middleware for the controller.
      *
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware Middleware.
+     * @param \Psr\Http\Server\IMiddleware|\Closure|string middleware Middleware.
      * @param array<string, mixed> myOptions Valid options:
      *  - `only`: (array|string) Only run the middleware for specified actions.
      *  - `except`: (array|string) Run the middleware for all actions except the specified ones.
@@ -642,13 +642,13 @@ class Controller : IEventListener, IEventDispatcher
      * setAction("action_with_parameters", $parameter1);
      * ```
      *
-     * @param string $action The new action to be "redirected" to.
+     * @param string action The new action to be "redirected" to.
      *   Any other parameters passed to this method will be passed as parameters to the new action.
      * @param mixed ...$args Arguments passed to the action
      * @return mixed Returns the return value of the called action
      * @deprecated 4.2.0 Refactor your code use `redirect()` instead of forwarding actions.
      */
-    auto setAction(string $action, ...$args) {
+    auto setAction(string action, ...$args) {
         deprecationWarning(
             "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " .
             "or call the other action as a method."
@@ -666,7 +666,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response A response object containing the rendered view.
      * @link https://book.UIM.org/4/en/controllers.html#rendering-a-view
      */
-    Response render(Nullable!string myTemplate = null, Nullable!string $layout = null) {
+    Response render(Nullable!string myTemplate = null, Nullable!string layout = null) {
       myBuilder = this.viewBuilder();
       if (!myBuilder.getTemplatePath()) {
           myBuilder.setTemplatePath(_templatePath());
@@ -790,11 +790,11 @@ class Controller : IEventListener, IEventDispatcher
      * The default implementation disallows access to all methods defined on Cake\Controller\Controller,
      * and allows all public methods on all subclasses of this class.
      *
-     * @param string $action The action to check.
+     * @param string action The action to check.
      * @return bool Whether the method is accessible from a URL.
      * @throws \ReflectionException
      */
-    bool isAction(string $action) {
+    bool isAction(string action) {
         $baseClass = new ReflectionClass(self::class);
         if ($baseClass.hasMethod($action)) {
             return false;

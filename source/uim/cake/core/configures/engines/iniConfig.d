@@ -42,7 +42,7 @@ class IniConfig : IConfigEngine
     use FileConfigTrait;
 
     // File extension.
-    protected string $_extension = ".ini";
+    protected string _extension = ".ini";
 
     // The section to read, if null all sections will be read.
     protected Nullable!string _section;
@@ -55,7 +55,7 @@ class IniConfig : IConfigEngine
      * @param string|null $section Only get one section, leave null to parse and fetch
      *     all sections in the ini file.
      */
-    this(Nullable!string myPath = null, Nullable!string $section = null) {
+    this(Nullable!string myPath = null, Nullable!string section = null) {
         if (myPath == null) {
             myPath = CONFIG;
         }

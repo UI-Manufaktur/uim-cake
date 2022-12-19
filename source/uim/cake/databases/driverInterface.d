@@ -8,7 +8,7 @@ import uim.cake;
  *
  * @method int|null getMaxAliasLength() Returns the maximum alias length allowed.
  * @method int getConnectRetries() Returns the number of connection retry attempts made.
- * @method bool supports(string $feature) Checks whether a feature is supported by the driver.
+ * @method bool supports(string feature) Checks whether a feature is supported by the driver.
  * @method bool inTransaction() Returns whether a transaction is active.
  */
 interface IDriver {
@@ -196,7 +196,7 @@ interface IDriver {
      * @param string|null $column the name of the column representing the primary key.
      * @return string|int
      */
-    function lastInsertId(Nullable!string myTable = null, Nullable!string $column = null);
+    function lastInsertId(Nullable!string myTable = null, Nullable!string column = null);
 
     // Checks whether the driver is connected.
     bool isConnected();

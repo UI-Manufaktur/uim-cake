@@ -33,7 +33,7 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Type of this query (select, insert, update, delete).
      */
-    protected string $_type = "select";
+    protected string _type = "select";
 
     /**
      * List of SQL parts that will be used to build this query.
@@ -489,7 +489,7 @@ class Query : IExpression, IteratorAggregate {
      * // It will produce the SQL: SELECT HIGH_PRIORITY SQL_NO_CACHE name, city FROM products
      * ```
      *
-     * @param \Cake\Database\IExpression|array|string $modifiers modifiers to be applied to the query
+     * @param \Cake\Database\IExpression|array|string modifiers modifiers to be applied to the query
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
@@ -716,7 +716,7 @@ class Query : IExpression, IteratorAggregate {
      * See `join()` for further details on conditions and types.
      *
      * @param array<string>|string myTable The table to join with
-     * @param \Cake\Database\IExpression|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string conditions The conditions
      * to use for joining.
      * @param array myTypes a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
@@ -737,7 +737,7 @@ class Query : IExpression, IteratorAggregate {
      * to that methods description for further details.
      *
      * @param array<string>|string myTable The table to join with
-     * @param \Cake\Database\IExpression|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string conditions The conditions
      * to use for joining.
      * @param array myTypes a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
@@ -758,7 +758,7 @@ class Query : IExpression, IteratorAggregate {
      * to that method"s description for further details.
      *
      * @param array|string myTable The table to join with
-     * @param \Cake\Database\IExpression|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string conditions The conditions
      * to use for joining.
      * @param array<string, string> myTypes a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
@@ -774,7 +774,7 @@ class Query : IExpression, IteratorAggregate {
      * Returns an array that can be passed to the join method describing a single join clause
      *
      * @param array<string>|string myTable The table to join with
-     * @param \Cake\Database\IExpression|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string conditions The conditions
      * to use for joining.
      * @param string myType the join type to use
      * @psalm-suppress InvalidReturnType
@@ -1110,7 +1110,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * `WHERE (title = "Foo") AND (author_id = 1 OR author_id = 2)`
      *
-     * @param \Cake\Database\IExpression|\Closure|array|string $conditions The conditions to add with AND.
+     * @param \Cake\Database\IExpression|\Closure|array|string conditions The conditions to add with AND.
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
      * @see \Cake\Database\Query::where()
      * @see \Cake\Database\TypeFactory
@@ -1339,7 +1339,7 @@ class Query : IExpression, IteratorAggregate {
      * Having fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param \Cake\Database\IExpression|\Closure|array|string $conditions The AND conditions for HAVING.
+     * @param \Cake\Database\IExpression|\Closure|array|string conditions The AND conditions for HAVING.
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
      * @see \Cake\Database\Query::andWhere()
      * @return this
@@ -2160,13 +2160,13 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Helper function used to build conditions by composing QueryExpression objects.
      *
-     * @param string $part Name of the query part to append the new part to
+     * @param string part Name of the query part to append the new part to
      * @param \Cake\Database\IExpression|\Closure|array|string|null $append Expression or builder function to append.
      *   to append.
-     * @param string $conjunction type of conjunction to be used to operate part
+     * @param string conjunction type of conjunction to be used to operate part
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
      */
-    protected void _conjugate(string $part, $append, $conjunction, array myTypes) {
+    protected void _conjugate(string part, $append, $conjunction, array myTypes) {
         $expression = _parts[$part] ?: this.newExpr();
         if (empty($append)) {
             _parts[$part] = $expression;

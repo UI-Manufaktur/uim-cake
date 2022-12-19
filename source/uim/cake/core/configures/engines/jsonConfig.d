@@ -29,7 +29,7 @@ class JsonConfig : IConfigEngine
     /**
      * File extension.
      */
-    protected string $_extension = ".json";
+    protected string _extension = ".json";
 
     /**
      * Constructor for JSON Config file reading.

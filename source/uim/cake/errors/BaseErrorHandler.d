@@ -111,7 +111,7 @@ abstract class BaseErrorHandler
      * Stack traces for errors can be enabled with the "trace" option.
      *
      * @param int $code Code of error
-     * @param string $description Error description
+     * @param string description Error description
      * @param string|null myfile File on which error occurred
      * @param int|null $line Line that triggered the error
      * @param array<string, mixed>|null $context Context
@@ -119,7 +119,7 @@ abstract class BaseErrorHandler
      */
     bool handleError(
         int $code,
-        string $description,
+        string description,
         Nullable!string myfile = null,
         Nullable!int $line = null,
         ?array $context = null
@@ -212,11 +212,11 @@ abstract class BaseErrorHandler
      * Display/Log a fatal error.
      *
      * @param int $code Code of error
-     * @param string $description Error description
+     * @param string description Error description
      * @param string myfile File on which error occurred
      * @param int $line Line that triggered the error
      */
-    bool handleFatalError(int $code, string $description, string myfile, int $line) {
+    bool handleFatalError(int $code, string description, string myfile, int $line) {
         myData = [
             "code":$code,
             "description":$description,

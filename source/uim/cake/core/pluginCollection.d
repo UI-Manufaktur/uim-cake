@@ -261,11 +261,11 @@ class PluginCollection : Iterator, Countable
     /**
      * Filter the plugins to those with the named hook enabled.
      *
-     * @param string $hook The hook to filter plugins by
+     * @param string hook The hook to filter plugins by
      * @return \Generator<\Cake\Core\IPlugin> A generator containing matching plugins.
      * @throws \InvalidArgumentException on invalid hooks
      */
-    Generator with(string $hook) {
+    Generator with(string hook) {
       if (!in_array($hook, IPlugin::VALID_HOOKS, true)) {
         throw new InvalidArgumentException("The `{$hook}` hook is not a known plugin hook.");
       }

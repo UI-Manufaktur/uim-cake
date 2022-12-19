@@ -86,23 +86,23 @@ interface IPlugin
     /**
      * Disables the named hook
      *
-     * @param string $hook The hook to disable
+     * @param string hook The hook to disable
      * @return this
      */
-    function disable(string $hook);
+    function disable(string hook);
 
     /**
      * Enables the named hook
      *
-     * @param string $hook The hook to disable
+     * @param string hook The hook to disable
      * @return this
      */
-    function enable(string $hook);
+    function enable(string hook);
 
     /**
      * Check if the named hook is enabled
      *
-     * @param string $hook The hook to check
+     * @param string hook The hook to check
      */
-    bool isEnabled(string $hook);
+    bool isEnabled(string hook);
 }

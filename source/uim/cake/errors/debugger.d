@@ -53,7 +53,7 @@ class Debugger
     /**
      * The current output format.
      */
-    protected string $_outputFormat = "js";
+    protected string _outputFormat = "js";
 
     /**
      * Templates used when generating trace or error strings. Can be global or indexed by the format
@@ -319,7 +319,7 @@ class Debugger
      */
     static function log($var, $level = "debug", int $maxDepth = 3): void
     {
-        /** @var string $source */
+        /** @var string source */
         $source = static::trace(["start":1]);
         $source .= "\n";
 
@@ -517,10 +517,10 @@ class Debugger
      * Wraps the highlight_string function in case the server API does not
      * implement the function as it is the case of the HipHop interpreter
      *
-     * @param string $str The string to convert.
+     * @param string str The string to convert.
      * @return string
      */
-    protected static string _highlight(string $str) {
+    protected static string _highlight(string str) {
         if (function_exists("hphp_log") || function_exists("hphp_gettid")) {
             return htmlentities($str);
         }
@@ -792,11 +792,11 @@ class Debugger
     /**
      * Set the output format for Debugger error rendering.
      *
-     * @param string $format The format you want errors to be output as.
+     * @param string format The format you want errors to be output as.
      * @return void
      * @throws \InvalidArgumentException When choosing a format that doesn"t exist.
      */
-    static auto setOutputFormat(string $format): void
+    static auto setOutputFormat(string format): void
     {
         $self = Debugger::getInstance();
 
@@ -844,12 +844,12 @@ class Debugger
      * the other template strings. Keys like `info`, `links`, `code`, `context` and `trace`
      * will be present depending on the other templates in the format type.
      *
-     * @param string $format Format to use, including "js" for JavaScript-enhanced HTML, "html" for
+     * @param string format Format to use, including "js" for JavaScript-enhanced HTML, "html" for
      *    straight HTML output, or "txt" for unformatted text.
      * @param array $strings Template strings, or a callback to be used for the output format.
      * @return array The resulting format string set.
      */
-    static function addFormat(string $format, array $strings): array
+    static function addFormat(string format, array $strings): array
     {
         $self = Debugger::getInstance();
         if (isset($self._templates[$format])) {

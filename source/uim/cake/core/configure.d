@@ -99,7 +99,7 @@ class Configure
      * @return mixed Value stored in configure, or null.
      * @link https://book.UIM.org/4/en/development/configuration.html#reading-configuration-data
      */
-    static function read(Nullable!string $var = null, $default = null) {
+    static function read(Nullable!string var = null, $default = null) {
         if ($var == null) {
             return static::$_values;
         }
@@ -110,10 +110,10 @@ class Configure
     /**
      * Returns true if given variable is set in Configure.
      *
-     * @param string $var Variable name to check for
+     * @param string var Variable name to check for
      * @return bool True if variable is there
      */
-    static bool check(string $var) {
+    static bool check(string var) {
         if (empty($var)) {
             return false;
         }
@@ -135,12 +135,12 @@ class Configure
      * Configure::readOrFail("Name.key"); will return only the value of Configure::Name[key]
      * ```
      *
-     * @param string $var Variable to obtain. Use "." to access array elements.
+     * @param string var Variable to obtain. Use "." to access array elements.
      * @return mixed Value stored in configure.
      * @throws \RuntimeException if the requested configuration is not set.
      * @link https://book.UIM.org/4/en/development/configuration.html#reading-configuration-data
      */
-    static function readOrFail(string $var) {
+    static function readOrFail(string var) {
         if (!static::check($var)) {
             throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
@@ -157,10 +157,10 @@ class Configure
      * Configure::delete("Name.key"); will delete only the Configure::Name[key]
      * ```
      *
-     * @param string $var the var to be deleted
+     * @param string var the var to be deleted
      * @link https://book.UIM.org/4/en/development/configuration.html#deleting-configuration-data
      */
-    static void delete(string $var) {
+    static void delete(string var) {
         static::$_values = Hash::remove(static::$_values, $var);
     }
 
@@ -172,12 +172,12 @@ class Configure
      * The configure key/value pair consumed via this method is expected to exist.
      * In case it does not an exception will be thrown.
      *
-     * @param string $var Variable to consume. Use "." to access array elements.
+     * @param string var Variable to consume. Use "." to access array elements.
      * @return mixed Value stored in configure.
      * @throws \RuntimeException if the requested configuration is not set.
 
      */
-    static function consumeOrFail(string $var) {
+    static function consumeOrFail(string var) {
         if (!static::check($var)) {
             throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
@@ -191,10 +191,10 @@ class Configure
      * This is primarily used during bootstrapping to move configuration data
      * out of configure into the various other classes in UIM.
      *
-     * @param string $var The key to read and remove.
+     * @param string var The key to read and remove.
      * @return array|string|null
      */
-    static function consume(string $var) {
+    static function consume(string var) {
         if (indexOf($var, ".") == false) {
             if (!isset(static::$_values[$var])) {
                 return null;
@@ -408,12 +408,12 @@ class Configure
      * frontends, or other GUI type interfaces for configuration.
      *
      * @param string myName The storage name for the saved configuration.
-     * @param string $cacheConfig The cache configuration to save into. Defaults to "default"
+     * @param string cacheConfig The cache configuration to save into. Defaults to "default"
      * @param array|null myData Either an array of data to store, or leave empty to store all values.
      * @return bool Success
      * @throws \RuntimeException
      */
-    static bool store(string myName, string $cacheConfig = "default", ?array myData = null) {
+    static bool store(string myName, string cacheConfig = "default", ?array myData = null) {
         if (myData == null) {
             myData = static::$_values;
         }
@@ -429,11 +429,11 @@ class Configure
      * values will overwrite existing ones.
      *
      * @param string myName Name of the stored config file to load.
-     * @param string $cacheConfig Name of the Cache configuration to read from.
+     * @param string cacheConfig Name of the Cache configuration to read from.
      * @return bool Success.
      * @throws \RuntimeException
      */
-    static bool restore(string myName, string $cacheConfig = "default") {
+    static bool restore(string myName, string cacheConfig = "default") {
         if (!class_exists(Cache::class)) {
             throw new RuntimeException("You must install UIM/cache to use Configure::restore()");
         }

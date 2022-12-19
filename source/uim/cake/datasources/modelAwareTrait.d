@@ -40,7 +40,7 @@ trait ModelAwareTrait
     /**
      * The model type to use.
      */
-    protected string $_modelType = "Table";
+    protected string _modelType = "Table";
 
     /**
      * Set the modelClass property based on conventions.

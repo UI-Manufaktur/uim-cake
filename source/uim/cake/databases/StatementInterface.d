@@ -165,5 +165,5 @@ interface IStatement
      * @param string|null $column the name of the column representing the primary key
      * @return string|int
      */
-    function lastInsertId(Nullable!string myTable = null, Nullable!string $column = null);
+    function lastInsertId(Nullable!string myTable = null, Nullable!string column = null);
 }

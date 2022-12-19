@@ -136,10 +136,10 @@ class ConnectionManager
      * ConnectionManager::alias("test_things", "things");
      * ```
      *
-     * @param string $source The existing connection to alias.
+     * @param string source The existing connection to alias.
      * @param string myAlias The alias name that resolves to `$source`.
      */
-    static void alias(string $source, string myAlias) {
+    static void alias(string source, string myAlias) {
         static::$_aliasMap[myAlias] = $source;
     }
 

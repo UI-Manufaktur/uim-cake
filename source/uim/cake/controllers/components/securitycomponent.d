@@ -53,7 +53,7 @@ class SecurityComponent : Component {
     /**
      * Holds the current action of the controller
      */
-    protected string $_action;
+    protected string _action;
 
     /**
      * Component startup. All security checking happens here.
@@ -415,18 +415,18 @@ class SecurityComponent : Component {
      *
      * @param array myDataFields Fields array, containing the POST data fields
      * @param array $expectedFields Fields array, containing the expected fields we should have in POST
-     * @param string $intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
-     * @param string $stringKeyMessage Message string if tampered found in
+     * @param string intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
+     * @param string stringKeyMessage Message string if tampered found in
      *  data fields indexed by string (protected).
-     * @param string $missingMessage Message string if missing field
+     * @param string missingMessage Message string if missing field
      * @return Messages
      */
     protected string[] _debugCheckFields(
         array myDataFields,
         array $expectedFields = [],
-        string $intKeyMessage = "",
-        string $stringKeyMessage = "",
-        string $missingMessage = ""
+        string intKeyMessage = "",
+        string stringKeyMessage = "",
+        string missingMessage = ""
     ) {
         myMessages = _matchExistingFields(myDataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = _debugExpectedFields($expectedFields, $missingMessage);
@@ -458,12 +458,12 @@ class SecurityComponent : Component {
      * Calls a controller callback method
      *
      * @param \Cake\Controller\Controller $controller Instantiating controller
-     * @param string $method Method to execute
+     * @param string method Method to execute
      * @param array myParams Parameters to send to method
      * @return mixed Controller callback method"s response
      * @throws \Cake\Http\Exception\BadRequestException When a the blackholeCallback is not callable.
      */
-    protected auto _callback(Controller $controller, string $method, array myParams = []) {
+    protected auto _callback(Controller $controller, string method, array myParams = []) {
         $callable = [$controller, $method];
 
         if (!is_callable($callable)) {
@@ -479,16 +479,16 @@ class SecurityComponent : Component {
      *
      * @param array myDataFields Fields array, containing the POST data fields
      * @param array $expectedFields Fields array, containing the expected fields we should have in POST
-     * @param string $intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
-     * @param string $stringKeyMessage Message string if tampered found in
+     * @param string intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
+     * @param string stringKeyMessage Message string if tampered found in
      *   data fields indexed by string (protected)
      * @return Error messages
      */
     protected string[] _matchExistingFields(
         array myDataFields,
         array &$expectedFields,
-        string $intKeyMessage,
-        string $stringKeyMessage
+        string intKeyMessage,
+        string stringKeyMessage
     ) {
         myMessages = [];
         foreach (myDataFields as myKey: myValue) {
@@ -514,10 +514,10 @@ class SecurityComponent : Component {
      * Generate debug message for the expected fields
      *
      * @param array $expectedFields Expected fields
-     * @param string $missingMessage Message template
+     * @param string missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected string _debugExpectedFields(array $expectedFields = [], string $missingMessage = "") {
+    protected string _debugExpectedFields(array $expectedFields = [], string missingMessage = "") {
         if (count($expectedFields) == 0) {
             return null;
         }

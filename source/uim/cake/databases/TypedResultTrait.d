@@ -8,7 +8,7 @@ trait TypedResultTrait
     /**
      * The type name this expression will return when executed
      */
-    protected string $_returnType = "string";
+    protected string _returnType = "string";
 
     /**
      * Gets the type of the value this object will generate.

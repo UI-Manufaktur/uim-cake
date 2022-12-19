@@ -86,7 +86,7 @@ trait EntityTrait
     /**
      * The alias of the repository this entity came from
      */
-    protected string $_registryAlias = "";
+    protected string _registryAlias = "";
 
     /**
      * Magic getter to access fields that have been set in this entity
@@ -527,7 +527,7 @@ trait EntityTrait
     /**
      * : isset($entity);
      *
-     * @param string $offset The offset to check.
+     * @param string offset The offset to check.
      * @return bool Success
      */
     bool offsetExists($offset) {
@@ -537,7 +537,7 @@ trait EntityTrait
     /**
      * : $entity[$offset];
      *
-     * @param string $offset The offset to get.
+     * @param string offset The offset to get.
      * @return mixed
      */
     #[\ReturnTypeWillChange]
@@ -548,7 +548,7 @@ trait EntityTrait
     /**
      * : $entity[$offset] = myValue;
      *
-     * @param string $offset The offset to set.
+     * @param string offset The offset to set.
      * @param mixed myValue The value to set.
      */
     void offsetSet($offset, myValue) {
@@ -558,7 +558,7 @@ trait EntityTrait
     /**
      * : unset(myResult[$offset]);
      *
-     * @param string $offset The offset to remove.
+     * @param string offset The offset to remove.
      */
     void offsetUnset($offset) {
         this.unset($offset);
@@ -568,11 +568,11 @@ trait EntityTrait
      * Fetch accessor method name
      * Accessor methods (available or not) are cached in $_accessors
      *
-     * @param string $property the field name to derive getter name from
+     * @param string property the field name to derive getter name from
      * @param string myType the accessor type ("get" or "set")
      * return method name or empty string (no method available)
      */
-    protected static string _accessor(string $property, string myType) {
+    protected static string _accessor(string property, string myType) {
         myClass = static::class;
 
         if (isset(static::$_accessors[myClass][myType][$property])) {

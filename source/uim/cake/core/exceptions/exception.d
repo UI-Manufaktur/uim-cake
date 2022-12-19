@@ -21,7 +21,7 @@ class CakeException : RuntimeException
     /**
      * Template string that has attributes sprintf()"ed into it.
      */
-    protected string $_messageTemplate = "";
+    protected string _messageTemplate = "";
 
     /**
      * Array of headers to be passed to {@link \Cake\Http\Response::withHeader()}

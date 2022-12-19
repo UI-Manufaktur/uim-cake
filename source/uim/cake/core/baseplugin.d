@@ -132,7 +132,7 @@ class BasePlugin : IPlugin
     }
 
 
-    function enable(string $hook) {
+    function enable(string hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled}"} = true;
 
@@ -140,7 +140,7 @@ class BasePlugin : IPlugin
     }
 
 
-    function disable(string $hook) {
+    function disable(string hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled"} = false;
 
@@ -148,7 +148,7 @@ class BasePlugin : IPlugin
     }
 
 
-    bool isEnabled(string $hook) {
+    bool isEnabled(string hook) {
         this.checkHook($hook);
 
         return this.{"{$hook}Enabled"} == true;
@@ -157,10 +157,10 @@ class BasePlugin : IPlugin
     /**
      * Check if a hook name is valid
      *
-     * @param string $hook The hook name to check
+     * @param string hook The hook name to check
      * @throws \InvalidArgumentException on invalid hooks
      */
-    protected void checkHook(string $hook) {
+    protected void checkHook(string hook) {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
                 "`$hook` is not a valid hook name. Must be one of " . implode(", ", static::VALID_HOOKS)

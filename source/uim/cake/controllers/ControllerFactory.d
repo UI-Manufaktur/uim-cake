@@ -227,11 +227,11 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Coerces string argument to primitive type.
      *
-     * @param string $argument Argument to coerce
+     * @param string argument Argument to coerce
      * @param \ReflectionNamedType myType Parameter type
      * @return array|string|float|int|bool|null
      */
-    protected auto coerceStringToType(string $argument, ReflectionNamedType myType) {
+    protected auto coerceStringToType(string argument, ReflectionNamedType myType) {
         switch (myType.getName()) {
             case "string":
                 return $argument;

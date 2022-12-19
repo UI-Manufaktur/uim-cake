@@ -35,7 +35,7 @@ interface SchemaInterface
      * - `comment` The comment for the column.
      *
      * @param string myName The name of the column
-     * @param array<string, mixed>|string $attrs The attributes for the column or the type name.
+     * @param array<string, mixed>|string attrs The attributes for the column or the type name.
      * @return this
      */
     function addColumn(string myName, $attrs);
@@ -90,10 +90,10 @@ interface SchemaInterface
      * This represent the database type a more complex class is
      * based upon.
      *
-     * @param string $column The column name to get the base type from
+     * @param string column The column name to get the base type from
      * @return string|null The base type name
      */
-    Nullable!string baseColumnType(string $column);
+    Nullable!string baseColumnType(string column);
 
     /**
      * Check whether a field is nullable

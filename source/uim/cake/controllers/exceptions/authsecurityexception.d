@@ -8,5 +8,5 @@ class AuthSecurityException : SecurityException
     /**
      * Security Exception type
      */
-    protected string $_type = "auth";
+    protected string _type = "auth";
 }

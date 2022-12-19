@@ -183,11 +183,11 @@ trait StaticConfigTrait
      *
      * Note that querystring arguments are also parsed and set as values in the returned configuration.
      *
-     * @param string $dsn The DSN string to convert to a configuration array
+     * @param string dsn The DSN string to convert to a configuration array
      * @return array<string, mixed> The configuration array to be stored after parsing the DSN
      * @throws \InvalidArgumentException If not passed a string, or passed an invalid string
      */
-    static function parseDsn(string $dsn): array
+    static function parseDsn(string dsn): array
     {
         if (empty($dsn)) {
             return [];

@@ -218,7 +218,7 @@ trait QueryTrait
      * @param array myFields The fields to alias
      * @param string|null $defaultAlias The default alias
      */
-    string[] aliasFields(array myFields, Nullable!string $defaultAlias = null) {
+    string[] aliasFields(array myFields, Nullable!string defaultAlias = null) {
         myAliased = [];
         foreach (myFields as myAlias: myField) {
             if (is_numeric(myAlias) && is_string(myField)) {
@@ -498,12 +498,12 @@ trait QueryTrait
     /**
      * Enables calling methods from the result set as if they were from this class
      *
-     * @param string $method the method to call
+     * @param string method the method to call
      * @param array $arguments list of arguments for the method to call
      * @return mixed
      * @throws \BadMethodCallException if no such method exists in result set
      */
-    auto __call(string $method, array $arguments) {
+    auto __call(string method, array $arguments) {
         myResultSetClass = _decoratorClass();
         if (in_array($method, get_class_methods(myResultSetClass), true)) {
             deprecationWarning(sprintf(

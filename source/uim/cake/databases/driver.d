@@ -86,11 +86,11 @@ abstract class Driver : IDriver
     /**
      * Establishes a connection to the database server
      *
-     * @param string $dsn A Driver-specific PDO-DSN
+     * @param string dsn A Driver-specific PDO-DSN
      * @param array<string, mixed> myConfig configuration to be used for creating connection
      * @return bool true on success
      */
-    protected bool _connect(string $dsn, array myConfig) {
+    protected bool _connect(string dsn, array myConfig) {
         $action = function () use ($dsn, myConfig) {
             this.setConnection(new PDO(
                 $dsn,
@@ -308,7 +308,7 @@ abstract class Driver : IDriver
     }
 
     
-    function lastInsertId(Nullable!string myTable = null, Nullable!string $column = null) {
+    function lastInsertId(Nullable!string myTable = null, Nullable!string column = null) {
         this.connect();
 
         if (_connection instanceof PDO) {
@@ -357,10 +357,10 @@ abstract class Driver : IDriver
      *
      * Defaults to true for FEATURE_QUOTE and FEATURE_SAVEPOINT.
      *
-     * @param string $feature Driver feature name
+     * @param string feature Driver feature name
      * @return bool
      */
-    bool supports(string $feature) {
+    bool supports(string feature) {
         switch ($feature) {
             case static::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION:
             case static::FEATURE_QUOTE:

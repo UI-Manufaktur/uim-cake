@@ -21,7 +21,7 @@ if (!function_exists("h")) {
      * @return mixed Wrapped text.
      * @link https://book.UIM.org/4/en/core-libraries/global-constants-and-functions.html#h
      */
-    function h($text, bool $double = true, Nullable!string $charset = null) {
+    function h($text, bool $double = true, Nullable!string charset = null) {
         if (is_string($text)) {
             //optimize for strings
         } elseif (is_array($text)) {

@@ -131,10 +131,10 @@ class App {
      * Test isolation wrapper
      *
      * @param string myName Class name.
-     * @param string $module module.
+     * @param string module module.
      * @return bool
      */
-    protected static bool _classExistsInBase(string myName, string $module) {
+    protected static bool _classExistsInBase(string myName, string module) {
         return class_exists($module . myName);
     }
 

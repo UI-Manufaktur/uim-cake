@@ -22,10 +22,10 @@ interface IRepository
     /**
      * Sets the table registry key used to create this table instance.
      *
-     * @param string $registryAlias The key used to access this object.
+     * @param string registryAlias The key used to access this object.
      * @return this
      */
-    auto setRegistryAlias(string $registryAlias);
+    auto setRegistryAlias(string registryAlias);
 
     /**
      * Returns the table registry key used to create this table instance.
