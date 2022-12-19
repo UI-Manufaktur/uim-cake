@@ -286,7 +286,7 @@ class ShellDispatcher
      * @return \Cake\Console\Shell A shell instance.
      * @throws \Cake\Console\Exception\MissingShellException when errors are encountered.
      */
-    function findShell(string myShell): Shell
+    Shell findShell(string myShell): 
     {
         myClassName = this._shellExists(myShell);
         if (!myClassName) {
@@ -342,8 +342,7 @@ class ShellDispatcher
      * @param string $shortName The plugin-prefixed shell name
      * @return \Cake\Console\Shell A shell instance.
      */
-    protected auto _createShell(string myClassName, string $shortName): Shell
-    {
+    protected Shell _createShell(string myClassName, string $shortName) {
         [myPlugin] = pluginSplit($shortName);
         /** @var \Cake\Console\Shell $instance */
         $instance = new myClassName();

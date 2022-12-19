@@ -363,7 +363,7 @@ class View : IEventDispatcher {
      *
      * @return string|null
      */
-    auto getTheme(): Nullable!string
+    Nullable!string getTheme()
     {
         return this.theme;
     }
@@ -1099,7 +1099,7 @@ class View : IEventDispatcher {
      * @return string|null
 
      */
-    auto getPlugin(): Nullable!string
+    Nullable!string getPlugin()
     {
         return this.plugin;
     }

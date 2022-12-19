@@ -276,7 +276,7 @@ class SmtpTransport : AbstractTransport
      * @param string myPassword Password.
      * @return string|null Response code for the command.
      */
-    protected auto _authPlain(string myUsername, string myPassword): Nullable!string
+    protected Nullable!string _authPlain(string myUsername, string myPassword)
     {
         return this._smtpSend(
             sprintf(
@@ -462,7 +462,7 @@ class SmtpTransport : AbstractTransport
      * @return string|null The matched code, or null if nothing matched
      * @throws \Cake\Network\Exception\SocketException
      */
-    protected auto _smtpSend(Nullable!string myData, $checkCode = "250"): Nullable!string
+    protected Nullable!string _smtpSend(Nullable!string myData, $checkCode = "250")
     {
         this._lastResponse = [];
 

@@ -21,7 +21,7 @@ class ConnectionRegistry : ObjectRegistry
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected auto _resolveClassName(string myClass): Nullable!string
+    protected Nullable!string _resolveClassName(string myClass)
     {
         return App::className(myClass, "Datasource");
     }

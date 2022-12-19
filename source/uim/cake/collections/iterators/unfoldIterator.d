@@ -57,8 +57,7 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
      *
      * @return \RecursiveIterator
      */
-    auto getChildren(): RecursiveIterator
-    {
+    RecursiveIterator getChildren() {
         $current = this.current();
         myKey = this.key();
         $unfolder = this._unfolder;

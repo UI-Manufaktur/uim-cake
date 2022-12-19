@@ -70,8 +70,7 @@ class TaskRegistry : ObjectRegistry
      * @return \Cake\Console\Shell The constructed task class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected auto _create(myClass, string myAlias, array myConfig): Shell
-    {
+    protected Shell _create(myClass, string myAlias, array myConfig) {
         /** @var \Cake\Console\Shell */
         return new myClass(this._Shell.getIo());
     }

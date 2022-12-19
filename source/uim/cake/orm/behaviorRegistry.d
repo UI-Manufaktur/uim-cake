@@ -66,8 +66,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return string|null Either the correct classname or null.
      * @psalm-return class-string|null
      */
-    static function className(string myClass): Nullable!string
-    {
+    static Nullable!string className(string myClass) {
         return App::className(myClass, "Model/Behavior", "Behavior")
             ?: App::className(myClass, "ORM/Behavior", "Behavior");
     }
@@ -81,7 +80,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected auto _resolveClassName(string myClass): Nullable!string
+    protected Nullable!string _resolveClassName(string myClass)
     {
         return static::className(myClass);
     }

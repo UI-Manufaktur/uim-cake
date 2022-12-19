@@ -111,8 +111,7 @@ trait ExtractTrait {
      * value to be compared the item with.
      * @return \Closure
      */
-    protected auto _createMatcherFilter(array $conditions): Closure
-    {
+    protected Closure _createMatcherFilter(array $conditions) {
         $matchers = [];
         foreach ($conditions as $property: myValue) {
             $extractor = this._propertyExtractor($property);

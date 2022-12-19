@@ -2393,7 +2393,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param string myField Field name
      * @return string|null
      */
-    auto getRequiredMessage(string myField): Nullable!string
+    Nullable!string getRequiredMessage(string myField)
     {
         if (!isset(this._fields[myField])) {
             return null;
@@ -2413,8 +2413,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param string myField Field name
      * @return string|null
      */
-    auto getNotEmptyMessage(string myField): Nullable!string
-    {
+    Nullable!string getNotEmptyMessage(string myField) {
         if (!isset(this._fields[myField])) {
             return null;
         }

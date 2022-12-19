@@ -95,8 +95,7 @@ class ConsoleInputSubCommand {
      *
      * @return \Cake\Console\ConsoleOptionParser|null
      */
-    function parser(): ?ConsoleOptionParser
-    {
+    ?ConsoleOptionParser parser() {
         return this._parser;
     }
 
@@ -106,8 +105,7 @@ class ConsoleInputSubCommand {
      * @param \SimpleXMLElement $parent The parent element.
      * @return \SimpleXMLElement The parent with this subcommand appended.
      */
-    function xml(SimpleXMLElement $parent): SimpleXMLElement
-    {
+    SimpleXMLElement xml(SimpleXMLElement $parent) {
         $command = $parent.addChild("command");
         $command.addAttribute("name", this._name);
         $command.addAttribute("help", this._help);

@@ -212,7 +212,7 @@ class Security {
      * @return string|null Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function decrypt(string $cipher, string myKey, Nullable!string $hmacSalt = null): Nullable!string
+    static Nullable!string decrypt(string $cipher, string myKey, Nullable!string $hmacSalt = null)
     {
         self::_checkKey(myKey, "decrypt()");
         if (empty($cipher)) {

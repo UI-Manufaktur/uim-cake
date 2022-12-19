@@ -105,9 +105,9 @@ class JsonView : SerializedView {
     }
 
 
-    protected string _serialize($serialize)
+    protected string _serialize(serializeNames)
     {
-        myData = this._dataToSerialize($serialize);
+        myData = this._dataToSerialize(serializeNames);
 
         $jsonOptions = this.getConfig("jsonOptions");
         if ($jsonOptions == null) {
@@ -135,13 +135,13 @@ class JsonView : SerializedView {
     /**
      * Returns data to be serialized.
      *
-     * @param array|string $serialize The name(s) of the view variable(s) that need(s) to be serialized.
+     * @param array|string serializeNames The name(s) of the view variable(s) that need(s) to be serialized.
      * @return mixed The data to serialize.
      */
-    protected auto _dataToSerialize($serialize) {
-        if (is_array($serialize)) {
+    protected auto _dataToSerialize(string[] serializeNames...) {
+        if (is_array(serializeNames)) {
             myData = [];
-            foreach ($serialize as myAlias => myKey) {
+            foreach (myAlias => myKey; serializeNames) {
                 if (is_numeric(myAlias)) {
                     myAlias = myKey;
                 }
@@ -153,6 +153,6 @@ class JsonView : SerializedView {
             return !empty(myData) ? myData : null;
         }
 
-        return this.viewVars[$serialize] ?? null;
+        return this.viewVars[serializeNames] ?? null;
     }
 }
