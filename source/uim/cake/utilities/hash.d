@@ -130,7 +130,7 @@ class Hash {
             return myData !== null ? (array)myData : [];
         }
 
-        if (strpos(myPath, "[") == false) {
+        if (indexOf(myPath, "[") == false) {
             $tokens = explode(".", myPath);
         } else {
             $tokens = Text::tokenize(myPath, ".", "[", "]");
@@ -188,7 +188,7 @@ class Hash {
     protected static auto _splitConditions(string $token): array
     {
         $conditions = false;
-        $position = strpos($token, "[");
+        $position = indexOf($token, "[");
         if ($position !== false) {
             $conditions = substr($token, $position);
             $token = substr($token, 0, $position);
@@ -296,8 +296,8 @@ class Hash {
      */
     static function insert(array myData, string myPath, myValues = null): array
     {
-        $noTokens = strpos(myPath, "[") == false;
-        if ($noTokens && strpos(myPath, ".") == false) {
+        $noTokens = indexOf(myPath, "[") == false;
+        if ($noTokens && indexOf(myPath, ".") == false) {
             myData[myPath] = myValues;
 
             return myData;
@@ -309,7 +309,7 @@ class Hash {
             $tokens = Text::tokenize(myPath, ".", "[", "]");
         }
 
-        if ($noTokens && strpos(myPath, "{") == false) {
+        if ($noTokens && indexOf(myPath, "{") == false) {
             return static::_simpleOp("insert", myData, $tokens, myValues);
         }
 
@@ -388,10 +388,10 @@ class Hash {
      */
     static function remove(array myData, string myPath): array
     {
-        $noTokens = strpos(myPath, "[") == false;
-        $noExpansion = strpos(myPath, "{") == false;
+        $noTokens = indexOf(myPath, "[") == false;
+        $noExpansion = indexOf(myPath, "{") == false;
 
-        if ($noExpansion && $noTokens && strpos(myPath, ".") == false) {
+        if ($noExpansion && $noTokens && indexOf(myPath, ".") == false) {
             unset(myData[myPath]);
 
             return myData;

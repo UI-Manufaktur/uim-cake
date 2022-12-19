@@ -93,9 +93,9 @@ class Text {
         while ($offset <= $length) {
             $tmpOffset = -1;
             $offsets = [
-                mb_strpos(myData, $separator, $offset),
-                mb_strpos(myData, $leftBound, $offset),
-                mb_strpos(myData, $rightBound, $offset),
+                mb_indexOf(myData, $separator, $offset),
+                mb_indexOf(myData, $leftBound, $offset),
+                mb_indexOf(myData, $rightBound, $offset),
             ];
             for ($i = 0; $i < 3; $i++) {
                 if ($offsets[$i] !== false && ($offsets[$i] < $tmpOffset || $tmpOffset == -1)) {
@@ -180,14 +180,14 @@ class Text {
             return myOptions["clean"] ? static::cleanInsert($str, myOptions) : $str;
         }
 
-        if (strpos($str, "?") !== false && is_numeric(key(myData))) {
+        if (indexOf($str, "?") !== false && is_numeric(key(myData))) {
             deprecationWarning(
                 "Using Text::insert() with `?` placeholders is deprecated. " .
                 "Use sprintf() with `%s` placeholders instead."
             );
 
             $offset = 0;
-            while (($pos = strpos($str, "?", $offset)) !== false) {
+            while (($pos = indexOf($str, "?", $offset)) !== false) {
                 $val = array_shift(myData);
                 $offset = $pos + strlen($val);
                 $str = substr_replace($str, $val, $pos, 1);
@@ -436,7 +436,7 @@ class Text {
             if ($nextChar !== " ") {
                 $breakAt = mb_strrpos($part, " ");
                 if ($breakAt == false) {
-                    $breakAt = mb_strpos($text, " ", $width);
+                    $breakAt = mb_indexOf($text, " ", $width);
                 }
                 if ($breakAt == false) {
                     $parts[] = trim($text);
@@ -542,7 +542,7 @@ class Text {
 
         $truncate = mb_substr($text, mb_strlen($text) - $length + mb_strlen($ellipsis));
         if (!myOptions["exact"]) {
-            $spacepos = mb_strpos($truncate, " ");
+            $spacepos = mb_indexOf($truncate, " ");
             $truncate = $spacepos == false ? "" : trim(mb_substr($truncate, $spacepos));
         }
 
@@ -785,7 +785,7 @@ class Text {
             $len = self::_strlen($part, myOptions);
             if ($offset !== 0 || $totalLength + $len > $length) {
                 if (
-                    strpos($part, "&") == 0
+                    indexOf($part, "&") == 0
                     && preg_match($pattern, $part)
                     && $part !== html_entity_decode($part, ENT_HTML5 | ENT_QUOTES, "UTF-8")
                 ) {

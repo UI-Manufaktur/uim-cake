@@ -150,7 +150,7 @@ abstract class Cell : IEventDispatcher
             myClassName = static::class;
             myNamePrefix = "\View\Cell\\";
             /** @psalm-suppress PossiblyFalseOperand */
-            myName = substr(myClassName, strpos(myClassName, myNamePrefix) + strlen(myNamePrefix));
+            myName = substr(myClassName, indexOf(myClassName, myNamePrefix) + strlen(myNamePrefix));
             myName = substr(myName, 0, -4);
             if (!myBuilder.getTemplatePath()) {
                 myBuilder.setTemplatePath(

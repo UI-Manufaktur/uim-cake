@@ -1152,9 +1152,9 @@ class View : IEventDispatcher {
         [myPlugin, myName] = this.pluginSplit(myName);
         myName = str_replace("/", DIRECTORY_SEPARATOR, myName);
 
-        if (strpos(myName, DIRECTORY_SEPARATOR) == false && myName !== "" && myName[0] !== ".") {
+        if (indexOf(myName, DIRECTORY_SEPARATOR) == false && myName !== "" && myName[0] !== ".") {
             myName = myTemplatePath . $subDir . this._inflectTemplateFileName(myName);
-        } elseif (strpos(myName, DIRECTORY_SEPARATOR) !== false) {
+        } elseif (indexOf(myName, DIRECTORY_SEPARATOR) !== false) {
             if (myName[0] == DIRECTORY_SEPARATOR || myName[1] == ":") {
                 myName = trim(myName, DIRECTORY_SEPARATOR);
             } elseif (!myPlugin || this.templatePath !== this.name) {
@@ -1197,11 +1197,11 @@ class View : IEventDispatcher {
      * @throws \InvalidArgumentException
      */
     protected string _checkFilePath(string myfile, string myPath) {
-        if (strpos(myfile, "..") == false) {
+        if (indexOf(myfile, "..") == false) {
             return myfile;
         }
         $absolute = realpath(myfile);
-        if (strpos($absolute, myPath) !== 0) {
+        if (indexOf($absolute, myPath) !== 0) {
             throw new InvalidArgumentException(sprintf(
                 "Cannot use "%s" as a template, it is not within any view template path.",
                 myfile

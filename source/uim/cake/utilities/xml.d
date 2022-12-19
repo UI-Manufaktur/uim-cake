@@ -102,7 +102,7 @@ class Xml {
             throw new XmlException("Invalid input. {myType} cannot be parsed as XML.");
         }
 
-        if (strpos($input, "<") !== false) {
+        if (indexOf($input, "<") !== false) {
             return static::_loadXml($input, myOptions);
         }
 
@@ -301,7 +301,7 @@ class Xml {
                     } elseif (myValue == null) {
                         myValue = "";
                     }
-                    $ismodule = strpos(myKey, "xmlns:");
+                    $ismodule = indexOf(myKey, "xmlns:");
                     if ($ismodule !== false) {
                         /** @psalm-suppress PossiblyUndefinedMethod */
                         myNode.setAttributeNS("http://www.w3.org/2000/xmlns/", myKey, (string)myValue);

@@ -192,7 +192,7 @@ class RadioWidget : BasicWidget
 
         if (
             $label == false &&
-            strpos(this._templates.get("radioWrapper"), "{{input}}") == false
+            indexOf(this._templates.get("radioWrapper"), "{{input}}") == false
         ) {
             $label = $input;
         }

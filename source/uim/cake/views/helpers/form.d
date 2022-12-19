@@ -791,7 +791,7 @@ class FormHelper : Helper
             if (substr($text, -5) == "._ids") {
                 $text = substr($text, 0, -5);
             }
-            if (strpos($text, ".") !== false) {
+            if (indexOf($text, ".") !== false) {
                 myFieldElements = explode(".", $text);
                 $text = array_pop(myFieldElements);
             }
@@ -1018,8 +1018,8 @@ class FormHelper : Helper
             // Don"t include aria-describedby unless we have a good chance of
             // having error message show up.
             if (
-                strpos(myTemplater.get("error"), "{{id}}") !== false &&
-                strpos(myTemplater.get("inputContainerError"), "{{error}}") !== false
+                indexOf(myTemplater.get("error"), "{{id}}") !== false &&
+                indexOf(myTemplater.get("inputContainerError"), "{{error}}") !== false
             ) {
                 myOptions += [
                    "aria-describedby": $isFieldError ? this._domId(myFieldName) . "-error" : null,
@@ -1852,7 +1852,7 @@ class FormHelper : Helper
         }
         unset(myOptions["secure"]);
 
-        $isUrl = strpos($caption, "://") !== false;
+        $isUrl = indexOf($caption, "://") !== false;
         $isImage = preg_match("/\.(jpg|jpe|jpeg|gif|png|ico)$/", $caption);
 
         myType = myOptions["type"];

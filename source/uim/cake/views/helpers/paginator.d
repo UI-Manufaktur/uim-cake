@@ -398,7 +398,7 @@ class PaginatorHelper : Helper
         if (empty($title)) {
             $title = myKey;
 
-            if (strpos($title, ".") !== false) {
+            if (indexOf($title, ".") !== false) {
                 $title = str_replace(".", " ", $title);
             }
 
@@ -496,14 +496,14 @@ class PaginatorHelper : Helper
         if (
             !empty($paging["sort"])
             && !empty(myOptions["sort"])
-            && strpos(myOptions["sort"], ".") == false
+            && indexOf(myOptions["sort"], ".") == false
         ) {
             $paging["sort"] = this._removeAlias($paging["sort"], myModel = null);
         }
         if (
             !empty($paging["sortDefault"])
             && !empty(myOptions["sort"])
-            && strpos(myOptions["sort"], ".") == false
+            && indexOf(myOptions["sort"], ".") == false
         ) {
             $paging["sortDefault"] = this._removeAlias($paging["sortDefault"], myModel);
         }
@@ -563,7 +563,7 @@ class PaginatorHelper : Helper
     protected string _removeAlias(string myField, Nullable!string myModel = null) {
         $currentModel = myModel ?: this.defaultModel();
 
-        if (strpos(myField, ".") == false) {
+        if (indexOf(myField, ".") == false) {
             return myField;
         }
 
