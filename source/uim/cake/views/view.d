@@ -1048,7 +1048,7 @@ class View : IEventDispatcher {
      * @return \Cake\View\Helper a constructed helper object.
      * @see \Cake\View\HelperRegistry::load()
      */
-    function loadHelper(string myName, array myConfig = []): Helper
+    Helper loadHelper(string myName, array myConfig = [])
     {
         [, myClass] = pluginSplit(myName);
         $helpers = this.helpers();

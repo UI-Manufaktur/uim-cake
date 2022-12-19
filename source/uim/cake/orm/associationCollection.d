@@ -317,8 +317,7 @@ class AssociationCollection : IteratorAggregate
      * @param array|bool myKeys the list of association names to normalize
      * @return array
      */
-    array normalizeKeys(myKeys)
-    {
+    array normalizeKeys(myKeys) {
         if (myKeys == true) {
             myKeys = this.keys();
         }
@@ -335,8 +334,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @return \Traversable<string, \Cake\ORM\Association>
      */
-    auto getIterator(): Traversable
-    {
+    Traversable getIterator() {
         return new ArrayIterator(this._items);
     }
 }

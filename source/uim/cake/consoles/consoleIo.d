@@ -510,7 +510,7 @@ class ConsoleIo {
      * @param array<string, mixed> myConfig Configuration data for the helper.
      * @return \Cake\Console\Helper The created helper instance.
      */
-    function helper(string myName, array myConfig = []): Helper
+    Helper helper(string myName, array myConfig = []) 
     {
         myName = ucfirst(myName);
 

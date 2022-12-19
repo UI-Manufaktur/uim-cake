@@ -353,7 +353,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return \Traversable
      * @psalm-return \Traversable<string, TObject>
      */
-    auto getIterator(): Traversable
+    Traversable getIterator()
     {
         return new ArrayIterator(this._loaded);
     }

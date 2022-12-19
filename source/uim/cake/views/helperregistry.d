@@ -123,7 +123,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @return \Cake\View\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected auto _create(myClass, string myAlias, array myConfig): Helper
+    protected Helper _create(myClass, string myAlias, array myConfig)
     {
         /** @var \Cake\View\Helper $instance */
         $instance = new myClass(this._View, myConfig);

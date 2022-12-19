@@ -39,14 +39,13 @@ class HelperRegistry : ObjectRegistry
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string
      */
-    protected auto _resolveClassName(string myClass): Nullable!string
-    {
-        myName = App::className(myClass, "Command/Helper", "Helper");
-        if (myName == null) {
-            return App::className(myClass, "Shell/Helper", "Helper");
-        }
+    protected Nullable!string _resolveClassName(string myClass) {
+      myName = App::className(myClass, "Command/Helper", "Helper");
+      if (myName == null) {
+          return App::className(myClass, "Shell/Helper", "Helper");
+      }
 
-        return myName;
+      return myName;
     }
 
     /**
@@ -60,10 +59,10 @@ class HelperRegistry : ObjectRegistry
      * @throws \Cake\Console\Exception\MissingHelperException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
-        throw new MissingHelperException([
-            "class":myClass,
-            "plugin":myPlugin,
-        ]);
+      throw new MissingHelperException([
+          "class":myClass,
+          "plugin":myPlugin,
+      ]);
     }
 
     /**
@@ -77,9 +76,8 @@ class HelperRegistry : ObjectRegistry
      * @return \Cake\Console\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected auto _create(myClass, string myAlias, array myConfig): Helper
-    {
-        /** @var \Cake\Console\Helper */
-        return new myClass(this._io, myConfig);
+    protected Helper _create(myClass, string myAlias, array myConfig) {
+      /** @var \Cake\Console\Helper */
+      return new myClass(this._io, myConfig);
     }
 }

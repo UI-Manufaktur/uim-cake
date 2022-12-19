@@ -703,7 +703,7 @@ trait CollectionTrait
     }
 
 
-    function unwrap(): Traversable
+    Traversable unwrap()
     {
         $iterator = this;
         while (

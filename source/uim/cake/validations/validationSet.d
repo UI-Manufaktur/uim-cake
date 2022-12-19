@@ -192,7 +192,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @return \Traversable<string, \Cake\Validation\ValidationRule>
      */
-    auto getIterator(): Traversable
+    Traversable getIterator()
     {
         return new ArrayIterator(this._rules);
     }

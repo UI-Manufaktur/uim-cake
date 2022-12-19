@@ -74,7 +74,7 @@ interface SchemaInterface
      * @param string myName The column to get the type of.
      * @return string|null
      */
-    auto getColumnType(string myName): Nullable!string;
+    Nullable!string getColumnType(string myName);
 
     /**
      * Sets the type of a column.
@@ -93,7 +93,7 @@ interface SchemaInterface
      * @param string $column The column name to get the base type from
      * @return string|null The base type name
      */
-    function baseColumnType(string $column): Nullable!string;
+    Nullable!string baseColumnType(string $column);
 
     /**
      * Check whether a field is nullable

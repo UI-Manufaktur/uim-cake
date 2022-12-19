@@ -120,7 +120,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @return \Traversable
      * @psalm-return \Traversable<string, \Cake\Console\Shell|\Cake\Console\ICommand|class-string>
      */
-    auto getIterator(): Traversable
+    Traversable getIterator()
     {
         return new ArrayIterator(this.commands);
     }

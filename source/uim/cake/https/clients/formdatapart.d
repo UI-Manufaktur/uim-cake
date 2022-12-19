@@ -106,7 +106,7 @@ class FormDataPart
      * @param string|null $id The content id.
      * @return string|null
      */
-    function contentId(Nullable!string $id = null): Nullable!string
+    Nullable!string contentId(Nullable!string $id = null)
     {
         if ($id == null) {
             return this._contentId;
@@ -154,7 +154,7 @@ class FormDataPart
      * @param string|null myType The type of encoding the value has.
      * @return string|null
      */
-    function transferEncoding(Nullable!string myType): Nullable!string
+    Nullable!string transferEncoding(Nullable!string myType)
     {
         if (myType == null) {
             return this._transferEncoding;
@@ -163,16 +163,12 @@ class FormDataPart
         return this._transferEncoding = myType;
     }
 
-    /**
-     * Get the part name.
-     */
+    // Get the part name.
     string name() {
         return this._name;
     }
 
-    /**
-     * Get the value.
-     */
+    // Get the value.
     string value() {
         return this._value;
     }

@@ -533,7 +533,7 @@ class Cookie : ICookie
     }
 
 
-    auto getSameSite(): Nullable!string
+    Nullable!string getSameSite()
     {
         return this.sameSite;
     }

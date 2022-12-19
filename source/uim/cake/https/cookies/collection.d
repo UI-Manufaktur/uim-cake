@@ -176,7 +176,7 @@ class CookieCollection : IteratorAggregate, Countable {
      *
      * @return \Traversable<string, \Cake\Http\Cookie\ICookie>
      */
-    auto getIterator(): Traversable
+    Traversable getIterator()
     {
         return new ArrayIterator(this.cookies);
     }
