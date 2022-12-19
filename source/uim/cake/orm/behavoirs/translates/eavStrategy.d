@@ -16,7 +16,7 @@ import uim.cake;
  * you can use the custom `translations` finder of `TranslateBehavior` that is
  * exposed to the table.
  */
-class EavStrategy : TranslateStrategyInterface
+class EavStrategy : ITranslateStrategy
 {
     use InstanceConfigTrait;
     use LocatorAwareTrait;

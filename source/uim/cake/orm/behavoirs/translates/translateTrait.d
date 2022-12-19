@@ -3,10 +3,7 @@ module uim.cake.orm.behaviors\Translate;
 @safe:
 import uim.cake;
 
-/**
- * Contains a translation method aimed to help managing multiple translations
- * for an entity.
- */
+// Contains a translation method aimed to help managing multiple translations for an entity.
 trait TranslateTrait {
     /**
      * Returns the entity containing the translated fields for this object and for

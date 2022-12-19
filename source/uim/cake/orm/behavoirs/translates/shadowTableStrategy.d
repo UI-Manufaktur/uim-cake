@@ -7,7 +7,7 @@ import uim.cake;
  * This class provides a way to translate dynamic data by keeping translations
  * in a separate shadow table where each row corresponds to a row of primary table.
  */
-class ShadowTableStrategy : TranslateStrategyInterface {
+class ShadowTableStrategy : ITranslateStrategy {
     use InstanceConfigTrait;
     use LocatorAwareTrait;
     use TranslateStrategyTrait {

@@ -7,7 +7,7 @@ import uim.cake;
 /**
  * This interface describes the methods for translate behavior strategies.
  */
-interface TranslateStrategyInterface : IPropertyMarshal
+interface ITranslateStrategy : IPropertyMarshal
 {
     /**
      * Return translation table instance.

@@ -45,14 +45,14 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * Default strategy class name.
      *
      * @var string
-     * @psalm-var class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface>
+     * @psalm-var class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy>
      */
     protected static $defaultStrategyClass = EavStrategy::class;
 
     /**
      * Translation strategy instance.
      *
-     * @var \Cake\ORM\Behavior\Translate\TranslateStrategyInterface|null
+     * @var \Cake\ORM\Behavior\Translate\ITranslateStrategy|null
      */
     protected $strategy;
 
@@ -107,7 +107,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * @param string myClass Class name.
      * @return void
      * @since 4.0.0
-     * @psalm-param class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> myClass
+     * @psalm-param class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy> myClass
      */
     static auto setDefaultStrategyClass(string myClass) {
         static::$defaultStrategyClass = myClass;
@@ -118,7 +118,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @return string
      * @since 4.0.0
-     * @psalm-return class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface>
+     * @psalm-return class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy>
      */
     static string getDefaultStrategyClass() {
         return static::$defaultStrategyClass;
@@ -127,10 +127,10 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Get strategy class instance.
      *
-     * @return \Cake\ORM\Behavior\Translate\TranslateStrategyInterface
+     * @return \Cake\ORM\Behavior\Translate\ITranslateStrategy
      * @since 4.0.0
      */
-    auto getStrategy(): TranslateStrategyInterface
+    auto getStrategy(): ITranslateStrategy
     {
         if (this.strategy !== null) {
             return this.strategy;
@@ -142,7 +142,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Create strategy instance.
      *
-     * @return \Cake\ORM\Behavior\Translate\TranslateStrategyInterface
+     * @return \Cake\ORM\Behavior\Translate\ITranslateStrategy
      * @since 4.0.0
      */
     protected auto createStrategy() {
@@ -150,7 +150,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
             this._config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
-        /** @var class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> myClassName */
+        /** @var class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy> myClassName */
         myClassName = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
         return new myClassName(this._table, myConfig);
@@ -159,11 +159,11 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Set strategy class instance.
      *
-     * @param \Cake\ORM\Behavior\Translate\TranslateStrategyInterface $strategy Strategy class instance.
+     * @param \Cake\ORM\Behavior\Translate\ITranslateStrategy $strategy Strategy class instance.
      * @return this
      * @since 4.0.0
      */
-    auto setStrategy(TranslateStrategyInterface $strategy) {
+    auto setStrategy(ITranslateStrategy $strategy) {
         this.strategy = $strategy;
 
         return this;

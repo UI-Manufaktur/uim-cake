@@ -1,4 +1,4 @@
-module uim.cake.ORM;
+module uim.cake.orm;
 
 /**
  * Represents a single level in the associations tree to be eagerly loaded

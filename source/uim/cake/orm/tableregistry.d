@@ -1,4 +1,4 @@
-module uim.cake.ORM;
+module uim.cake.orm;
 
 import uim.cake.datasources\FactoryLocator;
 import uim.cake.orm.locators\ILocator;

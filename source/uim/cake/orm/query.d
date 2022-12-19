@@ -1,4 +1,4 @@
-module uim.cake.ORM;
+module uim.cake.orm;
 
 use ArrayObject;
 use BadMethodCallException;

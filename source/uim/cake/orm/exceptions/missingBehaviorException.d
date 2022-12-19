@@ -5,15 +5,12 @@
 **********************************************************************************************************/
 module uim.cake.orm.Exception;
 
-import uim.cake.core.exceptions\CakeException;
+@safe:
+import uim.cake;
 
 /**
  * Used when a behavior cannot be found.
  */
-class MissingBehaviorException : CakeException
-{
-    /**
-     * @var string
-     */
-    protected $_messageTemplate = "Behavior class %s could not be found.";
+class MissingBehaviorException : CakeException {
+    protected string $_messageTemplate = "Behavior class %s could not be found.";
 }
