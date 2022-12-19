@@ -307,8 +307,7 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to configure
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
             "Extract i18n POT files from application source files. " .
             "Source files are parsed and string literal format strings " .
@@ -668,8 +667,7 @@ class I18nExtractCommand : Command {
      * @param int myTarget Number of strings to extract
      * @return array Strings extracted
      */
-    protected auto _getStrings(int &$position, int myTarget): array
-    {
+    array auto _getStrings(int &$position, int myTarget) {
         $strings = [];
         myCount = 0;
         while (

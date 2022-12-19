@@ -67,8 +67,7 @@ class RoutesGenerateCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
             "Check a routing array against the routes. " .
             "Will output the URL if there is a match." .

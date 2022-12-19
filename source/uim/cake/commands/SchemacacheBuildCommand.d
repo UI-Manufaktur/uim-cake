@@ -53,8 +53,7 @@ class SchemacacheBuildCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
             "Build all metadata caches for the connection. If a " .
             "table name is provided, only that table will be cached."

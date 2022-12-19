@@ -114,8 +114,7 @@ class ServerCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
       $parser.setDescription([
           "PHP Built-in Server for UIM",
           "<warning>[WARN] Don\"t use this in a production environment</warning>",

@@ -82,8 +82,7 @@ import uim.cake.console.consoleIo;
 import uim.cake.console.consoleOptionParser;
 
 class HelloCommand : BaseCommand {
-    protected auto buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    protected ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
       $parser
           .addArgument("name", [
               "required":true,

@@ -63,16 +63,15 @@ class RoutesCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
-        $parser
-            .setDescription("Get the list of routes connected in this application.")
-            .addOption("sort", [
-                "help":"Sorts alphabetically by route name A-Z",
-                "short":"s",
-                "boolean":true,
-            ]);
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
+      $parser
+        .setDescription("Get the list of routes connected in this application.")
+        .addOption("sort", [
+            "help":"Sorts alphabetically by route name A-Z",
+            "short":"s",
+            "boolean":true,
+        ]);
 
-        return $parser;
+      return $parser;
     }
 }

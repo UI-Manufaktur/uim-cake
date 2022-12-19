@@ -23,8 +23,7 @@ class CacheClearallCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
      * @return \Cake\Console\ConsoleOptionParser The built parser.
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser = super.buildOptionParser($parser);
         $parser.setDescription("Clear all data in all configured cache engines.");
 

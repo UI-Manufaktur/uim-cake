@@ -56,12 +56,11 @@ class I18nCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
-        $parser.setDescription(
-            "I18n commands let you generate .pot files to power translations in your application."
-        );
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
+      $parser.setDescription(
+          "I18n commands let you generate .pot files to power translations in your application."
+      );
 
-        return $parser;
+      return $parser;
     }
 }

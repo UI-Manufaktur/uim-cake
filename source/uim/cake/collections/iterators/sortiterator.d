@@ -67,11 +67,8 @@ class SortIterator : Collection
 
     /**
      * {@inheritDoc}
-     *
-     * @return \Traversable
      */
-    function unwrap(): Traversable
-    {
+    Traversable unwrap() {
         return this.getInnerIterator();
     }
 }

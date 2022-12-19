@@ -73,17 +73,16 @@ class I18nInitCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
-        $parser.setDescription("Initialize a language PO file from the POT file")
-           .addOption("plugin", [
-               "help":"The plugin to create a PO file in.",
-               "short":"p",
-           ])
-           .addArgument("language", [
-               "help":"Two-letter language code to create PO files for.",
-           ]);
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
+      $parser.setDescription("Initialize a language PO file from the POT file")
+        .addOption("plugin", [
+            "help":"The plugin to create a PO file in.",
+            "short":"p",
+        ])
+        .addArgument("language", [
+            "help":"Two-letter language code to create PO files for.",
+        ]);
 
-        return $parser;
+      return $parser;
     }
 }
