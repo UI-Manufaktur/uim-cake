@@ -19,7 +19,7 @@ class HtmlHelper : Helper {
      *
      * @var array
      */
-    protected $helpers = ["Url"];
+    protected helpers = ["Url"];
 
     /**
      * Default config for this class
@@ -65,14 +65,14 @@ class HtmlHelper : Helper {
      *
      * @var array<string, array>
      */
-    protected $_includedAssets = [];
+    protected _includedAssets = [];
 
     /**
      * Options for the currently opened script block buffer if any.
      *
      * @var array<string, mixed>
      */
-    protected $_scriptBlockOptions = [];
+    protected _scriptBlockOptions = [];
 
     /**
      * Creates a link to an external resource and handles basic meta tags

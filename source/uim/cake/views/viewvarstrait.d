@@ -17,7 +17,7 @@ trait ViewVarsTrait {
      *
      * @var \Cake\View\ViewBuilder|null
      */
-    protected $_viewBuilder;
+    protected _viewBuilder;
 
     /**
      * Get the view builder being used.

@@ -19,7 +19,7 @@ class BasicWidget : IWidget {
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "name": "",
         "val": null,
         "type": "text",

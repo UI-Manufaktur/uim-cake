@@ -18,35 +18,35 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @var string|null
      */
-    protected $_template;
+    protected _template;
 
     /**
      * The plugin name to use.
      *
      * @var string|null
      */
-    protected $_plugin;
+    protected _plugin;
 
     /**
      * The theme name to use.
      *
      * @var string|null
      */
-    protected $_theme;
+    protected _theme;
 
     /**
      * The layout name to render.
      *
      * @var string|null
      */
-    protected $_layout;
+    protected _layout;
 
     /**
      * Whether autoLayout should be enabled.
      *
      * @var bool
      */
-    protected $_autoLayout = true;
+    protected _autoLayout = true;
 
 
 
@@ -55,7 +55,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @var string|null
      */
-    protected $_name;
+    protected _name;
 
     /**
      * The view class name to use.
@@ -65,7 +65,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @var string|null
      * @psalm-var class-string<\Cake\View\View>|string|null
      */
-    protected $_className;
+    protected _className;
 
     /**
      * Additional options used when constructing the view.
@@ -75,21 +75,21 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @var array<string, mixed>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * The helpers to use
      *
      * @var array
      */
-    protected $_helpers = [];
+    protected _helpers = [];
 
     /**
      * View vars
      *
      * @var array<string, mixed>
      */
-    protected $_vars = [];
+    protected _vars = [];
 
     /**
      * Saves a variable for use inside a template.

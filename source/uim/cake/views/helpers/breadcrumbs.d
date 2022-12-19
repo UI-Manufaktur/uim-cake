@@ -17,7 +17,7 @@ class BreadcrumbsHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ["Url"];
+    protected helpers = ["Url"];
 
     /**
      * Default config for the helper.
@@ -38,7 +38,7 @@ class BreadcrumbsHelper : Helper
      *
      * @var array
      */
-    protected $crumbs = [];
+    protected crumbs = [];
 
     /**
      * Add a crumb to the end of the trail.

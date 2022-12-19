@@ -27,7 +27,7 @@ class FormHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ["Url", "Html"];
+    protected helpers = ["Url", "Html"];
 
     /**
      * Default config for the helper.
@@ -132,7 +132,7 @@ class FormHelper : Helper
      *
      * @var array<string, array<string>>
      */
-    protected $_defaultWidgets = [
+    protected _defaultWidgets = [
         "button": ["Button"],
         "checkbox": ["Checkbox"],
         "file": ["File"],
@@ -165,21 +165,21 @@ class FormHelper : Helper
      *
      * @var \Cake\View\Widget\WidgetLocator
      */
-    protected $_locator;
+    protected _locator;
 
     /**
      * Context for the current form.
      *
      * @var \Cake\View\Form\IContext|null
      */
-    protected $_context;
+    protected _context;
 
     /**
      * Context factory.
      *
      * @var \Cake\View\Form\ContextFactory|null
      */
-    protected $_contextFactory;
+    protected _contextFactory;
 
     /**
      * The action attribute value of the last created form.
@@ -196,7 +196,7 @@ class FormHelper : Helper
      *
      * @var array<string>
      */
-    protected $supportedValueSources = ["context", "data", "query"];
+    protected supportedValueSources = ["context", "data", "query"];
 
     /**
      * The default sources.
@@ -204,21 +204,21 @@ class FormHelper : Helper
      * @see FormHelper::$supportedValueSources for valid values.
      * @var array<string>
      */
-    protected $_valueSources = ["data", "context"];
+    protected _valueSources = ["data", "context"];
 
     /**
      * Grouped input types.
      *
      * @var array<string>
      */
-    protected $_groupedInputTypes = ["radio", "multicheckbox"];
+    protected _groupedInputTypes = ["radio", "multicheckbox"];
 
     /**
      * Form protector
      *
      * @var \Cake\Form\FormProtector|null
      */
-    protected $formProtector;
+    protected formProtector;
 
     /**
      * Construct the widgets and binds the default context providers

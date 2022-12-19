@@ -14,5 +14,5 @@ import uim.cake;
 class MissingHelperException : CakeException
 {
     
-    protected $_messageTemplate = "Helper class %s could not be found.";
+    protected _messageTemplate = "Helper class %s could not be found.";
 }

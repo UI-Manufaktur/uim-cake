@@ -25,21 +25,21 @@ class WidgetLocator
      *
      * @var array
      */
-    protected $_widgets = [];
+    protected _widgets = [];
 
     /**
      * Templates to use.
      *
      * @var \Cake\View\StringTemplate
      */
-    protected $_templates;
+    protected _templates;
 
     /**
      * View instance.
      *
      * @var \Cake\View\View
      */
-    protected $_view;
+    protected _view;
 
     /**
      * Constructor

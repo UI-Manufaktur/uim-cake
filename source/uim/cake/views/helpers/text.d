@@ -19,7 +19,7 @@ class TextHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ["Html"];
+    protected helpers = ["Html"];
 
     /**
      * Default config for this class
@@ -36,14 +36,14 @@ class TextHelper : Helper
      *
      * @var array<string, array>
      */
-    protected $_placeholders = [];
+    protected _placeholders = [];
 
     /**
      * Cake Utility Text instance
      *
      * @var \Cake\Utility\Text
      */
-    protected $_engine;
+    protected _engine;
 
     /**
      * Constructor

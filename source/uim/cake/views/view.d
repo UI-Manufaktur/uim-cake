@@ -52,14 +52,14 @@ class View : IEventDispatcher {
      *
      * @var \Cake\View\HelperRegistry
      */
-    protected $_helpers;
+    protected _helpers;
 
     /**
      * ViewBlock instance.
      *
      * @var \Cake\View\ViewBlock
      */
-    protected $Blocks;
+    protected Blocks;
 
     /**
      * The name of the plugin.
@@ -76,7 +76,7 @@ class View : IEventDispatcher {
      *
      * @var array
      */
-    protected $helpers = [];
+    protected helpers = [];
 
 
     /**
@@ -98,14 +98,14 @@ class View : IEventDispatcher {
      *
      * @var bool
      */
-    protected $autoLayout = true;
+    protected autoLayout = true;
 
     /**
      * An array of variables
      *
      * @var array<string, mixed>
      */
-    protected $viewVars = [];
+    protected viewVars = [];
 
     /**
      * File extension. Defaults to ".php".
@@ -123,7 +123,7 @@ class View : IEventDispatcher {
      *
      * @var string|null
      */
-    protected $theme;
+    protected theme;
 
     /**
      * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.
@@ -142,14 +142,14 @@ class View : IEventDispatcher {
      * @var string
      * @see \Cake\View\View::element()
      */
-    protected $elementCache = "default";
+    protected elementCache = "default";
 
     /**
      * List of variables to collect from the associated controller.
      *
      * @var array<string>
      */
-    protected $_passedVars = [
+    protected _passedVars = [
         "viewVars", "autoLayout", "helpers", "template", "layout", "name", "theme",
         "layoutPath", "templatePath", "plugin",
     ];
@@ -166,21 +166,21 @@ class View : IEventDispatcher {
      *
      * @var array<string>
      */
-    protected $_paths = [];
+    protected _paths = [];
 
     /**
      * Holds an array of plugin paths.
      *
      * @var array<string[]>
      */
-    protected $_pathsForPlugin = [];
+    protected _pathsForPlugin = [];
 
     /**
      * The names of views and their parents used with View::extend();
      *
      * @var array<string>
      */
-    protected $_parents = [];
+    protected _parents = [];
 
     /**
      * The currently rendering view file. Used for resolving parent files.
@@ -198,7 +198,7 @@ class View : IEventDispatcher {
      *
      * @var array<string>
      */
-    protected $_stack = [];
+    protected _stack = [];
 
     /**
      * ViewBlock class.
@@ -206,7 +206,7 @@ class View : IEventDispatcher {
      * @var string
      * @psalm-var class-string<\Cake\View\ViewBlock>
      */
-    protected $_viewBlockClass = ViewBlock::class;
+    protected _viewBlockClass = ViewBlock::class;
 
     /**
      * Constant for view file type "template".

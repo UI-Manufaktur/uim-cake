@@ -16,7 +16,7 @@ class LabelWidget : IWidget
      *
      * @var \Cake\View\StringTemplate
      */
-    protected $_templates;
+    protected _templates;
 
     /**
      * The template to use.

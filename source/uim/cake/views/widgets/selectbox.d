@@ -16,7 +16,7 @@ class SelectBoxWidget : BasicWidget
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "name": "",
         "empty": false,
         "escape": true,

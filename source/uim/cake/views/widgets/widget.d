@@ -16,7 +16,7 @@ class YearWidget : BasicWidget
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "name": "",
         "val": null,
         "min": null,
@@ -30,7 +30,7 @@ class YearWidget : BasicWidget
      *
      * @var \Cake\View\Widget\SelectBoxWidget
      */
-    protected $_select;
+    protected _select;
 
     /**
      * Constructor

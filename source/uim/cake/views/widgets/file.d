@@ -16,7 +16,7 @@ class FileWidget : BasicWidget
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "name": "",
         "escape": true,
         "templateVars": [],

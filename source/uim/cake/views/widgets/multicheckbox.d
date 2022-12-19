@@ -18,7 +18,7 @@ class MultiCheckboxWidget : BasicWidget
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "name": "",
         "escape": true,
         "options": [],
@@ -34,7 +34,7 @@ class MultiCheckboxWidget : BasicWidget
      *
      * @var \Cake\View\Widget\LabelWidget
      */
-    protected $_label;
+    protected _label;
 
     /**
      * Render multi-checkbox widget.

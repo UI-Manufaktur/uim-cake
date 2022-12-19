@@ -16,7 +16,7 @@ class TextareaWidget : BasicWidget
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "val": "",
         "name": "",
         "escape": true,

@@ -13,7 +13,7 @@ class ContextFactory
      *
      * @var array<string, array>
      */
-    protected $providers = [];
+    protected providers = [];
 
     /**
      * Constructor.

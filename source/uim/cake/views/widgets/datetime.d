@@ -15,14 +15,14 @@ class DateTimeWidget : BasicWidget {
      *
      * @var \Cake\View\StringTemplate
      */
-    protected $_templates;
+    protected _templates;
 
     /**
      * Data defaults.
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "name": "",
         "val": null,
         "type": "datetime-local",
@@ -36,7 +36,7 @@ class DateTimeWidget : BasicWidget {
      *
      * @var array<string>
      */
-    protected $formatMap = [
+    protected formatMap = [
         "datetime-local": "Y-m-d\TH:i:s",
         "date": "Y-m-d",
         "time": "H:i:s",
@@ -51,7 +51,7 @@ class DateTimeWidget : BasicWidget {
      *
      * @var array<string, mixed>
      */
-    protected $defaultStep = [
+    protected defaultStep = [
         "datetime-local": "1",
         "date": null,
         "time": "1",

@@ -23,7 +23,7 @@ class PaginatorHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ["Url", "Number", "Html", "Form"];
+    protected helpers = ["Url", "Number", "Html", "Form"];
 
     /**
      * Default config for this class
@@ -73,7 +73,7 @@ class PaginatorHelper : Helper
      *
      * @var string|null
      */
-    protected $_defaultModel;
+    protected _defaultModel;
 
     /**
      * Constructor. Overridden to merge passed args with URL options.

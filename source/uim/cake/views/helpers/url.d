@@ -23,7 +23,7 @@ class UrlHelper : Helper
      * @var string
      * @psalm-var class-string<\Cake\Routing\Asset>
      */
-    protected $_assetUrlClassName;
+    protected _assetUrlClassName;
 
     /**
      * Check proper configuration

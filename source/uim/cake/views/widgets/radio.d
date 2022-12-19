@@ -18,7 +18,7 @@ class RadioWidget : BasicWidget
      *
      * @var array<string, mixed>
      */
-    protected $defaults = [
+    protected defaults = [
         "name": "",
         "options": [],
         "disabled": null,
@@ -35,7 +35,7 @@ class RadioWidget : BasicWidget
      *
      * @var \Cake\View\Widget\LabelWidget
      */
-    protected $_label;
+    protected _label;
 
     /**
      * Constructor

@@ -60,7 +60,7 @@ class ArrayContext : IContext
      *
      * @var array
      */
-    protected $_context;
+    protected _context;
 
     /**
      * Constructor.

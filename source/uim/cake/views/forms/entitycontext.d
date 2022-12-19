@@ -31,7 +31,7 @@ class EntityContext : IContext {
      *
      * @var array
      */
-    protected $_context;
+    protected _context;
 
     /**
      * The name of the top level entity/table object.
@@ -44,21 +44,21 @@ class EntityContext : IContext {
      *
      * @var bool
      */
-    protected $_isCollection = false;
+    protected _isCollection = false;
 
     /**
      * A dictionary of tables
      *
      * @var array<\Cake\ORM\Table>
      */
-    protected $_tables = [];
+    protected _tables = [];
 
     /**
      * Dictionary of validators.
      *
      * @var array<\Cake\Validation\Validator>
      */
-    protected $_validator = [];
+    protected _validator = [];
 
     /**
      * Constructor.
