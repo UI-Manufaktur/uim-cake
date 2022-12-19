@@ -20,7 +20,7 @@ class ConsoleInputArgument {
     /**
      * Help string
      */
-    protected string $_help;
+    protected string _help;
 
     // Is this option required?
     protected bool $_required;
@@ -32,7 +32,7 @@ class ConsoleInputArgument {
      * Make a new Input Argument
      *
      * @param array<string, mixed>|string myName The long name of the option, or an array with all the properties.
-     * @param string $help The help text for this option
+     * @param string help The help text for this option
      * @param bool $required Whether this argument is required. Missing required args will trigger exceptions
      * @param array<string> $choices Valid choices for this option.
      */

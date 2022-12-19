@@ -34,7 +34,7 @@ class SortIterator : Collection {
      * per element.
      *
      * @param iterable myItems The values to sort
-     * @param callable|string $callback A function used to return the actual value to
+     * @param callable|string callback A function used to return the actual value to
      * be compared. It can also be a string representing the path to use to fetch a
      * column or property in each element
      * @param int $dir either SORT_DESC or SORT_ASC

@@ -84,12 +84,12 @@ class CommandScanner
      * should be within them.
      *
      * @param string myPath The directory to read.
-     * @param string $module The module the shells live in.
-     * @param string $prefix The prefix to apply to commands for their full name.
+     * @param string module The module the shells live in.
+     * @param string prefix The prefix to apply to commands for their full name.
      * @param $hide A list of command names to hide as they are internal commands.
      * @return array The list of shell info arrays based on scanning the filesystem and inflection.
      */
-    protected array scanDir(string myPath, string $module, string $prefix, string[] $hide) {
+    protected array scanDir(string myPath, string module, string prefix, string[] $hide) {
         if (!is_dir(myPath)) {
             return [];
         }

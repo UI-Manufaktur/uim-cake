@@ -185,9 +185,9 @@ trait PluginAssetsTrait
     /**
      * Create directory
      *
-     * @param string $dir Directory name
+     * @param string dir Directory name
      */
-    protected bool _createDirectory(string $dir) {
+    protected bool _createDirectory(string dir) {
         $old = umask(0);
         // phpcs:disable
         myResult = @mkdir($dir, 0755, true);
@@ -209,9 +209,9 @@ trait PluginAssetsTrait
      * Create symlink
      *
      * @param string myTarget Target directory
-     * @param string $link Link name
+     * @param string link Link name
      */
-    protected bool _createSymlink(string myTarget, string $link) {
+    protected bool _createSymlink(string myTarget, string link) {
         // phpcs:disable
         myResult = @symlink(myTarget, $link);
         // phpcs:enable
@@ -228,10 +228,10 @@ trait PluginAssetsTrait
     /**
      * Copy directory
      *
-     * @param string $source Source directory
+     * @param string source Source directory
      * @param string myDestinationination Destination directory
      */
-    protected bool _copyDirectory(string $source, string myDestinationination) {
+    protected bool _copyDirectory(string source, string myDestinationination) {
         $fs = new Filesystem();
         if ($fs.copyDir($source, myDestinationination)) {
             this.io.out("Copied assets to directory " . myDestinationination);

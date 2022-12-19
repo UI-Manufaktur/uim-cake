@@ -132,9 +132,9 @@ class ConsoleOutput {
      * Checks for a pretty console environment. Ansicon and ConEmu allows
      *  pretty consoles on Windows, and is supported.
      *
-     * @param string $stream The identifier of the stream to write output to.
+     * @param string stream The identifier of the stream to write output to.
      */
-    this(string $stream = "php://stdout") {
+    this(string stream = "php://stdout") {
         _output = fopen($stream, "wb");
 
         if (
@@ -176,10 +176,10 @@ class ConsoleOutput {
     /**
      * Apply styling to text.
      *
-     * @param string $text Text with styling tags.
+     * @param string text Text with styling tags.
      * @return String with color codes added.
      */
-    string styleText(string $text) {
+    string styleText(string text) {
         if (_outputAs == static::RAW) {
             return $text;
         }
@@ -237,10 +237,10 @@ class ConsoleOutput {
     /**
      * Gets the current styles offered
      *
-     * @param string $style The style to get.
+     * @param string style The style to get.
      * @return array The style or empty array.
      */
-    auto getStyle(string $style) {
+    auto getStyle(string style) {
         return static::$_styles[$style] ?? [];
     }
 
@@ -259,10 +259,10 @@ class ConsoleOutput {
      * this.output.setStyle("annoy", []);
      * ```
      *
-     * @param string $style The style to set.
+     * @param string style The style to set.
      * @param array $definition The array definition of the style to change or create..
      */
-    void setStyle(string $style, array $definition) {
+    void setStyle(string style, array $definition) {
         if (!$definition) {
             unset(static::$_styles[$style]);
 

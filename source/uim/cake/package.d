@@ -68,7 +68,7 @@ if (!function_exists("stackTrace")) {
         myOptions += ["start": 0];
         myOptions["start"]++;
 
-        /** @var string $trace */
+        /** @var string trace */
         $trace = Debugger::trace(myOptions);
         echo $trace;
     }

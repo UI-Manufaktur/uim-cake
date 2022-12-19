@@ -75,11 +75,11 @@ class ShellDispatcher
      * this.alias("alias");
      * ```
      *
-     * @param string $short The new short name for the shell.
+     * @param string short The new short name for the shell.
      * @param string|null $original The original full name for the shell.
      * @return string|null The aliased class name, or null if the alias does not exist
      */
-    static string alias(string $short, Nullable!string $original = null) {
+    static string alias(string short, Nullable!string original = null) {
         $short = Inflector::camelize($short);
         if ($original) {
             static::$_aliases[$short] = $original;
@@ -338,10 +338,10 @@ class ShellDispatcher
      * Create the given shell name, and set the plugin property
      *
      * @param string myClassName The class name to instantiate
-     * @param string $shortName The plugin-prefixed shell name
+     * @param string shortName The plugin-prefixed shell name
      * @return \Cake\Console\Shell A shell instance.
      */
-    protected Shell _createShell(string myClassName, string $shortName) {
+    protected Shell _createShell(string myClassName, string shortName) {
         [myPlugin] = pluginSplit($shortName);
         /** @var \Cake\Console\Shell $instance */
         $instance = new myClassName();

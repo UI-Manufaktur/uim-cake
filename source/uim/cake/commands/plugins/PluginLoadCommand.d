@@ -65,10 +65,10 @@ class PluginLoadCommand : Command {
     /**
      * Modify the application class
      *
-     * @param string $app The Application file to modify.
+     * @param string app The Application file to modify.
      * @param string myPlugin The plugin name to add.
      */
-    protected void modifyApplication(string $app, string myPlugin) {
+    protected void modifyApplication(string app, string myPlugin) {
         myContentss = file_get_contents($app);
 
         // Find start of bootstrap

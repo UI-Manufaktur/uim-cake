@@ -95,7 +95,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
     /**
      * Unserializes the passed string and rebuilds the ZipIterator instance
      *
-     * @param string $iterators The serialized iterators
+     * @param string iterators The serialized iterators
      */
     void unserialize($iterators) {
         super.this(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);

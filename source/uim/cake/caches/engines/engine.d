@@ -45,7 +45,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Contains the compiled string with all group
      * prefixes to be prepended to every key in this cache engine
      */
-    protected string $_groupPrefix = "";
+    protected string _groupPrefix = "";
 
     /**
      * Initialize the cache engine
@@ -86,10 +86,10 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Ensure the validity of the argument type and cache keys.
      *
      * @param iterable $iterable The iterable to check.
-     * @param string $check Whether to check keys or values.
+     * @param string check Whether to check keys or values.
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    protected void ensureValidType($iterable, string $check = self::CHECK_VALUE) {
+    protected void ensureValidType($iterable, string check = self::CHECK_VALUE) {
         if (!is_iterable($iterable)) {
             throw new InvalidArgumentException(sprintf(
                 "A cache %s must be either an array or a Traversable.",

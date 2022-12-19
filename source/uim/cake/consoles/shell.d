@@ -131,7 +131,7 @@ class Shell {
     /**
      * The root command name used when generating help output.
      */
-    protected string $rootName = "cake";
+    protected string rootName = "cake";
 
     /**
      * Constructs this Shell instance.
@@ -261,11 +261,11 @@ class Shell {
     /**
      * Check to see if this shell has a task with the provided name.
      *
-     * @param string $task The task name to check.
+     * @param string task The task name to check.
      * @return bool Success
      * @link https://book.UIM.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasTask(string $task) {
+    bool hasTask(string task) {
         return isset(_taskMap[Inflector::camelize($task)]);
     }
 
@@ -487,7 +487,7 @@ class Shell {
      * @param string|null $command The command to get help for.
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    protected auto _displayHelp(Nullable!string $command = null) {
+    protected auto _displayHelp(Nullable!string command = null) {
         $format = "text";
         if (!empty(this.args[0]) && this.args[0] == "xml") {
             $format = "xml";
@@ -552,13 +552,13 @@ class Shell {
     /**
      * Prompts the user for input, and returns it.
      *
-     * @param string $prompt Prompt text.
+     * @param string prompt Prompt text.
      * @param array<string>|string|null myOptions Array or string of options.
      * @param string|null $default Default input value.
      * @return string|null Either the default value, or the user-provided input.
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::in
      */
-    Nullable!string in(string $prompt, myOptions = null, Nullable!string $default = null) {
+    Nullable!string in(string prompt, myOptions = null, Nullable!string default = null) {
         if (!this.interactive) {
             return $default;
         }
@@ -579,13 +579,13 @@ class Shell {
      * - `wordWrap` Only wrap on words breaks (spaces) Defaults to true.
      * - `indent` Indent the text with the string provided. Defaults to null.
      *
-     * @param string $text Text the text to format.
+     * @param string text Text the text to format.
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return Wrapped / indented text
      * @see \Cake\Utility\Text::wrap()
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::wrapText
      */
-    string wrapText(string $text, myOptions = []) {
+    string wrapText(string text, myOptions = []) {
         return Text::wrap($text, myOptions);
     }
 

@@ -707,14 +707,14 @@ interface ICollection : Iterator, JsonSerializable
      * Returns a new collection where the values are nested in a tree-like structure
      * based on an id property path and a parent id property path.
      *
-     * @param callable|string $idPath the column name path to use for determining
+     * @param callable|string idPath the column name path to use for determining
      * whether an element is parent of another
-     * @param callable|string $parentPath the column name path to use for determining
+     * @param callable|string parentPath the column name path to use for determining
      * whether an element is child of another
-     * @param string $nestingKey The key name under which children are nested
+     * @param string nestingKey The key name under which children are nested
      * @return self
      */
-    ICollection nest($idPath, $parentPath, string $nestingKey = "children");
+    ICollection nest($idPath, $parentPath, string nestingKey = "children");
 
     /**
      * Returns a new collection containing each of the elements found in `myValues` as
@@ -871,7 +871,7 @@ interface ICollection : Iterator, JsonSerializable
      * ```
      *
      * @param string|int $order The order in which to return the elements
-     * @param callable|string $nestingKey The key name under which children are nested
+     * @param callable|string nestingKey The key name under which children are nested
      * or a callable function that will return the children list
      * @return self
      */

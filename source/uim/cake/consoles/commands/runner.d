@@ -15,7 +15,7 @@ class CommandRunner : IEventDispatcher {
     protected ICommandFactory _factory;
 
     // The root command name. Defaults to `cake`.
-    protected string $root;
+    protected string root;
 
     /**
      * Alias mappings.
@@ -26,12 +26,12 @@ class CommandRunner : IEventDispatcher {
      * Constructor
      *
      * @param \Cake\Core\IConsoleApplication _app The application to run CLI commands for.
-     * @param string $root The root command name to be removed from argv.
+     * @param string root The root command name to be removed from argv.
      * @param \Cake\Console\ICommandFactory|null _factory Command factory instance.
      */
     this(
         IConsoleApplication _app,
-        string $root = "cake",
+        string root = "cake",
         ?ICommandFactory _factory = null
     ) {
         this.app = _app;

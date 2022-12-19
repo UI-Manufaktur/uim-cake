@@ -34,7 +34,7 @@ class I18nExtractCommand : Command {
     /**
      * Current file being processed
      */
-    protected string $_file = "";
+    protected string _file = "";
 
     /**
      * Contains all content waiting to be written
@@ -60,7 +60,7 @@ class I18nExtractCommand : Command {
     /**
      * Destination path
      */
-    protected string $_output = "";
+    protected string _output = "";
 
     /**
      * An array of directories to exclude.
@@ -247,11 +247,11 @@ class I18nExtractCommand : Command {
      *
      * Takes care of duplicate translations
      *
-     * @param string $domain The domain
-     * @param string $msgid The message string
+     * @param string domain The domain
+     * @param string msgid The message string
      * @param array $details Context and plural form if any, file and line references
      */
-    protected void _addTranslation(string $domain, string $msgid, array $details = []) {
+    protected void _addTranslation(string domain, string msgid, array $details = []) {
         $context = $details["msgctxt"] ?? "";
 
         if (empty(_translations[$domain][$msgid][$context])) {
@@ -419,10 +419,10 @@ class I18nExtractCommand : Command {
      * Parse tokens
      *
      * @param \Cake\Console\ConsoleIo $io The io instance
-     * @param string $functionName Function name that indicates translatable string (e.g: "__")
+     * @param string functionName Function name that indicates translatable string (e.g: "__")
      * @param array $map Array containing what variables it will find (e.g: domain, singular, plural)
      */
-    protected void _parse(ConsoleIo $io, string $functionName, array $map) {
+    protected void _parse(ConsoleIo $io, string functionName, array $map) {
         myCount = 0;
         $tokenCount = count(_tokens);
 
@@ -487,7 +487,7 @@ class I18nExtractCommand : Command {
         /** @psalm-suppress UndefinedConstant */
         myPaths[] = realpath(APP) . DIRECTORY_SEPARATOR;
 
-        usort(myPaths, function (string $a, string $b) {
+        usort(myPaths, function (string a, string b) {
             return strlen($a) - strlen($b);
         });
 
@@ -540,11 +540,11 @@ class I18nExtractCommand : Command {
     /**
      * Prepare a file to be stored
      *
-     * @param string $domain The domain
-     * @param string $header The header content.
-     * @param string $sentence The sentence to store.
+     * @param string domain The domain
+     * @param string header The header content.
+     * @param string sentence The sentence to store.
      */
-    protected void _store(string $domain, string $header, string $sentence) {
+    protected void _store(string domain, string header, string sentence) {
         _storage[$domain] = _storage[$domain] ?? [];
 
         if (!isset(_storage[$domain][$sentence])) {
@@ -616,7 +616,7 @@ class I18nExtractCommand : Command {
      * @param $domain Domain
      * @return Translation template header
      */
-    protected string _writeHeader(string $domain) {
+    protected string _writeHeader(string domain) {
         $projectIdVersion = $domain == "cake" ? "UIM " . Configure::version() : "PROJECT VERSION";
 
         $output = "# LANGUAGE translation of UIM Application\n";
@@ -643,12 +643,12 @@ class I18nExtractCommand : Command {
      *
      * Compares the sha1 hashes of the old and new file without header.
      *
-     * @param string $oldFile The existing file.
+     * @param string oldFile The existing file.
      * @param int $headerLength The length of the file header in bytes.
-     * @param string $newFileContent The content of the new file.
+     * @param string newFileContent The content of the new file.
      * @return bool Whether the old and new file are unchanged.
      */
-    protected bool checkUnchanged(string $oldFile, int $headerLength, string $newFileContent) {
+    protected bool checkUnchanged(string oldFile, int $headerLength, string newFileContent) {
         if (!file_exists($oldFile)) {
             return false;
         }
@@ -704,10 +704,10 @@ class I18nExtractCommand : Command {
     /**
      * Format a string to be added as a translatable string
      *
-     * @param string $string String to format
+     * @param string string String to format
      * @return  Formatted string
      */
-    protected string _formatString(string $string) {
+    protected string _formatString(string string) {
         $quote = substr($string, 0, 1);
         $string = substr($string, 1, -1);
         if ($quote == """) {
@@ -726,10 +726,10 @@ class I18nExtractCommand : Command {
      * @param \Cake\Console\ConsoleIo $io The io instance.
      * @param string myfile File where invalid marker resides
      * @param int $line Line number
-     * @param string $marker Marker found
+     * @param string marker Marker found
      * @param int myCount Count
      */
-    protected void _markerError($io, string myfile, int $line, string $marker, int myCount) {
+    protected void _markerError($io, string myfile, int $line, string marker, int myCount) {
         if (indexOf(_file, CAKE_CORE_INCLUDE_PATH) == false) {
             _countMarkerError++;
         }

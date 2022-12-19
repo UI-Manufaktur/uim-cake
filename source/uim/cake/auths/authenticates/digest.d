@@ -146,10 +146,10 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Parse the digest authentication headers and split them up.
      *
-     * @param string $digest The raw digest authentication headers.
+     * @param string digest The raw digest authentication headers.
      * @return array|null An array of digest authentication headers
      */
-    ?array parseAuthData(string $digest) {
+    ?array parseAuthData(string digest) {
         if (substr($digest, 0, 7) == "Digest ") {
             $digest = substr($digest, 7);
         }
@@ -174,10 +174,10 @@ class DigestAuthenticate : BasicAuthenticate
      *
      * @param array<string, mixed> $digest Digest information containing data from DigestAuthenticate::parseAuthData().
      * @param string myPassword The digest hash password generated with DigestAuthenticate::password()
-     * @param string $method Request method
+     * @param string method Request method
      * @return Response hash
      */
-    string generateResponseHash(array $digest, string myPassword, string $method) {
+    string generateResponseHash(array $digest, string myPassword, string method) {
         return md5(
             myPassword .
             ":" . $digest["nonce"] . ":" . $digest["nc"] . ":" . $digest["cnonce"] . ":" . $digest["qop"] . ":" .
@@ -190,10 +190,10 @@ class DigestAuthenticate : BasicAuthenticate
      *
      * @param string myUsername The username to use in the digest hash.
      * @param string myPassword The unhashed password to make a digest hash for.
-     * @param string $realm The realm the password is for.
+     * @param string realm The realm the password is for.
      * @return the hashed password that can later be used with Digest authentication.
      */
-    static string password(string myUsername, string myPassword, string $realm) {
+    static string password(string myUsername, string myPassword, string realm) {
         return md5(myUsername . ":" . $realm . ":" . myPassword);
     }
 
@@ -248,9 +248,9 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Check the nonce to ensure it is valid and not expired.
      *
-     * @param string $nonce The nonce value to check.
+     * @param string nonce The nonce value to check.
      */
-    protected bool validNonce(string $nonce) {
+    protected bool validNonce(string nonce) {
         myValue = base64_decode($nonce);
         if (myValue == false) {
             return false;

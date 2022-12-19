@@ -227,10 +227,10 @@ class MemcachedEngine : CacheEngine
      * Parses the server address into the host/port. Handles both IPv6 and IPv4
      * addresses and Unix sockets
      *
-     * @param string $server The server address string.
+     * @param string server The server address string.
      * @return array Array containing host, port
      */
-    array parseServerString(string $server) {
+    array parseServerString(string server) {
         $socketTransport = "unix://";
         if (indexOf($server, $socketTransport) == 0) {
             return [substr($server, strlen($socketTransport)), 0];

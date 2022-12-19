@@ -61,14 +61,14 @@ class ConsoleOptionParser {
      *
      * @see \Cake\Console\ConsoleOptionParser::description()
      */
-    protected string $_description = "";
+    protected string _description = "";
 
     /**
      * Epilog text - displays after options when help is generated
      *
      * @see \Cake\Console\ConsoleOptionParser::epilog()
      */
-    protected string $_epilog = "";
+    protected string _epilog = "";
 
     /**
      * Option definitions.
@@ -109,7 +109,7 @@ class ConsoleOptionParser {
     protected $_subcommandSort = true;
 
     // Command name.
-    protected string $_commandName = "";
+    protected string _commandName = "";
 
     /**
      * Array of args (argv).
@@ -129,11 +129,11 @@ class ConsoleOptionParser {
     /**
      * Construct an OptionParser so you can define its behavior
      *
-     * @param string $command The command name this parser is for. The command name is used for generating help.
+     * @param string command The command name this parser is for. The command name is used for generating help.
      * @param bool $defaultOptions Whether you want the verbose and quiet options set. Setting
      *  this to false will prevent the addition of `--verbose` & `--quiet` options.
      */
-    this(string $command = "", bool $defaultOptions = true) {
+    this(string command = "", bool $defaultOptions = true) {
         this.setCommand($command);
 
         this.addOption("help", [
@@ -158,11 +158,11 @@ class ConsoleOptionParser {
     /**
      * Static factory method for creating new OptionParsers so you can chain methods off of them.
      *
-     * @param string $command The command name this parser is for. The command name is used for generating help.
+     * @param string command The command name this parser is for. The command name is used for generating help.
      * @param bool $defaultOptions Whether you want the verbose and quiet options set.
      * @return static
      */
-    static function create(string $command, bool $defaultOptions = true) {
+    static function create(string command, bool $defaultOptions = true) {
         return new static($command, $defaultOptions);
     }
 
@@ -260,10 +260,10 @@ class ConsoleOptionParser {
     /**
      * Sets the command name for shell/task.
      *
-     * @param string $text The text to set.
+     * @param string text The text to set.
      * @return this
      */
-    auto setCommand(string $text) {
+    auto setCommand(string text) {
         _commandName = Inflector::underscore($text);
 
         return this;
@@ -277,7 +277,7 @@ class ConsoleOptionParser {
     /**
      * Sets the description text for shell/task.
      *
-     * @param array<string>|string $text The text to set. If an array the
+     * @param array<string>|string text The text to set. If an array the
      *   text will be imploded with "\n".
      * @return this
      */
@@ -299,7 +299,7 @@ class ConsoleOptionParser {
      * Sets an epilog to the parser. The epilog is added to the end of
      * the options and arguments listing when help is generated.
      *
-     * @param array<string>|string $text The text to set. If an array the text will
+     * @param array<string>|string text The text to set. If an array the text will
      *   be imploded with "\n".
      * @return this
      */
@@ -673,11 +673,11 @@ class ConsoleOptionParser {
      *
      * @param string|null $subcommand If present and a valid subcommand that has a linked parser.
      *    That subcommands help will be shown instead.
-     * @param string $format Define the output format, can be text or XML
+     * @param string format Define the output format, can be text or XML
      * @param int $width The width to format user content to. Defaults to 72
      * @return  Generated help.
      */
-    string help(Nullable!string $subcommand = null, string $format = "text", int $width = 72) {
+    string help(Nullable!string subcommand = null, string format = "text", int $width = 72) {
         if ($subcommand == null) {
             $formatter = new HelpFormatter(this);
             $formatter.setAlias(this.rootName);
@@ -744,11 +744,11 @@ class ConsoleOptionParser {
      * Parse the value for a long option out of _tokens. Will handle
      * options with an `=` in them.
      *
-     * @param string $option The option to parse.
+     * @param string option The option to parse.
      * @param array<string, mixed> myParams The params to append the parsed value into
      * @return array Params with $option added in.
      */
-    protected array _parseLongOption(string $option, array myParams) {
+    protected array _parseLongOption(string option, array myParams) {
         myName = substr($option, 2);
         if (indexOf(myName, "=") !== false) {
             [myName, myValue] = explode("=", myName, 2);
@@ -763,12 +763,12 @@ class ConsoleOptionParser {
      * If the $option is a combination of multiple shortcuts like -otf
      * they will be shifted onto the token stack and parsed individually.
      *
-     * @param string $option The option to parse.
+     * @param string option The option to parse.
      * @param array<string, mixed> myParams The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
      * @throws \Cake\Console\Exception\ConsoleException When unknown short options are encountered.
      */
-    protected array _parseShortOption(string $option, array myParams) {
+    protected array _parseShortOption(string option, array myParams) {
         myKey = substr($option, 1);
         if (strlen(myKey) > 1) {
             $flags = str_split(myKey);
@@ -852,12 +852,12 @@ class ConsoleOptionParser {
      * Parse an argument, and ensure that the argument doesn"t exceed the number of arguments
      * and that the argument is a valid choice.
      *
-     * @param string $argument The argument to append
+     * @param string argument The argument to append
      * @param array $args The array of parsed args to append to.
      * @return array<string> Args
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    protected string[] _parseArg(string $argument, array $args) {
+    protected string[] _parseArg(string argument, array $args) {
         if (empty(_args)) {
             $args[] = $argument;
 

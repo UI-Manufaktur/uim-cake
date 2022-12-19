@@ -66,7 +66,7 @@ class MissingOptionException : ConsoleException
     /**
      * Find the best match for requested in suggestions
      *
-     * @param string $needle Unknown option name trying to be used.
+     * @param string needle Unknown option name trying to be used.
      * @param $haystack Suggestions to look through.
      * @return string The best match
      */

@@ -16,7 +16,7 @@ class NestIterator : Collection : RecursiveIterator {
      * Constructor
      *
      * @param iterable myItems Collection items.
-     * @param callable|string $nestKey the property that contains the nested items
+     * @param callable|string nestKey the property that contains the nested items
      * If a callable is passed, it should return the childrens for the passed item
      */
     this(iterable myItems, $nestKey) {

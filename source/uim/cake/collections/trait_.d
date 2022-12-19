@@ -482,7 +482,7 @@ trait CollectionTrait
     }
 
 
-    ICollection nest($idPath, $parentPath, string $nestingKey = "children") {
+    ICollection nest($idPath, $parentPath, string nestingKey = "children") {
         $parents = [];
         $idPath = _propertyExtractor($idPath);
         $parentPath = _propertyExtractor($parentPath);

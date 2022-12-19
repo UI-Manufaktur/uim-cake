@@ -36,7 +36,7 @@ class CommandCollection : IteratorAggregate, Countable
      * Add a command to the collection
      *
      * @param string myName The name of the command you want to map.
-     * @param ICommand|\Cake\Console\Shell|string $command The command to map.
+     * @param ICommand|\Cake\Console\Shell|string command The command to map.
      *   Can be a FQCN, Shell instance or ICommand instance.
      * @return this
      * @throws \InvalidArgumentException

@@ -344,11 +344,11 @@ class ConsoleIo {
     /**
      * Prompts the user for input, and returns it.
      *
-     * @param string $prompt Prompt text.
+     * @param string prompt Prompt text.
      * @param string|null $default Default input value.
      * @return Either the default value, or the user-provided input.
      */
-    string ask(string $prompt, Nullable!string $default = null) {
+    string ask(string prompt, Nullable!string default = null) {
         return _getInput($prompt, null, $default);
     }
 
@@ -375,34 +375,34 @@ class ConsoleIo {
     /**
      * Get defined style.
      *
-     * @param string $style The style to get.
+     * @param string style The style to get.
      * @return array
      * @see \Cake\Console\ConsoleOutput::getStyle()
      */
-    array getStyle(string $style) {
+    array getStyle(string style) {
       return _out.getStyle($style);
     }
 
     /**
      * Adds a new output style.
      *
-     * @param string $style The style to set.
+     * @param string style The style to set.
      * @param array $definition The array definition of the style to change or create.
      * @see \Cake\Console\ConsoleOutput::setStyle()
      */
-    void setStyle(string $style, array $definition) {
+    void setStyle(string style, array $definition) {
         _out.setStyle($style, $definition);
     }
 
     /**
      * Prompts the user for input based on a list of options, and returns it.
      *
-     * @param string $prompt Prompt text.
+     * @param string prompt Prompt text.
      * @param array<string>|string myOptions Array or string of options.
      * @param string|null $default Default input value.
      * @return Either the default value, or the user-provided input.
      */
-    string askChoice(string $prompt, myOptions, Nullable!string $default = null) {
+    string askChoice(string prompt, myOptions, Nullable!string default = null) {
         if (is_string(myOptions)) {
             if (indexOf(myOptions, ",")) {
                 myOptions = explode(",", myOptions);
@@ -430,12 +430,12 @@ class ConsoleIo {
     /**
      * Prompts the user for input, and returns it.
      *
-     * @param string $prompt Prompt text.
+     * @param string prompt Prompt text.
      * @param string|null myOptions String of options. Pass null to omit.
      * @param string|null $default Default input value. Pass null to omit.
      * @return Either the default value, or the user-provided input.
      */
-    protected string _getInput(string $prompt, Nullable!string myOptions, Nullable!string $default) {
+    protected string _getInput(string prompt, Nullable!string myOptions, Nullable!string default) {
         if (!this.interactive) {
             return (string)$default;
         }

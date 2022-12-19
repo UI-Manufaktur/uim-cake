@@ -64,7 +64,7 @@ v    protected int _mode;
      * the display value
      * @param callable|string|null myKeyPath The property to use as iteration key or a
      * callable returning the key value.
-     * @param string $spacer The string to use for prefixing the values according to
+     * @param string spacer The string to use for prefixing the values according to
      * their depth in the tree
      * @return \Cake\collection.iIterator\TreePrinter
      */

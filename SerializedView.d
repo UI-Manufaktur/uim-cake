@@ -11,7 +11,7 @@ import uim.cake;
 // Parent class for view classes generating serialized outputs like JsonView and XmlView.
 abstract class SerializedView : View {
     // Response type.
-    protected string $_responseType;
+    protected string _responseType;
 
     /**
      * Default config options.

@@ -46,8 +46,8 @@ class ConsoleInputOption {
      * Make a new Input Option
      *
      * @param string myName The long name of the option, or an array with all the properties.
-     * @param string $short The short alias for this option
-     * @param string $help The help text for this option
+     * @param string short The short alias for this option
+     * @param string help The help text for this option
      * @param bool $isBoolean Whether this option is a boolean option. Boolean options don"t consume extra tokens
      * @param string|bool|null $default The default value for this option.
      * @param array<string> $choices Valid choices for this option.
@@ -57,8 +57,8 @@ class ConsoleInputOption {
      */
     this(
       string myName,
-      string $short = "",
-      string $help = "",
+      string short = "",
+      string help = "",
       bool $isBoolean = false,
       $default = null,
       array $choices = [],

@@ -16,12 +16,12 @@ import uim.cake;
  */
 class ConsoleInputSubCommand {
     // Name of the subcommand
-    protected string $_name = "";
+    protected string _name = "";
 
     /**
      * Help string for the subcommand
      */
-    protected string $_help = "";
+    protected string _help = "";
 
     /**
      * The ConsoleOptionParser for this subcommand.
@@ -34,7 +34,7 @@ class ConsoleInputSubCommand {
      * Make a new Subcommand
      *
      * @param array<string, mixed>|string myName The long name of the subcommand, or an array with all the properties.
-     * @param string $help The help text for this option.
+     * @param string help The help text for this option.
      * @param \Cake\Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */

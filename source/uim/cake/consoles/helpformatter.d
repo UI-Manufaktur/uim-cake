@@ -37,7 +37,7 @@ class HelpFormatter {
     /**
      * Alias to display in the output.
      */
-    protected string $_alias = "cake";
+    protected string _alias = "cake";
 
     /**
      * Build the help formatter for an OptionParser

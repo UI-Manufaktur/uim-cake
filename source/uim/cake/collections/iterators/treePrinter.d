@@ -35,7 +35,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
     /**
      * The string to use for prefixing the values according to their depth in the tree.
      */
-    protected string $_spacer;
+    protected string _spacer;
 
     /**
      * Constructor
@@ -45,7 +45,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      * the display value.
      * @param callable|string myKeyPath The property to use as iteration key or a
      * callable returning the key value.
-     * @param string $spacer The string to use for prefixing the values according to
+     * @param string spacer The string to use for prefixing the values according to
      * their depth in the tree.
      * @param int myMode Iterator mode.
      */
@@ -53,7 +53,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
         RecursiveIterator myItems,
         myValuePath,
         myKeyPath,
-        string $spacer,
+        string spacer,
         int myMode = RecursiveIteratorIterator::SELF_FIRST
     ) {
         super.this(myItems, myMode);
