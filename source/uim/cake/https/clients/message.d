@@ -95,18 +95,13 @@ class Message
 
     /**
      * The array of cookies in the response.
-     *
-     * @var array
      */
-    protected $_cookies = [];
+    protected array $_cookies = [];
 
     /**
      * Get all cookies
-     *
-     * @return array
      */
-    function cookies(): array
-    {
+    array cookies() {
         return this._cookies;
     }
 }

@@ -1232,7 +1232,7 @@ class Response : IResponse
      *
      * @return array
      */
-    auto getCookies(): array
+    array getCookies()
     {
         $out = [];
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
@@ -1483,17 +1483,16 @@ class Response : IResponse
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
-    {
-        return [
-            "status":this._status,
-            "contentType":this.getType(),
-            "headers":this.headers,
-            "file":this._file,
-            "fileRange":this._fileRange,
-            "cookies":this._cookies,
-            "cacheDirectives":this._cacheDirectives,
-            "body":(string)this.getBody(),
-        ];
+    array __debugInfo() {
+      return [
+        "status":this._status,
+        "contentType":this.getType(),
+        "headers":this.headers,
+        "file":this._file,
+        "fileRange":this._fileRange,
+        "cookies":this._cookies,
+        "cacheDirectives":this._cacheDirectives,
+        "body":(string)this.getBody(),
+      ];
     }
 }

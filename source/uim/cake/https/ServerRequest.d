@@ -283,8 +283,7 @@ class ServerRequest : IServerRequest
      * @param array<string, mixed> myConfig Config array.
      * @return array<string, mixed> Update config.
      */
-    protected auto processUrlOption(array myConfig): array
-    {
+    protected array processUrlOption(array myConfig) {
         if (myConfig["url"][0] !== "/") {
             myConfig["url"] = "/" . myConfig["url"];
         }
@@ -307,12 +306,12 @@ class ServerRequest : IServerRequest
      * @return string|null
      */
     string contentType() {
-        myType = this.getEnv("CONTENT_TYPE");
-        if (myType) {
-            return myType;
-        }
+      myType = this.getEnv("CONTENT_TYPE");
+      if (myType) {
+          return myType;
+      }
 
-        return this.getEnv("HTTP_CONTENT_TYPE");
+      return this.getEnv("HTTP_CONTENT_TYPE");
     }
 
     /**
@@ -322,7 +321,7 @@ class ServerRequest : IServerRequest
      */
     auto getSession(): Session
     {
-        return this.session;
+      return this.session;
     }
 
     /**
@@ -725,7 +724,7 @@ class ServerRequest : IServerRequest
      * @return array<string[]> An associative array of headers and their values.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    auto getHeaders(): array
+    array getHeaders()
     {
         $headers = [];
         foreach (this._environment as myKey: myValue) {
@@ -770,7 +769,7 @@ class ServerRequest : IServerRequest
      *   If the header doesn"t exist, an empty array will be returned.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string[] getHeader(myName): array
+    string[] getHeader(myName)
     {
         myName = this.normalizeHeaderName(myName);
         if (isset(this._environment[myName])) {
@@ -899,7 +898,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    auto getServerParams(): array
+    array getServerParams()
     {
         return this._environment;
     }
@@ -911,7 +910,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    auto getQueryParams(): array
+    array getQueryParams()
     {
         return this.query;
     }
@@ -997,7 +996,7 @@ class ServerRequest : IServerRequest
      *   While `example.co.uk` contains 2.
      * @return An array of subdomains.
      */
-    string[] subdomains(int $tldLength = 1): array
+    string[] subdomains(int $tldLength = 1)
     {
         $host = this.host();
         if (empty($host)) {
@@ -1054,7 +1053,7 @@ class ServerRequest : IServerRequest
      *
      * @return array An array of `prefValue: [content/types]`
      */
-    function parseAccept(): array
+    array parseAccept()
     {
         return this._parseAcceptWithQualifier(this.getHeaderLine("Accept"));
     }
@@ -1101,7 +1100,7 @@ class ServerRequest : IServerRequest
      * @param string $header Header to parse.
      * @return array
      */
-    protected auto _parseAcceptWithQualifier(string $header): array
+    protected array _parseAcceptWithQualifier(string $header)
     {
         $accept = [];
         $headers = explode(",", $header);
@@ -1300,7 +1299,7 @@ class ServerRequest : IServerRequest
      *
      * @return array An array of cookie data.
      */
-    auto getCookieParams(): array
+    array getCookieParams()
     {
         return this.cookies;
     }
@@ -1589,7 +1588,7 @@ class ServerRequest : IServerRequest
      *
      * @return array
      */
-    auto getAttributes(): array
+    array getAttributes()
     {
         $emulated = [
             "params":this.params,
@@ -1622,7 +1621,7 @@ class ServerRequest : IServerRequest
      *
      * @return array
      */
-    auto getUploadedFiles(): array
+    array getUploadedFiles()
     {
         return this.uploadedFiles;
     }
