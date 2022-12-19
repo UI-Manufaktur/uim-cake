@@ -559,7 +559,7 @@ class Shell {
      * @return string|null Either the default value, or the user-provided input.
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::in
      */
-    function in(string $prompt, myOptions = null, Nullable!string $default = null): Nullable!string
+    Nullable!string in(string $prompt, myOptions = null, Nullable!string $default = null)
     {
         if (!this.interactive) {
             return $default;

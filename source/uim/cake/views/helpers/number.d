@@ -203,7 +203,7 @@ class NumberHelper : Helper
      * @return string|null Currency
      * @deprecated 3.9.0 Use setDefaultCurrency()/getDefaultCurrency() instead.
      */
-    function defaultCurrency($currency): Nullable!string
+    Nullable!string defaultCurrency($currency)
     {
         deprecationWarning(
             "NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead."

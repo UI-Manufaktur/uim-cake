@@ -213,7 +213,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    auto getPlugin(): Nullable!string
+    Nullable!string getPlugin()
     {
         return this._plugin;
     }
@@ -302,7 +302,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    auto getTheme(): Nullable!string
+    Nullable!string getTheme()
     {
         return this._theme;
     }
@@ -326,7 +326,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    auto getTemplate(): Nullable!string
+    Nullable!string getTemplate()
     {
         return this._template;
     }
@@ -350,7 +350,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    auto getLayout(): Nullable!string
+    Nullable!string getLayout()
     {
         return this._layout;
     }
@@ -423,7 +423,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    auto getName(): Nullable!string
+    Nullable!string getName()
     {
         return this._name;
     }
@@ -449,8 +449,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    auto getClassName(): Nullable!string
-    {
+    Nullable!string getClassName() {
         return this._className;
     }
 

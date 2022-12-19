@@ -103,8 +103,7 @@ class FormContext : IContext
         return false;
     }
 
-
-    auto getRequiredMessage(string myField): Nullable!string
+    Nullable!string getRequiredMessage(string myField)
     {
         $parts = explode(".", myField);
 
@@ -149,7 +148,7 @@ class FormContext : IContext
     }
 
 
-    function type(string myField): Nullable!string
+    Nullable!string type(string myField)
     {
         return this._form.getSchema().fieldType(myField);
     }

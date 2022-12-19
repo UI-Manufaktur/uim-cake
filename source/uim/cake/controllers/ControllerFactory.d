@@ -259,7 +259,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @return string|null
      * @psalm-return class-string<\Cake\Controller\Controller>|null
      */
-    auto getControllerClass(ServerRequest myRequest): Nullable!string
+    Nullable!string getControllerClass(ServerRequest myRequest)
     {
         myPluginPath = "";
         $module = "Controller";

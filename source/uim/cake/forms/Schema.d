@@ -95,7 +95,7 @@ class Schema
      * @return string|null Either the field type or null if the
      *   field does not exist.
      */
-    function fieldType(string myName): Nullable!string
+    Nullable!string fieldType(string myName)
     {
         myField = this.field(myName);
         if (!myField) {

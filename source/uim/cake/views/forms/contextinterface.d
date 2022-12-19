@@ -61,7 +61,7 @@ interface IContext
      * @param string myField A dot separated path to the field name
      * @return string|null
      */
-    auto getRequiredMessage(string myField): Nullable!string;
+    Nullable!string getRequiredMessage(string myField);
 
     /**
      * Get maximum length of a field from model validation.
@@ -85,7 +85,7 @@ interface IContext
      * @return string|null An abstract data type or null.
      * @see \Cake\Database\TypeFactory
      */
-    function type(string myField): Nullable!string;
+    Nullable!string type(string myField);
 
     /**
      * Get an associative array of other attributes for a field name.

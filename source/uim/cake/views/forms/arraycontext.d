@@ -200,7 +200,7 @@ class ArrayContext : IContext
     }
 
 
-    auto getRequiredMessage(string myField): Nullable!string
+    Nullable!string getRequiredMessage(string myField)
     {
         if (!is_array(this._context["required"])) {
             return null;
@@ -253,8 +253,7 @@ class ArrayContext : IContext
      * @return string|null An abstract data type or null.
      * @see \Cake\Database\TypeFactory
      */
-    function type(string myField): Nullable!string
-    {
+    Nullable!string type(string myField) {
         if (!is_array(this._context["schema"])) {
             return null;
         }

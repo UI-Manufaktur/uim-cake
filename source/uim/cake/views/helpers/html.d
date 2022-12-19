@@ -114,7 +114,7 @@ class HtmlHelper : Helper {
      * @return string|null A completed `<link />` element, or null if the element was sent to a block.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-meta-tags
      */
-    function meta(myType, myContents = null, array myOptions = []): Nullable!string
+    Nullable!string meta(myType, myContents = null, array myOptions = [])
     {
         if (!is_array(myType)) {
             myTypes = [
@@ -356,7 +356,7 @@ class HtmlHelper : Helper {
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-css-files
      */
-    function css(myPath, array myOptions = []): Nullable!string
+    Nullable!string css(myPath, array myOptions = [])
     {
         myOptions += [
             "once": true,
@@ -456,7 +456,7 @@ class HtmlHelper : Helper {
      *   or if $once is true and the file has been included before.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-javascript-files
      */
-    function script(myUrl, array myOptions = []): Nullable!string
+    Nullable!string script(myUrl, array myOptions = [])
     {
         $defaults = [
             "block": null,
@@ -515,7 +515,7 @@ class HtmlHelper : Helper {
      * @return string|null String or null depending on the value of `myOptions["block"]`
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    function scriptBlock(string $script, array myOptions = []): Nullable!string
+    Nullable!string scriptBlock(string $script, array myOptions = [])
     {
         myOptions += ["block": null, "nonce": this._View.getRequest().getAttribute("cspScriptNonce")];
 
@@ -561,7 +561,7 @@ class HtmlHelper : Helper {
      * @return string|null Depending on the settings of scriptStart() either a script tag or null
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    function scriptEnd(): Nullable!string
+    Nullable!string scriptEnd()
     {
         $buffer = ob_get_clean();
         myOptions = this._scriptBlockOptions;

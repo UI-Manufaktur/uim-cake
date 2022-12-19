@@ -472,9 +472,7 @@ class EntityContext : IContext {
         return false;
     }
 
-
-    auto getRequiredMessage(string myField): Nullable!string
-    {
+    Nullable!string getRequiredMessage(string myField) {
         $parts = explode(".", myField);
 
         $validator = this._getValidator($parts);
@@ -640,7 +638,7 @@ class EntityContext : IContext {
      * @return string|null An abstract data type or null.
      * @see \Cake\Database\TypeFactory
      */
-    function type(string myField): Nullable!string
+    Nullable!string type(string myField)
     {
         $parts = explode(".", myField);
         myTable = this._getTable($parts);

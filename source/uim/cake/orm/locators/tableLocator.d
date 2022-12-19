@@ -243,7 +243,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param array<string, mixed> myOptions Table options array.
      * @return string|null
      */
-    protected auto _getClassName(string myAlias, array myOptions = []): Nullable!string
+    protected Nullable!string _getClassName(string myAlias, array myOptions = [])
     {
         if (empty(myOptions["className"])) {
             myOptions["className"] = myAlias;

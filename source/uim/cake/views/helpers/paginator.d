@@ -194,7 +194,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    function sortKey(Nullable!string myModel = null, array myOptions = []): Nullable!string
+    Nullable!string sortKey(Nullable!string myModel = null, array myOptions = [])
     {
         if (empty(myOptions)) {
             myOptions = this.params(myModel);
@@ -642,7 +642,7 @@ class PaginatorHelper : Helper
      * @param string|null myModel Model name to set
      * @return string|null Model name or null if the pagination isn"t initialized.
      */
-    function defaultModel(Nullable!string myModel = null): Nullable!string
+    Nullable!string defaultModel(Nullable!string myModel = null)
     {
         if (myModel !== null) {
             this._defaultModel = myModel;
@@ -1125,7 +1125,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Array of options
      * @return string|null Meta links
      */
-    function meta(array myOptions = []): Nullable!string
+    Nullable!string meta(array myOptions = [])
     {
         myOptions += [
                 "model": null,
