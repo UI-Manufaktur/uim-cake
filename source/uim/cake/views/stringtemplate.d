@@ -199,8 +199,7 @@ class StringTemplate {
      * @return string Formatted string
      * @throws \RuntimeException If template not found.
      */
-    string format(string myName, array myData)
-    {
+    string format(string myName, array myData) {
         if (!isset(this._compiled[myName])) {
             throw new RuntimeException("Cannot find template named "myName".");
         }
@@ -248,8 +247,7 @@ class StringTemplate {
      * @param array<string>|null $exclude Array of options to be excluded, the options here will not be part of the return.
      * @return string Composed attributes.
      */
-    string formatAttributes(?array myOptions, ?array $exclude = null)
-    {
+    string formatAttributes(?array myOptions, ?array $exclude = null) {
         $insertBefore = " ";
         myOptions = (array)myOptions + ["escape" => true];
 
@@ -281,8 +279,7 @@ class StringTemplate {
      * @param bool $escape Define if the value must be escaped
      * @return string The composed attribute.
      */
-    protected string _formatAttribute(string myKey, myValue, $escape = true)
-    {
+    protected string _formatAttribute(string myKey, myValue, $escape = true) {
         if (is_array(myValue)) {
             myValue = implode(" ", myValue);
         }

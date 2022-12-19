@@ -58,8 +58,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> myOptions Array of options.
      * @return string Full translated URL with base path.
      */
-    string build(myUrl = null, array myOptions = [])
-    {
+    string build(myUrl = null, array myOptions = []) {
         $defaults = [
             "fullBase": false,
             "escape": true,
@@ -91,8 +90,7 @@ class UrlHelper : Helper
      * @return string Full translated URL with base path.
      * @see \Cake\Routing\Router::pathUrl()
      */
-    string buildFromPath(string myPath, array myParams = [], array myOptions = [])
-    {
+    string buildFromPath(string myPath, array myParams = [], array myOptions = []) {
         return this.build(["_path": myPath] + myParams, myOptions);
     }
 
@@ -113,8 +111,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string image(string myPath, array myOptions = [])
-    {
+    string image(string myPath, array myOptions = []) {
         myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::imageUrl(myPath, myOptions));
@@ -138,8 +135,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string css(string myPath, array myOptions = [])
-    {
+    string css(string myPath, array myOptions = []) {
         myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::cssUrl(myPath, myOptions));
@@ -163,8 +159,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string script(string myPath, array myOptions = [])
-    {
+    string script(string myPath, array myOptions = []) {
         myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::scriptUrl(myPath, myOptions));
@@ -192,8 +187,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> myOptions Options array.
      * @return string Generated URL
      */
-    string assetUrl(string myPath, array myOptions = [])
-    {
+    string assetUrl(string myPath, array myOptions = []) {
         myOptions += ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::url(myPath, myOptions));
@@ -208,8 +202,7 @@ class UrlHelper : Helper
      * @param string|bool $timestamp If set will overrule the value of `Asset.timestamp` in Configure.
      * @return string Path with a timestamp added, or not.
      */
-    string assetTimestamp(string myPath, $timestamp = null)
-    {
+    string assetTimestamp(string myPath, $timestamp = null) {
         return h(this._assetUrlClassName::assetTimestamp(myPath, $timestamp));
     }
 
@@ -219,8 +212,7 @@ class UrlHelper : Helper
      * @param string myfile The file to create a webroot path to.
      * @return string Web accessible path to file.
      */
-    string webroot(string myfile)
-    {
+    string webroot(string myfile) {
         myOptions = ["theme": this._View.getTheme()];
 
         return h(this._assetUrlClassName::webroot(myfile, myOptions));

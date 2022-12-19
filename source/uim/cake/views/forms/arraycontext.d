@@ -200,8 +200,7 @@ class ArrayContext : IContext
     }
 
 
-    Nullable!string getRequiredMessage(string myField)
-    {
+    Nullable!string getRequiredMessage(string myField) {
         if (!is_array(this._context["required"])) {
             return null;
         }
@@ -326,8 +325,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path
      * @return string A string with stripped numeric nesting
      */
-    protected string stripNesting(string myField)
-    {
+    protected string stripNesting(string myField) {
         return preg_replace("/\.\d*\./", ".", myField);
     }
 }

@@ -329,8 +329,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @psalm-param object|class-string $object
      * @return void
      */
-    static void addDefaultProvider(string myName, $object)
-    {
+    static void addDefaultProvider(string myName, $object) {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
                 "The provider must be an object or class name string. Got `%s` instead.",
@@ -405,8 +404,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param string myField name of the field to unset
      * @return void
      */
-    void offsetUnset(myField)
-    {
+    void offsetUnset(myField) {
         unset(this._fields[myField]);
     }
 
@@ -415,8 +413,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return \Traversable<string, \Cake\Validation\ValidationSet>
      */
-    Traversable getIterator()
-    {
+    Traversable getIterator() {
         return new ArrayIterator(this._fields);
     }
 
@@ -2393,8 +2390,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param string myField Field name
      * @return string|null
      */
-    Nullable!string getRequiredMessage(string myField)
-    {
+    Nullable!string getRequiredMessage(string myField) {
         if (!isset(this._fields[myField])) {
             return null;
         }

@@ -127,8 +127,7 @@ class RadioWidget : BasicWidget
      * @param \Cake\View\Form\IContext $context The form context
      * @return string
      */
-    protected string _renderInput($val, $text, myData, $context)
-    {
+    protected string _renderInput($val, $text, myData, $context) {
         $escape = myData["escape"];
         if (is_array($text) && isset($text["text"], $text["value"])) {
             $radio = $text;

@@ -84,8 +84,7 @@ class XmlView : SerializedView
     ];
 
     
-    protected string _serialize($serialize)
-    {
+    protected string _serialize($serialize) {
         $rootNode = this.getConfig("rootNode", "response");
 
         if (is_array($serialize)) {

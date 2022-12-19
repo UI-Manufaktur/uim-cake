@@ -114,8 +114,7 @@ class HtmlHelper : Helper {
      * @return string|null A completed `<link />` element, or null if the element was sent to a block.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-meta-tags
      */
-    Nullable!string meta(myType, myContents = null, array myOptions = [])
-    {
+    Nullable!string meta(myType, myContents = null, array myOptions = []) {
         if (!is_array(myType)) {
             myTypes = [
                 "rss": ["type": "application/rss+xml", "rel": "alternate", "title": myType, "link": myContents],
@@ -197,8 +196,7 @@ class HtmlHelper : Helper {
      * @return string A meta tag containing the specified character set.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-charset-tags
      */
-    string charset(Nullable!string $charset = null)
-    {
+    string charset(Nullable!string $charset = null) {
         if (empty($charset)) {
             $charset = strtolower((string)Configure::read("App.encoding"));
         }
@@ -232,8 +230,7 @@ class HtmlHelper : Helper {
      * @return string An `<a />` element.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
-    string link($title, myUrl = null, array myOptions = [])
-    {
+    string link($title, myUrl = null, array myOptions = []) {
         $escapeTitle = true;
         if (myUrl !== null) {
             myUrl = this.Url.build(myUrl, myOptions);
@@ -300,8 +297,7 @@ class HtmlHelper : Helper {
      * @see \Cake\Routing\Router::pathUrl()
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
-    string linkFromPath(string $title, string myPath, array myParams = [], array myOptions = [])
-    {
+    string linkFromPath(string $title, string myPath, array myParams = [], array myOptions = []) {
         return this.link($title, ["_path": myPath] + myParams, myOptions);
     }
 
@@ -356,8 +352,7 @@ class HtmlHelper : Helper {
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-css-files
      */
-    Nullable!string css(myPath, array myOptions = [])
-    {
+    Nullable!string css(myPath, array myOptions = []) {
         myOptions += [
             "once": true,
             "block": null,
@@ -456,8 +451,7 @@ class HtmlHelper : Helper {
      *   or if $once is true and the file has been included before.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-javascript-files
      */
-    Nullable!string script(myUrl, array myOptions = [])
-    {
+    Nullable!string script(myUrl, array myOptions = []) {
         $defaults = [
             "block": null,
             "once": true,
@@ -515,8 +509,7 @@ class HtmlHelper : Helper {
      * @return string|null String or null depending on the value of `myOptions["block"]`
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    Nullable!string scriptBlock(string $script, array myOptions = [])
-    {
+    Nullable!string scriptBlock(string $script, array myOptions = []) {
         myOptions += ["block": null, "nonce": this._View.getRequest().getAttribute("cspScriptNonce")];
 
         $out = this.formatTemplate("javascriptblock", [
@@ -561,8 +554,7 @@ class HtmlHelper : Helper {
      * @return string|null Depending on the settings of scriptStart() either a script tag or null
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    Nullable!string scriptEnd()
-    {
+    Nullable!string scriptEnd() {
         $buffer = ob_get_clean();
         myOptions = this._scriptBlockOptions;
         this._scriptBlockOptions = [];
@@ -587,8 +579,7 @@ class HtmlHelper : Helper {
      * @return string CSS styling data
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-css-programatically
      */
-    string style(array myData, bool $oneLine = true)
-    {
+    string style(array myData, bool $oneLine = true) {
         $out = [];
         foreach (myData as myKey: myValue) {
             $out[] = myKey . ":" . myValue . ";";
@@ -631,8 +622,7 @@ class HtmlHelper : Helper {
      * @return string completed img tag
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-images
      */
-    string image(myPath, array myOptions = [])
-    {
+    string image(myPath, array myOptions = []) {
         if (is_string(myPath)) {
             myPath = this.Url.image(myPath, myOptions);
         } else {
@@ -677,8 +667,7 @@ class HtmlHelper : Helper {
      * @return string Completed table headers
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-table-headings
      */
-    string tableHeaders(array myNames, ?array $trOptions = null, ?array $thOptions = null)
-    {
+    string tableHeaders(array myNames, ?array $trOptions = null, ?array $thOptions = null) {
         $out = [];
         foreach (myNames as $arg) {
             if (!is_array($arg)) {
@@ -797,8 +786,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions HTML attributes.
      * @return string
      */
-    string tableRow(string myContents, array myOptions = [])
-    {
+    string tableRow(string myContents, array myOptions = []) {
         return this.formatTemplate("tablerow", [
             "attrs": this.templater().formatAttributes(myOptions),
             "content": myContents,
@@ -812,8 +800,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions HTML attributes.
      * @return string
      */
-    string tableCell(string myContents, array myOptions = [])
-    {
+    string tableCell(string myContents, array myOptions = []) {
         return this.formatTemplate("tablecell", [
             "attrs": this.templater().formatAttributes(myOptions),
             "content": myContents,
@@ -833,8 +820,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag, see above.
      * @return string The formatted tag element
      */
-    string tag(string myName, Nullable!string $text = null, array myOptions = [])
-    {
+    string tag(string myName, Nullable!string $text = null, array myOptions = []) {
         if (isset(myOptions["escape"]) && myOptions["escape"]) {
             $text = h($text);
             unset(myOptions["escape"]);
@@ -865,8 +851,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
      */
-    string div(Nullable!string myClass = null, Nullable!string $text = null, array myOptions = [])
-    {
+    string div(Nullable!string myClass = null, Nullable!string $text = null, array myOptions = []) {
         if (!empty(myClass)) {
             myOptions["class"] = myClass;
         }
@@ -886,8 +871,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the P tag
      * @return string The formatted P element
      */
-    string para(Nullable!string myClass, Nullable!string $text, array myOptions = [])
-    {
+    string para(Nullable!string myClass, Nullable!string $text, array myOptions = []) {
         if (!empty(myOptions["escape"])) {
             $text = h($text);
         }
@@ -965,8 +949,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Array of HTML attributes, and special options above.
      * @return string Generated media element
      */
-    string media(myPath, array myOptions = [])
-    {
+    string media(myPath, array myOptions = []) {
         myOptions += [
             "tag": null,
             "pathPrefix": "files/",
@@ -1057,8 +1040,7 @@ class HtmlHelper : Helper {
      * @return string The nested list
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-nested-lists
      */
-    string nestedList(array $list, array myOptions = [], array $itemOptions = [])
-    {
+    string nestedList(array $list, array myOptions = [], array $itemOptions = []) {
         myOptions += ["tag": "ul"];
         myItems = this._nestedListItem($list, myOptions, $itemOptions);
 
@@ -1077,8 +1059,7 @@ class HtmlHelper : Helper {
      * @return string The nested list element
      * @see \Cake\View\Helper\HtmlHelper::nestedList()
      */
-    protected string _nestedListItem(array myItems, array myOptions, array $itemOptions)
-    {
+    protected string _nestedListItem(array myItems, array myOptions, array $itemOptions) {
         $out = "";
 
         $index = 1;

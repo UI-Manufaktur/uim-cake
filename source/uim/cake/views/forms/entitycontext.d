@@ -89,8 +89,7 @@ class EntityContext : IContext {
      *
      * @throws \RuntimeException When a table object cannot be located/inferred.
      */
-    protected void _prepare()
-    {
+    protected void _prepare() {
         /** @var \Cake\ORM\Table|null myTable */
         myTable = this._context["table"];
         /** @var \Cake\Datasource\IEntity|iterable $entity */
@@ -638,8 +637,7 @@ class EntityContext : IContext {
      * @return string|null An abstract data type or null.
      * @see \Cake\Database\TypeFactory
      */
-    Nullable!string type(string myField)
-    {
+    Nullable!string type(string myField) {
         $parts = explode(".", myField);
         myTable = this._getTable($parts);
         if (!myTable) {

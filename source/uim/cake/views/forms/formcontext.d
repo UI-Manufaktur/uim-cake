@@ -103,8 +103,7 @@ class FormContext : IContext
         return false;
     }
 
-    Nullable!string getRequiredMessage(string myField)
-    {
+    Nullable!string getRequiredMessage(string myField) {
         $parts = explode(".", myField);
 
         $validator = this._form.getValidator();
@@ -148,8 +147,7 @@ class FormContext : IContext
     }
 
 
-    Nullable!string type(string myField)
-    {
+    Nullable!string type(string myField) {
         return this._form.getSchema().fieldType(myField);
     }
 

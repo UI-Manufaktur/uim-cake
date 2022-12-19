@@ -95,8 +95,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-urls
      */
-    string autoLinkUrls(string $text, array myOptions = [])
-    {
+    string autoLinkUrls(string $text, array myOptions = []) {
         this._placeholders = [];
         myOptions += ["escape": true];
 
@@ -143,8 +142,7 @@ class TextHelper : Helper
      * @param array $matches An array of regexp matches.
      * @return string Replaced values.
      */
-    protected string _insertPlaceHolder(array $matches)
-    {
+    protected string _insertPlaceHolder(array $matches) {
         $match = $matches[0];
         $envelope = ["", ""];
         if (isset($matches["url"])) {
@@ -170,8 +168,7 @@ class TextHelper : Helper
      * @param array<string, mixed> $htmlOptions The options for the generated links.
      * @return string The text with links inserted.
      */
-    protected string _linkUrls(string $text, array $htmlOptions)
-    {
+    protected string _linkUrls(string $text, array $htmlOptions) {
         $replace = [];
         foreach (this._placeholders as $hash: myContents) {
             $link = myUrl = myContents["content"];
@@ -193,8 +190,7 @@ class TextHelper : Helper
      * @return string
      * @see \Cake\View\Helper\TextHelper::autoLinkEmails()
      */
-    protected string _linkEmails(string $text, array myOptions)
-    {
+    protected string _linkEmails(string $text, array myOptions) {
         $replace = [];
         foreach (this._placeholders as $hash: myContents) {
             myUrl = myContents["content"];
@@ -217,8 +213,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-email-addresses
      */
-    string autoLinkEmails(string $text, array myOptions = [])
-    {
+    string autoLinkEmails(string $text, array myOptions = []) {
         myOptions += ["escape": true];
         this._placeholders = [];
 
@@ -247,8 +242,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
-    string autoLink(string $text, array myOptions = [])
-    {
+    string autoLink(string $text, array myOptions = []) {
         $text = this.autoLinkUrls($text, myOptions);
 
         return this.autoLinkEmails($text, ["escape": false] + myOptions);
@@ -265,8 +259,7 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::highlight()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#highlighting-substrings
      */
-    string highlight(string $text, string $phrase, array myOptions = [])
-    {
+    string highlight(string $text, string $phrase, array myOptions = []) {
         return this._engine.highlight($text, $phrase, myOptions);
     }
 
@@ -279,8 +272,7 @@ class TextHelper : Helper
      * @return string The text with proper <p> and <br /> tags
      * @link https://book.UIM.org/4/en/views/helpers/text.html#converting-text-into-paragraphs
      */
-    string autoParagraph(Nullable!string $text)
-    {
+    string autoParagraph(Nullable!string $text) {
         $text = $text ?? "";
         if (trim($text) !== "") {
             $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text . "\n");
@@ -315,8 +307,7 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::truncate()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-text
      */
-    string truncate(string $text, int $length = 100, array myOptions = [])
-    {
+    string truncate(string $text, int $length = 100, array myOptions = []) {
         return this._engine.truncate($text, $length, myOptions);
     }
 
@@ -338,8 +329,7 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::tail()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
-    string tail(string $text, int $length = 100, array myOptions = [])
-    {
+    string tail(string $text, int $length = 100, array myOptions = []) {
         return this._engine.tail($text, $length, myOptions);
     }
 
@@ -355,8 +345,7 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::excerpt()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
-    string excerpt(string $text, string $phrase, int $radius = 100, string $ending = "...")
-    {
+    string excerpt(string $text, string $phrase, int $radius = 100, string $ending = "...") {
         return this._engine.excerpt($text, $phrase, $radius, $ending);
     }
 
@@ -370,8 +359,7 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::toList()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
-    string toList(array $list, Nullable!string $and = null, string $separator = ", ")
-    {
+    string toList(array $list, Nullable!string $and = null, string $separator = ", ") {
         return this._engine.toList($list, $and, $separator);
     }
 
@@ -396,8 +384,7 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::setTransliterator()
      * @see \Cake\Utility\Text::setTransliteratorId()
      */
-    string slug(string $string, myOptions = [])
-    {
+    string slug(string $string, myOptions = []) {
         return this._engine.slug($string, myOptions);
     }
 

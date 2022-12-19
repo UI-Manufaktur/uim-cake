@@ -18,8 +18,7 @@ trait IdGeneratorTrait
     /**
      * Clear the stored ID suffixes.
      */
-    protected void _clearIds()
-    {
+    protected void _clearIds() {
         this._idSuffixes = [];
     }
 
@@ -32,8 +31,7 @@ trait IdGeneratorTrait
      * @param string $val The ID attribute value.
      * @return string Generated id.
      */
-    protected string _id(string myName, string $val)
-    {
+    protected string _id(string myName, string $val) {
         myName = this._domId(myName);
         $suffix = this._idSuffix($val);
 
@@ -48,8 +46,7 @@ trait IdGeneratorTrait
      * @param string $val The ID attribute value.
      * @return string Generated id suffix.
      */
-    protected string _idSuffix(string $val)
-    {
+    protected string _idSuffix(string $val) {
         $idSuffix = mb_strtolower(str_replace(["/", "@", "<", ">", " ", """, "\""], "-", $val));
         myCount = 1;
         $check = $idSuffix;
@@ -67,8 +64,7 @@ trait IdGeneratorTrait
      * @param string myValue The value to convert into an ID.
      * @return string The generated id.
      */
-    protected string _domId(string myValue)
-    {
+    protected string _domId(string myValue) {
         $domId = mb_strtolower(Text::slug(myValue, "-"));
         if (this._idPrefix) {
             $domId = this._idPrefix . "-" . $domId;

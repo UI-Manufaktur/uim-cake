@@ -281,8 +281,7 @@ class View : IEventDispatcher {
      *
      * @return void
      */
-    void initialize()
-    {
+    void initialize() {
     }
 
     /**
@@ -363,8 +362,7 @@ class View : IEventDispatcher {
      *
      * @return string|null
      */
-    Nullable!string getTheme()
-    {
+    Nullable!string getTheme() {
         return this.theme;
     }
 
@@ -386,8 +384,7 @@ class View : IEventDispatcher {
      *
      * @return string
      */
-    string getTemplate()
-    {
+    string getTemplate() {
         return this.template;
     }
 
@@ -411,8 +408,7 @@ class View : IEventDispatcher {
      *
      * @return string
      */
-    string getLayout()
-    {
+    string getLayout() {
         return this.layout;
     }
 
@@ -490,8 +486,7 @@ class View : IEventDispatcher {
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} myOptions
      */
-    string element(string myName, array myData = [], array myOptions = [])
-    {
+    string element(string myName, array myData = [], array myOptions = []) {
         myOptions += ["callbacks" => false, "cache" => null, "plugin" => null, "ignoreMissing" => false];
         if (isset(myOptions["cache"])) {
             myOptions["cache"] = this._elementCache(
@@ -535,8 +530,7 @@ class View : IEventDispatcher {
      * @return string The rendered content.
      * @throws \RuntimeException When myOptions is lacking a "key" option.
      */
-    string cache(callable $block, array myOptions = [])
-    {
+    string cache(callable $block, array myOptions = []) {
         myOptions += ["key" => "", "config" => this.elementCache];
         if (empty(myOptions["key"])) {
             throw new RuntimeException("Cannot cache content with an empty key");
@@ -602,8 +596,7 @@ class View : IEventDispatcher {
      * @triggers View.beforeRender this, [myTemplateFileName]
      * @triggers View.afterRender this, [myTemplateFileName]
      */
-    string render(Nullable!string myTemplate = null, $layout = null)
-    {
+    string render(Nullable!string myTemplate = null, $layout = null) {
         $defaultLayout = "";
         $defaultAutoLayout = null;
         if ($layout == false) {
@@ -652,8 +645,7 @@ class View : IEventDispatcher {
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
-    string renderLayout(string myContents, Nullable!string $layout = null)
-    {
+    string renderLayout(string myContents, Nullable!string $layout = null) {
         $layoutFileName = this._getLayoutFileName($layout);
 
         if (!empty(myContents)) {
@@ -838,8 +830,7 @@ class View : IEventDispatcher {
      * @return string The block content or $default if the block does not exist.
      * @see \Cake\View\ViewBlock::get()
      */
-    string fetch(string myName, string $default = "")
-    {
+    string fetch(string myName, string $default = "") {
         return this.Blocks.get(myName, $default);
     }
 
@@ -912,8 +903,7 @@ class View : IEventDispatcher {
      *
      * @return string
      */
-    string getCurrentType()
-    {
+    string getCurrentType() {
         return this._currentType;
     }
 
@@ -961,8 +951,7 @@ class View : IEventDispatcher {
      * @triggers View.beforeRenderFile this, [myTemplateFile]
      * @triggers View.afterRenderFile this, [myTemplateFile, myContents]
      */
-    protected string _render(string myTemplateFile, array myData = [])
-    {
+    protected string _render(string myTemplateFile, array myData = []) {
         if (empty(myData)) {
             myData = this.viewVars;
         }
@@ -1005,8 +994,7 @@ class View : IEventDispatcher {
      * @param array myDataForView Data to include in rendered view.
      * @return string Rendered output
      */
-    protected string _evaluate(string myTemplateFile, array myDataForView)
-    {
+    protected string _evaluate(string myTemplateFile, array myDataForView) {
         extract(myDataForView);
 
         $bufferLevel = ob_get_level();
@@ -1048,8 +1036,7 @@ class View : IEventDispatcher {
      * @return \Cake\View\Helper a constructed helper object.
      * @see \Cake\View\HelperRegistry::load()
      */
-    Helper loadHelper(string myName, array myConfig = [])
-    {
+    Helper loadHelper(string myName, array myConfig = []) {
         [, myClass] = pluginSplit(myName);
         $helpers = this.helpers();
 
@@ -1077,8 +1064,7 @@ class View : IEventDispatcher {
      * @see \Cake\View\View::$subDir
 
      */
-    string getSubDir()
-    {
+    string getSubDir() {
         return this.subDir;
     }
 
@@ -1088,8 +1074,7 @@ class View : IEventDispatcher {
      * @return string
      * @since 3.7.7
      */
-    string getName()
-    {
+    string getName() {
         return this.name;
     }
 
@@ -1099,8 +1084,7 @@ class View : IEventDispatcher {
      * @return string|null
 
      */
-    Nullable!string getPlugin()
-    {
+    Nullable!string getPlugin() {
         return this.plugin;
     }
 
@@ -1143,8 +1127,7 @@ class View : IEventDispatcher {
      * @throws \Cake\View\Exception\MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
-    protected string _getTemplateFileName(Nullable!string myName = null)
-    {
+    protected string _getTemplateFileName(Nullable!string myName = null) {
         myTemplatePath = $subDir = "";
 
         if (this.templatePath) {
@@ -1198,8 +1181,7 @@ class View : IEventDispatcher {
      * @param string myName Name of file which should be inflected.
      * @return string File name after conversion
      */
-    protected string _inflectTemplateFileName(string myName)
-    {
+    protected string _inflectTemplateFileName(string myName) {
         return Inflector::underscore(myName);
     }
 
@@ -1214,8 +1196,7 @@ class View : IEventDispatcher {
      * @return string The file path
      * @throws \InvalidArgumentException
      */
-    protected string _checkFilePath(string myfile, string myPath)
-    {
+    protected string _checkFilePath(string myfile, string myPath) {
         if (strpos(myfile, "..") == false) {
             return myfile;
         }
@@ -1263,8 +1244,7 @@ class View : IEventDispatcher {
      * @throws \Cake\View\Exception\MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
-    protected string _getLayoutFileName(Nullable!string myName = null)
-    {
+    protected string _getLayoutFileName(Nullable!string myName = null) {
         if (myName == null) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
@@ -1488,8 +1468,7 @@ class View : IEventDispatcher {
      * @triggers View.beforeRender this, [myfile]
      * @triggers View.afterRender this, [myfile, $element]
      */
-    protected string _renderElement(string myfile, array myData, array myOptions)
-    {
+    protected string _renderElement(string myfile, array myData, array myOptions) {
         $current = this._current;
         $restore = this._currentType;
         this._currentType = static::TYPE_ELEMENT;

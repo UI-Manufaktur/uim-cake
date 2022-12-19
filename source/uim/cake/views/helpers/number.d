@@ -76,8 +76,7 @@ class NumberHelper : Helper
      * @see \Cake\I18n\Number::precision()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
-    string precision($number, int $precision = 3, array myOptions = [])
-    {
+    string precision($number, int $precision = 3, array myOptions = []) {
         return this._engine.precision($number, $precision, myOptions);
     }
 
@@ -89,8 +88,7 @@ class NumberHelper : Helper
      * @see \Cake\I18n\Number::toReadableSize()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#interacting-with-human-readable-values
      */
-    string toReadableSize($size)
-    {
+    string toReadableSize($size) {
         return this._engine.toReadableSize($size);
     }
 
@@ -108,8 +106,7 @@ class NumberHelper : Helper
      * @see \Cake\I18n\Number::toPercentage()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-percentages
      */
-    string toPercentage($number, int $precision = 2, array myOptions = [])
-    {
+    string toPercentage($number, int $precision = 2, array myOptions = []) {
         return this._engine.toPercentage($number, $precision, myOptions);
     }
 
@@ -130,8 +127,7 @@ class NumberHelper : Helper
      * @return string Formatted number
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-numbers
      */
-    string format($number, array myOptions = [])
-    {
+    string format($number, array myOptions = []) {
         $formatted = this._engine.format($number, myOptions);
         myOptions += ["escape": true];
 
@@ -162,8 +158,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return string Number formatted as a currency.
      */
-    string currency($number, Nullable!string $currency = null, array myOptions = [])
-    {
+    string currency($number, Nullable!string $currency = null, array myOptions = []) {
         $formatted = this._engine.currency($number, $currency, myOptions);
         myOptions += ["escape": true];
 
@@ -186,8 +181,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return string formatted delta
      */
-    string formatDelta(myValue, array myOptions = [])
-    {
+    string formatDelta(myValue, array myOptions = []) {
         $formatted = this._engine.formatDelta(myValue, myOptions);
         myOptions += ["escape": true];
 
@@ -203,8 +197,7 @@ class NumberHelper : Helper
      * @return string|null Currency
      * @deprecated 3.9.0 Use setDefaultCurrency()/getDefaultCurrency() instead.
      */
-    Nullable!string defaultCurrency($currency)
-    {
+    Nullable!string defaultCurrency($currency) {
         deprecationWarning(
             "NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead."
         );
@@ -229,8 +222,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions An array with options.
      * @return string formatted number
      */
-    string ordinal(myValue, array myOptions = [])
-    {
+    string ordinal(myValue, array myOptions = []) {
         return this._engine.ordinal(myValue, myOptions);
     }
 }

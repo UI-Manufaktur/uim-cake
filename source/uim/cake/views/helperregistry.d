@@ -89,8 +89,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected Nullable!string _resolveClassName(string myClass)
-    {
+    protected Nullable!string _resolveClassName(string myClass) {
         return App::className(myClass, "View/Helper", "Helper");
     }
 
@@ -123,8 +122,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @return \Cake\View\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected Helper _create(myClass, string myAlias, array myConfig)
-    {
+    protected Helper _create(myClass, string myAlias, array myConfig) {
         /** @var \Cake\View\Helper $instance */
         $instance = new myClass(this._View, myConfig);
 

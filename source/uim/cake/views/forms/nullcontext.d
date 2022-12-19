@@ -54,8 +54,7 @@ class NullContext : IContext
     }
 
 
-    Nullable!string getRequiredMessage(string myField)
-    {
+    Nullable!string getRequiredMessage(string myField) {
         return null;
     }
 
@@ -71,8 +70,7 @@ class NullContext : IContext
     }
 
 
-    Nullable!string type(string myField)
-    {
+    Nullable!string type(string myField) {
         return null;
     }
 

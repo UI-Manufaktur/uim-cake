@@ -123,8 +123,7 @@ abstract class Cell : IEventDispatcher
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */
-    string render(Nullable!string myTemplate = null)
-    {
+    string render(Nullable!string myTemplate = null) {
         $cache = [];
         if (this._cache) {
             $cache = this._cacheConfig(this.action, myTemplate);
@@ -222,8 +221,7 @@ abstract class Cell : IEventDispatcher
      * @return string Rendered cell
      * @throws \Error Include error details for PHP 7 fatal errors.
      */
-    string __toString()
-    {
+    string __toString() {
         try {
             return this.render();
         } catch (Exception $e) {

@@ -51,8 +51,7 @@ class FlashHelper : Helper
      * @return string|null Rendered flash message or null if flash key does not exist
      *   in session.
      */
-    Nullable!string render(string myKey = "flash", array myOptions = [])
-    {
+    Nullable!string render(string myKey = "flash", array myOptions = []) {
         myMessages = this._View.getRequest().getFlash().consume(myKey);
         if (myMessages == null) {
             return null;

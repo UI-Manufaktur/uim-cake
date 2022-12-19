@@ -78,8 +78,7 @@ class ViewBlock
      * @return void
      * @see \Cake\View\ViewBlock::start()
      */
-    void end()
-    {
+    void end() {
         if (this._discardActiveBufferOnEnd) {
             this._discardActiveBufferOnEnd = false;
             ob_end_clean();
@@ -117,8 +116,7 @@ class ViewBlock
      *   If ViewBlock::PREPEND it will be prepended.
      * @return void
      */
-    void concat(string myName, myValue = null, myMode = ViewBlock::APPEND)
-    {
+    void concat(string myName, myValue = null, myMode = ViewBlock::APPEND) {
         if (myValue == null) {
             this.start(myName, myMode);
 
@@ -144,8 +142,7 @@ class ViewBlock
      *   to string.
      * @return void
      */
-    void set(string myName, myValue)
-    {
+    void set(string myName, myValue) {
         this._blocks[myName] = (string)myValue;
     }
 
@@ -156,8 +153,7 @@ class ViewBlock
      * @param string $default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    string get(string myName, string $default = "")
-    {
+    string get(string myName, string $default = "") {
         return this._blocks[myName] ?? $default;
     }
 
@@ -183,8 +179,7 @@ class ViewBlock
      *
      * @return string|null Either null or the name of the last open block.
      */
-    Nullable!string active()
-    {
+    Nullable!string active() {
         end(this._active);
 
         return key(this._active);

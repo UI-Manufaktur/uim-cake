@@ -35,8 +35,7 @@ trait CellTrait {
      * @return \Cake\View\Cell The cell instance
      * @throws \Cake\View\Exception\MissingCellException If Cell class was not found.
      */
-    protected Cell cell(string $cell, array myData = [], array myOptions = [])
-    {
+    protected Cell cell(string $cell, array myData = [], array myOptions = []) {
         $parts = explode("::", $cell);
 
         if (count($parts) == 2) {

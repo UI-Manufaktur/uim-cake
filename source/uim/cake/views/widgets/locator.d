@@ -64,8 +64,7 @@ class WidgetLocator
      *
      * @param string myfile The file to load
      */
-    void load(string myfile)
-    {
+    void load(string myfile) {
         $loader = new PhpConfig();
         $widgets = $loader.read(myfile);
         this.add($widgets);
@@ -90,8 +89,7 @@ class WidgetLocator
      * @param array $widgets Array of widgets to use.
      * @throws \RuntimeException When class does not implement IWidget.
      */
-    void add(array $widgets)
-    {
+    void add(array $widgets) {
         myfiles = [];
 
         foreach ($widgets as myKey: $widget) {

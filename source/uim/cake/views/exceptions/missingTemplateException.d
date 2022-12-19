@@ -59,8 +59,7 @@ class MissingTemplateException : CakeException
      *
      * @return string
      */
-    string formatMessage()
-    {
+    string formatMessage() {
         myName = this.templateName ?? this.filename;
         myMessage = "{this.type} file `{myName}` could not be found.";
         if (this.paths) {

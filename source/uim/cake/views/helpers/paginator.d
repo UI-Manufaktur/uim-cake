@@ -194,8 +194,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    Nullable!string sortKey(Nullable!string myModel = null, array myOptions = [])
-    {
+    Nullable!string sortKey(Nullable!string myModel = null, array myOptions = []) {
         if (empty(myOptions)) {
             myOptions = this.params(myModel);
         }
@@ -215,8 +214,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    string sortDir(Nullable!string myModel = null, array myOptions = [])
-    {
+    string sortDir(Nullable!string myModel = null, array myOptions = []) {
         $dir = null;
 
         if (empty(myOptions)) {
@@ -243,8 +241,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myTemplates An array of templates with the "active" and "disabled" keys.
      * @return string Generated HTML
      */
-    protected string _toggledLink($text, myEnabled, myOptions, myTemplates)
-    {
+    protected string _toggledLink($text, myEnabled, myOptions, myTemplates) {
         myTemplate = myTemplates["active"];
         if (!myEnabled) {
             $text = myOptions["disabledTitle"];
@@ -315,8 +312,7 @@ class PaginatorHelper : Helper
      * @return string A "previous" link or a disabled link.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string prev(string $title = "<< Previous", array myOptions = [])
-    {
+    string prev(string $title = "<< Previous", array myOptions = []) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -355,8 +351,7 @@ class PaginatorHelper : Helper
      * @return string A "next" link or $disabledTitle text if the link is disabled.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string next(string $title = "Next >>", array myOptions = [])
-    {
+    string next(string $title = "Next >>", array myOptions = []) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -395,8 +390,7 @@ class PaginatorHelper : Helper
      *  key the returned link will sort by "desc".
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    string sort(string myKey, $title = null, array myOptions = [])
-    {
+    string sort(string myKey, $title = null, array myOptions = []) {
         myOptions += ["url": [], "model": null, "escape": true];
         myUrl = myOptions["url"];
         unset(myOptions["url"]);
@@ -566,8 +560,7 @@ class PaginatorHelper : Helper
      * @param string|null myModel Current model alias
      * @return string Unaliased field if applicable
      */
-    protected string _removeAlias(string myField, Nullable!string myModel = null)
-    {
+    protected string _removeAlias(string myField, Nullable!string myModel = null) {
         $currentModel = myModel ?: this.defaultModel();
 
         if (strpos(myField, ".") == false) {
@@ -642,8 +635,7 @@ class PaginatorHelper : Helper
      * @param string|null myModel Model name to set
      * @return string|null Model name or null if the pagination isn"t initialized.
      */
-    Nullable!string defaultModel(Nullable!string myModel = null)
-    {
+    Nullable!string defaultModel(Nullable!string myModel = null) {
         if (myModel !== null) {
             this._defaultModel = myModel;
         }
@@ -676,8 +668,7 @@ class PaginatorHelper : Helper
      * @return string Counter string.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-a-page-counter
      */
-    string counter(string $format = "pages", array myOptions = [])
-    {
+    string counter(string $format = "pages", array myOptions = []) {
         myOptions += [
             "model": this.defaultModel(),
         ];
@@ -748,8 +739,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-page-number-links
      */
-    string numbers(array myOptions = [])
-    {
+    string numbers(array myOptions = []) {
         $defaults = [
             "before": null, "after": null, "model": this.defaultModel(),
             "modulus": 8, "first": null, "last": null, "url": [],
@@ -824,8 +814,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string
      */
-    protected string _formatNumber(StringTemplate myTemplater, array myOptions)
-    {
+    protected string _formatNumber(StringTemplate myTemplater, array myOptions) {
         $vars = [
             "text": myOptions["text"],
             "url": this.generateUrl(["page": myOptions["page"]], myOptions["model"], myOptions["url"]),
@@ -842,8 +831,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _modulusNumbers(StringTemplate myTemplater, array myParams, array myOptions)
-    {
+    protected string _modulusNumbers(StringTemplate myTemplater, array myParams, array myOptions) {
         $out = "";
         $ellipsis = myTemplater.format("ellipsis", []);
 
@@ -904,8 +892,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _firstNumber(string $ellipsis, array myParams, int $start, array myOptions)
-    {
+    protected string _firstNumber(string $ellipsis, array myParams, int $start, array myOptions) {
         $out = "";
         $first = is_int(myOptions["first"]) ? myOptions["first"] : 0;
         if (myOptions["first"] && $start > 1) {
@@ -928,8 +915,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _lastNumber(string $ellipsis, array myParams, int $end, array myOptions)
-    {
+    protected string _lastNumber(string $ellipsis, array myParams, int $end, array myOptions) {
         $out = "";
         $last = is_int(myOptions["last"]) ? myOptions["last"] : 0;
         if (myOptions["last"] && $end < myParams["pageCount"]) {
@@ -951,8 +937,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _numbers(StringTemplate myTemplater, array myParams, array myOptions)
-    {
+    protected string _numbers(StringTemplate myTemplater, array myParams, array myOptions) {
         $out = "";
         $out .= myOptions["before"];
 
@@ -1003,8 +988,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string first($first = "<< first", array myOptions = [])
-    {
+    string first($first = "<< first", array myOptions = []) {
         myOptions += [
             "url": [],
             "model": this.defaultModel(),
@@ -1063,8 +1047,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string last($last = "last >>", array myOptions = [])
-    {
+    string last($last = "last >>", array myOptions = []) {
         myOptions += [
             "model": this.defaultModel(),
             "escape": true,
@@ -1125,8 +1108,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Array of options
      * @return string|null Meta links
      */
-    Nullable!string meta(array myOptions = [])
-    {
+    Nullable!string meta(array myOptions = []) {
         myOptions += [
                 "model": null,
                 "block": false,
@@ -1202,8 +1184,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> myOptions Options for Select tag attributes like class, id or event
      * @return string html output.
      */
-    string limitControl(array $limits = [], Nullable!int $default = null, array myOptions = [])
-    {
+    string limitControl(array $limits = [], Nullable!int $default = null, array myOptions = []) {
         $out = this.Form.create(null, ["type": "get"]);
 
         if (empty($default)) {

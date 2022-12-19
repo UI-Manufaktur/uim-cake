@@ -213,8 +213,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    Nullable!string getPlugin()
-    {
+    Nullable!string getPlugin() {
         return this._plugin;
     }
 
@@ -302,8 +301,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    Nullable!string getTheme()
-    {
+    Nullable!string getTheme() {
         return this._theme;
     }
 
@@ -326,8 +324,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    Nullable!string getTemplate()
-    {
+    Nullable!string getTemplate() {
         return this._template;
     }
 
@@ -350,8 +347,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    Nullable!string getLayout()
-    {
+    Nullable!string getLayout() {
         return this._layout;
     }
 
@@ -423,8 +419,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string|null
      */
-    Nullable!string getName()
-    {
+    Nullable!string getName() {
         return this._name;
     }
 

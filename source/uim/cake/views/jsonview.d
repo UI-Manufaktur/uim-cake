@@ -86,8 +86,7 @@ class JsonView : SerializedView {
      * @param string|false|null $layout The layout being rendered.
      * @return string The rendered view.
      */
-    string render(Nullable!string myTemplate = null, $layout = null)
-    {
+    string render(Nullable!string myTemplate = null, $layout = null) {
         $return = super.render(myTemplate, $layout);
 
         $jsonp = this.getConfig("jsonp");
@@ -105,8 +104,7 @@ class JsonView : SerializedView {
     }
 
 
-    protected string _serialize(serializeNames)
-    {
+    protected string _serialize(serializeNames) {
         myData = this._dataToSerialize(serializeNames);
 
         $jsonOptions = this.getConfig("jsonOptions");

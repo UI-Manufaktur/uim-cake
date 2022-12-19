@@ -221,8 +221,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * @param \Cake\Http\Session $session The session instance.
      * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected void validateToken(IServerRequest myRequest, Session $session)
-    {
+    protected void validateToken(IServerRequest myRequest, Session $session) {
         $token = $session.read(this._config["key"]);
         if (!$token || !is_string($token)) {
             throw new InvalidCsrfTokenException(__d("cake", "Missing or incorrect CSRF session key"));
