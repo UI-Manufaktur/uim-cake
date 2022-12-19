@@ -20,11 +20,9 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
 {
     /**
      * List of ids of services this provider provides.
-     *
-     * @var array<string>
      * @see ServiceProvider::provides()
      */
-    protected $provides = [];
+    protected string[] $provides = [];
 
     /**
      * Get the container.
@@ -34,8 +32,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return \Cake\Core\IContainer
      */
-    auto getContainer(): IDefinitionContainer
-    {
+    IDefinitionContainer getContainer() {
         myContainer = super.getContainer();
 
         if (!(myContainer instanceof IContainer)) {

@@ -181,7 +181,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\IStatement
      */
-    auto execute(): IStatement
+    IStatement execute()
     {
         $statement = this._connection.run(this);
         this._iterator = this._decorateStatement($statement);
@@ -1591,7 +1591,7 @@ class Query : IExpression, IteratorAggregate {
      * @param string myIdentifier The identifier for an expression
      * @return \Cake\Database\IExpression
      */
-    function identifier(string myIdentifier): IExpression
+    IExpression identifier(string myIdentifier)
     {
         return new IdentifierExpression(myIdentifier);
     }
@@ -1782,7 +1782,7 @@ class Query : IExpression, IteratorAggregate {
      * @param \Cake\Database\IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
      * @return \Cake\Database\Expression\QueryExpression
      */
-    function newExpr($rawExpression = null): QueryExpression
+    QueryExpression newExpr($rawExpression = null)
     {
         $expression = new QueryExpression([], this.getTypeMap());
 
@@ -1806,7 +1806,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\FunctionsBuilder
      */
-    function func(): FunctionsBuilder
+    FunctionsBuilder func()
     {
         if (this._functionsBuilder == null) {
             this._functionsBuilder = new FunctionsBuilder();
@@ -1996,7 +1996,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\ValueBinder
      */
-    auto getValueBinder(): ValueBinder
+    ValueBinder getValueBinder()
     {
         if (this._valueBinder == null) {
             this._valueBinder = new ValueBinder();
@@ -2090,7 +2090,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return \Cake\Database\TypeMap
      */
-    auto getSelectTypeMap(): TypeMap
+    TypeMap getSelectTypeMap()
     {
         if (this._selectTypeMap == null) {
             this._selectTypeMap = new TypeMap();

@@ -218,7 +218,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param \Cake\Controller\ComponentRegistry|null $components Component registry.
      * @return \Cake\Controller\ComponentRegistry
      */
-    function components(?ComponentRegistry $components = null): ComponentRegistry
+    ComponentRegistry components(?ComponentRegistry $components = null)
     {
         if ($components !== null) {
             $components.setController(this);
@@ -250,7 +250,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Controller\Component
      * @throws \Exception
      */
-    function loadComponent(string myName, array myConfig = []): Component
+    Component loadComponent(string myName, array myConfig = [])
     {
         [, $prop] = pluginSplit(myName);
 
@@ -406,7 +406,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\ServerRequest
 
      */
-    auto getRequest(): ServerRequest
+    ServerRequest getRequest()
     {
         return this.request;
     }
@@ -672,45 +672,42 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Http\Response A response object containing the rendered view.
      * @link https://book.UIM.org/4/en/controllers.html#rendering-a-view
      */
-    function render(Nullable!string myTemplate = null, Nullable!string $layout = null): Response
-    {
-        myBuilder = this.viewBuilder();
-        if (!myBuilder.getTemplatePath()) {
-            myBuilder.setTemplatePath(this._templatePath());
-        }
+    Response render(Nullable!string myTemplate = null, Nullable!string $layout = null) {
+      myBuilder = this.viewBuilder();
+      if (!myBuilder.getTemplatePath()) {
+          myBuilder.setTemplatePath(this._templatePath());
+      }
 
-        this.autoRender = false;
+      this.autoRender = false;
 
-        if (myTemplate !== null) {
-            myBuilder.setTemplate(myTemplate);
-        }
+      if (myTemplate !== null) {
+        myBuilder.setTemplate(myTemplate);
+      }
 
-        if ($layout !== null) {
-            myBuilder.setLayout($layout);
-        }
+      if ($layout !== null) {
+        myBuilder.setLayout($layout);
+      }
 
-        myEvent = this.dispatchEvent("Controller.beforeRender");
-        if (myEvent.getResult() instanceof Response) {
-            return myEvent.getResult();
-        }
-        if (myEvent.isStopped()) {
-            return this.response;
-        }
-
-        if (myBuilder.getTemplate() == null) {
-            myBuilder.setTemplate(this.request.getParam("action"));
-        }
-
-        $view = this.createView();
-        myContentss = $view.render();
-        this.setResponse($view.getResponse().withStringBody(myContentss));
-
+      myEvent = this.dispatchEvent("Controller.beforeRender");
+      if (myEvent.getResult() instanceof Response) {
+        return myEvent.getResult();
+      }
+      if (myEvent.isStopped()) {
         return this.response;
+      }
+
+      if (myBuilder.getTemplate() == null) {
+        myBuilder.setTemplate(this.request.getParam("action"));
+      }
+
+      $view = this.createView();
+      myContentss = $view.render();
+      this.setResponse($view.getResponse().withStringBody(myContentss));
+
+      return this.response;
     }
 
-    /**
-     * Get the templatePath based on controller name and request prefix.
-     */
+    // Get the templatePath based on controller name and request prefix.
     protected string _templatePath() {
         myTemplatePath = this.name;
         if (this.request.getParam("prefix")) {

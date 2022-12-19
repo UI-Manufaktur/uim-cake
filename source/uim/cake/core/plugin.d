@@ -99,7 +99,7 @@ class Plugin {
      *
      * @return \Cake\Core\PluginCollection
      */
-    static auto getCollection(): PluginCollection {
+    static PluginCollection getCollection() {
         if (!isset(static::myPlugins)) {
             static::myPlugins = new PluginCollection();
         }

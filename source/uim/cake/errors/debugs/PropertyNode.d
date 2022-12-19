@@ -1,14 +1,11 @@
-module uim.cake.errors\Debug;
+module uim.cake.errors.debugs.propertynode;
 
-/**
- * Dump node for object properties.
- */
-class PropertyNode : INode
-{
-    /**
-     * @var string
-     */
-    private myName;
+@safe:
+import uim.cake;
+
+// Dump node for object properties.
+class PropertyNode : INode {
+    private string myName;
 
     /**
      * @var string|null
@@ -38,23 +35,21 @@ class PropertyNode : INode
      *
      * @return \Cake\Error\Debug\INode
      */
-    auto getValue(): INode
-    {
-        return this.value;
+    INode getValue() {
+      return this.value;
     }
 
     // Get the property visibility
     string getVisibility() {
-        return this.visibility;
+      return this.visibility;
     }
 
     // Get the property name
     string getName() {
-        return this.name;
+      return this.name;
     }
 
-    auto getChildren(): array
-    {
-        return [this.value];
+    array getChildren() {
+      return [this.value];
     }
 }

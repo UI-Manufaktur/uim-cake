@@ -1,12 +1,7 @@
 module uim.cake.controllerss.components;
 
-import uim.cake.controllerss.components;
-import uim.cake.controllerss.componentsRegistry;
-import uim.cake.datasources\Exception\PageOutOfBoundsException;
-import uim.cake.datasources\Paginator;
-import uim.cake.datasources\IResultSet;
-import uim.caketps\Exception\NotFoundException;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * This component is used to handle automatic model data pagination. The primary way to use this

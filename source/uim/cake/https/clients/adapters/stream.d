@@ -257,7 +257,7 @@ class Stream : IAdapter
      * @param string $body The response body.
      * @return \Cake\Http\Client\Response
      */
-    protected auto _buildResponse(array $headers, string $body): Response
+    protected Response _buildResponse(array $headers, string $body)
     {
         return new Response($headers, $body);
     }

@@ -249,7 +249,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    auto get(string myUrl, myData = [], array myOptions = []): Response
+    Response get(string myUrl, myData = [], array myOptions = [])
     {
         myOptions = this._mergeOptions(myOptions);
         $body = null;
@@ -275,7 +275,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    function post(string myUrl, myData = [], array myOptions = []): Response
+    Response post(string myUrl, myData = [], array myOptions = [])
     {
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, [], myOptions);
@@ -291,7 +291,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    function put(string myUrl, myData = [], array myOptions = []): Response
+    Response put(string myUrl, myData = [], array myOptions = [])
     {
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, [], myOptions);
@@ -307,7 +307,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    function patch(string myUrl, myData = [], array myOptions = []): Response
+    Response patch(string myUrl, myData = [], array myOptions = [])
     {
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, [], myOptions);
@@ -323,8 +323,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    function options(string myUrl, myData = [], array myOptions = []): Response
-    {
+    Response options(string myUrl, myData = [], array myOptions = []) {
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, [], myOptions);
 
@@ -339,7 +338,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    function trace(string myUrl, myData = [], array myOptions = []): Response
+    Response trace(string myUrl, myData = [], array myOptions = [])
     {
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, [], myOptions);
@@ -355,7 +354,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    function delete(string myUrl, myData = [], array myOptions = []): Response
+    Response delete(string myUrl, myData = [], array myOptions = [])
     {
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, [], myOptions);
@@ -371,7 +370,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    function head(string myUrl, array myData = [], array myOptions = []): Response
+    Response head(string myUrl, array myData = [], array myOptions = [])
     {
         myOptions = this._mergeOptions(myOptions);
         myUrl = this.buildUrl(myUrl, myData, myOptions);
@@ -388,7 +387,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
      * @return \Cake\Http\Client\Response
      */
-    protected auto _doRequest(string $method, string myUrl, myData, myOptions): Response
+    protected Response _doRequest(string $method, string myUrl, myData, myOptions)
     {
         myRequest = this._createRequest(
             $method,
@@ -433,7 +432,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options to use.
      * @return \Cake\Http\Client\Response
      */
-    function send(RequestInterface myRequest, array myOptions = []): Response
+    Response send(RequestInterface myRequest, array myOptions = [])
     {
         $redirects = 0;
         if (isset(myOptions["redirect"])) {
@@ -507,7 +506,7 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions Additional options to use.
      * @return \Cake\Http\Client\Response
      */
-    protected auto _sendRequest(RequestInterface myRequest, array myOptions): Response
+    protected Response _sendRequest(RequestInterface myRequest, array myOptions)
     {
         if (static::$_mockAdapter) {
             $responses = static::$_mockAdapter.send(myRequest, myOptions);

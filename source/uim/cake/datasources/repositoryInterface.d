@@ -70,7 +70,7 @@ interface IRepository
      * @return \Cake\Datasource\IEntity
      * @see \Cake\Datasource\IRepository::find()
      */
-    auto get($primaryKey, array myOptions = []): IEntity;
+    IEntity get($primaryKey, array myOptions = []);
 
     /**
      * Creates a new Query instance for this repository
@@ -150,7 +150,7 @@ interface IRepository
      *
      * @return \Cake\Datasource\IEntity
      */
-    function newEmptyEntity(): IEntity;
+    IEntity newEmptyEntity();
 
     /**
      * Create a new entity + associated entities from an array.
@@ -170,7 +170,7 @@ interface IRepository
      * @param array<string, mixed> myOptions A list of options for the object hydration.
      * @return \Cake\Datasource\IEntity
      */
-    function newEntity(array myData, array myOptions = []): IEntity;
+    IEntity newEntity(array myData, array myOptions = []);
 
     /**
      * Create a list of entities + associated entities from an array.
@@ -188,7 +188,7 @@ interface IRepository
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
      * @return array<\Cake\Datasource\IEntity> An array of hydrated records.
      */
-    function newEntities(array myData, array myOptions = []): array;
+    array newEntities(array myData, array myOptions = []);
 
     /**
      * Merges the passed `myData` into `$entity` respecting the accessible
@@ -207,7 +207,7 @@ interface IRepository
      * @param array<string, mixed> myOptions A list of options for the object hydration.
      * @return \Cake\Datasource\IEntity
      */
-    function patchEntity(IEntity $entity, array myData, array myOptions = []): IEntity;
+    IEntity patchEntity(IEntity $entity, array myData, array myOptions = []);
 
     /**
      * Merges each of the elements passed in `myData` into the entities
@@ -227,5 +227,5 @@ interface IRepository
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
      * @return array<\Cake\Datasource\IEntity>
      */
-    function patchEntities(iterable $entities, array myData, array myOptions = []): array;
+    array patchEntities(iterable $entities, array myData, array myOptions = []);
 }

@@ -187,7 +187,7 @@ class PluginCollection : Iterator, Countable
      * @return \Cake\Core\IPlugin
      * @throws \Cake\Core\Exception\MissingPluginException When plugin instance could not be created.
      */
-    function create(string myName, array myConfig = []): IPlugin
+    IPlugin create(string myName, array myConfig = [])
     {
         if (strpos(myName, "\\") !== false) {
             /** @var \Cake\Core\IPlugin */
@@ -224,9 +224,7 @@ class PluginCollection : Iterator, Countable
         this.positions[this.loopDepth]++;
     }
 
-    /**
-     * Part of Iterator Interface
-     */
+    // Part of Iterator Interface
     string key() {
         return this.names[this.positions[this.loopDepth]];
     }
@@ -236,18 +234,14 @@ class PluginCollection : Iterator, Countable
      *
      * @return \Cake\Core\IPlugin
      */
-    function current(): IPlugin
-    {
+    IPlugin current() {
         $position = this.positions[this.loopDepth];
         myName = this.names[$position];
 
         return this.plugins[myName];
     }
 
-    /**
-     * Part of Iterator Interface
-     *
-     */
+    // Part of Iterator Interface
     void rewind() {
         this.positions[] = 0;
         this.loopDepth += 1;
@@ -272,15 +266,14 @@ class PluginCollection : Iterator, Countable
      * @return \Generator<\Cake\Core\IPlugin> A generator containing matching plugins.
      * @throws \InvalidArgumentException on invalid hooks
      */
-    function with(string $hook): Generator
-    {
-        if (!in_array($hook, IPlugin::VALID_HOOKS, true)) {
-            throw new InvalidArgumentException("The `{$hook}` hook is not a known plugin hook.");
+    Generator with(string $hook) {
+      if (!in_array($hook, IPlugin::VALID_HOOKS, true)) {
+        throw new InvalidArgumentException("The `{$hook}` hook is not a known plugin hook.");
+      }
+      foreach (this as myPlugin) {
+        if (myPlugin.isEnabled($hook)) {
+            yield myPlugin;
         }
-        foreach (this as myPlugin) {
-            if (myPlugin.isEnabled($hook)) {
-                yield myPlugin;
-            }
-        }
+      }
     }
 }

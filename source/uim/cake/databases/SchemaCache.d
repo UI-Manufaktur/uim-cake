@@ -87,8 +87,7 @@ class SchemaCache {
      * @return \Cake\Database\Schema\CachedCollection
      * @throws \RuntimeException If given connection object is not compatible with schema caching
      */
-    auto getSchema(Connection myConnection): CachedCollection
-    {
+    CachedCollection getSchema(Connection myConnection) {
         myConfig = myConnection.config();
         if (empty(myConfig["cacheMetadata"])) {
             myConnection.cacheMetadata(true);
