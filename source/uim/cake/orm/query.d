@@ -38,7 +38,7 @@ use Traversable;
  * @method mixed max(myField) Returns the maximum value for a single column in all the results.
  * @method mixed min(myField) Returns the minimum value for a single column in all the results.
  * @method \Cake\Collection\ICollection groupBy(callable|string myField) In-memory group all results by the value of a column.
- * @method \Cake\Collection\ICollection indexBy(callable|string $callback) Returns the results indexed by the value of a column.
+ * @method \Cake\Collection\ICollection indexBy(callable|string callback) Returns the results indexed by the value of a column.
  * @method \Cake\Collection\ICollection countBy(callable|string myField) Returns the number of unique values for a column
  * @method float sumOf(callable|string myField) Returns the sum of all values for a single column
  * @method \Cake\Collection\ICollection shuffle() In-memory randomize the order the results are returned
@@ -409,7 +409,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * If called with an empty first argument and `$override` is set to true, the
      * previous list will be emptied.
      *
-     * @param array|string $associations List of table aliases to be queried.
+     * @param array|string associations List of table aliases to be queried.
      * @param callable|bool $override The query builder for the association, or
      *   if associations is an array, a bool on whether to override previous list
      *   with the one passed
@@ -530,12 +530,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * `select`, `where`, `andWhere` and `orWhere` on it. If you wish to
      * add more complex clauses you can do it directly in the main query.
      *
-     * @param string $assoc The association to filter by
+     * @param string assoc The association to filter by
      * @param callable|null myBuilder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function matching(string $assoc, ?callable myBuilder = null) {
+    function matching(string assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader().setMatching($assoc, myBuilder).getMatching();
         _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
         _dirty();
@@ -601,12 +601,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * `select`, `where`, `andWhere` and `orWhere` on it. If you wish to
      * add more complex clauses you can do it directly in the main query.
      *
-     * @param string $assoc The association to join with
+     * @param string assoc The association to join with
      * @param callable|null myBuilder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function leftJoinWith(string $assoc, ?callable myBuilder = null) {
+    function leftJoinWith(string assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
                 "joinType": Query::JOIN_TYPE_LEFT,
@@ -648,13 +648,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * This function works the same as `matching()` with the difference that it
      * will select no fields from the association.
      *
-     * @param string $assoc The association to join with
+     * @param string assoc The association to join with
      * @param callable|null myBuilder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      * @see \Cake\ORM\Query::matching()
      */
-    function innerJoinWith(string $assoc, ?callable myBuilder = null) {
+    function innerJoinWith(string assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
                 "joinType": Query::JOIN_TYPE_INNER,
@@ -712,12 +712,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * `select`, `where`, `andWhere` and `orWhere` on it. If you wish to
      * add more complex clauses you can do it directly in the main query.
      *
-     * @param string $assoc The association to filter by
+     * @param string assoc The association to filter by
      * @param callable|null myBuilder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function notMatching(string $assoc, ?callable myBuilder = null) {
+    function notMatching(string assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
             .setMatching($assoc, myBuilder, [
                 "joinType": Query::JOIN_TYPE_LEFT,
@@ -1268,12 +1268,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * {@inheritDoc}
      *
-     * @param string $method the method to call
+     * @param string method the method to call
      * @param array $arguments list of arguments for the method to call
      * @return mixed
      * @throws \BadMethodCallException if the method is called for a non-select query
      */
-    auto __call(string $method, array $arguments) {
+    auto __call(string method, array $arguments) {
         if (this.type() == "select") {
             return _call($method, $arguments);
         }

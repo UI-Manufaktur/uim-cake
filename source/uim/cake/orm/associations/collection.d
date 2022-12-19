@@ -53,12 +53,12 @@ class AssociationCollection : IteratorAggregate {
      * Creates and adds the Association object to this collection.
      *
      * @param string myClassName The name of association class.
-     * @param string $associated The alias for the target table.
+     * @param string associated The alias for the target table.
      * @param array<string, mixed> myOptions List of options to configure the association definition.
      * @return \Cake\ORM\Association
      * @throws \InvalidArgumentException
      */
-    function load(string myClassName, string $associated, array myOptions = []): Association
+    function load(string myClassName, string associated, array myOptions = []): Association
     {
         myOptions += [
             "tableLocator":this.getTableLocator(),
@@ -91,10 +91,10 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Fetch an association by property name.
      *
-     * @param string $prop The property to find an association by.
+     * @param string prop The property to find an association by.
      * @return \Cake\ORM\Association|null Either the association or null.
      */
-    auto getByProperty(string $prop): ?Association
+    auto getByProperty(string prop): ?Association
     {
         foreach (_items as $assoc) {
             if ($assoc.getProperty() == $prop) {

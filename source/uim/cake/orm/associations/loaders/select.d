@@ -24,7 +24,7 @@ class SelectLoader
     /**
      * The alias of the source association
      */
-    protected string $sourceAlias;
+    protected string sourceAlias;
 
     /**
      * The alias of the target association
@@ -41,12 +41,12 @@ class SelectLoader
     /**
      * The strategy to use for loading, either select or subquery
      */
-    protected string $strategy;
+    protected string strategy;
 
     /**
      * The binding key for the source association.
      */
-    protected string $bindingKey;
+    protected string bindingKey;
 
     /**
      * A callable that will return a query object used for loading the association results
@@ -58,12 +58,12 @@ class SelectLoader
     /**
      * The type of the association triggering the load
      */
-    protected string $associationType;
+    protected string associationType;
 
     /**
      * The sorting options for loading the association
      */
-    protected string $sort;
+    protected string sort;
 
     /**
      * Copies the options array to properties in this class. The keys in the array correspond
@@ -306,7 +306,7 @@ class SelectLoader
      * @param \Cake\ORM\Query myQuery Target table"s query
      * @param myKeys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for myKey
-     * @param string $operator The operator for comparing the tuples
+     * @param string operator The operator for comparing the tuples
      * @return \Cake\Database\Expression\TupleComparison
      */
     protected auto _createTupleCondition(Query myQuery, string[] myKeys, $filter, $operator): TupleComparison
@@ -494,10 +494,10 @@ class SelectLoader
      *
      * @param array<string, mixed> myResultMap A keyed arrays containing the target table
      * @param $sourceKeys An array with aliased keys to match
-     * @param string $nestKey The key under which results should be nested
+     * @param string nestKey The key under which results should be nested
      * @return \Closure
      */
-    protected Closure _multiKeysInjector(array myResultMap, string[] $sourceKeys, string $nestKey) {
+    protected Closure _multiKeysInjector(array myResultMap, string[] $sourceKeys, string nestKey) {
         return function ($row) use (myResultMap, $sourceKeys, $nestKey) {
             myValues = [];
             foreach ($sourceKeys as myKey) {

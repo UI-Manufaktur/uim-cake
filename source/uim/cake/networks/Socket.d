@@ -175,9 +175,9 @@ class Socket
     /**
      * Create a stream socket client. Mock utility.
      *
-     * @param string $remoteSocketTarget remote socket
+     * @param string remoteSocketTarget remote socket
      * @param int $errNum error number
-     * @param string $errStr error string
+     * @param string errStr error string
      * @param int $timeout timeout
      * @param int $connectAs flags
      * @param resource $context context
@@ -203,10 +203,10 @@ class Socket
     /**
      * Configure the SSL context options.
      *
-     * @param string $host The host name being connected to.
+     * @param string host The host name being connected to.
      * @return void
      */
-    protected void _setSslContext(string $host) {
+    protected void _setSslContext(string host) {
         foreach (_config as myKey: myValue) {
             if (substr(myKey, 0, 4) !== "ssl_") {
                 continue;
@@ -315,10 +315,10 @@ class Socket
      * Set the last error.
      *
      * @param int|null $errNum Error code
-     * @param string $errStr Error string
+     * @param string errStr Error string
      * @return void
      */
-    void setLastError(Nullable!int $errNum, string $errStr) {
+    void setLastError(Nullable!int $errNum, string errStr) {
         this.lastError = ["num":$errNum, "str":$errStr];
     }
 
@@ -426,14 +426,14 @@ class Socket
      * Encrypts current stream socket, using one of the defined encryption methods
      *
      * @param string myType can be one of "ssl2", "ssl3", "ssl23" or "tls"
-     * @param string $clientOrServer can be one of "client", "server". Default is "client"
+     * @param string clientOrServer can be one of "client", "server". Default is "client"
      * @param bool myEnable enable or disable encryption. Default is true (enable)
      * @return void
      * @throws \InvalidArgumentException When an invalid encryption scheme is chosen.
      * @throws \Cake\Network\Exception\SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
-    void enableCrypto(string myType, string $clientOrServer = "client", bool myEnable = true) {
+    void enableCrypto(string myType, string clientOrServer = "client", bool myEnable = true) {
         if (!array_key_exists(myType . "_" . $clientOrServer, _encryptMethods)) {
             throw new InvalidArgumentException("Invalid encryption scheme chosen");
         }

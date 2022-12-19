@@ -90,8 +90,8 @@ import uim.cake;
  * - `afterMarshal(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
  * - `buildValidator(IEvent myEvent, Validator $validator, string myName)`
  * - `buildRules(RulesChecker $rules)`
- * - `beforeRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, string $operation)`
- * - `afterRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, bool myResult, string $operation)`
+ * - `beforeRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, string operation)`
+ * - `afterRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, bool myResult, string operation)`
  * - `beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
  * - `afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
  * - `afterSaveCommit(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
@@ -385,10 +385,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Sets the table registry key used to create this table instance.
      *
-     * @param string $registryAlias The key used to access this object.
+     * @param string registryAlias The key used to access this object.
      * @return this
      */
-    auto setRegistryAlias(string $registryAlias) {
+    auto setRegistryAlias(string registryAlias) {
         _registryAlias = $registryAlias;
 
         return this;
@@ -943,12 +943,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string $associated the alias for the target table. This is used to
+     * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
      * @return \Cake\ORM\Association\BelongsTo
      */
-    function belongsTo(string $associated, array myOptions = []): BelongsTo
+    function belongsTo(string associated, array myOptions = []): BelongsTo
     {
         myOptions += ["sourceTable": this];
 
@@ -989,12 +989,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string $associated the alias for the target table. This is used to
+     * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
      * @return \Cake\ORM\Association\HasOne
      */
-    function hasOne(string $associated, array myOptions = []): HasOne
+    function hasOne(string associated, array myOptions = []): HasOne
     {
         myOptions += ["sourceTable": this];
 
@@ -1041,12 +1041,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string $associated the alias for the target table. This is used to
+     * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
      * @return \Cake\ORM\Association\HasMany
      */
-    function hasMany(string $associated, array myOptions = []): HasMany
+    function hasMany(string associated, array myOptions = []): HasMany
     {
         myOptions += ["sourceTable": this];
 
@@ -1095,12 +1095,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string $associated the alias for the target table. This is used to
+     * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
      * @return \Cake\ORM\Association\BelongsToMany
      */
-    function belongsToMany(string $associated, array myOptions = []): BelongsToMany
+    function belongsToMany(string associated, array myOptions = []): BelongsToMany
     {
         myOptions += ["sourceTable": this];
 
@@ -2423,13 +2423,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Provides the dynamic findBy and findAllBy methods.
      *
-     * @param string $method The method name that was fired.
+     * @param string method The method name that was fired.
      * @param array $args List of arguments passed to the function.
      * @return \Cake\ORM\Query
      * @throws \BadMethodCallException when there are missing arguments, or when
      *  and & or are combined.
      */
-    protected auto _dynamicFinder(string $method, array $args) {
+    protected auto _dynamicFinder(string method, array $args) {
         $method = Inflector::underscore($method);
         preg_match("/^find_([\w]+)_by_/", $method, $matches);
         if (empty($matches)) {
@@ -2488,7 +2488,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * If your Table uses any behaviors you can call them as if
      * they were on the table object.
      *
-     * @param string $method name of the method to be invoked
+     * @param string method name of the method to be invoked
      * @param array $args List of arguments passed to the function
      * @return mixed
      * @throws \BadMethodCallException
@@ -2510,7 +2510,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns the association named after the passed value if exists, otherwise
      * throws an exception.
      *
-     * @param string $property the association name
+     * @param string property the association name
      * @return \Cake\ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
@@ -2533,7 +2533,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns whether an association named after the passed value
      * exists for this table.
      *
-     * @param string $property the association name
+     * @param string property the association name
      * @return bool
      */
     auto __isset($property) {

@@ -47,10 +47,10 @@ class TableHelper : Helper {
     /**
      * Get the width of a cell exclusive of style tags.
      *
-     * @param string $text The text to calculate a width for.
+     * @param string text The text to calculate a width for.
      * @return int The width of the textual content in visible characters.
      */
-    protected int _cellWidth(string $text) {
+    protected int _cellWidth(string text) {
         if ($text == "") {
             return 0;
         }
@@ -155,10 +155,10 @@ class TableHelper : Helper {
     /**
      * Add style tags
      *
-     * @param string $text The text to be surrounded
-     * @param string $style The style to be applied
+     * @param string text The text to be surrounded
+     * @param string style The style to be applied
      */
-    protected string _addStyle(string $text, string $style) {
+    protected string _addStyle(string text, string style) {
         return "<" . $style . ">" . $text . "</" . $style . ">";
     }
 }

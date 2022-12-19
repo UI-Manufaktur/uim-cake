@@ -114,7 +114,7 @@ class RulesChecker : BaseRulesChecker
      * On a `Comments` table that has a `belongsTo Articles` association, this check would ensure that comments
      * can only be edited as long as they are associated to an existing article.
      *
-     * @param \Cake\ORM\Association|string $association The association to check for links.
+     * @param \Cake\ORM\Association|string association The association to check for links.
      * @param string|null myField The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.
@@ -144,7 +144,7 @@ class RulesChecker : BaseRulesChecker
      * On a `Articles` table that has a `hasMany Comments` association, this check would ensure that articles
      * can only be deleted when no associated comments exist.
      *
-     * @param \Cake\ORM\Association|string $association The association to check for links.
+     * @param \Cake\ORM\Association|string association The association to check for links.
      * @param string|null myField The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.
@@ -165,12 +165,12 @@ class RulesChecker : BaseRulesChecker
     /**
      * Adds a link constraint rule.
      *
-     * @param \Cake\ORM\Association|string $association The association to check for links.
+     * @param \Cake\ORM\Association|string association The association to check for links.
      * @param string|null myErrorField The name of the property to use for setting possible errors. When absent,
      *   the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.
-     * @param string $linkStatus The ink status required for the check to pass.
-     * @param string $ruleName The alias/name of the rule.
+     * @param string linkStatus The ink status required for the check to pass.
+     * @param string ruleName The alias/name of the rule.
      * @return \Cake\Datasource\RuleInvoker
      * @throws \InvalidArgumentException In case the `$association` argument is of an invalid type.
      * @since 4.0.0
@@ -183,8 +183,8 @@ class RulesChecker : BaseRulesChecker
         $association,
         Nullable!string myErrorField,
         Nullable!string myMessage,
-        string $linkStatus,
-        string $ruleName
+        string linkStatus,
+        string ruleName
     ): RuleInvoker {
         if ($association instanceof Association) {
             $associationAlias = $association.getName();
@@ -239,14 +239,14 @@ class RulesChecker : BaseRulesChecker
      *
      * @param string myField The field to check the count on.
      * @param int myCount The expected count.
-     * @param string $operator The operator for the count comparison.
+     * @param string operator The operator for the count comparison.
      * @param string|null myMessage The error message to show in case the rule does not pass.
      * @return \Cake\Datasource\RuleInvoker
      */
     function validCount(
         string myField,
         int myCount = 0,
-        string $operator = ">",
+        string operator = ">",
         Nullable!string myMessage = null
     ): RuleInvoker {
         if (!myMessage) {

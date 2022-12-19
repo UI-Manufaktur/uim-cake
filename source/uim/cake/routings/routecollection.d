@@ -100,11 +100,11 @@ class RouteCollection
      * Takes the URL string and iterates the routes until one is able to parse the route.
      *
      * @param string myUrl URL to parse.
-     * @param string $method The HTTP method to use.
+     * @param string method The HTTP method to use.
      * @return array An array of request parameters parsed from the URL.
      * @throws \Cake\Routing\Exception\MissingRouteException When a URL has no matching route.
      */
-    function parse(string myUrl, string $method = ""): array
+    function parse(string myUrl, string method = ""): array
     {
         $decoded = urldecode(myUrl);
 
@@ -365,7 +365,7 @@ class RouteCollection
      * scope or any child scopes that share the same RouteCollection.
      *
      * @param string myName The name of the middleware. Used when applying middleware to a scope.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to register.
+     * @param \Psr\Http\Server\IMiddleware|\Closure|string middleware The middleware to register.
      * @return this
      * @throws \RuntimeException
      */

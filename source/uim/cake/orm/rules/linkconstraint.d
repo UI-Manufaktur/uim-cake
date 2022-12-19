@@ -28,16 +28,16 @@ class LinkConstraint
     /**
      * The link status that is required to be present in order for the check to succeed.
      */
-    protected string $_requiredLinkState;
+    protected string _requiredLinkState;
 
     /**
      * Constructor.
      *
-     * @param \Cake\ORM\Association|string $association The alias of the association that should be checked.
-     * @param string $requiredLinkStatus The link status that is required to be present in order for the check to
+     * @param \Cake\ORM\Association|string association The alias of the association that should be checked.
+     * @param string requiredLinkStatus The link status that is required to be present in order for the check to
      *  succeed.
      */
-    this($association, string $requiredLinkStatus) {
+    this($association, string requiredLinkStatus) {
         if (
             !is_string($association) &&
             !($association instanceof Association)

@@ -24,12 +24,12 @@ class BelongsToMany : Association
     /**
      * The type of join to be used when adding the association to a query
      */
-    protected string $_joinType = Query::JOIN_TYPE_INNER;
+    protected string _joinType = Query::JOIN_TYPE_INNER;
 
     /**
      * The strategy name to be used to fetch associated records.
      */
-    protected string $_strategy = self::STRATEGY_SELECT;
+    protected string _strategy = self::STRATEGY_SELECT;
 
     /**
      * Junction table instance
@@ -41,24 +41,24 @@ class BelongsToMany : Association
     /**
      * Junction table name
      */
-    protected string $_junctionTableName;
+    protected string _junctionTableName;
 
     /**
      * The name of the hasMany association from the target table
      * to the junction table
      */
-    protected string $_junctionAssociationName;
+    protected string _junctionAssociationName;
 
     /**
      * The name of the property to be set containing data from the junction table
      * once a record from the target table is hydrated
      */
-    protected string $_junctionProperty = "_joinData";
+    protected string _junctionProperty = "_joinData";
 
     /**
      * Saving strategy to be used by this association
      */
-    protected string $_saveStrategy = self::SAVE_REPLACE;
+    protected string _saveStrategy = self::SAVE_REPLACE;
 
     /**
      * The name of the field representing the foreign key to the target table
@@ -555,11 +555,11 @@ class BelongsToMany : Association
     /**
      * Sets the strategy that should be used for saving.
      *
-     * @param string $strategy the strategy name to be used
+     * @param string strategy the strategy name to be used
      * @throws \InvalidArgumentException if an invalid strategy name is passed
      * @return this
      */
-    auto setSaveStrategy(string $strategy) {
+    auto setSaveStrategy(string strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
             $msg = sprintf("Invalid save strategy "%s"", $strategy);
             throw new InvalidArgumentException($msg);
@@ -883,7 +883,7 @@ class BelongsToMany : Association
     /**
      * Sets the current join table, either the name of the Table instance or the instance itself.
      *
-     * @param \Cake\ORM\Table|string $through Name of the Table instance or the instance itself
+     * @param \Cake\ORM\Table|string through Name of the Table instance or the instance itself
      * @return this
      */
     auto setThrough($through) {

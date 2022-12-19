@@ -125,10 +125,10 @@ class ShadowTableStrategy : ITranslateStrategy {
     /**
      * Create a hasOne association for record with required locale.
      *
-     * @param string $locale Locale
+     * @param string locale Locale
      * @param \ArrayObject myOptions Find options
      */
-    protected void setupHasOneAssociation(string $locale, ArrayObject myOptions) {
+    protected void setupHasOneAssociation(string locale, ArrayObject myOptions) {
         myConfig = this.getConfig();
 
         [myPlugin] = pluginSplit(myConfig["translationTable"]);
@@ -428,7 +428,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * fields into each entity for a given locale.
      *
      * @param \Cake\Datasource\IResultSet myResults Results to map.
-     * @param string $locale Locale string
+     * @param string locale Locale string
      * @return \Cake\Collection\ICollection
      */
     protected auto rowMapper(myResults, $locale) {

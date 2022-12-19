@@ -12,5 +12,5 @@ import uim.cake;
  * Used when a behavior cannot be found.
  */
 class MissingBehaviorException : CakeException {
-    protected string $_messageTemplate = "Behavior class %s could not be found.";
+    protected string _messageTemplate = "Behavior class %s could not be found.";
 }

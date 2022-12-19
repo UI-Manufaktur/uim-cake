@@ -210,7 +210,7 @@ class SmtpTransport : AbstractTransport
             }
             $host = myConfig["client"];
         } else {
-            /** @var string $httpHost */
+            /** @var string httpHost */
             $httpHost = env("HTTP_HOST");
             if ($httpHost) {
                 [$host] = explode(":", $httpHost);

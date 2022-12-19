@@ -180,10 +180,10 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Will return true if any behavior provides a public non-finder method
      * with the chosen name.
      *
-     * @param string $method The method to check for.
+     * @param string method The method to check for.
      * @return bool
      */
-    bool hasMethod(string $method) {
+    bool hasMethod(string method) {
         $method = strtolower($method);
 
         return isset(_methodMap[$method]);
@@ -195,10 +195,10 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Will return true if any behavior provides a public method with
      * the chosen name.
      *
-     * @param string $method The method to check for.
+     * @param string method The method to check for.
      * @return bool
      */
-    bool hasFinder(string $method) {
+    bool hasFinder(string method) {
         $method = strtolower($method);
 
         return isset(_finderMap[$method]);
@@ -207,12 +207,12 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Invoke a method on a behavior.
      *
-     * @param string $method The method to invoke.
+     * @param string method The method to invoke.
      * @param array $args The arguments you want to invoke the method with.
      * @return mixed The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
-    function call(string $method, array $args = []) {
+    function call(string method, array $args = []) {
         $method = strtolower($method);
         if (this.hasMethod($method) && this.has(_methodMap[$method][0])) {
             [$behavior, $callMethod] = _methodMap[$method];

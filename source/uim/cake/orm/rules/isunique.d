@@ -13,7 +13,7 @@ class IsUnique
      *
      * @var array<string>
      */
-    protected string $_fields;
+    protected string _fields;
 
     /**
      * The unique check options

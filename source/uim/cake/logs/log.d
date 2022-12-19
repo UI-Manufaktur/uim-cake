@@ -326,7 +326,7 @@ class Log
      * @param string|int $level The severity level of the message being written.
      *    The value must be an integer or string matching a known level.
      * @param string myMessage Message content to log
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -381,7 +381,7 @@ class Log
      * Convenience method to log emergency messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -396,7 +396,7 @@ class Log
      * Convenience method to log alert messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -411,7 +411,7 @@ class Log
      * Convenience method to log critical messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -426,7 +426,7 @@ class Log
      * Convenience method to log error messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -441,7 +441,7 @@ class Log
      * Convenience method to log warning messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -456,7 +456,7 @@ class Log
      * Convenience method to log notice messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -471,7 +471,7 @@ class Log
      * Convenience method to log debug messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -486,7 +486,7 @@ class Log
      * Convenience method to log info messages
      *
      * @param string myMessage log message
-     * @param array|string $context Additional data to be used for logging the message.
+     * @param array|string context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically indexed array is passed, it
      *  will be treated as the `scope` key.

@@ -321,7 +321,7 @@ class EavStrategy : ITranslateStrategy
      * into each entity for a given locale.
      *
      * @param \Cake\Datasource\IResultSet myResults Results to map.
-     * @param string $locale Locale string
+     * @param string locale Locale string
      * @return \Cake\Collection\ICollection
      */
     protected auto rowMapper(myResults, $locale) {

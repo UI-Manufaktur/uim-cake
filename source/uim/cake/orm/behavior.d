@@ -371,7 +371,7 @@ class Behavior : IEventListener
       myEventMethods = [];
       foreach (myEvents as $binding) {
           if (is_array($binding) && isset($binding["callable"])) {
-              /** @var string $callable */
+              /** @var string callable */
               $callable = $binding["callable"];
               $binding = $callable;
           }

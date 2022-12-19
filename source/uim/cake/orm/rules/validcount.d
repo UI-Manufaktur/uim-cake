@@ -16,7 +16,7 @@ class ValidCount
     /**
      * The field to check
      */
-    protected string $_field;
+    protected string _field;
 
     /**
      * Constructor.

@@ -13,7 +13,7 @@ class EagerLoadable
     /**
      * The name of the association to load.
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * A list of other associations to load from this level.
@@ -41,7 +41,7 @@ class EagerLoadable
      * A dotted separated string representing the path of associations
      * that should be followed to fetch this level.
      */
-    protected string $_aliasPath;
+    protected string _aliasPath;
 
     /**
      * A dotted separated string representing the path of entity properties

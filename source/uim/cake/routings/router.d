@@ -133,7 +133,7 @@ class Router
      * @param string|null $routeClass Class name.
      * @return string|null
      */
-    static Nullable!string defaultRouteClass(Nullable!string $routeClass = null) {
+    static Nullable!string defaultRouteClass(Nullable!string routeClass = null) {
         if ($routeClass == null) {
             return static::$_defaultRouteClass;
         }
@@ -157,8 +157,8 @@ class Router
      *
      * Compatibility proxy to \Cake\Routing\RouteBuilder::connect() in the `/` scope.
      *
-     * @param \Cake\Routing\Route\Route|string $route A string describing the template of the route
-     * @param array|string $defaults An array describing the default route parameters.
+     * @param \Cake\Routing\Route\Route|string route A string describing the template of the route
+     * @param array|string defaults An array describing the default route parameters.
      *   These parameters will be used by default and can supply routing parameters that are not dynamic. See above.
      * @param array<string, mixed> myOptions An array matching the named elements in the route to regular expressions which that
      *   element should match. Also contains additional parameters such as which routed parameters should be
@@ -317,7 +317,7 @@ class Router
                 if (is_array($filter)) {
                     $ref = new ReflectionMethod($filter[0], $filter[1]);
                 } else {
-                    /** @psalm-var \Closure|callable-string $filter */
+                    /** @psalm-var \Closure|callable-string filter */
                     $ref = new ReflectionFunction($filter);
                 }
                 myMessage = sprintf(
@@ -543,7 +543,7 @@ class Router
      * For example: `http://example.com`
      * @return string
      */
-    static string fullBaseUrl(Nullable!string $base = null) {
+    static string fullBaseUrl(Nullable!string base = null) {
         if ($base == null && static::$_fullBaseUrl !== null) {
             return static::$_fullBaseUrl;
         }

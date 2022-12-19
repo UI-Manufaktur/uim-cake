@@ -220,7 +220,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
-    auto locale(Nullable!string $locale) {
+    auto locale(Nullable!string locale) {
         this.getStrategy().locale($locale);
 
         return this;
@@ -295,7 +295,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Proxy method calls to strategy class instance.
      *
-     * @param string $method Method name.
+     * @param string method Method name.
      * @param array $args Method arguments.
      * @return mixed
      */

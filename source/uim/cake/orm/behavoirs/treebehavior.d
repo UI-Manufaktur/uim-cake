@@ -25,7 +25,7 @@ use RuntimeException;
 class TreeBehavior : Behavior
 {
     // Cached copy of the first column in a table"s primary key.
-    protected string $_primaryKey;
+    protected string _primaryKey;
 
     /**
      * Default config
@@ -853,14 +853,14 @@ class TreeBehavior : Behavior
      * right columns by a certain amount that match the passed conditions
      *
      * @param int $shift the value to use for operating the left and right columns
-     * @param string $dir The operator to use for shifting the value (+/-)
-     * @param string $conditions a SQL snipped to be used for comparing left or right
+     * @param string dir The operator to use for shifting the value (+/-)
+     * @param string conditions a SQL snipped to be used for comparing left or right
      * against it.
      * @param bool $mark whether to mark the updated values so that they can not be
      * modified by future calls to this function.
      * @return void
      */
-    protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false) {
+    protected void _sync(int $shift, string dir, string conditions, bool $mark = false) {
         myConfig = _config;
 
         foreach ([myConfig["leftField"], myConfig["rightField"]] as myField) {

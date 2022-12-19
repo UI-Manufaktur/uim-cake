@@ -62,12 +62,12 @@ abstract class Association
      * Name given to the association, it usually represents the alias
      * assigned to the target associated table
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * The class name of the target table object
      */
-    protected string $_className;
+    protected string _className;
 
     /**
      * The field name in the owning side table that is used to match with the foreignKey
@@ -124,19 +124,19 @@ abstract class Association
     /**
      * The type of join to be used when adding the association to a query
      */
-    protected string $_joinType = Query::JOIN_TYPE_LEFT;
+    protected string _joinType = Query::JOIN_TYPE_LEFT;
 
     /**
      * The property name that should be filled with data from the target table
      * in the source table record.
      */
-    protected string $_propertyName;
+    protected string _propertyName;
 
     /**
      * The strategy name to be used to fetch associated records. Some association
      * types might not implement but one strategy to fetch records.
      */
-    protected string $_strategy = self::STRATEGY_JOIN;
+    protected string _strategy = self::STRATEGY_JOIN;
 
     /**
      * The default finder name to use for fetching rows from the target table
@@ -721,7 +721,7 @@ abstract class Association
      * source results.
      *
      * @param array $row The row to transform
-     * @param string $nestKey The array key under which the results for this association
+     * @param string nestKey The array key under which the results for this association
      *   should be found
      * @param bool $joined Whether the row is a result of a direct join
      *   with this association
@@ -729,7 +729,7 @@ abstract class Association
      * data shuld be nested in. Will use the default one if not provided.
      * @return array
      */
-    array transformRow(array $row, string $nestKey, bool $joined, Nullable!string myTargetProperty = null) {
+    array transformRow(array $row, string nestKey, bool $joined, Nullable!string myTargetProperty = null) {
         $sourceAlias = this.getSource().getAlias();
         $nestKey = $nestKey ?: _name;
         myTargetProperty = myTargetProperty ?: this.getProperty();
@@ -1049,7 +1049,7 @@ abstract class Association
      * Proxies property retrieval to the target table. This is handy for getting this
      * association"s associations
      *
-     * @param string $property the property name
+     * @param string property the property name
      * @return \Cake\ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
@@ -1061,7 +1061,7 @@ abstract class Association
      * Proxies the isset call to the target table. This is handy to check if the
      * target table has another association with the passed name
      *
-     * @param string $property the property name
+     * @param string property the property name
      * @return bool true if the property exists
      */
     auto __isset($property) {
@@ -1071,7 +1071,7 @@ abstract class Association
     /**
      * Proxies method calls to the target table.
      *
-     * @param string $method name of the method to be invoked
+     * @param string method name of the method to be invoked
      * @param array $argument List of arguments passed to the function
      * @return mixed
      * @throws \BadMethodCallException

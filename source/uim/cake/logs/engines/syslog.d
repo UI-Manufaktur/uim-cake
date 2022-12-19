@@ -123,11 +123,11 @@ class SyslogLog : BaseLog {
      * Extracts the call to openlog() in order to run unit tests on it. This function
      * will initialize the connection to the system logger
      *
-     * @param string $ident the prefix to add to all messages logged
+     * @param string ident the prefix to add to all messages logged
      * @param int myOptions the options flags to be used for logged messages
      * @param int $facility the stream or facility to log to
      */
-    protected void _open(string $ident, int myOptions, int $facility) {
+    protected void _open(string ident, int myOptions, int $facility) {
         openlog($ident, myOptions, $facility);
     }
 

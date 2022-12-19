@@ -18,12 +18,12 @@ class SelectWithPivotLoader : SelectLoader
     /**
      * The name of the junction association
      */
-    protected string $junctionAssociationName;
+    protected string junctionAssociationName;
 
     /**
      * The property name for the junction association, where its results should be nested at.
      */
-    protected string $junctionProperty;
+    protected string junctionProperty;
 
     /**
      * The junction association instance

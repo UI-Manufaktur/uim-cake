@@ -106,7 +106,7 @@ class EagerLoader
      * - joinType: For joinable associations, the SQL join type to use.
      * - strategy: The loading strategy to use (join, select, subquery)
      *
-     * @param array|string $associations list of table aliases to be queried.
+     * @param array|string associations list of table aliases to be queried.
      * When this method is called multiple times it will merge previous list with
      * the new one.
      * @param callable|null myQueryBuilder The query builder callable
@@ -207,13 +207,13 @@ class EagerLoader
      *  - `fields`: Fields to contain
      *  - `negateMatch`: Whether to add conditions negate match on target association
      *
-     * @param string $associationPath Dot separated association path, "Name1.Name2.Name3"
+     * @param string associationPath Dot separated association path, "Name1.Name2.Name3"
      * @param callable|null myBuilder the callback function to be used for setting extra
      * options to the filtering query
      * @param array<string, mixed> myOptions Extra options for the association matching.
      * @return this
      */
-    auto setMatching(string $associationPath, ?callable myBuilder = null, array myOptions = []) {
+    auto setMatching(string associationPath, ?callable myBuilder = null, array myOptions = []) {
         if (_matching == null) {
             _matching = new static();
         }

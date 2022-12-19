@@ -41,7 +41,7 @@ class RouteBuilder {
     /**
      * Default route class to use if none is provided in connect() options.
      */
-    protected string $_routeClass = Route::class;
+    protected string _routeClass = Route::class;
 
     /**
      * The extensions that should be set into the routes connected.
@@ -53,7 +53,7 @@ class RouteBuilder {
     /**
      * The path prefix scope that this collection uses.
      */
-    protected string $_path;
+    protected string _path;
 
     /**
      * The scope parameters if there are any.
@@ -65,7 +65,7 @@ class RouteBuilder {
     /**
      * Name prefix for connected routes.
      */
-    protected string $_namePrefix = "";
+    protected string _namePrefix = "";
 
     /**
      * The route collection routes should be added to.
@@ -116,10 +116,10 @@ class RouteBuilder {
     /**
      * Set default route class.
      *
-     * @param string $routeClass Class name.
+     * @param string routeClass Class name.
      * @return this
      */
-    auto setRouteClass(string $routeClass) {
+    auto setRouteClass(string routeClass) {
         _routeClass = $routeClass;
 
         return this;
@@ -155,7 +155,7 @@ class RouteBuilder {
     /**
      * Add additional extensions to what is already in current scope
      *
-     * @param array<string>|string $extensions One or more extensions to add
+     * @param array<string>|string extensions One or more extensions to add
      * @return this
      */
     function addExtensions($extensions) {
@@ -483,14 +483,14 @@ class RouteBuilder {
     /**
      * Helper to create routes that only respond to a single HTTP method.
      *
-     * @param string $method The HTTP method name to match.
+     * @param string method The HTTP method name to match.
      * @param string myTemplate The URL template to use.
      * @param array|string myTarget An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null myName The name of the route.
      * @return \Cake\Routing\Route\Route
      */
-    protected auto _methodRoute(string $method, string myTemplate, myTarget, Nullable!string myName): Route
+    protected auto _methodRoute(string method, string myTemplate, myTarget, Nullable!string myName): Route
     {
         if (myName !== null) {
             myName = _namePrefix . myName;
@@ -607,8 +607,8 @@ class RouteBuilder {
      *
      * The above route will only be matched for GET requests. POST requests will fail to match this route.
      *
-     * @param \Cake\Routing\Route\Route|string $route A string describing the template of the route
-     * @param array|string $defaults An array describing the default route parameters.
+     * @param \Cake\Routing\Route\Route|string route A string describing the template of the route
+     * @param array|string defaults An array describing the default route parameters.
      *   These parameters will be used by default and can supply routing parameters that are not dynamic. See above.
      * @param array<string, mixed> myOptions An array matching the named elements in the route to regular expressions which that
      *   element should match. Also contains additional parameters such as which routed parameters should be
@@ -643,7 +643,7 @@ class RouteBuilder {
     /**
      * Parse the defaults if they"re a string
      *
-     * @param array|string $defaults Defaults array from the connect() method.
+     * @param array|string defaults Defaults array from the connect() method.
      * @return array
      */
     protected auto parseDefaults($defaults): array
@@ -658,7 +658,7 @@ class RouteBuilder {
     /**
      * Create a route object, or return the provided object.
      *
-     * @param \Cake\Routing\Route\Route|string $route The route template or route object.
+     * @param \Cake\Routing\Route\Route|string route The route template or route object.
      * @param array $defaults Default parameters.
      * @param array<string, mixed> myOptions Additional options parameters.
      * @return \Cake\Routing\Route\Route
@@ -738,14 +738,14 @@ class RouteBuilder {
      * - `persist` Passes the params to the redirected route, if it can. This is useful with greedy routes,
      *   routes that end in `*` are greedy. As you can remap URLs and not lose any passed args.
      *
-     * @param string $route A string describing the template of the route
+     * @param string route A string describing the template of the route
      * @param array|string myUrl A URL to redirect to. Can be a string or a Cake array-based URL
      * @param array<string, mixed> myOptions An array matching the named elements in the route to regular expressions which that
      *   element should match. Also contains additional parameters such as which routed parameters should be
      *   shifted into the passed arguments. As well as supplying patterns for routing parameters.
      * @return \Cake\Routing\Route\Route|\Cake\Routing\Route\RedirectRoute
      */
-    function redirect(string $route, myUrl, array myOptions = []): Route
+    function redirect(string route, myUrl, array myOptions = []): Route
     {
         myOptions["routeClass"] = myOptions["routeClass"] ?? RedirectRoute::class;
         if (is_string(myUrl)) {
@@ -906,7 +906,7 @@ class RouteBuilder {
      *   if not specified
      * @return this
      */
-    function fallbacks(Nullable!string $routeClass = null) {
+    function fallbacks(Nullable!string routeClass = null) {
         $routeClass = $routeClass ?: _routeClass;
         this.connect("/{controller}", ["action":"index"], compact("routeClass"));
         this.connect("/{controller}/{action}/*", [], compact("routeClass"));
@@ -921,7 +921,7 @@ class RouteBuilder {
      * scope or any child scopes that share the same RouteCollection.
      *
      * @param string myName The name of the middleware. Used when applying middleware to a scope.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to register.
+     * @param \Psr\Http\Server\IMiddleware|\Closure|string middleware The middleware to register.
      * @return this
      * @see \Cake\Routing\RouteCollection
      */

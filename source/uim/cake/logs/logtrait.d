@@ -19,7 +19,7 @@ trait LogTrait
      *
      * @param string myMessage Log message.
      * @param string|int $level Error level.
-     * @param array|string $context Additional log data relevant to this message.
+     * @param array|string context Additional log data relevant to this message.
      * @return bool Success of log write.
      */
     bool log(string myMessage, $level = LogLevel::ERROR, $context = []) {

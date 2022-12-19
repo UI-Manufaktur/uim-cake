@@ -50,7 +50,7 @@ class FileLog : BaseLog
     /**
      * Path to save log files on.
      */
-    protected string $_path;
+    protected string _path;
 
     /**
      * The name of the file to save logs into.
@@ -143,10 +143,10 @@ class FileLog : BaseLog
     /**
      * Get filename
      *
-     * @param string $level The level of log.
+     * @param string level The level of log.
      * @return string File name
      */
-    protected string _getFilename(string $level) {
+    protected string _getFilename(string level) {
         $debugTypes = ["notice", "info", "debug"];
 
         if (_file) {

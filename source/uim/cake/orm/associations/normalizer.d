@@ -9,7 +9,7 @@ trait AssociationsNormalizerTrait {
      * Returns an array out of the original passed associations list where dot notation
      * is transformed into nested arrays so that they can be parsed by other routines
      *
-     * @param array|string $associations The array of included associations.
+     * @param array|string associations The array of included associations.
      * @return array An array having dot notation transformed into nested arrays
      */
     protected array _normalizeAssociations($associations) {
@@ -29,7 +29,7 @@ trait AssociationsNormalizerTrait {
 
             myPath = explode(".", myTable);
             myTable = array_pop(myPath);
-            /** @var string $first */
+            /** @var string first */
             $first = array_shift(myPath);
             $pointer += [$first: []];
             $pointer = &$pointer[$first];

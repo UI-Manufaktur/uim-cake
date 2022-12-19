@@ -45,7 +45,7 @@ class ResultSet : IResultSet
     /**
      * The default table alias
      */
-    protected string $_defaultAlias;
+    protected string _defaultAlias;
 
     /**
      * List of associations that should be placed under the `_matchingData`
@@ -102,7 +102,7 @@ class ResultSet : IResultSet
     /**
      * The fully moduled name of the class to use for hydrating results
      */
-    protected string $_entityClass;
+    protected string _entityClass;
 
     /**
      * Whether to buffer results fetched from the statement
@@ -294,7 +294,7 @@ class ResultSet : IResultSet
      *
      * Part of Serializable interface.
      *
-     * @param string $serialized Serialized object
+     * @param string serialized Serialized object
      * @return void
      */
     void unserialize($serialized) {

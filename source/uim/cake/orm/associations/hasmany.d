@@ -21,12 +21,12 @@ class HasMany : Association
     /**
      * The type of join to be used when adding the association to a query
      */
-    protected string $_joinType = Query::JOIN_TYPE_INNER;
+    protected string _joinType = Query::JOIN_TYPE_INNER;
 
     /**
      * The strategy name to be used to fetch associated records.
      */
-    protected string $_strategy = self::STRATEGY_SELECT;
+    protected string _strategy = self::STRATEGY_SELECT;
 
     /**
      * Valid strategies for this type of association
@@ -51,7 +51,7 @@ class HasMany : Association
     /**
      * Saving strategy to be used by this association
      */
-    protected string $_saveStrategy = self::SAVE_APPEND;
+    protected string _saveStrategy = self::SAVE_APPEND;
 
     /**
      * Returns whether the passed table is the owning side for this
@@ -67,11 +67,11 @@ class HasMany : Association
     /**
      * Sets the strategy that should be used for saving.
      *
-     * @param string $strategy the strategy name to be used
+     * @param string strategy the strategy name to be used
      * @throws \InvalidArgumentException if an invalid strategy name is passed
      * @return this
      */
-    auto setSaveStrategy(string $strategy) {
+    auto setSaveStrategy(string strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
             $msg = sprintf("Invalid save strategy "%s"", $strategy);
             throw new InvalidArgumentException($msg);

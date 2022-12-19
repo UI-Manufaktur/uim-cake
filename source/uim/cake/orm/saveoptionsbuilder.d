@@ -67,7 +67,7 @@ class SaveOptionsBuilder : ArrayObject
     /**
      * Set associated options.
      *
-     * @param array|string $associated String or array of associations.
+     * @param array|string associated String or array of associations.
      * @return this
      */
     function associated($associated) {
@@ -104,9 +104,9 @@ class SaveOptionsBuilder : ArrayObject
      *
      * @throws \RuntimeException If no such association exists for the given table.
      * @param \Cake\ORM\Table myTable Table object.
-     * @param string $association Association name.
+     * @param string association Association name.
      */
-    protected void _checkAssociation(Table myTable, string $association) {
+    protected void _checkAssociation(Table myTable, string association) {
         if (!myTable.associations().has($association)) {
             throw new RuntimeException(sprintf(
                 "Table `%s` is not associated with `%s`",
@@ -131,10 +131,10 @@ class SaveOptionsBuilder : ArrayObject
     /**
      * Set the validation rule set to use.
      *
-     * @param string $validate Name of the validation rule set to use.
+     * @param string validate Name of the validation rule set to use.
      * @return this
      */
-    function validate(string $validate) {
+    function validate(string validate) {
         _table.getValidator($validate);
         _options["validate"] = $validate;
 
@@ -188,11 +188,11 @@ class SaveOptionsBuilder : ArrayObject
     /**
      * Setting custom options.
      *
-     * @param string $option Option key.
+     * @param string option Option key.
      * @param mixed myValue Option value.
      * @return this
      */
-    auto set(string $option, myValue) {
+    auto set(string option, myValue) {
         if (method_exists(this, $option)) {
             return this.{$option}(myValue);
         }
