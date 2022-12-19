@@ -169,12 +169,12 @@ class RouteBuilder {
      * Get the path this scope is for.
      */
     string path() {
-        $routeKey = strpos(this._path, "{");
-        if ($routeKey !== false && strpos(this._path, "}") !== false) {
+        $routeKey = indexOf(this._path, "{");
+        if ($routeKey !== false && indexOf(this._path, "}") !== false) {
             return substr(this._path, 0, $routeKey);
         }
 
-        $routeKey = strpos(this._path, ":");
+        $routeKey = indexOf(this._path, ":");
         if ($routeKey !== false) {
             return substr(this._path, 0, $routeKey);
         }

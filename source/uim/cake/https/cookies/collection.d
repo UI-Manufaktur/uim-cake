@@ -237,7 +237,7 @@ class CookieCollection : IteratorAggregate, Countable {
             if ($scheme == "http" && $cookie.isSecure()) {
                 continue;
             }
-            if (strpos(myPath, $cookie.getPath()) !== 0) {
+            if (indexOf(myPath, $cookie.getPath()) !== 0) {
                 continue;
             }
             $domain = $cookie.getDomain();
@@ -301,7 +301,7 @@ class CookieCollection : IteratorAggregate, Countable {
             if (!$cookie.isExpired($time)) {
                 continue;
             }
-            myPathMatches = strpos(myPath, $cookie.getPath()) == 0;
+            myPathMatches = indexOf(myPath, $cookie.getPath()) == 0;
             $hostMatches = preg_match($hostPattern, $cookie.getDomain());
             if (myPathMatches && $hostMatches) {
                 unset(this.cookies[$i]);

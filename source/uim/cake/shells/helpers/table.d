@@ -55,7 +55,7 @@ class TableHelper : Helper {
             return 0;
         }
 
-        if (strpos($text, "<") == false && strpos($text, ">") == false) {
+        if (indexOf($text, "<") == false && indexOf($text, ">") == false) {
             return mb_strwidth($text);
         }
 

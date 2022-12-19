@@ -108,7 +108,7 @@ class IniConfig : IConfigEngine
                 myValue = false;
             }
             unset(myValues[myKey]);
-            if (strpos((string)myKey, ".") !== false) {
+            if (indexOf((string)myKey, ".") !== false) {
                 myValues = Hash::insert(myValues, myKey, myValue);
             } else {
                 myValues[myKey] = myValue;

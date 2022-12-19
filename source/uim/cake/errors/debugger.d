@@ -448,13 +448,13 @@ class Debugger
      * @return string Normalized path
      */
     static string trimPath(string myPath) {
-        if (defined("APP") && strpos(myPath, APP) == 0) {
+        if (defined("APP") && indexOf(myPath, APP) == 0) {
             return str_replace(APP, "APP/", myPath);
         }
-        if (defined("CAKE_CORE_INCLUDE_PATH") && strpos(myPath, CAKE_CORE_INCLUDE_PATH) == 0) {
+        if (defined("CAKE_CORE_INCLUDE_PATH") && indexOf(myPath, CAKE_CORE_INCLUDE_PATH) == 0) {
             return str_replace(CAKE_CORE_INCLUDE_PATH, "CORE", myPath);
         }
-        if (defined("ROOT") && strpos(myPath, ROOT) == 0) {
+        if (defined("ROOT") && indexOf(myPath, ROOT) == 0) {
             return str_replace(ROOT, "ROOT", myPath);
         }
 
@@ -491,7 +491,7 @@ class Debugger
         if (empty(myData)) {
             return $lines;
         }
-        if (strpos(myData, "\n") !== false) {
+        if (indexOf(myData, "\n") !== false) {
             myData = explode("\n", myData);
         }
         $line--;
@@ -525,7 +525,7 @@ class Debugger
             return htmlentities($str);
         }
         $added = false;
-        if (strpos($str, "<?php") == false) {
+        if (indexOf($str, "<?php") == false) {
             $added = true;
             $str = "<?php \n" . $str;
         }

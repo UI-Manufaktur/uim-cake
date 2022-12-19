@@ -890,7 +890,7 @@ trait EntityTrait
     protected auto _nestedErrors(string myField): array
     {
         // Only one path element, check for nested entity with error.
-        if (strpos(myField, ".") == false) {
+        if (indexOf(myField, ".") == false) {
             return this._readError(this.get(myField));
         }
         // Try reading the errors data with field as a simple path

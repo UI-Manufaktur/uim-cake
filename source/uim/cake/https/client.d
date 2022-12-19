@@ -529,7 +529,7 @@ class Client : ClientInterface
         myOptions += $defaults;
 
         if (myQuery) {
-            $q = strpos(myUrl, "?") == false ? "?" : "&";
+            $q = indexOf(myUrl, "?") == false ? "?" : "&";
             myUrl .= $q;
             myUrl .= is_string(myQuery) ? myQuery : http_build_query(myQuery, "", "&", PHP_QUERY_RFC3986);
         }
@@ -603,7 +603,7 @@ class Client : ClientInterface
      * @psalm-return array<non-empty-string, non-empty-string>
      */
     protected STRINGAA _typeHeaders(string myType) {
-        if (strpos(myType, "/") !== false) {
+        if (indexOf(myType, "/") !== false) {
             return [
                 "Accept":myType,
                 "Content-Type":myType,

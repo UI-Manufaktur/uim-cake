@@ -288,7 +288,7 @@ class ServerRequest : IServerRequest
             myConfig["url"] = "/" . myConfig["url"];
         }
 
-        if (strpos(myConfig["url"], "?") !== false) {
+        if (indexOf(myConfig["url"], "?") !== false) {
             [myConfig["url"], myConfig["environment"]["QUERY_STRING"]] = explode("?", myConfig["url"]);
 
             parse_str(myConfig["environment"]["QUERY_STRING"], myQueryArgs);
@@ -395,9 +395,9 @@ class ServerRequest : IServerRequest
 
         $base = Configure::read("App.fullBaseUrl") . this.webroot;
         if (!empty($ref) && !empty($base)) {
-            if ($local && strpos($ref, $base) == 0) {
+            if ($local && indexOf($ref, $base) == 0) {
                 $ref = substr($ref, strlen($base));
-                if ($ref == "" || strpos($ref, "//") == 0) {
+                if ($ref == "" || indexOf($ref, "//") == 0) {
                     $ref = "/";
                 }
                 if ($ref[0] !== "/") {
@@ -423,7 +423,7 @@ class ServerRequest : IServerRequest
      * @throws \BadMethodCallException when an invalid method is called.
      */
     auto __call(string myName, array myParams) {
-        if (strpos(myName, "is") == 0) {
+        if (indexOf(myName, "is") == 0) {
             myType = strtolower(substr(myName, 2));
 
             array_unshift(myParams, myType);
@@ -728,10 +728,10 @@ class ServerRequest : IServerRequest
         $headers = [];
         foreach (this._environment as myKey: myValue) {
             myName = null;
-            if (strpos(myKey, "HTTP_") == 0) {
+            if (indexOf(myKey, "HTTP_") == 0) {
                 myName = substr(myKey, 5);
             }
-            if (strpos(myKey, "CONTENT_") == 0) {
+            if (indexOf(myKey, "CONTENT_") == 0) {
                 myName = myKey;
             }
             if (myName !== null) {
@@ -1071,7 +1071,7 @@ class ServerRequest : IServerRequest
         $accept = [];
         foreach ($raw as myLanguages) {
             foreach (myLanguages as &$lang) {
-                if (strpos($lang, "_")) {
+                if (indexOf($lang, "_")) {
                     $lang = str_replace("_", "-", $lang);
                 }
                 $lang = strtolower($lang);
@@ -1101,12 +1101,12 @@ class ServerRequest : IServerRequest
             $prefValue = "1.0";
             myValue = trim(myValue);
 
-            $semiPos = strpos(myValue, ";");
+            $semiPos = indexOf(myValue, ";");
             if ($semiPos !== false) {
                 myParams = explode(";", myValue);
                 myValue = trim(myParams[0]);
                 foreach (myParams as $param) {
-                    $qPos = strpos($param, "q=");
+                    $qPos = indexOf($param, "q=");
                     if ($qPos !== false) {
                         $prefValue = substr($param, $qPos + 2);
                     }

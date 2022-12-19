@@ -375,7 +375,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return string The field prefixed with the table alias.
      */
     string aliasField(string myField) {
-        if (strpos(myField, ".") !== false) {
+        if (indexOf(myField, ".") !== false) {
             return myField;
         }
 
@@ -850,7 +850,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     protected auto findAssociation(string myName): ?Association
     {
-        if (strpos(myName, ".") == false) {
+        if (indexOf(myName, ".") == false) {
             return this._associations.get(myName);
         }
 
@@ -2440,8 +2440,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             myFields = substr($method, strlen($matches[0]));
             $findType = Inflector::variable($matches[1]);
         }
-        $hasOr = strpos(myFields, "_or_");
-        $hasAnd = strpos(myFields, "_and_");
+        $hasOr = indexOf(myFields, "_or_");
+        $hasAnd = indexOf(myFields, "_and_");
 
         $makeConditions = function (myFields, $args) {
             $conditions = [];

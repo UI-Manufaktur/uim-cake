@@ -344,7 +344,7 @@ class ExceptionRenderer : IExceptionRenderer
             $attributes = $e.getAttributes();
             if (
                 $e instanceof MissingLayoutException ||
-                strpos($attributes["file"], "error500") !== false
+                indexOf($attributes["file"], "error500") !== false
             ) {
                 return this._outputMessageSafe("error500");
             }

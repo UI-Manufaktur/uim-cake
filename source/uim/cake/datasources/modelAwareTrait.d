@@ -82,7 +82,7 @@ trait ModelAwareTrait
         myModelType = myModelType ?? this.getModelType();
 
         myOptions = [];
-        if (strpos(myModelClass, "\\") == false) {
+        if (indexOf(myModelClass, "\\") == false) {
             [, myAlias] = pluginSplit(myModelClass, true);
         } else {
             myOptions["className"] = myModelClass;

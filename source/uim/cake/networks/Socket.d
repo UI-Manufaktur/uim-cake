@@ -105,7 +105,7 @@ class Socket
             this.disconnect();
         }
 
-        $hasProtocol = strpos(this._config["host"], "://") !== false;
+        $hasProtocol = indexOf(this._config["host"], "://") !== false;
         if ($hasProtocol) {
             [this._config["protocol"], this._config["host"]] = explode("://", this._config["host"]);
         }

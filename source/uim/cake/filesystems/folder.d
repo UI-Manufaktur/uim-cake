@@ -536,7 +536,7 @@ class Folder
         foreach ($iterator as $itemPath: $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator.getSubPathname();
-                if ($subPathName[0] == "." || strpos($subPathName, DIRECTORY_SEPARATOR . ".") !== false) {
+                if ($subPathName[0] == "." || indexOf($subPathName, DIRECTORY_SEPARATOR . ".") !== false) {
                     unset($fsIterator);
                     continue;
                 }
@@ -893,7 +893,7 @@ class Folder
      * @return string|false The resolved path
      */
     function realpath(myPath) {
-        if (strpos(myPath, "..") == false) {
+        if (indexOf(myPath, "..") == false) {
             if (!Folder::isAbsolute(myPath)) {
                 myPath = Folder::addPathElement(this.path, myPath);
             }

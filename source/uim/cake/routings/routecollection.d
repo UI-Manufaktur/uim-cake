@@ -112,12 +112,12 @@ class RouteCollection
         krsort(this._paths);
 
         foreach (this._paths as myPath => $routes) {
-            if (strpos($decoded, myPath) !== 0) {
+            if (indexOf($decoded, myPath) !== 0) {
                 continue;
             }
 
             myQueryParameters = [];
-            if (strpos(myUrl, "?") !== false) {
+            if (indexOf(myUrl, "?") !== false) {
                 [myUrl, $qs] = explode("?", myUrl, 2);
                 parse_str($qs, myQueryParameters);
             }
@@ -161,7 +161,7 @@ class RouteCollection
         krsort(this._paths);
 
         foreach (this._paths as myPath => $routes) {
-            if (strpos(myUrlPath, myPath) !== 0) {
+            if (indexOf(myUrlPath, myPath) !== 0) {
                 continue;
             }
 

@@ -331,7 +331,7 @@ abstract class Association
     auto getTarget(): Table
     {
         if (this._targetTable == null) {
-            if (strpos(this._className, ".")) {
+            if (indexOf(this._className, ".")) {
                 [myPlugin] = pluginSplit(this._className, true);
                 $registryAlias = (string)myPlugin . this._name;
             } else {

@@ -176,7 +176,7 @@ class TableLocator : AbstractLocator : ILocator
 
 
     protected auto createInstance(string myAlias, array myOptions) {
-        if (strpos(myAlias, "\\") == false) {
+        if (indexOf(myAlias, "\\") == false) {
             [, myClassAlias] = pluginSplit(myAlias);
             myOptions = ["alias": myClassAlias] + myOptions;
         } elseif (!isset(myOptions["alias"])) {
@@ -197,7 +197,7 @@ class TableLocator : AbstractLocator : ILocator
             if (empty(myOptions["className"])) {
                 myOptions["className"] = myAlias;
             }
-            if (!isset(myOptions["table"]) && strpos(myOptions["className"], "\\") == false) {
+            if (!isset(myOptions["table"]) && indexOf(myOptions["className"], "\\") == false) {
                 [, myTable] = pluginSplit(myOptions["className"]);
                 myOptions["table"] = Inflector::underscore(myTable);
             }
@@ -205,7 +205,7 @@ class TableLocator : AbstractLocator : ILocator
         } else {
             myMessage = myOptions["className"] ?? myAlias;
             myMessage = "`" . myMessage . "`";
-            if (strpos(myMessage, "\\") == false) {
+            if (indexOf(myMessage, "\\") == false) {
                 myMessage = "for alias " . myMessage;
             }
             throw new MissingTableClassException([myMessage]);
@@ -248,7 +248,7 @@ class TableLocator : AbstractLocator : ILocator
             myOptions["className"] = myAlias;
         }
 
-        if (strpos(myOptions["className"], "\\") !== false && class_exists(myOptions["className"])) {
+        if (indexOf(myOptions["className"], "\\") !== false && class_exists(myOptions["className"])) {
             return myOptions["className"];
         }
 

@@ -367,7 +367,7 @@ class ResultSet : IResultSet
         foreach (myQuery.clause("select") as myKey: myField) {
             myKey = trim(myKey, ""`[]");
 
-            if (strpos(myKey, "__") <= 0) {
+            if (indexOf(myKey, "__") <= 0) {
                 $map[this._defaultAlias][myKey] = myKey;
                 continue;
             }

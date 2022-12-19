@@ -245,6 +245,6 @@ class Filesystem
      * @return bool
      */
     bool isStream(string myPath) {
-        return strpos(myPath, "://") !== false;
+        return indexOf(myPath, "://") !== false;
     }
 }

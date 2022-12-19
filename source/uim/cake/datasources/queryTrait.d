@@ -198,7 +198,7 @@ trait QueryTrait
      * @return array
      */
     array aliasField(string myField, Nullable!string myAlias = null) {
-        if (strpos(myField, ".") == false) {
+        if (indexOf(myField, ".") == false) {
             myAlias = myAlias ?: this.getRepository().getAlias();
             myAliasedField = myAlias . "." . myField;
         } else {

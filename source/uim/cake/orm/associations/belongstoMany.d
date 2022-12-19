@@ -922,7 +922,7 @@ class BelongsToMany : Association
         $matching = [];
         myAlias = this.getAlias() . ".";
         foreach ($conditions as myField: myValue) {
-            if (is_string(myField) && strpos(myField, myAlias) == 0) {
+            if (is_string(myField) && indexOf(myField, myAlias) == 0) {
                 $matching[myField] = myValue;
             } elseif (is_int(myField) || myValue instanceof IExpression) {
                 $matching[myField] = myValue;
@@ -951,7 +951,7 @@ class BelongsToMany : Association
         myAlias = this._junctionAssociationName() . ".";
         foreach ($conditions as myField: myValue) {
             $isString = is_string(myField);
-            if ($isString && strpos(myField, myAlias) == 0) {
+            if ($isString && indexOf(myField, myAlias) == 0) {
                 $matching[myField] = myValue;
             }
             // Assume that operators contain junction conditions.

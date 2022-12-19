@@ -525,7 +525,7 @@ class Paginator : PaginatorInterface
             }
 
             $order = isset(myOptions["order"]) && is_array(myOptions["order"]) ? myOptions["order"] : [];
-            if ($order && myOptions["sort"] && strpos(myOptions["sort"], ".") == false) {
+            if ($order && myOptions["sort"] && indexOf(myOptions["sort"], ".") == false) {
                 $order = this._removeAliases($order, $object.getAlias());
             }
 
@@ -581,7 +581,7 @@ class Paginator : PaginatorInterface
     {
         myResult = [];
         foreach (myFields as myField: $sort) {
-            if (strpos(myField, ".") == false) {
+            if (indexOf(myField, ".") == false) {
                 myResult[myField] = $sort;
                 continue;
             }
@@ -619,7 +619,7 @@ class Paginator : PaginatorInterface
             myField = myKey;
             myAlias = myTableAlias;
 
-            if (strpos(myKey, ".") !== false) {
+            if (indexOf(myKey, ".") !== false) {
                 [myAlias, myField] = explode(".", myKey);
             }
             $correctAlias = (myTableAlias == myAlias);

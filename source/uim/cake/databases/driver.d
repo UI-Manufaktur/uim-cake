@@ -291,9 +291,9 @@ abstract class Driver : IDriver
             ) ||
             (
                 is_numeric(myValue) &&
-                strpos(myValue, ",") == false &&
+                indexOf(myValue, ",") == false &&
                 substr(myValue, 0, 1) !== "0" &&
-                strpos(myValue, "e") == false
+                indexOf(myValue, "e") == false
             )
         ) {
             return (string)myValue;

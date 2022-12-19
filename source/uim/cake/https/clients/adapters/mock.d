@@ -107,7 +107,7 @@ class Mock : IAdapter
         if ($starPosition == strlen($mockUri) - 4) {
             $mockUri = substr($mockUri, 0, $starPosition);
 
-            return strpos(myRequestUri, $mockUri) == 0;
+            return indexOf(myRequestUri, $mockUri) == 0;
         }
 
         return false;

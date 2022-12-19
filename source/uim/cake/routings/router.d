@@ -455,14 +455,14 @@ class Router
             myUrl = (string)myUrl;
 
             $plainString = (
-                strpos(myUrl, "javascript:") == 0 ||
-                strpos(myUrl, "mailto:") == 0 ||
-                strpos(myUrl, "tel:") == 0 ||
-                strpos(myUrl, "sms:") == 0 ||
-                strpos(myUrl, "#") == 0 ||
-                strpos(myUrl, "?") == 0 ||
-                strpos(myUrl, "//") == 0 ||
-                strpos(myUrl, "://") !== false
+                indexOf(myUrl, "javascript:") == 0 ||
+                indexOf(myUrl, "mailto:") == 0 ||
+                indexOf(myUrl, "tel:") == 0 ||
+                indexOf(myUrl, "sms:") == 0 ||
+                indexOf(myUrl, "#") == 0 ||
+                indexOf(myUrl, "?") == 0 ||
+                indexOf(myUrl, "//") == 0 ||
+                indexOf(myUrl, "://") !== false
             );
 
             if ($plainString) {
@@ -658,7 +658,7 @@ class Router
         }
         myUrl = "/" . myUrl;
 
-        while (strpos(myUrl, "//") !== false) {
+        while (indexOf(myUrl, "//") !== false) {
             myUrl = str_replace("//", "/", myUrl);
         }
         myUrl = preg_replace("/(?:(\/$))/", "", myUrl);

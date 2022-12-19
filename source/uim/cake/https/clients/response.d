@@ -159,7 +159,7 @@ class Response : Message : IResponse
                 this.reasonPhrase = trim($matches[3]);
                 continue;
             }
-            if (strpos(myValue, ":") == false) {
+            if (indexOf(myValue, ":") == false) {
                 continue;
             }
             [myName, myValue] = explode(":", myValue, 2);

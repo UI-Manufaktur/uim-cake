@@ -95,7 +95,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
         if (
             in_array($method, ["PUT", "DELETE", "PATCH"], true) &&
-            strpos((string)myRequest.contentType(), "application/x-www-form-urlencoded") == 0
+            indexOf((string)myRequest.contentType(), "application/x-www-form-urlencoded") == 0
         ) {
             myData = (string)myRequest.getBody();
             parse_str(myData, $parsedBody);
@@ -256,7 +256,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     protected static function updatePath(string $base, UriInterface $uri): UriInterface
     {
         myPath = $uri.getPath();
-        if ($base !== "" && strpos(myPath, $base) == 0) {
+        if ($base !== "" && indexOf(myPath, $base) == 0) {
             myPath = substr(myPath, strlen($base));
         }
         if (myPath == "/index.php" && $uri.getQuery()) {
@@ -304,7 +304,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             // Clean up additional / which cause following code to fail..
             $base = preg_replace("#/+#", "/", $base);
 
-            $indexPos = strpos($base, "/" . $webroot . "/index.php");
+            $indexPos = indexOf($base, "/" . $webroot . "/index.php");
             if ($indexPos !== false) {
                 $base = substr($base, 0, $indexPos) . "/" . $webroot;
             }
@@ -329,10 +329,10 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $webrootDir = $base . "/";
 
         $docRoot = Hash::get($server, "DOCUMENT_ROOT");
-        $docRootContainsWebroot = strpos($docRoot, $webroot);
+        $docRootContainsWebroot = indexOf($docRoot, $webroot);
 
         if (!empty($base) || !$docRootContainsWebroot) {
-            if (strpos($webrootDir, "/" . $webroot . "/") == false) {
+            if (indexOf($webrootDir, "/" . $webroot . "/") == false) {
                 $webrootDir .= $webroot . "/";
             }
         }

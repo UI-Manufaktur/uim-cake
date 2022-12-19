@@ -229,7 +229,7 @@ class ShadowTableStrategy : ITranslateStrategy {
 
         $clause.iterateParts(
             function ($c, &myField) use (myFields, myAlias, $mainTableAlias, $mainTableFields, &$joinRequired) {
-                if (!is_string(myField) || strpos(myField, ".")) {
+                if (!is_string(myField) || indexOf(myField, ".")) {
                     return $c;
                 }
 
@@ -278,7 +278,7 @@ class ShadowTableStrategy : ITranslateStrategy {
                     return;
                 }
                 myField = $expression.getField();
-                if (!is_string(myField) || strpos(myField, ".")) {
+                if (!is_string(myField) || indexOf(myField, ".")) {
                     return;
                 }
 

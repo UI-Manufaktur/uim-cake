@@ -22,7 +22,7 @@ trait AssociationsNormalizerTrait {
                 myOptions = [];
             }
 
-            if (!strpos(myTable, ".")) {
+            if (!indexOf(myTable, ".")) {
                 myResult[myTable] = myOptions;
                 continue;
             }

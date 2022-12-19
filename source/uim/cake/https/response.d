@@ -466,14 +466,14 @@ class Response : IResponse
         if (
             this._charset &&
             (
-                strpos(myType, "text/") == 0 ||
+                indexOf(myType, "text/") == 0 ||
                 in_array(myType, $allowed, true)
             )
         ) {
             $charset = true;
         }
 
-        if ($charset && strpos(myType, ";") == false) {
+        if ($charset && indexOf(myType, ";") == false) {
             this._setHeader("Content-Type", "{myType}; charset={this._charset}");
         } else {
             this._setHeader("Content-Type", myType);
@@ -640,7 +640,7 @@ class Response : IResponse
      */
     string getType() {
         $header = this.getHeaderLine("Content-Type");
-        if (strpos($header, ";") !== false) {
+        if (indexOf($header, ";") !== false) {
             return explode(";", $header)[0];
         }
 
@@ -676,7 +676,7 @@ class Response : IResponse
         if ($mapped) {
             return is_array($mapped) ? current($mapped) : $mapped;
         }
-        if (strpos(myContentsType, "/") == false) {
+        if (indexOf(myContentsType, "/") == false) {
             throw new InvalidArgumentException(sprintf(""%s" is an invalid content type.", myContentsType));
         }
 
@@ -1039,7 +1039,7 @@ class Response : IResponse
     bool compress() {
         $compressionEnabled = ini_get("zlib.output_compression") !== "1" &&
             extension_loaded("zlib") &&
-            (strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false);
+            (indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false);
 
         return $compressionEnabled && ob_start("ob_gzhandler");
     }
@@ -1048,7 +1048,7 @@ class Response : IResponse
      * Returns whether the resulting output will be compressed by PHP
      */
     bool outputCompressed() {
-        return strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false
+        return indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false
             && (ini_get("zlib.output_compression") == "1" || in_array("ob_gzhandler", ob_list_handlers(), true));
     }
 
@@ -1390,7 +1390,7 @@ class Response : IResponse
      */
     protected auto validateFile(string myPath): SplFileInfo
     {
-        if (strpos(myPath, "../") !== false || strpos(myPath, "..\\") !== false) {
+        if (indexOf(myPath, "../") !== false || indexOf(myPath, "..\\") !== false) {
             throw new NotFoundException(__d("cake", "The requested file contains `..` and will not be read."));
         }
 

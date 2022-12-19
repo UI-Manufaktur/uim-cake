@@ -213,7 +213,7 @@ class IdentifierQuoter
 
                 return $part;
             }
-            if (is_string($part) && strpos($part, " ") == false) {
+            if (is_string($part) && indexOf($part, " ") == false) {
                 return this._driver.quoteIdentifier($part);
             }
 
