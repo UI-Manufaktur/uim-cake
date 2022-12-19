@@ -672,8 +672,7 @@ class EagerLoader
      * will be normalized
      * @return array
      */
-    function associationsMap(Table myTable): array
-    {
+    array associationsMap(Table myTable) {
         $map = [];
 
         if (!this.getMatching() && !this.getContain() && empty(this._joinsMap)) {
@@ -697,14 +696,13 @@ class EagerLoader
      * @param bool $matching Whether it is an association loaded through `matching()`.
      * @return array
      */
-    protected auto _buildAssociationsMap(array $map, array $level, bool $matching = false): array
-    {
-        foreach ($level as $assoc: $meta) {
+    protected array _buildAssociationsMap(array $map, array $level, bool $matching = false) {
+        foreach ($assoc, $meta; $level) {
             $canBeJoined = $meta.canBeJoined();
             $instance = $meta.instance();
             $associations = $meta.associations();
             $forMatching = $meta.forMatching();
-            $map[] = [
+            auto map[] = [
                 "alias":$assoc,
                 "instance":$instance,
                 "canBeJoined":$canBeJoined,
@@ -714,11 +712,11 @@ class EagerLoader
                 "targetProperty":$meta.targetProperty(),
             ];
             if ($canBeJoined && $associations) {
-                $map = this._buildAssociationsMap($map, $associations, $matching);
+                map = this._buildAssociationsMap(map, $associations, $matching);
             }
         }
 
-        return $map;
+        return map;
     }
 
     /**

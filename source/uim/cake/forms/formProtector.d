@@ -143,7 +143,7 @@ class FormProtector
      * @return Array of field name params like ["Model.field"] or
      *   ["Model", "field"] for array fields or empty array if myName is empty.
      */
-    protected string[] getFieldNameArray(string myName): array
+    protected string[] getFieldNameArray(string myName)
     {
         if (empty(myName) && myName !== "0") {
             return [];
@@ -251,7 +251,7 @@ class FormProtector
      * @return array
      * @psalm-return array{fields: array, unlockedFields: array}
      */
-    protected auto extractHashParts(array $formData): array
+    protected array extractHashParts(array $formData)
     {
         myFields = this.extractFields($formData);
         $unlockedFields = this.sortedUnlockedFields($formData);
@@ -268,7 +268,7 @@ class FormProtector
      * @param array $formData Data array
      * @return array
      */
-    protected auto extractFields(array $formData): array
+    protected array extractFields(array $formData)
     {
         $locked = "";
         $token = urldecode($formData["_Token"]["fields"]);
@@ -338,7 +338,7 @@ class FormProtector
      * Get the sorted unlocked string
      * @param array $formData Data array
      */
-    protected string[] sortedUnlockedFields(array $formData): array
+    protected string[] sortedUnlockedFields(array $formData)
     {
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
         if (empty($unlocked)) {
@@ -476,7 +476,7 @@ class FormProtector
         string $intKeyMessage = "",
         string $stringKeyMessage = "",
         string $missingMessage = ""
-    ): array {
+    ) {
         myMessages = this.matchExistingFields(myDataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = this.debugExpectedFields($expectedFields, $missingMessage);
         if ($expectedFieldsMessage !== null) {
@@ -502,7 +502,7 @@ class FormProtector
         array &$expectedFields,
         string $intKeyMessage,
         string $stringKeyMessage
-    ): array {
+    ) {
         myMessages = [];
         foreach (myDataFields as myKey: myValue) {
             if (is_int(myKey)) {
@@ -552,7 +552,7 @@ class FormProtector
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "fields":this.fields,

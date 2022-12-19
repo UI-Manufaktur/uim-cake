@@ -246,9 +246,9 @@ abstract class BaseApplication :
      * @param \Psr\Http\Message\IServerRequest myRequest The request
      * @return \Psr\Http\Message\IResponse
      */
-    function handle(
+    IResponse handle(
         IServerRequest myRequest
-    ): IResponse {
+    )  {
         if (this.controllerFactory == null) {
             this.controllerFactory = new ControllerFactory(this.getContainer());
         }

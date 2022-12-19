@@ -215,18 +215,17 @@ class CommandRunner : IEventDispatcher {
      * @param array $argv The CLI arguments.
      * @return array An array of the resolved name and modified argv.
      */
-    protected auto longestCommandName(CommandCollection $commands, array $argv): array
-    {
-        for ($i = 3; $i > 1; $i--) {
-            $parts = array_slice($argv, 0, $i);
-            myName = implode(" ", $parts);
-            if ($commands.has(myName)) {
-                return [myName, array_slice($argv, $i)];
-            }
+    protected array longestCommandName(CommandCollection $commands, array $argv) {
+      for ($i = 3; $i > 1; $i--) {
+        $parts = array_slice($argv, 0, $i);
+        myName = implode(" ", $parts);
+        if ($commands.has(myName)) {
+          return [myName, array_slice($argv, $i)];
         }
-        myName = array_shift($argv);
+      }
+      myName = array_shift($argv);
 
-        return [myName, $argv];
+      return [myName, $argv];
     }
 
     /**
