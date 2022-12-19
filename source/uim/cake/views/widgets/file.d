@@ -53,9 +53,7 @@ class FileWidget : BasicWidget
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function secureFields(array myData): array
     {
         // PSR7 UploadedFileInterface objects are used.

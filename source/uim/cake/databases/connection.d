@@ -595,9 +595,7 @@ class Connection : IConnection {
         return this._driver.supportsDynamicConstraints();
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function transactional(callable $callback) {
         this.begin();
 
@@ -632,9 +630,7 @@ class Connection : IConnection {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function disableConstraints(callable $callback) {
         return this.getDisconnectRetry().run(function () use ($callback) {
             this.disableForeignKeys();
@@ -710,18 +706,14 @@ class Connection : IConnection {
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     auto setCacher(ICache $cacher) {
         this.cacher = $cacher;
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     auto getCacher(): ICache
     {
         if (this.cacher !== null) {

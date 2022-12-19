@@ -401,9 +401,7 @@ class FileEngine : CacheEngine {
         return $success;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     protected string _key(myKey) {
         myKey = super._key(myKey);
 

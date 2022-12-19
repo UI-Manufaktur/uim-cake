@@ -115,8 +115,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException If myKeys is neither an array nor a Traversable,
      *   or if any of the myKeys are not a legal value.
      */
-    auto getMultiple(myKeys, $default = null): iterable
-    {
+    iterable getMultiple(myKeys, $default = null) {
         this.ensureValidType(myKeys);
 
         myResults = [];

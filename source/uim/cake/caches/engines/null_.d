@@ -22,31 +22,21 @@ class NullEngine : CacheEngine
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     auto get(myKey, $default = null) {
         return $default;
     }
 
-    /**
-     * @inheritDoc
-     */
-    auto getMultiple(myKeys, $default = null): iterable
-    {
+    iterable getMultiple(myKeys, $default = null) {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function increment(string myKey, int $offset = 1) {
         return 1;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function decrement(string myKey, int $offset = 1) {
         return 0;
     }

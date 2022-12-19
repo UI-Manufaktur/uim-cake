@@ -7,8 +7,7 @@ import uim.cake;
  * Provides utility protected methods for extracting a property or column
  * from an array or object.
  */
-trait ExtractTrait
-{
+trait ExtractTrait {
     /**
      * Returns a callable that can be used to extract a property or column from
      * an array or object based on a dot separated path.
@@ -18,8 +17,7 @@ trait ExtractTrait
      * of doing that.
      * @return callable
      */
-    protected auto _propertyExtractor(myPath): callable
-    {
+    protected callable _propertyExtractor(myPath) {
         if (!is_string(myPath)) {
             return myPath;
         }

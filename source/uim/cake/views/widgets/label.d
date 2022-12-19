@@ -70,9 +70,7 @@ class LabelWidget : IWidget
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function secureFields(array myData): array
     {
         return [];

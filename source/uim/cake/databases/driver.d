@@ -119,14 +119,10 @@ abstract class Driver : IDriver
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     abstract bool connect();
 
-    /**
-     * @inheritDoc
-     */
+    
     function disconnect(): void
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
@@ -175,14 +171,10 @@ abstract class Driver : IDriver
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     abstract bool enabled();
 
-    /**
-     * @inheritDoc
-     */
+    
     function prepare(myQuery): IStatement
     {
         this.connect();
@@ -191,9 +183,7 @@ abstract class Driver : IDriver
         return new PDOStatement($statement, this);
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     bool beginTransaction() {
         this.connect();
         if (this._connection.inTransaction()) {
@@ -203,9 +193,7 @@ abstract class Driver : IDriver
         return this._connection.beginTransaction();
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     bool commitTransaction() {
         this.connect();
         if (!this._connection.inTransaction()) {
@@ -215,9 +203,7 @@ abstract class Driver : IDriver
         return this._connection.commit();
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     bool rollbackTransaction() {
         this.connect();
         if (!this._connection.inTransaction()) {
@@ -236,9 +222,7 @@ abstract class Driver : IDriver
         return this._connection.inTransaction();
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     bool supportsSavePoints() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
@@ -257,9 +241,7 @@ abstract class Driver : IDriver
         return this.supports(static::FEATURE_CTE);
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     string quote(myValue, myType = PDO::PARAM_STR) {
         this.connect();
 
@@ -278,24 +260,16 @@ abstract class Driver : IDriver
         return this.supports(static::FEATURE_QUOTE);
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     abstract function queryTranslator(string myType): Closure;
 
-    /**
-     * @inheritDoc
-     */
+    
     abstract function schemaDialect(): SchemaDialect;
 
-    /**
-     * @inheritDoc
-     */
+    
     abstract string quoteIdentifier(string myIdentifier);
 
-    /**
-     * @inheritDoc
-     */
+    
     string schemaValue(myValue) {
         if (myValue == null) {
             return "NULL";
@@ -328,16 +302,12 @@ abstract class Driver : IDriver
         return this._connection.quote((string)myValue, PDO::PARAM_STR);
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     string schema() {
         return this._config["schema"];
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function lastInsertId(Nullable!string myTable = null, Nullable!string $column = null) {
         this.connect();
 
@@ -348,9 +318,7 @@ abstract class Driver : IDriver
         return this._connection.lastInsertId(myTable);
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     bool isConnected() {
         if (this._connection == null) {
             $connected = false;
@@ -365,27 +333,21 @@ abstract class Driver : IDriver
         return $connected;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function enableAutoQuoting(bool myEnable = true) {
         this._autoQuoting = myEnable;
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     function disableAutoQuoting() {
         this._autoQuoting = false;
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    
     bool isAutoQuotingEnabled() {
         return this._autoQuoting;
     }

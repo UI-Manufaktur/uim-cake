@@ -13,9 +13,7 @@ import uim.cakeility\Inflector;
  * Language string extractor
  */
 class I18nExtractCommand : Command {
-    /**
-     * @inheritDoc
-     */
+    
     static string defaultName() {
         return "i18n extract";
     }
