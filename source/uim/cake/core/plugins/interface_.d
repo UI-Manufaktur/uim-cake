@@ -1,8 +1,7 @@
-module uim.cake.core;
+module uim.cake.core.plugins.interface_;
 
 @safe:
 import uim.cake;
-
 
 /**
  * Plugin Interface
@@ -10,39 +9,24 @@ import uim.cake;
  * @method void services(\Cake\Core\IContainer myContainer) Register plugin services to
  *   the application"s container
  */
-interface IPlugin
-{
-    /**
-     * List of valid hooks.
-     *
-     * @var array<string>
-     */
-    public const VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
+interface IPlugin {
+    // List of valid hooks.
+    public const String[] VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
 
-    /**
-     * Get the name of this plugin.
-     */
-    string getName();
+    // Get the name of this plugin.
+    string name();
 
-    /**
-     * Get the filesystem path to this plugin
-     */
-    string getPath();
+    // Get the filesystem path to this plugin
+    string filesystemPath();
 
-    /**
-     * Get the filesystem path to configuration for this plugin
-     */
-    string getConfigPath();
+    // Get the filesystem path to configuration for this plugin
+    string configPath();
 
-    /**
-     * Get the filesystem path to configuration for this plugin
-     */
-    string getClassPath();
+    // Get the filesystem path to configuration for this plugin
+    string classPath();
 
-    /**
-     * Get the filesystem path to templates for this plugin
-     */
-    string getTemplatePath();
+    // Get the filesystem path to templates for this plugin
+    string templatePath();
 
     /**
      * Load all the application configuration and bootstrap logic.
@@ -60,10 +44,10 @@ interface IPlugin
     /**
      * Add console commands for the plugin.
      *
-     * @param \Cake\Console\CommandCollection $commands The command collection to update
+     * @param \Cake\Console\CommandCollection someCommands The command collection to update
      * @return \Cake\Console\CommandCollection
      */
-    CommandCollection console(CommandCollection $commands);
+    CommandCollection console(CommandCollection someCommands);
 
     /**
      * Add middleware for the plugin.
@@ -71,7 +55,7 @@ interface IPlugin
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
      * @return \Cake\Http\MiddlewareQueue
      */
-    function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
+    MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 
     /**
      * Add routes for the plugin.
@@ -81,23 +65,21 @@ interface IPlugin
      *
      * @param \Cake\Routing\RouteBuilder $routes The route builder to update.
      */
-    void routes(RouteBuilder $routes);
+    IPlugin routes(RouteBuilder $routes);
 
     /**
      * Disables the named hook
      *
      * @param string hook The hook to disable
-     * @return this
      */
-    function disable(string hook);
+    IPlugin disable(string hook);
 
     /**
      * Enables the named hook
      *
      * @param string hook The hook to disable
-     * @return this
      */
-    function enable(string hook);
+    IPlugin enable(string hook);
 
     /**
      * Check if the named hook is enabled

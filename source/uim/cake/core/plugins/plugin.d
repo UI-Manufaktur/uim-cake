@@ -1,4 +1,4 @@
-module uim.cake.core;
+module uim.cake.core.plugins.plugin;
 
 @safe:
 import uim.cake;

@@ -1,10 +1,7 @@
-module uim.cake.core;
+module uim.cake.core.plugins.collection;
 
-import uim.cake.core.exceptions\MissingPluginException;
-use Countable;
-use Generator;
-use InvalidArgumentException;
-use Iterator;
+@safe:
+import uim.cake;
 
 /**
  * Plugin Collection
