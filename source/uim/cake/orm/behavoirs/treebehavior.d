@@ -3,7 +3,7 @@ module uim.cake.orm.behaviors;
 import uim.cake.collections\ICollection;
 import uim.cake.databases.expressions\IdentifierExpression;
 import uim.cake.datasources\IEntity;
-import uim.cake.datasources\Exception\RecordNotFoundException;
+import uim.cake.datasources.exceptions\RecordNotFoundException;
 import uim.cake.events\IEvent;
 import uim.cake.orm.behaviors;
 import uim.cake.orm.Query;

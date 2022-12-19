@@ -1,13 +1,10 @@
 module uim.cake.datasources\Locator;
 
-import uim.cake.datasources\IRepository;
-use RuntimeException;
+@safe:
+import uim.cake;
 
-/**
- * Provides an abstract registry/factory for repository objects.
- */
-abstract class AbstractLocator : ILocator
-{
+// Provides an abstract registry/factory for repository objects.
+abstract class AbstractLocator : ILocator {
     /**
      * Instances that belong to the registry.
      *

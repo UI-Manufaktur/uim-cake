@@ -1,6 +1,7 @@
-module uim.cake.datasources\Exception;
+module uim.cake.datasources.exceptions;
 
-import uim.cake.core.exceptions\CakeException;
+@safe:
+import uim.cake;
 
 // Used when a model cannot be found.
 class MissingModelException : CakeException {

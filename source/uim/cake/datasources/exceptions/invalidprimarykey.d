@@ -1,6 +1,7 @@
-module uim.cake.datasources\Exception;
+module uim.cake.datasources.exceptions;
 
-import uim.cake.core.exceptions\CakeException;
+@safe:
+import uim.cake;
 
 /**
  * Exception raised when the provided primary key does not match the table primary key

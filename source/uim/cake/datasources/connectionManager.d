@@ -11,7 +11,7 @@ import uim.cake.databasess.Driver\Mysql;
 import uim.cake.databasess.Driver\Postgres;
 import uim.cake.databasess.Driver\Sqlite;
 import uim.cake.databasess.Driver\Sqlserver;
-import uim.cake.datasources\Exception\MissingDatasourceConfigException;
+import uim.cake.datasources.exceptions\MissingDatasourceConfigException;
 
 /**
  * Manages and loads instances of Connection

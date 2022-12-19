@@ -2,7 +2,7 @@ module uim.cake.datasources;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
-import uim.cake.datasources\Exception\MissingDatasourceException;
+import uim.cake.datasources.exceptions\MissingDatasourceException;
 
 /**
  * A registry object for connection instances.
