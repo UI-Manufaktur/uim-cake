@@ -37,7 +37,7 @@ class Paginator : PaginatorInterface
      *
      * @var array
      */
-    protected $_pagingParams = [];
+    protected _pagingParams = [];
 
     /**
      * Handles automatic pagination of model records.

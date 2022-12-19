@@ -21,7 +21,7 @@ class PostgresCompiler : QueryCompiler {
      */
     protected bool $_quotedSelectAliases = true;
 
-    protected $_templates = [
+    protected _templates = [
         "delete":"DELETE",
         "where":" WHERE %s",
         "group":" GROUP BY %s",

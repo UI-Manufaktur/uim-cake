@@ -52,14 +52,14 @@ class Component : IEventListener
      *
      * @var \Cake\Controller\ComponentRegistry
      */
-    protected $_registry;
+    protected _registry;
 
     /**
      * Other Components this component uses.
      *
      * @var array
      */
-    protected $components = [];
+    protected components = [];
 
     /**
      * Default config
@@ -75,7 +75,7 @@ class Component : IEventListener
      *
      * @var array<string, array>
      */
-    protected $_componentMap = [];
+    protected _componentMap = [];
 
     /**
      * Constructor

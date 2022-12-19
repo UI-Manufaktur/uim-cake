@@ -26,14 +26,14 @@ class RequestHandlerComponent : Component {
      * @var string|null
      * @see \Cake\Routing\Router::extensions()
      */
-    protected $ext;
+    protected ext;
 
     /**
      * The template type to use when rendering the given content type.
      *
      * @var string|null
      */
-    protected $_renderType;
+    protected _renderType;
 
     /**
      * Default config

@@ -15,7 +15,7 @@ class FieldTypeConverter
      *
      * @var array<\Cake\Database\TypeInterface>
      */
-    protected $_typeMap;
+    protected _typeMap;
 
     /**
      * An array containing the name of the fields and the Type objects
@@ -23,7 +23,7 @@ class FieldTypeConverter
      *
      * @var array<string, array>
      */
-    protected $batchingTypeMap;
+    protected batchingTypeMap;
 
     /**
      * An array containing all the types registered in the Type system
@@ -39,7 +39,7 @@ class FieldTypeConverter
      *
      * @var \Cake\Database\IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Builds the type map

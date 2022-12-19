@@ -17,7 +17,7 @@ class SecurityException : BadRequestException
      *
      * @var string|null
      */
-    protected $_reason;
+    protected _reason;
 
     /**
      * Getter for type

@@ -17,7 +17,7 @@ class Connection : IConnection {
      *
      * @var array<string, mixed>
      */
-    protected $_config;
+    protected _config;
 
     /**
      * Driver object, responsible for creating the real connection
@@ -25,7 +25,7 @@ class Connection : IConnection {
      *
      * @var \Cake\Database\IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     // Contains how many nested transactions have been started.
     protected int $_transactionLevel = 0;
@@ -44,28 +44,28 @@ class Connection : IConnection {
      *
      * @var bool
      */
-    protected $_logQueries = false;
+    protected _logQueries = false;
 
     /**
      * Logger object instance.
      *
      * @var \Psr\Log\LoggerInterface|null
      */
-    protected $_logger;
+    protected _logger;
 
     /**
      * Cacher object instance.
      *
      * @var \Psr\SimpleCache\ICache|null
      */
-    protected $cacher;
+    protected cacher;
 
     /**
      * The schema collection object
      *
      * @var \Cake\Database\Schema\ICollection|null
      */
-    protected $_schemaCollection;
+    protected _schemaCollection;
 
     /**
      * NestedTransactionRollbackException object instance, will be stored if
@@ -73,7 +73,7 @@ class Connection : IConnection {
      *
      * @var \Cake\Database\Exception\NestedTransactionRollbackException|null
      */
-    protected $nestedTransactionRollbackException;
+    protected nestedTransactionRollbackException;
 
     /**
      * Constructor.

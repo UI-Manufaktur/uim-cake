@@ -32,7 +32,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * @var \Cake\Controller\Controller
      */
-    protected $controller;
+    protected controller;
 
     /**
      * Constructor

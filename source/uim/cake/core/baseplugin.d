@@ -25,7 +25,7 @@ class BasePlugin : IPlugin
      *
      * @var bool
      */
-    protected $bootstrapEnabled = true;
+    protected bootstrapEnabled = true;
 
     // Console middleware
     protected bool consoleEnabled = true;

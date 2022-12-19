@@ -23,7 +23,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      *
      * @var \Cake\Controller\Controller|null
      */
-    protected $_controller;
+    protected _controller;
 
     /**
      * Constructor.

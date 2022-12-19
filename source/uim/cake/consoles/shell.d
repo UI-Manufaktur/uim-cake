@@ -119,14 +119,14 @@ class Shell {
      *
      * @var array<string, array>
      */
-    protected $_taskMap = [];
+    protected _taskMap = [];
 
     /**
      * ConsoleIo instance.
      *
      * @var \Cake\Console\ConsoleIo
      */
-    protected $_io;
+    protected _io;
 
     /**
      * The root command name used when generating help output.

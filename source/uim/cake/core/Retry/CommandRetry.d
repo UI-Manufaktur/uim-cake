@@ -15,7 +15,7 @@ class CommandRetry {
      *
      * @var \Cake\Core\Retry\IRetryStrategy
      */
-    protected $strategy;
+    protected strategy;
 
     protected int maxRetries;
 

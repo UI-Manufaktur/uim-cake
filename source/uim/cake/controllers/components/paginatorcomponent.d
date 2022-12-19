@@ -43,7 +43,7 @@ class PaginatorComponent : Component
      *
      * @var \Cake\Datasource\Paginator
      */
-    protected $_paginator;
+    protected _paginator;
 
 
     this(ComponentRegistry $registry, array myConfig = []) {

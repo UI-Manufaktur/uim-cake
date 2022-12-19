@@ -17,7 +17,7 @@ class MissingOptionException : ConsoleException
      *
      * @var array<string>
      */
-    protected $suggestions = [];
+    protected suggestions = [];
 
     /**
      * Constructor.

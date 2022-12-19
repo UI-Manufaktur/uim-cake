@@ -83,7 +83,7 @@ class Controller : IEventListener, IEventDispatcher
      * @var \Cake\Http\Response
      * @link https://book.UIM.org/4/en/controllers/request-response.html#response
      */
-    protected $response;
+    protected response;
 
     /**
      * Settings for pagination.
@@ -102,14 +102,14 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @var bool
      */
-    protected $autoRender = true;
+    protected autoRender = true;
 
     /**
      * Instance of ComponentRegistry used to create Components
      *
      * @var \Cake\Controller\ComponentRegistry|null
      */
-    protected $_components;
+    protected _components;
 
     /**
      * Automatically set to the name of a plugin.
@@ -124,7 +124,7 @@ class Controller : IEventListener, IEventDispatcher
      * @var array
      * @psalm-var array<int, array{middleware:\Psr\Http\Server\IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
      */
-    protected $middlewares = [];
+    protected middlewares = [];
 
     /**
      * Constructor.

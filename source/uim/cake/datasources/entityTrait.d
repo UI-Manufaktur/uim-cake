@@ -14,14 +14,14 @@ trait EntityTrait
      *
      * @var array<string, mixed>
      */
-    protected $_fields = [];
+    protected _fields = [];
 
     /**
      * Holds all fields that have been changed and their original values for this entity.
      *
      * @var array<string, mixed>
      */
-    protected $_original = ;
+    protected _original = ;
 
     /**
      * List of field names that should **not** be included in JSON or Array
@@ -56,21 +56,21 @@ trait EntityTrait
      *
      * @var bool
      */
-    protected $_new = true;
+    protected _new = true;
 
     /**
      * List of errors per field as stored in this object.
      *
      * @var array<string, mixed>
      */
-    protected $_errors = [];
+    protected _errors = [];
 
     /**
      * List of invalid fields and their data for errors upon validation/patching.
      *
      * @var array<string, mixed>
      */
-    protected $_invalid = [];
+    protected _invalid = [];
 
     /**
      * Map of fields in this entity that can be safely assigned, each

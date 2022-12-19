@@ -25,14 +25,14 @@ abstract class Driver : IDriver
      *
      * @var \PDO
      */
-    protected $_connection;
+    protected _connection;
 
     /**
      * Configuration data.
      *
      * @var array<string, mixed>
      */
-    protected $_config;
+    protected _config;
 
     /**
      * Base configuration that is merged into the user
@@ -40,7 +40,7 @@ abstract class Driver : IDriver
      *
      * @var array<string, mixed>
      */
-    protected $_baseConfig = [];
+    protected _baseConfig = [];
 
     /**
      * Indicates whether the driver is doing automatic identifier quoting
@@ -48,21 +48,21 @@ abstract class Driver : IDriver
      *
      * @var bool
      */
-    protected $_autoQuoting = false;
+    protected _autoQuoting = false;
 
     /**
      * The server version
      *
      * @var string|null
      */
-    protected $_version;
+    protected _version;
 
     /**
      * The last number of connection retry attempts.
      *
      * @var int
      */
-    protected $connectRetries = 0;
+    protected connectRetries = 0;
 
     /**
      * Constructor

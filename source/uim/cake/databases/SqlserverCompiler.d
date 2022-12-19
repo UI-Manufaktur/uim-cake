@@ -14,7 +14,7 @@ class SqlserverCompiler : QueryCompiler
     // SQLserver does not support ORDER BY in UNION queries.
     protected bool _orderedUnion = false;
 
-    protected $_templates = [
+    protected _templates = [
         "delete":"DELETE",
         "where":" WHERE %s",
         "group":" GROUP BY %s",
@@ -23,7 +23,7 @@ class SqlserverCompiler : QueryCompiler
         "epilog":" %s",
     ];
 
-    protected $_selectParts = [
+    protected _selectParts = [
         "with", "select", "from", "join", "where", "group", "having", "window", "order",
         "offset", "limit", "union", "epilog",
     ];

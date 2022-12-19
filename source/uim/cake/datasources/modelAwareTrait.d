@@ -35,7 +35,7 @@ trait ModelAwareTrait
      *
      * @var array<callable|\Cake\Datasource\Locator\ILocator>
      */
-    protected $_modelFactories = [];
+    protected _modelFactories = [];
 
     /**
      * The model type to use.

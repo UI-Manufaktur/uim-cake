@@ -35,7 +35,7 @@ class RuleInvoker
      *
      * @var callable
      */
-    protected $rule;
+    protected rule;
 
     /**
      * Constructor

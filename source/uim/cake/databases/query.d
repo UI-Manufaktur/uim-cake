@@ -28,7 +28,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var \Cake\Database\Connection
      */
-    protected $_connection;
+    protected _connection;
 
     /**
      * Type of this query (select, insert, update, delete).
@@ -40,7 +40,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var array<string, mixed>
      */
-    protected $_parts = [
+    protected _parts = [
         "delete":true,
         "update":[],
         "set":[],
@@ -68,7 +68,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var array<string>
      */
-    protected $_selectParts = [
+    protected _selectParts = [
         "with", "select", "from", "join", "where", "group", "having", "order", "limit",
         "offset", "union", "epilog",
     ];
@@ -78,14 +78,14 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var array<string>
      */
-    protected $_updateParts = ["with", "update", "set", "where", "epilog"];
+    protected _updateParts = ["with", "update", "set", "where", "epilog"];
 
     /**
      * The list of query clauses to traverse for generating a DELETE statement
      *
      * @var array<string>
      */
-    protected $_deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
+    protected _deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
 
     // The list of query clauses to traverse for generating an INSERT statement
     protected string[] $_insertParts = ["with", "insert", "values", "epilog"];
@@ -104,7 +104,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var array<callable>
      */
-    protected $_resultDecorators = [];
+    protected _resultDecorators = [];
 
     // Statement object resulting from executing this query.
     protected IStatement _iterator;
@@ -115,7 +115,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var \Cake\Database\ValueBinder|null
      */
-    protected $_valueBinder;
+    protected _valueBinder;
 
     // Instance of functions builder object used for generating arbitrary SQL functions.
     protected FunctionsBuilder _functionsBuilder;

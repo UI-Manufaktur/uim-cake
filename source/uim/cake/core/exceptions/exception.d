@@ -16,7 +16,7 @@ class CakeException : RuntimeException
      *
      * @var array
      */
-    protected $_attributes = [];
+    protected _attributes = [];
 
     /**
      * Template string that has attributes sprintf()"ed into it.
@@ -28,14 +28,14 @@ class CakeException : RuntimeException
      *
      * @var array|null
      */
-    protected $_responseHeaders;
+    protected _responseHeaders;
 
     /**
      * Default exception code
      *
      * @var int
      */
-    protected $_defaultCode = 0;
+    protected _defaultCode = 0;
 
     /**
      * Constructor.

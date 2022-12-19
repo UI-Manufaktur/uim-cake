@@ -17,7 +17,7 @@ class TaskRegistry : ObjectRegistry
      *
      * @var \Cake\Console\Shell
      */
-    protected $_Shell;
+    protected _Shell;
 
     /**
      * Constructor

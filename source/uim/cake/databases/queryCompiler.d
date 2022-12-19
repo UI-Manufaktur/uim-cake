@@ -58,7 +58,7 @@ class QueryCompiler {
      *
      * @var bool
      */
-    protected $_quotedSelectAliases = false;
+    protected _quotedSelectAliases = false;
 
     /**
      * Returns the SQL representation of the provided query after generating

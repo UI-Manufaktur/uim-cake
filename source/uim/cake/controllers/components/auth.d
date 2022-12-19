@@ -148,28 +148,28 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @var array
      */
-    protected $components = ["RequestHandler", "Flash"];
+    protected components = ["RequestHandler", "Flash"];
 
     /**
      * Objects that will be used for authentication checks.
      *
      * @var array<\Cake\Auth\BaseAuthenticate>
      */
-    protected $_authenticateObjects = [];
+    protected _authenticateObjects = [];
 
     /**
      * Objects that will be used for authorization checks.
      *
      * @var array<\Cake\Auth\BaseAuthorize>
      */
-    protected $_authorizeObjects = [];
+    protected _authorizeObjects = [];
 
     /**
      * Storage object.
      *
      * @var \Cake\Auth\Storage\IStorage|null
      */
-    protected $_storage;
+    protected _storage;
 
     /**
      * Controller actions for which user validation is not required.
@@ -186,7 +186,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @var \Cake\Auth\BaseAuthenticate|null
      */
-    protected $_authenticationProvider;
+    protected _authenticationProvider;
 
     /**
      * The instance of the Authorize provider that was used to grant
@@ -194,7 +194,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @var \Cake\Auth\BaseAuthorize|null
      */
-    protected $_authorizationProvider;
+    protected _authorizationProvider;
 
     /**
      * Initialize properties.
