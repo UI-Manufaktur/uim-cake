@@ -185,7 +185,7 @@ class FormHelper : Helper
      * The action attribute value of the last created form.
      * Used to make form/request specific hashes for form tampering protection.
      */
-    protected string $_lastAction = "";
+    protected string _lastAction = "";
 
     /**
      * The supported sources that can be used to populate input values.
@@ -785,7 +785,7 @@ class FormHelper : Helper
      * @return string The formatted LABEL element
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-labels
      */
-    string label(string myFieldName, Nullable!string $text = null, array myOptions = []) {
+    string label(string myFieldName, Nullable!string text = null, array myOptions = []) {
         if ($text == null) {
             $text = myFieldName;
             if (substr($text, -5) == "._ids") {
@@ -1528,12 +1528,12 @@ class FormHelper : Helper
      * The first argument to an input type should always be the fieldname, in `Model.field` format.
      * The second argument should always be an array of attributes for the input.
      *
-     * @param string $method Method name / input type to make.
+     * @param string method Method name / input type to make.
      * @param array myParams Parameters for the method call
      * @return string Formatted input method.
      * @throws \Cake\Core\Exception\CakeException When there are no params for the method call.
      */
-    auto __call(string $method, array myParams) {
+    auto __call(string method, array myParams) {
         if (empty(myParams)) {
             throw new CakeException(sprintf("Missing field name for FormHelper::%s", $method));
         }
@@ -1622,12 +1622,12 @@ class FormHelper : Helper
      * - `escape` - HTML entity encode the attributes of button tag. Defaults to true.
      * - `confirm` - Confirm message to show. Form execution will only continue if confirmed then.
      *
-     * @param string $title The button"s caption. Not automatically HTML encoded
+     * @param string title The button"s caption. Not automatically HTML encoded
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string A HTML button tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-button-elements
      */
-    string button(string $title, array myOptions = []) {
+    string button(string title, array myOptions = []) {
         myOptions += [
             "type": "submit",
             "escapeTitle": true,
@@ -1666,13 +1666,13 @@ class FormHelper : Helper
      * - Other options is the same of button method.
      * - `confirm` - Confirm message to show. Form execution will only continue if confirmed then.
      *
-     * @param string $title The button"s caption. Not automatically HTML encoded
+     * @param string title The button"s caption. Not automatically HTML encoded
      * @param array|string myUrl URL as string or array
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string A HTML button tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    string postButton(string $title, myUrl, array myOptions = []) {
+    string postButton(string title, myUrl, array myOptions = []) {
         $formOptions = ["url": myUrl];
         if (isset(myOptions["method"])) {
             $formOptions["type"] = myOptions["method"];
@@ -1717,14 +1717,14 @@ class FormHelper : Helper
      * - Other options are the same of HtmlHelper::link() method.
      * - The option `onclick` will be replaced.
      *
-     * @param string $title The content to be wrapped by <a> tags.
+     * @param string title The content to be wrapped by <a> tags.
      * @param array|string|null myUrl Cake-relative URL or array of URL parameters, or
      *   external URL (starts with http://)
      * @param array<string, mixed> myOptions Array of HTML attributes.
      * @return string An `<a />` element.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    string postLink(string $title, myUrl = null, array myOptions = []) {
+    string postLink(string title, myUrl = null, array myOptions = []) {
         myOptions += ["block": null, "confirm": null];
 
         myRequestMethod = "POST";
@@ -1834,7 +1834,7 @@ class FormHelper : Helper
      * @return string A HTML submit button
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    string submit(Nullable!string $caption = null, array myOptions = []) {
+    string submit(Nullable!string caption = null, array myOptions = []) {
         if ($caption == null) {
             $caption = __d("cake", "Submit");
         }
@@ -2447,7 +2447,7 @@ class FormHelper : Helper
      * Order sets priority.
      *
      * @see FormHelper::$supportedValueSources for valid values.
-     * @param array<string>|string $sources A string or a list of strings identifying a source.
+     * @param array<string>|string sources A string or a list of strings identifying a source.
      * @return this
      * @throws \InvalidArgumentException If sources list contains invalid value.
      */

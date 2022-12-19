@@ -196,7 +196,7 @@ class HtmlHelper : Helper {
      * @return string A meta tag containing the specified character set.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-charset-tags
      */
-    string charset(Nullable!string $charset = null) {
+    string charset(Nullable!string charset = null) {
         if (empty($charset)) {
             $charset = strtolower((string)Configure::read("App.encoding"));
         }
@@ -222,7 +222,7 @@ class HtmlHelper : Helper {
      *   over value of `escape`)
      * - `confirm` JavaScript confirmation message.
      *
-     * @param array|string $title The content to be wrapped by `<a>` tags.
+     * @param array|string title The content to be wrapped by `<a>` tags.
      *   Can be an array if myUrl is null. If myUrl is null, $title will be used as both the URL and title.
      * @param array|string|null myUrl Cake-relative URL or array of URL parameters, or
      *   external URL (starts with http://)
@@ -288,7 +288,7 @@ class HtmlHelper : Helper {
      *   over value of `escape`)
      * - `confirm` JavaScript confirmation message.
      *
-     * @param string $title The content to be wrapped by `<a>` tags.
+     * @param string title The content to be wrapped by `<a>` tags.
      * @param string myPath Cake-relative route path.
      * @param array myParams An array specifying any additional parameters.
      *   Can be also any special parameters supported by `Router::url()`.
@@ -297,7 +297,7 @@ class HtmlHelper : Helper {
      * @see \Cake\Routing\Router::pathUrl()
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
-    string linkFromPath(string $title, string myPath, array myParams = [], array myOptions = []) {
+    string linkFromPath(string title, string myPath, array myParams = [], array myOptions = []) {
         return this.link($title, ["_path": myPath] + myParams, myOptions);
     }
 
@@ -503,13 +503,13 @@ class HtmlHelper : Helper {
      * - `block` Set to true to append output to view block "script" or provide
      *   custom block name.
      *
-     * @param string $script The script to wrap
+     * @param string script The script to wrap
      * @param array<string, mixed> myOptions The options to use. Options not listed above will be
      *    treated as HTML attributes.
      * @return string|null String or null depending on the value of `myOptions["block"]`
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    Nullable!string scriptBlock(string $script, array myOptions = []) {
+    Nullable!string scriptBlock(string script, array myOptions = []) {
         myOptions += ["block": null, "nonce": _View.getRequest().getAttribute("cspScriptNonce")];
 
         $out = this.formatTemplate("javascriptblock", [
@@ -820,7 +820,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag, see above.
      * @return string The formatted tag element
      */
-    string tag(string myName, Nullable!string $text = null, array myOptions = []) {
+    string tag(string myName, Nullable!string text = null, array myOptions = []) {
         if (isset(myOptions["escape"]) && myOptions["escape"]) {
             $text = h($text);
             unset(myOptions["escape"]);
@@ -851,7 +851,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
      */
-    string div(Nullable!string myClass = null, Nullable!string $text = null, array myOptions = []) {
+    string div(Nullable!string myClass = null, Nullable!string text = null, array myOptions = []) {
         if (!empty(myClass)) {
             myOptions["class"] = myClass;
         }
@@ -871,7 +871,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the P tag
      * @return string The formatted P element
      */
-    string para(Nullable!string myClass, Nullable!string $text, array myOptions = []) {
+    string para(Nullable!string myClass, Nullable!string text, array myOptions = []) {
         if (!empty(myOptions["escape"])) {
             $text = h($text);
         }
@@ -994,7 +994,7 @@ class HtmlHelper : Helper {
             if (is_array(myPath)) {
                 $mimeType = myPath[0]["type"];
             } else {
-                /** @var string $mimeType */
+                /** @var string mimeType */
                 $mimeType = _View.getResponse().getMimeType(pathinfo(myPath, PATHINFO_EXTENSION));
             }
             if (preg_match("#^video/#", $mimeType)) {

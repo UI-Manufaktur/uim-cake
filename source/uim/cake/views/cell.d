@@ -45,7 +45,7 @@ abstract class Cell : IEventDispatcher
     /**
      * The cell"s action to invoke.
      */
-    protected string $action;
+    protected string action;
 
     /**
      * Arguments to pass to cell"s action.
@@ -186,11 +186,11 @@ abstract class Cell : IEventDispatcher
      *
      * If the key is undefined, the cell class and action name will be used.
      *
-     * @param string $action The action invoked.
+     * @param string action The action invoked.
      * @param string|null myTemplate The name of the template to be rendered.
      * @return array The cache configuration.
      */
-    protected auto _cacheConfig(string $action, Nullable!string myTemplate = null): array
+    protected auto _cacheConfig(string action, Nullable!string myTemplate = null): array
     {
         if (empty(_cache)) {
             return [];

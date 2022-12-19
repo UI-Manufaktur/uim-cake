@@ -77,11 +77,11 @@ class Helper : IEventListener
     /**
      * Provide non fatal errors on missing method calls.
      *
-     * @param string $method Method to invoke
+     * @param string method Method to invoke
      * @param array myParams Array of params for the method.
      * @return mixed|void
      */
-    auto __call(string $method, array myParams) {
+    auto __call(string method, array myParams) {
         trigger_error(sprintf("Method %1$s::%2$s does not exist", static::class, $method), E_USER_WARNING);
     }
 
@@ -113,11 +113,11 @@ class Helper : IEventListener
     /**
      * Returns a string to be used as onclick handler for confirm dialogs.
      *
-     * @param string $okCode Code to be executed after user chose "OK"
-     * @param string $cancelCode Code to be executed after user chose "Cancel"
+     * @param string okCode Code to be executed after user chose "OK"
+     * @param string cancelCode Code to be executed after user chose "Cancel"
      * @return string "onclick" JS code
      */
-    protected string _confirm(string $okCode, string $cancelCode) {
+    protected string _confirm(string okCode, string cancelCode) {
         return "if (confirm(this.dataset.confirmMessage)) { {$okCode} } {$cancelCode}";
     }
 

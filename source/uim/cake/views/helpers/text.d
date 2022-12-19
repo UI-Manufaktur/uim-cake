@@ -74,11 +74,11 @@ class TextHelper : Helper
     /**
      * Call methods from String utility class
      *
-     * @param string $method Method to invoke
+     * @param string method Method to invoke
      * @param array myParams Array of params for the method.
      * @return mixed Whatever is returned by called method, or false on failure
      */
-    auto __call(string $method, array myParams) {
+    auto __call(string method, array myParams) {
         return _engine.{$method}(...myParams);
     }
 
@@ -90,12 +90,12 @@ class TextHelper : Helper
      *
      * - `escape` Control HTML escaping of input. Defaults to true.
      *
-     * @param string $text Text
+     * @param string text Text
      * @param array<string, mixed> myOptions Array of HTML options, and options listed above.
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-urls
      */
-    string autoLinkUrls(string $text, array myOptions = []) {
+    string autoLinkUrls(string text, array myOptions = []) {
         _placeholders = [];
         myOptions += ["escape": true];
 
@@ -164,11 +164,11 @@ class TextHelper : Helper
     /**
      * Replace placeholders with links.
      *
-     * @param string $text The text to operate on.
+     * @param string text The text to operate on.
      * @param array<string, mixed> $htmlOptions The options for the generated links.
      * @return string The text with links inserted.
      */
-    protected string _linkUrls(string $text, array $htmlOptions) {
+    protected string _linkUrls(string text, array $htmlOptions) {
         $replace = [];
         foreach (_placeholders as $hash: myContents) {
             $link = myUrl = myContents["content"];
@@ -185,12 +185,12 @@ class TextHelper : Helper
     /**
      * Links email addresses
      *
-     * @param string $text The text to operate on
+     * @param string text The text to operate on
      * @param array<string, mixed> myOptions An array of options to use for the HTML.
      * @return string
      * @see \Cake\View\Helper\TextHelper::autoLinkEmails()
      */
-    protected string _linkEmails(string $text, array myOptions) {
+    protected string _linkEmails(string text, array myOptions) {
         $replace = [];
         foreach (_placeholders as $hash: myContents) {
             myUrl = myContents["content"];
@@ -208,12 +208,12 @@ class TextHelper : Helper
      *
      * - `escape` Control HTML escaping of input. Defaults to true.
      *
-     * @param string $text Text
+     * @param string text Text
      * @param array<string, mixed> myOptions Array of HTML options, and options listed above.
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-email-addresses
      */
-    string autoLinkEmails(string $text, array myOptions = []) {
+    string autoLinkEmails(string text, array myOptions = []) {
         myOptions += ["escape": true];
         _placeholders = [];
 
@@ -237,12 +237,12 @@ class TextHelper : Helper
      *
      * - `escape` Control HTML escaping of input. Defaults to true.
      *
-     * @param string $text Text
+     * @param string text Text
      * @param array<string, mixed> myOptions Array of HTML options, and options listed above.
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
-    string autoLink(string $text, array myOptions = []) {
+    string autoLink(string text, array myOptions = []) {
         $text = this.autoLinkUrls($text, myOptions);
 
         return this.autoLinkEmails($text, ["escape": false] + myOptions);
@@ -252,14 +252,14 @@ class TextHelper : Helper
      * Highlights a given phrase in a text. You can specify any expression in highlighter that
      * may include the \1 expression to include the $phrase found.
      *
-     * @param string $text Text to search the phrase in
-     * @param string $phrase The phrase that will be searched
+     * @param string text Text to search the phrase in
+     * @param string phrase The phrase that will be searched
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string The highlighted text
      * @see \Cake\Utility\Text::highlight()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#highlighting-substrings
      */
-    string highlight(string $text, string $phrase, array myOptions = []) {
+    string highlight(string text, string phrase, array myOptions = []) {
         return _engine.highlight($text, $phrase, myOptions);
     }
 
@@ -272,7 +272,7 @@ class TextHelper : Helper
      * @return string The text with proper <p> and <br /> tags
      * @link https://book.UIM.org/4/en/views/helpers/text.html#converting-text-into-paragraphs
      */
-    string autoParagraph(Nullable!string $text) {
+    string autoParagraph(Nullable!string text) {
         $text = $text ?? "";
         if (trim($text) !== "") {
             $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text . "\n");
@@ -300,14 +300,14 @@ class TextHelper : Helper
      * - `exact` If false, $text will not be cut mid-word
      * - `html` If true, HTML tags would be handled correctly
      *
-     * @param string $text String to truncate.
+     * @param string text String to truncate.
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
      * @see \Cake\Utility\Text::truncate()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-text
      */
-    string truncate(string $text, int $length = 100, array myOptions = []) {
+    string truncate(string text, int $length = 100, array myOptions = []) {
         return _engine.truncate($text, $length, myOptions);
     }
 
@@ -322,14 +322,14 @@ class TextHelper : Helper
      * - `ellipsis` Will be used as Beginning and prepended to the trimmed string
      * - `exact` If false, $text will not be cut mid-word
      *
-     * @param string $text String to truncate.
+     * @param string text String to truncate.
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
      * @see \Cake\Utility\Text::tail()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
-    string tail(string $text, int $length = 100, array myOptions = []) {
+    string tail(string text, int $length = 100, array myOptions = []) {
         return _engine.tail($text, $length, myOptions);
     }
 
@@ -337,15 +337,15 @@ class TextHelper : Helper
      * Extracts an excerpt from the text surrounding the phrase with a number of characters on each side
      * determined by radius.
      *
-     * @param string $text String to search the phrase in
-     * @param string $phrase Phrase that will be searched for
+     * @param string text String to search the phrase in
+     * @param string phrase Phrase that will be searched for
      * @param int $radius The amount of characters that will be returned on each side of the founded phrase
-     * @param string $ending Ending that will be appended
+     * @param string ending Ending that will be appended
      * @return string Modified string
      * @see \Cake\Utility\Text::excerpt()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
-    string excerpt(string $text, string $phrase, int $radius = 100, string $ending = "...") {
+    string excerpt(string text, string phrase, int $radius = 100, string ending = "...") {
         return _engine.excerpt($text, $phrase, $radius, $ending);
     }
 
@@ -354,12 +354,12 @@ class TextHelper : Helper
      *
      * @param array<string> $list The list to be joined.
      * @param string|null $and The word used to join the last and second last items together with. Defaults to "and".
-     * @param string $separator The separator used to join all the other items together. Defaults to ", ".
+     * @param string separator The separator used to join all the other items together. Defaults to ", ".
      * @return string The glued together string.
      * @see \Cake\Utility\Text::toList()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
-    string toList(array $list, Nullable!string $and = null, string $separator = ", ") {
+    string toList(array $list, Nullable!string and = null, string separator = ", ") {
         return _engine.toList($list, $and, $separator);
     }
 
@@ -377,14 +377,14 @@ class TextHelper : Helper
      * - `preserve`: Specific non-word character to preserve. Default `null`.
      *   For e.g. this option can be set to "." to generate clean file names.
      *
-     * @param string $string the string you want to slug
+     * @param string string the string you want to slug
      * @param array<string, mixed>|string myOptions If string it will be used as replacement character
      *   or an array of options.
      * @return string
      * @see \Cake\Utility\Text::setTransliterator()
      * @see \Cake\Utility\Text::setTransliteratorId()
      */
-    string slug(string $string, myOptions = []) {
+    string slug(string string, myOptions = []) {
         return _engine.slug($string, myOptions);
     }
 

@@ -75,7 +75,7 @@ class Xml {
      *
      * If using array as input, you can pass `options` from Xml::fromArray.
      *
-     * @param object|array|string $input XML string, a path to a file, a URL or an array
+     * @param object|array|string input XML string, a path to a file, a URL or an array
      * @param array<string, mixed> myOptions The options to use
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
@@ -112,12 +112,12 @@ class Xml {
     /**
      * Parse the input data and create either a SimpleXmlElement object or a DOMDocument.
      *
-     * @param string $input The input to load.
+     * @param string input The input to load.
      * @param array<string, mixed> myOptions The options to use. See Xml::build()
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static auto _loadXml(string $input, array myOptions) {
+    protected static auto _loadXml(string input, array myOptions) {
         return static::load(
             $input,
             myOptions,
@@ -138,12 +138,12 @@ class Xml {
     /**
      * Parse the input html string and create either a SimpleXmlElement object or a DOMDocument.
      *
-     * @param string $input The input html string to load.
+     * @param string input The input html string to load.
      * @param array<string, mixed> myOptions The options to use. See Xml::build()
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    static function loadHtml(string $input, array myOptions = []) {
+    static function loadHtml(string input, array myOptions = []) {
         $defaults = [
             "return" => "simplexml",
             "loadEntities" => false,
@@ -169,13 +169,13 @@ class Xml {
     /**
      * Parse the input data and create either a SimpleXmlElement object or a DOMDocument.
      *
-     * @param string $input The input to load.
+     * @param string input The input to load.
      * @param array<string, mixed> myOptions The options to use. See Xml::build()
      * @param \Closure $callable Closure that should return SimpleXMLElement or DOMDocument instance.
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static function load(string $input, array myOptions, Closure $callable) {
+    protected static function load(string input, array myOptions, Closure $callable) {
         $flags = 0;
         if (!empty(myOptions["parseHuge"])) {
             $flags |= LIBXML_PARSEHUGE;
@@ -281,7 +281,7 @@ class Xml {
      * @param \DOMDocument $dom Handler to DOMDocument
      * @param \DOMDocument|\DOMElement myNode Handler to DOMElement (child)
      * @param array myData Array of data to append to the myNode.
-     * @param string $format Either "attributes" or "tags". This determines where nested keys go.
+     * @param string format Either "attributes" or "tags". This determines where nested keys go.
      * @return void
      * @throws \Cake\Utility\Exception\XmlException
      */
@@ -424,11 +424,11 @@ class Xml {
      *
      * @param \SimpleXMLElement $xml SimpleXMLElement object
      * @param array $parentData Parent array with data
-     * @param string $ns module of current child
+     * @param string ns module of current child
      * @param $modules List of modules in XML
      * @return void
      */
-    protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, string[] $modules) {
+    protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string ns, string[] $modules) {
         myData = [];
 
         foreach ($modules as $module) {

@@ -34,12 +34,12 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      * in the application folder, then it tries looking under the current plugin
      * if any
      *
-     * @param string $helper The helper name to be loaded
+     * @param string helper The helper name to be loaded
      * @return bool whether the helper could be loaded or not
      * @throws \Cake\View\Exception\MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
-    bool __isset(string $helper) {
+    bool __isset(string helper) {
         if (isset(_loaded[$helper])) {
             return true;
         }

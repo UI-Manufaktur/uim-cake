@@ -40,7 +40,7 @@ trait ViewVarsTrait {
      * @return \Cake\View\View
      * @throws \Cake\View\Exception\MissingViewException If view class was not found.
      */
-    function createView(Nullable!string $viewClass = null): View
+    function createView(Nullable!string viewClass = null): View
     {
         myBuilder = this.viewBuilder();
         if ($viewClass) {

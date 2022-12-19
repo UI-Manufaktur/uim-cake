@@ -15,7 +15,7 @@ class Text {
     /**
      * Default transliterator id string.
      *
-     * @var string $_defaultTransliteratorId Transliterator identifier string.
+     * @var string _defaultTransliteratorId Transliterator identifier string.
      */
     protected static $_defaultTransliteratorId = "Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove";
 
@@ -68,16 +68,16 @@ class Text {
      * $leftBound and $rightBound.
      *
      * @param string myData The data to tokenize.
-     * @param string $separator The token to split the data on.
-     * @param string $leftBound The left boundary to ignore separators in.
-     * @param string $rightBound The right boundary to ignore separators in.
+     * @param string separator The token to split the data on.
+     * @param string leftBound The left boundary to ignore separators in.
+     * @param string rightBound The right boundary to ignore separators in.
      * @return Array of tokens in myData.
      */
     static string[] tokenize(
         string myData,
-        string $separator = ",",
-        string $leftBound = "(",
-        string $rightBound = ")"
+        string separator = ",",
+        string leftBound = "(",
+        string rightBound = ")"
     ) {
         if (empty(myData)) {
             return [];
@@ -165,13 +165,13 @@ class Text {
      *   (Overwrites before, after, breaks escape / clean)
      * - clean: A boolean or array with instructions for Text::cleanInsert
      *
-     * @param string $str A string containing variable placeholders
+     * @param string str A string containing variable placeholders
      * @param array myData A key => val array where each key stands for a placeholder variable name
      *     to be replaced with val
      * @param array<string, mixed> myOptions An array of options, see description above
      * @return string
      */
-    static string insert(string $str, array myData, array myOptions = []) {
+    static string insert(string str, array myData, array myOptions = []) {
         $defaults = [
             "before":":", "after":"", "escape":"\\", "format":null, "clean":false,
         ];
@@ -236,12 +236,12 @@ class Text {
      * is to replace all whitespace and unneeded markup around placeholders that did not get replaced
      * by Text::insert().
      *
-     * @param string $str String to clean.
+     * @param string str String to clean.
      * @param array<string, mixed> myOptions Options list.
      * @return string
      * @see \Cake\Utility\Text::insert()
      */
-    static string cleanInsert(string $str, array myOptions) {
+    static string cleanInsert(string str, array myOptions) {
         $clean = myOptions["clean"];
         if (!$clean) {
             return $str;
@@ -306,11 +306,11 @@ class Text {
      * - `indent` String to indent with. Defaults to null.
      * - `indentAt` 0 based index to start indenting at. Defaults to 0.
      *
-     * @param string $text The text to format.
+     * @param string text The text to format.
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrap(string $text, myOptions = []) {
+    static string wrap(string text, myOptions = []) {
         if (is_numeric(myOptions)) {
             myOptions = ["width":myOptions];
         }
@@ -342,11 +342,11 @@ class Text {
      * - `indent` String to indent with. Defaults to null.
      * - `indentAt` 0 based index to start indenting at. Defaults to 0.
      *
-     * @param string $text The text to format.
+     * @param string text The text to format.
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrapBlock(string $text, myOptions = []) {
+    static string wrapBlock(string text, myOptions = []) {
         if (is_numeric(myOptions)) {
             myOptions = ["width":myOptions];
         }
@@ -388,14 +388,14 @@ class Text {
     /**
      * Unicode and newline aware version of wordwrap.
      *
-     * @phpstan-param non-empty-string $break
-     * @param string $text The text to format.
+     * @phpstan-param non-empty-string break
+     * @param string text The text to format.
      * @param int $width The width to wrap to. Defaults to 72.
-     * @param string $break The line is broken using the optional break parameter. Defaults to "\n".
+     * @param string break The line is broken using the optional break parameter. Defaults to "\n".
      * @param bool $cut If the cut is set to true, the string is always wrapped at the specified width.
      * @return string Formatted text.
      */
-    static string wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false) {
+    static string wordWrap(string text, int $width = 72, string break = "\n", bool $cut = false) {
         $paragraphs = explode($break, $text);
         foreach ($paragraphs as &$paragraph) {
             $paragraph = static::_wordWrap($paragraph, $width, $break, $cut);
@@ -407,13 +407,13 @@ class Text {
     /**
      * Unicode aware version of wordwrap as helper method.
      *
-     * @param string $text The text to format.
+     * @param string text The text to format.
      * @param int $width The width to wrap to. Defaults to 72.
-     * @param string $break The line is broken using the optional break parameter. Defaults to "\n".
+     * @param string break The line is broken using the optional break parameter. Defaults to "\n".
      * @param bool $cut If the cut is set to true, the string is always wrapped at the specified width.
      * @return string Formatted text.
      */
-    protected static string _wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false) {
+    protected static string _wordWrap(string text, int $width = 72, string break = "\n", bool $cut = false) {
         $parts = [];
         if ($cut) {
             while (mb_strlen($text) > 0) {
@@ -464,13 +464,13 @@ class Text {
      * - `regex` A custom regex rule that is used to match words, default is "|$tag|iu"
      * - `limit` A limit, optional, defaults to -1 (none)
      *
-     * @param string $text Text to search the phrase in.
-     * @param array<string>|string $phrase The phrase or phrases that will be searched.
+     * @param string text Text to search the phrase in.
+     * @param array<string>|string phrase The phrase or phrases that will be searched.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string The highlighted text
      * @link https://book.UIM.org/4/en/core-libraries/text.html#highlighting-substrings
      */
-    static string highlight(string $text, $phrase, array myOptions = []) {
+    static string highlight(string text, $phrase, array myOptions = []) {
         if (empty($phrase)) {
             return $text;
         }
@@ -524,12 +524,12 @@ class Text {
      * - `ellipsis` Will be used as beginning and prepended to the trimmed string
      * - `exact` If false, $text will not be cut mid-word
      *
-     * @param string $text String to truncate.
+     * @param string text String to truncate.
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> myOptions An array of options.
      * @return string Trimmed string.
      */
-    static string tail(string $text, int $length = 100, array myOptions = []) {
+    static string tail(string text, int $length = 100, array myOptions = []) {
         $default = [
             "ellipsis":"...", "exact":true,
         ];
@@ -562,13 +562,13 @@ class Text {
      * - `html` If true, HTML tags would be handled correctly
      * - `trimWidth` If true, $text will be truncated with the width
      *
-     * @param string $text String to truncate.
+     * @param string text String to truncate.
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#truncating-text
      */
-    static string truncate(string $text, int $length = 100, array myOptions = []) {
+    static string truncate(string text, int $length = 100, array myOptions = []) {
         $default = [
             "ellipsis": "...", 
             "exact": "true", "html":false, "trimWidth":false,
@@ -665,13 +665,13 @@ class Text {
     /**
      * Truncate text with specified width.
      *
-     * @param string $text String to truncate.
+     * @param string text String to truncate.
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
      * @see \Cake\Utility\Text::truncate()
      */
-    static string truncateByWidth(string $text, int $length = 100, array myOptions = []) {
+    static string truncateByWidth(string text, int $length = 100, array myOptions = []) {
         return static::truncate($text, $length, ["trimWidth":true] + myOptions);
     }
 
@@ -683,11 +683,11 @@ class Text {
      * - `html` If true, HTML entities will be handled as decoded characters.
      * - `trimWidth` If true, the width will return.
      *
-     * @param string $text The string being checked for length
+     * @param string text The string being checked for length
      * @param array<string, mixed> myOptions An array of options.
      * @return int
      */
-    protected static int _strlen(string $text, array myOptions) {
+    protected static int _strlen(string text, array myOptions) {
         if (empty(myOptions["trimWidth"])) {
             $strlen = "mb_strlen";
         } else {
@@ -720,13 +720,13 @@ class Text {
      * - `html` If true, HTML entities will be handled as decoded characters.
      * - `trimWidth` If true, will be truncated with specified width.
      *
-     * @param string $text The input string.
+     * @param string text The input string.
      * @param int $start The position to begin extracting.
      * @param int|null $length The desired length.
      * @param array<string, mixed> myOptions An array of options.
      * @return string
      */
-    protected static string _substr(string $text, int $start, Nullable!int $length, array myOptions) {
+    protected static string _substr(string text, int $start, Nullable!int $length, array myOptions) {
         if (empty(myOptions["trimWidth"])) {
             $substr = "mb_substr";
         } else {
@@ -810,10 +810,10 @@ class Text {
     /**
      * Removes the last word from the input text.
      *
-     * @param string $text The input text
+     * @param string text The input text
      * @return string
      */
-    protected static string _removeLastWord(string $text) {
+    protected static string _removeLastWord(string text) {
         $spacepos = mb_strrpos($text, " ");
 
         if ($spacepos !== false) {
@@ -835,14 +835,14 @@ class Text {
      * Extracts an excerpt from the text surrounding the phrase with a number of characters on each side
      * determined by radius.
      *
-     * @param string $text String to search the phrase in
-     * @param string $phrase Phrase that will be searched for
+     * @param string text String to search the phrase in
+     * @param string phrase Phrase that will be searched for
      * @param int $radius The amount of characters that will be returned on each side of the founded phrase
-     * @param string $ellipsis Ending that will be appended
+     * @param string ellipsis Ending that will be appended
      * @return string Modified string
      * @link https://book.UIM.org/4/en/core-libraries/text.html#extracting-an-excerpt
      */
-    static string excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "...") {
+    static string excerpt(string text, string phrase, int $radius = 100, string ellipsis = "...") {
         if (empty($text) || empty($phrase)) {
             return static::truncate($text, $radius * 2, ["ellipsis":$ellipsis]);
         }
@@ -880,11 +880,11 @@ class Text {
      *
      * @param $list The list to be joined.
      * @param string|null $and The word used to join the last and second last items together with. Defaults to "and".
-     * @param string $separator The separator used to join all the other items together. Defaults to ", ".
+     * @param string separator The separator used to join all the other items together. Defaults to ", ".
      * @return string The glued together string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
-    static string toList(string[] $list, Nullable!string $and = null, string $separator = ", ") {
+    static string toList(string[] $list, Nullable!string and = null, string separator = ", ") {
         if ($and == null) {
             $and = __d("cake", "and");
         }
@@ -898,10 +898,10 @@ class Text {
     /**
      * Check if the string contain multibyte characters
      *
-     * @param string $string value to test
+     * @param string string value to test
      * @return bool
      */
-    static bool isMultibyte(string $string) {
+    static bool isMultibyte(string string) {
         $length = strlen($string);
 
         for ($i = 0; $i < $length; $i++) {
@@ -918,10 +918,10 @@ class Text {
      * Converts a multibyte character string
      * to the decimal value of the character
      *
-     * @param string $string String to convert.
+     * @param string string String to convert.
      * @return array
      */
-    static function utf8(string $string): array
+    static function utf8(string string): array
     {
         $map = [];
 
@@ -984,13 +984,13 @@ class Text {
     /**
      * Converts filesize from human readable string to bytes
      *
-     * @param string $size Size in human readable string like "5MB", "5M", "500B", "50kb" etc.
+     * @param string size Size in human readable string like "5MB", "5M", "500B", "50kb" etc.
      * @param mixed $default Value to be returned when invalid size was used, for example "Unknown type"
      * @return mixed Number of bytes as integer on success, `$default` on failure if not false
      * @throws \InvalidArgumentException On invalid Unit type.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#Cake\Utility\Text::parseFileSize
      */
-    static function parseFileSize(string $size, $default = false) {
+    static function parseFileSize(string size, $default = false) {
         if (ctype_digit($size)) {
             return (int)$size;
         }
@@ -1053,10 +1053,10 @@ class Text {
     /**
      * Set default transliterator identifier string.
      *
-     * @param string $transliteratorId Transliterator identifier.
+     * @param string transliteratorId Transliterator identifier.
      * @return void
      */
-    static void setTransliteratorId(string $transliteratorId) {
+    static void setTransliteratorId(string transliteratorId) {
         $transliterator = transliterator_create($transliteratorId);
         if ($transliterator == null) {
             throw new CakeException("Unable to create transliterator for id: " . $transliteratorId);
@@ -1069,7 +1069,7 @@ class Text {
     /**
      * Transliterate string.
      *
-     * @param string $string String to transliterate.
+     * @param string string String to transliterate.
      * @param \Transliterator|string|null $transliterator Either a Transliterator
      *   instance, or a transliterator identifier string. If `null`, the default
      *   transliterator (identifier) set via `setTransliteratorId()` or
@@ -1077,7 +1077,7 @@ class Text {
      * @return string
      * @see https://secure.php.net/manual/en/transliterator.transliterate.php
      */
-    static string transliterate(string $string, $transliterator = null) {
+    static string transliterate(string string, $transliterator = null) {
         if (empty($transliterator)) {
             $transliterator = static::$_defaultTransliterator ?: static::$_defaultTransliteratorId;
         }
@@ -1104,14 +1104,14 @@ class Text {
      * - `preserve`: Specific non-word character to preserve. Default `null`.
      *   For e.g. this option can be set to "." to generate clean file names.
      *
-     * @param string $string the string you want to slug
+     * @param string string the string you want to slug
      * @param array<string, mixed>|string myOptions If string it will be use as replacement character
      *   or an array of options.
      * @return string
      * @see setTransliterator()
      * @see setTransliteratorId()
      */
-    static string slug(string $string, myOptions = []) {
+    static string slug(string string, myOptions = []) {
         if (is_string(myOptions)) {
             myOptions = ["replacement":myOptions];
         }

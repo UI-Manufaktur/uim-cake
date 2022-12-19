@@ -10,7 +10,7 @@ import uim.cake;
 trait IdGeneratorTrait
 {
     // Prefix for id attribute.
-    protected string $_idPrefix;
+    protected string _idPrefix;
 
     // A list of id suffixes used in the current rendering.
     protected string[] $_idSuffixes = [];
@@ -28,10 +28,10 @@ trait IdGeneratorTrait
      * Ensures that id"s for a given set of fields are unique.
      *
      * @param string myName The ID attribute name.
-     * @param string $val The ID attribute value.
+     * @param string val The ID attribute value.
      * @return string Generated id.
      */
-    protected string _id(string myName, string $val) {
+    protected string _id(string myName, string val) {
         myName = _domId(myName);
         $suffix = _idSuffix($val);
 
@@ -43,10 +43,10 @@ trait IdGeneratorTrait
      *
      * Ensures that id"s for a given set of fields are unique.
      *
-     * @param string $val The ID attribute value.
+     * @param string val The ID attribute value.
      * @return string Generated id suffix.
      */
-    protected string _idSuffix(string $val) {
+    protected string _idSuffix(string val) {
         $idSuffix = mb_strtolower(str_replace(["/", "@", "<", ">", " ", """, "\""], "-", $val));
         myCount = 1;
         $check = $idSuffix;

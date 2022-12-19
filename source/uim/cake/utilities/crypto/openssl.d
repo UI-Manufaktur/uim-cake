@@ -22,12 +22,12 @@ class OpenSsl {
      * Any trailing null bytes will be removed on decryption due to how PHP pads messages
      * with nulls prior to encryption.
      *
-     * @param string $plain The value to encrypt.
+     * @param string plain The value to encrypt.
      * @param string myKey The 256 bit/32 byte key to use as a cipher key.
      * @return Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static string encrypt(string $plain, string myKey) {
+    static string encrypt(string plain, string myKey) {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
 
@@ -39,12 +39,12 @@ class OpenSsl {
     /**
      * Decrypt a value using AES-256.
      *
-     * @param string $cipher The ciphertext to decrypt.
+     * @param string cipher The ciphertext to decrypt.
      * @param string myKey The 256 bit/32 byte key to use as a cipher key.
      * @return string Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static Nullable!string decrypt(string $cipher, string myKey) {
+    static Nullable!string decrypt(string cipher, string myKey) {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
 

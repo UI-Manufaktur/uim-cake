@@ -27,7 +27,7 @@ trait CellTrait {
      *
      * Cells are not rendered until they are echoed.
      *
-     * @param string $cell You must indicate cell name, and optionally a cell action. e.g.: `TagCloud::smallList` will
+     * @param string cell You must indicate cell name, and optionally a cell action. e.g.: `TagCloud::smallList` will
      *  invoke `View\Cell\TagCloudCell::smallList()`, `display` action will be invoked by default when none is provided.
      * @param array myData Additional arguments for cell method. e.g.:
      *    `cell("TagCloud::smallList", ["a1" => "v1", "a2" => "v2"])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
@@ -35,7 +35,7 @@ trait CellTrait {
      * @return \Cake\View\Cell The cell instance
      * @throws \Cake\View\Exception\MissingCellException If Cell class was not found.
      */
-    protected Cell cell(string $cell, array myData = [], array myOptions = []) {
+    protected Cell cell(string cell, array myData = [], array myOptions = []) {
         $parts = explode("::", $cell);
 
         if (count($parts) == 2) {
@@ -64,12 +64,12 @@ trait CellTrait {
      * Create and configure the cell instance.
      *
      * @param string myClassName The cell classname.
-     * @param string $action The action name.
+     * @param string action The action name.
      * @param string|null myPlugin The plugin name.
      * @param array<string, mixed> myOptions The constructor options for the cell.
      * @return \Cake\View\Cell
      */
-    protected auto _createCell(string myClassName, string $action, Nullable!string myPlugin, array myOptions)Cell
+    protected auto _createCell(string myClassName, string action, Nullable!string myPlugin, array myOptions)Cell
     {
         /** @var \Cake\View\Cell $instance */
         $instance = new myClassName(this.request, this.response, this.getEventManager(), myOptions);

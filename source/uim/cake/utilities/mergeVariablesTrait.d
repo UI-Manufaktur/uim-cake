@@ -44,11 +44,11 @@ trait MergeVariablesTrait
     /**
      * Merge a single property with the values declared in all parent classes.
      *
-     * @param string $property The name of the property being merged.
+     * @param string property The name of the property being merged.
      * @param $parentClasses An array of classes you want to merge with.
      * @param array<string, mixed> myOptions Options for merging the property, see _mergeVars()
      */
-    protected void _mergeProperty(string $property, string[] $parentClasses, array myOptions) {
+    protected void _mergeProperty(string property, string[] $parentClasses, array myOptions) {
         thisValue = this.{$property};
         $isAssoc = false;
         if (

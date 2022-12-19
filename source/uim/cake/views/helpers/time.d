@@ -65,7 +65,7 @@ class TimeHelper : Helper
      * @param string|null $locale Locale string.
      * @return string Formatted date string
      */
-    string nice($dateString = null, $timezone = null, Nullable!string $locale = null) {
+    string nice($dateString = null, $timezone = null, Nullable!string locale = null) {
         $timezone = _getTimezone($timezone);
 
         return (new FrozenTime($dateString)).nice($timezone, $locale);
@@ -272,28 +272,28 @@ class TimeHelper : Helper
     /**
      * Returns true if specified datetime was within the interval specified, else false.
      *
-     * @param string $timeInterval the numeric value with space then time type.
+     * @param string timeInterval the numeric value with space then time type.
      *    Example of valid types: 6 hours, 2 days, 1 minute.
      * @param \IDateTime|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool
      * @see \Cake\I18n\Time::wasWithinLast()
      */
-    bool wasWithinLast(string $timeInterval, $dateString, $timezone = null) {
+    bool wasWithinLast(string timeInterval, $dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).wasWithinLast($timeInterval);
     }
 
     /**
      * Returns true if specified datetime is within the interval specified, else false.
      *
-     * @param string $timeInterval the numeric value with space then time type.
+     * @param string timeInterval the numeric value with space then time type.
      *    Example of valid types: 6 hours, 2 days, 1 minute.
      * @param \IDateTime|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool
      * @see \Cake\I18n\Time::wasWithinLast()
      */
-    bool isWithinNext(string $timeInterval, $dateString, $timezone = null) {
+    bool isWithinNext(string timeInterval, $dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isWithinNext($timeInterval);
     }
 

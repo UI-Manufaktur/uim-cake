@@ -242,11 +242,11 @@ class Inflector
     /**
      * Return $word in plural form.
      *
-     * @param string $word Word in singular
+     * @param string word Word in singular
      * @return string Word in plural
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
-    static string pluralize(string $word) {
+    static string pluralize(string word) {
         if (isset(static::$_cache["pluralize"][$word])) {
             return static::$_cache["pluralize"][$word];
         }
@@ -293,11 +293,11 @@ class Inflector
     /**
      * Return $word in singular form.
      *
-     * @param string $word Word in plural
+     * @param string word Word in plural
      * @return string Word in singular
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
-    static string singularize(string $word) {
+    static string singularize(string word) {
         if (isset(static::$_cache["singularize"][$word])) {
             return static::$_cache["singularize"][$word];
         }
@@ -348,12 +348,12 @@ class Inflector
     /**
      * Returns the input lower_case_delimited_string as a CamelCasedString.
      *
-     * @param string $string String to camelize
-     * @param string $delimiter the delimiter in the input string
+     * @param string string String to camelize
+     * @param string delimiter the delimiter in the input string
      * @return string CamelizedStringLikeThis.
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
-    static string camelize(string $string, string $delimiter = "_") {
+    static string camelize(string string, string delimiter = "_") {
         $cacheKey = __FUNCTION__ . $delimiter;
 
         myResult = static::_cache($cacheKey, $string);
@@ -371,11 +371,11 @@ class Inflector
      *
      * Also replaces dashes with underscores
      *
-     * @param string $string CamelCasedString to be "underscorized"
+     * @param string string CamelCasedString to be "underscorized"
      * @return string underscore_version of the input string
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
-    static string underscore(string $string) {
+    static string underscore(string string) {
         return static::delimit(str_replace("-", "_", $string), "_");
     }
 
@@ -384,10 +384,10 @@ class Inflector
      *
      * Also replaces underscores with dashes
      *
-     * @param string $string The string to dasherize.
+     * @param string string The string to dasherize.
      * @return string Dashed version of the input string
      */
-    static string dasherize(string $string) {
+    static string dasherize(string string) {
         return static::delimit(str_replace("_", "-", $string), "-");
     }
 
@@ -395,12 +395,12 @@ class Inflector
      * Returns the input lower_case_delimited_string as "A Human Readable String".
      * (Underscores are replaced by spaces and capitalized following words.)
      *
-     * @param string $string String to be humanized
-     * @param string $delimiter the character to replace with a space
+     * @param string string String to be humanized
+     * @param string delimiter the character to replace with a space
      * @return string Human-readable string
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-human-readable-forms
      */
-    static string humanize(string $string, string $delimiter = "_") {
+    static string humanize(string string, string delimiter = "_") {
         $cacheKey = __FUNCTION__ . $delimiter;
 
         myResult = static::_cache($cacheKey, $string);
@@ -420,11 +420,11 @@ class Inflector
     /**
      * Expects a CamelCasedInputString, and produces a lower_case_delimited_string
      *
-     * @param string $string String to delimit
-     * @param string $delimiter the character to use as a delimiter
+     * @param string string String to delimit
+     * @param string delimiter the character to use as a delimiter
      * @return string delimited string
      */
-    static string delimit(string $string, string $delimiter = "_") {
+    static string delimit(string string, string delimiter = "_") {
         $cacheKey = __FUNCTION__ . $delimiter;
 
         myResult = static::_cache($cacheKey, $string);
@@ -476,11 +476,11 @@ class Inflector
     /**
      * Returns camelBacked version of an underscored string.
      *
-     * @param string $string String to convert.
+     * @param string string String to convert.
      * @return string in variable form
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-variable-names
      */
-    static string variable(string $string) {
+    static string variable(string string) {
         myResult = static::_cache(__FUNCTION__, $string);
 
         if (myResult == false) {

@@ -83,10 +83,10 @@ class CommandTask : Shell {
      * Scan a directory for .php files and return the class names that
      * should be within them.
      *
-     * @param string $dir The directory to read.
+     * @param string dir The directory to read.
      * @return The list of shell classnames based on conventions.
      */
-    protected string[] _scanDir(string $dir) {
+    protected string[] _scanDir(string dir) {
         if (!is_dir($dir)) {
             return [];
         }

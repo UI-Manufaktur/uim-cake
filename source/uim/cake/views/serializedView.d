@@ -12,7 +12,7 @@ abstract class SerializedView : View
     /**
      * Response type.
      */
-    protected string $_responseType;
+    protected string _responseType;
 
     /**
      * Default config options.
@@ -52,7 +52,7 @@ abstract class SerializedView : View
     /**
      * Serialize view vars.
      *
-     * @param array|string $serialize The name(s) of the view variable(s) that
+     * @param array|string serialize The name(s) of the view variable(s) that
      *   need(s) to be serialized
      * @return string The serialized data.
      */

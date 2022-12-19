@@ -149,7 +149,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns whether an index exists in the rule set
      *
-     * @param string $index name of the rule
+     * @param string index name of the rule
      * @return bool
      */
     bool offsetExists($index) {
@@ -159,7 +159,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns a rule object by its index
      *
-     * @param string $index name of the rule
+     * @param string index name of the rule
      * @return \Cake\Validation\ValidationRule
      */
     function offsetGet($index): ValidationRule
@@ -170,7 +170,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Sets or replace a validation rule
      *
-     * @param string $index name of the rule
+     * @param string index name of the rule
      * @param \Cake\Validation\ValidationRule|array $rule Rule to add to $index
      */
     void offsetSet($index, $rule) {
@@ -180,7 +180,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Unsets a validation rule
      *
-     * @param string $index name of the rule
+     * @param string index name of the rule
      */
     void offsetUnset($index) {
         unset(_rules[$index]);

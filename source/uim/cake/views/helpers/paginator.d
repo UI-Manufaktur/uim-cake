@@ -307,12 +307,12 @@ class PaginatorHelper : Helper
      *   templates you"d like to use when generating the link for previous page.
      *   The helper"s original templates will be restored once prev() is done.
      *
-     * @param string $title Title for the link. Defaults to "<< Previous".
+     * @param string title Title for the link. Defaults to "<< Previous".
      * @param array<string, mixed> myOptions Options for pagination link. See above for list of keys.
      * @return string A "previous" link or a disabled link.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string prev(string $title = "<< Previous", array myOptions = []) {
+    string prev(string title = "<< Previous", array myOptions = []) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -346,12 +346,12 @@ class PaginatorHelper : Helper
      *   templates you"d like to use when generating the link for next page.
      *   The helper"s original templates will be restored once next() is done.
      *
-     * @param string $title Title for the link. Defaults to "Next >>".
+     * @param string title Title for the link. Defaults to "Next >>".
      * @param array<string, mixed> myOptions Options for pagination link. See above for list of keys.
      * @return string A "next" link or $disabledTitle text if the link is disabled.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string next(string $title = "Next >>", array myOptions = []) {
+    string next(string title = "Next >>", array myOptions = []) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -620,10 +620,10 @@ class PaginatorHelper : Helper
      * Does myModel have $page in its range?
      *
      * @param string|null myModel Model name to get parameters for.
-     * @param string $dir Direction
+     * @param string dir Direction
      * @return bool Whether model has $dir
      */
-    protected bool _hasPage(Nullable!string myModel, string $dir) {
+    protected bool _hasPage(Nullable!string myModel, string dir) {
         myParams = this.params(myModel);
 
         return !empty(myParams) && myParams[$dir . "Page"];
@@ -659,7 +659,7 @@ class PaginatorHelper : Helper
      *
      * - `model` The model to use, defaults to PaginatorHelper::defaultModel();
      *
-     * @param string $format The format string you want to use, defaults to "pages" Which generates output like "1 of 5"
+     * @param string format The format string you want to use, defaults to "pages" Which generates output like "1 of 5"
      *   set to "range" to generate output like "1 - 3 of 13". Can also be set to a custom string, containing the
      *   following placeholders `{{page}}`, `{{pages}}`, `{{current}}`, `{{count}}`, `{{model}}`, `{{start}}`, `{{end}}`
      *   and any custom content you would like.
@@ -668,7 +668,7 @@ class PaginatorHelper : Helper
      * @return string Counter string.
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#creating-a-page-counter
      */
-    string counter(string $format = "pages", array myOptions = []) {
+    string counter(string format = "pages", array myOptions = []) {
         myOptions += [
             "model": this.defaultModel(),
         ];
@@ -886,13 +886,13 @@ class PaginatorHelper : Helper
     /**
      * Generates the first number for the paginator numbers() method.
      *
-     * @param string $ellipsis Ellipsis character.
+     * @param string ellipsis Ellipsis character.
      * @param array<string, mixed> myParams Params from the numbers() method.
      * @param int $start Start number.
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _firstNumber(string $ellipsis, array myParams, int $start, array myOptions) {
+    protected string _firstNumber(string ellipsis, array myParams, int $start, array myOptions) {
         $out = "";
         $first = is_int(myOptions["first"]) ? myOptions["first"] : 0;
         if (myOptions["first"] && $start > 1) {
@@ -909,13 +909,13 @@ class PaginatorHelper : Helper
     /**
      * Generates the last number for the paginator numbers() method.
      *
-     * @param string $ellipsis Ellipsis character.
+     * @param string ellipsis Ellipsis character.
      * @param array<string, mixed> myParams Params from the numbers() method.
      * @param int $end End number.
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _lastNumber(string $ellipsis, array myParams, int $end, array myOptions) {
+    protected string _lastNumber(string ellipsis, array myParams, int $end, array myOptions) {
         $out = "";
         $last = is_int(myOptions["last"]) ? myOptions["last"] : 0;
         if (myOptions["last"] && $end < myParams["pageCount"]) {

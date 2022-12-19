@@ -37,13 +37,13 @@ class ValidationRule
     protected bool $_last = false;
 
     // The "message" key
-    protected string $_message;
+    protected string _message;
 
     /**
      * Key under which the object or class where the method to be used for
      * validation will be found
      */
-    protected string $_provider = "default";
+    protected string _provider = "default";
 
     /**
      * Extra arguments to be passed to the validation method
@@ -178,10 +178,10 @@ class ValidationRule
     /**
      * Returns the value of a property by name
      *
-     * @param string $property The name of the property to retrieve.
+     * @param string property The name of the property to retrieve.
      * @return mixed
      */
-    auto get(string $property) {
+    auto get(string property) {
       $property = "_" . $property;
 
       return this.{$property} ?? null;

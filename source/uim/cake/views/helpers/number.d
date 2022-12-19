@@ -58,11 +58,11 @@ class NumberHelper : Helper
     /**
      * Call methods from Cake\I18n\Number utility class
      *
-     * @param string $method Method to invoke
+     * @param string method Method to invoke
      * @param array myParams Array of params for the method.
      * @return mixed Whatever is returned by called method, or false on failure
      */
-    auto __call(string $method, array myParams) {
+    auto __call(string method, array myParams) {
         return _engine.{$method}(...myParams);
     }
 
@@ -158,7 +158,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return string Number formatted as a currency.
      */
-    string currency($number, Nullable!string $currency = null, array myOptions = []) {
+    string currency($number, Nullable!string currency = null, array myOptions = []) {
         $formatted = _engine.currency($number, $currency, myOptions);
         myOptions += ["escape": true];
 

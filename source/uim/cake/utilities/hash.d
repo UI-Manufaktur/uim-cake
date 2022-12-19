@@ -182,10 +182,10 @@ class Hash {
     /**
      * Split token conditions
      *
-     * @param string $token the token being splitted.
+     * @param string token the token being splitted.
      * @return array [token, conditions] with token splitted
      */
-    protected static auto _splitConditions(string $token): array
+    protected static auto _splitConditions(string token): array
     {
         $conditions = false;
         $position = indexOf($token, "[");
@@ -201,10 +201,10 @@ class Hash {
      * Check a key against a token.
      *
      * @param mixed myKey The key in the array being searched.
-     * @param string $token The token being matched.
+     * @param string token The token being matched.
      * @return bool
      */
-    protected static bool _matchToken(myKey, string $token) {
+    protected static bool _matchToken(myKey, string token) {
         switch ($token) {
             case "{n}":
                 return is_numeric(myKey);
@@ -221,10 +221,10 @@ class Hash {
      * Checks whether myData matches the attribute patterns
      *
      * @param \ArrayAccess|array myData Array of data to match.
-     * @param string $selector The patterns to match.
+     * @param string selector The patterns to match.
      * @return bool Fitness of expression.
      */
-    protected static bool _matches(myData, string $selector) {
+    protected static bool _matches(myData, string selector) {
         preg_match_all(
             "/(\[ (?P<attr>[^=><!]+?) (\s* (?P<op>[><!]?[=]|[><]) \s* (?P<val>(?:\/.*?\/ | [^\]]+)) )? \])/x",
             $selector,
@@ -334,13 +334,13 @@ class Hash {
     /**
      * Perform a simple insert/remove operation.
      *
-     * @param string $op The operation to do.
+     * @param string op The operation to do.
      * @param array myData The data to operate on.
      * @param myPath The path to work on.
      * @param mixed myValues The values to insert when doing inserts.
      * @return array data.
      */
-    protected static auto _simpleOp(string $op, array myData, string[] myPath, myValues = null): array
+    protected static auto _simpleOp(string op, array myData, string[] myPath, myValues = null): array
     {
         $_list = &myData;
 
@@ -525,13 +525,13 @@ class Hash {
      *
      * @param array myData Source array from which to extract the data
      * @param myPaths An array containing one or more Hash::extract()-style key paths
-     * @param string $format Format string into which values will be inserted, see sprintf()
+     * @param string format Format string into which values will be inserted, see sprintf()
      * @return An array of strings extracted from `myPath` and formatted with `$format`
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::format
      * @see sprintf()
      * @see \Cake\Utility\Hash::extract()
      */
-    static string[] format(array myData, string[] myPaths, string $format) {
+    static string[] format(array myData, string[] myPaths, string format) {
         $extracted = [];
         myCount = count(myPaths);
 
@@ -657,11 +657,11 @@ class Hash {
      * ["0.Foo.Bar" => "Far"].)
      *
      * @param array myData Array to flatten
-     * @param string $separator String used to separate array key elements in a path, defaults to "."
+     * @param string separator String used to separate array key elements in a path, defaults to "."
      * @return array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::flatten
      */
-    static function flatten(array myData, string $separator = "."): array
+    static function flatten(array myData, string separator = "."): array
     {
         myResult = [];
         $stack = [];
@@ -700,13 +700,13 @@ class Hash {
      * into a multi-dimensional array. So, `["0.Foo.Bar" => "Far"]` becomes
      * `[["Foo" => ["Bar" => "Far"]]]`.
      *
-     * @phpstan-param non-empty-string $separator
+     * @phpstan-param non-empty-string separator
      * @param array myData Flattened array
-     * @param string $separator The delimiter used
+     * @param string separator The delimiter used
      * @return array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::expand
      */
-    static function expand(array myData, string $separator = "."): array
+    static function expand(array myData, string separator = "."): array
     {
         myResult = [];
         foreach (myData as $flat => myValue) {

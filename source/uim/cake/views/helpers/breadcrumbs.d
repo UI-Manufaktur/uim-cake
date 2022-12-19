@@ -43,7 +43,7 @@ class BreadcrumbsHelper : Helper
     /**
      * Add a crumb to the end of the trail.
      *
-     * @param array|string $title If provided as a string, it represents the title of the crumb.
+     * @param array|string title If provided as a string, it represents the title of the crumb.
      * Alternatively, if you want to add multiple crumbs at once, you can provide an array, with each values being a
      * single crumb. Arrays are expected to be of this form:
      *
@@ -78,7 +78,7 @@ class BreadcrumbsHelper : Helper
     /**
      * Prepend a crumb to the start of the queue.
      *
-     * @param array|string $title If provided as a string, it represents the title of the crumb.
+     * @param array|string title If provided as a string, it represents the title of the crumb.
      * Alternatively, if you want to add multiple crumbs at once, you can provide an array, with each values being a
      * single crumb. Arrays are expected to be of this form:
      *
@@ -121,7 +121,7 @@ class BreadcrumbsHelper : Helper
      * If the index is out of bounds, it will throw an exception.
      *
      * @param int $index The index to insert at.
-     * @param string $title Title of the crumb.
+     * @param string title Title of the crumb.
      * @param array|string|null myUrl URL of the crumb. Either a string, an array of route params to pass to
      * Url::build() or null / empty if the crumb does not have a link.
      * @param array<string, mixed> myOptions Array of options. These options will be used as attributes HTML attribute the crumb will
@@ -133,7 +133,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the index is out of bound
      */
-    function insertAt(int $index, string $title, myUrl = null, array myOptions = []) {
+    function insertAt(int $index, string title, myUrl = null, array myOptions = []) {
         if (!isset(this.crumbs[$index])) {
             throw new LogicException(sprintf("No crumb could be found at index "%s"", $index));
         }
@@ -149,8 +149,8 @@ class BreadcrumbsHelper : Helper
      * Finds the index of the first crumb that matches the provided class,
      * and inserts the supplied callable before it.
      *
-     * @param string $matchingTitle The title of the crumb you want to insert this one before.
-     * @param string $title Title of the crumb.
+     * @param string matchingTitle The title of the crumb you want to insert this one before.
+     * @param string title Title of the crumb.
      * @param array|string|null myUrl URL of the crumb. Either a string, an array of route params to pass to
      * Url::build() or null / empty if the crumb does not have a link.
      * @param array<string, mixed> myOptions Array of options. These options will be used as attributes HTML attribute the crumb will
@@ -162,7 +162,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found
      */
-    function insertBefore(string $matchingTitle, string $title, myUrl = null, array myOptions = []) {
+    function insertBefore(string matchingTitle, string title, myUrl = null, array myOptions = []) {
         myKey = this.findCrumb($matchingTitle);
 
         if (myKey == null) {
@@ -178,8 +178,8 @@ class BreadcrumbsHelper : Helper
      * Finds the index of the first crumb that matches the provided class,
      * and inserts the supplied callable before it.
      *
-     * @param string $matchingTitle The title of the crumb you want to insert this one after.
-     * @param string $title Title of the crumb.
+     * @param string matchingTitle The title of the crumb you want to insert this one after.
+     * @param string title Title of the crumb.
      * @param array|string|null myUrl URL of the crumb. Either a string, an array of route params to pass to
      * Url::build() or null / empty if the crumb does not have a link.
      * @param array<string, mixed> myOptions Array of options. These options will be used as attributes HTML attribute the crumb will
@@ -191,7 +191,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found.
      */
-    function insertAfter(string $matchingTitle, string $title, myUrl = null, array myOptions = []) {
+    function insertAfter(string matchingTitle, string title, myUrl = null, array myOptions = []) {
         myKey = this.findCrumb($matchingTitle);
 
         if (myKey == null) {
@@ -307,10 +307,10 @@ class BreadcrumbsHelper : Helper
      * Search a crumb in the current stack which title matches the one provided as argument.
      * If found, the index of the matching crumb will be returned.
      *
-     * @param string $title Title to find.
+     * @param string title Title to find.
      * @return int|null Index of the crumb found, or null if it can not be found.
      */
-    protected Nullable!int findCrumb(string $title) {
+    protected Nullable!int findCrumb(string title) {
         foreach (this.crumbs as myKey: $crumb) {
             if ($crumb["title"] == $title) {
                 return myKey;

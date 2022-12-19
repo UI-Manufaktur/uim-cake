@@ -273,8 +273,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * when called will receive the full list of providers stored in this validator.
      *
      * @param string myName The name under which the provider should be set.
-     * @param object|string $object Provider object or class name.
-     * @psalm-param object|class-string $object
+     * @param object|string object Provider object or class name.
+     * @psalm-param object|class-string object
      * @return this
      */
     auto setProvider(string myName, $object) {
@@ -325,8 +325,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Associates an object to a name so it can be used as a default provider.
      *
      * @param string myName The name under which the provider should be set.
-     * @param object|string $object Provider object or class name.
-     * @psalm-param object|class-string $object
+     * @param object|string object Provider object or class name.
+     * @psalm-param object|class-string object
      * @return void
      */
     static void addDefaultProvider(string myName, $object) {
@@ -595,7 +595,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param string|null $rule the name of the rule to be removed
      * @return this
      */
-    function remove(string myField, Nullable!string $rule = null) {
+    function remove(string myField, Nullable!string rule = null) {
         if ($rule == null) {
             unset(_fields[myField]);
         } else {
@@ -1069,7 +1069,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param string|int myFieldName name of field
      * @param array<string, mixed> $defaults default settings
-     * @param array<string, mixed>|string $settings settings from data
+     * @param array<string, mixed>|string settings settings from data
      * @return array<array>
      * @throws \InvalidArgumentException
      */
@@ -1464,14 +1464,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * If both fields have the exact same value the rule will pass.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see \Cake\Validation\Validation::compareFields()
      * @return this
      */
-    function sameAs(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function sameAs(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "sameAs", $extra + [
@@ -1483,7 +1483,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a rule to compare that two fields have different values.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -1491,7 +1491,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
 
      */
-    function notSameAs(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function notSameAs(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "notSameAs", $extra + [
@@ -1503,7 +1503,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a rule to compare one field is equal to another.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -1511,7 +1511,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
 
      */
-    function equalToField(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function equalToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "equalToField", $extra + [
@@ -1523,7 +1523,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a rule to compare one field is not equal to another.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -1531,7 +1531,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
 
      */
-    function notEqualToField(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function notEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "notEqualToField", $extra + [
@@ -1543,7 +1543,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a rule to compare one field is greater than another.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -1551,7 +1551,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
 
      */
-    function greaterThanField(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function greaterThanField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "greaterThanField", $extra + [
@@ -1563,7 +1563,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a rule to compare one field is greater than or equal to another.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -1571,7 +1571,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
 
      */
-    function greaterThanOrEqualToField(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function greaterThanOrEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "greaterThanOrEqualToField", $extra + [
@@ -1583,7 +1583,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a rule to compare one field is less than another.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -1591,7 +1591,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
 
      */
-    function lessThanField(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function lessThanField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "lessThanField", $extra + [
@@ -1603,7 +1603,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a rule to compare one field is less than or equal to another.
      *
      * @param string myField The field you want to apply the rule to.
-     * @param string $secondField The field you want to compare against.
+     * @param string secondField The field you want to compare against.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -1611,7 +1611,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
 
      */
-    function lessThanOrEqualToField(string myField, string $secondField, Nullable!string myMessage = null, $when = null) {
+    function lessThanOrEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "lessThanOrEqualToField", $extra + [
@@ -2370,13 +2370,13 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Returns whether a field matches against a regular expression.
      *
      * @param string myField Field name.
-     * @param string $regex Regular expression.
+     * @param string regex Regular expression.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @return this
      */
-    function regex(string myField, string $regex, Nullable!string myMessage = null, $when = null) {
+    function regex(string myField, string regex, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on" => $when, "message" => myMessage]);
 
         return this.add(myField, "regex", $extra + [

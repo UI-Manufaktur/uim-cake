@@ -90,7 +90,7 @@ class View : IEventDispatcher {
      * is the filename of the layout in `templates/layout/` without the .php
      * extension.
      */
-    protected string $layout = "default";
+    protected string layout = "default";
 
     /**
      * Turns on or off UIM"s conventional mode of applying layout files. On by default.
@@ -110,13 +110,13 @@ class View : IEventDispatcher {
     /**
      * File extension. Defaults to ".php".
      */
-    protected string $_ext = ".php";
+    protected string _ext = ".php";
 
     /**
      * Sub-directory for this template file. This is often used for extension based routing.
      * Eg. With an `xml` extension, $subDir would be `xml/`
      */
-    protected string $subDir = "";
+    protected string subDir = "";
 
     /**
      * The view theme to use.
@@ -185,13 +185,13 @@ class View : IEventDispatcher {
     /**
      * The currently rendering view file. Used for resolving parent files.
      */
-    protected string $_current;
+    protected string _current;
 
     /**
      * Currently rendering an element. Used for finding parent fragments
      * for elements.
      */
-    protected string $_currentType = "";
+    protected string _currentType = "";
 
     /**
      * Content stack, used for nested templates that all use View::extend();
@@ -372,7 +372,7 @@ class View : IEventDispatcher {
      * @param string|null $theme Theme name.
      * @return this
      */
-    auto setTheme(Nullable!string $theme) {
+    auto setTheme(Nullable!string theme) {
         this.theme = $theme;
 
         return this;
@@ -645,7 +645,7 @@ class View : IEventDispatcher {
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
-    string renderLayout(string myContents, Nullable!string $layout = null) {
+    string renderLayout(string myContents, Nullable!string layout = null) {
         $layoutFileName = _getLayoutFileName($layout);
 
         if (!empty(myContents)) {
@@ -679,11 +679,11 @@ class View : IEventDispatcher {
     /**
      * Returns the contents of the given View variable.
      *
-     * @param string $var The view var you want the contents of.
+     * @param string var The view var you want the contents of.
      * @param mixed $default The default/fallback content of $var.
      * @return mixed The content of the named var if its set, otherwise $default.
      */
-    auto get(string $var, $default = null) {
+    auto get(string var, $default = null) {
         return this.viewVars[$var] ?? $default;
     }
 
@@ -826,11 +826,11 @@ class View : IEventDispatcher {
      * empty or undefined "" will be returned.
      *
      * @param string myName Name of the block
-     * @param string $default Default text
+     * @param string default Default text
      * @return string The block content or $default if the block does not exist.
      * @see \Cake\View\ViewBlock::get()
      */
-    string fetch(string myName, string $default = "") {
+    string fetch(string myName, string default = "") {
         return this.Blocks.get(myName, $default);
     }
 
@@ -1046,12 +1046,12 @@ class View : IEventDispatcher {
     /**
      * Set sub-directory for this template files.
      *
-     * @param string $subDir Sub-directory name.
+     * @param string subDir Sub-directory name.
      * @return this
      * @see \Cake\View\View::$subDir
 
      */
-    auto setSubDir(string $subDir) {
+    auto setSubDir(string subDir) {
         this.subDir = $subDir;
 
         return this;
@@ -1104,12 +1104,12 @@ class View : IEventDispatcher {
     /**
      * Set The cache configuration View will use to store cached elements
      *
-     * @param string $elementCache Cache config name.
+     * @param string elementCache Cache config name.
      * @return this
      * @see \Cake\View\View::$elementCache
 
      */
-    auto setElementCache(string $elementCache) {
+    auto setElementCache(string elementCache) {
         this.elementCache = $elementCache;
 
         return this;
@@ -1330,10 +1330,10 @@ class View : IEventDispatcher {
      * This is essentially used to find prefixed template paths for elements
      * and layouts.
      *
-     * @param string $basePath Base path on which to get the prefixed one.
+     * @param string basePath Base path on which to get the prefixed one.
      * @return Array with all the templates paths.
      */
-    protected string[] _getSubPaths(string $basePath) {
+    protected string[] _getSubPaths(string basePath) {
         myPaths = [$basePath];
         if (this.request.getParam("prefix")) {
             $prefixPath = explode("/", this.request.getParam("prefix"));

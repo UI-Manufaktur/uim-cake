@@ -178,7 +178,7 @@ class Validation {
      * @return bool Success
      * @see \Cake\Validation\Validation::luhn()
      */
-    static bool creditCard($check, myType = "fast", bool $deep = false, Nullable!string $regex = null) {
+    static bool creditCard($check, myType = "fast", bool $deep = false, Nullable!string regex = null) {
         if (!(is_string($check) || is_int($check))) {
             return false;
         }
@@ -243,13 +243,13 @@ class Validation {
      * Used to check the count of a given value of type array or Countable.
      *
      * @param mixed $check The value to check the count on.
-     * @param string $operator Can be either a word or operand
+     * @param string operator Can be either a word or operand
      *    is greater >, is less <, greater or equal >=
      *    less or equal <=, is less <, equal to ==, not equal !=
      * @param int $expectedCount The expected count value.
      * @return bool Success
      */
-    static bool numElements($check, string $operator, int $expectedCount) {
+    static bool numElements($check, string operator, int $expectedCount) {
         if (!is_array($check) && !$check instanceof Countable) {
             return false;
         }
@@ -261,13 +261,13 @@ class Validation {
      * Used to compare 2 numeric values.
      *
      * @param string|int $check1 The left value to compare.
-     * @param string $operator Can be one of following operator strings:
+     * @param string operator Can be one of following operator strings:
      *   ">", "<", ">=", "<=", "==", "!=", "==" and "!==". You can use one of
      *   the Validation::COMPARE_* constants.
      * @param string|int $check2 The right value to compare.
      * @return bool Success
      */
-    static bool comparison($check1, string $operator, $check2) {
+    static bool comparison($check1, string operator, $check2) {
         if (
             (!is_numeric($check1) || !is_numeric($check2)) &&
             !in_array($operator, static::COMPARE_STRING)
@@ -344,12 +344,12 @@ class Validation {
      *
      * @param mixed $check The value to find in myField.
      * @param string myField The field to check $check against. This field must be present in $context.
-     * @param string $operator Comparison operator. See Validation::comparison().
+     * @param string operator Comparison operator. See Validation::comparison().
      * @param array<string, mixed> $context The validation context.
      * @return bool
 
      */
-    static bool compareFields($check, string myField, string $operator, array $context) {
+    static bool compareFields($check, string myField, string operator, array $context) {
         if (!isset($context["data"]) || !array_key_exists(myField, $context["data"])) {
             return false;
         }
@@ -385,7 +385,7 @@ class Validation {
      * @param string|null $regex If $check is passed as a string, $regex must also be set to valid regular expression
      * @return bool Success
      */
-    static bool custom($check, Nullable!string $regex = null) {
+    static bool custom($check, Nullable!string regex = null) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -417,12 +417,12 @@ class Validation {
      * - `y` 2006 just the year without any separators
      *
      * @param mixed $check a valid date string/object
-     * @param array<string>|string $format Use a string or an array of the keys above.
+     * @param array<string>|string format Use a string or an array of the keys above.
      *    Arrays should be passed as ["dmy", "mdy", ...]
      * @param string|null $regex If a custom regular expression is used this is the only validation that will occur.
      * @return bool Success
      */
-    static bool date($check, $format = "ymd", Nullable!string $regex = null) {
+    static bool date($check, $format = "ymd", Nullable!string regex = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -491,7 +491,7 @@ class Validation {
      * All values matching the "date" core validation rule, and the "time" one will be valid
      *
      * @param mixed $check Value to check
-     * @param array|string $dateFormat Format of the date part. See Validation::date() for more information.
+     * @param array|string dateFormat Format of the date part. See Validation::date() for more information.
      *   Or `Validation::DATETIME_ISO8601` to validate an ISO8601 datetime value.
      * @param string|null $regex Regex for the date part. If a custom regular expression is used
      *   this is the only validation that will occur.
@@ -499,7 +499,7 @@ class Validation {
      * @see \Cake\Validation\Validation::date()
      * @see \Cake\Validation\Validation::time()
      */
-    static bool datetime($check, $dateFormat = "ymd", Nullable!string $regex = null) {
+    static bool datetime($check, $dateFormat = "ymd", Nullable!string regex = null) {
         if ($check instanceof IDateTime) {
             return true;
         }
@@ -681,7 +681,7 @@ class Validation {
      * @param string|null $regex If a custom regular expression is used, this is the only validation that will occur.
      * @return bool Success
      */
-    static bool decimal($check, $places = null, Nullable!string $regex = null) {
+    static bool decimal($check, $places = null, Nullable!string regex = null) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -735,7 +735,7 @@ class Validation {
      * @param string|null $regex Regex to use (if none it will use built in regex)
      * @return bool Success
      */
-    static bool email($check, ?bool $deep = false, Nullable!string $regex = null) {
+    static bool email($check, ?bool $deep = false, Nullable!string regex = null) {
         if (!is_string($check)) {
             return false;
         }
@@ -777,7 +777,7 @@ class Validation {
     /**
      * Checks that value has a valid file extension.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string $check Value to check
+     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check
      * @param $extensions file extensions to allow. By default extensions are "gif", "jpeg", "png", "jpg"
      * @return bool Success
      */
@@ -892,10 +892,10 @@ class Validation {
      * Checks that a value is a monetary amount.
      *
      * @param mixed $check Value to check
-     * @param string $symbolPosition Where symbol is located (left/right)
+     * @param string symbolPosition Where symbol is located (left/right)
      * @return bool Success
      */
-    static bool money($check, string $symbolPosition = "left") {
+    static bool money($check, string symbolPosition = "left") {
         $money = "(?!0,?\d)(?:\d{1,3}(?:([, .])\d{3})?(?:\1\d{3})*|(?:\d+))((?!\1)[,.]\d{1,2})?";
         if ($symbolPosition == "right") {
             $regex = "/^" . $money . "(?<!\x{00a2})\p{Sc}?$/u";
@@ -1084,10 +1084,10 @@ class Validation {
      * Runs a regular expression match.
      *
      * @param mixed $check Value to check against the $regex expression
-     * @param string $regex Regular expression
+     * @param string regex Regular expression
      * @return bool Success of match
      */
-    protected static bool _check($check, string $regex) {
+    protected static bool _check($check, string regex) {
         return is_scalar($check) && preg_match($regex, (string)$check);
     }
 
@@ -1125,8 +1125,8 @@ class Validation {
      * by checking the using finfo on the file, not relying on the content-type
      * sent by the client.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string $check Value to check.
-     * @param array|string $mimeTypes Array of mime types or regex pattern to check.
+     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check.
+     * @param array|string mimeTypes Array of mime types or regex pattern to check.
      * @return bool Success
      * @throws \RuntimeException when mime type can not be determined.
      * @throws \LogicException when ext/fileinfo is missing
@@ -1202,12 +1202,12 @@ class Validation {
      * by checking the filesize() on disk and not relying on the length
      * reported by the client.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string $check Value to check.
-     * @param string $operator See `Validation::comparison()`.
+     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check.
+     * @param string operator See `Validation::comparison()`.
      * @param string|int $size Size in bytes or human readable string like "5MB".
      * @return bool Success
      */
-    static bool fileSize($check, string $operator, $size) {
+    static bool fileSize($check, string operator, $size) {
         myfile = static::getFilename($check);
         if (myfile == false) {
             return false;
@@ -1224,7 +1224,7 @@ class Validation {
     /**
      * Checking for upload errors
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string $check Value to check.
+     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check.
      * @param bool $allowNoFile Set to true to allow UPLOAD_ERR_NO_FILE as a pass.
      * @return bool
      * @see https://secure.php.net/manual/en/features.file-upload.errors.php
@@ -1361,11 +1361,11 @@ class Validation {
      * Validates the image width.
      *
      * @param mixed myfile The uploaded file data from PHP.
-     * @param string $operator Comparison operator.
+     * @param string operator Comparison operator.
      * @param int $width Min or max width.
      * @return bool
      */
-    static bool imageWidth(myfile, string $operator, int $width) {
+    static bool imageWidth(myfile, string operator, int $width) {
         return self::imageSize(myfile, [
             "width" => [
                 $operator,
@@ -1378,11 +1378,11 @@ class Validation {
      * Validates the image height.
      *
      * @param mixed myfile The uploaded file data from PHP.
-     * @param string $operator Comparison operator.
+     * @param string operator Comparison operator.
      * @param int $height Min or max height.
      * @return bool
      */
-    static bool imageHeight(myfile, string $operator, int $height) {
+    static bool imageHeight(myfile, string operator, int $height) {
         return self::imageSize(myfile, [
             "height" => [
                 $operator,

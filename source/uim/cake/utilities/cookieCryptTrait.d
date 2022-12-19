@@ -58,10 +58,10 @@ trait CookieCryptTrait
     /**
      * Helper method for validating encryption cipher names.
      *
-     * @param string $encrypt The cipher name.
+     * @param string encrypt The cipher name.
      * @throws \RuntimeException When an invalid cipher is provided.
      */
-    protected void _checkCipher(string $encrypt) {
+    protected void _checkCipher(string encrypt) {
         if (!in_array($encrypt, _validCiphers, true)) {
             $msg = sprintf(
                 "Invalid encryption cipher. Must be one of %s or false.",
@@ -146,10 +146,10 @@ trait CookieCryptTrait
      * Explode method to return array from string set in CookieComponent::_implode()
      * Maintains reading backwards compatibility with 1.x CookieComponent::_implode().
      *
-     * @param string $string A string containing JSON encoded data, or a bare string.
+     * @param string string A string containing JSON encoded data, or a bare string.
      * @return array|string Map of key and values
      */
-    protected auto _explode(string $string) {
+    protected auto _explode(string string) {
         $first = substr($string, 0, 1);
         if ($first == "{" || $first == "[") {
             $ret = json_decode($string, true);

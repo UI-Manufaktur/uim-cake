@@ -10,5 +10,5 @@ import uim.cake;
 
 // Used when a view class file cannot be found.
 class MissingViewException : CakeException {
-  protected string $_messageTemplate = "View class "%s" is missing.";
+  protected string _messageTemplate = "View class "%s" is missing.";
 }

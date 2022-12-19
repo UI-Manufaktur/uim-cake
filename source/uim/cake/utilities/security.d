@@ -30,7 +30,7 @@ class Security {
     /**
      * Create a hash from string using given method.
      *
-     * @param string $string String to hash
+     * @param string string String to hash
      * @param string|null $algorithm Hashing algo to use (i.e. sha1, sha256 etc.).
      *   Can be any valid algo included in list returned by hash_algos().
      *   If no value is passed the type specified by `Security::$hashType` is used.
@@ -40,7 +40,7 @@ class Security {
      * @throws \RuntimeException
      * @link https://book.UIM.org/4/en/core-libraries/security.html#hashing-data
      */
-    static string hash(string $string, Nullable!string $algorithm = null, $salt = false) {
+    static string hash(string string, Nullable!string algorithm = null, $salt = false) {
         if (empty($algorithm)) {
             $algorithm = static::$hashType;
         }
@@ -69,11 +69,11 @@ class Security {
      * Sets the default hash method for the Security object. This affects all objects
      * using Security::hash().
      *
-     * @param string $hash Method to use (sha1/sha256/md5 etc.)
+     * @param string hash Method to use (sha1/sha256/md5 etc.)
      * @return void
      * @see \Cake\Utility\Security::hash()
      */
-    static void setHash(string $hash) {
+    static void setHash(string hash) {
         static::$hashType = $hash;
     }
 
@@ -161,14 +161,14 @@ class Security {
      * Any trailing null bytes will be removed on decryption due to how PHP pads messages
      * with nulls prior to encryption.
      *
-     * @param string $plain The value to encrypt.
+     * @param string plain The value to encrypt.
      * @param string myKey The 256 bit/32 byte key to use as a cipher key.
      * @param string|null $hmacSalt The salt to use for the HMAC process.
      *   Leave null to use value of Security::getSalt().
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static string encrypt(string $plain, string myKey, Nullable!string $hmacSalt = null) {
+    static string encrypt(string plain, string myKey, Nullable!string hmacSalt = null) {
         self::_checkKey(myKey, "encrypt()");
 
         if ($hmacSalt == null) {
@@ -188,11 +188,11 @@ class Security {
      * Check the encryption key for proper length.
      *
      * @param string myKey Key to check.
-     * @param string $method The method the key is being checked for.
+     * @param string method The method the key is being checked for.
      * @return void
      * @throws \InvalidArgumentException When key length is not 256 bit/32 bytes
      */
-    protected static void _checkKey(string myKey, string $method) {
+    protected static void _checkKey(string myKey, string method) {
         if (mb_strlen(myKey, "8bit") < 32) {
             throw new InvalidArgumentException(
                 sprintf("Invalid key for %s, key must be at least 256 bits (32 bytes) long.", $method)
@@ -203,14 +203,14 @@ class Security {
     /**
      * Decrypt a value using AES-256.
      *
-     * @param string $cipher The ciphertext to decrypt.
+     * @param string cipher The ciphertext to decrypt.
      * @param string myKey The 256 bit/32 byte key to use as a cipher key.
      * @param string|null $hmacSalt The salt to use for the HMAC process.
      *   Leave null to use value of Security::getSalt().
      * @return string|null Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static Nullable!string decrypt(string $cipher, string myKey, Nullable!string $hmacSalt = null) {
+    static Nullable!string decrypt(string cipher, string myKey, Nullable!string hmacSalt = null) {
         self::_checkKey(myKey, "decrypt()");
         if (empty($cipher)) {
             throw new InvalidArgumentException("The data to decrypt cannot be empty.");
@@ -268,9 +268,9 @@ class Security {
     /**
      * Sets the HMAC salt to be used for encryption/decryption routines.
      *
-     * @param string $salt The salt to use for encryption routines.
+     * @param string salt The salt to use for encryption routines.
      */
-    static void setSalt(string $salt) {
+    static void setSalt(string salt) {
         static::$_salt = $salt;
     }
 }

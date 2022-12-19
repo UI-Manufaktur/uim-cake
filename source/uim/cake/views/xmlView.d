@@ -50,17 +50,17 @@ class XmlView : SerializedView
     /**
      * XML layouts are located in the `layouts/xml/` subdirectory
      */
-    protected string $layoutPath = "xml";
+    protected string layoutPath = "xml";
 
     /**
      * XML views are located in the "xml" subdirectory for controllers" views.
      */
-    protected string $subDir = "xml";
+    protected string subDir = "xml";
 
     /**
      * Response type.
      */
-    protected string $_responseType = "xml";
+    protected string _responseType = "xml";
 
     /**
      * Default config options.

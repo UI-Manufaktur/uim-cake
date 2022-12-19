@@ -150,10 +150,10 @@ class ViewBlock
      * Get the content for a block.
      *
      * @param string myName Name of the block
-     * @param string $default Default string
+     * @param string default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    string get(string myName, string $default = "") {
+    string get(string myName, string default = "") {
         return _blocks[myName] ?? $default;
     }
 

@@ -220,12 +220,12 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Adds a helper to use.
      *
-     * @param string $helper Helper to use.
+     * @param string helper Helper to use.
      * @param array<string, mixed> myOptions Options.
      * @return this
      * @since 4.1.0
      */
-    function addHelper(string $helper, array myOptions = []) {
+    function addHelper(string helper, array myOptions = []) {
         if (myOptions) {
             $array = [$helper => myOptions];
         } else {
@@ -290,7 +290,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current theme.
      * @return this
      */
-    auto setTheme(Nullable!string $theme) {
+    auto setTheme(Nullable!string theme) {
         _theme = $theme;
 
         return this;
