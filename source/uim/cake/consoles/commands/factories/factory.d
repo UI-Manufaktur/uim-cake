@@ -9,21 +9,13 @@ import uim.cake;
  * This factory can be replaced or extended if you need to customize building
  * your command and shell objects.
  */
-class CommandFactory : ICommandFactory
-{
-    /**
-     * @var \Cake\Core\IContainer|null
-     */
-    protected myContainer;
+class CommandFactory : ICommandFactory {
+  protected IContainer myContainer;
 
-    /**
-     * Constructor
-     *
-     * @param \Cake\Core\IContainer|null myContainer The container to use if available.
-     */
-    this(?IContainer myContainer = null) {
-        this.container = myContainer;
-    }
+  // aContainer - The container to use if available.
+  this(IContainer aContainer = null) {
+    this.container = aContainer;
+  }
 
 
     function create(string myClassName) {

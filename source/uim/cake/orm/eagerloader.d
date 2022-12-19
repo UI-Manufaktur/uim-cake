@@ -758,7 +758,7 @@ class EagerLoader
 
             myAlias = $source.getAlias();
             $pkFields = [];
-            foreach (myKeys as myKey) {
+            foreach (myKey; myKeys) {
                 $pkFields[] = key(myQuery.aliasField(myKey, myAlias));
             }
             $collectKeys[$meta.aliasPath()] = [myAlias, $pkFields, count($pkFields) == 1];

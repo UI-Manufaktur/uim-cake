@@ -224,7 +224,7 @@ class Behavior : IEventListener
      */
     void verifyConfig() {
         myKeys = ["implementedFinders", "implementedMethods"];
-        foreach (myKeys as myKey) {
+        foreach (myKey; myKeys) {
             if (!isset(this._config[myKey])) {
                 continue;
             }

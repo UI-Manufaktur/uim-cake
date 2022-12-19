@@ -142,7 +142,7 @@ class MemcachedEngine : CacheEngine
         }
 
         $servers = [];
-        foreach (this._config["servers"] as $server) {
+        foreach ($server; this._config["servers"]) {
             $servers[] = this.parseServerString($server);
         }
 
@@ -333,7 +333,7 @@ class MemcachedEngine : CacheEngine
      */
     array getMultiple(myKeys, $default = null) {
         $cacheKeys = [];
-        foreach (myKeys as myKey) {
+        foreach (myKey; myKeys) {
             $cacheKeys[myKey] = this._key(myKey);
         }
 
@@ -388,7 +388,7 @@ class MemcachedEngine : CacheEngine
      */
     bool deleteMultiple(myKeys) {
         $cacheKeys = [];
-        foreach (myKeys as myKey) {
+        foreach (myKey; myKeys) {
             $cacheKeys[] = this._key(myKey);
         }
 
@@ -401,18 +401,16 @@ class MemcachedEngine : CacheEngine
      * @return bool True if the cache was successfully cleared, false otherwise
      */
     bool clear() {
-        myKeys = this._Memcached.getAllKeys();
-        if (myKeys == false) {
-            return false;
-        }
-
-        foreach (myKeys as myKey) {
-            if (strpos(myKey, this._config["prefix"]) == 0) {
-                this._Memcached.delete(myKey);
+        if (auto myKeys = this._Memcached.getAllKeys()) {
+            foreach (myKey; myKeys) {
+                if (strpos(myKey, this._config["prefix"]) == 0) {
+                    this._Memcached.delete(myKey);
+                }
             }
-        }
 
-        return true;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -454,7 +452,7 @@ class MemcachedEngine : CacheEngine
 
         myResult = [];
         myGroups = array_values(myGroups);
-        foreach (this._config["groups"] as $i: myGroup) {
+        foreach ($i, myGroup; this._config["groups"]) {
             myResult[] = myGroup . myGroups[$i];
         }
 

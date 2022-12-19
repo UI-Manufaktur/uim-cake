@@ -119,7 +119,7 @@ abstract class CacheEngine : ICache, ICacheEngine
         this.ensureValidType(myKeys);
 
         myResults = [];
-        foreach (myKeys as myKey) {
+        foreach (myKey; myKeys) {
             myResults[myKey] = this.get(myKey, $default);
         }
 
@@ -171,7 +171,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     bool deleteMultiple(myKeys) {
         this.ensureValidType(myKeys);
 
-        foreach (myKeys as myKey) {
+        foreach (myKey; myKeys) {
             myResult = this.delete(myKey);
             if (myResult == false) {
                 return false;

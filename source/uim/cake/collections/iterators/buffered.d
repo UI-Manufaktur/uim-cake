@@ -189,7 +189,7 @@ class BufferedIterator : Collection : Countable, Serializable
     void __unserialize(array myData) {
         this.this([]);
 
-        foreach (myData as myValue) {
+        foreach (myValue; myData) {
             this._buffer.push(myValue);
         }
 

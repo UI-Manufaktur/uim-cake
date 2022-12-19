@@ -23,8 +23,7 @@ import uim.cake;
  *
  * This iterator does not preserve the keys passed in the original elements.
  */
-class SortIterator : Collection
-{
+class SortIterator : Collection {
     /**
      * Wraps this iterator around the passed items so when iterated they are returned
      * in order.
@@ -65,11 +64,6 @@ class SortIterator : Collection
         super.this(myResults);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @return \Traversable
-     */
     Traversable unwrap() {
         return this.getInnerIterator();
     }

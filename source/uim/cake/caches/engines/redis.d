@@ -210,7 +210,7 @@ class RedisEngine : CacheEngine
                 break;
             }
 
-            foreach (myKeys as myKey) {
+            foreach (myKey; myKeys) {
                 $isDeleted = (this._Redis.del(myKey) > 0);
                 $isAllDeleted = $isAllDeleted && $isDeleted;
             }

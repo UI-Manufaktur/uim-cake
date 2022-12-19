@@ -56,7 +56,7 @@ class FilterIterator : Collection {
         $callback = this._callback;
         $res = [];
 
-        foreach ($iterator as $k: $v) {
+        foreach ($k, $v; $iterator) {
             if ($callback($v, $k, $iterator)) {
                 $res[$k] = $v;
             }

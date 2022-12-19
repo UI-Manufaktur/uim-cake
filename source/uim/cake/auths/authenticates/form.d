@@ -43,14 +43,14 @@ class FormAuthenticate : BaseAuthenticate {
      * @return bool False if the fields have not been supplied. True if they exist.
      */
     protected bool _checkFields(ServerRequest myRequest, array myFields) {
-        foreach ([myFields["username"], myFields["password"]] as myField) {
-            myValue = myRequest.getData(myField);
-            if (empty(myValue) || !is_string(myValue)) {
-                return false;
-            }
+      foreach (myField; [myFields["username"], myFields["password"]]) {
+        myValue = myRequest.getData(myField);
+        if (empty(myValue) || !is_string(myValue)) {
+            return false;
         }
+      }
 
-        return true;
+      return true;
     }
 
     /**

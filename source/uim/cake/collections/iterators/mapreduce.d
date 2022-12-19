@@ -149,7 +149,7 @@ class MapReduce : IteratorAggregate {
      */
     protected void _execute() {
         $mapper = this._mapper;
-        foreach (this._data as myKey: $val) {
+        foreach (myKey, $val; this._data) {
             $mapper($val, myKey, this);
         }
 
@@ -159,7 +159,7 @@ class MapReduce : IteratorAggregate {
 
         /** @var callable $reducer */
         $reducer = this._reducer;
-        foreach (this._intermediate as myKey: $list) {
+        foreach (myKey, $list; this._intermediate) {
             $reducer($list, myKey, this);
         }
         this._intermediate = [];

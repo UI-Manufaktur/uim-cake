@@ -25,7 +25,7 @@ trait CollectionTrait
 
 
     function each(callable $callback) {
-        foreach (this.optimizeUnwrap() as $k: $v) {
+        foreach ($k, $v; this.optimizeUnwrap()) {
             $callback($v, $k);
         }
 
@@ -63,7 +63,7 @@ trait CollectionTrait
 
 
     bool some(callable $callback) {
-        foreach (this.optimizeUnwrap() as myKey: myValue) {
+        foreach (myKey, myValue; this.optimizeUnwrap()) {
             if ($callback(myValue, myKey) == true) {
                 return true;
             }
@@ -74,7 +74,7 @@ trait CollectionTrait
 
 
     bool contains(myValue) {
-        foreach (this.optimizeUnwrap() as $v) {
+        foreach ($v; this.optimizeUnwrap()) {
             if (myValue == $v) {
                 return true;
             }
@@ -387,7 +387,7 @@ trait CollectionTrait
              * The logic above applies to collections of any size.
              */
 
-            foreach ($iterator as $k: $item) {
+            foreach ($k, $item; $iterator) {
                 myResult[$bucket] = [$k, $item];
                 $bucket = (++$bucket) % $length;
                 $offset++;
@@ -397,11 +397,11 @@ trait CollectionTrait
             $head = array_slice(myResult, $offset);
             $tail = array_slice(myResult, 0, $offset);
 
-            foreach ($head as $v) {
+            foreach ($v; $head) {
                 yield $v[0]: $v[1];
             }
 
-            foreach ($tail as $v) {
+            foreach ($v; $tail) {
                 yield $v[0]: $v[1];
             }
         };
@@ -411,11 +411,11 @@ trait CollectionTrait
 
 
     ICollection append(myItems) {
-        $list = new AppendIterator();
-        $list.append(this.unwrap());
-        $list.append(this.newCollection(myItems).unwrap());
+      auto myList = new AppendIterator();
+      myList.append(this.unwrap());
+      myList.append(this.newCollection(myItems).unwrap());
 
-        return this.newCollection($list);
+      return this.newCollection(myList;
     }
 
 
@@ -503,7 +503,7 @@ trait CollectionTrait
                 $foundOutType = true;
             }
             if (empty(myKey) || !isset($parents[myKey])) {
-                foreach (myValues as $id) {
+                foreach ($id; myValues) {
                     /** @psalm-suppress PossiblyInvalidArgument */
                     $parents[$id] = $isObject ? $parents[$id] : new ArrayIterator($parents[$id], 1);
                     $mapReduce.emit($parents[$id]);
@@ -513,7 +513,7 @@ trait CollectionTrait
             }
 
             $children = [];
-            foreach (myValues as $id) {
+            foreach ($id; myValues) {
                 $children[] = &$parents[$id];
             }
             $parents[myKey][$nestingKey] = $children;
@@ -693,7 +693,7 @@ trait CollectionTrait
 
 
     bool isEmpty() {
-        foreach (this as $el) {
+        foreach ($el; this) {
             return false;
         }
 
@@ -735,7 +735,7 @@ trait CollectionTrait
         myCollectionArraysKeys = [];
         myCollectionArraysCounts = [];
 
-        foreach (this.toList() as myValue) {
+        foreach (myValue; this.toList()) {
             myValueCount = count(myValue);
             if (myValueCount !== count(myValue, COUNT_RECURSIVE)) {
                 throw new LogicException("Cannot find the cartesian product of a multidimensional array");
@@ -787,7 +787,7 @@ trait CollectionTrait
         $arrayValue = this.toList();
         $length = count(current($arrayValue));
         myResult = [];
-        foreach ($arrayValue as $row) {
+        foreach ($row; $arrayValue) {
             if (count($row) !== $length) {
                 throw new LogicException("Child arrays do not have even length");
             }
