@@ -34,7 +34,7 @@ class ConsoleLog : BaseLog
      *
      * @var \Cake\Console\ConsoleOutput
      */
-    protected $_output;
+    protected _output;
 
     /**
      * Constructs a new Console Logger.

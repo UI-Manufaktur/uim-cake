@@ -24,7 +24,7 @@ class ClosureDecoratorMiddleware : IMiddleware
      *
      * @var \Closure
      */
-    protected $callable;
+    protected callable;
 
     /**
      * Constructor

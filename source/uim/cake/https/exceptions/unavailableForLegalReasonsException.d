@@ -13,7 +13,7 @@ use Throwable;
 class UnavailableForLegalReasonsException : HttpException
 {
 
-    protected $_defaultCode = 451;
+    protected _defaultCode = 451;
 
     /**
      * Constructor

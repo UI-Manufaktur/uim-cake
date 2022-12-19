@@ -54,7 +54,7 @@ class SyslogLog : BaseLog {
      *
      * @var array<int>
      */
-    protected $_levelMap = [
+    protected _levelMap = [
         "emergency":LOG_EMERG,
         "alert":LOG_ALERT,
         "critical":LOG_CRIT,
@@ -70,7 +70,7 @@ class SyslogLog : BaseLog {
      *
      * @var bool
      */
-    protected $_open = false;
+    protected _open = false;
 
 
     this(array myConfig = []) {

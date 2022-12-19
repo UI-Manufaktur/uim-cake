@@ -30,7 +30,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
      *
      * @var callable
      */
-    protected $callable;
+    protected callable;
 
     /**
      * Constructor

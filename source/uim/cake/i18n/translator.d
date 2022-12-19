@@ -21,14 +21,14 @@ class Translator
      *
      * @var \Cake\I18n\Translator|null
      */
-    protected $fallback;
+    protected fallback;
 
     /**
      * The formatter to use when translating messages.
      *
      * @var \Cake\I18n\IFormatter
      */
-    protected $formatter;
+    protected formatter;
 
     /**
      * The locale being used for translations.
@@ -40,7 +40,7 @@ class Translator
      *
      * @var \Cake\I18n\Package
      */
-    protected $package;
+    protected package;
 
     /**
      * Constructor

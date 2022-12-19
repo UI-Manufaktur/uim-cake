@@ -13,7 +13,7 @@ use Throwable;
 class UnauthorizedException : HttpException
 {
 
-    protected $_defaultCode = 401;
+    protected _defaultCode = 401;
 
     /**
      * Constructor

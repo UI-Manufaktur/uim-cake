@@ -11,7 +11,7 @@ import uim.cake;
 // Represents an HTTP 403 error.
 class ForbiddenException : HttpException {
 
-    protected $_defaultCode = 403;
+    protected _defaultCode = 403;
 
     /**
      * Constructor

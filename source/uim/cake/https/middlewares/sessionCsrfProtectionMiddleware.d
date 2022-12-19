@@ -45,7 +45,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @var array<string, mixed>
      */
-    protected $_config = [
+    protected _config = [
         "key":"csrfToken",
         "field":"_csrfToken",
     ];
@@ -57,7 +57,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @var callable|null
      */
-    protected $skipCheckCallback;
+    protected skipCheckCallback;
 
     /**
      * @var int

@@ -13,7 +13,7 @@ use Throwable;
 class ServiceUnavailableException : HttpException
 {
 
-    protected $_defaultCode = 503;
+    protected _defaultCode = 503;
 
     /**
      * Constructor

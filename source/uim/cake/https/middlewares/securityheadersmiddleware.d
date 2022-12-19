@@ -80,7 +80,7 @@ class SecurityHeadersMiddleware : IMiddleware {
      *
      * @var array
      */
-    protected $headers = [];
+    protected headers = [];
 
     /**
      * X-Content-Type-Options

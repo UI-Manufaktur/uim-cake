@@ -24,7 +24,7 @@ class CspMiddleware : IMiddleware {
      *
      * @var \ParagonIE\CSPBuilder\CSPBuilder $csp CSP Builder or config array
      */
-    protected $csp;
+    protected csp;
 
     /**
      * Configuration options.

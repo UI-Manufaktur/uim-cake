@@ -20,14 +20,14 @@ class EagerLoadable
      *
      * @var array<\Cake\ORM\EagerLoadable>
      */
-    protected $_associations = [];
+    protected _associations = [];
 
     /**
      * The Association class instance to use for loading the records.
      *
      * @var \Cake\ORM\Association|null
      */
-    protected $_instance;
+    protected _instance;
 
     /**
      * A list of options to pass to the association object for loading
@@ -35,7 +35,7 @@ class EagerLoadable
      *
      * @var array
      */
-    protected $_config = [];
+    protected _config = [];
 
     /**
      * A dotted separated string representing the path of associations
@@ -57,14 +57,14 @@ class EagerLoadable
      *
      * @var string|null
      */
-    protected $_propertyPath;
+    protected _propertyPath;
 
     /**
      * Whether this level can be fetched using a join.
      *
      * @var bool
      */
-    protected $_canBeJoined = false;
+    protected _canBeJoined = false;
 
     /**
      * Whether this level was meant for a "matching" fetch
@@ -72,7 +72,7 @@ class EagerLoadable
      *
      * @var bool|null
      */
-    protected $_forMatching;
+    protected _forMatching;
 
     /**
      * The property name where the association result should be nested
@@ -88,7 +88,7 @@ class EagerLoadable
      *
      * @var string|null
      */
-    protected $_targetProperty;
+    protected _targetProperty;
 
     /**
      * Constructor. The myConfig parameter accepts the following array

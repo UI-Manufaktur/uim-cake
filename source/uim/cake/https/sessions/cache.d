@@ -21,7 +21,7 @@ class CacheSession : SessionHandlerInterface
      *
      * @var array
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Constructor.

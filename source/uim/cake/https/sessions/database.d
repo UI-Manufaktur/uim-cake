@@ -20,14 +20,14 @@ class DatabaseSession : SessionHandlerInterface
      *
      * @var \Cake\ORM\Table
      */
-    protected $_table;
+    protected _table;
 
     /**
      * Number of seconds to mark the session as expired
      *
      * @var int
      */
-    protected $_timeout;
+    protected _timeout;
 
     /**
      * Constructor. Looks at Session configuration information and

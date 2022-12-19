@@ -23,7 +23,7 @@ class ResultSet : IResultSet
      *
      * @var \Cake\Database\IStatement
      */
-    protected $_statement;
+    protected _statement;
 
     // Points to the next record number that should be fetched
     protected int $_index = 0;
@@ -33,14 +33,14 @@ class ResultSet : IResultSet
      *
      * @var object|array
      */
-    protected $_current;
+    protected _current;
 
     /**
      * Default table instance
      *
      * @var \Cake\ORM\Table
      */
-    protected $_defaultTable;
+    protected _defaultTable;
 
     /**
      * The default table alias
@@ -53,14 +53,14 @@ class ResultSet : IResultSet
      *
      * @var array
      */
-    protected $_matchingMap = [];
+    protected _matchingMap = [];
 
     /**
      * List of associations that should be eager loaded.
      *
      * @var array
      */
-    protected $_containMap = [];
+    protected _containMap = [];
 
     /**
      * Map of fields that are fetched from the statement with
@@ -68,7 +68,7 @@ class ResultSet : IResultSet
      *
      * @var array
      */
-    protected $_map = [];
+    protected _map = [];
 
     /**
      * List of matching associations and the column keys to expect
@@ -76,28 +76,28 @@ class ResultSet : IResultSet
      *
      * @var array
      */
-    protected $_matchingMapColumns = [];
+    protected _matchingMapColumns = [];
 
     /**
      * Results that have been fetched or hydrated into the results.
      *
      * @var \SplFixedArray|array
      */
-    protected $_results = [];
+    protected _results = [];
 
     /**
      * Whether to hydrate results into objects or not
      *
      * @var bool
      */
-    protected $_hydrate = true;
+    protected _hydrate = true;
 
     /**
      * Tracks value of $_autoFields property of myQuery passed to constructor.
      *
      * @var bool|null
      */
-    protected $_autoFields;
+    protected _autoFields;
 
     /**
      * The fully moduled name of the class to use for hydrating results
@@ -109,14 +109,14 @@ class ResultSet : IResultSet
      *
      * @var bool
      */
-    protected $_useBuffering = true;
+    protected _useBuffering = true;
 
     /**
      * Holds the count of records in this result set
      *
      * @var int
      */
-    protected $_count;
+    protected _count;
 
     /**
      * The Database driver object.
@@ -125,7 +125,7 @@ class ResultSet : IResultSet
      *
      * @var \Cake\Database\IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Constructor

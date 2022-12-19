@@ -11,8 +11,8 @@ module uim.cake.https\Exception;
 class NotImplementedException : HttpException
 {
 
-    protected $_messageTemplate = "%s is not implemented.";
+    protected _messageTemplate = "%s is not implemented.";
 
 
-    protected $_defaultCode = 501;
+    protected _defaultCode = 501;
 }

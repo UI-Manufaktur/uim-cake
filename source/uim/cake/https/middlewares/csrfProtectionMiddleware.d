@@ -48,7 +48,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @var array<string, mixed>
      */
-    protected $_config = [
+    protected _config = [
         "cookieName":"csrfToken",
         "expiry":0,
         "secure":false,
@@ -64,7 +64,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @var callable|null
      */
-    protected $skipCheckCallback;
+    protected skipCheckCallback;
 
     /**
      * @var int

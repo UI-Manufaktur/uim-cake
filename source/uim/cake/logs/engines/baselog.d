@@ -26,7 +26,7 @@ abstract class BaseLog : AbstractLogger {
     /**
      * @var \Cake\Log\Formatter\AbstractFormatter
      */
-    protected $formatter;
+    protected formatter;
 
     /**
      * __construct method

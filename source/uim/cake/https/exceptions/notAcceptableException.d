@@ -13,7 +13,7 @@ use Throwable;
 class NotAcceptableException : HttpException
 {
 
-    protected $_defaultCode = 406;
+    protected _defaultCode = 406;
 
     /**
      * Constructor

@@ -102,7 +102,7 @@ class Behavior : IEventListener
      *
      * @var \Cake\ORM\Table
      */
-    protected $_table;
+    protected _table;
 
     /**
      * Reflection method cache for behaviors.

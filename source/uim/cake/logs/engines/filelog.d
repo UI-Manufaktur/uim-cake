@@ -57,14 +57,14 @@ class FileLog : BaseLog
      *
      * @var string|null
      */
-    protected $_file;
+    protected _file;
 
     /**
      * Max file size, used for log file rotation.
      *
      * @var int|null
      */
-    protected $_size;
+    protected _size;
 
     /**
      * Sets protected properties based on config provided

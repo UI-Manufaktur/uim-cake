@@ -16,14 +16,14 @@ class BodyParserMiddleware : IMiddleware
      *
      * @var array<\Closure>
      */
-    protected $parsers = [];
+    protected parsers = [];
 
     /**
      * The HTTP methods to parse data on.
      *
      * @var array<string>
      */
-    protected $methods = ["PUT", "POST", "PATCH", "DELETE"];
+    protected methods = ["PUT", "POST", "PATCH", "DELETE"];
 
     /**
      * Constructor

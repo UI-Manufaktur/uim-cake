@@ -93,7 +93,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var bool|null
      */
-    protected $_hasFields;
+    protected _hasFields;
 
     /**
      * Tracks whether the original query should include
@@ -101,14 +101,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var bool|null
      */
-    protected $_autoFields;
+    protected _autoFields;
 
     /**
      * Whether to hydrate results into entity objects
      *
      * @var bool
      */
-    protected $_hydrate = true;
+    protected _hydrate = true;
 
     /**
      * Whether aliases are generated for fields.
@@ -123,7 +123,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var callable|null
      */
-    protected $_counter;
+    protected _counter;
 
     /**
      * Instance of a class responsible for storing association containments and
@@ -131,14 +131,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var \Cake\ORM\EagerLoader|null
      */
-    protected $_eagerLoader;
+    protected _eagerLoader;
 
     /**
      * True if the beforeFind event has already been triggered for this query
      *
      * @var bool
      */
-    protected $_beforeFindFired = false;
+    protected _beforeFindFired = false;
 
     /**
      * The COUNT(*) for the query.
@@ -147,7 +147,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var int|null
      */
-    protected $_resultsCount;
+    protected _resultsCount;
 
     /**
      * Constructor

@@ -18,12 +18,12 @@ import uim.cake;
  */
 class HttpException : CakeException {
 
-    protected $_defaultCode = 500;
+    protected _defaultCode = 500;
 
     /**
      * @var array
      */
-    protected $headers = [];
+    protected headers = [];
 
     /**
      * Set a single HTTP response header.

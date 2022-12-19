@@ -33,21 +33,21 @@ class SmtpTransport : AbstractTransport
      *
      * @var \Cake\Network\Socket|null
      */
-    protected $_socket;
+    protected _socket;
 
     /**
      * Content of email to return
      *
      * @var array
      */
-    protected $_content = [];
+    protected _content = [];
 
     /**
      * The response of the last sent SMTP command.
      *
      * @var array
      */
-    protected $_lastResponse = [];
+    protected _lastResponse = [];
 
     /**
      * Destructor
