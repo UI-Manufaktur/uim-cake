@@ -512,7 +512,7 @@ class Shell {
      * @return \Cake\Console\ConsoleOptionParser
      * @link https://book.UIM.org/4/en/console-and-shells.html#configuring-options-and-generating-help
      */
-    auto getOptionParser(): ConsoleOptionParser
+    ConsoleOptionParser getOptionParser()
     {
         myName = (this.plugin ? this.plugin . "." : "") . this.name;
         $parser = new ConsoleOptionParser(myName);

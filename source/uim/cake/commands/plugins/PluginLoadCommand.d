@@ -104,7 +104,7 @@ class PluginLoadCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser)
     {
         $parser.setDescription([
             "Command for loading plugins.",

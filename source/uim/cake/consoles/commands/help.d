@@ -166,7 +166,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
      * @return \Cake\Console\ConsoleOptionParser
      */
-    protected auto buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    protected ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser)
     {
         $parser.setDescription(
             "Get the list of available commands for this application."

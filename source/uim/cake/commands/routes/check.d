@@ -64,7 +64,7 @@ class RoutesCheckCommand : Command {
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser)
     {
         $parser.setDescription(
             "Check a URL string against the routes. " .
