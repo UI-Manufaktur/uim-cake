@@ -206,8 +206,7 @@ class Socket
      * @param string $host The host name being connected to.
      * @return void
      */
-    protected void _setSslContext(string $host)
-    {
+    protected void _setSslContext(string $host) {
         foreach (this._config as myKey: myValue) {
             if (substr(myKey, 0, 4) !== "ssl_") {
                 continue;
@@ -291,8 +290,7 @@ class Socket
      *
      * @return array IP addresses
      */
-    array addresses()
-    {
+    array addresses() {
         if (Validation::ip(this._config["host"])) {
             return [this._config["host"]];
         }
@@ -305,8 +303,7 @@ class Socket
      *
      * @return string|null Last error
      */
-    Nullable!string lastError()
-    {
+    Nullable!string lastError() {
         if (!empty(this.lastError)) {
             return this.lastError["num"] . ": " . this.lastError["str"];
         }
@@ -321,8 +318,7 @@ class Socket
      * @param string $errStr Error string
      * @return void
      */
-    void setLastError(Nullable!int $errNum, string $errStr)
-    {
+    void setLastError(Nullable!int $errNum, string $errStr) {
         this.lastError = ["num":$errNum, "str":$errStr];
     }
 
@@ -357,8 +353,7 @@ class Socket
      * @param int $length Optional buffer length to read; defaults to 1024
      * @return string|null Socket data
      */
-    Nullable!string read(int $length = 1024)
-    {
+    Nullable!string read(int $length = 1024) {
         if (!this.connected && !this.connect()) {
             return null;
         }
@@ -413,8 +408,7 @@ class Socket
      * @param array|null $state Array with key and values to reset
      * @return void
      */
-    void reset(?array $state = null)
-    {
+    void reset(?array $state = null) {
         if (empty($state)) {
             static $initialState = [];
             if (empty($initialState)) {
@@ -439,8 +433,7 @@ class Socket
      * @throws \Cake\Network\Exception\SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
-    void enableCrypto(string myType, string $clientOrServer = "client", bool myEnable = true)
-    {
+    void enableCrypto(string myType, string $clientOrServer = "client", bool myEnable = true) {
         if (!array_key_exists(myType . "_" . $clientOrServer, this._encryptMethods)) {
             throw new InvalidArgumentException("Invalid encryption scheme chosen");
         }

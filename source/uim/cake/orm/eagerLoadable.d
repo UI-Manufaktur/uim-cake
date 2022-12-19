@@ -136,8 +136,7 @@ class EagerLoadable
      *
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    array associations()
-    {
+    array associations() {
         return this._associations;
     }
 
@@ -222,8 +221,7 @@ class EagerLoadable
      *
      * @return array
      */
-    array getConfig()
-    {
+    array getConfig() {
         return this._config;
     }
 
@@ -252,8 +250,7 @@ class EagerLoadable
      *
      * @return string|null
      */
-    Nullable!string targetProperty()
-    {
+    Nullable!string targetProperty() {
         return this._targetProperty;
     }
 

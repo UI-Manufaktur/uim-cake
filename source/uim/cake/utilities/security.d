@@ -73,8 +73,7 @@ class Security {
      * @return void
      * @see \Cake\Utility\Security::hash()
      */
-    static void setHash(string $hash)
-    {
+    static void setHash(string $hash) {
         static::$hashType = $hash;
     }
 
@@ -193,8 +192,7 @@ class Security {
      * @return void
      * @throws \InvalidArgumentException When key length is not 256 bit/32 bytes
      */
-    protected static void _checkKey(string myKey, string $method)
-    {
+    protected static void _checkKey(string myKey, string $method) {
         if (mb_strlen(myKey, "8bit") < 32) {
             throw new InvalidArgumentException(
                 sprintf("Invalid key for %s, key must be at least 256 bits (32 bytes) long.", $method)
@@ -212,8 +210,7 @@ class Security {
      * @return string|null Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static Nullable!string decrypt(string $cipher, string myKey, Nullable!string $hmacSalt = null)
-    {
+    static Nullable!string decrypt(string $cipher, string myKey, Nullable!string $hmacSalt = null) {
         self::_checkKey(myKey, "decrypt()");
         if (empty($cipher)) {
             throw new InvalidArgumentException("The data to decrypt cannot be empty.");

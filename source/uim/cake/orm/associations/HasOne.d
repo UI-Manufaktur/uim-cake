@@ -98,8 +98,7 @@ class HasOne : Association
     }
 
 
-    Closure eagerLoader(array myOptions)
-    {
+    Closure eagerLoader(array myOptions) {
         $loader = new SelectLoader([
             "alias":this.getAlias(),
             "sourceAlias":this.getSource().getAlias(),

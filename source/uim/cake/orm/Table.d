@@ -300,8 +300,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @param array<string, mixed> myConfig Configuration options passed to the constructor
      * @return void
      */
-    void initialize(array myConfig)
-    {
+    void initialize(array myConfig) {
     }
 
     /**
@@ -418,8 +417,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return \Cake\Database\Connection
      */
-    Connection getConnection()
-    {
+    Connection getConnection() {
         if (!this._connection) {
             /** @var \Cake\Database\Connection myConnection */
             myConnection = ConnectionManager::get(static::defaultConnectionName());
@@ -490,8 +488,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return void
      * @throws \RuntimeException When an alias combination is too long
      */
-    protected void checkAliasLengths()
-    {
+    protected void checkAliasLengths() {
         if (this._schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
         }

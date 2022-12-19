@@ -568,8 +568,7 @@ class Text {
      * @return string Trimmed string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#truncating-text
      */
-    static string truncate(string $text, int $length = 100, array myOptions = [])
-    {
+    static string truncate(string $text, int $length = 100, array myOptions = []) {
         $default = [
             "ellipsis": "...", 
             "exact": "true", "html":false, "trimWidth":false,
@@ -672,8 +671,7 @@ class Text {
      * @return string Trimmed string.
      * @see \Cake\Utility\Text::truncate()
      */
-    static string truncateByWidth(string $text, int $length = 100, array myOptions = [])
-    {
+    static string truncateByWidth(string $text, int $length = 100, array myOptions = []) {
         return static::truncate($text, $length, ["trimWidth":true] + myOptions);
     }
 
@@ -728,8 +726,7 @@ class Text {
      * @param array<string, mixed> myOptions An array of options.
      * @return string
      */
-    protected static string _substr(string $text, int $start, Nullable!int $length, array myOptions)
-    {
+    protected static string _substr(string $text, int $start, Nullable!int $length, array myOptions) {
         if (empty(myOptions["trimWidth"])) {
             $substr = "mb_substr";
         } else {
@@ -816,8 +813,7 @@ class Text {
      * @param string $text The input text
      * @return string
      */
-    protected static string _removeLastWord(string $text)
-    {
+    protected static string _removeLastWord(string $text) {
         $spacepos = mb_strrpos($text, " ");
 
         if ($spacepos !== false) {
@@ -846,8 +842,7 @@ class Text {
      * @return string Modified string
      * @link https://book.UIM.org/4/en/core-libraries/text.html#extracting-an-excerpt
      */
-    static string excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "...")
-    {
+    static string excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "...") {
         if (empty($text) || empty($phrase)) {
             return static::truncate($text, $radius * 2, ["ellipsis":$ellipsis]);
         }
@@ -889,8 +884,7 @@ class Text {
      * @return string The glued together string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
-    static string toList(string[] $list, Nullable!string $and = null, string $separator = ", ")
-    {
+    static string toList(string[] $list, Nullable!string $and = null, string $separator = ", ") {
         if ($and == null) {
             $and = __d("cake", "and");
         }
@@ -968,8 +962,7 @@ class Text {
      * @param array $array Array
      * @return string
      */
-    static string ascii(array $array)
-    {
+    static string ascii(array $array) {
         $ascii = "";
 
         foreach ($array as $utf8) {
@@ -1044,8 +1037,7 @@ class Text {
      * @param \Transliterator $transliterator A `Transliterator` instance.
      * @return void
      */
-    static void setTransliterator(Transliterator $transliterator)
-    {
+    static void setTransliterator(Transliterator $transliterator) {
         static::$_defaultTransliterator = $transliterator;
     }
 
@@ -1054,8 +1046,7 @@ class Text {
      *
      * @return string Transliterator identifier.
      */
-    static string getTransliteratorId()
-    {
+    static string getTransliteratorId() {
         return static::$_defaultTransliteratorId;
     }
 
@@ -1065,8 +1056,7 @@ class Text {
      * @param string $transliteratorId Transliterator identifier.
      * @return void
      */
-    static void setTransliteratorId(string $transliteratorId)
-    {
+    static void setTransliteratorId(string $transliteratorId) {
         $transliterator = transliterator_create($transliteratorId);
         if ($transliterator == null) {
             throw new CakeException("Unable to create transliterator for id: " . $transliteratorId);
@@ -1087,8 +1077,7 @@ class Text {
      * @return string
      * @see https://secure.php.net/manual/en/transliterator.transliterate.php
      */
-    static string transliterate(string $string, $transliterator = null)
-    {
+    static string transliterate(string $string, $transliterator = null) {
         if (empty($transliterator)) {
             $transliterator = static::$_defaultTransliterator ?: static::$_defaultTransliteratorId;
         }
@@ -1122,8 +1111,7 @@ class Text {
      * @see setTransliterator()
      * @see setTransliteratorId()
      */
-    static string slug(string $string, myOptions = [])
-    {
+    static string slug(string $string, myOptions = []) {
         if (is_string(myOptions)) {
             myOptions = ["replacement":myOptions];
         }

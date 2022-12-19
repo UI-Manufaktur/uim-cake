@@ -128,8 +128,7 @@ class AssociationCollection : IteratorAggregate {
      * @return array<\Cake\ORM\Association> An array of Association objects.
      * @since 3.5.3
      */
-    array getByType(myClass)
-    {
+    array getByType(myClass) {
         myClass = array_map("strtolower", (array)myClass);
 
         $out = array_filter(this._items, function ($assoc) use (myClass) {

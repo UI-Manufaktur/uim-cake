@@ -258,8 +258,7 @@ class BelongsToMany : Association
      * @param \Cake\ORM\Table myTarget The target table.
      * @return void
      */
-    protected void _generateTargetAssociations(Table $junction, Table $source, Table myTarget)
-    {
+    protected void _generateTargetAssociations(Table $junction, Table $source, Table myTarget) {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
         $tAlias = myTarget.getAlias();
@@ -304,8 +303,7 @@ class BelongsToMany : Association
      * @param \Cake\ORM\Table $source The source table.
      * @return void
      */
-    protected void _generateSourceAssociations(Table $junction, Table $source)
-    {
+    protected void _generateSourceAssociations(Table $junction, Table $source) {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
 
@@ -341,8 +339,7 @@ class BelongsToMany : Association
      * @return void
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
-    protected void _generateJunctionAssociations(Table $junction, Table $source, Table myTarget)
-    {
+    protected void _generateJunctionAssociations(Table $junction, Table $source, Table myTarget) {
         $tAlias = myTarget.getAlias();
         $sAlias = $source.getAlias();
 
@@ -389,8 +386,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions Any extra options or overrides to be taken in account
      * @return void
      */
-    void attachTo(Query myQuery, array myOptions = [])
-    {
+    void attachTo(Query myQuery, array myOptions = []) {
         if (!empty(myOptions["negateMatch"])) {
             this._appendNotMatching(myQuery, myOptions);
 
@@ -423,8 +419,7 @@ class BelongsToMany : Association
     }
 
 
-    protected void _appendNotMatching(Query myQuery, array myOptions)
-    {
+    protected void _appendNotMatching(Query myQuery, array myOptions) {
         if (empty(myOptions["negateMatch"])) {
             return;
         }
@@ -479,8 +474,7 @@ class BelongsToMany : Association
     }
 
 
-    Closure eagerLoader(array myOptions)
-    {
+    Closure eagerLoader(array myOptions) {
         myName = this._junctionAssociationName();
         $loader = new SelectWithPivotLoader([
             "alias":this.getAlias(),
@@ -1365,8 +1359,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions original list of options passed in constructor
      * @return void
      */
-    protected void _options(array myOptions)
-    {
+    protected void _options(array myOptions) {
         if (!empty(myOptions["targetForeignKey"])) {
             this.setTargetForeignKey(myOptions["targetForeignKey"]);
         }

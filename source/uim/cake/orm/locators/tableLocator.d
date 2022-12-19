@@ -243,8 +243,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param array<string, mixed> myOptions Table options array.
      * @return string|null
      */
-    protected Nullable!string _getClassName(string myAlias, array myOptions = [])
-    {
+    protected Nullable!string _getClassName(string myAlias, array myOptions = []) {
         if (empty(myOptions["className"])) {
             myOptions["className"] = myAlias;
         }
@@ -289,8 +288,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    void clear()
-    {
+    void clear() {
         super.clear();
 
         this._fallbacked = [];

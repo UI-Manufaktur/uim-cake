@@ -1678,8 +1678,7 @@ class Validation {
      *
      * @return void
      */
-    protected static void _reset()
-    {
+    protected static void _reset() {
         static::myErrors = [];
     }
 }

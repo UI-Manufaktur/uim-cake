@@ -600,8 +600,7 @@ abstract class Association
      * @param array<string, mixed> myOptions List of options used for initialization
      * @return void
      */
-    protected void _options(array myOptions)
-    {
+    protected void _options(array myOptions) {
     }
 
     /**
@@ -630,8 +629,7 @@ abstract class Association
      * @return void
      * @throws \RuntimeException Unable to build the query or associations.
      */
-    void attachTo(Query myQuery, array myOptions = [])
-    {
+    void attachTo(Query myQuery, array myOptions = []) {
         myTarget = this.getTarget();
         myTable = myTarget.getTable();
 
@@ -706,8 +704,7 @@ abstract class Association
      * @param array<string, mixed> myOptions Options array containing the `negateMatch` key.
      * @return void
      */
-    protected void _appendNotMatching(Query myQuery, array myOptions)
-    {
+    protected void _appendNotMatching(Query myQuery, array myOptions) {
         myTarget = this._targetTable;
         if (!empty(myOptions["negateMatch"])) {
             $primaryKey = myQuery.aliasFields((array)myTarget.getPrimaryKey(), this._name);
@@ -732,8 +729,7 @@ abstract class Association
      * data shuld be nested in. Will use the default one if not provided.
      * @return array
      */
-    array transformRow(array $row, string $nestKey, bool $joined, Nullable!string myTargetProperty = null)
-    {
+    array transformRow(array $row, string $nestKey, bool $joined, Nullable!string myTargetProperty = null) {
         $sourceAlias = this.getSource().getAlias();
         $nestKey = $nestKey ?: this._name;
         myTargetProperty = myTargetProperty ?: this.getProperty();
@@ -755,8 +751,7 @@ abstract class Association
      *   with this association
      * @return array
      */
-    array defaultRowValue(array $row, bool $joined)
-    {
+    array defaultRowValue(array $row, bool $joined) {
         $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {
             $row[$sourceAlias][this.getProperty()] = null;
@@ -856,8 +851,7 @@ abstract class Association
      * @param \Cake\ORM\Query myQuery the query this association is attaching itself to
      * @return void
      */
-    protected void _dispatchBeforeFind(Query myQuery)
-    {
+    protected void _dispatchBeforeFind(Query myQuery) {
         myQuery.triggerBeforeFind();
     }
 
@@ -870,8 +864,7 @@ abstract class Association
      * @param array<string, mixed> myOptions options passed to the method `attachTo`
      * @return void
      */
-    protected void _appendFields(Query myQuery, Query $surrogate, array myOptions)
-    {
+    protected void _appendFields(Query myQuery, Query $surrogate, array myOptions) {
         if (myQuery.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
         }
@@ -954,8 +947,7 @@ abstract class Association
      * @param array<string, mixed> myOptions options passed to the method `attachTo`
      * @return void
      */
-    protected void _bindNewAssociations(Query myQuery, Query $surrogate, array myOptions)
-    {
+    protected void _bindNewAssociations(Query myQuery, Query $surrogate, array myOptions) {
         $loader = $surrogate.getEagerLoader();
         $contain = $loader.getContain();
         $matching = $loader.getMatching();
@@ -992,8 +984,7 @@ abstract class Association
      * @throws \RuntimeException if the number of columns in the foreignKey do not
      * match the number of columns in the source table primaryKey
      */
-    protected array _joinCondition(array myOptions)
-    {
+    protected array _joinCondition(array myOptions) {
         $conditions = [];
         $tAlias = this._name;
         $sAlias = this.getSource().getAlias();
@@ -1044,8 +1035,7 @@ abstract class Association
      * and options as value.
      * @return array
      */
-    protected array _extractFinder(myFinderData)
-    {
+    protected array _extractFinder(myFinderData) {
         myFinderData = (array)myFinderData;
 
         if (is_numeric(key(myFinderData))) {

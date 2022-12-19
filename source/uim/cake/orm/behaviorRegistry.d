@@ -53,8 +53,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @param \Cake\ORM\Table myTable The table this registry is attached to.
      * @return void
      */
-    void setTable(Table myTable)
-    {
+    void setTable(Table myTable) {
         this._table = myTable;
         this.setEventManager(myTable.getEventManager());
     }
@@ -80,8 +79,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected Nullable!string _resolveClassName(string myClass)
-    {
+    protected Nullable!string _resolveClassName(string myClass) {
         return static::className(myClass);
     }
 
@@ -141,8 +139,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return array A list of implemented finders and methods.
      * @throws \LogicException when duplicate methods are connected.
      */
-    protected array _getMethods(Behavior $instance, string myClass, string myAlias)
-    {
+    protected array _getMethods(Behavior $instance, string myClass, string myAlias) {
         myFinders = array_change_key_case($instance.implementedFinders());
         $methods = array_change_key_case($instance.implementedMethods());
 

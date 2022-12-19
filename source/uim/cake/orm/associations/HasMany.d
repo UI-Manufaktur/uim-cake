@@ -300,8 +300,7 @@ class HasMany : Association
      * any of them is lacking a primary key value
      * @return void
      */
-    void unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = [])
-    {
+    void unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = []) {
         if (is_bool(myOptions)) {
             myOptions = [
                 "cleanProperty":myOptions,
@@ -582,8 +581,7 @@ class HasMany : Association
      * @param array<string, mixed> myOptions original list of options passed in constructor
      * @return void
      */
-    protected void _options(array myOptions)
-    {
+    protected void _options(array myOptions) {
         if (!empty(myOptions["saveStrategy"])) {
             this.setSaveStrategy(myOptions["saveStrategy"]);
         }
@@ -593,8 +591,7 @@ class HasMany : Association
     }
 
 
-    Closure eagerLoader(array myOptions)
-    {
+    Closure eagerLoader(array myOptions) {
         $loader = new SelectLoader([
             "alias":this.getAlias(),
             "sourceAlias":this.getSource().getAlias(),

@@ -90,8 +90,7 @@ class SelectLoader
      * @param array<string, mixed> myOptions Same options as `Association::eagerLoader()`
      * @return \Closure
      */
-    Closure buildEagerLoader(array myOptions)
-    {
+    Closure buildEagerLoader(array myOptions) {
         myOptions += this._defaultOptions();
         $fetchQuery = this._buildQuery(myOptions);
         myResultMap = this._buildResultMap($fetchQuery, myOptions);
@@ -211,8 +210,7 @@ class SelectLoader
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected void _assertFieldsPresent(Query $fetchQuery, string[] myKey)
-    {
+    protected void _assertFieldsPresent(Query $fetchQuery, string[] myKey) {
         $select = $fetchQuery.aliasFields($fetchQuery.clause("select"));
         if (empty($select)) {
             return;
@@ -462,8 +460,7 @@ class SelectLoader
      * @param array<string, mixed> myOptions The options passed to the eagerLoader method
      * @return \Closure
      */
-    protected Closure _resultInjector(Query $fetchQuery, array myResultMap, array myOptions)
-    {
+    protected Closure _resultInjector(Query $fetchQuery, array myResultMap, array myOptions) {
         myKeys = this.associationType == Association::MANY_TO_ONE ?
             this.foreignKey :
             this.bindingKey;
@@ -500,8 +497,7 @@ class SelectLoader
      * @param string $nestKey The key under which results should be nested
      * @return \Closure
      */
-    protected Closure _multiKeysInjector(array myResultMap, string[] $sourceKeys, string $nestKey)
-    {
+    protected Closure _multiKeysInjector(array myResultMap, string[] $sourceKeys, string $nestKey) {
         return function ($row) use (myResultMap, $sourceKeys, $nestKey) {
             myValues = [];
             foreach ($sourceKeys as myKey) {

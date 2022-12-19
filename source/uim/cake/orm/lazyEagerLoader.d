@@ -122,8 +122,7 @@ class LazyEagerLoader
      * @param \Cake\ORM\Table $source The table where the entities came from
      * @return array
      */
-    protected array _injectResults(iterable $objects, myResults, string[] $associations, Table $source)
-    {
+    protected array _injectResults(iterable $objects, myResults, string[] $associations, Table $source) {
         $injected = [];
         $properties = this._getPropertyMap($source, $associations);
         $primaryKey = (array)$source.getPrimaryKey();

@@ -189,8 +189,7 @@ class ResultSet : IResultSet
      * @throws \Cake\Database\Exception\DatabaseException
      * @return void
      */
-    function rewind()
-    {
+    function rewind() {
         if (this._index == 0) {
             return;
         }
@@ -307,8 +306,7 @@ class ResultSet : IResultSet
      * @param array myData Data array.
      * @return void
      */
-    void __unserialize(array myData)
-    {
+    void __unserialize(array myData) {
         this._results = SplFixedArray::fromArray(myData);
         this._useBuffering = true;
         this._count = this._results.count();
@@ -343,8 +341,7 @@ class ResultSet : IResultSet
      * @param \Cake\ORM\Query myQuery The query from where to derive the associations
      * @return void
      */
-    protected void _calculateAssociationMap(Query myQuery)
-    {
+    protected void _calculateAssociationMap(Query myQuery) {
         $map = myQuery.getEagerLoader().associationsMap(this._defaultTable);
         this._matchingMap = (new Collection($map))
             .match(["matching":true])
@@ -364,8 +361,7 @@ class ResultSet : IResultSet
      * @param \Cake\ORM\Query myQuery The query from where to derive the column map
      * @return void
      */
-    protected void _calculateColumnMap(Query myQuery)
-    {
+    protected void _calculateColumnMap(Query myQuery) {
         $map = [];
         foreach (myQuery.clause("select") as myKey: myField) {
             myKey = trim(myKey, ""`[]");

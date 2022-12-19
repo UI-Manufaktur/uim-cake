@@ -191,8 +191,7 @@ class Inflector
      *
      * @return void
      */
-    static void reset()
-    {
+    static void reset() {
         if (empty(static::$_initialState)) {
             static::$_initialState = get_class_vars(self::class);
 
@@ -223,8 +222,7 @@ class Inflector
      * @param bool $reset If true, will unset default inflections for all
      *        new rules that are being defined in $rules.
      */
-    static void rules(string myType, array $rules, bool $reset = false)
-    {
+    static void rules(string myType, array $rules, bool $reset = false) {
         $var = "_" . myType;
 
         if ($reset) {

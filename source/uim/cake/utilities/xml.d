@@ -285,8 +285,7 @@ class Xml {
      * @return void
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static void _fromArray(DOMDocument $dom, myNode, &myData, $format)
-    {
+    protected static void _fromArray(DOMDocument $dom, myNode, &myData, $format) {
         if (empty(myData) || !is_array(myData)) {
             return;
         }
@@ -429,8 +428,7 @@ class Xml {
      * @param $modules List of modules in XML
      * @return void
      */
-    protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, string[] $modules)
-    {
+    protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, string[] $modules) {
         myData = [];
 
         foreach ($modules as $module) {

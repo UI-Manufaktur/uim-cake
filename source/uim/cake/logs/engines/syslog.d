@@ -101,8 +101,7 @@ class SyslogLog : BaseLog {
      * @return void
      * @see \Cake\Log\Log::$_levels
      */
-    void log($level, myMessage, array $context = [])
-    {
+    void log($level, myMessage, array $context = []) {
         if (!this._open) {
             myConfig = this._config;
             this._open(myConfig["prefix"], myConfig["flag"], myConfig["facility"]);

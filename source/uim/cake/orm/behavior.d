@@ -156,8 +156,7 @@ class Behavior : IEventListener
      * @param array<string, mixed> myConfig The configuration settings provided to this behavior.
      * @return void
      */
-    void initialize(array myConfig)
-    {
+    void initialize(array myConfig) {
     }
 
     /**
@@ -191,8 +190,7 @@ class Behavior : IEventListener
      * @param array<string, mixed> myConfig The customized method mappings.
      * @return array A de-duped list of config data.
      */
-    protected array _resolveMethodAliases(string myKey, array $defaults, array myConfig)
-    {
+    protected array _resolveMethodAliases(string myKey, array $defaults, array myConfig) {
         if (!isset($defaults[myKey], myConfig[myKey])) {
             return myConfig;
         }
@@ -224,8 +222,7 @@ class Behavior : IEventListener
      * @return void
      * @throws \Cake\Core\Exception\CakeException if config are invalid
      */
-    void verifyConfig()
-    {
+    void verifyConfig() {
         myKeys = ["implementedFinders", "implementedMethods"];
         foreach (myKeys as myKey) {
             if (!isset(this._config[myKey])) {
@@ -255,8 +252,7 @@ class Behavior : IEventListener
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         myEventMap = [
             "Model.beforeMarshal":"beforeMarshal",
             "Model.afterMarshal":"afterMarshal",
@@ -315,8 +311,7 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    array implementedFinders()
-    {
+    array implementedFinders() {
         $methods = this.getConfig("implementedFinders");
         if (isset($methods)) {
             return $methods;
@@ -347,8 +342,7 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    array implementedMethods()
-    {
+    array implementedMethods() {
         $methods = this.getConfig("implementedMethods");
         if (isset($methods)) {
             return $methods;

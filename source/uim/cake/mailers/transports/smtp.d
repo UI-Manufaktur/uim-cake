@@ -70,8 +70,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return void
      */
-    void __wakeup()
-    {
+    void __wakeup() {
         this._socket = null;
     }
 
@@ -83,8 +82,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return void
      */
-    void connect()
-    {
+    void connect() {
         if (!this.connected()) {
             this._connect();
             this._auth();
@@ -106,8 +104,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return void
      */
-    void disconnect()
-    {
+    void disconnect() {
         if (!this.connected()) {
             return;
         }
@@ -140,8 +137,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return array
      */
-    array getLastResponse()
-    {
+    array getLastResponse() {
         return this._lastResponse;
     }
 
@@ -153,8 +149,7 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      * @psalm-return array{headers: string, message: string}
      */
-    array send(Message myMessage)
-    {
+    array send(Message myMessage) {
         this.checkRecipient(myMessage);
 
         if (!this.connected()) {
@@ -180,8 +175,7 @@ class SmtpTransport : AbstractTransport
      * @param $responseLines Response lines to parse.
      * @return void
      */
-    protected void _bufferResponseLines(string[] $responseLines)
-    {
+    protected void _bufferResponseLines(string[] $responseLines) {
         $response = [];
         foreach ($responseLines as $responseLine) {
             if (preg_match("/^(\d{3})(?:[ -]+(.*))?$/", $responseLine, $match)) {
@@ -200,8 +194,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws \Cake\Network\Exception\SocketException
      */
-    protected void _connect()
-    {
+    protected void _connect() {
         this._generateSocket();
         if (!this._socket().connect()) {
             throw new SocketException("Unable to connect to SMTP server.");
@@ -252,8 +245,7 @@ class SmtpTransport : AbstractTransport
      *
      * @throws \Cake\Network\Exception\SocketException
      */
-    protected void _auth()
-    {
+    protected void _auth() {
         if (!isset(this._config["username"], this._config["password"])) {
             return;
         }
@@ -276,8 +268,7 @@ class SmtpTransport : AbstractTransport
      * @param string myPassword Password.
      * @return string|null Response code for the command.
      */
-    protected Nullable!string _authPlain(string myUsername, string myPassword)
-    {
+    protected Nullable!string _authPlain(string myUsername, string myPassword) {
         return this._smtpSend(
             sprintf(
                 "AUTH PLAIN %s",
@@ -294,8 +285,7 @@ class SmtpTransport : AbstractTransport
      * @param string myPassword Password.
      * @return void
      */
-    protected void _authLogin(string myUsername, string myPassword)
-    {
+    protected void _authLogin(string myUsername, string myPassword) {
         $replyCode = this._smtpSend("AUTH LOGIN", "334|500|502|504");
         if ($replyCode == "334") {
             try {
@@ -343,8 +333,7 @@ class SmtpTransport : AbstractTransport
      * @param \Cake\Mailer\Message myMessage Message instance
      * @return array
      */
-    protected array _prepareFromAddress(Message myMessage)
-    {
+    protected array _prepareFromAddress(Message myMessage) {
         $from = myMessage.getReturnPath();
         if (empty($from)) {
             $from = myMessage.getFrom();
@@ -359,8 +348,7 @@ class SmtpTransport : AbstractTransport
      * @param \Cake\Mailer\Message myMessage Message instance
      * @return array
      */
-    protected array _prepareRecipientAddresses(Message myMessage)
-    {
+    protected array _prepareRecipientAddresses(Message myMessage) {
         $to = myMessage.getTo();
         $cc = myMessage.getCc();
         $bcc = myMessage.getBcc();
@@ -395,8 +383,7 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      * @return void
      */
-    protected void _sendRcpt(Message myMessage)
-    {
+    protected void _sendRcpt(Message myMessage) {
         $from = this._prepareFromAddress(myMessage);
         this._smtpSend(this._prepareFromCmd(key($from)));
 
@@ -413,8 +400,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws \Cake\Network\Exception\SocketException
      */
-    protected void _sendData(Message myMessage)
-    {
+    protected void _sendData(Message myMessage) {
         this._smtpSend("DATA", "354");
 
         $headers = myMessage.getHeadersString([
@@ -449,8 +435,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws \Cake\Network\Exception\SocketException
      */
-    protected void _generateSocket()
-    {
+    protected void _generateSocket() {
         this._socket = new Socket(this._config);
     }
 
@@ -462,8 +447,7 @@ class SmtpTransport : AbstractTransport
      * @return string|null The matched code, or null if nothing matched
      * @throws \Cake\Network\Exception\SocketException
      */
-    protected Nullable!string _smtpSend(Nullable!string myData, $checkCode = "250")
-    {
+    protected Nullable!string _smtpSend(Nullable!string myData, $checkCode = "250") {
         this._lastResponse = [];
 
         if (myData !== null) {

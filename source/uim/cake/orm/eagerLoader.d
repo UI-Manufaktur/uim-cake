@@ -242,8 +242,7 @@ class EagerLoader
      *
      * @return array The resulting containments array
      */
-    array getMatching()
-    {
+    array getMatching() {
         if (this._matching == null) {
             this._matching = new static();
         }
@@ -267,8 +266,7 @@ class EagerLoader
      * will be normalized
      * @return array
      */
-    array normalized(Table myRepository)
-    {
+    array normalized(Table myRepository) {
         if (this._normalized !== null || empty(this._containments)) {
             return (array)this._normalized;
         }
@@ -300,8 +298,7 @@ class EagerLoader
      * with the new one
      * @return array
      */
-    protected array _reformatContain(array $associations, array $original)
-    {
+    protected array _reformatContain(array $associations, array $original) {
         myResult = $original;
 
         foreach ($associations as myTable: myOptions) {
@@ -379,8 +376,7 @@ class EagerLoader
      * per association in the containments array
      * @return void
      */
-    void attachAssociations(Query myQuery, Table myRepository, bool $includeFields)
-    {
+    void attachAssociations(Query myQuery, Table myRepository, bool $includeFields) {
         if (empty(this._containments) && this._matching == null) {
             return;
         }
@@ -412,8 +408,7 @@ class EagerLoader
      * attached
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    array attachableAssociations(Table myRepository)
-    {
+    array attachableAssociations(Table myRepository) {
         $contain = this.normalized(myRepository);
         $matching = this._matching ? this._matching.normalized(myRepository) : [];
         this._fixStrategies();
@@ -430,8 +425,7 @@ class EagerLoader
      * to be loaded
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    array externalAssociations(Table myRepository)
-    {
+    array externalAssociations(Table myRepository) {
         if (this._loadExternal) {
             return this._loadExternal;
         }
@@ -511,8 +505,7 @@ class EagerLoader
      *
      * @return void
      */
-    protected void _fixStrategies()
-    {
+    protected void _fixStrategies() {
         foreach (this._aliasList as myAliases) {
             foreach (myAliases as myConfigs) {
                 if (count(myConfigs) < 2) {
@@ -535,8 +528,7 @@ class EagerLoader
      * @param \Cake\ORM\EagerLoadable $loadable The association config
      * @return void
      */
-    protected void _correctStrategy(EagerLoadable $loadable)
-    {
+    protected void _correctStrategy(EagerLoadable $loadable) {
         myConfig = $loadable.getConfig();
         $currentStrategy = myConfig["strategy"] ??
             "join";
@@ -558,8 +550,7 @@ class EagerLoader
      * @param array<\Cake\ORM\EagerLoadable> $matching list of associations that should be forcibly joined.
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    protected array _resolveJoins(array $associations, array $matching = [])
-    {
+    protected array _resolveJoins(array $associations, array $matching = []) {
         myResult = [];
         foreach ($matching as myTable: $loadable) {
             myResult[myTable] = $loadable;
@@ -752,8 +743,7 @@ class EagerLoader
      * @param \Cake\Database\IStatement $statement The statement to work on
      * @return array
      */
-    protected array _collectKeys(array $external, Query myQuery, $statement)
-    {
+    protected array _collectKeys(array $external, Query myQuery, $statement) {
         $collectKeys = [];
         foreach ($external as $meta) {
             $instance = $meta.instance();
@@ -792,8 +782,7 @@ class EagerLoader
      * @param array<string, array> $collectKeys The keys to collect
      * @return array
      */
-    protected array _groupKeys(BufferedStatement $statement, array $collectKeys)
-    {
+    protected array _groupKeys(BufferedStatement $statement, array $collectKeys) {
         myKeys = [];
         foreach (($statement.fetchAll("assoc") ?: []) as myResult) {
             foreach ($collectKeys as $nestKey: $parts) {

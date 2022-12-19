@@ -109,8 +109,7 @@ class FileLog : BaseLog
      * @return void
      * @see \Cake\Log\Log::$_levels
      */
-    void log($level, myMessage, array $context = [])
-    {
+    void log($level, myMessage, array $context = []) {
         myMessage = this._format(myMessage, $context);
         myMessage = this.formatter.format($level, myMessage, $context);
 

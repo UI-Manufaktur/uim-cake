@@ -164,8 +164,7 @@ class Log
      *
      * @return void
      */
-    protected static void _init()
-    {
+    protected static void _init() {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(static::$_registry)) {
             static::$_registry = new LogEngineRegistry();
@@ -182,8 +181,7 @@ class Log
      *
      * @return void
      */
-    protected static void _loadConfig()
-    {
+    protected static void _loadConfig() {
         foreach (static::$_config as myName: $properties) {
             if (isset($properties["engine"])) {
                 $properties["className"] = $properties["engine"];
@@ -263,8 +261,7 @@ class Log
      * @return void
      * @throws \BadMethodCallException When trying to modify an existing config.
      */
-    static void setConfig(myKey, myConfig = null)
-    {
+    static void setConfig(myKey, myConfig = null) {
         static::_setConfig(myKey, myConfig);
         static::$_dirtyConfig = true;
     }

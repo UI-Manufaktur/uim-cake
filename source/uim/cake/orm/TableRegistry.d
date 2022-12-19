@@ -59,8 +59,7 @@ class TableRegistry
      * @param \Cake\ORM\Locator\ILocator myTableLocator Instance of a locator to use.
      * @return void
      */
-    static void setTableLocator(ILocator myTableLocator)
-    {
+    static void setTableLocator(ILocator myTableLocator) {
         FactoryLocator::add("Table", myTableLocator);
     }
 

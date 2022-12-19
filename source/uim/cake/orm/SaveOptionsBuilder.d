@@ -85,8 +85,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param array $associations An associations array.
      * @return void
      */
-    protected void _associated(Table myTable, array $associations)
-    {
+    protected void _associated(Table myTable, array $associations) {
         foreach ($associations as myKey: $associated) {
             if (is_int(myKey)) {
                 this._checkAssociation(myTable, $associated);

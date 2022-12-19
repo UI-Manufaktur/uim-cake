@@ -170,8 +170,7 @@ class Router
      * @see \Cake\Routing\Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
      */
-    static void connect($route, $defaults = [], myOptions = [])
-    {
+    static void connect($route, $defaults = [], myOptions = []) {
         deprecationWarning(
             "`Router::connect()` is deprecated, use the non-static method `RouteBuilder::connect()` instead."
         );
@@ -200,8 +199,7 @@ class Router
      * @param \Cake\Http\ServerRequest myRequest request object.
      * @return void
      */
-    static void setRequest(ServerRequest myRequest)
-    {
+    static void setRequest(ServerRequest myRequest) {
         static::$_request = myRequest;
 
         static::$_requestContext["_base"] = myRequest.getAttribute("base");
@@ -231,8 +229,7 @@ class Router
      *
      * @return void
      */
-    static void reload()
-    {
+    static void reload() {
         if (empty(static::$_initialState)) {
             static::$_collection = new RouteCollection();
             static::$_initialState = get_class_vars(static::class);
@@ -264,8 +261,7 @@ class Router
      * @internal
      * @return void
      */
-    static void resetRoutes()
-    {
+    static void resetRoutes() {
         static::$_collection = new RouteCollection();
         static::$_urlFilters = [];
     }
@@ -299,8 +295,7 @@ class Router
      * @param callable $function The function to add
      * @return void
      */
-    static void addUrlFilter(callable $function)
-    {
+    static void addUrlFilter(callable $function) {
         static::$_urlFilters[] = $function;
     }
 
@@ -773,8 +768,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::scope()` instead.
      */
-    static void scope(string myPath, myParams = [], $callback = null)
-    {
+    static void scope(string myPath, myParams = [], $callback = null) {
         deprecationWarning(
             "`Router::scope()` is deprecated, use the non-static method `RouteBuilder::scope()` instead."
         );
@@ -812,8 +806,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::prefix()` instead.
      */
-    static void prefix(string myName, myParams = [], $callback = null)
-    {
+    static void prefix(string myName, myParams = [], $callback = null) {
         deprecationWarning(
             "`Router::prefix()` is deprecated, use the non-static method `RouteBuilder::prefix()` instead."
         );
@@ -849,8 +842,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::plugin()` instead.
      */
-    static void plugin(string myName, myOptions = [], $callback = null)
-    {
+    static void plugin(string myName, myOptions = [], $callback = null) {
         deprecationWarning(
             "`Router::plugin()` is deprecated, use the non-static method `RouteBuilder::plugin()` instead."
         );
@@ -893,8 +885,7 @@ class Router
      * @param \Cake\Routing\RouteCollection $routeCollection route collection
      * @return void
      */
-    static void setRouteCollection(RouteCollection $routeCollection)
-    {
+    static void setRouteCollection(RouteCollection $routeCollection) {
         static::$_collection = $routeCollection;
     }
 
