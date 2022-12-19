@@ -136,12 +136,12 @@ class Filesystem
     /**
      * Create directory.
      *
-     * @param string $dir Directory path.
+     * @param string dir Directory path.
      * @param int myMode Octal mode passed to mkdir(). Defaults to 0755.
      * @return void
      * @throws \Cake\Core\Exception\CakeException When directory creation fails.
      */
-    void mkdir(string $dir, int myMode = 0755) {
+    void mkdir(string dir, int myMode = 0755) {
         if (is_dir($dir)) {
             return;
         }
@@ -206,11 +206,11 @@ class Filesystem
     /**
      * Copies directory with all it"s contents.
      *
-     * @param string $source Source path.
-     * @param string $destination Destination path.
+     * @param string source Source path.
+     * @param string destination Destination path.
      * @return bool
      */
-    bool copyDir(string $source, string $destination) {
+    bool copyDir(string source, string destination) {
         $destination = (new SplFileInfo($destination)).getPathname();
 
         if (!is_dir($destination)) {

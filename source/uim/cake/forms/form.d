@@ -46,7 +46,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * Schema class.
      * @psalm-var class-string<\Cake\Form\Schema>
      */
-    protected string $_schemaClass = Schema::class;
+    protected string _schemaClass = Schema::class;
 
     /**
      * The schema used by this form.
@@ -182,7 +182,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * @return bool Whether the data is valid.
      * @throws \RuntimeException If validator is invalid.
      */
-    bool validate(array myData, Nullable!string $validator = null) {
+    bool validate(array myData, Nullable!string validator = null) {
         _errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
             .validate(myData);
 

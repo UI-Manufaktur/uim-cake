@@ -42,10 +42,10 @@ class FormProtector
      *
      * @param mixed $formData Form data.
      * @param string anURL URL form was POSTed to.
-     * @param string $sessionId Session id for hash generation.
+     * @param string sessionId Session id for hash generation.
      * @return bool
      */
-    bool validate($formData, string anURL, string $sessionId) {
+    bool validate($formData, string anURL, string sessionId) {
         this.debugMessage = null;
 
         $extractedToken = this.extractToken($formData);
@@ -351,11 +351,11 @@ class FormProtector
      * Generate the token data.
      *
      * @param string anURL Form URL.
-     * @param string $sessionId Session Id.
+     * @param string sessionId Session Id.
      * @return The token data.
      * @psalm-return array{fields: string, unlocked: string, debug: string}
      */
-    STRINGAA buildTokenData(string anURL = "", string $sessionId = "") {
+    STRINGAA buildTokenData(string anURL = "", string sessionId = "") {
         myFields = this.fields;
         $unlockedFields = this.unlockedFields;
 
@@ -395,10 +395,10 @@ class FormProtector
      * @param array myFields Fields list.
      * @param array $unlockedFields Unlocked fields.
      * @param string anURL Form URL.
-     * @param string $sessionId Session Id.
+     * @param string sessionId Session Id.
      * @return string
      */
-    protected auto generateHash(array myFields, array $unlockedFields, string anURL, string $sessionId) {
+    protected auto generateHash(array myFields, array $unlockedFields, string anURL, string sessionId) {
         $hashParts = [
             anURL,
             serialize(myFields),
@@ -460,18 +460,18 @@ class FormProtector
      *
      * @param array myDataFields Fields array, containing the POST data fields
      * @param array $expectedFields Fields array, containing the expected fields we should have in POST
-     * @param string $intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
-     * @param string $stringKeyMessage Message string if tampered found in
+     * @param string intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
+     * @param string stringKeyMessage Message string if tampered found in
      * return data fields indexed by string (protected).
-     * @param string $missingMessage Message string if missing field
+     * @param string missingMessage Message string if missing field
      * @return Messages
      */
     protected string[] debugCheckFields(
         array myDataFields,
         array $expectedFields = [],
-        string $intKeyMessage = "",
-        string $stringKeyMessage = "",
-        string $missingMessage = ""
+        string intKeyMessage = "",
+        string stringKeyMessage = "",
+        string missingMessage = ""
     ) {
         myMessages = this.matchExistingFields(myDataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = this.debugExpectedFields($expectedFields, $missingMessage);
@@ -488,16 +488,16 @@ class FormProtector
      *
      * @param array myDataFields Fields array, containing the POST data fields
      * @param array $expectedFields Fields array, containing the expected fields we should have in POST
-     * @param string $intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
-     * @param string $stringKeyMessage Message string if tampered found in
+     * @param string intKeyMessage Message string if unexpected found in data fields indexed by int (not protected)
+     * @param string stringKeyMessage Message string if tampered found in
      *   data fields indexed by string (protected)
      * @return Error messages
      */
     protected string[] matchExistingFields(
         array myDataFields,
         array &$expectedFields,
-        string $intKeyMessage,
-        string $stringKeyMessage
+        string intKeyMessage,
+        string stringKeyMessage
     ) {
         myMessages = [];
         foreach (myDataFields as myKey: myValue) {
@@ -523,10 +523,10 @@ class FormProtector
      * Generate debug message for the expected fields
      *
      * @param array $expectedFields Expected fields
-     * @param string $missingMessage Message template
+     * @param string missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected string debugExpectedFields(array $expectedFields = [], string $missingMessage = "") {
+    protected string debugExpectedFields(array $expectedFields = [], string missingMessage = "") {
         if (count($expectedFields) == 0) {
             return null;
         }

@@ -61,7 +61,7 @@ class CacheSession : SessionHandlerInterface
     /**
      * Method used to read from a cache session.
      *
-     * @param string $id ID that uniquely identifies session in cache.
+     * @param string id ID that uniquely identifies session in cache.
      * @return string|false Session data or false if it does not exist.
      */
     #[\ReturnTypeWillChange]
@@ -78,7 +78,7 @@ class CacheSession : SessionHandlerInterface
     /**
      * Helper function called on write for cache sessions.
      *
-     * @param string $id ID that uniquely identifies session in cache.
+     * @param string id ID that uniquely identifies session in cache.
      * @param string myData The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
@@ -93,7 +93,7 @@ class CacheSession : SessionHandlerInterface
     /**
      * Method called on the destruction of a cache session.
      *
-     * @param string $id ID that uniquely identifies session in cache.
+     * @param string id ID that uniquely identifies session in cache.
      * @return bool Always true.
      */
     bool destroy($id) {

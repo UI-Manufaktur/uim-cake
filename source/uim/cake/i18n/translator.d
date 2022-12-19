@@ -33,7 +33,7 @@ class Translator
     /**
      * The locale being used for translations.
      */
-    protected string $locale;
+    protected string locale;
 
     /**
      * The Package containing keys and translations.
@@ -45,13 +45,13 @@ class Translator
     /**
      * Constructor
      *
-     * @param string $locale The locale being used.
+     * @param string locale The locale being used.
      * @param \Cake\I18n\Package $package The Package containing keys and translations.
      * @param \Cake\I18n\IFormatter $formatter A message formatter.
      * @param \Cake\I18n\Translator|null $fallback A fallback translator.
      */
     this(
-        string $locale,
+        string locale,
         Package $package,
         IFormatter $formatter,
         ?Translator $fallback = null

@@ -148,10 +148,10 @@ class BodyParserMiddleware : IMiddleware
     /**
      * Decode JSON into an array.
      *
-     * @param string $body The request body to decode
+     * @param string body The request body to decode
      * @return array|null
      */
-    protected auto decodeJson(string $body) {
+    protected auto decodeJson(string body) {
       if ($body == "") {
           return [];
       }
@@ -166,10 +166,10 @@ class BodyParserMiddleware : IMiddleware
     /**
      * Decode XML into an array.
      *
-     * @param string $body The request body to decode
+     * @param string body The request body to decode
      * @return array
      */
-    protected array decodeXml(string $body) {
+    protected array decodeXml(string body) {
       try {
         $xml = Xml::build($body, ["return":"domdocument", "readFile":false]);
         // We might not get child nodes if there are nested inline entities.

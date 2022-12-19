@@ -67,12 +67,12 @@ class ServerRequest : IServerRequest
     /**
      * Base URL path.
      */
-    protected string $base;
+    protected string base;
 
     /**
      * webroot path segment for the request.
      */
-    protected string $webroot = "/";
+    protected string webroot = "/";
 
     /**
      * Whether to trust HTTP_X headers set by most load balancers.
@@ -866,7 +866,7 @@ class ServerRequest : IServerRequest
     /**
      * Update the request method and get a new instance.
      *
-     * @param string $method The HTTP method to use.
+     * @param string method The HTTP method to use.
      * @return static A new instance with the updated method.
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
@@ -1091,10 +1091,10 @@ class ServerRequest : IServerRequest
      * Only qualifiers will be extracted, any other accept extensions will be
      * discarded as they are not frequently used.
      *
-     * @param string $header Header to parse.
+     * @param string header Header to parse.
      * @return array
      */
-    protected array _parseAcceptWithQualifier(string $header) {
+    protected array _parseAcceptWithQualifier(string header) {
         $accept = [];
         $headers = explode(",", $header);
         foreach (array_filter($headers) as myValue) {
@@ -1364,7 +1364,7 @@ class ServerRequest : IServerRequest
      * The version string MUST contain only the HTTP version number (e.g.,
      * "1.1", "1.0").
      *
-     * @param string $version HTTP protocol version
+     * @param string version HTTP protocol version
      * @return static
      */
     function withProtocolVersion($version) {
@@ -1386,7 +1386,7 @@ class ServerRequest : IServerRequest
      *   variable"s value that does not exist.
      * @return string|null Either the environment value, or null if the value doesn"t exist.
      */
-    string getEnv(string myKey, Nullable!string $default = null) {
+    string getEnv(string myKey, Nullable!string default = null) {
         myKey = strtoupper(myKey);
         if (!array_key_exists(myKey, _environment)) {
             _environment[myKey] = env(myKey);
@@ -1426,7 +1426,7 @@ class ServerRequest : IServerRequest
      * If the request would be GET, response header "Allow: POST, DELETE" will be set
      * and a 405 error will be returned.
      *
-     * @param array<string>|string $methods Allowed HTTP request methods.
+     * @param array<string>|string methods Allowed HTTP request methods.
      * @return true
      * @throws \Cake\Http\Exception\MethodNotAllowedException
      */

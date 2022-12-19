@@ -206,11 +206,11 @@ class ConsoleFormatter : IFormatter
     /**
      * Style text with ANSI escape codes.
      *
-     * @param string $style The style name to use.
-     * @param string $text The text to style.
+     * @param string style The style name to use.
+     * @param string text The text to style.
      * @return string The styled output.
      */
-    protected string style(string $style, string $text) {
+    protected string style(string style, string text) {
         $code = this.styles[$style];
 
         return "\033[{$code}m{$text}\033[0m";

@@ -142,10 +142,10 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * When the token is compared to the session the token needs
      * to be unsalted.
      *
-     * @param string $token The token to salt.
+     * @param string token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    string saltToken(string $token) {
+    string saltToken(string token) {
         $decoded = base64_decode($token);
         $length = strlen($decoded);
         $salt = Security::randomBytes($length);
@@ -164,10 +164,10 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * If the token is not TOKEN_VALUE_LENGTH * 2 it is an old
      * unsalted value that is supported for backwards compatibility.
      *
-     * @param string $token The token that could be salty.
+     * @param string token The token that could be salty.
      * @return string An unsalted token.
      */
-    protected string unsaltToken(string $token) {
+    protected string unsaltToken(string token) {
         $decoded = base64_decode($token, true);
         if ($decoded == false || strlen($decoded) !== static::TOKEN_VALUE_LENGTH * 2) {
             return $token;

@@ -180,7 +180,7 @@ class ErrorHandler : BaseErrorHandler
     /**
      * Method that can be easily stubbed in testing.
      *
-     * @param \Cake\Http\Response|string $response Either the message or response object.
+     * @param \Cake\Http\Response|string response Either the message or response object.
      * @return void
      */
     protected auto _sendResponse($response): void

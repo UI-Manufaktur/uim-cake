@@ -26,7 +26,7 @@ class CorsBuilder
     /**
      * The request"s Origin header value
      */
-    protected string $_origin;
+    protected string _origin;
 
     /**
      * Whether the request was over SSL.
@@ -46,10 +46,10 @@ class CorsBuilder
      * Constructor.
      *
      * @param \Psr\Http\Message\IMessage $response The response object to add headers onto.
-     * @param string $origin The request"s Origin header.
+     * @param string origin The request"s Origin header.
      * @param bool $isSsl Whether the request was over SSL.
      */
-    this(IMessage $response, string $origin, bool $isSsl = false) {
+    this(IMessage $response, string origin, bool $isSsl = false) {
         _origin = $origin;
         _isSsl = $isSsl;
         _response = $response;
@@ -85,7 +85,7 @@ class CorsBuilder
      * Accepts a string or an array of domains that have CORS enabled.
      * You can use `*.example.com` wildcards to accept subdomains, or `*` to allow all domains
      *
-     * @param array<string>|string $domains The allowed domains
+     * @param array<string>|string domains The allowed domains
      * @return this
      */
     function allowOrigin($domains) {

@@ -170,15 +170,15 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * of the given values is performed, and, in particular, no attempt is made to
      * determine the HTTP method or URI, which must be provided explicitly.
      *
-     * @param string $method The HTTP method associated with the request.
-     * @param \Psr\Http\Message\UriInterface|string $uri The URI associated with the request. If
+     * @param string method The HTTP method associated with the request.
+     * @param \Psr\Http\Message\UriInterface|string uri The URI associated with the request. If
      *     the value is a string, the factory MUST create a UriInterface
      *     instance based on it.
      * @param array $serverParams Array of SAPI parameters with which to seed
      *     the generated request instance.
      * @return \Psr\Http\Message\IServerRequest
      */
-    function createServerRequest(string $method, $uri, array $serverParams = []): IServerRequest
+    function createServerRequest(string method, $uri, array $serverParams = []): IServerRequest
     {
         $serverParams["REQUEST_METHOD"] = $method;
         myOptions = ["environment":$serverParams];
@@ -249,11 +249,11 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     /**
      * Updates the request URI to remove the base directory.
      *
-     * @param string $base The base path to remove.
+     * @param string base The base path to remove.
      * @param \Psr\Http\Message\UriInterface $uri The uri to update.
      * @return \Psr\Http\Message\UriInterface The modified Uri instance.
      */
-    protected static function updatePath(string $base, UriInterface $uri): UriInterface
+    protected static function updatePath(string base, UriInterface $uri): UriInterface
     {
         myPath = $uri.getPath();
         if ($base !== "" && indexOf(myPath, $base) == 0) {

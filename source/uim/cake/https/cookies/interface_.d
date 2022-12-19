@@ -99,10 +99,10 @@ interface ICookie {
     /**
      * Create a cookie with an updated domain
      *
-     * @param string $domain Domain to set
+     * @param string domain Domain to set
      * @return static
      */
-    function withDomain(string $domain);
+    function withDomain(string domain);
 
     /**
      * Get the current expiry time
@@ -197,7 +197,7 @@ interface ICookie {
      *   One of ICookie::SAMESITE_* constants.
      * @return static
      */
-    function withSameSite(Nullable!string $sameSite);
+    function withSameSite(Nullable!string sameSite);
 
     /**
      * Get cookie options

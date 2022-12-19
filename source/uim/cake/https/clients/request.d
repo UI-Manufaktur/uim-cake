@@ -19,11 +19,11 @@ class Request : Message : IRequest {
      *
      * @phpstan-param array<non-empty-string, non-empty-string> $headers
      * @param string myUrl The request URL
-     * @param string $method The HTTP method to use.
+     * @param string method The HTTP method to use.
      * @param array $headers The HTTP headers to set.
      * @param array|string|null myData The request body to use.
      */
-    this(string myUrl = "", string $method = self::METHOD_GET, array $headers = [], myData = null) {
+    this(string myUrl = "", string method = self::METHOD_GET, array $headers = [], myData = null) {
         this.setMethod($method);
         this.uri = this.createUri(myUrl);
         $headers += [

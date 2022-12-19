@@ -53,10 +53,10 @@ class Basic
      * Generate basic [proxy] authentication header
      *
      * @param string myUser Username.
-     * @param string $pass Password.
+     * @param string pass Password.
      * @return string
      */
-    protected string _generateHeader(string myUser, string $pass) {
+    protected string _generateHeader(string myUser, string pass) {
         return "Basic " . base64_encode(myUser . ":" . $pass);
     }
 }

@@ -22,12 +22,12 @@ class FormDataPart
     /**
      * Name of the value.
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * Value to send.
      */
-    protected string $_value;
+    protected string _value;
 
     /**
      * Content type to use
@@ -39,7 +39,7 @@ class FormDataPart
     /**
      * Disposition to send
      */
-    protected string $_disposition;
+    protected string _disposition;
 
     /**
      * Filename to send if using files.
@@ -74,10 +74,10 @@ class FormDataPart
      *
      * @param string myName The name of the data.
      * @param string myValue The value of the data.
-     * @param string $disposition The type of disposition to use, defaults to form-data.
+     * @param string disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    this(string myName, string myValue, string $disposition = "form-data", Nullable!string $charset = null) {
+    this(string myName, string myValue, string disposition = "form-data", Nullable!string charset = null) {
         _name = myName;
         _value = myValue;
         _disposition = $disposition;
@@ -92,7 +92,7 @@ class FormDataPart
      *
      * @param string|null $disposition Use null to get/string to set.
      */
-    string disposition(Nullable!string $disposition = null) {
+    string disposition(Nullable!string disposition = null) {
         if ($disposition == null) {
             return _disposition;
         }
@@ -106,7 +106,7 @@ class FormDataPart
      * @param string|null $id The content id.
      * @return string|null
      */
-    Nullable!string contentId(Nullable!string $id = null) {
+    Nullable!string contentId(Nullable!string id = null) {
         if ($id == null) {
             return _contentId;
         }

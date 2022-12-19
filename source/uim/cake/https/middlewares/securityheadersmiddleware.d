@@ -114,11 +114,11 @@ class SecurityHeadersMiddleware : IMiddleware {
      * Referrer-Policy
      *
      * @link https://w3c.github.io/webappsec-referrer-policy
-     * @param string $policy Policy value. Available Value: "no-referrer", "no-referrer-when-downgrade", "origin",
+     * @param string policy Policy value. Available Value: "no-referrer", "no-referrer-when-downgrade", "origin",
      *     "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
      * @return this
      */
-    auto setReferrerPolicy(string $policy = self::SAME_ORIGIN) {
+    auto setReferrerPolicy(string policy = self::SAME_ORIGIN) {
         $available = [
             self::NO_REFERRER,
             self::NO_REFERRER_WHEN_DOWNGRADE,
@@ -140,11 +140,11 @@ class SecurityHeadersMiddleware : IMiddleware {
      * X-Frame-Options
      *
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
-     * @param string $option Option value. Available Values: "deny", "sameorigin", "allow-from <uri>"
+     * @param string option Option value. Available Values: "deny", "sameorigin", "allow-from <uri>"
      * @param string|null myUrl URL if mode is `allow-from`
      * @return this
      */
-    auto setXFrameOptions(string $option = self::SAMEORIGIN, Nullable!string myUrl = null) {
+    auto setXFrameOptions(string option = self::SAMEORIGIN, Nullable!string myUrl = null) {
         this.checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
         if ($option == self::ALLOW_FROM) {
@@ -181,11 +181,11 @@ class SecurityHeadersMiddleware : IMiddleware {
      * X-Permitted-Cross-Domain-Policies
      *
      * @link https://www.adobe.com/devnet/adobe-media-server/articles/cross-domain-xml-for-streaming.html
-     * @param string $policy Policy value. Available Values: "all", "none", "master-only", "by-content-type",
+     * @param string policy Policy value. Available Values: "all", "none", "master-only", "by-content-type",
      *     "by-ftp-filename"
      * @return this
      */
-    auto setCrossDomainPolicy(string $policy = self::ALL) {
+    auto setCrossDomainPolicy(string policy = self::ALL) {
         this.checkValues($policy, [
             self::ALL,
             self::NONE,

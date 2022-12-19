@@ -44,7 +44,7 @@ class ExceptionRenderer : IExceptionRenderer
     /**
      * The method corresponding to the Exception this object is for.
      */
-    protected string $method = "";
+    protected string method = "";
 
     /**
      * If set, this will be request used to create the controller that will render
@@ -238,11 +238,11 @@ class ExceptionRenderer : IExceptionRenderer
     /**
      * Render a custom error method/template.
      *
-     * @param string $method The method name to invoke.
+     * @param string method The method name to invoke.
      * @param \Throwable myException The exception to render.
      * @return \Cake\Http\Response The response to send.
      */
-    protected Response _customMethod(string $method, Throwable myException) {
+    protected Response _customMethod(string method, Throwable myException) {
         myResult = this.{$method}(myException);
         _shutdown();
         if (is_string(myResult)) {
@@ -299,11 +299,11 @@ class ExceptionRenderer : IExceptionRenderer
      * Get template for rendering exception info.
      *
      * @param \Throwable myException Exception instance.
-     * @param string $method Method name.
+     * @param string method Method name.
      * @param int $code Error code.
      * @return string Template name
      */
-    protected string _template(Throwable myException, string $method, int $code) {
+    protected string _template(Throwable myException, string method, int $code) {
         if (myException instanceof HttpException || !Configure::read("debug")) {
             return this.template = $code < 500 ? "error400" : "error500";
         }

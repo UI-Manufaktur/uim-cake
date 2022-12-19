@@ -366,7 +366,7 @@ class Response : IResponse
     /**
      * The charset the response body is encoded with
      */
-    protected string $_charset = "UTF-8";
+    protected string _charset = "UTF-8";
 
     /**
      * Holds all the cache directives that will be converted
@@ -386,12 +386,12 @@ class Response : IResponse
     /**
      * Reason Phrase
      */
-    protected string $_reasonPhrase = "OK";
+    protected string _reasonPhrase = "OK";
 
     /**
      * Stream mode options.
      */
-    protected string $_streamMode = "wb+";
+    protected string _streamMode = "wb+";
 
     /**
      * Stream target or resource object.
@@ -501,11 +501,11 @@ class Response : IResponse
     /**
      * Sets a header.
      *
-     * @phpstan-param non-empty-string $header
-     * @param string $header Header key.
+     * @phpstan-param non-empty-string header
+     * @param string header Header key.
      * @param string myValue Header value.
      */
-    protected void _setHeader(string $header, string myValue) {
+    protected void _setHeader(string header, string myValue) {
         $normalized = strtolower($header);
         this.headerNames[$normalized] = $header;
         this.headers[$header] = [myValue];
@@ -514,11 +514,11 @@ class Response : IResponse
     /**
      * Clear header
      *
-     * @phpstan-param non-empty-string $header
-     * @param string $header Header key.
+     * @phpstan-param non-empty-string header
+     * @param string header Header key.
      * @return void
      */
-    protected void _clearHeader(string $header) {
+    protected void _clearHeader(string header) {
         $normalized = strtolower($header);
         if (!isset(this.headerNames[$normalized])) {
             return;
@@ -562,7 +562,7 @@ class Response : IResponse
      * @link https://tools.ietf.org/html/rfc7231#section-6
      * @link https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      * @param int $code The 3-digit integer status code to set.
-     * @param string $reasonPhrase The reason phrase to use with the
+     * @param string reasonPhrase The reason phrase to use with the
      *     provided status code; if none is provided, implementations MAY
      *     use the defaults as suggested in the HTTP specification.
      * @return static
@@ -579,11 +579,11 @@ class Response : IResponse
      * Modifier for response status
      *
      * @param int $code The status code to set.
-     * @param string $reasonPhrase The response reason phrase.
+     * @param string reasonPhrase The response reason phrase.
      * @return void
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    protected void _setStatus(int $code, string $reasonPhrase = "") {
+    protected void _setStatus(int $code, string reasonPhrase = "") {
         if ($code < static::STATUS_CODE_MIN || $code > static::STATUS_CODE_MAX) {
             throw new InvalidArgumentException(sprintf(
                 "Invalid status code: %s. Use a valid HTTP status code in range 1xx - 5xx.",
@@ -628,7 +628,7 @@ class Response : IResponse
      * This is needed for RequestHandlerComponent and recognition of types.
      *
      * @param string myType Content type.
-     * @param array<string>|string $mimeType Definition of the mime type.
+     * @param array<string>|string mimeType Definition of the mime type.
      * @return void
      */
     void setTypeMap(string myType, $mimeType) {
@@ -700,7 +700,7 @@ class Response : IResponse
      *
      * e.g `mapType("application/pdf"); // returns "pdf"`
      *
-     * @param array|string $ctype Either a string content type to map, or an array of types.
+     * @param array|string ctype Either a string content type to map, or an array of types.
      * @return array|string|null Aliases for the types provided.
      */
     function mapType($ctype) {
@@ -727,10 +727,10 @@ class Response : IResponse
     /**
      * Get a new instance with an updated charset.
      *
-     * @param string $charset Character set string.
+     * @param string charset Character set string.
      * @return static
      */
-    function withCharset(string $charset) {
+    function withCharset(string charset) {
         $new = clone this;
         $new._charset = $charset;
         $new._setContentType(this.getType());
@@ -975,7 +975,7 @@ class Response : IResponse
      * separated string. If no parameters are passed, then an
      * array with the current Vary header value is returned
      *
-     * @param array<string>|string $cacheVariances A single Vary string or an array
+     * @param array<string>|string cacheVariances A single Vary string or an array
      *   containing the list for variances.
      * @return static
      */
@@ -999,12 +999,12 @@ class Response : IResponse
      * they differ by a few bytes. This permits the Client to decide whether they should
      * use the cached data.
      *
-     * @param string $hash The unique hash that identifies this response
+     * @param string hash The unique hash that identifies this response
      * @param bool $weak Whether the response is semantically the same as
      *   other with the same hash or not. Defaults to false
      * @return static
      */
-    function withEtag(string $hash, bool $weak = false) {
+    function withEtag(string hash, bool $weak = false) {
         $hash = sprintf("%s"%s"", $weak ? "W/" : "", $hash);
 
         return this.withHeader("Etag", $hash);
@@ -1373,7 +1373,7 @@ class Response : IResponse
      * @param string|null $string The string to be sent
      * @return static
      */
-    function withStringBody(Nullable!string $string) {
+    function withStringBody(Nullable!string string) {
         $new = clone this;
         $new._createStream();
         $new.stream.write((string)$string);
@@ -1422,10 +1422,10 @@ class Response : IResponse
      * in the response.
      *
      * @param \SplFileInfo myfile The file to set a range on.
-     * @param string $httpRange The range to use.
+     * @param string httpRange The range to use.
      * @return void
      */
-    protected void _fileRange(SplFileInfo myfile, string $httpRange) {
+    protected void _fileRange(SplFileInfo myfile, string httpRange) {
         myfileSize = myfile.getSize();
         $lastByte = myfileSize - 1;
         $start = 0;

@@ -18,7 +18,7 @@ class HtmlFormatter : IFormatter
     /**
      * Random id so that HTML ids are not shared between dump outputs.
      */
-    protected string $id;
+    protected string id;
 
     /**
      * Constructor.
@@ -237,11 +237,11 @@ class HtmlFormatter : IFormatter
     /**
      * Style text with HTML class names
      *
-     * @param string $style The style name to use.
-     * @param string $text The text to style.
+     * @param string style The style name to use.
+     * @param string text The text to style.
      * @return string The styled output.
      */
-    protected string style(string $style, string $text) {
+    protected string style(string style, string text) {
         return sprintf(
             "<span class="cake-dbg-%s">%s</span>",
             $style,

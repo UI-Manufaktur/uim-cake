@@ -14,7 +14,7 @@ class FormData : Countable {
     /**
      * Boundary marker.
      */
-    protected string $_boundary;
+    protected string _boundary;
 
     /**
      * Whether this formdata object has attached files.

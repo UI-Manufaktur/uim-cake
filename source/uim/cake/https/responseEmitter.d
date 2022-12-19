@@ -192,7 +192,7 @@ class ResponseEmitter : EmitterInterface
     /**
      * Helper methods to set cookie.
      *
-     * @param \Cake\Http\Cookie\ICookie|string $cookie Cookie.
+     * @param \Cake\Http\Cookie\ICookie|string cookie Cookie.
      */
     protected bool setCookie($cookie) {
         if (is_string($cookie)) {
@@ -244,11 +244,11 @@ class ResponseEmitter : EmitterInterface
      * Parse content-range header
      * https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16
      *
-     * @param string $header The Content-Range header to parse.
+     * @param string header The Content-Range header to parse.
      * @return array|false [unit, first, last, length]; returns false if no
      *     content range or an invalid content range is provided
      */
-    protected auto parseContentRange(string $header) {
+    protected auto parseContentRange(string header) {
         if (preg_match("/(?P<unit>[\w]+)\s+(?P<first>\d+)-(?P<last>\d+)\/(?P<length>\d+|\*)/", $header, $matches)) {
             return [
                 $matches["unit"],

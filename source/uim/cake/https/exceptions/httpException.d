@@ -28,7 +28,7 @@ class HttpException : CakeException {
     /**
      * Set a single HTTP response header.
      *
-     * @param string $header Header name
+     * @param string header Header name
      * @param array<string>|string|null myValue Header value
      */
     void setHeader(string aHeader, myValue = null) {

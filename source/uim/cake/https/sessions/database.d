@@ -89,12 +89,12 @@ class DatabaseSession : SessionHandlerInterface
     /**
      * Method used to read from a database session.
      *
-     * @param string $id ID that uniquely identifies session in database.
+     * @param string id ID that uniquely identifies session in database.
      * @return string|false Session data or false if it does not exist.
      */
     #[\ReturnTypeWillChange]
     function read($id) {
-        /** @var string $pkField */
+        /** @var string pkField */
         $pkField = _table.getPrimaryKey();
         myResult = _table
             .find("all")
@@ -123,7 +123,7 @@ class DatabaseSession : SessionHandlerInterface
     /**
      * Helper function called on write for database sessions.
      *
-     * @param string $id ID that uniquely identifies session in database.
+     * @param string id ID that uniquely identifies session in database.
      * @param string myData The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
@@ -132,7 +132,7 @@ class DatabaseSession : SessionHandlerInterface
             return false;
         }
 
-        /** @var string $pkField */
+        /** @var string pkField */
         $pkField = _table.getPrimaryKey();
         $session = _table.newEntity([
             $pkField: $id,
@@ -146,11 +146,11 @@ class DatabaseSession : SessionHandlerInterface
     /**
      * Method called on the destruction of a database session.
      *
-     * @param string $id ID that uniquely identifies session in database.
+     * @param string id ID that uniquely identifies session in database.
      * @return bool True for successful delete, false otherwise.
      */
     bool destroy($id) {
-        /** @var string $pkField */
+        /** @var string pkField */
         $pkField = _table.getPrimaryKey();
         _table.deleteAll([$pkField: $id]);
 

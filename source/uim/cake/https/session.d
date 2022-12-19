@@ -496,7 +496,7 @@ class Session
      * @param string|null $id Id to replace the current session id
      * @return string Session id
      */
-    string id(Nullable!string $id = null) {
+    string id(Nullable!string id = null) {
         if ($id !== null && !headers_sent()) {
             session_id($id);
         }

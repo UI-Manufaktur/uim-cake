@@ -165,7 +165,7 @@ class Curl : IAdapter
      * Convert the raw curl response into an Http\Client\Response
      *
      * @param resource|\CurlHandle $handle Curl handle
-     * @param string $responseData string The response data from curl_exec
+     * @param string responseData string The response data from curl_exec
      * @return array<\Cake\Http\Client\Response>
      * @psalm-suppress UndefinedDocblockClass
      */

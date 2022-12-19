@@ -82,7 +82,7 @@ class Response : Message : IResponse
     /**
      * The reason phrase for the status code
      */
-    protected string $reasonPhrase;
+    protected string reasonPhrase;
 
     /**
      * Cached decoded XML data.
@@ -102,9 +102,9 @@ class Response : Message : IResponse
      * Constructor
      *
      * @param array $headers Unparsed headers.
-     * @param string $body The response body.
+     * @param string body The response body.
      */
-    this(array $headers = [], string $body = "") {
+    this(array $headers = [], string body = "") {
         _parseHeaders($headers);
         if (this.getHeaderLine("Content-Encoding") == "gzip") {
             $body = _decodeGzipBody($body);
@@ -121,11 +121,11 @@ class Response : Message : IResponse
      * Looks for gzip signatures, and if gzinflate() exists,
      * the body will be decompressed.
      *
-     * @param string $body Gzip encoded body.
+     * @param string body Gzip encoded body.
      * @return string
      * @throws \RuntimeException When attempting to decode gzip content without gzinflate.
      */
-    protected string _decodeGzipBody(string $body) {
+    protected string _decodeGzipBody(string body) {
         if (!function_exists("gzinflate")) {
             throw new RuntimeException("Cannot decompress gzip response body without gzinflate()");
         }
@@ -220,7 +220,7 @@ class Response : Message : IResponse
      * {@inheritDoc}
      *
      * @param int $code The status code to set.
-     * @param string $reasonPhrase The status reason phrase.
+     * @param string reasonPhrase The status reason phrase.
      * @return static A copy of the current object with an updated status code.
      */
     function withStatus($code, $reasonPhrase = "") {

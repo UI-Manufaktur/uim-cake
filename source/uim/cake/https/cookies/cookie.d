@@ -65,7 +65,7 @@ class Cookie : ICookie
     /**
      * Domain
      */
-    protected string $domain = "";
+    protected string domain = "";
 
     /**
      * Secure
@@ -125,10 +125,10 @@ class Cookie : ICookie
         myValue = "",
         ?IDateTime $expiresAt = null,
         Nullable!string myPath = null,
-        Nullable!string $domain = null,
+        Nullable!string domain = null,
         ?bool $secure = null,
         ?bool $httpOnly = null,
-        Nullable!string $sameSite = null
+        Nullable!string sameSite = null
     ) {
         this.validateName(myName);
         this.name = myName;
@@ -244,12 +244,12 @@ class Cookie : ICookie
     /**
      * Create Cookie instance from "set-cookie" header string.
      *
-     * @param string $cookie Cookie header string.
+     * @param string cookie Cookie header string.
      * @param array<string, mixed> $defaults Default attributes.
      * @return static
      * @see \Cake\Http\Cookie\Cookie::setDefaults()
      */
-    static function createFromHeaderString(string $cookie, array $defaults = []) {
+    static function createFromHeaderString(string cookie, array $defaults = []) {
         if (indexOf($cookie, "";"") !== false) {
             $cookie = str_replace("";"", "{__cookie_replace__}", $cookie);
             $parts = str_replace("{__cookie_replace__}", "";"", explode(";", $cookie));
@@ -434,7 +434,7 @@ class Cookie : ICookie
     }
 
 
-    function withDomain(string $domain) {
+    function withDomain(string domain) {
         $new = clone this;
         $new.domain = $domain;
 
@@ -535,7 +535,7 @@ class Cookie : ICookie
     }
 
 
-    function withSameSite(Nullable!string $sameSite) {
+    function withSameSite(Nullable!string sameSite) {
         if ($sameSite !== null) {
             this.validateSameSiteValue($sameSite);
         }
@@ -549,11 +549,11 @@ class Cookie : ICookie
     /**
      * Check that value passed for SameSite is valid.
      *
-     * @param string $sameSite SameSite value
+     * @param string sameSite SameSite value
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected static function validateSameSiteValue(string $sameSite) {
+    protected static function validateSameSiteValue(string sameSite) {
       if (!in_array($sameSite, ICookie::SAMESITE_VALUES, true)) {
         throw new InvalidArgumentException(
             "Samesite value must be either of: " . implode(", ", ICookie::SAMESITE_VALUES)
@@ -690,10 +690,10 @@ class Cookie : ICookie
      * Explode method to return array from string set in CookieComponent::_flatten()
      * Maintains reading backwards compatibility with 1.x CookieComponent::_flatten().
      *
-     * @param string $string A string containing JSON encoded data, or a bare string.
+     * @param string string A string containing JSON encoded data, or a bare string.
      * @return array|string Map of key and values
      */
-    protected auto _expand(string $string) {
+    protected auto _expand(string string) {
         this.isExpanded = true;
         $first = substr($string, 0, 1);
         if ($first == "{" || $first == "[") {

@@ -323,7 +323,7 @@ class File {
      * @param string|null $ext The name of the extension
      * @return string the file basename.
      */
-    protected static string _basename(string myPath, Nullable!string $ext = null) {
+    protected static string _basename(string myPath, Nullable!string ext = null) {
         // check for multibyte string and use basename() if not found
         if (mb_strlen(myPath) == strlen(myPath)) {
             return $ext == null ? basename(myPath) : basename(myPath, $ext);
@@ -349,7 +349,7 @@ class File {
      * @param string|null $ext The name of the extension to make safe if different from this.ext
      * @return string The extension of the file
      */
-    string safe(Nullable!string myName = null, Nullable!string $ext = null) {
+    string safe(Nullable!string myName = null, Nullable!string ext = null) {
         if (!myName) {
             myName = (string)this.name;
         }
@@ -525,11 +525,11 @@ class File {
     /**
      * Copy the File to $dest
      *
-     * @param string $dest Absolute path to copy the file to.
+     * @param string dest Absolute path to copy the file to.
      * @param bool $overwrite Overwrite $dest if exists
      * @return bool Success
      */
-    bool copy(string $dest, bool $overwrite = true) {
+    bool copy(string dest, bool $overwrite = true) {
         if (!this.exists() || is_file($dest) && !$overwrite) {
             return false;
         }
@@ -583,8 +583,8 @@ class File {
     /**
      * Searches for a given text and replaces the text if found.
      *
-     * @param array<string>|string $search Text(s) to search for.
-     * @param array<string>|string $replace Text(s) to replace with.
+     * @param array<string>|string search Text(s) to search for.
+     * @param array<string>|string replace Text(s) to replace with.
      * @return bool Success
      */
     bool replaceText($search, $replace) {

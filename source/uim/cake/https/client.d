@@ -373,13 +373,13 @@ class Client : ClientInterface
     /**
      * Helper method for doing non-GET requests.
      *
-     * @param string $method HTTP method.
+     * @param string method HTTP method.
      * @param string myUrl URL to request.
      * @param mixed myData The request body.
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
      * @return \Cake\Http\Client\Response
      */
-    protected Response _doRequest(string $method, string myUrl, myData, myOptions) {
+    protected Response _doRequest(string method, string myUrl, myData, myOptions) {
         myRequest = _createRequest(
             $method,
             myUrl,
@@ -473,12 +473,12 @@ class Client : ClientInterface
      *
      * - `match` An additional closure to match requests with.
      *
-     * @param string $method The HTTP method being mocked.
+     * @param string method The HTTP method being mocked.
      * @param string myUrl The URL being matched. See above for examples.
      * @param \Cake\Http\Client\Response $response The response that matches the request.
      * @param array<string, mixed> myOptions See above.
      */
-    static void addMockResponse(string $method, string myUrl, Response $response, array myOptions = []) {
+    static void addMockResponse(string method, string myUrl, Response $response, array myOptions = []) {
         if (!static::$_mockAdapter) {
             static::$_mockAdapter = new MockAdapter();
         }
@@ -560,13 +560,13 @@ class Client : ClientInterface
     /**
      * Creates a new request object based on the parameters.
      *
-     * @param string $method HTTP method name.
+     * @param string method HTTP method name.
      * @param string myUrl The url including query string.
      * @param mixed myData The request body.
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
      * @return \Cake\Http\Client\Request
      */
-    protected Request _createRequest(string $method, string myUrl, myData, myOptions) {
+    protected Request _createRequest(string method, string myUrl, myData, myOptions) {
         /** @var array<non-empty-string, non-empty-string> $headers */
         $headers = (array)(myOptions["headers"] ?? []);
         if (isset(myOptions["type"])) {

@@ -24,7 +24,7 @@ class PropertyNode : INode {
      * @param string|null $visibility The visibility of the property.
      * @param \Cake\Error\Debug\INode myValue The property value node.
      */
-    this(string myName, Nullable!string $visibility, INode myValue) {
+    this(string myName, Nullable!string visibility, INode myValue) {
         this.name = myName;
         this.visibility = $visibility;
         this.value = myValue;

@@ -251,10 +251,10 @@ class Stream : IAdapter
      * Build a response object
      *
      * @param array $headers Unparsed headers.
-     * @param string $body The response body.
+     * @param string body The response body.
      * @return \Cake\Http\Client\Response
      */
-    protected Response _buildResponse(array $headers, string $body) {
+    protected Response _buildResponse(array $headers, string body) {
         return new Response($headers, $body);
     }
 

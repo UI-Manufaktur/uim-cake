@@ -224,12 +224,12 @@ class CookieCollection : IteratorAggregate, Countable {
     /**
      * Find cookies matching the scheme, host, and path
      *
-     * @param string $scheme The http scheme to match
-     * @param string $host The host to match.
+     * @param string scheme The http scheme to match
+     * @param string host The host to match.
      * @param string myPath The path to match
      * @return array<string, mixed> An array of cookie name/value pairs
      */
-    protected auto findMatchingCookies(string $scheme, string $host, string myPath): array
+    protected auto findMatchingCookies(string scheme, string host, string myPath): array
     {
         $out = [];
         $now = new DateTimeImmutable("now", new DateTimeZone("UTC"));
@@ -289,11 +289,11 @@ class CookieCollection : IteratorAggregate, Countable {
     /**
      * Remove expired cookies from the collection.
      *
-     * @param string $host The host to check for expired cookies on.
+     * @param string host The host to check for expired cookies on.
      * @param string myPath The path to check for expired cookies on.
      * @return void
      */
-    protected void removeExpiredCookies(string $host, string myPath) {
+    protected void removeExpiredCookies(string host, string myPath) {
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         $hostPattern = "/" . preg_quote($host, "/") . "$/";
 

@@ -227,11 +227,11 @@ class Folder
     /**
      * Returns an array of all matching files in current directory.
      *
-     * @param string $regexpPattern Preg_match pattern (Defaults to: .*)
+     * @param string regexpPattern Preg_match pattern (Defaults to: .*)
      * @param string|bool $sort Whether results should be sorted.
      * @return Files that match given pattern
      */
-    string[] find(string $regexpPattern = ".*", $sort = false) {
+    string[] find(string regexpPattern = ".*", $sort = false) {
         [, myfiles] = this.read($sort);
 
         return array_values(preg_grep("/^" . $regexpPattern . "$/i", myfiles));
@@ -240,11 +240,11 @@ class Folder
     /**
      * Returns an array of all matching files in and below current directory.
      *
-     * @param string $pattern Preg_match pattern (Defaults to: .*)
+     * @param string pattern Preg_match pattern (Defaults to: .*)
      * @param string|bool $sort Whether results should be sorted.
      * @return array Files matching $pattern
      */
-    function findRecursive(string $pattern = ".*", $sort = false): array
+    function findRecursive(string pattern = ".*", $sort = false): array
     {
         if (!this.pwd()) {
             return [];
@@ -259,11 +259,11 @@ class Folder
     /**
      * Private helper function for findRecursive.
      *
-     * @param string $pattern Pattern to match against
+     * @param string pattern Pattern to match against
      * @param bool $sort Whether results should be sorted.
      * @return array Files matching pattern
      */
-    protected auto _findRecursive(string $pattern, bool $sort = false): array
+    protected auto _findRecursive(string pattern, bool $sort = false): array
     {
         [$dirs, myfiles] = this.read($sort);
         $found = [];
@@ -362,7 +362,7 @@ class Folder
      * Returns myPath with $element added, with correct slash in-between.
      *
      * @param string myPath Path
-     * @param array<string>|string $element Element to add at end of path
+     * @param array<string>|string element Element to add at end of path
      * @return string Combined path
      */
     static string addPathElement(string myPath, $element) {
@@ -530,7 +530,7 @@ class Folder
         }
 
         /**
-         * @var string $itemPath
+         * @var string itemPath
          * @var \RecursiveDirectoryIterator $fsIterator
          */
         foreach ($iterator as $itemPath: $fsIterator) {
@@ -740,11 +740,11 @@ class Folder
      * - `scheme` Folder::MERGE, Folder::OVERWRITE, Folder::SKIP
      * - `recursive` Whether to copy recursively or not (default: true - recursive)
      *
-     * @param string $to The directory to copy to.
+     * @param string to The directory to copy to.
      * @param array<string, mixed> myOptions Array of options (see above).
      * @return bool Success.
      */
-    bool copy(string $to, array myOptions = []) {
+    bool copy(string to, array myOptions = []) {
         if (!this.pwd()) {
             return false;
         }
@@ -840,11 +840,11 @@ class Folder
      * - `scheme` Folder::MERGE, Folder::OVERWRITE, Folder::SKIP
      * - `recursive` Whether to copy recursively or not (default: true - recursive)
      *
-     * @param string $to The directory to move to.
+     * @param string to The directory to move to.
      * @param array<string, mixed> myOptions Array of options (see above).
      * @return bool Success
      */
-    bool move(string $to, array myOptions = []) {
+    bool move(string to, array myOptions = []) {
         myOptions += ["from":this.path, "mode":this.mode, "skip":[], "recursive":true];
 
         if (this.copy($to, myOptions) && this.delete(myOptions["from"])) {
