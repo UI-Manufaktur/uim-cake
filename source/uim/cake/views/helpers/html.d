@@ -183,7 +183,7 @@ class HtmlHelper : Helper {
         if (myOptions["block"] == true) {
             myOptions["block"] = __FUNCTION__;
         }
-        this._View.append(myOptions["block"], $out);
+        _View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -263,7 +263,7 @@ class HtmlHelper : Helper {
             unset(myOptions["confirm"]);
         }
         if ($confirmMessage) {
-            $confirm = this._confirm("return true;", "return false;");
+            $confirm = _confirm("return true;", "return false;");
             myOptions["data-confirm-message"] = $confirmMessage;
             myOptions["onclick"] = myTemplater.format("confirmJs", [
                 "confirmMessage": h($confirmMessage),
@@ -357,7 +357,7 @@ class HtmlHelper : Helper {
             "once": true,
             "block": null,
             "rel": "stylesheet",
-            "nonce": this._View.getRequest().getAttribute("cspStyleNonce"),
+            "nonce": _View.getRequest().getAttribute("cspStyleNonce"),
         ];
 
         if (is_array(myPath)) {
@@ -375,11 +375,11 @@ class HtmlHelper : Helper {
         myUrl = this.Url.css(myPath, myOptions);
         myOptions = array_diff_key(myOptions, ["fullBase": null, "pathPrefix": null]);
 
-        if (myOptions["once"] && isset(this._includedAssets[__METHOD__][myPath])) {
+        if (myOptions["once"] && isset(_includedAssets[__METHOD__][myPath])) {
             return null;
         }
         unset(myOptions["once"]);
-        this._includedAssets[__METHOD__][myPath] = true;
+        _includedAssets[__METHOD__][myPath] = true;
 
         myTemplater = this.templater();
         if (myOptions["rel"] == "import") {
@@ -401,7 +401,7 @@ class HtmlHelper : Helper {
         if (myOptions["block"] == true) {
             myOptions["block"] = __FUNCTION__;
         }
-        this._View.append(myOptions["block"], $out);
+        _View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -455,7 +455,7 @@ class HtmlHelper : Helper {
         $defaults = [
             "block": null,
             "once": true,
-            "nonce": this._View.getRequest().getAttribute("cspScriptNonce"),
+            "nonce": _View.getRequest().getAttribute("cspScriptNonce"),
         ];
         myOptions += $defaults;
 
@@ -474,10 +474,10 @@ class HtmlHelper : Helper {
         myUrl = this.Url.script(myUrl, myOptions);
         myOptions = array_diff_key(myOptions, ["fullBase": null, "pathPrefix": null]);
 
-        if (myOptions["once"] && isset(this._includedAssets[__METHOD__][myUrl])) {
+        if (myOptions["once"] && isset(_includedAssets[__METHOD__][myUrl])) {
             return null;
         }
-        this._includedAssets[__METHOD__][myUrl] = true;
+        _includedAssets[__METHOD__][myUrl] = true;
 
         $out = this.formatTemplate("javascriptlink", [
             "url": myUrl,
@@ -490,7 +490,7 @@ class HtmlHelper : Helper {
         if (myOptions["block"] == true) {
             myOptions["block"] = __FUNCTION__;
         }
-        this._View.append(myOptions["block"], $out);
+        _View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -510,7 +510,7 @@ class HtmlHelper : Helper {
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
     Nullable!string scriptBlock(string $script, array myOptions = []) {
-        myOptions += ["block": null, "nonce": this._View.getRequest().getAttribute("cspScriptNonce")];
+        myOptions += ["block": null, "nonce": _View.getRequest().getAttribute("cspScriptNonce")];
 
         $out = this.formatTemplate("javascriptblock", [
             "attrs": this.templater().formatAttributes(myOptions, ["block"]),
@@ -523,7 +523,7 @@ class HtmlHelper : Helper {
         if (myOptions["block"] == true) {
             myOptions["block"] = "script";
         }
-        this._View.append(myOptions["block"], $out);
+        _View.append(myOptions["block"], $out);
 
         return null;
     }
@@ -542,7 +542,7 @@ class HtmlHelper : Helper {
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
     void scriptStart(array myOptions = []) {
-        this._scriptBlockOptions = myOptions;
+        _scriptBlockOptions = myOptions;
         ob_start();
     }
 
@@ -556,8 +556,8 @@ class HtmlHelper : Helper {
      */
     Nullable!string scriptEnd() {
         $buffer = ob_get_clean();
-        myOptions = this._scriptBlockOptions;
-        this._scriptBlockOptions = [];
+        myOptions = _scriptBlockOptions;
+        _scriptBlockOptions = [];
 
         return this.scriptBlock($buffer, myOptions);
     }
@@ -734,7 +734,7 @@ class HtmlHelper : Helper {
         $out = [];
         foreach (myData as $line) {
             myCount++;
-            $cellsOut = this._renderCells($line, $useCount);
+            $cellsOut = _renderCells($line, $useCount);
             $opts = myCount % 2 ? $oddTrOptions : $evenTrOptions;
             /** @var array<string, mixed> myOptions */
             myOptions = (array)$opts;
@@ -972,7 +972,7 @@ class HtmlHelper : Helper {
                 }
                 if (!isset($source["type"])) {
                     $ext = pathinfo($source["src"], PATHINFO_EXTENSION);
-                    $source["type"] = this._View.getResponse().getMimeType($ext);
+                    $source["type"] = _View.getResponse().getMimeType($ext);
                 }
                 $source["src"] = this.Url.assetUrl($source["src"], myOptions);
                 $sourceTags .= this.formatTemplate("tagselfclosing", [
@@ -995,7 +995,7 @@ class HtmlHelper : Helper {
                 $mimeType = myPath[0]["type"];
             } else {
                 /** @var string $mimeType */
-                $mimeType = this._View.getResponse().getMimeType(pathinfo(myPath, PATHINFO_EXTENSION));
+                $mimeType = _View.getResponse().getMimeType(pathinfo(myPath, PATHINFO_EXTENSION));
             }
             if (preg_match("#^video/#", $mimeType)) {
                 $tag = "video";
@@ -1042,7 +1042,7 @@ class HtmlHelper : Helper {
      */
     string nestedList(array $list, array myOptions = [], array $itemOptions = []) {
         myOptions += ["tag": "ul"];
-        myItems = this._nestedListItem($list, myOptions, $itemOptions);
+        myItems = _nestedListItem($list, myOptions, $itemOptions);
 
         return this.formatTemplate(myOptions["tag"], [
             "attrs": this.templater().formatAttributes(myOptions, ["tag"]),

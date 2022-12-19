@@ -43,10 +43,10 @@ class FileWidget : BasicWidget
 
         unset(myData["val"]);
 
-        return this._templates.format("file", [
+        return _templates.format("file", [
             "name": myData["name"],
             "templateVars": myData["templateVars"],
-            "attrs": this._templates.formatAttributes(
+            "attrs": _templates.formatAttributes(
                 myData,
                 ["name"]
             ),

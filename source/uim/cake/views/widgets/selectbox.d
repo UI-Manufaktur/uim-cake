@@ -104,7 +104,7 @@ class SelectBoxWidget : BasicWidget
     string render(array myData, IContext $context) {
         myData += this.mergeDefaults(myData, $context);
 
-        myOptions = this._renderContent(myData);
+        myOptions = _renderContent(myData);
         myName = myData["name"];
         unset(myData["name"], myData["options"], myData["empty"], myData["val"], myData["escape"]);
         if (isset(myData["disabled"]) && is_array(myData["disabled"])) {
@@ -116,9 +116,9 @@ class SelectBoxWidget : BasicWidget
             myTemplate = "selectMultiple";
             unset(myData["multiple"]);
         }
-        $attrs = this._templates.formatAttributes(myData);
+        $attrs = _templates.formatAttributes(myData);
 
-        return this._templates.format(myTemplate, [
+        return _templates.format(myTemplate, [
             "name": myName,
             "templateVars": myData["templateVars"],
             "attrs": $attrs,
@@ -138,7 +138,7 @@ class SelectBoxWidget : BasicWidget
         }
 
         if (!empty(myData["empty"])) {
-            myOptions = this._emptyValue(myData["empty"]) + (array)myOptions;
+            myOptions = _emptyValue(myData["empty"]) + (array)myOptions;
         }
         if (empty(myOptions)) {
             return [];
@@ -151,7 +151,7 @@ class SelectBoxWidget : BasicWidget
         }
         myTemplateVars = myData["templateVars"];
 
-        return this._renderOptions(myOptions, $disabled, $selected, myTemplateVars, myData["escape"]);
+        return _renderOptions(myOptions, $disabled, $selected, myTemplateVars, myData["escape"]);
     }
 
     /**
@@ -201,13 +201,13 @@ class SelectBoxWidget : BasicWidget
             $label = $optgroup["text"];
             $attrs = (array)$optgroup;
         }
-        myGroupOptions = this._renderOptions($opts, $disabled, $selected, myTemplateVars, $escape);
+        myGroupOptions = _renderOptions($opts, $disabled, $selected, myTemplateVars, $escape);
 
-        return this._templates.format("optgroup", [
+        return _templates.format("optgroup", [
             "label": $escape ? h($label) : $label,
             "content": implode("", myGroupOptions),
             "templateVars": myTemplateVars,
-            "attrs": this._templates.formatAttributes($attrs, ["text", "options"]),
+            "attrs": _templates.formatAttributes($attrs, ["text", "options"]),
         ]);
     }
 
@@ -242,7 +242,7 @@ class SelectBoxWidget : BasicWidget
                     )
                 )
             ) {
-                $out[] = this._renderOptgroup((string)myKey, $val, $disabled, $selected, myTemplateVars, $escape);
+                $out[] = _renderOptgroup((string)myKey, $val, $disabled, $selected, myTemplateVars, $escape);
                 continue;
             }
 
@@ -257,10 +257,10 @@ class SelectBoxWidget : BasicWidget
                 myKey = $optAttrs["value"];
             }
             $optAttrs["templateVars"] = $optAttrs["templateVars"] ?? [];
-            if (this._isSelected((string)myKey, $selected)) {
+            if (_isSelected((string)myKey, $selected)) {
                 $optAttrs["selected"] = true;
             }
-            if (this._isDisabled((string)myKey, $disabled)) {
+            if (_isDisabled((string)myKey, $disabled)) {
                 $optAttrs["disabled"] = true;
             }
             if (!empty(myTemplateVars)) {
@@ -268,11 +268,11 @@ class SelectBoxWidget : BasicWidget
             }
             $optAttrs["escape"] = $escape;
 
-            $out[] = this._templates.format("option", [
+            $out[] = _templates.format("option", [
                 "value": $escape ? h($optAttrs["value"]) : $optAttrs["value"],
                 "text": $escape ? h($optAttrs["text"]) : $optAttrs["text"],
                 "templateVars": $optAttrs["templateVars"],
-                "attrs": this._templates.formatAttributes($optAttrs, ["text", "value"]),
+                "attrs": _templates.formatAttributes($optAttrs, ["text", "value"]),
             ]);
         }
 

@@ -26,11 +26,11 @@ trait ViewVarsTrait {
      */
     function viewBuilder(): ViewBuilder
     {
-        if (!isset(this._viewBuilder)) {
-            this._viewBuilder = new ViewBuilder();
+        if (!isset(_viewBuilder)) {
+            _viewBuilder = new ViewBuilder();
         }
 
-        return this._viewBuilder;
+        return _viewBuilder;
     }
 
     /**

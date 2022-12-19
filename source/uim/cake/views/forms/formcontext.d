@@ -26,7 +26,7 @@ class FormContext : IContext
         $context += [
             "entity" => null,
         ];
-        this._form = $context["entity"];
+        _form = $context["entity"];
     }
 
     /**
@@ -62,7 +62,7 @@ class FormContext : IContext
             "schemaDefault" => true,
         ];
 
-        $val = this._form.getData(myField);
+        $val = _form.getData(myField);
         if ($val !== null) {
             return $val;
         }
@@ -71,7 +71,7 @@ class FormContext : IContext
             return myOptions["default"];
         }
 
-        return this._schemaDefault(myField);
+        return _schemaDefault(myField);
     }
 
     /**
@@ -81,7 +81,7 @@ class FormContext : IContext
      * @return mixed
      */
     protected auto _schemaDefault(string myField) {
-        myField = this._form.getSchema().field(myField);
+        myField = _form.getSchema().field(myField);
         if (myField) {
             return myField["default"];
         }
@@ -92,7 +92,7 @@ class FormContext : IContext
 
     function isRequired(string myField): ?bool
     {
-        $validator = this._form.getValidator();
+        $validator = _form.getValidator();
         if (!$validator.hasField(myField)) {
             return null;
         }
@@ -106,7 +106,7 @@ class FormContext : IContext
     Nullable!string getRequiredMessage(string myField) {
         $parts = explode(".", myField);
 
-        $validator = this._form.getValidator();
+        $validator = _form.getValidator();
         myFieldName = array_pop($parts);
         if (!$validator.hasField(myFieldName)) {
             return null;
@@ -122,7 +122,7 @@ class FormContext : IContext
 
 
     Nullable!int getMaxLength(string myField) {
-        $validator = this._form.getValidator();
+        $validator = _form.getValidator();
         if (!$validator.hasField(myField)) {
             return null;
         }
@@ -143,19 +143,19 @@ class FormContext : IContext
 
     function fieldNames(): array
     {
-        return this._form.getSchema().fields();
+        return _form.getSchema().fields();
     }
 
 
     Nullable!string type(string myField) {
-        return this._form.getSchema().fieldType(myField);
+        return _form.getSchema().fieldType(myField);
     }
 
 
     function attributes(string myField): array
     {
         return array_intersect_key(
-            (array)this._form.getSchema().field(myField),
+            (array)_form.getSchema().field(myField),
             array_flip(static::VALID_ATTRIBUTES)
         );
     }
@@ -168,6 +168,6 @@ class FormContext : IContext
 
     function error(string myField): array
     {
-        return (array)Hash::get(this._form.getErrors(), myField, []);
+        return (array)Hash::get(_form.getErrors(), myField, []);
     }
 }

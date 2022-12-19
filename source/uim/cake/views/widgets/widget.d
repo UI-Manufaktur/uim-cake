@@ -39,8 +39,8 @@ class YearWidget : BasicWidget
      * @param \Cake\View\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
      */
     this(StringTemplate myTemplates, SelectBoxWidget $selectBox) {
-        this._select = $selectBox;
-        this._templates = myTemplates;
+        _select = $selectBox;
+        _templates = myTemplates;
     }
 
     /**
@@ -86,6 +86,6 @@ class YearWidget : BasicWidget
 
         unset(myData["order"], myData["min"], myData["max"]);
 
-        return this._select.render(myData, $context);
+        return _select.render(myData, $context);
     }
 }

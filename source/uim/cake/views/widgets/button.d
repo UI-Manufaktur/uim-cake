@@ -25,7 +25,7 @@ class ButtonWidget : IWidget
      * @param \Cake\View\StringTemplate myTemplates Templates list.
      */
     this(StringTemplate myTemplates) {
-        this._templates = myTemplates;
+        _templates = myTemplates;
     }
 
     /**
@@ -53,10 +53,10 @@ class ButtonWidget : IWidget
             "templateVars": [],
         ];
 
-        return this._templates.format("button", [
+        return _templates.format("button", [
             "text": myData["escapeTitle"] ? h(myData["text"]) : myData["text"],
             "templateVars": myData["templateVars"],
-            "attrs": this._templates.formatAttributes(myData, ["text", "escapeTitle"]),
+            "attrs": _templates.formatAttributes(myData, ["text", "escapeTitle"]),
         ]);
     }
 

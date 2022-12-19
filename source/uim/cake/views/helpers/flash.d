@@ -52,7 +52,7 @@ class FlashHelper : Helper
      *   in session.
      */
     Nullable!string render(string myKey = "flash", array myOptions = []) {
-        myMessages = this._View.getRequest().getFlash().consume(myKey);
+        myMessages = _View.getRequest().getFlash().consume(myKey);
         if (myMessages == null) {
             return null;
         }
@@ -60,7 +60,7 @@ class FlashHelper : Helper
         $out = "";
         foreach (myMessages as myMessage) {
             myMessage = myOptions + myMessage;
-            $out .= this._View.element(myMessage["element"], myMessage);
+            $out .= _View.element(myMessage["element"], myMessage);
         }
 
         return $out;

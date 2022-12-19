@@ -65,10 +65,10 @@ class ViewBlock
      * @return void
      */
     void start(string myName, string myMode = ViewBlock::OVERRIDE) {
-        if (array_key_exists(myName, this._active)) {
+        if (array_key_exists(myName, _active)) {
             throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", myName));
         }
-        this._active[myName] = myMode;
+        _active[myName] = myMode;
         ob_start();
     }
 
@@ -79,26 +79,26 @@ class ViewBlock
      * @see \Cake\View\ViewBlock::start()
      */
     void end() {
-        if (this._discardActiveBufferOnEnd) {
-            this._discardActiveBufferOnEnd = false;
+        if (_discardActiveBufferOnEnd) {
+            _discardActiveBufferOnEnd = false;
             ob_end_clean();
 
             return;
         }
 
-        if (!this._active) {
+        if (!_active) {
             return;
         }
 
-        myMode = end(this._active);
-        $active = key(this._active);
+        myMode = end(_active);
+        $active = key(_active);
         myContents = ob_get_clean();
         if (myMode == ViewBlock::OVERRIDE) {
-            this._blocks[$active] = (string)myContents;
+            _blocks[$active] = (string)myContents;
         } else {
             this.concat($active, myContents, myMode);
         }
-        array_pop(this._active);
+        array_pop(_active);
     }
 
     /**
@@ -123,13 +123,13 @@ class ViewBlock
             return;
         }
 
-        if (!isset(this._blocks[myName])) {
-            this._blocks[myName] = "";
+        if (!isset(_blocks[myName])) {
+            _blocks[myName] = "";
         }
         if (myMode == ViewBlock::PREPEND) {
-            this._blocks[myName] = myValue . this._blocks[myName];
+            _blocks[myName] = myValue . _blocks[myName];
         } else {
-            this._blocks[myName] .= myValue;
+            _blocks[myName] .= myValue;
         }
     }
 
@@ -143,7 +143,7 @@ class ViewBlock
      * @return void
      */
     void set(string myName, myValue) {
-        this._blocks[myName] = (string)myValue;
+        _blocks[myName] = (string)myValue;
     }
 
     /**
@@ -154,7 +154,7 @@ class ViewBlock
      * @return string The block content or $default if the block does not exist.
      */
     string get(string myName, string $default = "") {
-        return this._blocks[myName] ?? $default;
+        return _blocks[myName] ?? $default;
     }
 
     /**
@@ -163,7 +163,7 @@ class ViewBlock
      * @param string myName Name of the block
      */
     bool exists(string myName) {
-        return isset(this._blocks[myName]);
+        return isset(_blocks[myName]);
     }
 
     /**
@@ -171,7 +171,7 @@ class ViewBlock
      * @return An array containing the blocks.
      */
     string[] keys() {
-        return array_keys(this._blocks);
+        return array_keys(_blocks);
     }
 
     /**
@@ -180,9 +180,9 @@ class ViewBlock
      * @return string|null Either null or the name of the last open block.
      */
     Nullable!string active() {
-        end(this._active);
+        end(_active);
 
-        return key(this._active);
+        return key(_active);
     }
 
     /**
@@ -191,6 +191,6 @@ class ViewBlock
      * @return An array of unclosed blocks.
      */
     string[] unclosed() {
-        return this._active;
+        return _active;
     }
 }

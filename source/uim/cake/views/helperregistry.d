@@ -26,7 +26,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @param \Cake\View\View $view View object.
      */
     this(View $view) {
-        this._View = $view;
+        _View = $view;
         this.setEventManager($view.getEventManager());
     }
 
@@ -41,14 +41,14 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      *    App helpers are searched, and then plugin helpers.
      */
     bool __isset(string $helper) {
-        if (isset(this._loaded[$helper])) {
+        if (isset(_loaded[$helper])) {
             return true;
         }
 
         try {
             this.load($helper);
         } catch (MissingHelperException myException) {
-            myPlugin = this._View.getPlugin();
+            myPlugin = _View.getPlugin();
             if (!empty(myPlugin)) {
                 this.load(myPlugin . "." . $helper);
 
@@ -70,11 +70,11 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @return \Cake\View\Helper|null
      */
     auto __get(string myName) {
-        if (isset(this._loaded[myName])) {
-            return this._loaded[myName];
+        if (isset(_loaded[myName])) {
+            return _loaded[myName];
         }
         if (isset(this.{myName})) {
-            return this._loaded[myName];
+            return _loaded[myName];
         }
 
         return null;
@@ -124,7 +124,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      */
     protected Helper _create(myClass, string myAlias, array myConfig) {
         /** @var \Cake\View\Helper $instance */
-        $instance = new myClass(this._View, myConfig);
+        $instance = new myClass(_View, myConfig);
 
         myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {

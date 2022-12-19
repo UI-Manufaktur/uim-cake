@@ -99,9 +99,9 @@ class StringTemplate {
      *
      */
     void push() {
-      this._configStack[] = [
-          this._config,
-          this._compiled,
+      _configStack[] = [
+          _config,
+          _compiled,
       ];
     }
 
@@ -110,10 +110,10 @@ class StringTemplate {
      *
      */
     void pop() {
-      if (empty(this._configStack)) {
+      if (empty(_configStack)) {
           return;
       }
-      [this._config, this._compiled] = array_pop(this._configStack);
+      [_config, _compiled] = array_pop(_configStack);
     }
 
     /**
@@ -133,7 +133,7 @@ class StringTemplate {
      */
     function add(array myTemplates) {
       this.setConfig(myTemplates);
-      this._compileTemplates(array_keys(myTemplates));
+      _compileTemplates(array_keys(myTemplates));
 
       return this;
     }
@@ -145,17 +145,17 @@ class StringTemplate {
      */
     protected void _compileTemplates(array myTemplates = []) {
       if (empty(myTemplates)) {
-          myTemplates = array_keys(this._config);
+          myTemplates = array_keys(_config);
       }
       foreach (myTemplates as myName) {
         myTemplate = this.get(myName);
         if (myTemplate == null) {
-            this._compiled[myName] = [null, null];
+            _compiled[myName] = [null, null];
         }
 
         myTemplate = str_replace("%", "%%", myTemplate);
         preg_match_all("#\{\{([\w\._]+)\}\}#", myTemplate, $matches);
-        this._compiled[myName] = [
+        _compiled[myName] = [
             str_replace($matches[0], "%s", myTemplate),
             $matches[1],
         ];
@@ -188,7 +188,7 @@ class StringTemplate {
      */
     void remove(string myName) {
         this.setConfig(myName, null);
-        unset(this._compiled[myName]);
+        unset(_compiled[myName]);
     }
 
     /**
@@ -200,10 +200,10 @@ class StringTemplate {
      * @throws \RuntimeException If template not found.
      */
     string format(string myName, array myData) {
-        if (!isset(this._compiled[myName])) {
+        if (!isset(_compiled[myName])) {
             throw new RuntimeException("Cannot find template named "myName".");
         }
-        [myTemplate, $placeholders] = this._compiled[myName];
+        [myTemplate, $placeholders] = _compiled[myName];
 
         if (isset(myData["templateVars"])) {
             myData += myData["templateVars"];
@@ -262,7 +262,7 @@ class StringTemplate {
 
         foreach (myOptions as myKey => myValue) {
             if (!isset($exclude[myKey]) && myValue !== false && myValue !== null) {
-                $attributes[] = this._formatAttribute((string)myKey, myValue, $escape);
+                $attributes[] = _formatAttribute((string)myKey, myValue, $escape);
             }
         }
         $out = trim(implode(" ", $attributes));
@@ -287,7 +287,7 @@ class StringTemplate {
             return "myValue=\"myValue\"";
         }
         $truthy = [1, "1", true, "true", myKey];
-        $isMinimized = isset(this._compactAttributes[myKey]);
+        $isMinimized = isset(_compactAttributes[myKey]);
         if (!preg_match("/\A(\w|[.-])+\z/", myKey)) {
             myKey = h(myKey);
         }

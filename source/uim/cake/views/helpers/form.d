@@ -228,7 +228,7 @@ class FormHelper : Helper
      */
     this(View $view, array myConfig = []) {
         $locator = null;
-        $widgets = this._defaultWidgets;
+        $widgets = _defaultWidgets;
         if (isset(myConfig["locator"])) {
             $locator = myConfig["locator"];
             unset(myConfig["locator"]);
@@ -242,17 +242,17 @@ class FormHelper : Helper
         }
 
         if (isset(myConfig["groupedInputTypes"])) {
-            this._groupedInputTypes = myConfig["groupedInputTypes"];
+            _groupedInputTypes = myConfig["groupedInputTypes"];
             unset(myConfig["groupedInputTypes"]);
         }
 
         super.this($view, myConfig);
 
         if (!$locator) {
-            $locator = new WidgetLocator(this.templater(), this._View, $widgets);
+            $locator = new WidgetLocator(this.templater(), _View, $widgets);
         }
         this.setWidgetLocator($locator);
-        this._idPrefix = this.getConfig("idPrefix");
+        _idPrefix = this.getConfig("idPrefix");
     }
 
     /**
@@ -263,7 +263,7 @@ class FormHelper : Helper
      */
     auto getWidgetLocator(): WidgetLocator
     {
-        return this._locator;
+        return _locator;
     }
 
     /**
@@ -274,7 +274,7 @@ class FormHelper : Helper
 
      */
     auto setWidgetLocator(WidgetLocator $instance) {
-        this._locator = $instance;
+        _locator = $instance;
 
         return this;
     }
@@ -288,15 +288,15 @@ class FormHelper : Helper
      */
     ContextFactory contextFactory(?ContextFactory $instance = null, array $contexts = []) {
         if ($instance == null) {
-            if (this._contextFactory == null) {
-                this._contextFactory = ContextFactory::createWithDefaults($contexts);
+            if (_contextFactory == null) {
+                _contextFactory = ContextFactory::createWithDefaults($contexts);
             }
 
-            return this._contextFactory;
+            return _contextFactory;
         }
-        this._contextFactory = $instance;
+        _contextFactory = $instance;
 
-        return this._contextFactory;
+        return _contextFactory;
     }
 
     /**
@@ -337,7 +337,7 @@ class FormHelper : Helper
                 myOptions["context"] = [];
             }
             myOptions["context"]["entity"] = $context;
-            $context = this._getContext(myOptions["context"]);
+            $context = _getContext(myOptions["context"]);
             unset(myOptions["context"]);
         }
 
@@ -358,7 +358,7 @@ class FormHelper : Helper
         }
 
         if (myOptions["idPrefix"] !== null) {
-            this._idPrefix = myOptions["idPrefix"];
+            _idPrefix = myOptions["idPrefix"];
         }
         myTemplater = this.templater();
 
@@ -370,14 +370,14 @@ class FormHelper : Helper
         unset(myOptions["templates"]);
 
         if (myOptions["url"] == false) {
-            myUrl = this._View.getRequest().getRequestTarget();
+            myUrl = _View.getRequest().getRequestTarget();
             $action = null;
         } else {
-            myUrl = this._formUrl($context, myOptions);
+            myUrl = _formUrl($context, myOptions);
             $action = this.Url.build(myUrl);
         }
 
-        this._lastAction(myUrl);
+        _lastAction(myUrl);
         unset(myOptions["url"], myOptions["idPrefix"]);
 
         $htmlAttributes = [];
@@ -421,12 +421,12 @@ class FormHelper : Helper
         $htmlAttributes += myOptions;
 
         if (this.requestType !== "get") {
-            $formTokenData = this._View.getRequest().getAttribute("formTokenData");
+            $formTokenData = _View.getRequest().getAttribute("formTokenData");
             if ($formTokenData !== null) {
                 this.formProtector = this.createFormProtector($formTokenData);
             }
 
-            $append .= this._csrfField();
+            $append .= _csrfField();
         }
 
         if (!empty($append)) {
@@ -449,7 +449,7 @@ class FormHelper : Helper
      * @return array|string The action attribute for the form.
      */
     protected auto _formUrl(IContext $context, array myOptions) {
-        myRequest = this._View.getRequest();
+        myRequest = _View.getRequest();
 
         if (myOptions["url"] == null) {
             return myRequest.getRequestTarget();
@@ -464,7 +464,7 @@ class FormHelper : Helper
         }
 
         $actionDefaults = [
-            "plugin": this._View.getPlugin(),
+            "plugin": _View.getPlugin(),
             "controller": myRequest.getParam("controller"),
             "action": myRequest.getParam("action"),
         ];
@@ -486,7 +486,7 @@ class FormHelper : Helper
         myQuery = myQuery ? "?" . myQuery : "";
 
         myPath = parse_url($action, PHP_URL_PATH) ?: "";
-        this._lastAction = myPath . myQuery;
+        _lastAction = myPath . myQuery;
     }
 
     /**
@@ -496,7 +496,7 @@ class FormHelper : Helper
      * @return string
      */
     protected string _csrfField() {
-        myRequest = this._View.getRequest();
+        myRequest = _View.getRequest();
 
         $csrfToken = myRequest.getAttribute("csrfToken");
         if (!$csrfToken) {
@@ -524,16 +524,16 @@ class FormHelper : Helper
     string end(array $secureAttributes = []) {
         $out = "";
 
-        if (this.requestType !== "get" && this._View.getRequest().getAttribute("formTokenData") !== null) {
+        if (this.requestType !== "get" && _View.getRequest().getAttribute("formTokenData") !== null) {
             $out .= this.secure([], $secureAttributes);
         }
         $out .= this.formatTemplate("formEnd", []);
 
         this.templater().pop();
         this.requestType = null;
-        this._context = null;
-        this._valueSources = ["data", "context"];
-        this._idPrefix = this.getConfig("idPrefix");
+        _context = null;
+        _valueSources = ["data", "context"];
+        _idPrefix = this.getConfig("idPrefix");
         this.formProtector = null;
 
         return $out;
@@ -576,8 +576,8 @@ class FormHelper : Helper
         $secureAttributes["autocomplete"] = "off";
 
         $tokenData = this.formProtector.buildTokenData(
-            this._lastAction,
-            this._View.getRequest().getSession().id()
+            _lastAction,
+            _View.getRequest().getSession().id()
         );
         $tokenFields = array_merge($secureAttributes, [
             "value": $tokenData["fields"],
@@ -618,7 +618,7 @@ class FormHelper : Helper
      * @return \Cake\Form\FormProtector
      */
     protected FormProtector createFormProtector(array $formTokenData) {
-        $session = this._View.getRequest().getSession();
+        $session = _View.getRequest().getSession();
         $session.start();
 
         return new FormProtector(
@@ -652,7 +652,7 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
     bool isFieldError(string myField) {
-        return this._getContext().hasError(myField);
+        return _getContext().hasError(myField);
     }
 
     /**
@@ -678,7 +678,7 @@ class FormHelper : Helper
         }
         myOptions += ["escape": true];
 
-        $context = this._getContext();
+        $context = _getContext();
         if (!$context.hasError(myField)) {
             return "";
         }
@@ -723,7 +723,7 @@ class FormHelper : Helper
 
         return this.formatTemplate("error", [
             "content": myError,
-            "id": this._domId(myField) . "-error",
+            "id": _domId(myField) . "-error",
         ]);
     }
 
@@ -805,7 +805,7 @@ class FormHelper : Helper
             $labelFor = myOptions["for"];
             unset(myOptions["for"]);
         } else {
-            $labelFor = this._domId(myFieldName);
+            $labelFor = _domId(myFieldName);
         }
         $attrs = myOptions + [
             "for": $labelFor,
@@ -854,7 +854,7 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#generating-entire-forms
      */
     string allControls(array myFields = [], array myOptions = []) {
-        $context = this._getContext();
+        $context = _getContext();
 
         myModelFields = $context.fieldNames();
 
@@ -920,13 +920,13 @@ class FormHelper : Helper
     string fieldset(string myFields = "", array myOptions = []) {
         $legend = myOptions["legend"] ?? true;
         myFieldset = myOptions["fieldset"] ?? true;
-        $context = this._getContext();
+        $context = _getContext();
         $out = myFields;
 
         if ($legend == true) {
             $isCreate = $context.isCreate();
             myModelName = Inflector::humanize(
-                Inflector::singularize(this._View.getRequest().getParam("controller"))
+                Inflector::singularize(_View.getRequest().getParam("controller"))
             );
             if (!$isCreate) {
                 $legend = __d("cake", "Edit {0}", myModelName);
@@ -994,8 +994,8 @@ class FormHelper : Helper
             "templateVars": [],
             "labelOptions": true,
         ];
-        myOptions = this._parseOptions(myFieldName, myOptions);
-        myOptions += ["id": this._domId(myFieldName)];
+        myOptions = _parseOptions(myFieldName, myOptions);
+        myOptions += ["id": _domId(myFieldName)];
 
         myTemplater = this.templater();
         $newTemplates = myOptions["templates"];
@@ -1022,7 +1022,7 @@ class FormHelper : Helper
                 indexOf(myTemplater.get("inputContainerError"), "{{error}}") !== false
             ) {
                 myOptions += [
-                   "aria-describedby": $isFieldError ? this._domId(myFieldName) . "-error" : null,
+                   "aria-describedby": $isFieldError ? _domId(myFieldName) . "-error" : null,
                 ];
             }
             if (isset(myOptions["placeholder"]) && myOptions["label"] == false) {
@@ -1066,7 +1066,7 @@ class FormHelper : Helper
             myOptions["hiddenField"] = "_split";
         }
 
-        $input = this._getInput(myFieldName, myOptions + ["labelOptions": $labelOptions]);
+        $input = _getInput(myFieldName, myOptions + ["labelOptions": $labelOptions]);
         if (myOptions["type"] == "hidden" || myOptions["type"] == "submit") {
             if ($newTemplates) {
                 myTemplater.pop();
@@ -1075,13 +1075,13 @@ class FormHelper : Helper
             return $input;
         }
 
-        $label = this._getLabel(myFieldName, compact("input", "label", "error", "nestedInput") + myOptions);
+        $label = _getLabel(myFieldName, compact("input", "label", "error", "nestedInput") + myOptions);
         if ($nestedInput) {
-            myResult = this._groupTemplate(compact("label", "error", "options"));
+            myResult = _groupTemplate(compact("label", "error", "options"));
         } else {
-            myResult = this._groupTemplate(compact("input", "label", "error", "options"));
+            myResult = _groupTemplate(compact("input", "label", "error", "options"));
         }
-        myResult = this._inputContainerTemplate([
+        myResult = _inputContainerTemplate([
             "content": myResult,
             "error": myError,
             "errorSuffix": myErrorSuffix,
@@ -1178,10 +1178,10 @@ class FormHelper : Helper
         $needsMagicType = false;
         if (empty(myOptions["type"])) {
             $needsMagicType = true;
-            myOptions["type"] = this._inputType(myFieldName, myOptions);
+            myOptions["type"] = _inputType(myFieldName, myOptions);
         }
 
-        myOptions = this._magicOptions(myFieldName, myOptions, $needsMagicType);
+        myOptions = _magicOptions(myFieldName, myOptions, $needsMagicType);
 
         return myOptions;
     }
@@ -1196,7 +1196,7 @@ class FormHelper : Helper
      * @return string
      */
     protected string _inputType(string myFieldName, array myOptions) {
-        $context = this._getContext();
+        $context = _getContext();
 
         if ($context.isPrimaryKey(myFieldName)) {
             return "hidden";
@@ -1208,7 +1208,7 @@ class FormHelper : Helper
 
         myType = "text";
         $internalType = $context.type(myFieldName);
-        $map = this._config["typeMap"];
+        $map = _config["typeMap"];
         if ($internalType !== null && isset($map[$internalType])) {
             myType = $map[$internalType];
         }
@@ -1259,7 +1259,7 @@ class FormHelper : Helper
         $varName = Inflector::variable(
             $pluralize ? Inflector::pluralize(myFieldName) : myFieldName
         );
-        $varOptions = this._View.get($varName);
+        $varOptions = _View.get($varName);
         if (!is_iterable($varOptions)) {
             return myOptions;
         }
@@ -1290,7 +1290,7 @@ class FormHelper : Helper
         myTypesWithOptions = ["text", "number", "radio", "select"];
         $magicOptions = (in_array(myOptions["type"], ["radio", "select"], true) || $allowOverride);
         if ($magicOptions && in_array(myOptions["type"], myTypesWithOptions, true)) {
-            myOptions = this._optionsOptions(myFieldName, myOptions);
+            myOptions = _optionsOptions(myFieldName, myOptions);
         }
 
         if ($allowOverride && substr(myFieldName, -5) == "._ids") {
@@ -1311,7 +1311,7 @@ class FormHelper : Helper
      * @return array<string, mixed> Modified options list.
      */
     protected auto setRequiredAndCustomValidity(string myFieldName, array myOptions) {
-        $context = this._getContext();
+        $context = _getContext();
 
         if (!isset(myOptions["required"]) && myOptions["type"] !== "hidden") {
             myOptions["required"] = $context.isRequired(myFieldName);
@@ -1355,7 +1355,7 @@ class FormHelper : Helper
             return false;
         }
 
-        return this._inputLabel(myFieldName, $label, myOptions);
+        return _inputLabel(myFieldName, $label, myOptions);
     }
 
     /**
@@ -1400,7 +1400,7 @@ class FormHelper : Helper
         }
 
         $labelAttributes["for"] = myOptions["id"];
-        if (in_array(myOptions["type"], this._groupedInputTypes, true)) {
+        if (in_array(myOptions["type"], _groupedInputTypes, true)) {
             $labelAttributes["for"] = false;
         }
         if (myOptions["nestedInput"]) {
@@ -1437,7 +1437,7 @@ class FormHelper : Helper
         // Work around value=>val translations.
         myValue = myOptions["value"];
         unset(myOptions["value"]);
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
         myOptions["value"] = myValue;
 
         $output = "";
@@ -1490,8 +1490,8 @@ class FormHelper : Helper
      */
     string radio(string myFieldName, iterable myOptions = [], array $attributes = []) {
         $attributes["options"] = myOptions;
-        $attributes["idPrefix"] = this._idPrefix;
-        $attributes = this._initInputField(myFieldName, $attributes);
+        $attributes["idPrefix"] = _idPrefix;
+        $attributes = _initInputField(myFieldName, $attributes);
 
         myHiddenField = $attributes["hiddenField"] ?? true;
         unset($attributes["hiddenField"]);
@@ -1539,7 +1539,7 @@ class FormHelper : Helper
         }
         myOptions = myParams[1] ?? [];
         myOptions["type"] = myOptions["type"] ?? $method;
-        myOptions = this._initInputField(myParams[0], myOptions);
+        myOptions = _initInputField(myParams[0], myOptions);
 
         return this.widget(myOptions["type"], myOptions);
     }
@@ -1557,7 +1557,7 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-textareas
      */
     string textarea(string myFieldName, array myOptions = []) {
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
         unset(myOptions["type"]);
 
         return this.widget("textarea", myOptions);
@@ -1577,7 +1577,7 @@ class FormHelper : Helper
         $secure = myOptions["secure"];
         unset(myOptions["secure"]);
 
-        myOptions = this._initInputField(myFieldName, array_merge(
+        myOptions = _initInputField(myFieldName, array_merge(
             myOptions,
             ["secure": static::SECURE_SKIP]
         ));
@@ -1605,7 +1605,7 @@ class FormHelper : Helper
      */
     string file(string myFieldName, array myOptions = []) {
         myOptions += ["secure": true];
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
 
         unset(myOptions["type"]);
 
@@ -1640,7 +1640,7 @@ class FormHelper : Helper
         $confirmMessage = myOptions["confirm"];
         unset(myOptions["confirm"]);
         if ($confirmMessage) {
-            $confirm = this._confirm("return true;", "return false;");
+            $confirm = _confirm("return true;", "return false;");
             myOptions["data-confirm-message"] = $confirmMessage;
             myOptions["onclick"] = this.templater().format("confirmJs", [
                 "confirmMessage": h($confirmMessage),
@@ -1748,8 +1748,8 @@ class FormHelper : Helper
         }
         myTemplater = this.templater();
 
-        $restoreAction = this._lastAction;
-        this._lastAction(myUrl);
+        $restoreAction = _lastAction;
+        _lastAction(myUrl);
         $restoreFormProtector = this.formProtector;
 
         $action = myTemplater.formatAttributes([
@@ -1764,9 +1764,9 @@ class FormHelper : Helper
             "value": myRequestMethod,
             "secure": static::SECURE_SKIP,
         ]);
-        $out .= this._csrfField();
+        $out .= _csrfField();
 
-        $formTokenData = this._View.getRequest().getAttribute("formTokenData");
+        $formTokenData = _View.getRequest().getAttribute("formTokenData");
         if ($formTokenData !== null) {
             this.formProtector = this.createFormProtector($formTokenData);
         }
@@ -1782,14 +1782,14 @@ class FormHelper : Helper
         $out .= this.secure(myFields);
         $out .= this.formatTemplate("formEnd", []);
 
-        this._lastAction = $restoreAction;
+        _lastAction = $restoreAction;
         this.formProtector = $restoreFormProtector;
 
         if (myOptions["block"]) {
             if (myOptions["block"] == true) {
                 myOptions["block"] = __FUNCTION__;
             }
-            this._View.append(myOptions["block"], $out);
+            _View.append(myOptions["block"], $out);
             $out = "";
         }
         unset(myOptions["block"]);
@@ -1797,7 +1797,7 @@ class FormHelper : Helper
         myUrl = "#";
         $onClick = "document." . $formName . ".submit();";
         if ($confirmMessage) {
-            $onClick = this._confirm($onClick, "");
+            $onClick = _confirm($onClick, "");
             $onClick = $onClick . "event.returnValue = false; return false;";
             $onClick = this.templater().format("confirmJs", [
                 "confirmMessage": h($confirmMessage),
@@ -1965,7 +1965,7 @@ class FormHelper : Helper
         ];
 
         if ($attributes["empty"] == null && $attributes["multiple"] !== "checkbox") {
-            $required = this._getContext().isRequired(myFieldName);
+            $required = _getContext().isRequired(myFieldName);
             $attributes["empty"] = $required == null ? false : !$required;
         }
 
@@ -1988,7 +1988,7 @@ class FormHelper : Helper
             $attributes["secure"] = false;
         }
 
-        $attributes = this._initInputField(myFieldName, $attributes);
+        $attributes = _initInputField(myFieldName, $attributes);
         $attributes["options"] = myOptions;
 
         myHidden = "";
@@ -2038,9 +2038,9 @@ class FormHelper : Helper
             "hiddenField": true,
             "secure": true,
         ];
-        $attributes = this._initInputField(myFieldName, $attributes);
+        $attributes = _initInputField(myFieldName, $attributes);
         $attributes["options"] = myOptions;
-        $attributes["idPrefix"] = this._idPrefix;
+        $attributes["idPrefix"] = _idPrefix;
 
         myHidden = "";
         if ($attributes["hiddenField"]) {
@@ -2079,7 +2079,7 @@ class FormHelper : Helper
         myOptions += [
             "empty": true,
         ];
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
         unset(myOptions["type"]);
 
         return this.widget("year", myOptions);
@@ -2101,7 +2101,7 @@ class FormHelper : Helper
             "value": null,
         ];
 
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
         myOptions["type"] = "month";
 
         return this.widget("datetime", myOptions);
@@ -2123,7 +2123,7 @@ class FormHelper : Helper
         myOptions += [
             "value": null,
         ];
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
         myOptions["type"] = "datetime-local";
         myOptions["fieldName"] = myFieldName;
 
@@ -2145,7 +2145,7 @@ class FormHelper : Helper
         myOptions += [
             "value": null,
         ];
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
         myOptions["type"] = "time";
 
         return this.widget("datetime", myOptions);
@@ -2167,7 +2167,7 @@ class FormHelper : Helper
             "value": null,
         ];
 
-        myOptions = this._initInputField(myFieldName, myOptions);
+        myOptions = _initInputField(myFieldName, myOptions);
         myOptions["type"] = "date";
 
         return this.widget("datetime", myOptions);
@@ -2201,12 +2201,12 @@ class FormHelper : Helper
         myOptions += ["fieldName": myField];
 
         if (!isset(myOptions["secure"])) {
-            myOptions["secure"] = this._View.getRequest().getAttribute("formTokenData") == null ? false : true;
+            myOptions["secure"] = _View.getRequest().getAttribute("formTokenData") == null ? false : true;
         }
-        $context = this._getContext();
+        $context = _getContext();
 
         if (isset(myOptions["id"]) && myOptions["id"] == true) {
-            myOptions["id"] = this._domId(myField);
+            myOptions["id"] = _domId(myField);
         }
 
         $disabledIndex = array_search("disabled", myOptions, true);
@@ -2244,9 +2244,9 @@ class FormHelper : Helper
         unset(myOptions["value"], myOptions["default"]);
 
         if ($context.hasError(myField)) {
-            myOptions = this.addClass(myOptions, this._config["errorClass"]);
+            myOptions = this.addClass(myOptions, _config["errorClass"]);
         }
-        $isDisabled = this._isDisabled(myOptions);
+        $isDisabled = _isDisabled(myOptions);
         if ($isDisabled) {
             myOptions["secure"] = self::SECURE_SKIP;
         }
@@ -2318,10 +2318,10 @@ class FormHelper : Helper
      */
     IContext context(?IContext $context = null) {
         if ($context instanceof IContext) {
-            this._context = $context;
+            _context = $context;
         }
 
-        return this._getContext();
+        return _getContext();
     }
 
     /**
@@ -2335,13 +2335,13 @@ class FormHelper : Helper
      *   IContext.
      */
     protected IContext _getContext(myData = []) {
-        if (isset(this._context) && empty(myData)) {
-            return this._context;
+        if (isset(_context) && empty(myData)) {
+            return _context;
         }
         myData += ["entity": null];
 
-        return this._context = this.contextFactory()
-            .get(this._View.getRequest(), myData);
+        return _context = this.contextFactory()
+            .get(_View.getRequest(), myData);
     }
 
     /**
@@ -2355,7 +2355,7 @@ class FormHelper : Helper
      * @return void
      */
     void addWidget(string myName, $spec) {
-        this._locator.add([myName: $spec]);
+        _locator.add([myName: $spec]);
     }
 
     /**
@@ -2376,7 +2376,7 @@ class FormHelper : Helper
             $secure = myData["secure"];
             unset(myData["secure"]);
         }
-        $widget = this._locator.get(myName);
+        $widget = _locator.get(myName);
         $out = $widget.render(myData, this.context());
         if (
             this.formProtector !== null &&
@@ -2398,7 +2398,7 @@ class FormHelper : Helper
      * This method will not reset any templates set in custom widgets.
      */
     void resetTemplates() {
-        this.setTemplates(this._defaultConfig["templates"]);
+        this.setTemplates(_defaultConfig["templates"]);
     }
 
     /**
@@ -2418,7 +2418,7 @@ class FormHelper : Helper
      * @return List of value sources.
      */
     string[] getValueSources() {
-        return this._valueSources;
+        return _valueSources;
     }
 
     /**
@@ -2455,7 +2455,7 @@ class FormHelper : Helper
         $sources = (array)$sources;
 
         this.validateValueSources($sources);
-        this._valueSources = $sources;
+        _valueSources = $sources;
 
         return this;
     }
@@ -2474,14 +2474,14 @@ class FormHelper : Helper
         ];
         foreach (this.getValueSources() as myValuesSource) {
             if (myValuesSource == "context") {
-                $val = this._getContext().val(myFieldname, myOptions);
+                $val = _getContext().val(myFieldname, myOptions);
                 if ($val !== null) {
                     return $val;
                 }
             }
             if (isset(myValueMap[myValuesSource])) {
                 $method = myValueMap[myValuesSource];
-                myValue = this._View.getRequest().{$method}(myFieldname);
+                myValue = _View.getRequest().{$method}(myFieldname);
                 if (myValue !== null) {
                     return myValue;
                 }

@@ -75,7 +75,7 @@ class ArrayContext : IContext
             "defaults" => [],
             "errors" => [],
         ];
-        this._context = $context;
+        _context = $context;
     }
 
     /**
@@ -91,12 +91,12 @@ class ArrayContext : IContext
     // Get the fields used in the context as a primary key.
     string[] primaryKeys() {
         if (
-            empty(this._context["schema"]["_constraints"]) ||
-            !is_array(this._context["schema"]["_constraints"])
+            empty(_context["schema"]["_constraints"]) ||
+            !is_array(_context["schema"]["_constraints"])
         ) {
             return [];
         }
-        foreach (this._context["schema"]["_constraints"] as myData) {
+        foreach (_context["schema"]["_constraints"] as myData) {
             if (isset(myData["type"]) && myData["type"] == "primary") {
                 return (array)(myData["columns"] ?? []);
             }
@@ -124,7 +124,7 @@ class ArrayContext : IContext
     bool isCreate() {
         $primary = this.getPrimaryKey();
         foreach ($primary as $column) {
-            if (!empty(this._context["defaults"][$column])) {
+            if (!empty(_context["defaults"][$column])) {
                 return false;
             }
         }
@@ -153,23 +153,23 @@ class ArrayContext : IContext
             "schemaDefault" => true,
         ];
 
-        if (Hash::check(this._context["data"], myField)) {
-            return Hash::get(this._context["data"], myField);
+        if (Hash::check(_context["data"], myField)) {
+            return Hash::get(_context["data"], myField);
         }
 
         if (myOptions["default"] !== null || !myOptions["schemaDefault"]) {
             return myOptions["default"];
         }
-        if (empty(this._context["defaults"]) || !is_array(this._context["defaults"])) {
+        if (empty(_context["defaults"]) || !is_array(_context["defaults"])) {
             return null;
         }
 
         // Using Hash::check here incase the default value is actually null
-        if (Hash::check(this._context["defaults"], myField)) {
-            return Hash::get(this._context["defaults"], myField);
+        if (Hash::check(_context["defaults"], myField)) {
+            return Hash::get(_context["defaults"], myField);
         }
 
-        return Hash::get(this._context["defaults"], this.stripNesting(myField));
+        return Hash::get(_context["defaults"], this.stripNesting(myField));
     }
 
     /**
@@ -182,14 +182,14 @@ class ArrayContext : IContext
      */
     function isRequired(string myField): ?bool
     {
-        if (!is_array(this._context["required"])) {
+        if (!is_array(_context["required"])) {
             return null;
         }
 
-        $required = Hash::get(this._context["required"], myField);
+        $required = Hash::get(_context["required"], myField);
 
         if ($required == null) {
-            $required = Hash::get(this._context["required"], this.stripNesting(myField));
+            $required = Hash::get(_context["required"], this.stripNesting(myField));
         }
 
         if (!empty($required) || $required == "0") {
@@ -201,12 +201,12 @@ class ArrayContext : IContext
 
 
     Nullable!string getRequiredMessage(string myField) {
-        if (!is_array(this._context["required"])) {
+        if (!is_array(_context["required"])) {
             return null;
         }
-        $required = Hash::get(this._context["required"], myField);
+        $required = Hash::get(_context["required"], myField);
         if ($required == null) {
-            $required = Hash::get(this._context["required"], this.stripNesting(myField));
+            $required = Hash::get(_context["required"], this.stripNesting(myField));
         }
 
         if ($required == false) {
@@ -229,17 +229,17 @@ class ArrayContext : IContext
      * @return int|null
      */
     Nullable!int getMaxLength(string myField) {
-        if (!is_array(this._context["schema"])) {
+        if (!is_array(_context["schema"])) {
             return null;
         }
 
-        return Hash::get(this._context["schema"], "myField.length");
+        return Hash::get(_context["schema"], "myField.length");
     }
 
 
     function fieldNames(): array
     {
-        $schema = this._context["schema"];
+        $schema = _context["schema"];
         unset($schema["_constraints"], $schema["_indexes"]);
 
         return array_keys($schema);
@@ -253,13 +253,13 @@ class ArrayContext : IContext
      * @see \Cake\Database\TypeFactory
      */
     Nullable!string type(string myField) {
-        if (!is_array(this._context["schema"])) {
+        if (!is_array(_context["schema"])) {
             return null;
         }
 
-        $schema = Hash::get(this._context["schema"], myField);
+        $schema = Hash::get(_context["schema"], myField);
         if ($schema == null) {
-            $schema = Hash::get(this._context["schema"], this.stripNesting(myField));
+            $schema = Hash::get(_context["schema"], this.stripNesting(myField));
         }
 
         return $schema["type"] ?? null;
@@ -273,12 +273,12 @@ class ArrayContext : IContext
      */
     function attributes(string myField): array
     {
-        if (!is_array(this._context["schema"])) {
+        if (!is_array(_context["schema"])) {
             return [];
         }
-        $schema = Hash::get(this._context["schema"], myField);
+        $schema = Hash::get(_context["schema"], myField);
         if ($schema == null) {
-            $schema = Hash::get(this._context["schema"], this.stripNesting(myField));
+            $schema = Hash::get(_context["schema"], this.stripNesting(myField));
         }
 
         return array_intersect_key(
@@ -294,11 +294,11 @@ class ArrayContext : IContext
      * @return bool Returns true if the errors for the field are not empty.
      */
     bool hasError(string myField) {
-        if (empty(this._context["errors"])) {
+        if (empty(_context["errors"])) {
             return false;
         }
 
-        return Hash::check(this._context["errors"], myField);
+        return Hash::check(_context["errors"], myField);
     }
 
     /**
@@ -310,11 +310,11 @@ class ArrayContext : IContext
      */
     function error(string myField): array
     {
-        if (empty(this._context["errors"])) {
+        if (empty(_context["errors"])) {
             return [];
         }
 
-        return (array)Hash::get(this._context["errors"], myField);
+        return (array)Hash::get(_context["errors"], myField);
     }
 
     /**

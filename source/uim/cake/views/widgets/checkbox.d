@@ -44,17 +44,17 @@ class CheckboxWidget : BasicWidget
     string render(array myData, IContext $context) {
         myData += this.mergeDefaults(myData, $context);
 
-        if (this._isChecked(myData)) {
+        if (_isChecked(myData)) {
             myData["checked"] = true;
         }
         unset(myData["val"]);
 
-        $attrs = this._templates.formatAttributes(
+        $attrs = _templates.formatAttributes(
             myData,
             ["name", "value"]
         );
 
-        return this._templates.format("checkbox", [
+        return _templates.format("checkbox", [
             "name": myData["name"],
             "value": myData["value"],
             "templateVars": myData["templateVars"],

@@ -44,7 +44,7 @@ class NumberHelper : Helper
     this(View $view, array myConfig = []) {
         super.this($view, myConfig);
 
-        myConfig = this._config;
+        myConfig = _config;
 
         /** @psalm-var class-string<\Cake\I18n\Number>|null $engineClass */
         $engineClass = App::className(myConfig["engine"], "Utility");
@@ -52,7 +52,7 @@ class NumberHelper : Helper
             throw new CakeException(sprintf("Class for %s could not be found", myConfig["engine"]));
         }
 
-        this._engine = new $engineClass(myConfig);
+        _engine = new $engineClass(myConfig);
     }
 
     /**
@@ -63,7 +63,7 @@ class NumberHelper : Helper
      * @return mixed Whatever is returned by called method, or false on failure
      */
     auto __call(string $method, array myParams) {
-        return this._engine.{$method}(...myParams);
+        return _engine.{$method}(...myParams);
     }
 
     /**
@@ -77,7 +77,7 @@ class NumberHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
     string precision($number, int $precision = 3, array myOptions = []) {
-        return this._engine.precision($number, $precision, myOptions);
+        return _engine.precision($number, $precision, myOptions);
     }
 
     /**
@@ -89,7 +89,7 @@ class NumberHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/number.html#interacting-with-human-readable-values
      */
     string toReadableSize($size) {
-        return this._engine.toReadableSize($size);
+        return _engine.toReadableSize($size);
     }
 
     /**
@@ -107,7 +107,7 @@ class NumberHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-percentages
      */
     string toPercentage($number, int $precision = 2, array myOptions = []) {
-        return this._engine.toPercentage($number, $precision, myOptions);
+        return _engine.toPercentage($number, $precision, myOptions);
     }
 
     /**
@@ -128,7 +128,7 @@ class NumberHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-numbers
      */
     string format($number, array myOptions = []) {
-        $formatted = this._engine.format($number, myOptions);
+        $formatted = _engine.format($number, myOptions);
         myOptions += ["escape": true];
 
         return myOptions["escape"] ? h($formatted) : $formatted;
@@ -159,7 +159,7 @@ class NumberHelper : Helper
      * @return string Number formatted as a currency.
      */
     string currency($number, Nullable!string $currency = null, array myOptions = []) {
-        $formatted = this._engine.currency($number, $currency, myOptions);
+        $formatted = _engine.currency($number, $currency, myOptions);
         myOptions += ["escape": true];
 
         return myOptions["escape"] ? h($formatted) : $formatted;
@@ -182,7 +182,7 @@ class NumberHelper : Helper
      * @return string formatted delta
      */
     string formatDelta(myValue, array myOptions = []) {
-        $formatted = this._engine.formatDelta(myValue, myOptions);
+        $formatted = _engine.formatDelta(myValue, myOptions);
         myOptions += ["escape": true];
 
         return myOptions["escape"] ? h($formatted) : $formatted;
@@ -202,7 +202,7 @@ class NumberHelper : Helper
             "NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead."
         );
 
-        return this._engine.defaultCurrency($currency);
+        return _engine.defaultCurrency($currency);
     }
 
     /**
@@ -223,6 +223,6 @@ class NumberHelper : Helper
      * @return string formatted number
      */
     string ordinal(myValue, array myOptions = []) {
-        return this._engine.ordinal(myValue, myOptions);
+        return _engine.ordinal(myValue, myOptions);
     }
 }

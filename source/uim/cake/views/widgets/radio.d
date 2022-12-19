@@ -52,8 +52,8 @@ class RadioWidget : BasicWidget
      * @param \Cake\View\Widget\LabelWidget $label Label widget instance.
      */
     this(StringTemplate myTemplates, LabelWidget $label) {
-        this._templates = myTemplates;
-        this._label = $label;
+        _templates = myTemplates;
+        _label = $label;
     }
 
     /**
@@ -90,11 +90,11 @@ class RadioWidget : BasicWidget
         }
         unset(myData["empty"]);
 
-        this._idPrefix = myData["idPrefix"];
-        this._clearIds();
+        _idPrefix = myData["idPrefix"];
+        _clearIds();
         $opts = [];
         foreach (myOptions as $val: $text) {
-            $opts[] = this._renderInput($val, $text, myData, $context);
+            $opts[] = _renderInput($val, $text, myData, $context);
         }
 
         return implode("", $opts);
@@ -144,11 +144,11 @@ class RadioWidget : BasicWidget
         if (empty($radio["id"])) {
             if (isset(myData["id"])) {
                 $radio["id"] = myData["id"] . "-" . rtrim(
-                    this._idSuffix((string)$radio["value"]),
+                    _idSuffix((string)$radio["value"]),
                     "-"
                 );
             } else {
-                $radio["id"] = this._id((string)$radio["name"], (string)$radio["value"]);
+                $radio["id"] = _id((string)$radio["name"], (string)$radio["value"]);
             }
         }
         if (isset(myData["val"]) && is_bool(myData["val"])) {
@@ -160,11 +160,11 @@ class RadioWidget : BasicWidget
         }
 
         if (!is_bool(myData["label"]) && isset($radio["checked"]) && $radio["checked"]) {
-            $selectedClass = this._templates.format("selectedClass", []);
-            myData["label"] = this._templates.addClass(myData["label"], $selectedClass);
+            $selectedClass = _templates.format("selectedClass", []);
+            myData["label"] = _templates.addClass(myData["label"], $selectedClass);
         }
 
-        $radio["disabled"] = this._isDisabled($radio, myData["disabled"]);
+        $radio["disabled"] = _isDisabled($radio, myData["disabled"]);
         if (!empty(myData["required"])) {
             $radio["required"] = true;
         }
@@ -172,17 +172,17 @@ class RadioWidget : BasicWidget
             $radio["form"] = myData["form"];
         }
 
-        $input = this._templates.format("radio", [
+        $input = _templates.format("radio", [
             "name": $radio["name"],
             "value": $escape ? h($radio["value"]) : $radio["value"],
             "templateVars": $radio["templateVars"],
-            "attrs": this._templates.formatAttributes(
+            "attrs": _templates.formatAttributes(
                 $radio + myData,
                 ["name", "value", "text", "options", "label", "val", "type"]
             ),
         ]);
 
-        $label = this._renderLabel(
+        $label = _renderLabel(
             $radio,
             myData["label"],
             $input,
@@ -192,12 +192,12 @@ class RadioWidget : BasicWidget
 
         if (
             $label == false &&
-            indexOf(this._templates.get("radioWrapper"), "{{input}}") == false
+            indexOf(_templates.get("radioWrapper"), "{{input}}") == false
         ) {
             $label = $input;
         }
 
-        return this._templates.format("radioWrapper", [
+        return _templates.format("radioWrapper", [
             "input": $input,
             "label": $label,
             "templateVars": myData["templateVars"],
@@ -232,6 +232,6 @@ class RadioWidget : BasicWidget
             "input": $input,
         ];
 
-        return this._label.render($labelAttrs, $context);
+        return _label.render($labelAttrs, $context);
     }
 }

@@ -60,7 +60,7 @@ class TextHelper : Helper
     this(View $view, array myConfig = []) {
         super.this($view, myConfig);
 
-        myConfig = this._config;
+        myConfig = _config;
 
         /** @psalm-var class-string<\Cake\Utility\Text>|null $engineClass */
         $engineClass = App::className(myConfig["engine"], "Utility");
@@ -68,7 +68,7 @@ class TextHelper : Helper
             throw new CakeException(sprintf("Class for %s could not be found", myConfig["engine"]));
         }
 
-        this._engine = new $engineClass(myConfig);
+        _engine = new $engineClass(myConfig);
     }
 
     /**
@@ -79,7 +79,7 @@ class TextHelper : Helper
      * @return mixed Whatever is returned by called method, or false on failure
      */
     auto __call(string $method, array myParams) {
-        return this._engine.{$method}(...myParams);
+        return _engine.{$method}(...myParams);
     }
 
     /**
@@ -96,7 +96,7 @@ class TextHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-urls
      */
     string autoLinkUrls(string $text, array myOptions = []) {
-        this._placeholders = [];
+        _placeholders = [];
         myOptions += ["escape": true];
 
         // phpcs:disable Generic.Files.LineLength
@@ -132,7 +132,7 @@ class TextHelper : Helper
             $text = h($text);
         }
 
-        return this._linkUrls($text, myOptions);
+        return _linkUrls($text, myOptions);
     }
 
     /**
@@ -153,7 +153,7 @@ class TextHelper : Helper
             $match = $matches["url_bare"];
         }
         myKey = hash_hmac("sha1", $match, Security::getSalt());
-        this._placeholders[myKey] = [
+        _placeholders[myKey] = [
             "content": $match,
             "envelope": $envelope,
         ];
@@ -170,7 +170,7 @@ class TextHelper : Helper
      */
     protected string _linkUrls(string $text, array $htmlOptions) {
         $replace = [];
-        foreach (this._placeholders as $hash: myContents) {
+        foreach (_placeholders as $hash: myContents) {
             $link = myUrl = myContents["content"];
             $envelope = myContents["envelope"];
             if (!preg_match("#^[a-z]+\://#i", myUrl)) {
@@ -192,7 +192,7 @@ class TextHelper : Helper
      */
     protected string _linkEmails(string $text, array myOptions) {
         $replace = [];
-        foreach (this._placeholders as $hash: myContents) {
+        foreach (_placeholders as $hash: myContents) {
             myUrl = myContents["content"];
             $envelope = myContents["envelope"];
             $replace[$hash] = $envelope[0] . this.Html.link(myUrl, "mailto:" . myUrl, myOptions) . $envelope[1];
@@ -215,7 +215,7 @@ class TextHelper : Helper
      */
     string autoLinkEmails(string $text, array myOptions = []) {
         myOptions += ["escape": true];
-        this._placeholders = [];
+        _placeholders = [];
 
         $atom = "[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]";
         $text = preg_replace_callback(
@@ -227,7 +227,7 @@ class TextHelper : Helper
             $text = h($text);
         }
 
-        return this._linkEmails($text, myOptions);
+        return _linkEmails($text, myOptions);
     }
 
     /**
@@ -260,7 +260,7 @@ class TextHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/text.html#highlighting-substrings
      */
     string highlight(string $text, string $phrase, array myOptions = []) {
-        return this._engine.highlight($text, $phrase, myOptions);
+        return _engine.highlight($text, $phrase, myOptions);
     }
 
     /**
@@ -308,7 +308,7 @@ class TextHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-text
      */
     string truncate(string $text, int $length = 100, array myOptions = []) {
-        return this._engine.truncate($text, $length, myOptions);
+        return _engine.truncate($text, $length, myOptions);
     }
 
     /**
@@ -330,7 +330,7 @@ class TextHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
     string tail(string $text, int $length = 100, array myOptions = []) {
-        return this._engine.tail($text, $length, myOptions);
+        return _engine.tail($text, $length, myOptions);
     }
 
     /**
@@ -346,7 +346,7 @@ class TextHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
     string excerpt(string $text, string $phrase, int $radius = 100, string $ending = "...") {
-        return this._engine.excerpt($text, $phrase, $radius, $ending);
+        return _engine.excerpt($text, $phrase, $radius, $ending);
     }
 
     /**
@@ -360,7 +360,7 @@ class TextHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
     string toList(array $list, Nullable!string $and = null, string $separator = ", ") {
-        return this._engine.toList($list, $and, $separator);
+        return _engine.toList($list, $and, $separator);
     }
 
     /**
@@ -385,7 +385,7 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::setTransliteratorId()
      */
     string slug(string $string, myOptions = []) {
-        return this._engine.slug($string, myOptions);
+        return _engine.slug($string, myOptions);
     }
 
     /**

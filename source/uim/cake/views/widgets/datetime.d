@@ -98,11 +98,11 @@ class DateTimeWidget : BasicWidget {
         myData["value"] = this.formatDateTime(myData["val"], myData);
         unset(myData["val"], myData["timezone"], myData["format"]);
 
-        return this._templates.format("input", [
+        return _templates.format("input", [
             "name": myData["name"],
             "type": myData["type"],
             "templateVars": myData["templateVars"],
-            "attrs": this._templates.formatAttributes(
+            "attrs": _templates.formatAttributes(
                 myData,
                 ["name", "type"]
             ),

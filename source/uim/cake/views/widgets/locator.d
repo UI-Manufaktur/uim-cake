@@ -49,8 +49,8 @@ class WidgetLocator
      * @param array $widgets See add() method for more information.
      */
     this(StringTemplate myTemplates, View $view, array $widgets = []) {
-        this._templates = myTemplates;
-        this._view = $view;
+        _templates = myTemplates;
+        _view = $view;
 
         this.add($widgets);
     }
@@ -106,7 +106,7 @@ class WidgetLocator
                 ));
             }
 
-            this._widgets[myKey] = $widget;
+            _widgets[myKey] = $widget;
         }
 
         foreach (myfiles as myfile) {
@@ -128,24 +128,24 @@ class WidgetLocator
      */
     auto get(string myName): IWidget
     {
-        if (!isset(this._widgets[myName])) {
-            if (empty(this._widgets["_default"])) {
+        if (!isset(_widgets[myName])) {
+            if (empty(_widgets["_default"])) {
                 throw new RuntimeException(sprintf("Unknown widget `%s`", myName));
             }
 
             myName = "_default";
         }
 
-        if (this._widgets[myName] instanceof IWidget) {
-            return this._widgets[myName];
+        if (_widgets[myName] instanceof IWidget) {
+            return _widgets[myName];
         }
 
-        return this._widgets[myName] = this._resolveWidget(this._widgets[myName]);
+        return _widgets[myName] = _resolveWidget(_widgets[myName]);
     }
 
     // Clear the registry and reset the widgets.
     void clear() {
-        this._widgets = [];
+        _widgets = [];
     }
 
     /**
@@ -171,10 +171,10 @@ class WidgetLocator
         }
         if (count(myConfig)) {
             $reflection = new ReflectionClass(myClassName);
-            $arguments = [this._templates];
+            $arguments = [_templates];
             foreach (myConfig as $requirement) {
                 if ($requirement == "_view") {
-                    $arguments[] = this._view;
+                    $arguments[] = _view;
                 } else {
                     $arguments[] = this.get($requirement);
                 }
@@ -183,7 +183,7 @@ class WidgetLocator
             $instance = $reflection.newInstanceArgs($arguments);
         } else {
             /** @var \Cake\View\Widget\IWidget $instance */
-            $instance = new myClassName(this._templates);
+            $instance = new myClassName(_templates);
         }
 
         return $instance;

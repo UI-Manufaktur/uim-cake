@@ -99,7 +99,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setVar(string myName, myValue = null) {
-        this._vars[myName] = myValue;
+        _vars[myName] = myValue;
 
         return this;
     }
@@ -113,9 +113,9 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     auto setVars(array myData, bool myMerge = true) {
         if (myMerge) {
-            this._vars = myData + this._vars;
+            _vars = myData + _vars;
         } else {
-            this._vars = myData;
+            _vars = myData;
         }
 
         return this;
@@ -128,7 +128,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return bool
      */
     bool hasVar(string myName) {
-        return array_key_exists(myName, this._vars);
+        return array_key_exists(myName, _vars);
     }
 
     /**
@@ -138,7 +138,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return mixed The var value or null if unset.
      */
     auto getVar(string myName) {
-        return this._vars[myName] ?? null;
+        return _vars[myName] ?? null;
     }
 
     /**
@@ -148,7 +148,7 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     auto getVars(): array
     {
-        return this._vars;
+        return _vars;
     }
 
     // The subdirectory to the template.
@@ -166,7 +166,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     O enableAutoLayout(this O)(bool myEnable = true) {
-        this._autoLayout = myEnable;
+        _autoLayout = myEnable;
 
         return cast(O)this;
     }
@@ -180,7 +180,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     function disableAutoLayout() {
-        this._autoLayout = false;
+        _autoLayout = false;
 
         return this;
     }
@@ -192,7 +192,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return bool
      */
     bool isAutoLayoutEnabled() {
-        return this._autoLayout;
+        return _autoLayout;
     }
 
     /**
@@ -203,7 +203,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setPlugin(Nullable!string myName) {
-        this._plugin = myName;
+        _plugin = myName;
 
         return this;
     }
@@ -214,7 +214,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return string|null
      */
     Nullable!string getPlugin() {
-        return this._plugin;
+        return _plugin;
     }
 
     /**
@@ -232,7 +232,7 @@ class ViewBuilder : JsonSerializable, Serializable
             $array = [$helper];
         }
 
-        this._helpers = array_merge(this._helpers, $array);
+        _helpers = array_merge(_helpers, $array);
 
         return this;
     }
@@ -266,9 +266,9 @@ class ViewBuilder : JsonSerializable, Serializable
     auto setHelpers(array $helpers, bool myMerge = true) {
         if (myMerge) {
             deprecationWarning("The myMerge param is deprecated, use addHelper()/addHelpers() instead.");
-            $helpers = array_merge(this._helpers, $helpers);
+            $helpers = array_merge(_helpers, $helpers);
         }
-        this._helpers = $helpers;
+        _helpers = $helpers;
 
         return this;
     }
@@ -280,7 +280,7 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     auto getHelpers(): array
     {
-        return this._helpers;
+        return _helpers;
     }
 
     /**
@@ -291,7 +291,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setTheme(Nullable!string $theme) {
-        this._theme = $theme;
+        _theme = $theme;
 
         return this;
     }
@@ -302,7 +302,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return string|null
      */
     Nullable!string getTheme() {
-        return this._theme;
+        return _theme;
     }
 
     /**
@@ -313,7 +313,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setTemplate(Nullable!string myName) {
-        this._template = myName;
+        _template = myName;
 
         return this;
     }
@@ -325,7 +325,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return string|null
      */
     Nullable!string getTemplate() {
-        return this._template;
+        return _template;
     }
 
     /**
@@ -337,7 +337,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setLayout(Nullable!string myName) {
-        this._layout = myName;
+        _layout = myName;
 
         return this;
     }
@@ -348,7 +348,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return string|null
      */
     Nullable!string getLayout() {
-        return this._layout;
+        return _layout;
     }
 
     /**
@@ -358,7 +358,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return mixed
      */
     auto getOption(string myName) {
-        return this._options[myName] ?? null;
+        return _options[myName] ?? null;
     }
 
     /**
@@ -369,7 +369,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setOption(string myName, myValue) {
-        this._options[myName] = myValue;
+        _options[myName] = myValue;
 
         return this;
     }
@@ -385,9 +385,9 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     auto setOptions(array myOptions, bool myMerge = true) {
         if (myMerge) {
-            myOptions = array_merge(this._options, myOptions);
+            myOptions = array_merge(_options, myOptions);
         }
-        this._options = myOptions;
+        _options = myOptions;
 
         return this;
     }
@@ -399,7 +399,7 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     auto getOptions(): array
     {
-        return this._options;
+        return _options;
     }
 
     /**
@@ -409,7 +409,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setName(Nullable!string myName) {
-        this._name = myName;
+        _name = myName;
 
         return this;
     }
@@ -420,7 +420,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return string|null
      */
     Nullable!string getName() {
-        return this._name;
+        return _name;
     }
 
     /**
@@ -434,7 +434,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     auto setClassName(Nullable!string myName) {
-        this._className = myName;
+        _className = myName;
 
         return this;
     }
@@ -445,7 +445,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return string|null
      */
     Nullable!string getClassName() {
-        return this._className;
+        return _className;
     }
 
     /**
@@ -467,7 +467,7 @@ class ViewBuilder : JsonSerializable, Serializable
         ?Response $response = null,
         ?IEventManager myEvents = null
     ): View {
-        myClassName = this._className;
+        myClassName = _className;
         if (myClassName == null) {
             myClassName = App::className("App", "View", "View") ?? View::class;
         } elseif (myClassName == "View") {
@@ -476,7 +476,7 @@ class ViewBuilder : JsonSerializable, Serializable
             myClassName = App::className(myClassName, "View", "View");
         }
         if (myClassName == null) {
-            throw new MissingViewException(["class" => this._className]);
+            throw new MissingViewException(["class" => _className]);
         }
 
         if (!empty($vars)) {
@@ -486,18 +486,18 @@ class ViewBuilder : JsonSerializable, Serializable
         }
 
         myData = [
-            "name" => this._name,
-            "templatePath" => this._templatePath,
-            "template" => this._template,
-            "plugin" => this._plugin,
-            "theme" => this._theme,
-            "layout" => this._layout,
-            "autoLayout" => this._autoLayout,
-            "layoutPath" => this._layoutPath,
-            "helpers" => this._helpers,
-            "viewVars" => $vars + this._vars,
+            "name" => _name,
+            "templatePath" => _templatePath,
+            "template" => _template,
+            "plugin" => _plugin,
+            "theme" => _theme,
+            "layout" => _layout,
+            "autoLayout" => _autoLayout,
+            "layoutPath" => _layoutPath,
+            "helpers" => _helpers,
+            "viewVars" => $vars + _vars,
         ];
-        myData += this._options;
+        myData += _options;
 
         /** @var \Cake\View\View */
         return new myClassName(myRequest, $response, myEvents, myData);

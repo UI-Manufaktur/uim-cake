@@ -34,7 +34,7 @@ class LabelWidget : IWidget
      * @param \Cake\View\StringTemplate myTemplates Templates list.
      */
     this(StringTemplate myTemplates) {
-        this._templates = myTemplates;
+        _templates = myTemplates;
     }
 
     /**
@@ -61,12 +61,12 @@ class LabelWidget : IWidget
             "templateVars": [],
         ];
 
-        return this._templates.format(this._labelTemplate, [
+        return _templates.format(_labelTemplate, [
             "text": myData["escape"] ? h(myData["text"]) : myData["text"],
             "input": myData["input"],
             "hidden": myData["hidden"],
             "templateVars": myData["templateVars"],
-            "attrs": this._templates.formatAttributes(myData, ["text", "input", "hidden"]),
+            "attrs": _templates.formatAttributes(myData, ["text", "input", "hidden"]),
         ]);
     }
 

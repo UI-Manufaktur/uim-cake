@@ -49,11 +49,11 @@ class TextareaWidget : BasicWidget
             myData = this.setMaxLength(myData, $context, myData["fieldName"]);
         }
 
-        return this._templates.format("textarea", [
+        return _templates.format("textarea", [
             "name": myData["name"],
             "value": myData["escape"] ? h(myData["val"]) : myData["val"],
             "templateVars": myData["templateVars"],
-            "attrs": this._templates.formatAttributes(
+            "attrs": _templates.formatAttributes(
                 myData,
                 ["name", "val"]
             ),

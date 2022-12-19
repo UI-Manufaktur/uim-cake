@@ -84,11 +84,11 @@ class PaginatorHelper : Helper
     this(View $view, array myConfig = []) {
         super.this($view, myConfig);
 
-        myQuery = this._View.getRequest().getQueryParams();
+        myQuery = _View.getRequest().getQueryParams();
         unset(myQuery["page"], myQuery["limit"], myQuery["sort"], myQuery["direction"]);
         this.setConfig(
             "options.url",
-            array_merge(this._View.getRequest().getParam("pass", []), ["?": myQuery])
+            array_merge(_View.getRequest().getParam("pass", []), ["?": myQuery])
         );
     }
 
@@ -100,7 +100,7 @@ class PaginatorHelper : Helper
      */
     function params(Nullable!string myModel = null): array
     {
-        myRequest = this._View.getRequest();
+        myRequest = _View.getRequest();
 
         if (empty(myModel)) {
             myModel = (string)this.defaultModel();
@@ -131,7 +131,7 @@ class PaginatorHelper : Helper
      *   See PaginatorHelper::myOptions for list of keys.
      */
     void options(array myOptions = []) {
-        myRequest = this._View.getRequest();
+        myRequest = _View.getRequest();
 
         if (!empty(myOptions["paging"])) {
             myRequest = myRequest.withAttribute(
@@ -149,14 +149,14 @@ class PaginatorHelper : Helper
             unset(myOptions[myModel]);
         }
 
-        this._View.setRequest(myRequest);
+        _View.setRequest(myRequest);
 
-        this._config["options"] = array_filter(myOptions + this._config["options"]);
-        if (empty(this._config["options"]["url"])) {
-            this._config["options"]["url"] = [];
+        _config["options"] = array_filter(myOptions + _config["options"]);
+        if (empty(_config["options"]["url"])) {
+            _config["options"]["url"] = [];
         }
-        if (!empty(this._config["options"]["model"])) {
-            this.defaultModel(this._config["options"]["model"]);
+        if (!empty(_config["options"]["model"])) {
+            this.defaultModel(_config["options"]["model"]);
         }
     }
 
@@ -328,7 +328,7 @@ class PaginatorHelper : Helper
             "disabled": "prevDisabled",
         ];
 
-        return this._toggledLink($title, myEnabled, myOptions, myTemplates);
+        return _toggledLink($title, myEnabled, myOptions, myTemplates);
     }
 
     /**
@@ -367,7 +367,7 @@ class PaginatorHelper : Helper
             "disabled": "nextDisabled",
         ];
 
-        return this._toggledLink($title, myEnabled, myOptions, myTemplates);
+        return _toggledLink($title, myEnabled, myOptions, myTemplates);
     }
 
     /**
@@ -498,14 +498,14 @@ class PaginatorHelper : Helper
             && !empty(myOptions["sort"])
             && indexOf(myOptions["sort"], ".") == false
         ) {
-            $paging["sort"] = this._removeAlias($paging["sort"], myModel = null);
+            $paging["sort"] = _removeAlias($paging["sort"], myModel = null);
         }
         if (
             !empty($paging["sortDefault"])
             && !empty(myOptions["sort"])
             && indexOf(myOptions["sort"], ".") == false
         ) {
-            $paging["sortDefault"] = this._removeAlias($paging["sortDefault"], myModel);
+            $paging["sortDefault"] = _removeAlias($paging["sortDefault"], myModel);
         }
 
         myOptions += array_intersect_key(
@@ -524,7 +524,7 @@ class PaginatorHelper : Helper
         ) {
             myOptions["sort"] = myOptions["direction"] = null;
         }
-        $baseUrl = this._config["options"]["url"] ?? [];
+        $baseUrl = _config["options"]["url"] ?? [];
         if (!empty($paging["scope"])) {
             $scope = $paging["scope"];
             if (isset($baseUrl["?"][$scope]) && is_array($baseUrl["?"][$scope])) {
@@ -540,8 +540,8 @@ class PaginatorHelper : Helper
 
         myUrl["?"] = myUrl["?"] ?? [];
 
-        if (!empty(this._config["options"]["routePlaceholders"])) {
-            $placeholders = array_flip(this._config["options"]["routePlaceholders"]);
+        if (!empty(_config["options"]["routePlaceholders"])) {
+            $placeholders = array_flip(_config["options"]["routePlaceholders"]);
             myUrl += array_intersect_key(myOptions, $placeholders);
             myUrl["?"] += array_diff_key(myOptions, $placeholders);
         } else {
@@ -584,7 +584,7 @@ class PaginatorHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
     bool hasPrev(Nullable!string myModel = null) {
-        return this._hasPage(myModel, "prev");
+        return _hasPage(myModel, "prev");
     }
 
     /**
@@ -595,7 +595,7 @@ class PaginatorHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
     bool hasNext(Nullable!string myModel = null) {
-        return this._hasPage(myModel, "next");
+        return _hasPage(myModel, "next");
     }
 
     /**
@@ -637,19 +637,19 @@ class PaginatorHelper : Helper
      */
     Nullable!string defaultModel(Nullable!string myModel = null) {
         if (myModel !== null) {
-            this._defaultModel = myModel;
+            _defaultModel = myModel;
         }
-        if (this._defaultModel) {
-            return this._defaultModel;
+        if (_defaultModel) {
+            return _defaultModel;
         }
 
-        myParams = this._View.getRequest().getAttribute("paging");
+        myParams = _View.getRequest().getAttribute("paging");
         if (!myParams) {
             return null;
         }
-        [this._defaultModel] = array_keys(myParams);
+        [_defaultModel] = array_keys(myParams);
 
-        return this._defaultModel;
+        return _defaultModel;
     }
 
     /**
@@ -759,9 +759,9 @@ class PaginatorHelper : Helper
         }
 
         if (myOptions["modulus"] !== false && myParams["pageCount"] > myOptions["modulus"]) {
-            $out = this._modulusNumbers(myTemplater, myParams, myOptions);
+            $out = _modulusNumbers(myTemplater, myParams, myOptions);
         } else {
-            $out = this._numbers(myTemplater, myParams, myOptions);
+            $out = _numbers(myTemplater, myParams, myOptions);
         }
 
         if (isset(myOptions["templates"])) {
@@ -835,13 +835,13 @@ class PaginatorHelper : Helper
         $out = "";
         $ellipsis = myTemplater.format("ellipsis", []);
 
-        [$start, $end] = this._getNumbersStartAndEnd(myParams, myOptions);
+        [$start, $end] = _getNumbersStartAndEnd(myParams, myOptions);
 
-        $out .= this._firstNumber($ellipsis, myParams, $start, myOptions);
+        $out .= _firstNumber($ellipsis, myParams, $start, myOptions);
         $out .= myOptions["before"];
 
         for ($i = $start; $i < myParams["page"]; $i++) {
-            $out .= this._formatNumber(myTemplater, [
+            $out .= _formatNumber(myTemplater, [
                 "text": this.Number.format($i),
                 "page": $i,
                 "model": myOptions["model"],
@@ -859,7 +859,7 @@ class PaginatorHelper : Helper
         $start = myParams["page"] + 1;
         $i = $start;
         while ($i < $end) {
-            $out .= this._formatNumber(myTemplater, [
+            $out .= _formatNumber(myTemplater, [
                 "text": this.Number.format($i),
                 "page": $i,
                 "model": myOptions["model"],
@@ -869,7 +869,7 @@ class PaginatorHelper : Helper
         }
 
         if ($end !== myParams["page"]) {
-            $out .= this._formatNumber(myTemplater, [
+            $out .= _formatNumber(myTemplater, [
                 "text": this.Number.format($i),
                 "page": $end,
                 "model": myOptions["model"],
@@ -878,7 +878,7 @@ class PaginatorHelper : Helper
         }
 
         $out .= myOptions["after"];
-        $out .= this._lastNumber($ellipsis, myParams, $end, myOptions);
+        $out .= _lastNumber($ellipsis, myParams, $end, myOptions);
 
         return $out;
     }
@@ -1157,7 +1157,7 @@ class PaginatorHelper : Helper
         }
 
         if (myOptions["block"]) {
-            this._View.append(myOptions["block"], $out);
+            _View.append(myOptions["block"], $out);
 
             return null;
         }
@@ -1203,7 +1203,7 @@ class PaginatorHelper : Helper
                 "type": "select",
                 "label": __("View"),
                 "default": $default,
-                "value": this._View.getRequest().getQuery("limit"),
+                "value": _View.getRequest().getQuery("limit"),
                 "options": $limits,
                 "onChange": "this.form.submit()",
             ]);

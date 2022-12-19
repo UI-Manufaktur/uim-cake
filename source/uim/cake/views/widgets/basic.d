@@ -33,7 +33,7 @@ class BasicWidget : IWidget {
      * @param \Cake\View\StringTemplate myTemplates Templates list.
      */
     this(StringTemplate myTemplates) {
-        this._templates = myTemplates;
+        _templates = myTemplates;
     }
 
     /**
@@ -76,11 +76,11 @@ class BasicWidget : IWidget {
             }
         }
 
-        return this._templates.format("input", [
+        return _templates.format("input", [
             "name": myData["name"],
             "type": myData["type"],
             "templateVars": myData["templateVars"],
-            "attrs": this._templates.formatAttributes(
+            "attrs": _templates.formatAttributes(
                 myData,
                 ["name", "type"]
             ),

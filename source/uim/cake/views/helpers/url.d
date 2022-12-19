@@ -40,7 +40,7 @@ class UrlHelper : Helper
             throw new CakeException(sprintf("Class for %s could not be found", $engineClassConfig));
         }
 
-        this._assetUrlClassName = $engineClass;
+        _assetUrlClassName = $engineClass;
     }
 
     /**
@@ -112,9 +112,9 @@ class UrlHelper : Helper
      * @return string Generated URL
      */
     string image(string myPath, array myOptions = []) {
-        myOptions += ["theme": this._View.getTheme()];
+        myOptions += ["theme": _View.getTheme()];
 
-        return h(this._assetUrlClassName::imageUrl(myPath, myOptions));
+        return h(_assetUrlClassName::imageUrl(myPath, myOptions));
     }
 
     /**
@@ -136,9 +136,9 @@ class UrlHelper : Helper
      * @return string Generated URL
      */
     string css(string myPath, array myOptions = []) {
-        myOptions += ["theme": this._View.getTheme()];
+        myOptions += ["theme": _View.getTheme()];
 
-        return h(this._assetUrlClassName::cssUrl(myPath, myOptions));
+        return h(_assetUrlClassName::cssUrl(myPath, myOptions));
     }
 
     /**
@@ -160,9 +160,9 @@ class UrlHelper : Helper
      * @return string Generated URL
      */
     string script(string myPath, array myOptions = []) {
-        myOptions += ["theme": this._View.getTheme()];
+        myOptions += ["theme": _View.getTheme()];
 
-        return h(this._assetUrlClassName::scriptUrl(myPath, myOptions));
+        return h(_assetUrlClassName::scriptUrl(myPath, myOptions));
     }
 
     /**
@@ -188,9 +188,9 @@ class UrlHelper : Helper
      * @return string Generated URL
      */
     string assetUrl(string myPath, array myOptions = []) {
-        myOptions += ["theme": this._View.getTheme()];
+        myOptions += ["theme": _View.getTheme()];
 
-        return h(this._assetUrlClassName::url(myPath, myOptions));
+        return h(_assetUrlClassName::url(myPath, myOptions));
     }
 
     /**
@@ -203,7 +203,7 @@ class UrlHelper : Helper
      * @return string Path with a timestamp added, or not.
      */
     string assetTimestamp(string myPath, $timestamp = null) {
-        return h(this._assetUrlClassName::assetTimestamp(myPath, $timestamp));
+        return h(_assetUrlClassName::assetTimestamp(myPath, $timestamp));
     }
 
     /**
@@ -213,9 +213,9 @@ class UrlHelper : Helper
      * @return string Web accessible path to file.
      */
     string webroot(string myfile) {
-        myOptions = ["theme": this._View.getTheme()];
+        myOptions = ["theme": _View.getTheme()];
 
-        return h(this._assetUrlClassName::webroot(myfile, myOptions));
+        return h(_assetUrlClassName::webroot(myfile, myOptions));
     }
 
     /**

@@ -66,7 +66,7 @@ class TimeHelper : Helper
      * @return string Formatted date string
      */
     string nice($dateString = null, $timezone = null, Nullable!string $locale = null) {
-        $timezone = this._getTimezone($timezone);
+        $timezone = _getTimezone($timezone);
 
         return (new FrozenTime($dateString)).nice($timezone, $locale);
     }
@@ -192,7 +192,7 @@ class TimeHelper : Helper
      * @see \Cake\I18n\Time::toAtom()
      */
     string toAtom($dateString, $timezone = null) {
-        $timezone = this._getTimezone($timezone) ?: date_default_timezone_get();
+        $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString)).timezone($timezone).toAtomString();
     }
@@ -205,7 +205,7 @@ class TimeHelper : Helper
      * @return string Formatted date string
      */
     string toRss($dateString, $timezone = null) {
-        $timezone = this._getTimezone($timezone) ?: date_default_timezone_get();
+        $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString)).timezone($timezone).toRssString();
     }
@@ -233,7 +233,7 @@ class TimeHelper : Helper
             "element": null,
             "timezone": null,
         ];
-        myOptions["timezone"] = this._getTimezone(myOptions["timezone"]);
+        myOptions["timezone"] = _getTimezone(myOptions["timezone"]);
         /** @psalm-suppress UndefinedInterfaceMethod */
         if (myOptions["timezone"] && $dateTime instanceof IDateTime) {
             $dateTime = $dateTime.setTimezone(myOptions["timezone"]);
@@ -343,7 +343,7 @@ class TimeHelper : Helper
         if ($date == null) {
             return $invalid;
         }
-        $timezone = this._getTimezone($timezone);
+        $timezone = _getTimezone($timezone);
 
         try {
             $time = new FrozenTime($date);

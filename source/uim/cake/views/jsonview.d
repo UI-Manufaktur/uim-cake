@@ -105,7 +105,7 @@ class JsonView : SerializedView {
 
 
     protected string _serialize(serializeNames) {
-        myData = this._dataToSerialize(serializeNames);
+        myData = _dataToSerialize(serializeNames);
 
         $jsonOptions = this.getConfig("jsonOptions");
         if ($jsonOptions == null) {

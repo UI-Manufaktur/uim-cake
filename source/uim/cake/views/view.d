@@ -248,14 +248,14 @@ class View : IEventDispatcher {
         ?EventManager myEventManager = null,
         array $viewOptions = []
     ) {
-        foreach (this._passedVars as $var) {
+        foreach (_passedVars as $var) {
             if (isset($viewOptions[$var])) {
                 this.{$var} = $viewOptions[$var];
             }
         }
         this.setConfig(array_diff_key(
             $viewOptions,
-            array_flip(this._passedVars)
+            array_flip(_passedVars)
         ));
 
         if (myEventManager !== null) {
@@ -266,7 +266,7 @@ class View : IEventDispatcher {
         }
         this.request = myRequest;
         this.response = $response ?: new Response();
-        this.Blocks = new this._viewBlockClass();
+        this.Blocks = new _viewBlockClass();
         this.initialize();
         this.loadHelpers();
     }
@@ -439,7 +439,7 @@ class View : IEventDispatcher {
      * @psalm-suppress PossiblyNullArgument
      */
     auto getConfig(Nullable!string myKey = null, $default = null) {
-        myValue = this._getConfig(myKey);
+        myValue = _getConfig(myKey);
 
         if (myValue !== null) {
             return myValue;
@@ -489,7 +489,7 @@ class View : IEventDispatcher {
     string element(string myName, array myData = [], array myOptions = []) {
         myOptions += ["callbacks" => false, "cache" => null, "plugin" => null, "ignoreMissing" => false];
         if (isset(myOptions["cache"])) {
-            myOptions["cache"] = this._elementCache(
+            myOptions["cache"] = _elementCache(
                 myName,
                 myData,
                 array_diff_key(myOptions, ["callbacks" => false, "plugin" => null, "ignoreMissing" => null])
@@ -497,14 +497,14 @@ class View : IEventDispatcher {
         }
 
         myPluginCheck = myOptions["plugin"] !== false;
-        myfile = this._getElementFileName(myName, myPluginCheck);
+        myfile = _getElementFileName(myName, myPluginCheck);
         if (myfile && myOptions["cache"]) {
             return this.cache(void () use (myfile, myData, myOptions) {
-                echo this._renderElement(myfile, myData, myOptions);
+                echo _renderElement(myfile, myData, myOptions);
             }, myOptions["cache"]);
         }
         if (myfile) {
-            return this._renderElement(myfile, myData, myOptions);
+            return _renderElement(myfile, myData, myOptions);
         }
 
         if (myOptions["ignoreMissing"]) {
@@ -513,7 +513,7 @@ class View : IEventDispatcher {
 
         [myPlugin, $elementName] = this.pluginSplit(myName, myPluginCheck);
         myPaths = iterator_to_array(this.getElementPaths(myPlugin));
-        throw new MissingElementException([myName . this._ext, $elementName . this._ext], myPaths);
+        throw new MissingElementException([myName . _ext, $elementName . _ext], myPaths);
     }
 
     /**
@@ -569,7 +569,7 @@ class View : IEventDispatcher {
      * @return bool Success
      */
     bool elementExists(string myName) {
-        return (bool)this._getElementFileName(myName);
+        return (bool)_getElementFileName(myName);
     }
 
     /**
@@ -607,10 +607,10 @@ class View : IEventDispatcher {
             this.layout = $layout;
         }
 
-        myTemplateFileName = this._getTemplateFileName(myTemplate);
-        this._currentType = static::TYPE_TEMPLATE;
+        myTemplateFileName = _getTemplateFileName(myTemplate);
+        _currentType = static::TYPE_TEMPLATE;
         this.dispatchEvent("View.beforeRender", [myTemplateFileName]);
-        this.Blocks.set("content", this._render(myTemplateFileName));
+        this.Blocks.set("content", _render(myTemplateFileName));
         this.dispatchEvent("View.afterRender", [myTemplateFileName]);
 
         if (this.autoLayout) {
@@ -646,7 +646,7 @@ class View : IEventDispatcher {
      * @triggers View.afterLayout this, [$layoutFileName]
      */
     string renderLayout(string myContents, Nullable!string $layout = null) {
-        $layoutFileName = this._getLayoutFileName($layout);
+        $layoutFileName = _getLayoutFileName($layout);
 
         if (!empty(myContents)) {
             this.Blocks.set("content", myContents);
@@ -660,8 +660,8 @@ class View : IEventDispatcher {
             this.Blocks.set("title", $title);
         }
 
-        this._currentType = static::TYPE_LAYOUT;
-        this.Blocks.set("content", this._render($layoutFileName));
+        _currentType = static::TYPE_LAYOUT;
+        this.Blocks.set("content", _render($layoutFileName));
 
         this.dispatchEvent("View.afterLayout", [$layoutFileName]);
 
@@ -866,34 +866,34 @@ class View : IEventDispatcher {
      * @throws \LogicException when you extend an element which doesn"t exist
      */
     function extend(string myName) {
-        myType = myName[0] == "/" ? static::TYPE_TEMPLATE : this._currentType;
+        myType = myName[0] == "/" ? static::TYPE_TEMPLATE : _currentType;
         switch (myType) {
             case static::TYPE_ELEMENT:
-                $parent = this._getElementFileName(myName);
+                $parent = _getElementFileName(myName);
                 if (!$parent) {
                     [myPlugin, myName] = this.pluginSplit(myName);
-                    myPaths = this._paths(myPlugin);
+                    myPaths = _paths(myPlugin);
                     $defaultPath = myPaths[0] . static::TYPE_ELEMENT . DIRECTORY_SEPARATOR;
                     throw new LogicException(sprintf(
                         "You cannot extend an element which does not exist (%s).",
-                        $defaultPath . myName . this._ext
+                        $defaultPath . myName . _ext
                     ));
                 }
                 break;
             case static::TYPE_LAYOUT:
-                $parent = this._getLayoutFileName(myName);
+                $parent = _getLayoutFileName(myName);
                 break;
             default:
-                $parent = this._getTemplateFileName(myName);
+                $parent = _getTemplateFileName(myName);
         }
 
-        if ($parent == this._current) {
+        if ($parent == _current) {
             throw new LogicException("You cannot have templates extend themselves.");
         }
-        if (isset(this._parents[$parent]) && this._parents[$parent] == this._current) {
+        if (isset(_parents[$parent]) && _parents[$parent] == _current) {
             throw new LogicException("You cannot have templates extend in a loop.");
         }
-        this._parents[this._current] = $parent;
+        _parents[_current] = $parent;
 
         return this;
     }
@@ -904,7 +904,7 @@ class View : IEventDispatcher {
      * @return string
      */
     string getCurrentType() {
-        return this._currentType;
+        return _currentType;
     }
 
     /**
@@ -955,24 +955,24 @@ class View : IEventDispatcher {
         if (empty(myData)) {
             myData = this.viewVars;
         }
-        this._current = myTemplateFile;
+        _current = myTemplateFile;
         $initialBlocks = count(this.Blocks.unclosed());
 
         this.dispatchEvent("View.beforeRenderFile", [myTemplateFile]);
 
-        myContents = this._evaluate(myTemplateFile, myData);
+        myContents = _evaluate(myTemplateFile, myData);
 
         $afterEvent = this.dispatchEvent("View.afterRenderFile", [myTemplateFile, myContents]);
         if ($afterEvent.getResult() !== null) {
             myContents = $afterEvent.getResult();
         }
 
-        if (isset(this._parents[myTemplateFile])) {
-            this._stack[] = this.fetch("content");
+        if (isset(_parents[myTemplateFile])) {
+            _stack[] = this.fetch("content");
             this.assign("content", myContents);
 
-            myContents = this._render(this._parents[myTemplateFile]);
-            this.assign("content", array_pop(this._stack));
+            myContents = _render(_parents[myTemplateFile]);
+            this.assign("content", array_pop(_stack));
         }
 
         $remainingBlocks = count(this.Blocks.unclosed());
@@ -1021,11 +1021,11 @@ class View : IEventDispatcher {
      */
     function helpers(): HelperRegistry
     {
-        if (this._helpers == null) {
-            this._helpers = new HelperRegistry(this);
+        if (_helpers == null) {
+            _helpers = new HelperRegistry(this);
         }
 
-        return this._helpers;
+        return _helpers;
     }
 
     /**
@@ -1153,7 +1153,7 @@ class View : IEventDispatcher {
         myName = str_replace("/", DIRECTORY_SEPARATOR, myName);
 
         if (indexOf(myName, DIRECTORY_SEPARATOR) == false && myName !== "" && myName[0] !== ".") {
-            myName = myTemplatePath . $subDir . this._inflectTemplateFileName(myName);
+            myName = myTemplatePath . $subDir . _inflectTemplateFileName(myName);
         } elseif (indexOf(myName, DIRECTORY_SEPARATOR) !== false) {
             if (myName[0] == DIRECTORY_SEPARATOR || myName[1] == ":") {
                 myName = trim(myName, DIRECTORY_SEPARATOR);
@@ -1164,11 +1164,11 @@ class View : IEventDispatcher {
             }
         }
 
-        myName .= this._ext;
-        myPaths = this._paths(myPlugin);
+        myName .= _ext;
+        myPaths = _paths(myPlugin);
         foreach (myPaths as myPath) {
             if (is_file(myPath . myName)) {
-                return this._checkFilePath(myPath . myName, myPath);
+                return _checkFilePath(myPath . myName, myPath);
             }
         }
 
@@ -1255,11 +1255,11 @@ class View : IEventDispatcher {
             myName = this.layout;
         }
         [myPlugin, myName] = this.pluginSplit(myName);
-        myName .= this._ext;
+        myName .= _ext;
 
         foreach (this.getLayoutPaths(myPlugin) as myPath) {
             if (is_file(myPath . myName)) {
-                return this._checkFilePath(myPath . myName, myPath);
+                return _checkFilePath(myPath . myName, myPath);
             }
         }
 
@@ -1278,9 +1278,9 @@ class View : IEventDispatcher {
         if (this.layoutPath) {
             $subDir = this.layoutPath . DIRECTORY_SEPARATOR;
         }
-        $layoutPaths = this._getSubPaths(static::TYPE_LAYOUT . DIRECTORY_SEPARATOR . $subDir);
+        $layoutPaths = _getSubPaths(static::TYPE_LAYOUT . DIRECTORY_SEPARATOR . $subDir);
 
-        foreach (this._paths(myPlugin) as myPath) {
+        foreach (_paths(myPlugin) as myPath) {
             foreach ($layoutPaths as $layoutPath) {
                 yield myPath . $layoutPath;
             }
@@ -1297,7 +1297,7 @@ class View : IEventDispatcher {
     protected auto _getElementFileName(string myName, bool myPluginCheck = true) {
         [myPlugin, myName] = this.pluginSplit(myName, myPluginCheck);
 
-        myName .= this._ext;
+        myName .= _ext;
         foreach (this.getElementPaths(myPlugin) as myPath) {
             if (is_file(myPath . myName)) {
                 return myPath . myName;
@@ -1314,8 +1314,8 @@ class View : IEventDispatcher {
      * @return \Generator
      */
     protected auto getElementPaths(Nullable!string myPlugin) {
-        $elementPaths = this._getSubPaths(static::TYPE_ELEMENT);
-        foreach (this._paths(myPlugin) as myPath) {
+        $elementPaths = _getSubPaths(static::TYPE_ELEMENT);
+        foreach (_paths(myPlugin) as myPath) {
             foreach ($elementPaths as $subdir) {
                 yield myPath . $subdir . DIRECTORY_SEPARATOR;
             }
@@ -1360,11 +1360,11 @@ class View : IEventDispatcher {
      */
     protected string[] _paths(Nullable!string myPlugin = null, bool $cached = true) {
         if ($cached == true) {
-            if (myPlugin == null && !empty(this._paths)) {
-                return this._paths;
+            if (myPlugin == null && !empty(_paths)) {
+                return _paths;
             }
-            if (myPlugin !== null && isset(this._pathsForPlugin[myPlugin])) {
-                return this._pathsForPlugin[myPlugin];
+            if (myPlugin !== null && isset(_pathsForPlugin[myPlugin])) {
+                return _pathsForPlugin[myPlugin];
             }
         }
         myTemplatePaths = App::path(static::NAME_TEMPLATE);
@@ -1405,10 +1405,10 @@ class View : IEventDispatcher {
         );
 
         if (myPlugin !== null) {
-            return this._pathsForPlugin[myPlugin] = myPaths;
+            return _pathsForPlugin[myPlugin] = myPaths;
         }
 
-        return this._paths = myPaths;
+        return _paths = myPaths;
     }
 
     /**
@@ -1469,22 +1469,22 @@ class View : IEventDispatcher {
      * @triggers View.afterRender this, [myfile, $element]
      */
     protected string _renderElement(string myfile, array myData, array myOptions) {
-        $current = this._current;
-        $restore = this._currentType;
-        this._currentType = static::TYPE_ELEMENT;
+        $current = _current;
+        $restore = _currentType;
+        _currentType = static::TYPE_ELEMENT;
 
         if (myOptions["callbacks"]) {
             this.dispatchEvent("View.beforeRender", [myfile]);
         }
 
-        $element = this._render(myfile, array_merge(this.viewVars, myData));
+        $element = _render(myfile, array_merge(this.viewVars, myData));
 
         if (myOptions["callbacks"]) {
             this.dispatchEvent("View.afterRender", [myfile, $element]);
         }
 
-        this._currentType = $restore;
-        this._current = $current;
+        _currentType = $restore;
+        _current = $current;
 
         return $element;
     }
