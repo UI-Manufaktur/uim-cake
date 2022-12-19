@@ -73,7 +73,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @return array<string>
      */
-    auto getMethods(): array
+    array getMethods()
     {
         return this.methods;
     }
@@ -112,7 +112,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @return array<\Closure>
      */
-    auto getParsers(): array
+    array getParsers()
     {
         return this.parsers;
     }
@@ -154,15 +154,15 @@ class BodyParserMiddleware : IMiddleware
      * @return array|null
      */
     protected auto decodeJson(string $body) {
-        if ($body == "") {
-            return [];
-        }
-        $decoded = json_decode($body, true);
-        if (json_last_error() == JSON_ERROR_NONE) {
-            return (array)$decoded;
-        }
+      if ($body == "") {
+          return [];
+      }
+      $decoded = json_decode($body, true);
+      if (json_last_error() == JSON_ERROR_NONE) {
+          return (array)$decoded;
+      }
 
-        return null;
+      return null;
     }
 
     /**
@@ -171,18 +171,17 @@ class BodyParserMiddleware : IMiddleware
      * @param string $body The request body to decode
      * @return array
      */
-    protected auto decodeXml(string $body): array
-    {
-        try {
-            $xml = Xml::build($body, ["return":"domdocument", "readFile":false]);
-            // We might not get child nodes if there are nested inline entities.
-            if ((int)$xml.childNodes.length > 0) {
-                return Xml::toArray($xml);
-            }
-
-            return [];
-        } catch (XmlException $e) {
-            return [];
+    protected array decodeXml(string $body) {
+      try {
+        $xml = Xml::build($body, ["return":"domdocument", "readFile":false]);
+        // We might not get child nodes if there are nested inline entities.
+        if ((int)$xml.childNodes.length > 0) {
+            return Xml::toArray($xml);
         }
+
+        return [];
+      } catch (XmlException $e) {
+          return [];
+      }
     }
 }

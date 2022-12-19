@@ -47,7 +47,7 @@ class Stream : IAdapter
     protected $_connectionErrors = [];
 
 
-    function send(RequestInterface myRequest, array myOptions): array
+    array send(RequestInterface myRequest, array myOptions)
     {
         this._stream = null;
         this._context = null;
@@ -70,7 +70,7 @@ class Stream : IAdapter
      * @param string myContents The response content.
      * @return array<\Cake\Http\Client\Response> The list of responses from the request(s)
      */
-    function createResponses(array $headers, string myContents): array
+    array createResponses(array $headers, string myContents)
     {
         $indexes = $responses = [];
         foreach ($headers as $i: $header) {
@@ -207,7 +207,7 @@ class Stream : IAdapter
      * @return array Array of populated Response objects
      * @throws \Psr\Http\Client\NetworkExceptionInterface
      */
-    protected auto _send(RequestInterface myRequest): array
+    protected array _send(RequestInterface myRequest)
     {
         $deadline = false;
         if (isset(this._contextOptions["timeout"]) && this._contextOptions["timeout"] > 0) {
@@ -296,10 +296,8 @@ class Stream : IAdapter
      * Get the context options
      *
      * Useful for debugging and testing context creation.
-     *
-     * @return array
      */
-    function contextOptions(): array
+    array contextOptions()
     {
         return array_merge(this._contextOptions, this._sslContextOptions);
     }

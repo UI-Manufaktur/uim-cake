@@ -191,7 +191,7 @@ class Behavior : IEventListener
      * @param array<string, mixed> myConfig The customized method mappings.
      * @return array A de-duped list of config data.
      */
-    protected auto _resolveMethodAliases(string myKey, array $defaults, array myConfig): array
+    protected array _resolveMethodAliases(string myKey, array $defaults, array myConfig)
     {
         if (!isset($defaults[myKey], myConfig[myKey])) {
             return myConfig;
@@ -255,7 +255,7 @@ class Behavior : IEventListener
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         myEventMap = [
             "Model.beforeMarshal":"beforeMarshal",
@@ -315,7 +315,7 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    function implementedFinders(): array
+    array implementedFinders()
     {
         $methods = this.getConfig("implementedFinders");
         if (isset($methods)) {
@@ -347,7 +347,7 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    function implementedMethods(): array
+    array implementedMethods()
     {
         $methods = this.getConfig("implementedMethods");
         if (isset($methods)) {
@@ -367,55 +367,54 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    protected auto _reflectionCache(): array
-    {
-        myClass = static::class;
-        if (isset(self::$_reflectionCache[myClass])) {
-            return self::$_reflectionCache[myClass];
-        }
+    protected array _reflectionCache() {
+      myClass = static::class;
+      if (isset(self::$_reflectionCache[myClass])) {
+          return self::$_reflectionCache[myClass];
+      }
 
-        myEvents = this.implementedEvents();
-        myEventMethods = [];
-        foreach (myEvents as $binding) {
-            if (is_array($binding) && isset($binding["callable"])) {
-                /** @var string $callable */
-                $callable = $binding["callable"];
-                $binding = $callable;
-            }
-            myEventMethods[$binding] = true;
-        }
+      myEvents = this.implementedEvents();
+      myEventMethods = [];
+      foreach (myEvents as $binding) {
+          if (is_array($binding) && isset($binding["callable"])) {
+              /** @var string $callable */
+              $callable = $binding["callable"];
+              $binding = $callable;
+          }
+          myEventMethods[$binding] = true;
+      }
 
-        $baseClass = self::class;
-        if (isset(self::$_reflectionCache[$baseClass])) {
-            $baseMethods = self::$_reflectionCache[$baseClass];
-        } else {
-            $baseMethods = get_class_methods($baseClass);
-            self::$_reflectionCache[$baseClass] = $baseMethods;
-        }
+      $baseClass = self::class;
+      if (isset(self::$_reflectionCache[$baseClass])) {
+          $baseMethods = self::$_reflectionCache[$baseClass];
+      } else {
+          $baseMethods = get_class_methods($baseClass);
+          self::$_reflectionCache[$baseClass] = $baseMethods;
+      }
 
-        $return = [
-            "finders":[],
-            "methods":[],
-        ];
+      $return = [
+          "finders":[],
+          "methods":[],
+      ];
 
-        $reflection = new ReflectionClass(myClass);
+      $reflection = new ReflectionClass(myClass);
 
-        foreach ($reflection.getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $methodName = $method.getName();
-            if (
-                in_array($methodName, $baseMethods, true) ||
-                isset(myEventMethods[$methodName])
-            ) {
-                continue;
-            }
+      foreach ($reflection.getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+          $methodName = $method.getName();
+          if (
+              in_array($methodName, $baseMethods, true) ||
+              isset(myEventMethods[$methodName])
+          ) {
+              continue;
+          }
 
-            if (substr($methodName, 0, 4) == "find") {
-                $return["finders"][lcfirst(substr($methodName, 4))] = $methodName;
-            } else {
-                $return["methods"][$methodName] = $methodName;
-            }
-        }
+          if (substr($methodName, 0, 4) == "find") {
+              $return["finders"][lcfirst(substr($methodName, 4))] = $methodName;
+          } else {
+              $return["methods"][$methodName] = $methodName;
+          }
+      }
 
-        return self::$_reflectionCache[myClass] = $return;
+      return self::$_reflectionCache[myClass] = $return;
     }
 }

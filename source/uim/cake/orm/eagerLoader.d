@@ -113,29 +113,28 @@ class EagerLoader
      * @return array Containments.
      * @throws \InvalidArgumentException When using myQueryBuilder with an array of $associations
      */
-    function contain($associations, ?callable myQueryBuilder = null): array
-    {
-        if (myQueryBuilder) {
-            if (!is_string($associations)) {
-                throw new InvalidArgumentException(
-                    "Cannot set containments. To use myQueryBuilder, $associations must be a string"
-                );
-            }
-
-            $associations = [
-                $associations: [
-                    "queryBuilder":myQueryBuilder,
-                ],
-            ];
+    array contain($associations, ?callable myQueryBuilder = null) {
+      if (myQueryBuilder) {
+        if (!is_string($associations)) {
+          throw new InvalidArgumentException(
+              "Cannot set containments. To use myQueryBuilder, $associations must be a string"
+          );
         }
 
-        $associations = (array)$associations;
-        $associations = this._reformatContain($associations, this._containments);
-        this._normalized = null;
-        this._loadExternal = [];
-        this._aliasList = [];
+        $associations = [
+          $associations: [
+              "queryBuilder":myQueryBuilder,
+          ],
+        ];
+      }
 
-        return this._containments = $associations;
+      $associations = (array)$associations;
+      $associations = this._reformatContain($associations, this._containments);
+      this._normalized = null;
+      this._loadExternal = [];
+      this._aliasList = [];
+
+      return this._containments = $associations;
     }
 
     /**
@@ -146,8 +145,7 @@ class EagerLoader
      *
      * @return array Containments.
      */
-    auto getContain(): array
-    {
+    array getContain() {
         return this._containments;
     }
 
@@ -156,11 +154,8 @@ class EagerLoader
      *
      * This will reset/clear out any contained associations that were not
      * added via matching().
-     *
-     * @return void
      */
-    void clearContain()
-    {
+    void clearContain() {
         this._containments = [];
         this._normalized = null;
         this._loadExternal = [];
@@ -247,7 +242,7 @@ class EagerLoader
      *
      * @return array The resulting containments array
      */
-    auto getMatching(): array
+    array getMatching()
     {
         if (this._matching == null) {
             this._matching = new static();
@@ -272,7 +267,7 @@ class EagerLoader
      * will be normalized
      * @return array
      */
-    function normalized(Table myRepository): array
+    array normalized(Table myRepository)
     {
         if (this._normalized !== null || empty(this._containments)) {
             return (array)this._normalized;
@@ -305,7 +300,7 @@ class EagerLoader
      * with the new one
      * @return array
      */
-    protected auto _reformatContain(array $associations, array $original): array
+    protected array _reformatContain(array $associations, array $original)
     {
         myResult = $original;
 
@@ -417,7 +412,7 @@ class EagerLoader
      * attached
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    function attachableAssociations(Table myRepository): array
+    array attachableAssociations(Table myRepository)
     {
         $contain = this.normalized(myRepository);
         $matching = this._matching ? this._matching.normalized(myRepository) : [];
@@ -435,7 +430,7 @@ class EagerLoader
      * to be loaded
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    function externalAssociations(Table myRepository): array
+    array externalAssociations(Table myRepository)
     {
         if (this._loadExternal) {
             return this._loadExternal;
@@ -563,7 +558,7 @@ class EagerLoader
      * @param array<\Cake\ORM\EagerLoadable> $matching list of associations that should be forcibly joined.
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    protected auto _resolveJoins(array $associations, array $matching = []): array
+    protected array _resolveJoins(array $associations, array $matching = [])
     {
         myResult = [];
         foreach ($matching as myTable: $loadable) {
@@ -757,7 +752,7 @@ class EagerLoader
      * @param \Cake\Database\IStatement $statement The statement to work on
      * @return array
      */
-    protected auto _collectKeys(array $external, Query myQuery, $statement): array
+    protected array _collectKeys(array $external, Query myQuery, $statement)
     {
         $collectKeys = [];
         foreach ($external as $meta) {
@@ -797,7 +792,7 @@ class EagerLoader
      * @param array<string, array> $collectKeys The keys to collect
      * @return array
      */
-    protected auto _groupKeys(BufferedStatement $statement, array $collectKeys): array
+    protected array _groupKeys(BufferedStatement $statement, array $collectKeys)
     {
         myKeys = [];
         foreach (($statement.fetchAll("assoc") ?: []) as myResult) {

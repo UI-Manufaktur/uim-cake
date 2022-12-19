@@ -732,7 +732,7 @@ abstract class Association
      * data shuld be nested in. Will use the default one if not provided.
      * @return array
      */
-    function transformRow(array $row, string $nestKey, bool $joined, Nullable!string myTargetProperty = null): array
+    array transformRow(array $row, string $nestKey, bool $joined, Nullable!string myTargetProperty = null)
     {
         $sourceAlias = this.getSource().getAlias();
         $nestKey = $nestKey ?: this._name;
@@ -755,7 +755,7 @@ abstract class Association
      *   with this association
      * @return array
      */
-    function defaultRowValue(array $row, bool $joined): array
+    array defaultRowValue(array $row, bool $joined)
     {
         $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {
@@ -992,7 +992,7 @@ abstract class Association
      * @throws \RuntimeException if the number of columns in the foreignKey do not
      * match the number of columns in the source table primaryKey
      */
-    protected auto _joinCondition(array myOptions): array
+    protected array _joinCondition(array myOptions)
     {
         $conditions = [];
         $tAlias = this._name;
@@ -1044,7 +1044,7 @@ abstract class Association
      * and options as value.
      * @return array
      */
-    protected auto _extractFinder(myFinderData): array
+    protected array _extractFinder(myFinderData)
     {
         myFinderData = (array)myFinderData;
 

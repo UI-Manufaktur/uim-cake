@@ -291,7 +291,7 @@ class Socket
      *
      * @return array IP addresses
      */
-    function addresses(): array
+    array addresses()
     {
         if (Validation::ip(this._config["host"])) {
             return [this._config["host"]];

@@ -140,7 +140,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return array
      */
-    auto getLastResponse(): array
+    array getLastResponse()
     {
         return this._lastResponse;
     }
@@ -153,7 +153,7 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      * @psalm-return array{headers: string, message: string}
      */
-    function send(Message myMessage): array
+    array send(Message myMessage)
     {
         this.checkRecipient(myMessage);
 
@@ -343,7 +343,7 @@ class SmtpTransport : AbstractTransport
      * @param \Cake\Mailer\Message myMessage Message instance
      * @return array
      */
-    protected auto _prepareFromAddress(Message myMessage): array
+    protected array _prepareFromAddress(Message myMessage)
     {
         $from = myMessage.getReturnPath();
         if (empty($from)) {
@@ -359,7 +359,7 @@ class SmtpTransport : AbstractTransport
      * @param \Cake\Mailer\Message myMessage Message instance
      * @return array
      */
-    protected auto _prepareRecipientAddresses(Message myMessage): array
+    protected array _prepareRecipientAddresses(Message myMessage)
     {
         $to = myMessage.getTo();
         $cc = myMessage.getCc();

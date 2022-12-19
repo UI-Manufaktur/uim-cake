@@ -14,7 +14,7 @@ import uim.cake;
 class Curl : IAdapter
 {
 
-    function send(RequestInterface myRequest, array myOptions): array
+    array send(RequestInterface myRequest, array myOptions)
     {
         if (!extension_loaded("curl")) {
             throw new ClientException("curl extension is not loaded.");
@@ -56,7 +56,7 @@ class Curl : IAdapter
      * @param array<string, mixed> myOptions The client options
      * @return array
      */
-    function buildOptions(RequestInterface myRequest, array myOptions): array
+    array buildOptions(RequestInterface myRequest, array myOptions)
     {
         $headers = [];
         foreach (myRequest.getHeaders() as myKey: myValues) {
@@ -171,15 +171,14 @@ class Curl : IAdapter
      * @return array<\Cake\Http\Client\Response>
      * @psalm-suppress UndefinedDocblockClass
      */
-    protected auto createResponse($handle, $responseData): array
-    {
-        /** @psalm-suppress PossiblyInvalidArgument */
-        $headerSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
-        $headers = trim(substr($responseData, 0, $headerSize));
-        $body = substr($responseData, $headerSize);
-        $response = new Response(explode("\r\n", $headers), $body);
+    protected array createResponse($handle, $responseData) {
+      /** @psalm-suppress PossiblyInvalidArgument */
+      $headerSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+      $headers = trim(substr($responseData, 0, $headerSize));
+      $body = substr($responseData, $headerSize);
+      $response = new Response(explode("\r\n", $headers), $body);
 
-        return [$response];
+      return [$response];
     }
 
     /**
@@ -190,7 +189,7 @@ class Curl : IAdapter
      * @psalm-suppress UndefinedDocblockClass
      */
     protected auto exec($ch) {
-        /** @psalm-suppress PossiblyInvalidArgument */
-        return curl_exec($ch);
+      /** @psalm-suppress PossiblyInvalidArgument */
+      return curl_exec($ch);
     }
 }

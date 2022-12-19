@@ -13,7 +13,7 @@ trait AssociationsNormalizerTrait
      * @param array|string $associations The array of included associations.
      * @return array An array having dot notation transformed into nested arrays
      */
-    protected auto _normalizeAssociations($associations): array
+    protected array _normalizeAssociations($associations)
     {
         myResult = [];
         foreach ((array)$associations as myTable: myOptions) {

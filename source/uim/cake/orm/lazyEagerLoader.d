@@ -101,16 +101,15 @@ class LazyEagerLoader
      * @param $source The table having the top level associations
      * @param $associations The name of the top level associations
      */
-    protected string[] _getPropertyMap(Table $source, string[] $associations): array
-    {
-        $map = [];
-        myContainer = $source.associations();
-        foreach ($associations as $assoc) {
-            /** @psalm-suppress PossiblyNullReference */
-            $map[$assoc] = myContainer.get($assoc).getProperty();
-        }
+    protected string[] _getPropertyMap(Table $source, string[] $associations) {
+      $map = [];
+      myContainer = $source.associations();
+      foreach ($associations as $assoc) {
+          /** @psalm-suppress PossiblyNullReference */
+          $map[$assoc] = myContainer.get($assoc).getProperty();
+      }
 
-        return $map;
+      return $map;
     }
 
     /**
@@ -123,7 +122,7 @@ class LazyEagerLoader
      * @param \Cake\ORM\Table $source The table where the entities came from
      * @return array
      */
-    protected auto _injectResults(iterable $objects, myResults, string[] $associations, Table $source): array
+    protected array _injectResults(iterable $objects, myResults, string[] $associations, Table $source)
     {
         $injected = [];
         $properties = this._getPropertyMap($source, $associations);

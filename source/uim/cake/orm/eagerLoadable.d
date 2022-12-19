@@ -136,7 +136,7 @@ class EagerLoadable
      *
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    function associations(): array
+    array associations()
     {
         return this._associations;
     }
@@ -223,7 +223,7 @@ class EagerLoadable
      *
      * @return array
      */
-    auto getConfig(): array
+    array getConfig()
     {
         return this._config;
     }
@@ -261,11 +261,8 @@ class EagerLoadable
     /**
      * Returns a representation of this object that can be passed to
      * Cake\ORM\EagerLoader::contain()
-     *
-     * @return array
      */
-    function asContainArray(): array
-    {
+    array asContainArray() {
         $associations = [];
         foreach (this._associations as $assoc) {
             $associations += $assoc.asContainArray();

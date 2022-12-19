@@ -41,7 +41,7 @@ class Marshaller
      * @throws \InvalidArgumentException When associations do not exist.
      * @return array
      */
-    protected auto _buildPropertyMap(array myData, array myOptions): array
+    protected array _buildPropertyMap(array myData, array myOptions)
     {
         $map = [];
         $schema = this._table.getSchema();
@@ -220,7 +220,7 @@ class Marshaller
      * @return array The list of validation errors.
      * @throws \RuntimeException If no validator can be created.
      */
-    protected auto _validate(array myData, array myOptions, bool $isNew): array
+    protected array _validate(array myData, array myOptions, bool $isNew)
     {
         if (!myOptions["validate"]) {
             return [];
@@ -257,7 +257,7 @@ class Marshaller
      * @param array<string, mixed> myOptions The options passed to this marshaller.
      * @return array An array containing prepared data and options.
      */
-    protected auto _prepareDataAndOptions(array myData, array myOptions): array
+    protected array _prepareDataAndOptions(array myData, array myOptions)
     {
         myOptions += ["validate": true];
 
@@ -333,7 +333,7 @@ class Marshaller
      * @see \Cake\ORM\Table::newEntities()
      * @see \Cake\ORM\Entity::$_accessible
      */
-    function many(array myData, array myOptions = []): array
+    array many(array myData, array myOptions = [])
     {
         $output = [];
         foreach (myData as $record) {
@@ -360,7 +360,7 @@ class Marshaller
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    protected auto _belongsToMany(BelongsToMany $assoc, array myData, array myOptions = []): array
+    protected array _belongsToMany(BelongsToMany $assoc, array myData, array myOptions = [])
     {
         $associated = myOptions["associated"] ?? [];
         $forceNew = myOptions["forceNew"] ?? false;
@@ -451,7 +451,7 @@ class Marshaller
      * @param array $ids The list of ids to load.
      * @return array<\Cake\Datasource\IEntity> An array of entities.
      */
-    protected auto _loadAssociatedByIds(Association $assoc, array $ids): array
+    protected array _loadAssociatedByIds(Association $assoc, array $ids)
     {
         if (empty($ids)) {
             return [];
@@ -635,7 +635,7 @@ class Marshaller
      * @see \Cake\ORM\Entity::$_accessible
      * @psalm-suppress NullArrayOffset
      */
-    function mergeMany(iterable $entities, array myData, array myOptions = []): array
+    array mergeMany(iterable $entities, array myData, array myOptions = [])
     {
         $primary = (array)this._table.getPrimaryKey();
 
@@ -761,7 +761,7 @@ class Marshaller
      * @param array<string, mixed> myOptions List of options.
      * @return array<\Cake\Datasource\IEntity>
      */
-    protected auto _mergeBelongsToMany(array $original, BelongsToMany $assoc, array myValue, array myOptions): array
+    protected array _mergeBelongsToMany(array $original, BelongsToMany $assoc, array myValue, array myOptions)
     {
         $associated = myOptions["associated"] ?? [];
 
@@ -791,7 +791,7 @@ class Marshaller
      * @param array<string, mixed> myOptions List of options.
      * @return array<\Cake\Datasource\IEntity> An array of entities
      */
-    protected auto _mergeJoinData(array $original, BelongsToMany $assoc, array myValue, array myOptions): array
+    protected array _mergeJoinData(array $original, BelongsToMany $assoc, array myValue, array myOptions)
     {
         $associated = myOptions["associated"] ?? [];
         $extra = [];
