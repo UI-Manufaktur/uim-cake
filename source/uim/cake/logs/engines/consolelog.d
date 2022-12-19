@@ -53,22 +53,22 @@ class ConsoleLog : BaseLog
     this(array myConfig = []) {
         super.this(myConfig);
 
-        myConfig = this._config;
+        myConfig = _config;
         if (myConfig["stream"] instanceof ConsoleOutput) {
-            this._output = myConfig["stream"];
+            _output = myConfig["stream"];
         } elseif (is_string(myConfig["stream"])) {
-            this._output = new ConsoleOutput(myConfig["stream"]);
+            _output = new ConsoleOutput(myConfig["stream"]);
         } else {
             throw new InvalidArgumentException("`stream` not a ConsoleOutput nor string");
         }
 
         if (isset(myConfig["outputAs"])) {
-            this._output.setOutputAs(myConfig["outputAs"]);
+            _output.setOutputAs(myConfig["outputAs"]);
         }
 
-        if (isset(this._config["dateFormat"])) {
+        if (isset(_config["dateFormat"])) {
             deprecationWarning("`dateFormat` option should now be set in the formatter options.", 0);
-            this.formatter.setConfig("dateFormat", this._config["dateFormat"]);
+            this.formatter.setConfig("dateFormat", _config["dateFormat"]);
         }
     }
 
@@ -82,7 +82,7 @@ class ConsoleLog : BaseLog
      * @see \Cake\Log\Log::$_levels
      */
     function log($level, myMessage, array $context = []) {
-        myMessage = this._format(myMessage, $context);
-        this._output.write(this.formatter.format($level, myMessage, $context));
+        myMessage = _format(myMessage, $context);
+        _output.write(this.formatter.format($level, myMessage, $context));
     }
 }

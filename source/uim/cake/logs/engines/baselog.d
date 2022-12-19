@@ -36,19 +36,19 @@ abstract class BaseLog : AbstractLogger {
     this(array myConfig = []) {
         this.setConfig(myConfig);
 
-        if (!is_array(this._config["scopes"]) && this._config["scopes"] !== false) {
-            this._config["scopes"] = (array)this._config["scopes"];
+        if (!is_array(_config["scopes"]) && _config["scopes"] !== false) {
+            _config["scopes"] = (array)_config["scopes"];
         }
 
-        if (!is_array(this._config["levels"])) {
-            this._config["levels"] = (array)this._config["levels"];
+        if (!is_array(_config["levels"])) {
+            _config["levels"] = (array)_config["levels"];
         }
 
-        if (!empty(this._config["types"]) && empty(this._config["levels"])) {
-            this._config["levels"] = (array)this._config["types"];
+        if (!empty(_config["types"]) && empty(_config["levels"])) {
+            _config["levels"] = (array)_config["types"];
         }
 
-        $formatter = this._config["formatter"] ?? DefaultFormatter::class;
+        $formatter = _config["formatter"] ?? DefaultFormatter::class;
         if (!is_object($formatter)) {
             if (is_array($formatter)) {
                 myClass = $formatter["className"];
@@ -73,12 +73,12 @@ abstract class BaseLog : AbstractLogger {
 
     // Get the levels this logger is interested in.
     string[] levels() {
-        return this._config["levels"];
+        return _config["levels"];
     }
 
     // Get the scopes this logger is interested in.
     string[] scopes() {
-        return this._config["scopes"];
+        return _config["scopes"];
     }
 
     /**

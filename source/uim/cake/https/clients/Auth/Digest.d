@@ -25,7 +25,7 @@ class Digest
      * @param array|null myOptions Options list.
      */
     this(Client $client, ?array myOptions = null) {
-        this._client = $client;
+        _client = $client;
     }
 
     /**
@@ -42,12 +42,12 @@ class Digest
             return myRequest;
         }
         if (!isset($credentials["realm"])) {
-            $credentials = this._getServerInfo(myRequest, $credentials);
+            $credentials = _getServerInfo(myRequest, $credentials);
         }
         if (!isset($credentials["realm"])) {
             return myRequest;
         }
-        myValue = this._generateHeader(myRequest, $credentials);
+        myValue = _generateHeader(myRequest, $credentials);
 
         return myRequest.withHeader("Authorization", myValue);
     }
@@ -65,7 +65,7 @@ class Digest
      */
     protected auto _getServerInfo(Request myRequest, array $credentials): array
     {
-        $response = this._client.get(
+        $response = _client.get(
             (string)myRequest.getUri(),
             [],
             ["auth":["type":null]]

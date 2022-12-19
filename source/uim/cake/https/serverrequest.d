@@ -219,7 +219,7 @@ class ServerRequest : IServerRequest
             "input":null,
         ];
 
-        this._setConfig(myConfig);
+        _setConfig(myConfig);
     }
 
     /**
@@ -252,7 +252,7 @@ class ServerRequest : IServerRequest
             $uri = ServerRequestFactory::createUri(myConfig["environment"]);
         }
 
-        this._environment = myConfig["environment"];
+        _environment = myConfig["environment"];
 
         this.uri = $uri;
         this.base = myConfig["base"];
@@ -461,17 +461,17 @@ class ServerRequest : IServerRequest
             return false;
         }
         if ($args) {
-            return this._is(myType, $args);
+            return _is(myType, $args);
         }
 
-        return this._detectorCache[myType] = this._detectorCache[myType] ?? this._is(myType, $args);
+        return _detectorCache[myType] = _detectorCache[myType] ?? _is(myType, $args);
     }
 
     /**
      * Clears the instance detector cache, used by the is() function
      */
     void clearDetectorCache() {
-        this._detectorCache = [];
+        _detectorCache = [];
     }
 
     /**
@@ -488,16 +488,16 @@ class ServerRequest : IServerRequest
 
             return $detect(...$args);
         }
-        if (isset($detect["env"]) && this._environmentDetector($detect)) {
+        if (isset($detect["env"]) && _environmentDetector($detect)) {
             return true;
         }
-        if (isset($detect["header"]) && this._headerDetector($detect)) {
+        if (isset($detect["header"]) && _headerDetector($detect)) {
             return true;
         }
-        if (isset($detect["accept"]) && this._acceptHeaderDetector($detect)) {
+        if (isset($detect["accept"]) && _acceptHeaderDetector($detect)) {
             return true;
         }
-        if (isset($detect["param"]) && this._paramDetector($detect)) {
+        if (isset($detect["param"]) && _paramDetector($detect)) {
             return true;
         }
 
@@ -726,7 +726,7 @@ class ServerRequest : IServerRequest
      */
     array getHeaders() {
         $headers = [];
-        foreach (this._environment as myKey: myValue) {
+        foreach (_environment as myKey: myValue) {
             myName = null;
             if (indexOf(myKey, "HTTP_") == 0) {
                 myName = substr(myKey, 5);
@@ -754,7 +754,7 @@ class ServerRequest : IServerRequest
     bool hasHeader(myName) {
         myName = this.normalizeHeaderName(myName);
 
-        return isset(this._environment[myName]);
+        return isset(_environment[myName]);
     }
 
     /**
@@ -770,8 +770,8 @@ class ServerRequest : IServerRequest
      */
     string[] getHeader(myName) {
         myName = this.normalizeHeaderName(myName);
-        if (isset(this._environment[myName])) {
-            return (array)this._environment[myName];
+        if (isset(_environment[myName])) {
+            return (array)_environment[myName];
         }
 
         return [];
@@ -897,7 +897,7 @@ class ServerRequest : IServerRequest
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
     array getServerParams() {
-        return this._environment;
+        return _environment;
     }
 
     /**
@@ -1049,7 +1049,7 @@ class ServerRequest : IServerRequest
      * @return array An array of `prefValue: [content/types]`
      */
     array parseAccept() {
-        return this._parseAcceptWithQualifier(this.getHeaderLine("Accept"));
+        return _parseAcceptWithQualifier(this.getHeaderLine("Accept"));
     }
 
     /**
@@ -1067,7 +1067,7 @@ class ServerRequest : IServerRequest
      * @return array|bool If a myLanguage is provided, a boolean. Otherwise the array of accepted languages.
      */
     function acceptLanguage(Nullable!string myLanguage = null) {
-        $raw = this._parseAcceptWithQualifier(this.getHeaderLine("Accept-Language"));
+        $raw = _parseAcceptWithQualifier(this.getHeaderLine("Accept-Language"));
         $accept = [];
         foreach ($raw as myLanguages) {
             foreach (myLanguages as &$lang) {
@@ -1388,11 +1388,11 @@ class ServerRequest : IServerRequest
      */
     string getEnv(string myKey, Nullable!string $default = null) {
         myKey = strtoupper(myKey);
-        if (!array_key_exists(myKey, this._environment)) {
-            this._environment[myKey] = env(myKey);
+        if (!array_key_exists(myKey, _environment)) {
+            _environment[myKey] = env(myKey);
         }
 
-        return this._environment[myKey] !== null ? (string)this._environment[myKey] : $default;
+        return _environment[myKey] !== null ? (string)_environment[myKey] : $default;
     }
 
     /**

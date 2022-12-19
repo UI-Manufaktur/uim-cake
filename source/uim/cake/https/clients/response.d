@@ -105,9 +105,9 @@ class Response : Message : IResponse
      * @param string $body The response body.
      */
     this(array $headers = [], string $body = "") {
-        this._parseHeaders($headers);
+        _parseHeaders($headers);
         if (this.getHeaderLine("Content-Encoding") == "gzip") {
-            $body = this._decodeGzipBody($body);
+            $body = _decodeGzipBody($body);
         }
         $stream = new Stream("php://memory", "wb+");
         $stream.write($body);
@@ -260,7 +260,7 @@ class Response : Message : IResponse
      */
     auto getCookies(): array
     {
-        return this._getCookies();
+        return _getCookies();
     }
 
     /**
@@ -344,7 +344,7 @@ class Response : Message : IResponse
      * Get the response body as string.
      */
     string getStringBody() {
-        return this._getBody();
+        return _getBody();
     }
 
     /**
@@ -353,7 +353,7 @@ class Response : Message : IResponse
      * @return mixed
      */
     auto getJson() {
-        return this._getJson();
+        return _getJson();
     }
 
     /**
@@ -362,11 +362,11 @@ class Response : Message : IResponse
      * @return mixed
      */
     protected auto _getJson() {
-        if (this._json) {
-            return this._json;
+        if (_json) {
+            return _json;
         }
 
-        return this._json = json_decode(this._getBody(), true);
+        return _json = json_decode(_getBody(), true);
     }
 
     /**
@@ -376,7 +376,7 @@ class Response : Message : IResponse
      */
     auto getXml(): ?SimpleXMLElement
     {
-        return this._getXml();
+        return _getXml();
     }
 
     /**
@@ -386,15 +386,15 @@ class Response : Message : IResponse
      */
     protected auto _getXml(): ?SimpleXMLElement
     {
-        if (this._xml !== null) {
-            return this._xml;
+        if (_xml !== null) {
+            return _xml;
         }
         libxml_use_internal_errors();
-        myData = simplexml_load_string(this._getBody());
+        myData = simplexml_load_string(_getBody());
         if (myData) {
-            this._xml = myData;
+            _xml = myData;
 
-            return this._xml;
+            return _xml;
         }
 
         return null;

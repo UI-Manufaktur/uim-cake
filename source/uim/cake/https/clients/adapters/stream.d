@@ -48,15 +48,15 @@ class Stream : IAdapter
 
 
     array send(RequestInterface myRequest, array myOptions) {
-        this._stream = null;
-        this._context = null;
-        this._contextOptions = [];
-        this._sslContextOptions = [];
-        this._connectionErrors = [];
+        _stream = null;
+        _context = null;
+        _contextOptions = [];
+        _sslContextOptions = [];
+        _connectionErrors = [];
 
-        this._buildContext(myRequest, myOptions);
+        _buildContext(myRequest, myOptions);
 
-        return this._send(myRequest);
+        return _send(myRequest);
     }
 
     /**
@@ -83,7 +83,7 @@ class Stream : IAdapter
             /** @psalm-suppress PossiblyInvalidArgument */
             $headerSlice = array_slice($headers, $start, $end);
             $body = $i == $last ? myContents : "";
-            $responses[] = this._buildResponse($headerSlice, $body);
+            $responses[] = _buildResponse($headerSlice, $body);
         }
 
         return $responses;
@@ -96,18 +96,18 @@ class Stream : IAdapter
      * @param array<string, mixed> myOptions Additional request options.
      */
     protected void _buildContext(RequestInterface myRequest, array myOptions) {
-        this._buildContent(myRequest, myOptions);
-        this._buildHeaders(myRequest, myOptions);
-        this._buildOptions(myRequest, myOptions);
+        _buildContent(myRequest, myOptions);
+        _buildHeaders(myRequest, myOptions);
+        _buildOptions(myRequest, myOptions);
 
         myUrl = myRequest.getUri();
         $scheme = parse_url((string)myUrl, PHP_URL_SCHEME);
         if ($scheme == "https") {
-            this._buildSslContext(myRequest, myOptions);
+            _buildSslContext(myRequest, myOptions);
         }
-        this._context = stream_context_create([
-            "http":this._contextOptions,
-            "ssl":this._sslContextOptions,
+        _context = stream_context_create([
+            "http":_contextOptions,
+            "ssl":_sslContextOptions,
         ]);
     }
 
@@ -124,7 +124,7 @@ class Stream : IAdapter
         foreach (myRequest.getHeaders() as myName: myValues) {
             $headers[] = sprintf("%s: %s", myName, implode(", ", myValues));
         }
-        this._contextOptions["header"] = implode("\r\n", $headers);
+        _contextOptions["header"] = implode("\r\n", $headers);
     }
 
     /**
@@ -139,7 +139,7 @@ class Stream : IAdapter
     protected void _buildContent(RequestInterface myRequest, array myOptions) {
         $body = myRequest.getBody();
         $body.rewind();
-        this._contextOptions["content"] = $body.getContents();
+        _contextOptions["content"] = $body.getContents();
     }
 
     /**
@@ -149,19 +149,19 @@ class Stream : IAdapter
      * @param array<string, mixed> myOptions Array of options to use.
      */
     protected void _buildOptions(RequestInterface myRequest, array myOptions) {
-        this._contextOptions["method"] = myRequest.getMethod();
-        this._contextOptions["protocol_version"] = myRequest.getProtocolVersion();
-        this._contextOptions["ignore_errors"] = true;
+        _contextOptions["method"] = myRequest.getMethod();
+        _contextOptions["protocol_version"] = myRequest.getProtocolVersion();
+        _contextOptions["ignore_errors"] = true;
 
         if (isset(myOptions["timeout"])) {
-            this._contextOptions["timeout"] = myOptions["timeout"];
+            _contextOptions["timeout"] = myOptions["timeout"];
         }
         // Redirects are handled in the client layer because of cookie handling issues.
-        this._contextOptions["max_redirects"] = 0;
+        _contextOptions["max_redirects"] = 0;
 
         if (isset(myOptions["proxy"]["proxy"])) {
-            this._contextOptions["request_fulluri"] = true;
-            this._contextOptions["proxy"] = myOptions["proxy"]["proxy"];
+            _contextOptions["request_fulluri"] = true;
+            _contextOptions["proxy"] = myOptions["proxy"]["proxy"];
         }
     }
 
@@ -188,12 +188,12 @@ class Stream : IAdapter
         if (!empty(myOptions["ssl_verify_host"])) {
             myUrl = myRequest.getUri();
             $host = parse_url((string)myUrl, PHP_URL_HOST);
-            this._sslContextOptions["peer_name"] = $host;
+            _sslContextOptions["peer_name"] = $host;
         }
         foreach ($sslOptions as myKey) {
             if (isset(myOptions[myKey])) {
                 myName = substr(myKey, 4);
-                this._sslContextOptions[myName] = myOptions[myKey];
+                _sslContextOptions[myName] = myOptions[myKey];
             }
         }
     }
@@ -207,33 +207,33 @@ class Stream : IAdapter
      */
     protected array _send(RequestInterface myRequest) {
         $deadline = false;
-        if (isset(this._contextOptions["timeout"]) && this._contextOptions["timeout"] > 0) {
-            $deadline = time() + this._contextOptions["timeout"];
+        if (isset(_contextOptions["timeout"]) && _contextOptions["timeout"] > 0) {
+            $deadline = time() + _contextOptions["timeout"];
         }
 
         myUrl = myRequest.getUri();
-        this._open((string)myUrl, myRequest);
+        _open((string)myUrl, myRequest);
         myContents = "";
         $timedOut = false;
 
         /** @psalm-suppress PossiblyNullArgument  */
-        while (!feof(this._stream)) {
+        while (!feof(_stream)) {
             if ($deadline !== false) {
-                stream_set_timeout(this._stream, max($deadline - time(), 1));
+                stream_set_timeout(_stream, max($deadline - time(), 1));
             }
 
-            myContents .= fread(this._stream, 8192);
+            myContents .= fread(_stream, 8192);
 
-            $meta = stream_get_meta_data(this._stream);
+            $meta = stream_get_meta_data(_stream);
             if ($meta["timed_out"] || ($deadline !== false && time() > $deadline)) {
                 $timedOut = true;
                 break;
             }
         }
         /** @psalm-suppress PossiblyNullArgument */
-        $meta = stream_get_meta_data(this._stream);
+        $meta = stream_get_meta_data(_stream);
         /** @psalm-suppress InvalidPropertyAssignmentValue */
-        fclose(this._stream);
+        fclose(_stream);
 
         if ($timedOut) {
             throw new NetworkException("Connection timed out " . myUrl, myRequest);
@@ -272,19 +272,19 @@ class Stream : IAdapter
         }
 
         set_error_handler(bool ($code, myMessage) {
-            this._connectionErrors[] = myMessage;
+            _connectionErrors[] = myMessage;
 
             return true;
         });
         try {
             /** @psalm-suppress PossiblyNullArgument */
-            this._stream = fopen(myUrl, "rb", false, this._context);
+            _stream = fopen(myUrl, "rb", false, _context);
         } finally {
             restore_error_handler();
         }
 
-        if (!this._stream || !empty(this._connectionErrors)) {
-            throw new RequestException(implode("\n", this._connectionErrors), myRequest);
+        if (!_stream || !empty(_connectionErrors)) {
+            throw new RequestException(implode("\n", _connectionErrors), myRequest);
         }
     }
 
@@ -294,6 +294,6 @@ class Stream : IAdapter
      * Useful for debugging and testing context creation.
      */
     array contextOptions() {
-        return array_merge(this._contextOptions, this._sslContextOptions);
+        return array_merge(_contextOptions, _sslContextOptions);
     }
 }

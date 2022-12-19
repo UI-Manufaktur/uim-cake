@@ -135,20 +135,20 @@ class ResultSet : IResultSet
      */
     this(Query myQuery, IStatement $statement) {
         myRepository = myQuery.getRepository();
-        this._statement = $statement;
-        this._driver = myQuery.getConnection().getDriver();
-        this._defaultTable = myRepository;
-        this._calculateAssociationMap(myQuery);
-        this._hydrate = myQuery.isHydrationEnabled();
-        this._entityClass = myRepository.getEntityClass();
-        this._useBuffering = myQuery.isBufferedResultsEnabled();
-        this._defaultAlias = this._defaultTable.getAlias();
-        this._calculateColumnMap(myQuery);
-        this._autoFields = myQuery.isAutoFieldsEnabled();
+        _statement = $statement;
+        _driver = myQuery.getConnection().getDriver();
+        _defaultTable = myRepository;
+        _calculateAssociationMap(myQuery);
+        _hydrate = myQuery.isHydrationEnabled();
+        _entityClass = myRepository.getEntityClass();
+        _useBuffering = myQuery.isBufferedResultsEnabled();
+        _defaultAlias = _defaultTable.getAlias();
+        _calculateColumnMap(myQuery);
+        _autoFields = myQuery.isAutoFieldsEnabled();
 
-        if (this._useBuffering) {
+        if (_useBuffering) {
             myCount = this.count();
-            this._results = new SplFixedArray(myCount);
+            _results = new SplFixedArray(myCount);
         }
     }
 
@@ -161,7 +161,7 @@ class ResultSet : IResultSet
      */
     #[\ReturnTypeWillChange]
     function current() {
-        return this._current;
+        return _current;
     }
 
     /**
@@ -170,7 +170,7 @@ class ResultSet : IResultSet
      * Part of Iterator interface.
      */
     int key() {
-        return this._index;
+        return _index;
     }
 
     /**
@@ -179,7 +179,7 @@ class ResultSet : IResultSet
      * Part of Iterator interface.
      */
     void next() {
-        this._index++;
+        _index++;
     }
 
     /**
@@ -191,17 +191,17 @@ class ResultSet : IResultSet
      * @return void
      */
     function rewind() {
-        if (this._index == 0) {
+        if (_index == 0) {
             return;
         }
 
-        if (!this._useBuffering) {
+        if (!_useBuffering) {
             $msg = "You cannot rewind an un-buffered ResultSet. "
                 . "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
         }
 
-        this._index = 0;
+        _index = 0;
     }
 
     /**
@@ -210,10 +210,10 @@ class ResultSet : IResultSet
      * Part of Iterator interface.
      */
     bool valid() {
-        if (this._useBuffering) {
-            $valid = this._index < this._count;
-            if ($valid && this._results[this._index] !== null) {
-                this._current = this._results[this._index];
+        if (_useBuffering) {
+            $valid = _index < _count;
+            if ($valid && _results[_index] !== null) {
+                _current = _results[_index];
 
                 return true;
             }
@@ -222,14 +222,14 @@ class ResultSet : IResultSet
             }
         }
 
-        this._current = this._fetchResult();
-        $valid = this._current !== false;
+        _current = _fetchResult();
+        $valid = _current !== false;
 
-        if ($valid && this._useBuffering) {
-            this._results[this._index] = this._current;
+        if ($valid && _useBuffering) {
+            _results[_index] = _current;
         }
-        if (!$valid && this._statement !== null) {
-            this._statement.closeCursor();
+        if (!$valid && _statement !== null) {
+            _statement.closeCursor();
         }
 
         return $valid;
@@ -244,8 +244,8 @@ class ResultSet : IResultSet
      */
     function first() {
         foreach (this as myResult) {
-            if (this._statement !== null && !this._useBuffering) {
-                this._statement.closeCursor();
+            if (_statement !== null && !_useBuffering) {
+                _statement.closeCursor();
             }
 
             return myResult;
@@ -262,7 +262,7 @@ class ResultSet : IResultSet
      * @return string Serialized object
      */
     string serialize() {
-        return serialize(this.__serialize());
+        return serialize(__serialize());
     }
 
     /**
@@ -272,7 +272,7 @@ class ResultSet : IResultSet
      */
     auto __serialize(): array
     {
-        if (!this._useBuffering) {
+        if (!_useBuffering) {
             $msg = "You cannot serialize an un-buffered ResultSet. "
                 . "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
@@ -282,11 +282,11 @@ class ResultSet : IResultSet
             this.next();
         }
 
-        if (this._results instanceof SplFixedArray) {
-            return this._results.toArray();
+        if (_results instanceof SplFixedArray) {
+            return _results.toArray();
         }
 
-        return this._results;
+        return _results;
     }
 
     /**
@@ -298,7 +298,7 @@ class ResultSet : IResultSet
      * @return void
      */
     void unserialize($serialized) {
-        this.__unserialize((array)(unserialize($serialized) ?: []));
+        __unserialize((array)(unserialize($serialized) ?: []));
     }
 
     /**
@@ -308,9 +308,9 @@ class ResultSet : IResultSet
      * @return void
      */
     void __unserialize(array myData) {
-        this._results = SplFixedArray::fromArray(myData);
-        this._useBuffering = true;
-        this._count = this._results.count();
+        _results = SplFixedArray::fromArray(myData);
+        _useBuffering = true;
+        _count = _results.count();
     }
 
     /**
@@ -319,20 +319,20 @@ class ResultSet : IResultSet
      * Part of the Countable interface.
      */
     int count() {
-        if (this._count !== null) {
-            return this._count;
+        if (_count !== null) {
+            return _count;
         }
-        if (this._statement !== null) {
-            return this._count = this._statement.rowCount();
+        if (_statement !== null) {
+            return _count = _statement.rowCount();
         }
 
-        if (this._results instanceof SplFixedArray) {
-            this._count = this._results.count();
+        if (_results instanceof SplFixedArray) {
+            _count = _results.count();
         } else {
-            this._count = count(this._results);
+            _count = count(_results);
         }
 
-        return this._count;
+        return _count;
     }
 
     /**
@@ -343,13 +343,13 @@ class ResultSet : IResultSet
      * @return void
      */
     protected void _calculateAssociationMap(Query myQuery) {
-        $map = myQuery.getEagerLoader().associationsMap(this._defaultTable);
-        this._matchingMap = (new Collection($map))
+        $map = myQuery.getEagerLoader().associationsMap(_defaultTable);
+        _matchingMap = (new Collection($map))
             .match(["matching":true])
             .indexBy("alias")
             .toArray();
 
-        this._containMap = (new Collection(array_reverse($map)))
+        _containMap = (new Collection(array_reverse($map)))
             .match(["matching":false])
             .indexBy("nestKey")
             .toArray();
@@ -368,7 +368,7 @@ class ResultSet : IResultSet
             myKey = trim(myKey, ""`[]");
 
             if (indexOf(myKey, "__") <= 0) {
-                $map[this._defaultAlias][myKey] = myKey;
+                $map[_defaultAlias][myKey] = myKey;
                 continue;
             }
 
@@ -376,15 +376,15 @@ class ResultSet : IResultSet
             $map[$parts[0]][myKey] = $parts[1];
         }
 
-        foreach (this._matchingMap as myAlias: $assoc) {
+        foreach (_matchingMap as myAlias: $assoc) {
             if (!isset($map[myAlias])) {
                 continue;
             }
-            this._matchingMapColumns[myAlias] = $map[myAlias];
+            _matchingMapColumns[myAlias] = $map[myAlias];
             unset($map[myAlias]);
         }
 
-        this._map = $map;
+        _map = $map;
     }
 
     /**
@@ -394,16 +394,16 @@ class ResultSet : IResultSet
      * @return mixed
      */
     protected auto _fetchResult() {
-        if (this._statement == null) {
+        if (_statement == null) {
             return false;
         }
 
-        $row = this._statement.fetch("assoc");
+        $row = _statement.fetch("assoc");
         if ($row == false) {
             return $row;
         }
 
-        return this._groupResult($row);
+        return _groupResult($row);
     }
 
     /**
@@ -413,7 +413,7 @@ class ResultSet : IResultSet
      * @return \Cake\Datasource\IEntity|array Results
      */
     protected auto _groupResult(array $row) {
-        $defaultAlias = this._defaultAlias;
+        $defaultAlias = _defaultAlias;
         myResults = $presentAliases = [];
         myOptions = [
             "useSetters":false,
@@ -422,13 +422,13 @@ class ResultSet : IResultSet
             "guard":false,
         ];
 
-        foreach (this._matchingMapColumns as myAlias: myKeys) {
-            $matching = this._matchingMap[myAlias];
+        foreach (_matchingMapColumns as myAlias: myKeys) {
+            $matching = _matchingMap[myAlias];
             myResults["_matchingData"][myAlias] = array_combine(
                 myKeys,
                 array_intersect_key($row, myKeys)
             );
-            if (this._hydrate) {
+            if (_hydrate) {
                 /** @var \Cake\ORM\Table myTable */
                 myTable = $matching["instance"];
                 myOptions["source"] = myTable.getRegistryAlias();
@@ -438,7 +438,7 @@ class ResultSet : IResultSet
             }
         }
 
-        foreach (this._map as myTable: myKeys) {
+        foreach (_map as myTable: myKeys) {
             myResults[myTable] = array_combine(myKeys, array_intersect_key($row, myKeys));
             $presentAliases[myTable] = true;
         }
@@ -450,10 +450,10 @@ class ResultSet : IResultSet
 
         unset($presentAliases[$defaultAlias]);
 
-        foreach (this._containMap as $assoc) {
+        foreach (_containMap as $assoc) {
             myAlias = $assoc["nestKey"];
 
-            if ($assoc["canBeJoined"] && empty(this._map[myAlias])) {
+            if ($assoc["canBeJoined"] && empty(_map[myAlias])) {
                 continue;
             }
 
@@ -473,7 +473,7 @@ class ResultSet : IResultSet
             myOptions["source"] = myTarget.getRegistryAlias();
             unset($presentAliases[myAlias]);
 
-            if ($assoc["canBeJoined"] && this._autoFields !== false) {
+            if ($assoc["canBeJoined"] && _autoFields !== false) {
                 $hasData = false;
                 foreach (myResults[myAlias] as $v) {
                     if ($v !== null && $v !== []) {
@@ -487,7 +487,7 @@ class ResultSet : IResultSet
                 }
             }
 
-            if (this._hydrate && myResults[myAlias] !== null && $assoc["canBeJoined"]) {
+            if (_hydrate && myResults[myAlias] !== null && $assoc["canBeJoined"]) {
                 $entity = new $assoc["entityClass"](myResults[myAlias], myOptions);
                 myResults[myAlias] = $entity;
             }
@@ -506,12 +506,12 @@ class ResultSet : IResultSet
             myResults[$defaultAlias]["_matchingData"] = myResults["_matchingData"];
         }
 
-        myOptions["source"] = this._defaultTable.getRegistryAlias();
+        myOptions["source"] = _defaultTable.getRegistryAlias();
         if (isset(myResults[$defaultAlias])) {
             myResults = myResults[$defaultAlias];
         }
-        if (this._hydrate && !(myResults instanceof IEntity)) {
-            myResults = new this._entityClass(myResults, myOptions);
+        if (_hydrate && !(myResults instanceof IEntity)) {
+            myResults = new _entityClass(myResults, myOptions);
         }
 
         return myResults;

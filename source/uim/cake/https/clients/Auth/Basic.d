@@ -22,7 +22,7 @@ class Basic
     function authentication(Request myRequest, array $credentials): Request
     {
         if (isset($credentials["username"], $credentials["password"])) {
-            myValue = this._generateHeader($credentials["username"], $credentials["password"]);
+            myValue = _generateHeader($credentials["username"], $credentials["password"]);
             /** @var \Cake\Http\Client\Request myRequest */
             myRequest = myRequest.withHeader("Authorization", myValue);
         }
@@ -41,7 +41,7 @@ class Basic
     function proxyAuthentication(Request myRequest, array $credentials): Request
     {
         if (isset($credentials["username"], $credentials["password"])) {
-            myValue = this._generateHeader($credentials["username"], $credentials["password"]);
+            myValue = _generateHeader($credentials["username"], $credentials["password"]);
             /** @var \Cake\Http\Client\Request myRequest */
             myRequest = myRequest.withHeader("Proxy-Authorization", myValue);
         }

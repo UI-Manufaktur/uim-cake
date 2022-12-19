@@ -48,7 +48,7 @@ class ArrayLog : BaseLog
      * @see \Cake\Log\Log::$_levels
      */
     function log($level, myMessage, array $context = []) {
-        myMessage = this._format(myMessage, $context);
+        myMessage = _format(myMessage, $context);
         this.content[] = this.formatter.format($level, myMessage, $context);
     }
 

@@ -109,7 +109,7 @@ class EagerLoadable
      * @param array<string, mixed> myConfig The list of properties to set.
      */
     this(string myName, array myConfig = []) {
-        this._name = myName;
+        _name = myName;
         $allowed = [
             "associations", "instance", "config", "canBeJoined",
             "aliasPath", "propertyPath", "forMatching", "targetProperty",
@@ -128,7 +128,7 @@ class EagerLoadable
      * @param \Cake\ORM\EagerLoadable $association The association to load.
      */
     void addAssociation(string myName, EagerLoadable $association) {
-        this._associations[myName] = $association;
+        _associations[myName] = $association;
     }
 
     /**
@@ -137,7 +137,7 @@ class EagerLoadable
      * @return array<\Cake\ORM\EagerLoadable>
      */
     array associations() {
-        return this._associations;
+        return _associations;
     }
 
     /**
@@ -148,11 +148,11 @@ class EagerLoadable
      */
     function instance(): Association
     {
-        if (this._instance == null) {
+        if (_instance == null) {
             throw new \RuntimeException("No instance set.");
         }
 
-        return this._instance;
+        return _instance;
     }
 
     /**
@@ -160,7 +160,7 @@ class EagerLoadable
      * that should be followed to fetch this level.
      */
     string aliasPath() {
-        return this._aliasPath;
+        return _aliasPath;
     }
 
     /**
@@ -178,7 +178,7 @@ class EagerLoadable
      * @return string|null
      */
     Nullable!string propertyPath() {
-        return this._propertyPath;
+        return _propertyPath;
     }
 
     /**
@@ -188,7 +188,7 @@ class EagerLoadable
      * @return this
      */
     auto setCanBeJoined(bool $possible) {
-        this._canBeJoined = $possible;
+        _canBeJoined = $possible;
 
         return this;
     }
@@ -199,7 +199,7 @@ class EagerLoadable
      * @return bool
      */
     bool canBeJoined() {
-        return this._canBeJoined;
+        return _canBeJoined;
     }
 
     /**
@@ -210,7 +210,7 @@ class EagerLoadable
      * @return this
      */
     auto setConfig(array myConfig) {
-        this._config = myConfig;
+        _config = myConfig;
 
         return this;
     }
@@ -222,7 +222,7 @@ class EagerLoadable
      * @return array
      */
     array getConfig() {
-        return this._config;
+        return _config;
     }
 
     /**
@@ -233,7 +233,7 @@ class EagerLoadable
      */
     function forMatching(): ?bool
     {
-        return this._forMatching;
+        return _forMatching;
     }
 
     /**
@@ -251,7 +251,7 @@ class EagerLoadable
      * @return string|null
      */
     Nullable!string targetProperty() {
-        return this._targetProperty;
+        return _targetProperty;
     }
 
     /**
@@ -260,16 +260,16 @@ class EagerLoadable
      */
     array asContainArray() {
         $associations = [];
-        foreach (this._associations as $assoc) {
+        foreach (_associations as $assoc) {
             $associations += $assoc.asContainArray();
         }
-        myConfig = this._config;
-        if (this._forMatching !== null) {
-            myConfig = ["matching":this._forMatching] + myConfig;
+        myConfig = _config;
+        if (_forMatching !== null) {
+            myConfig = ["matching":_forMatching] + myConfig;
         }
 
         return [
-            this._name: [
+            _name: [
                 "associations":$associations,
                 "config":myConfig,
             ],
@@ -282,8 +282,8 @@ class EagerLoadable
      * @return void
      */
     auto __clone() {
-        foreach (this._associations as $i: $association) {
-            this._associations[$i] = clone $association;
+        foreach (_associations as $i: $association) {
+            _associations[$i] = clone $association;
         }
     }
 }

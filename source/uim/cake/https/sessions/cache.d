@@ -35,7 +35,7 @@ class CacheSession : SessionHandlerInterface
         if (empty(myConfig["config"])) {
             throw new InvalidArgumentException("The cache configuration name to use is required");
         }
-        this._options = myConfig;
+        _options = myConfig;
     }
 
     /**
@@ -66,7 +66,7 @@ class CacheSession : SessionHandlerInterface
      */
     #[\ReturnTypeWillChange]
     function read($id) {
-        myValue = Cache::read($id, this._options["config"]);
+        myValue = Cache::read($id, _options["config"]);
 
         if (myValue == null) {
             return "";
@@ -87,7 +87,7 @@ class CacheSession : SessionHandlerInterface
             return false;
         }
 
-        return Cache::write($id, myData, this._options["config"]);
+        return Cache::write($id, myData, _options["config"]);
     }
 
     /**
@@ -97,7 +97,7 @@ class CacheSession : SessionHandlerInterface
      * @return bool Always true.
      */
     bool destroy($id) {
-        Cache::delete($id, this._options["config"]);
+        Cache::delete($id, _options["config"]);
 
         return true;
     }

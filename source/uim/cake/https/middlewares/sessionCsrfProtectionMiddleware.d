@@ -70,7 +70,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * @param array<string, mixed> myConfig Config options. See $_config for valid keys.
      */
     this(array myConfig = []) {
-        this._config = myConfig + this._config;
+        _config = myConfig + _config;
     }
 
     /**
@@ -101,10 +101,10 @@ class SessionCsrfProtectionMiddleware : IMiddleware
             throw new RuntimeException("You must have a `session` attribute to use session based CSRF tokens");
         }
 
-        $token = $session.read(this._config["key"]);
+        $token = $session.read(_config["key"]);
         if ($token == null) {
             $token = this.createToken();
-            $session.write(this._config["key"], $token);
+            $session.write(_config["key"], $token);
         }
         myRequest = myRequest.withAttribute("csrfToken", this.saltToken($token));
 
@@ -197,7 +197,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     {
         $body = myRequest.getParsedBody();
         if (is_array($body)) {
-            unset($body[this._config["field"]]);
+            unset($body[_config["field"]]);
             myRequest = myRequest.withParsedBody($body);
         }
 
@@ -222,14 +222,14 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected void validateToken(IServerRequest myRequest, Session $session) {
-        $token = $session.read(this._config["key"]);
+        $token = $session.read(_config["key"]);
         if (!$token || !is_string($token)) {
             throw new InvalidCsrfTokenException(__d("cake", "Missing or incorrect CSRF session key"));
         }
 
         $body = myRequest.getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
-            $post = (string)Hash::get($body, this._config["field"]);
+            $post = (string)Hash::get($body, _config["field"]);
             $post = this.unsaltToken($post);
             if (hash_equals($post, $token)) {
                 return;

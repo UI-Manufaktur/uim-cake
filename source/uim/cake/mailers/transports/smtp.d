@@ -71,7 +71,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      */
     void __wakeup() {
-        this._socket = null;
+        _socket = null;
     }
 
     /**
@@ -84,8 +84,8 @@ class SmtpTransport : AbstractTransport
      */
     void connect() {
         if (!this.connected()) {
-            this._connect();
-            this._auth();
+            _connect();
+            _auth();
         }
     }
 
@@ -93,7 +93,7 @@ class SmtpTransport : AbstractTransport
      * Check whether an open connection to the SMTP server is available.
      */
     bool connected() {
-        return this._socket !== null && this._socket.isConnected();
+        return _socket !== null && _socket.isConnected();
     }
 
     /**
@@ -109,7 +109,7 @@ class SmtpTransport : AbstractTransport
             return;
         }
 
-        this._disconnect();
+        _disconnect();
     }
 
     /**
@@ -138,7 +138,7 @@ class SmtpTransport : AbstractTransport
      * @return array
      */
     array getLastResponse() {
-        return this._lastResponse;
+        return _lastResponse;
     }
 
     /**
@@ -153,20 +153,20 @@ class SmtpTransport : AbstractTransport
         this.checkRecipient(myMessage);
 
         if (!this.connected()) {
-            this._connect();
-            this._auth();
+            _connect();
+            _auth();
         } else {
-            this._smtpSend("RSET");
+            _smtpSend("RSET");
         }
 
-        this._sendRcpt(myMessage);
-        this._sendData(myMessage);
+        _sendRcpt(myMessage);
+        _sendData(myMessage);
 
-        if (!this._config["keepAlive"]) {
-            this._disconnect();
+        if (!_config["keepAlive"]) {
+            _disconnect();
         }
 
-        return this._content;
+        return _content;
     }
 
     /**
@@ -185,7 +185,7 @@ class SmtpTransport : AbstractTransport
                 ];
             }
         }
-        this._lastResponse = array_merge(this._lastResponse, $response);
+        _lastResponse = array_merge(_lastResponse, $response);
     }
 
     /**
@@ -195,13 +195,13 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      */
     protected void _connect() {
-        this._generateSocket();
-        if (!this._socket().connect()) {
+        _generateSocket();
+        if (!_socket().connect()) {
             throw new SocketException("Unable to connect to SMTP server.");
         }
-        this._smtpSend(null, "220");
+        _smtpSend(null, "220");
 
-        myConfig = this._config;
+        myConfig = _config;
 
         $host = "localhost";
         if (isset(myConfig["client"])) {
@@ -218,11 +218,11 @@ class SmtpTransport : AbstractTransport
         }
 
         try {
-            this._smtpSend("EHLO {$host}", "250");
+            _smtpSend("EHLO {$host}", "250");
             if (myConfig["tls"]) {
-                this._smtpSend("STARTTLS", "220");
-                this._socket().enableCrypto("tls");
-                this._smtpSend("EHLO {$host}", "250");
+                _smtpSend("STARTTLS", "220");
+                _socket().enableCrypto("tls");
+                _smtpSend("EHLO {$host}", "250");
             }
         } catch (SocketException $e) {
             if (myConfig["tls"]) {
@@ -233,7 +233,7 @@ class SmtpTransport : AbstractTransport
                 );
             }
             try {
-                this._smtpSend("HELO {$host}", "250");
+                _smtpSend("HELO {$host}", "250");
             } catch (SocketException $e2) {
                 throw new SocketException("SMTP server did not accept the connection.", null, $e2);
             }
@@ -246,19 +246,19 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      */
     protected void _auth() {
-        if (!isset(this._config["username"], this._config["password"])) {
+        if (!isset(_config["username"], _config["password"])) {
             return;
         }
 
-        myUsername = this._config["username"];
-        myPassword = this._config["password"];
+        myUsername = _config["username"];
+        myPassword = _config["password"];
 
-        $replyCode = this._authPlain(myUsername, myPassword);
+        $replyCode = _authPlain(myUsername, myPassword);
         if ($replyCode == "235") {
             return;
         }
 
-        this._authLogin(myUsername, myPassword);
+        _authLogin(myUsername, myPassword);
     }
 
     /**
@@ -269,7 +269,7 @@ class SmtpTransport : AbstractTransport
      * @return string|null Response code for the command.
      */
     protected Nullable!string _authPlain(string myUsername, string myPassword) {
-        return this._smtpSend(
+        return _smtpSend(
             sprintf(
                 "AUTH PLAIN %s",
                 base64_encode(chr(0) . myUsername . chr(0) . myPassword)
@@ -286,15 +286,15 @@ class SmtpTransport : AbstractTransport
      * @return void
      */
     protected void _authLogin(string myUsername, string myPassword) {
-        $replyCode = this._smtpSend("AUTH LOGIN", "334|500|502|504");
+        $replyCode = _smtpSend("AUTH LOGIN", "334|500|502|504");
         if ($replyCode == "334") {
             try {
-                this._smtpSend(base64_encode(myUsername), "334");
+                _smtpSend(base64_encode(myUsername), "334");
             } catch (SocketException $e) {
                 throw new SocketException("SMTP server did not accept the username.", null, $e);
             }
             try {
-                this._smtpSend(base64_encode(myPassword), "235");
+                _smtpSend(base64_encode(myPassword), "235");
             } catch (SocketException $e) {
                 throw new SocketException("SMTP server did not accept the password.", null, $e);
             }
@@ -384,12 +384,12 @@ class SmtpTransport : AbstractTransport
      * @return void
      */
     protected void _sendRcpt(Message myMessage) {
-        $from = this._prepareFromAddress(myMessage);
-        this._smtpSend(this._prepareFromCmd(key($from)));
+        $from = _prepareFromAddress(myMessage);
+        _smtpSend(_prepareFromCmd(key($from)));
 
-        myMessages = this._prepareRecipientAddresses(myMessage);
+        myMessages = _prepareRecipientAddresses(myMessage);
         foreach (myMessages as $mail) {
-            this._smtpSend(this._prepareRcptCmd($mail));
+            _smtpSend(_prepareRcptCmd($mail));
         }
     }
 
@@ -401,7 +401,7 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      */
     protected void _sendData(Message myMessage) {
-        this._smtpSend("DATA", "354");
+        _smtpSend("DATA", "354");
 
         $headers = myMessage.getHeadersString([
             "from",
@@ -413,10 +413,10 @@ class SmtpTransport : AbstractTransport
             "subject",
             "returnPath",
         ]);
-        myMessage = this._prepareMessage(myMessage);
+        myMessage = _prepareMessage(myMessage);
 
-        this._smtpSend($headers . "\r\n\r\n" . myMessage . "\r\n\r\n\r\n.");
-        this._content = ["headers":$headers, "message":myMessage];
+        _smtpSend($headers . "\r\n\r\n" . myMessage . "\r\n\r\n\r\n.");
+        _content = ["headers":$headers, "message":myMessage];
     }
 
     /**
@@ -425,8 +425,8 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      */
     protected void _disconnect() {
-        this._smtpSend("QUIT", false);
-        this._socket().disconnect();
+        _smtpSend("QUIT", false);
+        _socket().disconnect();
     }
 
     /**
@@ -436,7 +436,7 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      */
     protected void _generateSocket() {
-        this._socket = new Socket(this._config);
+        _socket = new Socket(_config);
     }
 
     /**
@@ -448,19 +448,19 @@ class SmtpTransport : AbstractTransport
      * @throws \Cake\Network\Exception\SocketException
      */
     protected Nullable!string _smtpSend(Nullable!string myData, $checkCode = "250") {
-        this._lastResponse = [];
+        _lastResponse = [];
 
         if (myData !== null) {
-            this._socket().write(myData . "\r\n");
+            _socket().write(myData . "\r\n");
         }
 
-        $timeout = this._config["timeout"];
+        $timeout = _config["timeout"];
 
         while ($checkCode !== false) {
             $response = "";
             $startTime = time();
             while (substr($response, -2) !== "\r\n" && (time() - $startTime < $timeout)) {
-                $bytes = this._socket().read();
+                $bytes = _socket().read();
                 if ($bytes == null) {
                     break;
                 }
@@ -474,7 +474,7 @@ class SmtpTransport : AbstractTransport
             $responseLines = explode("\r\n", rtrim($response, "\r\n"));
             $response = end($responseLines);
 
-            this._bufferResponseLines($responseLines);
+            _bufferResponseLines($responseLines);
 
             if (preg_match("/^(" . $checkCode . ")(.)/", $response, $code)) {
                 if ($code[2] == "-") {
@@ -497,10 +497,10 @@ class SmtpTransport : AbstractTransport
      */
     protected auto _socket(): Socket
     {
-        if (this._socket == null) {
+        if (_socket == null) {
             throw new RuntimeException("Socket is null, but must be set.");
         }
 
-        return this._socket;
+        return _socket;
     }
 }

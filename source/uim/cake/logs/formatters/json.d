@@ -29,9 +29,9 @@ class JsonFormatter : AbstractFormatter {
 
 
     string format($level, string myMessage, array $context = []) {
-        $log = ["date":date(this._config["dateFormat"]), "level":(string)$level, "message":myMessage];
-        $json = json_encode($log, this._config["flags"]);
+        $log = ["date":date(_config["dateFormat"]), "level":(string)$level, "message":myMessage];
+        $json = json_encode($log, _config["flags"]);
 
-        return this._config["appendNewline"] ? $json . "\n" : $json;
+        return _config["appendNewline"] ? $json . "\n" : $json;
     }
 }

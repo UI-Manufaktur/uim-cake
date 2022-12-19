@@ -44,12 +44,12 @@ class DatabaseSession : SessionHandlerInterface
 
         if (empty(myConfig["model"])) {
             myConfig = myTableLocator.exists("Sessions") ? [] : ["table":"sessions", "allowFallbackClass":true];
-            this._table = myTableLocator.get("Sessions", myConfig);
+            _table = myTableLocator.get("Sessions", myConfig);
         } else {
-            this._table = myTableLocator.get(myConfig["model"]);
+            _table = myTableLocator.get(myConfig["model"]);
         }
 
-        this._timeout = (int)ini_get("session.gc_maxlifetime");
+        _timeout = (int)ini_get("session.gc_maxlifetime");
     }
 
     /**
@@ -61,7 +61,7 @@ class DatabaseSession : SessionHandlerInterface
      * @return this
      */
     auto setTimeout(int $timeout) {
-        this._timeout = $timeout;
+        _timeout = $timeout;
 
         return this;
     }
@@ -95,8 +95,8 @@ class DatabaseSession : SessionHandlerInterface
     #[\ReturnTypeWillChange]
     function read($id) {
         /** @var string $pkField */
-        $pkField = this._table.getPrimaryKey();
-        myResult = this._table
+        $pkField = _table.getPrimaryKey();
+        myResult = _table
             .find("all")
             .select(["data"])
             .where([$pkField: $id])
@@ -133,14 +133,14 @@ class DatabaseSession : SessionHandlerInterface
         }
 
         /** @var string $pkField */
-        $pkField = this._table.getPrimaryKey();
-        $session = this._table.newEntity([
+        $pkField = _table.getPrimaryKey();
+        $session = _table.newEntity([
             $pkField: $id,
             "data":myData,
-            "expires":time() + this._timeout,
+            "expires":time() + _timeout,
         ], ["accessibleFields":[$pkField: true]]);
 
-        return (bool)this._table.save($session);
+        return (bool)_table.save($session);
     }
 
     /**
@@ -151,8 +151,8 @@ class DatabaseSession : SessionHandlerInterface
      */
     bool destroy($id) {
         /** @var string $pkField */
-        $pkField = this._table.getPrimaryKey();
-        this._table.deleteAll([$pkField: $id]);
+        $pkField = _table.getPrimaryKey();
+        _table.deleteAll([$pkField: $id]);
 
         return true;
     }
@@ -165,6 +165,6 @@ class DatabaseSession : SessionHandlerInterface
      */
     #[\ReturnTypeWillChange]
     function gc($maxlifetime) {
-        return this._table.deleteAll(["expires <":time()]);
+        return _table.deleteAll(["expires <":time()]);
     }
 }

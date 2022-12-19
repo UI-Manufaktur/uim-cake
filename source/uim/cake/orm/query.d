@@ -159,8 +159,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         super.this(myConnection);
         this.repository(myTable);
 
-        if (this._repository !== null) {
-            this.addDefaultTypes(this._repository);
+        if (_repository !== null) {
+            this.addDefaultTypes(_repository);
         }
     }
 
@@ -281,7 +281,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      */
     auto setEagerLoader(EagerLoader $instance) {
-        this._eagerLoader = $instance;
+        _eagerLoader = $instance;
 
         return this;
     }
@@ -293,11 +293,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     auto getEagerLoader(): EagerLoader
     {
-        if (this._eagerLoader == null) {
-            this._eagerLoader = new EagerLoader();
+        if (_eagerLoader == null) {
+            _eagerLoader = new EagerLoader();
         }
 
-        return this._eagerLoader;
+        return _eagerLoader;
     }
 
     /**
@@ -430,7 +430,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         if ($associations) {
             $loader.contain($associations, myQueryBuilder);
         }
-        this._addAssociationsToTypeMap(
+        _addAssociationsToTypeMap(
             this.getRepository(),
             this.getTypeMap(),
             $loader.getContain()
@@ -454,7 +454,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     function clearContain() {
         this.getEagerLoader().clearContain();
-        this._dirty();
+        _dirty();
 
         return this;
     }
@@ -480,7 +480,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
                 this.addDefaultTypes(myTarget);
             }
             if (!empty($nested)) {
-                this._addAssociationsToTypeMap(myTarget, myTypeMap, $nested);
+                _addAssociationsToTypeMap(myTarget, myTypeMap, $nested);
             }
         }
     }
@@ -537,8 +537,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     function matching(string $assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader().setMatching($assoc, myBuilder).getMatching();
-        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
-        this._dirty();
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+        _dirty();
 
         return this;
     }
@@ -613,8 +613,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
                 "fields": false,
             ])
             .getMatching();
-        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
-        this._dirty();
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+        _dirty();
 
         return this;
     }
@@ -661,8 +661,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
                 "fields": false,
             ])
             .getMatching();
-        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
-        this._dirty();
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+        _dirty();
 
         return this;
     }
@@ -725,8 +725,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
                 "negateMatch": true,
             ])
             .getMatching();
-        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
-        this._dirty();
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+        _dirty();
 
         return this;
     }
@@ -813,7 +813,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
             if (isset($valid[$option], myValues)) {
                 this.{$valid[$option]}(myValues);
             } else {
-                this._options[$option] = myValues;
+                _options[$option] = myValues;
             }
         }
 
@@ -859,7 +859,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      */
     function clearResult() {
-        this._dirty();
+        _dirty();
 
         return this;
     }
@@ -871,8 +871,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     auto __clone() {
         super.__clone();
-        if (this._eagerLoader !== null) {
-            this._eagerLoader = clone this._eagerLoader;
+        if (_eagerLoader !== null) {
+            _eagerLoader = clone _eagerLoader;
         }
     }
 
@@ -884,11 +884,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * value is returned
      */
     int count() {
-        if (this._resultsCount == null) {
-            this._resultsCount = this._performCount();
+        if (_resultsCount == null) {
+            _resultsCount = _performCount();
         }
 
-        return this._resultsCount;
+        return _resultsCount;
     }
 
     /**
@@ -898,7 +898,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     protected int _performCount() {
         myQuery = this.cleanCopy();
-        myCounter = this._counter;
+        myCounter = _counter;
         if (myCounter !== null) {
             myQuery.counter(null);
 
@@ -922,7 +922,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
             }
         }
 
-        if (!$complex && this._valueBinder !== null) {
+        if (!$complex && _valueBinder !== null) {
             $order = this.clause("order");
             $complex = $order == null ? false : $order.hasNestedExpression();
         }
@@ -971,7 +971,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      */
     function counter(?callable myCounter) {
-        this._counter = myCounter;
+        _counter = myCounter;
 
         return this;
     }
@@ -985,8 +985,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      */
     function enableHydration(bool myEnable = true) {
-        this._dirty();
-        this._hydrate = myEnable;
+        _dirty();
+        _hydrate = myEnable;
 
         return this;
     }
@@ -1000,8 +1000,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      */
     function disableHydration() {
-        this._dirty();
-        this._hydrate = false;
+        _dirty();
+        _hydrate = false;
 
         return this;
     }
@@ -1010,7 +1010,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Returns the current hydration mode.
      */
     bool isHydrationEnabled() {
-        return this._hydrate;
+        return _hydrate;
     }
 
     /**
@@ -1024,11 +1024,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @throws \RuntimeException When you attempt to cache a non-select query.
      */
     function cache(myKey, myConfig = "default") {
-        if (this._type !== "select" && this._type !== null) {
+        if (_type !== "select" && _type !== null) {
             throw new RuntimeException("You cannot cache the results of non-select queries.");
         }
 
-        return this._cache(myKey, myConfig);
+        return _cache(myKey, myConfig);
     }
 
     /**
@@ -1039,13 +1039,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     function all(): IResultSet
     {
-        if (this._type !== "select" && this._type !== null) {
+        if (_type !== "select" && _type !== null) {
             throw new RuntimeException(
                 "You cannot call all() on a non-select query. Use execute() instead."
             );
         }
 
-        return this._all();
+        return _all();
     }
 
     /**
@@ -1054,13 +1054,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Will not trigger more than once, and only for select queries.
      */
     void triggerBeforeFind() {
-        if (!this._beforeFindFired && this._type == "select") {
-            this._beforeFindFired = true;
+        if (!_beforeFindFired && _type == "select") {
+            _beforeFindFired = true;
 
             myRepository = this.getRepository();
             myRepository.dispatchEvent("Model.beforeFind", [
                 this,
-                new ArrayObject(this._options),
+                new ArrayObject(_options),
                 !this.isEagerLoaded(),
             ]);
         }
@@ -1070,7 +1070,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     string sql(?ValueBinder $binder = null) {
         this.triggerBeforeFind();
 
-        this._transformQuery();
+        _transformQuery();
 
         return super.sql($binder);
     }
@@ -1085,10 +1085,10 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     protected auto _execute(): IResultSet
     {
         this.triggerBeforeFind();
-        if (this._results) {
-            $decorator = this._decoratorClass();
+        if (_results) {
+            $decorator = _decoratorClass();
 
-            return new $decorator(this._results);
+            return new $decorator(_results);
         }
 
         $statement = this.getEagerLoader().loadExternal(this, this.execute());
@@ -1108,18 +1108,18 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @see \Cake\Database\Query::execute()
      */
     protected void _transformQuery() {
-        if (!this._dirty || this._type !== "select") {
+        if (!_dirty || _type !== "select") {
             return;
         }
 
         myRepository = this.getRepository();
 
-        if (empty(this._parts["from"])) {
+        if (empty(_parts["from"])) {
             this.from([myRepository.getAlias(): myRepository.getTable()]);
         }
-        this._addDefaultFields();
-        this.getEagerLoader().attachAssociations(this, myRepository, !this._hasFields);
-        this._addDefaultSelectTypes();
+        _addDefaultFields();
+        this.getEagerLoader().attachAssociations(this, myRepository, !_hasFields);
+        _addDefaultSelectTypes();
     }
 
     /**
@@ -1129,12 +1129,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     protected void _addDefaultFields() {
         $select = this.clause("select");
-        this._hasFields = true;
+        _hasFields = true;
 
         myRepository = this.getRepository();
 
-        if (!count($select) || this._autoFields == true) {
-            this._hasFields = false;
+        if (!count($select) || _autoFields == true) {
+            _hasFields = false;
             this.select(myRepository.getSchema().columns());
             $select = this.clause("select");
         }
@@ -1191,8 +1191,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      */
     protected void _dirty() {
-        this._results = null;
-        this._resultsCount = null;
+        _results = null;
+        _resultsCount = null;
         super._dirty();
     }
 
@@ -1275,7 +1275,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     auto __call(string $method, array $arguments) {
         if (this.type() == "select") {
-            return this._call($method, $arguments);
+            return _call($method, $arguments);
         }
 
         throw new BadMethodCallException(
@@ -1289,14 +1289,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         $eagerLoader = this.getEagerLoader();
 
         return super.__debugInfo() + [
-            "hydrate": this._hydrate,
-            "buffered": this._useBufferedResults,
-            "formatters": count(this._formatters),
-            "mapReducers": count(this._mapReduce),
+            "hydrate": _hydrate,
+            "buffered": _useBufferedResults,
+            "formatters": count(_formatters),
+            "mapReducers": count(_mapReduce),
             "contain": $eagerLoader.getContain(),
             "matching": $eagerLoader.getMatching(),
-            "extraOptions": this._options,
-            "repository": this._repository,
+            "extraOptions": _options,
+            "repository": _repository,
         ];
     }
 
@@ -1322,7 +1322,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      */
     function enableAutoFields(bool myValue = true) {
-        this._autoFields = myValue;
+        _autoFields = myValue;
 
         return this;
     }
@@ -1333,7 +1333,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      */
     function disableAutoFields() {
-        this._autoFields = false;
+        _autoFields = false;
 
         return this;
     }
@@ -1348,7 +1348,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     function isAutoFieldsEnabled(): ?bool
     {
-        return this._autoFields;
+        return _autoFields;
     }
 
     /**
@@ -1359,10 +1359,10 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     protected auto _decorateResults(Traversable myResult): IResultSet
     {
-        myResult = this._applyDecorators(myResult);
+        myResult = _applyDecorators(myResult);
 
         if (!(myResult instanceof ResultSet) && this.isBufferedResultsEnabled()) {
-            myClass = this._decoratorClass();
+            myClass = _decoratorClass();
             myResult = new myClass(myResult.buffered());
         }
 

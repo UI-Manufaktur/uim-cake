@@ -93,7 +93,7 @@ class CsrfProtectionMiddleware : IMiddleware
             deprecationWarning("Option `httpOnly` is deprecated. Use lowercased `httponly` instead.");
         }
 
-        this._config = myConfig + this._config;
+        _config = myConfig + _config;
     }
 
     /**
@@ -114,7 +114,7 @@ class CsrfProtectionMiddleware : IMiddleware
             && this.skipCheckCallback !== null
             && call_user_func(this.skipCheckCallback, myRequest) == true
         ) {
-            myRequest = this._unsetTokenField(myRequest);
+            myRequest = _unsetTokenField(myRequest);
 
             return $handler.handle(myRequest);
         }
@@ -128,7 +128,7 @@ class CsrfProtectionMiddleware : IMiddleware
         }
 
         $cookies = myRequest.getCookieParams();
-        $cookieData = Hash::get($cookies, this._config["cookieName"]);
+        $cookieData = Hash::get($cookies, _config["cookieName"]);
 
         if (is_string($cookieData) && $cookieData !== "") {
             try {
@@ -144,12 +144,12 @@ class CsrfProtectionMiddleware : IMiddleware
             /** @var mixed $response */
             $response = $handler.handle(myRequest);
 
-            return this._addTokenCookie($token, myRequest, $response);
+            return _addTokenCookie($token, myRequest, $response);
         }
 
         if ($hasData) {
-            this._validateToken(myRequest);
-            myRequest = this._unsetTokenField(myRequest);
+            _validateToken(myRequest);
+            myRequest = _unsetTokenField(myRequest);
         }
 
         return $handler.handle(myRequest);
@@ -197,7 +197,7 @@ class CsrfProtectionMiddleware : IMiddleware
     {
         $body = myRequest.getParsedBody();
         if (is_array($body)) {
-            unset($body[this._config["field"]]);
+            unset($body[_config["field"]]);
             myRequest = myRequest.withParsedBody($body);
         }
 
@@ -336,7 +336,7 @@ class CsrfProtectionMiddleware : IMiddleware
         IServerRequest myRequest,
         IResponse $response
     ): IResponse {
-        $cookie = this._createCookie($token, myRequest);
+        $cookie = _createCookie($token, myRequest);
         if ($response instanceof Response) {
             return $response.withCookie($cookie);
         }
@@ -353,16 +353,16 @@ class CsrfProtectionMiddleware : IMiddleware
      */
     protected auto _validateToken(IServerRequest myRequest): void
     {
-        $cookie = Hash::get(myRequest.getCookieParams(), this._config["cookieName"]);
+        $cookie = Hash::get(myRequest.getCookieParams(), _config["cookieName"]);
 
         if (!$cookie || !is_string($cookie)) {
             throw new InvalidCsrfTokenException(__d("cake", "Missing or incorrect CSRF cookie type."));
         }
 
-        if (!this._verifyToken($cookie)) {
+        if (!_verifyToken($cookie)) {
             myException = new InvalidCsrfTokenException(__d("cake", "Missing or invalid CSRF cookie."));
 
-            $expiredCookie = this._createCookie("", myRequest).withExpired();
+            $expiredCookie = _createCookie("", myRequest).withExpired();
             myException.setHeader("Set-Cookie", $expiredCookie.toHeaderValue());
 
             throw myException;
@@ -370,7 +370,7 @@ class CsrfProtectionMiddleware : IMiddleware
 
         $body = myRequest.getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
-            $post = (string)Hash::get($body, this._config["field"]);
+            $post = (string)Hash::get($body, _config["field"]);
             $post = this.unsaltToken($post);
             if (hash_equals($post, $cookie)) {
                 return;
@@ -399,14 +399,14 @@ class CsrfProtectionMiddleware : IMiddleware
     protected auto _createCookie(string myValue, IServerRequest myRequest): ICookie
     {
         $cookie = Cookie::create(
-            this._config["cookieName"],
+            _config["cookieName"],
             myValue,
             [
-                "expires":this._config["expiry"] ?: null,
+                "expires":_config["expiry"] ?: null,
                 "path":myRequest.getAttribute("webroot"),
-                "secure":this._config["secure"],
-                "httponly":this._config["httponly"],
-                "samesite":this._config["samesite"],
+                "secure":_config["secure"],
+                "httponly":_config["httponly"],
+                "samesite":_config["samesite"],
             ]
         );
 

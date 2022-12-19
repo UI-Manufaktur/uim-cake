@@ -44,14 +44,14 @@ class Oauth
                 if (!$hasKeys) {
                     return myRequest;
                 }
-                myValue = this._hmacSha1(myRequest, $credentials);
+                myValue = _hmacSha1(myRequest, $credentials);
                 break;
 
             case "RSA-SHA1":
                 if (!isset($credentials["privateKey"])) {
                     return myRequest;
                 }
-                myValue = this._rsaSha1(myRequest, $credentials);
+                myValue = _rsaSha1(myRequest, $credentials);
                 break;
 
             case "PLAINTEXT":
@@ -63,7 +63,7 @@ class Oauth
                 if (!$hasKeys) {
                     return myRequest;
                 }
-                myValue = this._plaintext(myRequest, $credentials);
+                myValue = _plaintext(myRequest, $credentials);
                 break;
 
             default:
@@ -100,7 +100,7 @@ class Oauth
         myKey = implode("&", myKey);
         myValues["oauth_signature"] = myKey;
 
-        return this._buildAuth(myValues);
+        return _buildAuth(myValues);
     }
 
     /**
@@ -121,7 +121,7 @@ class Oauth
             "oauth_timestamp":$timestamp,
             "oauth_signature_method":"HMAC-SHA1",
             "oauth_token":$credentials["token"],
-            "oauth_consumer_key":this._encode($credentials["consumerKey"]),
+            "oauth_consumer_key":_encode($credentials["consumerKey"]),
         ];
         $baseString = this.baseString(myRequest, myValues);
 
@@ -140,7 +140,7 @@ class Oauth
             hash_hmac("sha1", $baseString, myKey, true)
         );
 
-        return this._buildAuth(myValues);
+        return _buildAuth(myValues);
     }
 
     /**
@@ -207,7 +207,7 @@ class Oauth
 
         myValues["oauth_signature"] = base64_encode($signature);
 
-        return this._buildAuth(myValues);
+        return _buildAuth(myValues);
     }
 
     /**
@@ -225,8 +225,8 @@ class Oauth
     string baseString(Request myRequest, array $oauthValues) {
         $parts = [
             myRequest.getMethod(),
-            this._normalizedUrl(myRequest.getUri()),
-            this._normalizedParams(myRequest, $oauthValues),
+            _normalizedUrl(myRequest.getUri()),
+            _normalizedParams(myRequest, $oauthValues),
         ];
         $parts = array_map([this, "_encode"], $parts);
 
@@ -271,7 +271,7 @@ class Oauth
             parse_str((string)myRequest.getBody(), $post);
         }
         $args = array_merge(myQueryArgs, $oauthValues, $post);
-        $pairs = this._normalizeData($args);
+        $pairs = _normalizeData($args);
         myData = [];
         foreach ($pairs as $pair) {
             myData[] = implode("=", $pair);
@@ -305,7 +305,7 @@ class Oauth
             }
             if (is_array(myValue)) {
                 uksort(myValue, "strcmp");
-                myData = array_merge(myData, this._normalizeData(myValue, myKey));
+                myData = array_merge(myData, _normalizeData(myValue, myKey));
             } else {
                 myData[] = [myKey, myValue];
             }
@@ -324,7 +324,7 @@ class Oauth
         $out = "OAuth ";
         myParams = [];
         foreach (myData as myKey: myValue) {
-            myParams[] = myKey . "="" . this._encode((string)myValue) . """;
+            myParams[] = myKey . "="" . _encode((string)myValue) . """;
         }
         $out .= implode(",", myParams);
 

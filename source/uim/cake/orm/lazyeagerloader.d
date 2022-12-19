@@ -35,10 +35,10 @@ class LazyEagerLoader
         }
 
         $entities = new Collection($entities);
-        myQuery = this._getQuery($entities, $contain, $source);
+        myQuery = _getQuery($entities, $contain, $source);
         $associations = array_keys(myQuery.getContain());
 
-        $entities = this._injectResults($entities, myQuery, $associations, $source);
+        $entities = _injectResults($entities, myQuery, $associations, $source);
 
         return $returnSingle ? array_shift($entities) : $entities;
     }
@@ -124,7 +124,7 @@ class LazyEagerLoader
      */
     protected array _injectResults(iterable $objects, myResults, string[] $associations, Table $source) {
         $injected = [];
-        $properties = this._getPropertyMap($source, $associations);
+        $properties = _getPropertyMap($source, $associations);
         $primaryKey = (array)$source.getPrimaryKey();
         myResults = myResults
             .all()

@@ -133,7 +133,7 @@ class Cookie : ICookie
         this.validateName(myName);
         this.name = myName;
 
-        this._setValue(myValue);
+        _setValue(myValue);
 
         this.domain = $domain ?? static::$defaults["domain"];
         this.httpOnly = $httpOnly ?? static::$defaults["httponly"];
@@ -306,7 +306,7 @@ class Cookie : ICookie
         myValue = this.value;
         if (this.isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            myValue = this._flatten(this.value);
+            myValue = _flatten(this.value);
         }
         $headerValue = [];
         /** @psalm-suppress PossiblyInvalidArgument */
@@ -395,7 +395,7 @@ class Cookie : ICookie
     auto getScalarValue() {
         if (this.isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            return this._flatten(this.value);
+            return _flatten(this.value);
         }
 
         return this.value;
@@ -573,7 +573,7 @@ class Cookie : ICookie
     bool check(string myPath) {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            this.value = this._expand(this.value);
+            this.value = _expand(this.value);
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
@@ -631,7 +631,7 @@ class Cookie : ICookie
     function read(Nullable!string myPath = null) {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            this.value = this._expand(this.value);
+            this.value = _expand(this.value);
         }
 
         if (myPath == null) {

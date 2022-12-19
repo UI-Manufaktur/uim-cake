@@ -28,12 +28,12 @@ class DefaultFormatter : AbstractFormatter {
     }
 
     string format($level, string myMessage, array $context = []) {
-        if (this._config["includeDate"]) {
-            myMessage = sprintf("%s %s: %s", date(this._config["dateFormat"]), $level, myMessage);
+        if (_config["includeDate"]) {
+            myMessage = sprintf("%s %s: %s", date(_config["dateFormat"]), $level, myMessage);
         } else {
             myMessage = sprintf("%s: %s", $level, myMessage);
         }
-        if (this._config["includeTags"]) {
+        if (_config["includeTags"]) {
             myMessage = sprintf("<%s>%s</%s>", $level, myMessage, $level);
         }
 

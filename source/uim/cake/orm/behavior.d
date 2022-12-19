@@ -132,17 +132,17 @@ class Behavior : IEventListener
      * @param array<string, mixed> myConfig The config for this behavior.
      */
     this(Table myTable, array myConfig = []) {
-        myConfig = this._resolveMethodAliases(
+        myConfig = _resolveMethodAliases(
             "implementedFinders",
-            this._defaultConfig,
+            _defaultConfig,
             myConfig
         );
-        myConfig = this._resolveMethodAliases(
+        myConfig = _resolveMethodAliases(
             "implementedMethods",
-            this._defaultConfig,
+            _defaultConfig,
             myConfig
         );
-        this._table = myTable;
+        _table = myTable;
         this.setConfig(myConfig);
         this.initialize(myConfig);
     }
@@ -179,7 +179,7 @@ class Behavior : IEventListener
      */
     function table(): Table
     {
-        return this._table;
+        return _table;
     }
 
     /**
@@ -225,11 +225,11 @@ class Behavior : IEventListener
     void verifyConfig() {
         myKeys = ["implementedFinders", "implementedMethods"];
         foreach (myKey; myKeys) {
-            if (!isset(this._config[myKey])) {
+            if (!isset(_config[myKey])) {
                 continue;
             }
 
-            foreach (this._config[myKey] as $method) {
+            foreach (_config[myKey] as $method) {
                 if (!is_callable([this, $method])) {
                     throw new CakeException(sprintf(
                         "The method %s is not callable on class %s",
@@ -317,7 +317,7 @@ class Behavior : IEventListener
             return $methods;
         }
 
-        return this._reflectionCache()["finders"];
+        return _reflectionCache()["finders"];
     }
 
     /**
@@ -348,7 +348,7 @@ class Behavior : IEventListener
             return $methods;
         }
 
-        return this._reflectionCache()["methods"];
+        return _reflectionCache()["methods"];
     }
 
     /**

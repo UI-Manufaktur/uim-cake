@@ -102,20 +102,20 @@ class SyslogLog : BaseLog {
      * @see \Cake\Log\Log::$_levels
      */
     void log($level, myMessage, array $context = []) {
-        if (!this._open) {
-            myConfig = this._config;
-            this._open(myConfig["prefix"], myConfig["flag"], myConfig["facility"]);
-            this._open = true;
+        if (!_open) {
+            myConfig = _config;
+            _open(myConfig["prefix"], myConfig["flag"], myConfig["facility"]);
+            _open = true;
         }
 
         $priority = LOG_DEBUG;
-        if (isset(this._levelMap[$level])) {
-            $priority = this._levelMap[$level];
+        if (isset(_levelMap[$level])) {
+            $priority = _levelMap[$level];
         }
 
-        $lines = explode("\n", this._format(myMessage, $context));
+        $lines = explode("\n", _format(myMessage, $context));
         foreach ($lines as $line) {
-            this._write($priority, this.formatter.format($level, $line, $context));
+            _write($priority, this.formatter.format($level, $line, $context));
         }
     }
 

@@ -264,13 +264,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
                 }
             }
         }
-        this._eventManager = myEventManager ?: new EventManager();
-        this._behaviors = $behaviors ?: new BehaviorRegistry();
-        this._behaviors.setTable(this);
-        this._associations = $associations ?: new AssociationCollection();
+        _eventManager = myEventManager ?: new EventManager();
+        _behaviors = $behaviors ?: new BehaviorRegistry();
+        _behaviors.setTable(this);
+        _associations = $associations ?: new AssociationCollection();
 
         this.initialize(myConfig);
-        this._eventManager.on(this);
+        _eventManager.on(this);
         this.dispatchEvent("Model.initialize");
     }
 
@@ -318,7 +318,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      */
     auto setTable(string myTable) {
-        this._table = myTable;
+        _table = myTable;
 
         return this;
     }
@@ -329,16 +329,16 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * This can include the database schema name if set using `setTable()`.
      */
     string getTable() {
-        if (this._table == null) {
+        if (_table == null) {
             myTable = moduleSplit(static::class);
             myTable = substr(end(myTable), 0, -5);
             if (!myTable) {
                 myTable = this.getAlias();
             }
-            this._table = Inflector::underscore(myTable);
+            _table = Inflector::underscore(myTable);
         }
 
-        return this._table;
+        return _table;
     }
 
     /**
@@ -348,7 +348,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      */
     auto setAlias(string myAlias) {
-        this._alias = myAlias;
+        _alias = myAlias;
 
         return this;
     }
@@ -357,13 +357,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Returns the table alias.
      */
     string getAlias() {
-        if (this._alias == null) {
+        if (_alias == null) {
             myAlias = moduleSplit(static::class);
             myAlias = substr(end(myAlias), 0, -5) ?: this.getTable();
-            this._alias = myAlias;
+            _alias = myAlias;
         }
 
-        return this._alias;
+        return _alias;
     }
 
     /**
@@ -389,7 +389,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      */
     auto setRegistryAlias(string $registryAlias) {
-        this._registryAlias = $registryAlias;
+        _registryAlias = $registryAlias;
 
         return this;
     }
@@ -398,11 +398,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * Returns the table registry key used to create this table instance.
      */
     string getRegistryAlias() {
-        if (this._registryAlias == null) {
-            this._registryAlias = this.getAlias();
+        if (_registryAlias == null) {
+            _registryAlias = this.getAlias();
         }
 
-        return this._registryAlias;
+        return _registryAlias;
     }
 
     /**
@@ -412,7 +412,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      */
     auto setConnection(Connection myConnection) {
-        this._connection = myConnection;
+        _connection = myConnection;
 
         return this;
     }
@@ -423,13 +423,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return \Cake\Database\Connection
      */
     Connection getConnection() {
-        if (!this._connection) {
+        if (!_connection) {
             /** @var \Cake\Database\Connection myConnection */
             myConnection = ConnectionManager::get(static::defaultConnectionName());
-            this._connection = myConnection;
+            _connection = myConnection;
         }
 
-        return this._connection;
+        return _connection;
     }
 
     /**
@@ -439,8 +439,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     auto getSchema(): TableSchemaInterface
     {
-        if (this._schema == null) {
-            this._schema = this._initializeSchema(
+        if (_schema == null) {
+            _schema = _initializeSchema(
                 this.getConnection()
                     .getSchemaCollection()
                     .describe(this.getTable())
@@ -450,7 +450,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             }
         }
 
-        return this._schema;
+        return _schema;
     }
 
     /**
@@ -478,7 +478,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             }
         }
 
-        this._schema = $schema;
+        _schema = $schema;
         if (Configure::read("debug")) {
             this.checkAliasLengths();
         }
@@ -494,7 +494,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \RuntimeException When an alias combination is too long
      */
     protected void checkAliasLengths() {
-        if (this._schema == null) {
+        if (_schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
         }
 
@@ -507,7 +507,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         myTable = this.getAlias();
-        foreach (this._schema.columns() as myName) {
+        foreach (_schema.columns() as myName) {
             if (strlen(myTable . "__" . myName) > $maxLength) {
                 myNameLength = $maxLength - 2;
                 throw new RuntimeException(
@@ -566,22 +566,22 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      */
     auto setPrimaryKey(myKey) {
-        this._primaryKey = myKey;
+        _primaryKey = myKey;
 
         return this;
     }
 
     // Returns the primary key field name.
     string[] primaryKeys() {
-        if (this._primaryKey == null) {
+        if (_primaryKey == null) {
             myKey = this.getSchema().getPrimaryKey();
             if (count(myKey) == 1) {
                 myKey = myKey[0];
             }
-            this._primaryKey = myKey;
+            _primaryKey = myKey;
         }
 
-        return this._primaryKey;
+        return _primaryKey;
     }
 
     /**
@@ -591,25 +591,25 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return this
      */
     auto setDisplayField(myField) {
-        this._displayField = myField;
+        _displayField = myField;
 
         return this;
     }
 
     // Returns the display field.
     string[] getDisplayField() {
-        if (this._displayField == null) {
+        if (_displayField == null) {
             $schema = this.getSchema();
-            this._displayField = this.getPrimaryKey();
+            _displayField = this.getPrimaryKey();
             foreach (["title", "name", "label"] as myField) {
                 if ($schema.hasColumn(myField)) {
-                    this._displayField = myField;
+                    _displayField = myField;
                     break;
                 }
             }
         }
 
-        return this._displayField;
+        return _displayField;
     }
 
     /**
@@ -619,19 +619,19 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @psalm-return class-string<\Cake\Datasource\IEntity>
      */
     string getEntityClass() {
-        if (!this._entityClass) {
+        if (!_entityClass) {
             $default = Entity::class;
             $self = static::class;
             $parts = explode("\\", $self);
 
             if ($self == self::class || count($parts) < 3) {
-                return this._entityClass = $default;
+                return _entityClass = $default;
             }
 
             myAlias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
             myName = implode("\\", array_slice($parts, 0, -1)) . "\\Entity\\" . myAlias;
             if (!class_exists(myName)) {
-                return this._entityClass = $default;
+                return _entityClass = $default;
             }
 
             /** @var class-string<\Cake\Datasource\IEntity>|null myClass */
@@ -640,10 +640,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
                 throw new MissingEntityException([myName]);
             }
 
-            this._entityClass = myClass;
+            _entityClass = myClass;
         }
 
-        return this._entityClass;
+        return _entityClass;
     }
 
     /**
@@ -660,7 +660,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             throw new MissingEntityException([myName]);
         }
 
-        this._entityClass = myClass;
+        _entityClass = myClass;
 
         return this;
     }
@@ -690,7 +690,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @see \Cake\ORM\Behavior
      */
     function addBehavior(string myName, array myOptions = []) {
-        this._behaviors.load(myName, myOptions);
+        _behaviors.load(myName, myOptions);
 
         return this;
     }
@@ -740,7 +740,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @see \Cake\ORM\Behavior
      */
     function removeBehavior(string myName) {
-        this._behaviors.unload(myName);
+        _behaviors.unload(myName);
 
         return this;
     }
@@ -752,7 +752,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function behaviors(): BehaviorRegistry
     {
-        return this._behaviors;
+        return _behaviors;
     }
 
     /**
@@ -764,7 +764,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     auto getBehavior(string myName): Behavior
     {
-        if (!this._behaviors.has(myName)) {
+        if (!_behaviors.has(myName)) {
             throw new InvalidArgumentException(sprintf(
                 "The %s behavior is not defined on %s.",
                 myName,
@@ -772,7 +772,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             ));
         }
 
-        $behavior = this._behaviors.get(myName);
+        $behavior = _behaviors.get(myName);
 
         return $behavior;
     }
@@ -784,7 +784,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return bool Whether the behavior exists.
      */
     bool hasBehavior(string myName) {
-        return this._behaviors.has(myName);
+        return _behaviors.has(myName);
     }
 
     /**
@@ -851,13 +851,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     protected auto findAssociation(string myName): ?Association
     {
         if (indexOf(myName, ".") == false) {
-            return this._associations.get(myName);
+            return _associations.get(myName);
         }
 
         myResult = null;
         [myName, $next] = array_pad(explode(".", myName, 2), 2, null);
         if (myName !== null) {
-            myResult = this._associations.get(myName);
+            myResult = _associations.get(myName);
         }
 
         if (myResult !== null && $next !== null) {
@@ -874,7 +874,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function associations(): AssociationCollection
     {
-        return this._associations;
+        return _associations;
     }
 
     /**
@@ -953,7 +953,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\BelongsTo $association */
-        $association = this._associations.load(BelongsTo::class, $associated, myOptions);
+        $association = _associations.load(BelongsTo::class, $associated, myOptions);
 
         return $association;
     }
@@ -999,7 +999,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\HasOne $association */
-        $association = this._associations.load(HasOne::class, $associated, myOptions);
+        $association = _associations.load(HasOne::class, $associated, myOptions);
 
         return $association;
     }
@@ -1051,7 +1051,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\HasMany $association */
-        $association = this._associations.load(HasMany::class, $associated, myOptions);
+        $association = _associations.load(HasMany::class, $associated, myOptions);
 
         return $association;
     }
@@ -1105,7 +1105,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         myOptions += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\BelongsToMany $association */
-        $association = this._associations.load(BelongsToMany::class, $associated, myOptions);
+        $association = _associations.load(BelongsToMany::class, $associated, myOptions);
 
         return $association;
     }
@@ -1293,7 +1293,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             }
         }
 
-        myOptions = this._setFieldMatchers(
+        myOptions = _setFieldMatchers(
             myOptions,
             ["keyField", "valueField", "groupField"]
         );
@@ -1340,7 +1340,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             "nestingKey": "children",
         ];
 
-        myOptions = this._setFieldMatchers(myOptions, ["keyField", "parentField"]);
+        myOptions = _setFieldMatchers(myOptions, ["keyField", "parentField"]);
 
         return myQuery.formatResults(function (myResults) use (myOptions) {
             /** @var \Cake\Collection\ICollection myResults */
@@ -1523,11 +1523,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             "defaults": true,
         ]);
 
-        $entity = this._executeTransaction(function () use ($search, $callback, myOptions) {
-            return this._processFindOrCreate($search, $callback, myOptions.getArrayCopy());
+        $entity = _executeTransaction(function () use ($search, $callback, myOptions) {
+            return _processFindOrCreate($search, $callback, myOptions.getArrayCopy());
         }, myOptions["atomic"]);
 
-        if ($entity && this._transactionCommitted(myOptions["atomic"], true)) {
+        if ($entity && _transactionCommitted(myOptions["atomic"], true)) {
             this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
         }
 
@@ -1548,7 +1548,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \InvalidArgumentException
      */
     protected auto _processFindOrCreate($search, ?callable $callback = null, myOptions = []) {
-        myQuery = this._getFindOrCreateQuery($search);
+        myQuery = _getFindOrCreateQuery($search);
 
         $row = myQuery.first();
         if ($row !== null) {
@@ -1762,12 +1762,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return $entity;
         }
 
-        $success = this._executeTransaction(function () use ($entity, myOptions) {
-            return this._processSave($entity, myOptions);
+        $success = _executeTransaction(function () use ($entity, myOptions) {
+            return _processSave($entity, myOptions);
         }, myOptions["atomic"]);
 
         if ($success) {
-            if (this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+            if (_transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
                 this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
             }
             if (myOptions["atomic"] || myOptions["_primary"]) {
@@ -1827,7 +1827,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return false;
         }
 
-        myOptions["associated"] = this._associations.normalizeKeys(myOptions["associated"]);
+        myOptions["associated"] = _associations.normalizeKeys(myOptions["associated"]);
         myEvent = this.dispatchEvent("Model.beforeSave", compact("entity", "options"));
 
         if (myEvent.isStopped()) {
@@ -1846,7 +1846,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return myResult;
         }
 
-        $saved = this._associations.saveParents(
+        $saved = _associations.saveParents(
             this,
             $entity,
             myOptions["associated"],
@@ -1861,13 +1861,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         $isNew = $entity.isNew();
 
         if ($isNew) {
-            $success = this._insert($entity, myData);
+            $success = _insert($entity, myData);
         } else {
-            $success = this._update($entity, myData);
+            $success = _update($entity, myData);
         }
 
         if ($success) {
-            $success = this._onSaveSuccess($entity, myOptions);
+            $success = _onSaveSuccess($entity, myOptions);
         }
 
         if (!$success && $isNew) {
@@ -1889,7 +1889,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *   is aborted in the afterSave event.
      */
     protected bool _onSaveSuccess(IEntity $entity, ArrayObject myOptions) {
-        $success = this._associations.saveChildren(
+        $success = _associations.saveChildren(
             this,
             $entity,
             myOptions["associated"],
@@ -1934,7 +1934,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             throw new RuntimeException($msg);
         }
         myKeys = array_fill(0, count($primary), null);
-        $id = (array)this._newId($primary) + myKeys;
+        $id = (array)_newId($primary) + myKeys;
 
         // Generate primary keys preferring values in myData.
         $primary = array_combine($primary, $id) ?: [];
@@ -2072,7 +2072,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function saveMany(iterable $entities, myOptions = []) {
         try {
-            return this._saveMany($entities, myOptions);
+            return _saveMany($entities, myOptions);
         } catch (PersistenceFailedException myException) {
             return false;
         }
@@ -2093,7 +2093,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function saveManyOrFail(iterable $entities, myOptions = []): iterable
     {
-        return this._saveMany($entities, myOptions);
+        return _saveMany($entities, myOptions);
     }
 
     /**
@@ -2151,7 +2151,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             throw new PersistenceFailedException($failed, ["saveMany"]);
         }
 
-        if (this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        if (_transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
             }
@@ -2197,11 +2197,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             "_primary": true,
         ]);
 
-        $success = this._executeTransaction(function () use ($entity, myOptions) {
-            return this._processDelete($entity, myOptions);
+        $success = _executeTransaction(function () use ($entity, myOptions) {
+            return _processDelete($entity, myOptions);
         }, myOptions["atomic"]);
 
-        if ($success && this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        if ($success && _transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
             this.dispatchEvent("Model.afterDeleteCommit", [
                 "entity": $entity,
                 "options": myOptions,
@@ -2225,7 +2225,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @see \Cake\ORM\Table::delete() for options and events related to this method.
      */
     function deleteMany(iterable $entities, myOptions = []) {
-        $failed = this._deleteMany($entities, myOptions);
+        $failed = _deleteMany($entities, myOptions);
 
         if ($failed !== null) {
             return false;
@@ -2249,7 +2249,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function deleteManyOrFail(iterable $entities, myOptions = []): iterable
     {
-        $failed = this._deleteMany($entities, myOptions);
+        $failed = _deleteMany($entities, myOptions);
 
         if ($failed !== null) {
             throw new PersistenceFailedException($failed, ["deleteMany"]);
@@ -2271,9 +2271,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
                 "_primary": true,
             ]);
 
-        $failed = this._executeTransaction(function () use ($entities, myOptions) {
+        $failed = _executeTransaction(function () use ($entities, myOptions) {
             foreach ($entities as $entity) {
-                if (!this._processDelete($entity, myOptions)) {
+                if (!_processDelete($entity, myOptions)) {
                     return $entity;
                 }
             }
@@ -2281,7 +2281,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return null;
         }, myOptions["atomic"]);
 
-        if ($failed == null && this._transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        if ($failed == null && _transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent("Model.afterDeleteCommit", [
                     "entity": $entity,
@@ -2348,7 +2348,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return (bool)myEvent.getResult();
         }
 
-        $success = this._associations.cascadeDelete(
+        $success = _associations.cascadeDelete(
             $entity,
             ["_primary": false] + myOptions.getArrayCopy()
         );
@@ -2384,7 +2384,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     bool hasFinder(string myType) {
         myFinder = "find" . myType;
 
-        return method_exists(this, myFinder) || this._behaviors.hasFinder(myType);
+        return method_exists(this, myFinder) || _behaviors.hasFinder(myType);
     }
 
     /**
@@ -2409,8 +2409,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return this.{myFinder}(myQuery, myOptions);
         }
 
-        if (this._behaviors.hasFinder(myType)) {
-            return this._behaviors.callFinder(myType, [myQuery, myOptions]);
+        if (_behaviors.hasFinder(myType)) {
+            return _behaviors.callFinder(myType, [myQuery, myOptions]);
         }
 
         throw new BadMethodCallException(sprintf(
@@ -2494,11 +2494,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \BadMethodCallException
      */
     auto __call($method, $args) {
-        if (this._behaviors.hasMethod($method)) {
-            return this._behaviors.call($method, $args);
+        if (_behaviors.hasMethod($method)) {
+            return _behaviors.call($method, $args);
         }
         if (preg_match("/^find(?:\w+)?By/", $method) > 0) {
-            return this._dynamicFinder($method, $args);
+            return _dynamicFinder($method, $args);
         }
 
         throw new BadMethodCallException(
@@ -2515,7 +2515,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \RuntimeException if no association with such name exists
      */
     auto __get($property) {
-        $association = this._associations.get($property);
+        $association = _associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
                 "Undefined property `%s`. " .
@@ -2537,7 +2537,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @return bool
      */
     auto __isset($property) {
-        return this._associations.has($property);
+        return _associations.has($property);
     }
 
     /**
@@ -2627,7 +2627,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function newEntity(array myData, array myOptions = []): IEntity
     {
-        myOptions["associated"] = myOptions["associated"] ?? this._associations.keys();
+        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.one(myData, myOptions);
@@ -2667,7 +2667,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function newEntities(array myData, array myOptions = []): array
     {
-        myOptions["associated"] = myOptions["associated"] ?? this._associations.keys();
+        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.many(myData, myOptions);
@@ -2726,7 +2726,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function patchEntity(IEntity $entity, array myData, array myOptions = []): IEntity
     {
-        myOptions["associated"] = myOptions["associated"] ?? this._associations.keys();
+        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.merge($entity, myData, myOptions);
@@ -2765,7 +2765,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      */
     function patchEntities(iterable $entities, array myData, array myOptions = []): array
     {
-        myOptions["associated"] = myOptions["associated"] ?? this._associations.keys();
+        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.mergeMany($entities, myData, myOptions);
@@ -2963,8 +2963,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             "table": this.getTable(),
             "alias": this.getAlias(),
             "entityClass": this.getEntityClass(),
-            "associations": this._associations.keys(),
-            "behaviors": this._behaviors.loaded(),
+            "associations": _associations.keys(),
+            "behaviors": _behaviors.loaded(),
             "defaultConnection": static::defaultConnectionName(),
             "connectionName": $conn.configName(),
         ];

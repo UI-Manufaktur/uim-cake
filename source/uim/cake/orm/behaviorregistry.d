@@ -54,7 +54,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return void
      */
     void setTable(Table myTable) {
-        this._table = myTable;
+        _table = myTable;
         this.setEventManager(myTable.getEventManager());
     }
 
@@ -114,14 +114,14 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      */
     protected Behavior _create(myClass, string myAlias, array myConfig) {
         /** @var \Cake\ORM\Behavior $instance */
-        $instance = new myClass(this._table, myConfig);
+        $instance = new myClass(_table, myConfig);
         myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {
             this.getEventManager().on($instance);
         }
-        $methods = this._getMethods($instance, myClass, myAlias);
-        this._methodMap += $methods["methods"];
-        this._finderMap += $methods["finders"];
+        $methods = _getMethods($instance, myClass, myAlias);
+        _methodMap += $methods["methods"];
+        _finderMap += $methods["finders"];
 
         return $instance;
     }
@@ -144,8 +144,8 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
         $methods = array_change_key_case($instance.implementedMethods());
 
         foreach (myFinders as myFinder: $methodName) {
-            if (isset(this._finderMap[myFinder]) && this.has(this._finderMap[myFinder][0])) {
-                $duplicate = this._finderMap[myFinder];
+            if (isset(_finderMap[myFinder]) && this.has(_finderMap[myFinder][0])) {
+                $duplicate = _finderMap[myFinder];
                 myError = sprintf(
                     "%s contains duplicate finder "%s" which is already provided by "%s"",
                     myClass,
@@ -158,8 +158,8 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
         }
 
         foreach ($methods as $method: $methodName) {
-            if (isset(this._methodMap[$method]) && this.has(this._methodMap[$method][0])) {
-                $duplicate = this._methodMap[$method];
+            if (isset(_methodMap[$method]) && this.has(_methodMap[$method][0])) {
+                $duplicate = _methodMap[$method];
                 myError = sprintf(
                     "%s contains duplicate method "%s" which is already provided by "%s"",
                     myClass,
@@ -186,7 +186,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     bool hasMethod(string $method) {
         $method = strtolower($method);
 
-        return isset(this._methodMap[$method]);
+        return isset(_methodMap[$method]);
     }
 
     /**
@@ -201,7 +201,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     bool hasFinder(string $method) {
         $method = strtolower($method);
 
-        return isset(this._finderMap[$method]);
+        return isset(_finderMap[$method]);
     }
 
     /**
@@ -214,10 +214,10 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      */
     function call(string $method, array $args = []) {
         $method = strtolower($method);
-        if (this.hasMethod($method) && this.has(this._methodMap[$method][0])) {
-            [$behavior, $callMethod] = this._methodMap[$method];
+        if (this.hasMethod($method) && this.has(_methodMap[$method][0])) {
+            [$behavior, $callMethod] = _methodMap[$method];
 
-            return this._loaded[$behavior].{$callMethod}(...$args);
+            return _loaded[$behavior].{$callMethod}(...$args);
         }
 
         throw new BadMethodCallException(
@@ -237,9 +237,9 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     {
         myType = strtolower(myType);
 
-        if (this.hasFinder(myType) && this.has(this._finderMap[myType][0])) {
-            [$behavior, $callMethod] = this._finderMap[myType];
-            $callable = [this._loaded[$behavior], $callMethod];
+        if (this.hasFinder(myType) && this.has(_finderMap[myType][0])) {
+            [$behavior, $callMethod] = _finderMap[myType];
+            $callable = [_loaded[$behavior], $callMethod];
 
             return $callable(...$args);
         }

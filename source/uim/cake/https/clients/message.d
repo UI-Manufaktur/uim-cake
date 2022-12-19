@@ -102,6 +102,6 @@ class Message
      * Get all cookies
      */
     array cookies() {
-        return this._cookies;
+        return _cookies;
     }
 }
