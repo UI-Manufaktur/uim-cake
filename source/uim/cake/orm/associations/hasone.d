@@ -2,7 +2,7 @@ module uim.cake.orm.associations;
 
 import uim.cake.datasources\IEntity;
 import uim.cake.orm.associations;
-import uim.cake.orm.associations\Loader\SelectLoader;
+import uim.cake.orm.associations.loaders\SelectLoader;
 import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 use Closure;

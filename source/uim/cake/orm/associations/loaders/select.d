@@ -1,34 +1,21 @@
-module uim.cake.orm.associations\Loader;
+module uim.cake.orm.associations.loaders;
 
-import uim.cake.databases.expressions\IdentifierExpression;
-import uim.cake.databases.expressions\TupleComparison;
-import uim.cake.databases.ValueBinder;
-import uim.cake.orm.associations;
-import uim.cake.orm.Query;
-use Closure;
-use InvalidArgumentException;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * : the logic for loading an association using a SELECT query
  *
  * @internal
  */
-class SelectLoader
-{
-    /**
-     * The alias of the association loading the results
-     */
+class SelectLoader {
+    // The alias of the association loading the results
     protected string myAlias;
 
-    /**
-     * The alias of the source association
-     */
+    // The alias of the source association
     protected string sourceAlias;
 
-    /**
-     * The alias of the target association
-     */
+    // The alias of the target association
     protected string myTargetAlias;
 
     /**
@@ -38,14 +25,10 @@ class SelectLoader
      */
     protected foreignKey;
 
-    /**
-     * The strategy to use for loading, either select or subquery
-     */
+    // The strategy to use for loading, either select or subquery
     protected string strategy;
 
-    /**
-     * The binding key for the source association.
-     */
+    // The binding key for the source association.
     protected string bindingKey;
 
     /**
@@ -55,14 +38,10 @@ class SelectLoader
      */
     protected myFinder;
 
-    /**
-     * The type of the association triggering the load
-     */
+    // The type of the association triggering the load
     protected string associationType;
 
-    /**
-     * The sorting options for loading the association
-     */
+    // The sorting options for loading the association
     protected string sort;
 
     /**
