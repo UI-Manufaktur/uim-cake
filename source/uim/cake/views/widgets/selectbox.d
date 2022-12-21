@@ -286,7 +286,7 @@ class SelectBoxWidget : BasicWidget
      * @param array<string>|string|int|false|null $selected The selected values.
      */
     protected bool _isSelected(string myKey, $selected) {
-        if ($selected == null) {
+        if ($selected is null) {
             return false;
         }
         if (!is_array($selected)) {
@@ -306,7 +306,7 @@ class SelectBoxWidget : BasicWidget
      * @param array<string>|null $disabled The disabled values.
      */
     protected bool _isDisabled(string myKey, ?array $disabled) {
-        if ($disabled == null) {
+        if ($disabled is null) {
             return false;
         }
         $strict = !is_numeric(myKey);

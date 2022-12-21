@@ -156,7 +156,7 @@ class DateTimeWidget : BasicWidget {
      * @throws \InvalidArgumentException If invalid input type is passed.
      */
     protected string formatDateTime(myValue, array myOptions) {
-        if (myValue == "" || myValue == null) {
+        if (myValue == "" || myValue is null) {
             return "";
         }
 

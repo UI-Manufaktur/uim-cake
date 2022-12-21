@@ -260,7 +260,7 @@ class EntityContext : IContext {
      */
     protected auto _schemaDefault(array $parts) {
         myTable = _getTable($parts);
-        if (myTable == null) {
+        if (myTable is null) {
             return null;
         }
         myField = end($parts);
@@ -305,7 +305,7 @@ class EntityContext : IContext {
      * @throws \RuntimeException When properties cannot be read.
      */
     function entity(?array myPath = null) {
-        if (myPath == null) {
+        if (myPath is null) {
             return _context["entity"];
         }
 
@@ -328,7 +328,7 @@ class EntityContext : IContext {
             $prop = myPath[$i];
             $next = _getProp($entity, $prop);
             $isLast = ($i == $last);
-            if (!$isLast && $next == null && $prop !== "_ids") {
+            if (!$isLast && $next is null && $prop !== "_ids") {
                 myTable = _getTable(myPath);
                 if (myTable) {
                     return myTable.newEmptyEntity();
@@ -363,7 +363,7 @@ class EntityContext : IContext {
      * @throws \RuntimeException When properties cannot be read.
      */
     protected auto leafEntity(myPath = null) {
-        if (myPath == null) {
+        if (myPath is null) {
             return _context["entity"];
         }
 
@@ -616,7 +616,7 @@ class EntityContext : IContext {
                 $assoc = $associationCollection.getByProperty($part);
             }
 
-            if ($assoc == null) {
+            if ($assoc is null) {
                 if ($fallback) {
                     break;
                 }

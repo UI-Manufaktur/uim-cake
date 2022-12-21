@@ -53,7 +53,7 @@ class FlashHelper : Helper
      */
     Nullable!string render(string myKey = "flash", array myOptions = []) {
         myMessages = _View.getRequest().getFlash().consume(myKey);
-        if (myMessages == null) {
+        if (myMessages is null) {
             return null;
         }
 

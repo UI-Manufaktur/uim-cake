@@ -188,7 +188,7 @@ class ArrayContext : IContext
 
         $required = Hash::get(_context["required"], myField);
 
-        if ($required == null) {
+        if ($required is null) {
             $required = Hash::get(_context["required"], this.stripNesting(myField));
         }
 
@@ -205,7 +205,7 @@ class ArrayContext : IContext
             return null;
         }
         $required = Hash::get(_context["required"], myField);
-        if ($required == null) {
+        if ($required is null) {
             $required = Hash::get(_context["required"], this.stripNesting(myField));
         }
 
@@ -258,7 +258,7 @@ class ArrayContext : IContext
         }
 
         $schema = Hash::get(_context["schema"], myField);
-        if ($schema == null) {
+        if ($schema is null) {
             $schema = Hash::get(_context["schema"], this.stripNesting(myField));
         }
 
@@ -277,7 +277,7 @@ class ArrayContext : IContext
             return [];
         }
         $schema = Hash::get(_context["schema"], myField);
-        if ($schema == null) {
+        if ($schema is null) {
             $schema = Hash::get(_context["schema"], this.stripNesting(myField));
         }
 

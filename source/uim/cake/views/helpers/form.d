@@ -287,8 +287,8 @@ class FormHelper : Helper
      * @return \Cake\View\Form\ContextFactory
      */
     ContextFactory contextFactory(?ContextFactory $instance = null, array $contexts = []) {
-        if ($instance == null) {
-            if (_contextFactory == null) {
+        if ($instance is null) {
+            if (_contextFactory is null) {
                 _contextFactory = ContextFactory::createWithDefaults($contexts);
             }
 
@@ -451,7 +451,7 @@ class FormHelper : Helper
     protected auto _formUrl(IContext $context, array myOptions) {
         myRequest = _View.getRequest();
 
-        if (myOptions["url"] == null) {
+        if (myOptions["url"] is null) {
             return myRequest.getRequestTarget();
         }
 
@@ -634,7 +634,7 @@ class FormHelper : Helper
      */
     FormProtector getFormProtector(): 
     {
-        if (this.formProtector == null) {
+        if (this.formProtector is null) {
             throw new CakeException(
                 "`FormProtector` instance has not been created. Ensure you have loaded the `FormProtectionComponent`"
                 . " in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`."
@@ -786,7 +786,7 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-labels
      */
     string label(string myFieldName, Nullable!string text = null, array myOptions = []) {
-        if ($text == null) {
+        if ($text is null) {
             $text = myFieldName;
             if (substr($text, -5) == "._ids") {
                 $text = substr($text, 0, -5);
@@ -1152,7 +1152,7 @@ class FormHelper : Helper
             case "radio":
             case "multicheckbox":
                 $opts = myOptions["options"];
-                if ($opts == null) {
+                if ($opts is null) {
                     $opts = [];
                 }
                 unset(myOptions["options"]);
@@ -1835,7 +1835,7 @@ class FormHelper : Helper
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
     string submit(Nullable!string caption = null, array myOptions = []) {
-        if ($caption == null) {
+        if ($caption is null) {
             $caption = __d("cake", "Submit");
         }
         myOptions += [
@@ -1964,9 +1964,9 @@ class FormHelper : Helper
             "empty": null,
         ];
 
-        if ($attributes["empty"] == null && $attributes["multiple"] !== "checkbox") {
+        if ($attributes["empty"] is null && $attributes["multiple"] !== "checkbox") {
             $required = _getContext().isRequired(myFieldName);
-            $attributes["empty"] = $required == null ? false : !$required;
+            $attributes["empty"] = $required is null ? false : !$required;
         }
 
         if ($attributes["multiple"] == "checkbox") {
@@ -2201,7 +2201,7 @@ class FormHelper : Helper
         myOptions += ["fieldName": myField];
 
         if (!isset(myOptions["secure"])) {
-            myOptions["secure"] = _View.getRequest().getAttribute("formTokenData") == null ? false : true;
+            myOptions["secure"] = _View.getRequest().getAttribute("formTokenData") is null ? false : true;
         }
         $context = _getContext();
 

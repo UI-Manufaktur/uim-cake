@@ -165,7 +165,7 @@ class BreadcrumbsHelper : Helper
     function insertBefore(string matchingTitle, string title, myUrl = null, array myOptions = []) {
         myKey = this.findCrumb($matchingTitle);
 
-        if (myKey == null) {
+        if (myKey is null) {
             throw new LogicException(sprintf("No crumb matching "%s" could be found.", $matchingTitle));
         }
 
@@ -194,7 +194,7 @@ class BreadcrumbsHelper : Helper
     function insertAfter(string matchingTitle, string title, myUrl = null, array myOptions = []) {
         myKey = this.findCrumb($matchingTitle);
 
-        if (myKey == null) {
+        if (myKey is null) {
             throw new LogicException(sprintf("No crumb matching "%s" could be found.", $matchingTitle));
         }
 

@@ -468,14 +468,14 @@ class ViewBuilder : JsonSerializable, Serializable
         ?IEventManager myEvents = null
     ): View {
         myClassName = _className;
-        if (myClassName == null) {
+        if (myClassName is null) {
             myClassName = App::className("App", "View", "View") ?? View::class;
         } elseif (myClassName == "View") {
             myClassName = App::className(myClassName, "View");
         } else {
             myClassName = App::className(myClassName, "View", "View");
         }
-        if (myClassName == null) {
+        if (myClassName is null) {
             throw new MissingViewException(["class" => _className]);
         }
 

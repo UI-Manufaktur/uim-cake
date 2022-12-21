@@ -340,7 +340,7 @@ class TimeHelper : Helper
      * @see \Cake\I18n\Time::i18nFormat()
      */
     function i18nFormat($date, $format = null, $invalid = false, $timezone = null) {
-        if ($date == null) {
+        if ($date is null) {
             return $invalid;
         }
         $timezone = _getTimezone($timezone);

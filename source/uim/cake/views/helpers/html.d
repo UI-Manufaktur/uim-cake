@@ -131,7 +131,7 @@ class HtmlHelper : Helper {
                 "last": ["rel": "last", "link": myContents],
             ];
 
-            if (myType == "icon" && myContents == null) {
+            if (myType == "icon" && myContents is null) {
                 myTypes["icon"]["link"] = "favicon.ico";
             }
 
@@ -825,7 +825,7 @@ class HtmlHelper : Helper {
             $text = h($text);
             unset(myOptions["escape"]);
         }
-        if ($text == null) {
+        if ($text is null) {
             $tag = "tagstart";
         } else {
             $tag = "tag";
@@ -879,7 +879,7 @@ class HtmlHelper : Helper {
             myOptions["class"] = myClass;
         }
         $tag = "para";
-        if ($text == null) {
+        if ($text is null) {
             $tag = "parastart";
         }
 
@@ -990,7 +990,7 @@ class HtmlHelper : Helper {
             myOptions["src"] = this.Url.assetUrl(myPath, myOptions);
         }
 
-        if ($tag == null) {
+        if ($tag is null) {
             if (is_array(myPath)) {
                 $mimeType = myPath[0]["type"];
             } else {
