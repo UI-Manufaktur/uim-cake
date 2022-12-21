@@ -201,7 +201,7 @@ class Debugger
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
     static function configInstance(myKey = null, myValue = null, bool myMerge = true) {
-        if (myKey == null) {
+        if (myKey is null) {
             return static::getInstance().getConfig(myKey);
         }
 

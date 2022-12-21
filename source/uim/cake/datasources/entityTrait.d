@@ -320,7 +320,7 @@ trait EntityTrait
      */
     bool has(myField) {
         foreach ((array)myField as $prop) {
-            if (this.get($prop) == null) {
+            if (this.get($prop) is null) {
                 return false;
             }
         }
@@ -345,7 +345,7 @@ trait EntityTrait
     bool isEmpty(string myField) {
         myValue = this.get(myField);
         if (
-            myValue == null ||
+            myValue is null ||
             (
                 is_array(myValue) &&
                 empty(myValue) ||
@@ -698,7 +698,7 @@ trait EntityTrait
      * @return bool Whether the field was changed or not
      */
     bool isDirty(Nullable!string myField = null) {
-        if (myField == null) {
+        if (myField is null) {
             return !empty(_dirty);
         }
 
@@ -1109,7 +1109,7 @@ trait EntityTrait
     bool isAccessible(string myField) {
         myValue = _accessible[myField] ?? null;
 
-        return (myValue == null && !empty(_accessible["*"])) || myValue;
+        return (myValue is null && !empty(_accessible["*"])) || myValue;
     }
 
     /**

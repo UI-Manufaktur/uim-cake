@@ -120,7 +120,7 @@ class TypeFactory
      * @return Configured class name for given myType or map array.
      */
     static string[] getMap(Nullable!string myType = null) {
-        if (myType == null) {
+        if (myType is null) {
             return static::$_types;
         }
 

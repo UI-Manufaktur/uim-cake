@@ -179,7 +179,7 @@ class EventManager : IEventManager
             return this;
         }
 
-        if ($callable == null) {
+        if ($callable is null) {
             unset(_listeners[myEventKey]);
 
             return this;

@@ -306,7 +306,7 @@ abstract class BaseErrorHandler
      * @return \Cake\Error\IErrorLogger
      */
     auto getLogger() {
-        if (this.logger == null) {
+        if (this.logger is null) {
             /** @var \Cake\Error\IErrorLogger $logger */
             $logger = new _config["errorLogger"](_config);
 

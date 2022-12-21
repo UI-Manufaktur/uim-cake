@@ -160,7 +160,7 @@ class Translator
         $context = $vars["_context"] ?? null;
 
         // No or missing context, fallback to the key/first message
-        if ($context == null) {
+        if ($context is null) {
             if (isset(myMessage["_context"][""])) {
                 return myMessage["_context"][""] == "" ? myKey : myMessage["_context"][""];
             }

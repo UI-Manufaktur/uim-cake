@@ -139,7 +139,7 @@ class Cookie : ICookie
         this.httpOnly = $httpOnly ?? static::$defaults["httponly"];
         this.path = myPath ?? static::$defaults["path"];
         this.secure = $secure ?? static::$defaults["secure"];
-        if ($sameSite == null) {
+        if ($sameSite is null) {
             this.sameSite = static::$defaults["samesite"];
         } else {
             this.validateSameSiteValue($sameSite);
@@ -214,7 +214,7 @@ class Cookie : ICookie
      */
     protected static function dateTimeInstance($expires): ?IDateTime
     {
-        if ($expires == null) {
+        if ($expires is null) {
             return null;
         }
 
@@ -634,7 +634,7 @@ class Cookie : ICookie
             this.value = _expand(this.value);
         }
 
-        if (myPath == null) {
+        if (myPath is null) {
             return this.value;
         }
 

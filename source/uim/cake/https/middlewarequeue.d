@@ -58,7 +58,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     protected IMiddleware resolve($middleware) {
         if (is_string($middleware)) {
             myClassName = App::className($middleware, "Middleware", "Middleware");
-            if (myClassName == null) {
+            if (myClassName is null) {
                 throw new RuntimeException(sprintf(
                     "Middleware "%s" was not found.",
                     $middleware

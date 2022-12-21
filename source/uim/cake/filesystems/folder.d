@@ -522,7 +522,7 @@ class Folder
         } catch (Exception $e) {
             unset($directory, $iterator);
 
-            if (myType == null) {
+            if (myType is null) {
                 return [[], []];
             }
 
@@ -562,7 +562,7 @@ class Folder
         // which could otherwise make `rmdir()` fail
         unset($directory, $iterator);
 
-        if (myType == null) {
+        if (myType is null) {
             return [$directories, myfiles];
         }
         if (myType == "dir") {

@@ -235,7 +235,7 @@ class Session
      */
     function engine(myClass = null, array myOptions = []): ?SessionHandlerInterface
     {
-        if (myClass == null) {
+        if (myClass is null) {
             return _engine;
         }
         if (myClass instanceof SessionHandlerInterface) {
@@ -392,7 +392,7 @@ class Session
             return false;
         }
 
-        if (myName == null) {
+        if (myName is null) {
             return (bool)$_SESSION;
         }
 
@@ -416,7 +416,7 @@ class Session
             return $default;
         }
 
-        if (myName == null) {
+        if (myName is null) {
             return $_SESSION ?: [];
         }
 

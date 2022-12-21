@@ -102,7 +102,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
         }
 
         $token = $session.read(_config["key"]);
-        if ($token == null) {
+        if ($token is null) {
             $token = this.createToken();
             $session.write(_config["key"], $token);
         }

@@ -131,7 +131,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      */
     auto getSchema(): Schema
     {
-        if (_schema == null) {
+        if (_schema is null) {
             _schema = _buildSchema(new _schemaClass());
         }
 
@@ -272,7 +272,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * @return mixed
      */
     auto getData(Nullable!string myField = null) {
-        if (myField == null) {
+        if (myField is null) {
             return _data;
         }
 

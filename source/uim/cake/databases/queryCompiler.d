@@ -101,7 +101,7 @@ class QueryCompiler {
     protected Closure _sqlCompiler(string &mySql, Query myQuery, ValueBinder $binder) {
         return function ($part, $partName) use (&mySql, myQuery, $binder) {
             if (
-                $part == null ||
+                $part is null ||
                 (is_array($part) && empty($part)) ||
                 ($part instanceof Countable && count($part) == 0)
             ) {

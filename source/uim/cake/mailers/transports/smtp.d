@@ -461,7 +461,7 @@ class SmtpTransport : AbstractTransport
             $startTime = time();
             while (substr($response, -2) !== "\r\n" && (time() - $startTime < $timeout)) {
                 $bytes = _socket().read();
-                if ($bytes == null) {
+                if ($bytes is null) {
                     break;
                 }
                 $response .= $bytes;
@@ -497,7 +497,7 @@ class SmtpTransport : AbstractTransport
      */
     protected auto _socket(): Socket
     {
-        if (_socket == null) {
+        if (_socket is null) {
             throw new RuntimeException("Socket is null, but must be set.");
         }
 

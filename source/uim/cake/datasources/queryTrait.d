@@ -251,7 +251,7 @@ trait QueryTrait
         if (_cache) {
             myResults = _cache.fetch(this);
         }
-        if (myResults == null) {
+        if (myResults is null) {
             myResults = _decorateResults(_execute());
             if (_cache) {
                 _cache.store(this, myResults);
@@ -291,7 +291,7 @@ trait QueryTrait
         if ($overwrite) {
             _mapReduce = [];
         }
-        if ($mapper == null) {
+        if ($mapper is null) {
             if (!$overwrite) {
                 throw new InvalidArgumentException("$mapper can be null only when $overwrite is true.");
             }
@@ -408,7 +408,7 @@ trait QueryTrait
         if (myMode == self::OVERWRITE) {
             _formatters = [];
         }
-        if ($formatter == null) {
+        if ($formatter is null) {
             if (myMode !== self::OVERWRITE) {
                 throw new InvalidArgumentException("$formatter can be null only when myMode is overwrite.");
             }

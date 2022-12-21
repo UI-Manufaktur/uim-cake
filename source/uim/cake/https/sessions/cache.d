@@ -68,7 +68,7 @@ class CacheSession : SessionHandlerInterface
     function read($id) {
         myValue = Cache::read($id, _options["config"]);
 
-        if (myValue == null) {
+        if (myValue is null) {
             return "";
         }
 

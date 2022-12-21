@@ -50,7 +50,7 @@ trait ModelAwareTrait
      * @param string myName Class name.
      */
     protected void _setModelClass(string myName) {
-        if (this.modelClass == null) {
+        if (this.modelClass is null) {
             this.modelClass = myName;
         }
     }

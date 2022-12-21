@@ -86,7 +86,7 @@ class SqlserverCompiler : QueryCompiler
      * @return string
      */
     protected string _buildLimitPart(int $limit, Query myQuery) {
-        if (myQuery.clause("offset") == null) {
+        if (myQuery.clause("offset") is null) {
             return "";
         }
 

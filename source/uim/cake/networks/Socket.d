@@ -146,12 +146,12 @@ class Socket
         );
         restore_error_handler();
 
-        if (this.connection == null && (!$errNum || !$errStr)) {
+        if (this.connection is null && (!$errNum || !$errStr)) {
             this.setLastError($errNum, $errStr);
             throw new SocketException($errStr, $errNum);
         }
 
-        if (this.connection == null && _connectionErrors) {
+        if (this.connection is null && _connectionErrors) {
             myMessage = implode("\n", _connectionErrors);
             throw new SocketException(myMessage, E_WARNING);
         }
@@ -447,7 +447,7 @@ class Socket
         }
 
         try {
-            if (this.connection == null) {
+            if (this.connection is null) {
                 throw new CakeException("You must call connect() first.");
             }
             myEnableCryptoResult = stream_socket_enable_crypto(this.connection, myEnable, $method);

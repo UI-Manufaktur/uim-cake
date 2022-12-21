@@ -37,7 +37,7 @@ class Request : Message : IRequest {
         ];
         this.addHeaders($headers);
 
-        if (myData == null) {
+        if (myData is null) {
             this.stream = new Stream("php://memory", "rw");
         } else {
             this.setContent(myData);

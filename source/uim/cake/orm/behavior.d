@@ -276,7 +276,7 @@ class Behavior : IEventListener
             if (!method_exists(this, $method)) {
                 continue;
             }
-            if ($priority == null) {
+            if ($priority is null) {
                 myEvents[myEvent] = $method;
             } else {
                 myEvents[myEvent] = [

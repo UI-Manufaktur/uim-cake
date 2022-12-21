@@ -138,7 +138,7 @@ class CsrfProtectionMiddleware : IMiddleware
             }
         }
 
-        if ($method == "GET" && $cookieData == null) {
+        if ($method == "GET" && $cookieData is null) {
             $token = this.createToken();
             myRequest = myRequest.withAttribute("csrfToken", this.saltToken($token));
             /** @var mixed $response */

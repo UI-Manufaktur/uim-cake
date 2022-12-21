@@ -190,7 +190,7 @@ abstract class BaseApplication :
      * @return \Cake\Core\IContainer
      */
     IContainer getContainer() {
-        if (this.container == null) {
+        if (this.container is null) {
             this.container = this.buildContainer();
         }
 
@@ -241,7 +241,7 @@ abstract class BaseApplication :
     IResponse handle(
         IServerRequest myRequest
     )  {
-        if (this.controllerFactory == null) {
+        if (this.controllerFactory is null) {
             this.controllerFactory = new ControllerFactory(this.getContainer());
         }
 

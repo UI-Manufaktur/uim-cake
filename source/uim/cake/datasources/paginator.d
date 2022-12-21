@@ -3,11 +3,8 @@ module uim.cake.datasources;
 @safe:
 import uim.cake;
 
-/**
- * This class is used to handle automatic model data pagination.
- */
-class Paginator : IPaginator
-{
+// This class is used to handle automatic model data pagination.
+class Paginator : IPaginator {
     use InstanceConfigTrait;
 
     /**
@@ -155,7 +152,7 @@ class Paginator : IPaginator
         if ($object instanceof IQuery) {
             myQuery = $object;
             $object = myQuery.getRepository();
-            if ($object == null) {
+            if ($object is null) {
                 throw new CakeException("No repository set for query.");
             }
         }
@@ -191,7 +188,7 @@ class Paginator : IPaginator
      */
     protected auto getQuery(IRepository $object, ?IQuery myQuery, array myData): IQuery
     {
-        if (myQuery == null) {
+        if (myQuery is null) {
             myQuery = $object.find(myData["finder"], myData["options"]);
         } else {
             myQuery.applyOptions(myData["options"]);
@@ -324,7 +321,7 @@ class Paginator : IPaginator
     protected auto addPrevNextParams(array myParams, array myData): array
     {
         myParams["prevPage"] = myParams["page"] > 1;
-        if (myParams["count"] == null) {
+        if (myParams["count"] is null) {
             myParams["nextPage"] = true;
         } else {
             myParams["nextPage"] = myParams["count"] > myParams["page"] * myParams["perPage"];
@@ -558,7 +555,7 @@ class Paginator : IPaginator
         }
 
         if (
-            myOptions["sort"] == null
+            myOptions["sort"] is null
             && count(myOptions["order"]) == 1
             && !is_numeric(key(myOptions["order"]))
         ) {

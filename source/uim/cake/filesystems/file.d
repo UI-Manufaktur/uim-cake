@@ -128,7 +128,7 @@ class File {
      * @return string|false String on success, false on failure
      */
     function read($bytes = false, string myMode = "rb", bool $force = false) {
-        if ($bytes == false && this.lock == null) {
+        if ($bytes == false && this.lock is null) {
             return file_get_contents(this.path);
         }
         if (this.open(myMode, $force) == false) {
@@ -326,13 +326,13 @@ class File {
     protected static string _basename(string myPath, Nullable!string ext = null) {
         // check for multibyte string and use basename() if not found
         if (mb_strlen(myPath) == strlen(myPath)) {
-            return $ext == null ? basename(myPath) : basename(myPath, $ext);
+            return $ext is null ? basename(myPath) : basename(myPath, $ext);
         }
 
         $splInfo = new SplFileInfo(myPath);
         myName = ltrim($splInfo.getFilename(), "/\\");
 
-        if ($ext == null || $ext == "") {
+        if ($ext is null || $ext == "") {
             return myName;
         }
         $ext = preg_quote($ext);
@@ -386,7 +386,7 @@ class File {
      * @return string|null Full path to the file, or null on failure
      */
     function pwd() {
-        if (this.path == null) {
+        if (this.path is null) {
             $dir = this.Folder.pwd();
             if ($dir && is_dir($dir)) {
                 this.path = this.Folder.slashTerm($dir) . this.name;

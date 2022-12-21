@@ -93,7 +93,7 @@ class FormDataPart
      * @param string|null $disposition Use null to get/string to set.
      */
     string disposition(Nullable!string disposition = null) {
-        if ($disposition == null) {
+        if ($disposition is null) {
             return _disposition;
         }
 
@@ -107,7 +107,7 @@ class FormDataPart
      * @return string|null
      */
     Nullable!string contentId(Nullable!string id = null) {
-        if ($id == null) {
+        if ($id is null) {
             return _contentId;
         }
 
@@ -124,7 +124,7 @@ class FormDataPart
      * @return string|null
      */
     string filename(Nullable!string myfilename = null) {
-        if (myfilename == null) {
+        if (myfilename is null) {
             return _filename;
         }
 
@@ -138,7 +138,7 @@ class FormDataPart
      * @return string|null
      */
     string type(Nullable!string myType) {
-        if (myType == null) {
+        if (myType is null) {
             return _type;
         }
 
@@ -154,7 +154,7 @@ class FormDataPart
      * @return string|null
      */
     Nullable!string transferEncoding(Nullable!string myType) {
-        if (myType == null) {
+        if (myType is null) {
             return _transferEncoding;
         }
 

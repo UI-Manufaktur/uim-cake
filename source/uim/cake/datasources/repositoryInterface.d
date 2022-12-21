@@ -14,9 +14,7 @@ interface IRepository
      */
     auto setAlias(string myAlias);
 
-    /**
-     * Returns the repository alias.
-     */
+    // Returns the repository alias.
     string getAlias();
 
     /**

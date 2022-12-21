@@ -40,7 +40,7 @@ class Filesystem
             | FilesystemIterator::SKIP_DOTS;
         $directory = new FilesystemIterator(myPath, $flags);
 
-        if ($filter == null) {
+        if ($filter is null) {
             return $directory;
         }
 
@@ -79,7 +79,7 @@ class Filesystem
             RecursiveIteratorIterator::CHILD_FIRST
         );
 
-        if ($filter == null) {
+        if ($filter is null) {
             return $flatten;
         }
 

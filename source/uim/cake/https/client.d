@@ -152,7 +152,7 @@ class Client : ClientInterface
         this.setConfig(myConfig);
 
         $adapter = _config["adapter"];
-        if ($adapter == null) {
+        if ($adapter is null) {
             $adapter = Curl::class;
 
             if (!extension_loaded("curl")) {

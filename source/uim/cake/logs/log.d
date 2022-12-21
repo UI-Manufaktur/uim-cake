@@ -360,7 +360,7 @@ class Log
                 $levels = $logger.levels();
                 $scopes = $logger.scopes();
             }
-            if ($scopes == null) {
+            if ($scopes is null) {
                 $scopes = [];
             }
 

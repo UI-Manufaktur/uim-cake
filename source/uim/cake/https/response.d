@@ -1136,7 +1136,7 @@ class Response : IResponse
         if ($modifiedSince && this.hasHeader("Last-Modified")) {
             $timeMatches = strtotime(this.getHeaderLine("Last-Modified")) == strtotime($modifiedSince);
         }
-        if ($etagMatches == null && $timeMatches == null) {
+        if ($etagMatches is null && $timeMatches is null) {
             return false;
         }
         $notModified = $etagMatches !== false && $timeMatches !== false;
@@ -1327,7 +1327,7 @@ class Response : IResponse
 
         $extension = strtolower(myfile.getExtension());
         $mapped = this.getMimeType($extension);
-        if ((!$extension || !$mapped) && myOptions["download"] == null) {
+        if ((!$extension || !$mapped) && myOptions["download"] is null) {
             myOptions["download"] = true;
         }
 

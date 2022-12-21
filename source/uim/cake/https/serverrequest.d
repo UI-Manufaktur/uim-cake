@@ -1032,7 +1032,7 @@ class ServerRequest : IServerRequest
         foreach ($raw as myTypes) {
             $accept = array_merge($accept, myTypes);
         }
-        if (myType == null) {
+        if (myType is null) {
             return $accept;
         }
 
@@ -1078,7 +1078,7 @@ class ServerRequest : IServerRequest
             }
             $accept = array_merge($accept, myLanguages);
         }
-        if (myLanguage == null) {
+        if (myLanguage is null) {
             return $accept;
         }
 
@@ -1143,7 +1143,7 @@ class ServerRequest : IServerRequest
      * @see ServerRequest::getQueryParams()
      */
     auto getQuery(Nullable!string myName = null, $default = null) {
-        if (myName == null) {
+        if (myName is null) {
             return this.query;
         }
 
@@ -1183,7 +1183,7 @@ class ServerRequest : IServerRequest
      * @return mixed The value being read.
      */
     auto getData(Nullable!string myName = null, $default = null) {
-        if (myName == null) {
+        if (myName is null) {
             return this.data;
         }
         if (!is_array(this.data) && myName) {
@@ -1763,7 +1763,7 @@ class ServerRequest : IServerRequest
 
     // Get the path of current request.
     string getPath() {
-        if (this.requestTarget == null) {
+        if (this.requestTarget is null) {
             return this.uri.getPath();
         }
 
