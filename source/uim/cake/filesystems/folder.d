@@ -908,7 +908,7 @@ class Folder
             $newpath = DIRECTORY_SEPARATOR;
         }
 
-        while (($part = array_shift($parts)) !== null) {
+        while (($part = array_shift($parts))  !is null) {
             if ($part == "." || $part == "") {
                 continue;
             }

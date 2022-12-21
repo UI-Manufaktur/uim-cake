@@ -276,7 +276,7 @@ class Paginator : IPaginator {
         $page = myParams["page"];
         $pageCount = 0;
 
-        if (myParams["count"] !== null) {
+        if (myParams["count"]  !is null) {
             $pageCount = max((int)ceil(myParams["count"] / myParams["perPage"]), 1);
             $page = min($page, $pageCount);
         } elseif (myParams["current"] == 0 && myParams["requestedPage"] > 1) {
@@ -413,11 +413,11 @@ class Paginator : IPaginator {
      */
     protected string[] getSortableFields(array myConfig) {
         $allowed = myConfig["sortableFields"] ?? null;
-        if ($allowed !== null) {
+        if ($allowed  !is null) {
             return $allowed;
         }
         $deprecated = myConfig["sortWhitelist"] ?? null;
-        if ($deprecated !== null) {
+        if ($deprecated  !is null) {
             deprecationWarning("The `sortWhitelist` option is deprecated. Use `sortableFields` instead.");
         }
 
@@ -541,7 +541,7 @@ class Paginator : IPaginator {
 
         $sortAllowed = false;
         $allowed = this.getSortableFields(myOptions);
-        if ($allowed !== null) {
+        if ($allowed  !is null) {
             myOptions["sortableFields"] = myOptions["sortWhitelist"] = $allowed;
 
             myField = key(myOptions["order"]);

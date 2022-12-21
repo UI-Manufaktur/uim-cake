@@ -260,7 +260,7 @@ class EventManager : IEventManager
             if (myResult == false) {
                 myEvent.stopPropagation();
             }
-            if (myResult !== null) {
+            if (myResult  !is null) {
                 myEvent.setResult(myResult);
             }
         }

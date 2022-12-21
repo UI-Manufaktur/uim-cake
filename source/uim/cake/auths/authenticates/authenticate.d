@@ -78,7 +78,7 @@ abstract class DAuthenticate : IEventListener {
             // null passwords as authentication systems
             // like digest auth don"t use passwords
             // and hashing *could* create a timing side-channel.
-            if (myPassword !== null) {
+            if (myPassword  !is null) {
                 myHasher = this.passwordHasher();
                 myHasher.hash(myPassword);
             }
@@ -87,7 +87,7 @@ abstract class DAuthenticate : IEventListener {
         }
 
         myPasswordField = _config["fields"]["password"];
-        if (myPassword !== null) {
+        if (myPassword  !is null) {
             myHasher = this.passwordHasher();
             myHashedPassword = myResult.get(myPasswordField);
 
@@ -150,7 +150,7 @@ abstract class DAuthenticate : IEventListener {
      *   it does not extend AbstractPasswordHasher
      */
     AbstractPasswordHasher passwordHasher() {
-        if (_passwordHasher !== null) {
+        if (_passwordHasher  !is null) {
             return _passwordHasher;
         }
 

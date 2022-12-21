@@ -100,7 +100,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      * @return mixed
      */
     protected auto _fetchCurrent() {
-        if (_current !== null) {
+        if (_current  !is null) {
             return _current;
         }
 

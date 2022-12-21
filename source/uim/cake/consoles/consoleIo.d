@@ -99,7 +99,7 @@ class ConsoleIo {
      * @return int The current output level.
      */
     int level(Nullable!int $level = null) {
-        if ($level !== null) {
+        if ($level  !is null) {
             _level = $level;
         }
 
@@ -446,14 +446,14 @@ class ConsoleIo {
         }
 
         $defaultText = "";
-        if ($default !== null) {
+        if ($default  !is null) {
             $defaultText = "[$default] ";
         }
         _out.write("<question>" . $prompt . "</question>myOptionsText\n$defaultText> ", 0);
         myResult = _in.read();
 
         myResult = myResult is null ? "" : trim(myResult);
-        if ($default !== null && myResult == "") {
+        if ($default  !is null && myResult == "") {
             return $default;
         }
 

@@ -624,7 +624,7 @@ class ConsoleOptionParser {
         }
         myParams = $args = [];
         _tokens = $argv;
-        while (($token = array_shift(_tokens)) !== null) {
+        while (($token = array_shift(_tokens))  !is null) {
             $token = (string)$token;
             if (isset(_subcommands[$token])) {
                 continue;
@@ -649,7 +649,7 @@ class ConsoleOptionParser {
             $isBoolean = $option.isBoolean();
             $default = $option.defaultValue();
 
-            if ($default !== null && !isset(myParams[myName]) && !$isBoolean) {
+            if ($default  !is null && !isset(myParams[myName]) && !$isBoolean) {
                 myParams[myName] = $default;
             }
             if ($isBoolean && !isset(myParams[myName])) {

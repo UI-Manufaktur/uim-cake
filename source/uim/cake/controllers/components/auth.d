@@ -323,7 +323,7 @@ class AuthComponent : Component : IEventDispatcher
             throw new CakeException("At least one authenticate object must be available.");
         }
         myResult = $auth.unauthenticated($controller.getRequest(), $response);
-        if (myResult !== null) {
+        if (myResult  !is null) {
             return myResult instanceof Response ? myResult : null;
         }
 
@@ -428,7 +428,7 @@ class AuthComponent : Component : IEventDispatcher
 
         myConfig = this.getConfig();
         foreach (myConfig as myKey: myValue) {
-            if (myValue !== null) {
+            if (myValue  !is null) {
                 unset($defaults[myKey]);
             }
         }
@@ -665,7 +665,7 @@ class AuthComponent : Component : IEventDispatcher
             if (!empty(myResult) && is_array(myResult)) {
                 _authenticationProvider = $auth;
                 myEvent = this.dispatchEvent("Auth.afterIdentify", [myResult, $auth]);
-                if (myEvent.getResult() !== null) {
+                if (myEvent.getResult()  !is null) {
                     myResult = myEvent.getResult();
                 }
                 this.storage().write(myResult);
@@ -701,7 +701,7 @@ class AuthComponent : Component : IEventDispatcher
             $redirectUrl = null;
         }
 
-        if (myUrl !== null) {
+        if (myUrl  !is null) {
             $redirectUrl = myUrl;
         } elseif ($redirectUrl) {
             if (
@@ -745,7 +745,7 @@ class AuthComponent : Component : IEventDispatcher
             if (!empty(myResult)) {
                 _authenticationProvider = $auth;
                 myEvent = this.dispatchEvent("Auth.afterIdentify", [myResult, $auth]);
-                if (myEvent.getResult() !== null) {
+                if (myEvent.getResult()  !is null) {
                     return myEvent.getResult();
                 }
 
@@ -805,7 +805,7 @@ class AuthComponent : Component : IEventDispatcher
      */
     function storage(?IStorage $storage = null): ?IStorage
     {
-        if ($storage !== null) {
+        if ($storage  !is null) {
             _storage = $storage;
 
             return null;

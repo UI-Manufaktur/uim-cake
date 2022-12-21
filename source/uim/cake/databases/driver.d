@@ -426,7 +426,7 @@ abstract class Driver : IDriver
      */
     array __debugInfo() {
       return [
-          "connected":_connection !== null,
+          "connected":_connection  !is null,
       ];
     }
 }

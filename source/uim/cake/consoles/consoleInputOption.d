@@ -75,7 +75,7 @@ class ConsoleInputOption {
 
         if ($isBoolean) {
             _default = (bool)$default;
-        } elseif ($default !== null) {
+        } elseif ($default  !is null) {
             _default = (string)$default;
         }
 
@@ -130,7 +130,7 @@ class ConsoleInputOption {
     string usage() {
         myName = _short == "" ? "--" . name : "-" . _short;
         $default = "";
-        if (_default !== null && !is_bool(_default) && _default !== "") {
+        if (_default  !is null && !is_bool(_default) && _default !== "") {
             $default = " " . _default;
         }
         if (_choices) {

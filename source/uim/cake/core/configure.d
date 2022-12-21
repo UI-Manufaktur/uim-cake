@@ -118,7 +118,7 @@ class Configure
             return false;
         }
 
-        return static::read($var) !== null;
+        return static::read($var)  !is null;
     }
 
     /**
@@ -387,7 +387,7 @@ class Configure
      */
     static string version() {
         $version = static::read("Cake.version");
-        if ($version !== null) {
+        if ($version  !is null) {
             return $version;
         }
 

@@ -1000,7 +1000,7 @@ class Debugger
 
         $debugger = static::getInstance();
         $restore = null;
-        if ($showHtml !== null) {
+        if ($showHtml  !is null) {
             $restore = $debugger.getConfig("exportFormatter");
             $debugger.setConfig("exportFormatter", $showHtml ? HtmlFormatter::class : TextFormatter::class);
         }

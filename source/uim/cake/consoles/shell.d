@@ -497,7 +497,7 @@ class Shell {
         }
 
         $subcommands = this.OptionParser.subcommands();
-        if ($command !== null) {
+        if ($command  !is null) {
             $command = isset($subcommands[$command]) ? $command : null;
         }
 

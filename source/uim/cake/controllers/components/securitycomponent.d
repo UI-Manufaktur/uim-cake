@@ -146,7 +146,7 @@ class SecurityComponent : Component {
      * @throws \Cake\Http\Exception\BadRequestException
      */
     protected void _throwException(?SecurityException myException = null) {
-        if (myException !== null) {
+        if (myException  !is null) {
             if (!Configure::read("debug")) {
                 myException.setReason(myException.getMessage());
                 myException.setMessage(static::DEFAULT_EXCEPTION_MESSAGE);
@@ -430,7 +430,7 @@ class SecurityComponent : Component {
     ) {
         myMessages = _matchExistingFields(myDataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = _debugExpectedFields($expectedFields, $missingMessage);
-        if ($expectedFieldsMessage !== null) {
+        if ($expectedFieldsMessage  !is null) {
             myMessages[] = $expectedFieldsMessage;
         }
 

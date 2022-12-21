@@ -26,7 +26,7 @@ class Command : BaseCommand {
         return this.getTableLocator().get(myAlias);
     });
 
-    if (this.defaultTable !== null) {
+    if (this.defaultTable  !is null) {
         this.modelClass = this.defaultTable;
     }
     if (isset(this.modelClass)) {

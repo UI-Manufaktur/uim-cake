@@ -190,12 +190,12 @@ if (!function_exists("env")) {
 
         if (myKey == "REMOTE_ADDR" && $val == env("SERVER_ADDR")) {
             $addr = env("HTTP_PC_REMOTE_ADDR");
-            if ($addr !== null) {
+            if ($addr  !is null) {
                 $val = $addr;
             }
         }
 
-        if ($val !== null) {
+        if ($val  !is null) {
             return $val;
         }
 

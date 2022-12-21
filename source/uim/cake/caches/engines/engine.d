@@ -140,7 +140,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     bool setMultiple(myValues, $ttl = null) {
         this.ensureValidType(myValues, self::CHECK_KEY);
 
-        if ($ttl !== null) {
+        if ($ttl  !is null) {
             $restore = this.getConfig("duration");
             this.setConfig("duration", $ttl);
         }
@@ -194,7 +194,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException If the myKey string is not a legal value.
      */
     bool has(myKey) {
-        return this.get(myKey) !== null;
+        return this.get(myKey)  !is null;
     }
 
     /**

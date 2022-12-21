@@ -208,7 +208,7 @@ class App {
      * @param string|null myPlugin Plugin name.
      */
     static string[] classPath(string aClassType, Nullable!string myPlugin = null) {
-        if (myPlugin !== null) {
+        if (myPlugin  !is null) {
             return [
                 Plugin::classPath(myPlugin) . aClassType . DIRECTORY_SEPARATOR,
             ];

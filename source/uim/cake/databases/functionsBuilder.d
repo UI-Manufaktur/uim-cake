@@ -275,12 +275,12 @@ class FunctionsBuilder
     function lag($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
         myParams = this.toLiteralParam($expression) + [$offset: "literal"];
-        if ($default !== null) {
+        if ($default  !is null) {
             myParams[] = $default;
         }
 
         myTypes = [];
-        if (myType !== null) {
+        if (myType  !is null) {
             myTypes = [myType, "integer", myType];
         }
 
@@ -299,12 +299,12 @@ class FunctionsBuilder
     function lead($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
         myParams = this.toLiteralParam($expression) + [$offset: "literal"];
-        if ($default !== null) {
+        if ($default  !is null) {
             myParams[] = $default;
         }
 
         myTypes = [];
-        if (myType !== null) {
+        if (myType  !is null) {
             myTypes = [myType, "integer", myType];
         }
 

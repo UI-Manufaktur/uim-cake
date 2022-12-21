@@ -134,7 +134,7 @@ class File {
         if (this.open(myMode, $force) == false) {
             return false;
         }
-        if (this.lock !== null && flock(this.handle, LOCK_SH) == false) {
+        if (this.lock  !is null && flock(this.handle, LOCK_SH) == false) {
             return false;
         }
         if (is_int($bytes)) {
@@ -146,7 +146,7 @@ class File {
             myData .= fgets(this.handle, 4096);
         }
 
-        if (this.lock !== null) {
+        if (this.lock  !is null) {
             flock(this.handle, LOCK_UN);
         }
         if ($bytes == false) {
@@ -205,14 +205,14 @@ class File {
     bool write(string myData, string myMode = "w", bool $force = false) {
         $success = false;
         if (this.open(myMode, $force) == true) {
-            if (this.lock !== null && flock(this.handle, LOCK_EX) == false) {
+            if (this.lock  !is null && flock(this.handle, LOCK_EX) == false) {
                 return false;
             }
 
             if (fwrite(this.handle, myData) !== false) {
                 $success = true;
             }
-            if (this.lock !== null) {
+            if (this.lock  !is null) {
                 flock(this.handle, LOCK_UN);
             }
         }
@@ -592,13 +592,13 @@ class File {
             return false;
         }
 
-        if (this.lock !== null && flock(this.handle, LOCK_EX) == false) {
+        if (this.lock  !is null && flock(this.handle, LOCK_EX) == false) {
             return false;
         }
 
         $replaced = this.write(str_replace($search, $replace, this.read()), "w", true);
 
-        if (this.lock !== null) {
+        if (this.lock  !is null) {
             flock(this.handle, LOCK_UN);
         }
         this.close();

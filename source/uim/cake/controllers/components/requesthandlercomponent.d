@@ -371,7 +371,7 @@ class RequestHandlerComponent : Component {
         $defaults = ["charset":"UTF-8"];
         $viewClassMap = this.getConfig("viewClassMap");
 
-        if (Configure::read("App.encoding") !== null) {
+        if (Configure::read("App.encoding")  !is null) {
             $defaults["charset"] = Configure::read("App.encoding");
         }
         myOptions += $defaults;

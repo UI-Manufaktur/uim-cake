@@ -57,7 +57,7 @@ class SessionStorage : IStorage {
      * @psalm-suppress InvalidReturnType
      */
     function read() {
-        if (_user !== null) {
+        if (_user  !is null) {
             return _user ?: null;
         }
 

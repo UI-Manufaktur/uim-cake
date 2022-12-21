@@ -895,7 +895,7 @@ trait EntityTrait
         }
         // Try reading the errors data with field as a simple path
         myError = Hash::get(_errors, myField);
-        if (myError !== null) {
+        if (myError  !is null) {
             return myError;
         }
         myPath = explode(".", myField);
@@ -964,7 +964,7 @@ trait EntityTrait
      */
     protected auto _readError($object, myPath = null): array
     {
-        if (myPath !== null && $object instanceof IEntity) {
+        if (myPath  !is null && $object instanceof IEntity) {
             return $object.getError(myPath);
         }
         if ($object instanceof IEntity) {

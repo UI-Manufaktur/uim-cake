@@ -150,7 +150,7 @@ class ConsoleOutput {
                 !posix_isatty(_output)
             ) ||
             (
-                env("NO_COLOR") !== null
+                env("NO_COLOR")  !is null
             )
         ) {
             _outputAs = self::PLAIN;

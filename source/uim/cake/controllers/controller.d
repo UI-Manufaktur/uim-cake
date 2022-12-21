@@ -146,7 +146,7 @@ class Controller : IEventListener, IEventDispatcher
         ?IEventManager myEventManager = null,
         ?ComponentRegistry $components = null
     ) {
-        if (myName !== null) {
+        if (myName  !is null) {
             this.name = myName;
         } elseif (this.name is null && myRequest) {
             this.name = myRequest.getParam("controller");
@@ -160,13 +160,13 @@ class Controller : IEventListener, IEventDispatcher
         this.setRequest(myRequest ?: new ServerRequest());
         this.response = $response ?: new Response();
 
-        if (myEventManager !== null) {
+        if (myEventManager  !is null) {
             this.setEventManager(myEventManager);
         }
 
         this.modelFactory("Table", [this.getTableLocator(), "get"]);
 
-        if (this.defaultTable !== null) {
+        if (this.defaultTable  !is null) {
             this.modelClass = this.defaultTable;
         }
 
@@ -178,7 +178,7 @@ class Controller : IEventListener, IEventDispatcher
             this.defaultTable = myModelClass;
         }
 
-        if ($components !== null) {
+        if ($components  !is null) {
             this.components($components);
         }
 
@@ -219,7 +219,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Cake\Controller\ComponentRegistry
      */
     ComponentRegistry components(?ComponentRegistry $components = null) {
-        if ($components !== null) {
+        if ($components  !is null) {
             $components.setController(this);
 
             return _components = $components;
@@ -479,7 +479,7 @@ class Controller : IEventListener, IEventDispatcher
      */
     void invokeAction(Closure $action, array $args) {
         myResult = $action(...$args);
-        if (myResult !== null && !myResult instanceof IResponse) {
+        if (myResult  !is null && !myResult instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
                 "Controller actions can only return IResponse instance or null. "
                 . "Got %s instead.",
@@ -674,11 +674,11 @@ class Controller : IEventListener, IEventDispatcher
 
       this.autoRender = false;
 
-      if (myTemplate !== null) {
+      if (myTemplate  !is null) {
         myBuilder.setTemplate(myTemplate);
       }
 
-      if ($layout !== null) {
+      if ($layout  !is null) {
         myBuilder.setLayout($layout);
       }
 

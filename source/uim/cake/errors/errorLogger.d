@@ -59,7 +59,7 @@ class ErrorLogger : IErrorLogger
 
         myMessage = this.getMessage(myException);
 
-        if (myRequest !== null) {
+        if (myRequest  !is null) {
             myMessage .= this.getRequestContext(myRequest);
         }
 

@@ -160,7 +160,7 @@ class MemcachedEngine : CacheEngine
             );
         }
 
-        if (_config["username"] !== null && _config["password"] !== null) {
+        if (_config["username"]  !is null && _config["password"]  !is null) {
             if (!method_exists(_Memcached, "setSaslAuthData")) {
                 throw new InvalidArgumentException(
                     "Memcached extension is not built with SASL support"

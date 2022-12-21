@@ -77,7 +77,7 @@ class ConsoleInput {
         });
         $readyFds = stream_select($readFds, $writeFds, myErrorFds, $timeout);
         restore_error_handler();
-        if (myError !== null) {
+        if (myError  !is null) {
             throw new ConsoleException(myError);
         }
 

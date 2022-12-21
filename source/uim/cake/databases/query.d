@@ -1397,7 +1397,7 @@ class Query : IExpression, IteratorAggregate {
         if ($num < 1) {
             throw new InvalidArgumentException("Pages must start at 1.");
         }
-        if ($limit !== null) {
+        if ($limit  !is null) {
             this.limit($limit);
         }
         $limit = this.clause("limit");
@@ -1725,7 +1725,7 @@ class Query : IExpression, IteratorAggregate {
     function delete(Nullable!string myTable = null) {
         _dirty();
         _type = "delete";
-        if (myTable !== null) {
+        if (myTable  !is null) {
             this.from(myTable);
         }
 
@@ -1783,7 +1783,7 @@ class Query : IExpression, IteratorAggregate {
     QueryExpression newExpr($rawExpression = null) {
         $expression = new QueryExpression([], this.getTypeMap());
 
-        if ($rawExpression !== null) {
+        if ($rawExpression  !is null) {
             $expression.add($rawExpression);
         }
 
@@ -1903,7 +1903,7 @@ class Query : IExpression, IteratorAggregate {
             _resultDecorators = [];
         }
 
-        if ($callback !== null) {
+        if ($callback  !is null) {
             _resultDecorators[] = $callback;
         }
 
@@ -2205,10 +2205,10 @@ class Query : IExpression, IteratorAggregate {
     // Handles clearing iterator and cloning all expressions and value binders.
     void __clone() {
         _iterator = null;
-        if (_valueBinder !== null) {
+        if (_valueBinder  !is null) {
             _valueBinder = clone _valueBinder;
         }
-        if (_selectTypeMap !== null) {
+        if (_selectTypeMap  !is null) {
             _selectTypeMap = clone _selectTypeMap;
         }
         foreach (_parts as myName: $part) {

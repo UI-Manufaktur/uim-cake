@@ -114,7 +114,7 @@ trait CollectionTrait
         if (is_string(myPath) && indexOf(myPath, "{*}") !== false) {
             $extractor = $extractor
                 .filter(function (myData) {
-                    return myData !== null && (myData instanceof Traversable || is_array(myData));
+                    return myData  !is null && (myData instanceof Traversable || is_array(myData));
                 })
                 .unfold();
         }
@@ -135,7 +135,7 @@ trait CollectionTrait
 
     function avg(myPath = null) {
         myResult = this;
-        if (myPath !== null) {
+        if (myPath  !is null) {
             myResult = myResult.extract(myPath);
         }
         myResult = myResult
@@ -155,7 +155,7 @@ trait CollectionTrait
 
     function median(myPath = null) {
         myItems = this;
-        if (myPath !== null) {
+        if (myPath  !is null) {
             myItems = myItems.extract(myPath);
         }
         myValues = myItems.toList();
@@ -420,7 +420,7 @@ trait CollectionTrait
 
 
     ICollection appendItem($item, myKey = null) {
-        if (myKey !== null) {
+        if (myKey  !is null) {
             myData = [myKey: $item];
         } else {
             myData = [$item];
@@ -436,7 +436,7 @@ trait CollectionTrait
 
 
     ICollection prependItem($item, myKey = null) {
-        if (myKey !== null) {
+        if (myKey  !is null) {
             myData = [myKey: $item];
         } else {
             myData = [$item];

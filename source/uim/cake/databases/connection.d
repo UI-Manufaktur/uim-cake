@@ -323,7 +323,7 @@ class Connection : IConnection {
      */
     auto getSchemaCollection(): SchemaICollection
     {
-        if (_schemaCollection !== null) {
+        if (_schemaCollection  !is null) {
             return _schemaCollection;
         }
 
@@ -715,7 +715,7 @@ class Connection : IConnection {
     
     auto getCacher(): ICache
     {
-        if (this.cacher !== null) {
+        if (this.cacher  !is null) {
             return this.cacher;
         }
 
@@ -784,7 +784,7 @@ class Connection : IConnection {
      */
     auto getLogger(): LoggerInterface
     {
-        if (_logger !== null) {
+        if (_logger  !is null) {
             return _logger;
         }
 

@@ -462,10 +462,10 @@ class I18nExtractCommand : Command {
                         "line":$line,
                     ];
                     $details["file"] = "." . str_replace(ROOT, "", $details["file"]);
-                    if ($plural !== null) {
+                    if ($plural  !is null) {
                         $details["msgid_plural"] = $plural;
                     }
-                    if ($context !== null) {
+                    if ($context  !is null) {
                         $details["msgctxt"] = $context;
                     }
                     _addTranslation($domain, $singular, $details);

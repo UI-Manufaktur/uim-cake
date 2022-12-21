@@ -525,7 +525,7 @@ class Cache {
      */
     static function remember(string myKey, callable $callable, string myConfig = "default") {
         $existing = self::read(myKey, myConfig);
-        if ($existing !== null) {
+        if ($existing  !is null) {
             return $existing;
         }
         myResults = $callable();

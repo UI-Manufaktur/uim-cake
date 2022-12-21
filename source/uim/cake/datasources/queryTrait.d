@@ -243,7 +243,7 @@ trait QueryTrait
      * @return \Cake\Datasource\IResultSet
      */
     IResultSet all() {
-        if (_results !== null) {
+        if (_results  !is null) {
             return _results;
         }
 
