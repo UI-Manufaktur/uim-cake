@@ -6,7 +6,7 @@ import uim.cake;
 /**
  * This class is used to handle automatic model data pagination.
  */
-class Paginator : PaginatorInterface
+class Paginator : IPaginator
 {
     use InstanceConfigTrait;
 

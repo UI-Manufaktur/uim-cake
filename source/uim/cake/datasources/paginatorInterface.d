@@ -1,10 +1,7 @@
 module uim.cake.datasources;
 
-/**
- * This interface describes the methods for paginator instance.
- */
-interface PaginatorInterface
-{
+// This interface describes the methods for paginator instance.
+interface IPaginator {
     /**
      * Handles pagination of datasource records.
      *

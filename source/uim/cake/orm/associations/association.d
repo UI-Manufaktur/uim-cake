@@ -1,16 +1,7 @@
 module uim.cake.orm;
 
-import uim.cake.collections\Collection;
-import uim.cake.core.App;
-import uim.cake.core.ConventionsTrait;
-import uim.cake.databases.expressions\IdentifierExpression;
-import uim.cake.datasources\IEntity;
-import uim.cake.datasources\ResultSetDecorator;
-import uim.cake.orm.locators\LocatorAwareTrait;
-import uim.cake.utilities.Inflector;
-use Closure;
-use InvalidArgumentException;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * An Association is a relationship established between two tables and is used
@@ -18,56 +9,12 @@ use RuntimeException;
  *
  * @mixin \Cake\ORM\Table
  */
-abstract class Association
-{
+abstract class Association {
     use ConventionsTrait;
     use LocatorAwareTrait;
 
-    /**
-     * Strategy name to use joins for fetching associated records
-     */
-    public const string STRATEGY_JOIN = "join";
 
-    /**
-     * Strategy name to use a subquery for fetching associated records
-     */
-    public const string STRATEGY_SUBQUERY = "subquery";
-
-    /**
-     * Strategy name to use a select for fetching associated records
-     */
-    public const string STRATEGY_SELECT = "select";
-
-    /**
-     * Association type for one to one associations.
-     */
-    public const string ONE_TO_ONE = "oneToOne";
-
-    /**
-     * Association type for one to many associations.
-     */
-    public const string ONE_TO_MANY = "oneToMany";
-
-    /**
-     * Association type for many to many associations.
-     */
-    public const string MANY_TO_MANY = "manyToMany";
-
-    /**
-     * Association type for many to one associations.
-     */
-    public const string MANY_TO_ONE = "manyToOne";
-
-    /**
-     * Name given to the association, it usually represents the alias
-     * assigned to the target associated table
-     */
-    protected string _name;
-
-    /**
-     * The class name of the target table object
-     */
-    protected string _className;
+    // ----------
 
     /**
      * The field name in the owning side table that is used to match with the foreignKey
@@ -199,44 +146,7 @@ abstract class Association
         }
     }
 
-    /**
-     * Sets the name for this association, usually the alias
-     * assigned to the target associated table
-     *
-     * @param string myName Name to be assigned
-     * @return this
-     * @deprecated 4.3.0 Changing the association name after object creation is
-     *   no longer supported. The name should only be set through the constructor.
-     */
-    auto setName(string myName) {
-        deprecationWarning(
-            "Changing the association name after object creation is no longer supported."
-            . " The name should only be set through the constructor"
-        );
-
-        if (_targetTable !== null) {
-            myAlias = _targetTable.getAlias();
-            if (myAlias !== myName) {
-                throw new InvalidArgumentException(sprintf(
-                    "Association name "%s" does not match target table alias "%s".",
-                    myName,
-                    myAlias
-                ));
-            }
-        }
-
-        _name = myName;
-
-        return this;
-    }
-
-    /**
-     * Gets the name for this association, usually the alias
-     * assigned to the target associated table
-     */
-    string getName() {
-        return _name;
-    }
+    // ------------
 
     /**
      * Sets whether cascaded deletes should also fire callbacks.

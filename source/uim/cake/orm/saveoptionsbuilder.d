@@ -16,8 +16,7 @@ use RuntimeException;
  *
  * @see \Cake\Datasource\RulesChecker
  */
-class SaveOptionsBuilder : ArrayObject
-{
+class SaveOptionsBuilder : ArrayObject {
     use AssociationsNormalizerTrait;
 
     /**

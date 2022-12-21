@@ -6,15 +6,9 @@ import uim.cake;
 /**
  * Checks that a list of fields from an entity are unique in the table
  */
-class IsUnique
-{
-    /**
-     * The list of fields to check
-     *
-     * @var array<string>
-     */
-    protected string _fields;
-
+class IsUnique {
+    // ------
+    
     /**
      * The unique check options
      *

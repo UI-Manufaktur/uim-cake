@@ -1,20 +1,7 @@
 module uim.cake.orm;
 
-use ArrayObject;
-use BadMethodCallException;
-import uim.cake.databases.Connection;
-import uim.cake.databases.IExpression;
-import uim.cake.databases.Query as DatabaseQuery;
-import uim.cake.databases.TypedResultInterface;
-import uim.cake.databases.TypeMap;
-import uim.cake.databases.ValueBinder;
-import uim.cake.datasources\IQuery;
-import uim.cake.datasources\QueryTrait;
-import uim.cake.datasources\IResultSet;
-use InvalidArgumentException;
-use JsonSerializable;
-use RuntimeException;
-use Traversable;
+@safe:
+import uim.cake;
 
 /**
  * : the base Query class to provide new methods related to association
@@ -61,8 +48,7 @@ use Traversable;
  * @method \Cake\Collection\ICollection chunk(int $size) Groups the results in arrays of $size rows each.
  * @method bool isEmpty() Returns true if this query found no results.
  */
-class Query : DatabaseQuery : JsonSerializable, IQuery
-{
+class Query : DatabaseQuery : JsonSerializable, IQuery {
     use QueryTrait {
         cache as private _cache;
         all as private _all;
@@ -70,52 +56,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         __call as private _call;
     }
 
-    /**
-     * Indicates that the operation should append to the list
-    */
-    public const int APPEND = 0;
-
-    /**
-     * Indicates that the operation should prepend to the list
-    */
-    public const int PREPEND = 1;
-
-    /**
-     * Indicates that the operation should overwrite the list
-     *
-     * @var bool
-     */
-    public const OVERWRITE = true;
-
-    /**
-     * Whether the user select any fields before being executed, this is used
-     * to determined if any fields should be automatically be selected.
-     *
-     * @var bool|null
-     */
-    protected _hasFields;
-
-    /**
-     * Tracks whether the original query should include
-     * fields from the top level table.
-     *
-     * @var bool|null
-     */
-    protected _autoFields;
-
-    /**
-     * Whether to hydrate results into entity objects
-     *
-     * @var bool
-     */
-    protected _hydrate = true;
-
-    /**
-     * Whether aliases are generated for fields.
-     *
-     * @var bool
-     */
-    protected myAliasingEnabled = true;
+    // -------
 
     /**
      * A callable function that can be used to calculate the total amount of

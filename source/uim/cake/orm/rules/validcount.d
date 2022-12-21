@@ -3,29 +3,14 @@
 *	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
 *	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
 **********************************************************************************************************/
-module uim.cakem.Rule;
+module uim.cake.rules.validcount;
 
 @safe:
 import uim.cake;
 
-/**
- * Validates the count of associated records.
- */
-class ValidCount
-{
-    /**
-     * The field to check
-     */
-    protected string _field;
-
-    /**
-     * Constructor.
-     *
-     * @param string myField The field to check the count on.
-     */
-    this(string myField) {
-        _field = myField;
-    }
+// Validates the count of associated records.
+class ValidCount {
+    // -----------------
 
     /**
      * Performs the count check

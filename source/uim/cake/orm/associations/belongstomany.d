@@ -11,15 +11,7 @@ import uim.cake;
  */
 class BelongsToMany : Association
 {
-    /**
-     * Saving strategy that will only append to the links set
-     */
-    public const string SAVE_APPEND = "append";
-
-    /**
-     * Saving strategy that will replace the links with the provided set
-     */
-    public const string SAVE_REPLACE = "replace";
+    // -----------
 
     /**
      * The type of join to be used when adding the association to a query
@@ -38,9 +30,7 @@ class BelongsToMany : Association
      */
     protected _junctionTable;
 
-    /**
-     * Junction table name
-     */
+    // Junction table name
     protected string _junctionTableName;
 
     /**
@@ -55,9 +45,7 @@ class BelongsToMany : Association
      */
     protected string _junctionProperty = "_joinData";
 
-    /**
-     * Saving strategy to be used by this association
-     */
+    // Saving strategy to be used by this association
     protected string _saveStrategy = self::SAVE_REPLACE;
 
     /**
@@ -74,12 +62,8 @@ class BelongsToMany : Association
      */
     protected _through;
 
-    /**
-     * Valid strategies for this type of association
-     *
-     * @var array<string>
-     */
-    protected _validStrategies = [
+    // Valid strategies for this type of association
+    protected string[] _validStrategies = [
         self::STRATEGY_SELECT,
         self::STRATEGY_SUBQUERY,
     ];

@@ -8,19 +8,7 @@ import uim.cake;
  * table.
  */
 class ExistsIn {
-    /**
-     * The list of fields to check
-     *
-     * @var array<string>
-     */
-    protected _fields;
-
-    /**
-     * The repository where the field will be looked for
-     *
-     * @var \Cake\ORM\Table|\Cake\ORM\Association|string
-     */
-    protected _repository;
+    // --------
 
     /**
      * Options for the constructor
