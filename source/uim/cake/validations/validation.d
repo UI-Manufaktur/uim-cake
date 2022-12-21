@@ -188,7 +188,7 @@ class Validation {
             return false;
         }
 
-        if ($regex !== null && static::_check($check, $regex)) {
+        if ($regex  !is null && static::_check($check, $regex)) {
             return !$deep || static::luhn($check);
         }
         $cards = [
@@ -434,7 +434,7 @@ class Validation {
             $format = "ymd";
         }
 
-        if ($regex !== null) {
+        if ($regex  !is null) {
             return static::_check($check, $regex);
         }
         $month = "(0[123456789]|10|11|12)";
@@ -613,7 +613,7 @@ class Validation {
         }
         $method = $methods[myType];
 
-        return FrozenTime::$method($check, $format) !== null;
+        return FrozenTime::$method($check, $format)  !is null;
     }
 
     /**
@@ -1344,13 +1344,13 @@ class Validation {
         if (isset(myOptions["width"])) {
             $validWidth = self::comparison($width, myOptions["width"][0], myOptions["width"][1]);
         }
-        if ($validHeight !== null && $validWidth !== null) {
+        if ($validHeight  !is null && $validWidth  !is null) {
             return $validHeight && $validWidth;
         }
-        if ($validHeight !== null) {
+        if ($validHeight  !is null) {
             return $validHeight;
         }
-        if ($validWidth !== null) {
+        if ($validWidth  !is null) {
             return $validWidth;
         }
 

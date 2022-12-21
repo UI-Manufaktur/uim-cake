@@ -329,7 +329,7 @@ class HasMany : Association
         _unlink($foreignKey, myTarget, $conditions, myOptions);
 
         myResult = $sourceEntity.get($property);
-        if (myOptions["cleanProperty"] && myResult !== null) {
+        if (myOptions["cleanProperty"] && myResult  !is null) {
             $sourceEntity.set(
                 $property,
                 (new Collection($sourceEntity.get($property)))

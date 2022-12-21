@@ -315,7 +315,7 @@ class Response : Message : IResponse
      *
      */
     protected void buildCookieCollection() {
-        if (this.cookies !== null) {
+        if (this.cookies  !is null) {
             return;
         }
         this.cookies = CookieCollection::createFromHeader(this.getHeader("Set-Cookie"));
@@ -386,7 +386,7 @@ class Response : Message : IResponse
      */
     protected auto _getXml(): ?SimpleXMLElement
     {
-        if (_xml !== null) {
+        if (_xml  !is null) {
             return _xml;
         }
         libxml_use_internal_errors();

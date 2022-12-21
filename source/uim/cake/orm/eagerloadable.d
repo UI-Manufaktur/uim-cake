@@ -264,7 +264,7 @@ class EagerLoadable
             $associations += $assoc.asContainArray();
         }
         myConfig = _config;
-        if (_forMatching !== null) {
+        if (_forMatching  !is null) {
             myConfig = ["matching":_forMatching] + myConfig;
         }
 

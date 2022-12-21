@@ -93,7 +93,7 @@ class SmtpTransport : AbstractTransport
      * Check whether an open connection to the SMTP server is available.
      */
     bool connected() {
-        return _socket !== null && _socket.isConnected();
+        return _socket  !is null && _socket.isConnected();
     }
 
     /**
@@ -450,7 +450,7 @@ class SmtpTransport : AbstractTransport
     protected Nullable!string _smtpSend(Nullable!string myData, $checkCode = "250") {
         _lastResponse = [];
 
-        if (myData !== null) {
+        if (myData  !is null) {
             _socket().write(myData . "\r\n");
         }
 

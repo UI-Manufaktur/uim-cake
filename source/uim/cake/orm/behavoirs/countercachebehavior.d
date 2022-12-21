@@ -257,7 +257,7 @@ class CounterCacheBehavior : Behavior
      */
     protected auto _shouldUpdateCount(array $conditions) {
         return !empty(array_filter($conditions, function (myValue) {
-            return myValue !== null;
+            return myValue  !is null;
         }));
     }
 

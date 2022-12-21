@@ -530,7 +530,7 @@ class ServerRequest : IServerRequest
     protected bool _headerDetector(array $detect) {
         foreach ($detect["header"] as $header: myValue) {
             $header = this.getEnv("http_" . $header);
-            if ($header !== null) {
+            if ($header  !is null) {
                 if (!is_string(myValue) && !is_bool(myValue) && is_callable(myValue)) {
                     return myValue($header);
                 }
@@ -734,7 +734,7 @@ class ServerRequest : IServerRequest
             if (indexOf(myKey, "CONTENT_") == 0) {
                 myName = myKey;
             }
-            if (myName !== null) {
+            if (myName  !is null) {
                 myName = str_replace("_", " ", strtolower(myName));
                 myName = str_replace(" ", "-", ucwords(myName));
                 $headers[myName] = (array)myValue;
@@ -1392,7 +1392,7 @@ class ServerRequest : IServerRequest
             _environment[myKey] = env(myKey);
         }
 
-        return _environment[myKey] !== null ? (string)_environment[myKey] : $default;
+        return _environment[myKey]  !is null ? (string)_environment[myKey] : $default;
     }
 
     /**
@@ -1745,7 +1745,7 @@ class ServerRequest : IServerRequest
      * defined in the SERVER environment.
      */
     string getRequestTarget() {
-        if (this.requestTarget !== null) {
+        if (this.requestTarget  !is null) {
             return this.requestTarget;
         }
 

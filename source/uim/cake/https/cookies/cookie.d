@@ -234,7 +234,7 @@ class Cookie : ICookie
             $expires = strtotime($expires) ?: null;
         }
 
-        if ($expires !== null) {
+        if ($expires  !is null) {
             $expires = new DateTimeImmutable("@" . (string)$expires);
         }
 
@@ -536,7 +536,7 @@ class Cookie : ICookie
 
 
     function withSameSite(Nullable!string sameSite) {
-        if ($sameSite !== null) {
+        if ($sameSite  !is null) {
             this.validateSameSiteValue($sameSite);
         }
 
@@ -660,7 +660,7 @@ class Cookie : ICookie
             "httponly":this.httpOnly,
         ];
 
-        if (this.sameSite !== null) {
+        if (this.sameSite  !is null) {
             myOptions["samesite"] = this.sameSite;
         }
 

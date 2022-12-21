@@ -396,7 +396,7 @@ class Session
             return (bool)$_SESSION;
         }
 
-        return Hash::get($_SESSION, myName) !== null;
+        return Hash::get($_SESSION, myName)  !is null;
     }
 
     /**
@@ -450,7 +450,7 @@ class Session
             return null;
         }
         myValue = this.read(myName);
-        if (myValue !== null) {
+        if (myValue  !is null) {
             _overwrite($_SESSION, Hash::remove($_SESSION, myName));
         }
 
@@ -497,7 +497,7 @@ class Session
      * @return string Session id
      */
     string id(Nullable!string id = null) {
-        if ($id !== null && !headers_sent()) {
+        if ($id  !is null && !headers_sent()) {
             session_id($id);
         }
 
@@ -612,7 +612,7 @@ class Session
         $time = this.read("Config.time");
         myResult = false;
 
-        $checkTime = $time !== null && _lifetime > 0;
+        $checkTime = $time  !is null && _lifetime > 0;
         if ($checkTime && (time() - (int)$time > _lifetime)) {
             myResult = true;
         }

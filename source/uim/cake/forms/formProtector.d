@@ -117,7 +117,7 @@ class FormProtector
 
         if ($lock) {
             if (!in_array(myField, this.fields, true)) {
-                if (myValue !== null) {
+                if (myValue  !is null) {
                     this.fields[myField] = myValue;
 
                     return this;
@@ -475,7 +475,7 @@ class FormProtector
     ) {
         myMessages = this.matchExistingFields(myDataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = this.debugExpectedFields($expectedFields, $missingMessage);
-        if ($expectedFieldsMessage !== null) {
+        if ($expectedFieldsMessage  !is null) {
             myMessages[] = $expectedFieldsMessage;
         }
 

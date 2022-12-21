@@ -43,7 +43,7 @@ class Entity : IEntity, InvalidPropertyInterface
             this.setSource(myOptions["source"]);
         }
 
-        if (myOptions["markNew"] !== null) {
+        if (myOptions["markNew"]  !is null) {
             this.setNew(myOptions["markNew"]);
         }
 

@@ -88,7 +88,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
 
         if (
             $hasData
-            && this.skipCheckCallback !== null
+            && this.skipCheckCallback  !is null
             && call_user_func(this.skipCheckCallback, myRequest) == true
         ) {
             myRequest = this.unsetTokenField(myRequest);

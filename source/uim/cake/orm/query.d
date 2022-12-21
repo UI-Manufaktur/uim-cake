@@ -100,7 +100,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
         super.this(myConnection);
         this.repository(myTable);
 
-        if (_repository !== null) {
+        if (_repository  !is null) {
             this.addDefaultTypes(_repository);
         }
     }
@@ -812,7 +812,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      */
     auto __clone() {
         super.__clone();
-        if (_eagerLoader !== null) {
+        if (_eagerLoader  !is null) {
             _eagerLoader = clone _eagerLoader;
         }
     }
@@ -840,7 +840,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     protected int _performCount() {
         myQuery = this.cleanCopy();
         myCounter = _counter;
-        if (myCounter !== null) {
+        if (myCounter  !is null) {
             myQuery.counter(null);
 
             return (int)myCounter(myQuery);
@@ -863,7 +863,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
             }
         }
 
-        if (!$complex && _valueBinder !== null) {
+        if (!$complex && _valueBinder  !is null) {
             $order = this.clause("order");
             $complex = $order is null ? false : $order.hasNestedExpression();
         }
@@ -965,7 +965,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * @throws \RuntimeException When you attempt to cache a non-select query.
      */
     function cache(myKey, myConfig = "default") {
-        if (_type !== "select" && _type !== null) {
+        if (_type !== "select" && _type  !is null) {
             throw new RuntimeException("You cannot cache the results of non-select queries.");
         }
 
@@ -980,7 +980,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      */
     function all(): IResultSet
     {
-        if (_type !== "select" && _type !== null) {
+        if (_type !== "select" && _type  !is null) {
             throw new RuntimeException(
                 "You cannot call all() on a non-select query. Use execute() instead."
             );

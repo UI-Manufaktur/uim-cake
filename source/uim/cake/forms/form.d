@@ -72,7 +72,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      *  Defaults to a new instance.
      */
     this(?EventManager myEventManager = null) {
-        if (myEventManager !== null) {
+        if (myEventManager  !is null) {
             this.setEventManager(myEventManager);
         }
 
@@ -152,7 +152,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
     function schema(?Schema $schema = null): Schema
     {
         deprecationWarning("Form::schema() is deprecated. Use setSchema() and getSchema() instead.");
-        if ($schema !== null) {
+        if ($schema  !is null) {
             this.setSchema($schema);
         }
 

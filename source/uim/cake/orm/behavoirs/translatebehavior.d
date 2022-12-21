@@ -132,7 +132,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      */
     auto getStrategy(): ITranslateStrategy
     {
-        if (this.strategy !== null) {
+        if (this.strategy  !is null) {
             return this.strategy;
         }
 

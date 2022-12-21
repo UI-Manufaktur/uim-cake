@@ -544,11 +544,11 @@ class Router
      * @return string
      */
     static string fullBaseUrl(Nullable!string base = null) {
-        if ($base is null && static::$_fullBaseUrl !== null) {
+        if ($base is null && static::$_fullBaseUrl  !is null) {
             return static::$_fullBaseUrl;
         }
 
-        if ($base !== null) {
+        if ($base  !is null) {
             static::$_fullBaseUrl = $base;
             Configure.write("App.fullBaseUrl", $base);
         } else {

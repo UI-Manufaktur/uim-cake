@@ -469,7 +469,7 @@ class ShadowTableStrategy : ITranslateStrategy {
                     continue;
                 }
 
-                if ($translation[myField] !== null) {
+                if ($translation[myField]  !is null) {
                     if ($allowEmpty || $translation[myField] !== "") {
                         $row[myField] = $translation[myField];
                     }

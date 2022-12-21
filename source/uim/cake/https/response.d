@@ -788,7 +788,7 @@ class Response : IResponse
         myKey = $public ? "public" : "private";
         $new._cacheDirectives[myKey] = true;
 
-        if ($time !== null) {
+        if ($time  !is null) {
             $new._cacheDirectives["max-age"] = $time;
         }
         $new._setCacheControl();

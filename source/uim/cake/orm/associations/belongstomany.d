@@ -182,7 +182,7 @@ class BelongsToMany : Association
      */
     function junction(myTable = null): Table
     {
-        if (myTable is null && _junctionTable !== null) {
+        if (myTable is null && _junctionTable  !is null) {
             return _junctionTable;
         }
 
@@ -896,7 +896,7 @@ class BelongsToMany : Association
      *   returned unmodified.
      */
     protected auto targetConditions() {
-        if (_targetConditions !== null) {
+        if (_targetConditions  !is null) {
             return _targetConditions;
         }
         $conditions = this.getConditions();
@@ -924,7 +924,7 @@ class BelongsToMany : Association
      */
     protected auto junctionConditions(): array
     {
-        if (_junctionConditions !== null) {
+        if (_junctionConditions  !is null) {
             return _junctionConditions;
         }
         $matching = [];

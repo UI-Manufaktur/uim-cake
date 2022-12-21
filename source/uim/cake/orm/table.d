@@ -556,7 +556,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     bool hasField(string myField) {
         $schema = this.getSchema();
 
-        return $schema.getColumn(myField) !== null;
+        return $schema.getColumn(myField)  !is null;
     }
 
     /**
@@ -833,7 +833,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @return bool
      */
     bool hasAssociation(string myName) {
-        return this.findAssociation(myName) !== null;
+        return this.findAssociation(myName)  !is null;
     }
 
     /**
@@ -856,11 +856,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
         myResult = null;
         [myName, $next] = array_pad(explode(".", myName, 2), 2, null);
-        if (myName !== null) {
+        if (myName  !is null) {
             myResult = _associations.get(myName);
         }
 
-        if (myResult !== null && $next !== null) {
+        if (myResult  !is null && $next  !is null) {
             myResult = myResult.getTarget().getAssociation($next);
         }
 
@@ -1551,7 +1551,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         myQuery = _getFindOrCreateQuery($search);
 
         $row = myQuery.first();
-        if ($row !== null) {
+        if ($row  !is null) {
             return $row;
         }
 
@@ -1560,7 +1560,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             $accessibleFields = array_combine(array_keys($search), array_fill(0, count($search), true));
             $entity = this.patchEntity($entity, $search, ["accessibleFields": $accessibleFields]);
         }
-        if ($callback !== null) {
+        if ($callback  !is null) {
             $entity = $callback($entity) ?: $entity;
         }
         unset(myOptions["defaults"]);
@@ -1941,7 +1941,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         $primary = array_intersect_key(myData, $primary) + $primary;
 
         $filteredKeys = array_filter($primary, function ($v) {
-            return $v !== null;
+            return $v  !is null;
         });
         myData += $filteredKeys;
 
@@ -2145,7 +2145,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             throw $e;
         }
 
-        if ($failed !== null) {
+        if ($failed  !is null) {
             $cleanup($entities);
 
             throw new PersistenceFailedException($failed, ["saveMany"]);
@@ -2227,7 +2227,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     function deleteMany(iterable $entities, myOptions = []) {
         $failed = _deleteMany($entities, myOptions);
 
-        if ($failed !== null) {
+        if ($failed  !is null) {
             return false;
         }
 
@@ -2251,7 +2251,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     {
         $failed = _deleteMany($entities, myOptions);
 
-        if ($failed !== null) {
+        if ($failed  !is null) {
             throw new PersistenceFailedException($failed, ["deleteMany"]);
         }
 
@@ -2823,7 +2823,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         );
         myValues = $entity.extract(myFields);
         foreach (myValues as myField) {
-            if (myField !== null && !is_scalar(myField)) {
+            if (myField  !is null && !is_scalar(myField)) {
                 return false;
             }
         }

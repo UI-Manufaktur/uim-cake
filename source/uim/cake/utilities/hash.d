@@ -123,11 +123,11 @@ class Hash {
         // Simple paths.
         if (!preg_match("/[{\[]/", myPath)) {
             myData = static::get(myData, myPath);
-            if (myData !== null && !(is_array(myData) || myData instanceof ArrayAccess)) {
+            if (myData  !is null && !(is_array(myData) || myData instanceof ArrayAccess)) {
                 return [myData];
             }
 
-            return myData !== null ? (array)myData : [];
+            return myData  !is null ? (array)myData : [];
         }
 
         if (indexOf(myPath, "[") == false) {
@@ -463,7 +463,7 @@ class Hash {
             /** @var array myKeys */
             myKeys = static::extract(myData, myKeyPath);
         }
-        if (myKeyPath !== null && empty(myKeys)) {
+        if (myKeyPath  !is null && empty(myKeys)) {
             return [];
         }
 
@@ -486,7 +486,7 @@ class Hash {
             );
         }
 
-        if (myGroupPath !== null) {
+        if (myGroupPath  !is null) {
             myGroup = static::extract(myData, myGroupPath);
             if (!empty(myGroup)) {
                 $c = is_array(myKeys) ? count(myKeys) : count($vals);
@@ -1049,7 +1049,7 @@ class Hash {
         $stack = [];
         foreach (myData as $k => $r) {
             $id = $k;
-            if (myKey !== null) {
+            if (myKey  !is null) {
                 $id = myKey;
             }
             if (is_array($r) && !empty($r)) {
@@ -1082,7 +1082,7 @@ class Hash {
             return myData;
         }
         $intersection = array_intersect_key(myData, $compare);
-        while ((myKey = key($intersection)) !== null) {
+        while ((myKey = key($intersection))  !is null) {
             if (myData[myKey] == $compare[myKey]) {
                 unset(myData[myKey], $compare[myKey]);
             }

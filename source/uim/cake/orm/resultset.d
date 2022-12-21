@@ -212,7 +212,7 @@ class ResultSet : IResultSet
     bool valid() {
         if (_useBuffering) {
             $valid = _index < _count;
-            if ($valid && _results[_index] !== null) {
+            if ($valid && _results[_index]  !is null) {
                 _current = _results[_index];
 
                 return true;
@@ -228,7 +228,7 @@ class ResultSet : IResultSet
         if ($valid && _useBuffering) {
             _results[_index] = _current;
         }
-        if (!$valid && _statement !== null) {
+        if (!$valid && _statement  !is null) {
             _statement.closeCursor();
         }
 
@@ -244,7 +244,7 @@ class ResultSet : IResultSet
      */
     function first() {
         foreach (this as myResult) {
-            if (_statement !== null && !_useBuffering) {
+            if (_statement  !is null && !_useBuffering) {
                 _statement.closeCursor();
             }
 
@@ -319,10 +319,10 @@ class ResultSet : IResultSet
      * Part of the Countable interface.
      */
     int count() {
-        if (_count !== null) {
+        if (_count  !is null) {
             return _count;
         }
-        if (_statement !== null) {
+        if (_statement  !is null) {
             return _count = _statement.rowCount();
         }
 
@@ -476,7 +476,7 @@ class ResultSet : IResultSet
             if ($assoc["canBeJoined"] && _autoFields !== false) {
                 $hasData = false;
                 foreach (myResults[myAlias] as $v) {
-                    if ($v !== null && $v !== []) {
+                    if ($v  !is null && $v !== []) {
                         $hasData = true;
                         break;
                     }
@@ -487,7 +487,7 @@ class ResultSet : IResultSet
                 }
             }
 
-            if (_hydrate && myResults[myAlias] !== null && $assoc["canBeJoined"]) {
+            if (_hydrate && myResults[myAlias]  !is null && $assoc["canBeJoined"]) {
                 $entity = new $assoc["entityClass"](myResults[myAlias], myOptions);
                 myResults[myAlias] = $entity;
             }

@@ -267,7 +267,7 @@ class EagerLoader
      * @return array
      */
     array normalized(Table myRepository) {
-        if (_normalized !== null || empty(_containments)) {
+        if (_normalized  !is null || empty(_containments)) {
             return (array)_normalized;
         }
 

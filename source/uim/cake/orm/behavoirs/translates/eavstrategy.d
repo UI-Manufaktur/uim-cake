@@ -342,7 +342,7 @@ class EavStrategy : ITranslateStrategy
                 }
 
                 myContents = $translation["content"] ?? null;
-                if (myContents !== null) {
+                if (myContents  !is null) {
                     $row[myField] = myContents;
                 }
 

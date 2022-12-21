@@ -21,7 +21,7 @@ class CallbackStream : BaseCallbackStream
         $callback = this.detach();
         myResult = "";
         /** @psalm-suppress TypeDoesNotContainType */
-        if ($callback !== null) {
+        if ($callback  !is null) {
             myResult = $callback();
         }
         if (!is_string(myResult)) {

@@ -254,7 +254,7 @@ class TableLocator : AbstractLocator : ILocator
 
         foreach (this.locations as myLocation) {
             myClass = App::className(myOptions["className"], myLocation, "Table");
-            if (myClass !== null) {
+            if (myClass  !is null) {
                 return myClass;
             }
         }

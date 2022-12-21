@@ -817,7 +817,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         if (myMessage) {
             _allowEmptyMessages[myField] = myMessage;
         }
-        if ($flags !== null) {
+        if ($flags  !is null) {
             _allowEmptyFlags[myField] = $flags;
         }
 
@@ -2515,7 +2515,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
             $allFieldsAreEmpty = true;
             foreach (myData as myField) {
-                if (myField !== null && myField !== "") {
+                if (myField  !is null && myField !== "") {
                     $allFieldsAreEmpty = false;
                     break;
                 }

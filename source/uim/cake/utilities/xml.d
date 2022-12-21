@@ -386,7 +386,7 @@ class Xml {
         }
 
         $child = $dom.createElement(myKey);
-        if ($childValue !== null) {
+        if ($childValue  !is null) {
             $child.appendChild($dom.createTextNode($childValue));
         }
         if ($childNS) {

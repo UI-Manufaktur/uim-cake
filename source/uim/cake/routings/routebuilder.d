@@ -210,7 +210,7 @@ class RouteBuilder {
      * @param string|null myValue Either the value to set or null.
      */
     string namePrefix(Nullable!string myValue = null) {
-        if (myValue !== null) {
+        if (myValue  !is null) {
             _namePrefix = myValue;
         }
 
@@ -373,7 +373,7 @@ class RouteBuilder {
             this.connect(myUrl, myParams, $routeOptions);
         }
 
-        if ($callback !== null) {
+        if ($callback  !is null) {
             $idName = Inflector::singularize(Inflector::underscore(myName)) . "_id";
             myPath = "/" . myOptions["path"] . "/{" . $idName . "}";
             this.scope(myPath, [], $callback);
@@ -492,7 +492,7 @@ class RouteBuilder {
      */
     protected auto _methodRoute(string method, string myTemplate, myTarget, Nullable!string myName): Route
     {
-        if (myName !== null) {
+        if (myName  !is null) {
             myName = _namePrefix . myName;
         }
         myOptions = [

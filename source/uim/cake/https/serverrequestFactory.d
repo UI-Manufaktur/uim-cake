@@ -295,7 +295,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $baseUrl = myConfig["baseUrl"];
         $webroot = myConfig["webroot"];
 
-        if ($base !== false && $base !== null) {
+        if ($base !== false && $base  !is null) {
             return [$base, $base . "/"];
         }
 

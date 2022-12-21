@@ -177,7 +177,7 @@ abstract class Association {
      */
     auto setClassName(string myClassName) {
         if (
-            _targetTable !== null &&
+            _targetTable  !is null &&
             get_class(_targetTable) !== App::className(myClassName, "Model/Table", "Table")
         ) {
             throw new InvalidArgumentException(sprintf(

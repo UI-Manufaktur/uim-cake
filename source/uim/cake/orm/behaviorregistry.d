@@ -42,7 +42,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @param \Cake\ORM\Table|null myTable The table this registry is attached to.
      */
     this(?Table myTable = null) {
-        if (myTable !== null) {
+        if (myTable  !is null) {
             this.setTable(myTable);
         }
     }
