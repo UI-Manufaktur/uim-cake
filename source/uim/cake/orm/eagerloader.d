@@ -214,7 +214,7 @@ class EagerLoader
      * @return this
      */
     auto setMatching(string associationPath, ?callable myBuilder = null, array myOptions = []) {
-        if (_matching == null) {
+        if (_matching is null) {
             _matching = new static();
         }
 
@@ -243,7 +243,7 @@ class EagerLoader
      * @return array The resulting containments array
      */
     array getMatching() {
-        if (_matching == null) {
+        if (_matching is null) {
             _matching = new static();
         }
 
@@ -377,7 +377,7 @@ class EagerLoader
      * @return void
      */
     void attachAssociations(Query myQuery, Table myRepository, bool $includeFields) {
-        if (empty(_containments) && _matching == null) {
+        if (empty(_containments) && _matching is null) {
             return;
         }
 

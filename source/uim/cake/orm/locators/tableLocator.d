@@ -59,7 +59,7 @@ class TableLocator : AbstractLocator : ILocator
      *   If none provided, the default `Model\Table` under your app"s module is used.
      */
     this(?array myLocations = null) {
-        if (myLocations == null) {
+        if (myLocations is null) {
             myLocations = [
                 "Model/Table",
             ];
@@ -125,7 +125,7 @@ class TableLocator : AbstractLocator : ILocator
 
     auto getConfig(Nullable!string myAlias = null): array
     {
-        if (myAlias == null) {
+        if (myAlias is null) {
             return _config;
         }
 

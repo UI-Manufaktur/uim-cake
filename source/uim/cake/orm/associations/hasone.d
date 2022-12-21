@@ -27,7 +27,7 @@ class HasOne : Association
 
     // Gets the name of the field representing the foreign key to the target table.
     string[] getForeignKey() {
-        if (_foreignKey == null) {
+        if (_foreignKey is null) {
             _foreignKey = _modelKey(this.getSource().getAlias());
         }
 

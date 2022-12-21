@@ -108,7 +108,7 @@ class JsonView : SerializedView {
         myData = _dataToSerialize(serializeNames);
 
         $jsonOptions = this.getConfig("jsonOptions");
-        if ($jsonOptions == null) {
+        if ($jsonOptions is null) {
             $jsonOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_PARTIAL_OUTPUT_ON_ERROR;
         } elseif ($jsonOptions == false) {
             $jsonOptions = 0;

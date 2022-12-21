@@ -425,7 +425,7 @@ class TreeBehavior : Behavior
             throw new InvalidArgumentException("The "for" key is required for find("children")");
         }
 
-        if (myQuery.clause("order") == null) {
+        if (myQuery.clause("order") is null) {
             myQuery.order([$left: "ASC"]);
         }
 
@@ -841,7 +841,7 @@ class TreeBehavior : Behavior
             .orderDesc($rightField)
             .first();
 
-        if ($edge == null || empty($edge[myField])) {
+        if ($edge is null || empty($edge[myField])) {
             return 0;
         }
 
@@ -962,7 +962,7 @@ class TreeBehavior : Behavior
             .where([$primaryKey: $id])
             .first();
 
-        if ($entity == null) {
+        if ($entity is null) {
             return false;
         }
 

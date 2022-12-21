@@ -234,7 +234,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      */
     auto getEagerLoader(): EagerLoader
     {
-        if (_eagerLoader == null) {
+        if (_eagerLoader is null) {
             _eagerLoader = new EagerLoader();
         }
 
@@ -417,7 +417,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
             $association = myTable.getAssociation(myName);
             myTarget = $association.getTarget();
             $primary = (array)myTarget.getPrimaryKey();
-            if (empty($primary) || myTypeMap.type(myTarget.aliasField($primary[0])) == null) {
+            if (empty($primary) || myTypeMap.type(myTarget.aliasField($primary[0])) is null) {
                 this.addDefaultTypes(myTarget);
             }
             if (!empty($nested)) {
@@ -825,7 +825,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * value is returned
      */
     int count() {
-        if (_resultsCount == null) {
+        if (_resultsCount is null) {
             _resultsCount = _performCount();
         }
 
@@ -865,7 +865,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
 
         if (!$complex && _valueBinder !== null) {
             $order = this.clause("order");
-            $complex = $order == null ? false : $order.hasNestedExpression();
+            $complex = $order is null ? false : $order.hasNestedExpression();
         }
 
         myCount = ["count": myQuery.func().count("*")];

@@ -93,7 +93,7 @@ class ExistsIn {
         if (_options["allowNullableNulls"]) {
             $schema = $source.getSchema();
             foreach (myFields as $i: myField) {
-                if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) == null) {
+                if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) is null) {
                     unset($bindingKey[$i], myFields[$i]);
                 }
             }
@@ -123,7 +123,7 @@ class ExistsIn {
         $nulls = 0;
         $schema = $source.getSchema();
         foreach (_fields as myField) {
-            if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) == null) {
+            if ($schema.getColumn(myField) && $schema.isNullable(myField) && $entity.get(myField) is null) {
                 $nulls++;
             }
         }

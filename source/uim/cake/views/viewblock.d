@@ -117,7 +117,7 @@ class ViewBlock
      * @return void
      */
     void concat(string myName, myValue = null, myMode = ViewBlock::APPEND) {
-        if (myValue == null) {
+        if (myValue is null) {
             this.start(myName, myMode);
 
             return;

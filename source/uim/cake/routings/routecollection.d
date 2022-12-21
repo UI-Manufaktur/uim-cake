@@ -124,7 +124,7 @@ class RouteCollection
 
             foreach ($routes as $route) {
                 $r = $route.parse(myUrl, $method);
-                if ($r == null) {
+                if ($r is null) {
                     continue;
                 }
                 if (myQueryParameters) {
@@ -167,7 +167,7 @@ class RouteCollection
 
             foreach ($routes as $route) {
                 $r = $route.parseRequest(myRequest);
-                if ($r == null) {
+                if ($r is null) {
                     continue;
                 }
                 if ($uri.getQuery()) {

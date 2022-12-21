@@ -596,7 +596,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function remove(string myField, Nullable!string rule = null) {
-        if ($rule == null) {
+        if ($rule is null) {
             unset(_fields[myField]);
         } else {
             this.field(myField).remove($rule);
@@ -2491,7 +2491,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param int $flags A bitmask of EMPTY_* flags which specify what is empty
      */
     protected bool isEmpty(myData, int $flags) {
-        if (myData == null) {
+        if (myData is null) {
             return true;
         }
 

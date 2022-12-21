@@ -34,7 +34,7 @@ trait MergeVariablesTrait
                 continue;
             }
             thisValue = this.{$property};
-            if (thisValue == null || thisValue == false) {
+            if (thisValue is null || thisValue == false) {
                 continue;
             }
             _mergeProperty($property, $parents, myOptions);

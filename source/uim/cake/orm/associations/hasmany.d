@@ -536,7 +536,7 @@ class HasMany : Association
 
     // Gets the name of the field representing the foreign key to the source table.
     string[] getForeignKey() {
-        if (_foreignKey == null) {
+        if (_foreignKey is null) {
             _foreignKey = _modelKey(this.getSource().getTable());
         }
 

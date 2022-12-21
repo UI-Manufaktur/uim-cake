@@ -298,7 +298,7 @@ class Xml {
                 if (!is_array(myValue)) {
                     if (is_bool(myValue)) {
                         myValue = (int)myValue;
-                    } elseif (myValue == null) {
+                    } elseif (myValue is null) {
                         myValue = "";
                     }
                     $ismodule = indexOf(myKey, "xmlns:");

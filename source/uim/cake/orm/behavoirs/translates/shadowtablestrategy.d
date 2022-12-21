@@ -436,7 +436,7 @@ class ShadowTableStrategy : ITranslateStrategy {
 
         return myResults.map(function ($row) use ($allowEmpty, $locale) {
             /** @var \Cake\Datasource\IEntity|array|null $row */
-            if ($row == null) {
+            if ($row is null) {
                 return $row;
             }
 

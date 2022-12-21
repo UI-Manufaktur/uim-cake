@@ -76,7 +76,7 @@ class SelectWithPivotLoader : SelectLoader
             myQuery = myQueryBuilder(myQuery);
         }
 
-        if (myQuery.isAutoFieldsEnabled() == null) {
+        if (myQuery.isAutoFieldsEnabled() is null) {
             myQuery.enableAutoFields(myQuery.clause("select") == []);
         }
 

@@ -41,7 +41,7 @@ class Hash {
             );
         }
 
-        if (empty(myData) || myPath == null) {
+        if (empty(myData) || myPath is null) {
             return $default;
         }
 
@@ -457,7 +457,7 @@ class Hash {
             $format = array_shift(myKeyPath);
             /** @var array myKeys */
             myKeys = static::format(myData, myKeyPath, $format);
-        } elseif (myKeyPath == null) {
+        } elseif (myKeyPath is null) {
             myKeys = myKeyPath;
         } else {
             /** @var array myKeys */
@@ -477,7 +477,7 @@ class Hash {
             $vals = static::extract(myData, myValuePath);
         }
         if (empty($vals)) {
-            $vals = array_fill(0, myKeys == null ? count(myData) : count(myKeys), null);
+            $vals = array_fill(0, myKeys is null ? count(myData) : count(myKeys), null);
         }
 
         if (is_array(myKeys) && count(myKeys) !== count($vals)) {
@@ -494,7 +494,7 @@ class Hash {
                 for ($i = 0; $i < $c; $i++) {
                     myGroup[$i] = myGroup[$i] ?? 0;
                     $out[myGroup[$i]] = $out[myGroup[$i]] ?? [];
-                    if (myKeys == null) {
+                    if (myKeys is null) {
                         $out[myGroup[$i]][] = $vals[$i];
                     } else {
                         $out[myGroup[$i]][myKeys[$i]] = $vals[$i];

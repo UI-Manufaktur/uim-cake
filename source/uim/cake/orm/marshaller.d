@@ -239,7 +239,7 @@ class Marshaller
             $validator = myOptions["validate"];
         }
 
-        if ($validator == null) {
+        if ($validator is null) {
             throw new RuntimeException(
                 sprintf("validate must be a boolean, a string or an object. Got %s.", getTypeName(myOptions["validate"]))
             );
@@ -554,7 +554,7 @@ class Marshaller
                         && $original == myValue
                     )
                     || (
-                        myValue == null
+                        myValue is null
                         && $original == myValue
                     )
                     || (

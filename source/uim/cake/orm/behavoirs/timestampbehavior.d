@@ -128,7 +128,7 @@ class TimestampBehavior : Behavior {
                 _config["refreshTimestamp"] = false;
             }
             _ts = new FrozenTime($ts);
-        } elseif (_ts == null || $refreshTimestamp) {
+        } elseif (_ts is null || $refreshTimestamp) {
             _ts = new FrozenTime();
         }
 

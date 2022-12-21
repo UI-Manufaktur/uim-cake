@@ -240,7 +240,7 @@ abstract class Association {
      */
     auto getTarget(): Table
     {
-        if (_targetTable == null) {
+        if (_targetTable is null) {
             if (indexOf(_className, ".")) {
                 [myPlugin] = pluginSplit(_className, true);
                 $registryAlias = (string)myPlugin . _name;
@@ -267,7 +267,7 @@ abstract class Association {
 
                     throw new RuntimeException(sprintf(
                         myErrorMessage,
-                        _sourceTable == null ? "null" : get_class(_sourceTable),
+                        _sourceTable is null ? "null" : get_class(_sourceTable),
                         this.getName(),
                         this.type(),
                         get_class(_targetTable),
@@ -323,7 +323,7 @@ abstract class Association {
      * When not manually specified the primary key of the owning side table is used.
      */
     string[] getBindingKey() {
-        if (_bindingKey == null) {
+        if (_bindingKey is null) {
             _bindingKey = this.isOwningSide(this.getSource()) ?
                 this.getSource().getPrimaryKey() :
                 this.getTarget().getPrimaryKey();

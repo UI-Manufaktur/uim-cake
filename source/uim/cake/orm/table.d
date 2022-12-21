@@ -329,7 +329,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * This can include the database schema name if set using `setTable()`.
      */
     string getTable() {
-        if (_table == null) {
+        if (_table is null) {
             myTable = moduleSplit(static::class);
             myTable = substr(end(myTable), 0, -5);
             if (!myTable) {
@@ -357,7 +357,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns the table alias.
      */
     string getAlias() {
-        if (_alias == null) {
+        if (_alias is null) {
             myAlias = moduleSplit(static::class);
             myAlias = substr(end(myAlias), 0, -5) ?: this.getTable();
             _alias = myAlias;
@@ -398,7 +398,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns the table registry key used to create this table instance.
      */
     string getRegistryAlias() {
-        if (_registryAlias == null) {
+        if (_registryAlias is null) {
             _registryAlias = this.getAlias();
         }
 
@@ -439,7 +439,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      */
     auto getSchema(): TableSchemaInterface
     {
-        if (_schema == null) {
+        if (_schema is null) {
             _schema = _initializeSchema(
                 this.getConnection()
                     .getSchemaCollection()
@@ -494,7 +494,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @throws \RuntimeException When an alias combination is too long
      */
     protected void checkAliasLengths() {
-        if (_schema == null) {
+        if (_schema is null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
         }
 
@@ -502,7 +502,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         if (method_exists(this.getConnection().getDriver(), "getMaxAliasLength")) {
             $maxLength = this.getConnection().getDriver().getMaxAliasLength();
         }
-        if ($maxLength == null) {
+        if ($maxLength is null) {
             return;
         }
 
@@ -573,7 +573,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
     // Returns the primary key field name.
     string[] primaryKeys() {
-        if (_primaryKey == null) {
+        if (_primaryKey is null) {
             myKey = this.getSchema().getPrimaryKey();
             if (count(myKey) == 1) {
                 myKey = myKey[0];
@@ -598,7 +598,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
     // Returns the display field.
     string[] getDisplayField() {
-        if (_displayField == null) {
+        if (_displayField is null) {
             $schema = this.getSchema();
             _displayField = this.getPrimaryKey();
             foreach (["title", "name", "label"] as myField) {
@@ -656,7 +656,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     auto setEntityClass(string myName) {
         /** @psalm-var class-string<\Cake\Datasource\IEntity>|null */
         myClass = App::className(myName, "Model/Entity");
-        if (myClass == null) {
+        if (myClass is null) {
             throw new MissingEntityException([myName]);
         }
 
@@ -1832,7 +1832,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
         if (myEvent.isStopped()) {
             myResult = myEvent.getResult();
-            if (myResult == null) {
+            if (myResult is null) {
                 return false;
             }
 
@@ -2281,7 +2281,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             return null;
         }, myOptions["atomic"]);
 
-        if ($failed == null && _transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        if ($failed is null && _transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent("Model.afterDeleteCommit", [
                     "entity": $entity,
@@ -2806,7 +2806,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @return bool True if the value is unique, or false if a non-scalar, non-unique value was given.
      */
     bool validateUnique(myValue, array myOptions, ?array $context = null) {
-        if ($context == null) {
+        if ($context is null) {
             $context = myOptions;
         }
         $entity = new Entity(

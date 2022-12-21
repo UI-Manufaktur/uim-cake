@@ -45,7 +45,7 @@ trait CookieCryptTrait
         _checkCipher($encrypt);
         $prefix = "Q2FrZQ==.";
         $cipher = "";
-        if (myKey == null) {
+        if (myKey is null) {
             myKey = _getCookieEncryptionKey();
         }
         if ($encrypt == "aes") {
@@ -118,14 +118,14 @@ trait CookieCryptTrait
             return "";
         }
 
-        if (myKey == null) {
+        if (myKey is null) {
             myKey = _getCookieEncryptionKey();
         }
         if ($encrypt == "aes") {
             myValue = Security::decrypt(myValue, myKey);
         }
 
-        if (myValue == null) {
+        if (myValue is null) {
             return "";
         }
 

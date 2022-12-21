@@ -261,7 +261,7 @@ class View : IEventDispatcher {
         if (myEventManager !== null) {
             this.setEventManager(myEventManager);
         }
-        if (myRequest == null) {
+        if (myRequest is null) {
             myRequest = Router::getRequest() ?: new ServerRequest(["base" => "", "url" => "", "webroot" => "/"]);
         }
         this.request = myRequest;
@@ -1021,7 +1021,7 @@ class View : IEventDispatcher {
      */
     function helpers(): HelperRegistry
     {
-        if (_helpers == null) {
+        if (_helpers is null) {
             _helpers = new HelperRegistry(this);
         }
 
@@ -1141,7 +1141,7 @@ class View : IEventDispatcher {
             }
         }
 
-        if (myName == null) {
+        if (myName is null) {
             myName = this.template;
         }
 
@@ -1245,7 +1245,7 @@ class View : IEventDispatcher {
      * @throws \RuntimeException
      */
     protected string _getLayoutFileName(Nullable!string myName = null) {
-        if (myName == null) {
+        if (myName is null) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
                     "View::$layout must be a non-empty string." .
@@ -1360,7 +1360,7 @@ class View : IEventDispatcher {
      */
     protected string[] _paths(Nullable!string myPlugin = null, bool $cached = true) {
         if ($cached == true) {
-            if (myPlugin == null && !empty(_paths)) {
+            if (myPlugin is null && !empty(_paths)) {
                 return _paths;
             }
             if (myPlugin !== null && isset(_pathsForPlugin[myPlugin])) {

@@ -113,7 +113,7 @@ class BelongsToMany : Association
 
     // Gets the name of the field representing the foreign key to the target table.
     string[] getTargetForeignKey() {
-        if (_targetForeignKey == null) {
+        if (_targetForeignKey is null) {
             _targetForeignKey = _modelKey(this.getTarget().getAlias());
         }
 
@@ -133,7 +133,7 @@ class BelongsToMany : Association
 
     // Gets the name of the field representing the foreign key to the source table.
     string[] getForeignKey() {
-        if (_foreignKey == null) {
+        if (_foreignKey is null) {
             _foreignKey = _modelKey(this.getSource().getTable());
         }
 
@@ -182,14 +182,14 @@ class BelongsToMany : Association
      */
     function junction(myTable = null): Table
     {
-        if (myTable == null && _junctionTable !== null) {
+        if (myTable is null && _junctionTable !== null) {
             return _junctionTable;
         }
 
         myTableLocator = this.getTableLocator();
-        if (myTable == null && _through) {
+        if (myTable is null && _through) {
             myTable = _through;
-        } elseif (myTable == null) {
+        } elseif (myTable is null) {
             myTableName = _junctionTableName();
             myTableAlias = Inflector::camelize(myTableName);
 
@@ -988,7 +988,7 @@ class BelongsToMany : Association
     protected auto _appendJunctionJoin(Query myQuery, ?array $conditions = null): Query
     {
         $junctionTable = this.junction();
-        if ($conditions == null) {
+        if ($conditions is null) {
             $belongsTo = $junctionTable.getAssociation(this.getTarget().getAlias());
             $conditions = $belongsTo._joinCondition([
                 "foreignKey":this.getTargetForeignKey(),
@@ -1321,7 +1321,7 @@ class BelongsToMany : Association
      * @return string
      */
     protected string _junctionTableName(Nullable!string myName = null) {
-        if (myName == null) {
+        if (myName is null) {
             if (empty(_junctionTableName)) {
                 myTablesNames = array_map("Cake\Utility\Inflector::underscore", [
                     this.getSource().getTable(),

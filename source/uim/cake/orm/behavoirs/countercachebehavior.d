@@ -198,7 +198,7 @@ class CounterCacheBehavior : Behavior
         myCountConditions = $entity.extract($foreignKeys);
 
         foreach (myCountConditions as myField: myValue) {
-            if (myValue == null) {
+            if (myValue is null) {
                 myCountConditions[myField . " IS"] = myValue;
                 unset(myCountConditions[myField]);
             }

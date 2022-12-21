@@ -197,7 +197,7 @@ class Text {
         }
 
         $format = myOptions["format"];
-        if ($format == null) {
+        if ($format is null) {
             $format = sprintf(
                 "/(?<!%s)%s%%s%s/",
                 preg_quote(myOptions["escape"], "/"),
@@ -744,7 +744,7 @@ class Text {
             return "";
         }
 
-        if ($length == null) {
+        if ($length is null) {
             $length = self::_strlen($text, myOptions);
         }
 
@@ -885,7 +885,7 @@ class Text {
      * @link https://book.UIM.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
     static string toList(string[] $list, Nullable!string and = null, string separator = ", ") {
-        if ($and == null) {
+        if ($and is null) {
             $and = __d("cake", "and");
         }
         if (count($list) > 1) {
@@ -1058,7 +1058,7 @@ class Text {
      */
     static void setTransliteratorId(string transliteratorId) {
         $transliterator = transliterator_create($transliteratorId);
-        if ($transliterator == null) {
+        if ($transliterator is null) {
             throw new CakeException("Unable to create transliterator for id: " . $transliteratorId);
         }
 

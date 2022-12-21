@@ -389,7 +389,7 @@ class Validation {
         if (!is_scalar($check)) {
             return false;
         }
-        if ($regex == null) {
+        if ($regex is null) {
             static::myErrors[] = "You must define a regular expression for Validation::custom()";
 
             return false;
@@ -686,13 +686,13 @@ class Validation {
             return false;
         }
 
-        if ($regex == null) {
+        if ($regex is null) {
             $lnum = "[0-9]+";
             $dnum = "[0-9]*[\.]{$lnum}";
             $sign = "[+-]?";
             $exp = "(?:[eE]{$sign}{$lnum})?";
 
-            if ($places == null) {
+            if ($places is null) {
                 $regex = "/^{$sign}(?:{$lnum}|{$dnum}){$exp}$/";
             } elseif ($places == true) {
                 if (is_float($check) && floor($check) == $check) {
@@ -740,12 +740,12 @@ class Validation {
             return false;
         }
 
-        if ($regex == null) {
+        if ($regex is null) {
             // phpcs:ignore Generic.Files.LineLength
             $regex = "/^[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+(?:\.[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+)*@" . self::$_pattern["hostname"] . "$/ui";
         }
         $return = static::_check($check, $regex);
-        if ($deep == false || $deep == null) {
+        if ($deep == false || $deep is null) {
             return $return;
         }
 

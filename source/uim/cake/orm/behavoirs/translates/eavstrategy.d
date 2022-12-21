@@ -327,7 +327,7 @@ class EavStrategy : ITranslateStrategy
     protected auto rowMapper(myResults, $locale) {
         return myResults.map(function ($row) use ($locale) {
             /** @var \Cake\Datasource\IEntity|array|null $row */
-            if ($row == null) {
+            if ($row is null) {
                 return $row;
             }
             $hydrated = !is_array($row);
@@ -336,7 +336,7 @@ class EavStrategy : ITranslateStrategy
                 myName = myField . "_translation";
                 $translation = $row[myName] ?? null;
 
-                if ($translation == null || $translation == false) {
+                if ($translation is null || $translation == false) {
                     unset($row[myName]);
                     continue;
                 }

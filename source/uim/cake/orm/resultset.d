@@ -394,7 +394,7 @@ class ResultSet : IResultSet
      * @return mixed
      */
     protected auto _fetchResult() {
-        if (_statement == null) {
+        if (_statement is null) {
             return false;
         }
 

@@ -134,7 +134,7 @@ class Router
      * @return string|null
      */
     static Nullable!string defaultRouteClass(Nullable!string routeClass = null) {
-        if ($routeClass == null) {
+        if ($routeClass is null) {
             return static::$_defaultRouteClass;
         }
         static::$_defaultRouteClass = $routeClass;
@@ -544,7 +544,7 @@ class Router
      * @return string
      */
     static string fullBaseUrl(Nullable!string base = null) {
-        if ($base == null && static::$_fullBaseUrl !== null) {
+        if ($base is null && static::$_fullBaseUrl !== null) {
             return static::$_fullBaseUrl;
         }
 
@@ -692,7 +692,7 @@ class Router
      */
     static string[] extensions($extensions = null, myMerge = true) {
         myCollection = static::$_collection;
-        if ($extensions == null) {
+        if ($extensions is null) {
             return array_unique(array_merge(static::$_defaultExtensions, myCollection.getExtensions()));
         }
 
