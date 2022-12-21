@@ -357,7 +357,7 @@ class FormHelper : Helper
             unset(myOptions["valueSources"]);
         }
 
-        if (myOptions["idPrefix"] !== null) {
+        if (myOptions["idPrefix"]  !is null) {
             _idPrefix = myOptions["idPrefix"];
         }
         myTemplater = this.templater();
@@ -422,7 +422,7 @@ class FormHelper : Helper
 
         if (this.requestType !== "get") {
             $formTokenData = _View.getRequest().getAttribute("formTokenData");
-            if ($formTokenData !== null) {
+            if ($formTokenData  !is null) {
                 this.formProtector = this.createFormProtector($formTokenData);
             }
 
@@ -524,7 +524,7 @@ class FormHelper : Helper
     string end(array $secureAttributes = []) {
         $out = "";
 
-        if (this.requestType !== "get" && _View.getRequest().getAttribute("formTokenData") !== null) {
+        if (this.requestType !== "get" && _View.getRequest().getAttribute("formTokenData")  !is null) {
             $out .= this.secure([], $secureAttributes);
         }
         $out .= this.formatTemplate("formEnd", []);
@@ -698,7 +698,7 @@ class FormHelper : Helper
             $text = $tmp;
         }
 
-        if ($text !== null) {
+        if ($text  !is null) {
             myError = $text;
         }
 
@@ -1209,7 +1209,7 @@ class FormHelper : Helper
         myType = "text";
         $internalType = $context.type(myFieldName);
         $map = _config["typeMap"];
-        if ($internalType !== null && isset($map[$internalType])) {
+        if ($internalType  !is null && isset($map[$internalType])) {
             myType = $map[$internalType];
         }
         myFieldName = array_slice(explode(".", myFieldName), -1)[0];
@@ -1767,7 +1767,7 @@ class FormHelper : Helper
         $out .= _csrfField();
 
         $formTokenData = _View.getRequest().getAttribute("formTokenData");
-        if ($formTokenData !== null) {
+        if ($formTokenData  !is null) {
             this.formProtector = this.createFormProtector($formTokenData);
         }
 
@@ -2379,9 +2379,9 @@ class FormHelper : Helper
         $widget = _locator.get(myName);
         $out = $widget.render(myData, this.context());
         if (
-            this.formProtector !== null &&
+            this.formProtector  !is null &&
             isset(myData["name"]) &&
-            $secure !== null &&
+            $secure  !is null &&
             $secure !== self::SECURE_SKIP
         ) {
             foreach ($widget.secureFields(myData) as myField) {
@@ -2475,14 +2475,14 @@ class FormHelper : Helper
         foreach (this.getValueSources() as myValuesSource) {
             if (myValuesSource == "context") {
                 $val = _getContext().val(myFieldname, myOptions);
-                if ($val !== null) {
+                if ($val  !is null) {
                     return $val;
                 }
             }
             if (isset(myValueMap[myValuesSource])) {
                 $method = myValueMap[myValuesSource];
                 myValue = _View.getRequest().{$method}(myFieldname);
-                if (myValue !== null) {
+                if (myValue  !is null) {
                     return myValue;
                 }
             }

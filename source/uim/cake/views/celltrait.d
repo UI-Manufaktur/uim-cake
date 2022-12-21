@@ -99,7 +99,7 @@ trait CellTrait {
         if (method_exists(this, "viewBuilder")) {
             myBuilder.setTheme(this.viewBuilder().getTheme());
 
-            if (this.viewBuilder().getClassName() !== null) {
+            if (this.viewBuilder().getClassName()  !is null) {
                 myBuilder.setClassName(this.viewBuilder().getClassName());
             }
         }

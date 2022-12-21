@@ -258,7 +258,7 @@ class View : IEventDispatcher {
             array_flip(_passedVars)
         ));
 
-        if (myEventManager !== null) {
+        if (myEventManager  !is null) {
             this.setEventManager(myEventManager);
         }
         if (myRequest is null) {
@@ -441,7 +441,7 @@ class View : IEventDispatcher {
     auto getConfig(Nullable!string myKey = null, $default = null) {
         myValue = _getConfig(myKey);
 
-        if (myValue !== null) {
+        if (myValue  !is null) {
             return myValue;
         }
 
@@ -602,7 +602,7 @@ class View : IEventDispatcher {
         if ($layout == false) {
             $defaultAutoLayout = this.autoLayout;
             this.autoLayout = false;
-        } elseif ($layout !== null) {
+        } elseif ($layout  !is null) {
             $defaultLayout = this.layout;
             this.layout = $layout;
         }
@@ -623,10 +623,10 @@ class View : IEventDispatcher {
 
             this.Blocks.set("content", this.renderLayout("", this.layout));
         }
-        if ($layout !== null) {
+        if ($layout  !is null) {
             this.layout = $defaultLayout;
         }
-        if ($defaultAutoLayout !== null) {
+        if ($defaultAutoLayout  !is null) {
             this.autoLayout = $defaultAutoLayout;
         }
 
@@ -963,7 +963,7 @@ class View : IEventDispatcher {
         myContents = _evaluate(myTemplateFile, myData);
 
         $afterEvent = this.dispatchEvent("View.afterRenderFile", [myTemplateFile, myContents]);
-        if ($afterEvent.getResult() !== null) {
+        if ($afterEvent.getResult()  !is null) {
             myContents = $afterEvent.getResult();
         }
 
@@ -1363,7 +1363,7 @@ class View : IEventDispatcher {
             if (myPlugin is null && !empty(_paths)) {
                 return _paths;
             }
-            if (myPlugin !== null && isset(_pathsForPlugin[myPlugin])) {
+            if (myPlugin  !is null && isset(_pathsForPlugin[myPlugin])) {
                 return _pathsForPlugin[myPlugin];
             }
         }
@@ -1404,7 +1404,7 @@ class View : IEventDispatcher {
             App::core("templates")
         );
 
-        if (myPlugin !== null) {
+        if (myPlugin  !is null) {
             return _pathsForPlugin[myPlugin] = myPaths;
         }
 

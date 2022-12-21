@@ -224,17 +224,17 @@ class EntityContext : IContext {
 
             if ($entity instanceof InvalidPropertyInterface) {
                 $val = $entity.getInvalidField($part);
-                if ($val !== null) {
+                if ($val  !is null) {
                     return $val;
                 }
             }
 
             $val = $entity.get($part);
-            if ($val !== null) {
+            if ($val  !is null) {
                 return $val;
             }
             if (
-                myOptions["default"] !== null
+                myOptions["default"]  !is null
                 || !myOptions["schemaDefault"]
                 || !$entity.isNew()
             ) {
@@ -606,7 +606,7 @@ class EntityContext : IContext {
         $assoc = null;
         foreach ($normalized as $part) {
             if ($part == "_joinData") {
-                if ($assoc !== null) {
+                if ($assoc  !is null) {
                     myTable = $assoc.junction();
                     $assoc = null;
                     continue;

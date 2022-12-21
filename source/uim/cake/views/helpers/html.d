@@ -137,7 +137,7 @@ class HtmlHelper : Helper {
 
             if (isset(myTypes[myType])) {
                 myType = myTypes[myType];
-            } elseif (!isset(myOptions["type"]) && myContents !== null) {
+            } elseif (!isset(myOptions["type"]) && myContents  !is null) {
                 if (is_array(myContents) && isset(myContents["_ext"])) {
                     myType = myTypes[myContents["_ext"]];
                 } else {
@@ -232,7 +232,7 @@ class HtmlHelper : Helper {
      */
     string link($title, myUrl = null, array myOptions = []) {
         $escapeTitle = true;
-        if (myUrl !== null) {
+        if (myUrl  !is null) {
             myUrl = this.Url.build(myUrl, myOptions);
             unset(myOptions["fullBase"]);
         } else {

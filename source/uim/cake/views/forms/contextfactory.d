@@ -46,7 +46,7 @@ class ContextFactory
                         return new EntityContext(myData);
                     }
                     if (is_iterable(myData["entity"])) {
-                        $pass = (new Collection(myData["entity"])).first() !== null;
+                        $pass = (new Collection(myData["entity"])).first()  !is null;
                         if ($pass) {
                             return new EntityContext(myData);
                         } else {

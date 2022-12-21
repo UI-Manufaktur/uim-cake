@@ -142,7 +142,7 @@ class BasicWidget : IWidget {
     protected auto setMaxLength(array myData, IContext $context, string myFieldName): array
     {
         $maxLength = $context.getMaxLength(myFieldName);
-        if ($maxLength !== null) {
+        if ($maxLength  !is null) {
             myData["maxlength"] = min($maxLength, 100000);
         }
 

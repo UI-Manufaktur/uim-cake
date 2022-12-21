@@ -50,7 +50,7 @@ class TimeHelper : Helper
     function fromString($dateString, $timezone = null): FrozenTime
     {
         $time = new FrozenTime($dateString);
-        if ($timezone !== null) {
+        if ($timezone  !is null) {
             $time = $time.timezone($timezone);
         }
 

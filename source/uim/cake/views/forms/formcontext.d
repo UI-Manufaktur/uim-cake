@@ -63,11 +63,11 @@ class FormContext : IContext
         ];
 
         $val = _form.getData(myField);
-        if ($val !== null) {
+        if ($val  !is null) {
             return $val;
         }
 
-        if (myOptions["default"] !== null || !myOptions["schemaDefault"]) {
+        if (myOptions["default"]  !is null || !myOptions["schemaDefault"]) {
             return myOptions["default"];
         }
 

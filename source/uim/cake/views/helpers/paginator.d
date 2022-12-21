@@ -636,7 +636,7 @@ class PaginatorHelper : Helper
      * @return string|null Model name or null if the pagination isn"t initialized.
      */
     Nullable!string defaultModel(Nullable!string myModel = null) {
-        if (myModel !== null) {
+        if (myModel  !is null) {
             _defaultModel = myModel;
         }
         if (_defaultModel) {

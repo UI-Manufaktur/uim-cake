@@ -157,7 +157,7 @@ class ArrayContext : IContext
             return Hash::get(_context["data"], myField);
         }
 
-        if (myOptions["default"] !== null || !myOptions["schemaDefault"]) {
+        if (myOptions["default"]  !is null || !myOptions["schemaDefault"]) {
             return myOptions["default"];
         }
         if (empty(_context["defaults"]) || !is_array(_context["defaults"])) {

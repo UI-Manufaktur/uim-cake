@@ -84,7 +84,7 @@ abstract class Cell : IEventDispatcher
         ?IEventManager myEventManager = null,
         array $cellOptions = []
     ) {
-        if (myEventManager !== null) {
+        if (myEventManager  !is null) {
             this.setEventManager(myEventManager);
         }
         this.request = myRequest;
@@ -143,7 +143,7 @@ abstract class Cell : IEventDispatcher
 
             myBuilder = this.viewBuilder();
 
-            if (myTemplate !== null) {
+            if (myTemplate  !is null) {
                 myBuilder.setTemplate(myTemplate);
             }
 
