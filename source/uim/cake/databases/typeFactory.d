@@ -13,7 +13,7 @@ class TypeFactory
      * representing the class that will do actual type conversions.
      *
      * @var array<string, string>
-     * @psalm-var array<string, class-string<\Cake\Database\TypeInterface>>
+     * @psalm-var array<string, class-string<\Cake\Database\IType>>
      */
     protected static $_types = [
         "tinyinteger": Type\IntegerType::class,
@@ -42,7 +42,7 @@ class TypeFactory
     /**
      * Contains a map of type object instances to be reused if needed.
      *
-     * @var array<\Cake\Database\TypeInterface>
+     * @var array<\Cake\Database\IType>
      */
     protected static $_builtTypes = [];
 
@@ -51,9 +51,9 @@ class TypeFactory
      *
      * @param string myName type identifier
      * @throws \InvalidArgumentException If type identifier is unknown
-     * @return \Cake\Database\TypeInterface
+     * @return \Cake\Database\IType
      */
-    static function build(string myName): TypeInterface
+    static function build(string myName): IType
     {
         if (isset(static::$_builtTypes[myName])) {
             return static::$_builtTypes[myName];
@@ -68,7 +68,7 @@ class TypeFactory
     /**
      * Returns an arrays with all the mapped type objects, indexed by name.
      *
-     * @return array<\Cake\Database\TypeInterface>
+     * @return array<\Cake\Database\IType>
      */
     static array buildAll() {
         myResult = [];
@@ -80,12 +80,12 @@ class TypeFactory
     }
 
     /**
-     * Set TypeInterface instance capable of converting a type identified by myName
+     * Set IType instance capable of converting a type identified by myName
      *
      * @param string myName The type identifier you want to set.
-     * @param \Cake\Database\TypeInterface $instance The type instance you want to set.
+     * @param \Cake\Database\IType $instance The type instance you want to set.
      */
-    static void set(string myName, TypeInterface $instance) {
+    static void set(string myName, IType $instance) {
         static::$_builtTypes[myName] = $instance;
         static::$_types[myName] = get_class($instance);
     }
@@ -95,7 +95,7 @@ class TypeFactory
      *
      * @param string myType Name of type to map.
      * @param string myClassName The classname to register.
-     * @psalm-param class-string<\Cake\Database\TypeInterface> myClassName
+     * @psalm-param class-string<\Cake\Database\IType> myClassName
      */
     static void map(string myType, string myClassName) {
         static::$_types[myType] = myClassName;
@@ -106,7 +106,7 @@ class TypeFactory
      * Set type to classname mapping.
      *
      * @param $map List of types to be mapped.
-     * @psalm-param array<string, class-string<\Cake\Database\TypeInterface>> $map
+     * @psalm-param array<string, class-string<\Cake\Database\IType>> $map
      */
     static void setMap(string[] $map) {
         static::$_types = $map;

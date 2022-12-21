@@ -3,7 +3,7 @@ module uim.cake.databases;
 /**
  * Represents an expression that is known to return a specific type
  */
-interface TypedResultInterface
+interface ITypedResult
 {
     /**
      * Return the abstract type this expression will return

@@ -659,7 +659,7 @@ class Connection : IConnection {
      * This uses `PDO::quote()` and requires `supportsQuoting()` to work.
      *
      * @param mixed myValue The value to quote.
-     * @param \Cake\Database\TypeInterface|string|int myType Type to be used for determining kind of quoting to perform
+     * @param \Cake\Database\IType|string|int myType Type to be used for determining kind of quoting to perform
      * @return  Quoted value
      */
     string quote(myValue, myType = "string") {

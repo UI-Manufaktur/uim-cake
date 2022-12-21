@@ -1,23 +1,20 @@
-module uim.cake.databases;
+module uim.cake.databases.functionsBuilder;
 
-import uim.cake.databases.Expression\AggregateExpression;
-import uim.cake.databases.Expression\FunctionExpression;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Contains methods related to generating FunctionExpression objects
  * with most commonly used SQL functions.
  * This acts as a factory for FunctionExpression objects.
  */
-class FunctionsBuilder
-{
+class FunctionsBuilder {
     /**
      * Returns a FunctionExpression representing a call to SQL RAND function.
      *
      * @return \Cake\Database\Expression\FunctionExpression
      */
-    function rand(): FunctionExpression
-    {
+    function rand(): FunctionExpression {
         return new FunctionExpression("RAND", [], [], "float");
     }
 

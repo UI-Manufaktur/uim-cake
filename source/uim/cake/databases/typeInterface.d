@@ -9,7 +9,7 @@ module uim.cake.databases;
  * Encapsulates all conversion functions for values coming from a database into PHP and
  * going from PHP into a database.
  */
-interface TypeInterface
+interface IType
 {
     /**
      * Casts given value from a PHP type to one acceptable by a database.

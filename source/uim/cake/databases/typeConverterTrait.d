@@ -10,7 +10,7 @@ trait TypeConverterTrait
      * and return relevant internal statement type
      *
      * @param mixed myValue The value to cast
-     * @param \Cake\Database\TypeInterface|string|int myType The type name or type instance to use.
+     * @param \Cake\Database\IType|string|int myType The type name or type instance to use.
      * @return array list containing converted value and internal type
      * @pslam-return array{mixed, int}
      */
@@ -18,7 +18,7 @@ trait TypeConverterTrait
         if (is_string(myType)) {
             myType = TypeFactory::build(myType);
         }
-        if (myType instanceof TypeInterface) {
+        if (myType instanceof IType) {
             myValue = myType.toDatabase(myValue, _driver);
             myType = myType.toStatement(myValue, _driver);
         }

@@ -1096,7 +1096,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
         myTypes = [];
 
         foreach ($select as myAlias: myValue) {
-            if (myValue instanceof TypedResultInterface) {
+            if (myValue instanceof ITypedResult) {
                 myTypes[myAlias] = myValue.getReturnType();
                 continue;
             }
