@@ -80,7 +80,7 @@ class Cache {
      * @return \Cake\Cache\CacheRegistry
      */
     static CacheRegistry getRegistry() {
-        if (static::$_registry == null) {
+        if (static::$_registry is null) {
             static::$_registry = new CacheRegistry();
         }
 
@@ -461,7 +461,7 @@ class Cache {
         foreach (static::configured() as myConfig) {
             static::pool(myConfig);
         }
-        if (myGroup == null) {
+        if (myGroup is null) {
             return static::$_groups;
         }
 

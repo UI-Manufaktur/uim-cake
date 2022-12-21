@@ -136,7 +136,7 @@ class Connection : IConnection {
         if (is_string(myDriver)) {
             /** @psalm-var class-string<\Cake\Database\IDriver>|null myClassName */
             myClassName = App::className(myDriver, "Database/Driver");
-            if (myClassName == null) {
+            if (myClassName is null) {
                 throw new MissingDriverException(["driver":myDriver]);
             }
             myDriver = new myClassName(myConfig);
@@ -469,7 +469,7 @@ class Connection : IConnection {
         }
 
         $useSavePoint = this.isSavePointsEnabled();
-        if ($toBeginning == null) {
+        if ($toBeginning is null) {
             $toBeginning = !$useSavePoint;
         }
         if (_transactionLevel == 0 || $toBeginning) {
@@ -487,7 +487,7 @@ class Connection : IConnection {
         $savePoint = _transactionLevel--;
         if ($useSavePoint) {
             this.rollbackSavepoint($savePoint);
-        } elseif (this.nestedTransactionRollbackException == null) {
+        } elseif (this.nestedTransactionRollbackException is null) {
             this.nestedTransactionRollbackException = new NestedTransactionRollbackException();
         }
 

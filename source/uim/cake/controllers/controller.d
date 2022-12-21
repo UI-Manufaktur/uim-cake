@@ -148,11 +148,11 @@ class Controller : IEventListener, IEventDispatcher
     ) {
         if (myName !== null) {
             this.name = myName;
-        } elseif (this.name == null && myRequest) {
+        } elseif (this.name is null && myRequest) {
             this.name = myRequest.getParam("controller");
         }
 
-        if (this.name == null) {
+        if (this.name is null) {
             [, myName] = moduleSplit(static::class);
             this.name = substr(myName, 0, -10);
         }
@@ -170,7 +170,7 @@ class Controller : IEventListener, IEventDispatcher
             this.modelClass = this.defaultTable;
         }
 
-        if (this.modelClass == null) {
+        if (this.modelClass is null) {
             myPlugin = this.request.getParam("plugin");
             myModelClass = (myPlugin ? myPlugin . "." : "") . this.name;
             _setModelClass(myModelClass);
@@ -225,7 +225,7 @@ class Controller : IEventListener, IEventDispatcher
             return _components = $components;
         }
 
-        if (_components == null) {
+        if (_components is null) {
             _components = new ComponentRegistry(this);
         }
 
@@ -486,7 +486,7 @@ class Controller : IEventListener, IEventDispatcher
                 getTypeName(myResult)
             ));
         }
-        if (myResult == null && this.isAutoRenderEnabled()) {
+        if (myResult is null && this.isAutoRenderEnabled()) {
             myResult = this.render();
         }
         if (myResult) {
@@ -690,7 +690,7 @@ class Controller : IEventListener, IEventDispatcher
         return this.response;
       }
 
-      if (myBuilder.getTemplate() == null) {
+      if (myBuilder.getTemplate() is null) {
         myBuilder.setTemplate(this.request.getParam("action"));
       }
 
@@ -725,7 +725,7 @@ class Controller : IEventListener, IEventDispatcher
      */
     string referer($default = "/", bool $local = true) {
         $referer = this.request.referer($local);
-        if ($referer == null) {
+        if ($referer is null) {
             myUrl = Router::url($default, !$local);
             $base = this.request.getAttribute("base");
             if ($local && $base && indexOf(myUrl, $base) == 0) {
@@ -763,7 +763,7 @@ class Controller : IEventListener, IEventDispatcher
             myTable = $object;
         }
 
-        if (is_string($object) || $object == null) {
+        if (is_string($object) || $object is null) {
             $try = [$object, this.modelClass];
             foreach ($try as myTableName) {
                 if (empty(myTableName)) {

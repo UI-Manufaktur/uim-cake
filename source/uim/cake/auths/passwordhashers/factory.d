@@ -30,7 +30,7 @@ class PasswordHasherFactory {
         }
 
         myClassName = App::className(myClass, "Auth", "PasswordHasher");
-        if (myClassName == null) {
+        if (myClassName is null) {
             throw new RuntimeException(sprintf("Password hasher class "%s" was not found.", myClass));
         }
 

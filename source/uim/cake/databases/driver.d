@@ -134,7 +134,7 @@ abstract class Driver : IDriver
      * Returns connected server version.
      */
     string version() {
-        if (_version == null) {
+        if (_version is null) {
             this.connect();
             _version = (string)_connection.getAttribute(PDO::ATTR_SERVER_VERSION);
         }
@@ -148,7 +148,7 @@ abstract class Driver : IDriver
      * @return \PDO
      */
     auto getConnection() {
-        if (_connection == null) {
+        if (_connection is null) {
             throw new MissingConnectionException([
                 "driver":App::shortName(static::class, "Database/Driver"),
                 "reason":"Unknown",
@@ -271,7 +271,7 @@ abstract class Driver : IDriver
 
     
     string schemaValue(myValue) {
-        if (myValue == null) {
+        if (myValue is null) {
             return "NULL";
         }
         if (myValue == false) {
@@ -320,7 +320,7 @@ abstract class Driver : IDriver
 
     
     bool isConnected() {
-        if (_connection == null) {
+        if (_connection is null) {
             $connected = false;
         } else {
             try {

@@ -282,7 +282,7 @@ class RequestHandlerComponent : Component {
         }
 
         [myContentsType] = explode(";", myRequest.contentType() ?? "");
-        if (myType == null) {
+        if (myType is null) {
             return $controller.getResponse().mapType(myContentsType);
         }
 
@@ -384,7 +384,7 @@ class RequestHandlerComponent : Component {
         }
 
         $viewClass = null;
-        if (myBuilder.getClassName() == null) {
+        if (myBuilder.getClassName() is null) {
             $viewClass = App::className($view, "View", "View");
         }
 

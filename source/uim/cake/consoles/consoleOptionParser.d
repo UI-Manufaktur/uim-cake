@@ -678,7 +678,7 @@ class ConsoleOptionParser {
      * @return  Generated help.
      */
     string help(Nullable!string subcommand = null, string format = "text", int $width = 72) {
-        if ($subcommand == null) {
+        if ($subcommand is null) {
             $formatter = new HelpFormatter(this);
             $formatter.setAlias(this.rootName);
 

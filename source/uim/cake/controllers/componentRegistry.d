@@ -42,7 +42,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @return \Cake\Controller\Controller Controller instance or null if not set.
      */
     Controller getController() {
-        if (_controller == null) {
+        if (_controller is null) {
             throw new CakeException("Controller not set for ComponentRegistry");
         }
 

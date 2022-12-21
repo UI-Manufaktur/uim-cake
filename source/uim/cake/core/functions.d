@@ -37,7 +37,7 @@ if (!function_exists("h")) {
             } else {
                 $text = "(object)" . get_class($text);
             }
-        } elseif ($text == null || is_scalar($text)) {
+        } elseif ($text is null || is_scalar($text)) {
             return $text;
         }
 
@@ -184,7 +184,7 @@ if (!function_exists("env")) {
         }
 
         $val = $_SERVER[myKey] ?? $_ENV[myKey] ?? null;
-        if ($val == null && getenv(myKey) !== false) {
+        if ($val is null && getenv(myKey) !== false) {
             $val = getenv(myKey);
         }
 

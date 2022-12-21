@@ -34,7 +34,7 @@ trait CollectionTrait
 
 
     ICollection filter(?callable $callback = null) {
-        if ($callback == null) {
+        if ($callback is null) {
             $callback = function ($v) {
                 return (bool)$v;
             };
@@ -186,7 +186,7 @@ trait CollectionTrait
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
-            if (myPathValue == null) {
+            if (myPathValue is null) {
                 throw new InvalidArgumentException(
                     "Cannot group by path that does not exist or contains a null value. " .
                     "Use a callback to return a default value for that path."
@@ -204,7 +204,7 @@ trait CollectionTrait
         myGroup = [];
         foreach (this.optimizeUnwrap() as myValue) {
             myPathValue = $callback(myValue);
-            if (myPathValue == null) {
+            if (myPathValue is null) {
                 throw new InvalidArgumentException(
                     "Cannot index by path that does not exist or contains a null value. " .
                     "Use a callback to return a default value for that path."
@@ -235,7 +235,7 @@ trait CollectionTrait
 
 
     function sumOf(myPath = null) {
-        if (myPath == null) {
+        if (myPath is null) {
             return array_sum(this.toList());
         }
 
@@ -613,7 +613,7 @@ trait CollectionTrait
 
 
     ICollection unfold(?callable $callback = null) {
-        if ($callback == null) {
+        if ($callback is null) {
             $callback = function ($item) {
                 return $item;
             };
@@ -758,8 +758,8 @@ trait CollectionTrait
                 return myValue[myKeys[$index]];
             }, myCollectionArrays, myCollectionArraysKeys, $currentIndexes);
 
-            if ($filter == null || $filter($currentCombination)) {
-                myResult[] = $operation == null ? $currentCombination : $operation($currentCombination);
+            if ($filter is null || $filter($currentCombination)) {
+                myResult[] = $operation is null ? $currentCombination : $operation($currentCombination);
             }
 
             $currentIndexes[$lastIndex]++;

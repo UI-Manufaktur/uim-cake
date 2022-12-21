@@ -139,7 +139,7 @@ class ShellDispatcher {
 
             return $code;
         }
-        if (myResult == null || myResult == true) {
+        if (myResult is null || myResult == true) {
             /** @psalm-suppress DeprecatedClass */
             return Shell::CODE_SUCCESS;
         }

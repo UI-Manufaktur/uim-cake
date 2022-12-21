@@ -266,7 +266,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      */
     bool add(string myKey, myValue) {
         $cachedValue = this.get(myKey);
-        if ($cachedValue == null) {
+        if ($cachedValue is null) {
             return this.set(myKey, myValue);
         }
 
@@ -336,7 +336,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return int
      */
     protected int duration($ttl) {
-        if ($ttl == null) {
+        if ($ttl is null) {
             return _config["duration"];
         }
         if (is_int($ttl)) {

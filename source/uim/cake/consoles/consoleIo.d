@@ -452,7 +452,7 @@ class ConsoleIo {
         _out.write("<question>" . $prompt . "</question>myOptionsText\n$defaultText> ", 0);
         myResult = _in.read();
 
-        myResult = myResult == null ? "" : trim(myResult);
+        myResult = myResult is null ? "" : trim(myResult);
         if ($default !== null && myResult == "") {
             return $default;
         }

@@ -96,7 +96,7 @@ class SessionStorage : IStorage {
 
 
     function redirectUrl(myUrl = null) {
-        if (myUrl == null) {
+        if (myUrl is null) {
             return _session.read(_config["redirect"]);
         }
 

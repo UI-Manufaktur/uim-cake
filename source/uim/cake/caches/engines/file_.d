@@ -63,7 +63,7 @@ class FileEngine : CacheEngine {
     bool init(array myConfig = []) {
       super.init(myConfig);
 
-      if (_config["path"] == null) {
+      if (_config["path"] is null) {
           _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
       }
       if (substr(_config["path"], -1) !== DIRECTORY_SEPARATOR) {

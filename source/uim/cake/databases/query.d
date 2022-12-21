@@ -1401,7 +1401,7 @@ class Query : IExpression, IteratorAggregate {
             this.limit($limit);
         }
         $limit = this.clause("limit");
-        if ($limit == null) {
+        if ($limit is null) {
             $limit = 25;
             this.limit($limit);
         }
@@ -1804,7 +1804,7 @@ class Query : IExpression, IteratorAggregate {
      * @return \Cake\Database\FunctionsBuilder
      */
     FunctionsBuilder func() {
-        if (_functionsBuilder == null) {
+        if (_functionsBuilder is null) {
             _functionsBuilder = new FunctionsBuilder();
         }
 
@@ -1822,7 +1822,7 @@ class Query : IExpression, IteratorAggregate {
      */
     #[\ReturnTypeWillChange]
     auto getIterator() {
-        if (_iterator == null || _dirty) {
+        if (_iterator is null || _dirty) {
             _iterator = this.execute();
         }
 
@@ -1992,7 +1992,7 @@ class Query : IExpression, IteratorAggregate {
      * @return \Cake\Database\ValueBinder
      */
     ValueBinder getValueBinder() {
-        if (_valueBinder == null) {
+        if (_valueBinder is null) {
             _valueBinder = new ValueBinder();
         }
 
@@ -2085,7 +2085,7 @@ class Query : IExpression, IteratorAggregate {
      * @return \Cake\Database\TypeMap
      */
     TypeMap getSelectTypeMap() {
-        if (_selectTypeMap == null) {
+        if (_selectTypeMap is null) {
             _selectTypeMap = new TypeMap();
         }
 

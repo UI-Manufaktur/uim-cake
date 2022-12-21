@@ -110,7 +110,7 @@ trait InstanceConfigTrait {
      */
     auto getConfigOrFail(string myKey) {
         myConfig = this.getConfig(myKey);
-        if (myConfig == null) {
+        if (myConfig is null) {
             throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", myKey));
         }
 
@@ -161,7 +161,7 @@ trait InstanceConfigTrait {
      * @return mixed
      */
     protected auto _configRead(Nullable!string myKey) {
-        if (myKey == null) {
+        if (myKey is null) {
             return _config;
         }
 
@@ -193,7 +193,7 @@ trait InstanceConfigTrait {
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
      */
     protected void _configWrite(myKey, myValue, myMerge = false) {
-        if (is_string(myKey) && myValue == null) {
+        if (is_string(myKey) && myValue is null) {
             _configDelete(myKey);
 
             return;

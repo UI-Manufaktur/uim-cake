@@ -56,7 +56,7 @@ class IniConfig : IConfigEngine
      *     all sections in the ini file.
      */
     this(Nullable!string myPath = null, Nullable!string section = null) {
-        if (myPath == null) {
+        if (myPath is null) {
             myPath = CONFIG;
         }
         _path = myPath;
@@ -162,7 +162,7 @@ class IniConfig : IConfigEngine
         return aValue ? "true" : "false";
     }
     protected string _value(T myValue) {
-        if (myValue == null) {
+        if (myValue is null) {
             return "null";
         }
 

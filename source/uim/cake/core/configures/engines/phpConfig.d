@@ -43,7 +43,7 @@ class PhpConfig : IConfigEngine
      * @param string|null myPath The path to read config files from. Defaults to CONFIG.
      */
     this(Nullable!string myPath = null) {
-        if (myPath == null) {
+        if (myPath is null) {
             myPath = CONFIG;
         }
         _path = myPath;

@@ -249,7 +249,7 @@ class Shell {
     protected void _validateTasks() {
         foreach (_taskMap as $taskName: $task) {
             myClass = App::className($task["class"], "Shell/Task", "Task");
-            if (myClass == null) {
+            if (myClass is null) {
                 throw new RuntimeException(sprintf(
                     "Task `%s` not found. Maybe you made a typo or a plugin is missing or not loaded?",
                     $taskName

@@ -80,7 +80,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         myClassName = myName;
         if (is_string(myName)) {
             myClassName = _resolveClassName(myName);
-            if (myClassName == null) {
+            if (myClassName is null) {
                 [myPlugin, myName] = pluginSplit(myName);
                 _throwMissingClassError(myName, myPlugin);
             }

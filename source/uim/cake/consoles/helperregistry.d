@@ -41,7 +41,7 @@ class HelperRegistry : ObjectRegistry
      */
     protected Nullable!string _resolveClassName(string myClass) {
       myName = App::className(myClass, "Command/Helper", "Helper");
-      if (myName == null) {
+      if (myName is null) {
           return App::className(myClass, "Shell/Helper", "Helper");
       }
 

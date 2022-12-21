@@ -52,7 +52,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      */
     Controller create(IServerRequest myRequest) {
         myClassName = this.getControllerClass(myRequest);
-        if (myClassName == null) {
+        if (myClassName is null) {
             throw this.missingController(myRequest);
         }
 
@@ -181,7 +181,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
                 if (myType instanceof ReflectionNamedType) {
                     myTypedArgument = this.coerceStringToType($argument, myType);
 
-                    if (myTypedArgument == null) {
+                    if (myTypedArgument is null) {
                         throw new InvalidParameterException([
                             "template":"failed_coercion",
                             "passed":$argument,

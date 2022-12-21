@@ -165,7 +165,7 @@ class App {
      * @link https://book.UIM.org/4/en/core-libraries/app.html#finding-paths-to-modules
      */
     static string[] path(string aClassType, Nullable!string myPlugin = null) {
-        if (myPlugin == null && aClassType[0] == strtolower(aClassType[0])) {
+        if (myPlugin is null && aClassType[0] == strtolower(aClassType[0])) {
             return (array)Configure::read("App.paths." . aClassType);
         }
 

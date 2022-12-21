@@ -34,7 +34,7 @@ trait PluginAssetsTrait
      * @return array<string, mixed> List of plugins with meta data.
      */
     protected array _list(Nullable!string myName = null) {
-        if (myName == null) {
+        if (myName is null) {
             myPluginsList = Plugin::loaded();
         } else {
             myPluginsList = [myName];

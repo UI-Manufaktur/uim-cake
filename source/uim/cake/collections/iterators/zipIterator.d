@@ -72,7 +72,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      */
     #[\ReturnTypeWillChange]
     function current() {
-        if (_callback == null) {
+        if (_callback is null) {
             return super.current();
         }
 

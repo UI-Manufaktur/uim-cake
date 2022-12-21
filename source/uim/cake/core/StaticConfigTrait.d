@@ -57,7 +57,7 @@ trait StaticConfigTrait
      * @throws \LogicException When trying to store an invalid structured config array.
      */
     static void setConfig(myKey, myConfig = null) {
-        if (myConfig == null) {
+        if (myConfig is null) {
             if (!is_array(myKey)) {
                 throw new LogicException("If config is null, key must be an array.");
             }

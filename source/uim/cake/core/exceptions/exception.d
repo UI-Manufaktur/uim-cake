@@ -67,7 +67,7 @@ class CakeException : RuntimeException {
      *   should be set for HttpException only.
      */
     function responseHeader($header = null, myValue = null): ?array {
-      if ($header == null) {
+      if ($header is null) {
           return _responseHeaders;
       }
 

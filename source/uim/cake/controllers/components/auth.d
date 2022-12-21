@@ -238,7 +238,7 @@ class AuthComponent : Component : IEventDispatcher
         $controller = myEvent.getSubject();
 
         $action = $controller.getRequest().getParam("action");
-        if ($action == null || !$controller.isAction($action)) {
+        if ($action is null || !$controller.isAction($action)) {
             return null;
         }
 
@@ -498,7 +498,7 @@ class AuthComponent : Component : IEventDispatcher
                 myClass = myAlias;
             }
             myClassName = App::className(myClass, "Auth", "Authorize");
-            if (myClassName == null) {
+            if (myClassName is null) {
                 throw new CakeException(sprintf("Authorization adapter "%s" was not found.", myClass));
             }
             if (!method_exists(myClassName, "authorize")) {
@@ -545,7 +545,7 @@ class AuthComponent : Component : IEventDispatcher
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-public
      */
     void allow($actions = null) {
-        if ($actions == null) {
+        if ($actions is null) {
             $controller = _registry.getController();
             this.allowedActions = get_class_methods($controller);
 
@@ -574,7 +574,7 @@ class AuthComponent : Component : IEventDispatcher
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
     void deny($actions = null) {
-        if ($actions == null) {
+        if ($actions is null) {
             this.allowedActions = [];
 
             return;
@@ -635,7 +635,7 @@ class AuthComponent : Component : IEventDispatcher
             return null;
         }
 
-        if (myKey == null) {
+        if (myKey is null) {
             return myUser;
         }
 
@@ -782,7 +782,7 @@ class AuthComponent : Component : IEventDispatcher
                 myClass = myAlias;
             }
             myClassName = App::className(myClass, "Auth", "Authenticate");
-            if (myClassName == null) {
+            if (myClassName is null) {
                 throw new CakeException(sprintf("Authentication adapter "%s" was not found.", myClass));
             }
             if (!method_exists(myClassName, "authenticate")) {
@@ -824,7 +824,7 @@ class AuthComponent : Component : IEventDispatcher
             unset(myConfig["className"]);
         }
         myClassName = App::className(myClass, "Auth/Storage", "Storage");
-        if (myClassName == null) {
+        if (myClassName is null) {
             throw new CakeException(sprintf("Auth storage adapter "%s" was not found.", myClass));
         }
         myRequest = this.getController().getRequest();

@@ -124,7 +124,7 @@ class CommandRunner : IEventDispatcher {
             myResult = this.runCommand(myShell, $argv, $io);
         }
 
-        if (myResult == null || myResult == true) {
+        if (myResult is null || myResult == true) {
             return ICommand::CODE_SUCCESS;
         }
         if (is_int(myResult) && myResult >= 0 && myResult <= 255) {
