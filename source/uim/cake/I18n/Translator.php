@@ -155,11 +155,11 @@ class Translator
             $message = $message[$form] ?? (string)end($message);
         }
 
-        if ($message === '') {
+        if ($message == '') {
             $message = $key;
 
             // If singular haven't been translated, fallback to the key.
-            if (isset($tokensValues['_singular']) && $tokensValues['_count'] === 1) {
+            if (isset($tokensValues['_singular']) && $tokensValues['_count'] == 1) {
                 $message = $tokensValues['_singular'];
             }
         }
@@ -182,9 +182,9 @@ class Translator
         $context = $vars['_context'] ?? null;
 
         // No or missing context, fallback to the key/first message
-        if ($context === null) {
+        if ($context == null) {
             if (isset($message['_context'][''])) {
-                return $message['_context'][''] === '' ? $key : $message['_context'][''];
+                return $message['_context'][''] == '' ? $key : $message['_context'][''];
             }
 
             return current($message['_context']);
@@ -192,7 +192,7 @@ class Translator
         if (!isset($message['_context'][$context])) {
             return $key;
         }
-        if ($message['_context'][$context] === '') {
+        if ($message['_context'][$context] == '') {
             return $key;
         }
 

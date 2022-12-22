@@ -163,7 +163,7 @@ class Cookie implements CookieInterface
         this->httpOnly = $httpOnly ?? static::$defaults['httponly'];
         this->path = $path ?? static::$defaults['path'];
         this->secure = $secure ?? static::$defaults['secure'];
-        if ($sameSite === null) {
+        if ($sameSite == null) {
             this->sameSite = static::$defaults['samesite'];
         } else {
             this->validateSameSiteValue($sameSite);
@@ -240,7 +240,7 @@ class Cookie implements CookieInterface
      */
     protected static function dateTimeInstance($expires): ?DateTimeInterface
     {
-        if ($expires === null) {
+        if ($expires == null) {
             return null;
         }
 
@@ -676,7 +676,7 @@ class Cookie implements CookieInterface
      */
     function check(string $path): bool
     {
-        if (this->isExpanded === false) {
+        if (this->isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             this->value = this->_expand(this->value);
         }
@@ -695,7 +695,7 @@ class Cookie implements CookieInterface
     function withAddedValue(string $path, $value)
     {
         $new = clone this;
-        if ($new->isExpanded === false) {
+        if ($new->isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $new->value = $new->_expand($new->value);
         }
@@ -715,7 +715,7 @@ class Cookie implements CookieInterface
     function withoutAddedValue(string $path)
     {
         $new = clone this;
-        if ($new->isExpanded === false) {
+        if ($new->isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $new->value = $new->_expand($new->value);
         }
@@ -737,12 +737,12 @@ class Cookie implements CookieInterface
      */
     function read(?string $path = null)
     {
-        if (this->isExpanded === false) {
+        if (this->isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             this->value = this->_expand(this->value);
         }
 
-        if ($path === null) {
+        if ($path == null) {
             return this->value;
         }
 
@@ -813,7 +813,7 @@ class Cookie implements CookieInterface
     {
         this->isExpanded = true;
         $first = substr($string, 0, 1);
-        if ($first === '{' || $first === '[') {
+        if ($first == '{' || $first == '[') {
             $ret = json_decode($string, true);
 
             return $ret ?? $string;

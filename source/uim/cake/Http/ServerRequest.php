@@ -378,7 +378,7 @@ class ServerRequest implements ServerRequestInterface
 
             if ($trusted) {
                 $trusted = array_diff($addresses, this->trustedProxies);
-                $trusted = (count($trusted) === 1);
+                $trusted = (count($trusted) == 1);
             }
 
             if ($trusted) {
@@ -435,9 +435,9 @@ class ServerRequest implements ServerRequestInterface
 
         $base = Configure::read('App.fullBaseUrl') . this->webroot;
         if (!empty($ref) && !empty($base)) {
-            if ($local && strpos($ref, $base) === 0) {
+            if ($local && strpos($ref, $base) == 0) {
                 $ref = substr($ref, strlen($base));
-                if ($ref === '' || strpos($ref, '//') === 0) {
+                if ($ref == '' || strpos($ref, '//') == 0) {
                     $ref = '/';
                 }
                 if ($ref[0] != '/') {
@@ -464,7 +464,7 @@ class ServerRequest implements ServerRequestInterface
      */
     function __call(string $name, array $params)
     {
-        if (strpos($name, 'is') === 0) {
+        if (strpos($name, 'is') == 0) {
             $type = strtolower(substr($name, 2));
 
             array_unshift($params, $type);
@@ -570,7 +570,7 @@ class ServerRequest implements ServerRequestInterface
         }
 
         $accepted = $content->preferredType(this, $options);
-        if ($accepted === null) {
+        if ($accepted == null) {
             return false;
         }
         if ($exclude && in_array($accepted, $exclude, true)) {
@@ -595,7 +595,7 @@ class ServerRequest implements ServerRequestInterface
                     return $value($header);
                 }
 
-                return $header === $value;
+                return $header == $value;
             }
         }
 
@@ -794,10 +794,10 @@ class ServerRequest implements ServerRequestInterface
         $headers = [];
         foreach (this->_environment as $key => $value) {
             $name = null;
-            if (strpos($key, 'HTTP_') === 0) {
+            if (strpos($key, 'HTTP_') == 0) {
                 $name = substr($key, 5);
             }
-            if (strpos($key, 'CONTENT_') === 0) {
+            if (strpos($key, 'CONTENT_') == 0) {
                 $name = $key;
             }
             if ($name != null) {
@@ -1181,7 +1181,7 @@ class ServerRequest implements ServerRequestInterface
      */
     function getQuery(?string $name = null, $default = null)
     {
-        if ($name === null) {
+        if ($name == null) {
             return this->query;
         }
 
@@ -1222,7 +1222,7 @@ class ServerRequest implements ServerRequestInterface
      */
     function getData(?string $name = null, $default = null)
     {
-        if ($name === null) {
+        if ($name == null) {
             return this->data;
         }
         if (!is_array(this->data) && $name) {
@@ -1617,7 +1617,7 @@ class ServerRequest implements ServerRequestInterface
     function getAttribute($name, $default = null)
     {
         if (in_array($name, this->emulatedAttributes, true)) {
-            if ($name === 'here') {
+            if ($name == 'here') {
                 return this->base . this->uri->getPath();
             }
 
@@ -1838,7 +1838,7 @@ class ServerRequest implements ServerRequestInterface
      */
     function getPath(): string
     {
-        if (this->requestTarget === null) {
+        if (this->requestTarget == null) {
             return this->uri->getPath();
         }
 

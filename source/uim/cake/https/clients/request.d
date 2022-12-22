@@ -30,7 +30,7 @@ class Request : Message : IRequest {
 <<<<<<< HEAD
             "Connection":"close",
             "User-Agent":ini_get("user_agent") ?: "CakePHP",
-=====
+!==
             "Connection": "close",
             "User-Agent": ini_get("user_agent") ?: "UIM",
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9

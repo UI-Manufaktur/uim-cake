@@ -119,14 +119,14 @@ class Mock implements AdapterInterface
     protected function urlMatches(string $requestUri, RequestInterface $mock): bool
     {
         $mockUri = (string)$mock->getUri();
-        if ($requestUri === $mockUri) {
+        if ($requestUri == $mockUri) {
             return true;
         }
         $starPosition = strrpos($mockUri, '/%2A');
-        if ($starPosition === strlen($mockUri) - 4) {
+        if ($starPosition == strlen($mockUri) - 4) {
             $mockUri = substr($mockUri, 0, $starPosition);
 
-            return strpos($requestUri, $mockUri) === 0;
+            return strpos($requestUri, $mockUri) == 0;
         }
 
         return false;

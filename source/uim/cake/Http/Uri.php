@@ -68,7 +68,7 @@ class Uri implements UriInterface
      */
     function __get(string $name)
     {
-        if ($name === 'base' || $name === 'webroot') {
+        if ($name == 'base' || $name == 'webroot') {
             return this->{$name};
         }
         throw new UnexpectedValueException("Undefined property via __get('{$name}')");

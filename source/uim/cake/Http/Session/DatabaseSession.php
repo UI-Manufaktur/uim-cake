@@ -131,7 +131,7 @@ class DatabaseSession implements SessionHandlerInterface
 
         $session = stream_get_contents($result['data']);
 
-        if ($session === false) {
+        if ($session == false) {
             return '';
         }
 

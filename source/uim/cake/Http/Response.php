@@ -506,14 +506,14 @@ class Response implements ResponseInterface
         if (
             this->_charset &&
             (
-                strpos($type, 'text/') === 0 ||
+                strpos($type, 'text/') == 0 ||
                 in_array($type, $allowed, true)
             )
         ) {
             $charset = true;
         }
 
-        if ($charset && strpos($type, ';') === false) {
+        if ($charset && strpos($type, ';') == false) {
             this->_setHeader('Content-Type', "{$type}; charset={this->_charset}");
         } else {
             this->_setHeader('Content-Type', $type);
@@ -532,7 +532,7 @@ class Response implements ResponseInterface
     function withLocation(string $url)
     {
         $new = this->withHeader('Location', $url);
-        if ($new->_status === 200) {
+        if ($new->_status == 200) {
             $new->_status = 302;
         }
 
@@ -639,7 +639,7 @@ class Response implements ResponseInterface
         }
 
         this->_status = $code;
-        if ($reasonPhrase === '' && isset(this->_statusCodes[$code])) {
+        if ($reasonPhrase == '' && isset(this->_statusCodes[$code])) {
             $reasonPhrase = this->_statusCodes[$code];
         }
         this->_reasonPhrase = $reasonPhrase;
@@ -730,7 +730,7 @@ class Response implements ResponseInterface
         if ($mapped) {
             return is_array($mapped) ? current($mapped) : $mapped;
         }
-        if (strpos($contentType, '/') === false) {
+        if (strpos($contentType, '/') == false) {
             throw new InvalidArgumentException(sprintf('"%s" is an invalid content type.', $contentType));
         }
 
@@ -821,7 +821,7 @@ class Response implements ResponseInterface
     {
         if (!is_int($time)) {
             $time = strtotime($time);
-            if ($time === false) {
+            if ($time == false) {
                 throw new InvalidArgumentException(
                     'Invalid time parameter. Ensure your time value can be parsed by strtotime'
                 );
@@ -929,7 +929,7 @@ class Response implements ResponseInterface
     {
         $control = '';
         foreach (this->_cacheDirectives as $key => $val) {
-            $control .= $val === true ? $key : sprintf('%s=%s', $key, $val);
+            $control .= $val == true ? $key : sprintf('%s=%s', $key, $val);
             $control .= ', ';
         }
         $control = rtrim($control, ', ');
@@ -1132,7 +1132,7 @@ class Response implements ResponseInterface
     function outputCompressed(): bool
     {
         return strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') != false
-            && (ini_get('zlib.output_compression') === '1' || in_array('ob_gzhandler', ob_list_handlers(), true));
+            && (ini_get('zlib.output_compression') == '1' || in_array('ob_gzhandler', ob_list_handlers(), true));
     }
 
     /**
@@ -1218,9 +1218,9 @@ class Response implements ResponseInterface
         $modifiedSince = $request->getHeaderLine('If-Modified-Since');
         $timeMatches = null;
         if ($modifiedSince && this->hasHeader('Last-Modified')) {
-            $timeMatches = strtotime(this->getHeaderLine('Last-Modified')) === strtotime($modifiedSince);
+            $timeMatches = strtotime(this->getHeaderLine('Last-Modified')) == strtotime($modifiedSince);
         }
-        if ($etagMatches === null && $timeMatches === null) {
+        if ($etagMatches == null && $timeMatches == null) {
             return false;
         }
 
@@ -1421,7 +1421,7 @@ class Response implements ResponseInterface
 
         $extension = strtolower($file->getExtension());
         $mapped = this->getMimeType($extension);
-        if ((!$extension || !$mapped) && $options['download'] === null) {
+        if ((!$extension || !$mapped) && $options['download'] == null) {
             $options['download'] = true;
         }
 
@@ -1533,11 +1533,11 @@ class Response implements ResponseInterface
             $end = $matches[2] ?? '';
         }
 
-        if ($start === '') {
+        if ($start == '') {
             $start = $fileSize - (int)$end;
             $end = $lastByte;
         }
-        if ($end === '') {
+        if ($end == '') {
             $end = $lastByte;
         }
 

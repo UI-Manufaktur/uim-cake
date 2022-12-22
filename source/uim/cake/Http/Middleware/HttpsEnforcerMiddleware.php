@@ -81,7 +81,7 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
     function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (
-            $request->getUri()->getScheme() === 'https'
+            $request->getUri()->getScheme() == 'https'
             || (this->config['disableOnDebug']
                 && Configure::read('debug'))
         ) {
@@ -93,7 +93,7 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
             return $response;
         }
 
-        if (this->config['redirect'] && $request->getMethod() === 'GET') {
+        if (this->config['redirect'] && $request->getMethod() == 'GET') {
             $uri = $request->getUri()->withScheme('https');
             $base = $request->getAttribute('base');
             if ($base) {

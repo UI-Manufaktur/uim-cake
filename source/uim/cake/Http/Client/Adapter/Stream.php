@@ -96,7 +96,7 @@ class Stream implements AdapterInterface
     {
         $indexes = $responses = [];
         foreach ($headers as $i => $header) {
-            if (strtoupper(substr($header, 0, 5)) === 'HTTP/') {
+            if (strtoupper(substr($header, 0, 5)) == 'HTTP/') {
                 $indexes[] = $i;
             }
         }
@@ -106,7 +106,7 @@ class Stream implements AdapterInterface
             $end = isset($indexes[$i + 1]) ? $indexes[$i + 1] - $start : null;
             /** @psalm-suppress PossiblyInvalidArgument */
             $headerSlice = array_slice($headers, $start, $end);
-            $body = $i === $last ? $content : '';
+            $body = $i == $last ? $content : '';
             $responses[] = this->_buildResponse($headerSlice, $body);
         }
 
@@ -128,7 +128,7 @@ class Stream implements AdapterInterface
 
         $url = $request->getUri();
         $scheme = parse_url((string)$url, PHP_URL_SCHEME);
-        if ($scheme === 'https') {
+        if ($scheme == 'https') {
             this->_buildSslContext($request, $options);
         }
         this->_context = stream_context_create([

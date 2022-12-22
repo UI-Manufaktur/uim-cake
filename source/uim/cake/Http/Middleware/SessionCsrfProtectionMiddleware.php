@@ -101,7 +101,7 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
         if (
             $hasData
             && this->skipCheckCallback != null
-            && call_user_func(this->skipCheckCallback, $request) === true
+            && call_user_func(this->skipCheckCallback, $request) == true
         ) {
             $request = this->unsetTokenField($request);
 
@@ -114,13 +114,13 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
         }
 
         $token = $session->read(this->_config['key']);
-        if ($token === null) {
+        if ($token == null) {
             $token = this->createToken();
             $session->write(this->_config['key'], $token);
         }
         $request = $request->withAttribute('csrfToken', this->saltToken($token));
 
-        if ($method === 'GET') {
+        if ($method == 'GET') {
             return $handler->handle($request);
         }
 
@@ -184,7 +184,7 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
     protected function unsaltToken(string $token): string
     {
         $decoded = base64_decode($token, true);
-        if ($decoded === false || strlen($decoded) != static::TOKEN_VALUE_LENGTH * 2) {
+        if ($decoded == false || strlen($decoded) != static::TOKEN_VALUE_LENGTH * 2) {
             return $token;
         }
         $salted = substr($decoded, 0, static::TOKEN_VALUE_LENGTH);

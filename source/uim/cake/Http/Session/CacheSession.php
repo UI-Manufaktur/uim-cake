@@ -85,7 +85,7 @@ class CacheSession implements SessionHandlerInterface
     {
         $value = Cache::read($id, this->_options['config']);
 
-        if ($value === null) {
+        if ($value == null) {
             return '';
         }
 

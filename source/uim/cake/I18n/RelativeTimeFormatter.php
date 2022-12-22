@@ -40,7 +40,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
         ?ChronosInterface $other = null,
         bool $absolute = false
     ): string {
-        $isNow = $other === null;
+        $isNow = $other == null;
         if ($isNow) {
             $other = $date->now($date->getTimezone());
         }
@@ -81,7 +81,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
         if ($absolute) {
             return $message;
         }
-        $isFuture = $diffInterval->invert === 1;
+        $isFuture = $diffInterval->invert == 1;
         if ($isNow) {
             return $isFuture ? __d('cake', '{0} from now', $message) : __d('cake', '{0} ago', $message);
         }
@@ -228,7 +228,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
                 $years = floor($months / 12);
                 $months -= $years * 12;
             }
-            if ((int)$future['m'] < (int)$past['m'] && (int)$future['Y'] - (int)$past['Y'] === 1) {
+            if ((int)$future['m'] < (int)$past['m'] && (int)$future['Y'] - (int)$past['Y'] == 1) {
                 $years--;
             }
 

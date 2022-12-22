@@ -50,7 +50,7 @@ class Request extends Message implements RequestInterface
         ];
         this->addHeaders($headers);
 
-        if ($data === null) {
+        if ($data == null) {
             this->stream = new Stream('php://memory', 'rw');
         } else {
             this->setContent($data);

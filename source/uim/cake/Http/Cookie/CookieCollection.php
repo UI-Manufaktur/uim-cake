@@ -133,7 +133,7 @@ class CookieCollection implements IteratorAggregate, Countable
     {
         $key = mb_strtolower($name);
         foreach (this->cookies as $cookie) {
-            if (mb_strtolower($cookie->getName()) === $key) {
+            if (mb_strtolower($cookie->getName()) == $key) {
                 return $cookie;
             }
         }
@@ -156,7 +156,7 @@ class CookieCollection implements IteratorAggregate, Countable
     {
         $key = mb_strtolower($name);
         foreach (this->cookies as $cookie) {
-            if (mb_strtolower($cookie->getName()) === $key) {
+            if (mb_strtolower($cookie->getName()) == $key) {
                 return true;
             }
         }
@@ -177,7 +177,7 @@ class CookieCollection implements IteratorAggregate, Countable
         $new = clone this;
         $key = mb_strtolower($name);
         foreach ($new->cookies as $i => $cookie) {
-            if (mb_strtolower($cookie->getName()) === $key) {
+            if (mb_strtolower($cookie->getName()) == $key) {
                 unset($new->cookies[$i]);
             }
         }
@@ -272,14 +272,14 @@ class CookieCollection implements IteratorAggregate, Countable
         $out = [];
         $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
         foreach (this->cookies as $cookie) {
-            if ($scheme === 'http' && $cookie->isSecure()) {
+            if ($scheme == 'http' && $cookie->isSecure()) {
                 continue;
             }
             if (strpos($path, $cookie->getPath()) != 0) {
                 continue;
             }
             $domain = $cookie->getDomain();
-            $leadingDot = substr($domain, 0, 1) === '.';
+            $leadingDot = substr($domain, 0, 1) == '.';
             if ($leadingDot) {
                 $domain = ltrim($domain, '.');
             }
@@ -341,7 +341,7 @@ class CookieCollection implements IteratorAggregate, Countable
             if (!$cookie->isExpired($time)) {
                 continue;
             }
-            $pathMatches = strpos($path, $cookie->getPath()) === 0;
+            $pathMatches = strpos($path, $cookie->getPath()) == 0;
             $hostMatches = preg_match($hostPattern, $cookie->getDomain());
             if ($pathMatches && $hostMatches) {
                 unset(this->cookies[$i]);

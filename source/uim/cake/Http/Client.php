@@ -188,7 +188,7 @@ class Client implements ClientInterface
         this->setConfig($config);
 
         $adapter = this->_config['adapter'];
-        if ($adapter === null) {
+        if ($adapter == null) {
             $adapter = Curl::class;
 
             if (!extension_loaded('curl')) {
@@ -229,7 +229,7 @@ class Client implements ClientInterface
     {
         $parts = parse_url($url);
 
-        if ($parts === false) {
+        if ($parts == false) {
             throw new InvalidArgumentException('String ' . $url . ' did not parse');
         }
 
@@ -585,7 +585,7 @@ class Client implements ClientInterface
         $options += $defaults;
 
         if ($query) {
-            $q = strpos($url, '?') === false ? '?' : '&';
+            $q = strpos($url, '?') == false ? '?' : '&';
             $url .= $q;
             $url .= is_string($query) ? $query : http_build_query($query, '', '&', PHP_QUERY_RFC3986);
         }

@@ -111,7 +111,7 @@ class FormDataPart
      */
     function disposition(?string $disposition = null): string
     {
-        if ($disposition === null) {
+        if ($disposition == null) {
             return this->_disposition;
         }
 
@@ -126,7 +126,7 @@ class FormDataPart
      */
     function contentId(?string $id = null): ?string
     {
-        if ($id === null) {
+        if ($id == null) {
             return this->_contentId;
         }
 
@@ -144,7 +144,7 @@ class FormDataPart
      */
     function filename(?string $filename = null): ?string
     {
-        if ($filename === null) {
+        if ($filename == null) {
             return this->_filename;
         }
 
@@ -159,7 +159,7 @@ class FormDataPart
      */
     function type(?string $type): ?string
     {
-        if ($type === null) {
+        if ($type == null) {
             return this->_type;
         }
 
@@ -176,7 +176,7 @@ class FormDataPart
      */
     function transferEncoding(?string $type): ?string
     {
-        if ($type === null) {
+        if ($type == null) {
             return this->_transferEncoding;
         }
 

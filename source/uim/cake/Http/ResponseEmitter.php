@@ -188,7 +188,7 @@ class ResponseEmitter implements EmitterInterface
         }
 
         foreach ($response->getHeaders() as $name => $values) {
-            if (strtolower($name) === 'set-cookie') {
+            if (strtolower($name) == 'set-cookie') {
                 $cookies = array_merge($cookies, $values);
                 continue;
             }
@@ -264,7 +264,7 @@ class ResponseEmitter implements EmitterInterface
      */
     protected function flush(?int $maxBufferLevel = null): void
     {
-        if ($maxBufferLevel === null) {
+        if ($maxBufferLevel == null) {
             $maxBufferLevel = ob_get_level();
         }
 
@@ -288,7 +288,7 @@ class ResponseEmitter implements EmitterInterface
                 $matches['unit'],
                 (int)$matches['first'],
                 (int)$matches['last'],
-                $matches['length'] === '*' ? '*' : (int)$matches['length'],
+                $matches['length'] == '*' ? '*' : (int)$matches['length'],
             ];
         }
 

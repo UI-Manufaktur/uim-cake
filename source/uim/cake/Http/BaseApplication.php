@@ -250,7 +250,7 @@ abstract class BaseApplication implements
      */
     function getContainer(): ContainerInterface
     {
-        if (this->container === null) {
+        if (this->container == null) {
             this->container = this->buildContainer();
         }
 
@@ -307,7 +307,7 @@ abstract class BaseApplication implements
         $container = this->getContainer();
         $container->add(ServerRequest::class, $request);
 
-        if (this->controllerFactory === null) {
+        if (this->controllerFactory == null) {
             this->controllerFactory = new ControllerFactory($container);
         }
 

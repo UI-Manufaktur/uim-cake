@@ -168,7 +168,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      */
     function isThisWeek(): bool
     {
-        return static::now(this->getTimezone())->format('W o') === this->format('W o');
+        return static::now(this->getTimezone())->format('W o') == this->format('W o');
     }
 
     /**
@@ -178,7 +178,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      */
     function isThisMonth(): bool
     {
-        return static::now(this->getTimezone())->format('m Y') === this->format('m Y');
+        return static::now(this->getTimezone())->format('m Y') == this->format('m Y');
     }
 
     /**
@@ -188,7 +188,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      */
     function isThisYear(): bool
     {
-        return static::now(this->getTimezone())->format('Y') === this->format('Y');
+        return static::now(this->getTimezone())->format('Y') == this->format('Y');
     }
 
     /**
@@ -200,7 +200,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
     function toQuarter(bool $range = false)
     {
         $quarter = (int)ceil((int)this->format('m') / 3);
-        if ($range === false) {
+        if ($range == false) {
             return $quarter;
         }
 
@@ -307,7 +307,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
             $regex = $filter;
             $filter = null;
         }
-        if ($filter === null) {
+        if ($filter == null) {
             $filter = DateTimeZone::ALL;
         }
         $identifiers = DateTimeZone::listIdentifiers($filter, (string)$country) ?: [];

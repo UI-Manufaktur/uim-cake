@@ -146,7 +146,7 @@ class I18n
         }
 
         $translator = $translators->get($name);
-        if ($translator === null) {
+        if ($translator == null) {
             throw new I18nException(sprintf(
                 'Translator for domain "%s" could not be found.',
                 $name
@@ -234,7 +234,7 @@ class I18n
     {
         static::getDefaultLocale();
         $current = Locale::getDefault();
-        if ($current === '') {
+        if ($current == '') {
             $current = static::DEFAULT_LOCALE;
             Locale::setDefault($current);
         }
@@ -253,7 +253,7 @@ class I18n
      */
     public static function getDefaultLocale(): string
     {
-        if (static::$_defaultLocale === null) {
+        if (static::$_defaultLocale == null) {
             static::$_defaultLocale = Locale::getDefault() ?: static::DEFAULT_LOCALE;
         }
 

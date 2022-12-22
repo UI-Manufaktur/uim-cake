@@ -181,7 +181,7 @@ trait DateFormatTrait
      */
     function i18nFormat($format = null, $timezone = null, $locale = null)
     {
-        if ($format === Time::UNIX_TIMESTAMP_FORMAT) {
+        if ($format == Time::UNIX_TIMESTAMP_FORMAT) {
             return this->getTimestamp();
         }
 
@@ -221,7 +221,7 @@ trait DateFormatTrait
             $pattern = $format;
         }
 
-        if ($locale === null) {
+        if ($locale == null) {
             $locale = I18n::getLocale();
         }
 
@@ -240,9 +240,9 @@ trait DateFormatTrait
         $key = "{$locale}.{$dateFormat}.{$timeFormat}.{$timezone}.{$calendar}.{$pattern}";
 
         if (!isset(static::$_formatters[$key])) {
-            if ($timezone === '+00:00' || $timezone === 'Z') {
+            if ($timezone == '+00:00' || $timezone == 'Z') {
                 $timezone = 'UTC';
-            } elseif ($timezone[0] === '+' || $timezone[0] === '-') {
+            } elseif ($timezone[0] == '+' || $timezone[0] == '-') {
                 $timezone = 'GMT' . $timezone;
             }
             $formatter = datefmt_create(
@@ -466,7 +466,7 @@ trait DateFormatTrait
     public static function getDiffFormatter(): DifferenceFormatterInterface
     {
         // Use the static property defined in chronos.
-        if (static::$diffFormatter === null) {
+        if (static::$diffFormatter == null) {
             static::$diffFormatter = new RelativeTimeFormatter();
         }
 

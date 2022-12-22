@@ -180,11 +180,11 @@ class BodyParserMiddleware implements MiddlewareInterface
      */
     protected function decodeJson(string $body)
     {
-        if ($body === '') {
+        if ($body == '') {
             return [];
         }
         $decoded = json_decode($body, true);
-        if (json_last_error() === JSON_ERROR_NONE) {
+        if (json_last_error() == JSON_ERROR_NONE) {
             return (array)$decoded;
         }
 

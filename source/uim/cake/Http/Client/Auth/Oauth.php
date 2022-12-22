@@ -296,7 +296,7 @@ class Oauth
 
         $post = [];
         $contentType = $request->getHeaderLine('Content-Type');
-        if ($contentType === '' || $contentType === 'application/x-www-form-urlencoded') {
+        if ($contentType == '' || $contentType == 'application/x-www-form-urlencoded') {
             parse_str((string)$request->getBody(), $post);
         }
         $args = array_merge($queryArgs, $oauthValues, $post);

@@ -50,7 +50,7 @@ class Curl implements AdapterInterface
 
         /** @var string|false $body */
         $body = this->exec($ch);
-        if ($body === false) {
+        if ($body == false) {
             $errorCode = curl_errno($ch);
             $error = curl_error($ch);
             curl_close($ch);
@@ -120,7 +120,7 @@ class Curl implements AdapterInterface
         if ($out[CURLOPT_POSTFIELDS] != '' && isset($out[CURLOPT_HTTPGET])) {
             $out[CURLOPT_CUSTOMREQUEST] = 'get';
         }
-        if ($out[CURLOPT_POSTFIELDS] === '') {
+        if ($out[CURLOPT_POSTFIELDS] == '') {
             unset($out[CURLOPT_POSTFIELDS]);
         }
 

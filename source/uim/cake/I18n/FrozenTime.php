@@ -220,7 +220,7 @@ class FrozenTime extends Chronos implements I18nDateTimeInterface
             $regex = $filter;
             $filter = null;
         }
-        if ($filter === null) {
+        if ($filter == null) {
             $filter = DateTimeZone::ALL;
         }
         $identifiers = DateTimeZone::listIdentifiers($filter, (string)$country) ?: [];

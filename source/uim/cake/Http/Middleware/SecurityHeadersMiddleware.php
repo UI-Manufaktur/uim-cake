@@ -171,7 +171,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
     {
         this->checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
-        if ($option === self::ALLOW_FROM) {
+        if ($option == self::ALLOW_FROM) {
             if (empty($url)) {
                 throw new InvalidArgumentException('The 2nd arg $url can not be empty when `allow-from` is used');
             }
@@ -192,7 +192,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      */
     function setXssProtection(string $mode = self::XSS_BLOCK)
     {
-        if ($mode === self::XSS_BLOCK) {
+        if ($mode == self::XSS_BLOCK) {
             $mode = self::XSS_ENABLED_BLOCK;
         }
 

@@ -281,7 +281,7 @@ class Number
             'Use Number::setDefaultCurrency()/getDefaultCurrency() instead.'
         );
 
-        if ($currency === false) {
+        if ($currency == false) {
             static::setDefaultCurrency(null);
 
             // This doesn't seem like a useful result to return, but it's what the old version did.
@@ -302,7 +302,7 @@ class Number
      */
     public static function getDefaultCurrency(): string
     {
-        if (static::$_defaultCurrency === null) {
+        if (static::$_defaultCurrency == null) {
             $locale = ini_get('intl.default_locale') ?: static::DEFAULT_LOCALE;
             $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
             static::$_defaultCurrency = $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE);
@@ -331,7 +331,7 @@ class Number
      */
     public static function getDefaultCurrencyFormat(): string
     {
-        if (static::$_defaultCurrencyFormat === null) {
+        if (static::$_defaultCurrencyFormat == null) {
             static::$_defaultCurrencyFormat = static::FORMAT_CURRENCY;
         }
 
@@ -382,9 +382,9 @@ class Number
         $type = NumberFormatter::DECIMAL;
         if (!empty($options['type'])) {
             $type = $options['type'];
-            if ($options['type'] === static::FORMAT_CURRENCY) {
+            if ($options['type'] == static::FORMAT_CURRENCY) {
                 $type = NumberFormatter::CURRENCY;
-            } elseif ($options['type'] === static::FORMAT_CURRENCY_ACCOUNTING) {
+            } elseif ($options['type'] == static::FORMAT_CURRENCY_ACCOUNTING) {
                 if (defined('NumberFormatter::CURRENCY_ACCOUNTING')) {
                     $type = NumberFormatter::CURRENCY_ACCOUNTING;
                 } else {

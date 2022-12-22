@@ -119,7 +119,7 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
 
         if (
             in_array($method, ['PUT', 'DELETE', 'PATCH'], true) &&
-            strpos((string)$request->contentType(), 'application/x-www-form-urlencoded') === 0
+            strpos((string)$request->contentType(), 'application/x-www-form-urlencoded') == 0
         ) {
             $data = (string)$request->getBody();
             parse_str($data, $parsedBody);
@@ -171,7 +171,7 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
             foreach ($fileMap as $key => $file) {
                 $error = $file->getError();
                 $tmpName = '';
-                if ($error === UPLOAD_ERR_OK) {
+                if ($error == UPLOAD_ERR_OK) {
                     $tmpName = $file->getStream()->getMetadata('uri');
                 }
                 $parsedBody = Hash::insert($parsedBody, (string)$key, [
@@ -274,20 +274,20 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
     protected static function updatePath(string $base, UriInterface $uri): UriInterface
     {
         $path = $uri->getPath();
-        if ($base != '' && strpos($path, $base) === 0) {
+        if ($base != '' && strpos($path, $base) == 0) {
             $path = substr($path, strlen($base));
         }
-        if ($path === '/index.php' && $uri->getQuery()) {
+        if ($path == '/index.php' && $uri->getQuery()) {
             $path = $uri->getQuery();
         }
-        if (empty($path) || $path === '/' || $path === '//' || $path === '/index.php') {
+        if (empty($path) || $path == '/' || $path == '//' || $path == '/index.php') {
             $path = '/';
         }
         $endsWithIndex = '/' . (Configure::read('App.webroot') ?: 'webroot') . '/index.php';
         $endsWithLength = strlen($endsWithIndex);
         if (
             strlen($path) >= $endsWithLength &&
-            substr($path, -$endsWithLength) === $endsWithIndex
+            substr($path, -$endsWithLength) == $endsWithIndex
         ) {
             $path = '/';
         }
@@ -326,11 +326,11 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
             if ($indexPos != false) {
                 $base = substr($base, 0, $indexPos) . '/' . $webroot;
             }
-            if ($webroot === basename($base)) {
+            if ($webroot == basename($base)) {
                 $base = dirname($base);
             }
 
-            if ($base === DIRECTORY_SEPARATOR || $base === '.') {
+            if ($base == DIRECTORY_SEPARATOR || $base == '.') {
                 $base = '';
             }
             $base = implode('/', array_map('rawurlencode', explode('/', $base)));
@@ -341,7 +341,7 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
         $file = '/' . basename($baseUrl);
         $base = dirname($baseUrl);
 
-        if ($base === DIRECTORY_SEPARATOR || $base === '.') {
+        if ($base == DIRECTORY_SEPARATOR || $base == '.') {
             $base = '';
         }
         $webrootDir = $base . '/';
@@ -350,7 +350,7 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
         $docRootContainsWebroot = strpos($docRoot, $webroot);
 
         if (!empty($base) || !$docRootContainsWebroot) {
-            if (strpos($webrootDir, '/' . $webroot . '/') === false) {
+            if (strpos($webrootDir, '/' . $webroot . '/') == false) {
                 $webrootDir .= $webroot . '/';
             }
         }
