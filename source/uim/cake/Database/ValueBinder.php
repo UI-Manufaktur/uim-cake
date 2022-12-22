@@ -51,7 +51,7 @@ class ValueBinder
      */
     public function bind($param, $value, $type = null): void
     {
-        $this->_bindings[$param] = compact('value', 'type') + [
+        this->_bindings[$param] = compact('value', 'type') + [
             'placeholder' => is_int($param) ? $param : substr($param, 1),
         ];
     }
@@ -67,7 +67,7 @@ class ValueBinder
      */
     public function placeholder(string $token): string
     {
-        $number = $this->_bindingsCount++;
+        $number = this->_bindingsCount++;
         if ($token[0] !== ':' && $token !== '?') {
             $token = sprintf(':%s%s', $token, $number);
         }
@@ -87,8 +87,8 @@ class ValueBinder
     {
         $placeholders = [];
         foreach ($values as $k => $value) {
-            $param = $this->placeholder('c');
-            $this->_bindings[$param] = [
+            $param = this->placeholder('c');
+            this->_bindings[$param] = [
                 'value' => $value,
                 'type' => $type,
                 'placeholder' => substr($param, 1),
@@ -107,7 +107,7 @@ class ValueBinder
      */
     public function bindings(): array
     {
-        return $this->_bindings;
+        return this->_bindings;
     }
 
     /**
@@ -117,8 +117,8 @@ class ValueBinder
      */
     public function reset(): void
     {
-        $this->_bindings = [];
-        $this->_bindingsCount = 0;
+        this->_bindings = [];
+        this->_bindingsCount = 0;
     }
 
     /**
@@ -128,7 +128,7 @@ class ValueBinder
      */
     public function resetCount(): void
     {
-        $this->_bindingsCount = 0;
+        this->_bindingsCount = 0;
     }
 
     /**
@@ -139,7 +139,7 @@ class ValueBinder
      */
     public function attachTo(StatementInterface $statement): void
     {
-        $bindings = $this->bindings();
+        $bindings = this->bindings();
         if (empty($bindings)) {
             return;
         }

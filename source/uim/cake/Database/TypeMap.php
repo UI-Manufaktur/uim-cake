@@ -48,7 +48,7 @@ class TypeMap
      */
     public this(array $defaults = [])
     {
-        $this->setDefaults($defaults);
+        this->setDefaults($defaults);
     }
 
     /**
@@ -71,13 +71,13 @@ class TypeMap
      *
      * @param array<int|string, string> $defaults Array where keys are field names / positions and values
      * are the correspondent type.
-     * @return $this
+     * @return this
      */
     public function setDefaults(array $defaults)
     {
-        $this->_defaults = $defaults;
+        this->_defaults = $defaults;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -87,7 +87,7 @@ class TypeMap
      */
     public function getDefaults(): array
     {
-        return $this->_defaults;
+        return this->_defaults;
     }
 
     /**
@@ -100,7 +100,7 @@ class TypeMap
      */
     public function addDefaults(array $types): void
     {
-        $this->_defaults += $types;
+        this->_defaults += $types;
     }
 
     /**
@@ -116,13 +116,13 @@ class TypeMap
      *
      * @param array<int|string, string> $types Array where keys are field names / positions and values
      * are the correspondent type.
-     * @return $this
+     * @return this
      */
     public function setTypes(array $types)
     {
-        $this->_types = $types;
+        this->_types = $types;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -132,7 +132,7 @@ class TypeMap
      */
     public function getTypes(): array
     {
-        return $this->_types;
+        return this->_types;
     }
 
     /**
@@ -145,7 +145,7 @@ class TypeMap
      */
     public function type($column): ?string
     {
-        return $this->_types[$column] ?? $this->_defaults[$column] ?? null;
+        return this->_types[$column] ?? this->_defaults[$column] ?? null;
     }
 
     /**
@@ -155,6 +155,6 @@ class TypeMap
      */
     public function toArray(): array
     {
-        return $this->_types + $this->_defaults;
+        return this->_types + this->_defaults;
     }
 }

@@ -105,7 +105,7 @@ interface DriverInterface
      * Set the internal connection object.
      *
      * @param object $connection The connection instance.
-     * @return $this
+     * @return this
      */
     public function setConnection($connection);
 
@@ -286,14 +286,14 @@ interface DriverInterface
      * in queries.
      *
      * @param bool $enable Whether to enable auto quoting
-     * @return $this
+     * @return this
      */
     public function enableAutoQuoting(bool $enable = true);
 
     /**
      * Disable auto quoting of identifiers in queries.
      *
-     * @return $this
+     * @return this
      */
     public function disableAutoQuoting();
 

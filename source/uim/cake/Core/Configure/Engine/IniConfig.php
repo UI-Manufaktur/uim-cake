@@ -84,8 +84,8 @@ class IniConfig implements ConfigEngineInterface
         if ($path === null) {
             $path = CONFIG;
         }
-        $this->_path = $path;
-        $this->_section = $section;
+        this->_path = $path;
+        this->_section = $section;
     }
 
     /**
@@ -99,18 +99,18 @@ class IniConfig implements ConfigEngineInterface
      */
     public function read(string $key): array
     {
-        $file = $this->_getFilePath($key, true);
+        $file = this->_getFilePath($key, true);
 
         $contents = parse_ini_file($file, true);
-        if ($this->_section && isset($contents[$this->_section])) {
-            $values = $this->_parseNestedValues($contents[$this->_section]);
+        if (this->_section && isset($contents[this->_section])) {
+            $values = this->_parseNestedValues($contents[this->_section]);
         } else {
             $values = [];
             foreach ($contents as $section => $attribs) {
                 if (is_array($attribs)) {
-                    $values[$section] = $this->_parseNestedValues($attribs);
+                    $values[$section] = this->_parseNestedValues($attribs);
                 } else {
-                    $parse = $this->_parseNestedValues([$attribs]);
+                    $parse = this->_parseNestedValues([$attribs]);
                     $values[$section] = array_shift($parse);
                 }
             }
@@ -166,7 +166,7 @@ class IniConfig implements ConfigEngineInterface
             if (is_array($value)) {
                 $kValues = Hash::flatten($value, '.');
                 foreach ($kValues as $k2 => $v) {
-                    $result[] = "$k2 = " . $this->_value($v);
+                    $result[] = "$k2 = " . this->_value($v);
                 }
             }
             if ($isSection) {
@@ -175,7 +175,7 @@ class IniConfig implements ConfigEngineInterface
         }
         $contents = trim(implode("\n", $result));
 
-        $filename = $this->_getFilePath($key);
+        $filename = this->_getFilePath($key);
 
         return file_put_contents($filename, $contents) > 0;
     }

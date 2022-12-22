@@ -52,10 +52,10 @@ trait FileConfigTrait
         if ($plugin) {
             $file = Plugin::configPath($plugin) . $key;
         } else {
-            $file = $this->_path . $key;
+            $file = this->_path . $key;
         }
 
-        $file .= $this->_extension;
+        $file .= this->_extension;
 
         if (!$checkExists || is_file($file)) {
             return $file;

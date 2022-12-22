@@ -38,7 +38,7 @@ interface ExpressionInterface
      * being iterated.
      *
      * @param \Closure $callback The callable to apply to all nodes.
-     * @return $this
+     * @return this
      */
     public O traverse(this O)(Closure $callback);
 }

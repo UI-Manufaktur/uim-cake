@@ -64,8 +64,8 @@ trait ContainerStubTrait
      */
     public function configApplication(string $class, ?array $constructorArgs): void
     {
-        $this->_appClass = $class;
-        $this->_appArgs = $constructorArgs;
+        this->_appClass = $class;
+        this->_appArgs = $constructorArgs;
     }
 
     /**
@@ -77,8 +77,8 @@ trait ContainerStubTrait
      */
     protected function createApp()
     {
-        if ($this->_appClass) {
-            $appClass = $this->_appClass;
+        if (this->_appClass) {
+            $appClass = this->_appClass;
         } else {
             /** @psalm-var class-string<\Cake\Http\BaseApplication> */
             $appClass = Configure::read('App.namespace') . '\Application';
@@ -86,11 +86,11 @@ trait ContainerStubTrait
         if (!class_exists($appClass)) {
             throw new LogicException("Cannot load `{$appClass}` for use in integration testing.");
         }
-        $appArgs = $this->_appArgs ?: [CONFIG];
+        $appArgs = this->_appArgs ?: [CONFIG];
 
         $app = new $appClass(...$appArgs);
-        if (!empty($this->containerServices) && method_exists($app, 'getEventManager')) {
-            $app->getEventManager()->on('Application.buildContainer', [$this, 'modifyContainer']);
+        if (!empty(this->containerServices) && method_exists($app, 'getEventManager')) {
+            $app->getEventManager()->on('Application.buildContainer', [this, 'modifyContainer']);
         }
 
         return $app;
@@ -105,26 +105,26 @@ trait ContainerStubTrait
      *
      * @param string $class The class or interface you want to define.
      * @param \Closure $factory The factory function for mocked services.
-     * @return $this
+     * @return this
      */
     public function mockService(string $class, Closure $factory)
     {
-        $this->containerServices[$class] = $factory;
+        this->containerServices[$class] = $factory;
 
-        return $this;
+        return this;
     }
 
     /**
      * Remove a mocked service to the container.
      *
      * @param string $class The class or interface you want to remove.
-     * @return $this
+     * @return this
      */
     public function removeMockService(string $class)
     {
-        unset($this->containerServices[$class]);
+        unset(this->containerServices[$class]);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -140,10 +140,10 @@ trait ContainerStubTrait
      */
     public function modifyContainer(EventInterface $event, ContainerInterface $container): ?ContainerInterface
     {
-        if (empty($this->containerServices)) {
+        if (empty(this->containerServices)) {
             return null;
         }
-        foreach ($this->containerServices as $key => $factory) {
+        foreach (this->containerServices as $key => $factory) {
             if ($container->has($key)) {
                 try {
                     $container->extend($key)->setConcrete($factory);
@@ -167,8 +167,8 @@ trait ContainerStubTrait
      */
     public function cleanupContainer(): void
     {
-        $this->_appArgs = null;
-        $this->_appClass = null;
-        $this->containerServices = [];
+        this->_appArgs = null;
+        this->_appClass = null;
+        this->containerServices = [];
     }
 }

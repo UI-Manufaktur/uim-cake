@@ -65,7 +65,7 @@ class PhpConfig implements ConfigEngineInterface
         if ($path === null) {
             $path = CONFIG;
         }
-        $this->_path = $path;
+        this->_path = $path;
     }
 
     /**
@@ -82,7 +82,7 @@ class PhpConfig implements ConfigEngineInterface
      */
     public function read(string $key): array
     {
-        $file = $this->_getFilePath($key, true);
+        $file = this->_getFilePath($key, true);
 
         $config = null;
 
@@ -107,7 +107,7 @@ class PhpConfig implements ConfigEngineInterface
     {
         $contents = '<?php' . "\n" . 'return ' . var_export($data, true) . ';';
 
-        $filename = $this->_getFilePath($key);
+        $filename = this->_getFilePath($key);
 
         return file_put_contents($filename, $contents) > 0;
     }

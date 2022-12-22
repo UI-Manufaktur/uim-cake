@@ -47,41 +47,41 @@ trait SqlDialectTrait
 
         // string
         if (preg_match('/^[\w-]+$/u', $identifier)) {
-            return $this->_startQuote . $identifier . $this->_endQuote;
+            return this->_startQuote . $identifier . this->_endQuote;
         }
 
         // string.string
         if (preg_match('/^[\w-]+\.[^ \*]*$/u', $identifier)) {
             $items = explode('.', $identifier);
 
-            return $this->_startQuote . implode($this->_endQuote . '.' . $this->_startQuote, $items) . $this->_endQuote;
+            return this->_startQuote . implode(this->_endQuote . '.' . this->_startQuote, $items) . this->_endQuote;
         }
 
         // string.*
         if (preg_match('/^[\w-]+\.\*$/u', $identifier)) {
-            return $this->_startQuote . str_replace('.*', $this->_endQuote . '.*', $identifier);
+            return this->_startQuote . str_replace('.*', this->_endQuote . '.*', $identifier);
         }
 
         // Functions
         if (preg_match('/^([\w-]+)\((.*)\)$/', $identifier, $matches)) {
-            return $matches[1] . '(' . $this->quoteIdentifier($matches[2]) . ')';
+            return $matches[1] . '(' . this->quoteIdentifier($matches[2]) . ')';
         }
 
         // Alias.field AS thing
         if (preg_match('/^([\w-]+(\.[\w\s-]+|\(.*\))*)\s+AS\s*([\w-]+)$/ui', $identifier, $matches)) {
-            return $this->quoteIdentifier($matches[1]) . ' AS ' . $this->quoteIdentifier($matches[3]);
+            return this->quoteIdentifier($matches[1]) . ' AS ' . this->quoteIdentifier($matches[3]);
         }
 
         // string.string with spaces
         if (preg_match('/^([\w-]+\.[\w][\w\s-]*[\w])(.*)/u', $identifier, $matches)) {
             $items = explode('.', $matches[1]);
-            $field = implode($this->_endQuote . '.' . $this->_startQuote, $items);
+            $field = implode(this->_endQuote . '.' . this->_startQuote, $items);
 
-            return $this->_startQuote . $field . $this->_endQuote . $matches[2];
+            return this->_startQuote . $field . this->_endQuote . $matches[2];
         }
 
         if (preg_match('/^[\w\s-]*[\w-]+/u', $identifier)) {
-            return $this->_startQuote . $identifier . $this->_endQuote;
+            return this->_startQuote . $identifier . this->_endQuote;
         }
 
         return $identifier;
@@ -99,13 +99,13 @@ trait SqlDialectTrait
     public function queryTranslator(string $type): Closure
     {
         return function ($query) use ($type) {
-            if ($this->isAutoQuotingEnabled()) {
-                $query = (new IdentifierQuoter($this))->quote($query);
+            if (this->isAutoQuotingEnabled()) {
+                $query = (new IdentifierQuoter(this))->quote($query);
             }
 
             /** @var \Cake\ORM\Query $query */
-            $query = $this->{'_' . $type . 'QueryTranslator'}($query);
-            $translators = $this->_expressionTranslators();
+            $query = this->{'_' . $type . 'QueryTranslator'}($query);
+            $translators = this->_expressionTranslators();
             if (!$translators) {
                 return $query;
             }
@@ -113,7 +113,7 @@ trait SqlDialectTrait
             $query->traverseExpressions(function ($expression) use ($translators, $query): void {
                 foreach ($translators as $class => $method) {
                     if ($expression instanceof $class) {
-                        $this->{$method}($expression, $query);
+                        this->{$method}($expression, $query);
                     }
                 }
             });
@@ -143,7 +143,7 @@ trait SqlDialectTrait
      */
     protected function _selectQueryTranslator(Query $query): Query
     {
-        return $this->_transformDistinct($query);
+        return this->_transformDistinct($query);
     }
 
     /**
@@ -193,7 +193,7 @@ trait SqlDialectTrait
             return $query;
         }
 
-        return $this->_removeAliasesFromConditions($query);
+        return this->_removeAliasesFromConditions($query);
     }
 
     /**
@@ -209,7 +209,7 @@ trait SqlDialectTrait
      */
     protected function _updateQueryTranslator(Query $query): Query
     {
-        return $this->_removeAliasesFromConditions($query);
+        return this->_removeAliasesFromConditions($query);
     }
 
     /**
