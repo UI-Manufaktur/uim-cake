@@ -78,14 +78,14 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function init(array $config = []): bool
     {
-        $this->setConfig($config);
+        this->setConfig($config);
 
-        if (!empty($this->_config['groups'])) {
-            sort($this->_config['groups']);
-            $this->_groupPrefix = str_repeat('%s_', count($this->_config['groups']));
+        if (!empty(this->_config['groups'])) {
+            sort(this->_config['groups']);
+            this->_groupPrefix = str_repeat('%s_', count(this->_config['groups']));
         }
-        if (!is_numeric($this->_config['duration'])) {
-            $this->_config['duration'] = strtotime($this->_config['duration']) - time();
+        if (!is_numeric(this->_config['duration'])) {
+            this->_config['duration'] = strtotime(this->_config['duration']) - time();
         }
 
         return true;
@@ -124,9 +124,9 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
 
         foreach ($iterable as $key => $value) {
             if ($check === self::CHECK_VALUE) {
-                $this->ensureValidKey($value);
+                this->ensureValidKey($value);
             } else {
-                $this->ensureValidKey($key);
+                this->ensureValidKey($key);
             }
         }
     }
@@ -142,11 +142,11 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function getMultiple($keys, $default = null): iterable
     {
-        $this->ensureValidType($keys);
+        this->ensureValidType($keys);
 
         $results = [];
         foreach ($keys as $key) {
-            $results[$key] = $this->get($key, $default);
+            $results[$key] = this->get($key, $default);
         }
 
         return $results;
@@ -165,15 +165,15 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function setMultiple($values, $ttl = null): bool
     {
-        $this->ensureValidType($values, self::CHECK_KEY);
+        this->ensureValidType($values, self::CHECK_KEY);
 
         if ($ttl !== null) {
-            $restore = $this->getConfig('duration');
-            $this->setConfig('duration', $ttl);
+            $restore = this->getConfig('duration');
+            this->setConfig('duration', $ttl);
         }
         try {
             foreach ($values as $key => $value) {
-                $success = $this->set($key, $value);
+                $success = this->set($key, $value);
                 if ($success === false) {
                     return false;
                 }
@@ -182,7 +182,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
             return true;
         } finally {
             if (isset($restore)) {
-                $this->setConfig('duration', $restore);
+                this->setConfig('duration', $restore);
             }
         }
     }
@@ -201,11 +201,11 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function deleteMultiple($keys): bool
     {
-        $this->ensureValidType($keys);
+        this->ensureValidType($keys);
 
         $result = true;
         foreach ($keys as $key) {
-            if (!$this->delete($key)) {
+            if (!this->delete($key)) {
                 $result = false;
             }
         }
@@ -227,7 +227,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function has($key): bool
     {
-        return $this->get($key) !== null;
+        return this->get($key) !== null;
     }
 
     /**
@@ -299,9 +299,9 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function add(string $key, $value): bool
     {
-        $cachedValue = $this->get($key);
+        $cachedValue = this->get($key);
         if ($cachedValue === null) {
-            return $this->set($key, $value);
+            return this->set($key, $value);
         }
 
         return false;
@@ -326,7 +326,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function groups(): array
     {
-        return $this->_config['groups'];
+        return this->_config['groups'];
     }
 
     /**
@@ -341,15 +341,15 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     protected function _key($key): string
     {
-        $this->ensureValidKey($key);
+        this->ensureValidKey($key);
 
         $prefix = '';
-        if ($this->_groupPrefix) {
-            $prefix = md5(implode('_', $this->groups()));
+        if (this->_groupPrefix) {
+            $prefix = md5(implode('_', this->groups()));
         }
         $key = preg_replace('/[\s]+/', '_', $key);
 
-        return $this->_config['prefix'] . $prefix . $key;
+        return this->_config['prefix'] . $prefix . $key;
     }
 
     /**
@@ -361,7 +361,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     protected function warning(string $message): void
     {
-        if ($this->getConfig('warnOnWriteFailures') !== true) {
+        if (this->getConfig('warnOnWriteFailures') !== true) {
             return;
         }
 
@@ -378,7 +378,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
     protected function duration($ttl): int
     {
         if ($ttl === null) {
-            return $this->_config['duration'];
+            return this->_config['duration'];
         }
         if (is_int($ttl)) {
             return $ttl;

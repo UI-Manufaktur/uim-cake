@@ -51,9 +51,9 @@ class ArrayEngine extends CacheEngine
      */
     public function set($key, $value, $ttl = null): bool
     {
-        $key = $this->_key($key);
-        $expires = time() + $this->duration($ttl);
-        $this->data[$key] = ['exp' => $expires, 'val' => $value];
+        $key = this->_key($key);
+        $expires = time() + this->duration($ttl);
+        this->data[$key] = ['exp' => $expires, 'val' => $value];
 
         return true;
     }
@@ -68,16 +68,16 @@ class ArrayEngine extends CacheEngine
      */
     public function get($key, $default = null)
     {
-        $key = $this->_key($key);
-        if (!isset($this->data[$key])) {
+        $key = this->_key($key);
+        if (!isset(this->data[$key])) {
             return $default;
         }
-        $data = $this->data[$key];
+        $data = this->data[$key];
 
         // Check expiration
         $now = time();
         if ($data['exp'] <= $now) {
-            unset($this->data[$key]);
+            unset(this->data[$key]);
 
             return $default;
         }
@@ -94,13 +94,13 @@ class ArrayEngine extends CacheEngine
      */
     public function increment(string $key, int $offset = 1)
     {
-        if ($this->get($key) === null) {
-            $this->set($key, 0);
+        if (this->get($key) === null) {
+            this->set($key, 0);
         }
-        $key = $this->_key($key);
-        $this->data[$key]['val'] += $offset;
+        $key = this->_key($key);
+        this->data[$key]['val'] += $offset;
 
-        return $this->data[$key]['val'];
+        return this->data[$key]['val'];
     }
 
     /**
@@ -112,13 +112,13 @@ class ArrayEngine extends CacheEngine
      */
     public function decrement(string $key, int $offset = 1)
     {
-        if ($this->get($key) === null) {
-            $this->set($key, 0);
+        if (this->get($key) === null) {
+            this->set($key, 0);
         }
-        $key = $this->_key($key);
-        $this->data[$key]['val'] -= $offset;
+        $key = this->_key($key);
+        this->data[$key]['val'] -= $offset;
 
-        return $this->data[$key]['val'];
+        return this->data[$key]['val'];
     }
 
     /**
@@ -129,8 +129,8 @@ class ArrayEngine extends CacheEngine
      */
     public function delete($key): bool
     {
-        $key = $this->_key($key);
-        unset($this->data[$key]);
+        $key = this->_key($key);
+        unset(this->data[$key]);
 
         return true;
     }
@@ -142,7 +142,7 @@ class ArrayEngine extends CacheEngine
      */
     public function clear(): bool
     {
-        $this->data = [];
+        this->data = [];
 
         return true;
     }
@@ -157,12 +157,12 @@ class ArrayEngine extends CacheEngine
     public function groups(): array
     {
         $result = [];
-        foreach ($this->_config['groups'] as $group) {
-            $key = $this->_config['prefix'] . $group;
-            if (!isset($this->data[$key])) {
-                $this->data[$key] = ['exp' => PHP_INT_MAX, 'val' => 1];
+        foreach (this->_config['groups'] as $group) {
+            $key = this->_config['prefix'] . $group;
+            if (!isset(this->data[$key])) {
+                this->data[$key] = ['exp' => PHP_INT_MAX, 'val' => 1];
             }
-            $value = $this->data[$key]['val'];
+            $value = this->data[$key]['val'];
             $result[] = $group . $value;
         }
 
@@ -178,9 +178,9 @@ class ArrayEngine extends CacheEngine
      */
     public function clearGroup(string $group): bool
     {
-        $key = $this->_config['prefix'] . $group;
-        if (isset($this->data[$key])) {
-            $this->data[$key]['val'] += 1;
+        $key = this->_config['prefix'] . $group;
+        if (isset(this->data[$key])) {
+            this->data[$key]['val'] += 1;
         }
 
         return true;

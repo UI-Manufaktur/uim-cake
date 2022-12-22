@@ -49,11 +49,11 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
     public this(array $config = [])
     {
         parent::__construct($config);
-        foreach ($this->_config['hashers'] as $key => $hasher) {
+        foreach (this->_config['hashers'] as $key => $hasher) {
             if (is_array($hasher) && !isset($hasher['className'])) {
                 $hasher['className'] = $key;
             }
-            $this->_hashers[] = PasswordHasherFactory::build($hasher);
+            this->_hashers[] = PasswordHasherFactory::build($hasher);
         }
     }
 
@@ -67,7 +67,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function hash(string $password)
     {
-        return $this->_hashers[0]->hash($password);
+        return this->_hashers[0]->hash($password);
     }
 
     /**
@@ -82,7 +82,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function check(string $password, string $hashedPassword): bool
     {
-        foreach ($this->_hashers as $hasher) {
+        foreach (this->_hashers as $hasher) {
             if ($hasher->check($password, $hashedPassword)) {
                 return true;
             }
@@ -100,6 +100,6 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      */
     public function needsRehash(string $password): bool
     {
-        return $this->_hashers[0]->needsRehash($password);
+        return this->_hashers[0]->needsRehash($password);
     }
 }

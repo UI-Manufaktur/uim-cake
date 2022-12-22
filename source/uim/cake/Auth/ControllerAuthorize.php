@@ -29,7 +29,7 @@ use Cake\Http\ServerRequest;
  * ```
  *  public function isAuthorized($user)
  *  {
- *      if ($this->request->getParam('admin')) {
+ *      if (this->request->getParam('admin')) {
  *          return $user['role'] === 'admin';
  *      }
  *      return !empty($user);
@@ -56,7 +56,7 @@ class ControllerAuthorize extends BaseAuthorize
     public this(ComponentRegistry $registry, array $config = [])
     {
         parent::__construct($registry, $config);
-        $this->controller($registry->getController());
+        this->controller($registry->getController());
     }
 
     /**
@@ -69,10 +69,10 @@ class ControllerAuthorize extends BaseAuthorize
     public function controller(?Controller $controller = null): Controller
     {
         if ($controller) {
-            $this->_Controller = $controller;
+            this->_Controller = $controller;
         }
 
-        return $this->_Controller;
+        return this->_Controller;
     }
 
     /**
@@ -85,13 +85,13 @@ class ControllerAuthorize extends BaseAuthorize
      */
     public function authorize($user, ServerRequest $request): bool
     {
-        if (!method_exists($this->_Controller, 'isAuthorized')) {
+        if (!method_exists(this->_Controller, 'isAuthorized')) {
             throw new CakeException(sprintf(
                 '%s does not implement an isAuthorized() method.',
-                get_class($this->_Controller)
+                get_class(this->_Controller)
             ));
         }
 
-        return (bool)$this->_Controller->isAuthorized($user);
+        return (bool)this->_Controller->isAuthorized($user);
     }
 }

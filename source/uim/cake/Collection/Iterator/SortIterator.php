@@ -65,7 +65,7 @@ class SortIterator extends Collection
             $items = iterator_to_array((new Collection($items))->unwrap(), false);
         }
 
-        $callback = $this->_propertyExtractor($callback);
+        $callback = this->_propertyExtractor($callback);
         $results = [];
         foreach ($items as $key => $val) {
             $val = $callback($val);
@@ -90,6 +90,6 @@ class SortIterator extends Collection
      */
     public function unwrap(): Traversable
     {
-        return $this->getInnerIterator();
+        return this->getInnerIterator();
     }
 }

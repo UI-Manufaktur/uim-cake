@@ -58,7 +58,7 @@ class ExtractIterator extends Collection
      */
     public this(iterable $items, $path)
     {
-        $this->_extractor = $this->_propertyExtractor($path);
+        this->_extractor = this->_propertyExtractor($path);
         parent::__construct($items);
     }
 
@@ -71,7 +71,7 @@ class ExtractIterator extends Collection
     #[\ReturnTypeWillChange]
     public function current()
     {
-        $extractor = $this->_extractor;
+        $extractor = this->_extractor;
 
         return $extractor(parent::current());
     }
@@ -81,20 +81,20 @@ class ExtractIterator extends Collection
      */
     public function unwrap(): Traversable
     {
-        $iterator = $this->getInnerIterator();
+        $iterator = this->getInnerIterator();
 
         if ($iterator instanceof CollectionInterface) {
             $iterator = $iterator->unwrap();
         }
 
         if (get_class($iterator) !== ArrayIterator::class) {
-            return $this;
+            return this;
         }
 
         // ArrayIterator can be traversed strictly.
         // Let's do that for performance gains
 
-        $callback = $this->_extractor;
+        $callback = this->_extractor;
         $res = [];
 
         foreach ($iterator->getArrayCopy() as $k => $v) {

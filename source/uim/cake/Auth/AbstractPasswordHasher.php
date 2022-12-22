@@ -41,7 +41,7 @@ abstract class AbstractPasswordHasher
      */
     public this(array $config = [])
     {
-        $this->setConfig($config);
+        this->setConfig($config);
     }
 
     /**

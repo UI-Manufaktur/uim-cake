@@ -53,7 +53,7 @@ class WeakPasswordHasher extends AbstractPasswordHasher
      */
     public function hash(string $password)
     {
-        return Security::hash($password, $this->_config['hashType'], true);
+        return Security::hash($password, this->_config['hashType'], true);
     }
 
     /**
@@ -65,6 +65,6 @@ class WeakPasswordHasher extends AbstractPasswordHasher
      */
     public function check(string $password, string $hashedPassword): bool
     {
-        return $hashedPassword === $this->hash($password);
+        return $hashedPassword === this->hash($password);
     }
 }

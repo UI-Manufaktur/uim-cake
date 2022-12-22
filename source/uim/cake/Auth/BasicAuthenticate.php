@@ -31,7 +31,7 @@ use Cake\Http\ServerRequest;
  *
  * Load `AuthComponent` in your controller's `initialize()` and add 'Basic' in 'authenticate' key
  * ```
- *  $this->loadComponent('Auth', [
+ *  this->loadComponent('Auth', [
  *      'authenticate' => ['Basic']
  *      'storage' => 'Memory',
  *      'unauthorizedRedirect' => false,
@@ -63,7 +63,7 @@ class BasicAuthenticate extends BaseAuthenticate
      */
     public function authenticate(ServerRequest $request, Response $response)
     {
-        return $this->getUser($request);
+        return this->getUser($request);
     }
 
     /**
@@ -81,7 +81,7 @@ class BasicAuthenticate extends BaseAuthenticate
             return false;
         }
 
-        return $this->_findUser($username, $pass);
+        return this->_findUser($username, $pass);
     }
 
     /**
@@ -95,7 +95,7 @@ class BasicAuthenticate extends BaseAuthenticate
     public function unauthenticated(ServerRequest $request, Response $response)
     {
         $unauthorizedException = new UnauthorizedException();
-        $unauthorizedException->setHeaders($this->loginHeaders($request));
+        $unauthorizedException->setHeaders(this->loginHeaders($request));
 
         throw $unauthorizedException;
     }
@@ -108,7 +108,7 @@ class BasicAuthenticate extends BaseAuthenticate
      */
     public function loginHeaders(ServerRequest $request): array
     {
-        $realm = $this->getConfig('realm') ?: $request->getEnv('SERVER_NAME');
+        $realm = this->getConfig('realm') ?: $request->getEnv('SERVER_NAME');
 
         return [
             'WWW-Authenticate' => sprintf('Basic realm="%s"', $realm),

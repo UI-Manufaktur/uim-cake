@@ -110,7 +110,7 @@ if (!function_exists('breakpoint')) {
     function breakpoint(): ?string
     {
         if ((PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') && class_exists(PsyShell::class)) {
-            return 'extract(\Psy\Shell::debug(get_defined_vars(), isset($this) ? $this : null));';
+            return 'extract(\Psy\Shell::debug(get_defined_vars(), isset(this) ? this : null));';
         }
         trigger_error(
             'psy/psysh must be installed and you must be in a CLI environment to use the breakpoint function',

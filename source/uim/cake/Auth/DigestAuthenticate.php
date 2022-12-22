@@ -30,7 +30,7 @@ use Cake\Utility\Security;
  * Load `AuthComponent` in your controller's `initialize()` and add 'Digest' in 'authenticate' key
  *
  * ```
- *  $this->loadComponent('Auth', [
+ *  this->loadComponent('Auth', [
  *      'authenticate' => ['Digest'],
  *      'storage' => 'Memory',
  *      'unauthorizedRedirect' => false,
@@ -86,7 +86,7 @@ class DigestAuthenticate extends BasicAuthenticate
      */
     public this(ComponentRegistry $registry, array $config = [])
     {
-        $this->setConfig([
+        this->setConfig([
             'nonceLifetime' => 300,
             'secret' => Security::getSalt(),
             'realm' => null,
@@ -105,26 +105,26 @@ class DigestAuthenticate extends BasicAuthenticate
      */
     public function getUser(ServerRequest $request)
     {
-        $digest = $this->_getDigest($request);
+        $digest = this->_getDigest($request);
         if (empty($digest)) {
             return false;
         }
 
-        $user = $this->_findUser($digest['username']);
+        $user = this->_findUser($digest['username']);
         if (empty($user)) {
             return false;
         }
 
-        if (!$this->validNonce($digest['nonce'])) {
+        if (!this->validNonce($digest['nonce'])) {
             return false;
         }
 
-        $field = $this->_config['fields']['password'];
+        $field = this->_config['fields']['password'];
         $password = $user[$field];
         unset($user[$field]);
 
         $requestMethod = $request->getEnv('ORIGINAL_REQUEST_METHOD') ?: $request->getMethod();
-        $hash = $this->generateResponseHash(
+        $hash = this->generateResponseHash(
             $digest,
             $password,
             (string)$requestMethod
@@ -155,7 +155,7 @@ class DigestAuthenticate extends BasicAuthenticate
             return null;
         }
 
-        return $this->parseAuthData($digest);
+        return this->parseAuthData($digest);
     }
 
     /**
@@ -223,17 +223,17 @@ class DigestAuthenticate extends BasicAuthenticate
      */
     public function loginHeaders(ServerRequest $request): array
     {
-        $realm = $this->_config['realm'] ?: $request->getEnv('SERVER_NAME');
+        $realm = this->_config['realm'] ?: $request->getEnv('SERVER_NAME');
 
         $options = [
             'realm' => $realm,
-            'qop' => $this->_config['qop'],
-            'nonce' => $this->generateNonce(),
-            'opaque' => $this->_config['opaque'] ?: md5($realm),
+            'qop' => this->_config['qop'],
+            'nonce' => this->generateNonce(),
+            'opaque' => this->_config['opaque'] ?: md5($realm),
         ];
 
-        $digest = $this->_getDigest($request);
-        if ($digest && isset($digest['nonce']) && !$this->validNonce($digest['nonce'])) {
+        $digest = this->_getDigest($request);
+        if ($digest && isset($digest['nonce']) && !this->validNonce($digest['nonce'])) {
             $options['stale'] = true;
         }
 
@@ -259,8 +259,8 @@ class DigestAuthenticate extends BasicAuthenticate
      */
     protected function generateNonce(): string
     {
-        $expiryTime = microtime(true) + $this->getConfig('nonceLifetime');
-        $secret = $this->getConfig('secret');
+        $expiryTime = microtime(true) + this->getConfig('nonceLifetime');
+        $secret = this->getConfig('secret');
         $signatureValue = hash_hmac('sha256', $expiryTime . ':' . $secret, $secret);
         $nonceValue = $expiryTime . ':' . $signatureValue;
 
@@ -287,7 +287,7 @@ class DigestAuthenticate extends BasicAuthenticate
         if ($expires < microtime(true)) {
             return false;
         }
-        $secret = $this->getConfig('secret');
+        $secret = this->getConfig('secret');
         $check = hash_hmac('sha256', $expires . ':' . $secret, $secret);
 
         return hash_equals($check, $checksum);
