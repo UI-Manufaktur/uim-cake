@@ -36,7 +36,7 @@ trait FieldTrait
      */
     public function setField($field): void
     {
-        $this->_field = $field;
+        this->_field = $field;
     }
 
     /**
@@ -46,6 +46,6 @@ trait FieldTrait
      */
     public function getField()
     {
-        return $this->_field;
+        return this->_field;
     }
 }

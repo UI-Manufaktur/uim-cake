@@ -43,8 +43,8 @@ class ErrorCodeWaitStrategy implements RetryStrategyInterface
      */
     public this(array $errorCodes, int $retryInterval)
     {
-        $this->errorCodes = $errorCodes;
-        $this->retryInterval = $retryInterval;
+        this->errorCodes = $errorCodes;
+        this->retryInterval = $retryInterval;
     }
 
     /**
@@ -55,10 +55,10 @@ class ErrorCodeWaitStrategy implements RetryStrategyInterface
         if (
             $exception instanceof PDOException &&
             $exception->errorInfo &&
-            in_array($exception->errorInfo[1], $this->errorCodes)
+            in_array($exception->errorInfo[1], this->errorCodes)
         ) {
-            if ($this->retryInterval > 0) {
-                sleep($this->retryInterval);
+            if (this->retryInterval > 0) {
+                sleep(this->retryInterval);
             }
 
             return true;

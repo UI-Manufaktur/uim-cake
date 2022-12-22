@@ -68,8 +68,8 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      */
     public this(string $name, array $params = [], array $types = [], string $returnType = 'string')
     {
-        $this->_name = $name;
-        $this->_returnType = $returnType;
+        this->_name = $name;
+        this->_returnType = $returnType;
         parent::__construct($params, $types, ',');
     }
 
@@ -77,13 +77,13 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      * Sets the name of the SQL function to be invoke in this expression.
      *
      * @param string $name The name of the function
-     * @return $this
+     * @return this
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        this->_name = $name;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -93,7 +93,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      */
     public function getName(): string
     {
-        return $this->_name;
+        return this->_name;
     }
 
     /**
@@ -105,39 +105,39 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      * passed arguments
      * @param bool $prepend Whether to prepend or append to the list of arguments
      * @see \Cake\Database\Expression\FunctionExpression::__construct() for more details.
-     * @return $this
+     * @return this
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     public function add($conditions, array $types = [], bool $prepend = false)
     {
         $put = $prepend ? 'array_unshift' : 'array_push';
-        $typeMap = $this->getTypeMap()->setTypes($types);
+        $typeMap = this->getTypeMap()->setTypes($types);
         foreach ($conditions as $k => $p) {
             if ($p === 'literal') {
-                $put($this->_conditions, $k);
+                $put(this->_conditions, $k);
                 continue;
             }
 
             if ($p === 'identifier') {
-                $put($this->_conditions, new IdentifierExpression($k));
+                $put(this->_conditions, new IdentifierExpression($k));
                 continue;
             }
 
             $type = $typeMap->type($k);
 
             if ($type !== null && !$p instanceof ExpressionInterface) {
-                $p = $this->_castToExpression($p, $type);
+                $p = this->_castToExpression($p, $type);
             }
 
             if ($p instanceof ExpressionInterface) {
-                $put($this->_conditions, $p);
+                $put(this->_conditions, $p);
                 continue;
             }
 
-            $put($this->_conditions, ['value' => $p, 'type' => $type]);
+            $put(this->_conditions, ['value' => $p, 'type' => $type]);
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -146,7 +146,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
     public function sql(ValueBinder $binder): string
     {
         $parts = [];
-        foreach ($this->_conditions as $condition) {
+        foreach (this->_conditions as $condition) {
             if ($condition instanceof Query) {
                 $condition = sprintf('(%s)', $condition->sql($binder));
             } elseif ($condition instanceof ExpressionInterface) {
@@ -159,8 +159,8 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
             $parts[] = $condition;
         }
 
-        return $this->_name . sprintf('(%s)', implode(
-            $this->_conjunction . ' ',
+        return this->_name . sprintf('(%s)', implode(
+            this->_conjunction . ' ',
             $parts
         ));
     }
@@ -173,6 +173,6 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      */
     public function count(): int
     {
-        return 1 + count($this->_conditions);
+        return 1 + count(this->_conditions);
     }
 }

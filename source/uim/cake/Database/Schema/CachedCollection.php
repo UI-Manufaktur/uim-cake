@@ -53,9 +53,9 @@ class CachedCollection implements CollectionInterface
      */
     public this(CollectionInterface $collection, string $prefix, CacheInterface $cacher)
     {
-        $this->collection = $collection;
-        $this->prefix = $prefix;
-        $this->cacher = $cacher;
+        this->collection = $collection;
+        this->prefix = $prefix;
+        this->cacher = $cacher;
     }
 
     /**
@@ -63,7 +63,7 @@ class CachedCollection implements CollectionInterface
      */
     public function listTablesWithoutViews(): array
     {
-        return $this->collection->listTablesWithoutViews();
+        return this->collection->listTablesWithoutViews();
     }
 
     /**
@@ -71,7 +71,7 @@ class CachedCollection implements CollectionInterface
      */
     public function listTables(): array
     {
-        return $this->collection->listTables();
+        return this->collection->listTables();
     }
 
     /**
@@ -80,17 +80,17 @@ class CachedCollection implements CollectionInterface
     public function describe(string $name, array $options = []): TableSchemaInterface
     {
         $options += ['forceRefresh' => false];
-        $cacheKey = $this->cacheKey($name);
+        $cacheKey = this->cacheKey($name);
 
         if (!$options['forceRefresh']) {
-            $cached = $this->cacher->get($cacheKey);
+            $cached = this->cacher->get($cacheKey);
             if ($cached !== null) {
                 return $cached;
             }
         }
 
-        $table = $this->collection->describe($name, $options);
-        $this->cacher->set($cacheKey, $table);
+        $table = this->collection->describe($name, $options);
+        this->cacher->set($cacheKey, $table);
 
         return $table;
     }
@@ -103,20 +103,20 @@ class CachedCollection implements CollectionInterface
      */
     public function cacheKey(string $name): string
     {
-        return $this->prefix . '_' . $name;
+        return this->prefix . '_' . $name;
     }
 
     /**
      * Set a cacher.
      *
      * @param \Psr\SimpleCache\CacheInterface $cacher Cacher object
-     * @return $this
+     * @return this
      */
     public function setCacher(CacheInterface $cacher)
     {
-        $this->cacher = $cacher;
+        this->cacher = $cacher;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -126,6 +126,6 @@ class CachedCollection implements CollectionInterface
      */
     public function getCacher(): CacheInterface
     {
-        return $this->cacher;
+        return this->cacher;
     }
 }

@@ -42,8 +42,8 @@ class PDOStatement extends StatementDecorator
      */
     public this(Statement $statement, DriverInterface $driver)
     {
-        $this->_statement = $statement;
-        $this->_driver = $driver;
+        this->_statement = $statement;
+        this->_driver = $driver;
     }
 
     /**
@@ -54,9 +54,9 @@ class PDOStatement extends StatementDecorator
      */
     public function __get(string $property)
     {
-        if ($property === 'queryString' && isset($this->_statement->queryString)) {
+        if ($property === 'queryString' && isset(this->_statement->queryString)) {
             /** @psalm-suppress NoInterfaceProperties */
-            return $this->_statement->queryString;
+            return this->_statement->queryString;
         }
 
         return null;
@@ -93,9 +93,9 @@ class PDOStatement extends StatementDecorator
             $type = 'string';
         }
         if (!is_int($type)) {
-            [$value, $type] = $this->cast($value, $type);
+            [$value, $type] = this->cast($value, $type);
         }
-        $this->_statement->bindValue($column, $value, $type);
+        this->_statement->bindValue($column, $value, $type);
     }
 
     /**
@@ -118,13 +118,13 @@ class PDOStatement extends StatementDecorator
     public function fetch($type = parent::FETCH_TYPE_NUM)
     {
         if ($type === static::FETCH_TYPE_NUM) {
-            return $this->_statement->fetch(PDO::FETCH_NUM);
+            return this->_statement->fetch(PDO::FETCH_NUM);
         }
         if ($type === static::FETCH_TYPE_ASSOC) {
-            return $this->_statement->fetch(PDO::FETCH_ASSOC);
+            return this->_statement->fetch(PDO::FETCH_ASSOC);
         }
         if ($type === static::FETCH_TYPE_OBJ) {
-            return $this->_statement->fetch(PDO::FETCH_OBJ);
+            return this->_statement->fetch(PDO::FETCH_OBJ);
         }
 
         if (!is_int($type)) {
@@ -134,7 +134,7 @@ class PDOStatement extends StatementDecorator
             ));
         }
 
-        return $this->_statement->fetch($type);
+        return this->_statement->fetch($type);
     }
 
     /**
@@ -155,13 +155,13 @@ class PDOStatement extends StatementDecorator
     public function fetchAll($type = parent::FETCH_TYPE_NUM)
     {
         if ($type === static::FETCH_TYPE_NUM) {
-            return $this->_statement->fetchAll(PDO::FETCH_NUM);
+            return this->_statement->fetchAll(PDO::FETCH_NUM);
         }
         if ($type === static::FETCH_TYPE_ASSOC) {
-            return $this->_statement->fetchAll(PDO::FETCH_ASSOC);
+            return this->_statement->fetchAll(PDO::FETCH_ASSOC);
         }
         if ($type === static::FETCH_TYPE_OBJ) {
-            return $this->_statement->fetchAll(PDO::FETCH_OBJ);
+            return this->_statement->fetchAll(PDO::FETCH_OBJ);
         }
 
         if (!is_int($type)) {
@@ -171,6 +171,6 @@ class PDOStatement extends StatementDecorator
             ));
         }
 
-        return $this->_statement->fetchAll($type);
+        return this->_statement->fetchAll($type);
     }
 }

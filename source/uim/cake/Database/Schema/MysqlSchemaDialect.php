@@ -42,7 +42,7 @@ class MysqlSchemaDialect extends SchemaDialect
      */
     public function listTablesSql(array $config): array
     {
-        return ['SHOW FULL TABLES FROM ' . $this->_driver->quoteIdentifier($config['database']), []];
+        return ['SHOW FULL TABLES FROM ' . this->_driver->quoteIdentifier($config['database']), []];
     }
 
     /**
@@ -55,7 +55,7 @@ class MysqlSchemaDialect extends SchemaDialect
     public function listTablesWithoutViewsSql(array $config): array
     {
         return [
-            'SHOW FULL TABLES FROM ' . $this->_driver->quoteIdentifier($config['database'])
+            'SHOW FULL TABLES FROM ' . this->_driver->quoteIdentifier($config['database'])
             . ' WHERE TABLE_TYPE = "BASE TABLE"'
         , []];
     }
@@ -65,7 +65,7 @@ class MysqlSchemaDialect extends SchemaDialect
      */
     public function describeColumnSql(string $tableName, array $config): array
     {
-        return ['SHOW FULL COLUMNS FROM ' . $this->_driver->quoteIdentifier($tableName), []];
+        return ['SHOW FULL COLUMNS FROM ' . this->_driver->quoteIdentifier($tableName), []];
     }
 
     /**
@@ -73,7 +73,7 @@ class MysqlSchemaDialect extends SchemaDialect
      */
     public function describeIndexSql(string $tableName, array $config): array
     {
-        return ['SHOW INDEXES FROM ' . $this->_driver->quoteIdentifier($tableName), []];
+        return ['SHOW INDEXES FROM ' . this->_driver->quoteIdentifier($tableName), []];
     }
 
     /**
@@ -122,7 +122,7 @@ class MysqlSchemaDialect extends SchemaDialect
             $precision = (int)$precision;
         }
 
-        $type = $this->_applyTypeSpecificColumnConversion(
+        $type = this->_applyTypeSpecificColumnConversion(
             $col,
             compact('length', 'precision', 'scale')
         );
@@ -212,7 +212,7 @@ class MysqlSchemaDialect extends SchemaDialect
      */
     public function convertColumnDescription(TableSchema $schema, array $row): void
     {
-        $field = $this->_convertColumn($row['Type']);
+        $field = this->_convertColumn($row['Type']);
         $field += [
             'null' => $row['Null'] === 'YES',
             'default' => $row['Default'],
@@ -309,8 +309,8 @@ class MysqlSchemaDialect extends SchemaDialect
             'type' => TableSchema::CONSTRAINT_FOREIGN,
             'columns' => [$row['COLUMN_NAME']],
             'references' => [$row['REFERENCED_TABLE_NAME'], $row['REFERENCED_COLUMN_NAME']],
-            'update' => $this->_convertOnClause($row['UPDATE_RULE']),
-            'delete' => $this->_convertOnClause($row['DELETE_RULE']),
+            'update' => this->_convertOnClause($row['UPDATE_RULE']),
+            'delete' => this->_convertOnClause($row['DELETE_RULE']),
         ];
         $name = $row['CONSTRAINT_NAME'];
         $schema->addConstraint($name, $data);
@@ -354,13 +354,13 @@ class MysqlSchemaDialect extends SchemaDialect
         /** @var array $data */
         $data = $schema->getColumn($name);
 
-        $sql = $this->_getTypeSpecificColumnSql($data['type'], $schema, $name);
+        $sql = this->_getTypeSpecificColumnSql($data['type'], $schema, $name);
         if ($sql !== null) {
             return $sql;
         }
 
-        $out = $this->_driver->quoteIdentifier($name);
-        $nativeJson = $this->_driver->supports(DriverInterface::FEATURE_JSON);
+        $out = this->_driver->quoteIdentifier($name);
+        $nativeJson = this->_driver->supports(DriverInterface::FEATURE_JSON);
 
         $typeMap = [
             TableSchema::TYPE_TINYINTEGER => ' TINYINT',
@@ -530,11 +530,11 @@ class MysqlSchemaDialect extends SchemaDialect
             unset($data['default']);
         }
         if (isset($data['default'])) {
-            $out .= ' DEFAULT ' . $this->_driver->schemaValue($data['default']);
+            $out .= ' DEFAULT ' . this->_driver->schemaValue($data['default']);
             unset($data['default']);
         }
         if (isset($data['comment']) && $data['comment'] !== '') {
-            $out .= ' COMMENT ' . $this->_driver->schemaValue($data['comment']);
+            $out .= ' COMMENT ' . this->_driver->schemaValue($data['comment']);
         }
 
         return $out;
@@ -549,7 +549,7 @@ class MysqlSchemaDialect extends SchemaDialect
         $data = $schema->getConstraint($name);
         if ($data['type'] === TableSchema::CONSTRAINT_PRIMARY) {
             $columns = array_map(
-                [$this->_driver, 'quoteIdentifier'],
+                [this->_driver, 'quoteIdentifier'],
                 $data['columns']
             );
 
@@ -563,9 +563,9 @@ class MysqlSchemaDialect extends SchemaDialect
         if ($data['type'] === TableSchema::CONSTRAINT_FOREIGN) {
             $out = 'CONSTRAINT ';
         }
-        $out .= $this->_driver->quoteIdentifier($name);
+        $out .= this->_driver->quoteIdentifier($name);
 
-        return $this->_keySql($out, $data);
+        return this->_keySql($out, $data);
     }
 
     /**
@@ -580,8 +580,8 @@ class MysqlSchemaDialect extends SchemaDialect
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
             if ($constraint['type'] === TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = $this->_driver->quoteIdentifier($schema->name());
-                $sql[] = sprintf($sqlPattern, $tableName, $this->constraintSql($schema, $name));
+                $tableName = this->_driver->quoteIdentifier($schema->name());
+                $sql[] = sprintf($sqlPattern, $tableName, this->constraintSql($schema, $name));
             }
         }
 
@@ -600,8 +600,8 @@ class MysqlSchemaDialect extends SchemaDialect
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
             if ($constraint['type'] === TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = $this->_driver->quoteIdentifier($schema->name());
-                $constraintName = $this->_driver->quoteIdentifier($name);
+                $tableName = this->_driver->quoteIdentifier($schema->name());
+                $constraintName = this->_driver->quoteIdentifier($name);
                 $sql[] = sprintf($sqlPattern, $tableName, $constraintName);
             }
         }
@@ -623,9 +623,9 @@ class MysqlSchemaDialect extends SchemaDialect
         if ($data['type'] === TableSchema::INDEX_FULLTEXT) {
             $out = 'FULLTEXT KEY ';
         }
-        $out .= $this->_driver->quoteIdentifier($name);
+        $out .= this->_driver->quoteIdentifier($name);
 
-        return $this->_keySql($out, $data);
+        return this->_keySql($out, $data);
     }
 
     /**
@@ -638,7 +638,7 @@ class MysqlSchemaDialect extends SchemaDialect
     protected function _keySql(string $prefix, array $data): string
     {
         $columns = array_map(
-            [$this->_driver, 'quoteIdentifier'],
+            [this->_driver, 'quoteIdentifier'],
             $data['columns']
         );
         foreach ($data['columns'] as $i => $column) {
@@ -650,10 +650,10 @@ class MysqlSchemaDialect extends SchemaDialect
             return $prefix . sprintf(
                 ' FOREIGN KEY (%s) REFERENCES %s (%s) ON UPDATE %s ON DELETE %s',
                 implode(', ', $columns),
-                $this->_driver->quoteIdentifier($data['references'][0]),
-                $this->_convertConstraintColumns($data['references'][1]),
-                $this->_foreignOnClause($data['update']),
-                $this->_foreignOnClause($data['delete'])
+                this->_driver->quoteIdentifier($data['references'][0]),
+                this->_convertConstraintColumns($data['references'][1]),
+                this->_foreignOnClause($data['update']),
+                this->_foreignOnClause($data['delete'])
             );
         }
 

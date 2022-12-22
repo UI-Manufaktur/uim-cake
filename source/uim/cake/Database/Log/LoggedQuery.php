@@ -83,7 +83,7 @@ class LoggedQuery implements JsonSerializable
             }
 
             if (is_bool($p)) {
-                if ($this->driver instanceof Sqlserver) {
+                if (this->driver instanceof Sqlserver) {
                     return $p ? '1' : '0';
                 }
 
@@ -109,7 +109,7 @@ class LoggedQuery implements JsonSerializable
             }
 
             return $p;
-        }, $this->params);
+        }, this->params);
 
         $keys = [];
         $limit = is_int(key($params)) ? 1 : -1;
@@ -117,7 +117,7 @@ class LoggedQuery implements JsonSerializable
             $keys[] = is_string($key) ? "/:$key\b/" : '/[?]/';
         }
 
-        return preg_replace($keys, $params, $this->query, $limit);
+        return preg_replace($keys, $params, this->query, $limit);
     }
 
     /**
@@ -128,8 +128,8 @@ class LoggedQuery implements JsonSerializable
     public function getContext(): array
     {
         return [
-            'numRows' => $this->numRows,
-            'took' => $this->took,
+            'numRows' => this->numRows,
+            'took' => this->took,
         ];
     }
 
@@ -140,7 +140,7 @@ class LoggedQuery implements JsonSerializable
      */
     public function jsonSerialize(): array
     {
-        $error = $this->error;
+        $error = this->error;
         if ($error !== null) {
             $error = [
                 'class' => get_class($error),
@@ -150,10 +150,10 @@ class LoggedQuery implements JsonSerializable
         }
 
         return [
-            'query' => $this->query,
-            'numRows' => $this->numRows,
-            'params' => $this->params,
-            'took' => $this->took,
+            'query' => this->query,
+            'numRows' => this->numRows,
+            'params' => this->params,
+            'took' => this->took,
             'error' => $error,
         ];
     }
@@ -165,9 +165,9 @@ class LoggedQuery implements JsonSerializable
      */
     public function __toString(): string
     {
-        $sql = $this->query;
-        if (!empty($this->params)) {
-            $sql = $this->interpolate();
+        $sql = this->query;
+        if (!empty(this->params)) {
+            $sql = this->interpolate();
         }
 
         return $sql;

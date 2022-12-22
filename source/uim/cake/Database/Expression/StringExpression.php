@@ -41,8 +41,8 @@ class StringExpression implements ExpressionInterface
      */
     public this(string $string, string $collation)
     {
-        $this->string = $string;
-        $this->collation = $collation;
+        this->string = $string;
+        this->collation = $collation;
     }
 
     /**
@@ -53,7 +53,7 @@ class StringExpression implements ExpressionInterface
      */
     public function setCollation(string $collation): void
     {
-        $this->collation = $collation;
+        this->collation = $collation;
     }
 
     /**
@@ -63,7 +63,7 @@ class StringExpression implements ExpressionInterface
      */
     public function getCollation(): string
     {
-        return $this->collation;
+        return this->collation;
     }
 
     /**
@@ -72,9 +72,9 @@ class StringExpression implements ExpressionInterface
     public function sql(ValueBinder $binder): string
     {
         $placeholder = $binder->placeholder('c');
-        $binder->bind($placeholder, $this->string, 'string');
+        $binder->bind($placeholder, this->string, 'string');
 
-        return $placeholder . ' COLLATE ' . $this->collation;
+        return $placeholder . ' COLLATE ' . this->collation;
     }
 
     /**
@@ -82,6 +82,6 @@ class StringExpression implements ExpressionInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        return $this;
+        return this;
     }
 }

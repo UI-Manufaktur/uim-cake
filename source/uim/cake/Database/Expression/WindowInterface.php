@@ -50,7 +50,7 @@ interface WindowInterface
      * Adds one or more partition expressions to the window.
      *
      * @param \Cake\Database\ExpressionInterface|\Closure|array<\Cake\Database\ExpressionInterface|string>|string $partitions Partition expressions
-     * @return $this
+     * @return this
      */
     public function partition($partitions);
 
@@ -58,7 +58,7 @@ interface WindowInterface
      * Adds one or more order clauses to the window.
      *
      * @param \Cake\Database\ExpressionInterface|\Closure|array<\Cake\Database\ExpressionInterface|string>|string $fields Order expressions
-     * @return $this
+     * @return this
      */
     public function order($fields);
 
@@ -81,7 +81,7 @@ interface WindowInterface
      * @param \Cake\Database\ExpressionInterface|string|int|null $start Frame start
      * @param \Cake\Database\ExpressionInterface|string|int|null $end Frame end
      *  If not passed in, only frame start SQL will be generated.
-     * @return $this
+     * @return this
      */
     public function range($start, $end = 0);
 
@@ -93,7 +93,7 @@ interface WindowInterface
      * @param int|null $start Frame start
      * @param int|null $end Frame end
      *  If not passed in, only frame start SQL will be generated.
-     * @return $this
+     * @return this
      */
     public function rows(?int $start, ?int $end = 0);
 
@@ -105,7 +105,7 @@ interface WindowInterface
      * @param int|null $start Frame start
      * @param int|null $end Frame end
      *  If not passed in, only frame start SQL will be generated.
-     * @return $this
+     * @return this
      */
     public function groups(?int $start, ?int $end = 0);
 
@@ -126,7 +126,7 @@ interface WindowInterface
      * @param string $startDirection Frame start direction
      * @param \Cake\Database\ExpressionInterface|string|int|null $endOffset Frame end offset
      * @param string $endDirection Frame end direction
-     * @return $this
+     * @return this
      * @throws \InvalidArgumentException WHen offsets are negative.
      * @psalm-param self::RANGE|self::ROWS|self::GROUPS $type
      * @psalm-param self::PRECEDING|self::FOLLOWING $startDirection
@@ -143,21 +143,21 @@ interface WindowInterface
     /**
      * Adds current row frame exclusion.
      *
-     * @return $this
+     * @return this
      */
     public function excludeCurrent();
 
     /**
      * Adds group frame exclusion.
      *
-     * @return $this
+     * @return this
      */
     public function excludeGroup();
 
     /**
      * Adds ties frame exclusion.
      *
-     * @return $this
+     * @return this
      */
     public function excludeTies();
 }

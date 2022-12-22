@@ -55,7 +55,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public this(string $name = '')
     {
-        $this->name = new IdentifierExpression($name);
+        this->name = new IdentifierExpression($name);
     }
 
     /**
@@ -68,20 +68,20 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function isNamedOnly(): bool
     {
-        return $this->name->getIdentifier() && (!$this->partitions && !$this->frame && !$this->order);
+        return this->name->getIdentifier() && (!this->partitions && !this->frame && !this->order);
     }
 
     /**
      * Sets the window name.
      *
      * @param string $name Window name
-     * @return $this
+     * @return this
      */
     public function name(string $name)
     {
-        $this->name = new IdentifierExpression($name);
+        this->name = new IdentifierExpression($name);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -90,7 +90,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     public function partition($partitions)
     {
         if (!$partitions) {
-            return $this;
+            return this;
         }
 
         if ($partitions instanceof Closure) {
@@ -107,9 +107,9 @@ class WindowExpression implements ExpressionInterface, WindowInterface
             }
         }
 
-        $this->partitions = array_merge($this->partitions, $partitions);
+        this->partitions = array_merge(this->partitions, $partitions);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -118,20 +118,20 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     public function order($fields)
     {
         if (!$fields) {
-            return $this;
+            return this;
         }
 
-        if ($this->order === null) {
-            $this->order = new OrderByExpression();
+        if (this->order === null) {
+            this->order = new OrderByExpression();
         }
 
         if ($fields instanceof Closure) {
             $fields = $fields(new QueryExpression([], [], ''));
         }
 
-        $this->order->add($fields);
+        this->order->add($fields);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -139,7 +139,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function range($start, $end = 0)
     {
-        return $this->frame(self::RANGE, $start, self::PRECEDING, $end, self::FOLLOWING);
+        return this->frame(self::RANGE, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
     /**
@@ -147,7 +147,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function rows(?int $start, ?int $end = 0)
     {
-        return $this->frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
+        return this->frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
     /**
@@ -155,7 +155,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function groups(?int $start, ?int $end = 0)
     {
-        return $this->frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
+        return this->frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
     /**
@@ -168,7 +168,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
         $endOffset,
         string $endDirection
     ) {
-        $this->frame = [
+        this->frame = [
             'type' => $type,
             'start' => [
                 'offset' => $startOffset,
@@ -180,7 +180,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
             ],
         ];
 
-        return $this;
+        return this;
     }
 
     /**
@@ -188,9 +188,9 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function excludeCurrent()
     {
-        $this->exclusion = 'CURRENT ROW';
+        this->exclusion = 'CURRENT ROW';
 
-        return $this;
+        return this;
     }
 
     /**
@@ -198,9 +198,9 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function excludeGroup()
     {
-        $this->exclusion = 'GROUP';
+        this->exclusion = 'GROUP';
 
-        return $this;
+        return this;
     }
 
     /**
@@ -208,9 +208,9 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function excludeTies()
     {
-        $this->exclusion = 'TIES';
+        this->exclusion = 'TIES';
 
-        return $this;
+        return this;
     }
 
     /**
@@ -219,39 +219,39 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     public function sql(ValueBinder $binder): string
     {
         $clauses = [];
-        if ($this->name->getIdentifier()) {
-            $clauses[] = $this->name->sql($binder);
+        if (this->name->getIdentifier()) {
+            $clauses[] = this->name->sql($binder);
         }
 
-        if ($this->partitions) {
+        if (this->partitions) {
             $expressions = [];
-            foreach ($this->partitions as $partition) {
+            foreach (this->partitions as $partition) {
                 $expressions[] = $partition->sql($binder);
             }
 
             $clauses[] = 'PARTITION BY ' . implode(', ', $expressions);
         }
 
-        if ($this->order) {
-            $clauses[] = $this->order->sql($binder);
+        if (this->order) {
+            $clauses[] = this->order->sql($binder);
         }
 
-        if ($this->frame) {
-            $start = $this->buildOffsetSql(
+        if (this->frame) {
+            $start = this->buildOffsetSql(
                 $binder,
-                $this->frame['start']['offset'],
-                $this->frame['start']['direction']
+                this->frame['start']['offset'],
+                this->frame['start']['direction']
             );
-            $end = $this->buildOffsetSql(
+            $end = this->buildOffsetSql(
                 $binder,
-                $this->frame['end']['offset'],
-                $this->frame['end']['direction']
+                this->frame['end']['offset'],
+                this->frame['end']['direction']
             );
 
-            $frameSql = sprintf('%s BETWEEN %s AND %s', $this->frame['type'], $start, $end);
+            $frameSql = sprintf('%s BETWEEN %s AND %s', this->frame['type'], $start, $end);
 
-            if ($this->exclusion !== null) {
-                $frameSql .= ' EXCLUDE ' . $this->exclusion;
+            if (this->exclusion !== null) {
+                $frameSql .= ' EXCLUDE ' . this->exclusion;
             }
 
             $clauses[] = $frameSql;
@@ -265,31 +265,31 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        $callback($this->name);
-        foreach ($this->partitions as $partition) {
+        $callback(this->name);
+        foreach (this->partitions as $partition) {
             $callback($partition);
             $partition->traverse($callback);
         }
 
-        if ($this->order) {
-            $callback($this->order);
-            $this->order->traverse($callback);
+        if (this->order) {
+            $callback(this->order);
+            this->order->traverse($callback);
         }
 
-        if ($this->frame !== null) {
-            $offset = $this->frame['start']['offset'];
+        if (this->frame !== null) {
+            $offset = this->frame['start']['offset'];
             if ($offset instanceof ExpressionInterface) {
                 $callback($offset);
                 $offset->traverse($callback);
             }
-            $offset = $this->frame['end']['offset'] ?? null;
+            $offset = this->frame['end']['offset'] ?? null;
             if ($offset instanceof ExpressionInterface) {
                 $callback($offset);
                 $offset->traverse($callback);
             }
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -324,12 +324,12 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     public function __clone()
     {
-        $this->name = clone $this->name;
-        foreach ($this->partitions as $i => $partition) {
-            $this->partitions[$i] = clone $partition;
+        this->name = clone this->name;
+        foreach (this->partitions as $i => $partition) {
+            this->partitions[$i] = clone $partition;
         }
-        if ($this->order !== null) {
-            $this->order = clone $this->order;
+        if (this->order !== null) {
+            this->order = clone this->order;
         }
     }
 }

@@ -34,12 +34,12 @@ trait BufferResultsTrait
      * Whether to buffer results in php
      *
      * @param bool $buffer Toggle buffering
-     * @return $this
+     * @return this
      */
     public function bufferResults(bool $buffer)
     {
-        $this->_bufferResults = $buffer;
+        this->_bufferResults = $buffer;
 
-        return $this;
+        return this;
     }
 }

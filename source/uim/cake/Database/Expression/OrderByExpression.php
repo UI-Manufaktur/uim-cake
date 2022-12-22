@@ -43,7 +43,7 @@ class OrderByExpression extends QueryExpression
     public function sql(ValueBinder $binder): string
     {
         $order = [];
-        foreach ($this->_conditions as $k => $direction) {
+        foreach (this->_conditions as $k => $direction) {
             if ($direction instanceof ExpressionInterface) {
                 $direction = $direction->sql($binder);
             }
@@ -83,6 +83,6 @@ class OrderByExpression extends QueryExpression
             }
         }
 
-        $this->_conditions = array_merge($this->_conditions, $conditions);
+        this->_conditions = array_merge(this->_conditions, $conditions);
     }
 }

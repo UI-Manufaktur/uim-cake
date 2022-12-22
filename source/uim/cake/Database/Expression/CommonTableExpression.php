@@ -69,9 +69,9 @@ class CommonTableExpression implements ExpressionInterface
      */
     public this(string $name = '', $query = null)
     {
-        $this->name = new IdentifierExpression($name);
+        this->name = new IdentifierExpression($name);
         if ($query) {
-            $this->query($query);
+            this->query($query);
         }
     }
 
@@ -82,20 +82,20 @@ class CommonTableExpression implements ExpressionInterface
      * in select, insert, etc queries.
      *
      * @param string $name The CTE name.
-     * @return $this
+     * @return this
      */
     public function name(string $name)
     {
-        $this->name = new IdentifierExpression($name);
+        this->name = new IdentifierExpression($name);
 
-        return $this;
+        return this;
     }
 
     /**
      * Sets the query for this CTE.
      *
      * @param \Cake\Database\ExpressionInterface|\Closure $query CTE query
-     * @return $this
+     * @return this
      */
     public function query($query)
     {
@@ -107,16 +107,16 @@ class CommonTableExpression implements ExpressionInterface
                 );
             }
         }
-        $this->query = $query;
+        this->query = $query;
 
-        return $this;
+        return this;
     }
 
     /**
      * Adds one or more fields (arguments) to the CTE.
      *
      * @param \Cake\Database\Expression\IdentifierExpression|array<\Cake\Database\Expression\IdentifierExpression>|array<string>|string $fields Field names
-     * @return $this
+     * @return this
      */
     public function field($fields)
     {
@@ -126,33 +126,33 @@ class CommonTableExpression implements ExpressionInterface
                 $field = new IdentifierExpression($field);
             }
         }
-        $this->fields = array_merge($this->fields, $fields);
+        this->fields = array_merge(this->fields, $fields);
 
-        return $this;
+        return this;
     }
 
     /**
      * Sets this CTE as materialized.
      *
-     * @return $this
+     * @return this
      */
     public function materialized()
     {
-        $this->materialized = 'MATERIALIZED';
+        this->materialized = 'MATERIALIZED';
 
-        return $this;
+        return this;
     }
 
     /**
      * Sets this CTE as not materialized.
      *
-     * @return $this
+     * @return this
      */
     public function notMaterialized()
     {
-        $this->materialized = 'NOT MATERIALIZED';
+        this->materialized = 'NOT MATERIALIZED';
 
-        return $this;
+        return this;
     }
 
     /**
@@ -162,19 +162,19 @@ class CommonTableExpression implements ExpressionInterface
      */
     public function isRecursive(): bool
     {
-        return $this->recursive;
+        return this->recursive;
     }
 
     /**
      * Sets this CTE as recursive.
      *
-     * @return $this
+     * @return this
      */
     public function recursive()
     {
-        $this->recursive = true;
+        this->recursive = true;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -183,21 +183,21 @@ class CommonTableExpression implements ExpressionInterface
     public function sql(ValueBinder $binder): string
     {
         $fields = '';
-        if ($this->fields) {
+        if (this->fields) {
             $expressions = array_map(function (IdentifierExpression $e) use ($binder) {
                 return $e->sql($binder);
-            }, $this->fields);
+            }, this->fields);
             $fields = sprintf('(%s)', implode(', ', $expressions));
         }
 
-        $suffix = $this->materialized ? $this->materialized . ' ' : '';
+        $suffix = this->materialized ? this->materialized . ' ' : '';
 
         return sprintf(
             '%s%s AS %s(%s)',
-            $this->name->sql($binder),
+            this->name->sql($binder),
             $fields,
             $suffix,
-            $this->query ? $this->query->sql($binder) : ''
+            this->query ? this->query->sql($binder) : ''
         );
     }
 
@@ -206,18 +206,18 @@ class CommonTableExpression implements ExpressionInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        $callback($this->name);
-        foreach ($this->fields as $field) {
+        $callback(this->name);
+        foreach (this->fields as $field) {
             $callback($field);
             $field->traverse($callback);
         }
 
-        if ($this->query) {
-            $callback($this->query);
-            $this->query->traverse($callback);
+        if (this->query) {
+            $callback(this->query);
+            this->query->traverse($callback);
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -227,13 +227,13 @@ class CommonTableExpression implements ExpressionInterface
      */
     public function __clone()
     {
-        $this->name = clone $this->name;
-        if ($this->query) {
-            $this->query = clone $this->query;
+        this->name = clone this->name;
+        if (this->query) {
+            this->query = clone this->query;
         }
 
-        foreach ($this->fields as $key => $field) {
-            $this->fields[$key] = clone $field;
+        foreach (this->fields as $key => $field) {
+            this->fields[$key] = clone $field;
         }
     }
 }

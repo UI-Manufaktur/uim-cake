@@ -50,8 +50,8 @@ class IdentifierExpression implements ExpressionInterface
      */
     public this(string $identifier, ?string $collation = null)
     {
-        $this->_identifier = $identifier;
-        $this->collation = $collation;
+        this->_identifier = $identifier;
+        this->collation = $collation;
     }
 
     /**
@@ -62,7 +62,7 @@ class IdentifierExpression implements ExpressionInterface
      */
     public function setIdentifier(string $identifier): void
     {
-        $this->_identifier = $identifier;
+        this->_identifier = $identifier;
     }
 
     /**
@@ -72,7 +72,7 @@ class IdentifierExpression implements ExpressionInterface
      */
     public function getIdentifier(): string
     {
-        return $this->_identifier;
+        return this->_identifier;
     }
 
     /**
@@ -83,7 +83,7 @@ class IdentifierExpression implements ExpressionInterface
      */
     public function setCollation(string $collation): void
     {
-        $this->collation = $collation;
+        this->collation = $collation;
     }
 
     /**
@@ -93,7 +93,7 @@ class IdentifierExpression implements ExpressionInterface
      */
     public function getCollation(): ?string
     {
-        return $this->collation;
+        return this->collation;
     }
 
     /**
@@ -101,9 +101,9 @@ class IdentifierExpression implements ExpressionInterface
      */
     public function sql(ValueBinder $binder): string
     {
-        $sql = $this->_identifier;
-        if ($this->collation) {
-            $sql .= ' COLLATE ' . $this->collation;
+        $sql = this->_identifier;
+        if (this->collation) {
+            $sql .= ' COLLATE ' . this->collation;
         }
 
         return $sql;
@@ -114,6 +114,6 @@ class IdentifierExpression implements ExpressionInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        return $this;
+        return this;
     }
 }
