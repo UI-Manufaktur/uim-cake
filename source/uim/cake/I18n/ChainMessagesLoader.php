@@ -49,7 +49,7 @@ class ChainMessagesLoader
      * @return \Cake\I18n\Package
      * @throws \RuntimeException if any of the loaders in the chain is not a valid callable
      */
-    public function __invoke(): Package
+    function __invoke(): Package
     {
         foreach (this->_loaders as $k => $loader) {
             if (!is_callable($loader)) {

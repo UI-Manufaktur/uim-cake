@@ -42,7 +42,7 @@ trait EmailTrait
      * @before
      * @return void
      */
-    public function setupTransports(): void
+    function setupTransports(): void
     {
         TestEmailTransport::replaceAllTransports();
     }
@@ -53,7 +53,7 @@ trait EmailTrait
      * @after
      * @return void
      */
-    public function cleanupEmailTrait(): void
+    function cleanupEmailTrait(): void
     {
         TestEmailTransport::clearMessages();
     }
@@ -65,7 +65,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailCount(int $count, string $message = ''): void
+    function assertMailCount(int $count, string $message = ''): void
     {
         this->assertThat($count, new MailCount(), $message);
     }
@@ -76,7 +76,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertNoMailSent(string $message = ''): void
+    function assertNoMailSent(string $message = ''): void
     {
         this->assertThat(null, new NoMailSent(), $message);
     }
@@ -89,7 +89,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSentToAt(int $at, string $address, string $message = ''): void
+    function assertMailSentToAt(int $at, string $address, string $message = ''): void
     {
         this->assertThat($address, new MailSentTo($at), $message);
     }
@@ -102,7 +102,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSentFromAt(int $at, string $address, string $message = ''): void
+    function assertMailSentFromAt(int $at, string $address, string $message = ''): void
     {
         this->assertThat($address, new MailSentFrom($at), $message);
     }
@@ -115,7 +115,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailContainsAt(int $at, string $contents, string $message = ''): void
+    function assertMailContainsAt(int $at, string $contents, string $message = ''): void
     {
         this->assertThat($contents, new MailContains($at), $message);
     }
@@ -128,7 +128,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailContainsHtmlAt(int $at, string $contents, string $message = ''): void
+    function assertMailContainsHtmlAt(int $at, string $contents, string $message = ''): void
     {
         this->assertThat($contents, new MailContainsHtml($at), $message);
     }
@@ -141,7 +141,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailContainsTextAt(int $at, string $contents, string $message = ''): void
+    function assertMailContainsTextAt(int $at, string $contents, string $message = ''): void
     {
         this->assertThat($contents, new MailContainsText($at), $message);
     }
@@ -155,7 +155,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSentWithAt(int $at, string $expected, string $parameter, string $message = ''): void
+    function assertMailSentWithAt(int $at, string $expected, string $parameter, string $message = ''): void
     {
         this->assertThat($expected, new MailSentWith($at, $parameter), $message);
     }
@@ -167,7 +167,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSentTo(string $address, string $message = ''): void
+    function assertMailSentTo(string $address, string $message = ''): void
     {
         this->assertThat($address, new MailSentTo(), $message);
     }
@@ -179,7 +179,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSentFrom($address, string $message = ''): void
+    function assertMailSentFrom($address, string $message = ''): void
     {
         this->assertThat($address, new MailSentFrom(), $message);
     }
@@ -191,7 +191,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailContains(string $contents, string $message = ''): void
+    function assertMailContains(string $contents, string $message = ''): void
     {
         this->assertThat($contents, new MailContains(), $message);
     }
@@ -204,7 +204,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailContainsAttachment(string $filename, array $file = [], string $message = ''): void
+    function assertMailContainsAttachment(string $filename, array $file = [], string $message = ''): void
     {
         this->assertThat([$filename, $file], new MailContainsAttachment(), $message);
     }
@@ -216,7 +216,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailContainsHtml(string $contents, string $message = ''): void
+    function assertMailContainsHtml(string $contents, string $message = ''): void
     {
         this->assertThat($contents, new MailContainsHtml(), $message);
     }
@@ -228,7 +228,7 @@ trait EmailTrait
      * @param string $message Message to display if assertion fails.
      * @return void
      */
-    public function assertMailContainsText(string $expected, string $message = ''): void
+    function assertMailContainsText(string $expected, string $message = ''): void
     {
         this->assertThat($expected, new MailContainsText(), $message);
     }
@@ -241,7 +241,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSentWith(string $expected, string $parameter, string $message = ''): void
+    function assertMailSentWith(string $expected, string $parameter, string $message = ''): void
     {
         this->assertThat($expected, new MailSentWith(null, $parameter), $message);
     }
@@ -253,7 +253,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSubjectContains(string $contents, string $message = ''): void
+    function assertMailSubjectContains(string $contents, string $message = ''): void
     {
         this->assertThat($contents, new MailSubjectContains(), $message);
     }
@@ -266,7 +266,7 @@ trait EmailTrait
      * @param string $message Message
      * @return void
      */
-    public function assertMailSubjectContainsAt(int $at, string $contents, string $message = ''): void
+    function assertMailSubjectContainsAt(int $at, string $contents, string $message = ''): void
     {
         this->assertThat($contents, new MailSubjectContains($at), $message);
     }

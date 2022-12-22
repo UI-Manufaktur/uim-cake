@@ -199,7 +199,7 @@ trait IntegrationTestTrait
      * @return void
      * @psalm-suppress PossiblyNullPropertyAssignmentValue
      */
-    public function cleanup(): void
+    function cleanup(): void
     {
         this->_request = [];
         this->_session = [];
@@ -223,7 +223,7 @@ trait IntegrationTestTrait
      *
      * @return void
      */
-    public function enableSecurityToken(): void
+    function enableSecurityToken(): void
     {
         this->_securityToken = true;
     }
@@ -234,7 +234,7 @@ trait IntegrationTestTrait
      * @param array<string> $unlockedFields List of fields that are excluded from field validation.
      * @return void
      */
-    public function setUnlockedFields(array $unlockedFields = []): void
+    function setUnlockedFields(array $unlockedFields = []): void
     {
         this->_unlockedFields = $unlockedFields;
     }
@@ -248,7 +248,7 @@ trait IntegrationTestTrait
      * @param string $cookieName The name of the csrf token cookie.
      * @return void
      */
-    public function enableCsrfToken(string $cookieName = 'csrfToken'): void
+    function enableCsrfToken(string $cookieName = 'csrfToken'): void
     {
         this->_csrfToken = true;
         this->_csrfKeyName = $cookieName;
@@ -260,7 +260,7 @@ trait IntegrationTestTrait
      *
      * @return void
      */
-    public function enableRetainFlashMessages(): void
+    function enableRetainFlashMessages(): void
     {
         this->_retainFlashMessages = true;
     }
@@ -277,7 +277,7 @@ trait IntegrationTestTrait
      * @param array $data The request data to use.
      * @return void
      */
-    public function configRequest(array $data): void
+    function configRequest(array $data): void
     {
         this->_request = $data + this->_request;
     }
@@ -295,7 +295,7 @@ trait IntegrationTestTrait
      * @param array $data The session data to use.
      * @return void
      */
-    public function session(array $data): void
+    function session(array $data): void
     {
         this->_session = $data + this->_session;
     }
@@ -314,7 +314,7 @@ trait IntegrationTestTrait
      * @param mixed $value The value of the cookie.
      * @return void
      */
-    public function cookie(string $name, $value): void
+    function cookie(string $name, $value): void
     {
         this->_cookie[$name] = $value;
     }
@@ -343,7 +343,7 @@ trait IntegrationTestTrait
      * @return void
      * @see \Cake\Utility\CookieCryptTrait::_encrypt()
      */
-    public function cookieEncrypted(string $name, $value, $encrypt = 'aes', $key = null): void
+    function cookieEncrypted(string $name, $value, $encrypt = 'aes', $key = null): void
     {
         this->_cookieEncryptionKey = $key;
         this->_cookie[$name] = this->_encrypt($value, $encrypt);
@@ -359,7 +359,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @return void
      */
-    public function get($url): void
+    function get($url): void
     {
         this->_sendRequest($url, 'GET');
     }
@@ -375,7 +375,7 @@ trait IntegrationTestTrait
      * @param array|string $data The data for the request.
      * @return void
      */
-    public function post($url, $data = []): void
+    function post($url, $data = []): void
     {
         this->_sendRequest($url, 'POST', $data);
     }
@@ -391,7 +391,7 @@ trait IntegrationTestTrait
      * @param array|string $data The data for the request.
      * @return void
      */
-    public function patch($url, $data = []): void
+    function patch($url, $data = []): void
     {
         this->_sendRequest($url, 'PATCH', $data);
     }
@@ -407,7 +407,7 @@ trait IntegrationTestTrait
      * @param array|string $data The data for the request.
      * @return void
      */
-    public function put($url, $data = []): void
+    function put($url, $data = []): void
     {
         this->_sendRequest($url, 'PUT', $data);
     }
@@ -422,7 +422,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @return void
      */
-    public function delete($url): void
+    function delete($url): void
     {
         this->_sendRequest($url, 'DELETE');
     }
@@ -437,7 +437,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @return void
      */
-    public function head($url): void
+    function head($url): void
     {
         this->_sendRequest($url, 'HEAD');
     }
@@ -452,7 +452,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @return void
      */
-    public function options($url): void
+    function options($url): void
     {
         this->_sendRequest($url, 'OPTIONS');
     }
@@ -511,7 +511,7 @@ trait IntegrationTestTrait
      * @param \Cake\Controller\Controller|null $controller Controller instance.
      * @return void
      */
-    public function controllerSpy(EventInterface $event, ?Controller $controller = null): void
+    function controllerSpy(EventInterface $event, ?Controller $controller = null): void
     {
         if (!$controller) {
             /** @var \Cake\Controller\Controller $controller */
@@ -756,7 +756,7 @@ trait IntegrationTestTrait
      * @param string $name The view variable to get.
      * @return mixed The view variable if set.
      */
-    public function viewVariable(string $name)
+    function viewVariable(string $name)
     {
         return this->_controller ? this->_controller->viewBuilder()->getVar($name) : null;
     }
@@ -767,7 +767,7 @@ trait IntegrationTestTrait
      * @param string $message Custom message for failure.
      * @return void
      */
-    public function assertResponseOk(string $message = ''): void
+    function assertResponseOk(string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat(null, new StatusOk(this->_response), $verboseMessage);
@@ -779,7 +779,7 @@ trait IntegrationTestTrait
      * @param string $message Custom message for failure.
      * @return void
      */
-    public function assertResponseSuccess(string $message = ''): void
+    function assertResponseSuccess(string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat(null, new StatusSuccess(this->_response), $verboseMessage);
@@ -791,7 +791,7 @@ trait IntegrationTestTrait
      * @param string $message Custom message for failure.
      * @return void
      */
-    public function assertResponseError(string $message = ''): void
+    function assertResponseError(string $message = ''): void
     {
         this->assertThat(null, new StatusError(this->_response), $message);
     }
@@ -802,7 +802,7 @@ trait IntegrationTestTrait
      * @param string $message Custom message for failure.
      * @return void
      */
-    public function assertResponseFailure(string $message = ''): void
+    function assertResponseFailure(string $message = ''): void
     {
         this->assertThat(null, new StatusFailure(this->_response), $message);
     }
@@ -814,7 +814,7 @@ trait IntegrationTestTrait
      * @param string $message Custom message for failure.
      * @return void
      */
-    public function assertResponseCode(int $code, string $message = ''): void
+    function assertResponseCode(int $code, string $message = ''): void
     {
         this->assertThat($code, new StatusCode(this->_response), $message);
     }
@@ -828,7 +828,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertRedirect($url = null, $message = ''): void
+    function assertRedirect($url = null, $message = ''): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert header.');
@@ -855,7 +855,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertRedirectEquals($url = null, $message = '')
+    function assertRedirectEquals($url = null, $message = '')
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert header.');
@@ -876,7 +876,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertRedirectContains(string $url, string $message = ''): void
+    function assertRedirectContains(string $url, string $message = ''): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert header.');
@@ -894,7 +894,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertRedirectNotContains(string $url, string $message = ''): void
+    function assertRedirectNotContains(string $url, string $message = ''): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert header.');
@@ -911,7 +911,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertNoRedirect(string $message = ''): void
+    function assertNoRedirect(string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat(null, new HeaderNotSet(this->_response, 'Location'), $verboseMessage);
@@ -925,7 +925,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertHeader(string $header, string $content, string $message = ''): void
+    function assertHeader(string $header, string $content, string $message = ''): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert header.');
@@ -944,7 +944,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertHeaderContains(string $header, string $content, string $message = ''): void
+    function assertHeaderContains(string $header, string $content, string $message = ''): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert header.');
@@ -963,7 +963,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertHeaderNotContains(string $header, string $content, string $message = ''): void
+    function assertHeaderNotContains(string $header, string $content, string $message = ''): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert header.');
@@ -981,7 +981,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertContentType(string $type, string $message = ''): void
+    function assertContentType(string $type, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($type, new ContentType(this->_response), $verboseMessage);
@@ -994,7 +994,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertResponseEquals($content, $message = ''): void
+    function assertResponseEquals($content, $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($content, new BodyEquals(this->_response), $verboseMessage);
@@ -1007,7 +1007,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertResponseNotEquals($content, $message = ''): void
+    function assertResponseNotEquals($content, $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($content, new BodyNotEquals(this->_response), $verboseMessage);
@@ -1021,7 +1021,7 @@ trait IntegrationTestTrait
      * @param bool $ignoreCase A flag to check whether we should ignore case or not.
      * @return void
      */
-    public function assertResponseContains(string $content, string $message = '', bool $ignoreCase = false): void
+    function assertResponseContains(string $content, string $message = '', bool $ignoreCase = false): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert content.');
@@ -1039,7 +1039,7 @@ trait IntegrationTestTrait
      * @param bool $ignoreCase A flag to check whether we should ignore case or not.
      * @return void
      */
-    public function assertResponseNotContains(string $content, string $message = '', bool $ignoreCase = false): void
+    function assertResponseNotContains(string $content, string $message = '', bool $ignoreCase = false): void
     {
         if (!this->_response) {
             this->fail('No response set, cannot assert content.');
@@ -1056,7 +1056,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertResponseRegExp(string $pattern, string $message = ''): void
+    function assertResponseRegExp(string $pattern, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($pattern, new BodyRegExp(this->_response), $verboseMessage);
@@ -1069,7 +1069,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertResponseNotRegExp(string $pattern, string $message = ''): void
+    function assertResponseNotRegExp(string $pattern, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($pattern, new BodyNotRegExp(this->_response), $verboseMessage);
@@ -1081,7 +1081,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertResponseNotEmpty(string $message = ''): void
+    function assertResponseNotEmpty(string $message = ''): void
     {
         this->assertThat(null, new BodyNotEmpty(this->_response), $message);
     }
@@ -1092,7 +1092,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertResponseEmpty(string $message = ''): void
+    function assertResponseEmpty(string $message = ''): void
     {
         this->assertThat(null, new BodyEmpty(this->_response), $message);
     }
@@ -1104,7 +1104,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertTemplate(string $content, string $message = ''): void
+    function assertTemplate(string $content, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($content, new TemplateFileEquals(this->_viewName), $verboseMessage);
@@ -1117,7 +1117,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertLayout(string $content, string $message = ''): void
+    function assertLayout(string $content, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($content, new LayoutFileEquals(this->_layoutName), $verboseMessage);
@@ -1131,7 +1131,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertSession($expected, string $path, string $message = ''): void
+    function assertSession($expected, string $path, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($expected, new SessionEquals($path), $verboseMessage);
@@ -1144,7 +1144,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertSessionHasKey(string $path, string $message = ''): void
+    function assertSessionHasKey(string $path, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($path, new SessionHasKey($path), $verboseMessage);
@@ -1157,7 +1157,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertSessionNotHasKey(string $path, string $message = ''): void
+    function assertSessionNotHasKey(string $path, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($path, this->logicalNot(new SessionHasKey($path)), $verboseMessage);
@@ -1171,7 +1171,7 @@ trait IntegrationTestTrait
      * @param string $message Assertion failure message
      * @return void
      */
-    public function assertFlashMessage(string $expected, string $key = 'flash', string $message = ''): void
+    function assertFlashMessage(string $expected, string $key = 'flash', string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($expected, new FlashParamEquals(this->_requestSession, $key, 'message'), $verboseMessage);
@@ -1186,7 +1186,7 @@ trait IntegrationTestTrait
      * @param string $message Assertion failure message
      * @return void
      */
-    public function assertFlashMessageAt(int $at, string $expected, string $key = 'flash', string $message = ''): void
+    function assertFlashMessageAt(int $at, string $expected, string $key = 'flash', string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat(
@@ -1204,7 +1204,7 @@ trait IntegrationTestTrait
      * @param string $message Assertion failure message
      * @return void
      */
-    public function assertFlashElement(string $expected, string $key = 'flash', string $message = ''): void
+    function assertFlashElement(string $expected, string $key = 'flash', string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat(
@@ -1223,7 +1223,7 @@ trait IntegrationTestTrait
      * @param string $message Assertion failure message
      * @return void
      */
-    public function assertFlashElementAt(int $at, string $expected, string $key = 'flash', string $message = ''): void
+    function assertFlashElementAt(int $at, string $expected, string $key = 'flash', string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat(
@@ -1241,7 +1241,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertCookie($expected, string $name, string $message = ''): void
+    function assertCookie($expected, string $name, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($name, new CookieSet(this->_response), $verboseMessage);
@@ -1255,7 +1255,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertCookieNotSet(string $cookie, string $message = ''): void
+    function assertCookieNotSet(string $cookie, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat($cookie, new CookieNotSet(this->_response), $verboseMessage);
@@ -1270,7 +1270,7 @@ trait IntegrationTestTrait
      *
      * @return void
      */
-    public function disableErrorHandlerMiddleware(): void
+    function disableErrorHandlerMiddleware(): void
     {
         Configure::write('Error.exceptionRenderer', TestExceptionRenderer::class);
     }
@@ -1291,7 +1291,7 @@ trait IntegrationTestTrait
      * @return void
      * @see \Cake\Utility\CookieCryptTrait::_encrypt()
      */
-    public function assertCookieEncrypted(
+    function assertCookieEncrypted(
         $expected,
         string $name,
         string $encrypt = 'aes',
@@ -1315,7 +1315,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    public function assertFileResponse(string $expected, string $message = ''): void
+    function assertFileResponse(string $expected, string $message = ''): void
     {
         $verboseMessage = this->extractVerboseMessage($message);
         this->assertThat(null, new FileSent(this->_response), $verboseMessage);

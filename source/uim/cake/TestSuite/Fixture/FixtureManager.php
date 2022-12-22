@@ -83,7 +83,7 @@ class FixtureManager
      * @param bool $debug Whether fixture debug mode is enabled.
      * @return void
      */
-    public function setDebug(bool $debug): void
+    function setDebug(bool $debug): void
     {
         this->_debug = $debug;
     }
@@ -92,7 +92,7 @@ class FixtureManager
      * @param \Cake\TestSuite\TestCase $test Test case
      * @return void
      */
-    public function fixturize(TestCase $test): void
+    function fixturize(TestCase $test): void
     {
         this->_initDb();
         if (!$test->getFixtures() || !empty(this->_processed[get_class($test)])) {
@@ -105,7 +105,7 @@ class FixtureManager
     /**
      * @return \Cake\Datasource\FixtureInterface[]
      */
-    public function loaded(): array
+    function loaded(): array
     {
         return this->_loaded;
     }
@@ -113,7 +113,7 @@ class FixtureManager
     /**
      * @return array<string>
      */
-    public function getInserted(): array
+    function getInserted(): array
     {
         $inserted = [];
         foreach (this->_insertionMap as $fixtures) {
@@ -285,7 +285,7 @@ class FixtureManager
      * @return void
      * @throws \RuntimeException
      */
-    public function load(TestCase $test): void
+    function load(TestCase $test): void
     {
         $fixtures = $test->getFixtures();
         if (!$fixtures || !$test->autoFixtures) {
@@ -427,7 +427,7 @@ class FixtureManager
      * @param \Cake\TestSuite\TestCase $test The test to inspect for fixture unloading.
      * @return void
      */
-    public function unload(TestCase $test): void
+    function unload(TestCase $test): void
     {
         $fixtures = $test->getFixtures();
         if (!$fixtures) {
@@ -455,7 +455,7 @@ class FixtureManager
      * @return void
      * @throws \UnexpectedValueException
      */
-    public function loadSingle(string $name, ?ConnectionInterface $connection = null, bool $dropTables = true): void
+    function loadSingle(string $name, ?ConnectionInterface $connection = null, bool $dropTables = true): void
     {
         if (!isset(this->_fixtureMap[$name])) {
             throw new UnexpectedValueException(sprintf('Referenced fixture class %s not found', $name));
@@ -489,7 +489,7 @@ class FixtureManager
      *
      * @return void
      */
-    public function shutDown(): void
+    function shutDown(): void
     {
         $shutdown = function (ConnectionInterface $db, array $fixtures): void {
             $connection = $db->configName();
@@ -512,7 +512,7 @@ class FixtureManager
      * @param \Cake\Datasource\FixtureInterface $fixture The fixture to check.
      * @return bool
      */
-    public function isFixtureSetup(string $connection, FixtureInterface $fixture): bool
+    function isFixtureSetup(string $connection, FixtureInterface $fixture): bool
     {
         return isset(this->_insertionMap[$connection]) && in_array($fixture, this->_insertionMap[$connection], true);
     }

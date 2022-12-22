@@ -29,5 +29,5 @@ interface AdapterInterface
      * @param array<string, mixed> $options Array of options for the stream.
      * @return array<\Cake\Http\Client\Response> Array of populated Response objects
      */
-    public function send(RequestInterface $request, array $options): array;
+    function send(RequestInterface $request, array $options): array;
 }

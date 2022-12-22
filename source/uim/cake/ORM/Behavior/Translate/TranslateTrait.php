@@ -33,7 +33,7 @@ trait TranslateTrait
      * @param string $language Language to return entity for.
      * @return \Cake\Datasource\EntityInterface|this
      */
-    public function translation(string $language)
+    function translation(string $language)
     {
         if ($language === this->get('_locale')) {
             return this;

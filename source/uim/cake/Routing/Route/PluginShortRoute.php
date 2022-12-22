@@ -30,7 +30,7 @@ class PluginShortRoute extends InflectedRoute
      * @param string $method The HTTP method
      * @return array|null An array of request parameters, or null on failure.
      */
-    public function parse(string $url, string $method = ''): ?array
+    function parse(string $url, string $method = ''): ?array
     {
         $params = parent::parse($url, $method);
         if (!$params) {
@@ -51,7 +51,7 @@ class PluginShortRoute extends InflectedRoute
      *   directory.
      * @return string|null Either a string URL for the parameters if they match or null.
      */
-    public function match(array $url, array $context = []): ?string
+    function match(array $url, array $context = []): ?string
     {
         if (isset($url['controller'], $url['plugin']) && $url['plugin'] != $url['controller']) {
             return null;

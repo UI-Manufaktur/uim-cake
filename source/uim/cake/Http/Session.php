@@ -255,7 +255,7 @@ class Session
      * @return \SessionHandlerInterface|null
      * @throws \InvalidArgumentException
      */
-    public function engine($class = null, array $options = []): ?SessionHandlerInterface
+    function engine($class = null, array $options = []): ?SessionHandlerInterface
     {
         if ($class === null) {
             return this->_engine;
@@ -304,7 +304,7 @@ class Session
      * @return void
      * @throws \RuntimeException if any directive could not be set
      */
-    public function options(array $options): void
+    function options(array $options): void
     {
         if (session_status() === \PHP_SESSION_ACTIVE || headers_sent()) {
             return;
@@ -325,7 +325,7 @@ class Session
      * @return bool True if session was started
      * @throws \RuntimeException if the session was already started
      */
-    public function start(): bool
+    function start(): bool
     {
         if (this->_started) {
             return true;
@@ -366,7 +366,7 @@ class Session
      *
      * @return true
      */
-    public function close(): bool
+    function close(): bool
     {
         if (!this->_started) {
             return true;
@@ -392,7 +392,7 @@ class Session
      *
      * @return bool True if session has been started.
      */
-    public function started(): bool
+    function started(): bool
     {
         return this->_started || session_status() === \PHP_SESSION_ACTIVE;
     }
@@ -403,7 +403,7 @@ class Session
      * @param string|null $name Variable name to check for
      * @return bool True if variable is there
      */
-    public function check(?string $name = null): bool
+    function check(?string $name = null): bool
     {
         if (this->_hasSession() && !this->started()) {
             this->start();
@@ -428,7 +428,7 @@ class Session
      * @return mixed|null The value of the session variable, or default value if a session
      *   is not available, can't be started, or provided $name is not found in the session.
      */
-    public function read(?string $name = null, $default = null)
+    function read(?string $name = null, $default = null)
     {
         if (this->_hasSession() && !this->started()) {
             this->start();
@@ -452,7 +452,7 @@ class Session
      * @throws \RuntimeException
      * @return mixed|null
      */
-    public function readOrFail(string $name)
+    function readOrFail(string $name)
     {
         if (!this->check($name)) {
             throw new RuntimeException(sprintf('Expected session key "%s" not found.', $name));
@@ -468,7 +468,7 @@ class Session
      * @return mixed|null The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    public function consume(string $name)
+    function consume(string $name)
     {
         if (empty($name)) {
             return null;
@@ -489,7 +489,7 @@ class Session
      * @param mixed $value Value to write
      * @return void
      */
-    public function write($name, $value = null): void
+    function write($name, $value = null): void
     {
         if (!this->started()) {
             this->start();
@@ -522,7 +522,7 @@ class Session
      * @param string|null $id Id to replace the current session id
      * @return string Session id
      */
-    public function id(?string $id = null): string
+    function id(?string $id = null): string
     {
         if ($id != null && !headers_sent()) {
             session_id($id);
@@ -537,7 +537,7 @@ class Session
      * @param string $name Session variable to remove
      * @return void
      */
-    public function delete(string $name): void
+    function delete(string $name): void
     {
         if (this->check($name)) {
             /** @psalm-suppress InvalidScalarArgument */
@@ -570,7 +570,7 @@ class Session
      *
      * @return void
      */
-    public function destroy(): void
+    function destroy(): void
     {
         if (this->_hasSession() && !this->started()) {
             this->start();
@@ -592,7 +592,7 @@ class Session
      * @param bool $renew If session should be renewed, as well. Defaults to false.
      * @return void
      */
-    public function clear(bool $renew = false): void
+    function clear(bool $renew = false): void
     {
         $_SESSION = [];
         if ($renew) {
@@ -618,7 +618,7 @@ class Session
      *
      * @return void
      */
-    public function renew(): void
+    function renew(): void
     {
         if (!this->_hasSession() || this->_isCLI) {
             return;

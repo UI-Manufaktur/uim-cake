@@ -120,7 +120,7 @@ class StringTemplate
      *
      * @return void
      */
-    public function push(): void
+    function push(): void
     {
         this->_configStack[] = [
             this->_config,
@@ -133,7 +133,7 @@ class StringTemplate
      *
      * @return void
      */
-    public function pop(): void
+    function pop(): void
     {
         if (empty(this->_configStack)) {
             return;
@@ -156,7 +156,7 @@ class StringTemplate
      * @param array<string> $templates An associative list of named templates.
      * @return this
      */
-    public function add(array $templates)
+    function add(array $templates)
     {
         this->setConfig($templates);
         this->_compileTemplates(array_keys($templates));
@@ -200,7 +200,7 @@ class StringTemplate
      * @param string $file The file to load
      * @return void
      */
-    public function load(string $file): void
+    function load(string $file): void
     {
         if ($file === '') {
             throw new CakeException('String template filename cannot be an empty string');
@@ -217,7 +217,7 @@ class StringTemplate
      * @param string $name The template to remove.
      * @return void
      */
-    public function remove(string $name): void
+    function remove(string $name): void
     {
         this->setConfig($name, null);
         unset(this->_compiled[$name]);
@@ -231,7 +231,7 @@ class StringTemplate
      * @return string Formatted string
      * @throws \RuntimeException If template not found.
      */
-    public function format(string $name, array $data): string
+    function format(string $name, array $data): string
     {
         if (!isset(this->_compiled[$name])) {
             throw new RuntimeException("Cannot find template named '$name'.");
@@ -280,7 +280,7 @@ class StringTemplate
      * @param array<string>|null $exclude Array of options to be excluded, the options here will not be part of the return.
      * @return string Composed attributes.
      */
-    public function formatAttributes(?array $options, ?array $exclude = null): string
+    function formatAttributes(?array $options, ?array $exclude = null): string
     {
         $insertBefore = ' ';
         $options = (array)$options + ['escape' => true];
@@ -344,7 +344,7 @@ class StringTemplate
      * @param string $useIndex if you are inputting an array with an element other than default of 'class'.
      * @return array<string>|string
      */
-    public function addClass($input, $newClass, string $useIndex = 'class')
+    function addClass($input, $newClass, string $useIndex = 'class')
     {
         // NOOP
         if (empty($newClass)) {

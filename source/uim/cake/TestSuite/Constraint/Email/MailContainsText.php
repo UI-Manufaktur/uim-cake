@@ -35,7 +35,7 @@ class MailContainsText extends MailContains
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         if (this->at) {
             return sprintf('is in the text message of email #%d', this->at) . this->getAssertedMessages();

@@ -98,7 +98,7 @@ class Helper implements EventListenerInterface
      * @param array $params Array of params for the method.
      * @return mixed|void
      */
-    public function __call(string $method, array $params)
+    function __call(string $method, array $params)
     {
         trigger_error(sprintf('Method %1$s::%2$s does not exist', static::class, $method), E_USER_WARNING);
     }
@@ -109,7 +109,7 @@ class Helper implements EventListenerInterface
      * @param string $name Name of the property being accessed.
      * @return \Cake\View\Helper|null|void Helper instance if helper with provided name exists
      */
-    public function __get(string $name)
+    function __get(string $name)
     {
         if (isset(this->_helperMap[$name]) && !isset(this->{$name})) {
             $config = ['enabled' => false] + (array)this->_helperMap[$name]['config'];
@@ -124,7 +124,7 @@ class Helper implements EventListenerInterface
      *
      * @return \Cake\View\View The bound view instance.
      */
-    public function getView(): View
+    function getView(): View
     {
         return this->_View;
     }
@@ -149,7 +149,7 @@ class Helper implements EventListenerInterface
      * @param string $key the key to use for class. Defaults to `'class'`.
      * @return array<string, mixed> Array of options with $key set.
      */
-    public function addClass(array $options, string $class, string $key = 'class'): array
+    function addClass(array $options, string $class, string $key = 'class'): array
     {
         if (isset($options[$key]) && is_array($options[$key])) {
             $options[$key][] = $class;
@@ -173,7 +173,7 @@ class Helper implements EventListenerInterface
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         $eventMap = [
             'View.beforeRenderFile' => 'beforeRenderFile',
@@ -201,7 +201,7 @@ class Helper implements EventListenerInterface
      * @param array<string, mixed> $config The configuration settings provided to this helper.
      * @return void
      */
-    public function initialize(array $config): void
+    function initialize(array $config): void
     {
     }
 
@@ -211,7 +211,7 @@ class Helper implements EventListenerInterface
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         return [
             'helpers' => this->helpers,

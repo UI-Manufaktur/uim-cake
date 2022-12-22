@@ -57,7 +57,7 @@ class ArrayLog extends BaseLog
      * @return void success of write.
      * @see \Cake\Log\Log::$_levels
      */
-    public function log($level, $message, array $context = [])
+    function log($level, $message, array $context = [])
     {
         $message = this->_format($message, $context);
         this->content[] = this->formatter->format($level, $message, $context);
@@ -68,7 +68,7 @@ class ArrayLog extends BaseLog
      *
      * @return array<string>
      */
-    public function read(): array
+    function read(): array
     {
         return this->content;
     }
@@ -78,7 +78,7 @@ class ArrayLog extends BaseLog
      *
      * @return void
      */
-    public function clear(): void
+    function clear(): void
     {
         this->content = [];
     }

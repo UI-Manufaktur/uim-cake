@@ -42,7 +42,7 @@ class TruncateStrategy implements FixtureStrategyInterface
     /**
      * @inheritDoc
      */
-    public function setupTest(array $fixtureNames): void
+    function setupTest(array $fixtureNames): void
     {
         if (empty($fixtureNames)) {
             return;
@@ -55,7 +55,7 @@ class TruncateStrategy implements FixtureStrategyInterface
     /**
      * @inheritDoc
      */
-    public function teardownTest(): void
+    function teardownTest(): void
     {
         this->helper->truncate(this->fixtures);
     }

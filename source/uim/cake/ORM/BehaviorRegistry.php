@@ -75,7 +75,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      * @param \Cake\ORM\Table $table The table this registry is attached to.
      * @return void
      */
-    public function setTable(Table $table): void
+    function setTable(Table $table): void
     {
         this->_table = $table;
         this->setEventManager($table->getEventManager());
@@ -212,7 +212,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      * @param string $method The method to check for.
      * @return bool
      */
-    public function hasMethod(string $method): bool
+    function hasMethod(string $method): bool
     {
         $method = strtolower($method);
 
@@ -228,7 +228,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      * @param string $method The method to check for.
      * @return bool
      */
-    public function hasFinder(string $method): bool
+    function hasFinder(string $method): bool
     {
         $method = strtolower($method);
 
@@ -243,7 +243,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      * @return mixed The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
-    public function call(string $method, array $args = [])
+    function call(string $method, array $args = [])
     {
         $method = strtolower($method);
         if (this->hasMethod($method) && this->has(this->_methodMap[$method][0])) {
@@ -265,7 +265,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      * @return \Cake\ORM\Query The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
-    public function callFinder(string $type, array $args = []): Query
+    function callFinder(string $type, array $args = []): Query
     {
         $type = strtolower($type);
 

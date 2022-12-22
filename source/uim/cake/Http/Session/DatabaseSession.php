@@ -74,7 +74,7 @@ class DatabaseSession implements SessionHandlerInterface
      * @param int $timeout The timeout duration.
      * @return this
      */
-    public function setTimeout(int $timeout)
+    function setTimeout(int $timeout)
     {
         this->_timeout = $timeout;
 
@@ -88,7 +88,7 @@ class DatabaseSession implements SessionHandlerInterface
      * @param string $name The session name.
      * @return bool Success
      */
-    public function open($path, $name): bool
+    function open($path, $name): bool
     {
         return true;
     }
@@ -98,7 +98,7 @@ class DatabaseSession implements SessionHandlerInterface
      *
      * @return bool Success
      */
-    public function close(): bool
+    function close(): bool
     {
         return true;
     }
@@ -110,7 +110,7 @@ class DatabaseSession implements SessionHandlerInterface
      * @return string|false Session data or false if it does not exist.
      */
     #[\ReturnTypeWillChange]
-    public function read($id)
+    function read($id)
     {
         /** @var string $pkField */
         $pkField = this->_table->getPrimaryKey();
@@ -145,7 +145,7 @@ class DatabaseSession implements SessionHandlerInterface
      * @param string $data The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
-    public function write($id, $data): bool
+    function write($id, $data): bool
     {
         if (!$id) {
             return false;
@@ -168,7 +168,7 @@ class DatabaseSession implements SessionHandlerInterface
      * @param string $id ID that uniquely identifies session in database.
      * @return bool True for successful delete, false otherwise.
      */
-    public function destroy($id): bool
+    function destroy($id): bool
     {
         /** @var string $pkField */
         $pkField = this->_table->getPrimaryKey();
@@ -184,7 +184,7 @@ class DatabaseSession implements SessionHandlerInterface
      * @return int|false The number of deleted sessions on success, or false on failure.
      */
     #[\ReturnTypeWillChange]
-    public function gc($maxlifetime)
+    function gc($maxlifetime)
     {
         return this->_table->deleteAll(['expires <' => time()]);
     }

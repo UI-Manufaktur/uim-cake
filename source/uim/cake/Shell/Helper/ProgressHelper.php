@@ -69,7 +69,7 @@ class ProgressHelper extends Helper
      * @param array $args The arguments/options to use when outputing the progress bar.
      * @return void
      */
-    public function output(array $args): void
+    function output(array $args): void
     {
         $args += ['callback' => null];
         if (isset($args[0])) {
@@ -100,7 +100,7 @@ class ProgressHelper extends Helper
      * @param array $args The initialization data.
      * @return this
      */
-    public function init(array $args = [])
+    function init(array $args = [])
     {
         $args += ['total' => 100, 'width' => 80];
         this->_progress = 0;
@@ -116,7 +116,7 @@ class ProgressHelper extends Helper
      * @param float|int $num The amount of progress to advance by.
      * @return this
      */
-    public function increment($num = 1)
+    function increment($num = 1)
     {
         this->_progress = min(max(0, this->_progress + $num), this->_total);
 
@@ -128,7 +128,7 @@ class ProgressHelper extends Helper
      *
      * @return this
      */
-    public function draw()
+    function draw()
     {
         $numberLen = strlen(' 100%');
         $complete = round(this->_progress / this->_total, 2);

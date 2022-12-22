@@ -44,7 +44,7 @@ class TestSession
      * @param string|null $name Variable name to check for
      * @return bool True if variable is there
      */
-    public function check(?string $name = null): bool
+    function check(?string $name = null): bool
     {
         if (this->session === null) {
             return false;
@@ -64,7 +64,7 @@ class TestSession
      * @return mixed The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    public function read(?string $name = null)
+    function read(?string $name = null)
     {
         if (this->session === null) {
             return null;

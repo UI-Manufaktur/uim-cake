@@ -69,7 +69,7 @@ class Stream implements AdapterInterface
     /**
      * @inheritDoc
      */
-    public function send(RequestInterface $request, array $options): array
+    function send(RequestInterface $request, array $options): array
     {
         this->_stream = null;
         this->_context = null;
@@ -92,7 +92,7 @@ class Stream implements AdapterInterface
      * @param string $content The response content.
      * @return array<\Cake\Http\Client\Response> The list of responses from the request(s)
      */
-    public function createResponses(array $headers, string $content): array
+    function createResponses(array $headers, string $content): array
     {
         $indexes = $responses = [];
         foreach ($headers as $i => $header) {
@@ -332,7 +332,7 @@ class Stream implements AdapterInterface
      *
      * @return array<string, mixed>
      */
-    public function contextOptions(): array
+    function contextOptions(): array
     {
         return array_merge(this->_contextOptions, this->_sslContextOptions);
     }

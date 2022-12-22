@@ -77,7 +77,7 @@ class TimestampBehavior extends Behavior
      * @param array<string, mixed> $config The config for this behavior.
      * @return void
      */
-    public function initialize(array $config): void
+    function initialize(array $config): void
     {
         if (isset($config['events'])) {
             this->setConfig('events', $config['events'], false);
@@ -93,7 +93,7 @@ class TimestampBehavior extends Behavior
      * @return true Returns true irrespective of the behavior logic, the save will not be prevented.
      * @throws \UnexpectedValueException When the value for an event is not 'always', 'new' or 'existing'
      */
-    public function handleEvent(EventInterface $event, EntityInterface $entity): bool
+    function handleEvent(EventInterface $event, EntityInterface $entity): bool
     {
         $eventName = $event->getName();
         $events = this->_config['events'];
@@ -133,7 +133,7 @@ class TimestampBehavior extends Behavior
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return array_fill_keys(array_keys(this->_config['events']), 'handleEvent');
     }
@@ -149,7 +149,7 @@ class TimestampBehavior extends Behavior
      * @param bool $refreshTimestamp If true timestamp is refreshed.
      * @return \Cake\I18n\FrozenTime
      */
-    public function timestamp(?DateTimeInterface $ts = null, bool $refreshTimestamp = false): DateTimeInterface
+    function timestamp(?DateTimeInterface $ts = null, bool $refreshTimestamp = false): DateTimeInterface
     {
         if ($ts) {
             if (this->_config['refreshTimestamp']) {
@@ -174,7 +174,7 @@ class TimestampBehavior extends Behavior
      * @param string $eventName Event name.
      * @return bool true if a field is updated, false if no action performed
      */
-    public function touch(EntityInterface $entity, string $eventName = 'Model.beforeSave'): bool
+    function touch(EntityInterface $entity, string $eventName = 'Model.beforeSave'): bool
     {
         $events = this->_config['events'];
         if (empty($events[$eventName])) {

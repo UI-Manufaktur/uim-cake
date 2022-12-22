@@ -117,7 +117,7 @@ class Socket
      * @return bool Success
      * @throws \Cake\Network\Exception\SocketException
      */
-    public function connect(): bool
+    function connect(): bool
     {
         if (this->connection) {
             this->disconnect();
@@ -188,7 +188,7 @@ class Socket
      *
      * @return bool
      */
-    public function isConnected(): bool
+    function isConnected(): bool
     {
         return this->connected;
     }
@@ -275,7 +275,7 @@ class Socket
      *
      * @return array|null Null when there is no connection, an array when there is.
      */
-    public function context(): ?array
+    function context(): ?array
     {
         if (!this->connection) {
             return null;
@@ -289,7 +289,7 @@ class Socket
      *
      * @return string Host name
      */
-    public function host(): string
+    function host(): string
     {
         if (Validation::ip(this->_config['host'])) {
             return gethostbyaddr(this->_config['host']);
@@ -303,7 +303,7 @@ class Socket
      *
      * @return string IP address
      */
-    public function address(): string
+    function address(): string
     {
         if (Validation::ip(this->_config['host'])) {
             return this->_config['host'];
@@ -317,7 +317,7 @@ class Socket
      *
      * @return array IP addresses
      */
-    public function addresses(): array
+    function addresses(): array
     {
         if (Validation::ip(this->_config['host'])) {
             return [this->_config['host']];
@@ -331,7 +331,7 @@ class Socket
      *
      * @return string|null Last error
      */
-    public function lastError(): ?string
+    function lastError(): ?string
     {
         if (!empty(this->lastError)) {
             return this->lastError['num'] . ': ' . this->lastError['str'];
@@ -347,7 +347,7 @@ class Socket
      * @param string $errStr Error string
      * @return void
      */
-    public function setLastError(?int $errNum, string $errStr): void
+    function setLastError(?int $errNum, string $errStr): void
     {
         this->lastError = ['num' => $errNum, 'str' => $errStr];
     }
@@ -358,7 +358,7 @@ class Socket
      * @param string $data The data to write to the socket.
      * @return int Bytes written.
      */
-    public function write(string $data): int
+    function write(string $data): int
     {
         if (!this->connected && !this->connect()) {
             return 0;
@@ -384,7 +384,7 @@ class Socket
      * @param int $length Optional buffer length to read; defaults to 1024
      * @return string|null Socket data
      */
-    public function read(int $length = 1024): ?string
+    function read(int $length = 1024): ?string
     {
         if (!this->connected && !this->connect()) {
             return null;
@@ -411,7 +411,7 @@ class Socket
      *
      * @return bool Success
      */
-    public function disconnect(): bool
+    function disconnect(): bool
     {
         if (!is_resource(this->connection)) {
             this->connected = false;
@@ -431,7 +431,7 @@ class Socket
     /**
      * Destructor, used to disconnect from current connection.
      */
-    public function __destruct()
+    function __destruct()
     {
         this->disconnect();
     }
@@ -442,7 +442,7 @@ class Socket
      * @param array|null $state Array with key and values to reset
      * @return void
      */
-    public function reset(?array $state = null): void
+    function reset(?array $state = null): void
     {
         if (empty($state)) {
             static $initialState = [];
@@ -468,7 +468,7 @@ class Socket
      * @throws \Cake\Network\Exception\SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
-    public function enableCrypto(string $type, string $clientOrServer = 'client', bool $enable = true): void
+    function enableCrypto(string $type, string $clientOrServer = 'client', bool $enable = true): void
     {
         if (!array_key_exists($type . '_' . $clientOrServer, this->_encryptMethods)) {
             throw new InvalidArgumentException('Invalid encryption scheme chosen');
@@ -508,7 +508,7 @@ class Socket
      *
      * @return bool
      */
-    public function isEncrypted(): bool
+    function isEncrypted(): bool
     {
         return this->encrypted;
     }
@@ -521,7 +521,7 @@ class Socket
      * @param string $name Property name.
      * @return mixed
      */
-    public function __get($name)
+    function __get($name)
     {
         switch ($name) {
             case 'connected':

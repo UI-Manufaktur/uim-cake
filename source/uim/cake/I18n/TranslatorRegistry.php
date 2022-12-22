@@ -126,7 +126,7 @@ class TranslatorRegistry
      * @param string $locale The new locale code.
      * @return void
      */
-    public function setLocale(string $locale): void
+    function setLocale(string $locale): void
     {
         this->locale = $locale;
     }
@@ -136,7 +136,7 @@ class TranslatorRegistry
      *
      * @return string
      */
-    public function getLocale(): string
+    function getLocale(): string
     {
         return this->locale;
     }
@@ -146,7 +146,7 @@ class TranslatorRegistry
      *
      * @return \Cake\I18n\PackageLocator
      */
-    public function getPackages(): PackageLocator
+    function getPackages(): PackageLocator
     {
         return this->packages;
     }
@@ -156,7 +156,7 @@ class TranslatorRegistry
      *
      * @return \Cake\I18n\FormatterLocator
      */
-    public function getFormatters(): FormatterLocator
+    function getFormatters(): FormatterLocator
     {
         return this->formatters;
     }
@@ -168,7 +168,7 @@ class TranslatorRegistry
      * @param \Psr\SimpleCache\CacheInterface&\Cake\Cache\CacheEngineInterface $cacher The cacher instance.
      * @return void
      */
-    public function setCacher($cacher): void
+    function setCacher($cacher): void
     {
         this->_cacher = $cacher;
     }
@@ -183,7 +183,7 @@ class TranslatorRegistry
      * @throws \Cake\I18n\Exception\I18nException If no translator with that name could be found
      * for the given locale.
      */
-    public function get(string $name, ?string $locale = null): ?Translator
+    function get(string $name, ?string $locale = null): ?Translator
     {
         if ($locale === null) {
             $locale = this->getLocale();
@@ -270,7 +270,7 @@ class TranslatorRegistry
      * @param callable $loader A callable object that should return a Package
      * @return void
      */
-    public function registerLoader(string $name, callable $loader): void
+    function registerLoader(string $name, callable $loader): void
     {
         this->_loaders[$name] = $loader;
     }
@@ -284,7 +284,7 @@ class TranslatorRegistry
      * @param string|null $name The name of the formatter to use.
      * @return string The name of the formatter.
      */
-    public function defaultFormatter(?string $name = null): string
+    function defaultFormatter(?string $name = null): string
     {
         if ($name === null) {
             return this->_defaultFormatter;
@@ -299,7 +299,7 @@ class TranslatorRegistry
      * @param bool $enable flag to enable or disable fallback
      * @return void
      */
-    public function useFallback(bool $enable = true): void
+    function useFallback(bool $enable = true): void
     {
         this->_useFallback = $enable;
     }
@@ -311,7 +311,7 @@ class TranslatorRegistry
      * @param \Cake\I18n\Package $package Package instance
      * @return \Cake\I18n\Package
      */
-    public function setFallbackPackage(string $name, Package $package): Package
+    function setFallbackPackage(string $name, Package $package): Package
     {
         if ($package->getFallback()) {
             return $package;
@@ -334,7 +334,7 @@ class TranslatorRegistry
      * @param callable $loader invokable loader
      * @return callable loader
      */
-    public function setLoaderFallback(string $name, callable $loader): callable
+    function setLoaderFallback(string $name, callable $loader): callable
     {
         $fallbackDomain = 'default';
         if (!this->_useFallback || $name === $fallbackDomain) {

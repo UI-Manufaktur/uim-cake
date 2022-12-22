@@ -133,7 +133,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param mixed $value Value.
      * @return this
      */
-    public function setVar(string $name, $value = null)
+    function setVar(string $name, $value = null)
     {
         this->_vars[$name] = $value;
 
@@ -147,7 +147,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param bool $merge Whether to merge with existing vars, default true.
      * @return this
      */
-    public function setVars(array $data, bool $merge = true)
+    function setVars(array $data, bool $merge = true)
     {
         if ($merge) {
             this->_vars = $data + this->_vars;
@@ -164,7 +164,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string $name Var name
      * @return bool
      */
-    public function hasVar(string $name): bool
+    function hasVar(string $name): bool
     {
         return array_key_exists($name, this->_vars);
     }
@@ -175,7 +175,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string $name Var name
      * @return mixed The var value or null if unset.
      */
-    public function getVar(string $name)
+    function getVar(string $name)
     {
         return this->_vars[$name] ?? null;
     }
@@ -185,7 +185,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    public function getVars(): array
+    function getVars(): array
     {
         return this->_vars;
     }
@@ -196,7 +196,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string|null $path Path for view files.
      * @return this
      */
-    public function setTemplatePath(?string $path)
+    function setTemplatePath(?string $path)
     {
         this->_templatePath = $path;
 
@@ -208,7 +208,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getTemplatePath(): ?string
+    function getTemplatePath(): ?string
     {
         return this->_templatePath;
     }
@@ -219,7 +219,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string|null $path Path for layout files.
      * @return this
      */
-    public function setLayoutPath(?string $path)
+    function setLayoutPath(?string $path)
     {
         this->_layoutPath = $path;
 
@@ -231,7 +231,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getLayoutPath(): ?string
+    function getLayoutPath(): ?string
     {
         return this->_layoutPath;
     }
@@ -244,7 +244,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param bool $enable Boolean to turn on/off.
      * @return this
      */
-    public function enableAutoLayout(bool $enable = true)
+    function enableAutoLayout(bool $enable = true)
     {
         this->_autoLayout = $enable;
 
@@ -259,7 +259,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return this
      */
-    public function disableAutoLayout()
+    function disableAutoLayout()
     {
         this->_autoLayout = false;
 
@@ -272,7 +272,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return bool
      */
-    public function isAutoLayoutEnabled(): bool
+    function isAutoLayoutEnabled(): bool
     {
         return this->_autoLayout;
     }
@@ -284,7 +284,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *   Use null to remove the current plugin name.
      * @return this
      */
-    public function setPlugin(?string $name)
+    function setPlugin(?string $name)
     {
         this->_plugin = $name;
 
@@ -296,7 +296,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getPlugin(): ?string
+    function getPlugin(): ?string
     {
         return this->_plugin;
     }
@@ -309,7 +309,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @return this
      * @since 4.1.0
      */
-    public function addHelper(string $helper, array $options = [])
+    function addHelper(string $helper, array $options = [])
     {
         if ($options) {
             $array = [$helper => $options];
@@ -329,7 +329,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @return this
      * @since 4.3.0
      */
-    public function addHelpers(array $helpers)
+    function addHelpers(array $helpers)
     {
         foreach ($helpers as $helper => $config) {
             if (is_int($helper)) {
@@ -349,7 +349,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param bool $merge Whether to merge existing data with the new data.
      * @return this
      */
-    public function setHelpers(array $helpers, bool $merge = true)
+    function setHelpers(array $helpers, bool $merge = true)
     {
         if ($merge) {
             deprecationWarning('The $merge param is deprecated, use addHelper()/addHelpers() instead.');
@@ -365,7 +365,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return array
      */
-    public function getHelpers(): array
+    function getHelpers(): array
     {
         return this->_helpers;
     }
@@ -377,7 +377,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *   Use null to remove the current theme.
      * @return this
      */
-    public function setTheme(?string $theme)
+    function setTheme(?string $theme)
     {
         this->_theme = $theme;
 
@@ -389,7 +389,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getTheme(): ?string
+    function getTheme(): ?string
     {
         return this->_theme;
     }
@@ -401,7 +401,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string|null $name View file name to set, or null to remove the template name.
      * @return this
      */
-    public function setTemplate(?string $name)
+    function setTemplate(?string $name)
     {
         this->_template = $name;
 
@@ -414,7 +414,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getTemplate(): ?string
+    function getTemplate(): ?string
     {
         return this->_template;
     }
@@ -427,7 +427,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string|null $name Layout file name to set.
      * @return this
      */
-    public function setLayout(?string $name)
+    function setLayout(?string $name)
     {
         this->_layout = $name;
 
@@ -439,7 +439,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getLayout(): ?string
+    function getLayout(): ?string
     {
         return this->_layout;
     }
@@ -450,7 +450,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string $name The name of the option.
      * @return mixed
      */
-    public function getOption(string $name)
+    function getOption(string $name)
     {
         return this->_options[$name] ?? null;
     }
@@ -462,7 +462,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param mixed $value Value to set.
      * @return this
      */
-    public function setOption(string $name, $value)
+    function setOption(string $name, $value)
     {
         this->_options[$name] = $value;
 
@@ -478,7 +478,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param bool $merge Whether to merge existing data with the new data.
      * @return this
      */
-    public function setOptions(array $options, bool $merge = true)
+    function setOptions(array $options, bool $merge = true)
     {
         if ($merge) {
             $options = array_merge(this->_options, $options);
@@ -493,7 +493,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    public function getOptions(): array
+    function getOptions(): array
     {
         return this->_options;
     }
@@ -504,7 +504,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string|null $name The name of the view, or null to remove the current name.
      * @return this
      */
-    public function setName(?string $name)
+    function setName(?string $name)
     {
         this->_name = $name;
 
@@ -516,7 +516,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getName(): ?string
+    function getName(): ?string
     {
         return this->_name;
     }
@@ -531,7 +531,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string|null $name The class name for the view.
      * @return this
      */
-    public function setClassName(?string $name)
+    function setClassName(?string $name)
     {
         this->_className = $name;
 
@@ -543,7 +543,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string|null
      */
-    public function getClassName(): ?string
+    function getClassName(): ?string
     {
         return this->_className;
     }
@@ -561,7 +561,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @return \Cake\View\View
      * @throws \Cake\View\Exception\MissingViewException
      */
-    public function build(
+    function build(
         array $vars = [],
         ?ServerRequest $request = null,
         ?Response $response = null,
@@ -616,7 +616,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return array Serializable array of configuration properties.
      */
-    public function jsonSerialize(): array
+    function jsonSerialize(): array
     {
         $properties = [
             '_templatePath', '_template', '_plugin', '_theme', '_layout', '_autoLayout',
@@ -670,7 +670,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param array<string, mixed> $config View builder configuration array.
      * @return this
      */
-    public function createFromArray(array $config)
+    function createFromArray(array $config)
     {
         foreach ($config as $property => $value) {
             this->{$property} = $value;
@@ -684,7 +684,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return string
      */
-    public function serialize(): string
+    function serialize(): string
     {
         $array = this->jsonSerialize();
 
@@ -696,7 +696,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      *
      * @return array
      */
-    public function __serialize(): array
+    function __serialize(): array
     {
         return this->jsonSerialize();
     }
@@ -707,7 +707,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param string $data Serialized string.
      * @return void
      */
-    public function unserialize($data): void
+    function unserialize($data): void
     {
         this->createFromArray(unserialize($data));
     }
@@ -718,7 +718,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param array<string, mixed> $data Data array.
      * @return void
      */
-    public function __unserialize(array $data): void
+    function __unserialize(array $data): void
     {
         this->createFromArray($data);
     }

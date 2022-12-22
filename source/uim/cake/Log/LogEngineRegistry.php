@@ -100,7 +100,7 @@ class LogEngineRegistry extends ObjectRegistry
      * @param string $name The logger name.
      * @return this
      */
-    public function unload(string $name)
+    function unload(string $name)
     {
         unset(this->_loaded[$name]);
 

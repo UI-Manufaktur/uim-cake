@@ -70,7 +70,7 @@ class PoFileParser
      * @param string $resource The file name to parse
      * @return array
      */
-    public function parse(string $resource): array
+    function parse(string $resource): array
     {
         $stream = fopen($resource, 'rb');
 

@@ -120,7 +120,7 @@ class ContextFactory
      *   when the form context is the correct type.
      * @return this
      */
-    public function addProvider(string $type, callable $check)
+    function addProvider(string $type, callable $check)
     {
         this->providers = [$type => ['type' => $type, 'callable' => $check]]
             + this->providers;
@@ -138,7 +138,7 @@ class ContextFactory
      * @return \Cake\View\Form\ContextInterface Context provider.
      * @throws \RuntimeException When a context instance cannot be generated for given entity.
      */
-    public function get(ServerRequest $request, array $data = []): ContextInterface
+    function get(ServerRequest $request, array $data = []): ContextInterface
     {
         $data += ['entity' => null];
 

@@ -38,7 +38,7 @@ class Curl implements AdapterInterface
     /**
      * @inheritDoc
      */
-    public function send(RequestInterface $request, array $options): array
+    function send(RequestInterface $request, array $options): array
     {
         if (!extension_loaded('curl')) {
             throw new ClientException('curl extension is not loaded.');
@@ -80,7 +80,7 @@ class Curl implements AdapterInterface
      * @param array<string, mixed> $options The client options
      * @return array
      */
-    public function buildOptions(RequestInterface $request, array $options): array
+    function buildOptions(RequestInterface $request, array $options): array
     {
         $headers = [];
         foreach ($request->getHeaders() as $key => $values) {

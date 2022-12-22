@@ -103,7 +103,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      * @param bool $allow Flag to enable or disable fallback
      * @return this
      */
-    public function allowFallbackClass(bool $allow)
+    function allowFallbackClass(bool $allow)
     {
         this->allowFallbackClass = $allow;
 
@@ -121,7 +121,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      * @return this
      * @psalm-param class-string<\Cake\ORM\Table> $className
      */
-    public function setFallbackClassName($className)
+    function setFallbackClassName($className)
     {
         this->fallbackClassName = $className;
 
@@ -131,7 +131,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function setConfig($alias, $options = null)
+    function setConfig($alias, $options = null)
     {
         if (!is_string($alias)) {
             this->_config = $alias;
@@ -154,7 +154,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function getConfig(?string $alias = null): array
+    function getConfig(?string $alias = null): array
     {
         if ($alias === null) {
             return this->_config;
@@ -199,7 +199,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      * @return \Cake\ORM\Table
      * @throws \RuntimeException When you try to configure an alias that already exists.
      */
-    public function get(string $alias, array $options = []): Table
+    function get(string $alias, array $options = []): Table
     {
         /** @var \Cake\ORM\Table */
         return parent::get($alias, $options);
@@ -315,7 +315,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      * @return \Cake\ORM\Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function set(string $alias, RepositoryInterface $repository): Table
+    function set(string $alias, RepositoryInterface $repository): Table
     {
         return this->instances[$alias] = $repository;
     }
@@ -323,7 +323,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function clear(): void
+    function clear(): void
     {
         parent::clear();
 
@@ -339,7 +339,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      *
      * @return array<\Cake\ORM\Table>
      */
-    public function genericInstances(): array
+    function genericInstances(): array
     {
         return this->_fallbacked;
     }
@@ -347,7 +347,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function remove(string $alias): void
+    function remove(string $alias): void
     {
         parent::remove($alias);
 
@@ -361,7 +361,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      * @return this
      * @since 3.8.0
      */
-    public function addLocation(string $location)
+    function addLocation(string $location)
     {
         $location = str_replace('\\', '/', $location);
         this->locations[] = trim($location, '/');

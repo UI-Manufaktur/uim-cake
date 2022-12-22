@@ -71,7 +71,7 @@ class LabelWidget implements WidgetInterface
      * @param \Cake\View\Form\ContextInterface $context The current form context.
      * @return string
      */
-    public function render(array $data, ContextInterface $context): string
+    function render(array $data, ContextInterface $context): string
     {
         $data += [
             'text' => '',
@@ -93,7 +93,7 @@ class LabelWidget implements WidgetInterface
     /**
      * @inheritDoc
      */
-    public function secureFields(array $data): array
+    function secureFields(array $data): array
     {
         return [];
     }

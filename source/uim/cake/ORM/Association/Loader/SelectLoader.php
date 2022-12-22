@@ -121,7 +121,7 @@ class SelectLoader
      * @param array<string, mixed> $options Same options as `Association::eagerLoader()`
      * @return \Closure
      */
-    public function buildEagerLoader(array $options): Closure
+    function buildEagerLoader(array $options): Closure
     {
         $options += this->_defaultOptions();
         $fetchQuery = this->_buildQuery($options);

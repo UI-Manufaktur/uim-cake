@@ -52,7 +52,7 @@ class Digest
      * @return \Cake\Http\Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
-    public function authentication(Request $request, array $credentials): Request
+    function authentication(Request $request, array $credentials): Request
     {
         if (!isset($credentials['username'], $credentials['password'])) {
             return $request;

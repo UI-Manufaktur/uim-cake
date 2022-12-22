@@ -27,12 +27,12 @@ interface FixtureStrategyInterface
      * @param array<string> $fixtureNames Name of fixtures used by test.
      * @return void
      */
-    public function setupTest(array $fixtureNames): void;
+    function setupTest(array $fixtureNames): void;
 
     /**
      * Called after each test run in each TestCase.
      *
      * @return void
      */
-    public function teardownTest(): void;
+    function teardownTest(): void;
 }

@@ -29,7 +29,7 @@ class MailCount extends MailConstraintBase
      * @param mixed $other Constraint check
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return count(this->getMessages()) === $other;
     }
@@ -39,7 +39,7 @@ class MailCount extends MailConstraintBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'emails were sent';
     }

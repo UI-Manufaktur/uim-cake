@@ -45,7 +45,7 @@ class TemplateFileEquals extends Constraint
      * @param mixed $other Expected filename
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return strpos(this->filename, $other) != false;
     }
@@ -55,7 +55,7 @@ class TemplateFileEquals extends Constraint
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf('equals template file `%s`', this->filename);
     }

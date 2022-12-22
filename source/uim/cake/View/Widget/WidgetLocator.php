@@ -86,7 +86,7 @@ class WidgetLocator
      * @param string $file The file to load
      * @return void
      */
-    public function load(string $file): void
+    function load(string $file): void
     {
         $loader = new PhpConfig();
         $widgets = $loader->read($file);
@@ -113,7 +113,7 @@ class WidgetLocator
      * @return void
      * @throws \RuntimeException When class does not implement WidgetInterface.
      */
-    public function add(array $widgets): void
+    function add(array $widgets): void
     {
         $files = [];
 
@@ -151,7 +151,7 @@ class WidgetLocator
      * @return \Cake\View\Widget\WidgetInterface WidgetInterface instance.
      * @throws \RuntimeException when widget is undefined.
      */
-    public function get(string $name): WidgetInterface
+    function get(string $name): WidgetInterface
     {
         if (!isset(this->_widgets[$name])) {
             if (empty(this->_widgets['_default'])) {
@@ -173,7 +173,7 @@ class WidgetLocator
      *
      * @return void
      */
-    public function clear(): void
+    function clear(): void
     {
         this->_widgets = [];
     }

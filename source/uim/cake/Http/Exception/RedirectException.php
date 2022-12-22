@@ -55,7 +55,7 @@ class RedirectException extends HttpException
      * @return this
      * @deprecated 4.2.0 Use `setHeaders()` instead.
      */
-    public function addHeaders(array $headers)
+    function addHeaders(array $headers)
     {
         deprecationWarning('RedirectException::addHeaders() is deprecated, use setHeaders() instead.');
 
@@ -73,7 +73,7 @@ class RedirectException extends HttpException
      * @return this
      * @deprecated 4.2.0 Use `setHeaders()` instead.
      */
-    public function removeHeader(string $key)
+    function removeHeader(string $key)
     {
         deprecationWarning('RedirectException::removeHeader() is deprecated, use setHeaders() instead.');
 

@@ -56,7 +56,7 @@ class MiddlewareDispatcher
      * @param array|string $url The URL array/string to resolve.
      * @return string
      */
-    public function resolveUrl($url): string
+    function resolveUrl($url): string
     {
         // If we need to resolve a Route URL but there are no routes, load routes.
         if (is_array($url) && count(Router::getRouteCollection()->routes()) === 0) {
@@ -134,7 +134,7 @@ class MiddlewareDispatcher
      * @return \Psr\Http\Message\ResponseInterface The generated response.
      * @throws \LogicException
      */
-    public function execute(array $requestSpec): ResponseInterface
+    function execute(array $requestSpec): ResponseInterface
     {
         $server = new Server(this->app);
 

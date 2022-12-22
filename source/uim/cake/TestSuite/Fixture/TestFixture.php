@@ -118,7 +118,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function connection(): string
+    function connection(): string
     {
         return this->connection;
     }
@@ -126,7 +126,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function sourceName(): string
+    function sourceName(): string
     {
         return this->table;
     }
@@ -137,7 +137,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
      * @return void
      * @throws \Cake\ORM\Exception\MissingTableClassException When importing from a table that does not exist.
      */
-    public function init(): void
+    function init(): void
     {
         if (this->table === null) {
             this->table = this->_tableFromClass();
@@ -267,7 +267,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function create(ConnectionInterface $connection): bool
+    function create(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(this->_schema)) {
@@ -304,7 +304,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function drop(ConnectionInterface $connection): bool
+    function drop(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(this->_schema)) {
@@ -331,7 +331,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function insert(ConnectionInterface $connection)
+    function insert(ConnectionInterface $connection)
     {
         if (!empty(this->records)) {
             [$fields, $values, $types] = this->_getRecords();
@@ -354,7 +354,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function createConstraints(ConnectionInterface $connection): bool
+    function createConstraints(ConnectionInterface $connection): bool
     {
         if (empty(this->_constraints)) {
             return true;
@@ -381,7 +381,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function dropConstraints(ConnectionInterface $connection): bool
+    function dropConstraints(ConnectionInterface $connection): bool
     {
         if (empty(this->_constraints)) {
             return true;
@@ -434,7 +434,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function truncate(ConnectionInterface $connection): bool
+    function truncate(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         $sql = this->_schema->truncateSql($connection);
@@ -448,7 +448,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function getTableSchema()
+    function getTableSchema()
     {
         return this->_schema;
     }
@@ -456,7 +456,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     /**
      * @inheritDoc
      */
-    public function setTableSchema($schema)
+    function setTableSchema($schema)
     {
         this->_schema = $schema;
 

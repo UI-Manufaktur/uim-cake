@@ -105,7 +105,7 @@ class MessagesFileLoader
      * @throws \RuntimeException if no file parser class could be found for the specified
      * file extension.
      */
-    public function __invoke()
+    function __invoke()
     {
         $folders = this->translationsFolders();
         $ext = this->_extension;
@@ -148,7 +148,7 @@ class MessagesFileLoader
      *
      * @return array<string> The list of folders where the translation file should be looked for
      */
-    public function translationsFolders(): array
+    function translationsFolders(): array
     {
         $locale = Locale::parseLocale(this->_locale) + ['region' => null];
 

@@ -85,7 +85,7 @@ class ViewBlock
      * @throws \Cake\Core\Exception\CakeException When starting a block twice
      * @return void
      */
-    public function start(string $name, string $mode = ViewBlock::OVERRIDE): void
+    function start(string $name, string $mode = ViewBlock::OVERRIDE): void
     {
         if (array_key_exists($name, this->_active)) {
             throw new CakeException(sprintf("A view block with the name '%s' is already/still open.", $name));
@@ -100,7 +100,7 @@ class ViewBlock
      * @return void
      * @see \Cake\View\ViewBlock::start()
      */
-    public function end(): void
+    function end(): void
     {
         if (this->_discardActiveBufferOnEnd) {
             this->_discardActiveBufferOnEnd = false;
@@ -139,7 +139,7 @@ class ViewBlock
      *   If ViewBlock::PREPEND it will be prepended.
      * @return void
      */
-    public function concat(string $name, $value = null, $mode = ViewBlock::APPEND): void
+    function concat(string $name, $value = null, $mode = ViewBlock::APPEND): void
     {
         if ($value === null) {
             this->start($name, $mode);
@@ -166,7 +166,7 @@ class ViewBlock
      *   to string.
      * @return void
      */
-    public function set(string $name, $value): void
+    function set(string $name, $value): void
     {
         this->_blocks[$name] = (string)$value;
     }
@@ -178,7 +178,7 @@ class ViewBlock
      * @param string $default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    public function get(string $name, string $default = ''): string
+    function get(string $name, string $default = ''): string
     {
         return this->_blocks[$name] ?? $default;
     }
@@ -189,7 +189,7 @@ class ViewBlock
      * @param string $name Name of the block
      * @return bool
      */
-    public function exists(string $name): bool
+    function exists(string $name): bool
     {
         return isset(this->_blocks[$name]);
     }
@@ -199,7 +199,7 @@ class ViewBlock
      *
      * @return array<string> An array containing the blocks.
      */
-    public function keys(): array
+    function keys(): array
     {
         return array_keys(this->_blocks);
     }
@@ -209,7 +209,7 @@ class ViewBlock
      *
      * @return string|null Either null or the name of the last open block.
      */
-    public function active(): ?string
+    function active(): ?string
     {
         end(this->_active);
 
@@ -221,7 +221,7 @@ class ViewBlock
      *
      * @return array<string> An array of unclosed blocks.
      */
-    public function unclosed(): array
+    function unclosed(): array
     {
         return this->_active;
     }

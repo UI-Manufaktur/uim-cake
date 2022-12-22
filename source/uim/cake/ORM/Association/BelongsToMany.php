@@ -166,7 +166,7 @@ class BelongsToMany extends Association
      * @param array<string>|string $key the key to be used to link both tables together
      * @return this
      */
-    public function setTargetForeignKey($key)
+    function setTargetForeignKey($key)
     {
         this->_targetForeignKey = $key;
 
@@ -178,7 +178,7 @@ class BelongsToMany extends Association
      *
      * @return array<string>|string
      */
-    public function getTargetForeignKey()
+    function getTargetForeignKey()
     {
         if (this->_targetForeignKey === null) {
             this->_targetForeignKey = this->_modelKey(this->getTarget()->getAlias());
@@ -194,7 +194,7 @@ class BelongsToMany extends Association
      * @return bool if the 'matching' key in $option is true then this function
      * will return true, false otherwise
      */
-    public function canBeJoined(array $options = []): bool
+    function canBeJoined(array $options = []): bool
     {
         return !empty($options['matching']);
     }
@@ -204,7 +204,7 @@ class BelongsToMany extends Association
      *
      * @return array<string>|string
      */
-    public function getForeignKey()
+    function getForeignKey()
     {
         if (this->_foreignKey === null) {
             this->_foreignKey = this->_modelKey(this->getSource()->getTable());
@@ -219,7 +219,7 @@ class BelongsToMany extends Association
      * @param mixed $sort A find() compatible order clause
      * @return this
      */
-    public function setSort($sort)
+    function setSort($sort)
     {
         this->_sort = $sort;
 
@@ -231,7 +231,7 @@ class BelongsToMany extends Association
      *
      * @return mixed
      */
-    public function getSort()
+    function getSort()
     {
         return this->_sort;
     }
@@ -239,7 +239,7 @@ class BelongsToMany extends Association
     /**
      * @inheritDoc
      */
-    public function defaultRowValue(array $row, bool $joined): array
+    function defaultRowValue(array $row, bool $joined): array
     {
         $sourceAlias = this->getSource()->getAlias();
         if (isset($row[$sourceAlias])) {
@@ -257,7 +257,7 @@ class BelongsToMany extends Association
      * @return \Cake\ORM\Table
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
-    public function junction($table = null): Table
+    function junction($table = null): Table
     {
         if ($table === null && this->_junctionTable != null) {
             return this->_junctionTable;
@@ -451,7 +451,7 @@ class BelongsToMany extends Association
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      * @return void
      */
-    public function attachTo(Query $query, array $options = []): void
+    function attachTo(Query $query, array $options = []): void
     {
         if (!empty($options['negateMatch'])) {
             this->_appendNotMatching($query, $options);
@@ -529,7 +529,7 @@ class BelongsToMany extends Association
      *
      * @return string
      */
-    public function type(): string
+    function type(): string
     {
         return self::MANY_TO_MANY;
     }
@@ -548,7 +548,7 @@ class BelongsToMany extends Association
     /**
      * @inheritDoc
      */
-    public function eagerLoader(array $options): Closure
+    function eagerLoader(array $options): Closure
     {
         $name = this->_junctionAssociationName();
         $loader = new SelectWithPivotLoader([
@@ -579,7 +579,7 @@ class BelongsToMany extends Association
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    public function cascadeDelete(EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(EntityInterface $entity, array $options = []): bool
     {
         if (!this->getDependent()) {
             return true;
@@ -624,7 +624,7 @@ class BelongsToMany extends Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
      */
-    public function isOwningSide(Table $side): bool
+    function isOwningSide(Table $side): bool
     {
         return true;
     }
@@ -636,7 +636,7 @@ class BelongsToMany extends Association
      * @throws \InvalidArgumentException if an invalid strategy name is passed
      * @return this
      */
-    public function setSaveStrategy(string $strategy)
+    function setSaveStrategy(string $strategy)
     {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
             $msg = sprintf('Invalid save strategy "%s"', $strategy);
@@ -653,7 +653,7 @@ class BelongsToMany extends Association
      *
      * @return string the strategy to be used for saving
      */
-    public function getSaveStrategy(): string
+    function getSaveStrategy(): string
     {
         return this->_saveStrategy;
     }
@@ -682,7 +682,7 @@ class BelongsToMany extends Association
      * @see \Cake\ORM\Table::save()
      * @see \Cake\ORM\Association\BelongsToMany::replaceLinks()
      */
-    public function saveAssociated(EntityInterface $entity, array $options = [])
+    function saveAssociated(EntityInterface $entity, array $options = [])
     {
         $targetEntity = $entity->get(this->getProperty());
         $strategy = this->getSaveStrategy();
@@ -859,7 +859,7 @@ class BelongsToMany extends Association
      *   detected to not be already persisted
      * @return bool true on success, false otherwise
      */
-    public function link(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function link(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
     {
         this->_checkPersistenceStatus($sourceEntity, $targetEntities);
         $property = this->getProperty();
@@ -910,7 +910,7 @@ class BelongsToMany extends Association
      *   any of them is lacking a primary key value.
      * @return bool Success
      */
-    public function unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): bool
+    function unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): bool
     {
         if (is_bool($options)) {
             $options = [
@@ -959,7 +959,7 @@ class BelongsToMany extends Association
     /**
      * @inheritDoc
      */
-    public function setConditions($conditions)
+    function setConditions($conditions)
     {
         parent::setConditions($conditions);
         this->_targetConditions = this->_junctionConditions = null;
@@ -973,7 +973,7 @@ class BelongsToMany extends Association
      * @param \Cake\ORM\Table|string $through Name of the Table instance or the instance itself
      * @return this
      */
-    public function setThrough($through)
+    function setThrough($through)
     {
         this->_through = $through;
 
@@ -985,7 +985,7 @@ class BelongsToMany extends Association
      *
      * @return \Cake\ORM\Table|string
      */
-    public function getThrough()
+    function getThrough()
     {
         return this->_through;
     }
@@ -1068,7 +1068,7 @@ class BelongsToMany extends Association
      * @see \Cake\ORM\Table::find()
      * @return \Cake\ORM\Query
      */
-    public function find($type = null, array $options = []): Query
+    function find($type = null, array $options = []): Query
     {
         $type = $type ?: this->getFinder();
         [$type, $opts] = this->_extractFinder($type);
@@ -1169,7 +1169,7 @@ class BelongsToMany extends Association
      *   any of them is lacking a primary key value
      * @return bool success
      */
-    public function replaceLinks(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function replaceLinks(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
     {
         $bindingKey = (array)this->getBindingKey();
         $primaryValue = $sourceEntity->extract($bindingKey);

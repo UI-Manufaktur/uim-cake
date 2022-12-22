@@ -47,7 +47,7 @@ abstract class MailConstraintBase extends Constraint
      *
      * @return array<\Cake\Mailer\Message>
      */
-    public function getMessages()
+    function getMessages()
     {
         $messages = TestEmailTransport::getMessages();
 

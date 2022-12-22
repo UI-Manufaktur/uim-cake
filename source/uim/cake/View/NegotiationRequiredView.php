@@ -42,7 +42,7 @@ class NegotiationRequiredView extends View
      *
      * @return void
      */
-    public function initialize(): void
+    function initialize(): void
     {
         $response = this->getResponse()->withStatus(406);
         this->setResponse($response);
@@ -55,7 +55,7 @@ class NegotiationRequiredView extends View
      * @param string|false|null $layout Layout to use. False to disable.
      * @return string Rendered content.
      */
-    public function render(?string $template = null, $layout = null): string
+    function render(?string $template = null, $layout = null): string
     {
         return '';
     }

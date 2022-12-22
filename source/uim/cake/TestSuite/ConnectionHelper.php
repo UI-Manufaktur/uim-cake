@@ -38,7 +38,7 @@ class ConnectionHelper
      *
      * @return void
      */
-    public function addTestAliases(): void
+    function addTestAliases(): void
     {
         ConnectionManager::alias('test', 'default');
         foreach (ConnectionManager::configured() as $connection) {
@@ -62,7 +62,7 @@ class ConnectionHelper
      * @param array<int, string>|null $connections Connection names or null for all.
      * @return void
      */
-    public function enableQueryLogging(?array $connections = null): void
+    function enableQueryLogging(?array $connections = null): void
     {
         $connections = $connections ?? ConnectionManager::configured();
         foreach ($connections as $connection) {
@@ -80,7 +80,7 @@ class ConnectionHelper
      * @param array<string>|null $tables List of tables names or null for all.
      * @return void
      */
-    public function dropTables(string $connectionName, ?array $tables = null): void
+    function dropTables(string $connectionName, ?array $tables = null): void
     {
         /** @var \Cake\Database\Connection $connection */
         $connection = ConnectionManager::get($connectionName);
@@ -119,7 +119,7 @@ class ConnectionHelper
      * @param array<string>|null $tables List of tables names or null for all.
      * @return void
      */
-    public function truncateTables(string $connectionName, ?array $tables = null): void
+    function truncateTables(string $connectionName, ?array $tables = null): void
     {
         /** @var \Cake\Database\Connection $connection */
         $connection = ConnectionManager::get($connectionName);
@@ -149,7 +149,7 @@ class ConnectionHelper
      * @param \Closure $callback callback
      * @return void
      */
-    public function runWithoutConstraints(Connection $connection, Closure $callback): void
+    function runWithoutConstraints(Connection $connection, Closure $callback): void
     {
         if ($connection->getDriver()->supports(DriverInterface::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION)) {
             $connection->disableConstraints(function (Connection $connection) use ($callback): void {

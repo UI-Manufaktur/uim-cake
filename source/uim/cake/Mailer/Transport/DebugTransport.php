@@ -30,7 +30,7 @@ class DebugTransport extends AbstractTransport
     /**
      * @inheritDoc
      */
-    public function send(Message $message): array
+    function send(Message $message): array
     {
         $headers = $message->getHeadersString(
             ['from', 'sender', 'replyTo', 'readReceipt', 'returnPath', 'to', 'cc', 'subject']

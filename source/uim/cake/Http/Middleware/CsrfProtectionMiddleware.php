@@ -122,7 +122,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\ResponseInterface A response.
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $method = $request->getMethod();
         $hasData = in_array($method, ['PUT', 'POST', 'DELETE', 'PATCH'], true)
@@ -184,7 +184,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * @param callable $callback A callable.
      * @return this
      */
-    public function whitelistCallback(callable $callback)
+    function whitelistCallback(callable $callback)
     {
         deprecationWarning('`whitelistCallback()` is deprecated. Use `skipCheckCallback()` instead.');
         this->skipCheckCallback = $callback;
@@ -201,7 +201,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * @param callable $callback A callable.
      * @return this
      */
-    public function skipCheckCallback(callable $callback)
+    function skipCheckCallback(callable $callback)
     {
         this->skipCheckCallback = $callback;
 
@@ -259,7 +259,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      *
      * @return string
      */
-    public function createToken(): string
+    function createToken(): string
     {
         $value = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
 
@@ -276,7 +276,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * @param string $token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    public function saltToken(string $token): string
+    function saltToken(string $token): string
     {
         if (this->isHexadecimalToken($token)) {
             return $token;
@@ -306,7 +306,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * @param string $token The token that could be salty.
      * @return string An unsalted token.
      */
-    public function unsaltToken(string $token): string
+    function unsaltToken(string $token): string
     {
         if (this->isHexadecimalToken($token)) {
             return $token;

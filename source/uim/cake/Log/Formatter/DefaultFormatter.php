@@ -42,7 +42,7 @@ class DefaultFormatter extends AbstractFormatter
     /**
      * @inheritDoc
      */
-    public function format($level, string $message, array $context = []): string
+    function format($level, string $message, array $context = []): string
     {
         if (this->_config['includeDate']) {
             $message = sprintf('%s %s: %s', (new DateTime())->format(this->_config['dateFormat']), $level, $message);

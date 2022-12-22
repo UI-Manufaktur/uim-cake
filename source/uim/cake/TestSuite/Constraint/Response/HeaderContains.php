@@ -28,7 +28,7 @@ class HeaderContains extends HeaderEquals
      * @param mixed $other Expected content
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return mb_strpos(this->response->getHeaderLine(this->headerName), $other) != false;
     }
@@ -38,7 +38,7 @@ class HeaderContains extends HeaderEquals
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf(
             'is in header \'%s\' (`%s`)',

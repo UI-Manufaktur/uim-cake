@@ -132,7 +132,7 @@ class EagerLoader
      * @return array Containments.
      * @throws \InvalidArgumentException When using $queryBuilder with an array of $associations
      */
-    public function contain($associations, ?callable $queryBuilder = null): array
+    function contain($associations, ?callable $queryBuilder = null): array
     {
         if ($queryBuilder) {
             if (!is_string($associations)) {
@@ -165,7 +165,7 @@ class EagerLoader
      *
      * @return array Containments.
      */
-    public function getContain(): array
+    function getContain(): array
     {
         return this->_containments;
     }
@@ -178,7 +178,7 @@ class EagerLoader
      *
      * @return void
      */
-    public function clearContain(): void
+    function clearContain(): void
     {
         this->_containments = [];
         this->_normalized = null;
@@ -192,7 +192,7 @@ class EagerLoader
      * @param bool $enable The value to set.
      * @return this
      */
-    public function enableAutoFields(bool $enable = true)
+    function enableAutoFields(bool $enable = true)
     {
         this->_autoFields = $enable;
 
@@ -204,7 +204,7 @@ class EagerLoader
      *
      * @return this
      */
-    public function disableAutoFields()
+    function disableAutoFields()
     {
         this->_autoFields = false;
 
@@ -216,7 +216,7 @@ class EagerLoader
      *
      * @return bool The current value.
      */
-    public function isAutoFieldsEnabled(): bool
+    function isAutoFieldsEnabled(): bool
     {
         return this->_autoFields;
     }
@@ -240,7 +240,7 @@ class EagerLoader
      * @param array<string, mixed> $options Extra options for the association matching.
      * @return this
      */
-    public function setMatching(string $associationPath, ?callable $builder = null, array $options = [])
+    function setMatching(string $associationPath, ?callable $builder = null, array $options = [])
     {
         if (this->_matching === null) {
             this->_matching = new static();
@@ -270,7 +270,7 @@ class EagerLoader
      *
      * @return array The resulting containments array
      */
-    public function getMatching(): array
+    function getMatching(): array
     {
         if (this->_matching === null) {
             this->_matching = new static();
@@ -295,7 +295,7 @@ class EagerLoader
      * will be normalized
      * @return array
      */
-    public function normalized(Table $repository): array
+    function normalized(Table $repository): array
     {
         if (this->_normalized != null || empty(this->_containments)) {
             return (array)this->_normalized;
@@ -407,7 +407,7 @@ class EagerLoader
      * per association in the containments array
      * @return void
      */
-    public function attachAssociations(Query $query, Table $repository, bool $includeFields): void
+    function attachAssociations(Query $query, Table $repository, bool $includeFields): void
     {
         if (empty(this->_containments) && this->_matching === null) {
             return;
@@ -440,7 +440,7 @@ class EagerLoader
      * attached
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    public function attachableAssociations(Table $repository): array
+    function attachableAssociations(Table $repository): array
     {
         $contain = this->normalized($repository);
         $matching = this->_matching ? this->_matching->normalized($repository) : [];
@@ -458,7 +458,7 @@ class EagerLoader
      * to be loaded
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    public function externalAssociations(Table $repository): array
+    function externalAssociations(Table $repository): array
     {
         if (this->_loadExternal) {
             return this->_loadExternal;
@@ -622,7 +622,7 @@ class EagerLoader
      * @return \Cake\Database\StatementInterface statement modified statement with extra loaders
      * @throws \RuntimeException
      */
-    public function loadExternal(Query $query, StatementInterface $statement): StatementInterface
+    function loadExternal(Query $query, StatementInterface $statement): StatementInterface
     {
         $table = $query->getRepository();
         $external = this->externalAssociations($table);
@@ -695,7 +695,7 @@ class EagerLoader
      * will be normalized
      * @return array
      */
-    public function associationsMap(Table $table): array
+    function associationsMap(Table $table): array
     {
         $map = [];
 
@@ -757,7 +757,7 @@ class EagerLoader
      * If not passed, the default property for the association will be used.
      * @return void
      */
-    public function addToJoinsMap(
+    function addToJoinsMap(
         string $alias,
         Association $assoc,
         bool $asMatching = false,
@@ -861,7 +861,7 @@ class EagerLoader
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         if (this->_matching) {
             this->_matching = clone this->_matching;

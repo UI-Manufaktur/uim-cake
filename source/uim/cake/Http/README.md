@@ -52,7 +52,7 @@ class Application implements HttpApplicationInterface
      *
      * @return void
      */
-    public function bootstrap(): void
+    function bootstrap(): void
     {
         // Load configuration here. This is the first
         // method Cake\Http\Server will call on your application.
@@ -64,7 +64,7 @@ class Application implements HttpApplicationInterface
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
      * @return \Cake\Http\MiddlewareQueue
      */
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // Add middleware for your application.
         return $middlewareQueue;
@@ -76,7 +76,7 @@ class Application implements HttpApplicationInterface
      * @param \Psr\Http\Message\ServerRequestInterface $request The request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    function handle(ServerRequestInterface $request): ResponseInterface
     {
         return new Response(['body'=>'Hello World!']);
     }

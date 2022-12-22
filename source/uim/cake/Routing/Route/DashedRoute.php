@@ -61,7 +61,7 @@ class DashedRoute extends Route
      * @param string $method The HTTP method.
      * @return array|null An array of request parameters, or null on failure.
      */
-    public function parse(string $url, string $method = ''): ?array
+    function parse(string $url, string $method = ''): ?array
     {
         $params = parent::parse($url, $method);
         if (!$params) {
@@ -94,7 +94,7 @@ class DashedRoute extends Route
      *   directory.
      * @return string|null Either a string URL or null.
      */
-    public function match(array $url, array $context = []): ?string
+    function match(array $url, array $context = []): ?string
     {
         $url = this->_dasherize($url);
         if (!this->_inflectedDefaults) {

@@ -122,7 +122,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @param array<string, mixed> $config The config for this behavior.
      * @return void
      */
-    public function initialize(array $config): void
+    function initialize(array $config): void
     {
         this->getStrategy();
     }
@@ -158,7 +158,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @return \Cake\ORM\Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
-    public function getStrategy(): TranslateStrategyInterface
+    function getStrategy(): TranslateStrategyInterface
     {
         if (this->strategy != null) {
             return this->strategy;
@@ -192,7 +192,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @return this
      * @since 4.0.0
      */
-    public function setStrategy(TranslateStrategyInterface $strategy)
+    function setStrategy(TranslateStrategyInterface $strategy)
     {
         this->strategy = $strategy;
 
@@ -204,7 +204,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [
             'Model.beforeFind' => 'beforeFind',
@@ -225,7 +225,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @param array<string, mixed> $options The options array used in the marshalling call.
      * @return array A map of `[property => callable]` of additional properties to marshal.
      */
-    public function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
+    function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
         return this->getStrategy()->buildMarshalMap($marshaller, $map, $options);
     }
@@ -250,7 +250,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
-    public function setLocale(?string $locale)
+    function setLocale(?string $locale)
     {
         this->getStrategy()->setLocale($locale);
 
@@ -267,7 +267,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @see \Cake\I18n\I18n::getLocale()
      * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
      */
-    public function getLocale(): string
+    function getLocale(): string
     {
         return this->getStrategy()->getLocale();
     }
@@ -282,7 +282,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    public function translationField(string $field): string
+    function translationField(string $field): string
     {
         return this->getStrategy()->translationField($field);
     }
@@ -309,7 +309,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @param array<string, mixed> $options Options
      * @return \Cake\ORM\Query
      */
-    public function findTranslations(Query $query, array $options): Query
+    function findTranslations(Query $query, array $options): Query
     {
         $locales = $options['locales'] ?? [];
         $targetAlias = this->getStrategy()->getTranslationTable()->getAlias();
@@ -333,7 +333,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      * @param array $args Method arguments.
      * @return mixed
      */
-    public function __call($method, $args)
+    function __call($method, $args)
     {
         return this->strategy->{$method}(...$args);
     }

@@ -185,7 +185,7 @@ class ResultSet implements ResultSetInterface
      * @return object|array
      */
     #[\ReturnTypeWillChange]
-    public function current()
+    function current()
     {
         return this->_current;
     }
@@ -197,7 +197,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return int
      */
-    public function key(): int
+    function key(): int
     {
         return this->_index;
     }
@@ -209,7 +209,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return void
      */
-    public function next(): void
+    function next(): void
     {
         this->_index++;
     }
@@ -222,7 +222,7 @@ class ResultSet implements ResultSetInterface
      * @throws \Cake\Database\Exception\DatabaseException
      * @return void
      */
-    public function rewind(): void
+    function rewind(): void
     {
         if (this->_index === 0) {
             return;
@@ -244,7 +244,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return bool
      */
-    public function valid(): bool
+    function valid(): bool
     {
         if (this->_useBuffering) {
             $valid = this->_index < this->_count;
@@ -278,7 +278,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return object|array|null
      */
-    public function first()
+    function first()
     {
         foreach (this as $result) {
             if (this->_statement != null && !this->_useBuffering) {
@@ -298,7 +298,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return string Serialized object
      */
-    public function serialize(): string
+    function serialize(): string
     {
         return serialize(this->__serialize());
     }
@@ -308,7 +308,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return array
      */
-    public function __serialize(): array
+    function __serialize(): array
     {
         if (!this->_useBuffering) {
             $msg = 'You cannot serialize an un-buffered ResultSet. '
@@ -335,7 +335,7 @@ class ResultSet implements ResultSetInterface
      * @param string $serialized Serialized object
      * @return void
      */
-    public function unserialize($serialized)
+    function unserialize($serialized)
     {
         this->__unserialize((array)(unserialize($serialized) ?: []));
     }
@@ -346,7 +346,7 @@ class ResultSet implements ResultSetInterface
      * @param array $data Data array.
      * @return void
      */
-    public function __unserialize(array $data): void
+    function __unserialize(array $data): void
     {
         this->_results = SplFixedArray::fromArray($data);
         this->_useBuffering = true;
@@ -360,7 +360,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         if (this->_count != null) {
             return this->_count;
@@ -570,7 +570,7 @@ class ResultSet implements ResultSetInterface
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo()
+    function __debugInfo()
     {
         $currentIndex = this->_index;
         // toArray() adjusts the current index, so we have to reset it

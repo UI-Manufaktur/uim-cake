@@ -30,5 +30,5 @@ interface ValidatableInterface
      * @param \Cake\Validation\Validator $validator The validator to use when validating the entity.
      * @return array
      */
-    public function validate(Validator $validator): array;
+    function validate(Validator $validator): array;
 }

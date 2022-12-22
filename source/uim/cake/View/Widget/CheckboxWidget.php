@@ -56,7 +56,7 @@ class CheckboxWidget extends BasicWidget
      * @param \Cake\View\Form\ContextInterface $context The current form context.
      * @return string Generated HTML string.
      */
-    public function render(array $data, ContextInterface $context): string
+    function render(array $data, ContextInterface $context): string
     {
         $data += this->mergeDefaults($data, $context);
 

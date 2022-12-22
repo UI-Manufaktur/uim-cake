@@ -122,7 +122,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
      * @param \ArrayObject $options The options for the query.
      * @return void
      */
-    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options)
+    function beforeFind(EventInterface $event, Query $query, ArrayObject $options)
     {
         $locale = Hash::get($options, 'locale', this->getLocale());
         $config = this->getConfig();
@@ -342,7 +342,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
      * @param \ArrayObject $options the options passed to the save method.
      * @return void
      */
-    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         $locale = $entity->get('_locale') ?: this->getLocale();
         $newOptions = [this->translationTable->getAlias() => ['validate' => false]];
@@ -431,7 +431,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
     /**
      * @inheritDoc
      */
-    public function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
+    function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
         this->translatedFields();
 
@@ -448,7 +448,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    public function translationField(string $field): string
+    function translationField(string $field): string
     {
         if (this->getLocale() === this->getConfig('defaultLocale')) {
             return this->table->aliasField($field);
@@ -534,7 +534,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
      * @param \Cake\Datasource\ResultSetInterface $results Results to modify.
      * @return \Cake\Collection\CollectionInterface
      */
-    public function groupTranslations($results): CollectionInterface
+    function groupTranslations($results): CollectionInterface
     {
         return $results->map(function ($row) {
             $translations = (array)$row['_i18n'];

@@ -55,7 +55,7 @@ class SchemaLoader
      * @param bool $truncateTables Truncate all tables after loading schema files
      * @return void
      */
-    public function loadSqlFiles(
+    function loadSqlFiles(
         $paths,
         string $connectionName = 'test',
         bool $dropTables = true,
@@ -99,7 +99,7 @@ class SchemaLoader
      * @return void
      * @internal
      */
-    public function loadInternalFile(string $file, string $connectionName = 'test'): void
+    function loadInternalFile(string $file, string $connectionName = 'test'): void
     {
         // Don't reload schema when we are in a separate process state.
         if (isset($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {

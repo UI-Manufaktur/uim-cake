@@ -40,7 +40,7 @@ abstract class AbstractTransport
      * @return array
      * @psalm-return array{headers: string, message: string}
      */
-    abstract public function send(Message $message): array;
+    abstract function send(Message $message): array;
 
     /**
      * Constructor

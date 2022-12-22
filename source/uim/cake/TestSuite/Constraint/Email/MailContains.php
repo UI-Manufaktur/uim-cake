@@ -36,7 +36,7 @@ class MailContains extends MailConstraintBase
      * @param mixed $other Constraint check
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $other = preg_quote($other, '/');
         $messages = this->getMessages();
@@ -87,7 +87,7 @@ class MailContains extends MailConstraintBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         if (this->at) {
             return sprintf('is in email #%d', this->at) . this->getAssertedMessages();

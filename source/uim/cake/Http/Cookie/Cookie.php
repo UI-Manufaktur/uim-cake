@@ -331,7 +331,7 @@ class Cookie implements CookieInterface
      *
      * @return string
      */
-    public function toHeaderValue(): string
+    function toHeaderValue(): string
     {
         $value = this->value;
         if (this->isExpanded) {
@@ -367,7 +367,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withName(string $name)
+    function withName(string $name)
     {
         this->validateName($name);
         $new = clone this;
@@ -379,7 +379,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getId(): string
+    function getId(): string
     {
         return "{this->name};{this->domain};{this->path}";
     }
@@ -387,7 +387,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getName(): string
+    function getName(): string
     {
         return this->name;
     }
@@ -416,7 +416,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getValue()
+    function getValue()
     {
         return this->value;
     }
@@ -429,7 +429,7 @@ class Cookie implements CookieInterface
      * @return mixed
      * @deprecated 4.0.0 Use {@link getScalarValue()} instead.
      */
-    public function getStringValue()
+    function getStringValue()
     {
         deprecationWarning('Cookie::getStringValue() is deprecated. Use getScalarValue() instead.');
 
@@ -439,7 +439,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getScalarValue()
+    function getScalarValue()
     {
         if (this->isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -452,7 +452,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withValue($value)
+    function withValue($value)
     {
         $new = clone this;
         $new->_setValue($value);
@@ -475,7 +475,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withPath(string $path)
+    function withPath(string $path)
     {
         $new = clone this;
         $new->path = $path;
@@ -486,7 +486,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getPath(): string
+    function getPath(): string
     {
         return this->path;
     }
@@ -494,7 +494,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withDomain(string $domain)
+    function withDomain(string $domain)
     {
         $new = clone this;
         $new->domain = $domain;
@@ -505,7 +505,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getDomain(): string
+    function getDomain(): string
     {
         return this->domain;
     }
@@ -513,7 +513,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function isSecure(): bool
+    function isSecure(): bool
     {
         return this->secure;
     }
@@ -521,7 +521,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withSecure(bool $secure)
+    function withSecure(bool $secure)
     {
         $new = clone this;
         $new->secure = $secure;
@@ -532,7 +532,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withHttpOnly(bool $httpOnly)
+    function withHttpOnly(bool $httpOnly)
     {
         $new = clone this;
         $new->httpOnly = $httpOnly;
@@ -543,7 +543,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function isHttpOnly(): bool
+    function isHttpOnly(): bool
     {
         return this->httpOnly;
     }
@@ -551,7 +551,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withExpiry($dateTime)
+    function withExpiry($dateTime)
     {
         $new = clone this;
         $new->expiresAt = $dateTime->setTimezone(new DateTimeZone('GMT'));
@@ -562,7 +562,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getExpiry()
+    function getExpiry()
     {
         return this->expiresAt;
     }
@@ -570,7 +570,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getExpiresTimestamp(): ?int
+    function getExpiresTimestamp(): ?int
     {
         if (!this->expiresAt) {
             return null;
@@ -582,7 +582,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getFormattedExpires(): string
+    function getFormattedExpires(): string
     {
         if (!this->expiresAt) {
             return '';
@@ -594,7 +594,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function isExpired($time = null): bool
+    function isExpired($time = null): bool
     {
         $time = $time ?: new DateTimeImmutable('now', new DateTimeZone('UTC'));
         if (!this->expiresAt) {
@@ -607,7 +607,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withNeverExpire()
+    function withNeverExpire()
     {
         $new = clone this;
         $new->expiresAt = new DateTimeImmutable('2038-01-01');
@@ -618,7 +618,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withExpired()
+    function withExpired()
     {
         $new = clone this;
         $new->expiresAt = new DateTimeImmutable('1970-01-01 00:00:01');
@@ -629,7 +629,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getSameSite(): ?string
+    function getSameSite(): ?string
     {
         return this->sameSite;
     }
@@ -637,7 +637,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function withSameSite(?string $sameSite)
+    function withSameSite(?string $sameSite)
     {
         if ($sameSite != null) {
             this->validateSameSiteValue($sameSite);
@@ -674,7 +674,7 @@ class Cookie implements CookieInterface
      * @param string $path Path to check
      * @return bool
      */
-    public function check(string $path): bool
+    function check(string $path): bool
     {
         if (this->isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -692,7 +692,7 @@ class Cookie implements CookieInterface
      * @param mixed $value Value to write
      * @return static
      */
-    public function withAddedValue(string $path, $value)
+    function withAddedValue(string $path, $value)
     {
         $new = clone this;
         if ($new->isExpanded === false) {
@@ -712,7 +712,7 @@ class Cookie implements CookieInterface
      * @param string $path Path to remove
      * @return static
      */
-    public function withoutAddedValue(string $path)
+    function withoutAddedValue(string $path)
     {
         $new = clone this;
         if ($new->isExpanded === false) {
@@ -735,7 +735,7 @@ class Cookie implements CookieInterface
      * @param string|null $path Path to read the data from
      * @return mixed
      */
-    public function read(?string $path = null)
+    function read(?string $path = null)
     {
         if (this->isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -755,7 +755,7 @@ class Cookie implements CookieInterface
      *
      * @return bool
      */
-    public function isExpanded(): bool
+    function isExpanded(): bool
     {
         return this->isExpanded;
     }
@@ -763,7 +763,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function getOptions(): array
+    function getOptions(): array
     {
         $options = [
             'expires' => (int)this->getExpiresTimestamp(),
@@ -783,7 +783,7 @@ class Cookie implements CookieInterface
     /**
      * @inheritDoc
      */
-    public function toArray(): array
+    function toArray(): array
     {
         return [
             'name' => this->name,

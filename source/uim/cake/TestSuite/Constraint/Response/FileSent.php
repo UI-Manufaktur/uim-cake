@@ -33,7 +33,7 @@ class FileSent extends ResponseBase
      * @param mixed $other Expected type
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return this->response->getFile() != null;
     }
@@ -43,7 +43,7 @@ class FileSent extends ResponseBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'file was sent';
     }

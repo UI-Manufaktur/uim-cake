@@ -68,7 +68,7 @@ class FixtureInjector implements TestListener
      * @param \PHPUnit\Framework\TestSuite $suite The test suite
      * @return void
      */
-    public function startTestSuite(TestSuite $suite): void
+    function startTestSuite(TestSuite $suite): void
     {
         if (empty(this->_first)) {
             deprecationWarning(
@@ -89,7 +89,7 @@ class FixtureInjector implements TestListener
      * @param \PHPUnit\Framework\TestSuite $suite The test suite
      * @return void
      */
-    public function endTestSuite(TestSuite $suite): void
+    function endTestSuite(TestSuite $suite): void
     {
         if (this->_first === $suite) {
             this->_fixtureManager->shutDown();
@@ -102,7 +102,7 @@ class FixtureInjector implements TestListener
      * @param \PHPUnit\Framework\Test $test The test case
      * @return void
      */
-    public function startTest(Test $test): void
+    function startTest(Test $test): void
     {
         if ($test instanceof TestCase) {
             this->_fixtureManager->fixturize($test);
@@ -117,7 +117,7 @@ class FixtureInjector implements TestListener
      * @param float $time current time
      * @return void
      */
-    public function endTest(Test $test, float $time): void
+    function endTest(Test $test, float $time): void
     {
         if ($test instanceof TestCase) {
             this->_fixtureManager->unload($test);

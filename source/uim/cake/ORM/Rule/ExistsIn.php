@@ -79,7 +79,7 @@ class ExistsIn
      * @throws \RuntimeException When the rule refers to an undefined association.
      * @return bool
      */
-    public function __invoke(EntityInterface $entity, array $options): bool
+    function __invoke(EntityInterface $entity, array $options): bool
     {
         if (is_string(this->_repository)) {
             if (!$options['repository']->hasAssociation(this->_repository)) {

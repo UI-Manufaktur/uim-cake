@@ -67,7 +67,7 @@ class Package
      * @param array<array|string> $messages The messages for this package.
      * @return void
      */
-    public function setMessages(array $messages): void
+    function setMessages(array $messages): void
     {
         this->messages = $messages;
     }
@@ -79,7 +79,7 @@ class Package
      * @param array|string $message the actual message
      * @return void
      */
-    public function addMessage(string $key, $message): void
+    function addMessage(string $key, $message): void
     {
         this->messages[$key] = $message;
     }
@@ -90,7 +90,7 @@ class Package
      * @param array<array|string> $messages The messages to add in this package.
      * @return void
      */
-    public function addMessages(array $messages): void
+    function addMessages(array $messages): void
     {
         this->messages = array_merge(this->messages, $messages);
     }
@@ -100,7 +100,7 @@ class Package
      *
      * @return array<array|string>
      */
-    public function getMessages(): array
+    function getMessages(): array
     {
         return this->messages;
     }
@@ -111,7 +111,7 @@ class Package
      * @param string $key the key of the message to return
      * @return array|string|false The message translation, or false if not found.
      */
-    public function getMessage(string $key)
+    function getMessage(string $key)
     {
         return this->messages[$key] ?? false;
     }
@@ -122,7 +122,7 @@ class Package
      * @param string $formatter The formatter name for this package.
      * @return void
      */
-    public function setFormatter(string $formatter): void
+    function setFormatter(string $formatter): void
     {
         this->formatter = $formatter;
     }
@@ -132,7 +132,7 @@ class Package
      *
      * @return string
      */
-    public function getFormatter(): string
+    function getFormatter(): string
     {
         return this->formatter;
     }
@@ -143,7 +143,7 @@ class Package
      * @param string|null $fallback The fallback package name.
      * @return void
      */
-    public function setFallback(?string $fallback): void
+    function setFallback(?string $fallback): void
     {
         this->fallback = $fallback;
     }
@@ -153,7 +153,7 @@ class Package
      *
      * @return string|null
      */
-    public function getFallback(): ?string
+    function getFallback(): ?string
     {
         return this->fallback;
     }

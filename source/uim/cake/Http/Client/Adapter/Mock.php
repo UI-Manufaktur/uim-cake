@@ -51,7 +51,7 @@ class Mock implements AdapterInterface
      * @param array<string, mixed> $options See above.
      * @return void
      */
-    public function addResponse(RequestInterface $request, Response $response, array $options): void
+    function addResponse(RequestInterface $request, Response $response, array $options): void
     {
         if (isset($options['match']) && !($options['match'] instanceof Closure)) {
             $type = getTypeName($options['match']);
@@ -71,7 +71,7 @@ class Mock implements AdapterInterface
      * @param array<string, mixed> $options Unused.
      * @return \Cake\Http\Client\Response[] The matched response or an empty array for no matches.
      */
-    public function send(RequestInterface $request, array $options): array
+    function send(RequestInterface $request, array $options): array
     {
         $found = null;
         $method = $request->getMethod();

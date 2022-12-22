@@ -64,7 +64,7 @@ class IsUnique
      * @param array<string, mixed> $options Options passed to the check,
      * @return bool
      */
-    public function __invoke(EntityInterface $entity, array $options): bool
+    function __invoke(EntityInterface $entity, array $options): bool
     {
         if (!$entity->extract(this->_fields, true)) {
             return true;

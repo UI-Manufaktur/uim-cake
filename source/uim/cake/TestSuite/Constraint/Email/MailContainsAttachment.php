@@ -29,7 +29,7 @@ class MailContainsAttachment extends MailContains
      * @param mixed $other Constraint check
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         [$expectedFilename, $expectedFileInfo] = $other;
 
@@ -53,7 +53,7 @@ class MailContainsAttachment extends MailContains
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         if (this->at) {
             return sprintf('is an attachment of email #%d', this->at);

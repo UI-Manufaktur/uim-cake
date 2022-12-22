@@ -30,70 +30,70 @@ trait TestListenerTrait
     /**
      * @inheritDoc
      */
-    public function startTestSuite(TestSuite $suite): void
+    function startTestSuite(TestSuite $suite): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function endTestSuite(TestSuite $suite): void
+    function endTestSuite(TestSuite $suite): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function startTest(Test $test): void
+    function startTest(Test $test): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function endTest(Test $test, float $time): void
+    function endTest(Test $test, float $time): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function addSkippedTest(Test $test, Throwable $t, float $time): void
+    function addSkippedTest(Test $test, Throwable $t, float $time): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function addError(Test $test, Throwable $t, float $time): void
+    function addError(Test $test, Throwable $t, float $time): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function addWarning(Test $test, Warning $e, float $time): void
+    function addWarning(Test $test, Warning $e, float $time): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function addFailure(Test $test, AssertionFailedError $e, float $time): void
+    function addFailure(Test $test, AssertionFailedError $e, float $time): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function addRiskyTest(Test $test, Throwable $t, float $time): void
+    function addRiskyTest(Test $test, Throwable $t, float $time): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function addIncompleteTest(Test $test, Throwable $t, float $time): void
+    function addIncompleteTest(Test $test, Throwable $t, float $time): void
     {
     }
 }

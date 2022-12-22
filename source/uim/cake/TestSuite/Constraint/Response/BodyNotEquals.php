@@ -28,7 +28,7 @@ class BodyNotEquals extends BodyEquals
      * @param mixed $other Expected type
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return parent::matches($other) === false;
     }
@@ -38,7 +38,7 @@ class BodyNotEquals extends BodyEquals
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'does not match response body';
     }

@@ -73,7 +73,7 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
      * @param \Psr\Http\Server\RequestHandlerInterface $handler Request handler instance.
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         return (this->callable)(
             $request,
@@ -88,7 +88,7 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
      * @internal
      * @return callable
      */
-    public function getCallable(): callable
+    function getCallable(): callable
     {
         return this->callable;
     }

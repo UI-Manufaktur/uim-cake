@@ -161,7 +161,7 @@ class Message
      *
      * @return array
      */
-    public function cookies(): array
+    function cookies(): array
     {
         return this->_cookies;
     }

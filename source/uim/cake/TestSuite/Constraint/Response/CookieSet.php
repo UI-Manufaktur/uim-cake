@@ -33,7 +33,7 @@ class CookieSet extends ResponseBase
      * @param mixed $other Expected content
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $cookie = this->response->getCookie($other);
 
@@ -45,7 +45,7 @@ class CookieSet extends ResponseBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'cookie is set';
     }

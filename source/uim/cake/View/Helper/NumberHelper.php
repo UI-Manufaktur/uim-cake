@@ -82,7 +82,7 @@ class NumberHelper extends Helper
      * @param array $params Array of params for the method.
      * @return mixed Whatever is returned by called method, or false on failure
      */
-    public function __call(string $method, array $params)
+    function __call(string $method, array $params)
     {
         return this->_engine->{$method}(...$params);
     }
@@ -97,7 +97,7 @@ class NumberHelper extends Helper
      * @see \Cake\I18n\Number::precision()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
-    public function precision($number, int $precision = 3, array $options = []): string
+    function precision($number, int $precision = 3, array $options = []): string
     {
         return this->_engine->precision($number, $precision, $options);
     }
@@ -110,7 +110,7 @@ class NumberHelper extends Helper
      * @see \Cake\I18n\Number::toReadableSize()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#interacting-with-human-readable-values
      */
-    public function toReadableSize($size): string
+    function toReadableSize($size): string
     {
         return this->_engine->toReadableSize($size);
     }
@@ -129,7 +129,7 @@ class NumberHelper extends Helper
      * @see \Cake\I18n\Number::toPercentage()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-percentages
      */
-    public function toPercentage($number, int $precision = 2, array $options = []): string
+    function toPercentage($number, int $precision = 2, array $options = []): string
     {
         return this->_engine->toPercentage($number, $precision, $options);
     }
@@ -151,7 +151,7 @@ class NumberHelper extends Helper
      * @return string Formatted number
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-numbers
      */
-    public function format($number, array $options = []): string
+    function format($number, array $options = []): string
     {
         $formatted = this->_engine->format($number, $options);
         $options += ['escape' => true];
@@ -183,7 +183,7 @@ class NumberHelper extends Helper
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
-    public function currency($number, ?string $currency = null, array $options = []): string
+    function currency($number, ?string $currency = null, array $options = []): string
     {
         $formatted = this->_engine->currency($number, $currency, $options);
         $options += ['escape' => true];
@@ -207,7 +207,7 @@ class NumberHelper extends Helper
      * @param array<string, mixed> $options Options list.
      * @return string formatted delta
      */
-    public function formatDelta($value, array $options = []): string
+    function formatDelta($value, array $options = []): string
     {
         $formatted = this->_engine->formatDelta($value, $options);
         $options += ['escape' => true];
@@ -224,7 +224,7 @@ class NumberHelper extends Helper
      * @return string|null Currency
      * @deprecated 3.9.0 Use setDefaultCurrency()/getDefaultCurrency() instead.
      */
-    public function defaultCurrency($currency): ?string
+    function defaultCurrency($currency): ?string
     {
         deprecationWarning(
             'NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead.'
@@ -238,7 +238,7 @@ class NumberHelper extends Helper
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [];
     }
@@ -250,7 +250,7 @@ class NumberHelper extends Helper
      * @param array<string, mixed> $options An array with options.
      * @return string formatted number
      */
-    public function ordinal($value, array $options = []): string
+    function ordinal($value, array $options = []): string
     {
         return this->_engine->ordinal($value, $options);
     }

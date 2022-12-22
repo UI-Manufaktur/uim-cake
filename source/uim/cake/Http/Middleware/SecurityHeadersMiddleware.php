@@ -110,7 +110,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
      * @return this
      */
-    public function noSniff()
+    function noSniff()
     {
         this->headers['x-content-type-options'] = self::NOSNIFF;
 
@@ -125,7 +125,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @link https://msdn.microsoft.com/en-us/library/jj542450(v=vs.85).aspx
      * @return this
      */
-    public function noOpen()
+    function noOpen()
     {
         this->headers['x-download-options'] = self::NOOPEN;
 
@@ -140,7 +140,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      *     'origin-when-cross-origin', 'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', 'unsafe-url'
      * @return this
      */
-    public function setReferrerPolicy(string $policy = self::SAME_ORIGIN)
+    function setReferrerPolicy(string $policy = self::SAME_ORIGIN)
     {
         $available = [
             self::NO_REFERRER,
@@ -167,7 +167,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @param string|null $url URL if mode is `allow-from`
      * @return this
      */
-    public function setXFrameOptions(string $option = self::SAMEORIGIN, ?string $url = null)
+    function setXFrameOptions(string $option = self::SAMEORIGIN, ?string $url = null)
     {
         this->checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
@@ -190,7 +190,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @param string $mode Mode value. Available Values: '1', '0', 'block'
      * @return this
      */
-    public function setXssProtection(string $mode = self::XSS_BLOCK)
+    function setXssProtection(string $mode = self::XSS_BLOCK)
     {
         if ($mode === self::XSS_BLOCK) {
             $mode = self::XSS_ENABLED_BLOCK;
@@ -210,7 +210,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      *     'by-ftp-filename'
      * @return this
      */
-    public function setCrossDomainPolicy(string $policy = self::ALL)
+    function setCrossDomainPolicy(string $policy = self::ALL)
     {
         this->checkValues($policy, [
             self::ALL,
@@ -250,7 +250,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\ResponseInterface A response.
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
         foreach (this->headers as $header => $value) {

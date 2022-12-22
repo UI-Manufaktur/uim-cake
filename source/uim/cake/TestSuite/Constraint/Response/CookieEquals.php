@@ -53,7 +53,7 @@ class CookieEquals extends ResponseBase
      * @param mixed $other Expected content
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $cookie = this->response->getCookie(this->cookieName);
 
@@ -65,7 +65,7 @@ class CookieEquals extends ResponseBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf('is in cookie \'%s\'', this->cookieName);
     }

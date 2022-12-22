@@ -149,7 +149,7 @@ class EagerLoadable
      * @param \Cake\ORM\EagerLoadable $association The association to load.
      * @return void
      */
-    public function addAssociation(string $name, EagerLoadable $association): void
+    function addAssociation(string $name, EagerLoadable $association): void
     {
         this->_associations[$name] = $association;
     }
@@ -159,7 +159,7 @@ class EagerLoadable
      *
      * @return array<\Cake\ORM\EagerLoadable>
      */
-    public function associations(): array
+    function associations(): array
     {
         return this->_associations;
     }
@@ -170,7 +170,7 @@ class EagerLoadable
      * @return \Cake\ORM\Association
      * @throws \RuntimeException
      */
-    public function instance(): Association
+    function instance(): Association
     {
         if (this->_instance === null) {
             throw new \RuntimeException('No instance set.');
@@ -185,7 +185,7 @@ class EagerLoadable
      *
      * @return string
      */
-    public function aliasPath(): string
+    function aliasPath(): string
     {
         return this->_aliasPath;
     }
@@ -204,7 +204,7 @@ class EagerLoadable
      *
      * @return string|null
      */
-    public function propertyPath(): ?string
+    function propertyPath(): ?string
     {
         return this->_propertyPath;
     }
@@ -215,7 +215,7 @@ class EagerLoadable
      * @param bool $possible The value to set.
      * @return this
      */
-    public function setCanBeJoined(bool $possible)
+    function setCanBeJoined(bool $possible)
     {
         this->_canBeJoined = $possible;
 
@@ -227,7 +227,7 @@ class EagerLoadable
      *
      * @return bool
      */
-    public function canBeJoined(): bool
+    function canBeJoined(): bool
     {
         return this->_canBeJoined;
     }
@@ -239,7 +239,7 @@ class EagerLoadable
      * @param array<string, mixed> $config The value to set.
      * @return this
      */
-    public function setConfig(array $config)
+    function setConfig(array $config)
     {
         this->_config = $config;
 
@@ -252,7 +252,7 @@ class EagerLoadable
      *
      * @return array<string, mixed>
      */
-    public function getConfig(): array
+    function getConfig(): array
     {
         return this->_config;
     }
@@ -263,7 +263,7 @@ class EagerLoadable
      *
      * @return bool|null
      */
-    public function forMatching(): ?bool
+    function forMatching(): ?bool
     {
         return this->_forMatching;
     }
@@ -282,7 +282,7 @@ class EagerLoadable
      *
      * @return string|null
      */
-    public function targetProperty(): ?string
+    function targetProperty(): ?string
     {
         return this->_targetProperty;
     }
@@ -293,7 +293,7 @@ class EagerLoadable
      *
      * @return array<string, array>
      */
-    public function asContainArray(): array
+    function asContainArray(): array
     {
         $associations = [];
         foreach (this->_associations as $assoc) {
@@ -317,7 +317,7 @@ class EagerLoadable
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         foreach (this->_associations as $i => $association) {
             this->_associations[$i] = clone $association;

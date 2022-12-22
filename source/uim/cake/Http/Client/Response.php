@@ -208,7 +208,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return bool
      */
-    public function isOk(): bool
+    function isOk(): bool
     {
         return this->code >= 200 && this->code <= 399;
     }
@@ -218,7 +218,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return bool
      */
-    public function isSuccess(): bool
+    function isSuccess(): bool
     {
         return this->code >= 200 && this->code <= 299;
     }
@@ -228,7 +228,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return bool
      */
-    public function isRedirect(): bool
+    function isRedirect(): bool
     {
         $codes = [
             static::STATUS_MOVED_PERMANENTLY,
@@ -247,7 +247,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return int The status code.
      */
-    public function getStatusCode(): int
+    function getStatusCode(): int
     {
         return this->code;
     }
@@ -259,7 +259,7 @@ class Response extends Message implements ResponseInterface
      * @param string $reasonPhrase The status reason phrase.
      * @return static A copy of the current object with an updated status code.
      */
-    public function withStatus($code, $reasonPhrase = '')
+    function withStatus($code, $reasonPhrase = '')
     {
         $new = clone this;
         $new->code = $code;
@@ -273,7 +273,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return string The current reason phrase.
      */
-    public function getReasonPhrase(): string
+    function getReasonPhrase(): string
     {
         return this->reasonPhrase;
     }
@@ -283,7 +283,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return string|null
      */
-    public function getEncoding(): ?string
+    function getEncoding(): ?string
     {
         $content = this->getHeaderLine('content-type');
         if (!$content) {
@@ -302,7 +302,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return array The cookie data
      */
-    public function getCookies(): array
+    function getCookies(): array
     {
         return this->_getCookies();
     }
@@ -315,7 +315,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    public function getCookieCollection(): CookieCollection
+    function getCookieCollection(): CookieCollection
     {
         this->buildCookieCollection();
 
@@ -328,7 +328,7 @@ class Response extends Message implements ResponseInterface
      * @param string $name The name of the cookie value.
      * @return array|string|null Either the cookie's value or null when the cookie is undefined.
      */
-    public function getCookie(string $name)
+    function getCookie(string $name)
     {
         this->buildCookieCollection();
 
@@ -345,7 +345,7 @@ class Response extends Message implements ResponseInterface
      * @param string $name The name of the cookie value.
      * @return array|null Either the cookie's data or null when the cookie is undefined.
      */
-    public function getCookieData(string $name): ?array
+    function getCookieData(string $name): ?array
     {
         this->buildCookieCollection();
 
@@ -393,7 +393,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return string
      */
-    public function getStringBody(): string
+    function getStringBody(): string
     {
         return this->_getBody();
     }
@@ -403,7 +403,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return mixed
      */
-    public function getJson()
+    function getJson()
     {
         return this->_getJson();
     }
@@ -427,7 +427,7 @@ class Response extends Message implements ResponseInterface
      *
      * @return \SimpleXMLElement|null
      */
-    public function getXml(): ?SimpleXMLElement
+    function getXml(): ?SimpleXMLElement
     {
         return this->_getXml();
     }

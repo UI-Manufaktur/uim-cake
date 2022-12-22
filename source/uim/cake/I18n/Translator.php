@@ -109,7 +109,7 @@ class Translator
      *   message.
      * @return string The translated message with tokens replaced.
      */
-    public function translate(string $key, array $tokensValues = []): string
+    function translate(string $key, array $tokensValues = []): string
     {
         if (isset($tokensValues['_count'])) {
             $message = this->getMessage(static::PLURAL_PREFIX . $key);
@@ -204,7 +204,7 @@ class Translator
      *
      * @return \Cake\I18n\Package
      */
-    public function getPackage(): Package
+    function getPackage(): Package
     {
         return this->package;
     }

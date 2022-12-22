@@ -99,7 +99,7 @@ class CookieCollection implements IteratorAggregate, Countable
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         return count(this->cookies);
     }
@@ -114,7 +114,7 @@ class CookieCollection implements IteratorAggregate, Countable
      * @param \Cake\Http\Cookie\CookieInterface $cookie Cookie instance to add.
      * @return static
      */
-    public function add(CookieInterface $cookie)
+    function add(CookieInterface $cookie)
     {
         $new = clone this;
         $new->cookies[$cookie->getId()] = $cookie;
@@ -129,7 +129,7 @@ class CookieCollection implements IteratorAggregate, Countable
      * @return \Cake\Http\Cookie\CookieInterface
      * @throws \InvalidArgumentException If cookie not found.
      */
-    public function get(string $name): CookieInterface
+    function get(string $name): CookieInterface
     {
         $key = mb_strtolower($name);
         foreach (this->cookies as $cookie) {
@@ -152,7 +152,7 @@ class CookieCollection implements IteratorAggregate, Countable
      * @param string $name The cookie name to check.
      * @return bool True if the cookie exists, otherwise false.
      */
-    public function has(string $name): bool
+    function has(string $name): bool
     {
         $key = mb_strtolower($name);
         foreach (this->cookies as $cookie) {
@@ -172,7 +172,7 @@ class CookieCollection implements IteratorAggregate, Countable
      * @param string $name The name of the cookie to remove.
      * @return static
      */
-    public function remove(string $name)
+    function remove(string $name)
     {
         $new = clone this;
         $key = mb_strtolower($name);
@@ -213,7 +213,7 @@ class CookieCollection implements IteratorAggregate, Countable
      *
      * @return \Traversable<string, \Cake\Http\Cookie\CookieInterface>
      */
-    public function getIterator(): Traversable
+    function getIterator(): Traversable
     {
         return new ArrayIterator(this->cookies);
     }
@@ -230,7 +230,7 @@ class CookieCollection implements IteratorAggregate, Countable
      *   is useful when you have cookie data from outside the collection you want to send.
      * @return \Psr\Http\Message\RequestInterface An updated request.
      */
-    public function addToRequest(RequestInterface $request, array $extraCookies = []): RequestInterface
+    function addToRequest(RequestInterface $request, array $extraCookies = []): RequestInterface
     {
         $uri = $request->getUri();
         $cookies = this->findMatchingCookies(
@@ -306,7 +306,7 @@ class CookieCollection implements IteratorAggregate, Countable
      * @param \Psr\Http\Message\RequestInterface $request Request to get cookie context from.
      * @return static
      */
-    public function addFromResponse(ResponseInterface $response, RequestInterface $request)
+    function addFromResponse(ResponseInterface $response, RequestInterface $request)
     {
         $uri = $request->getUri();
         $host = $uri->getHost();

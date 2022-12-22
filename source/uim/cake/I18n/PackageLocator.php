@@ -68,7 +68,7 @@ class PackageLocator
      * @param \Cake\I18n\Package|callable $spec A callable that returns a package or Package instance.
      * @return void
      */
-    public function set(string $name, string $locale, $spec): void
+    function set(string $name, string $locale, $spec): void
     {
         this->registry[$name][$locale] = $spec;
         this->converted[$name][$locale] = $spec instanceof Package;
@@ -81,7 +81,7 @@ class PackageLocator
      * @param string $locale The locale for the package.
      * @return \Cake\I18n\Package
      */
-    public function get(string $name, string $locale): Package
+    function get(string $name, string $locale): Package
     {
         if (!isset(this->registry[$name][$locale])) {
             throw new I18nException("Package '$name' with locale '$locale' is not registered.");
@@ -105,7 +105,7 @@ class PackageLocator
      * @param string $locale The locale for the package.
      * @return bool
      */
-    public function has(string $name, string $locale): bool
+    function has(string $name, string $locale): bool
     {
         return isset(this->registry[$name][$locale]);
     }

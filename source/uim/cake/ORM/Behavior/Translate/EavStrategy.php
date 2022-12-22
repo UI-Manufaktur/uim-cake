@@ -165,7 +165,7 @@ class EavStrategy implements TranslateStrategyInterface
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options)
+    function beforeFind(EventInterface $event, Query $query, ArrayObject $options)
     {
         $locale = Hash::get($options, 'locale', this->getLocale());
 
@@ -230,7 +230,7 @@ class EavStrategy implements TranslateStrategyInterface
      * @param \ArrayObject $options the options passed to the save method
      * @return void
      */
-    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         $locale = $entity->get('_locale') ?: this->getLocale();
         $newOptions = [this->translationTable->getAlias() => ['validate' => false]];
@@ -332,7 +332,7 @@ class EavStrategy implements TranslateStrategyInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    public function translationField(string $field): string
+    function translationField(string $field): string
     {
         $table = this->table;
         if (this->getLocale() === this->getConfig('defaultLocale')) {
@@ -398,7 +398,7 @@ class EavStrategy implements TranslateStrategyInterface
      * @param \Cake\Datasource\ResultSetInterface $results Results to modify.
      * @return \Cake\Collection\CollectionInterface
      */
-    public function groupTranslations($results): CollectionInterface
+    function groupTranslations($results): CollectionInterface
     {
         return $results->map(function ($row) {
             if (!$row instanceof EntityInterface) {

@@ -54,7 +54,7 @@ class TextareaWidget extends BasicWidget
      * @param \Cake\View\Form\ContextInterface $context The current form context.
      * @return string HTML elements.
      */
-    public function render(array $data, ContextInterface $context): string
+    function render(array $data, ContextInterface $context): string
     {
         $data += this->mergeDefaults($data, $context);
 

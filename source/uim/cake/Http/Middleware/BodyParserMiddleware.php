@@ -85,7 +85,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      * @param array<string> $methods The methods to parse data on.
      * @return this
      */
-    public function setMethods(array $methods)
+    function setMethods(array $methods)
     {
         this->methods = $methods;
 
@@ -97,7 +97,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      *
      * @return array<string>
      */
-    public function getMethods(): array
+    function getMethods(): array
     {
         return this->methods;
     }
@@ -122,7 +122,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      *   into the request.
      * @return this
      */
-    public function addParser(array $types, Closure $parser)
+    function addParser(array $types, Closure $parser)
     {
         foreach ($types as $type) {
             $type = strtolower($type);
@@ -137,7 +137,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      *
      * @return array<\Closure>
      */
-    public function getParsers(): array
+    function getParsers(): array
     {
         return this->parsers;
     }
@@ -151,7 +151,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\ResponseInterface A response.
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (!in_array($request->getMethod(), this->methods, true)) {
             return $handler->handle($request);

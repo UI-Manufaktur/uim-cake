@@ -28,7 +28,7 @@ class HeaderNotContains extends HeaderContains
      * @param mixed $other Expected content
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return parent::matches($other) === false;
     }
@@ -38,7 +38,7 @@ class HeaderNotContains extends HeaderContains
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf(
             "is not in header '%s' (`%s`)",

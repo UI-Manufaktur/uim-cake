@@ -170,7 +170,7 @@ class EntityContext implements ContextInterface
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    public function primaryKey(): array
+    function primaryKey(): array
     {
         deprecationWarning('`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.');
 
@@ -184,7 +184,7 @@ class EntityContext implements ContextInterface
      *
      * @return array<string>
      */
-    public function getPrimaryKey(): array
+    function getPrimaryKey(): array
     {
         return (array)this->_tables[this->_rootName]->getPrimaryKey();
     }
@@ -192,7 +192,7 @@ class EntityContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function isPrimaryKey(string $field): bool
+    function isPrimaryKey(string $field): bool
     {
         $parts = explode('.', $field);
         $table = this->_getTable($parts);
@@ -215,7 +215,7 @@ class EntityContext implements ContextInterface
      *
      * @return bool
      */
-    public function isCreate(): bool
+    function isCreate(): bool
     {
         $entity = this->_context['entity'];
         if (is_iterable($entity)) {
@@ -245,7 +245,7 @@ class EntityContext implements ContextInterface
      *     schema should be used if it's not explicitly provided.
      * @return mixed The value of the field or null on a miss.
      */
-    public function val(string $field, array $options = [])
+    function val(string $field, array $options = [])
     {
         $options += [
             'default' => null,
@@ -348,7 +348,7 @@ class EntityContext implements ContextInterface
      * @return \Cake\Datasource\EntityInterface|iterable|null
      * @throws \RuntimeException When properties cannot be read.
      */
-    public function entity(?array $path = null)
+    function entity(?array $path = null)
     {
         if ($path === null) {
             return this->_context['entity'];
@@ -496,7 +496,7 @@ class EntityContext implements ContextInterface
      * @param string $field The dot separated path to the field you want to check.
      * @return bool|null
      */
-    public function isRequired(string $field): ?bool
+    function isRequired(string $field): ?bool
     {
         $parts = explode('.', $field);
         $entity = this->entity($parts);
@@ -521,7 +521,7 @@ class EntityContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function getRequiredMessage(string $field): ?string
+    function getRequiredMessage(string $field): ?string
     {
         $parts = explode('.', $field);
 
@@ -545,7 +545,7 @@ class EntityContext implements ContextInterface
      * @param string $field The dot separated path to the field you want to check.
      * @return int|null
      */
-    public function getMaxLength(string $field): ?int
+    function getMaxLength(string $field): ?int
     {
         $parts = explode('.', $field);
         $validator = this->_getValidator($parts);
@@ -574,7 +574,7 @@ class EntityContext implements ContextInterface
      *
      * @return array<string> Array of field names in the table/entity.
      */
-    public function fieldNames(): array
+    function fieldNames(): array
     {
         $table = this->_getTable('0');
         if (!$table) {
@@ -692,7 +692,7 @@ class EntityContext implements ContextInterface
      * @return string|null An abstract data type or null.
      * @see \Cake\Database\TypeFactory
      */
-    public function type(string $field): ?string
+    function type(string $field): ?string
     {
         $parts = explode('.', $field);
         $table = this->_getTable($parts);
@@ -709,7 +709,7 @@ class EntityContext implements ContextInterface
      * @param string $field A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    public function attributes(string $field): array
+    function attributes(string $field): array
     {
         $parts = explode('.', $field);
         $table = this->_getTable($parts);
@@ -729,7 +729,7 @@ class EntityContext implements ContextInterface
      * @param string $field A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    public function hasError(string $field): bool
+    function hasError(string $field): bool
     {
         return this->error($field) != [];
     }
@@ -740,7 +740,7 @@ class EntityContext implements ContextInterface
      * @param string $field A dot separated path to check errors on.
      * @return array An array of errors.
      */
-    public function error(string $field): array
+    function error(string $field): array
     {
         $parts = explode('.', $field);
         try {

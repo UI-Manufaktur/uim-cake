@@ -54,7 +54,7 @@ trait TranslateStrategyTrait
      *
      * @return \Cake\ORM\Table
      */
-    public function getTranslationTable(): Table
+    function getTranslationTable(): Table
     {
         return this->translationTable;
     }
@@ -74,7 +74,7 @@ trait TranslateStrategyTrait
      *   the behavior fall back to using the globally configured locale.
      * @return this
      */
-    public function setLocale(?string $locale)
+    function setLocale(?string $locale)
     {
         this->locale = $locale;
 
@@ -91,7 +91,7 @@ trait TranslateStrategyTrait
      * @see \Cake\I18n\I18n::getLocale()
      * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
      */
-    public function getLocale(): string
+    function getLocale(): string
     {
         return this->locale ?: I18n::getLocale();
     }
@@ -144,7 +144,7 @@ trait TranslateStrategyTrait
      * @param array<string, mixed> $options The options array used in the marshalling call.
      * @return array A map of `[property => callable]` of additional properties to marshal.
      */
-    public function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
+    function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
         if (isset($options['translations']) && !$options['translations']) {
             return [];
@@ -193,7 +193,7 @@ trait TranslateStrategyTrait
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
-    public function afterSave(EventInterface $event, EntityInterface $entity)
+    function afterSave(EventInterface $event, EntityInterface $entity)
     {
         $entity->unset('_i18n');
     }

@@ -39,7 +39,7 @@ trait StringTemplateTrait
      * @param array<string> $templates Templates to be added.
      * @return this
      */
-    public function setTemplates(array $templates)
+    function setTemplates(array $templates)
     {
         this->templater()->add($templates);
 
@@ -52,7 +52,7 @@ trait StringTemplateTrait
      * @param string|null $template String for reading a specific template, null for all.
      * @return array|string
      */
-    public function getTemplates(?string $template = null)
+    function getTemplates(?string $template = null)
     {
         return this->templater()->get($template);
     }
@@ -64,7 +64,7 @@ trait StringTemplateTrait
      * @param array<string, mixed> $data The data to insert.
      * @return string
      */
-    public function formatTemplate(string $name, array $data): string
+    function formatTemplate(string $name, array $data): string
     {
         return this->templater()->format($name, $data);
     }
@@ -74,7 +74,7 @@ trait StringTemplateTrait
      *
      * @return \Cake\View\StringTemplate
      */
-    public function templater(): StringTemplate
+    function templater(): StringTemplate
     {
         if (this->_templater === null) {
             /** @var class-string<\Cake\View\StringTemplate> $class */

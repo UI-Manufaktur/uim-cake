@@ -109,7 +109,7 @@ class FormDataPart
      * @param string|null $disposition Use null to get/string to set.
      * @return string
      */
-    public function disposition(?string $disposition = null): string
+    function disposition(?string $disposition = null): string
     {
         if ($disposition === null) {
             return this->_disposition;
@@ -124,7 +124,7 @@ class FormDataPart
      * @param string|null $id The content id.
      * @return string|null
      */
-    public function contentId(?string $id = null): ?string
+    function contentId(?string $id = null): ?string
     {
         if ($id === null) {
             return this->_contentId;
@@ -142,7 +142,7 @@ class FormDataPart
      * @param string|null $filename Use null to get/string to set.
      * @return string|null
      */
-    public function filename(?string $filename = null): ?string
+    function filename(?string $filename = null): ?string
     {
         if ($filename === null) {
             return this->_filename;
@@ -157,7 +157,7 @@ class FormDataPart
      * @param string|null $type Use null to get/string to set.
      * @return string|null
      */
-    public function type(?string $type): ?string
+    function type(?string $type): ?string
     {
         if ($type === null) {
             return this->_type;
@@ -174,7 +174,7 @@ class FormDataPart
      * @param string|null $type The type of encoding the value has.
      * @return string|null
      */
-    public function transferEncoding(?string $type): ?string
+    function transferEncoding(?string $type): ?string
     {
         if ($type === null) {
             return this->_transferEncoding;
@@ -188,7 +188,7 @@ class FormDataPart
      *
      * @return string
      */
-    public function name(): string
+    function name(): string
     {
         return this->_name;
     }
@@ -198,7 +198,7 @@ class FormDataPart
      *
      * @return string
      */
-    public function value(): string
+    function value(): string
     {
         return this->_value;
     }
@@ -210,7 +210,7 @@ class FormDataPart
      *
      * @return string
      */
-    public function __toString(): string
+    function __toString(): string
     {
         $out = '';
         if (this->_disposition) {

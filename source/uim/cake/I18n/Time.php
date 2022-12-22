@@ -156,7 +156,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      * @param string|null $locale The locale name in which the date should be displayed (e.g. pt-BR)
      * @return string Formatted date string
      */
-    public function nice($timezone = null, $locale = null): string
+    function nice($timezone = null, $locale = null): string
     {
         return (string)this->i18nFormat(static::$niceFormat, $timezone, $locale);
     }
@@ -166,7 +166,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      *
      * @return bool
      */
-    public function isThisWeek(): bool
+    function isThisWeek(): bool
     {
         return static::now(this->getTimezone())->format('W o') === this->format('W o');
     }
@@ -176,7 +176,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      *
      * @return bool
      */
-    public function isThisMonth(): bool
+    function isThisMonth(): bool
     {
         return static::now(this->getTimezone())->format('m Y') === this->format('m Y');
     }
@@ -186,7 +186,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      *
      * @return bool
      */
-    public function isThisYear(): bool
+    function isThisYear(): bool
     {
         return static::now(this->getTimezone())->format('Y') === this->format('Y');
     }
@@ -197,7 +197,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      * @param bool $range Range.
      * @return array<string>|int 1, 2, 3, or 4 quarter of year, or array if $range true
      */
-    public function toQuarter(bool $range = false)
+    function toQuarter(bool $range = false)
     {
         $quarter = (int)ceil((int)this->format('m') / 3);
         if ($range === false) {
@@ -223,7 +223,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      *
      * @return string UNIX timestamp
      */
-    public function toUnixString(): string
+    function toUnixString(): string
     {
         return this->format('U');
     }
@@ -265,7 +265,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      * @param array<string, mixed> $options Array of options.
      * @return string Relative time string.
      */
-    public function timeAgoInWords(array $options = []): string
+    function timeAgoInWords(array $options = []): string
     {
         /** @psalm-suppress UndefinedInterfaceMethod */
         return static::getDiffFormatter()->timeAgoInWords(this, $options);

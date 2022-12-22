@@ -61,7 +61,7 @@ class FormatterLocator
      * @param class-string<\Cake\I18n\FormatterInterface> $className A FQCN for a formatter.
      * @return void
      */
-    public function set(string $name, string $className): void
+    function set(string $name, string $className): void
     {
         this->registry[$name] = $className;
         this->converted[$name] = false;
@@ -74,7 +74,7 @@ class FormatterLocator
      * @return \Cake\I18n\FormatterInterface A formatter object.
      * @throws \Cake\I18n\Exception\I18nException
      */
-    public function get(string $name): FormatterInterface
+    function get(string $name): FormatterInterface
     {
         if (!isset(this->registry[$name])) {
             throw new I18nException("Formatter named `{$name}` has not been registered");

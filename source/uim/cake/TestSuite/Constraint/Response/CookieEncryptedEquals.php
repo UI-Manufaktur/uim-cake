@@ -64,7 +64,7 @@ class CookieEncryptedEquals extends CookieEquals
      * @param mixed $other Expected content
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $cookie = this->response->getCookie(this->cookieName);
 
@@ -76,7 +76,7 @@ class CookieEncryptedEquals extends CookieEquals
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf('is encrypted in cookie \'%s\'', this->cookieName);
     }

@@ -99,7 +99,7 @@ class TextHelper extends Helper
      * @param array $params Array of params for the method.
      * @return mixed Whatever is returned by called method, or false on failure
      */
-    public function __call(string $method, array $params)
+    function __call(string $method, array $params)
     {
         return this->_engine->{$method}(...$params);
     }
@@ -117,7 +117,7 @@ class TextHelper extends Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-urls
      */
-    public function autoLinkUrls(string $text, array $options = []): string
+    function autoLinkUrls(string $text, array $options = []): string
     {
         this->_placeholders = [];
         $options += ['escape' => true];
@@ -239,7 +239,7 @@ class TextHelper extends Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-email-addresses
      */
-    public function autoLinkEmails(string $text, array $options = []): string
+    function autoLinkEmails(string $text, array $options = []): string
     {
         $options += ['escape' => true];
         this->_placeholders = [];
@@ -269,7 +269,7 @@ class TextHelper extends Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
-    public function autoLink(string $text, array $options = []): string
+    function autoLink(string $text, array $options = []): string
     {
         $text = this->autoLinkUrls($text, $options);
 
@@ -287,7 +287,7 @@ class TextHelper extends Helper
      * @see \Cake\Utility\Text::highlight()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#highlighting-substrings
      */
-    public function highlight(string $text, string $phrase, array $options = []): string
+    function highlight(string $text, string $phrase, array $options = []): string
     {
         return this->_engine->highlight($text, $phrase, $options);
     }
@@ -301,7 +301,7 @@ class TextHelper extends Helper
      * @return string The text with proper <p> and <br /> tags
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-text-into-paragraphs
      */
-    public function autoParagraph(?string $text): string
+    function autoParagraph(?string $text): string
     {
         $text = $text ?? '';
         if (trim($text) != '') {
@@ -337,7 +337,7 @@ class TextHelper extends Helper
      * @see \Cake\Utility\Text::truncate()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-text
      */
-    public function truncate(string $text, int $length = 100, array $options = []): string
+    function truncate(string $text, int $length = 100, array $options = []): string
     {
         return this->_engine->truncate($text, $length, $options);
     }
@@ -360,7 +360,7 @@ class TextHelper extends Helper
      * @see \Cake\Utility\Text::tail()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
-    public function tail(string $text, int $length = 100, array $options = []): string
+    function tail(string $text, int $length = 100, array $options = []): string
     {
         return this->_engine->tail($text, $length, $options);
     }
@@ -377,7 +377,7 @@ class TextHelper extends Helper
      * @see \Cake\Utility\Text::excerpt()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
-    public function excerpt(string $text, string $phrase, int $radius = 100, string $ending = '...'): string
+    function excerpt(string $text, string $phrase, int $radius = 100, string $ending = '...'): string
     {
         return this->_engine->excerpt($text, $phrase, $radius, $ending);
     }
@@ -392,7 +392,7 @@ class TextHelper extends Helper
      * @see \Cake\Utility\Text::toList()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
-    public function toList(array $list, ?string $and = null, string $separator = ', '): string
+    function toList(array $list, ?string $and = null, string $separator = ', '): string
     {
         return this->_engine->toList($list, $and, $separator);
     }
@@ -418,7 +418,7 @@ class TextHelper extends Helper
      * @see \Cake\Utility\Text::setTransliterator()
      * @see \Cake\Utility\Text::setTransliteratorId()
      */
-    public function slug(string $string, $options = []): string
+    function slug(string $string, $options = []): string
     {
         return this->_engine->slug($string, $options);
     }
@@ -428,7 +428,7 @@ class TextHelper extends Helper
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [];
     }

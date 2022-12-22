@@ -62,7 +62,7 @@ class ResponseEmitter implements EmitterInterface
      * @param \Psr\Http\Message\ResponseInterface $response The response to emit.
      * @return bool
      */
-    public function emit(ResponseInterface $response): bool
+    function emit(ResponseInterface $response): bool
     {
         $file = '';
         $line = 0;

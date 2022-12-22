@@ -31,7 +31,7 @@ class MailSubjectContains extends MailConstraintBase
      * @param mixed $other Constraint check
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         if (!is_string($other)) {
             throw new InvalidArgumentException(
@@ -75,7 +75,7 @@ class MailSubjectContains extends MailConstraintBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         if (this->at) {
             return sprintf('is in an email subject #%d', this->at) . this->getAssertedMessages();

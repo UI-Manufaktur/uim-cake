@@ -82,7 +82,7 @@ class RouteCollection
      *   `_name` option, which enables named routes.
      * @return void
      */
-    public function add(Route $route, array $options = []): void
+    function add(Route $route, array $options = []): void
     {
         // Explicit names
         if (isset($options['_name'])) {
@@ -120,7 +120,7 @@ class RouteCollection
      * @return array An array of request parameters parsed from the URL.
      * @throws \Cake\Routing\Exception\MissingRouteException When a URL has no matching route.
      */
-    public function parse(string $url, string $method = ''): array
+    function parse(string $url, string $method = ''): array
     {
         $decoded = urldecode($url);
 
@@ -168,7 +168,7 @@ class RouteCollection
      * @return array An array of request parameters parsed from the URL.
      * @throws \Cake\Routing\Exception\MissingRouteException When a URL has no matching route.
      */
-    public function parseRequest(ServerRequestInterface $request): array
+    function parseRequest(ServerRequestInterface $request): array
     {
         $uri = $request->getUri();
         $urlPath = urldecode($uri->getPath());
@@ -291,7 +291,7 @@ class RouteCollection
      * @return string The URL string on match.
      * @throws \Cake\Routing\Exception\MissingRouteException When no route could be matched.
      */
-    public function match(array $url, array $context): string
+    function match(array $url, array $context): string
     {
         // Named routes support optimization.
         if (isset($url['_name'])) {
@@ -331,7 +331,7 @@ class RouteCollection
      *
      * @return array<\Cake\Routing\Route\Route>
      */
-    public function routes(): array
+    function routes(): array
     {
         krsort(this->_paths);
 
@@ -347,7 +347,7 @@ class RouteCollection
      *
      * @return array<\Cake\Routing\Route\Route>
      */
-    public function named(): array
+    function named(): array
     {
         return this->_named;
     }
@@ -357,7 +357,7 @@ class RouteCollection
      *
      * @return array<string> The valid extensions.
      */
-    public function getExtensions(): array
+    function getExtensions(): array
     {
         return this->_extensions;
     }
@@ -370,7 +370,7 @@ class RouteCollection
      *   Defaults to `true`.
      * @return this
      */
-    public function setExtensions(array $extensions, bool $merge = true)
+    function setExtensions(array $extensions, bool $merge = true)
     {
         if ($merge) {
             $extensions = array_unique(array_merge(
@@ -394,7 +394,7 @@ class RouteCollection
      * @return this
      * @throws \RuntimeException
      */
-    public function registerMiddleware(string $name, $middleware)
+    function registerMiddleware(string $name, $middleware)
     {
         this->_middleware[$name] = $middleware;
 
@@ -409,7 +409,7 @@ class RouteCollection
      * @return this
      * @throws \RuntimeException
      */
-    public function middlewareGroup(string $name, array $middlewareNames)
+    function middlewareGroup(string $name, array $middlewareNames)
     {
         if (this->hasMiddleware($name)) {
             $message = "Cannot add middleware group '$name'. A middleware by this name has already been registered.";
@@ -434,7 +434,7 @@ class RouteCollection
      * @param string $name The name of the middleware group to check.
      * @return bool
      */
-    public function hasMiddlewareGroup(string $name): bool
+    function hasMiddlewareGroup(string $name): bool
     {
         return array_key_exists($name, this->_middlewareGroups);
     }
@@ -445,7 +445,7 @@ class RouteCollection
      * @param string $name The name of the middleware to check.
      * @return bool
      */
-    public function hasMiddleware(string $name): bool
+    function hasMiddleware(string $name): bool
     {
         return isset(this->_middleware[$name]);
     }
@@ -456,7 +456,7 @@ class RouteCollection
      * @param string $name The name of the middleware to check.
      * @return bool
      */
-    public function middlewareExists(string $name): bool
+    function middlewareExists(string $name): bool
     {
         return this->hasMiddleware($name) || this->hasMiddlewareGroup($name);
     }
@@ -469,7 +469,7 @@ class RouteCollection
      *   the groups middleware will be flattened into the returned list.
      * @throws \RuntimeException when a requested middleware does not exist.
      */
-    public function getMiddleware(array $names): array
+    function getMiddleware(array $names): array
     {
         $out = [];
         foreach ($names as $name) {

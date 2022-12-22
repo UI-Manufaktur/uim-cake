@@ -39,7 +39,7 @@ class NullContext implements ContextInterface
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    public function primaryKey(): array
+    function primaryKey(): array
     {
         deprecationWarning('`NullContext::primaryKey()` is deprecated. Use `NullContext::getPrimaryKey()`.');
 
@@ -49,7 +49,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function getPrimaryKey(): array
+    function getPrimaryKey(): array
     {
         return [];
     }
@@ -57,7 +57,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function isPrimaryKey(string $field): bool
+    function isPrimaryKey(string $field): bool
     {
         return false;
     }
@@ -65,7 +65,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function isCreate(): bool
+    function isCreate(): bool
     {
         return true;
     }
@@ -73,7 +73,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function val(string $field, array $options = [])
+    function val(string $field, array $options = [])
     {
         return null;
     }
@@ -81,7 +81,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function isRequired(string $field): ?bool
+    function isRequired(string $field): ?bool
     {
         return null;
     }
@@ -89,7 +89,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function getRequiredMessage(string $field): ?string
+    function getRequiredMessage(string $field): ?string
     {
         return null;
     }
@@ -97,7 +97,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function getMaxLength(string $field): ?int
+    function getMaxLength(string $field): ?int
     {
         return null;
     }
@@ -105,7 +105,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function fieldNames(): array
+    function fieldNames(): array
     {
         return [];
     }
@@ -113,7 +113,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function type(string $field): ?string
+    function type(string $field): ?string
     {
         return null;
     }
@@ -121,7 +121,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function attributes(string $field): array
+    function attributes(string $field): array
     {
         return [];
     }
@@ -129,7 +129,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function hasError(string $field): bool
+    function hasError(string $field): bool
     {
         return false;
     }
@@ -137,7 +137,7 @@ class NullContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function error(string $field): array
+    function error(string $field): array
     {
         return [];
     }

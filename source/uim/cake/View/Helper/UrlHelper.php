@@ -50,7 +50,7 @@ class UrlHelper extends Helper
      * @param array<string, mixed> $config The configuration settings provided to this helper.
      * @return void
      */
-    public function initialize(array $config): void
+    function initialize(array $config): void
     {
         parent::initialize($config);
         $engineClassConfig = this->getConfig('assetUrlClassName');
@@ -79,7 +79,7 @@ class UrlHelper extends Helper
      * @param array<string, mixed> $options Array of options.
      * @return string Full translated URL with base path.
      */
-    public function build($url = null, array $options = []): string
+    function build($url = null, array $options = []): string
     {
         $defaults = [
             'fullBase' => false,
@@ -112,7 +112,7 @@ class UrlHelper extends Helper
      * @return string Full translated URL with base path.
      * @see \Cake\Routing\Router::pathUrl()
      */
-    public function buildFromPath(string $path, array $params = [], array $options = []): string
+    function buildFromPath(string $path, array $params = [], array $options = []): string
     {
         return this->build(['_path' => $path] + $params, $options);
     }
@@ -134,7 +134,7 @@ class UrlHelper extends Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    public function image(string $path, array $options = []): string
+    function image(string $path, array $options = []): string
     {
         $options += ['theme' => this->_View->getTheme()];
 
@@ -159,7 +159,7 @@ class UrlHelper extends Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    public function css(string $path, array $options = []): string
+    function css(string $path, array $options = []): string
     {
         $options += ['theme' => this->_View->getTheme()];
 
@@ -184,7 +184,7 @@ class UrlHelper extends Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    public function script(string $path, array $options = []): string
+    function script(string $path, array $options = []): string
     {
         $options += ['theme' => this->_View->getTheme()];
 
@@ -213,7 +213,7 @@ class UrlHelper extends Helper
      * @param array<string, mixed> $options Options array.
      * @return string Generated URL
      */
-    public function assetUrl(string $path, array $options = []): string
+    function assetUrl(string $path, array $options = []): string
     {
         $options += ['theme' => this->_View->getTheme()];
 
@@ -229,7 +229,7 @@ class UrlHelper extends Helper
      * @param string|bool $timestamp If set will overrule the value of `Asset.timestamp` in Configure.
      * @return string Path with a timestamp added, or not.
      */
-    public function assetTimestamp(string $path, $timestamp = null): string
+    function assetTimestamp(string $path, $timestamp = null): string
     {
         return h(this->_assetUrlClassName::assetTimestamp($path, $timestamp));
     }
@@ -240,7 +240,7 @@ class UrlHelper extends Helper
      * @param string $file The file to create a webroot path to.
      * @return string Web accessible path to file.
      */
-    public function webroot(string $file): string
+    function webroot(string $file): string
     {
         $options = ['theme' => this->_View->getTheme()];
 
@@ -252,7 +252,7 @@ class UrlHelper extends Helper
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [];
     }

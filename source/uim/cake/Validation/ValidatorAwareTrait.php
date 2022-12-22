@@ -66,7 +66,7 @@ trait ValidatorAwareTrait
      * you will need to create a method in your Table subclass as follows:
      *
      * ```
-     * public function validationForSubscription($validator)
+     * function validationForSubscription($validator)
      * {
      *     return $validator
      *         ->add('email', 'valid-email', ['rule' => 'email'])
@@ -88,7 +88,7 @@ trait ValidatorAwareTrait
      * @param string|null $name The name of the validation set to return.
      * @return \Cake\Validation\Validator
      */
-    public function getValidator(?string $name = null): Validator
+    function getValidator(?string $name = null): Validator
     {
         $name = $name ?: static::DEFAULT_VALIDATOR;
         if (!isset(this->_validators[$name])) {
@@ -156,7 +156,7 @@ trait ValidatorAwareTrait
      * @param \Cake\Validation\Validator $validator Validator object to be set.
      * @return this
      */
-    public function setValidator(string $name, Validator $validator)
+    function setValidator(string $name, Validator $validator)
     {
         $validator->setProvider(static::VALIDATOR_PROVIDER_NAME, this);
         this->_validators[$name] = $validator;
@@ -170,7 +170,7 @@ trait ValidatorAwareTrait
      * @param string $name The name of a validator.
      * @return bool
      */
-    public function hasValidator(string $name): bool
+    function hasValidator(string $name): bool
     {
         $method = 'validation' . ucfirst($name);
         if (this->validationMethodExists($method)) {
@@ -199,7 +199,7 @@ trait ValidatorAwareTrait
      * add some rules to it.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator): Validator
+    function validationDefault(Validator $validator): Validator
     {
         return $validator;
     }

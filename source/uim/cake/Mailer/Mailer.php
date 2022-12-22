@@ -39,7 +39,7 @@ use InvalidArgumentException;
  * ```
  * class UserMailer extends Mailer
  * {
- *     public function resetPassword($user)
+ *     function resetPassword($user)
  *     {
  *         this
  *             ->setSubject('Reset Password')
@@ -69,14 +69,14 @@ use InvalidArgumentException;
  * registration event:
  *
  * ```
- * public function implementedEvents(): array
+ * function implementedEvents(): array
  * {
  *     return [
  *         'Model.afterSave' => 'onRegistration',
  *     ];
  * }
  *
- * public function onRegistration(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+ * function onRegistration(EventInterface $event, EntityInterface $entity, ArrayObject $options)
  * {
  *     if ($entity->isNew()) {
  *          this->send('welcome', [$entity]);
@@ -226,7 +226,7 @@ class Mailer implements EventListenerInterface
      *
      * @return \Cake\View\ViewBuilder
      */
-    public function viewBuilder(): ViewBuilder
+    function viewBuilder(): ViewBuilder
     {
         return this->getRenderer()->viewBuilder();
     }
@@ -236,7 +236,7 @@ class Mailer implements EventListenerInterface
      *
      * @return \Cake\Mailer\Renderer
      */
-    public function getRenderer(): Renderer
+    function getRenderer(): Renderer
     {
         if (this->renderer === null) {
             this->renderer = new Renderer();
@@ -251,7 +251,7 @@ class Mailer implements EventListenerInterface
      * @param \Cake\Mailer\Renderer $renderer Render instance.
      * @return this
      */
-    public function setRenderer(Renderer $renderer)
+    function setRenderer(Renderer $renderer)
     {
         this->renderer = $renderer;
 
@@ -263,7 +263,7 @@ class Mailer implements EventListenerInterface
      *
      * @return \Cake\Mailer\Message
      */
-    public function getMessage(): Message
+    function getMessage(): Message
     {
         return this->message;
     }
@@ -274,7 +274,7 @@ class Mailer implements EventListenerInterface
      * @param \Cake\Mailer\Message $message Message instance.
      * @return this
      */
-    public function setMessage(Message $message)
+    function setMessage(Message $message)
     {
         this->message = $message;
 
@@ -288,7 +288,7 @@ class Mailer implements EventListenerInterface
      * @param array $args Method arguments
      * @return this|mixed
      */
-    public function __call(string $method, array $args)
+    function __call(string $method, array $args)
     {
         $result = this->message->$method(...$args);
         if (strpos($method, 'get') === 0) {
@@ -306,7 +306,7 @@ class Mailer implements EventListenerInterface
      * @return this
      * @deprecated 4.0.0 Use {@link Mailer::setViewVars()} instead.
      */
-    public function set($key, $value = null)
+    function set($key, $value = null)
     {
         deprecationWarning('Mailer::set() is deprecated. Use setViewVars() instead.');
 
@@ -320,7 +320,7 @@ class Mailer implements EventListenerInterface
      * @param mixed $value View variable value.
      * @return this
      */
-    public function setViewVars($key, $value = null)
+    function setViewVars($key, $value = null)
     {
         this->getRenderer()->set($key, $value);
 
@@ -339,7 +339,7 @@ class Mailer implements EventListenerInterface
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
-    public function send(?string $action = null, array $args = [], array $headers = []): array
+    function send(?string $action = null, array $args = [], array $headers = []): array
     {
         if ($action === null) {
             return this->deliver();
@@ -380,7 +380,7 @@ class Mailer implements EventListenerInterface
      * @param string $content Content.
      * @return this
      */
-    public function render(string $content = '')
+    function render(string $content = '')
     {
         $content = this->getRenderer()->render(
             $content,
@@ -399,7 +399,7 @@ class Mailer implements EventListenerInterface
      * @return array
      * @psalm-return array{headers: string, message: string}
      */
-    public function deliver(string $content = '')
+    function deliver(string $content = '')
     {
         this->render($content);
 
@@ -416,7 +416,7 @@ class Mailer implements EventListenerInterface
      *    an array with config.
      * @return this
      */
-    public function setProfile($config)
+    function setProfile($config)
     {
         if (is_string($config)) {
             $name = $config;
@@ -487,7 +487,7 @@ class Mailer implements EventListenerInterface
      * @throws \LogicException When the chosen transport lacks a send method.
      * @throws \InvalidArgumentException When $name is neither a string nor an object.
      */
-    public function setTransport($name)
+    function setTransport($name)
     {
         if (is_string($name)) {
             $transport = TransportFactory::get($name);
@@ -513,7 +513,7 @@ class Mailer implements EventListenerInterface
      *
      * @return \Cake\Mailer\AbstractTransport
      */
-    public function getTransport(): AbstractTransport
+    function getTransport(): AbstractTransport
     {
         if (this->transport === null) {
             throw new BadMethodCallException(
@@ -549,7 +549,7 @@ class Mailer implements EventListenerInterface
      *
      * @return this
      */
-    public function reset()
+    function reset()
     {
         this->message->reset();
         this->getRenderer()->reset();
@@ -621,7 +621,7 @@ class Mailer implements EventListenerInterface
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [];
     }

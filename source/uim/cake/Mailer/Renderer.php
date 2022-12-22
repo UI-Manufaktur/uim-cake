@@ -53,7 +53,7 @@ class Renderer
      * @psalm-param array<\Cake\Mailer\Message::MESSAGE_HTML|\Cake\Mailer\Message::MESSAGE_TEXT> $types
      * @psalm-return array{html?: string, text?: string}
      */
-    public function render(string $content, array $types = []): array
+    function render(string $content, array $types = []): array
     {
         $rendered = [];
         $template = this->viewBuilder()->getTemplate();
@@ -94,7 +94,7 @@ class Renderer
      *
      * @return this
      */
-    public function reset()
+    function reset()
     {
         this->_viewBuilder = null;
 
@@ -111,7 +111,7 @@ class Renderer
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         if (this->_viewBuilder != null) {
             this->_viewBuilder = clone this->_viewBuilder;

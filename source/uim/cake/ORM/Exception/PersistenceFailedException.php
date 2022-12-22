@@ -66,7 +66,7 @@ class PersistenceFailedException extends CakeException
      *
      * @return \Cake\Datasource\EntityInterface
      */
-    public function getEntity(): EntityInterface
+    function getEntity(): EntityInterface
     {
         return this->_entity;
     }

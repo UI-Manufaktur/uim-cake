@@ -156,7 +156,7 @@ class Route
      * @param array<string> $extensions The extensions to set.
      * @return this
      */
-    public function setExtensions(array $extensions)
+    function setExtensions(array $extensions)
     {
         this->_extensions = array_map('strtolower', $extensions);
 
@@ -168,7 +168,7 @@ class Route
      *
      * @return array<string>
      */
-    public function getExtensions(): array
+    function getExtensions(): array
     {
         return this->_extensions;
     }
@@ -180,7 +180,7 @@ class Route
      * @return this
      * @throws \InvalidArgumentException When methods are not in `VALID_METHODS` list.
      */
-    public function setMethods(array $methods)
+    function setMethods(array $methods)
     {
         this->defaults['_method'] = this->normalizeAndValidateMethods($methods);
 
@@ -219,7 +219,7 @@ class Route
      * @param array<string> $patterns The patterns to apply to routing elements
      * @return this
      */
-    public function setPatterns(array $patterns)
+    function setPatterns(array $patterns)
     {
         $patternValues = implode('', $patterns);
         if (mb_strlen($patternValues) < strlen($patternValues)) {
@@ -236,7 +236,7 @@ class Route
      * @param string $host The host name this route is bound to
      * @return this
      */
-    public function setHost(string $host)
+    function setHost(string $host)
     {
         this->options['_host'] = $host;
 
@@ -249,7 +249,7 @@ class Route
      * @param array<string> $names The names of the parameters that should be passed.
      * @return this
      */
-    public function setPass(array $names)
+    function setPass(array $names)
     {
         this->options['pass'] = $names;
 
@@ -271,7 +271,7 @@ class Route
      * @param array $names The names of the parameters that should be passed.
      * @return this
      */
-    public function setPersist(array $names)
+    function setPersist(array $names)
     {
         this->options['persist'] = $names;
 
@@ -283,7 +283,7 @@ class Route
      *
      * @return bool
      */
-    public function compiled(): bool
+    function compiled(): bool
     {
         return this->_compiledRoute != null;
     }
@@ -296,7 +296,7 @@ class Route
      *
      * @return string Returns a string regular expression of the compiled route.
      */
-    public function compile(): string
+    function compile(): string
     {
         if (this->_compiledRoute === null) {
             this->_writeRoute();
@@ -395,7 +395,7 @@ class Route
      *
      * @return string
      */
-    public function getName(): string
+    function getName(): string
     {
         if (!empty(this->_name)) {
             return this->_name;
@@ -439,7 +439,7 @@ class Route
      * @param \Psr\Http\Message\ServerRequestInterface $request The URL to attempt to parse.
      * @return array|null An array of request parameters, or `null` on failure.
      */
-    public function parseRequest(ServerRequestInterface $request): ?array
+    function parseRequest(ServerRequestInterface $request): ?array
     {
         $uri = $request->getUri();
         if (isset(this->options['_host']) && !this->hostMatches($uri->getHost())) {
@@ -460,7 +460,7 @@ class Route
      * @return array|null An array of request parameters, or `null` on failure.
      * @throws \Cake\Http\Exception\BadRequestException When method is not an empty string and not in `VALID_METHODS` list.
      */
-    public function parse(string $url, string $method): ?array
+    function parse(string $url, string $method): ?array
     {
         try {
             if ($method != '') {
@@ -555,7 +555,7 @@ class Route
      * @param string $host The request's host name
      * @return bool Whether the host matches any conditions set in for this route.
      */
-    public function hostMatches(string $host): bool
+    function hostMatches(string $host): bool
     {
         $pattern = '@^' . str_replace('\*', '.*', preg_quote(this->options['_host'], '@')) . '$@';
 
@@ -642,7 +642,7 @@ class Route
      *   directory and other url params.
      * @return string|null Either a string URL for the parameters if they match or null.
      */
-    public function match(array $url, array $context = []): ?string
+    function match(array $url, array $context = []): ?string
     {
         if (empty(this->_compiledRoute)) {
             this->compile();
@@ -883,7 +883,7 @@ class Route
      *
      * @return string
      */
-    public function staticPath(): string
+    function staticPath(): string
     {
         $matched = preg_match(
             static::PLACEHOLDER_REGEX,
@@ -918,7 +918,7 @@ class Route
      *   Middleware names will not be checked until the route is matched.
      * @return this
      */
-    public function setMiddleware(array $middleware)
+    function setMiddleware(array $middleware)
     {
         this->middleware = $middleware;
 
@@ -930,7 +930,7 @@ class Route
      *
      * @return array
      */
-    public function getMiddleware(): array
+    function getMiddleware(): array
     {
         return this->middleware;
     }

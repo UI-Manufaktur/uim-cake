@@ -45,7 +45,7 @@ trait LocatorAwareTrait
      * @param \Cake\ORM\Locator\LocatorInterface $tableLocator LocatorInterface instance.
      * @return this
      */
-    public function setTableLocator(LocatorInterface $tableLocator)
+    function setTableLocator(LocatorInterface $tableLocator)
     {
         this->_tableLocator = $tableLocator;
 
@@ -57,7 +57,7 @@ trait LocatorAwareTrait
      *
      * @return \Cake\ORM\Locator\LocatorInterface
      */
-    public function getTableLocator(): LocatorInterface
+    function getTableLocator(): LocatorInterface
     {
         if (this->_tableLocator === null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
@@ -80,7 +80,7 @@ trait LocatorAwareTrait
      * @see \Cake\ORM\TableLocator::get()
      * @since 4.3.0
      */
-    public function fetchTable(?string $alias = null, array $options = []): Table
+    function fetchTable(?string $alias = null, array $options = []): Table
     {
         $alias = $alias ?? this->defaultTable;
         if (empty($alias)) {

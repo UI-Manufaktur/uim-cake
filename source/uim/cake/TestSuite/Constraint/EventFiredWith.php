@@ -63,7 +63,7 @@ class EventFiredWith extends Constraint
      * @return bool
      * @throws \PHPUnit\Framework\AssertionFailedError
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $firedEvents = [];
         $list = this->_eventManager->getEventList();
@@ -109,7 +109,7 @@ class EventFiredWith extends Constraint
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'was fired with ' . this->_dataKey . ' matching ' . (string)this->_dataValue;
     }

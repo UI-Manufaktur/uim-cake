@@ -67,7 +67,7 @@ class FlashHelper extends Helper
      * @return string|null Rendered flash message or null if flash key does not exist
      *   in session.
      */
-    public function render(string $key = 'flash', array $options = []): ?string
+    function render(string $key = 'flash', array $options = []): ?string
     {
         $messages = this->_View->getRequest()->getFlash()->consume($key);
         if ($messages === null) {
@@ -88,7 +88,7 @@ class FlashHelper extends Helper
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [];
     }

@@ -78,7 +78,7 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
      * @return \Psr\Http\Message\ResponseInterface A response.
      * @throws \Cake\Http\Exception\BadRequestException
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (
             $request->getUri()->getScheme() === 'https'

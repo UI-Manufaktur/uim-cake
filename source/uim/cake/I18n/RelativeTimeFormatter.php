@@ -35,7 +35,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
      * @return string The difference between the two days in a human readable format.
      * @see \Cake\Chronos\ChronosInterface::diffForHumans
      */
-    public function diffForHumans(
+    function diffForHumans(
         ChronosInterface $date,
         ?ChronosInterface $other = null,
         bool $absolute = false
@@ -97,7 +97,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
      * @return string Relative time string.
      * @see \Cake\I18n\Time::timeAgoInWords()
      */
-    public function timeAgoInWords(I18nDateTimeInterface $time, array $options = []): string
+    function timeAgoInWords(I18nDateTimeInterface $time, array $options = []): string
     {
         $options = this->_options($options, FrozenTime::class);
         if ($options['timezone']) {
@@ -319,7 +319,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
      * @return string Relative date string.
      * @see \Cake\I18n\Date::timeAgoInWords()
      */
-    public function dateAgoInWords(I18nDateTimeInterface $date, array $options = []): string
+    function dateAgoInWords(I18nDateTimeInterface $date, array $options = []): string
     {
         $options = this->_options($options, FrozenDate::class);
         if ($options['timezone']) {

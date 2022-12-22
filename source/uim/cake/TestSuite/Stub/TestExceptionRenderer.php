@@ -48,7 +48,7 @@ class TestExceptionRenderer implements ExceptionRendererInterface
     /**
      * @inheritDoc
      */
-    public function render(): ResponseInterface
+    function render(): ResponseInterface
     {
         throw new LogicException('You cannot use this class to render exceptions.');
     }
@@ -59,7 +59,7 @@ class TestExceptionRenderer implements ExceptionRendererInterface
      * @param \Psr\Http\Message\ResponseInterface|string $output The output or response to send.
      * @return void
      */
-    public function write($output): void
+    function write($output): void
     {
     }
 }

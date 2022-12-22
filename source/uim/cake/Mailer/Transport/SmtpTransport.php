@@ -81,7 +81,7 @@ class SmtpTransport extends AbstractTransport
      * Tries to disconnect to ensure that the connection is being
      * terminated properly before the socket gets closed.
      */
-    public function __destruct()
+    function __destruct()
     {
         try {
             this->disconnect();
@@ -97,7 +97,7 @@ class SmtpTransport extends AbstractTransport
      *
      * @return void
      */
-    public function __wakeup(): void
+    function __wakeup(): void
     {
         this->_socket = null;
     }
@@ -110,7 +110,7 @@ class SmtpTransport extends AbstractTransport
      *
      * @return void
      */
-    public function connect(): void
+    function connect(): void
     {
         if (!this->connected()) {
             this->_connect();
@@ -123,7 +123,7 @@ class SmtpTransport extends AbstractTransport
      *
      * @return bool
      */
-    public function connected(): bool
+    function connected(): bool
     {
         return this->_socket != null && this->_socket->isConnected();
     }
@@ -136,7 +136,7 @@ class SmtpTransport extends AbstractTransport
      *
      * @return void
      */
-    public function disconnect(): void
+    function disconnect(): void
     {
         if (!this->connected()) {
             return;
@@ -170,7 +170,7 @@ class SmtpTransport extends AbstractTransport
      *
      * @return array
      */
-    public function getLastResponse(): array
+    function getLastResponse(): array
     {
         return this->_lastResponse;
     }
@@ -182,7 +182,7 @@ class SmtpTransport extends AbstractTransport
      * @return array{headers: string, message: string}
      * @throws \Cake\Network\Exception\SocketException
      */
-    public function send(Message $message): array
+    function send(Message $message): array
     {
         this->checkRecipient($message);
 

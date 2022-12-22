@@ -55,7 +55,7 @@ class EventFired extends Constraint
      * @param mixed $other Constraint check
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $list = this->_eventManager->getEventList();
 
@@ -67,7 +67,7 @@ class EventFired extends Constraint
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'was fired';
     }

@@ -32,7 +32,7 @@ interface LocatorInterface extends BaseLocatorInterface
      * @param string|null $alias Alias to get config for, null for complete config.
      * @return array The config data.
      */
-    public function getConfig(?string $alias = null): array;
+    function getConfig(?string $alias = null): array;
 
     /**
      * Stores a list of options to be used when instantiating an object
@@ -45,7 +45,7 @@ interface LocatorInterface extends BaseLocatorInterface
      * @throws \RuntimeException When you attempt to configure an existing
      *   table instance.
      */
-    public function setConfig($alias, $options = null);
+    function setConfig($alias, $options = null);
 
     /**
      * Get a table instance from the registry.
@@ -54,7 +54,7 @@ interface LocatorInterface extends BaseLocatorInterface
      * @param array<string, mixed> $options The options you want to build the table with.
      * @return \Cake\ORM\Table
      */
-    public function get(string $alias, array $options = []): Table;
+    function get(string $alias, array $options = []): Table;
 
     /**
      * Set a table instance.
@@ -64,5 +64,5 @@ interface LocatorInterface extends BaseLocatorInterface
      * @return \Cake\ORM\Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function set(string $alias, RepositoryInterface $repository): Table;
+    function set(string $alias, RepositoryInterface $repository): Table;
 }

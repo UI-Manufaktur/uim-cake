@@ -40,7 +40,7 @@ class TestEmailTransport extends DebugTransport
      * @param \Cake\Mailer\Message $message Message
      * @return array{headers: string, message: string}
      */
-    public function send(Message $message): array
+    function send(Message $message): array
     {
         static::$messages[] = $message;
 

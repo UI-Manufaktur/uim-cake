@@ -34,7 +34,7 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      *
      * @return \Cake\ORM\Table
      */
-    public function getTranslationTable(): Table;
+    function getTranslationTable(): Table;
 
     /**
      * Sets the locale to be used.
@@ -51,7 +51,7 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      *   the behavior fall back to using the globally configured locale.
      * @return this
      */
-    public function setLocale(?string $locale);
+    function setLocale(?string $locale);
 
     /**
      * Returns the current locale.
@@ -61,7 +61,7 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      *
      * @return string
      */
-    public function getLocale(): string;
+    function getLocale(): string;
 
     /**
      * Returns a fully aliased field name for translated fields.
@@ -73,7 +73,7 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    public function translationField(string $field): string;
+    function translationField(string $field): string;
 
     /**
      * Modifies the results from a table find in order to merge full translation records
@@ -82,7 +82,7 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      * @param \Cake\Datasource\ResultSetInterface $results Results to modify.
      * @return \Cake\Collection\CollectionInterface
      */
-    public function groupTranslations($results): CollectionInterface;
+    function groupTranslations($results): CollectionInterface;
 
     /**
      * Callback method that listens to the `beforeFind` event in the bound
@@ -94,7 +94,7 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options);
+    function beforeFind(EventInterface $event, Query $query, ArrayObject $options);
 
     /**
      * Modifies the entity before it is saved so that translated fields are persisted
@@ -105,7 +105,7 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      * @param \ArrayObject $options the options passed to the save method
      * @return void
      */
-    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options);
+    function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options);
 
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
@@ -114,5 +114,5 @@ interface TranslateStrategyInterface extends PropertyMarshalInterface
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
-    public function afterSave(EventInterface $event, EntityInterface $entity);
+    function afterSave(EventInterface $event, EntityInterface $entity);
 }

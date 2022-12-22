@@ -529,7 +529,7 @@ class Response implements ResponseInterface
      * @param string $url The location to redirect to.
      * @return static A new response with the Location header set.
      */
-    public function withLocation(string $url)
+    function withLocation(string $url)
     {
         $new = this->withHeader('Location', $url);
         if ($new->_status === 200) {
@@ -579,7 +579,7 @@ class Response implements ResponseInterface
      *
      * @return int Status code.
      */
-    public function getStatusCode(): int
+    function getStatusCode(): int
     {
         return this->_status;
     }
@@ -613,7 +613,7 @@ class Response implements ResponseInterface
      * @return static
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    public function withStatus($code, $reasonPhrase = '')
+    function withStatus($code, $reasonPhrase = '')
     {
         $new = clone this;
         $new->_setStatus($code, $reasonPhrase);
@@ -663,7 +663,7 @@ class Response implements ResponseInterface
      * @link https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      * @return string Reason phrase; must return an empty string if none present.
      */
-    public function getReasonPhrase(): string
+    function getReasonPhrase(): string
     {
         return this->_reasonPhrase;
     }
@@ -679,7 +679,7 @@ class Response implements ResponseInterface
      * @param array<string>|string $mimeType Definition of the mime type.
      * @return void
      */
-    public function setTypeMap(string $type, $mimeType): void
+    function setTypeMap(string $type, $mimeType): void
     {
         this->_mimeTypes[$type] = $mimeType;
     }
@@ -689,7 +689,7 @@ class Response implements ResponseInterface
      *
      * @return string
      */
-    public function getType(): string
+    function getType(): string
     {
         $header = this->getHeaderLine('Content-Type');
         if (strpos($header, ';') != false) {
@@ -708,7 +708,7 @@ class Response implements ResponseInterface
      * @param string $contentType Either a file extension which will be mapped to a mime-type or a concrete mime-type.
      * @return static
      */
-    public function withType(string $contentType)
+    function withType(string $contentType)
     {
         $mappedType = this->resolveType($contentType);
         $new = clone this;
@@ -745,7 +745,7 @@ class Response implements ResponseInterface
      * @param string $alias the content type alias to map
      * @return array|string|false String mapped mime type or false if $alias is not mapped
      */
-    public function getMimeType(string $alias)
+    function getMimeType(string $alias)
     {
         return this->_mimeTypes[$alias] ?? false;
     }
@@ -758,7 +758,7 @@ class Response implements ResponseInterface
      * @param array|string $ctype Either a string content type to map, or an array of types.
      * @return array|string|null Aliases for the types provided.
      */
-    public function mapType($ctype)
+    function mapType($ctype)
     {
         if (is_array($ctype)) {
             return array_map([this, 'mapType'], $ctype);
@@ -778,7 +778,7 @@ class Response implements ResponseInterface
      *
      * @return string
      */
-    public function getCharset(): string
+    function getCharset(): string
     {
         return this->_charset;
     }
@@ -789,7 +789,7 @@ class Response implements ResponseInterface
      * @param string $charset Character set string.
      * @return static
      */
-    public function withCharset(string $charset)
+    function withCharset(string $charset)
     {
         $new = clone this;
         $new->_charset = $charset;
@@ -803,7 +803,7 @@ class Response implements ResponseInterface
      *
      * @return static
      */
-    public function withDisabledCache()
+    function withDisabledCache()
     {
         return this->withHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT')
             ->withHeader('Last-Modified', gmdate(DATE_RFC7231))
@@ -817,7 +817,7 @@ class Response implements ResponseInterface
      * @param string|int $time a valid time for cache expiry
      * @return static
      */
-    public function withCache($since, $time = '+1 day')
+    function withCache($since, $time = '+1 day')
     {
         if (!is_int($time)) {
             $time = strtotime($time);
@@ -843,7 +843,7 @@ class Response implements ResponseInterface
      * @param int|null $time time in seconds after which the response should no longer be considered fresh.
      * @return static
      */
-    public function withSharable(bool $public, ?int $time = null)
+    function withSharable(bool $public, ?int $time = null)
     {
         $new = clone this;
         unset($new->_cacheDirectives['private'], $new->_cacheDirectives['public']);
@@ -868,7 +868,7 @@ class Response implements ResponseInterface
      * @param int $seconds The number of seconds for shared max-age
      * @return static
      */
-    public function withSharedMaxAge(int $seconds)
+    function withSharedMaxAge(int $seconds)
     {
         $new = clone this;
         $new->_cacheDirectives['s-maxage'] = $seconds;
@@ -886,7 +886,7 @@ class Response implements ResponseInterface
      * @param int $seconds The seconds a cached response can be considered valid
      * @return static
      */
-    public function withMaxAge(int $seconds)
+    function withMaxAge(int $seconds)
     {
         $new = clone this;
         $new->_cacheDirectives['max-age'] = $seconds;
@@ -906,7 +906,7 @@ class Response implements ResponseInterface
      * @param bool $enable If boolean sets or unsets the directive.
      * @return static
      */
-    public function withMustRevalidate(bool $enable)
+    function withMustRevalidate(bool $enable)
     {
         $new = clone this;
         if ($enable) {
@@ -952,7 +952,7 @@ class Response implements ResponseInterface
      * @param \DateTimeInterface|string|int|null $time Valid time string or \DateTime instance.
      * @return static
      */
-    public function withExpires($time)
+    function withExpires($time)
     {
         $date = this->_getUTCDate($time);
 
@@ -975,7 +975,7 @@ class Response implements ResponseInterface
      * @param \DateTimeInterface|string|int $time Valid time string or \DateTime instance.
      * @return static
      */
-    public function withModified($time)
+    function withModified($time)
     {
         $date = this->_getUTCDate($time);
 
@@ -992,7 +992,7 @@ class Response implements ResponseInterface
      * @deprecated 4.4.0 Use `withNotModified()` instead.
      * @return void
      */
-    public function notModified(): void
+    function notModified(): void
     {
         deprecationWarning(
             'The `notModified()` method is deprecated. ' .
@@ -1024,7 +1024,7 @@ class Response implements ResponseInterface
      *
      * @return static
      */
-    public function withNotModified()
+    function withNotModified()
     {
         $new = this->withStatus(304);
         $new->_createStream();
@@ -1055,7 +1055,7 @@ class Response implements ResponseInterface
      *   containing the list for variances.
      * @return static
      */
-    public function withVary($cacheVariances)
+    function withVary($cacheVariances)
     {
         return this->withHeader('Vary', (array)$cacheVariances);
     }
@@ -1081,7 +1081,7 @@ class Response implements ResponseInterface
      *   other with the same hash or not. Defaults to false
      * @return static
      */
-    public function withEtag(string $hash, bool $weak = false)
+    function withEtag(string $hash, bool $weak = false)
     {
         $hash = sprintf('%s"%s"', $weak ? 'W/' : '', $hash);
 
@@ -1115,7 +1115,7 @@ class Response implements ResponseInterface
      *
      * @return bool false if client does not accept compressed responses or no handler is available, true otherwise
      */
-    public function compress(): bool
+    function compress(): bool
     {
         $compressionEnabled = ini_get('zlib.output_compression') != '1' &&
             extension_loaded('zlib') &&
@@ -1129,7 +1129,7 @@ class Response implements ResponseInterface
      *
      * @return bool
      */
-    public function outputCompressed(): bool
+    function outputCompressed(): bool
     {
         return strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') != false
             && (ini_get('zlib.output_compression') === '1' || in_array('ob_gzhandler', ob_list_handlers(), true));
@@ -1141,7 +1141,7 @@ class Response implements ResponseInterface
      * @param string $filename The name of the file as the browser will download the response
      * @return static
      */
-    public function withDownload(string $filename)
+    function withDownload(string $filename)
     {
         return this->withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"');
     }
@@ -1152,7 +1152,7 @@ class Response implements ResponseInterface
      * @param string|int $bytes Number of bytes
      * @return static
      */
-    public function withLength($bytes)
+    function withLength($bytes)
     {
         return this->withHeader('Content-Length', (string)$bytes);
     }
@@ -1179,7 +1179,7 @@ class Response implements ResponseInterface
      * @return static
      * @since 3.6.0
      */
-    public function withAddedLink(string $url, array $options = [])
+    function withAddedLink(string $url, array $options = [])
     {
         $params = [];
         foreach ($options as $key => $option) {
@@ -1206,7 +1206,7 @@ class Response implements ResponseInterface
      * @param \Cake\Http\ServerRequest $request Request object
      * @return bool Whether the response is 'modified' based on cache headers.
      */
-    public function isNotModified(ServerRequest $request): bool
+    function isNotModified(ServerRequest $request): bool
     {
         $etags = preg_split('/\s*,\s*/', $request->getHeaderLine('If-None-Match'), 0, PREG_SPLIT_NO_EMPTY);
         $responseTag = this->getHeaderLine('Etag');
@@ -1243,7 +1243,7 @@ class Response implements ResponseInterface
      * @return bool Whether the response was marked as not modified or not.
      * @deprecated 4.4.0 Use `isNotModified()` and `withNotModified()` instead.
      */
-    public function checkNotModified(ServerRequest $request): bool
+    function checkNotModified(ServerRequest $request): bool
     {
         deprecationWarning(
             'The `checkNotModified()` method is deprecated. ' .
@@ -1265,7 +1265,7 @@ class Response implements ResponseInterface
      *
      * @return string
      */
-    public function __toString(): string
+    function __toString(): string
     {
         this->stream->rewind();
 
@@ -1285,7 +1285,7 @@ class Response implements ResponseInterface
      * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
      * @return static
      */
-    public function withCookie(CookieInterface $cookie)
+    function withCookie(CookieInterface $cookie)
     {
         $new = clone this;
         $new->_cookies = $new->_cookies->add($cookie);
@@ -1306,7 +1306,7 @@ class Response implements ResponseInterface
      * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
      * @return static
      */
-    public function withExpiredCookie(CookieInterface $cookie)
+    function withExpiredCookie(CookieInterface $cookie)
     {
         $cookie = $cookie->withExpired();
 
@@ -1325,7 +1325,7 @@ class Response implements ResponseInterface
      * @param string $name The cookie name you want to read.
      * @return array|null Either the cookie data or null
      */
-    public function getCookie(string $name): ?array
+    function getCookie(string $name): ?array
     {
         if (!this->_cookies->has($name)) {
             return null;
@@ -1341,7 +1341,7 @@ class Response implements ResponseInterface
      *
      * @return array<string, array>
      */
-    public function getCookies(): array
+    function getCookies(): array
     {
         $out = [];
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
@@ -1358,7 +1358,7 @@ class Response implements ResponseInterface
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    public function getCookieCollection(): CookieCollection
+    function getCookieCollection(): CookieCollection
     {
         return this->_cookies;
     }
@@ -1369,7 +1369,7 @@ class Response implements ResponseInterface
      * @param \Cake\Http\Cookie\CookieCollection $cookieCollection Cookie collection to set.
      * @return static
      */
-    public function withCookieCollection(CookieCollection $cookieCollection)
+    function withCookieCollection(CookieCollection $cookieCollection)
     {
         $new = clone this;
         $new->_cookies = $cookieCollection;
@@ -1384,7 +1384,7 @@ class Response implements ResponseInterface
      * @return \Cake\Http\CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */
-    public function cors(ServerRequest $request): CorsBuilder
+    function cors(ServerRequest $request): CorsBuilder
     {
         $origin = $request->getHeaderLine('Origin');
         $ssl = $request->is('ssl');
@@ -1411,7 +1411,7 @@ class Response implements ResponseInterface
      * @return static
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    public function withFile(string $path, array $options = [])
+    function withFile(string $path, array $options = [])
     {
         $file = this->validateFile($path);
         $options += [
@@ -1467,7 +1467,7 @@ class Response implements ResponseInterface
      * @param string|null $string The string to be sent
      * @return static
      */
-    public function withStringBody(?string $string)
+    function withStringBody(?string $string)
     {
         $new = clone this;
         $new->_createStream();
@@ -1505,7 +1505,7 @@ class Response implements ResponseInterface
      *
      * @return \SplFileInfo|null The file to use in the response or null
      */
-    public function getFile(): ?SplFileInfo
+    function getFile(): ?SplFileInfo
     {
         return this->_file;
     }
@@ -1565,7 +1565,7 @@ class Response implements ResponseInterface
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         return [
             'status' => this->_status,

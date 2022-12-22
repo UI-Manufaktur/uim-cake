@@ -68,7 +68,7 @@ class FormContext implements ContextInterface
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    public function primaryKey(): array
+    function primaryKey(): array
     {
         deprecationWarning('`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.');
 
@@ -78,7 +78,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function getPrimaryKey(): array
+    function getPrimaryKey(): array
     {
         return [];
     }
@@ -86,7 +86,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function isPrimaryKey(string $field): bool
+    function isPrimaryKey(string $field): bool
     {
         return false;
     }
@@ -94,7 +94,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function isCreate(): bool
+    function isCreate(): bool
     {
         return true;
     }
@@ -102,7 +102,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function val(string $field, array $options = [])
+    function val(string $field, array $options = [])
     {
         $options += [
             'default' => null,
@@ -140,7 +140,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function isRequired(string $field): ?bool
+    function isRequired(string $field): ?bool
     {
         $validator = this->_form->getValidator(this->_validator);
         if (!$validator->hasField($field)) {
@@ -156,7 +156,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function getRequiredMessage(string $field): ?string
+    function getRequiredMessage(string $field): ?string
     {
         $parts = explode('.', $field);
 
@@ -177,7 +177,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function getMaxLength(string $field): ?int
+    function getMaxLength(string $field): ?int
     {
         $validator = this->_form->getValidator(this->_validator);
         if (!$validator->hasField($field)) {
@@ -200,7 +200,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function fieldNames(): array
+    function fieldNames(): array
     {
         return this->_form->getSchema()->fields();
     }
@@ -208,7 +208,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function type(string $field): ?string
+    function type(string $field): ?string
     {
         return this->_form->getSchema()->fieldType($field);
     }
@@ -216,7 +216,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function attributes(string $field): array
+    function attributes(string $field): array
     {
         return array_intersect_key(
             (array)this->_form->getSchema()->field($field),
@@ -227,7 +227,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function hasError(string $field): bool
+    function hasError(string $field): bool
     {
         $errors = this->error($field);
 
@@ -237,7 +237,7 @@ class FormContext implements ContextInterface
     /**
      * @inheritDoc
      */
-    public function error(string $field): array
+    function error(string $field): array
     {
         return (array)Hash::get(this->_form->getErrors(), $field, []);
     }

@@ -29,5 +29,5 @@ interface RoutingApplicationInterface
      * @param \Cake\Routing\RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
-    public function routes(RouteBuilder $routes): void;
+    function routes(RouteBuilder $routes): void;
 }

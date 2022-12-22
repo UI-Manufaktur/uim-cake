@@ -61,7 +61,7 @@ class FormData implements Countable
      *
      * @return string
      */
-    public function boundary(): string
+    function boundary(): string
     {
         if (this->_boundary) {
             return this->_boundary;
@@ -78,7 +78,7 @@ class FormData implements Countable
      * @param string $value The value to add.
      * @return \Cake\Http\Client\FormDataPart
      */
-    public function newPart(string $name, string $value): FormDataPart
+    function newPart(string $name, string $value): FormDataPart
     {
         return new FormDataPart($name, $value);
     }
@@ -97,7 +97,7 @@ class FormData implements Countable
      * @param mixed $value The value for the part.
      * @return this
      */
-    public function add($name, $value = null)
+    function add($name, $value = null)
     {
         if (is_string($name)) {
             if (is_array($value)) {
@@ -123,7 +123,7 @@ class FormData implements Countable
      * @param array $data Array of data to add.
      * @return this
      */
-    public function addMany(array $data)
+    function addMany(array $data)
     {
         foreach ($data as $name => $value) {
             this->add($name, $value);
@@ -141,7 +141,7 @@ class FormData implements Countable
      *  or a UploadedFileInterface instance.
      * @return \Cake\Http\Client\FormDataPart
      */
-    public function addFile(string $name, $value): FormDataPart
+    function addFile(string $name, $value): FormDataPart
     {
         this->_hasFile = true;
 
@@ -183,7 +183,7 @@ class FormData implements Countable
      * @param mixed $value The value to add.
      * @return void
      */
-    public function addRecursive(string $name, $value): void
+    function addRecursive(string $name, $value): void
     {
         foreach ($value as $key => $value) {
             $key = $name . '[' . $key . ']';
@@ -196,7 +196,7 @@ class FormData implements Countable
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         return count(this->_parts);
     }
@@ -207,7 +207,7 @@ class FormData implements Countable
      *
      * @return bool Whether there is a file in this payload.
      */
-    public function hasFile(): bool
+    function hasFile(): bool
     {
         return this->_hasFile;
     }
@@ -221,7 +221,7 @@ class FormData implements Countable
      *
      * @return bool Whether the payload is multipart.
      */
-    public function isMultipart(): bool
+    function isMultipart(): bool
     {
         return this->hasFile() || this->_hasComplexPart;
     }
@@ -234,7 +234,7 @@ class FormData implements Countable
      *
      * @return string
      */
-    public function contentType(): string
+    function contentType(): string
     {
         if (!this->isMultipart()) {
             return 'application/x-www-form-urlencoded';
@@ -249,7 +249,7 @@ class FormData implements Countable
      *
      * @return string
      */
-    public function __toString(): string
+    function __toString(): string
     {
         if (this->isMultipart()) {
             $boundary = this->boundary();

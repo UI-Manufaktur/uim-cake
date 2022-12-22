@@ -58,7 +58,7 @@ class MissingCellTemplateException extends MissingTemplateException
      * @return array
      * @psalm-return array{name: string, file: string, paths: array}
      */
-    public function getAttributes(): array
+    function getAttributes(): array
     {
         return [
             'name' => this->name,

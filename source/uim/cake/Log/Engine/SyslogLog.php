@@ -118,7 +118,7 @@ class SyslogLog extends BaseLog
      * @return void
      * @see \Cake\Log\Log::$_levels
      */
-    public function log($level, $message, array $context = []): void
+    function log($level, $message, array $context = []): void
     {
         if (!this->_open) {
             $config = this->_config;
@@ -167,7 +167,7 @@ class SyslogLog extends BaseLog
     /**
      * Closes the logger connection
      */
-    public function __destruct()
+    function __destruct()
     {
         closelog();
     }

@@ -34,7 +34,7 @@ class CommandTask extends Shell
      *
      * @return array
      */
-    public function getShellList()
+    function getShellList()
     {
         $skipFiles = ['app'];
         $hiddenCommands = ['command_list', 'completion'];

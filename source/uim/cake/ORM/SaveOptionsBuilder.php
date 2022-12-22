@@ -69,7 +69,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param array<string, mixed> $array Options array.
      * @return this
      */
-    public function parseArrayOptions(array $array)
+    function parseArrayOptions(array $array)
     {
         foreach ($array as $key => $value) {
             this->{$key}($value);
@@ -84,7 +84,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param array|string $associated String or array of associations.
      * @return this
      */
-    public function associated($associated)
+    function associated($associated)
     {
         $associated = this->_normalizeAssociations($associated);
         this->_associated(this->_table, $associated);
@@ -140,7 +140,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param bool $guard Guard the properties or not.
      * @return this
      */
-    public function guard(bool $guard)
+    function guard(bool $guard)
     {
         this->_options['guard'] = $guard;
 
@@ -153,7 +153,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param string $validate Name of the validation rule set to use.
      * @return this
      */
-    public function validate(string $validate)
+    function validate(string $validate)
     {
         this->_table->getValidator($validate);
         this->_options['validate'] = $validate;
@@ -167,7 +167,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param bool $checkExisting Guard the properties or not.
      * @return this
      */
-    public function checkExisting(bool $checkExisting)
+    function checkExisting(bool $checkExisting)
     {
         this->_options['checkExisting'] = $checkExisting;
 
@@ -180,7 +180,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param bool $checkRules Check the rules or not.
      * @return this
      */
-    public function checkRules(bool $checkRules)
+    function checkRules(bool $checkRules)
     {
         this->_options['checkRules'] = $checkRules;
 
@@ -193,7 +193,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param bool $atomic Atomic or not.
      * @return this
      */
-    public function atomic(bool $atomic)
+    function atomic(bool $atomic)
     {
         this->_options['atomic'] = $atomic;
 
@@ -203,7 +203,7 @@ class SaveOptionsBuilder extends ArrayObject
     /**
      * @return array<string, mixed>
      */
-    public function toArray(): array
+    function toArray(): array
     {
         return this->_options;
     }
@@ -215,7 +215,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param mixed $value Option value.
      * @return this
      */
-    public function set(string $option, $value)
+    function set(string $option, $value)
     {
         if (method_exists(this, $option)) {
             return this->{$option}($value);

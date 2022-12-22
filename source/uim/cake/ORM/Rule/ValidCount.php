@@ -49,7 +49,7 @@ class ValidCount
      * @param array<string, mixed> $options Options passed to the check.
      * @return bool True if successful, else false.
      */
-    public function __invoke(EntityInterface $entity, array $options): bool
+    function __invoke(EntityInterface $entity, array $options): bool
     {
         $value = $entity->{this->_field};
         if (!is_array($value) && !$value instanceof Countable) {

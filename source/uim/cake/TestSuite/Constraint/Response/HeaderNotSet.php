@@ -28,7 +28,7 @@ class HeaderNotSet extends HeaderSet
      * @param mixed $other Expected content
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return parent::matches($other) === false;
     }
@@ -38,7 +38,7 @@ class HeaderNotSet extends HeaderSet
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf('did not have header `%s`', this->headerName);
     }

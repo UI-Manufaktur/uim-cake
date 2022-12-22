@@ -174,7 +174,7 @@ class Marshaller
      * @see \Cake\ORM\Table::newEntity()
      * @see \Cake\ORM\Entity::$_accessible
      */
-    public function one(array $data, array $options = []): EntityInterface
+    function one(array $data, array $options = []): EntityInterface
     {
         [$data, $options] = this->_prepareDataAndOptions($data, $options);
 
@@ -359,7 +359,7 @@ class Marshaller
      * @see \Cake\ORM\Table::newEntities()
      * @see \Cake\ORM\Entity::$_accessible
      */
-    public function many(array $data, array $options = []): array
+    function many(array $data, array $options = []): array
     {
         $output = [];
         foreach ($data as $record) {
@@ -543,7 +543,7 @@ class Marshaller
      * @return \Cake\Datasource\EntityInterface
      * @see \Cake\ORM\Entity::$_accessible
      */
-    public function merge(EntityInterface $entity, array $data, array $options = []): EntityInterface
+    function merge(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
         [$data, $options] = this->_prepareDataAndOptions($data, $options);
 
@@ -661,7 +661,7 @@ class Marshaller
      * @see \Cake\ORM\Entity::$_accessible
      * @psalm-suppress NullArrayOffset
      */
-    public function mergeMany(iterable $entities, array $data, array $options = []): array
+    function mergeMany(iterable $entities, array $data, array $options = []): array
     {
         $primary = (array)this->_table->getPrimaryKey();
 

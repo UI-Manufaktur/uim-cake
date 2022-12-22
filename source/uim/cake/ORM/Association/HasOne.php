@@ -46,7 +46,7 @@ class HasOne extends Association
      *
      * @return array<string>|string
      */
-    public function getForeignKey()
+    function getForeignKey()
     {
         if (this->_foreignKey === null) {
             this->_foreignKey = this->_modelKey(this->getSource()->getAlias());
@@ -75,7 +75,7 @@ class HasOne extends Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
      */
-    public function isOwningSide(Table $side): bool
+    function isOwningSide(Table $side): bool
     {
         return $side === this->getSource();
     }
@@ -85,7 +85,7 @@ class HasOne extends Association
      *
      * @return string
      */
-    public function type(): string
+    function type(): string
     {
         return self::ONE_TO_ONE;
     }
@@ -102,7 +102,7 @@ class HasOne extends Association
      * the saved entity
      * @see \Cake\ORM\Table::save()
      */
-    public function saveAssociated(EntityInterface $entity, array $options = [])
+    function saveAssociated(EntityInterface $entity, array $options = [])
     {
         $targetEntity = $entity->get(this->getProperty());
         if (empty($targetEntity) || !($targetEntity instanceof EntityInterface)) {
@@ -127,7 +127,7 @@ class HasOne extends Association
     /**
      * @inheritDoc
      */
-    public function eagerLoader(array $options): Closure
+    function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
             'alias' => this->getAlias(),
@@ -146,7 +146,7 @@ class HasOne extends Association
     /**
      * @inheritDoc
      */
-    public function cascadeDelete(EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(EntityInterface $entity, array $options = []): bool
     {
         $helper = new DependentDeleteHelper();
 

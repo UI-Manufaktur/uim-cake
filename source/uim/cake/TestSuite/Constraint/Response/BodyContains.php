@@ -48,7 +48,7 @@ class BodyContains extends ResponseBase
      * @param mixed $other Expected type
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $method = 'mb_strpos';
         if (this->ignoreCase) {
@@ -63,7 +63,7 @@ class BodyContains extends ResponseBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'is in response body';
     }

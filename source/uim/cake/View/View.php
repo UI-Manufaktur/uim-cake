@@ -48,7 +48,7 @@ use Throwable;
  * View class supports using plugins as themes. You can set
  *
  * ```
- * public function beforeRender(\Cake\Event\EventInterface $event)
+ * function beforeRender(\Cake\Event\EventInterface $event)
  * {
  *      this->viewBuilder()->setTheme('SuperHot');
  * }
@@ -370,7 +370,7 @@ class View implements EventDispatcherInterface
      *
      * @return void
      */
-    public function initialize(): void
+    function initialize(): void
     {
         this->setContentType();
     }
@@ -410,7 +410,7 @@ class View implements EventDispatcherInterface
      * @return \Cake\Http\ServerRequest
      * @since 3.7.0
      */
-    public function getRequest(): ServerRequest
+    function getRequest(): ServerRequest
     {
         return this->request;
     }
@@ -425,7 +425,7 @@ class View implements EventDispatcherInterface
      * @param \Cake\Http\ServerRequest $request Request instance.
      * @return this
      */
-    public function setRequest(ServerRequest $request)
+    function setRequest(ServerRequest $request)
     {
         this->request = $request;
         this->plugin = $request->getParam('plugin');
@@ -438,7 +438,7 @@ class View implements EventDispatcherInterface
      *
      * @return \Cake\Http\Response
      */
-    public function getResponse(): Response
+    function getResponse(): Response
     {
         return this->response;
     }
@@ -449,7 +449,7 @@ class View implements EventDispatcherInterface
      * @param \Cake\Http\Response $response Response instance.
      * @return this
      */
-    public function setResponse(Response $response)
+    function setResponse(Response $response)
     {
         this->response = $response;
 
@@ -461,7 +461,7 @@ class View implements EventDispatcherInterface
      *
      * @return string
      */
-    public function getTemplatePath(): string
+    function getTemplatePath(): string
     {
         return this->templatePath;
     }
@@ -472,7 +472,7 @@ class View implements EventDispatcherInterface
      * @param string $path Path for template files.
      * @return this
      */
-    public function setTemplatePath(string $path)
+    function setTemplatePath(string $path)
     {
         this->templatePath = $path;
 
@@ -484,7 +484,7 @@ class View implements EventDispatcherInterface
      *
      * @return string
      */
-    public function getLayoutPath(): string
+    function getLayoutPath(): string
     {
         return this->layoutPath;
     }
@@ -495,7 +495,7 @@ class View implements EventDispatcherInterface
      * @param string $path Path for layout files.
      * @return this
      */
-    public function setLayoutPath(string $path)
+    function setLayoutPath(string $path)
     {
         this->layoutPath = $path;
 
@@ -508,7 +508,7 @@ class View implements EventDispatcherInterface
      *
      * @return bool
      */
-    public function isAutoLayoutEnabled(): bool
+    function isAutoLayoutEnabled(): bool
     {
         return this->autoLayout;
     }
@@ -521,7 +521,7 @@ class View implements EventDispatcherInterface
      * @param bool $enable Boolean to turn on/off.
      * @return this
      */
-    public function enableAutoLayout(bool $enable = true)
+    function enableAutoLayout(bool $enable = true)
     {
         this->autoLayout = $enable;
 
@@ -534,7 +534,7 @@ class View implements EventDispatcherInterface
      *
      * @return this
      */
-    public function disableAutoLayout()
+    function disableAutoLayout()
     {
         this->autoLayout = false;
 
@@ -546,7 +546,7 @@ class View implements EventDispatcherInterface
      *
      * @return string|null
      */
-    public function getTheme(): ?string
+    function getTheme(): ?string
     {
         return this->theme;
     }
@@ -557,7 +557,7 @@ class View implements EventDispatcherInterface
      * @param string|null $theme Theme name.
      * @return this
      */
-    public function setTheme(?string $theme)
+    function setTheme(?string $theme)
     {
         this->theme = $theme;
 
@@ -570,7 +570,7 @@ class View implements EventDispatcherInterface
      *
      * @return string
      */
-    public function getTemplate(): string
+    function getTemplate(): string
     {
         return this->template;
     }
@@ -582,7 +582,7 @@ class View implements EventDispatcherInterface
      * @param string $name Template file name to set.
      * @return this
      */
-    public function setTemplate(string $name)
+    function setTemplate(string $name)
     {
         this->template = $name;
 
@@ -596,7 +596,7 @@ class View implements EventDispatcherInterface
      *
      * @return string
      */
-    public function getLayout(): string
+    function getLayout(): string
     {
         return this->layout;
     }
@@ -609,7 +609,7 @@ class View implements EventDispatcherInterface
      * @param string $name Layout file name to set.
      * @return this
      */
-    public function setLayout(string $name)
+    function setLayout(string $name)
     {
         this->layout = $name;
 
@@ -628,7 +628,7 @@ class View implements EventDispatcherInterface
      * @return mixed Config value being read.
      * @psalm-suppress PossiblyNullArgument
      */
-    public function getConfig(?string $key = null, $default = null)
+    function getConfig(?string $key = null, $default = null)
     {
         $value = this->_getConfig($key);
 
@@ -677,7 +677,7 @@ class View implements EventDispatcherInterface
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} $options
      */
-    public function element(string $name, array $data = [], array $options = []): string
+    function element(string $name, array $data = [], array $options = []): string
     {
         $options += ['callbacks' => false, 'cache' => null, 'plugin' => null, 'ignoreMissing' => false];
         if (isset($options['cache'])) {
@@ -722,7 +722,7 @@ class View implements EventDispatcherInterface
      * @return string The rendered content.
      * @throws \RuntimeException When $options is lacking a 'key' option.
      */
-    public function cache(callable $block, array $options = []): string
+    function cache(callable $block, array $options = []): string
     {
         $options += ['key' => '', 'config' => this->elementCache];
         if (empty($options['key'])) {
@@ -761,7 +761,7 @@ class View implements EventDispatcherInterface
      *   is not found in the plugin, the normal view path cascade will be searched.
      * @return bool Success
      */
-    public function elementExists(string $name): bool
+    function elementExists(string $name): bool
     {
         return (bool)this->_getElementFileName($name);
     }
@@ -790,7 +790,7 @@ class View implements EventDispatcherInterface
      * @triggers View.beforeRender this, [$templateFileName]
      * @triggers View.afterRender this, [$templateFileName]
      */
-    public function render(?string $template = null, $layout = null): string
+    function render(?string $template = null, $layout = null): string
     {
         $defaultLayout = '';
         $defaultAutoLayout = null;
@@ -840,7 +840,7 @@ class View implements EventDispatcherInterface
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
-    public function renderLayout(string $content, ?string $layout = null): string
+    function renderLayout(string $content, ?string $layout = null): string
     {
         $layoutFileName = this->_getLayoutFileName($layout);
 
@@ -869,7 +869,7 @@ class View implements EventDispatcherInterface
      *
      * @return array<string> Array of the set view variable names.
      */
-    public function getVars(): array
+    function getVars(): array
     {
         return array_keys(this->viewVars);
     }
@@ -881,7 +881,7 @@ class View implements EventDispatcherInterface
      * @param mixed $default The default/fallback content of $var.
      * @return mixed The content of the named var if its set, otherwise $default.
      */
-    public function get(string $var, $default = null)
+    function get(string $var, $default = null)
     {
         return this->viewVars[$var] ?? $default;
     }
@@ -895,7 +895,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @throws \RuntimeException If the array combine operation failed.
      */
-    public function set($name, $value = null)
+    function set($name, $value = null)
     {
         if (is_array($name)) {
             if (is_array($value)) {
@@ -923,7 +923,7 @@ class View implements EventDispatcherInterface
      * @return array<string> An array containing the blocks.
      * @see \Cake\View\ViewBlock::keys()
      */
-    public function blocks(): array
+    function blocks(): array
     {
         return this->Blocks->keys();
     }
@@ -952,7 +952,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::start()
      */
-    public function start(string $name)
+    function start(string $name)
     {
         this->Blocks->start($name);
 
@@ -970,7 +970,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::concat()
      */
-    public function append(string $name, $value = null)
+    function append(string $name, $value = null)
     {
         this->Blocks->concat($name, $value);
 
@@ -988,7 +988,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::concat()
      */
-    public function prepend(string $name, $value)
+    function prepend(string $name, $value)
     {
         this->Blocks->concat($name, $value, ViewBlock::PREPEND);
 
@@ -1005,7 +1005,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::set()
      */
-    public function assign(string $name, $value)
+    function assign(string $name, $value)
     {
         this->Blocks->set($name, $value);
 
@@ -1020,7 +1020,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::set()
      */
-    public function reset(string $name)
+    function reset(string $name)
     {
         this->assign($name, '');
 
@@ -1036,7 +1036,7 @@ class View implements EventDispatcherInterface
      * @return string The block content or $default if the block does not exist.
      * @see \Cake\View\ViewBlock::get()
      */
-    public function fetch(string $name, string $default = ''): string
+    function fetch(string $name, string $default = ''): string
     {
         return this->Blocks->get($name, $default);
     }
@@ -1047,7 +1047,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::end()
      */
-    public function end()
+    function end()
     {
         this->Blocks->end();
 
@@ -1060,7 +1060,7 @@ class View implements EventDispatcherInterface
      * @param string $name Name of the block
      * @return bool
      */
-    public function exists(string $name): bool
+    function exists(string $name): bool
     {
         return this->Blocks->exists($name);
     }
@@ -1074,7 +1074,7 @@ class View implements EventDispatcherInterface
      * @throws \LogicException when you extend a template with itself or make extend loops.
      * @throws \LogicException when you extend an element which doesn't exist
      */
-    public function extend(string $name)
+    function extend(string $name)
     {
         $type = $name[0] === '/' ? static::TYPE_TEMPLATE : this->_currentType;
         switch ($type) {
@@ -1113,7 +1113,7 @@ class View implements EventDispatcherInterface
      *
      * @return string
      */
-    public function getCurrentType(): string
+    function getCurrentType(): string
     {
         return this->_currentType;
     }
@@ -1124,7 +1124,7 @@ class View implements EventDispatcherInterface
      * @param string $name Name of the attribute to get.
      * @return \Cake\View\Helper|null
      */
-    public function __get(string $name)
+    function __get(string $name)
     {
         $registry = this->helpers();
         if (!isset($registry->{$name})) {
@@ -1141,7 +1141,7 @@ class View implements EventDispatcherInterface
      *
      * @return this
      */
-    public function loadHelpers()
+    function loadHelpers()
     {
         $registry = this->helpers();
         $helpers = $registry->normalizeArray(this->helpers);
@@ -1234,7 +1234,7 @@ class View implements EventDispatcherInterface
      *
      * @return \Cake\View\HelperRegistry
      */
-    public function helpers(): HelperRegistry
+    function helpers(): HelperRegistry
     {
         if (this->_helpers === null) {
             this->_helpers = new HelperRegistry(this);
@@ -1251,7 +1251,7 @@ class View implements EventDispatcherInterface
      * @return \Cake\View\Helper a constructed helper object.
      * @see \Cake\View\HelperRegistry::load()
      */
-    public function loadHelper(string $name, array $config = []): Helper
+    function loadHelper(string $name, array $config = []): Helper
     {
         [, $class] = pluginSplit($name);
         $helpers = this->helpers();
@@ -1267,7 +1267,7 @@ class View implements EventDispatcherInterface
      * @see \Cake\View\View::$subDir
      * @since 3.7.0
      */
-    public function setSubDir(string $subDir)
+    function setSubDir(string $subDir)
     {
         this->subDir = $subDir;
 
@@ -1281,7 +1281,7 @@ class View implements EventDispatcherInterface
      * @see \Cake\View\View::$subDir
      * @since 3.7.0
      */
-    public function getSubDir(): string
+    function getSubDir(): string
     {
         return this->subDir;
     }
@@ -1292,7 +1292,7 @@ class View implements EventDispatcherInterface
      * @return string
      * @since 3.7.7
      */
-    public function getName(): string
+    function getName(): string
     {
         return this->name;
     }
@@ -1303,7 +1303,7 @@ class View implements EventDispatcherInterface
      * @return string|null
      * @since 3.7.0
      */
-    public function getPlugin(): ?string
+    function getPlugin(): ?string
     {
         return this->plugin;
     }
@@ -1315,7 +1315,7 @@ class View implements EventDispatcherInterface
      * @return this
      * @since 3.7.0
      */
-    public function setPlugin(?string $name)
+    function setPlugin(?string $name)
     {
         this->plugin = $name;
 
@@ -1330,7 +1330,7 @@ class View implements EventDispatcherInterface
      * @see \Cake\View\View::$elementCache
      * @since 3.7.0
      */
-    public function setElementCache(string $elementCache)
+    function setElementCache(string $elementCache)
     {
         this->elementCache = $elementCache;
 
@@ -1446,7 +1446,7 @@ class View implements EventDispatcherInterface
      * @return array Array with 2 indexes. 0 => plugin name, 1 => filename.
      * @psalm-return array{string|null, string}
      */
-    public function pluginSplit(string $name, bool $fallback = true): array
+    function pluginSplit(string $name, bool $fallback = true): array
     {
         $plugin = null;
         [$first, $second] = pluginSplit($name);

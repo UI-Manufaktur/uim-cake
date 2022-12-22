@@ -30,7 +30,7 @@ class PHPUnitExtension implements BeforeFirstTestHook
      *
      * @return void
      */
-    public function executeBeforeFirstTest(): void
+    function executeBeforeFirstTest(): void
     {
         $helper = new ConnectionHelper();
         $helper->addTestAliases();

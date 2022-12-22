@@ -87,7 +87,7 @@ class ValidationRule
      *
      * @return bool
      */
-    public function isLast(): bool
+    function isLast(): bool
     {
         return this->_last;
     }
@@ -110,7 +110,7 @@ class ValidationRule
      * @throws \InvalidArgumentException when the supplied rule is not a valid
      * callable for the configured scope
      */
-    public function process($value, array $providers, array $context = [])
+    function process($value, array $providers, array $context = [])
     {
         $context += ['data' => [], 'newRecord' => true, 'providers' => $providers];
 
@@ -209,7 +209,7 @@ class ValidationRule
      * @param string $property The name of the property to retrieve.
      * @return mixed
      */
-    public function get(string $property)
+    function get(string $property)
     {
         $property = '_' . $property;
 

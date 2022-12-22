@@ -46,7 +46,7 @@ class Runner implements RequestHandlerInterface
      * @param \Psr\Http\Server\RequestHandlerInterface|null $fallbackHandler Fallback request handler.
      * @return \Psr\Http\Message\ResponseInterface A response object
      */
-    public function run(
+    function run(
         MiddlewareQueue $queue,
         ServerRequestInterface $request,
         ?RequestHandlerInterface $fallbackHandler = null
@@ -64,7 +64,7 @@ class Runner implements RequestHandlerInterface
      * @param \Psr\Http\Message\ServerRequestInterface $request The server request
      * @return \Psr\Http\Message\ResponseInterface An updated response
      */
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    function handle(ServerRequestInterface $request): ResponseInterface
     {
         if (this->queue->valid()) {
             $middleware = this->queue->current();

@@ -135,7 +135,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         if (this->renderer) {
             this->renderer = clone this->renderer;
@@ -153,7 +153,7 @@ class Email implements JsonSerializable, Serializable
      * @param array $args Method arguments
      * @return this|mixed
      */
-    public function __call(string $method, array $args)
+    function __call(string $method, array $args)
     {
         $result = this->message->$method(...$args);
 
@@ -174,7 +174,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return \Cake\Mailer\Message
      */
-    public function getMessage(): Message
+    function getMessage(): Message
     {
         return this->message;
     }
@@ -185,7 +185,7 @@ class Email implements JsonSerializable, Serializable
      * @param string $viewClass View class name.
      * @return this
      */
-    public function setViewRenderer(string $viewClass)
+    function setViewRenderer(string $viewClass)
     {
         this->getRenderer()->viewBuilder()->setClassName($viewClass);
 
@@ -198,7 +198,7 @@ class Email implements JsonSerializable, Serializable
      * @return string
      * @psalm-suppress InvalidNullableReturnType
      */
-    public function getViewRenderer(): string
+    function getViewRenderer(): string
     {
         /** @psalm-suppress NullableReturnStatement */
         return this->getRenderer()->viewBuilder()->getClassName();
@@ -210,7 +210,7 @@ class Email implements JsonSerializable, Serializable
      * @param array<string, mixed> $viewVars Variables to set for view.
      * @return this
      */
-    public function setViewVars(array $viewVars)
+    function setViewVars(array $viewVars)
     {
         this->getRenderer()->viewBuilder()->setVars($viewVars);
 
@@ -222,7 +222,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    public function getViewVars(): array
+    function getViewVars(): array
     {
         return this->getRenderer()->viewBuilder()->getVars();
     }
@@ -239,7 +239,7 @@ class Email implements JsonSerializable, Serializable
      * @throws \LogicException When the chosen transport lacks a send method.
      * @throws \InvalidArgumentException When $name is neither a string nor an object.
      */
-    public function setTransport($name)
+    function setTransport($name)
     {
         if (is_string($name)) {
             $transport = TransportFactory::get($name);
@@ -265,7 +265,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return \Cake\Mailer\AbstractTransport|null
      */
-    public function getTransport(): ?AbstractTransport
+    function getTransport(): ?AbstractTransport
     {
         return this->_transport;
     }
@@ -276,7 +276,7 @@ class Email implements JsonSerializable, Serializable
      * @param string|null $type Use MESSAGE_* constants or null to return the full message as array
      * @return array|string String if type is given, array if type is null
      */
-    public function message(?string $type = null)
+    function message(?string $type = null)
     {
         if ($type === null) {
             return this->message->getBody();
@@ -294,7 +294,7 @@ class Email implements JsonSerializable, Serializable
      *    an array with config.
      * @return this
      */
-    public function setProfile($config)
+    function setProfile($config)
     {
         if (is_string($config)) {
             $name = $config;
@@ -350,7 +350,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    public function getProfile(): array
+    function getProfile(): array
     {
         return this->_profile;
     }
@@ -363,7 +363,7 @@ class Email implements JsonSerializable, Serializable
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
-    public function send($content = null): array
+    function send($content = null): array
     {
         if (is_array($content)) {
             $content = implode("\n", $content) . "\n";
@@ -389,7 +389,7 @@ class Email implements JsonSerializable, Serializable
      * @param array<string>|string|null $content Content array or string
      * @return void
      */
-    public function render($content = null): void
+    function render($content = null): void
     {
         if (is_array($content)) {
             $content = implode("\n", $content) . "\n";
@@ -408,7 +408,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return \Cake\View\ViewBuilder
      */
-    public function viewBuilder(): ViewBuilder
+    function viewBuilder(): ViewBuilder
     {
         return this->getRenderer()->viewBuilder();
     }
@@ -418,7 +418,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return \Cake\Mailer\Renderer
      */
-    public function getRenderer(): Renderer
+    function getRenderer(): Renderer
     {
         if (this->renderer === null) {
             this->renderer = new Renderer();
@@ -433,7 +433,7 @@ class Email implements JsonSerializable, Serializable
      * @param \Cake\Mailer\Renderer $renderer Render instance.
      * @return this
      */
-    public function setRenderer(Renderer $renderer)
+    function setRenderer(Renderer $renderer)
     {
         this->renderer = $renderer;
 
@@ -531,7 +531,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return this
      */
-    public function reset()
+    function reset()
     {
         this->message->reset();
         if (this->renderer != null) {
@@ -550,7 +550,7 @@ class Email implements JsonSerializable, Serializable
      * @return array Serializable array of configuration properties.
      * @throws \Exception When a view var object can not be properly serialized.
      */
-    public function jsonSerialize(): array
+    function jsonSerialize(): array
     {
         $array = this->message->jsonSerialize();
         $array['viewConfig'] = this->getRenderer()->viewBuilder()->jsonSerialize();
@@ -564,7 +564,7 @@ class Email implements JsonSerializable, Serializable
      * @param array<string, mixed> $config Email configuration array.
      * @return this
      */
-    public function createFromArray(array $config)
+    function createFromArray(array $config)
     {
         if (isset($config['viewConfig'])) {
             this->getRenderer()->viewBuilder()->createFromArray($config['viewConfig']);
@@ -584,7 +584,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return string
      */
-    public function serialize(): string
+    function serialize(): string
     {
         $array = this->__serialize();
 
@@ -596,7 +596,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @return array
      */
-    public function __serialize(): array
+    function __serialize(): array
     {
         $array = this->jsonSerialize();
         array_walk_recursive($array, function (&$item, $key): void {
@@ -615,7 +615,7 @@ class Email implements JsonSerializable, Serializable
      * @param string $data Serialized string.
      * @return void
      */
-    public function unserialize($data): void
+    function unserialize($data): void
     {
         this->createFromArray(unserialize($data));
     }
@@ -626,7 +626,7 @@ class Email implements JsonSerializable, Serializable
      * @param array $data Data array.
      * @return void
      */
-    public function __unserialize(array $data): void
+    function __unserialize(array $data): void
     {
         this->createFromArray($data);
     }

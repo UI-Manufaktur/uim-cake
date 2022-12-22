@@ -52,7 +52,7 @@ abstract class SerializedView extends View
     /**
      * @inheritDoc
      */
-    public function initialize(): void
+    function initialize(): void
     {
         parent::initialize();
         if (this->_responseType) {
@@ -66,7 +66,7 @@ abstract class SerializedView extends View
      *
      * @return this
      */
-    public function loadHelpers()
+    function loadHelpers()
     {
         if (!this->getConfig('serialize')) {
             parent::loadHelpers();
@@ -92,7 +92,7 @@ abstract class SerializedView extends View
      * @return string The rendered view.
      * @throws \Cake\View\Exception\SerializationFailureException When serialization fails.
      */
-    public function render(?string $template = null, $layout = null): string
+    function render(?string $template = null, $layout = null): string
     {
         $serialize = this->getConfig('serialize', false);
 

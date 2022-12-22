@@ -168,7 +168,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to display.
      * @return bool
      */
-    public function skipIf(bool $shouldSkip, string $message = ''): bool
+    function skipIf(bool $shouldSkip, string $message = ''): bool
     {
         if ($shouldSkip) {
             this->markTestSkipped($message);
@@ -184,7 +184,7 @@ abstract class TestCase extends BaseTestCase
      * @param callable $callable callable function that will receive asserts
      * @return void
      */
-    public function withErrorReporting(int $errorLevel, callable $callable): void
+    function withErrorReporting(int $errorLevel, callable $callable): void
     {
         $default = error_reporting();
         error_reporting($errorLevel);
@@ -201,7 +201,7 @@ abstract class TestCase extends BaseTestCase
      * @param callable $callable callable function that will receive asserts
      * @return void
      */
-    public function deprecated(callable $callable): void
+    function deprecated(callable $callable): void
     {
         $duplicate = Configure::read('Error.allowDuplicateDeprecations');
         Configure::write('Error.allowDuplicateDeprecations', true);
@@ -335,7 +335,7 @@ abstract class TestCase extends BaseTestCase
      * @throws \RuntimeException when no fixture manager is available.
      * @deprecated 4.3.0 Disabling auto-fixtures is deprecated and only available using FixtureInjector fixture system.
      */
-    public function loadFixtures(): void
+    function loadFixtures(): void
     {
         if (this->autoFixtures) {
             throw new RuntimeException('Cannot use `loadFixtures()` with `$autoFixtures` enabled.');
@@ -369,7 +369,7 @@ abstract class TestCase extends BaseTestCase
      * @return void
      * @since 4.0.1
      */
-    public function loadRoutes(?array $appArgs = null): void
+    function loadRoutes(?array $appArgs = null): void
     {
         $appArgs = $appArgs ?? [rtrim(CONFIG, DIRECTORY_SEPARATOR)];
         /** @psalm-var class-string */
@@ -394,7 +394,7 @@ abstract class TestCase extends BaseTestCase
      * @param array<string, mixed> $plugins List of Plugins to load.
      * @return \Cake\Http\BaseApplication
      */
-    public function loadPlugins(array $plugins = []): BaseApplication
+    function loadPlugins(array $plugins = []): BaseApplication
     {
         /** @var \Cake\Http\BaseApplication $app */
         $app = this->getMockForAbstractClass(
@@ -424,7 +424,7 @@ abstract class TestCase extends BaseTestCase
      * @param array<string> $names A list of plugins you want to remove.
      * @return void
      */
-    public function removePlugins(array $names = []): void
+    function removePlugins(array $names = []): void
     {
         $collection = Plugin::getCollection();
         foreach ($names as $name) {
@@ -439,7 +439,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @return void
      */
-    public function clearPlugins(): void
+    function clearPlugins(): void
     {
         Plugin::getCollection()->clear();
     }
@@ -452,7 +452,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message Assertion failure message
      * @return void
      */
-    public function assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ''): void
+    function assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ''): void
     {
         if (!$eventManager) {
             $eventManager = EventManager::instance();
@@ -472,7 +472,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message Assertion failure message
      * @return void
      */
-    public function assertEventFiredWith(
+    function assertEventFiredWith(
         string $name,
         string $dataKey,
         $dataValue,
@@ -494,7 +494,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    public function assertTextNotEquals(string $expected, string $result, string $message = ''): void
+    function assertTextNotEquals(string $expected, string $result, string $message = ''): void
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -510,7 +510,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    public function assertTextEquals(string $expected, string $result, string $message = ''): void
+    function assertTextEquals(string $expected, string $result, string $message = ''): void
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -526,7 +526,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    public function assertTextStartsWith(string $prefix, string $string, string $message = ''): void
+    function assertTextStartsWith(string $prefix, string $string, string $message = ''): void
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -542,7 +542,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    public function assertTextStartsNotWith(string $prefix, string $string, string $message = ''): void
+    function assertTextStartsNotWith(string $prefix, string $string, string $message = ''): void
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -558,7 +558,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    public function assertTextEndsWith(string $suffix, string $string, string $message = ''): void
+    function assertTextEndsWith(string $suffix, string $string, string $message = ''): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -574,7 +574,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    public function assertTextEndsNotWith(string $suffix, string $string, string $message = ''): void
+    function assertTextEndsNotWith(string $suffix, string $string, string $message = ''): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -591,7 +591,7 @@ abstract class TestCase extends BaseTestCase
      * @param bool $ignoreCase Whether the search should be case-sensitive.
      * @return void
      */
-    public function assertTextContains(
+    function assertTextContains(
         string $needle,
         string $haystack,
         string $message = '',
@@ -617,7 +617,7 @@ abstract class TestCase extends BaseTestCase
      * @param bool $ignoreCase Whether the search should be case-sensitive.
      * @return void
      */
-    public function assertTextNotContains(
+    function assertTextNotContains(
         string $needle,
         string $haystack,
         string $message = '',
@@ -641,7 +641,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to display on failure
      * @return void
      */
-    public function assertEqualsSql(
+    function assertEqualsSql(
         string $expected,
         string $actual,
         string $message = ''
@@ -660,7 +660,7 @@ abstract class TestCase extends BaseTestCase
      * @param bool $optional Whether quote characters (marked with <>) are optional
      * @return void
      */
-    public function assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
+    function assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
     {
         $optional = $optional ? '?' : '';
         $pattern = str_replace('<', '[`"\[]' . $optional, $pattern);
@@ -712,7 +712,7 @@ abstract class TestCase extends BaseTestCase
      * @param bool $fullDebug Whether more verbose output should be used.
      * @return bool
      */
-    public function assertHtml(array $expected, string $string, bool $fullDebug = false): bool
+    function assertHtml(array $expected, string $string, bool $fullDebug = false): bool
     {
         $regex = [];
         $normalized = [];
@@ -989,7 +989,7 @@ abstract class TestCase extends BaseTestCase
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @return \Cake\ORM\Table|\PHPUnit\Framework\MockObject\MockObject
      */
-    public function getMockForModel(string $alias, array $methods = [], array $options = [])
+    function getMockForModel(string $alias, array $methods = [], array $options = [])
     {
         $className = this->_getTableClassName($alias, $options);
         $connectionName = $className::defaultConnectionName();
@@ -1105,7 +1105,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @return array<string>
      */
-    public function getFixtures(): array
+    function getFixtures(): array
     {
         return this->fixtures;
     }

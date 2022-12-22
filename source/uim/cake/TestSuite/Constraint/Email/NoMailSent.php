@@ -29,7 +29,7 @@ class NoMailSent extends MailConstraintBase
      * @param mixed $other Constraint check
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return count(this->getMessages()) === 0;
     }
@@ -39,7 +39,7 @@ class NoMailSent extends MailConstraintBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'no emails were sent';
     }

@@ -147,7 +147,7 @@ abstract class Cell implements EventDispatcherInterface
      *
      * @return void
      */
-    public function initialize(): void
+    function initialize(): void
     {
     }
 
@@ -161,7 +161,7 @@ abstract class Cell implements EventDispatcherInterface
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */
-    public function render(?string $template = null): string
+    function render(?string $template = null): string
     {
         $cache = [];
         if (this->_cache) {
@@ -260,7 +260,7 @@ abstract class Cell implements EventDispatcherInterface
      * @return string Rendered cell
      * @throws \Error Include error details for PHP 7 fatal errors.
      */
-    public function __toString(): string
+    function __toString(): string
     {
         try {
             return this->render();
@@ -288,7 +288,7 @@ abstract class Cell implements EventDispatcherInterface
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         return [
             'action' => this->action,

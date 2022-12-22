@@ -30,7 +30,7 @@ class MailTransport extends AbstractTransport
     /**
      * @inheritDoc
      */
-    public function send(Message $message): array
+    function send(Message $message): array
     {
         this->checkRecipient($message);
 

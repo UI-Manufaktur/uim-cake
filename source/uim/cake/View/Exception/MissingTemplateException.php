@@ -69,7 +69,7 @@ class MissingTemplateException extends CakeException
      *
      * @return string
      */
-    public function formatMessage(): string
+    function formatMessage(): string
     {
         $name = this->templateName ?? this->filename;
         $message = "{this->type} file `{$name}` could not be found.";
@@ -89,7 +89,7 @@ class MissingTemplateException extends CakeException
      * @return array
      * @psalm-return array{file: string, paths: array}
      */
-    public function getAttributes(): array
+    function getAttributes(): array
     {
         return [
             'file' => this->filename,

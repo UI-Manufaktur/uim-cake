@@ -72,7 +72,7 @@ class Server implements EventDispatcherInterface
      * @return \Psr\Http\Message\ResponseInterface
      * @throws \RuntimeException When the application does not make a response.
      */
-    public function run(
+    function run(
         ?ServerRequestInterface $request = null,
         ?MiddlewareQueue $middlewareQueue = null
     ): ResponseInterface {
@@ -120,7 +120,7 @@ class Server implements EventDispatcherInterface
      *   When null, a SAPI Stream Emitter will be used.
      * @return void
      */
-    public function emit(ResponseInterface $response, ?EmitterInterface $emitter = null): void
+    function emit(ResponseInterface $response, ?EmitterInterface $emitter = null): void
     {
         if (!$emitter) {
             $emitter = new ResponseEmitter();
@@ -133,7 +133,7 @@ class Server implements EventDispatcherInterface
      *
      * @return \Cake\Core\HttpApplicationInterface The application that will be run.
      */
-    public function getApp(): HttpApplicationInterface
+    function getApp(): HttpApplicationInterface
     {
         return this->app;
     }
@@ -143,7 +143,7 @@ class Server implements EventDispatcherInterface
      *
      * @return \Cake\Event\EventManagerInterface
      */
-    public function getEventManager(): EventManagerInterface
+    function getEventManager(): EventManagerInterface
     {
         if (this->app instanceof EventDispatcherInterface) {
             return this->app->getEventManager();
@@ -161,7 +161,7 @@ class Server implements EventDispatcherInterface
      * @return this
      * @throws \InvalidArgumentException
      */
-    public function setEventManager(EventManagerInterface $eventManager)
+    function setEventManager(EventManagerInterface $eventManager)
     {
         if (this->app instanceof EventDispatcherInterface) {
             this->app->setEventManager($eventManager);

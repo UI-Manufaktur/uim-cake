@@ -36,7 +36,7 @@ class DependentDeleteHelper
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    public function cascadeDelete(Association $association, EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(Association $association, EntityInterface $entity, array $options = []): bool
     {
         if (!$association->getDependent()) {
             return true;

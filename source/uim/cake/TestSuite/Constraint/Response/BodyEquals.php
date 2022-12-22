@@ -28,7 +28,7 @@ class BodyEquals extends ResponseBase
      * @param mixed $other Expected type
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return this->_getBodyAsString() === $other;
     }
@@ -38,7 +38,7 @@ class BodyEquals extends ResponseBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return 'matches response body';
     }

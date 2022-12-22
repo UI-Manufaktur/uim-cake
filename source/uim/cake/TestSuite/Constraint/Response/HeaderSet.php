@@ -48,7 +48,7 @@ class HeaderSet extends ResponseBase
      * @param mixed $other Expected content
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return this->response->hasHeader(this->headerName);
     }
@@ -58,7 +58,7 @@ class HeaderSet extends ResponseBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf('response has header \'%s\'', this->headerName);
     }

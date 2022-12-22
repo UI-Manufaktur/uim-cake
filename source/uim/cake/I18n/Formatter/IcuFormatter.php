@@ -35,7 +35,7 @@ class IcuFormatter implements FormatterInterface
      * @return string The formatted message
      * @throws \Cake\I18n\Exception\I18nException
      */
-    public function format(string $locale, string $message, array $tokenValues): string
+    function format(string $locale, string $message, array $tokenValues): string
     {
         if ($message === '') {
             return $message;

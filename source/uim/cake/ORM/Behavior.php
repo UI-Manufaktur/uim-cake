@@ -176,7 +176,7 @@ class Behavior implements EventListenerInterface
      * @param array<string, mixed> $config The configuration settings provided to this behavior.
      * @return void
      */
-    public function initialize(array $config): void
+    function initialize(array $config): void
     {
     }
 
@@ -186,7 +186,7 @@ class Behavior implements EventListenerInterface
      * @return \Cake\ORM\Table The bound table instance.
      * @deprecated 4.2.0 Use table() instead.
      */
-    public function getTable(): Table
+    function getTable(): Table
     {
         deprecationWarning('Behavior::getTable() is deprecated. Use table() instead.');
 
@@ -198,7 +198,7 @@ class Behavior implements EventListenerInterface
      *
      * @return \Cake\ORM\Table The bound table instance.
      */
-    public function table(): Table
+    function table(): Table
     {
         return this->_table;
     }
@@ -244,7 +244,7 @@ class Behavior implements EventListenerInterface
      * @return void
      * @throws \Cake\Core\Exception\CakeException if config are invalid
      */
-    public function verifyConfig(): void
+    function verifyConfig(): void
     {
         $keys = ['implementedFinders', 'implementedMethods'];
         foreach ($keys as $key) {
@@ -275,7 +275,7 @@ class Behavior implements EventListenerInterface
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         $eventMap = [
             'Model.beforeMarshal' => 'beforeMarshal',
@@ -335,7 +335,7 @@ class Behavior implements EventListenerInterface
      * @return array
      * @throws \ReflectionException
      */
-    public function implementedFinders(): array
+    function implementedFinders(): array
     {
         $methods = this->getConfig('implementedFinders');
         if (isset($methods)) {
@@ -367,7 +367,7 @@ class Behavior implements EventListenerInterface
      * @return array
      * @throws \ReflectionException
      */
-    public function implementedMethods(): array
+    function implementedMethods(): array
     {
         $methods = this->getConfig('implementedMethods');
         if (isset($methods)) {

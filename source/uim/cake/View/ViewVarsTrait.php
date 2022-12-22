@@ -37,7 +37,7 @@ trait ViewVarsTrait
      *
      * @return \Cake\View\ViewBuilder
      */
-    public function viewBuilder(): ViewBuilder
+    function viewBuilder(): ViewBuilder
     {
         if (!isset(this->_viewBuilder)) {
             this->_viewBuilder = new ViewBuilder();
@@ -53,7 +53,7 @@ trait ViewVarsTrait
      * @return \Cake\View\View
      * @throws \Cake\View\Exception\MissingViewException If view class was not found.
      */
-    public function createView(?string $viewClass = null): View
+    function createView(?string $viewClass = null): View
     {
         $builder = this->viewBuilder();
         if ($viewClass) {
@@ -84,7 +84,7 @@ trait ViewVarsTrait
      *   Unused if $name is an associative array, otherwise serves as the values to $name's keys.
      * @return this
      */
-    public function set($name, $value = null)
+    function set($name, $value = null)
     {
         if (is_array($name)) {
             if (is_array($value)) {

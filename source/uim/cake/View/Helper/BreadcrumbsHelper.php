@@ -78,7 +78,7 @@ class BreadcrumbsHelper extends Helper
      * - *templateVars*: Specific template vars in case you override the templates provided.
      * @return this
      */
-    public function add($title, $url = null, array $options = [])
+    function add($title, $url = null, array $options = [])
     {
         if (is_array($title)) {
             foreach ($title as $crumb) {
@@ -114,7 +114,7 @@ class BreadcrumbsHelper extends Helper
      * - *templateVars*: Specific template vars in case you override the templates provided.
      * @return this
      */
-    public function prepend($title, $url = null, array $options = [])
+    function prepend($title, $url = null, array $options = [])
     {
         if (is_array($title)) {
             $crumbs = [];
@@ -154,7 +154,7 @@ class BreadcrumbsHelper extends Helper
      * @return this
      * @throws \LogicException In case the index is out of bound
      */
-    public function insertAt(int $index, string $title, $url = null, array $options = [])
+    function insertAt(int $index, string $title, $url = null, array $options = [])
     {
         if (!isset(this->crumbs[$index]) && $index != count(this->crumbs)) {
             throw new LogicException(sprintf("No crumb could be found at index '%s'", $index));
@@ -184,7 +184,7 @@ class BreadcrumbsHelper extends Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found
      */
-    public function insertBefore(string $matchingTitle, string $title, $url = null, array $options = [])
+    function insertBefore(string $matchingTitle, string $title, $url = null, array $options = [])
     {
         $key = this->findCrumb($matchingTitle);
 
@@ -214,7 +214,7 @@ class BreadcrumbsHelper extends Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found.
      */
-    public function insertAfter(string $matchingTitle, string $title, $url = null, array $options = [])
+    function insertAfter(string $matchingTitle, string $title, $url = null, array $options = [])
     {
         $key = this->findCrumb($matchingTitle);
 
@@ -230,7 +230,7 @@ class BreadcrumbsHelper extends Helper
      *
      * @return array
      */
-    public function getCrumbs(): array
+    function getCrumbs(): array
     {
         return this->crumbs;
     }
@@ -240,7 +240,7 @@ class BreadcrumbsHelper extends Helper
      *
      * @return this
      */
-    public function reset()
+    function reset()
     {
         this->crumbs = [];
 
@@ -263,7 +263,7 @@ class BreadcrumbsHelper extends Helper
      * If you use the default for this option (empty), it will not render a separator.
      * @return string The breadcrumbs trail
      */
-    public function render(array $attributes = [], array $separator = []): string
+    function render(array $attributes = [], array $separator = []): string
     {
         if (!this->crumbs) {
             return '';

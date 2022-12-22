@@ -97,7 +97,7 @@ abstract class BaseLog extends AbstractLogger
      *
      * @return array<string>
      */
-    public function levels(): array
+    function levels(): array
     {
         return this->_config['levels'];
     }
@@ -107,7 +107,7 @@ abstract class BaseLog extends AbstractLogger
      *
      * @return array<string>|false
      */
-    public function scopes()
+    function scopes()
     {
         return this->_config['scopes'];
     }

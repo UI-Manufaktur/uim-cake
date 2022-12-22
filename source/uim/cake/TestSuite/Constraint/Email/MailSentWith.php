@@ -50,7 +50,7 @@ class MailSentWith extends MailConstraintBase
      * @param mixed $other Constraint check
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         $emails = this->getMessages();
         foreach ($emails as $email) {
@@ -75,7 +75,7 @@ class MailSentWith extends MailConstraintBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         if (this->at) {
             return sprintf('is in email #%d `%s`', this->at, this->method);

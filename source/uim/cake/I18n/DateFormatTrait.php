@@ -121,7 +121,7 @@ trait DateFormatTrait
      * @param string|null $locale The locale name in which the date should be displayed (e.g. pt-BR)
      * @return string Formatted date string
      */
-    public function nice($timezone = null, $locale = null): string
+    function nice($timezone = null, $locale = null): string
     {
         return (string)this->i18nFormat(static::$niceFormat, $timezone, $locale);
     }
@@ -179,7 +179,7 @@ trait DateFormatTrait
      * @param string|null $locale The locale name in which the date should be displayed (e.g. pt-BR)
      * @return string|int Formatted and translated date string
      */
-    public function i18nFormat($format = null, $timezone = null, $locale = null)
+    function i18nFormat($format = null, $timezone = null, $locale = null)
     {
         if ($format === Time::UNIX_TIMESTAMP_FORMAT) {
             return this->getTimestamp();
@@ -268,7 +268,7 @@ trait DateFormatTrait
     /**
      * @inheritDoc
      */
-    public function __toString(): string
+    function __toString(): string
     {
         return (string)this->i18nFormat();
     }
@@ -449,7 +449,7 @@ trait DateFormatTrait
      * @return string|int
      */
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    function jsonSerialize()
     {
         if (static::$_jsonEncodeFormat instanceof Closure) {
             return call_user_func(static::$_jsonEncodeFormat, this);
@@ -507,7 +507,7 @@ trait DateFormatTrait
      * @param bool $absolute removes time difference modifiers ago, after, etc
      * @return string
      */
-    public function diffForHumans(?ChronosInterface $other = null, bool $absolute = false): string
+    function diffForHumans(?ChronosInterface $other = null, bool $absolute = false): string
     {
         return static::getDiffFormatter()->diffForHumans(this, $other, $absolute);
     }
@@ -517,7 +517,7 @@ trait DateFormatTrait
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         /** @psalm-suppress PossiblyNullReference */
         return [

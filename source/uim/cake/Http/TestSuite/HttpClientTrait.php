@@ -30,7 +30,7 @@ trait HttpClientTrait
      * @after
      * @return void
      */
-    public function cleanupMockResponses(): void
+    function cleanupMockResponses(): void
     {
         Client::clearMockResponses();
     }
@@ -43,7 +43,7 @@ trait HttpClientTrait
      * @param string $body The body for the response.
      * @return \Cake\Http\Client\Response
      */
-    public function newClientResponse(int $code = 200, array $headers = [], string $body = ''): Response
+    function newClientResponse(int $code = 200, array $headers = [], string $body = ''): Response
     {
         $headers = array_merge(["HTTP/1.1 {$code}"], $headers);
 
@@ -58,7 +58,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    public function mockClientPost(string $url, Response $response, array $options = []): void
+    function mockClientPost(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse('POST', $url, $response, $options);
     }
@@ -71,7 +71,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    public function mockClientGet(string $url, Response $response, array $options = []): void
+    function mockClientGet(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse('GET', $url, $response, $options);
     }
@@ -84,7 +84,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    public function mockClientPatch(string $url, Response $response, array $options = []): void
+    function mockClientPatch(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse('PATCH', $url, $response, $options);
     }
@@ -97,7 +97,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    public function mockClientPut(string $url, Response $response, array $options = []): void
+    function mockClientPut(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse('PUT', $url, $response, $options);
     }
@@ -110,7 +110,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    public function mockClientDelete(string $url, Response $response, array $options = []): void
+    function mockClientDelete(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse('DELETE', $url, $response, $options);
     }

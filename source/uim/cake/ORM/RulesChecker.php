@@ -52,7 +52,7 @@ class RulesChecker extends BaseRulesChecker
      *   also be an array of options. When an array, the 'message' key can be used to provide a message.
      * @return \Cake\Datasource\RuleInvoker
      */
-    public function isUnique(array $fields, $message = null): RuleInvoker
+    function isUnique(array $fields, $message = null): RuleInvoker
     {
         $options = is_array($message) ? $message : ['message' => $message];
         $message = $options['message'] ?? null;
@@ -96,7 +96,7 @@ class RulesChecker extends BaseRulesChecker
      *   also be an array of options. When an array, the 'message' key can be used to provide a message.
      * @return \Cake\Datasource\RuleInvoker
      */
-    public function existsIn($field, $table, $message = null): RuleInvoker
+    function existsIn($field, $table, $message = null): RuleInvoker
     {
         $options = [];
         if (is_array($message)) {
@@ -137,7 +137,7 @@ class RulesChecker extends BaseRulesChecker
      * @return \Cake\Datasource\RuleInvoker
      * @since 4.0.0
      */
-    public function isLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
+    function isLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
     {
         return this->_addLinkConstraintRule(
             $association,
@@ -167,7 +167,7 @@ class RulesChecker extends BaseRulesChecker
      * @return \Cake\Datasource\RuleInvoker
      * @since 4.0.0
      */
-    public function isNotLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
+    function isNotLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
     {
         return this->_addLinkConstraintRule(
             $association,
@@ -259,7 +259,7 @@ class RulesChecker extends BaseRulesChecker
      * @param string|null $message The error message to show in case the rule does not pass.
      * @return \Cake\Datasource\RuleInvoker
      */
-    public function validCount(
+    function validCount(
         string $field,
         int $count = 0,
         string $operator = '>',

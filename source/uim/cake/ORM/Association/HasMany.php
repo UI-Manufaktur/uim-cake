@@ -96,7 +96,7 @@ class HasMany extends Association
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
      */
-    public function isOwningSide(Table $side): bool
+    function isOwningSide(Table $side): bool
     {
         return $side === this->getSource();
     }
@@ -108,7 +108,7 @@ class HasMany extends Association
      * @throws \InvalidArgumentException if an invalid strategy name is passed
      * @return this
      */
-    public function setSaveStrategy(string $strategy)
+    function setSaveStrategy(string $strategy)
     {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
             $msg = sprintf('Invalid save strategy "%s"', $strategy);
@@ -125,7 +125,7 @@ class HasMany extends Association
      *
      * @return string the strategy to be used for saving
      */
-    public function getSaveStrategy(): string
+    function getSaveStrategy(): string
     {
         return this->_saveStrategy;
     }
@@ -143,7 +143,7 @@ class HasMany extends Association
      * @see \Cake\ORM\Table::save()
      * @throws \InvalidArgumentException when the association data cannot be traversed.
      */
-    public function saveAssociated(EntityInterface $entity, array $options = [])
+    function saveAssociated(EntityInterface $entity, array $options = [])
     {
         $targetEntities = $entity->get(this->getProperty());
 
@@ -270,7 +270,7 @@ class HasMany extends Association
      * @param array<string, mixed> $options list of options to be passed to the internal `save` call
      * @return bool true on success, false otherwise
      */
-    public function link(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function link(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
     {
         $saveStrategy = this->getSaveStrategy();
         this->setSaveStrategy(self::SAVE_APPEND);
@@ -341,7 +341,7 @@ class HasMany extends Association
      * any of them is lacking a primary key value
      * @return void
      */
-    public function unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): void
+    function unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): void
     {
         if (is_bool($options)) {
             $options = [
@@ -430,7 +430,7 @@ class HasMany extends Association
      * any of them is lacking a primary key value
      * @return bool success
      */
-    public function replace(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function replace(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
     {
         $property = this->getProperty();
         $sourceEntity->set($property, $targetEntities);
@@ -567,7 +567,7 @@ class HasMany extends Association
      *
      * @return string
      */
-    public function type(): string
+    function type(): string
     {
         return self::ONE_TO_MANY;
     }
@@ -579,7 +579,7 @@ class HasMany extends Association
      * @return bool if the 'matching' key in $option is true then this function
      * will return true, false otherwise
      */
-    public function canBeJoined(array $options = []): bool
+    function canBeJoined(array $options = []): bool
     {
         return !empty($options['matching']);
     }
@@ -589,7 +589,7 @@ class HasMany extends Association
      *
      * @return array<string>|string
      */
-    public function getForeignKey()
+    function getForeignKey()
     {
         if (this->_foreignKey === null) {
             this->_foreignKey = this->_modelKey(this->getSource()->getTable());
@@ -604,7 +604,7 @@ class HasMany extends Association
      * @param mixed $sort A find() compatible order clause
      * @return this
      */
-    public function setSort($sort)
+    function setSort($sort)
     {
         this->_sort = $sort;
 
@@ -616,7 +616,7 @@ class HasMany extends Association
      *
      * @return mixed
      */
-    public function getSort()
+    function getSort()
     {
         return this->_sort;
     }
@@ -624,7 +624,7 @@ class HasMany extends Association
     /**
      * @inheritDoc
      */
-    public function defaultRowValue(array $row, bool $joined): array
+    function defaultRowValue(array $row, bool $joined): array
     {
         $sourceAlias = this->getSource()->getAlias();
         if (isset($row[$sourceAlias])) {
@@ -653,7 +653,7 @@ class HasMany extends Association
     /**
      * @inheritDoc
      */
-    public function eagerLoader(array $options): Closure
+    function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
             'alias' => this->getAlias(),
@@ -673,7 +673,7 @@ class HasMany extends Association
     /**
      * @inheritDoc
      */
-    public function cascadeDelete(EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(EntityInterface $entity, array $options = []): bool
     {
         $helper = new DependentDeleteHelper();
 

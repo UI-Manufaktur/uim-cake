@@ -41,7 +41,7 @@ class Oauth
      * @return \Cake\Http\Client\Request The updated request.
      * @throws \Cake\Core\Exception\CakeException On invalid signature types.
      */
-    public function authentication(Request $request, array $credentials): Request
+    function authentication(Request $request, array $credentials): Request
     {
         if (!isset($credentials['consumerKey'])) {
             return $request;
@@ -248,7 +248,7 @@ class Oauth
      * @param array $oauthValues Oauth values.
      * @return string
      */
-    public function baseString(Request $request, array $oauthValues): string
+    function baseString(Request $request, array $oauthValues): string
     {
         $parts = [
             $request->getMethod(),

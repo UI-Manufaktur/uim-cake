@@ -42,7 +42,7 @@ class LazyEagerLoader
      * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface>
      */
-    public function loadInto($entities, array $contain, Table $source)
+    function loadInto($entities, array $contain, Table $source)
     {
         $returnSingle = false;
 

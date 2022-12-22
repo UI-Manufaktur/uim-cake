@@ -41,7 +41,7 @@ class EntityRoute extends Route
      *   directory.
      * @return string|null Either a string URL or null.
      */
-    public function match(array $url, array $context = []): ?string
+    function match(array $url, array $context = []): ?string
     {
         if (empty(this->_compiledRoute)) {
             this->compile();

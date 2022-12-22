@@ -92,7 +92,7 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\ResponseInterface A response.
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $method = $request->getMethod();
         $hasData = in_array($method, ['PUT', 'POST', 'DELETE', 'PATCH'], true)
@@ -141,7 +141,7 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
      * @param callable $callback A callable.
      * @return this
      */
-    public function skipCheckCallback(callable $callback)
+    function skipCheckCallback(callable $callback)
     {
         this->skipCheckCallback = $callback;
 
@@ -158,7 +158,7 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
      * @param string $token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    public function saltToken(string $token): string
+    function saltToken(string $token): string
     {
         $decoded = base64_decode($token);
         $length = strlen($decoded);
@@ -227,7 +227,7 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
      *
      * @return string
      */
-    public function createToken(): string
+    function createToken(): string
     {
         return base64_encode(Security::randomBytes(static::TOKEN_VALUE_LENGTH));
     }

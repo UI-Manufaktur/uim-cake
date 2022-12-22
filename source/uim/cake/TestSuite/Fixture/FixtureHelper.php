@@ -40,7 +40,7 @@ class FixtureHelper
      * @param array<string> $fixtureNames Fixture names from test case
      * @return array<\Cake\Datasource\FixtureInterface>
      */
-    public function loadFixtures(array $fixtureNames): array
+    function loadFixtures(array $fixtureNames): array
     {
         static $cachedFixtures = [];
 
@@ -112,7 +112,7 @@ class FixtureHelper
      * @param array<\Cake\Datasource\FixtureInterface> $fixtures Test fixtures
      * @return void
      */
-    public function runPerConnection(Closure $callback, array $fixtures): void
+    function runPerConnection(Closure $callback, array $fixtures): void
     {
         $groups = [];
         foreach ($fixtures as $fixture) {
@@ -131,7 +131,7 @@ class FixtureHelper
      * @return void
      * @internal
      */
-    public function insert(array $fixtures): void
+    function insert(array $fixtures): void
     {
         this->runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
@@ -184,7 +184,7 @@ class FixtureHelper
      * @return void
      * @internal
      */
-    public function truncate(array $fixtures): void
+    function truncate(array $fixtures): void
     {
         this->runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
