@@ -194,7 +194,7 @@ class ConsoleOutput
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to output.
      */
-    public function write($message, int $newlines = 1): int
+    function write($message, int $newlines = 1): int
     {
         if (is_array($message)) {
             $message = implode(static::LF, $message);
@@ -209,7 +209,7 @@ class ConsoleOutput
      * @param string $text Text with styling tags.
      * @return string String with color codes added.
      */
-    public function styleText(string $text): string
+    function styleText(string $text): string
     {
         if (this->_outputAs === static::RAW) {
             return $text;
@@ -274,7 +274,7 @@ class ConsoleOutput
      * @param string $style The style to get.
      * @return array The style or empty array.
      */
-    public function getStyle(string $style): array
+    function getStyle(string $style): array
     {
         return static::$_styles[$style] ?? [];
     }
@@ -298,7 +298,7 @@ class ConsoleOutput
      * @param array $definition The array definition of the style to change or create..
      * @return void
      */
-    public function setStyle(string $style, array $definition): void
+    function setStyle(string $style, array $definition): void
     {
         if (!$definition) {
             unset(static::$_styles[$style]);
@@ -314,7 +314,7 @@ class ConsoleOutput
      *
      * @return array<string, mixed>
      */
-    public function styles(): array
+    function styles(): array
     {
         return static::$_styles;
     }
@@ -324,7 +324,7 @@ class ConsoleOutput
      *
      * @return int
      */
-    public function getOutputAs(): int
+    function getOutputAs(): int
     {
         return this->_outputAs;
     }
@@ -336,7 +336,7 @@ class ConsoleOutput
      * @return void
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
-    public function setOutputAs(int $type): void
+    function setOutputAs(int $type): void
     {
         if (!in_array($type, [self::RAW, self::PLAIN, self::COLOR], true)) {
             throw new InvalidArgumentException(sprintf('Invalid output type "%s".', $type));
@@ -348,7 +348,7 @@ class ConsoleOutput
     /**
      * Clean up and close handles
      */
-    public function __destruct()
+    function __destruct()
     {
         if (is_resource(this->_output)) {
             fclose(this->_output);

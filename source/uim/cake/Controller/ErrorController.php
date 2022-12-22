@@ -30,7 +30,7 @@ class ErrorController extends Controller
      *
      * @return void
      */
-    public function initialize(): void
+    function initialize(): void
     {
         this->loadComponent('RequestHandler');
     }
@@ -41,7 +41,7 @@ class ErrorController extends Controller
      * @param \Cake\Event\EventInterface $event Event.
      * @return \Cake\Http\Response|null|void
      */
-    public function beforeRender(EventInterface $event)
+    function beforeRender(EventInterface $event)
     {
         $builder = this->viewBuilder();
         $templatePath = 'Error';

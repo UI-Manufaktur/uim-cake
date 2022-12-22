@@ -74,7 +74,7 @@ class HelpFormatter
      * @param string $alias The alias
      * @return void
      */
-    public function setAlias(string $alias): void
+    function setAlias(string $alias): void
     {
         this->_alias = $alias;
     }
@@ -85,7 +85,7 @@ class HelpFormatter
      * @param int $width The width of the help output.
      * @return string
      */
-    public function text(int $width = 72): string
+    function text(int $width = 72): string
     {
         $parser = this->_parser;
         $out = [];
@@ -211,7 +211,7 @@ class HelpFormatter
      * @param bool $string Return the SimpleXml object or a string. Defaults to true.
      * @return \SimpleXMLElement|string See $string
      */
-    public function xml(bool $string = true)
+    function xml(bool $string = true)
     {
         $parser = this->_parser;
         $xml = new SimpleXMLElement('<shell></shell>');

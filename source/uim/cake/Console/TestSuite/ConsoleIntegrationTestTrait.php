@@ -83,7 +83,7 @@ trait ConsoleIntegrationTestTrait
      * @throws \RuntimeException
      * @return void
      */
-    public function exec(string $command, array $input = []): void
+    function exec(string $command, array $input = []): void
     {
         $runner = this->makeRunner();
 
@@ -122,7 +122,7 @@ trait ConsoleIntegrationTestTrait
      * @return void
      * @psalm-suppress PossiblyNullPropertyAssignmentValue
      */
-    public function cleanupConsoleTrait(): void
+    function cleanupConsoleTrait(): void
     {
         this->_exitCode = null;
         this->_out = null;
@@ -137,7 +137,7 @@ trait ConsoleIntegrationTestTrait
      *
      * @return void
      */
-    public function useCommandRunner(): void
+    function useCommandRunner(): void
     {
         this->_useCommandRunner = true;
     }
@@ -149,7 +149,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertExitCode(int $expected, string $message = ''): void
+    function assertExitCode(int $expected, string $message = ''): void
     {
         this->assertThat($expected, new ExitCode(this->_exitCode), $message);
     }
@@ -160,7 +160,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertExitSuccess($message = '')
+    function assertExitSuccess($message = '')
     {
         this->assertThat(Command::CODE_SUCCESS, new ExitCode(this->_exitCode), $message);
     }
@@ -171,7 +171,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertExitError($message = '')
+    function assertExitError($message = '')
     {
         this->assertThat(Command::CODE_ERROR, new ExitCode(this->_exitCode), $message);
     }
@@ -182,7 +182,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message The message to output when the assertion fails.
      * @return void
      */
-    public function assertOutputEmpty(string $message = ''): void
+    function assertOutputEmpty(string $message = ''): void
     {
         this->assertThat(null, new ContentsEmpty(this->_out->messages(), 'output'), $message);
     }
@@ -194,7 +194,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertOutputContains(string $expected, string $message = ''): void
+    function assertOutputContains(string $expected, string $message = ''): void
     {
         this->assertThat($expected, new ContentsContain(this->_out->messages(), 'output'), $message);
     }
@@ -206,7 +206,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertOutputNotContains(string $expected, string $message = ''): void
+    function assertOutputNotContains(string $expected, string $message = ''): void
     {
         this->assertThat($expected, new ContentsNotContain(this->_out->messages(), 'output'), $message);
     }
@@ -218,7 +218,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertOutputRegExp(string $pattern, string $message = ''): void
+    function assertOutputRegExp(string $pattern, string $message = ''): void
     {
         this->assertThat($pattern, new ContentsRegExp(this->_out->messages(), 'output'), $message);
     }
@@ -242,7 +242,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertErrorContains(string $expected, string $message = ''): void
+    function assertErrorContains(string $expected, string $message = ''): void
     {
         this->assertThat($expected, new ContentsContain(this->_err->messages(), 'error output'), $message);
     }
@@ -254,7 +254,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    public function assertErrorRegExp(string $pattern, string $message = ''): void
+    function assertErrorRegExp(string $pattern, string $message = ''): void
     {
         this->assertThat($pattern, new ContentsRegExp(this->_err->messages(), 'error output'), $message);
     }
@@ -265,7 +265,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message The message to output when the assertion fails.
      * @return void
      */
-    public function assertErrorEmpty(string $message = ''): void
+    function assertErrorEmpty(string $message = ''): void
     {
         this->assertThat(null, new ContentsEmpty(this->_err->messages(), 'error output'), $message);
     }

@@ -41,7 +41,7 @@ class HelperRegistry extends ObjectRegistry
      * @param \Cake\Console\ConsoleIo $io An io instance.
      * @return void
      */
-    public function setIo(ConsoleIo $io): void
+    function setIo(ConsoleIo $io): void
     {
         this->_io = $io;
     }

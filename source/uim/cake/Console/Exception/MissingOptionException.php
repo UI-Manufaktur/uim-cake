@@ -62,7 +62,7 @@ class MissingOptionException extends ConsoleException
      *
      * @return string
      */
-    public function getFullMessage(): string
+    function getFullMessage(): string
     {
         $out = this->getMessage();
         $bestGuess = this->findClosestItem(this->requested, this->suggestions);

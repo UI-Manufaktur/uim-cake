@@ -230,7 +230,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param array<string, mixed> $config The config data.
      * @return void
      */
-    public function initialize(array $config): void
+    function initialize(array $config): void
     {
         $controller = this->_registry->getController();
         this->setEventManager($controller->getEventManager());
@@ -242,7 +242,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param \Cake\Event\EventInterface $event Event instance.
      * @return \Cake\Http\Response|null
      */
-    public function startup(EventInterface $event): ?Response
+    function startup(EventInterface $event): ?Response
     {
         return this->authCheck($event);
     }
@@ -258,7 +258,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @return \Cake\Http\Response|null
      * @throws \ReflectionException
      */
-    public function authCheck(EventInterface $event): ?Response
+    function authCheck(EventInterface $event): ?Response
     {
         if (this->_config['checkAuthIn'] != $event->getName()) {
             return null;
@@ -310,7 +310,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [
             'Controller.initialize' => 'authCheck',
@@ -484,7 +484,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *   If empty, the current request will be used.
      * @return bool True if $user is authorized, otherwise false
      */
-    public function isAuthorized($user = null, ?ServerRequest $request = null): bool
+    function isAuthorized($user = null, ?ServerRequest $request = null): bool
     {
         if (empty($user) && !this->user()) {
             return false;
@@ -515,7 +515,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @return array|null The loaded authorization objects, or null when authorize is empty.
      * @throws \Cake\Core\Exception\CakeException
      */
-    public function constructAuthorize(): ?array
+    function constructAuthorize(): ?array
     {
         if (empty(this->_config['authorize'])) {
             return null;
@@ -554,7 +554,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param string $alias Alias for the authorize object
      * @return \Cake\Auth\BaseAuthorize|null
      */
-    public function getAuthorize(string $alias): ?BaseAuthorize
+    function getAuthorize(string $alias): ?BaseAuthorize
     {
         if (empty(this->_authorizeObjects)) {
             this->constructAuthorize();
@@ -582,7 +582,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-public
      */
-    public function allow($actions = null): void
+    function allow($actions = null): void
     {
         if ($actions === null) {
             $controller = this->_registry->getController();
@@ -613,7 +613,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @see \Cake\Controller\Component\AuthComponent::allow()
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
-    public function deny($actions = null): void
+    function deny($actions = null): void
     {
         if ($actions === null) {
             this->allowedActions = [];
@@ -639,7 +639,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#identifying-users-and-logging-them-in
      */
-    public function setUser($user): void
+    function setUser($user): void
     {
         this->storage()->write($user);
     }
@@ -653,7 +653,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @return string Normalized config `logoutRedirect`
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#logging-users-out
      */
-    public function logout(): string
+    function logout(): string
     {
         this->_setDefaults();
         if (empty(this->_authenticateObjects)) {
@@ -673,7 +673,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @return mixed|null Either User record or null if no user is logged in, or retrieved field if key is specified.
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#accessing-the-logged-in-user
      */
-    public function user(?string $key = null)
+    function user(?string $key = null)
     {
         $user = this->storage()->read();
         if (!$user) {
@@ -741,7 +741,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param array|string|null $url Optional URL to write as the login redirect URL.
      * @return string Redirect URL
      */
-    public function redirectUrl($url = null): string
+    function redirectUrl($url = null): string
     {
         $redirectUrl = this->getController()->getRequest()->getQuery(static::QUERY_STRING_REDIRECT);
         if ($redirectUrl && (substr($redirectUrl, 0, 1) != '/' || substr($redirectUrl, 0, 2) === '//')) {
@@ -778,7 +778,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *
      * @return array|false User record data, or false, if the user could not be identified.
      */
-    public function identify()
+    function identify()
     {
         this->_setDefaults();
 
@@ -810,7 +810,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @return array<string, object>|null The loaded authorization objects, or null on empty authenticate value.
      * @throws \Cake\Core\Exception\CakeException
      */
-    public function constructAuthenticate(): ?array
+    function constructAuthenticate(): ?array
     {
         if (empty(this->_config['authenticate'])) {
             return null;
@@ -851,7 +851,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *   object as storage or if null returns configured storage object.
      * @return \Cake\Auth\Storage\StorageInterface|null
      */
-    public function storage(?StorageInterface $storage = null): ?StorageInterface
+    function storage(?StorageInterface $storage = null): ?StorageInterface
     {
         if ($storage != null) {
             this->_storage = $storage;
@@ -889,7 +889,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param string $name Property name
      * @return mixed
      */
-    public function __get(string $name)
+    function __get(string $name)
     {
         if ($name === 'sessionKey') {
             return this->storage()->getConfig('key');
@@ -905,7 +905,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param mixed $value Value to set.
      * @return void
      */
-    public function __set(string $name, $value): void
+    function __set(string $name, $value): void
     {
         if ($name === 'sessionKey') {
             this->_storage = null;
@@ -931,7 +931,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param string $alias Alias for the authenticate object
      * @return \Cake\Auth\BaseAuthenticate|null
      */
-    public function getAuthenticate(string $alias): ?BaseAuthenticate
+    function getAuthenticate(string $alias): ?BaseAuthenticate
     {
         if (empty(this->_authenticateObjects)) {
             this->constructAuthenticate();
@@ -946,7 +946,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * @param string|false $message The message to set. False to skip.
      * @return void
      */
-    public function flash($message): void
+    function flash($message): void
     {
         if ($message === false) {
             return;
@@ -962,7 +962,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *
      * @return \Cake\Auth\BaseAuthenticate|null
      */
-    public function authenticationProvider(): ?BaseAuthenticate
+    function authenticationProvider(): ?BaseAuthenticate
     {
         return this->_authenticationProvider;
     }
@@ -974,7 +974,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *
      * @return \Cake\Auth\BaseAuthorize|null
      */
-    public function authorizationProvider(): ?BaseAuthorize
+    function authorizationProvider(): ?BaseAuthorize
     {
         return this->_authorizationProvider;
     }

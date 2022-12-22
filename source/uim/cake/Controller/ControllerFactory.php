@@ -67,7 +67,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      * @return \Cake\Controller\Controller
      * @throws \Cake\Http\Exception\MissingControllerException
      */
-    public function create(ServerRequestInterface $request): Controller
+    function create(ServerRequestInterface $request): Controller
     {
         $className = this->getControllerClass($request);
         if ($className === null) {
@@ -98,7 +98,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or ResponseInterface instance.
      */
-    public function invoke($controller): ResponseInterface
+    function invoke($controller): ResponseInterface
     {
         this->controller = $controller;
 
@@ -120,7 +120,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      * @param \Psr\Http\Message\ServerRequestInterface $request Request instance.
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    function handle(ServerRequestInterface $request): ResponseInterface
     {
         $controller = this->controller;
         /** @psalm-suppress ArgumentTypeCoercion */
@@ -285,7 +285,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      * @return string|null
      * @psalm-return class-string<\Cake\Controller\Controller>|null
      */
-    public function getControllerClass(ServerRequest $request): ?string
+    function getControllerClass(ServerRequest $request): ?string
     {
         $pluginPath = '';
         $namespace = 'Controller';

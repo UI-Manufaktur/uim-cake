@@ -68,7 +68,7 @@ class FlashComponent extends Component
      * @param array<string, mixed> $options An array of options
      * @return void
      */
-    public function set($message, array $options = []): void
+    function set($message, array $options = []): void
     {
         if ($message instanceof Throwable) {
             this->flash()->setExceptionMessage($message, $options);
@@ -96,7 +96,7 @@ class FlashComponent extends Component
      * @return this
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    public function setConfig($key, $value = null, $merge = true)
+    function setConfig($key, $value = null, $merge = true)
     {
         this->flash()->setConfig($key, $value, $merge);
 
@@ -110,7 +110,7 @@ class FlashComponent extends Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    public function getConfig(?string $key = null, $default = null)
+    function getConfig(?string $key = null, $default = null)
     {
         return this->flash()->getConfig($key, $default);
     }
@@ -122,7 +122,7 @@ class FlashComponent extends Component
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    public function getConfigOrFail(string $key)
+    function getConfigOrFail(string $key)
     {
         return this->flash()->getConfigOrFail($key);
     }
@@ -134,7 +134,7 @@ class FlashComponent extends Component
      * @param mixed|null $value The value to set.
      * @return this
      */
-    public function configShallow($key, $value = null)
+    function configShallow($key, $value = null)
     {
         this->flash()->configShallow($key, $value);
 
@@ -163,7 +163,7 @@ class FlashComponent extends Component
      * @return void
      * @throws \Cake\Http\Exception\InternalErrorException If missing the flash message.
      */
-    public function __call(string $name, array $args)
+    function __call(string $name, array $args)
     {
         $element = Inflector::underscore($name);
 

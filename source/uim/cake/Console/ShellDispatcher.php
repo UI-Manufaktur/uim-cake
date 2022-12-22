@@ -174,7 +174,7 @@ class ShellDispatcher
      * - `requested` : if used, will prevent the Shell welcome message to be displayed
      * @return int The CLI command exit code. 0 is success.
      */
-    public function dispatch(array $extra = []): int
+    function dispatch(array $extra = []): int
     {
         try {
             $result = this->_dispatch($extra);
@@ -239,7 +239,7 @@ class ShellDispatcher
      *
      * @return array the resultant list of aliases
      */
-    public function addShortPluginAliases(): array
+    function addShortPluginAliases(): array
     {
         $plugins = Plugin::loaded();
 
@@ -315,7 +315,7 @@ class ShellDispatcher
      * @return \Cake\Console\Shell A shell instance.
      * @throws \Cake\Console\Exception\MissingShellException when errors are encountered.
      */
-    public function findShell(string $shell): Shell
+    function findShell(string $shell): Shell
     {
         $className = this->_shellExists($shell);
         if (!$className) {
@@ -388,7 +388,7 @@ class ShellDispatcher
      *
      * @return mixed Null if there are no arguments otherwise the shifted argument
      */
-    public function shiftArgs()
+    function shiftArgs()
     {
         return array_shift(this->args);
     }
@@ -398,7 +398,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    public function help(): void
+    function help(): void
     {
         trigger_error(
             'Console help cannot be generated from Shell classes anymore. ' .
@@ -412,7 +412,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    public function version(): void
+    function version(): void
     {
         trigger_error(
             'Version information cannot be generated from Shell classes anymore. ' .

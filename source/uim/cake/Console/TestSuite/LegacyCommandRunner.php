@@ -30,7 +30,7 @@ class LegacyCommandRunner
      * @param \Cake\Console\ConsoleIo|null $io A ConsoleIo instance.
      * @return int
      */
-    public function run(array $argv, ?ConsoleIo $io = null): int
+    function run(array $argv, ?ConsoleIo $io = null): int
     {
         $dispatcher = new LegacyShellDispatcher($argv, true, $io);
 

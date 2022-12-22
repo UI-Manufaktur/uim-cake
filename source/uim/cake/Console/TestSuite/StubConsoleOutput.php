@@ -47,7 +47,7 @@ class StubConsoleOutput extends ConsoleOutput
      * @param int $newlines Number of newlines to append
      * @return int
      */
-    public function write($message, int $newlines = 1): int
+    function write($message, int $newlines = 1): int
     {
         foreach ((array)$message as $line) {
             this->_out[] = $line;
@@ -67,7 +67,7 @@ class StubConsoleOutput extends ConsoleOutput
      *
      * @return array<string>
      */
-    public function messages(): array
+    function messages(): array
     {
         return this->_out;
     }
@@ -77,7 +77,7 @@ class StubConsoleOutput extends ConsoleOutput
      *
      * @return string
      */
-    public function output(): string
+    function output(): string
     {
         return implode("\n", this->_out);
     }

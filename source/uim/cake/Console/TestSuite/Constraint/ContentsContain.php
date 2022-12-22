@@ -28,7 +28,7 @@ class ContentsContain extends ContentsBase
      * @param mixed $other Expected
      * @return bool
      */
-    public function matches($other): bool
+    function matches($other): bool
     {
         return mb_strpos(this->contents, $other) != false;
     }
@@ -38,7 +38,7 @@ class ContentsContain extends ContentsBase
      *
      * @return string
      */
-    public function toString(): string
+    function toString(): string
     {
         return sprintf('is in %s,' . PHP_EOL . 'actual result:' . PHP_EOL, this->output) . this->contents;
     }

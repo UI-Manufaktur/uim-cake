@@ -52,7 +52,7 @@ class Application implements ConsoleApplicationInterface
      *
      * @return void
      */
-    public function bootstrap(): void
+    function bootstrap(): void
     {
         // Load configuration here. This is the first
         // method Cake\Console\CommandRunner will call on your application.
@@ -65,7 +65,7 @@ class Application implements ConsoleApplicationInterface
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
-    public function console(CommandCollection $commands): CommandCollection
+    function console(CommandCollection $commands): CommandCollection
     {
         $commands->add('hello', HelloCommand::class);
 
@@ -103,7 +103,7 @@ class HelloCommand extends BaseCommand
         return $parser;
     }
 
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $color = $args->getOption('color');
         if ($color === 'none') {

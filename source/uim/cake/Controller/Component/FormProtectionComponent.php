@@ -75,7 +75,7 @@ class FormProtectionComponent extends Component
      * @param \Cake\Event\EventInterface $event An Event instance
      * @return \Cake\Http\Response|null
      */
-    public function startup(EventInterface $event): ?Response
+    function startup(EventInterface $event): ?Response
     {
         $request = this->getController()->getRequest();
         $data = $request->getParsedBody();
@@ -120,7 +120,7 @@ class FormProtectionComponent extends Component
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [
             'Controller.startup' => 'startup',

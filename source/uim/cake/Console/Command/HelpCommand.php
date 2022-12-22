@@ -43,7 +43,7 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
     /**
      * @inheritDoc
      */
-    public function setCommandCollection(CommandCollection $commands): void
+    function setCommandCollection(CommandCollection $commands): void
     {
         this->commands = $commands;
     }
@@ -55,7 +55,7 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $commands = this->commands->getIterator();
         if ($commands instanceof ArrayIterator) {

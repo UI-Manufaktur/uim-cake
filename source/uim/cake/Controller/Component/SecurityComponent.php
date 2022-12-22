@@ -87,7 +87,7 @@ class SecurityComponent extends Component
      * @param \Cake\Event\EventInterface $event An Event instance
      * @return \Cake\Http\Response|null
      */
-    public function startup(EventInterface $event): ?Response
+    function startup(EventInterface $event): ?Response
     {
         /** @var \Cake\Controller\Controller $controller */
         $controller = $event->getSubject();
@@ -129,7 +129,7 @@ class SecurityComponent extends Component
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [
             'Controller.startup' => 'startup',
@@ -142,7 +142,7 @@ class SecurityComponent extends Component
      * @param array<string>|string|null $actions Actions list
      * @return void
      */
-    public function requireSecure($actions = null): void
+    function requireSecure($actions = null): void
     {
         $actions = (array)$actions;
         this->setConfig('requireSecure', empty($actions) ? ['*'] : $actions);
@@ -160,7 +160,7 @@ class SecurityComponent extends Component
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
      * @throws \Cake\Http\Exception\BadRequestException
      */
-    public function blackHole(Controller $controller, string $error = '', ?SecurityException $exception = null)
+    function blackHole(Controller $controller, string $error = '', ?SecurityException $exception = null)
     {
         if (!this->_config['blackHoleCallback']) {
             this->_throwException($exception);
@@ -488,7 +488,7 @@ class SecurityComponent extends Component
      * @param \Cake\Http\ServerRequest $request The request object to add into.
      * @return \Cake\Http\ServerRequest The modified request.
      */
-    public function generateToken(ServerRequest $request): ServerRequest
+    function generateToken(ServerRequest $request): ServerRequest
     {
         $token = [
             'unlockedFields' => this->_config['unlockedFields'],

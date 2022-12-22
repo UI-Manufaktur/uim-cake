@@ -98,7 +98,7 @@ class RequestHandlerComponent extends Component
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [
             'Controller.startup' => 'startup',
@@ -160,7 +160,7 @@ class RequestHandlerComponent extends Component
      * @param \Cake\Event\EventInterface $event The startup event that was fired.
      * @return void
      */
-    public function startup(EventInterface $event): void
+    function startup(EventInterface $event): void
     {
         $controller = this->getController();
         $request = $controller->getRequest();
@@ -203,7 +203,7 @@ class RequestHandlerComponent extends Component
      * @return void
      * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
      */
-    public function beforeRender(EventInterface $event): void
+    function beforeRender(EventInterface $event): void
     {
         $controller = this->getController();
         $response = $controller->getResponse();
@@ -255,7 +255,7 @@ class RequestHandlerComponent extends Component
      *   if the client accepts one or more elements in the array.
      * @deprecated 4.4.0 Use ContentTypeNegotiation::prefersChoice() or Controller::getViewClasses() instead.
      */
-    public function accepts($type = null)
+    function accepts($type = null)
     {
         $controller = this->getController();
         /** @var array $accepted */
@@ -291,7 +291,7 @@ class RequestHandlerComponent extends Component
      *   The mapped value of CONTENT_TYPE will be returned. If an array is supplied the first type
      *   in the request content type will be returned.
      */
-    public function requestedWith($type = null)
+    function requestedWith($type = null)
     {
         $controller = this->getController();
         $request = $controller->getRequest();
@@ -343,7 +343,7 @@ class RequestHandlerComponent extends Component
      *    If no type is provided the first preferred type is returned.
      * @deprecated 4.4.0 Use Controller::getViewClasses() instead.
      */
-    public function prefers($type = null)
+    function prefers($type = null)
     {
         $controller = this->getController();
         $request = $controller->getRequest();
@@ -405,7 +405,7 @@ class RequestHandlerComponent extends Component
      * @return void
      * @see \Cake\Controller\Component\RequestHandlerComponent::respondAs()
      */
-    public function renderAs(Controller $controller, string $type, array $options = []): void
+    function renderAs(Controller $controller, string $type, array $options = []): void
     {
         $defaults = ['charset' => 'UTF-8'];
         $viewClassMap = this->getConfig('viewClassMap');
@@ -461,7 +461,7 @@ class RequestHandlerComponent extends Component
      *    not exist in the type map, or if the Content-type header has
      *    already been set by this method.
      */
-    public function respondAs($type, array $options = []): bool
+    function respondAs($type, array $options = []): bool
     {
         $defaults = ['index' => null, 'charset' => null, 'attachment' => false];
         $options += $defaults;
@@ -504,7 +504,7 @@ class RequestHandlerComponent extends Component
      *   alias maps to more than one content type, the first one will be returned. If an array is provided
      *   for $alias, an array of mapped types will be returned.
      */
-    public function mapAlias($alias)
+    function mapAlias($alias)
     {
         if (is_array($alias)) {
             return array_map([this, 'mapAlias'], $alias);

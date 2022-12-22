@@ -58,7 +58,7 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
      *
      * @return \Cake\Controller\Controller Controller instance or null if not set.
      */
-    public function getController(): Controller
+    function getController(): Controller
     {
         if (this->_Controller === null) {
             throw new CakeException('Controller not set for ComponentRegistry');
@@ -73,7 +73,7 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
      * @param \Cake\Controller\Controller $controller Controller instance.
      * @return this
      */
-    public function setController(Controller $controller)
+    function setController(Controller $controller)
     {
         this->_Controller = $controller;
         this->setEventManager($controller->getEventManager());

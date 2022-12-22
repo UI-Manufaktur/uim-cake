@@ -243,7 +243,7 @@ class ConsoleOptionParser
      *
      * @return array<string, mixed>
      */
-    public function toArray(): array
+    function toArray(): array
     {
         return [
             'command' => this->_command,
@@ -261,7 +261,7 @@ class ConsoleOptionParser
      * @param \Cake\Console\ConsoleOptionParser|array $spec ConsoleOptionParser or spec to merge with.
      * @return this
      */
-    public function merge($spec)
+    function merge($spec)
     {
         if ($spec instanceof ConsoleOptionParser) {
             $spec = $spec->toArray();
@@ -291,7 +291,7 @@ class ConsoleOptionParser
      * @param string $text The text to set.
      * @return this
      */
-    public function setCommand(string $text)
+    function setCommand(string $text)
     {
         this->_command = Inflector::underscore($text);
 
@@ -303,7 +303,7 @@ class ConsoleOptionParser
      *
      * @return string The value of the command.
      */
-    public function getCommand(): string
+    function getCommand(): string
     {
         return this->_command;
     }
@@ -315,7 +315,7 @@ class ConsoleOptionParser
      *   text will be imploded with "\n".
      * @return this
      */
-    public function setDescription($text)
+    function setDescription($text)
     {
         if (is_array($text)) {
             $text = implode("\n", $text);
@@ -330,7 +330,7 @@ class ConsoleOptionParser
      *
      * @return string The value of the description
      */
-    public function getDescription(): string
+    function getDescription(): string
     {
         return this->_description;
     }
@@ -343,7 +343,7 @@ class ConsoleOptionParser
      *   be imploded with "\n".
      * @return this
      */
-    public function setEpilog($text)
+    function setEpilog($text)
     {
         if (is_array($text)) {
             $text = implode("\n", $text);
@@ -358,7 +358,7 @@ class ConsoleOptionParser
      *
      * @return string The value of the epilog.
      */
-    public function getEpilog(): string
+    function getEpilog(): string
     {
         return this->_epilog;
     }
@@ -369,7 +369,7 @@ class ConsoleOptionParser
      * @param bool $value Whether to sort subcommands
      * @return this
      */
-    public function enableSubcommandSort(bool $value = true)
+    function enableSubcommandSort(bool $value = true)
     {
         this->_subcommandSort = $value;
 
@@ -381,7 +381,7 @@ class ConsoleOptionParser
      *
      * @return bool
      */
-    public function isSubcommandSortEnabled(): bool
+    function isSubcommandSortEnabled(): bool
     {
         return this->_subcommandSort;
     }
@@ -410,7 +410,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $options An array of parameters that define the behavior of the option
      * @return this
      */
-    public function addOption($name, array $options = [])
+    function addOption($name, array $options = [])
     {
         if ($name instanceof ConsoleInputOption) {
             $option = $name;
@@ -455,7 +455,7 @@ class ConsoleOptionParser
      * @param string $name The option name to remove.
      * @return this
      */
-    public function removeOption(string $name)
+    function removeOption(string $name)
     {
         unset(this->_options[$name]);
 
@@ -480,7 +480,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $params Parameters for the argument, see above.
      * @return this
      */
-    public function addArgument($name, array $params = [])
+    function addArgument($name, array $params = [])
     {
         if ($name instanceof ConsoleInputArgument) {
             $arg = $name;
@@ -520,7 +520,7 @@ class ConsoleOptionParser
      * @see \Cake\Console\ConsoleOptionParser::addArgument()
      * @return this
      */
-    public function addArguments(array $args)
+    function addArguments(array $args)
     {
         foreach ($args as $name => $params) {
             if ($params instanceof ConsoleInputArgument) {
@@ -541,7 +541,7 @@ class ConsoleOptionParser
      * @see \Cake\Console\ConsoleOptionParser::addOption()
      * @return this
      */
-    public function addOptions(array $options)
+    function addOptions(array $options)
     {
         foreach ($options as $name => $params) {
             if ($params instanceof ConsoleInputOption) {
@@ -570,7 +570,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $options Array of params, see above.
      * @return this
      */
-    public function addSubcommand($name, array $options = [])
+    function addSubcommand($name, array $options = [])
     {
         if ($name instanceof ConsoleInputSubcommand) {
             $command = $name;
@@ -600,7 +600,7 @@ class ConsoleOptionParser
      * @param string $name The subcommand name to remove.
      * @return this
      */
-    public function removeSubcommand(string $name)
+    function removeSubcommand(string $name)
     {
         unset(this->_subcommands[$name]);
 
@@ -613,7 +613,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $commands Array of subcommands.
      * @return this
      */
-    public function addSubcommands(array $commands)
+    function addSubcommands(array $commands)
     {
         foreach ($commands as $name => $params) {
             if ($params instanceof ConsoleInputSubcommand) {
@@ -631,7 +631,7 @@ class ConsoleOptionParser
      *
      * @return array<\Cake\Console\ConsoleInputArgument>
      */
-    public function arguments()
+    function arguments()
     {
         return this->_args;
     }
@@ -641,7 +641,7 @@ class ConsoleOptionParser
      *
      * @return array<string>
      */
-    public function argumentNames()
+    function argumentNames()
     {
         $out = [];
         foreach (this->_args as $arg) {
@@ -656,7 +656,7 @@ class ConsoleOptionParser
      *
      * @return array<string, \Cake\Console\ConsoleInputOption>
      */
-    public function options()
+    function options()
     {
         return this->_options;
     }
@@ -666,7 +666,7 @@ class ConsoleOptionParser
      *
      * @return array<string, \Cake\Console\ConsoleInputSubcommand>
      */
-    public function subcommands()
+    function subcommands()
     {
         return this->_subcommands;
     }
@@ -681,7 +681,7 @@ class ConsoleOptionParser
      * @return array [$params, $args]
      * @throws \Cake\Console\Exception\ConsoleException When an invalid parameter is encountered.
      */
-    public function parse(array $argv, ?ConsoleIo $io = null): array
+    function parse(array $argv, ?ConsoleIo $io = null): array
     {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         if (isset(this->_subcommands[$command])) {
@@ -768,7 +768,7 @@ class ConsoleOptionParser
      * @param int $width The width to format user content to. Defaults to 72
      * @return string Generated help.
      */
-    public function help(?string $subcommand = null, string $format = 'text', int $width = 72): string
+    function help(?string $subcommand = null, string $format = 'text', int $width = 72): string
     {
         if ($subcommand === null) {
             $formatter = new HelpFormatter(this);
@@ -826,7 +826,7 @@ class ConsoleOptionParser
      * @param string $name The root command name
      * @return this
      */
-    public function setRootName(string $name)
+    function setRootName(string $name)
     {
         this->rootName = $name;
 

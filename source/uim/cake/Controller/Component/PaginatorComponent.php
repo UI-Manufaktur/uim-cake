@@ -85,7 +85,7 @@ class PaginatorComponent extends Component
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [];
     }
@@ -188,7 +188,7 @@ class PaginatorComponent extends Component
      * @return \Cake\Datasource\ResultSetInterface Query results
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    public function paginate(object $object, array $settings = []): ResultSetInterface
+    function paginate(object $object, array $settings = []): ResultSetInterface
     {
         $request = this->_registry->getController()->getRequest();
 
@@ -225,7 +225,7 @@ class PaginatorComponent extends Component
      * @param array<string, mixed> $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
-    public function mergeOptions(string $alias, array $settings): array
+    function mergeOptions(string $alias, array $settings): array
     {
         $request = this->_registry->getController()->getRequest();
 
@@ -241,7 +241,7 @@ class PaginatorComponent extends Component
      * @param \Cake\Datasource\Paging\NumericPaginator $paginator Paginator instance.
      * @return this
      */
-    public function setPaginator(NumericPaginator $paginator)
+    function setPaginator(NumericPaginator $paginator)
     {
         this->_paginator = $paginator;
 
@@ -253,7 +253,7 @@ class PaginatorComponent extends Component
      *
      * @return \Cake\Datasource\Paging\NumericPaginator
      */
-    public function getPaginator(): NumericPaginator
+    function getPaginator(): NumericPaginator
     {
         return this->_paginator;
     }
@@ -280,7 +280,7 @@ class PaginatorComponent extends Component
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
      */
-    public function setConfig($key, $value = null, $merge = true)
+    function setConfig($key, $value = null, $merge = true)
     {
         this->_paginator->setConfig($key, $value, $merge);
 
@@ -294,7 +294,7 @@ class PaginatorComponent extends Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Config value being read.
      */
-    public function getConfig(?string $key = null, $default = null)
+    function getConfig(?string $key = null, $default = null)
     {
         return this->_paginator->getConfig($key, $default);
     }
@@ -306,7 +306,7 @@ class PaginatorComponent extends Component
      * @param mixed|null $value The value to set.
      * @return this
      */
-    public function configShallow($key, $value = null)
+    function configShallow($key, $value = null)
     {
         this->_paginator->configShallow($key, null);
 
@@ -320,7 +320,7 @@ class PaginatorComponent extends Component
      * @param array $args Method arguments.
      * @return mixed
      */
-    public function __call(string $method, array $args)
+    function __call(string $method, array $args)
     {
         return this->_paginator->{$method}(...$args);
     }

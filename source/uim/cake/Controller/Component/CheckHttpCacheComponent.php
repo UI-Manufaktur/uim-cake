@@ -39,7 +39,7 @@ class CheckHttpCacheComponent extends Component
      * @param \Cake\Event\EventInterface $event The Controller.beforeRender event.
      * @return void
      */
-    public function beforeRender(EventInterface $event): void
+    function beforeRender(EventInterface $event): void
     {
         $controller = this->getController();
         $response = $controller->getResponse();
