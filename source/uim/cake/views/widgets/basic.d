@@ -119,7 +119,7 @@ class BasicWidget : IWidget {
             empty(myData["disabled"])
             && (
                 (isset(myData["type"])
-                    && myData["type"] !== "hidden"
+                    && myData["type"] != "hidden"
                 )
                 || !isset(myData["type"])
             )

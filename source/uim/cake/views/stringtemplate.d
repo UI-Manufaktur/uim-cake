@@ -261,7 +261,7 @@ class StringTemplate {
         $attributes = [];
 
         foreach (myOptions as myKey => myValue) {
-            if (!isset($exclude[myKey]) && myValue !== false && myValue  !is null) {
+            if (!isset($exclude[myKey]) && myValue != false && myValue  !is null) {
                 $attributes[] = _formatAttribute((string)myKey, myValue, $escape);
             }
         }

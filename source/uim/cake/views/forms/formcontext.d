@@ -96,7 +96,7 @@ class FormContext : IContext
         if (!$validator.hasField(myField)) {
             return null;
         }
-        if (this.type(myField) !== "boolean") {
+        if (this.type(myField) != "boolean") {
             return !$validator.isEmptyAllowed(myField, this.isCreate());
         }
 

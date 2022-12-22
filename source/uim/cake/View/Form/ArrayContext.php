@@ -186,7 +186,7 @@ class ArrayContext implements ContextInterface
             return Hash::get(this->_context['data'], $field);
         }
 
-        if ($options['default'] !== null || !$options['schemaDefault']) {
+        if ($options['default'] != null || !$options['schemaDefault']) {
             return $options['default'];
         }
         if (empty(this->_context['defaults']) || !is_array(this->_context['defaults'])) {

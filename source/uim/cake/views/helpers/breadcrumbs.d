@@ -287,7 +287,7 @@ class BreadcrumbsHelper : Helper
                 myTemplate = "itemWithoutLink";
             }
 
-            if ($separatorString && myKey !== $crumbsCount - 1) {
+            if ($separatorString && myKey != $crumbsCount - 1) {
                 myTemplateParams["separator"] = $separatorString;
             }
 

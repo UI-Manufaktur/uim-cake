@@ -156,7 +156,7 @@ class BreadcrumbsHelper extends Helper
      */
     public function insertAt(int $index, string $title, $url = null, array $options = [])
     {
-        if (!isset(this->crumbs[$index]) && $index !== count(this->crumbs)) {
+        if (!isset(this->crumbs[$index]) && $index != count(this->crumbs)) {
             throw new LogicException(sprintf("No crumb could be found at index '%s'", $index));
         }
 
@@ -313,7 +313,7 @@ class BreadcrumbsHelper extends Helper
                 $template = 'itemWithoutLink';
             }
 
-            if ($separatorString && $key !== $crumbsCount - 1) {
+            if ($separatorString && $key != $crumbsCount - 1) {
                 $templateParams['separator'] = $separatorString;
             }
 

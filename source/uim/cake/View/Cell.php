@@ -119,7 +119,7 @@ abstract class Cell implements EventDispatcherInterface
         ?EventManagerInterface $eventManager = null,
         array $cellOptions = []
     ) {
-        if ($eventManager !== null) {
+        if ($eventManager != null) {
             this->setEventManager($eventManager);
         }
         this->request = $request;
@@ -182,7 +182,7 @@ abstract class Cell implements EventDispatcherInterface
 
             $builder = this->viewBuilder();
 
-            if ($template !== null) {
+            if ($template != null) {
                 $builder->setTemplate($template);
             }
 

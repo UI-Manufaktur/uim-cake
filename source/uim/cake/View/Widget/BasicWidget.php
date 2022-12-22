@@ -142,7 +142,7 @@ class BasicWidget implements WidgetInterface
             empty($data['disabled'])
             && (
                 (isset($data['type'])
-                    && $data['type'] !== 'hidden'
+                    && $data['type'] != 'hidden'
                 )
                 || !isset($data['type'])
             )
@@ -165,7 +165,7 @@ class BasicWidget implements WidgetInterface
     protected function setMaxLength(array $data, ContextInterface $context, string $fieldName): array
     {
         $maxLength = $context->getMaxLength($fieldName);
-        if ($maxLength !== null) {
+        if ($maxLength != null) {
             $data['maxlength'] = min($maxLength, 100000);
         }
 

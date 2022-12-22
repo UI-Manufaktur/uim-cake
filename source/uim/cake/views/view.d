@@ -496,7 +496,7 @@ class View : IEventDispatcher {
             );
         }
 
-        myPluginCheck = myOptions["plugin"] !== false;
+        myPluginCheck = myOptions["plugin"] != false;
         myfile = _getElementFileName(myName, myPluginCheck);
         if (myfile && myOptions["cache"]) {
             return this.cache(void () use (myfile, myData, myOptions) {
@@ -977,7 +977,7 @@ class View : IEventDispatcher {
 
         $remainingBlocks = count(this.Blocks.unclosed());
 
-        if ($initialBlocks !== $remainingBlocks) {
+        if ($initialBlocks != $remainingBlocks) {
             throw new LogicException(sprintf(
                 "The "%s" block was left open. Blocks are not allowed to cross files.",
                 (string)this.Blocks.active()
@@ -1133,7 +1133,7 @@ class View : IEventDispatcher {
         if (this.templatePath) {
             myTemplatePath = this.templatePath . DIRECTORY_SEPARATOR;
         }
-        if (this.subDir !== "") {
+        if (this.subDir != "") {
             $subDir = this.subDir . DIRECTORY_SEPARATOR;
             // Check if templatePath already terminates with subDir
             if (myTemplatePath != $subDir && substr(myTemplatePath, -strlen($subDir)) == $subDir) {
@@ -1152,12 +1152,12 @@ class View : IEventDispatcher {
         [myPlugin, myName] = this.pluginSplit(myName);
         myName = str_replace("/", DIRECTORY_SEPARATOR, myName);
 
-        if (indexOf(myName, DIRECTORY_SEPARATOR) == false && myName !== "" && myName[0] !== ".") {
+        if (indexOf(myName, DIRECTORY_SEPARATOR) == false && myName != "" && myName[0] != ".") {
             myName = myTemplatePath . $subDir . _inflectTemplateFileName(myName);
-        } elseif (indexOf(myName, DIRECTORY_SEPARATOR) !== false) {
+        } elseif (indexOf(myName, DIRECTORY_SEPARATOR) != false) {
             if (myName[0] == DIRECTORY_SEPARATOR || myName[1] == ":") {
                 myName = trim(myName, DIRECTORY_SEPARATOR);
-            } elseif (!myPlugin || this.templatePath !== this.name) {
+            } elseif (!myPlugin || this.templatePath != this.name) {
                 myName = myTemplatePath . $subDir . myName;
             } else {
                 myName = $subDir . myName;
@@ -1201,7 +1201,7 @@ class View : IEventDispatcher {
             return myfile;
         }
         $absolute = realpath(myfile);
-        if (indexOf($absolute, myPath) !== 0) {
+        if (indexOf($absolute, myPath) != 0) {
             throw new InvalidArgumentException(sprintf(
                 "Cannot use "%s" as a template, it is not within any view template path.",
                 myfile

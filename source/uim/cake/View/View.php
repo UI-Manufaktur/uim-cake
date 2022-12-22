@@ -347,7 +347,7 @@ class View implements EventDispatcherInterface
             array_flip(this->_passedVars)
         ));
 
-        if ($eventManager !== null) {
+        if ($eventManager != null) {
             this->setEventManager($eventManager);
         }
         if ($request === null) {
@@ -632,7 +632,7 @@ class View implements EventDispatcherInterface
     {
         $value = this->_getConfig($key);
 
-        if ($value !== null) {
+        if ($value != null) {
             return $value;
         }
 
@@ -688,7 +688,7 @@ class View implements EventDispatcherInterface
             );
         }
 
-        $pluginCheck = $options['plugin'] !== false;
+        $pluginCheck = $options['plugin'] != false;
         $file = this->_getElementFileName($name, $pluginCheck);
         if ($file && $options['cache']) {
             return this->cache(function () use ($file, $data, $options): void {
@@ -797,7 +797,7 @@ class View implements EventDispatcherInterface
         if ($layout === false) {
             $defaultAutoLayout = this->autoLayout;
             this->autoLayout = false;
-        } elseif ($layout !== null) {
+        } elseif ($layout != null) {
             $defaultLayout = this->layout;
             this->layout = $layout;
         }
@@ -818,10 +818,10 @@ class View implements EventDispatcherInterface
 
             this->Blocks->set('content', this->renderLayout('', this->layout));
         }
-        if ($layout !== null) {
+        if ($layout != null) {
             this->layout = $defaultLayout;
         }
-        if ($defaultAutoLayout !== null) {
+        if ($defaultAutoLayout != null) {
             this->autoLayout = $defaultAutoLayout;
         }
 
@@ -1177,7 +1177,7 @@ class View implements EventDispatcherInterface
         $content = this->_evaluate($templateFile, $data);
 
         $afterEvent = this->dispatchEvent('View.afterRenderFile', [$templateFile, $content]);
-        if ($afterEvent->getResult() !== null) {
+        if ($afterEvent->getResult() != null) {
             $content = $afterEvent->getResult();
         }
 
@@ -1191,7 +1191,7 @@ class View implements EventDispatcherInterface
 
         $remainingBlocks = count(this->Blocks->unclosed());
 
-        if ($initialBlocks !== $remainingBlocks) {
+        if ($initialBlocks != $remainingBlocks) {
             throw new LogicException(sprintf(
                 'The "%s" block was left open. Blocks are not allowed to cross files.',
                 (string)this->Blocks->active()
@@ -1356,7 +1356,7 @@ class View implements EventDispatcherInterface
         if (this->templatePath) {
             $templatePath = this->templatePath . DIRECTORY_SEPARATOR;
         }
-        if (this->subDir !== '') {
+        if (this->subDir != '') {
             $subDir = this->subDir . DIRECTORY_SEPARATOR;
             // Check if templatePath already terminates with subDir
             if ($templatePath != $subDir && substr($templatePath, -strlen($subDir)) === $subDir) {
@@ -1375,12 +1375,12 @@ class View implements EventDispatcherInterface
         [$plugin, $name] = this->pluginSplit($name);
         $name = str_replace('/', DIRECTORY_SEPARATOR, $name);
 
-        if (strpos($name, DIRECTORY_SEPARATOR) === false && $name !== '' && $name[0] !== '.') {
+        if (strpos($name, DIRECTORY_SEPARATOR) === false && $name != '' && $name[0] != '.') {
             $name = $templatePath . $subDir . this->_inflectTemplateFileName($name);
-        } elseif (strpos($name, DIRECTORY_SEPARATOR) !== false) {
+        } elseif (strpos($name, DIRECTORY_SEPARATOR) != false) {
             if ($name[0] === DIRECTORY_SEPARATOR || $name[1] === ':') {
                 $name = trim($name, DIRECTORY_SEPARATOR);
-            } elseif (!$plugin || this->templatePath !== this->name) {
+            } elseif (!$plugin || this->templatePath != this->name) {
                 $name = $templatePath . $subDir . $name;
             } else {
                 $name = $subDir . $name;
@@ -1426,7 +1426,7 @@ class View implements EventDispatcherInterface
             return $file;
         }
         $absolute = realpath($file);
-        if (strpos($absolute, $path) !== 0) {
+        if (strpos($absolute, $path) != 0) {
             throw new InvalidArgumentException(sprintf(
                 'Cannot use "%s" as a template, it is not within any view template path.',
                 $file
@@ -1594,7 +1594,7 @@ class View implements EventDispatcherInterface
             if ($plugin === null && !empty(this->_paths)) {
                 return this->_paths;
             }
-            if ($plugin !== null && isset(this->_pathsForPlugin[$plugin])) {
+            if ($plugin != null && isset(this->_pathsForPlugin[$plugin])) {
                 return this->_pathsForPlugin[$plugin];
             }
         }
@@ -1635,7 +1635,7 @@ class View implements EventDispatcherInterface
             App::core('templates')
         );
 
-        if ($plugin !== null) {
+        if ($plugin != null) {
             return this->_pathsForPlugin[$plugin] = $paths;
         }
 

@@ -301,7 +301,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         if (isset(_providers[myName])) {
             return _providers[myName];
         }
-        if (myName !== "default") {
+        if (myName != "default") {
             return null;
         }
 
@@ -1140,7 +1140,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * ```
      * $validator.notEmpty("email", "Email is required", function ($context) {
-     *   return $context["newRecord"] && $context["data"]["role"] !== "admin";
+     *   return $context["newRecord"] && $context["data"]["role"] != "admin";
      * });
      * ```
      *
@@ -1314,7 +1314,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @throws \InvalidArgumentException
      */
     function lengthBetween(string myField, array $range, Nullable!string myMessage = null, $when = null) {
-        if (count($range) !== 2) {
+        if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
         $extra = array_filter(["on" => $when, "message" => myMessage]);
@@ -1970,7 +1970,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @throws \InvalidArgumentException
      */
     function range(string myField, array $range, Nullable!string myMessage = null, $when = null) {
-        if (count($range) !== 2) {
+        if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
         $extra = array_filter(["on" => $when, "message" => myMessage]);
@@ -2515,7 +2515,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
             $allFieldsAreEmpty = true;
             foreach (myData as myField) {
-                if (myField  !is null && myField !== "") {
+                if (myField  !is null && myField != "") {
                     $allFieldsAreEmpty = false;
                     break;
                 }

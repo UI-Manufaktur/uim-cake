@@ -1069,7 +1069,7 @@ class HtmlHelper : Helper {
             }
             if (isset($itemOptions["even"]) && $index % 2 == 0) {
                 $itemOptions["class"] = $itemOptions["even"];
-            } elseif (isset($itemOptions["odd"]) && $index % 2 !== 0) {
+            } elseif (isset($itemOptions["odd"]) && $index % 2 != 0) {
                 $itemOptions["class"] = $itemOptions["odd"];
             }
             $out .= this.formatTemplate("li", [

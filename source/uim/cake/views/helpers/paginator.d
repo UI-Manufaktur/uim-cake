@@ -398,7 +398,7 @@ class PaginatorHelper : Helper
         if (empty($title)) {
             $title = myKey;
 
-            if (indexOf($title, ".") !== false) {
+            if (indexOf($title, ".") != false) {
                 $title = str_replace(".", " ", $title);
             }
 
@@ -758,7 +758,7 @@ class PaginatorHelper : Helper
             myTemplater.{$method}(myOptions["templates"]);
         }
 
-        if (myOptions["modulus"] !== false && myParams["pageCount"] > myOptions["modulus"]) {
+        if (myOptions["modulus"] != false && myParams["pageCount"] > myOptions["modulus"]) {
             $out = _modulusNumbers(myTemplater, myParams, myOptions);
         } else {
             $out = _numbers(myTemplater, myParams, myOptions);
@@ -868,7 +868,7 @@ class PaginatorHelper : Helper
             $i++;
         }
 
-        if ($end !== myParams["page"]) {
+        if ($end != myParams["page"]) {
             $out .= _formatNumber(myTemplater, [
                 "text": this.Number.format($i),
                 "page": $end,

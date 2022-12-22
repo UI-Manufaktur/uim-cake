@@ -143,12 +143,12 @@ class EntityContext implements ContextInterface
                 $table = $entity->getSource();
             }
             /** @psalm-suppress PossiblyInvalidArgument */
-            if (!$table && $isEntity && get_class($entity) !== Entity::class) {
+            if (!$table && $isEntity && get_class($entity) != Entity::class) {
                 [, $entityClass] = namespaceSplit(get_class($entity));
                 $table = Inflector::pluralize($entityClass);
             }
         }
-        if (is_string($table) && $table !== '') {
+        if (is_string($table) && $table != '') {
             $table = this->getTableLocator()->get($table);
         }
 
@@ -225,7 +225,7 @@ class EntityContext implements ContextInterface
             }
         }
         if ($entity instanceof EntityInterface) {
-            return $entity->isNew() !== false;
+            return $entity->isNew() != false;
         }
 
         return true;
@@ -267,17 +267,17 @@ class EntityContext implements ContextInterface
 
             if ($entity instanceof InvalidPropertyInterface) {
                 $val = $entity->getInvalidField($part);
-                if ($val !== null) {
+                if ($val != null) {
                     return $val;
                 }
             }
 
             $val = $entity->get($part);
-            if ($val !== null) {
+            if ($val != null) {
                 return $val;
             }
             if (
-                $options['default'] !== null
+                $options['default'] != null
                 || !$options['schemaDefault']
                 || !$entity->isNew()
             ) {
@@ -373,7 +373,7 @@ class EntityContext implements ContextInterface
             $prop = $path[$i];
             $next = this->_getProp($entity, $prop);
             $isLast = ($i === $last);
-            if (!$isLast && $next === null && $prop !== '_ids') {
+            if (!$isLast && $next === null && $prop != '_ids') {
                 $table = this->_getTable($path);
                 if ($table) {
                     return $table->newEmptyEntity();
@@ -511,7 +511,7 @@ class EntityContext implements ContextInterface
         if (!$validator->hasField($fieldName)) {
             return null;
         }
-        if (this->type($field) !== 'boolean') {
+        if (this->type($field) != 'boolean') {
             return !$validator->isEmptyAllowed($fieldName, $isNew);
         }
 
@@ -661,7 +661,7 @@ class EntityContext implements ContextInterface
         $assoc = null;
         foreach ($normalized as $part) {
             if ($part === '_joinData') {
-                if ($assoc !== null) {
+                if ($assoc != null) {
                     $table = $assoc->junction();
                     $assoc = null;
                     continue;
@@ -731,7 +731,7 @@ class EntityContext implements ContextInterface
      */
     public function hasError(string $field): bool
     {
-        return this->error($field) !== [];
+        return this->error($field) != [];
     }
 
     /**

@@ -70,7 +70,7 @@ class TimeHelper extends Helper
     public function fromString($dateString, $timezone = null): FrozenTime
     {
         $time = new FrozenTime($dateString);
-        if ($timezone !== null) {
+        if ($timezone != null) {
             $time = $time->timezone($timezone);
         }
 

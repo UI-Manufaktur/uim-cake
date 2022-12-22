@@ -295,7 +295,7 @@ class StringTemplate
         $attributes = [];
 
         foreach ($options as $key => $value) {
-            if (!isset($exclude[$key]) && $value !== false && $value !== null) {
+            if (!isset($exclude[$key]) && $value != false && $value != null) {
                 $attributes[] = this->_formatAttribute((string)$key, $value, $escape);
             }
         }

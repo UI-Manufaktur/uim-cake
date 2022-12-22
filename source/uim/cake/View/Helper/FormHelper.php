@@ -393,7 +393,7 @@ class FormHelper extends Helper
             unset($options['valueSources']);
         }
 
-        if ($options['idPrefix'] !== null) {
+        if ($options['idPrefix'] != null) {
             this->_idPrefix = $options['idPrefix'];
         }
         $templater = this->templater();
@@ -456,9 +456,9 @@ class FormHelper extends Helper
 
         $htmlAttributes += $options;
 
-        if (this->requestType !== 'get') {
+        if (this->requestType != 'get') {
             $formTokenData = this->_View->getRequest()->getAttribute('formTokenData');
-            if ($formTokenData !== null) {
+            if ($formTokenData != null) {
                 this->formProtector = this->createFormProtector($formTokenData);
             }
 
@@ -562,7 +562,7 @@ class FormHelper extends Helper
     {
         $out = '';
 
-        if (this->requestType !== 'get' && this->_View->getRequest()->getAttribute('formTokenData') !== null) {
+        if (this->requestType != 'get' && this->_View->getRequest()->getAttribute('formTokenData') != null) {
             $out .= this->secure([], $secureAttributes);
         }
         $out .= this->formatTemplate('formEnd', []);
@@ -741,7 +741,7 @@ class FormHelper extends Helper
             $text = $tmp;
         }
 
-        if ($text !== null) {
+        if ($text != null) {
             $error = $text;
         }
 
@@ -835,7 +835,7 @@ class FormHelper extends Helper
             if (substr($text, -5) === '._ids') {
                 $text = substr($text, 0, -5);
             }
-            if (strpos($text, '.') !== false) {
+            if (strpos($text, '.') != false) {
                 $fieldElements = explode('.', $text);
                 $text = array_pop($fieldElements);
             }
@@ -982,7 +982,7 @@ class FormHelper extends Helper
             }
         }
 
-        if ($fieldset !== false) {
+        if ($fieldset != false) {
             if ($legend) {
                 $out = this->formatTemplate('legend', ['text' => $legend]) . $out;
             }
@@ -1057,7 +1057,7 @@ class FormHelper extends Helper
 
         // Hidden inputs don't need aria.
         // Multiple checkboxes can't have aria generated for them at this layer.
-        if ($options['type'] !== 'hidden' && ($options['type'] !== 'select' && !isset($options['multiple']))) {
+        if ($options['type'] != 'hidden' && ($options['type'] != 'select' && !isset($options['multiple']))) {
             $isFieldError = this->isFieldError($fieldName);
             $options += [
                 'aria-required' => $options['required'] == true ? 'true' : null,
@@ -1066,8 +1066,8 @@ class FormHelper extends Helper
             // Don't include aria-describedby unless we have a good chance of
             // having error message show up.
             if (
-                strpos($templater->get('error'), '{{id}}') !== false &&
-                strpos($templater->get('inputContainerError'), '{{error}}') !== false
+                strpos($templater->get('error'), '{{id}}') != false &&
+                strpos($templater->get('inputContainerError'), '{{error}}') != false
             ) {
                 $options += [
                    'aria-describedby' => $isFieldError ? this->_domId($fieldName) . '-error' : null,
@@ -1082,7 +1082,7 @@ class FormHelper extends Helper
 
         $error = null;
         $errorSuffix = '';
-        if ($options['type'] !== 'hidden' && $options['error'] !== false) {
+        if ($options['type'] != 'hidden' && $options['error'] != false) {
             if (is_array($options['error'])) {
                 $error = this->error($fieldName, $options['error'], $options['error']);
             } else {
@@ -1109,7 +1109,7 @@ class FormHelper extends Helper
             $nestedInput === true
             && $options['type'] === 'checkbox'
             && !array_key_exists('hiddenField', $options)
-            && $label !== false
+            && $label != false
         ) {
             $options['hiddenField'] = '_split';
         }
@@ -1259,7 +1259,7 @@ class FormHelper extends Helper
         $type = 'text';
         $internalType = $context->type($fieldName);
         $map = this->_config['typeMap'];
-        if ($internalType !== null && isset($map[$internalType])) {
+        if ($internalType != null && isset($map[$internalType])) {
             $type = $map[$internalType];
         }
         $fieldName = array_slice(explode('.', $fieldName), -1)[0];
@@ -1314,7 +1314,7 @@ class FormHelper extends Helper
         if (!is_iterable($varOptions)) {
             return $options;
         }
-        if ($options['type'] !== 'radio') {
+        if ($options['type'] != 'radio') {
             $options['type'] = 'select';
         }
         $options['options'] = $varOptions;
@@ -1347,7 +1347,7 @@ class FormHelper extends Helper
 
         if ($allowOverride && substr($fieldName, -5) === '._ids') {
             $options['type'] = 'select';
-            if (!isset($options['multiple']) || ($options['multiple'] && $options['multiple'] !== 'checkbox')) {
+            if (!isset($options['multiple']) || ($options['multiple'] && $options['multiple'] != 'checkbox')) {
                 $options['multiple'] = true;
             }
         }
@@ -1366,7 +1366,7 @@ class FormHelper extends Helper
     {
         $context = this->_getContext();
 
-        if (!isset($options['required']) && $options['type'] !== 'hidden') {
+        if (!isset($options['required']) && $options['type'] != 'hidden') {
             $options['required'] = $context->isRequired($fieldName);
         }
 
@@ -1499,11 +1499,11 @@ class FormHelper extends Helper
         $options['value'] = $value;
 
         $output = '';
-        if ($options['hiddenField'] !== false && is_scalar($options['hiddenField'])) {
+        if ($options['hiddenField'] != false && is_scalar($options['hiddenField'])) {
             $hiddenOptions = [
                 'name' => $options['name'],
-                'value' => $options['hiddenField'] !== true
-                    && $options['hiddenField'] !== '_split'
+                'value' => $options['hiddenField'] != true
+                    && $options['hiddenField'] != '_split'
                     ? (string)$options['hiddenField'] : '0',
                 'form' => $options['form'] ?? null,
                 'secure' => false,
@@ -1563,7 +1563,7 @@ class FormHelper extends Helper
         unset($attributes['hiddenField']);
 
         $hidden = '';
-        if ($hiddenField !== false && is_scalar($hiddenField)) {
+        if ($hiddenField != false && is_scalar($hiddenField)) {
             $hidden = this->hidden($fieldName, [
                 'value' => $hiddenField === true ? '' : (string)$hiddenField,
                 'form' => $attributes['form'] ?? null,
@@ -1843,7 +1843,7 @@ class FormHelper extends Helper
         $out .= this->_csrfField();
 
         $formTokenData = this->_View->getRequest()->getAttribute('formTokenData');
-        if ($formTokenData !== null) {
+        if ($formTokenData != null) {
             this->formProtector = this->createFormProtector($formTokenData);
         }
 
@@ -1929,7 +1929,7 @@ class FormHelper extends Helper
         }
         unset($options['secure']);
 
-        $isUrl = strpos($caption, '://') !== false;
+        $isUrl = strpos($caption, '://') != false;
         $isImage = preg_match('/\.(jpg|jpe|jpeg|gif|png|ico)$/', $caption);
 
         $type = $options['type'];
@@ -1955,7 +1955,7 @@ class FormHelper extends Helper
         if ($isUrl) {
             $options['src'] = $caption;
         } elseif ($isImage) {
-            if ($caption[0] !== '/') {
+            if ($caption[0] != '/') {
                 $url = this->Url->webroot(Configure::read('App.imageBaseUrl') . $caption);
             } else {
                 $url = this->Url->webroot(trim($caption, '/'));
@@ -2042,7 +2042,7 @@ class FormHelper extends Helper
             'empty' => null,
         ];
 
-        if ($attributes['empty'] === null && $attributes['multiple'] !== 'checkbox') {
+        if ($attributes['empty'] === null && $attributes['multiple'] != 'checkbox') {
             $required = this->_getContext()->isRequired($fieldName);
             $attributes['empty'] = $required === null ? false : !$required;
         }
@@ -2482,10 +2482,10 @@ class FormHelper extends Helper
         $widget = this->_locator->get($name);
         $out = $widget->render($data, this->context());
         if (
-            this->formProtector !== null &&
+            this->formProtector != null &&
             isset($data['name']) &&
-            $secure !== null &&
-            $secure !== self::SECURE_SKIP
+            $secure != null &&
+            $secure != self::SECURE_SKIP
         ) {
             foreach ($widget->secureFields($data) as $field) {
                 this->formProtector->addField($field, $secure);
@@ -2586,14 +2586,14 @@ class FormHelper extends Helper
         foreach (this->getValueSources() as $valuesSource) {
             if ($valuesSource === 'context') {
                 $val = this->_getContext()->val($fieldname, $options);
-                if ($val !== null) {
+                if ($val != null) {
                     return $val;
                 }
             }
             if (isset($valueMap[$valuesSource])) {
                 $method = $valueMap[$valuesSource];
                 $value = this->_View->getRequest()->{$method}($fieldname);
-                if ($value !== null) {
+                if ($value != null) {
                     return $value;
                 }
             }

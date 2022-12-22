@@ -119,7 +119,7 @@ trait CellTrait
         if (method_exists(this, 'viewBuilder')) {
             $builder->setTheme(this->viewBuilder()->getTheme());
 
-            if (this->viewBuilder()->getClassName() !== null) {
+            if (this->viewBuilder()->getClassName() != null) {
                 $builder->setClassName(this->viewBuilder()->getClassName());
             }
         }

@@ -82,7 +82,7 @@ abstract class SerializedView : View
                 myOptions
             );
         }
-        if ($serialize !== false) {
+        if ($serialize != false) {
             try {
                 return _serialize($serialize);
             } catch (Exception | TypeError $e) {

@@ -102,7 +102,7 @@ class Validation {
      * @return bool Success
      */
     static bool alphaNumeric($check) {
-        if ((empty($check) && $check !== "0") || !is_scalar($check)) {
+        if ((empty($check) && $check != "0") || !is_scalar($check)) {
             return false;
         }
 
@@ -129,7 +129,7 @@ class Validation {
      * @return bool Success
      */
     static bool asciiAlphaNumeric($check) {
-        if ((empty($check) && $check !== "0") || !is_scalar($check)) {
+        if ((empty($check) && $check != "0") || !is_scalar($check)) {
             return false;
         }
 
@@ -312,7 +312,7 @@ class Validation {
                 }
                 break;
             case static::COMPARE_NOT_SAME:
-                if ($check1 !== $check2) {
+                if ($check1 != $check2) {
                     return true;
                 }
                 break;
@@ -1282,7 +1282,7 @@ class Validation {
         if (is_array(myfile)) {
             myKeys = ["error", "name", "size", "tmp_name", "type"];
             ksort(myfile);
-            if (array_keys(myfile) !== myKeys) {
+            if (array_keys(myfile) != myKeys) {
                 return false;
             }
             myError = (int)myfile["error"];
@@ -1417,7 +1417,7 @@ class Validation {
             "format" => "both",
             "type" => "latLong",
         ];
-        if (myOptions["type"] !== "latLong") {
+        if (myOptions["type"] != "latLong") {
             throw new RuntimeException(sprintf(
                 "Unsupported coordinate type "%s". Use "latLong" instead.",
                 myOptions["type"]

@@ -109,7 +109,7 @@ abstract class SerializedView extends View
                 $options
             );
         }
-        if ($serialize !== false) {
+        if ($serialize != false) {
             try {
                 return this->_serialize($serialize);
             } catch (Exception | TypeError $e) {

@@ -110,11 +110,11 @@ class FormContext implements ContextInterface
         ];
 
         $val = this->_form->getData($field);
-        if ($val !== null) {
+        if ($val != null) {
             return $val;
         }
 
-        if ($options['default'] !== null || !$options['schemaDefault']) {
+        if ($options['default'] != null || !$options['schemaDefault']) {
             return $options['default'];
         }
 
@@ -146,7 +146,7 @@ class FormContext implements ContextInterface
         if (!$validator->hasField($field)) {
             return null;
         }
-        if (this->type($field) !== 'boolean') {
+        if (this->type($field) != 'boolean') {
             return !$validator->isEmptyAllowed($field, this->isCreate());
         }
 

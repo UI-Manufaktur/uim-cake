@@ -160,7 +160,7 @@ class Validation
      */
     public static function alphaNumeric($check): bool
     {
-        if ((empty($check) && $check !== '0') || !is_scalar($check)) {
+        if ((empty($check) && $check != '0') || !is_scalar($check)) {
             return false;
         }
 
@@ -189,7 +189,7 @@ class Validation
      */
     public static function asciiAlphaNumeric($check): bool
     {
-        if ((empty($check) && $check !== '0') || !is_scalar($check)) {
+        if ((empty($check) && $check != '0') || !is_scalar($check)) {
             return false;
         }
 
@@ -251,7 +251,7 @@ class Validation
             return false;
         }
 
-        if ($regex !== null && static::_check($check, $regex)) {
+        if ($regex != null && static::_check($check, $regex)) {
             return !$deep || static::luhn($check);
         }
         $cards = [
@@ -377,7 +377,7 @@ class Validation
                 }
                 break;
             case static::COMPARE_NOT_SAME:
-                if ($check1 !== $check2) {
+                if ($check1 != $check2) {
                     return true;
                 }
                 break;
@@ -504,7 +504,7 @@ class Validation
             $format = 'ymd';
         }
 
-        if ($regex !== null) {
+        if ($regex != null) {
             return static::_check($check, $regex);
         }
         $month = '(0[123456789]|10|11|12)';
@@ -687,7 +687,7 @@ class Validation
         }
         $method = $methods[$type];
 
-        return FrozenTime::$method($check, $format) !== null;
+        return FrozenTime::$method($check, $format) != null;
     }
 
     /**
@@ -1387,7 +1387,7 @@ class Validation
         if (is_array($file)) {
             $keys = ['error', 'name', 'size', 'tmp_name', 'type'];
             ksort($file);
-            if (array_keys($file) !== $keys) {
+            if (array_keys($file) != $keys) {
                 return false;
             }
             $error = (int)$file['error'];
@@ -1450,13 +1450,13 @@ class Validation
         if (isset($options['width'])) {
             $validWidth = self::comparison($width, $options['width'][0], $options['width'][1]);
         }
-        if ($validHeight !== null && $validWidth !== null) {
+        if ($validHeight != null && $validWidth != null) {
             return $validHeight && $validWidth;
         }
-        if ($validHeight !== null) {
+        if ($validHeight != null) {
             return $validHeight;
         }
-        if ($validWidth !== null) {
+        if ($validWidth != null) {
             return $validWidth;
         }
 
@@ -1526,7 +1526,7 @@ class Validation
             'format' => 'both',
             'type' => 'latLong',
         ];
-        if ($options['type'] !== 'latLong') {
+        if ($options['type'] != 'latLong') {
             throw new RuntimeException(sprintf(
                 'Unsupported coordinate type "%s". Use "latLong" instead.',
                 $options['type']

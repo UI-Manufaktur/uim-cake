@@ -125,7 +125,7 @@ class Xml
             throw new XmlException("Invalid input. {$type} cannot be parsed as XML.");
         }
 
-        if (strpos($input, '<') !== false) {
+        if (strpos($input, '<') != false) {
             return static::_loadXml($input, $options);
         }
 
@@ -271,7 +271,7 @@ class Xml
         if (is_object($input) && method_exists($input, 'toArray') && is_callable([$input, 'toArray'])) {
             $input = $input->toArray();
         }
-        if (!is_array($input) || count($input) !== 1) {
+        if (!is_array($input) || count($input) != 1) {
             throw new XmlException('Invalid input.');
         }
         $key = key($input);
@@ -330,12 +330,12 @@ class Xml
                         $value = '';
                     }
                     $isNamespace = strpos($key, 'xmlns:');
-                    if ($isNamespace !== false) {
+                    if ($isNamespace != false) {
                         /** @psalm-suppress PossiblyUndefinedMethod */
                         $node->setAttributeNS('http://www.w3.org/2000/xmlns/', $key, (string)$value);
                         continue;
                     }
-                    if ($key[0] !== '@' && $format === 'tags') {
+                    if ($key[0] != '@' && $format === 'tags') {
                         if (!is_numeric($value)) {
                             // Escape special characters
                             // https://www.w3.org/TR/REC-xml/#syntax
@@ -416,7 +416,7 @@ class Xml
         }
 
         $child = $dom->createElement($key);
-        if ($childValue !== null) {
+        if ($childValue != null) {
             $child->appendChild($dom->createTextNode($childValue));
         }
         if ($childNS) {
@@ -483,7 +483,7 @@ class Xml
         $asString = trim((string)$xml);
         if (empty($data)) {
             $data = $asString;
-        } elseif ($asString !== '') {
+        } elseif ($asString != '') {
             $data['@'] = $asString;
         }
 

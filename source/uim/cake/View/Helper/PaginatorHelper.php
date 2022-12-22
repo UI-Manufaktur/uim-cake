@@ -430,7 +430,7 @@ class PaginatorHelper extends Helper
         if (empty($title)) {
             $title = $key;
 
-            if (strpos($title, '.') !== false) {
+            if (strpos($title, '.') != false) {
                 $title = str_replace('.', ' ', $title);
             }
 
@@ -674,7 +674,7 @@ class PaginatorHelper extends Helper
      */
     public function defaultModel(?string $model = null): ?string
     {
-        if ($model !== null) {
+        if ($model != null) {
             this->_defaultModel = $model;
         }
         if (this->_defaultModel) {
@@ -798,7 +798,7 @@ class PaginatorHelper extends Helper
             $templater->{$method}($options['templates']);
         }
 
-        if ($options['modulus'] !== false && $params['pageCount'] > $options['modulus']) {
+        if ($options['modulus'] != false && $params['pageCount'] > $options['modulus']) {
             $out = this->_modulusNumbers($templater, $params, $options);
         } else {
             $out = this->_numbers($templater, $params, $options);
@@ -910,7 +910,7 @@ class PaginatorHelper extends Helper
             $i++;
         }
 
-        if ($end !== $params['page']) {
+        if ($end != $params['page']) {
             $out .= this->_formatNumber($templater, [
                 'text' => this->Number->format($i),
                 'page' => $end,

@@ -420,7 +420,7 @@ class FormHelper : Helper
 
         $htmlAttributes += myOptions;
 
-        if (this.requestType !== "get") {
+        if (this.requestType != "get") {
             $formTokenData = _View.getRequest().getAttribute("formTokenData");
             if ($formTokenData  !is null) {
                 this.formProtector = this.createFormProtector($formTokenData);
@@ -524,7 +524,7 @@ class FormHelper : Helper
     string end(array $secureAttributes = []) {
         $out = "";
 
-        if (this.requestType !== "get" && _View.getRequest().getAttribute("formTokenData")  !is null) {
+        if (this.requestType != "get" && _View.getRequest().getAttribute("formTokenData")  !is null) {
             $out .= this.secure([], $secureAttributes);
         }
         $out .= this.formatTemplate("formEnd", []);
@@ -791,7 +791,7 @@ class FormHelper : Helper
             if (substr($text, -5) == "._ids") {
                 $text = substr($text, 0, -5);
             }
-            if (indexOf($text, ".") !== false) {
+            if (indexOf($text, ".") != false) {
                 myFieldElements = explode(".", $text);
                 $text = array_pop(myFieldElements);
             }
@@ -935,7 +935,7 @@ class FormHelper : Helper
             }
         }
 
-        if (myFieldset !== false) {
+        if (myFieldset != false) {
             if ($legend) {
                 $out = this.formatTemplate("legend", ["text": $legend]) . $out;
             }
@@ -1009,7 +1009,7 @@ class FormHelper : Helper
 
         // Hidden inputs don"t need aria.
         // Multiple checkboxes can"t have aria generated for them at this layer.
-        if (myOptions["type"] !== "hidden" && (myOptions["type"] !== "select" && !isset(myOptions["multiple"]))) {
+        if (myOptions["type"] != "hidden" && (myOptions["type"] != "select" && !isset(myOptions["multiple"]))) {
             $isFieldError = this.isFieldError(myFieldName);
             myOptions += [
                 "aria-required": myOptions["required"] == true ? "true" : null,
@@ -1018,8 +1018,8 @@ class FormHelper : Helper
             // Don"t include aria-describedby unless we have a good chance of
             // having error message show up.
             if (
-                indexOf(myTemplater.get("error"), "{{id}}") !== false &&
-                indexOf(myTemplater.get("inputContainerError"), "{{error}}") !== false
+                indexOf(myTemplater.get("error"), "{{id}}") != false &&
+                indexOf(myTemplater.get("inputContainerError"), "{{error}}") != false
             ) {
                 myOptions += [
                    "aria-describedby": $isFieldError ? _domId(myFieldName) . "-error" : null,
@@ -1034,7 +1034,7 @@ class FormHelper : Helper
 
         myError = null;
         myErrorSuffix = "";
-        if (myOptions["type"] !== "hidden" && myOptions["error"] !== false) {
+        if (myOptions["type"] != "hidden" && myOptions["error"] != false) {
             if (is_array(myOptions["error"])) {
                 myError = this.error(myFieldName, myOptions["error"], myOptions["error"]);
             } else {
@@ -1061,7 +1061,7 @@ class FormHelper : Helper
             $nestedInput == true
             && myOptions["type"] == "checkbox"
             && !array_key_exists("hiddenField", myOptions)
-            && $label !== false
+            && $label != false
         ) {
             myOptions["hiddenField"] = "_split";
         }
@@ -1263,7 +1263,7 @@ class FormHelper : Helper
         if (!is_iterable($varOptions)) {
             return myOptions;
         }
-        if (myOptions["type"] !== "radio") {
+        if (myOptions["type"] != "radio") {
             myOptions["type"] = "select";
         }
         myOptions["options"] = $varOptions;
@@ -1295,7 +1295,7 @@ class FormHelper : Helper
 
         if ($allowOverride && substr(myFieldName, -5) == "._ids") {
             myOptions["type"] = "select";
-            if (!isset(myOptions["multiple"]) || (myOptions["multiple"] && myOptions["multiple"] !== "checkbox")) {
+            if (!isset(myOptions["multiple"]) || (myOptions["multiple"] && myOptions["multiple"] != "checkbox")) {
                 myOptions["multiple"] = true;
             }
         }
@@ -1313,7 +1313,7 @@ class FormHelper : Helper
     protected auto setRequiredAndCustomValidity(string myFieldName, array myOptions) {
         $context = _getContext();
 
-        if (!isset(myOptions["required"]) && myOptions["type"] !== "hidden") {
+        if (!isset(myOptions["required"]) && myOptions["type"] != "hidden") {
             myOptions["required"] = $context.isRequired(myFieldName);
         }
 
@@ -1444,8 +1444,8 @@ class FormHelper : Helper
         if (myOptions["hiddenField"]) {
             myHiddenOptions = [
                 "name": myOptions["name"],
-                "value": myOptions["hiddenField"] !== true
-                    && myOptions["hiddenField"] !== "_split"
+                "value": myOptions["hiddenField"] != true
+                    && myOptions["hiddenField"] != "_split"
                     ? myOptions["hiddenField"] : "0",
                 "form": myOptions["form"] ?? null,
                 "secure": false,
@@ -1852,7 +1852,7 @@ class FormHelper : Helper
         }
         unset(myOptions["secure"]);
 
-        $isUrl = indexOf($caption, "://") !== false;
+        $isUrl = indexOf($caption, "://") != false;
         $isImage = preg_match("/\.(jpg|jpe|jpeg|gif|png|ico)$/", $caption);
 
         myType = myOptions["type"];
@@ -1878,7 +1878,7 @@ class FormHelper : Helper
         if ($isUrl) {
             myOptions["src"] = $caption;
         } elseif ($isImage) {
-            if ($caption[0] !== "/") {
+            if ($caption[0] != "/") {
                 myUrl = this.Url.webroot(Configure::read("App.imageBaseUrl") . $caption);
             } else {
                 myUrl = this.Url.webroot(trim($caption, "/"));
@@ -1964,7 +1964,7 @@ class FormHelper : Helper
             "empty": null,
         ];
 
-        if ($attributes["empty"] is null && $attributes["multiple"] !== "checkbox") {
+        if ($attributes["empty"] is null && $attributes["multiple"] != "checkbox") {
             $required = _getContext().isRequired(myFieldName);
             $attributes["empty"] = $required is null ? false : !$required;
         }
@@ -2382,7 +2382,7 @@ class FormHelper : Helper
             this.formProtector  !is null &&
             isset(myData["name"]) &&
             $secure  !is null &&
-            $secure !== self::SECURE_SKIP
+            $secure != self::SECURE_SKIP
         ) {
             foreach ($widget.secureFields(myData) as myField) {
                 this.formProtector.addField(myField, $secure);

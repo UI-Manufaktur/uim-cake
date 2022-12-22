@@ -107,12 +107,12 @@ class EntityContext : IContext {
                 /** @psalm-suppress PossiblyInvalidMethodCall */
                 myTable = $entity.getSource();
             }
-            if (!myTable && $isEntity && get_class($entity) !== Entity::class) {
+            if (!myTable && $isEntity && get_class($entity) != Entity::class) {
                 [, $entityClass] = moduleSplit(get_class($entity));
                 myTable = Inflector::pluralize($entityClass);
             }
         }
-        if (is_string(myTable) && myTable !== "") {
+        if (is_string(myTable) && myTable != "") {
             myTable = this.getTableLocator().get(myTable);
         }
 
@@ -183,7 +183,7 @@ class EntityContext : IContext {
             }
         }
         if ($entity instanceof IEntity) {
-            return $entity.isNew() !== false;
+            return $entity.isNew() != false;
         }
 
         return true;
@@ -328,7 +328,7 @@ class EntityContext : IContext {
             $prop = myPath[$i];
             $next = _getProp($entity, $prop);
             $isLast = ($i == $last);
-            if (!$isLast && $next is null && $prop !== "_ids") {
+            if (!$isLast && $next is null && $prop != "_ids") {
                 myTable = _getTable(myPath);
                 if (myTable) {
                     return myTable.newEmptyEntity();
@@ -464,7 +464,7 @@ class EntityContext : IContext {
         if (!$validator.hasField(myFieldName)) {
             return null;
         }
-        if (this.type(myField) !== "boolean") {
+        if (this.type(myField) != "boolean") {
             return !$validator.isEmptyAllowed(myFieldName, $isNew);
         }
 
@@ -674,7 +674,7 @@ class EntityContext : IContext {
      * @return bool Returns true if the errors for the field are not empty.
      */
     bool hasError(string myField) {
-        return this.error(myField) !== [];
+        return this.error(myField) != [];
     }
 
     /**

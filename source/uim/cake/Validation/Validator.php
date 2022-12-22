@@ -347,7 +347,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         if (isset(this->_providers[$name])) {
             return this->_providers[$name];
         }
-        if ($name !== 'default') {
+        if ($name != 'default') {
             return null;
         }
 
@@ -880,7 +880,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         if ($message) {
             this->_allowEmptyMessages[$field] = $message;
         }
-        if ($flags !== null) {
+        if ($flags != null) {
             this->_allowEmptyFlags[$field] = $flags;
         }
 
@@ -1215,7 +1215,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      *
      * ```
      * $validator->notEmpty('email', 'Email is required', function ($context) {
-     *   return $context['newRecord'] && $context['data']['role'] !== 'admin';
+     *   return $context['newRecord'] && $context['data']['role'] != 'admin';
      * });
      * ```
      *
@@ -1397,7 +1397,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      */
     public function lengthBetween(string $field, array $range, ?string $message = null, $when = null)
     {
-        if (count($range) !== 2) {
+        if (count($range) != 2) {
             throw new InvalidArgumentException('The $range argument requires 2 numbers');
         }
         $extra = array_filter(['on' => $when, 'message' => $message]);
@@ -2087,7 +2087,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      */
     public function range(string $field, array $range, ?string $message = null, $when = null)
     {
-        if (count($range) !== 2) {
+        if (count($range) != 2) {
             throw new InvalidArgumentException('The $range argument requires 2 numbers');
         }
         $extra = array_filter(['on' => $when, 'message' => $message]);
@@ -2662,7 +2662,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
 
             $allFieldsAreEmpty = true;
             foreach ($data as $field) {
-                if ($field !== null && $field !== '') {
+                if ($field != null && $field != '') {
                     $allFieldsAreEmpty = false;
                     break;
                 }

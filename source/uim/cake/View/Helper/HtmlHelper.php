@@ -156,7 +156,7 @@ class HtmlHelper extends Helper
 
             if (isset($types[$type])) {
                 $type = $types[$type];
-            } elseif (!isset($options['type']) && $content !== null) {
+            } elseif (!isset($options['type']) && $content != null) {
                 if (is_array($content) && isset($content['_ext'])) {
                     $type = $types[$content['_ext']];
                 } else {
@@ -253,7 +253,7 @@ class HtmlHelper extends Helper
     public function link($title, $url = null, array $options = []): string
     {
         $escapeTitle = true;
-        if ($url !== null) {
+        if ($url != null) {
             $url = this->Url->build($url, $options);
             unset($options['fullBase']);
         } else {
@@ -1110,7 +1110,7 @@ class HtmlHelper extends Helper
             }
             if (isset($itemOptions['even']) && $index % 2 === 0) {
                 $itemOptions['class'] = $itemOptions['even'];
-            } elseif (isset($itemOptions['odd']) && $index % 2 !== 0) {
+            } elseif (isset($itemOptions['odd']) && $index % 2 != 0) {
                 $itemOptions['class'] = $itemOptions['odd'];
             }
             $out .= this->formatTemplate('li', [
