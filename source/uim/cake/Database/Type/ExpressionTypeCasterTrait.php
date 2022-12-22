@@ -19,17 +19,17 @@ namespace Cake\Database\Type;
 use Cake\Database\TypeFactory;
 
 /**
- * Offers a method to convert values to ExpressionInterface objects
+ * Offers a method to convert values to IExpression objects
  * if the type they should be converted to implements ExpressionTypeInterface
  */
 trait ExpressionTypeCasterTrait
 {
     /**
-     * Conditionally converts the passed value to an ExpressionInterface object
+     * Conditionally converts the passed value to an IExpression object
      * if the type class implements the ExpressionTypeInterface. Otherwise,
      * returns the value unmodified.
      *
-     * @param mixed $value The value to convert to ExpressionInterface
+     * @param mixed $value The value to convert to IExpression
      * @param string|null $type The type name
      * @return mixed
      */

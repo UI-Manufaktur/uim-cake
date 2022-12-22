@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Query;
 use Cake\Database\ValueBinder;
 use Closure;
@@ -24,7 +24,7 @@ use Closure;
 /**
  * An expression object for complex ORDER BY clauses
  */
-class OrderClauseExpression implements ExpressionInterface, FieldInterface
+class OrderClauseExpression implements IExpression, FieldInterface
 {
     use FieldTrait;
 
@@ -38,7 +38,7 @@ class OrderClauseExpression implements ExpressionInterface, FieldInterface
     /**
      * Constructor
      *
-     * @param \Cake\Database\ExpressionInterface|string $field The field to order on.
+     * @param \Cake\Database\IExpression|string $field The field to order on.
      * @param string $direction The direction to sort on.
      */
     public this($field, $direction)
@@ -52,11 +52,11 @@ class OrderClauseExpression implements ExpressionInterface, FieldInterface
      */
     function sql(ValueBinder $binder): string
     {
-        /** @var \Cake\Database\ExpressionInterface|string $field */
+        /** @var \Cake\Database\IExpression|string $field */
         $field = this->_field;
         if ($field instanceof Query) {
             $field = sprintf('(%s)', $field->sql($binder));
-        } elseif ($field instanceof ExpressionInterface) {
+        } elseif ($field instanceof IExpression) {
             $field = $field->sql($binder);
         }
 
@@ -68,7 +68,7 @@ class OrderClauseExpression implements ExpressionInterface, FieldInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this->_field instanceof ExpressionInterface) {
+        if (this->_field instanceof IExpression) {
             $callback(this->_field);
             this->_field->traverse($callback);
         }
@@ -83,7 +83,7 @@ class OrderClauseExpression implements ExpressionInterface, FieldInterface
      */
     function __clone()
     {
-        if (this->_field instanceof ExpressionInterface) {
+        if (this->_field instanceof IExpression) {
             this->_field = clone this->_field;
         }
     }

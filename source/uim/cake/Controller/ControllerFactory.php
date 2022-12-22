@@ -26,8 +26,8 @@ use Cake\Http\Runner;
 use Cake\Http\ServerRequest;
 use Cake\Utility\Inflector;
 use Closure;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\RequestHandlerInterface;
 use ReflectionClass;
 use ReflectionFunction;
@@ -63,11 +63,11 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
     /**
      * Create a controller for a given request.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to build a controller for.
+     * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
      * @return \Cake\Controller\Controller
      * @throws \Cake\Http\Exception\MissingControllerException
      */
-    function create(ServerRequestInterface $request): Controller
+    function create(IServerRequest $request): Controller
     {
         $className = this->getControllerClass($request);
         if ($className == null) {
@@ -94,11 +94,11 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      * Invoke a controller's action and wrapping methods.
      *
      * @param \Cake\Controller\Controller $controller The controller to invoke.
-     * @return \Psr\Http\Message\ResponseInterface The response
+     * @return \Psr\Http\Message\IResponse The response
      * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
-     * @throws \UnexpectedValueException If return value of action method is not null or ResponseInterface instance.
+     * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
-    function invoke($controller): ResponseInterface
+    function invoke($controller): IResponse
     {
         this->controller = $controller;
 
@@ -117,17 +117,17 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
     /**
      * Invoke the action.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request Request instance.
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param \Psr\Http\Message\IServerRequest $request Request instance.
+     * @return \Psr\Http\Message\IResponse
      */
-    function handle(ServerRequestInterface $request): ResponseInterface
+    function handle(IServerRequest $request): IResponse
     {
         $controller = this->controller;
         /** @psalm-suppress ArgumentTypeCoercion */
         $controller->setRequest($request);
 
         $result = $controller->startupProcess();
-        if ($result instanceof ResponseInterface) {
+        if ($result instanceof IResponse) {
             return $result;
         }
 
@@ -139,7 +139,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
         $controller->invokeAction($action, $args);
 
         $result = $controller->shutdownProcess();
-        if ($result instanceof ResponseInterface) {
+        if ($result instanceof IResponse) {
             return $result;
         }
 

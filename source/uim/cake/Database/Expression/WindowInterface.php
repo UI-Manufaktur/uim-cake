@@ -49,7 +49,7 @@ interface WindowInterface
     /**
      * Adds one or more partition expressions to the window.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|array<\Cake\Database\ExpressionInterface|string>|string $partitions Partition expressions
+     * @param \Cake\Database\IExpression|\Closure|array<\Cake\Database\IExpression|string>|string $partitions Partition expressions
      * @return this
      */
     function partition($partitions);
@@ -57,7 +57,7 @@ interface WindowInterface
     /**
      * Adds one or more order clauses to the window.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|array<\Cake\Database\ExpressionInterface|string>|string $fields Order expressions
+     * @param \Cake\Database\IExpression|\Closure|array<\Cake\Database\IExpression|string>|string $fields Order expressions
      * @return this
      */
     function order($fields);
@@ -78,8 +78,8 @@ interface WindowInterface
      * If you need to use 'FOLLOWING' with frame start or
      * 'PRECEDING' with frame end, use `frame()` instead.
      *
-     * @param \Cake\Database\ExpressionInterface|string|int|null $start Frame start
-     * @param \Cake\Database\ExpressionInterface|string|int|null $end Frame end
+     * @param \Cake\Database\IExpression|string|int|null $start Frame start
+     * @param \Cake\Database\IExpression|string|int|null $end Frame end
      *  If not passed in, only frame start SQL will be generated.
      * @return this
      */
@@ -122,9 +122,9 @@ interface WindowInterface
      *  - `null` - 'UNBOUNDED'
      *
      * @param string $type Frame type
-     * @param \Cake\Database\ExpressionInterface|string|int|null $startOffset Frame start offset
+     * @param \Cake\Database\IExpression|string|int|null $startOffset Frame start offset
      * @param string $startDirection Frame start direction
-     * @param \Cake\Database\ExpressionInterface|string|int|null $endOffset Frame end offset
+     * @param \Cake\Database\IExpression|string|int|null $endOffset Frame end offset
      * @param string $endDirection Frame end direction
      * @return this
      * @throws \InvalidArgumentException WHen offsets are negative.

@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Type\ExpressionTypeCasterTrait;
 use Cake\Database\ValueBinder;
 use Closure;
@@ -24,7 +24,7 @@ use Closure;
 /**
  * An expression object that represents a SQL BETWEEN snippet
  */
-class BetweenExpression implements ExpressionInterface, FieldInterface
+class BetweenExpression implements IExpression, FieldInterface
 {
     use ExpressionTypeCasterTrait;
     use FieldTrait;
@@ -53,7 +53,7 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
     /**
      * Constructor
      *
-     * @param \Cake\Database\ExpressionInterface|string $field The field name to compare for values inbetween the range.
+     * @param \Cake\Database\IExpression|string $field The field name to compare for values inbetween the range.
      * @param mixed $from The initial value of the range.
      * @param mixed $to The ending value in the comparison range.
      * @param string|null $type The data type name to bind the values with.
@@ -81,14 +81,14 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
             'to' => this->_to,
         ];
 
-        /** @var \Cake\Database\ExpressionInterface|string $field */
+        /** @var \Cake\Database\IExpression|string $field */
         $field = this->_field;
-        if ($field instanceof ExpressionInterface) {
+        if ($field instanceof IExpression) {
             $field = $field->sql($binder);
         }
 
         foreach ($parts as $name => $part) {
-            if ($part instanceof ExpressionInterface) {
+            if ($part instanceof IExpression) {
                 $parts[$name] = $part->sql($binder);
                 continue;
             }
@@ -104,7 +104,7 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
     public O traverse(this O)(Closure $callback)
     {
         foreach ([this->_field, this->_from, this->_to] as $part) {
-            if ($part instanceof ExpressionInterface) {
+            if ($part instanceof IExpression) {
                 $callback($part);
             }
         }
@@ -136,7 +136,7 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
     function __clone()
     {
         foreach (['_field', '_from', '_to'] as $part) {
-            if (this->{$part} instanceof ExpressionInterface) {
+            if (this->{$part} instanceof IExpression) {
                 this->{$part} = clone this->{$part};
             }
         }

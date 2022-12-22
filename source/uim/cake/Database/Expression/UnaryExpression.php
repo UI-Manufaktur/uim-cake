@@ -16,14 +16,14 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\ValueBinder;
 use Closure;
 
 /**
  * An expression object that represents an expression with only a single operand.
  */
-class UnaryExpression implements ExpressionInterface
+class UnaryExpression implements IExpression
 {
     /**
      * Indicates that the operation is in pre-order
@@ -80,7 +80,7 @@ class UnaryExpression implements ExpressionInterface
     function sql(ValueBinder $binder): string
     {
         $operand = this->_value;
-        if ($operand instanceof ExpressionInterface) {
+        if ($operand instanceof IExpression) {
             $operand = $operand->sql($binder);
         }
 
@@ -96,7 +96,7 @@ class UnaryExpression implements ExpressionInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this->_value instanceof ExpressionInterface) {
+        if (this->_value instanceof IExpression) {
             $callback(this->_value);
             this->_value->traverse($callback);
         }
@@ -111,7 +111,7 @@ class UnaryExpression implements ExpressionInterface
      */
     function __clone()
     {
-        if (this->_value instanceof ExpressionInterface) {
+        if (this->_value instanceof IExpression) {
             this->_value = clone this->_value;
         }
     }

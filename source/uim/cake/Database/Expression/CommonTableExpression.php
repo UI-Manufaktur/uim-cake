@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\ValueBinder;
 use Closure;
 use RuntimeException;
@@ -24,7 +24,7 @@ use RuntimeException;
 /**
  * An expression that represents a common table expression definition.
  */
-class CommonTableExpression implements ExpressionInterface
+class CommonTableExpression implements IExpression
 {
     /**
      * The CTE name.
@@ -43,7 +43,7 @@ class CommonTableExpression implements ExpressionInterface
     /**
      * The CTE query definition.
      *
-     * @var \Cake\Database\ExpressionInterface|null
+     * @var \Cake\Database\IExpression|null
      */
     protected $query;
 
@@ -65,7 +65,7 @@ class CommonTableExpression implements ExpressionInterface
      * Constructor.
      *
      * @param string $name The CTE name.
-     * @param \Cake\Database\ExpressionInterface|\Closure $query CTE query
+     * @param \Cake\Database\IExpression|\Closure $query CTE query
      */
     public this(string $name = '', $query = null)
     {
@@ -94,16 +94,16 @@ class CommonTableExpression implements ExpressionInterface
     /**
      * Sets the query for this CTE.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure $query CTE query
+     * @param \Cake\Database\IExpression|\Closure $query CTE query
      * @return this
      */
     function query($query)
     {
         if ($query instanceof Closure) {
             $query = $query();
-            if (!($query instanceof ExpressionInterface)) {
+            if (!($query instanceof IExpression)) {
                 throw new RuntimeException(
-                    'You must return an `ExpressionInterface` from a Closure passed to `query()`.'
+                    'You must return an `IExpression` from a Closure passed to `query()`.'
                 );
             }
         }

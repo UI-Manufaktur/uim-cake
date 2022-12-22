@@ -19,7 +19,7 @@ namespace Cake\Error;
 use Cake\Core\Configure;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Routing\Router;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 use Throwable;
 
@@ -328,10 +328,10 @@ abstract class BaseErrorHandler
      * Log an error for the exception if applicable.
      *
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The current request.
+     * @param \Psr\Http\Message\IServerRequest|null $request The current request.
      * @return bool
      */
-    function logException(Throwable $exception, ?ServerRequestInterface $request = null): bool
+    function logException(Throwable $exception, ?IServerRequest $request = null): bool
     {
         if (empty(this->_config['log'])) {
             return false;

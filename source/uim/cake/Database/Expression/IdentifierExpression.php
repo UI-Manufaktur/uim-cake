@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\ValueBinder;
 use Closure;
 
@@ -28,7 +28,7 @@ use Closure;
  *
  * @see \Cake\Database\Query::identifier()
  */
-class IdentifierExpression implements ExpressionInterface
+class IdentifierExpression implements IExpression
 {
     /**
      * Holds the identifier string

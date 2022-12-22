@@ -36,7 +36,7 @@ use RuntimeException;
  * for dynamically constructing each query part, execute it and transform it
  * to a specific SQL dialect.
  */
-class Query implements ExpressionInterface, IteratorAggregate
+class Query implements IExpression, IteratorAggregate
 {
     use TypeMapTrait;
 
@@ -473,7 +473,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * fields you should also call `Cake\ORM\Query::enableAutoFields()` to select the default fields
      * from the table.
      *
-     * @param \Cake\Database\ExpressionInterface|callable|array|string $fields fields to be added to the list.
+     * @param \Cake\Database\IExpression|callable|array|string $fields fields to be added to the list.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
@@ -522,7 +522,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * $query->distinct('name', true);
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|array|string|bool $on Enable/disable distinct class
+     * @param \Cake\Database\IExpression|array|string|bool $on Enable/disable distinct class
      * or list of fields to be filtered on
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
@@ -567,7 +567,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * // It will produce the SQL: SELECT HIGH_PRIORITY SQL_NO_CACHE name, city FROM products
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|array|string $modifiers modifiers to be applied to the query
+     * @param \Cake\Database\IExpression|array|string $modifiers modifiers to be applied to the query
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
@@ -591,7 +591,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * objects, a single expression or a single string.
      *
      * If an array is passed, keys will be used to alias tables using the value as the
-     * real field to be aliased. It is possible to alias strings, ExpressionInterface objects or
+     * real field to be aliased. It is possible to alias strings, IExpression objects or
      * even other Query objects.
      *
      * By default this function will append any passed argument to the list of tables
@@ -732,7 +732,7 @@ class Query implements ExpressionInterface, IteratorAggregate
                 $t['conditions'] = $t['conditions'](this->newExpr(), this);
             }
 
-            if (!($t['conditions'] instanceof ExpressionInterface)) {
+            if (!($t['conditions'] instanceof IExpression)) {
                 $t['conditions'] = this->newExpr()->add($t['conditions'], $types);
             }
             $alias = is_string($alias) ? $alias : null;
@@ -798,7 +798,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * See `join()` for further details on conditions and types.
      *
      * @param array<string, mixed>|string $table The table to join with
-     * @param \Cake\Database\ExpressionInterface|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string $conditions The conditions
      * to use for joining.
      * @param array $types a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
@@ -820,7 +820,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * to that methods description for further details.
      *
      * @param array<string, mixed>|string $table The table to join with
-     * @param \Cake\Database\ExpressionInterface|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string $conditions The conditions
      * to use for joining.
      * @param array $types a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
@@ -842,7 +842,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * to that method's description for further details.
      *
      * @param array<string, mixed>|string $table The table to join with
-     * @param \Cake\Database\ExpressionInterface|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string $conditions The conditions
      * to use for joining.
      * @param array<string, string> $types a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
@@ -859,7 +859,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * Returns an array that can be passed to the join method describing a single join clause
      *
      * @param array<string, mixed>|string $table The table to join with
-     * @param \Cake\Database\ExpressionInterface|array|string $conditions The conditions
+     * @param \Cake\Database\IExpression|array|string $conditions The conditions
      * to use for joining.
      * @param string $type the join type to use
      * @return array
@@ -1000,7 +1000,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * If you use string conditions make sure that your values are correctly quoted.
      * The safest thing you can do is to never use string conditions.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|array|string|null $conditions The conditions to filter on.
+     * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The conditions to filter on.
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset conditions with passed list or not
      * @see \Cake\Database\TypeFactory
@@ -1020,7 +1020,7 @@ class Query implements ExpressionInterface, IteratorAggregate
     /**
      * Convenience method that adds a NOT NULL condition to the query
      *
-     * @param \Cake\Database\ExpressionInterface|array|string $fields A single field or expressions or a list of them
+     * @param \Cake\Database\IExpression|array|string $fields A single field or expressions or a list of them
      *  that should be not null.
      * @return this
      */
@@ -1042,7 +1042,7 @@ class Query implements ExpressionInterface, IteratorAggregate
     /**
      * Convenience method that adds a IS NULL condition to the query
      *
-     * @param \Cake\Database\ExpressionInterface|array|string $fields A single field or expressions or a list of them
+     * @param \Cake\Database\IExpression|array|string $fields A single field or expressions or a list of them
      *   that should be null.
      * @return this
      */
@@ -1203,7 +1203,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      *
      * `WHERE (title = 'Foo') AND (author_id = 1 OR author_id = 2)`
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|array|string $conditions The conditions to add with AND.
+     * @param \Cake\Database\IExpression|\Closure|array|string $conditions The conditions to add with AND.
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @see \Cake\Database\Query::where()
      * @see \Cake\Database\TypeFactory
@@ -1273,7 +1273,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * If you need to set complex expressions as order conditions, you
      * should use `orderAsc()` or `orderDesc()`.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|array|string $fields fields to be added to the list
+     * @param \Cake\Database\IExpression|\Closure|array|string $fields fields to be added to the list
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
@@ -1304,7 +1304,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * Order fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|string $field The field to order on.
+     * @param \Cake\Database\IExpression|\Closure|string $field The field to order on.
      * @param bool $overwrite Whether to reset the order clauses.
      * @return this
      */
@@ -1338,7 +1338,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * Order fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|string $field The field to order on.
+     * @param \Cake\Database\IExpression|\Closure|string $field The field to order on.
      * @param bool $overwrite Whether to reset the order clauses.
      * @return this
      */
@@ -1384,7 +1384,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * Group fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param \Cake\Database\ExpressionInterface|array|string $fields fields to be added to the list
+     * @param \Cake\Database\IExpression|array|string $fields fields to be added to the list
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
@@ -1413,7 +1413,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * Having fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|array|string|null $conditions The having conditions.
+     * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The having conditions.
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset conditions with passed list or not
      * @see \Cake\Database\Query::where()
@@ -1438,7 +1438,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * Having fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|array|string $conditions The AND conditions for HAVING.
+     * @param \Cake\Database\IExpression|\Closure|array|string $conditions The AND conditions for HAVING.
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @see \Cake\Database\Query::andWhere()
      * @return this
@@ -1529,7 +1529,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * $query->limit($query->newExpr()->add(['1 + 1'])); // LIMIT (1 + 1)
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|int|null $limit number of records to be returned
+     * @param \Cake\Database\IExpression|int|null $limit number of records to be returned
      * @return this
      */
     function limit($limit)
@@ -1555,7 +1555,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * $query->offset($query->newExpr()->add(['1 + 1'])); // OFFSET (1 + 1)
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|int|null $offset number of records to be skipped
+     * @param \Cake\Database\IExpression|int|null $offset number of records to be skipped
      * @return this
      */
     function offset($offset)
@@ -1696,9 +1696,9 @@ class Query implements ExpressionInterface, IteratorAggregate
      * ```
      *
      * @param string $identifier The identifier for an expression
-     * @return \Cake\Database\ExpressionInterface
+     * @return \Cake\Database\IExpression
      */
-    function identifier(string $identifier): ExpressionInterface
+    function identifier(string $identifier): IExpression
     {
         return new IdentifierExpression($identifier);
     }
@@ -1745,14 +1745,14 @@ class Query implements ExpressionInterface, IteratorAggregate
      *
      * Can be combined with set() and where() methods to create update queries.
      *
-     * @param \Cake\Database\ExpressionInterface|string $table The table you want to update.
+     * @param \Cake\Database\IExpression|string $table The table you want to update.
      * @return this
      */
     function update($table)
     {
-        if (!is_string($table) && !($table instanceof ExpressionInterface)) {
+        if (!is_string($table) && !($table instanceof IExpression)) {
             $text = 'Table must be of type string or "%s", got "%s"';
-            $message = sprintf($text, ExpressionInterface::class, gettype($table));
+            $message = sprintf($text, IExpression::class, gettype($table));
             throw new InvalidArgumentException($message);
         }
 
@@ -1810,7 +1810,7 @@ class Query implements ExpressionInterface, IteratorAggregate
             return this;
         }
 
-        if (is_array($key) || $key instanceof ExpressionInterface) {
+        if (is_array($key) || $key instanceof IExpression) {
             $types = (array)$value;
             this->_parts['set']->add($key, $types);
 
@@ -1859,7 +1859,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      *
      * Epliog content is raw SQL and not suitable for use with user supplied data.
      *
-     * @param \Cake\Database\ExpressionInterface|string|null $expression The expression to be appended
+     * @param \Cake\Database\IExpression|string|null $expression The expression to be appended
      * @return this
      */
     function epilog($expression = null)
@@ -1894,7 +1894,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * $expression = $query->expr('Table.column = Table2.column'); // Return a raw SQL expression
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
+     * @param \Cake\Database\IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
      * @return \Cake\Database\Expression\QueryExpression
      */
     function newExpr($rawExpression = null): QueryExpression
@@ -1916,7 +1916,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * $expression = $query->expr('Table.column = Table2.column'); // Return a raw SQL expression
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
+     * @param \Cake\Database\IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
      * @return \Cake\Database\Expression\QueryExpression
      */
     function expr($rawExpression = null): QueryExpression
@@ -2057,12 +2057,12 @@ class Query implements ExpressionInterface, IteratorAggregate
     /**
      * This function works similar to the traverse() function, with the difference
      * that it does a full depth traversal of the entire expression tree. This will execute
-     * the provided callback function for each ExpressionInterface object that is
+     * the provided callback function for each IExpression object that is
      * stored inside this query at any nesting depth in any part of the query.
      *
      * Callback will receive as first parameter the currently visited expression.
      *
-     * @param callable $callback the function to be executed for each ExpressionInterface
+     * @param callable $callback the function to be executed for each IExpression
      *   found inside this query.
      * @return this
      */
@@ -2082,9 +2082,9 @@ class Query implements ExpressionInterface, IteratorAggregate
     /**
      * Query parts traversal method used by traverseExpressions()
      *
-     * @param \Cake\Database\ExpressionInterface|array<\Cake\Database\ExpressionInterface> $expression Query expression or
+     * @param \Cake\Database\IExpression|array<\Cake\Database\IExpression> $expression Query expression or
      *   array of expressions.
-     * @param \Closure $callback The callback to be executed for each ExpressionInterface
+     * @param \Closure $callback The callback to be executed for each IExpression
      *   found inside this query.
      * @return void
      */
@@ -2098,7 +2098,7 @@ class Query implements ExpressionInterface, IteratorAggregate
             return;
         }
 
-        if ($expression instanceof ExpressionInterface) {
+        if ($expression instanceof IExpression) {
             $expression->traverse(function ($exp) use ($callback) {
                 this->_expressionsVisitor($exp, $callback);
             });
@@ -2324,7 +2324,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * Helper function used to build conditions by composing QueryExpression objects.
      *
      * @param string $part Name of the query part to append the new part to
-     * @param \Cake\Database\ExpressionInterface|\Closure|array|string|null $append Expression or builder function to append.
+     * @param \Cake\Database\IExpression|\Closure|array|string|null $append Expression or builder function to append.
      *   to append.
      * @param string $conjunction type of conjunction to be used to operate part
      * @param array<string, string> $types Associative array of type names used to bind values to query
@@ -2392,18 +2392,18 @@ class Query implements ExpressionInterface, IteratorAggregate
                 foreach ($part as $i => $piece) {
                     if (is_array($piece)) {
                         foreach ($piece as $j => $value) {
-                            if ($value instanceof ExpressionInterface) {
+                            if ($value instanceof IExpression) {
                                 /** @psalm-suppress PossiblyUndefinedMethod */
                                 this->_parts[$name][$i][$j] = clone $value;
                             }
                         }
-                    } elseif ($piece instanceof ExpressionInterface) {
+                    } elseif ($piece instanceof IExpression) {
                         /** @psalm-suppress PossiblyUndefinedMethod */
                         this->_parts[$name][$i] = clone $piece;
                     }
                 }
             }
-            if ($part instanceof ExpressionInterface) {
+            if ($part instanceof IExpression) {
                 this->_parts[$name] = clone $part;
             }
         }

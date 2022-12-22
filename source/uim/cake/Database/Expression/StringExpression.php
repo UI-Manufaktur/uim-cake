@@ -16,14 +16,14 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\ValueBinder;
 use Closure;
 
 /**
  * String expression with collation.
  */
-class StringExpression implements ExpressionInterface
+class StringExpression implements IExpression
 {
     /**
      * @var string

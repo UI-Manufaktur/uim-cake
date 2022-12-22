@@ -143,7 +143,7 @@ class QueryCompiler
                 return;
             }
 
-            if ($part instanceof ExpressionInterface) {
+            if ($part instanceof IExpression) {
                 $part = [$part->sql($binder)];
             }
             if (isset(this->_templates[$partName])) {
@@ -276,14 +276,14 @@ class QueryCompiler
                     $join['alias']
                 ));
             }
-            if ($join['table'] instanceof ExpressionInterface) {
+            if ($join['table'] instanceof IExpression) {
                 $join['table'] = '(' . $join['table']->sql($binder) . ')';
             }
 
             $joins .= sprintf(' %s JOIN %s %s', $join['type'], $join['table'], $join['alias']);
 
             $condition = '';
-            if (isset($join['conditions']) && $join['conditions'] instanceof ExpressionInterface) {
+            if (isset($join['conditions']) && $join['conditions'] instanceof IExpression) {
                 $condition = $join['conditions']->sql($binder);
             }
             if ($condition == '') {
@@ -326,7 +326,7 @@ class QueryCompiler
     {
         $set = [];
         foreach ($parts as $part) {
-            if ($part instanceof ExpressionInterface) {
+            if ($part instanceof IExpression) {
                 $part = $part->sql($binder);
             }
             if ($part[0] == '(') {
@@ -438,10 +438,10 @@ class QueryCompiler
     }
 
     /**
-     * Helper function used to covert ExpressionInterface objects inside an array
+     * Helper function used to covert IExpression objects inside an array
      * into their string representation.
      *
-     * @param array $expressions list of strings and ExpressionInterface objects
+     * @param array $expressions list of strings and IExpression objects
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholder
      * @param bool $wrap Whether to wrap each expression object with parenthesis
      * @return array
@@ -450,7 +450,7 @@ class QueryCompiler
     {
         $result = [];
         foreach ($expressions as $k => $expression) {
-            if ($expression instanceof ExpressionInterface) {
+            if ($expression instanceof IExpression) {
                 $value = $expression->sql($binder);
                 $expression = $wrap ? '(' . $value . ')' : $value;
             }

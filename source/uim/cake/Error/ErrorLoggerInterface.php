@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Error;
 
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use Throwable;
 
 /**
@@ -25,9 +25,9 @@ use Throwable;
  * Used by the ErrorHandlerMiddleware and global
  * error handlers to log exceptions and errors.
  *
- * @method void logException(\Throwable $exception, ?\Psr\Http\Message\ServerRequestInterface $request = null, bool $includeTrace = false)
+ * @method void logException(\Throwable $exception, ?\Psr\Http\Message\IServerRequest $request = null, bool $includeTrace = false)
  *   Log an exception with an optional HTTP request.
- * @method void logError(\Cake\Error\PhpError $error, ?\Psr\Http\Message\ServerRequestInterface $request = null, bool $includeTrace = false)
+ * @method void logError(\Cake\Error\PhpError $error, ?\Psr\Http\Message\IServerRequest $request = null, bool $includeTrace = false)
  *   Log an error with an optional HTTP request.
  */
 interface ErrorLoggerInterface
@@ -36,13 +36,13 @@ interface ErrorLoggerInterface
      * Log an error for an exception with optional request context.
      *
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The current request if available.
+     * @param \Psr\Http\Message\IServerRequest|null $request The current request if available.
      * @return bool
      * @deprecated 4.4.0 Implement `logException` instead.
      */
     function log(
         Throwable $exception,
-        ?ServerRequestInterface $request = null
+        ?IServerRequest $request = null
     ): bool;
 
     /**

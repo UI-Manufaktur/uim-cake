@@ -16,21 +16,21 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Type;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 
 /**
  * An interface used by Type objects to signal whether the value should
- * be converted to an ExpressionInterface instead of a string when sent
+ * be converted to an IExpression instead of a string when sent
  * to the database.
  */
 interface ExpressionTypeInterface
 {
     /**
-     * Returns an ExpressionInterface object for the given value that can
+     * Returns an IExpression object for the given value that can
      * be used in queries.
      *
      * @param mixed $value The value to be converted to an expression
-     * @return \Cake\Database\ExpressionInterface
+     * @return \Cake\Database\IExpression
      */
-    function toExpression($value): ExpressionInterface;
+    function toExpression($value): IExpression;
 }

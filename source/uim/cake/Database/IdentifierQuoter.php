@@ -73,10 +73,10 @@ class IdentifierQuoter
     /**
      * Quotes identifiers inside expression objects
      *
-     * @param \Cake\Database\ExpressionInterface $expression The expression object to walk and quote.
+     * @param \Cake\Database\IExpression $expression The expression object to walk and quote.
      * @return void
      */
-    function quoteExpression(ExpressionInterface $expression): void
+    function quoteExpression(IExpression $expression): void
     {
         if ($expression instanceof FieldInterface) {
             this->_quoteComparison($expression);
@@ -224,7 +224,7 @@ class IdentifierQuoter
                 $quoted[] = this->_driver->quoteIdentifier($f);
             }
             $expression->setField($quoted);
-        } elseif ($field instanceof ExpressionInterface) {
+        } elseif ($field instanceof IExpression) {
             this->quoteExpression($field);
         }
     }

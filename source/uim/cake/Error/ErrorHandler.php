@@ -21,7 +21,7 @@ namespace Cake\Error;
 use Cake\Core\App;
 use Cake\Http\ResponseEmitter;
 use Cake\Routing\Router;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 use Throwable;
 
@@ -146,13 +146,13 @@ class ErrorHandler extends BaseErrorHandler
      * Get a renderer instance.
      *
      * @param \Throwable $exception The exception being rendered.
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The request.
+     * @param \Psr\Http\Message\IServerRequest|null $request The request.
      * @return \Cake\Error\ExceptionRendererInterface The exception renderer.
      * @throws \RuntimeException When the renderer class cannot be found.
      */
     function getRenderer(
         Throwable $exception,
-        ?ServerRequestInterface $request = null
+        ?IServerRequest $request = null
     ): ExceptionRendererInterface {
         $renderer = this->_config['exceptionRenderer'];
 
@@ -199,7 +199,7 @@ class ErrorHandler extends BaseErrorHandler
     /**
      * Method that can be easily stubbed in testing.
      *
-     * @param \Psr\Http\Message\ResponseInterface|string $response Either the message or response object.
+     * @param \Psr\Http\Message\IResponse|string $response Either the message or response object.
      * @return void
      */
     protected function _sendResponse($response): void

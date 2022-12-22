@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\Database\Expression;
 
 use Cake\Database\Exception\DatabaseException;
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Query;
 use Cake\Database\Type\ExpressionTypeCasterTrait;
 use Cake\Database\TypeMap;
@@ -31,7 +31,7 @@ use Closure;
  * Helps generate SQL with the correct number of placeholders and bind
  * values correctly into the statement.
  */
-class ValuesExpression implements ExpressionInterface
+class ValuesExpression implements IExpression
 {
     use ExpressionTypeCasterTrait;
     use TypeMapTrait;
@@ -238,7 +238,7 @@ class ValuesExpression implements ExpressionInterface
             foreach ($columns as $column) {
                 $value = $row[$column];
 
-                if ($value instanceof ExpressionInterface) {
+                if ($value instanceof IExpression) {
                     $rowPlaceholders[] = '(' . $value->sql($binder) . ')';
                     continue;
                 }
@@ -273,14 +273,14 @@ class ValuesExpression implements ExpressionInterface
         }
 
         foreach (this->_values as $v) {
-            if ($v instanceof ExpressionInterface) {
+            if ($v instanceof IExpression) {
                 $v->traverse($callback);
             }
             if (!is_array($v)) {
                 continue;
             }
             foreach ($v as $field) {
-                if ($field instanceof ExpressionInterface) {
+                if ($field instanceof IExpression) {
                     $callback($field);
                     $field->traverse($callback);
                 }

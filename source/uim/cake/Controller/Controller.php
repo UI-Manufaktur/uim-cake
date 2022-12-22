@@ -38,7 +38,7 @@ use Cake\View\View;
 use Cake\View\ViewVarsTrait;
 use Closure;
 use InvalidArgumentException;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
@@ -540,14 +540,14 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      * @param \Closure $action The action closure.
      * @param array $args The arguments to be passed when invoking action.
      * @return void
-     * @throws \UnexpectedValueException If return value of action is not `null` or `ResponseInterface` instance.
+     * @throws \UnexpectedValueException If return value of action is not `null` or `IResponse` instance.
      */
     function invokeAction(Closure $action, array $args): void
     {
         $result = $action(...$args);
-        if ($result != null && !$result instanceof ResponseInterface) {
+        if ($result != null && !$result instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
-                'Controller actions can only return ResponseInterface instance or null. '
+                'Controller actions can only return IResponse instance or null. '
                 . 'Got %s instead.',
                 getTypeName($result)
             ));
@@ -637,16 +637,16 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      * - Calls the controller `beforeFilter`.
      * - triggers Component `startup` methods.
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return \Psr\Http\Message\IResponse|null
      */
-    function startupProcess(): ?ResponseInterface
+    function startupProcess(): ?IResponse
     {
         $event = this->dispatchEvent('Controller.initialize');
-        if ($event->getResult() instanceof ResponseInterface) {
+        if ($event->getResult() instanceof IResponse) {
             return $event->getResult();
         }
         $event = this->dispatchEvent('Controller.startup');
-        if ($event->getResult() instanceof ResponseInterface) {
+        if ($event->getResult() instanceof IResponse) {
             return $event->getResult();
         }
 
@@ -660,12 +660,12 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      * - triggers the component `shutdown` callback.
      * - calls the Controller's `afterFilter` method.
      *
-     * @return \Psr\Http\Message\ResponseInterface|null
+     * @return \Psr\Http\Message\IResponse|null
      */
-    function shutdownProcess(): ?ResponseInterface
+    function shutdownProcess(): ?IResponse
     {
         $event = this->dispatchEvent('Controller.shutdown');
-        if ($event->getResult() instanceof ResponseInterface) {
+        if ($event->getResult() instanceof IResponse) {
             return $event->getResult();
         }
 

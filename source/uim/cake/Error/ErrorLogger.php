@@ -20,7 +20,7 @@ use Cake\Core\Configure;
 use Cake\Core\Exception\CakeException;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Log\Log;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use Throwable;
 
 /**
@@ -55,11 +55,11 @@ class ErrorLogger implements ErrorLoggerInterface
      * Log an error to Cake's Log subsystem
      *
      * @param \Cake\Error\PhpError $error The error to log
-     * @param ?\Psr\Http\Message\ServerRequestInterface $request The request if in an HTTP context.
+     * @param ?\Psr\Http\Message\IServerRequest $request The request if in an HTTP context.
      * @param bool $includeTrace Should the log message include a stacktrace
      * @return void
      */
-    function logError(PhpError $error, ?ServerRequestInterface $request = null, bool $includeTrace = false): void
+    function logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false): void
     {
         $message = $error->getMessage();
         if ($request) {
@@ -82,13 +82,13 @@ class ErrorLogger implements ErrorLoggerInterface
      * Log an exception to Cake's Log subsystem
      *
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The current request if available.
+     * @param \Psr\Http\Message\IServerRequest|null $request The current request if available.
      * @param bool $includeTrace Whether or not a stack trace should be logged.
      * @return void
      */
     function logException(
         Throwable $exception,
-        ?ServerRequestInterface $request = null,
+        ?IServerRequest $request = null,
         bool $includeTrace = false
     ): void {
         $message = this->getMessage($exception, false, $includeTrace);
@@ -125,11 +125,11 @@ class ErrorLogger implements ErrorLoggerInterface
 
     /**
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The current request if available.
+     * @param \Psr\Http\Message\IServerRequest|null $request The current request if available.
      * @return bool
      * @deprecated 4.4.0 Use logException instead.
      */
-    function log(Throwable $exception, ?ServerRequestInterface $request = null): bool
+    function log(Throwable $exception, ?IServerRequest $request = null): bool
     {
         $message = this->getMessage($exception, false, this->getConfig('trace'));
 
@@ -193,10 +193,10 @@ class ErrorLogger implements ErrorLoggerInterface
     /**
      * Get the request context for an error/exception trace.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to read from.
+     * @param \Psr\Http\Message\IServerRequest $request The request to read from.
      * @return string
      */
-    function getRequestContext(ServerRequestInterface $request): string
+    function getRequestContext(IServerRequest $request): string
     {
         $message = "\nRequest URL: " . $request->getRequestTarget();
 

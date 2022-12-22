@@ -22,7 +22,7 @@ use Cake\Database\Expression\OrderByExpression;
 use Cake\Database\Expression\OrderClauseExpression;
 use Cake\Database\Expression\TupleComparison;
 use Cake\Database\Expression\UnaryExpression;
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Query;
 use Cake\Database\QueryCompiler;
 use Cake\Database\Schema\SchemaDialect;
@@ -370,7 +370,7 @@ class Sqlserver extends Driver
                     $key = $orderBy;
                     if (
                         isset($select[$orderBy]) &&
-                        $select[$orderBy] instanceof ExpressionInterface
+                        $select[$orderBy] instanceof IExpression
                     ) {
                         $order->add(new OrderClauseExpression($select[$orderBy], $direction));
                     } else {

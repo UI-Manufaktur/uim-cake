@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Query;
 use Cake\Database\Type\ExpressionTypeCasterTrait;
 use Cake\Database\TypedResultInterface;
@@ -125,11 +125,11 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
 
             $type = $typeMap->type($k);
 
-            if ($type != null && !$p instanceof ExpressionInterface) {
+            if ($type != null && !$p instanceof IExpression) {
                 $p = this->_castToExpression($p, $type);
             }
 
-            if ($p instanceof ExpressionInterface) {
+            if ($p instanceof IExpression) {
                 $put(this->_conditions, $p);
                 continue;
             }
@@ -149,7 +149,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
         foreach (this->_conditions as $condition) {
             if ($condition instanceof Query) {
                 $condition = sprintf('(%s)', $condition->sql($binder));
-            } elseif ($condition instanceof ExpressionInterface) {
+            } elseif ($condition instanceof IExpression) {
                 $condition = $condition->sql($binder);
             } elseif (is_array($condition)) {
                 $p = $binder->placeholder('param');

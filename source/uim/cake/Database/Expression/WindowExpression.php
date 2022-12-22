@@ -16,14 +16,14 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\ValueBinder;
 use Closure;
 
 /**
  * This represents a SQL window expression used by aggregate and window functions.
  */
-class WindowExpression implements ExpressionInterface, WindowInterface
+class WindowExpression implements IExpression, WindowInterface
 {
     /**
      * @var \Cake\Database\Expression\IdentifierExpression
@@ -31,7 +31,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     protected $name;
 
     /**
-     * @var array<\Cake\Database\ExpressionInterface>
+     * @var array<\Cake\Database\IExpression>
      */
     protected $partitions = [];
 
@@ -278,12 +278,12 @@ class WindowExpression implements ExpressionInterface, WindowInterface
 
         if (this->frame != null) {
             $offset = this->frame['start']['offset'];
-            if ($offset instanceof ExpressionInterface) {
+            if ($offset instanceof IExpression) {
                 $callback($offset);
                 $offset->traverse($callback);
             }
             $offset = this->frame['end']['offset'] ?? null;
-            if ($offset instanceof ExpressionInterface) {
+            if ($offset instanceof IExpression) {
                 $callback($offset);
                 $offset->traverse($callback);
             }
@@ -296,7 +296,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      * Builds frame offset sql.
      *
      * @param \Cake\Database\ValueBinder $binder Value binder
-     * @param \Cake\Database\ExpressionInterface|string|int|null $offset Frame offset
+     * @param \Cake\Database\IExpression|string|int|null $offset Frame offset
      * @param string $direction Frame offset direction
      * @return string
      */
@@ -306,7 +306,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
             return 'CURRENT ROW';
         }
 
-        if ($offset instanceof ExpressionInterface) {
+        if ($offset instanceof IExpression) {
             $offset = $offset->sql($binder);
         }
 

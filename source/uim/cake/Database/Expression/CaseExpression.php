@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Type\ExpressionTypeCasterTrait;
 use Cake\Database\ValueBinder;
 use Closure;
@@ -26,7 +26,7 @@ use Closure;
  *
  * @deprecated 4.3.0 Use QueryExpression::case() or CaseStatementExpression instead
  */
-class CaseExpression implements ExpressionInterface
+class CaseExpression implements IExpression
 {
     use ExpressionTypeCasterTrait;
 
@@ -49,16 +49,16 @@ class CaseExpression implements ExpressionInterface
     /**
      * The `ELSE` value for the case statement. If null then no `ELSE` will be included.
      *
-     * @var \Cake\Database\ExpressionInterface|array|string|null
+     * @var \Cake\Database\IExpression|array|string|null
      */
     protected $_elseValue;
 
     /**
      * Constructs the case expression
      *
-     * @param \Cake\Database\ExpressionInterface|array $conditions The conditions to test. Must be a ExpressionInterface
-     * instance, or an array of ExpressionInterface instances.
-     * @param \Cake\Database\ExpressionInterface|array $values Associative array of values to be associated with the
+     * @param \Cake\Database\IExpression|array $conditions The conditions to test. Must be a IExpression
+     * instance, or an array of IExpression instances.
+     * @param \Cake\Database\IExpression|array $values Associative array of values to be associated with the
      * conditions passed in $conditions. If there are more $values than $conditions,
      * the last $value is used as the `ELSE` value.
      * @param array<string> $types Associative array of types to be associated with the values
@@ -86,9 +86,9 @@ class CaseExpression implements ExpressionInterface
      * Conditions must be a one dimensional array or a QueryExpression.
      * The trueValues must be a similar structure, but may contain a string value.
      *
-     * @param \Cake\Database\ExpressionInterface|array $conditions Must be a ExpressionInterface instance,
-     *   or an array of ExpressionInterface instances.
-     * @param \Cake\Database\ExpressionInterface|array $values Associative array of values of each condition
+     * @param \Cake\Database\IExpression|array $conditions Must be a IExpression instance,
+     *   or an array of IExpression instances.
+     * @param \Cake\Database\IExpression|array $values Associative array of values of each condition
      * @param array<string> $types Associative array of types to be associated with the values
      * @return this
      */
@@ -107,7 +107,7 @@ class CaseExpression implements ExpressionInterface
      * Iterates over the passed in conditions and ensures that there is a matching true value for each.
      * If no matching true value, then it is defaulted to '1'.
      *
-     * @param array $conditions Array of ExpressionInterface instances.
+     * @param array $conditions Array of IExpression instances.
      * @param array<mixed> $values Associative array of values of each condition
      * @param array<string> $types Associative array of types to be associated with the values
      * @return void
@@ -124,7 +124,7 @@ class CaseExpression implements ExpressionInterface
                 continue;
             }
 
-            if (!$c instanceof ExpressionInterface) {
+            if (!$c instanceof IExpression) {
                 continue;
             }
 
@@ -147,11 +147,11 @@ class CaseExpression implements ExpressionInterface
 
             $type = $types[$k] ?? null;
 
-            if ($type != null && !$value instanceof ExpressionInterface) {
+            if ($type != null && !$value instanceof IExpression) {
                 $value = this->_castToExpression($value, $type);
             }
 
-            if ($value instanceof ExpressionInterface) {
+            if ($value instanceof IExpression) {
                 this->_values[] = $value;
                 continue;
             }
@@ -163,7 +163,7 @@ class CaseExpression implements ExpressionInterface
     /**
      * Sets the default value
      *
-     * @param \Cake\Database\ExpressionInterface|array|string|null $value Value to set
+     * @param \Cake\Database\IExpression|array|string|null $value Value to set
      * @param string|null $type Type of value
      * @return void
      */
@@ -174,11 +174,11 @@ class CaseExpression implements ExpressionInterface
             $value = key($value);
         }
 
-        if ($value != null && !$value instanceof ExpressionInterface) {
+        if ($value != null && !$value instanceof IExpression) {
             $value = this->_castToExpression($value, $type);
         }
 
-        if (!$value instanceof ExpressionInterface) {
+        if (!$value instanceof IExpression) {
             $value = ['value' => $value, 'type' => $type];
         }
 
@@ -188,13 +188,13 @@ class CaseExpression implements ExpressionInterface
     /**
      * Compiles the relevant parts into sql
      *
-     * @param \Cake\Database\ExpressionInterface|array|string $part The part to compile
+     * @param \Cake\Database\IExpression|array|string $part The part to compile
      * @param \Cake\Database\ValueBinder $binder Sql generator
      * @return string
      */
     protected function _compile($part, ValueBinder $binder): string
     {
-        if ($part instanceof ExpressionInterface) {
+        if ($part instanceof IExpression) {
             $part = $part->sql($binder);
         } elseif (is_array($part)) {
             $placeholder = $binder->placeholder('param');
@@ -235,13 +235,13 @@ class CaseExpression implements ExpressionInterface
     {
         foreach (['_conditions', '_values'] as $part) {
             foreach (this->{$part} as $c) {
-                if ($c instanceof ExpressionInterface) {
+                if ($c instanceof IExpression) {
                     $callback($c);
                     $c->traverse($callback);
                 }
             }
         }
-        if (this->_elseValue instanceof ExpressionInterface) {
+        if (this->_elseValue instanceof IExpression) {
             $callback(this->_elseValue);
             this->_elseValue->traverse($callback);
         }

@@ -16,13 +16,13 @@ declare(strict_types=1);
  */
 namespace Cake\Error;
 
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 
 /**
  * Interface ExceptionRendererInterface
  *
- * @method \Psr\Http\Message\ResponseInterface|string render() Render the exception to a string or Http Response.
- * @method void write(\Psr\Http\Message\ResponseInterface|string $output) Write the output to the output stream.
+ * @method \Psr\Http\Message\IResponse|string render() Render the exception to a string or Http Response.
+ * @method void write(\Psr\Http\Message\IResponse|string $output) Write the output to the output stream.
  *  This method is only called when exceptions are handled by a global default exception handler.
  */
 interface ExceptionRendererInterface
@@ -30,7 +30,7 @@ interface ExceptionRendererInterface
     /**
      * Renders the response for the exception.
      *
-     * @return \Psr\Http\Message\ResponseInterface The response to be sent.
+     * @return \Psr\Http\Message\IResponse The response to be sent.
      */
-    function render(): ResponseInterface;
+    function render(): IResponse;
 }

@@ -21,7 +21,7 @@ use Closure;
 /**
  * An interface used by Expression objects.
  */
-interface ExpressionInterface
+interface IExpression
 {
     /**
      * Converts the Node into a SQL string fragment.

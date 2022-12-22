@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Database\Expression;
 
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Type\ExpressionTypeCasterTrait;
 use Cake\Database\TypedResultInterface;
 use Cake\Database\TypeMapTrait;
@@ -28,7 +28,7 @@ use LogicException;
 /**
  * Represents a SQL case statement with a fluid API
  */
-class CaseStatementExpression implements ExpressionInterface, TypedResultInterface
+class CaseStatementExpression implements IExpression, TypedResultInterface
 {
     use CaseExpressionTrait;
     use ExpressionTypeCasterTrait;
@@ -56,7 +56,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
     /**
      * The case value.
      *
-     * @var \Cake\Database\ExpressionInterface|object|scalar|null
+     * @var \Cake\Database\IExpression|object|scalar|null
      */
     protected $value = null;
 
@@ -84,7 +84,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
     /**
      * The else part result value.
      *
-     * @var \Cake\Database\ExpressionInterface|object|scalar|null
+     * @var \Cake\Database\IExpression|object|scalar|null
      */
     protected $else = null;
 
@@ -118,7 +118,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      * only be passed if you actually want to create the simple
      * case expression variant!
      *
-     * @param \Cake\Database\ExpressionInterface|object|scalar|null $value The case value.
+     * @param \Cake\Database\IExpression|object|scalar|null $value The case value.
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
      */
@@ -133,7 +133,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
                 throw new InvalidArgumentException(sprintf(
                     'The `$value` argument must be either `null`, a scalar value, an object, ' .
                     'or an instance of `\%s`, `%s` given.',
-                    ExpressionInterface::class,
+                    IExpression::class,
                     getTypeName($value)
                 ));
             }
@@ -143,7 +143,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
             if (
                 $value != null &&
                 $type == null &&
-                !($value instanceof ExpressionInterface)
+                !($value instanceof IExpression)
             ) {
                 $type = this->inferType($value);
             }
@@ -278,7 +278,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      *      ->bind(':userData', $userData, 'integer')
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|\Closure|object|array|scalar $when The `WHEN` value. When using an
+     * @param \Cake\Database\IExpression|\Closure|object|array|scalar $when The `WHEN` value. When using an
      *  array of conditions, it must be compatible with `\Cake\Database\Query::where()`. Note that this argument is
      *  _not_ completely safe for use with user data, as a user supplied array would allow for raw SQL to slip in! If
      *  you plan to use user data, either pass a single type for the `$type` argument (which forces the `$when` value to
@@ -366,7 +366,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      *     // ...
      * ```
      *
-     * @param \Cake\Database\ExpressionInterface|object|scalar|null $result The result value.
+     * @param \Cake\Database\IExpression|object|scalar|null $result The result value.
      * @param string|null $type The result type. If no type is provided, the type will be tried to be inferred from the
      *  value.
      * @return this
@@ -393,13 +393,13 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
     /**
      * Sets the `ELSE` result value.
      *
-     * @param \Cake\Database\ExpressionInterface|object|scalar|null $result The result value.
+     * @param \Cake\Database\IExpression|object|scalar|null $result The result value.
      * @param string|null $type The result type. If no type is provided, the type will be tried to be inferred from the
      *  value.
      * @return this
      * @throws \LogicException In case a closing `then()` call is required before calling this method.
      * @throws \InvalidArgumentException In case the `$result` argument is neither a scalar value, nor an object, an
-     *  instance of `\Cake\Database\ExpressionInterface`, or `null`.
+     *  instance of `\Cake\Database\IExpression`, or `null`.
      */
     function else($result, ?string $type = null)
     {
@@ -415,7 +415,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
             throw new InvalidArgumentException(sprintf(
                 'The `$result` argument must be either `null`, a scalar value, an object, ' .
                 'or an instance of `\%s`, `%s` given.',
-                ExpressionInterface::class,
+                IExpression::class,
                 getTypeName($result)
             ));
         }
@@ -496,7 +496,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      * * `else`: The `ELSE` result value.
      *
      * @param string $clause The name of the clause to obtain.
-     * @return \Cake\Database\ExpressionInterface|object|array<\Cake\Database\Expression\WhenThenExpression>|scalar|null
+     * @return \Cake\Database\IExpression|object|array<\Cake\Database\Expression\WhenThenExpression>|scalar|null
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
     function clause(string $clause)
@@ -552,7 +552,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 
-        if (this->value instanceof ExpressionInterface) {
+        if (this->value instanceof IExpression) {
             $callback(this->value);
             this->value->traverse($callback);
         }
@@ -562,7 +562,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
             $when->traverse($callback);
         }
 
-        if (this->else instanceof ExpressionInterface) {
+        if (this->else instanceof IExpression) {
             $callback(this->else);
             this->else->traverse($callback);
         }
@@ -581,7 +581,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 
-        if (this->value instanceof ExpressionInterface) {
+        if (this->value instanceof IExpression) {
             this->value = clone this->value;
         }
 
@@ -589,7 +589,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
             this->when[$key] = clone this->when[$key];
         }
 
-        if (this->else instanceof ExpressionInterface) {
+        if (this->else instanceof IExpression) {
             this->else = clone this->else;
         }
     }

@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\Database\Expression;
 
 use Cake\Database\Exception\DatabaseException;
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Type\ExpressionTypeCasterTrait;
 use Cake\Database\ValueBinder;
 use Closure;
@@ -27,7 +27,7 @@ use Closure;
  * involving a field an operator and a value. In its most common form the
  * string representation of a comparison is `field = value`
  */
-class ComparisonExpression implements ExpressionInterface, FieldInterface
+class ComparisonExpression implements IExpression, FieldInterface
 {
     use ExpressionTypeCasterTrait;
     use FieldTrait;
@@ -61,17 +61,17 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
     protected $_isMultiple = false;
 
     /**
-     * A cached list of ExpressionInterface objects that were
+     * A cached list of IExpression objects that were
      * found in the value for this expression.
      *
-     * @var array<\Cake\Database\ExpressionInterface>
+     * @var array<\Cake\Database\IExpression>
      */
     protected $_valueExpressions = [];
 
     /**
      * Constructor
      *
-     * @param \Cake\Database\ExpressionInterface|string $field the field name to compare to a value
+     * @param \Cake\Database\IExpression|string $field the field name to compare to a value
      * @param mixed $value The value to be used in comparison
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
@@ -139,17 +139,17 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      */
     function sql(ValueBinder $binder): string
     {
-        /** @var \Cake\Database\ExpressionInterface|string $field */
+        /** @var \Cake\Database\IExpression|string $field */
         $field = this->_field;
 
-        if ($field instanceof ExpressionInterface) {
+        if ($field instanceof IExpression) {
             $field = $field->sql($binder);
         }
 
         if (this->_value instanceof IdentifierExpression) {
             $template = '%s %s %s';
             $value = this->_value->sql($binder);
-        } elseif (this->_value instanceof ExpressionInterface) {
+        } elseif (this->_value instanceof IExpression) {
             $template = '%s %s (%s)';
             $value = this->_value->sql($binder);
         } else {
@@ -164,12 +164,12 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this->_field instanceof ExpressionInterface) {
+        if (this->_field instanceof IExpression) {
             $callback(this->_field);
             this->_field->traverse($callback);
         }
 
-        if (this->_value instanceof ExpressionInterface) {
+        if (this->_value instanceof IExpression) {
             $callback(this->_value);
             this->_value->traverse($callback);
         }
@@ -192,7 +192,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
     function __clone()
     {
         foreach (['_value', '_field'] as $prop) {
-            if (this->{$prop} instanceof ExpressionInterface) {
+            if (this->{$prop} instanceof IExpression) {
                 this->{$prop} = clone this->{$prop};
             }
         }
@@ -209,7 +209,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
     {
         $template = '%s ';
 
-        if (this->_field instanceof ExpressionInterface && !this->_field instanceof IdentifierExpression) {
+        if (this->_field instanceof IExpression && !this->_field instanceof IdentifierExpression) {
             $template = '(%s) ';
         }
 
@@ -224,7 +224,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
             // To avoid SQL errors when comparing a field to a list of empty values,
             // better just throw an exception here
             if ($value == '') {
-                $field = this->_field instanceof ExpressionInterface ? this->_field->sql($binder) : this->_field;
+                $field = this->_field instanceof IExpression ? this->_field->sql($binder) : this->_field;
                 /** @psalm-suppress PossiblyInvalidCast */
                 throw new DatabaseException(
                     "Impossible to generate condition with empty list of values for field ($field)"
@@ -282,15 +282,15 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
 
     /**
      * Returns an array with the original $values in the first position
-     * and all ExpressionInterface objects that could be found in the second
+     * and all IExpression objects that could be found in the second
      * position.
      *
-     * @param \Cake\Database\ExpressionInterface|iterable $values The rows to insert
+     * @param \Cake\Database\IExpression|iterable $values The rows to insert
      * @return array
      */
     protected function _collectExpressions($values): array
     {
-        if ($values instanceof ExpressionInterface) {
+        if ($values instanceof IExpression) {
             return [$values, []];
         }
 
@@ -303,7 +303,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
         }
 
         foreach ($values as $k => $v) {
-            if ($v instanceof ExpressionInterface) {
+            if ($v instanceof IExpression) {
                 $expressions[$k] = $v;
             }
 
