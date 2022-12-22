@@ -55,7 +55,7 @@ class BasicWidget implements WidgetInterface
      */
     public this(StringTemplate $templates)
     {
-        $this->_templates = $templates;
+        this->_templates = $templates;
     }
 
     /**
@@ -75,7 +75,7 @@ class BasicWidget implements WidgetInterface
      */
     public function render(array $data, ContextInterface $context): string
     {
-        $data = $this->mergeDefaults($data, $context);
+        $data = this->mergeDefaults($data, $context);
 
         $data['value'] = $data['val'];
         unset($data['val']);
@@ -87,7 +87,7 @@ class BasicWidget implements WidgetInterface
         $fieldName = $data['fieldName'] ?? null;
         if ($fieldName) {
             if ($data['type'] === 'number' && !isset($data['step'])) {
-                $data = $this->setStep($data, $context, $fieldName);
+                $data = this->setStep($data, $context, $fieldName);
             }
 
             $typesWithMaxLength = ['text', 'email', 'tel', 'url', 'search'];
@@ -95,15 +95,15 @@ class BasicWidget implements WidgetInterface
                 !array_key_exists('maxlength', $data)
                 && in_array($data['type'], $typesWithMaxLength, true)
             ) {
-                $data = $this->setMaxLength($data, $context, $fieldName);
+                $data = this->setMaxLength($data, $context, $fieldName);
             }
         }
 
-        return $this->_templates->format('input', [
+        return this->_templates->format('input', [
             'name' => $data['name'],
             'type' => $data['type'],
             'templateVars' => $data['templateVars'],
-            'attrs' => $this->_templates->formatAttributes(
+            'attrs' => this->_templates->formatAttributes(
                 $data,
                 ['name', 'type']
             ),
@@ -119,10 +119,10 @@ class BasicWidget implements WidgetInterface
      */
     protected function mergeDefaults(array $data, ContextInterface $context): array
     {
-        $data += $this->defaults;
+        $data += this->defaults;
 
         if (isset($data['fieldName']) && !array_key_exists('required', $data)) {
-            $data = $this->setRequired($data, $context, $data['fieldName']);
+            $data = this->setRequired($data, $context, $data['fieldName']);
         }
 
         return $data;

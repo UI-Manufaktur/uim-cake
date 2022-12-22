@@ -57,7 +57,7 @@ class TimeHelper extends Helper
             return $timezone;
         }
 
-        return $this->getConfig('outputTimezone');
+        return this->getConfig('outputTimezone');
     }
 
     /**
@@ -87,7 +87,7 @@ class TimeHelper extends Helper
      */
     public function nice($dateString = null, $timezone = null, ?string $locale = null): string
     {
-        $timezone = $this->_getTimezone($timezone);
+        $timezone = this->_getTimezone($timezone);
 
         return (new FrozenTime($dateString))->nice($timezone, $locale);
     }
@@ -224,7 +224,7 @@ class TimeHelper extends Helper
      */
     public function toAtom($dateString, $timezone = null): string
     {
-        $timezone = $this->_getTimezone($timezone) ?: date_default_timezone_get();
+        $timezone = this->_getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString))->timezone($timezone)->toAtomString();
     }
@@ -238,7 +238,7 @@ class TimeHelper extends Helper
      */
     public function toRss($dateString, $timezone = null): string
     {
-        $timezone = $this->_getTimezone($timezone) ?: date_default_timezone_get();
+        $timezone = this->_getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString))->timezone($timezone)->toRssString();
     }
@@ -267,7 +267,7 @@ class TimeHelper extends Helper
             'element' => null,
             'timezone' => null,
         ];
-        $options['timezone'] = $this->_getTimezone($options['timezone']);
+        $options['timezone'] = this->_getTimezone($options['timezone']);
         /** @psalm-suppress UndefinedInterfaceMethod */
         if ($options['timezone'] && $dateTime instanceof DateTimeInterface) {
             $dateTime = $dateTime->setTimezone($options['timezone']);
@@ -294,7 +294,7 @@ class TimeHelper extends Helper
             $relativeDate = sprintf(
                 '<%s%s>%s</%s>',
                 $element['tag'],
-                $this->templater()->formatAttributes($element, ['tag']),
+                this->templater()->formatAttributes($element, ['tag']),
                 $relativeDate,
                 $element['tag']
             );
@@ -362,7 +362,7 @@ class TimeHelper extends Helper
      */
     public function format($date, $format = null, $invalid = false, $timezone = null)
     {
-        return $this->i18nFormat($date, $format, $invalid, $timezone);
+        return this->i18nFormat($date, $format, $invalid, $timezone);
     }
 
     /**
@@ -382,7 +382,7 @@ class TimeHelper extends Helper
         if ($date === null) {
             return $invalid;
         }
-        $timezone = $this->_getTimezone($timezone);
+        $timezone = this->_getTimezone($timezone);
 
         try {
             $time = new FrozenTime($date);

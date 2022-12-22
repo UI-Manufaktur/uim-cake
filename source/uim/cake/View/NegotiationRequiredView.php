@@ -44,8 +44,8 @@ class NegotiationRequiredView extends View
      */
     public function initialize(): void
     {
-        $response = $this->getResponse()->withStatus(406);
-        $this->setResponse($response);
+        $response = this->getResponse()->withStatus(406);
+        this->setResponse($response);
     }
 
     /**

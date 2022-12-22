@@ -55,24 +55,24 @@ abstract class SerializedView extends View
     public function initialize(): void
     {
         parent::initialize();
-        if ($this->_responseType) {
-            $response = $this->getResponse()->withType($this->_responseType);
-            $this->setResponse($response);
+        if (this->_responseType) {
+            $response = this->getResponse()->withType(this->_responseType);
+            this->setResponse($response);
         }
     }
 
     /**
      * Load helpers only if serialization is disabled.
      *
-     * @return $this
+     * @return this
      */
     public function loadHelpers()
     {
-        if (!$this->getConfig('serialize')) {
+        if (!this->getConfig('serialize')) {
             parent::loadHelpers();
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -94,24 +94,24 @@ abstract class SerializedView extends View
      */
     public function render(?string $template = null, $layout = null): string
     {
-        $serialize = $this->getConfig('serialize', false);
+        $serialize = this->getConfig('serialize', false);
 
         if ($serialize === true) {
             $options = array_map(
                 function ($v) {
                     return '_' . $v;
                 },
-                array_keys($this->_defaultConfig)
+                array_keys(this->_defaultConfig)
             );
 
             $serialize = array_diff(
-                array_keys($this->viewVars),
+                array_keys(this->viewVars),
                 $options
             );
         }
         if ($serialize !== false) {
             try {
-                return $this->_serialize($serialize);
+                return this->_serialize($serialize);
             } catch (Exception | TypeError $e) {
                 throw new SerializationFailureException(
                     'Serialization of View data failed.',

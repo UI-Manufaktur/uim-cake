@@ -56,20 +56,20 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function isPresenceRequired()
     {
-        return $this->_validatePresent;
+        return this->_validatePresent;
     }
 
     /**
      * Sets whether a field is required to be present in data array.
      *
      * @param callable|string|bool $validatePresent Valid values are true, false, 'create', 'update' or a callable.
-     * @return $this
+     * @return this
      */
     public function requirePresence($validatePresent)
     {
-        $this->_validatePresent = $validatePresent;
+        this->_validatePresent = $validatePresent;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -79,7 +79,7 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function isEmptyAllowed()
     {
-        return $this->_allowEmpty;
+        return this->_allowEmpty;
     }
 
     /**
@@ -87,13 +87,13 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      *
      * @param callable|string|bool $allowEmpty Valid values are true, false,
      * 'create', 'update' or a callable.
-     * @return $this
+     * @return this
      */
     public function allowEmpty($allowEmpty)
     {
-        $this->_allowEmpty = $allowEmpty;
+        this->_allowEmpty = $allowEmpty;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -104,8 +104,8 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function rule(string $name): ?ValidationRule
     {
-        if (!empty($this->_rules[$name])) {
-            return $this->_rules[$name];
+        if (!empty(this->_rules[$name])) {
+            return this->_rules[$name];
         }
 
         return null;
@@ -118,7 +118,7 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function rules(): array
     {
-        return $this->_rules;
+        return this->_rules;
     }
 
     /**
@@ -134,16 +134,16 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $name The name under which the rule should be set
      * @param \Cake\Validation\ValidationRule|array $rule The validation rule to be set
-     * @return $this
+     * @return this
      */
     public function add(string $name, $rule)
     {
         if (!($rule instanceof ValidationRule)) {
             $rule = new ValidationRule($rule);
         }
-        $this->_rules[$name] = $rule;
+        this->_rules[$name] = $rule;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -158,13 +158,13 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      * ```
      *
      * @param string $name The name under which the rule should be unset
-     * @return $this
+     * @return this
      */
     public function remove(string $name)
     {
-        unset($this->_rules[$name]);
+        unset(this->_rules[$name]);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -175,7 +175,7 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function offsetExists($index): bool
     {
-        return isset($this->_rules[$index]);
+        return isset(this->_rules[$index]);
     }
 
     /**
@@ -186,7 +186,7 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function offsetGet($index): ValidationRule
     {
-        return $this->_rules[$index];
+        return this->_rules[$index];
     }
 
     /**
@@ -198,7 +198,7 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function offsetSet($index, $rule): void
     {
-        $this->add($index, $rule);
+        this->add($index, $rule);
     }
 
     /**
@@ -209,7 +209,7 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function offsetUnset($index): void
     {
-        unset($this->_rules[$index]);
+        unset(this->_rules[$index]);
     }
 
     /**
@@ -219,7 +219,7 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function getIterator(): Traversable
     {
-        return new ArrayIterator($this->_rules);
+        return new ArrayIterator(this->_rules);
     }
 
     /**
@@ -229,6 +229,6 @@ class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
      */
     public function count(): int
     {
-        return count($this->_rules);
+        return count(this->_rules);
     }
 }

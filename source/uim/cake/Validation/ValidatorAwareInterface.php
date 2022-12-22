@@ -38,7 +38,7 @@ interface ValidatorAwareInterface
      *
      * @param string $name The name of a validator to be set.
      * @param \Cake\Validation\Validator $validator Validator object to be set.
-     * @return $this
+     * @return this
      */
     public function setValidator(string $name, Validator $validator);
 

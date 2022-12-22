@@ -46,8 +46,8 @@ class HelperRegistry extends ObjectRegistry implements EventDispatcherInterface
      */
     public this(View $view)
     {
-        $this->_View = $view;
-        $this->setEventManager($view->getEventManager());
+        this->_View = $view;
+        this->setEventManager($view->getEventManager());
     }
 
     /**
@@ -62,16 +62,16 @@ class HelperRegistry extends ObjectRegistry implements EventDispatcherInterface
      */
     public function __isset(string $helper): bool
     {
-        if (isset($this->_loaded[$helper])) {
+        if (isset(this->_loaded[$helper])) {
             return true;
         }
 
         try {
-            $this->load($helper);
+            this->load($helper);
         } catch (MissingHelperException $exception) {
-            $plugin = $this->_View->getPlugin();
+            $plugin = this->_View->getPlugin();
             if (!empty($plugin)) {
-                $this->load($plugin . '.' . $helper);
+                this->load($plugin . '.' . $helper);
 
                 return true;
             }
@@ -92,11 +92,11 @@ class HelperRegistry extends ObjectRegistry implements EventDispatcherInterface
      */
     public function __get(string $name)
     {
-        if (isset($this->_loaded[$name])) {
-            return $this->_loaded[$name];
+        if (isset(this->_loaded[$name])) {
+            return this->_loaded[$name];
         }
-        if (isset($this->{$name})) {
-            return $this->_loaded[$name];
+        if (isset(this->{$name})) {
+            return this->_loaded[$name];
         }
 
         return null;
@@ -150,11 +150,11 @@ class HelperRegistry extends ObjectRegistry implements EventDispatcherInterface
     protected function _create($class, string $alias, array $config): Helper
     {
         /** @var \Cake\View\Helper $instance */
-        $instance = new $class($this->_View, $config);
+        $instance = new $class(this->_View, $config);
 
         $enable = $config['enabled'] ?? true;
         if ($enable) {
-            $this->getEventManager()->on($instance);
+            this->getEventManager()->on($instance);
         }
 
         return $instance;

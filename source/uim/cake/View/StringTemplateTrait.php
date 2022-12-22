@@ -37,13 +37,13 @@ trait StringTemplateTrait
      * Sets templates to use.
      *
      * @param array<string> $templates Templates to be added.
-     * @return $this
+     * @return this
      */
     public function setTemplates(array $templates)
     {
-        $this->templater()->add($templates);
+        this->templater()->add($templates);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -54,7 +54,7 @@ trait StringTemplateTrait
      */
     public function getTemplates(?string $template = null)
     {
-        return $this->templater()->get($template);
+        return this->templater()->get($template);
     }
 
     /**
@@ -66,7 +66,7 @@ trait StringTemplateTrait
      */
     public function formatTemplate(string $name, array $data): string
     {
-        return $this->templater()->format($name, $data);
+        return this->templater()->format($name, $data);
     }
 
     /**
@@ -76,22 +76,22 @@ trait StringTemplateTrait
      */
     public function templater(): StringTemplate
     {
-        if ($this->_templater === null) {
+        if (this->_templater === null) {
             /** @var class-string<\Cake\View\StringTemplate> $class */
-            $class = $this->getConfig('templateClass') ?: StringTemplate::class;
-            $this->_templater = new $class();
+            $class = this->getConfig('templateClass') ?: StringTemplate::class;
+            this->_templater = new $class();
 
-            $templates = $this->getConfig('templates');
+            $templates = this->getConfig('templates');
             if ($templates) {
                 if (is_string($templates)) {
-                    $this->_templater->add($this->_defaultConfig['templates']);
-                    $this->_templater->load($templates);
+                    this->_templater->add(this->_defaultConfig['templates']);
+                    this->_templater->load($templates);
                 } else {
-                    $this->_templater->add($templates);
+                    this->_templater->add($templates);
                 }
             }
         }
 
-        return $this->_templater;
+        return this->_templater;
     }
 }

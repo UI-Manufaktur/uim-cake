@@ -29,14 +29,14 @@ class FlashHelper extends Helper
     /**
      * Used to render the message set in FlashComponent::set()
      *
-     * In your template file: $this->Flash->render('somekey');
+     * In your template file: this->Flash->render('somekey');
      * Will default to flash if no param is passed
      *
      * You can pass additional information into the flash message generation. This allows you
      * to consolidate all the parameters for a given type of flash message into the view.
      *
      * ```
-     * echo $this->Flash->render('flash', ['params' => ['name' => $user['User']['name']]]);
+     * echo this->Flash->render('flash', ['params' => ['name' => $user['User']['name']]]);
      * ```
      *
      * This would pass the current user's name into the flash message, so you could create personalized
@@ -46,14 +46,14 @@ class FlashHelper extends Helper
      * custom elements allows you to fully customize how flash messages are generated.
      *
      * ```
-     * echo $this->Flash->render('flash', ['element' => 'my_custom_element']);
+     * echo this->Flash->render('flash', ['element' => 'my_custom_element']);
      * ```
      *
      * If you want to use an element from a plugin for rendering your flash message
      * you can use the dot notation for the plugin's element name:
      *
      * ```
-     * echo $this->Flash->render('flash', [
+     * echo this->Flash->render('flash', [
      *   'element' => 'MyPlugin.my_custom_element',
      * ]);
      * ```
@@ -69,7 +69,7 @@ class FlashHelper extends Helper
      */
     public function render(string $key = 'flash', array $options = []): ?string
     {
-        $messages = $this->_View->getRequest()->getFlash()->consume($key);
+        $messages = this->_View->getRequest()->getFlash()->consume($key);
         if ($messages === null) {
             return null;
         }
@@ -77,7 +77,7 @@ class FlashHelper extends Helper
         $out = '';
         foreach ($messages as $message) {
             $message = $options + $message;
-            $out .= $this->_View->element($message['element'], $message);
+            $out .= this->_View->element($message['element'], $message);
         }
 
         return $out;

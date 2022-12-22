@@ -43,7 +43,7 @@ class ContextFactory
     public this(array $providers = [])
     {
         foreach ($providers as $provider) {
-            $this->addProvider($provider['type'], $provider['callable']);
+            this->addProvider($provider['type'], $provider['callable']);
         }
     }
 
@@ -118,14 +118,14 @@ class ContextFactory
      *   can be used to overwrite existing providers.
      * @param callable $check A callable that returns an object
      *   when the form context is the correct type.
-     * @return $this
+     * @return this
      */
     public function addProvider(string $type, callable $check)
     {
-        $this->providers = [$type => ['type' => $type, 'callable' => $check]]
-            + $this->providers;
+        this->providers = [$type => ['type' => $type, 'callable' => $check]]
+            + this->providers;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -142,7 +142,7 @@ class ContextFactory
     {
         $data += ['entity' => null];
 
-        foreach ($this->providers as $provider) {
+        foreach (this->providers as $provider) {
             $check = $provider['callable'];
             $context = $check($request, $data);
             if ($context) {
