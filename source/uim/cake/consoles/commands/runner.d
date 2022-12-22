@@ -306,7 +306,7 @@ class CommandRunner : IEventDispatcher {
     protected auto createCommand(string myClassName, ConsoleIo $io) {
         if (!this.factory) {
             myContainer = null;
-            if (this.app instanceof ContainerApplicationInterface) {
+            if (this.app instanceof IContainerApplication) {
                 myContainer = this.app.getContainer();
             }
             this.factory = new CommandFactory(myContainer);
@@ -327,7 +327,7 @@ class CommandRunner : IEventDispatcher {
      *
      */
     protected void loadRoutes() {
-        if (!(this.app instanceof RoutingApplicationInterface)) {
+        if (!(this.app instanceof IRoutingApplication)) {
             return;
         }
         myBuilder = Router::createRouteBuilder("/");

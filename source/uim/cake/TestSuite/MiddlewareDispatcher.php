@@ -22,7 +22,7 @@ use Cake\Http\Server;
 use Cake\Http\ServerRequest;
 use Cake\Http\ServerRequestFactory;
 use Cake\Routing\Router;
-use Cake\Routing\RoutingApplicationInterface;
+use Cake\Routing\IRoutingApplication;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -82,7 +82,7 @@ class MiddlewareDispatcher
         }
         $builder = Router::createRouteBuilder('/');
 
-        if (this->app instanceof RoutingApplicationInterface) {
+        if (this->app instanceof IRoutingApplication) {
             this->app->routes($builder);
         }
         if (this->app instanceof IPluginApplication) {

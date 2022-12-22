@@ -19,7 +19,7 @@ namespace Cake\Routing;
 /**
  * Interface for applications that use routing.
  */
-interface RoutingApplicationInterface
+interface IRoutingApplication
 {
     /**
      * Define the routes for an application.

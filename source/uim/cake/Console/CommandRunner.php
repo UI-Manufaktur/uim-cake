@@ -21,14 +21,14 @@ use Cake\Console\Command\HelpCommand;
 use Cake\Console\Exception\MissingOptionException;
 use Cake\Console\Exception\StopException;
 use Cake\Core\ConsoleApplicationInterface;
-use Cake\Core\ContainerApplicationInterface;
+use Cake\Core\IContainerApplication;
 use Cake\Core\IPluginApplication;
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventManager;
 use Cake\Event\IEventManager;
 use Cake\Routing\Router;
-use Cake\Routing\RoutingApplicationInterface;
+use Cake\Routing\IRoutingApplication;
 use Cake\Utility\Inflector;
 use InvalidArgumentException;
 use RuntimeException;
@@ -366,7 +366,7 @@ class CommandRunner implements EventDispatcherInterface
     {
         if (!this->factory) {
             $container = null;
-            if (this->app instanceof ContainerApplicationInterface) {
+            if (this->app instanceof IContainerApplication) {
                 $container = this->app->getContainer();
             }
             this->factory = new CommandFactory($container);
@@ -389,7 +389,7 @@ class CommandRunner implements EventDispatcherInterface
      */
     protected function loadRoutes(): void
     {
-        if (!(this->app instanceof RoutingApplicationInterface)) {
+        if (!(this->app instanceof IRoutingApplication)) {
             return;
         }
         $builder = Router::createRouteBuilder('/');

@@ -16,10 +16,10 @@ import uim.cake;
  */
 abstract class BaseApplication :
     IConsoleApplication,
-    ContainerApplicationInterface,
+    IContainerApplication,
     HttpApplicationInterface,
     IPluginApplication,
-    RoutingApplicationInterface
+    IRoutingApplication
 {
     use EventDispatcherTrait;
 

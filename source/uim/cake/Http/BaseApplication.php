@@ -21,7 +21,7 @@ use Cake\Console\CommandCollection;
 use Cake\Controller\ControllerFactory;
 use Cake\Core\ConsoleApplicationInterface;
 use Cake\Core\Container;
-use Cake\Core\ContainerApplicationInterface;
+use Cake\Core\IContainerApplication;
 use Cake\Core\IContainer;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Core\HttpApplicationInterface;
@@ -33,7 +33,7 @@ use Cake\Event\EventManager;
 use Cake\Event\IEventManager;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
-use Cake\Routing\RoutingApplicationInterface;
+use Cake\Routing\IRoutingApplication;
 use Closure;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -51,10 +51,10 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 abstract class BaseApplication implements
     ConsoleApplicationInterface,
-    ContainerApplicationInterface,
+    IContainerApplication,
     HttpApplicationInterface,
     IPluginApplication,
-    RoutingApplicationInterface
+    IRoutingApplication
 {
     use EventDispatcherTrait;
 

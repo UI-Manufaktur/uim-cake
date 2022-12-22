@@ -6,7 +6,7 @@ module uim.cake.core;
  * @experimental This interface is not final and can have additional
  *   methods and parameters added in future minor releases.
  */
-interface ContainerApplicationInterface
+interface IContainerApplication
 {
     /**
      * Register services to the container

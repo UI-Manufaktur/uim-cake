@@ -19,7 +19,7 @@ namespace Cake\Core;
 /**
  * Interface for applications that configure and use a dependency injection container.
  */
-interface ContainerApplicationInterface
+interface IContainerApplication
 {
     /**
      * Register services to the container

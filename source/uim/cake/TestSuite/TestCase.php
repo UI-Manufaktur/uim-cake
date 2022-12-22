@@ -376,7 +376,7 @@ abstract class TestCase extends BaseTestCase
         $className = Configure::read('App.namespace') . '\\Application';
         try {
             $reflect = new ReflectionClass($className);
-            /** @var \Cake\Routing\RoutingApplicationInterface $app */
+            /** @var \Cake\Routing\IRoutingApplication $app */
             $app = $reflect->newInstanceArgs($appArgs);
         } catch (ReflectionException $e) {
             throw new LogicException(sprintf('Cannot load "%s" to load routes from.', $className), 0, $e);

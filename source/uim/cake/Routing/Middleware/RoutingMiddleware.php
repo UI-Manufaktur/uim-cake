@@ -26,7 +26,7 @@ use Cake\Routing\Exception\FailedRouteCacheException;
 use Cake\Routing\Exception\RedirectException as DeprecatedRedirectException;
 use Cake\Routing\RouteCollection;
 use Cake\Routing\Router;
-use Cake\Routing\RoutingApplicationInterface;
+use Cake\Routing\IRoutingApplication;
 use Exception;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -50,7 +50,7 @@ class RoutingMiddleware implements MiddlewareInterface
     /**
      * The application that will have its routing hook invoked.
      *
-     * @var \Cake\Routing\RoutingApplicationInterface
+     * @var \Cake\Routing\IRoutingApplication
      */
     protected $app;
 
@@ -65,10 +65,10 @@ class RoutingMiddleware implements MiddlewareInterface
     /**
      * Constructor
      *
-     * @param \Cake\Routing\RoutingApplicationInterface $app The application instance that routes are defined on.
+     * @param \Cake\Routing\IRoutingApplication $app The application instance that routes are defined on.
      * @param string|null $cacheConfig The cache config name to use or null to disable routes cache
      */
-    public this(RoutingApplicationInterface $app, ?string $cacheConfig = null)
+    public this(IRoutingApplication $app, ?string $cacheConfig = null)
     {
         if ($cacheConfig != null) {
             deprecationWarning(
