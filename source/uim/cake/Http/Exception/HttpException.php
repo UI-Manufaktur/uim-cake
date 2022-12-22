@@ -45,7 +45,7 @@ class HttpException extends CakeException
      */
     public function setHeader(string $header, $value = null): void
     {
-        $this->headers[$header] = $value;
+        this->headers[$header] = $value;
     }
 
     /**
@@ -56,7 +56,7 @@ class HttpException extends CakeException
      */
     public function setHeaders(array $headers): void
     {
-        $this->headers = $headers;
+        this->headers = $headers;
     }
 
     /**
@@ -66,6 +66,6 @@ class HttpException extends CakeException
      */
     public function getHeaders(): array
     {
-        return $this->headers;
+        return this->headers;
     }
 }

@@ -154,20 +154,20 @@ class Cookie implements CookieInterface
         ?bool $httpOnly = null,
         ?string $sameSite = null
     ) {
-        $this->validateName($name);
-        $this->name = $name;
+        this->validateName($name);
+        this->name = $name;
 
-        $this->_setValue($value);
+        this->_setValue($value);
 
-        $this->domain = $domain ?? static::$defaults['domain'];
-        $this->httpOnly = $httpOnly ?? static::$defaults['httponly'];
-        $this->path = $path ?? static::$defaults['path'];
-        $this->secure = $secure ?? static::$defaults['secure'];
+        this->domain = $domain ?? static::$defaults['domain'];
+        this->httpOnly = $httpOnly ?? static::$defaults['httponly'];
+        this->path = $path ?? static::$defaults['path'];
+        this->secure = $secure ?? static::$defaults['secure'];
         if ($sameSite === null) {
-            $this->sameSite = static::$defaults['samesite'];
+            this->sameSite = static::$defaults['samesite'];
         } else {
-            $this->validateSameSiteValue($sameSite);
-            $this->sameSite = $sameSite;
+            this->validateSameSiteValue($sameSite);
+            this->sameSite = $sameSite;
         }
 
         if ($expiresAt) {
@@ -175,7 +175,7 @@ class Cookie implements CookieInterface
         } else {
             $expiresAt = static::$defaults['expires'];
         }
-        $this->expiresAt = $expiresAt;
+        this->expiresAt = $expiresAt;
     }
 
     /**
@@ -333,31 +333,31 @@ class Cookie implements CookieInterface
      */
     public function toHeaderValue(): string
     {
-        $value = $this->value;
-        if ($this->isExpanded) {
+        $value = this->value;
+        if (this->isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $value = $this->_flatten($this->value);
+            $value = this->_flatten(this->value);
         }
         $headerValue = [];
         /** @psalm-suppress PossiblyInvalidArgument */
-        $headerValue[] = sprintf('%s=%s', $this->name, rawurlencode($value));
+        $headerValue[] = sprintf('%s=%s', this->name, rawurlencode($value));
 
-        if ($this->expiresAt) {
-            $headerValue[] = sprintf('expires=%s', $this->getFormattedExpires());
+        if (this->expiresAt) {
+            $headerValue[] = sprintf('expires=%s', this->getFormattedExpires());
         }
-        if ($this->path !== '') {
-            $headerValue[] = sprintf('path=%s', $this->path);
+        if (this->path !== '') {
+            $headerValue[] = sprintf('path=%s', this->path);
         }
-        if ($this->domain !== '') {
-            $headerValue[] = sprintf('domain=%s', $this->domain);
+        if (this->domain !== '') {
+            $headerValue[] = sprintf('domain=%s', this->domain);
         }
-        if ($this->sameSite) {
-            $headerValue[] = sprintf('samesite=%s', $this->sameSite);
+        if (this->sameSite) {
+            $headerValue[] = sprintf('samesite=%s', this->sameSite);
         }
-        if ($this->secure) {
+        if (this->secure) {
             $headerValue[] = 'secure';
         }
-        if ($this->httpOnly) {
+        if (this->httpOnly) {
             $headerValue[] = 'httponly';
         }
 
@@ -369,8 +369,8 @@ class Cookie implements CookieInterface
      */
     public function withName(string $name)
     {
-        $this->validateName($name);
-        $new = clone $this;
+        this->validateName($name);
+        $new = clone this;
         $new->name = $name;
 
         return $new;
@@ -381,7 +381,7 @@ class Cookie implements CookieInterface
      */
     public function getId(): string
     {
-        return "{$this->name};{$this->domain};{$this->path}";
+        return "{this->name};{this->domain};{this->path}";
     }
 
     /**
@@ -389,7 +389,7 @@ class Cookie implements CookieInterface
      */
     public function getName(): string
     {
-        return $this->name;
+        return this->name;
     }
 
     /**
@@ -418,7 +418,7 @@ class Cookie implements CookieInterface
      */
     public function getValue()
     {
-        return $this->value;
+        return this->value;
     }
 
     /**
@@ -433,7 +433,7 @@ class Cookie implements CookieInterface
     {
         deprecationWarning('Cookie::getStringValue() is deprecated. Use getScalarValue() instead.');
 
-        return $this->getScalarValue();
+        return this->getScalarValue();
     }
 
     /**
@@ -441,12 +441,12 @@ class Cookie implements CookieInterface
      */
     public function getScalarValue()
     {
-        if ($this->isExpanded) {
+        if (this->isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            return $this->_flatten($this->value);
+            return this->_flatten(this->value);
         }
 
-        return $this->value;
+        return this->value;
     }
 
     /**
@@ -454,7 +454,7 @@ class Cookie implements CookieInterface
      */
     public function withValue($value)
     {
-        $new = clone $this;
+        $new = clone this;
         $new->_setValue($value);
 
         return $new;
@@ -468,8 +468,8 @@ class Cookie implements CookieInterface
      */
     protected function _setValue($value): void
     {
-        $this->isExpanded = is_array($value);
-        $this->value = $value;
+        this->isExpanded = is_array($value);
+        this->value = $value;
     }
 
     /**
@@ -477,7 +477,7 @@ class Cookie implements CookieInterface
      */
     public function withPath(string $path)
     {
-        $new = clone $this;
+        $new = clone this;
         $new->path = $path;
 
         return $new;
@@ -488,7 +488,7 @@ class Cookie implements CookieInterface
      */
     public function getPath(): string
     {
-        return $this->path;
+        return this->path;
     }
 
     /**
@@ -496,7 +496,7 @@ class Cookie implements CookieInterface
      */
     public function withDomain(string $domain)
     {
-        $new = clone $this;
+        $new = clone this;
         $new->domain = $domain;
 
         return $new;
@@ -507,7 +507,7 @@ class Cookie implements CookieInterface
      */
     public function getDomain(): string
     {
-        return $this->domain;
+        return this->domain;
     }
 
     /**
@@ -515,7 +515,7 @@ class Cookie implements CookieInterface
      */
     public function isSecure(): bool
     {
-        return $this->secure;
+        return this->secure;
     }
 
     /**
@@ -523,7 +523,7 @@ class Cookie implements CookieInterface
      */
     public function withSecure(bool $secure)
     {
-        $new = clone $this;
+        $new = clone this;
         $new->secure = $secure;
 
         return $new;
@@ -534,7 +534,7 @@ class Cookie implements CookieInterface
      */
     public function withHttpOnly(bool $httpOnly)
     {
-        $new = clone $this;
+        $new = clone this;
         $new->httpOnly = $httpOnly;
 
         return $new;
@@ -545,7 +545,7 @@ class Cookie implements CookieInterface
      */
     public function isHttpOnly(): bool
     {
-        return $this->httpOnly;
+        return this->httpOnly;
     }
 
     /**
@@ -553,7 +553,7 @@ class Cookie implements CookieInterface
      */
     public function withExpiry($dateTime)
     {
-        $new = clone $this;
+        $new = clone this;
         $new->expiresAt = $dateTime->setTimezone(new DateTimeZone('GMT'));
 
         return $new;
@@ -564,7 +564,7 @@ class Cookie implements CookieInterface
      */
     public function getExpiry()
     {
-        return $this->expiresAt;
+        return this->expiresAt;
     }
 
     /**
@@ -572,11 +572,11 @@ class Cookie implements CookieInterface
      */
     public function getExpiresTimestamp(): ?int
     {
-        if (!$this->expiresAt) {
+        if (!this->expiresAt) {
             return null;
         }
 
-        return (int)$this->expiresAt->format('U');
+        return (int)this->expiresAt->format('U');
     }
 
     /**
@@ -584,11 +584,11 @@ class Cookie implements CookieInterface
      */
     public function getFormattedExpires(): string
     {
-        if (!$this->expiresAt) {
+        if (!this->expiresAt) {
             return '';
         }
 
-        return $this->expiresAt->format(static::EXPIRES_FORMAT);
+        return this->expiresAt->format(static::EXPIRES_FORMAT);
     }
 
     /**
@@ -597,11 +597,11 @@ class Cookie implements CookieInterface
     public function isExpired($time = null): bool
     {
         $time = $time ?: new DateTimeImmutable('now', new DateTimeZone('UTC'));
-        if (!$this->expiresAt) {
+        if (!this->expiresAt) {
             return false;
         }
 
-        return $this->expiresAt < $time;
+        return this->expiresAt < $time;
     }
 
     /**
@@ -609,7 +609,7 @@ class Cookie implements CookieInterface
      */
     public function withNeverExpire()
     {
-        $new = clone $this;
+        $new = clone this;
         $new->expiresAt = new DateTimeImmutable('2038-01-01');
 
         return $new;
@@ -620,7 +620,7 @@ class Cookie implements CookieInterface
      */
     public function withExpired()
     {
-        $new = clone $this;
+        $new = clone this;
         $new->expiresAt = new DateTimeImmutable('1970-01-01 00:00:01');
 
         return $new;
@@ -631,7 +631,7 @@ class Cookie implements CookieInterface
      */
     public function getSameSite(): ?string
     {
-        return $this->sameSite;
+        return this->sameSite;
     }
 
     /**
@@ -640,10 +640,10 @@ class Cookie implements CookieInterface
     public function withSameSite(?string $sameSite)
     {
         if ($sameSite !== null) {
-            $this->validateSameSiteValue($sameSite);
+            this->validateSameSiteValue($sameSite);
         }
 
-        $new = clone $this;
+        $new = clone this;
         $new->sameSite = $sameSite;
 
         return $new;
@@ -676,13 +676,13 @@ class Cookie implements CookieInterface
      */
     public function check(string $path): bool
     {
-        if ($this->isExpanded === false) {
+        if (this->isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $this->value = $this->_expand($this->value);
+            this->value = this->_expand(this->value);
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        return Hash::check($this->value, $path);
+        return Hash::check(this->value, $path);
     }
 
     /**
@@ -694,7 +694,7 @@ class Cookie implements CookieInterface
      */
     public function withAddedValue(string $path, $value)
     {
-        $new = clone $this;
+        $new = clone this;
         if ($new->isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $new->value = $new->_expand($new->value);
@@ -714,7 +714,7 @@ class Cookie implements CookieInterface
      */
     public function withoutAddedValue(string $path)
     {
-        $new = clone $this;
+        $new = clone this;
         if ($new->isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $new->value = $new->_expand($new->value);
@@ -737,17 +737,17 @@ class Cookie implements CookieInterface
      */
     public function read(?string $path = null)
     {
-        if ($this->isExpanded === false) {
+        if (this->isExpanded === false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $this->value = $this->_expand($this->value);
+            this->value = this->_expand(this->value);
         }
 
         if ($path === null) {
-            return $this->value;
+            return this->value;
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        return Hash::get($this->value, $path);
+        return Hash::get(this->value, $path);
     }
 
     /**
@@ -757,7 +757,7 @@ class Cookie implements CookieInterface
      */
     public function isExpanded(): bool
     {
-        return $this->isExpanded;
+        return this->isExpanded;
     }
 
     /**
@@ -766,15 +766,15 @@ class Cookie implements CookieInterface
     public function getOptions(): array
     {
         $options = [
-            'expires' => (int)$this->getExpiresTimestamp(),
-            'path' => $this->path,
-            'domain' => $this->domain,
-            'secure' => $this->secure,
-            'httponly' => $this->httpOnly,
+            'expires' => (int)this->getExpiresTimestamp(),
+            'path' => this->path,
+            'domain' => this->domain,
+            'secure' => this->secure,
+            'httponly' => this->httpOnly,
         ];
 
-        if ($this->sameSite !== null) {
-            $options['samesite'] = $this->sameSite;
+        if (this->sameSite !== null) {
+            $options['samesite'] = this->sameSite;
         }
 
         return $options;
@@ -786,9 +786,9 @@ class Cookie implements CookieInterface
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
-            'value' => $this->getScalarValue(),
-        ] + $this->getOptions();
+            'name' => this->name,
+            'value' => this->getScalarValue(),
+        ] + this->getOptions();
     }
 
     /**
@@ -811,7 +811,7 @@ class Cookie implements CookieInterface
      */
     protected function _expand(string $string)
     {
-        $this->isExpanded = true;
+        this->isExpanded = true;
         $first = substr($string, 0, 1);
         if ($first === '{' || $first === '[') {
             $ret = json_decode($string, true);

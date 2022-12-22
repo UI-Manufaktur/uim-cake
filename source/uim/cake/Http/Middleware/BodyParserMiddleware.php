@@ -63,19 +63,19 @@ class BodyParserMiddleware implements MiddlewareInterface
     {
         $options += ['json' => true, 'xml' => false, 'methods' => null];
         if ($options['json']) {
-            $this->addParser(
+            this->addParser(
                 ['application/json', 'text/json'],
-                Closure::fromCallable([$this, 'decodeJson'])
+                Closure::fromCallable([this, 'decodeJson'])
             );
         }
         if ($options['xml']) {
-            $this->addParser(
+            this->addParser(
                 ['application/xml', 'text/xml'],
-                Closure::fromCallable([$this, 'decodeXml'])
+                Closure::fromCallable([this, 'decodeXml'])
             );
         }
         if ($options['methods']) {
-            $this->setMethods($options['methods']);
+            this->setMethods($options['methods']);
         }
     }
 
@@ -83,13 +83,13 @@ class BodyParserMiddleware implements MiddlewareInterface
      * Set the HTTP methods to parse request bodies on.
      *
      * @param array<string> $methods The methods to parse data on.
-     * @return $this
+     * @return this
      */
     public function setMethods(array $methods)
     {
-        $this->methods = $methods;
+        this->methods = $methods;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -99,7 +99,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      */
     public function getMethods(): array
     {
-        return $this->methods;
+        return this->methods;
     }
 
     /**
@@ -120,16 +120,16 @@ class BodyParserMiddleware implements MiddlewareInterface
      * @param array<string> $types An array of content-type header values to match. eg. application/json
      * @param \Closure $parser The parser function. Must return an array of data to be inserted
      *   into the request.
-     * @return $this
+     * @return this
      */
     public function addParser(array $types, Closure $parser)
     {
         foreach ($types as $type) {
             $type = strtolower($type);
-            $this->parsers[$type] = $parser;
+            this->parsers[$type] = $parser;
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -139,7 +139,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      */
     public function getParsers(): array
     {
-        return $this->parsers;
+        return this->parsers;
     }
 
     /**
@@ -153,16 +153,16 @@ class BodyParserMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if (!in_array($request->getMethod(), $this->methods, true)) {
+        if (!in_array($request->getMethod(), this->methods, true)) {
             return $handler->handle($request);
         }
         [$type] = explode(';', $request->getHeaderLine('Content-Type'));
         $type = strtolower($type);
-        if (!isset($this->parsers[$type])) {
+        if (!isset(this->parsers[$type])) {
             return $handler->handle($request);
         }
 
-        $parser = $this->parsers[$type];
+        $parser = this->parsers[$type];
         $result = $parser($request->getBody()->getContents());
         if (!is_array($result)) {
             throw new BadRequestException();

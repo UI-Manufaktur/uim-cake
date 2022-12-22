@@ -45,11 +45,11 @@ class Curl implements AdapterInterface
         }
 
         $ch = curl_init();
-        $options = $this->buildOptions($request, $options);
+        $options = this->buildOptions($request, $options);
         curl_setopt_array($ch, $options);
 
         /** @var string|false $body */
-        $body = $this->exec($ch);
+        $body = this->exec($ch);
         if ($body === false) {
             $errorCode = curl_errno($ch);
             $error = curl_error($ch);
@@ -67,7 +67,7 @@ class Curl implements AdapterInterface
             throw new NetworkException($message, $request);
         }
 
-        $responses = $this->createResponse($ch, $body);
+        $responses = this->createResponse($ch, $body);
         curl_close($ch);
 
         return $responses;
@@ -89,7 +89,7 @@ class Curl implements AdapterInterface
 
         $out = [
             CURLOPT_URL => (string)$request->getUri(),
-            CURLOPT_HTTP_VERSION => $this->getProtocolVersion($request),
+            CURLOPT_HTTP_VERSION => this->getProtocolVersion($request),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER => true,
             CURLOPT_HTTPHEADER => $headers,

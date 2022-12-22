@@ -69,9 +69,9 @@ class CorsBuilder
      */
     public this(MessageInterface $response, string $origin, bool $isSsl = false)
     {
-        $this->_origin = $origin;
-        $this->_isSsl = $isSsl;
-        $this->_response = $response;
+        this->_origin = $origin;
+        this->_isSsl = $isSsl;
+        this->_response = $response;
     }
 
     /**
@@ -84,13 +84,13 @@ class CorsBuilder
      */
     public function build(): MessageInterface
     {
-        $response = $this->_response;
-        if (empty($this->_origin)) {
+        $response = this->_response;
+        if (empty(this->_origin)) {
             return $response;
         }
 
-        if (isset($this->_headers['Access-Control-Allow-Origin'])) {
-            foreach ($this->_headers as $key => $value) {
+        if (isset(this->_headers['Access-Control-Allow-Origin'])) {
+            foreach (this->_headers as $key => $value) {
                 $response = $response->withHeader($key, $value);
             }
         }
@@ -105,21 +105,21 @@ class CorsBuilder
      * You can use `*.example.com` wildcards to accept subdomains, or `*` to allow all domains
      *
      * @param array<string>|string $domains The allowed domains
-     * @return $this
+     * @return this
      */
     public function allowOrigin($domains)
     {
-        $allowed = $this->_normalizeDomains((array)$domains);
+        $allowed = this->_normalizeDomains((array)$domains);
         foreach ($allowed as $domain) {
-            if (!preg_match($domain['preg'], $this->_origin)) {
+            if (!preg_match($domain['preg'], this->_origin)) {
                 continue;
             }
-            $value = $domain['original'] === '*' ? '*' : $this->_origin;
-            $this->_headers['Access-Control-Allow-Origin'] = $value;
+            $value = $domain['original'] === '*' ? '*' : this->_origin;
+            this->_headers['Access-Control-Allow-Origin'] = $value;
             break;
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -139,7 +139,7 @@ class CorsBuilder
 
             $original = $preg = $domain;
             if (strpos($domain, '://') === false) {
-                $preg = ($this->_isSsl ? 'https://' : 'http://') . $domain;
+                $preg = (this->_isSsl ? 'https://' : 'http://') . $domain;
             }
             $preg = '@^' . str_replace('\*', '.*', preg_quote($preg, '@')) . '$@';
             $result[] = compact('original', 'preg');
@@ -152,63 +152,63 @@ class CorsBuilder
      * Set the list of allowed HTTP Methods.
      *
      * @param array<string> $methods The allowed HTTP methods
-     * @return $this
+     * @return this
      */
     public function allowMethods(array $methods)
     {
-        $this->_headers['Access-Control-Allow-Methods'] = implode(', ', $methods);
+        this->_headers['Access-Control-Allow-Methods'] = implode(', ', $methods);
 
-        return $this;
+        return this;
     }
 
     /**
      * Enable cookies to be sent in CORS requests.
      *
-     * @return $this
+     * @return this
      */
     public function allowCredentials()
     {
-        $this->_headers['Access-Control-Allow-Credentials'] = 'true';
+        this->_headers['Access-Control-Allow-Credentials'] = 'true';
 
-        return $this;
+        return this;
     }
 
     /**
      * Allowed headers that can be sent in CORS requests.
      *
      * @param array<string> $headers The list of headers to accept in CORS requests.
-     * @return $this
+     * @return this
      */
     public function allowHeaders(array $headers)
     {
-        $this->_headers['Access-Control-Allow-Headers'] = implode(', ', $headers);
+        this->_headers['Access-Control-Allow-Headers'] = implode(', ', $headers);
 
-        return $this;
+        return this;
     }
 
     /**
      * Define the headers a client library/browser can expose to scripting
      *
      * @param array<string> $headers The list of headers to expose CORS responses
-     * @return $this
+     * @return this
      */
     public function exposeHeaders(array $headers)
     {
-        $this->_headers['Access-Control-Expose-Headers'] = implode(', ', $headers);
+        this->_headers['Access-Control-Expose-Headers'] = implode(', ', $headers);
 
-        return $this;
+        return this;
     }
 
     /**
      * Define the max-age preflight OPTIONS requests are valid for.
      *
      * @param string|int $age The max-age for OPTIONS requests in seconds
-     * @return $this
+     * @return this
      */
     public function maxAge($age)
     {
-        $this->_headers['Access-Control-Max-Age'] = $age;
+        this->_headers['Access-Control-Max-Age'] = $age;
 
-        return $this;
+        return this;
     }
 }

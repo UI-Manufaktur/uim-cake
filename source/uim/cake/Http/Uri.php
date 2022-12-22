@@ -55,9 +55,9 @@ class Uri implements UriInterface
      */
     public this(UriInterface $uri, string $base, string $webroot)
     {
-        $this->uri = $uri;
-        $this->base = $base;
-        $this->webroot = $webroot;
+        this->uri = $uri;
+        this->base = $base;
+        this->webroot = $webroot;
     }
 
     /**
@@ -69,7 +69,7 @@ class Uri implements UriInterface
     public function __get(string $name)
     {
         if ($name === 'base' || $name === 'webroot') {
-            return $this->{$name};
+            return this->{$name};
         }
         throw new UnexpectedValueException("Undefined property via __get('{$name}')");
     }
@@ -81,7 +81,7 @@ class Uri implements UriInterface
      */
     public function getUri(): UriInterface
     {
-        return $this->uri;
+        return this->uri;
     }
 
     /**
@@ -91,7 +91,7 @@ class Uri implements UriInterface
      */
     public function getBase(): string
     {
-        return $this->base;
+        return this->base;
     }
 
     /**
@@ -101,7 +101,7 @@ class Uri implements UriInterface
      */
     public function getWebroot(): string
     {
-        return $this->webroot;
+        return this->webroot;
     }
 
     /**
@@ -109,7 +109,7 @@ class Uri implements UriInterface
      */
     public function getScheme()
     {
-        return $this->uri->getScheme();
+        return this->uri->getScheme();
     }
 
     /**
@@ -117,7 +117,7 @@ class Uri implements UriInterface
      */
     public function getAuthority()
     {
-        return $this->uri->getAuthority();
+        return this->uri->getAuthority();
     }
 
     /**
@@ -125,7 +125,7 @@ class Uri implements UriInterface
      */
     public function getUserInfo()
     {
-        return $this->uri->getUserInfo();
+        return this->uri->getUserInfo();
     }
 
     /**
@@ -133,7 +133,7 @@ class Uri implements UriInterface
      */
     public function getHost()
     {
-        return $this->uri->getHost();
+        return this->uri->getHost();
     }
 
     /**
@@ -141,7 +141,7 @@ class Uri implements UriInterface
      */
     public function getPort()
     {
-        return $this->uri->getPort();
+        return this->uri->getPort();
     }
 
     /**
@@ -149,7 +149,7 @@ class Uri implements UriInterface
      */
     public function getPath()
     {
-        return $this->uri->getPath();
+        return this->uri->getPath();
     }
 
     /**
@@ -157,7 +157,7 @@ class Uri implements UriInterface
      */
     public function getQuery()
     {
-        return $this->uri->getQuery();
+        return this->uri->getQuery();
     }
 
     /**
@@ -165,7 +165,7 @@ class Uri implements UriInterface
      */
     public function getFragment()
     {
-        return $this->uri->getFragment();
+        return this->uri->getFragment();
     }
 
     /**
@@ -173,8 +173,8 @@ class Uri implements UriInterface
      */
     public function withScheme($scheme)
     {
-        $new = clone $this;
-        $new->uri = $this->uri->withScheme($scheme);
+        $new = clone this;
+        $new->uri = this->uri->withScheme($scheme);
 
         return $new;
     }
@@ -184,8 +184,8 @@ class Uri implements UriInterface
      */
     public function withUserInfo($user, $password = null)
     {
-        $new = clone $this;
-        $new->uri = $this->uri->withUserInfo($user, $password);
+        $new = clone this;
+        $new->uri = this->uri->withUserInfo($user, $password);
 
         return $new;
     }
@@ -195,8 +195,8 @@ class Uri implements UriInterface
      */
     public function withHost($host)
     {
-        $new = clone $this;
-        $new->uri = $this->uri->withHost($host);
+        $new = clone this;
+        $new->uri = this->uri->withHost($host);
 
         return $new;
     }
@@ -206,8 +206,8 @@ class Uri implements UriInterface
      */
     public function withPort($port)
     {
-        $new = clone $this;
-        $new->uri = $this->uri->withPort($port);
+        $new = clone this;
+        $new->uri = this->uri->withPort($port);
 
         return $new;
     }
@@ -217,8 +217,8 @@ class Uri implements UriInterface
      */
     public function withPath($path)
     {
-        $new = clone $this;
-        $new->uri = $this->uri->withPath($path);
+        $new = clone this;
+        $new->uri = this->uri->withPath($path);
 
         return $new;
     }
@@ -228,8 +228,8 @@ class Uri implements UriInterface
      */
     public function withQuery($query)
     {
-        $new = clone $this;
-        $new->uri = $this->uri->withQuery($query);
+        $new = clone this;
+        $new->uri = this->uri->withQuery($query);
 
         return $new;
     }
@@ -239,8 +239,8 @@ class Uri implements UriInterface
      */
     public function withFragment($fragment)
     {
-        $new = clone $this;
-        $new->uri = $this->uri->withFragment($fragment);
+        $new = clone this;
+        $new->uri = this->uri->withFragment($fragment);
 
         return $new;
     }
@@ -250,6 +250,6 @@ class Uri implements UriInterface
      */
     public function __toString()
     {
-        return $this->uri->__toString();
+        return this->uri->__toString();
     }
 }

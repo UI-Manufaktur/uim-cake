@@ -57,7 +57,7 @@ class Mock implements AdapterInterface
             $type = getTypeName($options['match']);
             throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{$type}`.");
         }
-        $this->responses[] = [
+        this->responses[] = [
             'request' => $request,
             'response' => $response,
             'options' => $options,
@@ -77,11 +77,11 @@ class Mock implements AdapterInterface
         $method = $request->getMethod();
         $requestUri = (string)$request->getUri();
 
-        foreach ($this->responses as $index => $mock) {
+        foreach (this->responses as $index => $mock) {
             if ($method !== $mock['request']->getMethod()) {
                 continue;
             }
-            if (!$this->urlMatches($requestUri, $mock['request'])) {
+            if (!this->urlMatches($requestUri, $mock['request'])) {
                 continue;
             }
             if (isset($mock['options']['match'])) {
@@ -99,9 +99,9 @@ class Mock implements AdapterInterface
         if ($found !== null) {
             // Move the current mock to the end so that when there are multiple
             // matches for a URL the next match is used on subsequent requests.
-            $mock = $this->responses[$found];
-            unset($this->responses[$found]);
-            $this->responses[] = $mock;
+            $mock = this->responses[$found];
+            unset(this->responses[$found]);
+            this->responses[] = $mock;
 
             return [$mock['response']];
         }

@@ -108,13 +108,13 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * Sets the header value for it to 'nosniff'
      *
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
-     * @return $this
+     * @return this
      */
     public function noSniff()
     {
-        $this->headers['x-content-type-options'] = self::NOSNIFF;
+        this->headers['x-content-type-options'] = self::NOSNIFF;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -123,13 +123,13 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * Sets the header value for it to 'noopen'
      *
      * @link https://msdn.microsoft.com/en-us/library/jj542450(v=vs.85).aspx
-     * @return $this
+     * @return this
      */
     public function noOpen()
     {
-        $this->headers['x-download-options'] = self::NOOPEN;
+        this->headers['x-download-options'] = self::NOOPEN;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -138,7 +138,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @link https://w3c.github.io/webappsec-referrer-policy
      * @param string $policy Policy value. Available Value: 'no-referrer', 'no-referrer-when-downgrade', 'origin',
      *     'origin-when-cross-origin', 'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', 'unsafe-url'
-     * @return $this
+     * @return this
      */
     public function setReferrerPolicy(string $policy = self::SAME_ORIGIN)
     {
@@ -153,10 +153,10 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
             self::UNSAFE_URL,
         ];
 
-        $this->checkValues($policy, $available);
-        $this->headers['referrer-policy'] = $policy;
+        this->checkValues($policy, $available);
+        this->headers['referrer-policy'] = $policy;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -165,11 +165,11 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
      * @param string $option Option value. Available Values: 'deny', 'sameorigin', 'allow-from <uri>'
      * @param string|null $url URL if mode is `allow-from`
-     * @return $this
+     * @return this
      */
     public function setXFrameOptions(string $option = self::SAMEORIGIN, ?string $url = null)
     {
-        $this->checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
+        this->checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
         if ($option === self::ALLOW_FROM) {
             if (empty($url)) {
@@ -178,9 +178,9 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
             $option .= ' ' . $url;
         }
 
-        $this->headers['x-frame-options'] = $option;
+        this->headers['x-frame-options'] = $option;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -188,7 +188,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      *
      * @link https://blogs.msdn.microsoft.com/ieinternals/2011/01/31/controlling-the-xss-filter
      * @param string $mode Mode value. Available Values: '1', '0', 'block'
-     * @return $this
+     * @return this
      */
     public function setXssProtection(string $mode = self::XSS_BLOCK)
     {
@@ -196,10 +196,10 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
             $mode = self::XSS_ENABLED_BLOCK;
         }
 
-        $this->checkValues($mode, [self::XSS_ENABLED, self::XSS_DISABLED, self::XSS_ENABLED_BLOCK]);
-        $this->headers['x-xss-protection'] = $mode;
+        this->checkValues($mode, [self::XSS_ENABLED, self::XSS_DISABLED, self::XSS_ENABLED_BLOCK]);
+        this->headers['x-xss-protection'] = $mode;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -208,20 +208,20 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
      * @link https://www.adobe.com/devnet/adobe-media-server/articles/cross-domain-xml-for-streaming.html
      * @param string $policy Policy value. Available Values: 'all', 'none', 'master-only', 'by-content-type',
      *     'by-ftp-filename'
-     * @return $this
+     * @return this
      */
     public function setCrossDomainPolicy(string $policy = self::ALL)
     {
-        $this->checkValues($policy, [
+        this->checkValues($policy, [
             self::ALL,
             self::NONE,
             self::MASTER_ONLY,
             self::BY_CONTENT_TYPE,
             self::BY_FTP_FILENAME,
         ]);
-        $this->headers['x-permitted-cross-domain-policies'] = $policy;
+        this->headers['x-permitted-cross-domain-policies'] = $policy;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -253,7 +253,7 @@ class SecurityHeadersMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
-        foreach ($this->headers as $header => $value) {
+        foreach (this->headers as $header => $value) {
             $response = $response->withHeader($header, $value);
         }
 

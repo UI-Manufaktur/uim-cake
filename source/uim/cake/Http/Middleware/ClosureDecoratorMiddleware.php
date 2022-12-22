@@ -52,7 +52,7 @@ class ClosureDecoratorMiddleware implements MiddlewareInterface
      */
     public this(Closure $callable)
     {
-        $this->callable = $callable;
+        this->callable = $callable;
     }
 
     /**
@@ -64,7 +64,7 @@ class ClosureDecoratorMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return ($this->callable)(
+        return (this->callable)(
             $request,
             $handler
         );
@@ -76,6 +76,6 @@ class ClosureDecoratorMiddleware implements MiddlewareInterface
      */
     public function getCallable(): callable
     {
-        return $this->callable;
+        return this->callable;
     }
 }

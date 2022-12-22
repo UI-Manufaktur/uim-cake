@@ -36,7 +36,7 @@ class Basic
     public function authentication(Request $request, array $credentials): Request
     {
         if (isset($credentials['username'], $credentials['password'])) {
-            $value = $this->_generateHeader($credentials['username'], $credentials['password']);
+            $value = this->_generateHeader($credentials['username'], $credentials['password']);
             /** @var \Cake\Http\Client\Request $request */
             $request = $request->withHeader('Authorization', $value);
         }
@@ -55,7 +55,7 @@ class Basic
     public function proxyAuthentication(Request $request, array $credentials): Request
     {
         if (isset($credentials['username'], $credentials['password'])) {
-            $value = $this->_generateHeader($credentials['username'], $credentials['password']);
+            $value = this->_generateHeader($credentials['username'], $credentials['password']);
             /** @var \Cake\Http\Client\Request $request */
             $request = $request->withHeader('Proxy-Authorization', $value);
         }

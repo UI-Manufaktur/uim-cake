@@ -57,7 +57,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public this(array $middleware = [])
     {
-        $this->queue = $middleware;
+        this->queue = $middleware;
     }
 
     /**
@@ -100,48 +100,48 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * Append a middleware to the end of the queue.
      *
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|array|string $middleware The middleware(s) to append.
-     * @return $this
+     * @return this
      */
     public function add($middleware)
     {
         if (is_array($middleware)) {
-            $this->queue = array_merge($this->queue, $middleware);
+            this->queue = array_merge(this->queue, $middleware);
 
-            return $this;
+            return this;
         }
-        $this->queue[] = $middleware;
+        this->queue[] = $middleware;
 
-        return $this;
+        return this;
     }
 
     /**
      * Alias for MiddlewareQueue::add().
      *
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|array|string $middleware The middleware(s) to append.
-     * @return $this
+     * @return this
      * @see MiddlewareQueue::add()
      */
     public function push($middleware)
     {
-        return $this->add($middleware);
+        return this->add($middleware);
     }
 
     /**
      * Prepend a middleware to the start of the queue.
      *
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|array|string $middleware The middleware(s) to prepend.
-     * @return $this
+     * @return this
      */
     public function prepend($middleware)
     {
         if (is_array($middleware)) {
-            $this->queue = array_merge($middleware, $this->queue);
+            this->queue = array_merge($middleware, this->queue);
 
-            return $this;
+            return this;
         }
-        array_unshift($this->queue, $middleware);
+        array_unshift(this->queue, $middleware);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -152,13 +152,13 @@ class MiddlewareQueue implements Countable, SeekableIterator
      *
      * @param int $index The index to insert at.
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|string $middleware The middleware to insert.
-     * @return $this
+     * @return this
      */
     public function insertAt(int $index, $middleware)
     {
-        array_splice($this->queue, $index, 0, [$middleware]);
+        array_splice(this->queue, $index, 0, [$middleware]);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -169,14 +169,14 @@ class MiddlewareQueue implements Countable, SeekableIterator
      *
      * @param string $class The classname to insert the middleware before.
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|string $middleware The middleware to insert.
-     * @return $this
+     * @return this
      * @throws \LogicException If middleware to insert before is not found.
      */
     public function insertBefore(string $class, $middleware)
     {
         $found = false;
         $i = 0;
-        foreach ($this->queue as $i => $object) {
+        foreach (this->queue as $i => $object) {
             /** @psalm-suppress ArgumentTypeCoercion */
             if (
                 (
@@ -190,7 +190,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
             }
         }
         if ($found) {
-            return $this->insertAt($i, $middleware);
+            return this->insertAt($i, $middleware);
         }
         throw new LogicException(sprintf("No middleware matching '%s' could be found.", $class));
     }
@@ -204,13 +204,13 @@ class MiddlewareQueue implements Countable, SeekableIterator
      *
      * @param string $class The classname to insert the middleware before.
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|string $middleware The middleware to insert.
-     * @return $this
+     * @return this
      */
     public function insertAfter(string $class, $middleware)
     {
         $found = false;
         $i = 0;
-        foreach ($this->queue as $i => $object) {
+        foreach (this->queue as $i => $object) {
             /** @psalm-suppress ArgumentTypeCoercion */
             if (
                 (
@@ -224,10 +224,10 @@ class MiddlewareQueue implements Countable, SeekableIterator
             }
         }
         if ($found) {
-            return $this->insertAt($i + 1, $middleware);
+            return this->insertAt($i + 1, $middleware);
         }
 
-        return $this->add($middleware);
+        return this->add($middleware);
     }
 
     /**
@@ -239,7 +239,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public function count(): int
     {
-        return count($this->queue);
+        return count(this->queue);
     }
 
     /**
@@ -251,11 +251,11 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public function seek($position): void
     {
-        if (!isset($this->queue[$position])) {
+        if (!isset(this->queue[$position])) {
             throw new OutOfBoundsException("Invalid seek position ($position)");
         }
 
-        $this->position = $position;
+        this->position = $position;
     }
 
     /**
@@ -266,7 +266,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public function rewind(): void
     {
-        $this->position = 0;
+        this->position = 0;
     }
 
     /**
@@ -277,15 +277,15 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public function current(): MiddlewareInterface
     {
-        if (!isset($this->queue[$this->position])) {
-            throw new OutOfBoundsException("Invalid current position ($this->position)");
+        if (!isset(this->queue[this->position])) {
+            throw new OutOfBoundsException("Invalid current position (this->position)");
         }
 
-        if ($this->queue[$this->position] instanceof MiddlewareInterface) {
-            return $this->queue[$this->position];
+        if (this->queue[this->position] instanceof MiddlewareInterface) {
+            return this->queue[this->position];
         }
 
-        return $this->queue[$this->position] = $this->resolve($this->queue[$this->position]);
+        return this->queue[this->position] = this->resolve(this->queue[this->position]);
     }
 
     /**
@@ -296,7 +296,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public function key(): int
     {
-        return $this->position;
+        return this->position;
     }
 
     /**
@@ -307,7 +307,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public function next(): void
     {
-        ++$this->position;
+        ++this->position;
     }
 
     /**
@@ -318,6 +318,6 @@ class MiddlewareQueue implements Countable, SeekableIterator
      */
     public function valid(): bool
     {
-        return isset($this->queue[$this->position]);
+        return isset(this->queue[this->position]);
     }
 }

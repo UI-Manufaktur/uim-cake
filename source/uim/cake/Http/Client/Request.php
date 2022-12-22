@@ -42,18 +42,18 @@ class Request extends Message implements RequestInterface
      */
     public this(string $url = '', string $method = self::METHOD_GET, array $headers = [], $data = null)
     {
-        $this->setMethod($method);
-        $this->uri = $this->createUri($url);
+        this->setMethod($method);
+        this->uri = this->createUri($url);
         $headers += [
             'Connection' => 'close',
             'User-Agent' => ini_get('user_agent') ?: 'CakePHP',
         ];
-        $this->addHeaders($headers);
+        this->addHeaders($headers);
 
         if ($data === null) {
-            $this->stream = new Stream('php://memory', 'rw');
+            this->stream = new Stream('php://memory', 'rw');
         } else {
-            $this->setContent($data);
+            this->setContent($data);
         }
     }
 
@@ -68,8 +68,8 @@ class Request extends Message implements RequestInterface
     {
         foreach ($headers as $key => $val) {
             $normalized = strtolower($key);
-            $this->headers[$key] = (array)$val;
-            $this->headerNames[$normalized] = $key;
+            this->headers[$key] = (array)$val;
+            this->headerNames[$normalized] = $key;
         }
     }
 
@@ -80,7 +80,7 @@ class Request extends Message implements RequestInterface
      * and the content-type will be set.
      *
      * @param array|string $content The body for the request.
-     * @return $this
+     * @return this
      */
     protected function setContent($content)
     {
@@ -89,14 +89,14 @@ class Request extends Message implements RequestInterface
             $formData->addMany($content);
             /** @phpstan-var array<non-empty-string, non-empty-string> $headers */
             $headers = ['Content-Type' => $formData->contentType()];
-            $this->addHeaders($headers);
+            this->addHeaders($headers);
             $content = (string)$formData;
         }
 
         $stream = new Stream('php://memory', 'rw');
         $stream->write($content);
-        $this->stream = $stream;
+        this->stream = $stream;
 
-        return $this;
+        return this;
     }
 }

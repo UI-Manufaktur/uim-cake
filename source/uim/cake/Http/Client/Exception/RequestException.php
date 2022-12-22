@@ -44,7 +44,7 @@ class RequestException extends RuntimeException implements RequestExceptionInter
      */
     public this(string $message, RequestInterface $request, ?Throwable $previous = null)
     {
-        $this->request = $request;
+        this->request = $request;
         parent::__construct($message, 0, $previous);
     }
 
@@ -57,6 +57,6 @@ class RequestException extends RuntimeException implements RequestExceptionInter
      */
     public function getRequest(): RequestInterface
     {
-        return $this->request;
+        return this->request;
     }
 }

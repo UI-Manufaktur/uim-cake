@@ -225,16 +225,16 @@ class Session
             $config['ini']['session.cookie_path'] = $cookiePath;
         }
 
-        $this->options($config['ini']);
+        this->options($config['ini']);
 
         if (!empty($config['handler'])) {
             $class = $config['handler']['engine'];
             unset($config['handler']['engine']);
-            $this->engine($class, $config['handler']);
+            this->engine($class, $config['handler']);
         }
 
-        $this->_lifetime = (int)ini_get('session.gc_maxlifetime');
-        $this->_isCLI = (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg');
+        this->_lifetime = (int)ini_get('session.gc_maxlifetime');
+        this->_isCLI = (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg');
         session_register_shutdown();
     }
 
@@ -258,10 +258,10 @@ class Session
     public function engine($class = null, array $options = []): ?SessionHandlerInterface
     {
         if ($class === null) {
-            return $this->_engine;
+            return this->_engine;
         }
         if ($class instanceof SessionHandlerInterface) {
-            return $this->setEngine($class);
+            return this->setEngine($class);
         }
 
         /** @var class-string<\SessionHandlerInterface>|null $className */
@@ -272,7 +272,7 @@ class Session
             );
         }
 
-        return $this->setEngine(new $className($options));
+        return this->setEngine(new $className($options));
     }
 
     /**
@@ -287,7 +287,7 @@ class Session
             session_set_save_handler($handler, false);
         }
 
-        return $this->_engine = $handler;
+        return this->_engine = $handler;
     }
 
     /**
@@ -327,15 +327,15 @@ class Session
      */
     public function start(): bool
     {
-        if ($this->_started) {
+        if (this->_started) {
             return true;
         }
 
-        if ($this->_isCLI) {
+        if (this->_isCLI) {
             $_SESSION = [];
-            $this->id('cli');
+            this->id('cli');
 
-            return $this->_started = true;
+            return this->_started = true;
         }
 
         if (session_status() === \PHP_SESSION_ACTIVE) {
@@ -350,15 +350,15 @@ class Session
             throw new RuntimeException('Could not start the session');
         }
 
-        $this->_started = true;
+        this->_started = true;
 
-        if ($this->_timedOut()) {
-            $this->destroy();
+        if (this->_timedOut()) {
+            this->destroy();
 
-            return $this->start();
+            return this->start();
         }
 
-        return $this->_started;
+        return this->_started;
     }
 
     /**
@@ -368,12 +368,12 @@ class Session
      */
     public function close(): bool
     {
-        if (!$this->_started) {
+        if (!this->_started) {
             return true;
         }
 
-        if ($this->_isCLI) {
-            $this->_started = false;
+        if (this->_isCLI) {
+            this->_started = false;
 
             return true;
         }
@@ -382,7 +382,7 @@ class Session
             throw new RuntimeException('Could not close the session');
         }
 
-        $this->_started = false;
+        this->_started = false;
 
         return true;
     }
@@ -394,7 +394,7 @@ class Session
      */
     public function started(): bool
     {
-        return $this->_started || session_status() === \PHP_SESSION_ACTIVE;
+        return this->_started || session_status() === \PHP_SESSION_ACTIVE;
     }
 
     /**
@@ -405,8 +405,8 @@ class Session
      */
     public function check(?string $name = null): bool
     {
-        if ($this->_hasSession() && !$this->started()) {
-            $this->start();
+        if (this->_hasSession() && !this->started()) {
+            this->start();
         }
 
         if (!isset($_SESSION)) {
@@ -430,8 +430,8 @@ class Session
      */
     public function read(?string $name = null, $default = null)
     {
-        if ($this->_hasSession() && !$this->started()) {
-            $this->start();
+        if (this->_hasSession() && !this->started()) {
+            this->start();
         }
 
         if (!isset($_SESSION)) {
@@ -454,11 +454,11 @@ class Session
      */
     public function readOrFail(string $name)
     {
-        if (!$this->check($name)) {
+        if (!this->check($name)) {
             throw new RuntimeException(sprintf('Expected session key "%s" not found.', $name));
         }
 
-        return $this->read($name);
+        return this->read($name);
     }
 
     /**
@@ -473,10 +473,10 @@ class Session
         if (empty($name)) {
             return null;
         }
-        $value = $this->read($name);
+        $value = this->read($name);
         if ($value !== null) {
             /** @psalm-suppress InvalidScalarArgument */
-            $this->_overwrite($_SESSION, Hash::remove($_SESSION, $name));
+            this->_overwrite($_SESSION, Hash::remove($_SESSION, $name));
         }
 
         return $value;
@@ -491,8 +491,8 @@ class Session
      */
     public function write($name, $value = null): void
     {
-        if (!$this->started()) {
-            $this->start();
+        if (!this->started()) {
+            this->start();
         }
 
         if (!is_array($name)) {
@@ -505,7 +505,7 @@ class Session
         }
 
         /** @psalm-suppress PossiblyNullArgument */
-        $this->_overwrite($_SESSION, $data);
+        this->_overwrite($_SESSION, $data);
     }
 
     /**
@@ -539,9 +539,9 @@ class Session
      */
     public function delete(string $name): void
     {
-        if ($this->check($name)) {
+        if (this->check($name)) {
             /** @psalm-suppress InvalidScalarArgument */
-            $this->_overwrite($_SESSION, Hash::remove($_SESSION, $name));
+            this->_overwrite($_SESSION, Hash::remove($_SESSION, $name));
         }
     }
 
@@ -572,16 +572,16 @@ class Session
      */
     public function destroy(): void
     {
-        if ($this->_hasSession() && !$this->started()) {
-            $this->start();
+        if (this->_hasSession() && !this->started()) {
+            this->start();
         }
 
-        if (!$this->_isCLI && session_status() === \PHP_SESSION_ACTIVE) {
+        if (!this->_isCLI && session_status() === \PHP_SESSION_ACTIVE) {
             session_destroy();
         }
 
         $_SESSION = [];
-        $this->_started = false;
+        this->_started = false;
     }
 
     /**
@@ -596,7 +596,7 @@ class Session
     {
         $_SESSION = [];
         if ($renew) {
-            $this->renew();
+            this->renew();
         }
     }
 
@@ -609,7 +609,7 @@ class Session
     {
         return !ini_get('session.use_cookies')
             || isset($_COOKIE[session_name()])
-            || $this->_isCLI
+            || this->_isCLI
             || (ini_get('session.use_trans_sid') && isset($_GET[session_name()]));
     }
 
@@ -620,11 +620,11 @@ class Session
      */
     public function renew(): void
     {
-        if (!$this->_hasSession() || $this->_isCLI) {
+        if (!this->_hasSession() || this->_isCLI) {
             return;
         }
 
-        $this->start();
+        this->start();
         $params = session_get_cookie_params();
         setcookie(
             session_name(),
@@ -649,15 +649,15 @@ class Session
      */
     protected function _timedOut(): bool
     {
-        $time = $this->read('Config.time');
+        $time = this->read('Config.time');
         $result = false;
 
-        $checkTime = $time !== null && $this->_lifetime > 0;
-        if ($checkTime && (time() - (int)$time > $this->_lifetime)) {
+        $checkTime = $time !== null && this->_lifetime > 0;
+        if ($checkTime && (time() - (int)$time > this->_lifetime)) {
             $result = true;
         }
 
-        $this->write('Config.time', time());
+        this->write('Config.time', time());
 
         return $result;
     }

@@ -127,14 +127,14 @@ class Response extends Message implements ResponseInterface
      */
     public this(array $headers = [], string $body = '')
     {
-        $this->_parseHeaders($headers);
-        if ($this->getHeaderLine('Content-Encoding') === 'gzip') {
-            $body = $this->_decodeGzipBody($body);
+        this->_parseHeaders($headers);
+        if (this->getHeaderLine('Content-Encoding') === 'gzip') {
+            $body = this->_decodeGzipBody($body);
         }
         $stream = new Stream('php://memory', 'wb+');
         $stream->write($body);
         $stream->rewind();
-        $this->stream = $stream;
+        this->stream = $stream;
     }
 
     /**
@@ -179,9 +179,9 @@ class Response extends Message implements ResponseInterface
         foreach ($headers as $value) {
             if (substr($value, 0, 5) === 'HTTP/') {
                 preg_match('/HTTP\/([\d.]+) ([0-9]+)(.*)/i', $value, $matches);
-                $this->protocol = $matches[1];
-                $this->code = (int)$matches[2];
-                $this->reasonPhrase = trim($matches[3]);
+                this->protocol = $matches[1];
+                this->code = (int)$matches[2];
+                this->reasonPhrase = trim($matches[3]);
                 continue;
             }
             if (strpos($value, ':') === false) {
@@ -194,11 +194,11 @@ class Response extends Message implements ResponseInterface
 
             $normalized = strtolower($name);
 
-            if (isset($this->headers[$name])) {
-                $this->headers[$name][] = $value;
+            if (isset(this->headers[$name])) {
+                this->headers[$name][] = $value;
             } else {
-                $this->headers[$name] = (array)$value;
-                $this->headerNames[$normalized] = $name;
+                this->headers[$name] = (array)$value;
+                this->headerNames[$normalized] = $name;
             }
         }
     }
@@ -210,7 +210,7 @@ class Response extends Message implements ResponseInterface
      */
     public function isOk(): bool
     {
-        return $this->code >= 200 && $this->code <= 399;
+        return this->code >= 200 && this->code <= 399;
     }
 
     /**
@@ -220,7 +220,7 @@ class Response extends Message implements ResponseInterface
      */
     public function isSuccess(): bool
     {
-        return $this->code >= 200 && $this->code <= 299;
+        return this->code >= 200 && this->code <= 299;
     }
 
     /**
@@ -238,8 +238,8 @@ class Response extends Message implements ResponseInterface
             static::STATUS_PERMANENT_REDIRECT,
         ];
 
-        return in_array($this->code, $codes, true) &&
-            $this->getHeaderLine('Location');
+        return in_array(this->code, $codes, true) &&
+            this->getHeaderLine('Location');
     }
 
     /**
@@ -249,7 +249,7 @@ class Response extends Message implements ResponseInterface
      */
     public function getStatusCode(): int
     {
-        return $this->code;
+        return this->code;
     }
 
     /**
@@ -261,7 +261,7 @@ class Response extends Message implements ResponseInterface
      */
     public function withStatus($code, $reasonPhrase = '')
     {
-        $new = clone $this;
+        $new = clone this;
         $new->code = $code;
         $new->reasonPhrase = $reasonPhrase;
 
@@ -275,7 +275,7 @@ class Response extends Message implements ResponseInterface
      */
     public function getReasonPhrase(): string
     {
-        return $this->reasonPhrase;
+        return this->reasonPhrase;
     }
 
     /**
@@ -285,7 +285,7 @@ class Response extends Message implements ResponseInterface
      */
     public function getEncoding(): ?string
     {
-        $content = $this->getHeaderLine('content-type');
+        $content = this->getHeaderLine('content-type');
         if (!$content) {
             return null;
         }
@@ -304,7 +304,7 @@ class Response extends Message implements ResponseInterface
      */
     public function getCookies(): array
     {
-        return $this->_getCookies();
+        return this->_getCookies();
     }
 
     /**
@@ -317,9 +317,9 @@ class Response extends Message implements ResponseInterface
      */
     public function getCookieCollection(): CookieCollection
     {
-        $this->buildCookieCollection();
+        this->buildCookieCollection();
 
-        return $this->cookies;
+        return this->cookies;
     }
 
     /**
@@ -330,13 +330,13 @@ class Response extends Message implements ResponseInterface
      */
     public function getCookie(string $name)
     {
-        $this->buildCookieCollection();
+        this->buildCookieCollection();
 
-        if (!$this->cookies->has($name)) {
+        if (!this->cookies->has($name)) {
             return null;
         }
 
-        return $this->cookies->get($name)->getValue();
+        return this->cookies->get($name)->getValue();
     }
 
     /**
@@ -347,13 +347,13 @@ class Response extends Message implements ResponseInterface
      */
     public function getCookieData(string $name): ?array
     {
-        $this->buildCookieCollection();
+        this->buildCookieCollection();
 
-        if (!$this->cookies->has($name)) {
+        if (!this->cookies->has($name)) {
             return null;
         }
 
-        return $this->cookies->get($name)->toArray();
+        return this->cookies->get($name)->toArray();
     }
 
     /**
@@ -363,24 +363,24 @@ class Response extends Message implements ResponseInterface
      */
     protected function buildCookieCollection(): void
     {
-        if ($this->cookies !== null) {
+        if (this->cookies !== null) {
             return;
         }
-        $this->cookies = CookieCollection::createFromHeader($this->getHeader('Set-Cookie'));
+        this->cookies = CookieCollection::createFromHeader(this->getHeader('Set-Cookie'));
     }
 
     /**
-     * Property accessor for `$this->cookies`
+     * Property accessor for `this->cookies`
      *
      * @return array Array of Cookie data.
      */
     protected function _getCookies(): array
     {
-        $this->buildCookieCollection();
+        this->buildCookieCollection();
 
         $out = [];
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
-        $cookies = $this->cookies;
+        $cookies = this->cookies;
         foreach ($cookies as $cookie) {
             $out[$cookie->getName()] = $cookie->toArray();
         }
@@ -395,7 +395,7 @@ class Response extends Message implements ResponseInterface
      */
     public function getStringBody(): string
     {
-        return $this->_getBody();
+        return this->_getBody();
     }
 
     /**
@@ -405,7 +405,7 @@ class Response extends Message implements ResponseInterface
      */
     public function getJson()
     {
-        return $this->_getJson();
+        return this->_getJson();
     }
 
     /**
@@ -415,11 +415,11 @@ class Response extends Message implements ResponseInterface
      */
     protected function _getJson()
     {
-        if ($this->_json) {
-            return $this->_json;
+        if (this->_json) {
+            return this->_json;
         }
 
-        return $this->_json = json_decode($this->_getBody(), true);
+        return this->_json = json_decode(this->_getBody(), true);
     }
 
     /**
@@ -429,7 +429,7 @@ class Response extends Message implements ResponseInterface
      */
     public function getXml(): ?SimpleXMLElement
     {
-        return $this->_getXml();
+        return this->_getXml();
     }
 
     /**
@@ -439,15 +439,15 @@ class Response extends Message implements ResponseInterface
      */
     protected function _getXml(): ?SimpleXMLElement
     {
-        if ($this->_xml !== null) {
-            return $this->_xml;
+        if (this->_xml !== null) {
+            return this->_xml;
         }
         libxml_use_internal_errors();
-        $data = simplexml_load_string($this->_getBody());
+        $data = simplexml_load_string(this->_getBody());
         if ($data) {
-            $this->_xml = $data;
+            this->_xml = $data;
 
-            return $this->_xml;
+            return this->_xml;
         }
 
         return null;
@@ -461,7 +461,7 @@ class Response extends Message implements ResponseInterface
     protected function _getHeaders(): array
     {
         $out = [];
-        foreach ($this->headers as $key => $values) {
+        foreach (this->headers as $key => $values) {
             $out[$key] = implode(',', $values);
         }
 
@@ -475,8 +475,8 @@ class Response extends Message implements ResponseInterface
      */
     protected function _getBody(): string
     {
-        $this->stream->rewind();
+        this->stream->rewind();
 
-        return $this->stream->getContents();
+        return this->stream->getContents();
     }
 }

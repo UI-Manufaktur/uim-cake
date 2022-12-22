@@ -63,7 +63,7 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
             . ' `($request, $handler)` or a class which implements `Psr\Http\Server\MiddlewareInterface` instead.',
             0
         );
-        $this->callable = $callable;
+        this->callable = $callable;
     }
 
     /**
@@ -75,7 +75,7 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return ($this->callable)(
+        return (this->callable)(
             $request,
             new Response(),
             function ($request, $res) use ($handler) {
@@ -90,6 +90,6 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
      */
     public function getCallable(): callable
     {
-        return $this->callable;
+        return this->callable;
     }
 }

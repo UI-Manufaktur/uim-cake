@@ -42,7 +42,7 @@ use RuntimeException;
  *
  * This middleware integrates with the FormHelper automatically and when
  * used together your forms will have CSRF tokens automatically added
- * when `$this->Form->create(...)` is used in a view.
+ * when `this->Form->create(...)` is used in a view.
  *
  * @see https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
  */
@@ -112,7 +112,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
             deprecationWarning('Option `httpOnly` is deprecated. Use lowercased `httponly` instead.');
         }
 
-        $this->_config = $config + $this->_config;
+        this->_config = $config + this->_config;
     }
 
     /**
@@ -130,10 +130,10 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
 
         if (
             $hasData
-            && $this->skipCheckCallback !== null
-            && call_user_func($this->skipCheckCallback, $request) === true
+            && this->skipCheckCallback !== null
+            && call_user_func(this->skipCheckCallback, $request) === true
         ) {
-            $request = $this->_unsetTokenField($request);
+            $request = this->_unsetTokenField($request);
 
             return $handler->handle($request);
         }
@@ -147,28 +147,28 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
         }
 
         $cookies = $request->getCookieParams();
-        $cookieData = Hash::get($cookies, $this->_config['cookieName']);
+        $cookieData = Hash::get($cookies, this->_config['cookieName']);
 
         if (is_string($cookieData) && $cookieData !== '') {
             try {
-                $request = $request->withAttribute('csrfToken', $this->saltToken($cookieData));
+                $request = $request->withAttribute('csrfToken', this->saltToken($cookieData));
             } catch (InvalidArgumentException $e) {
                 $cookieData = null;
             }
         }
 
         if ($method === 'GET' && $cookieData === null) {
-            $token = $this->createToken();
-            $request = $request->withAttribute('csrfToken', $this->saltToken($token));
+            $token = this->createToken();
+            $request = $request->withAttribute('csrfToken', this->saltToken($token));
             /** @var mixed $response */
             $response = $handler->handle($request);
 
-            return $this->_addTokenCookie($token, $request, $response);
+            return this->_addTokenCookie($token, $request, $response);
         }
 
         if ($hasData) {
-            $this->_validateToken($request);
-            $request = $this->_unsetTokenField($request);
+            this->_validateToken($request);
+            $request = this->_unsetTokenField($request);
         }
 
         return $handler->handle($request);
@@ -182,14 +182,14 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      *
      * @deprecated 4.1.0 Use skipCheckCallback instead.
      * @param callable $callback A callable.
-     * @return $this
+     * @return this
      */
     public function whitelistCallback(callable $callback)
     {
         deprecationWarning('`whitelistCallback()` is deprecated. Use `skipCheckCallback()` instead.');
-        $this->skipCheckCallback = $callback;
+        this->skipCheckCallback = $callback;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -199,13 +199,13 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * `true` if you want to skip token check for the current request.
      *
      * @param callable $callback A callable.
-     * @return $this
+     * @return this
      */
     public function skipCheckCallback(callable $callback)
     {
-        $this->skipCheckCallback = $callback;
+        this->skipCheckCallback = $callback;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -218,7 +218,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
     {
         $body = $request->getParsedBody();
         if (is_array($body)) {
-            unset($body[$this->_config['field']]);
+            unset($body[this->_config['field']]);
             $request = $request->withParsedBody($body);
         }
 
@@ -235,7 +235,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
     {
         deprecationWarning('_createToken() is deprecated. Use createToken() instead.');
 
-        return $this->createToken();
+        return this->createToken();
     }
 
     /**
@@ -278,7 +278,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      */
     public function saltToken(string $token): string
     {
-        if ($this->isHexadecimalToken($token)) {
+        if (this->isHexadecimalToken($token)) {
             return $token;
         }
         $decoded = base64_decode($token, true);
@@ -308,7 +308,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      */
     public function unsaltToken(string $token): string
     {
-        if ($this->isHexadecimalToken($token)) {
+        if (this->isHexadecimalToken($token)) {
             return $token;
         }
         $decoded = base64_decode($token, true);
@@ -337,7 +337,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
     {
         // If we have a hexadecimal value we're in a compatibility mode from before
         // tokens were salted on each request.
-        if ($this->isHexadecimalToken($token)) {
+        if (this->isHexadecimalToken($token)) {
             $decoded = $token;
         } else {
             $decoded = base64_decode($token, true);
@@ -367,7 +367,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
         ServerRequestInterface $request,
         ResponseInterface $response
     ): ResponseInterface {
-        $cookie = $this->_createCookie($token, $request);
+        $cookie = this->_createCookie($token, $request);
         if ($response instanceof Response) {
             return $response->withCookie($cookie);
         }
@@ -384,16 +384,16 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      */
     protected function _validateToken(ServerRequestInterface $request): void
     {
-        $cookie = Hash::get($request->getCookieParams(), $this->_config['cookieName']);
+        $cookie = Hash::get($request->getCookieParams(), this->_config['cookieName']);
 
         if (!$cookie || !is_string($cookie)) {
             throw new InvalidCsrfTokenException(__d('cake', 'Missing or incorrect CSRF cookie type.'));
         }
 
-        if (!$this->_verifyToken($cookie)) {
+        if (!this->_verifyToken($cookie)) {
             $exception = new InvalidCsrfTokenException(__d('cake', 'Missing or invalid CSRF cookie.'));
 
-            $expiredCookie = $this->_createCookie('', $request)->withExpired();
+            $expiredCookie = this->_createCookie('', $request)->withExpired();
             $exception->setHeader('Set-Cookie', $expiredCookie->toHeaderValue());
 
             throw $exception;
@@ -401,15 +401,15 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
 
         $body = $request->getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
-            $post = (string)Hash::get($body, $this->_config['field']);
-            $post = $this->unsaltToken($post);
+            $post = (string)Hash::get($body, this->_config['field']);
+            $post = this->unsaltToken($post);
             if (hash_equals($post, $cookie)) {
                 return;
             }
         }
 
         $header = $request->getHeaderLine('X-CSRF-Token');
-        $header = $this->unsaltToken($header);
+        $header = this->unsaltToken($header);
         if (hash_equals($header, $cookie)) {
             return;
         }
@@ -430,14 +430,14 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
     protected function _createCookie(string $value, ServerRequestInterface $request): CookieInterface
     {
         return Cookie::create(
-            $this->_config['cookieName'],
+            this->_config['cookieName'],
             $value,
             [
-                'expires' => $this->_config['expiry'] ?: null,
+                'expires' => this->_config['expiry'] ?: null,
                 'path' => $request->getAttribute('webroot'),
-                'secure' => $this->_config['secure'],
-                'httponly' => $this->_config['httponly'],
-                'samesite' => $this->_config['samesite'],
+                'secure' => this->_config['secure'],
+                'httponly' => this->_config['httponly'],
+                'samesite' => this->_config['samesite'],
             ]
         );
     }

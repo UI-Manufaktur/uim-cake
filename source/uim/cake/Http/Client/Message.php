@@ -163,6 +163,6 @@ class Message
      */
     public function cookies(): array
     {
-        return $this->_cookies;
+        return this->_cookies;
     }
 }

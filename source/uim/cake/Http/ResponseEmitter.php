@@ -50,7 +50,7 @@ class ResponseEmitter implements EmitterInterface
      */
     public this(int $maxBufferLength = 8192)
     {
-        $this->maxBufferLength = $maxBufferLength;
+        this->maxBufferLength = $maxBufferLength;
     }
 
     /**
@@ -71,15 +71,15 @@ class ResponseEmitter implements EmitterInterface
             trigger_error($message, E_USER_WARNING);
         }
 
-        $this->emitStatusLine($response);
-        $this->emitHeaders($response);
-        $this->flush();
+        this->emitStatusLine($response);
+        this->emitHeaders($response);
+        this->flush();
 
-        $range = $this->parseContentRange($response->getHeaderLine('Content-Range'));
+        $range = this->parseContentRange($response->getHeaderLine('Content-Range'));
         if (is_array($range)) {
-            $this->emitBodyRange($range, $response);
+            this->emitBodyRange($range, $response);
         } else {
-            $this->emitBody($response);
+            this->emitBody($response);
         }
 
         if (function_exists('fastcgi_finish_request')) {
@@ -110,7 +110,7 @@ class ResponseEmitter implements EmitterInterface
 
         $body->rewind();
         while (!$body->eof()) {
-            echo $body->read($this->maxBufferLength);
+            echo $body->read(this->maxBufferLength);
         }
     }
 
@@ -139,12 +139,12 @@ class ResponseEmitter implements EmitterInterface
         $pos = 0;
         $length = $last - $first + 1;
         while (!$body->eof() && $pos < $length) {
-            if ($pos + $this->maxBufferLength > $length) {
+            if ($pos + this->maxBufferLength > $length) {
                 echo $body->read($length - $pos);
                 break;
             }
 
-            echo $body->read($this->maxBufferLength);
+            echo $body->read(this->maxBufferLength);
             $pos = $body->tell();
         }
     }
@@ -203,7 +203,7 @@ class ResponseEmitter implements EmitterInterface
             }
         }
 
-        $this->emitCookies($cookies);
+        this->emitCookies($cookies);
     }
 
     /**
@@ -215,7 +215,7 @@ class ResponseEmitter implements EmitterInterface
     protected function emitCookies(array $cookies): void
     {
         foreach ($cookies as $cookie) {
-            $this->setCookie($cookie);
+            this->setCookie($cookie);
         }
     }
 
