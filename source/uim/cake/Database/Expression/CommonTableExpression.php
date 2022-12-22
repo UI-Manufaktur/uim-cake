@@ -204,7 +204,7 @@ class CommonTableExpression implements ExpressionInterface
     /**
      * @inheritDoc
      */
-    public function traverse(Closure $callback)
+    public O traverse(this O)(Closure $callback)
     {
         $callback($this->name);
         foreach ($this->fields as $field) {

@@ -221,7 +221,7 @@ abstract class Cell : IEventDispatcher
      * @return string Rendered cell
      * @throws \Error Include error details for PHP 7 fatal errors.
      */
-    string __toString() {
+    string toString() {
         try {
             return this.render();
         } catch (Exception $e) {

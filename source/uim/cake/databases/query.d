@@ -262,7 +262,7 @@ class Query : IExpression, IteratorAggregate {
      * @param callable $callback A function or callable to be executed for each part
      * @return this
      */
-    function traverse($callback) {
+    O traverse(this O)($callback) {
         foreach (_parts as myName: $part) {
             $callback($part, myName);
         }
@@ -2239,7 +2239,7 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Returns string representation of this query (complete SQL statement).
      */
-    string __toString() {
+    string toString() {
         return this.sql();
     }
 

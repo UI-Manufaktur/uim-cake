@@ -207,7 +207,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function traverse(Closure $callback)
+    public O traverse(this O)(Closure $callback)
     {
         parent::traverse($callback);
         if ($this->filter !== null) {

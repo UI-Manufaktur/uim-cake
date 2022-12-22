@@ -316,7 +316,7 @@ class WhenThenExpression implements ExpressionInterface
     /**
      * @inheritDoc
      */
-    public function traverse(Closure $callback)
+    public O traverse(this O)(Closure $callback)
     {
         if ($this->when instanceof ExpressionInterface) {
             $callback($this->when);

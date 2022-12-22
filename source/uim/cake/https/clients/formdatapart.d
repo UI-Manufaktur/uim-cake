@@ -176,7 +176,7 @@ class FormDataPart
      *
      * Creates a string suitable for use in HTTP requests.
      */
-    string __toString() {
+    string toString() {
         $out = "";
         if (_disposition) {
             $out .= "Content-Disposition: " . _disposition;

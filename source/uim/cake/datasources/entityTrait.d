@@ -1134,7 +1134,7 @@ trait EntityTrait
     /**
      * Returns a string representation of this object in a human readable format.
      */
-    string __toString() {
+    string toString() {
         return (string)json_encode(this, JSON_PRETTY_PRINT);
     }
 

@@ -335,7 +335,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * @param callable $callback A function or callable to be executed for each part
      * @return $this
      */
-    public function traverse($callback)
+    public O traverse(this O)($callback)
     {
         foreach ($this->_parts as $name => $part) {
             $callback($part, $name);

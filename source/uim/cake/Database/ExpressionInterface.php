@@ -40,5 +40,5 @@ interface ExpressionInterface
      * @param \Closure $callback The callable to apply to all nodes.
      * @return $this
      */
-    public function traverse(Closure $callback);
+    public O traverse(this O)(Closure $callback);
 }

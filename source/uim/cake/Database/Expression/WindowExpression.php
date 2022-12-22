@@ -263,7 +263,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function traverse(Closure $callback)
+    public O traverse(this O)(Closure $callback)
     {
         $callback($this->name);
         foreach ($this->partitions as $partition) {

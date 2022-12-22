@@ -546,7 +546,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
     /**
      * @inheritDoc
      */
-    public function traverse(Closure $callback)
+    public O traverse(this O)(Closure $callback)
     {
         if ($this->whenBuffer !== null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');

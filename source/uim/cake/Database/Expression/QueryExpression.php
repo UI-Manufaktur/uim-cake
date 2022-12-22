@@ -612,7 +612,7 @@ class QueryExpression implements ExpressionInterface, Countable
     /**
      * @inheritDoc
      */
-    public function traverse(Closure $callback)
+    public O traverse(this O)(Closure $callback)
     {
         foreach ($this->_conditions as $c) {
             if ($c instanceof ExpressionInterface) {

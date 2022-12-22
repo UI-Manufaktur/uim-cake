@@ -173,7 +173,7 @@ class TupleComparison extends ComparisonExpression
     /**
      * @inheritDoc
      */
-    public function traverse(Closure $callback)
+    public O traverse(this O)(Closure $callback)
     {
         /** @var array<string> $fields */
         $fields = $this->getField();

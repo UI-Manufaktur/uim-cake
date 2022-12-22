@@ -1152,7 +1152,7 @@ class Response : IResponse
      * Does *not* send headers.
      * If body is a callable, a blank string is returned.
      */
-    string __toString() {
+    string toString() {
         this.stream.rewind();
 
         return this.stream.getContents();
