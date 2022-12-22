@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Core;
 
-use League\Container\DefinitionContainerInterface;
+use League\Container\DefinitionIContainer;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
 use RuntimeException;
@@ -45,16 +45,16 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      * This method's actual return type and documented return type differ
      * because PHP 7.2 doesn't support return type narrowing.
      *
-     * @return \Cake\Core\ContainerInterface
+     * @return \Cake\Core\IContainer
      */
-    function getContainer(): DefinitionContainerInterface
+    function getContainer(): DefinitionIContainer
     {
         $container = parent::getContainer();
 
-        if (!($container instanceof ContainerInterface)) {
+        if (!($container instanceof IContainer)) {
             $message = sprintf(
                 'Unexpected container type. Expected `%s` got `%s` instead.',
-                ContainerInterface::class,
+                IContainer::class,
                 getTypeName($container)
             );
             throw new RuntimeException($message);
@@ -84,10 +84,10 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      * files or do any other work when the service provider is added to the
      * container.
      *
-     * @param \Cake\Core\ContainerInterface $container The container to add services to.
+     * @param \Cake\Core\IContainer $container The container to add services to.
      * @return void
      */
-    function bootstrap(ContainerInterface $container): void
+    function bootstrap(IContainer $container): void
     {
     }
 
@@ -125,8 +125,8 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      * All services registered in this method should also be included in the $provides
      * property so that services can be located.
      *
-     * @param \Cake\Core\ContainerInterface $container The container to add services to.
+     * @param \Cake\Core\IContainer $container The container to add services to.
      * @return void
      */
-    abstract function services(ContainerInterface $container): void;
+    abstract function services(IContainer $container): void;
 }

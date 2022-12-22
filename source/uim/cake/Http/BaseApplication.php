@@ -22,7 +22,7 @@ use Cake\Controller\ControllerFactory;
 use Cake\Core\ConsoleApplicationInterface;
 use Cake\Core\Container;
 use Cake\Core\ContainerApplicationInterface;
-use Cake\Core\ContainerInterface;
+use Cake\Core\IContainer;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Core\HttpApplicationInterface;
 use Cake\Core\Plugin;
@@ -80,7 +80,7 @@ abstract class BaseApplication implements
     /**
      * Container
      *
-     * @var \Cake\Core\ContainerInterface|null
+     * @var \Cake\Core\IContainer|null
      */
     protected $container;
 
@@ -246,9 +246,9 @@ abstract class BaseApplication implements
      * The first time the container is fetched it will be constructed
      * and stored for future calls.
      *
-     * @return \Cake\Core\ContainerInterface
+     * @return \Cake\Core\IContainer
      */
-    function getContainer(): ContainerInterface
+    function getContainer(): IContainer
     {
         if (this->container == null) {
             this->container = this->buildContainer();
@@ -263,9 +263,9 @@ abstract class BaseApplication implements
      * Override this method if you need to use a custom container or
      * want to change how the container is built.
      *
-     * @return \Cake\Core\ContainerInterface
+     * @return \Cake\Core\IContainer
      */
-    protected function buildContainer(): ContainerInterface
+    protected function buildContainer(): IContainer
     {
         $container = new Container();
         this->services($container);
@@ -274,7 +274,7 @@ abstract class BaseApplication implements
         }
 
         $event = this->dispatchEvent('Application.buildContainer', ['container' => $container]);
-        if ($event->getResult() instanceof ContainerInterface) {
+        if ($event->getResult() instanceof IContainer) {
             return $event->getResult();
         }
 
@@ -284,10 +284,10 @@ abstract class BaseApplication implements
     /**
      * Register application container services.
      *
-     * @param \Cake\Core\ContainerInterface $container The Container to update.
+     * @param \Cake\Core\IContainer $container The Container to update.
      * @return void
      */
-    function services(ContainerInterface $container): void
+    function services(IContainer $container): void
     {
     }
 

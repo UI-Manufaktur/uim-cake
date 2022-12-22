@@ -28,10 +28,10 @@ interface ContainerApplicationInterface
      * using `get()`. Dependencies and parameters will be resolved based
      * on service definitions.
      *
-     * @param \Cake\Core\ContainerInterface $container The container to add services to
+     * @param \Cake\Core\IContainer $container The container to add services to
      * @return void
      */
-    function services(ContainerInterface $container): void;
+    function services(IContainer $container): void;
 
     /**
      * Create a new container and register services.
@@ -39,7 +39,7 @@ interface ContainerApplicationInterface
      * This will `register()` services provided by both the application
      * and any plugins if the application has plugin support.
      *
-     * @return \Cake\Core\ContainerInterface A populated container
+     * @return \Cake\Core\IContainer A populated container
      */
-    function getContainer(): ContainerInterface;
+    function getContainer(): IContainer;
 }

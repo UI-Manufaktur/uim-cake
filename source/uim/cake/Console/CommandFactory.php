@@ -14,7 +14,7 @@ declare(strict_types=1);
  */
 namespace Cake\Console;
 
-use Cake\Core\ContainerInterface;
+use Cake\Core\IContainer;
 use InvalidArgumentException;
 
 /**
@@ -26,16 +26,16 @@ use InvalidArgumentException;
 class CommandFactory implements CommandFactoryInterface
 {
     /**
-     * @var \Cake\Core\ContainerInterface|null
+     * @var \Cake\Core\IContainer|null
      */
     protected $container;
 
     /**
      * Constructor
      *
-     * @param \Cake\Core\ContainerInterface|null $container The container to use if available.
+     * @param \Cake\Core\IContainer|null $container The container to use if available.
      */
-    public this(?ContainerInterface $container = null)
+    public this(?IContainer $container = null)
     {
         this->container = $container;
     }

@@ -296,10 +296,10 @@ class BasePlugin implements PluginInterface
     /**
      * Register container services for this plugin.
      *
-     * @param \Cake\Core\ContainerInterface $container The container to add services to.
+     * @param \Cake\Core\IContainer $container The container to add services to.
      * @return void
      */
-    function services(ContainerInterface $container): void
+    function services(IContainer $container): void
     {
     }
 }

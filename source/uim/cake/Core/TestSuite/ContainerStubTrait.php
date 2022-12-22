@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace Cake\Core\TestSuite;
 
 use Cake\Core\Configure;
-use Cake\Core\ContainerInterface;
+use Cake\Core\IContainer;
 use Cake\Event\EventInterface;
 use Closure;
 use League\Container\Exception\NotFoundException;
@@ -135,10 +135,10 @@ trait ContainerStubTrait
      * container will be set as a delegate to the mock container.
      *
      * @param \Cake\Event\EventInterface $event The event
-     * @param \Cake\Core\ContainerInterface $container The container to wrap.
-     * @return \Cake\Core\ContainerInterface|null
+     * @param \Cake\Core\IContainer $container The container to wrap.
+     * @return \Cake\Core\IContainer|null
      */
-    function modifyContainer(EventInterface $event, ContainerInterface $container): ?ContainerInterface
+    function modifyContainer(EventInterface $event, IContainer $container): ?IContainer
     {
         if (empty(this->containerServices)) {
             return null;

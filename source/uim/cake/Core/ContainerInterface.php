@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Core;
 
-use League\Container\DefinitionContainerInterface;
+use League\Container\DefinitionIContainer;
 
 /**
  * Interface for the Dependency Injection Container in CakePHP applications
@@ -27,6 +27,6 @@ use League\Container\DefinitionContainerInterface;
  * The methods defined in this interface use the conventions provided
  * by league/container as that is the library that CakePHP uses.
  */
-interface ContainerInterface extends DefinitionContainerInterface
+interface IContainer extends DefinitionIContainer
 {
 }

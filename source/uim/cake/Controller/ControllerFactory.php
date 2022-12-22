@@ -18,7 +18,7 @@ namespace Cake\Controller;
 
 use Cake\Controller\Exception\InvalidParameterException;
 use Cake\Core\App;
-use Cake\Core\ContainerInterface;
+use Cake\Core\IContainer;
 use Cake\Http\ControllerFactoryInterface;
 use Cake\Http\Exception\MissingControllerException;
 use Cake\Http\MiddlewareQueue;
@@ -41,7 +41,7 @@ use ReflectionNamedType;
 class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInterface
 {
     /**
-     * @var \Cake\Core\ContainerInterface
+     * @var \Cake\Core\IContainer
      */
     protected $container;
 
@@ -53,9 +53,9 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
     /**
      * Constructor
      *
-     * @param \Cake\Core\ContainerInterface $container The container to build controllers with.
+     * @param \Cake\Core\IContainer $container The container to build controllers with.
      */
-    public this(ContainerInterface $container)
+    public this(IContainer $container)
     {
         this->container = $container;
     }
