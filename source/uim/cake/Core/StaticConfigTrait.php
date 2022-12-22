@@ -259,7 +259,7 @@ REGEXP;
             if (is_int($k)) {
                 unset($parsed[$k]);
             } elseif (strpos($k, '_') === 0) {
-                $exists[substr($k, 1)] = ($v !== '');
+                $exists[substr($k, 1)] = ($v != '');
                 unset($parsed[$k]);
             } elseif ($v === '' && !$exists[$k]) {
                 unset($parsed[$k]);

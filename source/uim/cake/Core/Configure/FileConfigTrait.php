@@ -43,7 +43,7 @@ trait FileConfigTrait
      */
     protected function _getFilePath(string $key, bool $checkExists = false): string
     {
-        if (strpos($key, '..') !== false) {
+        if (strpos($key, '..') != false) {
             throw new CakeException('Cannot load/dump configuration files with ../ in them.');
         }
 
@@ -62,7 +62,7 @@ trait FileConfigTrait
         }
 
         $realPath = realpath($file);
-        if ($realPath !== false && is_file($realPath)) {
+        if ($realPath != false && is_file($realPath)) {
             return $realPath;
         }
 

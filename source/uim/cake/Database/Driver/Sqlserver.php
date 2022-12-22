@@ -138,25 +138,25 @@ class Sqlserver extends Driver
         }
 
         $dsn = "sqlsrv:Server={$config['host']}{$port};Database={$config['database']};MultipleActiveResultSets=false";
-        if ($config['app'] !== null) {
+        if ($config['app'] != null) {
             $dsn .= ";APP={$config['app']}";
         }
-        if ($config['connectionPooling'] !== null) {
+        if ($config['connectionPooling'] != null) {
             $dsn .= ";ConnectionPooling={$config['connectionPooling']}";
         }
-        if ($config['failoverPartner'] !== null) {
+        if ($config['failoverPartner'] != null) {
             $dsn .= ";Failover_Partner={$config['failoverPartner']}";
         }
-        if ($config['loginTimeout'] !== null) {
+        if ($config['loginTimeout'] != null) {
             $dsn .= ";LoginTimeout={$config['loginTimeout']}";
         }
-        if ($config['multiSubnetFailover'] !== null) {
+        if ($config['multiSubnetFailover'] != null) {
             $dsn .= ";MultiSubnetFailover={$config['multiSubnetFailover']}";
         }
-        if ($config['encrypt'] !== null) {
+        if ($config['encrypt'] != null) {
             $dsn .= ";Encrypt={$config['encrypt']}";
         }
-        if ($config['trustServerCertificate'] !== null) {
+        if ($config['trustServerCertificate'] != null) {
             $dsn .= ";TrustServerCertificate={$config['trustServerCertificate']}";
         }
         this->_connect($dsn, $config);
@@ -283,7 +283,7 @@ class Sqlserver extends Driver
             case static::FEATURE_QUOTE:
                 this->connect();
 
-                return this->_connection->getAttribute(PDO::ATTR_DRIVER_NAME) !== 'odbc';
+                return this->_connection->getAttribute(PDO::ATTR_DRIVER_NAME) != 'odbc';
         }
 
         return parent::supports($feature);
@@ -331,11 +331,11 @@ class Sqlserver extends Driver
             $query->modifier(['_auto_top_' => sprintf('TOP %d', $limit)]);
         }
 
-        if ($offset !== null && !$query->clause('order')) {
+        if ($offset != null && !$query->clause('order')) {
             $query->order($query->newExpr()->add('(SELECT NULL)'));
         }
 
-        if (this->version() < 11 && $offset !== null) {
+        if (this->version() < 11 && $offset != null) {
             return this->_pagingSubquery($query, $limit, $offset);
         }
 

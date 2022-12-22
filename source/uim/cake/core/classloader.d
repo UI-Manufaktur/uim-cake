@@ -60,7 +60,7 @@ class ClassLoader
     function loadClass(string myClass) {
         $prefix = myClass;
 
-        while (($pos = strrpos($prefix, "\\")) !== false) {
+        while (($pos = strrpos($prefix, "\\")) != false) {
             $prefix = substr(myClass, 0, $pos + 1);
             $relativeClass = substr(myClass, $pos + 1);
 

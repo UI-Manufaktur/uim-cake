@@ -24,7 +24,7 @@ trait FileConfigTrait
      *  files contain ".." as this could lead to abusive reads.
      */
     protected string _getFilePath(string myKey, bool $checkExists = false) {
-        if (indexOf(myKey, "..") !== false) {
+        if (indexOf(myKey, "..") != false) {
             throw new CakeException("Cannot load/dump configuration files with ../ in them.");
         }
 
@@ -43,7 +43,7 @@ trait FileConfigTrait
         }
 
         $realPath = realpath(myfile);
-        if ($realPath !== false && is_file($realPath)) {
+        if ($realPath != false && is_file($realPath)) {
             return $realPath;
         }
 

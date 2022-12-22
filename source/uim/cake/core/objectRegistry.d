@@ -130,7 +130,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
                 $failure = " The `{myKey}` was not defined in the previous configuration data.";
                 break;
             }
-            if (isset($existingConfig[myKey]) && $existingConfig[myKey] !== myValue) {
+            if (isset($existingConfig[myKey]) && $existingConfig[myKey] != myValue) {
                 $failure = sprintf(
                     " The `%s` key has a value of `%s` but previously had a value of `%s`",
                     myKey,

@@ -80,7 +80,7 @@ class ClassLoader
     {
         $prefix = $class;
 
-        while (($pos = strrpos($prefix, '\\')) !== false) {
+        while (($pos = strrpos($prefix, '\\')) != false) {
             $prefix = substr($class, 0, $pos + 1);
             $relativeClass = substr($class, $pos + 1);
 

@@ -64,7 +64,7 @@ trait CaseExpressionTrait
         ) {
             $type = 'string';
         } elseif (
-            this->_typeMap !== null &&
+            this->_typeMap != null &&
             $value instanceof IdentifierExpression
         ) {
             $type = this->_typeMap->type($value->getIdentifier());
@@ -86,7 +86,7 @@ trait CaseExpressionTrait
     protected function compileNullableValue(ValueBinder $binder, $value, ?string $type = null): string
     {
         if (
-            $type !== null &&
+            $type != null &&
             !($value instanceof ExpressionInterface)
         ) {
             $value = this->_castToExpression($value, $type);

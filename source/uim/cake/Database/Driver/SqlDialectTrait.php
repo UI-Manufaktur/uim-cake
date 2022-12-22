@@ -236,7 +236,7 @@ trait SqlDialectTrait
                     $field = $expression->getField();
                     if (
                         is_string($field) &&
-                        strpos($field, '.') !== false
+                        strpos($field, '.') != false
                     ) {
                         [, $unaliasedField] = explode('.', $field, 2);
                         $expression->setField($unaliasedField);
@@ -247,7 +247,7 @@ trait SqlDialectTrait
 
                 if ($expression instanceof IdentifierExpression) {
                     $identifier = $expression->getIdentifier();
-                    if (strpos($identifier, '.') !== false) {
+                    if (strpos($identifier, '.') != false) {
                         [, $unaliasedIdentifier] = explode('.', $identifier, 2);
                         $expression->setIdentifier($unaliasedIdentifier);
                     }

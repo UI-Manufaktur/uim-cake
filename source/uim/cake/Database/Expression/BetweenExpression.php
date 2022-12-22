@@ -60,7 +60,7 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
      */
     public this($field, $from, $to, $type = null)
     {
-        if ($type !== null) {
+        if ($type != null) {
             $from = this->_castToExpression($from, $type);
             $to = this->_castToExpression($to, $type);
         }

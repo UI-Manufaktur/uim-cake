@@ -94,7 +94,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
     {
         $value = this->_castToExpression($value, this->_type);
 
-        $isMultiple = this->_type && strpos(this->_type, '[]') !== false;
+        $isMultiple = this->_type && strpos(this->_type, '[]') != false;
         if ($isMultiple) {
             [$value, this->_valueExpressions] = this->_collectExpressions($value);
         }
@@ -216,7 +216,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
         if (this->_isMultiple) {
             $template .= '%s (%s)';
             $type = this->_type;
-            if ($type !== null) {
+            if ($type != null) {
                 $type = str_replace('[]', '', $type);
             }
             $value = this->_flattenValue(this->_value, $binder, $type);

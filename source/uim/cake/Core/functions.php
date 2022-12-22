@@ -88,7 +88,7 @@ if (!function_exists('pluginSplit')) {
      */
     function pluginSplit(string $name, bool $dotAppend = false, ?string $plugin = null): array
     {
-        if (strpos($name, '.') !== false) {
+        if (strpos($name, '.') != false) {
             $parts = explode('.', $name, 2);
             if ($dotAppend) {
                 $parts[0] .= '.';
@@ -144,7 +144,7 @@ if (!function_exists('pr')) {
             return $var;
         }
 
-        $template = PHP_SAPI !== 'cli' && PHP_SAPI !== 'phpdbg' ? '<pre class="pr">%s</pre>' : "\n%s\n\n";
+        $template = PHP_SAPI != 'cli' && PHP_SAPI != 'phpdbg' ? '<pre class="pr">%s</pre>' : "\n%s\n\n";
         printf($template, trim(print_r($var, true)));
 
         return $var;
@@ -172,7 +172,7 @@ if (!function_exists('pj')) {
             return $var;
         }
 
-        $template = PHP_SAPI !== 'cli' && PHP_SAPI !== 'phpdbg' ? '<pre class="pj">%s</pre>' : "\n%s\n\n";
+        $template = PHP_SAPI != 'cli' && PHP_SAPI != 'phpdbg' ? '<pre class="pj">%s</pre>' : "\n%s\n\n";
         printf($template, trim(json_encode($var, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)));
 
         return $var;
@@ -196,7 +196,7 @@ if (!function_exists('env')) {
     {
         if ($key === 'HTTPS') {
             if (isset($_SERVER['HTTPS'])) {
-                return !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+                return !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
             }
 
             return strpos((string)env('SCRIPT_URI'), 'https://') === 0;
@@ -208,19 +208,19 @@ if (!function_exists('env')) {
 
         /** @var string|null $val */
         $val = $_SERVER[$key] ?? $_ENV[$key] ?? null;
-        if ($val == null && getenv($key) !== false) {
+        if ($val == null && getenv($key) != false) {
             /** @var string|false $val */
             $val = getenv($key);
         }
 
         if ($key === 'REMOTE_ADDR' && $val === env('SERVER_ADDR')) {
             $addr = env('HTTP_PC_REMOTE_ADDR');
-            if ($addr !== null) {
+            if ($addr != null) {
                 $val = $addr;
             }
         }
 
-        if ($val !== null) {
+        if ($val != null) {
             return $val;
         }
 

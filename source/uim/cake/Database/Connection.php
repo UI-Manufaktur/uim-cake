@@ -409,7 +409,7 @@ class Connection implements ConnectionInterface
      */
     public function getSchemaCollection(): SchemaCollectionInterface
     {
-        if (this->_schemaCollection !== null) {
+        if (this->_schemaCollection != null) {
             return this->_schemaCollection;
         }
 
@@ -841,7 +841,7 @@ class Connection implements ConnectionInterface
      */
     public function getCacher(): CacheInterface
     {
-        if (this->cacher !== null) {
+        if (this->cacher != null) {
             return this->cacher;
         }
 
@@ -916,7 +916,7 @@ class Connection implements ConnectionInterface
      */
     public function getLogger(): LoggerInterface
     {
-        if (this->_logger !== null) {
+        if (this->_logger != null) {
             return this->_logger;
         }
 

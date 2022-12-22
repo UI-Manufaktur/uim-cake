@@ -108,7 +108,7 @@ class IniConfig : IConfigEngine
                 myValue = false;
             }
             unset(myValues[myKey]);
-            if (indexOf((string)myKey, ".") !== false) {
+            if (indexOf((string)myKey, ".") != false) {
                 myValues = Hash::insert(myValues, myKey, myValue);
             } else {
                 myValues[myKey] = myValue;
@@ -131,7 +131,7 @@ class IniConfig : IConfigEngine
         foreach (myData as $k: myValue) {
             $isSection = false;
             /** @psalm-suppress InvalidArrayAccess */
-            if ($k[0] !== "[") {
+            if ($k[0] != "[") {
                 myResult[] = "[$k]";
                 $isSection = true;
             }

@@ -138,7 +138,7 @@ class Configure
             return false;
         }
 
-        return static::read($var) !== null;
+        return static::read($var) != null;
     }
 
     /**
@@ -402,7 +402,7 @@ class Configure
     protected static function _getEngine(string $config): ?ConfigEngineInterface
     {
         if (!isset(static::$_engines[$config])) {
-            if ($config !== 'default') {
+            if ($config != 'default') {
                 return null;
             }
             static::config($config, new PhpConfig());
@@ -424,7 +424,7 @@ class Configure
     public static function version(): string
     {
         $version = static::read('Cake.version');
-        if ($version !== null) {
+        if ($version != null) {
             return $version;
         }
 

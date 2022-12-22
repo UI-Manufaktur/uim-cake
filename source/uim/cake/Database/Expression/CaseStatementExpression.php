@@ -126,7 +126,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
     {
         if (func_num_args() > 0) {
             if (
-                $value !== null &&
+                $value != null &&
                 !is_scalar($value) &&
                 !(is_object($value) && !($value instanceof Closure))
             ) {
@@ -141,7 +141,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
             this->value = $value;
 
             if (
-                $value !== null &&
+                $value != null &&
                 $type === null &&
                 !($value instanceof ExpressionInterface)
             ) {
@@ -293,7 +293,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      */
     public function when($when, $type = null)
     {
-        if (this->whenBuffer !== null) {
+        if (this->whenBuffer != null) {
             throw new LogicException('Cannot call `when()` between `when()` and `then()`.');
         }
 
@@ -403,12 +403,12 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      */
     public function else($result, ?string $type = null)
     {
-        if (this->whenBuffer !== null) {
+        if (this->whenBuffer != null) {
             throw new LogicException('Cannot call `else()` between `when()` and `then()`.');
         }
 
         if (
-            $result !== null &&
+            $result != null &&
             !is_scalar($result) &&
             !(is_object($result) && !($result instanceof Closure))
         ) {
@@ -443,19 +443,19 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      */
     public function getReturnType(): string
     {
-        if (this->returnType !== null) {
+        if (this->returnType != null) {
             return this->returnType;
         }
 
         $types = [];
         foreach (this->when as $when) {
             $type = $when->getResultType();
-            if ($type !== null) {
+            if ($type != null) {
                 $types[] = $type;
             }
         }
 
-        if (this->elseType !== null) {
+        if (this->elseType != null) {
             $types[] = this->elseType;
         }
 
@@ -519,7 +519,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      */
     public function sql(ValueBinder $binder): string
     {
-        if (this->whenBuffer !== null) {
+        if (this->whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 
@@ -548,7 +548,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this->whenBuffer !== null) {
+        if (this->whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 
@@ -577,7 +577,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      */
     public function __clone()
     {
-        if (this->whenBuffer !== null) {
+        if (this->whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 

@@ -1499,7 +1499,7 @@ class Query implements ExpressionInterface, IteratorAggregate
         if ($num < 1) {
             throw new InvalidArgumentException('Pages must start at 1.');
         }
-        if ($limit !== null) {
+        if ($limit != null) {
             this->limit($limit);
         }
         $limit = this->clause('limit');
@@ -1717,7 +1717,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      */
     public function values($data)
     {
-        if (this->_type !== 'insert') {
+        if (this->_type != 'insert') {
             throw new DatabaseException(
                 'You cannot add values before defining columns to use.'
             );
@@ -1838,7 +1838,7 @@ class Query implements ExpressionInterface, IteratorAggregate
     {
         this->_dirty();
         this->_type = 'delete';
-        if ($table !== null) {
+        if ($table != null) {
             this->from($table);
         }
 
@@ -1923,7 +1923,7 @@ class Query implements ExpressionInterface, IteratorAggregate
     {
         $expression = new QueryExpression([], this->getTypeMap());
 
-        if ($rawExpression !== null) {
+        if ($rawExpression != null) {
             $expression->add($rawExpression);
         }
 
@@ -2047,7 +2047,7 @@ class Query implements ExpressionInterface, IteratorAggregate
             this->_resultDecorators = [];
         }
 
-        if ($callback !== null) {
+        if ($callback != null) {
             this->_resultDecorators[] = $callback;
         }
 
@@ -2378,10 +2378,10 @@ class Query implements ExpressionInterface, IteratorAggregate
     public function __clone()
     {
         this->_iterator = null;
-        if (this->_valueBinder !== null) {
+        if (this->_valueBinder != null) {
             this->_valueBinder = clone this->_valueBinder;
         }
-        if (this->_selectTypeMap !== null) {
+        if (this->_selectTypeMap != null) {
             this->_selectTypeMap = clone this->_selectTypeMap;
         }
         foreach (this->_parts as $name => $part) {

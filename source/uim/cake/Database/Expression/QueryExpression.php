@@ -601,7 +601,7 @@ class QueryExpression implements ExpressionInterface, Countable
             } elseif ($part instanceof ExpressionInterface) {
                 $part = $part->sql($binder);
             }
-            if ($part !== '') {
+            if ($part != '') {
                 $parts[] = $part;
             }
         }
@@ -645,7 +645,7 @@ class QueryExpression implements ExpressionInterface, Countable
         foreach (this->_conditions as $k => $c) {
             $key = &$k;
             $part = $callback($c, $key);
-            if ($part !== null) {
+            if ($part != null) {
                 $parts[$key] = $part;
             }
         }
@@ -801,7 +801,7 @@ class QueryExpression implements ExpressionInterface, Countable
         $operator = strtolower(trim($operator));
         $type = this->getTypeMap()->type($expression);
 
-        $typeMultiple = (is_string($type) && strpos($type, '[]') !== false);
+        $typeMultiple = (is_string($type) && strpos($type, '[]') != false);
         if (in_array($operator, ['in', 'not in']) || $typeMultiple) {
             $type = $type ?: 'string';
             if (!$typeMultiple) {
@@ -832,15 +832,15 @@ class QueryExpression implements ExpressionInterface, Countable
             );
         }
 
-        if ($operator === 'is' && $value !== null) {
+        if ($operator === 'is' && $value != null) {
             $operator = '=';
         }
 
-        if ($operator === 'is not' && $value !== null) {
+        if ($operator === 'is not' && $value != null) {
             $operator = '!=';
         }
 
-        if ($value === null && this->_conjunction !== ',') {
+        if ($value === null && this->_conjunction != ',') {
             throw new InvalidArgumentException(
                 sprintf('Expression `%s` is missing operator (IS, IS NOT) with `null` value.', $expression)
             );

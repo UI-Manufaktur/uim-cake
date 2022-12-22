@@ -135,7 +135,7 @@ class IniConfig implements ConfigEngineInterface
                 $value = false;
             }
             unset($values[$key]);
-            if (strpos((string)$key, '.') !== false) {
+            if (strpos((string)$key, '.') != false) {
                 $values = Hash::insert($values, $key, $value);
             } else {
                 $values[$key] = $value;
@@ -159,7 +159,7 @@ class IniConfig implements ConfigEngineInterface
         foreach ($data as $k => $value) {
             $isSection = false;
             /** @psalm-suppress InvalidArrayAccess */
-            if ($k[0] !== '[') {
+            if ($k[0] != '[') {
                 $result[] = "[$k]";
                 $isSection = true;
             }

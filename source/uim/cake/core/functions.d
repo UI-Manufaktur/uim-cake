@@ -69,7 +69,7 @@ if (!function_exists("pluginSplit")) {
      * @psalm-return array{string|null, string}
      */
     array pluginSplit(string myName, bool $dotAppend = false, Nullable!string myPlugin = null) {
-        if (indexOf(myName, ".") !== false) {
+        if (indexOf(myName, ".") != false) {
             $parts = explode(".", myName, 2);
             if ($dotAppend) {
                 $parts[0] .= ".";
@@ -123,7 +123,7 @@ if (!function_exists("pr")) {
             return $var;
         }
 
-        myTemplate = PHP_SAPI !== "cli" && PHP_SAPI !== "phpdbg" ? "<pre class="pr">%s</pre>" : "\n%s\n\n";
+        myTemplate = PHP_SAPI != "cli" && PHP_SAPI != "phpdbg" ? "<pre class="pr">%s</pre>" : "\n%s\n\n";
         printf(myTemplate, trim(print_r($var, true)));
 
         return $var;
@@ -150,7 +150,7 @@ if (!function_exists("pj")) {
             return $var;
         }
 
-        myTemplate = PHP_SAPI !== "cli" && PHP_SAPI !== "phpdbg" ? "<pre class="pj">%s</pre>" : "\n%s\n\n";
+        myTemplate = PHP_SAPI != "cli" && PHP_SAPI != "phpdbg" ? "<pre class="pj">%s</pre>" : "\n%s\n\n";
         printf(myTemplate, trim(json_encode($var, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)));
 
         return $var;
@@ -173,7 +173,7 @@ if (!function_exists("env")) {
     function env(string myKey, $default = null) {
         if (myKey == "HTTPS") {
             if (isset($_SERVER["HTTPS"])) {
-                return !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off";
+                return !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off";
             }
 
             return indexOf((string)env("SCRIPT_URI"), "https://") == 0;
@@ -184,7 +184,7 @@ if (!function_exists("env")) {
         }
 
         $val = $_SERVER[myKey] ?? $_ENV[myKey] ?? null;
-        if ($val is null && getenv(myKey) !== false) {
+        if ($val is null && getenv(myKey) != false) {
             $val = getenv(myKey);
         }
 

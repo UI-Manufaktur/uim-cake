@@ -139,7 +139,7 @@ class WhenThenExpression implements ExpressionInterface
         }
 
         if (
-            $type !== null &&
+            $type != null &&
             !is_array($type) &&
             !is_string($type)
         ) {
@@ -151,7 +151,7 @@ class WhenThenExpression implements ExpressionInterface
 
         if (is_array($when)) {
             if (
-                $type !== null &&
+                $type != null &&
                 !is_array($type)
             ) {
                 throw new InvalidArgumentException(sprintf(
@@ -173,7 +173,7 @@ class WhenThenExpression implements ExpressionInterface
             $when = new QueryExpression($when, $typeMap);
         } else {
             if (
-                $type !== null &&
+                $type != null &&
                 !is_string($type)
             ) {
                 throw new InvalidArgumentException(sprintf(
@@ -208,7 +208,7 @@ class WhenThenExpression implements ExpressionInterface
     public function then($result, ?string $type = null)
     {
         if (
-            $result !== null &&
+            $result != null &&
             !is_scalar($result) &&
             !(is_object($result) && !($result instanceof Closure))
         ) {

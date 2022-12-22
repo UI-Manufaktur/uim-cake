@@ -136,7 +136,7 @@ class Sqlite extends Driver
         }
 
         $chmodFile = false;
-        if ($config['database'] !== ':memory:' && $config['mode'] !== 'memory') {
+        if ($config['database'] != ':memory:' && $config['mode'] != 'memory') {
             $chmodFile = !file_exists($config['database']);
         }
 

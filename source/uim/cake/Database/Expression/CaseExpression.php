@@ -147,7 +147,7 @@ class CaseExpression implements ExpressionInterface
 
             $type = $types[$k] ?? null;
 
-            if ($type !== null && !$value instanceof ExpressionInterface) {
+            if ($type != null && !$value instanceof ExpressionInterface) {
                 $value = this->_castToExpression($value, $type);
             }
 
@@ -174,7 +174,7 @@ class CaseExpression implements ExpressionInterface
             $value = key($value);
         }
 
-        if ($value !== null && !$value instanceof ExpressionInterface) {
+        if ($value != null && !$value instanceof ExpressionInterface) {
             $value = this->_castToExpression($value, $type);
         }
 
@@ -219,7 +219,7 @@ class CaseExpression implements ExpressionInterface
             $value = this->_values[$k];
             $parts[] = 'WHEN ' . this->_compile($part, $binder) . ' THEN ' . this->_compile($value, $binder);
         }
-        if (this->_elseValue !== null) {
+        if (this->_elseValue != null) {
             $parts[] = 'ELSE';
             $parts[] = this->_compile(this->_elseValue, $binder);
         }

@@ -366,7 +366,7 @@ class Configure
     protected static auto _getEngine(string myConfig): ?IConfigEngine
     {
         if (!isset(static::$_engines[myConfig])) {
-            if (myConfig !== "default") {
+            if (myConfig != "default") {
                 return null;
             }
             static::config(myConfig, new PhpConfig());
