@@ -166,7 +166,7 @@ class WincacheEngine extends CacheEngine
         }
 
         $groups = wincache_ucache_get(this->_compiledGroupNames);
-        if (count($groups) !== count(this->_config['groups'])) {
+        if (count($groups) != count(this->_config['groups'])) {
             foreach (this->_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
                     wincache_ucache_set($group, 1);

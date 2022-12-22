@@ -264,7 +264,7 @@ class Cache
 
         $backend = static::pool($config);
         $success = $backend->set($key, $value);
-        if ($success === false && $value !== '') {
+        if ($success === false && $value != '') {
             trigger_error(
                 sprintf(
                     "%s cache was unable to write '%s' to %s cache",
@@ -585,7 +585,7 @@ class Cache
     public static function remember(string $key, callable $callable, string $config = 'default')
     {
         $existing = self::read($key, $config);
-        if ($existing !== null) {
+        if ($existing != null) {
             return $existing;
         }
         $results = $callable();

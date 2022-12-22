@@ -139,7 +139,7 @@ class WincacheEngine : CacheEngine {
         }
 
         myGroups = wincache_ucache_get(_compiledGroupNames);
-        if (count(myGroups) !== count(_config["groups"])) {
+        if (count(myGroups) != count(_config["groups"])) {
             foreach (_compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     wincache_ucache_set(myGroup, 1);

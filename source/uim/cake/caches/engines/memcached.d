@@ -193,7 +193,7 @@ class MemcachedEngine : CacheEngine
         }
 
         if (
-            $serializer !== "php" &&
+            $serializer != "php" &&
             !constant("Memcached::HAVE_" . strtoupper($serializer))
         ) {
             throw new InvalidArgumentException(
@@ -237,7 +237,7 @@ class MemcachedEngine : CacheEngine
         }
         if (substr($server, 0, 1) == "[") {
             $position = indexOf($server, "]:");
-            if ($position !== false) {
+            if ($position != false) {
                 $position++;
             }
         } else {
@@ -245,7 +245,7 @@ class MemcachedEngine : CacheEngine
         }
         $port = 11211;
         $host = $server;
-        if ($position !== false) {
+        if ($position != false) {
             $host = substr($server, 0, $position);
             $port = substr($server, $position + 1);
         }
@@ -438,7 +438,7 @@ class MemcachedEngine : CacheEngine
         }
 
         myGroups = _Memcached.getMulti(_compiledGroupNames) ?: [];
-        if (count(myGroups) !== count(_config["groups"])) {
+        if (count(myGroups) != count(_config["groups"])) {
             foreach (_compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     _Memcached.set(myGroup, 1, 0);

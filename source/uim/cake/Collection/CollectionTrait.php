@@ -175,10 +175,10 @@ trait CollectionTrait
     public function extract($path): CollectionInterface
     {
         $extractor = new ExtractIterator(this->unwrap(), $path);
-        if (is_string($path) && strpos($path, '{*}') !== false) {
+        if (is_string($path) && strpos($path, '{*}') != false) {
             $extractor = $extractor
                 ->filter(function ($data) {
-                    return $data !== null && ($data instanceof Traversable || is_array($data));
+                    return $data != null && ($data instanceof Traversable || is_array($data));
                 })
                 ->unfold();
         }
@@ -208,7 +208,7 @@ trait CollectionTrait
     public function avg($path = null)
     {
         $result = this;
-        if ($path !== null) {
+        if ($path != null) {
             $result = $result->extract($path);
         }
         $result = $result
@@ -231,7 +231,7 @@ trait CollectionTrait
     public function median($path = null)
     {
         $items = this;
-        if ($path !== null) {
+        if ($path != null) {
             $items = $items->extract($path);
         }
         $values = $items->toList();
@@ -544,7 +544,7 @@ trait CollectionTrait
      */
     public function appendItem($item, $key = null): CollectionInterface
     {
-        if ($key !== null) {
+        if ($key != null) {
             $data = [$key => $item];
         } else {
             $data = [$item];
@@ -566,7 +566,7 @@ trait CollectionTrait
      */
     public function prependItem($item, $key = null): CollectionInterface
     {
-        if ($key !== null) {
+        if ($key != null) {
             $data = [$key => $item];
         } else {
             $data = [$item];
@@ -899,7 +899,7 @@ trait CollectionTrait
             $iterator = $iterator->getInnerIterator();
         }
 
-        if ($iterator !== this && $iterator instanceof CollectionInterface) {
+        if ($iterator != this && $iterator instanceof CollectionInterface) {
             $iterator = $iterator->unwrap();
         }
 
@@ -927,7 +927,7 @@ trait CollectionTrait
 
         foreach (this->toList() as $value) {
             $valueCount = count($value);
-            if ($valueCount !== count($value, COUNT_RECURSIVE)) {
+            if ($valueCount != count($value, COUNT_RECURSIVE)) {
                 throw new LogicException('Cannot find the cartesian product of a multidimensional array');
             }
 
@@ -979,7 +979,7 @@ trait CollectionTrait
         $length = count(current($arrayValue));
         $result = [];
         foreach ($arrayValue as $row) {
-            if (count($row) !== $length) {
+            if (count($row) != $length) {
                 throw new LogicException('Child arrays do not have even length');
             }
         }

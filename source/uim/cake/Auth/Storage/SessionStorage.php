@@ -80,7 +80,7 @@ class SessionStorage implements StorageInterface
      */
     public function read()
     {
-        if (this->_user !== null) {
+        if (this->_user != null) {
             return this->_user ?: null;
         }
 

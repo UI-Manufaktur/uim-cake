@@ -90,7 +90,7 @@ class FileEngine extends CacheEngine
         if (this->_config['path'] === null) {
             this->_config['path'] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'cake_cache' . DIRECTORY_SEPARATOR;
         }
-        if (substr(this->_config['path'], -1) !== DIRECTORY_SEPARATOR) {
+        if (substr(this->_config['path'], -1) != DIRECTORY_SEPARATOR) {
             this->_config['path'] .= DIRECTORY_SEPARATOR;
         }
         if (this->_groupPrefix) {
@@ -197,7 +197,7 @@ class FileEngine extends CacheEngine
 
         $data = trim($data);
 
-        if ($data !== '' && !empty(this->_config['serialize'])) {
+        if ($data != '' && !empty(this->_config['serialize'])) {
             $data = unserialize($data);
         }
 
@@ -304,8 +304,8 @@ class FileEngine extends CacheEngine
 
         $prefixLength = strlen(this->_config['prefix']);
 
-        while (($entry = $dir->read()) !== false) {
-            if (substr($entry, 0, $prefixLength) !== this->_config['prefix']) {
+        while (($entry = $dir->read()) != false) {
+            if (substr($entry, 0, $prefixLength) != this->_config['prefix']) {
                 continue;
             }
 
@@ -381,7 +381,7 @@ class FileEngine extends CacheEngine
         }
         if (
             empty(this->_File) ||
-            this->_File->getBasename() !== $key ||
+            this->_File->getBasename() != $key ||
             this->_File->valid() === false
         ) {
             $exists = is_file($path->getPathname());
@@ -479,7 +479,7 @@ class FileEngine extends CacheEngine
                     DIRECTORY_SEPARATOR . $group . DIRECTORY_SEPARATOR
                 );
 
-                return $pos !== false;
+                return $pos != false;
             }
         );
         foreach ($filtered as $object) {

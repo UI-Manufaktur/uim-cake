@@ -197,7 +197,7 @@ class ApcuEngine extends CacheEngine
 
         $success = false;
         $groups = apcu_fetch(this->_compiledGroupNames, $success);
-        if ($success && count($groups) !== count(this->_config['groups'])) {
+        if ($success && count($groups) != count(this->_config['groups'])) {
             foreach (this->_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
                     $value = 1;

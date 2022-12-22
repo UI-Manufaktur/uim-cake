@@ -66,7 +66,7 @@ class I18nCommand extends Command
             if ($code === static::CODE_ERROR) {
                 this->abort();
             }
-        } while ($choice !== 'q');
+        } while ($choice != 'q');
 
         return static::CODE_SUCCESS;
     }

@@ -154,7 +154,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
         $options = [];
         foreach (this->commands as $key => $value) {
             $parts = explode(' ', $key);
-            if ($parts[0] !== $name) {
+            if ($parts[0] != $name) {
                 continue;
             }
 
@@ -233,13 +233,13 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
         $options = [];
         foreach (this->commands as $key => $value) {
             $parts = explode(' ', $key);
-            if ($parts[0] !== $name) {
+            if ($parts[0] != $name) {
                 continue;
             }
             if ($subcommand && !isset($parts[1])) {
                 continue;
             }
-            if ($subcommand && isset($parts[1]) && $parts[1] !== $subcommand) {
+            if ($subcommand && isset($parts[1]) && $parts[1] != $subcommand) {
                 continue;
             }
 

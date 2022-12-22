@@ -432,7 +432,7 @@ class I18nExtractCommand extends Command
 
                 this->_tokens = [];
                 foreach ($allTokens as $token) {
-                    if (!is_array($token) || ($token[0] !== T_WHITESPACE && $token[0] !== T_INLINE_HTML)) {
+                    if (!is_array($token) || ($token[0] != T_WHITESPACE && $token[0] != T_INLINE_HTML)) {
                         this->_tokens[] = $token;
                     }
                 }
@@ -499,10 +499,10 @@ class I18nExtractCommand extends Command
                         'line' => $line,
                     ];
                     $details['file'] = '.' . str_replace(ROOT, '', $details['file']);
-                    if ($plural !== null) {
+                    if ($plural != null) {
                         $details['msgid_plural'] = $plural;
                     }
-                    if ($context !== null) {
+                    if ($context != null) {
                         $details['msgctxt'] = $context;
                     }
                     this->_addTranslation($domain, $singular, $details);
@@ -553,7 +553,7 @@ class I18nExtractCommand extends Command
                     }
 
                     $sentence = '';
-                    if ($context !== '') {
+                    if ($context != '') {
                         $sentence .= "msgctxt \"{$context}\"\n";
                     }
                     if ($plural === false) {
@@ -566,7 +566,7 @@ class I18nExtractCommand extends Command
                         $sentence .= "msgstr[1] \"\"\n\n";
                     }
 
-                    if ($domain !== 'default' && this->_merge) {
+                    if ($domain != 'default' && this->_merge) {
                         this->_store('default', $header, $sentence);
                     } else {
                         this->_store($domain, $header, $sentence);
@@ -618,7 +618,7 @@ class I18nExtractCommand extends Command
 
             // Remove vendor prefix if present.
             $slashPosition = strpos($domain, '/');
-            if ($slashPosition !== false) {
+            if ($slashPosition != false) {
                 $domain = substr($domain, $slashPosition + 1);
             }
 
@@ -631,7 +631,7 @@ class I18nExtractCommand extends Command
             }
 
             $response = '';
-            while ($overwriteAll === false && file_exists($outputPath) && strtoupper($response) !== 'Y') {
+            while ($overwriteAll === false && file_exists($outputPath) && strtoupper($response) != 'Y') {
                 $io->out();
                 $response = $io->askChoice(
                     sprintf('Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll', $filename),
@@ -821,7 +821,7 @@ class I18nExtractCommand extends Command
         if (!empty(this->_exclude)) {
             $exclude = [];
             foreach (this->_exclude as $e) {
-                if (DIRECTORY_SEPARATOR !== '\\' && $e[0] !== DIRECTORY_SEPARATOR) {
+                if (DIRECTORY_SEPARATOR != '\\' && $e[0] != DIRECTORY_SEPARATOR) {
                     $e = DIRECTORY_SEPARATOR . $e;
                 }
                 $exclude[] = preg_quote($e, '/');

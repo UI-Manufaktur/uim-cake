@@ -179,7 +179,7 @@ class MemcachedEngine extends CacheEngine
             );
         }
 
-        if (this->_config['username'] !== null && this->_config['password'] !== null) {
+        if (this->_config['username'] != null && this->_config['password'] != null) {
             if (!method_exists(this->_Memcached, 'setSaslAuthData')) {
                 throw new InvalidArgumentException(
                     'Memcached extension is not built with SASL support'
@@ -214,7 +214,7 @@ class MemcachedEngine extends CacheEngine
         }
 
         if (
-            $serializer !== 'php' &&
+            $serializer != 'php' &&
             !constant('Memcached::HAVE_' . strtoupper($serializer))
         ) {
             throw new InvalidArgumentException(
@@ -259,7 +259,7 @@ class MemcachedEngine extends CacheEngine
         }
         if (substr($server, 0, 1) === '[') {
             $position = strpos($server, ']:');
-            if ($position !== false) {
+            if ($position != false) {
                 $position++;
             }
         } else {
@@ -267,7 +267,7 @@ class MemcachedEngine extends CacheEngine
         }
         $port = 11211;
         $host = $server;
-        if ($position !== false) {
+        if ($position != false) {
             $host = substr($server, 0, $position);
             $port = substr($server, $position + 1);
         }
@@ -476,7 +476,7 @@ class MemcachedEngine extends CacheEngine
         }
 
         $groups = this->_Memcached->getMulti(this->_compiledGroupNames) ?: [];
-        if (count($groups) !== count(this->_config['groups'])) {
+        if (count($groups) != count(this->_config['groups'])) {
             foreach (this->_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
                     this->_Memcached->set($group, 1, 0);

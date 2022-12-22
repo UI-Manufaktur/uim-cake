@@ -127,7 +127,7 @@ class TreePrinter extends RecursiveIteratorIterator implements CollectionInterfa
      */
     protected function _fetchCurrent()
     {
-        if (this->_current !== null) {
+        if (this->_current != null) {
             return this->_current;
         }
 

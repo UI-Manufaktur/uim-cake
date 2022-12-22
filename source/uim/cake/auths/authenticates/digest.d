@@ -256,7 +256,7 @@ class DigestAuthenticate : BasicAuthenticate
             return false;
         }
         $parts = explode(":", myValue);
-        if (count($parts) !== 2) {
+        if (count($parts) != 2) {
             return false;
         }
         [$expires, $checksum] = $parts;

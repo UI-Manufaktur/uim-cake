@@ -321,7 +321,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string myMessage The warning message.
      */
     protected void warning(string myMessage) {
-        if (this.getConfig("warnOnWriteFailures") !== true) {
+        if (this.getConfig("warnOnWriteFailures") != true) {
             return;
         }
 

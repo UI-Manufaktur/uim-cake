@@ -111,7 +111,7 @@ trait CollectionTrait
 
     ICollection extract(myPath) {
         $extractor = new ExtractIterator(this.unwrap(), myPath);
-        if (is_string(myPath) && indexOf(myPath, "{*}") !== false) {
+        if (is_string(myPath) && indexOf(myPath, "{*}") != false) {
             $extractor = $extractor
                 .filter(function (myData) {
                     return myData  !is null && (myData instanceof Traversable || is_array(myData));
@@ -710,7 +710,7 @@ trait CollectionTrait
             $iterator = $iterator.getInnerIterator();
         }
 
-        if ($iterator !== this && $iterator instanceof ICollection) {
+        if ($iterator != this && $iterator instanceof ICollection) {
             $iterator = $iterator.unwrap();
         }
 
@@ -737,7 +737,7 @@ trait CollectionTrait
 
         foreach (myValue; this.toList()) {
             myValueCount = count(myValue);
-            if (myValueCount !== count(myValue, COUNT_RECURSIVE)) {
+            if (myValueCount != count(myValue, COUNT_RECURSIVE)) {
                 throw new LogicException("Cannot find the cartesian product of a multidimensional array");
             }
 
@@ -788,7 +788,7 @@ trait CollectionTrait
         $length = count(current($arrayValue));
         myResult = [];
         foreach ($row; $arrayValue) {
-            if (count($row) !== $length) {
+            if (count($row) != $length) {
                 throw new LogicException("Child arrays do not have even length");
             }
         }

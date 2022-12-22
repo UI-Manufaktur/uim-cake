@@ -64,7 +64,7 @@ class ExtractIterator : Collection
             $iterator = $iterator.unwrap();
         }
 
-        if (get_class($iterator) !== ArrayIterator::class) {
+        if (get_class($iterator) != ArrayIterator::class) {
             return this;
         }
 

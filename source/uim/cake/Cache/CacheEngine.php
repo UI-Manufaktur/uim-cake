@@ -167,7 +167,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
     {
         this->ensureValidType($values, self::CHECK_KEY);
 
-        if ($ttl !== null) {
+        if ($ttl != null) {
             $restore = this->getConfig('duration');
             this->setConfig('duration', $ttl);
         }
@@ -227,7 +227,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     public function has($key): bool
     {
-        return this->get($key) !== null;
+        return this->get($key) != null;
     }
 
     /**
@@ -361,7 +361,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     protected function warning(string $message): void
     {
-        if (this->getConfig('warnOnWriteFailures') !== true) {
+        if (this->getConfig('warnOnWriteFailures') != true) {
             return;
         }
 

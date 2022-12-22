@@ -174,7 +174,7 @@ class ApcuEngine : CacheEngine
 
         $success = false;
         myGroups = apcu_fetch(_compiledGroupNames, $success);
-        if ($success && count(myGroups) !== count(_config["groups"])) {
+        if ($success && count(myGroups) != count(_config["groups"])) {
             foreach (_compiledGroupNames as myGroup) {
                 if (!isset(myGroups[myGroup])) {
                     myValue = 1;

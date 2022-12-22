@@ -225,7 +225,7 @@ class Cache {
 
         $backend = static::pool(myConfig);
         $success = $backend.set(myKey, myValue);
-        if ($success == false && myValue !== "") {
+        if ($success == false && myValue != "") {
             trigger_error(
                 sprintf(
                     "%s cache was unable to write "%s" to %s cache",
