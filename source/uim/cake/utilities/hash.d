@@ -189,7 +189,7 @@ class Hash {
     {
         $conditions = false;
         $position = indexOf($token, "[");
-        if ($position !== false) {
+        if ($position != false) {
             $conditions = substr($token, $position);
             $token = substr($token, 0, $position);
         }
@@ -413,7 +413,7 @@ class Hash {
             if ($match && is_array($v)) {
                 if ($conditions) {
                     if (static::_matches($v, $conditions)) {
-                        if ($nextPath !== "") {
+                        if ($nextPath != "") {
                             myData[$k] = static::remove($v, $nextPath);
                         } else {
                             unset(myData[$k]);
@@ -480,7 +480,7 @@ class Hash {
             $vals = array_fill(0, myKeys is null ? count(myData) : count(myKeys), null);
         }
 
-        if (is_array(myKeys) && count(myKeys) !== count($vals)) {
+        if (is_array(myKeys) && count(myKeys) != count($vals)) {
             throw new RuntimeException(
                 "Hash::combine() needs an equal number of keys + values."
             );
@@ -1230,7 +1230,7 @@ class Hash {
         foreach ($return as $i => myResult) {
             $id = static::get(myResult, $idKeys);
             $parentId = static::get(myResult, $parentKeys);
-            if ($id !== $root && $parentId != $root) {
+            if ($id != $root && $parentId != $root) {
                 unset($return[$i]);
             }
         }

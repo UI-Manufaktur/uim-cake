@@ -36,7 +36,7 @@ class ContentType extends ResponseBase
     public function matches($other): bool
     {
         $alias = this->response->getMimeType($other);
-        if ($alias !== false) {
+        if ($alias != false) {
             $other = $alias;
         }
 

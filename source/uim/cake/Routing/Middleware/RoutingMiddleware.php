@@ -70,7 +70,7 @@ class RoutingMiddleware implements MiddlewareInterface
      */
     public this(RoutingApplicationInterface $app, ?string $cacheConfig = null)
     {
-        if ($cacheConfig !== null) {
+        if ($cacheConfig != null) {
             deprecationWarning(
                 'Use of routing cache is deprecated and will be removed in 5.0. ' .
                 'Upgrade to the new `CakeDC/CachedRouting` plugin. ' .
@@ -103,7 +103,7 @@ class RoutingMiddleware implements MiddlewareInterface
      */
     protected function buildRouteCollection(): RouteCollection
     {
-        if (Cache::enabled() && this->cacheConfig !== null) {
+        if (Cache::enabled() && this->cacheConfig != null) {
             try {
                 return Cache::remember(static::ROUTE_COLLECTION_CACHE_KEY, function () {
                     return this->prepareRouteCollection();

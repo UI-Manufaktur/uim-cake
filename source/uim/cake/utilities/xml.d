@@ -102,7 +102,7 @@ class Xml {
             throw new XmlException("Invalid input. {myType} cannot be parsed as XML.");
         }
 
-        if (indexOf($input, "<") !== false) {
+        if (indexOf($input, "<") != false) {
             return static::_loadXml($input, myOptions);
         }
 
@@ -244,7 +244,7 @@ class Xml {
         if (is_object($input) && method_exists($input, "toArray") && is_callable([$input, "toArray"])) {
             $input = $input.toArray();
         }
-        if (!is_array($input) || count($input) !== 1) {
+        if (!is_array($input) || count($input) != 1) {
             throw new XmlException("Invalid input.");
         }
         myKey = key($input);
@@ -302,12 +302,12 @@ class Xml {
                         myValue = "";
                     }
                     $ismodule = indexOf(myKey, "xmlns:");
-                    if ($ismodule !== false) {
+                    if ($ismodule != false) {
                         /** @psalm-suppress PossiblyUndefinedMethod */
                         myNode.setAttributeNS("http://www.w3.org/2000/xmlns/", myKey, (string)myValue);
                         continue;
                     }
-                    if (myKey[0] !== "@" && $format == "tags") {
+                    if (myKey[0] != "@" && $format == "tags") {
                         if (!is_numeric(myValue)) {
                             // Escape special characters
                             // https://www.w3.org/TR/REC-xml/#syntax
@@ -452,7 +452,7 @@ class Xml {
         $asString = trim((string)$xml);
         if (empty(myData)) {
             myData = $asString;
-        } elseif ($asString !== "") {
+        } elseif ($asString != "") {
             myData["@"] = $asString;
         }
 

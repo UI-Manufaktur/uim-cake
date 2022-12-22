@@ -37,7 +37,7 @@ class CookieSet extends ResponseBase
     {
         $cookie = this->response->getCookie($other);
 
-        return $cookie !== null && $cookie['value'] !== '';
+        return $cookie != null && $cookie['value'] != '';
     }
 
     /**

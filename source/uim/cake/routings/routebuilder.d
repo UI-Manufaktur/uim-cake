@@ -170,12 +170,12 @@ class RouteBuilder {
      */
     string path() {
         $routeKey = indexOf(_path, "{");
-        if ($routeKey !== false && indexOf(_path, "}") !== false) {
+        if ($routeKey != false && indexOf(_path, "}") != false) {
             return substr(_path, 0, $routeKey);
         }
 
         $routeKey = indexOf(_path, ":");
-        if ($routeKey !== false) {
+        if ($routeKey != false) {
             return substr(_path, 0, $routeKey);
         }
 
@@ -677,12 +677,12 @@ class RouteBuilder {
             }
 
             $route = str_replace("//", "/", _path . $route);
-            if ($route !== "/") {
+            if ($route != "/") {
                 $route = rtrim($route, "/");
             }
 
             foreach (_params as $param => $val) {
-                if (isset($defaults[$param]) && $param !== "prefix" && $defaults[$param] !== $val) {
+                if (isset($defaults[$param]) && $param != "prefix" && $defaults[$param] != $val) {
                     $msg = "You cannot define routes that conflict with the scope. " .
                         "Scope had %s = %s, while route had %s = %s";
                     throw new BadMethodCallException(sprintf(
@@ -876,7 +876,7 @@ class RouteBuilder {
             ));
         }
 
-        if (_path !== "/") {
+        if (_path != "/") {
             myPath = _path . myPath;
         }
         myNamePrefix = _namePrefix;

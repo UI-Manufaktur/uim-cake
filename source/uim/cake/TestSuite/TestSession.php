@@ -54,7 +54,7 @@ class TestSession
             return (bool)this->session;
         }
 
-        return Hash::get(this->session, $name) !== null;
+        return Hash::get(this->session, $name) != null;
     }
 
     /**

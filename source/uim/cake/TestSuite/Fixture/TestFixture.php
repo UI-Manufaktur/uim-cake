@@ -103,7 +103,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
     {
         if (!empty(this->connection)) {
             $connection = this->connection;
-            if (strpos($connection, 'test') !== 0) {
+            if (strpos($connection, 'test') != 0) {
                 $message = sprintf(
                     'Invalid datasource name "%s" for "%s" fixture. Fixture datasource names must begin with "test".',
                     $connection,
@@ -187,7 +187,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
         }
         if (!empty(this->fields['_constraints'])) {
             foreach (this->fields['_constraints'] as $name => $data) {
-                if (!$connection->supportsDynamicConstraints() || $data['type'] !== TableSchema::CONSTRAINT_FOREIGN) {
+                if (!$connection->supportsDynamicConstraints() || $data['type'] != TableSchema::CONSTRAINT_FOREIGN) {
                     this->_schema->addConstraint($name, $data);
                 } else {
                     this->_constraints[$name] = $data;

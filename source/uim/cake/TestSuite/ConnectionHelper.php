@@ -92,7 +92,7 @@ class ConnectionHelper
             $allTables = $collection->listTables();
         }
 
-        $tables = $tables !== null ? array_intersect($tables, $allTables) : $allTables;
+        $tables = $tables != null ? array_intersect($tables, $allTables) : $allTables;
         $schemas = array_map(function ($table) use ($collection) {
             return $collection->describe($table);
         }, $tables);
@@ -126,7 +126,7 @@ class ConnectionHelper
         $collection = $connection->getSchemaCollection();
 
         $allTables = $collection->listTablesWithoutViews();
-        $tables = $tables !== null ? array_intersect($tables, $allTables) : $allTables;
+        $tables = $tables != null ? array_intersect($tables, $allTables) : $allTables;
         $schemas = array_map(function ($table) use ($collection) {
             return $collection->describe($table);
         }, $tables);

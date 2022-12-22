@@ -137,11 +137,11 @@ class Hash
         // Simple paths.
         if (!preg_match('/[{\[]/', $path)) {
             $data = static::get($data, $path);
-            if ($data !== null && !(is_array($data) || $data instanceof ArrayAccess)) {
+            if ($data != null && !(is_array($data) || $data instanceof ArrayAccess)) {
                 return [$data];
             }
 
-            return $data !== null ? (array)$data : [];
+            return $data != null ? (array)$data : [];
         }
 
         if (strpos($path, '[') === false) {
@@ -203,7 +203,7 @@ class Hash
     {
         $conditions = false;
         $position = strpos($token, '[');
-        if ($position !== false) {
+        if ($position != false) {
             $conditions = substr($token, $position);
             $token = substr($token, 0, $position);
         }
@@ -429,7 +429,7 @@ class Hash
             if ($match && is_array($v)) {
                 if ($conditions) {
                     if (static::_matches($v, $conditions)) {
-                        if ($nextPath !== '') {
+                        if ($nextPath != '') {
                             $data[$k] = static::remove($v, $nextPath);
                         } else {
                             unset($data[$k]);
@@ -479,7 +479,7 @@ class Hash
             /** @var array $keys */
             $keys = static::extract($data, $keyPath);
         }
-        if ($keyPath !== null && empty($keys)) {
+        if ($keyPath != null && empty($keys)) {
             return [];
         }
 
@@ -496,13 +496,13 @@ class Hash
             $vals = array_fill(0, $keys === null ? count($data) : count($keys), null);
         }
 
-        if (is_array($keys) && count($keys) !== count($vals)) {
+        if (is_array($keys) && count($keys) != count($vals)) {
             throw new RuntimeException(
                 'Hash::combine() needs an equal number of keys + values.'
             );
         }
 
-        if ($groupPath !== null) {
+        if ($groupPath != null) {
             $group = static::extract($data, $groupPath);
             if (!empty($group)) {
                 $c = is_array($keys) ? count($keys) : count($vals);
@@ -1079,7 +1079,7 @@ class Hash
         $stack = [];
         foreach ($data as $k => $r) {
             $id = $k;
-            if ($key !== null) {
+            if ($key != null) {
                 $id = $key;
             }
             if (is_array($r) && !empty($r)) {
@@ -1112,7 +1112,7 @@ class Hash
             return $data;
         }
         $intersection = array_intersect_key($data, $compare);
-        while (($key = key($intersection)) !== null) {
+        while (($key = key($intersection)) != null) {
             if ($data[$key] == $compare[$key]) {
                 unset($data[$key], $compare[$key]);
             }
@@ -1261,7 +1261,7 @@ class Hash
         foreach ($return as $i => $result) {
             $id = static::get($result, $idKeys);
             $parentId = static::get($result, $parentKeys);
-            if ($id !== $root && $parentId != $root) {
+            if ($id != $root && $parentId != $root) {
                 unset($return[$i]);
             }
         }

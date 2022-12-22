@@ -106,7 +106,7 @@ class FlashParamEquals extends Constraint
      */
     public function toString(): string
     {
-        if (this->at !== null) {
+        if (this->at != null) {
             return sprintf('is in \'%s\' %s #%d', this->key, this->param, this->at);
         }
 

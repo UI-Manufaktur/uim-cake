@@ -112,12 +112,12 @@ class RouteCollection
         krsort(_paths);
 
         foreach (_paths as myPath => $routes) {
-            if (indexOf($decoded, myPath) !== 0) {
+            if (indexOf($decoded, myPath) != 0) {
                 continue;
             }
 
             myQueryParameters = [];
-            if (indexOf(myUrl, "?") !== false) {
+            if (indexOf(myUrl, "?") != false) {
                 [myUrl, $qs] = explode("?", myUrl, 2);
                 parse_str($qs, myQueryParameters);
             }
@@ -136,7 +136,7 @@ class RouteCollection
         }
 
         myExceptionProperties = ["url" => myUrl];
-        if ($method !== "") {
+        if ($method != "") {
             // Ensure that if the method is included, it is the first element of
             // the array, to match the order that the strings are printed in the
             // MissingRouteException error message, $_messageTemplateWithMethod.
@@ -161,7 +161,7 @@ class RouteCollection
         krsort(_paths);
 
         foreach (_paths as myPath => $routes) {
-            if (indexOf(myUrlPath, myPath) !== 0) {
+            if (indexOf(myUrlPath, myPath) != 0) {
                 continue;
             }
 
@@ -190,11 +190,11 @@ class RouteCollection
      */
     protected string[] _getNames(array myUrl) {
         myPlugin = false;
-        if (isset(myUrl["plugin"]) && myUrl["plugin"] !== false) {
+        if (isset(myUrl["plugin"]) && myUrl["plugin"] != false) {
             myPlugin = strtolower(myUrl["plugin"]);
         }
         $prefix = false;
-        if (isset(myUrl["prefix"]) && myUrl["prefix"] !== false) {
+        if (isset(myUrl["prefix"]) && myUrl["prefix"] != false) {
             $prefix = strtolower(myUrl["prefix"]);
         }
         $controller = isset(myUrl["controller"]) ? strtolower(myUrl["controller"]) : null;

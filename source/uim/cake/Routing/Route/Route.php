@@ -201,7 +201,7 @@ class Route
             : strtoupper($methods);
 
         $diff = array_diff((array)$methods, static::VALID_METHODS);
-        if ($diff !== []) {
+        if ($diff != []) {
             throw new InvalidArgumentException(
                 sprintf('Invalid HTTP method received. `%s` is invalid.', implode(', ', $diff))
             );
@@ -285,7 +285,7 @@ class Route
      */
     public function compiled(): bool
     {
-        return this->_compiledRoute !== null;
+        return this->_compiledRoute != null;
     }
 
     /**
@@ -326,7 +326,7 @@ class Route
         $names = $routeParams = [];
         $parsed = preg_quote(this->template, '#');
 
-        if (strpos($route, '{') !== false && strpos($route, '}') !== false) {
+        if (strpos($route, '{') != false && strpos($route, '}') != false) {
             preg_match_all(static::PLACEHOLDER_REGEX, $route, $namedElements, PREG_OFFSET_CAPTURE | PREG_SET_ORDER);
         } else {
             $hasMatches = preg_match_all(
@@ -350,7 +350,7 @@ class Route
             $search = preg_quote($matchArray[0][0]);
             if (isset(this->options[$name])) {
                 $option = '';
-                if ($name !== 'plugin' && array_key_exists($name, this->defaults)) {
+                if ($name != 'plugin' && array_key_exists($name, this->defaults)) {
                     $option = '?';
                 }
                 // phpcs:disable Generic.Files.LineLength
@@ -410,8 +410,8 @@ class Route
         foreach ($keys as $key => $glue) {
             $value = null;
             if (
-                strpos(this->template, '{' . $key . '}') !== false
-                || strpos(this->template, ':' . $key) !== false
+                strpos(this->template, '{' . $key . '}') != false
+                || strpos(this->template, ':' . $key) != false
             ) {
                 $value = '_' . $key;
             } elseif (isset(this->defaults[$key])) {
@@ -463,7 +463,7 @@ class Route
     public function parse(string $url, string $method): ?array
     {
         try {
-            if ($method !== '') {
+            if ($method != '') {
                 $method = this->normalizeAndValidateMethods($method);
             }
         } catch (InvalidArgumentException $e) {
@@ -559,7 +559,7 @@ class Route
     {
         $pattern = '@^' . str_replace('\*', '.*', preg_quote(this->options['_host'], '@')) . '$@';
 
-        return preg_match($pattern, $host) !== 0;
+        return preg_match($pattern, $host) != 0;
     }
 
     /**
@@ -571,7 +571,7 @@ class Route
      */
     protected function _parseExtension(string $url): array
     {
-        if (count(this->_extensions) && strpos($url, '.') !== false) {
+        if (count(this->_extensions) && strpos($url, '.') != false) {
             foreach (this->_extensions as $ext) {
                 $len = strlen($ext) + 1;
                 if (substr($url, -$len) === '.' . $ext) {
@@ -600,7 +600,7 @@ class Route
         $urldecode = this->options['_urldecode'] ?? true;
 
         foreach ($args as $param) {
-            if (empty($param) && $param !== '0') {
+            if (empty($param) && $param != '0') {
                 continue;
             }
             $pass[] = $urldecode ? rawurldecode($param) : $param;
@@ -728,7 +728,7 @@ class Route
 
         // check that all the key names are in the url
         $keyNames = array_flip(this->keys);
-        if (array_intersect_key($keyNames, $url) !== $keyNames) {
+        if (array_intersect_key($keyNames, $url) != $keyNames) {
             return null;
         }
 
@@ -835,10 +835,10 @@ class Route
             $replace[] = $string;
         }
 
-        if (strpos(this->template, '**') !== false) {
+        if (strpos(this->template, '**') != false) {
             array_push($search, '**', '%2F');
             array_push($replace, $pass, '/');
-        } elseif (strpos(this->template, '*') !== false) {
+        } elseif (strpos(this->template, '*') != false) {
             $search[] = '*';
             $replace[] = $pass;
         }
@@ -897,12 +897,12 @@ class Route
         }
 
         $routeKey = strpos(this->template, ':');
-        if ($routeKey !== false) {
+        if ($routeKey != false) {
             return substr(this->template, 0, $routeKey);
         }
 
         $star = strpos(this->template, '*');
-        if ($star !== false) {
+        if ($star != false) {
             $path = rtrim(substr(this->template, 0, $star), '/');
 
             return $path === '' ? '/' : $path;

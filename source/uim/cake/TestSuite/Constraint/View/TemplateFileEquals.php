@@ -47,7 +47,7 @@ class TemplateFileEquals extends Constraint
      */
     public function matches($other): bool
     {
-        return strpos(this->filename, $other) !== false;
+        return strpos(this->filename, $other) != false;
     }
 
     /**

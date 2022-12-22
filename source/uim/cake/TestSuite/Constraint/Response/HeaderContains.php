@@ -30,7 +30,7 @@ class HeaderContains extends HeaderEquals
      */
     public function matches($other): bool
     {
-        return mb_strpos(this->response->getHeaderLine(this->headerName), $other) !== false;
+        return mb_strpos(this->response->getHeaderLine(this->headerName), $other) != false;
     }
 
     /**

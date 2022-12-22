@@ -229,7 +229,7 @@ abstract class TestCase extends BaseTestCase
             $callable();
         } finally {
             restore_error_handler();
-            if ($duplicate !== Configure::read('Error.allowDuplicateDeprecations')) {
+            if ($duplicate != Configure::read('Error.allowDuplicateDeprecations')) {
                 Configure::write('Error.allowDuplicateDeprecations', $duplicate);
             }
         }
@@ -735,7 +735,7 @@ abstract class TestCase extends BaseTestCase
             } elseif (is_string($tags)) {
                 $tagsTrimmed = preg_replace('/\s+/m', '', $tags);
 
-                if (preg_match('/^\*?\//', $tags, $match) && $tagsTrimmed !== '//') {
+                if (preg_match('/^\*?\//', $tags, $match) && $tagsTrimmed != '//') {
                     $prefix = ['', ''];
 
                     if ($match[0] === '*/') {
@@ -794,7 +794,7 @@ abstract class TestCase extends BaseTestCase
                             ['.*?', '.+?'],
                             $matches[1]
                         );
-                        $quotes = $val !== $matches[1] ? '["\']' : '["\']?';
+                        $quotes = $val != $matches[1] ? '["\']' : '["\']?';
 
                         $explanations[] = sprintf('Attribute "%s" matches "%s"', $attr, $val);
                     } else {

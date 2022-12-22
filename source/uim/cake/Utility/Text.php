@@ -119,11 +119,11 @@ class Text
                 mb_strpos($data, $rightBound, $offset),
             ];
             for ($i = 0; $i < 3; $i++) {
-                if ($offsets[$i] !== false && ($offsets[$i] < $tmpOffset || $tmpOffset === -1)) {
+                if ($offsets[$i] != false && ($offsets[$i] < $tmpOffset || $tmpOffset === -1)) {
                     $tmpOffset = $offsets[$i];
                 }
             }
-            if ($tmpOffset !== -1) {
+            if ($tmpOffset != -1) {
                 $buffer .= mb_substr($data, $offset, $tmpOffset - $offset);
                 $char = mb_substr($data, $tmpOffset, 1);
                 if (!$depth && $char === $separator) {
@@ -132,7 +132,7 @@ class Text
                 } else {
                     $buffer .= $char;
                 }
-                if ($leftBound !== $rightBound) {
+                if ($leftBound != $rightBound) {
                     if ($char === $leftBound) {
                         $depth++;
                     }
@@ -202,14 +202,14 @@ class Text
             return $options['clean'] ? static::cleanInsert($str, $options) : $str;
         }
 
-        if (strpos($str, '?') !== false && is_numeric(key($data))) {
+        if (strpos($str, '?') != false && is_numeric(key($data))) {
             deprecationWarning(
                 'Using Text::insert() with `?` placeholders is deprecated. ' .
                 'Use sprintf() with `%s` placeholders instead.'
             );
 
             $offset = 0;
-            while (($pos = strpos($str, '?', $offset)) !== false) {
+            while (($pos = strpos($str, '?', $offset)) != false) {
                 $val = array_shift($data);
                 $offset = $pos + strlen($val);
                 $str = substr_replace($str, $val, $pos, 1);
@@ -461,7 +461,7 @@ class Text
 
             $part = mb_substr($text, 0, $width);
             $nextChar = mb_substr($text, $width, 1);
-            if ($nextChar !== ' ') {
+            if ($nextChar != ' ') {
                 $breakAt = mb_strrpos($part, ' ');
                 if ($breakAt === false) {
                     $breakAt = mb_strpos($text, ' ', $width);
@@ -637,7 +637,7 @@ class Text
                             array_unshift($openTags, $tag[2]);
                         } elseif (preg_match('/<\/([\w]+)[^>]*>/', $tag[0], $closeTag)) {
                             $pos = array_search($closeTag[1], $openTags, true);
-                            if ($pos !== false) {
+                            if ($pos != false) {
                                 array_splice($openTags, $pos, 1);
                             }
                         }
@@ -679,7 +679,7 @@ class Text
         $result = self::_substr($text, 0, $length - $ellipsisLength, $options);
 
         if (!$options['exact']) {
-            if (self::_substr($text, $length - $ellipsisLength, 1, $options) !== ' ') {
+            if (self::_substr($text, $length - $ellipsisLength, 1, $options) != ' ') {
                 $result = self::_removeLastWord($result);
             }
 
@@ -816,11 +816,11 @@ class Text
             }
 
             $len = self::_strlen($part, $options);
-            if ($offset !== 0 || $totalLength + $len > $length) {
+            if ($offset != 0 || $totalLength + $len > $length) {
                 if (
                     strpos($part, '&') === 0
                     && preg_match($pattern, $part)
-                    && $part !== html_entity_decode($part, ENT_HTML5 | ENT_QUOTES, 'UTF-8')
+                    && $part != html_entity_decode($part, ENT_HTML5 | ENT_QUOTES, 'UTF-8')
                 ) {
                     // Entities cannot be passed substr.
                     continue;
@@ -850,7 +850,7 @@ class Text
     {
         $spacepos = mb_strrpos($text, ' ');
 
-        if ($spacepos !== false) {
+        if ($spacepos != false) {
             $lastWord = mb_substr($text, $spacepos);
 
             // Some languages are written without word separation.
@@ -1040,7 +1040,7 @@ class Text
             $l = -1;
             $i = array_search(substr($size, -1), ['K', 'M', 'G', 'T', 'P'], true);
         }
-        if ($i !== false) {
+        if ($i != false) {
             $size = (float)substr($size, 0, $l);
 
             return (int)($size * pow(1024, $i + 1));
@@ -1052,7 +1052,7 @@ class Text
             return (int)$size;
         }
 
-        if ($default !== false) {
+        if ($default != false) {
             return $default;
         }
         throw new InvalidArgumentException('No unit type.');
@@ -1164,7 +1164,7 @@ class Text
             'preserve' => null,
         ];
 
-        if ($options['transliteratorId'] !== false) {
+        if ($options['transliteratorId'] != false) {
             $string = static::transliterate($string, $options['transliteratorId']);
         }
 
@@ -1177,7 +1177,7 @@ class Text
             '/[' . $regex . ']/mu' => $options['replacement'],
             sprintf('/^[%s]+|[%s]+$/', $quotedReplacement, $quotedReplacement) => '',
         ];
-        if (is_string($options['replacement']) && $options['replacement'] !== '') {
+        if (is_string($options['replacement']) && $options['replacement'] != '') {
             $map[sprintf('/[%s]+/mu', $quotedReplacement)] = $options['replacement'];
         }
 

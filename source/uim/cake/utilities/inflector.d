@@ -173,7 +173,7 @@ class Inflector
     protected static auto _cache(string myType, string myKey, myValue = false) {
         myKey = "_" . myKey;
         myType = "_" . myType;
-        if (myValue !== false) {
+        if (myValue != false) {
             static::$_cache[myType][myKey] = myValue;
 
             return myValue;
@@ -198,7 +198,7 @@ class Inflector
             return;
         }
         foreach (static::$_initialState as myKey => $val) {
-            if (myKey !== "_initialState") {
+            if (myKey != "_initialState") {
                 static::${myKey} = $val;
             }
         }

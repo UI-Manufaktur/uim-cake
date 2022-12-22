@@ -37,7 +37,7 @@ class MailSentWith extends MailConstraintBase
      */
     public this(?int $at = null, ?string $method = null)
     {
-        if ($method !== null) {
+        if ($method != null) {
             this->method = $method;
         }
 

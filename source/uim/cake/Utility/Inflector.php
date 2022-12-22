@@ -189,7 +189,7 @@ class Inflector
     {
         $key = '_' . $key;
         $type = '_' . $type;
-        if ($value !== false) {
+        if ($value != false) {
             static::$_cache[$type][$key] = $value;
 
             return $value;
@@ -215,7 +215,7 @@ class Inflector
             return;
         }
         foreach (static::$_initialState as $key => $val) {
-            if ($key !== '_initialState') {
+            if ($key != '_initialState') {
                 static::${$key} = $val;
             }
         }

@@ -193,7 +193,7 @@ class FixtureHelper
                     $sortedFixtures = this->sortByConstraint($connection, $groupFixtures);
                 }
 
-                if ($sortedFixtures !== null) {
+                if ($sortedFixtures != null) {
                     this->truncateConnection($connection, array_reverse($sortedFixtures));
                 } else {
                     $helper = new ConnectionHelper();

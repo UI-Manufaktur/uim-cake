@@ -64,11 +64,11 @@ class AssetMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $url = $request->getUri()->getPath();
-        if (strpos($url, '..') !== false || strpos($url, '.') === false) {
+        if (strpos($url, '..') != false || strpos($url, '.') === false) {
             return $handler->handle($request);
         }
 
-        if (strpos($url, '/.') !== false) {
+        if (strpos($url, '/.') != false) {
             return $handler->handle($request);
         }
 

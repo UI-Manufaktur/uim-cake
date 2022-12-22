@@ -35,7 +35,7 @@ class FileSent extends ResponseBase
      */
     public function matches($other): bool
     {
-        return this->response->getFile() !== null;
+        return this->response->getFile() != null;
     }
 
     /**

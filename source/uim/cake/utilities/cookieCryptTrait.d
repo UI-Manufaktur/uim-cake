@@ -108,7 +108,7 @@ trait CookieCryptTrait
         $prefix = "Q2FrZQ==.";
         $prefixLength = strlen($prefix);
 
-        if (strncmp(myValue, $prefix, $prefixLength) !== 0) {
+        if (strncmp(myValue, $prefix, $prefixLength) != 0) {
             return "";
         }
 

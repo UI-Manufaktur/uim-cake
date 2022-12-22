@@ -99,8 +99,8 @@ class TableHelper : Helper {
             if (!empty(myOptions["style"])) {
                 $column = _addStyle($column, myOptions["style"]);
             }
-            if ($column !== "" && preg_match("#(.*)<text-right>.+</text-right>(.*)#", $column, $matches)) {
-                if ($matches[1] !== "" || $matches[2] !== "") {
+            if ($column != "" && preg_match("#(.*)<text-right>.+</text-right>(.*)#", $column, $matches)) {
+                if ($matches[1] != "" || $matches[2] != "") {
                     throw new UnexpectedValueException("You cannot include text before or after the text-right tag.");
                 }
                 $column = str_replace(["<text-right>", "</text-right>"], "", $column);
@@ -147,7 +147,7 @@ class TableHelper : Helper {
                 _rowSeparator($widths);
             }
         }
-        if (myConfig["rowSeparator"] !== true) {
+        if (myConfig["rowSeparator"] != true) {
             _rowSeparator($widths);
         }
     }

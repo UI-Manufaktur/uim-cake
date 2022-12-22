@@ -237,7 +237,7 @@ class Router
             return;
         }
         foreach (static::$_initialState as myKey => $val) {
-            if (myKey !== "_initialState") {
+            if (myKey != "_initialState") {
                 static::${myKey} = $val;
             }
         }
@@ -462,7 +462,7 @@ class Router
                 indexOf(myUrl, "#") == 0 ||
                 indexOf(myUrl, "?") == 0 ||
                 indexOf(myUrl, "//") == 0 ||
-                indexOf(myUrl, "://") !== false
+                indexOf(myUrl, "://") != false
             );
 
             if ($plainString) {
@@ -652,13 +652,13 @@ class Router
 
         if (myRequest) {
             $base = myRequest.getAttribute("base", "");
-            if ($base !== "" && stristr(myUrl, $base)) {
+            if ($base != "" && stristr(myUrl, $base)) {
                 myUrl = preg_replace("/^" . preg_quote($base, "/") . "/", "", myUrl, 1);
             }
         }
         myUrl = "/" . myUrl;
 
-        while (indexOf(myUrl, "//") !== false) {
+        while (indexOf(myUrl, "//") != false) {
             myUrl = str_replace("//", "/", myUrl);
         }
         myUrl = preg_replace("/(?:(\/$))/", "", myUrl);
@@ -944,10 +944,10 @@ class Router
 
         $defaults = [];
 
-        if ($matches["plugin"] !== "") {
+        if ($matches["plugin"] != "") {
             $defaults["plugin"] = $matches["plugin"];
         }
-        if ($matches["prefix"] !== "") {
+        if ($matches["prefix"] != "") {
             $defaults["prefix"] = $matches["prefix"];
         }
         $defaults["controller"] = $matches["controller"];

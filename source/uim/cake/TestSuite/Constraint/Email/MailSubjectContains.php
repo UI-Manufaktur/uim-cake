@@ -41,7 +41,7 @@ class MailSubjectContains extends MailConstraintBase
         $messages = this->getMessages();
         foreach ($messages as $message) {
             $subject = $message->getOriginalSubject();
-            if (strpos($subject, $other) !== false) {
+            if (strpos($subject, $other) != false) {
                 return true;
             }
         }
