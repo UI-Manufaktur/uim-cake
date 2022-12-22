@@ -32,7 +32,7 @@ class ErrorController extends Controller
      */
     public function initialize(): void
     {
-        $this->loadComponent('RequestHandler');
+        this->loadComponent('RequestHandler');
     }
 
     /**
@@ -43,11 +43,11 @@ class ErrorController extends Controller
      */
     public function beforeRender(EventInterface $event)
     {
-        $builder = $this->viewBuilder();
+        $builder = this->viewBuilder();
         $templatePath = 'Error';
 
         if (
-            $this->request->getParam('prefix') &&
+            this->request->getParam('prefix') &&
             in_array($builder->getTemplate(), ['error400', 'error500'], true)
         ) {
             $parts = explode(DIRECTORY_SEPARATOR, (string)$builder->getTemplatePath(), -1);

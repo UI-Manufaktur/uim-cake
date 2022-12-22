@@ -139,12 +139,12 @@ class RequestHandlerComponent extends Component
         }
 
         $extensions = array_unique(
-            array_merge(Router::extensions(), array_keys($this->getConfig('viewClassMap')))
+            array_merge(Router::extensions(), array_keys(this->getConfig('viewClassMap')))
         );
         foreach ($accepts as $types) {
             $ext = array_intersect($extensions, $types);
             if ($ext) {
-                $this->ext = current($ext);
+                this->ext = current($ext);
                 break;
             }
         }
@@ -162,20 +162,20 @@ class RequestHandlerComponent extends Component
      */
     public function startup(EventInterface $event): void
     {
-        $controller = $this->getController();
+        $controller = this->getController();
         $request = $controller->getRequest();
         $response = $controller->getResponse();
 
-        $this->ext = $request->getParam('_ext');
-        if (!$this->ext || in_array($this->ext, ['html', 'htm'], true)) {
-            $this->_setExtension($request, $response);
+        this->ext = $request->getParam('_ext');
+        if (!this->ext || in_array(this->ext, ['html', 'htm'], true)) {
+            this->_setExtension($request, $response);
         }
 
         $isAjax = $request->is('ajax');
         $controller->setRequest($request->withAttribute('isAjax', $isAjax));
 
-        if (!$this->ext && $isAjax) {
-            $this->ext = 'ajax';
+        if (!this->ext && $isAjax) {
+            this->ext = 'ajax';
         }
     }
 
@@ -205,22 +205,22 @@ class RequestHandlerComponent extends Component
      */
     public function beforeRender(EventInterface $event): void
     {
-        $controller = $this->getController();
+        $controller = this->getController();
         $response = $controller->getResponse();
 
-        if ($this->ext && !in_array($this->ext, ['html', 'htm'], true)) {
-            if (!$response->getMimeType($this->ext)) {
-                throw new NotFoundException('Invoked extension not recognized/configured: ' . $this->ext);
+        if (this->ext && !in_array(this->ext, ['html', 'htm'], true)) {
+            if (!$response->getMimeType(this->ext)) {
+                throw new NotFoundException('Invoked extension not recognized/configured: ' . this->ext);
             }
 
-            $this->renderAs($controller, $this->ext);
+            this->renderAs($controller, this->ext);
             $response = $controller->getResponse();
         } else {
             $response = $response->withCharset(Configure::read('App.encoding'));
         }
 
         $request = $controller->getRequest();
-        if ($this->_config['checkHttpCache'] && $response->isNotModified($request)) {
+        if (this->_config['checkHttpCache'] && $response->isNotModified($request)) {
             $response = $response->withNotModified();
             $event->stopPropagation();
         }
@@ -236,13 +236,13 @@ class RequestHandlerComponent extends Component
      * Usage:
      *
      * ```
-     * $this->RequestHandler->accepts(['xml', 'html', 'json']);
+     * this->RequestHandler->accepts(['xml', 'html', 'json']);
      * ```
      *
      * Returns true if the client accepts any of the supplied types.
      *
      * ```
-     * $this->RequestHandler->accepts('xml');
+     * this->RequestHandler->accepts('xml');
      * ```
      *
      * Returns true if the client accepts XML.
@@ -257,7 +257,7 @@ class RequestHandlerComponent extends Component
      */
     public function accepts($type = null)
     {
-        $controller = $this->getController();
+        $controller = this->getController();
         /** @var array $accepted */
         $accepted = $controller->getRequest()->accepts();
 
@@ -267,7 +267,7 @@ class RequestHandlerComponent extends Component
 
         if (is_array($type)) {
             foreach ($type as $t) {
-                $t = $this->mapAlias($t);
+                $t = this->mapAlias($t);
                 if (in_array($t, $accepted, true)) {
                     return true;
                 }
@@ -277,7 +277,7 @@ class RequestHandlerComponent extends Component
         }
 
         if (is_string($type)) {
-            return in_array($this->mapAlias($type), $accepted, true);
+            return in_array(this->mapAlias($type), $accepted, true);
         }
 
         return false;
@@ -293,7 +293,7 @@ class RequestHandlerComponent extends Component
      */
     public function requestedWith($type = null)
     {
-        $controller = $this->getController();
+        $controller = this->getController();
         $request = $controller->getRequest();
 
         if (
@@ -306,7 +306,7 @@ class RequestHandlerComponent extends Component
         }
         if (is_array($type)) {
             foreach ($type as $t) {
-                if ($this->requestedWith($t)) {
+                if (this->requestedWith($t)) {
                     return $t;
                 }
             }
@@ -345,29 +345,29 @@ class RequestHandlerComponent extends Component
      */
     public function prefers($type = null)
     {
-        $controller = $this->getController();
+        $controller = this->getController();
         $request = $controller->getRequest();
         $content = new ContentTypeNegotiation();
 
         $acceptRaw = $content->parseAccept($request);
         if (empty($acceptRaw)) {
-            return $type ? $type === $this->ext : $this->ext;
+            return $type ? $type === this->ext : this->ext;
         }
 
         /** @var array $accepts */
         $accepts = $controller->getResponse()->mapType(array_shift($acceptRaw));
         if (!$type) {
-            if (empty($this->ext) && !empty($accepts)) {
+            if (empty(this->ext) && !empty($accepts)) {
                 return $accepts[0];
             }
 
-            return $this->ext;
+            return this->ext;
         }
 
         $types = (array)$type;
         if (count($types) === 1) {
-            if ($this->ext) {
-                return in_array($this->ext, $types, true);
+            if (this->ext) {
+                return in_array(this->ext, $types, true);
             }
 
             return in_array($types[0], $accepts, true);
@@ -390,13 +390,13 @@ class RequestHandlerComponent extends Component
      * Render the response as an 'ajax' response.
      *
      * ```
-     * $this->RequestHandler->renderAs($this, 'ajax');
+     * this->RequestHandler->renderAs(this, 'ajax');
      * ```
      *
      * Render the response as an XML file and force the result as a file download.
      *
      * ```
-     * $this->RequestHandler->renderAs($this, 'xml', ['attachment' => 'myfile.xml'];
+     * this->RequestHandler->renderAs(this, 'xml', ['attachment' => 'myfile.xml'];
      * ```
      *
      * @param \Cake\Controller\Controller $controller A reference to a controller object
@@ -408,7 +408,7 @@ class RequestHandlerComponent extends Component
     public function renderAs(Controller $controller, string $type, array $options = []): void
     {
         $defaults = ['charset' => 'UTF-8'];
-        $viewClassMap = $this->getConfig('viewClassMap');
+        $viewClassMap = this->getConfig('viewClassMap');
 
         if (Configure::read('App.encoding') !== null) {
             $defaults['charset'] = Configure::read('App.encoding');
@@ -430,22 +430,22 @@ class RequestHandlerComponent extends Component
         if ($viewClass) {
             $builder->setClassName($viewClass);
         } else {
-            if (!$this->_renderType) {
+            if (!this->_renderType) {
                 $builder->setTemplatePath((string)$builder->getTemplatePath() . DIRECTORY_SEPARATOR . $type);
             } else {
                 $builder->setTemplatePath(preg_replace(
-                    "/([\/\\\\]{$this->_renderType})$/",
+                    "/([\/\\\\]{this->_renderType})$/",
                     DIRECTORY_SEPARATOR . $type,
                     (string)$builder->getTemplatePath()
                 ));
             }
 
-            $this->_renderType = $type;
+            this->_renderType = $type;
             $builder->setLayoutPath($type);
         }
 
         if ($controller->getResponse()->getMimeType($type)) {
-            $this->respondAs($type, $options);
+            this->respondAs($type, $options);
         }
     }
 
@@ -467,7 +467,7 @@ class RequestHandlerComponent extends Component
         $options += $defaults;
 
         $cType = $type;
-        $controller = $this->getController();
+        $controller = this->getController();
         $response = $controller->getResponse();
 
         if (strpos($type, '/') === false) {
@@ -475,7 +475,7 @@ class RequestHandlerComponent extends Component
         }
         if (is_array($cType)) {
             $cType = $cType[$options['index']] ?? $cType;
-            $cType = $this->prefers($cType) ?: $cType[0];
+            $cType = this->prefers($cType) ?: $cType[0];
         }
 
         if (!$cType) {
@@ -507,10 +507,10 @@ class RequestHandlerComponent extends Component
     public function mapAlias($alias)
     {
         if (is_array($alias)) {
-            return array_map([$this, 'mapAlias'], $alias);
+            return array_map([this, 'mapAlias'], $alias);
         }
 
-        $type = $this->getController()->getResponse()->getMimeType($alias);
+        $type = this->getController()->getResponse()->getMimeType($alias);
         if ($type) {
             if (is_array($type)) {
                 return $type[0];

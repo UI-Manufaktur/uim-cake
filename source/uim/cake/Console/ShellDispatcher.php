@@ -60,12 +60,12 @@ class ShellDispatcher
     public this(array $args = [], bool $bootstrap = true)
     {
         set_time_limit(0);
-        $this->args = $args;
+        this->args = $args;
 
-        $this->addShortPluginAliases();
+        this->addShortPluginAliases();
 
         if ($bootstrap) {
-            $this->_initEnvironment();
+            this->_initEnvironment();
         }
     }
 
@@ -83,13 +83,13 @@ class ShellDispatcher
      * Aliasing a shell named ClassName:
      *
      * ```
-     * $this->alias('alias', 'ClassName');
+     * this->alias('alias', 'ClassName');
      * ```
      *
      * Getting the original name for a given alias:
      *
      * ```
-     * $this->alias('alias');
+     * this->alias('alias');
      * ```
      *
      * @param string $short The new short name for the shell.
@@ -138,7 +138,7 @@ class ShellDispatcher
      */
     protected function _initEnvironment(): void
     {
-        $this->_bootstrap();
+        this->_bootstrap();
 
         if (function_exists('ini_set')) {
             ini_set('html_errors', '0');
@@ -146,7 +146,7 @@ class ShellDispatcher
             ini_set('max_execution_time', '0');
         }
 
-        $this->shiftArgs();
+        this->shiftArgs();
     }
 
     /**
@@ -177,7 +177,7 @@ class ShellDispatcher
     public function dispatch(array $extra = []): int
     {
         try {
-            $result = $this->_dispatch($extra);
+            $result = this->_dispatch($extra);
         } catch (StopException $e) {
             return $e->getCode();
         }
@@ -206,29 +206,29 @@ class ShellDispatcher
      */
     protected function _dispatch(array $extra = [])
     {
-        $shellName = $this->shiftArgs();
+        $shellName = this->shiftArgs();
 
         if (!$shellName) {
-            $this->help();
+            this->help();
 
             return false;
         }
         if (in_array($shellName, ['help', '--help', '-h'], true)) {
-            $this->help();
+            this->help();
 
             return true;
         }
         if (in_array($shellName, ['version', '--version'], true)) {
-            $this->version();
+            this->version();
 
             return true;
         }
 
-        $shell = $this->findShell($shellName);
+        $shell = this->findShell($shellName);
 
         $shell->initialize();
 
-        return $shell->runCommand($this->args, true, $extra);
+        return $shell->runCommand(this->args, true, $extra);
     }
 
     /**
@@ -317,10 +317,10 @@ class ShellDispatcher
      */
     public function findShell(string $shell): Shell
     {
-        $className = $this->_shellExists($shell);
+        $className = this->_shellExists($shell);
         if (!$className) {
-            $shell = $this->_handleAlias($shell);
-            $className = $this->_shellExists($shell);
+            $shell = this->_handleAlias($shell);
+            $className = this->_shellExists($shell);
         }
 
         if (!$className) {
@@ -329,7 +329,7 @@ class ShellDispatcher
             ]);
         }
 
-        return $this->_createShell($className, $shell);
+        return this->_createShell($className, $shell);
     }
 
     /**
@@ -390,7 +390,7 @@ class ShellDispatcher
      */
     public function shiftArgs()
     {
-        return array_shift($this->args);
+        return array_shift(this->args);
     }
 
     /**

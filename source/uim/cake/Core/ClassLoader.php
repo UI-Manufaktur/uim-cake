@@ -38,7 +38,7 @@ class ClassLoader
     public function register(): void
     {
         /** @var callable $callable */
-        $callable = [$this, 'loadClass'];
+        $callable = [this, 'loadClass'];
         spl_autoload_register($callable);
     }
 
@@ -60,12 +60,12 @@ class ClassLoader
         $baseDir = rtrim($baseDir, '/') . DIRECTORY_SEPARATOR;
         $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . '/';
 
-        $this->_prefixes[$prefix] = $this->_prefixes[$prefix] ?? [];
+        this->_prefixes[$prefix] = this->_prefixes[$prefix] ?? [];
 
         if ($prepend) {
-            array_unshift($this->_prefixes[$prefix], $baseDir);
+            array_unshift(this->_prefixes[$prefix], $baseDir);
         } else {
-            $this->_prefixes[$prefix][] = $baseDir;
+            this->_prefixes[$prefix][] = $baseDir;
         }
     }
 
@@ -84,7 +84,7 @@ class ClassLoader
             $prefix = substr($class, 0, $pos + 1);
             $relativeClass = substr($class, $pos + 1);
 
-            $mappedFile = $this->_loadMappedFile($prefix, $relativeClass);
+            $mappedFile = this->_loadMappedFile($prefix, $relativeClass);
             if ($mappedFile) {
                 return $mappedFile;
             }
@@ -105,14 +105,14 @@ class ClassLoader
      */
     protected function _loadMappedFile(string $prefix, string $relativeClass)
     {
-        if (!isset($this->_prefixes[$prefix])) {
+        if (!isset(this->_prefixes[$prefix])) {
             return false;
         }
 
-        foreach ($this->_prefixes[$prefix] as $baseDir) {
+        foreach (this->_prefixes[$prefix] as $baseDir) {
             $file = $baseDir . str_replace('\\', DIRECTORY_SEPARATOR, $relativeClass) . '.php';
 
-            if ($this->_requireFile($file)) {
+            if (this->_requireFile($file)) {
                 return $file;
             }
         }

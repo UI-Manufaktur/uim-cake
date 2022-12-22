@@ -36,7 +36,7 @@ class ExitCode extends Constraint
      */
     public this(?int $exitCode)
     {
-        $this->exitCode = $exitCode;
+        this->exitCode = $exitCode;
     }
 
     /**
@@ -47,7 +47,7 @@ class ExitCode extends Constraint
      */
     public function matches($other): bool
     {
-        return $other === $this->exitCode;
+        return $other === this->exitCode;
     }
 
     /**
@@ -57,6 +57,6 @@ class ExitCode extends Constraint
      */
     public function toString(): string
     {
-        return sprintf('matches exit code %s', $this->exitCode ?? 'null');
+        return sprintf('matches exit code %s', this->exitCode ?? 'null');
     }
 }

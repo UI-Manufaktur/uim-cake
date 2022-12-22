@@ -49,37 +49,37 @@ trait InstanceConfigTrait
      * Setting a specific value:
      *
      * ```
-     * $this->setConfig('key', $value);
+     * this->setConfig('key', $value);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * $this->setConfig('some.nested.key', $value);
+     * this->setConfig('some.nested.key', $value);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * $this->setConfig(['one' => 'value', 'another' => 'value']);
+     * this->setConfig(['one' => 'value', 'another' => 'value']);
      * ```
      *
      * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
-     * @return $this
+     * @return this
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
     public function setConfig($key, $value = null, $merge = true)
     {
-        if (!$this->_configInitialized) {
-            $this->_config = $this->_defaultConfig;
-            $this->_configInitialized = true;
+        if (!this->_configInitialized) {
+            this->_config = this->_defaultConfig;
+            this->_configInitialized = true;
         }
 
-        $this->_configWrite($key, $value, $merge);
+        this->_configWrite($key, $value, $merge);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -90,25 +90,25 @@ trait InstanceConfigTrait
      * Reading the whole config:
      *
      * ```
-     * $this->getConfig();
+     * this->getConfig();
      * ```
      *
      * Reading a specific value:
      *
      * ```
-     * $this->getConfig('key');
+     * this->getConfig('key');
      * ```
      *
      * Reading a nested value:
      *
      * ```
-     * $this->getConfig('some.nested.key');
+     * this->getConfig('some.nested.key');
      * ```
      *
      * Reading with default value:
      *
      * ```
-     * $this->getConfig('some-key', 'default-value');
+     * this->getConfig('some-key', 'default-value');
      * ```
      *
      * @param string|null $key The key to get or null for the whole config.
@@ -117,12 +117,12 @@ trait InstanceConfigTrait
      */
     public function getConfig(?string $key = null, $default = null)
     {
-        if (!$this->_configInitialized) {
-            $this->_config = $this->_defaultConfig;
-            $this->_configInitialized = true;
+        if (!this->_configInitialized) {
+            this->_config = this->_defaultConfig;
+            this->_configInitialized = true;
         }
 
-        $return = $this->_configRead($key);
+        $return = this->_configRead($key);
 
         return $return ?? $default;
     }
@@ -138,7 +138,7 @@ trait InstanceConfigTrait
      */
     public function getConfigOrFail(string $key)
     {
-        $config = $this->getConfig($key);
+        $config = this->getConfig($key);
         if ($config === null) {
             throw new InvalidArgumentException(sprintf('Expected configuration `%s` not found.', $key));
         }
@@ -153,35 +153,35 @@ trait InstanceConfigTrait
      * Setting a specific value:
      *
      * ```
-     * $this->configShallow('key', $value);
+     * this->configShallow('key', $value);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * $this->configShallow('some.nested.key', $value);
+     * this->configShallow('some.nested.key', $value);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * $this->configShallow(['one' => 'value', 'another' => 'value']);
+     * this->configShallow(['one' => 'value', 'another' => 'value']);
      * ```
      *
      * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
-     * @return $this
+     * @return this
      */
     public function configShallow($key, $value = null)
     {
-        if (!$this->_configInitialized) {
-            $this->_config = $this->_defaultConfig;
-            $this->_configInitialized = true;
+        if (!this->_configInitialized) {
+            this->_config = this->_defaultConfig;
+            this->_configInitialized = true;
         }
 
-        $this->_configWrite($key, $value, 'shallow');
+        this->_configWrite($key, $value, 'shallow');
 
-        return $this;
+        return this;
     }
 
     /**
@@ -193,14 +193,14 @@ trait InstanceConfigTrait
     protected function _configRead(?string $key)
     {
         if ($key === null) {
-            return $this->_config;
+            return this->_config;
         }
 
         if (strpos($key, '.') === false) {
-            return $this->_config[$key] ?? null;
+            return this->_config[$key] ?? null;
         }
 
-        $return = $this->_config;
+        $return = this->_config;
 
         foreach (explode('.', $key) as $k) {
             if (!is_array($return) || !isset($return[$k])) {
@@ -227,7 +227,7 @@ trait InstanceConfigTrait
     protected function _configWrite($key, $value, $merge = false): void
     {
         if (is_string($key) && $value === null) {
-            $this->_configDelete($key);
+            this->_configDelete($key);
 
             return;
         }
@@ -235,9 +235,9 @@ trait InstanceConfigTrait
         if ($merge) {
             $update = is_array($key) ? $key : [$key => $value];
             if ($merge === 'shallow') {
-                $this->_config = array_merge($this->_config, Hash::expand($update));
+                this->_config = array_merge(this->_config, Hash::expand($update));
             } else {
-                $this->_config = Hash::merge($this->_config, Hash::expand($update));
+                this->_config = Hash::merge(this->_config, Hash::expand($update));
             }
 
             return;
@@ -245,19 +245,19 @@ trait InstanceConfigTrait
 
         if (is_array($key)) {
             foreach ($key as $k => $val) {
-                $this->_configWrite($k, $val);
+                this->_configWrite($k, $val);
             }
 
             return;
         }
 
         if (strpos($key, '.') === false) {
-            $this->_config[$key] = $value;
+            this->_config[$key] = $value;
 
             return;
         }
 
-        $update = &$this->_config;
+        $update = &this->_config;
         $stack = explode('.', $key);
 
         foreach ($stack as $k) {
@@ -283,12 +283,12 @@ trait InstanceConfigTrait
     protected function _configDelete(string $key): void
     {
         if (strpos($key, '.') === false) {
-            unset($this->_config[$key]);
+            unset(this->_config[$key]);
 
             return;
         }
 
-        $update = &$this->_config;
+        $update = &this->_config;
         $stack = explode('.', $key);
         $length = count($stack);
 

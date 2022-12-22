@@ -52,8 +52,8 @@ class MissingOptionException extends ConsoleException
         ?int $code = null,
         ?Throwable $previous = null
     ) {
-        $this->suggestions = $suggestions;
-        $this->requested = $requested;
+        this->suggestions = $suggestions;
+        this->requested = $requested;
         parent::__construct($message, $code, $previous);
     }
 
@@ -64,14 +64,14 @@ class MissingOptionException extends ConsoleException
      */
     public function getFullMessage(): string
     {
-        $out = $this->getMessage();
-        $bestGuess = $this->findClosestItem($this->requested, $this->suggestions);
+        $out = this->getMessage();
+        $bestGuess = this->findClosestItem(this->requested, this->suggestions);
         if ($bestGuess) {
             $out .= "\nDid you mean: `{$bestGuess}`?";
         }
         $good = [];
-        foreach ($this->suggestions as $option) {
-            if (levenshtein($option, $this->requested) < 8) {
+        foreach (this->suggestions as $option) {
+            if (levenshtein($option, this->requested) < 8) {
                 $good[] = '- ' . $option;
             }
         }

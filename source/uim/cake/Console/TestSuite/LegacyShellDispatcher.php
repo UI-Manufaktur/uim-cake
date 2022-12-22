@@ -39,7 +39,7 @@ class LegacyShellDispatcher extends ShellDispatcher
     public this(array $args = [], bool $bootstrap = true, ?ConsoleIo $io = null)
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
-        $this->_io = $io;
+        this->_io = $io;
         parent::__construct($args, $bootstrap);
     }
 
@@ -54,7 +54,7 @@ class LegacyShellDispatcher extends ShellDispatcher
     {
         [$plugin] = pluginSplit($shortName);
         /** @var \Cake\Console\Shell $instance */
-        $instance = new $className($this->_io);
+        $instance = new $className(this->_io);
         if ($plugin) {
             $instance->plugin = trim($plugin, '.');
         }

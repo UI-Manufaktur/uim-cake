@@ -37,7 +37,7 @@ class ContentsContainRow extends ContentsRegExp
         $cells = implode('\s+\|\s+', $row);
         $pattern = '/' . $cells . '/';
 
-        return preg_match($pattern, $this->contents) > 0;
+        return preg_match($pattern, this->contents) > 0;
     }
 
     /**
@@ -47,7 +47,7 @@ class ContentsContainRow extends ContentsRegExp
      */
     public function toString(): string
     {
-        return sprintf('row was in %s', $this->output);
+        return sprintf('row was in %s', this->output);
     }
 
     /**
@@ -56,6 +56,6 @@ class ContentsContainRow extends ContentsRegExp
      */
     public function failureDescription($other): string
     {
-        return '`' . $this->exporter()->shortenedExport($other) . '` ' . $this->toString();
+        return '`' . this->exporter()->shortenedExport($other) . '` ' . this->toString();
     }
 }

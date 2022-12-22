@@ -103,14 +103,14 @@ class Component implements EventListenerInterface
      */
     public this(ComponentRegistry $registry, array $config = [])
     {
-        $this->_registry = $registry;
+        this->_registry = $registry;
 
-        $this->setConfig($config);
+        this->setConfig($config);
 
-        if ($this->components) {
-            $this->_componentMap = $registry->normalizeArray($this->components);
+        if (this->components) {
+            this->_componentMap = $registry->normalizeArray(this->components);
         }
-        $this->initialize($config);
+        this->initialize($config);
     }
 
     /**
@@ -120,7 +120,7 @@ class Component implements EventListenerInterface
      */
     public function getController(): Controller
     {
-        return $this->_registry->getController();
+        return this->_registry->getController();
     }
 
     /**
@@ -144,12 +144,12 @@ class Component implements EventListenerInterface
      */
     public function __get(string $name)
     {
-        if (isset($this->_componentMap[$name]) && !isset($this->{$name})) {
-            $config = (array)$this->_componentMap[$name]['config'] + ['enabled' => false];
-            $this->{$name} = $this->_registry->load($this->_componentMap[$name]['class'], $config);
+        if (isset(this->_componentMap[$name]) && !isset(this->{$name})) {
+            $config = (array)this->_componentMap[$name]['config'] + ['enabled' => false];
+            this->{$name} = this->_registry->load(this->_componentMap[$name]['class'], $config);
         }
 
-        return $this->{$name} ?? null;
+        return this->{$name} ?? null;
     }
 
     /**
@@ -175,12 +175,12 @@ class Component implements EventListenerInterface
         ];
         $events = [];
         foreach ($eventMap as $event => $method) {
-            if (method_exists($this, $method)) {
+            if (method_exists(this, $method)) {
                 $events[$event] = $method;
             }
         }
 
-        if (!isset($events['Controller.shutdown']) && method_exists($this, 'shutdown')) {
+        if (!isset($events['Controller.shutdown']) && method_exists(this, 'shutdown')) {
             deprecationWarning(
                 '`Controller.shutdown` event callback is now `afterFilter()` instead of `shutdown()`.',
                 0
@@ -200,9 +200,9 @@ class Component implements EventListenerInterface
     public function __debugInfo(): array
     {
         return [
-            'components' => $this->components,
-            'implementedEvents' => $this->implementedEvents(),
-            '_config' => $this->getConfig(),
+            'components' => this->components,
+            'implementedEvents' => this->implementedEvents(),
+            '_config' => this->getConfig(),
         ];
     }
 }

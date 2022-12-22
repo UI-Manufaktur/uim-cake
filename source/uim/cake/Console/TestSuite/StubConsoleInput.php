@@ -49,7 +49,7 @@ class StubConsoleInput extends ConsoleInput
     {
         parent::__construct();
 
-        $this->replies = $replies;
+        this->replies = $replies;
     }
 
     /**
@@ -59,20 +59,20 @@ class StubConsoleInput extends ConsoleInput
      */
     public function read(): string
     {
-        $this->currentIndex += 1;
+        this->currentIndex += 1;
 
-        if (!isset($this->replies[$this->currentIndex])) {
-            $total = count($this->replies);
+        if (!isset(this->replies[this->currentIndex])) {
+            $total = count(this->replies);
             $formatter = new NumberFormatter('en', NumberFormatter::ORDINAL);
-            $nth = $formatter->format($this->currentIndex + 1);
+            $nth = $formatter->format(this->currentIndex + 1);
 
-            $replies = implode(', ', $this->replies);
+            $replies = implode(', ', this->replies);
             $message = "There are no more input replies available. This is the {$nth} read operation, " .
                 "only {$total} replies were set.\nThe provided replies are: {$replies}";
             throw new MissingConsoleInputException($message);
         }
 
-        return $this->replies[$this->currentIndex];
+        return this->replies[this->currentIndex];
     }
 
     /**

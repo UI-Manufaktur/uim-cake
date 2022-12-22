@@ -38,7 +38,7 @@ interface PluginApplicationInterface extends EventDispatcherInterface
      *
      * @param \Cake\Core\PluginInterface|string $name The plugin name or plugin object.
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
-     * @return $this
+     * @return this
      */
     public function addPlugin($name, array $config = []);
 

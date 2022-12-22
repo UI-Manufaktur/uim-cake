@@ -42,7 +42,7 @@ abstract class ContentsBase extends Constraint
      */
     public this(array $contents, string $output)
     {
-        $this->contents = implode(PHP_EOL, $contents);
-        $this->output = $output;
+        this->contents = implode(PHP_EOL, $contents);
+        this->output = $output;
     }
 }

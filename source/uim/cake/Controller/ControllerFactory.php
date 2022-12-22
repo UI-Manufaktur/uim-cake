@@ -57,7 +57,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      */
     public this(ContainerInterface $container)
     {
-        $this->container = $container;
+        this->container = $container;
     }
 
     /**
@@ -69,20 +69,20 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      */
     public function create(ServerRequestInterface $request): Controller
     {
-        $className = $this->getControllerClass($request);
+        $className = this->getControllerClass($request);
         if ($className === null) {
-            throw $this->missingController($request);
+            throw this->missingController($request);
         }
 
         $reflection = new ReflectionClass($className);
         if ($reflection->isAbstract()) {
-            throw $this->missingController($request);
+            throw this->missingController($request);
         }
 
         // Get the controller from the container if defined.
         // The request is in the container by default.
-        if ($this->container->has($className)) {
-            $controller = $this->container->get($className);
+        if (this->container->has($className)) {
+            $controller = this->container->get($className);
         } else {
             $controller = $reflection->newInstance($request);
         }
@@ -100,7 +100,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      */
     public function invoke($controller): ResponseInterface
     {
-        $this->controller = $controller;
+        this->controller = $controller;
 
         $middlewares = $controller->getMiddleware();
 
@@ -108,10 +108,10 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
             $middlewareQueue = new MiddlewareQueue($middlewares);
             $runner = new Runner();
 
-            return $runner->run($middlewareQueue, $controller->getRequest(), $this);
+            return $runner->run($middlewareQueue, $controller->getRequest(), this);
         }
 
-        return $this->handle($controller->getRequest());
+        return this->handle($controller->getRequest());
     }
 
     /**
@@ -122,7 +122,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $controller = $this->controller;
+        $controller = this->controller;
         /** @psalm-suppress ArgumentTypeCoercion */
         $controller->setRequest($request);
 
@@ -132,7 +132,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
         }
 
         $action = $controller->getAction();
-        $args = $this->getActionArgs(
+        $args = this->getActionArgs(
             $action,
             array_values((array)$controller->getRequest()->getParam('pass'))
         );
@@ -164,18 +164,18 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
                 throw new InvalidParameterException([
                     'template' => 'unsupported_type',
                     'parameter' => $parameter->getName(),
-                    'controller' => $this->controller->getName(),
-                    'action' => $this->controller->getRequest()->getParam('action'),
-                    'prefix' => $this->controller->getRequest()->getParam('prefix'),
-                    'plugin' => $this->controller->getRequest()->getParam('plugin'),
+                    'controller' => this->controller->getName(),
+                    'action' => this->controller->getRequest()->getParam('action'),
+                    'prefix' => this->controller->getRequest()->getParam('prefix'),
+                    'plugin' => this->controller->getRequest()->getParam('plugin'),
                 ]);
             }
 
             // Check for dependency injection for classes
             if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
                 $typeName = $type->getName();
-                if ($this->container->has($typeName)) {
-                    $resolved[] = $this->container->get($typeName);
+                if (this->container->has($typeName)) {
+                    $resolved[] = this->container->get($typeName);
                     continue;
                 }
 
@@ -197,10 +197,10 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
                     'template' => 'missing_dependency',
                     'parameter' => $parameter->getName(),
                     'type' => $typeName,
-                    'controller' => $this->controller->getName(),
-                    'action' => $this->controller->getRequest()->getParam('action'),
-                    'prefix' => $this->controller->getRequest()->getParam('prefix'),
-                    'plugin' => $this->controller->getRequest()->getParam('plugin'),
+                    'controller' => this->controller->getName(),
+                    'action' => this->controller->getRequest()->getParam('action'),
+                    'prefix' => this->controller->getRequest()->getParam('prefix'),
+                    'plugin' => this->controller->getRequest()->getParam('plugin'),
                 ]);
             }
 
@@ -208,7 +208,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
             if ($passedParams) {
                 $argument = array_shift($passedParams);
                 if (is_string($argument) && $type instanceof ReflectionNamedType) {
-                    $typedArgument = $this->coerceStringToType($argument, $type);
+                    $typedArgument = this->coerceStringToType($argument, $type);
 
                     if ($typedArgument === null) {
                         throw new InvalidParameterException([
@@ -216,10 +216,10 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
                             'passed' => $argument,
                             'type' => $type->getName(),
                             'parameter' => $parameter->getName(),
-                            'controller' => $this->controller->getName(),
-                            'action' => $this->controller->getRequest()->getParam('action'),
-                            'prefix' => $this->controller->getRequest()->getParam('prefix'),
-                            'plugin' => $this->controller->getRequest()->getParam('plugin'),
+                            'controller' => this->controller->getName(),
+                            'action' => this->controller->getRequest()->getParam('action'),
+                            'prefix' => this->controller->getRequest()->getParam('prefix'),
+                            'plugin' => this->controller->getRequest()->getParam('plugin'),
                         ]);
                     }
                     $argument = $typedArgument;
@@ -243,10 +243,10 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
             throw new InvalidParameterException([
                 'template' => 'missing_parameter',
                 'parameter' => $parameter->getName(),
-                'controller' => $this->controller->getName(),
-                'action' => $this->controller->getRequest()->getParam('action'),
-                'prefix' => $this->controller->getRequest()->getParam('prefix'),
-                'plugin' => $this->controller->getRequest()->getParam('plugin'),
+                'controller' => this->controller->getName(),
+                'action' => this->controller->getRequest()->getParam('action'),
+                'prefix' => this->controller->getRequest()->getParam('prefix'),
+                'plugin' => this->controller->getRequest()->getParam('plugin'),
             ]);
         }
 
@@ -330,7 +330,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
             strpos($controller, '.') !== false ||
             $firstChar === strtolower($firstChar)
         ) {
-            throw $this->missingController($request);
+            throw this->missingController($request);
         }
 
         /** @var class-string<\Cake\Controller\Controller>|null */
