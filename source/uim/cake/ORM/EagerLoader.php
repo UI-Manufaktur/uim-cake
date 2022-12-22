@@ -297,7 +297,7 @@ class EagerLoader
      */
     public function normalized(Table $repository): array
     {
-        if (this->_normalized !== null || empty(this->_containments)) {
+        if (this->_normalized != null || empty(this->_containments)) {
             return (array)this->_normalized;
         }
 
@@ -569,7 +569,7 @@ class EagerLoader
         $currentStrategy = $config['strategy'] ??
             'join';
 
-        if (!$loadable->canBeJoined() || $currentStrategy !== 'join') {
+        if (!$loadable->canBeJoined() || $currentStrategy != 'join') {
             return;
         }
 

@@ -114,7 +114,7 @@ class LinkConstraint
             ) ||
             (
                 this->_requiredLinkState === static::STATUS_NOT_LINKED &&
-                $count !== 0
+                $count != 0
             )
         ) {
             return false;
@@ -148,7 +148,7 @@ class LinkConstraint
      */
     protected function _buildConditions(array $fields, array $values): array
     {
-        if (count($fields) !== count($values)) {
+        if (count($fields) != count($values)) {
             throw new \InvalidArgumentException(sprintf(
                 'The number of fields is expected to match the number of values, got %d field(s) and %d value(s).',
                 count($fields),

@@ -335,8 +335,8 @@ class BelongsToMany : Association
         } else {
             $belongsTo = $junction.getAssociation($tAlias);
             if (
-                this.getTargetForeignKey() !== $belongsTo.getForeignKey() ||
-                myTarget !== $belongsTo.getTarget()
+                this.getTargetForeignKey() != $belongsTo.getForeignKey() ||
+                myTarget != $belongsTo.getTarget()
             ) {
                 throw new InvalidArgumentException(
                     "The existing `{$tAlias}` association on `{$junction.getAlias()}` " .
@@ -707,8 +707,8 @@ class BelongsToMany : Association
             myTargetKeys = array_combine($assocForeignKey, $e.extract(myTargetBindingKey));
 
             $changedKeys = (
-                $sourceKeys !== $joint.extract($foreignKey) ||
-                myTargetKeys !== $joint.extract($assocForeignKey)
+                $sourceKeys != $joint.extract($foreignKey) ||
+                myTargetKeys != $joint.extract($assocForeignKey)
             );
             // Keys were changed, the junction table record _could_ be
             // new. By clearing the primary key values, and marking the entity
@@ -1067,7 +1067,7 @@ class BelongsToMany : Association
         $bindingKey = (array)this.getBindingKey();
         $primaryValue = $sourceEntity.extract($bindingKey);
 
-        if (count(Hash::filter($primaryValue)) !== count($bindingKey)) {
+        if (count(Hash::filter($primaryValue)) != count($bindingKey)) {
             myMessage = "Could not find primary key value for source entity";
             throw new InvalidArgumentException(myMessage);
         }

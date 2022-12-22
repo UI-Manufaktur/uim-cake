@@ -509,8 +509,8 @@ class ShadowTableStrategy implements TranslateStrategyInterface
                     continue;
                 }
 
-                if ($translation[$field] !== null) {
-                    if ($allowEmpty || $translation[$field] !== '') {
+                if ($translation[$field] != null) {
+                    if ($allowEmpty || $translation[$field] != '') {
                         $row[$field] = $translation[$field];
                     }
                 }

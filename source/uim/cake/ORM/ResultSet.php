@@ -248,7 +248,7 @@ class ResultSet implements ResultSetInterface
     {
         if (this->_useBuffering) {
             $valid = this->_index < this->_count;
-            if ($valid && this->_results[this->_index] !== null) {
+            if ($valid && this->_results[this->_index] != null) {
                 this->_current = this->_results[this->_index];
 
                 return true;
@@ -259,12 +259,12 @@ class ResultSet implements ResultSetInterface
         }
 
         this->_current = this->_fetchResult();
-        $valid = this->_current !== false;
+        $valid = this->_current != false;
 
         if ($valid && this->_useBuffering) {
             this->_results[this->_index] = this->_current;
         }
-        if (!$valid && this->_statement !== null) {
+        if (!$valid && this->_statement != null) {
             this->_statement->closeCursor();
         }
 
@@ -281,7 +281,7 @@ class ResultSet implements ResultSetInterface
     public function first()
     {
         foreach (this as $result) {
-            if (this->_statement !== null && !this->_useBuffering) {
+            if (this->_statement != null && !this->_useBuffering) {
                 this->_statement->closeCursor();
             }
 
@@ -362,10 +362,10 @@ class ResultSet implements ResultSetInterface
      */
     public function count(): int
     {
-        if (this->_count !== null) {
+        if (this->_count != null) {
             return this->_count;
         }
-        if (this->_statement !== null) {
+        if (this->_statement != null) {
             return this->_count = this->_statement->rowCount();
         }
 
@@ -520,10 +520,10 @@ class ResultSet implements ResultSetInterface
             $options['source'] = $target->getRegistryAlias();
             unset($presentAliases[$alias]);
 
-            if ($assoc['canBeJoined'] && this->_autoFields !== false) {
+            if ($assoc['canBeJoined'] && this->_autoFields != false) {
                 $hasData = false;
                 foreach ($results[$alias] as $v) {
-                    if ($v !== null && $v !== []) {
+                    if ($v != null && $v != []) {
                         $hasData = true;
                         break;
                     }
@@ -534,7 +534,7 @@ class ResultSet implements ResultSetInterface
                 }
             }
 
-            if (this->_hydrate && $results[$alias] !== null && $assoc['canBeJoined']) {
+            if (this->_hydrate && $results[$alias] != null && $assoc['canBeJoined']) {
                 $entity = new $assoc['entityClass']($results[$alias], $options);
                 $results[$alias] = $entity;
             }

@@ -281,13 +281,13 @@ class TableLocator extends AbstractLocator implements LocatorInterface
             $options['className'] = $alias;
         }
 
-        if (strpos($options['className'], '\\') !== false && class_exists($options['className'])) {
+        if (strpos($options['className'], '\\') != false && class_exists($options['className'])) {
             return $options['className'];
         }
 
         foreach (this->locations as $location) {
             $class = App::className($options['className'], $location, 'Table');
-            if ($class !== null) {
+            if ($class != null) {
                 return $class;
             }
         }

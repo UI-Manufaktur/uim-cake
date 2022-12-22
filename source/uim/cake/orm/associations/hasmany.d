@@ -111,7 +111,7 @@ class HasMany : Association
         if ($isEmpty) {
             if (
                 $entity.isNew() ||
-                this.getSaveStrategy() !== self::SAVE_REPLACE
+                this.getSaveStrategy() != self::SAVE_REPLACE
             ) {
                 return $entity;
             }
@@ -181,7 +181,7 @@ class HasMany : Association
                 $entity = clone $entity;
             }
 
-            if ($foreignKeyReference !== $entity.extract($foreignKey)) {
+            if ($foreignKeyReference != $entity.extract($foreignKey)) {
                 $entity.set($foreignKeyReference, ["guard":false]);
             }
 

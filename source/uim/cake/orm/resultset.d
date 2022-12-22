@@ -223,7 +223,7 @@ class ResultSet : IResultSet
         }
 
         _current = _fetchResult();
-        $valid = _current !== false;
+        $valid = _current != false;
 
         if ($valid && _useBuffering) {
             _results[_index] = _current;
@@ -473,10 +473,10 @@ class ResultSet : IResultSet
             myOptions["source"] = myTarget.getRegistryAlias();
             unset($presentAliases[myAlias]);
 
-            if ($assoc["canBeJoined"] && _autoFields !== false) {
+            if ($assoc["canBeJoined"] && _autoFields != false) {
                 $hasData = false;
                 foreach (myResults[myAlias] as $v) {
-                    if ($v  !is null && $v !== []) {
+                    if ($v  !is null && $v != []) {
                         $hasData = true;
                         break;
                     }

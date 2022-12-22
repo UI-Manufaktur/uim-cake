@@ -965,7 +965,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * @throws \RuntimeException When you attempt to cache a non-select query.
      */
     function cache(myKey, myConfig = "default") {
-        if (_type !== "select" && _type  !is null) {
+        if (_type != "select" && _type  !is null) {
             throw new RuntimeException("You cannot cache the results of non-select queries.");
         }
 
@@ -980,7 +980,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      */
     function all(): IResultSet
     {
-        if (_type !== "select" && _type  !is null) {
+        if (_type != "select" && _type  !is null) {
             throw new RuntimeException(
                 "You cannot call all() on a non-select query. Use execute() instead."
             );
@@ -1049,7 +1049,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * @see \Cake\Database\Query::execute()
      */
     protected void _transformQuery() {
-        if (!_dirty || _type !== "select") {
+        if (!_dirty || _type != "select") {
             return;
         }
 

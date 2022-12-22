@@ -178,7 +178,7 @@ abstract class Association {
     auto setClassName(string myClassName) {
         if (
             _targetTable  !is null &&
-            get_class(_targetTable) !== App::className(myClassName, "Model/Table", "Table")
+            get_class(_targetTable) != App::className(myClassName, "Model/Table", "Table")
         ) {
             throw new InvalidArgumentException(sprintf(
                 "The class name "%s" doesn\"t match the target table class name of "%s".",
@@ -901,7 +901,7 @@ abstract class Association {
         $foreignKey = (array)myOptions["foreignKey"];
         $bindingKey = (array)this.getBindingKey();
 
-        if (count($foreignKey) !== count($bindingKey)) {
+        if (count($foreignKey) != count($bindingKey)) {
             if (empty($bindingKey)) {
                 myTable = this.getTarget().getTable();
                 if (this.isOwningSide(this.getSource())) {

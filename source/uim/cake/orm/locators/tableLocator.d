@@ -248,7 +248,7 @@ class TableLocator : AbstractLocator : ILocator
             myOptions["className"] = myAlias;
         }
 
-        if (indexOf(myOptions["className"], "\\") !== false && class_exists(myOptions["className"])) {
+        if (indexOf(myOptions["className"], "\\") != false && class_exists(myOptions["className"])) {
             return myOptions["className"];
         }
 

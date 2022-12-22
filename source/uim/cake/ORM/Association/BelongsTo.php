@@ -157,7 +157,7 @@ class BelongsTo extends Association
         $foreignKey = (array)$options['foreignKey'];
         $bindingKey = (array)this->getBindingKey();
 
-        if (count($foreignKey) !== count($bindingKey)) {
+        if (count($foreignKey) != count($bindingKey)) {
             if (empty($bindingKey)) {
                 $msg = 'The "%s" table does not define a primary key. Please set one.';
                 throw new RuntimeException(sprintf($msg, this->getTarget()->getTable()));

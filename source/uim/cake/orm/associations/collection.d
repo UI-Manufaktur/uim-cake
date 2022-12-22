@@ -238,7 +238,7 @@ class AssociationCollection : IteratorAggregate {
                 );
                 throw new InvalidArgumentException($msg);
             }
-            if ($relation.isOwningSide(myTable) !== $owningSide) {
+            if ($relation.isOwningSide(myTable) != $owningSide) {
                 continue;
             }
             if (!_save($relation, $entity, $nested, myOptions)) {

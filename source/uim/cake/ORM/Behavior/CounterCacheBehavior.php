@@ -232,7 +232,7 @@ class CounterCacheBehavior extends Behavior
         $updateConditions = array_combine($primaryKeys, $countConditions);
 
         $countOriginalConditions = $entity->extractOriginalChanged($foreignKeys);
-        if ($countOriginalConditions !== []) {
+        if ($countOriginalConditions != []) {
             $updateOriginalConditions = array_combine($primaryKeys, $countOriginalConditions);
         }
 
@@ -255,7 +255,7 @@ class CounterCacheBehavior extends Behavior
                 } else {
                     $count = this->_getCount($config, $countConditions);
                 }
-                if ($count !== false) {
+                if ($count != false) {
                     $assoc->getTarget()->updateAll([$field => $count], $updateConditions);
                 }
             }
@@ -266,7 +266,7 @@ class CounterCacheBehavior extends Behavior
                 } else {
                     $count = this->_getCount($config, $countOriginalConditions);
                 }
-                if ($count !== false) {
+                if ($count != false) {
                     $assoc->getTarget()->updateAll([$field => $count], $updateOriginalConditions);
                 }
             }
@@ -282,7 +282,7 @@ class CounterCacheBehavior extends Behavior
     protected function _shouldUpdateCount(array $conditions)
     {
         return !empty(array_filter($conditions, function ($value) {
-            return $value !== null;
+            return $value != null;
         }));
     }
 

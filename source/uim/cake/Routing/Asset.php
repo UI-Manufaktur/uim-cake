@@ -149,14 +149,14 @@ class Asset
             return $path;
         }
 
-        if (strpos($path, '://') !== false || preg_match('/^[a-z]+:/i', $path)) {
+        if (strpos($path, '://') != false || preg_match('/^[a-z]+:/i', $path)) {
             return ltrim(Router::url($path), '/');
         }
 
-        if (!array_key_exists('plugin', $options) || $options['plugin'] !== false) {
+        if (!array_key_exists('plugin', $options) || $options['plugin'] != false) {
             [$plugin, $path] = static::pluginSplit($path);
         }
-        if (!empty($options['pathPrefix']) && $path[0] !== '/') {
+        if (!empty($options['pathPrefix']) && $path[0] != '/') {
             $pathPrefix = $options['pathPrefix'];
             $placeHolderVal = '';
             if (!empty($options['theme'])) {
@@ -170,7 +170,7 @@ class Asset
         if (
             !empty($options['ext']) &&
             strpos($path, '?') === false &&
-            substr($path, -strlen($options['ext'])) !== $options['ext']
+            substr($path, -strlen($options['ext'])) != $options['ext']
         ) {
             $path .= $options['ext'];
         }
@@ -236,7 +236,7 @@ class Asset
      */
     public static function assetTimestamp(string $path, $timestamp = null): string
     {
-        if (strpos($path, '?') !== false) {
+        if (strpos($path, '?') != false) {
             return $path;
         }
 
@@ -316,7 +316,7 @@ class Asset
                 }
             }
         }
-        if (strpos($webPath, '//') !== false) {
+        if (strpos($webPath, '//') != false) {
             return str_replace('//', '/', $webPath . $asset[1]);
         }
 

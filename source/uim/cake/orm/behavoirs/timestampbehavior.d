@@ -70,7 +70,7 @@ class TimestampBehavior : Behavior {
         myEventName = myEvent.getName();
         myEvents = _config["events"];
 
-        $new = $entity.isNew() !== false;
+        $new = $entity.isNew() != false;
         $refresh = _config["refreshTimestamp"];
 
         foreach (myEvents[myEventName] as myField: $when) {

@@ -208,7 +208,7 @@ class CounterCacheBehavior : Behavior
         $updateConditions = array_combine($primaryKeys, myCountConditions);
 
         myCountOriginalConditions = $entity.extractOriginalChanged($foreignKeys);
-        if (myCountOriginalConditions !== []) {
+        if (myCountOriginalConditions != []) {
             $updateOriginalConditions = array_combine($primaryKeys, myCountOriginalConditions);
         }
 
@@ -231,7 +231,7 @@ class CounterCacheBehavior : Behavior
                 } else {
                     myCount = _getCount(myConfig, myCountConditions);
                 }
-                if (myCount !== false) {
+                if (myCount != false) {
                     $assoc.getTarget().updateAll([myField: myCount], $updateConditions);
                 }
             }
@@ -242,7 +242,7 @@ class CounterCacheBehavior : Behavior
                 } else {
                     myCount = _getCount(myConfig, myCountOriginalConditions);
                 }
-                if (myCount !== false) {
+                if (myCount != false) {
                     $assoc.getTarget().updateAll([myField: myCount], $updateOriginalConditions);
                 }
             }

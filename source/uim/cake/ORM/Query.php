@@ -180,7 +180,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         parent::__construct($connection);
         this->repository($table);
 
-        if (this->_repository !== null) {
+        if (this->_repository != null) {
             this->addDefaultTypes(this->_repository);
         }
     }
@@ -908,7 +908,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
     public function __clone()
     {
         parent::__clone();
-        if (this->_eagerLoader !== null) {
+        if (this->_eagerLoader != null) {
             this->_eagerLoader = clone this->_eagerLoader;
         }
     }
@@ -940,7 +940,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
     {
         $query = this->cleanCopy();
         $counter = this->_counter;
-        if ($counter !== null) {
+        if ($counter != null) {
             $query->counter(null);
 
             return (int)$counter($query);
@@ -963,7 +963,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
             }
         }
 
-        if (!$complex && this->_valueBinder !== null) {
+        if (!$complex && this->_valueBinder != null) {
             $order = this->clause('order');
             $complex = $order === null ? false : $order->hasNestedExpression();
         }
@@ -1072,7 +1072,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     public function cache($key, $config = 'default')
     {
-        if (this->_type !== 'select' && this->_type !== null) {
+        if (this->_type != 'select' && this->_type != null) {
             throw new RuntimeException('You cannot cache the results of non-select queries.');
         }
 
@@ -1087,7 +1087,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     public function all(): ResultSetInterface
     {
-        if (this->_type !== 'select' && this->_type !== null) {
+        if (this->_type != 'select' && this->_type != null) {
             throw new RuntimeException(
                 'You cannot call all() on a non-select query. Use execute() instead.'
             );
@@ -1164,7 +1164,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _transformQuery(): void
     {
-        if (!this->_dirty || this->_type !== 'select') {
+        if (!this->_dirty || this->_type != 'select') {
             return;
         }
 

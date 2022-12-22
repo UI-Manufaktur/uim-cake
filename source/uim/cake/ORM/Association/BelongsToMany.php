@@ -259,7 +259,7 @@ class BelongsToMany extends Association
      */
     public function junction($table = null): Table
     {
-        if ($table === null && this->_junctionTable !== null) {
+        if ($table === null && this->_junctionTable != null) {
             return this->_junctionTable;
         }
 
@@ -415,8 +415,8 @@ class BelongsToMany extends Association
         } else {
             $belongsTo = $junction->getAssociation($tAlias);
             if (
-                this->getTargetForeignKey() !== $belongsTo->getForeignKey() ||
-                $target !== $belongsTo->getTarget()
+                this->getTargetForeignKey() != $belongsTo->getForeignKey() ||
+                $target != $belongsTo->getTarget()
             ) {
                 throw new InvalidArgumentException(
                     "The existing `{$tAlias}` association on `{$junction->getAlias()}` " .
@@ -805,8 +805,8 @@ class BelongsToMany extends Association
             $targetKeys = array_combine($assocForeignKey, $e->extract($targetBindingKey));
 
             $changedKeys = (
-                $sourceKeys !== $joint->extract($foreignKey) ||
-                $targetKeys !== $joint->extract($assocForeignKey)
+                $sourceKeys != $joint->extract($foreignKey) ||
+                $targetKeys != $joint->extract($assocForeignKey)
             );
             // Keys were changed, the junction table record _could_ be
             // new. By clearing the primary key values, and marking the entity
@@ -1002,7 +1002,7 @@ class BelongsToMany extends Association
      */
     protected function targetConditions()
     {
-        if (this->_targetConditions !== null) {
+        if (this->_targetConditions != null) {
             return this->_targetConditions;
         }
         $conditions = this->getConditions();
@@ -1030,7 +1030,7 @@ class BelongsToMany extends Association
      */
     protected function junctionConditions(): array
     {
-        if (this->_junctionConditions !== null) {
+        if (this->_junctionConditions != null) {
             return this->_junctionConditions;
         }
         $matching = [];
@@ -1174,7 +1174,7 @@ class BelongsToMany extends Association
         $bindingKey = (array)this->getBindingKey();
         $primaryValue = $sourceEntity->extract($bindingKey);
 
-        if (count(Hash::filter($primaryValue)) !== count($bindingKey)) {
+        if (count(Hash::filter($primaryValue)) != count($bindingKey)) {
             $message = 'Could not find primary key value for source entity';
             throw new InvalidArgumentException($message);
         }

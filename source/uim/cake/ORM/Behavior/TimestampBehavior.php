@@ -98,7 +98,7 @@ class TimestampBehavior extends Behavior
         $eventName = $event->getName();
         $events = this->_config['events'];
 
-        $new = $entity->isNew() !== false;
+        $new = $entity->isNew() != false;
         $refresh = this->_config['refreshTimestamp'];
 
         foreach ($events[$eventName] as $field => $when) {

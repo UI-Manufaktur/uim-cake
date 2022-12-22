@@ -195,7 +195,7 @@ class EavStrategy implements TranslateStrategyInterface
         $select = $query->clause('select');
 
         $changeFilter = isset($options['filterByCurrentLocale']) &&
-            $options['filterByCurrentLocale'] !== this->_config['onlyTranslated'];
+            $options['filterByCurrentLocale'] != this->_config['onlyTranslated'];
 
         foreach ($fields as $field) {
             $name = $alias . '_' . $field . '_translation';
@@ -374,7 +374,7 @@ class EavStrategy implements TranslateStrategyInterface
                 }
 
                 $content = $translation['content'] ?? null;
-                if ($content !== null) {
+                if ($content != null) {
                     $row[$field] = $content;
                 }
 

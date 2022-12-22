@@ -67,7 +67,7 @@ class Marshaller
             // If the key is not a special field like _ids or _joinData
             // it is a missing association that we should error on.
             if (!_table.hasAssociation(myKey)) {
-                if (substr(myKey, 0, 1) !== "_") {
+                if (substr(myKey, 0, 1) != "_") {
                     throw new InvalidArgumentException(sprintf(
                         "Cannot marshal data for "%s" association. It is not associated with "%s".",
                         (string)myKey,
@@ -458,7 +458,7 @@ class Marshaller
 
         if ($multi) {
             $first = current($ids);
-            if (!is_array($first) || count($first) !== count($primaryKey)) {
+            if (!is_array($first) || count($first) != count($primaryKey)) {
                 return [];
             }
             myType = [];

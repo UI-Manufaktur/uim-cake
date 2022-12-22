@@ -444,7 +444,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     public function aliasField(string $field): string
     {
-        if (strpos($field, '.') !== false) {
+        if (strpos($field, '.') != false) {
             return $field;
         }
 
@@ -634,7 +634,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
     {
         $schema = this->getSchema();
 
-        return $schema->getColumn($field) !== null;
+        return $schema->getColumn($field) != null;
     }
 
     /**
@@ -928,7 +928,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     public function hasAssociation(string $name): bool
     {
-        return this->findAssociation($name) !== null;
+        return this->findAssociation($name) != null;
     }
 
     /**
@@ -951,11 +951,11 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
 
         $result = null;
         [$name, $next] = array_pad(explode('.', $name, 2), 2, null);
-        if ($name !== null) {
+        if ($name != null) {
             $result = this->_associations->get($name);
         }
 
-        if ($result !== null && $next !== null) {
+        if ($result != null && $next != null) {
             $result = $result->getTarget()->getAssociation($next);
         }
 
@@ -1519,7 +1519,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         if (!is_array($primaryKey)) {
             $primaryKey = [$primaryKey];
         }
-        if (count($key) !== count($primaryKey)) {
+        if (count($key) != count($primaryKey)) {
             $primaryKey = $primaryKey ?: [null];
             $primaryKey = array_map(function ($key) {
                 return var_export($key, true);
@@ -1656,7 +1656,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         $query = this->_getFindOrCreateQuery($search);
 
         $row = $query->first();
-        if ($row !== null) {
+        if ($row != null) {
             return $row;
         }
 
@@ -1665,7 +1665,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             $accessibleFields = array_combine(array_keys($search), array_fill(0, count($search), true));
             $entity = this->patchEntity($entity, $search, ['accessibleFields' => $accessibleFields]);
         }
-        if ($callback !== null) {
+        if ($callback != null) {
             $entity = $callback($entity) ?: $entity;
         }
         unset($options['defaults']);
@@ -1956,7 +1956,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
                 return false;
             }
 
-            if ($result !== false && !($result instanceof EntityInterface)) {
+            if ($result != false && !($result instanceof EntityInterface)) {
                 throw new RuntimeException(sprintf(
                     'The beforeSave callback must return `false` or `EntityInterface` instance. Got `%s` instead.',
                     getTypeName($result)
@@ -2063,7 +2063,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         $primary = array_intersect_key($data, $primary) + $primary;
 
         $filteredKeys = array_filter($primary, function ($v) {
-            return $v !== null;
+            return $v != null;
         });
         $data += $filteredKeys;
 
@@ -2091,7 +2091,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             ->execute();
 
         $success = false;
-        if ($statement->rowCount() !== 0) {
+        if ($statement->rowCount() != 0) {
             $success = $entity;
             $entity->set($filteredKeys, ['guard' => false]);
             $schema = this->getSchema();
@@ -2273,7 +2273,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             throw $e;
         }
 
-        if ($failed !== null) {
+        if ($failed != null) {
             $cleanupOnFailure($entities);
 
             throw new PersistenceFailedException($failed, ['saveMany']);
@@ -2377,7 +2377,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
     {
         $failed = this->_deleteMany($entities, $options);
 
-        if ($failed !== null) {
+        if ($failed != null) {
             return false;
         }
 
@@ -2401,7 +2401,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
     {
         $failed = this->_deleteMany($entities, $options);
 
-        if ($failed !== null) {
+        if ($failed != null) {
             throw new PersistenceFailedException($failed, ['deleteMany']);
         }
 
@@ -2610,7 +2610,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return $conditions;
         };
 
-        if ($hasOr !== false && $hasAnd !== false) {
+        if ($hasOr != false && $hasAnd != false) {
             throw new BadMethodCallException(
                 'Cannot mix "and" & "or" in a magic finder. Use find() instead.'
             );
@@ -2618,7 +2618,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
 
         if ($hasOr === false && $hasAnd === false) {
             $conditions = $makeConditions([$fields], $args);
-        } elseif ($hasOr !== false) {
+        } elseif ($hasOr != false) {
             $fields = explode('_or_', $fields);
             $conditions = [
                 'OR' => $makeConditions($fields, $args),
@@ -2978,7 +2978,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         );
         $values = $entity->extract($fields);
         foreach ($values as $field) {
-            if ($field !== null && !is_scalar($field)) {
+            if ($field != null && !is_scalar($field)) {
                 return false;
             }
         }

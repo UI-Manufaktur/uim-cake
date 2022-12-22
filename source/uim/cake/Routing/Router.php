@@ -278,7 +278,7 @@ class Router
             return;
         }
         foreach (static::$_initialState as $key => $val) {
-            if ($key !== '_initialState') {
+            if ($key != '_initialState') {
                 static::${$key} = $val;
             }
         }
@@ -506,7 +506,7 @@ class Router
                 strpos($url, '#') === 0 ||
                 strpos($url, '?') === 0 ||
                 strpos($url, '//') === 0 ||
-                strpos($url, '://') !== false
+                strpos($url, '://') != false
             );
 
             if ($plainString) {
@@ -591,11 +591,11 @@ class Router
      */
     public static function fullBaseUrl(?string $base = null): string
     {
-        if ($base === null && static::$_fullBaseUrl !== null) {
+        if ($base === null && static::$_fullBaseUrl != null) {
             return static::$_fullBaseUrl;
         }
 
-        if ($base !== null) {
+        if ($base != null) {
             static::$_fullBaseUrl = $base;
             Configure::write('App.fullBaseUrl', $base);
         } else {
@@ -718,13 +718,13 @@ class Router
 
         if ($request) {
             $base = $request->getAttribute('base', '');
-            if ($base !== '' && stristr($url, $base)) {
+            if ($base != '' && stristr($url, $base)) {
                 $url = preg_replace('/^' . preg_quote($base, '/') . '/', '', $url, 1);
             }
         }
         $url = '/' . $url;
 
-        while (strpos($url, '//') !== false) {
+        while (strpos($url, '//') != false) {
             $url = str_replace('//', '/', $url);
         }
         $url = preg_replace('/(?:(\/$))/', '', $url);
@@ -1017,10 +1017,10 @@ class Router
 
         $defaults = [];
 
-        if ($matches['plugin'] !== '') {
+        if ($matches['plugin'] != '') {
             $defaults['plugin'] = $matches['plugin'];
         }
-        if ($matches['prefix'] !== '') {
+        if ($matches['prefix'] != '') {
             $defaults['prefix'] = $matches['prefix'];
         }
         $defaults['controller'] = $matches['controller'];

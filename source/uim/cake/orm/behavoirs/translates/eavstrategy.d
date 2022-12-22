@@ -167,7 +167,7 @@ class EavStrategy : ITranslateStrategy
         $select = myQuery.clause("select");
 
         $changeFilter = isset(myOptions["filterByCurrentLocale"]) &&
-            myOptions["filterByCurrentLocale"] !== _config["onlyTranslated"];
+            myOptions["filterByCurrentLocale"] != _config["onlyTranslated"];
 
         foreach (myFields as myField) {
             myName = myAlias . "_" . myField . "_translation";

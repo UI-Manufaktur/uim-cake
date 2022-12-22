@@ -375,7 +375,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @return string The field prefixed with the table alias.
      */
     string aliasField(string myField) {
-        if (indexOf(myField, ".") !== false) {
+        if (indexOf(myField, ".") != false) {
             return myField;
         }
 
@@ -1417,7 +1417,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             myKey[$index] = myAlias . "." . myKeyname;
         }
         $primaryKey = (array)$primaryKey;
-        if (count(myKey) !== count($primaryKey)) {
+        if (count(myKey) != count($primaryKey)) {
             $primaryKey = $primaryKey ?: [null];
             $primaryKey = array_map(function (myKey) {
                 return var_export(myKey, true);
@@ -1836,7 +1836,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
                 return false;
             }
 
-            if (myResult !== false && !(myResult instanceof IEntity)) {
+            if (myResult != false && !(myResult instanceof IEntity)) {
                 throw new RuntimeException(sprintf(
                     "The beforeSave callback must return `false` or `IEntity` instance. Got `%s` instead.",
                     getTypeName(myResult)
@@ -1969,7 +1969,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             .values(myData)
             .execute();
 
-        if ($statement.rowCount() !== 0) {
+        if ($statement.rowCount() != 0) {
             $success = $entity;
             $entity.set($filteredKeys, ["guard": false]);
             $schema = this.getSchema();
@@ -2459,7 +2459,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             return $conditions;
         };
 
-        if ($hasOr !== false && $hasAnd !== false) {
+        if ($hasOr != false && $hasAnd != false) {
             throw new BadMethodCallException(
                 "Cannot mix "and" & "or" in a magic finder. Use find() instead."
             );
@@ -2467,7 +2467,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
         if ($hasOr == false && $hasAnd == false) {
             $conditions = $makeConditions([myFields], $args);
-        } elseif ($hasOr !== false) {
+        } elseif ($hasOr != false) {
             myFields = explode("_or_", myFields);
             $conditions = [
                 "OR": $makeConditions(myFields, $args),

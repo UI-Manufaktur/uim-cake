@@ -151,7 +151,7 @@ class HasMany extends Association
         if ($isEmpty) {
             if (
                 $entity->isNew() ||
-                this->getSaveStrategy() !== self::SAVE_REPLACE
+                this->getSaveStrategy() != self::SAVE_REPLACE
             ) {
                 return $entity;
             }
@@ -221,7 +221,7 @@ class HasMany extends Association
                 $entity = clone $entity;
             }
 
-            if ($foreignKeyReference !== $entity->extract($foreignKey)) {
+            if ($foreignKeyReference != $entity->extract($foreignKey)) {
                 $entity->set($foreignKeyReference, ['guard' => false]);
             }
 
@@ -371,7 +371,7 @@ class HasMany extends Association
         this->_unlink($foreignKey, $target, $conditions, $options);
 
         $result = $sourceEntity->get($property);
-        if ($options['cleanProperty'] && $result !== null) {
+        if ($options['cleanProperty'] && $result != null) {
             $sourceEntity->set(
                 $property,
                 (new Collection($sourceEntity->get($property)))

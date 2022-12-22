@@ -644,7 +644,7 @@ class TreeBehavior extends Behavior
         [$nodeParent, $nodeLeft, $nodeRight] = array_values($node->extract([$parent, $left, $right]));
 
         $targetNode = null;
-        if ($number !== true) {
+        if ($number != true) {
             /** @var \Cake\Datasource\EntityInterface|null $targetNode */
             $targetNode = this->_scope(this->_table->find())
                 ->select([$left, $right])
@@ -736,7 +736,7 @@ class TreeBehavior extends Behavior
         [$nodeParent, $nodeLeft, $nodeRight] = array_values($node->extract([$parent, $left, $right]));
 
         $targetNode = null;
-        if ($number !== true) {
+        if ($number != true) {
             /** @var \Cake\Datasource\EntityInterface|null $targetNode */
             $targetNode = this->_scope(this->_table->find())
                 ->select([$left, $right])

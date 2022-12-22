@@ -69,7 +69,7 @@ class LinkConstraint
             ) ||
             (
                 _requiredLinkState == static::STATUS_NOT_LINKED &&
-                myCount !== 0
+                myCount != 0
             )
         ) {
             return false;
@@ -103,7 +103,7 @@ class LinkConstraint
      */
     protected auto _buildConditions(array myFields, array myValues): array
     {
-        if (count(myFields) !== count(myValues)) {
+        if (count(myFields) != count(myValues)) {
             throw new \InvalidArgumentException(sprintf(
                 "The number of fields is expected to match the number of values, got %d field(s) and %d value(s).",
                 count(myFields),

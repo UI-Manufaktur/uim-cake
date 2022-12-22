@@ -216,12 +216,12 @@ class RouteBuilder
     public function path(): string
     {
         $routeKey = strpos(this->_path, '{');
-        if ($routeKey !== false && strpos(this->_path, '}') !== false) {
+        if ($routeKey != false && strpos(this->_path, '}') != false) {
             return substr(this->_path, 0, $routeKey);
         }
 
         $routeKey = strpos(this->_path, ':');
-        if ($routeKey !== false) {
+        if ($routeKey != false) {
             return substr(this->_path, 0, $routeKey);
         }
 
@@ -260,7 +260,7 @@ class RouteBuilder
      */
     public function namePrefix(?string $value = null): string
     {
-        if ($value !== null) {
+        if ($value != null) {
             this->_namePrefix = $value;
         }
 
@@ -424,7 +424,7 @@ class RouteBuilder
             this->connect($url, $params, $routeOptions);
         }
 
-        if ($callback !== null) {
+        if ($callback != null) {
             $idName = Inflector::singularize(Inflector::underscore($name)) . '_id';
             $path = '/' . $options['path'] . '/{' . $idName . '}';
             this->scope($path, [], $callback);
@@ -543,7 +543,7 @@ class RouteBuilder
      */
     protected function _methodRoute(string $method, string $template, $target, ?string $name): Route
     {
-        if ($name !== null) {
+        if ($name != null) {
             $name = this->_namePrefix . $name;
         }
         $options = [
@@ -730,12 +730,12 @@ class RouteBuilder
             }
 
             $route = str_replace('//', '/', this->_path . $route);
-            if ($route !== '/') {
+            if ($route != '/') {
                 $route = rtrim($route, '/');
             }
 
             foreach (this->_params as $param => $val) {
-                if (isset($defaults[$param]) && $param !== 'prefix' && $defaults[$param] !== $val) {
+                if (isset($defaults[$param]) && $param != 'prefix' && $defaults[$param] != $val) {
                     $msg = 'You cannot define routes that conflict with the scope. ' .
                         'Scope had %s = %s, while route had %s = %s';
                     throw new BadMethodCallException(sprintf(
@@ -927,7 +927,7 @@ class RouteBuilder
             ));
         }
 
-        if (this->_path !== '/') {
+        if (this->_path != '/') {
             $path = this->_path . $path;
         }
         $namePrefix = this->_namePrefix;

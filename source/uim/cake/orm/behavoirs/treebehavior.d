@@ -602,7 +602,7 @@ class TreeBehavior : Behavior
         [myNodeParent, myNodeLeft, myNodeRight] = array_values(myNode.extract([$parent, $left, $right]));
 
         myTargetNode = null;
-        if ($number !== true) {
+        if ($number != true) {
             /** @var \Cake\Datasource\IEntity|null myTargetNode */
             myTargetNode = _scope(_table.find())
                 .select([$left, $right])
@@ -693,7 +693,7 @@ class TreeBehavior : Behavior
         [myNodeParent, myNodeLeft, myNodeRight] = array_values(myNode.extract([$parent, $left, $right]));
 
         myTargetNode = null;
-        if ($number !== true) {
+        if ($number != true) {
             /** @var \Cake\Datasource\IEntity|null myTargetNode */
             myTargetNode = _scope(_table.find())
                 .select([$left, $right])
