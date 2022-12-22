@@ -121,11 +121,11 @@ class ConsoleIo
         ?ConsoleInput $in = null,
         ?HelperRegistry $helpers = null
     ) {
-        $this->_out = $out ?: new ConsoleOutput('php://stdout');
-        $this->_err = $err ?: new ConsoleOutput('php://stderr');
-        $this->_in = $in ?: new ConsoleInput('php://stdin');
-        $this->_helpers = $helpers ?: new HelperRegistry();
-        $this->_helpers->setIo($this);
+        this->_out = $out ?: new ConsoleOutput('php://stdout');
+        this->_err = $err ?: new ConsoleOutput('php://stderr');
+        this->_in = $in ?: new ConsoleInput('php://stdin');
+        this->_helpers = $helpers ?: new HelperRegistry();
+        this->_helpers->setIo(this);
     }
 
     /**
@@ -134,7 +134,7 @@ class ConsoleIo
      */
     public function setInteractive(bool $value): void
     {
-        $this->interactive = $value;
+        this->interactive = $value;
     }
 
     /**
@@ -146,10 +146,10 @@ class ConsoleIo
     public function level(?int $level = null): int
     {
         if ($level !== null) {
-            $this->_level = $level;
+            this->_level = $level;
         }
 
-        return $this->_level;
+        return this->_level;
     }
 
     /**
@@ -162,7 +162,7 @@ class ConsoleIo
      */
     public function verbose($message, int $newlines = 1): ?int
     {
-        return $this->out($message, $newlines, self::VERBOSE);
+        return this->out($message, $newlines, self::VERBOSE);
     }
 
     /**
@@ -175,7 +175,7 @@ class ConsoleIo
      */
     public function quiet($message, int $newlines = 1): ?int
     {
-        return $this->out($message, $newlines, self::QUIET);
+        return this->out($message, $newlines, self::QUIET);
     }
 
     /**
@@ -197,10 +197,10 @@ class ConsoleIo
      */
     public function out($message = '', int $newlines = 1, int $level = self::NORMAL): ?int
     {
-        if ($level <= $this->_level) {
-            $this->_lastWritten = $this->_out->write($message, $newlines);
+        if ($level <= this->_level) {
+            this->_lastWritten = this->_out->write($message, $newlines);
 
-            return $this->_lastWritten;
+            return this->_lastWritten;
         }
 
         return null;
@@ -219,9 +219,9 @@ class ConsoleIo
     public function info($message, int $newlines = 1, int $level = self::NORMAL): ?int
     {
         $messageType = 'info';
-        $message = $this->wrapMessageWithType($messageType, $message);
+        $message = this->wrapMessageWithType($messageType, $message);
 
-        return $this->out($message, $newlines, $level);
+        return this->out($message, $newlines, $level);
     }
 
     /**
@@ -237,9 +237,9 @@ class ConsoleIo
     public function comment($message, int $newlines = 1, int $level = self::NORMAL): ?int
     {
         $messageType = 'comment';
-        $message = $this->wrapMessageWithType($messageType, $message);
+        $message = this->wrapMessageWithType($messageType, $message);
 
-        return $this->out($message, $newlines, $level);
+        return this->out($message, $newlines, $level);
     }
 
     /**
@@ -253,9 +253,9 @@ class ConsoleIo
     public function warning($message, int $newlines = 1): int
     {
         $messageType = 'warning';
-        $message = $this->wrapMessageWithType($messageType, $message);
+        $message = this->wrapMessageWithType($messageType, $message);
 
-        return $this->err($message, $newlines);
+        return this->err($message, $newlines);
     }
 
     /**
@@ -269,9 +269,9 @@ class ConsoleIo
     public function error($message, int $newlines = 1): int
     {
         $messageType = 'error';
-        $message = $this->wrapMessageWithType($messageType, $message);
+        $message = this->wrapMessageWithType($messageType, $message);
 
-        return $this->err($message, $newlines);
+        return this->err($message, $newlines);
     }
 
     /**
@@ -287,9 +287,9 @@ class ConsoleIo
     public function success($message, int $newlines = 1, int $level = self::NORMAL): ?int
     {
         $messageType = 'success';
-        $message = $this->wrapMessageWithType($messageType, $message);
+        $message = this->wrapMessageWithType($messageType, $message);
 
-        return $this->out($message, $newlines, $level);
+        return this->out($message, $newlines, $level);
     }
 
     /**
@@ -303,7 +303,7 @@ class ConsoleIo
      */
     public function abort($message, $code = CommandInterface::CODE_ERROR): void
     {
-        $this->error($message);
+        this->error($message);
 
         throw new StopException($message, $code);
     }
@@ -344,27 +344,27 @@ class ConsoleIo
      */
     public function overwrite($message, int $newlines = 1, ?int $size = null): void
     {
-        $size = $size ?: $this->_lastWritten;
+        $size = $size ?: this->_lastWritten;
 
         // Output backspaces.
-        $this->out(str_repeat("\x08", $size), 0);
+        this->out(str_repeat("\x08", $size), 0);
 
-        $newBytes = (int)$this->out($message, 0);
+        $newBytes = (int)this->out($message, 0);
 
         // Fill any remaining bytes with spaces.
         $fill = $size - $newBytes;
         if ($fill > 0) {
-            $this->out(str_repeat(' ', $fill), 0);
+            this->out(str_repeat(' ', $fill), 0);
         }
         if ($newlines) {
-            $this->out($this->nl($newlines), 0);
+            this->out(this->nl($newlines), 0);
         }
 
         // Store length of content + fill so if the new content
         // is shorter than the old content the next overwrite
         // will work.
         if ($fill > 0) {
-            $this->_lastWritten = $newBytes + $fill;
+            this->_lastWritten = $newBytes + $fill;
         }
     }
 
@@ -378,7 +378,7 @@ class ConsoleIo
      */
     public function err($message = '', int $newlines = 1): int
     {
-        return $this->_err->write($message, $newlines);
+        return this->_err->write($message, $newlines);
     }
 
     /**
@@ -401,9 +401,9 @@ class ConsoleIo
      */
     public function hr(int $newlines = 0, int $width = 79): void
     {
-        $this->out('', $newlines);
-        $this->out(str_repeat('-', $width));
-        $this->out('', $newlines);
+        this->out('', $newlines);
+        this->out(str_repeat('-', $width));
+        this->out('', $newlines);
     }
 
     /**
@@ -415,7 +415,7 @@ class ConsoleIo
      */
     public function ask(string $prompt, ?string $default = null): string
     {
-        return $this->_getInput($prompt, null, $default);
+        return this->_getInput($prompt, null, $default);
     }
 
     /**
@@ -427,7 +427,7 @@ class ConsoleIo
      */
     public function setOutputAs(int $mode): void
     {
-        $this->_out->setOutputAs($mode);
+        this->_out->setOutputAs($mode);
     }
 
     /**
@@ -438,7 +438,7 @@ class ConsoleIo
      */
     public function styles(): array
     {
-        return $this->_out->styles();
+        return this->_out->styles();
     }
 
     /**
@@ -450,7 +450,7 @@ class ConsoleIo
      */
     public function getStyle(string $style): array
     {
-        return $this->_out->getStyle($style);
+        return this->_out->getStyle($style);
     }
 
     /**
@@ -463,7 +463,7 @@ class ConsoleIo
      */
     public function setStyle(string $style, array $definition): void
     {
-        $this->_out->setStyle($style, $definition);
+        this->_out->setStyle($style, $definition);
     }
 
     /**
@@ -494,7 +494,7 @@ class ConsoleIo
         );
         $in = '';
         while ($in === '' || !in_array($in, $options, true)) {
-            $in = $this->_getInput($prompt, $printOptions, $default);
+            $in = this->_getInput($prompt, $printOptions, $default);
         }
 
         return $in;
@@ -510,7 +510,7 @@ class ConsoleIo
      */
     protected function _getInput(string $prompt, ?string $options, ?string $default): string
     {
-        if (!$this->interactive) {
+        if (!this->interactive) {
             return (string)$default;
         }
 
@@ -523,8 +523,8 @@ class ConsoleIo
         if ($default !== null) {
             $defaultText = "[$default] ";
         }
-        $this->_out->write('<question>' . $prompt . "</question>$optionsText\n$defaultText> ", 0);
-        $result = $this->_in->read();
+        this->_out->write('<question>' . $prompt . "</question>$optionsText\n$defaultText> ", 0);
+        $result = this->_in->read();
 
         $result = $result === null ? '' : trim($result);
         if ($default !== null && $result === '') {
@@ -561,13 +561,13 @@ class ConsoleIo
         if ($enable !== static::QUIET) {
             $stdout = new ConsoleLog([
                 'types' => $outLevels,
-                'stream' => $this->_out,
+                'stream' => this->_out,
             ]);
             Log::setConfig('stdout', ['engine' => $stdout]);
         }
         $stderr = new ConsoleLog([
             'types' => ['emergency', 'alert', 'critical', 'error', 'warning'],
-            'stream' => $this->_err,
+            'stream' => this->_err,
         ]);
         Log::setConfig('stderr', ['engine' => $stderr]);
     }
@@ -586,7 +586,7 @@ class ConsoleIo
     {
         $name = ucfirst($name);
 
-        return $this->_helpers->load($name, $config);
+        return this->_helpers->load($name, $config);
     }
 
     /**
@@ -609,29 +609,29 @@ class ConsoleIo
      */
     public function createFile(string $path, string $contents, bool $forceOverwrite = false): bool
     {
-        $this->out();
-        $forceOverwrite = $forceOverwrite || $this->forceOverwrite;
+        this->out();
+        $forceOverwrite = $forceOverwrite || this->forceOverwrite;
 
         if (file_exists($path) && $forceOverwrite === false) {
-            $this->warning("File `{$path}` exists");
-            $key = $this->askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
+            this->warning("File `{$path}` exists");
+            $key = this->askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
             $key = strtolower($key);
 
             if ($key === 'q') {
-                $this->error('Quitting.', 2);
+                this->error('Quitting.', 2);
                 throw new StopException('Not creating file. Quitting.');
             }
             if ($key === 'a') {
-                $this->forceOverwrite = true;
+                this->forceOverwrite = true;
                 $key = 'y';
             }
             if ($key !== 'y') {
-                $this->out("Skip `{$path}`", 2);
+                this->out("Skip `{$path}`", 2);
 
                 return false;
             }
         } else {
-            $this->out("Creating file {$path}");
+            this->out("Creating file {$path}");
         }
 
         try {
@@ -643,7 +643,7 @@ class ConsoleIo
 
             $file = new SplFileObject($path, 'w');
         } catch (RuntimeException $e) {
-            $this->error("Could not write to `{$path}`. Permission denied.", 2);
+            this->error("Could not write to `{$path}`. Permission denied.", 2);
 
             return false;
         }
@@ -651,11 +651,11 @@ class ConsoleIo
         $file->rewind();
         $file->fwrite($contents);
         if (file_exists($path)) {
-            $this->out("<success>Wrote</success> `{$path}`");
+            this->out("<success>Wrote</success> `{$path}`");
 
             return true;
         }
-        $this->error("Could not write to `{$path}`.", 2);
+        this->error("Could not write to `{$path}`.", 2);
 
         return false;
     }

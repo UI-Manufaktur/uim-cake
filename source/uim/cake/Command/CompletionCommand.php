@@ -44,7 +44,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
      */
     public function setCommandCollection(CommandCollection $commands): void
     {
-        $this->commands = $commands;
+        this->commands = $commands;
     }
 
     /**
@@ -103,11 +103,11 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
         $mode = $args->getArgument('mode');
         switch ($mode) {
             case 'commands':
-                return $this->getCommands($args, $io);
+                return this->getCommands($args, $io);
             case 'subcommands':
-                return $this->getSubcommands($args, $io);
+                return this->getSubcommands($args, $io);
             case 'options':
-                return $this->getOptions($args, $io);
+                return this->getOptions($args, $io);
             case 'fuzzy':
                 return static::CODE_SUCCESS;
             default:
@@ -127,7 +127,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
     protected function getCommands(Arguments $args, ConsoleIo $io): int
     {
         $options = [];
-        foreach ($this->commands as $key => $value) {
+        foreach (this->commands as $key => $value) {
             $parts = explode(' ', $key);
             $options[] = $parts[0];
         }
@@ -152,7 +152,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
         }
 
         $options = [];
-        foreach ($this->commands as $key => $value) {
+        foreach (this->commands as $key => $value) {
             $parts = explode(' ', $key);
             if ($parts[0] !== $name) {
                 continue;
@@ -171,7 +171,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
                 $value = $reflection->newInstance();
             }
             if ($value instanceof Shell) {
-                $shellCommands = $this->shellSubcommands($value);
+                $shellCommands = this->shellSubcommands($value);
                 $options = array_merge($options, $shellCommands);
             }
         }
@@ -231,7 +231,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
         $subcommand = $args->getArgument('subcommand');
 
         $options = [];
-        foreach ($this->commands as $key => $value) {
+        foreach (this->commands as $key => $value) {
             $parts = explode(' ', $key);
             if ($parts[0] !== $name) {
                 continue;

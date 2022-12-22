@@ -62,7 +62,7 @@ class CacheClearallCommand extends Command
     {
         $engines = Cache::configured();
         foreach ($engines as $engine) {
-            $this->executeCommand(CacheClearCommand::class, [$engine], $io);
+            this->executeCommand(CacheClearCommand::class, [$engine], $io);
         }
 
         return static::CODE_SUCCESS;

@@ -77,9 +77,9 @@ class TreePrinter extends RecursiveIteratorIterator implements CollectionInterfa
         int $mode = RecursiveIteratorIterator::SELF_FIRST
     ) {
         parent::__construct($items, $mode);
-        $this->_value = $this->_propertyExtractor($valuePath);
-        $this->_key = $this->_propertyExtractor($keyPath);
-        $this->_spacer = $spacer;
+        this->_value = this->_propertyExtractor($valuePath);
+        this->_key = this->_propertyExtractor($keyPath);
+        this->_spacer = $spacer;
     }
 
     /**
@@ -90,9 +90,9 @@ class TreePrinter extends RecursiveIteratorIterator implements CollectionInterfa
     #[\ReturnTypeWillChange]
     public function key()
     {
-        $extractor = $this->_key;
+        $extractor = this->_key;
 
-        return $extractor($this->_fetchCurrent(), parent::key(), $this);
+        return $extractor(this->_fetchCurrent(), parent::key(), this);
     }
 
     /**
@@ -102,11 +102,11 @@ class TreePrinter extends RecursiveIteratorIterator implements CollectionInterfa
      */
     public function current(): string
     {
-        $extractor = $this->_value;
-        $current = $this->_fetchCurrent();
-        $spacer = str_repeat($this->_spacer, $this->getDepth());
+        $extractor = this->_value;
+        $current = this->_fetchCurrent();
+        $spacer = str_repeat(this->_spacer, this->getDepth());
 
-        return $spacer . $extractor($current, parent::key(), $this);
+        return $spacer . $extractor($current, parent::key(), this);
     }
 
     /**
@@ -117,7 +117,7 @@ class TreePrinter extends RecursiveIteratorIterator implements CollectionInterfa
     public function next(): void
     {
         parent::next();
-        $this->_current = null;
+        this->_current = null;
     }
 
     /**
@@ -127,10 +127,10 @@ class TreePrinter extends RecursiveIteratorIterator implements CollectionInterfa
      */
     protected function _fetchCurrent()
     {
-        if ($this->_current !== null) {
-            return $this->_current;
+        if (this->_current !== null) {
+            return this->_current;
         }
 
-        return $this->_current = parent::current();
+        return this->_current = parent::current();
     }
 }

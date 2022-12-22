@@ -48,8 +48,8 @@ class ConsoleInput
      */
     public this(string $handle = 'php://stdin')
     {
-        $this->_canReadline = (extension_loaded('readline') && $handle === 'php://stdin');
-        $this->_input = fopen($handle, 'rb');
+        this->_canReadline = (extension_loaded('readline') && $handle === 'php://stdin');
+        this->_input = fopen($handle, 'rb');
     }
 
     /**
@@ -59,14 +59,14 @@ class ConsoleInput
      */
     public function read(): ?string
     {
-        if ($this->_canReadline) {
+        if (this->_canReadline) {
             $line = readline('');
 
             if ($line !== false && $line !== '') {
                 readline_add_history($line);
             }
         } else {
-            $line = fgets($this->_input);
+            $line = fgets(this->_input);
         }
 
         if ($line === false) {
@@ -84,7 +84,7 @@ class ConsoleInput
      */
     public function dataAvailable(int $timeout = 0): bool
     {
-        $readFds = [$this->_input];
+        $readFds = [this->_input];
         $writeFds = null;
         $errorFds = null;
 

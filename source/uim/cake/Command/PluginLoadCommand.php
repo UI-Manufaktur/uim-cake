@@ -60,22 +60,22 @@ class PluginLoadCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $this->io = $io;
-        $this->args = $args;
+        this->io = $io;
+        this->args = $args;
 
         $plugin = $args->getArgument('plugin') ?? '';
         try {
             Plugin::getCollection()->findPath($plugin);
         } catch (MissingPluginException $e) {
-            $this->io->err($e->getMessage());
-            $this->io->err('Ensure you have the correct spelling and casing.');
+            this->io->err($e->getMessage());
+            this->io->err('Ensure you have the correct spelling and casing.');
 
             return static::CODE_ERROR;
         }
 
         $app = APP . 'Application.php';
         if (file_exists($app)) {
-            $this->modifyApplication($app, $plugin);
+            this->modifyApplication($app, $plugin);
 
             return static::CODE_SUCCESS;
         }
@@ -96,8 +96,8 @@ class PluginLoadCommand extends Command
 
         // Find start of bootstrap
         if (!preg_match('/^(\s+)public function bootstrap(?:\s*)\(\)/mu', $contents, $matches, PREG_OFFSET_CAPTURE)) {
-            $this->io->err('Your Application class does not have a bootstrap() method. Please add one.');
-            $this->abort();
+            this->io->err('Your Application class does not have a bootstrap() method. Please add one.');
+            this->abort();
         }
 
         $offset = $matches[0][1];
@@ -105,11 +105,11 @@ class PluginLoadCommand extends Command
 
         // Find closing function bracket
         if (!preg_match("/^$indent\}\n$/mu", $contents, $matches, PREG_OFFSET_CAPTURE, $offset)) {
-            $this->io->err('Your Application class does not have a bootstrap() method. Please add one.');
-            $this->abort();
+            this->io->err('Your Application class does not have a bootstrap() method. Please add one.');
+            this->abort();
         }
 
-        $append = "$indent    \$this->addPlugin('%s');\n";
+        $append = "$indent    \this->addPlugin('%s');\n";
         $insert = str_replace(', []', '', sprintf($append, $plugin));
 
         $offset = $matches[0][1];
@@ -117,8 +117,8 @@ class PluginLoadCommand extends Command
 
         file_put_contents($app, $contents);
 
-        $this->io->out('');
-        $this->io->out(sprintf('%s modified', $app));
+        this->io->out('');
+        this->io->out(sprintf('%s modified', $app));
     }
 
     /**

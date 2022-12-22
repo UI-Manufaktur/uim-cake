@@ -80,10 +80,10 @@ class CommandRunner implements EventDispatcherInterface
         string $root = 'cake',
         ?CommandFactoryInterface $factory = null
     ) {
-        $this->app = $app;
-        $this->root = $root;
-        $this->factory = $factory;
-        $this->aliases = [
+        this->app = $app;
+        this->root = $root;
+        this->factory = $factory;
+        this->aliases = [
             '--version' => 'version',
             '--help' => 'help',
             '-h' => 'help',
@@ -104,13 +104,13 @@ class CommandRunner implements EventDispatcherInterface
      * ```
      *
      * @param array<string> $aliases The map of aliases to replace.
-     * @return $this
+     * @return this
      */
     public function setAliases(array $aliases)
     {
-        $this->aliases = $aliases;
+        this->aliases = $aliases;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -130,7 +130,7 @@ class CommandRunner implements EventDispatcherInterface
      */
     public function run(array $argv, ?ConsoleIo $io = null): int
     {
-        $this->bootstrap();
+        this->bootstrap();
 
         $commands = new CommandCollection([
             'help' => HelpCommand::class,
@@ -138,13 +138,13 @@ class CommandRunner implements EventDispatcherInterface
         if (class_exists(VersionCommand::class)) {
             $commands->add('version', VersionCommand::class);
         }
-        $commands = $this->app->console($commands);
+        $commands = this->app->console($commands);
 
-        if ($this->app instanceof PluginApplicationInterface) {
-            $commands = $this->app->pluginConsole($commands);
+        if (this->app instanceof PluginApplicationInterface) {
+            $commands = this->app->pluginConsole($commands);
         }
-        $this->dispatchEvent('Console.buildCommands', ['commands' => $commands]);
-        $this->loadRoutes();
+        this->dispatchEvent('Console.buildCommands', ['commands' => $commands]);
+        this->loadRoutes();
 
         if (empty($argv)) {
             throw new RuntimeException('Cannot run any commands. No arguments received.');
@@ -155,8 +155,8 @@ class CommandRunner implements EventDispatcherInterface
         $io = $io ?: new ConsoleIo();
 
         try {
-            [$name, $argv] = $this->longestCommandName($commands, $argv);
-            $name = $this->resolveName($commands, $io, $name);
+            [$name, $argv] = this->longestCommandName($commands, $argv);
+            $name = this->resolveName($commands, $io, $name);
         } catch (MissingOptionException $e) {
             $io->error($e->getFullMessage());
 
@@ -164,12 +164,12 @@ class CommandRunner implements EventDispatcherInterface
         }
 
         $result = CommandInterface::CODE_ERROR;
-        $shell = $this->getCommand($io, $commands, $name);
+        $shell = this->getCommand($io, $commands, $name);
         if ($shell instanceof Shell) {
-            $result = $this->runShell($shell, $argv);
+            $result = this->runShell($shell, $argv);
         }
         if ($shell instanceof CommandInterface) {
-            $result = $this->runCommand($shell, $argv, $io);
+            $result = this->runCommand($shell, $argv, $io);
         }
 
         if ($result === null || $result === true) {
@@ -192,9 +192,9 @@ class CommandRunner implements EventDispatcherInterface
      */
     protected function bootstrap(): void
     {
-        $this->app->bootstrap();
-        if ($this->app instanceof PluginApplicationInterface) {
-            $this->app->pluginBootstrap();
+        this->app->bootstrap();
+        if (this->app instanceof PluginApplicationInterface) {
+            this->app->pluginBootstrap();
         }
     }
 
@@ -205,8 +205,8 @@ class CommandRunner implements EventDispatcherInterface
      */
     public function getEventManager(): EventManagerInterface
     {
-        if ($this->app instanceof PluginApplicationInterface) {
-            return $this->app->getEventManager();
+        if (this->app instanceof PluginApplicationInterface) {
+            return this->app->getEventManager();
         }
 
         return EventManager::instance();
@@ -219,15 +219,15 @@ class CommandRunner implements EventDispatcherInterface
      * a setter, an exception will be raised.
      *
      * @param \Cake\Event\EventManagerInterface $eventManager The event manager to set.
-     * @return $this
+     * @return this
      * @throws \InvalidArgumentException
      */
     public function setEventManager(EventManagerInterface $eventManager)
     {
-        if ($this->app instanceof PluginApplicationInterface) {
-            $this->app->setEventManager($eventManager);
+        if (this->app instanceof PluginApplicationInterface) {
+            this->app->setEventManager($eventManager);
 
-            return $this;
+            return this;
         }
 
         throw new InvalidArgumentException('Cannot set the event manager, the application does not support events.');
@@ -245,13 +245,13 @@ class CommandRunner implements EventDispatcherInterface
     {
         $instance = $commands->get($name);
         if (is_string($instance)) {
-            $instance = $this->createCommand($instance, $io);
+            $instance = this->createCommand($instance, $io);
         }
         if ($instance instanceof Shell) {
-            $instance->setRootName($this->root);
+            $instance->setRootName(this->root);
         }
         if ($instance instanceof CommandInterface) {
-            $instance->setName("{$this->root} {$name}");
+            $instance->setName("{this->root} {$name}");
         }
         if ($instance instanceof CommandCollectionAwareInterface) {
             $instance->setCommandCollection($commands);
@@ -304,14 +304,14 @@ class CommandRunner implements EventDispatcherInterface
             $io->err('<error>No command provided. Choose one of the available commands.</error>', 2);
             $name = 'help';
         }
-        $name = $this->aliases[$name] ?? $name;
+        $name = this->aliases[$name] ?? $name;
         if (!$commands->has($name)) {
             $name = Inflector::underscore($name);
         }
         if (!$commands->has($name)) {
             throw new MissingOptionException(
-                "Unknown command `{$this->root} {$name}`. " .
-                "Run `{$this->root} --help` to get the list of commands.",
+                "Unknown command `{this->root} {$name}`. " .
+                "Run `{this->root} --help` to get the list of commands.",
                 $name,
                 $commands->keys()
             );
@@ -364,15 +364,15 @@ class CommandRunner implements EventDispatcherInterface
      */
     protected function createCommand(string $className, ConsoleIo $io)
     {
-        if (!$this->factory) {
+        if (!this->factory) {
             $container = null;
-            if ($this->app instanceof ContainerApplicationInterface) {
-                $container = $this->app->getContainer();
+            if (this->app instanceof ContainerApplicationInterface) {
+                $container = this->app->getContainer();
             }
-            $this->factory = new CommandFactory($container);
+            this->factory = new CommandFactory($container);
         }
 
-        $shell = $this->factory->create($className);
+        $shell = this->factory->create($className);
         if ($shell instanceof Shell) {
             $shell->setIo($io);
         }
@@ -389,14 +389,14 @@ class CommandRunner implements EventDispatcherInterface
      */
     protected function loadRoutes(): void
     {
-        if (!($this->app instanceof RoutingApplicationInterface)) {
+        if (!(this->app instanceof RoutingApplicationInterface)) {
             return;
         }
         $builder = Router::createRouteBuilder('/');
 
-        $this->app->routes($builder);
-        if ($this->app instanceof PluginApplicationInterface) {
-            $this->app->pluginRoutes($builder);
+        this->app->routes($builder);
+        if (this->app instanceof PluginApplicationInterface) {
+            this->app->pluginRoutes($builder);
         }
     }
 }

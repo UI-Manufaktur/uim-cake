@@ -67,14 +67,14 @@ class ConsoleInputArgument
     {
         if (is_array($name) && isset($name['name'])) {
             foreach ($name as $key => $value) {
-                $this->{'_' . $key} = $value;
+                this->{'_' . $key} = $value;
             }
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-            $this->_name = $name;
-            $this->_help = $help;
-            $this->_required = $required;
-            $this->_choices = $choices;
+            this->_name = $name;
+            this->_help = $help;
+            this->_required = $required;
+            this->_choices = $choices;
         }
     }
 
@@ -85,7 +85,7 @@ class ConsoleInputArgument
      */
     public function name(): string
     {
-        return $this->_name;
+        return this->_name;
     }
 
     /**
@@ -96,8 +96,8 @@ class ConsoleInputArgument
      */
     public function isEqualTo(ConsoleInputArgument $argument): bool
     {
-        return $this->name() === $argument->name() &&
-            $this->usage() === $argument->usage();
+        return this->name() === $argument->name() &&
+            this->usage() === $argument->usage();
     }
 
     /**
@@ -108,19 +108,19 @@ class ConsoleInputArgument
      */
     public function help(int $width = 0): string
     {
-        $name = $this->_name;
+        $name = this->_name;
         if (strlen($name) < $width) {
             $name = str_pad($name, $width, ' ');
         }
         $optional = '';
-        if (!$this->isRequired()) {
+        if (!this->isRequired()) {
             $optional = ' <comment>(optional)</comment>';
         }
-        if ($this->_choices) {
-            $optional .= sprintf(' <comment>(choices: %s)</comment>', implode('|', $this->_choices));
+        if (this->_choices) {
+            $optional .= sprintf(' <comment>(choices: %s)</comment>', implode('|', this->_choices));
         }
 
-        return sprintf('%s%s%s', $name, $this->_help, $optional);
+        return sprintf('%s%s%s', $name, this->_help, $optional);
     }
 
     /**
@@ -130,12 +130,12 @@ class ConsoleInputArgument
      */
     public function usage(): string
     {
-        $name = $this->_name;
-        if ($this->_choices) {
-            $name = implode('|', $this->_choices);
+        $name = this->_name;
+        if (this->_choices) {
+            $name = implode('|', this->_choices);
         }
         $name = '<' . $name . '>';
-        if (!$this->isRequired()) {
+        if (!this->isRequired()) {
             $name = '[' . $name . ']';
         }
 
@@ -149,7 +149,7 @@ class ConsoleInputArgument
      */
     public function isRequired(): bool
     {
-        return $this->_required;
+        return this->_required;
     }
 
     /**
@@ -161,16 +161,16 @@ class ConsoleInputArgument
      */
     public function validChoice(string $value): bool
     {
-        if (empty($this->_choices)) {
+        if (empty(this->_choices)) {
             return true;
         }
-        if (!in_array($value, $this->_choices, true)) {
+        if (!in_array($value, this->_choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     '"%s" is not a valid value for %s. Please use one of "%s"',
                     $value,
-                    $this->_name,
-                    implode(', ', $this->_choices)
+                    this->_name,
+                    implode(', ', this->_choices)
                 )
             );
         }
@@ -187,11 +187,11 @@ class ConsoleInputArgument
     public function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent->addChild('argument');
-        $option->addAttribute('name', $this->_name);
-        $option->addAttribute('help', $this->_help);
-        $option->addAttribute('required', (string)(int)$this->isRequired());
+        $option->addAttribute('name', this->_name);
+        $option->addAttribute('help', this->_help);
+        $option->addAttribute('required', (string)(int)this->isRequired());
         $choices = $option->addChild('choices');
-        foreach ($this->_choices as $valid) {
+        foreach (this->_choices as $valid) {
             $choices->addChild('choice', $valid);
         }
 

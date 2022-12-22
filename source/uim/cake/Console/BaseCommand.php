@@ -50,9 +50,9 @@ abstract class BaseCommand implements CommandInterface
                 "The name '{$name}' is missing a space. Names should look like `cake routes`"
             );
         }
-        $this->name = $name;
+        this->name = $name;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -62,7 +62,7 @@ abstract class BaseCommand implements CommandInterface
      */
     public function getName(): string
     {
-        return $this->name;
+        return this->name;
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class BaseCommand implements CommandInterface
      */
     public function getRootName(): string
     {
-        [$root] = explode(' ', $this->name);
+        [$root] = explode(' ', this->name);
 
         return $root;
     }
@@ -115,12 +115,12 @@ abstract class BaseCommand implements CommandInterface
      */
     public function getOptionParser(): ConsoleOptionParser
     {
-        [$root, $name] = explode(' ', $this->name, 2);
+        [$root, $name] = explode(' ', this->name, 2);
         $parser = new ConsoleOptionParser($name);
         $parser->setRootName($root);
         $parser->setDescription(static::getDescription());
 
-        $parser = $this->buildOptionParser($parser);
+        $parser = this->buildOptionParser($parser);
         if ($parser->subcommands()) {
             throw new RuntimeException(
                 'You cannot add sub-commands to `Command` sub-classes. Instead make a separate command.'
@@ -159,9 +159,9 @@ abstract class BaseCommand implements CommandInterface
      */
     public function run(array $argv, ConsoleIo $io): ?int
     {
-        $this->initialize();
+        this->initialize();
 
-        $parser = $this->getOptionParser();
+        $parser = this->getOptionParser();
         try {
             [$options, $arguments] = $parser->parse($argv, $io);
             $args = new Arguments(
@@ -174,10 +174,10 @@ abstract class BaseCommand implements CommandInterface
 
             return static::CODE_ERROR;
         }
-        $this->setOutputLevel($args, $io);
+        this->setOutputLevel($args, $io);
 
         if ($args->getOption('help')) {
-            $this->displayHelp($parser, $args, $io);
+            this->displayHelp($parser, $args, $io);
 
             return static::CODE_SUCCESS;
         }
@@ -186,7 +186,7 @@ abstract class BaseCommand implements CommandInterface
             $io->setInteractive(false);
         }
 
-        return $this->execute($args, $io);
+        return this->execute($args, $io);
     }
 
     /**

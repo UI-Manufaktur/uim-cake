@@ -45,15 +45,15 @@ class Command extends BaseCommand
      */
     public this()
     {
-        $this->modelFactory('Table', function ($alias) {
-            return $this->getTableLocator()->get($alias);
+        this->modelFactory('Table', function ($alias) {
+            return this->getTableLocator()->get($alias);
         });
 
-        if ($this->defaultTable !== null) {
-            $this->modelClass = $this->defaultTable;
+        if (this->defaultTable !== null) {
+            this->modelClass = this->defaultTable;
         }
-        if (isset($this->modelClass)) {
-            $this->loadModel();
+        if (isset(this->modelClass)) {
+            this->loadModel();
         }
     }
 

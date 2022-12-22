@@ -48,7 +48,7 @@ class CommandCollection implements IteratorAggregate, Countable
     public this(array $commands = [])
     {
         foreach ($commands as $name => $command) {
-            $this->add($name, $command);
+            this->add($name, $command);
         }
     }
 
@@ -58,7 +58,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @param string $name The name of the command you want to map.
      * @param \Cake\Console\CommandInterface|\Cake\Console\Shell|string $command The command to map.
      *   Can be a FQCN, Shell instance or CommandInterface instance.
-     * @return $this
+     * @return this
      * @throws \InvalidArgumentException
      */
     public function add(string $name, $command)
@@ -78,38 +78,38 @@ class CommandCollection implements IteratorAggregate, Countable
             );
         }
 
-        $this->commands[$name] = $command;
+        this->commands[$name] = $command;
 
-        return $this;
+        return this;
     }
 
     /**
      * Add multiple commands at once.
      *
      * @param array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|string> $commands A map of command names => command classes/instances.
-     * @return $this
+     * @return this
      * @see \Cake\Console\CommandCollection::add()
      */
     public function addMany(array $commands)
     {
         foreach ($commands as $name => $class) {
-            $this->add($name, $class);
+            this->add($name, $class);
         }
 
-        return $this;
+        return this;
     }
 
     /**
      * Remove a command from the collection if it exists.
      *
      * @param string $name The named shell.
-     * @return $this
+     * @return this
      */
     public function remove(string $name)
     {
-        unset($this->commands[$name]);
+        unset(this->commands[$name]);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -120,7 +120,7 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     public function has(string $name): bool
     {
-        return isset($this->commands[$name]);
+        return isset(this->commands[$name]);
     }
 
     /**
@@ -133,11 +133,11 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     public function get(string $name)
     {
-        if (!$this->has($name)) {
+        if (!this->has($name)) {
             throw new InvalidArgumentException("The $name is not a known command name.");
         }
 
-        return $this->commands[$name];
+        return this->commands[$name];
     }
 
     /**
@@ -148,7 +148,7 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     public function getIterator(): Traversable
     {
-        return new ArrayIterator($this->commands);
+        return new ArrayIterator(this->commands);
     }
 
     /**
@@ -160,7 +160,7 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     public function count(): int
     {
-        return count($this->commands);
+        return count(this->commands);
     }
 
     /**
@@ -179,7 +179,7 @@ class CommandCollection implements IteratorAggregate, Countable
         $scanner = new CommandScanner();
         $shells = $scanner->scanPlugin($plugin);
 
-        return $this->resolveNames($shells);
+        return this->resolveNames($shells);
     }
 
     /**
@@ -198,7 +198,7 @@ class CommandCollection implements IteratorAggregate, Countable
             // If the short name has been used, use the full name.
             // This allows app shells to have name preference.
             // and app shells to overwrite core shells.
-            if ($this->has($name) && $addLong) {
+            if (this->has($name) && $addLong) {
                 $name = $info['fullName'];
             }
 
@@ -229,8 +229,8 @@ class CommandCollection implements IteratorAggregate, Countable
     {
         $scanner = new CommandScanner();
 
-        $core = $this->resolveNames($scanner->scanCore());
-        $app = $this->resolveNames($scanner->scanApp());
+        $core = this->resolveNames($scanner->scanCore());
+        $app = this->resolveNames($scanner->scanApp());
 
         return $app + $core;
     }
@@ -242,6 +242,6 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     public function keys(): array
     {
-        return array_keys($this->commands);
+        return array_keys(this->commands);
     }
 }

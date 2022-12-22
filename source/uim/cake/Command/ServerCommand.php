@@ -81,29 +81,29 @@ class ServerCommand extends Command
     protected function startup(Arguments $args, ConsoleIo $io): void
     {
         if ($args->getOption('host')) {
-            $this->_host = (string)$args->getOption('host');
+            this->_host = (string)$args->getOption('host');
         }
         if ($args->getOption('port')) {
-            $this->_port = (int)$args->getOption('port');
+            this->_port = (int)$args->getOption('port');
         }
         if ($args->getOption('document_root')) {
-            $this->_documentRoot = (string)$args->getOption('document_root');
+            this->_documentRoot = (string)$args->getOption('document_root');
         }
         if ($args->getOption('ini_path')) {
-            $this->_iniPath = (string)$args->getOption('ini_path');
+            this->_iniPath = (string)$args->getOption('ini_path');
         }
 
         // For Windows
-        if (substr($this->_documentRoot, -1, 1) === DIRECTORY_SEPARATOR) {
-            $this->_documentRoot = substr($this->_documentRoot, 0, strlen($this->_documentRoot) - 1);
+        if (substr(this->_documentRoot, -1, 1) === DIRECTORY_SEPARATOR) {
+            this->_documentRoot = substr(this->_documentRoot, 0, strlen(this->_documentRoot) - 1);
         }
-        if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", $this->_documentRoot, $m)) {
-            $this->_documentRoot = $m[1] . '\\' . $m[2];
+        if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", this->_documentRoot, $m)) {
+            this->_documentRoot = $m[1] . '\\' . $m[2];
         }
 
-        $this->_iniPath = rtrim($this->_iniPath, DIRECTORY_SEPARATOR);
-        if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", $this->_iniPath, $m)) {
-            $this->_iniPath = $m[1] . '\\' . $m[2];
+        this->_iniPath = rtrim(this->_iniPath, DIRECTORY_SEPARATOR);
+        if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", this->_iniPath, $m)) {
+            this->_iniPath = $m[1] . '\\' . $m[2];
         }
 
         $io->out();
@@ -111,8 +111,8 @@ class ServerCommand extends Command
         $io->hr();
         $io->out(sprintf('App : %s', Configure::read('App.dir')));
         $io->out(sprintf('Path: %s', APP));
-        $io->out(sprintf('DocumentRoot: %s', $this->_documentRoot));
-        $io->out(sprintf('Ini Path: %s', $this->_iniPath));
+        $io->out(sprintf('DocumentRoot: %s', this->_documentRoot));
+        $io->out(sprintf('Ini Path: %s', this->_iniPath));
         $io->hr();
     }
 
@@ -125,24 +125,24 @@ class ServerCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $this->startup($args, $io);
+        this->startup($args, $io);
         $phpBinary = (string)env('PHP', 'php');
         $command = sprintf(
             '%s -S %s:%d -t %s',
             $phpBinary,
-            $this->_host,
-            $this->_port,
-            escapeshellarg($this->_documentRoot)
+            this->_host,
+            this->_port,
+            escapeshellarg(this->_documentRoot)
         );
 
-        if (!empty($this->_iniPath)) {
-            $command = sprintf('%s -c %s', $command, $this->_iniPath);
+        if (!empty(this->_iniPath)) {
+            $command = sprintf('%s -c %s', $command, this->_iniPath);
         }
 
-        $command = sprintf('%s %s', $command, escapeshellarg($this->_documentRoot . '/index.php'));
+        $command = sprintf('%s %s', $command, escapeshellarg(this->_documentRoot . '/index.php'));
 
-        $port = ':' . $this->_port;
-        $io->out(sprintf('built-in server is running in http://%s%s/', $this->_host, $port));
+        $port = ':' . this->_port;
+        $io->out(sprintf('built-in server is running in http://%s%s/', this->_host, $port));
         $io->out('You can exit with <info>`CTRL-C`</info>');
         system($command);
 

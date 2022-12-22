@@ -51,7 +51,7 @@ class PluginUnloadCommand extends Command
         }
 
         $app = APP . 'Application.php';
-        if (file_exists($app) && $this->modifyApplication($app, $plugin)) {
+        if (file_exists($app) && this->modifyApplication($app, $plugin)) {
             $io->out('');
             $io->out(sprintf('%s modified', $app));
 
@@ -73,7 +73,7 @@ class PluginUnloadCommand extends Command
         $plugin = preg_quote($plugin, '/');
         $finder = "/
             # whitespace and addPlugin call
-            \s*\\\$this\-\>addPlugin\(
+            \s*\\\this\-\>addPlugin\(
             # plugin name in quotes of any kind
             \s*['\"]{$plugin}['\"]
             # method arguments assuming a literal array with multiline args

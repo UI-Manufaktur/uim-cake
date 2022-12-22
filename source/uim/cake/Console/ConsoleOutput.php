@@ -38,7 +38,7 @@ use InvalidArgumentException;
  * You can format console output using tags with the name of the style to apply. From inside a shell object
  *
  * ```
- * $this->out('<warning>Overwrite:</warning> foo.php was overwritten.');
+ * this->out('<warning>Overwrite:</warning> foo.php was overwritten.');
  * ```
  *
  * This would create orange 'Overwrite:' text, while the rest of the text would remain the normal color.
@@ -164,7 +164,7 @@ class ConsoleOutput
      */
     public this(string $stream = 'php://stdout')
     {
-        $this->_output = fopen($stream, 'wb');
+        this->_output = fopen($stream, 'wb');
 
         if (
             (
@@ -176,13 +176,13 @@ class ConsoleOutput
             ) ||
             (
                 function_exists('posix_isatty') &&
-                !posix_isatty($this->_output)
+                !posix_isatty(this->_output)
             ) ||
             (
                 env('NO_COLOR') !== null
             )
         ) {
-            $this->_outputAs = self::PLAIN;
+            this->_outputAs = self::PLAIN;
         }
     }
 
@@ -200,7 +200,7 @@ class ConsoleOutput
             $message = implode(static::LF, $message);
         }
 
-        return $this->_write($this->styleText($message . str_repeat(static::LF, $newlines)));
+        return this->_write(this->styleText($message . str_repeat(static::LF, $newlines)));
     }
 
     /**
@@ -211,10 +211,10 @@ class ConsoleOutput
      */
     public function styleText(string $text): string
     {
-        if ($this->_outputAs === static::RAW) {
+        if (this->_outputAs === static::RAW) {
             return $text;
         }
-        if ($this->_outputAs === static::PLAIN) {
+        if (this->_outputAs === static::PLAIN) {
             $tags = implode('|', array_keys(static::$_styles));
 
             return preg_replace('#</?(?:' . $tags . ')>#', '', $text);
@@ -222,7 +222,7 @@ class ConsoleOutput
 
         return preg_replace_callback(
             '/<(?P<tag>[a-z0-9-_]+)>(?P<text>.*?)<\/(\1)>/ims',
-            [$this, '_replaceTags'],
+            [this, '_replaceTags'],
             $text
         );
     }
@@ -235,7 +235,7 @@ class ConsoleOutput
      */
     protected function _replaceTags(array $matches): string
     {
-        $style = $this->getStyle($matches['tag']);
+        $style = this->getStyle($matches['tag']);
         if (empty($style)) {
             return '<' . $matches['tag'] . '>' . $matches['text'] . '</' . $matches['tag'] . '>';
         }
@@ -265,7 +265,7 @@ class ConsoleOutput
      */
     protected function _write(string $message): int
     {
-        return (int)fwrite($this->_output, $message);
+        return (int)fwrite(this->_output, $message);
     }
 
     /**
@@ -291,7 +291,7 @@ class ConsoleOutput
      * ### Remove a style
      *
      * ```
-     * $this->output->setStyle('annoy', []);
+     * this->output->setStyle('annoy', []);
      * ```
      *
      * @param string $style The style to set.
@@ -326,7 +326,7 @@ class ConsoleOutput
      */
     public function getOutputAs(): int
     {
-        return $this->_outputAs;
+        return this->_outputAs;
     }
 
     /**
@@ -342,7 +342,7 @@ class ConsoleOutput
             throw new InvalidArgumentException(sprintf('Invalid output type "%s".', $type));
         }
 
-        $this->_outputAs = $type;
+        this->_outputAs = $type;
     }
 
     /**
@@ -350,8 +350,8 @@ class ConsoleOutput
      */
     public function __destruct()
     {
-        if (is_resource($this->_output)) {
-            fclose($this->_output);
+        if (is_resource(this->_output)) {
+            fclose(this->_output);
         }
     }
 }

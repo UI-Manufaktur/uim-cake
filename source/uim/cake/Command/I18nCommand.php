@@ -46,13 +46,13 @@ class I18nCommand extends Command
             $code = null;
             switch ($choice) {
                 case 'e':
-                    $code = $this->executeCommand(I18nExtractCommand::class, [], $io);
+                    $code = this->executeCommand(I18nExtractCommand::class, [], $io);
                     break;
                 case 'i':
-                    $code = $this->executeCommand(I18nInitCommand::class, [], $io);
+                    $code = this->executeCommand(I18nInitCommand::class, [], $io);
                     break;
                 case 'h':
-                    $io->out($this->getOptionParser()->help());
+                    $io->out(this->getOptionParser()->help());
                     break;
                 case 'q':
                     // Do nothing
@@ -64,7 +64,7 @@ class I18nCommand extends Command
                     );
             }
             if ($code === static::CODE_ERROR) {
-                $this->abort();
+                this->abort();
             }
         } while ($choice !== 'q');
 

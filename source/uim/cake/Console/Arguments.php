@@ -53,9 +53,9 @@ class Arguments
      */
     public this(array $args, array $options, array $argNames)
     {
-        $this->args = $args;
-        $this->options = $options;
-        $this->argNames = $argNames;
+        this->args = $args;
+        this->options = $options;
+        this->argNames = $argNames;
     }
 
     /**
@@ -65,7 +65,7 @@ class Arguments
      */
     public function getArguments(): array
     {
-        return $this->args;
+        return this->args;
     }
 
     /**
@@ -76,8 +76,8 @@ class Arguments
      */
     public function getArgumentAt(int $index): ?string
     {
-        if ($this->hasArgumentAt($index)) {
-            return $this->args[$index];
+        if (this->hasArgumentAt($index)) {
+            return this->args[$index];
         }
 
         return null;
@@ -91,7 +91,7 @@ class Arguments
      */
     public function hasArgumentAt(int $index): bool
     {
-        return isset($this->args[$index]);
+        return isset(this->args[$index]);
     }
 
     /**
@@ -102,12 +102,12 @@ class Arguments
      */
     public function hasArgument(string $name): bool
     {
-        $offset = array_search($name, $this->argNames, true);
+        $offset = array_search($name, this->argNames, true);
         if ($offset === false) {
             return false;
         }
 
-        return isset($this->args[$offset]);
+        return isset(this->args[$offset]);
     }
 
     /**
@@ -118,12 +118,12 @@ class Arguments
      */
     public function getArgument(string $name): ?string
     {
-        $offset = array_search($name, $this->argNames, true);
-        if ($offset === false || !isset($this->args[$offset])) {
+        $offset = array_search($name, this->argNames, true);
+        if ($offset === false || !isset(this->args[$offset])) {
             return null;
         }
 
-        return $this->args[$offset];
+        return this->args[$offset];
     }
 
     /**
@@ -133,7 +133,7 @@ class Arguments
      */
     public function getOptions(): array
     {
-        return $this->options;
+        return this->options;
     }
 
     /**
@@ -144,7 +144,7 @@ class Arguments
      */
     public function getOption(string $name)
     {
-        return $this->options[$name] ?? null;
+        return this->options[$name] ?? null;
     }
 
     /**
@@ -155,6 +155,6 @@ class Arguments
      */
     public function hasOption(string $name): bool
     {
-        return isset($this->options[$name]);
+        return isset(this->options[$name]);
     }
 }

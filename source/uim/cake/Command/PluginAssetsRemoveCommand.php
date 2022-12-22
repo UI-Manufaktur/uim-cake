@@ -48,22 +48,22 @@ class PluginAssetsRemoveCommand extends Command
      */
     public function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $this->io = $io;
-        $this->args = $args;
+        this->io = $io;
+        this->args = $args;
 
         $name = $args->getArgument('name');
-        $plugins = $this->_list($name);
+        $plugins = this->_list($name);
 
         foreach ($plugins as $plugin => $config) {
-            $this->io->out();
-            $this->io->out('For plugin: ' . $plugin);
-            $this->io->hr();
+            this->io->out();
+            this->io->out('For plugin: ' . $plugin);
+            this->io->hr();
 
-            $this->_remove($config);
+            this->_remove($config);
         }
 
-        $this->io->out();
-        $this->io->out('Done');
+        this->io->out();
+        this->io->out('Done');
 
         return static::CODE_SUCCESS;
     }
