@@ -47,9 +47,9 @@ class MissingRouteException extends CakeException
     {
         if (is_array($message)) {
             if (isset($message['message'])) {
-                $this->_messageTemplate = $message['message'];
+                this->_messageTemplate = $message['message'];
             } elseif (isset($message['method']) && $message['method']) {
-                $this->_messageTemplate = $this->_messageTemplateWithMethod;
+                this->_messageTemplate = this->_messageTemplateWithMethod;
             }
         }
         parent::__construct($message, $code, $previous);

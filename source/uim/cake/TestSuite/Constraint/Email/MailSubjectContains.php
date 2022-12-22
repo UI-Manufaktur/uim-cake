@@ -38,7 +38,7 @@ class MailSubjectContains extends MailConstraintBase
                 'Invalid data type, must be a string.'
             );
         }
-        $messages = $this->getMessages();
+        $messages = this->getMessages();
         foreach ($messages as $message) {
             $subject = $message->getOriginalSubject();
             if (strpos($subject, $other) !== false) {
@@ -51,19 +51,19 @@ class MailSubjectContains extends MailConstraintBase
 
     /**
      * Returns the subjects of all messages
-     * respects $this->at
+     * respects this->at
      *
      * @return string
      */
     protected function getAssertedMessages(): string
     {
         $messageMembers = [];
-        $messages = $this->getMessages();
+        $messages = this->getMessages();
         foreach ($messages as $message) {
             $messageMembers[] = $message->getSubject();
         }
-        if ($this->at && isset($messageMembers[$this->at - 1])) {
-            $messageMembers = [$messageMembers[$this->at - 1]];
+        if (this->at && isset($messageMembers[this->at - 1])) {
+            $messageMembers = [$messageMembers[this->at - 1]];
         }
         $result = implode(PHP_EOL, $messageMembers);
 
@@ -77,10 +77,10 @@ class MailSubjectContains extends MailConstraintBase
      */
     public function toString(): string
     {
-        if ($this->at) {
-            return sprintf('is in an email subject #%d', $this->at) . $this->getAssertedMessages();
+        if (this->at) {
+            return sprintf('is in an email subject #%d', this->at) . this->getAssertedMessages();
         }
 
-        return 'is in an email subject' . $this->getAssertedMessages();
+        return 'is in an email subject' . this->getAssertedMessages();
     }
 }

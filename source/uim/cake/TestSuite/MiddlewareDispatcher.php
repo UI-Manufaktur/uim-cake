@@ -47,7 +47,7 @@ class MiddlewareDispatcher
      */
     public this(HttpApplicationInterface $app)
     {
-        $this->app = $app;
+        this->app = $app;
     }
 
     /**
@@ -60,7 +60,7 @@ class MiddlewareDispatcher
     {
         // If we need to resolve a Route URL but there are no routes, load routes.
         if (is_array($url) && count(Router::getRouteCollection()->routes()) === 0) {
-            return $this->resolveRoute($url);
+            return this->resolveRoute($url);
         }
 
         return Router::url($url);
@@ -76,17 +76,17 @@ class MiddlewareDispatcher
     {
         // Simulate application bootstrap and route loading.
         // We need both to ensure plugins are loaded.
-        $this->app->bootstrap();
-        if ($this->app instanceof PluginApplicationInterface) {
-            $this->app->pluginBootstrap();
+        this->app->bootstrap();
+        if (this->app instanceof PluginApplicationInterface) {
+            this->app->pluginBootstrap();
         }
         $builder = Router::createRouteBuilder('/');
 
-        if ($this->app instanceof RoutingApplicationInterface) {
-            $this->app->routes($builder);
+        if (this->app instanceof RoutingApplicationInterface) {
+            this->app->routes($builder);
         }
-        if ($this->app instanceof PluginApplicationInterface) {
-            $this->app->pluginRoutes($builder);
+        if (this->app instanceof PluginApplicationInterface) {
+            this->app->pluginRoutes($builder);
         }
 
         $out = Router::url($url);
@@ -136,8 +136,8 @@ class MiddlewareDispatcher
      */
     public function execute(array $requestSpec): ResponseInterface
     {
-        $server = new Server($this->app);
+        $server = new Server(this->app);
 
-        return $server->run($this->_createRequest($requestSpec));
+        return $server->run(this->_createRequest($requestSpec));
     }
 }

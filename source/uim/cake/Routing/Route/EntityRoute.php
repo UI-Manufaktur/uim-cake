@@ -43,15 +43,15 @@ class EntityRoute extends Route
      */
     public function match(array $url, array $context = []): ?string
     {
-        if (empty($this->_compiledRoute)) {
-            $this->compile();
+        if (empty(this->_compiledRoute)) {
+            this->compile();
         }
 
         if (isset($url['_entity'])) {
             $entity = $url['_entity'];
-            $this->_checkEntity($entity);
+            this->_checkEntity($entity);
 
-            foreach ($this->keys as $field) {
+            foreach (this->keys as $field) {
                 if (!isset($url[$field]) && isset($entity[$field])) {
                     $url[$field] = $entity[$field];
                 }
@@ -74,7 +74,7 @@ class EntityRoute extends Route
             throw new RuntimeException(sprintf(
                 'Route `%s` expects the URL option `_entity` to be an array or object implementing \ArrayAccess, '
                 . 'but `%s` passed.',
-                $this->template,
+                this->template,
                 getTypeName($entity)
             ));
         }

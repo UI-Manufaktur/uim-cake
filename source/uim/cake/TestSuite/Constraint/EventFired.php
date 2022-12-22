@@ -40,9 +40,9 @@ class EventFired extends Constraint
      */
     public this(EventManager $eventManager)
     {
-        $this->_eventManager = $eventManager;
+        this->_eventManager = $eventManager;
 
-        if ($this->_eventManager->getEventList() === null) {
+        if (this->_eventManager->getEventList() === null) {
             throw new AssertionFailedError(
                 'The event manager you are asserting against is not configured to track events.'
             );
@@ -57,7 +57,7 @@ class EventFired extends Constraint
      */
     public function matches($other): bool
     {
-        $list = $this->_eventManager->getEventList();
+        $list = this->_eventManager->getEventList();
 
         return $list === null ? false : $list->hasEvent($other);
     }

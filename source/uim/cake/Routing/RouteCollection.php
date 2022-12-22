@@ -86,29 +86,29 @@ class RouteCollection
     {
         // Explicit names
         if (isset($options['_name'])) {
-            if (isset($this->_named[$options['_name']])) {
-                $matched = $this->_named[$options['_name']];
+            if (isset(this->_named[$options['_name']])) {
+                $matched = this->_named[$options['_name']];
                 throw new DuplicateNamedRouteException([
                     'name' => $options['_name'],
                     'url' => $matched->template,
                     'duplicate' => $matched,
                 ]);
             }
-            $this->_named[$options['_name']] = $route;
+            this->_named[$options['_name']] = $route;
         }
 
         // Generated names.
         $name = $route->getName();
-        $this->_routeTable[$name] = $this->_routeTable[$name] ?? [];
-        $this->_routeTable[$name][] = $route;
+        this->_routeTable[$name] = this->_routeTable[$name] ?? [];
+        this->_routeTable[$name][] = $route;
 
         // Index path prefixes (for parsing)
         $path = $route->staticPath();
-        $this->_paths[$path][] = $route;
+        this->_paths[$path][] = $route;
 
         $extensions = $route->getExtensions();
         if (count($extensions) > 0) {
-            $this->setExtensions($extensions);
+            this->setExtensions($extensions);
         }
     }
 
@@ -125,9 +125,9 @@ class RouteCollection
         $decoded = urldecode($url);
 
         // Sort path segments matching longest paths first.
-        krsort($this->_paths);
+        krsort(this->_paths);
 
-        foreach ($this->_paths as $path => $routes) {
+        foreach (this->_paths as $path => $routes) {
             if (strpos($decoded, $path) !== 0) {
                 continue;
             }
@@ -174,9 +174,9 @@ class RouteCollection
         $urlPath = urldecode($uri->getPath());
 
         // Sort path segments matching longest paths first.
-        krsort($this->_paths);
+        krsort(this->_paths);
 
-        foreach ($this->_paths as $path => $routes) {
+        foreach (this->_paths as $path => $routes) {
             if (strpos($urlPath, $path) !== 0) {
                 continue;
             }
@@ -297,8 +297,8 @@ class RouteCollection
         if (isset($url['_name'])) {
             $name = $url['_name'];
             unset($url['_name']);
-            if (isset($this->_named[$name])) {
-                $route = $this->_named[$name];
+            if (isset(this->_named[$name])) {
+                $route = this->_named[$name];
                 $out = $route->match($url + $route->defaults, $context);
                 if ($out) {
                     return $out;
@@ -312,11 +312,11 @@ class RouteCollection
             throw new MissingRouteException(['url' => $name, 'context' => $context]);
         }
 
-        foreach ($this->_getNames($url) as $name) {
-            if (empty($this->_routeTable[$name])) {
+        foreach (this->_getNames($url) as $name) {
+            if (empty(this->_routeTable[$name])) {
                 continue;
             }
-            foreach ($this->_routeTable[$name] as $route) {
+            foreach (this->_routeTable[$name] as $route) {
                 $match = $route->match($url, $context);
                 if ($match) {
                     return $match === '/' ? $match : trim($match, '/');
@@ -333,10 +333,10 @@ class RouteCollection
      */
     public function routes(): array
     {
-        krsort($this->_paths);
+        krsort(this->_paths);
 
         return array_reduce(
-            $this->_paths,
+            this->_paths,
             'array_merge',
             []
         );
@@ -349,7 +349,7 @@ class RouteCollection
      */
     public function named(): array
     {
-        return $this->_named;
+        return this->_named;
     }
 
     /**
@@ -359,7 +359,7 @@ class RouteCollection
      */
     public function getExtensions(): array
     {
-        return $this->_extensions;
+        return this->_extensions;
     }
 
     /**
@@ -368,19 +368,19 @@ class RouteCollection
      * @param array<string> $extensions The list of extensions to set.
      * @param bool $merge Whether to merge with or override existing extensions.
      *   Defaults to `true`.
-     * @return $this
+     * @return this
      */
     public function setExtensions(array $extensions, bool $merge = true)
     {
         if ($merge) {
             $extensions = array_unique(array_merge(
-                $this->_extensions,
+                this->_extensions,
                 $extensions
             ));
         }
-        $this->_extensions = $extensions;
+        this->_extensions = $extensions;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -391,14 +391,14 @@ class RouteCollection
      *
      * @param string $name The name of the middleware. Used when applying middleware to a scope.
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|string $middleware The middleware to register.
-     * @return $this
+     * @return this
      * @throws \RuntimeException
      */
     public function registerMiddleware(string $name, $middleware)
     {
-        $this->_middleware[$name] = $middleware;
+        this->_middleware[$name] = $middleware;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -406,26 +406,26 @@ class RouteCollection
      *
      * @param string $name Name of the middleware group
      * @param array<string> $middlewareNames Names of the middleware
-     * @return $this
+     * @return this
      * @throws \RuntimeException
      */
     public function middlewareGroup(string $name, array $middlewareNames)
     {
-        if ($this->hasMiddleware($name)) {
+        if (this->hasMiddleware($name)) {
             $message = "Cannot add middleware group '$name'. A middleware by this name has already been registered.";
             throw new RuntimeException($message);
         }
 
         foreach ($middlewareNames as $middlewareName) {
-            if (!$this->hasMiddleware($middlewareName)) {
+            if (!this->hasMiddleware($middlewareName)) {
                 $message = "Cannot add '$middlewareName' middleware to group '$name'. It has not been registered.";
                 throw new RuntimeException($message);
             }
         }
 
-        $this->_middlewareGroups[$name] = $middlewareNames;
+        this->_middlewareGroups[$name] = $middlewareNames;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -436,7 +436,7 @@ class RouteCollection
      */
     public function hasMiddlewareGroup(string $name): bool
     {
-        return array_key_exists($name, $this->_middlewareGroups);
+        return array_key_exists($name, this->_middlewareGroups);
     }
 
     /**
@@ -447,7 +447,7 @@ class RouteCollection
      */
     public function hasMiddleware(string $name): bool
     {
-        return isset($this->_middleware[$name]);
+        return isset(this->_middleware[$name]);
     }
 
     /**
@@ -458,7 +458,7 @@ class RouteCollection
      */
     public function middlewareExists(string $name): bool
     {
-        return $this->hasMiddleware($name) || $this->hasMiddlewareGroup($name);
+        return this->hasMiddleware($name) || this->hasMiddlewareGroup($name);
     }
 
     /**
@@ -473,17 +473,17 @@ class RouteCollection
     {
         $out = [];
         foreach ($names as $name) {
-            if ($this->hasMiddlewareGroup($name)) {
-                $out = array_merge($out, $this->getMiddleware($this->_middlewareGroups[$name]));
+            if (this->hasMiddlewareGroup($name)) {
+                $out = array_merge($out, this->getMiddleware(this->_middlewareGroups[$name]));
                 continue;
             }
-            if (!$this->hasMiddleware($name)) {
+            if (!this->hasMiddleware($name)) {
                 throw new RuntimeException(sprintf(
                     "The middleware named '%s' has not been registered. Use registerMiddleware() to define it.",
                     $name
                 ));
             }
-            $out[] = $this->_middleware[$name];
+            $out[] = this->_middleware[$name];
         }
 
         return $out;

@@ -35,7 +35,7 @@ class TestSession
      */
     public this(?array $session)
     {
-        $this->session = $session;
+        this->session = $session;
     }
 
     /**
@@ -46,15 +46,15 @@ class TestSession
      */
     public function check(?string $name = null): bool
     {
-        if ($this->session === null) {
+        if (this->session === null) {
             return false;
         }
 
         if ($name === null) {
-            return (bool)$this->session;
+            return (bool)this->session;
         }
 
-        return Hash::get($this->session, $name) !== null;
+        return Hash::get(this->session, $name) !== null;
     }
 
     /**
@@ -66,14 +66,14 @@ class TestSession
      */
     public function read(?string $name = null)
     {
-        if ($this->session === null) {
+        if (this->session === null) {
             return null;
         }
 
         if ($name === null) {
-            return $this->session ?: [];
+            return this->session ?: [];
         }
 
-        return Hash::get($this->session, $name);
+        return Hash::get(this->session, $name);
     }
 }

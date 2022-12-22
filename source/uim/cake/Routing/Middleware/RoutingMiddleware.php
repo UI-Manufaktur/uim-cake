@@ -77,8 +77,8 @@ class RoutingMiddleware implements MiddlewareInterface
                 'See https://github.com/CakeDC/cakephp-cached-routing'
             );
         }
-        $this->app = $app;
-        $this->cacheConfig = $cacheConfig;
+        this->app = $app;
+        this->cacheConfig = $cacheConfig;
     }
 
     /**
@@ -92,7 +92,7 @@ class RoutingMiddleware implements MiddlewareInterface
      */
     protected function loadRoutes(): void
     {
-        $routeCollection = $this->buildRouteCollection();
+        $routeCollection = this->buildRouteCollection();
         Router::setRouteCollection($routeCollection);
     }
 
@@ -103,11 +103,11 @@ class RoutingMiddleware implements MiddlewareInterface
      */
     protected function buildRouteCollection(): RouteCollection
     {
-        if (Cache::enabled() && $this->cacheConfig !== null) {
+        if (Cache::enabled() && this->cacheConfig !== null) {
             try {
                 return Cache::remember(static::ROUTE_COLLECTION_CACHE_KEY, function () {
-                    return $this->prepareRouteCollection();
-                }, $this->cacheConfig);
+                    return this->prepareRouteCollection();
+                }, this->cacheConfig);
             } catch (InvalidArgumentException $e) {
                 throw $e;
             } catch (Exception $e) {
@@ -121,7 +121,7 @@ class RoutingMiddleware implements MiddlewareInterface
             }
         }
 
-        return $this->prepareRouteCollection();
+        return this->prepareRouteCollection();
     }
 
     /**
@@ -132,9 +132,9 @@ class RoutingMiddleware implements MiddlewareInterface
     protected function prepareRouteCollection(): RouteCollection
     {
         $builder = Router::createRouteBuilder('/');
-        $this->app->routes($builder);
-        if ($this->app instanceof PluginApplicationInterface) {
-            $this->app->pluginRoutes($builder);
+        this->app->routes($builder);
+        if (this->app instanceof PluginApplicationInterface) {
+            this->app->pluginRoutes($builder);
         }
 
         return Router::getRouteCollection();
@@ -152,7 +152,7 @@ class RoutingMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $this->loadRoutes();
+        this->loadRoutes();
         try {
             Router::setRequest($request);
             $params = (array)$request->getAttribute('params', []);

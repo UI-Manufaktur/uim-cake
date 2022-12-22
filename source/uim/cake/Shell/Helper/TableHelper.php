@@ -46,7 +46,7 @@ class TableHelper extends Helper
         $widths = [];
         foreach ($rows as $line) {
             foreach (array_values($line) as $k => $v) {
-                $columnLength = $this->_cellWidth((string)$v);
+                $columnLength = this->_cellWidth((string)$v);
                 if ($columnLength >= ($widths[$k] ?? 0)) {
                     $widths[$k] = $columnLength;
                 }
@@ -72,7 +72,7 @@ class TableHelper extends Helper
             return mb_strwidth($text);
         }
 
-        $styles = $this->_io->styles();
+        $styles = this->_io->styles();
         $tags = implode('|', array_keys($styles));
         $text = preg_replace('#</?(?:' . $tags . ')>#', '', $text);
 
@@ -92,7 +92,7 @@ class TableHelper extends Helper
             $out .= '+' . str_repeat('-', $column + 2);
         }
         $out .= '+';
-        $this->_io->out($out);
+        this->_io->out($out);
     }
 
     /**
@@ -112,9 +112,9 @@ class TableHelper extends Helper
         $out = '';
         foreach (array_values($row) as $i => $column) {
             $column = (string)$column;
-            $pad = $widths[$i] - $this->_cellWidth($column);
+            $pad = $widths[$i] - this->_cellWidth($column);
             if (!empty($options['style'])) {
-                $column = $this->_addStyle($column, $options['style']);
+                $column = this->_addStyle($column, $options['style']);
             }
             if ($column !== '' && preg_match('#(.*)<text-right>.+</text-right>(.*)#', $column, $matches)) {
                 if ($matches[1] !== '' || $matches[2] !== '') {
@@ -127,7 +127,7 @@ class TableHelper extends Helper
             }
         }
         $out .= '|';
-        $this->_io->out($out);
+        this->_io->out($out);
     }
 
     /**
@@ -145,15 +145,15 @@ class TableHelper extends Helper
             return;
         }
 
-        $this->_io->setStyle('text-right', ['text' => null]);
+        this->_io->setStyle('text-right', ['text' => null]);
 
-        $config = $this->getConfig();
-        $widths = $this->_calculateWidths($args);
+        $config = this->getConfig();
+        $widths = this->_calculateWidths($args);
 
-        $this->_rowSeparator($widths);
+        this->_rowSeparator($widths);
         if ($config['headers'] === true) {
-            $this->_render(array_shift($args), $widths, ['style' => $config['headerStyle']]);
-            $this->_rowSeparator($widths);
+            this->_render(array_shift($args), $widths, ['style' => $config['headerStyle']]);
+            this->_rowSeparator($widths);
         }
 
         if (empty($args)) {
@@ -161,13 +161,13 @@ class TableHelper extends Helper
         }
 
         foreach ($args as $line) {
-            $this->_render($line, $widths);
+            this->_render($line, $widths);
             if ($config['rowSeparator'] === true) {
-                $this->_rowSeparator($widths);
+                this->_rowSeparator($widths);
             }
         }
         if ($config['rowSeparator'] !== true) {
-            $this->_rowSeparator($widths);
+            this->_rowSeparator($widths);
         }
     }
 

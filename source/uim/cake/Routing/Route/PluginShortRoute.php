@@ -56,9 +56,9 @@ class PluginShortRoute extends InflectedRoute
         if (isset($url['controller'], $url['plugin']) && $url['plugin'] !== $url['controller']) {
             return null;
         }
-        $this->defaults['controller'] = $url['controller'];
+        this->defaults['controller'] = $url['controller'];
         $result = parent::match($url, $context);
-        unset($this->defaults['controller']);
+        unset(this->defaults['controller']);
 
         return $result;
     }

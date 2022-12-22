@@ -33,7 +33,7 @@ class MailContainsAttachment extends MailContains
     {
         [$expectedFilename, $expectedFileInfo] = $other;
 
-        $messages = $this->getMessages();
+        $messages = this->getMessages();
         foreach ($messages as $message) {
             foreach ($message->getAttachments() as $filename => $fileInfo) {
                 if ($filename === $expectedFilename && empty($expectedFileInfo)) {
@@ -55,8 +55,8 @@ class MailContainsAttachment extends MailContains
      */
     public function toString(): string
     {
-        if ($this->at) {
-            return sprintf('is an attachment of email #%d', $this->at);
+        if (this->at) {
+            return sprintf('is an attachment of email #%d', this->at);
         }
 
         return 'is an attachment of an email';
@@ -72,6 +72,6 @@ class MailContainsAttachment extends MailContains
     {
         [$expectedFilename] = $other;
 
-        return '\'' . $expectedFilename . '\' ' . $this->toString();
+        return '\'' . $expectedFilename . '\' ' . this->toString();
     }
 }
