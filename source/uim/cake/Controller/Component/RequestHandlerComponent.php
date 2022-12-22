@@ -81,7 +81,7 @@ class RequestHandlerComponent extends Component
      * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> $config Array of config.
      */
-    public function __construct(ComponentRegistry $registry, array $config = [])
+    public this(ComponentRegistry $registry, array $config = [])
     {
         $config += [
             'viewClassMap' => [

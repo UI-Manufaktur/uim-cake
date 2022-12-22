@@ -84,7 +84,7 @@ class DigestAuthenticate extends BasicAuthenticate
      *   used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
-    public function __construct(ComponentRegistry $registry, array $config = [])
+    public this(ComponentRegistry $registry, array $config = [])
     {
         $this->setConfig([
             'nonceLifetime' => 300,

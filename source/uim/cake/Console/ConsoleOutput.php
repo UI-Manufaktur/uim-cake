@@ -162,7 +162,7 @@ class ConsoleOutput
      *
      * @param string $stream The identifier of the stream to write output to.
      */
-    public function __construct(string $stream = 'php://stdout')
+    public this(string $stream = 'php://stdout')
     {
         $this->_output = fopen($stream, 'wb');
 

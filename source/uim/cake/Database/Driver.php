@@ -94,7 +94,7 @@ abstract class Driver implements DriverInterface
      * @param array<string, mixed> $config The configuration for the driver.
      * @throws \InvalidArgumentException
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         if (empty($config['username']) && !empty($config['login'])) {
             throw new InvalidArgumentException(

@@ -115,7 +115,7 @@ class ConsoleIo
      * @param \Cake\Console\ConsoleInput|null $in A ConsoleInput object for stdin.
      * @param \Cake\Console\HelperRegistry|null $helpers A HelperRegistry instance
      */
-    public function __construct(
+    public this(
         ?ConsoleOutput $out = null,
         ?ConsoleOutput $err = null,
         ?ConsoleInput $in = null,

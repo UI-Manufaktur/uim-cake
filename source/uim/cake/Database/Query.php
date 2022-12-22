@@ -200,7 +200,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * @param \Cake\Database\Connection $connection The connection
      * object to be used for transforming and executing this query
      */
-    public function __construct(Connection $connection)
+    public this(Connection $connection)
     {
         $this->setConnection($connection);
     }

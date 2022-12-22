@@ -95,7 +95,7 @@ class ErrorHandler extends BaseErrorHandler
      *
      * @param array<string, mixed> $config The options for error handling.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $config += [
             'exceptionRenderer' => ExceptionRenderer::class,

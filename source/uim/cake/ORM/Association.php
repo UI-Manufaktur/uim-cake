@@ -206,7 +206,7 @@ abstract class Association
      * @param string $alias The name given to the association
      * @param array<string, mixed> $options A list of properties to be set on this object
      */
-    public function __construct(string $alias, array $options = [])
+    public this(string $alias, array $options = [])
     {
         $defaults = [
             'cascadeCallbacks',

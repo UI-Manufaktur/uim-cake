@@ -331,7 +331,7 @@ class View implements EventDispatcherInterface
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
      */
-    public function __construct(
+    public this(
         ?ServerRequest $request = null,
         ?Response $response = null,
         ?EventManager $eventManager = null,

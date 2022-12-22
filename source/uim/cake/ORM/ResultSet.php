@@ -157,7 +157,7 @@ class ResultSet implements ResultSetInterface
      * @param \Cake\ORM\Query $query Query from where results come
      * @param \Cake\Database\StatementInterface $statement The statement to fetch from
      */
-    public function __construct(Query $query, StatementInterface $statement)
+    public this(Query $query, StatementInterface $statement)
     {
         $repository = $query->getRepository();
         $this->_statement = $statement;

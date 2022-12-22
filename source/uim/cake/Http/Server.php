@@ -50,7 +50,7 @@ class Server implements EventDispatcherInterface
      * @param \Cake\Core\HttpApplicationInterface $app The application to use.
      * @param \Cake\Http\Runner|null $runner Application runner.
      */
-    public function __construct(HttpApplicationInterface $app, ?Runner $runner = null)
+    public this(HttpApplicationInterface $app, ?Runner $runner = null)
     {
         $this->app = $app;
         $this->runner = $runner ?? new Runner();

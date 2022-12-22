@@ -125,7 +125,7 @@ class Response extends Message implements ResponseInterface
      * @param array $headers Unparsed headers.
      * @param string $body The response body.
      */
-    public function __construct(array $headers = [], string $body = '')
+    public this(array $headers = [], string $body = '')
     {
         $this->_parseHeaders($headers);
         if ($this->getHeaderLine('Content-Encoding') === 'gzip') {

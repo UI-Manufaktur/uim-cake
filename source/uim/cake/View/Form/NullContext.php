@@ -29,7 +29,7 @@ class NullContext implements ContextInterface
      *
      * @param array $context Context info.
      */
-    public function __construct(array $context)
+    public this(array $context)
     {
     }
 

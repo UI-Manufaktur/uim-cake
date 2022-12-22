@@ -46,7 +46,7 @@ class TypeMap
      *
      * @param array<int|string, string> $defaults The defaults to use.
      */
-    public function __construct(array $defaults = [])
+    public this(array $defaults = [])
     {
         $this->setDefaults($defaults);
     }

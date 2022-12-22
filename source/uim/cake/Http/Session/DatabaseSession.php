@@ -49,7 +49,7 @@ class DatabaseSession implements SessionHandlerInterface
      * @param array<string, mixed> $config The configuration for this engine. It requires the 'model'
      * key to be present corresponding to the Table to use for managing the sessions.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         if (isset($config['tableLocator'])) {
             $this->setTableLocator($config['tableLocator']);

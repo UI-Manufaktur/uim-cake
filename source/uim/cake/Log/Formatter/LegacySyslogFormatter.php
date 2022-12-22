@@ -33,7 +33,7 @@ class LegacySyslogFormatter extends AbstractFormatter
     /**
      * @param array<string, mixed> $config Formatter config
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->setConfig($config);
     }

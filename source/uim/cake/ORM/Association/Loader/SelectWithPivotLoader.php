@@ -57,7 +57,7 @@ class SelectWithPivotLoader extends SelectLoader
     /**
      * @inheritDoc
      */
-    public function __construct(array $options)
+    public this(array $options)
     {
         parent::__construct($options);
         $this->junctionAssociationName = $options['junctionAssociationName'];

@@ -47,7 +47,7 @@ class ConsoleErrorRenderer implements ErrorRendererInterface
      *
      * @param array $config Error handling configuration.
      */
-    public function __construct(array $config)
+    public this(array $config)
     {
         $this->output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
         $this->trace = (bool)($config['trace'] ?? false);

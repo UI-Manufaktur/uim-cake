@@ -90,7 +90,7 @@ class MessagesFileLoader
      * @param string $extension The file extension to use. This will also be mapped
      * to a messages parser class.
      */
-    public function __construct(string $name, string $locale, string $extension = 'po')
+    public this(string $name, string $locale, string $extension = 'po')
     {
         $this->_name = $name;
         $this->_locale = $locale;

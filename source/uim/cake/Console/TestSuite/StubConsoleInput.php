@@ -45,7 +45,7 @@ class StubConsoleInput extends ConsoleInput
      *
      * @param array<string> $replies A list of replies for read()
      */
-    public function __construct(array $replies)
+    public this(array $replies)
     {
         parent::__construct();
 

@@ -45,7 +45,7 @@ class MissingOptionException extends ConsoleException
      * @param int|null $code The exception code if relevant.
      * @param \Throwable|null $previous the previous exception.
      */
-    public function __construct(
+    public this(
         string $message,
         string $requested = '',
         array $suggestions = [],

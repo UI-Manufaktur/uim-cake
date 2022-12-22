@@ -40,7 +40,7 @@ abstract class ContentsBase extends Constraint
      * @param array<string> $contents Contents
      * @param string $output Output type
      */
-    public function __construct(array $contents, string $output)
+    public this(array $contents, string $output)
     {
         $this->contents = implode(PHP_EOL, $contents);
         $this->output = $output;

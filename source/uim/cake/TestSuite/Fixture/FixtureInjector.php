@@ -51,7 +51,7 @@ class FixtureInjector implements TestListener
      *
      * @param \Cake\TestSuite\Fixture\FixtureManager $manager The fixture manager
      */
-    public function __construct(FixtureManager $manager)
+    public this(FixtureManager $manager)
     {
         if (isset($_SERVER['argv'])) {
             $manager->setDebug(in_array('--debug', $_SERVER['argv'], true));

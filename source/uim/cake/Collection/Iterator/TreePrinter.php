@@ -69,7 +69,7 @@ class TreePrinter extends RecursiveIteratorIterator implements CollectionInterfa
      * their depth in the tree.
      * @param int $mode Iterator mode.
      */
-    public function __construct(
+    public this(
         RecursiveIterator $items,
         $valuePath,
         $keyPath,

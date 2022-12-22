@@ -276,7 +276,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      *
      * @param array<string, mixed> $config List of options for this table
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         if (!empty($config['registryAlias'])) {
             $this->setRegistryAlias($config['registryAlias']);

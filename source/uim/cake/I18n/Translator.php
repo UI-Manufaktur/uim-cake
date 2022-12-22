@@ -64,7 +64,7 @@ class Translator
      * @param \Cake\I18n\FormatterInterface $formatter A message formatter.
      * @param \Cake\I18n\Translator|null $fallback A fallback translator.
      */
-    public function __construct(
+    public this(
         string $locale,
         Package $package,
         FormatterInterface $formatter,

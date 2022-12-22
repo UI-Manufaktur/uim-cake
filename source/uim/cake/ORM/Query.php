@@ -175,7 +175,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      * @param \Cake\Database\Connection $connection The connection object
      * @param \Cake\ORM\Table $table The table this query is starting on
      */
-    public function __construct(Connection $connection, Table $table)
+    public this(Connection $connection, Table $table)
     {
         parent::__construct($connection);
         $this->repository($table);

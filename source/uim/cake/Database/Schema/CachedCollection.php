@@ -51,7 +51,7 @@ class CachedCollection implements CollectionInterface
      * @param string $prefix The cache key prefix to use. Typically the connection name.
      * @param \Psr\SimpleCache\CacheInterface $cacher Cacher instance.
      */
-    public function __construct(CollectionInterface $collection, string $prefix, CacheInterface $cacher)
+    public this(CollectionInterface $collection, string $prefix, CacheInterface $cacher)
     {
         $this->collection = $collection;
         $this->prefix = $prefix;

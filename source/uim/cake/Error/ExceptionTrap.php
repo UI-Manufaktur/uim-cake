@@ -97,7 +97,7 @@ class ExceptionTrap
      *
      * @param array<string, mixed> $options An options array. See $_defaultConfig.
      */
-    public function __construct(array $options = [])
+    public this(array $options = [])
     {
         $this->setConfig($options);
     }

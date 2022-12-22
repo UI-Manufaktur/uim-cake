@@ -131,7 +131,7 @@ class Date extends MutableDate implements I18nDateTimeInterface
      * @param \DateTimeZone|string|null $tz The timezone in which the date is taken.
      *                                  Ignored if `$time` is a DateTimeInterface instance.
      */
-    public function __construct($time = 'now', $tz = null)
+    public this($time = 'now', $tz = null)
     {
         deprecationWarning(
             'The `Date` class has been deprecated. Use the immutable alternative `FrozenDate` instead',

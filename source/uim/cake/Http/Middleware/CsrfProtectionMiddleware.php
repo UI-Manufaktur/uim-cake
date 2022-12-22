@@ -105,7 +105,7 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      *
      * @param array<string, mixed> $config Config options. See $_config for valid keys.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         if (array_key_exists('httpOnly', $config)) {
             $config['httponly'] = $config['httpOnly'];

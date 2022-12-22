@@ -61,7 +61,7 @@ class CspMiddleware implements MiddlewareInterface
      * @param array<string, mixed> $config Configuration options.
      * @throws \RuntimeException
      */
-    public function __construct($csp, array $config = [])
+    public this($csp, array $config = [])
     {
         if (!class_exists(CSPBuilder::class)) {
             throw new RuntimeException('You must install paragonie/csp-builder to use CspMiddleware');

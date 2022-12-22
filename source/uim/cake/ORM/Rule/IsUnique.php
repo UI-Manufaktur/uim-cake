@@ -50,7 +50,7 @@ class IsUnique
      * @param array<string> $fields The list of fields to check uniqueness for
      * @param array<string, mixed> $options The options for unique checks.
      */
-    public function __construct(array $fields, array $options = [])
+    public this(array $fields, array $options = [])
     {
         $this->_fields = $fields;
         $this->_options = $options + $this->_options;

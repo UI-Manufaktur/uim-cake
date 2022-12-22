@@ -50,7 +50,7 @@ class ClosureDecoratorMiddleware implements MiddlewareInterface
      *
      * @param \Closure $callable A closure.
      */
-    public function __construct(Closure $callable)
+    public this(Closure $callable)
     {
         $this->callable = $callable;
     }

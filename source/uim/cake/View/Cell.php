@@ -113,7 +113,7 @@ abstract class Cell implements EventDispatcherInterface
      * @param \Cake\Event\EventManagerInterface|null $eventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */
-    public function __construct(
+    public this(
         ServerRequest $request,
         Response $response,
         ?EventManagerInterface $eventManager = null,

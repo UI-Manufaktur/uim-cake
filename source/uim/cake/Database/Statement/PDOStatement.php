@@ -40,7 +40,7 @@ class PDOStatement extends StatementDecorator
      * @param \PDOStatement $statement Original statement to be decorated.
      * @param \Cake\Database\DriverInterface $driver Driver instance.
      */
-    public function __construct(Statement $statement, DriverInterface $driver)
+    public this(Statement $statement, DriverInterface $driver)
     {
         $this->_statement = $statement;
         $this->_driver = $driver;

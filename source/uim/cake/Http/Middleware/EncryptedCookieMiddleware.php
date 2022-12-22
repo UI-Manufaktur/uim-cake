@@ -70,7 +70,7 @@ class EncryptedCookieMiddleware implements MiddlewareInterface
      * @param string $key The encryption key to use.
      * @param string $cipherType The cipher type to use. Defaults to 'aes'.
      */
-    public function __construct(array $cookieNames, string $key, string $cipherType = 'aes')
+    public this(array $cookieNames, string $key, string $cipherType = 'aes')
     {
         $this->cookieNames = $cookieNames;
         $this->key = $key;

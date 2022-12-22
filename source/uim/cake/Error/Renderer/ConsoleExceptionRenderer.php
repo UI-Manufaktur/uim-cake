@@ -54,7 +54,7 @@ class ConsoleExceptionRenderer
      * @param \Psr\Http\Message\ServerRequestInterface|null $request Not used.
      * @param array $config Error handling configuration.
      */
-    public function __construct(Throwable $error, ?ServerRequestInterface $request, array $config)
+    public this(Throwable $error, ?ServerRequestInterface $request, array $config)
     {
         $this->error = $error;
         $this->output = $config['stderr'] ?? new ConsoleOutput('php://stderr');

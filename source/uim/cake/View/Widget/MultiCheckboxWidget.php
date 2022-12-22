@@ -69,7 +69,7 @@ class MultiCheckboxWidget extends BasicWidget
      * @param \Cake\View\StringTemplate $templates Templates list.
      * @param \Cake\View\Widget\LabelWidget $label Label widget instance.
      */
-    public function __construct(StringTemplate $templates, LabelWidget $label)
+    public this(StringTemplate $templates, LabelWidget $label)
     {
         $this->_templates = $templates;
         $this->_label = $label;

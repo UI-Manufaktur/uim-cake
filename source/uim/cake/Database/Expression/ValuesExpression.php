@@ -71,7 +71,7 @@ class ValuesExpression implements ExpressionInterface
      * @param array $columns The list of columns that are going to be part of the values.
      * @param \Cake\Database\TypeMap $typeMap A dictionary of column -> type names
      */
-    public function __construct(array $columns, TypeMap $typeMap)
+    public this(array $columns, TypeMap $typeMap)
     {
         $this->_columns = $columns;
         $this->setTypeMap($typeMap);

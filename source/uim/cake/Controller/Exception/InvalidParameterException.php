@@ -41,7 +41,7 @@ class InvalidParameterException extends CakeException
      * @param int|null $code The error code
      * @param \Throwable|null $previous the previous exception.
      */
-    public function __construct($message = '', ?int $code = null, ?Throwable $previous = null)
+    public this($message = '', ?int $code = null, ?Throwable $previous = null)
     {
         if (is_array($message)) {
             $this->_messageTemplate = $this->templates[$message['template']] ?? '';

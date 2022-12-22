@@ -55,7 +55,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
      *
      * @param \Cake\Core\ContainerInterface $container The container to build controllers with.
      */
-    public function __construct(ContainerInterface $container)
+    public this(ContainerInterface $container)
     {
         $this->container = $container;
     }

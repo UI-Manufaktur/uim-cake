@@ -53,7 +53,7 @@ class UnfoldIterator extends IteratorIterator implements RecursiveIterator
      * current item and key. It must return an array or Traversable object
      * out of which the nested iterators will be yielded.
      */
-    public function __construct(Traversable $items, callable $unfolder)
+    public this(Traversable $items, callable $unfolder)
     {
         $this->_unfolder = $unfolder;
         parent::__construct($items);

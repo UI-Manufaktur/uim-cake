@@ -72,7 +72,7 @@ class EavStrategy implements TranslateStrategyInterface
      * @param \Cake\ORM\Table $table The table this strategy is attached to.
      * @param array<string, mixed> $config The config for this strategy.
      */
-    public function __construct(Table $table, array $config = [])
+    public this(Table $table, array $config = [])
     {
         if (isset($config['tableLocator'])) {
             $this->_tableLocator = $config['tableLocator'];

@@ -58,7 +58,7 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
      * @param mixed $to The ending value in the comparison range.
      * @param string|null $type The data type name to bind the values with.
      */
-    public function __construct($field, $from, $to, $type = null)
+    public this($field, $from, $to, $type = null)
     {
         if ($type !== null) {
             $from = $this->_castToExpression($from, $type);

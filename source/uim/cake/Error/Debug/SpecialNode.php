@@ -31,7 +31,7 @@ class SpecialNode implements NodeInterface
      *
      * @param string $value The message/value to include in dump results.
      */
-    public function __construct(string $value)
+    public this(string $value)
     {
         $this->value = $value;
     }

@@ -101,7 +101,7 @@ class PaginatorHelper extends Helper
      * @param \Cake\View\View $view The View this helper is being attached to.
      * @param array<string, mixed> $config Configuration settings for the helper.
      */
-    public function __construct(View $view, array $config = [])
+    public this(View $view, array $config = [])
     {
         parent::__construct($view, $config);
 

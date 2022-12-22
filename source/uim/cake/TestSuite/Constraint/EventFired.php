@@ -38,7 +38,7 @@ class EventFired extends Constraint
      *
      * @param \Cake\Event\EventManager $eventManager Event manager to check
      */
-    public function __construct(EventManager $eventManager)
+    public this(EventManager $eventManager)
     {
         $this->_eventManager = $eventManager;
 

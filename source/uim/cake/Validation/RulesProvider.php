@@ -47,7 +47,7 @@ class RulesProvider
      * @throws \ReflectionException
      * @psalm-param object|class-string $class
      */
-    public function __construct($class = Validation::class)
+    public this($class = Validation::class)
     {
         $this->_class = $class;
         $this->_reflection = new ReflectionClass($class);

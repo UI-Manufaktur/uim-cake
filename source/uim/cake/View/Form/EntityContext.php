@@ -93,7 +93,7 @@ class EntityContext implements ContextInterface
      *
      * @param array<string, mixed> $context Context info.
      */
-    public function __construct(array $context)
+    public this(array $context)
     {
         $context += [
             'entity' => null,

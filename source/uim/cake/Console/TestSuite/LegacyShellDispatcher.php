@@ -36,7 +36,7 @@ class LegacyShellDispatcher extends ShellDispatcher
      * @param bool $bootstrap Initialize environment
      * @param \Cake\Console\ConsoleIo|null $io ConsoleIo
      */
-    public function __construct(array $args = [], bool $bootstrap = true, ?ConsoleIo $io = null)
+    public this(array $args = [], bool $bootstrap = true, ?ConsoleIo $io = null)
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         $this->_io = $io;

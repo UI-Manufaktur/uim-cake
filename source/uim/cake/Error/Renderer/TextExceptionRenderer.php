@@ -38,7 +38,7 @@ class TextExceptionRenderer
      *
      * @param \Throwable $error The error to render.
      */
-    public function __construct(Throwable $error)
+    public this(Throwable $error)
     {
         $this->error = $error;
     }

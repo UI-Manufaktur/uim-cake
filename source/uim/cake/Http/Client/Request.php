@@ -40,7 +40,7 @@ class Request extends Message implements RequestInterface
      * @param array $headers The HTTP headers to set.
      * @param array|string|null $data The request body to use.
      */
-    public function __construct(string $url = '', string $method = self::METHOD_GET, array $headers = [], $data = null)
+    public this(string $url = '', string $method = self::METHOD_GET, array $headers = [], $data = null)
     {
         $this->setMethod($method);
         $this->uri = $this->createUri($url);

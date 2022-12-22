@@ -153,7 +153,7 @@ class Debugger
     /**
      * Constructor.
      */
-    public function __construct()
+    public this()
     {
         $docRef = ini_get('docref_root');
         if (empty($docRef) && function_exists('ini_set')) {

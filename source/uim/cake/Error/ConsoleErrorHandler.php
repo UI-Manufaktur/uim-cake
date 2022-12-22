@@ -39,7 +39,7 @@ class ConsoleErrorHandler extends BaseErrorHandler
      *
      * @param array<string, mixed> $config Config options for the error handler.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $config += [
             'stderr' => new ConsoleOutput('php://stderr'),

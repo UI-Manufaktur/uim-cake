@@ -31,7 +31,7 @@ class FatalErrorException extends CakeException
      * @param int|null $line Line number.
      * @param \Throwable|null $previous The previous exception.
      */
-    public function __construct(
+    public this(
         string $message,
         ?int $code = null,
         ?string $file = null,

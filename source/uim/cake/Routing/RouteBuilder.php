@@ -126,7 +126,7 @@ class RouteBuilder
      * @param array $params The scope's routing parameters.
      * @param array<string, mixed> $options Options list.
      */
-    public function __construct(RouteCollection $collection, string $path, array $params = [], array $options = [])
+    public this(RouteCollection $collection, string $path, array $params = [], array $options = [])
     {
         $this->_collection = $collection;
         $this->_path = $path;

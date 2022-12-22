@@ -76,7 +76,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
      */
-    public function __construct($field, $value, ?string $type = null, string $operator = '=')
+    public this($field, $value, ?string $type = null, string $operator = '=')
     {
         $this->_type = $type;
         $this->setField($field);

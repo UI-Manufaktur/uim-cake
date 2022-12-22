@@ -56,7 +56,7 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
      *
      * @param callable $callable A closure.
      */
-    public function __construct(callable $callable)
+    public this(callable $callable)
     {
         deprecationWarning(
             '"Double pass" middleware are deprecated. Use a `Closure` with the signature of'

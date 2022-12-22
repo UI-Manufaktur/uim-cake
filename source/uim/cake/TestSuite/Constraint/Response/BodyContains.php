@@ -35,7 +35,7 @@ class BodyContains extends ResponseBase
      * @param \Psr\Http\Message\ResponseInterface $response A response instance.
      * @param bool $ignoreCase Ignore case
      */
-    public function __construct(ResponseInterface $response, bool $ignoreCase = false)
+    public this(ResponseInterface $response, bool $ignoreCase = false)
     {
         parent::__construct($response);
 

@@ -229,7 +229,7 @@ class ServerRequest implements ServerRequestInterface
      *
      * @param array<string, mixed> $config An array of request data to create a request with.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $config += [
             'params' => $this->params,

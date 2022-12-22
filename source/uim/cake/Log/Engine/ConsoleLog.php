@@ -62,7 +62,7 @@ class ConsoleLog extends BaseLog
      * @param array<string, mixed> $config Options for the FileLog, see above.
      * @throws \InvalidArgumentException
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         parent::__construct($config);
 

@@ -49,7 +49,7 @@ abstract class Helper
      * @param \Cake\Console\ConsoleIo $io The ConsoleIo instance to use.
      * @param array<string, mixed> $config The settings for this helper.
      */
-    public function __construct(ConsoleIo $io, array $config = [])
+    public this(ConsoleIo $io, array $config = [])
     {
         $this->_io = $io;
         $this->setConfig($config);

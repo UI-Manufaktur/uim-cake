@@ -144,7 +144,7 @@ class Cookie implements CookieInterface
      * @param bool|null $httpOnly HTTP Only
      * @param string|null $sameSite Samesite
      */
-    public function __construct(
+    public this(
         string $name,
         $value = '',
         ?DateTimeInterface $expiresAt = null,

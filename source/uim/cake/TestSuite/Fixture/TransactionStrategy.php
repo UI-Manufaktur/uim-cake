@@ -40,7 +40,7 @@ class TransactionStrategy implements FixtureStrategyInterface
     /**
      * Initialize strategy.
      */
-    public function __construct()
+    public this()
     {
         $this->helper = new FixtureHelper();
     }

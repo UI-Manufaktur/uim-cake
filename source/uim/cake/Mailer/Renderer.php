@@ -36,7 +36,7 @@ class Renderer
     /**
      * Constructor
      */
-    public function __construct()
+    public this()
     {
         $this->reset();
     }

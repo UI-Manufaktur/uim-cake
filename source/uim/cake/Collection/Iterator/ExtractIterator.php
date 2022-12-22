@@ -56,7 +56,7 @@ class ExtractIterator extends Collection
      * so that the final one can be returned or a callable that will take care
      * of doing that.
      */
-    public function __construct(iterable $items, $path)
+    public this(iterable $items, $path)
     {
         $this->_extractor = $this->_propertyExtractor($path);
         parent::__construct($items);

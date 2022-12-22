@@ -89,7 +89,7 @@ class SyslogLog extends BaseLog
     /**
      * @inheritDoc
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         if (isset($config['format'])) {
             deprecationWarning(

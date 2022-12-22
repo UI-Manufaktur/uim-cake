@@ -81,7 +81,7 @@ class Event implements EventInterface
      *   with this event to it can be read by listeners.
      * @psalm-param TSubject|null $subject
      */
-    public function __construct(string $name, $subject = null, $data = null)
+    public this(string $name, $subject = null, $data = null)
     {
         $this->_name = $name;
         $this->_subject = $subject;

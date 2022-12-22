@@ -76,7 +76,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      *
      * @param iterable $items The items to be filtered.
      */
-    public function __construct(iterable $items)
+    public this(iterable $items)
     {
         $this->_buffer = new SplDoublyLinkedList();
         parent::__construct($items);

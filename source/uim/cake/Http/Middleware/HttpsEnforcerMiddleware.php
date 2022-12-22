@@ -62,7 +62,7 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
      * @param array<string, mixed> $config The options to use.
      * @see \Cake\Http\Middleware\HttpsEnforcerMiddleware::$config
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->config = $config + $this->config;
     }

@@ -44,7 +44,7 @@ class TupleComparison extends ComparisonExpression
      * one type per position in the value array in needed
      * @param string $conjunction the operator used for comparing field and value
      */
-    public function __construct($fields, $values, array $types = [], string $conjunction = '=')
+    public this($fields, $values, array $types = [], string $conjunction = '=')
     {
         $this->_type = $types;
         $this->setField($fields);

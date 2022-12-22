@@ -46,7 +46,7 @@ class ErrorLogger implements ErrorLoggerInterface
      *
      * @param array<string, mixed> $config Config array.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->setConfig($config);
     }

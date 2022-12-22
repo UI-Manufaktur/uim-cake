@@ -66,7 +66,7 @@ class ReconnectStrategy implements RetryStrategyInterface
      *
      * @param \Cake\Database\Connection $connection The connection to check
      */
-    public function __construct(Connection $connection)
+    public this(Connection $connection)
     {
         $this->connection = $connection;
     }

@@ -64,7 +64,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
      * @param \Cake\ORM\Table $table Table instance.
      * @param array<string, mixed> $config Configuration.
      */
-    public function __construct(Table $table, array $config = [])
+    public this(Table $table, array $config = [])
     {
         $tableAlias = $table->getAlias();
         [$plugin] = pluginSplit($table->getRegistryAlias(), true);

@@ -50,7 +50,7 @@ class CookieEncryptedEquals extends CookieEquals
      * @param string $mode Mode
      * @param string $key Key
      */
-    public function __construct(?Response $response, string $cookieName, string $mode, string $key)
+    public this(?Response $response, string $cookieName, string $mode, string $key)
     {
         parent::__construct($response, $cookieName);
 

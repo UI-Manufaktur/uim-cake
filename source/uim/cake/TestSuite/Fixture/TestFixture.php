@@ -99,7 +99,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
      *
      * @throws \Cake\Core\Exception\CakeException on invalid datasource usage.
      */
-    public function __construct()
+    public this()
     {
         if (!empty($this->connection)) {
             $connection = $this->connection;

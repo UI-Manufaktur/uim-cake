@@ -55,7 +55,7 @@ class FlashParamEquals extends Constraint
      * @param string $param Param to check
      * @param int|null $at Expected index
      */
-    public function __construct(?Session $session, string $key, string $param, ?int $at = null)
+    public this(?Session $session, string $key, string $param, ?int $at = null)
     {
         if (!$session) {
             $message = 'There is no stored session data. Perhaps you need to run a request?';

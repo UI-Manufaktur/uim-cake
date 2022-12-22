@@ -55,7 +55,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      *
      * @param array $middleware The list of middleware to append.
      */
-    public function __construct(array $middleware = [])
+    public this(array $middleware = [])
     {
         $this->queue = $middleware;
     }

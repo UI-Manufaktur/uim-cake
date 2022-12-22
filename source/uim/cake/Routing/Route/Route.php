@@ -136,7 +136,7 @@ class Route
      * @param array<string, mixed> $options Array of additional options for the Route
      * @throws \InvalidArgumentException When `$options['_method']` are not in `VALID_METHODS` list.
      */
-    public function __construct(string $template, array $defaults = [], array $options = [])
+    public this(string $template, array $defaults = [], array $options = [])
     {
         $this->template = $template;
         $this->defaults = $defaults;

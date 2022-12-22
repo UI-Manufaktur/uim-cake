@@ -183,7 +183,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $config Config options for scoped clients.
      * @throws \InvalidArgumentException
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->setConfig($config);
 

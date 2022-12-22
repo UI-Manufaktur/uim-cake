@@ -32,7 +32,7 @@ class OrderByExpression extends QueryExpression
      * @param \Cake\Database\TypeMap|array<string, string> $types The types for each column.
      * @param string $conjunction The glue used to join conditions together.
      */
-    public function __construct($conditions = [], $types = [], $conjunction = '')
+    public this($conditions = [], $types = [], $conjunction = '')
     {
         parent::__construct($conditions, $types, $conjunction);
     }

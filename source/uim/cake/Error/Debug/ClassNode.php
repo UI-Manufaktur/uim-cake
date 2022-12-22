@@ -42,7 +42,7 @@ class ClassNode implements NodeInterface
      * @param string $class The class name
      * @param int $id The reference id of this object in the DumpContext
      */
-    public function __construct(string $class, int $id)
+    public this(string $class, int $id)
     {
         $this->class = $class;
         $this->id = $id;

@@ -52,7 +52,7 @@ class FormContext implements ContextInterface
      * - `entity` The Form class instance this context is operating on. **(required)**
      * - `validator` Optional name of the validation method to call on the Form object.
      */
-    public function __construct(array $context)
+    public this(array $context)
     {
         if (!isset($context['entity']) || !$context['entity'] instanceof Form) {
             throw new CakeException('`$context[\'entity\']` must be an instance of Cake\Form\Form');

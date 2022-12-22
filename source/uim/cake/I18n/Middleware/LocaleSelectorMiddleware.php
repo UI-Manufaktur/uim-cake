@@ -42,7 +42,7 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
      * @param array $locales A list of accepted locales, or ['*'] to accept any
      *   locale header value.
      */
-    public function __construct(array $locales = [])
+    public this(array $locales = [])
     {
         $this->locales = $locales;
     }

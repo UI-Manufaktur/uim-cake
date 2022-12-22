@@ -48,7 +48,7 @@ class CookieCollection implements IteratorAggregate, Countable
      *
      * @param array<\Cake\Http\Cookie\CookieInterface> $cookies Array of cookie objects
      */
-    public function __construct(array $cookies = [])
+    public this(array $cookies = [])
     {
         $this->checkCookies($cookies);
         foreach ($cookies as $cookie) {

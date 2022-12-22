@@ -52,7 +52,7 @@ class SaveOptionsBuilder extends ArrayObject
      * @param \Cake\ORM\Table $table A table instance.
      * @param array<string, mixed> $options Options to parse when instantiating.
      */
-    public function __construct(Table $table, array $options = [])
+    public this(Table $table, array $options = [])
     {
         $this->_table = $table;
         $this->parseArrayOptions($options);

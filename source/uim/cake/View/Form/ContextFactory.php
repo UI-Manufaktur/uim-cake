@@ -40,7 +40,7 @@ class ContextFactory
      * @param array $providers Array of provider callables. Each element should
      *   be of form `['type' => 'a-string', 'callable' => ..]`
      */
-    public function __construct(array $providers = [])
+    public this(array $providers = [])
     {
         foreach ($providers as $provider) {
             $this->addProvider($provider['type'], $provider['callable']);

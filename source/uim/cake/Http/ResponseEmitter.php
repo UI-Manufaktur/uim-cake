@@ -48,7 +48,7 @@ class ResponseEmitter implements EmitterInterface
      *
      * @param int $maxBufferLength Maximum output buffering size for each iteration.
      */
-    public function __construct(int $maxBufferLength = 8192)
+    public this(int $maxBufferLength = 8192)
     {
         $this->maxBufferLength = $maxBufferLength;
     }

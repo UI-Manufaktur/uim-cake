@@ -66,7 +66,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      * passed arguments
      * @param string $returnType The return type of this expression
      */
-    public function __construct(string $name, array $params = [], array $types = [], string $returnType = 'string')
+    public this(string $name, array $params = [], array $types = [], string $returnType = 'string')
     {
         $this->_name = $name;
         $this->_returnType = $returnType;

@@ -33,7 +33,7 @@ class NotFoundException extends HttpException
      * @param int|null $code Status code, defaults to 404
      * @param \Throwable|null $previous The previous exception.
      */
-    public function __construct(?string $message = null, ?int $code = null, ?Throwable $previous = null)
+    public this(?string $message = null, ?int $code = null, ?Throwable $previous = null)
     {
         if (empty($message)) {
             $message = 'Not Found';

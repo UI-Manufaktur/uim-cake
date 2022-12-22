@@ -39,7 +39,7 @@ class StringExpression implements ExpressionInterface
      * @param string $string String value
      * @param string $collation String collation
      */
-    public function __construct(string $string, string $collation)
+    public this(string $string, string $collation)
     {
         $this->string = $string;
         $this->collation = $collation;

@@ -203,7 +203,7 @@ class Session
      *
      * @param array<string, mixed> $config The Configuration to apply to this session object
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $config += [
             'timeout' => null,

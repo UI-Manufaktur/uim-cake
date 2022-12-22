@@ -444,7 +444,7 @@ class Response implements ResponseInterface
      *  - charset: the charset for the response body
      * @throws \InvalidArgumentException
      */
-    public function __construct(array $options = [])
+    public this(array $options = [])
     {
         $this->_streamTarget = $options['streamTarget'] ?? $this->_streamTarget;
         $this->_streamMode = $options['streamMode'] ?? $this->_streamMode;

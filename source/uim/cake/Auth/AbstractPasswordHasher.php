@@ -39,7 +39,7 @@ abstract class AbstractPasswordHasher
      *
      * @param array<string, mixed> $config Array of config.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->setConfig($config);
     }

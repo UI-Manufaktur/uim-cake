@@ -40,7 +40,7 @@ class MissingCellTemplateException extends MissingTemplateException
      * @param int|null $code The code of the error.
      * @param \Throwable|null $previous the previous exception.
      */
-    public function __construct(
+    public this(
         string $name,
         string $file,
         array $paths = [],

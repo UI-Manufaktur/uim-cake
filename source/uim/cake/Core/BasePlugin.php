@@ -105,7 +105,7 @@ class BasePlugin implements PluginInterface
      *
      * @param array<string, mixed> $options Options
      */
-    public function __construct(array $options = [])
+    public this(array $options = [])
     {
         foreach (static::VALID_HOOKS as $key) {
             if (isset($options[$key])) {

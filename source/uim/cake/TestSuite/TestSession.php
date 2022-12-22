@@ -33,7 +33,7 @@ class TestSession
     /**
      * @param array|null $session Session data.
      */
-    public function __construct(?array $session)
+    public this(?array $session)
     {
         $this->session = $session;
     }

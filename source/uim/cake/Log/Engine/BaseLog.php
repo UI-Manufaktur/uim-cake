@@ -53,7 +53,7 @@ abstract class BaseLog extends AbstractLogger
      *
      * @param array<string, mixed> $config Configuration array
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->setConfig($config);
 

@@ -84,7 +84,7 @@ class File
      * @param int $mode Mode to apply to the folder holding the file
      * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html#file-api
      */
-    public function __construct(string $path, bool $create = false, int $mode = 0755)
+    public this(string $path, bool $create = false, int $mode = 0755)
     {
         $splInfo = new SplFileInfo($path);
         $this->Folder = new Folder($splInfo->getPath(), $create, $mode);

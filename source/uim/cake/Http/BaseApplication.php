@@ -91,7 +91,7 @@ abstract class BaseApplication implements
      * @param \Cake\Event\EventManagerInterface|null $eventManager Application event manager instance.
      * @param \Cake\Http\ControllerFactoryInterface|null $controllerFactory Controller factory.
      */
-    public function __construct(
+    public this(
         string $configDir,
         ?EventManagerInterface $eventManager = null,
         ?ControllerFactoryInterface $controllerFactory = null

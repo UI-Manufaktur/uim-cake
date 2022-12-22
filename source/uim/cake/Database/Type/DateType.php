@@ -51,7 +51,7 @@ class DateType extends DateTimeType
     /**
      * @inheritDoc
      */
-    public function __construct(?string $name = null)
+    public this(?string $name = null)
     {
         parent::__construct($name);
 

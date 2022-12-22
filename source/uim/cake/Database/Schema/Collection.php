@@ -47,7 +47,7 @@ class Collection implements CollectionInterface
      *
      * @param \Cake\Database\Connection $connection The connection instance.
      */
-    public function __construct(Connection $connection)
+    public this(Connection $connection)
     {
         $this->_connection = $connection;
         $this->_dialect = $connection->getDriver()->schemaDialect();

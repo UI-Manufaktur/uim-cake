@@ -43,7 +43,7 @@ class TreeIterator extends RecursiveIteratorIterator implements CollectionInterf
      * @param int $mode Iterator mode.
      * @param int $flags Iterator flags.
      */
-    public function __construct(
+    public this(
         RecursiveIterator $items,
         int $mode = RecursiveIteratorIterator::SELF_FIRST,
         int $flags = 0

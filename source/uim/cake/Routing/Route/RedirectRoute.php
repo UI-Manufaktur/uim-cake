@@ -43,7 +43,7 @@ class RedirectRoute extends Route
      * @param array $defaults Defaults for the route. Either a redirect=>value array or a CakePHP array URL.
      * @param array<string, mixed> $options Array of additional options for the Route
      */
-    public function __construct(string $template, array $defaults = [], array $options = [])
+    public this(string $template, array $defaults = [], array $options = [])
     {
         parent::__construct($template, $defaults, $options);
         if (isset($defaults['redirect'])) {

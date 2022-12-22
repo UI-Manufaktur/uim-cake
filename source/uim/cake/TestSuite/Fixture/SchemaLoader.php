@@ -41,7 +41,7 @@ class SchemaLoader
     /**
      * Constructor.
      */
-    public function __construct()
+    public this()
     {
         $this->helper = new ConnectionHelper();
     }

@@ -129,7 +129,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      * @param \Cake\Http\ServerRequest|null $request The request if this is set it will be used
      *   instead of creating a new one.
      */
-    public function __construct(Throwable $exception, ?ServerRequest $request = null)
+    public this(Throwable $exception, ?ServerRequest $request = null)
     {
         $this->error = $exception;
         $this->request = $request;

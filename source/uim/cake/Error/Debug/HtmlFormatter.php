@@ -40,7 +40,7 @@ class HtmlFormatter implements FormatterInterface
     /**
      * Constructor.
      */
-    public function __construct()
+    public this()
     {
         $this->id = uniqid('', true);
     }

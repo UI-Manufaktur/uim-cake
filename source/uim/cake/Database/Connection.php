@@ -132,7 +132,7 @@ class Connection implements ConnectionInterface
      *
      * @param array<string, mixed> $config Configuration array.
      */
-    public function __construct(array $config)
+    public this(array $config)
     {
         $this->_config = $config;
 

@@ -47,7 +47,7 @@ class Entity implements EntityInterface, InvalidPropertyInterface
      * @param array<string, mixed> $properties hash of properties to set in this entity
      * @param array<string, mixed> $options list of options to use when creating this entity
      */
-    public function __construct(array $properties = [], array $options = [])
+    public this(array $properties = [], array $options = [])
     {
         $options += [
             'useSetters' => true,

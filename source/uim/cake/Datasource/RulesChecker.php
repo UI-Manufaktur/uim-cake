@@ -109,7 +109,7 @@ class RulesChecker
      *
      * @param array<string, mixed> $options The options to pass to every rule
      */
-    public function __construct(array $options = [])
+    public this(array $options = [])
     {
         $this->_options = $options;
         $this->_useI18n = function_exists('__d');

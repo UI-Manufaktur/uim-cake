@@ -77,7 +77,7 @@ class TextHelper extends Helper
      * @param array<string, mixed> $config Settings array Settings array
      * @throws \Cake\Core\Exception\CakeException when the engine class could not be found.
      */
-    public function __construct(View $view, array $config = [])
+    public this(View $view, array $config = [])
     {
         parent::__construct($view, $config);
 

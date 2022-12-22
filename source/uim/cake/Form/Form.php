@@ -99,7 +99,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @param \Cake\Event\EventManager|null $eventManager The event manager.
      *  Defaults to a new instance.
      */
-    public function __construct(?EventManager $eventManager = null)
+    public this(?EventManager $eventManager = null)
     {
         if ($eventManager !== null) {
             $this->setEventManager($eventManager);

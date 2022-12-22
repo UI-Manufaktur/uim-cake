@@ -47,7 +47,7 @@ class AssetMiddleware implements MiddlewareInterface
      *
      * @param array<string, mixed> $options The options to use
      */
-    public function __construct(array $options = [])
+    public this(array $options = [])
     {
         if (!empty($options['cacheTime'])) {
             $this->cacheTime = $options['cacheTime'];

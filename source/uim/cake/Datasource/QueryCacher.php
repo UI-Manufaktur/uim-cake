@@ -53,7 +53,7 @@ class QueryCacher
      * @param \Psr\SimpleCache\CacheInterface|string $config The cache config name or cache engine instance.
      * @throws \RuntimeException
      */
-    public function __construct($key, $config)
+    public this($key, $config)
     {
         if (!is_string($key) && !($key instanceof Closure)) {
             throw new RuntimeException('Cache keys must be strings or callables.');

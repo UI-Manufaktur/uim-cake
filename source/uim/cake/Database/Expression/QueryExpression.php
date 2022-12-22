@@ -64,7 +64,7 @@ class QueryExpression implements ExpressionInterface, Countable
      * level of the expression tree. For example "AND", "OR", "XOR"...
      * @see \Cake\Database\Expression\QueryExpression::add() for more details on $conditions and $types
      */
-    public function __construct($conditions = [], $types = [], $conjunction = 'AND')
+    public this($conditions = [], $types = [], $conjunction = 'AND')
     {
         $this->setTypeMap($types);
         $this->setConjunction(strtoupper($conjunction));

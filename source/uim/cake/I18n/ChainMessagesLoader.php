@@ -37,7 +37,7 @@ class ChainMessagesLoader
      *
      * @param array<callable> $loaders List of callables to execute
      */
-    public function __construct(array $loaders)
+    public this(array $loaders)
     {
         $this->_loaders = $loaders;
     }

@@ -128,7 +128,7 @@ class EagerLoadable
      * @param string $name The Association name.
      * @param array<string, mixed> $config The list of properties to set.
      */
-    public function __construct(string $name, array $config = [])
+    public this(string $name, array $config = [])
     {
         $this->_name = $name;
         $allowed = [

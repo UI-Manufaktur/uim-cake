@@ -63,7 +63,7 @@ class HelpFormatter
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser help is being generated for.
      */
-    public function __construct(ConsoleOptionParser $parser)
+    public this(ConsoleOptionParser $parser)
     {
         $this->_parser = $parser;
     }

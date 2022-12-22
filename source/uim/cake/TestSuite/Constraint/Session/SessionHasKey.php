@@ -35,7 +35,7 @@ class SessionHasKey extends Constraint
      *
      * @param string $path Session Path
      */
-    public function __construct(string $path)
+    public this(string $path)
     {
         $this->path = $path;
     }

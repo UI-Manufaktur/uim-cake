@@ -53,7 +53,7 @@ class Uri implements UriInterface
      * @param string $base The base path.
      * @param string $webroot The webroot path.
      */
-    public function __construct(UriInterface $uri, string $base, string $webroot)
+    public this(UriInterface $uri, string $base, string $webroot)
     {
         $this->uri = $uri;
         $this->base = $base;

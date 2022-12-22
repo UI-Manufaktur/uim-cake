@@ -43,7 +43,7 @@ class EventFiredWith extends Constraint
      * @param string $dataKey Data key
      * @param mixed $dataValue Data value
      */
-    public function __construct(EventManager $eventManager, string $dataKey, $dataValue)
+    public this(EventManager $eventManager, string $dataKey, $dataValue)
     {
         $this->_eventManager = $eventManager;
         $this->_dataKey = $dataKey;

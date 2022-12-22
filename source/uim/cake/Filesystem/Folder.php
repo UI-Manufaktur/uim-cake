@@ -137,7 +137,7 @@ class Folder
      * @param bool $create Create folder if not found
      * @param int|null $mode Mode (CHMOD) to apply to created folder, false to ignore
      */
-    public function __construct(?string $path = null, bool $create = false, ?int $mode = null)
+    public this(?string $path = null, bool $create = false, ?int $mode = null)
     {
         if (empty($path)) {
             $path = TMP;

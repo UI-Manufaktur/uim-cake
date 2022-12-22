@@ -104,7 +104,7 @@ class ConsoleInputOption
      * @param string|null $prompt The prompt string.
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    public function __construct(
+    public this(
         string $name,
         string $short = '',
         string $help = '',

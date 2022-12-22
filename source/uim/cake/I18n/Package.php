@@ -51,7 +51,7 @@ class Package
      * @param string|null $fallback The name of the fallback package to use.
      * @param array<array|string> $messages The messages in this package.
      */
-    public function __construct(
+    public this(
         string $formatter = 'default',
         ?string $fallback = null,
         array $messages = []

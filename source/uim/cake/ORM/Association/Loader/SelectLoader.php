@@ -101,7 +101,7 @@ class SelectLoader
      *
      * @param array<string, mixed> $options Properties to be copied to this class
      */
-    public function __construct(array $options)
+    public this(array $options)
     {
         $this->alias = $options['alias'];
         $this->sourceAlias = $options['sourceAlias'];

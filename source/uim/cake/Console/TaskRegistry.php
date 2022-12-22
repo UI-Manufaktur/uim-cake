@@ -40,7 +40,7 @@ class TaskRegistry extends ObjectRegistry
      *
      * @param \Cake\Console\Shell $shell Shell instance
      */
-    public function __construct(Shell $shell)
+    public this(Shell $shell)
     {
         $this->_Shell = $shell;
     }

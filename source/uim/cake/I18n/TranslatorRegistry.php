@@ -97,7 +97,7 @@ class TranslatorRegistry
      * @param \Cake\I18n\FormatterLocator $formatters The formatter locator.
      * @param string $locale The default locale code to use.
      */
-    public function __construct(
+    public this(
         PackageLocator $packages,
         FormatterLocator $formatters,
         string $locale

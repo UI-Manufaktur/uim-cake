@@ -122,7 +122,7 @@ class CaseStatementExpression implements ExpressionInterface, TypedResultInterfa
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
      */
-    public function __construct($value = null, ?string $type = null)
+    public this($value = null, ?string $type = null)
     {
         if (func_num_args() > 0) {
             if (

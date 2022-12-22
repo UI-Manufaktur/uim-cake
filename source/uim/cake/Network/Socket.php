@@ -106,7 +106,7 @@ class Socket
      * @param array<string, mixed> $config Socket configuration, which will be merged with the base configuration
      * @see \Cake\Network\Socket::$_defaultConfig
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->setConfig($config);
     }

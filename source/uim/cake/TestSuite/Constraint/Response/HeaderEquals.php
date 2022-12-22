@@ -35,7 +35,7 @@ class HeaderEquals extends ResponseBase
      * @param \Psr\Http\Message\ResponseInterface $response A response instance.
      * @param string $headerName Header name
      */
-    public function __construct(ResponseInterface $response, string $headerName)
+    public this(ResponseInterface $response, string $headerName)
     {
         parent::__construct($response);
 

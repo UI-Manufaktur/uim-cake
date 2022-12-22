@@ -204,7 +204,7 @@ class Mailer implements EventListenerInterface
      *
      * @param array<string, mixed>|string|null $config Array of configs, or string to load configs from app.php
      */
-    public function __construct($config = null)
+    public this($config = null)
     {
         $this->message = new $this->messageClass();
 

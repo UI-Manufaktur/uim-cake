@@ -80,7 +80,7 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
      *
      * @param array<string, mixed> $config Config options. See $_config for valid keys.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->_config = $config + $this->_config;
     }

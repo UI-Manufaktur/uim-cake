@@ -37,7 +37,7 @@ class ValidCount
      *
      * @param string $field The field to check the count on.
      */
-    public function __construct(string $field)
+    public this(string $field)
     {
         $this->_field = $field;
     }

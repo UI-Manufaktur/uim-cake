@@ -48,7 +48,7 @@ class IdentifierExpression implements ExpressionInterface
      * @param string $identifier The identifier this expression represents
      * @param string|null $collation The identifier collation
      */
-    public function __construct(string $identifier, ?string $collation = null)
+    public this(string $identifier, ?string $collation = null)
     {
         $this->_identifier = $identifier;
         $this->collation = $collation;

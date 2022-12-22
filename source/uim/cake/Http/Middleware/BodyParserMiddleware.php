@@ -59,7 +59,7 @@ class BodyParserMiddleware implements MiddlewareInterface
      *
      * @param array<string, mixed> $options The options to use. See above.
      */
-    public function __construct(array $options = [])
+    public this(array $options = [])
     {
         $options += ['json' => true, 'xml' => false, 'methods' => null];
         if ($options['json']) {

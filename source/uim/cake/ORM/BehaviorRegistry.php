@@ -62,7 +62,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      *
      * @param \Cake\ORM\Table|null $table The table this registry is attached to.
      */
-    public function __construct(?Table $table = null)
+    public this(?Table $table = null)
     {
         if ($table !== null) {
             $this->setTable($table);

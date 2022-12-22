@@ -40,7 +40,7 @@ class TestExceptionRenderer implements ExceptionRendererInterface
      * @return void
      * @throws \Throwable $exception Rethrows the passed exception.
      */
-    public function __construct(Throwable $exception)
+    public this(Throwable $exception)
     {
         throw $exception;
     }

@@ -110,7 +110,7 @@ class StringTemplate
      *
      * @param array<string, mixed> $config A set of templates to add.
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->add($config);
     }

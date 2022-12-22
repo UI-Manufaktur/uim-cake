@@ -68,7 +68,7 @@ class RoutingMiddleware implements MiddlewareInterface
      * @param \Cake\Routing\RoutingApplicationInterface $app The application instance that routes are defined on.
      * @param string|null $cacheConfig The cache config name to use or null to disable routes cache
      */
-    public function __construct(RoutingApplicationInterface $app, ?string $cacheConfig = null)
+    public this(RoutingApplicationInterface $app, ?string $cacheConfig = null)
     {
         if ($cacheConfig !== null) {
             deprecationWarning(

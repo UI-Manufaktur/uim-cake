@@ -31,7 +31,7 @@ class ArrayNode implements NodeInterface
      *
      * @param array<\Cake\Error\Debug\ArrayItemNode> $items The items for the array
      */
-    public function __construct(array $items = [])
+    public this(array $items = [])
     {
         $this->items = [];
         foreach ($items as $item) {

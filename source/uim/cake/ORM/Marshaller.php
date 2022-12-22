@@ -53,7 +53,7 @@ class Marshaller
      *
      * @param \Cake\ORM\Table $table The table this marshaller is for.
      */
-    public function __construct(Table $table)
+    public this(Table $table)
     {
         $this->_table = $table;
     }

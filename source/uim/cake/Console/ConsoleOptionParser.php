@@ -158,7 +158,7 @@ class ConsoleOptionParser
      * @param bool $defaultOptions Whether you want the verbose and quiet options set. Setting
      *  this to false will prevent the addition of `--verbose` & `--quiet` options.
      */
-    public function __construct(string $command = '', bool $defaultOptions = true)
+    public this(string $command = '', bool $defaultOptions = true)
     {
         $this->setCommand($command);
 

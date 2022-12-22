@@ -64,7 +64,7 @@ class CaseExpression implements ExpressionInterface
      * @param array<string> $types Associative array of types to be associated with the values
      * passed in $values
      */
-    public function __construct($conditions = [], $values = [], $types = [])
+    public this($conditions = [], $values = [], $types = [])
     {
         $conditions = is_array($conditions) ? $conditions : [$conditions];
         $values = is_array($values) ? $values : [$values];

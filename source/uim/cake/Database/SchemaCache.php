@@ -42,7 +42,7 @@ class SchemaCache
      *
      * @param \Cake\Database\Connection $connection Connection name to get the schema for or a connection instance
      */
-    public function __construct(Connection $connection)
+    public this(Connection $connection)
     {
         $this->_schema = $this->getSchema($connection);
     }

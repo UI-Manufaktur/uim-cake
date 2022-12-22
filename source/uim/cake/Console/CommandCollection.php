@@ -45,7 +45,7 @@ class CommandCollection implements IteratorAggregate, Countable
      *
      * @param array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|string> $commands The map of commands to add to the collection.
      */
-    public function __construct(array $commands = [])
+    public this(array $commands = [])
     {
         foreach ($commands as $name => $command) {
             $this->add($name, $command);

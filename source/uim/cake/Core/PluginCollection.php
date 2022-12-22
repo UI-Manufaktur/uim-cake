@@ -70,7 +70,7 @@ class PluginCollection implements Iterator, Countable
      *
      * @param array<\Cake\Core\PluginInterface> $plugins The map of plugins to add to the collection.
      */
-    public function __construct(array $plugins = [])
+    public this(array $plugins = [])
     {
         foreach ($plugins as $plugin) {
             $this->add($plugin);

@@ -60,7 +60,7 @@ class NumberHelper extends Helper
      * @param array<string, mixed> $config Configuration settings for the helper
      * @throws \Cake\Core\Exception\CakeException When the engine class could not be found.
      */
-    public function __construct(View $view, array $config = [])
+    public this(View $view, array $config = [])
     {
         parent::__construct($view, $config);
 

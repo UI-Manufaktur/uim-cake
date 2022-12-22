@@ -48,7 +48,7 @@ class DebugContext
      *
      * @param int $maxDepth The desired depth of dump output.
      */
-    public function __construct(int $maxDepth)
+    public this(int $maxDepth)
     {
         $this->maxDepth = $maxDepth;
         $this->refs = new SplObjectStorage();

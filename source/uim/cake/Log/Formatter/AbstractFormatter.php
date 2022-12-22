@@ -33,7 +33,7 @@ abstract class AbstractFormatter
     /**
      * @param array<string, mixed> $config Config options
      */
-    public function __construct(array $config = [])
+    public this(array $config = [])
     {
         $this->setConfig($config);
     }

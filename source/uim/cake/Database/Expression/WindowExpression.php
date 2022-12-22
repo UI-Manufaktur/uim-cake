@@ -53,7 +53,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @param string $name Window name
      */
-    public function __construct(string $name = '')
+    public this(string $name = '')
     {
         $this->name = new IdentifierExpression($name);
     }

@@ -127,7 +127,7 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      * @param \DateTimeInterface|string|int|null $time Fixed or relative time
      * @param \DateTimeZone|string|null $tz The timezone for the instance
      */
-    public function __construct($time = null, $tz = null)
+    public this($time = null, $tz = null)
     {
         deprecationWarning(
             'The `Time` class has been deprecated. Use the immutable alternative `FrozenTime` instead',

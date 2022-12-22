@@ -39,7 +39,7 @@ class Digest
      * @param \Cake\Http\Client $client Http client object.
      * @param array|null $options Options list.
      */
-    public function __construct(Client $client, ?array $options = null)
+    public this(Client $client, ?array $options = null)
     {
         $this->_client = $client;
     }

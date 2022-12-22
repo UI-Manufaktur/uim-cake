@@ -51,7 +51,7 @@ class Arguments
      * @param array<int, string> $argNames List of argument names. Order is expected to be
      *  the same as $args.
      */
-    public function __construct(array $args, array $options, array $argNames)
+    public this(array $args, array $options, array $argNames)
     {
         $this->args = $args;
         $this->options = $options;

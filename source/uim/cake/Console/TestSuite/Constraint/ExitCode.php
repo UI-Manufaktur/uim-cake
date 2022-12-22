@@ -34,7 +34,7 @@ class ExitCode extends Constraint
      *
      * @param int|null $exitCode Exit code
      */
-    public function __construct(?int $exitCode)
+    public this(?int $exitCode)
     {
         $this->exitCode = $exitCode;
     }

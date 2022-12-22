@@ -123,7 +123,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      *
      * @param string|null $name The name identifying this type
      */
-    public function __construct(?string $name = null)
+    public this(?string $name = null)
     {
         parent::__construct($name);
 

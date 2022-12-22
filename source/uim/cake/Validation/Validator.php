@@ -191,7 +191,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
     /**
      * Constructor
      */
-    public function __construct()
+    public this()
     {
         $this->_useI18n = function_exists('__d');
         $this->_providers = self::$_defaultProviders;

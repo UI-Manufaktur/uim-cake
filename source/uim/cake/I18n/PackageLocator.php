@@ -51,7 +51,7 @@ class PackageLocator
      * @param array<string, array<string, \Cake\I18n\Package|callable>> $registry A registry of packages.
      * @see PackageLocator::$registry
      */
-    public function __construct(array $registry = [])
+    public this(array $registry = [])
     {
         foreach ($registry as $name => $locales) {
             foreach ($locales as $locale => $spec) {

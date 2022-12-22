@@ -53,7 +53,7 @@ class ControllerAuthorize extends BaseAuthorize
     /**
      * @inheritDoc
      */
-    public function __construct(ComponentRegistry $registry, array $config = [])
+    public this(ComponentRegistry $registry, array $config = [])
     {
         parent::__construct($registry, $config);
         $this->controller($registry->getController());

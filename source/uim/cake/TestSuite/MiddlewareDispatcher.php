@@ -45,7 +45,7 @@ class MiddlewareDispatcher
      *
      * @param \Cake\Core\HttpApplicationInterface $app The test case to run.
      */
-    public function __construct(HttpApplicationInterface $app)
+    public this(HttpApplicationInterface $app)
     {
         $this->app = $app;
     }

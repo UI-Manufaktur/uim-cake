@@ -101,7 +101,7 @@ class Component implements EventListenerInterface
      *  this component can use to lazy load its components.
      * @param array<string, mixed> $config Array of configuration settings.
      */
-    public function __construct(ComponentRegistry $registry, array $config = [])
+    public this(ComponentRegistry $registry, array $config = [])
     {
         $this->_registry = $registry;
 
