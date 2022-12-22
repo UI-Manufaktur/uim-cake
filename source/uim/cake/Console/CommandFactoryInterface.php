@@ -25,5 +25,5 @@ interface CommandFactoryInterface
      * @param string $className Command/Shell class name.
      * @return \Cake\Console\Shell|\Cake\Console\CommandInterface
      */
-    public function create(string $className);
+    function create(string $className);
 }

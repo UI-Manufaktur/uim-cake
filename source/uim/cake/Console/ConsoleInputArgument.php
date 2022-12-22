@@ -83,7 +83,7 @@ class ConsoleInputArgument
      *
      * @return string Value of this->_name.
      */
-    public function name(): string
+    function name(): string
     {
         return this->_name;
     }
@@ -94,7 +94,7 @@ class ConsoleInputArgument
      * @param \Cake\Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      * @return bool
      */
-    public function isEqualTo(ConsoleInputArgument $argument): bool
+    function isEqualTo(ConsoleInputArgument $argument): bool
     {
         return this->name() === $argument->name() &&
             this->usage() === $argument->usage();
@@ -106,7 +106,7 @@ class ConsoleInputArgument
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    public function help(int $width = 0): string
+    function help(int $width = 0): string
     {
         $name = this->_name;
         if (strlen($name) < $width) {
@@ -128,7 +128,7 @@ class ConsoleInputArgument
      *
      * @return string
      */
-    public function usage(): string
+    function usage(): string
     {
         $name = this->_name;
         if (this->_choices) {
@@ -147,7 +147,7 @@ class ConsoleInputArgument
      *
      * @return bool
      */
-    public function isRequired(): bool
+    function isRequired(): bool
     {
         return this->_required;
     }
@@ -159,7 +159,7 @@ class ConsoleInputArgument
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    public function validChoice(string $value): bool
+    function validChoice(string $value): bool
     {
         if (empty(this->_choices)) {
             return true;
@@ -184,7 +184,7 @@ class ConsoleInputArgument
      * @param \SimpleXMLElement $parent The parent element.
      * @return \SimpleXMLElement The parent with this argument appended.
      */
-    public function xml(SimpleXMLElement $parent): SimpleXMLElement
+    function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent->addChild('argument');
         $option->addAttribute('name', this->_name);

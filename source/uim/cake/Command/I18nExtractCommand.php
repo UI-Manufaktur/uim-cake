@@ -172,7 +172,7 @@ class I18nExtractCommand extends Command
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $plugin = '';
         if ($args->getOption('exclude')) {
@@ -344,7 +344,7 @@ class I18nExtractCommand extends Command
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to configure
      * @return \Cake\Console\ConsoleOptionParser
      */
-    public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser->setDescription(
             'Extract i18n POT files from application source files. ' .

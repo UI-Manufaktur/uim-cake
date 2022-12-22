@@ -66,7 +66,7 @@ class UnfoldIterator extends IteratorIterator implements RecursiveIterator
      *
      * @return bool
      */
-    public function hasChildren(): bool
+    function hasChildren(): bool
     {
         return true;
     }
@@ -77,7 +77,7 @@ class UnfoldIterator extends IteratorIterator implements RecursiveIterator
      *
      * @return \RecursiveIterator
      */
-    public function getChildren(): RecursiveIterator
+    function getChildren(): RecursiveIterator
     {
         $current = this->current();
         $key = this->key();

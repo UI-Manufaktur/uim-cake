@@ -32,7 +32,7 @@ class I18nCommand extends Command
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $io->out('<info>I18n Shell</info>');
         $io->hr();
@@ -77,7 +77,7 @@ class I18nCommand extends Command
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser->setDescription(
             'I18n commands let you generate .pot files to power translations in your application.'

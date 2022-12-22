@@ -58,7 +58,7 @@ class PluginLoadCommand extends Command
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    function execute(Arguments $args, ConsoleIo $io): ?int
     {
         this->io = $io;
         this->args = $args;
@@ -95,7 +95,7 @@ class PluginLoadCommand extends Command
         $contents = file_get_contents($app);
 
         // Find start of bootstrap
-        if (!preg_match('/^(\s+)public function bootstrap(?:\s*)\(\)/mu', $contents, $matches, PREG_OFFSET_CAPTURE)) {
+        if (!preg_match('/^(\s+)function bootstrap(?:\s*)\(\)/mu', $contents, $matches, PREG_OFFSET_CAPTURE)) {
             this->io->err('Your Application class does not have a bootstrap() method. Please add one.');
             this->abort();
         }
@@ -127,7 +127,7 @@ class PluginLoadCommand extends Command
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
-    public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser->setDescription([
             'Command for loading plugins.',

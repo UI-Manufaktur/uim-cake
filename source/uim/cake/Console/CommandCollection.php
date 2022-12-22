@@ -61,7 +61,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @return this
      * @throws \InvalidArgumentException
      */
-    public function add(string $name, $command)
+    function add(string $name, $command)
     {
         if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, CommandInterface::class)) {
             $class = is_string($command) ? $command : get_class($command);
@@ -90,7 +90,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @return this
      * @see \Cake\Console\CommandCollection::add()
      */
-    public function addMany(array $commands)
+    function addMany(array $commands)
     {
         foreach ($commands as $name => $class) {
             this->add($name, $class);
@@ -105,7 +105,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @param string $name The named shell.
      * @return this
      */
-    public function remove(string $name)
+    function remove(string $name)
     {
         unset(this->commands[$name]);
 
@@ -118,7 +118,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @param string $name The named shell.
      * @return bool
      */
-    public function has(string $name): bool
+    function has(string $name): bool
     {
         return isset(this->commands[$name]);
     }
@@ -131,7 +131,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @throws \InvalidArgumentException when unknown commands are fetched.
      * @psalm-return \Cake\Console\CommandInterface|\Cake\Console\Shell|class-string
      */
-    public function get(string $name)
+    function get(string $name)
     {
         if (!this->has($name)) {
             throw new InvalidArgumentException("The $name is not a known command name.");
@@ -146,7 +146,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @return \Traversable
      * @psalm-return \Traversable<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|class-string>
      */
-    public function getIterator(): Traversable
+    function getIterator(): Traversable
     {
         return new ArrayIterator(this->commands);
     }
@@ -158,7 +158,7 @@ class CommandCollection implements IteratorAggregate, Countable
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         return count(this->commands);
     }
@@ -174,7 +174,7 @@ class CommandCollection implements IteratorAggregate, Countable
      * @param string $plugin The plugin to scan.
      * @return array<string, string> Discovered plugin commands.
      */
-    public function discoverPlugin(string $plugin): array
+    function discoverPlugin(string $plugin): array
     {
         $scanner = new CommandScanner();
         $shells = $scanner->scanPlugin($plugin);
@@ -225,7 +225,7 @@ class CommandCollection implements IteratorAggregate, Countable
      *
      * @return array<string, string> An array of command names and their classes.
      */
-    public function autoDiscover(): array
+    function autoDiscover(): array
     {
         $scanner = new CommandScanner();
 
@@ -240,7 +240,7 @@ class CommandCollection implements IteratorAggregate, Countable
      *
      * @return array<string> Command names
      */
-    public function keys(): array
+    function keys(): array
     {
         return array_keys(this->commands);
     }

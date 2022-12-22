@@ -43,7 +43,7 @@ abstract class BaseCommand implements CommandInterface
     /**
      * @inheritDoc
      */
-    public function setName(string $name)
+    function setName(string $name)
     {
         if (strpos($name, ' ') < 1) {
             throw new InvalidArgumentException(
@@ -60,7 +60,7 @@ abstract class BaseCommand implements CommandInterface
      *
      * @return string
      */
-    public function getName(): string
+    function getName(): string
     {
         return this->name;
     }
@@ -80,7 +80,7 @@ abstract class BaseCommand implements CommandInterface
      *
      * @return string
      */
-    public function getRootName(): string
+    function getRootName(): string
     {
         [$root] = explode(' ', this->name);
 
@@ -113,7 +113,7 @@ abstract class BaseCommand implements CommandInterface
      * @return \Cake\Console\ConsoleOptionParser
      * @throws \RuntimeException When the parser is invalid
      */
-    public function getOptionParser(): ConsoleOptionParser
+    function getOptionParser(): ConsoleOptionParser
     {
         [$root, $name] = explode(' ', this->name, 2);
         $parser = new ConsoleOptionParser($name);
@@ -150,14 +150,14 @@ abstract class BaseCommand implements CommandInterface
      *
      * @return void
      */
-    public function initialize(): void
+    function initialize(): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function run(array $argv, ConsoleIo $io): ?int
+    function run(array $argv, ConsoleIo $io): ?int
     {
         this->initialize();
 
@@ -235,7 +235,7 @@ abstract class BaseCommand implements CommandInterface
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null|void The exit code or null for success
      */
-    abstract public function execute(Arguments $args, ConsoleIo $io);
+    abstract function execute(Arguments $args, ConsoleIo $io);
 
     /**
      * Halt the the current process with a StopException.
@@ -245,7 +245,7 @@ abstract class BaseCommand implements CommandInterface
      * @return void
      * @psalm-return never-return
      */
-    public function abort(int $code = self::CODE_ERROR): void
+    function abort(int $code = self::CODE_ERROR): void
     {
         throw new StopException('Command aborted', $code);
     }
@@ -262,7 +262,7 @@ abstract class BaseCommand implements CommandInterface
      * @param \Cake\Console\ConsoleIo|null $io The ConsoleIo instance to use for the executed command.
      * @return int|null The exit code or null for success of the command.
      */
-    public function executeCommand($command, array $args = [], ?ConsoleIo $io = null): ?int
+    function executeCommand($command, array $args = [], ?ConsoleIo $io = null): ?int
     {
         if (is_string($command)) {
             if (!class_exists($command)) {

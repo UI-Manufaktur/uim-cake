@@ -63,7 +63,7 @@ class Arguments
      *
      * @return array<int, string>
      */
-    public function getArguments(): array
+    function getArguments(): array
     {
         return this->args;
     }
@@ -74,7 +74,7 @@ class Arguments
      * @param int $index The argument index to access.
      * @return string|null The argument value or null
      */
-    public function getArgumentAt(int $index): ?string
+    function getArgumentAt(int $index): ?string
     {
         if (this->hasArgumentAt($index)) {
             return this->args[$index];
@@ -89,7 +89,7 @@ class Arguments
      * @param int $index The argument index to check.
      * @return bool
      */
-    public function hasArgumentAt(int $index): bool
+    function hasArgumentAt(int $index): bool
     {
         return isset(this->args[$index]);
     }
@@ -100,7 +100,7 @@ class Arguments
      * @param string $name The argument name to check.
      * @return bool
      */
-    public function hasArgument(string $name): bool
+    function hasArgument(string $name): bool
     {
         $offset = array_search($name, this->argNames, true);
         if ($offset === false) {
@@ -116,7 +116,7 @@ class Arguments
      * @param string $name The argument name to check.
      * @return string|null
      */
-    public function getArgument(string $name): ?string
+    function getArgument(string $name): ?string
     {
         $offset = array_search($name, this->argNames, true);
         if ($offset === false || !isset(this->args[$offset])) {
@@ -131,7 +131,7 @@ class Arguments
      *
      * @return array<string, string|int|bool|null>
      */
-    public function getOptions(): array
+    function getOptions(): array
     {
         return this->options;
     }
@@ -142,7 +142,7 @@ class Arguments
      * @param string $name The name of the option to check.
      * @return string|int|bool|null The option value or null.
      */
-    public function getOption(string $name)
+    function getOption(string $name)
     {
         return this->options[$name] ?? null;
     }
@@ -153,7 +153,7 @@ class Arguments
      * @param string $name The name of the option to check.
      * @return bool
      */
-    public function hasOption(string $name): bool
+    function hasOption(string $name): bool
     {
         return isset(this->options[$name]);
     }

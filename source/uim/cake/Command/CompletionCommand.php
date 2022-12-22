@@ -42,7 +42,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
      * @param \Cake\Console\CommandCollection $commands The command collection
      * @return void
      */
-    public function setCommandCollection(CommandCollection $commands): void
+    function setCommandCollection(CommandCollection $commands): void
     {
         this->commands = $commands;
     }
@@ -53,7 +53,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
      * @return \Cake\Console\ConsoleOptionParser
      */
-    public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $modes = [
             'commands' => 'Output a list of available commands',
@@ -98,7 +98,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int
      */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $mode = $args->getArgument('mode');
         switch ($mode) {

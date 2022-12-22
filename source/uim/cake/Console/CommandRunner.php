@@ -106,7 +106,7 @@ class CommandRunner implements EventDispatcherInterface
      * @param array<string> $aliases The map of aliases to replace.
      * @return this
      */
-    public function setAliases(array $aliases)
+    function setAliases(array $aliases)
     {
         this->aliases = $aliases;
 
@@ -128,7 +128,7 @@ class CommandRunner implements EventDispatcherInterface
      * @return int The exit code of the command.
      * @throws \RuntimeException
      */
-    public function run(array $argv, ?ConsoleIo $io = null): int
+    function run(array $argv, ?ConsoleIo $io = null): int
     {
         this->bootstrap();
 
@@ -203,7 +203,7 @@ class CommandRunner implements EventDispatcherInterface
      *
      * @return \Cake\Event\EventManagerInterface
      */
-    public function getEventManager(): EventManagerInterface
+    function getEventManager(): EventManagerInterface
     {
         if (this->app instanceof PluginApplicationInterface) {
             return this->app->getEventManager();
@@ -222,7 +222,7 @@ class CommandRunner implements EventDispatcherInterface
      * @return this
      * @throws \InvalidArgumentException
      */
-    public function setEventManager(EventManagerInterface $eventManager)
+    function setEventManager(EventManagerInterface $eventManager)
     {
         if (this->app instanceof PluginApplicationInterface) {
             this->app->setEventManager($eventManager);

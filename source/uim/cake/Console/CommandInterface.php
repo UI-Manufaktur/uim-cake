@@ -47,7 +47,7 @@ interface CommandInterface
      * @return this
      * @throws \InvalidArgumentException
      */
-    public function setName(string $name);
+    function setName(string $name);
 
     /**
      * Run the command.
@@ -56,5 +56,5 @@ interface CommandInterface
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null Exit code or null for success.
      */
-    public function run(array $argv, ConsoleIo $io): ?int;
+    function run(array $argv, ConsoleIo $io): ?int;
 }

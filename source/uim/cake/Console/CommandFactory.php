@@ -43,7 +43,7 @@ class CommandFactory implements CommandFactoryInterface
     /**
      * @inheritDoc
      */
-    public function create(string $className)
+    function create(string $className)
     {
         if (this->container && this->container->has($className)) {
             $command = this->container->get($className);

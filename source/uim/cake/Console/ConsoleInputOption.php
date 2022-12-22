@@ -148,7 +148,7 @@ class ConsoleInputOption
      *
      * @return string Value of this->_name.
      */
-    public function name(): string
+    function name(): string
     {
         return this->_name;
     }
@@ -158,7 +158,7 @@ class ConsoleInputOption
      *
      * @return string Value of this->_short.
      */
-    public function short(): string
+    function short(): string
     {
         return this->_short;
     }
@@ -169,7 +169,7 @@ class ConsoleInputOption
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    public function help(int $width = 0): string
+    function help(int $width = 0): string
     {
         $default = $short = '';
         if (this->_default && this->_default != true) {
@@ -198,7 +198,7 @@ class ConsoleInputOption
      *
      * @return string
      */
-    public function usage(): string
+    function usage(): string
     {
         $name = this->_short === '' ? '--' . this->_name : '-' . this->_short;
         $default = '';
@@ -221,7 +221,7 @@ class ConsoleInputOption
      *
      * @return string|bool|null
      */
-    public function defaultValue()
+    function defaultValue()
     {
         return this->_default;
     }
@@ -231,7 +231,7 @@ class ConsoleInputOption
      *
      * @return bool
      */
-    public function isRequired(): bool
+    function isRequired(): bool
     {
         return this->required;
     }
@@ -241,7 +241,7 @@ class ConsoleInputOption
      *
      * @return bool
      */
-    public function isBoolean(): bool
+    function isBoolean(): bool
     {
         return this->_boolean;
     }
@@ -251,7 +251,7 @@ class ConsoleInputOption
      *
      * @return bool
      */
-    public function acceptsMultiple(): bool
+    function acceptsMultiple(): bool
     {
         return this->_multiple;
     }
@@ -263,7 +263,7 @@ class ConsoleInputOption
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    public function validChoice($value): bool
+    function validChoice($value): bool
     {
         if (empty(this->_choices)) {
             return true;
@@ -287,7 +287,7 @@ class ConsoleInputOption
      *
      * @return array
      */
-    public function choices(): array
+    function choices(): array
     {
         return this->_choices;
     }
@@ -297,7 +297,7 @@ class ConsoleInputOption
      *
      * @return string
      */
-    public function prompt(): string
+    function prompt(): string
     {
         return (string)this->prompt;
     }
@@ -308,7 +308,7 @@ class ConsoleInputOption
      * @param \SimpleXMLElement $parent The parent element.
      * @return \SimpleXMLElement The parent with this option appended.
      */
-    public function xml(SimpleXMLElement $parent): SimpleXMLElement
+    function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent->addChild('option');
         $option->addAttribute('name', '--' . this->_name);

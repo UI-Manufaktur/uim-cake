@@ -57,7 +57,7 @@ class ConsoleInput
      *
      * @return string|null The value of the stream. Null on EOF.
      */
-    public function read(): ?string
+    function read(): ?string
     {
         if (this->_canReadline) {
             $line = readline('');
@@ -82,7 +82,7 @@ class ConsoleInput
      * @param int $timeout An optional time to wait for data
      * @return bool True for data available, false otherwise
      */
-    public function dataAvailable(int $timeout = 0): bool
+    function dataAvailable(int $timeout = 0): bool
     {
         $readFds = [this->_input];
         $writeFds = null;

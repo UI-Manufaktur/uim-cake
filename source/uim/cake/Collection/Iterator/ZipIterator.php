@@ -91,7 +91,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
      * @return array
      */
     #[\ReturnTypeWillChange]
-    public function current()
+    function current()
     {
         if (this->_callback === null) {
             return parent::current();
@@ -106,7 +106,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
      *
      * @return string
      */
-    public function serialize(): string
+    function serialize(): string
     {
         return serialize(this->_iterators);
     }
@@ -116,7 +116,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
      *
      * @return array
      */
-    public function __serialize(): array
+    function __serialize(): array
     {
         return this->_iterators;
     }
@@ -127,7 +127,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
      * @param string $iterators The serialized iterators
      * @return void
      */
-    public function unserialize($iterators): void
+    function unserialize($iterators): void
     {
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
         this->_iterators = unserialize($iterators);
@@ -142,7 +142,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
      * @param array $data Data array.
      * @return void
      */
-    public function __unserialize(array $data): void
+    function __unserialize(array $data): void
     {
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 

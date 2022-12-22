@@ -28,5 +28,5 @@ interface CommandCollectionAwareInterface
      * @param \Cake\Console\CommandCollection $commands The commands to use.
      * @return void
      */
-    public function setCommandCollection(CommandCollection $commands): void;
+    function setCommandCollection(CommandCollection $commands): void;
 }

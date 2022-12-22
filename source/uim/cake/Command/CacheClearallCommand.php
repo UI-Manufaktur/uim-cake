@@ -43,7 +43,7 @@ class CacheClearallCommand extends Command
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
      * @return \Cake\Console\ConsoleOptionParser The built parser.
      */
-    public function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser = parent::buildOptionParser($parser);
         $parser->setDescription('Clear all data in all configured cache engines.');
@@ -58,7 +58,7 @@ class CacheClearallCommand extends Command
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    public function execute(Arguments $args, ConsoleIo $io): ?int
+    function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $engines = Cache::configured();
         foreach ($engines as $engine) {

@@ -90,7 +90,7 @@ class TreeIterator extends RecursiveIteratorIterator implements CollectionInterf
      * their depth in the tree
      * @return \Cake\Collection\Iterator\TreePrinter
      */
-    public function printer($valuePath, $keyPath = null, $spacer = '__')
+    function printer($valuePath, $keyPath = null, $spacer = '__')
     {
         if (!$keyPath) {
             $counter = 0;
