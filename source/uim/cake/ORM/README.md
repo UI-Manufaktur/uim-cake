@@ -56,7 +56,7 @@ You can also use a trait for easy access to the locator instance:
 ```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
-$articles = $this->getTableLocator()->get('Articles');
+$articles = this->getTableLocator()->get('Articles');
 ```
 
 By default, classes using `LocatorAwareTrait` will share a global locator instance.
@@ -67,9 +67,9 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $locator = new TableLocator();
-$this->setTableLocator($locator);
+this->setTableLocator($locator);
 
-$articles = $this->getTableLocator()->get('Articles');
+$articles = this->getTableLocator()->get('Articles');
 ```
 
 ## Creating Associations
@@ -93,7 +93,7 @@ Once you've defined some table classes you can read existing data in your tables
 ```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
-$articles = $this->getTableLocator()->get('Articles');
+$articles = this->getTableLocator()->get('Articles');
 foreach ($articles->find() as $article) {
 	echo $article->title;
 }
@@ -124,7 +124,7 @@ $data = [
 	]
 ];
 
-$articles = $this->getTableLocator()->get('Articles');
+$articles = this->getTableLocator()->get('Articles');
 $article = $articles->newEntity($data, [
 	'associated' => ['Tags', 'Comments']
 ]);
@@ -142,7 +142,7 @@ for more in-depth examples.
 Once you have a reference to an entity, you can use it to delete data:
 
 ```php
-$articles = $this->getTableLocator()->get('Articles');
+$articles = this->getTableLocator()->get('Articles');
 $article = $articles->get(2);
 $articles->delete($article);
 ```
@@ -189,8 +189,8 @@ class ArticlesTable extends Table
 {
     public function initialize()
     {
-        $this->setEntityClass(Article::class);
-        $this->belongsTo('Users', ['className' => UsersTable::class]);
+        this->setEntityClass(Article::class);
+        this->belongsTo('Users', ['className' => UsersTable::class]);
     }
 }
 ```

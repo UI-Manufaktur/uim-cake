@@ -130,14 +130,14 @@ class EagerLoadable
      */
     public this(string $name, array $config = [])
     {
-        $this->_name = $name;
+        this->_name = $name;
         $allowed = [
             'associations', 'instance', 'config', 'canBeJoined',
             'aliasPath', 'propertyPath', 'forMatching', 'targetProperty',
         ];
         foreach ($allowed as $property) {
             if (isset($config[$property])) {
-                $this->{'_' . $property} = $config[$property];
+                this->{'_' . $property} = $config[$property];
             }
         }
     }
@@ -151,7 +151,7 @@ class EagerLoadable
      */
     public function addAssociation(string $name, EagerLoadable $association): void
     {
-        $this->_associations[$name] = $association;
+        this->_associations[$name] = $association;
     }
 
     /**
@@ -161,7 +161,7 @@ class EagerLoadable
      */
     public function associations(): array
     {
-        return $this->_associations;
+        return this->_associations;
     }
 
     /**
@@ -172,11 +172,11 @@ class EagerLoadable
      */
     public function instance(): Association
     {
-        if ($this->_instance === null) {
+        if (this->_instance === null) {
             throw new \RuntimeException('No instance set.');
         }
 
-        return $this->_instance;
+        return this->_instance;
     }
 
     /**
@@ -187,7 +187,7 @@ class EagerLoadable
      */
     public function aliasPath(): string
     {
-        return $this->_aliasPath;
+        return this->_aliasPath;
     }
 
     /**
@@ -206,20 +206,20 @@ class EagerLoadable
      */
     public function propertyPath(): ?string
     {
-        return $this->_propertyPath;
+        return this->_propertyPath;
     }
 
     /**
      * Sets whether this level can be fetched using a join.
      *
      * @param bool $possible The value to set.
-     * @return $this
+     * @return this
      */
     public function setCanBeJoined(bool $possible)
     {
-        $this->_canBeJoined = $possible;
+        this->_canBeJoined = $possible;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -229,7 +229,7 @@ class EagerLoadable
      */
     public function canBeJoined(): bool
     {
-        return $this->_canBeJoined;
+        return this->_canBeJoined;
     }
 
     /**
@@ -237,13 +237,13 @@ class EagerLoadable
      * the records.
      *
      * @param array<string, mixed> $config The value to set.
-     * @return $this
+     * @return this
      */
     public function setConfig(array $config)
     {
-        $this->_config = $config;
+        this->_config = $config;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -254,7 +254,7 @@ class EagerLoadable
      */
     public function getConfig(): array
     {
-        return $this->_config;
+        return this->_config;
     }
 
     /**
@@ -265,7 +265,7 @@ class EagerLoadable
      */
     public function forMatching(): ?bool
     {
-        return $this->_forMatching;
+        return this->_forMatching;
     }
 
     /**
@@ -284,7 +284,7 @@ class EagerLoadable
      */
     public function targetProperty(): ?string
     {
-        return $this->_targetProperty;
+        return this->_targetProperty;
     }
 
     /**
@@ -296,16 +296,16 @@ class EagerLoadable
     public function asContainArray(): array
     {
         $associations = [];
-        foreach ($this->_associations as $assoc) {
+        foreach (this->_associations as $assoc) {
             $associations += $assoc->asContainArray();
         }
-        $config = $this->_config;
-        if ($this->_forMatching !== null) {
-            $config = ['matching' => $this->_forMatching] + $config;
+        $config = this->_config;
+        if (this->_forMatching !== null) {
+            $config = ['matching' => this->_forMatching] + $config;
         }
 
         return [
-            $this->_name => [
+            this->_name => [
                 'associations' => $associations,
                 'config' => $config,
             ],
@@ -319,8 +319,8 @@ class EagerLoadable
      */
     public function __clone()
     {
-        foreach ($this->_associations as $i => $association) {
-            $this->_associations[$i] = clone $association;
+        foreach (this->_associations as $i => $association) {
+            this->_associations[$i] = clone $association;
         }
     }
 }

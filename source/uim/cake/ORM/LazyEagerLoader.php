@@ -52,10 +52,10 @@ class LazyEagerLoader
         }
 
         $entities = new Collection($entities);
-        $query = $this->_getQuery($entities, $contain, $source);
+        $query = this->_getQuery($entities, $contain, $source);
         $associations = array_keys($query->getContain());
 
-        $entities = $this->_injectResults($entities, $query, $associations, $source);
+        $entities = this->_injectResults($entities, $query, $associations, $source);
 
         return $returnSingle ? array_shift($entities) : $entities;
     }
@@ -144,7 +144,7 @@ class LazyEagerLoader
     protected function _injectResults(iterable $objects, $results, array $associations, Table $source): array
     {
         $injected = [];
-        $properties = $this->_getPropertyMap($source, $associations);
+        $properties = this->_getPropertyMap($source, $associations);
         $primaryKey = (array)$source->getPrimaryKey();
         $results = $results
             ->all()

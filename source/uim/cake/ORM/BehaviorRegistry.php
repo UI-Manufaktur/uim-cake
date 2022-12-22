@@ -65,7 +65,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
     public this(?Table $table = null)
     {
         if ($table !== null) {
-            $this->setTable($table);
+            this->setTable($table);
         }
     }
 
@@ -77,8 +77,8 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      */
     public function setTable(Table $table): void
     {
-        $this->_table = $table;
-        $this->setEventManager($table->getEventManager());
+        this->_table = $table;
+        this->setEventManager($table->getEventManager());
     }
 
     /**
@@ -142,14 +142,14 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
     protected function _create($class, string $alias, array $config): Behavior
     {
         /** @var \Cake\ORM\Behavior $instance */
-        $instance = new $class($this->_table, $config);
+        $instance = new $class(this->_table, $config);
         $enable = $config['enabled'] ?? true;
         if ($enable) {
-            $this->getEventManager()->on($instance);
+            this->getEventManager()->on($instance);
         }
-        $methods = $this->_getMethods($instance, $class, $alias);
-        $this->_methodMap += $methods['methods'];
-        $this->_finderMap += $methods['finders'];
+        $methods = this->_getMethods($instance, $class, $alias);
+        this->_methodMap += $methods['methods'];
+        this->_finderMap += $methods['finders'];
 
         return $instance;
     }
@@ -173,8 +173,8 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
         $methods = array_change_key_case($instance->implementedMethods());
 
         foreach ($finders as $finder => $methodName) {
-            if (isset($this->_finderMap[$finder]) && $this->has($this->_finderMap[$finder][0])) {
-                $duplicate = $this->_finderMap[$finder];
+            if (isset(this->_finderMap[$finder]) && this->has(this->_finderMap[$finder][0])) {
+                $duplicate = this->_finderMap[$finder];
                 $error = sprintf(
                     '%s contains duplicate finder "%s" which is already provided by "%s"',
                     $class,
@@ -187,8 +187,8 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
         }
 
         foreach ($methods as $method => $methodName) {
-            if (isset($this->_methodMap[$method]) && $this->has($this->_methodMap[$method][0])) {
-                $duplicate = $this->_methodMap[$method];
+            if (isset(this->_methodMap[$method]) && this->has(this->_methodMap[$method][0])) {
+                $duplicate = this->_methodMap[$method];
                 $error = sprintf(
                     '%s contains duplicate method "%s" which is already provided by "%s"',
                     $class,
@@ -216,7 +216,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
     {
         $method = strtolower($method);
 
-        return isset($this->_methodMap[$method]);
+        return isset(this->_methodMap[$method]);
     }
 
     /**
@@ -232,7 +232,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
     {
         $method = strtolower($method);
 
-        return isset($this->_finderMap[$method]);
+        return isset(this->_finderMap[$method]);
     }
 
     /**
@@ -246,10 +246,10 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
     public function call(string $method, array $args = [])
     {
         $method = strtolower($method);
-        if ($this->hasMethod($method) && $this->has($this->_methodMap[$method][0])) {
-            [$behavior, $callMethod] = $this->_methodMap[$method];
+        if (this->hasMethod($method) && this->has(this->_methodMap[$method][0])) {
+            [$behavior, $callMethod] = this->_methodMap[$method];
 
-            return $this->_loaded[$behavior]->{$callMethod}(...$args);
+            return this->_loaded[$behavior]->{$callMethod}(...$args);
         }
 
         throw new BadMethodCallException(
@@ -269,9 +269,9 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
     {
         $type = strtolower($type);
 
-        if ($this->hasFinder($type) && $this->has($this->_finderMap[$type][0])) {
-            [$behavior, $callMethod] = $this->_finderMap[$type];
-            $callable = [$this->_loaded[$behavior], $callMethod];
+        if (this->hasFinder($type) && this->has(this->_finderMap[$type][0])) {
+            [$behavior, $callMethod] = this->_finderMap[$type];
+            $callable = [this->_loaded[$behavior], $callMethod];
 
             return $callable(...$args);
         }

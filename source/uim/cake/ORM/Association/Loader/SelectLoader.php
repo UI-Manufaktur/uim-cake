@@ -103,15 +103,15 @@ class SelectLoader
      */
     public this(array $options)
     {
-        $this->alias = $options['alias'];
-        $this->sourceAlias = $options['sourceAlias'];
-        $this->targetAlias = $options['targetAlias'];
-        $this->foreignKey = $options['foreignKey'];
-        $this->strategy = $options['strategy'];
-        $this->bindingKey = $options['bindingKey'];
-        $this->finder = $options['finder'];
-        $this->associationType = $options['associationType'];
-        $this->sort = $options['sort'] ?? null;
+        this->alias = $options['alias'];
+        this->sourceAlias = $options['sourceAlias'];
+        this->targetAlias = $options['targetAlias'];
+        this->foreignKey = $options['foreignKey'];
+        this->strategy = $options['strategy'];
+        this->bindingKey = $options['bindingKey'];
+        this->finder = $options['finder'];
+        this->associationType = $options['associationType'];
+        this->sort = $options['sort'] ?? null;
     }
 
     /**
@@ -123,11 +123,11 @@ class SelectLoader
      */
     public function buildEagerLoader(array $options): Closure
     {
-        $options += $this->_defaultOptions();
-        $fetchQuery = $this->_buildQuery($options);
-        $resultMap = $this->_buildResultMap($fetchQuery, $options);
+        $options += this->_defaultOptions();
+        $fetchQuery = this->_buildQuery($options);
+        $resultMap = this->_buildResultMap($fetchQuery, $options);
 
-        return $this->_resultInjector($fetchQuery, $resultMap, $options);
+        return this->_resultInjector($fetchQuery, $resultMap, $options);
     }
 
     /**
@@ -138,11 +138,11 @@ class SelectLoader
     protected function _defaultOptions(): array
     {
         return [
-            'foreignKey' => $this->foreignKey,
+            'foreignKey' => this->foreignKey,
             'conditions' => [],
-            'strategy' => $this->strategy,
-            'nestKey' => $this->alias,
-            'sort' => $this->sort,
+            'strategy' => this->strategy,
+            'nestKey' => this->alias,
+            'sort' => this->sort,
         ];
     }
 
@@ -157,16 +157,16 @@ class SelectLoader
      */
     protected function _buildQuery(array $options): Query
     {
-        $key = $this->_linkField($options);
+        $key = this->_linkField($options);
         $filter = $options['keys'];
         $useSubquery = $options['strategy'] === Association::STRATEGY_SUBQUERY;
-        $finder = $this->finder;
+        $finder = this->finder;
         $options['fields'] = $options['fields'] ?? [];
 
         /** @var \Cake\ORM\Query $query */
         $query = $finder();
         if (isset($options['finder'])) {
-            [$finderName, $opts] = $this->_extractFinder($options['finder']);
+            [$finderName, $opts] = this->_extractFinder($options['finder']);
             $query = $query->find($finderName, $opts);
         }
 
@@ -182,10 +182,10 @@ class SelectLoader
         }
 
         if ($useSubquery) {
-            $filter = $this->_buildSubquery($options['query']);
-            $fetchQuery = $this->_addFilteringJoin($fetchQuery, $key, $filter);
+            $filter = this->_buildSubquery($options['query']);
+            $fetchQuery = this->_addFilteringJoin($fetchQuery, $key, $filter);
         } else {
-            $fetchQuery = $this->_addFilteringCondition($fetchQuery, $key, $filter);
+            $fetchQuery = this->_addFilteringCondition($fetchQuery, $key, $filter);
         }
 
         if (!empty($options['sort'])) {
@@ -200,7 +200,7 @@ class SelectLoader
             $fetchQuery = $options['queryBuilder']($fetchQuery);
         }
 
-        $this->_assertFieldsPresent($fetchQuery, (array)$key);
+        this->_assertFieldsPresent($fetchQuery, (array)$key);
 
         return $fetchQuery;
     }
@@ -292,7 +292,7 @@ class SelectLoader
     protected function _addFilteringJoin(Query $query, $key, $subquery): Query
     {
         $filter = [];
-        $aliasedTable = $this->sourceAlias;
+        $aliasedTable = this->sourceAlias;
 
         foreach ($subquery->clause('select') as $aliasedField => $field) {
             if (is_int($aliasedField)) {
@@ -304,7 +304,7 @@ class SelectLoader
         $subquery->select($filter, true);
 
         if (is_array($key)) {
-            $conditions = $this->_createTupleCondition($query, $key, $filter, '=');
+            $conditions = this->_createTupleCondition($query, $key, $filter, '=');
         } else {
             $filter = current($filter);
             $conditions = $query->newExpr([$key => $filter]);
@@ -328,7 +328,7 @@ class SelectLoader
     protected function _addFilteringCondition(Query $query, $key, $filter): Query
     {
         if (is_array($key)) {
-            $conditions = $this->_createTupleCondition($query, $key, $filter, 'IN');
+            $conditions = this->_createTupleCondition($query, $key, $filter, 'IN');
         } else {
             $conditions = [$key . ' IN' => $filter];
         }
@@ -370,17 +370,17 @@ class SelectLoader
     protected function _linkField(array $options)
     {
         $links = [];
-        $name = $this->alias;
+        $name = this->alias;
 
-        if ($options['foreignKey'] === false && $this->associationType === Association::ONE_TO_MANY) {
+        if ($options['foreignKey'] === false && this->associationType === Association::ONE_TO_MANY) {
             $msg = 'Cannot have foreignKey = false for hasMany associations. ' .
                    'You must provide a foreignKey column.';
             throw new RuntimeException($msg);
         }
 
-        $keys = in_array($this->associationType, [Association::ONE_TO_ONE, Association::ONE_TO_MANY], true) ?
-            $this->foreignKey :
-            $this->bindingKey;
+        $keys = in_array(this->associationType, [Association::ONE_TO_ONE, Association::ONE_TO_MANY], true) ?
+            this->foreignKey :
+            this->bindingKey;
 
         foreach ((array)$keys as $key) {
             $links[] = sprintf('%s.%s', $name, $key);
@@ -417,7 +417,7 @@ class SelectLoader
             $filterQuery->offset(null);
         }
 
-        $fields = $this->_subqueryFields($query);
+        $fields = this->_subqueryFields($query);
         $filterQuery->select($fields['select'], true)->group($fields['group']);
 
         return $filterQuery;
@@ -435,13 +435,13 @@ class SelectLoader
      */
     protected function _subqueryFields(Query $query): array
     {
-        $keys = (array)$this->bindingKey;
+        $keys = (array)this->bindingKey;
 
-        if ($this->associationType === Association::MANY_TO_ONE) {
-            $keys = (array)$this->foreignKey;
+        if (this->associationType === Association::MANY_TO_ONE) {
+            $keys = (array)this->foreignKey;
         }
 
-        $fields = $query->aliasFields($keys, $this->sourceAlias);
+        $fields = $query->aliasFields($keys, this->sourceAlias);
         $group = $fields = array_values($fields);
 
         $order = $query->clause('order');
@@ -468,10 +468,10 @@ class SelectLoader
     protected function _buildResultMap(Query $fetchQuery, array $options): array
     {
         $resultMap = [];
-        $singleResult = in_array($this->associationType, [Association::MANY_TO_ONE, Association::ONE_TO_ONE], true);
-        $keys = in_array($this->associationType, [Association::ONE_TO_ONE, Association::ONE_TO_MANY], true) ?
-            $this->foreignKey :
-            $this->bindingKey;
+        $singleResult = in_array(this->associationType, [Association::MANY_TO_ONE, Association::ONE_TO_ONE], true);
+        $keys = in_array(this->associationType, [Association::ONE_TO_ONE, Association::ONE_TO_MANY], true) ?
+            this->foreignKey :
+            this->bindingKey;
         $key = (array)$keys;
 
         foreach ($fetchQuery->all() as $result) {
@@ -501,19 +501,19 @@ class SelectLoader
      */
     protected function _resultInjector(Query $fetchQuery, array $resultMap, array $options): Closure
     {
-        $keys = $this->associationType === Association::MANY_TO_ONE ?
-            $this->foreignKey :
-            $this->bindingKey;
+        $keys = this->associationType === Association::MANY_TO_ONE ?
+            this->foreignKey :
+            this->bindingKey;
 
         $sourceKeys = [];
         foreach ((array)$keys as $key) {
-            $f = $fetchQuery->aliasField($key, $this->sourceAlias);
+            $f = $fetchQuery->aliasField($key, this->sourceAlias);
             $sourceKeys[] = key($f);
         }
 
         $nestKey = $options['nestKey'];
         if (count($sourceKeys) > 1) {
-            return $this->_multiKeysInjector($resultMap, $sourceKeys, $nestKey);
+            return this->_multiKeysInjector($resultMap, $sourceKeys, $nestKey);
         }
 
         $sourceKey = $sourceKeys[0];

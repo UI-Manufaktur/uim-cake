@@ -41,7 +41,7 @@ interface LocatorInterface extends BaseLocatorInterface
      * @param array<string, mixed>|string $alias Name of the alias or array to completely
      *   overwrite current config.
      * @param array<string, mixed>|null $options list of options for the alias
-     * @return $this
+     * @return this
      * @throws \RuntimeException When you attempt to configure an existing
      *   table instance.
      */

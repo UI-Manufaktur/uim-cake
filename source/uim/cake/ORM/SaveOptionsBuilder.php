@@ -54,8 +54,8 @@ class SaveOptionsBuilder extends ArrayObject
      */
     public this(Table $table, array $options = [])
     {
-        $this->_table = $table;
-        $this->parseArrayOptions($options);
+        this->_table = $table;
+        this->parseArrayOptions($options);
 
         parent::__construct();
     }
@@ -67,30 +67,30 @@ class SaveOptionsBuilder extends ArrayObject
      *
      * @throws \InvalidArgumentException If a given option key does not exist.
      * @param array<string, mixed> $array Options array.
-     * @return $this
+     * @return this
      */
     public function parseArrayOptions(array $array)
     {
         foreach ($array as $key => $value) {
-            $this->{$key}($value);
+            this->{$key}($value);
         }
 
-        return $this;
+        return this;
     }
 
     /**
      * Set associated options.
      *
      * @param array|string $associated String or array of associations.
-     * @return $this
+     * @return this
      */
     public function associated($associated)
     {
-        $associated = $this->_normalizeAssociations($associated);
-        $this->_associated($this->_table, $associated);
-        $this->_options['associated'] = $associated;
+        $associated = this->_normalizeAssociations($associated);
+        this->_associated(this->_table, $associated);
+        this->_options['associated'] = $associated;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -104,12 +104,12 @@ class SaveOptionsBuilder extends ArrayObject
     {
         foreach ($associations as $key => $associated) {
             if (is_int($key)) {
-                $this->_checkAssociation($table, $associated);
+                this->_checkAssociation($table, $associated);
                 continue;
             }
-            $this->_checkAssociation($table, $key);
+            this->_checkAssociation($table, $key);
             if (isset($associated['associated'])) {
-                $this->_associated($table->getAssociation($key)->getTarget(), $associated['associated']);
+                this->_associated($table->getAssociation($key)->getTarget(), $associated['associated']);
                 continue;
             }
         }
@@ -138,66 +138,66 @@ class SaveOptionsBuilder extends ArrayObject
      * Set the guard option.
      *
      * @param bool $guard Guard the properties or not.
-     * @return $this
+     * @return this
      */
     public function guard(bool $guard)
     {
-        $this->_options['guard'] = $guard;
+        this->_options['guard'] = $guard;
 
-        return $this;
+        return this;
     }
 
     /**
      * Set the validation rule set to use.
      *
      * @param string $validate Name of the validation rule set to use.
-     * @return $this
+     * @return this
      */
     public function validate(string $validate)
     {
-        $this->_table->getValidator($validate);
-        $this->_options['validate'] = $validate;
+        this->_table->getValidator($validate);
+        this->_options['validate'] = $validate;
 
-        return $this;
+        return this;
     }
 
     /**
      * Set check existing option.
      *
      * @param bool $checkExisting Guard the properties or not.
-     * @return $this
+     * @return this
      */
     public function checkExisting(bool $checkExisting)
     {
-        $this->_options['checkExisting'] = $checkExisting;
+        this->_options['checkExisting'] = $checkExisting;
 
-        return $this;
+        return this;
     }
 
     /**
      * Option to check the rules.
      *
      * @param bool $checkRules Check the rules or not.
-     * @return $this
+     * @return this
      */
     public function checkRules(bool $checkRules)
     {
-        $this->_options['checkRules'] = $checkRules;
+        this->_options['checkRules'] = $checkRules;
 
-        return $this;
+        return this;
     }
 
     /**
      * Sets the atomic option.
      *
      * @param bool $atomic Atomic or not.
-     * @return $this
+     * @return this
      */
     public function atomic(bool $atomic)
     {
-        $this->_options['atomic'] = $atomic;
+        this->_options['atomic'] = $atomic;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -205,7 +205,7 @@ class SaveOptionsBuilder extends ArrayObject
      */
     public function toArray(): array
     {
-        return $this->_options;
+        return this->_options;
     }
 
     /**
@@ -213,15 +213,15 @@ class SaveOptionsBuilder extends ArrayObject
      *
      * @param string $option Option key.
      * @param mixed $value Option value.
-     * @return $this
+     * @return this
      */
     public function set(string $option, $value)
     {
-        if (method_exists($this, $option)) {
-            return $this->{$option}($value);
+        if (method_exists(this, $option)) {
+            return this->{$option}($value);
         }
-        $this->_options[$option] = $value;
+        this->_options[$option] = $value;
 
-        return $this;
+        return this;
     }
 }

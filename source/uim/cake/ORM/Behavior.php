@@ -152,19 +152,19 @@ class Behavior implements EventListenerInterface
      */
     public this(Table $table, array $config = [])
     {
-        $config = $this->_resolveMethodAliases(
+        $config = this->_resolveMethodAliases(
             'implementedFinders',
-            $this->_defaultConfig,
+            this->_defaultConfig,
             $config
         );
-        $config = $this->_resolveMethodAliases(
+        $config = this->_resolveMethodAliases(
             'implementedMethods',
-            $this->_defaultConfig,
+            this->_defaultConfig,
             $config
         );
-        $this->_table = $table;
-        $this->setConfig($config);
-        $this->initialize($config);
+        this->_table = $table;
+        this->setConfig($config);
+        this->initialize($config);
     }
 
     /**
@@ -190,7 +190,7 @@ class Behavior implements EventListenerInterface
     {
         deprecationWarning('Behavior::getTable() is deprecated. Use table() instead.');
 
-        return $this->table();
+        return this->table();
     }
 
     /**
@@ -200,7 +200,7 @@ class Behavior implements EventListenerInterface
      */
     public function table(): Table
     {
-        return $this->_table;
+        return this->_table;
     }
 
     /**
@@ -217,7 +217,7 @@ class Behavior implements EventListenerInterface
             return $config;
         }
         if (isset($config[$key]) && $config[$key] === []) {
-            $this->setConfig($key, [], false);
+            this->setConfig($key, [], false);
             unset($config[$key]);
 
             return $config;
@@ -230,7 +230,7 @@ class Behavior implements EventListenerInterface
                 $indexedCustom[$method] = $alias;
             }
         }
-        $this->setConfig($key, array_flip($indexedCustom), false);
+        this->setConfig($key, array_flip($indexedCustom), false);
         unset($config[$key]);
 
         return $config;
@@ -248,12 +248,12 @@ class Behavior implements EventListenerInterface
     {
         $keys = ['implementedFinders', 'implementedMethods'];
         foreach ($keys as $key) {
-            if (!isset($this->_config[$key])) {
+            if (!isset(this->_config[$key])) {
                 continue;
             }
 
-            foreach ($this->_config[$key] as $method) {
-                if (!is_callable([$this, $method])) {
+            foreach (this->_config[$key] as $method) {
+                if (!is_callable([this, $method])) {
                     throw new CakeException(sprintf(
                         'The method %s is not callable on class %s',
                         $method,
@@ -292,12 +292,12 @@ class Behavior implements EventListenerInterface
             'Model.beforeRules' => 'beforeRules',
             'Model.afterRules' => 'afterRules',
         ];
-        $config = $this->getConfig();
+        $config = this->getConfig();
         $priority = $config['priority'] ?? null;
         $events = [];
 
         foreach ($eventMap as $event => $method) {
-            if (!method_exists($this, $method)) {
+            if (!method_exists(this, $method)) {
                 continue;
             }
             if ($priority === null) {
@@ -337,12 +337,12 @@ class Behavior implements EventListenerInterface
      */
     public function implementedFinders(): array
     {
-        $methods = $this->getConfig('implementedFinders');
+        $methods = this->getConfig('implementedFinders');
         if (isset($methods)) {
             return $methods;
         }
 
-        return $this->_reflectionCache()['finders'];
+        return this->_reflectionCache()['finders'];
     }
 
     /**
@@ -369,12 +369,12 @@ class Behavior implements EventListenerInterface
      */
     public function implementedMethods(): array
     {
-        $methods = $this->getConfig('implementedMethods');
+        $methods = this->getConfig('implementedMethods');
         if (isset($methods)) {
             return $methods;
         }
 
-        return $this->_reflectionCache()['methods'];
+        return this->_reflectionCache()['methods'];
     }
 
     /**
@@ -394,7 +394,7 @@ class Behavior implements EventListenerInterface
             return self::$_reflectionCache[$class];
         }
 
-        $events = $this->implementedEvents();
+        $events = this->implementedEvents();
         $eventMethods = [];
         foreach ($events as $binding) {
             if (is_array($binding) && isset($binding['callable'])) {

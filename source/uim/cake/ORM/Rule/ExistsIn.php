@@ -64,10 +64,10 @@ class ExistsIn
     public this($fields, $repository, array $options = [])
     {
         $options += ['allowNullableNulls' => false];
-        $this->_options = $options;
+        this->_options = $options;
 
-        $this->_fields = (array)$fields;
-        $this->_repository = $repository;
+        this->_fields = (array)$fields;
+        this->_repository = $repository;
     }
 
     /**
@@ -81,21 +81,21 @@ class ExistsIn
      */
     public function __invoke(EntityInterface $entity, array $options): bool
     {
-        if (is_string($this->_repository)) {
-            if (!$options['repository']->hasAssociation($this->_repository)) {
+        if (is_string(this->_repository)) {
+            if (!$options['repository']->hasAssociation(this->_repository)) {
                 throw new RuntimeException(sprintf(
                     "ExistsIn rule for '%s' is invalid. '%s' is not associated with '%s'.",
-                    implode(', ', $this->_fields),
-                    $this->_repository,
+                    implode(', ', this->_fields),
+                    this->_repository,
                     get_class($options['repository'])
                 ));
             }
-            $repository = $options['repository']->getAssociation($this->_repository);
-            $this->_repository = $repository;
+            $repository = $options['repository']->getAssociation(this->_repository);
+            this->_repository = $repository;
         }
 
-        $fields = $this->_fields;
-        $source = $target = $this->_repository;
+        $fields = this->_fields;
+        $source = $target = this->_repository;
         if ($target instanceof Association) {
             $bindingKey = (array)$target->getBindingKey();
             $realTarget = $target->getTarget();
@@ -115,15 +115,15 @@ class ExistsIn
             $source = $source->getSource();
         }
 
-        if (!$entity->extract($this->_fields, true)) {
+        if (!$entity->extract(this->_fields, true)) {
             return true;
         }
 
-        if ($this->_fieldsAreNull($entity, $source)) {
+        if (this->_fieldsAreNull($entity, $source)) {
             return true;
         }
 
-        if ($this->_options['allowNullableNulls']) {
+        if (this->_options['allowNullableNulls']) {
             $schema = $source->getSchema();
             foreach ($fields as $i => $field) {
                 if ($schema->getColumn($field) && $schema->isNullable($field) && $entity->get($field) === null) {
@@ -157,12 +157,12 @@ class ExistsIn
     {
         $nulls = 0;
         $schema = $source->getSchema();
-        foreach ($this->_fields as $field) {
+        foreach (this->_fields as $field) {
             if ($schema->getColumn($field) && $schema->isNullable($field) && $entity->get($field) === null) {
                 $nulls++;
             }
         }
 
-        return $nulls === count($this->_fields);
+        return $nulls === count(this->_fields);
     }
 }
