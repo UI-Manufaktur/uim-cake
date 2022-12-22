@@ -241,7 +241,7 @@ abstract class Cell implements EventDispatcherInterface
             'config' => 'default',
             'key' => $key,
         ];
-        if (this->_cache === true) {
+        if (this->_cache == true) {
             return $default;
         }
 

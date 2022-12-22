@@ -127,7 +127,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
         $locale = Hash::get($options, 'locale', this->getLocale());
         $config = this->getConfig();
 
-        if ($locale === $config['defaultLocale']) {
+        if ($locale == $config['defaultLocale']) {
             return;
         }
 
@@ -351,17 +351,17 @@ class ShadowTableStrategy implements TranslateStrategyInterface
         // Check early if empty translations are present in the entity.
         // If this is the case, unset them to prevent persistence.
         // This only applies if this->_config['allowEmptyTranslations'] is false
-        if (this->_config['allowEmptyTranslations'] === false) {
+        if (this->_config['allowEmptyTranslations'] == false) {
             this->unsetEmptyFields($entity);
         }
 
         this->bundleTranslatedFields($entity);
         $bundled = $entity->get('_i18n') ?: [];
-        $noBundled = count($bundled) === 0;
+        $noBundled = count($bundled) == 0;
 
         // No additional translation records need to be saved,
         // as the entity is in the default locale.
-        if ($noBundled && $locale === this->getConfig('defaultLocale')) {
+        if ($noBundled && $locale == this->getConfig('defaultLocale')) {
             return;
         }
 
@@ -450,7 +450,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
      */
     function translationField(string $field): string
     {
-        if (this->getLocale() === this->getConfig('defaultLocale')) {
+        if (this->getLocale() == this->getConfig('defaultLocale')) {
             return this->table->aliasField($field);
         }
 
@@ -476,7 +476,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
 
         return $results->map(function ($row) use ($allowEmpty, $locale) {
             /** @var \Cake\Datasource\EntityInterface|array|null $row */
-            if ($row === null) {
+            if ($row == null) {
                 return $row;
             }
 
@@ -504,7 +504,7 @@ class ShadowTableStrategy implements TranslateStrategyInterface
             $keys = $hydrated ? $translation->getVisible() : array_keys($translation);
 
             foreach ($keys as $field) {
-                if ($field === 'locale') {
+                if ($field == 'locale') {
                     $row['_locale'] = $translation[$field];
                     continue;
                 }

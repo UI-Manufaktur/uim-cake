@@ -70,7 +70,7 @@ class FlashHelper extends Helper
     function render(string $key = 'flash', array $options = []): ?string
     {
         $messages = this->_View->getRequest()->getFlash()->consume($key);
-        if ($messages === null) {
+        if ($messages == null) {
             return null;
         }
 

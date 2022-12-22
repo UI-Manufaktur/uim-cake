@@ -40,7 +40,7 @@ class FileSentAs extends ResponseBase
             return false;
         }
 
-        return $file->getPathName() === $other;
+        return $file->getPathName() == $other;
     }
 
     /**

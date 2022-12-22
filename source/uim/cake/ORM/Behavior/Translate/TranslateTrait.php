@@ -35,7 +35,7 @@ trait TranslateTrait
      */
     function translation(string $language)
     {
-        if ($language === this->get('_locale')) {
+        if ($language == this->get('_locale')) {
             return this;
         }
 

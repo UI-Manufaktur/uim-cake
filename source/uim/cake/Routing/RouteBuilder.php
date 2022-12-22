@@ -722,7 +722,7 @@ class RouteBuilder
         if (is_string($route)) {
             /** @var class-string<\Cake\Routing\Route\Route>|null $routeClass */
             $routeClass = App::className($options['routeClass'], 'Routing/Route');
-            if ($routeClass === null) {
+            if ($routeClass == null) {
                 throw new InvalidArgumentException(sprintf(
                     'Cannot find route class %s',
                     $options['routeClass']

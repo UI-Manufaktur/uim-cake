@@ -177,7 +177,7 @@ class StringTemplate
         }
         foreach ($templates as $name) {
             $template = this->get($name);
-            if ($template === null) {
+            if ($template == null) {
                 this->_compiled[$name] = [null, null];
             }
 
@@ -202,7 +202,7 @@ class StringTemplate
      */
     function load(string $file): void
     {
-        if ($file === '') {
+        if ($file == '') {
             throw new CakeException('String template filename cannot be an empty string');
         }
 

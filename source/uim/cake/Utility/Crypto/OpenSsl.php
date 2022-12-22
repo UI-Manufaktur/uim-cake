@@ -70,7 +70,7 @@ class OpenSsl
         $cipher = mb_substr($cipher, $ivSize, null, '8bit');
 
         $value = openssl_decrypt($cipher, $method, $key, OPENSSL_RAW_DATA, $iv);
-        if ($value === false) {
+        if ($value == false) {
             return null;
         }
 

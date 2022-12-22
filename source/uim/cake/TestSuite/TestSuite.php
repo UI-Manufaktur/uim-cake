@@ -53,7 +53,7 @@ class TestSuite extends BaseTestSuite
         $fs = new Filesystem();
         $files = $fs->findRecursive($directory, function (SplFileInfo $current) {
             $file = $current->getFilename();
-            if ($file[0] === '.' || !preg_match('/\.php$/', $file)) {
+            if ($file[0] == '.' || !preg_match('/\.php$/', $file)) {
                 return false;
             }
 

@@ -97,7 +97,7 @@ class YearWidget extends BasicWidget
             throw new InvalidArgumentException('Max year cannot be less than min year');
         }
 
-        if ($data['order'] === 'desc') {
+        if ($data['order'] == 'desc') {
             $data['options'] = range($data['max'], $data['min']);
         } else {
             $data['options'] = range($data['min'], $data['max']);

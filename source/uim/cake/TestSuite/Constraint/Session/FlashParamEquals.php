@@ -91,7 +91,7 @@ class FlashParamEquals extends Constraint
             if (!isset($message[this->param])) {
                 continue;
             }
-            if ($message[this->param] === $other) {
+            if ($message[this->param] == $other) {
                 return true;
             }
         }

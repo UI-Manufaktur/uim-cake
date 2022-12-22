@@ -49,7 +49,7 @@ class EventFiredWith extends Constraint
         this->_dataKey = $dataKey;
         this->_dataValue = $dataValue;
 
-        if (this->_eventManager->getEventList() === null) {
+        if (this->_eventManager->getEventList() == null) {
             throw new AssertionFailedError(
                 'The event manager you are asserting against is not configured to track events.'
             );
@@ -97,11 +97,11 @@ class EventFiredWith extends Constraint
 
         $event = $events[0];
 
-        if (array_key_exists(this->_dataKey, (array)$event->getData()) === false) {
+        if (array_key_exists(this->_dataKey, (array)$event->getData()) == false) {
             return false;
         }
 
-        return $event->getData(this->_dataKey) === this->_dataValue;
+        return $event->getData(this->_dataKey) == this->_dataValue;
     }
 
     /**

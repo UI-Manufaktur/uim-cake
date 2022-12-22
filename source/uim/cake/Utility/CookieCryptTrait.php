@@ -55,16 +55,16 @@ trait CookieCryptTrait
         if (is_array($value)) {
             $value = this->_implode($value);
         }
-        if ($encrypt === false) {
+        if ($encrypt == false) {
             return $value;
         }
         this->_checkCipher($encrypt);
         $prefix = 'Q2FrZQ==.';
         $cipher = '';
-        if ($key === null) {
+        if ($key == null) {
             $key = this->_getCookieEncryptionKey();
         }
-        if ($encrypt === 'aes') {
+        if ($encrypt == 'aes') {
             $cipher = Security::encrypt($value, $key);
         }
 
@@ -134,18 +134,18 @@ trait CookieCryptTrait
 
         $value = base64_decode(substr($value, $prefixLength), true);
 
-        if ($value === false || $value === '') {
+        if ($value == false || $value == '') {
             return '';
         }
 
-        if ($key === null) {
+        if ($key == null) {
             $key = this->_getCookieEncryptionKey();
         }
-        if ($encrypt === 'aes') {
+        if ($encrypt == 'aes') {
             $value = Security::decrypt($value, $key);
         }
 
-        if ($value === null) {
+        if ($value == null) {
             return '';
         }
 
@@ -173,7 +173,7 @@ trait CookieCryptTrait
     protected function _explode(string $string)
     {
         $first = substr($string, 0, 1);
-        if ($first === '{' || $first === '[') {
+        if ($first == '{' || $first == '[') {
             $ret = json_decode($string, true);
 
             return $ret ?? $string;

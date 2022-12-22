@@ -50,7 +50,7 @@ trait MergeVariablesTrait
                 continue;
             }
             thisValue = this->{$property};
-            if (thisValue === null || thisValue === false) {
+            if (thisValue == null || thisValue == false) {
                 continue;
             }
             this->_mergeProperty($property, $parents, $options);

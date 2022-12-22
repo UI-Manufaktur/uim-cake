@@ -59,7 +59,7 @@ trait LocatorAwareTrait
      */
     function getTableLocator(): LocatorInterface
     {
-        if (this->_tableLocator === null) {
+        if (this->_tableLocator == null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
             this->_tableLocator = FactoryLocator::get('Table');
         }

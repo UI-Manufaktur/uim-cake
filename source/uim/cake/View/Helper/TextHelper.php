@@ -85,7 +85,7 @@ class TextHelper extends Helper
 
         /** @psalm-var class-string<\Cake\Utility\Text>|null $engineClass */
         $engineClass = App::className($config['engine'], 'Utility');
-        if ($engineClass === null) {
+        if ($engineClass == null) {
             throw new CakeException(sprintf('Class for %s could not be found', $config['engine']));
         }
 

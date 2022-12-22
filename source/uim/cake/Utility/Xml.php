@@ -146,7 +146,7 @@ class Xml
             $input,
             $options,
             function ($input, $options, $flags) {
-                if ($options['return'] === 'simplexml' || $options['return'] === 'simplexmlelement') {
+                if ($options['return'] == 'simplexml' || $options['return'] == 'simplexmlelement') {
                     $flags |= LIBXML_NOCDATA;
                     $xml = new SimpleXMLElement($input, $flags);
                 } else {
@@ -182,7 +182,7 @@ class Xml
                 $xml = new DOMDocument();
                 $xml->loadHTML($input, $flags);
 
-                if ($options['return'] === 'simplexml' || $options['return'] === 'simplexmlelement') {
+                if ($options['return'] == 'simplexml' || $options['return'] == 'simplexmlelement') {
                     $xml = simplexml_import_dom($xml);
                 }
 
@@ -295,7 +295,7 @@ class Xml
         self::_fromArray($dom, $dom, $input, $options['format']);
 
         $options['return'] = strtolower($options['return']);
-        if ($options['return'] === 'simplexml' || $options['return'] === 'simplexmlelement') {
+        if ($options['return'] == 'simplexml' || $options['return'] == 'simplexmlelement') {
             return new SimpleXMLElement($dom->saveXML());
         }
 
@@ -326,7 +326,7 @@ class Xml
                 if (!is_array($value)) {
                     if (is_bool($value)) {
                         $value = (int)$value;
-                    } elseif ($value === null) {
+                    } elseif ($value == null) {
                         $value = '';
                     }
                     $isNamespace = strpos($key, 'xmlns:');
@@ -335,7 +335,7 @@ class Xml
                         $node->setAttributeNS('http://www.w3.org/2000/xmlns/', $key, (string)$value);
                         continue;
                     }
-                    if ($key[0] != '@' && $format === 'tags') {
+                    if ($key[0] != '@' && $format == 'tags') {
                         if (!is_numeric($value)) {
                             // Escape special characters
                             // https://www.w3.org/TR/REC-xml/#syntax
@@ -347,7 +347,7 @@ class Xml
                         }
                         $node->appendChild($child);
                     } else {
-                        if ($key[0] === '@') {
+                        if ($key[0] == '@') {
                             $key = substr($key, 1);
                         }
                         $attribute = $dom->createAttribute($key);
@@ -355,7 +355,7 @@ class Xml
                         $node->appendChild($attribute);
                     }
                 } else {
-                    if ($key[0] === '@') {
+                    if ($key[0] == '@') {
                         throw new XmlException('Invalid array');
                     }
                     if (is_numeric(implode('', array_keys($value)))) {
@@ -411,7 +411,7 @@ class Xml
                 $childNS = $value['xmlns:'];
                 unset($value['xmlns:']);
             }
-        } elseif (!empty($value) || $value === 0 || $value === '0') {
+        } elseif (!empty($value) || $value == 0 || $value == '0') {
             $childValue = (string)$value;
         }
 

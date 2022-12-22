@@ -246,7 +246,7 @@ class Inflector
 
         if ($reset) {
             static::${$var} = $rules;
-        } elseif ($type === 'uninflected') {
+        } elseif ($type == 'uninflected') {
             static::$_uninflected = array_merge(
                 $rules,
                 static::$_uninflected
@@ -380,7 +380,7 @@ class Inflector
 
         $result = static::_cache($cacheKey, $string);
 
-        if ($result === false) {
+        if ($result == false) {
             $result = str_replace(' ', '', static::humanize($string, $delimiter));
             static::_cache($cacheKey, $string, $result);
         }
@@ -430,7 +430,7 @@ class Inflector
 
         $result = static::_cache($cacheKey, $string);
 
-        if ($result === false) {
+        if ($result == false) {
             $result = explode(' ', str_replace($delimiter, ' ', $string));
             foreach ($result as &$word) {
                 $word = mb_strtoupper(mb_substr($word, 0, 1)) . mb_substr($word, 1);
@@ -455,7 +455,7 @@ class Inflector
 
         $result = static::_cache($cacheKey, $string);
 
-        if ($result === false) {
+        if ($result == false) {
             $result = mb_strtolower(preg_replace('/(?<=\\w)([A-Z])/', $delimiter . '\\1', $string));
             static::_cache($cacheKey, $string, $result);
         }
@@ -474,7 +474,7 @@ class Inflector
     {
         $result = static::_cache(__FUNCTION__, $className);
 
-        if ($result === false) {
+        if ($result == false) {
             $result = static::pluralize(static::underscore($className));
             static::_cache(__FUNCTION__, $className, $result);
         }
@@ -493,7 +493,7 @@ class Inflector
     {
         $result = static::_cache(__FUNCTION__, $tableName);
 
-        if ($result === false) {
+        if ($result == false) {
             $result = static::camelize(static::singularize($tableName));
             static::_cache(__FUNCTION__, $tableName, $result);
         }
@@ -512,7 +512,7 @@ class Inflector
     {
         $result = static::_cache(__FUNCTION__, $string);
 
-        if ($result === false) {
+        if ($result == false) {
             $camelized = static::camelize(static::underscore($string));
             $replace = strtolower(substr($camelized, 0, 1));
             $result = $replace . substr($camelized, 1);

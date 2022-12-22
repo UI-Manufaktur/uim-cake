@@ -42,11 +42,11 @@ class ConnectionHelper
     {
         ConnectionManager::alias('test', 'default');
         foreach (ConnectionManager::configured() as $connection) {
-            if ($connection === 'test' || $connection === 'default') {
+            if ($connection == 'test' || $connection == 'default') {
                 continue;
             }
 
-            if (strpos($connection, 'test_') === 0) {
+            if (strpos($connection, 'test_') == 0) {
                 $original = substr($connection, 5);
                 ConnectionManager::alias($connection, $original);
             } else {

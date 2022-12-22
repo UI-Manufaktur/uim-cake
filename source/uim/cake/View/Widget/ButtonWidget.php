@@ -84,7 +84,7 @@ class ButtonWidget implements WidgetInterface
      */
     function secureFields(array $data): array
     {
-        if (!isset($data['name']) || $data['name'] === '') {
+        if (!isset($data['name']) || $data['name'] == '') {
             return [];
         }
 

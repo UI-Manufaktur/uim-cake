@@ -79,14 +79,14 @@ class BasicWidget implements WidgetInterface
 
         $data['value'] = $data['val'];
         unset($data['val']);
-        if ($data['value'] === false) {
+        if ($data['value'] == false) {
             // explicitly convert to 0 to avoid empty string which is marshaled as null
             $data['value'] = '0';
         }
 
         $fieldName = $data['fieldName'] ?? null;
         if ($fieldName) {
-            if ($data['type'] === 'number' && !isset($data['step'])) {
+            if ($data['type'] == 'number' && !isset($data['step'])) {
                 $data = this->setStep($data, $context, $fieldName);
             }
 
@@ -185,10 +185,10 @@ class BasicWidget implements WidgetInterface
         $dbType = $context->type($fieldName);
         $fieldDef = $context->attributes($fieldName);
 
-        if ($dbType === 'decimal' && isset($fieldDef['precision'])) {
+        if ($dbType == 'decimal' && isset($fieldDef['precision'])) {
             $decimalPlaces = $fieldDef['precision'];
             $data['step'] = sprintf('%.' . $decimalPlaces . 'F', pow(10, -1 * $decimalPlaces));
-        } elseif ($dbType === 'float') {
+        } elseif ($dbType == 'float') {
             $data['step'] = 'any';
         }
 
@@ -200,7 +200,7 @@ class BasicWidget implements WidgetInterface
      */
     function secureFields(array $data): array
     {
-        if (!isset($data['name']) || $data['name'] === '') {
+        if (!isset($data['name']) || $data['name'] == '') {
             return [];
         }
 

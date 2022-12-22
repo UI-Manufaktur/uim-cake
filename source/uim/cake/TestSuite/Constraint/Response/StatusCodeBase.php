@@ -44,7 +44,7 @@ abstract class StatusCodeBase extends ResponseBase
             return this->statusCodeBetween($other[0], $other[1]);
         }
 
-        return this->response->getStatusCode() === $other;
+        return this->response->getStatusCode() == $other;
     }
 
     /**

@@ -30,7 +30,7 @@ class BodyNotEquals extends BodyEquals
      */
     function matches($other): bool
     {
-        return parent::matches($other) === false;
+        return parent::matches($other) == false;
     }
 
     /**

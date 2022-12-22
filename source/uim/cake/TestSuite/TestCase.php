@@ -340,7 +340,7 @@ abstract class TestCase extends BaseTestCase
         if (this->autoFixtures) {
             throw new RuntimeException('Cannot use `loadFixtures()` with `$autoFixtures` enabled.');
         }
-        if (static::$fixtureManager === null) {
+        if (static::$fixtureManager == null) {
             throw new RuntimeException('No fixture manager to load the test fixture');
         }
 
@@ -729,7 +729,7 @@ abstract class TestCase extends BaseTestCase
                 $tags = (string)$tags;
             }
             $i++;
-            if (is_string($tags) && $tags[0] === '<') {
+            if (is_string($tags) && $tags[0] == '<') {
                 /** @psalm-suppress InvalidArrayOffset */
                 $tags = [substr($tags, 1) => []];
             } elseif (is_string($tags)) {
@@ -738,7 +738,7 @@ abstract class TestCase extends BaseTestCase
                 if (preg_match('/^\*?\//', $tags, $match) && $tagsTrimmed != '//') {
                     $prefix = ['', ''];
 
-                    if ($match[0] === '*/') {
+                    if ($match[0] == '*/') {
                         $prefix = ['Anything, ', '.*?'];
                     }
                     $regex[] = [
@@ -769,7 +769,7 @@ abstract class TestCase extends BaseTestCase
                     sprintf('[\s]*<%s', preg_quote($tag, '/')),
                     $i,
                 ];
-                if ($attributes === true) {
+                if ($attributes == true) {
                     $attributes = [];
                 }
                 $attrs = [];
@@ -825,7 +825,7 @@ abstract class TestCase extends BaseTestCase
             $matches = false;
             if (isset($assertion['attrs'])) {
                 $string = this->_assertAttributes($assertion, $string, $fullDebug, $regex);
-                if ($fullDebug === true && $string === false) {
+                if ($fullDebug == true && $string == false) {
                     debug($string, true);
                     debug($regex, true);
                 }
@@ -845,7 +845,7 @@ abstract class TestCase extends BaseTestCase
                 }
             }
             if (!$matches) {
-                if ($fullDebug === true) {
+                if ($fullDebug == true) {
                     debug($string);
                     debug($regex);
                 }
@@ -889,8 +889,8 @@ abstract class TestCase extends BaseTestCase
                     break;
                 }
             }
-            if ($matches === false) {
-                if ($fullDebug === true) {
+            if ($matches == false) {
+                if ($fullDebug == true) {
                     debug($string);
                     debug($regex);
                 }
@@ -1022,7 +1022,7 @@ abstract class TestCase extends BaseTestCase
         /** @var \Cake\ORM\Table $mock */
         $mock = $builder->getMock();
 
-        if (empty($options['entityClass']) && $mock->getEntityClass() === Entity::class) {
+        if (empty($options['entityClass']) && $mock->getEntityClass() == Entity::class) {
             $parts = explode('\\', $className);
             $entityAlias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
             $entityClass = implode('\\', array_slice($parts, 0, -1)) . '\\Entity\\' . $entityAlias;
@@ -1031,7 +1031,7 @@ abstract class TestCase extends BaseTestCase
             }
         }
 
-        if (stripos($mock->getTable(), 'mock') === 0) {
+        if (stripos($mock->getTable(), 'mock') == 0) {
             $mock->setTable(Inflector::tableize($baseClass));
         }
 

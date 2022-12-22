@@ -57,7 +57,7 @@ class UrlHelper extends Helper
 
         /** @psalm-var class-string<\Cake\Routing\Asset>|null $engineClass */
         $engineClass = App::className($engineClassConfig, 'Routing');
-        if ($engineClass === null) {
+        if ($engineClass == null) {
             throw new CakeException(sprintf('Class for %s could not be found', $engineClassConfig));
         }
 
@@ -222,7 +222,7 @@ class UrlHelper extends Helper
 
     /**
      * Adds a timestamp to a file based resource based on the value of `Asset.timestamp` in
-     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp === 'force'
+     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp == 'force'
      * a timestamp will be added.
      *
      * @param string $path The file path to timestamp, the path must be inside `App.wwwRoot` in Configure.

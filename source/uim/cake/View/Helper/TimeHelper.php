@@ -379,7 +379,7 @@ class TimeHelper extends Helper
      */
     function i18nFormat($date, $format = null, $invalid = false, $timezone = null)
     {
-        if ($date === null) {
+        if ($date == null) {
             return $invalid;
         }
         $timezone = this->_getTimezone($timezone);
@@ -389,7 +389,7 @@ class TimeHelper extends Helper
 
             return $time->i18nFormat($format, $timezone);
         } catch (Exception $e) {
-            if ($invalid === false) {
+            if ($invalid == false) {
                 throw $e;
             }
 

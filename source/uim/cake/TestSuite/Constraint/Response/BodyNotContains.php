@@ -30,7 +30,7 @@ class BodyNotContains extends BodyContains
      */
     function matches($other): bool
     {
-        return parent::matches($other) === false;
+        return parent::matches($other) == false;
     }
 
     /**

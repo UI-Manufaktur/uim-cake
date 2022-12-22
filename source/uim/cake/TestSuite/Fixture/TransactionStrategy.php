@@ -59,7 +59,7 @@ class TransactionStrategy implements FixtureStrategyInterface
         this->helper->runPerConnection(function ($connection) {
             if ($connection instanceof Connection) {
                 assert(
-                    $connection->inTransaction() === false,
+                    $connection->inTransaction() == false,
                     'Cannot start transaction strategy inside a transaction. ' .
                     'Ensure you have closed all open transactions.'
                 );

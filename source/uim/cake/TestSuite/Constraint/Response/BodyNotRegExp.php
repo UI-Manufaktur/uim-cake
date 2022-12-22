@@ -30,7 +30,7 @@ class BodyNotRegExp extends BodyRegExp
      */
     function matches($other): bool
     {
-        return parent::matches($other) === false;
+        return parent::matches($other) == false;
     }
 
     /**

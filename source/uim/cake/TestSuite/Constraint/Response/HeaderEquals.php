@@ -50,7 +50,7 @@ class HeaderEquals extends ResponseBase
      */
     function matches($other): bool
     {
-        return this->response->getHeaderLine(this->headerName) === $other;
+        return this->response->getHeaderLine(this->headerName) == $other;
     }
 
     /**

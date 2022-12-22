@@ -618,7 +618,7 @@ trait IntegrationTestTrait
         } elseif (
             is_array($data) &&
             isset($props['environment']['CONTENT_TYPE']) &&
-            $props['environment']['CONTENT_TYPE'] === 'application/x-www-form-urlencoded'
+            $props['environment']['CONTENT_TYPE'] == 'application/x-www-form-urlencoded'
         ) {
             $props['input'] = http_build_query($data);
         } else {
@@ -641,7 +641,7 @@ trait IntegrationTestTrait
      */
     protected function _addTokens(string $url, array $data): array
     {
-        if (this->_securityToken === true) {
+        if (this->_securityToken == true) {
             $fields = array_diff_key($data, array_flip(this->_unlockedFields));
 
             $keys = array_map(function ($field) {
@@ -658,7 +658,7 @@ trait IntegrationTestTrait
             $data['_Token']['debug'] = 'FormProtector debug data would be added here';
         }
 
-        if (this->_csrfToken === true) {
+        if (this->_csrfToken == true) {
             $middleware = new CsrfProtectionMiddleware();
             if (!isset(this->_cookie[this->_csrfKeyName]) && !isset(this->_session[this->_csrfKeyName])) {
                 $token = $middleware->createToken();
@@ -693,7 +693,7 @@ trait IntegrationTestTrait
     {
         foreach ($data as $key => $value) {
             if (is_scalar($value)) {
-                $data[$key] = $value === false ? '0' : (string)$value;
+                $data[$key] = $value == false ? '0' : (string)$value;
 
                 continue;
             }
@@ -728,7 +728,7 @@ trait IntegrationTestTrait
             $hostData['host'] = $uri->getHost();
         }
         if ($uri->getScheme()) {
-            $hostData['ssl'] = $uri->getScheme() === 'https';
+            $hostData['ssl'] = $uri->getScheme() == 'https';
         }
 
         return [$path, $query, $hostData];
@@ -1338,7 +1338,7 @@ trait IntegrationTestTrait
         if (this->_exception instanceof Exception) {
             $message .= this->extractExceptionMessage(this->_exception);
         }
-        if (this->_controller === null) {
+        if (this->_controller == null) {
             return $message;
         }
         $error = this->_controller->viewBuilder()->getVar('error');

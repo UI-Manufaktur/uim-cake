@@ -31,7 +31,7 @@ class MailCount extends MailConstraintBase
      */
     function matches($other): bool
     {
-        return count(this->getMessages()) === $other;
+        return count(this->getMessages()) == $other;
     }
 
     /**

@@ -91,7 +91,7 @@ class FixtureInjector implements TestListener
      */
     function endTestSuite(TestSuite $suite): void
     {
-        if (this->_first === $suite) {
+        if (this->_first == $suite) {
             this->_fixtureManager->shutDown();
         }
     }

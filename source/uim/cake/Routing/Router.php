@@ -171,7 +171,7 @@ class Router
      */
     public static function defaultRouteClass(?string $routeClass = null): ?string
     {
-        if ($routeClass === null) {
+        if ($routeClass == null) {
             return static::$_defaultRouteClass;
         }
         static::$_defaultRouteClass = $routeClass;
@@ -449,10 +449,10 @@ class Router
             }
 
             if (isset($url['_ssl'])) {
-                $url['_scheme'] = $url['_ssl'] === true ? 'https' : 'http';
+                $url['_scheme'] = $url['_ssl'] == true ? 'https' : 'http';
             }
 
-            if (isset($url['_full']) && $url['_full'] === true) {
+            if (isset($url['_full']) && $url['_full'] == true) {
                 $full = true;
             }
             if (isset($url['#'])) {
@@ -468,7 +468,7 @@ class Router
                     empty($url['action']) &&
                     (
                         empty($url['controller']) ||
-                        $params['controller'] === $url['controller']
+                        $params['controller'] == $url['controller']
                     )
                 ) {
                     $url['action'] = $params['action'];
@@ -499,13 +499,13 @@ class Router
             $url = (string)$url;
 
             $plainString = (
-                strpos($url, 'javascript:') === 0 ||
-                strpos($url, 'mailto:') === 0 ||
-                strpos($url, 'tel:') === 0 ||
-                strpos($url, 'sms:') === 0 ||
-                strpos($url, '#') === 0 ||
-                strpos($url, '?') === 0 ||
-                strpos($url, '//') === 0 ||
+                strpos($url, 'javascript:') == 0 ||
+                strpos($url, 'mailto:') == 0 ||
+                strpos($url, 'tel:') == 0 ||
+                strpos($url, 'sms:') == 0 ||
+                strpos($url, '#') == 0 ||
+                strpos($url, '?') == 0 ||
+                strpos($url, '//') == 0 ||
                 strpos($url, '://') != false
             );
 
@@ -516,7 +516,7 @@ class Router
         }
 
         $protocol = preg_match('#^[a-z][a-z0-9+\-.]*\://#i', $output);
-        if ($protocol === 0) {
+        if ($protocol == 0) {
             $output = str_replace('//', '/', '/' . $output);
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
@@ -591,7 +591,7 @@ class Router
      */
     public static function fullBaseUrl(?string $base = null): string
     {
-        if ($base === null && static::$_fullBaseUrl != null) {
+        if ($base == null && static::$_fullBaseUrl != null) {
             return static::$_fullBaseUrl;
         }
 
@@ -662,7 +662,7 @@ class Router
             // Locate the route that was used to match this route
             // so we can access the pass parameter configuration.
             foreach (static::getRouteCollection()->routes() as $maybe) {
-                if ($maybe->template === $template) {
+                if ($maybe->template == $template) {
                     $route = $maybe;
                     break;
                 }
@@ -759,7 +759,7 @@ class Router
     public static function extensions($extensions = null, $merge = true): array
     {
         $collection = static::$_collection;
-        if ($extensions === null) {
+        if ($extensions == null) {
             return array_unique(array_merge(static::$_defaultExtensions, $collection->getExtensions()));
         }
 

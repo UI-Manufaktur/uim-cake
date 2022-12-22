@@ -253,7 +253,7 @@ class PaginatorHelper extends Helper
             $dir = strtolower($options['direction']);
         }
 
-        if ($dir === 'desc') {
+        if ($dir == 'desc') {
             return 'desc';
         }
 
@@ -277,7 +277,7 @@ class PaginatorHelper extends Helper
             $template = $templates['disabled'];
         }
 
-        if (!$enabled && $text === false) {
+        if (!$enabled && $text == false) {
             return '';
         }
         $text = $options['escape'] ? h($text) : $text;
@@ -452,19 +452,19 @@ class PaginatorHelper extends Helper
             $table = $model;
         }
         $isSorted = (
-            $sortKey === $table . '.' . $field ||
-            $sortKey === $model . '.' . $key ||
-            $table . '.' . $field === $model . '.' . $sortKey
+            $sortKey == $table . '.' . $field ||
+            $sortKey == $model . '.' . $key ||
+            $table . '.' . $field == $model . '.' . $sortKey
         );
 
         $template = 'sort';
         $dir = $defaultDir;
         if ($isSorted) {
             if ($locked) {
-                $template = $dir === 'asc' ? 'sortDescLocked' : 'sortAscLocked';
+                $template = $dir == 'asc' ? 'sortDescLocked' : 'sortAscLocked';
             } else {
-                $dir = this->sortDir($options['model']) === 'asc' ? 'desc' : 'asc';
-                $template = $dir === 'asc' ? 'sortDesc' : 'sortAsc';
+                $dir = this->sortDir($options['model']) == 'asc' ? 'desc' : 'asc';
+                $template = $dir == 'asc' ? 'sortDesc' : 'sortAsc';
             }
         }
         if (is_array($title) && array_key_exists($dir, $title)) {
@@ -528,14 +528,14 @@ class PaginatorHelper extends Helper
         if (
             !empty($paging['sort'])
             && !empty($options['sort'])
-            && strpos($options['sort'], '.') === false
+            && strpos($options['sort'], '.') == false
         ) {
             $paging['sort'] = this->_removeAlias($paging['sort'], $model = null);
         }
         if (
             !empty($paging['sortDefault'])
             && !empty($options['sort'])
-            && strpos($options['sort'], '.') === false
+            && strpos($options['sort'], '.') == false
         ) {
             $paging['sortDefault'] = this->_removeAlias($paging['sortDefault'], $model);
         }
@@ -545,14 +545,14 @@ class PaginatorHelper extends Helper
             ['page' => null, 'limit' => null, 'sort' => null, 'direction' => null]
         );
 
-        if (!empty($options['page']) && $options['page'] === 1) {
+        if (!empty($options['page']) && $options['page'] == 1) {
             $options['page'] = null;
         }
 
         if (
             isset($paging['sortDefault'], $paging['directionDefault'], $options['sort'], $options['direction'])
-            && $options['sort'] === $paging['sortDefault']
-            && strtolower($options['direction']) === strtolower($paging['directionDefault'])
+            && $options['sort'] == $paging['sortDefault']
+            && strtolower($options['direction']) == strtolower($paging['directionDefault'])
         ) {
             $options['sort'] = $options['direction'] = null;
         }
@@ -596,13 +596,13 @@ class PaginatorHelper extends Helper
     {
         $currentModel = $model ?: this->defaultModel();
 
-        if (strpos($field, '.') === false) {
+        if (strpos($field, '.') == false) {
             return $field;
         }
 
         [$alias, $currentField] = explode('.', $field);
 
-        if ($alias === $currentModel) {
+        if ($alias == $currentModel) {
             return $currentField;
         }
 
@@ -645,7 +645,7 @@ class PaginatorHelper extends Helper
     function hasPage(int $page = 1, ?string $model = null): bool
     {
         $paging = this->params($model);
-        if ($paging === []) {
+        if ($paging == []) {
             return false;
         }
 
@@ -987,7 +987,7 @@ class PaginatorHelper extends Helper
         $out .= $options['before'];
 
         for ($i = 1; $i <= $params['pageCount']; $i++) {
-            if ($i === $params['page']) {
+            if ($i == $params['page']) {
                 $out .= $templater->format('current', [
                     'text' => this->Number->format($params['page']),
                     'url' => this->generateUrl(['page' => $i], $options['model'], $options['url']),
@@ -1200,7 +1200,7 @@ class PaginatorHelper extends Helper
 
         $out = implode($links);
 
-        if ($options['block'] === true) {
+        if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
 

@@ -298,7 +298,7 @@ class Route
      */
     function compile(): string
     {
-        if (this->_compiledRoute === null) {
+        if (this->_compiledRoute == null) {
             this->_writeRoute();
         }
 
@@ -316,7 +316,7 @@ class Route
      */
     protected function _writeRoute(): void
     {
-        if (empty(this->template) || (this->template === '/')) {
+        if (empty(this->template) || (this->template == '/')) {
             this->_compiledRoute = '#^/*$#';
             this->keys = [];
 
@@ -355,7 +355,7 @@ class Route
                 }
                 // phpcs:disable Generic.Files.LineLength
                 // Offset of the colon/braced placeholder in the full template string
-                if ($parsed[$matchArray[0][1] - 1] === '/') {
+                if ($parsed[$matchArray[0][1] - 1] == '/') {
                     $routeParams['/' . $search] = '(?:/(?P<' . $name . '>' . this->options[$name] . ')' . $option . ')' . $option;
                 } else {
                     $routeParams[$search] = '(?:(?P<' . $name . '>' . this->options[$name] . ')' . $option . ')' . $option;
@@ -418,10 +418,10 @@ class Route
                 $value = this->defaults[$key];
             }
 
-            if ($value === null) {
+            if ($value == null) {
                 continue;
             }
-            if ($value === true || $value === false) {
+            if ($value == true || $value == false) {
                 $value = $value ? '1' : '0';
             }
             $name .= $value . $glue;
@@ -574,7 +574,7 @@ class Route
         if (count(this->_extensions) && strpos($url, '.') != false) {
             foreach (this->_extensions as $ext) {
                 $len = strlen($ext) + 1;
-                if (substr($url, -$len) === '.' . $ext) {
+                if (substr($url, -$len) == '.' . $ext) {
                     return [substr($url, 0, $len * -1), $ext];
                 }
             }
@@ -661,7 +661,7 @@ class Route
 
         // Apply the _host option if possible
         if (isset(this->options['_host'])) {
-            if (!isset($hostOptions['_host']) && strpos(this->options['_host'], '*') === false) {
+            if (!isset($hostOptions['_host']) && strpos(this->options['_host'], '*') == false) {
                 $hostOptions['_host'] = this->options['_host'];
             }
             $hostOptions['_host'] = $hostOptions['_host'] ?? $context['_host'];
@@ -683,7 +683,7 @@ class Route
 
             if (
                 $hostOptions['_scheme'] &&
-                getservbyname($hostOptions['_scheme'], 'tcp') === $hostOptions['_port']
+                getservbyname($hostOptions['_scheme'], 'tcp') == $hostOptions['_port']
             ) {
                 unset($hostOptions['_port']);
             }
@@ -741,7 +741,7 @@ class Route
 
             // pull out passed args
             $numeric = is_numeric($key);
-            if ($numeric && isset($defaults[$key]) && $defaults[$key] === $value) {
+            if ($numeric && isset($defaults[$key]) && $defaults[$key] == $value) {
                 continue;
             }
             if ($numeric) {
@@ -905,7 +905,7 @@ class Route
         if ($star != false) {
             $path = rtrim(substr(this->template, 0, $star), '/');
 
-            return $path === '' ? '/' : $path;
+            return $path == '' ? '/' : $path;
         }
 
         return this->template;

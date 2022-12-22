@@ -258,7 +258,7 @@ class EntityContext implements ContextInterface
         $parts = explode('.', $field);
         $entity = this->entity($parts);
 
-        if ($entity && end($parts) === '_ids') {
+        if ($entity && end($parts) == '_ids') {
             return this->_extractMultiple($entity, $parts);
         }
 
@@ -304,7 +304,7 @@ class EntityContext implements ContextInterface
     protected function _schemaDefault(array $parts)
     {
         $table = this->_getTable($parts);
-        if ($table === null) {
+        if ($table == null) {
             return null;
         }
         $field = end($parts);
@@ -350,11 +350,11 @@ class EntityContext implements ContextInterface
      */
     function entity(?array $path = null)
     {
-        if ($path === null) {
+        if ($path == null) {
             return this->_context['entity'];
         }
 
-        $oneElement = count($path) === 1;
+        $oneElement = count($path) == 1;
         if ($oneElement && this->_isCollection) {
             return null;
         }
@@ -363,7 +363,7 @@ class EntityContext implements ContextInterface
             return $entity;
         }
 
-        if ($path[0] === this->_rootName) {
+        if ($path[0] == this->_rootName) {
             $path = array_slice($path, 1);
         }
 
@@ -372,8 +372,8 @@ class EntityContext implements ContextInterface
         for ($i = 0; $i < $len; $i++) {
             $prop = $path[$i];
             $next = this->_getProp($entity, $prop);
-            $isLast = ($i === $last);
-            if (!$isLast && $next === null && $prop != '_ids') {
+            $isLast = ($i == $last);
+            if (!$isLast && $next == null && $prop != '_ids') {
                 $table = this->_getTable($path);
                 if ($table) {
                     return $table->newEmptyEntity();
@@ -409,11 +409,11 @@ class EntityContext implements ContextInterface
      */
     protected function leafEntity($path = null)
     {
-        if ($path === null) {
+        if ($path == null) {
             return this->_context['entity'];
         }
 
-        $oneElement = count($path) === 1;
+        $oneElement = count($path) == 1;
         if ($oneElement && this->_isCollection) {
             throw new RuntimeException(sprintf(
                 'Unable to fetch property "%s"',
@@ -425,7 +425,7 @@ class EntityContext implements ContextInterface
             return [$entity, $path];
         }
 
-        if ($path[0] === this->_rootName) {
+        if ($path[0] == this->_rootName) {
             $path = array_slice($path, 1);
         }
 
@@ -479,7 +479,7 @@ class EntityContext implements ContextInterface
         }
         if ($target instanceof Traversable) {
             foreach ($target as $i => $val) {
-                if ((string)$i === $field) {
+                if ((string)$i == $field) {
                     return $val;
                 }
             }
@@ -553,7 +553,7 @@ class EntityContext implements ContextInterface
 
         if ($validator->hasField($fieldName)) {
             foreach ($validator->field($fieldName)->rules() as $rule) {
-                if ($rule->get('rule') === 'maxLength') {
+                if ($rule->get('rule') == 'maxLength') {
                     return $rule->get('pass')[0];
                 }
             }
@@ -640,7 +640,7 @@ class EntityContext implements ContextInterface
      */
     protected function _getTable($parts, $fallback = true): ?Table
     {
-        if (!is_array($parts) || count($parts) === 1) {
+        if (!is_array($parts) || count($parts) == 1) {
             return this->_tables[this->_rootName];
         }
 
@@ -653,14 +653,14 @@ class EntityContext implements ContextInterface
             return this->_tables[$path];
         }
 
-        if (current($normalized) === this->_rootName) {
+        if (current($normalized) == this->_rootName) {
             $normalized = array_slice($normalized, 1);
         }
 
         $table = this->_tables[this->_rootName];
         $assoc = null;
         foreach ($normalized as $part) {
-            if ($part === '_joinData') {
+            if ($part == '_joinData') {
                 if ($assoc != null) {
                     $table = $assoc->junction();
                     $assoc = null;
@@ -671,7 +671,7 @@ class EntityContext implements ContextInterface
                 $assoc = $associationCollection->getByProperty($part);
             }
 
-            if ($assoc === null) {
+            if ($assoc == null) {
                 if ($fallback) {
                     break;
                 }
@@ -748,7 +748,7 @@ class EntityContext implements ContextInterface
         } catch (RuntimeException $e) {
             return [];
         }
-        if (count($remainingParts) === 0) {
+        if (count($remainingParts) == 0) {
             return $entity->getErrors();
         }
 

@@ -115,7 +115,7 @@ class XmlView extends SerializedView
         if (is_array($serialize)) {
             if (empty($serialize)) {
                 $serialize = '';
-            } elseif (count($serialize) === 1) {
+            } elseif (count($serialize) == 1) {
                 $serialize = current($serialize);
             }
         }

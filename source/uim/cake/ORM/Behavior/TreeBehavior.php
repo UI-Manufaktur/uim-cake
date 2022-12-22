@@ -106,7 +106,7 @@ class TreeBehavior extends Behavior
         $dirty = $entity->isDirty($config['parent']);
         $level = $config['level'];
 
-        if ($parent && $entity->get($primaryKey) === $parent) {
+        if ($parent && $entity->get($primaryKey) == $parent) {
             throw new RuntimeException("Cannot set a node's parent as itself");
         }
 
@@ -184,7 +184,7 @@ class TreeBehavior extends Behavior
     {
         $config = this->getConfig();
 
-        if ($entity->get($config['left']) + 1 === $entity->get($config['right'])) {
+        if ($entity->get($config['left']) + 1 == $entity->get($config['right'])) {
             return;
         }
 
@@ -464,7 +464,7 @@ class TreeBehavior extends Behavior
             throw new InvalidArgumentException("The 'for' key is required for find('children')");
         }
 
-        if ($query->clause('order') === null) {
+        if ($query->clause('order') == null) {
             $query->order([$left => 'ASC']);
         }
 
@@ -580,7 +580,7 @@ class TreeBehavior extends Behavior
 
         $node->set($config['parent'], null);
 
-        if ($right - $left === 1) {
+        if ($right - $left == 1) {
             return this->_table->save($node);
         }
 
@@ -887,7 +887,7 @@ class TreeBehavior extends Behavior
             ->orderDesc($rightField)
             ->first();
 
-        if ($edge === null || empty($edge[$field])) {
+        if ($edge == null || empty($edge[$field])) {
             return 0;
         }
 
@@ -966,7 +966,7 @@ class TreeBehavior extends Behavior
         $config = this->getConfig();
         $fields = [$config['left'], $config['right']];
         $values = array_filter($entity->extract($fields));
-        if (count($values) === count($fields)) {
+        if (count($values) == count($fields)) {
             return;
         }
 
@@ -1012,7 +1012,7 @@ class TreeBehavior extends Behavior
             ->where([$primaryKey => $id])
             ->first();
 
-        if ($entity === null) {
+        if ($entity == null) {
             return false;
         }
 

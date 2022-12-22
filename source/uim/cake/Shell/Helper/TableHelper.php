@@ -64,11 +64,11 @@ class TableHelper extends Helper
      */
     protected function _cellWidth(string $text): int
     {
-        if ($text === '') {
+        if ($text == '') {
             return 0;
         }
 
-        if (strpos($text, '<') === false && strpos($text, '>') === false) {
+        if (strpos($text, '<') == false && strpos($text, '>') == false) {
             return mb_strwidth($text);
         }
 
@@ -105,7 +105,7 @@ class TableHelper extends Helper
      */
     protected function _render(array $row, array $widths, array $options = []): void
     {
-        if (count($row) === 0) {
+        if (count($row) == 0) {
             return;
         }
 
@@ -151,7 +151,7 @@ class TableHelper extends Helper
         $widths = this->_calculateWidths($args);
 
         this->_rowSeparator($widths);
-        if ($config['headers'] === true) {
+        if ($config['headers'] == true) {
             this->_render(array_shift($args), $widths, ['style' => $config['headerStyle']]);
             this->_rowSeparator($widths);
         }
@@ -162,7 +162,7 @@ class TableHelper extends Helper
 
         foreach ($args as $line) {
             this->_render($line, $widths);
-            if ($config['rowSeparator'] === true) {
+            if ($config['rowSeparator'] == true) {
                 this->_rowSeparator($widths);
             }
         }

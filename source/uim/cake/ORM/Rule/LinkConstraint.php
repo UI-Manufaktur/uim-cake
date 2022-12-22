@@ -109,11 +109,11 @@ class LinkConstraint
 
         if (
             (
-                this->_requiredLinkState === static::STATUS_LINKED &&
+                this->_requiredLinkState == static::STATUS_LINKED &&
                 $count < 1
             ) ||
             (
-                this->_requiredLinkState === static::STATUS_NOT_LINKED &&
+                this->_requiredLinkState == static::STATUS_NOT_LINKED &&
                 $count != 0
             )
         ) {

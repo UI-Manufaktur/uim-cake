@@ -197,7 +197,7 @@ class Security
     {
         self::_checkKey($key, 'encrypt()');
 
-        if ($hmacSalt === null) {
+        if ($hmacSalt == null) {
             $hmacSalt = static::getSalt();
         }
         // Generate the encryption and hmac key.
@@ -243,7 +243,7 @@ class Security
         if (empty($cipher)) {
             throw new InvalidArgumentException('The data to decrypt cannot be empty.');
         }
-        if ($hmacSalt === null) {
+        if ($hmacSalt == null) {
             $hmacSalt = static::getSalt();
         }
 
@@ -286,7 +286,7 @@ class Security
      */
     public static function getSalt(): string
     {
-        if (static::$_salt === null) {
+        if (static::$_salt == null) {
             throw new RuntimeException(
                 'Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`.'
             );

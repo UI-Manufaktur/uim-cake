@@ -95,7 +95,7 @@ class ContextFactory
             [
                 'type' => 'null',
                 'callable' => function ($request, $data) {
-                    if ($data['entity'] === null) {
+                    if ($data['entity'] == null) {
                         return new NullContext($data);
                     }
                 },

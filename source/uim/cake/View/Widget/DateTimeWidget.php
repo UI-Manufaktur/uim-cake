@@ -180,7 +180,7 @@ class DateTimeWidget extends BasicWidget
      */
     protected function formatDateTime($value, array $options): string
     {
-        if ($value === '' || $value === null) {
+        if ($value == '' || $value == null) {
             return '';
         }
 
@@ -213,7 +213,7 @@ class DateTimeWidget extends BasicWidget
             $format = this->formatMap[$options['type']];
 
             if (
-                $options['type'] === 'datetime-local'
+                $options['type'] == 'datetime-local'
                 && is_numeric($options['step'])
                 && $options['step'] < 1
             ) {
@@ -229,7 +229,7 @@ class DateTimeWidget extends BasicWidget
      */
     function secureFields(array $data): array
     {
-        if (!isset($data['name']) || $data['name'] === '') {
+        if (!isset($data['name']) || $data['name'] == '') {
             return [];
         }
 

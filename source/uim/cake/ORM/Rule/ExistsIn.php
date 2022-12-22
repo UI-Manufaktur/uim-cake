@@ -104,7 +104,7 @@ class ExistsIn
             $realTarget = $target;
         }
 
-        if (!empty($options['_sourceTable']) && $realTarget === $options['_sourceTable']) {
+        if (!empty($options['_sourceTable']) && $realTarget == $options['_sourceTable']) {
             return true;
         }
 
@@ -126,7 +126,7 @@ class ExistsIn
         if (this->_options['allowNullableNulls']) {
             $schema = $source->getSchema();
             foreach ($fields as $i => $field) {
-                if ($schema->getColumn($field) && $schema->isNullable($field) && $entity->get($field) === null) {
+                if ($schema->getColumn($field) && $schema->isNullable($field) && $entity->get($field) == null) {
                     unset($bindingKey[$i], $fields[$i]);
                 }
             }
@@ -158,11 +158,11 @@ class ExistsIn
         $nulls = 0;
         $schema = $source->getSchema();
         foreach (this->_fields as $field) {
-            if ($schema->getColumn($field) && $schema->isNullable($field) && $entity->get($field) === null) {
+            if ($schema->getColumn($field) && $schema->isNullable($field) && $entity->get($field) == null) {
                 $nulls++;
             }
         }
 
-        return $nulls === count(this->_fields);
+        return $nulls == count(this->_fields);
     }
 }

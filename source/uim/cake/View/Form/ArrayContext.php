@@ -121,7 +121,7 @@ class ArrayContext implements ContextInterface
             return [];
         }
         foreach (this->_context['schema']['_constraints'] as $data) {
-            if (isset($data['type']) && $data['type'] === 'primary') {
+            if (isset($data['type']) && $data['type'] == 'primary') {
                 return (array)($data['columns'] ?? []);
             }
         }
@@ -217,11 +217,11 @@ class ArrayContext implements ContextInterface
 
         $required = Hash::get(this->_context['required'], $field);
 
-        if ($required === null) {
+        if ($required == null) {
             $required = Hash::get(this->_context['required'], this->stripNesting($field));
         }
 
-        if (!empty($required) || $required === '0') {
+        if (!empty($required) || $required == '0') {
             return true;
         }
 
@@ -237,15 +237,15 @@ class ArrayContext implements ContextInterface
             return null;
         }
         $required = Hash::get(this->_context['required'], $field);
-        if ($required === null) {
+        if ($required == null) {
             $required = Hash::get(this->_context['required'], this->stripNesting($field));
         }
 
-        if ($required === false) {
+        if ($required == false) {
             return null;
         }
 
-        if ($required === true) {
+        if ($required == true) {
             $required = __d('cake', 'This field cannot be left empty');
         }
 
@@ -294,7 +294,7 @@ class ArrayContext implements ContextInterface
         }
 
         $schema = Hash::get(this->_context['schema'], $field);
-        if ($schema === null) {
+        if ($schema == null) {
             $schema = Hash::get(this->_context['schema'], this->stripNesting($field));
         }
 
@@ -313,7 +313,7 @@ class ArrayContext implements ContextInterface
             return [];
         }
         $schema = Hash::get(this->_context['schema'], $field);
-        if ($schema === null) {
+        if ($schema == null) {
             $schema = Hash::get(this->_context['schema'], this->stripNesting($field));
         }
 

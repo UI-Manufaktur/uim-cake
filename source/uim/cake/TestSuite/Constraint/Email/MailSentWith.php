@@ -55,7 +55,7 @@ class MailSentWith extends MailConstraintBase
         $emails = this->getMessages();
         foreach ($emails as $email) {
             $value = $email->{'get' . ucfirst(this->method)}();
-            if ($value === $other) {
+            if ($value == $other) {
                 return true;
             }
             if (

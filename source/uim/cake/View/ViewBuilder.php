@@ -568,14 +568,14 @@ class ViewBuilder implements JsonSerializable, Serializable
         ?EventManagerInterface $events = null
     ): View {
         $className = this->_className;
-        if ($className === null) {
+        if ($className == null) {
             $className = App::className('App', 'View', 'View') ?? View::class;
-        } elseif ($className === 'View') {
+        } elseif ($className == 'View') {
             $className = App::className($className, 'View');
         } else {
             $className = App::className($className, 'View', 'View');
         }
-        if ($className === null) {
+        if ($className == null) {
             throw new MissingViewException(['class' => this->_className]);
         }
 

@@ -96,7 +96,7 @@ abstract class SerializedView extends View
     {
         $serialize = this->getConfig('serialize', false);
 
-        if ($serialize === true) {
+        if ($serialize == true) {
             $options = array_map(
                 function ($v) {
                     return '_' . $v;

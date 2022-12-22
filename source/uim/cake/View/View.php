@@ -350,7 +350,7 @@ class View implements EventDispatcherInterface
         if ($eventManager != null) {
             this->setEventManager($eventManager);
         }
-        if ($request === null) {
+        if ($request == null) {
             $request = Router::getRequest() ?: new ServerRequest(['base' => '', 'url' => '', 'webroot' => '/']);
         }
         this->request = $request;
@@ -388,7 +388,7 @@ class View implements EventDispatcherInterface
         }
         $response = this->getResponse();
         $responseType = $response->getHeaderLine('Content-Type');
-        if ($responseType === '' || substr($responseType, 0, 9) === 'text/html') {
+        if ($responseType == '' || substr($responseType, 0, 9) == 'text/html') {
             $response = $response->withType($viewContentType);
         }
         this->setResponse($response);
@@ -794,7 +794,7 @@ class View implements EventDispatcherInterface
     {
         $defaultLayout = '';
         $defaultAutoLayout = null;
-        if ($layout === false) {
+        if ($layout == false) {
             $defaultAutoLayout = this->autoLayout;
             this->autoLayout = false;
         } elseif ($layout != null) {
@@ -851,7 +851,7 @@ class View implements EventDispatcherInterface
         this->dispatchEvent('View.beforeLayout', [$layoutFileName]);
 
         $title = this->Blocks->get('title');
-        if ($title === '') {
+        if ($title == '') {
             $title = Inflector::humanize(str_replace(DIRECTORY_SEPARATOR, '/', this->templatePath));
             this->Blocks->set('title', $title);
         }
@@ -901,7 +901,7 @@ class View implements EventDispatcherInterface
             if (is_array($value)) {
                 /** @var array|false $data */
                 $data = array_combine($name, $value);
-                if ($data === false) {
+                if ($data == false) {
                     throw new RuntimeException(
                         'Invalid data provided for array_combine() to work: Both $name and $value require same count.'
                     );
@@ -1076,7 +1076,7 @@ class View implements EventDispatcherInterface
      */
     function extend(string $name)
     {
-        $type = $name[0] === '/' ? static::TYPE_TEMPLATE : this->_currentType;
+        $type = $name[0] == '/' ? static::TYPE_TEMPLATE : this->_currentType;
         switch ($type) {
             case static::TYPE_ELEMENT:
                 $parent = this->_getElementFileName($name);
@@ -1097,10 +1097,10 @@ class View implements EventDispatcherInterface
                 $parent = this->_getTemplateFileName($name);
         }
 
-        if ($parent === this->_current) {
+        if ($parent == this->_current) {
             throw new LogicException('You cannot have templates extend themselves.');
         }
-        if (isset(this->_parents[$parent]) && this->_parents[$parent] === this->_current) {
+        if (isset(this->_parents[$parent]) && this->_parents[$parent] == this->_current) {
             throw new LogicException('You cannot have templates extend in a loop.');
         }
         this->_parents[this->_current] = $parent;
@@ -1236,7 +1236,7 @@ class View implements EventDispatcherInterface
      */
     function helpers(): HelperRegistry
     {
-        if (this->_helpers === null) {
+        if (this->_helpers == null) {
             this->_helpers = new HelperRegistry(this);
         }
 
@@ -1359,12 +1359,12 @@ class View implements EventDispatcherInterface
         if (this->subDir != '') {
             $subDir = this->subDir . DIRECTORY_SEPARATOR;
             // Check if templatePath already terminates with subDir
-            if ($templatePath != $subDir && substr($templatePath, -strlen($subDir)) === $subDir) {
+            if ($templatePath != $subDir && substr($templatePath, -strlen($subDir)) == $subDir) {
                 $subDir = '';
             }
         }
 
-        if ($name === null) {
+        if ($name == null) {
             $name = this->template;
         }
 
@@ -1375,10 +1375,10 @@ class View implements EventDispatcherInterface
         [$plugin, $name] = this->pluginSplit($name);
         $name = str_replace('/', DIRECTORY_SEPARATOR, $name);
 
-        if (strpos($name, DIRECTORY_SEPARATOR) === false && $name != '' && $name[0] != '.') {
+        if (strpos($name, DIRECTORY_SEPARATOR) == false && $name != '' && $name[0] != '.') {
             $name = $templatePath . $subDir . this->_inflectTemplateFileName($name);
         } elseif (strpos($name, DIRECTORY_SEPARATOR) != false) {
-            if ($name[0] === DIRECTORY_SEPARATOR || $name[1] === ':') {
+            if ($name[0] == DIRECTORY_SEPARATOR || $name[1] == ':') {
                 $name = trim($name, DIRECTORY_SEPARATOR);
             } elseif (!$plugin || this->templatePath != this->name) {
                 $name = $templatePath . $subDir . $name;
@@ -1422,7 +1422,7 @@ class View implements EventDispatcherInterface
      */
     protected function _checkFilePath(string $file, string $path): string
     {
-        if (strpos($file, '..') === false) {
+        if (strpos($file, '..') == false) {
             return $file;
         }
         $absolute = realpath($file);
@@ -1471,7 +1471,7 @@ class View implements EventDispatcherInterface
      */
     protected function _getLayoutFileName(?string $name = null): string
     {
-        if ($name === null) {
+        if ($name == null) {
             if (empty(this->layout)) {
                 throw new RuntimeException(
                     'View::$layout must be a non-empty string.' .
@@ -1590,8 +1590,8 @@ class View implements EventDispatcherInterface
      */
     protected function _paths(?string $plugin = null, bool $cached = true): array
     {
-        if ($cached === true) {
-            if ($plugin === null && !empty(this->_paths)) {
+        if ($cached == true) {
+            if ($plugin == null && !empty(this->_paths)) {
                 return this->_paths;
             }
             if ($plugin != null && isset(this->_pathsForPlugin[$plugin])) {

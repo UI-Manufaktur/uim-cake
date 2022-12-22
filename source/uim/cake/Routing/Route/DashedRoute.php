@@ -44,7 +44,7 @@ class DashedRoute extends Route
     protected function _camelizePlugin(string $plugin): string
     {
         $plugin = str_replace('-', '_', $plugin);
-        if (strpos($plugin, '/') === false) {
+        if (strpos($plugin, '/') == false) {
             return Inflector::camelize($plugin);
         }
         [$vendor, $plugin] = explode('/', $plugin, 2);

@@ -106,7 +106,7 @@ class RadioWidget extends BasicWidget
         }
 
         if (!empty($data['empty'])) {
-            $empty = $data['empty'] === true ? 'empty' : $data['empty'];
+            $empty = $data['empty'] == true ? 'empty' : $data['empty'];
             $options = ['' => $empty] + $options;
         }
         unset($data['empty']);
@@ -133,7 +133,7 @@ class RadioWidget extends BasicWidget
         if (!$disabled) {
             return false;
         }
-        if ($disabled === true) {
+        if ($disabled == true) {
             return true;
         }
         $isNumeric = is_numeric($radio['value']);
@@ -178,7 +178,7 @@ class RadioWidget extends BasicWidget
         if (isset($data['val']) && is_bool($data['val'])) {
             $data['val'] = $data['val'] ? 1 : 0;
         }
-        if (isset($data['val']) && (string)$data['val'] === (string)$radio['value']) {
+        if (isset($data['val']) && (string)$data['val'] == (string)$radio['value']) {
             $radio['checked'] = true;
             $radio['templateVars']['activeClass'] = 'active';
         }
@@ -215,8 +215,8 @@ class RadioWidget extends BasicWidget
         );
 
         if (
-            $label === false &&
-            strpos(this->_templates->get('radioWrapper'), '{{input}}') === false
+            $label == false &&
+            strpos(this->_templates->get('radioWrapper'), '{{input}}') == false
         ) {
             $label = $input;
         }
@@ -245,7 +245,7 @@ class RadioWidget extends BasicWidget
     {
         if (isset($radio['label'])) {
             $label = $radio['label'];
-        } elseif ($label === false) {
+        } elseif ($label == false) {
             return false;
         }
         $labelAttrs = is_array($label) ? $label : [];

@@ -52,11 +52,11 @@ class FixtureHelper
                 $name = array_pop($path);
                 $additionalPath = implode('\\', $path);
 
-                if ($type === 'core') {
+                if ($type == 'core') {
                     $baseNamespace = 'Cake';
-                } elseif ($type === 'app') {
+                } elseif ($type == 'app') {
                     $baseNamespace = Configure::read('App.namespace');
-                } elseif ($type === 'plugin') {
+                } elseif ($type == 'plugin') {
                     [$plugin, $name] = explode('.', $pathName);
                     $baseNamespace = str_replace('/', '\\', $plugin);
                     $additionalPath = null;
@@ -289,7 +289,7 @@ class FixtureHelper
         foreach ($schema->constraints() as $constraintName) {
             $constraint = $schema->getConstraint($constraintName);
 
-            if ($constraint && $constraint['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+            if ($constraint && $constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
                 $references[] = $constraint['references'][0];
             }
         }

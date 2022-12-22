@@ -111,7 +111,7 @@ trait TranslateStrategyTrait
         foreach ($translations as $locale => $translation) {
             $fields = $translation->extract(this->_config['fields'], false);
             foreach ($fields as $field => $value) {
-                if ($value === null || $value === '') {
+                if ($value == null || $value == '') {
                     $translation->unset($field);
                 }
             }
@@ -158,7 +158,7 @@ trait TranslateStrategyTrait
 
                 /** @var array<string, \Cake\Datasource\EntityInterface>|null $translations */
                 $translations = $entity->get('_translations');
-                if ($translations === null) {
+                if ($translations == null) {
                     $translations = [];
                 }
 

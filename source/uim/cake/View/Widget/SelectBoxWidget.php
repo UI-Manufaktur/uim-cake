@@ -182,7 +182,7 @@ class SelectBoxWidget extends BasicWidget
      */
     protected function _emptyValue($value): array
     {
-        if ($value === true) {
+        if ($value == true) {
             return ['' => ''];
         }
         if (is_scalar($value)) {
@@ -309,13 +309,13 @@ class SelectBoxWidget extends BasicWidget
      */
     protected function _isSelected(string $key, $selected): bool
     {
-        if ($selected === null) {
+        if ($selected == null) {
             return false;
         }
         if (!is_array($selected)) {
-            $selected = $selected === false ? '0' : $selected;
+            $selected = $selected == false ? '0' : $selected;
 
-            return $key === (string)$selected;
+            return $key == (string)$selected;
         }
         $strict = !is_numeric($key);
 
@@ -331,7 +331,7 @@ class SelectBoxWidget extends BasicWidget
      */
     protected function _isDisabled(string $key, ?array $disabled): bool
     {
-        if ($disabled === null) {
+        if ($disabled == null) {
             return false;
         }
         $strict = !is_numeric($key);

@@ -30,7 +30,7 @@ class HeaderNotSet extends HeaderSet
      */
     function matches($other): bool
     {
-        return parent::matches($other) === false;
+        return parent::matches($other) == false;
     }
 
     /**

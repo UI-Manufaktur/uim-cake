@@ -46,11 +46,11 @@ class TestSession
      */
     function check(?string $name = null): bool
     {
-        if (this->session === null) {
+        if (this->session == null) {
             return false;
         }
 
-        if ($name === null) {
+        if ($name == null) {
             return (bool)this->session;
         }
 
@@ -66,11 +66,11 @@ class TestSession
      */
     function read(?string $name = null)
     {
-        if (this->session === null) {
+        if (this->session == null) {
             return null;
         }
 
-        if ($name === null) {
+        if ($name == null) {
             return this->session ?: [];
         }
 

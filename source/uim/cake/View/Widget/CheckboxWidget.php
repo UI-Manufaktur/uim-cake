@@ -90,6 +90,6 @@ class CheckboxWidget extends BasicWidget
             return (bool)$data['checked'];
         }
 
-        return (string)$data['val'] === (string)$data['value'];
+        return (string)$data['val'] == (string)$data['value'];
     }
 }

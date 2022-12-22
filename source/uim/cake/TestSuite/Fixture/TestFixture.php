@@ -139,7 +139,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
      */
     function init(): void
     {
-        if (this->table === null) {
+        if (this->table == null) {
             this->table = this->_tableFromClass();
         }
 
@@ -180,7 +180,7 @@ class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchema
         $connection = ConnectionManager::get(this->connection());
         this->_schema = $connection->getDriver()->newTableSchema(this->table);
         foreach (this->fields as $field => $data) {
-            if ($field === '_constraints' || $field === '_indexes' || $field === '_options') {
+            if ($field == '_constraints' || $field == '_indexes' || $field == '_options') {
                 continue;
             }
             this->_schema->addColumn($field, $data);

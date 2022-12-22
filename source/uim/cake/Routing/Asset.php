@@ -169,7 +169,7 @@ class Asset
         }
         if (
             !empty($options['ext']) &&
-            strpos($path, '?') === false &&
+            strpos($path, '?') == false &&
             substr($path, -strlen($options['ext'])) != $options['ext']
         ) {
             $path .= $options['ext'];
@@ -214,7 +214,7 @@ class Asset
     protected static function encodeUrl(string $url): string
     {
         $path = parse_url($url, PHP_URL_PATH);
-        if ($path === false) {
+        if ($path == false) {
             $path = $url;
         }
 
@@ -227,7 +227,7 @@ class Asset
 
     /**
      * Adds a timestamp to a file based resource based on the value of `Asset.timestamp` in
-     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp === 'force'
+     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp == 'force'
      * a timestamp will be added.
      *
      * @param string $path The file path to timestamp, the path must be inside `App.wwwRoot` in Configure.
@@ -240,10 +240,10 @@ class Asset
             return $path;
         }
 
-        if ($timestamp === null) {
+        if ($timestamp == null) {
             $timestamp = Configure::read('Asset.timestamp');
         }
-        $timestampEnabled = $timestamp === 'force' || ($timestamp === true && Configure::read('debug'));
+        $timestampEnabled = $timestamp == 'force' || ($timestamp == true && Configure::read('debug'));
         if ($timestampEnabled) {
             $filepath = preg_replace(
                 '/^' . preg_quote(static::requestWebroot(), '/') . '/',
@@ -302,7 +302,7 @@ class Asset
             $file = trim($file, '/');
             $theme = static::inflectString($themeName) . '/';
 
-            if (DIRECTORY_SEPARATOR === '\\') {
+            if (DIRECTORY_SEPARATOR == '\\') {
                 $file = str_replace('/', '\\', $file);
             }
 
@@ -342,7 +342,7 @@ class Asset
     protected static function requestWebroot(): string
     {
         $request = Router::getRequest();
-        if ($request === null) {
+        if ($request == null) {
             return '/';
         }
 

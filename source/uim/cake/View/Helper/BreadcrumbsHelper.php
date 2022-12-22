@@ -188,7 +188,7 @@ class BreadcrumbsHelper extends Helper
     {
         $key = this->findCrumb($matchingTitle);
 
-        if ($key === null) {
+        if ($key == null) {
             throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
         }
 
@@ -218,7 +218,7 @@ class BreadcrumbsHelper extends Helper
     {
         $key = this->findCrumb($matchingTitle);
 
-        if ($key === null) {
+        if ($key == null) {
             throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
         }
 
@@ -337,7 +337,7 @@ class BreadcrumbsHelper extends Helper
     protected function findCrumb(string $title): ?int
     {
         foreach (this->crumbs as $key => $crumb) {
-            if ($crumb['title'] === $title) {
+            if ($crumb['title'] == $title) {
                 return $key;
             }
         }

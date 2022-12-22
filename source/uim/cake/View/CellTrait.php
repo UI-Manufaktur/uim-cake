@@ -59,7 +59,7 @@ trait CellTrait
     {
         $parts = explode('::', $cell);
 
-        if (count($parts) === 2) {
+        if (count($parts) == 2) {
             [$pluginAndCell, $action] = [$parts[0], $parts[1]];
         } else {
             [$pluginAndCell, $action] = [$parts[0], 'display'];

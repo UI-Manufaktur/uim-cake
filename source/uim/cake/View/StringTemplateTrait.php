@@ -76,7 +76,7 @@ trait StringTemplateTrait
      */
     function templater(): StringTemplate
     {
-        if (this->_templater === null) {
+        if (this->_templater == null) {
             /** @var class-string<\Cake\View\StringTemplate> $class */
             $class = this->getConfig('templateClass') ?: StringTemplate::class;
             this->_templater = new $class();

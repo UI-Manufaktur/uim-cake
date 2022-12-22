@@ -204,7 +204,7 @@ class MultiCheckboxWidget extends BasicWidget
             ),
         ]);
 
-        if ($checkbox['label'] === false && strpos(this->_templates->get('checkboxWrapper'), '{{input}}') === false) {
+        if ($checkbox['label'] == false && strpos(this->_templates->get('checkboxWrapper'), '{{input}}') == false) {
             $label = $input;
         } else {
             $labelAttrs = is_array($checkbox['label']) ? $checkbox['label'] : [];
@@ -240,11 +240,11 @@ class MultiCheckboxWidget extends BasicWidget
      */
     protected function _isSelected(string $key, $selected): bool
     {
-        if ($selected === null) {
+        if ($selected == null) {
             return false;
         }
         if (!is_array($selected)) {
-            return $key === (string)$selected;
+            return $key == (string)$selected;
         }
         $strict = !is_numeric($key);
 
@@ -260,10 +260,10 @@ class MultiCheckboxWidget extends BasicWidget
      */
     protected function _isDisabled(string $key, $disabled): bool
     {
-        if ($disabled === null || $disabled === false) {
+        if ($disabled == null || $disabled == false) {
             return false;
         }
-        if ($disabled === true || is_string($disabled)) {
+        if ($disabled == true || is_string($disabled)) {
             return true;
         }
         $strict = !is_numeric($key);

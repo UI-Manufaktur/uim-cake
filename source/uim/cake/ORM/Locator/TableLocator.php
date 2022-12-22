@@ -83,7 +83,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      */
     public this(?array $locations = null)
     {
-        if ($locations === null) {
+        if ($locations == null) {
             $locations = [
                 'Model/Table',
             ];
@@ -156,7 +156,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      */
     function getConfig(?string $alias = null): array
     {
-        if ($alias === null) {
+        if ($alias == null) {
             return this->_config;
         }
 
@@ -210,7 +210,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      */
     protected function createInstance(string $alias, array $options)
     {
-        if (strpos($alias, '\\') === false) {
+        if (strpos($alias, '\\') == false) {
             [, $classAlias] = pluginSplit($alias);
             $options = ['alias' => $classAlias] + $options;
         } elseif (!isset($options['alias'])) {
@@ -229,7 +229,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
             if (empty($options['className'])) {
                 $options['className'] = $alias;
             }
-            if (!isset($options['table']) && strpos($options['className'], '\\') === false) {
+            if (!isset($options['table']) && strpos($options['className'], '\\') == false) {
                 [, $table] = pluginSplit($options['className']);
                 $options['table'] = Inflector::underscore($table);
             }
@@ -237,7 +237,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
         } else {
             $message = $options['className'] ?? $alias;
             $message = '`' . $message . '`';
-            if (strpos($message, '\\') === false) {
+            if (strpos($message, '\\') == false) {
                 $message = 'for alias ' . $message;
             }
             throw new MissingTableClassException([$message]);
@@ -261,7 +261,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
         $options['registryAlias'] = $alias;
         $instance = this->_create($options);
 
-        if ($options['className'] === this->fallbackClassName) {
+        if ($options['className'] == this->fallbackClassName) {
             this->_fallbacked[$alias] = $instance;
         }
 

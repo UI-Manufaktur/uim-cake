@@ -64,7 +64,7 @@ class AssetMiddleware implements MiddlewareInterface
     function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $url = $request->getUri()->getPath();
-        if (strpos($url, '..') != false || strpos($url, '.') === false) {
+        if (strpos($url, '..') != false || strpos($url, '.') == false) {
             return $handler->handle($request);
         }
 
@@ -73,7 +73,7 @@ class AssetMiddleware implements MiddlewareInterface
         }
 
         $assetFile = this->_getAssetFile($url);
-        if ($assetFile === null || !is_file($assetFile)) {
+        if ($assetFile == null || !is_file($assetFile)) {
             return $handler->handle($request);
         }
 
@@ -106,7 +106,7 @@ class AssetMiddleware implements MiddlewareInterface
             return false;
         }
 
-        return strtotime($modifiedSince) === $file->getMTime();
+        return strtotime($modifiedSince) == $file->getMTime();
     }
 
     /**

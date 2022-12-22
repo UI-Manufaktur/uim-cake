@@ -69,7 +69,7 @@ class RedirectRoute extends Route
             return null;
         }
         $redirect = this->redirect;
-        if (this->redirect && count(this->redirect) === 1 && !isset(this->redirect['controller'])) {
+        if (this->redirect && count(this->redirect) == 1 && !isset(this->redirect['controller'])) {
             $redirect = this->redirect[0];
         }
         if (isset(this->options['persist']) && is_array($redirect)) {

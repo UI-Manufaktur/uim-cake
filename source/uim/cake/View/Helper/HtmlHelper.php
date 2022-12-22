@@ -150,7 +150,7 @@ class HtmlHelper extends Helper
                 'last' => ['rel' => 'last', 'link' => $content],
             ];
 
-            if ($type === 'icon' && $content === null) {
+            if ($type == 'icon' && $content == null) {
                 $types['icon']['link'] = 'favicon.ico';
             }
 
@@ -179,7 +179,7 @@ class HtmlHelper extends Helper
             } else {
                 $options['link'] = this->Url->assetUrl($options['link']);
             }
-            if (isset($options['rel']) && $options['rel'] === 'icon') {
+            if (isset($options['rel']) && $options['rel'] == 'icon') {
                 $out = this->formatTemplate('metalink', [
                     'url' => $options['link'],
                     'attrs' => this->templater()->formatAttributes($options, ['block', 'link']),
@@ -199,7 +199,7 @@ class HtmlHelper extends Helper
         if (empty($options['block'])) {
             return $out;
         }
-        if ($options['block'] === true) {
+        if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
         this->_View->append($options['block'], $out);
@@ -270,7 +270,7 @@ class HtmlHelper extends Helper
             $escapeTitle = $options['escape'];
         }
 
-        if ($escapeTitle === true) {
+        if ($escapeTitle == true) {
             $title = h($title);
         } elseif (is_string($escapeTitle)) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -405,7 +405,7 @@ class HtmlHelper extends Helper
         this->_includedAssets[__METHOD__][$path] = true;
 
         $templater = this->templater();
-        if ($options['rel'] === 'import') {
+        if ($options['rel'] == 'import') {
             $out = $templater->format('style', [
                 'attrs' => $templater->formatAttributes($options, ['rel', 'block']),
                 'content' => '@import url(' . $url . ');',
@@ -421,7 +421,7 @@ class HtmlHelper extends Helper
         if (empty($options['block'])) {
             return $out;
         }
-        if ($options['block'] === true) {
+        if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
         this->_View->append($options['block'], $out);
@@ -511,7 +511,7 @@ class HtmlHelper extends Helper
         if (empty($options['block'])) {
             return $out;
         }
-        if ($options['block'] === true) {
+        if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
         this->_View->append($options['block'], $out);
@@ -545,7 +545,7 @@ class HtmlHelper extends Helper
         if (empty($options['block'])) {
             return $out;
         }
-        if ($options['block'] === true) {
+        if ($options['block'] == true) {
             $options['block'] = 'script';
         }
         this->_View->append($options['block'], $out);
@@ -746,12 +746,12 @@ class HtmlHelper extends Helper
             $data = [$data];
         }
 
-        if ($oddTrOptions === true) {
+        if ($oddTrOptions == true) {
             $useCount = true;
             $oddTrOptions = null;
         }
 
-        if ($evenTrOptions === false) {
+        if ($evenTrOptions == false) {
             $continueOddEven = false;
             $evenTrOptions = null;
         }
@@ -861,7 +861,7 @@ class HtmlHelper extends Helper
             $text = h($text);
             unset($options['escape']);
         }
-        if ($text === null) {
+        if ($text == null) {
             $tag = 'tagstart';
         } else {
             $tag = 'tag';
@@ -917,7 +917,7 @@ class HtmlHelper extends Helper
             $options['class'] = $class;
         }
         $tag = 'para';
-        if ($text === null) {
+        if ($text == null) {
             $tag = 'parastart';
         }
 
@@ -1029,7 +1029,7 @@ class HtmlHelper extends Helper
             $options['src'] = this->Url->assetUrl($path, $options);
         }
 
-        if ($tag === null) {
+        if ($tag == null) {
             if (is_array($path)) {
                 $mimeType = $path[0]['type'];
             } else {
@@ -1108,7 +1108,7 @@ class HtmlHelper extends Helper
             if (is_array($item)) {
                 $item = $key . this->nestedList($item, $options, $itemOptions);
             }
-            if (isset($itemOptions['even']) && $index % 2 === 0) {
+            if (isset($itemOptions['even']) && $index % 2 == 0) {
                 $itemOptions['class'] = $itemOptions['even'];
             } elseif (isset($itemOptions['odd']) && $index % 2 != 0) {
                 $itemOptions['class'] = $itemOptions['odd'];

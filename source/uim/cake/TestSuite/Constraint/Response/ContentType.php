@@ -40,7 +40,7 @@ class ContentType extends ResponseBase
             $other = $alias;
         }
 
-        return $other === this->response->getType();
+        return $other == this->response->getType();
     }
 
     /**

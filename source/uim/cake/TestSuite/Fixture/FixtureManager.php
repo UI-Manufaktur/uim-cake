@@ -140,13 +140,13 @@ class FixtureManager
         ConnectionManager::alias('test', 'default');
         $map = [];
         foreach ($connections as $connection) {
-            if ($connection === 'test' || $connection === 'default') {
+            if ($connection == 'test' || $connection == 'default') {
                 continue;
             }
             if (isset($map[$connection])) {
                 continue;
             }
-            if (strpos($connection, 'test_') === 0) {
+            if (strpos($connection, 'test_') == 0) {
                 $map[$connection] = substr($connection, 5);
             } else {
                 $map['test_' . $connection] = $connection;
@@ -195,11 +195,11 @@ class FixtureManager
                 $name = array_pop($path);
                 $additionalPath = implode('\\', $path);
 
-                if ($type === 'core') {
+                if ($type == 'core') {
                     $baseNamespace = 'Cake';
-                } elseif ($type === 'app') {
+                } elseif ($type == 'app') {
                     $baseNamespace = Configure::read('App.namespace');
-                } elseif ($type === 'plugin') {
+                } elseif ($type == 'plugin') {
                     [$plugin, $name] = explode('.', $pathName);
                     $baseNamespace = str_replace('/', '\\', $plugin);
                     $additionalPath = null;

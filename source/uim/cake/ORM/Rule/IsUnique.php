@@ -77,7 +77,7 @@ class IsUnique
 
         $alias = $options['repository']->getAlias();
         $conditions = this->_alias($alias, $fields);
-        if ($entity->isNew() === false) {
+        if ($entity->isNew() == false) {
             $keys = (array)$options['repository']->getPrimaryKey();
             $keys = this->_alias($alias, $entity->extract($keys));
             if (Hash::filter($keys)) {
