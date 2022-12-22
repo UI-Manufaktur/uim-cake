@@ -39,8 +39,8 @@ class ScalarNode implements NodeInterface
      */
     public this(string $type, $value)
     {
-        $this->type = $type;
-        $this->value = $value;
+        this->type = $type;
+        this->value = $value;
     }
 
     /**
@@ -50,7 +50,7 @@ class ScalarNode implements NodeInterface
      */
     public function getType(): string
     {
-        return $this->type;
+        return this->type;
     }
 
     /**
@@ -60,7 +60,7 @@ class ScalarNode implements NodeInterface
      */
     public function getValue()
     {
-        return $this->value;
+        return this->value;
     }
 
     /**

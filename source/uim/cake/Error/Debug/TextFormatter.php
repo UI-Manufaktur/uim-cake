@@ -58,7 +58,7 @@ TEXT;
     {
         $indent = 0;
 
-        return $this->export($node, $indent);
+        return this->export($node, $indent);
     }
 
     /**
@@ -83,10 +83,10 @@ TEXT;
             }
         }
         if ($var instanceof ArrayNode) {
-            return $this->exportArray($var, $indent + 1);
+            return this->exportArray($var, $indent + 1);
         }
         if ($var instanceof ClassNode || $var instanceof ReferenceNode) {
-            return $this->exportObject($var, $indent + 1);
+            return this->exportObject($var, $indent + 1);
         }
         if ($var instanceof SpecialNode) {
             return $var->getValue();
@@ -110,7 +110,7 @@ TEXT;
 
         foreach ($var->getChildren() as $item) {
             $val = $item->getValue();
-            $vars[] = $break . $this->export($item->getKey(), $indent) . ' => ' . $this->export($val, $indent);
+            $vars[] = $break . this->export($item->getKey(), $indent) . ' => ' . this->export($val, $indent);
         }
         if (count($vars)) {
             return $out . implode(',', $vars) . $end . ']';
@@ -144,9 +144,9 @@ TEXT;
             $visibility = $property->getVisibility();
             $name = $property->getName();
             if ($visibility && $visibility !== 'public') {
-                $props[] = "[{$visibility}] {$name} => " . $this->export($property->getValue(), $indent);
+                $props[] = "[{$visibility}] {$name} => " . this->export($property->getValue(), $indent);
             } else {
-                $props[] = "{$name} => " . $this->export($property->getValue(), $indent);
+                $props[] = "{$name} => " . this->export($property->getValue(), $indent);
             }
         }
         if (count($props)) {

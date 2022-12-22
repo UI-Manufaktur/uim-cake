@@ -58,8 +58,8 @@ class HtmlErrorRenderer implements ErrorRendererInterface
             h(ucfirst($error->getLabel())),
             h($error->getCode())
         );
-        $toggle = $this->renderToggle($errorMessage, $id, 'trace');
-        $codeToggle = $this->renderToggle('Code', $id, 'code');
+        $toggle = this->renderToggle($errorMessage, $id, 'trace');
+        $codeToggle = this->renderToggle('Code', $id, 'code');
 
         $excerpt = [];
         if ($file && $line) {

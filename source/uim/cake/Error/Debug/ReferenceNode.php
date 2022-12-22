@@ -43,8 +43,8 @@ class ReferenceNode implements NodeInterface
      */
     public this(string $class, int $id)
     {
-        $this->class = $class;
-        $this->id = $id;
+        this->class = $class;
+        this->id = $id;
     }
 
     /**
@@ -54,7 +54,7 @@ class ReferenceNode implements NodeInterface
      */
     public function getValue(): string
     {
-        return $this->class;
+        return this->class;
     }
 
     /**
@@ -64,7 +64,7 @@ class ReferenceNode implements NodeInterface
      */
     public function getId(): int
     {
-        return $this->id;
+        return this->id;
     }
 
     /**

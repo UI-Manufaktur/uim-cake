@@ -33,11 +33,11 @@ class ConditionDecorator extends AbstractDecorator
     public function __invoke()
     {
         $args = func_get_args();
-        if (!$this->canTrigger($args[0])) {
+        if (!this->canTrigger($args[0])) {
             return;
         }
 
-        return $this->_call($args);
+        return this->_call($args);
     }
 
     /**
@@ -48,8 +48,8 @@ class ConditionDecorator extends AbstractDecorator
      */
     public function canTrigger(EventInterface $event): bool
     {
-        $if = $this->_evaluateCondition('if', $event);
-        $unless = $this->_evaluateCondition('unless', $event);
+        $if = this->_evaluateCondition('if', $event);
+        $unless = this->_evaluateCondition('unless', $event);
 
         return $if && !$unless;
     }
@@ -63,13 +63,13 @@ class ConditionDecorator extends AbstractDecorator
      */
     protected function _evaluateCondition(string $condition, EventInterface $event): bool
     {
-        if (!isset($this->_options[$condition])) {
+        if (!isset(this->_options[$condition])) {
             return $condition !== 'unless';
         }
-        if (!is_callable($this->_options[$condition])) {
+        if (!is_callable(this->_options[$condition])) {
             throw new RuntimeException(self::class . ' the `' . $condition . '` condition is not a callable!');
         }
 
-        return (bool)$this->_options[$condition]($event);
+        return (bool)this->_options[$condition]($event);
     }
 }

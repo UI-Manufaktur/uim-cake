@@ -102,12 +102,12 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
     public this(?EventManager $eventManager = null)
     {
         if ($eventManager !== null) {
-            $this->setEventManager($eventManager);
+            this->setEventManager($eventManager);
         }
 
-        $this->getEventManager()->on($this);
+        this->getEventManager()->on(this);
 
-        if (method_exists($this, '_buildValidator')) {
+        if (method_exists(this, '_buildValidator')) {
             deprecationWarning(
                 static::class . ' implements `_buildValidator` which is no longer used. ' .
                 'You should implement `buildValidator(Validator $validator, string $name): void` ' .
@@ -127,7 +127,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     public function implementedEvents(): array
     {
-        if (method_exists($this, 'buildValidator')) {
+        if (method_exists(this, 'buildValidator')) {
             return [
                 self::BUILD_VALIDATOR_EVENT => 'buildValidator',
             ];
@@ -141,13 +141,13 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      *
      * @since 4.1.0
      * @param \Cake\Form\Schema $schema The schema to set
-     * @return $this
+     * @return this
      */
     public function setSchema(Schema $schema)
     {
-        $this->_schema = $schema;
+        this->_schema = $schema;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -162,11 +162,11 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     public function getSchema(): Schema
     {
-        if ($this->_schema === null) {
-            $this->_schema = $this->_buildSchema(new $this->_schemaClass());
+        if (this->_schema === null) {
+            this->_schema = this->_buildSchema(new this->_schemaClass());
         }
 
-        return $this->_schema;
+        return this->_schema;
     }
 
     /**
@@ -184,10 +184,10 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
     {
         deprecationWarning('Form::schema() is deprecated. Use setSchema() and getSchema() instead.');
         if ($schema !== null) {
-            $this->setSchema($schema);
+            this->setSchema($schema);
         }
 
-        return $this->getSchema();
+        return this->getSchema();
     }
 
     /**
@@ -215,10 +215,10 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     public function validate(array $data, ?string $validator = null): bool
     {
-        $this->_errors = $this->getValidator($validator ?: static::DEFAULT_VALIDATOR)
+        this->_errors = this->getValidator($validator ?: static::DEFAULT_VALIDATOR)
             ->validate($data);
 
-        return count($this->_errors) === 0;
+        return count(this->_errors) === 0;
     }
 
     /**
@@ -231,7 +231,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     public function getErrors(): array
     {
-        return $this->_errors;
+        return this->_errors;
     }
 
     /**
@@ -246,13 +246,13 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * ```
      *
      * @param array $errors Errors list.
-     * @return $this
+     * @return this
      */
     public function setErrors(array $errors)
     {
-        $this->_errors = $errors;
+        this->_errors = $errors;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -275,17 +275,17 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     public function execute(array $data, array $options = []): bool
     {
-        $this->_data = $data;
+        this->_data = $data;
 
         $options += ['validate' => true];
 
         if ($options['validate'] === false) {
-            return $this->_execute($data);
+            return this->_execute($data);
         }
 
         $validator = $options['validate'] === true ? static::DEFAULT_VALIDATOR : $options['validate'];
 
-        return $this->validate($data, $validator) ? $this->_execute($data) : false;
+        return this->validate($data, $validator) ? this->_execute($data) : false;
     }
 
     /**
@@ -311,10 +311,10 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
     public function getData(?string $field = null)
     {
         if ($field === null) {
-            return $this->_data;
+            return this->_data;
         }
 
-        return Hash::get($this->_data, $field);
+        return Hash::get(this->_data, $field);
     }
 
     /**
@@ -323,7 +323,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @param array|string $name The key to write, can be a dot notation value.
      * Alternatively can be an array containing key(s) and value(s).
      * @param mixed $value Value to set for var
-     * @return $this
+     * @return this
      */
     public function set($name, $value = null)
     {
@@ -334,23 +334,23 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
 
         /** @psalm-suppress PossiblyInvalidIterator */
         foreach ($write as $key => $val) {
-            $this->_data = Hash::insert($this->_data, $key, $val);
+            this->_data = Hash::insert(this->_data, $key, $val);
         }
 
-        return $this;
+        return this;
     }
 
     /**
      * Set form data.
      *
      * @param array $data Data array.
-     * @return $this
+     * @return this
      */
     public function setData(array $data)
     {
-        $this->_data = $data;
+        this->_data = $data;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -361,11 +361,11 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
     public function __debugInfo(): array
     {
         $special = [
-            '_schema' => $this->getSchema()->__debugInfo(),
-            '_errors' => $this->getErrors(),
-            '_validator' => $this->getValidator()->__debugInfo(),
+            '_schema' => this->getSchema()->__debugInfo(),
+            '_errors' => this->getErrors(),
+            '_validator' => this->getValidator()->__debugInfo(),
         ];
 
-        return $special + get_object_vars($this);
+        return $special + get_object_vars(this);
     }
 }

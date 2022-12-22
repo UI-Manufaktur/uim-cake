@@ -96,10 +96,10 @@ abstract class BaseApplication implements
         ?EventManagerInterface $eventManager = null,
         ?ControllerFactoryInterface $controllerFactory = null
     ) {
-        $this->configDir = rtrim($configDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        $this->plugins = Plugin::getCollection();
-        $this->_eventManager = $eventManager ?: EventManager::instance();
-        $this->controllerFactory = $controllerFactory;
+        this->configDir = rtrim($configDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        this->plugins = Plugin::getCollection();
+        this->_eventManager = $eventManager ?: EventManager::instance();
+        this->controllerFactory = $controllerFactory;
     }
 
     /**
@@ -113,7 +113,7 @@ abstract class BaseApplication implements
      */
     public function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
-        foreach ($this->plugins->with('middleware') as $plugin) {
+        foreach (this->plugins->with('middleware') as $plugin) {
             $middleware = $plugin->middleware($middleware);
         }
 
@@ -126,13 +126,13 @@ abstract class BaseApplication implements
     public function addPlugin($name, array $config = [])
     {
         if (is_string($name)) {
-            $plugin = $this->plugins->create($name, $config);
+            $plugin = this->plugins->create($name, $config);
         } else {
             $plugin = $name;
         }
-        $this->plugins->add($plugin);
+        this->plugins->add($plugin);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -142,17 +142,17 @@ abstract class BaseApplication implements
      *
      * @param \Cake\Core\PluginInterface|string $name The plugin name or plugin object.
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
-     * @return $this
+     * @return this
      */
     public function addOptionalPlugin($name, array $config = [])
     {
         try {
-            $this->addPlugin($name, $config);
+            this->addPlugin($name, $config);
         } catch (MissingPluginException $e) {
             // Do not halt if the plugin is missing
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -162,7 +162,7 @@ abstract class BaseApplication implements
      */
     public function getPlugins(): PluginCollection
     {
-        return $this->plugins;
+        return this->plugins;
     }
 
     /**
@@ -170,7 +170,7 @@ abstract class BaseApplication implements
      */
     public function bootstrap(): void
     {
-        require_once $this->configDir . 'bootstrap.php';
+        require_once this->configDir . 'bootstrap.php';
     }
 
     /**
@@ -178,8 +178,8 @@ abstract class BaseApplication implements
      */
     public function pluginBootstrap(): void
     {
-        foreach ($this->plugins->with('bootstrap') as $plugin) {
-            $plugin->bootstrap($this);
+        foreach (this->plugins->with('bootstrap') as $plugin) {
+            $plugin->bootstrap(this);
         }
     }
 
@@ -195,7 +195,7 @@ abstract class BaseApplication implements
     {
         // Only load routes if the router is empty
         if (!Router::routes()) {
-            $return = require $this->configDir . 'routes.php';
+            $return = require this->configDir . 'routes.php';
             if ($return instanceof Closure) {
                 $return($routes);
             }
@@ -207,7 +207,7 @@ abstract class BaseApplication implements
      */
     public function pluginRoutes(RouteBuilder $routes): RouteBuilder
     {
-        foreach ($this->plugins->with('routes') as $plugin) {
+        foreach (this->plugins->with('routes') as $plugin) {
             $plugin->routes($routes);
         }
 
@@ -233,7 +233,7 @@ abstract class BaseApplication implements
      */
     public function pluginConsole(CommandCollection $commands): CommandCollection
     {
-        foreach ($this->plugins->with('console') as $plugin) {
+        foreach (this->plugins->with('console') as $plugin) {
             $commands = $plugin->console($commands);
         }
 
@@ -250,11 +250,11 @@ abstract class BaseApplication implements
      */
     public function getContainer(): ContainerInterface
     {
-        if ($this->container === null) {
-            $this->container = $this->buildContainer();
+        if (this->container === null) {
+            this->container = this->buildContainer();
         }
 
-        return $this->container;
+        return this->container;
     }
 
     /**
@@ -268,12 +268,12 @@ abstract class BaseApplication implements
     protected function buildContainer(): ContainerInterface
     {
         $container = new Container();
-        $this->services($container);
-        foreach ($this->plugins->with('services') as $plugin) {
+        this->services($container);
+        foreach (this->plugins->with('services') as $plugin) {
             $plugin->services($container);
         }
 
-        $event = $this->dispatchEvent('Application.buildContainer', ['container' => $container]);
+        $event = this->dispatchEvent('Application.buildContainer', ['container' => $container]);
         if ($event->getResult() instanceof ContainerInterface) {
             return $event->getResult();
         }
@@ -304,19 +304,19 @@ abstract class BaseApplication implements
     public function handle(
         ServerRequestInterface $request
     ): ResponseInterface {
-        $container = $this->getContainer();
+        $container = this->getContainer();
         $container->add(ServerRequest::class, $request);
 
-        if ($this->controllerFactory === null) {
-            $this->controllerFactory = new ControllerFactory($container);
+        if (this->controllerFactory === null) {
+            this->controllerFactory = new ControllerFactory($container);
         }
 
         if (Router::getRequest() !== $request) {
             Router::setRequest($request);
         }
 
-        $controller = $this->controllerFactory->create($request);
+        $controller = this->controllerFactory->create($request);
 
-        return $this->controllerFactory->invoke($controller);
+        return this->controllerFactory->invoke($controller);
     }
 }

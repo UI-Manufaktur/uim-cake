@@ -87,10 +87,10 @@ class ConsoleFormatter implements FormatterInterface
             $lineInfo = sprintf('%s (line %s)', $location['file'], $location['line']);
         }
         $parts = [
-            $this->style('const', $lineInfo),
-            $this->style('special', '########## DEBUG ##########'),
+            this->style('const', $lineInfo),
+            this->style('special', '########## DEBUG ##########'),
             $contents,
-            $this->style('special', '###########################'),
+            this->style('special', '###########################'),
             '',
         ];
 
@@ -107,7 +107,7 @@ class ConsoleFormatter implements FormatterInterface
     {
         $indent = 0;
 
-        return $this->export($node, $indent);
+        return this->export($node, $indent);
     }
 
     /**
@@ -122,27 +122,27 @@ class ConsoleFormatter implements FormatterInterface
         if ($var instanceof ScalarNode) {
             switch ($var->getType()) {
                 case 'bool':
-                    return $this->style('const', $var->getValue() ? 'true' : 'false');
+                    return this->style('const', $var->getValue() ? 'true' : 'false');
                 case 'null':
-                    return $this->style('const', 'null');
+                    return this->style('const', 'null');
                 case 'string':
-                    return $this->style('string', "'" . (string)$var->getValue() . "'");
+                    return this->style('string', "'" . (string)$var->getValue() . "'");
                 case 'int':
                 case 'float':
-                    return $this->style('visibility', "({$var->getType()})") .
-                        ' ' . $this->style('number', "{$var->getValue()}");
+                    return this->style('visibility', "({$var->getType()})") .
+                        ' ' . this->style('number', "{$var->getValue()}");
                 default:
                     return "({$var->getType()}) {$var->getValue()}";
             }
         }
         if ($var instanceof ArrayNode) {
-            return $this->exportArray($var, $indent + 1);
+            return this->exportArray($var, $indent + 1);
         }
         if ($var instanceof ClassNode || $var instanceof ReferenceNode) {
-            return $this->exportObject($var, $indent + 1);
+            return this->exportObject($var, $indent + 1);
         }
         if ($var instanceof SpecialNode) {
-            return $this->style('special', $var->getValue());
+            return this->style('special', $var->getValue());
         }
         throw new RuntimeException('Unknown node received ' . get_class($var));
     }
@@ -156,20 +156,20 @@ class ConsoleFormatter implements FormatterInterface
      */
     protected function exportArray(ArrayNode $var, int $indent): string
     {
-        $out = $this->style('punct', '[');
+        $out = this->style('punct', '[');
         $break = "\n" . str_repeat('  ', $indent);
         $end = "\n" . str_repeat('  ', $indent - 1);
         $vars = [];
 
-        $arrow = $this->style('punct', ' => ');
+        $arrow = this->style('punct', ' => ');
         foreach ($var->getChildren() as $item) {
             $val = $item->getValue();
-            $vars[] = $break . $this->export($item->getKey(), $indent) . $arrow . $this->export($val, $indent);
+            $vars[] = $break . this->export($item->getKey(), $indent) . $arrow . this->export($val, $indent);
         }
 
-        $close = $this->style('punct', ']');
+        $close = this->style('punct', ']');
         if (count($vars)) {
-            return $out . implode($this->style('punct', ','), $vars) . $end . $close;
+            return $out . implode(this->style('punct', ','), $vars) . $end . $close;
         }
 
         return $out . $close;
@@ -188,43 +188,43 @@ class ConsoleFormatter implements FormatterInterface
         $props = [];
 
         if ($var instanceof ReferenceNode) {
-            return $this->style('punct', 'object(') .
-                $this->style('class', $var->getValue()) .
-                $this->style('punct', ') id:') .
-                $this->style('number', (string)$var->getId()) .
-                $this->style('punct', ' {}');
+            return this->style('punct', 'object(') .
+                this->style('class', $var->getValue()) .
+                this->style('punct', ') id:') .
+                this->style('number', (string)$var->getId()) .
+                this->style('punct', ' {}');
         }
 
-        $out = $this->style('punct', 'object(') .
-            $this->style('class', $var->getValue()) .
-            $this->style('punct', ') id:') .
-            $this->style('number', (string)$var->getId()) .
-            $this->style('punct', ' {');
+        $out = this->style('punct', 'object(') .
+            this->style('class', $var->getValue()) .
+            this->style('punct', ') id:') .
+            this->style('number', (string)$var->getId()) .
+            this->style('punct', ' {');
 
         $break = "\n" . str_repeat('  ', $indent);
-        $end = "\n" . str_repeat('  ', $indent - 1) . $this->style('punct', '}');
+        $end = "\n" . str_repeat('  ', $indent - 1) . this->style('punct', '}');
 
-        $arrow = $this->style('punct', ' => ');
+        $arrow = this->style('punct', ' => ');
         foreach ($var->getChildren() as $property) {
             $visibility = $property->getVisibility();
             $name = $property->getName();
             if ($visibility && $visibility !== 'public') {
-                $props[] = $this->style('visibility', $visibility) .
+                $props[] = this->style('visibility', $visibility) .
                     ' ' .
-                    $this->style('property', $name) .
+                    this->style('property', $name) .
                     $arrow .
-                    $this->export($property->getValue(), $indent);
+                    this->export($property->getValue(), $indent);
             } else {
-                $props[] = $this->style('property', $name) .
+                $props[] = this->style('property', $name) .
                     $arrow .
-                    $this->export($property->getValue(), $indent);
+                    this->export($property->getValue(), $indent);
             }
         }
         if (count($props)) {
             return $out . $break . implode($break, $props) . $end;
         }
 
-        return $out . $this->style('punct', '}');
+        return $out . this->style('punct', '}');
     }
 
     /**
@@ -236,7 +236,7 @@ class ConsoleFormatter implements FormatterInterface
      */
     protected function style(string $style, string $text): string
     {
-        $code = $this->styles[$style];
+        $code = this->styles[$style];
 
         return "\033[{$code}m{$text}\033[0m";
     }

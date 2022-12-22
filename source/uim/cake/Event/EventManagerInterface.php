@@ -53,7 +53,7 @@ interface EventManagerInterface
      * added to the same priority queue will be treated in the order of insertion.
      *
      * @param callable|null $callable The callable function you want invoked.
-     * @return $this
+     * @return this
      * @throws \InvalidArgumentException When event key is missing or callable is not an
      *   instance of Cake\Event\EventListenerInterface.
      */
@@ -89,7 +89,7 @@ interface EventManagerInterface
      * @param \Cake\Event\EventListenerInterface|callable|string $eventKey The event unique identifier name
      *   with which the callback has been associated, or the $listener you want to remove.
      * @param \Cake\Event\EventListenerInterface|callable|null $callable The callback you want to detach.
-     * @return $this
+     * @return this
      */
     public function off($eventKey, $callable = null);
 

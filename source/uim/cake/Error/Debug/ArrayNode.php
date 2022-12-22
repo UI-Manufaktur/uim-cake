@@ -33,9 +33,9 @@ class ArrayNode implements NodeInterface
      */
     public this(array $items = [])
     {
-        $this->items = [];
+        this->items = [];
         foreach ($items as $item) {
-            $this->add($item);
+            this->add($item);
         }
     }
 
@@ -47,7 +47,7 @@ class ArrayNode implements NodeInterface
      */
     public function add(ArrayItemNode $node): void
     {
-        $this->items[] = $node;
+        this->items[] = $node;
     }
 
     /**
@@ -57,7 +57,7 @@ class ArrayNode implements NodeInterface
      */
     public function getValue(): array
     {
-        return $this->items;
+        return this->items;
     }
 
     /**
@@ -67,6 +67,6 @@ class ArrayNode implements NodeInterface
      */
     public function getChildren(): array
     {
-        return $this->items;
+        return this->items;
     }
 }

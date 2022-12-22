@@ -24,7 +24,7 @@ class ContentTypeNegotiation
     {
         $header = $request->getHeaderLine('Accept');
 
-        return $this->parseQualifiers($header);
+        return this->parseQualifiers($header);
     }
 
     /**
@@ -40,7 +40,7 @@ class ContentTypeNegotiation
     {
         $header = $request->getHeaderLine('Accept-Language');
 
-        return $this->parseQualifiers($header);
+        return this->parseQualifiers($header);
     }
 
     /**
@@ -100,7 +100,7 @@ class ContentTypeNegotiation
      */
     public function preferredType(RequestInterface $request, array $choices = []): ?string
     {
-        $parsed = $this->parseAccept($request);
+        $parsed = this->parseAccept($request);
         if (empty($parsed)) {
             return null;
         }
@@ -131,7 +131,7 @@ class ContentTypeNegotiation
      */
     public function acceptedLanguages(RequestInterface $request): array
     {
-        $raw = $this->parseAcceptLanguage($request);
+        $raw = this->parseAcceptLanguage($request);
         $accept = [];
         foreach ($raw as $languages) {
             foreach ($languages as &$lang) {
@@ -158,7 +158,7 @@ class ContentTypeNegotiation
      */
     public function acceptLanguage(RequestInterface $request, string $lang): bool
     {
-        $accept = $this->acceptedLanguages($request);
+        $accept = this->acceptedLanguages($request);
 
         return in_array(strtolower($lang), $accept, true);
     }

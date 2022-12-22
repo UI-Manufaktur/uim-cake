@@ -38,7 +38,7 @@ class EventList implements ArrayAccess, Countable
      */
     public function flush(): void
     {
-        $this->_events = [];
+        this->_events = [];
     }
 
     /**
@@ -49,7 +49,7 @@ class EventList implements ArrayAccess, Countable
      */
     public function add(EventInterface $event): void
     {
-        $this->_events[] = $event;
+        this->_events[] = $event;
     }
 
     /**
@@ -61,7 +61,7 @@ class EventList implements ArrayAccess, Countable
      */
     public function offsetExists($offset): bool
     {
-        return isset($this->_events[$offset]);
+        return isset(this->_events[$offset]);
     }
 
     /**
@@ -74,8 +74,8 @@ class EventList implements ArrayAccess, Countable
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        if ($this->offsetExists($offset)) {
-            return $this->_events[$offset];
+        if (this->offsetExists($offset)) {
+            return this->_events[$offset];
         }
 
         return null;
@@ -91,7 +91,7 @@ class EventList implements ArrayAccess, Countable
      */
     public function offsetSet($offset, $value): void
     {
-        $this->_events[$offset] = $value;
+        this->_events[$offset] = $value;
     }
 
     /**
@@ -103,7 +103,7 @@ class EventList implements ArrayAccess, Countable
      */
     public function offsetUnset($offset): void
     {
-        unset($this->_events[$offset]);
+        unset(this->_events[$offset]);
     }
 
     /**
@@ -114,7 +114,7 @@ class EventList implements ArrayAccess, Countable
      */
     public function count(): int
     {
-        return count($this->_events);
+        return count(this->_events);
     }
 
     /**
@@ -125,7 +125,7 @@ class EventList implements ArrayAccess, Countable
      */
     public function hasEvent(string $name): bool
     {
-        foreach ($this->_events as $event) {
+        foreach (this->_events as $event) {
             if ($event->getName() === $name) {
                 return true;
             }

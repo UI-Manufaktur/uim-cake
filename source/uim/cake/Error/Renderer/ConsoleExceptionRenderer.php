@@ -56,9 +56,9 @@ class ConsoleExceptionRenderer
      */
     public this(Throwable $error, ?ServerRequestInterface $request, array $config)
     {
-        $this->error = $error;
-        $this->output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
-        $this->trace = $config['trace'] ?? true;
+        this->error = $error;
+        this->output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
+        this->trace = $config['trace'] ?? true;
     }
 
     /**
@@ -68,15 +68,15 @@ class ConsoleExceptionRenderer
      */
     public function render()
     {
-        $exceptions = [$this->error];
-        $previous = $this->error->getPrevious();
+        $exceptions = [this->error];
+        $previous = this->error->getPrevious();
         while ($previous !== null) {
             $exceptions[] = $previous;
             $previous = $previous->getPrevious();
         }
         $out = [];
         foreach ($exceptions as $i => $error) {
-            $out = array_merge($out, $this->renderException($error, $i));
+            $out = array_merge($out, this->renderException($error, $i));
         }
 
         return join("\n", $out);
@@ -113,7 +113,7 @@ class ConsoleExceptionRenderer
             }
         }
 
-        if ($this->trace) {
+        if (this->trace) {
             $out[] = '';
             $out[] = '<info>Stack Trace:</info>';
             $out[] = '';
@@ -132,6 +132,6 @@ class ConsoleExceptionRenderer
      */
     public function write($output): void
     {
-        $this->output->write($output);
+        this->output->write($output);
     }
 }

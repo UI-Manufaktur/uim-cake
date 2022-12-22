@@ -46,11 +46,11 @@ trait EventDispatcherTrait
      */
     public function getEventManager(): EventManagerInterface
     {
-        if ($this->_eventManager === null) {
-            $this->_eventManager = new EventManager();
+        if (this->_eventManager === null) {
+            this->_eventManager = new EventManager();
         }
 
-        return $this->_eventManager;
+        return this->_eventManager;
     }
 
     /**
@@ -60,13 +60,13 @@ trait EventDispatcherTrait
      * object events, or create your own events and trigger them at will.
      *
      * @param \Cake\Event\EventManagerInterface $eventManager the eventManager to set
-     * @return $this
+     * @return this
      */
     public function setEventManager(EventManagerInterface $eventManager)
     {
-        $this->_eventManager = $eventManager;
+        this->_eventManager = $eventManager;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -78,18 +78,18 @@ trait EventDispatcherTrait
      * @param array|null $data Any value you wish to be transported with this event to
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
-     * ($this by default).
+     * (this by default).
      * @return \Cake\Event\EventInterface
      */
     public function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface
     {
         if ($subject === null) {
-            $subject = $this;
+            $subject = this;
         }
 
         /** @var \Cake\Event\EventInterface $event */
-        $event = new $this->_eventClass($name, $subject, $data);
-        $this->getEventManager()->dispatch($event);
+        $event = new this->_eventClass($name, $subject, $data);
+        this->getEventManager()->dispatch($event);
 
         return $event;
     }

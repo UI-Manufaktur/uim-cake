@@ -63,7 +63,7 @@ class Filesystem
             return $directory;
         }
 
-        return $this->filterIterator($directory, $filter);
+        return this->filterIterator($directory, $filter);
     }
 
     /**
@@ -103,7 +103,7 @@ class Filesystem
             return $flatten;
         }
 
-        return $this->filterIterator($flatten, $filter);
+        return this->filterIterator($flatten, $filter);
     }
 
     /**
@@ -134,12 +134,12 @@ class Filesystem
     {
         $dir = dirname($filename);
         if (!is_dir($dir)) {
-            $this->mkdir($dir);
+            this->mkdir($dir);
         }
 
         $exists = file_exists($filename);
 
-        if ($this->isStream($filename)) {
+        if (this->isStream($filename)) {
             // phpcs:ignore
             $success = @file_put_contents($filename, $content);
         } else {
@@ -238,7 +238,7 @@ class Filesystem
         $destination = (new SplFileInfo($destination))->getPathname();
 
         if (!is_dir($destination)) {
-            $this->mkdir($destination);
+            this->mkdir($destination);
         }
 
         $iterator = new FilesystemIterator($source);
@@ -246,7 +246,7 @@ class Filesystem
         $result = true;
         foreach ($iterator as $fileInfo) {
             if ($fileInfo->isDir()) {
-                $result = $result && $this->copyDir(
+                $result = $result && this->copyDir(
                     $fileInfo->getPathname(),
                     $destination . DIRECTORY_SEPARATOR . $fileInfo->getFilename()
                 );

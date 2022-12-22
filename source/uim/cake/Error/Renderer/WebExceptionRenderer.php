@@ -131,9 +131,9 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      */
     public this(Throwable $exception, ?ServerRequest $request = null)
     {
-        $this->error = $exception;
-        $this->request = $request;
-        $this->controller = $this->_getController();
+        this->error = $exception;
+        this->request = $request;
+        this->controller = this->_getController();
     }
 
     /**
@@ -147,7 +147,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      */
     protected function _getController(): Controller
     {
-        $request = $this->request;
+        $request = this->request;
         $routerRequest = Router::getRequest();
         // Fallback to the request in the router or make a new one from
         // $_SERVER
@@ -221,19 +221,19 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      */
     public function render(): ResponseInterface
     {
-        $exception = $this->error;
-        $code = $this->getHttpCode($exception);
-        $method = $this->_method($exception);
-        $template = $this->_template($exception, $method, $code);
-        $this->clearOutput();
+        $exception = this->error;
+        $code = this->getHttpCode($exception);
+        $method = this->_method($exception);
+        $template = this->_template($exception, $method, $code);
+        this->clearOutput();
 
-        if (method_exists($this, $method)) {
-            return $this->_customMethod($method, $exception);
+        if (method_exists(this, $method)) {
+            return this->_customMethod($method, $exception);
         }
 
-        $message = $this->_message($exception, $code);
-        $url = $this->controller->getRequest()->getRequestTarget();
-        $response = $this->controller->getResponse();
+        $message = this->_message($exception, $code);
+        $url = this->controller->getRequest()->getRequestTarget();
+        $response = this->controller->getResponse();
 
         if ($exception instanceof CakeException) {
             /** @psalm-suppress DeprecatedMethod */
@@ -281,15 +281,15 @@ class WebExceptionRenderer implements ExceptionRendererInterface
             $serialize[] = 'file';
             $serialize[] = 'line';
         }
-        $this->controller->set($viewVars);
-        $this->controller->viewBuilder()->setOption('serialize', $serialize);
+        this->controller->set($viewVars);
+        this->controller->viewBuilder()->setOption('serialize', $serialize);
 
         if ($exception instanceof CakeException && $isDebug) {
-            $this->controller->set($exception->getAttributes());
+            this->controller->set($exception->getAttributes());
         }
-        $this->controller->setResponse($response);
+        this->controller->setResponse($response);
 
-        return $this->_outputMessage($template);
+        return this->_outputMessage($template);
     }
 
     /**
@@ -319,10 +319,10 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      */
     protected function _customMethod(string $method, Throwable $exception): Response
     {
-        $result = $this->{$method}($exception);
-        $this->_shutdown();
+        $result = this->{$method}($exception);
+        this->_shutdown();
         if (is_string($result)) {
-            $result = $this->controller->getResponse()->withStringBody($result);
+            $result = this->controller->getResponse()->withStringBody($result);
         }
 
         return $result;
@@ -345,7 +345,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
         // $baseClass would be an empty string if the exception class is \Exception.
         $method = $baseClass === '' ? 'error500' : Inflector::variable($baseClass);
 
-        return $this->method = $method;
+        return this->method = $method;
     }
 
     /**
@@ -384,14 +384,14 @@ class WebExceptionRenderer implements ExceptionRendererInterface
     protected function _template(Throwable $exception, string $method, int $code): string
     {
         if ($exception instanceof HttpException || !Configure::read('debug')) {
-            return $this->template = $code < 500 ? 'error400' : 'error500';
+            return this->template = $code < 500 ? 'error400' : 'error500';
         }
 
         if ($exception instanceof PDOException) {
-            return $this->template = 'pdo_error';
+            return this->template = 'pdo_error';
         }
 
-        return $this->template = $method;
+        return this->template = $method;
     }
 
     /**
@@ -406,7 +406,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
             return $exception->getCode();
         }
 
-        return $this->exceptionHttpCodes[get_class($exception)] ?? 500;
+        return this->exceptionHttpCodes[get_class($exception)] ?? 500;
     }
 
     /**
@@ -418,29 +418,29 @@ class WebExceptionRenderer implements ExceptionRendererInterface
     protected function _outputMessage(string $template): Response
     {
         try {
-            $this->controller->render($template);
+            this->controller->render($template);
 
-            return $this->_shutdown();
+            return this->_shutdown();
         } catch (MissingTemplateException $e) {
             $attributes = $e->getAttributes();
             if (
                 $e instanceof MissingLayoutException ||
                 strpos($attributes['file'], 'error500') !== false
             ) {
-                return $this->_outputMessageSafe('error500');
+                return this->_outputMessageSafe('error500');
             }
 
-            return $this->_outputMessage('error500');
+            return this->_outputMessage('error500');
         } catch (MissingPluginException $e) {
             $attributes = $e->getAttributes();
-            if (isset($attributes['plugin']) && $attributes['plugin'] === $this->controller->getPlugin()) {
-                $this->controller->setPlugin(null);
+            if (isset($attributes['plugin']) && $attributes['plugin'] === this->controller->getPlugin()) {
+                this->controller->setPlugin(null);
             }
 
-            return $this->_outputMessageSafe('error500');
+            return this->_outputMessageSafe('error500');
         } catch (Throwable $outer) {
             try {
-                return $this->_outputMessageSafe('error500');
+                return this->_outputMessageSafe('error500');
             } catch (Throwable $inner) {
                 throw $outer;
             }
@@ -456,17 +456,17 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      */
     protected function _outputMessageSafe(string $template): Response
     {
-        $builder = $this->controller->viewBuilder();
+        $builder = this->controller->viewBuilder();
         $builder
             ->setHelpers([], false)
             ->setLayoutPath('')
             ->setTemplatePath('Error');
-        $view = $this->controller->createView('View');
+        $view = this->controller->createView('View');
 
-        $response = $this->controller->getResponse()
+        $response = this->controller->getResponse()
             ->withType('html')
             ->withStringBody($view->render($template, 'error'));
-        $this->controller->setResponse($response);
+        this->controller->setResponse($response);
 
         return $response;
     }
@@ -480,9 +480,9 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      */
     protected function _shutdown(): Response
     {
-        $this->controller->dispatchEvent('Controller.shutdown');
+        this->controller->dispatchEvent('Controller.shutdown');
 
-        return $this->controller->getResponse();
+        return this->controller->getResponse();
     }
 
     /**
@@ -494,11 +494,11 @@ class WebExceptionRenderer implements ExceptionRendererInterface
     public function __debugInfo(): array
     {
         return [
-            'error' => $this->error,
-            'request' => $this->request,
-            'controller' => $this->controller,
-            'template' => $this->template,
-            'method' => $this->method,
+            'error' => this->error,
+            'request' => this->request,
+            'controller' => this->controller,
+            'template' => this->template,
+            'method' => this->method,
         ];
     }
 }

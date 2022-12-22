@@ -36,7 +36,7 @@ interface EventDispatcherInterface
      * @param array|null $data Any value you wish to be transported with this event to
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
-     * ($this by default).
+     * (this by default).
      * @return \Cake\Event\EventInterface
      */
     public function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface;
@@ -48,7 +48,7 @@ interface EventDispatcherInterface
      * object events, or create your own events and trigger them at will.
      *
      * @param \Cake\Event\EventManagerInterface $eventManager the eventManager to set
-     * @return $this
+     * @return this
      */
     public function setEventManager(EventManagerInterface $eventManager);
 

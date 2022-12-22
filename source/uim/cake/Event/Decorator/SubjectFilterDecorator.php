@@ -37,11 +37,11 @@ class SubjectFilterDecorator extends AbstractDecorator
     public function __invoke()
     {
         $args = func_get_args();
-        if (!$this->canTrigger($args[0])) {
+        if (!this->canTrigger($args[0])) {
             return false;
         }
 
-        return $this->_call($args);
+        return this->_call($args);
     }
 
     /**
@@ -52,11 +52,11 @@ class SubjectFilterDecorator extends AbstractDecorator
      */
     public function canTrigger(EventInterface $event): bool
     {
-        if (!isset($this->_options['allowedSubject'])) {
+        if (!isset(this->_options['allowedSubject'])) {
             throw new RuntimeException(self::class . ' Missing subject filter options!');
         }
-        if (is_string($this->_options['allowedSubject'])) {
-            $this->_options['allowedSubject'] = [$this->_options['allowedSubject']];
+        if (is_string(this->_options['allowedSubject'])) {
+            this->_options['allowedSubject'] = [this->_options['allowedSubject']];
         }
 
         try {
@@ -65,6 +65,6 @@ class SubjectFilterDecorator extends AbstractDecorator
             return false;
         }
 
-        return in_array(get_class($subject), $this->_options['allowedSubject'], true);
+        return in_array(get_class($subject), this->_options['allowedSubject'], true);
     }
 }

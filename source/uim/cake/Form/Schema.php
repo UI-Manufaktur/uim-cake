@@ -44,15 +44,15 @@ class Schema
      * Add multiple fields to the schema.
      *
      * @param array<string, array<string, mixed>|string> $fields The fields to add.
-     * @return $this
+     * @return this
      */
     public function addFields(array $fields)
     {
         foreach ($fields as $name => $attrs) {
-            $this->addField($name, $attrs);
+            this->addField($name, $attrs);
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -61,30 +61,30 @@ class Schema
      * @param string $name The field name.
      * @param array<string, mixed>|string $attrs The attributes for the field, or the type
      *   as a string.
-     * @return $this
+     * @return this
      */
     public function addField(string $name, $attrs)
     {
         if (is_string($attrs)) {
             $attrs = ['type' => $attrs];
         }
-        $attrs = array_intersect_key($attrs, $this->_fieldDefaults);
-        $this->_fields[$name] = $attrs + $this->_fieldDefaults;
+        $attrs = array_intersect_key($attrs, this->_fieldDefaults);
+        this->_fields[$name] = $attrs + this->_fieldDefaults;
 
-        return $this;
+        return this;
     }
 
     /**
      * Removes a field to the schema.
      *
      * @param string $name The field to remove.
-     * @return $this
+     * @return this
      */
     public function removeField(string $name)
     {
-        unset($this->_fields[$name]);
+        unset(this->_fields[$name]);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -94,7 +94,7 @@ class Schema
      */
     public function fields(): array
     {
-        return array_keys($this->_fields);
+        return array_keys(this->_fields);
     }
 
     /**
@@ -105,7 +105,7 @@ class Schema
      */
     public function field(string $name): ?array
     {
-        return $this->_fields[$name] ?? null;
+        return this->_fields[$name] ?? null;
     }
 
     /**
@@ -117,7 +117,7 @@ class Schema
      */
     public function fieldType(string $name): ?string
     {
-        $field = $this->field($name);
+        $field = this->field($name);
         if (!$field) {
             return null;
         }
@@ -133,7 +133,7 @@ class Schema
     public function __debugInfo(): array
     {
         return [
-            '_fields' => $this->_fields,
+            '_fields' => this->_fields,
         ];
     }
 }
