@@ -151,7 +151,7 @@ class RedisEngine extends CacheEngine
         $value = this->serialize($value);
 
         $duration = this->duration($ttl);
-        if ($duration === 0) {
+        if ($duration == 0) {
             return this->_Redis->set($key, $value);
         }
 
@@ -169,7 +169,7 @@ class RedisEngine extends CacheEngine
     function get($key, $default = null)
     {
         $value = this->_Redis->get(this->_key($key));
-        if ($value === false) {
+        if ($value == false) {
             return $default;
         }
 
@@ -260,7 +260,7 @@ class RedisEngine extends CacheEngine
         while (true) {
             $keys = this->_Redis->scan($iterator, $pattern, (int)this->_config['scanCount']);
 
-            if ($keys === false) {
+            if ($keys == false) {
                 break;
             }
 
@@ -291,7 +291,7 @@ class RedisEngine extends CacheEngine
         while (true) {
             $keys = this->_Redis->scan($iterator, $pattern, (int)this->_config['scanCount']);
 
-            if ($keys === false) {
+            if ($keys == false) {
                 break;
             }
 

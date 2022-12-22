@@ -93,7 +93,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
     #[\ReturnTypeWillChange]
     function current()
     {
-        if (this->_callback === null) {
+        if (this->_callback == null) {
             return parent::current();
         }
 

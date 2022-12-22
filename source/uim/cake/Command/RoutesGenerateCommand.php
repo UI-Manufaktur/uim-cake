@@ -72,7 +72,7 @@ class RoutesGenerateCommand extends Command
             if (strpos($arg, ':') != false) {
                 [$key, $value] = explode(':', $arg);
                 if (in_array($value, ['true', 'false'], true)) {
-                    $value = $value === 'true';
+                    $value = $value == 'true';
                 }
                 $out[$key] = $value;
             } else {

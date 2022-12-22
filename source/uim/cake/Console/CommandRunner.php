@@ -172,7 +172,7 @@ class CommandRunner implements EventDispatcherInterface
             $result = this->runCommand($shell, $argv, $io);
         }
 
-        if ($result === null || $result === true) {
+        if ($result == null || $result == true) {
             return CommandInterface::CODE_SUCCESS;
         }
         if (is_int($result) && $result >= 0 && $result <= 255) {

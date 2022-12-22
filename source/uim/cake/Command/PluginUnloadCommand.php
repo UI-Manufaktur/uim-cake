@@ -84,7 +84,7 @@ class PluginUnloadCommand extends Command
         $content = file_get_contents($app);
         $newContent = preg_replace($finder, '', $content);
 
-        if ($newContent === $content) {
+        if ($newContent == $content) {
             return false;
         }
 

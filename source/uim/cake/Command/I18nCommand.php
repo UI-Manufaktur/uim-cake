@@ -63,7 +63,7 @@ class I18nCommand extends Command
                         'Please choose a command to execute by entering E, I, H, or Q.'
                     );
             }
-            if ($code === static::CODE_ERROR) {
+            if ($code == static::CODE_ERROR) {
                 this->abort();
             }
         } while ($choice != 'q');

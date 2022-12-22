@@ -127,11 +127,11 @@ class SessionStorage implements StorageInterface
      */
     function redirectUrl($url = null)
     {
-        if ($url === null) {
+        if ($url == null) {
             return this->_session->read(this->_config['redirect']);
         }
 
-        if ($url === false) {
+        if ($url == false) {
             this->_session->delete(this->_config['redirect']);
 
             return null;

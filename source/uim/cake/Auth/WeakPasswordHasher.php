@@ -65,6 +65,6 @@ class WeakPasswordHasher extends AbstractPasswordHasher
      */
     function check(string $password, string $hashedPassword): bool
     {
-        return $hashedPassword === this->hash($password);
+        return $hashedPassword == this->hash($password);
     }
 }

@@ -100,7 +100,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     protected function ensureValidKey($key): void
     {
-        if (!is_string($key) || strlen($key) === 0) {
+        if (!is_string($key) || strlen($key) == 0) {
             throw new InvalidArgumentException('A cache key must be a non-empty string.');
         }
     }
@@ -118,12 +118,12 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
         if (!is_iterable($iterable)) {
             throw new InvalidArgumentException(sprintf(
                 'A cache %s must be either an array or a Traversable.',
-                $check === self::CHECK_VALUE ? 'key set' : 'set'
+                $check == self::CHECK_VALUE ? 'key set' : 'set'
             ));
         }
 
         foreach ($iterable as $key => $value) {
-            if ($check === self::CHECK_VALUE) {
+            if ($check == self::CHECK_VALUE) {
                 this->ensureValidKey($value);
             } else {
                 this->ensureValidKey($key);
@@ -174,7 +174,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
         try {
             foreach ($values as $key => $value) {
                 $success = this->set($key, $value);
-                if ($success === false) {
+                if ($success == false) {
                     return false;
                 }
             }
@@ -300,7 +300,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
     function add(string $key, $value): bool
     {
         $cachedValue = this->get($key);
-        if ($cachedValue === null) {
+        if ($cachedValue == null) {
             return this->set($key, $value);
         }
 
@@ -377,7 +377,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      */
     protected function duration($ttl): int
     {
-        if ($ttl === null) {
+        if ($ttl == null) {
             return this->_config['duration'];
         }
         if (is_int($ttl)) {

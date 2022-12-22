@@ -51,7 +51,7 @@ trait PluginAssetsTrait
      */
     protected function _list(?string $name = null): array
     {
-        if ($name === null) {
+        if ($name == null) {
             $pluginsList = Plugin::loaded();
         } else {
             $pluginsList = [$name];
@@ -180,7 +180,7 @@ trait PluginAssetsTrait
 
         if (is_link($dest)) {
             // phpcs:ignore
-            $success = DS === '\\' ? @rmdir($dest) : @unlink($dest);
+            $success = DS == '\\' ? @rmdir($dest) : @unlink($dest);
             if ($success) {
                 this->io->out('Unlinked ' . $dest);
 

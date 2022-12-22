@@ -64,11 +64,11 @@ class MemoryStorage implements StorageInterface
      */
     function redirectUrl($url = null)
     {
-        if ($url === null) {
+        if ($url == null) {
             return this->_redirectUrl;
         }
 
-        if ($url === false) {
+        if ($url == false) {
             this->_redirectUrl = null;
 
             return null;

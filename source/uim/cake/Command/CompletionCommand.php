@@ -147,7 +147,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
     protected function getSubcommands(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('command');
-        if ($name === null || $name === '') {
+        if ($name == null || $name == '') {
             return static::CODE_SUCCESS;
         }
 
@@ -199,7 +199,7 @@ class CompletionCommand extends Command implements CommandCollectionAwareInterfa
 
         // If there are no formal subcommands all methods
         // on a shell are 'subcommands'
-        if (count($subcommands) === 0) {
+        if (count($subcommands) == 0) {
             /** @psalm-suppress DeprecatedClass */
             $coreShellReflection = new ReflectionClass(Shell::class);
             $reflection = new ReflectionClass($shell);

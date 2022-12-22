@@ -254,10 +254,10 @@ class MemcachedEngine extends CacheEngine
     function parseServerString(string $server): array
     {
         $socketTransport = 'unix://';
-        if (strpos($server, $socketTransport) === 0) {
+        if (strpos($server, $socketTransport) == 0) {
             return [substr($server, strlen($socketTransport)), 0];
         }
-        if (substr($server, 0, 1) === '[') {
+        if (substr($server, 0, 1) == '[') {
             $position = strpos($server, ']:');
             if ($position != false) {
                 $position++;
@@ -432,12 +432,12 @@ class MemcachedEngine extends CacheEngine
     function clear(): bool
     {
         $keys = this->_Memcached->getAllKeys();
-        if ($keys === false) {
+        if ($keys == false) {
             return false;
         }
 
         foreach ($keys as $key) {
-            if (strpos($key, this->_config['prefix']) === 0) {
+            if (strpos($key, this->_config['prefix']) == 0) {
                 this->_Memcached->delete($key);
             }
         }

@@ -111,7 +111,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      */
     function rewind(): void
     {
-        if (this->_index === 0 && !this->_started) {
+        if (this->_index == 0 && !this->_started) {
             this->_started = true;
             parent::rewind();
 

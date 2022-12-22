@@ -87,7 +87,7 @@ class FileEngine extends CacheEngine
     {
         parent::init($config);
 
-        if (this->_config['path'] === null) {
+        if (this->_config['path'] == null) {
             this->_config['path'] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'cake_cache' . DIRECTORY_SEPARATOR;
         }
         if (substr(this->_config['path'], -1) != DIRECTORY_SEPARATOR) {
@@ -112,13 +112,13 @@ class FileEngine extends CacheEngine
      */
     function set($key, $value, $ttl = null): bool
     {
-        if ($value === '' || !this->_init) {
+        if ($value == '' || !this->_init) {
             return false;
         }
 
         $key = this->_key($key);
 
-        if (this->_setKey($key, true) === false) {
+        if (this->_setKey($key, true) == false) {
             return false;
         }
 
@@ -160,7 +160,7 @@ class FileEngine extends CacheEngine
     {
         $key = this->_key($key);
 
-        if (!this->_init || this->_setKey($key) === false) {
+        if (!this->_init || this->_setKey($key) == false) {
             return $default;
         }
 
@@ -215,7 +215,7 @@ class FileEngine extends CacheEngine
     {
         $key = this->_key($key);
 
-        if (this->_setKey($key) === false || !this->_init) {
+        if (this->_setKey($key) == false || !this->_init) {
             return false;
         }
 
@@ -223,7 +223,7 @@ class FileEngine extends CacheEngine
         $path = this->_File->getRealPath();
         this->_File = null;
 
-        if ($path === false) {
+        if ($path == false) {
             return false;
         }
 
@@ -382,7 +382,7 @@ class FileEngine extends CacheEngine
         if (
             empty(this->_File) ||
             this->_File->getBasename() != $key ||
-            this->_File->valid() === false
+            this->_File->valid() == false
         ) {
             $exists = is_file($path->getPathname());
             try {
@@ -468,9 +468,9 @@ class FileEngine extends CacheEngine
                     return false;
                 }
 
-                $hasPrefix = $prefix === ''
-                    || strpos($current->getBasename(), $prefix) === 0;
-                if ($hasPrefix === false) {
+                $hasPrefix = $prefix == ''
+                    || strpos($current->getBasename(), $prefix) == 0;
+                if ($hasPrefix == false) {
                     return false;
                 }
 

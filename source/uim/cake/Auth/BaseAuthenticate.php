@@ -105,7 +105,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
     {
         $result = this->_query($username)->first();
 
-        if ($result === null) {
+        if ($result == null) {
             // Waste time hashing the password, to prevent
             // timing side-channels. However, don't hash
             // null passwords as authentication systems
@@ -124,7 +124,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
             $hasher = this->passwordHasher();
             $hashedPassword = $result->get($passwordField);
 
-            if ($hashedPassword === null || $hashedPassword === '') {
+            if ($hashedPassword == null || $hashedPassword == '') {
                 // Waste time hashing the password, to prevent
                 // timing side-channels to distinguish whether
                 // user has password or not.
@@ -141,7 +141,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
             $result->unset($passwordField);
         }
         $hidden = $result->getHidden();
-        if ($password === null && in_array($passwordField, $hidden, true)) {
+        if ($password == null && in_array($passwordField, $hidden, true)) {
             $key = array_search($passwordField, $hidden, true);
             unset($hidden[$key]);
             $result->setHidden($hidden);

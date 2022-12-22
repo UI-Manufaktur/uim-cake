@@ -59,7 +59,7 @@ interface CollectionInterface extends Iterator, JsonSerializable
      *
      * ```
      * $collection = (new Collection([1, 2, 3]))->filter(function ($value, $key) {
-     *  return $value % 2 === 0;
+     *  return $value % 2 == 0;
      * });
      * ```
      *
@@ -85,7 +85,7 @@ interface CollectionInterface extends Iterator, JsonSerializable
      *
      * ```
      * $collection = (new Collection([1, 2, 3]))->reject(function ($value, $key) {
-     *  return $value % 2 === 0;
+     *  return $value % 2 == 0;
      * });
      * ```
      *
@@ -162,7 +162,7 @@ interface CollectionInterface extends Iterator, JsonSerializable
      *
      * ```
      * $collection = (new Collection($people))->map(function ($person, $key) {
-     *  return $person->gender === 'female';
+     *  return $person->gender == 'female';
      * });
      * ```
      *

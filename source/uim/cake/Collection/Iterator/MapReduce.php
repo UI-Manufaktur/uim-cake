@@ -89,7 +89,7 @@ class MapReduce implements IteratorAggregate
      * ```
      *  $data = new \ArrayObject([1, 2, 3, 4, 5, 3]);
      *  $mapper = function ($value, $key, $mr) {
-     *      $type = ($value % 2 === 0) ? 'even' : 'odd';
+     *      $type = ($value % 2 == 0) ? 'even' : 'odd';
      *      $mr->emitIntermediate($value, $type);
      *  };
      *

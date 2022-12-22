@@ -82,7 +82,7 @@ class WincacheEngine extends CacheEngine
     function get($key, $default = null)
     {
         $value = wincache_ucache_get(this->_key($key), $success);
-        if ($success === false) {
+        if ($success == false) {
             return $default;
         }
 
@@ -142,7 +142,7 @@ class WincacheEngine extends CacheEngine
         $cacheKeys = $info['ucache_entries'];
         unset($info);
         foreach ($cacheKeys as $key) {
-            if (strpos($key['key_name'], this->_config['prefix']) === 0) {
+            if (strpos($key['key_name'], this->_config['prefix']) == 0) {
                 wincache_ucache_delete($key['key_name']);
             }
         }

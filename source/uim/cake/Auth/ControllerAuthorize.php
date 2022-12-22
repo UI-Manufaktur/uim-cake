@@ -30,7 +30,7 @@ use Cake\Http\ServerRequest;
  *  function isAuthorized($user)
  *  {
  *      if (this->request->getParam('admin')) {
- *          return $user['role'] === 'admin';
+ *          return $user['role'] == 'admin';
  *      }
  *      return !empty($user);
  *  }

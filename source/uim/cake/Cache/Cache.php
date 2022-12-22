@@ -112,7 +112,7 @@ class Cache
      */
     public static function getRegistry(): CacheRegistry
     {
-        if (static::$_registry === null) {
+        if (static::$_registry == null) {
             static::$_registry = new CacheRegistry();
         }
 
@@ -163,11 +163,11 @@ class Cache
                 return;
             }
 
-            if ($config['fallback'] === false) {
+            if ($config['fallback'] == false) {
                 throw $e;
             }
 
-            if ($config['fallback'] === $name) {
+            if ($config['fallback'] == $name) {
                 throw new InvalidArgumentException(sprintf(
                     '"%s" cache configuration cannot fallback to itself.',
                     $name
@@ -264,7 +264,7 @@ class Cache
 
         $backend = static::pool($config);
         $success = $backend->set($key, $value);
-        if ($success === false && $value != '') {
+        if ($success == false && $value != '') {
             trigger_error(
                 sprintf(
                     "%s cache was unable to write '%s' to %s cache",
@@ -512,7 +512,7 @@ class Cache
         foreach (static::configured() as $config) {
             static::pool($config);
         }
-        if ($group === null) {
+        if ($group == null) {
             return static::$_groups;
         }
 

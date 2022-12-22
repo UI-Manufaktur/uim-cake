@@ -69,13 +69,13 @@ class SortIterator extends Collection
         $results = [];
         foreach ($items as $key => $val) {
             $val = $callback($val);
-            if ($val instanceof DateTimeInterface && $type === \SORT_NUMERIC) {
+            if ($val instanceof DateTimeInterface && $type == \SORT_NUMERIC) {
                 $val = $val->format('U');
             }
             $results[$key] = $val;
         }
 
-        $dir === SORT_DESC ? arsort($results, $type) : asort($results, $type);
+        $dir == SORT_DESC ? arsort($results, $type) : asort($results, $type);
 
         foreach (array_keys($results) as $key) {
             $results[$key] = $items[$key];

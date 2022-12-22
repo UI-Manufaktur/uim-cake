@@ -77,7 +77,7 @@ class BasicAuthenticate extends BaseAuthenticate
         $username = $request->getEnv('PHP_AUTH_USER');
         $pass = $request->getEnv('PHP_AUTH_PW');
 
-        if (!is_string($username) || $username === '' || !is_string($pass) || $pass === '') {
+        if (!is_string($username) || $username == '' || !is_string($pass) || $pass == '') {
             return false;
         }
 

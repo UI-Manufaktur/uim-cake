@@ -94,7 +94,7 @@ class ArrayEngine extends CacheEngine
      */
     function increment(string $key, int $offset = 1)
     {
-        if (this->get($key) === null) {
+        if (this->get($key) == null) {
             this->set($key, 0);
         }
         $key = this->_key($key);
@@ -112,7 +112,7 @@ class ArrayEngine extends CacheEngine
      */
     function decrement(string $key, int $offset = 1)
     {
-        if (this->get($key) === null) {
+        if (this->get($key) == null) {
             this->set($key, 0);
         }
         $key = this->_key($key);

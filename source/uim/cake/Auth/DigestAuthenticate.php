@@ -147,7 +147,7 @@ class DigestAuthenticate extends BasicAuthenticate
         $digest = $request->getEnv('PHP_AUTH_DIGEST');
         if (empty($digest) && function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
-            if (!empty($headers['Authorization']) && substr($headers['Authorization'], 0, 7) === 'Digest ') {
+            if (!empty($headers['Authorization']) && substr($headers['Authorization'], 0, 7) == 'Digest ') {
                 $digest = substr($headers['Authorization'], 7);
             }
         }
@@ -166,7 +166,7 @@ class DigestAuthenticate extends BasicAuthenticate
      */
     function parseAuthData(string $digest): ?array
     {
-        if (substr($digest, 0, 7) === 'Digest ') {
+        if (substr($digest, 0, 7) == 'Digest ') {
             $digest = substr($digest, 7);
         }
         $keys = $match = [];
@@ -276,7 +276,7 @@ class DigestAuthenticate extends BasicAuthenticate
     protected function validNonce(string $nonce): bool
     {
         $value = base64_decode($nonce);
-        if ($value === false) {
+        if ($value == false) {
             return false;
         }
         $parts = explode(':', $value);

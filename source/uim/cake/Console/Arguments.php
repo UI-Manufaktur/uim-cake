@@ -103,7 +103,7 @@ class Arguments
     function hasArgument(string $name): bool
     {
         $offset = array_search($name, this->argNames, true);
-        if ($offset === false) {
+        if ($offset == false) {
             return false;
         }
 
@@ -119,7 +119,7 @@ class Arguments
     function getArgument(string $name): ?string
     {
         $offset = array_search($name, this->argNames, true);
-        if ($offset === false || !isset(this->args[$offset])) {
+        if ($offset == false || !isset(this->args[$offset])) {
             return null;
         }
 
