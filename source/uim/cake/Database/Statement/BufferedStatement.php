@@ -91,7 +91,7 @@ class BufferedStatement implements Iterator, StatementInterface
      * @param string $property internal property to get
      * @return string|null
      */
-    public function __get(string $property)
+    function __get(string $property)
     {
         if ($property === 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
@@ -104,7 +104,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = 'string'): void
     {
         this->statement->bindValue($column, $value, $type);
     }
@@ -112,7 +112,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function closeCursor(): void
+    function closeCursor(): void
     {
         this->statement->closeCursor();
     }
@@ -120,7 +120,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function columnCount(): int
+    function columnCount(): int
     {
         return this->statement->columnCount();
     }
@@ -128,7 +128,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function errorCode()
+    function errorCode()
     {
         return this->statement->errorCode();
     }
@@ -136,7 +136,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function errorInfo(): array
+    function errorInfo(): array
     {
         return this->statement->errorInfo();
     }
@@ -144,7 +144,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function execute(?array $params = null): bool
+    function execute(?array $params = null): bool
     {
         this->_reset();
         this->_hasExecuted = true;
@@ -155,7 +155,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function fetchColumn(int $position)
+    function fetchColumn(int $position)
     {
         $result = this->fetch(static::FETCH_TYPE_NUM);
         if ($result != false && isset($result[$position])) {
@@ -171,7 +171,7 @@ class BufferedStatement implements Iterator, StatementInterface
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         return this->rowCount();
     }
@@ -179,7 +179,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function bind(array $params, array $types): void
+    function bind(array $params, array $types): void
     {
         this->statement->bind($params, $types);
     }
@@ -187,7 +187,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function lastInsertId(?string $table = null, ?string $column = null)
+    function lastInsertId(?string $table = null, ?string $column = null)
     {
         return this->statement->lastInsertId($table, $column);
     }
@@ -198,7 +198,7 @@ class BufferedStatement implements Iterator, StatementInterface
      * @param string|int $type The type to fetch.
      * @return array|false
      */
-    public function fetch($type = self::FETCH_TYPE_NUM)
+    function fetch($type = self::FETCH_TYPE_NUM)
     {
         if (this->_allFetched) {
             $row = false;
@@ -229,7 +229,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @return array
      */
-    public function fetchAssoc(): array
+    function fetchAssoc(): array
     {
         $result = this->fetch(static::FETCH_TYPE_ASSOC);
 
@@ -239,7 +239,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function fetchAll($type = self::FETCH_TYPE_NUM)
+    function fetchAll($type = self::FETCH_TYPE_NUM)
     {
         if (this->_allFetched) {
             return this->buffer;
@@ -257,7 +257,7 @@ class BufferedStatement implements Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    public function rowCount(): int
+    function rowCount(): int
     {
         if (!this->_allFetched) {
             this->fetchAll(static::FETCH_TYPE_ASSOC);
@@ -284,7 +284,7 @@ class BufferedStatement implements Iterator, StatementInterface
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function key()
+    function key()
     {
         return this->index;
     }
@@ -295,7 +295,7 @@ class BufferedStatement implements Iterator, StatementInterface
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function current()
+    function current()
     {
         return this->buffer[this->index];
     }
@@ -305,7 +305,7 @@ class BufferedStatement implements Iterator, StatementInterface
      *
      * @return void
      */
-    public function rewind(): void
+    function rewind(): void
     {
         this->index = 0;
     }
@@ -315,7 +315,7 @@ class BufferedStatement implements Iterator, StatementInterface
      *
      * @return bool
      */
-    public function valid(): bool
+    function valid(): bool
     {
         $old = this->index;
         $row = this->fetch(self::FETCH_TYPE_ASSOC);
@@ -332,7 +332,7 @@ class BufferedStatement implements Iterator, StatementInterface
      *
      * @return void
      */
-    public function next(): void
+    function next(): void
     {
         this->index += 1;
     }
@@ -342,7 +342,7 @@ class BufferedStatement implements Iterator, StatementInterface
      *
      * @return \Cake\Database\StatementInterface
      */
-    public function getInnerStatement(): StatementInterface
+    function getInnerStatement(): StatementInterface
     {
         return this->statement;
     }

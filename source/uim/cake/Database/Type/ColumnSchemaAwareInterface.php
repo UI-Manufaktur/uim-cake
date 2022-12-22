@@ -16,7 +16,7 @@ interface ColumnSchemaAwareInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance being used.
      * @return string|null An SQL fragment, or `null` in case the column isn't processed by this type.
      */
-    public function getColumnSql(TableSchemaInterface $schema, string $column, DriverInterface $driver): ?string;
+    function getColumnSql(TableSchemaInterface $schema, string $column, DriverInterface $driver): ?string;
 
     /**
      * Convert a SQL column definition to an abstract type definition.
@@ -25,5 +25,5 @@ interface ColumnSchemaAwareInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance being used.
      * @return array<string, mixed>|null Array of column information, or `null` in case the column isn't processed by this type.
      */
-    public function convertColumnDefinition(array $definition, DriverInterface $driver): ?array;
+    function convertColumnDefinition(array $definition, DriverInterface $driver): ?array;
 }

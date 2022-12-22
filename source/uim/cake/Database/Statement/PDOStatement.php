@@ -52,7 +52,7 @@ class PDOStatement extends StatementDecorator
      * @param string $property internal property to get
      * @return string|null
      */
-    public function __get(string $property)
+    function __get(string $property)
     {
         if ($property === 'queryString' && isset(this->_statement->queryString)) {
             /** @psalm-suppress NoInterfaceProperties */
@@ -87,7 +87,7 @@ class PDOStatement extends StatementDecorator
      * @param string|int|null $type PDO type or name of configured Type class
      * @return void
      */
-    public function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = 'string'): void
     {
         if ($type === null) {
             $type = 'string';
@@ -115,7 +115,7 @@ class PDOStatement extends StatementDecorator
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    public function fetch($type = parent::FETCH_TYPE_NUM)
+    function fetch($type = parent::FETCH_TYPE_NUM)
     {
         if ($type === static::FETCH_TYPE_NUM) {
             return this->_statement->fetch(PDO::FETCH_NUM);
@@ -152,7 +152,7 @@ class PDOStatement extends StatementDecorator
      * @return array|false list of all results from database for this statement, false on failure
      * @psalm-assert string $type
      */
-    public function fetchAll($type = parent::FETCH_TYPE_NUM)
+    function fetchAll($type = parent::FETCH_TYPE_NUM)
     {
         if ($type === static::FETCH_TYPE_NUM) {
             return this->_statement->fetchAll(PDO::FETCH_NUM);

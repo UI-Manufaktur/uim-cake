@@ -30,7 +30,7 @@ class MysqlStatement extends PDOStatement
     /**
      * @inheritDoc
      */
-    public function execute(?array $params = null): bool
+    function execute(?array $params = null): bool
     {
         $connection = this->_driver->getConnection();
 

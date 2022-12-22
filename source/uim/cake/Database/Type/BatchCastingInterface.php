@@ -33,5 +33,5 @@ interface BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted.
      * @return array<string, mixed>
      */
-    public function manyToPHP(array $values, array $fields, DriverInterface $driver): array;
+    function manyToPHP(array $values, array $fields, DriverInterface $driver): array;
 }

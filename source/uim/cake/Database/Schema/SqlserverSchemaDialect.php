@@ -35,7 +35,7 @@ class SqlserverSchemaDialect extends SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    public function listTablesSql(array $config): array
+    function listTablesSql(array $config): array
     {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
@@ -54,7 +54,7 @@ class SqlserverSchemaDialect extends SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    public function listTablesWithoutViewsSql(array $config): array
+    function listTablesWithoutViewsSql(array $config): array
     {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
@@ -69,7 +69,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function describeColumnSql(string $tableName, array $config): array
+    function describeColumnSql(string $tableName, array $config): array
     {
         $sql = 'SELECT DISTINCT
             AC.column_id AS [column_id],
@@ -210,7 +210,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function convertColumnDescription(TableSchema $schema, array $row): void
+    function convertColumnDescription(TableSchema $schema, array $row): void
     {
         $field = this->_convertColumn(
             $row['type'],
@@ -272,7 +272,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function describeIndexSql(string $tableName, array $config): array
+    function describeIndexSql(string $tableName, array $config): array
     {
         $sql = "SELECT
                 I.[name] AS [index_name],
@@ -296,7 +296,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function convertIndexDescription(TableSchema $schema, array $row): void
+    function convertIndexDescription(TableSchema $schema, array $row): void
     {
         $type = TableSchema::INDEX_INDEX;
         $name = $row['index_name'];
@@ -335,7 +335,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function describeForeignKeySql(string $tableName, array $config): array
+    function describeForeignKeySql(string $tableName, array $config): array
     {
         // phpcs:disable Generic.Files.LineLength
         $sql = 'SELECT FK.[name] AS [foreign_key_name], FK.[delete_referential_action_desc] AS [delete_type],
@@ -360,7 +360,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function convertForeignKeyDescription(TableSchema $schema, array $row): void
+    function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $data = [
             'type' => TableSchema::CONSTRAINT_FOREIGN,
@@ -405,7 +405,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function columnSql(TableSchema $schema, string $name): string
+    function columnSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
         $data = $schema->getColumn($name);
@@ -550,7 +550,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function addConstraintSql(TableSchema $schema): array
+    function addConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = 'ALTER TABLE %s ADD %s;';
         $sql = [];
@@ -570,7 +570,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function dropConstraintSql(TableSchema $schema): array
+    function dropConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = 'ALTER TABLE %s DROP CONSTRAINT %s;';
         $sql = [];
@@ -591,7 +591,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function indexSql(TableSchema $schema, string $name): string
+    function indexSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
         $data = $schema->getIndex($name);
@@ -611,7 +611,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function constraintSql(TableSchema $schema, string $name): string
+    function constraintSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
         $data = $schema->getConstraint($name);
@@ -656,7 +656,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
@@ -673,7 +673,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function truncateTableSql(TableSchema $schema): array
+    function truncateTableSql(TableSchema $schema): array
     {
         $name = this->_driver->quoteIdentifier($schema->name());
         $queries = [

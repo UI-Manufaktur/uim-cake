@@ -138,7 +138,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return string|null
      */
-    public function toDatabase($value, DriverInterface $driver): ?string
+    function toDatabase($value, DriverInterface $driver): ?string
     {
         if ($value === null || is_string($value)) {
             return $value;
@@ -168,7 +168,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @return this
      * @deprecated 4.1.0 Use {@link setDatabaseTimezone()} instead.
      */
-    public function setTimezone($timezone)
+    function setTimezone($timezone)
     {
         deprecationWarning('DateTimeType::setTimezone() is deprecated. Use setDatabaseTimezone() instead.');
 
@@ -185,7 +185,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @param \DateTimeZone|string|null $timezone Database timezone.
      * @return this
      */
-    public function setDatabaseTimezone($timezone)
+    function setDatabaseTimezone($timezone)
     {
         if (is_string($timezone)) {
             $timezone = new DateTimeZone($timezone);
@@ -203,7 +203,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @param \DateTimeZone|string|null $timezone User timezone.
      * @return this
      */
-    public function setUserTimezone($timezone)
+    function setUserTimezone($timezone)
     {
         if (is_string($timezone)) {
             $timezone = new DateTimeZone($timezone);
@@ -220,7 +220,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted
      * @return \DateTimeInterface|null
      */
-    public function toPHP($value, DriverInterface $driver)
+    function toPHP($value, DriverInterface $driver)
     {
         if ($value === null) {
             return null;
@@ -264,7 +264,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      *      to DateTime instances.
      * @return this
      */
-    public function setKeepDatabaseTimezone(bool $keep)
+    function setKeepDatabaseTimezone(bool $keep)
     {
         this->keepDatabaseTimezone = $keep;
 
@@ -274,7 +274,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
     /**
      * @inheritDoc
      */
-    public function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
@@ -317,7 +317,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @param mixed $value Request data
      * @return \DateTimeInterface|null
      */
-    public function marshal($value): ?DateTimeInterface
+    function marshal($value): ?DateTimeInterface
     {
         if ($value instanceof DateTimeInterface) {
             if ($value instanceof DateTime) {
@@ -405,7 +405,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @param bool $enable Whether to enable
      * @return this
      */
-    public function useLocaleParser(bool $enable = true)
+    function useLocaleParser(bool $enable = true)
     {
         if ($enable === false) {
             this->_useLocaleMarshal = $enable;
@@ -431,7 +431,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @see \Cake\I18n\Time::parseDateTime()
      * @return this
      */
-    public function setLocaleFormat($format)
+    function setLocaleFormat($format)
     {
         this->_localeMarshalFormat = $format;
 
@@ -444,7 +444,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @return this
      * @deprecated 4.3.0 This method is no longer needed as using immutable datetime class is the default behavior.
      */
-    public function useImmutable()
+    function useImmutable()
     {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
@@ -479,7 +479,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @return string
      * @psalm-return class-string<\DateTime>|class-string<\DateTimeImmutable>
      */
-    public function getDateTimeClassName(): string
+    function getDateTimeClassName(): string
     {
         return this->_className;
     }
@@ -490,7 +490,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @return this
      * @deprecated 4.3.0 Using mutable datetime objects is deprecated.
      */
-    public function useMutable()
+    function useMutable()
     {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
@@ -552,7 +552,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver object from which database preferences and configuration will be extracted
      * @return mixed
      */
-    public function toStatement($value, DriverInterface $driver)
+    function toStatement($value, DriverInterface $driver)
     {
         return PDO::PARAM_STR;
     }

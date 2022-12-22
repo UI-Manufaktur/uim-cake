@@ -35,14 +35,14 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param bool $merge Merge the new fields with the existing. By default false.
      * @return this
      */
-    public function setHidden(array $fields, bool $merge = false);
+    function setHidden(array $fields, bool $merge = false);
 
     /**
      * Gets the hidden fields.
      *
      * @return array<string>
      */
-    public function getHidden(): array;
+    function getHidden(): array;
 
     /**
      * Sets the virtual fields on this entity.
@@ -51,14 +51,14 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param bool $merge Merge the new fields with the existing. By default false.
      * @return this
      */
-    public function setVirtual(array $fields, bool $merge = false);
+    function setVirtual(array $fields, bool $merge = false);
 
     /**
      * Gets the virtual fields on this entity.
      *
      * @return array<string>
      */
-    public function getVirtual(): array;
+    function getVirtual(): array;
 
     /**
      * Sets the dirty status of a single field.
@@ -68,7 +68,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * it was not changed. Default true.
      * @return this
      */
-    public function setDirty(string $field, bool $isDirty = true);
+    function setDirty(string $field, bool $isDirty = true);
 
     /**
      * Checks if the entity is dirty or if a single field of it is dirty.
@@ -76,14 +76,14 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string|null $field The field to check the status for. Null for the whole entity.
      * @return bool Whether the field was changed or not
      */
-    public function isDirty(?string $field = null): bool;
+    function isDirty(?string $field = null): bool;
 
     /**
      * Gets the dirty fields.
      *
      * @return array<string>
      */
-    public function getDirty(): array;
+    function getDirty(): array;
 
     /**
      * Returns whether this entity has errors.
@@ -91,14 +91,14 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param bool $includeNested true will check nested entities for hasErrors()
      * @return bool
      */
-    public function hasErrors(bool $includeNested = true): bool;
+    function hasErrors(bool $includeNested = true): bool;
 
     /**
      * Returns all validation errors.
      *
      * @return array
      */
-    public function getErrors(): array;
+    function getErrors(): array;
 
     /**
      * Returns validation errors of a field
@@ -106,7 +106,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string $field Field name to get the errors from
      * @return array
      */
-    public function getError(string $field): array;
+    function getError(string $field): array;
 
     /**
      * Sets error messages to the entity
@@ -115,7 +115,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param bool $overwrite Whether to overwrite pre-existing errors for $fields
      * @return this
      */
-    public function setErrors(array $errors, bool $overwrite = false);
+    function setErrors(array $errors, bool $overwrite = false);
 
     /**
      * Sets errors for a single field
@@ -125,7 +125,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param bool $overwrite Whether to overwrite pre-existing errors for $field
      * @return this
      */
-    public function setError(string $field, $errors, bool $overwrite = false);
+    function setError(string $field, $errors, bool $overwrite = false);
 
     /**
      * Stores whether a field value can be changed or set in this entity.
@@ -135,7 +135,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * mark it as protected.
      * @return this
      */
-    public function setAccess($field, bool $set);
+    function setAccess($field, bool $set);
 
     /**
      * Checks if a field is accessible
@@ -143,7 +143,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string $field Field name to check
      * @return bool
      */
-    public function isAccessible(string $field): bool;
+    function isAccessible(string $field): bool;
 
     /**
      * Sets the source alias
@@ -151,14 +151,14 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string $alias the alias of the repository
      * @return this
      */
-    public function setSource(string $alias);
+    function setSource(string $alias);
 
     /**
      * Returns the alias of the repository from which this entity came from.
      *
      * @return string
      */
-    public function getSource(): string;
+    function getSource(): string;
 
     /**
      * Returns an array with the requested original fields
@@ -167,7 +167,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param array<string> $fields List of fields to be returned
      * @return array
      */
-    public function extractOriginal(array $fields): array;
+    function extractOriginal(array $fields): array;
 
     /**
      * Returns an array with only the original fields
@@ -176,7 +176,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param array<string> $fields List of fields to be returned
      * @return array
      */
-    public function extractOriginalChanged(array $fields): array;
+    function extractOriginalChanged(array $fields): array;
 
     /**
      * Sets one or multiple fields to the specified value
@@ -189,7 +189,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * keys are `setter` and `guard`
      * @return this
      */
-    public function set($field, $value = null, array $options = []);
+    function set($field, $value = null, array $options = []);
 
     /**
      * Returns the value of a field by name
@@ -197,7 +197,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string $field the name of the field to retrieve
      * @return mixed
      */
-    public function &get(string $field);
+    function &get(string $field);
 
     /**
      * Returns the original value of a field.
@@ -205,14 +205,14 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string $field The name of the field.
      * @return mixed
      */
-    public function getOriginal(string $field);
+    function getOriginal(string $field);
 
     /**
      * Gets all original values of the entity.
      *
      * @return array
      */
-    public function getOriginalValues(): array;
+    function getOriginalValues(): array;
 
     /**
      * Returns whether this entity contains a field named $field
@@ -221,7 +221,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param array<string>|string $field The field to check.
      * @return bool
      */
-    public function has($field): bool;
+    function has($field): bool;
 
     /**
      * Removes a field or list of fields from this entity
@@ -229,14 +229,14 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param array<string>|string $field The field to unset.
      * @return this
      */
-    public function unset($field);
+    function unset($field);
 
     /**
      * Get the list of visible fields.
      *
      * @return array<string> A list of fields that are 'visible' in all representations.
      */
-    public function getVisible(): array;
+    function getVisible(): array;
 
     /**
      * Returns an array with all the visible fields set in this entity.
@@ -246,7 +246,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      *
      * @return array
      */
-    public function toArray(): array;
+    function toArray(): array;
 
     /**
      * Returns an array with the requested fields
@@ -256,7 +256,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param bool $onlyDirty Return the requested field only if it is dirty
      * @return array
      */
-    public function extract(array $fields, bool $onlyDirty = false): array;
+    function extract(array $fields, bool $onlyDirty = false): array;
 
     /**
      * Sets the entire entity as clean, which means that it will appear as
@@ -265,7 +265,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      *
      * @return void
      */
-    public function clean(): void;
+    function clean(): void;
 
     /**
      * Set the status of this entity.
@@ -276,12 +276,12 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param bool $new Indicate whether this entity has been persisted.
      * @return this
      */
-    public function setNew(bool $new);
+    function setNew(bool $new);
 
     /**
      * Returns whether this entity has already been persisted.
      *
      * @return bool Whether the entity has been persisted.
      */
-    public function isNew(): bool;
+    function isNew(): bool;
 }

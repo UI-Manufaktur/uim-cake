@@ -47,7 +47,7 @@ interface ConnectionInterface extends LoggerAwareInterface
      *
      * @return \Psr\Log\LoggerInterface logger instance
      */
-    public function getLogger(): LoggerInterface;
+    function getLogger(): LoggerInterface;
 
     /**
      * Set a cacher.
@@ -55,28 +55,28 @@ interface ConnectionInterface extends LoggerAwareInterface
      * @param \Psr\SimpleCache\CacheInterface $cacher Cacher object
      * @return this
      */
-    public function setCacher(CacheInterface $cacher);
+    function setCacher(CacheInterface $cacher);
 
     /**
      * Get a cacher.
      *
      * @return \Psr\SimpleCache\CacheInterface $cacher Cacher object
      */
-    public function getCacher(): CacheInterface;
+    function getCacher(): CacheInterface;
 
     /**
      * Get the configuration name for this connection.
      *
      * @return string
      */
-    public function configName(): string;
+    function configName(): string;
 
     /**
      * Get the configuration data used to create the connection.
      *
      * @return array<string, mixed>
      */
-    public function config(): array;
+    function config(): array;
 
     /**
      * Executes a callable function inside a transaction, if any exception occurs
@@ -100,7 +100,7 @@ interface ConnectionInterface extends LoggerAwareInterface
      * @throws \Exception Will re-throw any exception raised in $callback after
      *   rolling back the transaction.
      */
-    public function transactional(callable $callback);
+    function transactional(callable $callback);
 
     /**
      * Run an operation with constraints disabled.
@@ -120,7 +120,7 @@ interface ConnectionInterface extends LoggerAwareInterface
      * @throws \Exception Will re-throw any exception raised in $callback after
      *   rolling back the transaction.
      */
-    public function disableConstraints(callable $callback);
+    function disableConstraints(callable $callback);
 
     /**
      * Enable/disable query logging
@@ -128,19 +128,19 @@ interface ConnectionInterface extends LoggerAwareInterface
      * @param bool $enable Enable/disable query logging
      * @return this
      */
-    public function enableQueryLogging(bool $enable = true);
+    function enableQueryLogging(bool $enable = true);
 
     /**
      * Disable query logging
      *
      * @return this
      */
-    public function disableQueryLogging();
+    function disableQueryLogging();
 
     /**
      * Check if query logging is enabled.
      *
      * @return bool
      */
-    public function isQueryLoggingEnabled(): bool;
+    function isQueryLoggingEnabled(): bool;
 }

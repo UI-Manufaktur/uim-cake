@@ -38,7 +38,7 @@ class BinaryUuidType extends BaseType
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return resource|string|null
      */
-    public function toDatabase($value, DriverInterface $driver)
+    function toDatabase($value, DriverInterface $driver)
     {
         if (!is_string($value)) {
             return $value;
@@ -57,7 +57,7 @@ class BinaryUuidType extends BaseType
      *
      * @return string A new primary key value.
      */
-    public function newId(): string
+    function newId(): string
     {
         return Text::uuid();
     }
@@ -70,7 +70,7 @@ class BinaryUuidType extends BaseType
      * @return resource|string|null
      * @throws \Cake\Core\Exception\CakeException
      */
-    public function toPHP($value, DriverInterface $driver)
+    function toPHP($value, DriverInterface $driver)
     {
         if ($value === null) {
             return null;
@@ -92,7 +92,7 @@ class BinaryUuidType extends BaseType
      * @param \Cake\Database\DriverInterface $driver The driver.
      * @return int
      */
-    public function toStatement($value, DriverInterface $driver): int
+    function toStatement($value, DriverInterface $driver): int
     {
         return PDO::PARAM_LOB;
     }
@@ -106,7 +106,7 @@ class BinaryUuidType extends BaseType
      * @param mixed $value The value to convert.
      * @return mixed Converted value.
      */
-    public function marshal($value)
+    function marshal($value)
     {
         return $value;
     }

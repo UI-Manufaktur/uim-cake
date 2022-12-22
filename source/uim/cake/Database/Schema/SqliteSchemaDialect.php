@@ -158,7 +158,7 @@ class SqliteSchemaDialect extends SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    public function listTablesSql(array $config): array
+    function listTablesSql(array $config): array
     {
         return [
             'SELECT name FROM sqlite_master ' .
@@ -175,7 +175,7 @@ class SqliteSchemaDialect extends SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    public function listTablesWithoutViewsSql(array $config): array
+    function listTablesWithoutViewsSql(array $config): array
     {
         return [
             'SELECT name FROM sqlite_master WHERE type="table" ' .
@@ -187,7 +187,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function describeColumnSql(string $tableName, array $config): array
+    function describeColumnSql(string $tableName, array $config): array
     {
         $sql = sprintf(
             'PRAGMA table_info(%s)',
@@ -200,7 +200,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function convertColumnDescription(TableSchema $schema, array $row): void
+    function convertColumnDescription(TableSchema $schema, array $row): void
     {
         $field = this->_convertColumn($row['type']);
         $field += [
@@ -258,7 +258,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function describeIndexSql(string $tableName, array $config): array
+    function describeIndexSql(string $tableName, array $config): array
     {
         $sql = sprintf(
             'PRAGMA index_list(%s)',
@@ -281,7 +281,7 @@ class SqliteSchemaDialect extends SchemaDialect
      * @param array $row The row data from `describeIndexSql`.
      * @return void
      */
-    public function convertIndexDescription(TableSchema $schema, array $row): void
+    function convertIndexDescription(TableSchema $schema, array $row): void
     {
         $sql = sprintf(
             'PRAGMA index_info(%s)',
@@ -311,7 +311,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function describeForeignKeySql(string $tableName, array $config): array
+    function describeForeignKeySql(string $tableName, array $config): array
     {
         $sql = sprintf('PRAGMA foreign_key_list(%s)', this->_driver->quoteIdentifier($tableName));
 
@@ -321,7 +321,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function convertForeignKeyDescription(TableSchema $schema, array $row): void
+    function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $name = $row['from'] . '_fk';
 
@@ -352,7 +352,7 @@ class SqliteSchemaDialect extends SchemaDialect
      * @return string SQL fragment.
      * @throws \Cake\Database\Exception\DatabaseException when the column type is unknown
      */
-    public function columnSql(TableSchema $schema, string $name): string
+    function columnSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
         $data = $schema->getColumn($name);
@@ -496,7 +496,7 @@ class SqliteSchemaDialect extends SchemaDialect
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
-    public function constraintSql(TableSchema $schema, string $name): string
+    function constraintSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
         $data = $schema->getConstraint($name);
@@ -550,7 +550,7 @@ class SqliteSchemaDialect extends SchemaDialect
      * @param \Cake\Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    public function addConstraintSql(TableSchema $schema): array
+    function addConstraintSql(TableSchema $schema): array
     {
         return [];
     }
@@ -564,7 +564,7 @@ class SqliteSchemaDialect extends SchemaDialect
      * @param \Cake\Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    public function dropConstraintSql(TableSchema $schema): array
+    function dropConstraintSql(TableSchema $schema): array
     {
         return [];
     }
@@ -572,7 +572,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function indexSql(TableSchema $schema, string $name): string
+    function indexSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
         $data = $schema->getIndex($name);
@@ -592,7 +592,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $lines = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($lines));
@@ -609,7 +609,7 @@ class SqliteSchemaDialect extends SchemaDialect
     /**
      * @inheritDoc
      */
-    public function truncateTableSql(TableSchema $schema): array
+    function truncateTableSql(TableSchema $schema): array
     {
         $name = $schema->name();
         $sql = [];
@@ -628,7 +628,7 @@ class SqliteSchemaDialect extends SchemaDialect
      *
      * @return bool
      */
-    public function hasSequences(): bool
+    function hasSequences(): bool
     {
         $result = this->_driver->prepare(
             'SELECT 1 FROM sqlite_master WHERE name = "sqlite_sequence"'

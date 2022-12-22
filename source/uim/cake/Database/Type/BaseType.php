@@ -45,7 +45,7 @@ abstract class BaseType implements TypeInterface
     /**
      * @inheritDoc
      */
-    public function getName(): ?string
+    function getName(): ?string
     {
         return this->_name;
     }
@@ -53,7 +53,7 @@ abstract class BaseType implements TypeInterface
     /**
      * @inheritDoc
      */
-    public function getBaseType(): ?string
+    function getBaseType(): ?string
     {
         return this->_name;
     }
@@ -61,7 +61,7 @@ abstract class BaseType implements TypeInterface
     /**
      * @inheritDoc
      */
-    public function toStatement($value, DriverInterface $driver)
+    function toStatement($value, DriverInterface $driver)
     {
         if ($value === null) {
             return PDO::PARAM_NULL;
@@ -73,7 +73,7 @@ abstract class BaseType implements TypeInterface
     /**
      * @inheritDoc
      */
-    public function newId()
+    function newId()
     {
         return null;
     }

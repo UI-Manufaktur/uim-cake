@@ -172,7 +172,7 @@ abstract class SchemaDialect
      * @param \Cake\Database\Schema\TableSchema $schema Schema instance
      * @return array SQL statements to drop a table.
      */
-    public function dropTableSql(TableSchema $schema): array
+    function dropTableSql(TableSchema $schema): array
     {
         $sql = sprintf(
             'DROP TABLE %s',
@@ -189,7 +189,7 @@ abstract class SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    abstract public function listTablesSql(array $config): array;
+    abstract function listTablesSql(array $config): array;
 
     /**
      * Generate the SQL to describe a table.
@@ -198,7 +198,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract public function describeColumnSql(string $tableName, array $config): array;
+    abstract function describeColumnSql(string $tableName, array $config): array;
 
     /**
      * Generate the SQL to describe the indexes in a table.
@@ -207,7 +207,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract public function describeIndexSql(string $tableName, array $config): array;
+    abstract function describeIndexSql(string $tableName, array $config): array;
 
     /**
      * Generate the SQL to describe the foreign keys in a table.
@@ -216,7 +216,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract public function describeForeignKeySql(string $tableName, array $config): array;
+    abstract function describeForeignKeySql(string $tableName, array $config): array;
 
     /**
      * Generate the SQL to describe table options
@@ -225,7 +225,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array SQL statements to get options for a table.
      */
-    public function describeOptionsSql(string $tableName, array $config): array
+    function describeOptionsSql(string $tableName, array $config): array
     {
         return ['', ''];
     }
@@ -237,7 +237,7 @@ abstract class SchemaDialect
      * @param array $row The row data from `describeColumnSql`.
      * @return void
      */
-    abstract public function convertColumnDescription(TableSchema $schema, array $row): void;
+    abstract function convertColumnDescription(TableSchema $schema, array $row): void;
 
     /**
      * Convert an index description results into abstract schema indexes or constraints.
@@ -247,7 +247,7 @@ abstract class SchemaDialect
      * @param array $row The row data from `describeIndexSql`.
      * @return void
      */
-    abstract public function convertIndexDescription(TableSchema $schema, array $row): void;
+    abstract function convertIndexDescription(TableSchema $schema, array $row): void;
 
     /**
      * Convert a foreign key description into constraints on the Table object.
@@ -257,7 +257,7 @@ abstract class SchemaDialect
      * @param array $row The row data from `describeForeignKeySql`.
      * @return void
      */
-    abstract public function convertForeignKeyDescription(TableSchema $schema, array $row): void;
+    abstract function convertForeignKeyDescription(TableSchema $schema, array $row): void;
 
     /**
      * Convert options data into table options.
@@ -266,7 +266,7 @@ abstract class SchemaDialect
      * @param array $row The row of data.
      * @return void
      */
-    public function convertOptionsDescription(TableSchema $schema, array $row): void
+    function convertOptionsDescription(TableSchema $schema, array $row): void
     {
     }
 
@@ -279,7 +279,7 @@ abstract class SchemaDialect
      * @param array<string> $indexes The indexes for the table.
      * @return array<string> SQL statements to create a table.
      */
-    abstract public function createTableSql(
+    abstract function createTableSql(
         TableSchema $schema,
         array $columns,
         array $constraints,
@@ -293,7 +293,7 @@ abstract class SchemaDialect
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
-    abstract public function columnSql(TableSchema $schema, string $name): string;
+    abstract function columnSql(TableSchema $schema, string $name): string;
 
     /**
      * Generate the SQL queries needed to add foreign key constraints to the table
@@ -301,7 +301,7 @@ abstract class SchemaDialect
      * @param \Cake\Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    abstract public function addConstraintSql(TableSchema $schema): array;
+    abstract function addConstraintSql(TableSchema $schema): array;
 
     /**
      * Generate the SQL queries needed to drop foreign key constraints from the table
@@ -309,7 +309,7 @@ abstract class SchemaDialect
      * @param \Cake\Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    abstract public function dropConstraintSql(TableSchema $schema): array;
+    abstract function dropConstraintSql(TableSchema $schema): array;
 
     /**
      * Generate the SQL fragments for defining table constraints.
@@ -318,7 +318,7 @@ abstract class SchemaDialect
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
-    abstract public function constraintSql(TableSchema $schema, string $name): string;
+    abstract function constraintSql(TableSchema $schema, string $name): string;
 
     /**
      * Generate the SQL fragment for a single index in a table.
@@ -327,7 +327,7 @@ abstract class SchemaDialect
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
-    abstract public function indexSql(TableSchema $schema, string $name): string;
+    abstract function indexSql(TableSchema $schema, string $name): string;
 
     /**
      * Generate the SQL to truncate a table.
@@ -335,7 +335,7 @@ abstract class SchemaDialect
      * @param \Cake\Database\Schema\TableSchema $schema Table instance.
      * @return array SQL statements to truncate a table.
      */
-    abstract public function truncateTableSql(TableSchema $schema): array;
+    abstract function truncateTableSql(TableSchema $schema): array;
 }
 
 // phpcs:disable

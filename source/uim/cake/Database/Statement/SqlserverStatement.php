@@ -36,7 +36,7 @@ class SqlserverStatement extends PDOStatement
      * @param string|int|null $type PDO type or name of configured Type class
      * @return void
      */
-    public function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = 'string'): void
     {
         if ($type === null) {
             $type = 'string';

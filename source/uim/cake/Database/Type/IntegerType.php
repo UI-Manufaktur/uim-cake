@@ -51,7 +51,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return int|null
      */
-    public function toDatabase($value, DriverInterface $driver): ?int
+    function toDatabase($value, DriverInterface $driver): ?int
     {
         if ($value === null || $value === '') {
             return null;
@@ -69,7 +69,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return int|null
      */
-    public function toPHP($value, DriverInterface $driver): ?int
+    function toPHP($value, DriverInterface $driver): ?int
     {
         if ($value === null) {
             return null;
@@ -81,7 +81,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
     /**
      * @inheritDoc
      */
-    public function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
@@ -103,7 +103,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver.
      * @return int
      */
-    public function toStatement($value, DriverInterface $driver): int
+    function toStatement($value, DriverInterface $driver): int
     {
         return PDO::PARAM_INT;
     }
@@ -114,7 +114,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
      * @param mixed $value The value to convert.
      * @return int|null Converted value.
      */
-    public function marshal($value): ?int
+    function marshal($value): ?int
     {
         if ($value === null || $value === '') {
             return null;

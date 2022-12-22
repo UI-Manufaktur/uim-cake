@@ -52,7 +52,7 @@ class DecimalType extends BaseType implements BatchCastingInterface
      * @return string|float|int|null
      * @throws \InvalidArgumentException
      */
-    public function toDatabase($value, DriverInterface $driver)
+    function toDatabase($value, DriverInterface $driver)
     {
         if ($value === null || $value === '') {
             return null;
@@ -83,7 +83,7 @@ class DecimalType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return string|null
      */
-    public function toPHP($value, DriverInterface $driver): ?string
+    function toPHP($value, DriverInterface $driver): ?string
     {
         if ($value === null) {
             return null;
@@ -95,7 +95,7 @@ class DecimalType extends BaseType implements BatchCastingInterface
     /**
      * @inheritDoc
      */
-    public function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
@@ -115,7 +115,7 @@ class DecimalType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver.
      * @return int
      */
-    public function toStatement($value, DriverInterface $driver): int
+    function toStatement($value, DriverInterface $driver): int
     {
         return PDO::PARAM_STR;
     }
@@ -126,7 +126,7 @@ class DecimalType extends BaseType implements BatchCastingInterface
      * @param mixed $value The value to convert.
      * @return string|null Converted value.
      */
-    public function marshal($value): ?string
+    function marshal($value): ?string
     {
         if ($value === null || $value === '') {
             return null;
@@ -152,7 +152,7 @@ class DecimalType extends BaseType implements BatchCastingInterface
      * @return this
      * @throws \RuntimeException
      */
-    public function useLocaleParser(bool $enable = true)
+    function useLocaleParser(bool $enable = true)
     {
         if ($enable === false) {
             this->_useLocaleParser = $enable;

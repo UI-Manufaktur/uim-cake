@@ -175,7 +175,7 @@ interface TableSchemaInterface extends SchemaInterface
      *
      * @return bool
      */
-    public function hasAutoincrement(): bool;
+    function hasAutoincrement(): bool;
 
     /**
      * Sets whether the table is temporary in the database.
@@ -183,14 +183,14 @@ interface TableSchemaInterface extends SchemaInterface
      * @param bool $temporary Whether the table is to be temporary.
      * @return this
      */
-    public function setTemporary(bool $temporary);
+    function setTemporary(bool $temporary);
 
     /**
      * Gets whether the table is temporary in the database.
      *
      * @return bool The current temporary setting.
      */
-    public function isTemporary(): bool;
+    function isTemporary(): bool;
 
     /**
      * Get the column(s) used for the primary key.
@@ -198,7 +198,7 @@ interface TableSchemaInterface extends SchemaInterface
      * @return array<string> Column name(s) for the primary key. An
      *   empty list will be returned when the table has no primary key.
      */
-    public function getPrimaryKey(): array;
+    function getPrimaryKey(): array;
 
     /**
      * Add an index.
@@ -217,7 +217,7 @@ interface TableSchemaInterface extends SchemaInterface
      * @return this
      * @throws \Cake\Database\Exception\DatabaseException
      */
-    public function addIndex(string $name, $attrs);
+    function addIndex(string $name, $attrs);
 
     /**
      * Read information about an index based on name.
@@ -225,14 +225,14 @@ interface TableSchemaInterface extends SchemaInterface
      * @param string $name The name of the index.
      * @return array<string, mixed>|null Array of index data, or null
      */
-    public function getIndex(string $name): ?array;
+    function getIndex(string $name): ?array;
 
     /**
      * Get the names of all the indexes in the table.
      *
      * @return array<string>
      */
-    public function indexes(): array;
+    function indexes(): array;
 
     /**
      * Add a constraint.
@@ -256,7 +256,7 @@ interface TableSchemaInterface extends SchemaInterface
      * @return this
      * @throws \Cake\Database\Exception\DatabaseException
      */
-    public function addConstraint(string $name, $attrs);
+    function addConstraint(string $name, $attrs);
 
     /**
      * Read information about a constraint based on name.
@@ -264,7 +264,7 @@ interface TableSchemaInterface extends SchemaInterface
      * @param string $name The name of the constraint.
      * @return array<string, mixed>|null Array of constraint data, or null
      */
-    public function getConstraint(string $name): ?array;
+    function getConstraint(string $name): ?array;
 
     /**
      * Remove a constraint.
@@ -272,12 +272,12 @@ interface TableSchemaInterface extends SchemaInterface
      * @param string $name Name of the constraint to remove
      * @return this
      */
-    public function dropConstraint(string $name);
+    function dropConstraint(string $name);
 
     /**
      * Get the names of all the constraints in the table.
      *
      * @return array<string>
      */
-    public function constraints(): array;
+    function constraints(): array;
 }

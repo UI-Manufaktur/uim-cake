@@ -28,7 +28,7 @@ class SqliteStatement extends StatementDecorator
     /**
      * @inheritDoc
      */
-    public function execute(?array $params = null): bool
+    function execute(?array $params = null): bool
     {
         if (this->_statement instanceof BufferedStatement) {
             this->_statement = this->_statement->getInnerStatement();
@@ -46,7 +46,7 @@ class SqliteStatement extends StatementDecorator
      *
      * @return int
      */
-    public function rowCount(): int
+    function rowCount(): int
     {
         /** @psalm-suppress NoInterfaceProperties */
         if (

@@ -26,7 +26,7 @@ interface TableSchemaAwareInterface
      *
      * @return \Cake\Database\Schema\TableSchemaInterface&\Cake\Database\Schema\SqlGeneratorInterface
      */
-    public function getTableSchema();
+    function getTableSchema();
 
     /**
      * Get and set the schema for this fixture.
@@ -34,5 +34,5 @@ interface TableSchemaAwareInterface
      * @param \Cake\Database\Schema\TableSchemaInterface&\Cake\Database\Schema\SqlGeneratorInterface $schema The table to set.
      * @return this
      */
-    public function setTableSchema($schema);
+    function setTableSchema($schema);
 }

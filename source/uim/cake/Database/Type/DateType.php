@@ -64,7 +64,7 @@ class DateType extends DateTimeType
      * @return this
      * @deprecated 4.3.0 This method is no longer needed as using immutable datetime class is the default behavior.
      */
-    public function useImmutable()
+    function useImmutable()
     {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
@@ -82,7 +82,7 @@ class DateType extends DateTimeType
      * @return this
      * @deprecated 4.3.0 Using mutable datetime objects is deprecated.
      */
-    public function useMutable()
+    function useMutable()
     {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
@@ -100,7 +100,7 @@ class DateType extends DateTimeType
      * @param mixed $value Request data
      * @return \DateTimeInterface|null
      */
-    public function marshal($value): ?DateTimeInterface
+    function marshal($value): ?DateTimeInterface
     {
         $date = parent::marshal($value);
         /** @psalm-var \DateTime|\DateTimeImmutable|null $date */

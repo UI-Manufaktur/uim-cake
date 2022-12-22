@@ -40,7 +40,7 @@ class JsonType extends BaseType implements BatchCastingInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function toDatabase($value, DriverInterface $driver): ?string
+    function toDatabase($value, DriverInterface $driver): ?string
     {
         if (is_resource($value)) {
             throw new InvalidArgumentException('Cannot convert a resource value to JSON');
@@ -60,7 +60,7 @@ class JsonType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return array|string|null
      */
-    public function toPHP($value, DriverInterface $driver)
+    function toPHP($value, DriverInterface $driver)
     {
         if (!is_string($value)) {
             return null;
@@ -72,7 +72,7 @@ class JsonType extends BaseType implements BatchCastingInterface
     /**
      * @inheritDoc
      */
-    public function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
@@ -92,7 +92,7 @@ class JsonType extends BaseType implements BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver.
      * @return int
      */
-    public function toStatement($value, DriverInterface $driver): int
+    function toStatement($value, DriverInterface $driver): int
     {
         return PDO::PARAM_STR;
     }
@@ -103,7 +103,7 @@ class JsonType extends BaseType implements BatchCastingInterface
      * @param mixed $value The value to convert.
      * @return mixed Converted value.
      */
-    public function marshal($value)
+    function marshal($value)
     {
         return $value;
     }
@@ -115,7 +115,7 @@ class JsonType extends BaseType implements BatchCastingInterface
      * @return this
      * @see https://www.php.net/manual/en/function.json-encode.php
      */
-    public function setEncodingOptions(int $options)
+    function setEncodingOptions(int $options)
     {
         this->_encodingOptions = $options;
 
