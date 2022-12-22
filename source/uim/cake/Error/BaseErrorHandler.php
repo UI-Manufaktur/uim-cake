@@ -94,17 +94,17 @@ abstract class BaseErrorHandler
             'See https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html'
         );
 
-        $level = $this->_config['errorLevel'] ?? -1;
+        $level = this->_config['errorLevel'] ?? -1;
         error_reporting($level);
-        set_error_handler([$this, 'handleError'], $level);
-        set_exception_handler([$this, 'handleException']);
+        set_error_handler([this, 'handleError'], $level);
+        set_exception_handler([this, 'handleException']);
         register_shutdown_function(function (): void {
-            if ((PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') && $this->_handled) {
+            if ((PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') && this->_handled) {
                 return;
             }
-            $megabytes = $this->_config['extraFatalErrorMemory'] ?? 4;
+            $megabytes = this->_config['extraFatalErrorMemory'] ?? 4;
             if ($megabytes > 0) {
-                $this->increaseMemoryLimit($megabytes * 1024);
+                this->increaseMemoryLimit($megabytes * 1024);
             }
             $error = error_get_last();
             if (!is_array($error)) {
@@ -118,7 +118,7 @@ abstract class BaseErrorHandler
             if (!in_array($error['type'], $fatals, true)) {
                 return;
             }
-            $this->handleFatalError(
+            this->handleFatalError(
                 $error['type'],
                 $error['message'],
                 $error['file'],
@@ -154,11 +154,11 @@ abstract class BaseErrorHandler
         if (!(error_reporting() & $code)) {
             return false;
         }
-        $this->_handled = true;
+        this->_handled = true;
         [$error, $log] = static::mapErrorCode($code);
         if ($log === LOG_ERR) {
             /** @psalm-suppress PossiblyNullArgument */
-            return $this->handleFatalError($code, $description, $file, $line);
+            return this->handleFatalError($code, $description, $file, $line);
         }
         $data = [
             'level' => $log,
@@ -187,8 +187,8 @@ abstract class BaseErrorHandler
                 'path' => Debugger::trimPath((string)$file),
             ];
         }
-        $this->_displayError($data, $debug);
-        $this->_logError($log, $data);
+        this->_displayError($data, $debug);
+        this->_logError($log, $data);
 
         return true;
     }
@@ -205,7 +205,7 @@ abstract class BaseErrorHandler
     public function wrapAndHandleException(Throwable $exception): void
     {
         deprecationWarning('This method is no longer in use. Call handleException instead.');
-        $this->handleException($exception);
+        this->handleException($exception);
     }
 
     /**
@@ -221,10 +221,10 @@ abstract class BaseErrorHandler
      */
     public function handleException(Throwable $exception): void
     {
-        $this->_displayException($exception);
-        $this->logException($exception);
+        this->_displayException($exception);
+        this->logException($exception);
         $code = $exception->getCode() ?: 1;
-        $this->_stop((int)$code);
+        this->_stop((int)$code);
     }
 
     /**
@@ -258,9 +258,9 @@ abstract class BaseErrorHandler
             'line' => $line,
             'error' => 'Fatal Error',
         ];
-        $this->_logError(LOG_ERR, $data);
+        this->_logError(LOG_ERR, $data);
 
-        $this->handleException(new FatalErrorException($description, 500, $file, $line));
+        this->handleException(new FatalErrorException($description, 500, $file, $line));
 
         return true;
     }
@@ -313,7 +313,7 @@ abstract class BaseErrorHandler
             $data['line']
         );
         $context = [];
-        if (!empty($this->_config['trace'])) {
+        if (!empty(this->_config['trace'])) {
             $context['trace'] = Debugger::trace([
                 'start' => 1,
                 'format' => 'log',
@@ -321,7 +321,7 @@ abstract class BaseErrorHandler
             $context['request'] = Router::getRequest();
         }
 
-        return $this->getLogger()->logMessage($level, $message, $context);
+        return this->getLogger()->logMessage($level, $message, $context);
     }
 
     /**
@@ -333,16 +333,16 @@ abstract class BaseErrorHandler
      */
     public function logException(Throwable $exception, ?ServerRequestInterface $request = null): bool
     {
-        if (empty($this->_config['log'])) {
+        if (empty(this->_config['log'])) {
             return false;
         }
-        foreach ($this->_config['skipLog'] as $class) {
+        foreach (this->_config['skipLog'] as $class) {
             if ($exception instanceof $class) {
                 return false;
             }
         }
 
-        return $this->getLogger()->log($exception, $request ?? Router::getRequest());
+        return this->getLogger()->log($exception, $request ?? Router::getRequest());
     }
 
     /**
@@ -352,22 +352,22 @@ abstract class BaseErrorHandler
      */
     public function getLogger()
     {
-        if ($this->logger === null) {
+        if (this->logger === null) {
             /** @var \Cake\Error\ErrorLoggerInterface $logger */
-            $logger = new $this->_config['errorLogger']($this->_config);
+            $logger = new this->_config['errorLogger'](this->_config);
 
             if (!$logger instanceof ErrorLoggerInterface) {
                 // Set the logger so that the next error can be logged.
-                $this->logger = new ErrorLogger($this->_config);
+                this->logger = new ErrorLogger(this->_config);
 
                 $interface = ErrorLoggerInterface::class;
                 $type = getTypeName($logger);
                 throw new RuntimeException("Cannot create logger. `{$type}` does not implement `{$interface}`.");
             }
-            $this->logger = $logger;
+            this->logger = $logger;
         }
 
-        return $this->logger;
+        return this->logger;
     }
 
     /**

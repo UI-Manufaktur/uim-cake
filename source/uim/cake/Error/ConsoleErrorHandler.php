@@ -46,8 +46,8 @@ class ConsoleErrorHandler extends BaseErrorHandler
             'log' => false,
         ];
 
-        $this->setConfig($config);
-        $this->_stderr = $this->_config['stderr'];
+        this->setConfig($config);
+        this->_stderr = this->_config['stderr'];
     }
 
     /**
@@ -61,14 +61,14 @@ class ConsoleErrorHandler extends BaseErrorHandler
      */
     public function handleException(Throwable $exception): void
     {
-        $this->_displayException($exception);
-        $this->logException($exception);
+        this->_displayException($exception);
+        this->logException($exception);
 
         $exitCode = Command::CODE_ERROR;
         if ($exception instanceof ConsoleException) {
             $exitCode = $exception->getCode();
         }
-        $this->_stop($exitCode);
+        this->_stop($exitCode);
     }
 
     /**
@@ -91,7 +91,7 @@ class ConsoleErrorHandler extends BaseErrorHandler
             $exception->getFile(),
             $exception->getLine()
         );
-        $this->_stderr->write($message);
+        this->_stderr->write($message);
     }
 
     /**
@@ -116,7 +116,7 @@ class ConsoleErrorHandler extends BaseErrorHandler
             $error['error'],
             $message
         );
-        $this->_stderr->write($message);
+        this->_stderr->write($message);
     }
 
     /**

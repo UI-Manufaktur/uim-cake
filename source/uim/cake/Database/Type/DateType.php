@@ -55,13 +55,13 @@ class DateType extends DateTimeType
     {
         parent::__construct($name);
 
-        $this->_setClassName(FrozenDate::class, DateTimeImmutable::class);
+        this->_setClassName(FrozenDate::class, DateTimeImmutable::class);
     }
 
     /**
      * Change the preferred class name to the FrozenDate implementation.
      *
-     * @return $this
+     * @return this
      * @deprecated 4.3.0 This method is no longer needed as using immutable datetime class is the default behavior.
      */
     public function useImmutable()
@@ -71,15 +71,15 @@ class DateType extends DateTimeType
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
         );
 
-        $this->_setClassName(FrozenDate::class, DateTimeImmutable::class);
+        this->_setClassName(FrozenDate::class, DateTimeImmutable::class);
 
-        return $this;
+        return this;
     }
 
     /**
      * Change the preferred class name to the mutable Date implementation.
      *
-     * @return $this
+     * @return this
      * @deprecated 4.3.0 Using mutable datetime objects is deprecated.
      */
     public function useMutable()
@@ -89,9 +89,9 @@ class DateType extends DateTimeType
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
         );
 
-        $this->_setClassName(Date::class, DateTime::class);
+        this->_setClassName(Date::class, DateTime::class);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -118,8 +118,8 @@ class DateType extends DateTimeType
     protected function _parseLocaleValue(string $value): ?I18nDateTimeInterface
     {
         /** @psalm-var class-string<\Cake\I18n\I18nDateTimeInterface> $class */
-        $class = $this->_className;
+        $class = this->_className;
 
-        return $class::parseDate($value, $this->_localeMarshalFormat);
+        return $class::parseDate($value, this->_localeMarshalFormat);
     }
 }

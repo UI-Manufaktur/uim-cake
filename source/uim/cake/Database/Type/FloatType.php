@@ -115,8 +115,8 @@ class FloatType extends BaseType implements BatchCastingInterface
         if ($value === null || $value === '') {
             return null;
         }
-        if (is_string($value) && $this->_useLocaleParser) {
-            return $this->_parseValue($value);
+        if (is_string($value) && this->_useLocaleParser) {
+            return this->_parseValue($value);
         }
         if (is_numeric($value)) {
             return (float)$value;
@@ -133,22 +133,22 @@ class FloatType extends BaseType implements BatchCastingInterface
      * by using a locale aware parser.
      *
      * @param bool $enable Whether to enable
-     * @return $this
+     * @return this
      */
     public function useLocaleParser(bool $enable = true)
     {
         if ($enable === false) {
-            $this->_useLocaleParser = $enable;
+            this->_useLocaleParser = $enable;
 
-            return $this;
+            return this;
         }
         if (
             static::$numberClass === Number::class ||
             is_subclass_of(static::$numberClass, Number::class)
         ) {
-            $this->_useLocaleParser = $enable;
+            this->_useLocaleParser = $enable;
 
-            return $this;
+            return this;
         }
         throw new RuntimeException(
             sprintf('Cannot use locale parsing with the %s class', static::$numberClass)

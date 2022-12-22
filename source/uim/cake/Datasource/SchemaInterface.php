@@ -54,7 +54,7 @@ interface SchemaInterface
      *
      * @param string $name The name of the column
      * @param array<string, mixed>|string $attrs The attributes for the column or the type name.
-     * @return $this
+     * @return this
      */
     public function addColumn(string $name, $attrs);
 
@@ -80,7 +80,7 @@ interface SchemaInterface
      * If the column is not defined in the table, no error will be raised.
      *
      * @param string $name The name of the column
-     * @return $this
+     * @return this
      */
     public function removeColumn(string $name);
 
@@ -104,7 +104,7 @@ interface SchemaInterface
      *
      * @param string $name The column to set the type of.
      * @param string $type The type to set the column to.
-     * @return $this
+     * @return this
      */
     public function setColumnType(string $name, string $type);
 
@@ -150,7 +150,7 @@ interface SchemaInterface
      * For example the engine type in MySQL.
      *
      * @param array<string, mixed> $options The options to set, or null to read options.
-     * @return $this
+     * @return this
      */
     public function setOptions(array $options);
 

@@ -20,7 +20,7 @@ namespace Cake\Datasource;
 /**
  * The basis for every query object
  *
- * @method $this andWhere($conditions, array $types = []) Connects any previously defined set of conditions to the
+ * @method this andWhere($conditions, array $types = []) Connects any previously defined set of conditions to the
  *   provided list using the AND operator. {@see \Cake\Database\Query::andWhere()}
  * @method \Cake\Datasource\EntityInterface|array firstOrFail() Get the first result from the executing query or raise an exception.
  *   {@see \Cake\Database\Query::firstOrFail()}
@@ -38,7 +38,7 @@ interface QueryInterface
      *
      * @param \Cake\Database\ExpressionInterface|\Cake\ORM\Association|\Cake\ORM\Table|callable|array|string $fields Fields.
      * @param bool $overwrite whether to reset fields with passed list or not
-     * @return $this
+     * @return this
      */
     public function select($fields, bool $overwrite = false);
 
@@ -116,7 +116,7 @@ interface QueryInterface
      * ```
      *
      * @param array<string, mixed> $options list of query clauses to apply new parts to.
-     * @return $this
+     * @return this
      */
     public function applyOptions(array $options);
 
@@ -173,7 +173,7 @@ interface QueryInterface
      * ```
      *
      * @param \Cake\Database\ExpressionInterface|int|null $limit number of records to be returned
-     * @return $this
+     * @return this
      */
     public function limit($limit);
 
@@ -193,7 +193,7 @@ interface QueryInterface
      * ```
      *
      * @param \Cake\Database\ExpressionInterface|int|null $offset number of records to be skipped
-     * @return $this
+     * @return this
      */
     public function offset($offset);
 
@@ -244,7 +244,7 @@ interface QueryInterface
      *
      * @param \Cake\Database\ExpressionInterface|\Closure|array|string $fields fields to be added to the list
      * @param bool $overwrite whether to reset order with field list or not
-     * @return $this
+     * @return this
      */
     public function order($fields, $overwrite = false);
 
@@ -260,7 +260,7 @@ interface QueryInterface
      * @param int $num The page number you want.
      * @param int|null $limit The number of rows you want in the page. If null
      *  the current limit clause will be used.
-     * @return $this
+     * @return this
      * @throws \InvalidArgumentException If page number < 1.
      */
     public function page(int $num, ?int $limit = null);
@@ -277,7 +277,7 @@ interface QueryInterface
      * and form the `FROM` clause.
      *
      * @param \Cake\Datasource\RepositoryInterface $repository The default repository object to use
-     * @return $this
+     * @return this
      */
     public function repository(RepositoryInterface $repository);
 
@@ -399,7 +399,7 @@ interface QueryInterface
      * @param \Closure|array|string|null $conditions The conditions to filter on.
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset conditions with passed list or not
-     * @return $this
+     * @return this
      */
     public function where($conditions = null, array $types = [], bool $overwrite = false);
 }

@@ -49,7 +49,7 @@ class BinaryUuidType extends BaseType
             return null;
         }
 
-        return $this->convertStringToBinaryUuid($value);
+        return this->convertStringToBinaryUuid($value);
     }
 
     /**
@@ -76,7 +76,7 @@ class BinaryUuidType extends BaseType
             return null;
         }
         if (is_string($value)) {
-            return $this->convertBinaryUuidToString($value);
+            return this->convertBinaryUuidToString($value);
         }
         if (is_resource($value)) {
             return $value;

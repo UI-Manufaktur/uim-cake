@@ -88,13 +88,13 @@ trait QueryTrait
      * and form the `FROM` clause.
      *
      * @param \Cake\Datasource\RepositoryInterface|\Cake\ORM\Table $repository The default table object to use
-     * @return $this
+     * @return this
      */
     public function repository(RepositoryInterface $repository)
     {
-        $this->_repository = $repository;
+        this->_repository = $repository;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -105,7 +105,7 @@ trait QueryTrait
      */
     public function getRepository(): RepositoryInterface
     {
-        return $this->_repository;
+        return this->_repository;
     }
 
     /**
@@ -118,13 +118,13 @@ trait QueryTrait
      * This method is most useful when combined with results stored in a persistent cache.
      *
      * @param iterable $results The results this query should return.
-     * @return $this
+     * @return this
      */
     public function setResult(iterable $results)
     {
-        $this->_results = $results;
+        this->_results = $results;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -139,7 +139,7 @@ trait QueryTrait
     #[\ReturnTypeWillChange]
     public function getIterator()
     {
-        return $this->all();
+        return this->all();
     }
 
     /**
@@ -176,18 +176,18 @@ trait QueryTrait
      *   When using a function, this query instance will be supplied as an argument.
      * @param \Psr\SimpleCache\CacheInterface|string $config Either the name of the cache config to use, or
      *   a cache engine instance.
-     * @return $this
+     * @return this
      */
     public function cache($key, $config = 'default')
     {
         if ($key === false) {
-            $this->_cache = null;
+            this->_cache = null;
 
-            return $this;
+            return this;
         }
-        $this->_cache = new QueryCacher($key, $config);
+        this->_cache = new QueryCacher($key, $config);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -197,7 +197,7 @@ trait QueryTrait
      */
     public function isEagerLoaded(): bool
     {
-        return $this->_eagerLoaded;
+        return this->_eagerLoaded;
     }
 
     /**
@@ -205,13 +205,13 @@ trait QueryTrait
      * passed, the current configured query `_eagerLoaded` value is returned.
      *
      * @param bool $value Whether to eager load.
-     * @return $this
+     * @return this
      */
     public function eagerLoaded(bool $value)
     {
-        $this->_eagerLoaded = $value;
+        this->_eagerLoaded = $value;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -229,7 +229,7 @@ trait QueryTrait
     public function aliasField(string $field, ?string $alias = null): array
     {
         if (strpos($field, '.') === false) {
-            $alias = $alias ?: $this->getRepository()->getAlias();
+            $alias = $alias ?: this->getRepository()->getAlias();
             $aliasedField = $alias . '.' . $field;
         } else {
             $aliasedField = $field;
@@ -254,7 +254,7 @@ trait QueryTrait
         $aliased = [];
         foreach ($fields as $alias => $field) {
             if (is_numeric($alias) && is_string($field)) {
-                $aliased += $this->aliasField($field, $defaultAlias);
+                $aliased += this->aliasField($field, $defaultAlias);
                 continue;
             }
             $aliased[$alias] = $field;
@@ -276,23 +276,23 @@ trait QueryTrait
      */
     public function all(): ResultSetInterface
     {
-        if ($this->_results !== null) {
-            return $this->_results;
+        if (this->_results !== null) {
+            return this->_results;
         }
 
         $results = null;
-        if ($this->_cache) {
-            $results = $this->_cache->fetch($this);
+        if (this->_cache) {
+            $results = this->_cache->fetch(this);
         }
         if ($results === null) {
-            $results = $this->_decorateResults($this->_execute());
-            if ($this->_cache) {
-                $this->_cache->store($this, $results);
+            $results = this->_decorateResults(this->_execute());
+            if (this->_cache) {
+                this->_cache->store(this, $results);
             }
         }
-        $this->_results = $results;
+        this->_results = $results;
 
-        return $this->_results;
+        return this->_results;
     }
 
     /**
@@ -302,7 +302,7 @@ trait QueryTrait
      */
     public function toArray(): array
     {
-        return $this->all()->toArray();
+        return this->all()->toArray();
     }
 
     /**
@@ -318,24 +318,24 @@ trait QueryTrait
      * @param callable|null $mapper The mapper callable.
      * @param callable|null $reducer The reducing function.
      * @param bool $overwrite Set to true to overwrite existing map + reduce functions.
-     * @return $this
+     * @return this
      * @see \Cake\Collection\Iterator\MapReduce for details on how to use emit data to the map reducer.
      */
     public function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
     {
         if ($overwrite) {
-            $this->_mapReduce = [];
+            this->_mapReduce = [];
         }
         if ($mapper === null) {
             if (!$overwrite) {
                 throw new InvalidArgumentException('$mapper can be null only when $overwrite is true.');
             }
 
-            return $this;
+            return this;
         }
-        $this->_mapReduce[] = compact('mapper', 'reducer');
+        this->_mapReduce[] = compact('mapper', 'reducer');
 
-        return $this;
+        return this;
     }
 
     /**
@@ -345,7 +345,7 @@ trait QueryTrait
      */
     public function getMapReducers(): array
     {
-        return $this->_mapReduce;
+        return this->_mapReduce;
     }
 
     /**
@@ -437,31 +437,31 @@ trait QueryTrait
      *
      * @param callable|null $formatter The formatting callable.
      * @param int|bool $mode Whether to overwrite, append or prepend the formatter.
-     * @return $this
+     * @return this
      * @throws \InvalidArgumentException
      */
     public function formatResults(?callable $formatter = null, $mode = self::APPEND)
     {
         if ($mode === self::OVERWRITE) {
-            $this->_formatters = [];
+            this->_formatters = [];
         }
         if ($formatter === null) {
             if ($mode !== self::OVERWRITE) {
                 throw new InvalidArgumentException('$formatter can be null only when $mode is overwrite.');
             }
 
-            return $this;
+            return this;
         }
 
         if ($mode === self::PREPEND) {
-            array_unshift($this->_formatters, $formatter);
+            array_unshift(this->_formatters, $formatter);
 
-            return $this;
+            return this;
         }
 
-        $this->_formatters[] = $formatter;
+        this->_formatters[] = $formatter;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -471,7 +471,7 @@ trait QueryTrait
      */
     public function getResultFormatters(): array
     {
-        return $this->_formatters;
+        return this->_formatters;
     }
 
     /**
@@ -488,11 +488,11 @@ trait QueryTrait
      */
     public function first()
     {
-        if ($this->_dirty) {
-            $this->limit(1);
+        if (this->_dirty) {
+            this->limit(1);
         }
 
-        return $this->all()->first();
+        return this->all()->first();
     }
 
     /**
@@ -503,9 +503,9 @@ trait QueryTrait
      */
     public function firstOrFail()
     {
-        $entity = $this->first();
+        $entity = this->first();
         if (!$entity) {
-            $table = $this->getRepository();
+            $table = this->getRepository();
             throw new RecordNotFoundException(sprintf(
                 'Record not found in table "%s"',
                 $table->getTable()
@@ -533,7 +533,7 @@ trait QueryTrait
      */
     public function getOptions(): array
     {
-        return $this->_options;
+        return this->_options;
     }
 
     /**
@@ -546,7 +546,7 @@ trait QueryTrait
      */
     public function __call(string $method, array $arguments)
     {
-        $resultSetClass = $this->_decoratorClass();
+        $resultSetClass = this->_decoratorClass();
         if (in_array($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(
                 'Calling `%s` methods, such as `%s()`, on queries is deprecated. ' .
@@ -555,7 +555,7 @@ trait QueryTrait
                 $method,
                 $method,
             ), 2);
-            $results = $this->all();
+            $results = this->all();
 
             return $results->$method(...$arguments);
         }
@@ -569,7 +569,7 @@ trait QueryTrait
      * This is handy for passing all query clauses at once.
      *
      * @param array<string, mixed> $options the options to be applied
-     * @return $this
+     * @return this
      */
     abstract public function applyOptions(array $options);
 
@@ -588,20 +588,20 @@ trait QueryTrait
      */
     protected function _decorateResults(Traversable $result): ResultSetInterface
     {
-        $decorator = $this->_decoratorClass();
-        foreach ($this->_mapReduce as $functions) {
+        $decorator = this->_decoratorClass();
+        foreach (this->_mapReduce as $functions) {
             $result = new MapReduce($result, $functions['mapper'], $functions['reducer']);
         }
 
-        if (!empty($this->_mapReduce)) {
+        if (!empty(this->_mapReduce)) {
             $result = new $decorator($result);
         }
 
-        foreach ($this->_formatters as $formatter) {
-            $result = $formatter($result, $this);
+        foreach (this->_formatters as $formatter) {
+            $result = $formatter($result, this);
         }
 
-        if (!empty($this->_formatters) && !($result instanceof $decorator)) {
+        if (!empty(this->_formatters) && !($result instanceof $decorator)) {
             $result = new $decorator($result);
         }
 

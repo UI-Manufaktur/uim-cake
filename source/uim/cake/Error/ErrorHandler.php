@@ -101,7 +101,7 @@ class ErrorHandler extends BaseErrorHandler
             'exceptionRenderer' => ExceptionRenderer::class,
         ];
 
-        $this->setConfig($config);
+        this->setConfig($config);
     }
 
     /**
@@ -131,14 +131,14 @@ class ErrorHandler extends BaseErrorHandler
     protected function _displayException(Throwable $exception): void
     {
         try {
-            $renderer = $this->getRenderer(
+            $renderer = this->getRenderer(
                 $exception,
                 Router::getRequest()
             );
             $response = $renderer->render();
-            $this->_sendResponse($response);
+            this->_sendResponse($response);
         } catch (Throwable $exception) {
-            $this->_logInternalError($exception);
+            this->_logInternalError($exception);
         }
     }
 
@@ -154,7 +154,7 @@ class ErrorHandler extends BaseErrorHandler
         Throwable $exception,
         ?ServerRequestInterface $request = null
     ): ExceptionRendererInterface {
-        $renderer = $this->_config['exceptionRenderer'];
+        $renderer = this->_config['exceptionRenderer'];
 
         if (is_string($renderer)) {
             /** @var class-string<\Cake\Error\ExceptionRendererInterface>|null $class */
@@ -184,7 +184,7 @@ class ErrorHandler extends BaseErrorHandler
     protected function _logInternalError(Throwable $exception): void
     {
         // Disable trace for internal errors.
-        $this->_config['trace'] = false;
+        this->_config['trace'] = false;
         $message = sprintf(
             "[%s] %s (%s:%s)\n%s", // Keeping same message format
             get_class($exception),

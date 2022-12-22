@@ -135,7 +135,7 @@ class NumericPaginator implements PaginatorInterface
      * You can also pass an already created instance of a query to this method:
      *
      * ```
-     * $query = $this->Articles->find('popular')->matching('Tags', function ($q) {
+     * $query = this->Articles->find('popular')->matching('Tags', function ($q) {
      *   return $q->where(['name' => 'CakePHP'])
      * });
      * $results = $paginator->paginate($query);
@@ -176,21 +176,21 @@ class NumericPaginator implements PaginatorInterface
             }
         }
 
-        $data = $this->extractData($object, $params, $settings);
-        $query = $this->getQuery($object, $query, $data);
+        $data = this->extractData($object, $params, $settings);
+        $query = this->getQuery($object, $query, $data);
 
         $cleanQuery = clone $query;
         $results = $query->all();
         $data['numResults'] = count($results);
-        $data['count'] = $this->getCount($cleanQuery, $data);
+        $data['count'] = this->getCount($cleanQuery, $data);
 
-        $pagingParams = $this->buildParams($data);
+        $pagingParams = this->buildParams($data);
         $alias = $object->getAlias();
-        $this->_pagingParams = [$alias => $pagingParams];
+        this->_pagingParams = [$alias => $pagingParams];
         if ($pagingParams['requestedPage'] > $pagingParams['page']) {
             throw new PageOutOfBoundsException([
                 'requestedPage' => $pagingParams['requestedPage'],
-                'pagingParams' => $this->_pagingParams,
+                'pagingParams' => this->_pagingParams,
             ]);
         }
 
@@ -239,14 +239,14 @@ class NumericPaginator implements PaginatorInterface
     protected function extractData(RepositoryInterface $object, array $params, array $settings): array
     {
         $alias = $object->getAlias();
-        $defaults = $this->getDefaults($alias, $settings);
-        $options = $this->mergeOptions($params, $defaults);
-        $options = $this->validateSort($object, $options);
-        $options = $this->checkLimit($options);
+        $defaults = this->getDefaults($alias, $settings);
+        $options = this->mergeOptions($params, $defaults);
+        $options = this->validateSort($object, $options);
+        $options = this->checkLimit($options);
 
         $options += ['page' => 1, 'scope' => null];
         $options['page'] = (int)$options['page'] < 1 ? 1 : (int)$options['page'];
-        [$finder, $options] = $this->_extractFinder($options);
+        [$finder, $options] = this->_extractFinder($options);
 
         return compact('defaults', 'options', 'finder');
     }
@@ -270,10 +270,10 @@ class NumericPaginator implements PaginatorInterface
             'requestedPage' => $data['options']['page'],
         ];
 
-        $paging = $this->addPageCountParams($paging, $data);
-        $paging = $this->addStartEndParams($paging, $data);
-        $paging = $this->addPrevNextParams($paging, $data);
-        $paging = $this->addSortingParams($paging, $data);
+        $paging = this->addPageCountParams($paging, $data);
+        $paging = this->addStartEndParams($paging, $data);
+        $paging = this->addPrevNextParams($paging, $data);
+        $paging = this->addSortingParams($paging, $data);
 
         $paging += [
             'limit' => $data['defaults']['limit'] != $limit ? $limit : null,
@@ -406,7 +406,7 @@ class NumericPaginator implements PaginatorInterface
      */
     public function getPagingParams(): array
     {
-        return $this->_pagingParams;
+        return this->_pagingParams;
     }
 
     /**
@@ -416,11 +416,11 @@ class NumericPaginator implements PaginatorInterface
      */
     protected function getAllowedParameters(): array
     {
-        $allowed = $this->getConfig('allowedParameters');
+        $allowed = this->getConfig('allowedParameters');
         if (!$allowed) {
             $allowed = [];
         }
-        $whitelist = $this->getConfig('whitelist');
+        $whitelist = this->getConfig('whitelist');
         if ($whitelist) {
             deprecationWarning('The `whitelist` option is deprecated. Use the `allowedParameters` option instead.');
 
@@ -473,7 +473,7 @@ class NumericPaginator implements PaginatorInterface
             $params = !empty($params[$scope]) ? (array)$params[$scope] : [];
         }
 
-        $allowed = $this->getAllowedParameters();
+        $allowed = this->getAllowedParameters();
         $params = array_intersect_key($params, array_flip($allowed));
 
         return array_merge($settings, $params);
@@ -494,8 +494,8 @@ class NumericPaginator implements PaginatorInterface
             $settings = $settings[$alias];
         }
 
-        $defaults = $this->getConfig();
-        $defaults['whitelist'] = $defaults['allowedParameters'] = $this->getAllowedParameters();
+        $defaults = this->getConfig();
+        $defaults['whitelist'] = $defaults['allowedParameters'] = this->getAllowedParameters();
 
         $maxLimit = $settings['maxLimit'] ?? $defaults['maxLimit'];
         $limit = $settings['limit'] ?? $defaults['limit'];
@@ -549,7 +549,7 @@ class NumericPaginator implements PaginatorInterface
 
             $order = isset($options['order']) && is_array($options['order']) ? $options['order'] : [];
             if ($order && $options['sort'] && strpos($options['sort'], '.') === false) {
-                $order = $this->_removeAliases($order, $object->getAlias());
+                $order = this->_removeAliases($order, $object->getAlias());
             }
 
             $options['order'] = [$options['sort'] => $direction] + $order;
@@ -566,7 +566,7 @@ class NumericPaginator implements PaginatorInterface
         }
 
         $sortAllowed = false;
-        $allowed = $this->getSortableFields($options);
+        $allowed = this->getSortableFields($options);
         if ($allowed !== null) {
             $options['sortableFields'] = $options['sortWhitelist'] = $allowed;
 
@@ -588,7 +588,7 @@ class NumericPaginator implements PaginatorInterface
             $options['sort'] = key($options['order']);
         }
 
-        $options['order'] = $this->_prefix($object, $options['order'], $sortAllowed);
+        $options['order'] = this->_prefix($object, $options['order'], $sortAllowed);
 
         return $options;
     }

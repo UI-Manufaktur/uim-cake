@@ -52,20 +52,20 @@ abstract class AbstractLocator implements LocatorInterface
         $storeOptions = $options;
         unset($storeOptions['allowFallbackClass']);
 
-        if (isset($this->instances[$alias])) {
-            if (!empty($storeOptions) && isset($this->options[$alias]) && $this->options[$alias] !== $storeOptions) {
+        if (isset(this->instances[$alias])) {
+            if (!empty($storeOptions) && isset(this->options[$alias]) && this->options[$alias] !== $storeOptions) {
                 throw new RuntimeException(sprintf(
                     'You cannot configure "%s", it already exists in the registry.',
                     $alias
                 ));
             }
 
-            return $this->instances[$alias];
+            return this->instances[$alias];
         }
 
-        $this->options[$alias] = $storeOptions;
+        this->options[$alias] = $storeOptions;
 
-        return $this->instances[$alias] = $this->createInstance($alias, $options);
+        return this->instances[$alias] = this->createInstance($alias, $options);
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class AbstractLocator implements LocatorInterface
      */
     public function set(string $alias, RepositoryInterface $repository)
     {
-        return $this->instances[$alias] = $repository;
+        return this->instances[$alias] = $repository;
     }
 
     /**
@@ -90,7 +90,7 @@ abstract class AbstractLocator implements LocatorInterface
      */
     public function exists(string $alias): bool
     {
-        return isset($this->instances[$alias]);
+        return isset(this->instances[$alias]);
     }
 
     /**
@@ -99,8 +99,8 @@ abstract class AbstractLocator implements LocatorInterface
     public function remove(string $alias): void
     {
         unset(
-            $this->instances[$alias],
-            $this->options[$alias]
+            this->instances[$alias],
+            this->options[$alias]
         );
     }
 
@@ -109,7 +109,7 @@ abstract class AbstractLocator implements LocatorInterface
      */
     public function clear(): void
     {
-        $this->instances = [];
-        $this->options = [];
+        this->instances = [];
+        this->options = [];
     }
 }

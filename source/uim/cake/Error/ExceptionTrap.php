@@ -99,7 +99,7 @@ class ExceptionTrap
      */
     public this(array $options = [])
     {
-        $this->setConfig($options);
+        this->setConfig($options);
     }
 
     /**
@@ -114,7 +114,7 @@ class ExceptionTrap
         $request = $request ?? Router::getRequest();
 
         /** @var class-string|callable $class */
-        $class = $this->getConfig('exceptionRenderer');
+        $class = this->getConfig('exceptionRenderer');
         $deprecatedConfig = ($class === ExceptionRenderer::class && PHP_SAPI === 'cli');
         if ($deprecatedConfig) {
             deprecationWarning(
@@ -128,7 +128,7 @@ class ExceptionTrap
             // in a CLI context and the Web renderer is currently selected.
             // This indicates old configuration or user error, in both scenarios
             // it is preferrable to use the Console renderer instead.
-            $class = $this->chooseRenderer();
+            $class = this->chooseRenderer();
         }
 
         if (is_string($class)) {
@@ -141,7 +141,7 @@ class ExceptionTrap
             }
 
             /** @var class-string<\Cake\Error\ExceptionRendererInterface> $class */
-            return new $class($exception, $request, $this->_config);
+            return new $class($exception, $request, this->_config);
         }
 
         return $class($exception, $request);
@@ -166,9 +166,9 @@ class ExceptionTrap
     public function logger(): ErrorLoggerInterface
     {
         /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
-        $class = $this->getConfig('logger', $this->_defaultConfig['logger']);
+        $class = this->getConfig('logger', this->_defaultConfig['logger']);
 
-        return new $class($this->_config);
+        return new $class(this->_config);
     }
 
     /**
@@ -181,9 +181,9 @@ class ExceptionTrap
      */
     public function register(): void
     {
-        set_exception_handler([$this, 'handleException']);
-        register_shutdown_function([$this, 'handleShutdown']);
-        static::$registeredTrap = $this;
+        set_exception_handler([this, 'handleException']);
+        register_shutdown_function([this, 'handleShutdown']);
+        static::$registeredTrap = this;
     }
 
     /**
@@ -196,8 +196,8 @@ class ExceptionTrap
      */
     public function unregister(): void
     {
-        if (static::$registeredTrap == $this) {
-            $this->disabled = true;
+        if (static::$registeredTrap == this) {
+            this->disabled = true;
             static::$registeredTrap = null;
         }
     }
@@ -229,18 +229,18 @@ class ExceptionTrap
      */
     public function handleException(Throwable $exception): void
     {
-        if ($this->disabled) {
+        if (this->disabled) {
             return;
         }
         $request = Router::getRequest();
 
-        $this->logException($exception, $request);
+        this->logException($exception, $request);
 
         try {
-            $renderer = $this->renderer($exception);
+            $renderer = this->renderer($exception);
             $renderer->write($renderer->render());
         } catch (Throwable $exception) {
-            $this->logInternalError($exception);
+            this->logInternalError($exception);
         }
         // Use this constant as a proxy for cakephp tests.
         if (PHP_SAPI == 'cli' && !env('FIXTURE_SCHEMA_METADATA')) {
@@ -257,12 +257,12 @@ class ExceptionTrap
      */
     public function handleShutdown(): void
     {
-        if ($this->disabled) {
+        if (this->disabled) {
             return;
         }
-        $megabytes = $this->_config['extraFatalErrorMemory'] ?? 4;
+        $megabytes = this->_config['extraFatalErrorMemory'] ?? 4;
         if ($megabytes > 0) {
-            $this->increaseMemoryLimit($megabytes * 1024);
+            this->increaseMemoryLimit($megabytes * 1024);
         }
         $error = error_get_last();
         if (!is_array($error)) {
@@ -276,7 +276,7 @@ class ExceptionTrap
         if (!in_array($error['type'], $fatals, true)) {
             return;
         }
-        $this->handleFatalError(
+        this->handleFatalError(
             $error['type'],
             $error['message'],
             $error['file'],
@@ -325,7 +325,7 @@ class ExceptionTrap
      */
     public function handleFatalError(int $code, string $description, string $file, int $line): void
     {
-        $this->handleException(new FatalErrorException('Fatal Error: ' . $description, 500, $file, $line));
+        this->handleException(new FatalErrorException('Fatal Error: ' . $description, 500, $file, $line));
     }
 
     /**
@@ -343,28 +343,28 @@ class ExceptionTrap
      */
     public function logException(Throwable $exception, ?ServerRequestInterface $request = null): void
     {
-        $shouldLog = $this->_config['log'];
+        $shouldLog = this->_config['log'];
         if ($shouldLog) {
-            foreach ($this->getConfig('skipLog') as $class) {
+            foreach (this->getConfig('skipLog') as $class) {
                 if ($exception instanceof $class) {
                     $shouldLog = false;
                 }
             }
         }
         if ($shouldLog) {
-            $logger = $this->logger();
+            $logger = this->logger();
             if (method_exists($logger, 'logException')) {
-                $logger->logException($exception, $request, $this->_config['trace']);
+                $logger->logException($exception, $request, this->_config['trace']);
             } else {
                 $loggerClass = get_class($logger);
                 deprecationWarning(
                     "The configured logger `{$loggerClass}` should implement `logException()` " .
                     'to be compatible with future versions of CakePHP.'
                 );
-                $this->logger()->log($exception, $request);
+                this->logger()->log($exception, $request);
             }
         }
-        $this->dispatchEvent('Exception.beforeRender', ['exception' => $exception]);
+        this->dispatchEvent('Exception.beforeRender', ['exception' => $exception]);
     }
 
     /**

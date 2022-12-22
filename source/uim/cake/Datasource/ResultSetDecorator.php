@@ -36,11 +36,11 @@ class ResultSetDecorator extends Collection implements ResultSetInterface
      */
     public function count(): int
     {
-        $iterator = $this->getInnerIterator();
+        $iterator = this->getInnerIterator();
         if ($iterator instanceof Countable) {
             return $iterator->count();
         }
 
-        return count($this->toArray());
+        return count(this->toArray());
     }
 }

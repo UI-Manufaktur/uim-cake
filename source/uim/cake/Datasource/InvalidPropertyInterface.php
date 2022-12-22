@@ -38,7 +38,7 @@ interface InvalidPropertyInterface
      *
      * @param array<string, mixed> $fields The values to set.
      * @param bool $overwrite Whether to overwrite pre-existing values for $field.
-     * @return $this
+     * @return this
      */
     public function setInvalid(array $fields, bool $overwrite = false);
 
@@ -55,7 +55,7 @@ interface InvalidPropertyInterface
      *
      * @param string $field The value to set.
      * @param mixed $value The invalid value to be set for $field.
-     * @return $this
+     * @return this
      */
     public function setInvalidField(string $field, $value);
 }

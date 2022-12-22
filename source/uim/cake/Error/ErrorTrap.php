@@ -53,7 +53,7 @@ class ErrorTrap
      */
     public this(array $options = [])
     {
-        $this->setConfig($options);
+        this->setConfig($options);
     }
 
     /**
@@ -63,7 +63,7 @@ class ErrorTrap
      */
     protected function chooseErrorRenderer(): string
     {
-        $config = $this->getConfig('errorRenderer');
+        $config = this->getConfig('errorRenderer');
         if ($config !== null) {
             return $config;
         }
@@ -85,9 +85,9 @@ class ErrorTrap
      */
     public function register(): void
     {
-        $level = $this->_config['errorLevel'] ?? -1;
+        $level = this->_config['errorLevel'] ?? -1;
         error_reporting($level);
-        set_error_handler([$this, 'handleError'], $level);
+        set_error_handler([this, 'handleError'], $level);
     }
 
     /**
@@ -123,19 +123,19 @@ class ErrorTrap
         $error = new PhpError($code, $description, $file, $line, $trace);
 
         $debug = Configure::read('debug');
-        $renderer = $this->renderer();
+        $renderer = this->renderer();
 
         try {
             // Log first incase rendering or event listeners fail
-            $this->logError($error);
-            $event = $this->dispatchEvent('Error.beforeRender', ['error' => $error]);
+            this->logError($error);
+            $event = this->dispatchEvent('Error.beforeRender', ['error' => $error]);
             if ($event->isStopped()) {
                 return true;
             }
             $renderer->write($renderer->render($error, $debug));
         } catch (Exception $e) {
             // Fatal errors always log.
-            $this->logger()->logMessage('error', 'Could not render error. Got: ' . $e->getMessage());
+            this->logger()->logMessage('error', 'Could not render error. Got: ' . $e->getMessage());
 
             return false;
         }
@@ -151,12 +151,12 @@ class ErrorTrap
      */
     protected function logError(PhpError $error): void
     {
-        if (!$this->_config['log']) {
+        if (!this->_config['log']) {
             return;
         }
-        $logger = $this->logger();
+        $logger = this->logger();
         if (method_exists($logger, 'logError')) {
-            $logger->logError($error, Router::getRequest(), $this->_config['trace']);
+            $logger->logError($error, Router::getRequest(), this->_config['trace']);
         } else {
             $loggerClass = get_class($logger);
             deprecationWarning(
@@ -164,7 +164,7 @@ class ErrorTrap
                 'which will be required in future versions of CakePHP.'
             );
             $context = [];
-            if ($this->_config['trace']) {
+            if (this->_config['trace']) {
                 $context = [
                     'trace' => $error->getTraceAsString(),
                     'request' => Router::getRequest(),
@@ -182,9 +182,9 @@ class ErrorTrap
     public function renderer(): ErrorRendererInterface
     {
         /** @var class-string<\Cake\Error\ErrorRendererInterface> $class */
-        $class = $this->getConfig('errorRenderer') ?: $this->chooseErrorRenderer();
+        $class = this->getConfig('errorRenderer') ?: this->chooseErrorRenderer();
 
-        return new $class($this->_config);
+        return new $class(this->_config);
     }
 
     /**
@@ -194,15 +194,15 @@ class ErrorTrap
      */
     public function logger(): ErrorLoggerInterface
     {
-        $oldConfig = $this->getConfig('errorLogger');
+        $oldConfig = this->getConfig('errorLogger');
         if ($oldConfig !== null) {
             deprecationWarning('The `errorLogger` configuration key is deprecated. Use `logger` instead.');
-            $this->setConfig(['logger' => $oldConfig, 'errorLogger' => null]);
+            this->setConfig(['logger' => $oldConfig, 'errorLogger' => null]);
         }
 
         /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
-        $class = $this->getConfig('logger', $this->_defaultConfig['logger']);
+        $class = this->getConfig('logger', this->_defaultConfig['logger']);
 
-        return new $class($this->_config);
+        return new $class(this->_config);
     }
 }

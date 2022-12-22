@@ -39,8 +39,8 @@ class ArrayItemNode implements NodeInterface
      */
     public this(NodeInterface $key, NodeInterface $value)
     {
-        $this->key = $key;
-        $this->value = $value;
+        this->key = $key;
+        this->value = $value;
     }
 
     /**
@@ -50,7 +50,7 @@ class ArrayItemNode implements NodeInterface
      */
     public function getValue()
     {
-        return $this->value;
+        return this->value;
     }
 
     /**
@@ -60,7 +60,7 @@ class ArrayItemNode implements NodeInterface
      */
     public function getKey()
     {
-        return $this->key;
+        return this->key;
     }
 
     /**
@@ -68,6 +68,6 @@ class ArrayItemNode implements NodeInterface
      */
     public function getChildren(): array
     {
-        return [$this->value];
+        return [this->value];
     }
 }

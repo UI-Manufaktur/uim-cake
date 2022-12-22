@@ -33,7 +33,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      *
      * @param array<string> $fields An array of fields to hide from array exports.
      * @param bool $merge Merge the new fields with the existing. By default false.
-     * @return $this
+     * @return this
      */
     public function setHidden(array $fields, bool $merge = false);
 
@@ -49,7 +49,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      *
      * @param array<string> $fields An array of fields to treat as virtual.
      * @param bool $merge Merge the new fields with the existing. By default false.
-     * @return $this
+     * @return this
      */
     public function setVirtual(array $fields, bool $merge = false);
 
@@ -66,7 +66,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string $field the field to set or check status for
      * @param bool $isDirty true means the field was changed, false means
      * it was not changed. Default true.
-     * @return $this
+     * @return this
      */
     public function setDirty(string $field, bool $isDirty = true);
 
@@ -113,7 +113,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      *
      * @param array $errors The array of errors to set.
      * @param bool $overwrite Whether to overwrite pre-existing errors for $fields
-     * @return $this
+     * @return this
      */
     public function setErrors(array $errors, bool $overwrite = false);
 
@@ -123,7 +123,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param string $field The field to get errors for, or the array of errors to set.
      * @param array|string $errors The errors to be set for $field
      * @param bool $overwrite Whether to overwrite pre-existing errors for $field
-     * @return $this
+     * @return this
      */
     public function setError(string $field, $errors, bool $overwrite = false);
 
@@ -133,7 +133,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * @param array<string>|string $field single or list of fields to change its accessibility
      * @param bool $set true marks the field as accessible, false will
      * mark it as protected.
-     * @return $this
+     * @return this
      */
     public function setAccess($field, bool $set);
 
@@ -149,7 +149,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * Sets the source alias
      *
      * @param string $alias the alias of the repository
-     * @return $this
+     * @return this
      */
     public function setSource(string $alias);
 
@@ -187,7 +187,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * first argument is also an array, in which case will be treated as $options
      * @param array<string, mixed> $options Options to be used for setting the field. Allowed option
      * keys are `setter` and `guard`
-     * @return $this
+     * @return this
      */
     public function set($field, $value = null, array $options = []);
 
@@ -227,7 +227,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * Removes a field or list of fields from this entity
      *
      * @param array<string>|string $field The field to unset.
-     * @return $this
+     * @return this
      */
     public function unset($field);
 
@@ -274,7 +274,7 @@ interface EntityInterface extends ArrayAccess, JsonSerializable
      * `false` indicates that the entity has been persisted.
      *
      * @param bool $new Indicate whether this entity has been persisted.
-     * @return $this
+     * @return this
      */
     public function setNew(bool $new);
 

@@ -72,8 +72,8 @@ trait ModelAwareTrait
      */
     protected function _setModelClass(string $name): void
     {
-        if ($this->modelClass === null) {
-            $this->modelClass = $name;
+        if (this->modelClass === null) {
+            this->modelClass = $name;
         }
     }
 
@@ -86,7 +86,7 @@ trait ModelAwareTrait
      * If a repository provider does not return an object a MissingModelException will
      * be thrown.
      *
-     * @param string|null $modelClass Name of model class to load. Defaults to $this->modelClass.
+     * @param string|null $modelClass Name of model class to load. Defaults to this->modelClass.
      *  The name can be an alias like `'Post'` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null $modelType The type of repository to load. Defaults to the getModelType() value.
      * @return \Cake\Datasource\RepositoryInterface The model instance created.
@@ -97,11 +97,11 @@ trait ModelAwareTrait
      */
     public function loadModel(?string $modelClass = null, ?string $modelType = null): RepositoryInterface
     {
-        $modelClass = $modelClass ?? $this->modelClass;
+        $modelClass = $modelClass ?? this->modelClass;
         if (empty($modelClass)) {
             throw new UnexpectedValueException('Default modelClass is empty');
         }
-        $modelType = $modelType ?? $this->getModelType();
+        $modelType = $modelType ?? this->getModelType();
 
         $options = [];
         if (strpos($modelClass, '\\') === false) {
@@ -117,22 +117,22 @@ trait ModelAwareTrait
             $modelClass = $alias;
         }
 
-        if (isset($this->{$alias})) {
-            return $this->{$alias};
+        if (isset(this->{$alias})) {
+            return this->{$alias};
         }
 
-        $factory = $this->_modelFactories[$modelType] ?? FactoryLocator::get($modelType);
+        $factory = this->_modelFactories[$modelType] ?? FactoryLocator::get($modelType);
         if ($factory instanceof LocatorInterface) {
-            $this->{$alias} = $factory->get($modelClass, $options);
+            this->{$alias} = $factory->get($modelClass, $options);
         } else {
-            $this->{$alias} = $factory($modelClass, $options);
+            this->{$alias} = $factory($modelClass, $options);
         }
 
-        if (!$this->{$alias}) {
+        if (!this->{$alias}) {
             throw new MissingModelException([$modelClass, $modelType]);
         }
 
-        return $this->{$alias};
+        return this->{$alias};
     }
 
     /**
@@ -152,7 +152,7 @@ trait ModelAwareTrait
             ));
         }
 
-        $this->_modelFactories[$type] = $factory;
+        this->_modelFactories[$type] = $factory;
     }
 
     /**
@@ -162,19 +162,19 @@ trait ModelAwareTrait
      */
     public function getModelType(): string
     {
-        return $this->_modelType;
+        return this->_modelType;
     }
 
     /**
      * Set the model type to be used by this class
      *
      * @param string $modelType The model type
-     * @return $this
+     * @return this
      */
     public function setModelType(string $modelType)
     {
-        $this->_modelType = $modelType;
+        this->_modelType = $modelType;
 
-        return $this;
+        return this;
     }
 }

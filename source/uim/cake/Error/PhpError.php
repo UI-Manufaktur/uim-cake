@@ -95,11 +95,11 @@ class PhpError
         ?int $line = null,
         array $trace = []
     ) {
-        $this->code = $code;
-        $this->message = $message;
-        $this->file = $file;
-        $this->line = $line;
-        $this->trace = $trace;
+        this->code = $code;
+        this->message = $message;
+        this->file = $file;
+        this->line = $line;
+        this->trace = $trace;
     }
 
     /**
@@ -109,7 +109,7 @@ class PhpError
      */
     public function getCode(): int
     {
-        return $this->code;
+        return this->code;
     }
 
     /**
@@ -119,9 +119,9 @@ class PhpError
      */
     public function getLogLevel(): int
     {
-        $label = $this->getLabel();
+        $label = this->getLabel();
 
-        return $this->logMap[$label] ?? LOG_ERR;
+        return this->logMap[$label] ?? LOG_ERR;
     }
 
     /**
@@ -131,7 +131,7 @@ class PhpError
      */
     public function getLabel(): string
     {
-        return $this->levelMap[$this->code] ?? 'error';
+        return this->levelMap[this->code] ?? 'error';
     }
 
     /**
@@ -141,7 +141,7 @@ class PhpError
      */
     public function getMessage(): string
     {
-        return $this->message;
+        return this->message;
     }
 
     /**
@@ -151,7 +151,7 @@ class PhpError
      */
     public function getFile(): ?string
     {
-        return $this->file;
+        return this->file;
     }
 
     /**
@@ -161,7 +161,7 @@ class PhpError
      */
     public function getLine(): ?int
     {
-        return $this->line;
+        return this->line;
     }
 
     /**
@@ -171,7 +171,7 @@ class PhpError
      */
     public function getTrace(): array
     {
-        return $this->trace;
+        return this->trace;
     }
 
     /**
@@ -182,7 +182,7 @@ class PhpError
     public function getTraceAsString(): string
     {
         $out = [];
-        foreach ($this->trace as $frame) {
+        foreach (this->trace as $frame) {
             $out[] = "{$frame['reference']} {$frame['file']}, line {$frame['line']}";
         }
 

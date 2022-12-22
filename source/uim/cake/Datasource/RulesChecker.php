@@ -111,8 +111,8 @@ class RulesChecker
      */
     public this(array $options = [])
     {
-        $this->_options = $options;
-        $this->_useI18n = function_exists('__d');
+        this->_options = $options;
+        this->_useI18n = function_exists('__d');
     }
 
     /**
@@ -132,13 +132,13 @@ class RulesChecker
      * @param array|string|null $name The alias for a rule, or an array of options.
      * @param array<string, mixed> $options List of extra options to pass to the rule callable as
      * second argument.
-     * @return $this
+     * @return this
      */
     public function add(callable $rule, $name = null, array $options = [])
     {
-        $this->_rules[] = $this->_addError($rule, $name, $options);
+        this->_rules[] = this->_addError($rule, $name, $options);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -157,13 +157,13 @@ class RulesChecker
      * @param array|string|null $name The alias for a rule or an array of options.
      * @param array<string, mixed> $options List of extra options to pass to the rule callable as
      * second argument.
-     * @return $this
+     * @return this
      */
     public function addCreate(callable $rule, $name = null, array $options = [])
     {
-        $this->_createRules[] = $this->_addError($rule, $name, $options);
+        this->_createRules[] = this->_addError($rule, $name, $options);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -182,13 +182,13 @@ class RulesChecker
      * @param array|string|null $name The alias for a rule, or an array of options.
      * @param array<string, mixed> $options List of extra options to pass to the rule callable as
      * second argument.
-     * @return $this
+     * @return this
      */
     public function addUpdate(callable $rule, $name = null, array $options = [])
     {
-        $this->_updateRules[] = $this->_addError($rule, $name, $options);
+        this->_updateRules[] = this->_addError($rule, $name, $options);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -207,13 +207,13 @@ class RulesChecker
      * @param array|string|null $name The alias for a rule, or an array of options.
      * @param array<string, mixed> $options List of extra options to pass to the rule callable as
      * second argument.
-     * @return $this
+     * @return this
      */
     public function addDelete(callable $rule, $name = null, array $options = [])
     {
-        $this->_deleteRules[] = $this->_addError($rule, $name, $options);
+        this->_deleteRules[] = this->_addError($rule, $name, $options);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -230,15 +230,15 @@ class RulesChecker
     public function check(EntityInterface $entity, string $mode, array $options = []): bool
     {
         if ($mode === self::CREATE) {
-            return $this->checkCreate($entity, $options);
+            return this->checkCreate($entity, $options);
         }
 
         if ($mode === self::UPDATE) {
-            return $this->checkUpdate($entity, $options);
+            return this->checkUpdate($entity, $options);
         }
 
         if ($mode === self::DELETE) {
-            return $this->checkDelete($entity, $options);
+            return this->checkDelete($entity, $options);
         }
 
         throw new InvalidArgumentException('Wrong checking mode: ' . $mode);
@@ -254,7 +254,7 @@ class RulesChecker
      */
     public function checkCreate(EntityInterface $entity, array $options = []): bool
     {
-        return $this->_checkRules($entity, $options, array_merge($this->_rules, $this->_createRules));
+        return this->_checkRules($entity, $options, array_merge(this->_rules, this->_createRules));
     }
 
     /**
@@ -267,7 +267,7 @@ class RulesChecker
      */
     public function checkUpdate(EntityInterface $entity, array $options = []): bool
     {
-        return $this->_checkRules($entity, $options, array_merge($this->_rules, $this->_updateRules));
+        return this->_checkRules($entity, $options, array_merge(this->_rules, this->_updateRules));
     }
 
     /**
@@ -280,7 +280,7 @@ class RulesChecker
      */
     public function checkDelete(EntityInterface $entity, array $options = []): bool
     {
-        return $this->_checkRules($entity, $options, $this->_deleteRules);
+        return this->_checkRules($entity, $options, this->_deleteRules);
     }
 
     /**
@@ -295,7 +295,7 @@ class RulesChecker
     protected function _checkRules(EntityInterface $entity, array $options = [], array $rules = []): bool
     {
         $success = true;
-        $options += $this->_options;
+        $options += this->_options;
         foreach ($rules as $rule) {
             $success = $rule($entity, $options) && $success;
         }
