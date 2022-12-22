@@ -107,7 +107,7 @@ class PhpError
      *
      * @return int
      */
-    public function getCode(): int
+    function getCode(): int
     {
         return this->code;
     }
@@ -117,7 +117,7 @@ class PhpError
      *
      * @return int
      */
-    public function getLogLevel(): int
+    function getLogLevel(): int
     {
         $label = this->getLabel();
 
@@ -129,7 +129,7 @@ class PhpError
      *
      * @return string
      */
-    public function getLabel(): string
+    function getLabel(): string
     {
         return this->levelMap[this->code] ?? 'error';
     }
@@ -139,7 +139,7 @@ class PhpError
      *
      * @return string
      */
-    public function getMessage(): string
+    function getMessage(): string
     {
         return this->message;
     }
@@ -149,7 +149,7 @@ class PhpError
      *
      * @return string|null
      */
-    public function getFile(): ?string
+    function getFile(): ?string
     {
         return this->file;
     }
@@ -159,7 +159,7 @@ class PhpError
      *
      * @return int|null
      */
-    public function getLine(): ?int
+    function getLine(): ?int
     {
         return this->line;
     }
@@ -169,7 +169,7 @@ class PhpError
      *
      * @return array
      */
-    public function getTrace(): array
+    function getTrace(): array
     {
         return this->trace;
     }
@@ -179,7 +179,7 @@ class PhpError
      *
      * @return string
      */
-    public function getTraceAsString(): string
+    function getTraceAsString(): string
     {
         $out = [];
         foreach (this->trace as $frame) {

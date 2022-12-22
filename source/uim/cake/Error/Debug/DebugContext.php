@@ -59,7 +59,7 @@ class DebugContext
      *
      * @return static
      */
-    public function withAddedDepth()
+    function withAddedDepth()
     {
         $new = clone this;
         $new->depth += 1;
@@ -72,7 +72,7 @@ class DebugContext
      *
      * @return int
      */
-    public function remainingDepth(): int
+    function remainingDepth(): int
     {
         return this->maxDepth - this->depth;
     }
@@ -86,7 +86,7 @@ class DebugContext
      * @param object $object The object to get a reference for.
      * @return int
      */
-    public function getReferenceId(object $object): int
+    function getReferenceId(object $object): int
     {
         if (this->refs->contains($object)) {
             return this->refs[$object];
@@ -103,7 +103,7 @@ class DebugContext
      * @param object $object The object to get a reference for.
      * @return bool
      */
-    public function hasReference(object $object): bool
+    function hasReference(object $object): bool
     {
         return this->refs->contains($object);
     }

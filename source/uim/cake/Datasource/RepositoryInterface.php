@@ -28,14 +28,14 @@ interface RepositoryInterface
      * @param string $alias Table alias
      * @return this
      */
-    public function setAlias(string $alias);
+    function setAlias(string $alias);
 
     /**
      * Returns the repository alias.
      *
      * @return string
      */
-    public function getAlias(): string;
+    function getAlias(): string;
 
     /**
      * Sets the table registry key used to create this table instance.
@@ -43,14 +43,14 @@ interface RepositoryInterface
      * @param string $registryAlias The key used to access this object.
      * @return this
      */
-    public function setRegistryAlias(string $registryAlias);
+    function setRegistryAlias(string $registryAlias);
 
     /**
      * Returns the table registry key used to create this table instance.
      *
      * @return string
      */
-    public function getRegistryAlias(): string;
+    function getRegistryAlias(): string;
 
     /**
      * Test to see if a Repository has a specific field/column.
@@ -58,7 +58,7 @@ interface RepositoryInterface
      * @param string $field The field to check for.
      * @return bool True if the field exists, false if it does not.
      */
-    public function hasField(string $field): bool;
+    function hasField(string $field): bool;
 
     /**
      * Creates a new Query for this repository and applies some defaults based on the
@@ -68,7 +68,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
      * @return \Cake\Datasource\QueryInterface
      */
-    public function find(string $type = 'all', array $options = []);
+    function find(string $type = 'all', array $options = []);
 
     /**
      * Returns a single record after finding it by its primary key, if no record is
@@ -90,14 +90,14 @@ interface RepositoryInterface
      * @return \Cake\Datasource\EntityInterface
      * @see \Cake\Datasource\RepositoryInterface::find()
      */
-    public function get($primaryKey, array $options = []): EntityInterface;
+    function get($primaryKey, array $options = []): EntityInterface;
 
     /**
      * Creates a new Query instance for this repository
      *
      * @return \Cake\Datasource\QueryInterface
      */
-    public function query();
+    function query();
 
     /**
      * Update all matching records.
@@ -111,7 +111,7 @@ interface RepositoryInterface
      * can take.
      * @return int Count Returns the affected rows.
      */
-    public function updateAll($fields, $conditions): int;
+    function updateAll($fields, $conditions): int;
 
     /**
      * Deletes all records matching the provided conditions.
@@ -128,7 +128,7 @@ interface RepositoryInterface
      * @return int Returns the number of affected rows.
      * @see \Cake\Datasource\RepositoryInterface::delete()
      */
-    public function deleteAll($conditions): int;
+    function deleteAll($conditions): int;
 
     /**
      * Returns true if there is any record in this repository matching the specified
@@ -137,7 +137,7 @@ interface RepositoryInterface
      * @param array $conditions list of conditions to pass to the query
      * @return bool
      */
-    public function exists($conditions): bool;
+    function exists($conditions): bool;
 
     /**
      * Persists an entity based on the fields that are marked as dirty and
@@ -148,7 +148,7 @@ interface RepositoryInterface
      * @param \ArrayAccess|array $options The options to use when saving.
      * @return \Cake\Datasource\EntityInterface|false
      */
-    public function save(EntityInterface $entity, $options = []);
+    function save(EntityInterface $entity, $options = []);
 
     /**
      * Delete a single entity.
@@ -160,7 +160,7 @@ interface RepositoryInterface
      * @param \ArrayAccess|array $options The options for the delete.
      * @return bool success
      */
-    public function delete(EntityInterface $entity, $options = []): bool;
+    function delete(EntityInterface $entity, $options = []): bool;
 
     /**
      * This creates a new entity object.
@@ -171,7 +171,7 @@ interface RepositoryInterface
      *
      * @return \Cake\Datasource\EntityInterface
      */
-    public function newEmptyEntity(): EntityInterface;
+    function newEmptyEntity(): EntityInterface;
 
     /**
      * Create a new entity + associated entities from an array.
@@ -191,7 +191,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return \Cake\Datasource\EntityInterface
      */
-    public function newEntity(array $data, array $options = []): EntityInterface;
+    function newEntity(array $data, array $options = []): EntityInterface;
 
     /**
      * Create a list of entities + associated entities from an array.
@@ -209,7 +209,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<\Cake\Datasource\EntityInterface> An array of hydrated records.
      */
-    public function newEntities(array $data, array $options = []): array;
+    function newEntities(array $data, array $options = []): array;
 
     /**
      * Merges the passed `$data` into `$entity` respecting the accessible
@@ -228,7 +228,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return \Cake\Datasource\EntityInterface
      */
-    public function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface;
+    function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface;
 
     /**
      * Merges each of the elements passed in `$data` into the entities
@@ -248,5 +248,5 @@ interface RepositoryInterface
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<\Cake\Datasource\EntityInterface>
      */
-    public function patchEntities(iterable $entities, array $data, array $options = []): array;
+    function patchEntities(iterable $entities, array $data, array $options = []): array;
 }

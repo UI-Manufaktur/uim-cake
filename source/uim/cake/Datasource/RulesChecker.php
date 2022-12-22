@@ -134,7 +134,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    public function add(callable $rule, $name = null, array $options = [])
+    function add(callable $rule, $name = null, array $options = [])
     {
         this->_rules[] = this->_addError($rule, $name, $options);
 
@@ -159,7 +159,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    public function addCreate(callable $rule, $name = null, array $options = [])
+    function addCreate(callable $rule, $name = null, array $options = [])
     {
         this->_createRules[] = this->_addError($rule, $name, $options);
 
@@ -184,7 +184,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    public function addUpdate(callable $rule, $name = null, array $options = [])
+    function addUpdate(callable $rule, $name = null, array $options = [])
     {
         this->_updateRules[] = this->_addError($rule, $name, $options);
 
@@ -209,7 +209,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    public function addDelete(callable $rule, $name = null, array $options = [])
+    function addDelete(callable $rule, $name = null, array $options = [])
     {
         this->_deleteRules[] = this->_addError($rule, $name, $options);
 
@@ -227,7 +227,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    public function check(EntityInterface $entity, string $mode, array $options = []): bool
+    function check(EntityInterface $entity, string $mode, array $options = []): bool
     {
         if ($mode === self::CREATE) {
             return this->checkCreate($entity, $options);
@@ -252,7 +252,7 @@ class RulesChecker
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @return bool
      */
-    public function checkCreate(EntityInterface $entity, array $options = []): bool
+    function checkCreate(EntityInterface $entity, array $options = []): bool
     {
         return this->_checkRules($entity, $options, array_merge(this->_rules, this->_createRules));
     }
@@ -265,7 +265,7 @@ class RulesChecker
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @return bool
      */
-    public function checkUpdate(EntityInterface $entity, array $options = []): bool
+    function checkUpdate(EntityInterface $entity, array $options = []): bool
     {
         return this->_checkRules($entity, $options, array_merge(this->_rules, this->_updateRules));
     }
@@ -278,7 +278,7 @@ class RulesChecker
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @return bool
      */
-    public function checkDelete(EntityInterface $entity, array $options = []): bool
+    function checkDelete(EntityInterface $entity, array $options = []): bool
     {
         return this->_checkRules($entity, $options, this->_deleteRules);
     }

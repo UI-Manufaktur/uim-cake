@@ -165,7 +165,7 @@ class NumericPaginator implements PaginatorInterface
      * @return \Cake\Datasource\ResultSetInterface Query results
      * @throws \Cake\Datasource\Paging\Exception\PageOutOfBoundsException
      */
-    public function paginate(object $object, array $params = [], array $settings = []): ResultSetInterface
+    function paginate(object $object, array $params = [], array $settings = []): ResultSetInterface
     {
         $query = null;
         if ($object instanceof QueryInterface) {
@@ -404,7 +404,7 @@ class NumericPaginator implements PaginatorInterface
      *
      * @return array<string, array>
      */
-    public function getPagingParams(): array
+    function getPagingParams(): array
     {
         return this->_pagingParams;
     }
@@ -466,7 +466,7 @@ class NumericPaginator implements PaginatorInterface
      * @param array $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
-    public function mergeOptions(array $params, array $settings): array
+    function mergeOptions(array $params, array $settings): array
     {
         if (!empty($settings['scope'])) {
             $scope = $settings['scope'];
@@ -488,7 +488,7 @@ class NumericPaginator implements PaginatorInterface
      * @return array<string, mixed> An array of pagination settings for a model,
      *   or the general settings.
      */
-    public function getDefaults(string $alias, array $settings): array
+    function getDefaults(string $alias, array $settings): array
     {
         if (isset($settings[$alias])) {
             $settings = $settings[$alias];
@@ -536,7 +536,7 @@ class NumericPaginator implements PaginatorInterface
      * @return array<string, mixed> An array of options with sort + direction removed and
      *   replaced with order if possible.
      */
-    public function validateSort(RepositoryInterface $object, array $options): array
+    function validateSort(RepositoryInterface $object, array $options): array
     {
         if (isset($options['sort'])) {
             $direction = null;
@@ -669,7 +669,7 @@ class NumericPaginator implements PaginatorInterface
      * @param array<string, mixed> $options An array of options with a limit key to be checked.
      * @return array<string, mixed> An array of options for pagination.
      */
-    public function checkLimit(array $options): array
+    function checkLimit(array $options): array
     {
         $options['limit'] = (int)$options['limit'];
         if ($options['limit'] < 1) {

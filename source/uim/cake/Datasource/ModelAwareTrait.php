@@ -95,7 +95,7 @@ trait ModelAwareTrait
      *   and ModelAwareTrait::$modelClass property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.
      */
-    public function loadModel(?string $modelClass = null, ?string $modelType = null): RepositoryInterface
+    function loadModel(?string $modelClass = null, ?string $modelType = null): RepositoryInterface
     {
         $modelClass = $modelClass ?? this->modelClass;
         if (empty($modelClass)) {
@@ -142,7 +142,7 @@ trait ModelAwareTrait
      * @param \Cake\Datasource\Locator\LocatorInterface|callable $factory The factory function used to create instances.
      * @return void
      */
-    public function modelFactory(string $type, $factory): void
+    function modelFactory(string $type, $factory): void
     {
         if (!$factory instanceof LocatorInterface && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
@@ -160,7 +160,7 @@ trait ModelAwareTrait
      *
      * @return string
      */
-    public function getModelType(): string
+    function getModelType(): string
     {
         return this->_modelType;
     }
@@ -171,7 +171,7 @@ trait ModelAwareTrait
      * @param string $modelType The model type
      * @return this
      */
-    public function setModelType(string $modelType)
+    function setModelType(string $modelType)
     {
         this->_modelType = $modelType;
 

@@ -86,7 +86,7 @@ abstract class BaseErrorHandler
      *
      * @return void
      */
-    public function register(): void
+    function register(): void
     {
         deprecationWarning(
             'Use of `BaseErrorHandler` and subclasses are deprecated. ' .
@@ -144,7 +144,7 @@ abstract class BaseErrorHandler
      * @param array<string, mixed>|null $context Context
      * @return bool True if error was handled
      */
-    public function handleError(
+    function handleError(
         int $code,
         string $description,
         ?string $file = null,
@@ -202,7 +202,7 @@ abstract class BaseErrorHandler
      * @return void
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
-    public function wrapAndHandleException(Throwable $exception): void
+    function wrapAndHandleException(Throwable $exception): void
     {
         deprecationWarning('This method is no longer in use. Call handleException instead.');
         this->handleException($exception);
@@ -219,7 +219,7 @@ abstract class BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    public function handleException(Throwable $exception): void
+    function handleException(Throwable $exception): void
     {
         this->_displayException($exception);
         this->logException($exception);
@@ -249,7 +249,7 @@ abstract class BaseErrorHandler
      * @param int $line Line that triggered the error
      * @return bool
      */
-    public function handleFatalError(int $code, string $description, string $file, int $line): bool
+    function handleFatalError(int $code, string $description, string $file, int $line): bool
     {
         $data = [
             'code' => $code,
@@ -272,7 +272,7 @@ abstract class BaseErrorHandler
      * @param int $additionalKb Number in kilobytes
      * @return void
      */
-    public function increaseMemoryLimit(int $additionalKb): void
+    function increaseMemoryLimit(int $additionalKb): void
     {
         $limit = ini_get('memory_limit');
         if ($limit === false || $limit === '' || $limit === '-1') {
@@ -331,7 +331,7 @@ abstract class BaseErrorHandler
      * @param \Psr\Http\Message\ServerRequestInterface|null $request The current request.
      * @return bool
      */
-    public function logException(Throwable $exception, ?ServerRequestInterface $request = null): bool
+    function logException(Throwable $exception, ?ServerRequestInterface $request = null): bool
     {
         if (empty(this->_config['log'])) {
             return false;
@@ -350,7 +350,7 @@ abstract class BaseErrorHandler
      *
      * @return \Cake\Error\ErrorLoggerInterface
      */
-    public function getLogger()
+    function getLogger()
     {
         if (this->logger === null) {
             /** @var \Cake\Error\ErrorLoggerInterface $logger */

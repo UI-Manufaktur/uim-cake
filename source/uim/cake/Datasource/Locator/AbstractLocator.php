@@ -47,7 +47,7 @@ abstract class AbstractLocator implements LocatorInterface
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    public function get(string $alias, array $options = [])
+    function get(string $alias, array $options = [])
     {
         $storeOptions = $options;
         unset($storeOptions['allowFallbackClass']);
@@ -80,7 +80,7 @@ abstract class AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function set(string $alias, RepositoryInterface $repository)
+    function set(string $alias, RepositoryInterface $repository)
     {
         return this->instances[$alias] = $repository;
     }
@@ -88,7 +88,7 @@ abstract class AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function exists(string $alias): bool
+    function exists(string $alias): bool
     {
         return isset(this->instances[$alias]);
     }
@@ -96,7 +96,7 @@ abstract class AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function remove(string $alias): void
+    function remove(string $alias): void
     {
         unset(
             this->instances[$alias],
@@ -107,7 +107,7 @@ abstract class AbstractLocator implements LocatorInterface
     /**
      * @inheritDoc
      */
-    public function clear(): void
+    function clear(): void
     {
         this->instances = [];
         this->options = [];

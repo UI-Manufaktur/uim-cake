@@ -72,7 +72,7 @@ class QueryCacher
      * @param object $query The query the cache read is for.
      * @return mixed|null Either the cached results or null.
      */
-    public function fetch(object $query)
+    function fetch(object $query)
     {
         $key = this->_resolveKey($query);
         $storage = this->_resolveCacher();
@@ -91,7 +91,7 @@ class QueryCacher
      * @param \Traversable $results The result set to store.
      * @return bool True if the data was successfully cached, false on failure
      */
-    public function store(object $query, Traversable $results): bool
+    function store(object $query, Traversable $results): bool
     {
         $key = this->_resolveKey($query);
         $storage = this->_resolveCacher();

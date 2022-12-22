@@ -59,7 +59,7 @@ class ConsoleErrorHandler extends BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    public function handleException(Throwable $exception): void
+    function handleException(Throwable $exception): void
     {
         this->_displayException($exception);
         this->logException($exception);

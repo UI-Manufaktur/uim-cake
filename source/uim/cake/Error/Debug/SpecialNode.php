@@ -41,7 +41,7 @@ class SpecialNode implements NodeInterface
      *
      * @return string
      */
-    public function getValue(): string
+    function getValue(): string
     {
         return this->value;
     }
@@ -49,7 +49,7 @@ class SpecialNode implements NodeInterface
     /**
      * @inheritDoc
      */
-    public function getChildren(): array
+    function getChildren(): array
     {
         return [];
     }

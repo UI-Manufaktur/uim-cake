@@ -79,7 +79,7 @@ class RuleInvoker
      * @param array<string, mixed> $options The options to set.
      * @return this
      */
-    public function setOptions(array $options)
+    function setOptions(array $options)
     {
         this->options = $options + this->options;
 
@@ -94,7 +94,7 @@ class RuleInvoker
      * @param string|null $name The name to set.
      * @return this
      */
-    public function setName(?string $name)
+    function setName(?string $name)
     {
         if ($name) {
             this->name = $name;
@@ -111,7 +111,7 @@ class RuleInvoker
      * @param array $scope The rule's scope/options.
      * @return bool Whether the rule passed.
      */
-    public function __invoke(EntityInterface $entity, array $scope): bool
+    function __invoke(EntityInterface $entity, array $scope): bool
     {
         $rule = this->rule;
         $pass = $rule($entity, this->options + $scope);

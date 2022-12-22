@@ -55,7 +55,7 @@ class PropertyNode implements NodeInterface
      *
      * @return \Cake\Error\Debug\NodeInterface
      */
-    public function getValue(): NodeInterface
+    function getValue(): NodeInterface
     {
         return this->value;
     }
@@ -65,7 +65,7 @@ class PropertyNode implements NodeInterface
      *
      * @return string
      */
-    public function getVisibility(): ?string
+    function getVisibility(): ?string
     {
         return this->visibility;
     }
@@ -75,7 +75,7 @@ class PropertyNode implements NodeInterface
      *
      * @return string
      */
-    public function getName(): string
+    function getName(): string
     {
         return this->name;
     }
@@ -83,7 +83,7 @@ class PropertyNode implements NodeInterface
     /**
      * @inheritDoc
      */
-    public function getChildren(): array
+    function getChildren(): array
     {
         return [this->value];
     }

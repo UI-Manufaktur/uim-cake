@@ -48,7 +48,7 @@ class ScalarNode implements NodeInterface
      *
      * @return string
      */
-    public function getType(): string
+    function getType(): string
     {
         return this->type;
     }
@@ -58,7 +58,7 @@ class ScalarNode implements NodeInterface
      *
      * @return string|float|int|bool|null
      */
-    public function getValue()
+    function getValue()
     {
         return this->value;
     }
@@ -66,7 +66,7 @@ class ScalarNode implements NodeInterface
     /**
      * @inheritDoc
      */
-    public function getChildren(): array
+    function getChildren(): array
     {
         return [];
     }

@@ -47,7 +47,7 @@ trait RulesAwareTrait
      * @param \ArrayObject|array|null $options The options To be passed to the rules.
      * @return bool
      */
-    public function checkRules(EntityInterface $entity, string $operation = RulesChecker::CREATE, $options = null): bool
+    function checkRules(EntityInterface $entity, string $operation = RulesChecker::CREATE, $options = null): bool
     {
         $rules = this->rulesChecker();
         $options = $options ?: new ArrayObject();
@@ -90,7 +90,7 @@ trait RulesAwareTrait
      * @see \Cake\Datasource\RulesChecker
      * @return \Cake\Datasource\RulesChecker
      */
-    public function rulesChecker(): RulesChecker
+    function rulesChecker(): RulesChecker
     {
         if (this->_rulesChecker != null) {
             return this->_rulesChecker;
@@ -113,7 +113,7 @@ trait RulesAwareTrait
      * @param \Cake\Datasource\RulesChecker $rules The rules object to be modified.
      * @return \Cake\Datasource\RulesChecker
      */
-    public function buildRules(RulesChecker $rules): RulesChecker
+    function buildRules(RulesChecker $rules): RulesChecker
     {
         return $rules;
     }

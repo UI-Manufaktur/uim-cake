@@ -32,5 +32,5 @@ interface ExceptionRendererInterface
      *
      * @return \Psr\Http\Message\ResponseInterface The response to be sent.
      */
-    public function render(): ResponseInterface;
+    function render(): ResponseInterface;
 }

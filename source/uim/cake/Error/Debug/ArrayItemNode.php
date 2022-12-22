@@ -48,7 +48,7 @@ class ArrayItemNode implements NodeInterface
      *
      * @return \Cake\Error\Debug\NodeInterface
      */
-    public function getValue()
+    function getValue()
     {
         return this->value;
     }
@@ -58,7 +58,7 @@ class ArrayItemNode implements NodeInterface
      *
      * @return \Cake\Error\Debug\NodeInterface
      */
-    public function getKey()
+    function getKey()
     {
         return this->key;
     }
@@ -66,7 +66,7 @@ class ArrayItemNode implements NodeInterface
     /**
      * @inheritDoc
      */
-    public function getChildren(): array
+    function getChildren(): array
     {
         return [this->value];
     }

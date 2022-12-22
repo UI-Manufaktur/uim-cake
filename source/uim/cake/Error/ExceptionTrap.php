@@ -109,7 +109,7 @@ class ExceptionTrap
      * @param \Psr\Http\Message\ServerRequestInterface|null $request The request if possible.
      * @return \Cake\Error\ExceptionRendererInterface
      */
-    public function renderer(Throwable $exception, $request = null)
+    function renderer(Throwable $exception, $request = null)
     {
         $request = $request ?? Router::getRequest();
 
@@ -163,7 +163,7 @@ class ExceptionTrap
      *
      * @return \Cake\Error\ErrorLoggerInterface
      */
-    public function logger(): ErrorLoggerInterface
+    function logger(): ErrorLoggerInterface
     {
         /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
         $class = this->getConfig('logger', this->_defaultConfig['logger']);
@@ -179,7 +179,7 @@ class ExceptionTrap
      *
      * @return void
      */
-    public function register(): void
+    function register(): void
     {
         set_exception_handler([this, 'handleException']);
         register_shutdown_function([this, 'handleShutdown']);
@@ -194,7 +194,7 @@ class ExceptionTrap
      *
      * @return void
      */
-    public function unregister(): void
+    function unregister(): void
     {
         if (static::$registeredTrap == this) {
             this->disabled = true;
@@ -227,7 +227,7 @@ class ExceptionTrap
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    public function handleException(Throwable $exception): void
+    function handleException(Throwable $exception): void
     {
         if (this->disabled) {
             return;
@@ -255,7 +255,7 @@ class ExceptionTrap
      *
      * @return void
      */
-    public function handleShutdown(): void
+    function handleShutdown(): void
     {
         if (this->disabled) {
             return;
@@ -291,7 +291,7 @@ class ExceptionTrap
      * @param int $additionalKb Number in kilobytes
      * @return void
      */
-    public function increaseMemoryLimit(int $additionalKb): void
+    function increaseMemoryLimit(int $additionalKb): void
     {
         $limit = ini_get('memory_limit');
         if ($limit === false || $limit === '' || $limit === '-1') {
@@ -323,7 +323,7 @@ class ExceptionTrap
      * @param int $line Line that triggered the error
      * @return void
      */
-    public function handleFatalError(int $code, string $description, string $file, int $line): void
+    function handleFatalError(int $code, string $description, string $file, int $line): void
     {
         this->handleException(new FatalErrorException('Fatal Error: ' . $description, 500, $file, $line));
     }
@@ -331,7 +331,7 @@ class ExceptionTrap
     /**
      * Log an exception.
      *
-     * Primarily a public function to ensure consistency between global exception handling
+     * Primarily a function to ensure consistency between global exception handling
      * and the ErrorHandlerMiddleware. This method will apply the `skipLog` filter
      * skipping logging if the exception should not be logged.
      *
@@ -341,7 +341,7 @@ class ExceptionTrap
      * @param \Psr\Http\Message\ServerRequestInterface|null $request The optional request
      * @return void
      */
-    public function logException(Throwable $exception, ?ServerRequestInterface $request = null): void
+    function logException(Throwable $exception, ?ServerRequestInterface $request = null): void
     {
         $shouldLog = this->_config['log'];
         if ($shouldLog) {
@@ -377,7 +377,7 @@ class ExceptionTrap
      * @param \Throwable $exception Exception to log
      * @return void
      */
-    public function logInternalError(Throwable $exception): void
+    function logInternalError(Throwable $exception): void
     {
         $message = sprintf(
             '[%s] %s (%s:%s)', // Keeping same message format

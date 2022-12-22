@@ -29,7 +29,7 @@ interface FormatterInterface
      * @param \Cake\Error\Debug\NodeInterface $node The node tree to dump.
      * @return string
      */
-    public function dump(NodeInterface $node): string;
+    function dump(NodeInterface $node): string;
 
     /**
      * Output a dump wrapper with location context.
@@ -38,5 +38,5 @@ interface FormatterInterface
      * @param array $location The file and line the contents came from.
      * @return string
      */
-    public function formatWrapper(string $contents, array $location): string;
+    function formatWrapper(string $contents, array $location): string;
 }

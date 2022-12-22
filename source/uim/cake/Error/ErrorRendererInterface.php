@@ -31,7 +31,7 @@ interface ErrorRendererInterface
      * @param bool $debug Whether or not the application is in debug mode.
      * @return string The output to be echoed.
      */
-    public function render(PhpError $error, bool $debug): string;
+    function render(PhpError $error, bool $debug): string;
 
     /**
      * Write output to the renderer's output stream
@@ -39,5 +39,5 @@ interface ErrorRendererInterface
      * @param string $out The content to output.
      * @return void
      */
-    public function write(string $out): void;
+    function write(string $out): void;
 }

@@ -45,7 +45,7 @@ class ArrayNode implements NodeInterface
      * @param \Cake\Error\Debug\ArrayItemNode $node The item to add.
      * @return void
      */
-    public function add(ArrayItemNode $node): void
+    function add(ArrayItemNode $node): void
     {
         this->items[] = $node;
     }
@@ -55,7 +55,7 @@ class ArrayNode implements NodeInterface
      *
      * @return array<\Cake\Error\Debug\ArrayItemNode>
      */
-    public function getValue(): array
+    function getValue(): array
     {
         return this->items;
     }
@@ -65,7 +65,7 @@ class ArrayNode implements NodeInterface
      *
      * @return array<\Cake\Error\Debug\ArrayItemNode>
      */
-    public function getChildren(): array
+    function getChildren(): array
     {
         return this->items;
     }

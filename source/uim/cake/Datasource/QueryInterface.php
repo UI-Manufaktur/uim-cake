@@ -40,7 +40,7 @@ interface QueryInterface
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
-    public function select($fields, bool $overwrite = false);
+    function select($fields, bool $overwrite = false);
 
     /**
      * Returns a key => value array representing a single aliased field
@@ -54,7 +54,7 @@ interface QueryInterface
      * @param string|null $alias the alias used to prefix the field
      * @return array<string, string>
      */
-    public function aliasField(string $field, ?string $alias = null): array;
+    function aliasField(string $field, ?string $alias = null): array;
 
     /**
      * Runs `aliasField()` for each field in the provided list and returns
@@ -64,7 +64,7 @@ interface QueryInterface
      * @param string|null $defaultAlias The default alias
      * @return array<string, string>
      */
-    public function aliasFields(array $fields, ?string $defaultAlias = null): array;
+    function aliasFields(array $fields, ?string $defaultAlias = null): array;
 
     /**
      * Fetch the results for this query.
@@ -77,7 +77,7 @@ interface QueryInterface
      *
      * @return \Cake\Datasource\ResultSetInterface
      */
-    public function all(): ResultSetInterface;
+    function all(): ResultSetInterface;
 
     /**
      * Populates or adds parts to current query clauses using an array.
@@ -118,7 +118,7 @@ interface QueryInterface
      * @param array<string, mixed> $options list of query clauses to apply new parts to.
      * @return this
      */
-    public function applyOptions(array $options);
+    function applyOptions(array $options);
 
     /**
      * Apply custom finds to against an existing query object.
@@ -136,7 +136,7 @@ interface QueryInterface
      * @param array<string, mixed> $options The options for the finder.
      * @return static Returns a modified query.
      */
-    public function find(string $finder, array $options = []);
+    function find(string $finder, array $options = []);
 
     /**
      * Returns the first result out of executing this query, if the query has not been
@@ -150,14 +150,14 @@ interface QueryInterface
      *
      * @return \Cake\Datasource\EntityInterface|array|null the first result from the ResultSet
      */
-    public function first();
+    function first();
 
     /**
      * Returns the total amount of results for the query.
      *
      * @return int
      */
-    public function count(): int;
+    function count(): int;
 
     /**
      * Sets the number of records that should be retrieved from database,
@@ -175,7 +175,7 @@ interface QueryInterface
      * @param \Cake\Database\ExpressionInterface|int|null $limit number of records to be returned
      * @return this
      */
-    public function limit($limit);
+    function limit($limit);
 
     /**
      * Sets the number of records that should be skipped from the original result set
@@ -195,7 +195,7 @@ interface QueryInterface
      * @param \Cake\Database\ExpressionInterface|int|null $offset number of records to be skipped
      * @return this
      */
-    public function offset($offset);
+    function offset($offset);
 
     /**
      * Adds a single or multiple fields to be used in the ORDER clause for this query.
@@ -246,7 +246,7 @@ interface QueryInterface
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
-    public function order($fields, $overwrite = false);
+    function order($fields, $overwrite = false);
 
     /**
      * Set the page of results you want.
@@ -263,14 +263,14 @@ interface QueryInterface
      * @return this
      * @throws \InvalidArgumentException If page number < 1.
      */
-    public function page(int $num, ?int $limit = null);
+    function page(int $num, ?int $limit = null);
 
     /**
      * Returns an array representation of the results after executing the query.
      *
      * @return array
      */
-    public function toArray(): array;
+    function toArray(): array;
 
     /**
      * Set the default Table object that will be used by this query
@@ -279,7 +279,7 @@ interface QueryInterface
      * @param \Cake\Datasource\RepositoryInterface $repository The default repository object to use
      * @return this
      */
-    public function repository(RepositoryInterface $repository);
+    function repository(RepositoryInterface $repository);
 
     /**
      * Returns the default repository object that will be used by this query,
@@ -287,7 +287,7 @@ interface QueryInterface
      *
      * @return \Cake\Datasource\RepositoryInterface|null $repository The default repository object to use
      */
-    public function getRepository(): ?RepositoryInterface;
+    function getRepository(): ?RepositoryInterface;
 
     /**
      * Adds a condition or set of conditions to be used in the WHERE clause for this
@@ -401,5 +401,5 @@ interface QueryInterface
      * @param bool $overwrite whether to reset conditions with passed list or not
      * @return this
      */
-    public function where($conditions = null, array $types = [], bool $overwrite = false);
+    function where($conditions = null, array $types = [], bool $overwrite = false);
 }

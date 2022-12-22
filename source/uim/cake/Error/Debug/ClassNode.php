@@ -54,7 +54,7 @@ class ClassNode implements NodeInterface
      * @param \Cake\Error\Debug\PropertyNode $node The property to add.
      * @return void
      */
-    public function addProperty(PropertyNode $node): void
+    function addProperty(PropertyNode $node): void
     {
         this->properties[] = $node;
     }
@@ -64,7 +64,7 @@ class ClassNode implements NodeInterface
      *
      * @return string
      */
-    public function getValue(): string
+    function getValue(): string
     {
         return this->class;
     }
@@ -74,7 +74,7 @@ class ClassNode implements NodeInterface
      *
      * @return int
      */
-    public function getId(): int
+    function getId(): int
     {
         return this->id;
     }
@@ -84,7 +84,7 @@ class ClassNode implements NodeInterface
      *
      * @return array<\Cake\Error\Debug\PropertyNode>
      */
-    public function getChildren(): array
+    function getChildren(): array
     {
         return this->properties;
     }

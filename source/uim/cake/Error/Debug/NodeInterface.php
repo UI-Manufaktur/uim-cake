@@ -28,12 +28,12 @@ interface NodeInterface
      *
      * @return array<\Cake\Error\Debug\NodeInterface>
      */
-    public function getChildren(): array;
+    function getChildren(): array;
 
     /**
      * Get the contained value.
      *
      * @return mixed
      */
-    public function getValue();
+    function getValue();
 }

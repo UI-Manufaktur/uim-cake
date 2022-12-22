@@ -150,7 +150,7 @@ class ErrorHandler extends BaseErrorHandler
      * @return \Cake\Error\ExceptionRendererInterface The exception renderer.
      * @throws \RuntimeException When the renderer class cannot be found.
      */
-    public function getRenderer(
+    function getRenderer(
         Throwable $exception,
         ?ServerRequestInterface $request = null
     ): ExceptionRendererInterface {

@@ -52,7 +52,7 @@ class ReferenceNode implements NodeInterface
      *
      * @return string
      */
-    public function getValue(): string
+    function getValue(): string
     {
         return this->class;
     }
@@ -62,7 +62,7 @@ class ReferenceNode implements NodeInterface
      *
      * @return int
      */
-    public function getId(): int
+    function getId(): int
     {
         return this->id;
     }
@@ -70,7 +70,7 @@ class ReferenceNode implements NodeInterface
     /**
      * @inheritDoc
      */
-    public function getChildren(): array
+    function getChildren(): array
     {
         return [];
     }

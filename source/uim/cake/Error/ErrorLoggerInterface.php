@@ -40,7 +40,7 @@ interface ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Implement `logException` instead.
      */
-    public function log(
+    function log(
         Throwable $exception,
         ?ServerRequestInterface $request = null
     ): bool;
@@ -54,5 +54,5 @@ interface ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Implement `logError` instead.
      */
-    public function logMessage($level, string $message, array $context = []): bool;
+    function logMessage($level, string $message, array $context = []): bool;
 }

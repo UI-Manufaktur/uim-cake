@@ -602,7 +602,7 @@ class Debugger
      * @unstable This method is not stable and may change in the future.
      * @since 4.1.0
      */
-    public function getExportFormatter(): FormatterInterface
+    function getExportFormatter(): FormatterInterface
     {
         $instance = static::getInstance();
         $class = $instance->getConfig('exportFormatter');
@@ -961,7 +961,7 @@ class Debugger
      * @return void
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    public function outputError(array $data): void
+    function outputError(array $data): void
     {
         $defaults = [
             'level' => 0,

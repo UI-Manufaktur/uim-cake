@@ -83,7 +83,7 @@ class ErrorTrap
      *
      * @return void
      */
-    public function register(): void
+    function register(): void
     {
         $level = this->_config['errorLevel'] ?? -1;
         error_reporting($level);
@@ -105,7 +105,7 @@ class ErrorTrap
      * @param int|null $line Line that triggered the error
      * @return bool True if error was handled
      */
-    public function handleError(
+    function handleError(
         int $code,
         string $description,
         ?string $file = null,
@@ -179,7 +179,7 @@ class ErrorTrap
      *
      * @return \Cake\Error\ErrorRendererInterface
      */
-    public function renderer(): ErrorRendererInterface
+    function renderer(): ErrorRendererInterface
     {
         /** @var class-string<\Cake\Error\ErrorRendererInterface> $class */
         $class = this->getConfig('errorRenderer') ?: this->chooseErrorRenderer();
@@ -192,7 +192,7 @@ class ErrorTrap
      *
      * @return \Cake\Error\ErrorLoggerInterface
      */
-    public function logger(): ErrorLoggerInterface
+    function logger(): ErrorLoggerInterface
     {
         $oldConfig = this->getConfig('errorLogger');
         if ($oldConfig != null) {

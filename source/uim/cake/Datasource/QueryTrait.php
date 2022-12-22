@@ -90,7 +90,7 @@ trait QueryTrait
      * @param \Cake\Datasource\RepositoryInterface|\Cake\ORM\Table $repository The default table object to use
      * @return this
      */
-    public function repository(RepositoryInterface $repository)
+    function repository(RepositoryInterface $repository)
     {
         this->_repository = $repository;
 
@@ -103,7 +103,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\RepositoryInterface
      */
-    public function getRepository(): RepositoryInterface
+    function getRepository(): RepositoryInterface
     {
         return this->_repository;
     }
@@ -120,7 +120,7 @@ trait QueryTrait
      * @param iterable $results The results this query should return.
      * @return this
      */
-    public function setResult(iterable $results)
+    function setResult(iterable $results)
     {
         this->_results = $results;
 
@@ -137,7 +137,7 @@ trait QueryTrait
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
-    public function getIterator()
+    function getIterator()
     {
         return this->all();
     }
@@ -178,7 +178,7 @@ trait QueryTrait
      *   a cache engine instance.
      * @return this
      */
-    public function cache($key, $config = 'default')
+    function cache($key, $config = 'default')
     {
         if ($key === false) {
             this->_cache = null;
@@ -195,7 +195,7 @@ trait QueryTrait
      *
      * @return bool
      */
-    public function isEagerLoaded(): bool
+    function isEagerLoaded(): bool
     {
         return this->_eagerLoaded;
     }
@@ -207,7 +207,7 @@ trait QueryTrait
      * @param bool $value Whether to eager load.
      * @return this
      */
-    public function eagerLoaded(bool $value)
+    function eagerLoaded(bool $value)
     {
         this->_eagerLoaded = $value;
 
@@ -226,7 +226,7 @@ trait QueryTrait
      * @param string|null $alias the alias used to prefix the field
      * @return array<string, string>
      */
-    public function aliasField(string $field, ?string $alias = null): array
+    function aliasField(string $field, ?string $alias = null): array
     {
         if (strpos($field, '.') === false) {
             $alias = $alias ?: this->getRepository()->getAlias();
@@ -249,7 +249,7 @@ trait QueryTrait
      * @param string|null $defaultAlias The default alias
      * @return array<string, string>
      */
-    public function aliasFields(array $fields, ?string $defaultAlias = null): array
+    function aliasFields(array $fields, ?string $defaultAlias = null): array
     {
         $aliased = [];
         foreach ($fields as $alias => $field) {
@@ -274,7 +274,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\ResultSetInterface
      */
-    public function all(): ResultSetInterface
+    function all(): ResultSetInterface
     {
         if (this->_results != null) {
             return this->_results;
@@ -300,7 +300,7 @@ trait QueryTrait
      *
      * @return array
      */
-    public function toArray(): array
+    function toArray(): array
     {
         return this->all()->toArray();
     }
@@ -321,7 +321,7 @@ trait QueryTrait
      * @return this
      * @see \Cake\Collection\Iterator\MapReduce for details on how to use emit data to the map reducer.
      */
-    public function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
+    function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
     {
         if ($overwrite) {
             this->_mapReduce = [];
@@ -343,7 +343,7 @@ trait QueryTrait
      *
      * @return array
      */
-    public function getMapReducers(): array
+    function getMapReducers(): array
     {
         return this->_mapReduce;
     }
@@ -440,7 +440,7 @@ trait QueryTrait
      * @return this
      * @throws \InvalidArgumentException
      */
-    public function formatResults(?callable $formatter = null, $mode = self::APPEND)
+    function formatResults(?callable $formatter = null, $mode = self::APPEND)
     {
         if ($mode === self::OVERWRITE) {
             this->_formatters = [];
@@ -469,7 +469,7 @@ trait QueryTrait
      *
      * @return array<callable>
      */
-    public function getResultFormatters(): array
+    function getResultFormatters(): array
     {
         return this->_formatters;
     }
@@ -486,7 +486,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\EntityInterface|array|null The first result from the ResultSet.
      */
-    public function first()
+    function first()
     {
         if (this->_dirty) {
             this->limit(1);
@@ -501,7 +501,7 @@ trait QueryTrait
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When there is no first record.
      * @return \Cake\Datasource\EntityInterface|array The first result from the ResultSet.
      */
-    public function firstOrFail()
+    function firstOrFail()
     {
         $entity = this->first();
         if (!$entity) {
@@ -531,7 +531,7 @@ trait QueryTrait
      * @return array
      * @see applyOptions()
      */
-    public function getOptions(): array
+    function getOptions(): array
     {
         return this->_options;
     }
@@ -544,7 +544,7 @@ trait QueryTrait
      * @return mixed
      * @throws \BadMethodCallException if no such method exists in result set
      */
-    public function __call(string $method, array $arguments)
+    function __call(string $method, array $arguments)
     {
         $resultSetClass = this->_decoratorClass();
         if (in_array($method, get_class_methods($resultSetClass), true)) {
@@ -571,7 +571,7 @@ trait QueryTrait
      * @param array<string, mixed> $options the options to be applied
      * @return this
      */
-    abstract public function applyOptions(array $options);
+    abstract function applyOptions(array $options);
 
     /**
      * Executes this query and returns a traversable object containing the results

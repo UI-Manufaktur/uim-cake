@@ -59,7 +59,7 @@ class ErrorLogger implements ErrorLoggerInterface
      * @param bool $includeTrace Should the log message include a stacktrace
      * @return void
      */
-    public function logError(PhpError $error, ?ServerRequestInterface $request = null, bool $includeTrace = false): void
+    function logError(PhpError $error, ?ServerRequestInterface $request = null, bool $includeTrace = false): void
     {
         $message = $error->getMessage();
         if ($request) {
@@ -86,7 +86,7 @@ class ErrorLogger implements ErrorLoggerInterface
      * @param bool $includeTrace Whether or not a stack trace should be logged.
      * @return void
      */
-    public function logException(
+    function logException(
         Throwable $exception,
         ?ServerRequestInterface $request = null,
         bool $includeTrace = false
@@ -106,7 +106,7 @@ class ErrorLogger implements ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Use logError instead.
      */
-    public function logMessage($level, string $message, array $context = []): bool
+    function logMessage($level, string $message, array $context = []): bool
     {
         if (!empty($context['request'])) {
             $message .= this->getRequestContext($context['request']);
@@ -129,7 +129,7 @@ class ErrorLogger implements ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Use logException instead.
      */
-    public function log(Throwable $exception, ?ServerRequestInterface $request = null): bool
+    function log(Throwable $exception, ?ServerRequestInterface $request = null): bool
     {
         $message = this->getMessage($exception, false, this->getConfig('trace'));
 
@@ -196,7 +196,7 @@ class ErrorLogger implements ErrorLoggerInterface
      * @param \Psr\Http\Message\ServerRequestInterface $request The request to read from.
      * @return string
      */
-    public function getRequestContext(ServerRequestInterface $request): string
+    function getRequestContext(ServerRequestInterface $request): string
     {
         $message = "\nRequest URL: " . $request->getRequestTarget();
 
