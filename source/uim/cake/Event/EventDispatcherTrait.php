@@ -44,7 +44,7 @@ trait EventDispatcherTrait
      *
      * @return \Cake\Event\EventManagerInterface
      */
-    public function getEventManager(): EventManagerInterface
+    function getEventManager(): EventManagerInterface
     {
         if (this->_eventManager === null) {
             this->_eventManager = new EventManager();
@@ -62,7 +62,7 @@ trait EventDispatcherTrait
      * @param \Cake\Event\EventManagerInterface $eventManager the eventManager to set
      * @return this
      */
-    public function setEventManager(EventManagerInterface $eventManager)
+    function setEventManager(EventManagerInterface $eventManager)
     {
         this->_eventManager = $eventManager;
 
@@ -81,7 +81,7 @@ trait EventDispatcherTrait
      * (this by default).
      * @return \Cake\Event\EventInterface
      */
-    public function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface
+    function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface
     {
         if ($subject === null) {
             $subject = this;

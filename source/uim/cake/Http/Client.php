@@ -252,7 +252,7 @@ class Client implements ClientInterface
      *
      * @return \Cake\Http\Cookie\CookieCollection
      */
-    public function cookies(): CookieCollection
+    function cookies(): CookieCollection
     {
         return this->_cookies;
     }
@@ -264,7 +264,7 @@ class Client implements ClientInterface
      * @return this
      * @throws \InvalidArgumentException
      */
-    public function addCookie(CookieInterface $cookie)
+    function addCookie(CookieInterface $cookie)
     {
         if (!$cookie->getDomain() || !$cookie->getPath()) {
             throw new InvalidArgumentException('Cookie must have a domain and a path set.');
@@ -287,7 +287,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function get(string $url, $data = [], array $options = []): Response
+    function get(string $url, $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $body = null;
@@ -313,7 +313,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function post(string $url, $data = [], array $options = []): Response
+    function post(string $url, $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $url = this->buildUrl($url, [], $options);
@@ -329,7 +329,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function put(string $url, $data = [], array $options = []): Response
+    function put(string $url, $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $url = this->buildUrl($url, [], $options);
@@ -345,7 +345,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function patch(string $url, $data = [], array $options = []): Response
+    function patch(string $url, $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $url = this->buildUrl($url, [], $options);
@@ -361,7 +361,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function options(string $url, $data = [], array $options = []): Response
+    function options(string $url, $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $url = this->buildUrl($url, [], $options);
@@ -377,7 +377,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function trace(string $url, $data = [], array $options = []): Response
+    function trace(string $url, $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $url = this->buildUrl($url, [], $options);
@@ -393,7 +393,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function delete(string $url, $data = [], array $options = []): Response
+    function delete(string $url, $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $url = this->buildUrl($url, [], $options);
@@ -409,7 +409,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return \Cake\Http\Client\Response
      */
-    public function head(string $url, array $data = [], array $options = []): Response
+    function head(string $url, array $data = [], array $options = []): Response
     {
         $options = this->_mergeOptions($options);
         $url = this->buildUrl($url, $data, $options);
@@ -456,7 +456,7 @@ class Client implements ClientInterface
      * @return \Psr\Http\Message\ResponseInterface Response instance.
      * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
      */
-    public function sendRequest(RequestInterface $request): ResponseInterface
+    function sendRequest(RequestInterface $request): ResponseInterface
     {
         return this->send($request, this->_config);
     }
@@ -471,7 +471,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options Additional options to use.
      * @return \Cake\Http\Client\Response
      */
-    public function send(RequestInterface $request, array $options = []): Response
+    function send(RequestInterface $request, array $options = []): Response
     {
         $redirects = 0;
         if (isset($options['redirect'])) {
@@ -570,7 +570,7 @@ class Client implements ClientInterface
      * @param array<string, mixed> $options The config options stored with Client::config()
      * @return string A complete url with scheme, port, host, and path.
      */
-    public function buildUrl(string $url, $query = [], array $options = []): string
+    function buildUrl(string $url, $query = [], array $options = []): string
     {
         if (empty($options) && empty($query)) {
             return $url;

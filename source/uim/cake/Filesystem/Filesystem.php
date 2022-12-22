@@ -52,7 +52,7 @@ class Filesystem
      * @param int|null $flags Flags for FilesystemIterator::__construct();
      * @return \Iterator
      */
-    public function find(string $path, $filter = null, ?int $flags = null): Iterator
+    function find(string $path, $filter = null, ?int $flags = null): Iterator
     {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO
@@ -76,7 +76,7 @@ class Filesystem
      * @param int|null $flags Flags for FilesystemIterator::__construct();
      * @return \Iterator
      */
-    public function findRecursive(string $path, $filter = null, ?int $flags = null): Iterator
+    function findRecursive(string $path, $filter = null, ?int $flags = null): Iterator
     {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO
@@ -130,7 +130,7 @@ class Filesystem
      * @return void
      * @throws \Cake\Core\Exception\CakeException When dumping fails.
      */
-    public function dumpFile(string $filename, string $content): void
+    function dumpFile(string $filename, string $content): void
     {
         $dir = dirname($filename);
         if (!is_dir($dir)) {
@@ -164,7 +164,7 @@ class Filesystem
      * @return void
      * @throws \Cake\Core\Exception\CakeException When directory creation fails.
      */
-    public function mkdir(string $dir, int $mode = 0755): void
+    function mkdir(string $dir, int $mode = 0755): void
     {
         if (is_dir($dir)) {
             return;
@@ -187,7 +187,7 @@ class Filesystem
      * @return bool
      * @throws \Cake\Core\Exception\CakeException If path is not a directory.
      */
-    public function deleteDir(string $path): bool
+    function deleteDir(string $path): bool
     {
         if (!file_exists($path)) {
             return true;
@@ -233,7 +233,7 @@ class Filesystem
      * @param string $destination Destination path.
      * @return bool
      */
-    public function copyDir(string $source, string $destination): bool
+    function copyDir(string $source, string $destination): bool
     {
         $destination = (new SplFileInfo($destination))->getPathname();
 
@@ -268,7 +268,7 @@ class Filesystem
      * @param string $path Path.
      * @return bool
      */
-    public function isStream(string $path): bool
+    function isStream(string $path): bool
     {
         return strpos($path, '://') != false;
     }

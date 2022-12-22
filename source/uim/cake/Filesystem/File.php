@@ -98,7 +98,7 @@ class File
     /**
      * Closes the current file if it is opened
      */
-    public function __destruct()
+    function __destruct()
     {
         this->close();
     }
@@ -108,7 +108,7 @@ class File
      *
      * @return bool Success
      */
-    public function create(): bool
+    function create(): bool
     {
         $dir = this->Folder->pwd();
 
@@ -126,7 +126,7 @@ class File
      * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won't
      * @return bool True on success, false on failure
      */
-    public function open(string $mode = 'r', bool $force = false): bool
+    function open(string $mode = 'r', bool $force = false): bool
     {
         if (!$force && is_resource(this->handle)) {
             return true;
@@ -148,7 +148,7 @@ class File
      * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won't
      * @return string|false String on success, false on failure
      */
-    public function read($bytes = false, string $mode = 'rb', bool $force = false)
+    function read($bytes = false, string $mode = 'rb', bool $force = false)
     {
         if ($bytes === false && this->lock === null) {
             return file_get_contents(this->path);
@@ -186,7 +186,7 @@ class File
      * @return int|bool True on success, false on failure (set mode), false on failure
      *   or integer offset on success (get mode).
      */
-    public function offset($offset = false, int $seek = SEEK_SET)
+    function offset($offset = false, int $seek = SEEK_SET)
     {
         if ($offset === false) {
             if (is_resource(this->handle)) {
@@ -226,7 +226,7 @@ class File
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    public function write(string $data, string $mode = 'w', bool $force = false): bool
+    function write(string $data, string $mode = 'w', bool $force = false): bool
     {
         $success = false;
         if (this->open($mode, $force) === true) {
@@ -252,7 +252,7 @@ class File
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    public function append(string $data, bool $force = false): bool
+    function append(string $data, bool $force = false): bool
     {
         return this->write($data, 'a', $force);
     }
@@ -262,7 +262,7 @@ class File
      *
      * @return bool True if closing was successful or file was already closed, otherwise false
      */
-    public function close(): bool
+    function close(): bool
     {
         if (!is_resource(this->handle)) {
             return true;
@@ -276,7 +276,7 @@ class File
      *
      * @return bool Success
      */
-    public function delete(): bool
+    function delete(): bool
     {
         this->close();
         this->handle = null;
@@ -299,7 +299,7 @@ class File
      *
      * @return array<string, mixed> File information.
      */
-    public function info(): array
+    function info(): array
     {
         if (!this->info) {
             this->info = pathinfo(this->path);
@@ -317,7 +317,7 @@ class File
      *
      * @return string|false The file extension, false if extension cannot be extracted.
      */
-    public function ext()
+    function ext()
     {
         if (!this->info) {
             this->info();
@@ -331,7 +331,7 @@ class File
      *
      * @return string|false The file name without extension, false if name cannot be extracted.
      */
-    public function name()
+    function name()
     {
         if (!this->info) {
             this->info();
@@ -380,7 +380,7 @@ class File
      * @param string|null $ext The name of the extension to make safe if different from this->ext
      * @return string The extension of the file
      */
-    public function safe(?string $name = null, ?string $ext = null): string
+    function safe(?string $name = null, ?string $ext = null): string
     {
         if (!$name) {
             $name = (string)this->name;
@@ -399,7 +399,7 @@ class File
      * @return string|false md5 Checksum {@link https://secure.php.net/md5_file See md5_file()},
      *  or false in case of an error.
      */
-    public function md5($maxsize = 5)
+    function md5($maxsize = 5)
     {
         if ($maxsize === true) {
             return md5_file(this->path);
@@ -418,7 +418,7 @@ class File
      *
      * @return string|null Full path to the file, or null on failure
      */
-    public function pwd()
+    function pwd()
     {
         if (this->path === null) {
             $dir = this->Folder->pwd();
@@ -435,7 +435,7 @@ class File
      *
      * @return bool True if it exists, false otherwise
      */
-    public function exists(): bool
+    function exists(): bool
     {
         this->clearStatCache();
 
@@ -447,7 +447,7 @@ class File
      *
      * @return string|false Permissions for the file, or false in case of an error
      */
-    public function perms()
+    function perms()
     {
         if (this->exists()) {
             return decoct(fileperms(this->path) & 0777);
@@ -461,7 +461,7 @@ class File
      *
      * @return int|false Size of the file in bytes, or false in case of an error
      */
-    public function size()
+    function size()
     {
         if (this->exists()) {
             return filesize(this->path);
@@ -475,7 +475,7 @@ class File
      *
      * @return bool True if it's writable, false otherwise
      */
-    public function writable(): bool
+    function writable(): bool
     {
         return is_writable(this->path);
     }
@@ -485,7 +485,7 @@ class File
      *
      * @return bool True if it's executable, false otherwise
      */
-    public function executable(): bool
+    function executable(): bool
     {
         return is_executable(this->path);
     }
@@ -495,7 +495,7 @@ class File
      *
      * @return bool True if file is readable, false otherwise
      */
-    public function readable(): bool
+    function readable(): bool
     {
         return is_readable(this->path);
     }
@@ -505,7 +505,7 @@ class File
      *
      * @return int|false The file owner, or bool in case of an error
      */
-    public function owner()
+    function owner()
     {
         if (this->exists()) {
             return fileowner(this->path);
@@ -519,7 +519,7 @@ class File
      *
      * @return int|false The file group, or false in case of an error
      */
-    public function group()
+    function group()
     {
         if (this->exists()) {
             return filegroup(this->path);
@@ -533,7 +533,7 @@ class File
      *
      * @return int|false Timestamp of last access time, or false in case of an error
      */
-    public function lastAccess()
+    function lastAccess()
     {
         if (this->exists()) {
             return fileatime(this->path);
@@ -547,7 +547,7 @@ class File
      *
      * @return int|false Timestamp of last modification, or false in case of an error
      */
-    public function lastChange()
+    function lastChange()
     {
         if (this->exists()) {
             return filemtime(this->path);
@@ -561,7 +561,7 @@ class File
      *
      * @return \Cake\Filesystem\Folder Current folder
      */
-    public function folder(): Folder
+    function folder(): Folder
     {
         return this->Folder;
     }
@@ -573,7 +573,7 @@ class File
      * @param bool $overwrite Overwrite $dest if exists
      * @return bool Success
      */
-    public function copy(string $dest, bool $overwrite = true): bool
+    function copy(string $dest, bool $overwrite = true): bool
     {
         if (!this->exists() || is_file($dest) && !$overwrite) {
             return false;
@@ -588,7 +588,7 @@ class File
      *
      * @return string|false The mimetype of the file, or false if reading fails.
      */
-    public function mime()
+    function mime()
     {
         if (!this->exists()) {
             return false;
@@ -617,7 +617,7 @@ class File
      *   the stat cache for the current path only.
      * @return void
      */
-    public function clearStatCache($all = false): void
+    function clearStatCache($all = false): void
     {
         if ($all === false && this->path) {
             clearstatcache(true, this->path);
@@ -633,7 +633,7 @@ class File
      * @param array<string>|string $replace Text(s) to replace with.
      * @return bool Success
      */
-    public function replaceText($search, $replace): bool
+    function replaceText($search, $replace): bool
     {
         if (!this->open('r+')) {
             return false;

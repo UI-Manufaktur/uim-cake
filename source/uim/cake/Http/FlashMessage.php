@@ -80,7 +80,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::$_defaultConfig For default values for the options.
      */
-    public function set($message, array $options = []): void
+    function set($message, array $options = []): void
     {
         $options += (array)this->getConfig();
 
@@ -136,7 +136,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    public function setExceptionMessage(Throwable $exception, array $options = []): void
+    function setExceptionMessage(Throwable $exception, array $options = []): void
     {
         $options['element'] = $options['element'] ?? 'error';
         $options['params']['code'] = $options['params']['code'] ?? $exception->getCode();
@@ -151,7 +151,7 @@ class FlashMessage
      * @param string $key The key for get messages for.
      * @return array|null
      */
-    public function consume(string $key): ?array
+    function consume(string $key): ?array
     {
         return this->session->consume("Flash.{$key}");
     }
@@ -166,7 +166,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    public function success(string $message, array $options = []): void
+    function success(string $message, array $options = []): void
     {
         $options['element'] = 'success';
         this->set($message, $options);
@@ -182,7 +182,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    public function error(string $message, array $options = []): void
+    function error(string $message, array $options = []): void
     {
         $options['element'] = 'error';
         this->set($message, $options);
@@ -198,7 +198,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    public function warning(string $message, array $options = []): void
+    function warning(string $message, array $options = []): void
     {
         $options['element'] = 'warning';
         this->set($message, $options);
@@ -214,7 +214,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    public function info(string $message, array $options = []): void
+    function info(string $message, array $options = []): void
     {
         $options['element'] = 'info';
         this->set($message, $options);

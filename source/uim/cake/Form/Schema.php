@@ -46,7 +46,7 @@ class Schema
      * @param array<string, array<string, mixed>|string> $fields The fields to add.
      * @return this
      */
-    public function addFields(array $fields)
+    function addFields(array $fields)
     {
         foreach ($fields as $name => $attrs) {
             this->addField($name, $attrs);
@@ -63,7 +63,7 @@ class Schema
      *   as a string.
      * @return this
      */
-    public function addField(string $name, $attrs)
+    function addField(string $name, $attrs)
     {
         if (is_string($attrs)) {
             $attrs = ['type' => $attrs];
@@ -80,7 +80,7 @@ class Schema
      * @param string $name The field to remove.
      * @return this
      */
-    public function removeField(string $name)
+    function removeField(string $name)
     {
         unset(this->_fields[$name]);
 
@@ -92,7 +92,7 @@ class Schema
      *
      * @return array<string> The list of field names.
      */
-    public function fields(): array
+    function fields(): array
     {
         return array_keys(this->_fields);
     }
@@ -103,7 +103,7 @@ class Schema
      * @param string $name The field name.
      * @return array<string, mixed>|null The attributes for a field, or null.
      */
-    public function field(string $name): ?array
+    function field(string $name): ?array
     {
         return this->_fields[$name] ?? null;
     }
@@ -115,7 +115,7 @@ class Schema
      * @return string|null Either the field type or null if the
      *   field does not exist.
      */
-    public function fieldType(string $name): ?string
+    function fieldType(string $name): ?string
     {
         $field = this->field($name);
         if (!$field) {
@@ -130,7 +130,7 @@ class Schema
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         return [
             '_fields' => this->_fields,

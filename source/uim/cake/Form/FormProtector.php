@@ -61,7 +61,7 @@ class FormProtector
      * @param string $sessionId Session id for hash generation.
      * @return bool
      */
-    public function validate($formData, string $url, string $sessionId): bool
+    function validate($formData, string $url, string $sessionId): bool
     {
         this->debugMessage = null;
 
@@ -114,7 +114,7 @@ class FormProtector
      * @param mixed $value Field value, if value should not be tampered with.
      * @return this
      */
-    public function addField($field, bool $lock = true, $value = null)
+    function addField($field, bool $lock = true, $value = null)
     {
         if (is_string($field)) {
             $field = this->getFieldNameArray($field);
@@ -187,7 +187,7 @@ class FormProtector
      * @param string $name The dot separated name for the field.
      * @return this
      */
-    public function unlockField($name)
+    function unlockField($name)
     {
         if (!in_array($name, this->unlockedFields, true)) {
             this->unlockedFields[] = $name;
@@ -207,7 +207,7 @@ class FormProtector
      *
      * @return string|null
      */
-    public function getError(): ?string
+    function getError(): ?string
     {
         return this->debugMessage;
     }
@@ -383,7 +383,7 @@ class FormProtector
      * @return array<string, string> The token data.
      * @psalm-return array{fields: string, unlocked: string, debug: string}
      */
-    public function buildTokenData(string $url = '', string $sessionId = ''): array
+    function buildTokenData(string $url = '', string $sessionId = ''): array
     {
         $fields = this->fields;
         $unlockedFields = this->unlockedFields;
@@ -580,7 +580,7 @@ class FormProtector
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         return [
             'fields' => this->fields,

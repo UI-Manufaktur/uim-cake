@@ -66,7 +66,7 @@ class ConsoleExceptionRenderer
      *
      * @return \Psr\Http\Message\ResponseInterface|string
      */
-    public function render()
+    function render()
     {
         $exceptions = [this->error];
         $previous = this->error->getPrevious();
@@ -130,7 +130,7 @@ class ConsoleExceptionRenderer
      * @param string $output The output to print.
      * @return void
      */
-    public function write($output): void
+    function write($output): void
     {
         this->output->write($output);
     }

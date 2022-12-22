@@ -125,7 +125,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      *
      * @return array<string, mixed>
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         if (method_exists(this, 'buildValidator')) {
             return [
@@ -143,7 +143,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @param \Cake\Form\Schema $schema The schema to set
      * @return this
      */
-    public function setSchema(Schema $schema)
+    function setSchema(Schema $schema)
     {
         this->_schema = $schema;
 
@@ -160,7 +160,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @since 4.1.0
      * @return \Cake\Form\Schema the schema instance.
      */
-    public function getSchema(): Schema
+    function getSchema(): Schema
     {
         if (this->_schema === null) {
             this->_schema = this->_buildSchema(new this->_schemaClass());
@@ -180,7 +180,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @param \Cake\Form\Schema|null $schema The schema to set, or null.
      * @return \Cake\Form\Schema the schema instance.
      */
-    public function schema(?Schema $schema = null): Schema
+    function schema(?Schema $schema = null): Schema
     {
         deprecationWarning('Form::schema() is deprecated. Use setSchema() and getSchema() instead.');
         if ($schema != null) {
@@ -213,7 +213,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @return bool Whether the data is valid.
      * @throws \RuntimeException If validator is invalid.
      */
-    public function validate(array $data, ?string $validator = null): bool
+    function validate(array $data, ?string $validator = null): bool
     {
         this->_errors = this->getValidator($validator ?: static::DEFAULT_VALIDATOR)
             ->validate($data);
@@ -229,7 +229,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      *
      * @return array Last set validation errors.
      */
-    public function getErrors(): array
+    function getErrors(): array
     {
         return this->_errors;
     }
@@ -248,7 +248,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @param array $errors Errors list.
      * @return this
      */
-    public function setErrors(array $errors)
+    function setErrors(array $errors)
     {
         this->_errors = $errors;
 
@@ -273,7 +273,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @return bool False on validation failure, otherwise returns the
      *   result of the `_execute()` method.
      */
-    public function execute(array $data, array $options = []): bool
+    function execute(array $data, array $options = []): bool
     {
         this->_data = $data;
 
@@ -308,7 +308,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      *   all fields.
      * @return mixed
      */
-    public function getData(?string $field = null)
+    function getData(?string $field = null)
     {
         if ($field === null) {
             return this->_data;
@@ -325,7 +325,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @param mixed $value Value to set for var
      * @return this
      */
-    public function set($name, $value = null)
+    function set($name, $value = null)
     {
         $write = $name;
         if (!is_array($name)) {
@@ -346,7 +346,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      * @param array $data Data array.
      * @return this
      */
-    public function setData(array $data)
+    function setData(array $data)
     {
         this->_data = $data;
 
@@ -358,7 +358,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         $special = [
             '_schema' => this->getSchema()->__debugInfo(),

@@ -30,7 +30,7 @@ class HtmlErrorRenderer implements ErrorRendererInterface
     /**
      * @inheritDoc
      */
-    public function write(string $out): void
+    function write(string $out): void
     {
         // Output to stdout which is the server response.
         echo $out;
@@ -39,7 +39,7 @@ class HtmlErrorRenderer implements ErrorRendererInterface
     /**
      * @inheritDoc
      */
-    public function render(PhpError $error, bool $debug): string
+    function render(PhpError $error, bool $debug): string
     {
         if (!$debug) {
             return '';

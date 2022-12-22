@@ -30,7 +30,7 @@ class ConditionDecorator extends AbstractDecorator
     /**
      * @inheritDoc
      */
-    public function __invoke()
+    function __invoke()
     {
         $args = func_get_args();
         if (!this->canTrigger($args[0])) {
@@ -46,7 +46,7 @@ class ConditionDecorator extends AbstractDecorator
      * @param \Cake\Event\EventInterface $event Event object.
      * @return bool
      */
-    public function canTrigger(EventInterface $event): bool
+    function canTrigger(EventInterface $event): bool
     {
         $if = this->_evaluateCondition('if', $event);
         $unless = this->_evaluateCondition('unless', $event);

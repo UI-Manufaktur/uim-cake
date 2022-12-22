@@ -29,7 +29,7 @@ class TextErrorRenderer implements ErrorRendererInterface
     /**
      * @inheritDoc
      */
-    public function write(string $out): void
+    function write(string $out): void
     {
         echo $out;
     }
@@ -37,7 +37,7 @@ class TextErrorRenderer implements ErrorRendererInterface
     /**
      * @inheritDoc
      */
-    public function render(PhpError $error, bool $debug): string
+    function render(PhpError $error, bool $debug): string
     {
         if (!$debug) {
             return '';

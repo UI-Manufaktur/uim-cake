@@ -53,7 +53,7 @@ abstract class AbstractDecorator
      * @link https://secure.php.net/manual/en/language.oop5.magic.php#object.invoke
      * @return mixed
      */
-    public function __invoke()
+    function __invoke()
     {
         return this->_call(func_get_args());
     }

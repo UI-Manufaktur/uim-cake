@@ -36,7 +36,7 @@ class EventList implements ArrayAccess, Countable
      *
      * @return void
      */
-    public function flush(): void
+    function flush(): void
     {
         this->_events = [];
     }
@@ -47,7 +47,7 @@ class EventList implements ArrayAccess, Countable
      * @param \Cake\Event\EventInterface $event An event to the list of dispatched events.
      * @return void
      */
-    public function add(EventInterface $event): void
+    function add(EventInterface $event): void
     {
         this->_events[] = $event;
     }
@@ -59,7 +59,7 @@ class EventList implements ArrayAccess, Countable
      * @param mixed $offset An offset to check for.
      * @return bool True on success or false on failure.
      */
-    public function offsetExists($offset): bool
+    function offsetExists($offset): bool
     {
         return isset(this->_events[$offset]);
     }
@@ -72,7 +72,7 @@ class EventList implements ArrayAccess, Countable
      * @return mixed Can return all value types.
      */
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    function offsetGet($offset)
     {
         if (this->offsetExists($offset)) {
             return this->_events[$offset];
@@ -89,7 +89,7 @@ class EventList implements ArrayAccess, Countable
      * @param mixed $value The value to set.
      * @return void
      */
-    public function offsetSet($offset, $value): void
+    function offsetSet($offset, $value): void
     {
         this->_events[$offset] = $value;
     }
@@ -101,7 +101,7 @@ class EventList implements ArrayAccess, Countable
      * @param mixed $offset The offset to unset.
      * @return void
      */
-    public function offsetUnset($offset): void
+    function offsetUnset($offset): void
     {
         unset(this->_events[$offset]);
     }
@@ -112,7 +112,7 @@ class EventList implements ArrayAccess, Countable
      * @link https://secure.php.net/manual/en/countable.count.php
      * @return int The custom count as an integer.
      */
-    public function count(): int
+    function count(): int
     {
         return count(this->_events);
     }
@@ -123,7 +123,7 @@ class EventList implements ArrayAccess, Countable
      * @param string $name Event name.
      * @return bool
      */
-    public function hasEvent(string $name): bool
+    function hasEvent(string $name): bool
     {
         foreach (this->_events as $event) {
             if ($event->getName() === $name) {

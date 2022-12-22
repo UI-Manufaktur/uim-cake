@@ -219,7 +219,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      *
      * @return \Cake\Http\Response The response to be sent.
      */
-    public function render(): ResponseInterface
+    function render(): ResponseInterface
     {
         $exception = this->error;
         $code = this->getHttpCode($exception);
@@ -298,7 +298,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      * @param \Psr\Http\Message\ResponseInterface|string $output The response to output.
      * @return void
      */
-    public function write($output): void
+    function write($output): void
     {
         if (is_string($output)) {
             echo $output;
@@ -491,7 +491,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         return [
             'error' => this->error,

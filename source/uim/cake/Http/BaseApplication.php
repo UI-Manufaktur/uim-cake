@@ -106,12 +106,12 @@ abstract class BaseApplication implements
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
      * @return \Cake\Http\MiddlewareQueue
      */
-    abstract public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
+    abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
     /**
      * @inheritDoc
      */
-    public function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
+    function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
         foreach (this->plugins->with('middleware') as $plugin) {
             $middleware = $plugin->middleware($middleware);
@@ -123,7 +123,7 @@ abstract class BaseApplication implements
     /**
      * @inheritDoc
      */
-    public function addPlugin($name, array $config = [])
+    function addPlugin($name, array $config = [])
     {
         if (is_string($name)) {
             $plugin = this->plugins->create($name, $config);
@@ -144,7 +144,7 @@ abstract class BaseApplication implements
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
      * @return this
      */
-    public function addOptionalPlugin($name, array $config = [])
+    function addOptionalPlugin($name, array $config = [])
     {
         try {
             this->addPlugin($name, $config);
@@ -160,7 +160,7 @@ abstract class BaseApplication implements
      *
      * @return \Cake\Core\PluginCollection
      */
-    public function getPlugins(): PluginCollection
+    function getPlugins(): PluginCollection
     {
         return this->plugins;
     }
@@ -168,7 +168,7 @@ abstract class BaseApplication implements
     /**
      * @inheritDoc
      */
-    public function bootstrap(): void
+    function bootstrap(): void
     {
         require_once this->configDir . 'bootstrap.php';
     }
@@ -176,7 +176,7 @@ abstract class BaseApplication implements
     /**
      * @inheritDoc
      */
-    public function pluginBootstrap(): void
+    function pluginBootstrap(): void
     {
         foreach (this->plugins->with('bootstrap') as $plugin) {
             $plugin->bootstrap(this);
@@ -191,7 +191,7 @@ abstract class BaseApplication implements
      * @param \Cake\Routing\RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
-    public function routes(RouteBuilder $routes): void
+    function routes(RouteBuilder $routes): void
     {
         // Only load routes if the router is empty
         if (!Router::routes()) {
@@ -205,7 +205,7 @@ abstract class BaseApplication implements
     /**
      * @inheritDoc
      */
-    public function pluginRoutes(RouteBuilder $routes): RouteBuilder
+    function pluginRoutes(RouteBuilder $routes): RouteBuilder
     {
         foreach (this->plugins->with('routes') as $plugin) {
             $plugin->routes($routes);
@@ -223,7 +223,7 @@ abstract class BaseApplication implements
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
-    public function console(CommandCollection $commands): CommandCollection
+    function console(CommandCollection $commands): CommandCollection
     {
         return $commands->addMany($commands->autoDiscover());
     }
@@ -231,7 +231,7 @@ abstract class BaseApplication implements
     /**
      * @inheritDoc
      */
-    public function pluginConsole(CommandCollection $commands): CommandCollection
+    function pluginConsole(CommandCollection $commands): CommandCollection
     {
         foreach (this->plugins->with('console') as $plugin) {
             $commands = $plugin->console($commands);
@@ -248,7 +248,7 @@ abstract class BaseApplication implements
      *
      * @return \Cake\Core\ContainerInterface
      */
-    public function getContainer(): ContainerInterface
+    function getContainer(): ContainerInterface
     {
         if (this->container === null) {
             this->container = this->buildContainer();
@@ -287,7 +287,7 @@ abstract class BaseApplication implements
      * @param \Cake\Core\ContainerInterface $container The Container to update.
      * @return void
      */
-    public function services(ContainerInterface $container): void
+    function services(ContainerInterface $container): void
     {
     }
 
@@ -301,7 +301,7 @@ abstract class BaseApplication implements
      * @param \Psr\Http\Message\ServerRequestInterface $request The request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function handle(
+    function handle(
         ServerRequestInterface $request
     ): ResponseInterface {
         $container = this->getContainer();

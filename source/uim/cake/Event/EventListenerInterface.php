@@ -29,7 +29,7 @@ interface EventListenerInterface
      * ### Example:
      *
      * ```
-     *  public function implementedEvents()
+     *  function implementedEvents()
      *  {
      *      return [
      *          'Order.complete' => 'sendEmail',
@@ -42,5 +42,5 @@ interface EventListenerInterface
      * @return array<string, mixed> Associative array or event key names pointing to the function
      * that should be called in the object when the respective event is fired
      */
-    public function implementedEvents(): array;
+    function implementedEvents(): array;
 }

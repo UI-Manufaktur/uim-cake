@@ -162,7 +162,7 @@ class Folder
      *
      * @return string|null Current path
      */
-    public function pwd(): ?string
+    function pwd(): ?string
     {
         return this->path;
     }
@@ -173,7 +173,7 @@ class Folder
      * @param string $path Path to the directory to change to
      * @return string|false The new path. Returns false on failure
      */
-    public function cd(string $path)
+    function cd(string $path)
     {
         $path = this->realpath($path);
         if ($path != false && is_dir($path)) {
@@ -193,7 +193,7 @@ class Folder
      * @param bool $fullPath True returns the full path
      * @return array Contents of current directory as an array, an empty array on failure
      */
-    public function read($sort = self::SORT_NAME, $exceptions = false, bool $fullPath = false): array
+    function read($sort = self::SORT_NAME, $exceptions = false, bool $fullPath = false): array
     {
         $dirs = $files = [];
 
@@ -259,7 +259,7 @@ class Folder
      * @param string|bool $sort Whether results should be sorted.
      * @return array<string> Files that match given pattern
      */
-    public function find(string $regexpPattern = '.*', $sort = false): array
+    function find(string $regexpPattern = '.*', $sort = false): array
     {
         [, $files] = this->read($sort);
 
@@ -273,7 +273,7 @@ class Folder
      * @param string|bool $sort Whether results should be sorted.
      * @return array Files matching $pattern
      */
-    public function findRecursive(string $pattern = '.*', $sort = false): array
+    function findRecursive(string $pattern = '.*', $sort = false): array
     {
         if (!this->pwd()) {
             return [];
@@ -416,7 +416,7 @@ class Folder
      * @return bool
      * @throws \InvalidArgumentException When the given `$path` argument is not an absolute path.
      */
-    public function inPath(string $path, bool $reverse = false): bool
+    function inPath(string $path, bool $reverse = false): bool
     {
         if (!Folder::isAbsolute($path)) {
             throw new InvalidArgumentException('The $path argument is expected to be an absolute path.');
@@ -443,7 +443,7 @@ class Folder
      * @param array<string> $exceptions Array of files, directories to skip.
      * @return bool Success.
      */
-    public function chmod(string $path, ?int $mode = null, bool $recursive = true, array $exceptions = []): bool
+    function chmod(string $path, ?int $mode = null, bool $recursive = true, array $exceptions = []): bool
     {
         if (!$mode) {
             $mode = this->mode;
@@ -500,7 +500,7 @@ class Folder
      * @param bool $fullPath Whether to return the full path or only the directory name.
      * @return array Array of subdirectories for the provided or current path.
      */
-    public function subdirectories(?string $path = null, bool $fullPath = true): array
+    function subdirectories(?string $path = null, bool $fullPath = true): array
     {
         if (!$path) {
             $path = this->path;
@@ -532,7 +532,7 @@ class Folder
      * @param string|null $type either 'file' or 'dir'. Null returns both files and directories
      * @return array Array of nested directories and files in each directory
      */
-    public function tree(?string $path = null, $exceptions = false, ?string $type = null): array
+    function tree(?string $path = null, $exceptions = false, ?string $type = null): array
     {
         if (!$path) {
             $path = this->path;
@@ -621,7 +621,7 @@ class Folder
      * @param int|null $mode octal value 0755
      * @return bool Returns TRUE on success, FALSE on failure
      */
-    public function create(string $pathname, ?int $mode = null): bool
+    function create(string $pathname, ?int $mode = null): bool
     {
         if (is_dir($pathname) || empty($pathname)) {
             return true;
@@ -667,7 +667,7 @@ class Folder
      *
      * @return int size in bytes of current folder
      */
-    public function dirsize(): int
+    function dirsize(): int
     {
         $size = 0;
         $directory = Folder::slashTerm(this->path);
@@ -705,7 +705,7 @@ class Folder
      * @param string|null $path Path of directory to delete
      * @return bool Success
      */
-    public function delete(?string $path = null): bool
+    function delete(?string $path = null): bool
     {
         if (!$path) {
             $path = this->pwd();
@@ -786,7 +786,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success.
      */
-    public function copy(string $to, array $options = []): bool
+    function copy(string $to, array $options = []): bool
     {
         if (!this->pwd()) {
             return false;
@@ -887,7 +887,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success
      */
-    public function move(string $to, array $options = []): bool
+    function move(string $to, array $options = []): bool
     {
         $options += ['from' => this->path, 'mode' => this->mode, 'skip' => [], 'recursive' => true];
 
@@ -904,7 +904,7 @@ class Folder
      * @param bool $reset Reset message stack after reading
      * @return array
      */
-    public function messages(bool $reset = true): array
+    function messages(bool $reset = true): array
     {
         $messages = this->_messages;
         if ($reset) {
@@ -920,7 +920,7 @@ class Folder
      * @param bool $reset Reset error stack after reading
      * @return array
      */
-    public function errors(bool $reset = true): array
+    function errors(bool $reset = true): array
     {
         $errors = this->_errors;
         if ($reset) {
@@ -936,7 +936,7 @@ class Folder
      * @param string $path Path to resolve
      * @return string|false The resolved path
      */
-    public function realpath($path)
+    function realpath($path)
     {
         if (strpos($path, '..') === false) {
             if (!Folder::isAbsolute($path)) {

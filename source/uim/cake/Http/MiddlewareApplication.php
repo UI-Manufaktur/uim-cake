@@ -35,12 +35,12 @@ abstract class MiddlewareApplication implements HttpApplicationInterface
     /**
      * @inheritDoc
      */
-    abstract public function bootstrap(): void;
+    abstract function bootstrap(): void;
 
     /**
      * @inheritDoc
      */
-    abstract public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
+    abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
     /**
      * Generate a 404 response as no middleware handled the request.
@@ -48,7 +48,7 @@ abstract class MiddlewareApplication implements HttpApplicationInterface
      * @param \Psr\Http\Message\ServerRequestInterface $request The request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function handle(
+    function handle(
         ServerRequestInterface $request
     ): ResponseInterface {
         return new Response(['body' => 'Not found', 'status' => 404]);

@@ -20,7 +20,7 @@ class ContentTypeNegotiation
      * @param \Psr\Http\Message\RequestInterface $request The request to get an accept from.
      * @return array<string, array<string>> A mapping of preference values => content types
      */
-    public function parseAccept(RequestInterface $request): array
+    function parseAccept(RequestInterface $request): array
     {
         $header = $request->getHeaderLine('Accept');
 
@@ -36,7 +36,7 @@ class ContentTypeNegotiation
      * @param \Psr\Http\Message\RequestInterface $request The request to get an accept from.
      * @return array<string, array<string>> A mapping of preference values => languages
      */
-    public function parseAcceptLanguage(RequestInterface $request): array
+    function parseAcceptLanguage(RequestInterface $request): array
     {
         $header = $request->getHeaderLine('Accept-Language');
 
@@ -98,7 +98,7 @@ class ContentTypeNegotiation
      * @return string|null The prefered type or null if there is no match with choices or if the
      *   request had no Accept header.
      */
-    public function preferredType(RequestInterface $request, array $choices = []): ?string
+    function preferredType(RequestInterface $request, array $choices = []): ?string
     {
         $parsed = this->parseAccept($request);
         if (empty($parsed)) {
@@ -129,7 +129,7 @@ class ContentTypeNegotiation
      * @param \Psr\Http\Message\RequestInterface $request The request to read headers from.
      * @return array<string> A list of language codes that are accepted.
      */
-    public function acceptedLanguages(RequestInterface $request): array
+    function acceptedLanguages(RequestInterface $request): array
     {
         $raw = this->parseAcceptLanguage($request);
         $accept = [];
@@ -156,7 +156,7 @@ class ContentTypeNegotiation
      * @param string $lang The language code to check.
      * @return bool Whether the request accepts $lang
      */
-    public function acceptLanguage(RequestInterface $request, string $lang): bool
+    function acceptLanguage(RequestInterface $request, string $lang): bool
     {
         $accept = this->acceptedLanguages($request);
 

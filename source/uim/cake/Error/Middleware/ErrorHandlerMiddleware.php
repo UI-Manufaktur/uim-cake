@@ -125,7 +125,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\ResponseInterface A response
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         try {
             return $handler->handle($request);
@@ -143,7 +143,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      * @param \Psr\Http\Message\ServerRequestInterface $request The request.
      * @return \Psr\Http\Message\ResponseInterface A response.
      */
-    public function handleException(Throwable $exception, ServerRequestInterface $request): ResponseInterface
+    function handleException(Throwable $exception, ServerRequestInterface $request): ResponseInterface
     {
         if (this->errorHandler === null) {
             $handler = this->getExceptionTrap();
@@ -178,7 +178,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      * @param \Cake\Http\Exception\RedirectException $exception The exception to handle
      * @return \Psr\Http\Message\ResponseInterface Response created from the redirect.
      */
-    public function handleRedirect(RedirectException $exception): ResponseInterface
+    function handleRedirect(RedirectException $exception): ResponseInterface
     {
         return new RedirectResponse(
             $exception->getMessage(),

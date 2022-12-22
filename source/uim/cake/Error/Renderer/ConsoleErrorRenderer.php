@@ -56,7 +56,7 @@ class ConsoleErrorRenderer implements ErrorRendererInterface
     /**
      * @inheritDoc
      */
-    public function write(string $out): void
+    function write(string $out): void
     {
         this->output->write($out);
     }
@@ -64,7 +64,7 @@ class ConsoleErrorRenderer implements ErrorRendererInterface
     /**
      * @inheritDoc
      */
-    public function render(PhpError $error, bool $debug): string
+    function render(PhpError $error, bool $debug): string
     {
         $trace = '';
         if (this->trace) {

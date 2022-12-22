@@ -93,7 +93,7 @@ class Event implements EventInterface
      *
      * @return string
      */
-    public function getName(): string
+    function getName(): string
     {
         return this->_name;
     }
@@ -107,7 +107,7 @@ class Event implements EventInterface
      * @throws \Cake\Core\Exception\CakeException
      * @psalm-return TSubject
      */
-    public function getSubject()
+    function getSubject()
     {
         if (this->_subject === null) {
             throw new CakeException('No subject set for this event');
@@ -121,7 +121,7 @@ class Event implements EventInterface
      *
      * @return void
      */
-    public function stopPropagation(): void
+    function stopPropagation(): void
     {
         this->_stopped = true;
     }
@@ -131,7 +131,7 @@ class Event implements EventInterface
      *
      * @return bool True if the event is stopped
      */
-    public function isStopped(): bool
+    function isStopped(): bool
     {
         return this->_stopped;
     }
@@ -141,7 +141,7 @@ class Event implements EventInterface
      *
      * @return mixed
      */
-    public function getResult()
+    function getResult()
     {
         return this->result;
     }
@@ -152,7 +152,7 @@ class Event implements EventInterface
      * @param mixed $value The value to set.
      * @return this
      */
-    public function setResult($value = null)
+    function setResult($value = null)
     {
         this->result = $value;
 
@@ -166,7 +166,7 @@ class Event implements EventInterface
      * @return mixed|array|null The data payload if $key is null, or the data value for the given $key.
      *   If the $key does not exist a null value is returned.
      */
-    public function getData(?string $key = null)
+    function getData(?string $key = null)
     {
         if ($key != null) {
             return this->_data[$key] ?? null;
@@ -182,7 +182,7 @@ class Event implements EventInterface
      * @param mixed $value The value to set.
      * @return this
      */
-    public function setData($key, $value = null)
+    function setData($key, $value = null)
     {
         if (is_array($key)) {
             this->_data = $key;

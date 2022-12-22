@@ -34,7 +34,7 @@ class SubjectFilterDecorator extends AbstractDecorator
     /**
      * @inheritDoc
      */
-    public function __invoke()
+    function __invoke()
     {
         $args = func_get_args();
         if (!this->canTrigger($args[0])) {
@@ -50,7 +50,7 @@ class SubjectFilterDecorator extends AbstractDecorator
      * @param \Cake\Event\EventInterface $event Event object.
      * @return bool
      */
-    public function canTrigger(EventInterface $event): bool
+    function canTrigger(EventInterface $event): bool
     {
         if (!isset(this->_options['allowedSubject'])) {
             throw new RuntimeException(self::class . ' Missing subject filter options!');

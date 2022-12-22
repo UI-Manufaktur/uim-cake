@@ -48,7 +48,7 @@ class TextExceptionRenderer
      *
      * @return \Psr\Http\Message\ResponseInterface|string
      */
-    public function render()
+    function render()
     {
         return sprintf(
             "%s : %s on line %s of %s\nTrace:\n%s",
@@ -66,7 +66,7 @@ class TextExceptionRenderer
      * @param string $output The output to print.
      * @return void
      */
-    public function write($output): void
+    function write($output): void
     {
         echo $output;
     }

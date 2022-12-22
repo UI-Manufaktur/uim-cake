@@ -31,7 +31,7 @@ class TextFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function formatWrapper(string $contents, array $location): string
+    function formatWrapper(string $contents, array $location): string
     {
         $template = <<<TEXT
 %s
@@ -54,7 +54,7 @@ TEXT;
      * @param \Cake\Error\Debug\NodeInterface $node The node tree to dump.
      * @return string
      */
-    public function dump(NodeInterface $node): string
+    function dump(NodeInterface $node): string
     {
         $indent = 0;
 

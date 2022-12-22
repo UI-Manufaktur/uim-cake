@@ -30,7 +30,7 @@ interface EventInterface
      *
      * @return string
      */
-    public function getName(): string;
+    function getName(): string;
 
     /**
      * Returns the subject of this event.
@@ -38,28 +38,28 @@ interface EventInterface
      * @return object
      * @psalm-return TSubject
      */
-    public function getSubject();
+    function getSubject();
 
     /**
      * Stops the event from being used anymore.
      *
      * @return void
      */
-    public function stopPropagation(): void;
+    function stopPropagation(): void;
 
     /**
      * Checks if the event is stopped.
      *
      * @return bool True if the event is stopped
      */
-    public function isStopped(): bool;
+    function isStopped(): bool;
 
     /**
      * The result value of the event listeners.
      *
      * @return mixed
      */
-    public function getResult();
+    function getResult();
 
     /**
      * Listeners can attach a result value to the event.
@@ -67,7 +67,7 @@ interface EventInterface
      * @param mixed $value The value to set.
      * @return this
      */
-    public function setResult($value = null);
+    function setResult($value = null);
 
     /**
      * Accesses the event data/payload.
@@ -76,7 +76,7 @@ interface EventInterface
      * @return mixed|array|null The data payload if $key is null, or the data value for the given $key.
      *   If the $key does not exist a null value is returned.
      */
-    public function getData(?string $key = null);
+    function getData(?string $key = null);
 
     /**
      * Assigns a value to the data/payload of this event.
@@ -85,5 +85,5 @@ interface EventInterface
      * @param mixed $value The value to set.
      * @return this
      */
-    public function setData($key, $value = null);
+    function setData($key, $value = null);
 }

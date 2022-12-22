@@ -96,7 +96,7 @@ class EventManager implements EventManagerInterface
     /**
      * @inheritDoc
      */
-    public function on($eventKey, $options = [], ?callable $callable = null)
+    function on($eventKey, $options = [], ?callable $callable = null)
     {
         if ($eventKey instanceof EventListenerInterface) {
             this->_attachSubscriber($eventKey);
@@ -174,7 +174,7 @@ class EventManager implements EventManagerInterface
     /**
      * @inheritDoc
      */
-    public function off($eventKey, $callable = null)
+    function off($eventKey, $callable = null)
     {
         if ($eventKey instanceof EventListenerInterface) {
             this->_detachSubscriber($eventKey);
@@ -259,7 +259,7 @@ class EventManager implements EventManagerInterface
     /**
      * @inheritDoc
      */
-    public function dispatch($event): EventInterface
+    function dispatch($event): EventInterface
     {
         if (is_string($event)) {
             $event = new Event($event);
@@ -312,7 +312,7 @@ class EventManager implements EventManagerInterface
     /**
      * @inheritDoc
      */
-    public function listeners(string $eventKey): array
+    function listeners(string $eventKey): array
     {
         $localListeners = [];
         if (!this->_isGlobal) {
@@ -345,7 +345,7 @@ class EventManager implements EventManagerInterface
      * @param string $eventKey Event key.
      * @return array
      */
-    public function prioritisedListeners(string $eventKey): array
+    function prioritisedListeners(string $eventKey): array
     {
         if (empty(this->_listeners[$eventKey])) {
             return [];
@@ -360,7 +360,7 @@ class EventManager implements EventManagerInterface
      * @param string $eventKeyPattern Pattern to match.
      * @return array
      */
-    public function matchingListeners(string $eventKeyPattern): array
+    function matchingListeners(string $eventKeyPattern): array
     {
         $matchPattern = '/' . preg_quote($eventKeyPattern, '/') . '/';
 
@@ -377,7 +377,7 @@ class EventManager implements EventManagerInterface
      *
      * @return \Cake\Event\EventList|null
      */
-    public function getEventList(): ?EventList
+    function getEventList(): ?EventList
     {
         return this->_eventList;
     }
@@ -388,7 +388,7 @@ class EventManager implements EventManagerInterface
      * @param \Cake\Event\EventInterface $event An event to add to the list.
      * @return this
      */
-    public function addEventToList(EventInterface $event)
+    function addEventToList(EventInterface $event)
     {
         if (this->_eventList) {
             this->_eventList->add($event);
@@ -403,7 +403,7 @@ class EventManager implements EventManagerInterface
      * @param bool $enabled True or false to enable / disable it.
      * @return this
      */
-    public function trackEvents(bool $enabled)
+    function trackEvents(bool $enabled)
     {
         this->_trackEvents = $enabled;
 
@@ -415,7 +415,7 @@ class EventManager implements EventManagerInterface
      *
      * @return bool
      */
-    public function isTrackingEvents(): bool
+    function isTrackingEvents(): bool
     {
         return this->_trackEvents && this->_eventList;
     }
@@ -426,7 +426,7 @@ class EventManager implements EventManagerInterface
      * @param \Cake\Event\EventList $eventList The event list object to use.
      * @return this
      */
-    public function setEventList(EventList $eventList)
+    function setEventList(EventList $eventList)
     {
         this->_eventList = $eventList;
         this->_trackEvents = true;
@@ -439,7 +439,7 @@ class EventManager implements EventManagerInterface
      *
      * @return this
      */
-    public function unsetEventList()
+    function unsetEventList()
     {
         this->_eventList = null;
         this->_trackEvents = false;
@@ -452,7 +452,7 @@ class EventManager implements EventManagerInterface
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         $properties = get_object_vars(this);
         $properties['_generalManager'] = '(object) EventManager';

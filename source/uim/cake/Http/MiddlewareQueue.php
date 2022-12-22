@@ -102,7 +102,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|array|string $middleware The middleware(s) to append.
      * @return this
      */
-    public function add($middleware)
+    function add($middleware)
     {
         if (is_array($middleware)) {
             this->queue = array_merge(this->queue, $middleware);
@@ -121,7 +121,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return this
      * @see MiddlewareQueue::add()
      */
-    public function push($middleware)
+    function push($middleware)
     {
         return this->add($middleware);
     }
@@ -132,7 +132,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|array|string $middleware The middleware(s) to prepend.
      * @return this
      */
-    public function prepend($middleware)
+    function prepend($middleware)
     {
         if (is_array($middleware)) {
             this->queue = array_merge($middleware, this->queue);
@@ -154,7 +154,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|string $middleware The middleware to insert.
      * @return this
      */
-    public function insertAt(int $index, $middleware)
+    function insertAt(int $index, $middleware)
     {
         array_splice(this->queue, $index, 0, [$middleware]);
 
@@ -172,7 +172,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return this
      * @throws \LogicException If middleware to insert before is not found.
      */
-    public function insertBefore(string $class, $middleware)
+    function insertBefore(string $class, $middleware)
     {
         $found = false;
         $i = 0;
@@ -206,7 +206,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @param \Psr\Http\Server\MiddlewareInterface|\Closure|string $middleware The middleware to insert.
      * @return this
      */
-    public function insertAfter(string $class, $middleware)
+    function insertAfter(string $class, $middleware)
     {
         $found = false;
         $i = 0;
@@ -237,7 +237,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         return count(this->queue);
     }
@@ -249,7 +249,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return void
      * @see \SeekableIterator::seek()
      */
-    public function seek($position): void
+    function seek($position): void
     {
         if (!isset(this->queue[$position])) {
             throw new OutOfBoundsException("Invalid seek position ($position)");
@@ -264,7 +264,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return void
      * @see \Iterator::rewind()
      */
-    public function rewind(): void
+    function rewind(): void
     {
         this->position = 0;
     }
@@ -275,7 +275,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return \Psr\Http\Server\MiddlewareInterface
      * @see \Iterator::current()
      */
-    public function current(): MiddlewareInterface
+    function current(): MiddlewareInterface
     {
         if (!isset(this->queue[this->position])) {
             throw new OutOfBoundsException("Invalid current position (this->position)");
@@ -294,7 +294,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return int
      * @see \Iterator::key()
      */
-    public function key(): int
+    function key(): int
     {
         return this->position;
     }
@@ -305,7 +305,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return void
      * @see \Iterator::next()
      */
-    public function next(): void
+    function next(): void
     {
         ++this->position;
     }
@@ -316,7 +316,7 @@ class MiddlewareQueue implements Countable, SeekableIterator
      * @return bool
      * @see \Iterator::valid()
      */
-    public function valid(): bool
+    function valid(): bool
     {
         return isset(this->queue[this->position]);
     }

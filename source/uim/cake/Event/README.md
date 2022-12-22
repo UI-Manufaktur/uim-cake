@@ -23,7 +23,7 @@ class Orders
 
 	use EventDispatcherTrait;
 
-	public function placeOrder($order)
+	function placeOrder($order)
 	{
 		this->doStuff();
 		$event = new Event('Orders.afterPlace', this, [
