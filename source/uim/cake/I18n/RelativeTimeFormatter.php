@@ -244,7 +244,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
                     $days = $daysInFutureMonth - (int)$past['d'] + (int)$future['d'];
                 }
 
-                if ($future['m'] !== $past['m']) {
+                if ($future['m'] != $past['m']) {
                     $months--;
                 }
             }

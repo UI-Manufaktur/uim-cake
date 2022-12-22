@@ -130,7 +130,7 @@ class CsrfProtectionMiddleware : IMiddleware
         $cookies = myRequest.getCookieParams();
         $cookieData = Hash::get($cookies, _config["cookieName"]);
 
-        if (is_string($cookieData) && $cookieData !== "") {
+        if (is_string($cookieData) && $cookieData != "") {
             try {
                 myRequest = myRequest.withAttribute("csrfToken", this.saltToken($cookieData));
             } catch (InvalidArgumentException $e) {
@@ -283,7 +283,7 @@ class CsrfProtectionMiddleware : IMiddleware
             return $token;
         }
         $decoded = base64_decode($token, true);
-        if ($decoded == false || strlen($decoded) !== static::TOKEN_WITH_CHECKSUM_LENGTH * 2) {
+        if ($decoded == false || strlen($decoded) != static::TOKEN_WITH_CHECKSUM_LENGTH * 2) {
             return $token;
         }
         $salted = substr($decoded, 0, static::TOKEN_WITH_CHECKSUM_LENGTH);

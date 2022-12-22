@@ -64,7 +64,7 @@ class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterfac
      */
     public this(?Table $table = null)
     {
-        if ($table !== null) {
+        if ($table != null) {
             this->setTable($table);
         }
     }

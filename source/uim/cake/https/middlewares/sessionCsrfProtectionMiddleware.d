@@ -169,7 +169,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      */
     protected string unsaltToken(string token) {
         $decoded = base64_decode($token, true);
-        if ($decoded == false || strlen($decoded) !== static::TOKEN_VALUE_LENGTH * 2) {
+        if ($decoded == false || strlen($decoded) != static::TOKEN_VALUE_LENGTH * 2) {
             return $token;
         }
         $salted = substr($decoded, 0, static::TOKEN_VALUE_LENGTH);

@@ -251,7 +251,7 @@ class TranslatorRegistry
     {
         $package = this->packages->get($name, $locale);
         $fallback = $package->getFallback();
-        if ($fallback !== null) {
+        if ($fallback != null) {
             $fallback = this->get($fallback, $locale);
         }
         $formatter = this->formatters->get($package->getFormatter());
@@ -318,7 +318,7 @@ class TranslatorRegistry
         }
 
         $fallbackDomain = null;
-        if (this->_useFallback && $name !== 'default') {
+        if (this->_useFallback && $name != 'default') {
             $fallbackDomain = 'default';
         }
 

@@ -367,7 +367,7 @@ trait DateFormatTrait
         $formatter->setLenient(static::$lenientParsing);
 
         $time = $formatter->parse($time);
-        if ($time !== false) {
+        if ($time != false) {
             $dateTime = new DateTime('@' . $time);
 
             if (!($tz instanceof DateTimeZone)) {

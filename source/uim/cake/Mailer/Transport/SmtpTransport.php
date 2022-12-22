@@ -125,7 +125,7 @@ class SmtpTransport extends AbstractTransport
      */
     public function connected(): bool
     {
-        return this->_socket !== null && this->_socket->isConnected();
+        return this->_socket != null && this->_socket->isConnected();
     }
 
     /**
@@ -240,13 +240,13 @@ class SmtpTransport extends AbstractTransport
             }
         }
 
-        if (strpos($auth, self::AUTH_PLAIN) !== false) {
+        if (strpos($auth, self::AUTH_PLAIN) != false) {
             this->authType = self::AUTH_PLAIN;
 
             return;
         }
 
-        if (strpos($auth, self::AUTH_LOGIN) !== false) {
+        if (strpos($auth, self::AUTH_LOGIN) != false) {
             this->authType = self::AUTH_LOGIN;
 
             return;
@@ -549,16 +549,16 @@ class SmtpTransport extends AbstractTransport
     {
         this->_lastResponse = [];
 
-        if ($data !== null) {
+        if ($data != null) {
             this->_socket()->write($data . "\r\n");
         }
 
         $timeout = this->_config['timeout'];
 
-        while ($checkCode !== false) {
+        while ($checkCode != false) {
             $response = '';
             $startTime = time();
-            while (substr($response, -2) !== "\r\n" && (time() - $startTime < $timeout)) {
+            while (substr($response, -2) != "\r\n" && (time() - $startTime < $timeout)) {
                 $bytes = this->_socket()->read();
                 if ($bytes === null) {
                     break;
@@ -566,7 +566,7 @@ class SmtpTransport extends AbstractTransport
                 $response .= $bytes;
             }
             // Catch empty or malformed responses.
-            if (substr($response, -2) !== "\r\n") {
+            if (substr($response, -2) != "\r\n") {
                 // Use response message or assume operation timed out.
                 throw new SocketException($response ?: 'SMTP timeout.');
             }

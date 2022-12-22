@@ -123,7 +123,7 @@ class Socket
             this->disconnect();
         }
 
-        $hasProtocol = strpos(this->_config['host'], '://') !== false;
+        $hasProtocol = strpos(this->_config['host'], '://') != false;
         if ($hasProtocol) {
             [this->_config['protocol'], this->_config['host']] = explode('://', this->_config['host']);
         }
@@ -231,7 +231,7 @@ class Socket
     protected function _setSslContext(string $host): void
     {
         foreach (this->_config as $key => $value) {
-            if (substr($key, 0, 4) !== 'ssl_') {
+            if (substr($key, 0, 4) != 'ssl_') {
                 continue;
             }
             $contextKey = substr($key, 4);

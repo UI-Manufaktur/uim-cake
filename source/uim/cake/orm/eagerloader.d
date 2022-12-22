@@ -533,7 +533,7 @@ class EagerLoader
         $currentStrategy = myConfig["strategy"] ??
             "join";
 
-        if (!$loadable.canBeJoined() || $currentStrategy !== "join") {
+        if (!$loadable.canBeJoined() || $currentStrategy != "join") {
             return;
         }
 

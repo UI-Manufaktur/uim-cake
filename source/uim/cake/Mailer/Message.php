@@ -309,7 +309,7 @@ class Message implements JsonSerializable, Serializable
     public this(?array $config = null)
     {
         this->appCharset = Configure::read('App.encoding');
-        if (this->appCharset !== null) {
+        if (this->appCharset != null) {
             this->charset = this->appCharset;
         }
         this->domain = preg_replace('/\:\d+$/', '', (string)env('HTTP_HOST'));
@@ -625,7 +625,7 @@ class Message implements JsonSerializable, Serializable
      */
     public function setTransferEncoding(?string $encoding)
     {
-        if ($encoding !== null) {
+        if ($encoding != null) {
             $encoding = strtolower($encoding);
             if (!in_array($encoding, this->transferEncodingAvailable, true)) {
                 throw new InvalidArgumentException(
@@ -753,7 +753,7 @@ class Message implements JsonSerializable, Serializable
 
         $current = this->{$varName};
         this->setEmail($varName, $email, $name);
-        if (count(this->{$varName}) !== 1) {
+        if (count(this->{$varName}) != 1) {
             this->{$varName} = $current;
             throw new InvalidArgumentException($throwMessage);
         }
@@ -919,7 +919,7 @@ class Message implements JsonSerializable, Serializable
         if (!isset($headers['Date'])) {
             $headers['Date'] = date(DATE_RFC2822);
         }
-        if (this->messageId !== false) {
+        if (this->messageId != false) {
             if (this->messageId === true) {
                 this->messageId = '<' . str_replace('-', '', Text::uuid()) . '@' . this->domain . '>';
             }
@@ -969,7 +969,7 @@ class Message implements JsonSerializable, Serializable
 
         $headers = [];
         foreach ($lines as $key => $value) {
-            if (empty($value) && $value !== '0') {
+            if (empty($value) && $value != '0') {
                 continue;
             }
 
@@ -1353,7 +1353,7 @@ class Message implements JsonSerializable, Serializable
             $msg[] = '';
         }
 
-        if ($textBoundary !== $relBoundary) {
+        if ($textBoundary != $relBoundary) {
             $msg[] = '--' . $textBoundary . '--';
             $msg[] = '';
         }
@@ -1619,7 +1619,7 @@ class Message implements JsonSerializable, Serializable
         $cut = ($wrapLength === static::LINE_LENGTH_MUST);
 
         foreach ($lines as $line) {
-            if (empty($line) && $line !== '0') {
+            if (empty($line) && $line != '0') {
                 $formatted[] = '';
                 continue;
             }
@@ -1869,7 +1869,7 @@ class Message implements JsonSerializable, Serializable
         });
 
         return array_filter($array, function ($i) {
-            return $i !== null && !is_array($i) && !is_bool($i) && strlen($i) || !empty($i);
+            return $i != null && !is_array($i) && !is_bool($i) && strlen($i) || !empty($i);
         });
     }
 

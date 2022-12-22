@@ -456,10 +456,10 @@ class SmtpTransport : AbstractTransport
 
         $timeout = _config["timeout"];
 
-        while ($checkCode !== false) {
+        while ($checkCode != false) {
             $response = "";
             $startTime = time();
-            while (substr($response, -2) !== "\r\n" && (time() - $startTime < $timeout)) {
+            while (substr($response, -2) != "\r\n" && (time() - $startTime < $timeout)) {
                 $bytes = _socket().read();
                 if ($bytes is null) {
                     break;
@@ -467,7 +467,7 @@ class SmtpTransport : AbstractTransport
                 $response .= $bytes;
             }
             // Catch empty or malformed responses.
-            if (substr($response, -2) !== "\r\n") {
+            if (substr($response, -2) != "\r\n") {
                 // Use response message or assume operation timed out.
                 throw new SocketException($response ?: "SMTP timeout.");
             }

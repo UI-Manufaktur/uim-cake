@@ -208,7 +208,7 @@ class Mailer implements EventListenerInterface
     {
         this->message = new this->messageClass();
 
-        if (this->defaultTable !== null) {
+        if (this->defaultTable != null) {
             this->modelClass = this->defaultTable;
         }
 
@@ -354,7 +354,7 @@ class Mailer implements EventListenerInterface
 
         this->clonedInstances['message'] = clone this->message;
         this->clonedInstances['renderer'] = clone this->getRenderer();
-        if (this->transport !== null) {
+        if (this->transport != null) {
             this->clonedInstances['transport'] = clone this->transport;
         }
 
@@ -595,7 +595,7 @@ class Mailer implements EventListenerInterface
             'level' => 'debug',
             'scope' => 'email',
         ];
-        if ($log !== true) {
+        if ($log != true) {
             if (!is_array($log)) {
                 $log = ['level' => $log];
             }

@@ -165,7 +165,7 @@ class PoFileParser
 
         $translation = stripcslashes((string)$translation);
 
-        if ($context !== null && !isset($messages[$singular]['_context'][$context])) {
+        if ($context != null && !isset($messages[$singular]['_context'][$context])) {
             $messages[$singular]['_context'][$context] = $translation;
         } elseif (!isset($messages[$singular]['_context'][''])) {
             $messages[$singular]['_context'][''] = $translation;
@@ -188,7 +188,7 @@ class PoFileParser
             $plurals = array_map('stripcslashes', $plurals);
             $key = stripcslashes($item['ids']['plural']);
 
-            if ($context !== null) {
+            if ($context != null) {
                 $messages[Translator::PLURAL_PREFIX . $key]['_context'][$context] = $plurals;
             } else {
                 $messages[Translator::PLURAL_PREFIX . $key]['_context'][''] = $plurals;

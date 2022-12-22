@@ -61,7 +61,7 @@ class Mock : IAdapter
         myRequestUri = (string)myRequest.getUri();
 
         foreach (this.responses as $index: $mock) {
-            if ($method !== $mock["request"].getMethod()) {
+            if ($method != $mock["request"].getMethod()) {
                 continue;
             }
             if (!this.urlMatches(myRequestUri, $mock["request"])) {

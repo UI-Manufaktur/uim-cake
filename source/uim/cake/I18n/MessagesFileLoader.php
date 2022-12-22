@@ -113,7 +113,7 @@ class MessagesFileLoader
 
         $fileName = this->_name;
         $pos = strpos($fileName, '/');
-        if ($pos !== false) {
+        if ($pos != false) {
             $fileName = substr($fileName, $pos + 1);
         }
         foreach ($folders as $folder) {

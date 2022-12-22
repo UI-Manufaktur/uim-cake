@@ -36,7 +36,7 @@ abstract class BaseLog : AbstractLogger {
     this(array myConfig = []) {
         this.setConfig(myConfig);
 
-        if (!is_array(_config["scopes"]) && _config["scopes"] !== false) {
+        if (!is_array(_config["scopes"]) && _config["scopes"] != false) {
             _config["scopes"] = (array)_config["scopes"];
         }
 

@@ -155,7 +155,7 @@ class Session
         if (isset($defaults[myName])) {
             if (
                 PHP_VERSION_ID >= 70300
-                && (myName !== "php" || empty(ini_get("session.cookie_samesite")))
+                && (myName != "php" || empty(ini_get("session.cookie_samesite")))
             ) {
                 $defaults["php"]["ini"]["session.cookie_samesite"] = "Lax";
             }
@@ -267,7 +267,7 @@ class Session
      */
     protected auto setEngine(SessionHandlerInterface $handler): SessionHandlerInterface
     {
-        if (!headers_sent() && session_status() !== \PHP_SESSION_ACTIVE) {
+        if (!headers_sent() && session_status() != \PHP_SESSION_ACTIVE) {
             session_set_save_handler($handler, false);
         }
 
@@ -598,7 +598,7 @@ class Session
             myParams["httponly"]
         );
 
-        if (session_id() !== "") {
+        if (session_id() != "") {
             session_regenerate_id(true);
         }
     }

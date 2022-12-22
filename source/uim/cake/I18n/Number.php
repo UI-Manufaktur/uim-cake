@@ -288,7 +288,7 @@ class Number
             // Retaining it for backward compatibility.
             return null;
         }
-        if ($currency !== null) {
+        if ($currency != null) {
             static::setDefaultCurrency($currency);
         }
 

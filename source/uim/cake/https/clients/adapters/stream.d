@@ -218,14 +218,14 @@ class Stream : IAdapter
 
         /** @psalm-suppress PossiblyNullArgument  */
         while (!feof(_stream)) {
-            if ($deadline !== false) {
+            if ($deadline != false) {
                 stream_set_timeout(_stream, max($deadline - time(), 1));
             }
 
             myContents .= fread(_stream, 8192);
 
             $meta = stream_get_meta_data(_stream);
-            if ($meta["timed_out"] || ($deadline !== false && time() > $deadline)) {
+            if ($meta["timed_out"] || ($deadline != false && time() > $deadline)) {
                 $timedOut = true;
                 break;
             }

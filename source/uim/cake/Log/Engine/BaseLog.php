@@ -57,7 +57,7 @@ abstract class BaseLog extends AbstractLogger
     {
         this->setConfig($config);
 
-        if (!is_array(this->_config['scopes']) && this->_config['scopes'] !== false) {
+        if (!is_array(this->_config['scopes']) && this->_config['scopes'] != false) {
             this->_config['scopes'] = (array)this->_config['scopes'];
         }
 

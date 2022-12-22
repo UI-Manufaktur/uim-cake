@@ -141,7 +141,7 @@ class Email implements JsonSerializable, Serializable
             this->renderer = clone this->renderer;
         }
 
-        if (this->message !== null) {
+        if (this->message != null) {
             this->message = clone this->message;
         }
     }
@@ -455,7 +455,7 @@ class Email implements JsonSerializable, Serializable
             'level' => 'debug',
             'scope' => 'email',
         ];
-        if (this->_profile['log'] !== true) {
+        if (this->_profile['log'] != true) {
             if (!is_array(this->_profile['log'])) {
                 this->_profile['log'] = ['level' => this->_profile['log']];
             }
@@ -503,10 +503,10 @@ class Email implements JsonSerializable, Serializable
         }
 
         $instance = new static($config);
-        if ($to !== null) {
+        if ($to != null) {
             $instance->getMessage()->setTo($to);
         }
-        if ($subject !== null) {
+        if ($subject != null) {
             $instance->getMessage()->setSubject($subject);
         }
         if (is_array($message)) {
@@ -534,7 +534,7 @@ class Email implements JsonSerializable, Serializable
     public function reset()
     {
         this->message->reset();
-        if (this->renderer !== null) {
+        if (this->renderer != null) {
             this->renderer->reset();
         }
         this->_transport = null;

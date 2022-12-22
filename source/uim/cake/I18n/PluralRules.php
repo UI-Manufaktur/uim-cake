@@ -161,7 +161,7 @@ class PluralRules
             case 2:
                 return $n > 1 ? 1 : 0;
             case 3:
-                return $n % 10 === 1 && $n % 100 !== 11 ? 0 :
+                return $n % 10 === 1 && $n % 100 != 11 ? 0 :
                     (($n % 10 >= 2 && $n % 10 <= 4) && ($n % 100 < 10 || $n % 100 >= 20) ? 1 : 2);
             case 4:
                 return $n === 1 ? 0 :
@@ -170,7 +170,7 @@ class PluralRules
                 return $n === 1 ? 0 :
                     ($n === 2 ? 1 : ($n < 7 ? 2 : ($n < 11 ? 3 : 4)));
             case 6:
-                return $n % 10 === 1 && $n % 100 !== 11 ? 0 :
+                return $n % 10 === 1 && $n % 100 != 11 ? 0 :
                     ($n % 10 >= 2 && ($n % 100 < 10 || $n % 100 >= 20) ? 1 : 2);
             case 7:
                 return $n % 100 === 1 ? 1 :
@@ -182,7 +182,7 @@ class PluralRules
                     ($n === 0 || ($n % 100 > 0 && $n % 100 <= 10) ? 1 :
                     ($n % 100 > 10 && $n % 100 < 20 ? 2 : 3));
             case 10:
-                return $n % 10 === 1 && $n % 100 !== 11 ? 0 : ($n !== 0 ? 1 : 2);
+                return $n % 10 === 1 && $n % 100 != 11 ? 0 : ($n != 0 ? 1 : 2);
             case 11:
                 return $n === 1 ? 0 :
                     ($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20) ? 1 : 2);
@@ -198,9 +198,9 @@ class PluralRules
             case 14:
                 return $n === 1 ? 0 :
                     ($n === 2 ? 1 :
-                    ($n !== 8 && $n !== 11 ? 2 : 3));
+                    ($n != 8 && $n != 11 ? 2 : 3));
             case 15:
-                return $n % 10 !== 1 || $n % 100 === 11 ? 1 : 0;
+                return $n % 10 != 1 || $n % 100 === 11 ? 1 : 0;
         }
 
         throw new CakeException('Unable to find plural rule number.');

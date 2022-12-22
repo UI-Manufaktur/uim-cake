@@ -105,7 +105,7 @@ class Socket
             this.disconnect();
         }
 
-        $hasProtocol = indexOf(_config["host"], "://") !== false;
+        $hasProtocol = indexOf(_config["host"], "://") != false;
         if ($hasProtocol) {
             [_config["protocol"], _config["host"]] = explode("://", _config["host"]);
         }
@@ -208,7 +208,7 @@ class Socket
      */
     protected void _setSslContext(string host) {
         foreach (_config as myKey: myValue) {
-            if (substr(myKey, 0, 4) !== "ssl_") {
+            if (substr(myKey, 0, 4) != "ssl_") {
                 continue;
             }
             $contextKey = substr(myKey, 4);

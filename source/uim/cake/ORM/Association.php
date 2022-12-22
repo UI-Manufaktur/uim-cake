@@ -258,9 +258,9 @@ abstract class Association
             . ' The name should only be set through the constructor'
         );
 
-        if (this->_targetTable !== null) {
+        if (this->_targetTable != null) {
             $alias = this->_targetTable->getAlias();
-            if ($alias !== $name) {
+            if ($alias != $name) {
                 throw new InvalidArgumentException(sprintf(
                     'Association name "%s" does not match target table alias "%s".',
                     $name,
@@ -319,8 +319,8 @@ abstract class Association
     public function setClassName(string $className)
     {
         if (
-            this->_targetTable !== null &&
-            get_class(this->_targetTable) !== App::className($className, 'Model/Table', 'Table')
+            this->_targetTable != null &&
+            get_class(this->_targetTable) != App::className($className, 'Model/Table', 'Table')
         ) {
             throw new InvalidArgumentException(sprintf(
                 'The class name "%s" doesn\'t match the target table class name of "%s".',
@@ -1100,7 +1100,7 @@ abstract class Association
         $foreignKey = (array)$options['foreignKey'];
         $bindingKey = (array)this->getBindingKey();
 
-        if (count($foreignKey) !== count($bindingKey)) {
+        if (count($foreignKey) != count($bindingKey)) {
             if (empty($bindingKey)) {
                 $table = this->getTarget()->getTable();
                 if (this->isOwningSide(this->getSource())) {

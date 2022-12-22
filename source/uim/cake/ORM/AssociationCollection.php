@@ -52,7 +52,7 @@ class AssociationCollection implements IteratorAggregate
      */
     public this(?LocatorInterface $tableLocator = null)
     {
-        if ($tableLocator !== null) {
+        if ($tableLocator != null) {
             this->_tableLocator = $tableLocator;
         }
     }
@@ -270,7 +270,7 @@ class AssociationCollection implements IteratorAggregate
                 );
                 throw new InvalidArgumentException($msg);
             }
-            if ($relation->isOwningSide($table) !== $owningSide) {
+            if ($relation->isOwningSide($table) != $owningSide) {
                 continue;
             }
             if (!this->_save($relation, $entity, $nested, $options)) {

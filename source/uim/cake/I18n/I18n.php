@@ -57,7 +57,7 @@ class I18n
      */
     public static function translators(): TranslatorRegistry
     {
-        if (static::$_collection !== null) {
+        if (static::$_collection != null) {
             return static::$_collection;
         }
 

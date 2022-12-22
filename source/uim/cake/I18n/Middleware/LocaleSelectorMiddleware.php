@@ -60,7 +60,7 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
         if (!$locale) {
             return $handler->handle($request);
         }
-        if (this->locales !== ['*']) {
+        if (this->locales != ['*']) {
             $locale = Locale::lookup(this->locales, $locale, true);
         }
         if ($locale || this->locales === ['*']) {

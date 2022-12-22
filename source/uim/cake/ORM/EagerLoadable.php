@@ -300,7 +300,7 @@ class EagerLoadable
             $associations += $assoc->asContainArray();
         }
         $config = this->_config;
-        if (this->_forMatching !== null) {
+        if (this->_forMatching != null) {
             $config = ['matching' => this->_forMatching] + $config;
         }
 

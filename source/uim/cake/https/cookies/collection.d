@@ -237,7 +237,7 @@ class CookieCollection : IteratorAggregate, Countable {
             if ($scheme == "http" && $cookie.isSecure()) {
                 continue;
             }
-            if (indexOf(myPath, $cookie.getPath()) !== 0) {
+            if (indexOf(myPath, $cookie.getPath()) != 0) {
                 continue;
             }
             $domain = $cookie.getDomain();

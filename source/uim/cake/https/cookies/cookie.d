@@ -250,7 +250,7 @@ class Cookie : ICookie
      * @see \Cake\Http\Cookie\Cookie::setDefaults()
      */
     static function createFromHeaderString(string cookie, array $defaults = []) {
-        if (indexOf($cookie, "";"") !== false) {
+        if (indexOf($cookie, "";"") != false) {
             $cookie = str_replace("";"", "{__cookie_replace__}", $cookie);
             $parts = str_replace("{__cookie_replace__}", "";"", explode(";", $cookie));
         } else {
@@ -264,7 +264,7 @@ class Cookie : ICookie
             ] + $defaults;
 
         foreach ($parts as $part) {
-            if (indexOf($part, "=") !== false) {
+            if (indexOf($part, "=") != false) {
                 [myKey, myValue] = explode("=", $part);
             } else {
                 myKey = $part;
@@ -315,10 +315,10 @@ class Cookie : ICookie
         if (this.expiresAt) {
             $headerValue[] = sprintf("expires=%s", this.getFormattedExpires());
         }
-        if (this.path !== "") {
+        if (this.path != "") {
             $headerValue[] = sprintf("path=%s", this.path);
         }
-        if (this.domain !== "") {
+        if (this.domain != "") {
             $headerValue[] = sprintf("domain=%s", this.domain);
         }
         if (this.sameSite) {

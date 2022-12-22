@@ -113,7 +113,7 @@ class Renderer
      */
     public function __clone()
     {
-        if (this->_viewBuilder !== null) {
+        if (this->_viewBuilder != null) {
             this->_viewBuilder = clone this->_viewBuilder;
         }
     }
