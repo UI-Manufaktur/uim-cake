@@ -109,7 +109,7 @@ class Event implements EventInterface
      */
     function getSubject()
     {
-        if (this->_subject === null) {
+        if (this->_subject == null) {
             throw new CakeException('No subject set for this event');
         }
 

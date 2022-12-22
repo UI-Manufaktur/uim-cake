@@ -145,7 +145,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      */
     function handleException(Throwable $exception, ServerRequestInterface $request): ResponseInterface
     {
-        if (this->errorHandler === null) {
+        if (this->errorHandler == null) {
             $handler = this->getExceptionTrap();
             $handler->logException($exception, $request);
 
@@ -207,7 +207,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      */
     protected function getErrorHandler(): ErrorHandler
     {
-        if (this->errorHandler === null) {
+        if (this->errorHandler == null) {
             /** @var class-string<\Cake\Error\ErrorHandler> $className */
             $className = App::className('ErrorHandler', 'Error');
             this->errorHandler = new $className(this->getConfig());
@@ -223,7 +223,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      */
     protected function getExceptionTrap(): ExceptionTrap
     {
-        if (this->exceptionTrap === null) {
+        if (this->exceptionTrap == null) {
             /** @var class-string<\Cake\Error\ExceptionTrap> $className */
             $className = App::className('ExceptionTrap', 'Error');
             this->exceptionTrap = new $className(this->getConfig());

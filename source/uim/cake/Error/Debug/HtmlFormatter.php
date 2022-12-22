@@ -52,7 +52,7 @@ class HtmlFormatter implements FormatterInterface
      */
     public static function environmentMatches(): bool
     {
-        if (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') {
+        if (PHP_SAPI == 'cli' || PHP_SAPI == 'phpdbg') {
             return false;
         }
 

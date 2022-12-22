@@ -229,15 +229,15 @@ class RulesChecker
      */
     function check(EntityInterface $entity, string $mode, array $options = []): bool
     {
-        if ($mode === self::CREATE) {
+        if ($mode == self::CREATE) {
             return this->checkCreate($entity, $options);
         }
 
-        if ($mode === self::UPDATE) {
+        if ($mode == self::UPDATE) {
             return this->checkUpdate($entity, $options);
         }
 
-        if ($mode === self::DELETE) {
+        if ($mode == self::DELETE) {
             return this->checkDelete($entity, $options);
         }
 

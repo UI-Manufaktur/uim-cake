@@ -146,7 +146,7 @@ class Folder
             this->mode = $mode;
         }
 
-        if (!file_exists($path) && $create === true) {
+        if (!file_exists($path) && $create == true) {
             this->create($path, this->mode);
         }
         if (!Folder::isAbsolute($path)) {
@@ -203,7 +203,7 @@ class Folder
         if (is_array($exceptions)) {
             $exceptions = array_flip($exceptions);
         }
-        $skipHidden = isset($exceptions['.']) || $exceptions === true;
+        $skipHidden = isset($exceptions['.']) || $exceptions == true;
 
         try {
             $iterator = new DirectoryIterator(this->path);
@@ -222,7 +222,7 @@ class Folder
                 continue;
             }
             $name = $item->getFilename();
-            if ($skipHidden && $name[0] === '.' || isset($exceptions[$name])) {
+            if ($skipHidden && $name[0] == '.' || isset($exceptions[$name])) {
                 continue;
             }
             if ($fullPath) {
@@ -320,7 +320,7 @@ class Folder
      */
     public static function isWindowsPath(string $path): bool
     {
-        return preg_match('/^[A-Z]:\\\\/i', $path) || substr($path, 0, 2) === '\\\\';
+        return preg_match('/^[A-Z]:\\\\/i', $path) || substr($path, 0, 2) == '\\\\';
     }
 
     /**
@@ -335,9 +335,9 @@ class Folder
             return false;
         }
 
-        return $path[0] === '/' ||
+        return $path[0] == '/' ||
             preg_match('/^[A-Z]:\\\\/i', $path) ||
-            substr($path, 0, 2) === '\\\\' ||
+            substr($path, 0, 2) == '\\\\' ||
             self::isRegisteredStreamWrapper($path);
     }
 
@@ -362,7 +362,7 @@ class Folder
     public static function normalizeFullPath(string $path): string
     {
         $to = Folder::correctSlashFor($path);
-        $from = ($to === '/' ? '\\' : '/');
+        $from = ($to == '/' ? '\\' : '/');
 
         return str_replace($from, $to, $path);
     }
@@ -449,7 +449,7 @@ class Folder
             $mode = this->mode;
         }
 
-        if ($recursive === false && is_dir($path)) {
+        if ($recursive == false && is_dir($path)) {
             // phpcs:disable
             if (@chmod($path, intval($mode, 8))) {
                 // phpcs:enable
@@ -544,7 +544,7 @@ class Folder
             $exceptions = array_flip($exceptions);
         }
         $skipHidden = false;
-        if ($exceptions === true) {
+        if ($exceptions == true) {
             $skipHidden = true;
         } elseif (isset($exceptions['.'])) {
             $skipHidden = true;
@@ -560,7 +560,7 @@ class Folder
         } catch (Exception $e) {
             unset($directory, $iterator);
 
-            if ($type === null) {
+            if ($type == null) {
                 return [[], []];
             }
 
@@ -574,7 +574,7 @@ class Folder
         foreach ($iterator as $itemPath => $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator->getSubPathname();
-                if ($subPathName[0] === '.' || strpos($subPathName, DIRECTORY_SEPARATOR . '.') != false) {
+                if ($subPathName[0] == '.' || strpos($subPathName, DIRECTORY_SEPARATOR . '.') != false) {
                     unset($fsIterator);
                     continue;
                 }
@@ -600,10 +600,10 @@ class Folder
         // which could otherwise make `rmdir()` fail
         unset($directory, $iterator);
 
-        if ($type === null) {
+        if ($type == null) {
             return [$directories, $files];
         }
-        if ($type === 'dir') {
+        if ($type == 'dir') {
             return $directories;
         }
 
@@ -680,7 +680,7 @@ class Folder
                 $dir = dir($stack[$i]);
                 if ($dir) {
                     while (($entry = $dir->read()) != false) {
-                        if ($entry === '.' || $entry === '..') {
+                        if ($entry == '.' || $entry == '..') {
                             continue;
                         }
                         $add = $stack[$i] . $entry;
@@ -837,11 +837,11 @@ class Folder
                         }
                     }
 
-                    if (is_dir($from) && file_exists($to) && $options['scheme'] === Folder::OVERWRITE) {
+                    if (is_dir($from) && file_exists($to) && $options['scheme'] == Folder::OVERWRITE) {
                         this->delete($to);
                     }
 
-                    if (is_dir($from) && $options['recursive'] === false) {
+                    if (is_dir($from) && $options['recursive'] == false) {
                         continue;
                     }
 
@@ -858,7 +858,7 @@ class Folder
                         } else {
                             this->_errors[] = sprintf('%s not created', $to);
                         }
-                    } elseif (is_dir($from) && $options['scheme'] === Folder::MERGE) {
+                    } elseif (is_dir($from) && $options['scheme'] == Folder::MERGE) {
                         $options = ['from' => $from] + $options;
                         this->copy($to, $options);
                     }
@@ -938,7 +938,7 @@ class Folder
      */
     function realpath($path)
     {
-        if (strpos($path, '..') === false) {
+        if (strpos($path, '..') == false) {
             if (!Folder::isAbsolute($path)) {
                 $path = Folder::addPathElement(this->path, $path);
             }
@@ -949,15 +949,15 @@ class Folder
         $parts = explode(DIRECTORY_SEPARATOR, $path);
         $newparts = [];
         $newpath = '';
-        if ($path[0] === DIRECTORY_SEPARATOR) {
+        if ($path[0] == DIRECTORY_SEPARATOR) {
             $newpath = DIRECTORY_SEPARATOR;
         }
 
         while (($part = array_shift($parts)) != null) {
-            if ($part === '.' || $part === '') {
+            if ($part == '.' || $part == '') {
                 continue;
             }
-            if ($part === '..') {
+            if ($part == '..') {
                 if (!empty($newparts)) {
                     array_pop($newparts);
                     continue;
@@ -982,6 +982,6 @@ class Folder
     {
         $lastChar = $path[strlen($path) - 1];
 
-        return $lastChar === '/' || $lastChar === '\\';
+        return $lastChar == '/' || $lastChar == '\\';
     }
 }

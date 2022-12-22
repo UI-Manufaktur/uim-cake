@@ -69,7 +69,7 @@ class ErrorTrap
         }
 
         /** @var class-string<\Cake\Error\ErrorRendererInterface> */
-        return PHP_SAPI === 'cli' ? ConsoleErrorRenderer::class : HtmlErrorRenderer::class;
+        return PHP_SAPI == 'cli' ? ConsoleErrorRenderer::class : HtmlErrorRenderer::class;
     }
 
     /**
@@ -114,7 +114,7 @@ class ErrorTrap
         if (!(error_reporting() & $code)) {
             return false;
         }
-        if ($code === E_USER_ERROR || $code === E_ERROR || $code === E_PARSE) {
+        if ($code == E_USER_ERROR || $code == E_ERROR || $code == E_PARSE) {
             throw new FatalErrorException($description, $code, $file, $line);
         }
 

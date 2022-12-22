@@ -33,7 +33,7 @@ class UuidType extends StringType
      */
     function toDatabase($value, DriverInterface $driver): ?string
     {
-        if ($value === null || $value === '' || $value === false) {
+        if ($value == null || $value == '' || $value == false) {
             return null;
         }
 
@@ -58,7 +58,7 @@ class UuidType extends StringType
      */
     function marshal($value): ?string
     {
-        if ($value === null || $value === '' || is_array($value)) {
+        if ($value == null || $value == '' || is_array($value)) {
             return null;
         }
 

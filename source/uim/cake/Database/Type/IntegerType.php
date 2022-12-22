@@ -53,7 +53,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
      */
     function toDatabase($value, DriverInterface $driver): ?int
     {
-        if ($value === null || $value === '') {
+        if ($value == null || $value == '') {
             return null;
         }
 
@@ -71,7 +71,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
      */
     function toPHP($value, DriverInterface $driver): ?int
     {
-        if ($value === null) {
+        if ($value == null) {
             return null;
         }
 
@@ -116,7 +116,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
      */
     function marshal($value): ?int
     {
-        if ($value === null || $value === '') {
+        if ($value == null || $value == '') {
             return null;
         }
         if (is_numeric($value)) {

@@ -105,7 +105,7 @@ class EventManager implements EventManagerInterface
         }
 
         $argCount = func_num_args();
-        if ($argCount === 2) {
+        if ($argCount == 2) {
             this->_listeners[$eventKey][static::$defaultPriority][] = [
                 'callable' => $options,
             ];
@@ -203,7 +203,7 @@ class EventManager implements EventManagerInterface
             return this;
         }
 
-        if ($callable === null) {
+        if ($callable == null) {
             unset(this->_listeners[$eventKey]);
 
             return this;
@@ -215,7 +215,7 @@ class EventManager implements EventManagerInterface
 
         foreach (this->_listeners[$eventKey] as $priority => $callables) {
             foreach ($callables as $k => $callback) {
-                if ($callback['callable'] === $callable) {
+                if ($callback['callable'] == $callable) {
                     unset(this->_listeners[$eventKey][$priority][$k]);
                     break;
                 }
@@ -284,7 +284,7 @@ class EventManager implements EventManagerInterface
                 break;
             }
             $result = this->_callListener($listener['callable'], $event);
-            if ($result === false) {
+            if ($result == false) {
                 $event->stopPropagation();
             }
             if ($result != null) {

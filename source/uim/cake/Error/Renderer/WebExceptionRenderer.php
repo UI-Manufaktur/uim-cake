@@ -151,13 +151,13 @@ class WebExceptionRenderer implements ExceptionRendererInterface
         $routerRequest = Router::getRequest();
         // Fallback to the request in the router or make a new one from
         // $_SERVER
-        if ($request === null) {
+        if ($request == null) {
             $request = $routerRequest ?: ServerRequestFactory::fromGlobals();
         }
 
         // If the current request doesn't have routing data, but we
         // found a request in the router context copy the params over
-        if ($request->getParam('controller') === null && $routerRequest != null) {
+        if ($request->getParam('controller') == null && $routerRequest != null) {
             $request = $request->withAttribute('params', $routerRequest->getAttribute('params'));
         }
 
@@ -338,12 +338,12 @@ class WebExceptionRenderer implements ExceptionRendererInterface
     {
         [, $baseClass] = namespaceSplit(get_class($exception));
 
-        if (substr($baseClass, -9) === 'Exception') {
+        if (substr($baseClass, -9) == 'Exception') {
             $baseClass = substr($baseClass, 0, -9);
         }
 
         // $baseClass would be an empty string if the exception class is \Exception.
-        $method = $baseClass === '' ? 'error500' : Inflector::variable($baseClass);
+        $method = $baseClass == '' ? 'error500' : Inflector::variable($baseClass);
 
         return this->method = $method;
     }
@@ -433,7 +433,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
             return this->_outputMessage('error500');
         } catch (MissingPluginException $e) {
             $attributes = $e->getAttributes();
-            if (isset($attributes['plugin']) && $attributes['plugin'] === this->controller->getPlugin()) {
+            if (isset($attributes['plugin']) && $attributes['plugin'] == this->controller->getPlugin()) {
                 this->controller->setPlugin(null);
             }
 

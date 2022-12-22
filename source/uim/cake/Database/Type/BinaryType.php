@@ -52,7 +52,7 @@ class BinaryType extends BaseType
      */
     function toPHP($value, DriverInterface $driver)
     {
-        if ($value === null) {
+        if ($value == null) {
             return null;
         }
         if (is_string($value)) {

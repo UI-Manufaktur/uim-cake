@@ -115,8 +115,8 @@ class RuleInvoker
     {
         $rule = this->rule;
         $pass = $rule($entity, this->options + $scope);
-        if ($pass === true || empty(this->options['errorField'])) {
-            return $pass === true;
+        if ($pass == true || empty(this->options['errorField'])) {
+            return $pass == true;
         }
 
         $message = this->options['message'] ?? 'invalid';
@@ -137,6 +137,6 @@ class RuleInvoker
         }
 
         /** @phpstan-ignore-next-line */
-        return $pass === true;
+        return $pass == true;
     }
 }

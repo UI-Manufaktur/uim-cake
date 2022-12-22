@@ -36,7 +36,7 @@ class StringType extends BaseType implements OptionalConvertInterface
      */
     function toDatabase($value, DriverInterface $driver): ?string
     {
-        if ($value === null || is_string($value)) {
+        if ($value == null || is_string($value)) {
             return $value;
         }
 
@@ -63,7 +63,7 @@ class StringType extends BaseType implements OptionalConvertInterface
      */
     function toPHP($value, DriverInterface $driver): ?string
     {
-        if ($value === null) {
+        if ($value == null) {
             return null;
         }
 
@@ -90,7 +90,7 @@ class StringType extends BaseType implements OptionalConvertInterface
      */
     function marshal($value): ?string
     {
-        if ($value === null || is_array($value)) {
+        if ($value == null || is_array($value)) {
             return null;
         }
 

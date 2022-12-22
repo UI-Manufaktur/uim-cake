@@ -72,7 +72,7 @@ trait ModelAwareTrait
      */
     protected function _setModelClass(string $name): void
     {
-        if (this->modelClass === null) {
+        if (this->modelClass == null) {
             this->modelClass = $name;
         }
     }
@@ -104,7 +104,7 @@ trait ModelAwareTrait
         $modelType = $modelType ?? this->getModelType();
 
         $options = [];
-        if (strpos($modelClass, '\\') === false) {
+        if (strpos($modelClass, '\\') == false) {
             [, $alias] = pluginSplit($modelClass, true);
         } else {
             $options['className'] = $modelClass;

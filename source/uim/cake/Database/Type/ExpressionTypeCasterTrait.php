@@ -35,7 +35,7 @@ trait ExpressionTypeCasterTrait
      */
     protected function _castToExpression($value, ?string $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             return $value;
         }
 

@@ -115,7 +115,7 @@ class ExceptionTrap
 
         /** @var class-string|callable $class */
         $class = this->getConfig('exceptionRenderer');
-        $deprecatedConfig = ($class === ExceptionRenderer::class && PHP_SAPI === 'cli');
+        $deprecatedConfig = ($class == ExceptionRenderer::class && PHP_SAPI == 'cli');
         if ($deprecatedConfig) {
             deprecationWarning(
                 'Your application is using a deprecated `Error.exceptionRenderer`. ' .
@@ -155,7 +155,7 @@ class ExceptionTrap
     protected function chooseRenderer(): string
     {
         /** @var class-string<\Cake\Error\ExceptionRendererInterface> */
-        return PHP_SAPI === 'cli' ? ConsoleExceptionRenderer::class : ExceptionRenderer::class;
+        return PHP_SAPI == 'cli' ? ConsoleExceptionRenderer::class : ExceptionRenderer::class;
     }
 
     /**
@@ -294,22 +294,22 @@ class ExceptionTrap
     function increaseMemoryLimit(int $additionalKb): void
     {
         $limit = ini_get('memory_limit');
-        if ($limit === false || $limit === '' || $limit === '-1') {
+        if ($limit == false || $limit == '' || $limit == '-1') {
             return;
         }
         $limit = trim($limit);
         $units = strtoupper(substr($limit, -1));
         $current = (int)substr($limit, 0, -1);
-        if ($units === 'M') {
+        if ($units == 'M') {
             $current *= 1024;
             $units = 'K';
         }
-        if ($units === 'G') {
+        if ($units == 'G') {
             $current = $current * 1024 * 1024;
             $units = 'K';
         }
 
-        if ($units === 'K') {
+        if ($units == 'K') {
             ini_set('memory_limit', ceil($current + $additionalKb) . 'K');
         }
     }

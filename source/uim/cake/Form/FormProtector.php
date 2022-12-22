@@ -126,7 +126,7 @@ class FormProtector
 
         foreach (this->unlockedFields as $unlockField) {
             $unlockParts = explode('.', $unlockField);
-            if (array_values(array_intersect($field, $unlockParts)) === $unlockParts) {
+            if (array_values(array_intersect($field, $unlockParts)) == $unlockParts) {
                 return this;
             }
         }
@@ -168,7 +168,7 @@ class FormProtector
             return [];
         }
 
-        if (strpos($name, '[') === false) {
+        if (strpos($name, '[') == false) {
             return Hash::filter(explode('.', $name));
         }
         $parts = explode('[', $name);
@@ -335,7 +335,7 @@ class FormProtector
                 foreach ($unlockedFields as $off) {
                     $off = explode('.', $off);
                     $field = array_values(array_intersect(explode('.', $key), $off));
-                    $isUnlocked = ($field === $off);
+                    $isUnlocked = ($field == $off);
                     if ($isUnlocked) {
                         break;
                     }
@@ -534,7 +534,7 @@ class FormProtector
         foreach ($dataFields as $key => $value) {
             if (is_int($key)) {
                 $foundKey = array_search($value, $expectedFields, true);
-                if ($foundKey === false) {
+                if ($foundKey == false) {
                     $messages[] = sprintf($intKeyMessage, $value);
                 } else {
                     unset($expectedFields[$foundKey]);
@@ -559,7 +559,7 @@ class FormProtector
      */
     protected function debugExpectedFields(array $expectedFields = [], string $missingMessage = ''): ?string
     {
-        if (count($expectedFields) === 0) {
+        if (count($expectedFields) == 0) {
             return null;
         }
 

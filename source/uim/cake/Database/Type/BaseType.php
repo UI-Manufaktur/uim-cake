@@ -63,7 +63,7 @@ abstract class BaseType implements TypeInterface
      */
     function toStatement($value, DriverInterface $driver)
     {
-        if ($value === null) {
+        if ($value == null) {
             return PDO::PARAM_NULL;
         }
 

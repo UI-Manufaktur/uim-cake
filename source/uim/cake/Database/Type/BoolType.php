@@ -36,7 +36,7 @@ class BoolType extends BaseType implements BatchCastingInterface
      */
     function toDatabase($value, DriverInterface $driver): ?bool
     {
-        if ($value === true || $value === false || $value === null) {
+        if ($value == true || $value == false || $value == null) {
             return $value;
         }
 
@@ -59,12 +59,12 @@ class BoolType extends BaseType implements BatchCastingInterface
      */
     function toPHP($value, DriverInterface $driver): ?bool
     {
-        if ($value === null || is_bool($value)) {
+        if ($value == null || is_bool($value)) {
             return $value;
         }
 
         if (!is_numeric($value)) {
-            return strtolower($value) === 'true';
+            return strtolower($value) == 'true';
         }
 
         return !empty($value);
@@ -77,12 +77,12 @@ class BoolType extends BaseType implements BatchCastingInterface
     {
         foreach ($fields as $field) {
             $value = $values[$field] ?? null;
-            if ($value === null || is_bool($value)) {
+            if ($value == null || is_bool($value)) {
                 continue;
             }
 
             if (!is_numeric($value)) {
-                $values[$field] = strtolower($value) === 'true';
+                $values[$field] = strtolower($value) == 'true';
                 continue;
             }
 
@@ -101,7 +101,7 @@ class BoolType extends BaseType implements BatchCastingInterface
      */
     function toStatement($value, DriverInterface $driver): int
     {
-        if ($value === null) {
+        if ($value == null) {
             return PDO::PARAM_NULL;
         }
 
@@ -116,7 +116,7 @@ class BoolType extends BaseType implements BatchCastingInterface
      */
     function marshal($value): ?bool
     {
-        if ($value === null || $value === '') {
+        if ($value == null || $value == '') {
             return null;
         }
 

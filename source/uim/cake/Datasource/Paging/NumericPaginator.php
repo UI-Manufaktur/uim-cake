@@ -171,7 +171,7 @@ class NumericPaginator implements PaginatorInterface
         if ($object instanceof QueryInterface) {
             $query = $object;
             $object = $query->getRepository();
-            if ($object === null) {
+            if ($object == null) {
                 throw new CakeException('No repository set for query.');
             }
         }
@@ -207,7 +207,7 @@ class NumericPaginator implements PaginatorInterface
      */
     protected function getQuery(RepositoryInterface $object, ?QueryInterface $query, array $data): QueryInterface
     {
-        if ($query === null) {
+        if ($query == null) {
             $query = $object->find($data['finder'], $data['options']);
         } else {
             $query->applyOptions($data['options']);
@@ -299,7 +299,7 @@ class NumericPaginator implements PaginatorInterface
         if ($params['count'] != null) {
             $pageCount = max((int)ceil($params['count'] / $params['perPage']), 1);
             $page = min($page, $pageCount);
-        } elseif ($params['current'] === 0 && $params['requestedPage'] > 1) {
+        } elseif ($params['current'] == 0 && $params['requestedPage'] > 1) {
             $page = 1;
         }
 
@@ -341,7 +341,7 @@ class NumericPaginator implements PaginatorInterface
     protected function addPrevNextParams(array $params, array $data): array
     {
         $params['prevPage'] = $params['page'] > 1;
-        if ($params['count'] === null) {
+        if ($params['count'] == null) {
             $params['nextPage'] = true;
         } else {
             $params['nextPage'] = $params['count'] > $params['page'] * $params['perPage'];
@@ -548,7 +548,7 @@ class NumericPaginator implements PaginatorInterface
             }
 
             $order = isset($options['order']) && is_array($options['order']) ? $options['order'] : [];
-            if ($order && $options['sort'] && strpos($options['sort'], '.') === false) {
+            if ($order && $options['sort'] && strpos($options['sort'], '.') == false) {
                 $order = this->_removeAliases($order, $object->getAlias());
             }
 
@@ -581,7 +581,7 @@ class NumericPaginator implements PaginatorInterface
         }
 
         if (
-            $options['sort'] === null
+            $options['sort'] == null
             && count($options['order']) >= 1
             && !is_numeric(key($options['order']))
         ) {
@@ -604,14 +604,14 @@ class NumericPaginator implements PaginatorInterface
     {
         $result = [];
         foreach ($fields as $field => $sort) {
-            if (strpos($field, '.') === false) {
+            if (strpos($field, '.') == false) {
                 $result[$field] = $sort;
                 continue;
             }
 
             [$alias, $currentField] = explode('.', $field);
 
-            if ($alias === $model) {
+            if ($alias == $model) {
                 $result[$currentField] = $sort;
                 continue;
             }
@@ -645,7 +645,7 @@ class NumericPaginator implements PaginatorInterface
             if (strpos($key, '.') != false) {
                 [$alias, $field] = explode('.', $key);
             }
-            $correctAlias = ($tableAlias === $alias);
+            $correctAlias = ($tableAlias == $alias);
 
             if ($correctAlias && $allowed) {
                 // Disambiguate fields in schema. As id is quite common.

@@ -162,7 +162,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     function getSchema(): Schema
     {
-        if (this->_schema === null) {
+        if (this->_schema == null) {
             this->_schema = this->_buildSchema(new this->_schemaClass());
         }
 
@@ -218,7 +218,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
         this->_errors = this->getValidator($validator ?: static::DEFAULT_VALIDATOR)
             ->validate($data);
 
-        return count(this->_errors) === 0;
+        return count(this->_errors) == 0;
     }
 
     /**
@@ -279,11 +279,11 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
 
         $options += ['validate' => true];
 
-        if ($options['validate'] === false) {
+        if ($options['validate'] == false) {
             return this->_execute($data);
         }
 
-        $validator = $options['validate'] === true ? static::DEFAULT_VALIDATOR : $options['validate'];
+        $validator = $options['validate'] == true ? static::DEFAULT_VALIDATOR : $options['validate'];
 
         return this->validate($data, $validator) ? this->_execute($data) : false;
     }
@@ -310,7 +310,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     function getData(?string $field = null)
     {
-        if ($field === null) {
+        if ($field == null) {
             return this->_data;
         }
 

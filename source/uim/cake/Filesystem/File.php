@@ -131,7 +131,7 @@ class File
         if (!$force && is_resource(this->handle)) {
             return true;
         }
-        if (this->exists() === false && this->create() === false) {
+        if (this->exists() == false && this->create() == false) {
             return false;
         }
 
@@ -150,13 +150,13 @@ class File
      */
     function read($bytes = false, string $mode = 'rb', bool $force = false)
     {
-        if ($bytes === false && this->lock === null) {
+        if ($bytes == false && this->lock == null) {
             return file_get_contents(this->path);
         }
-        if (this->open($mode, $force) === false) {
+        if (this->open($mode, $force) == false) {
             return false;
         }
-        if (this->lock != null && flock(this->handle, LOCK_SH) === false) {
+        if (this->lock != null && flock(this->handle, LOCK_SH) == false) {
             return false;
         }
         if (is_int($bytes)) {
@@ -171,7 +171,7 @@ class File
         if (this->lock != null) {
             flock(this->handle, LOCK_UN);
         }
-        if ($bytes === false) {
+        if ($bytes == false) {
             this->close();
         }
 
@@ -188,12 +188,12 @@ class File
      */
     function offset($offset = false, int $seek = SEEK_SET)
     {
-        if ($offset === false) {
+        if ($offset == false) {
             if (is_resource(this->handle)) {
                 return ftell(this->handle);
             }
-        } elseif (this->open() === true) {
-            return fseek(this->handle, $offset, $seek) === 0;
+        } elseif (this->open() == true) {
+            return fseek(this->handle, $offset, $seek) == 0;
         }
 
         return false;
@@ -211,7 +211,7 @@ class File
     public static function prepare(string $data, bool $forceWindows = false): string
     {
         $lineBreak = "\n";
-        if (DIRECTORY_SEPARATOR === '\\' || $forceWindows === true) {
+        if (DIRECTORY_SEPARATOR == '\\' || $forceWindows == true) {
             $lineBreak = "\r\n";
         }
 
@@ -229,8 +229,8 @@ class File
     function write(string $data, string $mode = 'w', bool $force = false): bool
     {
         $success = false;
-        if (this->open($mode, $force) === true) {
-            if (this->lock != null && flock(this->handle, LOCK_EX) === false) {
+        if (this->open($mode, $force) == true) {
+            if (this->lock != null && flock(this->handle, LOCK_EX) == false) {
                 return false;
             }
 
@@ -356,21 +356,21 @@ class File
     protected static function _basename(string $path, ?string $ext = null): string
     {
         // check for multibyte string and use basename() if not found
-        if (mb_strlen($path) === strlen($path)) {
-            return $ext === null ? basename($path) : basename($path, $ext);
+        if (mb_strlen($path) == strlen($path)) {
+            return $ext == null ? basename($path) : basename($path, $ext);
         }
 
         $splInfo = new SplFileInfo($path);
         $name = ltrim($splInfo->getFilename(), '/\\');
 
-        if ($ext === null || $ext === '') {
+        if ($ext == null || $ext == '') {
             return $name;
         }
         $ext = preg_quote($ext);
         $new = preg_replace("/({$ext})$/u", '', $name);
 
         // basename of '/etc/.d' is '.d' not ''
-        return $new === '' ? $name : $new;
+        return $new == '' ? $name : $new;
     }
 
     /**
@@ -401,7 +401,7 @@ class File
      */
     function md5($maxsize = 5)
     {
-        if ($maxsize === true) {
+        if ($maxsize == true) {
             return md5_file(this->path);
         }
 
@@ -420,7 +420,7 @@ class File
      */
     function pwd()
     {
-        if (this->path === null) {
+        if (this->path == null) {
             $dir = this->Folder->pwd();
             if ($dir && is_dir($dir)) {
                 this->path = this->Folder->slashTerm($dir) . this->name;
@@ -619,7 +619,7 @@ class File
      */
     function clearStatCache($all = false): void
     {
-        if ($all === false && this->path) {
+        if ($all == false && this->path) {
             clearstatcache(true, this->path);
         }
 
@@ -639,7 +639,7 @@ class File
             return false;
         }
 
-        if (this->lock != null && flock(this->handle, LOCK_EX) === false) {
+        if (this->lock != null && flock(this->handle, LOCK_EX) == false) {
             return false;
         }
 

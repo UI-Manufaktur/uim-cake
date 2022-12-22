@@ -180,7 +180,7 @@ trait QueryTrait
      */
     function cache($key, $config = 'default')
     {
-        if ($key === false) {
+        if ($key == false) {
             this->_cache = null;
 
             return this;
@@ -228,7 +228,7 @@ trait QueryTrait
      */
     function aliasField(string $field, ?string $alias = null): array
     {
-        if (strpos($field, '.') === false) {
+        if (strpos($field, '.') == false) {
             $alias = $alias ?: this->getRepository()->getAlias();
             $aliasedField = $alias . '.' . $field;
         } else {
@@ -284,7 +284,7 @@ trait QueryTrait
         if (this->_cache) {
             $results = this->_cache->fetch(this);
         }
-        if ($results === null) {
+        if ($results == null) {
             $results = this->_decorateResults(this->_execute());
             if (this->_cache) {
                 this->_cache->store(this, $results);
@@ -326,7 +326,7 @@ trait QueryTrait
         if ($overwrite) {
             this->_mapReduce = [];
         }
-        if ($mapper === null) {
+        if ($mapper == null) {
             if (!$overwrite) {
                 throw new InvalidArgumentException('$mapper can be null only when $overwrite is true.');
             }
@@ -442,10 +442,10 @@ trait QueryTrait
      */
     function formatResults(?callable $formatter = null, $mode = self::APPEND)
     {
-        if ($mode === self::OVERWRITE) {
+        if ($mode == self::OVERWRITE) {
             this->_formatters = [];
         }
-        if ($formatter === null) {
+        if ($formatter == null) {
             if ($mode != self::OVERWRITE) {
                 throw new InvalidArgumentException('$formatter can be null only when $mode is overwrite.');
             }
@@ -453,7 +453,7 @@ trait QueryTrait
             return this;
         }
 
-        if ($mode === self::PREPEND) {
+        if ($mode == self::PREPEND) {
             array_unshift(this->_formatters, $formatter);
 
             return this;

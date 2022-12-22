@@ -236,7 +236,7 @@ trait EntityTrait
 
         foreach ($field as $name => $value) {
             $name = (string)$name;
-            if ($options['guard'] === true && !this->isAccessible($name)) {
+            if ($options['guard'] == true && !this->isAccessible($name)) {
                 continue;
             }
 
@@ -274,7 +274,7 @@ trait EntityTrait
      */
     function &get(string $field)
     {
-        if ($field === '') {
+        if ($field == '') {
             throw new InvalidArgumentException('Cannot get an empty field');
         }
 
@@ -303,7 +303,7 @@ trait EntityTrait
      */
     function getOriginal(string $field)
     {
-        if ($field === '') {
+        if ($field == '') {
             throw new InvalidArgumentException('Cannot get an empty field');
         }
         if (array_key_exists($field, this->_original)) {
@@ -361,7 +361,7 @@ trait EntityTrait
     function has($field): bool
     {
         foreach ((array)$field as $prop) {
-            if (this->get($prop) === null) {
+            if (this->get($prop) == null) {
                 return false;
             }
         }
@@ -388,13 +388,13 @@ trait EntityTrait
     {
         $value = this->get($field);
         if (
-            $value === null ||
+            $value == null ||
             (
                 is_array($value) &&
                 empty($value) ||
                 (
                     is_string($value) &&
-                    $value === ''
+                    $value == ''
                 )
             )
         ) {
@@ -471,7 +471,7 @@ trait EntityTrait
      */
     function setHidden(array $fields, bool $merge = false)
     {
-        if ($merge === false) {
+        if ($merge == false) {
             this->_hidden = $fields;
 
             return this;
@@ -502,7 +502,7 @@ trait EntityTrait
      */
     function setVirtual(array $fields, bool $merge = false)
     {
-        if ($merge === false) {
+        if ($merge == false) {
             this->_virtual = $fields;
 
             return this;
@@ -650,7 +650,7 @@ trait EntityTrait
             return static::$_accessors[$class][$type][$property] = '';
         }
 
-        if (static::class === Entity::class) {
+        if (static::class == Entity::class) {
             return '';
         }
 
@@ -747,7 +747,7 @@ trait EntityTrait
      */
     function setDirty(string $field, bool $isDirty = true)
     {
-        if ($isDirty === false) {
+        if ($isDirty == false) {
             unset(this->_dirty[$field]);
 
             return this;
@@ -767,7 +767,7 @@ trait EntityTrait
      */
     function isDirty(?string $field = null): bool
     {
-        if ($field === null) {
+        if ($field == null) {
             return !empty(this->_dirty);
         }
 
@@ -849,7 +849,7 @@ trait EntityTrait
             return true;
         }
 
-        if ($includeNested === false) {
+        if ($includeNested == false) {
             return false;
         }
 
@@ -973,7 +973,7 @@ trait EntityTrait
     protected function _nestedErrors(string $field): array
     {
         // Only one path element, check for nested entity with error.
-        if (strpos($field, '.') === false) {
+        if (strpos($field, '.') == false) {
             return this->_readError(this->get($field));
         }
         // Try reading the errors data with field as a simple path
@@ -1103,7 +1103,7 @@ trait EntityTrait
     function setInvalid(array $fields, bool $overwrite = false)
     {
         foreach ($fields as $field => $value) {
-            if ($overwrite === true) {
+            if ($overwrite == true) {
                 this->_invalid[$field] = $value;
                 continue;
             }
@@ -1153,7 +1153,7 @@ trait EntityTrait
      */
     function setAccess($field, bool $set)
     {
-        if ($field === '*') {
+        if ($field == '*') {
             this->_accessible = array_map(function ($p) use ($set) {
                 return $set;
             }, this->_accessible);
@@ -1196,7 +1196,7 @@ trait EntityTrait
     {
         $value = this->_accessible[$field] ?? null;
 
-        return ($value === null && !empty(this->_accessible['*'])) || $value;
+        return ($value == null && !empty(this->_accessible['*'])) || $value;
     }
 
     /**

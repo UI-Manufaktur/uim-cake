@@ -46,7 +46,7 @@ trait EventDispatcherTrait
      */
     function getEventManager(): EventManagerInterface
     {
-        if (this->_eventManager === null) {
+        if (this->_eventManager == null) {
             this->_eventManager = new EventManager();
         }
 
@@ -83,7 +83,7 @@ trait EventDispatcherTrait
      */
     function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface
     {
-        if ($subject === null) {
+        if ($subject == null) {
             $subject = this;
         }
 
