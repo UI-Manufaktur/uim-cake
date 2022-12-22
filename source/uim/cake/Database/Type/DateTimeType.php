@@ -149,8 +149,8 @@ class DateTimeType extends BaseType implements BatchCastingInterface
         }
 
         if (
-            this->dbTimezone !== null
-            && this->dbTimezone->getName() !== $value->getTimezone()->getName()
+            this->dbTimezone != null
+            && this->dbTimezone->getName() != $value->getTimezone()->getName()
         ) {
             if (!$value instanceof DateTimeImmutable) {
                 $value = clone $value;
@@ -238,7 +238,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
 
         if (
             !this->keepDatabaseTimezone &&
-            $instance->getTimezone()->getName() !== this->defaultTimezone->getName()
+            $instance->getTimezone()->getName() != this->defaultTimezone->getName()
         ) {
             $instance = $instance->setTimezone(this->defaultTimezone);
         }
@@ -296,7 +296,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
 
             if (
                 !this->keepDatabaseTimezone &&
-                $instance->getTimezone()->getName() !== this->defaultTimezone->getName()
+                $instance->getTimezone()->getName() != this->defaultTimezone->getName()
             ) {
                 $instance = $instance->setTimezone(this->defaultTimezone);
             }
@@ -350,7 +350,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
                 }
 
                 /** @var \DateTime|\DateTimeImmutable $dateTime */
-                if ($dateTime !== null) {
+                if ($dateTime != null) {
                     $dateTime = $dateTime->setTimezone(this->defaultTimezone);
                 }
 
@@ -532,7 +532,7 @@ class DateTimeType extends BaseType implements BatchCastingInterface
             try {
                 $dateTime = $class::createFromFormat($format, $value, this->userTimezone);
                 // Check for false in case DateTime is used directly
-                if ($dateTime !== false) {
+                if ($dateTime != false) {
                     return $dateTime;
                 }
             } catch (InvalidArgumentException $e) {

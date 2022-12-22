@@ -72,6 +72,6 @@ class CallbackStatement extends StatementDecorator
     {
         $results = this->_statement->fetchAll($type);
 
-        return $results !== false ? array_map(this->_callback, $results) : false;
+        return $results != false ? array_map(this->_callback, $results) : false;
     }
 }

@@ -93,7 +93,7 @@ class LoggedQuery implements JsonSerializable
             if (is_string($p)) {
                 // Likely binary data like a blob or binary uuid.
                 // pattern matches ascii control chars.
-                if (preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', '', $p) !== $p) {
+                if (preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', '', $p) != $p) {
                     $p = bin2hex($p);
                 }
 
@@ -141,7 +141,7 @@ class LoggedQuery implements JsonSerializable
     public function jsonSerialize(): array
     {
         $error = this->error;
-        if ($error !== null) {
+        if ($error != null) {
             $error = [
                 'class' => get_class($error),
                 'message' => $error->getMessage(),

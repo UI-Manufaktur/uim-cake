@@ -70,7 +70,7 @@ class SqliteSchemaDialect extends SchemaDialect
         $length = $precision = $scale = null;
         if (isset($matches[3])) {
             $length = $matches[3];
-            if (strpos($length, ',') !== false) {
+            if (strpos($length, ',') != false) {
                 [$length, $precision] = explode(',', $length);
             }
             $length = (int)$length;
@@ -81,7 +81,7 @@ class SqliteSchemaDialect extends SchemaDialect
             $col,
             compact('length', 'precision', 'scale')
         );
-        if ($type !== null) {
+        if ($type != null) {
             return $type;
         }
 
@@ -94,10 +94,10 @@ class SqliteSchemaDialect extends SchemaDialect
         if ($col === 'tinyint') {
             return ['type' => TableSchema::TYPE_TINYINTEGER, 'length' => $length, 'unsigned' => $unsigned];
         }
-        if (strpos($col, 'int') !== false) {
+        if (strpos($col, 'int') != false) {
             return ['type' => TableSchema::TYPE_INTEGER, 'length' => $length, 'unsigned' => $unsigned];
         }
-        if (strpos($col, 'decimal') !== false) {
+        if (strpos($col, 'decimal') != false) {
             return [
                 'type' => TableSchema::TYPE_DECIMAL,
                 'length' => $length,
@@ -114,7 +114,7 @@ class SqliteSchemaDialect extends SchemaDialect
             ];
         }
 
-        if (strpos($col, 'boolean') !== false) {
+        if (strpos($col, 'boolean') != false) {
             return ['type' => TableSchema::TYPE_BOOLEAN, 'length' => null];
         }
 
@@ -124,7 +124,7 @@ class SqliteSchemaDialect extends SchemaDialect
         if ($col === 'char') {
             return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
         }
-        if (strpos($col, 'char') !== false) {
+        if (strpos($col, 'char') != false) {
             return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
         }
 
@@ -358,7 +358,7 @@ class SqliteSchemaDialect extends SchemaDialect
         $data = $schema->getColumn($name);
 
         $sql = this->_getTypeSpecificColumnSql($data['type'], $schema, $name);
-        if ($sql !== null) {
+        if ($sql != null) {
             return $sql;
         }
 
@@ -398,7 +398,7 @@ class SqliteSchemaDialect extends SchemaDialect
             isset($data['unsigned']) &&
             $data['unsigned'] === true
         ) {
-            if ($data['type'] !== TableSchema::TYPE_INTEGER || $schema->getPrimaryKey() !== [$name]) {
+            if ($data['type'] != TableSchema::TYPE_INTEGER || $schema->getPrimaryKey() != [$name]) {
                 $out .= ' UNSIGNED';
             }
         }
@@ -407,7 +407,7 @@ class SqliteSchemaDialect extends SchemaDialect
             $out .= $typeMap[$data['type']];
         }
 
-        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] !== TableSchema::LENGTH_TINY) {
+        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] != TableSchema::LENGTH_TINY) {
             $out .= ' TEXT';
         }
 
@@ -445,7 +445,7 @@ class SqliteSchemaDialect extends SchemaDialect
         if (
             in_array($data['type'], $integerTypes, true) &&
             isset($data['length']) &&
-            $schema->getPrimaryKey() !== [$name]
+            $schema->getPrimaryKey() != [$name]
         ) {
             $out .= '(' . (int)$data['length'] . ')';
         }

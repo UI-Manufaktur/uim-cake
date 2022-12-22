@@ -70,7 +70,7 @@ class ConsoleExceptionRenderer
     {
         $exceptions = [this->error];
         $previous = this->error->getPrevious();
-        while ($previous !== null) {
+        while ($previous != null) {
             $exceptions[] = $previous;
             $previous = $previous->getPrevious();
         }

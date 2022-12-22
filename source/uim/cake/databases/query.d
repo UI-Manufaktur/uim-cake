@@ -1607,7 +1607,7 @@ class Query : IExpression, IteratorAggregate {
      *   Or if you try to set values on non-insert queries.
      */
     function values(myData) {
-        if (_type !== "insert") {
+        if (_type != "insert") {
             throw new DatabaseException(
                 "You cannot add values before defining columns to use."
             );

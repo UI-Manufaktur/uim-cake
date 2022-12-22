@@ -158,7 +158,7 @@ class BufferedStatement implements Iterator, StatementInterface
     public function fetchColumn(int $position)
     {
         $result = this->fetch(static::FETCH_TYPE_NUM);
-        if ($result !== false && isset($result[$position])) {
+        if ($result != false && isset($result[$position])) {
             return $result[$position];
         }
 
@@ -245,7 +245,7 @@ class BufferedStatement implements Iterator, StatementInterface
             return this->buffer;
         }
         $results = this->statement->fetchAll($type);
-        if ($results !== false) {
+        if ($results != false) {
             this->buffer = array_merge(this->buffer, $results);
         }
         this->_allFetched = true;
@@ -324,7 +324,7 @@ class BufferedStatement implements Iterator, StatementInterface
         // the cache scenario.
         this->index = $old;
 
-        return $row !== false;
+        return $row != false;
     }
 
     /**

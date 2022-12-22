@@ -77,7 +77,7 @@ class QueryCompiler {
 
         // Propagate bound parameters from sub-queries if the
         // placeholders can be found in the SQL statement.
-        if (myQuery.getValueBinder() !== $binder) {
+        if (myQuery.getValueBinder() != $binder) {
             foreach (myQuery.getValueBinder().bindings() as $binding) {
                 $placeholder = ":" . $binding["placeholder"];
                 if (preg_match("/" . $placeholder . "(?:\W|$)/", mySql) > 0) {

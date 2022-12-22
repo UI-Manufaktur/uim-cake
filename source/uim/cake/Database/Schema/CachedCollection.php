@@ -84,7 +84,7 @@ class CachedCollection implements CollectionInterface
 
         if (!$options['forceRefresh']) {
             $cached = this->cacher->get($cacheKey);
-            if ($cached !== null) {
+            if ($cached != null) {
                 return $cached;
             }
         }

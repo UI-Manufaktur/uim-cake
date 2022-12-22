@@ -231,7 +231,7 @@ class HtmlFormatter implements FormatterInterface
             $arrow = this->style('punct', ' => ');
             $visibility = $property->getVisibility();
             $name = $property->getName();
-            if ($visibility && $visibility !== 'public') {
+            if ($visibility && $visibility != 'public') {
                 $props[] = $break .
                     '<span class="cake-dbg-prop">' .
                     this->style('visibility', $visibility) .

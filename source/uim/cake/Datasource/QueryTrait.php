@@ -276,7 +276,7 @@ trait QueryTrait
      */
     public function all(): ResultSetInterface
     {
-        if (this->_results !== null) {
+        if (this->_results != null) {
             return this->_results;
         }
 
@@ -446,7 +446,7 @@ trait QueryTrait
             this->_formatters = [];
         }
         if ($formatter === null) {
-            if ($mode !== self::OVERWRITE) {
+            if ($mode != self::OVERWRITE) {
                 throw new InvalidArgumentException('$formatter can be null only when $mode is overwrite.');
             }
 

@@ -180,7 +180,7 @@ class Debugger
     static auto getInstance(Nullable!string myClass = null) {
         static $instance = [];
         if (!empty(myClass)) {
-            if (!$instance || strtolower(myClass) !== strtolower(get_class($instance[0]))) {
+            if (!$instance || strtolower(myClass) != strtolower(get_class($instance[0]))) {
                 $instance[0] = new myClass();
             }
         }
@@ -415,7 +415,7 @@ class Debugger
             if (in_array($signature, myOptions["exclude"], true)) {
                 continue;
             }
-            if (myOptions["format"] == "points" && $trace["file"] !== "[internal]") {
+            if (myOptions["format"] == "points" && $trace["file"] != "[internal]") {
                 $back[] = ["file":$trace["file"], "line":$trace["line"]];
             } elseif (myOptions["format"] == "array") {
                 $back[] = $trace;
@@ -491,7 +491,7 @@ class Debugger
         if (empty(myData)) {
             return $lines;
         }
-        if (indexOf(myData, "\n") !== false) {
+        if (indexOf(myData, "\n") != false) {
             myData = explode("\n", myData);
         }
         $line--;
@@ -684,7 +684,7 @@ class Debugger
             foreach ($var as myKey: $val) {
                 if (array_key_exists(myKey, $outputMask)) {
                     myNode = new ScalarNode("string", $outputMask[myKey]);
-                } elseif ($val !== $var) {
+                } elseif ($val != $var) {
                     // Dump all the items without increasing depth.
                     myNode = static::export($val, $context);
                 } else {

@@ -119,7 +119,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             $col,
             compact('length', 'precision', 'scale')
         );
-        if ($type !== null) {
+        if ($type != null) {
             return $type;
         }
 
@@ -131,7 +131,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             // datetime cannot parse more than 3 digits of precision and isn't accurate
             return ['type' => TableSchema::TYPE_DATETIME, 'length' => null];
         }
-        if (strpos($col, 'datetime') !== false) {
+        if (strpos($col, 'datetime') != false) {
             $typeName = TableSchema::TYPE_DATETIME;
             if ($scale > 0) {
                 $typeName = TableSchema::TYPE_DATETIME_FRACTIONAL;
@@ -160,9 +160,9 @@ class SqlserverSchemaDialect extends SchemaDialect
             return ['type' => TableSchema::TYPE_BOOLEAN, 'length' => null];
         }
         if (
-            strpos($col, 'numeric') !== false ||
-            strpos($col, 'money') !== false ||
-            strpos($col, 'decimal') !== false
+            strpos($col, 'numeric') != false ||
+            strpos($col, 'money') != false ||
+            strpos($col, 'decimal') != false
         ) {
             return ['type' => TableSchema::TYPE_DECIMAL, 'length' => $precision, 'precision' => $scale];
         }
@@ -175,23 +175,23 @@ class SqlserverSchemaDialect extends SchemaDialect
         if ($col === 'nvarchar' || $col === 'nchar' || $col === 'ntext') {
             $length /= 2;
         }
-        if (strpos($col, 'varchar') !== false && $length < 0) {
+        if (strpos($col, 'varchar') != false && $length < 0) {
             return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
         }
 
-        if (strpos($col, 'varchar') !== false) {
+        if (strpos($col, 'varchar') != false) {
             return ['type' => TableSchema::TYPE_STRING, 'length' => $length ?: 255];
         }
 
-        if (strpos($col, 'char') !== false) {
+        if (strpos($col, 'char') != false) {
             return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
         }
 
-        if (strpos($col, 'text') !== false) {
+        if (strpos($col, 'text') != false) {
             return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
         }
 
-        if ($col === 'image' || strpos($col, 'binary') !== false) {
+        if ($col === 'image' || strpos($col, 'binary') != false) {
             // -1 is the value for MAX which we treat as a 'long' binary
             if ($length == -1) {
                 $length = TableSchema::LENGTH_LONG;
@@ -214,9 +214,9 @@ class SqlserverSchemaDialect extends SchemaDialect
     {
         $field = this->_convertColumn(
             $row['type'],
-            $row['char_length'] !== null ? (int)$row['char_length'] : null,
-            $row['precision'] !== null ? (int)$row['precision'] : null,
-            $row['scale'] !== null ? (int)$row['scale'] : null
+            $row['char_length'] != null ? (int)$row['char_length'] : null,
+            $row['precision'] != null ? (int)$row['precision'] : null,
+            $row['scale'] != null ? (int)$row['scale'] : null
         );
 
         if (!empty($row['autoincrement'])) {
@@ -411,7 +411,7 @@ class SqlserverSchemaDialect extends SchemaDialect
         $data = $schema->getColumn($name);
 
         $sql = this->_getTypeSpecificColumnSql($data['type'], $schema, $name);
-        if ($sql !== null) {
+        if ($sql != null) {
             return $sql;
         }
 
@@ -448,7 +448,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             }
         }
 
-        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] !== TableSchema::LENGTH_TINY) {
+        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] != TableSchema::LENGTH_TINY) {
             $out .= ' NVARCHAR(MAX)';
         }
 
@@ -486,7 +486,7 @@ class SqlserverSchemaDialect extends SchemaDialect
         }
 
         $hasCollate = [TableSchema::TYPE_TEXT, TableSchema::TYPE_STRING, TableSchema::TYPE_CHAR];
-        if (in_array($data['type'], $hasCollate, true) && isset($data['collate']) && $data['collate'] !== '') {
+        if (in_array($data['type'], $hasCollate, true) && isset($data['collate']) && $data['collate'] != '') {
             $out .= ' COLLATE ' . $data['collate'];
         }
 
@@ -540,7 +540,7 @@ class SqlserverSchemaDialect extends SchemaDialect
                 ? (int)$data['default']
                 : this->_driver->schemaValue($data['default']);
             $out .= ' DEFAULT ' . $default;
-        } elseif (isset($data['null']) && $data['null'] !== false) {
+        } elseif (isset($data['null']) && $data['null'] != false) {
             $out .= ' DEFAULT NULL';
         }
 

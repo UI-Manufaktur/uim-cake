@@ -221,7 +221,7 @@ trait EntityTrait
      */
     public function set($field, $value = null, array $options = [])
     {
-        if (is_string($field) && $field !== '') {
+        if (is_string($field) && $field != '') {
             $guard = false;
             $field = [$field => $value];
         } else {
@@ -245,7 +245,7 @@ trait EntityTrait
             if (
                 !array_key_exists($name, this->_original) &&
                 array_key_exists($name, this->_fields) &&
-                this->_fields[$name] !== $value
+                this->_fields[$name] != $value
             ) {
                 this->_original[$name] = this->_fields[$name];
             }
@@ -656,7 +656,7 @@ trait EntityTrait
 
         foreach (get_class_methods($class) as $method) {
             $prefix = substr($method, 1, 3);
-            if ($method[0] !== '_' || ($prefix !== 'get' && $prefix !== 'set')) {
+            if ($method[0] != '_' || ($prefix != 'get' && $prefix != 'set')) {
                 continue;
             }
             $field = lcfirst(substr($method, 4));
@@ -729,7 +729,7 @@ trait EntityTrait
         $result = [];
         foreach ($fields as $field) {
             $original = this->getOriginal($field);
-            if ($original !== this->get($field)) {
+            if ($original != this->get($field)) {
                 $result[$field] = $original;
             }
         }
@@ -978,7 +978,7 @@ trait EntityTrait
         }
         // Try reading the errors data with field as a simple path
         $error = Hash::get(this->_errors, $field);
-        if ($error !== null) {
+        if ($error != null) {
             return $error;
         }
         $path = explode('.', $field);
@@ -1047,7 +1047,7 @@ trait EntityTrait
      */
     protected function _readError($object, $path = null): array
     {
-        if ($path !== null && $object instanceof EntityInterface) {
+        if ($path != null && $object instanceof EntityInterface) {
             return $object->getError($path);
         }
         if ($object instanceof EntityInterface) {

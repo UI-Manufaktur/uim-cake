@@ -184,7 +184,7 @@ trait EntityTrait
      * @throws \InvalidArgumentException
      */
     auto set(myField, myValue = null, array myOptions = []) {
-        if (is_string(myField) && myField !== "") {
+        if (is_string(myField) && myField != "") {
             $guard = false;
             myField = [myField: myValue];
         } else {
@@ -208,7 +208,7 @@ trait EntityTrait
             if (
                 !array_key_exists(myName, _original) &&
                 array_key_exists(myName, _fields) &&
-                _fields[myName] !== myValue
+                _fields[myName] != myValue
             ) {
                 _original[myName] = _fields[myName];
             }
@@ -589,7 +589,7 @@ trait EntityTrait
 
         foreach (get_class_methods(myClass) as $method) {
             $prefix = substr($method, 1, 3);
-            if ($method[0] !== "_" || ($prefix !== "get" && $prefix !== "set")) {
+            if ($method[0] != "_" || ($prefix != "get" && $prefix != "set")) {
                 continue;
             }
             myField = lcfirst(substr($method, 4));
@@ -662,7 +662,7 @@ trait EntityTrait
         myResult = [];
         foreach (myField; myFields) {
             $original = this.getOriginal(myField);
-            if ($original !== this.get(myField)) {
+            if ($original != this.get(myField)) {
                 myResult[myField] = $original;
             }
         }

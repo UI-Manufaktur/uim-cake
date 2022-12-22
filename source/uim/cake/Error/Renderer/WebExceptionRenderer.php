@@ -157,7 +157,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
 
         // If the current request doesn't have routing data, but we
         // found a request in the router context copy the params over
-        if ($request->getParam('controller') === null && $routerRequest !== null) {
+        if ($request->getParam('controller') === null && $routerRequest != null) {
             $request = $request->withAttribute('params', $routerRequest->getAttribute('params'));
         }
 
@@ -425,7 +425,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
             $attributes = $e->getAttributes();
             if (
                 $e instanceof MissingLayoutException ||
-                strpos($attributes['file'], 'error500') !== false
+                strpos($attributes['file'], 'error500') != false
             ) {
                 return this->_outputMessageSafe('error500');
             }

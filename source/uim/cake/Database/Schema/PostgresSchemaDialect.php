@@ -115,7 +115,7 @@ class PostgresSchemaDialect extends SchemaDialect
             $col,
             compact('length', 'precision', 'scale')
         );
-        if ($type !== null) {
+        if ($type != null) {
             return $type;
         }
 
@@ -125,10 +125,10 @@ class PostgresSchemaDialect extends SchemaDialect
         if (in_array($col, ['timestamptz', 'timestamp with time zone'], true)) {
             return ['type' => TableSchema::TYPE_TIMESTAMP_TIMEZONE, 'length' => null];
         }
-        if (strpos($col, 'timestamp') !== false) {
+        if (strpos($col, 'timestamp') != false) {
             return ['type' => TableSchema::TYPE_TIMESTAMP_FRACTIONAL, 'length' => null];
         }
-        if (strpos($col, 'time') !== false) {
+        if (strpos($col, 'time') != false) {
             return ['type' => TableSchema::TYPE_TIME, 'length' => null];
         }
         if ($col === 'serial' || $col === 'integer') {
@@ -149,31 +149,31 @@ class PostgresSchemaDialect extends SchemaDialect
         if ($col === 'char') {
             return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
         }
-        if (strpos($col, 'character') !== false) {
+        if (strpos($col, 'character') != false) {
             return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
         }
         // money is 'string' as it includes arbitrary text content
         // before the number value.
-        if (strpos($col, 'money') !== false || $col === 'string') {
+        if (strpos($col, 'money') != false || $col === 'string') {
             return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
         }
-        if (strpos($col, 'text') !== false) {
+        if (strpos($col, 'text') != false) {
             return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
         }
         if ($col === 'bytea') {
             return ['type' => TableSchema::TYPE_BINARY, 'length' => null];
         }
-        if ($col === 'real' || strpos($col, 'double') !== false) {
+        if ($col === 'real' || strpos($col, 'double') != false) {
             return ['type' => TableSchema::TYPE_FLOAT, 'length' => null];
         }
         if (
-            strpos($col, 'numeric') !== false ||
-            strpos($col, 'decimal') !== false
+            strpos($col, 'numeric') != false ||
+            strpos($col, 'decimal') != false
         ) {
             return ['type' => TableSchema::TYPE_DECIMAL, 'length' => null];
         }
 
-        if (strpos($col, 'json') !== false) {
+        if (strpos($col, 'json') != false) {
             return ['type' => TableSchema::TYPE_JSON, 'length' => null];
         }
 
@@ -410,7 +410,7 @@ class PostgresSchemaDialect extends SchemaDialect
         $data = $schema->getColumn($name);
 
         $sql = this->_getTypeSpecificColumnSql($data['type'], $schema, $name);
-        if ($sql !== null) {
+        if ($sql != null) {
             return $sql;
         }
 
@@ -447,7 +447,7 @@ class PostgresSchemaDialect extends SchemaDialect
             $out .= $type;
         }
 
-        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] !== TableSchema::LENGTH_TINY) {
+        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] != TableSchema::LENGTH_TINY) {
             $out .= ' TEXT';
         }
         if ($data['type'] === TableSchema::TYPE_BINARY) {
@@ -466,13 +466,13 @@ class PostgresSchemaDialect extends SchemaDialect
             )
         ) {
             $out .= ' VARCHAR';
-            if (isset($data['length']) && $data['length'] !== '') {
+            if (isset($data['length']) && $data['length'] != '') {
                 $out .= '(' . $data['length'] . ')';
             }
         }
 
         $hasCollate = [TableSchema::TYPE_TEXT, TableSchema::TYPE_STRING, TableSchema::TYPE_CHAR];
-        if (in_array($data['type'], $hasCollate, true) && isset($data['collate']) && $data['collate'] !== '') {
+        if (in_array($data['type'], $hasCollate, true) && isset($data['collate']) && $data['collate'] != '') {
             $out .= ' COLLATE "' . $data['collate'] . '"';
         }
 
@@ -521,7 +521,7 @@ class PostgresSchemaDialect extends SchemaDialect
                 $defaultValue = (bool)$defaultValue;
             }
             $out .= ' DEFAULT ' . this->_driver->schemaValue($defaultValue);
-        } elseif (isset($data['null']) && $data['null'] !== false) {
+        } elseif (isset($data['null']) && $data['null'] != false) {
             $out .= ' DEFAULT NULL';
         }
 

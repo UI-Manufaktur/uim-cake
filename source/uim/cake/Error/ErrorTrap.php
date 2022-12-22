@@ -64,7 +64,7 @@ class ErrorTrap
     protected function chooseErrorRenderer(): string
     {
         $config = this->getConfig('errorRenderer');
-        if ($config !== null) {
+        if ($config != null) {
             return $config;
         }
 
@@ -195,7 +195,7 @@ class ErrorTrap
     public function logger(): ErrorLoggerInterface
     {
         $oldConfig = this->getConfig('errorLogger');
-        if ($oldConfig !== null) {
+        if ($oldConfig != null) {
             deprecationWarning('The `errorLogger` configuration key is deprecated. Use `logger` instead.');
             this->setConfig(['logger' => $oldConfig, 'errorLogger' => null]);
         }

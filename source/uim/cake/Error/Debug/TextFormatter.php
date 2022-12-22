@@ -143,7 +143,7 @@ TEXT;
         foreach ($var->getChildren() as $property) {
             $visibility = $property->getVisibility();
             $name = $property->getName();
-            if ($visibility && $visibility !== 'public') {
+            if ($visibility && $visibility != 'public') {
                 $props[] = "[{$visibility}] {$name} => " . this->export($property->getValue(), $indent);
             } else {
                 $props[] = "{$name} => " . this->export($property->getValue(), $indent);

@@ -446,7 +446,7 @@ class TableSchema implements TableSchemaInterface, SqlGeneratorInterface
             if (!array_key_exists('default', $data)) {
                 continue;
             }
-            if ($data['default'] === null && $data['null'] !== true) {
+            if ($data['default'] === null && $data['null'] != true) {
                 continue;
             }
             $defaults[$name] = $data['default'];

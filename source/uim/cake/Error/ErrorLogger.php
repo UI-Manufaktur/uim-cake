@@ -93,7 +93,7 @@ class ErrorLogger implements ErrorLoggerInterface
     ): void {
         $message = this->getMessage($exception, false, $includeTrace);
 
-        if ($request !== null) {
+        if ($request != null) {
             $message .= this->getRequestContext($request);
         }
         Log::error($message);
@@ -133,7 +133,7 @@ class ErrorLogger implements ErrorLoggerInterface
     {
         $message = this->getMessage($exception, false, this->getConfig('trace'));
 
-        if ($request !== null) {
+        if ($request != null) {
             $message .= this->getRequestContext($request);
         }
 
@@ -207,7 +207,7 @@ class ErrorLogger implements ErrorLoggerInterface
 
         if (method_exists($request, 'clientIp')) {
             $clientIp = $request->clientIp();
-            if ($clientIp && $clientIp !== '::1') {
+            if ($clientIp && $clientIp != '::1') {
                 $message .= "\nClient IP: " . $clientIp;
             }
         }

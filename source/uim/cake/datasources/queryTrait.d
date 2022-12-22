@@ -409,7 +409,7 @@ trait QueryTrait
             _formatters = [];
         }
         if ($formatter is null) {
-            if (myMode !== self::OVERWRITE) {
+            if (myMode != self::OVERWRITE) {
                 throw new InvalidArgumentException("$formatter can be null only when myMode is overwrite.");
             }
 

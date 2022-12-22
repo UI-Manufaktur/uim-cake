@@ -45,7 +45,7 @@ class BinaryUuidType extends BaseType
         }
 
         $length = strlen($value);
-        if ($length !== 36 && $length !== 32) {
+        if ($length != 36 && $length != 32) {
             return null;
         }
 

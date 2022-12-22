@@ -56,7 +56,7 @@ class ConsoleFormatter implements FormatterInterface
      */
     public static function environmentMatches(): bool
     {
-        if (PHP_SAPI !== 'cli') {
+        if (PHP_SAPI != 'cli') {
             return false;
         }
         // NO_COLOR in environment means no color.
@@ -69,7 +69,7 @@ class ConsoleFormatter implements FormatterInterface
             strpos(strtolower(php_uname('v')), 'windows 10') === false &&
             strpos(strtolower((string)env('SHELL')), 'bash.exe') === false &&
             !(bool)env('ANSICON') &&
-            env('ConEmuANSI') !== 'ON'
+            env('ConEmuANSI') != 'ON'
         ) {
             return false;
         }
@@ -208,7 +208,7 @@ class ConsoleFormatter implements FormatterInterface
         foreach ($var->getChildren() as $property) {
             $visibility = $property->getVisibility();
             $name = $property->getName();
-            if ($visibility && $visibility !== 'public') {
+            if ($visibility && $visibility != 'public') {
                 $props[] = this->style('visibility', $visibility) .
                     ' ' .
                     this->style('property', $name) .

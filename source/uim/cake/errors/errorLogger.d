@@ -129,7 +129,7 @@ class ErrorLogger : IErrorLogger
 
         if (method_exists(myRequest, "clientIp")) {
             $clientIp = myRequest.clientIp();
-            if ($clientIp && $clientIp !== "::1") {
+            if ($clientIp && $clientIp != "::1") {
                 myMessage .= "\nClient IP: " . $clientIp;
             }
         }

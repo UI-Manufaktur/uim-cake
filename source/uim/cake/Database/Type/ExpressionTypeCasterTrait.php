@@ -46,7 +46,7 @@ trait ExpressionTypeCasterTrait
             return $value;
         }
 
-        $multi = $type !== $baseType;
+        $multi = $type != $baseType;
 
         if ($multi) {
             /** @var \Cake\Database\Type\ExpressionTypeInterface $converter */

@@ -250,7 +250,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
 
             $frameSql = sprintf('%s BETWEEN %s AND %s', this->frame['type'], $start, $end);
 
-            if (this->exclusion !== null) {
+            if (this->exclusion != null) {
                 $frameSql .= ' EXCLUDE ' . this->exclusion;
             }
 
@@ -276,7 +276,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
             this->order->traverse($callback);
         }
 
-        if (this->frame !== null) {
+        if (this->frame != null) {
             $offset = this->frame['start']['offset'];
             if ($offset instanceof ExpressionInterface) {
                 $callback($offset);
@@ -328,7 +328,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
         foreach (this->partitions as $i => $partition) {
             this->partitions[$i] = clone $partition;
         }
-        if (this->order !== null) {
+        if (this->order != null) {
             this->order = clone this->order;
         }
     }

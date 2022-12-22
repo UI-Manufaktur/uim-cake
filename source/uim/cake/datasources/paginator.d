@@ -616,7 +616,7 @@ class Paginator : IPaginator {
             myField = myKey;
             myAlias = myTableAlias;
 
-            if (indexOf(myKey, ".") !== false) {
+            if (indexOf(myKey, ".") != false) {
                 [myAlias, myField] = explode(".", myKey);
             }
             $correctAlias = (myTableAlias == myAlias);

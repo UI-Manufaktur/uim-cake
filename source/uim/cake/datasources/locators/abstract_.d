@@ -33,7 +33,7 @@ abstract class AbstractLocator : ILocator {
         unset($storeOptions["allowFallbackClass"]);
 
         if (isset(this.instances[myAlias])) {
-            if (!empty($storeOptions) && this.options[myAlias] !== $storeOptions) {
+            if (!empty($storeOptions) && this.options[myAlias] != $storeOptions) {
                 throw new RuntimeException(sprintf(
                     "You cannot configure "%s", it already exists in the registry.",
                     myAlias

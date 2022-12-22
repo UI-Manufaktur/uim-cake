@@ -292,7 +292,7 @@ abstract class Driver : IDriver
             (
                 is_numeric(myValue) &&
                 indexOf(myValue, ",") == false &&
-                substr(myValue, 0, 1) !== "0" &&
+                substr(myValue, 0, 1) != "0" &&
                 indexOf(myValue, "e") == false
             )
         ) {

@@ -218,7 +218,7 @@ class Debugger
     {
         static $instance = [];
         if (!empty($class)) {
-            if (!$instance || strtolower($class) !== strtolower(get_class($instance[0]))) {
+            if (!$instance || strtolower($class) != strtolower(get_class($instance[0]))) {
                 $instance[0] = new $class();
             }
         }
@@ -544,7 +544,7 @@ class Debugger
         if (empty($data)) {
             return $lines;
         }
-        if (strpos($data, "\n") !== false) {
+        if (strpos($data, "\n") != false) {
             $data = explode("\n", $data);
         }
         $line--;
@@ -740,7 +740,7 @@ class Debugger
             foreach ($var as $key => $val) {
                 if (array_key_exists($key, $outputMask)) {
                     $node = new ScalarNode('string', $outputMask[$key]);
-                } elseif ($val !== $var) {
+                } elseif ($val != $var) {
                     // Dump all the items without increasing depth.
                     $node = static::export($val, $context);
                 } else {
@@ -1099,7 +1099,7 @@ class Debugger
 
         $debugger = static::getInstance();
         $restore = null;
-        if ($showHtml !== null) {
+        if ($showHtml != null) {
             $restore = $debugger->getConfig('exportFormatter');
             $debugger->setConfig('exportFormatter', $showHtml ? HtmlFormatter::class : TextFormatter::class);
         }

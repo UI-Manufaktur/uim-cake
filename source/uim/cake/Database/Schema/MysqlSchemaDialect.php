@@ -115,7 +115,7 @@ class MysqlSchemaDialect extends SchemaDialect
         $length = $precision = $scale = null;
         if (isset($matches[2]) && strlen($matches[2])) {
             $length = $matches[2];
-            if (strpos($matches[2], ',') !== false) {
+            if (strpos($matches[2], ',') != false) {
                 [$length, $precision] = explode(',', $length);
             }
             $length = (int)$length;
@@ -126,7 +126,7 @@ class MysqlSchemaDialect extends SchemaDialect
             $col,
             compact('length', 'precision', 'scale')
         );
-        if ($type !== null) {
+        if ($type != null) {
             return $type;
         }
 
@@ -147,7 +147,7 @@ class MysqlSchemaDialect extends SchemaDialect
         }
 
         $unsigned = (isset($matches[3]) && strtolower($matches[3]) === 'unsigned');
-        if (strpos($col, 'bigint') !== false || $col === 'bigint') {
+        if (strpos($col, 'bigint') != false || $col === 'bigint') {
             return ['type' => TableSchema::TYPE_BIGINTEGER, 'length' => null, 'unsigned' => $unsigned];
         }
         if ($col === 'tinyint') {
@@ -165,10 +165,10 @@ class MysqlSchemaDialect extends SchemaDialect
         if ($col === 'char') {
             return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
         }
-        if (strpos($col, 'char') !== false) {
+        if (strpos($col, 'char') != false) {
             return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
         }
-        if (strpos($col, 'text') !== false) {
+        if (strpos($col, 'text') != false) {
             $lengthName = substr($col, 0, -4);
             $length = TableSchema::$columnLengths[$lengthName] ?? null;
 
@@ -177,13 +177,13 @@ class MysqlSchemaDialect extends SchemaDialect
         if ($col === 'binary' && $length === 16) {
             return ['type' => TableSchema::TYPE_BINARY_UUID, 'length' => null];
         }
-        if (strpos($col, 'blob') !== false || in_array($col, ['binary', 'varbinary'])) {
+        if (strpos($col, 'blob') != false || in_array($col, ['binary', 'varbinary'])) {
             $lengthName = substr($col, 0, -4);
             $length = TableSchema::$columnLengths[$lengthName] ?? $length;
 
             return ['type' => TableSchema::TYPE_BINARY, 'length' => $length];
         }
-        if (strpos($col, 'float') !== false || strpos($col, 'double') !== false) {
+        if (strpos($col, 'float') != false || strpos($col, 'double') != false) {
             return [
                 'type' => TableSchema::TYPE_FLOAT,
                 'length' => $length,
@@ -191,7 +191,7 @@ class MysqlSchemaDialect extends SchemaDialect
                 'unsigned' => $unsigned,
             ];
         }
-        if (strpos($col, 'decimal') !== false) {
+        if (strpos($col, 'decimal') != false) {
             return [
                 'type' => TableSchema::TYPE_DECIMAL,
                 'length' => $length,
@@ -200,7 +200,7 @@ class MysqlSchemaDialect extends SchemaDialect
             ];
         }
 
-        if (strpos($col, 'json') !== false) {
+        if (strpos($col, 'json') != false) {
             return ['type' => TableSchema::TYPE_JSON, 'length' => null];
         }
 
@@ -244,9 +244,9 @@ class MysqlSchemaDialect extends SchemaDialect
 
         if ($row['Index_type'] === 'FULLTEXT') {
             $type = TableSchema::INDEX_FULLTEXT;
-        } elseif ((int)$row['Non_unique'] === 0 && $type !== 'primary') {
+        } elseif ((int)$row['Non_unique'] === 0 && $type != 'primary') {
             $type = TableSchema::CONSTRAINT_UNIQUE;
-        } elseif ($type !== 'primary') {
+        } elseif ($type != 'primary') {
             $type = TableSchema::INDEX_INDEX;
         }
 
@@ -355,7 +355,7 @@ class MysqlSchemaDialect extends SchemaDialect
         $data = $schema->getColumn($name);
 
         $sql = this->_getTypeSpecificColumnSql($data['type'], $schema, $name);
-        if ($sql !== null) {
+        if ($sql != null) {
             return $sql;
         }
 
@@ -479,7 +479,7 @@ class MysqlSchemaDialect extends SchemaDialect
             TableSchema::TYPE_CHAR,
             TableSchema::TYPE_STRING,
         ];
-        if (in_array($data['type'], $hasCollate, true) && isset($data['collate']) && $data['collate'] !== '') {
+        if (in_array($data['type'], $hasCollate, true) && isset($data['collate']) && $data['collate'] != '') {
             $out .= ' COLLATE ' . $data['collate'];
         }
 
@@ -521,7 +521,7 @@ class MysqlSchemaDialect extends SchemaDialect
         if (
             isset($data['default']) &&
             in_array($data['type'], $dateTimeTypes) &&
-            strpos(strtolower($data['default']), 'current_timestamp') !== false
+            strpos(strtolower($data['default']), 'current_timestamp') != false
         ) {
             $out .= ' DEFAULT CURRENT_TIMESTAMP';
             if (isset($data['precision'])) {
@@ -533,7 +533,7 @@ class MysqlSchemaDialect extends SchemaDialect
             $out .= ' DEFAULT ' . this->_driver->schemaValue($data['default']);
             unset($data['default']);
         }
-        if (isset($data['comment']) && $data['comment'] !== '') {
+        if (isset($data['comment']) && $data['comment'] != '') {
             $out .= ' COMMENT ' . this->_driver->schemaValue($data['comment']);
         }
 

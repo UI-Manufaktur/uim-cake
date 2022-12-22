@@ -92,7 +92,7 @@ trait RulesAwareTrait
      */
     public function rulesChecker(): RulesChecker
     {
-        if (this->_rulesChecker !== null) {
+        if (this->_rulesChecker != null) {
             return this->_rulesChecker;
         }
         /** @psalm-var class-string<\Cake\Datasource\RulesChecker> $class */

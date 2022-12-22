@@ -296,7 +296,7 @@ class NumericPaginator implements PaginatorInterface
         $page = $params['page'];
         $pageCount = 0;
 
-        if ($params['count'] !== null) {
+        if ($params['count'] != null) {
             $pageCount = max((int)ceil($params['count'] / $params['perPage']), 1);
             $page = min($page, $pageCount);
         } elseif ($params['current'] === 0 && $params['requestedPage'] > 1) {
@@ -439,11 +439,11 @@ class NumericPaginator implements PaginatorInterface
     protected function getSortableFields(array $config): ?array
     {
         $allowed = $config['sortableFields'] ?? null;
-        if ($allowed !== null) {
+        if ($allowed != null) {
             return $allowed;
         }
         $deprecated = $config['sortWhitelist'] ?? null;
-        if ($deprecated !== null) {
+        if ($deprecated != null) {
             deprecationWarning('The `sortWhitelist` option is deprecated. Use `sortableFields` instead.');
         }
 
@@ -567,7 +567,7 @@ class NumericPaginator implements PaginatorInterface
 
         $sortAllowed = false;
         $allowed = this->getSortableFields($options);
-        if ($allowed !== null) {
+        if ($allowed != null) {
             $options['sortableFields'] = $options['sortWhitelist'] = $allowed;
 
             $field = key($options['order']);
@@ -642,7 +642,7 @@ class NumericPaginator implements PaginatorInterface
             $field = $key;
             $alias = $tableAlias;
 
-            if (strpos($key, '.') !== false) {
+            if (strpos($key, '.') != false) {
                 [$alias, $field] = explode('.', $key);
             }
             $correctAlias = ($tableAlias === $alias);
