@@ -252,7 +252,7 @@ class FormDataPart
     {
         $transliterated = Text::transliterate(str_replace('"', '', $value));
         $return = sprintf('%s="%s"', $name, $transliterated);
-        if (this->_charset !== null && $value !== $transliterated) {
+        if (this->_charset != null && $value != $transliterated) {
             $return .= sprintf("; %s*=%s''%s", $name, strtolower(this->_charset), rawurlencode($value));
         }
 

@@ -287,7 +287,7 @@ class EventManager implements EventManagerInterface
             if ($result === false) {
                 $event->stopPropagation();
             }
-            if ($result !== null) {
+            if ($result != null) {
                 $event->setResult($result);
             }
         }

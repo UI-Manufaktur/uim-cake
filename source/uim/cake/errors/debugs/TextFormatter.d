@@ -120,7 +120,7 @@ TEXT;
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
             myName = $property.getName();
-            if ($visibility && $visibility !== "public") {
+            if ($visibility && $visibility != "public") {
                 $props[] = "[{$visibility}] {myName}: " . this.export($property.getValue(), $indent);
             } else {
                 $props[] = "{myName}: " . this.export($property.getValue(), $indent);

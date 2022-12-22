@@ -78,7 +78,7 @@ class Mock implements AdapterInterface
         $requestUri = (string)$request->getUri();
 
         foreach (this->responses as $index => $mock) {
-            if ($method !== $mock['request']->getMethod()) {
+            if ($method != $mock['request']->getMethod()) {
                 continue;
             }
             if (!this->urlMatches($requestUri, $mock['request'])) {
@@ -96,7 +96,7 @@ class Mock implements AdapterInterface
             $found = $index;
             break;
         }
-        if ($found !== null) {
+        if ($found != null) {
             // Move the current mock to the end so that when there are multiple
             // matches for a URL the next match is used on subsequent requests.
             $mock = this->responses[$found];

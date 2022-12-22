@@ -270,6 +270,6 @@ class Filesystem
      */
     public function isStream(string $path): bool
     {
-        return strpos($path, '://') !== false;
+        return strpos($path, '://') != false;
     }
 }

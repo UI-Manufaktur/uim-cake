@@ -148,7 +148,7 @@ class Folder
      */
     function cd(string myPath) {
         myPath = this.realpath(myPath);
-        if (myPath !== false && is_dir(myPath)) {
+        if (myPath != false && is_dir(myPath)) {
             return this.path = myPath;
         }
 
@@ -536,7 +536,7 @@ class Folder
         foreach ($iterator as $itemPath: $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator.getSubPathname();
-                if ($subPathName[0] == "." || indexOf($subPathName, DIRECTORY_SEPARATOR . ".") !== false) {
+                if ($subPathName[0] == "." || indexOf($subPathName, DIRECTORY_SEPARATOR . ".") != false) {
                     unset($fsIterator);
                     continue;
                 }
@@ -638,7 +638,7 @@ class Folder
             } elseif (is_dir($stack[$i])) {
                 $dir = dir($stack[$i]);
                 if ($dir) {
-                    while (($entry = $dir.read()) !== false) {
+                    while (($entry = $dir.read()) != false) {
                         if ($entry == "." || $entry == "..") {
                             continue;
                         }
@@ -780,11 +780,11 @@ class Folder
         // phpcs:disable
         if ($handle = @opendir($fromDir)) {
             // phpcs:enable
-            while (($item = readdir($handle)) !== false) {
+            while (($item = readdir($handle)) != false) {
                 $to = Folder::addPathElement($toDir, $item);
-                if ((myOptions["scheme"] !== Folder::SKIP || !is_dir($to)) && !in_array($item, myExceptions, true)) {
+                if ((myOptions["scheme"] != Folder::SKIP || !is_dir($to)) && !in_array($item, myExceptions, true)) {
                     $from = Folder::addPathElement($fromDir, $item);
-                    if (is_file($from) && (!is_file($to) || myOptions["scheme"] !== Folder::SKIP)) {
+                    if (is_file($from) && (!is_file($to) || myOptions["scheme"] != Folder::SKIP)) {
                         if (copy($from, $to)) {
                             chmod($to, intval(myMode, 8));
                             touch($to, filemtime($from));

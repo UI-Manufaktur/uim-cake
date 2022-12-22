@@ -640,7 +640,7 @@ class Response : IResponse
      */
     string getType() {
         $header = this.getHeaderLine("Content-Type");
-        if (indexOf($header, ";") !== false) {
+        if (indexOf($header, ";") != false) {
             return explode(";", $header)[0];
         }
 
@@ -1037,9 +1037,9 @@ class Response : IResponse
      * @return bool false if client does not accept compressed responses or no handler is available, true otherwise
      */
     bool compress() {
-        $compressionEnabled = ini_get("zlib.output_compression") !== "1" &&
+        $compressionEnabled = ini_get("zlib.output_compression") != "1" &&
             extension_loaded("zlib") &&
-            (indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false);
+            (indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false);
 
         return $compressionEnabled && ob_start("ob_gzhandler");
     }
@@ -1048,7 +1048,7 @@ class Response : IResponse
      * Returns whether the resulting output will be compressed by PHP
      */
     bool outputCompressed() {
-        return indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") !== false
+        return indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false
             && (ini_get("zlib.output_compression") == "1" || in_array("ob_gzhandler", ob_list_handlers(), true));
     }
 
@@ -1139,7 +1139,7 @@ class Response : IResponse
         if ($etagMatches is null && $timeMatches is null) {
             return false;
         }
-        $notModified = $etagMatches !== false && $timeMatches !== false;
+        $notModified = $etagMatches != false && $timeMatches != false;
         if ($notModified) {
             this.notModified();
         }
@@ -1390,7 +1390,7 @@ class Response : IResponse
      */
     protected auto validateFile(string myPath): SplFileInfo
     {
-        if (indexOf(myPath, "../") !== false || indexOf(myPath, "..\\") !== false) {
+        if (indexOf(myPath, "../") != false || indexOf(myPath, "..\\") != false) {
             throw new NotFoundException(__d("cake", "The requested file contains `..` and will not be read."));
         }
 

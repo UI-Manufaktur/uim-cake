@@ -203,7 +203,7 @@ class HtmlFormatter : IFormatter
             $arrow = this.style("punct", ":");
             $visibility = $property.getVisibility();
             myName = $property.getName();
-            if ($visibility && $visibility !== "public") {
+            if ($visibility && $visibility != "public") {
                 $props[] = $break .
                     "<span class="cake-dbg-prop">" .
                     this.style("visibility", $visibility) .

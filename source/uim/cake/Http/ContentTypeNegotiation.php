@@ -61,12 +61,12 @@ class ContentTypeNegotiation
             $value = trim($value);
 
             $semiPos = strpos($value, ';');
-            if ($semiPos !== false) {
+            if ($semiPos != false) {
                 $params = explode(';', $value);
                 $value = trim($params[0]);
                 foreach ($params as $param) {
                     $qPos = strpos($param, 'q=');
-                    if ($qPos !== false) {
+                    if ($qPos != false) {
                         $prefValue = substr($param, $qPos + 2);
                     }
                 }

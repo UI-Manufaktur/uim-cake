@@ -144,7 +144,7 @@ class FormProtector
      *   ["Model", "field"] for array fields or empty array if myName is empty.
      */
     protected string[] getFieldNameArray(string myName) {
-        if (empty(myName) && myName !== "0") {
+        if (empty(myName) && myName != "0") {
             return [];
         }
 
@@ -173,7 +173,7 @@ class FormProtector
         }
 
         $index = array_search(myName, this.fields, true);
-        if ($index !== false) {
+        if ($index != false) {
             unset(this.fields[$index]);
         }
         unset(this.fields[myName]);
@@ -423,12 +423,12 @@ class FormProtector
         }
 
         $expectedParts = json_decode(urldecode($formData["_Token"]["debug"]), true);
-        if (!is_array($expectedParts) || count($expectedParts) !== 3) {
+        if (!is_array($expectedParts) || count($expectedParts) != 3) {
             return "Invalid form protection debug token.";
         }
         $expectedUrl = Hash::get($expectedParts, 0);
         anURL = Hash::get($hashParts, "url");
-        if ($expectedUrl !== anURL) {
+        if ($expectedUrl != anURL) {
             myMessages[] = sprintf("URL mismatch in POST data (expected `%s` but found `%s`)", $expectedUrl, anURL);
         }
         $expectedFields = Hash::get($expectedParts, 1);
@@ -509,7 +509,7 @@ class FormProtector
                     unset($expectedFields[$foundKey]);
                 }
             } else {
-                if (isset($expectedFields[myKey]) && myValue !== $expectedFields[myKey]) {
+                if (isset($expectedFields[myKey]) && myValue != $expectedFields[myKey]) {
                     myMessages[] = sprintf($stringKeyMessage, myKey, $expectedFields[myKey], myValue);
                 }
                 unset($expectedFields[myKey]);

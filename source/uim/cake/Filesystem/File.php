@@ -156,7 +156,7 @@ class File
         if (this->open($mode, $force) === false) {
             return false;
         }
-        if (this->lock !== null && flock(this->handle, LOCK_SH) === false) {
+        if (this->lock != null && flock(this->handle, LOCK_SH) === false) {
             return false;
         }
         if (is_int($bytes)) {
@@ -168,7 +168,7 @@ class File
             $data .= fgets(this->handle, 4096);
         }
 
-        if (this->lock !== null) {
+        if (this->lock != null) {
             flock(this->handle, LOCK_UN);
         }
         if ($bytes === false) {
@@ -230,14 +230,14 @@ class File
     {
         $success = false;
         if (this->open($mode, $force) === true) {
-            if (this->lock !== null && flock(this->handle, LOCK_EX) === false) {
+            if (this->lock != null && flock(this->handle, LOCK_EX) === false) {
                 return false;
             }
 
-            if (fwrite(this->handle, $data) !== false) {
+            if (fwrite(this->handle, $data) != false) {
                 $success = true;
             }
-            if (this->lock !== null) {
+            if (this->lock != null) {
                 flock(this->handle, LOCK_UN);
             }
         }
@@ -639,13 +639,13 @@ class File
             return false;
         }
 
-        if (this->lock !== null && flock(this->handle, LOCK_EX) === false) {
+        if (this->lock != null && flock(this->handle, LOCK_EX) === false) {
             return false;
         }
 
         $replaced = this->write(str_replace($search, $replace, this->read()), 'w', true);
 
-        if (this->lock !== null) {
+        if (this->lock != null) {
             flock(this->handle, LOCK_UN);
         }
         this->close();

@@ -101,7 +101,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
      */
     public this(?EventManager $eventManager = null)
     {
-        if ($eventManager !== null) {
+        if ($eventManager != null) {
             this->setEventManager($eventManager);
         }
 
@@ -183,7 +183,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
     public function schema(?Schema $schema = null): Schema
     {
         deprecationWarning('Form::schema() is deprecated. Use setSchema() and getSchema() instead.');
-        if ($schema !== null) {
+        if ($schema != null) {
             this->setSchema($schema);
         }
 

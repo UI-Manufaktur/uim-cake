@@ -176,7 +176,7 @@ class Folder
     public function cd(string $path)
     {
         $path = this->realpath($path);
-        if ($path !== false && is_dir($path)) {
+        if ($path != false && is_dir($path)) {
             return this->path = $path;
         }
 
@@ -574,7 +574,7 @@ class Folder
         foreach ($iterator as $itemPath => $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator->getSubPathname();
-                if ($subPathName[0] === '.' || strpos($subPathName, DIRECTORY_SEPARATOR . '.') !== false) {
+                if ($subPathName[0] === '.' || strpos($subPathName, DIRECTORY_SEPARATOR . '.') != false) {
                     unset($fsIterator);
                     continue;
                 }
@@ -679,7 +679,7 @@ class Folder
             } elseif (is_dir($stack[$i])) {
                 $dir = dir($stack[$i]);
                 if ($dir) {
-                    while (($entry = $dir->read()) !== false) {
+                    while (($entry = $dir->read()) != false) {
                         if ($entry === '.' || $entry === '..') {
                             continue;
                         }
@@ -823,11 +823,11 @@ class Folder
         // phpcs:disable
         if ($handle = @opendir($fromDir)) {
             // phpcs:enable
-            while (($item = readdir($handle)) !== false) {
+            while (($item = readdir($handle)) != false) {
                 $to = Folder::addPathElement($toDir, $item);
-                if (($options['scheme'] !== Folder::SKIP || !is_dir($to)) && !in_array($item, $exceptions, true)) {
+                if (($options['scheme'] != Folder::SKIP || !is_dir($to)) && !in_array($item, $exceptions, true)) {
                     $from = Folder::addPathElement($fromDir, $item);
-                    if (is_file($from) && (!is_file($to) || $options['scheme'] !== Folder::SKIP)) {
+                    if (is_file($from) && (!is_file($to) || $options['scheme'] != Folder::SKIP)) {
                         if (copy($from, $to)) {
                             chmod($to, intval($mode, 8));
                             touch($to, filemtime($from));
@@ -953,7 +953,7 @@ class Folder
             $newpath = DIRECTORY_SEPARATOR;
         }
 
-        while (($part = array_shift($parts)) !== null) {
+        while (($part = array_shift($parts)) != null) {
             if ($part === '.' || $part === '') {
                 continue;
             }

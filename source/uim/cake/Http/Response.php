@@ -692,7 +692,7 @@ class Response implements ResponseInterface
     public function getType(): string
     {
         $header = this->getHeaderLine('Content-Type');
-        if (strpos($header, ';') !== false) {
+        if (strpos($header, ';') != false) {
             return explode(';', $header)[0];
         }
 
@@ -851,7 +851,7 @@ class Response implements ResponseInterface
         $key = $public ? 'public' : 'private';
         $new->_cacheDirectives[$key] = true;
 
-        if ($time !== null) {
+        if ($time != null) {
             $new->_cacheDirectives['max-age'] = $time;
         }
         $new->_setCacheControl();
@@ -1117,9 +1117,9 @@ class Response implements ResponseInterface
      */
     public function compress(): bool
     {
-        $compressionEnabled = ini_get('zlib.output_compression') !== '1' &&
+        $compressionEnabled = ini_get('zlib.output_compression') != '1' &&
             extension_loaded('zlib') &&
-            (strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') !== false);
+            (strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') != false);
 
         return $compressionEnabled && ob_start('ob_gzhandler');
     }
@@ -1131,7 +1131,7 @@ class Response implements ResponseInterface
      */
     public function outputCompressed(): bool
     {
-        return strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') !== false
+        return strpos((string)env('HTTP_ACCEPT_ENCODING'), 'gzip') != false
             && (ini_get('zlib.output_compression') === '1' || in_array('ob_gzhandler', ob_list_handlers(), true));
     }
 
@@ -1224,7 +1224,7 @@ class Response implements ResponseInterface
             return false;
         }
 
-        return $etagMatches !== false && $timeMatches !== false;
+        return $etagMatches != false && $timeMatches != false;
     }
 
     /**
@@ -1485,7 +1485,7 @@ class Response implements ResponseInterface
      */
     protected function validateFile(string $path): SplFileInfo
     {
-        if (strpos($path, '../') !== false || strpos($path, '..\\') !== false) {
+        if (strpos($path, '../') != false || strpos($path, '..\\') != false) {
             throw new NotFoundException(__d('cake', 'The requested file contains `..` and will not be read.'));
         }
 

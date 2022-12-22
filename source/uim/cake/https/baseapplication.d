@@ -245,7 +245,7 @@ abstract class BaseApplication :
             this.controllerFactory = new ControllerFactory(this.getContainer());
         }
 
-        if (Router::getRequest() !== myRequest) {
+        if (Router::getRequest() != myRequest) {
             Router::setRequest(myRequest);
         }
 

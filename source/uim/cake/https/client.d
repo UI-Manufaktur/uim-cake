@@ -546,7 +546,7 @@ class Client : ClientInterface
             "https":443,
         ];
         $out = myOptions["scheme"] . "://" . myOptions["host"];
-        if (myOptions["port"] && (int)myOptions["port"] !== $defaultPorts[myOptions["scheme"]]) {
+        if (myOptions["port"] && (int)myOptions["port"] != $defaultPorts[myOptions["scheme"]]) {
             $out .= ":" . myOptions["port"];
         }
         if (!empty(myOptions["basePath"])) {
@@ -603,7 +603,7 @@ class Client : ClientInterface
      * @psalm-return array<non-empty-string, non-empty-string>
      */
     protected STRINGAA _typeHeaders(string myType) {
-        if (indexOf(myType, "/") !== false) {
+        if (indexOf(myType, "/") != false) {
             return [
                 "Accept":myType,
                 "Content-Type":myType,

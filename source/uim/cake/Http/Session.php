@@ -176,7 +176,7 @@ class Session
         if (isset($defaults[$name])) {
             if (
                 PHP_VERSION_ID >= 70300
-                && ($name !== 'php' || empty(ini_get('session.cookie_samesite')))
+                && ($name != 'php' || empty(ini_get('session.cookie_samesite')))
             ) {
                 $defaults['php']['ini']['session.cookie_samesite'] = 'Lax';
             }
@@ -283,7 +283,7 @@ class Session
      */
     protected function setEngine(SessionHandlerInterface $handler): SessionHandlerInterface
     {
-        if (!headers_sent() && session_status() !== \PHP_SESSION_ACTIVE) {
+        if (!headers_sent() && session_status() != \PHP_SESSION_ACTIVE) {
             session_set_save_handler($handler, false);
         }
 
@@ -417,7 +417,7 @@ class Session
             return (bool)$_SESSION;
         }
 
-        return Hash::get($_SESSION, $name) !== null;
+        return Hash::get($_SESSION, $name) != null;
     }
 
     /**
@@ -474,7 +474,7 @@ class Session
             return null;
         }
         $value = this->read($name);
-        if ($value !== null) {
+        if ($value != null) {
             /** @psalm-suppress InvalidScalarArgument */
             this->_overwrite($_SESSION, Hash::remove($_SESSION, $name));
         }
@@ -524,7 +524,7 @@ class Session
      */
     public function id(?string $id = null): string
     {
-        if ($id !== null && !headers_sent()) {
+        if ($id != null && !headers_sent()) {
             session_id($id);
         }
 
@@ -636,7 +636,7 @@ class Session
             $params['httponly']
         );
 
-        if (session_id() !== '') {
+        if (session_id() != '') {
             session_regenerate_id(true);
         }
     }
@@ -652,7 +652,7 @@ class Session
         $time = this->read('Config.time');
         $result = false;
 
-        $checkTime = $time !== null && this->_lifetime > 0;
+        $checkTime = $time != null && this->_lifetime > 0;
         if ($checkTime && (time() - (int)$time > this->_lifetime)) {
             $result = true;
         }

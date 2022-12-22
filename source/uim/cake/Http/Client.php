@@ -602,7 +602,7 @@ class Client implements ClientInterface
             'https' => 443,
         ];
         $out = $options['scheme'] . '://' . $options['host'];
-        if ($options['port'] && (int)$options['port'] !== $defaultPorts[$options['scheme']]) {
+        if ($options['port'] && (int)$options['port'] != $defaultPorts[$options['scheme']]) {
             $out .= ':' . $options['port'];
         }
         if (!empty($options['basePath'])) {
@@ -660,7 +660,7 @@ class Client implements ClientInterface
      */
     protected function _typeHeaders(string $type): array
     {
-        if (strpos($type, '/') !== false) {
+        if (strpos($type, '/') != false) {
             return [
                 'Accept' => $type,
                 'Content-Type' => $type,

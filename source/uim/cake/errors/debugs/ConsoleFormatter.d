@@ -40,7 +40,7 @@ class ConsoleFormatter : IFormatter
      * @return bool
      */
     static bool environmentMatches() {
-        if (PHP_SAPI !== "cli") {
+        if (PHP_SAPI != "cli") {
             return false;
         }
         // NO_COLOR in environment means no color.
@@ -53,7 +53,7 @@ class ConsoleFormatter : IFormatter
             indexOf(strtolower(php_uname("v")), "windows 10") == false &&
             indexOf(strtolower((string)env("SHELL")), "bash.exe") == false &&
             !(bool)env("ANSICON") &&
-            env("ConEmuANSI") !== "ON"
+            env("ConEmuANSI") != "ON"
         ) {
             return false;
         }
@@ -184,7 +184,7 @@ class ConsoleFormatter : IFormatter
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
             myName = $property.getName();
-            if ($visibility && $visibility !== "public") {
+            if ($visibility && $visibility != "public") {
                 $props[] = this.style("visibility", $visibility) .
                     " " .
                     this.style("property", myName) .

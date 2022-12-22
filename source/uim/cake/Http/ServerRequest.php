@@ -274,7 +274,7 @@ class ServerRequest implements ServerRequestInterface
             }
             $uri = $config['uri'];
         } else {
-            if ($config['url'] !== '') {
+            if ($config['url'] != '') {
                 $config = this->processUrlOption($config);
             }
             $uri = ServerRequestFactory::createUri($config['environment']);
@@ -313,11 +313,11 @@ class ServerRequest implements ServerRequestInterface
      */
     protected function processUrlOption(array $config): array
     {
-        if ($config['url'][0] !== '/') {
+        if ($config['url'][0] != '/') {
             $config['url'] = '/' . $config['url'];
         }
 
-        if (strpos($config['url'], '?') !== false) {
+        if (strpos($config['url'], '?') != false) {
             [$config['url'], $config['environment']['QUERY_STRING']] = explode('?', $config['url']);
 
             parse_str($config['environment']['QUERY_STRING'], $queryArgs);
@@ -440,7 +440,7 @@ class ServerRequest implements ServerRequestInterface
                 if ($ref === '' || strpos($ref, '//') === 0) {
                     $ref = '/';
                 }
-                if ($ref[0] !== '/') {
+                if ($ref[0] != '/') {
                     $ref = '/' . $ref;
                 }
 
@@ -590,7 +590,7 @@ class ServerRequest implements ServerRequestInterface
     {
         foreach ($detect['header'] as $header => $value) {
             $header = this->getEnv('http_' . $header);
-            if ($header !== null) {
+            if ($header != null) {
                 if (!is_string($value) && !is_bool($value) && is_callable($value)) {
                     return $value($header);
                 }
@@ -800,7 +800,7 @@ class ServerRequest implements ServerRequestInterface
             if (strpos($key, 'CONTENT_') === 0) {
                 $name = $key;
             }
-            if ($name !== null) {
+            if ($name != null) {
                 $name = str_replace('_', ' ', strtolower($name));
                 $name = str_replace(' ', '-', ucwords($name));
                 $headers[$name] = (array)$value;
@@ -1112,7 +1112,7 @@ class ServerRequest implements ServerRequestInterface
     {
         $content = new ContentTypeNegotiation();
         if ($type) {
-            return $content->preferredType(this, [$type]) !== null;
+            return $content->preferredType(this, [$type]) != null;
         }
 
         $accept = [];
@@ -1155,7 +1155,7 @@ class ServerRequest implements ServerRequestInterface
     public function acceptLanguage(?string $language = null)
     {
         $content = new ContentTypeNegotiation();
-        if ($language !== null) {
+        if ($language != null) {
             return $content->acceptLanguage(this, $language);
         }
 
@@ -1442,7 +1442,7 @@ class ServerRequest implements ServerRequestInterface
             this->_environment[$key] = env($key);
         }
 
-        return this->_environment[$key] !== null ? (string)this->_environment[$key] : $default;
+        return this->_environment[$key] != null ? (string)this->_environment[$key] : $default;
     }
 
     /**
@@ -1814,7 +1814,7 @@ class ServerRequest implements ServerRequestInterface
      */
     public function getRequestTarget(): string
     {
-        if (this->requestTarget !== null) {
+        if (this->requestTarget != null) {
             return this->requestTarget;
         }
 

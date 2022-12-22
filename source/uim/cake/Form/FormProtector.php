@@ -136,7 +136,7 @@ class FormProtector
 
         if ($lock) {
             if (!in_array($field, this->fields, true)) {
-                if ($value !== null) {
+                if ($value != null) {
                     this->fields[$field] = $value;
 
                     return this;
@@ -164,7 +164,7 @@ class FormProtector
      */
     protected function getFieldNameArray(string $name): array
     {
-        if (empty($name) && $name !== '0') {
+        if (empty($name) && $name != '0') {
             return [];
         }
 
@@ -194,7 +194,7 @@ class FormProtector
         }
 
         $index = array_search($name, this->fields, true);
-        if ($index !== false) {
+        if ($index != false) {
             unset(this->fields[$index]);
         }
         unset(this->fields[$name]);
@@ -454,12 +454,12 @@ class FormProtector
         }
 
         $expectedParts = json_decode(urldecode($formData['_Token']['debug']), true);
-        if (!is_array($expectedParts) || count($expectedParts) !== 3) {
+        if (!is_array($expectedParts) || count($expectedParts) != 3) {
             return 'Invalid form protection debug token.';
         }
         $expectedUrl = Hash::get($expectedParts, 0);
         $url = Hash::get($hashParts, 'url');
-        if ($expectedUrl !== $url) {
+        if ($expectedUrl != $url) {
             $messages[] = sprintf('URL mismatch in POST data (expected `%s` but found `%s`)', $expectedUrl, $url);
         }
         $expectedFields = Hash::get($expectedParts, 1);
@@ -506,7 +506,7 @@ class FormProtector
     ): array {
         $messages = this->matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = this->debugExpectedFields($expectedFields, $missingMessage);
-        if ($expectedFieldsMessage !== null) {
+        if ($expectedFieldsMessage != null) {
             $messages[] = $expectedFieldsMessage;
         }
 
@@ -540,7 +540,7 @@ class FormProtector
                     unset($expectedFields[$foundKey]);
                 }
             } else {
-                if (isset($expectedFields[$key]) && $value !== $expectedFields[$key]) {
+                if (isset($expectedFields[$key]) && $value != $expectedFields[$key]) {
                     $messages[] = sprintf($stringKeyMessage, $key, $expectedFields[$key], $value);
                 }
                 unset($expectedFields[$key]);

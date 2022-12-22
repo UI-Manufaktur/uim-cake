@@ -275,7 +275,7 @@ class CookieCollection implements IteratorAggregate, Countable
             if ($scheme === 'http' && $cookie->isSecure()) {
                 continue;
             }
-            if (strpos($path, $cookie->getPath()) !== 0) {
+            if (strpos($path, $cookie->getPath()) != 0) {
                 continue;
             }
             $domain = $cookie->getDomain();

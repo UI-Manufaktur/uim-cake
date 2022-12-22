@@ -246,7 +246,7 @@ class ServerRequest : IServerRequest
             }
             $uri = myConfig["uri"];
         } else {
-            if (myConfig["url"] !== "") {
+            if (myConfig["url"] != "") {
                 myConfig = this.processUrlOption(myConfig);
             }
             $uri = ServerRequestFactory::createUri(myConfig["environment"]);
@@ -284,11 +284,11 @@ class ServerRequest : IServerRequest
      * @return array<string, mixed> Update config.
      */
     protected array processUrlOption(array myConfig) {
-        if (myConfig["url"][0] !== "/") {
+        if (myConfig["url"][0] != "/") {
             myConfig["url"] = "/" . myConfig["url"];
         }
 
-        if (indexOf(myConfig["url"], "?") !== false) {
+        if (indexOf(myConfig["url"], "?") != false) {
             [myConfig["url"], myConfig["environment"]["QUERY_STRING"]] = explode("?", myConfig["url"]);
 
             parse_str(myConfig["environment"]["QUERY_STRING"], myQueryArgs);
@@ -400,7 +400,7 @@ class ServerRequest : IServerRequest
                 if ($ref == "" || indexOf($ref, "//") == 0) {
                     $ref = "/";
                 }
-                if ($ref[0] !== "/") {
+                if ($ref[0] != "/") {
                     $ref = "/" . $ref;
                 }
 
@@ -1102,12 +1102,12 @@ class ServerRequest : IServerRequest
             myValue = trim(myValue);
 
             $semiPos = indexOf(myValue, ";");
-            if ($semiPos !== false) {
+            if ($semiPos != false) {
                 myParams = explode(";", myValue);
                 myValue = trim(myParams[0]);
                 foreach (myParams as $param) {
                     $qPos = indexOf($param, "q=");
-                    if ($qPos !== false) {
+                    if ($qPos != false) {
                         $prefValue = substr($param, $qPos + 2);
                     }
                 }

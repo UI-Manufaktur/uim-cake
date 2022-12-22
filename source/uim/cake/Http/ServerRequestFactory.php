@@ -274,7 +274,7 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
     protected static function updatePath(string $base, UriInterface $uri): UriInterface
     {
         $path = $uri->getPath();
-        if ($base !== '' && strpos($path, $base) === 0) {
+        if ($base != '' && strpos($path, $base) === 0) {
             $path = substr($path, strlen($base));
         }
         if ($path === '/index.php' && $uri->getQuery()) {
@@ -313,7 +313,7 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
         $baseUrl = $config['baseUrl'];
         $webroot = $config['webroot'];
 
-        if ($base !== false && $base !== null) {
+        if ($base != false && $base != null) {
             return [$base, $base . '/'];
         }
 
@@ -323,7 +323,7 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
             $base = preg_replace('#/+#', '/', $base);
 
             $indexPos = strpos($base, '/' . $webroot . '/index.php');
-            if ($indexPos !== false) {
+            if ($indexPos != false) {
                 $base = substr($base, 0, $indexPos) . '/' . $webroot;
             }
             if ($webroot === basename($base)) {

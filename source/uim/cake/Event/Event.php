@@ -168,7 +168,7 @@ class Event implements EventInterface
      */
     public function getData(?string $key = null)
     {
-        if ($key !== null) {
+        if ($key != null) {
             return this->_data[$key] ?? null;
         }
 

@@ -260,7 +260,7 @@ class Cookie implements CookieInterface
             $expires = strtotime($expires) ?: null;
         }
 
-        if ($expires !== null) {
+        if ($expires != null) {
             $expires = new DateTimeImmutable('@' . (string)$expires);
         }
 
@@ -277,7 +277,7 @@ class Cookie implements CookieInterface
      */
     public static function createFromHeaderString(string $cookie, array $defaults = [])
     {
-        if (strpos($cookie, '";"') !== false) {
+        if (strpos($cookie, '";"') != false) {
             $cookie = str_replace('";"', '{__cookie_replace__}', $cookie);
             $parts = str_replace('{__cookie_replace__}', '";"', explode(';', $cookie));
         } else {
@@ -291,7 +291,7 @@ class Cookie implements CookieInterface
             ] + $defaults;
 
         foreach ($parts as $part) {
-            if (strpos($part, '=') !== false) {
+            if (strpos($part, '=') != false) {
                 [$key, $value] = explode('=', $part);
             } else {
                 $key = $part;
@@ -345,10 +345,10 @@ class Cookie implements CookieInterface
         if (this->expiresAt) {
             $headerValue[] = sprintf('expires=%s', this->getFormattedExpires());
         }
-        if (this->path !== '') {
+        if (this->path != '') {
             $headerValue[] = sprintf('path=%s', this->path);
         }
-        if (this->domain !== '') {
+        if (this->domain != '') {
             $headerValue[] = sprintf('domain=%s', this->domain);
         }
         if (this->sameSite) {
@@ -639,7 +639,7 @@ class Cookie implements CookieInterface
      */
     public function withSameSite(?string $sameSite)
     {
-        if ($sameSite !== null) {
+        if ($sameSite != null) {
             this->validateSameSiteValue($sameSite);
         }
 
@@ -773,7 +773,7 @@ class Cookie implements CookieInterface
             'httponly' => this->httpOnly,
         ];
 
-        if (this->sameSite !== null) {
+        if (this->sameSite != null) {
             $options['samesite'] = this->sameSite;
         }
 

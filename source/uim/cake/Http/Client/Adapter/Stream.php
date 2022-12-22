@@ -253,14 +253,14 @@ class Stream implements AdapterInterface
 
         /** @psalm-suppress PossiblyNullArgument  */
         while (!feof(this->_stream)) {
-            if ($deadline !== false) {
+            if ($deadline != false) {
                 stream_set_timeout(this->_stream, max($deadline - time(), 1));
             }
 
             $content .= fread(this->_stream, 8192);
 
             $meta = stream_get_meta_data(this->_stream);
-            if ($meta['timed_out'] || ($deadline !== false && time() > $deadline)) {
+            if ($meta['timed_out'] || ($deadline != false && time() > $deadline)) {
                 $timedOut = true;
                 break;
             }

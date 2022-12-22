@@ -209,7 +209,7 @@ class File {
                 return false;
             }
 
-            if (fwrite(this.handle, myData) !== false) {
+            if (fwrite(this.handle, myData) != false) {
                 $success = true;
             }
             if (this.lock  !is null) {
