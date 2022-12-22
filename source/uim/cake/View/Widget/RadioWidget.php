@@ -71,8 +71,8 @@ class RadioWidget extends BasicWidget
      */
     public this(StringTemplate $templates, LabelWidget $label)
     {
-        $this->_templates = $templates;
-        $this->_label = $label;
+        this->_templates = $templates;
+        this->_label = $label;
     }
 
     /**
@@ -97,7 +97,7 @@ class RadioWidget extends BasicWidget
      */
     public function render(array $data, ContextInterface $context): string
     {
-        $data += $this->mergeDefaults($data, $context);
+        $data += this->mergeDefaults($data, $context);
 
         if ($data['options'] instanceof Traversable) {
             $options = iterator_to_array($data['options']);
@@ -111,11 +111,11 @@ class RadioWidget extends BasicWidget
         }
         unset($data['empty']);
 
-        $this->_idPrefix = $data['idPrefix'];
-        $this->_clearIds();
+        this->_idPrefix = $data['idPrefix'];
+        this->_clearIds();
         $opts = [];
         foreach ($options as $val => $text) {
-            $opts[] = $this->_renderInput($val, $text, $data, $context);
+            $opts[] = this->_renderInput($val, $text, $data, $context);
         }
 
         return implode('', $opts);
@@ -168,11 +168,11 @@ class RadioWidget extends BasicWidget
         if (empty($radio['id'])) {
             if (isset($data['id'])) {
                 $radio['id'] = $data['id'] . '-' . rtrim(
-                    $this->_idSuffix((string)$radio['value']),
+                    this->_idSuffix((string)$radio['value']),
                     '-'
                 );
             } else {
-                $radio['id'] = $this->_id((string)$radio['name'], (string)$radio['value']);
+                $radio['id'] = this->_id((string)$radio['name'], (string)$radio['value']);
             }
         }
         if (isset($data['val']) && is_bool($data['val'])) {
@@ -184,11 +184,11 @@ class RadioWidget extends BasicWidget
         }
 
         if (!is_bool($data['label']) && isset($radio['checked']) && $radio['checked']) {
-            $selectedClass = $this->_templates->format('selectedClass', []);
-            $data['label'] = $this->_templates->addClass($data['label'], $selectedClass);
+            $selectedClass = this->_templates->format('selectedClass', []);
+            $data['label'] = this->_templates->addClass($data['label'], $selectedClass);
         }
 
-        $radio['disabled'] = $this->_isDisabled($radio, $data['disabled']);
+        $radio['disabled'] = this->_isDisabled($radio, $data['disabled']);
         if (!empty($data['required'])) {
             $radio['required'] = true;
         }
@@ -196,17 +196,17 @@ class RadioWidget extends BasicWidget
             $radio['form'] = $data['form'];
         }
 
-        $input = $this->_templates->format('radio', [
+        $input = this->_templates->format('radio', [
             'name' => $radio['name'],
             'value' => $escape ? h($radio['value']) : $radio['value'],
             'templateVars' => $radio['templateVars'],
-            'attrs' => $this->_templates->formatAttributes(
+            'attrs' => this->_templates->formatAttributes(
                 $radio + $data,
                 ['name', 'value', 'text', 'options', 'label', 'val', 'type']
             ),
         ]);
 
-        $label = $this->_renderLabel(
+        $label = this->_renderLabel(
             $radio,
             $data['label'],
             $input,
@@ -216,12 +216,12 @@ class RadioWidget extends BasicWidget
 
         if (
             $label === false &&
-            strpos($this->_templates->get('radioWrapper'), '{{input}}') === false
+            strpos(this->_templates->get('radioWrapper'), '{{input}}') === false
         ) {
             $label = $input;
         }
 
-        return $this->_templates->format('radioWrapper', [
+        return this->_templates->format('radioWrapper', [
             'input' => $input,
             'label' => $label,
             'templateVars' => $data['templateVars'],
@@ -257,6 +257,6 @@ class RadioWidget extends BasicWidget
             'input' => $input,
         ];
 
-        return $this->_label->render($labelAttrs, $context);
+        return this->_label->render($labelAttrs, $context);
     }
 }

@@ -56,20 +56,20 @@ class TextareaWidget extends BasicWidget
      */
     public function render(array $data, ContextInterface $context): string
     {
-        $data += $this->mergeDefaults($data, $context);
+        $data += this->mergeDefaults($data, $context);
 
         if (
             !array_key_exists('maxlength', $data)
             && isset($data['fieldName'])
         ) {
-            $data = $this->setMaxLength($data, $context, $data['fieldName']);
+            $data = this->setMaxLength($data, $context, $data['fieldName']);
         }
 
-        return $this->_templates->format('textarea', [
+        return this->_templates->format('textarea', [
             'name' => $data['name'],
             'value' => $data['escape'] ? h($data['val']) : $data['val'],
             'templateVars' => $data['templateVars'],
-            'attrs' => $this->_templates->formatAttributes(
+            'attrs' => this->_templates->formatAttributes(
                 $data,
                 ['name', 'val']
             ),
