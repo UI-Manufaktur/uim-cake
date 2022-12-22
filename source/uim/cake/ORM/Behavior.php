@@ -216,7 +216,7 @@ class Behavior implements EventListenerInterface
         if (!isset($defaults[$key], $config[$key])) {
             return $config;
         }
-        if (isset($config[$key]) && $config[$key] === []) {
+        if (isset($config[$key]) && $config[$key] == []) {
             this->setConfig($key, [], false);
             unset($config[$key]);
 
@@ -300,7 +300,7 @@ class Behavior implements EventListenerInterface
             if (!method_exists(this, $method)) {
                 continue;
             }
-            if ($priority === null) {
+            if ($priority == null) {
                 $events[$event] = $method;
             } else {
                 $events[$event] = [
@@ -429,7 +429,7 @@ class Behavior implements EventListenerInterface
                 continue;
             }
 
-            if (substr($methodName, 0, 4) === 'find') {
+            if (substr($methodName, 0, 4) == 'find') {
                 $return['finders'][lcfirst(substr($methodName, 4))] = $methodName;
             } else {
                 $return['methods'][$methodName] = $methodName;

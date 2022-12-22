@@ -112,7 +112,7 @@ class TranslatorRegistry
                 new MessagesFileLoader($name, $locale, 'po'),
             ]);
 
-            $formatter = $name === 'cake' ? 'default' : this->_defaultFormatter;
+            $formatter = $name == 'cake' ? 'default' : this->_defaultFormatter;
             $package = $loader();
             $package->setFormatter($formatter);
 
@@ -185,7 +185,7 @@ class TranslatorRegistry
      */
     function get(string $name, ?string $locale = null): ?Translator
     {
-        if ($locale === null) {
+        if ($locale == null) {
             $locale = this->getLocale();
         }
 
@@ -193,7 +193,7 @@ class TranslatorRegistry
             return this->registry[$name][$locale];
         }
 
-        if (this->_cacher === null) {
+        if (this->_cacher == null) {
             return this->registry[$name][$locale] = this->_getTranslator($name, $locale);
         }
 
@@ -286,7 +286,7 @@ class TranslatorRegistry
      */
     function defaultFormatter(?string $name = null): string
     {
-        if ($name === null) {
+        if ($name == null) {
             return this->_defaultFormatter;
         }
 
@@ -337,7 +337,7 @@ class TranslatorRegistry
     function setLoaderFallback(string $name, callable $loader): callable
     {
         $fallbackDomain = 'default';
-        if (!this->_useFallback || $name === $fallbackDomain) {
+        if (!this->_useFallback || $name == $fallbackDomain) {
             return $loader;
         }
 

@@ -380,12 +380,12 @@ class Log
                 $levels = $logger->levels();
                 $scopes = $logger->scopes();
             }
-            if ($scopes === null) {
+            if ($scopes == null) {
                 $scopes = [];
             }
 
             $correctLevel = empty($levels) || in_array($level, $levels, true);
-            $inScope = $scopes === false && empty($context['scope']) || $scopes === [] ||
+            $inScope = $scopes == false && empty($context['scope']) || $scopes == [] ||
                 is_array($scopes) && array_intersect((array)$context['scope'], $scopes);
 
             if ($correctLevel && $inScope) {

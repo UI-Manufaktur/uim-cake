@@ -386,7 +386,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function getTable(): string
     {
-        if (this->_table === null) {
+        if (this->_table == null) {
             $table = namespaceSplit(static::class);
             $table = substr(end($table), 0, -5) ?: this->_alias;
             if (!$table) {
@@ -420,7 +420,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function getAlias(): string
     {
-        if (this->_alias === null) {
+        if (this->_alias == null) {
             $alias = namespaceSplit(static::class);
             $alias = substr(end($alias), 0, -5) ?: this->_table;
             if (!$alias) {
@@ -471,7 +471,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function getRegistryAlias(): string
     {
-        if (this->_registryAlias === null) {
+        if (this->_registryAlias == null) {
             this->_registryAlias = this->getAlias();
         }
 
@@ -514,7 +514,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function getSchema(): TableSchemaInterface
     {
-        if (this->_schema === null) {
+        if (this->_schema == null) {
             this->_schema = this->_initializeSchema(
                 this->getConnection()
                     ->getSchemaCollection()
@@ -571,7 +571,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     protected function checkAliasLengths(): void
     {
-        if (this->_schema === null) {
+        if (this->_schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this->getAlias()}` without schema.");
         }
 
@@ -579,7 +579,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         if (method_exists(this->getConnection()->getDriver(), 'getMaxAliasLength')) {
             $maxLength = this->getConnection()->getDriver()->getMaxAliasLength();
         }
-        if ($maxLength === null) {
+        if ($maxLength == null) {
             return;
         }
 
@@ -657,9 +657,9 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function getPrimaryKey()
     {
-        if (this->_primaryKey === null) {
+        if (this->_primaryKey == null) {
             $key = this->getSchema()->getPrimaryKey();
-            if (count($key) === 1) {
+            if (count($key) == 1) {
                 $key = $key[0];
             }
             this->_primaryKey = $key;
@@ -688,7 +688,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function getDisplayField()
     {
-        if (this->_displayField === null) {
+        if (this->_displayField == null) {
             $schema = this->getSchema();
             this->_displayField = this->getPrimaryKey();
             foreach (['title', 'name', 'label'] as $field) {
@@ -715,7 +715,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             $self = static::class;
             $parts = explode('\\', $self);
 
-            if ($self === self::class || count($parts) < 3) {
+            if ($self == self::class || count($parts) < 3) {
                 return this->_entityClass = $default;
             }
 
@@ -748,7 +748,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
     {
         /** @psalm-var class-string<\Cake\Datasource\EntityInterface>|null */
         $class = App::className($name, 'Model/Entity');
-        if ($class === null) {
+        if ($class == null) {
             throw new MissingEntityException([$name]);
         }
 
@@ -945,7 +945,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     protected function findAssociation(string $name): ?Association
     {
-        if (strpos($name, '.') === false) {
+        if (strpos($name, '.') == false) {
             return this->_associations->get($name);
         }
 
@@ -1381,7 +1381,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
                 (array)$options['groupField']
             );
             $columns = this->getSchema()->columns();
-            if (count($fields) === count(array_intersect($fields, $columns))) {
+            if (count($fields) == count(array_intersect($fields, $columns))) {
                 $query->select($fields);
             }
         }
@@ -1461,7 +1461,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
                 continue;
             }
 
-            if (count($options[$field]) === 1) {
+            if (count($options[$field]) == 1) {
                 $options[$field] = current($options[$field]);
                 continue;
             }
@@ -1504,7 +1504,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function get($primaryKey, array $options = []): EntityInterface
     {
-        if ($primaryKey === null) {
+        if ($primaryKey == null) {
             throw new InvalidPrimaryKeyException(sprintf(
                 'Record not found in table "%s" with primary key [NULL]',
                 this->getTable()
@@ -1672,7 +1672,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
 
         $result = this->save($entity, $options);
 
-        if ($result === false) {
+        if ($result == false) {
             throw new PersistenceFailedException($entity, ['findOrCreate']);
         }
 
@@ -1875,7 +1875,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return false;
         }
 
-        if ($entity->isNew() === false && !$entity->isDirty()) {
+        if ($entity->isNew() == false && !$entity->isDirty()) {
             return $entity;
         }
 
@@ -1912,7 +1912,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
     function saveOrFail(EntityInterface $entity, $options = []): EntityInterface
     {
         $saved = this->save($entity, $options);
-        if ($saved === false) {
+        if ($saved == false) {
             throw new PersistenceFailedException($entity, ['save']);
         }
 
@@ -1952,7 +1952,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
 
         if ($event->isStopped()) {
             $result = $event->getResult();
-            if ($result === null) {
+            if ($result == null) {
                 return false;
             }
 
@@ -2154,7 +2154,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return $entity;
         }
 
-        if (count($primaryColumns) === 0) {
+        if (count($primaryColumns) == 0) {
             $entityClass = get_class($entity);
             $table = this->getTable();
             $message = "Cannot update `$entityClass`. The `$table` has no primary key.";
@@ -2173,7 +2173,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             ->where($primaryKey)
             ->execute();
 
-        $success = $statement->errorCode() === '00000' ? $entity : false;
+        $success = $statement->errorCode() == '00000' ? $entity : false;
         $statement->closeCursor();
 
         return $success;
@@ -2260,7 +2260,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
                 ->transactional(function () use ($entities, $options, &$isNew, &$failed) {
                     foreach ($entities as $key => $entity) {
                         $isNew[$key] = $entity->isNew();
-                        if (this->save($entity, $options) === false) {
+                        if (this->save($entity, $options) == false) {
                             $failed = $entity;
 
                             return false;
@@ -2431,7 +2431,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return null;
         }, $options['atomic']);
 
-        if ($failed === null && this->_transactionCommitted($options['atomic'], $options['_primary'])) {
+        if ($failed == null && this->_transactionCommitted($options['atomic'], $options['_primary'])) {
             foreach ($entities as $entity) {
                 this->dispatchEvent('Model.afterDeleteCommit', [
                     'entity' => $entity,
@@ -2456,7 +2456,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
     function deleteOrFail(EntityInterface $entity, $options = []): bool
     {
         $deleted = this->delete($entity, $options);
-        if ($deleted === false) {
+        if ($deleted == false) {
             throw new PersistenceFailedException($entity, ['delete']);
         }
 
@@ -2616,7 +2616,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             );
         }
 
-        if ($hasOr === false && $hasAnd === false) {
+        if ($hasOr == false && $hasAnd == false) {
             $conditions = $makeConditions([$fields], $args);
         } elseif ($hasOr != false) {
             $fields = explode('_or_', $fields);
@@ -2961,7 +2961,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     function validateUnique($value, array $options, ?array $context = null): bool
     {
-        if ($context === null) {
+        if ($context == null) {
             $context = $options;
         }
         $entity = new Entity(

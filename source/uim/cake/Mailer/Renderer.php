@@ -75,7 +75,7 @@ class Renderer
             $view->setPlugin($layoutPlugin);
         }
 
-        if ($view->get('content') === null) {
+        if ($view->get('content') == null) {
             $view->set('content', $content);
         }
 

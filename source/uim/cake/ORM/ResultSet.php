@@ -224,7 +224,7 @@ class ResultSet implements ResultSetInterface
      */
     function rewind(): void
     {
-        if (this->_index === 0) {
+        if (this->_index == 0) {
             return;
         }
 
@@ -440,12 +440,12 @@ class ResultSet implements ResultSetInterface
      */
     protected function _fetchResult()
     {
-        if (this->_statement === null) {
+        if (this->_statement == null) {
             return false;
         }
 
         $row = this->_statement->fetch('assoc');
-        if ($row === false) {
+        if ($row == false) {
             return $row;
         }
 

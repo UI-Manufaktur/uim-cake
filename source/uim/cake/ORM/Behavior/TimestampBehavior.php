@@ -109,13 +109,13 @@ class TimestampBehavior extends Behavior
                 ));
             }
             if (
-                $when === 'always' ||
+                $when == 'always' ||
                 (
-                    $when === 'new' &&
+                    $when == 'new' &&
                     $new
                 ) ||
                 (
-                    $when === 'existing' &&
+                    $when == 'existing' &&
                     !$new
                 )
             ) {
@@ -156,7 +156,7 @@ class TimestampBehavior extends Behavior
                 this->_config['refreshTimestamp'] = false;
             }
             this->_ts = new FrozenTime($ts);
-        } elseif (this->_ts === null || $refreshTimestamp) {
+        } elseif (this->_ts == null || $refreshTimestamp) {
             this->_ts = new FrozenTime();
         }
 

@@ -94,8 +94,8 @@ class SelectWithPivotLoader extends SelectLoader
             $query = $queryBuilder($query);
         }
 
-        if ($query->isAutoFieldsEnabled() === null) {
-            $query->enableAutoFields($query->clause('select') === []);
+        if ($query->isAutoFieldsEnabled() == null) {
+            $query->enableAutoFields($query->clause('select') == []);
         }
 
         // Ensure that association conditions are applied
@@ -153,7 +153,7 @@ class SelectWithPivotLoader extends SelectLoader
             $links[] = sprintf('%s.%s', $name, $key);
         }
 
-        if (count($links) === 1) {
+        if (count($links) == 1) {
             return $links[0];
         }
 

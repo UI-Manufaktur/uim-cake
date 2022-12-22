@@ -62,9 +62,9 @@ abstract class AbstractTransport
     protected function checkRecipient(Message $message): void
     {
         if (
-            $message->getTo() === []
-            && $message->getCc() === []
-            && $message->getBcc() === []
+            $message->getTo() == []
+            && $message->getCc() == []
+            && $message->getBcc() == []
         ) {
             throw new CakeException(
                 'You must specify at least one recipient.'

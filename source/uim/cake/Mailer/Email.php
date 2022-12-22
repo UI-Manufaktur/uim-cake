@@ -121,7 +121,7 @@ class Email implements JsonSerializable, Serializable
     {
         this->message = new this->messageClass();
 
-        if ($config === null) {
+        if ($config == null) {
             $config = Mailer::getConfig('default');
         }
 
@@ -157,7 +157,7 @@ class Email implements JsonSerializable, Serializable
     {
         $result = this->message->$method(...$args);
 
-        if (strpos($method, 'get') === 0) {
+        if (strpos($method, 'get') == 0) {
             return $result;
         }
 
@@ -278,7 +278,7 @@ class Email implements JsonSerializable, Serializable
      */
     function message(?string $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             return this->message->getBody();
         }
 
@@ -420,7 +420,7 @@ class Email implements JsonSerializable, Serializable
      */
     function getRenderer(): Renderer
     {
-        if (this->renderer === null) {
+        if (this->renderer == null) {
             this->renderer = new Renderer();
         }
 
@@ -512,14 +512,14 @@ class Email implements JsonSerializable, Serializable
         if (is_array($message)) {
             $instance->setViewVars($message);
             $message = null;
-        } elseif ($message === null) {
+        } elseif ($message == null) {
             $config = $instance->getProfile();
             if (array_key_exists('message', $config)) {
                 $message = $config['message'];
             }
         }
 
-        if ($send === true) {
+        if ($send == true) {
             $instance->send($message);
         }
 
@@ -571,7 +571,7 @@ class Email implements JsonSerializable, Serializable
             unset($config['viewConfig']);
         }
 
-        if (this->message === null) {
+        if (this->message == null) {
             this->message = new this->messageClass();
         }
         this->message->createFromArray($config);

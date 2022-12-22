@@ -387,7 +387,7 @@ abstract class Association
      */
     function getTarget(): Table
     {
-        if (this->_targetTable === null) {
+        if (this->_targetTable == null) {
             if (strpos(this->_className, '.')) {
                 [$plugin] = pluginSplit(this->_className, true);
                 $registryAlias = (string)$plugin . this->_name;
@@ -414,7 +414,7 @@ abstract class Association
 
                     throw new RuntimeException(sprintf(
                         $errorMessage,
-                        this->_sourceTable === null ? 'null' : get_class(this->_sourceTable),
+                        this->_sourceTable == null ? 'null' : get_class(this->_sourceTable),
                         this->getName(),
                         this->type(),
                         get_class(this->_targetTable),
@@ -476,7 +476,7 @@ abstract class Association
      */
     function getBindingKey()
     {
-        if (this->_bindingKey === null) {
+        if (this->_bindingKey == null) {
             this->_bindingKey = this->isOwningSide(this->getSource()) ?
                 this->getSource()->getPrimaryKey() :
                 this->getTarget()->getPrimaryKey();
@@ -549,7 +549,7 @@ abstract class Association
     {
         $strategy = $options['strategy'] ?? this->getStrategy();
 
-        return $strategy === this::STRATEGY_JOIN;
+        return $strategy == this::STRATEGY_JOIN;
     }
 
     /**
@@ -735,7 +735,7 @@ abstract class Association
         ];
 
         // This is set by joinWith to disable matching results
-        if ($options['fields'] === false) {
+        if ($options['fields'] == false) {
             $options['fields'] = [];
             $options['includeFields'] = false;
         }
@@ -764,7 +764,7 @@ abstract class Association
 
         if (
             !empty($options['matching']) &&
-            this->_strategy === static::STRATEGY_JOIN &&
+            this->_strategy == static::STRATEGY_JOIN &&
             $dummy->getContain()
         ) {
             throw new RuntimeException(
@@ -939,7 +939,7 @@ abstract class Association
     {
         $strategy = $options['strategy'] ?? this->getStrategy();
 
-        return $strategy === static::STRATEGY_SELECT;
+        return $strategy == static::STRATEGY_SELECT;
     }
 
     /**
@@ -965,7 +965,7 @@ abstract class Association
      */
     protected function _appendFields(Query $query, Query $surrogate, array $options): void
     {
-        if ($query->getEagerLoader()->isAutoFieldsEnabled() === false) {
+        if ($query->getEagerLoader()->isAutoFieldsEnabled() == false) {
             return;
         }
 

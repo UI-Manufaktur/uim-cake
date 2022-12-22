@@ -201,7 +201,7 @@ class Marshaller
                 continue;
             }
 
-            if ($value === '' && in_array($key, $primaryKey, true)) {
+            if ($value == '' && in_array($key, $primaryKey, true)) {
                 // Skip marshalling '' for pk fields.
                 continue;
             }
@@ -252,7 +252,7 @@ class Marshaller
         }
 
         $validator = null;
-        if ($options['validate'] === true) {
+        if ($options['validate'] == true) {
             $validator = this->_table->getValidator();
         } elseif (is_string($options['validate'])) {
             $validator = this->_table->getValidator($options['validate']);
@@ -266,7 +266,7 @@ class Marshaller
             $validator = $options['validate'];
         }
 
-        if ($validator === null) {
+        if ($validator == null) {
             throw new RuntimeException(
                 sprintf('validate must be a boolean, a string or an object. Got %s.', getTypeName($options['validate']))
             );
@@ -319,7 +319,7 @@ class Marshaller
         if (in_array($type, $types, true)) {
             return $marshaller->one($value, $options);
         }
-        if ($type === Association::ONE_TO_MANY || $type === Association::MANY_TO_MANY) {
+        if ($type == Association::ONE_TO_MANY || $type == Association::MANY_TO_MANY) {
             $hasIds = array_key_exists('_ids', $value);
             $onlyIds = array_key_exists('onlyIds', $options) && $options['onlyIds'];
 
@@ -330,7 +330,7 @@ class Marshaller
                 return [];
             }
         }
-        if ($type === Association::MANY_TO_MANY) {
+        if ($type == Association::MANY_TO_MANY) {
             /** @psalm-suppress ArgumentTypeCoercion */
             return $marshaller->_belongsToMany($assoc, $value, $options);
         }
@@ -402,9 +402,9 @@ class Marshaller
             if (!is_array($row)) {
                 continue;
             }
-            if (array_intersect_key($primaryKey, $row) === $primaryKey) {
+            if (array_intersect_key($primaryKey, $row) == $primaryKey) {
                 $keys = array_intersect_key($row, $primaryKey);
-                if (count($keys) === $primaryCount) {
+                if (count($keys) == $primaryCount) {
                     $rowConditions = [];
                     foreach ($keys as $key => $value) {
                         $rowConditions[][$target->aliasField($key)] = $value;
@@ -583,11 +583,11 @@ class Marshaller
                 if (
                     (
                         is_scalar($value)
-                        && $original === $value
+                        && $original == $value
                     )
                     || (
-                        $value === null
-                        && $original === $value
+                        $value == null
+                        && $original == $value
                     )
                     || (
                         is_object($value)
@@ -675,7 +675,7 @@ class Marshaller
                 return implode(';', $keys);
             })
             ->map(function ($element, $key) {
-                return $key === '' ? $element : $element[0];
+                return $key == '' ? $element : $element[0];
             })
             ->toArray();
 
@@ -702,7 +702,7 @@ class Marshaller
                 return explode(';', (string)$key);
             })
             ->filter(function ($keys) use ($primary) {
-                return count(Hash::filter($keys)) === count($primary);
+                return count(Hash::filter($keys)) == count($primary);
             })
             ->reduce(function ($conditions, $keys) use ($primary) {
                 $fields = array_map([this->_table, 'aliasField'], $primary);
@@ -758,12 +758,12 @@ class Marshaller
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
             return $marshaller->merge($original, $value, $options);
         }
-        if ($type === Association::MANY_TO_MANY) {
+        if ($type == Association::MANY_TO_MANY) {
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
             return $marshaller->_mergeBelongsToMany($original, $assoc, $value, $options);
         }
 
-        if ($type === Association::ONE_TO_MANY) {
+        if ($type == Association::ONE_TO_MANY) {
             $hasIds = array_key_exists('_ids', $value);
             $onlyIds = array_key_exists('onlyIds', $options) && $options['onlyIds'];
             if ($hasIds && is_array($value['_ids'])) {

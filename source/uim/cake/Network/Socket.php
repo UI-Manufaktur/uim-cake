@@ -164,12 +164,12 @@ class Socket
         );
         restore_error_handler();
 
-        if (this->connection === null && (!$errNum || !$errStr)) {
+        if (this->connection == null && (!$errNum || !$errStr)) {
             this->setLastError($errNum, $errStr);
             throw new SocketException($errStr, $errNum);
         }
 
-        if (this->connection === null && this->_connectionErrors) {
+        if (this->connection == null && this->_connectionErrors) {
             $message = implode("\n", this->_connectionErrors);
             throw new SocketException($message, E_WARNING);
         }
@@ -368,7 +368,7 @@ class Socket
         while ($written < $totalBytes) {
             /** @psalm-suppress PossiblyNullArgument */
             $rv = fwrite(this->connection, substr($data, $written));
-            if ($rv === false || $rv === 0) {
+            if ($rv == false || $rv == 0) {
                 return $written;
             }
             $written += $rv;
@@ -475,15 +475,15 @@ class Socket
         }
         $method = this->_encryptMethods[$type . '_' . $clientOrServer];
 
-        if ($method === STREAM_CRYPTO_METHOD_TLS_CLIENT) {
+        if ($method == STREAM_CRYPTO_METHOD_TLS_CLIENT) {
             $method |= STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
         }
-        if ($method === STREAM_CRYPTO_METHOD_TLS_SERVER) {
+        if ($method == STREAM_CRYPTO_METHOD_TLS_SERVER) {
             $method |= STREAM_CRYPTO_METHOD_TLSv1_1_SERVER | STREAM_CRYPTO_METHOD_TLSv1_2_SERVER;
         }
 
         try {
-            if (this->connection === null) {
+            if (this->connection == null) {
                 throw new CakeException('You must call connect() first.');
             }
             $enableCryptoResult = stream_socket_enable_crypto(this->connection, $enable, $method);
@@ -492,7 +492,7 @@ class Socket
             throw new SocketException($e->getMessage(), null, $e);
         }
 
-        if ($enableCryptoResult === true) {
+        if ($enableCryptoResult == true) {
             this->encrypted = $enable;
 
             return;

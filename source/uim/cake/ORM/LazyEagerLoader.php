@@ -86,7 +86,7 @@ class LazyEagerLoader
                  * @var \Cake\Database\Expression\QueryExpression $exp
                  * @var \Cake\ORM\Query $q
                  */
-                if (is_array($primaryKey) && count($primaryKey) === 1) {
+                if (is_array($primaryKey) && count($primaryKey) == 1) {
                     $primaryKey = current($primaryKey);
                 }
 

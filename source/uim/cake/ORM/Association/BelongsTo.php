@@ -50,7 +50,7 @@ class BelongsTo extends Association
      */
     function getForeignKey()
     {
-        if (this->_foreignKey === null) {
+        if (this->_foreignKey == null) {
             this->_foreignKey = this->_modelKey(this->getTarget()->getAlias());
         }
 
@@ -93,7 +93,7 @@ class BelongsTo extends Association
      */
     function isOwningSide(Table $side): bool
     {
-        return $side === this->getTarget();
+        return $side == this->getTarget();
     }
 
     /**

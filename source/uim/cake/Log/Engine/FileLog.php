@@ -168,7 +168,7 @@ class FileLog extends BaseLog
 
         if (this->_file) {
             $filename = this->_file;
-        } elseif ($level === 'error' || $level === 'warning') {
+        } elseif ($level == 'error' || $level == 'warning') {
             $filename = 'error.log';
         } elseif (in_array($level, $debugTypes, true)) {
             $filename = 'debug.log';
@@ -200,7 +200,7 @@ class FileLog extends BaseLog
         }
 
         $rotate = this->_config['rotate'];
-        if ($rotate === 0) {
+        if ($rotate == 0) {
             $result = unlink($filePath);
         } else {
             $result = rename($filePath, $filePath . '.' . time());

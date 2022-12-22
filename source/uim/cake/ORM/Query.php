@@ -318,7 +318,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function getEagerLoader(): EagerLoader
     {
-        if (this->_eagerLoader === null) {
+        if (this->_eagerLoader == null) {
             this->_eagerLoader = new EagerLoader();
         }
 
@@ -444,7 +444,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
     function contain($associations, $override = false)
     {
         $loader = this->getEagerLoader();
-        if ($override === true) {
+        if ($override == true) {
             this->clearContain();
         }
 
@@ -505,7 +505,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
             $association = $table->getAssociation($name);
             $target = $association->getTarget();
             $primary = (array)$target->getPrimaryKey();
-            if (empty($primary) || $typeMap->type($target->aliasField($primary[0])) === null) {
+            if (empty($primary) || $typeMap->type($target->aliasField($primary[0])) == null) {
                 this->addDefaultTypes($target);
             }
             if (!empty($nested)) {
@@ -924,7 +924,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function count(): int
     {
-        if (this->_resultsCount === null) {
+        if (this->_resultsCount == null) {
             this->_resultsCount = this->_performCount();
         }
 
@@ -965,7 +965,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
 
         if (!$complex && this->_valueBinder != null) {
             $order = this->clause('order');
-            $complex = $order === null ? false : $order->hasNestedExpression();
+            $complex = $order == null ? false : $order->hasNestedExpression();
         }
 
         $count = ['count' => $query->func()->count('*')];
@@ -986,7 +986,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         $result = $statement->fetch('assoc');
         $statement->closeCursor();
 
-        if ($result === false) {
+        if ($result == false) {
             return 0;
         }
 
@@ -1105,7 +1105,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function triggerBeforeFind(): void
     {
-        if (!this->_beforeFindFired && this->_type === 'select') {
+        if (!this->_beforeFindFired && this->_type == 'select') {
             this->_beforeFindFired = true;
 
             $repository = this->getRepository();
@@ -1191,7 +1191,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
 
         $repository = this->getRepository();
 
-        if (!count($select) || this->_autoFields === true) {
+        if (!count($select) || this->_autoFields == true) {
             this->_hasFields = false;
             this->select($repository->getSchema()->columns());
             $select = this->clause('select');
@@ -1342,7 +1342,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function __call(string $method, array $arguments)
     {
-        if (this->type() === 'select') {
+        if (this->type() == 'select') {
             return this->_call($method, $arguments);
         }
 

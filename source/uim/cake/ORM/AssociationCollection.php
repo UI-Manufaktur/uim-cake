@@ -115,7 +115,7 @@ class AssociationCollection implements IteratorAggregate
     function getByProperty(string $prop): ?Association
     {
         foreach (this->_items as $assoc) {
-            if ($assoc->getProperty() === $prop) {
+            if ($assoc->getProperty() == $prop) {
                 return $assoc;
             }
         }
@@ -348,7 +348,7 @@ class AssociationCollection implements IteratorAggregate
      */
     function normalizeKeys($keys): array
     {
-        if ($keys === true) {
+        if ($keys == true) {
             $keys = this->keys();
         }
 

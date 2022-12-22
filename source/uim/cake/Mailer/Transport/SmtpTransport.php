@@ -234,7 +234,7 @@ class SmtpTransport extends AbstractTransport
 
         $auth = '';
         foreach (this->_lastResponse as $line) {
-            if (strlen($line['message']) === 0 || substr($line['message'], 0, 5) === 'AUTH ') {
+            if (strlen($line['message']) == 0 || substr($line['message'], 0, 5) == 'AUTH ') {
                 $auth = $line['message'];
                 break;
             }
@@ -324,7 +324,7 @@ class SmtpTransport extends AbstractTransport
         $password = this->_config['password'];
         if (empty(this->authType)) {
             $replyCode = this->_authPlain($username, $password);
-            if ($replyCode === '235') {
+            if ($replyCode == '235') {
                 return;
             }
 
@@ -333,13 +333,13 @@ class SmtpTransport extends AbstractTransport
             return;
         }
 
-        if (this->authType === self::AUTH_PLAIN) {
+        if (this->authType == self::AUTH_PLAIN) {
             this->_authPlain($username, $password);
 
             return;
         }
 
-        if (this->authType === self::AUTH_LOGIN) {
+        if (this->authType == self::AUTH_LOGIN) {
             this->_authLogin($username, $password);
 
             return;
@@ -374,7 +374,7 @@ class SmtpTransport extends AbstractTransport
     protected function _authLogin(string $username, string $password): void
     {
         $replyCode = this->_smtpSend('AUTH LOGIN', '334|500|502|504');
-        if ($replyCode === '334') {
+        if ($replyCode == '334') {
             try {
                 this->_smtpSend(base64_encode($username), '334');
             } catch (SocketException $e) {
@@ -385,7 +385,7 @@ class SmtpTransport extends AbstractTransport
             } catch (SocketException $e) {
                 throw new SocketException('SMTP server did not accept the password.', null, $e);
             }
-        } elseif ($replyCode === '504') {
+        } elseif ($replyCode == '504') {
             throw new SocketException('SMTP authentication method not allowed, check if SMTP server requires TLS.');
         } else {
             throw new SocketException(
@@ -458,7 +458,7 @@ class SmtpTransport extends AbstractTransport
         $lines = $message->getBody();
         $messages = [];
         foreach ($lines as $line) {
-            if (!empty($line) && ($line[0] === '.')) {
+            if (!empty($line) && ($line[0] == '.')) {
                 $messages[] = '.' . $line;
             } else {
                 $messages[] = $line;
@@ -560,7 +560,7 @@ class SmtpTransport extends AbstractTransport
             $startTime = time();
             while (substr($response, -2) != "\r\n" && (time() - $startTime < $timeout)) {
                 $bytes = this->_socket()->read();
-                if ($bytes === null) {
+                if ($bytes == null) {
                     break;
                 }
                 $response .= $bytes;
@@ -576,7 +576,7 @@ class SmtpTransport extends AbstractTransport
             this->_bufferResponseLines($responseLines);
 
             if (preg_match('/^(' . $checkCode . ')(.)/', $response, $code)) {
-                if ($code[2] === '-') {
+                if ($code[2] == '-') {
                     continue;
                 }
 
@@ -596,7 +596,7 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _socket(): Socket
     {
-        if (this->_socket === null) {
+        if (this->_socket == null) {
             throw new RuntimeException('Socket is null, but must be set.');
         }
 

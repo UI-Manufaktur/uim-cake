@@ -37,13 +37,13 @@ class IcuFormatter implements FormatterInterface
      */
     function format(string $locale, string $message, array $tokenValues): string
     {
-        if ($message === '') {
+        if ($message == '') {
             return $message;
         }
 
         $formatter = new MessageFormatter($locale, $message);
         $result = $formatter->format($tokenValues);
-        if ($result === false) {
+        if ($result == false) {
             throw new I18nException($formatter->getErrorMessage(), $formatter->getErrorCode());
         }
 

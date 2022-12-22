@@ -172,7 +172,7 @@ class EagerLoadable
      */
     function instance(): Association
     {
-        if (this->_instance === null) {
+        if (this->_instance == null) {
             throw new \RuntimeException('No instance set.');
         }
 

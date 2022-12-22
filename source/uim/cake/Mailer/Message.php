@@ -717,7 +717,7 @@ class Message implements JsonSerializable, Serializable
      */
     protected function validateEmail(string $email, string $context): void
     {
-        if (this->emailPattern === null) {
+        if (this->emailPattern == null) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 return;
             }
@@ -726,7 +726,7 @@ class Message implements JsonSerializable, Serializable
         }
 
         $context = ltrim($context, '_');
-        if ($email === '') {
+        if ($email == '') {
             throw new InvalidArgumentException(sprintf('The email set for "%s" is empty.', $context));
         }
         throw new InvalidArgumentException(sprintf('Invalid email set for "%s". You passed "%s".', $context, $email));
@@ -745,7 +745,7 @@ class Message implements JsonSerializable, Serializable
      */
     protected function setEmailSingle(string $varName, $email, ?string $name, string $throwMessage)
     {
-        if ($email === []) {
+        if ($email == []) {
             this->{$varName} = $email;
 
             return this;
@@ -775,7 +775,7 @@ class Message implements JsonSerializable, Serializable
     {
         if (!is_array($email)) {
             this->validateEmail($email, $varName);
-            if ($name === null) {
+            if ($name == null) {
                 $name = $email;
             }
             this->{$varName}[$email] = $name;
@@ -875,7 +875,7 @@ class Message implements JsonSerializable, Serializable
     {
         this->createBoundary();
 
-        if ($include === array_values($include)) {
+        if ($include == array_values($include)) {
             $include = array_fill_keys($include, true);
         }
         $defaults = array_fill_keys(
@@ -908,7 +908,7 @@ class Message implements JsonSerializable, Serializable
             }
         }
         if ($include['sender']) {
-            if (key(this->sender) === key(this->from)) {
+            if (key(this->sender) == key(this->from)) {
                 $headers['Sender'] = '';
             } else {
                 $headers['Sender'] = (string)current(this->formatAddress(this->sender));
@@ -920,7 +920,7 @@ class Message implements JsonSerializable, Serializable
             $headers['Date'] = date(DATE_RFC2822);
         }
         if (this->messageId != false) {
-            if (this->messageId === true) {
+            if (this->messageId == true) {
                 this->messageId = '<' . str_replace('-', '', Text::uuid()) . '@' . this->domain . '>';
             }
 
@@ -938,11 +938,11 @@ class Message implements JsonSerializable, Serializable
         $headers['MIME-Version'] = '1.0';
         if (this->attachments) {
             $headers['Content-Type'] = 'multipart/mixed; boundary="' . (string)this->boundary . '"';
-        } elseif (this->emailFormat === static::MESSAGE_BOTH) {
+        } elseif (this->emailFormat == static::MESSAGE_BOTH) {
             $headers['Content-Type'] = 'multipart/alternative; boundary="' . (string)this->boundary . '"';
-        } elseif (this->emailFormat === static::MESSAGE_TEXT) {
+        } elseif (this->emailFormat == static::MESSAGE_TEXT) {
             $headers['Content-Type'] = 'text/plain; charset=' . this->getContentTypeCharset();
-        } elseif (this->emailFormat === static::MESSAGE_HTML) {
+        } elseif (this->emailFormat == static::MESSAGE_HTML) {
             $headers['Content-Type'] = 'text/html; charset=' . this->getContentTypeCharset();
         }
         $headers['Content-Transfer-Encoding'] = this->getContentTransferEncoding();
@@ -995,11 +995,11 @@ class Message implements JsonSerializable, Serializable
     {
         $return = [];
         foreach ($address as $email => $alias) {
-            if ($email === $alias) {
+            if ($email == $alias) {
                 $return[] = $email;
             } else {
                 $encoded = this->encodeForHeader($alias);
-                if ($encoded === $alias && preg_match('/[^a-z0-9 ]/i', $encoded)) {
+                if ($encoded == $alias && preg_match('/[^a-z0-9 ]/i', $encoded)) {
                     $encoded = '"' . str_replace('"', '\"', $encoded) . '"';
                 }
                 $return[] = sprintf('%s <%s>', $encoded, $email);
@@ -1045,7 +1045,7 @@ class Message implements JsonSerializable, Serializable
     {
         $format = this->emailFormat;
 
-        if ($format === static::MESSAGE_BOTH) {
+        if ($format == static::MESSAGE_BOTH) {
             return [static::MESSAGE_HTML, static::MESSAGE_TEXT];
         }
 
@@ -1184,7 +1184,7 @@ class Message implements JsonSerializable, Serializable
             } elseif (is_string($fileInfo['file'])) {
                 $fileName = $fileInfo['file'];
                 $fileInfo['file'] = realpath($fileInfo['file']);
-                if ($fileInfo['file'] === false || !file_exists($fileInfo['file'])) {
+                if ($fileInfo['file'] == false || !file_exists($fileInfo['file'])) {
                     throw new InvalidArgumentException(sprintf('File not found: "%s"', $fileName));
                 }
                 if (is_int($name)) {
@@ -1277,10 +1277,10 @@ class Message implements JsonSerializable, Serializable
     protected function createBoundary(): void
     {
         if (
-            this->boundary === null &&
+            this->boundary == null &&
             (
                 this->attachments ||
-                this->emailFormat === static::MESSAGE_BOTH
+                this->emailFormat == static::MESSAGE_BOTH
             )
         ) {
             this->boundary = md5(Security::randomBytes(16));
@@ -1300,7 +1300,7 @@ class Message implements JsonSerializable, Serializable
         $contentIds = array_filter((array)Hash::extract(this->attachments, '{s}.contentId'));
         $hasInlineAttachments = count($contentIds) > 0;
         $hasAttachments = !empty(this->attachments);
-        $hasMultipleTypes = this->emailFormat === static::MESSAGE_BOTH;
+        $hasMultipleTypes = this->emailFormat == static::MESSAGE_BOTH;
         $multiPart = ($hasAttachments || $hasMultipleTypes);
 
         /** @var string $boundary */
@@ -1322,8 +1322,8 @@ class Message implements JsonSerializable, Serializable
         }
 
         if (
-            this->emailFormat === static::MESSAGE_TEXT
-            || this->emailFormat === static::MESSAGE_BOTH
+            this->emailFormat == static::MESSAGE_TEXT
+            || this->emailFormat == static::MESSAGE_BOTH
         ) {
             if ($multiPart) {
                 $msg[] = '--' . $textBoundary;
@@ -1338,8 +1338,8 @@ class Message implements JsonSerializable, Serializable
         }
 
         if (
-            this->emailFormat === static::MESSAGE_HTML
-            || this->emailFormat === static::MESSAGE_BOTH
+            this->emailFormat == static::MESSAGE_HTML
+            || this->emailFormat == static::MESSAGE_BOTH
         ) {
             if ($multiPart) {
                 $msg[] = '--' . $textBoundary;
@@ -1387,7 +1387,7 @@ class Message implements JsonSerializable, Serializable
      */
     protected function attachFiles(?string $boundary = null): array
     {
-        if ($boundary === null) {
+        if ($boundary == null) {
             /** @var string $boundary */
             $boundary = this->boundary;
         }
@@ -1427,7 +1427,7 @@ class Message implements JsonSerializable, Serializable
      */
     protected function attachInlineFiles(?string $boundary = null): array
     {
-        if ($boundary === null) {
+        if ($boundary == null) {
             /** @var string $boundary */
             $boundary = this->boundary;
         }
@@ -1590,11 +1590,11 @@ class Message implements JsonSerializable, Serializable
      */
     protected function encodeString(string $text, string $charset): string
     {
-        if (this->appCharset === $charset) {
+        if (this->appCharset == $charset) {
             return $text;
         }
 
-        if (this->appCharset === null) {
+        if (this->appCharset == null) {
             return mb_convert_encoding($text, $charset);
         }
 
@@ -1610,13 +1610,13 @@ class Message implements JsonSerializable, Serializable
      */
     protected function wrap(?string $message = null, int $wrapLength = self::LINE_LENGTH_MUST): array
     {
-        if ($message === null || $message === '') {
+        if ($message == null || $message == '') {
             return [''];
         }
         $message = str_replace(["\r\n", "\r"], "\n", $message);
         $lines = explode("\n", $message);
         $formatted = [];
-        $cut = ($wrapLength === static::LINE_LENGTH_MUST);
+        $cut = ($wrapLength == static::LINE_LENGTH_MUST);
 
         foreach ($lines as $line) {
             if (empty($line) && $line != '0') {
@@ -1642,7 +1642,7 @@ class Message implements JsonSerializable, Serializable
                 $char = $line[$i];
                 if ($tagOpen) {
                     $tag .= $char;
-                    if ($char === '>') {
+                    if ($char == '>') {
                         $tagLength = strlen($tag);
                         if ($tagLength + $tmpLineLength < $wrapLength) {
                             $tmpLine .= $tag;
@@ -1668,30 +1668,30 @@ class Message implements JsonSerializable, Serializable
                     }
                     continue;
                 }
-                if ($char === '<') {
+                if ($char == '<') {
                     $tagOpen = true;
                     $tag = '<';
                     continue;
                 }
-                if ($char === ' ' && $tmpLineLength >= $wrapLength) {
+                if ($char == ' ' && $tmpLineLength >= $wrapLength) {
                     $formatted[] = $tmpLine;
                     $tmpLineLength = 0;
                     continue;
                 }
                 $tmpLine .= $char;
                 $tmpLineLength++;
-                if ($tmpLineLength === $wrapLength) {
+                if ($tmpLineLength == $wrapLength) {
                     $nextChar = $line[$i + 1] ?? '';
-                    if ($nextChar === ' ' || $nextChar === '<') {
+                    if ($nextChar == ' ' || $nextChar == '<') {
                         $formatted[] = trim($tmpLine);
                         $tmpLine = '';
                         $tmpLineLength = 0;
-                        if ($nextChar === ' ') {
+                        if ($nextChar == ' ') {
                             $i++;
                         }
                     } else {
                         $lastSpace = strrpos($tmpLine, ' ');
-                        if ($lastSpace === false) {
+                        if ($lastSpace == false) {
                             continue;
                         }
                         $formatted[] = trim(substr($tmpLine, 0, $lastSpace));
@@ -1750,7 +1750,7 @@ class Message implements JsonSerializable, Serializable
      */
     protected function encodeForHeader(string $text): string
     {
-        if (this->appCharset === null) {
+        if (this->appCharset == null) {
             return $text;
         }
 
@@ -1771,7 +1771,7 @@ class Message implements JsonSerializable, Serializable
      */
     protected function decodeForHeader(string $text): string
     {
-        if (this->appCharset === null) {
+        if (this->appCharset == null) {
             return $text;
         }
 

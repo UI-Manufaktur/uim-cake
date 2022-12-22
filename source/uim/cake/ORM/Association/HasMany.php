@@ -98,7 +98,7 @@ class HasMany extends Association
      */
     function isOwningSide(Table $side): bool
     {
-        return $side === this->getSource();
+        return $side == this->getSource();
     }
 
     /**
@@ -173,7 +173,7 @@ class HasMany extends Association
         $options['_sourceTable'] = this->getSource();
 
         if (
-            this->_saveStrategy === self::SAVE_REPLACE &&
+            this->_saveStrategy == self::SAVE_REPLACE &&
             !this->_unlinkAssociated($foreignKeyReference, $entity, this->getTarget(), $targetEntities, $options)
         ) {
             return false;
@@ -350,7 +350,7 @@ class HasMany extends Association
         } else {
             $options += ['cleanProperty' => true];
         }
-        if (count($targetEntities) === 0) {
+        if (count($targetEntities) == 0) {
             return;
         }
 
@@ -591,7 +591,7 @@ class HasMany extends Association
      */
     function getForeignKey()
     {
-        if (this->_foreignKey === null) {
+        if (this->_foreignKey == null) {
             this->_foreignKey = this->_modelKey(this->getSource()->getTable());
         }
 

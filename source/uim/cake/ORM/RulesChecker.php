@@ -205,13 +205,13 @@ class RulesChecker extends BaseRulesChecker
         if ($association instanceof Association) {
             $associationAlias = $association->getName();
 
-            if ($errorField === null) {
+            if ($errorField == null) {
                 $errorField = $association->getProperty();
             }
         } elseif (is_string($association)) {
             $associationAlias = $association;
 
-            if ($errorField === null) {
+            if ($errorField == null) {
                 $repository = this->_options['repository'] ?? null;
                 if ($repository instanceof Table) {
                     $association = $repository->getAssociation($association);

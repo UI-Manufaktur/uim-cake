@@ -180,7 +180,7 @@ class BelongsToMany extends Association
      */
     function getTargetForeignKey()
     {
-        if (this->_targetForeignKey === null) {
+        if (this->_targetForeignKey == null) {
             this->_targetForeignKey = this->_modelKey(this->getTarget()->getAlias());
         }
 
@@ -206,7 +206,7 @@ class BelongsToMany extends Association
      */
     function getForeignKey()
     {
-        if (this->_foreignKey === null) {
+        if (this->_foreignKey == null) {
             this->_foreignKey = this->_modelKey(this->getSource()->getTable());
         }
 
@@ -259,14 +259,14 @@ class BelongsToMany extends Association
      */
     function junction($table = null): Table
     {
-        if ($table === null && this->_junctionTable != null) {
+        if ($table == null && this->_junctionTable != null) {
             return this->_junctionTable;
         }
 
         $tableLocator = this->getTableLocator();
-        if ($table === null && this->_through) {
+        if ($table == null && this->_through) {
             $table = this->_through;
-        } elseif ($table === null) {
+        } elseif ($table == null) {
             $tableName = this->_junctionTableName();
             $tableAlias = Inflector::camelize($tableName);
 
@@ -288,7 +288,7 @@ class BelongsToMany extends Association
 
         $source = this->getSource();
         $target = this->getTarget();
-        if ($source->getAlias() === $target->getAlias()) {
+        if ($source->getAlias() == $target->getAlias()) {
             throw new InvalidArgumentException(sprintf(
                 'The `%s` association on `%s` cannot target the same table.',
                 this->getName(),
@@ -695,7 +695,7 @@ class BelongsToMany extends Association
             $targetEntity = [];
         }
 
-        if ($strategy === self::SAVE_APPEND) {
+        if ($strategy == self::SAVE_APPEND) {
             return this->_saveTarget($entity, $targetEntity, $options);
         }
 
@@ -755,7 +755,7 @@ class BelongsToMany extends Association
             if (!empty($options['atomic'])) {
                 $original[$k]->setErrors($entity->getErrors());
             }
-            if ($saved === false) {
+            if ($saved == false) {
                 return false;
             }
         }
@@ -1012,7 +1012,7 @@ class BelongsToMany extends Association
         $matching = [];
         $alias = this->getAlias() . '.';
         foreach ($conditions as $field => $value) {
-            if (is_string($field) && strpos($field, $alias) === 0) {
+            if (is_string($field) && strpos($field, $alias) == 0) {
                 $matching[$field] = $value;
             } elseif (is_int($field) || $value instanceof ExpressionInterface) {
                 $matching[$field] = $value;
@@ -1041,7 +1041,7 @@ class BelongsToMany extends Association
         $alias = this->_junctionAssociationName() . '.';
         foreach ($conditions as $field => $value) {
             $isString = is_string($field);
-            if ($isString && strpos($field, $alias) === 0) {
+            if ($isString && strpos($field, $alias) == 0) {
                 $matching[$field] = $value;
             }
             // Assume that operators contain junction conditions.
@@ -1094,7 +1094,7 @@ class BelongsToMany extends Association
     protected function _appendJunctionJoin(Query $query, ?array $conditions = null): Query
     {
         $junctionTable = this->junction();
-        if ($conditions === null) {
+        if ($conditions == null) {
             $belongsTo = $junctionTable->getAssociation(this->getTarget()->getAlias());
             $conditions = $belongsTo->_joinCondition([
                 'foreignKey' => this->getTargetForeignKey(),
@@ -1215,7 +1215,7 @@ class BelongsToMany extends Association
 
                 $jointEntities = this->_collectJointEntities($sourceEntity, $targetEntities);
                 $inserts = this->_diffLinks($existing, $jointEntities, $targetEntities, $options);
-                if ($inserts === false) {
+                if ($inserts == false) {
                     return false;
                 }
 
@@ -1286,7 +1286,7 @@ class BelongsToMany extends Association
                         $matched = $existingKeys[$key] == $unmatchedKeys[$key];
                     } else {
                         // Use strict equality for all other values.
-                        $matched = $existingKeys[$key] === $unmatchedKeys[$key];
+                        $matched = $existingKeys[$key] == $unmatchedKeys[$key];
                     }
                     // Stop checks on first failure.
                     if (!$matched) {
@@ -1314,7 +1314,7 @@ class BelongsToMany extends Association
             }
             $key = array_values($entity->extract($primary));
             foreach ($present as $i => $data) {
-                if ($key === $data && !$entity->get($jointProperty)) {
+                if ($key == $data && !$entity->get($jointProperty)) {
                     unset($targetEntities[$k], $present[$i]);
                     break;
                 }
@@ -1453,7 +1453,7 @@ class BelongsToMany extends Association
      */
     protected function _junctionTableName(?string $name = null): string
     {
-        if ($name === null) {
+        if ($name == null) {
             if (empty(this->_junctionTableName)) {
                 $tablesNames = array_map('Cake\Utility\Inflector::underscore', [
                     this->getSource()->getTable(),

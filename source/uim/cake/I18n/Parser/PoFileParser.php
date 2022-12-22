@@ -86,24 +86,24 @@ class PoFileParser
         while ($line = fgets($stream)) {
             $line = trim($line);
 
-            if ($line === '') {
+            if ($line == '') {
                 // Whitespace indicated current item is done
                 this->_addMessage($messages, $item);
                 $item = $defaults;
                 $stage = [];
-            } elseif (substr($line, 0, 7) === 'msgid "') {
+            } elseif (substr($line, 0, 7) == 'msgid "') {
                 // We start a new msg so save previous
                 this->_addMessage($messages, $item);
                 /** @psalm-suppress InvalidArrayOffset */
                 $item['ids']['singular'] = substr($line, 7, -1);
                 $stage = ['ids', 'singular'];
-            } elseif (substr($line, 0, 8) === 'msgstr "') {
+            } elseif (substr($line, 0, 8) == 'msgstr "') {
                 $item['translated'] = substr($line, 8, -1);
                 $stage = ['translated'];
-            } elseif (substr($line, 0, 9) === 'msgctxt "') {
+            } elseif (substr($line, 0, 9) == 'msgctxt "') {
                 $item['context'] = substr($line, 9, -1);
                 $stage = ['context'];
-            } elseif ($line[0] === '"') {
+            } elseif ($line[0] == '"') {
                 switch (count($stage)) {
                     case 2:
                         /**
@@ -123,11 +123,11 @@ class PoFileParser
                         $item[$stage[0]] .= substr($line, 1, -1);
                         break;
                 }
-            } elseif (substr($line, 0, 14) === 'msgid_plural "') {
+            } elseif (substr($line, 0, 14) == 'msgid_plural "') {
                 /** @psalm-suppress InvalidArrayOffset */
                 $item['ids']['plural'] = substr($line, 14, -1);
                 $stage = ['ids', 'plural'];
-            } elseif (substr($line, 0, 7) === 'msgstr[') {
+            } elseif (substr($line, 0, 7) == 'msgstr[') {
                 /** @var int $size */
                 $size = strpos($line, ']');
                 $row = (int)substr($line, 7, 1);

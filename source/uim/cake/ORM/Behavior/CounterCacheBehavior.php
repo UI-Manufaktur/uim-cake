@@ -122,7 +122,7 @@ class CounterCacheBehavior extends Behavior
      */
     function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] === true) {
+        if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] == true) {
             return;
         }
 
@@ -139,7 +139,7 @@ class CounterCacheBehavior extends Behavior
                 if (
                     !is_callable($config) &&
                     isset($config['ignoreDirty']) &&
-                    $config['ignoreDirty'] === true &&
+                    $config['ignoreDirty'] == true &&
                     $entity->$entityAlias->isDirty($field)
                 ) {
                     this->_ignoreDirty[$registryAlias][$field] = true;
@@ -160,7 +160,7 @@ class CounterCacheBehavior extends Behavior
      */
     function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
     {
-        if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] === true) {
+        if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] == true) {
             return;
         }
 
@@ -180,7 +180,7 @@ class CounterCacheBehavior extends Behavior
      */
     function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] === true) {
+        if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] == true) {
             return;
         }
 
@@ -222,7 +222,7 @@ class CounterCacheBehavior extends Behavior
         $countConditions = $entity->extract($foreignKeys);
 
         foreach ($countConditions as $field => $value) {
-            if ($value === null) {
+            if ($value == null) {
                 $countConditions[$field . ' IS'] = $value;
                 unset($countConditions[$field]);
             }
@@ -244,7 +244,7 @@ class CounterCacheBehavior extends Behavior
 
             if (
                 isset(this->_ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field]) &&
-                this->_ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field] === true
+                this->_ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field] == true
             ) {
                 continue;
             }

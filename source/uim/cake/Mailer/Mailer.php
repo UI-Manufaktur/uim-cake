@@ -212,7 +212,7 @@ class Mailer implements EventListenerInterface
             this->modelClass = this->defaultTable;
         }
 
-        if ($config === null) {
+        if ($config == null) {
             $config = static::getConfig('default');
         }
 
@@ -238,7 +238,7 @@ class Mailer implements EventListenerInterface
      */
     function getRenderer(): Renderer
     {
-        if (this->renderer === null) {
+        if (this->renderer == null) {
             this->renderer = new Renderer();
         }
 
@@ -291,7 +291,7 @@ class Mailer implements EventListenerInterface
     function __call(string $method, array $args)
     {
         $result = this->message->$method(...$args);
-        if (strpos($method, 'get') === 0) {
+        if (strpos($method, 'get') == 0) {
             return $result;
         }
 
@@ -341,7 +341,7 @@ class Mailer implements EventListenerInterface
      */
     function send(?string $action = null, array $args = [], array $headers = []): array
     {
-        if ($action === null) {
+        if ($action == null) {
             return this->deliver();
         }
 
@@ -460,7 +460,7 @@ class Mailer implements EventListenerInterface
             unset($config['viewVars']);
         }
         if (isset($config['autoLayout'])) {
-            if ($config['autoLayout'] === false) {
+            if ($config['autoLayout'] == false) {
                 this->viewBuilder()->disableAutoLayout();
             }
             unset($config['autoLayout']);
@@ -515,7 +515,7 @@ class Mailer implements EventListenerInterface
      */
     function getTransport(): AbstractTransport
     {
-        if (this->transport === null) {
+        if (this->transport == null) {
             throw new BadMethodCallException(
                 'Transport was not defined. '
                 . 'You must set on using setTransport() or set `transport` option in your mailer profile.'
@@ -533,7 +533,7 @@ class Mailer implements EventListenerInterface
     protected function restore()
     {
         foreach (array_keys(this->clonedInstances) as $key) {
-            if (this->clonedInstances[$key] === null) {
+            if (this->clonedInstances[$key] == null) {
                 this->{$key} = null;
             } else {
                 this->{$key} = clone this->clonedInstances[$key];

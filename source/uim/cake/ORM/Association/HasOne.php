@@ -48,7 +48,7 @@ class HasOne extends Association
      */
     function getForeignKey()
     {
-        if (this->_foreignKey === null) {
+        if (this->_foreignKey == null) {
             this->_foreignKey = this->_modelKey(this->getSource()->getAlias());
         }
 
@@ -77,7 +77,7 @@ class HasOne extends Association
      */
     function isOwningSide(Table $side): bool
     {
-        return $side === this->getSource();
+        return $side == this->getSource();
     }
 
     /**

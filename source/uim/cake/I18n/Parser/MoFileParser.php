@@ -69,9 +69,9 @@ class MoFileParser
         $magic = unpack('V1', fread($stream, 4));
         $magic = hexdec(substr(dechex(current($magic)), -8));
 
-        if ($magic === self::MO_LITTLE_ENDIAN_MAGIC) {
+        if ($magic == self::MO_LITTLE_ENDIAN_MAGIC) {
             $isBigEndian = false;
-        } elseif ($magic === self::MO_BIG_ENDIAN_MAGIC) {
+        } elseif ($magic == self::MO_BIG_ENDIAN_MAGIC) {
             $isBigEndian = true;
         } else {
             throw new RuntimeException('Invalid format for MO translations file');
