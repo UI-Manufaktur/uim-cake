@@ -97,7 +97,7 @@ class SecurityComponent extends Component
         try {
             this->_secureRequired($controller);
 
-            if (this->_action === this->_config['blackHoleCallback']) {
+            if (this->_action == this->_config['blackHoleCallback']) {
                 throw new AuthSecurityException(sprintf(
                     'Action %s is defined as the blackhole callback.',
                     this->_action
@@ -206,7 +206,7 @@ class SecurityComponent extends Component
 
         $requireSecure = this->_config['requireSecure'];
         if (
-            ($requireSecure[0] === '*' ||
+            ($requireSecure[0] == '*' ||
                 in_array(this->_action, $requireSecure, true)
             ) &&
             !$controller->getRequest()->is('ssl')
@@ -358,7 +358,7 @@ class SecurityComponent extends Component
                 foreach ($unlockedFields as $off) {
                     $off = explode('.', $off);
                     $field = array_values(array_intersect(explode('.', $key), $off));
-                    $isUnlocked = ($field === $off);
+                    $isUnlocked = ($field == $off);
                     if ($isUnlocked) {
                         break;
                     }
@@ -540,7 +540,7 @@ class SecurityComponent extends Component
         foreach ($dataFields as $key => $value) {
             if (is_int($key)) {
                 $foundKey = array_search($value, $expectedFields, true);
-                if ($foundKey === false) {
+                if ($foundKey == false) {
                     $messages[] = sprintf($intKeyMessage, $value);
                 } else {
                     unset($expectedFields[$foundKey]);
@@ -565,7 +565,7 @@ class SecurityComponent extends Component
      */
     protected function _debugExpectedFields(array $expectedFields = [], string $missingMessage = ''): ?string
     {
-        if (count($expectedFields) === 0) {
+        if (count($expectedFields) == 0) {
             return null;
         }
 

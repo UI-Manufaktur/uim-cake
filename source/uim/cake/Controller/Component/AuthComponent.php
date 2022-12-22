@@ -268,7 +268,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
         $controller = $event->getSubject();
 
         $action = $controller->getRequest()->getParam('action');
-        if ($action === null || !$controller->isAction($action)) {
+        if ($action == null || !$controller->isAction($action)) {
             return null;
         }
 
@@ -351,7 +351,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
         }
         $response = $controller->getResponse();
         $auth = end(this->_authenticateObjects);
-        if ($auth === false) {
+        if ($auth == false) {
             throw new CakeException('At least one authenticate object must be available.');
         }
         $result = $auth->unauthenticated($controller->getRequest(), $response);
@@ -380,14 +380,14 @@ class AuthComponent extends Component implements EventDispatcherInterface
         $urlToRedirectBackTo = this->_getUrlToRedirectBackTo();
 
         $loginAction = this->_config['loginAction'];
-        if ($urlToRedirectBackTo === '/') {
+        if ($urlToRedirectBackTo == '/') {
             return $loginAction;
         }
 
         if (is_array($loginAction)) {
             $loginAction['?'][static::QUERY_STRING_REDIRECT] = $urlToRedirectBackTo;
         } else {
-            $char = strpos($loginAction, '?') === false ? '?' : '&';
+            $char = strpos($loginAction, '?') == false ? '?' : '&';
             $loginAction .= $char . static::QUERY_STRING_REDIRECT . '=' . urlencode($urlToRedirectBackTo);
         }
 
@@ -406,7 +406,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
         $url = Router::normalize($uri->getPath());
         $loginAction = Router::normalize(this->_config['loginAction']);
 
-        return $loginAction === $url;
+        return $loginAction == $url;
     }
 
     /**
@@ -418,12 +418,12 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     protected function _unauthorized(Controller $controller): ?Response
     {
-        if (this->_config['unauthorizedRedirect'] === false) {
+        if (this->_config['unauthorizedRedirect'] == false) {
             throw new ForbiddenException(this->_config['authError']);
         }
 
         this->flash(this->_config['authError']);
-        if (this->_config['unauthorizedRedirect'] === true) {
+        if (this->_config['unauthorizedRedirect'] == true) {
             $default = '/';
             if (!empty(this->_config['loginRedirect'])) {
                 $default = this->_config['loginRedirect'];
@@ -499,7 +499,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
             this->constructAuthorize();
         }
         foreach (this->_authorizeObjects as $authorizer) {
-            if ($authorizer->authorize($user, $request) === true) {
+            if ($authorizer->authorize($user, $request) == true) {
                 this->_authorizationProvider = $authorizer;
 
                 return true;
@@ -535,7 +535,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
                 $class = $alias;
             }
             $className = App::className($class, 'Auth', 'Authorize');
-            if ($className === null) {
+            if ($className == null) {
                 throw new CakeException(sprintf('Authorization adapter "%s" was not found.', $class));
             }
             if (!method_exists($className, 'authorize')) {
@@ -584,7 +584,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function allow($actions = null): void
     {
-        if ($actions === null) {
+        if ($actions == null) {
             $controller = this->_registry->getController();
             this->allowedActions = get_class_methods($controller);
 
@@ -615,7 +615,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function deny($actions = null): void
     {
-        if ($actions === null) {
+        if ($actions == null) {
             this->allowedActions = [];
 
             return;
@@ -680,7 +680,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
             return null;
         }
 
-        if ($key === null) {
+        if ($key == null) {
             return $user;
         }
 
@@ -744,7 +744,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
     function redirectUrl($url = null): string
     {
         $redirectUrl = this->getController()->getRequest()->getQuery(static::QUERY_STRING_REDIRECT);
-        if ($redirectUrl && (substr($redirectUrl, 0, 1) != '/' || substr($redirectUrl, 0, 2) === '//')) {
+        if ($redirectUrl && (substr($redirectUrl, 0, 1) != '/' || substr($redirectUrl, 0, 2) == '//')) {
             $redirectUrl = null;
         }
 
@@ -753,7 +753,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
         } elseif ($redirectUrl) {
             if (
                 this->_config['loginAction']
-                && Router::normalize($redirectUrl) === Router::normalize(this->_config['loginAction'])
+                && Router::normalize($redirectUrl) == Router::normalize(this->_config['loginAction'])
             ) {
                 $redirectUrl = this->_config['loginRedirect'];
             }
@@ -830,7 +830,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
                 $class = $alias;
             }
             $className = App::className($class, 'Auth', 'Authenticate');
-            if ($className === null) {
+            if ($className == null) {
                 throw new CakeException(sprintf('Authentication adapter "%s" was not found.', $class));
             }
             if (!method_exists($className, 'authenticate')) {
@@ -872,7 +872,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
             unset($config['className']);
         }
         $className = App::className($class, 'Auth/Storage', 'Storage');
-        if ($className === null) {
+        if ($className == null) {
             throw new CakeException(sprintf('Auth storage adapter "%s" was not found.', $class));
         }
         $request = this->getController()->getRequest();
@@ -891,7 +891,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function __get(string $name)
     {
-        if ($name === 'sessionKey') {
+        if ($name == 'sessionKey') {
             return this->storage()->getConfig('key');
         }
 
@@ -907,10 +907,10 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function __set(string $name, $value): void
     {
-        if ($name === 'sessionKey') {
+        if ($name == 'sessionKey') {
             this->_storage = null;
 
-            if ($value === false) {
+            if ($value == false) {
                 this->setConfig('storage', 'Memory');
 
                 return;
@@ -948,7 +948,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function flash($message): void
     {
-        if ($message === false) {
+        if ($message == false) {
             return;
         }
 

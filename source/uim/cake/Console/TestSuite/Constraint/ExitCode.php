@@ -47,7 +47,7 @@ class ExitCode extends Constraint
      */
     function matches($other): bool
     {
-        return $other === this->exitCode;
+        return $other == this->exitCode;
     }
 
     /**

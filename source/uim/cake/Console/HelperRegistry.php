@@ -61,7 +61,7 @@ class HelperRegistry extends ObjectRegistry
     protected function _resolveClassName(string $class): ?string
     {
         $name = App::className($class, 'Command/Helper', 'Helper');
-        if ($name === null) {
+        if ($name == null) {
             return App::className($class, 'Shell/Helper', 'Helper');
         }
 

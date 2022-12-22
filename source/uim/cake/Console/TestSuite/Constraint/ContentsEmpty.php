@@ -30,7 +30,7 @@ class ContentsEmpty extends ContentsBase
      */
     function matches($other): bool
     {
-        return this->contents === '';
+        return this->contents == '';
     }
 
     /**

@@ -81,7 +81,7 @@ class IniConfig implements ConfigEngineInterface
      */
     public this(?string $path = null, ?string $section = null)
     {
-        if ($path === null) {
+        if ($path == null) {
             $path = CONFIG;
         }
         this->_path = $path;
@@ -128,10 +128,10 @@ class IniConfig implements ConfigEngineInterface
     protected function _parseNestedValues(array $values): array
     {
         foreach ($values as $key => $value) {
-            if ($value === '1') {
+            if ($value == '1') {
                 $value = true;
             }
-            if ($value === '') {
+            if ($value == '') {
                 $value = false;
             }
             unset($values[$key]);
@@ -188,13 +188,13 @@ class IniConfig implements ConfigEngineInterface
      */
     protected function _value($value): string
     {
-        if ($value === null) {
+        if ($value == null) {
             return 'null';
         }
-        if ($value === true) {
+        if ($value == true) {
             return 'true';
         }
-        if ($value === false) {
+        if ($value == false) {
             return 'false';
         }
 

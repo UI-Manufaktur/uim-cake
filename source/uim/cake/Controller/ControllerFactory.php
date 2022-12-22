@@ -70,7 +70,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
     function create(ServerRequestInterface $request): Controller
     {
         $className = this->getControllerClass($request);
-        if ($className === null) {
+        if ($className == null) {
             throw this->missingController($request);
         }
 
@@ -210,7 +210,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
                 if (is_string($argument) && $type instanceof ReflectionNamedType) {
                     $typedArgument = this->coerceStringToType($argument, $type);
 
-                    if ($typedArgument === null) {
+                    if ($typedArgument == null) {
                         throw new InvalidParameterException([
                             'template' => 'failed_coercion',
                             'passed' => $argument,
@@ -270,9 +270,9 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
             case 'int':
                 return filter_var($argument, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
             case 'bool':
-                return $argument === '0' ? false : ($argument === '1' ? true : null);
+                return $argument == '0' ? false : ($argument == '1' ? true : null);
             case 'array':
-                return $argument === '' ? [] : explode(',', $argument);
+                return $argument == '' ? [] : explode(',', $argument);
         }
 
         return null;
@@ -304,7 +304,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
                     'Prefix inflection will be removed in 5.0'
                 );
 
-                if (strpos($prefix, '/') === false) {
+                if (strpos($prefix, '/') == false) {
                     $namespace .= '/' . Inflector::camelize($prefix);
                 } else {
                     $prefixes = array_map(
@@ -328,7 +328,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
             strpos($controller, '\\') != false ||
             strpos($controller, '/') != false ||
             strpos($controller, '.') != false ||
-            $firstChar === strtolower($firstChar)
+            $firstChar == strtolower($firstChar)
         ) {
             throw this->missingController($request);
         }

@@ -139,7 +139,7 @@ trait InstanceConfigTrait
     function getConfigOrFail(string $key)
     {
         $config = this->getConfig($key);
-        if ($config === null) {
+        if ($config == null) {
             throw new InvalidArgumentException(sprintf('Expected configuration `%s` not found.', $key));
         }
 
@@ -192,11 +192,11 @@ trait InstanceConfigTrait
      */
     protected function _configRead(?string $key)
     {
-        if ($key === null) {
+        if ($key == null) {
             return this->_config;
         }
 
-        if (strpos($key, '.') === false) {
+        if (strpos($key, '.') == false) {
             return this->_config[$key] ?? null;
         }
 
@@ -226,7 +226,7 @@ trait InstanceConfigTrait
      */
     protected function _configWrite($key, $value, $merge = false): void
     {
-        if (is_string($key) && $value === null) {
+        if (is_string($key) && $value == null) {
             this->_configDelete($key);
 
             return;
@@ -234,7 +234,7 @@ trait InstanceConfigTrait
 
         if ($merge) {
             $update = is_array($key) ? $key : [$key => $value];
-            if ($merge === 'shallow') {
+            if ($merge == 'shallow') {
                 this->_config = array_merge(this->_config, Hash::expand($update));
             } else {
                 this->_config = Hash::merge(this->_config, Hash::expand($update));
@@ -251,7 +251,7 @@ trait InstanceConfigTrait
             return;
         }
 
-        if (strpos($key, '.') === false) {
+        if (strpos($key, '.') == false) {
             this->_config[$key] = $value;
 
             return;
@@ -282,7 +282,7 @@ trait InstanceConfigTrait
      */
     protected function _configDelete(string $key): void
     {
-        if (strpos($key, '.') === false) {
+        if (strpos($key, '.') == false) {
             unset(this->_config[$key]);
 
             return;
@@ -301,7 +301,7 @@ trait InstanceConfigTrait
                 break;
             }
 
-            if ($i === $length - 1) {
+            if ($i == $length - 1) {
                 unset($update[$k]);
                 break;
             }

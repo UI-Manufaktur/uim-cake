@@ -47,7 +47,7 @@ class FunctionsBuilder
     function sum($expression, $types = []): AggregateExpression
     {
         $returnType = 'float';
-        if (current($types) === 'integer') {
+        if (current($types) == 'integer') {
             $returnType = 'integer';
         }
 
@@ -256,13 +256,13 @@ class FunctionsBuilder
      */
     function now(string $type = 'datetime'): FunctionExpression
     {
-        if ($type === 'datetime') {
+        if ($type == 'datetime') {
             return new FunctionExpression('NOW', [], [], 'datetime');
         }
-        if ($type === 'date') {
+        if ($type == 'date') {
             return new FunctionExpression('CURRENT_DATE', [], [], 'date');
         }
-        if ($type === 'time') {
+        if ($type == 'time') {
             return new FunctionExpression('CURRENT_TIME', [], [], 'time');
         }
 

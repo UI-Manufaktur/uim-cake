@@ -157,7 +157,7 @@ class BasePlugin implements PluginInterface
         $path = dirname($reflection->getFileName());
 
         // Trim off src
-        if (substr($path, -3) === 'src') {
+        if (substr($path, -3) == 'src') {
             $path = substr($path, 0, -3);
         }
         this->path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -233,7 +233,7 @@ class BasePlugin implements PluginInterface
     {
         this->checkHook($hook);
 
-        return this->{"{$hook}Enabled"} === true;
+        return this->{"{$hook}Enabled"} == true;
     }
 
     /**

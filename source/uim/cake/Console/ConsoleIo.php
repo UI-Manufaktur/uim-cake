@@ -493,7 +493,7 @@ class ConsoleIo
             $options
         );
         $in = '';
-        while ($in === '' || !in_array($in, $options, true)) {
+        while ($in == '' || !in_array($in, $options, true)) {
             $in = this->_getInput($prompt, $printOptions, $default);
         }
 
@@ -526,8 +526,8 @@ class ConsoleIo
         this->_out->write('<question>' . $prompt . "</question>$optionsText\n$defaultText> ", 0);
         $result = this->_in->read();
 
-        $result = $result === null ? '' : trim($result);
-        if ($default != null && $result === '') {
+        $result = $result == null ? '' : trim($result);
+        if ($default != null && $result == '') {
             return $default;
         }
 
@@ -551,11 +551,11 @@ class ConsoleIo
     {
         Log::drop('stdout');
         Log::drop('stderr');
-        if ($enable === false) {
+        if ($enable == false) {
             return;
         }
         $outLevels = ['notice', 'info'];
-        if ($enable === static::VERBOSE || $enable === true) {
+        if ($enable == static::VERBOSE || $enable == true) {
             $outLevels[] = 'debug';
         }
         if ($enable != static::QUIET) {
@@ -612,16 +612,16 @@ class ConsoleIo
         this->out();
         $forceOverwrite = $forceOverwrite || this->forceOverwrite;
 
-        if (file_exists($path) && $forceOverwrite === false) {
+        if (file_exists($path) && $forceOverwrite == false) {
             this->warning("File `{$path}` exists");
             $key = this->askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
             $key = strtolower($key);
 
-            if ($key === 'q') {
+            if ($key == 'q') {
                 this->error('Quitting.', 2);
                 throw new StopException('Not creating file. Quitting.');
             }
-            if ($key === 'a') {
+            if ($key == 'a') {
                 this->forceOverwrite = true;
                 $key = 'y';
             }

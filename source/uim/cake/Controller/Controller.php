@@ -192,11 +192,11 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     ) {
         if ($name != null) {
             this->name = $name;
-        } elseif (this->name === null && $request) {
+        } elseif (this->name == null && $request) {
             this->name = $request->getParam('controller');
         }
 
-        if (this->name === null) {
+        if (this->name == null) {
             [, $name] = namespaceSplit(static::class);
             this->name = substr($name, 0, -10);
         }
@@ -214,7 +214,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             this->modelClass = this->defaultTable;
         }
 
-        if (this->modelClass === null) {
+        if (this->modelClass == null) {
             $plugin = this->request->getParam('plugin');
             $modelClass = ($plugin ? $plugin . '.' : '') . this->name;
             this->_setModelClass($modelClass);
@@ -273,7 +273,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             return this->_components = $components;
         }
 
-        if (this->_components === null) {
+        if (this->_components == null) {
             this->_components = new ComponentRegistry(this);
         }
 
@@ -313,13 +313,13 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     function __get(string $name)
     {
         if (!empty(this->modelClass)) {
-            if (strpos(this->modelClass, '\\') === false) {
+            if (strpos(this->modelClass, '\\') == false) {
                 [, $class] = pluginSplit(this->modelClass, true);
             } else {
                 $class = App::shortName(this->modelClass, 'Model/Table', 'Table');
             }
 
-            if ($class === $name) {
+            if ($class == $name) {
                 return this->loadModel();
             }
         }
@@ -349,7 +349,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function __set(string $name, $value): void
     {
-        if ($name === 'components') {
+        if ($name == 'components') {
             triggerWarning(
                 'Support for loading components using $components property is removed. ' .
                 'Use this->loadComponent() instead in initialize().'
@@ -358,7 +358,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             return;
         }
 
-        if ($name === 'helpers') {
+        if ($name == 'helpers') {
             triggerWarning(
                 'Support for loading helpers using $helpers property is removed. ' .
                 'Use this->viewBuilder()->setHelpers() instead.'
@@ -552,7 +552,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
                 getTypeName($result)
             ));
         }
-        if ($result === null && this->isAutoRenderEnabled()) {
+        if ($result == null && this->isAutoRenderEnabled()) {
             $result = this->render();
         }
         if ($result) {
@@ -764,7 +764,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             return this->response;
         }
 
-        if ($builder->getTemplate() === null) {
+        if ($builder->getTemplate() == null) {
             $builder->setTemplate(this->request->getParam('action'));
         }
         $viewClass = this->chooseViewClass();
@@ -871,10 +871,10 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     function referer($default = '/', bool $local = true): string
     {
         $referer = this->request->referer($local);
-        if ($referer === null) {
+        if ($referer == null) {
             $url = Router::url($default, !$local);
             $base = this->request->getAttribute('base');
-            if ($local && $base && strpos($url, $base) === 0) {
+            if ($local && $base && strpos($url, $base) == 0) {
                 $url = substr($url, strlen($base));
                 if ($url[0] != '/') {
                     $url = '/' . $url;
@@ -910,7 +910,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             $table = $object;
         }
 
-        if (is_string($object) || $object === null) {
+        if (is_string($object) || $object == null) {
             $try = [$object, this->modelClass];
             foreach ($try as $tableName) {
                 if (empty($tableName)) {
@@ -943,7 +943,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         unset($settings['className']);
         if (is_string($paginator)) {
             $className = App::className($paginator, 'Datasource/Paging', 'Paginator');
-            if ($className === null) {
+            if ($className == null) {
                 throw new InvalidArgumentException('Invalid paginator: ' . $paginator);
             }
             $paginator = new $className();
@@ -997,7 +997,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             return false;
         }
 
-        return $method->isPublic() && $method->getName() === $action;
+        return $method->isPublic() && $method->getName() == $action;
     }
 
     /**

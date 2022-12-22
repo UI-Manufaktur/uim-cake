@@ -97,7 +97,7 @@ class CakeException extends RuntimeException
      */
     function responseHeader($header = null, $value = null): ?array
     {
-        if ($header === null) {
+        if ($header == null) {
             return this->_responseHeaders;
         }
 

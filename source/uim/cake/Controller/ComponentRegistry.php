@@ -60,7 +60,7 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
      */
     function getController(): Controller
     {
-        if (this->_Controller === null) {
+        if (this->_Controller == null) {
             throw new CakeException('Controller not set for ComponentRegistry');
         }
 

@@ -93,7 +93,7 @@ class Configure
         }
 
         if (isset($config['debug'])) {
-            if (static::$_hasIniSet === null) {
+            if (static::$_hasIniSet == null) {
                 static::$_hasIniSet = function_exists('ini_set');
             }
             if (static::$_hasIniSet) {
@@ -119,7 +119,7 @@ class Configure
      */
     public static function read(?string $var = null, $default = null)
     {
-        if ($var === null) {
+        if ($var == null) {
             return static::$_values;
         }
 
@@ -220,7 +220,7 @@ class Configure
      */
     public static function consume(string $var)
     {
-        if (strpos($var, '.') === false) {
+        if (strpos($var, '.') == false) {
             if (!isset(static::$_values[$var])) {
                 return null;
             }
@@ -452,7 +452,7 @@ class Configure
      */
     public static function store(string $name, string $cacheConfig = 'default', ?array $data = null): bool
     {
-        if ($data === null) {
+        if ($data == null) {
             $data = static::$_values;
         }
         if (!class_exists(Cache::class)) {

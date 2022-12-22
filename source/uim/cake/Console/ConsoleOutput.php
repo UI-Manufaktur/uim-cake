@@ -168,9 +168,9 @@ class ConsoleOutput
 
         if (
             (
-                DIRECTORY_SEPARATOR === '\\' &&
-                strpos(strtolower(php_uname('v')), 'windows 10') === false &&
-                strpos(strtolower((string)env('SHELL')), 'bash.exe') === false &&
+                DIRECTORY_SEPARATOR == '\\' &&
+                strpos(strtolower(php_uname('v')), 'windows 10') == false &&
+                strpos(strtolower((string)env('SHELL')), 'bash.exe') == false &&
                 !(bool)env('ANSICON') &&
                 env('ConEmuANSI') != 'ON'
             ) ||
@@ -211,10 +211,10 @@ class ConsoleOutput
      */
     function styleText(string $text): string
     {
-        if (this->_outputAs === static::RAW) {
+        if (this->_outputAs == static::RAW) {
             return $text;
         }
-        if (this->_outputAs === static::PLAIN) {
+        if (this->_outputAs == static::PLAIN) {
             $tags = implode('|', array_keys(static::$_styles));
 
             return preg_replace('#</?(?:' . $tags . ')>#', '', $text);

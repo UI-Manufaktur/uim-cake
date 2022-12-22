@@ -200,7 +200,7 @@ class ConsoleInputOption
      */
     function usage(): string
     {
-        $name = this->_short === '' ? '--' . this->_name : '-' . this->_short;
+        $name = this->_short == '' ? '--' . this->_name : '-' . this->_short;
         $default = '';
         if (this->_default != null && !is_bool(this->_default) && this->_default != '') {
             $default = ' ' . this->_default;
@@ -317,9 +317,9 @@ class ConsoleInputOption
             $short = '-' . this->_short;
         }
         $default = this->_default;
-        if ($default === true) {
+        if ($default == true) {
             $default = 'true';
-        } elseif ($default === false) {
+        } elseif ($default == false) {
             $default = 'false';
         }
         $option->addAttribute('short', $short);

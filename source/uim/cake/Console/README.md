@@ -106,7 +106,7 @@ class HelloCommand extends BaseCommand
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $color = $args->getOption('color');
-        if ($color === 'none') {
+        if ($color == 'none') {
             $io->out("Hello {$args->getArgument('name')}");
         } elseif ($color == 'green') {
             $io->out("<success>Hello {$args->getArgument('name')}</success>");

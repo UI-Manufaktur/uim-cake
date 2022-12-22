@@ -102,7 +102,7 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
             }
             $namespace = str_replace('\\', '/', $matches[1]);
             $prefix = 'App';
-            if ($namespace === 'Cake') {
+            if ($namespace == 'Cake') {
                 $prefix = 'CakePHP';
             } elseif (in_array($namespace, $plugins, true)) {
                 $prefix = $namespace;

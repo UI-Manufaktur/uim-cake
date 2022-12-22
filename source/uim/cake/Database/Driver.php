@@ -167,7 +167,7 @@ abstract class Driver implements DriverInterface
      */
     function version(): string
     {
-        if (this->_version === null) {
+        if (this->_version == null) {
             this->connect();
             this->_version = (string)this->_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
         }
@@ -182,7 +182,7 @@ abstract class Driver implements DriverInterface
      */
     function getConnection()
     {
-        if (this->_connection === null) {
+        if (this->_connection == null) {
             throw new MissingConnectionException([
                 'driver' => App::shortName(static::class, 'Database/Driver'),
                 'reason' => 'Unknown',
@@ -339,13 +339,13 @@ abstract class Driver implements DriverInterface
      */
     function schemaValue($value): string
     {
-        if ($value === null) {
+        if ($value == null) {
             return 'NULL';
         }
-        if ($value === false) {
+        if ($value == false) {
             return 'FALSE';
         }
-        if ($value === true) {
+        if ($value == true) {
             return 'TRUE';
         }
         if (is_float($value)) {
@@ -355,13 +355,13 @@ abstract class Driver implements DriverInterface
         if (
             (
                 is_int($value) ||
-                $value === '0'
+                $value == '0'
             ) ||
             (
                 is_numeric($value) &&
-                strpos($value, ',') === false &&
+                strpos($value, ',') == false &&
                 substr($value, 0, 1) != '0' &&
-                strpos($value, 'e') === false
+                strpos($value, 'e') == false
             )
         ) {
             return (string)$value;
@@ -397,7 +397,7 @@ abstract class Driver implements DriverInterface
      */
     function isConnected(): bool
     {
-        if (this->_connection === null) {
+        if (this->_connection == null) {
             $connected = false;
         } else {
             try {

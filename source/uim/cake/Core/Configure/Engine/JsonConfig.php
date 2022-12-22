@@ -56,7 +56,7 @@ class JsonConfig implements ConfigEngineInterface
      */
     public this(?string $path = null)
     {
-        if ($path === null) {
+        if ($path == null) {
             $path = CONFIG;
         }
         this->_path = $path;

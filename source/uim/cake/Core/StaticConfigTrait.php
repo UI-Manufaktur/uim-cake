@@ -75,7 +75,7 @@ trait StaticConfigTrait
      */
     public static function setConfig($key, $config = null): void
     {
-        if ($config === null) {
+        if ($config == null) {
             if (!is_array($key)) {
                 throw new LogicException('If config is null, key must be an array.');
             }
@@ -258,10 +258,10 @@ REGEXP;
         foreach ($parsed as $k => $v) {
             if (is_int($k)) {
                 unset($parsed[$k]);
-            } elseif (strpos($k, '_') === 0) {
+            } elseif (strpos($k, '_') == 0) {
                 $exists[substr($k, 1)] = ($v != '');
                 unset($parsed[$k]);
-            } elseif ($v === '' && !$exists[$k]) {
+            } elseif ($v == '' && !$exists[$k]) {
                 unset($parsed[$k]);
             }
         }
@@ -276,11 +276,11 @@ REGEXP;
         parse_str($query, $queryArgs);
 
         foreach ($queryArgs as $key => $value) {
-            if ($value === 'true') {
+            if ($value == 'true') {
                 $queryArgs[$key] = true;
-            } elseif ($value === 'false') {
+            } elseif ($value == 'false') {
                 $queryArgs[$key] = false;
-            } elseif ($value === 'null') {
+            } elseif ($value == 'null') {
                 $queryArgs[$key] = null;
             }
         }

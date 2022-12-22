@@ -55,12 +55,12 @@ if (!function_exists('h')) {
             } else {
                 $text = '(object)' . get_class($text);
             }
-        } elseif ($text === null || is_scalar($text)) {
+        } elseif ($text == null || is_scalar($text)) {
             return $text;
         }
 
         static $defaultCharset = false;
-        if ($defaultCharset === false) {
+        if ($defaultCharset == false) {
             $defaultCharset = mb_internal_encoding() ?: 'UTF-8';
         }
 
@@ -115,7 +115,7 @@ if (!function_exists('namespaceSplit')) {
     function namespaceSplit(string $class): array
     {
         $pos = strrpos($class, '\\');
-        if ($pos === false) {
+        if ($pos == false) {
             return ['', $class];
         }
 
@@ -194,15 +194,15 @@ if (!function_exists('env')) {
      */
     function env(string $key, $default = null)
     {
-        if ($key === 'HTTPS') {
+        if ($key == 'HTTPS') {
             if (isset($_SERVER['HTTPS'])) {
                 return !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
             }
 
-            return strpos((string)env('SCRIPT_URI'), 'https://') === 0;
+            return strpos((string)env('SCRIPT_URI'), 'https://') == 0;
         }
 
-        if ($key === 'SCRIPT_NAME' && env('CGI_MODE') && isset($_ENV['SCRIPT_URL'])) {
+        if ($key == 'SCRIPT_NAME' && env('CGI_MODE') && isset($_ENV['SCRIPT_URL'])) {
             $key = 'SCRIPT_URL';
         }
 
@@ -213,7 +213,7 @@ if (!function_exists('env')) {
             $val = getenv($key);
         }
 
-        if ($key === 'REMOTE_ADDR' && $val === env('SERVER_ADDR')) {
+        if ($key == 'REMOTE_ADDR' && $val == env('SERVER_ADDR')) {
             $addr = env('HTTP_PC_REMOTE_ADDR');
             if ($addr != null) {
                 $val = $addr;
@@ -237,7 +237,7 @@ if (!function_exists('env')) {
             case 'PHP_SELF':
                 return str_replace((string)env('DOCUMENT_ROOT'), '', (string)env('SCRIPT_FILENAME'));
             case 'CGI_MODE':
-                return PHP_SAPI === 'cgi';
+                return PHP_SAPI == 'cgi';
         }
 
         return $default;

@@ -698,9 +698,9 @@ class ConsoleOptionParser
             if (isset(this->_subcommands[$token])) {
                 continue;
             }
-            if (substr($token, 0, 2) === '--') {
+            if (substr($token, 0, 2) == '--') {
                 $params = this->_parseLongOption($token, $params);
-            } elseif (substr($token, 0, 1) === '-') {
+            } elseif (substr($token, 0, 1) == '-') {
                 $params = this->_parseShortOption($token, $params);
             } else {
                 $args = this->_parseArg($token, $args);
@@ -770,14 +770,14 @@ class ConsoleOptionParser
      */
     function help(?string $subcommand = null, string $format = 'text', int $width = 72): string
     {
-        if ($subcommand === null) {
+        if ($subcommand == null) {
             $formatter = new HelpFormatter(this);
             $formatter->setAlias(this->rootName);
 
-            if ($format === 'text') {
+            if ($format == 'text') {
                 return $formatter->text($width);
             }
-            if ($format === 'xml') {
+            if ($format == 'xml') {
                 return (string)$formatter->xml();
             }
         }
@@ -796,7 +796,7 @@ class ConsoleOptionParser
                     ->addOptions(this->options())
                     ->addArguments(this->arguments());
             }
-            if ($subparser->getDescription() === '') {
+            if ($subparser->getDescription() == '') {
                 $subparser->setDescription($command->getRawHelp());
             }
             $subparser->setCommand(this->getCommand() . ' ' . $subcommand);
@@ -936,10 +936,10 @@ class ConsoleOptionParser
      */
     protected function _optionExists(string $name): bool
     {
-        if (substr($name, 0, 2) === '--') {
+        if (substr($name, 0, 2) == '--') {
             return isset(this->_options[substr($name, 2)]);
         }
-        if ($name[0] === '-' && $name[1] != '-') {
+        if ($name[0] == '-' && $name[1] != '-') {
             return isset(this->_shortOptions[$name[1]]);
         }
 

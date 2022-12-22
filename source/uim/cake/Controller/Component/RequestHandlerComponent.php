@@ -127,7 +127,7 @@ class RequestHandlerComponent extends Component
         $content = new ContentTypeNegotiation();
         $accept = $content->parseAccept($request);
 
-        if (empty($accept) || current($accept)[0] === 'text/html') {
+        if (empty($accept) || current($accept)[0] == 'text/html') {
             return;
         }
 
@@ -315,7 +315,7 @@ class RequestHandlerComponent extends Component
         }
 
         [$contentType] = explode(';', $request->contentType() ?? '');
-        if ($type === null) {
+        if ($type == null) {
             return $controller->getResponse()->mapType($contentType);
         }
 
@@ -323,7 +323,7 @@ class RequestHandlerComponent extends Component
             return null;
         }
 
-        return $type === $controller->getResponse()->mapType($contentType);
+        return $type == $controller->getResponse()->mapType($contentType);
     }
 
     /**
@@ -351,7 +351,7 @@ class RequestHandlerComponent extends Component
 
         $acceptRaw = $content->parseAccept($request);
         if (empty($acceptRaw)) {
-            return $type ? $type === this->ext : this->ext;
+            return $type ? $type == this->ext : this->ext;
         }
 
         /** @var array $accepts */
@@ -365,7 +365,7 @@ class RequestHandlerComponent extends Component
         }
 
         $types = (array)$type;
-        if (count($types) === 1) {
+        if (count($types) == 1) {
             if (this->ext) {
                 return in_array(this->ext, $types, true);
             }
@@ -423,7 +423,7 @@ class RequestHandlerComponent extends Component
         }
 
         $viewClass = null;
-        if ($builder->getClassName() === null) {
+        if ($builder->getClassName() == null) {
             $viewClass = App::className($view, 'View', 'View');
         }
 
@@ -470,7 +470,7 @@ class RequestHandlerComponent extends Component
         $controller = this->getController();
         $response = $controller->getResponse();
 
-        if (strpos($type, '/') === false) {
+        if (strpos($type, '/') == false) {
             $cType = $response->getMimeType($type);
         }
         if (is_array($cType)) {

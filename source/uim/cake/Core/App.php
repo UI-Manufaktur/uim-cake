@@ -125,7 +125,7 @@ class App
         $type = '/' . $type . '/';
 
         $pos = strrpos($class, $type);
-        if ($pos === false) {
+        if ($pos == false) {
             return $class;
         }
 
@@ -190,16 +190,16 @@ class App
      */
     public static function path(string $type, ?string $plugin = null): array
     {
-        if ($plugin === null && $type[0] === strtolower($type[0])) {
+        if ($plugin == null && $type[0] == strtolower($type[0])) {
             return (array)Configure::read('App.paths.' . $type);
         }
 
-        if ($type === 'templates') {
+        if ($type == 'templates') {
             /** @psalm-suppress PossiblyNullArgument */
             return [Plugin::templatePath($plugin)];
         }
 
-        if ($type === 'locales') {
+        if ($type == 'locales') {
             /** @psalm-suppress PossiblyNullArgument */
             return [Plugin::path($plugin) . 'resources' . DIRECTORY_SEPARATOR . 'locales' . DIRECTORY_SEPARATOR];
         }
@@ -260,7 +260,7 @@ class App
      */
     public static function core(string $type): array
     {
-        if ($type === 'templates') {
+        if ($type == 'templates') {
             return [CORE_PATH . 'templates' . DIRECTORY_SEPARATOR];
         }
 

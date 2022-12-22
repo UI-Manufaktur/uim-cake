@@ -87,13 +87,13 @@ trait ConsoleIntegrationTestTrait
     {
         $runner = this->makeRunner();
 
-        if (this->_out === null) {
+        if (this->_out == null) {
             this->_out = new StubConsoleOutput();
         }
-        if (this->_err === null) {
+        if (this->_err == null) {
             this->_err = new StubConsoleOutput();
         }
-        if (this->_in === null) {
+        if (this->_in == null) {
             this->_in = new StubConsoleInput($input);
         } elseif ($input) {
             throw new RuntimeException('You can use `$input` only if `$_in` property is null and will be reset.');
@@ -304,7 +304,7 @@ trait ConsoleIntegrationTestTrait
             $char = substr($command, $i, 1);
 
             // end of argument
-            if ($char === ' ' && !$inDQuote && !$inSQuote) {
+            if ($char == ' ' && !$inDQuote && !$inSQuote) {
                 if ($arg != '') {
                     $argv[] = $arg;
                 }
@@ -313,25 +313,25 @@ trait ConsoleIntegrationTestTrait
             }
 
             // exiting single quote
-            if ($inSQuote && $char === "'") {
+            if ($inSQuote && $char == "'") {
                 $inSQuote = false;
                 continue;
             }
 
             // exiting double quote
-            if ($inDQuote && $char === '"') {
+            if ($inDQuote && $char == '"') {
                 $inDQuote = false;
                 continue;
             }
 
             // entering double quote
-            if ($char === '"' && !$inSQuote) {
+            if ($char == '"' && !$inSQuote) {
                 $inDQuote = true;
                 continue;
             }
 
             // entering single quote
-            if ($char === "'" && !$inDQuote) {
+            if ($char == "'" && !$inDQuote) {
                 $inSQuote = true;
                 continue;
             }
