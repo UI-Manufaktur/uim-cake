@@ -140,7 +140,7 @@ class LoggingStatement extends StatementDecorator
      */
     protected function _log(): void
     {
-        if (this->loggedQuery === null) {
+        if (this->loggedQuery == null) {
             return;
         }
 
@@ -163,7 +163,7 @@ class LoggingStatement extends StatementDecorator
     {
         parent::bindValue($column, $value, $type);
 
-        if ($type === null) {
+        if ($type == null) {
             $type = 'string';
         }
         if (!ctype_digit($type)) {

@@ -38,13 +38,13 @@ class SqlserverStatement extends PDOStatement
      */
     function bindValue($column, $value, $type = 'string'): void
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = 'string';
         }
         if (!is_int($type)) {
             [$value, $type] = this->cast($value, $type);
         }
-        if ($type === PDO::PARAM_LOB) {
+        if ($type == PDO::PARAM_LOB) {
             /** @psalm-suppress UndefinedConstant */
             this->_statement->bindParam($column, $value, $type, 0, PDO::SQLSRV_ENCODING_BINARY);
         } else {

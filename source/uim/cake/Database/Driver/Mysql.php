@@ -129,7 +129,7 @@ class Mysql extends Driver
         }
         $config = this->_config;
 
-        if ($config['timezone'] === 'UTC') {
+        if ($config['timezone'] == 'UTC') {
             $config['timezone'] = '+0:00';
         }
 
@@ -200,7 +200,7 @@ class Mysql extends Driver
         $statement = this->_connection->prepare($isObject ? $query->sql() : $query);
         $result = new MysqlStatement($statement, this);
         /** @psalm-suppress PossiblyInvalidMethodCall */
-        if ($isObject && $query->isBufferedResultsEnabled() === false) {
+        if ($isObject && $query->isBufferedResultsEnabled() == false) {
             $result->bufferResults(false);
         }
 
@@ -212,7 +212,7 @@ class Mysql extends Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this->_schemaDialect === null) {
+        if (this->_schemaDialect == null) {
             this->_schemaDialect = new MysqlSchemaDialect(this);
         }
 
@@ -279,7 +279,7 @@ class Mysql extends Driver
     {
         this->version();
 
-        return this->serverType === static::SERVER_TYPE_MARIADB;
+        return this->serverType == static::SERVER_TYPE_MARIADB;
     }
 
     /**
@@ -289,7 +289,7 @@ class Mysql extends Driver
      */
     function version(): string
     {
-        if (this->_version === null) {
+        if (this->_version == null) {
             this->connect();
             this->_version = (string)this->_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
 

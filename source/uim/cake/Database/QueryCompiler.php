@@ -136,9 +136,9 @@ class QueryCompiler
     {
         return function ($part, $partName) use (&$sql, $query, $binder) {
             if (
-                $part === null ||
+                $part == null ||
                 (is_array($part) && empty($part)) ||
-                ($part instanceof Countable && count($part) === 0)
+                ($part instanceof Countable && count($part) == 0)
             ) {
                 return;
             }
@@ -217,7 +217,7 @@ class QueryCompiler
             $normalized[] = $p;
         }
 
-        if ($distinct === true) {
+        if ($distinct == true) {
             $distinct = 'DISTINCT ';
         }
 
@@ -286,7 +286,7 @@ class QueryCompiler
             if (isset($join['conditions']) && $join['conditions'] instanceof ExpressionInterface) {
                 $condition = $join['conditions']->sql($binder);
             }
-            if ($condition === '') {
+            if ($condition == '') {
                 $joins .= ' ON 1 = 1';
             } else {
                 $joins .= " ON {$condition}";
@@ -329,7 +329,7 @@ class QueryCompiler
             if ($part instanceof ExpressionInterface) {
                 $part = $part->sql($binder);
             }
-            if ($part[0] === '(') {
+            if ($part[0] == '(') {
                 $part = substr($part, 1, -1);
             }
             $set[] = $part;
@@ -352,7 +352,7 @@ class QueryCompiler
     {
         $parts = array_map(function ($p) use ($binder) {
             $p['query'] = $p['query']->sql($binder);
-            $p['query'] = $p['query'][0] === '(' ? trim($p['query'], '()') : $p['query'];
+            $p['query'] = $p['query'][0] == '(' ? trim($p['query'], '()') : $p['query'];
             $prefix = $p['all'] ? 'ALL ' : '';
             if (this->_orderedUnion) {
                 return "{$prefix}({$p['query']})";
@@ -430,7 +430,7 @@ class QueryCompiler
      */
     protected function _buildModifierPart(array $parts, Query $query, ValueBinder $binder): string
     {
-        if ($parts === []) {
+        if ($parts == []) {
             return '';
         }
 

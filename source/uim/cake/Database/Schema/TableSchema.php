@@ -405,7 +405,7 @@ class TableSchema implements TableSchemaInterface, SqlGeneratorInterface
 
         $type = this->getColumnType($column);
 
-        if ($type === null) {
+        if ($type == null) {
             return null;
         }
 
@@ -433,7 +433,7 @@ class TableSchema implements TableSchemaInterface, SqlGeneratorInterface
             return true;
         }
 
-        return this->_columns[$name]['null'] === true;
+        return this->_columns[$name]['null'] == true;
     }
 
     /**
@@ -446,7 +446,7 @@ class TableSchema implements TableSchemaInterface, SqlGeneratorInterface
             if (!array_key_exists('default', $data)) {
                 continue;
             }
-            if ($data['default'] === null && $data['null'] != true) {
+            if ($data['default'] == null && $data['null'] != true) {
                 continue;
             }
             $defaults[$name] = $data['default'];
@@ -540,7 +540,7 @@ class TableSchema implements TableSchemaInterface, SqlGeneratorInterface
     function getPrimaryKey(): array
     {
         foreach (this->_constraints as $data) {
-            if ($data['type'] === static::CONSTRAINT_PRIMARY) {
+            if ($data['type'] == static::CONSTRAINT_PRIMARY) {
                 return $data['columns'];
             }
         }
@@ -584,7 +584,7 @@ class TableSchema implements TableSchemaInterface, SqlGeneratorInterface
             }
         }
 
-        if ($attrs['type'] === static::CONSTRAINT_FOREIGN) {
+        if ($attrs['type'] == static::CONSTRAINT_FOREIGN) {
             $attrs = this->_checkForeignKey($attrs);
 
             if (isset(this->_constraints[$name])) {

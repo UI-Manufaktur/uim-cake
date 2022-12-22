@@ -144,7 +144,7 @@ class TypeFactory
      */
     public static function getMap(?string $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             return static::$_types;
         }
 

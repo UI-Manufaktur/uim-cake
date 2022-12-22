@@ -326,7 +326,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      * ### Example
      * ```
      * $query->select(['title'])->from('articles')->traverse(function ($value, $clause) {
-     *     if ($clause === 'select') {
+     *     if ($clause == 'select') {
      *         var_dump($value);
      *     }
      * });
@@ -358,7 +358,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      *
      * ```
      * $query->select(['title'])->from('articles')->traverse(function ($value, $clause) {
-     *     if ($clause === 'select') {
+     *     if ($clause == 'select') {
      *         var_dump($value);
      *     }
      * }, ['select', 'from']);
@@ -529,7 +529,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      */
     function distinct($on = [], $overwrite = false)
     {
-        if ($on === []) {
+        if ($on == []) {
             $on = true;
         } elseif (is_string($on)) {
             $on = [$on];
@@ -1503,7 +1503,7 @@ class Query implements ExpressionInterface, IteratorAggregate
             this->limit($limit);
         }
         $limit = this->clause('limit');
-        if ($limit === null) {
+        if ($limit == null) {
             $limit = 25;
             this->limit($limit);
         }
@@ -1945,7 +1945,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      */
     function func(): FunctionsBuilder
     {
-        if (this->_functionsBuilder === null) {
+        if (this->_functionsBuilder == null) {
             this->_functionsBuilder = new FunctionsBuilder();
         }
 
@@ -1964,7 +1964,7 @@ class Query implements ExpressionInterface, IteratorAggregate
     #[\ReturnTypeWillChange]
     function getIterator()
     {
-        if (this->_iterator === null || this->_dirty) {
+        if (this->_iterator == null || this->_dirty) {
             this->_iterator = this->execute();
         }
 
@@ -2141,7 +2141,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      */
     function getValueBinder(): ValueBinder
     {
-        if (this->_valueBinder === null) {
+        if (this->_valueBinder == null) {
             this->_valueBinder = new ValueBinder();
         }
 
@@ -2242,7 +2242,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      */
     function getSelectTypeMap(): TypeMap
     {
-        if (this->_selectTypeMap === null) {
+        if (this->_selectTypeMap == null) {
             this->_selectTypeMap = new TypeMap();
         }
 
@@ -2343,7 +2343,7 @@ class Query implements ExpressionInterface, IteratorAggregate
             $append = $append(this->newExpr(), this);
         }
 
-        if ($expression->getConjunction() === $conjunction) {
+        if ($expression->getConjunction() == $conjunction) {
             $expression->add($append, $types);
         } else {
             $expression = this->newExpr()

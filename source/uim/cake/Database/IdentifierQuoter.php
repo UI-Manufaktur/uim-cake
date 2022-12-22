@@ -56,9 +56,9 @@ class IdentifierQuoter
         $binder = $query->getValueBinder();
         $query->setValueBinder(null);
 
-        if ($query->type() === 'insert') {
+        if ($query->type() == 'insert') {
             this->_quoteInsert($query);
-        } elseif ($query->type() === 'update') {
+        } elseif ($query->type() == 'update') {
             this->_quoteUpdate($query);
         } else {
             this->_quoteParts($query);
@@ -246,7 +246,7 @@ class IdentifierQuoter
 
                 return $part;
             }
-            if (is_string($part) && strpos($part, ' ') === false) {
+            if (is_string($part) && strpos($part, ' ') == false) {
                 return this->_driver->quoteIdentifier($part);
             }
 

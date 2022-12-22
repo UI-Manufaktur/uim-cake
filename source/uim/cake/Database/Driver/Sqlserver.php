@@ -302,7 +302,7 @@ class Sqlserver extends Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this->_schemaDialect === null) {
+        if (this->_schemaDialect == null) {
             this->_schemaDialect = new SqlserverSchemaDialect(this);
         }
 
@@ -327,7 +327,7 @@ class Sqlserver extends Driver
         $limit = $query->clause('limit');
         $offset = $query->clause('offset');
 
-        if ($limit && $offset === null) {
+        if ($limit && $offset == null) {
             $query->modifier(['_auto_top_' => sprintf('TOP %d', $limit)]);
         }
 
@@ -496,7 +496,7 @@ class Sqlserver extends Driver
                 /** @var bool $hasDay */
                 $hasDay = false;
                 $visitor = function ($value) use (&$hasDay) {
-                    if ($value === 'day') {
+                    if ($value == 'day') {
                         $hasDay = true;
                     }
 
@@ -525,7 +525,7 @@ class Sqlserver extends Driver
             case 'DATE_ADD':
                 $params = [];
                 $visitor = function ($p, $key) use (&$params) {
-                    if ($key === 0) {
+                    if ($key == 0) {
                         $params[2] = $p;
                     } else {
                         $valueUnit = explode(' ', $p);

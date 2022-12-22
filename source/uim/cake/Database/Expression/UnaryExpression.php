@@ -84,7 +84,7 @@ class UnaryExpression implements ExpressionInterface
             $operand = $operand->sql($binder);
         }
 
-        if (this->position === self::POSTFIX) {
+        if (this->position == self::POSTFIX) {
             return '(' . $operand . ') ' . this->_operator;
         }
 

@@ -44,7 +44,7 @@ class OrderClauseExpression implements ExpressionInterface, FieldInterface
     public this($field, $direction)
     {
         this->_field = $field;
-        this->_direction = strtolower($direction) === 'asc' ? 'ASC' : 'DESC';
+        this->_direction = strtolower($direction) == 'asc' ? 'ASC' : 'DESC';
     }
 
     /**

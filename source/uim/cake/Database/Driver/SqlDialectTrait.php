@@ -41,7 +41,7 @@ trait SqlDialectTrait
     {
         $identifier = trim($identifier);
 
-        if ($identifier === '*' || $identifier === '') {
+        if ($identifier == '*' || $identifier == '') {
             return $identifier;
         }
 

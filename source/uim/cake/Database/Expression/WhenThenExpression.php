@@ -96,7 +96,7 @@ class WhenThenExpression implements ExpressionInterface
      */
     public this(?TypeMap $typeMap = null)
     {
-        if ($typeMap === null) {
+        if ($typeMap == null) {
             $typeMap = new TypeMap();
         }
         this->_typeMap = $typeMap;
@@ -184,7 +184,7 @@ class WhenThenExpression implements ExpressionInterface
             }
 
             if (
-                $type === null &&
+                $type == null &&
                 !($when instanceof ExpressionInterface)
             ) {
                 $type = this->inferType($when);
@@ -222,7 +222,7 @@ class WhenThenExpression implements ExpressionInterface
 
         this->then = $result;
 
-        if ($type === null) {
+        if ($type == null) {
             $type = this->inferType($result);
         }
 
@@ -278,7 +278,7 @@ class WhenThenExpression implements ExpressionInterface
      */
     function sql(ValueBinder $binder): string
     {
-        if (this->when === null) {
+        if (this->when == null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `when()`.');
         }
 

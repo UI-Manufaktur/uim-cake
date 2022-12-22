@@ -142,27 +142,27 @@ class MysqlSchemaDialect extends SchemaDialect
             return ['type' => $typeName, 'length' => null, 'precision' => $length];
         }
 
-        if (($col === 'tinyint' && $length === 1) || $col === 'boolean') {
+        if (($col == 'tinyint' && $length == 1) || $col == 'boolean') {
             return ['type' => TableSchema::TYPE_BOOLEAN, 'length' => null];
         }
 
-        $unsigned = (isset($matches[3]) && strtolower($matches[3]) === 'unsigned');
-        if (strpos($col, 'bigint') != false || $col === 'bigint') {
+        $unsigned = (isset($matches[3]) && strtolower($matches[3]) == 'unsigned');
+        if (strpos($col, 'bigint') != false || $col == 'bigint') {
             return ['type' => TableSchema::TYPE_BIGINTEGER, 'length' => null, 'unsigned' => $unsigned];
         }
-        if ($col === 'tinyint') {
+        if ($col == 'tinyint') {
             return ['type' => TableSchema::TYPE_TINYINTEGER, 'length' => null, 'unsigned' => $unsigned];
         }
-        if ($col === 'smallint') {
+        if ($col == 'smallint') {
             return ['type' => TableSchema::TYPE_SMALLINTEGER, 'length' => null, 'unsigned' => $unsigned];
         }
         if (in_array($col, ['int', 'integer', 'mediumint'])) {
             return ['type' => TableSchema::TYPE_INTEGER, 'length' => null, 'unsigned' => $unsigned];
         }
-        if ($col === 'char' && $length === 36) {
+        if ($col == 'char' && $length == 36) {
             return ['type' => TableSchema::TYPE_UUID, 'length' => null];
         }
-        if ($col === 'char') {
+        if ($col == 'char') {
             return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
         }
         if (strpos($col, 'char') != false) {
@@ -174,7 +174,7 @@ class MysqlSchemaDialect extends SchemaDialect
 
             return ['type' => TableSchema::TYPE_TEXT, 'length' => $length];
         }
-        if ($col === 'binary' && $length === 16) {
+        if ($col == 'binary' && $length == 16) {
             return ['type' => TableSchema::TYPE_BINARY_UUID, 'length' => null];
         }
         if (strpos($col, 'blob') != false || in_array($col, ['binary', 'varbinary'])) {
@@ -214,12 +214,12 @@ class MysqlSchemaDialect extends SchemaDialect
     {
         $field = this->_convertColumn($row['Type']);
         $field += [
-            'null' => $row['Null'] === 'YES',
+            'null' => $row['Null'] == 'YES',
             'default' => $row['Default'],
             'collate' => $row['Collation'],
             'comment' => $row['Comment'],
         ];
-        if (isset($row['Extra']) && $row['Extra'] === 'auto_increment') {
+        if (isset($row['Extra']) && $row['Extra'] == 'auto_increment') {
             $field['autoIncrement'] = true;
         }
         $schema->addColumn($row['Field'], $field);
@@ -234,7 +234,7 @@ class MysqlSchemaDialect extends SchemaDialect
         $columns = $length = [];
 
         $name = $row['Key_name'];
-        if ($name === 'PRIMARY') {
+        if ($name == 'PRIMARY') {
             $name = $type = TableSchema::CONSTRAINT_PRIMARY;
         }
 
@@ -242,9 +242,9 @@ class MysqlSchemaDialect extends SchemaDialect
             $columns[] = $row['Column_name'];
         }
 
-        if ($row['Index_type'] === 'FULLTEXT') {
+        if ($row['Index_type'] == 'FULLTEXT') {
             $type = TableSchema::INDEX_FULLTEXT;
-        } elseif ((int)$row['Non_unique'] === 0 && $type != 'primary') {
+        } elseif ((int)$row['Non_unique'] == 0 && $type != 'primary') {
             $type = TableSchema::CONSTRAINT_UNIQUE;
         } elseif ($type != 'primary') {
             $type = TableSchema::INDEX_INDEX;
@@ -254,8 +254,8 @@ class MysqlSchemaDialect extends SchemaDialect
             $length[$row['Column_name']] = $row['Sub_part'];
         }
         $isIndex = (
-            $type === TableSchema::INDEX_INDEX ||
-            $type === TableSchema::INDEX_FULLTEXT
+            $type == TableSchema::INDEX_INDEX ||
+            $type == TableSchema::INDEX_FULLTEXT
         );
         if ($isIndex) {
             $existing = $schema->getIndex($name);
@@ -469,7 +469,7 @@ class MysqlSchemaDialect extends SchemaDialect
         if (
             in_array($data['type'], $hasUnsigned, true) &&
             isset($data['unsigned']) &&
-            $data['unsigned'] === true
+            $data['unsigned'] == true
         ) {
             $out .= ' UNSIGNED';
         }
@@ -483,18 +483,18 @@ class MysqlSchemaDialect extends SchemaDialect
             $out .= ' COLLATE ' . $data['collate'];
         }
 
-        if (isset($data['null']) && $data['null'] === false) {
+        if (isset($data['null']) && $data['null'] == false) {
             $out .= ' NOT NULL';
         }
         $addAutoIncrement = (
-            $schema->getPrimaryKey() === [$name] &&
+            $schema->getPrimaryKey() == [$name] &&
             !$schema->hasAutoincrement() &&
             !isset($data['autoIncrement'])
         );
         if (
             in_array($data['type'], [TableSchema::TYPE_INTEGER, TableSchema::TYPE_BIGINTEGER]) &&
             (
-                $data['autoIncrement'] === true ||
+                $data['autoIncrement'] == true ||
                 $addAutoIncrement
             )
         ) {
@@ -506,7 +506,7 @@ class MysqlSchemaDialect extends SchemaDialect
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
-        if (isset($data['null']) && $data['null'] === true && in_array($data['type'], $timestampTypes, true)) {
+        if (isset($data['null']) && $data['null'] == true && in_array($data['type'], $timestampTypes, true)) {
             $out .= ' NULL';
             unset($data['default']);
         }
@@ -547,7 +547,7 @@ class MysqlSchemaDialect extends SchemaDialect
     {
         /** @var array $data */
         $data = $schema->getConstraint($name);
-        if ($data['type'] === TableSchema::CONSTRAINT_PRIMARY) {
+        if ($data['type'] == TableSchema::CONSTRAINT_PRIMARY) {
             $columns = array_map(
                 [this->_driver, 'quoteIdentifier'],
                 $data['columns']
@@ -557,10 +557,10 @@ class MysqlSchemaDialect extends SchemaDialect
         }
 
         $out = '';
-        if ($data['type'] === TableSchema::CONSTRAINT_UNIQUE) {
+        if ($data['type'] == TableSchema::CONSTRAINT_UNIQUE) {
             $out = 'UNIQUE KEY ';
         }
-        if ($data['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+        if ($data['type'] == TableSchema::CONSTRAINT_FOREIGN) {
             $out = 'CONSTRAINT ';
         }
         $out .= this->_driver->quoteIdentifier($name);
@@ -579,7 +579,7 @@ class MysqlSchemaDialect extends SchemaDialect
         foreach ($schema->constraints() as $name) {
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
-            if ($constraint['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+            if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
                 $tableName = this->_driver->quoteIdentifier($schema->name());
                 $sql[] = sprintf($sqlPattern, $tableName, this->constraintSql($schema, $name));
             }
@@ -599,7 +599,7 @@ class MysqlSchemaDialect extends SchemaDialect
         foreach ($schema->constraints() as $name) {
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
-            if ($constraint['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+            if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
                 $tableName = this->_driver->quoteIdentifier($schema->name());
                 $constraintName = this->_driver->quoteIdentifier($name);
                 $sql[] = sprintf($sqlPattern, $tableName, $constraintName);
@@ -617,10 +617,10 @@ class MysqlSchemaDialect extends SchemaDialect
         /** @var array $data */
         $data = $schema->getIndex($name);
         $out = '';
-        if ($data['type'] === TableSchema::INDEX_INDEX) {
+        if ($data['type'] == TableSchema::INDEX_INDEX) {
             $out = 'KEY ';
         }
-        if ($data['type'] === TableSchema::INDEX_FULLTEXT) {
+        if ($data['type'] == TableSchema::INDEX_FULLTEXT) {
             $out = 'FULLTEXT KEY ';
         }
         $out .= this->_driver->quoteIdentifier($name);
@@ -646,7 +646,7 @@ class MysqlSchemaDialect extends SchemaDialect
                 $columns[$i] .= sprintf('(%d)', $data['length'][$column]);
             }
         }
-        if ($data['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+        if ($data['type'] == TableSchema::CONSTRAINT_FOREIGN) {
             return $prefix . sprintf(
                 ' FOREIGN KEY (%s) REFERENCES %s (%s) ON UPDATE %s ON DELETE %s',
                 implode(', ', $columns),

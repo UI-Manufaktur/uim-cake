@@ -121,7 +121,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
             return this;
         }
 
-        if (this->order === null) {
+        if (this->order == null) {
             this->order = new OrderByExpression();
         }
 
@@ -302,7 +302,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      */
     protected function buildOffsetSql(ValueBinder $binder, $offset, string $direction): string
     {
-        if ($offset === 0) {
+        if ($offset == 0) {
             return 'CURRENT ROW';
         }
 

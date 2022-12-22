@@ -137,7 +137,7 @@ class Postgres extends Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this->_schemaDialect === null) {
+        if (this->_schemaDialect == null) {
             this->_schemaDialect = new PostgresSchemaDialect(this);
         }
 
@@ -307,7 +307,7 @@ class Postgres extends Driver
                     ->setName('')
                     ->setConjunction(' + INTERVAL')
                     ->iterateParts(function ($p, $key) {
-                        if ($key === 1) {
+                        if ($key == 1) {
                             $p = sprintf("'%s'", $p);
                         }
 

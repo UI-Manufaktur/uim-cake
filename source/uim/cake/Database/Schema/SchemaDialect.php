@@ -60,19 +60,19 @@ abstract class SchemaDialect
      */
     protected function _foreignOnClause(string $on): string
     {
-        if ($on === TableSchema::ACTION_SET_NULL) {
+        if ($on == TableSchema::ACTION_SET_NULL) {
             return 'SET NULL';
         }
-        if ($on === TableSchema::ACTION_SET_DEFAULT) {
+        if ($on == TableSchema::ACTION_SET_DEFAULT) {
             return 'SET DEFAULT';
         }
-        if ($on === TableSchema::ACTION_CASCADE) {
+        if ($on == TableSchema::ACTION_CASCADE) {
             return 'CASCADE';
         }
-        if ($on === TableSchema::ACTION_RESTRICT) {
+        if ($on == TableSchema::ACTION_RESTRICT) {
             return 'RESTRICT';
         }
-        if ($on === TableSchema::ACTION_NO_ACTION) {
+        if ($on == TableSchema::ACTION_NO_ACTION) {
             return 'NO ACTION';
         }
 
@@ -87,10 +87,10 @@ abstract class SchemaDialect
      */
     protected function _convertOnClause(string $clause): string
     {
-        if ($clause === 'CASCADE' || $clause === 'RESTRICT') {
+        if ($clause == 'CASCADE' || $clause == 'RESTRICT') {
             return strtolower($clause);
         }
-        if ($clause === 'NO ACTION') {
+        if ($clause == 'NO ACTION') {
             return TableSchema::ACTION_NO_ACTION;
         }
 

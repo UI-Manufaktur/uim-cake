@@ -127,7 +127,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             return ['type' => $col, 'length' => null];
         }
 
-        if ($col === 'datetime') {
+        if ($col == 'datetime') {
             // datetime cannot parse more than 3 digits of precision and isn't accurate
             return ['type' => TableSchema::TYPE_DATETIME, 'length' => null];
         }
@@ -140,23 +140,23 @@ class SqlserverSchemaDialect extends SchemaDialect
             return ['type' => $typeName, 'length' => null, 'precision' => $scale];
         }
 
-        if ($col === 'char') {
+        if ($col == 'char') {
             return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
         }
 
-        if ($col === 'tinyint') {
+        if ($col == 'tinyint') {
             return ['type' => TableSchema::TYPE_TINYINTEGER, 'length' => $precision ?: 3];
         }
-        if ($col === 'smallint') {
+        if ($col == 'smallint') {
             return ['type' => TableSchema::TYPE_SMALLINTEGER, 'length' => $precision ?: 5];
         }
-        if ($col === 'int' || $col === 'integer') {
+        if ($col == 'int' || $col == 'integer') {
             return ['type' => TableSchema::TYPE_INTEGER, 'length' => $precision ?: 10];
         }
-        if ($col === 'bigint') {
+        if ($col == 'bigint') {
             return ['type' => TableSchema::TYPE_BIGINTEGER, 'length' => $precision ?: 20];
         }
-        if ($col === 'bit') {
+        if ($col == 'bit') {
             return ['type' => TableSchema::TYPE_BOOLEAN, 'length' => null];
         }
         if (
@@ -167,12 +167,12 @@ class SqlserverSchemaDialect extends SchemaDialect
             return ['type' => TableSchema::TYPE_DECIMAL, 'length' => $precision, 'precision' => $scale];
         }
 
-        if ($col === 'real' || $col === 'float') {
+        if ($col == 'real' || $col == 'float') {
             return ['type' => TableSchema::TYPE_FLOAT, 'length' => null];
         }
         // SqlServer schema reflection returns double length for unicode
         // columns because internally it uses UTF16/UCS2
-        if ($col === 'nvarchar' || $col === 'nchar' || $col === 'ntext') {
+        if ($col == 'nvarchar' || $col == 'nchar' || $col == 'ntext') {
             $length /= 2;
         }
         if (strpos($col, 'varchar') != false && $length < 0) {
@@ -191,7 +191,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
         }
 
-        if ($col === 'image' || strpos($col, 'binary') != false) {
+        if ($col == 'image' || strpos($col, 'binary') != false) {
             // -1 is the value for MAX which we treat as a 'long' binary
             if ($length == -1) {
                 $length = TableSchema::LENGTH_LONG;
@@ -200,7 +200,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             return ['type' => TableSchema::TYPE_BINARY, 'length' => $length];
         }
 
-        if ($col === 'uniqueidentifier') {
+        if ($col == 'uniqueidentifier') {
             return ['type' => TableSchema::TYPE_UUID];
         }
 
@@ -224,7 +224,7 @@ class SqlserverSchemaDialect extends SchemaDialect
         }
 
         $field += [
-            'null' => $row['null'] === '1',
+            'null' => $row['null'] == '1',
             'default' => this->_defaultValue($field['type'], $row['default']),
             'collate' => $row['collation_name'],
         ];
@@ -243,7 +243,7 @@ class SqlserverSchemaDialect extends SchemaDialect
      */
     protected function _defaultValue($type, $default)
     {
-        if ($default === null) {
+        if ($default == null) {
             return null;
         }
 
@@ -253,11 +253,11 @@ class SqlserverSchemaDialect extends SchemaDialect
             $default = $matches[1];
         }
 
-        if ($default === 'NULL') {
+        if ($default == 'NULL') {
             return null;
         }
 
-        if ($type === TableSchema::TYPE_BOOLEAN) {
+        if ($type == TableSchema::TYPE_BOOLEAN) {
             return (int)$default;
         }
 
@@ -303,11 +303,11 @@ class SqlserverSchemaDialect extends SchemaDialect
         if ($row['is_primary_key']) {
             $name = $type = TableSchema::CONSTRAINT_PRIMARY;
         }
-        if ($row['is_unique_constraint'] && $type === TableSchema::INDEX_INDEX) {
+        if ($row['is_unique_constraint'] && $type == TableSchema::INDEX_INDEX) {
             $type = TableSchema::CONSTRAINT_UNIQUE;
         }
 
-        if ($type === TableSchema::INDEX_INDEX) {
+        if ($type == TableSchema::INDEX_INDEX) {
             $existing = $schema->getIndex($name);
         } else {
             $existing = $schema->getConstraint($name);
@@ -318,7 +318,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             $columns = array_merge($existing['columns'], $columns);
         }
 
-        if ($type === TableSchema::CONSTRAINT_PRIMARY || $type === TableSchema::CONSTRAINT_UNIQUE) {
+        if ($type == TableSchema::CONSTRAINT_PRIMARY || $type == TableSchema::CONSTRAINT_UNIQUE) {
             $schema->addConstraint($name, [
                 'type' => $type,
                 'columns' => $columns,
@@ -380,7 +380,7 @@ class SqlserverSchemaDialect extends SchemaDialect
     {
         $parent = parent::_foreignOnClause($on);
 
-        return $parent === 'RESTRICT' ? parent::_foreignOnClause(TableSchema::ACTION_NO_ACTION) : $parent;
+        return $parent == 'RESTRICT' ? parent::_foreignOnClause(TableSchema::ACTION_NO_ACTION) : $parent;
     }
 
     /**
@@ -441,22 +441,22 @@ class SqlserverSchemaDialect extends SchemaDialect
             $out .= $typeMap[$data['type']];
         }
 
-        if ($data['type'] === TableSchema::TYPE_INTEGER || $data['type'] === TableSchema::TYPE_BIGINTEGER) {
-            if ($schema->getPrimaryKey() === [$name] || $data['autoIncrement'] === true) {
+        if ($data['type'] == TableSchema::TYPE_INTEGER || $data['type'] == TableSchema::TYPE_BIGINTEGER) {
+            if ($schema->getPrimaryKey() == [$name] || $data['autoIncrement'] == true) {
                 unset($data['null'], $data['default']);
                 $out .= ' IDENTITY(1, 1)';
             }
         }
 
-        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] != TableSchema::LENGTH_TINY) {
+        if ($data['type'] == TableSchema::TYPE_TEXT && $data['length'] != TableSchema::LENGTH_TINY) {
             $out .= ' NVARCHAR(MAX)';
         }
 
-        if ($data['type'] === TableSchema::TYPE_CHAR) {
+        if ($data['type'] == TableSchema::TYPE_CHAR) {
             $out .= '(' . $data['length'] . ')';
         }
 
-        if ($data['type'] === TableSchema::TYPE_BINARY) {
+        if ($data['type'] == TableSchema::TYPE_BINARY) {
             if (
                 !isset($data['length'])
                 || in_array($data['length'], [TableSchema::LENGTH_MEDIUM, TableSchema::LENGTH_LONG], true)
@@ -464,7 +464,7 @@ class SqlserverSchemaDialect extends SchemaDialect
                 $data['length'] = 'MAX';
             }
 
-            if ($data['length'] === 1) {
+            if ($data['length'] == 1) {
                 $out .= ' BINARY(1)';
             } else {
                 $out .= ' VARBINARY';
@@ -474,10 +474,10 @@ class SqlserverSchemaDialect extends SchemaDialect
         }
 
         if (
-            $data['type'] === TableSchema::TYPE_STRING ||
+            $data['type'] == TableSchema::TYPE_STRING ||
             (
-                $data['type'] === TableSchema::TYPE_TEXT &&
-                $data['length'] === TableSchema::LENGTH_TINY
+                $data['type'] == TableSchema::TYPE_TEXT &&
+                $data['length'] == TableSchema::LENGTH_TINY
             )
         ) {
             $type = ' NVARCHAR';
@@ -502,7 +502,7 @@ class SqlserverSchemaDialect extends SchemaDialect
         }
 
         if (
-            $data['type'] === TableSchema::TYPE_DECIMAL &&
+            $data['type'] == TableSchema::TYPE_DECIMAL &&
             (
                 isset($data['length']) ||
                 isset($data['precision'])
@@ -511,7 +511,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             $out .= '(' . (int)$data['length'] . ',' . (int)$data['precision'] . ')';
         }
 
-        if (isset($data['null']) && $data['null'] === false) {
+        if (isset($data['null']) && $data['null'] == false) {
             $out .= ' NOT NULL';
         }
 
@@ -558,7 +558,7 @@ class SqlserverSchemaDialect extends SchemaDialect
         foreach ($schema->constraints() as $name) {
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
-            if ($constraint['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+            if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
                 $tableName = this->_driver->quoteIdentifier($schema->name());
                 $sql[] = sprintf($sqlPattern, $tableName, this->constraintSql($schema, $name));
             }
@@ -578,7 +578,7 @@ class SqlserverSchemaDialect extends SchemaDialect
         foreach ($schema->constraints() as $name) {
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
-            if ($constraint['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+            if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
                 $tableName = this->_driver->quoteIdentifier($schema->name());
                 $constraintName = this->_driver->quoteIdentifier($name);
                 $sql[] = sprintf($sqlPattern, $tableName, $constraintName);
@@ -616,10 +616,10 @@ class SqlserverSchemaDialect extends SchemaDialect
         /** @var array $data */
         $data = $schema->getConstraint($name);
         $out = 'CONSTRAINT ' . this->_driver->quoteIdentifier($name);
-        if ($data['type'] === TableSchema::CONSTRAINT_PRIMARY) {
+        if ($data['type'] == TableSchema::CONSTRAINT_PRIMARY) {
             $out = 'PRIMARY KEY';
         }
-        if ($data['type'] === TableSchema::CONSTRAINT_UNIQUE) {
+        if ($data['type'] == TableSchema::CONSTRAINT_UNIQUE) {
             $out .= ' UNIQUE';
         }
 
@@ -639,7 +639,7 @@ class SqlserverSchemaDialect extends SchemaDialect
             [this->_driver, 'quoteIdentifier'],
             $data['columns']
         );
-        if ($data['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+        if ($data['type'] == TableSchema::CONSTRAINT_FOREIGN) {
             return $prefix . sprintf(
                 ' FOREIGN KEY (%s) REFERENCES %s (%s) ON UPDATE %s ON DELETE %s',
                 implode(', ', $columns),
@@ -682,7 +682,7 @@ class SqlserverSchemaDialect extends SchemaDialect
 
         // Restart identity sequences
         $pk = $schema->getPrimaryKey();
-        if (count($pk) === 1) {
+        if (count($pk) == 1) {
             /** @var array $column */
             $column = $schema->getColumn($pk[0]);
             if (in_array($column['type'], ['integer', 'biginteger'])) {

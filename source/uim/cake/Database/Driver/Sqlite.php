@@ -128,7 +128,7 @@ class Sqlite extends Driver
             PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ];
-        if (!is_string($config['database']) || $config['database'] === '') {
+        if (!is_string($config['database']) || $config['database'] == '') {
             $name = $config['name'] ?? 'unknown';
             throw new InvalidArgumentException(
                 "The `database` key for the `{$name}` SQLite connection needs to be a non-empty string."
@@ -200,7 +200,7 @@ class Sqlite extends Driver
         $statement = this->_connection->prepare($isObject ? $query->sql() : $query);
         $result = new SqliteStatement(new PDOStatement($statement, this), this);
         /** @psalm-suppress PossiblyInvalidMethodCall */
-        if ($isObject && $query->isBufferedResultsEnabled() === false) {
+        if ($isObject && $query->isBufferedResultsEnabled() == false) {
             $result->bufferResults(false);
         }
 
@@ -257,7 +257,7 @@ class Sqlite extends Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this->_schemaDialect === null) {
+        if (this->_schemaDialect == null) {
             this->_schemaDialect = new SqliteSchemaDialect(this);
         }
 
@@ -324,7 +324,7 @@ class Sqlite extends Driver
                     ->setName('STRFTIME')
                     ->setConjunction(' ,')
                     ->iterateParts(function ($p, $key) {
-                        if ($key === 0) {
+                        if ($key == 0) {
                             $value = rtrim(strtolower($p), 's');
                             if (isset(this->_dateParts[$value])) {
                                 $p = ['value' => '%' . this->_dateParts[$value], 'type' => null];
@@ -339,7 +339,7 @@ class Sqlite extends Driver
                     ->setName('DATE')
                     ->setConjunction(',')
                     ->iterateParts(function ($p, $key) {
-                        if ($key === 1) {
+                        if ($key == 1) {
                             $p = ['value' => $p, 'type' => null];
                         }
 

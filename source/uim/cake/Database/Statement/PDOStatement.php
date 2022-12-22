@@ -54,7 +54,7 @@ class PDOStatement extends StatementDecorator
      */
     function __get(string $property)
     {
-        if ($property === 'queryString' && isset(this->_statement->queryString)) {
+        if ($property == 'queryString' && isset(this->_statement->queryString)) {
             /** @psalm-suppress NoInterfaceProperties */
             return this->_statement->queryString;
         }
@@ -89,7 +89,7 @@ class PDOStatement extends StatementDecorator
      */
     function bindValue($column, $value, $type = 'string'): void
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = 'string';
         }
         if (!is_int($type)) {
@@ -117,13 +117,13 @@ class PDOStatement extends StatementDecorator
      */
     function fetch($type = parent::FETCH_TYPE_NUM)
     {
-        if ($type === static::FETCH_TYPE_NUM) {
+        if ($type == static::FETCH_TYPE_NUM) {
             return this->_statement->fetch(PDO::FETCH_NUM);
         }
-        if ($type === static::FETCH_TYPE_ASSOC) {
+        if ($type == static::FETCH_TYPE_ASSOC) {
             return this->_statement->fetch(PDO::FETCH_ASSOC);
         }
-        if ($type === static::FETCH_TYPE_OBJ) {
+        if ($type == static::FETCH_TYPE_OBJ) {
             return this->_statement->fetch(PDO::FETCH_OBJ);
         }
 
@@ -154,13 +154,13 @@ class PDOStatement extends StatementDecorator
      */
     function fetchAll($type = parent::FETCH_TYPE_NUM)
     {
-        if ($type === static::FETCH_TYPE_NUM) {
+        if ($type == static::FETCH_TYPE_NUM) {
             return this->_statement->fetchAll(PDO::FETCH_NUM);
         }
-        if ($type === static::FETCH_TYPE_ASSOC) {
+        if ($type == static::FETCH_TYPE_ASSOC) {
             return this->_statement->fetchAll(PDO::FETCH_ASSOC);
         }
-        if ($type === static::FETCH_TYPE_OBJ) {
+        if ($type == static::FETCH_TYPE_OBJ) {
             return this->_statement->fetchAll(PDO::FETCH_OBJ);
         }
 

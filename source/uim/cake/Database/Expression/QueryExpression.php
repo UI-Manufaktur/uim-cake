@@ -147,7 +147,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function eq($field, $value, ?string $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -166,7 +166,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function notEq($field, $value, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -183,7 +183,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function gt($field, $value, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -200,7 +200,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function lt($field, $value, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -217,7 +217,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function gte($field, $value, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -234,7 +234,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function lte($field, $value, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -283,7 +283,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function like($field, $value, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -300,7 +300,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function notLike($field, $value, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -318,7 +318,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function in($field, $values, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
         $type = $type ?: 'string';
@@ -391,7 +391,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function notIn($field, $values, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
         $type = $type ?: 'string';
@@ -454,7 +454,7 @@ class QueryExpression implements ExpressionInterface, Countable
      */
     function between($field, $from, $to, $type = null)
     {
-        if ($type === null) {
+        if ($type == null) {
             $type = this->_calculateType($field);
         }
 
@@ -589,11 +589,11 @@ class QueryExpression implements ExpressionInterface, Countable
     function sql(ValueBinder $binder): string
     {
         $len = this->count();
-        if ($len === 0) {
+        if ($len == 0) {
             return '';
         }
         $conjunction = this->_conjunction;
-        $template = $len === 1 ? '%s' : '(%s)';
+        $template = $len == 1 ? '%s' : '(%s)';
         $parts = [];
         foreach (this->_conditions as $part) {
             if ($part instanceof Query) {
@@ -728,10 +728,10 @@ class QueryExpression implements ExpressionInterface, Countable
             if (!$numericKey) {
                 $normalizedKey = strtolower($k);
                 $isOperator = in_array($normalizedKey, $operators);
-                $isNot = $normalizedKey === 'not';
+                $isNot = $normalizedKey == 'not';
             }
 
-            if (($isOperator || $isNot) && ($isArray || $c instanceof Countable) && count($c) === 0) {
+            if (($isOperator || $isNot) && ($isArray || $c instanceof Countable) && count($c) == 0) {
                 continue;
             }
 
@@ -807,8 +807,8 @@ class QueryExpression implements ExpressionInterface, Countable
             if (!$typeMultiple) {
                 $type .= '[]';
             }
-            $operator = $operator === '=' ? 'IN' : $operator;
-            $operator = $operator === '!=' ? 'NOT IN' : $operator;
+            $operator = $operator == '=' ? 'IN' : $operator;
+            $operator = $operator == '!=' ? 'NOT IN' : $operator;
             $typeMultiple = true;
         }
 
@@ -816,7 +816,7 @@ class QueryExpression implements ExpressionInterface, Countable
             $value = $value instanceof ExpressionInterface ? $value : (array)$value;
         }
 
-        if ($operator === 'is' && $value === null) {
+        if ($operator == 'is' && $value == null) {
             return new UnaryExpression(
                 'IS NULL',
                 new IdentifierExpression($expression),
@@ -824,7 +824,7 @@ class QueryExpression implements ExpressionInterface, Countable
             );
         }
 
-        if ($operator === 'is not' && $value === null) {
+        if ($operator == 'is not' && $value == null) {
             return new UnaryExpression(
                 'IS NOT NULL',
                 new IdentifierExpression($expression),
@@ -832,15 +832,15 @@ class QueryExpression implements ExpressionInterface, Countable
             );
         }
 
-        if ($operator === 'is' && $value != null) {
+        if ($operator == 'is' && $value != null) {
             $operator = '=';
         }
 
-        if ($operator === 'is not' && $value != null) {
+        if ($operator == 'is not' && $value != null) {
             $operator = '!=';
         }
 
-        if ($value === null && this->_conjunction != ',') {
+        if ($value == null && this->_conjunction != ',') {
             throw new InvalidArgumentException(
                 sprintf('Expression `%s` is missing operator (IS, IS NOT) with `null` value.', $expression)
             );

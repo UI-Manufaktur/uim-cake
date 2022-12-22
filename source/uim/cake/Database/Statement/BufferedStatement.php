@@ -93,7 +93,7 @@ class BufferedStatement implements Iterator, StatementInterface
      */
     function __get(string $property)
     {
-        if ($property === 'queryString') {
+        if ($property == 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
             return this->statement->queryString;
         }
@@ -207,7 +207,7 @@ class BufferedStatement implements Iterator, StatementInterface
             }
             this->index += 1;
 
-            if ($row && $type === static::FETCH_TYPE_NUM) {
+            if ($row && $type == static::FETCH_TYPE_NUM) {
                 return array_values($row);
             }
 
@@ -215,7 +215,7 @@ class BufferedStatement implements Iterator, StatementInterface
         }
 
         $record = this->statement->fetch($type);
-        if ($record === false) {
+        if ($record == false) {
             this->_allFetched = true;
             this->statement->closeCursor();
 

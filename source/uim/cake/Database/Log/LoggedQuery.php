@@ -78,7 +78,7 @@ class LoggedQuery implements JsonSerializable
     protected function interpolate(): string
     {
         $params = array_map(function ($p) {
-            if ($p === null) {
+            if ($p == null) {
                 return 'NULL';
             }
 

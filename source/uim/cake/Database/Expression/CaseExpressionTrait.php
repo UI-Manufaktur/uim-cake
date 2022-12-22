@@ -92,7 +92,7 @@ trait CaseExpressionTrait
             $value = this->_castToExpression($value, $type);
         }
 
-        if ($value === null) {
+        if ($value == null) {
             $value = 'NULL';
         } elseif ($value instanceof Query) {
             $value = sprintf('(%s)', $value->sql($binder));

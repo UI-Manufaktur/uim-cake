@@ -52,7 +52,7 @@ class SqliteSchemaDialect extends SchemaDialect
      */
     protected function _convertColumn(string $column): array
     {
-        if ($column === '') {
+        if ($column == '') {
             return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
         }
 
@@ -62,7 +62,7 @@ class SqliteSchemaDialect extends SchemaDialect
         }
 
         $unsigned = false;
-        if (strtolower($matches[1]) === 'unsigned') {
+        if (strtolower($matches[1]) == 'unsigned') {
             $unsigned = true;
         }
 
@@ -85,13 +85,13 @@ class SqliteSchemaDialect extends SchemaDialect
             return $type;
         }
 
-        if ($col === 'bigint') {
+        if ($col == 'bigint') {
             return ['type' => TableSchema::TYPE_BIGINTEGER, 'length' => $length, 'unsigned' => $unsigned];
         }
-        if ($col === 'smallint') {
+        if ($col == 'smallint') {
             return ['type' => TableSchema::TYPE_SMALLINTEGER, 'length' => $length, 'unsigned' => $unsigned];
         }
-        if ($col === 'tinyint') {
+        if ($col == 'tinyint') {
             return ['type' => TableSchema::TYPE_TINYINTEGER, 'length' => $length, 'unsigned' => $unsigned];
         }
         if (strpos($col, 'int') != false) {
@@ -118,17 +118,17 @@ class SqliteSchemaDialect extends SchemaDialect
             return ['type' => TableSchema::TYPE_BOOLEAN, 'length' => null];
         }
 
-        if ($col === 'char' && $length === 36) {
+        if ($col == 'char' && $length == 36) {
             return ['type' => TableSchema::TYPE_UUID, 'length' => null];
         }
-        if ($col === 'char') {
+        if ($col == 'char') {
             return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
         }
         if (strpos($col, 'char') != false) {
             return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
         }
 
-        if ($col === 'binary' && $length === 16) {
+        if ($col == 'binary' && $length == 16) {
             return ['type' => TableSchema::TYPE_BINARY_UUID, 'length' => null];
         }
         if (in_array($col, ['blob', 'clob', 'binary', 'varbinary'])) {
@@ -243,7 +243,7 @@ class SqliteSchemaDialect extends SchemaDialect
      */
     protected function _defaultValue($default)
     {
-        if ($default === 'NULL' || $default === null) {
+        if ($default == 'NULL' || $default == null) {
             return null;
         }
 
@@ -396,7 +396,7 @@ class SqliteSchemaDialect extends SchemaDialect
         if (
             in_array($data['type'], $hasUnsigned, true) &&
             isset($data['unsigned']) &&
-            $data['unsigned'] === true
+            $data['unsigned'] == true
         ) {
             if ($data['type'] != TableSchema::TYPE_INTEGER || $schema->getPrimaryKey() != [$name]) {
                 $out .= ' UNSIGNED';
@@ -407,19 +407,19 @@ class SqliteSchemaDialect extends SchemaDialect
             $out .= $typeMap[$data['type']];
         }
 
-        if ($data['type'] === TableSchema::TYPE_TEXT && $data['length'] != TableSchema::LENGTH_TINY) {
+        if ($data['type'] == TableSchema::TYPE_TEXT && $data['length'] != TableSchema::LENGTH_TINY) {
             $out .= ' TEXT';
         }
 
-        if ($data['type'] === TableSchema::TYPE_CHAR) {
+        if ($data['type'] == TableSchema::TYPE_CHAR) {
             $out .= '(' . $data['length'] . ')';
         }
 
         if (
-            $data['type'] === TableSchema::TYPE_STRING ||
+            $data['type'] == TableSchema::TYPE_STRING ||
             (
-                $data['type'] === TableSchema::TYPE_TEXT &&
-                $data['length'] === TableSchema::LENGTH_TINY
+                $data['type'] == TableSchema::TYPE_TEXT &&
+                $data['length'] == TableSchema::LENGTH_TINY
             )
         ) {
             $out .= ' VARCHAR';
@@ -429,7 +429,7 @@ class SqliteSchemaDialect extends SchemaDialect
             }
         }
 
-        if ($data['type'] === TableSchema::TYPE_BINARY) {
+        if ($data['type'] == TableSchema::TYPE_BINARY) {
             if (isset($data['length'])) {
                 $out .= ' BLOB(' . $data['length'] . ')';
             } else {
@@ -461,11 +461,11 @@ class SqliteSchemaDialect extends SchemaDialect
             $out .= '(' . (int)$data['length'] . ',' . (int)$data['precision'] . ')';
         }
 
-        if (isset($data['null']) && $data['null'] === false) {
+        if (isset($data['null']) && $data['null'] == false) {
             $out .= ' NOT NULL';
         }
 
-        if ($data['type'] === TableSchema::TYPE_INTEGER && $schema->getPrimaryKey() === [$name]) {
+        if ($data['type'] == TableSchema::TYPE_INTEGER && $schema->getPrimaryKey() == [$name]) {
             $out .= ' PRIMARY KEY AUTOINCREMENT';
         }
 
@@ -476,7 +476,7 @@ class SqliteSchemaDialect extends SchemaDialect
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
-        if (isset($data['null']) && $data['null'] === true && in_array($data['type'], $timestampTypes, true)) {
+        if (isset($data['null']) && $data['null'] == true && in_array($data['type'], $timestampTypes, true)) {
             $out .= ' DEFAULT NULL';
         }
         if (isset($data['default'])) {
@@ -502,21 +502,21 @@ class SqliteSchemaDialect extends SchemaDialect
         $data = $schema->getConstraint($name);
         /** @psalm-suppress PossiblyNullArrayAccess */
         if (
-            $data['type'] === TableSchema::CONSTRAINT_PRIMARY &&
-            count($data['columns']) === 1 &&
-            $schema->getColumn($data['columns'][0])['type'] === TableSchema::TYPE_INTEGER
+            $data['type'] == TableSchema::CONSTRAINT_PRIMARY &&
+            count($data['columns']) == 1 &&
+            $schema->getColumn($data['columns'][0])['type'] == TableSchema::TYPE_INTEGER
         ) {
             return '';
         }
         $clause = '';
         $type = '';
-        if ($data['type'] === TableSchema::CONSTRAINT_PRIMARY) {
+        if ($data['type'] == TableSchema::CONSTRAINT_PRIMARY) {
             $type = 'PRIMARY KEY';
         }
-        if ($data['type'] === TableSchema::CONSTRAINT_UNIQUE) {
+        if ($data['type'] == TableSchema::CONSTRAINT_UNIQUE) {
             $type = 'UNIQUE';
         }
-        if ($data['type'] === TableSchema::CONSTRAINT_FOREIGN) {
+        if ($data['type'] == TableSchema::CONSTRAINT_FOREIGN) {
             $type = 'FOREIGN KEY';
 
             $clause = sprintf(

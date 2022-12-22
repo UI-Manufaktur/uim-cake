@@ -49,7 +49,7 @@ trait TypeMapTrait
      */
     function getTypeMap(): TypeMap
     {
-        if (this->_typeMap === null) {
+        if (this->_typeMap == null) {
             this->_typeMap = new TypeMap();
         }
 
