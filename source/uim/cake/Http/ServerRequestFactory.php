@@ -20,7 +20,7 @@ use Cake\Core\Configure;
 use Cake\Http\Uri as CakeUri;
 use Cake\Utility\Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Message\UriInterface;
 use function Laminas\Diactoros\marshalHeadersFromSapi;
 use function Laminas\Diactoros\marshalUriFromSapi;
@@ -200,9 +200,9 @@ abstract class ServerRequestFactory implements ServerRequestFactoryInterface
      *     instance based on it.
      * @param array $serverParams Array of SAPI parameters with which to seed
      *     the generated request instance.
-     * @return \Psr\Http\Message\ServerRequestInterface
+     * @return \Psr\Http\Message\IServerRequest
      */
-    function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
+    function createServerRequest(string $method, $uri, array $serverParams = []): IServerRequest
     {
         $serverParams['REQUEST_METHOD'] = $method;
         $options = ['environment' => $serverParams];

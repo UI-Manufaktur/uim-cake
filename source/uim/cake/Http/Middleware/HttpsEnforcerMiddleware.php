@@ -19,8 +19,8 @@ namespace Cake\Http\Middleware;
 use Cake\Core\Configure;
 use Cake\Http\Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use UnexpectedValueException;
@@ -73,12 +73,12 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
      * Depending on the configuration and request method, either redirects to
      * same URL with https or throws an exception.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      * @throws \Cake\Http\Exception\BadRequestException
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if (
             $request->getUri()->getScheme() == 'https'
@@ -115,10 +115,10 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
     /**
      * Adds Strict-Transport-Security header to response.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response Response
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param \Psr\Http\Message\IResponse $response Response
+     * @return \Psr\Http\Message\IResponse
      */
-    protected function addHsts(ResponseInterface $response): ResponseInterface
+    protected function addHsts(IResponse $response): IResponse
     {
         $config = this->config['hsts'];
         if (!is_array($config)) {

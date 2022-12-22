@@ -18,7 +18,7 @@ namespace Cake\Routing\Route;
 
 use Cake\Http\Exception\BadRequestException;
 use InvalidArgumentException;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 
 /**
  * A single Route used by the Router to connect requests to
@@ -436,10 +436,10 @@ class Route
      * If the route can be parsed an array of parameters will be returned; if not
      * `null` will be returned.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The URL to attempt to parse.
+     * @param \Psr\Http\Message\IServerRequest $request The URL to attempt to parse.
      * @return array|null An array of request parameters, or `null` on failure.
      */
-    function parseRequest(ServerRequestInterface $request): ?array
+    function parseRequest(IServerRequest $request): ?array
     {
         $uri = $request->getUri();
         if (isset(this->options['_host']) && !this->hostMatches($uri->getHost())) {

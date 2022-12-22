@@ -26,7 +26,7 @@ use DateTimeZone;
 use InvalidArgumentException;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 use Psr\Http\Message\StreamInterface;
 use SplFileInfo;
 
@@ -39,7 +39,7 @@ use SplFileInfo;
  * include status codes that are now allowed which will throw an
  * `\InvalidArgumentException`.
  */
-class Response implements ResponseInterface
+class Response implements IResponse
 {
     use MessageTrait;
 

@@ -17,8 +17,8 @@ namespace Cake\I18n\Middleware;
 
 use Cake\I18n\I18n;
 use Locale;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -50,11 +50,11 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
     /**
      * Set locale based on request headers.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $locale = Locale::acceptFromHttp($request->getHeaderLine('Accept-Language'));
         if (!$locale) {

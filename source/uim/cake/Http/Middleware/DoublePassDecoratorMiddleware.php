@@ -17,8 +17,8 @@ declare(strict_types=1);
 namespace Cake\Http\Middleware;
 
 use Cake\Http\Response;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -29,10 +29,10 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * ```
  * function (
- *     ServerRequestInterface $request,
- *     ResponseInterface $response,
+ *     IServerRequest $request,
+ *     IResponse $response,
  *     callable $next
- * ): ResponseInterface
+ * ): IResponse
  * ```
  *
  * or a class with `__invoke()` method with same signature as above.
@@ -69,11 +69,11 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
     /**
      * Run the internal double pass callable to process an incoming server request.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request Request instance.
+     * @param \Psr\Http\Message\IServerRequest $request Request instance.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler Request handler instance.
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\IResponse
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         return (this->callable)(
             $request,

@@ -20,8 +20,8 @@ use Cake\Http\Exception\BadRequestException;
 use Cake\Utility\Exception\XmlException;
 use Cake\Utility\Xml;
 use Closure;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -147,11 +147,11 @@ class BodyParserMiddleware implements MiddlewareInterface
      *
      * Will modify the request adding a parsed body if the content-type is known.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if (!in_array($request->getMethod(), this->methods, true)) {
             return $handler->handle($request);

@@ -23,7 +23,7 @@ namespace Cake\Http;
 use Cake\Http\Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 
 /**
  * Emits a Response to the PHP Server API.
@@ -59,10 +59,10 @@ class ResponseEmitter implements EmitterInterface
      * Emits a response, including status line, headers, and the message body,
      * according to the environment.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response The response to emit.
+     * @param \Psr\Http\Message\IResponse $response The response to emit.
      * @return bool
      */
-    function emit(ResponseInterface $response): bool
+    function emit(IResponse $response): bool
     {
         $file = '';
         $line = 0;
@@ -92,10 +92,10 @@ class ResponseEmitter implements EmitterInterface
     /**
      * Emit the message body.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response The response to emit
+     * @param \Psr\Http\Message\IResponse $response The response to emit
      * @return void
      */
-    protected function emitBody(ResponseInterface $response): void
+    protected function emitBody(IResponse $response): void
     {
         if (in_array($response->getStatusCode(), [204, 304], true)) {
             return;
@@ -118,10 +118,10 @@ class ResponseEmitter implements EmitterInterface
      * Emit a range of the message body.
      *
      * @param array $range The range data to emit
-     * @param \Psr\Http\Message\ResponseInterface $response The response to emit
+     * @param \Psr\Http\Message\IResponse $response The response to emit
      * @return void
      */
-    protected function emitBodyRange(array $range, ResponseInterface $response): void
+    protected function emitBodyRange(array $range, IResponse $response): void
     {
         [, $first, $last] = $range;
 
@@ -155,10 +155,10 @@ class ResponseEmitter implements EmitterInterface
      * Emits the status line using the protocol version and status code from
      * the response; if a reason phrase is available, it, too, is emitted.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response The response to emit
+     * @param \Psr\Http\Message\IResponse $response The response to emit
      * @return void
      */
-    protected function emitStatusLine(ResponseInterface $response): void
+    protected function emitStatusLine(IResponse $response): void
     {
         $reasonPhrase = $response->getReasonPhrase();
         header(sprintf(
@@ -177,10 +177,10 @@ class ResponseEmitter implements EmitterInterface
      * in such a way as to create aggregate headers (instead of replace
      * the previous).
      *
-     * @param \Psr\Http\Message\ResponseInterface $response The response to emit
+     * @param \Psr\Http\Message\IResponse $response The response to emit
      * @return void
      */
-    protected function emitHeaders(ResponseInterface $response): void
+    protected function emitHeaders(IResponse $response): void
     {
         $cookies = [];
         if (method_exists($response, 'getCookieCollection')) {

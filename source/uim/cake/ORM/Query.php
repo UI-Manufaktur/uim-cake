@@ -19,7 +19,7 @@ namespace Cake\ORM;
 use ArrayObject;
 use BadMethodCallException;
 use Cake\Database\Connection;
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Database\Query as DatabaseQuery;
 use Cake\Database\TypedResultInterface;
 use Cake\Database\TypeMap;
@@ -220,7 +220,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      * all the fields in the schema of the table or the association will be added to
      * the select clause.
      *
-     * @param \Cake\Database\ExpressionInterface|\Cake\ORM\Table|\Cake\ORM\Association|callable|array|string $fields Fields
+     * @param \Cake\Database\IExpression|\Cake\ORM\Table|\Cake\ORM\Association|callable|array|string $fields Fields
      * to be added to the list.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
@@ -956,7 +956,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         if (!$complex) {
             // Expression fields could have bound parameters.
             foreach ($query->clause('select') as $field) {
-                if ($field instanceof ExpressionInterface) {
+                if ($field instanceof IExpression) {
                     $complex = true;
                     break;
                 }
@@ -1265,7 +1265,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      * This changes the query type to be 'update'.
      * Can be combined with set() and where() methods to create update queries.
      *
-     * @param \Cake\Database\ExpressionInterface|string|null $table Unused parameter.
+     * @param \Cake\Database\IExpression|string|null $table Unused parameter.
      * @return this
      */
     function update($table = null)

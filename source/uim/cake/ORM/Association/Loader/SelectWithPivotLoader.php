@@ -50,7 +50,7 @@ class SelectWithPivotLoader extends SelectLoader
     /**
      * Custom conditions for the junction association
      *
-     * @var \Cake\Database\ExpressionInterface|\Closure|array|string|null
+     * @var \Cake\Database\IExpression|\Closure|array|string|null
      */
     protected $junctionConditions;
 

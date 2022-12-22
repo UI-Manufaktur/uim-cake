@@ -19,8 +19,8 @@ namespace Cake\Http\Middleware;
 use Cake\Http\Cookie\CookieCollection;
 use Cake\Http\Response;
 use Cake\Utility\CookieCryptTrait;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -80,11 +80,11 @@ class EncryptedCookieMiddleware implements MiddlewareInterface
     /**
      * Apply cookie encryption/decryption.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if ($request->getCookieParams()) {
             $request = this->decodeCookies($request);
@@ -116,10 +116,10 @@ class EncryptedCookieMiddleware implements MiddlewareInterface
     /**
      * Decode cookies from the request.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to decode cookies from.
-     * @return \Psr\Http\Message\ServerRequestInterface Updated request with decoded cookies.
+     * @param \Psr\Http\Message\IServerRequest $request The request to decode cookies from.
+     * @return \Psr\Http\Message\IServerRequest Updated request with decoded cookies.
      */
-    protected function decodeCookies(ServerRequestInterface $request): ServerRequestInterface
+    protected function decodeCookies(IServerRequest $request): IServerRequest
     {
         $cookies = $request->getCookieParams();
         foreach (this->cookieNames as $name) {
@@ -154,10 +154,10 @@ class EncryptedCookieMiddleware implements MiddlewareInterface
     /**
      * Encode cookies from a response's Set-Cookie header
      *
-     * @param \Psr\Http\Message\ResponseInterface $response The response to encode cookies in.
-     * @return \Psr\Http\Message\ResponseInterface Updated response with encoded cookies.
+     * @param \Psr\Http\Message\IResponse $response The response to encode cookies in.
+     * @return \Psr\Http\Message\IResponse Updated response with encoded cookies.
      */
-    protected function encodeSetCookieHeader(ResponseInterface $response): ResponseInterface
+    protected function encodeSetCookieHeader(IResponse $response): IResponse
     {
         /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
         $cookies = CookieCollection::createFromHeader($response->getHeader('Set-Cookie'));

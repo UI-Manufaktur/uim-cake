@@ -17,8 +17,8 @@ declare(strict_types=1);
 namespace Cake\Http\Middleware;
 
 use Closure;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -29,9 +29,9 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * ```
  * function (
- *     ServerRequestInterface $request,
+ *     IServerRequest $request,
  *     RequestHandlerInterface $handler
- * ): ResponseInterface
+ * ): IResponse
  * ```
  *
  * such that it will operate as PSR-15 middleware.
@@ -58,11 +58,11 @@ class ClosureDecoratorMiddleware implements MiddlewareInterface
     /**
      * Run the callable to process an incoming server request.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request Request instance.
+     * @param \Psr\Http\Message\IServerRequest $request Request instance.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler Request handler instance.
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\IResponse
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         return (this->callable)(
             $request,

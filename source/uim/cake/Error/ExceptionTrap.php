@@ -8,7 +8,7 @@ use Cake\Error\Renderer\ConsoleExceptionRenderer;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Routing\Router;
 use InvalidArgumentException;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use Throwable;
 
 /**
@@ -106,7 +106,7 @@ class ExceptionTrap
      * Get an instance of the renderer.
      *
      * @param \Throwable $exception Exception to render
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The request if possible.
+     * @param \Psr\Http\Message\IServerRequest|null $request The request if possible.
      * @return \Cake\Error\ExceptionRendererInterface
      */
     function renderer(Throwable $exception, $request = null)
@@ -338,10 +338,10 @@ class ExceptionTrap
      * After logging is attempted the `Exception.beforeRender` event is triggered.
      *
      * @param \Throwable $exception The exception to log
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The optional request
+     * @param \Psr\Http\Message\IServerRequest|null $request The optional request
      * @return void
      */
-    function logException(Throwable $exception, ?ServerRequestInterface $request = null): void
+    function logException(Throwable $exception, ?IServerRequest $request = null): void
     {
         $shouldLog = this->_config['log'];
         if ($shouldLog) {

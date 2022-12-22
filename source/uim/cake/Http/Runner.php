@@ -16,8 +16,8 @@ declare(strict_types=1);
  */
 namespace Cake\Http;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -42,15 +42,15 @@ class Runner implements RequestHandlerInterface
 
     /**
      * @param \Cake\Http\MiddlewareQueue $queue The middleware queue
-     * @param \Psr\Http\Message\ServerRequestInterface $request The Server Request
+     * @param \Psr\Http\Message\IServerRequest $request The Server Request
      * @param \Psr\Http\Server\RequestHandlerInterface|null $fallbackHandler Fallback request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response object
+     * @return \Psr\Http\Message\IResponse A response object
      */
     function run(
         MiddlewareQueue $queue,
-        ServerRequestInterface $request,
+        IServerRequest $request,
         ?RequestHandlerInterface $fallbackHandler = null
-    ): ResponseInterface {
+    ): IResponse {
         this->queue = $queue;
         this->queue->rewind();
         this->fallbackHandler = $fallbackHandler;
@@ -61,10 +61,10 @@ class Runner implements RequestHandlerInterface
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The server request
-     * @return \Psr\Http\Message\ResponseInterface An updated response
+     * @param \Psr\Http\Message\IServerRequest $request The server request
+     * @return \Psr\Http\Message\IResponse An updated response
      */
-    function handle(ServerRequestInterface $request): ResponseInterface
+    function handle(IServerRequest $request): IResponse
     {
         if (this->queue->valid()) {
             $middleware = this->queue->current();

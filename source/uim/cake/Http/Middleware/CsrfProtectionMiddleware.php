@@ -24,8 +24,8 @@ use Cake\Http\Response;
 use Cake\Utility\Hash;
 use Cake\Utility\Security;
 use InvalidArgumentException;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
@@ -118,11 +118,11 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
     /**
      * Checks and sets the CSRF token depending on the HTTP verb.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $method = $request->getMethod();
         $hasData = in_array($method, ['PUT', 'POST', 'DELETE', 'PATCH'], true)
@@ -211,10 +211,10 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
     /**
      * Remove CSRF protection token from request data.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request object.
-     * @return \Psr\Http\Message\ServerRequestInterface
+     * @param \Psr\Http\Message\IServerRequest $request The request object.
+     * @return \Psr\Http\Message\IServerRequest
      */
-    protected function _unsetTokenField(ServerRequestInterface $request): ServerRequestInterface
+    protected function _unsetTokenField(IServerRequest $request): IServerRequest
     {
         $body = $request->getParsedBody();
         if (is_array($body)) {
@@ -358,15 +358,15 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * Add a CSRF token to the response cookies.
      *
      * @param string $token The token to add.
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to validate against.
-     * @param \Psr\Http\Message\ResponseInterface $response The response.
-     * @return \Psr\Http\Message\ResponseInterface $response Modified response.
+     * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
+     * @param \Psr\Http\Message\IResponse $response The response.
+     * @return \Psr\Http\Message\IResponse $response Modified response.
      */
     protected function _addTokenCookie(
         string $token,
-        ServerRequestInterface $request,
-        ResponseInterface $response
-    ): ResponseInterface {
+        IServerRequest $request,
+        IResponse $response
+    ): IResponse {
         $cookie = this->_createCookie($token, $request);
         if ($response instanceof Response) {
             return $response->withCookie($cookie);
@@ -378,11 +378,11 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
     /**
      * Validate the request data against the cookie token.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to validate against.
+     * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
      * @return void
      * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected function _validateToken(ServerRequestInterface $request): void
+    protected function _validateToken(IServerRequest $request): void
     {
         $cookie = Hash::get($request->getCookieParams(), this->_config['cookieName']);
 
@@ -424,10 +424,10 @@ class CsrfProtectionMiddleware implements MiddlewareInterface
      * Create response cookie
      *
      * @param string $value Cookie value
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request object.
+     * @param \Psr\Http\Message\IServerRequest $request The request object.
      * @return \Cake\Http\Cookie\CookieInterface
      */
-    protected function _createCookie(string $value, ServerRequestInterface $request): CookieInterface
+    protected function _createCookie(string $value, IServerRequest $request): CookieInterface
     {
         return Cookie::create(
             this->_config['cookieName'],

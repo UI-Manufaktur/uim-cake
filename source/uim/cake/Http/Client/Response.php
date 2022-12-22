@@ -18,7 +18,7 @@ namespace Cake\Http\Client;
 use Cake\Http\Cookie\CookieCollection;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 use RuntimeException;
 use SimpleXMLElement;
 
@@ -80,7 +80,7 @@ use SimpleXMLElement;
  * $content = $response->getStatusCode();
  * ```
  */
-class Response extends Message implements ResponseInterface
+class Response extends Message implements IResponse
 {
     use MessageTrait;
 

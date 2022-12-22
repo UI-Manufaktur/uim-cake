@@ -19,7 +19,7 @@ namespace Cake\Error\Renderer;
 use Cake\Console\ConsoleOutput;
 use Cake\Core\Configure;
 use Cake\Core\Exception\CakeException;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use Throwable;
 
 /**
@@ -51,10 +51,10 @@ class ConsoleExceptionRenderer
      * Constructor.
      *
      * @param \Throwable $error The error to render.
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request Not used.
+     * @param \Psr\Http\Message\IServerRequest|null $request Not used.
      * @param array $config Error handling configuration.
      */
-    public this(Throwable $error, ?ServerRequestInterface $request, array $config)
+    public this(Throwable $error, ?IServerRequest $request, array $config)
     {
         this->error = $error;
         this->output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
@@ -64,7 +64,7 @@ class ConsoleExceptionRenderer
     /**
      * Render an exception into a plain text message.
      *
-     * @return \Psr\Http\Message\ResponseInterface|string
+     * @return \Psr\Http\Message\IResponse|string
      */
     function render()
     {

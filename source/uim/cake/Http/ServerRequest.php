@@ -26,7 +26,7 @@ use InvalidArgumentException;
 use Laminas\Diactoros\PhpInputStream;
 use Laminas\Diactoros\Stream;
 use Laminas\Diactoros\UploadedFile;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileInterface;
 use Psr\Http\Message\UriInterface;
@@ -35,7 +35,7 @@ use Psr\Http\Message\UriInterface;
  * A class that helps wrap Request information and particulars about a single request.
  * Provides methods commonly used to introspect on the request headers and request body.
  */
-class ServerRequest implements ServerRequestInterface
+class ServerRequest implements IServerRequest
 {
     /**
      * Array of parameters parsed from the URL.

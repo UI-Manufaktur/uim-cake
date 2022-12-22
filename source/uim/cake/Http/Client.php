@@ -31,7 +31,7 @@ use InvalidArgumentException;
 use Laminas\Diactoros\Uri;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 
 /**
  * The end user interface for doing HTTP requests.
@@ -453,10 +453,10 @@ class Client implements ClientInterface
      * Sends a PSR-7 request and returns a PSR-7 response.
      *
      * @param \Psr\Http\Message\RequestInterface $request Request instance.
-     * @return \Psr\Http\Message\ResponseInterface Response instance.
+     * @return \Psr\Http\Message\IResponse Response instance.
      * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
      */
-    function sendRequest(RequestInterface $request): ResponseInterface
+    function sendRequest(RequestInterface $request): IResponse
     {
         return this->send($request, this->_config);
     }

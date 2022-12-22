@@ -29,8 +29,8 @@ use Cake\Routing\Router;
 use Cake\Routing\IRoutingApplication;
 use Exception;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -146,11 +146,11 @@ class RoutingMiddleware implements MiddlewareInterface
      * Any route/path specific middleware will be wrapped around $next and then the new middleware stack will be
      * invoked.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         this->loadRoutes();
         try {

@@ -42,8 +42,8 @@ namespace App;
 use Cake\Core\IHttpApplication;
 use Cake\Http\MiddlewareQueue;
 use Cake\Http\Response;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 
 class Application implements IHttpApplication
 {
@@ -73,10 +73,10 @@ class Application implements IHttpApplication
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param \Psr\Http\Message\IServerRequest $request The request
+     * @return \Psr\Http\Message\IResponse
      */
-    function handle(ServerRequestInterface $request): ResponseInterface
+    function handle(IServerRequest $request): IResponse
     {
         return new Response(['body'=>'Hello World!']);
     }

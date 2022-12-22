@@ -21,8 +21,8 @@ use Cake\Http\Exception\InvalidCsrfTokenException;
 use Cake\Http\Session;
 use Cake\Utility\Hash;
 use Cake\Utility\Security;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
@@ -88,11 +88,11 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
     /**
      * Checks and sets the CSRF token depending on the HTTP verb.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $method = $request->getMethod();
         $hasData = in_array($method, ['PUT', 'POST', 'DELETE', 'PATCH'], true)
@@ -205,10 +205,10 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
      * This ensures that the token does not cause failures during
      * form tampering protection.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request object.
-     * @return \Psr\Http\Message\ServerRequestInterface
+     * @param \Psr\Http\Message\IServerRequest $request The request object.
+     * @return \Psr\Http\Message\IServerRequest
      */
-    protected function unsetTokenField(ServerRequestInterface $request): ServerRequestInterface
+    protected function unsetTokenField(IServerRequest $request): IServerRequest
     {
         $body = $request->getParsedBody();
         if (is_array($body)) {
@@ -235,12 +235,12 @@ class SessionCsrfProtectionMiddleware implements MiddlewareInterface
     /**
      * Validate the request data against the cookie token.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to validate against.
+     * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
      * @param \Cake\Http\Session $session The session instance.
      * @return void
      * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected function validateToken(ServerRequestInterface $request, Session $session): void
+    protected function validateToken(IServerRequest $request, Session $session): void
     {
         $token = $session->read(this->_config['key']);
         if (!$token || !is_string($token)) {

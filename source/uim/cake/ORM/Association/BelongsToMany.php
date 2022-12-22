@@ -19,7 +19,7 @@ namespace Cake\ORM\Association;
 use Cake\Core\App;
 use Cake\Database\Expression\IdentifierExpression;
 use Cake\Database\Expression\QueryExpression;
-use Cake\Database\ExpressionInterface;
+use Cake\Database\IExpression;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Association;
 use Cake\ORM\Association\Loader\SelectWithPivotLoader;
@@ -1014,7 +1014,7 @@ class BelongsToMany extends Association
         foreach ($conditions as $field => $value) {
             if (is_string($field) && strpos($field, $alias) == 0) {
                 $matching[$field] = $value;
-            } elseif (is_int($field) || $value instanceof ExpressionInterface) {
+            } elseif (is_int($field) || $value instanceof IExpression) {
                 $matching[$field] = $value;
             }
         }

@@ -17,8 +17,8 @@ declare(strict_types=1);
 namespace Cake\Http;
 
 use Cake\Core\IHttpApplication;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 
 /**
  * Base class for standalone HTTP applications
@@ -45,12 +45,12 @@ abstract class MiddlewareApplication implements IHttpApplication
     /**
      * Generate a 404 response as no middleware handled the request.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param \Psr\Http\Message\IServerRequest $request The request
+     * @return \Psr\Http\Message\IResponse
      */
     function handle(
-        ServerRequestInterface $request
-    ): ResponseInterface {
+        IServerRequest $request
+    ): IResponse {
         return new Response(['body' => 'Not found', 'status' => 404]);
     }
 }

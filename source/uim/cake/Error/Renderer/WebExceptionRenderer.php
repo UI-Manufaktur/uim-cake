@@ -42,7 +42,7 @@ use Cake\Utility\Inflector;
 use Cake\View\Exception\MissingLayoutException;
 use Cake\View\Exception\MissingTemplateException;
 use PDOException;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 use Throwable;
 
 /**
@@ -219,7 +219,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
      *
      * @return \Cake\Http\Response The response to be sent.
      */
-    function render(): ResponseInterface
+    function render(): IResponse
     {
         $exception = this->error;
         $code = this->getHttpCode($exception);
@@ -295,7 +295,7 @@ class WebExceptionRenderer implements ExceptionRendererInterface
     /**
      * Emit the response content
      *
-     * @param \Psr\Http\Message\ResponseInterface|string $output The response to output.
+     * @param \Psr\Http\Message\IResponse|string $output The response to output.
      * @return void
      */
     function write($output): void

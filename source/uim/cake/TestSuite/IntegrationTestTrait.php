@@ -89,7 +89,7 @@ trait IntegrationTestTrait
     /**
      * The response for the most recent request.
      *
-     * @var \Psr\Http\Message\ResponseInterface|null
+     * @var \Psr\Http\Message\IResponse|null
      */
     protected $_response;
 

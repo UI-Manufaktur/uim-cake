@@ -16,8 +16,8 @@ declare(strict_types=1);
  */
 namespace Cake\Http;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 
 /**
  * Factory method for building controllers from request/response pairs.
@@ -29,19 +29,19 @@ interface ControllerFactoryInterface
     /**
      * Create a controller for a given request
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to build a controller for.
+     * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
      * @return mixed
      * @throws \Cake\Http\Exception\MissingControllerException
      * @psalm-return TController
      */
-    function create(ServerRequestInterface $request);
+    function create(IServerRequest $request);
 
     /**
      * Invoke a controller's action and wrapping methods.
      *
      * @param mixed $controller The controller to invoke.
-     * @return \Psr\Http\Message\ResponseInterface The response
+     * @return \Psr\Http\Message\IResponse The response
      * @psalm-param TController $controller
      */
-    function invoke($controller): ResponseInterface;
+    function invoke($controller): IResponse;
 }

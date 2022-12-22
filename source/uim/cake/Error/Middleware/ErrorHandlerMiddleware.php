@@ -26,8 +26,8 @@ use Cake\Http\Exception\RedirectException;
 use Cake\Http\Response;
 use InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
@@ -121,11 +121,11 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
     /**
      * Wrap the remaining middleware with error handling.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response
+     * @return \Psr\Http\Message\IResponse A response
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         try {
             return $handler->handle($request);
@@ -140,10 +140,10 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      * Handle an exception and generate an error response
      *
      * @param \Throwable $exception The exception to handle.
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function handleException(Throwable $exception, ServerRequestInterface $request): ResponseInterface
+    function handleException(Throwable $exception, IServerRequest $request): IResponse
     {
         if (this->errorHandler == null) {
             $handler = this->getExceptionTrap();
@@ -158,7 +158,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
         }
 
         try {
-            /** @var \Psr\Http\Message\ResponseInterface|string $response */
+            /** @var \Psr\Http\Message\IResponse|string $response */
             $response = $renderer->render();
             if (is_string($response)) {
                 return new Response(['body' => $response, 'status' => 500]);
@@ -176,9 +176,9 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      * Convert a redirect exception into a response.
      *
      * @param \Cake\Http\Exception\RedirectException $exception The exception to handle
-     * @return \Psr\Http\Message\ResponseInterface Response created from the redirect.
+     * @return \Psr\Http\Message\IResponse Response created from the redirect.
      */
-    function handleRedirect(RedirectException $exception): ResponseInterface
+    function handleRedirect(RedirectException $exception): IResponse
     {
         return new RedirectResponse(
             $exception->getMessage(),
@@ -190,9 +190,9 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
     /**
      * Handle internal errors.
      *
-     * @return \Psr\Http\Message\ResponseInterface A response
+     * @return \Psr\Http\Message\IResponse A response
      */
-    protected function handleInternalError(): ResponseInterface
+    protected function handleInternalError(): IResponse
     {
         return new Response([
             'body' => 'An Internal Server Error Occurred',

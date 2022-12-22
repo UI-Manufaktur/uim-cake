@@ -19,8 +19,8 @@ namespace Cake\Http\Middleware;
 
 use Cake\Core\InstanceConfigTrait;
 use ParagonIE\CSPBuilder\CSPBuilder;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
@@ -78,11 +78,11 @@ class CspMiddleware implements MiddlewareInterface
     /**
      * Add nonces (if enabled) to the request and apply the CSP header to the response.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if (this->getConfig('scriptNonce')) {
             $request = $request->withAttribute('cspScriptNonce', this->csp->nonce('script-src'));
@@ -92,7 +92,7 @@ class CspMiddleware implements MiddlewareInterface
         }
         $response = $handler->handle($request);
 
-        /** @var \Psr\Http\Message\ResponseInterface */
+        /** @var \Psr\Http\Message\IResponse */
         return this->csp->injectCSPHeader($response);
     }
 }

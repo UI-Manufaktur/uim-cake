@@ -24,8 +24,8 @@ use Cake\Event\EventManager;
 use Cake\Event\IEventManager;
 use InvalidArgumentException;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 
 /**
  * Runs an application invoking all the PSR7 middleware and the registered application.
@@ -67,15 +67,15 @@ class Server implements EventDispatcherInterface
      *   from event listeners.
      * - Run the middleware queue including the application.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface|null $request The request to use or null.
+     * @param \Psr\Http\Message\IServerRequest|null $request The request to use or null.
      * @param \Cake\Http\MiddlewareQueue|null $middlewareQueue MiddlewareQueue or null.
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\IResponse
      * @throws \RuntimeException When the application does not make a response.
      */
     function run(
-        ?ServerRequestInterface $request = null,
+        ?IServerRequest $request = null,
         ?MiddlewareQueue $middlewareQueue = null
-    ): ResponseInterface {
+    ): IResponse {
         this->bootstrap();
 
         $request = $request ?: ServerRequestFactory::fromGlobals();
@@ -115,12 +115,12 @@ class Server implements EventDispatcherInterface
     /**
      * Emit the response using the PHP SAPI.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response The response to emit
+     * @param \Psr\Http\Message\IResponse $response The response to emit
      * @param \Laminas\HttpHandlerRunner\Emitter\EmitterInterface|null $emitter The emitter to use.
      *   When null, a SAPI Stream Emitter will be used.
      * @return void
      */
-    function emit(ResponseInterface $response, ?EmitterInterface $emitter = null): void
+    function emit(IResponse $response, ?EmitterInterface $emitter = null): void
     {
         if (!$emitter) {
             $emitter = new ResponseEmitter();

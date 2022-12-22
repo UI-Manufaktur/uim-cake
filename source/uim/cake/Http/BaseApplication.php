@@ -35,8 +35,8 @@ use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\Routing\IRoutingApplication;
 use Closure;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 
 /**
  * Base class for full-stack applications
@@ -298,12 +298,12 @@ abstract class BaseApplication implements
      * - Create the controller that will handle this request.
      * - Invoke the controller.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param \Psr\Http\Message\IServerRequest $request The request
+     * @return \Psr\Http\Message\IResponse
      */
     function handle(
-        ServerRequestInterface $request
-    ): ResponseInterface {
+        IServerRequest $request
+    ): IResponse {
         $container = this->getContainer();
         $container->add(ServerRequest::class, $request);
 

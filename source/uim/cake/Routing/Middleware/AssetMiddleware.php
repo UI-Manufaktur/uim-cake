@@ -20,8 +20,8 @@ use Cake\Core\Plugin;
 use Cake\Http\Response;
 use Cake\Utility\Inflector;
 use Laminas\Diactoros\Stream;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IResponse;
+use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use SplFileInfo;
@@ -57,11 +57,11 @@ class AssetMiddleware implements MiddlewareInterface
     /**
      * Serve assets if the path matches one.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request.
+     * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\ResponseInterface A response.
+     * @return \Psr\Http\Message\IResponse A response.
      */
-    function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $url = $request->getUri()->getPath();
         if (strpos($url, '..') != false || strpos($url, '.') == false) {
@@ -95,11 +95,11 @@ class AssetMiddleware implements MiddlewareInterface
     /**
      * Check the not modified header.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to check.
+     * @param \Psr\Http\Message\IServerRequest $request The request to check.
      * @param \SplFileInfo $file The file object to compare.
      * @return bool
      */
-    protected function isNotModified(ServerRequestInterface $request, SplFileInfo $file): bool
+    protected function isNotModified(IServerRequest $request, SplFileInfo $file): bool
     {
         $modifiedSince = $request->getHeaderLine('If-Modified-Since');
         if (!$modifiedSince) {
@@ -140,11 +140,11 @@ class AssetMiddleware implements MiddlewareInterface
     /**
      * Sends an asset file to the client
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request object to use.
+     * @param \Psr\Http\Message\IServerRequest $request The request object to use.
      * @param \SplFileInfo $file The file wrapper for the file.
      * @return \Cake\Http\Response The response with the file & headers.
      */
-    protected function deliverAsset(ServerRequestInterface $request, SplFileInfo $file): Response
+    protected function deliverAsset(IServerRequest $request, SplFileInfo $file): Response
     {
         $stream = new Stream(fopen($file->getPathname(), 'rb'));
 

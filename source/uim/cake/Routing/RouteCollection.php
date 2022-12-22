@@ -19,7 +19,7 @@ namespace Cake\Routing;
 use Cake\Routing\Exception\DuplicateNamedRouteException;
 use Cake\Routing\Exception\MissingRouteException;
 use Cake\Routing\Route\Route;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 
 /**
@@ -162,13 +162,13 @@ class RouteCollection
     }
 
     /**
-     * Takes the ServerRequestInterface, iterates the routes until one is able to parse the route.
+     * Takes the IServerRequest, iterates the routes until one is able to parse the route.
      *
-     * @param \Psr\Http\Message\ServerRequestInterface $request The request to parse route data from.
+     * @param \Psr\Http\Message\IServerRequest $request The request to parse route data from.
      * @return array An array of request parameters parsed from the URL.
      * @throws \Cake\Routing\Exception\MissingRouteException When a URL has no matching route.
      */
-    function parseRequest(ServerRequestInterface $request): array
+    function parseRequest(IServerRequest $request): array
     {
         $uri = $request->getUri();
         $urlPath = urldecode($uri->getPath());
