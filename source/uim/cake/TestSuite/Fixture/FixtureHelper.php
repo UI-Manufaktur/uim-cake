@@ -133,22 +133,22 @@ class FixtureHelper
      */
     public function insert(array $fixtures): void
     {
-        $this->runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
+        this->runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
-                $sortedFixtures = $this->sortByConstraint($connection, $groupFixtures);
+                $sortedFixtures = this->sortByConstraint($connection, $groupFixtures);
                 if ($sortedFixtures) {
-                    $this->insertConnection($connection, $sortedFixtures);
+                    this->insertConnection($connection, $sortedFixtures);
                 } else {
                     $helper = new ConnectionHelper();
                     $helper->runWithoutConstraints(
                         $connection,
                         function (Connection $connection) use ($groupFixtures): void {
-                            $this->insertConnection($connection, $groupFixtures);
+                            this->insertConnection($connection, $groupFixtures);
                         }
                     );
                 }
             } else {
-                $this->insertConnection($connection, $groupFixtures);
+                this->insertConnection($connection, $groupFixtures);
             }
         }, $fixtures);
     }
@@ -186,26 +186,26 @@ class FixtureHelper
      */
     public function truncate(array $fixtures): void
     {
-        $this->runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
+        this->runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
                 $sortedFixtures = null;
                 if ($connection->getDriver()->supports(DriverInterface::FEATURE_TRUNCATE_WITH_CONSTRAINTS)) {
-                    $sortedFixtures = $this->sortByConstraint($connection, $groupFixtures);
+                    $sortedFixtures = this->sortByConstraint($connection, $groupFixtures);
                 }
 
                 if ($sortedFixtures !== null) {
-                    $this->truncateConnection($connection, array_reverse($sortedFixtures));
+                    this->truncateConnection($connection, array_reverse($sortedFixtures));
                 } else {
                     $helper = new ConnectionHelper();
                     $helper->runWithoutConstraints(
                         $connection,
                         function (Connection $connection) use ($groupFixtures): void {
-                            $this->truncateConnection($connection, $groupFixtures);
+                            this->truncateConnection($connection, $groupFixtures);
                         }
                     );
                 }
             } else {
-                $this->truncateConnection($connection, $groupFixtures);
+                this->truncateConnection($connection, $groupFixtures);
             }
         }, $fixtures);
     }
@@ -246,7 +246,7 @@ class FixtureHelper
         $constrained = [];
         $unconstrained = [];
         foreach ($fixtures as $fixture) {
-            $references = $this->getForeignReferences($connection, $fixture);
+            $references = this->getForeignReferences($connection, $fixture);
             if ($references) {
                 $constrained[$fixture->sourceName()] = ['references' => $references, 'fixture' => $fixture];
             } else {

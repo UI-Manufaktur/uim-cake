@@ -39,7 +39,7 @@ class BodyContains extends ResponseBase
     {
         parent::__construct($response);
 
-        $this->ignoreCase = $ignoreCase;
+        this->ignoreCase = $ignoreCase;
     }
 
     /**
@@ -51,11 +51,11 @@ class BodyContains extends ResponseBase
     public function matches($other): bool
     {
         $method = 'mb_strpos';
-        if ($this->ignoreCase) {
+        if (this->ignoreCase) {
             $method = 'mb_stripos';
         }
 
-        return $method($this->_getBodyAsString(), $other) !== false;
+        return $method(this->_getBodyAsString(), $other) !== false;
     }
 
     /**

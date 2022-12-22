@@ -35,7 +35,7 @@ class FileSentAs extends ResponseBase
      */
     public function matches($other): bool
     {
-        $file = $this->response->getFile();
+        $file = this->response->getFile();
         if (!$file) {
             return false;
         }

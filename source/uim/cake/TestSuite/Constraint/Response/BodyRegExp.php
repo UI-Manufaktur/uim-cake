@@ -30,7 +30,7 @@ class BodyRegExp extends ResponseBase
      */
     public function matches($other): bool
     {
-        return preg_match($other, $this->_getBodyAsString()) > 0;
+        return preg_match($other, this->_getBodyAsString()) > 0;
     }
 
     /**
@@ -49,6 +49,6 @@ class BodyRegExp extends ResponseBase
      */
     public function failureDescription($other): string
     {
-        return '`' . $other . '`' . ' ' . $this->toString();
+        return '`' . $other . '`' . ' ' . this->toString();
     }
 }
