@@ -21,7 +21,7 @@ use Cake\Cache\Cache;
 use Cake\Datasource\ModelAwareTrait;
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
-use Cake\Event\EventManagerInterface;
+use Cake\Event\IEventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
@@ -110,13 +110,13 @@ abstract class Cell implements EventDispatcherInterface
      *
      * @param \Cake\Http\ServerRequest $request The request to use in the cell.
      * @param \Cake\Http\Response $response The response to use in the cell.
-     * @param \Cake\Event\EventManagerInterface|null $eventManager The eventManager to bind events to.
+     * @param \Cake\Event\IEventManager|null $eventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */
     public this(
         ServerRequest $request,
         Response $response,
-        ?EventManagerInterface $eventManager = null,
+        ?IEventManager $eventManager = null,
         array $cellOptions = []
     ) {
         if ($eventManager != null) {

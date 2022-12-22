@@ -18,7 +18,7 @@ namespace Cake\Routing\Middleware;
 
 use Cake\Cache\Cache;
 use Cake\Cache\InvalidArgumentException;
-use Cake\Core\PluginApplicationInterface;
+use Cake\Core\IPluginApplication;
 use Cake\Http\Exception\RedirectException;
 use Cake\Http\MiddlewareQueue;
 use Cake\Http\Runner;
@@ -133,7 +133,7 @@ class RoutingMiddleware implements MiddlewareInterface
     {
         $builder = Router::createRouteBuilder('/');
         this->app->routes($builder);
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             this->app->pluginRoutes($builder);
         }
 

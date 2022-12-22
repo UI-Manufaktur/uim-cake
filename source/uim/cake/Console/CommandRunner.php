@@ -22,11 +22,11 @@ use Cake\Console\Exception\MissingOptionException;
 use Cake\Console\Exception\StopException;
 use Cake\Core\ConsoleApplicationInterface;
 use Cake\Core\ContainerApplicationInterface;
-use Cake\Core\PluginApplicationInterface;
+use Cake\Core\IPluginApplication;
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventManager;
-use Cake\Event\EventManagerInterface;
+use Cake\Event\IEventManager;
 use Cake\Routing\Router;
 use Cake\Routing\RoutingApplicationInterface;
 use Cake\Utility\Inflector;
@@ -140,7 +140,7 @@ class CommandRunner implements EventDispatcherInterface
         }
         $commands = this->app->console($commands);
 
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             $commands = this->app->pluginConsole($commands);
         }
         this->dispatchEvent('Console.buildCommands', ['commands' => $commands]);
@@ -193,7 +193,7 @@ class CommandRunner implements EventDispatcherInterface
     protected function bootstrap(): void
     {
         this->app->bootstrap();
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             this->app->pluginBootstrap();
         }
     }
@@ -201,11 +201,11 @@ class CommandRunner implements EventDispatcherInterface
     /**
      * Get the application's event manager or the global one.
      *
-     * @return \Cake\Event\EventManagerInterface
+     * @return \Cake\Event\IEventManager
      */
-    function getEventManager(): EventManagerInterface
+    function getEventManager(): IEventManager
     {
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             return this->app->getEventManager();
         }
 
@@ -218,13 +218,13 @@ class CommandRunner implements EventDispatcherInterface
      * If the application does not support events and this method is used as
      * a setter, an exception will be raised.
      *
-     * @param \Cake\Event\EventManagerInterface $eventManager The event manager to set.
+     * @param \Cake\Event\IEventManager $eventManager The event manager to set.
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setEventManager(EventManagerInterface $eventManager)
+    function setEventManager(IEventManager $eventManager)
     {
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             this->app->setEventManager($eventManager);
 
             return this;
@@ -395,7 +395,7 @@ class CommandRunner implements EventDispatcherInterface
         $builder = Router::createRouteBuilder('/');
 
         this->app->routes($builder);
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             this->app->pluginRoutes($builder);
         }
     }

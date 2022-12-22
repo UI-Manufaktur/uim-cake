@@ -269,7 +269,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    function bootstrap(PluginApplicationInterface $app): void
+    function bootstrap(IPluginApplication $app): void
     {
         $bootstrap = this->getConfigPath() . 'bootstrap.php';
         if (is_file($bootstrap)) {

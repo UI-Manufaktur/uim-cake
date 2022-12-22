@@ -24,7 +24,7 @@ use Cake\Core\Exception\CakeException;
  * can create multiple instances of this object to manage local events or keep a single instance
  * and pass it around to manage all events in your app.
  */
-class EventManager implements EventManagerInterface
+class EventManager implements IEventManager
 {
     /**
      * The default priority queue value for new, attached listeners

@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\View;
 
 use Cake\Core\App;
-use Cake\Event\EventManagerInterface;
+use Cake\Event\IEventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\View\Exception\MissingViewException;
@@ -557,7 +557,7 @@ class ViewBuilder implements JsonSerializable, Serializable
      * @param array<string, mixed> $vars The view variables/context to use.
      * @param \Cake\Http\ServerRequest|null $request The request to use.
      * @param \Cake\Http\Response|null $response The response to use.
-     * @param \Cake\Event\EventManagerInterface|null $events The event manager to use.
+     * @param \Cake\Event\IEventManager|null $events The event manager to use.
      * @return \Cake\View\View
      * @throws \Cake\View\Exception\MissingViewException
      */
@@ -565,7 +565,7 @@ class ViewBuilder implements JsonSerializable, Serializable
         array $vars = [],
         ?ServerRequest $request = null,
         ?Response $response = null,
-        ?EventManagerInterface $events = null
+        ?IEventManager $events = null
     ): View {
         $className = this->_className;
         if ($className == null) {

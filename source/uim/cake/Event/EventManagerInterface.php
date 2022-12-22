@@ -16,9 +16,9 @@ declare(strict_types=1);
 namespace Cake\Event;
 
 /**
- * Interface EventManagerInterface
+ * Interface IEventManager
  */
-interface EventManagerInterface
+interface IEventManager
 {
     /**
      * Adds a new listener to an event.

@@ -26,7 +26,7 @@ use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventInterface;
 use Cake\Event\EventListenerInterface;
-use Cake\Event\EventManagerInterface;
+use Cake\Event\IEventManager;
 use Cake\Http\ContentTypeNegotiation;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
@@ -180,14 +180,14 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      *   but expect that features that use the request parameters will not work.
      * @param \Cake\Http\Response|null $response Response object for this controller.
      * @param string|null $name Override the name useful in testing when using mocks.
-     * @param \Cake\Event\EventManagerInterface|null $eventManager The event manager. Defaults to a new instance.
+     * @param \Cake\Event\IEventManager|null $eventManager The event manager. Defaults to a new instance.
      * @param \Cake\Controller\ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
     public this(
         ?ServerRequest $request = null,
         ?Response $response = null,
         ?string $name = null,
-        ?EventManagerInterface $eventManager = null,
+        ?IEventManager $eventManager = null,
         ?ComponentRegistry $components = null
     ) {
         if ($name != null) {

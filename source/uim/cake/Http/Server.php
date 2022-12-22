@@ -17,11 +17,11 @@ declare(strict_types=1);
 namespace Cake\Http;
 
 use Cake\Core\HttpApplicationInterface;
-use Cake\Core\PluginApplicationInterface;
+use Cake\Core\IPluginApplication;
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventManager;
-use Cake\Event\EventManagerInterface;
+use Cake\Event\IEventManager;
 use InvalidArgumentException;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -81,7 +81,7 @@ class Server implements EventDispatcherInterface
         $request = $request ?: ServerRequestFactory::fromGlobals();
 
         $middleware = this->app->middleware($middlewareQueue ?? new MiddlewareQueue());
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             $middleware = this->app->pluginMiddleware($middleware);
         }
 
@@ -107,7 +107,7 @@ class Server implements EventDispatcherInterface
     protected function bootstrap(): void
     {
         this->app->bootstrap();
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             this->app->pluginBootstrap();
         }
     }
@@ -141,9 +141,9 @@ class Server implements EventDispatcherInterface
     /**
      * Get the application's event manager or the global one.
      *
-     * @return \Cake\Event\EventManagerInterface
+     * @return \Cake\Event\IEventManager
      */
-    function getEventManager(): EventManagerInterface
+    function getEventManager(): IEventManager
     {
         if (this->app instanceof EventDispatcherInterface) {
             return this->app->getEventManager();
@@ -157,11 +157,11 @@ class Server implements EventDispatcherInterface
      *
      * If the application does not support events, an exception will be raised.
      *
-     * @param \Cake\Event\EventManagerInterface $eventManager The event manager to set.
+     * @param \Cake\Event\IEventManager $eventManager The event manager to set.
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setEventManager(EventManagerInterface $eventManager)
+    function setEventManager(IEventManager $eventManager)
     {
         if (this->app instanceof EventDispatcherInterface) {
             this->app->setEventManager($eventManager);

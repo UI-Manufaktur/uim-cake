@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace Cake\TestSuite;
 
 use Cake\Core\HttpApplicationInterface;
-use Cake\Core\PluginApplicationInterface;
+use Cake\Core\IPluginApplication;
 use Cake\Http\FlashMessage;
 use Cake\Http\Server;
 use Cake\Http\ServerRequest;
@@ -77,7 +77,7 @@ class MiddlewareDispatcher
         // Simulate application bootstrap and route loading.
         // We need both to ensure plugins are loaded.
         this->app->bootstrap();
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             this->app->pluginBootstrap();
         }
         $builder = Router::createRouteBuilder('/');
@@ -85,7 +85,7 @@ class MiddlewareDispatcher
         if (this->app instanceof RoutingApplicationInterface) {
             this->app->routes($builder);
         }
-        if (this->app instanceof PluginApplicationInterface) {
+        if (this->app instanceof IPluginApplication) {
             this->app->pluginRoutes($builder);
         }
 

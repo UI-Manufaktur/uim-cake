@@ -26,11 +26,11 @@ use Cake\Core\IContainer;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Core\HttpApplicationInterface;
 use Cake\Core\Plugin;
-use Cake\Core\PluginApplicationInterface;
+use Cake\Core\IPluginApplication;
 use Cake\Core\PluginCollection;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventManager;
-use Cake\Event\EventManagerInterface;
+use Cake\Event\IEventManager;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\Routing\RoutingApplicationInterface;
@@ -53,7 +53,7 @@ abstract class BaseApplication implements
     ConsoleApplicationInterface,
     ContainerApplicationInterface,
     HttpApplicationInterface,
-    PluginApplicationInterface,
+    IPluginApplication,
     RoutingApplicationInterface
 {
     use EventDispatcherTrait;
@@ -88,12 +88,12 @@ abstract class BaseApplication implements
      * Constructor
      *
      * @param string $configDir The directory the bootstrap configuration is held in.
-     * @param \Cake\Event\EventManagerInterface|null $eventManager Application event manager instance.
+     * @param \Cake\Event\IEventManager|null $eventManager Application event manager instance.
      * @param \Cake\Http\ControllerFactoryInterface|null $controllerFactory Controller factory.
      */
     public this(
         string $configDir,
-        ?EventManagerInterface $eventManager = null,
+        ?IEventManager $eventManager = null,
         ?ControllerFactoryInterface $controllerFactory = null
     ) {
         this->configDir = rtrim($configDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;

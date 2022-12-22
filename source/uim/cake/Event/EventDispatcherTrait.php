@@ -25,7 +25,7 @@ trait EventDispatcherTrait
      * Instance of the Cake\Event\EventManager this object is using
      * to dispatch inner events.
      *
-     * @var \Cake\Event\EventManagerInterface|null
+     * @var \Cake\Event\IEventManager|null
      */
     protected $_eventManager;
 
@@ -42,9 +42,9 @@ trait EventDispatcherTrait
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @return \Cake\Event\EventManagerInterface
+     * @return \Cake\Event\IEventManager
      */
-    function getEventManager(): EventManagerInterface
+    function getEventManager(): IEventManager
     {
         if (this->_eventManager == null) {
             this->_eventManager = new EventManager();
@@ -54,15 +54,15 @@ trait EventDispatcherTrait
     }
 
     /**
-     * Returns the Cake\Event\EventManagerInterface instance for this object.
+     * Returns the Cake\Event\IEventManager instance for this object.
      *
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @param \Cake\Event\EventManagerInterface $eventManager the eventManager to set
+     * @param \Cake\Event\IEventManager $eventManager the eventManager to set
      * @return this
      */
-    function setEventManager(EventManagerInterface $eventManager)
+    function setEventManager(IEventManager $eventManager)
     {
         this->_eventManager = $eventManager;
 

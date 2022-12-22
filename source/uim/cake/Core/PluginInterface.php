@@ -77,10 +77,10 @@ interface PluginInterface
      * The host application is provided as an argument. This allows you to load additional
      * plugin dependencies, or attach events.
      *
-     * @param \Cake\Core\PluginApplicationInterface $app The host application
+     * @param \Cake\Core\IPluginApplication $app The host application
      * @return void
      */
-    function bootstrap(PluginApplicationInterface $app): void;
+    function bootstrap(IPluginApplication $app): void;
 
     /**
      * Add console commands for the plugin.

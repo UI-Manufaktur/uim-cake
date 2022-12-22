@@ -47,15 +47,15 @@ interface EventDispatcherInterface
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @param \Cake\Event\EventManagerInterface $eventManager the eventManager to set
+     * @param \Cake\Event\IEventManager $eventManager the eventManager to set
      * @return this
      */
-    function setEventManager(EventManagerInterface $eventManager);
+    function setEventManager(IEventManager $eventManager);
 
     /**
      * Returns the Cake\Event\EventManager manager instance for this object.
      *
-     * @return \Cake\Event\EventManagerInterface
+     * @return \Cake\Event\IEventManager
      */
-    function getEventManager(): EventManagerInterface;
+    function getEventManager(): IEventManager;
 }
