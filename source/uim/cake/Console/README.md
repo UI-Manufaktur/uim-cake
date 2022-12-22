@@ -42,10 +42,10 @@ For our `Application` class we can start with:
 namespace App;
 
 use App\Command\HelloCommand;
-use Cake\Core\ConsoleApplicationInterface;
+use Cake\Core\IConsoleApplication;
 use Cake\Console\CommandCollection;
 
-class Application implements ConsoleApplicationInterface
+class Application implements IConsoleApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.

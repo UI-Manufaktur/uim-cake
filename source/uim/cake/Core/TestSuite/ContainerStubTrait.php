@@ -35,7 +35,7 @@ trait ContainerStubTrait
     /**
      * The customized application class name.
      *
-     * @psalm-var class-string<\Cake\Core\HttpApplicationInterface>|class-string<\Cake\Core\ConsoleApplicationInterface>|null
+     * @psalm-var class-string<\Cake\Core\IHttpApplication>|class-string<\Cake\Core\IConsoleApplication>|null
      * @var string|null
      */
     protected $_appClass;
@@ -60,7 +60,7 @@ trait ContainerStubTrait
      * @param string $class The application class name.
      * @param array|null $constructorArgs The constructor arguments for your application class.
      * @return void
-     * @psalm-param class-string<\Cake\Core\HttpApplicationInterface>|class-string<\Cake\Core\ConsoleApplicationInterface> $class
+     * @psalm-param class-string<\Cake\Core\IHttpApplication>|class-string<\Cake\Core\IConsoleApplication> $class
      */
     function configApplication(string $class, ?array $constructorArgs): void
     {
@@ -73,7 +73,7 @@ trait ContainerStubTrait
      *
      * Uses the configuration set in `configApplication()`.
      *
-     * @return \Cake\Core\HttpApplicationInterface|\Cake\Core\ConsoleApplicationInterface
+     * @return \Cake\Core\IHttpApplication|\Cake\Core\IConsoleApplication
      */
     protected function createApp()
     {

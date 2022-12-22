@@ -7,7 +7,7 @@ use Psr\Http\Server\IRequestHandler;
  * An interface defining the methods that the
  * http server depend on.
  */
-interface HttpApplicationInterface : IRequestHandler
+interface IHttpApplication : IRequestHandler
 {
     /**
      * Load all the application configuration and bootstrap logic.

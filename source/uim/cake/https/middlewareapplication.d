@@ -1,6 +1,6 @@
 module uim.cake.https;
 
-import uim.cake.core.HttpApplicationInterface;
+import uim.cake.core.IHttpApplication;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 
@@ -14,7 +14,7 @@ use Psr\Http\Message\IServerRequest;
  * You can overload the `handle` method to provide your own logic
  * to run when no middleware generates a response.
  */
-abstract class MiddlewareApplication : HttpApplicationInterface
+abstract class MiddlewareApplication : IHttpApplication
 {
 
     abstract void bootstrap();

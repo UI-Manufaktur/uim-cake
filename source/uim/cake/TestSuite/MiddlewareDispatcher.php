@@ -15,7 +15,7 @@ declare(strict_types=1);
  */
 namespace Cake\TestSuite;
 
-use Cake\Core\HttpApplicationInterface;
+use Cake\Core\IHttpApplication;
 use Cake\Core\IPluginApplication;
 use Cake\Http\FlashMessage;
 use Cake\Http\Server;
@@ -36,16 +36,16 @@ class MiddlewareDispatcher
     /**
      * The application that is being dispatched.
      *
-     * @var \Cake\Core\HttpApplicationInterface
+     * @var \Cake\Core\IHttpApplication
      */
     protected $app;
 
     /**
      * Constructor
      *
-     * @param \Cake\Core\HttpApplicationInterface $app The test case to run.
+     * @param \Cake\Core\IHttpApplication $app The test case to run.
      */
-    public this(HttpApplicationInterface $app)
+    public this(IHttpApplication $app)
     {
         this->app = $app;
     }

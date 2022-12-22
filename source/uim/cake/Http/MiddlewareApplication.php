@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Http;
 
-use Cake\Core\HttpApplicationInterface;
+use Cake\Core\IHttpApplication;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -30,7 +30,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * You can overload the `handle` method to provide your own logic
  * to run when no middleware generates a response.
  */
-abstract class MiddlewareApplication implements HttpApplicationInterface
+abstract class MiddlewareApplication implements IHttpApplication
 {
     /**
      * @inheritDoc

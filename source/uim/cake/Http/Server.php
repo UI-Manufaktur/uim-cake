@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Http;
 
-use Cake\Core\HttpApplicationInterface;
+use Cake\Core\IHttpApplication;
 use Cake\Core\IPluginApplication;
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
@@ -35,7 +35,7 @@ class Server implements EventDispatcherInterface
     use EventDispatcherTrait;
 
     /**
-     * @var \Cake\Core\HttpApplicationInterface
+     * @var \Cake\Core\IHttpApplication
      */
     protected $app;
 
@@ -47,10 +47,10 @@ class Server implements EventDispatcherInterface
     /**
      * Constructor
      *
-     * @param \Cake\Core\HttpApplicationInterface $app The application to use.
+     * @param \Cake\Core\IHttpApplication $app The application to use.
      * @param \Cake\Http\Runner|null $runner Application runner.
      */
-    public this(HttpApplicationInterface $app, ?Runner $runner = null)
+    public this(IHttpApplication $app, ?Runner $runner = null)
     {
         this->app = $app;
         this->runner = $runner ?? new Runner();
@@ -131,9 +131,9 @@ class Server implements EventDispatcherInterface
     /**
      * Get the current application.
      *
-     * @return \Cake\Core\HttpApplicationInterface The application that will be run.
+     * @return \Cake\Core\IHttpApplication The application that will be run.
      */
-    function getApp(): HttpApplicationInterface
+    function getApp(): IHttpApplication
     {
         return this->app;
     }

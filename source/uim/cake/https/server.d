@@ -5,7 +5,7 @@
 **********************************************************************************************************/
 module uim.cake.https;
 
-import uim.cake.core.HttpApplicationInterface;
+import uim.cake.core.IHttpApplication;
 import uim.cake.core.IPluginApplication;
 import uim.cake.events\IEventDispatcher;
 import uim.cake.events\EventDispatcherTrait;
@@ -24,7 +24,7 @@ class Server : IEventDispatcher
     use EventDispatcherTrait;
 
     /**
-     * @var \Cake\Core\HttpApplicationInterface
+     * @var \Cake\Core\IHttpApplication
      */
     protected app;
 
@@ -36,10 +36,10 @@ class Server : IEventDispatcher
     /**
      * Constructor
      *
-     * @param \Cake\Core\HttpApplicationInterface $app The application to use.
+     * @param \Cake\Core\IHttpApplication $app The application to use.
      * @param \Cake\Http\Runner|null $runner Application runner.
      */
-    this(HttpApplicationInterface $app, ?Runner $runner = null) {
+    this(IHttpApplication $app, ?Runner $runner = null) {
         this.app = $app;
         this.runner = $runner ?? new Runner();
     }
@@ -116,9 +116,9 @@ class Server : IEventDispatcher
     /**
      * Get the current application.
      *
-     * @return \Cake\Core\HttpApplicationInterface The application that will be run.
+     * @return \Cake\Core\IHttpApplication The application that will be run.
      */
-    auto getApp(): HttpApplicationInterface
+    auto getApp(): IHttpApplication
     {
         return this.app;
     }

@@ -278,7 +278,7 @@ trait ConsoleIntegrationTestTrait
     protected function makeRunner()
     {
         if (this->_useCommandRunner) {
-            /** @var \Cake\Core\ConsoleApplicationInterface $app */
+            /** @var \Cake\Core\IConsoleApplication $app */
             $app = this->createApp();
 
             return new CommandRunner($app);

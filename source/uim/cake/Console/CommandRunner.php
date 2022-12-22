@@ -20,7 +20,7 @@ use Cake\Command\VersionCommand;
 use Cake\Console\Command\HelpCommand;
 use Cake\Console\Exception\MissingOptionException;
 use Cake\Console\Exception\StopException;
-use Cake\Core\ConsoleApplicationInterface;
+use Cake\Core\IConsoleApplication;
 use Cake\Core\IContainerApplication;
 use Cake\Core\IPluginApplication;
 use Cake\Event\EventDispatcherInterface;
@@ -43,7 +43,7 @@ class CommandRunner implements EventDispatcherInterface
     /**
      * The application console commands are being run for.
      *
-     * @var \Cake\Core\ConsoleApplicationInterface
+     * @var \Cake\Core\IConsoleApplication
      */
     protected $app;
 
@@ -71,12 +71,12 @@ class CommandRunner implements EventDispatcherInterface
     /**
      * Constructor
      *
-     * @param \Cake\Core\ConsoleApplicationInterface $app The application to run CLI commands for.
+     * @param \Cake\Core\IConsoleApplication $app The application to run CLI commands for.
      * @param string $root The root command name to be removed from argv.
      * @param \Cake\Console\CommandFactoryInterface|null $factory Command factory instance.
      */
     public this(
-        ConsoleApplicationInterface $app,
+        IConsoleApplication $app,
         string $root = 'cake',
         ?CommandFactoryInterface $factory = null
     ) {

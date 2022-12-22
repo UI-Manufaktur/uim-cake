@@ -32,19 +32,19 @@ To learn more read the [Http Client documentation](https://book.UIM.org/4/en/cor
 
 ## Using the Http Server
 
-The Http Server allows an `HttpApplicationInterface` to process requests and
+The Http Server allows an `IHttpApplication` to process requests and
 emit responses. To get started first implement the
-`Cake\Http\HttpApplicationInterface`  A minimal example could look like:
+`Cake\Http\IHttpApplication`  A minimal example could look like:
 
 ```phpmodule App;
 
-import uim.cake.core.HttpApplicationInterface;
+import uim.cake.core.IHttpApplication;
 import uim.cake.https\MiddlewareQueue;
 import uim.cake.https\Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 
-class Application : HttpApplicationInterface
+class Application : IHttpApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.

@@ -17,7 +17,7 @@ import uim.cake;
 abstract class BaseApplication :
     IConsoleApplication,
     IContainerApplication,
-    HttpApplicationInterface,
+    IHttpApplication,
     IPluginApplication,
     IRoutingApplication
 {

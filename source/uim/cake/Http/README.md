@@ -32,20 +32,20 @@ To learn more read the [Http Client documentation](https://book.cakephp.org/4/en
 
 ## Using the Http Server
 
-The Http Server allows an `HttpApplicationInterface` to process requests and
+The Http Server allows an `IHttpApplication` to process requests and
 emit responses. To get started first implement the
-`Cake\Http\HttpApplicationInterface`  A minimal example could look like:
+`Cake\Http\IHttpApplication`  A minimal example could look like:
 
 ```php
 namespace App;
 
-use Cake\Core\HttpApplicationInterface;
+use Cake\Core\IHttpApplication;
 use Cake\Http\MiddlewareQueue;
 use Cake\Http\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Application implements HttpApplicationInterface
+class Application implements IHttpApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.

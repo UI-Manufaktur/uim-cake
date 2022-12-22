@@ -19,12 +19,12 @@ namespace Cake\Http;
 
 use Cake\Console\CommandCollection;
 use Cake\Controller\ControllerFactory;
-use Cake\Core\ConsoleApplicationInterface;
+use Cake\Core\IConsoleApplication;
 use Cake\Core\Container;
 use Cake\Core\IContainerApplication;
 use Cake\Core\IContainer;
 use Cake\Core\Exception\MissingPluginException;
-use Cake\Core\HttpApplicationInterface;
+use Cake\Core\IHttpApplication;
 use Cake\Core\Plugin;
 use Cake\Core\IPluginApplication;
 use Cake\Core\PluginCollection;
@@ -50,9 +50,9 @@ use Psr\Http\Message\ServerRequestInterface;
  * of middleware, and delegates request/response handling to the correct controller.
  */
 abstract class BaseApplication implements
-    ConsoleApplicationInterface,
+    IConsoleApplication,
     IContainerApplication,
-    HttpApplicationInterface,
+    IHttpApplication,
     IPluginApplication,
     IRoutingApplication
 {
