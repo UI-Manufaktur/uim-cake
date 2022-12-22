@@ -46,7 +46,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
      * @return this
      * @see \Cake\Database\Query::where()
      */
-    public function filter($conditions, array $types = [])
+    function filter($conditions, array $types = [])
     {
         if (this->filter === null) {
             this->filter = new QueryExpression();
@@ -67,7 +67,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
      * @param string|null $name Window name
      * @return this
      */
-    public function over(?string $name = null)
+    function over(?string $name = null)
     {
         if (this->window === null) {
             this->window = new WindowExpression();
@@ -83,7 +83,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function partition($partitions)
+    function partition($partitions)
     {
         this->over();
         this->window->partition($partitions);
@@ -94,7 +94,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function order($fields)
+    function order($fields)
     {
         this->over();
         this->window->order($fields);
@@ -105,7 +105,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function range($start, $end = 0)
+    function range($start, $end = 0)
     {
         this->over();
         this->window->range($start, $end);
@@ -116,7 +116,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function rows(?int $start, ?int $end = 0)
+    function rows(?int $start, ?int $end = 0)
     {
         this->over();
         this->window->rows($start, $end);
@@ -127,7 +127,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function groups(?int $start, ?int $end = 0)
+    function groups(?int $start, ?int $end = 0)
     {
         this->over();
         this->window->groups($start, $end);
@@ -138,7 +138,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function frame(
+    function frame(
         string $type,
         $startOffset,
         string $startDirection,
@@ -154,7 +154,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function excludeCurrent()
+    function excludeCurrent()
     {
         this->over();
         this->window->excludeCurrent();
@@ -165,7 +165,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function excludeGroup()
+    function excludeGroup()
     {
         this->over();
         this->window->excludeGroup();
@@ -176,7 +176,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function excludeTies()
+    function excludeTies()
     {
         this->over();
         this->window->excludeTies();
@@ -187,7 +187,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $sql = parent::sql($binder);
         if (this->filter != null) {
@@ -225,7 +225,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
     /**
      * @inheritDoc
      */
-    public function count(): int
+    function count(): int
     {
         $count = parent::count();
         if (this->window != null) {
@@ -240,7 +240,7 @@ class AggregateExpression extends FunctionExpression implements WindowInterface
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         parent::__clone();
         if (this->filter != null) {

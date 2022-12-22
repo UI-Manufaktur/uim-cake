@@ -84,7 +84,7 @@ class CommonTableExpression implements ExpressionInterface
      * @param string $name The CTE name.
      * @return this
      */
-    public function name(string $name)
+    function name(string $name)
     {
         this->name = new IdentifierExpression($name);
 
@@ -97,7 +97,7 @@ class CommonTableExpression implements ExpressionInterface
      * @param \Cake\Database\ExpressionInterface|\Closure $query CTE query
      * @return this
      */
-    public function query($query)
+    function query($query)
     {
         if ($query instanceof Closure) {
             $query = $query();
@@ -118,7 +118,7 @@ class CommonTableExpression implements ExpressionInterface
      * @param \Cake\Database\Expression\IdentifierExpression|array<\Cake\Database\Expression\IdentifierExpression>|array<string>|string $fields Field names
      * @return this
      */
-    public function field($fields)
+    function field($fields)
     {
         $fields = (array)$fields;
         foreach ($fields as &$field) {
@@ -136,7 +136,7 @@ class CommonTableExpression implements ExpressionInterface
      *
      * @return this
      */
-    public function materialized()
+    function materialized()
     {
         this->materialized = 'MATERIALIZED';
 
@@ -148,7 +148,7 @@ class CommonTableExpression implements ExpressionInterface
      *
      * @return this
      */
-    public function notMaterialized()
+    function notMaterialized()
     {
         this->materialized = 'NOT MATERIALIZED';
 
@@ -160,7 +160,7 @@ class CommonTableExpression implements ExpressionInterface
      *
      * @return bool
      */
-    public function isRecursive(): bool
+    function isRecursive(): bool
     {
         return this->recursive;
     }
@@ -170,7 +170,7 @@ class CommonTableExpression implements ExpressionInterface
      *
      * @return this
      */
-    public function recursive()
+    function recursive()
     {
         this->recursive = true;
 
@@ -180,7 +180,7 @@ class CommonTableExpression implements ExpressionInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $fields = '';
         if (this->fields) {
@@ -225,7 +225,7 @@ class CommonTableExpression implements ExpressionInterface
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         this->name = clone this->name;
         if (this->query) {

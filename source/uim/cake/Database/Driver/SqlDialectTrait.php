@@ -37,7 +37,7 @@ trait SqlDialectTrait
      * @param string $identifier The identifier to quote.
      * @return string
      */
-    public function quoteIdentifier(string $identifier): string
+    function quoteIdentifier(string $identifier): string
     {
         $identifier = trim($identifier);
 
@@ -96,7 +96,7 @@ trait SqlDialectTrait
      * (select, insert, update, delete)
      * @return \Closure
      */
-    public function queryTranslator(string $type): Closure
+    function queryTranslator(string $type): Closure
     {
         return function ($query) use ($type) {
             if (this->isAutoQuotingEnabled()) {
@@ -279,7 +279,7 @@ trait SqlDialectTrait
      * @param string|int $name save point name
      * @return string
      */
-    public function savePointSQL($name): string
+    function savePointSQL($name): string
     {
         return 'SAVEPOINT LEVEL' . $name;
     }
@@ -290,7 +290,7 @@ trait SqlDialectTrait
      * @param string|int $name save point name
      * @return string
      */
-    public function releaseSavePointSQL($name): string
+    function releaseSavePointSQL($name): string
     {
         return 'RELEASE SAVEPOINT LEVEL' . $name;
     }
@@ -301,7 +301,7 @@ trait SqlDialectTrait
      * @param string|int $name save point name
      * @return string
      */
-    public function rollbackSavePointSQL($name): string
+    function rollbackSavePointSQL($name): string
     {
         return 'ROLLBACK TO SAVEPOINT LEVEL' . $name;
     }

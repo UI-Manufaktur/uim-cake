@@ -57,7 +57,7 @@ class TupleComparison extends ComparisonExpression
      *
      * @return array<string|null>
      */
-    public function getType(): array
+    function getType(): array
     {
         return this->_type;
     }
@@ -68,7 +68,7 @@ class TupleComparison extends ComparisonExpression
      * @param mixed $value The value to compare
      * @return void
      */
-    public function setValue($value): void
+    function setValue($value): void
     {
         if (this->isMulti()) {
             if (is_array($value) && !is_array(current($value))) {
@@ -90,7 +90,7 @@ class TupleComparison extends ComparisonExpression
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $template = '(%s) %s (%s)';
         $fields = [];
@@ -224,7 +224,7 @@ class TupleComparison extends ComparisonExpression
      *
      * @return bool
      */
-    public function isMulti(): bool
+    function isMulti(): bool
     {
         return in_array(strtolower(this->_operator), ['in', 'not in']);
     }

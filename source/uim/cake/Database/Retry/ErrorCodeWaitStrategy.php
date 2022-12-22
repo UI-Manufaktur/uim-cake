@@ -50,7 +50,7 @@ class ErrorCodeWaitStrategy implements RetryStrategyInterface
     /**
      * @inheritDoc
      */
-    public function shouldRetry(Exception $exception, int $retryCount): bool
+    function shouldRetry(Exception $exception, int $retryCount): bool
     {
         if (
             $exception instanceof PDOException &&

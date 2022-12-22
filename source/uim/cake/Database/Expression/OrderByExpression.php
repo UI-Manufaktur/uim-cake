@@ -40,7 +40,7 @@ class OrderByExpression extends QueryExpression
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $order = [];
         foreach (this->_conditions as $k => $direction) {

@@ -90,7 +90,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      * @param mixed $value The value to compare
      * @return void
      */
-    public function setValue($value): void
+    function setValue($value): void
     {
         $value = this->_castToExpression($value, this->_type);
 
@@ -108,7 +108,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      *
      * @return mixed
      */
-    public function getValue()
+    function getValue()
     {
         return this->_value;
     }
@@ -119,7 +119,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      * @param string $operator The operator to be used for the comparison.
      * @return void
      */
-    public function setOperator(string $operator): void
+    function setOperator(string $operator): void
     {
         this->_operator = $operator;
     }
@@ -129,7 +129,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      *
      * @return string
      */
-    public function getOperator(): string
+    function getOperator(): string
     {
         return this->_operator;
     }
@@ -137,7 +137,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         /** @var \Cake\Database\ExpressionInterface|string $field */
         $field = this->_field;
@@ -189,7 +189,7 @@ class ComparisonExpression implements ExpressionInterface, FieldInterface
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         foreach (['_value', '_field'] as $prop) {
             if (this->{$prop} instanceof ExpressionInterface) {

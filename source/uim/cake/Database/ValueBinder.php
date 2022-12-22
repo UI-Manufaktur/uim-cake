@@ -49,7 +49,7 @@ class ValueBinder
      * to database
      * @return void
      */
-    public function bind($param, $value, $type = null): void
+    function bind($param, $value, $type = null): void
     {
         this->_bindings[$param] = compact('value', 'type') + [
             'placeholder' => is_int($param) ? $param : substr($param, 1),
@@ -65,7 +65,7 @@ class ValueBinder
      * if it starts with a colon, then the same string is returned
      * @return string to be used as a placeholder in a query expression
      */
-    public function placeholder(string $token): string
+    function placeholder(string $token): string
     {
         $number = this->_bindingsCount++;
         if ($token[0] != ':' && $token != '?') {
@@ -83,7 +83,7 @@ class ValueBinder
      * @param string|int|null $type The type with which all values will be bound
      * @return array with the placeholders to insert in the query
      */
-    public function generateManyNamed(iterable $values, $type = null): array
+    function generateManyNamed(iterable $values, $type = null): array
     {
         $placeholders = [];
         foreach ($values as $k => $value) {
@@ -105,7 +105,7 @@ class ValueBinder
      *
      * @return array
      */
-    public function bindings(): array
+    function bindings(): array
     {
         return this->_bindings;
     }
@@ -115,7 +115,7 @@ class ValueBinder
      *
      * @return void
      */
-    public function reset(): void
+    function reset(): void
     {
         this->_bindings = [];
         this->_bindingsCount = 0;
@@ -126,7 +126,7 @@ class ValueBinder
      *
      * @return void
      */
-    public function resetCount(): void
+    function resetCount(): void
     {
         this->_bindingsCount = 0;
     }
@@ -137,7 +137,7 @@ class ValueBinder
      * @param \Cake\Database\StatementInterface $statement The statement to add parameters to.
      * @return void
      */
-    public function attachTo(StatementInterface $statement): void
+    function attachTo(StatementInterface $statement): void
     {
         $bindings = this->bindings();
         if (empty($bindings)) {

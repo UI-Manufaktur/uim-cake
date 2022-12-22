@@ -35,7 +35,7 @@ trait TypeMapTrait
      * @param \Cake\Database\TypeMap|array $typeMap Creates a TypeMap if array, otherwise sets the given TypeMap
      * @return this
      */
-    public function setTypeMap($typeMap)
+    function setTypeMap($typeMap)
     {
         this->_typeMap = is_array($typeMap) ? new TypeMap($typeMap) : $typeMap;
 
@@ -47,7 +47,7 @@ trait TypeMapTrait
      *
      * @return \Cake\Database\TypeMap
      */
-    public function getTypeMap(): TypeMap
+    function getTypeMap(): TypeMap
     {
         if (this->_typeMap === null) {
             this->_typeMap = new TypeMap();
@@ -70,7 +70,7 @@ trait TypeMapTrait
      * @return this
      * @see \Cake\Database\TypeMap::setDefaults()
      */
-    public function setDefaultTypes(array $types)
+    function setDefaultTypes(array $types)
     {
         this->getTypeMap()->setDefaults($types);
 
@@ -82,7 +82,7 @@ trait TypeMapTrait
      *
      * @return array<int|string, string>
      */
-    public function getDefaultTypes(): array
+    function getDefaultTypes(): array
     {
         return this->getTypeMap()->getDefaults();
     }

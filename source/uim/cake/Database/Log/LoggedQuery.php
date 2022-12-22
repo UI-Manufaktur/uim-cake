@@ -125,7 +125,7 @@ class LoggedQuery implements JsonSerializable
      *
      * @return array<string, mixed>
      */
-    public function getContext(): array
+    function getContext(): array
     {
         return [
             'numRows' => this->numRows,
@@ -138,7 +138,7 @@ class LoggedQuery implements JsonSerializable
      *
      * @return array<string, mixed>
      */
-    public function jsonSerialize(): array
+    function jsonSerialize(): array
     {
         $error = this->error;
         if ($error != null) {
@@ -163,7 +163,7 @@ class LoggedQuery implements JsonSerializable
      *
      * @return string
      */
-    public function __toString(): string
+    function __toString(): string
     {
         $sql = this->query;
         if (!empty(this->params)) {

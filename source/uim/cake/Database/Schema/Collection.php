@@ -58,7 +58,7 @@ class Collection implements CollectionInterface
      *
      * @return array<string> The list of tables in the connected database/schema.
      */
-    public function listTablesWithoutViews(): array
+    function listTablesWithoutViews(): array
     {
         [$sql, $params] = this->_dialect->listTablesWithoutViewsSql(this->_connection->config());
         $result = [];
@@ -76,7 +76,7 @@ class Collection implements CollectionInterface
      *
      * @return array<string> The list of tables and views in the connected database/schema.
      */
-    public function listTables(): array
+    function listTables(): array
     {
         [$sql, $params] = this->_dialect->listTablesSql(this->_connection->config());
         $result = [];
@@ -107,7 +107,7 @@ class Collection implements CollectionInterface
      * @return \Cake\Database\Schema\TableSchema Object with column metadata.
      * @throws \Cake\Database\Exception\DatabaseException when table cannot be described.
      */
-    public function describe(string $name, array $options = []): TableSchemaInterface
+    function describe(string $name, array $options = []): TableSchemaInterface
     {
         $config = this->_connection->config();
         if (strpos($name, '.')) {

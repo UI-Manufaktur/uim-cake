@@ -66,7 +66,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      *
      * @return bool
      */
-    public function isNamedOnly(): bool
+    function isNamedOnly(): bool
     {
         return this->name->getIdentifier() && (!this->partitions && !this->frame && !this->order);
     }
@@ -77,7 +77,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      * @param string $name Window name
      * @return this
      */
-    public function name(string $name)
+    function name(string $name)
     {
         this->name = new IdentifierExpression($name);
 
@@ -87,7 +87,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function partition($partitions)
+    function partition($partitions)
     {
         if (!$partitions) {
             return this;
@@ -115,7 +115,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function order($fields)
+    function order($fields)
     {
         if (!$fields) {
             return this;
@@ -137,7 +137,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function range($start, $end = 0)
+    function range($start, $end = 0)
     {
         return this->frame(self::RANGE, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
@@ -145,7 +145,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function rows(?int $start, ?int $end = 0)
+    function rows(?int $start, ?int $end = 0)
     {
         return this->frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
@@ -153,7 +153,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function groups(?int $start, ?int $end = 0)
+    function groups(?int $start, ?int $end = 0)
     {
         return this->frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
@@ -161,7 +161,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function frame(
+    function frame(
         string $type,
         $startOffset,
         string $startDirection,
@@ -186,7 +186,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function excludeCurrent()
+    function excludeCurrent()
     {
         this->exclusion = 'CURRENT ROW';
 
@@ -196,7 +196,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function excludeGroup()
+    function excludeGroup()
     {
         this->exclusion = 'GROUP';
 
@@ -206,7 +206,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function excludeTies()
+    function excludeTies()
     {
         this->exclusion = 'TIES';
 
@@ -216,7 +216,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $clauses = [];
         if (this->name->getIdentifier()) {
@@ -322,7 +322,7 @@ class WindowExpression implements ExpressionInterface, WindowInterface
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         this->name = clone this->name;
         foreach (this->partitions as $i => $partition) {

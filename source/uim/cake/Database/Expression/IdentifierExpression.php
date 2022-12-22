@@ -60,7 +60,7 @@ class IdentifierExpression implements ExpressionInterface
      * @param string $identifier The identifier
      * @return void
      */
-    public function setIdentifier(string $identifier): void
+    function setIdentifier(string $identifier): void
     {
         this->_identifier = $identifier;
     }
@@ -70,7 +70,7 @@ class IdentifierExpression implements ExpressionInterface
      *
      * @return string
      */
-    public function getIdentifier(): string
+    function getIdentifier(): string
     {
         return this->_identifier;
     }
@@ -81,7 +81,7 @@ class IdentifierExpression implements ExpressionInterface
      * @param string $collation Identifier collation
      * @return void
      */
-    public function setCollation(string $collation): void
+    function setCollation(string $collation): void
     {
         this->collation = $collation;
     }
@@ -91,7 +91,7 @@ class IdentifierExpression implements ExpressionInterface
      *
      * @return string|null
      */
-    public function getCollation(): ?string
+    function getCollation(): ?string
     {
         return this->collation;
     }
@@ -99,7 +99,7 @@ class IdentifierExpression implements ExpressionInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $sql = this->_identifier;
         if (this->collation) {

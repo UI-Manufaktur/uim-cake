@@ -61,7 +61,7 @@ class CachedCollection implements CollectionInterface
     /**
      * @inheritDoc
      */
-    public function listTablesWithoutViews(): array
+    function listTablesWithoutViews(): array
     {
         return this->collection->listTablesWithoutViews();
     }
@@ -69,7 +69,7 @@ class CachedCollection implements CollectionInterface
     /**
      * @inheritDoc
      */
-    public function listTables(): array
+    function listTables(): array
     {
         return this->collection->listTables();
     }
@@ -77,7 +77,7 @@ class CachedCollection implements CollectionInterface
     /**
      * @inheritDoc
      */
-    public function describe(string $name, array $options = []): TableSchemaInterface
+    function describe(string $name, array $options = []): TableSchemaInterface
     {
         $options += ['forceRefresh' => false];
         $cacheKey = this->cacheKey($name);
@@ -101,7 +101,7 @@ class CachedCollection implements CollectionInterface
      * @param string $name The name to get a cache key for.
      * @return string The cache key.
      */
-    public function cacheKey(string $name): string
+    function cacheKey(string $name): string
     {
         return this->prefix . '_' . $name;
     }
@@ -112,7 +112,7 @@ class CachedCollection implements CollectionInterface
      * @param \Psr\SimpleCache\CacheInterface $cacher Cacher object
      * @return this
      */
-    public function setCacher(CacheInterface $cacher)
+    function setCacher(CacheInterface $cacher)
     {
         this->cacher = $cacher;
 
@@ -124,7 +124,7 @@ class CachedCollection implements CollectionInterface
      *
      * @return \Psr\SimpleCache\CacheInterface $cacher Cacher object
      */
-    public function getCacher(): CacheInterface
+    function getCacher(): CacheInterface
     {
         return this->cacher;
     }

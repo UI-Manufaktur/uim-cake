@@ -77,7 +77,7 @@ class UnaryExpression implements ExpressionInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $operand = this->_value;
         if ($operand instanceof ExpressionInterface) {
@@ -109,7 +109,7 @@ class UnaryExpression implements ExpressionInterface
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         if (this->_value instanceof ExpressionInterface) {
             this->_value = clone this->_value;

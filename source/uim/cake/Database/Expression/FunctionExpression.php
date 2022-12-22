@@ -79,7 +79,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      * @param string $name The name of the function
      * @return this
      */
-    public function setName(string $name)
+    function setName(string $name)
     {
         this->_name = $name;
 
@@ -91,7 +91,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      *
      * @return string
      */
-    public function getName(): string
+    function getName(): string
     {
         return this->_name;
     }
@@ -108,7 +108,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      * @return this
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    public function add($conditions, array $types = [], bool $prepend = false)
+    function add($conditions, array $types = [], bool $prepend = false)
     {
         $put = $prepend ? 'array_unshift' : 'array_push';
         $typeMap = this->getTypeMap()->setTypes($types);
@@ -143,7 +143,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $parts = [];
         foreach (this->_conditions as $condition) {
@@ -171,7 +171,7 @@ class FunctionExpression extends QueryExpression implements TypedResultInterface
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         return 1 + count(this->_conditions);
     }

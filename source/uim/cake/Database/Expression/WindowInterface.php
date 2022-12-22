@@ -52,7 +52,7 @@ interface WindowInterface
      * @param \Cake\Database\ExpressionInterface|\Closure|array<\Cake\Database\ExpressionInterface|string>|string $partitions Partition expressions
      * @return this
      */
-    public function partition($partitions);
+    function partition($partitions);
 
     /**
      * Adds one or more order clauses to the window.
@@ -60,7 +60,7 @@ interface WindowInterface
      * @param \Cake\Database\ExpressionInterface|\Closure|array<\Cake\Database\ExpressionInterface|string>|string $fields Order expressions
      * @return this
      */
-    public function order($fields);
+    function order($fields);
 
     /**
      * Adds a simple range frame to the window.
@@ -83,7 +83,7 @@ interface WindowInterface
      *  If not passed in, only frame start SQL will be generated.
      * @return this
      */
-    public function range($start, $end = 0);
+    function range($start, $end = 0);
 
     /**
      * Adds a simple rows frame to the window.
@@ -95,7 +95,7 @@ interface WindowInterface
      *  If not passed in, only frame start SQL will be generated.
      * @return this
      */
-    public function rows(?int $start, ?int $end = 0);
+    function rows(?int $start, ?int $end = 0);
 
     /**
      * Adds a simple groups frame to the window.
@@ -107,7 +107,7 @@ interface WindowInterface
      *  If not passed in, only frame start SQL will be generated.
      * @return this
      */
-    public function groups(?int $start, ?int $end = 0);
+    function groups(?int $start, ?int $end = 0);
 
     /**
      * Adds a frame to the window.
@@ -132,7 +132,7 @@ interface WindowInterface
      * @psalm-param self::PRECEDING|self::FOLLOWING $startDirection
      * @psalm-param self::PRECEDING|self::FOLLOWING $endDirection
      */
-    public function frame(
+    function frame(
         string $type,
         $startOffset,
         string $startDirection,
@@ -145,19 +145,19 @@ interface WindowInterface
      *
      * @return this
      */
-    public function excludeCurrent();
+    function excludeCurrent();
 
     /**
      * Adds group frame exclusion.
      *
      * @return this
      */
-    public function excludeGroup();
+    function excludeGroup();
 
     /**
      * Adds ties frame exclusion.
      *
      * @return this
      */
-    public function excludeTies();
+    function excludeTies();
 }

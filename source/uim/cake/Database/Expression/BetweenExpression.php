@@ -74,7 +74,7 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $parts = [
             'from' => this->_from,
@@ -133,7 +133,7 @@ class BetweenExpression implements ExpressionInterface, FieldInterface
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         foreach (['_field', '_from', '_to'] as $part) {
             if (this->{$part} instanceof ExpressionInterface) {

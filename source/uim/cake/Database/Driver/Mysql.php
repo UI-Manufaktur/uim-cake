@@ -122,7 +122,7 @@ class Mysql extends Driver
      *
      * @return bool true on success
      */
-    public function connect(): bool
+    function connect(): bool
     {
         if (this->_connection) {
             return true;
@@ -178,7 +178,7 @@ class Mysql extends Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    public function enabled(): bool
+    function enabled(): bool
     {
         return in_array('mysql', PDO::getAvailableDrivers(), true);
     }
@@ -189,7 +189,7 @@ class Mysql extends Driver
      * @param \Cake\Database\Query|string $query The query to prepare.
      * @return \Cake\Database\StatementInterface
      */
-    public function prepare($query): StatementInterface
+    function prepare($query): StatementInterface
     {
         this->connect();
         $isObject = $query instanceof Query;
@@ -210,7 +210,7 @@ class Mysql extends Driver
     /**
      * @inheritDoc
      */
-    public function schemaDialect(): SchemaDialect
+    function schemaDialect(): SchemaDialect
     {
         if (this->_schemaDialect === null) {
             this->_schemaDialect = new MysqlSchemaDialect(this);
@@ -222,7 +222,7 @@ class Mysql extends Driver
     /**
      * @inheritDoc
      */
-    public function schema(): string
+    function schema(): string
     {
         return this->_config['database'];
     }
@@ -230,7 +230,7 @@ class Mysql extends Driver
     /**
      * @inheritDoc
      */
-    public function disableForeignKeySQL(): string
+    function disableForeignKeySQL(): string
     {
         return 'SET foreign_key_checks = 0';
     }
@@ -238,7 +238,7 @@ class Mysql extends Driver
     /**
      * @inheritDoc
      */
-    public function enableForeignKeySQL(): string
+    function enableForeignKeySQL(): string
     {
         return 'SET foreign_key_checks = 1';
     }
@@ -246,7 +246,7 @@ class Mysql extends Driver
     /**
      * @inheritDoc
      */
-    public function supports(string $feature): bool
+    function supports(string $feature): bool
     {
         switch ($feature) {
             case static::FEATURE_CTE:
@@ -265,7 +265,7 @@ class Mysql extends Driver
     /**
      * @inheritDoc
      */
-    public function supportsDynamicConstraints(): bool
+    function supportsDynamicConstraints(): bool
     {
         return true;
     }
@@ -275,7 +275,7 @@ class Mysql extends Driver
      *
      * @return bool
      */
-    public function isMariadb(): bool
+    function isMariadb(): bool
     {
         this->version();
 
@@ -287,7 +287,7 @@ class Mysql extends Driver
      *
      * @return string
      */
-    public function version(): string
+    function version(): string
     {
         if (this->_version === null) {
             this->connect();
@@ -309,7 +309,7 @@ class Mysql extends Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_CTE)` instead
      */
-    public function supportsCTEs(): bool
+    function supportsCTEs(): bool
     {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
@@ -322,7 +322,7 @@ class Mysql extends Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_JSON)` instead
      */
-    public function supportsNativeJson(): bool
+    function supportsNativeJson(): bool
     {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
@@ -335,7 +335,7 @@ class Mysql extends Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_WINDOW)` instead
      */
-    public function supportsWindowFunctions(): bool
+    function supportsWindowFunctions(): bool
     {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 

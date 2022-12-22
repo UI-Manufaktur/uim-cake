@@ -85,7 +85,7 @@ class ValuesExpression implements ExpressionInterface
      * @return void
      * @throws \Cake\Database\Exception\DatabaseException When mixing array + Query data types.
      */
-    public function add($values): void
+    function add($values): void
     {
         if (
             (
@@ -116,7 +116,7 @@ class ValuesExpression implements ExpressionInterface
      * @param array $columns Array with columns to be inserted.
      * @return this
      */
-    public function setColumns(array $columns)
+    function setColumns(array $columns)
     {
         this->_columns = $columns;
         this->_castedExpressions = false;
@@ -129,7 +129,7 @@ class ValuesExpression implements ExpressionInterface
      *
      * @return array
      */
-    public function getColumns(): array
+    function getColumns(): array
     {
         return this->_columns;
     }
@@ -161,7 +161,7 @@ class ValuesExpression implements ExpressionInterface
      * @param array $values Array with values to be inserted.
      * @return this
      */
-    public function setValues(array $values)
+    function setValues(array $values)
     {
         this->_values = $values;
         this->_castedExpressions = false;
@@ -174,7 +174,7 @@ class ValuesExpression implements ExpressionInterface
      *
      * @return array
      */
-    public function getValues(): array
+    function getValues(): array
     {
         if (!this->_castedExpressions) {
             this->_processExpressions();
@@ -190,7 +190,7 @@ class ValuesExpression implements ExpressionInterface
      * @param \Cake\Database\Query $query The query to set
      * @return this
      */
-    public function setQuery(Query $query)
+    function setQuery(Query $query)
     {
         this->_query = $query;
 
@@ -203,7 +203,7 @@ class ValuesExpression implements ExpressionInterface
      *
      * @return \Cake\Database\Query|null
      */
-    public function getQuery(): ?Query
+    function getQuery(): ?Query
     {
         return this->_query;
     }
@@ -211,7 +211,7 @@ class ValuesExpression implements ExpressionInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         if (empty(this->_values) && empty(this->_query)) {
             return '';

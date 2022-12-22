@@ -51,7 +51,7 @@ class StringExpression implements ExpressionInterface
      * @param string $collation String collation
      * @return void
      */
-    public function setCollation(string $collation): void
+    function setCollation(string $collation): void
     {
         this->collation = $collation;
     }
@@ -61,7 +61,7 @@ class StringExpression implements ExpressionInterface
      *
      * @return string
      */
-    public function getCollation(): string
+    function getCollation(): string
     {
         return this->collation;
     }
@@ -69,7 +69,7 @@ class StringExpression implements ExpressionInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         $placeholder = $binder->placeholder('c');
         $binder->bind($placeholder, this->string, 'string');

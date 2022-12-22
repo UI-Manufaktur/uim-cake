@@ -84,7 +84,7 @@ class Postgres extends Driver
      *
      * @return bool true on success
      */
-    public function connect(): bool
+    function connect(): bool
     {
         if (this->_connection) {
             return true;
@@ -127,7 +127,7 @@ class Postgres extends Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    public function enabled(): bool
+    function enabled(): bool
     {
         return in_array('pgsql', PDO::getAvailableDrivers(), true);
     }
@@ -135,7 +135,7 @@ class Postgres extends Driver
     /**
      * @inheritDoc
      */
-    public function schemaDialect(): SchemaDialect
+    function schemaDialect(): SchemaDialect
     {
         if (this->_schemaDialect === null) {
             this->_schemaDialect = new PostgresSchemaDialect(this);
@@ -150,7 +150,7 @@ class Postgres extends Driver
      * @param string $encoding The encoding to use.
      * @return void
      */
-    public function setEncoding(string $encoding): void
+    function setEncoding(string $encoding): void
     {
         this->connect();
         this->_connection->exec('SET NAMES ' . this->_connection->quote($encoding));
@@ -163,7 +163,7 @@ class Postgres extends Driver
      * @param string $schema The schema names to set `search_path` to.
      * @return void
      */
-    public function setSchema(string $schema): void
+    function setSchema(string $schema): void
     {
         this->connect();
         this->_connection->exec('SET search_path TO ' . this->_connection->quote($schema));
@@ -172,7 +172,7 @@ class Postgres extends Driver
     /**
      * @inheritDoc
      */
-    public function disableForeignKeySQL(): string
+    function disableForeignKeySQL(): string
     {
         return 'SET CONSTRAINTS ALL DEFERRED';
     }
@@ -180,7 +180,7 @@ class Postgres extends Driver
     /**
      * @inheritDoc
      */
-    public function enableForeignKeySQL(): string
+    function enableForeignKeySQL(): string
     {
         return 'SET CONSTRAINTS ALL IMMEDIATE';
     }
@@ -188,7 +188,7 @@ class Postgres extends Driver
     /**
      * @inheritDoc
      */
-    public function supports(string $feature): bool
+    function supports(string $feature): bool
     {
         switch ($feature) {
             case static::FEATURE_CTE:
@@ -207,7 +207,7 @@ class Postgres extends Driver
     /**
      * @inheritDoc
      */
-    public function supportsDynamicConstraints(): bool
+    function supportsDynamicConstraints(): bool
     {
         return true;
     }
@@ -341,7 +341,7 @@ class Postgres extends Driver
      *
      * @return \Cake\Database\PostgresCompiler
      */
-    public function newCompiler(): QueryCompiler
+    function newCompiler(): QueryCompiler
     {
         return new PostgresCompiler();
     }

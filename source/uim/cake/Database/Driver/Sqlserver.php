@@ -111,7 +111,7 @@ class Sqlserver extends Driver
      * @throws \InvalidArgumentException if an unsupported setting is in the driver config
      * @return bool true on success
      */
-    public function connect(): bool
+    function connect(): bool
     {
         if (this->_connection) {
             return true;
@@ -186,7 +186,7 @@ class Sqlserver extends Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    public function enabled(): bool
+    function enabled(): bool
     {
         return in_array('sqlsrv', PDO::getAvailableDrivers(), true);
     }
@@ -197,7 +197,7 @@ class Sqlserver extends Driver
      * @param \Cake\Database\Query|string $query The query to prepare.
      * @return \Cake\Database\StatementInterface
      */
-    public function prepare($query): StatementInterface
+    function prepare($query): StatementInterface
     {
         this->connect();
 
@@ -231,7 +231,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function savePointSQL($name): string
+    function savePointSQL($name): string
     {
         return 'SAVE TRANSACTION t' . $name;
     }
@@ -239,7 +239,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function releaseSavePointSQL($name): string
+    function releaseSavePointSQL($name): string
     {
         // SQLServer has no release save point operation.
         return '';
@@ -248,7 +248,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function rollbackSavePointSQL($name): string
+    function rollbackSavePointSQL($name): string
     {
         return 'ROLLBACK TRANSACTION t' . $name;
     }
@@ -256,7 +256,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function disableForeignKeySQL(): string
+    function disableForeignKeySQL(): string
     {
         return 'EXEC sp_MSforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT all"';
     }
@@ -264,7 +264,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function enableForeignKeySQL(): string
+    function enableForeignKeySQL(): string
     {
         return 'EXEC sp_MSforeachtable "ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all"';
     }
@@ -272,7 +272,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function supports(string $feature): bool
+    function supports(string $feature): bool
     {
         switch ($feature) {
             case static::FEATURE_CTE:
@@ -292,7 +292,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function supportsDynamicConstraints(): bool
+    function supportsDynamicConstraints(): bool
     {
         return true;
     }
@@ -300,7 +300,7 @@ class Sqlserver extends Driver
     /**
      * @inheritDoc
      */
-    public function schemaDialect(): SchemaDialect
+    function schemaDialect(): SchemaDialect
     {
         if (this->_schemaDialect === null) {
             this->_schemaDialect = new SqlserverSchemaDialect(this);
@@ -314,7 +314,7 @@ class Sqlserver extends Driver
      *
      * @return \Cake\Database\SqlserverCompiler
      */
-    public function newCompiler(): QueryCompiler
+    function newCompiler(): QueryCompiler
     {
         return new SqlserverCompiler();
     }

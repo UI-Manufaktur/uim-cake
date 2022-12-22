@@ -50,7 +50,7 @@ class OrderClauseExpression implements ExpressionInterface, FieldInterface
     /**
      * @inheritDoc
      */
-    public function sql(ValueBinder $binder): string
+    function sql(ValueBinder $binder): string
     {
         /** @var \Cake\Database\ExpressionInterface|string $field */
         $field = this->_field;
@@ -81,7 +81,7 @@ class OrderClauseExpression implements ExpressionInterface, FieldInterface
      *
      * @return void
      */
-    public function __clone()
+    function __clone()
     {
         if (this->_field instanceof ExpressionInterface) {
             this->_field = clone this->_field;

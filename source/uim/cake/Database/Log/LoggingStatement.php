@@ -63,7 +63,7 @@ class LoggingStatement extends StatementDecorator
      * @return bool True on success, false otherwise
      * @throws \Exception Re-throws any exception raised during query execution.
      */
-    public function execute(?array $params = null): bool
+    function execute(?array $params = null): bool
     {
         this->startTime = microtime(true);
 
@@ -92,7 +92,7 @@ class LoggingStatement extends StatementDecorator
     /**
      * @inheritDoc
      */
-    public function fetch($type = self::FETCH_TYPE_NUM)
+    function fetch($type = self::FETCH_TYPE_NUM)
     {
         $record = parent::fetch($type);
 
@@ -106,7 +106,7 @@ class LoggingStatement extends StatementDecorator
     /**
      * @inheritDoc
      */
-    public function fetchAll($type = self::FETCH_TYPE_NUM)
+    function fetchAll($type = self::FETCH_TYPE_NUM)
     {
         $results = parent::fetchAll($type);
 
@@ -120,7 +120,7 @@ class LoggingStatement extends StatementDecorator
     /**
      * @inheritDoc
      */
-    public function rowCount(): int
+    function rowCount(): int
     {
         $result = parent::rowCount();
 
@@ -159,7 +159,7 @@ class LoggingStatement extends StatementDecorator
      * @param string|int|null $type PDO type or name of configured Type class
      * @return void
      */
-    public function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = 'string'): void
     {
         parent::bindValue($column, $value, $type);
 
@@ -178,7 +178,7 @@ class LoggingStatement extends StatementDecorator
      * @param \Psr\Log\LoggerInterface $logger Logger object
      * @return void
      */
-    public function setLogger(LoggerInterface $logger): void
+    function setLogger(LoggerInterface $logger): void
     {
         this->_logger = $logger;
     }
@@ -188,7 +188,7 @@ class LoggingStatement extends StatementDecorator
      *
      * @return \Psr\Log\LoggerInterface logger instance
      */
-    public function getLogger(): LoggerInterface
+    function getLogger(): LoggerInterface
     {
         return this->_logger;
     }
