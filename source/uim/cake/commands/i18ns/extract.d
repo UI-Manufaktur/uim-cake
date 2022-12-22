@@ -397,7 +397,7 @@ class I18nExtractCommand : Command {
 
                 _tokens = [];
                 foreach ($token; $allTokens) {
-                    if (!is_array($token) || ($token[0] !== T_WHITESPACE && $token[0] !== T_INLINE_HTML)) {
+                    if (!is_array($token) || ($token[0] != T_WHITESPACE && $token[0] != T_INLINE_HTML)) {
                         _tokens[] = $token;
                     }
                 }
@@ -514,7 +514,7 @@ class I18nExtractCommand : Command {
                     }
 
                     $sentence = "";
-                    if ($context !== "") {
+                    if ($context != "") {
                         $sentence .= "msgctxt \"{$context}\"\n";
                     }
                     if ($plural == false) {
@@ -527,7 +527,7 @@ class I18nExtractCommand : Command {
                         $sentence .= "msgstr[1] \"\"\n\n";
                     }
 
-                    if ($domain !== "default" && _merge) {
+                    if ($domain != "default" && _merge) {
                         _store("default", $header, $sentence);
                     } else {
                         _store($domain, $header, $sentence);
@@ -575,7 +575,7 @@ class I18nExtractCommand : Command {
 
             // Remove vendor prefix if present.
             $slashPosition = indexOf($domain, "/");
-            if ($slashPosition !== false) {
+            if ($slashPosition != false) {
                 $domain = substr($domain, $slashPosition + 1);
             }
 
@@ -588,7 +588,7 @@ class I18nExtractCommand : Command {
             }
 
             $response = "";
-            while ($overwriteAll == false && file_exists($outputPath) && strtoupper($response) !== "Y") {
+            while ($overwriteAll == false && file_exists($outputPath) && strtoupper($response) != "Y") {
                 $io.out();
                 $response = $io.askChoice(
                     sprintf("Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll", myfilename),
@@ -770,7 +770,7 @@ class I18nExtractCommand : Command {
         if (!empty(_exclude)) {
             $exclude = [];
             foreach ($e; _exclude) 
-                if (DIRECTORY_SEPARATOR !== "\\" && $e[0] !== DIRECTORY_SEPARATOR) {
+                if (DIRECTORY_SEPARATOR != "\\" && $e[0] != DIRECTORY_SEPARATOR) {
                     $e = DIRECTORY_SEPARATOR . $e;
                 }
                 $exclude[] = preg_quote($e, "/");

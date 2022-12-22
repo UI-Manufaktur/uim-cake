@@ -233,7 +233,7 @@ class ShellDispatcher {
 
             $other = static::alias(myShell);
             if ($other) {
-                if ($other !== myPlugin) {
+                if ($other != myPlugin) {
                     Log::write(
                         "debug",
                         "command "myShell" in plugin "myPlugin" was not aliased, conflicts with "$other"",

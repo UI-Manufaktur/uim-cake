@@ -730,7 +730,7 @@ class Controller : IEventListener, IEventDispatcher
             $base = this.request.getAttribute("base");
             if ($local && $base && indexOf(myUrl, $base) == 0) {
                 myUrl = substr(myUrl, strlen($base));
-                if (myUrl[0] !== "/") {
+                if (myUrl[0] != "/") {
                     myUrl = "/" . myUrl;
                 }
 

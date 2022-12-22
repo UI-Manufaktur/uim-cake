@@ -372,12 +372,12 @@ class SecurityComponent : Component {
     protected string _debugPostTokenNotMatching(Controller $controller, string[] $hashParts) {
         myMessages = [];
         $expectedParts = json_decode(urldecode($controller.getRequest().getData("_Token.debug")), true);
-        if (!is_array($expectedParts) || count($expectedParts) !== 3) {
+        if (!is_array($expectedParts) || count($expectedParts) != 3) {
             return "Invalid security debug token.";
         }
         $expectedUrl = Hash::get($expectedParts, 0);
         myUrl = Hash::get($hashParts, 0);
-        if ($expectedUrl !== myUrl) {
+        if ($expectedUrl != myUrl) {
             myMessages[] = sprintf("URL mismatch in POST data (expected \"%s\" but found \"%s\")", $expectedUrl, myUrl);
         }
         $expectedFields = Hash::get($expectedParts, 1);
@@ -500,7 +500,7 @@ class SecurityComponent : Component {
                     unset($expectedFields[$foundKey]);
                 }
             } else {
-                if (isset($expectedFields[myKey]) && myValue !== $expectedFields[myKey]) {
+                if (isset($expectedFields[myKey]) && myValue != $expectedFields[myKey]) {
                     myMessages[] = sprintf($stringKeyMessage, myKey, $expectedFields[myKey], myValue);
                 }
                 unset($expectedFields[myKey]);

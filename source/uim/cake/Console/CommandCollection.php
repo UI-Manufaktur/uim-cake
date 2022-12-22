@@ -193,7 +193,7 @@ class CommandCollection implements IteratorAggregate, Countable
         $out = [];
         foreach ($input as $info) {
             $name = $info['name'];
-            $addLong = $name !== $info['fullName'];
+            $addLong = $name != $info['fullName'];
 
             // If the short name has been used, use the full name.
             // This allows app shells to have name preference.

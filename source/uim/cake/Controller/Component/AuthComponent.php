@@ -260,7 +260,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     public function authCheck(EventInterface $event): ?Response
     {
-        if (this->_config['checkAuthIn'] !== $event->getName()) {
+        if (this->_config['checkAuthIn'] != $event->getName()) {
             return null;
         }
 
@@ -355,7 +355,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
             throw new CakeException('At least one authenticate object must be available.');
         }
         $result = $auth->unauthenticated($controller->getRequest(), $response);
-        if ($result !== null) {
+        if ($result != null) {
             return $result instanceof Response ? $result : null;
         }
 
@@ -464,7 +464,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
 
         $config = this->getConfig();
         foreach ($config as $key => $value) {
-            if ($value !== null) {
+            if ($value != null) {
                 unset($defaults[$key]);
             }
         }
@@ -711,7 +711,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
             if (!empty($result) && is_array($result)) {
                 this->_authenticationProvider = $auth;
                 $event = this->dispatchEvent('Auth.afterIdentify', [$result, $auth]);
-                if ($event->getResult() !== null) {
+                if ($event->getResult() != null) {
                     $result = $event->getResult();
                 }
                 this->storage()->write($result);
@@ -744,11 +744,11 @@ class AuthComponent extends Component implements EventDispatcherInterface
     public function redirectUrl($url = null): string
     {
         $redirectUrl = this->getController()->getRequest()->getQuery(static::QUERY_STRING_REDIRECT);
-        if ($redirectUrl && (substr($redirectUrl, 0, 1) !== '/' || substr($redirectUrl, 0, 2) === '//')) {
+        if ($redirectUrl && (substr($redirectUrl, 0, 1) != '/' || substr($redirectUrl, 0, 2) === '//')) {
             $redirectUrl = null;
         }
 
-        if ($url !== null) {
+        if ($url != null) {
             $redirectUrl = $url;
         } elseif ($redirectUrl) {
             if (
@@ -793,7 +793,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
             if (!empty($result)) {
                 this->_authenticationProvider = $auth;
                 $event = this->dispatchEvent('Auth.afterIdentify', [$result, $auth]);
-                if ($event->getResult() !== null) {
+                if ($event->getResult() != null) {
                     return $event->getResult();
                 }
 
@@ -853,7 +853,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     public function storage(?StorageInterface $storage = null): ?StorageInterface
     {
-        if ($storage !== null) {
+        if ($storage != null) {
             this->_storage = $storage;
 
             return null;

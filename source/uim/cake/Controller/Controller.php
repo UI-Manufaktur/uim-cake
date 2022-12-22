@@ -190,7 +190,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         ?EventManagerInterface $eventManager = null,
         ?ComponentRegistry $components = null
     ) {
-        if ($name !== null) {
+        if ($name != null) {
             this->name = $name;
         } elseif (this->name === null && $request) {
             this->name = $request->getParam('controller');
@@ -204,13 +204,13 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         this->setRequest($request ?: new ServerRequest());
         this->response = $response ?: new Response();
 
-        if ($eventManager !== null) {
+        if ($eventManager != null) {
             this->setEventManager($eventManager);
         }
 
         this->modelFactory('Table', [this->getTableLocator(), 'get']);
 
-        if (this->defaultTable !== null) {
+        if (this->defaultTable != null) {
             this->modelClass = this->defaultTable;
         }
 
@@ -222,7 +222,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             this->defaultTable = $modelClass;
         }
 
-        if ($components !== null) {
+        if ($components != null) {
             this->components($components);
         }
 
@@ -267,7 +267,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     public function components(?ComponentRegistry $components = null): ComponentRegistry
     {
-        if ($components !== null) {
+        if ($components != null) {
             $components->setController(this);
 
             return this->_components = $components;
@@ -545,7 +545,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     public function invokeAction(Closure $action, array $args): void
     {
         $result = $action(...$args);
-        if ($result !== null && !$result instanceof ResponseInterface) {
+        if ($result != null && !$result instanceof ResponseInterface) {
             throw new UnexpectedValueException(sprintf(
                 'Controller actions can only return ResponseInterface instance or null. '
                 . 'Got %s instead.',
@@ -748,11 +748,11 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
 
         this->autoRender = false;
 
-        if ($template !== null) {
+        if ($template != null) {
             $builder->setTemplate($template);
         }
 
-        if ($layout !== null) {
+        if ($layout != null) {
             $builder->setLayout($layout);
         }
 
@@ -804,7 +804,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         }
         // Controller or component has already made a view class decision.
         // That decision should overwrite the framework behavior.
-        if (this->viewBuilder()->getClassName() !== null) {
+        if (this->viewBuilder()->getClassName() != null) {
             return null;
         }
 
@@ -876,7 +876,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             $base = this->request->getAttribute('base');
             if ($local && $base && strpos($url, $base) === 0) {
                 $url = substr($url, strlen($base));
-                if ($url[0] !== '/') {
+                if ($url[0] != '/') {
                     $url = '/' . $url;
                 }
 

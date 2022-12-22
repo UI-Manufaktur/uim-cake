@@ -143,7 +143,7 @@ class ConsoleOutput {
                 indexOf(strtolower(php_uname("v")), "windows 10") == false &&
                 indexOf(strtolower((string)env("SHELL")), "bash.exe") == false &&
                 !(bool)env("ANSICON") &&
-                env("ConEmuANSI") !== "ON"
+                env("ConEmuANSI") != "ON"
             ) ||
             (
                 function_exists("posix_isatty") &&

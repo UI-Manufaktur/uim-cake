@@ -126,7 +126,7 @@ class ConsoleInputOption
 
         if ($isBoolean) {
             this->_default = (bool)$default;
-        } elseif ($default !== null) {
+        } elseif ($default != null) {
             this->_default = (string)$default;
         }
 
@@ -172,13 +172,13 @@ class ConsoleInputOption
     public function help(int $width = 0): string
     {
         $default = $short = '';
-        if (this->_default && this->_default !== true) {
+        if (this->_default && this->_default != true) {
             $default = sprintf(' <comment>(default: %s)</comment>', this->_default);
         }
         if (this->_choices) {
             $default .= sprintf(' <comment>(choices: %s)</comment>', implode('|', this->_choices));
         }
-        if (this->_short !== '') {
+        if (this->_short != '') {
             $short = ', -' . this->_short;
         }
         $name = sprintf('--%s%s', this->_name, $short);
@@ -202,7 +202,7 @@ class ConsoleInputOption
     {
         $name = this->_short === '' ? '--' . this->_name : '-' . this->_short;
         $default = '';
-        if (this->_default !== null && !is_bool(this->_default) && this->_default !== '') {
+        if (this->_default != null && !is_bool(this->_default) && this->_default != '') {
             $default = ' ' . this->_default;
         }
         if (this->_choices) {
@@ -313,7 +313,7 @@ class ConsoleInputOption
         $option = $parent->addChild('option');
         $option->addAttribute('name', '--' . this->_name);
         $short = '';
-        if (this->_short !== '') {
+        if (this->_short != '') {
             $short = '-' . this->_short;
         }
         $default = this->_default;

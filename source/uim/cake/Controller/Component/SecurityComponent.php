@@ -178,7 +178,7 @@ class SecurityComponent extends Component
      */
     protected function _throwException(?SecurityException $exception = null): void
     {
-        if ($exception !== null) {
+        if ($exception != null) {
             if (!Configure::read('debug')) {
                 $exception->setReason($exception->getMessage());
                 $exception->setMessage(static::DEFAULT_EXCEPTION_MESSAGE);
@@ -416,12 +416,12 @@ class SecurityComponent extends Component
     {
         $messages = [];
         $expectedParts = json_decode(urldecode($controller->getRequest()->getData('_Token.debug')), true);
-        if (!is_array($expectedParts) || count($expectedParts) !== 3) {
+        if (!is_array($expectedParts) || count($expectedParts) != 3) {
             return 'Invalid security debug token.';
         }
         $expectedUrl = Hash::get($expectedParts, 0);
         $url = Hash::get($hashParts, 0);
-        if ($expectedUrl !== $url) {
+        if ($expectedUrl != $url) {
             $messages[] = sprintf('URL mismatch in POST data (expected \'%s\' but found \'%s\')', $expectedUrl, $url);
         }
         $expectedFields = Hash::get($expectedParts, 1);
@@ -474,7 +474,7 @@ class SecurityComponent extends Component
     ): array {
         $messages = this->_matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = this->_debugExpectedFields($expectedFields, $missingMessage);
-        if ($expectedFieldsMessage !== null) {
+        if ($expectedFieldsMessage != null) {
             $messages[] = $expectedFieldsMessage;
         }
 
@@ -546,7 +546,7 @@ class SecurityComponent extends Component
                     unset($expectedFields[$foundKey]);
                 }
             } else {
-                if (isset($expectedFields[$key]) && $value !== $expectedFields[$key]) {
+                if (isset($expectedFields[$key]) && $value != $expectedFields[$key]) {
                     $messages[] = sprintf($stringKeyMessage, $key, $expectedFields[$key], $value);
                 }
                 unset($expectedFields[$key]);

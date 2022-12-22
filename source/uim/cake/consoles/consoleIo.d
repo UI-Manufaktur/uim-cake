@@ -482,7 +482,7 @@ class ConsoleIo {
         if (myEnable == static::VERBOSE || myEnable == true) {
             $outLevels[] = "debug";
         }
-        if (myEnable !== static::QUIET) {
+        if (myEnable != static::QUIET) {
             $stdout = new ConsoleLog([
                 "types":$outLevels,
                 "stream":_out,
@@ -548,7 +548,7 @@ class ConsoleIo {
                 this.forceOverwrite = true;
                 myKey = "y";
             }
-            if (myKey !== "y") {
+            if (myKey != "y") {
                 this.out("Skip `{myPath}`", 2);
 
                 return false;

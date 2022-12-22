@@ -145,7 +145,7 @@ class ConsoleIo
      */
     public function level(?int $level = null): int
     {
-        if ($level !== null) {
+        if ($level != null) {
             this->_level = $level;
         }
 
@@ -520,14 +520,14 @@ class ConsoleIo
         }
 
         $defaultText = '';
-        if ($default !== null) {
+        if ($default != null) {
             $defaultText = "[$default] ";
         }
         this->_out->write('<question>' . $prompt . "</question>$optionsText\n$defaultText> ", 0);
         $result = this->_in->read();
 
         $result = $result === null ? '' : trim($result);
-        if ($default !== null && $result === '') {
+        if ($default != null && $result === '') {
             return $default;
         }
 
@@ -558,7 +558,7 @@ class ConsoleIo
         if ($enable === static::VERBOSE || $enable === true) {
             $outLevels[] = 'debug';
         }
-        if ($enable !== static::QUIET) {
+        if ($enable != static::QUIET) {
             $stdout = new ConsoleLog([
                 'types' => $outLevels,
                 'stream' => this->_out,
@@ -625,7 +625,7 @@ class ConsoleIo
                 this->forceOverwrite = true;
                 $key = 'y';
             }
-            if ($key !== 'y') {
+            if ($key != 'y') {
                 this->out("Skip `{$path}`", 2);
 
                 return false;

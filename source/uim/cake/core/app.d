@@ -36,7 +36,7 @@ class App {
      * @psalm-return class-string|null
      */
     static string className(string aClassName, string aClassType = "", string aClassNameSuffix = "") {
-        if (indexOf(aClassName, "\\") !== false) {
+        if (indexOf(aClassName, "\\") != false) {
             return class_exists(aClassName) ? aClassName : null;
         }
 

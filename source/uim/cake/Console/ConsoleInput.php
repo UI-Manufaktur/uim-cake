@@ -62,7 +62,7 @@ class ConsoleInput
         if (this->_canReadline) {
             $line = readline('');
 
-            if ($line !== false && $line !== '') {
+            if ($line != false && $line != '') {
                 readline_add_history($line);
             }
         } else {
@@ -97,7 +97,7 @@ class ConsoleInput
         });
         $readyFds = stream_select($readFds, $writeFds, $errorFds, $timeout);
         restore_error_handler();
-        if ($error !== null) {
+        if ($error != null) {
             throw new ConsoleException($error);
         }
 

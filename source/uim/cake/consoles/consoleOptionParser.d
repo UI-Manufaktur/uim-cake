@@ -750,7 +750,7 @@ class ConsoleOptionParser {
      */
     protected array _parseLongOption(string option, array myParams) {
         myName = substr($option, 2);
-        if (indexOf(myName, "=") !== false) {
+        if (indexOf(myName, "=") != false) {
             [myName, myValue] = explode("=", myName, 2);
             array_unshift(_tokens, myValue);
         }
@@ -812,7 +812,7 @@ class ConsoleOptionParser {
         $option = _options[myName];
         $isBoolean = $option.isBoolean();
         $nextValue = _nextToken();
-        $emptyNextValue = (empty($nextValue) && $nextValue !== "0");
+        $emptyNextValue = (empty($nextValue) && $nextValue != "0");
         if (!$isBoolean && !$emptyNextValue && !_optionExists($nextValue)) {
             array_shift(_tokens);
             myValue = $nextValue;
@@ -841,7 +841,7 @@ class ConsoleOptionParser {
         if (substr(myName, 0, 2) == "--") {
             return isset(_options[substr(myName, 2)]);
         }
-        if (myName[0] == "-" && myName[1] !== "-") {
+        if (myName[0] == "-" && myName[1] != "-") {
             return isset(_shortOptions[myName[1]]);
         }
 

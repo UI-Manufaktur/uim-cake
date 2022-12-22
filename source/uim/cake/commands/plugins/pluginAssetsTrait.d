@@ -57,7 +57,7 @@ trait PluginAssetsTrait
             $wwwRoot = Configure::read("App.wwwRoot");
             $dir = $wwwRoot;
             $moduled = false;
-            if (indexOf($link, "/") !== false) {
+            if (indexOf($link, "/") != false) {
                 $moduled = true;
                 $parts = explode("/", $link);
                 $link = array_pop($parts);

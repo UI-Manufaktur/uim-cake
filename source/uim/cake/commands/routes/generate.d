@@ -47,7 +47,7 @@ class RoutesGenerateCommand : Command {
     protected array _splitArgs(array $args) {
         $out = [];
         foreach ($arg; $args) {
-            if (indexOf($arg, ":") !== false) {
+            if (indexOf($arg, ":") != false) {
                 [myKey, myValue] = explode(":", $arg);
                 if (in_array(myValue, ["true", "false"], true)) {
                     myValue = myValue == "true";

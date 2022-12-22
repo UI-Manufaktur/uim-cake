@@ -172,14 +172,14 @@ class ConsoleOutput
                 strpos(strtolower(php_uname('v')), 'windows 10') === false &&
                 strpos(strtolower((string)env('SHELL')), 'bash.exe') === false &&
                 !(bool)env('ANSICON') &&
-                env('ConEmuANSI') !== 'ON'
+                env('ConEmuANSI') != 'ON'
             ) ||
             (
                 function_exists('posix_isatty') &&
                 !posix_isatty(this->_output)
             ) ||
             (
-                env('NO_COLOR') !== null
+                env('NO_COLOR') != null
             )
         ) {
             this->_outputAs = self::PLAIN;

@@ -693,7 +693,7 @@ class ConsoleOptionParser
         }
         $params = $args = [];
         this->_tokens = $argv;
-        while (($token = array_shift(this->_tokens)) !== null) {
+        while (($token = array_shift(this->_tokens)) != null) {
             $token = (string)$token;
             if (isset(this->_subcommands[$token])) {
                 continue;
@@ -724,7 +724,7 @@ class ConsoleOptionParser
             $default = $option->defaultValue();
 
             $useDefault = !isset($params[$name]);
-            if ($default !== null && $useDefault && !$isBoolean) {
+            if ($default != null && $useDefault && !$isBoolean) {
                 $params[$name] = $default;
             }
             if ($isBoolean && $useDefault) {
@@ -844,7 +844,7 @@ class ConsoleOptionParser
     protected function _parseLongOption(string $option, array $params): array
     {
         $name = substr($option, 2);
-        if (strpos($name, '=') !== false) {
+        if (strpos($name, '=') != false) {
             [$name, $value] = explode('=', $name, 2);
             array_unshift(this->_tokens, $value);
         }
@@ -908,7 +908,7 @@ class ConsoleOptionParser
         $option = this->_options[$name];
         $isBoolean = $option->isBoolean();
         $nextValue = this->_nextToken();
-        $emptyNextValue = (empty($nextValue) && $nextValue !== '0');
+        $emptyNextValue = (empty($nextValue) && $nextValue != '0');
         if (!$isBoolean && !$emptyNextValue && !this->_optionExists($nextValue)) {
             array_shift(this->_tokens);
             $value = $nextValue;
@@ -939,7 +939,7 @@ class ConsoleOptionParser
         if (substr($name, 0, 2) === '--') {
             return isset(this->_options[substr($name, 2)]);
         }
-        if ($name[0] === '-' && $name[1] !== '-') {
+        if ($name[0] === '-' && $name[1] != '-') {
             return isset(this->_shortOptions[$name[1]]);
         }
 

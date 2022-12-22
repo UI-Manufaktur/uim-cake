@@ -160,7 +160,7 @@ class CommandCollection : IteratorAggregate, Countable
         $out = [];
         foreach ($input as $info) {
             myName = $info["name"];
-            $addLong = myName !== $info["fullName"];
+            $addLong = myName != $info["fullName"];
 
             // If the short name has been used, use the full name.
             // This allows app shells to have name preference.

@@ -342,7 +342,7 @@ class Shell
                 return false;
             }
 
-            return $method->getDeclaringClass()->name !== self::class;
+            return $method->getDeclaringClass()->name != self::class;
         } catch (ReflectionException $e) {
             return false;
         }
@@ -562,7 +562,7 @@ class Shell
         }
 
         $subcommands = this->OptionParser->subcommands();
-        if ($command !== null) {
+        if ($command != null) {
             $command = isset($subcommands[$command]) ? $command : null;
         }
 
@@ -855,7 +855,7 @@ class Shell
                 this->params['force'] = true;
                 $key = 'y';
             }
-            if (strtolower($key) !== 'y') {
+            if (strtolower($key) != 'y') {
                 this->_io->out(sprintf('Skip `%s`', $path), 2);
 
                 return false;

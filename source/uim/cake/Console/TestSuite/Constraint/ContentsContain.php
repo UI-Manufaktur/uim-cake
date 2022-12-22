@@ -30,7 +30,7 @@ class ContentsContain extends ContentsBase
      */
     public function matches($other): bool
     {
-        return mb_strpos(this->contents, $other) !== false;
+        return mb_strpos(this->contents, $other) != false;
     }
 
     /**

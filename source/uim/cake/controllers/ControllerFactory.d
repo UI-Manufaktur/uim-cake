@@ -266,7 +266,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
             $prefix = myRequest.getParam("prefix");
 
             $firstChar = substr($prefix, 0, 1);
-            if ($firstChar !== strtoupper($firstChar)) {
+            if ($firstChar != strtoupper($firstChar)) {
                 deprecationWarning(
                     "The `{$prefix}` prefix did not start with an upper case character. " .
                     "Routing prefixes should be defined as CamelCase values. " .
@@ -294,9 +294,9 @@ class ControllerFactory : IControllerFactory, IRequestHandler
         // controller names as they allow direct references to
         // be created.
         if (
-            indexOf($controller, "\\") !== false ||
-            indexOf($controller, "/") !== false ||
-            indexOf($controller, ".") !== false ||
+            indexOf($controller, "\\") != false ||
+            indexOf($controller, "/") != false ||
+            indexOf($controller, ".") != false ||
             $firstChar == strtolower($firstChar)
         ) {
             throw this.missingController(myRequest);

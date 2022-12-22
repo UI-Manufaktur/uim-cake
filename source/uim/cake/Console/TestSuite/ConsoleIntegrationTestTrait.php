@@ -305,7 +305,7 @@ trait ConsoleIntegrationTestTrait
 
             // end of argument
             if ($char === ' ' && !$inDQuote && !$inSQuote) {
-                if ($arg !== '') {
+                if ($arg != '') {
                     $argv[] = $arg;
                 }
                 $arg = '';

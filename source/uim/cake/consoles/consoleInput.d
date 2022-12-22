@@ -43,7 +43,7 @@ class ConsoleInput {
         if (_canReadline) {
             $line = readline("");
 
-            if ($line !== false && $line !== "") {
+            if ($line != false && $line != "") {
                 readline_add_history($line);
             }
         } else {

@@ -54,7 +54,7 @@ class App
      */
     public static function className(string $class, string $type = '', string $suffix = ''): ?string
     {
-        if (strpos($class, '\\') !== false) {
+        if (strpos($class, '\\') != false) {
             return class_exists($class) ? $class : null;
         }
 
@@ -62,7 +62,7 @@ class App
         $fullname = '\\' . str_replace('/', '\\', $type . '\\' . $name) . $suffix;
 
         $base = $plugin ?: Configure::read('App.namespace');
-        if ($base !== null) {
+        if ($base != null) {
             $base = str_replace('/', '\\', rtrim($base, '\\'));
 
             if (static::_classExistsInBase($fullname, $base)) {
@@ -235,7 +235,7 @@ class App
      */
     public static function classPath(string $type, ?string $plugin = null): array
     {
-        if ($plugin !== null) {
+        if ($plugin != null) {
             return [
                 Plugin::classPath($plugin) . $type . DIRECTORY_SEPARATOR,
             ];

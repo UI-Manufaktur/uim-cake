@@ -131,7 +131,7 @@ class CompletionCommand : Command : ICommandCollectionAware
         myOptions = [];
         foreach (this.commands as myKey: myValue) {
             $parts = explode(" ", myKey);
-            if ($parts[0] !== myName) {
+            if ($parts[0] != myName) {
                 continue;
             }
 
@@ -208,13 +208,13 @@ class CompletionCommand : Command : ICommandCollectionAware
         myOptions = [];
         foreach (myKey, myValue; this.commands) {
             $parts = explode(" ", myKey);
-            if ($parts[0] !== myName) {
+            if ($parts[0] != myName) {
                 continue;
             }
             if ($subcommand && !isset($parts[1])) {
                 continue;
             }
-            if ($subcommand && isset($parts[1]) && $parts[1] !== $subcommand) {
+            if ($subcommand && isset($parts[1]) && $parts[1] != $subcommand) {
                 continue;
             }
 

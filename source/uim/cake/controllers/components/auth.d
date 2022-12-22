@@ -230,7 +230,7 @@ class AuthComponent : Component : IEventDispatcher
      */
     function authCheck(IEvent myEvent): ?Response
     {
-        if (_config["checkAuthIn"] !== myEvent.getName()) {
+        if (_config["checkAuthIn"] != myEvent.getName()) {
             return null;
         }
 
@@ -697,7 +697,7 @@ class AuthComponent : Component : IEventDispatcher
      */
     string redirectUrl(myUrl = null) {
         $redirectUrl = this.getController().getRequest().getQuery(static::QUERY_STRING_REDIRECT);
-        if ($redirectUrl && (substr($redirectUrl, 0, 1) !== "/" || substr($redirectUrl, 0, 2) == "//")) {
+        if ($redirectUrl && (substr($redirectUrl, 0, 1) != "/" || substr($redirectUrl, 0, 2) == "//")) {
             $redirectUrl = null;
         }
 

@@ -283,7 +283,7 @@ class Shell {
                 return false;
             }
 
-            return $method.getDeclaringClass().name !== self::class;
+            return $method.getDeclaringClass().name != self::class;
         } catch (ReflectionException $e) {
             return false;
         }
@@ -771,7 +771,7 @@ class Shell {
                 this.params["force"] = true;
                 myKey = "y";
             }
-            if (strtolower(myKey) !== "y") {
+            if (strtolower(myKey) != "y") {
                 _io.out(sprintf("Skip `%s`", myPath), 2);
 
                 return false;

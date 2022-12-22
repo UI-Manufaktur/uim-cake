@@ -103,13 +103,13 @@ class ConsoleInputOption {
      */
     string help(int $width = 0) {
         $default = $short = "";
-        if (_default && _default !== true) {
+        if (_default && _default != true) {
             $default = sprintf(" <comment>(default: %s)</comment>", _default);
         }
         if (_choices) {
             $default .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
-        if (_short !== "") {
+        if (_short != "") {
             $short = ", -" . _short;
         }
         myName = sprintf("--%s%s", name, $short);
@@ -130,7 +130,7 @@ class ConsoleInputOption {
     string usage() {
         myName = _short == "" ? "--" . name : "-" . _short;
         $default = "";
-        if (_default  !is null && !is_bool(_default) && _default !== "") {
+        if (_default  !is null && !is_bool(_default) && _default != "") {
             $default = " " . _default;
         }
         if (_choices) {
@@ -206,7 +206,7 @@ class ConsoleInputOption {
         $option = $parent.addChild("option");
         $option.addAttribute("name", "--" . name);
         $short = "";
-        if (_short !== "") {
+        if (_short != "") {
             $short = "-" . _short;
         }
         $default = _default;

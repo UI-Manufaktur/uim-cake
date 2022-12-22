@@ -297,7 +297,7 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
             $prefix = $request->getParam('prefix');
 
             $firstChar = substr($prefix, 0, 1);
-            if ($firstChar !== strtoupper($firstChar)) {
+            if ($firstChar != strtoupper($firstChar)) {
                 deprecationWarning(
                     "The `{$prefix}` prefix did not start with an upper case character. " .
                     'Routing prefixes should be defined as CamelCase values. ' .
@@ -325,9 +325,9 @@ class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInt
         // controller names as they allow direct references to
         // be created.
         if (
-            strpos($controller, '\\') !== false ||
-            strpos($controller, '/') !== false ||
-            strpos($controller, '.') !== false ||
+            strpos($controller, '\\') != false ||
+            strpos($controller, '/') != false ||
+            strpos($controller, '.') != false ||
             $firstChar === strtolower($firstChar)
         ) {
             throw this->missingController($request);
