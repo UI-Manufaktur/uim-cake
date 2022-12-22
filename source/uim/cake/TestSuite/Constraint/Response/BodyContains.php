@@ -15,7 +15,7 @@ declare(strict_types=1);
  */
 namespace Cake\TestSuite\Constraint\Response;
 
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 
 /**
  * BodyContains
@@ -32,10 +32,10 @@ class BodyContains extends ResponseBase
     /**
      * Constructor.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response A response instance.
+     * @param \Psr\Http\Message\IResponse $response A response instance.
      * @param bool $ignoreCase Ignore case
      */
-    public this(ResponseInterface $response, bool $ignoreCase = false)
+    public this(IResponse $response, bool $ignoreCase = false)
     {
         parent::__construct($response);
 

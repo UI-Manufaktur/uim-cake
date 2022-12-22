@@ -18,7 +18,7 @@ namespace Cake\TestSuite\Stub;
 
 use Cake\Error\ExceptionRendererInterface;
 use LogicException;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 use Throwable;
 
 /**
@@ -48,7 +48,7 @@ class TestExceptionRenderer implements ExceptionRendererInterface
     /**
      * @inheritDoc
      */
-    function render(): ResponseInterface
+    function render(): IResponse
     {
         throw new LogicException('You cannot use this class to render exceptions.');
     }
@@ -56,7 +56,7 @@ class TestExceptionRenderer implements ExceptionRendererInterface
     /**
      * Part of upcoming interface requirements
      *
-     * @param \Psr\Http\Message\ResponseInterface|string $output The output or response to send.
+     * @param \Psr\Http\Message\IResponse|string $output The output or response to send.
      * @return void
      */
     function write($output): void

@@ -15,7 +15,7 @@ declare(strict_types=1);
  */
 namespace Cake\TestSuite\Constraint\Response;
 
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 
 /**
  * HeaderEquals
@@ -32,10 +32,10 @@ class HeaderEquals extends ResponseBase
     /**
      * Constructor.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response A response instance.
+     * @param \Psr\Http\Message\IResponse $response A response instance.
      * @param string $headerName Header name
      */
-    public this(ResponseInterface $response, string $headerName)
+    public this(IResponse $response, string $headerName)
     {
         parent::__construct($response);
 

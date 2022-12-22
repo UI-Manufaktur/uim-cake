@@ -23,7 +23,7 @@ use Cake\Http\ServerRequest;
 use Cake\Http\ServerRequestFactory;
 use Cake\Routing\Router;
 use Cake\Routing\IRoutingApplication;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\IResponse;
 
 /**
  * Dispatches a request capturing the response for integration
@@ -131,10 +131,10 @@ class MiddlewareDispatcher
      * Run a request and get the response.
      *
      * @param array<string, mixed> $requestSpec The request spec to execute.
-     * @return \Psr\Http\Message\ResponseInterface The generated response.
+     * @return \Psr\Http\Message\IResponse The generated response.
      * @throws \LogicException
      */
-    function execute(array $requestSpec): ResponseInterface
+    function execute(array $requestSpec): IResponse
     {
         $server = new Server(this->app);
 
