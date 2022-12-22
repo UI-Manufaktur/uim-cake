@@ -44,7 +44,7 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
      */
     public this(array $locales = [])
     {
-        $this->locales = $locales;
+        this->locales = $locales;
     }
 
     /**
@@ -60,10 +60,10 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
         if (!$locale) {
             return $handler->handle($request);
         }
-        if ($this->locales !== ['*']) {
-            $locale = Locale::lookup($this->locales, $locale, true);
+        if (this->locales !== ['*']) {
+            $locale = Locale::lookup(this->locales, $locale, true);
         }
-        if ($locale || $this->locales === ['*']) {
+        if ($locale || this->locales === ['*']) {
             I18n::setLocale($locale);
         }
 

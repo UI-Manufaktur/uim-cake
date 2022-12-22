@@ -56,9 +56,9 @@ class Package
         ?string $fallback = null,
         array $messages = []
     ) {
-        $this->formatter = $formatter;
-        $this->fallback = $fallback;
-        $this->messages = $messages;
+        this->formatter = $formatter;
+        this->fallback = $fallback;
+        this->messages = $messages;
     }
 
     /**
@@ -69,7 +69,7 @@ class Package
      */
     public function setMessages(array $messages): void
     {
-        $this->messages = $messages;
+        this->messages = $messages;
     }
 
     /**
@@ -81,7 +81,7 @@ class Package
      */
     public function addMessage(string $key, $message): void
     {
-        $this->messages[$key] = $message;
+        this->messages[$key] = $message;
     }
 
     /**
@@ -92,7 +92,7 @@ class Package
      */
     public function addMessages(array $messages): void
     {
-        $this->messages = array_merge($this->messages, $messages);
+        this->messages = array_merge(this->messages, $messages);
     }
 
     /**
@@ -102,7 +102,7 @@ class Package
      */
     public function getMessages(): array
     {
-        return $this->messages;
+        return this->messages;
     }
 
     /**
@@ -113,7 +113,7 @@ class Package
      */
     public function getMessage(string $key)
     {
-        return $this->messages[$key] ?? false;
+        return this->messages[$key] ?? false;
     }
 
     /**
@@ -124,7 +124,7 @@ class Package
      */
     public function setFormatter(string $formatter): void
     {
-        $this->formatter = $formatter;
+        this->formatter = $formatter;
     }
 
     /**
@@ -134,7 +134,7 @@ class Package
      */
     public function getFormatter(): string
     {
-        return $this->formatter;
+        return this->formatter;
     }
 
     /**
@@ -145,7 +145,7 @@ class Package
      */
     public function setFallback(?string $fallback): void
     {
-        $this->fallback = $fallback;
+        this->fallback = $fallback;
     }
 
     /**
@@ -155,6 +155,6 @@ class Package
      */
     public function getFallback(): ?string
     {
-        return $this->fallback;
+        return this->fallback;
     }
 }

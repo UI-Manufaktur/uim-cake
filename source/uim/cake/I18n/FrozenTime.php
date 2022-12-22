@@ -181,7 +181,7 @@ class FrozenTime extends Chronos implements I18nDateTimeInterface
     public function timeAgoInWords(array $options = []): string
     {
         /** @psalm-suppress UndefinedInterfaceMethod */
-        return static::getDiffFormatter()->timeAgoInWords($this, $options);
+        return static::getDiffFormatter()->timeAgoInWords(this, $options);
     }
 
     /**

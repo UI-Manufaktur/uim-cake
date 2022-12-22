@@ -49,7 +49,7 @@ abstract class AbstractTransport
      */
     public this(array $config = [])
     {
-        $this->setConfig($config);
+        this->setConfig($config);
     }
 
     /**

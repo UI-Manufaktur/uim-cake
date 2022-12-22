@@ -35,7 +35,7 @@ class LegacySyslogFormatter extends AbstractFormatter
      */
     public this(array $config = [])
     {
-        $this->setConfig($config);
+        this->setConfig($config);
     }
 
     /**
@@ -43,6 +43,6 @@ class LegacySyslogFormatter extends AbstractFormatter
      */
     public function format($level, string $message, array $context = []): string
     {
-        return sprintf($this->getConfig('format'), $level, $message);
+        return sprintf(this->getConfig('format'), $level, $message);
     }
 }

@@ -50,7 +50,7 @@ class FormatterLocator
     public this(array $registry = [])
     {
         foreach ($registry as $name => $spec) {
-            $this->set($name, $spec);
+            this->set($name, $spec);
         }
     }
 
@@ -63,8 +63,8 @@ class FormatterLocator
      */
     public function set(string $name, string $className): void
     {
-        $this->registry[$name] = $className;
-        $this->converted[$name] = false;
+        this->registry[$name] = $className;
+        this->converted[$name] = false;
     }
 
     /**
@@ -76,18 +76,18 @@ class FormatterLocator
      */
     public function get(string $name): FormatterInterface
     {
-        if (!isset($this->registry[$name])) {
+        if (!isset(this->registry[$name])) {
             throw new I18nException("Formatter named `{$name}` has not been registered");
         }
 
-        if (!$this->converted[$name]) {
+        if (!this->converted[$name]) {
             /** @var class-string<\Cake\I18n\FormatterInterface> $formatter */
-            $formatter = $this->registry[$name];
-            $this->registry[$name] = new $formatter();
-            $this->converted[$name] = true;
+            $formatter = this->registry[$name];
+            this->registry[$name] = new $formatter();
+            this->converted[$name] = true;
         }
 
         /** @var \Cake\I18n\FormatterInterface */
-        return $this->registry[$name];
+        return this->registry[$name];
     }
 }

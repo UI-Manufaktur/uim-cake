@@ -102,17 +102,17 @@ class TranslatorRegistry
         FormatterLocator $formatters,
         string $locale
     ) {
-        $this->packages = $packages;
-        $this->formatters = $formatters;
-        $this->setLocale($locale);
+        this->packages = $packages;
+        this->formatters = $formatters;
+        this->setLocale($locale);
 
-        $this->registerLoader(static::FALLBACK_LOADER, function ($name, $locale) {
+        this->registerLoader(static::FALLBACK_LOADER, function ($name, $locale) {
             $loader = new ChainMessagesLoader([
                 new MessagesFileLoader($name, $locale, 'mo'),
                 new MessagesFileLoader($name, $locale, 'po'),
             ]);
 
-            $formatter = $name === 'cake' ? 'default' : $this->_defaultFormatter;
+            $formatter = $name === 'cake' ? 'default' : this->_defaultFormatter;
             $package = $loader();
             $package->setFormatter($formatter);
 
@@ -128,7 +128,7 @@ class TranslatorRegistry
      */
     public function setLocale(string $locale): void
     {
-        $this->locale = $locale;
+        this->locale = $locale;
     }
 
     /**
@@ -138,7 +138,7 @@ class TranslatorRegistry
      */
     public function getLocale(): string
     {
-        return $this->locale;
+        return this->locale;
     }
 
     /**
@@ -148,7 +148,7 @@ class TranslatorRegistry
      */
     public function getPackages(): PackageLocator
     {
-        return $this->packages;
+        return this->packages;
     }
 
     /**
@@ -158,7 +158,7 @@ class TranslatorRegistry
      */
     public function getFormatters(): FormatterLocator
     {
-        return $this->formatters;
+        return this->formatters;
     }
 
     /**
@@ -170,7 +170,7 @@ class TranslatorRegistry
      */
     public function setCacher($cacher): void
     {
-        $this->_cacher = $cacher;
+        this->_cacher = $cacher;
     }
 
     /**
@@ -186,32 +186,32 @@ class TranslatorRegistry
     public function get(string $name, ?string $locale = null): ?Translator
     {
         if ($locale === null) {
-            $locale = $this->getLocale();
+            $locale = this->getLocale();
         }
 
-        if (isset($this->registry[$name][$locale])) {
-            return $this->registry[$name][$locale];
+        if (isset(this->registry[$name][$locale])) {
+            return this->registry[$name][$locale];
         }
 
-        if ($this->_cacher === null) {
-            return $this->registry[$name][$locale] = $this->_getTranslator($name, $locale);
+        if (this->_cacher === null) {
+            return this->registry[$name][$locale] = this->_getTranslator($name, $locale);
         }
 
         // Cache keys cannot contain / if they go to file engine.
         $keyName = str_replace('/', '.', $name);
         $key = "translations.{$keyName}.{$locale}";
-        $translator = $this->_cacher->get($key);
+        $translator = this->_cacher->get($key);
 
         // PHP <8.1 does not correctly garbage collect strings created
         // by unserialized arrays.
         gc_collect_cycles();
 
         if (!$translator || !$translator->getPackage()) {
-            $translator = $this->_getTranslator($name, $locale);
-            $this->_cacher->set($key, $translator);
+            $translator = this->_getTranslator($name, $locale);
+            this->_cacher->set($key, $translator);
         }
 
-        return $this->registry[$name][$locale] = $translator;
+        return this->registry[$name][$locale] = $translator;
     }
 
     /**
@@ -224,20 +224,20 @@ class TranslatorRegistry
      */
     protected function _getTranslator(string $name, string $locale): Translator
     {
-        if ($this->packages->has($name, $locale)) {
-            return $this->createInstance($name, $locale);
+        if (this->packages->has($name, $locale)) {
+            return this->createInstance($name, $locale);
         }
 
-        if (isset($this->_loaders[$name])) {
-            $package = $this->_loaders[$name]($name, $locale);
+        if (isset(this->_loaders[$name])) {
+            $package = this->_loaders[$name]($name, $locale);
         } else {
-            $package = $this->_loaders[static::FALLBACK_LOADER]($name, $locale);
+            $package = this->_loaders[static::FALLBACK_LOADER]($name, $locale);
         }
 
-        $package = $this->setFallbackPackage($name, $package);
-        $this->packages->set($name, $locale, $package);
+        $package = this->setFallbackPackage($name, $package);
+        this->packages->set($name, $locale, $package);
 
-        return $this->createInstance($name, $locale);
+        return this->createInstance($name, $locale);
     }
 
     /**
@@ -249,12 +249,12 @@ class TranslatorRegistry
      */
     protected function createInstance(string $name, string $locale): Translator
     {
-        $package = $this->packages->get($name, $locale);
+        $package = this->packages->get($name, $locale);
         $fallback = $package->getFallback();
         if ($fallback !== null) {
-            $fallback = $this->get($fallback, $locale);
+            $fallback = this->get($fallback, $locale);
         }
-        $formatter = $this->formatters->get($package->getFormatter());
+        $formatter = this->formatters->get($package->getFormatter());
 
         return new Translator($locale, $package, $formatter, $fallback);
     }
@@ -272,7 +272,7 @@ class TranslatorRegistry
      */
     public function registerLoader(string $name, callable $loader): void
     {
-        $this->_loaders[$name] = $loader;
+        this->_loaders[$name] = $loader;
     }
 
     /**
@@ -287,10 +287,10 @@ class TranslatorRegistry
     public function defaultFormatter(?string $name = null): string
     {
         if ($name === null) {
-            return $this->_defaultFormatter;
+            return this->_defaultFormatter;
         }
 
-        return $this->_defaultFormatter = $name;
+        return this->_defaultFormatter = $name;
     }
 
     /**
@@ -301,7 +301,7 @@ class TranslatorRegistry
      */
     public function useFallback(bool $enable = true): void
     {
-        $this->_useFallback = $enable;
+        this->_useFallback = $enable;
     }
 
     /**
@@ -318,7 +318,7 @@ class TranslatorRegistry
         }
 
         $fallbackDomain = null;
-        if ($this->_useFallback && $name !== 'default') {
+        if (this->_useFallback && $name !== 'default') {
             $fallbackDomain = 'default';
         }
 
@@ -337,7 +337,7 @@ class TranslatorRegistry
     public function setLoaderFallback(string $name, callable $loader): callable
     {
         $fallbackDomain = 'default';
-        if (!$this->_useFallback || $name === $fallbackDomain) {
+        if (!this->_useFallback || $name === $fallbackDomain) {
             return $loader;
         }
 

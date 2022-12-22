@@ -32,7 +32,7 @@ class MailTransport extends AbstractTransport
      */
     public function send(Message $message): array
     {
-        $this->checkRecipient($message);
+        this->checkRecipient($message);
 
         // https://github.com/cakephp/cakephp/issues/2209
         // https://bugs.php.net/bug.php?id=47983
@@ -41,7 +41,7 @@ class MailTransport extends AbstractTransport
         $to = $message->getHeaders(['to'])['To'];
         $to = str_replace("\r\n", '', $to);
 
-        $eol = $this->getConfig('eol', version_compare(PHP_VERSION, '8.0', '>=') ? "\r\n" : "\n");
+        $eol = this->getConfig('eol', version_compare(PHP_VERSION, '8.0', '>=') ? "\r\n" : "\n");
         $headers = $message->getHeadersString(
             [
                 'from',
@@ -60,8 +60,8 @@ class MailTransport extends AbstractTransport
 
         $message = $message->getBodyString($eol);
 
-        $params = $this->getConfig('additionalParameters', '');
-        $this->_mail($to, $subject, $message, $headers, $params);
+        $params = this->getConfig('additionalParameters', '');
+        this->_mail($to, $subject, $message, $headers, $params);
 
         $headers .= $eol . 'To: ' . $to;
         $headers .= $eol . 'Subject: ' . $subject;

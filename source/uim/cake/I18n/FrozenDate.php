@@ -173,6 +173,6 @@ class FrozenDate extends ChronosDate implements I18nDateTimeInterface
     public function timeAgoInWords(array $options = []): string
     {
         /** @psalm-suppress UndefinedInterfaceMethod */
-        return static::getDiffFormatter()->dateAgoInWords($this, $options);
+        return static::getDiffFormatter()->dateAgoInWords(this, $options);
     }
 }

@@ -98,12 +98,12 @@ class LogEngineRegistry extends ObjectRegistry
      * Remove a single logger from the registry.
      *
      * @param string $name The logger name.
-     * @return $this
+     * @return this
      */
     public function unload(string $name)
     {
-        unset($this->_loaded[$name]);
+        unset(this->_loaded[$name]);
 
-        return $this;
+        return this;
     }
 }

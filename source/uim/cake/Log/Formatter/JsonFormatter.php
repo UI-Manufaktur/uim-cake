@@ -34,7 +34,7 @@ class JsonFormatter extends AbstractFormatter
      */
     public this(array $config = [])
     {
-        $this->setConfig($config);
+        this->setConfig($config);
     }
 
     /**
@@ -42,9 +42,9 @@ class JsonFormatter extends AbstractFormatter
      */
     public function format($level, string $message, array $context = []): string
     {
-        $log = ['date' => date($this->_config['dateFormat']), 'level' => (string)$level, 'message' => $message];
-        $json = json_encode($log, $this->_config['flags']);
+        $log = ['date' => date(this->_config['dateFormat']), 'level' => (string)$level, 'message' => $message];
+        $json = json_encode($log, this->_config['flags']);
 
-        return $this->_config['appendNewline'] ? $json . "\n" : $json;
+        return this->_config['appendNewline'] ? $json . "\n" : $json;
     }
 }

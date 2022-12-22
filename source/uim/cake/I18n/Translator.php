@@ -70,10 +70,10 @@ class Translator
         FormatterInterface $formatter,
         ?Translator $fallback = null
     ) {
-        $this->locale = $locale;
-        $this->package = $package;
-        $this->formatter = $formatter;
-        $this->fallback = $fallback;
+        this->locale = $locale;
+        this->package = $package;
+        this->formatter = $formatter;
+        this->fallback = $fallback;
     }
 
     /**
@@ -84,15 +84,15 @@ class Translator
      */
     protected function getMessage(string $key)
     {
-        $message = $this->package->getMessage($key);
+        $message = this->package->getMessage($key);
         if ($message) {
             return $message;
         }
 
-        if ($this->fallback) {
-            $message = $this->fallback->getMessage($key);
+        if (this->fallback) {
+            $message = this->fallback->getMessage($key);
             if ($message) {
-                $this->package->addMessage($key, $message);
+                this->package->addMessage($key, $message);
 
                 return $message;
             }
@@ -112,14 +112,14 @@ class Translator
     public function translate(string $key, array $tokensValues = []): string
     {
         if (isset($tokensValues['_count'])) {
-            $message = $this->getMessage(static::PLURAL_PREFIX . $key);
+            $message = this->getMessage(static::PLURAL_PREFIX . $key);
             if (!$message) {
-                $message = $this->getMessage($key);
+                $message = this->getMessage($key);
             }
         } else {
-            $message = $this->getMessage($key);
+            $message = this->getMessage($key);
             if (!$message) {
-                $message = $this->getMessage(static::PLURAL_PREFIX . $key);
+                $message = this->getMessage(static::PLURAL_PREFIX . $key);
             }
         }
 
@@ -130,7 +130,7 @@ class Translator
 
         // Check for missing/invalid context
         if (is_array($message) && isset($message['_context'])) {
-            $message = $this->resolveContext($key, $message, $tokensValues);
+            $message = this->resolveContext($key, $message, $tokensValues);
             unset($tokensValues['_context']);
         }
 
@@ -151,7 +151,7 @@ class Translator
         // Resolve plural form.
         if (is_array($message)) {
             $count = $tokensValues['_count'] ?? 0;
-            $form = PluralRules::calculate($this->locale, (int)$count);
+            $form = PluralRules::calculate(this->locale, (int)$count);
             $message = $message[$form] ?? (string)end($message);
         }
 
@@ -166,7 +166,7 @@ class Translator
 
         unset($tokensValues['_count'], $tokensValues['_singular']);
 
-        return $this->formatter->format($this->locale, $message, $tokensValues);
+        return this->formatter->format(this->locale, $message, $tokensValues);
     }
 
     /**
@@ -206,6 +206,6 @@ class Translator
      */
     public function getPackage(): Package
     {
-        return $this->package;
+        return this->package;
     }
 }

@@ -89,12 +89,12 @@ class TransportRegistry extends ObjectRegistry
      * Remove a single adapter from the registry.
      *
      * @param string $name The adapter name.
-     * @return $this
+     * @return this
      */
     public function unload(string $name)
     {
-        unset($this->_loaded[$name]);
+        unset(this->_loaded[$name]);
 
-        return $this;
+        return this;
     }
 }

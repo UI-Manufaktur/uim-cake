@@ -123,7 +123,7 @@ trait DateFormatTrait
      */
     public function nice($timezone = null, $locale = null): string
     {
-        return (string)$this->i18nFormat(static::$niceFormat, $timezone, $locale);
+        return (string)this->i18nFormat(static::$niceFormat, $timezone, $locale);
     }
 
     /**
@@ -182,21 +182,21 @@ trait DateFormatTrait
     public function i18nFormat($format = null, $timezone = null, $locale = null)
     {
         if ($format === Time::UNIX_TIMESTAMP_FORMAT) {
-            return $this->getTimestamp();
+            return this->getTimestamp();
         }
 
-        $time = $this;
+        $time = this;
 
         if ($timezone) {
             // Handle the immutable and mutable object cases.
-            $time = clone $this;
+            $time = clone this;
             $time = $time->timezone($timezone);
         }
 
         $format = $format ?? static::$_toStringFormat;
         $locale = $locale ?: static::$defaultLocale;
 
-        return $this->_formatObject($time, $format, $locale);
+        return this->_formatObject($time, $format, $locale);
     }
 
     /**
@@ -270,7 +270,7 @@ trait DateFormatTrait
      */
     public function __toString(): string
     {
-        return (string)$this->i18nFormat();
+        return (string)this->i18nFormat();
     }
 
     /**
@@ -452,10 +452,10 @@ trait DateFormatTrait
     public function jsonSerialize()
     {
         if (static::$_jsonEncodeFormat instanceof Closure) {
-            return call_user_func(static::$_jsonEncodeFormat, $this);
+            return call_user_func(static::$_jsonEncodeFormat, this);
         }
 
-        return $this->i18nFormat(static::$_jsonEncodeFormat);
+        return this->i18nFormat(static::$_jsonEncodeFormat);
     }
 
     /**
@@ -509,7 +509,7 @@ trait DateFormatTrait
      */
     public function diffForHumans(?ChronosInterface $other = null, bool $absolute = false): string
     {
-        return static::getDiffFormatter()->diffForHumans($this, $other, $absolute);
+        return static::getDiffFormatter()->diffForHumans(this, $other, $absolute);
     }
 
     /**
@@ -521,8 +521,8 @@ trait DateFormatTrait
     {
         /** @psalm-suppress PossiblyNullReference */
         return [
-            'time' => $this->format('Y-m-d H:i:s.uP'),
-            'timezone' => $this->getTimezone()->getName(),
+            'time' => this->format('Y-m-d H:i:s.uP'),
+            'timezone' => this->getTimezone()->getName(),
             'fixedNowTime' => static::hasTestNow() ? static::getTestNow()->format('Y-m-d\TH:i:s.uP') : false,
         ];
     }

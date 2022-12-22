@@ -84,7 +84,7 @@ class SmtpTransport extends AbstractTransport
     public function __destruct()
     {
         try {
-            $this->disconnect();
+            this->disconnect();
         } catch (Exception $e) {
             // avoid fatal error on script termination
         }
@@ -99,7 +99,7 @@ class SmtpTransport extends AbstractTransport
      */
     public function __wakeup(): void
     {
-        $this->_socket = null;
+        this->_socket = null;
     }
 
     /**
@@ -112,9 +112,9 @@ class SmtpTransport extends AbstractTransport
      */
     public function connect(): void
     {
-        if (!$this->connected()) {
-            $this->_connect();
-            $this->_auth();
+        if (!this->connected()) {
+            this->_connect();
+            this->_auth();
         }
     }
 
@@ -125,7 +125,7 @@ class SmtpTransport extends AbstractTransport
      */
     public function connected(): bool
     {
-        return $this->_socket !== null && $this->_socket->isConnected();
+        return this->_socket !== null && this->_socket->isConnected();
     }
 
     /**
@@ -138,11 +138,11 @@ class SmtpTransport extends AbstractTransport
      */
     public function disconnect(): void
     {
-        if (!$this->connected()) {
+        if (!this->connected()) {
             return;
         }
 
-        $this->_disconnect();
+        this->_disconnect();
     }
 
     /**
@@ -172,7 +172,7 @@ class SmtpTransport extends AbstractTransport
      */
     public function getLastResponse(): array
     {
-        return $this->_lastResponse;
+        return this->_lastResponse;
     }
 
     /**
@@ -184,23 +184,23 @@ class SmtpTransport extends AbstractTransport
      */
     public function send(Message $message): array
     {
-        $this->checkRecipient($message);
+        this->checkRecipient($message);
 
-        if (!$this->connected()) {
-            $this->_connect();
-            $this->_auth();
+        if (!this->connected()) {
+            this->_connect();
+            this->_auth();
         } else {
-            $this->_smtpSend('RSET');
+            this->_smtpSend('RSET');
         }
 
-        $this->_sendRcpt($message);
-        $this->_sendData($message);
+        this->_sendRcpt($message);
+        this->_sendData($message);
 
-        if (!$this->_config['keepAlive']) {
-            $this->_disconnect();
+        if (!this->_config['keepAlive']) {
+            this->_disconnect();
         }
 
-        return $this->_content;
+        return this->_content;
     }
 
     /**
@@ -220,7 +220,7 @@ class SmtpTransport extends AbstractTransport
                 ];
             }
         }
-        $this->_lastResponse = array_merge($this->_lastResponse, $response);
+        this->_lastResponse = array_merge(this->_lastResponse, $response);
     }
 
     /**
@@ -230,10 +230,10 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _parseAuthType(): void
     {
-        $this->authType = null;
+        this->authType = null;
 
         $auth = '';
-        foreach ($this->_lastResponse as $line) {
+        foreach (this->_lastResponse as $line) {
             if (strlen($line['message']) === 0 || substr($line['message'], 0, 5) === 'AUTH ') {
                 $auth = $line['message'];
                 break;
@@ -241,13 +241,13 @@ class SmtpTransport extends AbstractTransport
         }
 
         if (strpos($auth, self::AUTH_PLAIN) !== false) {
-            $this->authType = self::AUTH_PLAIN;
+            this->authType = self::AUTH_PLAIN;
 
             return;
         }
 
         if (strpos($auth, self::AUTH_LOGIN) !== false) {
-            $this->authType = self::AUTH_LOGIN;
+            this->authType = self::AUTH_LOGIN;
 
             return;
         }
@@ -261,13 +261,13 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _connect(): void
     {
-        $this->_generateSocket();
-        if (!$this->_socket()->connect()) {
+        this->_generateSocket();
+        if (!this->_socket()->connect()) {
             throw new SocketException('Unable to connect to SMTP server.');
         }
-        $this->_smtpSend(null, '220');
+        this->_smtpSend(null, '220');
 
-        $config = $this->_config;
+        $config = this->_config;
 
         $host = 'localhost';
         if (isset($config['client'])) {
@@ -284,11 +284,11 @@ class SmtpTransport extends AbstractTransport
         }
 
         try {
-            $this->_smtpSend("EHLO {$host}", '250');
+            this->_smtpSend("EHLO {$host}", '250');
             if ($config['tls']) {
-                $this->_smtpSend('STARTTLS', '220');
-                $this->_socket()->enableCrypto('tls');
-                $this->_smtpSend("EHLO {$host}", '250');
+                this->_smtpSend('STARTTLS', '220');
+                this->_socket()->enableCrypto('tls');
+                this->_smtpSend("EHLO {$host}", '250');
             }
         } catch (SocketException $e) {
             if ($config['tls']) {
@@ -299,13 +299,13 @@ class SmtpTransport extends AbstractTransport
                 );
             }
             try {
-                $this->_smtpSend("HELO {$host}", '250');
+                this->_smtpSend("HELO {$host}", '250');
             } catch (SocketException $e2) {
                 throw new SocketException('SMTP server did not accept the connection.', null, $e2);
             }
         }
 
-        $this->_parseAuthType();
+        this->_parseAuthType();
     }
 
     /**
@@ -316,31 +316,31 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _auth(): void
     {
-        if (!isset($this->_config['username'], $this->_config['password'])) {
+        if (!isset(this->_config['username'], this->_config['password'])) {
             return;
         }
 
-        $username = $this->_config['username'];
-        $password = $this->_config['password'];
-        if (empty($this->authType)) {
-            $replyCode = $this->_authPlain($username, $password);
+        $username = this->_config['username'];
+        $password = this->_config['password'];
+        if (empty(this->authType)) {
+            $replyCode = this->_authPlain($username, $password);
             if ($replyCode === '235') {
                 return;
             }
 
-            $this->_authLogin($username, $password);
+            this->_authLogin($username, $password);
 
             return;
         }
 
-        if ($this->authType === self::AUTH_PLAIN) {
-            $this->_authPlain($username, $password);
+        if (this->authType === self::AUTH_PLAIN) {
+            this->_authPlain($username, $password);
 
             return;
         }
 
-        if ($this->authType === self::AUTH_LOGIN) {
-            $this->_authLogin($username, $password);
+        if (this->authType === self::AUTH_LOGIN) {
+            this->_authLogin($username, $password);
 
             return;
         }
@@ -355,7 +355,7 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _authPlain(string $username, string $password): ?string
     {
-        return $this->_smtpSend(
+        return this->_smtpSend(
             sprintf(
                 'AUTH PLAIN %s',
                 base64_encode(chr(0) . $username . chr(0) . $password)
@@ -373,15 +373,15 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _authLogin(string $username, string $password): void
     {
-        $replyCode = $this->_smtpSend('AUTH LOGIN', '334|500|502|504');
+        $replyCode = this->_smtpSend('AUTH LOGIN', '334|500|502|504');
         if ($replyCode === '334') {
             try {
-                $this->_smtpSend(base64_encode($username), '334');
+                this->_smtpSend(base64_encode($username), '334');
             } catch (SocketException $e) {
                 throw new SocketException('SMTP server did not accept the username.', null, $e);
             }
             try {
-                $this->_smtpSend(base64_encode($password), '235');
+                this->_smtpSend(base64_encode($password), '235');
             } catch (SocketException $e) {
                 throw new SocketException('SMTP server did not accept the password.', null, $e);
             }
@@ -477,12 +477,12 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _sendRcpt(Message $message): void
     {
-        $from = $this->_prepareFromAddress($message);
-        $this->_smtpSend($this->_prepareFromCmd(key($from)));
+        $from = this->_prepareFromAddress($message);
+        this->_smtpSend(this->_prepareFromCmd(key($from)));
 
-        $messages = $this->_prepareRecipientAddresses($message);
+        $messages = this->_prepareRecipientAddresses($message);
         foreach ($messages as $mail) {
-            $this->_smtpSend($this->_prepareRcptCmd($mail));
+            this->_smtpSend(this->_prepareRcptCmd($mail));
         }
     }
 
@@ -495,7 +495,7 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _sendData(Message $message): void
     {
-        $this->_smtpSend('DATA', '354');
+        this->_smtpSend('DATA', '354');
 
         $headers = $message->getHeadersString([
             'from',
@@ -507,10 +507,10 @@ class SmtpTransport extends AbstractTransport
             'subject',
             'returnPath',
         ]);
-        $message = $this->_prepareMessage($message);
+        $message = this->_prepareMessage($message);
 
-        $this->_smtpSend($headers . "\r\n\r\n" . $message . "\r\n\r\n\r\n.");
-        $this->_content = ['headers' => $headers, 'message' => $message];
+        this->_smtpSend($headers . "\r\n\r\n" . $message . "\r\n\r\n\r\n.");
+        this->_content = ['headers' => $headers, 'message' => $message];
     }
 
     /**
@@ -521,9 +521,9 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _disconnect(): void
     {
-        $this->_smtpSend('QUIT', false);
-        $this->_socket()->disconnect();
-        $this->authType = null;
+        this->_smtpSend('QUIT', false);
+        this->_socket()->disconnect();
+        this->authType = null;
     }
 
     /**
@@ -534,7 +534,7 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _generateSocket(): void
     {
-        $this->_socket = new Socket($this->_config);
+        this->_socket = new Socket(this->_config);
     }
 
     /**
@@ -547,19 +547,19 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _smtpSend(?string $data, $checkCode = '250'): ?string
     {
-        $this->_lastResponse = [];
+        this->_lastResponse = [];
 
         if ($data !== null) {
-            $this->_socket()->write($data . "\r\n");
+            this->_socket()->write($data . "\r\n");
         }
 
-        $timeout = $this->_config['timeout'];
+        $timeout = this->_config['timeout'];
 
         while ($checkCode !== false) {
             $response = '';
             $startTime = time();
             while (substr($response, -2) !== "\r\n" && (time() - $startTime < $timeout)) {
-                $bytes = $this->_socket()->read();
+                $bytes = this->_socket()->read();
                 if ($bytes === null) {
                     break;
                 }
@@ -573,7 +573,7 @@ class SmtpTransport extends AbstractTransport
             $responseLines = explode("\r\n", rtrim($response, "\r\n"));
             $response = end($responseLines);
 
-            $this->_bufferResponseLines($responseLines);
+            this->_bufferResponseLines($responseLines);
 
             if (preg_match('/^(' . $checkCode . ')(.)/', $response, $code)) {
                 if ($code[2] === '-') {
@@ -596,10 +596,10 @@ class SmtpTransport extends AbstractTransport
      */
     protected function _socket(): Socket
     {
-        if ($this->_socket === null) {
+        if (this->_socket === null) {
             throw new RuntimeException('Socket is null, but must be set.');
         }
 
-        return $this->_socket;
+        return this->_socket;
     }
 }

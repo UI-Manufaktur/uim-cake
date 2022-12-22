@@ -92,9 +92,9 @@ class MessagesFileLoader
      */
     public this(string $name, string $locale, string $extension = 'po')
     {
-        $this->_name = $name;
-        $this->_locale = $locale;
-        $this->_extension = $extension;
+        this->_name = $name;
+        this->_locale = $locale;
+        this->_extension = $extension;
     }
 
     /**
@@ -107,11 +107,11 @@ class MessagesFileLoader
      */
     public function __invoke()
     {
-        $folders = $this->translationsFolders();
-        $ext = $this->_extension;
+        $folders = this->translationsFolders();
+        $ext = this->_extension;
         $file = false;
 
-        $fileName = $this->_name;
+        $fileName = this->_name;
         $pos = strpos($fileName, '/');
         if ($pos !== false) {
             $fileName = substr($fileName, $pos + 1);
@@ -150,7 +150,7 @@ class MessagesFileLoader
      */
     public function translationsFolders(): array
     {
-        $locale = Locale::parseLocale($this->_locale) + ['region' => null];
+        $locale = Locale::parseLocale(this->_locale) + ['region' => null];
 
         $folders = [
             implode('_', [$locale['language'], $locale['region']]),
@@ -170,7 +170,7 @@ class MessagesFileLoader
         }
 
         // If space is not added after slash, the character after it remains lowercased
-        $pluginName = Inflector::camelize(str_replace('/', '/ ', $this->_name));
+        $pluginName = Inflector::camelize(str_replace('/', '/ ', this->_name));
         if (Plugin::isLoaded($pluginName)) {
             $basePath = App::path('locales', $pluginName)[0];
             foreach ($folders as $folder) {

@@ -119,14 +119,14 @@ class Email implements JsonSerializable, Serializable
      */
     public this($config = null)
     {
-        $this->message = new $this->messageClass();
+        this->message = new this->messageClass();
 
         if ($config === null) {
             $config = Mailer::getConfig('default');
         }
 
         if ($config) {
-            $this->setProfile($config);
+            this->setProfile($config);
         }
     }
 
@@ -137,12 +137,12 @@ class Email implements JsonSerializable, Serializable
      */
     public function __clone()
     {
-        if ($this->renderer) {
-            $this->renderer = clone $this->renderer;
+        if (this->renderer) {
+            this->renderer = clone this->renderer;
         }
 
-        if ($this->message !== null) {
-            $this->message = clone $this->message;
+        if (this->message !== null) {
+            this->message = clone this->message;
         }
     }
 
@@ -151,11 +151,11 @@ class Email implements JsonSerializable, Serializable
      *
      * @param string $method Method name.
      * @param array $args Method arguments
-     * @return $this|mixed
+     * @return this|mixed
      */
     public function __call(string $method, array $args)
     {
-        $result = $this->message->$method(...$args);
+        $result = this->message->$method(...$args);
 
         if (strpos($method, 'get') === 0) {
             return $result;
@@ -166,7 +166,7 @@ class Email implements JsonSerializable, Serializable
             return $result;
         }
 
-        return $this;
+        return this;
     }
 
     /**
@@ -176,20 +176,20 @@ class Email implements JsonSerializable, Serializable
      */
     public function getMessage(): Message
     {
-        return $this->message;
+        return this->message;
     }
 
     /**
      * Sets view class for render.
      *
      * @param string $viewClass View class name.
-     * @return $this
+     * @return this
      */
     public function setViewRenderer(string $viewClass)
     {
-        $this->getRenderer()->viewBuilder()->setClassName($viewClass);
+        this->getRenderer()->viewBuilder()->setClassName($viewClass);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -201,20 +201,20 @@ class Email implements JsonSerializable, Serializable
     public function getViewRenderer(): string
     {
         /** @psalm-suppress NullableReturnStatement */
-        return $this->getRenderer()->viewBuilder()->getClassName();
+        return this->getRenderer()->viewBuilder()->getClassName();
     }
 
     /**
      * Sets variables to be set on render.
      *
      * @param array<string, mixed> $viewVars Variables to set for view.
-     * @return $this
+     * @return this
      */
     public function setViewVars(array $viewVars)
     {
-        $this->getRenderer()->viewBuilder()->setVars($viewVars);
+        this->getRenderer()->viewBuilder()->setVars($viewVars);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -224,7 +224,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function getViewVars(): array
     {
-        return $this->getRenderer()->viewBuilder()->getVars();
+        return this->getRenderer()->viewBuilder()->getVars();
     }
 
     /**
@@ -235,7 +235,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @param \Cake\Mailer\AbstractTransport|string $name Either the name of a configured
      *   transport, or a transport instance.
-     * @return $this
+     * @return this
      * @throws \LogicException When the chosen transport lacks a send method.
      * @throws \InvalidArgumentException When $name is neither a string nor an object.
      */
@@ -255,9 +255,9 @@ class Email implements JsonSerializable, Serializable
             throw new LogicException(sprintf('The "%s" do not have send method.', get_class($transport)));
         }
 
-        $this->_transport = $transport;
+        this->_transport = $transport;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -267,7 +267,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function getTransport(): ?AbstractTransport
     {
-        return $this->_transport;
+        return this->_transport;
     }
 
     /**
@@ -279,12 +279,12 @@ class Email implements JsonSerializable, Serializable
     public function message(?string $type = null)
     {
         if ($type === null) {
-            return $this->message->getBody();
+            return this->message->getBody();
         }
 
         $method = 'getBody' . ucfirst($type);
 
-        return $this->message->$method();
+        return this->message->$method();
     }
 
     /**
@@ -292,7 +292,7 @@ class Email implements JsonSerializable, Serializable
      *
      * @param array<string, mixed>|string $config String with configuration name, or
      *    an array with config.
-     * @return $this
+     * @return this
      */
     public function setProfile($config)
     {
@@ -305,14 +305,14 @@ class Email implements JsonSerializable, Serializable
             unset($name);
         }
 
-        $this->_profile = $config + $this->_profile;
+        this->_profile = $config + this->_profile;
 
         $simpleMethods = [
             'transport',
         ];
         foreach ($simpleMethods as $method) {
             if (isset($config[$method])) {
-                $this->{'set' . ucfirst($method)}($config[$method]);
+                this->{'set' . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
@@ -322,27 +322,27 @@ class Email implements JsonSerializable, Serializable
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                $this->getRenderer()->viewBuilder()->{'set' . ucfirst($method)}($config[$method]);
+                this->getRenderer()->viewBuilder()->{'set' . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
         if (array_key_exists('helpers', $config)) {
-            $this->getRenderer()->viewBuilder()->setHelpers($config['helpers'], false);
+            this->getRenderer()->viewBuilder()->setHelpers($config['helpers'], false);
             unset($config['helpers']);
         }
         if (array_key_exists('viewRenderer', $config)) {
-            $this->getRenderer()->viewBuilder()->setClassName($config['viewRenderer']);
+            this->getRenderer()->viewBuilder()->setClassName($config['viewRenderer']);
             unset($config['viewRenderer']);
         }
         if (array_key_exists('viewVars', $config)) {
-            $this->getRenderer()->viewBuilder()->setVars($config['viewVars']);
+            this->getRenderer()->viewBuilder()->setVars($config['viewVars']);
             unset($config['viewVars']);
         }
 
-        $this->message->setConfig($config);
+        this->message->setConfig($config);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -352,7 +352,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function getProfile(): array
     {
-        return $this->_profile;
+        return this->_profile;
     }
 
     /**
@@ -369,16 +369,16 @@ class Email implements JsonSerializable, Serializable
             $content = implode("\n", $content) . "\n";
         }
 
-        $this->render($content);
+        this->render($content);
 
-        $transport = $this->getTransport();
+        $transport = this->getTransport();
         if (!$transport) {
             $msg = 'Cannot send email, transport was not defined. Did you call transport() or define ' .
                 ' a transport in the set profile?';
             throw new BadMethodCallException($msg);
         }
-        $contents = $transport->send($this->message);
-        $this->_logDelivery($contents);
+        $contents = $transport->send(this->message);
+        this->_logDelivery($contents);
 
         return $contents;
     }
@@ -395,10 +395,10 @@ class Email implements JsonSerializable, Serializable
             $content = implode("\n", $content) . "\n";
         }
 
-        $this->message->setBody(
-            $this->getRenderer()->render(
+        this->message->setBody(
+            this->getRenderer()->render(
                 (string)$content,
-                $this->message->getBodyTypes()
+                this->message->getBodyTypes()
             )
         );
     }
@@ -410,7 +410,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function viewBuilder(): ViewBuilder
     {
-        return $this->getRenderer()->viewBuilder();
+        return this->getRenderer()->viewBuilder();
     }
 
     /**
@@ -420,24 +420,24 @@ class Email implements JsonSerializable, Serializable
      */
     public function getRenderer(): Renderer
     {
-        if ($this->renderer === null) {
-            $this->renderer = new Renderer();
+        if (this->renderer === null) {
+            this->renderer = new Renderer();
         }
 
-        return $this->renderer;
+        return this->renderer;
     }
 
     /**
      * Set email renderer.
      *
      * @param \Cake\Mailer\Renderer $renderer Render instance.
-     * @return $this
+     * @return this
      */
     public function setRenderer(Renderer $renderer)
     {
-        $this->renderer = $renderer;
+        this->renderer = $renderer;
 
-        return $this;
+        return this;
     }
 
     /**
@@ -448,22 +448,22 @@ class Email implements JsonSerializable, Serializable
      */
     protected function _logDelivery(array $contents): void
     {
-        if (empty($this->_profile['log'])) {
+        if (empty(this->_profile['log'])) {
             return;
         }
         $config = [
             'level' => 'debug',
             'scope' => 'email',
         ];
-        if ($this->_profile['log'] !== true) {
-            if (!is_array($this->_profile['log'])) {
-                $this->_profile['log'] = ['level' => $this->_profile['log']];
+        if (this->_profile['log'] !== true) {
+            if (!is_array(this->_profile['log'])) {
+                this->_profile['log'] = ['level' => this->_profile['log']];
             }
-            $config = $this->_profile['log'] + $config;
+            $config = this->_profile['log'] + $config;
         }
         Log::write(
             $config['level'],
-            PHP_EOL . $this->flatten($contents['headers']) . PHP_EOL . PHP_EOL . $this->flatten($contents['message']),
+            PHP_EOL . this->flatten($contents['headers']) . PHP_EOL . PHP_EOL . this->flatten($contents['message']),
             $config['scope']
         );
     }
@@ -529,18 +529,18 @@ class Email implements JsonSerializable, Serializable
     /**
      * Reset all the internal variables to be able to send out a new email.
      *
-     * @return $this
+     * @return this
      */
     public function reset()
     {
-        $this->message->reset();
-        if ($this->renderer !== null) {
-            $this->renderer->reset();
+        this->message->reset();
+        if (this->renderer !== null) {
+            this->renderer->reset();
         }
-        $this->_transport = null;
-        $this->_profile = [];
+        this->_transport = null;
+        this->_profile = [];
 
-        return $this;
+        return this;
     }
 
     /**
@@ -552,8 +552,8 @@ class Email implements JsonSerializable, Serializable
      */
     public function jsonSerialize(): array
     {
-        $array = $this->message->jsonSerialize();
-        $array['viewConfig'] = $this->getRenderer()->viewBuilder()->jsonSerialize();
+        $array = this->message->jsonSerialize();
+        $array['viewConfig'] = this->getRenderer()->viewBuilder()->jsonSerialize();
 
         return $array;
     }
@@ -562,21 +562,21 @@ class Email implements JsonSerializable, Serializable
      * Configures an email instance object from serialized config.
      *
      * @param array<string, mixed> $config Email configuration array.
-     * @return $this
+     * @return this
      */
     public function createFromArray(array $config)
     {
         if (isset($config['viewConfig'])) {
-            $this->getRenderer()->viewBuilder()->createFromArray($config['viewConfig']);
+            this->getRenderer()->viewBuilder()->createFromArray($config['viewConfig']);
             unset($config['viewConfig']);
         }
 
-        if ($this->message === null) {
-            $this->message = new $this->messageClass();
+        if (this->message === null) {
+            this->message = new this->messageClass();
         }
-        $this->message->createFromArray($config);
+        this->message->createFromArray($config);
 
-        return $this;
+        return this;
     }
 
     /**
@@ -586,7 +586,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function serialize(): string
     {
-        $array = $this->__serialize();
+        $array = this->__serialize();
 
         return serialize($array);
     }
@@ -598,7 +598,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function __serialize(): array
     {
-        $array = $this->jsonSerialize();
+        $array = this->jsonSerialize();
         array_walk_recursive($array, function (&$item, $key): void {
             if ($item instanceof SimpleXMLElement) {
                 $item = json_decode(json_encode((array)$item), true);
@@ -617,7 +617,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function unserialize($data): void
     {
-        $this->createFromArray(unserialize($data));
+        this->createFromArray(unserialize($data));
     }
 
     /**
@@ -628,7 +628,7 @@ class Email implements JsonSerializable, Serializable
      */
     public function __unserialize(array $data): void
     {
-        $this->createFromArray($data);
+        this->createFromArray($data);
     }
 
     /**
