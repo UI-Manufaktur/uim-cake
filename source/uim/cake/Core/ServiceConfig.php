@@ -32,7 +32,7 @@ class ServiceConfig
      * @param mixed $default The default value to use if $path does not exist.
      * @return mixed The configuration data or $default value.
      */
-    public function get(string $path, $default = null)
+    function get(string $path, $default = null)
     {
         return Configure::read($path, $default);
     }
@@ -43,7 +43,7 @@ class ServiceConfig
      * @param string $path The path to check.
      * @return bool True if the configuration data exists.
      */
-    public function has(string $path): bool
+    function has(string $path): bool
     {
         return Configure::check($path);
     }

@@ -62,7 +62,7 @@ class CommandRetry
      * @return mixed The return value of the passed action callable
      * @throws \Exception
      */
-    public function run(callable $action)
+    function run(callable $action)
     {
         this->numRetries = 0;
         while (true) {
@@ -87,7 +87,7 @@ class CommandRetry
      *
      * @return int
      */
-    public function getRetries(): int
+    function getRetries(): int
     {
         return this->numRetries;
     }

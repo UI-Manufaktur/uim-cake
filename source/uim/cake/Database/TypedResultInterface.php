@@ -26,7 +26,7 @@ interface TypedResultInterface
      *
      * @return string
      */
-    public function getReturnType(): string;
+    function getReturnType(): string;
 
     /**
      * Set the return type of the expression
@@ -34,5 +34,5 @@ interface TypedResultInterface
      * @param string $type The type name to use.
      * @return this
      */
-    public function setReturnType(string $type);
+    function setReturnType(string $type);
 }

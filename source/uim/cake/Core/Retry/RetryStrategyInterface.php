@@ -31,5 +31,5 @@ interface RetryStrategyInterface
      * @param int $retryCount The number of times action has been retried
      * @return bool Whether it is OK to retry the action
      */
-    public function shouldRetry(Exception $exception, int $retryCount): bool;
+    function shouldRetry(Exception $exception, int $retryCount): bool;
 }

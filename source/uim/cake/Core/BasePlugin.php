@@ -126,14 +126,14 @@ class BasePlugin implements PluginInterface
      *
      * @return void
      */
-    public function initialize(): void
+    function initialize(): void
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function getName(): string
+    function getName(): string
     {
         if (this->name) {
             return this->name;
@@ -148,7 +148,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function getPath(): string
+    function getPath(): string
     {
         if (this->path) {
             return this->path;
@@ -168,7 +168,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function getConfigPath(): string
+    function getConfigPath(): string
     {
         if (this->configPath) {
             return this->configPath;
@@ -181,7 +181,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function getClassPath(): string
+    function getClassPath(): string
     {
         if (this->classPath) {
             return this->classPath;
@@ -194,7 +194,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function getTemplatePath(): string
+    function getTemplatePath(): string
     {
         if (this->templatePath) {
             return this->templatePath;
@@ -207,7 +207,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function enable(string $hook)
+    function enable(string $hook)
     {
         this->checkHook($hook);
         this->{"{$hook}Enabled}"} = true;
@@ -218,7 +218,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function disable(string $hook)
+    function disable(string $hook)
     {
         this->checkHook($hook);
         this->{"{$hook}Enabled"} = false;
@@ -229,7 +229,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function isEnabled(string $hook): bool
+    function isEnabled(string $hook): bool
     {
         this->checkHook($hook);
 
@@ -255,7 +255,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function routes(RouteBuilder $routes): void
+    function routes(RouteBuilder $routes): void
     {
         $path = this->getConfigPath() . 'routes.php';
         if (is_file($path)) {
@@ -269,7 +269,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function bootstrap(PluginApplicationInterface $app): void
+    function bootstrap(PluginApplicationInterface $app): void
     {
         $bootstrap = this->getConfigPath() . 'bootstrap.php';
         if (is_file($bootstrap)) {
@@ -280,7 +280,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function console(CommandCollection $commands): CommandCollection
+    function console(CommandCollection $commands): CommandCollection
     {
         return $commands->addMany($commands->discoverPlugin(this->getName()));
     }
@@ -288,7 +288,7 @@ class BasePlugin implements PluginInterface
     /**
      * @inheritDoc
      */
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         return $middlewareQueue;
     }
@@ -299,7 +299,7 @@ class BasePlugin implements PluginInterface
      * @param \Cake\Core\ContainerInterface $container The container to add services to.
      * @return void
      */
-    public function services(ContainerInterface $container): void
+    function services(ContainerInterface $container): void
     {
     }
 }

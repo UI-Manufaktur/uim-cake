@@ -31,7 +31,7 @@ interface HttpApplicationInterface extends RequestHandlerInterface
      *
      * @return void
      */
-    public function bootstrap(): void;
+    function bootstrap(): void;
 
     /**
      * Define the HTTP middleware layers for an application.
@@ -39,5 +39,5 @@ interface HttpApplicationInterface extends RequestHandlerInterface
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
      * @return \Cake\Http\MiddlewareQueue
      */
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
+    function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 }

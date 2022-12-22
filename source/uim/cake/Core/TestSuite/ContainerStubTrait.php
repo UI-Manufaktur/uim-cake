@@ -62,7 +62,7 @@ trait ContainerStubTrait
      * @return void
      * @psalm-param class-string<\Cake\Core\HttpApplicationInterface>|class-string<\Cake\Core\ConsoleApplicationInterface> $class
      */
-    public function configApplication(string $class, ?array $constructorArgs): void
+    function configApplication(string $class, ?array $constructorArgs): void
     {
         this->_appClass = $class;
         this->_appArgs = $constructorArgs;
@@ -107,7 +107,7 @@ trait ContainerStubTrait
      * @param \Closure $factory The factory function for mocked services.
      * @return this
      */
-    public function mockService(string $class, Closure $factory)
+    function mockService(string $class, Closure $factory)
     {
         this->containerServices[$class] = $factory;
 
@@ -120,7 +120,7 @@ trait ContainerStubTrait
      * @param string $class The class or interface you want to remove.
      * @return this
      */
-    public function removeMockService(string $class)
+    function removeMockService(string $class)
     {
         unset(this->containerServices[$class]);
 
@@ -138,7 +138,7 @@ trait ContainerStubTrait
      * @param \Cake\Core\ContainerInterface $container The container to wrap.
      * @return \Cake\Core\ContainerInterface|null
      */
-    public function modifyContainer(EventInterface $event, ContainerInterface $container): ?ContainerInterface
+    function modifyContainer(EventInterface $event, ContainerInterface $container): ?ContainerInterface
     {
         if (empty(this->containerServices)) {
             return null;
@@ -165,7 +165,7 @@ trait ContainerStubTrait
      * @after
      * @return void
      */
-    public function cleanupContainer(): void
+    function cleanupContainer(): void
     {
         this->_appArgs = null;
         this->_appClass = null;

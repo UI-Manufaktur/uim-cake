@@ -29,7 +29,7 @@ interface TypeInterface
      * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted.
      * @return mixed Given PHP type casted to one acceptable by a database.
      */
-    public function toDatabase($value, DriverInterface $driver);
+    function toDatabase($value, DriverInterface $driver);
 
     /**
      * Casts given value from a database type to a PHP equivalent.
@@ -38,7 +38,7 @@ interface TypeInterface
      * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted
      * @return mixed Given value casted from a database to a PHP equivalent.
      */
-    public function toPHP($value, DriverInterface $driver);
+    function toPHP($value, DriverInterface $driver);
 
     /**
      * Casts given value to its Statement equivalent.
@@ -47,7 +47,7 @@ interface TypeInterface
      * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted.
      * @return mixed Given value casted to its Statement equivalent.
      */
-    public function toStatement($value, DriverInterface $driver);
+    function toStatement($value, DriverInterface $driver);
 
     /**
      * Marshals flat data into PHP objects.
@@ -58,7 +58,7 @@ interface TypeInterface
      * @param mixed $value The value to convert.
      * @return mixed Converted value.
      */
-    public function marshal($value);
+    function marshal($value);
 
     /**
      * Returns the base type name that this class is inheriting.
@@ -69,14 +69,14 @@ interface TypeInterface
      *
      * @return string|null The base type name that this class is inheriting.
      */
-    public function getBaseType(): ?string;
+    function getBaseType(): ?string;
 
     /**
      * Returns type identifier name for this object.
      *
      * @return string|null The type identifier name for this object.
      */
-    public function getName(): ?string;
+    function getName(): ?string;
 
     /**
      * Generate a new primary key value for a given type.
@@ -87,5 +87,5 @@ interface TypeInterface
      * @return mixed A new primary key value.
      * @see \Cake\Database\Type\UuidType
      */
-    public function newId();
+    function newId();
 }

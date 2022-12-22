@@ -85,21 +85,21 @@ interface DriverInterface
      * @throws \Cake\Database\Exception\MissingConnectionException If database connection could not be established.
      * @return bool True on success, false on failure.
      */
-    public function connect(): bool;
+    function connect(): bool;
 
     /**
      * Disconnects from database server.
      *
      * @return void
      */
-    public function disconnect(): void;
+    function disconnect(): void;
 
     /**
      * Returns correct connection resource or object that is internally used.
      *
      * @return object Connection object used internally.
      */
-    public function getConnection();
+    function getConnection();
 
     /**
      * Set the internal connection object.
@@ -107,14 +107,14 @@ interface DriverInterface
      * @param object $connection The connection instance.
      * @return this
      */
-    public function setConnection($connection);
+    function setConnection($connection);
 
     /**
      * Returns whether php is able to use this driver for connecting to database.
      *
      * @return bool True if it is valid to use this driver.
      */
-    public function enabled(): bool;
+    function enabled(): bool;
 
     /**
      * Prepares a sql statement to be executed.
@@ -122,28 +122,28 @@ interface DriverInterface
      * @param \Cake\Database\Query|string $query The query to turn into a prepared statement.
      * @return \Cake\Database\StatementInterface
      */
-    public function prepare($query): StatementInterface;
+    function prepare($query): StatementInterface;
 
     /**
      * Starts a transaction.
      *
      * @return bool True on success, false otherwise.
      */
-    public function beginTransaction(): bool;
+    function beginTransaction(): bool;
 
     /**
      * Commits a transaction.
      *
      * @return bool True on success, false otherwise.
      */
-    public function commitTransaction(): bool;
+    function commitTransaction(): bool;
 
     /**
      * Rollbacks a transaction.
      *
      * @return bool True on success, false otherwise.
      */
-    public function rollbackTransaction(): bool;
+    function rollbackTransaction(): bool;
 
     /**
      * Get the SQL for releasing a save point.
@@ -151,7 +151,7 @@ interface DriverInterface
      * @param string|int $name Save point name or id
      * @return string
      */
-    public function releaseSavePointSQL($name): string;
+    function releaseSavePointSQL($name): string;
 
     /**
      * Get the SQL for creating a save point.
@@ -159,7 +159,7 @@ interface DriverInterface
      * @param string|int $name Save point name or id
      * @return string
      */
-    public function savePointSQL($name): string;
+    function savePointSQL($name): string;
 
     /**
      * Get the SQL for rollingback a save point.
@@ -167,21 +167,21 @@ interface DriverInterface
      * @param string|int $name Save point name or id
      * @return string
      */
-    public function rollbackSavePointSQL($name): string;
+    function rollbackSavePointSQL($name): string;
 
     /**
      * Get the SQL for disabling foreign keys.
      *
      * @return string
      */
-    public function disableForeignKeySQL(): string;
+    function disableForeignKeySQL(): string;
 
     /**
      * Get the SQL for enabling foreign keys.
      *
      * @return string
      */
-    public function enableForeignKeySQL(): string;
+    function enableForeignKeySQL(): string;
 
     /**
      * Returns whether the driver supports adding or dropping constraints
@@ -190,7 +190,7 @@ interface DriverInterface
      * @return bool True if driver supports dynamic constraints.
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
-    public function supportsDynamicConstraints(): bool;
+    function supportsDynamicConstraints(): bool;
 
     /**
      * Returns whether this driver supports save points for nested transactions.
@@ -198,7 +198,7 @@ interface DriverInterface
      * @return bool True if save points are supported, false otherwise.
      * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_SAVEPOINT)` instead
      */
-    public function supportsSavePoints(): bool;
+    function supportsSavePoints(): bool;
 
     /**
      * Returns a value in a safe representation to be used in a query string
@@ -207,7 +207,7 @@ interface DriverInterface
      * @param int $type Must be one of the \PDO::PARAM_* constants
      * @return string
      */
-    public function quote($value, $type): string;
+    function quote($value, $type): string;
 
     /**
      * Checks if the driver supports quoting.
@@ -215,7 +215,7 @@ interface DriverInterface
      * @return bool
      * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
      */
-    public function supportsQuoting(): bool;
+    function supportsQuoting(): bool;
 
     /**
      * Returns a callable function that will be used to transform a passed Query object.
@@ -226,7 +226,7 @@ interface DriverInterface
      * (select, insert, update, delete).
      * @return \Closure
      */
-    public function queryTranslator(string $type): Closure;
+    function queryTranslator(string $type): Closure;
 
     /**
      * Get the schema dialect.
@@ -239,7 +239,7 @@ interface DriverInterface
      *
      * @return \Cake\Database\Schema\SchemaDialect
      */
-    public function schemaDialect(): SchemaDialect;
+    function schemaDialect(): SchemaDialect;
 
     /**
      * Quotes a database identifier (a column name, table name, etc..) to
@@ -248,7 +248,7 @@ interface DriverInterface
      * @param string $identifier The identifier expression to quote.
      * @return string
      */
-    public function quoteIdentifier(string $identifier): string;
+    function quoteIdentifier(string $identifier): string;
 
     /**
      * Escapes values for use in schema definitions.
@@ -256,14 +256,14 @@ interface DriverInterface
      * @param mixed $value The value to escape.
      * @return string String for use in schema definitions.
      */
-    public function schemaValue($value): string;
+    function schemaValue($value): string;
 
     /**
      * Returns the schema name that's being used.
      *
      * @return string
      */
-    public function schema(): string;
+    function schema(): string;
 
     /**
      * Returns last id generated for a table or sequence in database.
@@ -272,14 +272,14 @@ interface DriverInterface
      * @param string|null $column the name of the column representing the primary key.
      * @return string|int
      */
-    public function lastInsertId(?string $table = null, ?string $column = null);
+    function lastInsertId(?string $table = null, ?string $column = null);
 
     /**
      * Checks whether the driver is connected.
      *
      * @return bool
      */
-    public function isConnected(): bool;
+    function isConnected(): bool;
 
     /**
      * Sets whether this driver should automatically quote identifiers
@@ -288,14 +288,14 @@ interface DriverInterface
      * @param bool $enable Whether to enable auto quoting
      * @return this
      */
-    public function enableAutoQuoting(bool $enable = true);
+    function enableAutoQuoting(bool $enable = true);
 
     /**
      * Disable auto quoting of identifiers in queries.
      *
      * @return this
      */
-    public function disableAutoQuoting();
+    function disableAutoQuoting();
 
     /**
      * Returns whether this driver should automatically quote identifiers
@@ -303,7 +303,7 @@ interface DriverInterface
      *
      * @return bool
      */
-    public function isAutoQuotingEnabled(): bool;
+    function isAutoQuotingEnabled(): bool;
 
     /**
      * Transforms the passed query to this Driver's dialect and returns an instance
@@ -314,14 +314,14 @@ interface DriverInterface
      * @return array containing 2 entries. The first entity is the transformed query
      * and the second one the compiled SQL.
      */
-    public function compileQuery(Query $query, ValueBinder $binder): array;
+    function compileQuery(Query $query, ValueBinder $binder): array;
 
     /**
      * Returns an instance of a QueryCompiler.
      *
      * @return \Cake\Database\QueryCompiler
      */
-    public function newCompiler(): QueryCompiler;
+    function newCompiler(): QueryCompiler;
 
     /**
      * Constructs new TableSchema.
@@ -330,5 +330,5 @@ interface DriverInterface
      * @param array $columns The list of columns for the schema.
      * @return \Cake\Database\Schema\TableSchema
      */
-    public function newTableSchema(string $table, array $columns = []): TableSchema;
+    function newTableSchema(string $table, array $columns = []): TableSchema;
 }

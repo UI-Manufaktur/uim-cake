@@ -47,7 +47,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      *
      * @return \Cake\Core\ContainerInterface
      */
-    public function getContainer(): DefinitionContainerInterface
+    function getContainer(): DefinitionContainerInterface
     {
         $container = parent::getContainer();
 
@@ -71,7 +71,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      *
      * @return void
      */
-    public function boot(): void
+    function boot(): void
     {
         this->bootstrap(this->getContainer());
     }
@@ -87,7 +87,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      * @param \Cake\Core\ContainerInterface $container The container to add services to.
      * @return void
      */
-    public function bootstrap(ContainerInterface $container): void
+    function bootstrap(ContainerInterface $container): void
     {
     }
 
@@ -99,7 +99,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      *
      * @return void
      */
-    public function register(): void
+    function register(): void
     {
         this->services(this->getContainer());
     }
@@ -114,7 +114,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      * @param string $id Identifier.
      * @return bool
      */
-    public function provides(string $id): bool
+    function provides(string $id): bool
     {
         return in_array($id, this->provides, true);
     }
@@ -128,5 +128,5 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      * @param \Cake\Core\ContainerInterface $container The container to add services to.
      * @return void
      */
-    abstract public function services(ContainerInterface $container): void;
+    abstract function services(ContainerInterface $container): void;
 }

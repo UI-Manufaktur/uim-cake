@@ -31,7 +31,7 @@ interface ContainerApplicationInterface
      * @param \Cake\Core\ContainerInterface $container The container to add services to
      * @return void
      */
-    public function services(ContainerInterface $container): void;
+    function services(ContainerInterface $container): void;
 
     /**
      * Create a new container and register services.
@@ -41,5 +41,5 @@ interface ContainerApplicationInterface
      *
      * @return \Cake\Core\ContainerInterface A populated container
      */
-    public function getContainer(): ContainerInterface;
+    function getContainer(): ContainerInterface;
 }

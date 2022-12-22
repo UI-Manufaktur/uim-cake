@@ -100,7 +100,7 @@ class QueryCompiler
      * @param \Cake\Database\ValueBinder $binder Value binder used to generate parameter placeholders
      * @return string
      */
-    public function compile(Query $query, ValueBinder $binder): string
+    function compile(Query $query, ValueBinder $binder): string
     {
         $sql = '';
         $type = $query->type();

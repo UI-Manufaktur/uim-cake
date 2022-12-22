@@ -78,7 +78,7 @@ class CakeException extends RuntimeException
      *
      * @return array
      */
-    public function getAttributes(): array
+    function getAttributes(): array
     {
         return this->_attributes;
     }
@@ -95,7 +95,7 @@ class CakeException extends RuntimeException
      * @deprecated 4.2.0 Use `HttpException::setHeaders()` instead. Response headers
      *   should be set for HttpException only.
      */
-    public function responseHeader($header = null, $value = null): ?array
+    function responseHeader($header = null, $value = null): ?array
     {
         if ($header === null) {
             return this->_responseHeaders;

@@ -65,7 +65,7 @@ interface StatementInterface
      * @param string|int|null $type name of configured Type class, or PDO type constant.
      * @return void
      */
-    public function bindValue($column, $value, $type = 'string'): void;
+    function bindValue($column, $value, $type = 'string'): void;
 
     /**
      * Closes a cursor in the database, freeing up any resources and memory
@@ -74,7 +74,7 @@ interface StatementInterface
      *
      * @return void
      */
-    public function closeCursor(): void;
+    function closeCursor(): void;
 
     /**
      * Returns the number of columns this statement's results will contain
@@ -89,14 +89,14 @@ interface StatementInterface
      *
      * @return int
      */
-    public function columnCount(): int;
+    function columnCount(): int;
 
     /**
      * Returns the error code for the last error that occurred when executing this statement
      *
      * @return string|int
      */
-    public function errorCode();
+    function errorCode();
 
     /**
      * Returns the error information for the last error that occurred when executing
@@ -104,7 +104,7 @@ interface StatementInterface
      *
      * @return array
      */
-    public function errorInfo(): array;
+    function errorInfo(): array;
 
     /**
      * Executes the statement by sending the SQL query to the database. It can optionally
@@ -115,7 +115,7 @@ interface StatementInterface
      * @param array|null $params list of values to be bound to query
      * @return bool true on success, false otherwise
      */
-    public function execute(?array $params = null): bool;
+    function execute(?array $params = null): bool;
 
     /**
      * Returns the next row for the result set after executing this statement.
@@ -134,7 +134,7 @@ interface StatementInterface
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    public function fetch($type = 'num');
+    function fetch($type = 'num');
 
     /**
      * Returns an array with all rows resulting from executing this statement
@@ -150,7 +150,7 @@ interface StatementInterface
      * @param string|int $type num for fetching columns as positional keys or assoc for column names as keys
      * @return array|false list of all results from database for this statement or false on failure.
      */
-    public function fetchAll($type = 'num');
+    function fetchAll($type = 'num');
 
     /**
      * Returns the value of the result at position.
@@ -158,7 +158,7 @@ interface StatementInterface
      * @param int $position The numeric position of the column to retrieve in the result
      * @return mixed Returns the specific value of the column designated at $position
      */
-    public function fetchColumn(int $position);
+    function fetchColumn(int $position);
 
     /**
      * Returns the number of rows affected by this SQL statement
@@ -173,7 +173,7 @@ interface StatementInterface
      *
      * @return int
      */
-    public function rowCount(): int;
+    function rowCount(): int;
 
     /**
      * Statements can be passed as argument for count()
@@ -181,7 +181,7 @@ interface StatementInterface
      *
      * @return int
      */
-    public function count(): int;
+    function count(): int;
 
     /**
      * Binds a set of values to statement object with corresponding type
@@ -190,7 +190,7 @@ interface StatementInterface
      * @param array $types list of types to be used, keys should match those in $params
      * @return void
      */
-    public function bind(array $params, array $types): void;
+    function bind(array $params, array $types): void;
 
     /**
      * Returns the latest primary inserted using this statement
@@ -199,5 +199,5 @@ interface StatementInterface
      * @param string|null $column the name of the column representing the primary key
      * @return string|int
      */
-    public function lastInsertId(?string $table = null, ?string $column = null);
+    function lastInsertId(?string $table = null, ?string $column = null);
 }

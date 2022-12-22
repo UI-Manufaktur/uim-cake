@@ -77,7 +77,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
-    public function load(string $name, array $config = [])
+    function load(string $name, array $config = [])
     {
         if (isset($config['className'])) {
             $objName = $name;
@@ -203,7 +203,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      *
      * @return array<string> List of object names.
      */
-    public function loaded(): array
+    function loaded(): array
     {
         return array_keys(this->_loaded);
     }
@@ -214,7 +214,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @param string $name The object name to check for.
      * @return bool True is object is loaded else false.
      */
-    public function has(string $name): bool
+    function has(string $name): bool
     {
         return isset(this->_loaded[$name]);
     }
@@ -227,7 +227,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @throws \RuntimeException If not loaded or found.
      * @psalm-return TObject
      */
-    public function get(string $name)
+    function get(string $name)
     {
         if (!isset(this->_loaded[$name])) {
             throw new RuntimeException(sprintf('Unknown object "%s"', $name));
@@ -243,7 +243,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @return object|null
      * @psalm-return TObject|null
      */
-    public function __get(string $name)
+    function __get(string $name)
     {
         return this->_loaded[$name] ?? null;
     }
@@ -254,7 +254,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @param string $name Name of object being checked.
      * @return bool
      */
-    public function __isset(string $name): bool
+    function __isset(string $name): bool
     {
         return this->has($name);
     }
@@ -267,7 +267,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @psalm-param TObject $object
      * @return void
      */
-    public function __set(string $name, $object): void
+    function __set(string $name, $object): void
     {
         this->set($name, $object);
     }
@@ -278,7 +278,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @param string $name Name of a property to unset.
      * @return void
      */
-    public function __unset(string $name): void
+    function __unset(string $name): void
     {
         this->unload($name);
     }
@@ -290,7 +290,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @param array $objects Array of child objects to normalize.
      * @return array<string, array> Array of normalized objects.
      */
-    public function normalizeArray(array $objects): array
+    function normalizeArray(array $objects): array
     {
         $normal = [];
         foreach ($objects as $i => $objectName) {
@@ -317,7 +317,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      *
      * @return this
      */
-    public function reset()
+    function reset()
     {
         foreach (array_keys(this->_loaded) as $name) {
             this->unload((string)$name);
@@ -338,7 +338,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @psalm-param TObject $object
      * @psalm-suppress MoreSpecificReturnType
      */
-    public function set(string $name, object $object)
+    function set(string $name, object $object)
     {
         [, $objName] = pluginSplit($name);
 
@@ -364,7 +364,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @return this
      * @psalm-suppress MoreSpecificReturnType
      */
-    public function unload(string $name)
+    function unload(string $name)
     {
         if (empty(this->_loaded[$name])) {
             [$plugin, $name] = pluginSplit($name);
@@ -387,7 +387,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      * @return \Traversable
      * @psalm-return \Traversable<string, TObject>
      */
-    public function getIterator(): Traversable
+    function getIterator(): Traversable
     {
         return new ArrayIterator(this->_loaded);
     }
@@ -397,7 +397,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         return count(this->_loaded);
     }
@@ -407,7 +407,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         $properties = get_object_vars(this);
         if (isset($properties['_loaded'])) {

@@ -53,7 +53,7 @@ class SchemaCache
      * @param string|null $name The name of the table to build cache data for.
      * @return array<string> Returns a list build table caches
      */
-    public function build(?string $name = null): array
+    function build(?string $name = null): array
     {
         if ($name) {
             $tables = [$name];
@@ -75,7 +75,7 @@ class SchemaCache
      * @param string|null $name The name of the table to clear cache data for.
      * @return array<string> Returns a list of cleared table caches
      */
-    public function clear(?string $name = null): array
+    function clear(?string $name = null): array
     {
         if ($name) {
             $tables = [$name];
@@ -101,7 +101,7 @@ class SchemaCache
      * @return \Cake\Database\Schema\CachedCollection
      * @throws \RuntimeException If given connection object is not compatible with schema caching
      */
-    public function getSchema(Connection $connection): CachedCollection
+    function getSchema(Connection $connection): CachedCollection
     {
         $config = $connection->config();
         if (empty($config['cacheMetadata'])) {

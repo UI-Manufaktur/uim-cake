@@ -30,7 +30,7 @@ interface ConsoleApplicationInterface
      *
      * @return void
      */
-    public function bootstrap(): void;
+    function bootstrap(): void;
 
     /**
      * Define the console commands for an application.
@@ -38,5 +38,5 @@ interface ConsoleApplicationInterface
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
-    public function console(CommandCollection $commands): CommandCollection;
+    function console(CommandCollection $commands): CommandCollection;
 }

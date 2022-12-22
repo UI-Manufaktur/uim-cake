@@ -38,35 +38,35 @@ interface PluginInterface
      *
      * @return string
      */
-    public function getName(): string;
+    function getName(): string;
 
     /**
      * Get the filesystem path to this plugin
      *
      * @return string
      */
-    public function getPath(): string;
+    function getPath(): string;
 
     /**
      * Get the filesystem path to configuration for this plugin
      *
      * @return string
      */
-    public function getConfigPath(): string;
+    function getConfigPath(): string;
 
     /**
      * Get the filesystem path to configuration for this plugin
      *
      * @return string
      */
-    public function getClassPath(): string;
+    function getClassPath(): string;
 
     /**
      * Get the filesystem path to templates for this plugin
      *
      * @return string
      */
-    public function getTemplatePath(): string;
+    function getTemplatePath(): string;
 
     /**
      * Load all the application configuration and bootstrap logic.
@@ -80,7 +80,7 @@ interface PluginInterface
      * @param \Cake\Core\PluginApplicationInterface $app The host application
      * @return void
      */
-    public function bootstrap(PluginApplicationInterface $app): void;
+    function bootstrap(PluginApplicationInterface $app): void;
 
     /**
      * Add console commands for the plugin.
@@ -88,7 +88,7 @@ interface PluginInterface
      * @param \Cake\Console\CommandCollection $commands The command collection to update
      * @return \Cake\Console\CommandCollection
      */
-    public function console(CommandCollection $commands): CommandCollection;
+    function console(CommandCollection $commands): CommandCollection;
 
     /**
      * Add middleware for the plugin.
@@ -96,7 +96,7 @@ interface PluginInterface
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
      * @return \Cake\Http\MiddlewareQueue
      */
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
+    function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
     /**
      * Add routes for the plugin.
@@ -107,7 +107,7 @@ interface PluginInterface
      * @param \Cake\Routing\RouteBuilder $routes The route builder to update.
      * @return void
      */
-    public function routes(RouteBuilder $routes): void;
+    function routes(RouteBuilder $routes): void;
 
     /**
      * Disables the named hook
@@ -115,7 +115,7 @@ interface PluginInterface
      * @param string $hook The hook to disable
      * @return this
      */
-    public function disable(string $hook);
+    function disable(string $hook);
 
     /**
      * Enables the named hook
@@ -123,7 +123,7 @@ interface PluginInterface
      * @param string $hook The hook to disable
      * @return this
      */
-    public function enable(string $hook);
+    function enable(string $hook);
 
     /**
      * Check if the named hook is enabled
@@ -131,5 +131,5 @@ interface PluginInterface
      * @param string $hook The hook to check
      * @return bool
      */
-    public function isEnabled(string $hook): bool;
+    function isEnabled(string $hook): bool;
 }

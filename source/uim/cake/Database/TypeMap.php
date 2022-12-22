@@ -73,7 +73,7 @@ class TypeMap
      * are the correspondent type.
      * @return this
      */
-    public function setDefaults(array $defaults)
+    function setDefaults(array $defaults)
     {
         this->_defaults = $defaults;
 
@@ -85,7 +85,7 @@ class TypeMap
      *
      * @return array<int|string, string>
      */
-    public function getDefaults(): array
+    function getDefaults(): array
     {
         return this->_defaults;
     }
@@ -98,7 +98,7 @@ class TypeMap
      * @param array<int|string, string> $types The additional types to add.
      * @return void
      */
-    public function addDefaults(array $types): void
+    function addDefaults(array $types): void
     {
         this->_defaults += $types;
     }
@@ -118,7 +118,7 @@ class TypeMap
      * are the correspondent type.
      * @return this
      */
-    public function setTypes(array $types)
+    function setTypes(array $types)
     {
         this->_types = $types;
 
@@ -130,7 +130,7 @@ class TypeMap
      *
      * @return array<int|string, string>
      */
-    public function getTypes(): array
+    function getTypes(): array
     {
         return this->_types;
     }
@@ -143,7 +143,7 @@ class TypeMap
      * @param string|int $column The type for a given column
      * @return string|null
      */
-    public function type($column): ?string
+    function type($column): ?string
     {
         return this->_types[$column] ?? this->_defaults[$column] ?? null;
     }
@@ -153,7 +153,7 @@ class TypeMap
      *
      * @return array<int|string, string>
      */
-    public function toArray(): array
+    function toArray(): array
     {
         return this->_types + this->_defaults;
     }

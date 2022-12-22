@@ -51,7 +51,7 @@ class IdentifierQuoter
      * @param \Cake\Database\Query $query The query to have its identifiers quoted
      * @return \Cake\Database\Query
      */
-    public function quote(Query $query): Query
+    function quote(Query $query): Query
     {
         $binder = $query->getValueBinder();
         $query->setValueBinder(null);
@@ -76,7 +76,7 @@ class IdentifierQuoter
      * @param \Cake\Database\ExpressionInterface $expression The expression object to walk and quote.
      * @return void
      */
-    public function quoteExpression(ExpressionInterface $expression): void
+    function quoteExpression(ExpressionInterface $expression): void
     {
         if ($expression instanceof FieldInterface) {
             this->_quoteComparison($expression);

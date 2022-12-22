@@ -35,7 +35,7 @@ class ClassLoader
      *
      * @return void
      */
-    public function register(): void
+    function register(): void
     {
         /** @var callable $callable */
         $callable = [this, 'loadClass'];
@@ -53,7 +53,7 @@ class ClassLoader
      * than last.
      * @return void
      */
-    public function addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
+    function addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
     {
         $prefix = trim($prefix, '\\') . '\\';
 
@@ -76,7 +76,7 @@ class ClassLoader
      * @return string|false The mapped file name on success, or boolean false on
      * failure.
      */
-    public function loadClass(string $class)
+    function loadClass(string $class)
     {
         $prefix = $class;
 

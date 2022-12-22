@@ -70,7 +70,7 @@ trait InstanceConfigTrait
      * @return this
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    public function setConfig($key, $value = null, $merge = true)
+    function setConfig($key, $value = null, $merge = true)
     {
         if (!this->_configInitialized) {
             this->_config = this->_defaultConfig;
@@ -115,7 +115,7 @@ trait InstanceConfigTrait
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    public function getConfig(?string $key = null, $default = null)
+    function getConfig(?string $key = null, $default = null)
     {
         if (!this->_configInitialized) {
             this->_config = this->_defaultConfig;
@@ -136,7 +136,7 @@ trait InstanceConfigTrait
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    public function getConfigOrFail(string $key)
+    function getConfigOrFail(string $key)
     {
         $config = this->getConfig($key);
         if ($config === null) {
@@ -172,7 +172,7 @@ trait InstanceConfigTrait
      * @param mixed|null $value The value to set.
      * @return this
      */
-    public function configShallow($key, $value = null)
+    function configShallow($key, $value = null)
     {
         if (!this->_configInitialized) {
             this->_config = this->_defaultConfig;

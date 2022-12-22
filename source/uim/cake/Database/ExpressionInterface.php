@@ -29,7 +29,7 @@ interface ExpressionInterface
      * @param \Cake\Database\ValueBinder $binder Parameter binder
      * @return string
      */
-    public function sql(ValueBinder $binder): string;
+    function sql(ValueBinder $binder): string;
 
     /**
      * Iterates over each part of the expression recursively for every
