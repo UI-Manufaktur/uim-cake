@@ -103,7 +103,7 @@ class DigestAuthenticate extends BasicAuthenticate
      * @param \Cake\Http\ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    public function getUser(ServerRequest $request)
+    function getUser(ServerRequest $request)
     {
         $digest = this->_getDigest($request);
         if (empty($digest)) {
@@ -164,7 +164,7 @@ class DigestAuthenticate extends BasicAuthenticate
      * @param string $digest The raw digest authentication headers.
      * @return array|null An array of digest authentication headers
      */
-    public function parseAuthData(string $digest): ?array
+    function parseAuthData(string $digest): ?array
     {
         if (substr($digest, 0, 7) === 'Digest ') {
             $digest = substr($digest, 7);
@@ -193,7 +193,7 @@ class DigestAuthenticate extends BasicAuthenticate
      * @param string $method Request method
      * @return string Response hash
      */
-    public function generateResponseHash(array $digest, string $password, string $method): string
+    function generateResponseHash(array $digest, string $password, string $method): string
     {
         return md5(
             $password .
@@ -221,7 +221,7 @@ class DigestAuthenticate extends BasicAuthenticate
      * @param \Cake\Http\ServerRequest $request Request object.
      * @return array<string, string> Headers for logging in.
      */
-    public function loginHeaders(ServerRequest $request): array
+    function loginHeaders(ServerRequest $request): array
     {
         $realm = this->_config['realm'] ?: $request->getEnv('SERVER_NAME');
 

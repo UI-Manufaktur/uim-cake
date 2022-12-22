@@ -50,7 +50,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      *
      * @return string
      */
-    public function serialize(): string
+    function serialize(): string
     {
         return serialize(this->buffered());
     }
@@ -60,7 +60,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      *
      * @return array
      */
-    public function __serialize(): array
+    function __serialize(): array
     {
         return this->buffered()->toArray();
     }
@@ -71,7 +71,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      * @param string $collection The serialized collection
      * @return void
      */
-    public function unserialize($collection): void
+    function unserialize($collection): void
     {
         this->__construct(unserialize($collection));
     }
@@ -82,7 +82,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      * @param array $data Data array.
      * @return void
      */
-    public function __unserialize(array $data): void
+    function __unserialize(array $data): void
     {
         this->__construct($data);
     }
@@ -92,7 +92,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         $traversable = this->optimizeUnwrap();
 
@@ -108,7 +108,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      *
      * @return int
      */
-    public function countKeys(): int
+    function countKeys(): int
     {
         return count(this->toArray());
     }
@@ -119,7 +119,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      *
      * @return array<string, mixed>
      */
-    public function __debugInfo(): array
+    function __debugInfo(): array
     {
         try {
             $count = this->count();

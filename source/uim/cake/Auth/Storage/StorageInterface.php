@@ -29,7 +29,7 @@ interface StorageInterface
      *
      * @return \ArrayAccess|array|null
      */
-    public function read();
+    function read();
 
     /**
      * Write user record.
@@ -37,14 +37,14 @@ interface StorageInterface
      * @param mixed $user array or \ArrayAccess User record.
      * @return void
      */
-    public function write($user): void;
+    function write($user): void;
 
     /**
      * Delete user record.
      *
      * @return void
      */
-    public function delete(): void;
+    function delete(): void;
 
     /**
      * Get/set redirect URL.
@@ -53,5 +53,5 @@ interface StorageInterface
      *   deletes currently set URL.
      * @return array|string|null
      */
-    public function redirectUrl($url = null);
+    function redirectUrl($url = null);
 }

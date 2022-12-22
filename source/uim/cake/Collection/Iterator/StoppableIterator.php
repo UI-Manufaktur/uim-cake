@@ -70,7 +70,7 @@ class StoppableIterator extends Collection
      *
      * @return bool
      */
-    public function valid(): bool
+    function valid(): bool
     {
         if (!parent::valid()) {
             return false;
@@ -86,7 +86,7 @@ class StoppableIterator extends Collection
     /**
      * @inheritDoc
      */
-    public function unwrap(): Traversable
+    function unwrap(): Traversable
     {
         $iterator = this->_innerIterator;
 

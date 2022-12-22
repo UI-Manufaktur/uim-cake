@@ -38,7 +38,7 @@ class MemoryStorage implements StorageInterface
     /**
      * @inheritDoc
      */
-    public function read()
+    function read()
     {
         return this->_user;
     }
@@ -46,7 +46,7 @@ class MemoryStorage implements StorageInterface
     /**
      * @inheritDoc
      */
-    public function write($user): void
+    function write($user): void
     {
         this->_user = $user;
     }
@@ -54,7 +54,7 @@ class MemoryStorage implements StorageInterface
     /**
      * @inheritDoc
      */
-    public function delete(): void
+    function delete(): void
     {
         this->_user = null;
     }
@@ -62,7 +62,7 @@ class MemoryStorage implements StorageInterface
     /**
      * @inheritDoc
      */
-    public function redirectUrl($url = null)
+    function redirectUrl($url = null)
     {
         if ($url === null) {
             return this->_redirectUrl;

@@ -66,7 +66,7 @@ class ReplaceIterator extends Collection
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function current()
+    function current()
     {
         $callback = this->_callback;
 
@@ -76,7 +76,7 @@ class ReplaceIterator extends Collection
     /**
      * @inheritDoc
      */
-    public function unwrap(): Traversable
+    function unwrap(): Traversable
     {
         $iterator = this->_innerIterator;
 

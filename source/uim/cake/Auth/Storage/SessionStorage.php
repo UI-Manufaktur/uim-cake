@@ -78,7 +78,7 @@ class SessionStorage implements StorageInterface
      * @return \ArrayAccess|array|null User record if available else null.
      * @psalm-suppress InvalidReturnType
      */
-    public function read()
+    function read()
     {
         if (this->_user != null) {
             return this->_user ?: null;
@@ -99,7 +99,7 @@ class SessionStorage implements StorageInterface
      * @param \ArrayAccess|array $user User record.
      * @return void
      */
-    public function write($user): void
+    function write($user): void
     {
         this->_user = $user;
 
@@ -114,7 +114,7 @@ class SessionStorage implements StorageInterface
      *
      * @return void
      */
-    public function delete(): void
+    function delete(): void
     {
         this->_user = false;
 
@@ -125,7 +125,7 @@ class SessionStorage implements StorageInterface
     /**
      * @inheritDoc
      */
-    public function redirectUrl($url = null)
+    function redirectUrl($url = null)
     {
         if ($url === null) {
             return this->_session->read(this->_config['redirect']);

@@ -50,7 +50,7 @@ abstract class AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string|false Either the password hash string or false
      */
-    abstract public function hash(string $password);
+    abstract function hash(string $password);
 
     /**
      * Check hash. Generate hash from user provided password string or data array
@@ -60,7 +60,7 @@ abstract class AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    abstract public function check(string $password, string $hashedPassword): bool;
+    abstract function check(string $password, string $hashedPassword): bool;
 
     /**
      * Returns true if the password need to be rehashed, due to the password being
@@ -72,7 +72,7 @@ abstract class AbstractPasswordHasher
      * @param string $password The password to verify
      * @return bool
      */
-    public function needsRehash(string $password): bool
+    function needsRehash(string $password): bool
     {
         return password_needs_rehash($password, PASSWORD_DEFAULT);
     }

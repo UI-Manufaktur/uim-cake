@@ -28,7 +28,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function init(array $config = []): bool
+    function init(array $config = []): bool
     {
         return true;
     }
@@ -36,7 +36,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function set($key, $value, $ttl = null): bool
+    function set($key, $value, $ttl = null): bool
     {
         return true;
     }
@@ -44,7 +44,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function setMultiple($values, $ttl = null): bool
+    function setMultiple($values, $ttl = null): bool
     {
         return true;
     }
@@ -52,7 +52,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function get($key, $default = null)
+    function get($key, $default = null)
     {
         return $default;
     }
@@ -60,7 +60,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function getMultiple($keys, $default = null): iterable
+    function getMultiple($keys, $default = null): iterable
     {
         return [];
     }
@@ -68,7 +68,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function increment(string $key, int $offset = 1)
+    function increment(string $key, int $offset = 1)
     {
         return 1;
     }
@@ -76,7 +76,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function decrement(string $key, int $offset = 1)
+    function decrement(string $key, int $offset = 1)
     {
         return 0;
     }
@@ -84,7 +84,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function delete($key): bool
+    function delete($key): bool
     {
         return true;
     }
@@ -92,7 +92,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function deleteMultiple($keys): bool
+    function deleteMultiple($keys): bool
     {
         return true;
     }
@@ -100,7 +100,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function clear(): bool
+    function clear(): bool
     {
         return true;
     }
@@ -108,7 +108,7 @@ class NullEngine extends CacheEngine
     /**
      * @inheritDoc
      */
-    public function clearGroup(string $group): bool
+    function clearGroup(string $group): bool
     {
         return true;
     }

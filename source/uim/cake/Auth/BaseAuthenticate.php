@@ -183,7 +183,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      * @throws \RuntimeException If password hasher class not found or
      *   it does not extend AbstractPasswordHasher
      */
-    public function passwordHasher(): AbstractPasswordHasher
+    function passwordHasher(): AbstractPasswordHasher
     {
         if (this->_passwordHasher != null) {
             return this->_passwordHasher;
@@ -200,7 +200,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      *
      * @return bool
      */
-    public function needsPasswordRehash(): bool
+    function needsPasswordRehash(): bool
     {
         return this->_needsPasswordRehash;
     }
@@ -212,7 +212,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      * @param \Cake\Http\Response $response A response object that can have headers added.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
-    abstract public function authenticate(ServerRequest $request, Response $response);
+    abstract function authenticate(ServerRequest $request, Response $response);
 
     /**
      * Get a user based on information in the request. Primarily used by stateless authentication
@@ -221,7 +221,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      * @param \Cake\Http\ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    public function getUser(ServerRequest $request)
+    function getUser(ServerRequest $request)
     {
         return false;
     }
@@ -238,7 +238,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      * @param \Cake\Http\Response $response A response object.
      * @return \Cake\Http\Response|null|void
      */
-    public function unauthenticated(ServerRequest $request, Response $response)
+    function unauthenticated(ServerRequest $request, Response $response)
     {
     }
 
@@ -258,7 +258,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      *
      * @return array<string, mixed> List of events this class listens to. Defaults to `[]`.
      */
-    public function implementedEvents(): array
+    function implementedEvents(): array
     {
         return [];
     }

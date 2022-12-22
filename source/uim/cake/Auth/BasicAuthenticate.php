@@ -61,7 +61,7 @@ class BasicAuthenticate extends BaseAuthenticate
      * @param \Cake\Http\Response $response The response to add headers to.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
-    public function authenticate(ServerRequest $request, Response $response)
+    function authenticate(ServerRequest $request, Response $response)
     {
         return this->getUser($request);
     }
@@ -72,7 +72,7 @@ class BasicAuthenticate extends BaseAuthenticate
      * @param \Cake\Http\ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    public function getUser(ServerRequest $request)
+    function getUser(ServerRequest $request)
     {
         $username = $request->getEnv('PHP_AUTH_USER');
         $pass = $request->getEnv('PHP_AUTH_PW');
@@ -92,7 +92,7 @@ class BasicAuthenticate extends BaseAuthenticate
      * @return \Cake\Http\Response|null|void
      * @throws \Cake\Http\Exception\UnauthorizedException
      */
-    public function unauthenticated(ServerRequest $request, Response $response)
+    function unauthenticated(ServerRequest $request, Response $response)
     {
         $unauthorizedException = new UnauthorizedException();
         $unauthorizedException->setHeaders(this->loginHeaders($request));
@@ -106,7 +106,7 @@ class BasicAuthenticate extends BaseAuthenticate
      * @param \Cake\Http\ServerRequest $request Request object.
      * @return array<string, string> Headers for logging in.
      */
-    public function loginHeaders(ServerRequest $request): array
+    function loginHeaders(ServerRequest $request): array
     {
         $realm = this->getConfig('realm') ?: $request->getEnv('SERVER_NAME');
 

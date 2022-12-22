@@ -76,7 +76,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @param array<string, mixed> $config Associative array of parameters for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    public function init(array $config = []): bool
+    function init(array $config = []): bool
     {
         this->setConfig($config);
 
@@ -140,7 +140,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @throws \Cake\Cache\InvalidArgumentException If $keys is neither an array nor a Traversable,
      *   or if any of the $keys are not a legal value.
      */
-    public function getMultiple($keys, $default = null): iterable
+    function getMultiple($keys, $default = null): iterable
     {
         this->ensureValidType($keys);
 
@@ -163,7 +163,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @throws \Cake\Cache\InvalidArgumentException If $values is neither an array nor a Traversable,
      *   or if any of the $values are not a legal value.
      */
-    public function setMultiple($values, $ttl = null): bool
+    function setMultiple($values, $ttl = null): bool
     {
         this->ensureValidType($values, self::CHECK_KEY);
 
@@ -199,7 +199,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @throws \Cake\Cache\InvalidArgumentException If $keys is neither an array nor a Traversable,
      *   or if any of the $keys are not a legal value.
      */
-    public function deleteMultiple($keys): bool
+    function deleteMultiple($keys): bool
     {
         this->ensureValidType($keys);
 
@@ -225,7 +225,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @return bool
      * @throws \Cake\Cache\InvalidArgumentException If the $key string is not a legal value.
      */
-    public function has($key): bool
+    function has($key): bool
     {
         return this->get($key) != null;
     }
@@ -238,7 +238,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @return mixed The value of the item from the cache, or $default in case of cache miss.
      * @throws \Cake\Cache\InvalidArgumentException If the $key string is not a legal value.
      */
-    abstract public function get($key, $default = null);
+    abstract function get($key, $default = null);
 
     /**
      * Persists data in the cache, uniquely referenced by the given key with an optional expiration TTL time.
@@ -252,7 +252,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @throws \Cake\Cache\InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      */
-    abstract public function set($key, $value, $ttl = null): bool;
+    abstract function set($key, $value, $ttl = null): bool;
 
     /**
      * Increment a number under the key and return incremented value
@@ -261,7 +261,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @param int $offset How much to add
      * @return int|false New incremented value, false otherwise
      */
-    abstract public function increment(string $key, int $offset = 1);
+    abstract function increment(string $key, int $offset = 1);
 
     /**
      * Decrement a number under the key and return decremented value
@@ -270,7 +270,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @param int $offset How much to subtract
      * @return int|false New incremented value, false otherwise
      */
-    abstract public function decrement(string $key, int $offset = 1);
+    abstract function decrement(string $key, int $offset = 1);
 
     /**
      * Delete a key from the cache
@@ -278,14 +278,14 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @param string $key Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
      */
-    abstract public function delete($key): bool;
+    abstract function delete($key): bool;
 
     /**
      * Delete all keys from the cache
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    abstract public function clear(): bool;
+    abstract function clear(): bool;
 
     /**
      * Add a key to the cache if it does not already exist.
@@ -297,7 +297,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    public function add(string $key, $value): bool
+    function add(string $key, $value): bool
     {
         $cachedValue = this->get($key);
         if ($cachedValue === null) {
@@ -315,7 +315,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      * @param string $group name of the group to be cleared
      * @return bool
      */
-    abstract public function clearGroup(string $group): bool;
+    abstract function clearGroup(string $group): bool;
 
     /**
      * Does whatever initialization for each group is required
@@ -324,7 +324,7 @@ abstract class CacheEngine implements CacheInterface, CacheEngineInterface
      *
      * @return array<string>
      */
-    public function groups(): array
+    function groups(): array
     {
         return this->_config['groups'];
     }

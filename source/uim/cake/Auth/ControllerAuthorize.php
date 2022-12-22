@@ -27,7 +27,7 @@ use Cake\Http\ServerRequest;
  * return a boolean to indicate whether the user is authorized.
  *
  * ```
- *  public function isAuthorized($user)
+ *  function isAuthorized($user)
  *  {
  *      if (this->request->getParam('admin')) {
  *          return $user['role'] === 'admin';
@@ -66,7 +66,7 @@ class ControllerAuthorize extends BaseAuthorize
      * @param \Cake\Controller\Controller|null $controller null to get, a controller to set.
      * @return \Cake\Controller\Controller
      */
-    public function controller(?Controller $controller = null): Controller
+    function controller(?Controller $controller = null): Controller
     {
         if ($controller) {
             this->_Controller = $controller;
@@ -83,7 +83,7 @@ class ControllerAuthorize extends BaseAuthorize
      * @throws \Cake\Core\Exception\CakeException If controller does not have method `isAuthorized()`.
      * @return bool
      */
-    public function authorize($user, ServerRequest $request): bool
+    function authorize($user, ServerRequest $request): bool
     {
         if (!method_exists(this->_Controller, 'isAuthorized')) {
             throw new CakeException(sprintf(

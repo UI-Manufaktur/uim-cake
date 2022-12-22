@@ -69,7 +69,7 @@ class ExtractIterator extends Collection
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function current()
+    function current()
     {
         $extractor = this->_extractor;
 
@@ -79,7 +79,7 @@ class ExtractIterator extends Collection
     /**
      * @inheritDoc
      */
-    public function unwrap(): Traversable
+    function unwrap(): Traversable
     {
         $iterator = this->getInnerIterator();
 

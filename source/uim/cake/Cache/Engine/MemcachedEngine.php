@@ -101,7 +101,7 @@ class MemcachedEngine extends CacheEngine
      * @throws \InvalidArgumentException When you try use authentication without
      *   Memcached compiled with SASL support
      */
-    public function init(array $config = []): bool
+    function init(array $config = []): bool
     {
         if (!extension_loaded('memcached')) {
             throw new RuntimeException('The `memcached` extension must be enabled to use MemcachedEngine.');
@@ -251,7 +251,7 @@ class MemcachedEngine extends CacheEngine
      * @param string $server The server address string.
      * @return array Array containing host, port
      */
-    public function parseServerString(string $server): array
+    function parseServerString(string $server): array
     {
         $socketTransport = 'unix://';
         if (strpos($server, $socketTransport) === 0) {
@@ -282,7 +282,7 @@ class MemcachedEngine extends CacheEngine
      * @return string|int|bool|null
      * @see https://secure.php.net/manual/en/memcached.getoption.php
      */
-    public function getOption(int $name)
+    function getOption(int $name)
     {
         return this->_Memcached->getOption($name);
     }
@@ -301,7 +301,7 @@ class MemcachedEngine extends CacheEngine
      * @return bool True if the data was successfully cached, false on failure
      * @see https://www.php.net/manual/en/memcached.set.php
      */
-    public function set($key, $value, $ttl = null): bool
+    function set($key, $value, $ttl = null): bool
     {
         $duration = this->duration($ttl);
 
@@ -317,7 +317,7 @@ class MemcachedEngine extends CacheEngine
      *   for it or let the driver take care of that.
      * @return bool Whether the write was successful or not.
      */
-    public function setMultiple($values, $ttl = null): bool
+    function setMultiple($values, $ttl = null): bool
     {
         $cacheData = [];
         foreach ($values as $key => $value) {
@@ -336,7 +336,7 @@ class MemcachedEngine extends CacheEngine
      * @return mixed The cached data, or default value if the data doesn't exist, has
      * expired, or if there was an error fetching it.
      */
-    public function get($key, $default = null)
+    function get($key, $default = null)
     {
         $key = this->_key($key);
         $value = this->_Memcached->get($key);
@@ -355,7 +355,7 @@ class MemcachedEngine extends CacheEngine
      * @return array An array containing, for each of the given $keys, the cached data or
      *   false if cached data could not be retrieved.
      */
-    public function getMultiple($keys, $default = null): array
+    function getMultiple($keys, $default = null): array
     {
         $cacheKeys = [];
         foreach ($keys as $key) {
@@ -378,7 +378,7 @@ class MemcachedEngine extends CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    public function increment(string $key, int $offset = 1)
+    function increment(string $key, int $offset = 1)
     {
         return this->_Memcached->increment(this->_key($key), $offset);
     }
@@ -390,7 +390,7 @@ class MemcachedEngine extends CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    public function decrement(string $key, int $offset = 1)
+    function decrement(string $key, int $offset = 1)
     {
         return this->_Memcached->decrement(this->_key($key), $offset);
     }
@@ -402,7 +402,7 @@ class MemcachedEngine extends CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't
      *   exist or couldn't be removed.
      */
-    public function delete($key): bool
+    function delete($key): bool
     {
         return this->_Memcached->delete(this->_key($key));
     }
@@ -414,7 +414,7 @@ class MemcachedEngine extends CacheEngine
      * @return bool of boolean values that are true if the key was successfully
      *   deleted, false if it didn't exist or couldn't be removed.
      */
-    public function deleteMultiple($keys): bool
+    function deleteMultiple($keys): bool
     {
         $cacheKeys = [];
         foreach ($keys as $key) {
@@ -429,7 +429,7 @@ class MemcachedEngine extends CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    public function clear(): bool
+    function clear(): bool
     {
         $keys = this->_Memcached->getAllKeys();
         if ($keys === false) {
@@ -452,7 +452,7 @@ class MemcachedEngine extends CacheEngine
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    public function add(string $key, $value): bool
+    function add(string $key, $value): bool
     {
         $duration = this->_config['duration'];
         $key = this->_key($key);
@@ -467,7 +467,7 @@ class MemcachedEngine extends CacheEngine
      *
      * @return array<string>
      */
-    public function groups(): array
+    function groups(): array
     {
         if (empty(this->_compiledGroupNames)) {
             foreach (this->_config['groups'] as $group) {
@@ -502,7 +502,7 @@ class MemcachedEngine extends CacheEngine
      * @param string $group name of the group to be cleared
      * @return bool success
      */
-    public function clearGroup(string $group): bool
+    function clearGroup(string $group): bool
     {
         return (bool)this->_Memcached->increment(this->_config['prefix'] . $group);
     }

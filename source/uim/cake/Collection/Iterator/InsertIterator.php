@@ -86,7 +86,7 @@ class InsertIterator extends Collection
      *
      * @return void
      */
-    public function next(): void
+    function next(): void
     {
         parent::next();
         if (this->_validValues) {
@@ -102,7 +102,7 @@ class InsertIterator extends Collection
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function current()
+    function current()
     {
         $row = parent::current();
 
@@ -128,7 +128,7 @@ class InsertIterator extends Collection
      *
      * @return void
      */
-    public function rewind(): void
+    function rewind(): void
     {
         parent::rewind();
         this->_values->rewind();

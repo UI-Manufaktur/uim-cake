@@ -75,7 +75,7 @@ class FormAuthenticate extends BaseAuthenticate
      * @param \Cake\Http\Response $response Unused response object.
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
-    public function authenticate(ServerRequest $request, Response $response)
+    function authenticate(ServerRequest $request, Response $response)
     {
         $fields = this->_config['fields'];
         if (!this->_checkFields($request, $fields)) {

@@ -88,7 +88,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function key()
+    function key()
     {
         return this->_key;
     }
@@ -99,7 +99,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    public function current()
+    function current()
     {
         return this->_current;
     }
@@ -109,7 +109,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      *
      * @return void
      */
-    public function rewind(): void
+    function rewind(): void
     {
         if (this->_index === 0 && !this->_started) {
             this->_started = true;
@@ -126,7 +126,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      *
      * @return bool
      */
-    public function valid(): bool
+    function valid(): bool
     {
         if (this->_buffer->offsetExists(this->_index)) {
             $current = this->_buffer->offsetGet(this->_index);
@@ -157,7 +157,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      *
      * @return void
      */
-    public function next(): void
+    function next(): void
     {
         this->_index++;
 
@@ -175,7 +175,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      *
      * @return int
      */
-    public function count(): int
+    function count(): int
     {
         if (!this->_started) {
             this->rewind();
@@ -194,7 +194,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      *
      * @return string
      */
-    public function serialize(): string
+    function serialize(): string
     {
         if (!this->_finished) {
             this->count();
@@ -208,7 +208,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      *
      * @return array
      */
-    public function __serialize(): array
+    function __serialize(): array
     {
         if (!this->_finished) {
             this->count();
@@ -223,7 +223,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      * @param string $collection The serialized buffer iterator
      * @return void
      */
-    public function unserialize($collection): void
+    function unserialize($collection): void
     {
         this->__construct([]);
         this->_buffer = unserialize($collection);
@@ -237,7 +237,7 @@ class BufferedIterator extends Collection implements Countable, Serializable
      * @param array $data Data array.
      * @return void
      */
-    public function __unserialize(array $data): void
+    function __unserialize(array $data): void
     {
         this->__construct([]);
 

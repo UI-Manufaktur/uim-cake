@@ -65,7 +65,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string|false Password hash or false
      */
-    public function hash(string $password)
+    function hash(string $password)
     {
         return this->_hashers[0]->hash($password);
     }
@@ -80,7 +80,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    public function check(string $password, string $hashedPassword): bool
+    function check(string $password, string $hashedPassword): bool
     {
         foreach (this->_hashers as $hasher) {
             if ($hasher->check($password, $hashedPassword)) {
@@ -98,7 +98,7 @@ class FallbackPasswordHasher extends AbstractPasswordHasher
      * @param string $password The password to verify
      * @return bool
      */
-    public function needsRehash(string $password): bool
+    function needsRehash(string $password): bool
     {
         return this->_hashers[0]->needsRehash($password);
     }

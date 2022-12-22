@@ -88,7 +88,7 @@ class SortIterator extends Collection
      *
      * @return \Traversable
      */
-    public function unwrap(): Traversable
+    function unwrap(): Traversable
     {
         return this->getInnerIterator();
     }

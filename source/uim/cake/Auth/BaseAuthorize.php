@@ -62,5 +62,5 @@ abstract class BaseAuthorize
      * @param \Cake\Http\ServerRequest $request Request instance.
      * @return bool
      */
-    abstract public function authorize($user, ServerRequest $request): bool;
+    abstract function authorize($user, ServerRequest $request): bool;
 }

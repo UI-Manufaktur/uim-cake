@@ -31,7 +31,7 @@ class NoChildrenIterator extends Collection implements RecursiveIterator
      *
      * @return bool
      */
-    public function hasChildren(): bool
+    function hasChildren(): bool
     {
         return false;
     }
@@ -41,7 +41,7 @@ class NoChildrenIterator extends Collection implements RecursiveIterator
      *
      * @return \RecursiveIterator
      */
-    public function getChildren(): RecursiveIterator
+    function getChildren(): RecursiveIterator
     {
         return new static([]);
     }
