@@ -13,7 +13,7 @@
  * @since         3.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Database\Type;
+module uim.cake.Database\Type;
 
 /**
  * An interface used by Type objects to signal whether the casting

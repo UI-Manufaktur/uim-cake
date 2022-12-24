@@ -1,6 +1,6 @@
 
 
-namespace Cake\Database\Type;
+module uim.cake.Database\Type;
 
 use Cake\Database\DriverInterface;
 use Cake\Database\Schema\TableSchemaInterface;

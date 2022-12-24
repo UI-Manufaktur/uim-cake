@@ -13,7 +13,7 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Datasource;
+module uim.cake.Datasource;
 
 use Cake\Core\StaticConfigTrait;
 use Cake\Database\Connection;

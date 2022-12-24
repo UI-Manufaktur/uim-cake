@@ -13,7 +13,7 @@
  * @since         3.3.4
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Database\Type;
+module uim.cake.Database\Type;
 
 use Cake\Database\DriverInterface;
 use Cake\I18n\Number;
