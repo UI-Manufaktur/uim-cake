@@ -65,11 +65,11 @@ class TextareaWidget : BasicWidget
             $data = this.setMaxLength($data, $context, $data['fieldName']);
         }
 
-        return this._templates->format('textarea', [
+        return _templates->format('textarea', [
             'name' => $data['name'],
             'value' => $data['escape'] ? h($data['val']) : $data['val'],
             'templateVars' => $data['templateVars'],
-            'attrs' => this._templates->formatAttributes(
+            'attrs' => _templates->formatAttributes(
                 $data,
                 ['name', 'val']
             ),

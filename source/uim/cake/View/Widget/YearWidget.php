@@ -58,8 +58,8 @@ class YearWidget : BasicWidget
      */
     public this(StringTemplate $templates, SelectBoxWidget $selectBox)
     {
-        this._select = $selectBox;
-        this._templates = $templates;
+        _select = $selectBox;
+        _templates = $templates;
     }
 
     /**
@@ -106,6 +106,6 @@ class YearWidget : BasicWidget
 
         unset($data['order'], $data['min'], $data['max']);
 
-        return this._select->render($data, $context);
+        return _select->render($data, $context);
     }
 }
