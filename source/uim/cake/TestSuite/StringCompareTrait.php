@@ -52,14 +52,14 @@ trait StringCompareTrait
     function assertSameAsFile(string $path, string $result): void
     {
         if (!file_exists($path)) {
-            $path = this._compareBasePath . $path;
+            $path = _compareBasePath . $path;
         }
 
-        if (this._updateComparisons == null) {
-            this._updateComparisons = env('UPDATE_TEST_COMPARISON_FILES');
+        if (_updateComparisons == null) {
+            _updateComparisons = env('UPDATE_TEST_COMPARISON_FILES');
         }
 
-        if (this._updateComparisons) {
+        if (_updateComparisons) {
             file_put_contents($path, $result);
         }
 

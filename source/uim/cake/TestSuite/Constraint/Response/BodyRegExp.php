@@ -30,7 +30,7 @@ class BodyRegExp : ResponseBase
      */
     function matches($other): bool
     {
-        return preg_match($other, this._getBodyAsString()) > 0;
+        return preg_match($other, _getBodyAsString()) > 0;
     }
 
     /**

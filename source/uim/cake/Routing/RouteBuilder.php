@@ -128,17 +128,17 @@ class RouteBuilder
      */
     public this(RouteCollection $collection, string $path, array $params = [], array $options = [])
     {
-        this._collection = $collection;
-        this._path = $path;
-        this._params = $params;
+        _collection = $collection;
+        _path = $path;
+        _params = $params;
         if (isset($options['routeClass'])) {
-            this._routeClass = $options['routeClass'];
+            _routeClass = $options['routeClass'];
         }
         if (isset($options['extensions'])) {
-            this._extensions = $options['extensions'];
+            _extensions = $options['extensions'];
         }
         if (isset($options['namePrefix'])) {
-            this._namePrefix = $options['namePrefix'];
+            _namePrefix = $options['namePrefix'];
         }
         if (isset($options['middleware'])) {
             this.middleware = (array)$options['middleware'];
@@ -153,7 +153,7 @@ class RouteBuilder
      */
     function setRouteClass(string $routeClass)
     {
-        this._routeClass = $routeClass;
+        _routeClass = $routeClass;
 
         return this;
     }
@@ -165,7 +165,7 @@ class RouteBuilder
      */
     function getRouteClass(): string
     {
-        return this._routeClass;
+        return _routeClass;
     }
 
     /**
@@ -179,7 +179,7 @@ class RouteBuilder
      */
     function setExtensions($extensions)
     {
-        this._extensions = (array)$extensions;
+        _extensions = (array)$extensions;
 
         return this;
     }
@@ -191,7 +191,7 @@ class RouteBuilder
      */
     function getExtensions(): array
     {
-        return this._extensions;
+        return _extensions;
     }
 
     /**
@@ -202,8 +202,8 @@ class RouteBuilder
      */
     function addExtensions($extensions)
     {
-        $extensions = array_merge(this._extensions, (array)$extensions);
-        this._extensions = array_unique($extensions);
+        $extensions = array_merge(_extensions, (array)$extensions);
+        _extensions = array_unique($extensions);
 
         return this;
     }
@@ -215,17 +215,17 @@ class RouteBuilder
      */
     function path(): string
     {
-        $routeKey = strpos(this._path, '{');
-        if ($routeKey != false && strpos(this._path, '}') != false) {
-            return substr(this._path, 0, $routeKey);
+        $routeKey = strpos(_path, '{');
+        if ($routeKey != false && strpos(_path, '}') != false) {
+            return substr(_path, 0, $routeKey);
         }
 
-        $routeKey = strpos(this._path, ':');
+        $routeKey = strpos(_path, ':');
         if ($routeKey != false) {
-            return substr(this._path, 0, $routeKey);
+            return substr(_path, 0, $routeKey);
         }
 
-        return this._path;
+        return _path;
     }
 
     /**
@@ -235,7 +235,7 @@ class RouteBuilder
      */
     function params(): array
     {
-        return this._params;
+        return _params;
     }
 
     /**
@@ -246,7 +246,7 @@ class RouteBuilder
      */
     function nameExists(string $name): bool
     {
-        return array_key_exists($name, this._collection->named());
+        return array_key_exists($name, _collection->named());
     }
 
     /**
@@ -261,10 +261,10 @@ class RouteBuilder
     function namePrefix(?string $value = null): string
     {
         if ($value != null) {
-            this._namePrefix = $value;
+            _namePrefix = $value;
         }
 
-        return this._namePrefix;
+        return _namePrefix;
     }
 
     /**
@@ -396,8 +396,8 @@ class RouteBuilder
         if ($options['prefix']) {
             $prefix = $options['prefix'];
         }
-        if (isset(this._params['prefix']) && $prefix) {
-            $prefix = this._params['prefix'] . '/' . $prefix;
+        if (isset(_params['prefix']) && $prefix) {
+            $prefix = _params['prefix'] . '/' . $prefix;
         }
 
         foreach ($resourceMap as $method => $params) {
@@ -444,7 +444,7 @@ class RouteBuilder
      */
     function get(string $template, $target, ?string $name = null): Route
     {
-        return this._methodRoute('GET', $template, $target, $name);
+        return _methodRoute('GET', $template, $target, $name);
     }
 
     /**
@@ -458,7 +458,7 @@ class RouteBuilder
      */
     function post(string $template, $target, ?string $name = null): Route
     {
-        return this._methodRoute('POST', $template, $target, $name);
+        return _methodRoute('POST', $template, $target, $name);
     }
 
     /**
@@ -472,7 +472,7 @@ class RouteBuilder
      */
     function put(string $template, $target, ?string $name = null): Route
     {
-        return this._methodRoute('PUT', $template, $target, $name);
+        return _methodRoute('PUT', $template, $target, $name);
     }
 
     /**
@@ -486,7 +486,7 @@ class RouteBuilder
      */
     function patch(string $template, $target, ?string $name = null): Route
     {
-        return this._methodRoute('PATCH', $template, $target, $name);
+        return _methodRoute('PATCH', $template, $target, $name);
     }
 
     /**
@@ -500,7 +500,7 @@ class RouteBuilder
      */
     function delete(string $template, $target, ?string $name = null): Route
     {
-        return this._methodRoute('DELETE', $template, $target, $name);
+        return _methodRoute('DELETE', $template, $target, $name);
     }
 
     /**
@@ -514,7 +514,7 @@ class RouteBuilder
      */
     function head(string $template, $target, ?string $name = null): Route
     {
-        return this._methodRoute('HEAD', $template, $target, $name);
+        return _methodRoute('HEAD', $template, $target, $name);
     }
 
     /**
@@ -528,7 +528,7 @@ class RouteBuilder
      */
     function options(string $template, $target, ?string $name = null): Route
     {
-        return this._methodRoute('OPTIONS', $template, $target, $name);
+        return _methodRoute('OPTIONS', $template, $target, $name);
     }
 
     /**
@@ -544,20 +544,20 @@ class RouteBuilder
     protected function _methodRoute(string $method, string $template, $target, ?string $name): Route
     {
         if ($name != null) {
-            $name = this._namePrefix . $name;
+            $name = _namePrefix . $name;
         }
         $options = [
             '_name' => $name,
-            '_ext' => this._extensions,
+            '_ext' => _extensions,
             '_middleware' => this.middleware,
-            'routeClass' => this._routeClass,
+            'routeClass' => _routeClass,
         ];
 
         $target = this.parseDefaults($target);
         $target['_method'] = $method;
 
-        $route = this._makeRoute($template, $target, $options);
-        this._collection->add($route, $options);
+        $route = _makeRoute($template, $target, $options);
+        _collection->add($route, $options);
 
         return $route;
     }
@@ -674,20 +674,20 @@ class RouteBuilder
     {
         $defaults = this.parseDefaults($defaults);
         if (empty($options['_ext'])) {
-            $options['_ext'] = this._extensions;
+            $options['_ext'] = _extensions;
         }
         if (empty($options['routeClass'])) {
-            $options['routeClass'] = this._routeClass;
+            $options['routeClass'] = _routeClass;
         }
-        if (isset($options['_name']) && this._namePrefix) {
-            $options['_name'] = this._namePrefix . $options['_name'];
+        if (isset($options['_name']) && _namePrefix) {
+            $options['_name'] = _namePrefix . $options['_name'];
         }
         if (empty($options['_middleware'])) {
             $options['_middleware'] = this.middleware;
         }
 
-        $route = this._makeRoute($route, $defaults, $options);
-        this._collection->add($route, $options);
+        $route = _makeRoute($route, $defaults, $options);
+        _collection->add($route, $options);
 
         return $route;
     }
@@ -729,12 +729,12 @@ class RouteBuilder
                 ));
             }
 
-            $route = str_replace('//', '/', this._path . $route);
+            $route = str_replace('//', '/', _path . $route);
             if ($route != '/') {
                 $route = rtrim($route, '/');
             }
 
-            foreach (this._params as $param => $val) {
+            foreach (_params as $param => $val) {
                 if (isset($defaults[$param]) && $param != 'prefix' && $defaults[$param] != $val) {
                     $msg = 'You cannot define routes that conflict with the scope. ' .
                         'Scope had %s = %s, while route had %s = %s';
@@ -747,7 +747,7 @@ class RouteBuilder
                     ));
                 }
             }
-            $defaults += this._params + ['plugin' => null];
+            $defaults += _params + ['plugin' => null];
             if (!isset($defaults['action']) && !isset($options['action'])) {
                 $defaults['action'] = 'index';
             }
@@ -847,8 +847,8 @@ class RouteBuilder
             $path = $params['path'];
             unset($params['path']);
         }
-        if (isset(this._params['prefix'])) {
-            $name = this._params['prefix'] . '/' . $name;
+        if (isset(_params['prefix'])) {
+            $name = _params['prefix'] . '/' . $name;
         }
         $params = array_merge($params, ['prefix' => $name]);
         this.scope($path, $params, $callback);
@@ -927,19 +927,19 @@ class RouteBuilder
             ));
         }
 
-        if (this._path != '/') {
-            $path = this._path . $path;
+        if (_path != '/') {
+            $path = _path . $path;
         }
-        $namePrefix = this._namePrefix;
+        $namePrefix = _namePrefix;
         if (isset($params['_namePrefix'])) {
             $namePrefix .= $params['_namePrefix'];
         }
         unset($params['_namePrefix']);
 
-        $params += this._params;
-        $builder = new static(this._collection, $path, $params, [
-            'routeClass' => this._routeClass,
-            'extensions' => this._extensions,
+        $params += _params;
+        $builder = new static(_collection, $path, $params, [
+            'routeClass' => _routeClass,
+            'extensions' => _extensions,
             'namePrefix' => $namePrefix,
             'middleware' => this.middleware,
         ]);
@@ -959,7 +959,7 @@ class RouteBuilder
      */
     function fallbacks(?string $routeClass = null)
     {
-        $routeClass = $routeClass ?: this._routeClass;
+        $routeClass = $routeClass ?: _routeClass;
         this.connect('/{controller}', ['action' => 'index'], compact('routeClass'));
         this.connect('/{controller}/{action}/*', [], compact('routeClass'));
 
@@ -979,7 +979,7 @@ class RouteBuilder
      */
     function registerMiddleware(string $name, $middleware)
     {
-        this._collection->registerMiddleware($name, $middleware);
+        _collection->registerMiddleware($name, $middleware);
 
         return this;
     }
@@ -997,7 +997,7 @@ class RouteBuilder
     function applyMiddleware(string ...$names)
     {
         foreach ($names as $name) {
-            if (!this._collection->middlewareExists($name)) {
+            if (!_collection->middlewareExists($name)) {
                 $message = "Cannot apply '$name' middleware or middleware group. " .
                     'Use registerMiddleware() to register middleware.';
                 throw new RuntimeException($message);
@@ -1027,7 +1027,7 @@ class RouteBuilder
      */
     function middlewareGroup(string $name, array $middlewareNames)
     {
-        this._collection->middlewareGroup($name, $middlewareNames);
+        _collection->middlewareGroup($name, $middlewareNames);
 
         return this;
     }

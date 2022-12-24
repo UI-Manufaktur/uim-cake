@@ -138,6 +138,6 @@ class MiddlewareDispatcher
     {
         $server = new Server(this.app);
 
-        return $server->run(this._createRequest($requestSpec));
+        return $server->run(_createRequest($requestSpec));
     }
 }

@@ -134,7 +134,7 @@ class TableLocator : AbstractLocator : LocatorInterface
     function setConfig($alias, $options = null)
     {
         if (!is_string($alias)) {
-            this._config = $alias;
+            _config = $alias;
 
             return this;
         }
@@ -146,7 +146,7 @@ class TableLocator : AbstractLocator : LocatorInterface
             ));
         }
 
-        this._config[$alias] = $options;
+        _config[$alias] = $options;
 
         return this;
     }
@@ -157,10 +157,10 @@ class TableLocator : AbstractLocator : LocatorInterface
     function getConfig(?string $alias = null): array
     {
         if ($alias == null) {
-            return this._config;
+            return _config;
         }
 
-        return this._config[$alias] ?? [];
+        return _config[$alias] ?? [];
     }
 
     /**
@@ -217,12 +217,12 @@ class TableLocator : AbstractLocator : LocatorInterface
             $options['className'] = $alias;
         }
 
-        if (isset(this._config[$alias])) {
-            $options += this._config[$alias];
+        if (isset(_config[$alias])) {
+            $options += _config[$alias];
         }
 
         $allowFallbackClass = $options['allowFallbackClass'] ?? this.allowFallbackClass;
-        $className = this._getClassName($alias, $options);
+        $className = _getClassName($alias, $options);
         if ($className) {
             $options['className'] = $className;
         } elseif ($allowFallbackClass) {
@@ -259,10 +259,10 @@ class TableLocator : AbstractLocator : LocatorInterface
         }
 
         $options['registryAlias'] = $alias;
-        $instance = this._create($options);
+        $instance = _create($options);
 
         if ($options['className'] == this.fallbackClassName) {
-            this._fallbacked[$alias] = $instance;
+            _fallbacked[$alias] = $instance;
         }
 
         return $instance;
@@ -327,8 +327,8 @@ class TableLocator : AbstractLocator : LocatorInterface
     {
         parent::clear();
 
-        this._fallbacked = [];
-        this._config = [];
+        _fallbacked = [];
+        _config = [];
     }
 
     /**
@@ -341,7 +341,7 @@ class TableLocator : AbstractLocator : LocatorInterface
      */
     function genericInstances(): array
     {
-        return this._fallbacked;
+        return _fallbacked;
     }
 
     /**
@@ -351,7 +351,7 @@ class TableLocator : AbstractLocator : LocatorInterface
     {
         parent::remove($alias);
 
-        unset(this._fallbacked[$alias]);
+        unset(_fallbacked[$alias]);
     }
 
     /**

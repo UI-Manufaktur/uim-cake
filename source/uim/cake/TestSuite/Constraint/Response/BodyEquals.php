@@ -30,7 +30,7 @@ class BodyEquals : ResponseBase
      */
     function matches($other): bool
     {
-        return this._getBodyAsString() == $other;
+        return _getBodyAsString() == $other;
     }
 
     /**

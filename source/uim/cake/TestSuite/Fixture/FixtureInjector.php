@@ -56,8 +56,8 @@ class FixtureInjector : TestListener
         if (isset($_SERVER['argv'])) {
             $manager->setDebug(in_array('--debug', $_SERVER['argv'], true));
         }
-        this._fixtureManager = $manager;
-        this._fixtureManager->shutDown();
+        _fixtureManager = $manager;
+        _fixtureManager->shutDown();
         TestCase::$fixtureManager = $manager;
     }
 
@@ -70,7 +70,7 @@ class FixtureInjector : TestListener
      */
     function startTestSuite(TestSuite $suite): void
     {
-        if (empty(this._first)) {
+        if (empty(_first)) {
             deprecationWarning(
                 'You are using the listener based PHPUnit integration. ' .
                 'This fixture system is deprecated, and we recommend you ' .
@@ -78,7 +78,7 @@ class FixtureInjector : TestListener
                 'See https://book.cakephp.org/4/en/appendices/fixture-upgrade.html',
                 0
             );
-            this._first = $suite;
+            _first = $suite;
         }
     }
 
@@ -91,8 +91,8 @@ class FixtureInjector : TestListener
      */
     function endTestSuite(TestSuite $suite): void
     {
-        if (this._first == $suite) {
-            this._fixtureManager->shutDown();
+        if (_first == $suite) {
+            _fixtureManager->shutDown();
         }
     }
 
@@ -105,8 +105,8 @@ class FixtureInjector : TestListener
     function startTest(Test $test): void
     {
         if ($test instanceof TestCase) {
-            this._fixtureManager->fixturize($test);
-            this._fixtureManager->load($test);
+            _fixtureManager->fixturize($test);
+            _fixtureManager->load($test);
         }
     }
 
@@ -120,7 +120,7 @@ class FixtureInjector : TestListener
     function endTest(Test $test, float $time): void
     {
         if ($test instanceof TestCase) {
-            this._fixtureManager->unload($test);
+            _fixtureManager->unload($test);
         }
     }
 }

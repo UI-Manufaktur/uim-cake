@@ -85,7 +85,7 @@ class FixtureManager
      */
     function setDebug(bool $debug): void
     {
-        this._debug = $debug;
+        _debug = $debug;
     }
 
     /**
@@ -94,12 +94,12 @@ class FixtureManager
      */
     function fixturize(TestCase $test): void
     {
-        this._initDb();
-        if (!$test->getFixtures() || !empty(this._processed[get_class($test)])) {
+        _initDb();
+        if (!$test->getFixtures() || !empty(_processed[get_class($test)])) {
             return;
         }
-        this._loadFixtures($test);
-        this._processed[get_class($test)] = true;
+        _loadFixtures($test);
+        _processed[get_class($test)] = true;
     }
 
     /**
@@ -107,7 +107,7 @@ class FixtureManager
      */
     function loaded(): array
     {
-        return this._loaded;
+        return _loaded;
     }
 
     /**
@@ -116,7 +116,7 @@ class FixtureManager
     function getInserted(): array
     {
         $inserted = [];
-        foreach (this._insertionMap as $fixtures) {
+        foreach (_insertionMap as $fixtures) {
             foreach ($fixtures as $fixture) {
                 /** @var \Cake\TestSuite\Fixture\TestFixture $fixture */
                 $inserted[] = $fixture->table;
@@ -164,11 +164,11 @@ class FixtureManager
      */
     protected function _initDb(): void
     {
-        if (this._initialized) {
+        if (_initialized) {
             return;
         }
-        this._aliasConnections();
-        this._initialized = true;
+        _aliasConnections();
+        _initialized = true;
     }
 
     /**
@@ -185,7 +185,7 @@ class FixtureManager
             return;
         }
         foreach ($fixtures as $fixture) {
-            if (isset(this._loaded[$fixture])) {
+            if (isset(_loaded[$fixture])) {
                 continue;
             }
 
@@ -228,8 +228,8 @@ class FixtureManager
             }
 
             if (class_exists($className)) {
-                this._loaded[$fixture] = new $className();
-                this._fixtureMap[$name] = this._loaded[$fixture];
+                _loaded[$fixture] = new $className();
+                _fixtureMap[$name] = _loaded[$fixture];
             } else {
                 $msg = sprintf(
                     'Referenced fixture class "%s" not found. Fixture "%s" was referenced in test case "%s".',
@@ -277,7 +277,7 @@ class FixtureManager
             $fixture->truncate($db);
         }
 
-        this._insertionMap[$configName][] = $fixture;
+        _insertionMap[$configName][] = $fixture;
     }
 
     /**
@@ -297,7 +297,7 @@ class FixtureManager
                 /** @var array<\Cake\Datasource\FixtureInterface> $fixtures */
                 $tables = $db->getSchemaCollection()->listTables();
                 $configName = $db->configName();
-                this._insertionMap[$configName] = this._insertionMap[$configName] ?? [];
+                _insertionMap[$configName] = _insertionMap[$configName] ?? [];
 
                 foreach ($fixtures as $fixture) {
                     if (!$fixture instanceof ConstraintsInterface) {
@@ -320,8 +320,8 @@ class FixtureManager
                 }
 
                 foreach ($fixtures as $fixture) {
-                    if (!in_array($fixture, this._insertionMap[$configName], true)) {
-                        this._setupTable($fixture, $db, $tables, $test->dropTables);
+                    if (!in_array($fixture, _insertionMap[$configName], true)) {
+                        _setupTable($fixture, $db, $tables, $test->dropTables);
                     } else {
                         $fixture->truncate($db);
                     }
@@ -345,7 +345,7 @@ class FixtureManager
                     }
                 }
             };
-            this._runOperation($fixtures, $createTables);
+            _runOperation($fixtures, $createTables);
 
             // Use a separate transaction because of postgres.
             $insert = function (ConnectionInterface $db, array $fixtures) use ($test): void {
@@ -363,7 +363,7 @@ class FixtureManager
                     }
                 }
             };
-            this._runOperation($fixtures, $insert);
+            _runOperation($fixtures, $insert);
         } catch (PDOException $e) {
             $msg = sprintf(
                 'Unable to insert fixtures for "%s" test case. %s',
@@ -383,12 +383,12 @@ class FixtureManager
      */
     protected function _runOperation(array $fixtures, callable $operation): void
     {
-        $dbs = this._fixtureConnections($fixtures);
+        $dbs = _fixtureConnections($fixtures);
         foreach ($dbs as $connection => $fixtures) {
             $db = ConnectionManager::get($connection);
             $logQueries = $db->isQueryLoggingEnabled();
 
-            if ($logQueries && !this._debug) {
+            if ($logQueries && !_debug) {
                 $db->disableQueryLogging();
             }
             $db->transactional(function (ConnectionInterface $db) use ($fixtures, $operation): void {
@@ -412,8 +412,8 @@ class FixtureManager
     {
         $dbs = [];
         foreach ($fixtures as $name) {
-            if (!empty(this._loaded[$name])) {
-                $fixture = this._loaded[$name];
+            if (!empty(_loaded[$name])) {
+                $fixture = _loaded[$name];
                 $dbs[$fixture->connection()][$name] = $fixture;
             }
         }
@@ -445,7 +445,7 @@ class FixtureManager
                 }
             }
         };
-        this._runOperation($fixtures, $truncate);
+        _runOperation($fixtures, $truncate);
     }
 
     /**
@@ -457,18 +457,18 @@ class FixtureManager
      */
     function loadSingle(string $name, ?ConnectionInterface $connection = null, bool $dropTables = true): void
     {
-        if (!isset(this._fixtureMap[$name])) {
+        if (!isset(_fixtureMap[$name])) {
             throw new UnexpectedValueException(sprintf('Referenced fixture class %s not found', $name));
         }
 
-        $fixture = this._fixtureMap[$name];
+        $fixture = _fixtureMap[$name];
         if (!$connection) {
             $connection = ConnectionManager::get($fixture->connection());
         }
 
         if (!this.isFixtureSetup($connection->configName(), $fixture)) {
             $sources = $connection->getSchemaCollection()->listTables();
-            this._setupTable($fixture, $connection, $sources, $dropTables);
+            _setupTable($fixture, $connection, $sources, $dropTables);
         }
 
         if (!$dropTables) {
@@ -497,12 +497,12 @@ class FixtureManager
             foreach ($fixtures as $fixture) {
                 if (this.isFixtureSetup($connection, $fixture)) {
                     $fixture->drop($db);
-                    $index = array_search($fixture, this._insertionMap[$connection], true);
-                    unset(this._insertionMap[$connection][$index]);
+                    $index = array_search($fixture, _insertionMap[$connection], true);
+                    unset(_insertionMap[$connection][$index]);
                 }
             }
         };
-        this._runOperation(array_keys(this._loaded), $shutdown);
+        _runOperation(array_keys(_loaded), $shutdown);
     }
 
     /**
@@ -514,6 +514,6 @@ class FixtureManager
      */
     function isFixtureSetup(string $connection, FixtureInterface $fixture): bool
     {
-        return isset(this._insertionMap[$connection]) && in_array($fixture, this._insertionMap[$connection], true);
+        return isset(_insertionMap[$connection]) && in_array($fixture, _insertionMap[$connection], true);
     }
 }

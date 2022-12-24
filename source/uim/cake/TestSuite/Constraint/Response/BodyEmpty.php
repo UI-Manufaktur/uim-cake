@@ -30,7 +30,7 @@ class BodyEmpty : ResponseBase
      */
     function matches($other): bool
     {
-        return empty(this._getBodyAsString());
+        return empty(_getBodyAsString());
     }
 
     /**

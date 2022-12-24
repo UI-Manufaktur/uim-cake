@@ -72,7 +72,7 @@ class AssetMiddleware : IMiddleware
             return $handler->handle($request);
         }
 
-        $assetFile = this._getAssetFile($url);
+        $assetFile = _getAssetFile($url);
         if ($assetFile == null || !is_file($assetFile)) {
             return $handler->handle($request);
         }

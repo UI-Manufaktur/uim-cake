@@ -45,11 +45,11 @@ class EventFiredWith : Constraint
      */
     public this(EventManager $eventManager, string $dataKey, $dataValue)
     {
-        this._eventManager = $eventManager;
-        this._dataKey = $dataKey;
-        this._dataValue = $dataValue;
+        _eventManager = $eventManager;
+        _dataKey = $dataKey;
+        _dataValue = $dataValue;
 
-        if (this._eventManager->getEventList() == null) {
+        if (_eventManager->getEventList() == null) {
             throw new AssertionFailedError(
                 'The event manager you are asserting against is not configured to track events.'
             );
@@ -66,7 +66,7 @@ class EventFiredWith : Constraint
     function matches($other): bool
     {
         $firedEvents = [];
-        $list = this._eventManager->getEventList();
+        $list = _eventManager->getEventList();
         if ($list != null) {
             $totalEvents = count($list);
             for ($e = 0; $e < $totalEvents; $e++) {
@@ -97,11 +97,11 @@ class EventFiredWith : Constraint
 
         $event = $events[0];
 
-        if (array_key_exists(this._dataKey, (array)$event->getData()) == false) {
+        if (array_key_exists(_dataKey, (array)$event->getData()) == false) {
             return false;
         }
 
-        return $event->getData(this._dataKey) == this._dataValue;
+        return $event->getData(_dataKey) == _dataValue;
     }
 
     /**
@@ -111,6 +111,6 @@ class EventFiredWith : Constraint
      */
     function toString(): string
     {
-        return 'was fired with ' . this._dataKey . ' matching ' . (string)this._dataValue;
+        return 'was fired with ' . _dataKey . ' matching ' . (string)_dataValue;
     }
 }

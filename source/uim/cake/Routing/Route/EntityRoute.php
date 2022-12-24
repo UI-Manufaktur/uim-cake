@@ -43,13 +43,13 @@ class EntityRoute : Route
      */
     function match(array $url, array $context = []): ?string
     {
-        if (empty(this._compiledRoute)) {
+        if (empty(_compiledRoute)) {
             this.compile();
         }
 
         if (isset($url['_entity'])) {
             $entity = $url['_entity'];
-            this._checkEntity($entity);
+            _checkEntity($entity);
 
             foreach (this.keys as $field) {
                 if (!isset($url[$field]) && isset($entity[$field])) {

@@ -158,7 +158,7 @@ class Route
      */
     function setExtensions(array $extensions)
     {
-        this._extensions = array_map('strtolower', $extensions);
+        _extensions = array_map('strtolower', $extensions);
 
         return this;
     }
@@ -170,7 +170,7 @@ class Route
      */
     function getExtensions(): array
     {
-        return this._extensions;
+        return _extensions;
     }
 
     /**
@@ -285,7 +285,7 @@ class Route
      */
     function compiled(): bool
     {
-        return this._compiledRoute != null;
+        return _compiledRoute != null;
     }
 
     /**
@@ -298,12 +298,12 @@ class Route
      */
     function compile(): string
     {
-        if (this._compiledRoute == null) {
-            this._writeRoute();
+        if (_compiledRoute == null) {
+            _writeRoute();
         }
 
         /** @var string */
-        return this._compiledRoute;
+        return _compiledRoute;
     }
 
     /**
@@ -317,7 +317,7 @@ class Route
     protected function _writeRoute(): void
     {
         if (empty(this.template) || (this.template == '/')) {
-            this._compiledRoute = '#^/*$#';
+            _compiledRoute = '#^/*$#';
             this.keys = [];
 
             return;
@@ -368,16 +368,16 @@ class Route
         }
         if (preg_match('#\/\*\*$#', $route)) {
             $parsed = preg_replace('#/\\\\\*\\\\\*$#', '(?:/(?P<_trailing_>.*))?', $parsed);
-            this._greedy = true;
+            _greedy = true;
         }
         if (preg_match('#\/\*$#', $route)) {
             $parsed = preg_replace('#/\\\\\*$#', '(?:/(?P<_args_>.*))?', $parsed);
-            this._greedy = true;
+            _greedy = true;
         }
         $mode = empty(this.options['multibytePattern']) ? '' : 'u';
         krsort($routeParams);
         $parsed = str_replace(array_keys($routeParams), $routeParams, $parsed);
-        this._compiledRoute = '#^' . $parsed . '[/]*$#' . $mode;
+        _compiledRoute = '#^' . $parsed . '[/]*$#' . $mode;
         this.keys = $names;
 
         // Remove defaults that are also keys. They can cause match failures
@@ -397,8 +397,8 @@ class Route
      */
     function getName(): string
     {
-        if (!empty(this._name)) {
-            return this._name;
+        if (!empty(_name)) {
+            return _name;
         }
         $name = '';
         $keys = [
@@ -427,7 +427,7 @@ class Route
             $name .= $value . $glue;
         }
 
-        return this._name = strtolower($name);
+        return _name = strtolower($name);
     }
 
     /**
@@ -471,7 +471,7 @@ class Route
         }
 
         $compiledRoute = this.compile();
-        [$url, $ext] = this._parseExtension($url);
+        [$url, $ext] = _parseExtension($url);
 
         $urldecode = this.options['_urldecode'] ?? true;
         if ($urldecode) {
@@ -510,7 +510,7 @@ class Route
 
         if (isset($route['_args_'])) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $pass = this._parseArgs($route['_args_'], $route);
+            $pass = _parseArgs($route['_args_'], $route);
             $route['pass'] = array_merge($route['pass'], $pass);
             unset($route['_args_']);
         }
@@ -571,8 +571,8 @@ class Route
      */
     protected function _parseExtension(string $url): array
     {
-        if (count(this._extensions) && strpos($url, '.') != false) {
-            foreach (this._extensions as $ext) {
+        if (count(_extensions) && strpos($url, '.') != false) {
+            foreach (_extensions as $ext) {
                 $len = strlen($ext) + 1;
                 if (substr($url, -$len) == '.' . $ext) {
                     return [substr($url, 0, $len * -1), $ext];
@@ -644,7 +644,7 @@ class Route
      */
     function match(array $url, array $context = []): ?string
     {
-        if (empty(this._compiledRoute)) {
+        if (empty(_compiledRoute)) {
             this.compile();
         }
         $defaults = this.defaults;
@@ -654,7 +654,7 @@ class Route
             !empty(this.options['persist']) &&
             is_array(this.options['persist'])
         ) {
-            $url = this._persistParams($url, $context['params']);
+            $url = _persistParams($url, $context['params']);
         }
         unset($context['params']);
         $hostOptions = array_intersect_key($url, $context);
@@ -705,7 +705,7 @@ class Route
         }
 
         // Check the method first as it is special.
-        if (!this._matchMethod($url)) {
+        if (!_matchMethod($url)) {
             return null;
         }
         unset($url['_method'], $url['[method]'], $defaults['_method']);
@@ -752,7 +752,7 @@ class Route
         }
 
         // if not a greedy route, no extra params are allowed.
-        if (!this._greedy && !empty($pass)) {
+        if (!_greedy && !empty($pass)) {
             return null;
         }
 
@@ -774,7 +774,7 @@ class Route
             return null;
         }
 
-        return this._writeUrl($url, $pass, $query);
+        return _writeUrl($url, $pass, $query);
     }
 
     /**

@@ -248,8 +248,8 @@ abstract class TestCase : BaseTestCase
         parent::setUp();
         this.setupFixtures();
 
-        if (!this._configure) {
-            this._configure = Configure::read();
+        if (!_configure) {
+            _configure = Configure::read();
         }
         if (class_exists(Router::class, false)) {
             Router::reload();
@@ -268,13 +268,13 @@ abstract class TestCase : BaseTestCase
         parent::tearDown();
         this.teardownFixtures();
 
-        if (this._configure) {
+        if (_configure) {
             Configure::clear();
-            Configure::write(this._configure);
+            Configure::write(_configure);
         }
         this.getTableLocator()->clear();
-        this._configure = [];
-        this._tableLocator = null;
+        _configure = [];
+        _tableLocator = null;
     }
 
     /**
@@ -824,7 +824,7 @@ abstract class TestCase : BaseTestCase
         foreach ($regex as $i => $assertion) {
             $matches = false;
             if (isset($assertion['attrs'])) {
-                $string = this._assertAttributes($assertion, $string, $fullDebug, $regex);
+                $string = _assertAttributes($assertion, $string, $fullDebug, $regex);
                 if ($fullDebug == true && $string == false) {
                     debug($string, true);
                     debug($regex, true);
@@ -991,7 +991,7 @@ abstract class TestCase : BaseTestCase
      */
     function getMockForModel(string $alias, array $methods = [], array $options = [])
     {
-        $className = this._getTableClassName($alias, $options);
+        $className = _getTableClassName($alias, $options);
         $connectionName = $className::defaultConnectionName();
         $connection = ConnectionManager::get($connectionName);
 

@@ -47,7 +47,7 @@ class PersistenceFailedException : CakeException
      */
     public this(EntityInterface $entity, $message, ?int $code = null, ?Throwable $previous = null)
     {
-        this._entity = $entity;
+        _entity = $entity;
         if (is_array($message)) {
             $errors = [];
             foreach (Hash::flatten($entity->getErrors()) as $field => $error) {
@@ -55,7 +55,7 @@ class PersistenceFailedException : CakeException
             }
             if ($errors) {
                 $message[] = implode(', ', $errors);
-                this._messageTemplate = 'Entity %s failure. Found the following errors (%s).';
+                _messageTemplate = 'Entity %s failure. Found the following errors (%s).';
             }
         }
         parent::__construct($message, $code, $previous);
@@ -68,6 +68,6 @@ class PersistenceFailedException : CakeException
      */
     function getEntity(): EntityInterface
     {
-        return this._entity;
+        return _entity;
     }
 }

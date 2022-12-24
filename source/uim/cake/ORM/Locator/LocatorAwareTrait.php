@@ -47,7 +47,7 @@ trait LocatorAwareTrait
      */
     function setTableLocator(LocatorInterface $tableLocator)
     {
-        this._tableLocator = $tableLocator;
+        _tableLocator = $tableLocator;
 
         return this;
     }
@@ -59,13 +59,13 @@ trait LocatorAwareTrait
      */
     function getTableLocator(): LocatorInterface
     {
-        if (this._tableLocator == null) {
+        if (_tableLocator == null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
-            this._tableLocator = FactoryLocator::get('Table');
+            _tableLocator = FactoryLocator::get('Table');
         }
 
         /** @var \Cake\ORM\Locator\LocatorInterface */
-        return this._tableLocator;
+        return _tableLocator;
     }
 
     /**

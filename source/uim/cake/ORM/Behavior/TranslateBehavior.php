@@ -176,13 +176,13 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     protected function createStrategy()
     {
         $config = array_diff_key(
-            this._config,
+            _config,
             ['implementedFinders', 'implementedMethods', 'strategyClass']
         );
         /** @var class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> $className */
         $className = this.getConfig('strategyClass', static::$defaultStrategyClass);
 
-        return new $className(this._table, $config);
+        return new $className(_table, $config);
     }
 
     /**

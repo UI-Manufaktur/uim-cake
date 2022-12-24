@@ -75,10 +75,10 @@ class InflectedRoute : Route
      */
     function match(array $url, array $context = []): ?string
     {
-        $url = this._underscore($url);
-        if (!this._inflectedDefaults) {
-            this._inflectedDefaults = true;
-            this.defaults = this._underscore(this.defaults);
+        $url = _underscore($url);
+        if (!_inflectedDefaults) {
+            _inflectedDefaults = true;
+            this.defaults = _underscore(this.defaults);
         }
 
         return parent::match($url, $context);

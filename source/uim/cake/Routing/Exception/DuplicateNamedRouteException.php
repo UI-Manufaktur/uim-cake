@@ -38,7 +38,7 @@ class DuplicateNamedRouteException : CakeException
     public this($message, ?int $code = 404, ?Throwable $previous = null)
     {
         if (is_array($message) && isset($message['message'])) {
-            this._messageTemplate = $message['message'];
+            _messageTemplate = $message['message'];
         }
         parent::__construct($message, $code, $previous);
     }

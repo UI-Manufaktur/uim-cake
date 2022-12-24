@@ -83,8 +83,8 @@ class TreeBehavior : Behavior
      */
     function initialize(array $config): void
     {
-        this._config['leftField'] = new IdentifierExpression(this._config['left']);
-        this._config['rightField'] = new IdentifierExpression(this._config['right']);
+        _config['leftField'] = new IdentifierExpression(_config['left']);
+        _config['rightField'] = new IdentifierExpression(_config['right']);
     }
 
     /**
@@ -102,7 +102,7 @@ class TreeBehavior : Behavior
         $isNew = $entity->isNew();
         $config = this.getConfig();
         $parent = $entity->get($config['parent']);
-        $primaryKey = this._getPrimaryKey();
+        $primaryKey = _getPrimaryKey();
         $dirty = $entity->isDirty($config['parent']);
         $level = $config['level'];
 
@@ -111,11 +111,11 @@ class TreeBehavior : Behavior
         }
 
         if ($isNew && $parent) {
-            $parentNode = this._getNode($parent);
+            $parentNode = _getNode($parent);
             $edge = $parentNode->get($config['right']);
             $entity->set($config['left'], $edge);
             $entity->set($config['right'], $edge + 1);
-            this._sync(2, '+', ">= {$edge}");
+            _sync(2, '+', ">= {$edge}");
 
             if ($level) {
                 $entity->set($level, $parentNode[$level] + 1);
@@ -125,7 +125,7 @@ class TreeBehavior : Behavior
         }
 
         if ($isNew && !$parent) {
-            $edge = this._getMax();
+            $edge = _getMax();
             $entity->set($config['left'], $edge + 1);
             $entity->set($config['right'], $edge + 2);
 
@@ -137,10 +137,10 @@ class TreeBehavior : Behavior
         }
 
         if ($dirty && $parent) {
-            this._setParent($entity, $parent);
+            _setParent($entity, $parent);
 
             if ($level) {
-                $parentNode = this._getNode($parent);
+                $parentNode = _getNode($parent);
                 $entity->set($level, $parentNode[$level] + 1);
             }
 
@@ -148,7 +148,7 @@ class TreeBehavior : Behavior
         }
 
         if ($dirty && !$parent) {
-            this._setAsRoot($entity);
+            _setAsRoot($entity);
 
             if ($level) {
                 $entity->set($level, 0);
@@ -167,11 +167,11 @@ class TreeBehavior : Behavior
      */
     function afterSave(EventInterface $event, EntityInterface $entity)
     {
-        if (!this._config['level'] || $entity->isNew()) {
+        if (!_config['level'] || $entity->isNew()) {
             return;
         }
 
-        this._setChildrenLevel($entity);
+        _setChildrenLevel($entity);
     }
 
     /**
@@ -188,13 +188,13 @@ class TreeBehavior : Behavior
             return;
         }
 
-        $primaryKey = this._getPrimaryKey();
+        $primaryKey = _getPrimaryKey();
         $primaryKeyValue = $entity->get($primaryKey);
         $depths = [$primaryKeyValue => $entity->get($config['level'])];
 
-        $children = this._table->find('children', [
+        $children = _table->find('children', [
             'for' => $primaryKeyValue,
-            'fields' => [this._getPrimaryKey(), $config['parent'], $config['level']],
+            'fields' => [_getPrimaryKey(), $config['parent'], $config['level']],
             'order' => $config['left'],
         ]);
 
@@ -204,7 +204,7 @@ class TreeBehavior : Behavior
             $depth = $depths[$parentIdValue] + 1;
             $depths[$node->get($primaryKey)] = $depth;
 
-            this._table->updateAll(
+            _table->updateAll(
                 [$config['level'] => $depth],
                 [$primaryKey => $node->get($primaryKey)]
             );
@@ -221,13 +221,13 @@ class TreeBehavior : Behavior
     function beforeDelete(EventInterface $event, EntityInterface $entity)
     {
         $config = this.getConfig();
-        this._ensureFields($entity);
+        _ensureFields($entity);
         $left = $entity->get($config['left']);
         $right = $entity->get($config['right']);
         $diff = $right - $left + 1;
 
         if ($diff > 2) {
-            $query = this._scope(this._table->query())
+            $query = _scope(_table->query())
                 ->where(function ($exp) use ($config, $left, $right) {
                     /** @var \Cake\Database\Expression\QueryExpression $exp */
                     return $exp
@@ -237,7 +237,7 @@ class TreeBehavior : Behavior
             if (this.getConfig('cascadeCallbacks')) {
                 $entities = $query->toArray();
                 foreach ($entities as $entityToDelete) {
-                    this._table->delete($entityToDelete, ['atomic' => false]);
+                    _table->delete($entityToDelete, ['atomic' => false]);
                 }
             } else {
                 $query->delete();
@@ -246,7 +246,7 @@ class TreeBehavior : Behavior
             }
         }
 
-        this._sync($diff, '-', "> {$right}");
+        _sync($diff, '-', "> {$right}");
     }
 
     /**
@@ -262,8 +262,8 @@ class TreeBehavior : Behavior
     protected function _setParent(EntityInterface $entity, $parent): void
     {
         $config = this.getConfig();
-        $parentNode = this._getNode($parent);
-        this._ensureFields($entity);
+        $parentNode = _getNode($parent);
+        _ensureFields($entity);
         $parentLeft = $parentNode->get($config['left']);
         $parentRight = $parentNode->get($config['right']);
         $right = $entity->get($config['right']);
@@ -273,7 +273,7 @@ class TreeBehavior : Behavior
             throw new RuntimeException(sprintf(
                 'Cannot use node "%s" as parent for entity "%s"',
                 $parent,
-                $entity->get(this._getPrimaryKey())
+                $entity->get(_getPrimaryKey())
             ));
         }
 
@@ -297,13 +297,13 @@ class TreeBehavior : Behavior
             // Correcting internal subtree
             $internalLeft = $left + 1;
             $internalRight = $right - 1;
-            this._sync($targetLeft - $left, '+', "BETWEEN {$internalLeft} AND {$internalRight}", true);
+            _sync($targetLeft - $left, '+', "BETWEEN {$internalLeft} AND {$internalRight}", true);
         }
 
-        this._sync($diff, '+', "BETWEEN {$min} AND {$max}");
+        _sync($diff, '+', "BETWEEN {$min} AND {$max}");
 
         if ($right - $left > 1) {
-            this._unmarkInternalTree();
+            _unmarkInternalTree();
         }
 
         // Allocating new position
@@ -322,8 +322,8 @@ class TreeBehavior : Behavior
     protected function _setAsRoot(EntityInterface $entity): void
     {
         $config = this.getConfig();
-        $edge = this._getMax();
-        this._ensureFields($entity);
+        $edge = _getMax();
+        _ensureFields($entity);
         $right = $entity->get($config['right']);
         $left = $entity->get($config['left']);
         $diff = $right - $left;
@@ -332,13 +332,13 @@ class TreeBehavior : Behavior
             //Correcting internal subtree
             $internalLeft = $left + 1;
             $internalRight = $right - 1;
-            this._sync($edge - $diff - $left, '+', "BETWEEN {$internalLeft} AND {$internalRight}", true);
+            _sync($edge - $diff - $left, '+', "BETWEEN {$internalLeft} AND {$internalRight}", true);
         }
 
-        this._sync($diff + 1, '-', "BETWEEN {$right} AND {$edge}");
+        _sync($diff + 1, '-', "BETWEEN {$right} AND {$edge}");
 
         if ($right - $left > 1) {
-            this._unmarkInternalTree();
+            _unmarkInternalTree();
         }
 
         $entity->set($config['left'], $edge - $diff);
@@ -355,7 +355,7 @@ class TreeBehavior : Behavior
     protected function _unmarkInternalTree(): void
     {
         $config = this.getConfig();
-        this._table->updateAll(
+        _table->updateAll(
             function ($exp) use ($config) {
                 /** @var \Cake\Database\Expression\QueryExpression $exp */
                 $leftInverse = clone $exp;
@@ -392,14 +392,14 @@ class TreeBehavior : Behavior
         $config = this.getConfig();
         [$left, $right] = array_map(
             function ($field) {
-                return this._table->aliasField($field);
+                return _table->aliasField($field);
             },
             [$config['left'], $config['right']]
         );
 
-        $node = this._table->get($options['for'], ['fields' => [$left, $right]]);
+        $node = _table->get($options['for'], ['fields' => [$left, $right]]);
 
-        return this._scope($query)
+        return _scope($query)
             ->where([
                 "$left <=" => $node->get($config['left']),
                 "$right >=" => $node->get($config['right']),
@@ -418,15 +418,15 @@ class TreeBehavior : Behavior
     function childCount(EntityInterface $node, bool $direct = false): int
     {
         $config = this.getConfig();
-        $parent = this._table->aliasField($config['parent']);
+        $parent = _table->aliasField($config['parent']);
 
         if ($direct) {
-            return this._scope(this._table->find())
-                ->where([$parent => $node->get(this._getPrimaryKey())])
+            return _scope(_table->find())
+                ->where([$parent => $node->get(_getPrimaryKey())])
                 ->count();
         }
 
-        this._ensureFields($node);
+        _ensureFields($node);
 
         return ($node->get($config['right']) - $node->get($config['left']) - 1) / 2;
     }
@@ -453,7 +453,7 @@ class TreeBehavior : Behavior
         $options += ['for' => null, 'direct' => false];
         [$parent, $left, $right] = array_map(
             function ($field) {
-                return this._table->aliasField($field);
+                return _table->aliasField($field);
             },
             [$config['parent'], $config['left'], $config['right']]
         );
@@ -469,12 +469,12 @@ class TreeBehavior : Behavior
         }
 
         if ($direct) {
-            return this._scope($query)->where([$parent => $for]);
+            return _scope($query)->where([$parent => $for]);
         }
 
-        $node = this._getNode($for);
+        $node = _getNode($for);
 
-        return this._scope($query)
+        return _scope($query)
             ->where([
                 "{$right} <" => $node->get($config['right']),
                 "{$left} >" => $node->get($config['left']),
@@ -500,9 +500,9 @@ class TreeBehavior : Behavior
      */
     function findTreeList(Query $query, array $options): Query
     {
-        $left = this._table->aliasField(this.getConfig('left'));
+        $left = _table->aliasField(this.getConfig('left'));
 
-        $results = this._scope($query)
+        $results = _scope($query)
             ->find('threaded', [
                 'parentField' => this.getConfig('parent'),
                 'order' => [$left => 'ASC'],
@@ -532,8 +532,8 @@ class TreeBehavior : Behavior
     {
         return $query->formatResults(function (CollectionInterface $results) use ($options) {
             $options += [
-                'keyPath' => this._getPrimaryKey(),
-                'valuePath' => this._table->getDisplayField(),
+                'keyPath' => _getPrimaryKey(),
+                'valuePath' => _table->getDisplayField(),
                 'spacer' => '_',
             ];
 
@@ -557,10 +557,10 @@ class TreeBehavior : Behavior
      */
     function removeFromTree(EntityInterface $node)
     {
-        return this._table->getConnection()->transactional(function () use ($node) {
-            this._ensureFields($node);
+        return _table->getConnection()->transactional(function () use ($node) {
+            _ensureFields($node);
 
-            return this._removeFromTree($node);
+            return _removeFromTree($node);
         });
     }
 
@@ -581,22 +581,22 @@ class TreeBehavior : Behavior
         $node->set($config['parent'], null);
 
         if ($right - $left == 1) {
-            return this._table->save($node);
+            return _table->save($node);
         }
 
-        $primary = this._getPrimaryKey();
-        this._table->updateAll(
+        $primary = _getPrimaryKey();
+        _table->updateAll(
             [$config['parent'] => $parent],
             [$config['parent'] => $node->get($primary)]
         );
-        this._sync(1, '-', 'BETWEEN ' . ($left + 1) . ' AND ' . ($right - 1));
-        this._sync(2, '-', "> {$right}");
-        $edge = this._getMax();
+        _sync(1, '-', 'BETWEEN ' . ($left + 1) . ' AND ' . ($right - 1));
+        _sync(2, '-', "> {$right}");
+        $edge = _getMax();
         $node->set($config['left'], $edge + 1);
         $node->set($config['right'], $edge + 2);
         $fields = [$config['parent'], $config['left'], $config['right']];
 
-        this._table->updateAll($node->extract($fields), [$primary => $node->get($primary)]);
+        _table->updateAll($node->extract($fields), [$primary => $node->get($primary)]);
 
         foreach ($fields as $field) {
             $node->setDirty($field, false);
@@ -622,10 +622,10 @@ class TreeBehavior : Behavior
             return false;
         }
 
-        return this._table->getConnection()->transactional(function () use ($node, $number) {
-            this._ensureFields($node);
+        return _table->getConnection()->transactional(function () use ($node, $number) {
+            _ensureFields($node);
 
-            return this._moveUp($node, $number);
+            return _moveUp($node, $number);
         });
     }
 
@@ -646,7 +646,7 @@ class TreeBehavior : Behavior
         $targetNode = null;
         if ($number != true) {
             /** @var \Cake\Datasource\EntityInterface|null $targetNode */
-            $targetNode = this._scope(this._table->find())
+            $targetNode = _scope(_table->find())
                 ->select([$left, $right])
                 ->where(["$parent IS" => $nodeParent])
                 ->where(function ($exp) use ($config, $nodeLeft) {
@@ -660,7 +660,7 @@ class TreeBehavior : Behavior
         }
         if (!$targetNode) {
             /** @var \Cake\Datasource\EntityInterface|null $targetNode */
-            $targetNode = this._scope(this._table->find())
+            $targetNode = _scope(_table->find())
                 ->select([$left, $right])
                 ->where(["$parent IS" => $nodeParent])
                 ->where(function ($exp) use ($config, $nodeLeft) {
@@ -677,16 +677,16 @@ class TreeBehavior : Behavior
         }
 
         [$targetLeft] = array_values($targetNode->extract([$left, $right]));
-        $edge = this._getMax();
+        $edge = _getMax();
         $leftBoundary = $targetLeft;
         $rightBoundary = $nodeLeft - 1;
 
         $nodeToEdge = $edge - $nodeLeft + 1;
         $shift = $nodeRight - $nodeLeft + 1;
         $nodeToHole = $edge - $leftBoundary + 1;
-        this._sync($nodeToEdge, '+', "BETWEEN {$nodeLeft} AND {$nodeRight}");
-        this._sync($shift, '+', "BETWEEN {$leftBoundary} AND {$rightBoundary}");
-        this._sync($nodeToHole, '-', "> {$edge}");
+        _sync($nodeToEdge, '+', "BETWEEN {$nodeLeft} AND {$nodeRight}");
+        _sync($shift, '+', "BETWEEN {$leftBoundary} AND {$rightBoundary}");
+        _sync($nodeToHole, '-', "> {$edge}");
 
         $node->set($left, $targetLeft);
         $node->set($right, $targetLeft + $nodeRight - $nodeLeft);
@@ -714,10 +714,10 @@ class TreeBehavior : Behavior
             return false;
         }
 
-        return this._table->getConnection()->transactional(function () use ($node, $number) {
-            this._ensureFields($node);
+        return _table->getConnection()->transactional(function () use ($node, $number) {
+            _ensureFields($node);
 
-            return this._moveDown($node, $number);
+            return _moveDown($node, $number);
         });
     }
 
@@ -738,7 +738,7 @@ class TreeBehavior : Behavior
         $targetNode = null;
         if ($number != true) {
             /** @var \Cake\Datasource\EntityInterface|null $targetNode */
-            $targetNode = this._scope(this._table->find())
+            $targetNode = _scope(_table->find())
                 ->select([$left, $right])
                 ->where(["$parent IS" => $nodeParent])
                 ->where(function ($exp) use ($config, $nodeRight) {
@@ -752,7 +752,7 @@ class TreeBehavior : Behavior
         }
         if (!$targetNode) {
             /** @var \Cake\Datasource\EntityInterface|null $targetNode */
-            $targetNode = this._scope(this._table->find())
+            $targetNode = _scope(_table->find())
                 ->select([$left, $right])
                 ->where(["$parent IS" => $nodeParent])
                 ->where(function ($exp) use ($config, $nodeRight) {
@@ -769,16 +769,16 @@ class TreeBehavior : Behavior
         }
 
         [, $targetRight] = array_values($targetNode->extract([$left, $right]));
-        $edge = this._getMax();
+        $edge = _getMax();
         $leftBoundary = $nodeRight + 1;
         $rightBoundary = $targetRight;
 
         $nodeToEdge = $edge - $nodeLeft + 1;
         $shift = $nodeRight - $nodeLeft + 1;
         $nodeToHole = $edge - $rightBoundary + $shift;
-        this._sync($nodeToEdge, '+', "BETWEEN {$nodeLeft} AND {$nodeRight}");
-        this._sync($shift, '-', "BETWEEN {$leftBoundary} AND {$rightBoundary}");
-        this._sync($nodeToHole, '-', "> {$edge}");
+        _sync($nodeToEdge, '+', "BETWEEN {$nodeLeft} AND {$nodeRight}");
+        _sync($shift, '-', "BETWEEN {$leftBoundary} AND {$rightBoundary}");
+        _sync($nodeToHole, '-', "> {$edge}");
 
         $node->set($left, $targetRight - ($nodeRight - $nodeLeft));
         $node->set($right, $targetRight);
@@ -801,15 +801,15 @@ class TreeBehavior : Behavior
     {
         $config = this.getConfig();
         [$parent, $left, $right] = [$config['parent'], $config['left'], $config['right']];
-        $primaryKey = this._getPrimaryKey();
+        $primaryKey = _getPrimaryKey();
         $fields = [$parent, $left, $right];
         if ($config['level']) {
             $fields[] = $config['level'];
         }
 
-        $node = this._scope(this._table->find())
+        $node = _scope(_table->find())
             ->select($fields)
-            ->where([this._table->aliasField($primaryKey) => $id])
+            ->where([_table->aliasField($primaryKey) => $id])
             ->first();
 
         if (!$node) {
@@ -828,8 +828,8 @@ class TreeBehavior : Behavior
      */
     function recover(): void
     {
-        this._table->getConnection()->transactional(function (): void {
-            this._recoverTree();
+        _table->getConnection()->transactional(function (): void {
+            _recoverTree();
         });
     }
 
@@ -845,10 +845,10 @@ class TreeBehavior : Behavior
     {
         $config = this.getConfig();
         [$parent, $left, $right] = [$config['parent'], $config['left'], $config['right']];
-        $primaryKey = this._getPrimaryKey();
+        $primaryKey = _getPrimaryKey();
         $order = $config['recoverOrder'] ?: $primaryKey;
 
-        $nodes = this._scope(this._table->query())
+        $nodes = _scope(_table->query())
             ->select($primaryKey)
             ->where([$parent . ' IS' => $parentId])
             ->order($order)
@@ -857,14 +857,14 @@ class TreeBehavior : Behavior
 
         foreach ($nodes as $node) {
             $nodeLft = $lftRght++;
-            $lftRght = this._recoverTree($lftRght, $node[$primaryKey], $level + 1);
+            $lftRght = _recoverTree($lftRght, $node[$primaryKey], $level + 1);
 
             $fields = [$left => $nodeLft, $right => $lftRght++];
             if ($config['level']) {
                 $fields[$config['level']] = $level;
             }
 
-            this._table->updateAll(
+            _table->updateAll(
                 $fields,
                 [$primaryKey => $node[$primaryKey]]
             );
@@ -880,9 +880,9 @@ class TreeBehavior : Behavior
      */
     protected function _getMax(): int
     {
-        $field = this._config['right'];
-        $rightField = this._config['rightField'];
-        $edge = this._scope(this._table->find())
+        $field = _config['right'];
+        $rightField = _config['rightField'];
+        $edge = _scope(_table->find())
             ->select([$field])
             ->orderDesc($rightField)
             ->first();
@@ -908,10 +908,10 @@ class TreeBehavior : Behavior
      */
     protected function _sync(int $shift, string $dir, string $conditions, bool $mark = false): void
     {
-        $config = this._config;
+        $config = _config;
 
         foreach ([$config['leftField'], $config['rightField']] as $field) {
-            $query = this._scope(this._table->query());
+            $query = _scope(_table->query());
             $exp = $query->newExpr();
 
             $movement = clone $exp;
@@ -970,7 +970,7 @@ class TreeBehavior : Behavior
             return;
         }
 
-        $fresh = this._table->get($entity->get(this._getPrimaryKey()));
+        $fresh = _table->get($entity->get(_getPrimaryKey()));
         $entity->set($fresh->extract($fields), ['guard' => false]);
 
         foreach ($fields as $field) {
@@ -985,12 +985,12 @@ class TreeBehavior : Behavior
      */
     protected function _getPrimaryKey(): string
     {
-        if (!this._primaryKey) {
-            $primaryKey = (array)this._table->getPrimaryKey();
-            this._primaryKey = $primaryKey[0];
+        if (!_primaryKey) {
+            $primaryKey = (array)_table->getPrimaryKey();
+            _primaryKey = $primaryKey[0];
         }
 
-        return this._primaryKey;
+        return _primaryKey;
     }
 
     /**
@@ -1001,13 +1001,13 @@ class TreeBehavior : Behavior
      */
     function getLevel($entity)
     {
-        $primaryKey = this._getPrimaryKey();
+        $primaryKey = _getPrimaryKey();
         $id = $entity;
         if ($entity instanceof EntityInterface) {
             $id = $entity->get($primaryKey);
         }
         $config = this.getConfig();
-        $entity = this._table->find('all')
+        $entity = _table->find('all')
             ->select([$config['left'], $config['right']])
             ->where([$primaryKey => $id])
             ->first();
@@ -1016,11 +1016,11 @@ class TreeBehavior : Behavior
             return false;
         }
 
-        $query = this._table->find('all')->where([
+        $query = _table->find('all')->where([
             $config['left'] . ' <' => $entity[$config['left']],
             $config['right'] . ' >' => $entity[$config['right']],
         ]);
 
-        return this._scope($query)->count();
+        return _scope($query)->count();
     }
 }

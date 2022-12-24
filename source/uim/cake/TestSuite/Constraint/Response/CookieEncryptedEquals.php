@@ -68,7 +68,7 @@ class CookieEncryptedEquals : CookieEquals
     {
         $cookie = this.response->getCookie(this.cookieName);
 
-        return $cookie != null && this._decrypt($cookie['value'], this.mode) == $other;
+        return $cookie != null && _decrypt($cookie['value'], this.mode) == $other;
     }
 
     /**
