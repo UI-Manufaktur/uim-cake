@@ -123,11 +123,11 @@ class Collection : IteratorIterator : CollectionInterface, Serializable
         try {
             $count = this.count();
         } catch (Exception $e) {
-            $count = 'An exception occurred while getting count';
+            $count = "An exception occurred while getting count";
         }
 
         return [
-            'count': $count,
+            "count": $count,
         ];
     }
 }

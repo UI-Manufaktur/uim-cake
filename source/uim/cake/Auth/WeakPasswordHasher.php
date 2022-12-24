@@ -32,7 +32,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'hashType': null,
+        "hashType": null,
     ];
 
     /**
@@ -40,7 +40,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
      */
     public this(array $config = [])
     {
-        if (Configure::read('debug')) {
+        if (Configure::read("debug")) {
             Debugger::checkSecurityKeys();
         }
 
@@ -52,7 +52,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
      */
     function hash(string $password)
     {
-        return Security::hash($password, _config['hashType'], true);
+        return Security::hash($password, _config["hashType"], true);
     }
 
     /**

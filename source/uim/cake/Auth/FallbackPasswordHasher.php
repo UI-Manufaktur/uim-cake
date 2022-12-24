@@ -28,7 +28,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'hashers': [],
+        "hashers": [],
     ];
 
     /**
@@ -48,9 +48,9 @@ class FallbackPasswordHasher : AbstractPasswordHasher
     public this(array $config = [])
     {
         parent::__construct($config);
-        foreach (_config['hashers'] as $key: $hasher) {
-            if (is_array($hasher) && !isset($hasher['className'])) {
-                $hasher['className'] = $key;
+        foreach (_config["hashers"] as $key: $hasher) {
+            if (is_array($hasher) && !isset($hasher["className"])) {
+                $hasher["className"] = $key;
             }
             _hashers[] = PasswordHasherFactory::build($hasher);
         }

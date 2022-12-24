@@ -33,8 +33,8 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'hashType': PASSWORD_DEFAULT,
-        'hashOptions': [],
+        "hashType": PASSWORD_DEFAULT,
+        "hashOptions": [],
     ];
 
     /**
@@ -50,8 +50,8 @@ class DefaultPasswordHasher : AbstractPasswordHasher
         /** @psalm-suppress NullableReturnStatement */
         return password_hash(
             $password,
-            _config['hashType'],
-            _config['hashOptions']
+            _config["hashType"],
+            _config["hashOptions"]
         );
     }
 
@@ -76,6 +76,6 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      */
     function needsRehash(string $password): bool
     {
-        return password_needs_rehash($password, _config['hashType'], _config['hashOptions']);
+        return password_needs_rehash($password, _config["hashType"], _config["hashOptions"]);
     }
 }

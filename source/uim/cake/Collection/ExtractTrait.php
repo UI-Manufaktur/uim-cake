@@ -39,9 +39,9 @@ trait ExtractTrait
             return $path;
         }
 
-        $parts = explode('.', $path);
+        $parts = explode(".", $path);
 
-        if (strpos($path, '{*}') != false) {
+        if (strpos($path, "{*}") != false) {
             return function ($element) use ($parts) {
                 return _extract($element, $parts);
             };
@@ -67,7 +67,7 @@ trait ExtractTrait
         $collectionTransform = false;
 
         foreach ($parts as $i: $column) {
-            if ($column == '{*}') {
+            if ($column == "{*}") {
                 $collectionTransform = true;
                 continue;
             }
@@ -83,7 +83,7 @@ trait ExtractTrait
             }
 
             if ($collectionTransform) {
-                $rest = implode('.', array_slice($parts, $i));
+                $rest = implode(".", array_slice($parts, $i));
 
                 return (new Collection($data)).extract($rest);
             }

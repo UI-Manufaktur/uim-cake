@@ -174,7 +174,7 @@ trait CollectionTrait
     function extract($path): CollectionInterface
     {
         $extractor = new ExtractIterator(this.unwrap(), $path);
-        if (is_string($path) && strpos($path, '{*}') != false) {
+        if (is_string($path) && strpos($path, "{*}") != false) {
             $extractor = $extractor
                 .filter(function ($data) {
                     return $data != null && ($data instanceof Traversable || is_array($data));
@@ -269,8 +269,8 @@ trait CollectionTrait
             $pathValue = $callback($value);
             if ($pathValue == null) {
                 throw new InvalidArgumentException(
-                    'Cannot group by path that does not exist or contains a null value. ' .
-                    'Use a callback to return a default value for that path.'
+                    "Cannot group by path that does not exist or contains a null value. " .
+                    "Use a callback to return a default value for that path."
                 );
             }
             $group[$pathValue][] = $value;
@@ -290,8 +290,8 @@ trait CollectionTrait
             $pathValue = $callback($value);
             if ($pathValue == null) {
                 throw new InvalidArgumentException(
-                    'Cannot index by path that does not exist or contains a null value. ' .
-                    'Use a callback to return a default value for that path.'
+                    "Cannot index by path that does not exist or contains a null value. " .
+                    "Use a callback to return a default value for that path."
                 );
             }
             $group[$pathValue] = $value;
@@ -433,7 +433,7 @@ trait CollectionTrait
     function takeLast(int $length): CollectionInterface
     {
         if ($length < 1) {
-            throw new InvalidArgumentException('The takeLast method requires a number greater than 0.');
+            throw new InvalidArgumentException("The takeLast method requires a number greater than 0.");
         }
 
         $iterator = this.optimizeUnwrap();
@@ -475,7 +475,7 @@ trait CollectionTrait
              *  We can see that at the end of the iterations, the buffer contains all
              *  the last four elements, just in the wrong order. How do we keep the
              *  original order? Well, it turns out that the number of iteration also
-             *  give us a clue on what's going on, Let's add a marker for it now:
+             *  give us a clue on what"s going on, Let"s add a marker for it now:
              *
              * 0) 1 2 3 4
              *    ^ -- The 0) above now becomes the $offset variable
@@ -580,22 +580,22 @@ trait CollectionTrait
     function combine($keyPath, $valuePath, $groupPath = null): CollectionInterface
     {
         $options = [
-            'keyPath': _propertyExtractor($keyPath),
-            'valuePath': _propertyExtractor($valuePath),
-            'groupPath': $groupPath ? _propertyExtractor($groupPath) : null,
+            "keyPath": _propertyExtractor($keyPath),
+            "valuePath": _propertyExtractor($valuePath),
+            "groupPath": $groupPath ? _propertyExtractor($groupPath) : null,
         ];
 
         $mapper = function ($value, $key, MapReduce $mapReduce) use ($options) {
-            $rowKey = $options['keyPath'];
-            $rowVal = $options['valuePath'];
+            $rowKey = $options["keyPath"];
+            $rowVal = $options["valuePath"];
 
-            if (!$options['groupPath']) {
+            if (!$options["groupPath"]) {
                 $mapReduce.emit($rowVal($value, $key), $rowKey($value, $key));
 
                 return null;
             }
 
-            $key = $options['groupPath']($value, $key);
+            $key = $options["groupPath"]($value, $key);
             $mapReduce.emitIntermediate(
                 [$rowKey($value, $key): $rowVal($value, $key)],
                 $key
@@ -616,7 +616,7 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function nest($idPath, $parentPath, string $nestingKey = 'children'): CollectionInterface
+    function nest($idPath, $parentPath, string $nestingKey = "children"): CollectionInterface
     {
         $parents = [];
         $idPath = _propertyExtractor($idPath);
@@ -738,19 +738,19 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function listNested($order = 'desc', $nestingKey = 'children'): CollectionInterface
+    function listNested($order = "desc", $nestingKey = "children"): CollectionInterface
     {
         if (is_string($order)) {
             $order = strtolower($order);
             $modes = [
-                'desc': RecursiveIteratorIterator::SELF_FIRST,
-                'asc': RecursiveIteratorIterator::CHILD_FIRST,
-                'leaves': RecursiveIteratorIterator::LEAVES_ONLY,
+                "desc": RecursiveIteratorIterator::SELF_FIRST,
+                "asc": RecursiveIteratorIterator::CHILD_FIRST,
+                "leaves": RecursiveIteratorIterator::LEAVES_ONLY,
             ];
 
             if (!isset($modes[$order])) {
                 throw new RuntimeException(sprintf(
-                    "Invalid direction `%s` provided. Must be one of: 'desc', 'asc', 'leaves'",
+                    "Invalid direction `%s` provided. Must be one of: "desc", "asc", "leaves"",
                     $order
                 ));
             }
@@ -927,7 +927,7 @@ trait CollectionTrait
         foreach (this.toList() as $value) {
             $valueCount = count($value);
             if ($valueCount != count($value, COUNT_RECURSIVE)) {
-                throw new LogicException('Cannot find the cartesian product of a multidimensional array');
+                throw new LogicException("Cannot find the cartesian product of a multidimensional array");
             }
 
             $collectionArraysKeys[] = array_keys($value);
@@ -979,7 +979,7 @@ trait CollectionTrait
         $result = [];
         foreach ($arrayValue as $row) {
             if (count($row) != $length) {
-                throw new LogicException('Child arrays do not have even length');
+                throw new LogicException("Child arrays do not have even length");
             }
         }
 

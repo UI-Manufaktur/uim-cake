@@ -42,8 +42,8 @@ class ApcuEngine : CacheEngine
      */
     function init(array $config = []): bool
     {
-        if (!extension_loaded('apcu')) {
-            throw new RuntimeException('The `apcu` extension must be enabled to use ApcuEngine.');
+        if (!extension_loaded("apcu")) {
+            throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
         }
 
         return parent::init($config);
@@ -73,7 +73,7 @@ class ApcuEngine : CacheEngine
      *
      * @param string $key Identifier for the data
      * @param mixed $default Default value in case the cache misses.
-     * @return mixed The cached data, or default if the data doesn't exist,
+     * @return mixed The cached data, or default if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
      * @link https://secure.php.net/manual/en/function.apcu-fetch.php
      */
@@ -121,7 +121,7 @@ class ApcuEngine : CacheEngine
      * Delete a key from the cache
      *
      * @param string $key Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
     function delete($key): bool
@@ -142,7 +142,7 @@ class ApcuEngine : CacheEngine
     {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
-                '/^' . preg_quote(_config['prefix'], '/') . '/',
+                "/^" . preg_quote(_config["prefix"], "/") . "/",
                 APC_ITER_NONE
             );
             apcu_delete($iterator);
@@ -151,9 +151,9 @@ class ApcuEngine : CacheEngine
         }
 
         $cache = apcu_cache_info(); // Raises warning by itself already
-        foreach ($cache['cache_list'] as $key) {
-            if (strpos($key['info'], _config['prefix']) == 0) {
-                apcu_delete($key['info']);
+        foreach ($cache["cache_list"] as $key) {
+            if (strpos($key["info"], _config["prefix"]) == 0) {
+                apcu_delete($key["info"]);
             }
         }
 
@@ -161,7 +161,7 @@ class ApcuEngine : CacheEngine
     }
 
     /**
-     * Write data for key into cache if it doesn't exist already.
+     * Write data for key into cache if it doesn"t exist already.
      * If it already exists, it fails and returns false.
      *
      * @param string $key Identifier for the data.
@@ -172,7 +172,7 @@ class ApcuEngine : CacheEngine
     function add(string $key, $value): bool
     {
         $key = _key($key);
-        $duration = _config['duration'];
+        $duration = _config["duration"];
 
         return apcu_add($key, $value, $duration);
     }
@@ -185,20 +185,20 @@ class ApcuEngine : CacheEngine
     string[] groups()
     {
         if (empty(_compiledGroupNames)) {
-            foreach (_config['groups'] as $group) {
-                _compiledGroupNames[] = _config['prefix'] . $group;
+            foreach (_config["groups"] as $group) {
+                _compiledGroupNames[] = _config["prefix"] . $group;
             }
         }
 
         $success = false;
         $groups = apcu_fetch(_compiledGroupNames, $success);
-        if ($success && count($groups) != count(_config['groups'])) {
+        if ($success && count($groups) != count(_config["groups"])) {
             foreach (_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
                     $value = 1;
                     if (apcu_store($group, $value) == false) {
                         this.warning(
-                            sprintf('Failed to store key "%s" with value "%s" into APCu cache.', $group, $value)
+                            sprintf("Failed to store key "%s" with value "%s" into APCu cache.", $group, $value)
                         );
                     }
                     $groups[$group] = $value;
@@ -209,7 +209,7 @@ class ApcuEngine : CacheEngine
 
         $result = [];
         $groups = array_values($groups);
-        foreach (_config['groups'] as $i: $group) {
+        foreach (_config["groups"] as $i: $group) {
             $result[] = $group . $groups[$i];
         }
 
@@ -227,7 +227,7 @@ class ApcuEngine : CacheEngine
     function clearGroup(string $group): bool
     {
         $success = false;
-        apcu_inc(_config['prefix'] . $group, 1, $success);
+        apcu_inc(_config["prefix"] . $group, 1, $success);
 
         return $success;
     }

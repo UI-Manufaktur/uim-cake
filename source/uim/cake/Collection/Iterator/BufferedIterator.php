@@ -22,7 +22,7 @@ use SplDoublyLinkedList;
 
 /**
  * Creates an iterator from another iterator that will keep the results of the inner
- * iterator in memory, so that results don't have to be re-calculated.
+ * iterator in memory, so that results don"t have to be re-calculated.
  */
 class BufferedIterator : Collection : Countable, Serializable
 {
@@ -55,7 +55,7 @@ class BufferedIterator : Collection : Countable, Serializable
     protected $_key;
 
     /**
-     * Whether the internal iterator's rewind method was already
+     * Whether the internal iterator"s rewind method was already
      * called
      *
      * @var bool
@@ -129,8 +129,8 @@ class BufferedIterator : Collection : Countable, Serializable
     {
         if (_buffer.offsetExists(_index)) {
             $current = _buffer.offsetGet(_index);
-            _current = $current['value'];
-            _key = $current['key'];
+            _current = $current["value"];
+            _key = $current["key"];
 
             return true;
         }
@@ -141,8 +141,8 @@ class BufferedIterator : Collection : Countable, Serializable
             _current = parent::current();
             _key = parent::key();
             _buffer.push([
-                'key': _key,
-                'value': _current,
+                "key": _key,
+                "value": _current,
             ]);
         }
 
@@ -160,7 +160,7 @@ class BufferedIterator : Collection : Countable, Serializable
     {
         _index++;
 
-        // Don't move inner iterator if we have more buffer
+        // Don"t move inner iterator if we have more buffer
         if (_buffer.offsetExists(_index)) {
             return;
         }

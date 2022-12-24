@@ -18,15 +18,15 @@ use Cake\Core\Configure;
 use Cake\Error\Debugger;
 use Psy\Shell as PsyShell;
 
-define('SECOND', 1);
-define('MINUTE', 60);
-define('HOUR', 3600);
-define('DAY', 86400);
-define('WEEK', 604800);
-define('MONTH', 2592000);
-define('YEAR', 31536000);
+define("SECOND", 1);
+define("MINUTE", 60);
+define("HOUR", 3600);
+define("DAY", 86400);
+define("WEEK", 604800);
+define("MONTH", 2592000);
+define("YEAR", 31536000);
 
-if (!function_exists('debug')) {
+if (!function_exists("debug")) {
     /**
      * Prints out debug information about given variable and returns the
      * variable that was passed.
@@ -42,17 +42,17 @@ if (!function_exists('debug')) {
      */
     function debug($var, $showHtml = null, $showFrom = true)
     {
-        if (!Configure::read('debug')) {
+        if (!Configure::read("debug")) {
             return $var;
         }
 
         $location = [];
         if ($showFrom) {
-            $trace = Debugger::trace(['start': 1, 'depth': 2, 'format': 'array']);
+            $trace = Debugger::trace(["start": 1, "depth": 2, "format": "array"]);
             /** @psalm-suppress PossiblyInvalidArrayOffset */
             $location = [
-                'line': $trace[0]['line'],
-                'file': $trace[0]['file'],
+                "line": $trace[0]["line"],
+                "file": $trace[0]["file"],
             ];
         }
 
@@ -63,7 +63,7 @@ if (!function_exists('debug')) {
 
 }
 
-if (!function_exists('stackTrace')) {
+if (!function_exists("stackTrace")) {
     /**
      * Outputs a stack trace based on the supplied options.
      *
@@ -79,12 +79,12 @@ if (!function_exists('stackTrace')) {
      */
     function stackTrace(array $options = []): void
     {
-        if (!Configure::read('debug')) {
+        if (!Configure::read("debug")) {
             return;
         }
 
-        $options += ['start': 0];
-        $options['start']++;
+        $options += ["start": 0];
+        $options["start"]++;
 
         /** @var string $trace */
         $trace = Debugger::trace($options);
@@ -93,7 +93,7 @@ if (!function_exists('stackTrace')) {
 
 }
 
-if (!function_exists('breakpoint')) {
+if (!function_exists("breakpoint")) {
     /**
      * Command to return the eval-able code to startup PsySH in interactive debugger
      * Works the same way as eval(\Psy\sh());
@@ -108,11 +108,11 @@ if (!function_exists('breakpoint')) {
      */
     function breakpoint(): ?string
     {
-        if ((PHP_SAPI == 'cli' || PHP_SAPI == 'phpdbg') && class_exists(PsyShell::class)) {
-            return 'extract(\Psy\Shell::debug(get_defined_vars(), isset(this) ? this : null));';
+        if ((PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") && class_exists(PsyShell::class)) {
+            return "extract(\Psy\Shell::debug(get_defined_vars(), isset(this) ? this : null));";
         }
         trigger_error(
-            'psy/psysh must be installed and you must be in a CLI environment to use the breakpoint function',
+            "psy/psysh must be installed and you must be in a CLI environment to use the breakpoint function",
             E_USER_WARNING
         );
 
@@ -120,7 +120,7 @@ if (!function_exists('breakpoint')) {
     }
 }
 
-if (!function_exists('dd')) {
+if (!function_exists("dd")) {
     /**
      * Prints out debug information about given variable and dies.
      *
@@ -134,15 +134,15 @@ if (!function_exists('dd')) {
      */
     function dd($var, $showHtml = null): void
     {
-        if (!Configure::read('debug')) {
+        if (!Configure::read("debug")) {
             return;
         }
 
-        $trace = Debugger::trace(['start': 1, 'depth': 2, 'format': 'array']);
+        $trace = Debugger::trace(["start": 1, "depth": 2, "format": "array"]);
         /** @psalm-suppress PossiblyInvalidArrayOffset */
         $location = [
-            'line': $trace[0]['line'],
-            'file': $trace[0]['file'],
+            "line": $trace[0]["line"],
+            "file": $trace[0]["file"],
         ];
 
         Debugger::printVar($var, $location, $showHtml);

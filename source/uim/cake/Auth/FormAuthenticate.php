@@ -26,14 +26,14 @@ use Cake\Http\ServerRequest;
  *
  * ### Using Form auth
  *
- * Load `AuthComponent` in your controller's `initialize()` and add 'Form' in 'authenticate' key
+ * Load `AuthComponent` in your controller"s `initialize()` and add "Form" in "authenticate" key
  *
  * ```
- * this.loadComponent('Auth', [
- *     'authenticate': [
- *         'Form': [
- *             'fields': ['username': 'email', 'password': 'passwd'],
- *             'finder': 'auth',
+ * this.loadComponent("Auth", [
+ *     "authenticate": [
+ *         "Form": [
+ *             "fields": ["username": "email", "password": "passwd"],
+ *             "finder": "auth",
  *         ]
  *     ]
  * ]);
@@ -55,7 +55,7 @@ class FormAuthenticate : BaseAuthenticate
      */
     protected function _checkFields(ServerRequest $request, array $fields): bool
     {
-        foreach ([$fields['username'], $fields['password']] as $field) {
+        foreach ([$fields["username"], $fields["password"]] as $field) {
             $value = $request.getData($field);
             if (empty($value) || !is_string($value)) {
                 return false;
@@ -76,14 +76,14 @@ class FormAuthenticate : BaseAuthenticate
      */
     function authenticate(ServerRequest $request, Response $response)
     {
-        $fields = _config['fields'];
+        $fields = _config["fields"];
         if (!_checkFields($request, $fields)) {
             return false;
         }
 
         return _findUser(
-            $request.getData($fields['username']),
-            $request.getData($fields['password'])
+            $request.getData($fields["username"]),
+            $request.getData($fields["password"])
         );
     }
 }

@@ -13,7 +13,7 @@ Collections can be created using an array or Traversable object.  A simple use o
 ```php
 use Cake\Collection\Collection;
 
-$items = ['a': 1, 'b': 2, 'c': 3];
+$items = ["a": 1, "b": 2, "c": 3];
 $collection = new Collection($items);
 
 // Create a new collection containing elements

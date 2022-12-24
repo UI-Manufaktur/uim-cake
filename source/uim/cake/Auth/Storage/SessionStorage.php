@@ -54,8 +54,8 @@ class SessionStorage : IStorage
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key': 'Auth.User',
-        'redirect': 'Auth.redirect',
+        "key": "Auth.User",
+        "redirect": "Auth.redirect",
     ];
 
     /**
@@ -84,7 +84,7 @@ class SessionStorage : IStorage
         }
 
         /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-        _user = _session.read(_config['key']) ?: false;
+        _user = _session.read(_config["key"]) ?: false;
 
         /** @psalm-suppress InvalidReturnStatement */
         return _user ?: null;
@@ -103,7 +103,7 @@ class SessionStorage : IStorage
         _user = $user;
 
         _session.renew();
-        _session.write(_config['key'], $user);
+        _session.write(_config["key"], $user);
     }
 
     /**
@@ -117,7 +117,7 @@ class SessionStorage : IStorage
     {
         _user = false;
 
-        _session.delete(_config['key']);
+        _session.delete(_config["key"]);
         _session.renew();
     }
 
@@ -127,16 +127,16 @@ class SessionStorage : IStorage
     function redirectUrl($url = null)
     {
         if ($url == null) {
-            return _session.read(_config['redirect']);
+            return _session.read(_config["redirect"]);
         }
 
         if ($url == false) {
-            _session.delete(_config['redirect']);
+            _session.delete(_config["redirect"]);
 
             return null;
         }
 
-        _session.write(_config['redirect'], $url);
+        _session.write(_config["redirect"], $url);
 
         return null;
     }

@@ -38,19 +38,19 @@ class PasswordHasherFactory
         if (is_string($passwordHasher)) {
             $class = $passwordHasher;
         } else {
-            $class = $passwordHasher['className'];
+            $class = $passwordHasher["className"];
             $config = $passwordHasher;
-            unset($config['className']);
+            unset($config["className"]);
         }
 
-        $className = App::className($class, 'Auth', 'PasswordHasher');
+        $className = App::className($class, "Auth", "PasswordHasher");
         if ($className == null) {
-            throw new RuntimeException(sprintf('Password hasher class "%s" was not found.', $class));
+            throw new RuntimeException(sprintf("Password hasher class "%s" was not found.", $class));
         }
 
         $hasher = new $className($config);
         if (!($hasher instanceof AbstractPasswordHasher)) {
-            throw new RuntimeException('Password hasher must extend AbstractPasswordHasher class.');
+            throw new RuntimeException("Password hasher must extend AbstractPasswordHasher class.");
         }
 
         return $hasher;

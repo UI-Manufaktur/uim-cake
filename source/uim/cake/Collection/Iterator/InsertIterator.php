@@ -73,7 +73,7 @@ class InsertIterator : Collection
             $values = new Collection($values);
         }
 
-        $path = explode('.', $path);
+        $path = explode(".", $path);
         $target = array_pop($path);
         _path = $path;
         _target = $target;

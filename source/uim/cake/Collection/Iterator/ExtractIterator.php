@@ -44,10 +44,10 @@ class ExtractIterator : Collection
      *
      * ```
      * $items = [
-     *  ['comment': ['body': 'cool', 'user': ['name': 'Mark']],
-     *  ['comment': ['body': 'very cool', 'user': ['name': 'Renan']]
+     *  ["comment": ["body": "cool", "user": ["name": "Mark"]],
+     *  ["comment": ["body": "very cool", "user": ["name": "Renan"]]
      * ];
-     * $extractor = new ExtractIterator($items, 'comment.user.name'');
+     * $extractor = new ExtractIterator($items, "comment.user.name"");
      * ```
      *
      * @param iterable $items The list of values to iterate
@@ -91,7 +91,7 @@ class ExtractIterator : Collection
         }
 
         // ArrayIterator can be traversed strictly.
-        // Let's do that for performance gains
+        // Let"s do that for performance gains
 
         $callback = _extractor;
         $res = [];

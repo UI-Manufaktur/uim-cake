@@ -30,11 +30,11 @@ class CacheListCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'cache list';
+        return "cache list";
     }
 
     /**
-     * Hook method for defining this command's option parser.
+     * Hook method for defining this command"s option parser.
      *
      * @see https://book.cakephp.org/4/en/console-commands/option-parsers.html
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
@@ -43,7 +43,7 @@ class CacheListCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser = parent::buildOptionParser($parser);
-        $parser.setDescription('Show a list of configured caches.');
+        $parser.setDescription("Show a list of configured caches.");
 
         return $parser;
     }

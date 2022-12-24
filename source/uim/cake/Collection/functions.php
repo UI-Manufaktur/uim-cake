@@ -17,7 +17,7 @@
 use Cake\Collection\Collection;
 use Cake\Collection\CollectionInterface;
 
-if (!function_exists('collection')) {
+if (!function_exists("collection")) {
     /**
      * Returns a new {@link \Cake\Collection\Collection} object wrapping the passed argument.
      *

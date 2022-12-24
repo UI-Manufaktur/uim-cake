@@ -26,13 +26,13 @@ use Cake\Utility\Security;
  *
  * ### Using Digest auth
  *
- * Load `AuthComponent` in your controller's `initialize()` and add 'Digest' in 'authenticate' key
+ * Load `AuthComponent` in your controller"s `initialize()` and add "Digest" in "authenticate" key
  *
  * ```
- *  this.loadComponent('Auth', [
- *      'authenticate': ['Digest'],
- *      'storage': 'Memory',
- *      'unauthorizedRedirect': false,
+ *  this.loadComponent("Auth", [
+ *      "authenticate": ["Digest"],
+ *      "storage": "Memory",
+ *      "unauthorizedRedirect": false,
  *  ]);
  * ```
  *
@@ -42,7 +42,7 @@ use Cake\Utility\Security;
  * You should set `unauthorizedRedirect` to `false`. This causes `AuthComponent` to
  * throw a `ForbiddenException` exception instead of redirecting to another page.
  *
- * Since HTTP Digest Authentication is stateless you don't need call `setUser()`
+ * Since HTTP Digest Authentication is stateless you don"t need call `setUser()`
  * in your controller. The user credentials will be checked on each request. If
  * valid credentials are not provided, required authentication headers will be sent
  * by this authentication provider which triggers the login dialog in the browser/client.
@@ -53,11 +53,11 @@ use Cake\Utility\Security;
  * You can generate this password using `DigestAuthenticate::password()`
  *
  * ```
- * $digestPass = DigestAuthenticate::password($username, $password, env('SERVER_NAME'));
+ * $digestPass = DigestAuthenticate::password($username, $password, env("SERVER_NAME"));
  * ```
  *
  * If you wish to use digest authentication alongside other authentication methods,
- * it's recommended that you store the digest authentication separately. For
+ * it"s recommended that you store the digest authentication separately. For
  * example `User.digest_pass` could be used for a digest password, while
  * `User.password` would store the password hash for use with other methods like
  * Basic or Form.
@@ -74,9 +74,9 @@ class DigestAuthenticate : BasicAuthenticate
      *
      * - `secret` The secret to use for nonce validation. Defaults to Security::getSalt().
      * - `realm` The realm authentication is for, Defaults to the servername.
-     * - `qop` Defaults to 'auth', no other values are supported at this time.
+     * - `qop` Defaults to "auth", no other values are supported at this time.
      * - `opaque` A string that must be returned unchanged by clients.
-     *    Defaults to `md5($config['realm'])`
+     *    Defaults to `md5($config["realm"])`
      * - `nonceLifetime` The number of seconds that nonces are valid for. Defaults to 300.
      *
      * @param \Cake\Controller\ComponentRegistry $registry The Component registry
@@ -86,11 +86,11 @@ class DigestAuthenticate : BasicAuthenticate
     public this(ComponentRegistry $registry, array $config = [])
     {
         this.setConfig([
-            'nonceLifetime': 300,
-            'secret': Security::getSalt(),
-            'realm': null,
-            'qop': 'auth',
-            'opaque': null,
+            "nonceLifetime": 300,
+            "secret": Security::getSalt(),
+            "realm": null,
+            "qop": "auth",
+            "opaque": null,
         ]);
 
         parent::__construct($registry, $config);
@@ -109,26 +109,26 @@ class DigestAuthenticate : BasicAuthenticate
             return false;
         }
 
-        $user = _findUser($digest['username']);
+        $user = _findUser($digest["username"]);
         if (empty($user)) {
             return false;
         }
 
-        if (!this.validNonce($digest['nonce'])) {
+        if (!this.validNonce($digest["nonce"])) {
             return false;
         }
 
-        $field = _config['fields']['password'];
+        $field = _config["fields"]["password"];
         $password = $user[$field];
         unset($user[$field]);
 
-        $requestMethod = $request.getEnv('ORIGINAL_REQUEST_METHOD') ?: $request.getMethod();
+        $requestMethod = $request.getEnv("ORIGINAL_REQUEST_METHOD") ?: $request.getMethod();
         $hash = this.generateResponseHash(
             $digest,
             $password,
             (string)$requestMethod
         );
-        if (hash_equals($hash, $digest['response'])) {
+        if (hash_equals($hash, $digest["response"])) {
             return $user;
         }
 
@@ -143,11 +143,11 @@ class DigestAuthenticate : BasicAuthenticate
      */
     protected function _getDigest(ServerRequest $request): ?array
     {
-        $digest = $request.getEnv('PHP_AUTH_DIGEST');
-        if (empty($digest) && function_exists('apache_request_headers')) {
+        $digest = $request.getEnv("PHP_AUTH_DIGEST");
+        if (empty($digest) && function_exists("apache_request_headers")) {
             $headers = apache_request_headers();
-            if (!empty($headers['Authorization']) && substr($headers['Authorization'], 0, 7) == 'Digest ') {
-                $digest = substr($headers['Authorization'], 7);
+            if (!empty($headers["Authorization"]) && substr($headers["Authorization"], 0, 7) == "Digest ") {
+                $digest = substr($headers["Authorization"], 7);
             }
         }
         if (empty($digest)) {
@@ -165,12 +165,12 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function parseAuthData(string $digest): ?array
     {
-        if (substr($digest, 0, 7) == 'Digest ') {
+        if (substr($digest, 0, 7) == "Digest ") {
             $digest = substr($digest, 7);
         }
         $keys = $match = [];
-        $req = ['nonce': 1, 'nc': 1, 'cnonce': 1, 'qop': 1, 'username': 1, 'uri': 1, 'response': 1];
-        preg_match_all('/(\w+)=([\'"]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/', $digest, $match, PREG_SET_ORDER);
+        $req = ["nonce": 1, "nc": 1, "cnonce": 1, "qop": 1, "username": 1, "uri": 1, "response": 1];
+        preg_match_all("/(\w+)=([\""]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/", $digest, $match, PREG_SET_ORDER);
 
         foreach ($match as $i) {
             $keys[$i[1]] = $i[3];
@@ -196,8 +196,8 @@ class DigestAuthenticate : BasicAuthenticate
     {
         return md5(
             $password .
-            ':' . $digest['nonce'] . ':' . $digest['nc'] . ':' . $digest['cnonce'] . ':' . $digest['qop'] . ':' .
-            md5($method . ':' . $digest['uri'])
+            ":" . $digest["nonce"] . ":" . $digest["nc"] . ":" . $digest["cnonce"] . ":" . $digest["qop"] . ":" .
+            md5($method . ":" . $digest["uri"])
         );
     }
 
@@ -211,7 +211,7 @@ class DigestAuthenticate : BasicAuthenticate
      */
     public static function password(string $username, string $password, string $realm): string
     {
-        return md5($username . ':' . $realm . ':' . $password);
+        return md5($username . ":" . $realm . ":" . $password);
     }
 
     /**
@@ -222,32 +222,32 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function loginHeaders(ServerRequest $request): array
     {
-        $realm = _config['realm'] ?: $request.getEnv('SERVER_NAME');
+        $realm = _config["realm"] ?: $request.getEnv("SERVER_NAME");
 
         $options = [
-            'realm': $realm,
-            'qop': _config['qop'],
-            'nonce': this.generateNonce(),
-            'opaque': _config['opaque'] ?: md5($realm),
+            "realm": $realm,
+            "qop": _config["qop"],
+            "nonce": this.generateNonce(),
+            "opaque": _config["opaque"] ?: md5($realm),
         ];
 
         $digest = _getDigest($request);
-        if ($digest && isset($digest['nonce']) && !this.validNonce($digest['nonce'])) {
-            $options['stale'] = true;
+        if ($digest && isset($digest["nonce"]) && !this.validNonce($digest["nonce"])) {
+            $options["stale"] = true;
         }
 
         $opts = [];
         foreach ($options as $k: $v) {
             if (is_bool($v)) {
-                $v = $v ? 'true' : 'false';
-                $opts[] = sprintf('%s=%s', $k, $v);
+                $v = $v ? "true" : "false";
+                $opts[] = sprintf("%s=%s", $k, $v);
             } else {
-                $opts[] = sprintf('%s="%s"', $k, $v);
+                $opts[] = sprintf("%s="%s"", $k, $v);
             }
         }
 
         return [
-            'WWW-Authenticate': 'Digest ' . implode(',', $opts),
+            "WWW-Authenticate": "Digest " . implode(",", $opts),
         ];
     }
 
@@ -258,10 +258,10 @@ class DigestAuthenticate : BasicAuthenticate
      */
     protected function generateNonce(): string
     {
-        $expiryTime = microtime(true) + this.getConfig('nonceLifetime');
-        $secret = this.getConfig('secret');
-        $signatureValue = hash_hmac('sha256', $expiryTime . ':' . $secret, $secret);
-        $nonceValue = $expiryTime . ':' . $signatureValue;
+        $expiryTime = microtime(true) + this.getConfig("nonceLifetime");
+        $secret = this.getConfig("secret");
+        $signatureValue = hash_hmac("sha256", $expiryTime . ":" . $secret, $secret);
+        $nonceValue = $expiryTime . ":" . $signatureValue;
 
         return base64_encode($nonceValue);
     }
@@ -278,7 +278,7 @@ class DigestAuthenticate : BasicAuthenticate
         if ($value == false) {
             return false;
         }
-        $parts = explode(':', $value);
+        $parts = explode(":", $value);
         if (count($parts) != 2) {
             return false;
         }
@@ -286,8 +286,8 @@ class DigestAuthenticate : BasicAuthenticate
         if ($expires < microtime(true)) {
             return false;
         }
-        $secret = this.getConfig('secret');
-        $check = hash_hmac('sha256', $expires . ':' . $secret, $secret);
+        $secret = this.getConfig("secret");
+        $check = hash_hmac("sha256", $expires . ":" . $secret, $secret);
 
         return hash_equals($check, $checksum);
     }

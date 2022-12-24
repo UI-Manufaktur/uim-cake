@@ -30,19 +30,19 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
     /**
      * @var string
      */
-    protected const CHECK_KEY = 'key';
+    protected const CHECK_KEY = "key";
 
     /**
      * @var string
      */
-    protected const CHECK_VALUE = 'value';
+    protected const CHECK_VALUE = "value";
 
     /**
      * The default cache configuration is overridden in most cache adapters. These are
      * the keys that are common to all adapters. If overridden, this property is not used.
      *
      * - `duration` Specify how long items in this cache configuration last.
-     * - `groups` List of groups or 'tags' associated to every key stored in this config.
+     * - `groups` List of groups or "tags" associated to every key stored in this config.
      *    handy for deleting a complete group from cache.
      * - `prefix` Prefix appended to all entries. Good for when you need to share a keyspace
      *    with either another cache config or another application.
@@ -52,10 +52,10 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'duration': 3600,
-        'groups': [],
-        'prefix': 'cake_',
-        'warnOnWriteFailures': true,
+        "duration": 3600,
+        "groups": [],
+        "prefix": "cake_",
+        "warnOnWriteFailures": true,
     ];
 
     /**
@@ -64,7 +64,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      *
      * @var string
      */
-    protected $_groupPrefix = '';
+    protected $_groupPrefix = "";
 
     /**
      * Initialize the cache engine
@@ -79,12 +79,12 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
     {
         this.setConfig($config);
 
-        if (!empty(_config['groups'])) {
-            sort(_config['groups']);
-            _groupPrefix = str_repeat('%s_', count(_config['groups']));
+        if (!empty(_config["groups"])) {
+            sort(_config["groups"]);
+            _groupPrefix = str_repeat("%s_", count(_config["groups"]));
         }
-        if (!is_numeric(_config['duration'])) {
-            _config['duration'] = strtotime(_config['duration']) - time();
+        if (!is_numeric(_config["duration"])) {
+            _config["duration"] = strtotime(_config["duration"]) - time();
         }
 
         return true;
@@ -100,7 +100,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
     protected function ensureValidKey($key): void
     {
         if (!is_string($key) || strlen($key) == 0) {
-            throw new InvalidArgumentException('A cache key must be a non-empty string.');
+            throw new InvalidArgumentException("A cache key must be a non-empty string.");
         }
     }
 
@@ -116,8 +116,8 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
     {
         if (!is_iterable($iterable)) {
             throw new InvalidArgumentException(sprintf(
-                'A cache %s must be either an array or a Traversable.',
-                $check == self::CHECK_VALUE ? 'key set' : 'set'
+                "A cache %s must be either an array or a Traversable.",
+                $check == self::CHECK_VALUE ? "key set" : "set"
             ));
         }
 
@@ -167,8 +167,8 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
         this.ensureValidType($values, self::CHECK_KEY);
 
         if ($ttl != null) {
-            $restore = this.getConfig('duration');
-            this.setConfig('duration', $ttl);
+            $restore = this.getConfig("duration");
+            this.setConfig("duration", $ttl);
         }
         try {
             foreach ($values as $key: $value) {
@@ -181,7 +181,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
             return true;
         } finally {
             if (isset($restore)) {
-                this.setConfig('duration', $restore);
+                this.setConfig("duration", $restore);
             }
         }
     }
@@ -275,7 +275,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      * Delete a key from the cache
      *
      * @param string $key Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     abstract function delete($key): bool;
 
@@ -323,7 +323,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      */
     string[] groups(): array
     {
-        return _config['groups'];
+        return _config["groups"];
     }
 
     /**
@@ -334,19 +334,19 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      *
      * @param string $key the key passed over
      * @return string Prefixed key with potentially unsafe characters replaced.
-     * @throws \Cake\Cache\InvalidArgumentException If key's value is invalid.
+     * @throws \Cake\Cache\InvalidArgumentException If key"s value is invalid.
      */
     protected function _key($key): string
     {
         this.ensureValidKey($key);
 
-        $prefix = '';
+        $prefix = "";
         if (_groupPrefix) {
-            $prefix = md5(implode('_', this.groups()));
+            $prefix = md5(implode("_", this.groups()));
         }
-        $key = preg_replace('/[\s]+/', '_', $key);
+        $key = preg_replace("/[\s]+/", "_", $key);
 
-        return _config['prefix'] . $prefix . $key;
+        return _config["prefix"] . $prefix . $key;
     }
 
     /**
@@ -358,7 +358,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      */
     protected function warning(string $message): void
     {
-        if (this.getConfig('warnOnWriteFailures') != true) {
+        if (this.getConfig("warnOnWriteFailures") != true) {
             return;
         }
 
@@ -369,23 +369,23 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      * Convert the various expressions of a TTL value into duration in seconds
      *
      * @param \DateInterval|int|null $ttl The TTL value of this item. If null is sent, the
-     *   driver's default duration will be used.
+     *   driver"s default duration will be used.
      * @return int
      */
     protected function duration($ttl): int
     {
         if ($ttl == null) {
-            return _config['duration'];
+            return _config["duration"];
         }
         if (is_int($ttl)) {
             return $ttl;
         }
         if ($ttl instanceof DateInterval) {
-            return (int)DateTime::createFromFormat('U', '0')
+            return (int)DateTime::createFromFormat("U", "0")
                 .add($ttl)
-                .format('U');
+                .format("U");
         }
 
-        throw new InvalidArgumentException('TTL values must be one of null, int, \DateInterval');
+        throw new InvalidArgumentException("TTL values must be one of null, int, \DateInterval");
     }
 }

@@ -43,8 +43,8 @@ class WincacheEngine : CacheEngine
      */
     function init(array $config = []): bool
     {
-        if (!extension_loaded('wincache')) {
-            throw new RuntimeException('The `wincache` extension must be enabled to use WincacheEngine.');
+        if (!extension_loaded("wincache")) {
+            throw new RuntimeException("The `wincache` extension must be enabled to use WincacheEngine.");
         }
 
         parent::init($config);
@@ -75,7 +75,7 @@ class WincacheEngine : CacheEngine
      *
      * @param string $key Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
-     * @return mixed The cached data, or default value if the data doesn't exist,
+     * @return mixed The cached data, or default value if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
      */
     function get($key, $default = null)
@@ -120,7 +120,7 @@ class WincacheEngine : CacheEngine
      * Delete a key from the cache
      *
      * @param string $key Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     function delete($key): bool
     {
@@ -138,11 +138,11 @@ class WincacheEngine : CacheEngine
     function clear(): bool
     {
         $info = wincache_ucache_info();
-        $cacheKeys = $info['ucache_entries'];
+        $cacheKeys = $info["ucache_entries"];
         unset($info);
         foreach ($cacheKeys as $key) {
-            if (strpos($key['key_name'], _config['prefix']) == 0) {
-                wincache_ucache_delete($key['key_name']);
+            if (strpos($key["key_name"], _config["prefix"]) == 0) {
+                wincache_ucache_delete($key["key_name"]);
             }
         }
 
@@ -157,13 +157,13 @@ class WincacheEngine : CacheEngine
     string[] groups()
     {
         if (empty(_compiledGroupNames)) {
-            foreach (_config['groups'] as $group) {
-                _compiledGroupNames[] = _config['prefix'] . $group;
+            foreach (_config["groups"] as $group) {
+                _compiledGroupNames[] = _config["prefix"] . $group;
             }
         }
 
         $groups = wincache_ucache_get(_compiledGroupNames);
-        if (count($groups) != count(_config['groups'])) {
+        if (count($groups) != count(_config["groups"])) {
             foreach (_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
                     wincache_ucache_set($group, 1);
@@ -175,7 +175,7 @@ class WincacheEngine : CacheEngine
 
         $result = [];
         $groups = array_values($groups);
-        foreach (_config['groups'] as $i: $group) {
+        foreach (_config["groups"] as $i: $group) {
             $result[] = $group . $groups[$i];
         }
 
@@ -192,7 +192,7 @@ class WincacheEngine : CacheEngine
     function clearGroup(string $group): bool
     {
         $success = false;
-        wincache_ucache_inc(_config['prefix'] . $group, 1, $success);
+        wincache_ucache_inc(_config["prefix"] . $group, 1, $success);
 
         return $success;
     }

@@ -68,7 +68,7 @@ class TreeIterator : RecursiveIteratorIterator : CollectionInterface
      * ### Example
      *
      * ```
-     *  $printer = (new Collection($treeStructure)).listNested().printer('name');
+     *  $printer = (new Collection($treeStructure)).listNested().printer("name");
      * ```
      *
      * Using a closure:
@@ -89,7 +89,7 @@ class TreeIterator : RecursiveIteratorIterator : CollectionInterface
      * their depth in the tree
      * @return \Cake\Collection\Iterator\TreePrinter
      */
-    function printer($valuePath, $keyPath = null, $spacer = '__')
+    function printer($valuePath, $keyPath = null, $spacer = "__")
     {
         if (!$keyPath) {
             $counter = 0;

@@ -35,24 +35,24 @@ abstract class BaseAuthenticate : IEventListener
      *
      * - `fields` The fields to use to identify a user by.
      * - `userModel` The alias for users table, defaults to Users.
-     * - `finder` The finder method to use to fetch user record. Defaults to 'all'.
+     * - `finder` The finder method to use to fetch user record. Defaults to "all".
      *   You can set finder name as string or an array where key is finder name and value
      *   is an array passed to `Table::find()` options.
-     *   E.g. ['finderName': ['some_finder_option': 'some_value']]
+     *   E.g. ["finderName": ["some_finder_option": "some_value"]]
      * - `passwordHasher` Password hasher class. Can be a string specifying class name
      *    or an array containing `className` key, any other keys will be passed as
-     *    config to the class. Defaults to 'Default'.
+     *    config to the class. Defaults to "Default".
      *
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'fields': [
-            'username': 'username',
-            'password': 'password',
+        "fields": [
+            "username": "username",
+            "password": "password",
         ],
-        'userModel': 'Users',
-        'finder': 'all',
-        'passwordHasher': 'Default',
+        "userModel": "Users",
+        "finder": "all",
+        "passwordHasher": "Default",
     ];
 
     /**
@@ -92,7 +92,7 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * Find a user record using the username and password provided.
      *
-     * Input passwords will be hashed even when a user doesn't exist. This
+     * Input passwords will be hashed even when a user doesn"t exist. This
      * helps mitigate timing attacks that are attempting to find valid usernames.
      *
      * @param string $username The username/identifier.
@@ -106,9 +106,9 @@ abstract class BaseAuthenticate : IEventListener
 
         if ($result == null) {
             // Waste time hashing the password, to prevent
-            // timing side-channels. However, don't hash
+            // timing side-channels. However, don"t hash
             // null passwords as authentication systems
-            // like digest auth don't use passwords
+            // like digest auth don"t use passwords
             // and hashing *could* create a timing side-channel.
             if ($password != null) {
                 $hasher = this.passwordHasher();
@@ -118,12 +118,12 @@ abstract class BaseAuthenticate : IEventListener
             return false;
         }
 
-        $passwordField = _config['fields']['password'];
+        $passwordField = _config["fields"]["password"];
         if ($password != null) {
             $hasher = this.passwordHasher();
             $hashedPassword = $result.get($passwordField);
 
-            if ($hashedPassword == null || $hashedPassword == '') {
+            if ($hashedPassword == null || $hashedPassword == "") {
                 // Waste time hashing the password, to prevent
                 // timing side-channels to distinguish whether
                 // user has password or not.
@@ -158,19 +158,19 @@ abstract class BaseAuthenticate : IEventListener
     protected function _query(string $username): Query
     {
         $config = _config;
-        $table = this.getTableLocator().get($config['userModel']);
+        $table = this.getTableLocator().get($config["userModel"]);
 
         $options = [
-            'conditions': [$table.aliasField($config['fields']['username']): $username],
+            "conditions": [$table.aliasField($config["fields"]["username"]): $username],
         ];
 
-        $finder = $config['finder'];
+        $finder = $config["finder"];
         if (is_array($finder)) {
             $options += current($finder);
             $finder = key($finder);
         }
 
-        $options['username'] = $options['username'] ?? $username;
+        $options["username"] = $options["username"] ?? $username;
 
         return $table.find($finder, $options);
     }
@@ -188,7 +188,7 @@ abstract class BaseAuthenticate : IEventListener
             return _passwordHasher;
         }
 
-        $passwordHasher = _config['passwordHasher'];
+        $passwordHasher = _config["passwordHasher"];
 
         return _passwordHasher = PasswordHasherFactory::build($passwordHasher);
     }

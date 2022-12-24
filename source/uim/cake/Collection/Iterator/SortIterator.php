@@ -69,7 +69,7 @@ class SortIterator : Collection
         foreach ($items as $key: $val) {
             $val = $callback($val);
             if ($val instanceof DateTimeInterface && $type == \SORT_NUMERIC) {
-                $val = $val.format('U');
+                $val = $val.format("U");
             }
             $results[$key] = $val;
         }

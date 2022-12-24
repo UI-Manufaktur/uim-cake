@@ -88,7 +88,7 @@ class MapReduce : IteratorAggregate
      * ```
      *  $data = new \ArrayObject([1, 2, 3, 4, 5, 3]);
      *  $mapper = function ($value, $key, $mr) {
-     *      $type = ($value % 2 == 0) ? 'even' : 'odd';
+     *      $type = ($value % 2 == 0) ? "even" : "odd";
      *      $mr.emitIntermediate($value, $type);
      *  };
      *
@@ -101,7 +101,7 @@ class MapReduce : IteratorAggregate
      * Previous example will generate the following result:
      *
      * ```
-     *  ['odd': [1, 3, 5], 'even': [2, 4]]
+     *  ["odd": [1, 3, 5], "even": [2, 4]]
      * ```
      *
      * @param \Traversable $data the original data to be processed
@@ -179,7 +179,7 @@ class MapReduce : IteratorAggregate
         }
 
         if (!empty(_intermediate) && empty(_reducer)) {
-            throw new LogicException('No reducer function was provided');
+            throw new LogicException("No reducer function was provided");
         }
 
         /** @var callable $reducer */

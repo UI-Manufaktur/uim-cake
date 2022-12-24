@@ -23,7 +23,7 @@ use Cake\Cache\CacheEngine;
  * Not actually a persistent cache engine. All data is only
  * stored in memory for the duration of a single process. While not
  * useful in production settings this engine can be useful in tests
- * or console tools where you don't want the overhead of interacting
+ * or console tools where you don"t want the overhead of interacting
  * with a cache servers, but want the work saving properties a cache
  * provides.
  */
@@ -52,7 +52,7 @@ class ArrayEngine : CacheEngine
     {
         $key = _key($key);
         $expires = time() + this.duration($ttl);
-        this.data[$key] = ['exp': $expires, 'val': $value];
+        this.data[$key] = ["exp": $expires, "val": $value];
 
         return true;
     }
@@ -62,7 +62,7 @@ class ArrayEngine : CacheEngine
      *
      * @param string $key Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
-     * @return mixed The cached data, or default value if the data doesn't exist, has
+     * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
     function get($key, $default = null)
@@ -75,13 +75,13 @@ class ArrayEngine : CacheEngine
 
         // Check expiration
         $now = time();
-        if ($data['exp'] <= $now) {
+        if ($data["exp"] <= $now) {
             unset(this.data[$key]);
 
             return $default;
         }
 
-        return $data['val'];
+        return $data["val"];
     }
 
     /**
@@ -97,9 +97,9 @@ class ArrayEngine : CacheEngine
             this.set($key, 0);
         }
         $key = _key($key);
-        this.data[$key]['val'] += $offset;
+        this.data[$key]["val"] += $offset;
 
-        return this.data[$key]['val'];
+        return this.data[$key]["val"];
     }
 
     /**
@@ -115,16 +115,16 @@ class ArrayEngine : CacheEngine
             this.set($key, 0);
         }
         $key = _key($key);
-        this.data[$key]['val'] -= $offset;
+        this.data[$key]["val"] -= $offset;
 
-        return this.data[$key]['val'];
+        return this.data[$key]["val"];
     }
 
     /**
      * Delete a key from the cache
      *
      * @param string $key Identifier for the data
-     * @return bool True if the value was successfully deleted, false if it didn't exist or couldn't be removed
+     * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     function delete($key): bool
     {
@@ -154,12 +154,12 @@ class ArrayEngine : CacheEngine
     string[] groups()
     {
         $result = [];
-        foreach (_config['groups'] as $group) {
-            $key = _config['prefix'] . $group;
+        foreach (_config["groups"] as $group) {
+            $key = _config["prefix"] . $group;
             if (!isset(this.data[$key])) {
-                this.data[$key] = ['exp': PHP_INT_MAX, 'val': 1];
+                this.data[$key] = ["exp": PHP_INT_MAX, "val": 1];
             }
-            $value = this.data[$key]['val'];
+            $value = this.data[$key]["val"];
             $result[] = $group . $value;
         }
 
@@ -175,9 +175,9 @@ class ArrayEngine : CacheEngine
      */
     function clearGroup(string $group): bool
     {
-        $key = _config['prefix'] . $group;
+        $key = _config["prefix"] . $group;
         if (isset(this.data[$key])) {
-            this.data[$key]['val'] += 1;
+            this.data[$key]["val"] += 1;
         }
 
         return true;

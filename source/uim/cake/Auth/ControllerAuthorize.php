@@ -22,21 +22,21 @@ use Cake\Http\ServerRequest;
 
 /**
  * An authorization adapter for AuthComponent. Provides the ability to authorize
- * using a controller callback. Your controller's isAuthorized() method should
+ * using a controller callback. Your controller"s isAuthorized() method should
  * return a boolean to indicate whether the user is authorized.
  *
  * ```
  *  function isAuthorized($user)
  *  {
- *      if (this.request.getParam('admin')) {
- *          return $user['role'] == 'admin';
+ *      if (this.request.getParam("admin")) {
+ *          return $user["role"] == "admin";
  *      }
  *      return !empty($user);
  *  }
  * ```
  *
  * The above is simple implementation that would only authorize users of the
- * 'admin' role to access admin routing.
+ * "admin" role to access admin routing.
  *
  * @see \Cake\Controller\Component\AuthComponent::$authenticate
  */
@@ -84,9 +84,9 @@ class ControllerAuthorize : BaseAuthorize
      */
     function authorize($user, ServerRequest $request): bool
     {
-        if (!method_exists(_Controller, 'isAuthorized')) {
+        if (!method_exists(_Controller, "isAuthorized")) {
             throw new CakeException(sprintf(
-                '%s does not implement an isAuthorized() method.',
+                "%s does not implement an isAuthorized() method.",
                 get_class(_Controller)
             ));
         }
