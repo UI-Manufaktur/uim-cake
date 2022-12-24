@@ -31,7 +31,7 @@ use SimpleXMLElement;
 /**
  * Print out command list
  */
-class HelpCommand : BaseCommand implements CommandCollectionAwareInterface
+class HelpCommand : BaseCommand : CommandCollectionAwareInterface
 {
     /**
      * The command collection to get help on.

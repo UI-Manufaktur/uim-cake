@@ -21,12 +21,12 @@ use LogicException;
 use Traversable;
 
 /**
- * Implements a simplistic version of the popular Map-Reduce algorithm. Acts
+ * : a simplistic version of the popular Map-Reduce algorithm. Acts
  * like an iterator for the original passed data after each result has been
  * processed, thus offering a transparent wrapper for results coming from any
  * source.
  */
-class MapReduce implements IteratorAggregate
+class MapReduce : IteratorAggregate
 {
     /**
      * Holds the shuffled results that were emitted from the map

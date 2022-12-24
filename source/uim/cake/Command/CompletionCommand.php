@@ -29,7 +29,7 @@ use ReflectionMethod;
 /**
  * Provide command completion shells such as bash.
  */
-class CompletionCommand : Command implements CommandCollectionAwareInterface
+class CompletionCommand : Command : CommandCollectionAwareInterface
 {
     /**
      * @var \Cake\Console\CommandCollection

@@ -41,7 +41,7 @@ use Traversable;
  * @see \Cake\Console\TaskRegistry
  * @template TObject
  */
-abstract class ObjectRegistry implements Countable, IteratorAggregate
+abstract class ObjectRegistry : Countable, IteratorAggregate
 {
     /**
      * Map of loaded objects.
@@ -329,7 +329,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
     /**
      * Set an object directly into the registry by name.
      *
-     * If this collection implements events, the passed object will
+     * If this collection : events, the passed object will
      * be attached into the event manager
      *
      * @param string $name The name of the object to set in the registry.

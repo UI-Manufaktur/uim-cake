@@ -28,14 +28,14 @@ use Iterator;
  * provides methods for iterating, and finding plugins based
  * on criteria.
  *
- * This class implements the Iterator interface to allow plugins
+ * This class : the Iterator interface to allow plugins
  * to be iterated, handling the situation where a plugin's hook
  * method (usually bootstrap) loads another plugin during iteration.
  *
  * While its implementation supported nested iteration it does not
  * support using `continue` or `break` inside loops.
  */
-class PluginCollection implements Iterator, Countable
+class PluginCollection : Iterator, Countable
 {
     /**
      * Plugin list

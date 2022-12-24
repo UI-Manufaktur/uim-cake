@@ -28,7 +28,7 @@ use ReflectionClass;
  * Every plugin should extend from this class or implement the interfaces and
  * include a plugin class in its src root folder.
  */
-class BasePlugin implements PluginInterface
+class BasePlugin : PluginInterface
 {
     /**
      * Do bootstrapping or not

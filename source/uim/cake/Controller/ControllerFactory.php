@@ -38,7 +38,7 @@ use ReflectionNamedType;
  *
  * @implements \Cake\Http\ControllerFactoryInterface<\Cake\Controller\Controller>
  */
-class ControllerFactory implements ControllerFactoryInterface, RequestHandlerInterface
+class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
 {
     /**
      * @var \Cake\Core\IContainer

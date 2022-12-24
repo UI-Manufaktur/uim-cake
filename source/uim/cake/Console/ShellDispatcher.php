@@ -234,7 +234,7 @@ class ShellDispatcher
     /**
      * For all loaded plugins, add a short alias
      *
-     * This permits a plugin which implements a shell of the same name to be accessed
+     * This permits a plugin which : a shell of the same name to be accessed
      * Using the shell name alone
      *
      * @return array the resultant list of aliases

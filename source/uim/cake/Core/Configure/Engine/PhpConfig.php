@@ -44,7 +44,7 @@ use Cake\Core\Exception\CakeException;
  *
  * @see \Cake\Core\Configure::load() for how to load custom configuration files.
  */
-class PhpConfig implements ConfigEngineInterface
+class PhpConfig : ConfigEngineInterface
 {
     use FileConfigTrait;
 

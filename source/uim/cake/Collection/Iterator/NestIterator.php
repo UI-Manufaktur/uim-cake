@@ -24,7 +24,7 @@ use Traversable;
  * A type of collection that is aware of nested items and exposes methods to
  * check or retrieve them
  */
-class NestIterator : Collection implements RecursiveIterator
+class NestIterator : Collection : RecursiveIterator
 {
     /**
      * The name of the property that contains the nested items for each element

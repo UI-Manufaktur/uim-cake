@@ -25,7 +25,7 @@ use SplDoublyLinkedList;
  * Creates an iterator from another iterator that will keep the results of the inner
  * iterator in memory, so that results don't have to be re-calculated.
  */
-class BufferedIterator : Collection implements Countable, Serializable
+class BufferedIterator : Collection : Countable, Serializable
 {
     /**
      * The in-memory cache containing results from previous iterators

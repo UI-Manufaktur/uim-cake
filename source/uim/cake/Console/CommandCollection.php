@@ -29,7 +29,7 @@ use Traversable;
  * CakePHP will use the mapped commands to construct and dispatch
  * shell commands.
  */
-class CommandCollection implements IteratorAggregate, Countable
+class CommandCollection : IteratorAggregate, Countable
 {
     /**
      * Command list

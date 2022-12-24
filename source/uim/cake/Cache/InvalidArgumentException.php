@@ -22,6 +22,6 @@ use Psr\SimpleCache\InvalidArgumentException as InvalidArgumentInterface;
 /**
  * Exception raised when cache keys are invalid.
  */
-class InvalidArgumentException : CakeException implements InvalidArgumentInterface
+class InvalidArgumentException : CakeException : InvalidArgumentInterface
 {
 }

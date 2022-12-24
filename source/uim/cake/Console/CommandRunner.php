@@ -36,7 +36,7 @@ use RuntimeException;
 /**
  * Run CLI commands for the provided application.
  */
-class CommandRunner implements EventDispatcherInterface
+class CommandRunner : EventDispatcherInterface
 {
     use EventDispatcherTrait;
 

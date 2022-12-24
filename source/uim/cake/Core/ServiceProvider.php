@@ -29,7 +29,7 @@ use RuntimeException;
  * improve performance of applications with many services by
  * allowing service registration to be deferred until services are needed.
  */
-abstract class ServiceProvider : AbstractServiceProvider implements BootableServiceProviderInterface
+abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProviderInterface
 {
     /**
      * List of ids of services this provider provides.

@@ -31,7 +31,7 @@ use RuntimeException;
  * - `buildOptionParser` Build/Configure the option parser for your command.
  * - `execute` Execute your command with parsed Arguments and ConsoleIo
  */
-abstract class BaseCommand implements CommandInterface
+abstract class BaseCommand : CommandInterface
 {
     /**
      * The name of this command.

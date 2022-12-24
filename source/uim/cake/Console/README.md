@@ -45,7 +45,7 @@ use App\Command\HelloCommand;
 use Cake\Core\IConsoleApplication;
 use Cake\Console\CommandCollection;
 
-class Application implements IConsoleApplication
+class Application : IConsoleApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.

@@ -23,6 +23,6 @@ use League\Container\Container as LeagueContainer;
  *
  * Based on the container out of League\Container
  */
-class Container : LeagueContainer implements IContainer
+class Container : LeagueContainer : IContainer
 {
 }

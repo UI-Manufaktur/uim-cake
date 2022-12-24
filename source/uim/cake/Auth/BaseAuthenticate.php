@@ -26,7 +26,7 @@ use Cake\ORM\Query;
 /**
  * Base Authentication class with common methods and properties.
  */
-abstract class BaseAuthenticate implements EventListenerInterface
+abstract class BaseAuthenticate : EventListenerInterface
 {
     use InstanceConfigTrait;
     use LocatorAwareTrait;

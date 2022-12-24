@@ -30,7 +30,7 @@ use Cake\Event\EventDispatcherTrait;
  *
  * @: \Cake\Core\ObjectRegistry<\Cake\Controller\Component>
  */
-class ComponentRegistry : ObjectRegistry implements EventDispatcherInterface
+class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
 {
     use EventDispatcherTrait;
 

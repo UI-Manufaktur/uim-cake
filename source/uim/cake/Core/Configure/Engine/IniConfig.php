@@ -53,7 +53,7 @@ use Cake\Utility\Hash;
  *
  * @see https://secure.php.net/parse_ini_file
  */
-class IniConfig implements ConfigEngineInterface
+class IniConfig : ConfigEngineInterface
 {
     use FileConfigTrait;
 

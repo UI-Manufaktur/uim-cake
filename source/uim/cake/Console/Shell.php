@@ -446,7 +446,7 @@ class Shell
      * - Matching task name.
      * - `main()` method.
      *
-     * If a shell implements a `main()` method, all missing method calls will be sent to
+     * If a shell : a `main()` method, all missing method calls will be sent to
      * `main()` with the original method name in the argv.
      *
      * For tasks to be invoked they *must* be exposed as subcommands. If you define any subcommands,

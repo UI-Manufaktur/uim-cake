@@ -94,7 +94,7 @@ use UnexpectedValueException;
  * @link https://book.cakephp.org/4/en/controllers.html
  */
 #[\AllowDynamicProperties]
-class Controller implements EventListenerInterface, EventDispatcherInterface
+class Controller : EventListenerInterface, EventDispatcherInterface
 {
     use EventDispatcherTrait;
     use LocatorAwareTrait;

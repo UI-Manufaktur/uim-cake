@@ -27,7 +27,7 @@ use Traversable;
  * @internal
  * @see \Cake\Collection\Collection::unfold()
  */
-class UnfoldIterator : IteratorIterator implements RecursiveIterator
+class UnfoldIterator : IteratorIterator : RecursiveIterator
 {
     /**
      * A function that is passed each element in this iterator and

@@ -23,7 +23,7 @@ use InvalidArgumentException;
  * This factory can be replaced or extended if you need to customize building
  * your command and shell objects.
  */
-class CommandFactory implements CommandFactoryInterface
+class CommandFactory : CommandFactoryInterface
 {
     /**
      * @var \Cake\Core\IContainer|null

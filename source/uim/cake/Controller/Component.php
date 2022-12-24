@@ -59,7 +59,7 @@ use Cake\Log\LogTrait;
  * @see \Cake\Controller\Controller::$components
  */
 #[\AllowDynamicProperties]
-class Component implements EventListenerInterface
+class Component : EventListenerInterface
 {
     use InstanceConfigTrait;
     use LogTrait;

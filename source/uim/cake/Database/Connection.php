@@ -41,7 +41,7 @@ use Throwable;
 /**
  * Represents a connection with a database server.
  */
-class Connection implements ConnectionInterface
+class Connection : ConnectionInterface
 {
     use TypeConverterTrait;
 
