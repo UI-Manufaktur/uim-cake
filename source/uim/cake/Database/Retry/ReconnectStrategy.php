@@ -13,7 +13,7 @@
  * @since         3.6.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Database\Retry;
+module uim.cake.Database\Retry;
 
 use Cake\Core\Retry\RetryStrategyInterface;
 use Cake\Database\Connection;

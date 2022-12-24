@@ -13,7 +13,7 @@
  * @since         4.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Database\Expression;
+module uim.cake.Database\Expression;
 
 use Cake\Database\ValueBinder;
 use Closure;

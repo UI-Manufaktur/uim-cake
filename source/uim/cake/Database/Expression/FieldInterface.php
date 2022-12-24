@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Database\Expression;
+module uim.cake.Database\Expression;
 
 /**
  * Describes a getter and a setter for the a field property. Useful for expressions
