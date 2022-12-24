@@ -32,7 +32,7 @@ trait AssociationsNormalizerTrait
     protected function _normalizeAssociations($associations): array
     {
         $result = [];
-        foreach ((array)$associations as $table => $options) {
+        foreach ((array)$associations as $table: $options) {
             $pointer = &$result;
 
             if (is_int($table)) {
@@ -49,18 +49,18 @@ trait AssociationsNormalizerTrait
             $table = array_pop($path);
             /** @var string $first */
             $first = array_shift($path);
-            $pointer += [$first => []];
+            $pointer += [$first: []];
             $pointer = &$pointer[$first];
-            $pointer += ['associated' => []];
+            $pointer += ['associated': []];
 
             foreach ($path as $t) {
-                $pointer += ['associated' => []];
-                $pointer['associated'] += [$t => []];
-                $pointer['associated'][$t] += ['associated' => []];
+                $pointer += ['associated': []];
+                $pointer['associated'] += [$t: []];
+                $pointer['associated'][$t] += ['associated': []];
                 $pointer = &$pointer['associated'][$t];
             }
 
-            $pointer['associated'] += [$table => []];
+            $pointer['associated'] += [$table: []];
             $pointer['associated'][$table] = $options + $pointer['associated'][$table];
         }
 

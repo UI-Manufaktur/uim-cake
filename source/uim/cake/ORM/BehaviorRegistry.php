@@ -78,7 +78,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     function setTable(Table $table): void
     {
         _table = $table;
-        this.setEventManager($table->getEventManager());
+        this.setEventManager($table.getEventManager());
     }
 
     /**
@@ -122,8 +122,8 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingBehaviorException([
-            'class' => $class . 'Behavior',
-            'plugin' => $plugin,
+            'class': $class . 'Behavior',
+            'plugin': $plugin,
         ]);
     }
 
@@ -145,7 +145,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
         $instance = new $class(_table, $config);
         $enable = $config['enabled'] ?? true;
         if ($enable) {
-            this.getEventManager()->on($instance);
+            this.getEventManager().on($instance);
         }
         $methods = _getMethods($instance, $class, $alias);
         _methodMap += $methods['methods'];
@@ -169,10 +169,10 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      */
     protected function _getMethods(Behavior $instance, string $class, string $alias): array
     {
-        $finders = array_change_key_case($instance->implementedFinders());
-        $methods = array_change_key_case($instance->implementedMethods());
+        $finders = array_change_key_case($instance.implementedFinders());
+        $methods = array_change_key_case($instance.implementedMethods());
 
-        foreach ($finders as $finder => $methodName) {
+        foreach ($finders as $finder: $methodName) {
             if (isset(_finderMap[$finder]) && this.has(_finderMap[$finder][0])) {
                 $duplicate = _finderMap[$finder];
                 $error = sprintf(
@@ -186,7 +186,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
             $finders[$finder] = [$alias, $methodName];
         }
 
-        foreach ($methods as $method => $methodName) {
+        foreach ($methods as $method: $methodName) {
             if (isset(_methodMap[$method]) && this.has(_methodMap[$method][0])) {
                 $duplicate = _methodMap[$method];
                 $error = sprintf(
@@ -249,7 +249,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
         if (this.hasMethod($method) && this.has(_methodMap[$method][0])) {
             [$behavior, $callMethod] = _methodMap[$method];
 
-            return _loaded[$behavior]->{$callMethod}(...$args);
+            return _loaded[$behavior].{$callMethod}(...$args);
         }
 
         throw new BadMethodCallException(

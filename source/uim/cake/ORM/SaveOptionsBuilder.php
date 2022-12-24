@@ -71,7 +71,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function parseArrayOptions(array $array)
     {
-        foreach ($array as $key => $value) {
+        foreach ($array as $key: $value) {
             this.{$key}($value);
         }
 
@@ -102,14 +102,14 @@ class SaveOptionsBuilder : ArrayObject
      */
     protected function _associated(Table $table, array $associations): void
     {
-        foreach ($associations as $key => $associated) {
+        foreach ($associations as $key: $associated) {
             if (is_int($key)) {
                 _checkAssociation($table, $associated);
                 continue;
             }
             _checkAssociation($table, $key);
             if (isset($associated['associated'])) {
-                _associated($table->getAssociation($key)->getTarget(), $associated['associated']);
+                _associated($table.getAssociation($key).getTarget(), $associated['associated']);
                 continue;
             }
         }
@@ -125,7 +125,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     protected function _checkAssociation(Table $table, string $association): void
     {
-        if (!$table->associations()->has($association)) {
+        if (!$table.associations().has($association)) {
             throw new RuntimeException(sprintf(
                 'Table `%s` is not associated with `%s`',
                 get_class($table),
@@ -155,7 +155,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function validate(string $validate)
     {
-        _table->getValidator($validate);
+        _table.getValidator($validate);
         _options['validate'] = $validate;
 
         return this;

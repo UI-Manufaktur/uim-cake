@@ -59,7 +59,7 @@ class Marshaller
     }
 
     /**
-     * Build the map of property => marshalling callable.
+     * Build the map of property: marshalling callable.
      *
      * @param array $data The data being marshalled.
      * @param array<string, mixed> $options List of options containing the 'associated' key.
@@ -69,15 +69,15 @@ class Marshaller
     protected function _buildPropertyMap(array $data, array $options): array
     {
         $map = [];
-        $schema = _table->getSchema();
+        $schema = _table.getSchema();
 
         // Is a concrete column?
         foreach (array_keys($data) as $prop) {
             $prop = (string)$prop;
-            $columnType = $schema->getColumnType($prop);
+            $columnType = $schema.getColumnType($prop);
             if ($columnType) {
                 $map[$prop] = function ($value, $entity) use ($columnType) {
-                    return TypeFactory::build($columnType)->marshal($value);
+                    return TypeFactory::build($columnType).marshal($value);
                 };
             }
         }
@@ -85,24 +85,24 @@ class Marshaller
         // Map associations
         $options['associated'] = $options['associated'] ?? [];
         $include = _normalizeAssociations($options['associated']);
-        foreach ($include as $key => $nested) {
+        foreach ($include as $key: $nested) {
             if (is_int($key) && is_scalar($nested)) {
                 $key = $nested;
                 $nested = [];
             }
             // If the key is not a special field like _ids or _joinData
             // it is a missing association that we should error on.
-            if (!_table->hasAssociation($key)) {
+            if (!_table.hasAssociation($key)) {
                 if (substr($key, 0, 1) != '_') {
                     throw new InvalidArgumentException(sprintf(
                         'Cannot marshal data for "%s" association. It is not associated with "%s".',
                         (string)$key,
-                        _table->getAlias()
+                        _table.getAlias()
                     ));
                 }
                 continue;
             }
-            $assoc = _table->getAssociation($key);
+            $assoc = _table.getAssociation($key);
 
             if (isset($options['forceNew'])) {
                 $nested['forceNew'] = $options['forceNew'];
@@ -110,25 +110,25 @@ class Marshaller
             if (isset($options['isMerge'])) {
                 $callback = function ($value, $entity) use ($assoc, $nested) {
                     /** @var \Cake\Datasource\EntityInterface $entity */
-                    $options = $nested + ['associated' => [], 'association' => $assoc];
+                    $options = $nested + ['associated': [], 'association': $assoc];
 
-                    return _mergeAssociation($entity->get($assoc->getProperty()), $assoc, $value, $options);
+                    return _mergeAssociation($entity.get($assoc.getProperty()), $assoc, $value, $options);
                 };
             } else {
                 $callback = function ($value, $entity) use ($assoc, $nested) {
-                    $options = $nested + ['associated' => []];
+                    $options = $nested + ['associated': []];
 
                     return _marshalAssociation($assoc, $value, $options);
                 };
             }
-            $map[$assoc->getProperty()] = $callback;
+            $map[$assoc.getProperty()] = $callback;
         }
 
-        $behaviors = _table->behaviors();
-        foreach ($behaviors->loaded() as $name) {
-            $behavior = $behaviors->get($name);
+        $behaviors = _table.behaviors();
+        foreach ($behaviors.loaded() as $name) {
+            $behavior = $behaviors.get($name);
             if ($behavior instanceof PropertyMarshalInterface) {
-                $map += $behavior->buildMarshalMap(this, $map, $options);
+                $map += $behavior.buildMarshalMap(this, $map, $options);
             }
         }
 
@@ -155,15 +155,15 @@ class Marshaller
      * When true this option restricts the request data to only be read from `_ids`.
      *
      * ```
-     * $result = $marshaller->one($data, [
-     *   'associated' => ['Tags' => ['onlyIds' => true]]
+     * $result = $marshaller.one($data, [
+     *   'associated': ['Tags': ['onlyIds': true]]
      * ]);
      * ```
      *
      * ```
-     * $result = $marshaller->one($data, [
-     *   'associated' => [
-     *     'Tags' => ['accessibleFields' => ['*' => true]]
+     * $result = $marshaller.one($data, [
+     *   'associated': [
+     *     'Tags': ['accessibleFields': ['*': true]]
      *   ]
      * ]);
      * ```
@@ -178,14 +178,14 @@ class Marshaller
     {
         [$data, $options] = _prepareDataAndOptions($data, $options);
 
-        $primaryKey = (array)_table->getPrimaryKey();
-        $entityClass = _table->getEntityClass();
+        $primaryKey = (array)_table.getPrimaryKey();
+        $entityClass = _table.getEntityClass();
         $entity = new $entityClass();
-        $entity->setSource(_table->getRegistryAlias());
+        $entity.setSource(_table.getRegistryAlias());
 
         if (isset($options['accessibleFields'])) {
-            foreach ((array)$options['accessibleFields'] as $key => $value) {
-                $entity->setAccess($key, $value);
+            foreach ((array)$options['accessibleFields'] as $key: $value) {
+                $entity.setAccess($key, $value);
             }
         }
         $errors = _validate($data, $options, true);
@@ -193,10 +193,10 @@ class Marshaller
         $options['isMerge'] = false;
         $propertyMap = _buildPropertyMap($data, $options);
         $properties = [];
-        foreach ($data as $key => $value) {
+        foreach ($data as $key: $value) {
             if (!empty($errors[$key])) {
                 if ($entity instanceof InvalidPropertyInterface) {
-                    $entity->setInvalidField($key, $value);
+                    $entity.setInvalidField($key, $value);
                 }
                 continue;
             }
@@ -215,22 +215,22 @@ class Marshaller
         if (isset($options['fields'])) {
             foreach ((array)$options['fields'] as $field) {
                 if (array_key_exists($field, $properties)) {
-                    $entity->set($field, $properties[$field]);
+                    $entity.set($field, $properties[$field]);
                 }
             }
         } else {
-            $entity->set($properties);
+            $entity.set($properties);
         }
 
         // Don't flag clean association entities as
         // dirty so we don't persist empty records.
-        foreach ($properties as $field => $value) {
+        foreach ($properties as $field: $value) {
             if ($value instanceof EntityInterface) {
-                $entity->setDirty($field, $value->isDirty());
+                $entity.setDirty($field, $value.isDirty());
             }
         }
 
-        $entity->setErrors($errors);
+        $entity.setErrors($errors);
         this.dispatchAfterMarshal($entity, $data, $options);
 
         return $entity;
@@ -253,9 +253,9 @@ class Marshaller
 
         $validator = null;
         if ($options['validate'] == true) {
-            $validator = _table->getValidator();
+            $validator = _table.getValidator();
         } elseif (is_string($options['validate'])) {
-            $validator = _table->getValidator($options['validate']);
+            $validator = _table.getValidator($options['validate']);
         } elseif (is_object($options['validate'])) {
             deprecationWarning(
                 'Passing validator instance for the `validate` option is deprecated,'
@@ -272,7 +272,7 @@ class Marshaller
             );
         }
 
-        return $validator->validate($data, $isNew);
+        return $validator.validate($data, $isNew);
     }
 
     /**
@@ -284,9 +284,9 @@ class Marshaller
      */
     protected function _prepareDataAndOptions(array $data, array $options): array
     {
-        $options += ['validate' => true];
+        $options += ['validate': true];
 
-        $tableName = _table->getAlias();
+        $tableName = _table.getAlias();
         if (isset($data[$tableName]) && is_array($data[$tableName])) {
             $data += $data[$tableName];
             unset($data[$tableName]);
@@ -294,7 +294,7 @@ class Marshaller
 
         $data = new ArrayObject($data);
         $options = new ArrayObject($options);
-        _table->dispatchEvent('Model.beforeMarshal', compact('data', 'options'));
+        _table.dispatchEvent('Model.beforeMarshal', compact('data', 'options'));
 
         return [(array)$data, (array)$options];
     }
@@ -312,12 +312,12 @@ class Marshaller
         if (!is_array($value)) {
             return null;
         }
-        $targetTable = $assoc->getTarget();
-        $marshaller = $targetTable->marshaller();
+        $targetTable = $assoc.getTarget();
+        $marshaller = $targetTable.marshaller();
         $types = [Association::ONE_TO_ONE, Association::MANY_TO_ONE];
-        $type = $assoc->type();
+        $type = $assoc.type();
         if (in_array($type, $types, true)) {
-            return $marshaller->one($value, $options);
+            return $marshaller.one($value, $options);
         }
         if ($type == Association::ONE_TO_MANY || $type == Association::MANY_TO_MANY) {
             $hasIds = array_key_exists('_ids', $value);
@@ -332,10 +332,10 @@ class Marshaller
         }
         if ($type == Association::MANY_TO_MANY) {
             /** @psalm-suppress ArgumentTypeCoercion */
-            return $marshaller->_belongsToMany($assoc, $value, $options);
+            return $marshaller._belongsToMany($assoc, $value, $options);
         }
 
-        return $marshaller->many($value, $options);
+        return $marshaller.many($value, $options);
     }
 
     /**
@@ -393,12 +393,12 @@ class Marshaller
 
         $data = array_values($data);
 
-        $target = $assoc->getTarget();
-        $primaryKey = array_flip((array)$target->getPrimaryKey());
+        $target = $assoc.getTarget();
+        $primaryKey = array_flip((array)$target.getPrimaryKey());
         $records = $conditions = [];
         $primaryCount = count($primaryKey);
 
-        foreach ($data as $i => $row) {
+        foreach ($data as $i: $row) {
             if (!is_array($row)) {
                 continue;
             }
@@ -406,11 +406,11 @@ class Marshaller
                 $keys = array_intersect_key($row, $primaryKey);
                 if (count($keys) == $primaryCount) {
                     $rowConditions = [];
-                    foreach ($keys as $key => $value) {
-                        $rowConditions[][$target->aliasField($key)] = $value;
+                    foreach ($keys as $key: $value) {
+                        $rowConditions[][$target.aliasField($key)] = $value;
                     }
 
-                    if ($forceNew && !$target->exists($rowConditions)) {
+                    if ($forceNew && !$target.exists($rowConditions)) {
                         $records[$i] = this.one($row, $options);
                     }
 
@@ -422,21 +422,21 @@ class Marshaller
         }
 
         if (!empty($conditions)) {
-            $query = $target->find();
-            $query->andWhere(function ($exp) use ($conditions) {
+            $query = $target.find();
+            $query.andWhere(function ($exp) use ($conditions) {
                 /** @var \Cake\Database\Expression\QueryExpression $exp */
-                return $exp->or($conditions);
+                return $exp.or($conditions);
             });
 
             $keyFields = array_keys($primaryKey);
 
             $existing = [];
             foreach ($query as $row) {
-                $k = implode(';', $row->extract($keyFields));
+                $k = implode(';', $row.extract($keyFields));
                 $existing[$k] = $row;
             }
 
-            foreach ($data as $i => $row) {
+            foreach ($data as $i: $row) {
                 $key = [];
                 foreach ($keyFields as $k) {
                     if (isset($row[$k])) {
@@ -452,18 +452,18 @@ class Marshaller
             }
         }
 
-        $jointMarshaller = $assoc->junction()->marshaller();
+        $jointMarshaller = $assoc.junction().marshaller();
 
         $nested = [];
         if (isset($associated['_joinData'])) {
             $nested = (array)$associated['_joinData'];
         }
 
-        foreach ($records as $i => $record) {
+        foreach ($records as $i: $record) {
             // Update junction table data in _joinData.
             if (isset($data[$i]['_joinData'])) {
-                $joinData = $jointMarshaller->one($data[$i]['_joinData'], $nested);
-                $record->set('_joinData', $joinData);
+                $joinData = $jointMarshaller.one($data[$i]['_joinData'], $nested);
+                $record.set('_joinData', $joinData);
             }
         }
 
@@ -483,8 +483,8 @@ class Marshaller
             return [];
         }
 
-        $target = $assoc->getTarget();
-        $primaryKey = (array)$target->getPrimaryKey();
+        $target = $assoc.getTarget();
+        $primaryKey = (array)$target.getPrimaryKey();
         $multi = count($primaryKey) > 1;
         $primaryKey = array_map([$target, 'aliasField'], $primaryKey);
 
@@ -494,16 +494,16 @@ class Marshaller
                 return [];
             }
             $type = [];
-            $schema = $target->getSchema();
-            foreach ((array)$target->getPrimaryKey() as $column) {
-                $type[] = $schema->getColumnType($column);
+            $schema = $target.getSchema();
+            foreach ((array)$target.getPrimaryKey() as $column) {
+                $type[] = $schema.getColumnType($column);
             }
             $filter = new TupleComparison($primaryKey, $ids, $type, 'IN');
         } else {
-            $filter = [$primaryKey[0] . ' IN' => $ids];
+            $filter = [$primaryKey[0] . ' IN': $ids];
         }
 
-        return $target->find()->where($filter)->toArray();
+        return $target.find().where($filter).toArray();
     }
 
     /**
@@ -531,8 +531,8 @@ class Marshaller
      * When true this option restricts the request data to only be read from `_ids`.
      *
      * ```
-     * $result = $marshaller->merge($entity, $data, [
-     *   'associated' => ['Tags' => ['onlyIds' => true]]
+     * $result = $marshaller.merge($entity, $data, [
+     *   'associated': ['Tags': ['onlyIds': true]]
      * ]);
      * ```
      *
@@ -547,16 +547,16 @@ class Marshaller
     {
         [$data, $options] = _prepareDataAndOptions($data, $options);
 
-        $isNew = $entity->isNew();
+        $isNew = $entity.isNew();
         $keys = [];
 
         if (!$isNew) {
-            $keys = $entity->extract((array)_table->getPrimaryKey());
+            $keys = $entity.extract((array)_table.getPrimaryKey());
         }
 
         if (isset($options['accessibleFields'])) {
-            foreach ((array)$options['accessibleFields'] as $key => $value) {
-                $entity->setAccess($key, $value);
+            foreach ((array)$options['accessibleFields'] as $key: $value) {
+                $entity.setAccess($key, $value);
             }
         }
 
@@ -564,14 +564,14 @@ class Marshaller
         $options['isMerge'] = true;
         $propertyMap = _buildPropertyMap($data, $options);
         $properties = [];
-        foreach ($data as $key => $value) {
+        foreach ($data as $key: $value) {
             if (!empty($errors[$key])) {
                 if ($entity instanceof InvalidPropertyInterface) {
-                    $entity->setInvalidField($key, $value);
+                    $entity.setInvalidField($key, $value);
                 }
                 continue;
             }
-            $original = $entity->get($key);
+            $original = $entity.get($key);
 
             if (isset($propertyMap[$key])) {
                 $value = $propertyMap[$key]($value, $entity);
@@ -601,13 +601,13 @@ class Marshaller
             $properties[$key] = $value;
         }
 
-        $entity->setErrors($errors);
+        $entity.setErrors($errors);
         if (!isset($options['fields'])) {
-            $entity->set($properties);
+            $entity.set($properties);
 
-            foreach ($properties as $field => $value) {
+            foreach ($properties as $field: $value) {
                 if ($value instanceof EntityInterface) {
-                    $entity->setDirty($field, $value->isDirty());
+                    $entity.setDirty($field, $value.isDirty());
                 }
             }
             this.dispatchAfterMarshal($entity, $data, $options);
@@ -619,9 +619,9 @@ class Marshaller
             if (!array_key_exists($field, $properties)) {
                 continue;
             }
-            $entity->set($field, $properties[$field]);
+            $entity.set($field, $properties[$field]);
             if ($properties[$field] instanceof EntityInterface) {
-                $entity->setDirty($field, $properties[$field]->isDirty());
+                $entity.setDirty($field, $properties[$field].isDirty());
             }
         }
         this.dispatchAfterMarshal($entity, $data, $options);
@@ -663,10 +663,10 @@ class Marshaller
      */
     function mergeMany(iterable $entities, array $data, array $options = []): array
     {
-        $primary = (array)_table->getPrimaryKey();
+        $primary = (array)_table.getPrimaryKey();
 
         $indexed = (new Collection($data))
-            ->groupBy(function ($el) use ($primary) {
+            .groupBy(function ($el) use ($primary) {
                 $keys = [];
                 foreach ($primary as $key) {
                     $keys[] = $el[$key] ?? '';
@@ -674,10 +674,10 @@ class Marshaller
 
                 return implode(';', $keys);
             })
-            ->map(function ($element, $key) {
+            .map(function ($element, $key) {
                 return $key == '' ? $element : $element[0];
             })
-            ->toArray();
+            .toArray();
 
         $new = $indexed[''] ?? [];
         unset($indexed['']);
@@ -688,7 +688,7 @@ class Marshaller
                 continue;
             }
 
-            $key = implode(';', $entity->extract($primary));
+            $key = implode(';', $entity.extract($primary));
             if (!isset($indexed[$key])) {
                 continue;
             }
@@ -698,23 +698,23 @@ class Marshaller
         }
 
         $conditions = (new Collection($indexed))
-            ->map(function ($data, $key) {
+            .map(function ($data, $key) {
                 return explode(';', (string)$key);
             })
-            ->filter(function ($keys) use ($primary) {
+            .filter(function ($keys) use ($primary) {
                 return count(Hash::filter($keys)) == count($primary);
             })
-            ->reduce(function ($conditions, $keys) use ($primary) {
+            .reduce(function ($conditions, $keys) use ($primary) {
                 $fields = array_map([_table, 'aliasField'], $primary);
                 $conditions['OR'][] = array_combine($fields, $keys);
 
                 return $conditions;
-            }, ['OR' => []]);
-        $maybeExistentQuery = _table->find()->where($conditions);
+            }, ['OR': []]);
+        $maybeExistentQuery = _table.find().where($conditions);
 
-        if (!empty($indexed) && count($maybeExistentQuery->clause('where'))) {
+        if (!empty($indexed) && count($maybeExistentQuery.clause('where'))) {
             foreach ($maybeExistentQuery as $entity) {
-                $key = implode(';', $entity->extract($primary));
+                $key = implode(';', $entity.extract($primary));
                 if (isset($indexed[$key])) {
                     $output[] = this.merge($entity, $indexed[$key], $options);
                     unset($indexed[$key]);
@@ -722,7 +722,7 @@ class Marshaller
             }
         }
 
-        foreach ((new Collection($indexed))->append($new) as $value) {
+        foreach ((new Collection($indexed)).append($new) as $value) {
             if (!is_array($value)) {
                 continue;
             }
@@ -750,17 +750,17 @@ class Marshaller
             return null;
         }
 
-        $targetTable = $assoc->getTarget();
-        $marshaller = $targetTable->marshaller();
+        $targetTable = $assoc.getTarget();
+        $marshaller = $targetTable.marshaller();
         $types = [Association::ONE_TO_ONE, Association::MANY_TO_ONE];
-        $type = $assoc->type();
+        $type = $assoc.type();
         if (in_array($type, $types, true)) {
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
-            return $marshaller->merge($original, $value, $options);
+            return $marshaller.merge($original, $value, $options);
         }
         if ($type == Association::MANY_TO_MANY) {
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
-            return $marshaller->_mergeBelongsToMany($original, $assoc, $value, $options);
+            return $marshaller._mergeBelongsToMany($original, $assoc, $value, $options);
         }
 
         if ($type == Association::ONE_TO_MANY) {
@@ -775,7 +775,7 @@ class Marshaller
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        return $marshaller->mergeMany($original, $value, $options);
+        return $marshaller.mergeMany($original, $value, $options);
     }
 
     /**
@@ -824,28 +824,28 @@ class Marshaller
         $extra = [];
         foreach ($original as $entity) {
             // Mark joinData as accessible so we can marshal it properly.
-            $entity->setAccess('_joinData', true);
+            $entity.setAccess('_joinData', true);
 
-            $joinData = $entity->get('_joinData');
+            $joinData = $entity.get('_joinData');
             if ($joinData && $joinData instanceof EntityInterface) {
                 $extra[spl_object_hash($entity)] = $joinData;
             }
         }
 
-        $joint = $assoc->junction();
-        $marshaller = $joint->marshaller();
+        $joint = $assoc.junction();
+        $marshaller = $joint.marshaller();
 
         $nested = [];
         if (isset($associated['_joinData'])) {
             $nested = (array)$associated['_joinData'];
         }
 
-        $options['accessibleFields'] = ['_joinData' => true];
+        $options['accessibleFields'] = ['_joinData': true];
 
         $records = this.mergeMany($original, $value, $options);
         foreach ($records as $record) {
             $hash = spl_object_hash($record);
-            $value = $record->get('_joinData');
+            $value = $record.get('_joinData');
 
             // Already an entity, no further marshalling required.
             if ($value instanceof EntityInterface) {
@@ -854,16 +854,16 @@ class Marshaller
 
             // Scalar data can't be handled
             if (!is_array($value)) {
-                $record->unset('_joinData');
+                $record.unset('_joinData');
                 continue;
             }
 
             // Marshal data into the old object, or make a new joinData object.
             if (isset($extra[$hash])) {
-                $record->set('_joinData', $marshaller->merge($extra[$hash], $value, $nested));
+                $record.set('_joinData', $marshaller.merge($extra[$hash], $value, $nested));
             } else {
-                $joinData = $marshaller->one($value, $nested);
-                $record->set('_joinData', $joinData);
+                $joinData = $marshaller.one($value, $nested);
+                $record.set('_joinData', $joinData);
             }
         }
 
@@ -882,6 +882,6 @@ class Marshaller
     {
         $data = new ArrayObject($data);
         $options = new ArrayObject($options);
-        _table->dispatchEvent('Model.afterMarshal', compact('entity', 'data', 'options'));
+        _table.dispatchEvent('Model.afterMarshal', compact('entity', 'data', 'options'));
     }
 }

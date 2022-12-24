@@ -40,9 +40,9 @@ class TransportFactory
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        'debug' => Transport\DebugTransport::class,
-        'mail' => Transport\MailTransport::class,
-        'smtp' => Transport\SmtpTransport::class,
+        'debug': Transport\DebugTransport::class,
+        'mail': Transport\MailTransport::class,
+        'smtp': Transport\SmtpTransport::class,
     ];
 
     /**
@@ -94,7 +94,7 @@ class TransportFactory
         }
 
         /** @phpstan-ignore-next-line */
-        static::getRegistry()->load($name, static::$_config[$name]);
+        static::getRegistry().load($name, static::$_config[$name]);
     }
 
     /**
@@ -107,12 +107,12 @@ class TransportFactory
     {
         $registry = static::getRegistry();
 
-        if (isset($registry->{$name})) {
-            return $registry->{$name};
+        if (isset($registry.{$name})) {
+            return $registry.{$name};
         }
 
         static::_buildTransport($name);
 
-        return $registry->{$name};
+        return $registry.{$name};
     }
 }

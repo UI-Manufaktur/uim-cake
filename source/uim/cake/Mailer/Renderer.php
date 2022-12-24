@@ -56,7 +56,7 @@ class Renderer
     function render(string $content, array $types = []): array
     {
         $rendered = [];
-        $template = this.viewBuilder()->getTemplate();
+        $template = this.viewBuilder().getTemplate();
         if (empty($template)) {
             foreach ($types as $type) {
                 $rendered[$type] = $content;
@@ -67,23 +67,23 @@ class Renderer
 
         $view = this.createView();
 
-        [$templatePlugin] = pluginSplit($view->getTemplate());
-        [$layoutPlugin] = pluginSplit($view->getLayout());
+        [$templatePlugin] = pluginSplit($view.getTemplate());
+        [$layoutPlugin] = pluginSplit($view.getLayout());
         if ($templatePlugin) {
-            $view->setPlugin($templatePlugin);
+            $view.setPlugin($templatePlugin);
         } elseif ($layoutPlugin) {
-            $view->setPlugin($layoutPlugin);
+            $view.setPlugin($layoutPlugin);
         }
 
-        if ($view->get('content') == null) {
-            $view->set('content', $content);
+        if ($view.get('content') == null) {
+            $view.set('content', $content);
         }
 
         foreach ($types as $type) {
-            $view->setTemplatePath(static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . $type);
-            $view->setLayoutPath(static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . $type);
+            $view.setTemplatePath(static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . $type);
+            $view.setLayoutPath(static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . $type);
 
-            $rendered[$type] = $view->render();
+            $rendered[$type] = $view.render();
         }
 
         return $rendered;
@@ -99,9 +99,9 @@ class Renderer
         _viewBuilder = null;
 
         this.viewBuilder()
-            ->setClassName(View::class)
-            ->setLayout('default')
-            ->setHelpers(['Html'], false);
+            .setClassName(View::class)
+            .setLayout('default')
+            .setHelpers(['Html'], false);
 
         return this;
     }

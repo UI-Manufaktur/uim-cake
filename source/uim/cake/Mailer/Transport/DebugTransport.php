@@ -32,11 +32,11 @@ class DebugTransport : AbstractTransport
      */
     function send(Message $message): array
     {
-        $headers = $message->getHeadersString(
+        $headers = $message.getHeadersString(
             ['from', 'sender', 'replyTo', 'readReceipt', 'returnPath', 'to', 'cc', 'subject']
         );
-        $message = implode("\r\n", $message->getBody());
+        $message = implode("\r\n", $message.getBody());
 
-        return ['headers' => $headers, 'message' => $message];
+        return ['headers': $headers, 'message': $message];
     }
 }

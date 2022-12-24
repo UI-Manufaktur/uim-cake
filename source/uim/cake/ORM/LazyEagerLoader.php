@@ -53,7 +53,7 @@ class LazyEagerLoader
 
         $entities = new Collection($entities);
         $query = _getQuery($entities, $contain, $source);
-        $associations = array_keys($query->getContain());
+        $associations = array_keys($query.getContain());
 
         $entities = _injectResults($entities, $query, $associations, $source);
 
@@ -71,17 +71,17 @@ class LazyEagerLoader
      */
     protected function _getQuery(CollectionInterface $objects, array $contain, Table $source): Query
     {
-        $primaryKey = $source->getPrimaryKey();
+        $primaryKey = $source.getPrimaryKey();
         $method = is_string($primaryKey) ? 'get' : 'extract';
 
-        $keys = $objects->map(function ($entity) use ($primaryKey, $method) {
-            return $entity->{$method}($primaryKey);
+        $keys = $objects.map(function ($entity) use ($primaryKey, $method) {
+            return $entity.{$method}($primaryKey);
         });
 
         $query = $source
-            ->find()
-            ->select((array)$primaryKey)
-            ->where(function ($exp, $q) use ($primaryKey, $keys, $source) {
+            .find()
+            .select((array)$primaryKey)
+            .where(function ($exp, $q) use ($primaryKey, $keys, $source) {
                 /**
                  * @var \Cake\Database\Expression\QueryExpression $exp
                  * @var \Cake\ORM\Query $q
@@ -91,21 +91,21 @@ class LazyEagerLoader
                 }
 
                 if (is_string($primaryKey)) {
-                    return $exp->in($source->aliasField($primaryKey), $keys->toList());
+                    return $exp.in($source.aliasField($primaryKey), $keys.toList());
                 }
 
-                $types = array_intersect_key($q->getDefaultTypes(), array_flip($primaryKey));
+                $types = array_intersect_key($q.getDefaultTypes(), array_flip($primaryKey));
                 $primaryKey = array_map([$source, 'aliasField'], $primaryKey);
 
-                return new TupleComparison($primaryKey, $keys->toList(), $types, 'IN');
+                return new TupleComparison($primaryKey, $keys.toList(), $types, 'IN');
             })
-            ->enableAutoFields()
-            ->contain($contain);
+            .enableAutoFields()
+            .contain($contain);
 
-        foreach ($query->getEagerLoader()->attachableAssociations($source) as $loadable) {
-            $config = $loadable->getConfig();
+        foreach ($query.getEagerLoader().attachableAssociations($source) as $loadable) {
+            $config = $loadable.getConfig();
             $config['includeFields'] = true;
-            $loadable->setConfig($config);
+            $loadable.setConfig($config);
         }
 
         return $query;
@@ -122,10 +122,10 @@ class LazyEagerLoader
     protected function _getPropertyMap(Table $source, array $associations): array
     {
         $map = [];
-        $container = $source->associations();
+        $container = $source.associations();
         foreach ($associations as $assoc) {
             /** @psalm-suppress PossiblyNullReference */
-            $map[$assoc] = $container->get($assoc)->getProperty();
+            $map[$assoc] = $container.get($assoc).getProperty();
         }
 
         return $map;
@@ -145,17 +145,17 @@ class LazyEagerLoader
     {
         $injected = [];
         $properties = _getPropertyMap($source, $associations);
-        $primaryKey = (array)$source->getPrimaryKey();
+        $primaryKey = (array)$source.getPrimaryKey();
         $results = $results
-            ->all()
-            ->indexBy(function ($e) use ($primaryKey) {
+            .all()
+            .indexBy(function ($e) use ($primaryKey) {
                 /** @var \Cake\Datasource\EntityInterface $e */
-                return implode(';', $e->extract($primaryKey));
+                return implode(';', $e.extract($primaryKey));
             })
-            ->toArray();
+            .toArray();
 
-        foreach ($objects as $k => $object) {
-            $key = implode(';', $object->extract($primaryKey));
+        foreach ($objects as $k: $object) {
+            $key = implode(';', $object.extract($primaryKey));
             if (!isset($results[$key])) {
                 $injected[$k] = $object;
                 continue;
@@ -165,8 +165,8 @@ class LazyEagerLoader
             $loaded = $results[$key];
             foreach ($associations as $assoc) {
                 $property = $properties[$assoc];
-                $object->set($property, $loaded->get($property), ['useSetters' => false]);
-                $object->setDirty($property, false);
+                $object.set($property, $loaded.get($property), ['useSetters': false]);
+                $object.setDirty($property, false);
             }
             $injected[$k] = $object;
         }

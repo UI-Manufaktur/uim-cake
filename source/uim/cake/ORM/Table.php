@@ -68,13 +68,13 @@ use RuntimeException;
  * to filter users by username you would call
  *
  * ```
- * $query = $users->findByUsername('mark');
+ * $query = $users.findByUsername('mark');
  * ```
  *
  * You can also combine conditions on multiple fields using either `Or` or `And`:
  *
  * ```
- * $query = $users->findByUsernameOrEmail('mark', 'mark@example.org');
+ * $query = $users.findByUsernameOrEmail('mark', 'mark@example.org');
  * ```
  *
  * ### Bulk updates/deletes
@@ -310,18 +310,18 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             if (!is_array($config['validator'])) {
                 this.setValidator(static::DEFAULT_VALIDATOR, $config['validator']);
             } else {
-                foreach ($config['validator'] as $name => $validator) {
+                foreach ($config['validator'] as $name: $validator) {
                     this.setValidator($name, $validator);
                 }
             }
         }
         _eventManager = $eventManager ?: new EventManager();
         _behaviors = $behaviors ?: new BehaviorRegistry();
-        _behaviors->setTable(this);
+        _behaviors.setTable(this);
         _associations = $associations ?: new AssociationCollection();
 
         this.initialize($config);
-        _eventManager->on(this);
+        _eventManager.on(this);
         this.dispatchEvent('Model.initialize');
     }
 
@@ -517,8 +517,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         if (_schema == null) {
             _schema = _initializeSchema(
                 this.getConnection()
-                    ->getSchemaCollection()
-                    ->describe(this.getTable())
+                    .getSchemaCollection()
+                    .describe(this.getTable())
             );
             if (Configure::read('debug')) {
                 this.checkAliasLengths();
@@ -547,10 +547,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
                 unset($schema['_constraints']);
             }
 
-            $schema = this.getConnection()->getDriver()->newTableSchema(this.getTable(), $schema);
+            $schema = this.getConnection().getDriver().newTableSchema(this.getTable(), $schema);
 
-            foreach ($constraints as $name => $value) {
-                $schema->addConstraint($name, $value);
+            foreach ($constraints as $name: $value) {
+                $schema.addConstraint($name, $value);
             }
         }
 
@@ -576,15 +576,15 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         }
 
         $maxLength = null;
-        if (method_exists(this.getConnection()->getDriver(), 'getMaxAliasLength')) {
-            $maxLength = this.getConnection()->getDriver()->getMaxAliasLength();
+        if (method_exists(this.getConnection().getDriver(), 'getMaxAliasLength')) {
+            $maxLength = this.getConnection().getDriver().getMaxAliasLength();
         }
         if ($maxLength == null) {
             return;
         }
 
         $table = this.getAlias();
-        foreach (_schema->columns() as $name) {
+        foreach (_schema.columns() as $name) {
             if (strlen($table . '__' . $name) > $maxLength) {
                 $nameLength = $maxLength - 2;
                 throw new RuntimeException(
@@ -608,7 +608,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      *
      * ```
      * protected function _initializeSchema(\Cake\Database\Schema\TableSchemaInterface $schema) {
-     *  $schema->setColumnType('preferences', 'json');
+     *  $schema.setColumnType('preferences', 'json');
      *  return $schema;
      * }
      * ```
@@ -634,7 +634,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         $schema = this.getSchema();
 
-        return $schema->getColumn($field) != null;
+        return $schema.getColumn($field) != null;
     }
 
     /**
@@ -658,7 +658,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function getPrimaryKey()
     {
         if (_primaryKey == null) {
-            $key = this.getSchema()->getPrimaryKey();
+            $key = this.getSchema().getPrimaryKey();
             if (count($key) == 1) {
                 $key = $key[0];
             }
@@ -692,7 +692,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             $schema = this.getSchema();
             _displayField = this.getPrimaryKey();
             foreach (['title', 'name', 'label'] as $field) {
-                if ($schema->hasColumn($field)) {
+                if ($schema.hasColumn($field)) {
                     _displayField = $field;
                     break;
                 }
@@ -770,7 +770,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * Load a behavior, with some settings.
      *
      * ```
-     * this.addBehavior('Tree', ['parent' => 'parentId']);
+     * this.addBehavior('Tree', ['parent': 'parentId']);
      * ```
      *
      * Behaviors are generally loaded during Table::initialize().
@@ -783,7 +783,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function addBehavior(string $name, array $options = [])
     {
-        _behaviors->load($name, $options);
+        _behaviors.load($name, $options);
 
         return this;
     }
@@ -796,7 +796,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * ```
      * this.addBehaviors([
      *      'Timestamp',
-     *      'Tree' => ['level' => 'level'],
+     *      'Tree': ['level': 'level'],
      * ]);
      * ```
      *
@@ -806,7 +806,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function addBehaviors(array $behaviors)
     {
-        foreach ($behaviors as $name => $options) {
+        foreach ($behaviors as $name: $options) {
             if (is_int($name)) {
                 $name = $options;
                 $options = [];
@@ -835,7 +835,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function removeBehavior(string $name)
     {
-        _behaviors->unload($name);
+        _behaviors.unload($name);
 
         return this;
     }
@@ -859,7 +859,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getBehavior(string $name): Behavior
     {
-        if (!_behaviors->has($name)) {
+        if (!_behaviors.has($name)) {
             throw new InvalidArgumentException(sprintf(
                 'The %s behavior is not defined on %s.',
                 $name,
@@ -867,7 +867,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             ));
         }
 
-        return _behaviors->get($name);
+        return _behaviors.get($name);
     }
 
     /**
@@ -878,7 +878,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function hasBehavior(string $name): bool
     {
-        return _behaviors->has($name);
+        return _behaviors.has($name);
     }
 
     /**
@@ -902,7 +902,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         $association = this.findAssociation($name);
         if (!$association) {
-            $assocations = this.associations()->keys();
+            $assocations = this.associations().keys();
 
             $message = "The `{$name}` association is not defined on `{this.getAlias()}`.";
             if ($assocations) {
@@ -946,17 +946,17 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     protected function findAssociation(string $name): ?Association
     {
         if (strpos($name, '.') == false) {
-            return _associations->get($name);
+            return _associations.get($name);
         }
 
         $result = null;
         [$name, $next] = array_pad(explode('.', $name, 2), 2, null);
         if ($name != null) {
-            $result = _associations->get($name);
+            $result = _associations.get($name);
         }
 
         if ($result != null && $next != null) {
-            $result = $result->getTarget()->getAssociation($next);
+            $result = $result.getTarget().getAssociation($next);
         }
 
         return $result;
@@ -979,12 +979,12 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * as argument:
      *
      * ```
-     * this.Posts->addAssociations([
-     *   'belongsTo' => [
-     *     'Users' => ['className' => 'App\Model\Table\UsersTable']
+     * this.Posts.addAssociations([
+     *   'belongsTo': [
+     *     'Users': ['className': 'App\Model\Table\UsersTable']
      *   ],
-     *   'hasMany' => ['Comments'],
-     *   'belongsToMany' => ['Tags']
+     *   'hasMany': ['Comments'],
+     *   'belongsToMany': ['Tags']
      * ]);
      * ```
      *
@@ -1001,8 +1001,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function addAssociations(array $params)
     {
-        foreach ($params as $assocType => $tables) {
-            foreach ($tables as $associated => $options) {
+        foreach ($params as $assocType: $tables) {
+            foreach ($tables as $associated: $options) {
                 if (is_numeric($associated)) {
                     $associated = $options;
                     $options = [];
@@ -1046,10 +1046,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function belongsTo(string $associated, array $options = []): BelongsTo
     {
-        $options += ['sourceTable' => this];
+        $options += ['sourceTable': this];
 
         /** @var \Cake\ORM\Association\BelongsTo $association */
-        $association = _associations->load(BelongsTo::class, $associated, $options);
+        $association = _associations.load(BelongsTo::class, $associated, $options);
 
         return $association;
     }
@@ -1092,10 +1092,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function hasOne(string $associated, array $options = []): HasOne
     {
-        $options += ['sourceTable' => this];
+        $options += ['sourceTable': this];
 
         /** @var \Cake\ORM\Association\HasOne $association */
-        $association = _associations->load(HasOne::class, $associated, $options);
+        $association = _associations.load(HasOne::class, $associated, $options);
 
         return $association;
     }
@@ -1144,10 +1144,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function hasMany(string $associated, array $options = []): HasMany
     {
-        $options += ['sourceTable' => this];
+        $options += ['sourceTable': this];
 
         /** @var \Cake\ORM\Association\HasMany $association */
-        $association = _associations->load(HasMany::class, $associated, $options);
+        $association = _associations.load(HasMany::class, $associated, $options);
 
         return $association;
     }
@@ -1198,10 +1198,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function belongsToMany(string $associated, array $options = []): BelongsToMany
     {
-        $options += ['sourceTable' => this];
+        $options += ['sourceTable': this];
 
         /** @var \Cake\ORM\Association\BelongsToMany $association */
-        $association = _associations->load(BelongsToMany::class, $associated, $options);
+        $association = _associations.load(BelongsToMany::class, $associated, $options);
 
         return $association;
     }
@@ -1233,20 +1233,20 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * Using the options array:
      *
      * ```
-     * $query = $articles->find('all', [
-     *   'conditions' => ['published' => 1],
-     *   'limit' => 10,
-     *   'contain' => ['Users', 'Comments']
+     * $query = $articles.find('all', [
+     *   'conditions': ['published': 1],
+     *   'limit': 10,
+     *   'contain': ['Users', 'Comments']
      * ]);
      * ```
      *
      * Using the builder interface:
      *
      * ```
-     * $query = $articles->find()
-     *   ->where(['published' => 1])
-     *   ->limit(10)
-     *   ->contain(['Users', 'Comments']);
+     * $query = $articles.find()
+     *   .where(['published': 1])
+     *   .limit(10)
+     *   .contain(['Users', 'Comments']);
      * ```
      *
      * ### Calling finders
@@ -1255,7 +1255,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * You can invoke a finder by specifying the type:
      *
      * ```
-     * $query = $articles->find('published');
+     * $query = $articles.find('published');
      * ```
      *
      * Would invoke the `findPublished` method.
@@ -1266,7 +1266,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function find(string $type = 'all', array $options = []): Query
     {
-        return this.callFinder($type, this.query()->select(), $options);
+        return this.callFinder($type, this.query().select(), $options);
     }
 
     /**
@@ -1297,9 +1297,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      *
      * ```
      * [
-     *  1 => 'value for id 1',
-     *  2 => 'value for id 2',
-     *  4 => 'value for id 4'
+     *  1: 'value for id 1',
+     *  2: 'value for id 2',
+     *  4: 'value for id 4'
      * ]
      * ```
      *
@@ -1308,9 +1308,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * of calling `primaryKey` and `displayField` respectively in this table:
      *
      * ```
-     * $table->find('list', [
-     *  'keyField' => 'name',
-     *  'valueField' => 'age'
+     * $table.find('list', [
+     *  'keyField': 'name',
+     *  'valueField': 'age'
      * ]);
      * ```
      *
@@ -1318,9 +1318,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * the `valueSeparator` option to control how the values will be concatenated:
      *
      * ```
-     * $table->find('list', [
-     *  'valueField' => ['first_name', 'last_name'],
-     *  'valueSeparator' => ' | ',
+     * $table.find('list', [
+     *  'valueField': ['first_name', 'last_name'],
+     *  'valueSeparator': ' | ',
      * ]);
      * ```
      *
@@ -1328,8 +1328,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      *
      * ```
      * [
-     *  1 => 'John | Doe',
-     *  2 => 'Steve | Smith'
+     *  1: 'John | Doe',
+     *  2: 'Steve | Smith'
      * ]
      * ```
      *
@@ -1337,8 +1337,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * can customize the property to use for grouping by setting `groupField`:
      *
      * ```
-     * $table->find('list', [
-     *  'groupField' => 'category_id',
+     * $table.find('list', [
+     *  'groupField': 'category_id',
      * ]);
      * ```
      *
@@ -1346,12 +1346,12 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      *
      * ```
      * [
-     *  'group_1' => [
-     *      1 => 'value for id 1',
-     *      2 => 'value for id 2',
+     *  'group_1': [
+     *      1: 'value for id 1',
+     *      2: 'value for id 2',
      *  ]
-     *  'group_2' => [
-     *      4 => 'value for id 4'
+     *  'group_2': [
+     *      4: 'value for id 4'
      *  ]
      * ]
      * ```
@@ -1363,14 +1363,14 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function findList(Query $query, array $options): Query
     {
         $options += [
-            'keyField' => this.getPrimaryKey(),
-            'valueField' => this.getDisplayField(),
-            'groupField' => null,
-            'valueSeparator' => ';',
+            'keyField': this.getPrimaryKey(),
+            'valueField': this.getDisplayField(),
+            'groupField': null,
+            'valueSeparator': ';',
         ];
 
         if (
-            !$query->clause('select') &&
+            !$query.clause('select') &&
             !is_object($options['keyField']) &&
             !is_object($options['valueField']) &&
             !is_object($options['groupField'])
@@ -1380,9 +1380,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
                 (array)$options['valueField'],
                 (array)$options['groupField']
             );
-            $columns = this.getSchema()->columns();
+            $columns = this.getSchema().columns();
             if (count($fields) == count(array_intersect($fields, $columns))) {
-                $query->select($fields);
+                $query.select($fields);
             }
         }
 
@@ -1391,9 +1391,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             ['keyField', 'valueField', 'groupField']
         );
 
-        return $query->formatResults(function ($results) use ($options) {
+        return $query.formatResults(function ($results) use ($options) {
             /** @var \Cake\Collection\CollectionInterface $results */
-            return $results->combine(
+            return $results.combine(
                 $options['keyField'],
                 $options['valueField'],
                 $options['groupField']
@@ -1414,10 +1414,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * `$options`:
      *
      * ```
-     * $table->find('threaded', [
-     *  'keyField' => 'id',
-     *  'parentField' => 'ancestor_id',
-     *  'nestingKey' => 'children'
+     * $table.find('threaded', [
+     *  'keyField': 'id',
+     *  'parentField': 'ancestor_id',
+     *  'nestingKey': 'children'
      * ]);
      * ```
      *
@@ -1428,16 +1428,16 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function findThreaded(Query $query, array $options): Query
     {
         $options += [
-            'keyField' => this.getPrimaryKey(),
-            'parentField' => 'parent_id',
-            'nestingKey' => 'children',
+            'keyField': this.getPrimaryKey(),
+            'parentField': 'parent_id',
+            'nestingKey': 'children',
         ];
 
         $options = _setFieldMatchers($options, ['keyField', 'parentField']);
 
-        return $query->formatResults(function ($results) use ($options) {
+        return $query.formatResults(function ($results) use ($options) {
             /** @var \Cake\Collection\CollectionInterface $results */
-            return $results->nest($options['keyField'], $options['parentField'], $options['nestingKey']);
+            return $results.nest($options['keyField'], $options['parentField'], $options['nestingKey']);
         });
     }
 
@@ -1489,7 +1489,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * Get an article and some relationships:
      *
      * ```
-     * $article = $articles->get(1, ['contain' => ['Users', 'Comments']]);
+     * $article = $articles.get(1, ['contain': ['Users', 'Comments']]);
      * ```
      *
      * @param mixed $primaryKey primary key value to find
@@ -1513,7 +1513,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
 
         $key = (array)this.getPrimaryKey();
         $alias = this.getAlias();
-        foreach ($key as $index => $keyname) {
+        foreach ($key as $index: $keyname) {
             $key[$index] = $alias . '.' . $keyname;
         }
         if (!is_array($primaryKey)) {
@@ -1538,22 +1538,22 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $finder = $options['finder'] ?? 'all';
         unset($options['key'], $options['cache'], $options['finder']);
 
-        $query = this.find($finder, $options)->where($conditions);
+        $query = this.find($finder, $options).where($conditions);
 
         if ($cacheConfig) {
             if (!$cacheKey) {
                 $cacheKey = sprintf(
                     'get-%s-%s-%s',
-                    this.getConnection()->configName(),
+                    this.getConnection().configName(),
                     this.getTable(),
                     json_encode($primaryKey)
                 );
             }
-            $query->cache($cacheKey, $cacheConfig);
+            $query.cache($cacheKey, $cacheConfig);
         }
 
         /** @psalm-suppress InvalidReturnStatement */
-        return $query->firstOrFail();
+        return $query.firstOrFail();
     }
 
     /**
@@ -1566,7 +1566,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     protected function _executeTransaction(callable $worker, bool $atomic = true)
     {
         if ($atomic) {
-            return this.getConnection()->transactional(function () use ($worker) {
+            return this.getConnection().transactional(function () use ($worker) {
                 return $worker();
             });
         }
@@ -1583,7 +1583,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     protected function _transactionCommitted(bool $atomic, bool $primary): bool
     {
-        return !this.getConnection()->inTransaction() && ($atomic || $primary);
+        return !this.getConnection().inTransaction() && ($atomic || $primary);
     }
 
     /**
@@ -1623,12 +1623,12 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function findOrCreate($search, ?callable $callback = null, $options = []): EntityInterface
     {
         $options = new ArrayObject($options + [
-            'atomic' => true,
-            'defaults' => true,
+            'atomic': true,
+            'defaults': true,
         ]);
 
         $entity = _executeTransaction(function () use ($search, $callback, $options) {
-            return _processFindOrCreate($search, $callback, $options->getArrayCopy());
+            return _processFindOrCreate($search, $callback, $options.getArrayCopy());
         }, $options['atomic']);
 
         if ($entity && _transactionCommitted($options['atomic'], true)) {
@@ -1655,7 +1655,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         $query = _getFindOrCreateQuery($search);
 
-        $row = $query->first();
+        $row = $query.first();
         if ($row != null) {
             return $row;
         }
@@ -1663,7 +1663,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $entity = this.newEmptyEntity();
         if ($options['defaults'] && is_array($search)) {
             $accessibleFields = array_combine(array_keys($search), array_fill(0, count($search), true));
-            $entity = this.patchEntity($entity, $search, ['accessibleFields' => $accessibleFields]);
+            $entity = this.patchEntity($entity, $search, ['accessibleFields': $accessibleFields]);
         }
         if ($callback != null) {
             $entity = $callback($entity) ?: $entity;
@@ -1691,7 +1691,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             $query = this.find();
             $search($query);
         } elseif (is_array($search)) {
-            $query = this.find()->where($search);
+            $query = this.find().where($search);
         } elseif ($search instanceof Query) {
             $query = $search;
         } else {
@@ -1731,13 +1731,13 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function updateAll($fields, $conditions): int
     {
         $statement = this.query()
-            ->update()
-            ->set($fields)
-            ->where($conditions)
-            ->execute();
-        $statement->closeCursor();
+            .update()
+            .set($fields)
+            .where($conditions)
+            .execute();
+        $statement.closeCursor();
 
-        return $statement->rowCount();
+        return $statement.rowCount();
     }
 
     /**
@@ -1746,12 +1746,12 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function deleteAll($conditions): int
     {
         $statement = this.query()
-            ->delete()
-            ->where($conditions)
-            ->execute();
-        $statement->closeCursor();
+            .delete()
+            .where($conditions)
+            .execute();
+        $statement.closeCursor();
 
-        return $statement->rowCount();
+        return $statement.rowCount();
     }
 
     /**
@@ -1761,11 +1761,11 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         return (bool)count(
             this.find('all')
-            ->select(['existing' => 1])
-            ->where($conditions)
-            ->limit(1)
-            ->disableHydration()
-            ->toArray()
+            .select(['existing': 1])
+            .where($conditions)
+            .limit(1)
+            .disableHydration()
+            .toArray()
         );
     }
 
@@ -1833,21 +1833,21 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      *
      * ```
      * // Only save the comments association
-     * $articles->save($entity, ['associated' => ['Comments']]);
+     * $articles.save($entity, ['associated': ['Comments']]);
      *
      * // Save the company, the employees and related addresses for each of them.
      * // For employees do not check the entity rules
-     * $companies->save($entity, [
-     *   'associated' => [
-     *     'Employees' => [
-     *       'associated' => ['Addresses'],
-     *       'checkRules' => false
+     * $companies.save($entity, [
+     *   'associated': [
+     *     'Employees': [
+     *       'associated': ['Addresses'],
+     *       'checkRules': false
      *     ]
      *   ]
      * ]);
      *
      * // Save no associations
-     * $articles->save($entity, ['associated' => false]);
+     * $articles.save($entity, ['associated': false]);
      * ```
      *
      * @param \Cake\Datasource\EntityInterface $entity the entity to be saved
@@ -1859,23 +1859,23 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         if ($options instanceof SaveOptionsBuilder) {
             deprecationWarning('SaveOptionsBuilder is deprecated. Use a normal array for options instead.');
-            $options = $options->toArray();
+            $options = $options.toArray();
         }
 
         $options = new ArrayObject((array)$options + [
-            'atomic' => true,
-            'associated' => true,
-            'checkRules' => true,
-            'checkExisting' => true,
-            '_primary' => true,
-            '_cleanOnSuccess' => true,
+            'atomic': true,
+            'associated': true,
+            'checkRules': true,
+            'checkExisting': true,
+            '_primary': true,
+            '_cleanOnSuccess': true,
         ]);
 
-        if ($entity->hasErrors((bool)$options['associated'])) {
+        if ($entity.hasErrors((bool)$options['associated'])) {
             return false;
         }
 
-        if ($entity->isNew() == false && !$entity->isDirty()) {
+        if ($entity.isNew() == false && !$entity.isDirty()) {
             return $entity;
         }
 
@@ -1889,10 +1889,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             }
             if ($options['atomic'] || $options['_primary']) {
                 if ($options['_cleanOnSuccess']) {
-                    $entity->clean();
-                    $entity->setNew(false);
+                    $entity.clean();
+                    $entity.setNew(false);
                 }
-                $entity->setSource(this.getRegistryAlias());
+                $entity.setSource(this.getRegistryAlias());
             }
         }
 
@@ -1933,25 +1933,25 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         $primaryColumns = (array)this.getPrimaryKey();
 
-        if ($options['checkExisting'] && $primaryColumns && $entity->isNew() && $entity->has($primaryColumns)) {
+        if ($options['checkExisting'] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
             $alias = this.getAlias();
             $conditions = [];
-            foreach ($entity->extract($primaryColumns) as $k => $v) {
+            foreach ($entity.extract($primaryColumns) as $k: $v) {
                 $conditions["$alias.$k"] = $v;
             }
-            $entity->setNew(!this.exists($conditions));
+            $entity.setNew(!this.exists($conditions));
         }
 
-        $mode = $entity->isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
+        $mode = $entity.isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
         if ($options['checkRules'] && !this.checkRules($entity, $mode, $options)) {
             return false;
         }
 
-        $options['associated'] = _associations->normalizeKeys($options['associated']);
+        $options['associated'] = _associations.normalizeKeys($options['associated']);
         $event = this.dispatchEvent('Model.beforeSave', compact('entity', 'options'));
 
-        if ($event->isStopped()) {
-            $result = $event->getResult();
+        if ($event.isStopped()) {
+            $result = $event.getResult();
             if ($result == null) {
                 return false;
             }
@@ -1966,19 +1966,19 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return $result;
         }
 
-        $saved = _associations->saveParents(
+        $saved = _associations.saveParents(
             this,
             $entity,
             $options['associated'],
-            ['_primary' => false] + $options->getArrayCopy()
+            ['_primary': false] + $options.getArrayCopy()
         );
 
         if (!$saved && $options['atomic']) {
             return false;
         }
 
-        $data = $entity->extract(this.getSchema()->columns(), true);
-        $isNew = $entity->isNew();
+        $data = $entity.extract(this.getSchema().columns(), true);
+        $isNew = $entity.isNew();
 
         if ($isNew) {
             $success = _insert($entity, $data);
@@ -1991,8 +1991,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         }
 
         if (!$success && $isNew) {
-            $entity->unset(this.getPrimaryKey());
-            $entity->setNew(true);
+            $entity.unset(this.getPrimaryKey());
+            $entity.setNew(true);
         }
 
         return $success ? $entity : false;
@@ -2010,11 +2010,11 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     protected function _onSaveSuccess(EntityInterface $entity, ArrayObject $options): bool
     {
-        $success = _associations->saveChildren(
+        $success = _associations.saveChildren(
             this,
             $entity,
             $options['associated'],
-            ['_primary' => false] + $options->getArrayCopy()
+            ['_primary': false] + $options.getArrayCopy()
         );
 
         if (!$success && $options['atomic']) {
@@ -2023,14 +2023,14 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
 
         this.dispatchEvent('Model.afterSave', compact('entity', 'options'));
 
-        if ($options['atomic'] && !this.getConnection()->inTransaction()) {
-            throw new RolledbackTransactionException(['table' => static::class]);
+        if ($options['atomic'] && !this.getConnection().inTransaction()) {
+            throw new RolledbackTransactionException(['table': static::class]);
         }
 
         if (!$options['atomic'] && !$options['_primary']) {
-            $entity->clean();
-            $entity->setNew(false);
-            $entity->setSource(this.getRegistryAlias());
+            $entity.clean();
+            $entity.setNew(false);
+            $entity.setSource(this.getRegistryAlias());
         }
 
         return true;
@@ -2069,12 +2069,12 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
 
         if (count($primary) > 1) {
             $schema = this.getSchema();
-            foreach ($primary as $k => $v) {
-                if (!isset($data[$k]) && empty($schema->getColumn($k)['autoIncrement'])) {
+            foreach ($primary as $k: $v) {
+                if (!isset($data[$k]) && empty($schema.getColumn($k)['autoIncrement'])) {
                     $msg = 'Cannot insert row, some of the primary key values are missing. ';
                     $msg .= sprintf(
                         'Got (%s), expecting (%s)',
-                        implode(', ', $filteredKeys + $entity->extract(array_keys($primary))),
+                        implode(', ', $filteredKeys + $entity.extract(array_keys($primary))),
                         implode(', ', array_keys($primary))
                     );
                     throw new RuntimeException($msg);
@@ -2086,27 +2086,27 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return false;
         }
 
-        $statement = this.query()->insert(array_keys($data))
-            ->values($data)
-            ->execute();
+        $statement = this.query().insert(array_keys($data))
+            .values($data)
+            .execute();
 
         $success = false;
-        if ($statement->rowCount() != 0) {
+        if ($statement.rowCount() != 0) {
             $success = $entity;
-            $entity->set($filteredKeys, ['guard' => false]);
+            $entity.set($filteredKeys, ['guard': false]);
             $schema = this.getSchema();
-            $driver = this.getConnection()->getDriver();
-            foreach ($primary as $key => $v) {
+            $driver = this.getConnection().getDriver();
+            foreach ($primary as $key: $v) {
                 if (!isset($data[$key])) {
-                    $id = $statement->lastInsertId(this.getTable(), $key);
+                    $id = $statement.lastInsertId(this.getTable(), $key);
                     /** @var string $type */
-                    $type = $schema->getColumnType($key);
-                    $entity->set($key, TypeFactory::build($type)->toPHP($id, $driver));
+                    $type = $schema.getColumnType($key);
+                    $entity.set($key, TypeFactory::build($type).toPHP($id, $driver));
                     break;
                 }
             }
         }
-        $statement->closeCursor();
+        $statement.closeCursor();
 
         return $success;
     }
@@ -2130,10 +2130,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return null;
         }
         /** @var string $typeName */
-        $typeName = this.getSchema()->getColumnType($primary[0]);
+        $typeName = this.getSchema().getColumnType($primary[0]);
         $type = TypeFactory::build($typeName);
 
-        return $type->newId();
+        return $type.newId();
     }
 
     /**
@@ -2147,7 +2147,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     protected function _update(EntityInterface $entity, array $data)
     {
         $primaryColumns = (array)this.getPrimaryKey();
-        $primaryKey = $entity->extract($primaryColumns);
+        $primaryKey = $entity.extract($primaryColumns);
 
         $data = array_diff_key($data, $primaryKey);
         if (empty($data)) {
@@ -2161,20 +2161,20 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             throw new InvalidArgumentException($message);
         }
 
-        if (!$entity->has($primaryColumns)) {
+        if (!$entity.has($primaryColumns)) {
             $message = 'All primary key value(s) are needed for updating, ';
             $message .= get_class($entity) . ' is missing ' . implode(', ', $primaryColumns);
             throw new InvalidArgumentException($message);
         }
 
         $statement = this.query()
-            ->update()
-            ->set($data)
-            ->where($primaryKey)
-            ->execute();
+            .update()
+            .set($data)
+            .where($primaryKey)
+            .execute();
 
-        $success = $statement->errorCode() == '00000' ? $entity : false;
-        $statement->closeCursor();
+        $success = $statement.errorCode() == '00000' ? $entity : false;
+        $statement.closeCursor();
 
         return $success;
     }
@@ -2229,14 +2229,14 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         if ($options instanceof SaveOptionsBuilder) {
             deprecationWarning('SaveOptionsBuilder is deprecated. Use a normal array for options instead.');
-            $options = $options->toArray();
+            $options = $options.toArray();
         }
 
         $options = new ArrayObject(
             (array)$options + [
-                'atomic' => true,
-                'checkRules' => true,
-                '_primary' => true,
+                'atomic': true,
+                'checkRules': true,
+                '_primary': true,
             ]
         );
         $options['_cleanOnSuccess'] = false;
@@ -2245,10 +2245,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $isNew = [];
         $cleanupOnFailure = function ($entities) use (&$isNew): void {
             /** @var array<\Cake\Datasource\EntityInterface> $entities */
-            foreach ($entities as $key => $entity) {
+            foreach ($entities as $key: $entity) {
                 if (isset($isNew[$key]) && $isNew[$key]) {
-                    $entity->unset(this.getPrimaryKey());
-                    $entity->setNew(true);
+                    $entity.unset(this.getPrimaryKey());
+                    $entity.setNew(true);
                 }
             }
         };
@@ -2257,9 +2257,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $failed = null;
         try {
             this.getConnection()
-                ->transactional(function () use ($entities, $options, &$isNew, &$failed) {
-                    foreach ($entities as $key => $entity) {
-                        $isNew[$key] = $entity->isNew();
+                .transactional(function () use ($entities, $options, &$isNew, &$failed) {
+                    foreach ($entities as $key: $entity) {
+                        $isNew[$key] = $entity.isNew();
                         if (this.save($entity, $options) == false) {
                             $failed = $entity;
 
@@ -2280,11 +2280,11 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         }
 
         $cleanupOnSuccess = function (EntityInterface $entity) use (&$cleanupOnSuccess) {
-            $entity->clean();
-            $entity->setNew(false);
+            $entity.clean();
+            $entity.setNew(false);
 
-            foreach (array_keys($entity->toArray()) as $field) {
-                $value = $entity->get($field);
+            foreach (array_keys($entity.toArray()) as $field) {
+                $value = $entity.get($field);
 
                 if ($value instanceof EntityInterface) {
                     $cleanupOnSuccess($value);
@@ -2341,9 +2341,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function delete(EntityInterface $entity, $options = []): bool
     {
         $options = new ArrayObject((array)$options + [
-            'atomic' => true,
-            'checkRules' => true,
-            '_primary' => true,
+            'atomic': true,
+            'checkRules': true,
+            '_primary': true,
         ]);
 
         $success = _executeTransaction(function () use ($entity, $options) {
@@ -2352,8 +2352,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
 
         if ($success && _transactionCommitted($options['atomic'], $options['_primary'])) {
             this.dispatchEvent('Model.afterDeleteCommit', [
-                'entity' => $entity,
-                'options' => $options,
+                'entity': $entity,
+                'options': $options,
             ]);
         }
 
@@ -2416,9 +2416,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     protected function _deleteMany(iterable $entities, $options = []): ?EntityInterface
     {
         $options = new ArrayObject((array)$options + [
-                'atomic' => true,
-                'checkRules' => true,
-                '_primary' => true,
+                'atomic': true,
+                'checkRules': true,
+                '_primary': true,
             ]);
 
         $failed = _executeTransaction(function () use ($entities, $options) {
@@ -2434,8 +2434,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         if ($failed == null && _transactionCommitted($options['atomic'], $options['_primary'])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent('Model.afterDeleteCommit', [
-                    'entity' => $entity,
-                    'options' => $options,
+                    'entity': $entity,
+                    'options': $options,
                 ]);
             }
         }
@@ -2477,12 +2477,12 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     protected function _processDelete(EntityInterface $entity, ArrayObject $options): bool
     {
-        if ($entity->isNew()) {
+        if ($entity.isNew()) {
             return false;
         }
 
         $primaryKey = (array)this.getPrimaryKey();
-        if (!$entity->has($primaryKey)) {
+        if (!$entity.has($primaryKey)) {
             $msg = 'Deleting requires all primary key values.';
             throw new InvalidArgumentException($msg);
         }
@@ -2492,34 +2492,34 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         }
 
         $event = this.dispatchEvent('Model.beforeDelete', [
-            'entity' => $entity,
-            'options' => $options,
+            'entity': $entity,
+            'options': $options,
         ]);
 
-        if ($event->isStopped()) {
-            return (bool)$event->getResult();
+        if ($event.isStopped()) {
+            return (bool)$event.getResult();
         }
 
-        $success = _associations->cascadeDelete(
+        $success = _associations.cascadeDelete(
             $entity,
-            ['_primary' => false] + $options->getArrayCopy()
+            ['_primary': false] + $options.getArrayCopy()
         );
         if (!$success) {
             return $success;
         }
 
         $statement = this.query()
-            ->delete()
-            ->where($entity->extract($primaryKey))
-            ->execute();
+            .delete()
+            .where($entity.extract($primaryKey))
+            .execute();
 
-        if ($statement->rowCount() < 1) {
+        if ($statement.rowCount() < 1) {
             return false;
         }
 
         this.dispatchEvent('Model.afterDelete', [
-            'entity' => $entity,
-            'options' => $options,
+            'entity': $entity,
+            'options': $options,
         ]);
 
         return true;
@@ -2535,7 +2535,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         $finder = 'find' . $type;
 
-        return method_exists(this, $finder) || _behaviors->hasFinder($type);
+        return method_exists(this, $finder) || _behaviors.hasFinder($type);
     }
 
     /**
@@ -2552,15 +2552,15 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function callFinder(string $type, Query $query, array $options = []): Query
     {
-        $query->applyOptions($options);
-        $options = $query->getOptions();
+        $query.applyOptions($options);
+        $options = $query.getOptions();
         $finder = 'find' . $type;
         if (method_exists(this, $finder)) {
             return this.{$finder}($query, $options);
         }
 
-        if (_behaviors->hasFinder($type)) {
-            return _behaviors->callFinder($type, [$query, $options]);
+        if (_behaviors.hasFinder($type)) {
+            return _behaviors.callFinder($type, [$query, $options]);
         }
 
         throw new BadMethodCallException(sprintf(
@@ -2621,7 +2621,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         } elseif ($hasOr != false) {
             $fields = explode('_or_', $fields);
             $conditions = [
-                'OR' => $makeConditions($fields, $args),
+                'OR': $makeConditions($fields, $args),
             ];
         } else {
             $fields = explode('_and_', $fields);
@@ -2629,7 +2629,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         }
 
         return this.find($findType, [
-            'conditions' => $conditions,
+            'conditions': $conditions,
         ]);
     }
 
@@ -2646,8 +2646,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function __call($method, $args)
     {
-        if (_behaviors->hasMethod($method)) {
-            return _behaviors->call($method, $args);
+        if (_behaviors.hasMethod($method)) {
+            return _behaviors.call($method, $args);
         }
         if (preg_match('/^find(?:\w+)?By/', $method) > 0) {
             return _dynamicFinder($method, $args);
@@ -2668,7 +2668,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function __get($property)
     {
-        $association = _associations->get($property);
+        $association = _associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
                 'Undefined property `%s`. ' .
@@ -2691,7 +2691,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function __isset($property)
     {
-        return _associations->has($property);
+        return _associations.has($property);
     }
 
     /**
@@ -2717,7 +2717,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         $class = this.getEntityClass();
 
-        return new $class([], ['source' => this.getRegistryAlias()]);
+        return new $class([], ['source': this.getRegistryAlias()]);
     }
 
     /**
@@ -2728,9 +2728,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * using the options parameter:
      *
      * ```
-     * $article = this.Articles->newEntity(
-     *   this.request->getData(),
-     *   ['associated' => ['Tags', 'Comments.Users']]
+     * $article = this.Articles.newEntity(
+     *   this.request.getData(),
+     *   ['associated': ['Tags', 'Comments.Users']]
      * );
      * ```
      *
@@ -2738,9 +2738,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * passing the `fields` option, which is also accepted for associations:
      *
      * ```
-     * $article = this.Articles->newEntity(this.request->getData(), [
-     *  'fields' => ['title', 'body', 'tags', 'comments'],
-     *  'associated' => ['Tags', 'Comments.Users' => ['fields' => 'username']]
+     * $article = this.Articles.newEntity(this.request.getData(), [
+     *  'fields': ['title', 'body', 'tags', 'comments'],
+     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
      * ]
      * );
      * ```
@@ -2750,9 +2750,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * you can use the `accessibleFields` option:
      *
      * ```
-     * $article = this.Articles->newEntity(
-     *   this.request->getData(),
-     *   ['accessibleFields' => ['protected_field' => true]]
+     * $article = this.Articles.newEntity(
+     *   this.request.getData(),
+     *   ['accessibleFields': ['protected_field': true]]
      * );
      * ```
      *
@@ -2761,9 +2761,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * The `validate` option can be used to disable validation on the passed data:
      *
      * ```
-     * $article = this.Articles->newEntity(
-     *   this.request->getData(),
-     *   ['validate' => false]
+     * $article = this.Articles.newEntity(
+     *   this.request.getData(),
+     *   ['validate': false]
      * );
      * ```
      *
@@ -2781,10 +2781,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function newEntity(array $data, array $options = []): EntityInterface
     {
-        $options['associated'] = $options['associated'] ?? _associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller->one($data, $options);
+        return $marshaller.one($data, $options);
     }
 
     /**
@@ -2795,9 +2795,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * using the options parameter:
      *
      * ```
-     * $articles = this.Articles->newEntities(
-     *   this.request->getData(),
-     *   ['associated' => ['Tags', 'Comments.Users']]
+     * $articles = this.Articles.newEntities(
+     *   this.request.getData(),
+     *   ['associated': ['Tags', 'Comments.Users']]
      * );
      * ```
      *
@@ -2805,9 +2805,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * passing the `fields` option, which is also accepted for associations:
      *
      * ```
-     * $articles = this.Articles->newEntities(this.request->getData(), [
-     *  'fields' => ['title', 'body', 'tags', 'comments'],
-     *  'associated' => ['Tags', 'Comments.Users' => ['fields' => 'username']]
+     * $articles = this.Articles.newEntities(this.request.getData(), [
+     *  'fields': ['title', 'body', 'tags', 'comments'],
+     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
      *  ]
      * );
      * ```
@@ -2821,10 +2821,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function newEntities(array $data, array $options = []): array
     {
-        $options['associated'] = $options['associated'] ?? _associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller->many($data, $options);
+        return $marshaller.many($data, $options);
     }
 
     /**
@@ -2838,17 +2838,17 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * passing the `fields` option, which is also accepted for associations:
      *
      * ```
-     * $article = this.Articles->patchEntity($article, this.request->getData(), [
-     *  'fields' => ['title', 'body', 'tags', 'comments'],
-     *  'associated' => ['Tags', 'Comments.Users' => ['fields' => 'username']]
+     * $article = this.Articles.patchEntity($article, this.request.getData(), [
+     *  'fields': ['title', 'body', 'tags', 'comments'],
+     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
      *  ]
      * );
      * ```
      *
      * ```
-     * $article = this.Articles->patchEntity($article, this.request->getData(), [
-     *   'associated' => [
-     *     'Tags' => ['accessibleFields' => ['*' => true]]
+     * $article = this.Articles.patchEntity($article, this.request.getData(), [
+     *   'associated': [
+     *     'Tags': ['accessibleFields': ['*': true]]
      *   ]
      * ]);
      * ```
@@ -2858,8 +2858,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * The `validate` option can be used to disable validation on the passed data:
      *
      * ```
-     * $article = this.patchEntity($article, this.request->getData(),[
-     *  'validate' => false
+     * $article = this.patchEntity($article, this.request.getData(),[
+     *  'validate': false
      * ]);
      * ```
      *
@@ -2880,10 +2880,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
-        $options['associated'] = $options['associated'] ?? _associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller->merge($entity, $data, $options);
+        return $marshaller.merge($entity, $data, $options);
     }
 
     /**
@@ -2901,9 +2901,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * passing the `fields` option, which is also accepted for associations:
      *
      * ```
-     * $articles = this.Articles->patchEntities($articles, this.request->getData(), [
-     *  'fields' => ['title', 'body', 'tags', 'comments'],
-     *  'associated' => ['Tags', 'Comments.Users' => ['fields' => 'username']]
+     * $articles = this.Articles.patchEntities($articles, this.request.getData(), [
+     *  'fields': ['title', 'body', 'tags', 'comments'],
+     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
      *  ]
      * );
      * ```
@@ -2919,10 +2919,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function patchEntities(iterable $entities, array $data, array $options = []): array
     {
-        $options['associated'] = $options['associated'] ?? _associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller->mergeMany($entities, $data, $options);
+        return $marshaller.mergeMany($entities, $data, $options);
     }
 
     /**
@@ -2933,18 +2933,18 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * ### Example:
      *
      * ```
-     * $validator->add('email', [
-     *  'unique' => ['rule' => 'validateUnique', 'provider' => 'table']
+     * $validator.add('email', [
+     *  'unique': ['rule': 'validateUnique', 'provider': 'table']
      * ])
      * ```
      *
      * Unique validation can be scoped to the value of another column:
      *
      * ```
-     * $validator->add('email', [
-     *  'unique' => [
-     *      'rule' => ['validateUnique', ['scope' => 'site_id']],
-     *      'provider' => 'table'
+     * $validator.add('email', [
+     *  'unique': [
+     *      'rule': ['validateUnique', ['scope': 'site_id']],
+     *      'provider': 'table'
      *  ]
      * ]);
      * ```
@@ -2967,16 +2967,16 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $entity = new Entity(
             $context['data'],
             [
-                'useSetters' => false,
-                'markNew' => $context['newRecord'],
-                'source' => this.getRegistryAlias(),
+                'useSetters': false,
+                'markNew': $context['newRecord'],
+                'source': this.getRegistryAlias(),
             ]
         );
         $fields = array_merge(
             [$context['field']],
             isset($options['scope']) ? (array)$options['scope'] : []
         );
-        $values = $entity->extract($fields);
+        $values = $entity.extract($fields);
         foreach ($values as $field) {
             if ($field != null && !is_scalar($field)) {
                 return false;
@@ -2986,7 +2986,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         /** @var \Cake\ORM\Rule\IsUnique $rule */
         $rule = new $class($fields, $options);
 
-        return $rule($entity, ['repository' => this]);
+        return $rule($entity, ['repository': this]);
     }
 
     /**
@@ -3000,40 +3000,40 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      *
      * The conventional method map is:
      *
-     * - Model.beforeMarshal => beforeMarshal
-     * - Model.afterMarshal => afterMarshal
-     * - Model.buildValidator => buildValidator
-     * - Model.beforeFind => beforeFind
-     * - Model.beforeSave => beforeSave
-     * - Model.afterSave => afterSave
-     * - Model.afterSaveCommit => afterSaveCommit
-     * - Model.beforeDelete => beforeDelete
-     * - Model.afterDelete => afterDelete
-     * - Model.afterDeleteCommit => afterDeleteCommit
-     * - Model.beforeRules => beforeRules
-     * - Model.afterRules => afterRules
+     * - Model.beforeMarshal: beforeMarshal
+     * - Model.afterMarshal: afterMarshal
+     * - Model.buildValidator: buildValidator
+     * - Model.beforeFind: beforeFind
+     * - Model.beforeSave: beforeSave
+     * - Model.afterSave: afterSave
+     * - Model.afterSaveCommit: afterSaveCommit
+     * - Model.beforeDelete: beforeDelete
+     * - Model.afterDelete: afterDelete
+     * - Model.afterDeleteCommit: afterDeleteCommit
+     * - Model.beforeRules: beforeRules
+     * - Model.afterRules: afterRules
      *
      * @return array<string, mixed>
      */
     function implementedEvents(): array
     {
         $eventMap = [
-            'Model.beforeMarshal' => 'beforeMarshal',
-            'Model.afterMarshal' => 'afterMarshal',
-            'Model.buildValidator' => 'buildValidator',
-            'Model.beforeFind' => 'beforeFind',
-            'Model.beforeSave' => 'beforeSave',
-            'Model.afterSave' => 'afterSave',
-            'Model.afterSaveCommit' => 'afterSaveCommit',
-            'Model.beforeDelete' => 'beforeDelete',
-            'Model.afterDelete' => 'afterDelete',
-            'Model.afterDeleteCommit' => 'afterDeleteCommit',
-            'Model.beforeRules' => 'beforeRules',
-            'Model.afterRules' => 'afterRules',
+            'Model.beforeMarshal': 'beforeMarshal',
+            'Model.afterMarshal': 'afterMarshal',
+            'Model.buildValidator': 'buildValidator',
+            'Model.beforeFind': 'beforeFind',
+            'Model.beforeSave': 'beforeSave',
+            'Model.afterSave': 'afterSave',
+            'Model.afterSaveCommit': 'afterSaveCommit',
+            'Model.beforeDelete': 'beforeDelete',
+            'Model.afterDelete': 'afterDelete',
+            'Model.afterDeleteCommit': 'afterDeleteCommit',
+            'Model.beforeRules': 'beforeRules',
+            'Model.afterRules': 'afterRules',
         ];
         $events = [];
 
-        foreach ($eventMap as $event => $method) {
+        foreach ($eventMap as $event: $method) {
             if (!method_exists(this, $method)) {
                 continue;
             }
@@ -3074,9 +3074,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * ### Example:
      *
      * ```
-     * $user = $usersTable->get(1);
-     * $user = $usersTable->loadInto($user, ['Articles.Tags', 'Articles.Comments']);
-     * echo $user->articles[0]->title;
+     * $user = $usersTable.get(1);
+     * $user = $usersTable.loadInto($user, ['Articles.Tags', 'Articles.Comments']);
+     * echo $user.articles[0].title;
      * ```
      *
      * You can also load associations for multiple entities at once
@@ -3084,9 +3084,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      * ### Example:
      *
      * ```
-     * $users = $usersTable->find()->where([...])->toList();
-     * $users = $usersTable->loadInto($users, ['Articles.Tags', 'Articles.Comments']);
-     * echo $user[1]->articles[0]->title;
+     * $users = $usersTable.find().where([...]).toList();
+     * $users = $usersTable.loadInto($users, ['Articles.Tags', 'Articles.Comments']);
+     * echo $user[1].articles[0].title;
      * ```
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
@@ -3098,7 +3098,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function loadInto($entities, array $contain)
     {
-        return (new LazyEagerLoader())->loadInto($entities, $contain, this);
+        return (new LazyEagerLoader()).loadInto($entities, $contain, this);
     }
 
     /**
@@ -3106,7 +3106,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     protected function validationMethodExists(string $name): bool
     {
-        return method_exists(this, $name) || this.behaviors()->hasMethod($name);
+        return method_exists(this, $name) || this.behaviors().hasMethod($name);
     }
 
     /**
@@ -3120,14 +3120,14 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $conn = this.getConnection();
 
         return [
-            'registryAlias' => this.getRegistryAlias(),
-            'table' => this.getTable(),
-            'alias' => this.getAlias(),
-            'entityClass' => this.getEntityClass(),
-            'associations' => _associations->keys(),
-            'behaviors' => _behaviors->loaded(),
-            'defaultConnection' => static::defaultConnectionName(),
-            'connectionName' => $conn->configName(),
+            'registryAlias': this.getRegistryAlias(),
+            'table': this.getTable(),
+            'alias': this.getAlias(),
+            'entityClass': this.getEntityClass(),
+            'associations': _associations.keys(),
+            'behaviors': _behaviors.loaded(),
+            'defaultConnection': static::defaultConnectionName(),
+            'connectionName': $conn.configName(),
         ];
     }
 }

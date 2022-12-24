@@ -42,7 +42,7 @@ use ReflectionMethod;
  * }
  * ```
  *
- * Would be called like `$table->doSomething($arg1, $arg2);`.
+ * Would be called like `$table.doSomething($arg1, $arg2);`.
  *
  * ### Callback methods
  *
@@ -225,7 +225,7 @@ class Behavior : EventListenerInterface
 
         $indexed = array_flip($defaults[$key]);
         $indexedCustom = array_flip($config[$key]);
-        foreach ($indexed as $method => $alias) {
+        foreach ($indexed as $method: $alias) {
             if (!isset($indexedCustom[$method])) {
                 $indexedCustom[$method] = $alias;
             }
@@ -278,25 +278,25 @@ class Behavior : EventListenerInterface
     function implementedEvents(): array
     {
         $eventMap = [
-            'Model.beforeMarshal' => 'beforeMarshal',
-            'Model.afterMarshal' => 'afterMarshal',
-            'Model.beforeFind' => 'beforeFind',
-            'Model.beforeSave' => 'beforeSave',
-            'Model.afterSave' => 'afterSave',
-            'Model.afterSaveCommit' => 'afterSaveCommit',
-            'Model.beforeDelete' => 'beforeDelete',
-            'Model.afterDelete' => 'afterDelete',
-            'Model.afterDeleteCommit' => 'afterDeleteCommit',
-            'Model.buildValidator' => 'buildValidator',
-            'Model.buildRules' => 'buildRules',
-            'Model.beforeRules' => 'beforeRules',
-            'Model.afterRules' => 'afterRules',
+            'Model.beforeMarshal': 'beforeMarshal',
+            'Model.afterMarshal': 'afterMarshal',
+            'Model.beforeFind': 'beforeFind',
+            'Model.beforeSave': 'beforeSave',
+            'Model.afterSave': 'afterSave',
+            'Model.afterSaveCommit': 'afterSaveCommit',
+            'Model.beforeDelete': 'beforeDelete',
+            'Model.afterDelete': 'afterDelete',
+            'Model.afterDeleteCommit': 'afterDeleteCommit',
+            'Model.buildValidator': 'buildValidator',
+            'Model.buildRules': 'buildRules',
+            'Model.beforeRules': 'beforeRules',
+            'Model.afterRules': 'afterRules',
         ];
         $config = this.getConfig();
         $priority = $config['priority'] ?? null;
         $events = [];
 
-        foreach ($eventMap as $event => $method) {
+        foreach ($eventMap as $event: $method) {
             if (!method_exists(this, $method)) {
                 continue;
             }
@@ -304,8 +304,8 @@ class Behavior : EventListenerInterface
                 $events[$event] = $method;
             } else {
                 $events[$event] = [
-                    'callable' => $method,
-                    'priority' => $priority,
+                    'callable': $method,
+                    'priority': $priority,
                 ];
             }
         }
@@ -316,17 +316,17 @@ class Behavior : EventListenerInterface
     /**
      * implementedFinders
      *
-     * Provides an alias->methodname map of which finders a behavior implements. Example:
+     * Provides an alias.methodname map of which finders a behavior implements. Example:
      *
      * ```
      *  [
-     *    'this' => 'findThis',
-     *    'alias' => 'findMethodName'
+     *    'this': 'findThis',
+     *    'alias': 'findMethodName'
      *  ]
      * ```
      *
-     * With the above example, a call to `$table->find('this')` will call `$behavior->findThis()`
-     * and a call to `$table->find('alias')` will call `$behavior->findMethodName()`
+     * With the above example, a call to `$table.find('this')` will call `$behavior.findThis()`
+     * and a call to `$table.find('alias')` will call `$behavior.findMethodName()`
      *
      * It is recommended, though not required, to define implementedFinders in the config property
      * of child classes such that it is not necessary to use reflections to derive the available
@@ -348,17 +348,17 @@ class Behavior : EventListenerInterface
     /**
      * implementedMethods
      *
-     * Provides an alias->methodname map of which methods a behavior implements. Example:
+     * Provides an alias.methodname map of which methods a behavior implements. Example:
      *
      * ```
      *  [
-     *    'method' => 'method',
-     *    'aliasedMethod' => 'somethingElse'
+     *    'method': 'method',
+     *    'aliasedMethod': 'somethingElse'
      *  ]
      * ```
      *
-     * With the above example, a call to `$table->method()` will call `$behavior->method()`
-     * and a call to `$table->aliasedMethod()` will call `$behavior->somethingElse()`
+     * With the above example, a call to `$table.method()` will call `$behavior.method()`
+     * and a call to `$table.aliasedMethod()` will call `$behavior.somethingElse()`
      *
      * It is recommended, though not required, to define implementedFinders in the config property
      * of child classes such that it is not necessary to use reflections to derive the available
@@ -414,14 +414,14 @@ class Behavior : EventListenerInterface
         }
 
         $return = [
-            'finders' => [],
-            'methods' => [],
+            'finders': [],
+            'methods': [],
         ];
 
         $reflection = new ReflectionClass($class);
 
-        foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $methodName = $method->getName();
+        foreach ($reflection.getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            $methodName = $method.getName();
             if (
                 in_array($methodName, $baseMethods, true) ||
                 isset($eventMethods[$methodName])

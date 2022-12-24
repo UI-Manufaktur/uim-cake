@@ -36,13 +36,13 @@ class MailTransport : AbstractTransport
 
         // https://github.com/cakephp/cakephp/issues/2209
         // https://bugs.php.net/bug.php?id=47983
-        $subject = str_replace("\r\n", '', $message->getSubject());
+        $subject = str_replace("\r\n", '', $message.getSubject());
 
-        $to = $message->getHeaders(['to'])['To'];
+        $to = $message.getHeaders(['to'])['To'];
         $to = str_replace("\r\n", '', $to);
 
         $eol = this.getConfig('eol', version_compare(PHP_VERSION, '8.0', '>=') ? "\r\n" : "\n");
-        $headers = $message->getHeadersString(
+        $headers = $message.getHeadersString(
             [
                 'from',
                 'sender',
@@ -58,7 +58,7 @@ class MailTransport : AbstractTransport
             }
         );
 
-        $message = $message->getBodyString($eol);
+        $message = $message.getBodyString($eol);
 
         $params = this.getConfig('additionalParameters', '');
         _mail($to, $subject, $message, $headers, $params);
@@ -66,7 +66,7 @@ class MailTransport : AbstractTransport
         $headers .= $eol . 'To: ' . $to;
         $headers .= $eol . 'Subject: ' . $subject;
 
-        return ['headers' => $headers, 'message' => $message];
+        return ['headers': $headers, 'message': $message];
     }
 
     /**

@@ -87,12 +87,12 @@ class AssociationCollection : IteratorAggregate
     function load(string $className, string $associated, array $options = []): Association
     {
         $options += [
-            'tableLocator' => this.getTableLocator(),
+            'tableLocator': this.getTableLocator(),
         ];
 
         $association = new $className($associated, $options);
 
-        return this.add($association->getName(), $association);
+        return this.add($association.getName(), $association);
     }
 
     /**
@@ -115,7 +115,7 @@ class AssociationCollection : IteratorAggregate
     function getByProperty(string $prop): ?Association
     {
         foreach (_items as $assoc) {
-            if ($assoc->getProperty() == $prop) {
+            if ($assoc.getProperty() == $prop) {
                 return $assoc;
             }
         }
@@ -187,7 +187,7 @@ class AssociationCollection : IteratorAggregate
      */
     function removeAll(): void
     {
-        foreach (_items as $alias => $object) {
+        foreach (_items as $alias: $object) {
             this.remove($alias);
         }
     }
@@ -256,7 +256,7 @@ class AssociationCollection : IteratorAggregate
         bool $owningSide
     ): bool {
         unset($options['associated']);
-        foreach ($associations as $alias => $nested) {
+        foreach ($associations as $alias: $nested) {
             if (is_int($alias)) {
                 $alias = $nested;
                 $nested = [];
@@ -266,11 +266,11 @@ class AssociationCollection : IteratorAggregate
                 $msg = sprintf(
                     'Cannot save %s, it is not associated to %s',
                     $alias,
-                    $table->getAlias()
+                    $table.getAlias()
                 );
                 throw new InvalidArgumentException($msg);
             }
-            if ($relation->isOwningSide($table) != $owningSide) {
+            if ($relation.isOwningSide($table) != $owningSide) {
                 continue;
             }
             if (!_save($relation, $entity, $nested, $options)) {
@@ -296,14 +296,14 @@ class AssociationCollection : IteratorAggregate
         array $nested,
         array $options
     ): bool {
-        if (!$entity->isDirty($association->getProperty())) {
+        if (!$entity.isDirty($association.getProperty())) {
             return true;
         }
         if (!empty($nested)) {
             $options = $nested + $options;
         }
 
-        return (bool)$association->saveAssociated($entity, $options);
+        return (bool)$association.saveAssociated($entity, $options);
     }
 
     /**
@@ -318,18 +318,18 @@ class AssociationCollection : IteratorAggregate
     {
         $noCascade = [];
         foreach (_items as $assoc) {
-            if (!$assoc->getCascadeCallbacks()) {
+            if (!$assoc.getCascadeCallbacks()) {
                 $noCascade[] = $assoc;
                 continue;
             }
-            $success = $assoc->cascadeDelete($entity, $options);
+            $success = $assoc.cascadeDelete($entity, $options);
             if (!$success) {
                 return false;
             }
         }
 
         foreach ($noCascade as $assoc) {
-            $success = $assoc->cascadeDelete($entity, $options);
+            $success = $assoc.cascadeDelete($entity, $options);
             if (!$success) {
                 return false;
             }

@@ -40,7 +40,7 @@ class RulesChecker : BaseRulesChecker
      * ### Example
      *
      * ```
-     * $rules->add($rules->isUnique(['email'], 'The email should be unique'));
+     * $rules.add($rules.isUnique(['email'], 'The email should be unique'));
      * ```
      *
      * ### Options
@@ -54,7 +54,7 @@ class RulesChecker : BaseRulesChecker
      */
     function isUnique(array $fields, $message = null): RuleInvoker
     {
-        $options = is_array($message) ? $message : ['message' => $message];
+        $options = is_array($message) ? $message : ['message': $message];
         $message = $options['message'] ?? null;
         unset($options['message']);
 
@@ -80,9 +80,9 @@ class RulesChecker : BaseRulesChecker
      * ### Example:
      *
      * ```
-     * $rules->add($rules->existsIn('author_id', 'Authors', 'Invalid Author'));
+     * $rules.add($rules.existsIn('author_id', 'Authors', 'Invalid Author'));
      *
-     * $rules->add($rules->existsIn('site_id', new SitesTable(), 'Invalid Site'));
+     * $rules.add($rules.existsIn('site_id', new SitesTable(), 'Invalid Site'));
      * ```
      *
      * Available $options are error 'message' and 'allowNullableNulls' flag.
@@ -100,7 +100,7 @@ class RulesChecker : BaseRulesChecker
     {
         $options = [];
         if (is_array($message)) {
-            $options = $message + ['message' => null];
+            $options = $message + ['message': null];
             $message = $options['message'];
             unset($options['message']);
         }
@@ -124,7 +124,7 @@ class RulesChecker : BaseRulesChecker
      * ### Example:
      *
      * ```
-     * $rules->addUpdate($rules->isLinkedTo('Articles', 'article'));
+     * $rules.addUpdate($rules.isLinkedTo('Articles', 'article'));
      * ```
      *
      * On a `Comments` table that has a `belongsTo Articles` association, this check would ensure that comments
@@ -154,7 +154,7 @@ class RulesChecker : BaseRulesChecker
      * ### Example:
      *
      * ```
-     * $rules->addDelete($rules->isNotLinkedTo('Comments', 'comments'));
+     * $rules.addDelete($rules.isNotLinkedTo('Comments', 'comments'));
      * ```
      *
      * On a `Articles` table that has a `hasMany Comments` association, this check would ensure that articles
@@ -203,10 +203,10 @@ class RulesChecker : BaseRulesChecker
         string $ruleName
     ): RuleInvoker {
         if ($association instanceof Association) {
-            $associationAlias = $association->getName();
+            $associationAlias = $association.getName();
 
             if ($errorField == null) {
-                $errorField = $association->getProperty();
+                $errorField = $association.getProperty();
             }
         } elseif (is_string($association)) {
             $associationAlias = $association;
@@ -214,8 +214,8 @@ class RulesChecker : BaseRulesChecker
             if ($errorField == null) {
                 $repository = _options['repository'] ?? null;
                 if ($repository instanceof Table) {
-                    $association = $repository->getAssociation($association);
-                    $errorField = $association->getProperty();
+                    $association = $repository.getAssociation($association);
+                    $errorField = $association.getProperty();
                 } else {
                     $errorField = Inflector::underscore($association);
                 }

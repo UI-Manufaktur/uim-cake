@@ -288,7 +288,7 @@ class Message : JsonSerializable, Serializable
      * @var array<string, string>
      */
     protected $contentTypeCharset = [
-        'ISO-2022-JP-MS' => 'ISO-2022-JP',
+        'ISO-2022-JP-MS': 'ISO-2022-JP',
     ];
 
     /**
@@ -690,12 +690,12 @@ class Message : JsonSerializable, Serializable
     {
         if (!is_array($email)) {
             this.validateEmail($email, $varName);
-            this.{$varName} = [$email => $name ?? $email];
+            this.{$varName} = [$email: $name ?? $email];
 
             return this;
         }
         $list = [];
-        foreach ($email as $key => $value) {
+        foreach ($email as $key: $value) {
             if (is_int($key)) {
                 $key = $value;
             }
@@ -783,7 +783,7 @@ class Message : JsonSerializable, Serializable
             return this;
         }
         $list = [];
-        foreach ($email as $key => $value) {
+        foreach ($email as $key: $value) {
             if (is_int($key)) {
                 $key = $value;
             }
@@ -889,16 +889,16 @@ class Message : JsonSerializable, Serializable
 
         $headers = [];
         $relation = [
-            'from' => 'From',
-            'replyTo' => 'Reply-To',
-            'readReceipt' => 'Disposition-Notification-To',
-            'returnPath' => 'Return-Path',
-            'to' => 'To',
-            'cc' => 'Cc',
-            'bcc' => 'Bcc',
+            'from': 'From',
+            'replyTo': 'Reply-To',
+            'readReceipt': 'Disposition-Notification-To',
+            'returnPath': 'Return-Path',
+            'to': 'To',
+            'cc': 'Cc',
+            'bcc': 'Bcc',
         ];
         $headersMultipleEmails = ['to', 'cc', 'bcc', 'replyTo'];
-        foreach ($relation as $var => $header) {
+        foreach ($relation as $var: $header) {
             if ($include[$var]) {
                 if (in_array($var, $headersMultipleEmails)) {
                     $headers[$header] = implode(', ', this.formatAddress(this.{$var}));
@@ -968,7 +968,7 @@ class Message : JsonSerializable, Serializable
         }
 
         $headers = [];
-        foreach ($lines as $key => $value) {
+        foreach ($lines as $key: $value) {
             if (empty($value) && $value != '0') {
                 continue;
             }
@@ -994,7 +994,7 @@ class Message : JsonSerializable, Serializable
     protected function formatAddress(array $address): array
     {
         $return = [];
-        foreach ($address as $email => $alias) {
+        foreach ($address as $email: $alias) {
             if ($email == $alias) {
                 $return[] = $email;
             } else {
@@ -1125,17 +1125,17 @@ class Message : JsonSerializable, Serializable
      * Attach a file with a different filename:
      *
      * ```
-     * this.setAttachments(['custom_name.txt' => 'path/to/file.txt']);
+     * this.setAttachments(['custom_name.txt': 'path/to/file.txt']);
      * ```
      *
      * Attach a file and specify additional properties:
      *
      * ```
-     * this.setAttachments(['custom_name.png' => [
-     *      'file' => 'path/to/file',
-     *      'mimetype' => 'image/png',
-     *      'contentId' => 'abc123',
-     *      'contentDisposition' => false
+     * this.setAttachments(['custom_name.png': [
+     *      'file': 'path/to/file',
+     *      'mimetype': 'image/png',
+     *      'contentId': 'abc123',
+     *      'contentDisposition': false
      *    ]
      * ]);
      * ```
@@ -1143,9 +1143,9 @@ class Message : JsonSerializable, Serializable
      * Attach a file from string and specify additional properties:
      *
      * ```
-     * this.setAttachments(['custom_name.png' => [
-     *      'data' => file_get_contents('path/to/file'),
-     *      'mimetype' => 'image/png'
+     * this.setAttachments(['custom_name.png': [
+     *      'data': file_get_contents('path/to/file'),
+     *      'mimetype': 'image/png'
      *    ]
      * ]);
      * ```
@@ -1163,9 +1163,9 @@ class Message : JsonSerializable, Serializable
     function setAttachments(array $attachments)
     {
         $attach = [];
-        foreach ($attachments as $name => $fileInfo) {
+        foreach ($attachments as $name: $fileInfo) {
             if (!is_array($fileInfo)) {
-                $fileInfo = ['file' => $fileInfo];
+                $fileInfo = ['file': $fileInfo];
             }
             if (!isset($fileInfo['file'])) {
                 if (!isset($fileInfo['data'])) {
@@ -1176,10 +1176,10 @@ class Message : JsonSerializable, Serializable
                 }
                 $fileInfo['data'] = chunk_split(base64_encode($fileInfo['data']), 76, "\r\n");
             } elseif ($fileInfo['file'] instanceof UploadedFileInterface) {
-                $fileInfo['mimetype'] = $fileInfo['file']->getClientMediaType();
+                $fileInfo['mimetype'] = $fileInfo['file'].getClientMediaType();
                 if (is_int($name)) {
                     /** @var string $name */
-                    $name = $fileInfo['file']->getClientFilename();
+                    $name = $fileInfo['file'].getClientFilename();
                 }
             } elseif (is_string($fileInfo['file'])) {
                 $fileName = $fileInfo['file'];
@@ -1393,7 +1393,7 @@ class Message : JsonSerializable, Serializable
         }
 
         $msg = [];
-        foreach (this.attachments as $filename => $fileInfo) {
+        foreach (this.attachments as $filename: $fileInfo) {
             if (!empty($fileInfo['contentId'])) {
                 continue;
             }
@@ -1405,11 +1405,11 @@ class Message : JsonSerializable, Serializable
             $part = new FormDataPart('', $data, '', this.getHeaderCharset());
 
             if ($hasDisposition) {
-                $part->disposition('attachment');
-                $part->filename($filename);
+                $part.disposition('attachment');
+                $part.filename($filename);
             }
-            $part->transferEncoding('base64');
-            $part->type($fileInfo['mimetype']);
+            $part.transferEncoding('base64');
+            $part.type($fileInfo['mimetype']);
 
             $msg[] = '--' . $boundary;
             $msg[] = (string)$part;
@@ -1433,7 +1433,7 @@ class Message : JsonSerializable, Serializable
         }
 
         $msg = [];
-        foreach (this.getAttachments() as $filename => $fileInfo) {
+        foreach (this.getAttachments() as $filename: $fileInfo) {
             if (empty($fileInfo['contentId'])) {
                 continue;
             }
@@ -1441,10 +1441,10 @@ class Message : JsonSerializable, Serializable
 
             $msg[] = '--' . $boundary;
             $part = new FormDataPart('', $data, 'inline', this.getHeaderCharset());
-            $part->type($fileInfo['mimetype']);
-            $part->transferEncoding('base64');
-            $part->contentId($fileInfo['contentId']);
-            $part->filename($filename);
+            $part.type($fileInfo['mimetype']);
+            $part.transferEncoding('base64');
+            $part.contentId($fileInfo['contentId']);
+            $part.filename($filename);
             $msg[] = (string)$part;
             $msg[] = '';
         }
@@ -1510,7 +1510,7 @@ class Message : JsonSerializable, Serializable
      */
     function setBody(array $content)
     {
-        foreach ($content as $type => $text) {
+        foreach ($content as $type: $text) {
             if (!in_array($type, this.emailFormatAvailable, true)) {
                 throw new InvalidArgumentException(sprintf(
                     'Invalid message type: "%s". Valid types are: "text", "html".',
@@ -1542,7 +1542,7 @@ class Message : JsonSerializable, Serializable
      */
     function setBodyText(string $content)
     {
-        this.setBody([static::MESSAGE_TEXT => $content]);
+        this.setBody([static::MESSAGE_TEXT: $content]);
 
         return this;
     }
@@ -1555,7 +1555,7 @@ class Message : JsonSerializable, Serializable
      */
     function setBodyHtml(string $content)
     {
-        this.setBody([static::MESSAGE_HTML => $content]);
+        this.setBody([static::MESSAGE_HTML: $content]);
 
         return this;
     }
@@ -1796,7 +1796,7 @@ class Message : JsonSerializable, Serializable
         if (is_string($file)) {
             $content = (string)file_get_contents($file);
         } else {
-            $content = (string)$file->getStream();
+            $content = (string)$file.getStream();
         }
 
         return chunk_split(base64_encode($content));
@@ -1881,7 +1881,7 @@ class Message : JsonSerializable, Serializable
      */
     function createFromArray(array $config)
     {
-        foreach ($config as $property => $value) {
+        foreach ($config as $property: $value) {
             this.{$property} = $value;
         }
 

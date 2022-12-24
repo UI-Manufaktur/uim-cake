@@ -33,7 +33,7 @@ use Closure;
  * Regular counter cache
  * ```
  * [
- *     'Users' => [
+ *     'Users': [
  *         'post_count'
  *     ]
  * ]
@@ -42,10 +42,10 @@ use Closure;
  * Counter cache with scope
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => [
- *             'conditions' => [
- *                 'published' => true
+ *     'Users': [
+ *         'posts_published': [
+ *             'conditions': [
+ *                 'published': true
  *             ]
  *         ]
  *     ]
@@ -55,9 +55,9 @@ use Closure;
  * Counter cache using custom find
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => [
- *             'finder' => 'published' // Will be using findPublished()
+ *     'Users': [
+ *         'posts_published': [
+ *             'finder': 'published' // Will be using findPublished()
  *         ]
  *     ]
  * ]
@@ -68,13 +68,13 @@ use Closure;
  *
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => function (EventInterface $event, EntityInterface $entity, Table $table) {
- *             $query = $table->find('all')->where([
- *                 'published' => true,
- *                 'user_id' => $entity->get('user_id')
+ *     'Users': [
+ *         'posts_published': function (EventInterface $event, EntityInterface $entity, Table $table) {
+ *             $query = $table.find('all').where([
+ *                 'published': true,
+ *                 'user_id': $entity.get('user_id')
  *             ]);
- *             return $query->count();
+ *             return $query.count();
  *          }
  *     ]
  * ]
@@ -86,9 +86,9 @@ use Closure;
  * Ignore updating the field if it is dirty
  * ```
  * [
- *     'Users' => [
- *         'posts_published' => [
- *             'ignoreDirty' => true
+ *     'Users': [
+ *         'posts_published': [
+ *             'ignoreDirty': true
  *         ]
  *     ]
  * ]
@@ -98,7 +98,7 @@ use Closure;
  * to your save operation:
  *
  * ```
- * this.Articles->save($article, ['ignoreCounterCache' => true]);
+ * this.Articles.save($article, ['ignoreCounterCache': true]);
  * ```
  */
 class CounterCacheBehavior : Behavior
@@ -126,21 +126,21 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        foreach (_config as $assoc => $settings) {
-            $assoc = _table->getAssociation($assoc);
-            foreach ($settings as $field => $config) {
+        foreach (_config as $assoc: $settings) {
+            $assoc = _table.getAssociation($assoc);
+            foreach ($settings as $field: $config) {
                 if (is_int($field)) {
                     continue;
                 }
 
-                $registryAlias = $assoc->getTarget()->getRegistryAlias();
-                $entityAlias = $assoc->getProperty();
+                $registryAlias = $assoc.getTarget().getRegistryAlias();
+                $entityAlias = $assoc.getProperty();
 
                 if (
                     !is_callable($config) &&
                     isset($config['ignoreDirty']) &&
                     $config['ignoreDirty'] == true &&
-                    $entity->$entityAlias->isDirty($field)
+                    $entity.$entityAlias.isDirty($field)
                 ) {
                     _ignoreDirty[$registryAlias][$field] = true;
                 }
@@ -196,8 +196,8 @@ class CounterCacheBehavior : Behavior
      */
     protected function _processAssociations(EventInterface $event, EntityInterface $entity): void
     {
-        foreach (_config as $assoc => $settings) {
-            $assoc = _table->getAssociation($assoc);
+        foreach (_config as $assoc: $settings) {
+            $assoc = _table.getAssociation($assoc);
             _processAssociation($event, $entity, $assoc, $settings);
         }
     }
@@ -218,33 +218,33 @@ class CounterCacheBehavior : Behavior
         Association $assoc,
         array $settings
     ): void {
-        $foreignKeys = (array)$assoc->getForeignKey();
-        $countConditions = $entity->extract($foreignKeys);
+        $foreignKeys = (array)$assoc.getForeignKey();
+        $countConditions = $entity.extract($foreignKeys);
 
-        foreach ($countConditions as $field => $value) {
+        foreach ($countConditions as $field: $value) {
             if ($value == null) {
                 $countConditions[$field . ' IS'] = $value;
                 unset($countConditions[$field]);
             }
         }
 
-        $primaryKeys = (array)$assoc->getBindingKey();
+        $primaryKeys = (array)$assoc.getBindingKey();
         $updateConditions = array_combine($primaryKeys, $countConditions);
 
-        $countOriginalConditions = $entity->extractOriginalChanged($foreignKeys);
+        $countOriginalConditions = $entity.extractOriginalChanged($foreignKeys);
         if ($countOriginalConditions != []) {
             $updateOriginalConditions = array_combine($primaryKeys, $countOriginalConditions);
         }
 
-        foreach ($settings as $field => $config) {
+        foreach ($settings as $field: $config) {
             if (is_int($field)) {
                 $field = $config;
                 $config = [];
             }
 
             if (
-                isset(_ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field]) &&
-                _ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field] == true
+                isset(_ignoreDirty[$assoc.getTarget().getRegistryAlias()][$field]) &&
+                _ignoreDirty[$assoc.getTarget().getRegistryAlias()][$field] == true
             ) {
                 continue;
             }
@@ -256,7 +256,7 @@ class CounterCacheBehavior : Behavior
                     $count = _getCount($config, $countConditions);
                 }
                 if ($count != false) {
-                    $assoc->getTarget()->updateAll([$field => $count], $updateConditions);
+                    $assoc.getTarget().updateAll([$field: $count], $updateConditions);
                 }
             }
 
@@ -267,7 +267,7 @@ class CounterCacheBehavior : Behavior
                     $count = _getCount($config, $countOriginalConditions);
                 }
                 if ($count != false) {
-                    $assoc->getTarget()->updateAll([$field => $count], $updateOriginalConditions);
+                    $assoc.getTarget().updateAll([$field: $count], $updateOriginalConditions);
                 }
             }
         }
@@ -302,8 +302,8 @@ class CounterCacheBehavior : Behavior
         }
 
         $config['conditions'] = array_merge($conditions, $config['conditions'] ?? []);
-        $query = _table->find($finder, $config);
+        $query = _table.find($finder, $config);
 
-        return $query->count();
+        return $query.count();
     }
 }

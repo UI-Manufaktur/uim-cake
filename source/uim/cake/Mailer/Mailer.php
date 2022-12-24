@@ -42,9 +42,9 @@ use InvalidArgumentException;
  *     function resetPassword($user)
  *     {
  *         this
- *             ->setSubject('Reset Password')
- *             ->setTo($user->email)
- *             ->set(['token' => $user->token]);
+ *             .setSubject('Reset Password')
+ *             .setTo($user.email)
+ *             .set(['token': $user.token]);
  *     }
  * }
  * ```
@@ -57,7 +57,7 @@ use InvalidArgumentException;
  *
  * ```
  * $mailer = new UserMailer();
- * $mailer->send('resetPassword', $user);
+ * $mailer.send('resetPassword', $user);
  * ```
  *
  * ## Event Listener
@@ -72,13 +72,13 @@ use InvalidArgumentException;
  * function implementedEvents(): array
  * {
  *     return [
- *         'Model.afterSave' => 'onRegistration',
+ *         'Model.afterSave': 'onRegistration',
  *     ];
  * }
  *
  * function onRegistration(EventInterface $event, EntityInterface $entity, ArrayObject $options)
  * {
- *     if ($entity->isNew()) {
+ *     if ($entity.isNew()) {
  *          this.send('welcome', [$entity]);
  *     }
  * }
@@ -181,9 +181,9 @@ class Mailer : EventListenerInterface
      * @var array<string, mixed>
      */
     protected $clonedInstances = [
-        'message' => null,
-        'renderer' => null,
-        'transport' => null,
+        'message': null,
+        'renderer': null,
+        'transport': null,
     ];
 
     /**
@@ -228,7 +228,7 @@ class Mailer : EventListenerInterface
      */
     function viewBuilder(): ViewBuilder
     {
-        return this.getRenderer()->viewBuilder();
+        return this.getRenderer().viewBuilder();
     }
 
     /**
@@ -290,7 +290,7 @@ class Mailer : EventListenerInterface
      */
     function __call(string $method, array $args)
     {
-        $result = this.message->$method(...$args);
+        $result = this.message.$method(...$args);
         if (strpos($method, 'get') == 0) {
             return $result;
         }
@@ -322,7 +322,7 @@ class Mailer : EventListenerInterface
      */
     function setViewVars($key, $value = null)
     {
-        this.getRenderer()->set($key, $value);
+        this.getRenderer().set($key, $value);
 
         return this;
     }
@@ -347,8 +347,8 @@ class Mailer : EventListenerInterface
 
         if (!method_exists(this, $action)) {
             throw new MissingActionException([
-                'mailer' => static::class,
-                'action' => $action,
+                'mailer': static::class,
+                'action': $action,
             ]);
         }
 
@@ -358,9 +358,9 @@ class Mailer : EventListenerInterface
             this.clonedInstances['transport'] = clone this.transport;
         }
 
-        this.getMessage()->setHeaders($headers);
-        if (!this.viewBuilder()->getTemplate()) {
-            this.viewBuilder()->setTemplate($action);
+        this.getMessage().setHeaders($headers);
+        if (!this.viewBuilder().getTemplate()) {
+            this.viewBuilder().setTemplate($action);
         }
 
         try {
@@ -382,12 +382,12 @@ class Mailer : EventListenerInterface
      */
     function render(string $content = '')
     {
-        $content = this.getRenderer()->render(
+        $content = this.getRenderer().render(
             $content,
-            this.message->getBodyTypes()
+            this.message.getBodyTypes()
         );
 
-        this.message->setBody($content);
+        this.message.setBody($content);
 
         return this;
     }
@@ -403,7 +403,7 @@ class Mailer : EventListenerInterface
     {
         this.render($content);
 
-        $result = this.getTransport()->send(this.message);
+        $result = this.getTransport().send(this.message);
         this.logDelivery($result);
 
         return $result;
@@ -442,26 +442,26 @@ class Mailer : EventListenerInterface
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                this.viewBuilder()->{'set' . ucfirst($method)}($config[$method]);
+                this.viewBuilder().{'set' . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
         if (array_key_exists('helpers', $config)) {
-            this.viewBuilder()->setHelpers($config['helpers'], false);
+            this.viewBuilder().setHelpers($config['helpers'], false);
             unset($config['helpers']);
         }
         if (array_key_exists('viewRenderer', $config)) {
-            this.viewBuilder()->setClassName($config['viewRenderer']);
+            this.viewBuilder().setClassName($config['viewRenderer']);
             unset($config['viewRenderer']);
         }
         if (array_key_exists('viewVars', $config)) {
-            this.viewBuilder()->setVars($config['viewVars']);
+            this.viewBuilder().setVars($config['viewVars']);
             unset($config['viewVars']);
         }
         if (isset($config['autoLayout'])) {
             if ($config['autoLayout'] == false) {
-                this.viewBuilder()->disableAutoLayout();
+                this.viewBuilder().disableAutoLayout();
             }
             unset($config['autoLayout']);
         }
@@ -470,7 +470,7 @@ class Mailer : EventListenerInterface
             this.setLogConfig($config['log']);
         }
 
-        this.message->setConfig($config);
+        this.message.setConfig($config);
 
         return this;
     }
@@ -551,13 +551,13 @@ class Mailer : EventListenerInterface
      */
     function reset()
     {
-        this.message->reset();
-        this.getRenderer()->reset();
+        this.message.reset();
+        this.getRenderer().reset();
         this.transport = null;
         this.clonedInstances = [
-            'message' => null,
-            'renderer' => null,
-            'transport' => null,
+            'message': null,
+            'renderer': null,
+            'transport': null,
         ];
 
         return this;
@@ -592,12 +592,12 @@ class Mailer : EventListenerInterface
     protected function setLogConfig($log)
     {
         $config = [
-            'level' => 'debug',
-            'scope' => 'email',
+            'level': 'debug',
+            'scope': 'email',
         ];
         if ($log != true) {
             if (!is_array($log)) {
-                $log = ['level' => $log];
+                $log = ['level': $log];
             }
             $config = $log + $config;
         }

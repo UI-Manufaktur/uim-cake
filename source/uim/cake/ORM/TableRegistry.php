@@ -33,10 +33,10 @@ use Cake\ORM\Locator\LocatorInterface;
  * an instance is made, the instances *will not* be updated.
  *
  * ```
- * TableRegistry::getTableLocator()->setConfig('Users', ['table' => 'my_users']);
+ * TableRegistry::getTableLocator().setConfig('Users', ['table': 'my_users']);
  *
  * // Prior to 3.6.0
- * TableRegistry::config('Users', ['table' => 'my_users']);
+ * TableRegistry::config('Users', ['table': 'my_users']);
  * ```
  *
  * Configuration data is stored *per alias* if you use the same table with
@@ -50,7 +50,7 @@ use Cake\ORM\Locator\LocatorInterface;
  * helps make cyclic references easier to solve.
  *
  * ```
- * $table = TableRegistry::getTableLocator()->get('Users', $config);
+ * $table = TableRegistry::getTableLocator().get('Users', $config);
  *
  * // Prior to 3.6.0
  * $table = TableRegistry::get('Users', $config);
@@ -92,7 +92,7 @@ class TableRegistry
      */
     public static function get(string $alias, array $options = []): Table
     {
-        return static::getTableLocator()->get($alias, $options);
+        return static::getTableLocator().get($alias, $options);
     }
 
     /**
@@ -104,7 +104,7 @@ class TableRegistry
      */
     public static function exists(string $alias): bool
     {
-        return static::getTableLocator()->exists($alias);
+        return static::getTableLocator().exists($alias);
     }
 
     /**
@@ -117,7 +117,7 @@ class TableRegistry
      */
     public static function set(string $alias, Table $object): Table
     {
-        return static::getTableLocator()->set($alias, $object);
+        return static::getTableLocator().set($alias, $object);
     }
 
     /**
@@ -129,7 +129,7 @@ class TableRegistry
      */
     public static function remove(string $alias): void
     {
-        static::getTableLocator()->remove($alias);
+        static::getTableLocator().remove($alias);
     }
 
     /**
@@ -140,6 +140,6 @@ class TableRegistry
      */
     public static function clear(): void
     {
-        static::getTableLocator()->clear();
+        static::getTableLocator().clear();
     }
 }

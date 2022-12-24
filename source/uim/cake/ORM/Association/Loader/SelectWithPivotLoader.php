@@ -94,37 +94,37 @@ class SelectWithPivotLoader : SelectLoader
             $query = $queryBuilder($query);
         }
 
-        if ($query->isAutoFieldsEnabled() == null) {
-            $query->enableAutoFields($query->clause('select') == []);
+        if ($query.isAutoFieldsEnabled() == null) {
+            $query.enableAutoFields($query.clause('select') == []);
         }
 
         // Ensure that association conditions are applied
         // and that the required keys are in the selected columns.
 
         $tempName = this.alias . '_CJoin';
-        $schema = $assoc->getSchema();
+        $schema = $assoc.getSchema();
         $joinFields = $types = [];
 
-        foreach ($schema->typeMap() as $f => $type) {
+        foreach ($schema.typeMap() as $f: $type) {
             $key = $tempName . '__' . $f;
             $joinFields[$key] = "$name.$f";
             $types[$key] = $type;
         }
 
         $query
-            ->where(this.junctionConditions)
-            ->select($joinFields);
+            .where(this.junctionConditions)
+            .select($joinFields);
 
         $query
-            ->getEagerLoader()
-            ->addToJoinsMap($tempName, $assoc, false, this.junctionProperty);
+            .getEagerLoader()
+            .addToJoinsMap($tempName, $assoc, false, this.junctionProperty);
 
-        $assoc->attachTo($query, [
-            'aliasPath' => $assoc->getAlias(),
-            'includeFields' => false,
-            'propertyPath' => this.junctionProperty,
+        $assoc.attachTo($query, [
+            'aliasPath': $assoc.getAlias(),
+            'includeFields': false,
+            'propertyPath': this.junctionProperty,
         ]);
-        $query->getTypeMap()->addDefaults($types);
+        $query.getTypeMap().addDefaults($types);
 
         return $query;
     }
@@ -174,7 +174,7 @@ class SelectWithPivotLoader : SelectLoader
         $resultMap = [];
         $key = (array)$options['foreignKey'];
 
-        foreach ($fetchQuery->all() as $result) {
+        foreach ($fetchQuery.all() as $result) {
             if (!isset($result[this.junctionProperty])) {
                 throw new RuntimeException(sprintf(
                     '"%s" is missing from the belongsToMany results. Results cannot be created.',

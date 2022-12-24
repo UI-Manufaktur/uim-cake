@@ -48,20 +48,20 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'implementedFinders' => ['translations' => 'findTranslations'],
-        'implementedMethods' => [
-            'setLocale' => 'setLocale',
-            'getLocale' => 'getLocale',
-            'translationField' => 'translationField',
+        'implementedFinders': ['translations': 'findTranslations'],
+        'implementedMethods': [
+            'setLocale': 'setLocale',
+            'getLocale': 'getLocale',
+            'translationField': 'translationField',
         ],
-        'fields' => [],
-        'defaultLocale' => null,
-        'referenceName' => '',
-        'allowEmptyTranslations' => true,
-        'onlyTranslated' => false,
-        'strategy' => 'subquery',
-        'tableLocator' => null,
-        'validator' => false,
+        'fields': [],
+        'defaultLocale': null,
+        'referenceName': '',
+        'allowEmptyTranslations': true,
+        'onlyTranslated': false,
+        'strategy': 'subquery',
+        'tableLocator': null,
+        'validator': false,
     ];
 
     /**
@@ -108,9 +108,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     public this(Table $table, array $config = [])
     {
         $config += [
-            'defaultLocale' => I18n::getDefaultLocale(),
-            'referenceName' => this.referenceName($table),
-            'tableLocator' => $table->associations()->getTableLocator(),
+            'defaultLocale': I18n::getDefaultLocale(),
+            'referenceName': this.referenceName($table),
+            'tableLocator': $table.associations().getTableLocator(),
         ];
 
         parent::__construct($table, $config);
@@ -207,9 +207,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     function implementedEvents(): array
     {
         return [
-            'Model.beforeFind' => 'beforeFind',
-            'Model.beforeSave' => 'beforeSave',
-            'Model.afterSave' => 'afterSave',
+            'Model.beforeFind': 'beforeFind',
+            'Model.beforeSave': 'beforeSave',
+            'Model.afterSave': 'afterSave',
         ];
     }
 
@@ -217,17 +217,17 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * {@inheritDoc}
      *
      * Add in `_translations` marshalling handlers. You can disable marshalling
-     * of translations by setting `'translations' => false` in the options
+     * of translations by setting `'translations': false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> $options The options array used in the marshalling call.
-     * @return array A map of `[property => callable]` of additional properties to marshal.
+     * @return array A map of `[property: callable]` of additional properties to marshal.
      */
     function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
-        return this.getStrategy()->buildMarshalMap($marshaller, $map, $options);
+        return this.getStrategy().buildMarshalMap($marshaller, $map, $options);
     }
 
     /**
@@ -252,7 +252,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      */
     function setLocale(?string $locale)
     {
-        this.getStrategy()->setLocale($locale);
+        this.getStrategy().setLocale($locale);
 
         return this;
     }
@@ -269,7 +269,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      */
     function getLocale(): string
     {
-        return this.getStrategy()->getLocale();
+        return this.getStrategy().getLocale();
     }
 
     /**
@@ -284,7 +284,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      */
     function translationField(string $field): string
     {
-        return this.getStrategy()->translationField($field);
+        return this.getStrategy().translationField($field);
     }
 
     /**
@@ -298,8 +298,8 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * ### Example:
      *
      * ```
-     * $article = $articles->find('translations', ['locales' => ['eng', 'deu'])->first();
-     * $englishTranslatedFields = $article->get('_translations')['eng'];
+     * $article = $articles.find('translations', ['locales': ['eng', 'deu']).first();
+     * $englishTranslatedFields = $article.get('_translations')['eng'];
      * ```
      *
      * If the `locales` array is not passed, it will bring all translations found
@@ -312,18 +312,18 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     function findTranslations(Query $query, array $options): Query
     {
         $locales = $options['locales'] ?? [];
-        $targetAlias = this.getStrategy()->getTranslationTable()->getAlias();
+        $targetAlias = this.getStrategy().getTranslationTable().getAlias();
 
         return $query
-            ->contain([$targetAlias => function ($query) use ($locales, $targetAlias) {
+            .contain([$targetAlias: function ($query) use ($locales, $targetAlias) {
                 /** @var \Cake\Datasource\QueryInterface $query */
                 if ($locales) {
-                    $query->where(["$targetAlias.locale IN" => $locales]);
+                    $query.where(["$targetAlias.locale IN": $locales]);
                 }
 
                 return $query;
             }])
-            ->formatResults([this.getStrategy(), 'groupTranslations'], $query::PREPEND);
+            .formatResults([this.getStrategy(), 'groupTranslations'], $query::PREPEND);
     }
 
     /**
@@ -335,14 +335,14 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      */
     function __call($method, $args)
     {
-        return this.strategy->{$method}(...$args);
+        return this.strategy.{$method}(...$args);
     }
 
     /**
      * Determine the reference name to use for a given table
      *
      * The reference name is usually derived from the class name of the table object
-     * (PostsTable -> Posts), however for autotable instances it is derived from
+     * (PostsTable . Posts), however for autotable instances it is derived from
      * the database table the object points at - or as a last resort, the alias
      * of the autotable instance.
      *
@@ -354,7 +354,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
         $name = namespaceSplit(get_class($table));
         $name = substr(end($name), 0, -5);
         if (empty($name)) {
-            $name = $table->getTable() ?: $table->getAlias();
+            $name = $table.getTable() ?: $table.getAlias();
             $name = Inflector::camelize($name);
         }
 

@@ -259,7 +259,7 @@ abstract class Association
         );
 
         if (_targetTable != null) {
-            $alias = _targetTable->getAlias();
+            $alias = _targetTable.getAlias();
             if ($alias != $name) {
                 throw new InvalidArgumentException(sprintf(
                     'Association name "%s" does not match target table alias "%s".',
@@ -398,11 +398,11 @@ abstract class Association
             $tableLocator = this.getTableLocator();
 
             $config = [];
-            $exists = $tableLocator->exists($registryAlias);
+            $exists = $tableLocator.exists($registryAlias);
             if (!$exists) {
-                $config = ['className' => _className];
+                $config = ['className': _className];
             }
-            _targetTable = $tableLocator->get($registryAlias, $config);
+            _targetTable = $tableLocator.get($registryAlias, $config);
 
             if ($exists) {
                 $className = App::className(_className, 'Model/Table', 'Table') ?: Table::class;
@@ -478,8 +478,8 @@ abstract class Association
     {
         if (_bindingKey == null) {
             _bindingKey = this.isOwningSide(this.getSource()) ?
-                this.getSource()->getPrimaryKey() :
-                this.getTarget()->getPrimaryKey();
+                this.getSource().getPrimaryKey() :
+                this.getTarget().getPrimaryKey();
         }
 
         return _bindingKey;
@@ -599,11 +599,11 @@ abstract class Association
     {
         if (!_propertyName) {
             _propertyName = _propertyName();
-            if (in_array(_propertyName, _sourceTable->getSchema()->columns(), true)) {
+            if (in_array(_propertyName, _sourceTable.getSchema().columns(), true)) {
                 $msg = 'Association property name "%s" clashes with field of same name of table "%s".' .
                     ' You should explicitly specify the "propertyName" option.';
                 trigger_error(
-                    sprintf($msg, _propertyName, _sourceTable->getTable()),
+                    sprintf($msg, _propertyName, _sourceTable.getTable()),
                     E_USER_WARNING
                 );
             }
@@ -722,16 +722,16 @@ abstract class Association
     function attachTo(Query $query, array $options = []): void
     {
         $target = this.getTarget();
-        $table = $target->getTable();
+        $table = $target.getTable();
 
         $options += [
-            'includeFields' => true,
-            'foreignKey' => this.getForeignKey(),
-            'conditions' => [],
-            'joinType' => this.getJoinType(),
-            'fields' => [],
-            'table' => $table,
-            'finder' => this.getFinder(),
+            'includeFields': true,
+            'foreignKey': this.getForeignKey(),
+            'conditions': [],
+            'joinType': this.getJoinType(),
+            'fields': [],
+            'table': $table,
+            'finder': this.getFinder(),
         ];
 
         // This is set by joinWith to disable matching results
@@ -749,8 +749,8 @@ abstract class Association
 
         [$finder, $opts] = _extractFinder($options['finder']);
         $dummy = this
-            ->find($finder, $opts)
-            ->eagerLoaded(true);
+            .find($finder, $opts)
+            .eagerLoaded(true);
 
         if (!empty($options['queryBuilder'])) {
             $dummy = $options['queryBuilder']($dummy);
@@ -765,20 +765,20 @@ abstract class Association
         if (
             !empty($options['matching']) &&
             _strategy == static::STRATEGY_JOIN &&
-            $dummy->getContain()
+            $dummy.getContain()
         ) {
             throw new RuntimeException(
                 "`{this.getName()}` association cannot contain() associations when using JOIN strategy."
             );
         }
 
-        $dummy->where($options['conditions']);
+        $dummy.where($options['conditions']);
         _dispatchBeforeFind($dummy);
 
-        $query->join([_name => [
-            'table' => $options['table'],
-            'conditions' => $dummy->clause('where'),
-            'type' => $options['joinType'],
+        $query.join([_name: [
+            'table': $options['table'],
+            'conditions': $dummy.clause('where'),
+            'type': $options['joinType'],
         ]]);
 
         _appendFields($query, $dummy, $options);
@@ -799,8 +799,8 @@ abstract class Association
     {
         $target = _targetTable;
         if (!empty($options['negateMatch'])) {
-            $primaryKey = $query->aliasFields((array)$target->getPrimaryKey(), _name);
-            $query->andWhere(function ($exp) use ($primaryKey) {
+            $primaryKey = $query.aliasFields((array)$target.getPrimaryKey(), _name);
+            $query.andWhere(function ($exp) use ($primaryKey) {
                 array_map([$exp, 'isNull'], $primaryKey);
 
                 return $exp;
@@ -823,7 +823,7 @@ abstract class Association
      */
     function transformRow(array $row, string $nestKey, bool $joined, ?string $targetProperty = null): array
     {
-        $sourceAlias = this.getSource()->getAlias();
+        $sourceAlias = this.getSource().getAlias();
         $nestKey = $nestKey ?: _name;
         $targetProperty = $targetProperty ?: this.getProperty();
         if (isset($row[$sourceAlias])) {
@@ -846,7 +846,7 @@ abstract class Association
      */
     function defaultRowValue(array $row, bool $joined): array
     {
-        $sourceAlias = this.getSource()->getAlias();
+        $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {
             $row[$sourceAlias][this.getProperty()] = null;
         }
@@ -871,8 +871,8 @@ abstract class Association
         [$type, $opts] = _extractFinder($type);
 
         return this.getTarget()
-            ->find($type, $options + $opts)
-            ->where(this.getConditions());
+            .find($type, $options + $opts)
+            .where(this.getConditions());
     }
 
     /**
@@ -887,16 +887,16 @@ abstract class Association
     function exists($conditions): bool
     {
         $conditions = this.find()
-            ->where($conditions)
-            ->clause('where');
+            .where($conditions)
+            .clause('where');
 
-        return this.getTarget()->exists($conditions);
+        return this.getTarget().exists($conditions);
     }
 
     /**
      * Proxies the update operation to the target table's updateAll method
      *
-     * @param array $fields A hash of field => new value.
+     * @param array $fields A hash of field: new value.
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @see \Cake\ORM\Table::updateAll()
@@ -905,10 +905,10 @@ abstract class Association
     function updateAll(array $fields, $conditions): int
     {
         $expression = this.find()
-            ->where($conditions)
-            ->clause('where');
+            .where($conditions)
+            .clause('where');
 
-        return this.getTarget()->updateAll($fields, $expression);
+        return this.getTarget().updateAll($fields, $expression);
     }
 
     /**
@@ -922,10 +922,10 @@ abstract class Association
     function deleteAll($conditions): int
     {
         $expression = this.find()
-            ->where($conditions)
-            ->clause('where');
+            .where($conditions)
+            .clause('where');
 
-        return this.getTarget()->deleteAll($expression);
+        return this.getTarget().deleteAll($expression);
     }
 
     /**
@@ -951,7 +951,7 @@ abstract class Association
      */
     protected function _dispatchBeforeFind(Query $query): void
     {
-        $query->triggerBeforeFind();
+        $query.triggerBeforeFind();
     }
 
     /**
@@ -965,21 +965,21 @@ abstract class Association
      */
     protected function _appendFields(Query $query, Query $surrogate, array $options): void
     {
-        if ($query->getEagerLoader()->isAutoFieldsEnabled() == false) {
+        if ($query.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
         }
 
-        $fields = array_merge($surrogate->clause('select'), $options['fields']);
+        $fields = array_merge($surrogate.clause('select'), $options['fields']);
 
         if (
             (empty($fields) && $options['includeFields']) ||
-            $surrogate->isAutoFieldsEnabled()
+            $surrogate.isAutoFieldsEnabled()
         ) {
-            $fields = array_merge($fields, _targetTable->getSchema()->columns());
+            $fields = array_merge($fields, _targetTable.getSchema().columns());
         }
 
-        $query->select($query->aliasFields($fields, _name));
-        $query->addDefaultTypes(_targetTable);
+        $query.select($query.aliasFields($fields, _name));
+        $query.addDefaultTypes(_targetTable);
     }
 
     /**
@@ -997,7 +997,7 @@ abstract class Association
      */
     protected function _formatAssociationResults(Query $query, Query $surrogate, array $options): void
     {
-        $formatters = $surrogate->getResultFormatters();
+        $formatters = $surrogate.getResultFormatters();
 
         if (!$formatters || empty($options['propertyPath'])) {
             return;
@@ -1005,7 +1005,7 @@ abstract class Association
 
         $property = $options['propertyPath'];
         $propertyPath = explode('.', $property);
-        $query->formatResults(
+        $query.formatResults(
             function (CollectionInterface $results, $query) use ($formatters, $property, $propertyPath) {
                 $extracted = [];
                 foreach ($results as $result) {
@@ -1026,10 +1026,10 @@ abstract class Association
                     }
                 }
 
-                $results = $results->insert($property, $extracted);
-                if ($query->isHydrationEnabled()) {
-                    $results = $results->map(function ($result) {
-                        $result->clean();
+                $results = $results.insert($property, $extracted);
+                if ($query.isHydrationEnabled()) {
+                    $results = $results.map(function ($result) {
+                        $result.clean();
 
                         return $result;
                     });
@@ -1056,26 +1056,26 @@ abstract class Association
      */
     protected function _bindNewAssociations(Query $query, Query $surrogate, array $options): void
     {
-        $loader = $surrogate->getEagerLoader();
-        $contain = $loader->getContain();
-        $matching = $loader->getMatching();
+        $loader = $surrogate.getEagerLoader();
+        $contain = $loader.getContain();
+        $matching = $loader.getMatching();
 
         if (!$contain && !$matching) {
             return;
         }
 
         $newContain = [];
-        foreach ($contain as $alias => $value) {
+        foreach ($contain as $alias: $value) {
             $newContain[$options['aliasPath'] . '.' . $alias] = $value;
         }
 
-        $eagerLoader = $query->getEagerLoader();
+        $eagerLoader = $query.getEagerLoader();
         if ($newContain) {
-            $eagerLoader->contain($newContain);
+            $eagerLoader.contain($newContain);
         }
 
-        foreach ($matching as $alias => $value) {
-            $eagerLoader->setMatching(
+        foreach ($matching as $alias: $value) {
+            $eagerLoader.setMatching(
                 $options['aliasPath'] . '.' . $alias,
                 $value['queryBuilder'],
                 $value
@@ -1096,15 +1096,15 @@ abstract class Association
     {
         $conditions = [];
         $tAlias = _name;
-        $sAlias = this.getSource()->getAlias();
+        $sAlias = this.getSource().getAlias();
         $foreignKey = (array)$options['foreignKey'];
         $bindingKey = (array)this.getBindingKey();
 
         if (count($foreignKey) != count($bindingKey)) {
             if (empty($bindingKey)) {
-                $table = this.getTarget()->getTable();
+                $table = this.getTarget().getTable();
                 if (this.isOwningSide(this.getSource())) {
-                    $table = this.getSource()->getTable();
+                    $table = this.getSource().getTable();
                 }
                 $msg = 'The "%s" table does not define a primary key, and cannot have join conditions generated.';
                 throw new RuntimeException(sprintf($msg, $table));
@@ -1119,7 +1119,7 @@ abstract class Association
             ));
         }
 
-        foreach ($foreignKey as $k => $f) {
+        foreach ($foreignKey as $k: $f) {
             $field = sprintf('%s.%s', $sAlias, $bindingKey[$k]);
             $value = new IdentifierExpression(sprintf('%s.%s', $tAlias, $f));
             $conditions[$field] = $value;
@@ -1136,9 +1136,9 @@ abstract class Association
      * ### Examples:
      *
      * The following will call the finder 'translations' with the value of the finder as its options:
-     * $query->contain(['Comments' => ['finder' => ['translations']]]);
-     * $query->contain(['Comments' => ['finder' => ['translations' => []]]]);
-     * $query->contain(['Comments' => ['finder' => ['translations' => ['locales' => ['en_US']]]]]);
+     * $query.contain(['Comments': ['finder': ['translations']]]);
+     * $query.contain(['Comments': ['finder': ['translations': []]]]);
+     * $query.contain(['Comments': ['finder': ['translations': ['locales': ['en_US']]]]]);
      *
      * @param array|string $finderData The finder name or an array having the name as key
      * and options as value.
@@ -1165,7 +1165,7 @@ abstract class Association
      */
     function __get($property)
     {
-        return this.getTarget()->{$property};
+        return this.getTarget().{$property};
     }
 
     /**
@@ -1177,7 +1177,7 @@ abstract class Association
      */
     function __isset($property)
     {
-        return isset(this.getTarget()->{$property});
+        return isset(this.getTarget().{$property});
     }
 
     /**
@@ -1190,7 +1190,7 @@ abstract class Association
      */
     function __call($method, $argument)
     {
-        return this.getTarget()->$method(...$argument);
+        return this.getTarget().$method(...$argument);
     }
 
     /**

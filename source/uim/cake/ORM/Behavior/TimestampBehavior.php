@@ -47,18 +47,18 @@ class TimestampBehavior : Behavior
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'implementedFinders' => [],
-        'implementedMethods' => [
-            'timestamp' => 'timestamp',
-            'touch' => 'touch',
+        'implementedFinders': [],
+        'implementedMethods': [
+            'timestamp': 'timestamp',
+            'touch': 'touch',
         ],
-        'events' => [
-            'Model.beforeSave' => [
-                'created' => 'new',
-                'modified' => 'always',
+        'events': [
+            'Model.beforeSave': [
+                'created': 'new',
+                'modified': 'always',
             ],
         ],
-        'refreshTimestamp' => true,
+        'refreshTimestamp': true,
     ];
 
     /**
@@ -95,13 +95,13 @@ class TimestampBehavior : Behavior
      */
     function handleEvent(EventInterface $event, EntityInterface $entity): bool
     {
-        $eventName = $event->getName();
+        $eventName = $event.getName();
         $events = _config['events'];
 
-        $new = $entity->isNew() != false;
+        $new = $entity.isNew() != false;
         $refresh = _config['refreshTimestamp'];
 
-        foreach ($events[$eventName] as $field => $when) {
+        foreach ($events[$eventName] as $field: $when) {
             if (!in_array($when, ['always', 'new', 'existing'], true)) {
                 throw new UnexpectedValueException(sprintf(
                     'When should be one of "always", "new" or "existing". The passed value "%s" is invalid',
@@ -184,10 +184,10 @@ class TimestampBehavior : Behavior
         $return = false;
         $refresh = _config['refreshTimestamp'];
 
-        foreach ($events[$eventName] as $field => $when) {
+        foreach ($events[$eventName] as $field: $when) {
             if (in_array($when, ['always', 'existing'], true)) {
                 $return = true;
-                $entity->setDirty($field, false);
+                $entity.setDirty($field, false);
                 _updateField($entity, $field, $refresh);
             }
         }
@@ -205,13 +205,13 @@ class TimestampBehavior : Behavior
      */
     protected function _updateField(EntityInterface $entity, string $field, bool $refreshTimestamp): void
     {
-        if ($entity->isDirty($field)) {
+        if ($entity.isDirty($field)) {
             return;
         }
 
         $ts = this.timestamp(null, $refreshTimestamp);
 
-        $columnType = this.table()->getSchema()->getColumnType($field);
+        $columnType = this.table().getSchema().getColumnType($field);
         if (!$columnType) {
             return;
         }
@@ -223,8 +223,8 @@ class TimestampBehavior : Behavior
             throw new RuntimeException('TimestampBehavior only supports columns of type DateTimeType.');
         }
 
-        $class = $type->getDateTimeClassName();
+        $class = $type.getDateTimeClassName();
 
-        $entity->set($field, new $class($ts));
+        $entity.set($field, new $class($ts));
     }
 }

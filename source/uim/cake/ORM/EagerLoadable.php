@@ -70,7 +70,7 @@ class EagerLoadable
      * For example, in the following nested property:
      *
      * ```
-     *  $article->author->company->country
+     *  $article.author.company.country
      * ```
      *
      * The property path of `country` will be `author.company`
@@ -101,7 +101,7 @@ class EagerLoadable
      * For example, in the following nested property:
      *
      * ```
-     *  $article->author->company->country
+     *  $article.author.company.country
      * ```
      *
      * The target property of `country` will be just `country`
@@ -197,7 +197,7 @@ class EagerLoadable
      * For example, in the following nested property:
      *
      * ```
-     *  $article->author->company->country
+     *  $article.author.company.country
      * ```
      *
      * The property path of `country` will be `author.company`
@@ -275,7 +275,7 @@ class EagerLoadable
      * For example, in the following nested property:
      *
      * ```
-     *  $article->author->company->country
+     *  $article.author.company.country
      * ```
      *
      * The target property of `country` will be just `country`
@@ -297,17 +297,17 @@ class EagerLoadable
     {
         $associations = [];
         foreach (_associations as $assoc) {
-            $associations += $assoc->asContainArray();
+            $associations += $assoc.asContainArray();
         }
         $config = _config;
         if (_forMatching != null) {
-            $config = ['matching' => _forMatching] + $config;
+            $config = ['matching': _forMatching] + $config;
         }
 
         return [
-            _name => [
-                'associations' => $associations,
-                'config' => $config,
+            _name: [
+                'associations': $associations,
+                'config': $config,
             ],
         ];
     }
@@ -319,7 +319,7 @@ class EagerLoadable
      */
     function __clone()
     {
-        foreach (_associations as $i => $association) {
+        foreach (_associations as $i: $association) {
             _associations[$i] = clone $association;
         }
     }

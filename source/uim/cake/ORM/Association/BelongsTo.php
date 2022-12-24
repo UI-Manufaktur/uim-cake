@@ -51,7 +51,7 @@ class BelongsTo : Association
     function getForeignKey()
     {
         if (_foreignKey == null) {
-            _foreignKey = _modelKey(this.getTarget()->getAlias());
+            _foreignKey = _modelKey(this.getTarget().getAlias());
         }
 
         return _foreignKey;
@@ -120,22 +120,22 @@ class BelongsTo : Association
      */
     function saveAssociated(EntityInterface $entity, array $options = [])
     {
-        $targetEntity = $entity->get(this.getProperty());
+        $targetEntity = $entity.get(this.getProperty());
         if (empty($targetEntity) || !($targetEntity instanceof EntityInterface)) {
             return $entity;
         }
 
         $table = this.getTarget();
-        $targetEntity = $table->save($targetEntity, $options);
+        $targetEntity = $table.save($targetEntity, $options);
         if (!$targetEntity) {
             return false;
         }
 
         $properties = array_combine(
             (array)this.getForeignKey(),
-            $targetEntity->extract((array)this.getBindingKey())
+            $targetEntity.extract((array)this.getBindingKey())
         );
-        $entity->set($properties, ['guard' => false]);
+        $entity.set($properties, ['guard': false]);
 
         return $entity;
     }
@@ -153,14 +153,14 @@ class BelongsTo : Association
     {
         $conditions = [];
         $tAlias = _name;
-        $sAlias = _sourceTable->getAlias();
+        $sAlias = _sourceTable.getAlias();
         $foreignKey = (array)$options['foreignKey'];
         $bindingKey = (array)this.getBindingKey();
 
         if (count($foreignKey) != count($bindingKey)) {
             if (empty($bindingKey)) {
                 $msg = 'The "%s" table does not define a primary key. Please set one.';
-                throw new RuntimeException(sprintf($msg, this.getTarget()->getTable()));
+                throw new RuntimeException(sprintf($msg, this.getTarget().getTable()));
             }
 
             $msg = 'Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"';
@@ -172,7 +172,7 @@ class BelongsTo : Association
             ));
         }
 
-        foreach ($foreignKey as $k => $f) {
+        foreach ($foreignKey as $k: $f) {
             $field = sprintf('%s.%s', $tAlias, $bindingKey[$k]);
             $value = new IdentifierExpression(sprintf('%s.%s', $sAlias, $f));
             $conditions[$field] = $value;
@@ -187,16 +187,16 @@ class BelongsTo : Association
     function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
-            'alias' => this.getAlias(),
-            'sourceAlias' => this.getSource()->getAlias(),
-            'targetAlias' => this.getTarget()->getAlias(),
-            'foreignKey' => this.getForeignKey(),
-            'bindingKey' => this.getBindingKey(),
-            'strategy' => this.getStrategy(),
-            'associationType' => this.type(),
-            'finder' => [this, 'find'],
+            'alias': this.getAlias(),
+            'sourceAlias': this.getSource().getAlias(),
+            'targetAlias': this.getTarget().getAlias(),
+            'foreignKey': this.getForeignKey(),
+            'bindingKey': this.getBindingKey(),
+            'strategy': this.getStrategy(),
+            'associationType': this.type(),
+            'finder': [this, 'find'],
         ]);
 
-        return $loader->buildEagerLoader($options);
+        return $loader.buildEagerLoader($options);
     }
 }

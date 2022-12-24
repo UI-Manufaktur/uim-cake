@@ -37,14 +37,14 @@ class SmtpTransport : AbstractTransport
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'host' => 'localhost',
-        'port' => 25,
-        'timeout' => 30,
-        'username' => null,
-        'password' => null,
-        'client' => null,
-        'tls' => false,
-        'keepAlive' => false,
+        'host': 'localhost',
+        'port': 25,
+        'timeout': 30,
+        'username': null,
+        'password': null,
+        'client': null,
+        'tls': false,
+        'keepAlive': false,
     ];
 
     /**
@@ -125,7 +125,7 @@ class SmtpTransport : AbstractTransport
      */
     function connected(): bool
     {
-        return _socket != null && _socket->isConnected();
+        return _socket != null && _socket.isConnected();
     }
 
     /**
@@ -153,16 +153,16 @@ class SmtpTransport : AbstractTransport
      * ```
      * [
      *     [
-     *         'code' => '250',
-     *         'message' => 'mail.example.com'
+     *         'code': '250',
+     *         'message': 'mail.example.com'
      *     ],
      *     [
-     *         'code' => '250',
-     *         'message' => 'PIPELINING'
+     *         'code': '250',
+     *         'message': 'PIPELINING'
      *     ],
      *     [
-     *         'code' => '250',
-     *         'message' => '8BITMIME'
+     *         'code': '250',
+     *         'message': '8BITMIME'
      *     ],
      *     // etc...
      * ]
@@ -204,7 +204,7 @@ class SmtpTransport : AbstractTransport
     }
 
     /**
-     * Parses and stores the response lines in `'code' => 'message'` format.
+     * Parses and stores the response lines in `'code': 'message'` format.
      *
      * @param array<string> $responseLines Response lines to parse.
      * @return void
@@ -215,8 +215,8 @@ class SmtpTransport : AbstractTransport
         foreach ($responseLines as $responseLine) {
             if (preg_match('/^(\d{3})(?:[ -]+(.*))?$/', $responseLine, $match)) {
                 $response[] = [
-                    'code' => $match[1],
-                    'message' => $match[2] ?? null,
+                    'code': $match[1],
+                    'message': $match[2] ?? null,
                 ];
             }
         }
@@ -262,7 +262,7 @@ class SmtpTransport : AbstractTransport
     protected function _connect(): void
     {
         _generateSocket();
-        if (!_socket()->connect()) {
+        if (!_socket().connect()) {
             throw new SocketException('Unable to connect to SMTP server.');
         }
         _smtpSend(null, '220');
@@ -287,7 +287,7 @@ class SmtpTransport : AbstractTransport
             _smtpSend("EHLO {$host}", '250');
             if ($config['tls']) {
                 _smtpSend('STARTTLS', '220');
-                _socket()->enableCrypto('tls');
+                _socket().enableCrypto('tls');
                 _smtpSend("EHLO {$host}", '250');
             }
         } catch (SocketException $e) {
@@ -424,9 +424,9 @@ class SmtpTransport : AbstractTransport
      */
     protected function _prepareFromAddress(Message $message): array
     {
-        $from = $message->getReturnPath();
+        $from = $message.getReturnPath();
         if (empty($from)) {
-            $from = $message->getFrom();
+            $from = $message.getFrom();
         }
 
         return $from;
@@ -440,9 +440,9 @@ class SmtpTransport : AbstractTransport
      */
     protected function _prepareRecipientAddresses(Message $message): array
     {
-        $to = $message->getTo();
-        $cc = $message->getCc();
-        $bcc = $message->getBcc();
+        $to = $message.getTo();
+        $cc = $message.getCc();
+        $bcc = $message.getBcc();
 
         return array_merge(array_keys($to), array_keys($cc), array_keys($bcc));
     }
@@ -455,7 +455,7 @@ class SmtpTransport : AbstractTransport
      */
     protected function _prepareMessage(Message $message): string
     {
-        $lines = $message->getBody();
+        $lines = $message.getBody();
         $messages = [];
         foreach ($lines as $line) {
             if (!empty($line) && ($line[0] == '.')) {
@@ -497,7 +497,7 @@ class SmtpTransport : AbstractTransport
     {
         _smtpSend('DATA', '354');
 
-        $headers = $message->getHeadersString([
+        $headers = $message.getHeadersString([
             'from',
             'sender',
             'replyTo',
@@ -510,7 +510,7 @@ class SmtpTransport : AbstractTransport
         $message = _prepareMessage($message);
 
         _smtpSend($headers . "\r\n\r\n" . $message . "\r\n\r\n\r\n.");
-        _content = ['headers' => $headers, 'message' => $message];
+        _content = ['headers': $headers, 'message': $message];
     }
 
     /**
@@ -522,7 +522,7 @@ class SmtpTransport : AbstractTransport
     protected function _disconnect(): void
     {
         _smtpSend('QUIT', false);
-        _socket()->disconnect();
+        _socket().disconnect();
         this.authType = null;
     }
 
@@ -550,7 +550,7 @@ class SmtpTransport : AbstractTransport
         _lastResponse = [];
 
         if ($data != null) {
-            _socket()->write($data . "\r\n");
+            _socket().write($data . "\r\n");
         }
 
         $timeout = _config['timeout'];
@@ -559,7 +559,7 @@ class SmtpTransport : AbstractTransport
             $response = '';
             $startTime = time();
             while (substr($response, -2) != "\r\n" && (time() - $startTime < $timeout)) {
-                $bytes = _socket()->read();
+                $bytes = _socket().read();
                 if ($bytes == null) {
                     break;
                 }

@@ -49,7 +49,7 @@ class HasOne : Association
     function getForeignKey()
     {
         if (_foreignKey == null) {
-            _foreignKey = _modelKey(this.getSource()->getAlias());
+            _foreignKey = _modelKey(this.getSource().getAlias());
         }
 
         return _foreignKey;
@@ -104,19 +104,19 @@ class HasOne : Association
      */
     function saveAssociated(EntityInterface $entity, array $options = [])
     {
-        $targetEntity = $entity->get(this.getProperty());
+        $targetEntity = $entity.get(this.getProperty());
         if (empty($targetEntity) || !($targetEntity instanceof EntityInterface)) {
             return $entity;
         }
 
         $properties = array_combine(
             (array)this.getForeignKey(),
-            $entity->extract((array)this.getBindingKey())
+            $entity.extract((array)this.getBindingKey())
         );
-        $targetEntity->set($properties, ['guard' => false]);
+        $targetEntity.set($properties, ['guard': false]);
 
-        if (!this.getTarget()->save($targetEntity, $options)) {
-            $targetEntity->unset(array_keys($properties));
+        if (!this.getTarget().save($targetEntity, $options)) {
+            $targetEntity.unset(array_keys($properties));
 
             return false;
         }
@@ -130,17 +130,17 @@ class HasOne : Association
     function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
-            'alias' => this.getAlias(),
-            'sourceAlias' => this.getSource()->getAlias(),
-            'targetAlias' => this.getTarget()->getAlias(),
-            'foreignKey' => this.getForeignKey(),
-            'bindingKey' => this.getBindingKey(),
-            'strategy' => this.getStrategy(),
-            'associationType' => this.type(),
-            'finder' => [this, 'find'],
+            'alias': this.getAlias(),
+            'sourceAlias': this.getSource().getAlias(),
+            'targetAlias': this.getTarget().getAlias(),
+            'foreignKey': this.getForeignKey(),
+            'bindingKey': this.getBindingKey(),
+            'strategy': this.getStrategy(),
+            'associationType': this.type(),
+            'finder': [this, 'find'],
         ]);
 
-        return $loader->buildEagerLoader($options);
+        return $loader.buildEagerLoader($options);
     }
 
     /**
@@ -150,6 +150,6 @@ class HasOne : Association
     {
         $helper = new DependentDeleteHelper();
 
-        return $helper->cascadeDelete(this, $entity, $options);
+        return $helper.cascadeDelete(this, $entity, $options);
     }
 }

@@ -138,11 +138,11 @@ class SelectLoader
     protected function _defaultOptions(): array
     {
         return [
-            'foreignKey' => this.foreignKey,
-            'conditions' => [],
-            'strategy' => this.strategy,
-            'nestKey' => this.alias,
-            'sort' => this.sort,
+            'foreignKey': this.foreignKey,
+            'conditions': [],
+            'strategy': this.strategy,
+            'nestKey': this.alias,
+            'sort': this.sort,
         ];
     }
 
@@ -167,18 +167,18 @@ class SelectLoader
         $query = $finder();
         if (isset($options['finder'])) {
             [$finderName, $opts] = _extractFinder($options['finder']);
-            $query = $query->find($finderName, $opts);
+            $query = $query.find($finderName, $opts);
         }
 
         $fetchQuery = $query
-            ->select($options['fields'])
-            ->where($options['conditions'])
-            ->eagerLoaded(true)
-            ->enableHydration($options['query']->isHydrationEnabled());
-        if ($options['query']->isResultsCastingEnabled()) {
-            $fetchQuery->enableResultsCasting();
+            .select($options['fields'])
+            .where($options['conditions'])
+            .eagerLoaded(true)
+            .enableHydration($options['query'].isHydrationEnabled());
+        if ($options['query'].isResultsCastingEnabled()) {
+            $fetchQuery.enableResultsCasting();
         } else {
-            $fetchQuery->disableResultsCasting();
+            $fetchQuery.disableResultsCasting();
         }
 
         if ($useSubquery) {
@@ -189,11 +189,11 @@ class SelectLoader
         }
 
         if (!empty($options['sort'])) {
-            $fetchQuery->order($options['sort']);
+            $fetchQuery.order($options['sort']);
         }
 
         if (!empty($options['contain'])) {
-            $fetchQuery->contain($options['contain']);
+            $fetchQuery.contain($options['contain']);
         }
 
         if (!empty($options['queryBuilder'])) {
@@ -213,9 +213,9 @@ class SelectLoader
      * ### Examples:
      *
      * The following will call the finder 'translations' with the value of the finder as its options:
-     * $query->contain(['Comments' => ['finder' => ['translations']]]);
-     * $query->contain(['Comments' => ['finder' => ['translations' => []]]]);
-     * $query->contain(['Comments' => ['finder' => ['translations' => ['locales' => ['en_US']]]]]);
+     * $query.contain(['Comments': ['finder': ['translations']]]);
+     * $query.contain(['Comments': ['finder': ['translations': []]]]);
+     * $query.contain(['Comments': ['finder': ['translations': ['locales': ['en_US']]]]]);
      *
      * @param array|string $finderData The finder name or an array having the name as key
      * and options as value.
@@ -244,11 +244,11 @@ class SelectLoader
      */
     protected function _assertFieldsPresent(Query $fetchQuery, array $key): void
     {
-        if ($fetchQuery->isAutoFieldsEnabled()) {
+        if ($fetchQuery.isAutoFieldsEnabled()) {
             return;
         }
 
-        $select = $fetchQuery->aliasFields($fetchQuery->clause('select'));
+        $select = $fetchQuery.aliasFields($fetchQuery.clause('select'));
         if (empty($select)) {
             return;
         }
@@ -264,7 +264,7 @@ class SelectLoader
 
         $missingFields = $missingKey($select, $key);
         if ($missingFields) {
-            $driver = $fetchQuery->getConnection()->getDriver();
+            $driver = $fetchQuery.getConnection().getDriver();
             $quoted = array_map([$driver, 'quoteIdentifier'], $key);
             $missingFields = $missingKey($select, $quoted);
         }
@@ -294,24 +294,24 @@ class SelectLoader
         $filter = [];
         $aliasedTable = this.sourceAlias;
 
-        foreach ($subquery->clause('select') as $aliasedField => $field) {
+        foreach ($subquery.clause('select') as $aliasedField: $field) {
             if (is_int($aliasedField)) {
                 $filter[] = new IdentifierExpression($field);
             } else {
                 $filter[$aliasedField] = $field;
             }
         }
-        $subquery->select($filter, true);
+        $subquery.select($filter, true);
 
         if (is_array($key)) {
             $conditions = _createTupleCondition($query, $key, $filter, '=');
         } else {
             $filter = current($filter);
-            $conditions = $query->newExpr([$key => $filter]);
+            $conditions = $query.newExpr([$key: $filter]);
         }
 
-        return $query->innerJoin(
-            [$aliasedTable => $subquery],
+        return $query.innerJoin(
+            [$aliasedTable: $subquery],
             $conditions
         );
     }
@@ -330,10 +330,10 @@ class SelectLoader
         if (is_array($key)) {
             $conditions = _createTupleCondition($query, $key, $filter, 'IN');
         } else {
-            $conditions = [$key . ' IN' => $filter];
+            $conditions = [$key . ' IN': $filter];
         }
 
-        return $query->andWhere($conditions);
+        return $query.andWhere($conditions);
     }
 
     /**
@@ -349,7 +349,7 @@ class SelectLoader
     protected function _createTupleCondition(Query $query, array $keys, $filter, $operator): TupleComparison
     {
         $types = [];
-        $defaults = $query->getDefaultTypes();
+        $defaults = $query.getDefaultTypes();
         foreach ($keys as $k) {
             if (isset($defaults[$k])) {
                 $types[] = $defaults[$k];
@@ -404,21 +404,21 @@ class SelectLoader
     protected function _buildSubquery(Query $query): Query
     {
         $filterQuery = clone $query;
-        $filterQuery->disableAutoFields();
-        $filterQuery->mapReduce(null, null, true);
-        $filterQuery->formatResults(null, true);
-        $filterQuery->contain([], true);
-        $filterQuery->setValueBinder(new ValueBinder());
+        $filterQuery.disableAutoFields();
+        $filterQuery.mapReduce(null, null, true);
+        $filterQuery.formatResults(null, true);
+        $filterQuery.contain([], true);
+        $filterQuery.setValueBinder(new ValueBinder());
 
         // Ignore limit if there is no order since we need all rows to find matches
-        if (!$filterQuery->clause('limit') || !$filterQuery->clause('order')) {
-            $filterQuery->limit(null);
-            $filterQuery->order([], true);
-            $filterQuery->offset(null);
+        if (!$filterQuery.clause('limit') || !$filterQuery.clause('order')) {
+            $filterQuery.limit(null);
+            $filterQuery.order([], true);
+            $filterQuery.offset(null);
         }
 
         $fields = _subqueryFields($query);
-        $filterQuery->select($fields['select'], true)->group($fields['group']);
+        $filterQuery.select($fields['select'], true).group($fields['group']);
 
         return $filterQuery;
     }
@@ -441,20 +441,20 @@ class SelectLoader
             $keys = (array)this.foreignKey;
         }
 
-        $fields = $query->aliasFields($keys, this.sourceAlias);
+        $fields = $query.aliasFields($keys, this.sourceAlias);
         $group = $fields = array_values($fields);
 
-        $order = $query->clause('order');
+        $order = $query.clause('order');
         if ($order) {
-            $columns = $query->clause('select');
-            $order->iterateParts(function ($direction, $field) use (&$fields, $columns): void {
+            $columns = $query.clause('select');
+            $order.iterateParts(function ($direction, $field) use (&$fields, $columns): void {
                 if (isset($columns[$field])) {
                     $fields[$field] = $columns[$field];
                 }
             });
         }
 
-        return ['select' => $fields, 'group' => $group];
+        return ['select': $fields, 'group': $group];
     }
 
     /**
@@ -474,7 +474,7 @@ class SelectLoader
             this.bindingKey;
         $key = (array)$keys;
 
-        foreach ($fetchQuery->all() as $result) {
+        foreach ($fetchQuery.all() as $result) {
             $values = [];
             foreach ($key as $k) {
                 $values[] = $result[$k];
@@ -507,7 +507,7 @@ class SelectLoader
 
         $sourceKeys = [];
         foreach ((array)$keys as $key) {
-            $f = $fetchQuery->aliasField($key, this.sourceAlias);
+            $f = $fetchQuery.aliasField($key, this.sourceAlias);
             $sourceKeys[] = key($f);
         }
 

@@ -38,22 +38,22 @@ class DependentDeleteHelper
      */
     function cascadeDelete(Association $association, EntityInterface $entity, array $options = []): bool
     {
-        if (!$association->getDependent()) {
+        if (!$association.getDependent()) {
             return true;
         }
-        $table = $association->getTarget();
+        $table = $association.getTarget();
         /** @psalm-suppress InvalidArgument */
-        $foreignKey = array_map([$association, 'aliasField'], (array)$association->getForeignKey());
-        $bindingKey = (array)$association->getBindingKey();
-        $bindingValue = $entity->extract($bindingKey);
+        $foreignKey = array_map([$association, 'aliasField'], (array)$association.getForeignKey());
+        $bindingKey = (array)$association.getBindingKey();
+        $bindingValue = $entity.extract($bindingKey);
         if (in_array(null, $bindingValue, true)) {
             return true;
         }
         $conditions = array_combine($foreignKey, $bindingValue);
 
-        if ($association->getCascadeCallbacks()) {
-            foreach ($association->find()->where($conditions)->all()->toList() as $related) {
-                $success = $table->delete($related, $options);
+        if ($association.getCascadeCallbacks()) {
+            foreach ($association.find().where($conditions).all().toList() as $related) {
+                $success = $table.delete($related, $options);
                 if (!$success) {
                     return false;
                 }
@@ -62,7 +62,7 @@ class DependentDeleteHelper
             return true;
         }
 
-        $association->deleteAll($conditions);
+        $association.deleteAll($conditions);
 
         return true;
     }

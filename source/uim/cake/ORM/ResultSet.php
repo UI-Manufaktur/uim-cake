@@ -159,17 +159,17 @@ class ResultSet : ResultSetInterface
      */
     public this(Query $query, StatementInterface $statement)
     {
-        $repository = $query->getRepository();
+        $repository = $query.getRepository();
         _statement = $statement;
-        _driver = $query->getConnection()->getDriver();
+        _driver = $query.getConnection().getDriver();
         _defaultTable = $repository;
         _calculateAssociationMap($query);
-        _hydrate = $query->isHydrationEnabled();
-        _entityClass = $repository->getEntityClass();
-        _useBuffering = $query->isBufferedResultsEnabled();
-        _defaultAlias = _defaultTable->getAlias();
+        _hydrate = $query.isHydrationEnabled();
+        _entityClass = $repository.getEntityClass();
+        _useBuffering = $query.isBufferedResultsEnabled();
+        _defaultAlias = _defaultTable.getAlias();
         _calculateColumnMap($query);
-        _autoFields = $query->isAutoFieldsEnabled();
+        _autoFields = $query.isAutoFieldsEnabled();
 
         if (_useBuffering) {
             $count = this.count();
@@ -265,7 +265,7 @@ class ResultSet : ResultSetInterface
             _results[_index] = _current;
         }
         if (!$valid && _statement != null) {
-            _statement->closeCursor();
+            _statement.closeCursor();
         }
 
         return $valid;
@@ -282,7 +282,7 @@ class ResultSet : ResultSetInterface
     {
         foreach (this as $result) {
             if (_statement != null && !_useBuffering) {
-                _statement->closeCursor();
+                _statement.closeCursor();
             }
 
             return $result;
@@ -321,7 +321,7 @@ class ResultSet : ResultSetInterface
         }
 
         if (_results instanceof SplFixedArray) {
-            return _results->toArray();
+            return _results.toArray();
         }
 
         return _results;
@@ -350,7 +350,7 @@ class ResultSet : ResultSetInterface
     {
         _results = SplFixedArray::fromArray($data);
         _useBuffering = true;
-        _count = _results->count();
+        _count = _results.count();
     }
 
     /**
@@ -366,11 +366,11 @@ class ResultSet : ResultSetInterface
             return _count;
         }
         if (_statement != null) {
-            return _count = _statement->rowCount();
+            return _count = _statement.rowCount();
         }
 
         if (_results instanceof SplFixedArray) {
-            _count = _results->count();
+            _count = _results.count();
         } else {
             _count = count(_results);
         }
@@ -387,16 +387,16 @@ class ResultSet : ResultSetInterface
      */
     protected function _calculateAssociationMap(Query $query): void
     {
-        $map = $query->getEagerLoader()->associationsMap(_defaultTable);
+        $map = $query.getEagerLoader().associationsMap(_defaultTable);
         _matchingMap = (new Collection($map))
-            ->match(['matching' => true])
-            ->indexBy('alias')
-            ->toArray();
+            .match(['matching': true])
+            .indexBy('alias')
+            .toArray();
 
         _containMap = (new Collection(array_reverse($map)))
-            ->match(['matching' => false])
-            ->indexBy('nestKey')
-            ->toArray();
+            .match(['matching': false])
+            .indexBy('nestKey')
+            .toArray();
     }
 
     /**
@@ -409,7 +409,7 @@ class ResultSet : ResultSetInterface
     protected function _calculateColumnMap(Query $query): void
     {
         $map = [];
-        foreach ($query->clause('select') as $key => $field) {
+        foreach ($query.clause('select') as $key: $field) {
             $key = trim($key, '"`[]');
 
             if (strpos($key, '__') <= 0) {
@@ -421,7 +421,7 @@ class ResultSet : ResultSetInterface
             $map[$parts[0]][$key] = $parts[1];
         }
 
-        foreach (_matchingMap as $alias => $assoc) {
+        foreach (_matchingMap as $alias: $assoc) {
             if (!isset($map[$alias])) {
                 continue;
             }
@@ -444,7 +444,7 @@ class ResultSet : ResultSetInterface
             return false;
         }
 
-        $row = _statement->fetch('assoc');
+        $row = _statement.fetch('assoc');
         if ($row == false) {
             return $row;
         }
@@ -463,13 +463,13 @@ class ResultSet : ResultSetInterface
         $defaultAlias = _defaultAlias;
         $results = $presentAliases = [];
         $options = [
-            'useSetters' => false,
-            'markClean' => true,
-            'markNew' => false,
-            'guard' => false,
+            'useSetters': false,
+            'markClean': true,
+            'markNew': false,
+            'guard': false,
         ];
 
-        foreach (_matchingMapColumns as $alias => $keys) {
+        foreach (_matchingMapColumns as $alias: $keys) {
             $matching = _matchingMap[$alias];
             $results['_matchingData'][$alias] = array_combine(
                 $keys,
@@ -478,14 +478,14 @@ class ResultSet : ResultSetInterface
             if (_hydrate) {
                 /** @var \Cake\ORM\Table $table */
                 $table = $matching['instance'];
-                $options['source'] = $table->getRegistryAlias();
+                $options['source'] = $table.getRegistryAlias();
                 /** @var \Cake\Datasource\EntityInterface $entity */
                 $entity = new $matching['entityClass']($results['_matchingData'][$alias], $options);
                 $results['_matchingData'][$alias] = $entity;
             }
         }
 
-        foreach (_map as $table => $keys) {
+        foreach (_map as $table: $keys) {
             $results[$table] = array_combine($keys, array_intersect_key($row, $keys));
             $presentAliases[$table] = true;
         }
@@ -508,7 +508,7 @@ class ResultSet : ResultSetInterface
             $instance = $assoc['instance'];
 
             if (!$assoc['canBeJoined'] && !isset($row[$alias])) {
-                $results = $instance->defaultRowValue($results, $assoc['canBeJoined']);
+                $results = $instance.defaultRowValue($results, $assoc['canBeJoined']);
                 continue;
             }
 
@@ -516,8 +516,8 @@ class ResultSet : ResultSetInterface
                 $results[$alias] = $row[$alias];
             }
 
-            $target = $instance->getTarget();
-            $options['source'] = $target->getRegistryAlias();
+            $target = $instance.getTarget();
+            $options['source'] = $target.getRegistryAlias();
             unset($presentAliases[$alias]);
 
             if ($assoc['canBeJoined'] && _autoFields != false) {
@@ -539,10 +539,10 @@ class ResultSet : ResultSetInterface
                 $results[$alias] = $entity;
             }
 
-            $results = $instance->transformRow($results, $alias, $assoc['canBeJoined'], $assoc['targetProperty']);
+            $results = $instance.transformRow($results, $alias, $assoc['canBeJoined'], $assoc['targetProperty']);
         }
 
-        foreach ($presentAliases as $alias => $present) {
+        foreach ($presentAliases as $alias: $present) {
             if (!isset($results[$alias])) {
                 continue;
             }
@@ -553,7 +553,7 @@ class ResultSet : ResultSetInterface
             $results[$defaultAlias]['_matchingData'] = $results['_matchingData'];
         }
 
-        $options['source'] = _defaultTable->getRegistryAlias();
+        $options['source'] = _defaultTable.getRegistryAlias();
         if (isset($results[$defaultAlias])) {
             $results = $results[$defaultAlias];
         }
@@ -578,7 +578,7 @@ class ResultSet : ResultSetInterface
         _index = $currentIndex;
 
         return [
-            'items' => $items,
+            'items': $items,
         ];
     }
 }
