@@ -186,7 +186,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param \Cake\Console\Shell $shell The shell to get commands for
      * @return array<string> A list of commands
      */
-    protected function shellSubcommands(Shell $shell): array
+    protected string[] shellSubcommands(Shell $shell): array
     {
         $shell.initialize();
         $shell.loadTasks();

@@ -45,7 +45,7 @@ class InsertIterator : Collection
      *
      * @var array<string>
      */
-    protected $_path;
+    protected string[] $_path;
 
     /**
      * The property name to which values will be assigned

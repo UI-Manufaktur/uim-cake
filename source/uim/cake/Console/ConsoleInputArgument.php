@@ -52,7 +52,7 @@ class ConsoleInputArgument
      *
      * @var array<string>
      */
-    protected $_choices;
+    protected string[] $_choices;
 
     /**
      * Make a new Input Argument

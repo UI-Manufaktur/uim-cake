@@ -685,7 +685,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @return array<string>|string|null
      */
-    function getDisplayField()
+    string[] getDisplayField()
     {
         if (_displayField == null) {
             $schema = this.getSchema();

@@ -332,7 +332,7 @@ class RedisEngine : CacheEngine
      *
      * @return array<string>
      */
-    function groups(): array
+    string[] groups(): array
     {
         $result = [];
         foreach (_config['groups'] as $group) {

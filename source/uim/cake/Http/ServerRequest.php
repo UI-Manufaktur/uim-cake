@@ -416,7 +416,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string>
      */
-    function getTrustedProxies(): array
+    string[] getTrustedProxies(): array
     {
         return this.trustedProxies;
     }
@@ -834,7 +834,7 @@ class ServerRequest : IServerRequest
      *   If the header doesn't exist, an empty array will be returned.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function getHeader($name): array
+    string[] getHeader($name): array
     {
         $name = this.normalizeHeaderName($name);
         if (isset(_environment[$name])) {
@@ -1072,7 +1072,7 @@ class ServerRequest : IServerRequest
      *   While `example.co.uk` contains 2.
      * @return array<string> An array of subdomains.
      */
-    function subdomains(int $tldLength = 1): array
+    string[] subdomains(int $tldLength = 1): array
     {
         $host = this.host();
         if (empty($host)) {
@@ -1107,7 +1107,7 @@ class ServerRequest : IServerRequest
      * @return array<string>|bool Either an array of all the types the client accepts or a boolean if they accept the
      *   provided type.
      */
-    function accepts(?string $type = null)
+    string[] accepts(?string $type = null)
     {
         $content = new ContentTypeNegotiation();
         if ($type) {

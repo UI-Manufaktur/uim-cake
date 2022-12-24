@@ -168,7 +168,7 @@ trait StaticConfigTrait
      *
      * @return array<string> Array of configurations.
      */
-    public static function configured(): array
+    public static string[] configured(): array
     {
         $configurations = array_keys(static::$_config);
 

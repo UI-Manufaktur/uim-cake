@@ -63,10 +63,8 @@ class StubConsoleOutput : ConsoleOutput
 
     /**
      * Get the buffered output.
-     *
-     * @return array<string>
      */
-    function messages(): array
+    string[] messages()
     {
         return _out;
     }

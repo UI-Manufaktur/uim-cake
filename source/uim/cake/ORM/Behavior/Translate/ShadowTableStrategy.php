@@ -594,7 +594,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @return array<string>
      */
-    protected function mainFields()
+    protected string[] mainFields()
     {
         $fields = this.getConfig('mainTableFields');
 

@@ -239,7 +239,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @return array<string> Command names
      */
-    function keys(): array
+    string[] keys(): array
     {
         return array_keys(this.commands);
     }

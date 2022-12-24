@@ -637,10 +637,8 @@ class ConsoleOptionParser
 
     /**
      * Get the list of argument names.
-     *
-     * @return array<string>
      */
-    function argumentNames()
+    string[] argumentNames()
     {
         $out = [];
         foreach (_args as $arg) {

@@ -177,7 +177,7 @@ class BelongsToMany : Association
      *
      * @return array<string>|string
      */
-    function getTargetForeignKey()
+    string[] getTargetForeignKey()
     {
         if (_targetForeignKey == null) {
             _targetForeignKey = _modelKey(this.getTarget().getAlias());
@@ -203,7 +203,7 @@ class BelongsToMany : Association
      *
      * @return array<string>|string
      */
-    function getForeignKey()
+    string[] getForeignKey()
     {
         if (_foreignKey == null) {
             _foreignKey = _modelKey(this.getSource().getTable());

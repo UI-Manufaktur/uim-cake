@@ -784,7 +784,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @see Cake\Http\ContentTypeNegotiation
      * @return array<string>
      */
-    function viewClasses(): array
+    string[] viewClasses(): array
     {
         return [];
     }

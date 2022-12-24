@@ -235,7 +235,7 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      *
      * @return array<string> A list of fields that are 'visible' in all representations.
      */
-    function getVisible(): array;
+    string[] getVisible(): array;
 
     /**
      * Returns an array with all the visible fields set in this entity.

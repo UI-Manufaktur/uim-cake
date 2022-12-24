@@ -47,7 +47,7 @@ class BelongsTo : Association
      *
      * @return array<string>|string
      */
-    function getForeignKey()
+    string[] getForeignKey()
     {
         if (_foreignKey == null) {
             _foreignKey = _modelKey(this.getTarget().getAlias());

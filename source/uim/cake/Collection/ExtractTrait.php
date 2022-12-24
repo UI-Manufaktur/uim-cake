@@ -61,7 +61,7 @@ trait ExtractTrait
      * @param array<string> $parts Path to extract from.
      * @return mixed
      */
-    protected function _extract($data, array $parts)
+    protected string[] _extract($data, array $parts)
     {
         $value = null;
         $collectionTransform = false;

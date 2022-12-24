@@ -88,7 +88,7 @@ interface SchemaInterface
      *
      * @return array<string>
      */
-    function columns(): array;
+    string[] columns(): array;
 
     /**
      * Returns column type or null if a column does not exist.

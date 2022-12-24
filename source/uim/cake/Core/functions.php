@@ -111,7 +111,7 @@ if (!function_exists('namespaceSplit')) {
      * @param string $class The full class name, ie `Cake\Core\App`.
      * @return array<string> Array with 2 indexes. 0: namespace, 1: classname.
      */
-    function namespaceSplit(string $class): array
+    string[] namespaceSplit(string $class): array
     {
         $pos = strrpos($class, '\\');
         if ($pos == false) {

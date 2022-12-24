@@ -202,7 +202,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @return array<string> List of object names.
      */
-    function loaded(): array
+    string[] loaded(): array
     {
         return array_keys(_loaded);
     }

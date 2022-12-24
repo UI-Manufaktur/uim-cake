@@ -18,7 +18,7 @@ class ApcuEngine : CacheEngine
      *
      * @var array<string>
      */
-    protected _compiledGroupNames = [];
+    protected string[] _compiledGroupNames = [];
 
     /**
      * Initialize the Cache Engine

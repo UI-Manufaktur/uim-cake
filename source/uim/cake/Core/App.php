@@ -184,10 +184,8 @@ class App
      *
      * @param string $type Type of path
      * @param string|null $plugin Plugin name
-     * @return array<string>
-     * @link https://book.cakephp.org/4/en/core-libraries/app.html#finding-paths-to-namespaces
      */
-    public static function path(string $type, ?string $plugin = null): array
+    public static string[] path(string $type, ?string $plugin = null): array
     {
         if ($plugin == null && $type[0] == strtolower($type[0])) {
             return (array)Configure::read('App.paths.' . $type);
@@ -232,7 +230,7 @@ class App
      * @param string|null $plugin Plugin name.
      * @return array<string>
      */
-    public static function classPath(string $type, ?string $plugin = null): array
+    public static string[] classPath(string $type, ?string $plugin = null): array
     {
         if ($plugin != null) {
             return [

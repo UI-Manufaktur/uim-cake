@@ -197,7 +197,7 @@ interface TableSchemaInterface : SchemaInterface
      * @return array<string> Column name(s) for the primary key. An
      *   empty list will be returned when the table has no primary key.
      */
-    function getPrimaryKey(): array;
+    string[] getPrimaryKey(): array;
 
     /**
      * Add an index.
@@ -231,7 +231,7 @@ interface TableSchemaInterface : SchemaInterface
      *
      * @return array<string>
      */
-    function indexes(): array;
+    string[] indexes(): array;
 
     /**
      * Add a constraint.
@@ -278,5 +278,5 @@ interface TableSchemaInterface : SchemaInterface
      *
      * @return array<string>
      */
-    function constraints(): array;
+    string[] constraints(): array;
 }

@@ -42,14 +42,14 @@ class I18nExtractCommand : Command
      *
      * @var array<string>
      */
-    protected $_paths = [];
+    protected string[] $_paths = [];
 
     /**
      * Files from where to extract
      *
      * @var array<string>
      */
-    protected $_files = [];
+    protected string[] $_files = [];
 
     /**
      * Merge all domain strings into the default.pot file
@@ -98,7 +98,7 @@ class I18nExtractCommand : Command
      *
      * @var array<string>
      */
-    protected $_exclude = [];
+    protected string[] $_exclude = [];
 
     /**
      * Holds whether this call should extract the CakePHP Lib messages

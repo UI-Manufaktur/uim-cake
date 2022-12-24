@@ -153,10 +153,8 @@ class WincacheEngine : CacheEngine
      * Returns the `group value` for each of the configured groups
      * If the group initial value was not found, then it initializes
      * the group accordingly.
-     *
-     * @return array<string>
      */
-    function groups(): array
+    string[] groups()
     {
         if (empty(_compiledGroupNames)) {
             foreach (_config['groups'] as $group) {
