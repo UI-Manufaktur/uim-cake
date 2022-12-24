@@ -24,7 +24,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-abstract class MailConstraintBase extends Constraint
+abstract class MailConstraintBase : Constraint
 {
     /**
      * @var int|null

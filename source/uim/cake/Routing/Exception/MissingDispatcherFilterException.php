@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Exception raised when a Dispatcher filter could not be found
  */
-class MissingDispatcherFilterException extends CakeException
+class MissingDispatcherFilterException : CakeException
 {
     /**
      * @inheritDoc

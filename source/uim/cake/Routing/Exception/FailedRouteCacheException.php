@@ -21,6 +21,6 @@ use Cake\Core\Exception\CakeException;
 /**
  * Thrown when unable to cache route collection.
  */
-class FailedRouteCacheException extends CakeException
+class FailedRouteCacheException : CakeException
 {
 }

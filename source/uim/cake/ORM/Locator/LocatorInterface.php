@@ -23,7 +23,7 @@ use Cake\ORM\Table;
 /**
  * Registries for Table objects should implement this interface.
  */
-interface LocatorInterface extends BaseLocatorInterface
+interface LocatorInterface : BaseLocatorInterface
 {
     /**
      * Returns configuration for an alias or the full configuration array for

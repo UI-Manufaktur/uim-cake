@@ -23,7 +23,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Exception raised when an Entity could not be found.
  */
-class MissingEntityException extends CakeException
+class MissingEntityException : CakeException
 {
     /**
      * @var string

@@ -33,7 +33,7 @@ use Cake\Core\Exception\CakeException;
  *
  * @deprecated 4.1.0 Use {@link \Cake\Http\Exception\RedirectException} instead.
  */
-class RedirectException extends CakeException
+class RedirectException : CakeException
 {
     /**
      * @inheritDoc

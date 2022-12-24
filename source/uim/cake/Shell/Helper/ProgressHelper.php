@@ -33,7 +33,7 @@ use RuntimeException;
  * });
  * ```
  */
-class ProgressHelper extends Helper
+class ProgressHelper : Helper
 {
     /**
      * The current progress.

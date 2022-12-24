@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used when a behavior cannot be found.
  */
-class MissingBehaviorException extends CakeException
+class MissingBehaviorException : CakeException
 {
     /**
      * @var string

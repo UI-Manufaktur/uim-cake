@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used when a transaction was rolled back from a callback event.
  */
-class RolledbackTransactionException extends CakeException
+class RolledbackTransactionException : CakeException
 {
     /**
      * @var string

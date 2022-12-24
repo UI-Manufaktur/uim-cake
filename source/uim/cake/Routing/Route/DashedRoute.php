@@ -23,7 +23,7 @@ use Cake\Utility\Inflector;
  * routing parameters, so that requesting `/my-plugin/my-controller/my-action`
  * is parsed as `['plugin' => 'MyPlugin', 'controller' => 'MyController', 'action' => 'myAction']`
  */
-class DashedRoute extends Route
+class DashedRoute : Route
 {
     /**
      * Flag for tracking whether the defaults have been inflected.

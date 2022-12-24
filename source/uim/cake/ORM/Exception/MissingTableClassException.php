@@ -21,7 +21,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Exception raised when a Table could not be found.
  */
-class MissingTableClassException extends CakeException
+class MissingTableClassException : CakeException
 {
     /**
      * @var string

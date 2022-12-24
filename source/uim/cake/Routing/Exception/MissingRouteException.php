@@ -21,7 +21,7 @@ use Throwable;
  * Exception raised when a URL cannot be reverse routed
  * or when a URL cannot be parsed.
  */
-class MissingRouteException extends CakeException
+class MissingRouteException : CakeException
 {
     /**
      * @inheritDoc

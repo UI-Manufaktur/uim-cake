@@ -38,7 +38,7 @@ use RuntimeException;
  * For more information on what is a nested set and a how it works refer to
  * https://www.sitepoint.com/hierarchical-data-database-2/
  */
-class TreeBehavior extends Behavior
+class TreeBehavior : Behavior
 {
     /**
      * Cached copy of the first column in a table's primary key.

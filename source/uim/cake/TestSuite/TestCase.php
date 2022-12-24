@@ -43,7 +43,7 @@ use RuntimeException;
 /**
  * Cake TestCase class
  */
-abstract class TestCase extends BaseTestCase
+abstract class TestCase : BaseTestCase
 {
     use LocatorAwareTrait;
 
@@ -558,7 +558,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextEndsWith(string $suffix, string $string, string $message = ''): void
+    function assertT:With(string $suffix, string $string, string $message = ''): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -574,7 +574,7 @@ abstract class TestCase extends BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextEndsNotWith(string $suffix, string $string, string $message = ''): void
+    function assertT:NotWith(string $suffix, string $string, string $message = ''): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);

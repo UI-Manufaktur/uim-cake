@@ -22,7 +22,7 @@ use UnexpectedValueException;
  * Create a visually pleasing ASCII art table
  * from 2 dimensional array data.
  */
-class TableHelper extends Helper
+class TableHelper : Helper
 {
     /**
      * Default config for this helper.

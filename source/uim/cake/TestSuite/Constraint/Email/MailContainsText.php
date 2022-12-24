@@ -23,7 +23,7 @@ use Cake\Mailer\Message;
  *
  * @internal
  */
-class MailContainsText extends MailContains
+class MailContainsText : MailContains
 {
     /**
      * @inheritDoc

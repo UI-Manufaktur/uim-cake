@@ -24,7 +24,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-class EventFired extends Constraint
+class EventFired : Constraint
 {
     /**
      * Array of fired events

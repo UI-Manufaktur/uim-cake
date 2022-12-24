@@ -23,7 +23,7 @@ use Cake\Console\TestSuite\ConsoleIntegrationTestTrait;
  *
  * @deprecated 3.7.0 Will be removed in 5.0.0. Use {@link \Cake\TestSuite\ConsoleIntegrationTestTrait} instead
  */
-abstract class ConsoleIntegrationTestCase extends TestCase
+abstract class ConsoleIntegrationTestCase : TestCase
 {
     use ConsoleIntegrationTestTrait;
 }

@@ -22,7 +22,7 @@ use Throwable;
 /**
  * Used when a strict save or delete fails
  */
-class PersistenceFailedException extends CakeException
+class PersistenceFailedException : CakeException
 {
     /**
      * The entity on which the persistence operation failed

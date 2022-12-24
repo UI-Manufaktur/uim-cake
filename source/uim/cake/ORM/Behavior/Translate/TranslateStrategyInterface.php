@@ -27,7 +27,7 @@ use Cake\ORM\Table;
 /**
  * This interface describes the methods for translate behavior strategies.
  */
-interface TranslateStrategyInterface extends PropertyMarshalInterface
+interface TranslateStrategyInterface : PropertyMarshalInterface
 {
     /**
      * Return translation table instance.

@@ -25,7 +25,7 @@ use SplFileInfo;
 /**
  * A class to contain test cases and run them with shared fixtures
  */
-class TestSuite extends BaseTestSuite
+class TestSuite : BaseTestSuite
 {
     /**
      * Adds all the files in a directory to the test suite. Does not recursive through directories.

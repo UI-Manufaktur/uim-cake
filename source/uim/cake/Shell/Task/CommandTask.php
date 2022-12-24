@@ -27,7 +27,7 @@ use Cake\Utility\Inflector;
  *
  * @internal
  */
-class CommandTask extends Shell
+class CommandTask : Shell
 {
     /**
      * Gets the shell command listing.

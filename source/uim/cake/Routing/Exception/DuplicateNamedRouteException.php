@@ -20,7 +20,7 @@ use Throwable;
 /**
  * Exception raised when a route names used twice.
  */
-class DuplicateNamedRouteException extends CakeException
+class DuplicateNamedRouteException : CakeException
 {
     /**
      * @inheritDoc

@@ -27,7 +27,7 @@ use Cake\Mailer\TransportFactory;
  *
  * @see \Cake\TestSuite\EmailTrait
  */
-class TestEmailTransport extends DebugTransport
+class TestEmailTransport : DebugTransport
 {
     /**
      * @var array

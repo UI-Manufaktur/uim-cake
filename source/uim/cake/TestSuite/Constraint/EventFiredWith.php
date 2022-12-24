@@ -13,7 +13,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-class EventFiredWith extends Constraint
+class EventFiredWith : Constraint
 {
     /**
      * Array of fired events

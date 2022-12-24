@@ -27,7 +27,7 @@ namespace Cake\TestSuite;
  *
  * @deprecated 3.7.0 Will be removed in 5.0.0. Use {@link \Cake\TestSuite\IntegrationTestTrait} instead.
  */
-abstract class IntegrationTestCase extends TestCase
+abstract class IntegrationTestCase : TestCase
 {
     use IntegrationTestTrait;
 

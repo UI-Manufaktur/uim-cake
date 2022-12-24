@@ -21,7 +21,7 @@ namespace Cake\TestSuite\Constraint\Email;
  *
  * @internal
  */
-class MailContainsAttachment extends MailContains
+class MailContainsAttachment : MailContains
 {
     /**
      * Checks constraint

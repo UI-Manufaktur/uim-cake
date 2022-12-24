@@ -27,7 +27,7 @@ use Cake\Routing\Router;
  * Redirection is signalled by an exception that halts route matching and
  * defines the redirect URL and status code.
  */
-class RedirectRoute extends Route
+class RedirectRoute : Route
 {
     /**
      * The location to redirect to.
