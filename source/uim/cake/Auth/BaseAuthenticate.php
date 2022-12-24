@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -17,7 +16,7 @@ namespace Cake\Auth;
 
 use Cake\Controller\ComponentRegistry;
 use Cake\Core\InstanceConfigTrait;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\ORM\Locator\LocatorAwareTrait;
@@ -26,7 +25,7 @@ use Cake\ORM\Query;
 /**
  * Base Authentication class with common methods and properties.
  */
-abstract class BaseAuthenticate : EventListenerInterface
+abstract class BaseAuthenticate : IEventListener
 {
     use InstanceConfigTrait;
     use LocatorAwareTrait;
