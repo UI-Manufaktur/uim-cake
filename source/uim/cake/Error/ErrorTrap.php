@@ -39,11 +39,11 @@ class ErrorTrap
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'errorLevel' => E_ALL,
-        'errorRenderer' => null,
-        'log' => true,
-        'logger' => ErrorLogger::class,
-        'trace' => false,
+        'errorLevel': E_ALL,
+        'errorRenderer': null,
+        'log': true,
+        'logger': ErrorLogger::class,
+        'trace': false,
     ];
 
     /**
@@ -119,7 +119,7 @@ class ErrorTrap
         }
 
         /** @var array $trace */
-        $trace = Debugger::trace(['start' => 1, 'format' => 'points']);
+        $trace = Debugger::trace(['start': 1, 'format': 'points']);
         $error = new PhpError($code, $description, $file, $line, $trace);
 
         $debug = Configure::read('debug');
@@ -128,14 +128,14 @@ class ErrorTrap
         try {
             // Log first incase rendering or event listeners fail
             this.logError($error);
-            $event = this.dispatchEvent('Error.beforeRender', ['error' => $error]);
-            if ($event->isStopped()) {
+            $event = this.dispatchEvent('Error.beforeRender', ['error': $error]);
+            if ($event.isStopped()) {
                 return true;
             }
-            $renderer->write($renderer->render($error, $debug));
+            $renderer.write($renderer.render($error, $debug));
         } catch (Exception $e) {
             // Fatal errors always log.
-            this.logger()->logMessage('error', 'Could not render error. Got: ' . $e->getMessage());
+            this.logger().logMessage('error', 'Could not render error. Got: ' . $e.getMessage());
 
             return false;
         }
@@ -156,7 +156,7 @@ class ErrorTrap
         }
         $logger = this.logger();
         if (method_exists($logger, 'logError')) {
-            $logger->logError($error, Router::getRequest(), _config['trace']);
+            $logger.logError($error, Router::getRequest(), _config['trace']);
         } else {
             $loggerClass = get_class($logger);
             deprecationWarning(
@@ -166,11 +166,11 @@ class ErrorTrap
             $context = [];
             if (_config['trace']) {
                 $context = [
-                    'trace' => $error->getTraceAsString(),
-                    'request' => Router::getRequest(),
+                    'trace': $error.getTraceAsString(),
+                    'request': Router::getRequest(),
                 ];
             }
-            $logger->logMessage($error->getLabel(), $error->getMessage(), $context);
+            $logger.logMessage($error.getLabel(), $error.getMessage(), $context);
         }
     }
 
@@ -197,7 +197,7 @@ class ErrorTrap
         $oldConfig = this.getConfig('errorLogger');
         if ($oldConfig != null) {
             deprecationWarning('The `errorLogger` configuration key is deprecated. Use `logger` instead.');
-            this.setConfig(['logger' => $oldConfig, 'errorLogger' => null]);
+            this.setConfig(['logger': $oldConfig, 'errorLogger': null]);
         }
 
         /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */

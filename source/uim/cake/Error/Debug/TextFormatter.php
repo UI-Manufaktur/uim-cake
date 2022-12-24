@@ -71,15 +71,15 @@ TEXT;
     protected function export(NodeInterface $var, int $indent): string
     {
         if ($var instanceof ScalarNode) {
-            switch ($var->getType()) {
+            switch ($var.getType()) {
                 case 'bool':
-                    return $var->getValue() ? 'true' : 'false';
+                    return $var.getValue() ? 'true' : 'false';
                 case 'null':
                     return 'null';
                 case 'string':
-                    return "'" . (string)$var->getValue() . "'";
+                    return "'" . (string)$var.getValue() . "'";
                 default:
-                    return "({$var->getType()}) {$var->getValue()}";
+                    return "({$var.getType()}) {$var.getValue()}";
             }
         }
         if ($var instanceof ArrayNode) {
@@ -89,7 +89,7 @@ TEXT;
             return this.exportObject($var, $indent + 1);
         }
         if ($var instanceof SpecialNode) {
-            return $var->getValue();
+            return $var.getValue();
         }
         throw new RuntimeException('Unknown node received ' . get_class($var));
     }
@@ -108,9 +108,9 @@ TEXT;
         $end = "\n" . str_repeat('  ', $indent - 1);
         $vars = [];
 
-        foreach ($var->getChildren() as $item) {
-            $val = $item->getValue();
-            $vars[] = $break . this.export($item->getKey(), $indent) . ' => ' . this.export($val, $indent);
+        foreach ($var.getChildren() as $item) {
+            $val = $item.getValue();
+            $vars[] = $break . this.export($item.getKey(), $indent) . ': ' . this.export($val, $indent);
         }
         if (count($vars)) {
             return $out . implode(',', $vars) . $end . ']';
@@ -133,20 +133,20 @@ TEXT;
         $props = [];
 
         if ($var instanceof ReferenceNode) {
-            return "object({$var->getValue()}) id:{$var->getId()} {}";
+            return "object({$var.getValue()}) id:{$var.getId()} {}";
         }
 
-        $out .= "object({$var->getValue()}) id:{$var->getId()} {";
+        $out .= "object({$var.getValue()}) id:{$var.getId()} {";
         $break = "\n" . str_repeat('  ', $indent);
         $end = "\n" . str_repeat('  ', $indent - 1) . '}';
 
-        foreach ($var->getChildren() as $property) {
-            $visibility = $property->getVisibility();
-            $name = $property->getName();
+        foreach ($var.getChildren() as $property) {
+            $visibility = $property.getVisibility();
+            $name = $property.getName();
             if ($visibility && $visibility != 'public') {
-                $props[] = "[{$visibility}] {$name} => " . this.export($property->getValue(), $indent);
+                $props[] = "[{$visibility}] {$name}: " . this.export($property.getValue(), $indent);
             } else {
-                $props[] = "{$name} => " . this.export($property->getValue(), $indent);
+                $props[] = "{$name}: " . this.export($property.getValue(), $indent);
             }
         }
         if (count($props)) {

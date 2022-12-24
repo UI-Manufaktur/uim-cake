@@ -52,31 +52,31 @@ class PhpError
      * @var array<int, string>
      */
     private $levelMap = [
-        E_PARSE => 'error',
-        E_ERROR => 'error',
-        E_CORE_ERROR => 'error',
-        E_COMPILE_ERROR => 'error',
-        E_USER_ERROR => 'error',
-        E_WARNING => 'warning',
-        E_USER_WARNING => 'warning',
-        E_COMPILE_WARNING => 'warning',
-        E_RECOVERABLE_ERROR => 'warning',
-        E_NOTICE => 'notice',
-        E_USER_NOTICE => 'notice',
-        E_STRICT => 'strict',
-        E_DEPRECATED => 'deprecated',
-        E_USER_DEPRECATED => 'deprecated',
+        E_PARSE: 'error',
+        E_ERROR: 'error',
+        E_CORE_ERROR: 'error',
+        E_COMPILE_ERROR: 'error',
+        E_USER_ERROR: 'error',
+        E_WARNING: 'warning',
+        E_USER_WARNING: 'warning',
+        E_COMPILE_WARNING: 'warning',
+        E_RECOVERABLE_ERROR: 'warning',
+        E_NOTICE: 'notice',
+        E_USER_NOTICE: 'notice',
+        E_STRICT: 'strict',
+        E_DEPRECATED: 'deprecated',
+        E_USER_DEPRECATED: 'deprecated',
     ];
 
     /**
      * @var array<string, int>
      */
     private $logMap = [
-        'error' => LOG_ERR,
-        'warning' => LOG_WARNING,
-        'notice' => LOG_NOTICE,
-        'strict' => LOG_NOTICE,
-        'deprecated' => LOG_NOTICE,
+        'error': LOG_ERR,
+        'warning': LOG_WARNING,
+        'notice': LOG_NOTICE,
+        'strict': LOG_NOTICE,
+        'deprecated': LOG_NOTICE,
     ];
 
     /**

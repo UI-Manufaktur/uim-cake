@@ -32,21 +32,21 @@ class ConsoleFormatter : FormatterInterface
      */
     protected $styles = [
         // bold yellow
-        'const' => '1;33',
+        'const': '1;33',
         // green
-        'string' => '0;32',
+        'string': '0;32',
         // bold blue
-        'number' => '1;34',
+        'number': '1;34',
         // cyan
-        'class' => '0;36',
+        'class': '0;36',
         // grey
-        'punct' => '0;90',
+        'punct': '0;90',
         // default foreground
-        'property' => '0;39',
+        'property': '0;39',
         // magenta
-        'visibility' => '0;35',
+        'visibility': '0;35',
         // red
-        'special' => '0;31',
+        'special': '0;31',
     ];
 
     /**
@@ -120,19 +120,19 @@ class ConsoleFormatter : FormatterInterface
     protected function export(NodeInterface $var, int $indent): string
     {
         if ($var instanceof ScalarNode) {
-            switch ($var->getType()) {
+            switch ($var.getType()) {
                 case 'bool':
-                    return this.style('const', $var->getValue() ? 'true' : 'false');
+                    return this.style('const', $var.getValue() ? 'true' : 'false');
                 case 'null':
                     return this.style('const', 'null');
                 case 'string':
-                    return this.style('string', "'" . (string)$var->getValue() . "'");
+                    return this.style('string', "'" . (string)$var.getValue() . "'");
                 case 'int':
                 case 'float':
-                    return this.style('visibility', "({$var->getType()})") .
-                        ' ' . this.style('number', "{$var->getValue()}");
+                    return this.style('visibility', "({$var.getType()})") .
+                        ' ' . this.style('number', "{$var.getValue()}");
                 default:
-                    return "({$var->getType()}) {$var->getValue()}";
+                    return "({$var.getType()}) {$var.getValue()}";
             }
         }
         if ($var instanceof ArrayNode) {
@@ -142,7 +142,7 @@ class ConsoleFormatter : FormatterInterface
             return this.exportObject($var, $indent + 1);
         }
         if ($var instanceof SpecialNode) {
-            return this.style('special', $var->getValue());
+            return this.style('special', $var.getValue());
         }
         throw new RuntimeException('Unknown node received ' . get_class($var));
     }
@@ -161,10 +161,10 @@ class ConsoleFormatter : FormatterInterface
         $end = "\n" . str_repeat('  ', $indent - 1);
         $vars = [];
 
-        $arrow = this.style('punct', ' => ');
-        foreach ($var->getChildren() as $item) {
-            $val = $item->getValue();
-            $vars[] = $break . this.export($item->getKey(), $indent) . $arrow . this.export($val, $indent);
+        $arrow = this.style('punct', ': ');
+        foreach ($var.getChildren() as $item) {
+            $val = $item.getValue();
+            $vars[] = $break . this.export($item.getKey(), $indent) . $arrow . this.export($val, $indent);
         }
 
         $close = this.style('punct', ']');
@@ -189,35 +189,35 @@ class ConsoleFormatter : FormatterInterface
 
         if ($var instanceof ReferenceNode) {
             return this.style('punct', 'object(') .
-                this.style('class', $var->getValue()) .
+                this.style('class', $var.getValue()) .
                 this.style('punct', ') id:') .
-                this.style('number', (string)$var->getId()) .
+                this.style('number', (string)$var.getId()) .
                 this.style('punct', ' {}');
         }
 
         $out = this.style('punct', 'object(') .
-            this.style('class', $var->getValue()) .
+            this.style('class', $var.getValue()) .
             this.style('punct', ') id:') .
-            this.style('number', (string)$var->getId()) .
+            this.style('number', (string)$var.getId()) .
             this.style('punct', ' {');
 
         $break = "\n" . str_repeat('  ', $indent);
         $end = "\n" . str_repeat('  ', $indent - 1) . this.style('punct', '}');
 
-        $arrow = this.style('punct', ' => ');
-        foreach ($var->getChildren() as $property) {
-            $visibility = $property->getVisibility();
-            $name = $property->getName();
+        $arrow = this.style('punct', ': ');
+        foreach ($var.getChildren() as $property) {
+            $visibility = $property.getVisibility();
+            $name = $property.getName();
             if ($visibility && $visibility != 'public') {
                 $props[] = this.style('visibility', $visibility) .
                     ' ' .
                     this.style('property', $name) .
                     $arrow .
-                    this.export($property->getValue(), $indent);
+                    this.export($property.getValue(), $indent);
             } else {
                 $props[] = this.style('property', $name) .
                     $arrow .
-                    this.export($property->getValue(), $indent);
+                    this.export($property.getValue(), $indent);
             }
         }
         if (count($props)) {

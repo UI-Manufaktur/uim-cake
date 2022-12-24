@@ -42,8 +42,8 @@ class ConsoleErrorHandler : BaseErrorHandler
     public this(array $config = [])
     {
         $config += [
-            'stderr' => new ConsoleOutput('php://stderr'),
-            'log' => false,
+            'stderr': new ConsoleOutput('php://stderr'),
+            'log': false,
         ];
 
         this.setConfig($config);
@@ -66,7 +66,7 @@ class ConsoleErrorHandler : BaseErrorHandler
 
         $exitCode = Command::CODE_ERROR;
         if ($exception instanceof ConsoleException) {
-            $exitCode = $exception->getCode();
+            $exitCode = $exception.getCode();
         }
         _stop($exitCode);
     }
@@ -87,11 +87,11 @@ class ConsoleErrorHandler : BaseErrorHandler
         $message = sprintf(
             "<error>%s</error> %s\nIn [%s, line %s]\n",
             $errorName,
-            $exception->getMessage(),
-            $exception->getFile(),
-            $exception->getLine()
+            $exception.getMessage(),
+            $exception.getFile(),
+            $exception.getLine()
         );
-        _stderr->write($message);
+        _stderr.write($message);
     }
 
     /**
@@ -116,7 +116,7 @@ class ConsoleErrorHandler : BaseErrorHandler
             $error['error'],
             $message
         );
-        _stderr->write($message);
+        _stderr.write($message);
     }
 
     /**

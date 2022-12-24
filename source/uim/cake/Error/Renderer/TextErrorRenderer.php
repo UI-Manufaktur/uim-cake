@@ -45,12 +45,12 @@ class TextErrorRenderer : ErrorRendererInterface
 
         return sprintf(
             "%s: %s :: %s on line %s of %s\nTrace:\n%s",
-            $error->getLabel(),
-            $error->getCode(),
-            $error->getMessage(),
-            $error->getLine() ?? '',
-            $error->getFile() ?? '',
-            $error->getTraceAsString(),
+            $error.getLabel(),
+            $error.getCode(),
+            $error.getMessage(),
+            $error.getLine() ?? '',
+            $error.getFile() ?? '',
+            $error.getTraceAsString(),
         );
     }
 }

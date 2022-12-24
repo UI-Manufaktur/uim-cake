@@ -105,7 +105,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
             this.setEventManager($eventManager);
         }
 
-        this.getEventManager()->on(this);
+        this.getEventManager().on(this);
 
         if (method_exists(this, '_buildValidator')) {
             deprecationWarning(
@@ -121,7 +121,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      *
      * The conventional method map is:
      *
-     * - Form.buildValidator => buildValidator
+     * - Form.buildValidator: buildValidator
      *
      * @return array<string, mixed>
      */
@@ -129,7 +129,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
     {
         if (method_exists(this, 'buildValidator')) {
             return [
-                self::BUILD_VALIDATOR_EVENT => 'buildValidator',
+                self::BUILD_VALIDATOR_EVENT: 'buildValidator',
             ];
         }
 
@@ -216,7 +216,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
     function validate(array $data, ?string $validator = null): bool
     {
         _errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
-            ->validate($data);
+            .validate($data);
 
         return count(_errors) == 0;
     }
@@ -239,10 +239,10 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      *
      * ```
      * $errors = [
-     *      'field_name' => ['rule_name' => 'message']
+     *      'field_name': ['rule_name': 'message']
      * ];
      *
-     * $form->setErrors($errors);
+     * $form.setErrors($errors);
      * ```
      *
      * @param array $errors Errors list.
@@ -277,7 +277,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
     {
         _data = $data;
 
-        $options += ['validate' => true];
+        $options += ['validate': true];
 
         if ($options['validate'] == false) {
             return _execute($data);
@@ -329,11 +329,11 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
     {
         $write = $name;
         if (!is_array($name)) {
-            $write = [$name => $value];
+            $write = [$name: $value];
         }
 
         /** @psalm-suppress PossiblyInvalidIterator */
-        foreach ($write as $key => $val) {
+        foreach ($write as $key: $val) {
             _data = Hash::insert(_data, $key, $val);
         }
 
@@ -361,9 +361,9 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
     function __debugInfo(): array
     {
         $special = [
-            '_schema' => this.getSchema()->__debugInfo(),
-            '_errors' => this.getErrors(),
-            '_validator' => this.getValidator()->__debugInfo(),
+            '_schema': this.getSchema().__debugInfo(),
+            '_errors': this.getErrors(),
+            '_validator': this.getValidator().__debugInfo(),
         ];
 
         return $special + get_object_vars(this);

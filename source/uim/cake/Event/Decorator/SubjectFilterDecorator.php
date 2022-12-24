@@ -60,7 +60,7 @@ class SubjectFilterDecorator : AbstractDecorator
         }
 
         try {
-            $subject = $event->getSubject();
+            $subject = $event.getSubject();
         } catch (CakeException $e) {
             return false;
         }

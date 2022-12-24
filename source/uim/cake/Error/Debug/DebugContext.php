@@ -62,7 +62,7 @@ class DebugContext
     function withAddedDepth()
     {
         $new = clone this;
-        $new->depth += 1;
+        $new.depth += 1;
 
         return $new;
     }
@@ -88,11 +88,11 @@ class DebugContext
      */
     function getReferenceId(object $object): int
     {
-        if (this.refs->contains($object)) {
+        if (this.refs.contains($object)) {
             return this.refs[$object];
         }
-        $refId = this.refs->count();
-        this.refs->attach($object, $refId);
+        $refId = this.refs.count();
+        this.refs.attach($object, $refId);
 
         return $refId;
     }
@@ -105,6 +105,6 @@ class DebugContext
      */
     function hasReference(object $object): bool
     {
-        return this.refs->contains($object);
+        return this.refs.contains($object);
     }
 }

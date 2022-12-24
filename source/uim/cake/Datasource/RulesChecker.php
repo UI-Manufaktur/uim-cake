@@ -322,7 +322,7 @@ class RulesChecker
         if (!($rule instanceof RuleInvoker)) {
             $rule = new RuleInvoker($rule, $name, $options);
         } else {
-            $rule->setOptions($options)->setName($name);
+            $rule.setOptions($options).setName($name);
         }
 
         return $rule;

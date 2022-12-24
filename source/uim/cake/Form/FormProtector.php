@@ -279,8 +279,8 @@ class FormProtector
         $unlockedFields = this.sortedUnlockedFields($formData);
 
         return [
-            'fields' => $fields,
-            'unlockedFields' => $unlockedFields,
+            'fields': $fields,
+            'unlockedFields': $unlockedFields,
         ];
     }
 
@@ -309,7 +309,7 @@ class FormProtector
         $multi = $lockedFields = [];
         $isUnlocked = false;
 
-        foreach ($fieldList as $i => $key) {
+        foreach ($fieldList as $i: $key) {
             if (is_string($key) && preg_match('/(\.\d+){1,10}$/', $key)) {
                 $multi[$i] = preg_replace('/(\.\d+){1,10}$/', '', $key);
                 unset($fieldList[$i]);
@@ -328,7 +328,7 @@ class FormProtector
             )
         );
 
-        foreach ($fieldList as $i => $key) {
+        foreach ($fieldList as $i: $key) {
             $isLocked = in_array($key, $locked, true);
 
             if (!empty($unlockedFields)) {
@@ -389,7 +389,7 @@ class FormProtector
         $unlockedFields = this.unlockedFields;
 
         $locked = [];
-        foreach ($fields as $key => $value) {
+        foreach ($fields as $key: $value) {
             if (is_numeric($value)) {
                 $value = (string)$value;
             }
@@ -408,9 +408,9 @@ class FormProtector
         $locked = implode('|', array_keys($locked));
 
         return [
-            'fields' => urlencode($fields . ':' . $locked),
-            'unlocked' => urlencode(implode('|', $unlockedFields)),
-            'debug' => urlencode(json_encode([
+            'fields': urlencode($fields . ':' . $locked),
+            'unlocked': urlencode(implode('|', $unlockedFields)),
+            'debug': urlencode(json_encode([
                 $url,
                 this.fields,
                 this.unlockedFields,
@@ -531,7 +531,7 @@ class FormProtector
         string $stringKeyMessage
     ): array {
         $messages = [];
-        foreach ($dataFields as $key => $value) {
+        foreach ($dataFields as $key: $value) {
             if (is_int($key)) {
                 $foundKey = array_search($value, $expectedFields, true);
                 if ($foundKey == false) {
@@ -564,7 +564,7 @@ class FormProtector
         }
 
         $expectedFieldNames = [];
-        foreach ($expectedFields as $key => $expectedField) {
+        foreach ($expectedFields as $key: $expectedField) {
             if (is_int($key)) {
                 $expectedFieldNames[] = $expectedField;
             } else {
@@ -583,9 +583,9 @@ class FormProtector
     function __debugInfo(): array
     {
         return [
-            'fields' => this.fields,
-            'unlockedFields' => this.unlockedFields,
-            'debugMessage' => this.debugMessage,
+            'fields': this.fields,
+            'unlockedFields': this.unlockedFields,
+            'debugMessage': this.debugMessage,
         ];
     }
 }

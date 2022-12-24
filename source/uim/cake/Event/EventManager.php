@@ -88,7 +88,7 @@ class EventManager : IEventManager
             static::$_generalManager = new static();
         }
 
-        static::$_generalManager->_isGlobal = true;
+        static::$_generalManager._isGlobal = true;
 
         return static::$_generalManager;
     }
@@ -107,7 +107,7 @@ class EventManager : IEventManager
         $argCount = func_num_args();
         if ($argCount == 2) {
             _listeners[$eventKey][static::$defaultPriority][] = [
-                'callable' => $options,
+                'callable': $options,
             ];
 
             return this;
@@ -115,7 +115,7 @@ class EventManager : IEventManager
 
         $priority = $options['priority'] ?? static::$defaultPriority;
         _listeners[$eventKey][$priority][] = [
-            'callable' => $callable,
+            'callable': $callable,
         ];
 
         return this;
@@ -130,7 +130,7 @@ class EventManager : IEventManager
      */
     protected function _attachSubscriber(EventListenerInterface $subscriber): void
     {
-        foreach ($subscriber->implementedEvents() as $eventKey => $function) {
+        foreach ($subscriber.implementedEvents() as $eventKey: $function) {
             $options = [];
             $method = $function;
             if (is_array($function) && isset($function['callable'])) {
@@ -213,8 +213,8 @@ class EventManager : IEventManager
             return this;
         }
 
-        foreach (_listeners[$eventKey] as $priority => $callables) {
-            foreach ($callables as $k => $callback) {
+        foreach (_listeners[$eventKey] as $priority: $callables) {
+            foreach ($callables as $k: $callback) {
                 if ($callback['callable'] == $callable) {
                     unset(_listeners[$eventKey][$priority][$k]);
                     break;
@@ -234,14 +234,14 @@ class EventManager : IEventManager
      */
     protected function _detachSubscriber(EventListenerInterface $subscriber, ?string $eventKey = null): void
     {
-        $events = $subscriber->implementedEvents();
+        $events = $subscriber.implementedEvents();
         if (!empty($eventKey) && empty($events[$eventKey])) {
             return;
         }
         if (!empty($eventKey)) {
-            $events = [$eventKey => $events[$eventKey]];
+            $events = [$eventKey: $events[$eventKey]];
         }
-        foreach ($events as $key => $function) {
+        foreach ($events as $key: $function) {
             if (is_array($function)) {
                 if (is_numeric(key($function))) {
                     foreach ($function as $handler) {
@@ -265,14 +265,14 @@ class EventManager : IEventManager
             $event = new Event($event);
         }
 
-        $listeners = this.listeners($event->getName());
+        $listeners = this.listeners($event.getName());
 
         if (_trackEvents) {
             this.addEventToList($event);
         }
 
-        if (!_isGlobal && static::instance()->isTrackingEvents()) {
-            static::instance()->addEventToList($event);
+        if (!_isGlobal && static::instance().isTrackingEvents()) {
+            static::instance().addEventToList($event);
         }
 
         if (empty($listeners)) {
@@ -280,15 +280,15 @@ class EventManager : IEventManager
         }
 
         foreach ($listeners as $listener) {
-            if ($event->isStopped()) {
+            if ($event.isStopped()) {
                 break;
             }
             $result = _callListener($listener['callable'], $event);
             if ($result == false) {
-                $event->stopPropagation();
+                $event.stopPropagation();
             }
             if ($result != null) {
-                $event->setResult($result);
+                $event.setResult($result);
             }
         }
 
@@ -304,7 +304,7 @@ class EventManager : IEventManager
      */
     protected function _callListener(callable $listener, EventInterface $event)
     {
-        $data = (array)$event->getData();
+        $data = (array)$event.getData();
 
         return $listener($event, ...array_values($data));
     }
@@ -319,7 +319,7 @@ class EventManager : IEventManager
             $localListeners = this.prioritisedListeners($eventKey);
             $localListeners = empty($localListeners) ? [] : $localListeners;
         }
-        $globalListeners = static::instance()->prioritisedListeners($eventKey);
+        $globalListeners = static::instance().prioritisedListeners($eventKey);
         $globalListeners = empty($globalListeners) ? [] : $globalListeners;
 
         $priorities = array_merge(array_keys($globalListeners), array_keys($localListeners));
@@ -391,7 +391,7 @@ class EventManager : IEventManager
     function addEventToList(EventInterface $event)
     {
         if (_eventList) {
-            _eventList->add($event);
+            _eventList.add($event);
         }
 
         return this;
@@ -457,7 +457,7 @@ class EventManager : IEventManager
         $properties = get_object_vars(this);
         $properties['_generalManager'] = '(object) EventManager';
         $properties['_listeners'] = [];
-        foreach (_listeners as $key => $priorities) {
+        foreach (_listeners as $key: $priorities) {
             $listenerCount = 0;
             foreach ($priorities as $listeners) {
                 $listenerCount += count($listeners);
@@ -469,10 +469,10 @@ class EventManager : IEventManager
             for ($i = 0; $i < $count; $i++) {
                 $event = _eventList[$i];
                 try {
-                    $subject = $event->getSubject();
-                    $properties['_dispatchedEvents'][] = $event->getName() . ' with subject ' . get_class($subject);
+                    $subject = $event.getSubject();
+                    $properties['_dispatchedEvents'][] = $event.getName() . ' with subject ' . get_class($subject);
                 } catch (CakeException $e) {
-                    $properties['_dispatchedEvents'][] = $event->getName() . ' with no subject';
+                    $properties['_dispatchedEvents'][] = $event.getName() . ' with no subject';
                 }
             }
         } else {

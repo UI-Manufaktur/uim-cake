@@ -87,9 +87,9 @@ class File
     public this(string $path, bool $create = false, int $mode = 0755)
     {
         $splInfo = new SplFileInfo($path);
-        this.Folder = new Folder($splInfo->getPath(), $create, $mode);
+        this.Folder = new Folder($splInfo.getPath(), $create, $mode);
         if (!is_dir($path)) {
-            this.name = ltrim($splInfo->getFilename(), '/\\');
+            this.name = ltrim($splInfo.getFilename(), '/\\');
         }
         this.pwd();
         $create && !this.exists() && this.safe($path) && this.create();
@@ -110,7 +110,7 @@ class File
      */
     function create(): bool
     {
-        $dir = this.Folder->pwd();
+        $dir = this.Folder.pwd();
 
         if (is_dir($dir) && is_writable($dir) && !this.exists() && touch(this.path)) {
             return true;
@@ -215,7 +215,7 @@ class File
             $lineBreak = "\r\n";
         }
 
-        return strtr($data, ["\r\n" => $lineBreak, "\n" => $lineBreak, "\r" => $lineBreak]);
+        return strtr($data, ["\r\n": $lineBreak, "\n": $lineBreak, "\r": $lineBreak]);
     }
 
     /**
@@ -361,7 +361,7 @@ class File
         }
 
         $splInfo = new SplFileInfo($path);
-        $name = ltrim($splInfo->getFilename(), '/\\');
+        $name = ltrim($splInfo.getFilename(), '/\\');
 
         if ($ext == null || $ext == '') {
             return $name;
@@ -421,9 +421,9 @@ class File
     function pwd()
     {
         if (this.path == null) {
-            $dir = this.Folder->pwd();
+            $dir = this.Folder.pwd();
             if ($dir && is_dir($dir)) {
-                this.path = this.Folder->slashTerm($dir) . this.name;
+                this.path = this.Folder.slashTerm($dir) . this.name;
             }
         }
 
@@ -595,7 +595,7 @@ class File
         }
         if (class_exists('finfo')) {
             $finfo = new finfo(FILEINFO_MIME);
-            $type = $finfo->file(this.pwd());
+            $type = $finfo.file(this.pwd());
             if (!$type) {
                 return false;
             }

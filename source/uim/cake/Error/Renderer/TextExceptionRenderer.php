@@ -52,11 +52,11 @@ class TextExceptionRenderer
     {
         return sprintf(
             "%s : %s on line %s of %s\nTrace:\n%s",
-            this.error->getCode(),
-            this.error->getMessage(),
-            this.error->getLine(),
-            this.error->getFile(),
-            this.error->getTraceAsString(),
+            this.error.getCode(),
+            this.error.getMessage(),
+            this.error.getLine(),
+            this.error.getFile(),
+            this.error.getTraceAsString(),
         );
     }
 

@@ -98,7 +98,7 @@ class ErrorHandler : BaseErrorHandler
     public this(array $config = [])
     {
         $config += [
-            'exceptionRenderer' => ExceptionRenderer::class,
+            'exceptionRenderer': ExceptionRenderer::class,
         ];
 
         this.setConfig($config);
@@ -118,7 +118,7 @@ class ErrorHandler : BaseErrorHandler
         if (!$debug) {
             return;
         }
-        Debugger::getInstance()->outputError($error);
+        Debugger::getInstance().outputError($error);
     }
 
     /**
@@ -135,7 +135,7 @@ class ErrorHandler : BaseErrorHandler
                 $exception,
                 Router::getRequest()
             );
-            $response = $renderer->render();
+            $response = $renderer.render();
             _sendResponse($response);
         } catch (Throwable $exception) {
             _logInternalError($exception);
@@ -188,10 +188,10 @@ class ErrorHandler : BaseErrorHandler
         $message = sprintf(
             "[%s] %s (%s:%s)\n%s", // Keeping same message format
             get_class($exception),
-            $exception->getMessage(),
-            $exception->getFile(),
-            $exception->getLine(),
-            $exception->getTraceAsString()
+            $exception.getMessage(),
+            $exception.getFile(),
+            $exception.getLine(),
+            $exception.getTraceAsString()
         );
         trigger_error($message, E_USER_ERROR);
     }
@@ -211,6 +211,6 @@ class ErrorHandler : BaseErrorHandler
         }
 
         $emitter = new ResponseEmitter();
-        $emitter->emit($response);
+        $emitter.emit($response);
     }
 }

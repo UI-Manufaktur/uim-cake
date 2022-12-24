@@ -45,18 +45,18 @@ class HtmlErrorRenderer : ErrorRendererInterface
             return '';
         }
         $id = 'cakeErr' . uniqid();
-        $file = $error->getFile();
+        $file = $error.getFile();
 
         // Some of the error data is not HTML safe so we escape everything.
-        $description = h($error->getMessage());
+        $description = h($error.getMessage());
         $path = h($file);
-        $trace = h($error->getTraceAsString());
-        $line = $error->getLine();
+        $trace = h($error.getTraceAsString());
+        $line = $error.getLine();
 
         $errorMessage = sprintf(
             '<b>%s</b> (%s)',
-            h(ucfirst($error->getLabel())),
-            h($error->getCode())
+            h(ucfirst($error.getLabel())),
+            h($error.getCode())
         );
         $toggle = this.renderToggle($errorMessage, $id, 'trace');
         $codeToggle = this.renderToggle('Code', $id, 'code');

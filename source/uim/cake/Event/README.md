@@ -27,19 +27,19 @@ class Orders
 	{
 		this.doStuff();
 		$event = new Event('Orders.afterPlace', this, [
-			'order' => $order
+			'order': $order
 		]);
-		this.getEventManager()->dispatch($event);
+		this.getEventManager().dispatch($event);
 	}
 }
 
 $orders = new Orders();
-$orders->getEventManager()->on(function ($event) {
+$orders.getEventManager().on(function ($event) {
 	// Do something after the order was placed
 	...
 }, 'Orders.afterPlace');
 
-$orders->placeOrder($order);
+$orders.placeOrder($order);
 ```
 
 The above code allows you to easily notify the other parts of the application that an order has been created.

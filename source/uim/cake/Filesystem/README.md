@@ -15,19 +15,19 @@ Create a folder instance and search for all the `.php` files within it:
 use Cake\Filesystem\Folder;
 
 $dir = new Folder('/path/to/folder');
-$files = $dir->find('.*\.php');
+$files = $dir.find('.*\.php');
 ```
 
 Now you can loop through the files and read from or write/append to the contents or simply delete the file:
 
 ```php
 foreach ($files as $file) {
-    $file = new File($dir->pwd() . DIRECTORY_SEPARATOR . $file);
-    $contents = $file->read();
-    // $file->write('I am overwriting the contents of this file');
-    // $file->append('I am adding to the bottom of this file.');
-    // $file->delete(); // I am deleting this file
-    $file->close(); // Be sure to close the file when you're done
+    $file = new File($dir.pwd() . DIRECTORY_SEPARATOR . $file);
+    $contents = $file.read();
+    // $file.write('I am overwriting the contents of this file');
+    // $file.append('I am adding to the bottom of this file.');
+    // $file.delete(); // I am deleting this file
+    $file.close(); // Be sure to close the file when you're done
 }
 ```
 

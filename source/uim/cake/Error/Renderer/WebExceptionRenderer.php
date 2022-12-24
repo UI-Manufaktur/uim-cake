@@ -111,15 +111,15 @@ class WebExceptionRenderer : ExceptionRendererInterface
      */
     protected $exceptionHttpCodes = [
         // Controller exceptions
-        InvalidParameterException::class => 404,
-        MissingActionException::class => 404,
+        InvalidParameterException::class: 404,
+        MissingActionException::class: 404,
         // Datasource exceptions
-        PageOutOfBoundsException::class => 404,
-        RecordNotFoundException::class => 404,
+        PageOutOfBoundsException::class: 404,
+        RecordNotFoundException::class: 404,
         // Http exceptions
-        MissingControllerException::class => 404,
+        MissingControllerException::class: 404,
         // Routing exceptions
-        MissingRouteException::class => 404,
+        MissingRouteException::class: 404,
     ];
 
     /**
@@ -157,17 +157,17 @@ class WebExceptionRenderer : ExceptionRendererInterface
 
         // If the current request doesn't have routing data, but we
         // found a request in the router context copy the params over
-        if ($request->getParam('controller') == null && $routerRequest != null) {
-            $request = $request->withAttribute('params', $routerRequest->getAttribute('params'));
+        if ($request.getParam('controller') == null && $routerRequest != null) {
+            $request = $request.withAttribute('params', $routerRequest.getAttribute('params'));
         }
 
         $errorOccured = false;
         try {
-            $params = $request->getAttribute('params');
+            $params = $request.getAttribute('params');
             $params['controller'] = 'Error';
 
             $factory = new ControllerFactory(new Container());
-            $class = $factory->getControllerClass($request->withAttribute('params', $params));
+            $class = $factory.getControllerClass($request.withAttribute('params', $params));
 
             if (!$class) {
                 /** @var string $class */
@@ -176,7 +176,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
 
             /** @var \Cake\Controller\Controller $controller */
             $controller = new $class($request);
-            $controller->startupProcess();
+            $controller.startupProcess();
         } catch (Throwable $e) {
             $errorOccured = true;
         }
@@ -188,10 +188,10 @@ class WebExceptionRenderer : ExceptionRendererInterface
         // Retry RequestHandler, as another aspect of startupProcess()
         // could have failed. Ignore any exceptions out of startup, as
         // there could be userland input data parsers.
-        if ($errorOccured && isset($controller->RequestHandler)) {
+        if ($errorOccured && isset($controller.RequestHandler)) {
             try {
                 $event = new Event('Controller.startup', $controller);
-                $controller->RequestHandler->startup($event);
+                $controller.RequestHandler.startup($event);
             } catch (Throwable $e) {
             }
         }
@@ -232,47 +232,47 @@ class WebExceptionRenderer : ExceptionRendererInterface
         }
 
         $message = _message($exception, $code);
-        $url = this.controller->getRequest()->getRequestTarget();
-        $response = this.controller->getResponse();
+        $url = this.controller.getRequest().getRequestTarget();
+        $response = this.controller.getResponse();
 
         if ($exception instanceof CakeException) {
             /** @psalm-suppress DeprecatedMethod */
-            foreach ((array)$exception->responseHeader() as $key => $value) {
-                $response = $response->withHeader($key, $value);
+            foreach ((array)$exception.responseHeader() as $key: $value) {
+                $response = $response.withHeader($key, $value);
             }
         }
         if ($exception instanceof HttpException) {
-            foreach ($exception->getHeaders() as $name => $value) {
-                $response = $response->withHeader($name, $value);
+            foreach ($exception.getHeaders() as $name: $value) {
+                $response = $response.withHeader($name, $value);
             }
         }
-        $response = $response->withStatus($code);
+        $response = $response.withStatus($code);
 
         $exceptions = [$exception];
-        $previous = $exception->getPrevious();
+        $previous = $exception.getPrevious();
         while ($previous != null) {
             $exceptions[] = $previous;
-            $previous = $previous->getPrevious();
+            $previous = $previous.getPrevious();
         }
 
         $viewVars = [
-            'message' => $message,
-            'url' => h($url),
-            'error' => $exception,
-            'exceptions' => $exceptions,
-            'code' => $code,
+            'message': $message,
+            'url': h($url),
+            'error': $exception,
+            'exceptions': $exceptions,
+            'code': $code,
         ];
         $serialize = ['message', 'url', 'code'];
 
         $isDebug = Configure::read('debug');
         if ($isDebug) {
-            $trace = (array)Debugger::formatTrace($exception->getTrace(), [
-                'format' => 'array',
-                'args' => true,
+            $trace = (array)Debugger::formatTrace($exception.getTrace(), [
+                'format': 'array',
+                'args': true,
             ]);
             $origin = [
-                'file' => $exception->getFile() ?: 'null',
-                'line' => $exception->getLine() ?: 'null',
+                'file': $exception.getFile() ?: 'null',
+                'line': $exception.getLine() ?: 'null',
             ];
             // Traces don't include the origin file/line.
             array_unshift($trace, $origin);
@@ -281,13 +281,13 @@ class WebExceptionRenderer : ExceptionRendererInterface
             $serialize[] = 'file';
             $serialize[] = 'line';
         }
-        this.controller->set($viewVars);
-        this.controller->viewBuilder()->setOption('serialize', $serialize);
+        this.controller.set($viewVars);
+        this.controller.viewBuilder().setOption('serialize', $serialize);
 
         if ($exception instanceof CakeException && $isDebug) {
-            this.controller->set($exception->getAttributes());
+            this.controller.set($exception.getAttributes());
         }
-        this.controller->setResponse($response);
+        this.controller.setResponse($response);
 
         return _outputMessage($template);
     }
@@ -307,7 +307,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
         }
 
         $emitter = new ResponseEmitter();
-        $emitter->emit($output);
+        $emitter.emit($output);
     }
 
     /**
@@ -322,7 +322,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
         $result = this.{$method}($exception);
         _shutdown();
         if (is_string($result)) {
-            $result = this.controller->getResponse()->withStringBody($result);
+            $result = this.controller.getResponse().withStringBody($result);
         }
 
         return $result;
@@ -357,7 +357,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      */
     protected function _message(Throwable $exception, int $code): string
     {
-        $message = $exception->getMessage();
+        $message = $exception.getMessage();
 
         if (
             !Configure::read('debug') &&
@@ -403,7 +403,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     protected function getHttpCode(Throwable $exception): int
     {
         if ($exception instanceof HttpException) {
-            return $exception->getCode();
+            return $exception.getCode();
         }
 
         return this.exceptionHttpCodes[get_class($exception)] ?? 500;
@@ -418,11 +418,11 @@ class WebExceptionRenderer : ExceptionRendererInterface
     protected function _outputMessage(string $template): Response
     {
         try {
-            this.controller->render($template);
+            this.controller.render($template);
 
             return _shutdown();
         } catch (MissingTemplateException $e) {
-            $attributes = $e->getAttributes();
+            $attributes = $e.getAttributes();
             if (
                 $e instanceof MissingLayoutException ||
                 strpos($attributes['file'], 'error500') != false
@@ -432,9 +432,9 @@ class WebExceptionRenderer : ExceptionRendererInterface
 
             return _outputMessage('error500');
         } catch (MissingPluginException $e) {
-            $attributes = $e->getAttributes();
-            if (isset($attributes['plugin']) && $attributes['plugin'] == this.controller->getPlugin()) {
-                this.controller->setPlugin(null);
+            $attributes = $e.getAttributes();
+            if (isset($attributes['plugin']) && $attributes['plugin'] == this.controller.getPlugin()) {
+                this.controller.setPlugin(null);
             }
 
             return _outputMessageSafe('error500');
@@ -456,17 +456,17 @@ class WebExceptionRenderer : ExceptionRendererInterface
      */
     protected function _outputMessageSafe(string $template): Response
     {
-        $builder = this.controller->viewBuilder();
+        $builder = this.controller.viewBuilder();
         $builder
-            ->setHelpers([], false)
-            ->setLayoutPath('')
-            ->setTemplatePath('Error');
-        $view = this.controller->createView('View');
+            .setHelpers([], false)
+            .setLayoutPath('')
+            .setTemplatePath('Error');
+        $view = this.controller.createView('View');
 
-        $response = this.controller->getResponse()
-            ->withType('html')
-            ->withStringBody($view->render($template, 'error'));
-        this.controller->setResponse($response);
+        $response = this.controller.getResponse()
+            .withType('html')
+            .withStringBody($view.render($template, 'error'));
+        this.controller.setResponse($response);
 
         return $response;
     }
@@ -480,9 +480,9 @@ class WebExceptionRenderer : ExceptionRendererInterface
      */
     protected function _shutdown(): Response
     {
-        this.controller->dispatchEvent('Controller.shutdown');
+        this.controller.dispatchEvent('Controller.shutdown');
 
-        return this.controller->getResponse();
+        return this.controller.getResponse();
     }
 
     /**
@@ -494,11 +494,11 @@ class WebExceptionRenderer : ExceptionRendererInterface
     function __debugInfo(): array
     {
         return [
-            'error' => this.error,
-            'request' => this.request,
-            'controller' => this.controller,
-            'template' => this.template,
-            'method' => this.method,
+            'error': this.error,
+            'request': this.request,
+            'controller': this.controller,
+            'template': this.template,
+            'method': this.method,
         ];
     }
 }

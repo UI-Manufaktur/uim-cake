@@ -46,10 +46,10 @@ class NumericPaginator : PaginatorInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'page' => 1,
-        'limit' => 20,
-        'maxLimit' => 100,
-        'allowedParameters' => ['limit', 'sort', 'page', 'direction'],
+        'page': 1,
+        'limit': 20,
+        'maxLimit': 100,
+        'allowedParameters': ['limit', 'sort', 'page', 'direction'],
     ];
 
     /**
@@ -74,10 +74,10 @@ class NumericPaginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    'limit' => 20,
-     *    'maxLimit' => 100
+     *    'limit': 20,
+     *    'maxLimit': 100
      *  ];
-     *  $results = $paginator->paginate($table, $settings);
+     *  $results = $paginator.paginate($table, $settings);
      * ```
      *
      * The above settings will be used to paginate any repository. You can configure
@@ -85,13 +85,13 @@ class NumericPaginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'limit' => 20,
-     *      'maxLimit' => 100
+     *    'Articles': [
+     *      'limit': 20,
+     *      'maxLimit': 100
      *    ],
-     *    'Comments' => [ ... ]
+     *    'Comments': [ ... ]
      *  ];
-     *  $results = $paginator->paginate($table, $settings);
+     *  $results = $paginator.paginate($table, $settings);
      * ```
      *
      * This would allow you to have different pagination settings for
@@ -107,9 +107,9 @@ class NumericPaginator : PaginatorInterface
      *
      * ```
      * $settings = [
-     *   'Articles' => [
-     *     'finder' => 'custom',
-     *     'sortableFields' => ['title', 'author_id', 'comment_count'],
+     *   'Articles': [
+     *     'finder': 'custom',
+     *     'sortableFields': ['title', 'author_id', 'comment_count'],
      *   ]
      * ];
      * ```
@@ -123,11 +123,11 @@ class NumericPaginator : PaginatorInterface
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'finder' => 'popular'
+     *    'Articles': [
+     *      'finder': 'popular'
      *    ]
      *  ];
-     *  $results = $paginator->paginate($table, $settings);
+     *  $results = $paginator.paginate($table, $settings);
      * ```
      *
      * Would paginate using the `find('popular')` method.
@@ -135,10 +135,10 @@ class NumericPaginator : PaginatorInterface
      * You can also pass an already created instance of a query to this method:
      *
      * ```
-     * $query = this.Articles->find('popular')->matching('Tags', function ($q) {
-     *   return $q->where(['name' => 'CakePHP'])
+     * $query = this.Articles.find('popular').matching('Tags', function ($q) {
+     *   return $q.where(['name': 'CakePHP'])
      * });
-     * $results = $paginator->paginate($query);
+     * $results = $paginator.paginate($query);
      * ```
      *
      * ### Scoping Request parameters
@@ -147,8 +147,8 @@ class NumericPaginator : PaginatorInterface
      * the same controller action:
      *
      * ```
-     * $articles = $paginator->paginate($articlesQuery, ['scope' => 'articles']);
-     * $tags = $paginator->paginate($tagsQuery, ['scope' => 'tags']);
+     * $articles = $paginator.paginate($articlesQuery, ['scope': 'articles']);
+     * $tags = $paginator.paginate($tagsQuery, ['scope': 'tags']);
      * ```
      *
      * Each of the above queries will use different query string parameter sets
@@ -170,7 +170,7 @@ class NumericPaginator : PaginatorInterface
         $query = null;
         if ($object instanceof QueryInterface) {
             $query = $object;
-            $object = $query->getRepository();
+            $object = $query.getRepository();
             if ($object == null) {
                 throw new CakeException('No repository set for query.');
             }
@@ -180,17 +180,17 @@ class NumericPaginator : PaginatorInterface
         $query = this.getQuery($object, $query, $data);
 
         $cleanQuery = clone $query;
-        $results = $query->all();
+        $results = $query.all();
         $data['numResults'] = count($results);
         $data['count'] = this.getCount($cleanQuery, $data);
 
         $pagingParams = this.buildParams($data);
-        $alias = $object->getAlias();
-        _pagingParams = [$alias => $pagingParams];
+        $alias = $object.getAlias();
+        _pagingParams = [$alias: $pagingParams];
         if ($pagingParams['requestedPage'] > $pagingParams['page']) {
             throw new PageOutOfBoundsException([
-                'requestedPage' => $pagingParams['requestedPage'],
-                'pagingParams' => _pagingParams,
+                'requestedPage': $pagingParams['requestedPage'],
+                'pagingParams': _pagingParams,
             ]);
         }
 
@@ -208,9 +208,9 @@ class NumericPaginator : PaginatorInterface
     protected function getQuery(RepositoryInterface $object, ?QueryInterface $query, array $data): QueryInterface
     {
         if ($query == null) {
-            $query = $object->find($data['finder'], $data['options']);
+            $query = $object.find($data['finder'], $data['options']);
         } else {
-            $query->applyOptions($data['options']);
+            $query.applyOptions($data['options']);
         }
 
         return $query;
@@ -225,7 +225,7 @@ class NumericPaginator : PaginatorInterface
      */
     protected function getCount(QueryInterface $query, array $data): ?int
     {
-        return $query->count();
+        return $query.count();
     }
 
     /**
@@ -238,13 +238,13 @@ class NumericPaginator : PaginatorInterface
      */
     protected function extractData(RepositoryInterface $object, array $params, array $settings): array
     {
-        $alias = $object->getAlias();
+        $alias = $object.getAlias();
         $defaults = this.getDefaults($alias, $settings);
         $options = this.mergeOptions($params, $defaults);
         $options = this.validateSort($object, $options);
         $options = this.checkLimit($options);
 
-        $options += ['page' => 1, 'scope' => null];
+        $options += ['page': 1, 'scope': null];
         $options['page'] = (int)$options['page'] < 1 ? 1 : (int)$options['page'];
         [$finder, $options] = _extractFinder($options);
 
@@ -263,11 +263,11 @@ class NumericPaginator : PaginatorInterface
         $limit = $data['options']['limit'];
 
         $paging = [
-            'count' => $data['count'],
-            'current' => $data['numResults'],
-            'perPage' => $limit,
-            'page' => $data['options']['page'],
-            'requestedPage' => $data['options']['page'],
+            'count': $data['count'],
+            'current': $data['numResults'],
+            'perPage': $limit,
+            'page': $data['options']['page'],
+            'requestedPage': $data['options']['page'],
         ];
 
         $paging = this.addPageCountParams($paging, $data);
@@ -276,9 +276,9 @@ class NumericPaginator : PaginatorInterface
         $paging = this.addSortingParams($paging, $data);
 
         $paging += [
-            'limit' => $data['defaults']['limit'] != $limit ? $limit : null,
-            'scope' => $data['options']['scope'],
-            'finder' => $data['finder'],
+            'limit': $data['defaults']['limit'] != $limit ? $limit : null,
+            'scope': $data['options']['scope'],
+            'finder': $data['finder'],
         ];
 
         return $paging;
@@ -369,11 +369,11 @@ class NumericPaginator : PaginatorInterface
         }
 
         $params += [
-            'sort' => $data['options']['sort'],
-            'direction' => isset($data['options']['sort']) && count($order) ? current($order) : null,
-            'sortDefault' => $sortDefault,
-            'directionDefault' => $directionDefault,
-            'completeSort' => $order,
+            'sort': $data['options']['sort'],
+            'direction': isset($data['options']['sort']) && count($order) ? current($order) : null,
+            'sortDefault': $sortDefault,
+            'directionDefault': $directionDefault,
+            'completeSort': $order,
         ];
 
         return $params;
@@ -549,10 +549,10 @@ class NumericPaginator : PaginatorInterface
 
             $order = isset($options['order']) && is_array($options['order']) ? $options['order'] : [];
             if ($order && $options['sort'] && strpos($options['sort'], '.') == false) {
-                $order = _removeAliases($order, $object->getAlias());
+                $order = _removeAliases($order, $object.getAlias());
             }
 
-            $options['order'] = [$options['sort'] => $direction] + $order;
+            $options['order'] = [$options['sort']: $direction] + $order;
         } else {
             $options['sort'] = null;
         }
@@ -603,7 +603,7 @@ class NumericPaginator : PaginatorInterface
     protected function _removeAliases(array $fields, string $model): array
     {
         $result = [];
-        foreach ($fields as $field => $sort) {
+        foreach ($fields as $field: $sort) {
             if (strpos($field, '.') == false) {
                 $result[$field] = $sort;
                 continue;
@@ -632,9 +632,9 @@ class NumericPaginator : PaginatorInterface
      */
     protected function _prefix(RepositoryInterface $object, array $order, bool $allowed = false): array
     {
-        $tableAlias = $object->getAlias();
+        $tableAlias = $object.getAlias();
         $tableOrder = [];
-        foreach ($order as $key => $value) {
+        foreach ($order as $key: $value) {
             if (is_numeric($key)) {
                 $tableOrder[] = $value;
                 continue;
@@ -649,11 +649,11 @@ class NumericPaginator : PaginatorInterface
 
             if ($correctAlias && $allowed) {
                 // Disambiguate fields in schema. As id is quite common.
-                if ($object->hasField($field)) {
+                if ($object.hasField($field)) {
                     $field = $alias . '.' . $field;
                 }
                 $tableOrder[$field] = $value;
-            } elseif ($correctAlias && $object->hasField($field)) {
+            } elseif ($correctAlias && $object.hasField($field)) {
                 $tableOrder[$tableAlias . '.' . $field] = $value;
             } elseif (!$correctAlias && $allowed) {
                 $tableOrder[$alias . '.' . $field] = $value;

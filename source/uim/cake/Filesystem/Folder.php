@@ -98,8 +98,8 @@ class Folder
      * @var array<string>
      */
     protected $_fsorts = [
-        self::SORT_NAME => 'getPathname',
-        self::SORT_TIME => 'getCTime',
+        self::SORT_NAME: 'getPathname',
+        self::SORT_TIME: 'getCTime',
     ];
 
     /**
@@ -218,21 +218,21 @@ class Folder
         }
 
         foreach ($iterator as $item) {
-            if ($item->isDot()) {
+            if ($item.isDot()) {
                 continue;
             }
-            $name = $item->getFilename();
+            $name = $item.getFilename();
             if ($skipHidden && $name[0] == '.' || isset($exceptions[$name])) {
                 continue;
             }
             if ($fullPath) {
-                $name = $item->getPathname();
+                $name = $item.getPathname();
             }
 
-            if ($item->isDir()) {
-                $dirs[$item->{$methodName}()][] = $name;
+            if ($item.isDir()) {
+                $dirs[$item.{$methodName}()][] = $name;
             } else {
-                $files[$item->{$methodName}()][] = $name;
+                $files[$item.{$methodName}()][] = $name;
             }
         }
 
@@ -514,10 +514,10 @@ class Folder
         }
 
         foreach ($iterator as $item) {
-            if (!$item->isDir() || $item->isDot()) {
+            if (!$item.isDir() || $item.isDot()) {
                 continue;
             }
-            $subdirectories[] = $fullPath ? $item->getRealPath() : $item->getFilename();
+            $subdirectories[] = $fullPath ? $item.getRealPath() : $item.getFilename();
         }
 
         return $subdirectories;
@@ -571,24 +571,24 @@ class Folder
          * @var string $itemPath
          * @var \RecursiveDirectoryIterator $fsIterator
          */
-        foreach ($iterator as $itemPath => $fsIterator) {
+        foreach ($iterator as $itemPath: $fsIterator) {
             if ($skipHidden) {
-                $subPathName = $fsIterator->getSubPathname();
+                $subPathName = $fsIterator.getSubPathname();
                 if ($subPathName[0] == '.' || strpos($subPathName, DIRECTORY_SEPARATOR . '.') != false) {
                     unset($fsIterator);
                     continue;
                 }
             }
             /** @var \FilesystemIterator $item */
-            $item = $fsIterator->current();
-            if (!empty($exceptions) && isset($exceptions[$item->getFilename()])) {
+            $item = $fsIterator.current();
+            if (!empty($exceptions) && isset($exceptions[$item.getFilename()])) {
                 unset($fsIterator, $item);
                 continue;
             }
 
-            if ($item->isFile()) {
+            if ($item.isFile()) {
                 $files[] = $itemPath;
-            } elseif ($item->isDir() && !$item->isDot()) {
+            } elseif ($item.isDir() && !$item.isDot()) {
                 $directories[] = $itemPath;
             }
 
@@ -679,7 +679,7 @@ class Folder
             } elseif (is_dir($stack[$i])) {
                 $dir = dir($stack[$i]);
                 if ($dir) {
-                    while (($entry = $dir->read()) != false) {
+                    while (($entry = $dir.read()) != false) {
                         if ($entry == '.' || $entry == '..') {
                             continue;
                         }
@@ -690,7 +690,7 @@ class Folder
                         }
                         $stack[] = $add;
                     }
-                    $dir->close();
+                    $dir.close();
                 }
             }
             $j = count($stack);
@@ -725,8 +725,8 @@ class Folder
             }
 
             foreach ($iterator as $item) {
-                $filePath = $item->getPathname();
-                if ($item->isFile() || $item->isLink()) {
+                $filePath = $item.getPathname();
+                if ($item.isFile() || $item.isLink()) {
                     // phpcs:disable
                     if (@unlink($filePath)) {
                         // phpcs:enable
@@ -734,7 +734,7 @@ class Folder
                     } else {
                         _errors[] = sprintf('%s NOT removed', $filePath);
                     }
-                } elseif ($item->isDir() && !$item->isDot()) {
+                } elseif ($item.isDir() && !$item.isDot()) {
                     // phpcs:disable
                     if (@rmdir($filePath)) {
                         // phpcs:enable
@@ -792,11 +792,11 @@ class Folder
             return false;
         }
         $options += [
-            'from' => this.path,
-            'mode' => this.mode,
-            'skip' => [],
-            'scheme' => Folder::MERGE,
-            'recursive' => true,
+            'from': this.path,
+            'mode': this.mode,
+            'skip': [],
+            'scheme': Folder::MERGE,
+            'recursive': true,
         ];
 
         $fromDir = $options['from'];
@@ -853,13 +853,13 @@ class Folder
                             chmod($to, $mode);
                             umask($old);
                             _messages[] = sprintf('%s created', $to);
-                            $options = ['from' => $from] + $options;
+                            $options = ['from': $from] + $options;
                             this.copy($to, $options);
                         } else {
                             _errors[] = sprintf('%s not created', $to);
                         }
                     } elseif (is_dir($from) && $options['scheme'] == Folder::MERGE) {
-                        $options = ['from' => $from] + $options;
+                        $options = ['from': $from] + $options;
                         this.copy($to, $options);
                     }
                 }
@@ -889,7 +889,7 @@ class Folder
      */
     function move(string $to, array $options = []): bool
     {
-        $options += ['from' => this.path, 'mode' => this.mode, 'skip' => [], 'recursive' => true];
+        $options += ['from': this.path, 'mode': this.mode, 'skip': [], 'recursive': true];
 
         if (this.copy($to, $options) && this.delete($options['from'])) {
             return (bool)this.cd($to);

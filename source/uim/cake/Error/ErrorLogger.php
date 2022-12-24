@@ -38,7 +38,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'trace' => false,
+        'trace': false,
     ];
 
     /**
@@ -61,18 +61,18 @@ class ErrorLogger : ErrorLoggerInterface
      */
     function logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false): void
     {
-        $message = $error->getMessage();
+        $message = $error.getMessage();
         if ($request) {
             $message .= this.getRequestContext($request);
         }
         if ($includeTrace) {
-            $message .= "\nTrace:\n" . $error->getTraceAsString() . "\n";
+            $message .= "\nTrace:\n" . $error.getTraceAsString() . "\n";
         }
         $logMap = [
-            'strict' => LOG_NOTICE,
-            'deprecated' => LOG_NOTICE,
+            'strict': LOG_NOTICE,
+            'deprecated': LOG_NOTICE,
         ];
-        $level = $error->getLabel();
+        $level = $error.getLabel();
         $level = $logMap[$level] ?? $level;
 
         Log::write($level, $message);
@@ -115,8 +115,8 @@ class ErrorLogger : ErrorLoggerInterface
             $message .= "\nTrace:\n" . $context['trace'] . "\n";
         }
         $logMap = [
-            'strict' => LOG_NOTICE,
-            'deprecated' => LOG_NOTICE,
+            'strict': LOG_NOTICE,
+            'deprecated': LOG_NOTICE,
         ];
         $level = $logMap[$level] ?? $level;
 
@@ -156,22 +156,22 @@ class ErrorLogger : ErrorLoggerInterface
             '%s[%s] %s in %s on line %s',
             $isPrevious ? "\nCaused by: " : '',
             get_class($exception),
-            $exception->getMessage(),
-            $exception->getFile(),
-            $exception->getLine()
+            $exception.getMessage(),
+            $exception.getFile(),
+            $exception.getLine()
         );
         $debug = Configure::read('debug');
 
         if ($debug && $exception instanceof CakeException) {
-            $attributes = $exception->getAttributes();
+            $attributes = $exception.getAttributes();
             if ($attributes) {
-                $message .= "\nException Attributes: " . var_export($exception->getAttributes(), true);
+                $message .= "\nException Attributes: " . var_export($exception.getAttributes(), true);
             }
         }
 
         if ($includeTrace) {
             /** @var array $trace */
-            $trace = Debugger::formatTrace($exception, ['format' => 'points']);
+            $trace = Debugger::formatTrace($exception, ['format': 'points']);
             $message .= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {
@@ -182,7 +182,7 @@ class ErrorLogger : ErrorLoggerInterface
             }
         }
 
-        $previous = $exception->getPrevious();
+        $previous = $exception.getPrevious();
         if ($previous) {
             $message .= this.getMessage($previous, true, $includeTrace);
         }
@@ -198,15 +198,15 @@ class ErrorLogger : ErrorLoggerInterface
      */
     function getRequestContext(IServerRequest $request): string
     {
-        $message = "\nRequest URL: " . $request->getRequestTarget();
+        $message = "\nRequest URL: " . $request.getRequestTarget();
 
-        $referer = $request->getHeaderLine('Referer');
+        $referer = $request.getHeaderLine('Referer');
         if ($referer) {
             $message .= "\nReferer URL: " . $referer;
         }
 
         if (method_exists($request, 'clientIp')) {
-            $clientIp = $request->clientIp();
+            $clientIp = $request.clientIp();
             if ($clientIp && $clientIp != '::1') {
                 $message .= "\nClient IP: " . $clientIp;
             }

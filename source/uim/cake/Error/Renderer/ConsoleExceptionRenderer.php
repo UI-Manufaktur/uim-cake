@@ -69,13 +69,13 @@ class ConsoleExceptionRenderer
     function render()
     {
         $exceptions = [this.error];
-        $previous = this.error->getPrevious();
+        $previous = this.error.getPrevious();
         while ($previous != null) {
             $exceptions[] = $previous;
-            $previous = $previous->getPrevious();
+            $previous = $previous.getPrevious();
         }
         $out = [];
-        foreach ($exceptions as $i => $error) {
+        foreach ($exceptions as $i: $error) {
             $out = array_merge($out, this.renderException($error, $i));
         }
 
@@ -96,20 +96,20 @@ class ConsoleExceptionRenderer
                 '<error>%s[%s] %s</error> in %s on line %s',
                 $index > 0 ? 'Caused by ' : '',
                 get_class($exception),
-                $exception->getMessage(),
-                $exception->getFile(),
-                $exception->getLine()
+                $exception.getMessage(),
+                $exception.getFile(),
+                $exception.getLine()
             ),
         ];
 
         $debug = Configure::read('debug');
         if ($debug && $exception instanceof CakeException) {
-            $attributes = $exception->getAttributes();
+            $attributes = $exception.getAttributes();
             if ($attributes) {
                 $out[] = '';
                 $out[] = '<info>Exception Attributes</info>';
                 $out[] = '';
-                $out[] = var_export($exception->getAttributes(), true);
+                $out[] = var_export($exception.getAttributes(), true);
             }
         }
 
@@ -117,7 +117,7 @@ class ConsoleExceptionRenderer
             $out[] = '';
             $out[] = '<info>Stack Trace:</info>';
             $out[] = '';
-            $out[] = $exception->getTraceAsString();
+            $out[] = $exception.getTraceAsString();
             $out[] = '';
         }
 
@@ -132,6 +132,6 @@ class ConsoleExceptionRenderer
      */
     function write($output): void
     {
-        this.output->write($output);
+        this.output.write($output);
     }
 }

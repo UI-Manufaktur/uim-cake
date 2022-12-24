@@ -89,7 +89,7 @@ trait EventDispatcherTrait
 
         /** @var \Cake\Event\EventInterface $event */
         $event = new _eventClass($name, $subject, $data);
-        this.getEventManager()->dispatch($event);
+        this.getEventManager().dispatch($event);
 
         return $event;
     }

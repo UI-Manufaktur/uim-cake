@@ -126,7 +126,7 @@ class EventList : ArrayAccess, Countable
     function hasEvent(string $name): bool
     {
         foreach (_events as $event) {
-            if ($event->getName() == $name) {
+            if ($event.getName() == $name) {
                 return true;
             }
         }

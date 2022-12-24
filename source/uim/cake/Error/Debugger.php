@@ -63,9 +63,9 @@ class Debugger
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'outputMask' => [],
-        'exportFormatter' => null,
-        'editor' => 'phpstorm',
+        'outputMask': [],
+        'exportFormatter': null,
+        'editor': 'phpstorm',
     ];
 
     /**
@@ -82,34 +82,34 @@ class Debugger
      * @var array<string, array<string, mixed>>
      */
     protected $_templates = [
-        'log' => [
+        'log': [
             // These templates are not actually used, as Debugger::log() is called instead.
-            'trace' => '{:reference} - {:path}, line {:line}',
-            'error' => '{:error} ({:code}): {:description} in [{:file}, line {:line}]',
+            'trace': '{:reference} - {:path}, line {:line}',
+            'error': '{:error} ({:code}): {:description} in [{:file}, line {:line}]',
         ],
-        'js' => [
-            'error' => '',
-            'info' => '',
-            'trace' => '<pre class="stack-trace">{:trace}</pre>',
-            'code' => '',
-            'context' => '',
-            'links' => [],
-            'escapeContext' => true,
+        'js': [
+            'error': '',
+            'info': '',
+            'trace': '<pre class="stack-trace">{:trace}</pre>',
+            'code': '',
+            'context': '',
+            'links': [],
+            'escapeContext': true,
         ],
-        'html' => [
-            'trace' => '<pre class="cake-error trace"><b>Trace</b> <p>{:trace}</p></pre>',
-            'context' => '<pre class="cake-error context"><b>Context</b> <p>{:context}</p></pre>',
-            'escapeContext' => true,
+        'html': [
+            'trace': '<pre class="cake-error trace"><b>Trace</b> <p>{:trace}</p></pre>',
+            'context': '<pre class="cake-error context"><b>Context</b> <p>{:context}</p></pre>',
+            'escapeContext': true,
         ],
-        'txt' => [
-            'error' => "{:error}: {:code} :: {:description} on line {:line} of {:path}\n{:info}",
-            'code' => '',
-            'info' => '',
+        'txt': [
+            'error': "{:error}: {:code} :: {:description} on line {:line} of {:path}\n{:info}",
+            'code': '',
+            'info': '',
         ],
-        'base' => [
-            'traceLine' => '{:reference} - {:path}, line {:line}',
-            'trace' => "Trace:\n{:trace}\n",
-            'context' => "Context:\n{:context}\n",
+        'base': [
+            'traceLine': '{:reference} - {:path}, line {:line}',
+            'trace': "Trace:\n{:trace}\n",
+            'context': "Context:\n{:context}\n",
         ],
     ];
 
@@ -123,9 +123,9 @@ class Debugger
      * @var array<string, class-string>
      */
     protected $renderers = [
-        'txt' => TextErrorRenderer::class,
+        'txt': TextErrorRenderer::class,
         // The html alias currently uses no JS and will be deprecated.
-        'js' => HtmlErrorRenderer::class,
+        'js': HtmlErrorRenderer::class,
     ];
 
     /**
@@ -134,13 +134,13 @@ class Debugger
      * @var array<string, string|callable>
      */
     protected $editors = [
-        'atom' => 'atom://core/open/file?filename={file}&line={line}',
-        'emacs' => 'emacs://open?url=file://{file}&line={line}',
-        'macvim' => 'mvim://open/?url=file://{file}&line={line}',
-        'phpstorm' => 'phpstorm://open?file={file}&line={line}',
-        'sublime' => 'subl://open?url=file://{file}&line={line}',
-        'textmate' => 'txmt://open?url=file://{file}&line={line}',
-        'vscode' => 'vscode://file/{file}:{line}',
+        'atom': 'atom://core/open/file?filename={file}&line={line}',
+        'emacs': 'emacs://open?url=file://{file}&line={line}',
+        'macvim': 'mvim://open/?url=file://{file}&line={line}',
+        'phpstorm': 'phpstorm://open?file={file}&line={line}',
+        'sublime': 'subl://open?url=file://{file}&line={line}',
+        'textmate': 'txmt://open?url=file://{file}&line={line}',
+        'vscode': 'vscode://file/{file}:{line}',
     ];
 
     /**
@@ -241,14 +241,14 @@ class Debugger
     public static function configInstance($key = null, $value = null, bool $merge = true)
     {
         if ($key == null) {
-            return static::getInstance()->getConfig($key);
+            return static::getInstance().getConfig($key);
         }
 
         if (is_array($key) || func_num_args() >= 2) {
-            return static::getInstance()->setConfig($key, $value, $merge);
+            return static::getInstance().setConfig($key, $value, $merge);
         }
 
-        return static::getInstance()->getConfig($key);
+        return static::getInstance().getConfig($key);
     }
 
     /**
@@ -266,7 +266,7 @@ class Debugger
      *
      * ### Example
      *
-     * Debugger::setOutputMask(['password' => '[*************]');
+     * Debugger::setOutputMask(['password': '[*************]');
      *
      * @param array<string, string> $value An array where keys are replaced by their values in output.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
@@ -295,7 +295,7 @@ class Debugger
             $type = getTypeName($template);
             throw new RuntimeException("Invalid editor type of `{$type}`. Expected string or Closure.");
         }
-        $instance->editors[$name] = $template;
+        $instance.editors[$name] = $template;
     }
 
     /**
@@ -307,11 +307,11 @@ class Debugger
     public static function setEditor(string $name): void
     {
         $instance = static::getInstance();
-        if (!isset($instance->editors[$name])) {
-            $known = implode(', ', array_keys($instance->editors));
+        if (!isset($instance.editors[$name])) {
+            $known = implode(', ', array_keys($instance.editors));
             throw new RuntimeException("Unknown editor `{$name}`. Known editors are {$known}");
         }
-        $instance->setConfig('editor', $name);
+        $instance.setConfig('editor', $name);
     }
 
     /**
@@ -324,12 +324,12 @@ class Debugger
     public static function editorUrl(string $file, int $line): string
     {
         $instance = static::getInstance();
-        $editor = $instance->getConfig('editor');
-        if (!isset($instance->editors[$editor])) {
+        $editor = $instance.getConfig('editor');
+        if (!isset($instance.editors[$editor])) {
             throw new RuntimeException("Cannot format editor URL `{$editor}` is not a known editor.");
         }
 
-        $template = $instance->editors[$editor];
+        $template = $instance.editors[$editor];
         if (is_string($template)) {
             return str_replace(['{file}', '{line}'], [$file, (string)$line], $template);
         }
@@ -363,7 +363,7 @@ class Debugger
     public static function log($var, $level = 'debug', int $maxDepth = 3): void
     {
         /** @var string $source */
-        $source = static::trace(['start' => 1]);
+        $source = static::trace(['start': 1]);
         $source .= "\n";
 
         Log::write(
@@ -413,16 +413,16 @@ class Debugger
     public static function formatTrace($backtrace, array $options = [])
     {
         if ($backtrace instanceof Throwable) {
-            $backtrace = $backtrace->getTrace();
+            $backtrace = $backtrace.getTrace();
         }
         $self = Debugger::getInstance();
         $defaults = [
-            'depth' => 999,
-            'format' => $self->_outputFormat,
-            'args' => false,
-            'start' => 0,
-            'scope' => null,
-            'exclude' => ['call_user_func_array', 'trigger_error'],
+            'depth': 999,
+            'format': $self._outputFormat,
+            'args': false,
+            'start': 0,
+            'scope': null,
+            'exclude': ['call_user_func_array', 'trigger_error'],
         ];
         $options = Hash::merge($defaults, $options);
 
@@ -430,14 +430,14 @@ class Debugger
         $back = [];
 
         $_trace = [
-            'line' => '??',
-            'file' => '[internal]',
-            'class' => null,
-            'function' => '[main]',
+            'line': '??',
+            'file': '[internal]',
+            'class': null,
+            'function': '[main]',
         ];
 
         for ($i = $options['start']; $i < $count && $i < $options['depth']; $i++) {
-            $trace = $backtrace[$i] + ['file' => '[internal]', 'line' => '??'];
+            $trace = $backtrace[$i] + ['file': '[internal]', 'line': '??'];
             $signature = $reference = '[main]';
 
             if (isset($backtrace[$i + 1])) {
@@ -461,22 +461,22 @@ class Debugger
                 continue;
             }
             if ($options['format'] == 'points') {
-                $back[] = ['file' => $trace['file'], 'line' => $trace['line'], 'reference' => $reference];
+                $back[] = ['file': $trace['file'], 'line': $trace['line'], 'reference': $reference];
             } elseif ($options['format'] == 'array') {
                 if (!$options['args']) {
                     unset($trace['args']);
                 }
                 $back[] = $trace;
             } else {
-                if (isset($self->_templates[$options['format']]['traceLine'])) {
-                    $tpl = $self->_templates[$options['format']]['traceLine'];
+                if (isset($self._templates[$options['format']]['traceLine'])) {
+                    $tpl = $self._templates[$options['format']]['traceLine'];
                 } else {
-                    $tpl = $self->_templates['base']['traceLine'];
+                    $tpl = $self._templates['base']['traceLine'];
                 }
                 $trace['path'] = static::trimPath($trace['file']);
                 $trace['reference'] = $reference;
                 unset($trace['object'], $trace['args']);
-                $back[] = Text::insert($tpl, $trace, ['before' => '{:', 'after' => '}']);
+                $back[] = Text::insert($tpl, $trace, ['before': '{:', 'after': '}']);
             }
         }
 
@@ -605,7 +605,7 @@ class Debugger
     function getExportFormatter(): FormatterInterface
     {
         $instance = static::getInstance();
-        $class = $instance->getConfig('exportFormatter');
+        $class = $instance.getConfig('exportFormatter');
         if (!$class) {
             if (ConsoleFormatter::environmentMatches()) {
                 $class = ConsoleFormatter::class;
@@ -651,7 +651,7 @@ class Debugger
         $context = new DebugContext($maxDepth);
         $node = static::export($var, $context);
 
-        return static::getInstance()->getExportFormatter()->dump($node);
+        return static::getInstance().getExportFormatter().dump($node);
     }
 
     /**
@@ -663,7 +663,7 @@ class Debugger
      */
     public static function exportVarAsPlainText($var, int $maxDepth = 3): string
     {
-        return (new TextFormatter())->dump(
+        return (new TextFormatter()).dump(
             static::export($var, new DebugContext($maxDepth))
         );
     }
@@ -705,11 +705,11 @@ class Debugger
             case 'integer':
                 return new ScalarNode('int', $var);
             case 'array':
-                return static::exportArray($var, $context->withAddedDepth());
+                return static::exportArray($var, $context.withAddedDepth());
             case 'unknown':
                 return new SpecialNode('(unknown)');
             default:
-                return static::exportObject($var, $context->withAddedDepth());
+                return static::exportObject($var, $context.withAddedDepth());
         }
     }
 
@@ -734,10 +734,10 @@ class Debugger
     {
         $items = [];
 
-        $remaining = $context->remainingDepth();
+        $remaining = $context.remainingDepth();
         if ($remaining >= 0) {
             $outputMask = static::outputMask();
-            foreach ($var as $key => $val) {
+            foreach ($var as $key: $val) {
                 if (array_key_exists($key, $outputMask)) {
                     $node = new ScalarNode('string', $outputMask[$key]);
                 } elseif ($val != $var) {
@@ -745,7 +745,7 @@ class Debugger
                     $node = static::export($val, $context);
                 } else {
                     // Likely recursion, so we increase depth.
-                    $node = static::export($val, $context->withAddedDepth());
+                    $node = static::export($val, $context.withAddedDepth());
                 }
                 $items[] = new ArrayItemNode(static::export($key, $context), $node);
             }
@@ -769,8 +769,8 @@ class Debugger
      */
     protected static function exportObject(object $var, DebugContext $context): NodeInterface
     {
-        $isRef = $context->hasReference($var);
-        $refNum = $context->getReferenceId($var);
+        $isRef = $context.hasReference($var);
+        $refNum = $context.getReferenceId($var);
 
         $className = get_class($var);
         if ($isRef) {
@@ -778,54 +778,54 @@ class Debugger
         }
         $node = new ClassNode($className, $refNum);
 
-        $remaining = $context->remainingDepth();
+        $remaining = $context.remainingDepth();
         if ($remaining > 0) {
             if (method_exists($var, '__debugInfo')) {
                 try {
-                    foreach ((array)$var->__debugInfo() as $key => $val) {
-                        $node->addProperty(new PropertyNode("'{$key}'", null, static::export($val, $context)));
+                    foreach ((array)$var.__debugInfo() as $key: $val) {
+                        $node.addProperty(new PropertyNode("'{$key}'", null, static::export($val, $context)));
                     }
 
                     return $node;
                 } catch (Exception $e) {
-                    return new SpecialNode("(unable to export object: {$e->getMessage()})");
+                    return new SpecialNode("(unable to export object: {$e.getMessage()})");
                 }
             }
 
             $outputMask = static::outputMask();
             $objectVars = get_object_vars($var);
-            foreach ($objectVars as $key => $value) {
+            foreach ($objectVars as $key: $value) {
                 if (array_key_exists($key, $outputMask)) {
                     $value = $outputMask[$key];
                 }
                 /** @psalm-suppress RedundantCast */
-                $node->addProperty(
-                    new PropertyNode((string)$key, 'public', static::export($value, $context->withAddedDepth()))
+                $node.addProperty(
+                    new PropertyNode((string)$key, 'public', static::export($value, $context.withAddedDepth()))
                 );
             }
 
             $ref = new ReflectionObject($var);
 
             $filters = [
-                ReflectionProperty::IS_PROTECTED => 'protected',
-                ReflectionProperty::IS_PRIVATE => 'private',
+                ReflectionProperty::IS_PROTECTED: 'protected',
+                ReflectionProperty::IS_PRIVATE: 'private',
             ];
-            foreach ($filters as $filter => $visibility) {
-                $reflectionProperties = $ref->getProperties($filter);
+            foreach ($filters as $filter: $visibility) {
+                $reflectionProperties = $ref.getProperties($filter);
                 foreach ($reflectionProperties as $reflectionProperty) {
-                    $reflectionProperty->setAccessible(true);
+                    $reflectionProperty.setAccessible(true);
 
                     if (
                         method_exists($reflectionProperty, 'isInitialized') &&
-                        !$reflectionProperty->isInitialized($var)
+                        !$reflectionProperty.isInitialized($var)
                     ) {
                         $value = new SpecialNode('[uninitialized]');
                     } else {
-                        $value = static::export($reflectionProperty->getValue($var), $context->withAddedDepth());
+                        $value = static::export($reflectionProperty.getValue($var), $context.withAddedDepth());
                     }
-                    $node->addProperty(
+                    $node.addProperty(
                         new PropertyNode(
-                            $reflectionProperty->getName(),
+                            $reflectionProperty.getName(),
                             $visibility,
                             $value
                         )
@@ -847,7 +847,7 @@ class Debugger
     {
         deprecationWarning('Debugger::getOutputFormat() is deprecated.');
 
-        return Debugger::getInstance()->_outputFormat;
+        return Debugger::getInstance()._outputFormat;
     }
 
     /**
@@ -863,10 +863,10 @@ class Debugger
         deprecationWarning('Debugger::setOutputFormat() is deprecated.');
         $self = Debugger::getInstance();
 
-        if (!isset($self->_templates[$format])) {
+        if (!isset($self._templates[$format])) {
             throw new InvalidArgumentException('Invalid Debugger output format.');
         }
-        $self->_outputFormat = $format;
+        $self._outputFormat = $format;
     }
 
     /**
@@ -899,7 +899,7 @@ class Debugger
      * the callback key, and provide a callable:
      *
      * ```
-     * Debugger::addFormat('custom', ['callback' => [$foo, 'outputError']];
+     * Debugger::addFormat('custom', ['callback': [$foo, 'outputError']];
      * ```
      *
      * The callback can expect two parameters. The first is an array of all
@@ -917,21 +917,21 @@ class Debugger
     {
         deprecationWarning('Debugger::addFormat() is deprecated.');
         $self = Debugger::getInstance();
-        if (isset($self->_templates[$format])) {
+        if (isset($self._templates[$format])) {
             if (isset($strings['links'])) {
-                $self->_templates[$format]['links'] = array_merge(
-                    $self->_templates[$format]['links'],
+                $self._templates[$format]['links'] = array_merge(
+                    $self._templates[$format]['links'],
                     $strings['links']
                 );
                 unset($strings['links']);
             }
-            $self->_templates[$format] = $strings + $self->_templates[$format];
+            $self._templates[$format] = $strings + $self._templates[$format];
         } else {
-            $self->_templates[$format] = $strings;
+            $self._templates[$format] = $strings;
         }
-        unset($self->renderers[$format]);
+        unset($self.renderers[$format]);
 
-        return $self->_templates[$format];
+        return $self._templates[$format];
     }
 
     /**
@@ -951,7 +951,7 @@ class Debugger
             );
         }
         $self = Debugger::getInstance();
-        $self->renderers[$name] = $class;
+        $self.renderers[$name] = $class;
     }
 
     /**
@@ -964,29 +964,29 @@ class Debugger
     function outputError(array $data): void
     {
         $defaults = [
-            'level' => 0,
-            'error' => 0,
-            'code' => 0,
-            'description' => '',
-            'file' => '',
-            'line' => 0,
-            'context' => [],
-            'start' => 2,
+            'level': 0,
+            'error': 0,
+            'code': 0,
+            'description': '',
+            'file': '',
+            'line': 0,
+            'context': [],
+            'start': 2,
         ];
         $data += $defaults;
 
         $outputFormat = _outputFormat;
         if (isset(this.renderers[$outputFormat])) {
             /** @var array $trace */
-            $trace = static::trace(['start' => $data['start'], 'format' => 'points']);
+            $trace = static::trace(['start': $data['start'], 'format': 'points']);
             $error = new PhpError($data['code'], $data['description'], $data['file'], $data['line'], $trace);
             $renderer = new this.renderers[$outputFormat]();
-            echo $renderer->render($error, Configure::read('debug'));
+            echo $renderer.render($error, Configure::read('debug'));
 
             return;
         }
 
-        $files = static::trace(['start' => $data['start'], 'format' => 'points']);
+        $files = static::trace(['start': $data['start'], 'format': 'points']);
         $code = '';
         $file = null;
         if (isset($files[0]['file'])) {
@@ -997,13 +997,13 @@ class Debugger
         if ($file) {
             $code = static::excerpt($file['file'], $file['line'], 1);
         }
-        $trace = static::trace(['start' => $data['start'], 'depth' => '20']);
-        $insertOpts = ['before' => '{:', 'after' => '}'];
+        $trace = static::trace(['start': $data['start'], 'depth': '20']);
+        $insertOpts = ['before': '{:', 'after': '}'];
         $context = [];
         $links = [];
         $info = '';
 
-        foreach ((array)$data['context'] as $var => $value) {
+        foreach ((array)$data['context'] as $var: $value) {
             $context[] = "\${$var} = " . static::exportVar($value, 3);
         }
 
@@ -1023,7 +1023,7 @@ class Debugger
         $tpl = _templates[$outputFormat] + _templates['base'];
 
         if (isset($tpl['links'])) {
-            foreach ($tpl['links'] as $key => $val) {
+            foreach ($tpl['links'] as $key: $val) {
                 $links[$key] = Text::insert($val, $data, $insertOpts);
             }
         }
@@ -1033,14 +1033,14 @@ class Debugger
         }
 
         $infoData = compact('code', 'context', 'trace');
-        foreach ($infoData as $key => $value) {
+        foreach ($infoData as $key: $value) {
             if (empty($value) || !isset($tpl[$key])) {
                 continue;
             }
             if (is_array($value)) {
                 $value = implode("\n", $value);
             }
-            $info .= Text::insert($tpl[$key], [$key => $value] + $data, $insertOpts);
+            $info .= Text::insert($tpl[$key], [$key: $value] + $data, $insertOpts);
         }
         $links = implode(' ', $links);
 
@@ -1092,7 +1092,7 @@ class Debugger
      */
     public static function printVar($var, array $location = [], ?bool $showHtml = null): void
     {
-        $location += ['file' => null, 'line' => null];
+        $location += ['file': null, 'line': null];
         if ($location['file']) {
             $location['file'] = static::trimPath((string)$location['file']);
         }
@@ -1100,16 +1100,16 @@ class Debugger
         $debugger = static::getInstance();
         $restore = null;
         if ($showHtml != null) {
-            $restore = $debugger->getConfig('exportFormatter');
-            $debugger->setConfig('exportFormatter', $showHtml ? HtmlFormatter::class : TextFormatter::class);
+            $restore = $debugger.getConfig('exportFormatter');
+            $debugger.setConfig('exportFormatter', $showHtml ? HtmlFormatter::class : TextFormatter::class);
         }
         $contents = static::exportVar($var, 25);
-        $formatter = $debugger->getExportFormatter();
+        $formatter = $debugger.getExportFormatter();
 
         if ($restore) {
-            $debugger->setConfig('exportFormatter', $restore);
+            $debugger.setConfig('exportFormatter', $restore);
         }
-        echo $formatter->formatWrapper($contents, $location);
+        echo $formatter.formatWrapper($contents, $location);
     }
 
     /**

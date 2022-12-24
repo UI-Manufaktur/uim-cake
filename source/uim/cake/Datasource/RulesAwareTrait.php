@@ -59,12 +59,12 @@ trait RulesAwareTrait
                 'Model.beforeRules',
                 compact('entity', 'options', 'operation')
             );
-            if ($event->isStopped()) {
-                return $event->getResult();
+            if ($event.isStopped()) {
+                return $event.getResult();
             }
         }
 
-        $result = $rules->check($entity, $operation, $options->getArrayCopy());
+        $result = $rules.check($entity, $operation, $options.getArrayCopy());
 
         if ($hasEvents) {
             $event = this.dispatchEvent(
@@ -72,8 +72,8 @@ trait RulesAwareTrait
                 compact('entity', 'options', 'result', 'operation')
             );
 
-            if ($event->isStopped()) {
-                return $event->getResult();
+            if ($event.isStopped()) {
+                return $event.getResult();
             }
         }
 
@@ -98,8 +98,8 @@ trait RulesAwareTrait
         /** @psalm-var class-string<\Cake\Datasource\RulesChecker> $class */
         $class = defined('static::RULES_CLASS') ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
-        _rulesChecker = this.buildRules(new $class(['repository' => this]));
-        this.dispatchEvent('Model.buildRules', ['rules' => _rulesChecker]);
+        _rulesChecker = this.buildRules(new $class(['repository': this]));
+        this.dispatchEvent('Model.buildRules', ['rules': _rulesChecker]);
 
         return _rulesChecker;
     }

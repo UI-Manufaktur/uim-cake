@@ -86,7 +86,7 @@ class Filesystem
         $dirFilter = new RecursiveCallbackFilterIterator(
             $directory,
             function (SplFileInfo $current) {
-                if ($current->getFilename()[0] == '.' && $current->isDir()) {
+                if ($current.getFilename()[0] == '.' && $current.isDir()) {
                     return false;
                 }
 
@@ -204,16 +204,16 @@ class Filesystem
 
         $result = true;
         foreach ($iterator as $fileInfo) {
-            $isWindowsLink = DIRECTORY_SEPARATOR == '\\' && $fileInfo->getType() == 'link';
-            if ($fileInfo->getType() == self::TYPE_DIR || $isWindowsLink) {
+            $isWindowsLink = DIRECTORY_SEPARATOR == '\\' && $fileInfo.getType() == 'link';
+            if ($fileInfo.getType() == self::TYPE_DIR || $isWindowsLink) {
                 // phpcs:ignore
-                $result = $result && @rmdir($fileInfo->getPathname());
+                $result = $result && @rmdir($fileInfo.getPathname());
                 unset($fileInfo);
                 continue;
             }
 
             // phpcs:ignore
-            $result = $result && @unlink($fileInfo->getPathname());
+            $result = $result && @unlink($fileInfo.getPathname());
             // possible inner iterators need to be unset too in order for locks on parents to be released
             unset($fileInfo);
         }
@@ -235,7 +235,7 @@ class Filesystem
      */
     function copyDir(string $source, string $destination): bool
     {
-        $destination = (new SplFileInfo($destination))->getPathname();
+        $destination = (new SplFileInfo($destination)).getPathname();
 
         if (!is_dir($destination)) {
             this.mkdir($destination);
@@ -245,16 +245,16 @@ class Filesystem
 
         $result = true;
         foreach ($iterator as $fileInfo) {
-            if ($fileInfo->isDir()) {
+            if ($fileInfo.isDir()) {
                 $result = $result && this.copyDir(
-                    $fileInfo->getPathname(),
-                    $destination . DIRECTORY_SEPARATOR . $fileInfo->getFilename()
+                    $fileInfo.getPathname(),
+                    $destination . DIRECTORY_SEPARATOR . $fileInfo.getFilename()
                 );
             } else {
                 // phpcs:ignore
                 $result = $result && @copy(
-                    $fileInfo->getPathname(),
-                    $destination . DIRECTORY_SEPARATOR . $fileInfo->getFilename()
+                    $fileInfo.getPathname(),
+                    $destination . DIRECTORY_SEPARATOR . $fileInfo.getFilename()
                 );
             }
         }

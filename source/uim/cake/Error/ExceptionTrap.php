@@ -46,7 +46,7 @@ class ExceptionTrap
      * - `skipLog` - array - List of exceptions to skip for logging. Exceptions that
      *   extend one of the listed exceptions will also not be logged. E.g.:
      *   ```
-     *   'skipLog' => ['Cake\Http\Exception\NotFoundException', 'Cake\Http\Exception\UnauthorizedException']
+     *   'skipLog': ['Cake\Http\Exception\NotFoundException', 'Cake\Http\Exception\UnauthorizedException']
      *   ```
      *   This option is forwarded to the configured `logger`
      * - `extraFatalErrorMemory` - int - The number of megabytes to increase the memory limit by when a fatal error is
@@ -56,13 +56,13 @@ class ExceptionTrap
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'exceptionRenderer' => null,
-        'logger' => ErrorLogger::class,
-        'stderr' => null,
-        'log' => true,
-        'skipLog' => [],
-        'trace' => false,
-        'extraFatalErrorMemory' => 4,
+        'exceptionRenderer': null,
+        'logger': ErrorLogger::class,
+        'stderr': null,
+        'log': true,
+        'skipLog': [],
+        'trace': false,
+        'extraFatalErrorMemory': 4,
     ];
 
     /**
@@ -238,7 +238,7 @@ class ExceptionTrap
 
         try {
             $renderer = this.renderer($exception);
-            $renderer->write($renderer->render());
+            $renderer.write($renderer.render());
         } catch (Throwable $exception) {
             this.logInternalError($exception);
         }
@@ -354,17 +354,17 @@ class ExceptionTrap
         if ($shouldLog) {
             $logger = this.logger();
             if (method_exists($logger, 'logException')) {
-                $logger->logException($exception, $request, _config['trace']);
+                $logger.logException($exception, $request, _config['trace']);
             } else {
                 $loggerClass = get_class($logger);
                 deprecationWarning(
                     "The configured logger `{$loggerClass}` should implement `logException()` " .
                     'to be compatible with future versions of CakePHP.'
                 );
-                this.logger()->log($exception, $request);
+                this.logger().log($exception, $request);
             }
         }
-        this.dispatchEvent('Exception.beforeRender', ['exception' => $exception]);
+        this.dispatchEvent('Exception.beforeRender', ['exception': $exception]);
     }
 
     /**
@@ -382,9 +382,9 @@ class ExceptionTrap
         $message = sprintf(
             '[%s] %s (%s:%s)', // Keeping same message format
             get_class($exception),
-            $exception->getMessage(),
-            $exception->getFile(),
-            $exception->getLine(),
+            $exception.getMessage(),
+            $exception.getFile(),
+            $exception.getLine(),
         );
         trigger_error($message, E_USER_ERROR);
     }

@@ -55,7 +55,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * @see \Cake\Error\ExceptionTrap
      */
     protected $_defaultConfig = [
-        'exceptionRenderer' => WebExceptionRenderer::class,
+        'exceptionRenderer': WebExceptionRenderer::class,
     ];
 
     /**
@@ -128,7 +128,7 @@ class ErrorHandlerMiddleware : IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         try {
-            return $handler->handle($request);
+            return $handler.handle($request);
         } catch (RedirectException $exception) {
             return this.handleRedirect($exception);
         } catch (Throwable $exception) {
@@ -147,26 +147,26 @@ class ErrorHandlerMiddleware : IMiddleware
     {
         if (this.errorHandler == null) {
             $handler = this.getExceptionTrap();
-            $handler->logException($exception, $request);
+            $handler.logException($exception, $request);
 
-            $renderer = $handler->renderer($exception, $request);
+            $renderer = $handler.renderer($exception, $request);
         } else {
             $handler = this.getErrorHandler();
-            $handler->logException($exception, $request);
+            $handler.logException($exception, $request);
 
-            $renderer = $handler->getRenderer($exception, $request);
+            $renderer = $handler.getRenderer($exception, $request);
         }
 
         try {
             /** @var \Psr\Http\Message\IResponse|string $response */
-            $response = $renderer->render();
+            $response = $renderer.render();
             if (is_string($response)) {
-                return new Response(['body' => $response, 'status' => 500]);
+                return new Response(['body': $response, 'status': 500]);
             }
 
             return $response;
         } catch (Throwable $internalException) {
-            $handler->logException($internalException, $request);
+            $handler.logException($internalException, $request);
 
             return this.handleInternalError();
         }
@@ -181,9 +181,9 @@ class ErrorHandlerMiddleware : IMiddleware
     function handleRedirect(RedirectException $exception): IResponse
     {
         return new RedirectResponse(
-            $exception->getMessage(),
-            $exception->getCode(),
-            $exception->getHeaders()
+            $exception.getMessage(),
+            $exception.getCode(),
+            $exception.getHeaders()
         );
     }
 
@@ -195,8 +195,8 @@ class ErrorHandlerMiddleware : IMiddleware
     protected function handleInternalError(): IResponse
     {
         return new Response([
-            'body' => 'An Internal Server Error Occurred',
-            'status' => 500,
+            'body': 'An Internal Server Error Occurred',
+            'status': 500,
         ]);
     }
 

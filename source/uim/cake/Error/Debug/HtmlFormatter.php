@@ -125,19 +125,19 @@ class HtmlFormatter : FormatterInterface
     protected function export(NodeInterface $var, int $indent): string
     {
         if ($var instanceof ScalarNode) {
-            switch ($var->getType()) {
+            switch ($var.getType()) {
                 case 'bool':
-                    return this.style('const', $var->getValue() ? 'true' : 'false');
+                    return this.style('const', $var.getValue() ? 'true' : 'false');
                 case 'null':
                     return this.style('const', 'null');
                 case 'string':
-                    return this.style('string', "'" . (string)$var->getValue() . "'");
+                    return this.style('string', "'" . (string)$var.getValue() . "'");
                 case 'int':
                 case 'float':
-                    return this.style('visibility', "({$var->getType()})") .
-                        ' ' . this.style('number', "{$var->getValue()}");
+                    return this.style('visibility', "({$var.getType()})") .
+                        ' ' . this.style('number', "{$var.getValue()}");
                 default:
-                    return "({$var->getType()}) {$var->getValue()}";
+                    return "({$var.getType()}) {$var.getValue()}";
             }
         }
         if ($var instanceof ArrayNode) {
@@ -147,7 +147,7 @@ class HtmlFormatter : FormatterInterface
             return this.exportObject($var, $indent + 1);
         }
         if ($var instanceof SpecialNode) {
-            return this.style('special', $var->getValue());
+            return this.style('special', $var.getValue());
         }
         throw new RuntimeException('Unknown node received ' . get_class($var));
     }
@@ -168,11 +168,11 @@ class HtmlFormatter : FormatterInterface
         $break = "\n" . str_repeat('  ', $indent);
         $endBreak = "\n" . str_repeat('  ', $indent - 1);
 
-        $arrow = this.style('punct', ' => ');
-        foreach ($var->getChildren() as $item) {
-            $val = $item->getValue();
+        $arrow = this.style('punct', ': ');
+        foreach ($var.getChildren() as $item) {
+            $val = $item.getValue();
             $vars[] = $break . '<span class="cake-dbg-array-item">' .
-                this.export($item->getKey(), $indent) . $arrow . this.export($val, $indent) .
+                this.export($item.getKey(), $indent) . $arrow . this.export($val, $indent) .
                 this.style('punct', ',') .
                 '</span>';
         }
@@ -195,7 +195,7 @@ class HtmlFormatter : FormatterInterface
      */
     protected function exportObject($var, int $indent): string
     {
-        $objectId = "cake-db-object-{this.id}-{$var->getId()}";
+        $objectId = "cake-db-object-{this.id}-{$var.getId()}";
         $out = sprintf(
             '<span class="cake-dbg-object" id="%s">',
             $objectId
@@ -207,12 +207,12 @@ class HtmlFormatter : FormatterInterface
             $link = sprintf(
                 '<a class="cake-dbg-ref" href="#%s">id: %s</a>',
                 $objectId,
-                $var->getId()
+                $var.getId()
             );
 
             return '<span class="cake-dbg-ref">' .
                 this.style('punct', 'object(') .
-                this.style('class', $var->getValue()) .
+                this.style('class', $var.getValue()) .
                 this.style('punct', ') ') .
                 $link .
                 this.style('punct', ' {}') .
@@ -220,17 +220,17 @@ class HtmlFormatter : FormatterInterface
         }
 
         $out .= this.style('punct', 'object(') .
-            this.style('class', $var->getValue()) .
+            this.style('class', $var.getValue()) .
             this.style('punct', ') id:') .
-            this.style('number', (string)$var->getId()) .
+            this.style('number', (string)$var.getId()) .
             this.style('punct', ' {') .
             '<samp class="cake-dbg-object-props">';
 
         $props = [];
-        foreach ($var->getChildren() as $property) {
-            $arrow = this.style('punct', ' => ');
-            $visibility = $property->getVisibility();
-            $name = $property->getName();
+        foreach ($var.getChildren() as $property) {
+            $arrow = this.style('punct', ': ');
+            $visibility = $property.getVisibility();
+            $name = $property.getName();
             if ($visibility && $visibility != 'public') {
                 $props[] = $break .
                     '<span class="cake-dbg-prop">' .
@@ -238,14 +238,14 @@ class HtmlFormatter : FormatterInterface
                     ' ' .
                     this.style('property', $name) .
                     $arrow .
-                    this.export($property->getValue(), $indent) .
+                    this.export($property.getValue(), $indent) .
                 '</span>';
             } else {
                 $props[] = $break .
                     '<span class="cake-dbg-prop">' .
                     this.style('property', $name) .
                     $arrow .
-                    this.export($property->getValue(), $indent) .
+                    this.export($property.getValue(), $indent) .
                     '</span>';
             }
         }

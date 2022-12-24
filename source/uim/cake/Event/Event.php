@@ -70,7 +70,7 @@ class Event : EventInterface
      * ### Examples of usage:
      *
      * ```
-     *  $event = new Event('Order.afterBuy', this, ['buyer' => $userData]);
+     *  $event = new Event('Order.afterBuy', this, ['buyer': $userData]);
      *  $event = new Event('User.afterRegister', $userModel);
      * ```
      *

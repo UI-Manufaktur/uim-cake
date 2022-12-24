@@ -40,10 +40,10 @@ abstract class BaseErrorHandler
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'log' => true,
-        'trace' => false,
-        'skipLog' => [],
-        'errorLogger' => ErrorLogger::class,
+        'log': true,
+        'trace': false,
+        'skipLog': [],
+        'errorLogger': ErrorLogger::class,
     ];
 
     /**
@@ -161,12 +161,12 @@ abstract class BaseErrorHandler
             return this.handleFatalError($code, $description, $file, $line);
         }
         $data = [
-            'level' => $log,
-            'code' => $code,
-            'error' => $error,
-            'description' => $description,
-            'file' => $file,
-            'line' => $line,
+            'level': $log,
+            'code': $code,
+            'error': $error,
+            'description': $description,
+            'file': $file,
+            'line': $line,
         ];
 
         $debug = (bool)Configure::read('debug');
@@ -182,9 +182,9 @@ abstract class BaseErrorHandler
                 unset($context['_trace_frame_offset']);
             }
             $data += [
-                'context' => $context,
-                'start' => $start,
-                'path' => Debugger::trimPath((string)$file),
+                'context': $context,
+                'start': $start,
+                'path': Debugger::trimPath((string)$file),
             ];
         }
         _displayError($data, $debug);
@@ -223,7 +223,7 @@ abstract class BaseErrorHandler
     {
         _displayException($exception);
         this.logException($exception);
-        $code = $exception->getCode() ?: 1;
+        $code = $exception.getCode() ?: 1;
         _stop((int)$code);
     }
 
@@ -252,11 +252,11 @@ abstract class BaseErrorHandler
     function handleFatalError(int $code, string $description, string $file, int $line): bool
     {
         $data = [
-            'code' => $code,
-            'description' => $description,
-            'file' => $file,
-            'line' => $line,
-            'error' => 'Fatal Error',
+            'code': $code,
+            'description': $description,
+            'file': $file,
+            'line': $line,
+            'error': 'Fatal Error',
         ];
         _logError(LOG_ERR, $data);
 
@@ -315,13 +315,13 @@ abstract class BaseErrorHandler
         $context = [];
         if (!empty(_config['trace'])) {
             $context['trace'] = Debugger::trace([
-                'start' => 1,
-                'format' => 'log',
+                'start': 1,
+                'format': 'log',
             ]);
             $context['request'] = Router::getRequest();
         }
 
-        return this.getLogger()->logMessage($level, $message, $context);
+        return this.getLogger().logMessage($level, $message, $context);
     }
 
     /**
@@ -342,7 +342,7 @@ abstract class BaseErrorHandler
             }
         }
 
-        return this.getLogger()->log($exception, $request ?? Router::getRequest());
+        return this.getLogger().log($exception, $request ?? Router::getRequest());
     }
 
     /**
@@ -379,27 +379,27 @@ abstract class BaseErrorHandler
     public static function mapErrorCode(int $code): array
     {
         $levelMap = [
-            E_PARSE => 'error',
-            E_ERROR => 'error',
-            E_CORE_ERROR => 'error',
-            E_COMPILE_ERROR => 'error',
-            E_USER_ERROR => 'error',
-            E_WARNING => 'warning',
-            E_USER_WARNING => 'warning',
-            E_COMPILE_WARNING => 'warning',
-            E_RECOVERABLE_ERROR => 'warning',
-            E_NOTICE => 'notice',
-            E_USER_NOTICE => 'notice',
-            E_STRICT => 'strict',
-            E_DEPRECATED => 'deprecated',
-            E_USER_DEPRECATED => 'deprecated',
+            E_PARSE: 'error',
+            E_ERROR: 'error',
+            E_CORE_ERROR: 'error',
+            E_COMPILE_ERROR: 'error',
+            E_USER_ERROR: 'error',
+            E_WARNING: 'warning',
+            E_USER_WARNING: 'warning',
+            E_COMPILE_WARNING: 'warning',
+            E_RECOVERABLE_ERROR: 'warning',
+            E_NOTICE: 'notice',
+            E_USER_NOTICE: 'notice',
+            E_STRICT: 'strict',
+            E_DEPRECATED: 'deprecated',
+            E_USER_DEPRECATED: 'deprecated',
         ];
         $logMap = [
-            'error' => LOG_ERR,
-            'warning' => LOG_WARNING,
-            'notice' => LOG_NOTICE,
-            'strict' => LOG_NOTICE,
-            'deprecated' => LOG_NOTICE,
+            'error': LOG_ERR,
+            'warning': LOG_WARNING,
+            'notice': LOG_NOTICE,
+            'strict': LOG_NOTICE,
+            'deprecated': LOG_NOTICE,
         ];
 
         $error = $levelMap[$code];
