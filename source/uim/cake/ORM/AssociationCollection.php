@@ -50,7 +50,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @param \Cake\ORM\Locator\LocatorInterface|null $tableLocator Table locator instance.
      */
-    public this(?LocatorInterface $tableLocator = null)
+    public this(?ILocator$tableLocator = null)
     {
         if ($tableLocator != null) {
             _tableLocator = $tableLocator;

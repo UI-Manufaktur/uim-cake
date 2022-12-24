@@ -18,7 +18,7 @@ namespace Cake\Controller\Component;
 
 use Cake\Auth\BaseAuthenticate;
 use Cake\Auth\BaseAuthorize;
-use Cake\Auth\Storage\StorageInterface;
+use Cake\Auth\Storage\IStorage;
 use Cake\Controller\Component;
 use Cake\Controller\Controller;
 use Cake\Core\App;
@@ -195,7 +195,7 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Storage object.
      *
-     * @var \Cake\Auth\Storage\StorageInterface|null
+     * @var \Cake\Auth\Storage\IStorage|null
      */
     protected $_storage;
 
@@ -847,11 +847,11 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Get/set user record storage object.
      *
-     * @param \Cake\Auth\Storage\StorageInterface|null $storage Sets provided
+     * @param \Cake\Auth\Storage\IStorage|null $storage Sets provided
      *   object as storage or if null returns configured storage object.
-     * @return \Cake\Auth\Storage\StorageInterface|null
+     * @return \Cake\Auth\Storage\IStorage|null
      */
-    function storage(?StorageInterface $storage = null): ?StorageInterface
+    function storage(?IStorage $storage = null): ?IStorage
     {
         if ($storage != null) {
             _storage = $storage;
@@ -877,7 +877,7 @@ class AuthComponent : Component : EventDispatcherInterface
         }
         $request = this.getController().getRequest();
         $response = this.getController().getResponse();
-        /** @var \Cake\Auth\Storage\StorageInterface $storage */
+        /** @var \Cake\Auth\Storage\IStorage $storage */
         $storage = new $className($request, $response, $config);
 
         return _storage = $storage;

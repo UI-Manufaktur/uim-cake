@@ -21,7 +21,7 @@ use Cake\ORM\Table;
 use UnexpectedValueException;
 
 /**
- * Contains method for setting and accessing LocatorInterface instance
+ * Contains method for setting and accessing ILocatorinstance
  */
 trait LocatorAwareTrait
 {
@@ -42,10 +42,10 @@ trait LocatorAwareTrait
     /**
      * Sets the table locator.
      *
-     * @param \Cake\ORM\Locator\LocatorInterface $tableLocator LocatorInterface instance.
+     * @param \Cake\ORM\Locator\ILocator$tableLocator ILocatorinstance.
      * @return this
      */
-    function setTableLocator(LocatorInterface $tableLocator)
+    function setTableLocator(ILocator$tableLocator)
     {
         _tableLocator = $tableLocator;
 
@@ -64,7 +64,7 @@ trait LocatorAwareTrait
             _tableLocator = FactoryLocator::get('Table');
         }
 
-        /** @var \Cake\ORM\Locator\LocatorInterface */
+        /** @var \Cake\ORM\Locator\ILocator*/
         return _tableLocator;
     }
 

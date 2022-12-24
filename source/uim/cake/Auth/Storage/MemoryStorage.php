@@ -19,7 +19,7 @@ namespace Cake\Auth\Storage;
 /**
  * Memory based non-persistent storage for authenticated user record.
  */
-class MemoryStorage : StorageInterface
+class MemoryStorage : IStorage
 {
     /**
      * User record.

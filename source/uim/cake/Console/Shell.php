@@ -183,7 +183,7 @@ class Shell
      * @param \Cake\ORM\Locator\LocatorInterface|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-commands/shells.html
      */
-    public this(?ConsoleIo $io = null, ?LocatorInterface $locator = null)
+    public this(?ConsoleIo $io = null, ?ILocator$locator = null)
     {
         if (!this.name) {
             [, $class] = namespaceSplit(static::class);

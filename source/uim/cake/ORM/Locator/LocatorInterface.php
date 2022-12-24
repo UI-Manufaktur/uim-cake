@@ -16,14 +16,14 @@ declare(strict_types=1);
  */
 namespace Cake\ORM\Locator;
 
-use Cake\Datasource\Locator\LocatorInterface as BaseLocatorInterface;
+use Cake\Datasource\Locator\ILocatoras BaseLocatorInterface;
 use Cake\Datasource\RepositoryInterface;
 use Cake\ORM\Table;
 
 /**
  * Registries for Table objects should implement this interface.
  */
-interface LocatorInterface : BaseLocatorInterface
+interface ILocator: BaseLocatorInterface
 {
     /**
      * Returns configuration for an alias or the full configuration array for

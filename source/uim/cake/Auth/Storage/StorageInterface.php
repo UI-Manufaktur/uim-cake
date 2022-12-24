@@ -22,7 +22,7 @@ namespace Cake\Auth\Storage;
  *
  * @mixin \Cake\Core\InstanceConfigTrait
  */
-interface StorageInterface
+interface IStorage
 {
     /**
      * Read user record.

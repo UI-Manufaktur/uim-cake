@@ -165,7 +165,7 @@ class TranslatorRegistry
      * Sets the CacheEngine instance used to remember translators across
      * requests.
      *
-     * @param \Psr\SimpleCache\CacheInterface&\Cake\Cache\CacheEngineInterface $cacher The cacher instance.
+     * @param \Psr\SimpleCache\CacheInterface&\Cake\Cache\ICacheEngine$cacher The cacher instance.
      * @return void
      */
     function setCacher($cacher): void

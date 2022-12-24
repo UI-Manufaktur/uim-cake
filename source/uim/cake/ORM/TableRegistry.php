@@ -59,23 +59,23 @@ use Cake\ORM\Locator\LocatorInterface;
 class TableRegistry
 {
     /**
-     * Returns a singleton instance of LocatorInterface implementation.
+     * Returns a singleton instance of ILocatorimplementation.
      *
      * @return \Cake\ORM\Locator\LocatorInterface
      */
     public static function getTableLocator(): LocatorInterface
     {
-        /** @var \Cake\ORM\Locator\LocatorInterface */
+        /** @var \Cake\ORM\Locator\ILocator*/
         return FactoryLocator::get('Table');
     }
 
     /**
-     * Sets singleton instance of LocatorInterface implementation.
+     * Sets singleton instance of ILocatorimplementation.
      *
-     * @param \Cake\ORM\Locator\LocatorInterface $tableLocator Instance of a locator to use.
+     * @param \Cake\ORM\Locator\ILocator$tableLocator Instance of a locator to use.
      * @return void
      */
-    public static function setTableLocator(LocatorInterface $tableLocator): void
+    public static function setTableLocator(ILocator$tableLocator): void
     {
         FactoryLocator::add('Table', $tableLocator);
     }
