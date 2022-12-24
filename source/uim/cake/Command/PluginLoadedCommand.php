@@ -44,7 +44,7 @@ class PluginLoadedCommand : Command
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
         $loaded = Plugin::loaded();
-        $io->out($loaded);
+        $io.out($loaded);
 
         return static::CODE_SUCCESS;
     }
@@ -57,7 +57,7 @@ class PluginLoadedCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription('Displays all currently loaded plugins.');
+        $parser.setDescription('Displays all currently loaded plugins.');
 
         return $parser;
     }

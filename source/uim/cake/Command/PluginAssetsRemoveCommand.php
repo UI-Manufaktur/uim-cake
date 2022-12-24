@@ -51,19 +51,19 @@ class PluginAssetsRemoveCommand : Command
         this.io = $io;
         this.args = $args;
 
-        $name = $args->getArgument('name');
+        $name = $args.getArgument('name');
         $plugins = _list($name);
 
-        foreach ($plugins as $plugin => $config) {
-            this.io->out();
-            this.io->out('For plugin: ' . $plugin);
-            this.io->hr();
+        foreach ($plugins as $plugin: $config) {
+            this.io.out();
+            this.io.out('For plugin: ' . $plugin);
+            this.io.hr();
 
             _remove($config);
         }
 
-        this.io->out();
-        this.io->out('Done');
+        this.io.out();
+        this.io.out('Done');
 
         return static::CODE_SUCCESS;
     }
@@ -76,11 +76,11 @@ class PluginAssetsRemoveCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription([
+        $parser.setDescription([
             'Remove plugin assets from app\'s webroot.',
-        ])->addArgument('name', [
-            'help' => 'A specific plugin you want to remove.',
-            'required' => false,
+        ]).addArgument('name', [
+            'help': 'A specific plugin you want to remove.',
+            'required': false,
         ]);
 
         return $parser;

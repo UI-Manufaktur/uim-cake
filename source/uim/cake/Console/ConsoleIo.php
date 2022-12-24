@@ -125,7 +125,7 @@ class ConsoleIo
         _err = $err ?: new ConsoleOutput('php://stderr');
         _in = $in ?: new ConsoleInput('php://stdin');
         _helpers = $helpers ?: new HelperRegistry();
-        _helpers->setIo(this);
+        _helpers.setIo(this);
     }
 
     /**
@@ -198,7 +198,7 @@ class ConsoleIo
     function out($message = '', int $newlines = 1, int $level = self::NORMAL): ?int
     {
         if ($level <= _level) {
-            _lastWritten = _out->write($message, $newlines);
+            _lastWritten = _out.write($message, $newlines);
 
             return _lastWritten;
         }
@@ -318,7 +318,7 @@ class ConsoleIo
     protected function wrapMessageWithType(string $messageType, $message)
     {
         if (is_array($message)) {
-            foreach ($message as $k => $v) {
+            foreach ($message as $k: $v) {
                 $message[$k] = "<{$messageType}>{$v}</{$messageType}>";
             }
         } else {
@@ -378,7 +378,7 @@ class ConsoleIo
      */
     function err($message = '', int $newlines = 1): int
     {
-        return _err->write($message, $newlines);
+        return _err.write($message, $newlines);
     }
 
     /**
@@ -427,7 +427,7 @@ class ConsoleIo
      */
     function setOutputAs(int $mode): void
     {
-        _out->setOutputAs($mode);
+        _out.setOutputAs($mode);
     }
 
     /**
@@ -438,7 +438,7 @@ class ConsoleIo
      */
     function styles(): array
     {
-        return _out->styles();
+        return _out.styles();
     }
 
     /**
@@ -450,7 +450,7 @@ class ConsoleIo
      */
     function getStyle(string $style): array
     {
-        return _out->getStyle($style);
+        return _out.getStyle($style);
     }
 
     /**
@@ -463,7 +463,7 @@ class ConsoleIo
      */
     function setStyle(string $style, array $definition): void
     {
-        _out->setStyle($style, $definition);
+        _out.setStyle($style, $definition);
     }
 
     /**
@@ -523,8 +523,8 @@ class ConsoleIo
         if ($default != null) {
             $defaultText = "[$default] ";
         }
-        _out->write('<question>' . $prompt . "</question>$optionsText\n$defaultText> ", 0);
-        $result = _in->read();
+        _out.write('<question>' . $prompt . "</question>$optionsText\n$defaultText> ", 0);
+        $result = _in.read();
 
         $result = $result == null ? '' : trim($result);
         if ($default != null && $result == '') {
@@ -560,16 +560,16 @@ class ConsoleIo
         }
         if ($enable != static::QUIET) {
             $stdout = new ConsoleLog([
-                'types' => $outLevels,
-                'stream' => _out,
+                'types': $outLevels,
+                'stream': _out,
             ]);
-            Log::setConfig('stdout', ['engine' => $stdout]);
+            Log::setConfig('stdout', ['engine': $stdout]);
         }
         $stderr = new ConsoleLog([
-            'types' => ['emergency', 'alert', 'critical', 'error', 'warning'],
-            'stream' => _err,
+            'types': ['emergency', 'alert', 'critical', 'error', 'warning'],
+            'stream': _err,
         ]);
-        Log::setConfig('stderr', ['engine' => $stderr]);
+        Log::setConfig('stderr', ['engine': $stderr]);
     }
 
     /**
@@ -586,7 +586,7 @@ class ConsoleIo
     {
         $name = ucfirst($name);
 
-        return _helpers->load($name, $config);
+        return _helpers.load($name, $config);
     }
 
     /**
@@ -648,8 +648,8 @@ class ConsoleIo
             return false;
         }
 
-        $file->rewind();
-        $file->fwrite($contents);
+        $file.rewind();
+        $file.fwrite($contents);
         if (file_exists($path)) {
             this.out("<success>Wrote</success> `{$path}`");
 

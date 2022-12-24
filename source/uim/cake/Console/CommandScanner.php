@@ -120,18 +120,18 @@ class CommandScanner
         $classPattern = '/(Shell|Command)\.php$/';
         $fs = new Filesystem();
         /** @var array<\SplFileInfo> $files */
-        $files = $fs->find($path, $classPattern);
+        $files = $fs.find($path, $classPattern);
 
         $shells = [];
         foreach ($files as $fileInfo) {
-            $file = $fileInfo->getFilename();
+            $file = $fileInfo.getFilename();
 
             $name = Inflector::underscore(preg_replace($classPattern, '', $file));
             if (in_array($name, $hide, true)) {
                 continue;
             }
 
-            $class = $namespace . $fileInfo->getBasename('.php');
+            $class = $namespace . $fileInfo.getBasename('.php');
             /** @psalm-suppress DeprecatedClass */
             if (
                 !is_subclass_of($class, Shell::class)
@@ -143,10 +143,10 @@ class CommandScanner
                 $name = $class::defaultName();
             }
             $shells[$path . $file] = [
-                'file' => $path . $file,
-                'fullName' => $prefix . $name,
-                'name' => $name,
-                'class' => $class,
+                'file': $path . $file,
+                'fullName': $prefix . $name,
+                'name': $name,
+                'class': $class,
             ];
         }
 

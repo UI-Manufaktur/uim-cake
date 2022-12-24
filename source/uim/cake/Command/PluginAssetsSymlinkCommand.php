@@ -53,8 +53,8 @@ class PluginAssetsSymlinkCommand : Command
         this.io = $io;
         this.args = $args;
 
-        $name = $args->getArgument('name');
-        $overwrite = (bool)$args->getOption('overwrite');
+        $name = $args.getArgument('name');
+        $overwrite = (bool)$args.getOption('overwrite');
         _process(_list($name), false, $overwrite);
 
         return static::CODE_SUCCESS;
@@ -68,15 +68,15 @@ class PluginAssetsSymlinkCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription([
+        $parser.setDescription([
             'Symlink (copy as fallback) plugin assets to app\'s webroot.',
-        ])->addArgument('name', [
-            'help' => 'A specific plugin you want to symlink assets for.',
-            'required' => false,
-        ])->addOption('overwrite', [
-            'help' => 'Overwrite existing symlink / folder / files.',
-            'default' => false,
-            'boolean' => true,
+        ]).addArgument('name', [
+            'help': 'A specific plugin you want to symlink assets for.',
+            'required': false,
+        ]).addOption('overwrite', [
+            'help': 'Overwrite existing symlink / folder / files.',
+            'default': false,
+            'boolean': true,
         ]);
 
         return $parser;

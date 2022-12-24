@@ -32,7 +32,7 @@ use Cake\Console\CommandRunner;
 
 // Build the runner with an application and root executable name.
 $runner = new CommandRunner(new Application(), 'tool');
-exit($runner->run($argv));
+exit($runner.run($argv));
 ````
 
 For our `Application` class we can start with:
@@ -67,7 +67,7 @@ class Application : IConsoleApplication
      */
     function console(CommandCollection $commands): CommandCollection
     {
-        $commands->add('hello', HelloCommand::class);
+        $commands.add('hello', HelloCommand::class);
 
         return $commands;
     }
@@ -90,14 +90,14 @@ class HelloCommand : BaseCommand
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
-            ->addArgument('name', [
-                'required' => true,
-                'help' => 'The name to say hello to',
+            .addArgument('name', [
+                'required': true,
+                'help': 'The name to say hello to',
             ])
-            ->addOption('color', [
-                'choices' => ['none', 'green'],
-                'default' => 'none',
-                'help' => 'The color to use.'
+            .addOption('color', [
+                'choices': ['none', 'green'],
+                'default': 'none',
+                'help': 'The color to use.'
             ]);
 
         return $parser;
@@ -105,11 +105,11 @@ class HelloCommand : BaseCommand
 
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $color = $args->getOption('color');
+        $color = $args.getOption('color');
         if ($color == 'none') {
-            $io->out("Hello {$args->getArgument('name')}");
+            $io.out("Hello {$args.getArgument('name')}");
         } elseif ($color == 'green') {
-            $io->out("<success>Hello {$args->getArgument('name')}</success>");
+            $io.out("<success>Hello {$args.getArgument('name')}</success>");
         }
 
         return static::CODE_SUCCESS;

@@ -42,18 +42,18 @@ class PluginUnloadCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $plugin = $args->getArgument('plugin');
+        $plugin = $args.getArgument('plugin');
         if (!$plugin) {
-            $io->err('You must provide a plugin name in CamelCase format.');
-            $io->err('To unload an "Example" plugin, run `cake plugin unload Example`.');
+            $io.err('You must provide a plugin name in CamelCase format.');
+            $io.err('To unload an "Example" plugin, run `cake plugin unload Example`.');
 
             return static::CODE_ERROR;
         }
 
         $app = APP . 'Application.php';
         if (file_exists($app) && this.modifyApplication($app, $plugin)) {
-            $io->out('');
-            $io->out(sprintf('%s modified', $app));
+            $io.out('');
+            $io.out(sprintf('%s modified', $app));
 
             return static::CODE_SUCCESS;
         }
@@ -101,11 +101,11 @@ class PluginUnloadCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription([
+        $parser.setDescription([
             'Command for unloading plugins.',
         ])
-        ->addArgument('plugin', [
-            'help' => 'Name of the plugin to unload.',
+        .addArgument('plugin', [
+            'help': 'Name of the plugin to unload.',
         ]);
 
         return $parser;

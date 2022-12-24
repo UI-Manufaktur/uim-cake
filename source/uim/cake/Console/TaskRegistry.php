@@ -73,8 +73,8 @@ class TaskRegistry : ObjectRegistry
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingTaskException([
-            'class' => $class,
-            'plugin' => $plugin,
+            'class': $class,
+            'plugin': $plugin,
         ]);
     }
 
@@ -92,6 +92,6 @@ class TaskRegistry : ObjectRegistry
     protected function _create($class, string $alias, array $config): Shell
     {
         /** @var \Cake\Console\Shell */
-        return new $class(_Shell->getIo());
+        return new $class(_Shell.getIo());
     }
 }

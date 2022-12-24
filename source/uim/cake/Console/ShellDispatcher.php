@@ -127,7 +127,7 @@ class ShellDispatcher
     {
         $dispatcher = new ShellDispatcher($argv);
 
-        return $dispatcher->dispatch($extra);
+        return $dispatcher.dispatch($extra);
     }
 
     /**
@@ -179,7 +179,7 @@ class ShellDispatcher
         try {
             $result = _dispatch($extra);
         } catch (StopException $e) {
-            return $e->getCode();
+            return $e.getCode();
         }
         if ($result == null || $result == true) {
             /** @psalm-suppress DeprecatedClass */
@@ -226,9 +226,9 @@ class ShellDispatcher
 
         $shell = this.findShell($shellName);
 
-        $shell->initialize();
+        $shell.initialize();
 
-        return $shell->runCommand(this.args, true, $extra);
+        return $shell.runCommand(this.args, true, $extra);
     }
 
     /**
@@ -245,8 +245,8 @@ class ShellDispatcher
 
         $io = new ConsoleIo();
         $task = new CommandTask($io);
-        $io->setLoggers(false);
-        $list = $task->getShellList() + ['app' => []];
+        $io.setLoggers(false);
+        $list = $task.getShellList() + ['app': []];
         $fixed = array_flip($list['app']) + array_flip($list['CORE']);
         $aliases = $others = [];
 
@@ -256,7 +256,7 @@ class ShellDispatcher
             }
 
             foreach ($list[$plugin] as $shell) {
-                $aliases += [$shell => $plugin];
+                $aliases += [$shell: $plugin];
                 if (!isset($others[$shell])) {
                     $others[$shell] = [$plugin];
                 } else {
@@ -265,7 +265,7 @@ class ShellDispatcher
             }
         }
 
-        foreach ($aliases as $shell => $plugin) {
+        foreach ($aliases as $shell: $plugin) {
             if (isset($fixed[$shell])) {
                 Log::write(
                     'debug',
@@ -325,7 +325,7 @@ class ShellDispatcher
 
         if (!$className) {
             throw new MissingShellException([
-                'class' => $shell,
+                'class': $shell,
             ]);
         }
 
@@ -378,7 +378,7 @@ class ShellDispatcher
         [$plugin] = pluginSplit($shortName);
         /** @var \Cake\Console\Shell $instance */
         $instance = new $className();
-        $instance->plugin = trim((string)$plugin, '.');
+        $instance.plugin = trim((string)$plugin, '.');
 
         return $instance;
     }

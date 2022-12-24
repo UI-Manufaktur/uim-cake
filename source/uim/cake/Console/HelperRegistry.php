@@ -82,8 +82,8 @@ class HelperRegistry : ObjectRegistry
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingHelperException([
-            'class' => $class,
-            'plugin' => $plugin,
+            'class': $class,
+            'plugin': $plugin,
         ]);
     }
 

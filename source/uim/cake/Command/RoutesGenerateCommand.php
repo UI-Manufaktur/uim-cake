@@ -45,13 +45,13 @@ class RoutesGenerateCommand : Command
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
         try {
-            $args = _splitArgs($args->getArguments());
+            $args = _splitArgs($args.getArguments());
             $url = Router::url($args);
-            $io->out("> $url");
-            $io->out();
+            $io.out("> $url");
+            $io.out();
         } catch (MissingRouteException $e) {
-            $io->err('<warning>The provided parameters do not match any routes.</warning>');
-            $io->out();
+            $io.err('<warning>The provided parameters do not match any routes.</warning>');
+            $io.out();
 
             return static::CODE_ERROR;
         }
@@ -91,7 +91,7 @@ class RoutesGenerateCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription(
+        $parser.setDescription(
             'Check a routing array against the routes. ' .
             'Will output the URL if there is a match.' .
             "\n\n" .

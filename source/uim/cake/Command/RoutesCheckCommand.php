@@ -46,14 +46,14 @@ class RoutesCheckCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $url = $args->getArgument('url');
+        $url = $args.getArgument('url');
         try {
-            $request = new ServerRequest(['url' => $url]);
+            $request = new ServerRequest(['url': $url]);
             $route = Router::parseRequest($request);
             $name = null;
             foreach (Router::routes() as $r) {
-                if ($r->match($route)) {
-                    $name = $r->options['_name'] ?? $r->getName();
+                if ($r.match($route)) {
+                    $name = $r.options['_name'] ?? $r.getName();
                     break;
                 }
             }
@@ -65,18 +65,18 @@ class RoutesCheckCommand : Command
                 ['Route name', 'URI template', 'Defaults'],
                 [$name, $url, json_encode($route)],
             ];
-            $io->helper('table')->output($output);
-            $io->out();
+            $io.helper('table').output($output);
+            $io.out();
         } catch (RedirectException $e) {
             $output = [
                 ['URI template', 'Redirect'],
-                [$url, $e->getMessage()],
+                [$url, $e.getMessage()],
             ];
-            $io->helper('table')->output($output);
-            $io->out();
+            $io.helper('table').output($output);
+            $io.out();
         } catch (MissingRouteException $e) {
-            $io->warning("'$url' did not match any routes.");
-            $io->out();
+            $io.warning("'$url' did not match any routes.");
+            $io.out();
 
             return static::CODE_ERROR;
         }
@@ -92,13 +92,13 @@ class RoutesCheckCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription(
+        $parser.setDescription(
             'Check a URL string against the routes. ' .
             'Will output the routing parameters the route resolves to.'
         )
-        ->addArgument('url', [
-            'help' => 'The URL to check.',
-            'required' => true,
+        .addArgument('url', [
+            'help': 'The URL to check.',
+            'required': true,
         ]);
 
         return $parser;

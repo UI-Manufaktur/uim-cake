@@ -310,8 +310,8 @@ class ConsoleInputOption
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $option = $parent->addChild('option');
-        $option->addAttribute('name', '--' . _name);
+        $option = $parent.addChild('option');
+        $option.addAttribute('name', '--' . _name);
         $short = '';
         if (_short != '') {
             $short = '-' . _short;
@@ -322,14 +322,14 @@ class ConsoleInputOption
         } elseif ($default == false) {
             $default = 'false';
         }
-        $option->addAttribute('short', $short);
-        $option->addAttribute('help', _help);
-        $option->addAttribute('boolean', (string)(int)_boolean);
-        $option->addAttribute('required', (string)(int)this.required);
-        $option->addChild('default', (string)$default);
-        $choices = $option->addChild('choices');
+        $option.addAttribute('short', $short);
+        $option.addAttribute('help', _help);
+        $option.addAttribute('boolean', (string)(int)_boolean);
+        $option.addAttribute('required', (string)(int)this.required);
+        $option.addChild('default', (string)$default);
+        $choices = $option.addChild('choices');
         foreach (_choices as $valid) {
-            $choices->addChild('choice', $valid);
+            $choices.addChild('choice', $valid);
         }
 
         return $parent;

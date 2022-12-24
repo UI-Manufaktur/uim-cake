@@ -178,7 +178,7 @@ class WincacheEngine : CacheEngine
 
         $result = [];
         $groups = array_values($groups);
-        foreach (_config['groups'] as $i => $group) {
+        foreach (_config['groups'] as $i: $group) {
             $result[] = $group . $groups[$i];
         }
 

@@ -84,9 +84,9 @@ class CommandRunner : EventDispatcherInterface
         this.root = $root;
         this.factory = $factory;
         this.aliases = [
-            '--version' => 'version',
-            '--help' => 'help',
-            '-h' => 'help',
+            '--version': 'version',
+            '--help': 'help',
+            '-h': 'help',
         ];
     }
 
@@ -100,7 +100,7 @@ class CommandRunner : EventDispatcherInterface
      * ### Usage
      *
      * ```
-     * $runner->setAliases(['--version' => 'version']);
+     * $runner.setAliases(['--version': 'version']);
      * ```
      *
      * @param array<string> $aliases The map of aliases to replace.
@@ -133,17 +133,17 @@ class CommandRunner : EventDispatcherInterface
         this.bootstrap();
 
         $commands = new CommandCollection([
-            'help' => HelpCommand::class,
+            'help': HelpCommand::class,
         ]);
         if (class_exists(VersionCommand::class)) {
-            $commands->add('version', VersionCommand::class);
+            $commands.add('version', VersionCommand::class);
         }
-        $commands = this.app->console($commands);
+        $commands = this.app.console($commands);
 
         if (this.app instanceof IPluginApplication) {
-            $commands = this.app->pluginConsole($commands);
+            $commands = this.app.pluginConsole($commands);
         }
-        this.dispatchEvent('Console.buildCommands', ['commands' => $commands]);
+        this.dispatchEvent('Console.buildCommands', ['commands': $commands]);
         this.loadRoutes();
 
         if (empty($argv)) {
@@ -158,7 +158,7 @@ class CommandRunner : EventDispatcherInterface
             [$name, $argv] = this.longestCommandName($commands, $argv);
             $name = this.resolveName($commands, $io, $name);
         } catch (MissingOptionException $e) {
-            $io->error($e->getFullMessage());
+            $io.error($e.getFullMessage());
 
             return CommandInterface::CODE_ERROR;
         }
@@ -192,9 +192,9 @@ class CommandRunner : EventDispatcherInterface
      */
     protected function bootstrap(): void
     {
-        this.app->bootstrap();
+        this.app.bootstrap();
         if (this.app instanceof IPluginApplication) {
-            this.app->pluginBootstrap();
+            this.app.pluginBootstrap();
         }
     }
 
@@ -206,7 +206,7 @@ class CommandRunner : EventDispatcherInterface
     function getEventManager(): IEventManager
     {
         if (this.app instanceof IPluginApplication) {
-            return this.app->getEventManager();
+            return this.app.getEventManager();
         }
 
         return EventManager::instance();
@@ -225,7 +225,7 @@ class CommandRunner : EventDispatcherInterface
     function setEventManager(IEventManager $eventManager)
     {
         if (this.app instanceof IPluginApplication) {
-            this.app->setEventManager($eventManager);
+            this.app.setEventManager($eventManager);
 
             return this;
         }
@@ -243,18 +243,18 @@ class CommandRunner : EventDispatcherInterface
      */
     protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name)
     {
-        $instance = $commands->get($name);
+        $instance = $commands.get($name);
         if (is_string($instance)) {
             $instance = this.createCommand($instance, $io);
         }
         if ($instance instanceof Shell) {
-            $instance->setRootName(this.root);
+            $instance.setRootName(this.root);
         }
         if ($instance instanceof CommandInterface) {
-            $instance->setName("{this.root} {$name}");
+            $instance.setName("{this.root} {$name}");
         }
         if ($instance instanceof CommandCollectionAwareInterface) {
-            $instance->setCommandCollection($commands);
+            $instance.setCommandCollection($commands);
         }
 
         return $instance;
@@ -275,7 +275,7 @@ class CommandRunner : EventDispatcherInterface
         for ($i = 3; $i > 1; $i--) {
             $parts = array_slice($argv, 0, $i);
             $name = implode(' ', $parts);
-            if ($commands->has($name)) {
+            if ($commands.has($name)) {
                 return [$name, array_slice($argv, $i)];
             }
         }
@@ -301,19 +301,19 @@ class CommandRunner : EventDispatcherInterface
     protected function resolveName(CommandCollection $commands, ConsoleIo $io, ?string $name): string
     {
         if (!$name) {
-            $io->err('<error>No command provided. Choose one of the available commands.</error>', 2);
+            $io.err('<error>No command provided. Choose one of the available commands.</error>', 2);
             $name = 'help';
         }
         $name = this.aliases[$name] ?? $name;
-        if (!$commands->has($name)) {
+        if (!$commands.has($name)) {
             $name = Inflector::underscore($name);
         }
-        if (!$commands->has($name)) {
+        if (!$commands.has($name)) {
             throw new MissingOptionException(
                 "Unknown command `{this.root} {$name}`. " .
                 "Run `{this.root} --help` to get the list of commands.",
                 $name,
-                $commands->keys()
+                $commands.keys()
             );
         }
 
@@ -331,9 +331,9 @@ class CommandRunner : EventDispatcherInterface
     protected function runCommand(CommandInterface $command, array $argv, ConsoleIo $io): ?int
     {
         try {
-            return $command->run($argv, $io);
+            return $command.run($argv, $io);
         } catch (StopException $e) {
-            return $e->getCode();
+            return $e.getCode();
         }
     }
 
@@ -347,11 +347,11 @@ class CommandRunner : EventDispatcherInterface
     protected function runShell(Shell $shell, array $argv)
     {
         try {
-            $shell->initialize();
+            $shell.initialize();
 
-            return $shell->runCommand($argv, true);
+            return $shell.runCommand($argv, true);
         } catch (StopException $e) {
-            return $e->getCode();
+            return $e.getCode();
         }
     }
 
@@ -367,14 +367,14 @@ class CommandRunner : EventDispatcherInterface
         if (!this.factory) {
             $container = null;
             if (this.app instanceof IContainerApplication) {
-                $container = this.app->getContainer();
+                $container = this.app.getContainer();
             }
             this.factory = new CommandFactory($container);
         }
 
-        $shell = this.factory->create($className);
+        $shell = this.factory.create($className);
         if ($shell instanceof Shell) {
-            $shell->setIo($io);
+            $shell.setIo($io);
         }
 
         return $shell;
@@ -394,9 +394,9 @@ class CommandRunner : EventDispatcherInterface
         }
         $builder = Router::createRouteBuilder('/');
 
-        this.app->routes($builder);
+        this.app.routes($builder);
         if (this.app instanceof IPluginApplication) {
-            this.app->pluginRoutes($builder);
+            this.app.pluginRoutes($builder);
         }
     }
 }

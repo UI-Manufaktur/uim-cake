@@ -47,7 +47,7 @@ class CommandCollection : IteratorAggregate, Countable
      */
     public this(array $commands = [])
     {
-        foreach ($commands as $name => $command) {
+        foreach ($commands as $name: $command) {
             this.add($name, $command);
         }
     }
@@ -86,13 +86,13 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Add multiple commands at once.
      *
-     * @param array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|string> $commands A map of command names => command classes/instances.
+     * @param array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|string> $commands A map of command names: command classes/instances.
      * @return this
      * @see \Cake\Console\CommandCollection::add()
      */
     function addMany(array $commands)
     {
-        foreach ($commands as $name => $class) {
+        foreach ($commands as $name: $class) {
             this.add($name, $class);
         }
 
@@ -177,7 +177,7 @@ class CommandCollection : IteratorAggregate, Countable
     function discoverPlugin(string $plugin): array
     {
         $scanner = new CommandScanner();
-        $shells = $scanner->scanPlugin($plugin);
+        $shells = $scanner.scanPlugin($plugin);
 
         return this.resolveNames($shells);
     }
@@ -186,7 +186,7 @@ class CommandCollection : IteratorAggregate, Countable
      * Resolve names based on existing commands
      *
      * @param array $input The results of a CommandScanner operation.
-     * @return array<string, string> A flat map of command names => class names.
+     * @return array<string, string> A flat map of command names: class names.
      */
     protected function resolveNames(array $input): array
     {
@@ -229,8 +229,8 @@ class CommandCollection : IteratorAggregate, Countable
     {
         $scanner = new CommandScanner();
 
-        $core = this.resolveNames($scanner->scanCore());
-        $app = this.resolveNames($scanner->scanApp());
+        $core = this.resolveNames($scanner.scanCore());
+        $app = this.resolveNames($scanner.scanApp());
 
         return $app + $core;
     }

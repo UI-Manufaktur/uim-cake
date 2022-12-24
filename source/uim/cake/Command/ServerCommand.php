@@ -80,17 +80,17 @@ class ServerCommand : Command
      */
     protected function startup(Arguments $args, ConsoleIo $io): void
     {
-        if ($args->getOption('host')) {
-            _host = (string)$args->getOption('host');
+        if ($args.getOption('host')) {
+            _host = (string)$args.getOption('host');
         }
-        if ($args->getOption('port')) {
-            _port = (int)$args->getOption('port');
+        if ($args.getOption('port')) {
+            _port = (int)$args.getOption('port');
         }
-        if ($args->getOption('document_root')) {
-            _documentRoot = (string)$args->getOption('document_root');
+        if ($args.getOption('document_root')) {
+            _documentRoot = (string)$args.getOption('document_root');
         }
-        if ($args->getOption('ini_path')) {
-            _iniPath = (string)$args->getOption('ini_path');
+        if ($args.getOption('ini_path')) {
+            _iniPath = (string)$args.getOption('ini_path');
         }
 
         // For Windows
@@ -106,14 +106,14 @@ class ServerCommand : Command
             _iniPath = $m[1] . '\\' . $m[2];
         }
 
-        $io->out();
-        $io->out(sprintf('<info>Welcome to CakePHP %s Console</info>', 'v' . Configure::version()));
-        $io->hr();
-        $io->out(sprintf('App : %s', Configure::read('App.dir')));
-        $io->out(sprintf('Path: %s', APP));
-        $io->out(sprintf('DocumentRoot: %s', _documentRoot));
-        $io->out(sprintf('Ini Path: %s', _iniPath));
-        $io->hr();
+        $io.out();
+        $io.out(sprintf('<info>Welcome to CakePHP %s Console</info>', 'v' . Configure::version()));
+        $io.hr();
+        $io.out(sprintf('App : %s', Configure::read('App.dir')));
+        $io.out(sprintf('Path: %s', APP));
+        $io.out(sprintf('DocumentRoot: %s', _documentRoot));
+        $io.out(sprintf('Ini Path: %s', _iniPath));
+        $io.hr();
     }
 
     /**
@@ -142,8 +142,8 @@ class ServerCommand : Command
         $command = sprintf('%s %s', $command, escapeshellarg(_documentRoot . '/index.php'));
 
         $port = ':' . _port;
-        $io->out(sprintf('built-in server is running in http://%s%s/', _host, $port));
-        $io->out('You can exit with <info>`CTRL-C`</info>');
+        $io.out(sprintf('built-in server is running in http://%s%s/', _host, $port));
+        $io.out('You can exit with <info>`CTRL-C`</info>');
         system($command);
 
         return static::CODE_SUCCESS;
@@ -157,21 +157,21 @@ class ServerCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription([
+        $parser.setDescription([
             'PHP Built-in Server for CakePHP',
             '<warning>[WARN] Don\'t use this in a production environment</warning>',
-        ])->addOption('host', [
-            'short' => 'H',
-            'help' => 'ServerHost',
-        ])->addOption('port', [
-            'short' => 'p',
-            'help' => 'ListenPort',
-        ])->addOption('ini_path', [
-            'short' => 'I',
-            'help' => 'php.ini path',
-        ])->addOption('document_root', [
-            'short' => 'd',
-            'help' => 'DocumentRoot',
+        ]).addOption('host', [
+            'short': 'H',
+            'help': 'ServerHost',
+        ]).addOption('port', [
+            'short': 'p',
+            'help': 'ListenPort',
+        ]).addOption('ini_path', [
+            'short': 'I',
+            'help': 'php.ini path',
+        ]).addOption('document_root', [
+            'short': 'd',
+            'help': 'DocumentRoot',
         ]);
 
         return $parser;

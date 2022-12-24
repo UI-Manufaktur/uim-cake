@@ -33,7 +33,7 @@ class ArrayEngine : CacheEngine
     /**
      * Cached data.
      *
-     * Structured as [key => [exp => expiration, val => value]]
+     * Structured as [key: [exp: expiration, val: value]]
      *
      * @var array<string, array>
      */
@@ -53,7 +53,7 @@ class ArrayEngine : CacheEngine
     {
         $key = _key($key);
         $expires = time() + this.duration($ttl);
-        this.data[$key] = ['exp' => $expires, 'val' => $value];
+        this.data[$key] = ['exp': $expires, 'val': $value];
 
         return true;
     }
@@ -160,7 +160,7 @@ class ArrayEngine : CacheEngine
         foreach (_config['groups'] as $group) {
             $key = _config['prefix'] . $group;
             if (!isset(this.data[$key])) {
-                this.data[$key] = ['exp' => PHP_INT_MAX, 'val' => 1];
+                this.data[$key] = ['exp': PHP_INT_MAX, 'val': 1];
             }
             $value = this.data[$key]['val'];
             $result[] = $group . $value;

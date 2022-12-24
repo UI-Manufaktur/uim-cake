@@ -35,7 +35,7 @@ use LogicException;
  *
  * ### Using Options
  *
- * Options can be defined with both long and short forms. By using `$parser->addOption()`
+ * Options can be defined with both long and short forms. By using `$parser.addOption()`
  * you can define new options. The name of the option is used as its long form, and you
  * can supply an additional short form, with the `short` option. Short options should
  * only be one letter long. Using more than one letter for a short option will raise an exception.
@@ -65,7 +65,7 @@ use LogicException;
  * declare arguments as optional, by setting the required param to false.
  *
  * ```
- * $parser->addArgument('model', ['required' => false]);
+ * $parser.addArgument('model', ['required': false]);
  * ```
  *
  * ### Providing Help text
@@ -100,7 +100,7 @@ class ConsoleOptionParser
     protected $_options = [];
 
     /**
-     * Map of short -> long options, generated when using addOption()
+     * Map of short . long options, generated when using addOption()
      *
      * @var array<string, string>
      */
@@ -163,20 +163,20 @@ class ConsoleOptionParser
         this.setCommand($command);
 
         this.addOption('help', [
-            'short' => 'h',
-            'help' => 'Display this help.',
-            'boolean' => true,
+            'short': 'h',
+            'help': 'Display this help.',
+            'boolean': true,
         ]);
 
         if ($defaultOptions) {
             this.addOption('verbose', [
-                'short' => 'v',
-                'help' => 'Enable verbose output.',
-                'boolean' => true,
-            ])->addOption('quiet', [
-                'short' => 'q',
-                'help' => 'Enable quiet output.',
-                'boolean' => true,
+                'short': 'v',
+                'help': 'Enable verbose output.',
+                'boolean': true,
+            ]).addOption('quiet', [
+                'short': 'q',
+                'help': 'Enable quiet output.',
+                'boolean': true,
             ]);
         }
     }
@@ -198,15 +198,15 @@ class ConsoleOptionParser
      *
      * ```
      * $spec = [
-     *      'description' => 'text',
-     *      'epilog' => 'text',
-     *      'arguments' => [
+     *      'description': 'text',
+     *      'epilog': 'text',
+     *      'arguments': [
      *          // list of arguments compatible with addArguments.
      *      ],
-     *      'options' => [
+     *      'options': [
      *          // list of options compatible with addOptions
      *      ],
-     *      'subcommands' => [
+     *      'subcommands': [
      *          // list of subcommands to add.
      *      ]
      * ];
@@ -220,19 +220,19 @@ class ConsoleOptionParser
     {
         $parser = new static($spec['command'], $defaultOptions);
         if (!empty($spec['arguments'])) {
-            $parser->addArguments($spec['arguments']);
+            $parser.addArguments($spec['arguments']);
         }
         if (!empty($spec['options'])) {
-            $parser->addOptions($spec['options']);
+            $parser.addOptions($spec['options']);
         }
         if (!empty($spec['subcommands'])) {
-            $parser->addSubcommands($spec['subcommands']);
+            $parser.addSubcommands($spec['subcommands']);
         }
         if (!empty($spec['description'])) {
-            $parser->setDescription($spec['description']);
+            $parser.setDescription($spec['description']);
         }
         if (!empty($spec['epilog'])) {
-            $parser->setEpilog($spec['epilog']);
+            $parser.setEpilog($spec['epilog']);
         }
 
         return $parser;
@@ -246,12 +246,12 @@ class ConsoleOptionParser
     function toArray(): array
     {
         return [
-            'command' => _command,
-            'arguments' => _args,
-            'options' => _options,
-            'subcommands' => _subcommands,
-            'description' => _description,
-            'epilog' => _epilog,
+            'command': _command,
+            'arguments': _args,
+            'options': _options,
+            'subcommands': _subcommands,
+            'description': _description,
+            'epilog': _epilog,
         ];
     }
 
@@ -264,7 +264,7 @@ class ConsoleOptionParser
     function merge($spec)
     {
         if ($spec instanceof ConsoleOptionParser) {
-            $spec = $spec->toArray();
+            $spec = $spec.toArray();
         }
         if (!empty($spec['arguments'])) {
             this.addArguments($spec['arguments']);
@@ -414,17 +414,17 @@ class ConsoleOptionParser
     {
         if ($name instanceof ConsoleInputOption) {
             $option = $name;
-            $name = $option->name();
+            $name = $option.name();
         } else {
             $defaults = [
-                'short' => '',
-                'help' => '',
-                'default' => null,
-                'boolean' => false,
-                'multiple' => false,
-                'choices' => [],
-                'required' => false,
-                'prompt' => null,
+                'short': '',
+                'help': '',
+                'default': null,
+                'boolean': false,
+                'multiple': false,
+                'choices': [],
+                'required': false,
+                'prompt': null,
             ];
             $options += $defaults;
             $option = new ConsoleInputOption(
@@ -441,8 +441,8 @@ class ConsoleOptionParser
         }
         _options[$name] = $option;
         asort(_options);
-        if ($option->short()) {
-            _shortOptions[$option->short()] = $name;
+        if ($option.short()) {
+            _shortOptions[$option.short()] = $name;
             asort(_shortOptions);
         }
 
@@ -487,11 +487,11 @@ class ConsoleOptionParser
             $index = count(_args);
         } else {
             $defaults = [
-                'name' => $name,
-                'help' => '',
-                'index' => count(_args),
-                'required' => false,
-                'choices' => [],
+                'name': $name,
+                'help': '',
+                'index': count(_args),
+                'required': false,
+                'choices': [],
             ];
             $options = $params + $defaults;
             $index = $options['index'];
@@ -499,10 +499,10 @@ class ConsoleOptionParser
             $arg = new ConsoleInputArgument($options);
         }
         foreach (_args as $a) {
-            if ($a->isEqualTo($arg)) {
+            if ($a.isEqualTo($arg)) {
                 return this;
             }
-            if (!empty($options['required']) && !$a->isRequired()) {
+            if (!empty($options['required']) && !$a.isRequired()) {
                 throw new LogicException('A required argument cannot follow an optional one');
             }
         }
@@ -522,7 +522,7 @@ class ConsoleOptionParser
      */
     function addArguments(array $args)
     {
-        foreach ($args as $name => $params) {
+        foreach ($args as $name: $params) {
             if ($params instanceof ConsoleInputArgument) {
                 $name = $params;
                 $params = [];
@@ -543,7 +543,7 @@ class ConsoleOptionParser
      */
     function addOptions(array $options)
     {
-        foreach ($options as $name => $params) {
+        foreach ($options as $name: $params) {
             if ($params instanceof ConsoleInputOption) {
                 $name = $params;
                 $params = [];
@@ -574,13 +574,13 @@ class ConsoleOptionParser
     {
         if ($name instanceof ConsoleInputSubcommand) {
             $command = $name;
-            $name = $command->name();
+            $name = $command.name();
         } else {
             $name = Inflector::underscore($name);
             $defaults = [
-                'name' => $name,
-                'help' => '',
-                'parser' => null,
+                'name': $name,
+                'help': '',
+                'parser': null,
             ];
             $options += $defaults;
 
@@ -615,7 +615,7 @@ class ConsoleOptionParser
      */
     function addSubcommands(array $commands)
     {
-        foreach ($commands as $name => $params) {
+        foreach ($commands as $name: $params) {
             if ($params instanceof ConsoleInputSubcommand) {
                 $name = $params;
                 $params = [];
@@ -645,7 +645,7 @@ class ConsoleOptionParser
     {
         $out = [];
         foreach (_args as $arg) {
-            $out[] = $arg->name();
+            $out[] = $arg.name();
         }
 
         return $out;
@@ -687,9 +687,9 @@ class ConsoleOptionParser
         if (isset(_subcommands[$command])) {
             array_shift($argv);
         }
-        if (isset(_subcommands[$command]) && _subcommands[$command]->parser()) {
+        if (isset(_subcommands[$command]) && _subcommands[$command].parser()) {
             /** @psalm-suppress PossiblyNullReference */
-            return _subcommands[$command]->parser()->parse($argv, $io);
+            return _subcommands[$command].parser().parse($argv, $io);
         }
         $params = $args = [];
         _tokens = $argv;
@@ -711,17 +711,17 @@ class ConsoleOptionParser
             return [$params, $args];
         }
 
-        foreach (_args as $i => $arg) {
-            if ($arg->isRequired() && !isset($args[$i])) {
+        foreach (_args as $i: $arg) {
+            if ($arg.isRequired() && !isset($args[$i])) {
                 throw new ConsoleException(
-                    sprintf('Missing required argument. The `%s` argument is required.', $arg->name())
+                    sprintf('Missing required argument. The `%s` argument is required.', $arg.name())
                 );
             }
         }
         foreach (_options as $option) {
-            $name = $option->name();
-            $isBoolean = $option->isBoolean();
-            $default = $option->defaultValue();
+            $name = $option.name();
+            $isBoolean = $option.isBoolean();
+            $default = $option.defaultValue();
 
             $useDefault = !isset($params[$name]);
             if ($default != null && $useDefault && !$isBoolean) {
@@ -730,7 +730,7 @@ class ConsoleOptionParser
             if ($isBoolean && $useDefault) {
                 $params[$name] = false;
             }
-            $prompt = $option->prompt();
+            $prompt = $option.prompt();
             if (!isset($params[$name]) && $prompt) {
                 if (!$io) {
                     throw new ConsoleException(
@@ -738,15 +738,15 @@ class ConsoleOptionParser
                         'Please provide a `$io` parameter to `parse()`.'
                     );
                 }
-                $choices = $option->choices();
+                $choices = $option.choices();
                 if ($choices) {
-                    $value = $io->askChoice($prompt, $choices);
+                    $value = $io.askChoice($prompt, $choices);
                 } else {
-                    $value = $io->ask($prompt);
+                    $value = $io.ask($prompt);
                 }
                 $params[$name] = $value;
             }
-            if ($option->isRequired() && !isset($params[$name])) {
+            if ($option.isRequired() && !isset($params[$name])) {
                 throw new ConsoleException(
                     sprintf('Missing required option. The `%s` option is required and has no default value.', $name)
                 );
@@ -772,37 +772,37 @@ class ConsoleOptionParser
     {
         if ($subcommand == null) {
             $formatter = new HelpFormatter(this);
-            $formatter->setAlias(this.rootName);
+            $formatter.setAlias(this.rootName);
 
             if ($format == 'text') {
-                return $formatter->text($width);
+                return $formatter.text($width);
             }
             if ($format == 'xml') {
-                return (string)$formatter->xml();
+                return (string)$formatter.xml();
             }
         }
         $subcommand = (string)$subcommand;
 
         if (isset(_subcommands[$subcommand])) {
             $command = _subcommands[$subcommand];
-            $subparser = $command->parser();
+            $subparser = $command.parser();
 
             // Generate a parser as the subcommand didn't define one.
             if (!($subparser instanceof self)) {
                 // $subparser = clone this;
                 $subparser = new self($subcommand);
                 $subparser
-                    ->setDescription($command->getRawHelp())
-                    ->addOptions(this.options())
-                    ->addArguments(this.arguments());
+                    .setDescription($command.getRawHelp())
+                    .addOptions(this.options())
+                    .addArguments(this.arguments());
             }
-            if ($subparser->getDescription() == '') {
-                $subparser->setDescription($command->getRawHelp());
+            if ($subparser.getDescription() == '') {
+                $subparser.setDescription($command.getRawHelp());
             }
-            $subparser->setCommand(this.getCommand() . ' ' . $subcommand);
-            $subparser->setRootName(this.rootName);
+            $subparser.setCommand(this.getCommand() . ' ' . $subcommand);
+            $subparser.setRootName(this.rootName);
 
-            return $subparser->help(null, $format, $width);
+            return $subparser.help(null, $format, $width);
         }
 
         $rootCommand = this.getCommand();
@@ -874,7 +874,7 @@ class ConsoleOptionParser
         }
         if (!isset(_shortOptions[$key])) {
             $options = [];
-            foreach (_shortOptions as $short => $long) {
+            foreach (_shortOptions as $short: $long) {
                 $options[] = "{$short} (short for `--{$long}`)";
             }
             throw new MissingOptionException(
@@ -906,7 +906,7 @@ class ConsoleOptionParser
             );
         }
         $option = _options[$name];
-        $isBoolean = $option->isBoolean();
+        $isBoolean = $option.isBoolean();
         $nextValue = _nextToken();
         $emptyNextValue = (empty($nextValue) && $nextValue != '0');
         if (!$isBoolean && !$emptyNextValue && !_optionExists($nextValue)) {
@@ -915,11 +915,11 @@ class ConsoleOptionParser
         } elseif ($isBoolean) {
             $value = true;
         } else {
-            $value = (string)$option->defaultValue();
+            $value = (string)$option.defaultValue();
         }
 
-        $option->validChoice($value);
-        if ($option->acceptsMultiple()) {
+        $option.validChoice($value);
+        if ($option.acceptsMultiple()) {
             $params[$name][] = $value;
         } else {
             $params[$name] = $value;
@@ -970,7 +970,7 @@ class ConsoleOptionParser
             );
         }
 
-        _args[$next]->validChoice($argument);
+        _args[$next].validChoice($argument);
         $args[] = $argument;
 
         return $args;

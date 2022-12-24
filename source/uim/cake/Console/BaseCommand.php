@@ -117,11 +117,11 @@ abstract class BaseCommand : CommandInterface
     {
         [$root, $name] = explode(' ', this.name, 2);
         $parser = new ConsoleOptionParser($name);
-        $parser->setRootName($root);
-        $parser->setDescription(static::getDescription());
+        $parser.setRootName($root);
+        $parser.setDescription(static::getDescription());
 
         $parser = this.buildOptionParser($parser);
-        if ($parser->subcommands()) {
+        if ($parser.subcommands()) {
             throw new RuntimeException(
                 'You cannot add sub-commands to `Command` sub-classes. Instead make a separate command.'
             );
@@ -163,27 +163,27 @@ abstract class BaseCommand : CommandInterface
 
         $parser = this.getOptionParser();
         try {
-            [$options, $arguments] = $parser->parse($argv, $io);
+            [$options, $arguments] = $parser.parse($argv, $io);
             $args = new Arguments(
                 $arguments,
                 $options,
-                $parser->argumentNames()
+                $parser.argumentNames()
             );
         } catch (ConsoleException $e) {
-            $io->err('Error: ' . $e->getMessage());
+            $io.err('Error: ' . $e.getMessage());
 
             return static::CODE_ERROR;
         }
         this.setOutputLevel($args, $io);
 
-        if ($args->getOption('help')) {
+        if ($args.getOption('help')) {
             this.displayHelp($parser, $args, $io);
 
             return static::CODE_SUCCESS;
         }
 
-        if ($args->getOption('quiet')) {
-            $io->setInteractive(false);
+        if ($args.getOption('quiet')) {
+            $io.setInteractive(false);
         }
 
         return this.execute($args, $io);
@@ -200,12 +200,12 @@ abstract class BaseCommand : CommandInterface
     protected function displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io): void
     {
         $format = 'text';
-        if ($args->getArgumentAt(0) == 'xml') {
+        if ($args.getArgumentAt(0) == 'xml') {
             $format = 'xml';
-            $io->setOutputAs(ConsoleOutput::RAW);
+            $io.setOutputAs(ConsoleOutput::RAW);
         }
 
-        $io->out($parser->help(null, $format));
+        $io.out($parser.help(null, $format));
     }
 
     /**
@@ -217,14 +217,14 @@ abstract class BaseCommand : CommandInterface
      */
     protected function setOutputLevel(Arguments $args, ConsoleIo $io): void
     {
-        $io->setLoggers(ConsoleIo::NORMAL);
-        if ($args->getOption('quiet')) {
-            $io->level(ConsoleIo::QUIET);
-            $io->setLoggers(ConsoleIo::QUIET);
+        $io.setLoggers(ConsoleIo::NORMAL);
+        if ($args.getOption('quiet')) {
+            $io.level(ConsoleIo::QUIET);
+            $io.setLoggers(ConsoleIo::QUIET);
         }
-        if ($args->getOption('verbose')) {
-            $io->level(ConsoleIo::VERBOSE);
-            $io->setLoggers(ConsoleIo::VERBOSE);
+        if ($args.getOption('verbose')) {
+            $io.level(ConsoleIo::VERBOSE);
+            $io.setLoggers(ConsoleIo::VERBOSE);
         }
     }
 
@@ -279,9 +279,9 @@ abstract class BaseCommand : CommandInterface
         $io = $io ?: new ConsoleIo();
 
         try {
-            return $command->run($args, $io);
+            return $command.run($args, $io);
         } catch (StopException $e) {
-            return $e->getCode();
+            return $e.getCode();
         }
     }
 }

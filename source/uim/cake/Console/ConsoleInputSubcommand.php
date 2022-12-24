@@ -61,7 +61,7 @@ class ConsoleInputSubcommand
     public this($name, $help = '', $parser = null)
     {
         if (is_array($name)) {
-            $data = $name + ['name' => null, 'help' => '', 'parser' => null];
+            $data = $name + ['name': null, 'help': '', 'parser': null];
             if (empty($data['name'])) {
                 throw new InvalidArgumentException('"name" not provided for console option parser');
             }
@@ -135,9 +135,9 @@ class ConsoleInputSubcommand
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $command = $parent->addChild('command');
-        $command->addAttribute('name', _name);
-        $command->addAttribute('help', _help);
+        $command = $parent.addChild('command');
+        $command.addAttribute('name', _name);
+        $command.addAttribute('help', _help);
 
         return $parent;
     }

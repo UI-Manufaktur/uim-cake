@@ -45,8 +45,8 @@ class CommandFactory : CommandFactoryInterface
      */
     function create(string $className)
     {
-        if (this.container && this.container->has($className)) {
-            $command = this.container->get($className);
+        if (this.container && this.container.has($className)) {
+            $command = this.container.get($className);
         } else {
             $command = new $className();
         }

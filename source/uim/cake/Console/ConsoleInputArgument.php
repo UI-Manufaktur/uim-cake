@@ -66,7 +66,7 @@ class ConsoleInputArgument
     public this($name, $help = '', $required = false, $choices = [])
     {
         if (is_array($name) && isset($name['name'])) {
-            foreach ($name as $key => $value) {
+            foreach ($name as $key: $value) {
                 this.{'_' . $key} = $value;
             }
         } else {
@@ -96,8 +96,8 @@ class ConsoleInputArgument
      */
     function isEqualTo(ConsoleInputArgument $argument): bool
     {
-        return this.name() == $argument->name() &&
-            this.usage() == $argument->usage();
+        return this.name() == $argument.name() &&
+            this.usage() == $argument.usage();
     }
 
     /**
@@ -186,13 +186,13 @@ class ConsoleInputArgument
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $option = $parent->addChild('argument');
-        $option->addAttribute('name', _name);
-        $option->addAttribute('help', _help);
-        $option->addAttribute('required', (string)(int)this.isRequired());
-        $choices = $option->addChild('choices');
+        $option = $parent.addChild('argument');
+        $option.addAttribute('name', _name);
+        $option.addAttribute('help', _help);
+        $option.addAttribute('required', (string)(int)this.isRequired());
+        $choices = $option.addChild('choices');
         foreach (_choices as $valid) {
-            $choices->addChild('choice', $valid);
+            $choices.addChild('choice', $valid);
         }
 
         return $parent;

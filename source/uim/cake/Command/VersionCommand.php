@@ -34,7 +34,7 @@ class VersionCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $io->out(Configure::version());
+        $io.out(Configure::version());
 
         return static::CODE_SUCCESS;
     }
