@@ -61,7 +61,7 @@ class UrlHelper : Helper
             throw new CakeException(sprintf('Class for %s could not be found', $engineClassConfig));
         }
 
-        this._assetUrlClassName = $engineClass;
+        _assetUrlClassName = $engineClass;
     }
 
     /**
@@ -136,9 +136,9 @@ class UrlHelper : Helper
      */
     function image(string $path, array $options = []): string
     {
-        $options += ['theme' => this._View->getTheme()];
+        $options += ['theme' => _View->getTheme()];
 
-        return h(this._assetUrlClassName::imageUrl($path, $options));
+        return h(_assetUrlClassName::imageUrl($path, $options));
     }
 
     /**
@@ -161,9 +161,9 @@ class UrlHelper : Helper
      */
     function css(string $path, array $options = []): string
     {
-        $options += ['theme' => this._View->getTheme()];
+        $options += ['theme' => _View->getTheme()];
 
-        return h(this._assetUrlClassName::cssUrl($path, $options));
+        return h(_assetUrlClassName::cssUrl($path, $options));
     }
 
     /**
@@ -186,9 +186,9 @@ class UrlHelper : Helper
      */
     function script(string $path, array $options = []): string
     {
-        $options += ['theme' => this._View->getTheme()];
+        $options += ['theme' => _View->getTheme()];
 
-        return h(this._assetUrlClassName::scriptUrl($path, $options));
+        return h(_assetUrlClassName::scriptUrl($path, $options));
     }
 
     /**
@@ -215,9 +215,9 @@ class UrlHelper : Helper
      */
     function assetUrl(string $path, array $options = []): string
     {
-        $options += ['theme' => this._View->getTheme()];
+        $options += ['theme' => _View->getTheme()];
 
-        return h(this._assetUrlClassName::url($path, $options));
+        return h(_assetUrlClassName::url($path, $options));
     }
 
     /**
@@ -231,7 +231,7 @@ class UrlHelper : Helper
      */
     function assetTimestamp(string $path, $timestamp = null): string
     {
-        return h(this._assetUrlClassName::assetTimestamp($path, $timestamp));
+        return h(_assetUrlClassName::assetTimestamp($path, $timestamp));
     }
 
     /**
@@ -242,9 +242,9 @@ class UrlHelper : Helper
      */
     function webroot(string $file): string
     {
-        $options = ['theme' => this._View->getTheme()];
+        $options = ['theme' => _View->getTheme()];
 
-        return h(this._assetUrlClassName::webroot($file, $options));
+        return h(_assetUrlClassName::webroot($file, $options));
     }
 
     /**

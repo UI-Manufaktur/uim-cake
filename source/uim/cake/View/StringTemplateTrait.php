@@ -76,22 +76,22 @@ trait StringTemplateTrait
      */
     function templater(): StringTemplate
     {
-        if (this._templater == null) {
+        if (_templater == null) {
             /** @var class-string<\Cake\View\StringTemplate> $class */
             $class = this.getConfig('templateClass') ?: StringTemplate::class;
-            this._templater = new $class();
+            _templater = new $class();
 
             $templates = this.getConfig('templates');
             if ($templates) {
                 if (is_string($templates)) {
-                    this._templater->add(this._defaultConfig['templates']);
-                    this._templater->load($templates);
+                    _templater->add(_defaultConfig['templates']);
+                    _templater->load($templates);
                 } else {
-                    this._templater->add($templates);
+                    _templater->add($templates);
                 }
             }
         }
 
-        return this._templater;
+        return _templater;
     }
 }

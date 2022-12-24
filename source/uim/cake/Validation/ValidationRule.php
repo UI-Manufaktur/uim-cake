@@ -78,7 +78,7 @@ class ValidationRule
      */
     public this(array $validator = [])
     {
-        this._addValidatorProps($validator);
+        _addValidatorProps($validator);
     }
 
     /**
@@ -89,7 +89,7 @@ class ValidationRule
      */
     function isLast(): bool
     {
-        return this._last;
+        return _last;
     }
 
     /**
@@ -114,16 +114,16 @@ class ValidationRule
     {
         $context += ['data' => [], 'newRecord' => true, 'providers' => $providers];
 
-        if (this._skip($context)) {
+        if (_skip($context)) {
             return true;
         }
 
-        if (!is_string(this._rule) && is_callable(this._rule)) {
-            $callable = this._rule;
+        if (!is_string(_rule) && is_callable(_rule)) {
+            $callable = _rule;
             $isCallable = true;
         } else {
-            $provider = $providers[this._provider];
-            $callable = [$provider, this._rule];
+            $provider = $providers[_provider];
+            $callable = [$provider, _rule];
             $isCallable = is_callable($callable);
         }
 
@@ -131,22 +131,22 @@ class ValidationRule
             /** @psalm-suppress PossiblyInvalidArgument */
             $message = sprintf(
                 'Unable to call method "%s" in "%s" provider for field "%s"',
-                this._rule,
-                this._provider,
+                _rule,
+                _provider,
                 $context['field']
             );
             throw new InvalidArgumentException($message);
         }
 
-        if (this._pass) {
-            $args = array_values(array_merge([$value], this._pass, [$context]));
+        if (_pass) {
+            $args = array_values(array_merge([$value], _pass, [$context]));
             $result = $callable(...$args);
         } else {
             $result = $callable($value, $context);
         }
 
         if ($result == false) {
-            return this._message ?: false;
+            return _message ?: false;
         }
 
         return $result;
@@ -166,16 +166,16 @@ class ValidationRule
      */
     protected function _skip(array $context): bool
     {
-        if (!is_string(this._on) && is_callable(this._on)) {
-            $function = this._on;
+        if (!is_string(_on) && is_callable(_on)) {
+            $function = _on;
 
             return !$function($context);
         }
 
         $newRecord = $context['newRecord'];
-        if (!empty(this._on)) {
-            return (this._on == Validator::WHEN_CREATE && !$newRecord)
-                || (this._on == Validator::WHEN_UPDATE && $newRecord);
+        if (!empty(_on)) {
+            return (_on == Validator::WHEN_CREATE && !$newRecord)
+                || (_on == Validator::WHEN_UPDATE && $newRecord);
         }
 
         return false;
@@ -194,7 +194,7 @@ class ValidationRule
                 continue;
             }
             if ($key == 'rule' && is_array($value) && !is_callable($value)) {
-                this._pass = array_slice($value, 1);
+                _pass = array_slice($value, 1);
                 $value = array_shift($value);
             }
             if (in_array($key, ['rule', 'on', 'message', 'last', 'provider', 'pass'], true)) {

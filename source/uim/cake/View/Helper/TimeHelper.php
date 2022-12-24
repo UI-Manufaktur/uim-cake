@@ -87,7 +87,7 @@ class TimeHelper : Helper
      */
     function nice($dateString = null, $timezone = null, ?string $locale = null): string
     {
-        $timezone = this._getTimezone($timezone);
+        $timezone = _getTimezone($timezone);
 
         return (new FrozenTime($dateString))->nice($timezone, $locale);
     }
@@ -224,7 +224,7 @@ class TimeHelper : Helper
      */
     function toAtom($dateString, $timezone = null): string
     {
-        $timezone = this._getTimezone($timezone) ?: date_default_timezone_get();
+        $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString))->timezone($timezone)->toAtomString();
     }
@@ -238,7 +238,7 @@ class TimeHelper : Helper
      */
     function toRss($dateString, $timezone = null): string
     {
-        $timezone = this._getTimezone($timezone) ?: date_default_timezone_get();
+        $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString))->timezone($timezone)->toRssString();
     }
@@ -267,7 +267,7 @@ class TimeHelper : Helper
             'element' => null,
             'timezone' => null,
         ];
-        $options['timezone'] = this._getTimezone($options['timezone']);
+        $options['timezone'] = _getTimezone($options['timezone']);
         /** @psalm-suppress UndefinedInterfaceMethod */
         if ($options['timezone'] && $dateTime instanceof DateTimeInterface) {
             $dateTime = $dateTime->setTimezone($options['timezone']);
@@ -382,7 +382,7 @@ class TimeHelper : Helper
         if ($date == null) {
             return $invalid;
         }
-        $timezone = this._getTimezone($timezone);
+        $timezone = _getTimezone($timezone);
 
         try {
             $time = new FrozenTime($date);

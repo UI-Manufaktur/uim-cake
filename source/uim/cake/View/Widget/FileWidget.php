@@ -60,10 +60,10 @@ class FileWidget : BasicWidget
 
         unset($data['val']);
 
-        return this._templates->format('file', [
+        return _templates->format('file', [
             'name' => $data['name'],
             'templateVars' => $data['templateVars'],
-            'attrs' => this._templates->formatAttributes(
+            'attrs' => _templates->formatAttributes(
                 $data,
                 ['name']
             ),

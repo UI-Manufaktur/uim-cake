@@ -55,8 +55,8 @@ abstract class SerializedView : View
     function initialize(): void
     {
         parent::initialize();
-        if (this._responseType) {
-            $response = this.getResponse()->withType(this._responseType);
+        if (_responseType) {
+            $response = this.getResponse()->withType(_responseType);
             this.setResponse($response);
         }
     }
@@ -101,7 +101,7 @@ abstract class SerializedView : View
                 function ($v) {
                     return '_' . $v;
                 },
-                array_keys(this._defaultConfig)
+                array_keys(_defaultConfig)
             );
 
             $serialize = array_diff(
@@ -111,7 +111,7 @@ abstract class SerializedView : View
         }
         if ($serialize != false) {
             try {
-                return this._serialize($serialize);
+                return _serialize($serialize);
             } catch (Exception | TypeError $e) {
                 throw new SerializationFailureException(
                     'Serialization of View data failed.',

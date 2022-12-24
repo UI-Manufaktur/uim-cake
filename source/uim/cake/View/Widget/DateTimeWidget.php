@@ -121,11 +121,11 @@ class DateTimeWidget : BasicWidget
         $data['value'] = this.formatDateTime($data['val'], $data);
         unset($data['val'], $data['timezone'], $data['format']);
 
-        return this._templates->format('input', [
+        return _templates->format('input', [
             'name' => $data['name'],
             'type' => $data['type'],
             'templateVars' => $data['templateVars'],
-            'attrs' => this._templates->formatAttributes(
+            'attrs' => _templates->formatAttributes(
                 $data,
                 ['name', 'type']
             ),

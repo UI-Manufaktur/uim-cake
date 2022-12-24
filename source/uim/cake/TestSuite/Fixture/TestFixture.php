@@ -140,19 +140,19 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     function init(): void
     {
         if (this.table == null) {
-            this.table = this._tableFromClass();
+            this.table = _tableFromClass();
         }
 
         if (empty(this.import) && !empty(this.fields)) {
-            this._schemaFromFields();
+            _schemaFromFields();
         }
 
         if (!empty(this.import)) {
-            this._schemaFromImport();
+            _schemaFromImport();
         }
 
         if (empty(this.import) && empty(this.fields)) {
-            this._schemaFromReflection();
+            _schemaFromReflection();
         }
     }
 
@@ -178,29 +178,29 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     protected function _schemaFromFields(): void
     {
         $connection = ConnectionManager::get(this.connection());
-        this._schema = $connection->getDriver()->newTableSchema(this.table);
+        _schema = $connection->getDriver()->newTableSchema(this.table);
         foreach (this.fields as $field => $data) {
             if ($field == '_constraints' || $field == '_indexes' || $field == '_options') {
                 continue;
             }
-            this._schema->addColumn($field, $data);
+            _schema->addColumn($field, $data);
         }
         if (!empty(this.fields['_constraints'])) {
             foreach (this.fields['_constraints'] as $name => $data) {
                 if (!$connection->supportsDynamicConstraints() || $data['type'] != TableSchema::CONSTRAINT_FOREIGN) {
-                    this._schema->addConstraint($name, $data);
+                    _schema->addConstraint($name, $data);
                 } else {
-                    this._constraints[$name] = $data;
+                    _constraints[$name] = $data;
                 }
             }
         }
         if (!empty(this.fields['_indexes'])) {
             foreach (this.fields['_indexes'] as $name => $data) {
-                this._schema->addIndex($name, $data);
+                _schema->addIndex($name, $data);
             }
         }
         if (!empty(this.fields['_options'])) {
-            this._schema->setOptions(this.fields['_options']);
+            _schema->setOptions(this.fields['_options']);
         }
     }
 
@@ -233,7 +233,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         $db = ConnectionManager::get($import['connection'], false);
         $schemaCollection = $db->getSchemaCollection();
         $table = $schemaCollection->describe($import['table']);
-        this._schema = $table;
+        _schema = $table;
     }
 
     /**
@@ -251,7 +251,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
 
             /** @var \Cake\Database\Schema\TableSchema $schema */
             $schema = $ormTable->getSchema();
-            this._schema = $schema;
+            _schema = $schema;
 
             this.getTableLocator()->clear();
         } catch (CakeException $e) {
@@ -270,7 +270,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     function create(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
-        if (!isset(this._schema)) {
+        if (!isset(_schema)) {
             return false;
         }
 
@@ -280,7 +280,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
 
         try {
             /** @psalm-suppress ArgumentTypeCoercion */
-            $queries = this._schema->createSql($connection);
+            $queries = _schema->createSql($connection);
             foreach ($queries as $query) {
                 $stmt = $connection->prepare($query);
                 $stmt->execute();
@@ -307,7 +307,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     function drop(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
-        if (!isset(this._schema)) {
+        if (!isset(_schema)) {
             return false;
         }
 
@@ -317,7 +317,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
 
         try {
             /** @psalm-suppress ArgumentTypeCoercion */
-            $sql = this._schema->dropSql($connection);
+            $sql = _schema->dropSql($connection);
             foreach ($sql as $stmt) {
                 $connection->execute($stmt)->closeCursor();
             }
@@ -334,7 +334,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     function insert(ConnectionInterface $connection)
     {
         if (!empty(this.records)) {
-            [$fields, $values, $types] = this._getRecords();
+            [$fields, $values, $types] = _getRecords();
             $query = $connection->newQuery()
                 ->insert($fields, $types)
                 ->into(this.sourceName());
@@ -356,16 +356,16 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      */
     function createConstraints(ConnectionInterface $connection): bool
     {
-        if (empty(this._constraints)) {
+        if (empty(_constraints)) {
             return true;
         }
 
-        foreach (this._constraints as $name => $data) {
-            this._schema->addConstraint($name, $data);
+        foreach (_constraints as $name => $data) {
+            _schema->addConstraint($name, $data);
         }
 
         /** @psalm-suppress ArgumentTypeCoercion */
-        $sql = this._schema->addConstraintSql($connection);
+        $sql = _schema->addConstraintSql($connection);
 
         if (empty($sql)) {
             return true;
@@ -383,12 +383,12 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      */
     function dropConstraints(ConnectionInterface $connection): bool
     {
-        if (empty(this._constraints)) {
+        if (empty(_constraints)) {
             return true;
         }
 
         /** @psalm-suppress ArgumentTypeCoercion */
-        $sql = this._schema->dropConstraintSql($connection);
+        $sql = _schema->dropConstraintSql($connection);
 
         if (empty($sql)) {
             return true;
@@ -398,8 +398,8 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
             $connection->execute($stmt)->closeCursor();
         }
 
-        foreach (this._constraints as $name => $data) {
-            this._schema->dropConstraint($name);
+        foreach (_constraints as $name => $data) {
+            _schema->dropConstraint($name);
         }
 
         return true;
@@ -413,14 +413,14 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     protected function _getRecords(): array
     {
         $fields = $values = $types = [];
-        $columns = this._schema->columns();
+        $columns = _schema->columns();
         foreach (this.records as $record) {
             $fields = array_merge($fields, array_intersect(array_keys($record), $columns));
         }
         $fields = array_values(array_unique($fields));
         foreach ($fields as $field) {
             /** @var array $column */
-            $column = this._schema->getColumn($field);
+            $column = _schema->getColumn($field);
             $types[$field] = $column['type'];
         }
         $default = array_fill_keys($fields, null);
@@ -437,7 +437,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     function truncate(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress ArgumentTypeCoercion */
-        $sql = this._schema->truncateSql($connection);
+        $sql = _schema->truncateSql($connection);
         foreach ($sql as $stmt) {
             $connection->execute($stmt)->closeCursor();
         }
@@ -450,7 +450,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      */
     function getTableSchema()
     {
-        return this._schema;
+        return _schema;
     }
 
     /**
@@ -458,7 +458,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      */
     function setTableSchema($schema)
     {
-        this._schema = $schema;
+        _schema = $schema;
 
         return this;
     }

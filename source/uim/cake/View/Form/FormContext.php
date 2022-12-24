@@ -58,8 +58,8 @@ class FormContext : ContextInterface
             throw new CakeException('`$context[\'entity\']` must be an instance of Cake\Form\Form');
         }
 
-        this._form = $context['entity'];
-        this._validator = $context['validator'] ?? null;
+        _form = $context['entity'];
+        _validator = $context['validator'] ?? null;
     }
 
     /**
@@ -109,7 +109,7 @@ class FormContext : ContextInterface
             'schemaDefault' => true,
         ];
 
-        $val = this._form->getData($field);
+        $val = _form->getData($field);
         if ($val != null) {
             return $val;
         }
@@ -118,7 +118,7 @@ class FormContext : ContextInterface
             return $options['default'];
         }
 
-        return this._schemaDefault($field);
+        return _schemaDefault($field);
     }
 
     /**
@@ -129,7 +129,7 @@ class FormContext : ContextInterface
      */
     protected function _schemaDefault(string $field)
     {
-        $field = this._form->getSchema()->field($field);
+        $field = _form->getSchema()->field($field);
         if ($field) {
             return $field['default'];
         }
@@ -142,7 +142,7 @@ class FormContext : ContextInterface
      */
     function isRequired(string $field): ?bool
     {
-        $validator = this._form->getValidator(this._validator);
+        $validator = _form->getValidator(_validator);
         if (!$validator->hasField($field)) {
             return null;
         }
@@ -160,7 +160,7 @@ class FormContext : ContextInterface
     {
         $parts = explode('.', $field);
 
-        $validator = this._form->getValidator(this._validator);
+        $validator = _form->getValidator(_validator);
         $fieldName = array_pop($parts);
         if (!$validator->hasField($fieldName)) {
             return null;
@@ -179,7 +179,7 @@ class FormContext : ContextInterface
      */
     function getMaxLength(string $field): ?int
     {
-        $validator = this._form->getValidator(this._validator);
+        $validator = _form->getValidator(_validator);
         if (!$validator->hasField($field)) {
             return null;
         }
@@ -202,7 +202,7 @@ class FormContext : ContextInterface
      */
     function fieldNames(): array
     {
-        return this._form->getSchema()->fields();
+        return _form->getSchema()->fields();
     }
 
     /**
@@ -210,7 +210,7 @@ class FormContext : ContextInterface
      */
     function type(string $field): ?string
     {
-        return this._form->getSchema()->fieldType($field);
+        return _form->getSchema()->fieldType($field);
     }
 
     /**
@@ -219,7 +219,7 @@ class FormContext : ContextInterface
     function attributes(string $field): array
     {
         return array_intersect_key(
-            (array)this._form->getSchema()->field($field),
+            (array)_form->getSchema()->field($field),
             array_flip(static::VALID_ATTRIBUTES)
         );
     }
@@ -239,6 +239,6 @@ class FormContext : ContextInterface
      */
     function error(string $field): array
     {
-        return (array)Hash::get(this._form->getErrors(), $field, []);
+        return (array)Hash::get(_form->getErrors(), $field, []);
     }
 }

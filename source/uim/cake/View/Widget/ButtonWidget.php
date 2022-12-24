@@ -42,7 +42,7 @@ class ButtonWidget : WidgetInterface
      */
     public this(StringTemplate $templates)
     {
-        this._templates = $templates;
+        _templates = $templates;
     }
 
     /**
@@ -72,10 +72,10 @@ class ButtonWidget : WidgetInterface
             'templateVars' => [],
         ];
 
-        return this._templates->format('button', [
+        return _templates->format('button', [
             'text' => $data['escapeTitle'] ? h($data['text']) : $data['text'],
             'templateVars' => $data['templateVars'],
-            'attrs' => this._templates->formatAttributes($data, ['text', 'escapeTitle']),
+            'attrs' => _templates->formatAttributes($data, ['text', 'escapeTitle']),
         ]);
     }
 

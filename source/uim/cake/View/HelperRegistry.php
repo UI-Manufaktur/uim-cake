@@ -46,7 +46,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      */
     public this(View $view)
     {
-        this._View = $view;
+        _View = $view;
         this.setEventManager($view->getEventManager());
     }
 
@@ -62,14 +62,14 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      */
     function __isset(string $helper): bool
     {
-        if (isset(this._loaded[$helper])) {
+        if (isset(_loaded[$helper])) {
             return true;
         }
 
         try {
             this.load($helper);
         } catch (MissingHelperException $exception) {
-            $plugin = this._View->getPlugin();
+            $plugin = _View->getPlugin();
             if (!empty($plugin)) {
                 this.load($plugin . '.' . $helper);
 
@@ -92,11 +92,11 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      */
     function __get(string $name)
     {
-        if (isset(this._loaded[$name])) {
-            return this._loaded[$name];
+        if (isset(_loaded[$name])) {
+            return _loaded[$name];
         }
         if (isset(this.{$name})) {
-            return this._loaded[$name];
+            return _loaded[$name];
         }
 
         return null;
@@ -150,7 +150,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _create($class, string $alias, array $config): Helper
     {
         /** @var \Cake\View\Helper $instance */
-        $instance = new $class(this._View, $config);
+        $instance = new $class(_View, $config);
 
         $enable = $config['enabled'] ?? true;
         if ($enable) {

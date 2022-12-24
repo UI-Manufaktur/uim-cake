@@ -202,7 +202,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
-        this._View->append($options['block'], $out);
+        _View->append($options['block'], $out);
 
         return null;
     }
@@ -284,7 +284,7 @@ class HtmlHelper : Helper
             unset($options['confirm']);
         }
         if ($confirmMessage) {
-            $confirm = this._confirm('return true;', 'return false;');
+            $confirm = _confirm('return true;', 'return false;');
             $options['data-confirm-message'] = $confirmMessage;
             $options['onclick'] = $templater->format('confirmJs', [
                 'confirmMessage' => h($confirmMessage),
@@ -380,7 +380,7 @@ class HtmlHelper : Helper
             'once' => true,
             'block' => null,
             'rel' => 'stylesheet',
-            'nonce' => this._View->getRequest()->getAttribute('cspStyleNonce'),
+            'nonce' => _View->getRequest()->getAttribute('cspStyleNonce'),
         ];
 
         if (is_array($path)) {
@@ -398,11 +398,11 @@ class HtmlHelper : Helper
         $url = this.Url->css($path, $options);
         $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
 
-        if ($options['once'] && isset(this._includedAssets[__METHOD__][$path])) {
+        if ($options['once'] && isset(_includedAssets[__METHOD__][$path])) {
             return null;
         }
         unset($options['once']);
-        this._includedAssets[__METHOD__][$path] = true;
+        _includedAssets[__METHOD__][$path] = true;
 
         $templater = this.templater();
         if ($options['rel'] == 'import') {
@@ -424,7 +424,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
-        this._View->append($options['block'], $out);
+        _View->append($options['block'], $out);
 
         return null;
     }
@@ -479,7 +479,7 @@ class HtmlHelper : Helper
         $defaults = [
             'block' => null,
             'once' => true,
-            'nonce' => this._View->getRequest()->getAttribute('cspScriptNonce'),
+            'nonce' => _View->getRequest()->getAttribute('cspScriptNonce'),
         ];
         $options += $defaults;
 
@@ -498,10 +498,10 @@ class HtmlHelper : Helper
         $url = this.Url->script($url, $options);
         $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
 
-        if ($options['once'] && isset(this._includedAssets[__METHOD__][$url])) {
+        if ($options['once'] && isset(_includedAssets[__METHOD__][$url])) {
             return null;
         }
-        this._includedAssets[__METHOD__][$url] = true;
+        _includedAssets[__METHOD__][$url] = true;
 
         $out = this.formatTemplate('javascriptlink', [
             'url' => $url,
@@ -514,7 +514,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
-        this._View->append($options['block'], $out);
+        _View->append($options['block'], $out);
 
         return null;
     }
@@ -535,7 +535,7 @@ class HtmlHelper : Helper
      */
     function scriptBlock(string $script, array $options = []): ?string
     {
-        $options += ['block' => null, 'nonce' => this._View->getRequest()->getAttribute('cspScriptNonce')];
+        $options += ['block' => null, 'nonce' => _View->getRequest()->getAttribute('cspScriptNonce')];
 
         $out = this.formatTemplate('javascriptblock', [
             'attrs' => this.templater()->formatAttributes($options, ['block']),
@@ -548,7 +548,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = 'script';
         }
-        this._View->append($options['block'], $out);
+        _View->append($options['block'], $out);
 
         return null;
     }
@@ -569,7 +569,7 @@ class HtmlHelper : Helper
      */
     function scriptStart(array $options = []): void
     {
-        this._scriptBlockOptions = $options;
+        _scriptBlockOptions = $options;
         ob_start();
     }
 
@@ -584,8 +584,8 @@ class HtmlHelper : Helper
     function scriptEnd(): ?string
     {
         $buffer = ob_get_clean();
-        $options = this._scriptBlockOptions;
-        this._scriptBlockOptions = [];
+        $options = _scriptBlockOptions;
+        _scriptBlockOptions = [];
 
         return this.scriptBlock($buffer, $options);
     }
@@ -765,7 +765,7 @@ class HtmlHelper : Helper
         $out = [];
         foreach ($data as $line) {
             $count++;
-            $cellsOut = this._renderCells($line, $useCount);
+            $cellsOut = _renderCells($line, $useCount);
             $opts = $count % 2 ? $oddTrOptions : $evenTrOptions;
             /** @var array<string, mixed> $options */
             $options = (array)$opts;
@@ -1011,7 +1011,7 @@ class HtmlHelper : Helper
                 }
                 if (!isset($source['type'])) {
                     $ext = pathinfo($source['src'], PATHINFO_EXTENSION);
-                    $source['type'] = this._View->getResponse()->getMimeType($ext);
+                    $source['type'] = _View->getResponse()->getMimeType($ext);
                 }
                 $source['src'] = this.Url->assetUrl($source['src'], $options);
                 $sourceTags .= this.formatTemplate('tagselfclosing', [
@@ -1034,7 +1034,7 @@ class HtmlHelper : Helper
                 $mimeType = $path[0]['type'];
             } else {
                 /** @var string $mimeType */
-                $mimeType = this._View->getResponse()->getMimeType(pathinfo($path, PATHINFO_EXTENSION));
+                $mimeType = _View->getResponse()->getMimeType(pathinfo($path, PATHINFO_EXTENSION));
             }
             if (preg_match('#^video/#', $mimeType)) {
                 $tag = 'video';
@@ -1082,7 +1082,7 @@ class HtmlHelper : Helper
     function nestedList(array $list, array $options = [], array $itemOptions = []): string
     {
         $options += ['tag' => 'ul'];
-        $items = this._nestedListItem($list, $options, $itemOptions);
+        $items = _nestedListItem($list, $options, $itemOptions);
 
         return this.formatTemplate($options['tag'], [
             'attrs' => this.templater()->formatAttributes($options, ['tag']),

@@ -126,14 +126,14 @@ abstract class Cell : EventDispatcherInterface
         this.response = $response;
         this.modelFactory('Table', [this.getTableLocator(), 'get']);
 
-        this._validCellOptions = array_merge(['action', 'args'], this._validCellOptions);
-        foreach (this._validCellOptions as $var) {
+        _validCellOptions = array_merge(['action', 'args'], _validCellOptions);
+        foreach (_validCellOptions as $var) {
             if (isset($cellOptions[$var])) {
                 this.{$var} = $cellOptions[$var];
             }
         }
         if (!empty($cellOptions['cache'])) {
-            this._cache = $cellOptions['cache'];
+            _cache = $cellOptions['cache'];
         }
 
         this.initialize();
@@ -164,8 +164,8 @@ abstract class Cell : EventDispatcherInterface
     function render(?string $template = null): string
     {
         $cache = [];
-        if (this._cache) {
-            $cache = this._cacheConfig(this.action, $template);
+        if (_cache) {
+            $cache = _cacheConfig(this.action, $template);
         }
 
         $render = function () use ($template) {
@@ -231,7 +231,7 @@ abstract class Cell : EventDispatcherInterface
      */
     protected function _cacheConfig(string $action, ?string $template = null): array
     {
-        if (empty(this._cache)) {
+        if (empty(_cache)) {
             return [];
         }
         $template = $template ?: 'default';
@@ -241,12 +241,12 @@ abstract class Cell : EventDispatcherInterface
             'config' => 'default',
             'key' => $key,
         ];
-        if (this._cache == true) {
+        if (_cache == true) {
             return $default;
         }
 
         /** @psalm-suppress PossiblyFalseOperand */
-        return this._cache + $default;
+        return _cache + $default;
     }
 
     /**

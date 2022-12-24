@@ -105,11 +105,11 @@ class PaginatorHelper : Helper
     {
         parent::__construct($view, $config);
 
-        $query = this._View->getRequest()->getQueryParams();
+        $query = _View->getRequest()->getQueryParams();
         unset($query['page'], $query['limit'], $query['sort'], $query['direction']);
         this.setConfig(
             'options.url',
-            array_merge(this._View->getRequest()->getParam('pass', []), ['?' => $query])
+            array_merge(_View->getRequest()->getParam('pass', []), ['?' => $query])
         );
     }
 
@@ -121,7 +121,7 @@ class PaginatorHelper : Helper
      */
     function params(?string $model = null): array
     {
-        $request = this._View->getRequest();
+        $request = _View->getRequest();
 
         if (empty($model)) {
             $model = (string)this.defaultModel();
@@ -155,7 +155,7 @@ class PaginatorHelper : Helper
      */
     function options(array $options = []): void
     {
-        $request = this._View->getRequest();
+        $request = _View->getRequest();
 
         if (!empty($options['paging'])) {
             $request = $request->withAttribute(
@@ -173,14 +173,14 @@ class PaginatorHelper : Helper
             unset($options[$model]);
         }
 
-        this._View->setRequest($request);
+        _View->setRequest($request);
 
-        this._config['options'] = array_filter($options + this._config['options']);
-        if (empty(this._config['options']['url'])) {
-            this._config['options']['url'] = [];
+        _config['options'] = array_filter($options + _config['options']);
+        if (empty(_config['options']['url'])) {
+            _config['options']['url'] = [];
         }
-        if (!empty(this._config['options']['model'])) {
-            this.defaultModel(this._config['options']['model']);
+        if (!empty(_config['options']['model'])) {
+            this.defaultModel(_config['options']['model']);
         }
     }
 
@@ -358,7 +358,7 @@ class PaginatorHelper : Helper
             'disabled' => 'prevDisabled',
         ];
 
-        return this._toggledLink($title, $enabled, $options, $templates);
+        return _toggledLink($title, $enabled, $options, $templates);
     }
 
     /**
@@ -398,7 +398,7 @@ class PaginatorHelper : Helper
             'disabled' => 'nextDisabled',
         ];
 
-        return this._toggledLink($title, $enabled, $options, $templates);
+        return _toggledLink($title, $enabled, $options, $templates);
     }
 
     /**
@@ -530,14 +530,14 @@ class PaginatorHelper : Helper
             && !empty($options['sort'])
             && strpos($options['sort'], '.') == false
         ) {
-            $paging['sort'] = this._removeAlias($paging['sort'], $model = null);
+            $paging['sort'] = _removeAlias($paging['sort'], $model = null);
         }
         if (
             !empty($paging['sortDefault'])
             && !empty($options['sort'])
             && strpos($options['sort'], '.') == false
         ) {
-            $paging['sortDefault'] = this._removeAlias($paging['sortDefault'], $model);
+            $paging['sortDefault'] = _removeAlias($paging['sortDefault'], $model);
         }
 
         $options += array_intersect_key(
@@ -556,7 +556,7 @@ class PaginatorHelper : Helper
         ) {
             $options['sort'] = $options['direction'] = null;
         }
-        $baseUrl = this._config['options']['url'] ?? [];
+        $baseUrl = _config['options']['url'] ?? [];
         if (!empty($paging['scope'])) {
             $scope = $paging['scope'];
             if (isset($baseUrl['?'][$scope]) && is_array($baseUrl['?'][$scope])) {
@@ -572,8 +572,8 @@ class PaginatorHelper : Helper
 
         $url['?'] = $url['?'] ?? [];
 
-        if (!empty(this._config['options']['routePlaceholders'])) {
-            $placeholders = array_flip(this._config['options']['routePlaceholders']);
+        if (!empty(_config['options']['routePlaceholders'])) {
+            $placeholders = array_flip(_config['options']['routePlaceholders']);
             $url += array_intersect_key($options, $placeholders);
             $url['?'] += array_diff_key($options, $placeholders);
         } else {
@@ -618,7 +618,7 @@ class PaginatorHelper : Helper
      */
     function hasPrev(?string $model = null): bool
     {
-        return this._hasPage($model, 'prev');
+        return _hasPage($model, 'prev');
     }
 
     /**
@@ -630,7 +630,7 @@ class PaginatorHelper : Helper
      */
     function hasNext(?string $model = null): bool
     {
-        return this._hasPage($model, 'next');
+        return _hasPage($model, 'next');
     }
 
     /**
@@ -675,19 +675,19 @@ class PaginatorHelper : Helper
     function defaultModel(?string $model = null): ?string
     {
         if ($model != null) {
-            this._defaultModel = $model;
+            _defaultModel = $model;
         }
-        if (this._defaultModel) {
-            return this._defaultModel;
+        if (_defaultModel) {
+            return _defaultModel;
         }
 
-        $params = this._View->getRequest()->getAttribute('paging');
+        $params = _View->getRequest()->getAttribute('paging');
         if (!$params) {
             return null;
         }
-        [this._defaultModel] = array_keys($params);
+        [_defaultModel] = array_keys($params);
 
-        return this._defaultModel;
+        return _defaultModel;
     }
 
     /**
@@ -799,9 +799,9 @@ class PaginatorHelper : Helper
         }
 
         if ($options['modulus'] != false && $params['pageCount'] > $options['modulus']) {
-            $out = this._modulusNumbers($templater, $params, $options);
+            $out = _modulusNumbers($templater, $params, $options);
         } else {
-            $out = this._numbers($templater, $params, $options);
+            $out = _numbers($templater, $params, $options);
         }
 
         if (isset($options['templates'])) {
@@ -877,13 +877,13 @@ class PaginatorHelper : Helper
         $out = '';
         $ellipsis = $templater->format('ellipsis', []);
 
-        [$start, $end] = this._getNumbersStartAndEnd($params, $options);
+        [$start, $end] = _getNumbersStartAndEnd($params, $options);
 
-        $out .= this._firstNumber($ellipsis, $params, $start, $options);
+        $out .= _firstNumber($ellipsis, $params, $start, $options);
         $out .= $options['before'];
 
         for ($i = $start; $i < $params['page']; $i++) {
-            $out .= this._formatNumber($templater, [
+            $out .= _formatNumber($templater, [
                 'text' => this.Number->format($i),
                 'page' => $i,
                 'model' => $options['model'],
@@ -901,7 +901,7 @@ class PaginatorHelper : Helper
         $start = $params['page'] + 1;
         $i = $start;
         while ($i < $end) {
-            $out .= this._formatNumber($templater, [
+            $out .= _formatNumber($templater, [
                 'text' => this.Number->format($i),
                 'page' => $i,
                 'model' => $options['model'],
@@ -911,7 +911,7 @@ class PaginatorHelper : Helper
         }
 
         if ($end != $params['page']) {
-            $out .= this._formatNumber($templater, [
+            $out .= _formatNumber($templater, [
                 'text' => this.Number->format($i),
                 'page' => $end,
                 'model' => $options['model'],
@@ -920,7 +920,7 @@ class PaginatorHelper : Helper
         }
 
         $out .= $options['after'];
-        $out .= this._lastNumber($ellipsis, $params, $end, $options);
+        $out .= _lastNumber($ellipsis, $params, $end, $options);
 
         return $out;
     }
@@ -1205,7 +1205,7 @@ class PaginatorHelper : Helper
         }
 
         if ($options['block']) {
-            this._View->append($options['block'], $out);
+            _View->append($options['block'], $out);
 
             return null;
         }
@@ -1259,7 +1259,7 @@ class PaginatorHelper : Helper
             'type' => 'select',
             'label' => __('View'),
             'default' => $default,
-            'value' => this._View->getRequest()->getQuery('limit'),
+            'value' => _View->getRequest()->getQuery('limit'),
             'options' => $limits,
             'onChange' => 'this.form.submit()',
         ]);

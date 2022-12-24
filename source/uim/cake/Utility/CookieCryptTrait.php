@@ -53,16 +53,16 @@ trait CookieCryptTrait
     protected function _encrypt($value, $encrypt, ?string $key = null): string
     {
         if (is_array($value)) {
-            $value = this._implode($value);
+            $value = _implode($value);
         }
         if ($encrypt == false) {
             return $value;
         }
-        this._checkCipher($encrypt);
+        _checkCipher($encrypt);
         $prefix = 'Q2FrZQ==.';
         $cipher = '';
         if ($key == null) {
-            $key = this._getCookieEncryptionKey();
+            $key = _getCookieEncryptionKey();
         }
         if ($encrypt == 'aes') {
             $cipher = Security::encrypt($value, $key);
@@ -80,10 +80,10 @@ trait CookieCryptTrait
      */
     protected function _checkCipher(string $encrypt): void
     {
-        if (!in_array($encrypt, this._validCiphers, true)) {
+        if (!in_array($encrypt, _validCiphers, true)) {
             $msg = sprintf(
                 'Invalid encryption cipher. Must be one of %s or false.',
-                implode(', ', this._validCiphers)
+                implode(', ', _validCiphers)
             );
             throw new RuntimeException($msg);
         }
@@ -100,12 +100,12 @@ trait CookieCryptTrait
     protected function _decrypt($values, $mode, ?string $key = null)
     {
         if (is_string($values)) {
-            return this._decode($values, $mode, $key);
+            return _decode($values, $mode, $key);
         }
 
         $decrypted = [];
         foreach ($values as $name => $value) {
-            $decrypted[$name] = this._decode($value, $mode, $key);
+            $decrypted[$name] = _decode($value, $mode, $key);
         }
 
         return $decrypted;
@@ -122,9 +122,9 @@ trait CookieCryptTrait
     protected function _decode(string $value, $encrypt, ?string $key)
     {
         if (!$encrypt) {
-            return this._explode($value);
+            return _explode($value);
         }
-        this._checkCipher($encrypt);
+        _checkCipher($encrypt);
         $prefix = 'Q2FrZQ==.';
         $prefixLength = strlen($prefix);
 
@@ -139,7 +139,7 @@ trait CookieCryptTrait
         }
 
         if ($key == null) {
-            $key = this._getCookieEncryptionKey();
+            $key = _getCookieEncryptionKey();
         }
         if ($encrypt == 'aes') {
             $value = Security::decrypt($value, $key);
@@ -149,7 +149,7 @@ trait CookieCryptTrait
             return '';
         }
 
-        return this._explode($value);
+        return _explode($value);
     }
 
     /**

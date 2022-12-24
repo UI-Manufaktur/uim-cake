@@ -337,14 +337,14 @@ class View : EventDispatcherInterface
         ?EventManager $eventManager = null,
         array $viewOptions = []
     ) {
-        foreach (this._passedVars as $var) {
+        foreach (_passedVars as $var) {
             if (isset($viewOptions[$var])) {
                 this.{$var} = $viewOptions[$var];
             }
         }
         this.setConfig(array_diff_key(
             $viewOptions,
-            array_flip(this._passedVars)
+            array_flip(_passedVars)
         ));
 
         if ($eventManager != null) {
@@ -355,7 +355,7 @@ class View : EventDispatcherInterface
         }
         this.request = $request;
         this.response = $response ?: new Response();
-        this.Blocks = new this._viewBlockClass();
+        this.Blocks = new _viewBlockClass();
         this.initialize();
         this.loadHelpers();
     }
@@ -630,7 +630,7 @@ class View : EventDispatcherInterface
      */
     function getConfig(?string $key = null, $default = null)
     {
-        $value = this._getConfig($key);
+        $value = _getConfig($key);
 
         if ($value != null) {
             return $value;
@@ -681,7 +681,7 @@ class View : EventDispatcherInterface
     {
         $options += ['callbacks' => false, 'cache' => null, 'plugin' => null, 'ignoreMissing' => false];
         if (isset($options['cache'])) {
-            $options['cache'] = this._elementCache(
+            $options['cache'] = _elementCache(
                 $name,
                 $data,
                 array_diff_key($options, ['callbacks' => false, 'plugin' => null, 'ignoreMissing' => null])
@@ -689,14 +689,14 @@ class View : EventDispatcherInterface
         }
 
         $pluginCheck = $options['plugin'] != false;
-        $file = this._getElementFileName($name, $pluginCheck);
+        $file = _getElementFileName($name, $pluginCheck);
         if ($file && $options['cache']) {
             return this.cache(function () use ($file, $data, $options): void {
-                echo this._renderElement($file, $data, $options);
+                echo _renderElement($file, $data, $options);
             }, $options['cache']);
         }
         if ($file) {
-            return this._renderElement($file, $data, $options);
+            return _renderElement($file, $data, $options);
         }
 
         if ($options['ignoreMissing']) {
@@ -705,7 +705,7 @@ class View : EventDispatcherInterface
 
         [$plugin, $elementName] = this.pluginSplit($name, $pluginCheck);
         $paths = iterator_to_array(this.getElementPaths($plugin));
-        throw new MissingElementException([$name . this._ext, $elementName . this._ext], $paths);
+        throw new MissingElementException([$name . _ext, $elementName . _ext], $paths);
     }
 
     /**
@@ -763,7 +763,7 @@ class View : EventDispatcherInterface
      */
     function elementExists(string $name): bool
     {
-        return (bool)this._getElementFileName($name);
+        return (bool)_getElementFileName($name);
     }
 
     /**
@@ -802,10 +802,10 @@ class View : EventDispatcherInterface
             this.layout = $layout;
         }
 
-        $templateFileName = this._getTemplateFileName($template);
-        this._currentType = static::TYPE_TEMPLATE;
+        $templateFileName = _getTemplateFileName($template);
+        _currentType = static::TYPE_TEMPLATE;
         this.dispatchEvent('View.beforeRender', [$templateFileName]);
-        this.Blocks->set('content', this._render($templateFileName));
+        this.Blocks->set('content', _render($templateFileName));
         this.dispatchEvent('View.afterRender', [$templateFileName]);
 
         if (this.autoLayout) {
@@ -842,7 +842,7 @@ class View : EventDispatcherInterface
      */
     function renderLayout(string $content, ?string $layout = null): string
     {
-        $layoutFileName = this._getLayoutFileName($layout);
+        $layoutFileName = _getLayoutFileName($layout);
 
         if (!empty($content)) {
             this.Blocks->set('content', $content);
@@ -856,8 +856,8 @@ class View : EventDispatcherInterface
             this.Blocks->set('title', $title);
         }
 
-        this._currentType = static::TYPE_LAYOUT;
-        this.Blocks->set('content', this._render($layoutFileName));
+        _currentType = static::TYPE_LAYOUT;
+        this.Blocks->set('content', _render($layoutFileName));
 
         this.dispatchEvent('View.afterLayout', [$layoutFileName]);
 
@@ -1076,34 +1076,34 @@ class View : EventDispatcherInterface
      */
     function extend(string $name)
     {
-        $type = $name[0] == '/' ? static::TYPE_TEMPLATE : this._currentType;
+        $type = $name[0] == '/' ? static::TYPE_TEMPLATE : _currentType;
         switch ($type) {
             case static::TYPE_ELEMENT:
-                $parent = this._getElementFileName($name);
+                $parent = _getElementFileName($name);
                 if (!$parent) {
                     [$plugin, $name] = this.pluginSplit($name);
-                    $paths = this._paths($plugin);
+                    $paths = _paths($plugin);
                     $defaultPath = $paths[0] . static::TYPE_ELEMENT . DIRECTORY_SEPARATOR;
                     throw new LogicException(sprintf(
                         'You cannot extend an element which does not exist (%s).',
-                        $defaultPath . $name . this._ext
+                        $defaultPath . $name . _ext
                     ));
                 }
                 break;
             case static::TYPE_LAYOUT:
-                $parent = this._getLayoutFileName($name);
+                $parent = _getLayoutFileName($name);
                 break;
             default:
-                $parent = this._getTemplateFileName($name);
+                $parent = _getTemplateFileName($name);
         }
 
-        if ($parent == this._current) {
+        if ($parent == _current) {
             throw new LogicException('You cannot have templates extend themselves.');
         }
-        if (isset(this._parents[$parent]) && this._parents[$parent] == this._current) {
+        if (isset(_parents[$parent]) && _parents[$parent] == _current) {
             throw new LogicException('You cannot have templates extend in a loop.');
         }
-        this._parents[this._current] = $parent;
+        _parents[_current] = $parent;
 
         return this;
     }
@@ -1115,7 +1115,7 @@ class View : EventDispatcherInterface
      */
     function getCurrentType(): string
     {
-        return this._currentType;
+        return _currentType;
     }
 
     /**
@@ -1169,24 +1169,24 @@ class View : EventDispatcherInterface
         if (empty($data)) {
             $data = this.viewVars;
         }
-        this._current = $templateFile;
+        _current = $templateFile;
         $initialBlocks = count(this.Blocks->unclosed());
 
         this.dispatchEvent('View.beforeRenderFile', [$templateFile]);
 
-        $content = this._evaluate($templateFile, $data);
+        $content = _evaluate($templateFile, $data);
 
         $afterEvent = this.dispatchEvent('View.afterRenderFile', [$templateFile, $content]);
         if ($afterEvent->getResult() != null) {
             $content = $afterEvent->getResult();
         }
 
-        if (isset(this._parents[$templateFile])) {
-            this._stack[] = this.fetch('content');
+        if (isset(_parents[$templateFile])) {
+            _stack[] = this.fetch('content');
             this.assign('content', $content);
 
-            $content = this._render(this._parents[$templateFile]);
-            this.assign('content', array_pop(this._stack));
+            $content = _render(_parents[$templateFile]);
+            this.assign('content', array_pop(_stack));
         }
 
         $remainingBlocks = count(this.Blocks->unclosed());
@@ -1236,11 +1236,11 @@ class View : EventDispatcherInterface
      */
     function helpers(): HelperRegistry
     {
-        if (this._helpers == null) {
-            this._helpers = new HelperRegistry(this);
+        if (_helpers == null) {
+            _helpers = new HelperRegistry(this);
         }
 
-        return this._helpers;
+        return _helpers;
     }
 
     /**
@@ -1376,7 +1376,7 @@ class View : EventDispatcherInterface
         $name = str_replace('/', DIRECTORY_SEPARATOR, $name);
 
         if (strpos($name, DIRECTORY_SEPARATOR) == false && $name != '' && $name[0] != '.') {
-            $name = $templatePath . $subDir . this._inflectTemplateFileName($name);
+            $name = $templatePath . $subDir . _inflectTemplateFileName($name);
         } elseif (strpos($name, DIRECTORY_SEPARATOR) != false) {
             if ($name[0] == DIRECTORY_SEPARATOR || $name[1] == ':') {
                 $name = trim($name, DIRECTORY_SEPARATOR);
@@ -1387,11 +1387,11 @@ class View : EventDispatcherInterface
             }
         }
 
-        $name .= this._ext;
-        $paths = this._paths($plugin);
+        $name .= _ext;
+        $paths = _paths($plugin);
         foreach ($paths as $path) {
             if (is_file($path . $name)) {
-                return this._checkFilePath($path . $name, $path);
+                return _checkFilePath($path . $name, $path);
             }
         }
 
@@ -1481,11 +1481,11 @@ class View : EventDispatcherInterface
             $name = this.layout;
         }
         [$plugin, $name] = this.pluginSplit($name);
-        $name .= this._ext;
+        $name .= _ext;
 
         foreach (this.getLayoutPaths($plugin) as $path) {
             if (is_file($path . $name)) {
-                return this._checkFilePath($path . $name, $path);
+                return _checkFilePath($path . $name, $path);
             }
         }
 
@@ -1505,9 +1505,9 @@ class View : EventDispatcherInterface
         if (this.layoutPath) {
             $subDir = this.layoutPath . DIRECTORY_SEPARATOR;
         }
-        $layoutPaths = this._getSubPaths(static::TYPE_LAYOUT . DIRECTORY_SEPARATOR . $subDir);
+        $layoutPaths = _getSubPaths(static::TYPE_LAYOUT . DIRECTORY_SEPARATOR . $subDir);
 
-        foreach (this._paths($plugin) as $path) {
+        foreach (_paths($plugin) as $path) {
             foreach ($layoutPaths as $layoutPath) {
                 yield $path . $layoutPath;
             }
@@ -1525,7 +1525,7 @@ class View : EventDispatcherInterface
     {
         [$plugin, $name] = this.pluginSplit($name, $pluginCheck);
 
-        $name .= this._ext;
+        $name .= _ext;
         foreach (this.getElementPaths($plugin) as $path) {
             if (is_file($path . $name)) {
                 return $path . $name;
@@ -1543,8 +1543,8 @@ class View : EventDispatcherInterface
      */
     protected function getElementPaths(?string $plugin)
     {
-        $elementPaths = this._getSubPaths(static::TYPE_ELEMENT);
-        foreach (this._paths($plugin) as $path) {
+        $elementPaths = _getSubPaths(static::TYPE_ELEMENT);
+        foreach (_paths($plugin) as $path) {
             foreach ($elementPaths as $subdir) {
                 yield $path . $subdir . DIRECTORY_SEPARATOR;
             }
@@ -1591,11 +1591,11 @@ class View : EventDispatcherInterface
     protected function _paths(?string $plugin = null, bool $cached = true): array
     {
         if ($cached == true) {
-            if ($plugin == null && !empty(this._paths)) {
-                return this._paths;
+            if ($plugin == null && !empty(_paths)) {
+                return _paths;
             }
-            if ($plugin != null && isset(this._pathsForPlugin[$plugin])) {
-                return this._pathsForPlugin[$plugin];
+            if ($plugin != null && isset(_pathsForPlugin[$plugin])) {
+                return _pathsForPlugin[$plugin];
             }
         }
         $templatePaths = App::path(static::NAME_TEMPLATE);
@@ -1636,10 +1636,10 @@ class View : EventDispatcherInterface
         );
 
         if ($plugin != null) {
-            return this._pathsForPlugin[$plugin] = $paths;
+            return _pathsForPlugin[$plugin] = $paths;
         }
 
-        return this._paths = $paths;
+        return _paths = $paths;
     }
 
     /**
@@ -1701,22 +1701,22 @@ class View : EventDispatcherInterface
      */
     protected function _renderElement(string $file, array $data, array $options): string
     {
-        $current = this._current;
-        $restore = this._currentType;
-        this._currentType = static::TYPE_ELEMENT;
+        $current = _current;
+        $restore = _currentType;
+        _currentType = static::TYPE_ELEMENT;
 
         if ($options['callbacks']) {
             this.dispatchEvent('View.beforeRender', [$file]);
         }
 
-        $element = this._render($file, array_merge(this.viewVars, $data));
+        $element = _render($file, array_merge(this.viewVars, $data));
 
         if ($options['callbacks']) {
             this.dispatchEvent('View.afterRender', [$file, $element]);
         }
 
-        this._currentType = $restore;
-        this._current = $current;
+        _currentType = $restore;
+        _current = $current;
 
         return $element;
     }

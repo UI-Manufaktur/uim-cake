@@ -77,7 +77,7 @@ trait CellTrait
         }
         $options = ['action' => $action, 'args' => $data] + $options;
 
-        return this._createCell($className, $action, $plugin, $options);
+        return _createCell($className, $action, $plugin, $options);
     }
 
     /**

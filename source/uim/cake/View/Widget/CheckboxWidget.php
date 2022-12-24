@@ -60,17 +60,17 @@ class CheckboxWidget : BasicWidget
     {
         $data += this.mergeDefaults($data, $context);
 
-        if (this._isChecked($data)) {
+        if (_isChecked($data)) {
             $data['checked'] = true;
         }
         unset($data['val']);
 
-        $attrs = this._templates->formatAttributes(
+        $attrs = _templates->formatAttributes(
             $data,
             ['name', 'value']
         );
 
-        return this._templates->format('checkbox', [
+        return _templates->format('checkbox', [
             'name' => $data['name'],
             'value' => $data['value'],
             'templateVars' => $data['templateVars'],

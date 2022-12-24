@@ -56,7 +56,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function isPresenceRequired()
     {
-        return this._validatePresent;
+        return _validatePresent;
     }
 
     /**
@@ -67,7 +67,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function requirePresence($validatePresent)
     {
-        this._validatePresent = $validatePresent;
+        _validatePresent = $validatePresent;
 
         return this;
     }
@@ -79,7 +79,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function isEmptyAllowed()
     {
-        return this._allowEmpty;
+        return _allowEmpty;
     }
 
     /**
@@ -91,7 +91,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function allowEmpty($allowEmpty)
     {
-        this._allowEmpty = $allowEmpty;
+        _allowEmpty = $allowEmpty;
 
         return this;
     }
@@ -104,8 +104,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function rule(string $name): ?ValidationRule
     {
-        if (!empty(this._rules[$name])) {
-            return this._rules[$name];
+        if (!empty(_rules[$name])) {
+            return _rules[$name];
         }
 
         return null;
@@ -118,7 +118,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function rules(): array
     {
-        return this._rules;
+        return _rules;
     }
 
     /**
@@ -141,7 +141,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
         if (!($rule instanceof ValidationRule)) {
             $rule = new ValidationRule($rule);
         }
-        this._rules[$name] = $rule;
+        _rules[$name] = $rule;
 
         return this;
     }
@@ -162,7 +162,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function remove(string $name)
     {
-        unset(this._rules[$name]);
+        unset(_rules[$name]);
 
         return this;
     }
@@ -175,7 +175,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function offsetExists($index): bool
     {
-        return isset(this._rules[$index]);
+        return isset(_rules[$index]);
     }
 
     /**
@@ -186,7 +186,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function offsetGet($index): ValidationRule
     {
-        return this._rules[$index];
+        return _rules[$index];
     }
 
     /**
@@ -209,7 +209,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function offsetUnset($index): void
     {
-        unset(this._rules[$index]);
+        unset(_rules[$index]);
     }
 
     /**
@@ -219,7 +219,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function getIterator(): Traversable
     {
-        return new ArrayIterator(this._rules);
+        return new ArrayIterator(_rules);
     }
 
     /**
@@ -229,6 +229,6 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      */
     function count(): int
     {
-        return count(this._rules);
+        return count(_rules);
     }
 }

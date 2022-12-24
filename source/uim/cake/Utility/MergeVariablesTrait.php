@@ -53,7 +53,7 @@ trait MergeVariablesTrait
             if (thisValue == null || thisValue == false) {
                 continue;
             }
-            this._mergeProperty($property, $parents, $options);
+            _mergeProperty($property, $parents, $options);
         }
     }
 
@@ -88,7 +88,7 @@ trait MergeVariablesTrait
             if (!is_array($parentProperty)) {
                 continue;
             }
-            thisValue = this._mergePropertyData(thisValue, $parentProperty, $isAssoc);
+            thisValue = _mergePropertyData(thisValue, $parentProperty, $isAssoc);
         }
         this.{$property} = thisValue;
     }

@@ -55,7 +55,7 @@ class BasicWidget : WidgetInterface
      */
     public this(StringTemplate $templates)
     {
-        this._templates = $templates;
+        _templates = $templates;
     }
 
     /**
@@ -99,11 +99,11 @@ class BasicWidget : WidgetInterface
             }
         }
 
-        return this._templates->format('input', [
+        return _templates->format('input', [
             'name' => $data['name'],
             'type' => $data['type'],
             'templateVars' => $data['templateVars'],
-            'attrs' => this._templates->formatAttributes(
+            'attrs' => _templates->formatAttributes(
                 $data,
                 ['name', 'type']
             ),
