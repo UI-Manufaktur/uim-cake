@@ -19,7 +19,7 @@ namespace Cake\Http\Middleware;
 use Cake\Http\Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -40,9 +40,9 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Neither the arguments nor the return value need be typehinted.
  *
  * @deprecated 4.3.0 "Double pass" middleware are deprecated.
- *   Use a `Closure` or a class which implements `Psr\Http\Server\MiddlewareInterface` instead.
+ *   Use a `Closure` or a class which implements `Psr\Http\Server\IMiddleware` instead.
  */
-class DoublePassDecoratorMiddleware implements MiddlewareInterface
+class DoublePassDecoratorMiddleware implements IMiddleware
 {
     /**
      * A closure or invokable object.
@@ -60,7 +60,7 @@ class DoublePassDecoratorMiddleware implements MiddlewareInterface
     {
         deprecationWarning(
             '"Double pass" middleware are deprecated. Use a `Closure` with the signature of'
-            . ' `($request, $handler)` or a class which implements `Psr\Http\Server\MiddlewareInterface` instead.',
+            . ' `($request, $handler)` or a class which implements `Psr\Http\Server\IMiddleware` instead.',
             0
         );
         this->callable = $callable;

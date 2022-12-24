@@ -19,7 +19,7 @@ namespace Cake\Http\Middleware;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -36,7 +36,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * such that it will operate as PSR-15 middleware.
  */
-class ClosureDecoratorMiddleware implements MiddlewareInterface
+class ClosureDecoratorMiddleware implements IMiddleware
 {
     /**
      * A Closure.

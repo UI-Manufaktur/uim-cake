@@ -31,14 +31,14 @@ use Exception;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Applies routing rules to the request and creates the controller
  * instance if possible.
  */
-class RoutingMiddleware implements MiddlewareInterface
+class RoutingMiddleware implements IMiddleware
 {
     /**
      * Key used to store the route collection in the cache engine

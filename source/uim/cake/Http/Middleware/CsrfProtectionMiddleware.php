@@ -26,7 +26,7 @@ use Cake\Utility\Security;
 use InvalidArgumentException;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use RuntimeException;
 
@@ -46,7 +46,7 @@ use RuntimeException;
  *
  * @see https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
  */
-class CsrfProtectionMiddleware implements MiddlewareInterface
+class CsrfProtectionMiddleware implements IMiddleware
 {
     /**
      * Config for the CSRF handling.

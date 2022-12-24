@@ -22,7 +22,7 @@ use Cake\Utility\Inflector;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use SplFileInfo;
 
@@ -33,7 +33,7 @@ use SplFileInfo;
  * has sub-optimal performance when compared to serving files
  * with a real webserver.
  */
-class AssetMiddleware implements MiddlewareInterface
+class AssetMiddleware implements IMiddleware
 {
     /**
      * The amount of time to cache the asset.

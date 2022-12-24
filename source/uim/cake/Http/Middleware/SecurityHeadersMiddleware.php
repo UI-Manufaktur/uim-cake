@@ -19,7 +19,7 @@ namespace Cake\Http\Middleware;
 use InvalidArgumentException;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -27,7 +27,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * @link https://book.cakephp.org/4/en/controllers/middleware.html#security-header-middleware
  */
-class SecurityHeadersMiddleware implements MiddlewareInterface
+class SecurityHeadersMiddleware implements IMiddleware
 {
     /** @var string X-Content-Type-Option nosniff */
     public const NOSNIFF = 'nosniff';

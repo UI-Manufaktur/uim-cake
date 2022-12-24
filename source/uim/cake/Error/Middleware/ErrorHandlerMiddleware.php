@@ -28,7 +28,7 @@ use InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
@@ -38,7 +38,7 @@ use Throwable;
  * Traps exceptions and converts them into HTML or content-type appropriate
  * error pages using the CakePHP ExceptionRenderer.
  */
-class ErrorHandlerMiddleware implements MiddlewareInterface
+class ErrorHandlerMiddleware implements IMiddleware
 {
     use InstanceConfigTrait;
 

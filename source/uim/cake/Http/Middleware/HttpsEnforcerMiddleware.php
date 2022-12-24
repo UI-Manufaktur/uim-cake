@@ -21,14 +21,14 @@ use Cake\Http\Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 use UnexpectedValueException;
 
 /**
  * Enforces use of HTTPS (SSL) for requests.
  */
-class HttpsEnforcerMiddleware implements MiddlewareInterface
+class HttpsEnforcerMiddleware implements IMiddleware
 {
     /**
      * Configuration.

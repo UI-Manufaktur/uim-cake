@@ -19,7 +19,7 @@ use Cake\I18n\I18n;
 use Locale;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\IMiddleware;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -27,7 +27,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Accept-Language header. The default will only be set if it
  * matches the list of passed valid locales.
  */
-class LocaleSelectorMiddleware implements MiddlewareInterface
+class LocaleSelectorMiddleware implements IMiddleware
 {
     /**
      * List of valid locales for the request
