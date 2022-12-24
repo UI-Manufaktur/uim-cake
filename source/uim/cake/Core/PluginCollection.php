@@ -73,9 +73,9 @@ class PluginCollection implements Iterator, Countable
     public this(array $plugins = [])
     {
         foreach ($plugins as $plugin) {
-            this->add($plugin);
+            this.add($plugin);
         }
-        this->loadConfig();
+        this.loadConfig();
     }
 
     /**
@@ -125,7 +125,7 @@ class PluginCollection implements Iterator, Countable
         // Ensure plugin config is loaded each time. This is necessary primarily
         // for testing because the Configure::clear() call in TestCase::tearDown()
         // wipes out all configuration including plugin paths config.
-        this->loadConfig();
+        this.loadConfig();
 
         $path = Configure::read('plugins.' . $name);
         if ($path) {
@@ -154,8 +154,8 @@ class PluginCollection implements Iterator, Countable
     function add(PluginInterface $plugin)
     {
         $name = $plugin->getName();
-        this->plugins[$name] = $plugin;
-        this->names = array_keys(this->plugins);
+        this.plugins[$name] = $plugin;
+        this.names = array_keys(this.plugins);
 
         return this;
     }
@@ -168,8 +168,8 @@ class PluginCollection implements Iterator, Countable
      */
     function remove(string $name)
     {
-        unset(this->plugins[$name]);
-        this->names = array_keys(this->plugins);
+        unset(this.plugins[$name]);
+        this.names = array_keys(this.plugins);
 
         return this;
     }
@@ -181,10 +181,10 @@ class PluginCollection implements Iterator, Countable
      */
     function clear()
     {
-        this->plugins = [];
-        this->names = [];
-        this->positions = [];
-        this->loopDepth = -1;
+        this.plugins = [];
+        this.names = [];
+        this.positions = [];
+        this.loopDepth = -1;
 
         return this;
     }
@@ -197,7 +197,7 @@ class PluginCollection implements Iterator, Countable
      */
     function has(string $name): bool
     {
-        return isset(this->plugins[$name]);
+        return isset(this.plugins[$name]);
     }
 
     /**
@@ -212,12 +212,12 @@ class PluginCollection implements Iterator, Countable
      */
     function get(string $name): PluginInterface
     {
-        if (this->has($name)) {
-            return this->plugins[$name];
+        if (this.has($name)) {
+            return this.plugins[$name];
         }
 
-        $plugin = this->create($name);
-        this->add($plugin);
+        $plugin = this.create($name);
+        this.add($plugin);
 
         return $plugin;
     }
@@ -254,7 +254,7 @@ class PluginCollection implements Iterator, Countable
             if (!class_exists($className)) {
                 $className = BasePlugin::class;
                 if (empty($config['path'])) {
-                    $config['path'] = this->findPath($name);
+                    $config['path'] = this.findPath($name);
                 }
             }
         }
@@ -272,7 +272,7 @@ class PluginCollection implements Iterator, Countable
      */
     function count(): int
     {
-        return count(this->plugins);
+        return count(this.plugins);
     }
 
     /**
@@ -282,7 +282,7 @@ class PluginCollection implements Iterator, Countable
      */
     function next(): void
     {
-        this->positions[this->loopDepth]++;
+        this.positions[this.loopDepth]++;
     }
 
     /**
@@ -292,7 +292,7 @@ class PluginCollection implements Iterator, Countable
      */
     function key(): string
     {
-        return this->names[this->positions[this->loopDepth]];
+        return this.names[this.positions[this.loopDepth]];
     }
 
     /**
@@ -302,10 +302,10 @@ class PluginCollection implements Iterator, Countable
      */
     function current(): PluginInterface
     {
-        $position = this->positions[this->loopDepth];
-        $name = this->names[$position];
+        $position = this.positions[this.loopDepth];
+        $name = this.names[$position];
 
-        return this->plugins[$name];
+        return this.plugins[$name];
     }
 
     /**
@@ -315,8 +315,8 @@ class PluginCollection implements Iterator, Countable
      */
     function rewind(): void
     {
-        this->positions[] = 0;
-        this->loopDepth += 1;
+        this.positions[] = 0;
+        this.loopDepth += 1;
     }
 
     /**
@@ -326,10 +326,10 @@ class PluginCollection implements Iterator, Countable
      */
     function valid(): bool
     {
-        $valid = isset(this->names[this->positions[this->loopDepth]]);
+        $valid = isset(this.names[this.positions[this.loopDepth]]);
         if (!$valid) {
-            array_pop(this->positions);
-            this->loopDepth -= 1;
+            array_pop(this.positions);
+            this.loopDepth -= 1;
         }
 
         return $valid;

@@ -101,10 +101,10 @@ abstract class Driver implements DriverInterface
                 'Please pass "username" instead of "login" for connecting to the database'
             );
         }
-        $config += this->_baseConfig;
-        this->_config = $config;
+        $config += this._baseConfig;
+        this._config = $config;
         if (!empty($config['quoteIdentifiers'])) {
-            this->enableAutoQuoting();
+            this.enableAutoQuoting();
         }
     }
 
@@ -118,7 +118,7 @@ abstract class Driver implements DriverInterface
     protected function _connect(string $dsn, array $config): bool
     {
         $action = function () use ($dsn, $config) {
-            this->setConnection(new PDO(
+            this.setConnection(new PDO(
                 $dsn,
                 $config['username'] ?: null,
                 $config['password'] ?: null,
@@ -139,7 +139,7 @@ abstract class Driver implements DriverInterface
                 $e
             );
         } finally {
-            this->connectRetries = $retry->getRetries();
+            this.connectRetries = $retry->getRetries();
         }
 
         return true;
@@ -156,8 +156,8 @@ abstract class Driver implements DriverInterface
     function disconnect(): void
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
-        this->_connection = null;
-        this->_version = null;
+        this._connection = null;
+        this._version = null;
     }
 
     /**
@@ -167,12 +167,12 @@ abstract class Driver implements DriverInterface
      */
     function version(): string
     {
-        if (this->_version == null) {
-            this->connect();
-            this->_version = (string)this->_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
+        if (this._version == null) {
+            this.connect();
+            this._version = (string)this._connection->getAttribute(PDO::ATTR_SERVER_VERSION);
         }
 
-        return this->_version;
+        return this._version;
     }
 
     /**
@@ -182,14 +182,14 @@ abstract class Driver implements DriverInterface
      */
     function getConnection()
     {
-        if (this->_connection == null) {
+        if (this._connection == null) {
             throw new MissingConnectionException([
                 'driver' => App::shortName(static::class, 'Database/Driver'),
                 'reason' => 'Unknown',
             ]);
         }
 
-        return this->_connection;
+        return this._connection;
     }
 
     /**
@@ -201,7 +201,7 @@ abstract class Driver implements DriverInterface
      */
     function setConnection($connection)
     {
-        this->_connection = $connection;
+        this._connection = $connection;
 
         return this;
     }
@@ -216,8 +216,8 @@ abstract class Driver implements DriverInterface
      */
     function prepare($query): StatementInterface
     {
-        this->connect();
-        $statement = this->_connection->prepare($query instanceof Query ? $query->sql() : $query);
+        this.connect();
+        $statement = this._connection->prepare($query instanceof Query ? $query->sql() : $query);
 
         return new PDOStatement($statement, this);
     }
@@ -227,12 +227,12 @@ abstract class Driver implements DriverInterface
      */
     function beginTransaction(): bool
     {
-        this->connect();
-        if (this->_connection->inTransaction()) {
+        this.connect();
+        if (this._connection->inTransaction()) {
             return true;
         }
 
-        return this->_connection->beginTransaction();
+        return this._connection->beginTransaction();
     }
 
     /**
@@ -240,12 +240,12 @@ abstract class Driver implements DriverInterface
      */
     function commitTransaction(): bool
     {
-        this->connect();
-        if (!this->_connection->inTransaction()) {
+        this.connect();
+        if (!this._connection->inTransaction()) {
             return false;
         }
 
-        return this->_connection->commit();
+        return this._connection->commit();
     }
 
     /**
@@ -253,12 +253,12 @@ abstract class Driver implements DriverInterface
      */
     function rollbackTransaction(): bool
     {
-        this->connect();
-        if (!this->_connection->inTransaction()) {
+        this.connect();
+        if (!this._connection->inTransaction()) {
             return false;
         }
 
-        return this->_connection->rollBack();
+        return this._connection->rollBack();
     }
 
     /**
@@ -268,9 +268,9 @@ abstract class Driver implements DriverInterface
      */
     function inTransaction(): bool
     {
-        this->connect();
+        this.connect();
 
-        return this->_connection->inTransaction();
+        return this._connection->inTransaction();
     }
 
     /**
@@ -280,7 +280,7 @@ abstract class Driver implements DriverInterface
     {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
-        return this->supports(static::FEATURE_SAVEPOINT);
+        return this.supports(static::FEATURE_SAVEPOINT);
     }
 
     /**
@@ -293,7 +293,7 @@ abstract class Driver implements DriverInterface
     {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
-        return this->supports(static::FEATURE_CTE);
+        return this.supports(static::FEATURE_CTE);
     }
 
     /**
@@ -301,9 +301,9 @@ abstract class Driver implements DriverInterface
      */
     function quote($value, $type = PDO::PARAM_STR): string
     {
-        this->connect();
+        this.connect();
 
-        return this->_connection->quote((string)$value, $type);
+        return this._connection->quote((string)$value, $type);
     }
 
     /**
@@ -316,7 +316,7 @@ abstract class Driver implements DriverInterface
     {
         deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
 
-        return this->supports(static::FEATURE_QUOTE);
+        return this.supports(static::FEATURE_QUOTE);
     }
 
     /**
@@ -367,7 +367,7 @@ abstract class Driver implements DriverInterface
             return (string)$value;
         }
 
-        return this->_connection->quote((string)$value, PDO::PARAM_STR);
+        return this._connection->quote((string)$value, PDO::PARAM_STR);
     }
 
     /**
@@ -375,7 +375,7 @@ abstract class Driver implements DriverInterface
      */
     function schema(): string
     {
-        return this->_config['schema'];
+        return this._config['schema'];
     }
 
     /**
@@ -383,13 +383,13 @@ abstract class Driver implements DriverInterface
      */
     function lastInsertId(?string $table = null, ?string $column = null)
     {
-        this->connect();
+        this.connect();
 
-        if (this->_connection instanceof PDO) {
-            return this->_connection->lastInsertId($table);
+        if (this._connection instanceof PDO) {
+            return this._connection->lastInsertId($table);
         }
 
-        return this->_connection->lastInsertId($table);
+        return this._connection->lastInsertId($table);
     }
 
     /**
@@ -397,11 +397,11 @@ abstract class Driver implements DriverInterface
      */
     function isConnected(): bool
     {
-        if (this->_connection == null) {
+        if (this._connection == null) {
             $connected = false;
         } else {
             try {
-                $connected = (bool)this->_connection->query('SELECT 1');
+                $connected = (bool)this._connection->query('SELECT 1');
             } catch (PDOException $e) {
                 $connected = false;
             }
@@ -415,7 +415,7 @@ abstract class Driver implements DriverInterface
      */
     function enableAutoQuoting(bool $enable = true)
     {
-        this->_autoQuoting = $enable;
+        this._autoQuoting = $enable;
 
         return this;
     }
@@ -425,7 +425,7 @@ abstract class Driver implements DriverInterface
      */
     function disableAutoQuoting()
     {
-        this->_autoQuoting = false;
+        this._autoQuoting = false;
 
         return this;
     }
@@ -435,7 +435,7 @@ abstract class Driver implements DriverInterface
      */
     function isAutoQuotingEnabled(): bool
     {
-        return this->_autoQuoting;
+        return this._autoQuoting;
     }
 
     /**
@@ -463,8 +463,8 @@ abstract class Driver implements DriverInterface
      */
     function compileQuery(Query $query, ValueBinder $binder): array
     {
-        $processor = this->newCompiler();
-        $translator = this->queryTranslator($query->type());
+        $processor = this.newCompiler();
+        $translator = this.queryTranslator($query->type());
         $query = $translator($query);
 
         return [$query, $processor->compile($query, $binder)];
@@ -484,9 +484,9 @@ abstract class Driver implements DriverInterface
     function newTableSchema(string $table, array $columns = []): TableSchema
     {
         $className = TableSchema::class;
-        if (isset(this->_config['tableSchema'])) {
+        if (isset(this._config['tableSchema'])) {
             /** @var class-string<\Cake\Database\Schema\TableSchema> $className */
-            $className = this->_config['tableSchema'];
+            $className = this._config['tableSchema'];
         }
 
         return new $className($table, $columns);
@@ -510,7 +510,7 @@ abstract class Driver implements DriverInterface
      */
     function getConnectRetries(): int
     {
-        return this->connectRetries;
+        return this.connectRetries;
     }
 
     /**
@@ -519,7 +519,7 @@ abstract class Driver implements DriverInterface
     function __destruct()
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
-        this->_connection = null;
+        this._connection = null;
     }
 
     /**
@@ -531,7 +531,7 @@ abstract class Driver implements DriverInterface
     function __debugInfo(): array
     {
         return [
-            'connected' => this->_connection != null,
+            'connected' => this._connection != null,
         ];
     }
 }
