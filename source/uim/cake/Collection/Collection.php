@@ -52,7 +52,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      */
     function serialize(): string
     {
-        return serialize(this->buffered());
+        return serialize(this.buffered());
     }
 
     /**
@@ -62,7 +62,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      */
     function __serialize(): array
     {
-        return this->buffered()->toArray();
+        return this.buffered()->toArray();
     }
 
     /**
@@ -73,7 +73,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      */
     function unserialize($collection): void
     {
-        this->__construct(unserialize($collection));
+        this.__construct(unserialize($collection));
     }
 
     /**
@@ -84,7 +84,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      */
     function __unserialize(array $data): void
     {
-        this->__construct($data);
+        this.__construct($data);
     }
 
     /**
@@ -94,7 +94,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      */
     function count(): int
     {
-        $traversable = this->optimizeUnwrap();
+        $traversable = this.optimizeUnwrap();
 
         if (is_array($traversable)) {
             return count($traversable);
@@ -110,7 +110,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
      */
     function countKeys(): int
     {
-        return count(this->toArray());
+        return count(this.toArray());
     }
 
     /**
@@ -122,7 +122,7 @@ class Collection extends IteratorIterator implements CollectionInterface, Serial
     function __debugInfo(): array
     {
         try {
-            $count = this->count();
+            $count = this.count();
         } catch (Exception $e) {
             $count = 'An exception occurred while getting count';
         }

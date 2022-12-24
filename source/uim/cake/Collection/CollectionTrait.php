@@ -65,7 +65,7 @@ trait CollectionTrait
      */
     function each(callable $callback)
     {
-        foreach (this->optimizeUnwrap() as $k => $v) {
+        foreach (this.optimizeUnwrap() as $k => $v) {
             $callback($v, $k);
         }
 
@@ -83,7 +83,7 @@ trait CollectionTrait
             };
         }
 
-        return new FilterIterator(this->unwrap(), $callback);
+        return new FilterIterator(this.unwrap(), $callback);
     }
 
     /**
@@ -91,7 +91,7 @@ trait CollectionTrait
      */
     function reject(callable $callback): CollectionInterface
     {
-        return new FilterIterator(this->unwrap(), function ($key, $value, $items) use ($callback) {
+        return new FilterIterator(this.unwrap(), function ($key, $value, $items) use ($callback) {
             return !$callback($key, $value, $items);
         });
     }
@@ -101,7 +101,7 @@ trait CollectionTrait
      */
     function every(callable $callback): bool
     {
-        foreach (this->optimizeUnwrap() as $key => $value) {
+        foreach (this.optimizeUnwrap() as $key => $value) {
             if (!$callback($value, $key)) {
                 return false;
             }
@@ -115,7 +115,7 @@ trait CollectionTrait
      */
     function some(callable $callback): bool
     {
-        foreach (this->optimizeUnwrap() as $key => $value) {
+        foreach (this.optimizeUnwrap() as $key => $value) {
             if ($callback($value, $key) == true) {
                 return true;
             }
@@ -129,7 +129,7 @@ trait CollectionTrait
      */
     function contains($value): bool
     {
-        foreach (this->optimizeUnwrap() as $v) {
+        foreach (this.optimizeUnwrap() as $v) {
             if ($value == $v) {
                 return true;
             }
@@ -143,7 +143,7 @@ trait CollectionTrait
      */
     function map(callable $callback): CollectionInterface
     {
-        return new ReplaceIterator(this->unwrap(), $callback);
+        return new ReplaceIterator(this.unwrap(), $callback);
     }
 
     /**
@@ -157,7 +157,7 @@ trait CollectionTrait
         }
 
         $result = $initial;
-        foreach (this->optimizeUnwrap() as $k => $value) {
+        foreach (this.optimizeUnwrap() as $k => $value) {
             if ($isFirst) {
                 $result = $value;
                 $isFirst = false;
@@ -174,7 +174,7 @@ trait CollectionTrait
      */
     function extract($path): CollectionInterface
     {
-        $extractor = new ExtractIterator(this->unwrap(), $path);
+        $extractor = new ExtractIterator(this.unwrap(), $path);
         if (is_string($path) && strpos($path, '{*}') != false) {
             $extractor = $extractor
                 ->filter(function ($data) {
@@ -191,7 +191,7 @@ trait CollectionTrait
      */
     function max($path, int $sort = \SORT_NUMERIC)
     {
-        return (new SortIterator(this->unwrap(), $path, \SORT_DESC, $sort))->first();
+        return (new SortIterator(this.unwrap(), $path, \SORT_DESC, $sort))->first();
     }
 
     /**
@@ -199,7 +199,7 @@ trait CollectionTrait
      */
     function min($path, int $sort = \SORT_NUMERIC)
     {
-        return (new SortIterator(this->unwrap(), $path, \SORT_ASC, $sort))->first();
+        return (new SortIterator(this.unwrap(), $path, \SORT_ASC, $sort))->first();
     }
 
     /**
@@ -256,7 +256,7 @@ trait CollectionTrait
      */
     function sortBy($path, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC): CollectionInterface
     {
-        return new SortIterator(this->unwrap(), $path, $order, $sort);
+        return new SortIterator(this.unwrap(), $path, $order, $sort);
     }
 
     /**
@@ -264,9 +264,9 @@ trait CollectionTrait
      */
     function groupBy($path): CollectionInterface
     {
-        $callback = this->_propertyExtractor($path);
+        $callback = this._propertyExtractor($path);
         $group = [];
-        foreach (this->optimizeUnwrap() as $value) {
+        foreach (this.optimizeUnwrap() as $value) {
             $pathValue = $callback($value);
             if ($pathValue == null) {
                 throw new InvalidArgumentException(
@@ -277,7 +277,7 @@ trait CollectionTrait
             $group[$pathValue][] = $value;
         }
 
-        return this->newCollection($group);
+        return this.newCollection($group);
     }
 
     /**
@@ -285,9 +285,9 @@ trait CollectionTrait
      */
     function indexBy($path): CollectionInterface
     {
-        $callback = this->_propertyExtractor($path);
+        $callback = this._propertyExtractor($path);
         $group = [];
-        foreach (this->optimizeUnwrap() as $value) {
+        foreach (this.optimizeUnwrap() as $value) {
             $pathValue = $callback($value);
             if ($pathValue == null) {
                 throw new InvalidArgumentException(
@@ -298,7 +298,7 @@ trait CollectionTrait
             $group[$pathValue] = $value;
         }
 
-        return this->newCollection($group);
+        return this.newCollection($group);
     }
 
     /**
@@ -306,7 +306,7 @@ trait CollectionTrait
      */
     function countBy($path): CollectionInterface
     {
-        $callback = this->_propertyExtractor($path);
+        $callback = this._propertyExtractor($path);
 
         $mapper = function ($value, $key, $mr) use ($callback): void {
             /** @var \Cake\Collection\Iterator\MapReduce $mr */
@@ -318,7 +318,7 @@ trait CollectionTrait
             $mr->emit(count($values), $key);
         };
 
-        return this->newCollection(new MapReduce(this->unwrap(), $mapper, $reducer));
+        return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
     }
 
     /**
@@ -327,12 +327,12 @@ trait CollectionTrait
     function sumOf($path = null)
     {
         if ($path == null) {
-            return array_sum(this->toList());
+            return array_sum(this.toList());
         }
 
-        $callback = this->_propertyExtractor($path);
+        $callback = this._propertyExtractor($path);
         $sum = 0;
-        foreach (this->optimizeUnwrap() as $k => $v) {
+        foreach (this.optimizeUnwrap() as $k => $v) {
             $sum += $callback($v, $k);
         }
 
@@ -344,10 +344,10 @@ trait CollectionTrait
      */
     function shuffle(): CollectionInterface
     {
-        $items = this->toList();
+        $items = this.toList();
         shuffle($items);
 
-        return this->newCollection($items);
+        return this.newCollection($items);
     }
 
     /**
@@ -355,7 +355,7 @@ trait CollectionTrait
      */
     function sample(int $length = 10): CollectionInterface
     {
-        return this->newCollection(new LimitIterator(this->shuffle(), 0, $length));
+        return this.newCollection(new LimitIterator(this.shuffle(), 0, $length));
     }
 
     /**
@@ -363,7 +363,7 @@ trait CollectionTrait
      */
     function take(int $length = 1, int $offset = 0): CollectionInterface
     {
-        return this->newCollection(new LimitIterator(this, $offset, $length));
+        return this.newCollection(new LimitIterator(this, $offset, $length));
     }
 
     /**
@@ -371,7 +371,7 @@ trait CollectionTrait
      */
     function skip(int $length): CollectionInterface
     {
-        return this->newCollection(new LimitIterator(this, $length));
+        return this.newCollection(new LimitIterator(this, $length));
     }
 
     /**
@@ -379,7 +379,7 @@ trait CollectionTrait
      */
     function match(array $conditions): CollectionInterface
     {
-        return this->filter(this->_createMatcherFilter($conditions));
+        return this.filter(this._createMatcherFilter($conditions));
     }
 
     /**
@@ -387,7 +387,7 @@ trait CollectionTrait
      */
     function firstMatch(array $conditions)
     {
-        return this->match($conditions)->first();
+        return this.match($conditions)->first();
     }
 
     /**
@@ -406,7 +406,7 @@ trait CollectionTrait
      */
     function last()
     {
-        $iterator = this->optimizeUnwrap();
+        $iterator = this.optimizeUnwrap();
         if (is_array($iterator)) {
             return array_pop($iterator);
         }
@@ -437,21 +437,21 @@ trait CollectionTrait
             throw new InvalidArgumentException('The takeLast method requires a number greater than 0.');
         }
 
-        $iterator = this->optimizeUnwrap();
+        $iterator = this.optimizeUnwrap();
         if (is_array($iterator)) {
-            return this->newCollection(array_slice($iterator, $length * -1));
+            return this.newCollection(array_slice($iterator, $length * -1));
         }
 
         if ($iterator instanceof Countable) {
             $count = count($iterator);
 
             if ($count == 0) {
-                return this->newCollection([]);
+                return this.newCollection([]);
             }
 
             $iterator = new LimitIterator($iterator, max(0, $count - $length), $length);
 
-            return this->newCollection($iterator);
+            return this.newCollection($iterator);
         }
 
         $generator = function ($iterator, $length) {
@@ -524,7 +524,7 @@ trait CollectionTrait
             }
         };
 
-        return this->newCollection($generator($iterator, $length));
+        return this.newCollection($generator($iterator, $length));
     }
 
     /**
@@ -533,10 +533,10 @@ trait CollectionTrait
     function append($items): CollectionInterface
     {
         $list = new AppendIterator();
-        $list->append(this->unwrap());
-        $list->append(this->newCollection($items)->unwrap());
+        $list->append(this.unwrap());
+        $list->append(this.newCollection($items)->unwrap());
 
-        return this->newCollection($list);
+        return this.newCollection($list);
     }
 
     /**
@@ -550,7 +550,7 @@ trait CollectionTrait
             $data = [$item];
         }
 
-        return this->append($data);
+        return this.append($data);
     }
 
     /**
@@ -558,7 +558,7 @@ trait CollectionTrait
      */
     function prepend($items): CollectionInterface
     {
-        return this->newCollection($items)->append(this);
+        return this.newCollection($items)->append(this);
     }
 
     /**
@@ -572,7 +572,7 @@ trait CollectionTrait
             $data = [$item];
         }
 
-        return this->prepend($data);
+        return this.prepend($data);
     }
 
     /**
@@ -581,9 +581,9 @@ trait CollectionTrait
     function combine($keyPath, $valuePath, $groupPath = null): CollectionInterface
     {
         $options = [
-            'keyPath' => this->_propertyExtractor($keyPath),
-            'valuePath' => this->_propertyExtractor($valuePath),
-            'groupPath' => $groupPath ? this->_propertyExtractor($groupPath) : null,
+            'keyPath' => this._propertyExtractor($keyPath),
+            'valuePath' => this._propertyExtractor($valuePath),
+            'groupPath' => $groupPath ? this._propertyExtractor($groupPath) : null,
         ];
 
         $mapper = function ($value, $key, MapReduce $mapReduce) use ($options) {
@@ -611,7 +611,7 @@ trait CollectionTrait
             $mapReduce->emit($result, $key);
         };
 
-        return this->newCollection(new MapReduce(this->unwrap(), $mapper, $reducer));
+        return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
     }
 
     /**
@@ -620,8 +620,8 @@ trait CollectionTrait
     function nest($idPath, $parentPath, string $nestingKey = 'children'): CollectionInterface
     {
         $parents = [];
-        $idPath = this->_propertyExtractor($idPath);
-        $parentPath = this->_propertyExtractor($parentPath);
+        $idPath = this._propertyExtractor($idPath);
+        $parentPath = this._propertyExtractor($parentPath);
         $isObject = true;
 
         $mapper = function ($row, $key, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey): void {
@@ -655,7 +655,7 @@ trait CollectionTrait
             $parents[$key][$nestingKey] = $children;
         };
 
-        return this->newCollection(new MapReduce(this->unwrap(), $mapper, $reducer))
+        return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer))
             ->map(function ($value) use (&$isObject) {
                 /** @var \ArrayIterator $value */
                 return $isObject ? $value : $value->getArrayCopy();
@@ -667,7 +667,7 @@ trait CollectionTrait
      */
     function insert(string $path, $values): CollectionInterface
     {
-        return new InsertIterator(this->unwrap(), $path, $values);
+        return new InsertIterator(this.unwrap(), $path, $values);
     }
 
     /**
@@ -675,7 +675,7 @@ trait CollectionTrait
      */
     function toArray(bool $keepKeys = true): array
     {
-        $iterator = this->unwrap();
+        $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
             $items = $iterator->getArrayCopy();
 
@@ -695,7 +695,7 @@ trait CollectionTrait
      */
     function toList(): array
     {
-        return this->toArray(false);
+        return this.toArray(false);
     }
 
     /**
@@ -703,7 +703,7 @@ trait CollectionTrait
      */
     function jsonSerialize(): array
     {
-        return this->toArray();
+        return this.toArray();
     }
 
     /**
@@ -711,7 +711,7 @@ trait CollectionTrait
      */
     function compile(bool $keepKeys = true): CollectionInterface
     {
-        return this->newCollection(this->toArray($keepKeys));
+        return this.newCollection(this.toArray($keepKeys));
     }
 
     /**
@@ -720,12 +720,12 @@ trait CollectionTrait
     function lazy(): CollectionInterface
     {
         $generator = function () {
-            foreach (this->unwrap() as $k => $v) {
+            foreach (this.unwrap() as $k => $v) {
                 yield $k => $v;
             }
         };
 
-        return this->newCollection($generator());
+        return this.newCollection($generator());
     }
 
     /**
@@ -733,7 +733,7 @@ trait CollectionTrait
      */
     function buffered(): CollectionInterface
     {
-        return new BufferedIterator(this->unwrap());
+        return new BufferedIterator(this.unwrap());
     }
 
     /**
@@ -770,10 +770,10 @@ trait CollectionTrait
     function stopWhen($condition): CollectionInterface
     {
         if (!is_callable($condition)) {
-            $condition = this->_createMatcherFilter($condition);
+            $condition = this._createMatcherFilter($condition);
         }
 
-        return new StoppableIterator(this->unwrap(), $condition);
+        return new StoppableIterator(this.unwrap(), $condition);
     }
 
     /**
@@ -787,9 +787,9 @@ trait CollectionTrait
             };
         }
 
-        return this->newCollection(
+        return this.newCollection(
             new RecursiveIteratorIterator(
-                new UnfoldIterator(this->unwrap(), $callback),
+                new UnfoldIterator(this.unwrap(), $callback),
                 RecursiveIteratorIterator::LEAVES_ONLY
             )
         );
@@ -802,7 +802,7 @@ trait CollectionTrait
     {
         $result = $callback(this);
 
-        return $result instanceof CollectionInterface ? $result : this->newCollection($result);
+        return $result instanceof CollectionInterface ? $result : this.newCollection($result);
     }
 
     /**
@@ -810,7 +810,7 @@ trait CollectionTrait
      */
     function zip(iterable $items): CollectionInterface
     {
-        return new ZipIterator(array_merge([this->unwrap()], func_get_args()));
+        return new ZipIterator(array_merge([this.unwrap()], func_get_args()));
     }
 
     /**
@@ -825,7 +825,7 @@ trait CollectionTrait
             $items = [$items];
         }
 
-        return new ZipIterator(array_merge([this->unwrap()], $items), $callback);
+        return new ZipIterator(array_merge([this.unwrap()], $items), $callback);
     }
 
     /**
@@ -833,7 +833,7 @@ trait CollectionTrait
      */
     function chunk(int $chunkSize): CollectionInterface
     {
-        return this->map(function ($v, $k, $iterator) use ($chunkSize) {
+        return this.map(function ($v, $k, $iterator) use ($chunkSize) {
             $values = [$v];
             for ($i = 1; $i < $chunkSize; $i++) {
                 $iterator->next();
@@ -852,7 +852,7 @@ trait CollectionTrait
      */
     function chunkWithKeys(int $chunkSize, bool $keepKeys = true): CollectionInterface
     {
-        return this->map(function ($v, $k, $iterator) use ($chunkSize, $keepKeys) {
+        return this.map(function ($v, $k, $iterator) use ($chunkSize, $keepKeys) {
             $key = 0;
             if ($keepKeys) {
                 $key = $k;
@@ -917,15 +917,15 @@ trait CollectionTrait
      */
     function cartesianProduct(?callable $operation = null, ?callable $filter = null): CollectionInterface
     {
-        if (this->isEmpty()) {
-            return this->newCollection([]);
+        if (this.isEmpty()) {
+            return this.newCollection([]);
         }
 
         $collectionArrays = [];
         $collectionArraysKeys = [];
         $collectionArraysCounts = [];
 
-        foreach (this->toList() as $value) {
+        foreach (this.toList() as $value) {
             $valueCount = count($value);
             if ($valueCount != count($value, COUNT_RECURSIVE)) {
                 throw new LogicException('Cannot find the cartesian product of a multidimensional array');
@@ -964,7 +964,7 @@ trait CollectionTrait
             }
         }
 
-        return this->newCollection($result);
+        return this.newCollection($result);
     }
 
     /**
@@ -975,7 +975,7 @@ trait CollectionTrait
      */
     function transpose(): CollectionInterface
     {
-        $arrayValue = this->toList();
+        $arrayValue = this.toList();
         $length = count(current($arrayValue));
         $result = [];
         foreach ($arrayValue as $row) {
@@ -988,7 +988,7 @@ trait CollectionTrait
             $result[] = array_column($arrayValue, $column);
         }
 
-        return this->newCollection($result);
+        return this.newCollection($result);
     }
 
     /**
@@ -996,7 +996,7 @@ trait CollectionTrait
      */
     function count(): int
     {
-        $traversable = this->optimizeUnwrap();
+        $traversable = this.optimizeUnwrap();
 
         if (is_array($traversable)) {
             return count($traversable);
@@ -1010,7 +1010,7 @@ trait CollectionTrait
      */
     function countKeys(): int
     {
-        return count(this->toArray());
+        return count(this.toArray());
     }
 
     /**
@@ -1022,7 +1022,7 @@ trait CollectionTrait
     protected function optimizeUnwrap(): iterable
     {
         /** @var \ArrayObject $iterator */
-        $iterator = this->unwrap();
+        $iterator = this.unwrap();
 
         if (get_class($iterator) == ArrayIterator::class) {
             $iterator = $iterator->getArrayCopy();

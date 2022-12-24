@@ -54,7 +54,7 @@ class FilterIterator extends Collection
             $items = new Collection($items);
         }
 
-        this->_callback = $callback;
+        this._callback = $callback;
         $wrapper = new CallbackFilterIterator($items, $callback);
         parent::__construct($wrapper);
     }
@@ -65,7 +65,7 @@ class FilterIterator extends Collection
     function unwrap(): Traversable
     {
         /** @var \IteratorIterator $filter */
-        $filter = this->getInnerIterator();
+        $filter = this.getInnerIterator();
         $iterator = $filter->getInnerIterator();
 
         if ($iterator instanceof CollectionInterface) {
@@ -78,7 +78,7 @@ class FilterIterator extends Collection
 
         // ArrayIterator can be traversed strictly.
         // Let's do that for performance gains
-        $callback = this->_callback;
+        $callback = this._callback;
         $res = [];
 
         foreach ($iterator as $k => $v) {
