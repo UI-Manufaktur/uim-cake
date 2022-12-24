@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -18,7 +17,7 @@ namespace Cake\Core;
 
 use ArrayIterator;
 use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;
@@ -346,7 +345,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         if (array_key_exists($name, _loaded)) {
             this.unload($name);
         }
-        if (this instanceof EventDispatcherInterface && $object instanceof EventListenerInterface) {
+        if (this instanceof EventDispatcherInterface && $object instanceof IEventListener) {
             this.getEventManager().on($object);
         }
         _loaded[$objName] = $object;
@@ -372,7 +371,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         }
 
         $object = _loaded[$name];
-        if (this instanceof EventDispatcherInterface && $object instanceof EventListenerInterface) {
+        if (this instanceof EventDispatcherInterface && $object instanceof IEventListener) {
             this.getEventManager().off($object);
         }
         unset(_loaded[$name]);
