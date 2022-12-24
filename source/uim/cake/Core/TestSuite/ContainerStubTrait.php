@@ -12,7 +12,7 @@
  * @since         4.2.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Core\TestSuite;
+module uim.cake.Core\TestSuite;
 
 use Cake\Core\Configure;
 use Cake\Core\IContainer;

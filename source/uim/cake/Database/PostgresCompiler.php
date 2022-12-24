@@ -13,7 +13,7 @@
  * @since         4.0.3
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Database;
+module uim.cake.Database;
 
 use Cake\Database\Expression\FunctionExpression;
 

@@ -13,7 +13,7 @@
  * @since         3.2.14
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Database;
+module uim.cake.Database;
 
 /**
  * Encapsulates all conversion functions for values coming from a database into PHP and
