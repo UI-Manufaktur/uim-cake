@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * Cache Session save handler. Allows saving session information into Cache.

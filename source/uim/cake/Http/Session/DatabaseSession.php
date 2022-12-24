@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * Database Session save handler. Allows saving session information into a model.
