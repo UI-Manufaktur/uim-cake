@@ -203,7 +203,7 @@ class RouteCollection
      * @param array $url The url to match.
      * @return array<string> The set of names of the url
      */
-    protected function _getNames(array $url): array
+    protected string[] _getNames(array $url): array
     {
         $plugin = false;
         if (isset($url['plugin']) && $url['plugin'] != false) {
@@ -356,7 +356,7 @@ class RouteCollection
      *
      * @return array<string> The valid extensions.
      */
-    function getExtensions(): array
+    string[] getExtensions(): array
     {
         return _extensions;
     }

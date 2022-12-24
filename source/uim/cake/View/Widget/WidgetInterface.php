@@ -37,5 +37,5 @@ interface WidgetInterface
      * @param array<string, mixed> $data The data to render.
      * @return array<string> Array of fields to secure.
      */
-    function secureFields(array $data): array;
+    string[] secureFields(array $data): array;
 }

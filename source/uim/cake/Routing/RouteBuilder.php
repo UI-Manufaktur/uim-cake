@@ -188,7 +188,7 @@ class RouteBuilder
      *
      * @return array<string>
      */
-    function getExtensions(): array
+    string[] getExtensions(): array
     {
         return _extensions;
     }

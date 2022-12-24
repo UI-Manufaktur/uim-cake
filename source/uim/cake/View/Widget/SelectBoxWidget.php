@@ -148,7 +148,7 @@ class SelectBoxWidget : BasicWidget
      * @param array<string, mixed> $data The context for rendering a select.
      * @return array<string>
      */
-    protected function _renderContent(array $data): array
+    protected string[] _renderContent(array $data): array
     {
         $options = $data['options'];
 
@@ -242,7 +242,7 @@ class SelectBoxWidget : BasicWidget
      * @param bool $escape Toggle HTML escaping.
      * @return array<string> Option elements.
      */
-    protected function _renderOptions(iterable $options, ?array $disabled, $selected, $templateVars, $escape): array
+    protected string[] _renderOptions(iterable $options, ?array $disabled, $selected, $templateVars, $escape): array
     {
         $out = [];
         foreach ($options as $key: $val) {

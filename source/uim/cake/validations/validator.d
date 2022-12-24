@@ -345,7 +345,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return array<string>
      */
-    static auto getDefaultProviders(): array
+    static string[] getDefaultProviders(): array
     {
         return array_keys(self::$_defaultProviders);
     }
@@ -355,7 +355,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return array<string>
      */
-    function providers(): array
+    string[] providers(): array
     {
         return array_keys(_providers);
     }

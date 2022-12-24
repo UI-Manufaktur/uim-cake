@@ -868,7 +868,7 @@ class View : EventDispatcherInterface
      *
      * @return array<string> Array of the set view variable names.
      */
-    function getVars(): array
+    string[] getVars(): array
     {
         return array_keys(this.viewVars);
     }
@@ -922,7 +922,7 @@ class View : EventDispatcherInterface
      * @return array<string> An array containing the blocks.
      * @see \Cake\View\ViewBlock::keys()
      */
-    function blocks(): array
+    string[] blocks(): array
     {
         return this.Blocks.keys();
     }
@@ -1587,7 +1587,7 @@ class View : EventDispatcherInterface
      * @param bool $cached Set to false to force a refresh of view paths. Default true.
      * @return array<string> paths
      */
-    protected function _paths(?string $plugin = null, bool $cached = true): array
+    protected string[] _paths(?string $plugin = null, bool $cached = true): array
     {
         if ($cached == true) {
             if ($plugin == null && !empty(_paths)) {

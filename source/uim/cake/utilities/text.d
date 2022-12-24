@@ -19,11 +19,7 @@ class Text {
      */
     protected static $_defaultTransliteratorId = "Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove";
 
-    /**
-     * Default HTML tags which must not be counted for truncating text.
-     *
-     * @var array<string>
-     */
+    // Default HTML tags which must not be counted for truncating text.
     protected static string[] _defaultHtmlNoCount = [
         "style",
         "script"
