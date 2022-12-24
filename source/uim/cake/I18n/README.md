@@ -57,10 +57,10 @@ I18n::translator('animals', 'fr_FR', function () {
         'default', // The formatting strategy (ICU)
         'default', // The fallback domain
     );
-    $package->setMessages([
-        'Dog' => 'Chien',
-        'Cat' => 'Chat',
-        'Bird' => 'Oiseau'
+    $package.setMessages([
+        'Dog': 'Chien',
+        'Cat': 'Chat',
+        'Bird': 'Oiseau'
         ...
     ]);
 

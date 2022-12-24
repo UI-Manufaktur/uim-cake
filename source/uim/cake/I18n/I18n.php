@@ -64,14 +64,14 @@ class I18n
         static::$_collection = new TranslatorRegistry(
             new PackageLocator(),
             new FormatterLocator([
-                'default' => IcuFormatter::class,
-                'sprintf' => SprintfFormatter::class,
+                'default': IcuFormatter::class,
+                'sprintf': SprintfFormatter::class,
             ]),
             static::getLocale()
         );
 
         if (class_exists(Cache::class)) {
-            static::$_collection->setCacher(Cache::pool('_cake_core_'));
+            static::$_collection.setCacher(Cache::pool('_cake_core_'));
         }
 
         return static::$_collection;
@@ -88,14 +88,14 @@ class I18n
      * ```
      *  I18n::setTranslator('default', function () {
      *      $package = new \Cake\I18n\Package();
-     *      $package->setMessages([
-     *          'Cake' => 'Gâteau'
+     *      $package.setMessages([
+     *          'Cake': 'Gâteau'
      *      ]);
      *      return $package;
      *  }, 'fr_FR');
      *
      *  $translator = I18n::getTranslator('default', 'fr_FR');
-     *  echo $translator->translate('Cake');
+     *  echo $translator.translate('Cake');
      * ```
      *
      * You can also use the `Cake\I18n\MessagesFileLoader` class to load a specific
@@ -121,9 +121,9 @@ class I18n
         $locale = $locale ?: static::getLocale();
 
         $translators = static::translators();
-        $loader = $translators->setLoaderFallback($name, $loader);
-        $packages = $translators->getPackages();
-        $packages->set($name, $locale, $loader);
+        $loader = $translators.setLoaderFallback($name, $loader);
+        $packages = $translators.getPackages();
+        $packages.set($name, $locale, $loader);
     }
 
     /**
@@ -141,11 +141,11 @@ class I18n
         $translators = static::translators();
 
         if ($locale) {
-            $currentLocale = $translators->getLocale();
-            $translators->setLocale($locale);
+            $currentLocale = $translators.getLocale();
+            $translators.setLocale($locale);
         }
 
-        $translator = $translators->get($name);
+        $translator = $translators.get($name);
         if ($translator == null) {
             throw new I18nException(sprintf(
                 'Translator for domain "%s" could not be found.',
@@ -154,7 +154,7 @@ class I18n
         }
 
         if (isset($currentLocale)) {
-            $translators->setLocale($currentLocale);
+            $translators.setLocale($currentLocale);
         }
 
         return $translator;
@@ -192,8 +192,8 @@ class I18n
      *  I18n::config('my_domain', function ($name, $locale) {
      *      $package = new Package('default');
      *      $messages = (...); // Fetch messages for locale from external service.
-     *      $package->setMessages($message);
-     *      $package->setFallback('default');
+     *      $package.setMessages($message);
+     *      $package.setFallback('default');
      *      return $package;
      *  });
      * ```
@@ -205,7 +205,7 @@ class I18n
      */
     public static function config(string $name, callable $loader): void
     {
-        static::translators()->registerLoader($name, $loader);
+        static::translators().registerLoader($name, $loader);
     }
 
     /**
@@ -220,7 +220,7 @@ class I18n
         static::getDefaultLocale();
         Locale::setDefault($locale);
         if (isset(static::$_collection)) {
-            static::translators()->setLocale($locale);
+            static::translators().setLocale($locale);
         }
     }
 
@@ -267,7 +267,7 @@ class I18n
      */
     public static function getDefaultFormatter(): string
     {
-        return static::translators()->defaultFormatter();
+        return static::translators().defaultFormatter();
     }
 
     /**
@@ -280,7 +280,7 @@ class I18n
      */
     public static function setDefaultFormatter(string $name): void
     {
-        static::translators()->defaultFormatter($name);
+        static::translators().defaultFormatter($name);
     }
 
     /**
@@ -291,7 +291,7 @@ class I18n
      */
     public static function useFallback(bool $enable = true): void
     {
-        static::translators()->useFallback($enable);
+        static::translators().useFallback($enable);
     }
 
     /**

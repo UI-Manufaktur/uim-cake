@@ -252,9 +252,9 @@ class SecurityHeadersMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        $response = $handler->handle($request);
-        foreach (this.headers as $header => $value) {
-            $response = $response->withHeader($header, $value);
+        $response = $handler.handle($request);
+        foreach (this.headers as $header: $value) {
+            $response = $response.withHeader($header, $value);
         }
 
         return $response;

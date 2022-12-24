@@ -51,7 +51,7 @@ class ChainMessagesLoader
      */
     function __invoke(): Package
     {
-        foreach (_loaders as $k => $loader) {
+        foreach (_loaders as $k: $loader) {
             if (!is_callable($loader)) {
                 throw new RuntimeException(sprintf(
                     'Loader "%s" in the chain is not a valid callable',

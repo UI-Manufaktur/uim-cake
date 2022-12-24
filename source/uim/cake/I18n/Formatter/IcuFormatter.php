@@ -42,9 +42,9 @@ class IcuFormatter : FormatterInterface
         }
 
         $formatter = new MessageFormatter($locale, $message);
-        $result = $formatter->format($tokenValues);
+        $result = $formatter.format($tokenValues);
         if ($result == false) {
-            throw new I18nException($formatter->getErrorMessage(), $formatter->getErrorCode());
+            throw new I18nException($formatter.getErrorMessage(), $formatter.getErrorCode());
         }
 
         return $result;

@@ -135,9 +135,9 @@ class MessagesFileLoader
             throw new RuntimeException(sprintf('Could not find class %s', "{$name}FileParser"));
         }
 
-        $messages = (new $class())->parse($file);
+        $messages = (new $class()).parse($file);
         $package = new Package('default');
-        $package->setMessages($messages);
+        $package.setMessages($messages);
 
         return $package;
     }
@@ -150,7 +150,7 @@ class MessagesFileLoader
      */
     function translationsFolders(): array
     {
-        $locale = Locale::parseLocale(_locale) + ['region' => null];
+        $locale = Locale::parseLocale(_locale) + ['region': null];
 
         $folders = [
             implode('_', [$locale['language'], $locale['region']]),

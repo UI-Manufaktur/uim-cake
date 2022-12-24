@@ -97,13 +97,13 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @see \Cake\I18n\FrozenTime::timeAgoInWords()
      */
     public static $wordAccuracy = [
-        'year' => 'day',
-        'month' => 'day',
-        'week' => 'day',
-        'day' => 'hour',
-        'hour' => 'minute',
-        'minute' => 'minute',
-        'second' => 'second',
+        'year': 'day',
+        'month': 'day',
+        'week': 'day',
+        'day': 'hour',
+        'hour': 'minute',
+        'minute': 'minute',
+        'second': 'second',
     ];
 
     /**
@@ -130,8 +130,8 @@ class FrozenTime : Chronos : I18nDateTimeInterface
     public this($time = null, $tz = null)
     {
         if ($time instanceof DateTimeInterface) {
-            $tz = $time->getTimezone();
-            $time = $time->format('Y-m-d H:i:s.u');
+            $tz = $time.getTimezone();
+            $time = $time.format('Y-m-d H:i:s.u');
         }
 
         if (is_numeric($time)) {
@@ -147,20 +147,20 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      *
      * ### Options:
      *
-     * - `from` => another Time object representing the "now" time
-     * - `format` => a fall back format if the relative time is longer than the duration specified by end
-     * - `accuracy` => Specifies how accurate the date should be described (array)
-     *     - year =>   The format if years > 0   (default "day")
-     *     - month =>  The format if months > 0  (default "day")
-     *     - week =>   The format if weeks > 0   (default "day")
-     *     - day =>    The format if weeks > 0   (default "hour")
-     *     - hour =>   The format if hours > 0   (default "minute")
-     *     - minute => The format if minutes > 0 (default "minute")
-     *     - second => The format if seconds > 0 (default "second")
-     * - `end` => The end of relative time telling
-     * - `relativeString` => The printf compatible string when outputting relative time
-     * - `absoluteString` => The printf compatible string when outputting absolute time
-     * - `timezone` => The user timezone the timestamp should be formatted in.
+     * - `from`: another Time object representing the "now" time
+     * - `format`: a fall back format if the relative time is longer than the duration specified by end
+     * - `accuracy`: Specifies how accurate the date should be described (array)
+     *     - year:   The format if years > 0   (default "day")
+     *     - month:  The format if months > 0  (default "day")
+     *     - week:   The format if weeks > 0   (default "day")
+     *     - day:    The format if weeks > 0   (default "hour")
+     *     - hour:   The format if hours > 0   (default "minute")
+     *     - minute: The format if minutes > 0 (default "minute")
+     *     - second: The format if seconds > 0 (default "second")
+     * - `end`: The end of relative time telling
+     * - `relativeString`: The printf compatible string when outputting relative time
+     * - `absoluteString`: The printf compatible string when outputting absolute time
+     * - `timezone`: The user timezone the timestamp should be formatted in.
      *
      * Relative dates look something like this:
      *
@@ -181,7 +181,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
     function timeAgoInWords(array $options = []): string
     {
         /** @psalm-suppress UndefinedInterfaceMethod */
-        return static::getDiffFormatter()->timeAgoInWords(this, $options);
+        return static::getDiffFormatter().timeAgoInWords(this, $options);
     }
 
     /**
@@ -203,14 +203,14 @@ class FrozenTime : Chronos : I18nDateTimeInterface
     {
         if (is_bool($options)) {
             $options = [
-                'group' => $options,
+                'group': $options,
             ];
         }
         $defaults = [
-            'group' => true,
-            'abbr' => false,
-            'before' => ' - ',
-            'after' => null,
+            'group': true,
+            'abbr': false,
+            'before': ' - ',
+            'after': null,
         ];
         $options += $defaults;
         $group = $options['group'];
@@ -226,7 +226,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
         $identifiers = DateTimeZone::listIdentifiers($filter, (string)$country) ?: [];
 
         if ($regex) {
-            foreach ($identifiers as $key => $tz) {
+            foreach ($identifiers as $key: $tz) {
                 if (!preg_match($regex, $tz)) {
                     unset($identifiers[$key]);
                 }
@@ -242,7 +242,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
                 $abbr = '';
                 if ($options['abbr']) {
                     $dateTimeZone = new DateTimeZone($tz);
-                    $trans = $dateTimeZone->getTransitions($now, $now);
+                    $trans = $dateTimeZone.getTransitions($now, $now);
                     $abbr = isset($trans[0]['abbr']) ?
                         $before . $trans[0]['abbr'] . $after :
                         '';
@@ -251,7 +251,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
                 if (isset($item[1])) {
                     $groupedIdentifiers[$item[0]][$tz] = $item[1] . $abbr;
                 } else {
-                    $groupedIdentifiers[$item[0]] = [$tz => $item[0] . $abbr];
+                    $groupedIdentifiers[$item[0]] = [$tz: $item[0] . $abbr];
                 }
             }
 

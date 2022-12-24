@@ -42,22 +42,22 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
     ): string {
         $isNow = $other == null;
         if ($isNow) {
-            $other = $date->now($date->getTimezone());
+            $other = $date.now($date.getTimezone());
         }
         /** @psalm-suppress PossiblyNullArgument */
-        $diffInterval = $date->diff($other);
+        $diffInterval = $date.diff($other);
 
         switch (true) {
-            case $diffInterval->y > 0:
-                $count = $diffInterval->y;
+            case $diffInterval.y > 0:
+                $count = $diffInterval.y;
                 $message = __dn('cake', '{0} year', '{0} years', $count, $count);
                 break;
-            case $diffInterval->m > 0:
-                $count = $diffInterval->m;
+            case $diffInterval.m > 0:
+                $count = $diffInterval.m;
                 $message = __dn('cake', '{0} month', '{0} months', $count, $count);
                 break;
-            case $diffInterval->d > 0:
-                $count = $diffInterval->d;
+            case $diffInterval.d > 0:
+                $count = $diffInterval.d;
                 if ($count >= I18nDateTimeInterface::DAYS_PER_WEEK) {
                     $count = (int)($count / I18nDateTimeInterface::DAYS_PER_WEEK);
                     $message = __dn('cake', '{0} week', '{0} weeks', $count, $count);
@@ -65,23 +65,23 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
                     $message = __dn('cake', '{0} day', '{0} days', $count, $count);
                 }
                 break;
-            case $diffInterval->h > 0:
-                $count = $diffInterval->h;
+            case $diffInterval.h > 0:
+                $count = $diffInterval.h;
                 $message = __dn('cake', '{0} hour', '{0} hours', $count, $count);
                 break;
-            case $diffInterval->i > 0:
-                $count = $diffInterval->i;
+            case $diffInterval.i > 0:
+                $count = $diffInterval.i;
                 $message = __dn('cake', '{0} minute', '{0} minutes', $count, $count);
                 break;
             default:
-                $count = $diffInterval->s;
+                $count = $diffInterval.s;
                 $message = __dn('cake', '{0} second', '{0} seconds', $count, $count);
                 break;
         }
         if ($absolute) {
             return $message;
         }
-        $isFuture = $diffInterval->invert == 1;
+        $isFuture = $diffInterval.invert == 1;
         if ($isNow) {
             return $isFuture ? __d('cake', '{0} from now', $message) : __d('cake', '{0} ago', $message);
         }
@@ -101,11 +101,11 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
     {
         $options = _options($options, FrozenTime::class);
         if ($options['timezone']) {
-            $time = $time->timezone($options['timezone']);
+            $time = $time.timezone($options['timezone']);
         }
 
-        $now = $options['from']->format('U');
-        $inSeconds = $time->format('U');
+        $now = $options['from'].format('U');
+        $inSeconds = $time.format('U');
         $backwards = ($inSeconds > $now);
 
         $futureTime = $now;
@@ -120,8 +120,8 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
             return __d('cake', 'just now', 'just now');
         }
 
-        if ($diff > abs($now - (new FrozenTime($options['end']))->format('U'))) {
-            return sprintf($options['absoluteString'], $time->i18nFormat($options['format']));
+        if ($diff > abs($now - (new FrozenTime($options['end'])).format('U'))) {
+            return sprintf($options['absoluteString'], $time.i18nFormat($options['format']));
         }
 
         $diffData = _diffData($futureTime, $pastTime, $backwards, $options);
@@ -154,13 +154,13 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
         // When time has passed
         if (!$backwards) {
             $aboutAgo = [
-                'second' => __d('cake', 'about a second ago'),
-                'minute' => __d('cake', 'about a minute ago'),
-                'hour' => __d('cake', 'about an hour ago'),
-                'day' => __d('cake', 'about a day ago'),
-                'week' => __d('cake', 'about a week ago'),
-                'month' => __d('cake', 'about a month ago'),
-                'year' => __d('cake', 'about a year ago'),
+                'second': __d('cake', 'about a second ago'),
+                'minute': __d('cake', 'about a minute ago'),
+                'hour': __d('cake', 'about an hour ago'),
+                'day': __d('cake', 'about a day ago'),
+                'week': __d('cake', 'about a week ago'),
+                'month': __d('cake', 'about a month ago'),
+                'year': __d('cake', 'about a year ago'),
             ];
 
             return $relativeDate ? sprintf($options['relativeString'], $relativeDate) : $aboutAgo[$fWord];
@@ -171,13 +171,13 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
             return $relativeDate;
         }
         $aboutIn = [
-            'second' => __d('cake', 'in about a second'),
-            'minute' => __d('cake', 'in about a minute'),
-            'hour' => __d('cake', 'in about an hour'),
-            'day' => __d('cake', 'in about a day'),
-            'week' => __d('cake', 'in about a week'),
-            'month' => __d('cake', 'in about a month'),
-            'year' => __d('cake', 'in about a year'),
+            'second': __d('cake', 'in about a second'),
+            'minute': __d('cake', 'in about a minute'),
+            'hour': __d('cake', 'in about an hour'),
+            'day': __d('cake', 'in about a day'),
+            'week': __d('cake', 'in about a week'),
+            'month': __d('cake', 'in about a month'),
+            'year': __d('cake', 'in about a year'),
         ];
 
         return $aboutIn[$fWord];
@@ -323,11 +323,11 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
     {
         $options = _options($options, FrozenDate::class);
         if ($options['timezone']) {
-            $date = $date->timezone($options['timezone']);
+            $date = $date.timezone($options['timezone']);
         }
 
-        $now = $options['from']->format('U');
-        $inSeconds = $date->format('U');
+        $now = $options['from'].format('U');
+        $inSeconds = $date.format('U');
         $backwards = ($inSeconds > $now);
 
         $futureTime = $now;
@@ -342,8 +342,8 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
             return __d('cake', 'today');
         }
 
-        if ($diff > abs($now - (new FrozenDate($options['end']))->format('U'))) {
-            return sprintf($options['absoluteString'], $date->i18nFormat($options['format']));
+        if ($diff > abs($now - (new FrozenDate($options['end'])).format('U'))) {
+            return sprintf($options['absoluteString'], $date.i18nFormat($options['format']));
         }
 
         $diffData = _diffData($futureTime, $pastTime, $backwards, $options);
@@ -367,10 +367,10 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
         // When time has passed
         if (!$backwards) {
             $aboutAgo = [
-                'day' => __d('cake', 'about a day ago'),
-                'week' => __d('cake', 'about a week ago'),
-                'month' => __d('cake', 'about a month ago'),
-                'year' => __d('cake', 'about a year ago'),
+                'day': __d('cake', 'about a day ago'),
+                'week': __d('cake', 'about a week ago'),
+                'month': __d('cake', 'about a month ago'),
+                'year': __d('cake', 'about a year ago'),
             ];
 
             return $relativeDate ? sprintf($options['relativeString'], $relativeDate) : $aboutAgo[$fWord];
@@ -381,10 +381,10 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
             return $relativeDate;
         }
         $aboutIn = [
-            'day' => __d('cake', 'in about a day'),
-            'week' => __d('cake', 'in about a week'),
-            'month' => __d('cake', 'in about a month'),
-            'year' => __d('cake', 'in about a year'),
+            'day': __d('cake', 'in about a day'),
+            'week': __d('cake', 'in about a week'),
+            'month': __d('cake', 'in about a month'),
+            'year': __d('cake', 'in about a year'),
         ];
 
         return $aboutIn[$fWord];
@@ -401,18 +401,18 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
     protected function _options(array $options, string $class): array
     {
         $options += [
-            'from' => $class::now(),
-            'timezone' => null,
-            'format' => $class::$wordFormat,
-            'accuracy' => $class::$wordAccuracy,
-            'end' => $class::$wordEnd,
-            'relativeString' => __d('cake', '%s ago'),
-            'absoluteString' => __d('cake', 'on %s'),
+            'from': $class::now(),
+            'timezone': null,
+            'format': $class::$wordFormat,
+            'accuracy': $class::$wordAccuracy,
+            'end': $class::$wordEnd,
+            'relativeString': __d('cake', '%s ago'),
+            'absoluteString': __d('cake', 'on %s'),
         ];
         if (is_string($options['accuracy'])) {
             $accuracy = $options['accuracy'];
             $options['accuracy'] = [];
-            foreach ($class::$wordAccuracy as $key => $level) {
+            foreach ($class::$wordAccuracy as $key: $level) {
                 $options['accuracy'][$key] = $accuracy;
             }
         } else {

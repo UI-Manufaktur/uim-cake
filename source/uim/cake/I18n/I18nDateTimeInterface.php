@@ -69,11 +69,11 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      *
      * ```
      * $time = new Time('2014-04-20 22:10');
-     * $time->i18nFormat(); // outputs '4/20/14, 10:10 PM' for the en-US locale
-     * $time->i18nFormat(\IntlDateFormatter::FULL); // Use the full date and time format
-     * $time->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]); // Use full date but short time format
-     * $time->i18nFormat('yyyy-MM-dd HH:mm:ss'); // outputs '2014-04-20 22:10'
-     * $time->i18nFormat(Time::UNIX_TIMESTAMP_FORMAT); // outputs '1398031800'
+     * $time.i18nFormat(); // outputs '4/20/14, 10:10 PM' for the en-US locale
+     * $time.i18nFormat(\IntlDateFormatter::FULL); // Use the full date and time format
+     * $time.i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]); // Use full date but short time format
+     * $time.i18nFormat('yyyy-MM-dd HH:mm:ss'); // outputs '2014-04-20 22:10'
+     * $time.i18nFormat(Time::UNIX_TIMESTAMP_FORMAT); // outputs '1398031800'
      * ```
      *
      * If you wish to control the default format to be used for this method, you can alter
@@ -94,8 +94,8 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      *
      * ```
      * $time = new Time('2014-04-20 22:10');
-     * $time->i18nFormat(null, null, 'de-DE');
-     * $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Berlin', 'de-DE');
+     * $time.i18nFormat(null, null, 'de-DE');
+     * $time.i18nFormat(\IntlDateFormatter::FULL, 'Europe/Berlin', 'de-DE');
      * ```
      *
      * You can control the default locale to be used by setting the static variable

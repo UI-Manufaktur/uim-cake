@@ -31,13 +31,13 @@ class ConsoleLog : BaseLog
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'stream' => 'php://stderr',
-        'levels' => null,
-        'scopes' => [],
-        'outputAs' => null,
-        'formatter' => [
-            'className' => DefaultFormatter::class,
-            'includeTags' => true,
+        'stream': 'php://stderr',
+        'levels': null,
+        'scopes': [],
+        'outputAs': null,
+        'formatter': [
+            'className': DefaultFormatter::class,
+            'includeTags': true,
         ],
     ];
 
@@ -76,12 +76,12 @@ class ConsoleLog : BaseLog
         }
 
         if (isset($config['outputAs'])) {
-            _output->setOutputAs($config['outputAs']);
+            _output.setOutputAs($config['outputAs']);
         }
 
         if (isset(_config['dateFormat'])) {
             deprecationWarning('`dateFormat` option should now be set in the formatter options.', 0);
-            this.formatter->setConfig('dateFormat', _config['dateFormat']);
+            this.formatter.setConfig('dateFormat', _config['dateFormat']);
         }
     }
 
@@ -97,6 +97,6 @@ class ConsoleLog : BaseLog
     function log($level, $message, array $context = [])
     {
         $message = _format($message, $context);
-        _output->write(this.formatter->format($level, $message, $context));
+        _output.write(this.formatter.format($level, $message, $context));
     }
 }

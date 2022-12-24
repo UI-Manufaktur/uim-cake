@@ -21,15 +21,15 @@ use Cake\Log\Log;
 
 // Short classname
 Log::setConfig('local', [
-    'className' => 'File',
-    'levels' => ['notice', 'info', 'debug'],
-    'file' => '/path/to/file.log',
+    'className': 'File',
+    'levels': ['notice', 'info', 'debug'],
+    'file': '/path/to/file.log',
 ]);
 
 // Fully namespaced name.
 Log::setConfig('production', [
-    'className' => \Cake\Log\Engine\SyslogLog::class,
-    'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
+    'className': \Cake\Log\Engine\SyslogLog::class,
+    'levels': ['warning', 'error', 'critical', 'alert', 'emergency'],
 ]);
 ```
 
@@ -67,13 +67,13 @@ you can limit the logging engines that receive a particular message.
 // Configure /logs/payments.log to receive all levels, but only
 // those with `payments` scope.
 Log::setConfig('payments', [
-    'className' => 'File',
-    'levels' => ['error', 'info', 'warning'],
-    'scopes' => ['payments'],
-    'file' => '/logs/payments.log',
+    'className': 'File',
+    'levels': ['error', 'info', 'warning'],
+    'scopes': ['payments'],
+    'file': '/logs/payments.log',
 ]);
 
-Log::warning('this gets written only to payments.log', ['scope' => ['payments']]);
+Log::warning('this gets written only to payments.log', ['scope': ['payments']]);
 ```
 
 ## Documentation

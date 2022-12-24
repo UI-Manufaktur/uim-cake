@@ -93,9 +93,9 @@ class Number
      */
     public static function precision($value, int $precision = 3, array $options = []): string
     {
-        $formatter = static::formatter(['precision' => $precision, 'places' => $precision] + $options);
+        $formatter = static::formatter(['precision': $precision, 'places': $precision] + $options);
 
-        return $formatter->format((float)$value);
+        return $formatter.format((float)$value);
     }
 
     /**
@@ -139,7 +139,7 @@ class Number
      */
     public static function toPercentage($value, int $precision = 2, array $options = []): string
     {
-        $options += ['multiply' => false, 'type' => NumberFormatter::PERCENT];
+        $options += ['multiply': false, 'type': NumberFormatter::PERCENT];
         if (!$options['multiply']) {
             $value = (float)$value / 100;
         }
@@ -166,9 +166,9 @@ class Number
     public static function format($value, array $options = []): string
     {
         $formatter = static::formatter($options);
-        $options += ['before' => '', 'after' => ''];
+        $options += ['before': '', 'after': ''];
 
-        return $options['before'] . $formatter->format((float)$value) . $options['after'];
+        return $options['before'] . $formatter.format((float)$value) . $options['after'];
     }
 
     /**
@@ -188,7 +188,7 @@ class Number
     {
         $formatter = static::formatter($options);
 
-        return (float)$formatter->parse($value, NumberFormatter::TYPE_DOUBLE);
+        return (float)$formatter.parse($value, NumberFormatter::TYPE_DOUBLE);
     }
 
     /**
@@ -208,7 +208,7 @@ class Number
      */
     public static function formatDelta($value, array $options = []): string
     {
-        $options += ['places' => 0];
+        $options += ['places': 0];
         $value = number_format((float)$value, $options['places'], '.', '');
         $sign = $value > 0 ? '+' : '';
         $options['before'] = isset($options['before']) ? $options['before'] . $sign : $sign;
@@ -248,18 +248,18 @@ class Number
             return $options['zero'];
         }
 
-        $formatter = static::formatter(['type' => static::getDefaultCurrencyFormat()] + $options);
+        $formatter = static::formatter(['type': static::getDefaultCurrencyFormat()] + $options);
         $abs = abs($value);
         if (!empty($options['fractionSymbol']) && $abs > 0 && $abs < 1) {
             $value *= 100;
             $pos = $options['fractionPosition'] ?? 'after';
 
-            return static::format($value, ['precision' => 0, $pos => $options['fractionSymbol']]);
+            return static::format($value, ['precision': 0, $pos: $options['fractionSymbol']]);
         }
 
         $before = $options['before'] ?? '';
         $after = $options['after'] ?? '';
-        $value = $formatter->formatCurrency($value, $currency);
+        $value = $formatter.formatCurrency($value, $currency);
 
         return $before . $value . $after;
     }
@@ -305,7 +305,7 @@ class Number
         if (static::$_defaultCurrency == null) {
             $locale = ini_get('intl.default_locale') ?: static::DEFAULT_LOCALE;
             $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-            static::$_defaultCurrency = $formatter->getTextAttribute(NumberFormatter::CURRENCY_CODE);
+            static::$_defaultCurrency = $formatter.getTextAttribute(NumberFormatter::CURRENCY_CODE);
         }
 
         return static::$_defaultCurrency;
@@ -403,10 +403,10 @@ class Number
         // PHP 8.0.0 - 8.0.6 throws an exception when cloning NumberFormatter after a failed parse
         if (version_compare(PHP_VERSION, '8.0.6', '>') || version_compare(PHP_VERSION, '8.0.0', '<')) {
             $options = array_intersect_key($options, [
-                'places' => null,
-                'precision' => null,
-                'pattern' => null,
-                'useIntlCode' => null,
+                'places': null,
+                'precision': null,
+                'pattern': null,
+                'useIntlCode': null,
             ]);
             if (empty($options)) {
                 return $formatter;
@@ -444,15 +444,15 @@ class Number
     protected static function _setAttributes(NumberFormatter $formatter, array $options = []): NumberFormatter
     {
         if (isset($options['places'])) {
-            $formatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $options['places']);
+            $formatter.setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $options['places']);
         }
 
         if (isset($options['precision'])) {
-            $formatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $options['precision']);
+            $formatter.setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $options['precision']);
         }
 
         if (!empty($options['pattern'])) {
-            $formatter->setPattern($options['pattern']);
+            $formatter.setPattern($options['pattern']);
         }
 
         if (!empty($options['useIntlCode'])) {
@@ -460,8 +460,8 @@ class Number
             // is denoted with ¤, whereas the international code is marked with ¤¤,
             // in order to use the code we need to simply duplicate the character wherever
             // it appears in the pattern.
-            $pattern = trim(str_replace('¤', '¤¤ ', $formatter->getPattern()));
-            $formatter->setPattern($pattern);
+            $pattern = trim(str_replace('¤', '¤¤ ', $formatter.getPattern()));
+            $formatter.setPattern($pattern);
         }
 
         return $formatter;
@@ -483,6 +483,6 @@ class Number
      */
     public static function ordinal($value, array $options = []): string
     {
-        return static::formatter(['type' => NumberFormatter::ORDINAL] + $options)->format($value);
+        return static::formatter(['type': NumberFormatter::ORDINAL] + $options).format($value);
     }
 }

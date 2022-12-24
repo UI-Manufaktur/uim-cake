@@ -84,15 +84,15 @@ class Translator
      */
     protected function getMessage(string $key)
     {
-        $message = this.package->getMessage($key);
+        $message = this.package.getMessage($key);
         if ($message) {
             return $message;
         }
 
         if (this.fallback) {
-            $message = this.fallback->getMessage($key);
+            $message = this.fallback.getMessage($key);
             if ($message) {
-                this.package->addMessage($key, $message);
+                this.package.addMessage($key, $message);
 
                 return $message;
             }
@@ -166,7 +166,7 @@ class Translator
 
         unset($tokensValues['_count'], $tokensValues['_singular']);
 
-        return this.formatter->format(this.locale, $message, $tokensValues);
+        return this.formatter.format(this.locale, $message, $tokensValues);
     }
 
     /**

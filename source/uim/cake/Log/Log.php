@@ -32,7 +32,7 @@ use Psr\Log\LoggerInterface;
  * A sample configuration would look like:
  *
  * ```
- * Log::setConfig('my_log', ['className' => 'FileLog']);
+ * Log::setConfig('my_log', ['className': 'FileLog']);
  * ```
  *
  * You can define the className as any fully namespaced classname or use a short hand
@@ -52,9 +52,9 @@ use Psr\Log\LoggerInterface;
  *
  * ```
  * Log::setConfig('default', [
- *     'className' => 'File',
- *     'path' => LOGS,
- *     'levels' => ['error', 'critical', 'alert', 'emergency']
+ *     'className': 'File',
+ *     'path': LOGS,
+ *     'levels': ['error', 'critical', 'alert', 'emergency']
  * ]);
  * ```
  *
@@ -70,8 +70,8 @@ use Psr\Log\LoggerInterface;
  *
  * ```
  * Log::setConfig('payments', [
- *     'className' => 'File',
- *     'scopes' => ['payment', 'order']
+ *     'className': 'File',
+ *     'scopes': ['payment', 'order']
  * ]);
  * ```
  *
@@ -117,9 +117,9 @@ class Log
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        'console' => Engine\ConsoleLog::class,
-        'file' => Engine\FileLog::class,
-        'syslog' => Engine\SyslogLog::class,
+        'console': Engine\ConsoleLog::class,
+        'file': Engine\FileLog::class,
+        'syslog': Engine\SyslogLog::class,
     ];
 
     /**
@@ -159,14 +159,14 @@ class Log
      * @var array<string, int>
      */
     protected static $_levelMap = [
-        'emergency' => LOG_EMERG,
-        'alert' => LOG_ALERT,
-        'critical' => LOG_CRIT,
-        'error' => LOG_ERR,
-        'warning' => LOG_WARNING,
-        'notice' => LOG_NOTICE,
-        'info' => LOG_INFO,
-        'debug' => LOG_DEBUG,
+        'emergency': LOG_EMERG,
+        'alert': LOG_ALERT,
+        'critical': LOG_CRIT,
+        'error': LOG_ERR,
+        'warning': LOG_WARNING,
+        'notice': LOG_NOTICE,
+        'info': LOG_INFO,
+        'debug': LOG_DEBUG,
     ];
 
     /**
@@ -194,12 +194,12 @@ class Log
      */
     protected static function _loadConfig(): void
     {
-        foreach (static::$_config as $name => $properties) {
+        foreach (static::$_config as $name: $properties) {
             if (isset($properties['engine'])) {
                 $properties['className'] = $properties['engine'];
             }
-            if (!static::$_registry->has((string)$name)) {
-                static::$_registry->load((string)$name, $properties);
+            if (!static::$_registry.has((string)$name)) {
+                static::$_registry.load((string)$name, $properties);
             }
         }
     }
@@ -218,7 +218,7 @@ class Log
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (isset(static::$_registry)) {
-            static::$_registry->reset();
+            static::$_registry.reset();
         }
         static::$_config = [];
         static::$_dirtyConfig = true;
@@ -273,7 +273,7 @@ class Log
      * ```
      *
      * @param array<string, mixed>|string $key The name of the logger config, or an array of multiple configs.
-     * @param array<string, mixed>|null $config An array of name => config data for adapter.
+     * @param array<string, mixed>|null $config An array of name: config data for adapter.
      * @return void
      * @throws \BadMethodCallException When trying to modify an existing config.
      */
@@ -292,8 +292,8 @@ class Log
     public static function engine(string $name): ?LoggerInterface
     {
         static::_init();
-        if (static::$_registry->{$name}) {
-            return static::$_registry->{$name};
+        if (static::$_registry.{$name}) {
+            return static::$_registry.{$name};
         }
 
         return null;
@@ -306,14 +306,14 @@ class Log
      *
      * ### Levels:
      *
-     * - `LOG_EMERG` => 'emergency',
-     * - `LOG_ALERT` => 'alert',
-     * - `LOG_CRIT` => 'critical',
-     * - `LOG_ERR` => 'error',
-     * - `LOG_WARNING` => 'warning',
-     * - `LOG_NOTICE` => 'notice',
-     * - `LOG_INFO` => 'info',
-     * - `LOG_DEBUG` => 'debug',
+     * - `LOG_EMERG`: 'emergency',
+     * - `LOG_ALERT`: 'alert',
+     * - `LOG_CRIT`: 'critical',
+     * - `LOG_ERR`: 'error',
+     * - `LOG_WARNING`: 'warning',
+     * - `LOG_NOTICE`: 'notice',
+     * - `LOG_INFO`: 'info',
+     * - `LOG_DEBUG`: 'debug',
      *
      * ### Basic usage
      *
@@ -329,7 +329,7 @@ class Log
      * This allows you to handle messages differently based on application section/feature.
      *
      * ```
-     * Log::write('warning', 'Payment failed', ['scope' => 'payment']);
+     * Log::write('warning', 'Payment failed', ['scope': 'payment']);
      * ```
      *
      * When configuring loggers you can configure the scopes a particular logger will handle.
@@ -368,17 +368,17 @@ class Log
         $logged = false;
         $context = (array)$context;
         if (isset($context[0])) {
-            $context = ['scope' => $context];
+            $context = ['scope': $context];
         }
-        $context += ['scope' => []];
+        $context += ['scope': []];
 
-        foreach (static::$_registry->loaded() as $streamName) {
-            $logger = static::$_registry->{$streamName};
+        foreach (static::$_registry.loaded() as $streamName) {
+            $logger = static::$_registry.{$streamName};
             $levels = $scopes = null;
 
             if ($logger instanceof BaseLog) {
-                $levels = $logger->levels();
-                $scopes = $logger->scopes();
+                $levels = $logger.levels();
+                $scopes = $logger.scopes();
             }
             if ($scopes == null) {
                 $scopes = [];
@@ -389,7 +389,7 @@ class Log
                 is_array($scopes) && array_intersect((array)$context['scope'], $scopes);
 
             if ($correctLevel && $inScope) {
-                $logger->log($level, $message, $context);
+                $logger.log($level, $message, $context);
                 $logged = true;
             }
         }

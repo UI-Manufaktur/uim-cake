@@ -33,11 +33,11 @@ class ArrayLog : BaseLog
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'levels' => [],
-        'scopes' => [],
-        'formatter' => [
-            'className' => DefaultFormatter::class,
-            'includeDate' => false,
+        'levels': [],
+        'scopes': [],
+        'formatter': [
+            'className': DefaultFormatter::class,
+            'includeDate': false,
         ],
     ];
 
@@ -60,7 +60,7 @@ class ArrayLog : BaseLog
     function log($level, $message, array $context = [])
     {
         $message = _format($message, $context);
-        this.content[] = this.formatter->format($level, $message, $context);
+        this.content[] = this.formatter.format($level, $message, $context);
     }
 
     /**

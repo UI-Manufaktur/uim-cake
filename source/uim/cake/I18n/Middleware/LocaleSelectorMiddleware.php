@@ -56,9 +56,9 @@ class LocaleSelectorMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        $locale = Locale::acceptFromHttp($request->getHeaderLine('Accept-Language'));
+        $locale = Locale::acceptFromHttp($request.getHeaderLine('Accept-Language'));
         if (!$locale) {
-            return $handler->handle($request);
+            return $handler.handle($request);
         }
         if (this.locales != ['*']) {
             $locale = Locale::lookup(this.locales, $locale, true);
@@ -67,6 +67,6 @@ class LocaleSelectorMiddleware : IMiddleware
             I18n::setLocale($locale);
         }
 
-        return $handler->handle($request);
+        return $handler.handle($request);
     }
 }

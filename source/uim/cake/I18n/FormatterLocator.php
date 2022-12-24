@@ -49,7 +49,7 @@ class FormatterLocator
      */
     public this(array $registry = [])
     {
-        foreach ($registry as $name => $spec) {
+        foreach ($registry as $name: $spec) {
             this.set($name, $spec);
         }
     }

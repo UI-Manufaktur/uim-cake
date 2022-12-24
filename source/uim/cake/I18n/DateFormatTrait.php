@@ -142,11 +142,11 @@ trait DateFormatTrait
      *
      * ```
      * $time = new Time('2014-04-20 22:10');
-     * $time->i18nFormat(); // outputs '4/20/14, 10:10 PM' for the en-US locale
-     * $time->i18nFormat(\IntlDateFormatter::FULL); // Use the full date and time format
-     * $time->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]); // Use full date but short time format
-     * $time->i18nFormat('yyyy-MM-dd HH:mm:ss'); // outputs '2014-04-20 22:10'
-     * $time->i18nFormat(Time::UNIX_TIMESTAMP_FORMAT); // outputs '1398031800'
+     * $time.i18nFormat(); // outputs '4/20/14, 10:10 PM' for the en-US locale
+     * $time.i18nFormat(\IntlDateFormatter::FULL); // Use the full date and time format
+     * $time.i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]); // Use full date but short time format
+     * $time.i18nFormat('yyyy-MM-dd HH:mm:ss'); // outputs '2014-04-20 22:10'
+     * $time.i18nFormat(Time::UNIX_TIMESTAMP_FORMAT); // outputs '1398031800'
      * ```
      *
      * You can control the default format used through `Time::setToStringFormat()`.
@@ -165,8 +165,8 @@ trait DateFormatTrait
      *
      * ```
      * $time = new Time('2014-04-20 22:10');
-     * $time->i18nFormat(null, null, 'de-DE');
-     * $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Berlin', 'de-DE');
+     * $time.i18nFormat(null, null, 'de-DE');
+     * $time.i18nFormat(\IntlDateFormatter::FULL, 'Europe/Berlin', 'de-DE');
      * ```
      *
      * You can control the default locale used through `Time::setDefaultLocale()`.
@@ -190,7 +190,7 @@ trait DateFormatTrait
         if ($timezone) {
             // Handle the immutable and mutable object cases.
             $time = clone this;
-            $time = $time->timezone($timezone);
+            $time = $time.timezone($timezone);
         }
 
         $format = $format ?? static::$_toStringFormat;
@@ -236,7 +236,7 @@ trait DateFormatTrait
             $calendar = IntlDateFormatter::GREGORIAN;
         }
 
-        $timezone = $date->getTimezone()->getName();
+        $timezone = $date.getTimezone().getName();
         $key = "{$locale}.{$dateFormat}.{$timeFormat}.{$timezone}.{$calendar}.{$pattern}";
 
         if (!isset(static::$_formatters[$key])) {
@@ -262,7 +262,7 @@ trait DateFormatTrait
             static::$_formatters[$key] = $formatter;
         }
 
-        return static::$_formatters[$key]->format($date->format('U'));
+        return static::$_formatters[$key].format($date.format('U'));
     }
 
     /**
@@ -364,16 +364,16 @@ trait DateFormatTrait
         if (!$formatter) {
             throw new CakeException('Unable to create IntlDateFormatter instance');
         }
-        $formatter->setLenient(static::$lenientParsing);
+        $formatter.setLenient(static::$lenientParsing);
 
-        $time = $formatter->parse($time);
+        $time = $formatter.parse($time);
         if ($time != false) {
             $dateTime = new DateTime('@' . $time);
 
             if (!($tz instanceof DateTimeZone)) {
                 $tz = new DateTimeZone($tz ?? date_default_timezone_get());
             }
-            $dateTime->setTimezone($tz);
+            $dateTime.setTimezone($tz);
 
             return new static($dateTime);
         }
@@ -509,7 +509,7 @@ trait DateFormatTrait
      */
     function diffForHumans(?ChronosInterface $other = null, bool $absolute = false): string
     {
-        return static::getDiffFormatter()->diffForHumans(this, $other, $absolute);
+        return static::getDiffFormatter().diffForHumans(this, $other, $absolute);
     }
 
     /**
@@ -521,9 +521,9 @@ trait DateFormatTrait
     {
         /** @psalm-suppress PossiblyNullReference */
         return [
-            'time' => this.format('Y-m-d H:i:s.uP'),
-            'timezone' => this.getTimezone()->getName(),
-            'fixedNowTime' => static::hasTestNow() ? static::getTestNow()->format('Y-m-d\TH:i:s.uP') : false,
+            'time': this.format('Y-m-d H:i:s.uP'),
+            'timezone': this.getTimezone().getName(),
+            'fixedNowTime': static::hasTestNow() ? static::getTestNow().format('Y-m-d\TH:i:s.uP') : false,
         ];
     }
 }

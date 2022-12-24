@@ -114,7 +114,7 @@ class TranslatorRegistry
 
             $formatter = $name == 'cake' ? 'default' : _defaultFormatter;
             $package = $loader();
-            $package->setFormatter($formatter);
+            $package.setFormatter($formatter);
 
             return $package;
         });
@@ -200,15 +200,15 @@ class TranslatorRegistry
         // Cache keys cannot contain / if they go to file engine.
         $keyName = str_replace('/', '.', $name);
         $key = "translations.{$keyName}.{$locale}";
-        $translator = _cacher->get($key);
+        $translator = _cacher.get($key);
 
         // PHP <8.1 does not correctly garbage collect strings created
         // by unserialized arrays.
         gc_collect_cycles();
 
-        if (!$translator || !$translator->getPackage()) {
+        if (!$translator || !$translator.getPackage()) {
             $translator = _getTranslator($name, $locale);
-            _cacher->set($key, $translator);
+            _cacher.set($key, $translator);
         }
 
         return this.registry[$name][$locale] = $translator;
@@ -224,7 +224,7 @@ class TranslatorRegistry
      */
     protected function _getTranslator(string $name, string $locale): Translator
     {
-        if (this.packages->has($name, $locale)) {
+        if (this.packages.has($name, $locale)) {
             return this.createInstance($name, $locale);
         }
 
@@ -235,7 +235,7 @@ class TranslatorRegistry
         }
 
         $package = this.setFallbackPackage($name, $package);
-        this.packages->set($name, $locale, $package);
+        this.packages.set($name, $locale, $package);
 
         return this.createInstance($name, $locale);
     }
@@ -249,12 +249,12 @@ class TranslatorRegistry
      */
     protected function createInstance(string $name, string $locale): Translator
     {
-        $package = this.packages->get($name, $locale);
-        $fallback = $package->getFallback();
+        $package = this.packages.get($name, $locale);
+        $fallback = $package.getFallback();
         if ($fallback != null) {
             $fallback = this.get($fallback, $locale);
         }
-        $formatter = this.formatters->get($package->getFormatter());
+        $formatter = this.formatters.get($package.getFormatter());
 
         return new Translator($locale, $package, $formatter, $fallback);
     }
@@ -313,7 +313,7 @@ class TranslatorRegistry
      */
     function setFallbackPackage(string $name, Package $package): Package
     {
-        if ($package->getFallback()) {
+        if ($package.getFallback()) {
             return $package;
         }
 
@@ -322,7 +322,7 @@ class TranslatorRegistry
             $fallbackDomain = 'default';
         }
 
-        $package->setFallback($fallbackDomain);
+        $package.setFallback($fallbackDomain);
 
         return $package;
     }
@@ -344,8 +344,8 @@ class TranslatorRegistry
         return function () use ($loader, $fallbackDomain) {
             /** @var \Cake\I18n\Package $package */
             $package = $loader();
-            if (!$package->getFallback()) {
-                $package->setFallback($fallbackDomain);
+            if (!$package.getFallback()) {
+                $package.setFallback($fallbackDomain);
             }
 
             return $package;

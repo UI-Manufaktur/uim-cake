@@ -53,8 +53,8 @@ class PackageLocator
      */
     public this(array $registry = [])
     {
-        foreach ($registry as $name => $locales) {
-            foreach ($locales as $locale => $spec) {
+        foreach ($registry as $name: $locales) {
+            foreach ($locales as $locale: $spec) {
                 this.set($name, $locale, $spec);
             }
         }

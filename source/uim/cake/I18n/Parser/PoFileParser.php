@@ -75,8 +75,8 @@ class PoFileParser
         $stream = fopen($resource, 'rb');
 
         $defaults = [
-            'ids' => [],
-            'translated' => null,
+            'ids': [],
+            'translated': null,
         ];
 
         $messages = [];

@@ -38,9 +38,9 @@ abstract class BaseLog : AbstractLogger
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'levels' => [],
-        'scopes' => [],
-        'formatter' => DefaultFormatter::class,
+        'levels': [],
+        'scopes': [],
+        'formatter': DefaultFormatter::class,
     ];
 
     /**
@@ -172,18 +172,18 @@ abstract class BaseLog : AbstractLogger
             }
 
             if ($value instanceof ArrayObject) {
-                $replacements['{' . $key . '}'] = json_encode($value->getArrayCopy(), JSON_UNESCAPED_UNICODE);
+                $replacements['{' . $key . '}'] = json_encode($value.getArrayCopy(), JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if ($value instanceof Serializable) {
-                $replacements['{' . $key . '}'] = $value->serialize();
+                $replacements['{' . $key . '}'] = $value.serialize();
                 continue;
             }
 
             if (is_object($value)) {
                 if (method_exists($value, 'toArray')) {
-                    $replacements['{' . $key . '}'] = json_encode($value->toArray(), JSON_UNESCAPED_UNICODE);
+                    $replacements['{' . $key . '}'] = json_encode($value.toArray(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
 
@@ -198,7 +198,7 @@ abstract class BaseLog : AbstractLogger
                 }
 
                 if (method_exists($value, '__debugInfo')) {
-                    $replacements['{' . $key . '}'] = json_encode($value->__debugInfo(), JSON_UNESCAPED_UNICODE);
+                    $replacements['{' . $key . '}'] = json_encode($value.__debugInfo(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
             }

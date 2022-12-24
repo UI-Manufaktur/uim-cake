@@ -155,7 +155,7 @@ class Email : JsonSerializable, Serializable
      */
     function __call(string $method, array $args)
     {
-        $result = this.message->$method(...$args);
+        $result = this.message.$method(...$args);
 
         if (strpos($method, 'get') == 0) {
             return $result;
@@ -187,7 +187,7 @@ class Email : JsonSerializable, Serializable
      */
     function setViewRenderer(string $viewClass)
     {
-        this.getRenderer()->viewBuilder()->setClassName($viewClass);
+        this.getRenderer().viewBuilder().setClassName($viewClass);
 
         return this;
     }
@@ -201,7 +201,7 @@ class Email : JsonSerializable, Serializable
     function getViewRenderer(): string
     {
         /** @psalm-suppress NullableReturnStatement */
-        return this.getRenderer()->viewBuilder()->getClassName();
+        return this.getRenderer().viewBuilder().getClassName();
     }
 
     /**
@@ -212,7 +212,7 @@ class Email : JsonSerializable, Serializable
      */
     function setViewVars(array $viewVars)
     {
-        this.getRenderer()->viewBuilder()->setVars($viewVars);
+        this.getRenderer().viewBuilder().setVars($viewVars);
 
         return this;
     }
@@ -224,7 +224,7 @@ class Email : JsonSerializable, Serializable
      */
     function getViewVars(): array
     {
-        return this.getRenderer()->viewBuilder()->getVars();
+        return this.getRenderer().viewBuilder().getVars();
     }
 
     /**
@@ -279,12 +279,12 @@ class Email : JsonSerializable, Serializable
     function message(?string $type = null)
     {
         if ($type == null) {
-            return this.message->getBody();
+            return this.message.getBody();
         }
 
         $method = 'getBody' . ucfirst($type);
 
-        return this.message->$method();
+        return this.message.$method();
     }
 
     /**
@@ -322,25 +322,25 @@ class Email : JsonSerializable, Serializable
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                this.getRenderer()->viewBuilder()->{'set' . ucfirst($method)}($config[$method]);
+                this.getRenderer().viewBuilder().{'set' . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
         if (array_key_exists('helpers', $config)) {
-            this.getRenderer()->viewBuilder()->setHelpers($config['helpers'], false);
+            this.getRenderer().viewBuilder().setHelpers($config['helpers'], false);
             unset($config['helpers']);
         }
         if (array_key_exists('viewRenderer', $config)) {
-            this.getRenderer()->viewBuilder()->setClassName($config['viewRenderer']);
+            this.getRenderer().viewBuilder().setClassName($config['viewRenderer']);
             unset($config['viewRenderer']);
         }
         if (array_key_exists('viewVars', $config)) {
-            this.getRenderer()->viewBuilder()->setVars($config['viewVars']);
+            this.getRenderer().viewBuilder().setVars($config['viewVars']);
             unset($config['viewVars']);
         }
 
-        this.message->setConfig($config);
+        this.message.setConfig($config);
 
         return this;
     }
@@ -377,7 +377,7 @@ class Email : JsonSerializable, Serializable
                 ' a transport in the set profile?';
             throw new BadMethodCallException($msg);
         }
-        $contents = $transport->send(this.message);
+        $contents = $transport.send(this.message);
         _logDelivery($contents);
 
         return $contents;
@@ -395,10 +395,10 @@ class Email : JsonSerializable, Serializable
             $content = implode("\n", $content) . "\n";
         }
 
-        this.message->setBody(
-            this.getRenderer()->render(
+        this.message.setBody(
+            this.getRenderer().render(
                 (string)$content,
-                this.message->getBodyTypes()
+                this.message.getBodyTypes()
             )
         );
     }
@@ -410,7 +410,7 @@ class Email : JsonSerializable, Serializable
      */
     function viewBuilder(): ViewBuilder
     {
-        return this.getRenderer()->viewBuilder();
+        return this.getRenderer().viewBuilder();
     }
 
     /**
@@ -452,12 +452,12 @@ class Email : JsonSerializable, Serializable
             return;
         }
         $config = [
-            'level' => 'debug',
-            'scope' => 'email',
+            'level': 'debug',
+            'scope': 'email',
         ];
         if (_profile['log'] != true) {
             if (!is_array(_profile['log'])) {
-                _profile['log'] = ['level' => _profile['log']];
+                _profile['log'] = ['level': _profile['log']];
             }
             $config = _profile['log'] + $config;
         }
@@ -504,23 +504,23 @@ class Email : JsonSerializable, Serializable
 
         $instance = new static($config);
         if ($to != null) {
-            $instance->getMessage()->setTo($to);
+            $instance.getMessage().setTo($to);
         }
         if ($subject != null) {
-            $instance->getMessage()->setSubject($subject);
+            $instance.getMessage().setSubject($subject);
         }
         if (is_array($message)) {
-            $instance->setViewVars($message);
+            $instance.setViewVars($message);
             $message = null;
         } elseif ($message == null) {
-            $config = $instance->getProfile();
+            $config = $instance.getProfile();
             if (array_key_exists('message', $config)) {
                 $message = $config['message'];
             }
         }
 
         if ($send == true) {
-            $instance->send($message);
+            $instance.send($message);
         }
 
         return $instance;
@@ -533,9 +533,9 @@ class Email : JsonSerializable, Serializable
      */
     function reset()
     {
-        this.message->reset();
+        this.message.reset();
         if (this.renderer != null) {
-            this.renderer->reset();
+            this.renderer.reset();
         }
         _transport = null;
         _profile = [];
@@ -552,8 +552,8 @@ class Email : JsonSerializable, Serializable
      */
     function jsonSerialize(): array
     {
-        $array = this.message->jsonSerialize();
-        $array['viewConfig'] = this.getRenderer()->viewBuilder()->jsonSerialize();
+        $array = this.message.jsonSerialize();
+        $array['viewConfig'] = this.getRenderer().viewBuilder().jsonSerialize();
 
         return $array;
     }
@@ -567,14 +567,14 @@ class Email : JsonSerializable, Serializable
     function createFromArray(array $config)
     {
         if (isset($config['viewConfig'])) {
-            this.getRenderer()->viewBuilder()->createFromArray($config['viewConfig']);
+            this.getRenderer().viewBuilder().createFromArray($config['viewConfig']);
             unset($config['viewConfig']);
         }
 
         if (this.message == null) {
             this.message = new this.messageClass();
         }
-        this.message->createFromArray($config);
+        this.message.createFromArray($config);
 
         return this;
     }

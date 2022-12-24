@@ -26,9 +26,9 @@ class DefaultFormatter : AbstractFormatter
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'dateFormat' => 'Y-m-d H:i:s',
-        'includeTags' => false,
-        'includeDate' => true,
+        'dateFormat': 'Y-m-d H:i:s',
+        'includeTags': false,
+        'includeDate': true,
     ];
 
     /**
@@ -45,7 +45,7 @@ class DefaultFormatter : AbstractFormatter
     function format($level, string $message, array $context = []): string
     {
         if (_config['includeDate']) {
-            $message = sprintf('%s %s: %s', (new DateTime())->format(_config['dateFormat']), $level, $message);
+            $message = sprintf('%s %s: %s', (new DateTime()).format(_config['dateFormat']), $level, $message);
         } else {
             $message = sprintf('%s: %s', $level, $message);
         }

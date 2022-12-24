@@ -57,10 +57,10 @@ class DatabaseSession : SessionHandlerInterface
         $tableLocator = this.getTableLocator();
 
         if (empty($config['model'])) {
-            $config = $tableLocator->exists('Sessions') ? [] : ['table' => 'sessions', 'allowFallbackClass' => true];
-            _table = $tableLocator->get('Sessions', $config);
+            $config = $tableLocator.exists('Sessions') ? [] : ['table': 'sessions', 'allowFallbackClass': true];
+            _table = $tableLocator.get('Sessions', $config);
         } else {
-            _table = $tableLocator->get($config['model']);
+            _table = $tableLocator.get($config['model']);
         }
 
         _timeout = (int)ini_get('session.gc_maxlifetime');
@@ -113,13 +113,13 @@ class DatabaseSession : SessionHandlerInterface
     function read($id)
     {
         /** @var string $pkField */
-        $pkField = _table->getPrimaryKey();
+        $pkField = _table.getPrimaryKey();
         $result = _table
-            ->find('all')
-            ->select(['data'])
-            ->where([$pkField => $id])
-            ->disableHydration()
-            ->first();
+            .find('all')
+            .select(['data'])
+            .where([$pkField: $id])
+            .disableHydration()
+            .first();
 
         if (empty($result)) {
             return '';
@@ -152,14 +152,14 @@ class DatabaseSession : SessionHandlerInterface
         }
 
         /** @var string $pkField */
-        $pkField = _table->getPrimaryKey();
-        $session = _table->newEntity([
-            $pkField => $id,
-            'data' => $data,
-            'expires' => time() + _timeout,
-        ], ['accessibleFields' => [$pkField => true]]);
+        $pkField = _table.getPrimaryKey();
+        $session = _table.newEntity([
+            $pkField: $id,
+            'data': $data,
+            'expires': time() + _timeout,
+        ], ['accessibleFields': [$pkField: true]]);
 
-        return (bool)_table->save($session);
+        return (bool)_table.save($session);
     }
 
     /**
@@ -171,8 +171,8 @@ class DatabaseSession : SessionHandlerInterface
     function destroy($id): bool
     {
         /** @var string $pkField */
-        $pkField = _table->getPrimaryKey();
-        _table->deleteAll([$pkField => $id]);
+        $pkField = _table.getPrimaryKey();
+        _table.deleteAll([$pkField: $id]);
 
         return true;
     }
@@ -186,6 +186,6 @@ class DatabaseSession : SessionHandlerInterface
     #[\ReturnTypeWillChange]
     function gc($maxlifetime)
     {
-        return _table->deleteAll(['expires <' => time()]);
+        return _table.deleteAll(['expires <': time()]);
     }
 }

@@ -43,23 +43,23 @@ class SyslogLog : BaseLog
      *
      * ```
      *  Log::config('error', ]
-     *      'engine' => 'Syslog',
-     *      'levels' => ['emergency', 'alert', 'critical', 'error'],
-     *      'prefix' => 'Web Server 01'
+     *      'engine': 'Syslog',
+     *      'levels': ['emergency', 'alert', 'critical', 'error'],
+     *      'prefix': 'Web Server 01'
      *  ]);
      * ```
      *
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'levels' => [],
-        'scopes' => [],
-        'flag' => LOG_ODELAY,
-        'prefix' => '',
-        'facility' => LOG_USER,
-        'formatter' => [
-            'className' => DefaultFormatter::class,
-            'includeDate' => false,
+        'levels': [],
+        'scopes': [],
+        'flag': LOG_ODELAY,
+        'prefix': '',
+        'facility': LOG_USER,
+        'formatter': [
+            'className': DefaultFormatter::class,
+            'includeDate': false,
         ],
     ];
 
@@ -69,14 +69,14 @@ class SyslogLog : BaseLog
      * @var array<int>
      */
     protected $_levelMap = [
-        'emergency' => LOG_EMERG,
-        'alert' => LOG_ALERT,
-        'critical' => LOG_CRIT,
-        'error' => LOG_ERR,
-        'warning' => LOG_WARNING,
-        'notice' => LOG_NOTICE,
-        'info' => LOG_INFO,
-        'debug' => LOG_DEBUG,
+        'emergency': LOG_EMERG,
+        'alert': LOG_ALERT,
+        'critical': LOG_CRIT,
+        'error': LOG_ERR,
+        'warning': LOG_WARNING,
+        'notice': LOG_NOTICE,
+        'info': LOG_INFO,
+        'debug': LOG_DEBUG,
     ];
 
     /**
@@ -99,8 +99,8 @@ class SyslogLog : BaseLog
             );
             /** @psalm-suppress DeprecatedClass */
             $config['formatter'] = [
-                'className' => LegacySyslogFormatter::class,
-                'format' => $config['format'],
+                'className': LegacySyslogFormatter::class,
+                'format': $config['format'],
             ];
         }
         parent::__construct($config);
@@ -133,7 +133,7 @@ class SyslogLog : BaseLog
 
         $lines = explode("\n", _format($message, $context));
         foreach ($lines as $line) {
-            _write($priority, this.formatter->format($level, $line, $context));
+            _write($priority, this.formatter.format($level, $line, $context));
         }
     }
 

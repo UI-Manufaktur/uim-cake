@@ -46,16 +46,16 @@ class FileLog : BaseLog
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'path' => null,
-        'file' => null,
-        'types' => null,
-        'levels' => [],
-        'scopes' => [],
-        'rotate' => 10,
-        'size' => 10485760, // 10MB
-        'mask' => null,
-        'formatter' => [
-            'className' => DefaultFormatter::class,
+        'path': null,
+        'file': null,
+        'types': null,
+        'levels': [],
+        'scopes': [],
+        'rotate': 10,
+        'size': 10485760, // 10MB
+        'mask': null,
+        'formatter': [
+            'className': DefaultFormatter::class,
         ],
     ];
 
@@ -111,7 +111,7 @@ class FileLog : BaseLog
 
         if (isset(_config['dateFormat'])) {
             deprecationWarning('`dateFormat` option should now be set in the formatter options.', 0);
-            this.formatter->setConfig('dateFormat', _config['dateFormat']);
+            this.formatter.setConfig('dateFormat', _config['dateFormat']);
         }
     }
 
@@ -127,7 +127,7 @@ class FileLog : BaseLog
     function log($level, $message, array $context = []): void
     {
         $message = _format($message, $context);
-        $message = this.formatter->format($level, $message, $context);
+        $message = this.formatter.format($level, $message, $context);
 
         $filename = _getFilename($level);
         if (_size) {
