@@ -66,10 +66,10 @@ class FilterIterator : Collection
     {
         /** @var \IteratorIterator $filter */
         $filter = this.getInnerIterator();
-        $iterator = $filter->getInnerIterator();
+        $iterator = $filter.getInnerIterator();
 
         if ($iterator instanceof CollectionInterface) {
-            $iterator = $iterator->unwrap();
+            $iterator = $iterator.unwrap();
         }
 
         if (get_class($iterator) != ArrayIterator::class) {
@@ -81,7 +81,7 @@ class FilterIterator : Collection
         $callback = _callback;
         $res = [];
 
-        foreach ($iterator as $k => $v) {
+        foreach ($iterator as $k: $v) {
             if ($callback($v, $k, $iterator)) {
                 $res[$k] = $v;
             }

@@ -67,7 +67,7 @@ trait ExtractTrait
         $value = null;
         $collectionTransform = false;
 
-        foreach ($parts as $i => $column) {
+        foreach ($parts as $i: $column) {
             if ($column == '{*}') {
                 $collectionTransform = true;
                 continue;
@@ -86,7 +86,7 @@ trait ExtractTrait
             if ($collectionTransform) {
                 $rest = implode('.', array_slice($parts, $i));
 
-                return (new Collection($data))->extract($rest);
+                return (new Collection($data)).extract($rest);
             }
 
             if (!isset($data[$column])) {
@@ -134,7 +134,7 @@ trait ExtractTrait
     protected function _createMatcherFilter(array $conditions): Closure
     {
         $matchers = [];
-        foreach ($conditions as $property => $value) {
+        foreach ($conditions as $property: $value) {
             $extractor = _propertyExtractor($property);
             $matchers[] = function ($v) use ($extractor, $value) {
                 return $extractor($v) == $value;

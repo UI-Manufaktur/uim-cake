@@ -33,8 +33,8 @@ use RuntimeException;
  *
  * ```
  * Cache::config('shared', [
- *    'className' => Cake\Cache\Engine\ApcuEngine::class,
- *    'prefix' => 'my_app_'
+ *    'className': Cake\Cache\Engine\ApcuEngine::class,
+ *    'prefix': 'my_app_'
  * ]);
  * ```
  *
@@ -75,13 +75,13 @@ class Cache
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        'array' => Engine\ArrayEngine::class,
-        'apcu' => Engine\ApcuEngine::class,
-        'file' => Engine\FileEngine::class,
-        'memcached' => Engine\MemcachedEngine::class,
-        'null' => Engine\NullEngine::class,
-        'redis' => Engine\RedisEngine::class,
-        'wincache' => Engine\WincacheEngine::class,
+        'array': Engine\ArrayEngine::class,
+        'apcu': Engine\ApcuEngine::class,
+        'file': Engine\FileEngine::class,
+        'memcached': Engine\MemcachedEngine::class,
+        'null': Engine\NullEngine::class,
+        'redis': Engine\RedisEngine::class,
+        'wincache': Engine\WincacheEngine::class,
     ];
 
     /**
@@ -154,11 +154,11 @@ class Cache
         $config = static::$_config[$name];
 
         try {
-            $registry->load($name, $config);
+            $registry.load($name, $config);
         } catch (RuntimeException $e) {
             if (!array_key_exists('fallback', $config)) {
-                $registry->set($name, new NullEngine());
-                trigger_error($e->getMessage(), E_USER_WARNING);
+                $registry.set($name, new NullEngine());
+                trigger_error($e.getMessage(), E_USER_WARNING);
 
                 return;
             }
@@ -176,16 +176,16 @@ class Cache
 
             /** @var \Cake\Cache\CacheEngine $fallbackEngine */
             $fallbackEngine = clone static::pool($config['fallback']);
-            $newConfig = $config + ['groups' => [], 'prefix' => null];
-            $fallbackEngine->setConfig('groups', $newConfig['groups'], false);
+            $newConfig = $config + ['groups': [], 'prefix': null];
+            $fallbackEngine.setConfig('groups', $newConfig['groups'], false);
             if ($newConfig['prefix']) {
-                $fallbackEngine->setConfig('prefix', $newConfig['prefix'], false);
+                $fallbackEngine.setConfig('prefix', $newConfig['prefix'], false);
             }
-            $registry->set($name, $fallbackEngine);
+            $registry.set($name, $fallbackEngine);
         }
 
         if ($config['className'] instanceof CacheEngine) {
-            $config = $config['className']->getConfig();
+            $config = $config['className'].getConfig();
         }
 
         if (!empty($config['groups'])) {
@@ -225,13 +225,13 @@ class Cache
 
         $registry = static::getRegistry();
 
-        if (isset($registry->{$config})) {
-            return $registry->{$config};
+        if (isset($registry.{$config})) {
+            return $registry.{$config};
         }
 
         static::_buildEngine($config);
 
-        return $registry->{$config};
+        return $registry.{$config};
     }
 
     /**
@@ -263,7 +263,7 @@ class Cache
         }
 
         $backend = static::pool($config);
-        $success = $backend->set($key, $value);
+        $success = $backend.set($key, $value);
         if ($success == false && $value != '') {
             trigger_error(
                 sprintf(
@@ -287,13 +287,13 @@ class Cache
      * Writing to the active cache config:
      *
      * ```
-     * Cache::writeMany(['cached_data_1' => 'data 1', 'cached_data_2' => 'data 2']);
+     * Cache::writeMany(['cached_data_1': 'data 1', 'cached_data_2': 'data 2']);
      * ```
      *
      * Writing to a specific cache config:
      *
      * ```
-     * Cache::writeMany(['cached_data_1' => 'data 1', 'cached_data_2' => 'data 2'], 'long_term');
+     * Cache::writeMany(['cached_data_1': 'data 1', 'cached_data_2': 'data 2'], 'long_term');
      * ```
      *
      * @param iterable $data An array or Traversable of data to be stored in the cache
@@ -303,7 +303,7 @@ class Cache
      */
     public static function writeMany(iterable $data, string $config = 'default'): bool
     {
-        return static::pool($config)->setMultiple($data);
+        return static::pool($config).setMultiple($data);
     }
 
     /**
@@ -330,7 +330,7 @@ class Cache
      */
     public static function read(string $key, string $config = 'default')
     {
-        return static::pool($config)->get($key);
+        return static::pool($config).get($key);
     }
 
     /**
@@ -358,7 +358,7 @@ class Cache
      */
     public static function readMany(iterable $keys, string $config = 'default'): iterable
     {
-        return static::pool($config)->getMultiple($keys);
+        return static::pool($config).getMultiple($keys);
     }
 
     /**
@@ -377,7 +377,7 @@ class Cache
             throw new InvalidArgumentException('Offset cannot be less than 0.');
         }
 
-        return static::pool($config)->increment($key, $offset);
+        return static::pool($config).increment($key, $offset);
     }
 
     /**
@@ -396,7 +396,7 @@ class Cache
             throw new InvalidArgumentException('Offset cannot be less than 0.');
         }
 
-        return static::pool($config)->decrement($key, $offset);
+        return static::pool($config).decrement($key, $offset);
     }
 
     /**
@@ -422,7 +422,7 @@ class Cache
      */
     public static function delete(string $key, string $config = 'default'): bool
     {
-        return static::pool($config)->delete($key);
+        return static::pool($config).delete($key);
     }
 
     /**
@@ -449,7 +449,7 @@ class Cache
      */
     public static function deleteMany(iterable $keys, string $config = 'default'): bool
     {
-        return static::pool($config)->deleteMultiple($keys);
+        return static::pool($config).deleteMultiple($keys);
     }
 
     /**
@@ -460,7 +460,7 @@ class Cache
      */
     public static function clear(string $config = 'default'): bool
     {
-        return static::pool($config)->clear();
+        return static::pool($config).clear();
     }
 
     /**
@@ -488,19 +488,19 @@ class Cache
      */
     public static function clearGroup(string $group, string $config = 'default'): bool
     {
-        return static::pool($config)->clearGroup($group);
+        return static::pool($config).clearGroup($group);
     }
 
     /**
      * Retrieve group names to config mapping.
      *
      * ```
-     * Cache::config('daily', ['duration' => '1 day', 'groups' => ['posts']]);
-     * Cache::config('weekly', ['duration' => '1 week', 'groups' => ['posts', 'archive']]);
+     * Cache::config('daily', ['duration': '1 day', 'groups': ['posts']]);
+     * Cache::config('weekly', ['duration': '1 week', 'groups': ['posts', 'archive']]);
      * $configs = Cache::groupConfigs('posts');
      * ```
      *
-     * $configs will equal to `['posts' => ['daily', 'weekly']]`
+     * $configs will equal to `['posts': ['daily', 'weekly']]`
      * Calling this method will load all the configured engines.
      *
      * @param string|null $group Group name or null to retrieve all group mappings
@@ -517,7 +517,7 @@ class Cache
         }
 
         if (isset(self::$_groups[$group])) {
-            return [$group => self::$_groups[$group]];
+            return [$group: self::$_groups[$group]];
         }
 
         throw new InvalidArgumentException(sprintf('Invalid cache group %s', $group));
@@ -570,7 +570,7 @@ class Cache
      *
      * ```
      * $results = Cache::remember('all_articles', function () {
-     *      return this.find('all')->toArray();
+     *      return this.find('all').toArray();
      * });
      * ```
      *
@@ -623,6 +623,6 @@ class Cache
             return false;
         }
 
-        return static::pool($config)->add($key, $value);
+        return static::pool($config).add($key, $value);
     }
 }

@@ -29,7 +29,7 @@ use Serializable;
  *
  * ```
  *  $iterator = new ZipIterator([[1, 2], [3, 4]]);
- *  $iterator->toList(); // Returns [[1, 3], [2, 4]]
+ *  $iterator.toList(); // Returns [[1, 3], [2, 4]]
  * ```
  *
  * You can also chose a custom function to zip the elements together, such
@@ -41,7 +41,7 @@ use Serializable;
  *  $iterator = new ZipIterator([[1, 2], [3, 4]], function ($a, $b) {
  *    return $a + $b;
  *  });
- *  $iterator->toList(); // Returns [4, 6]
+ *  $iterator.toList(); // Returns [4, 6]
  * ```
  */
 class ZipIterator : MultipleIterator : CollectionInterface, Serializable
@@ -72,7 +72,7 @@ class ZipIterator : MultipleIterator : CollectionInterface, Serializable
     public this(array $sets, ?callable $callable = null)
     {
         $sets = array_map(function ($items) {
-            return (new Collection($items))->unwrap();
+            return (new Collection($items)).unwrap();
         }, $sets);
 
         _callback = $callable;

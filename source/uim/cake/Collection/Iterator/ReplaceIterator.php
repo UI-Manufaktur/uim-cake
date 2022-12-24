@@ -81,7 +81,7 @@ class ReplaceIterator : Collection
         $iterator = _innerIterator;
 
         if ($iterator instanceof CollectionInterface) {
-            $iterator = $iterator->unwrap();
+            $iterator = $iterator.unwrap();
         }
 
         if (get_class($iterator) != ArrayIterator::class) {
@@ -94,7 +94,7 @@ class ReplaceIterator : Collection
         $callback = _callback;
         $res = [];
 
-        foreach ($iterator as $k => $v) {
+        foreach ($iterator as $k: $v) {
             $res[$k] = $callback($v, $k, $iterator);
         }
 

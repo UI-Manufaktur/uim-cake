@@ -46,7 +46,7 @@ class Command : BaseCommand
     public this()
     {
         this.modelFactory('Table', function ($alias) {
-            return this.getTableLocator()->get($alias);
+            return this.getTableLocator().get($alias);
         });
 
         if (this.defaultTable != null) {

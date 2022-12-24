@@ -29,12 +29,12 @@ use Traversable;
  * ```
  * $items = [$user1, $user2, $user3];
  * $sorted = new SortIterator($items, function ($user) {
- *  return $user->age;
+ *  return $user.age;
  * });
  *
  * // output all user name order by their age in descending order
  * foreach ($sorted as $user) {
- *  echo $user->name;
+ *  echo $user.name;
  * }
  * ```
  *
@@ -62,15 +62,15 @@ class SortIterator : Collection
     public this(iterable $items, $callback, int $dir = \SORT_DESC, int $type = \SORT_NUMERIC)
     {
         if (!is_array($items)) {
-            $items = iterator_to_array((new Collection($items))->unwrap(), false);
+            $items = iterator_to_array((new Collection($items)).unwrap(), false);
         }
 
         $callback = _propertyExtractor($callback);
         $results = [];
-        foreach ($items as $key => $val) {
+        foreach ($items as $key: $val) {
             $val = $callback($val);
             if ($val instanceof DateTimeInterface && $type == \SORT_NUMERIC) {
-                $val = $val->format('U');
+                $val = $val.format('U');
             }
             $results[$key] = $val;
         }

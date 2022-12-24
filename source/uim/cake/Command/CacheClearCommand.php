@@ -48,12 +48,12 @@ class CacheClearCommand : Command
     {
         $parser = parent::buildOptionParser($parser);
         $parser
-            ->setDescription('Clear all data in a single cache engine')
-            ->addArgument('engine', [
-                'help' => 'The cache engine to clear.' .
+            .setDescription('Clear all data in a single cache engine')
+            .addArgument('engine', [
+                'help': 'The cache engine to clear.' .
                     'For example, `cake cache clear _cake_model_` will clear the model cache.' .
                     ' Use `cake cache list` to list available engines.',
-                'required' => true,
+                'required': true,
             ]);
 
         return $parser;
@@ -68,23 +68,23 @@ class CacheClearCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $name = (string)$args->getArgument('engine');
+        $name = (string)$args.getArgument('engine');
         try {
-            $io->out("Clearing {$name}");
+            $io.out("Clearing {$name}");
 
             $engine = Cache::pool($name);
             Cache::clear($name);
             if ($engine instanceof ApcuEngine) {
-                $io->warning("ApcuEngine detected: Cleared {$name} CLI cache successfully " .
+                $io.warning("ApcuEngine detected: Cleared {$name} CLI cache successfully " .
                     "but {$name} web cache must be cleared separately.");
             } elseif ($engine instanceof WincacheEngine) {
-                $io->warning("WincacheEngine detected: Cleared {$name} CLI cache successfully " .
+                $io.warning("WincacheEngine detected: Cleared {$name} CLI cache successfully " .
                     "but {$name} web cache must be cleared separately.");
             } else {
-                $io->out("<success>Cleared {$name} cache</success>");
+                $io.out("<success>Cleared {$name} cache</success>");
             }
         } catch (InvalidArgumentException $e) {
-            $io->error($e->getMessage());
+            $io.error($e.getMessage());
             this.abort();
         }
 

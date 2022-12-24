@@ -90,9 +90,9 @@ class InsertIterator : Collection
     {
         parent::next();
         if (_validValues) {
-            _values->next();
+            _values.next();
         }
-        _validValues = _values->valid();
+        _validValues = _values.valid();
     }
 
     /**
@@ -118,7 +118,7 @@ class InsertIterator : Collection
             $pointer = &$pointer[$step];
         }
 
-        $pointer[_target] = _values->current();
+        $pointer[_target] = _values.current();
 
         return $row;
     }
@@ -131,7 +131,7 @@ class InsertIterator : Collection
     function rewind(): void
     {
         parent::rewind();
-        _values->rewind();
-        _validValues = _values->valid();
+        _values.rewind();
+        _validValues = _values.valid();
     }
 }

@@ -62,7 +62,7 @@ class Collection : IteratorIterator : CollectionInterface, Serializable
      */
     function __serialize(): array
     {
-        return this.buffered()->toArray();
+        return this.buffered().toArray();
     }
 
     /**
@@ -128,7 +128,7 @@ class Collection : IteratorIterator : CollectionInterface, Serializable
         }
 
         return [
-            'count' => $count,
+            'count': $count,
         ];
     }
 }

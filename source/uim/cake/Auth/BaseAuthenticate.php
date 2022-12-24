@@ -39,7 +39,7 @@ abstract class BaseAuthenticate : EventListenerInterface
      * - `finder` The finder method to use to fetch user record. Defaults to 'all'.
      *   You can set finder name as string or an array where key is finder name and value
      *   is an array passed to `Table::find()` options.
-     *   E.g. ['finderName' => ['some_finder_option' => 'some_value']]
+     *   E.g. ['finderName': ['some_finder_option': 'some_value']]
      * - `passwordHasher` Password hasher class. Can be a string specifying class name
      *    or an array containing `className` key, any other keys will be passed as
      *    config to the class. Defaults to 'Default'.
@@ -47,13 +47,13 @@ abstract class BaseAuthenticate : EventListenerInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'fields' => [
-            'username' => 'username',
-            'password' => 'password',
+        'fields': [
+            'username': 'username',
+            'password': 'password',
         ],
-        'userModel' => 'Users',
-        'finder' => 'all',
-        'passwordHasher' => 'Default',
+        'userModel': 'Users',
+        'finder': 'all',
+        'passwordHasher': 'Default',
     ];
 
     /**
@@ -103,7 +103,7 @@ abstract class BaseAuthenticate : EventListenerInterface
      */
     protected function _findUser(string $username, ?string $password = null)
     {
-        $result = _query($username)->first();
+        $result = _query($username).first();
 
         if ($result == null) {
             // Waste time hashing the password, to prevent
@@ -113,7 +113,7 @@ abstract class BaseAuthenticate : EventListenerInterface
             // and hashing *could* create a timing side-channel.
             if ($password != null) {
                 $hasher = this.passwordHasher();
-                $hasher->hash($password);
+                $hasher.hash($password);
             }
 
             return false;
@@ -122,32 +122,32 @@ abstract class BaseAuthenticate : EventListenerInterface
         $passwordField = _config['fields']['password'];
         if ($password != null) {
             $hasher = this.passwordHasher();
-            $hashedPassword = $result->get($passwordField);
+            $hashedPassword = $result.get($passwordField);
 
             if ($hashedPassword == null || $hashedPassword == '') {
                 // Waste time hashing the password, to prevent
                 // timing side-channels to distinguish whether
                 // user has password or not.
-                $hasher->hash($password);
+                $hasher.hash($password);
 
                 return false;
             }
 
-            if (!$hasher->check($password, $hashedPassword)) {
+            if (!$hasher.check($password, $hashedPassword)) {
                 return false;
             }
 
-            _needsPasswordRehash = $hasher->needsRehash($hashedPassword);
-            $result->unset($passwordField);
+            _needsPasswordRehash = $hasher.needsRehash($hashedPassword);
+            $result.unset($passwordField);
         }
-        $hidden = $result->getHidden();
+        $hidden = $result.getHidden();
         if ($password == null && in_array($passwordField, $hidden, true)) {
             $key = array_search($passwordField, $hidden, true);
             unset($hidden[$key]);
-            $result->setHidden($hidden);
+            $result.setHidden($hidden);
         }
 
-        return $result->toArray();
+        return $result.toArray();
     }
 
     /**
@@ -159,10 +159,10 @@ abstract class BaseAuthenticate : EventListenerInterface
     protected function _query(string $username): Query
     {
         $config = _config;
-        $table = this.getTableLocator()->get($config['userModel']);
+        $table = this.getTableLocator().get($config['userModel']);
 
         $options = [
-            'conditions' => [$table->aliasField($config['fields']['username']) => $username],
+            'conditions': [$table.aliasField($config['fields']['username']): $username],
         ];
 
         $finder = $config['finder'];
@@ -173,7 +173,7 @@ abstract class BaseAuthenticate : EventListenerInterface
 
         $options['username'] = $options['username'] ?? $username;
 
-        return $table->find($finder, $options);
+        return $table.find($finder, $options);
     }
 
     /**

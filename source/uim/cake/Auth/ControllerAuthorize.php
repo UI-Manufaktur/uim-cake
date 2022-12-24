@@ -29,7 +29,7 @@ use Cake\Http\ServerRequest;
  * ```
  *  function isAuthorized($user)
  *  {
- *      if (this.request->getParam('admin')) {
+ *      if (this.request.getParam('admin')) {
  *          return $user['role'] == 'admin';
  *      }
  *      return !empty($user);
@@ -56,7 +56,7 @@ class ControllerAuthorize : BaseAuthorize
     public this(ComponentRegistry $registry, array $config = [])
     {
         parent::__construct($registry, $config);
-        this.controller($registry->getController());
+        this.controller($registry.getController());
     }
 
     /**
@@ -92,6 +92,6 @@ class ControllerAuthorize : BaseAuthorize
             ));
         }
 
-        return (bool)_Controller->isAuthorized($user);
+        return (bool)_Controller.isAuthorized($user);
     }
 }

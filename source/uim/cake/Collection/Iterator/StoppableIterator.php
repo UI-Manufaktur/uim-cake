@@ -91,7 +91,7 @@ class StoppableIterator : Collection
         $iterator = _innerIterator;
 
         if ($iterator instanceof CollectionInterface) {
-            $iterator = $iterator->unwrap();
+            $iterator = $iterator.unwrap();
         }
 
         if (get_class($iterator) != ArrayIterator::class) {
@@ -104,7 +104,7 @@ class StoppableIterator : Collection
         $callback = _condition;
         $res = [];
 
-        foreach ($iterator as $k => $v) {
+        foreach ($iterator as $k: $v) {
             if ($callback($v, $k, $iterator)) {
                 break;
             }

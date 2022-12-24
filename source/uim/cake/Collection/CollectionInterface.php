@@ -33,7 +33,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * $collection = (new Collection($items))->each(function ($value, $key) {
+     * $collection = (new Collection($items)).each(function ($value, $key) {
      *  echo "Element $key: $value";
      * });
      * ```
@@ -58,7 +58,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      * be present in the resulting collection:
      *
      * ```
-     * $collection = (new Collection([1, 2, 3]))->filter(function ($value, $key) {
+     * $collection = (new Collection([1, 2, 3])).filter(function ($value, $key) {
      *  return $value % 2 == 0;
      * });
      * ```
@@ -84,7 +84,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      * be present in the resulting collection:
      *
      * ```
-     * $collection = (new Collection([1, 2, 3]))->reject(function ($value, $key) {
+     * $collection = (new Collection([1, 2, 3])).reject(function ($value, $key) {
      *  return $value % 2 == 0;
      * });
      * ```
@@ -105,7 +105,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * $overTwentyOne = (new Collection([24, 45, 60, 15]))->every(function ($value, $key) {
+     * $overTwentyOne = (new Collection([24, 45, 60, 15])).every(function ($value, $key) {
      *  return $value > 21;
      * });
      * ```
@@ -128,7 +128,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * $hasYoungPeople = (new Collection([24, 45, 15]))->some(function ($value, $key) {
+     * $hasYoungPeople = (new Collection([24, 45, 15])).some(function ($value, $key) {
      *  return $value < 21;
      * });
      * ```
@@ -161,8 +161,8 @@ interface CollectionInterface : Iterator, JsonSerializable
      * Getting a collection of booleans where true indicates if a person is female:
      *
      * ```
-     * $collection = (new Collection($people))->map(function ($person, $key) {
-     *  return $person->gender == 'female';
+     * $collection = (new Collection($people)).map(function ($person, $key) {
+     *  return $person.gender == 'female';
      * });
      * ```
      *
@@ -202,10 +202,10 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['comment' => ['body' => 'cool', 'user' => ['name' => 'Mark']],
-     *  ['comment' => ['body' => 'very cool', 'user' => ['name' => 'Renan']]
+     *  ['comment': ['body': 'cool', 'user': ['name': 'Mark']],
+     *  ['comment': ['body': 'very cool', 'user': ['name': 'Renan']]
      * ];
-     * $extracted = (new Collection($items))->extract('comment.user.name');
+     * $extracted = (new Collection($items)).extract('comment.user.name');
      *
      * // Result will look like this when converted to array
      * ['Mark', 'Renan']
@@ -215,10 +215,10 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      *  $items = [
-     *      ['comment' => ['votes' => [['value' => 1], ['value' => 2], ['value' => 3]]],
-     *      ['comment' => ['votes' => [['value' => 4]]
+     *      ['comment': ['votes': [['value': 1], ['value': 2], ['value': 3]]],
+     *      ['comment': ['votes': [['value': 4]]
      * ];
-     * $extracted = (new Collection($items))->extract('comment.votes.{*}.value');
+     * $extracted = (new Collection($items)).extract('comment.votes.{*}.value');
      *
      * // Result will contain
      * [1, 2, 3, 4]
@@ -239,14 +239,14 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * // For a collection of employees
-     * $max = $collection->max('age');
-     * $max = $collection->max('user.salary');
-     * $max = $collection->max(function ($e) {
-     *  return $e->get('user')->get('salary');
+     * $max = $collection.max('age');
+     * $max = $collection.max('user.salary');
+     * $max = $collection.max(function ($e) {
+     *  return $e.get('user').get('salary');
      * });
      *
      * // Display employee name
-     * echo $max->name;
+     * echo $max.name;
      * ```
      *
      * @param callable|string $path The column name to use for sorting or callback that returns the value.
@@ -265,14 +265,14 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * // For a collection of employees
-     * $min = $collection->min('age');
-     * $min = $collection->min('user.salary');
-     * $min = $collection->min(function ($e) {
-     *  return $e->get('user')->get('salary');
+     * $min = $collection.min('age');
+     * $min = $collection.min('user.salary');
+     * $min = $collection.min(function ($e) {
+     *  return $e.get('user').get('salary');
      * });
      *
      * // Display employee name
-     * echo $min->name;
+     * echo $min.name;
      * ```
      *
      * @param callable|string $path The column name to use for sorting or callback that returns the value.
@@ -291,15 +291,15 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['invoice' => ['total' => 100]],
-     *  ['invoice' => ['total' => 200]]
+     *  ['invoice': ['total': 100]],
+     *  ['invoice': ['total': 200]]
      * ];
      *
-     * $total = (new Collection($items))->avg('invoice.total');
+     * $total = (new Collection($items)).avg('invoice.total');
      *
      * // Total: 150
      *
-     * $total = (new Collection([1, 2, 3]))->avg();
+     * $total = (new Collection([1, 2, 3])).avg();
      * // Total: 2
      * ```
      *
@@ -321,18 +321,18 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['invoice' => ['total' => 400]],
-     *  ['invoice' => ['total' => 500]]
-     *  ['invoice' => ['total' => 100]]
-     *  ['invoice' => ['total' => 333]]
-     *  ['invoice' => ['total' => 200]]
+     *  ['invoice': ['total': 400]],
+     *  ['invoice': ['total': 500]]
+     *  ['invoice': ['total': 100]]
+     *  ['invoice': ['total': 333]]
+     *  ['invoice': ['total': 200]]
      * ];
      *
-     * $total = (new Collection($items))->median('invoice.total');
+     * $total = (new Collection($items)).median('invoice.total');
      *
      * // Total: 333
      *
-     * $total = (new Collection([1, 2, 3, 4]))->median();
+     * $total = (new Collection([1, 2, 3, 4])).median();
      * // Total: 2.5
      * ```
      *
@@ -360,19 +360,19 @@ interface CollectionInterface : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * $items = $collection->sortBy(function ($user) {
-     *  return $user->age;
+     * $items = $collection.sortBy(function ($user) {
+     *  return $user.age;
      * });
      *
      * // alternatively
-     * $items = $collection->sortBy('age');
+     * $items = $collection.sortBy('age');
      *
      * // or use a property path
-     * $items = $collection->sortBy('department.name');
+     * $items = $collection.sortBy('department.name');
      *
      * // output all user name order by their age in descending order
      * foreach ($items as $user) {
-     *  echo $user->name;
+     *  echo $user.name;
      * }
      * ```
      *
@@ -397,26 +397,26 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
-     *  ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
-     *  ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+     *  ['id': 1, 'name': 'foo', 'parent_id': 10],
+     *  ['id': 2, 'name': 'bar', 'parent_id': 11],
+     *  ['id': 3, 'name': 'baz', 'parent_id': 10],
      * ];
      *
-     * $group = (new Collection($items))->groupBy('parent_id');
+     * $group = (new Collection($items)).groupBy('parent_id');
      *
      * // Or
-     * $group = (new Collection($items))->groupBy(function ($e) {
+     * $group = (new Collection($items)).groupBy(function ($e) {
      *  return $e['parent_id'];
      * });
      *
      * // Result will look like this when converted to array
      * [
-     *  10 => [
-     *      ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
-     *      ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+     *  10: [
+     *      ['id': 1, 'name': 'foo', 'parent_id': 10],
+     *      ['id': 3, 'name': 'baz', 'parent_id': 10],
      *  ],
-     *  11 => [
-     *      ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
+     *  11: [
+     *      ['id': 2, 'name': 'bar', 'parent_id': 11],
      *  ]
      * ];
      * ```
@@ -440,23 +440,23 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['id' => 1, 'name' => 'foo'],
-     *  ['id' => 2, 'name' => 'bar'],
-     *  ['id' => 3, 'name' => 'baz'],
+     *  ['id': 1, 'name': 'foo'],
+     *  ['id': 2, 'name': 'bar'],
+     *  ['id': 3, 'name': 'baz'],
      * ];
      *
-     * $indexed = (new Collection($items))->indexBy('id');
+     * $indexed = (new Collection($items)).indexBy('id');
      *
      * // Or
-     * $indexed = (new Collection($items))->indexBy(function ($e) {
+     * $indexed = (new Collection($items)).indexBy(function ($e) {
      *  return $e['id'];
      * });
      *
      * // Result will look like this when converted to array
      * [
-     *  1 => ['id' => 1, 'name' => 'foo'],
-     *  3 => ['id' => 3, 'name' => 'baz'],
-     *  2 => ['id' => 2, 'name' => 'bar'],
+     *  1: ['id': 1, 'name': 'foo'],
+     *  3: ['id': 3, 'name': 'baz'],
+     *  2: ['id': 2, 'name': 'bar'],
      * ];
      * ```
      *
@@ -479,22 +479,22 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['id' => 1, 'name' => 'foo', 'parent_id' => 10],
-     *  ['id' => 2, 'name' => 'bar', 'parent_id' => 11],
-     *  ['id' => 3, 'name' => 'baz', 'parent_id' => 10],
+     *  ['id': 1, 'name': 'foo', 'parent_id': 10],
+     *  ['id': 2, 'name': 'bar', 'parent_id': 11],
+     *  ['id': 3, 'name': 'baz', 'parent_id': 10],
      * ];
      *
-     * $group = (new Collection($items))->countBy('parent_id');
+     * $group = (new Collection($items)).countBy('parent_id');
      *
      * // Or
-     * $group = (new Collection($items))->countBy(function ($e) {
+     * $group = (new Collection($items)).countBy(function ($e) {
      *  return $e['parent_id'];
      * });
      *
      * // Result will look like this when converted to array
      * [
-     *  10 => 2,
-     *  11 => 1
+     *  10: 2,
+     *  11: 1
      * ];
      * ```
      *
@@ -512,15 +512,15 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['invoice' => ['total' => 100]],
-     *  ['invoice' => ['total' => 200]]
+     *  ['invoice': ['total': 100]],
+     *  ['invoice': ['total': 200]]
      * ];
      *
-     * $total = (new Collection($items))->sumOf('invoice.total');
+     * $total = (new Collection($items)).sumOf('invoice.total');
      *
      * // Total: 300
      *
-     * $total = (new Collection([1, 2, 3]))->sumOf();
+     * $total = (new Collection([1, 2, 3])).sumOf();
      * // Total: 6
      * ```
      *
@@ -569,7 +569,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      * ```
      * $items = [1, 2, 3, 4, 5];
      *
-     * $last = (new Collection($items))->takeLast(3);
+     * $last = (new Collection($items)).takeLast(3);
      *
      * // Result will look like this when converted to array
      * [3, 4, 5];
@@ -597,15 +597,15 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['comment' => ['body' => 'cool', 'user' => ['name' => 'Mark']],
-     *  ['comment' => ['body' => 'very cool', 'user' => ['name' => 'Renan']]
+     *  ['comment': ['body': 'cool', 'user': ['name': 'Mark']],
+     *  ['comment': ['body': 'very cool', 'user': ['name': 'Renan']]
      * ];
      *
-     * $extracted = (new Collection($items))->match(['user.name' => 'Renan']);
+     * $extracted = (new Collection($items)).match(['user.name': 'Renan']);
      *
      * // Result will look like this when converted to array
      * [
-     *  ['comment' => ['body' => 'very cool', 'user' => ['name' => 'Renan']]
+     *  ['comment': ['body': 'very cool', 'user': ['name': 'Renan']]
      * ]
      * ```
      *
@@ -686,26 +686,26 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
-     *  ['id' => 2, 'name' => 'bar', 'parent' => 'b'],
-     *  ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
+     *  ['id': 1, 'name': 'foo', 'parent': 'a'],
+     *  ['id': 2, 'name': 'bar', 'parent': 'b'],
+     *  ['id': 3, 'name': 'baz', 'parent': 'a'],
      * ];
      *
-     * $combined = (new Collection($items))->combine('id', 'name');
+     * $combined = (new Collection($items)).combine('id', 'name');
      *
      * // Result will look like this when converted to array
      * [
-     *  1 => 'foo',
-     *  2 => 'bar',
-     *  3 => 'baz',
+     *  1: 'foo',
+     *  2: 'bar',
+     *  3: 'baz',
      * ];
      *
-     * $combined = (new Collection($items))->combine('id', 'name', 'parent');
+     * $combined = (new Collection($items)).combine('id', 'name', 'parent');
      *
      * // Result will look like this when converted to array
      * [
-     *  'a' => [1 => 'foo', 3 => 'baz'],
-     *  'b' => [2 => 'bar']
+     *  'a': [1: 'foo', 3: 'baz'],
+     *  'b': [2: 'bar']
      * ];
      * ```
      *
@@ -749,16 +749,16 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [
-     *  ['comment' => ['body' => 'cool', 'user' => ['name' => 'Mark']],
-     *  ['comment' => ['body' => 'awesome', 'user' => ['name' => 'Renan']]
+     *  ['comment': ['body': 'cool', 'user': ['name': 'Mark']],
+     *  ['comment': ['body': 'awesome', 'user': ['name': 'Renan']]
      * ];
      * $ages = [25, 28];
-     * $inserted = (new Collection($items))->insert('comment.user.age', $ages);
+     * $inserted = (new Collection($items)).insert('comment.user.age', $ages);
      *
      * // Result will look like this when converted to array
      * [
-     *  ['comment' => ['body' => 'cool', 'user' => ['name' => 'Mark', 'age' => 25]],
-     *  ['comment' => ['body' => 'awesome', 'user' => ['name' => 'Renan', 'age' => 28]]
+     *  ['comment': ['body': 'cool', 'user': ['name': 'Mark', 'age': 25]],
+     *  ['comment': ['body': 'awesome', 'user': ['name': 'Renan', 'age': 28]]
      * ];
      * ```
      *
@@ -812,10 +812,10 @@ interface CollectionInterface : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * $collection->map($mapper)->sortBy('age')->extract('name');
-     * $compiled = $collection->compile();
-     * $isJohnHere = $compiled->some($johnMatcher);
-     * $allButJohn = $compiled->filter($johnMatcher);
+     * $collection.map($mapper).sortBy('age').extract('name');
+     * $compiled = $collection.compile();
+     * $isJohnHere = $compiled.some($johnMatcher);
+     * $allButJohn = $compiled.filter($johnMatcher);
      * ```
      *
      * In the above example, had the collection not been compiled before, the
@@ -882,10 +882,10 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $collection = new Collection([
-     *  ['id' => 1, 'children' => [['id' => 2, 'children' => [['id' => 3]]]]],
-     *  ['id' => 4, 'children' => [['id' => 5]]]
+     *  ['id': 1, 'children': [['id': 2, 'children': [['id': 3]]]]],
+     *  ['id': 4, 'children': [['id': 5]]]
      * ]);
-     * $flattenedIds = $collection->listNested()->extract('id'); // Yields [1, 2, 3, 4, 5]
+     * $flattenedIds = $collection.listNested().extract('id'); // Yields [1, 2, 3, 4, 5]
      * ```
      *
      * @param string|int $order The order in which to return the elements
@@ -909,16 +909,16 @@ interface CollectionInterface : Iterator, JsonSerializable
      * Get an array of lines in a CSV file until the timestamp column is less than a date
      *
      * ```
-     * $lines = (new Collection($fileLines))->stopWhen(function ($value, $key) {
-     *  return (new DateTime($value))->format('Y') < 2012;
+     * $lines = (new Collection($fileLines)).stopWhen(function ($value, $key) {
+     *  return (new DateTime($value)).format('Y') < 2012;
      * })
-     * ->toArray();
+     * .toArray();
      * ```
      *
      * Get elements until the first unapproved message is found:
      *
      * ```
-     * $comments = (new Collection($comments))->stopWhen(['is_approved' => false]);
+     * $comments = (new Collection($comments)).stopWhen(['is_approved': false]);
      * ```
      *
      * @param callable|array $condition the method that will receive each of the elements and
@@ -947,15 +947,15 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items [[1, 2, 3], [4, 5]];
-     * $unfold = (new Collection($items))->unfold(); // Returns [1, 2, 3, 4, 5]
+     * $unfold = (new Collection($items)).unfold(); // Returns [1, 2, 3, 4, 5]
      * ```
      *
      * Using a transformer
      *
      * ```
      * $items [1, 2, 3];
-     * $allItems = (new Collection($items))->unfold(function ($page) {
-     *  return $service->fetchPage($page)->toArray();
+     * $allItems = (new Collection($items)).unfold(function ($page) {
+     *  return $service.fetchPage($page).toArray();
      * });
      * ```
      *
@@ -973,7 +973,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items = [1, 2, 3];
-     * $decorated = (new Collection($items))->through(function ($collection) {
+     * $decorated = (new Collection($items)).through(function ($collection) {
      *      return new MyCustomCollection($collection);
      * });
      * ```
@@ -992,7 +992,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $collection = new Collection([1, 2]);
-     * $collection->zip([3, 4], [5, 6])->toList(); // returns [[1, 3, 5], [2, 4, 6]]
+     * $collection.zip([3, 4], [5, 6]).toList(); // returns [[1, 3, 5], [2, 4, 6]]
      * ```
      *
      * @param iterable ...$items The collections to zip.
@@ -1010,10 +1010,10 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $collection = new Collection([1, 2]);
-     * $zipped = $collection->zipWith([3, 4], [5, 6], function (...$args) {
+     * $zipped = $collection.zipWith([3, 4], [5, 6], function (...$args) {
      *   return array_sum($args);
      * });
-     * $zipped->toList(); // returns [9, 12]; [(1 + 3 + 5), (2 + 4 + 6)]
+     * $zipped.toList(); // returns [9, 12]; [(1 + 3 + 5), (2 + 4 + 6)]
      * ```
      *
      * @param iterable ...$items The collections to zip.
@@ -1029,7 +1029,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-     * $chunked = (new Collection($items))->chunk(3)->toList();
+     * $chunked = (new Collection($items)).chunk(3).toList();
      * // Returns [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11]]
      * ```
      *
@@ -1044,9 +1044,9 @@ interface CollectionInterface : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * $items ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6];
-     * $chunked = (new Collection($items))->chunkWithKeys(3)->toList();
-     * // Returns [['a' => 1, 'b' => 2, 'c' => 3], ['d' => 4, 'e' => 5, 'f' => 6]]
+     * $items ['a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6];
+     * $chunked = (new Collection($items)).chunkWithKeys(3).toList();
+     * // Returns [['a': 1, 'b': 2, 'c': 3], ['d': 4, 'e': 5, 'f': 6]]
      * ```
      *
      * @param int $chunkSize The maximum size for each chunk
@@ -1062,11 +1062,11 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $items [1, 2, 3];
-     * (new Collection($items))->isEmpty(); // false
+     * (new Collection($items)).isEmpty(); // false
      * ```
      *
      * ```
-     * (new Collection([]))->isEmpty(); // true
+     * (new Collection([])).isEmpty(); // true
      * ```
      *
      * @return bool
@@ -1095,7 +1095,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      *       ['Product C', '400', '300', '200'],
      * ]
      *
-     * $transpose = (new Collection($items))->transpose()->toList();
+     * $transpose = (new Collection($items)).transpose().toList();
      *
      * // Returns
      * // [
@@ -1169,7 +1169,7 @@ interface CollectionInterface : Iterator, JsonSerializable
      *
      * ```
      * $collection = new Collection([['A', 'B', 'C'], [1, 2, 3]]);
-     * $result = $collection->cartesianProduct()->toArray();
+     * $result = $collection.cartesianProduct().toArray();
      * $expected = [
      *     ['A', 1],
      *     ['A', 2],

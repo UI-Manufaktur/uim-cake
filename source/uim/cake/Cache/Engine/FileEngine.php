@@ -59,13 +59,13 @@ class FileEngine : CacheEngine
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'duration' => 3600,
-        'groups' => [],
-        'lock' => true,
-        'mask' => 0664,
-        'path' => null,
-        'prefix' => 'cake_',
-        'serialize' => true,
+        'duration': 3600,
+        'groups': [],
+        'lock': true,
+        'mask': 0664,
+        'path': null,
+        'prefix': 'cake_',
+        'serialize': true,
     ];
 
     /**
@@ -131,17 +131,17 @@ class FileEngine : CacheEngine
 
         if (_config['lock']) {
             /** @psalm-suppress PossiblyNullReference */
-            _File->flock(LOCK_EX);
+            _File.flock(LOCK_EX);
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        _File->rewind();
-        $success = _File->ftruncate(0) &&
-            _File->fwrite($contents) &&
-            _File->fflush();
+        _File.rewind();
+        $success = _File.ftruncate(0) &&
+            _File.fwrite($contents) &&
+            _File.fflush();
 
         if (_config['lock']) {
-            _File->flock(LOCK_UN);
+            _File.flock(LOCK_UN);
         }
         _File = null;
 
@@ -166,33 +166,33 @@ class FileEngine : CacheEngine
 
         if (_config['lock']) {
             /** @psalm-suppress PossiblyNullReference */
-            _File->flock(LOCK_SH);
+            _File.flock(LOCK_SH);
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        _File->rewind();
+        _File.rewind();
         $time = time();
         /** @psalm-suppress RiskyCast */
-        $cachetime = (int)_File->current();
+        $cachetime = (int)_File.current();
 
         if ($cachetime < $time) {
             if (_config['lock']) {
-                _File->flock(LOCK_UN);
+                _File.flock(LOCK_UN);
             }
 
             return $default;
         }
 
         $data = '';
-        _File->next();
-        while (_File->valid()) {
+        _File.next();
+        while (_File.valid()) {
             /** @psalm-suppress PossiblyInvalidOperand */
-            $data .= _File->current();
-            _File->next();
+            $data .= _File.current();
+            _File.next();
         }
 
         if (_config['lock']) {
-            _File->flock(LOCK_UN);
+            _File.flock(LOCK_UN);
         }
 
         $data = trim($data);
@@ -220,7 +220,7 @@ class FileEngine : CacheEngine
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        $path = _File->getRealPath();
+        $path = _File.getRealPath();
         _File = null;
 
         if ($path == false) {
@@ -257,12 +257,12 @@ class FileEngine : CacheEngine
         $cleared = [];
         /** @var \SplFileInfo $fileInfo */
         foreach ($contents as $fileInfo) {
-            if ($fileInfo->isFile()) {
+            if ($fileInfo.isFile()) {
                 unset($fileInfo);
                 continue;
             }
 
-            $realPath = $fileInfo->getRealPath();
+            $realPath = $fileInfo.getRealPath();
             if (!$realPath) {
                 unset($fileInfo);
                 continue;
@@ -304,7 +304,7 @@ class FileEngine : CacheEngine
 
         $prefixLength = strlen(_config['prefix']);
 
-        while (($entry = $dir->read()) != false) {
+        while (($entry = $dir.read()) != false) {
             if (substr($entry, 0, $prefixLength) != _config['prefix']) {
                 continue;
             }
@@ -315,8 +315,8 @@ class FileEngine : CacheEngine
                 continue;
             }
 
-            if ($file->isFile()) {
-                $filePath = $file->getRealPath();
+            if ($file.isFile()) {
+                $filePath = $file.getRealPath();
                 unset($file);
 
                 // phpcs:disable
@@ -325,7 +325,7 @@ class FileEngine : CacheEngine
             }
         }
 
-        $dir->close();
+        $dir.close();
     }
 
     /**
@@ -376,28 +376,28 @@ class FileEngine : CacheEngine
 
         $path = new SplFileInfo($dir . $key);
 
-        if (!$createKey && !$path->isFile()) {
+        if (!$createKey && !$path.isFile()) {
             return false;
         }
         if (
             empty(_File) ||
-            _File->getBasename() != $key ||
-            _File->valid() == false
+            _File.getBasename() != $key ||
+            _File.valid() == false
         ) {
-            $exists = is_file($path->getPathname());
+            $exists = is_file($path.getPathname());
             try {
-                _File = $path->openFile('c+');
+                _File = $path.openFile('c+');
             } catch (Exception $e) {
-                trigger_error($e->getMessage(), E_USER_WARNING);
+                trigger_error($e.getMessage(), E_USER_WARNING);
 
                 return false;
             }
             unset($path);
 
-            if (!$exists && !chmod(_File->getPathname(), (int)_config['mask'])) {
+            if (!$exists && !chmod(_File.getPathname(), (int)_config['mask'])) {
                 trigger_error(sprintf(
                     'Could not apply permission mask "%s" on cache file "%s"',
-                    _File->getPathname(),
+                    _File.getPathname(),
                     _config['mask']
                 ), E_USER_WARNING);
             }
@@ -414,7 +414,7 @@ class FileEngine : CacheEngine
     protected function _active(): bool
     {
         $dir = new SplFileInfo(_config['path']);
-        $path = $dir->getPathname();
+        $path = $dir.getPathname();
         $success = true;
         if (!is_dir($path)) {
             // phpcs:disable
@@ -422,7 +422,7 @@ class FileEngine : CacheEngine
             // phpcs:enable
         }
 
-        $isWritableDir = ($dir->isDir() && $dir->isWritable());
+        $isWritableDir = ($dir.isDir() && $dir.isWritable());
         if (!$success || (_init && !$isWritableDir)) {
             _init = false;
             trigger_error(sprintf(
@@ -464,18 +464,18 @@ class FileEngine : CacheEngine
         $filtered = new CallbackFilterIterator(
             $contents,
             function (SplFileInfo $current) use ($group, $prefix) {
-                if (!$current->isFile()) {
+                if (!$current.isFile()) {
                     return false;
                 }
 
                 $hasPrefix = $prefix == ''
-                    || strpos($current->getBasename(), $prefix) == 0;
+                    || strpos($current.getBasename(), $prefix) == 0;
                 if ($hasPrefix == false) {
                     return false;
                 }
 
                 $pos = strpos(
-                    $current->getPathname(),
+                    $current.getPathname(),
                     DIRECTORY_SEPARATOR . $group . DIRECTORY_SEPARATOR
                 );
 
@@ -483,7 +483,7 @@ class FileEngine : CacheEngine
             }
         );
         foreach ($filtered as $object) {
-            $path = $object->getPathname();
+            $path = $object.getPathname();
             unset($object);
             // phpcs:ignore
             @unlink($path);

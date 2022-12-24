@@ -65,7 +65,7 @@ trait CollectionTrait
      */
     function each(callable $callback)
     {
-        foreach (this.optimizeUnwrap() as $k => $v) {
+        foreach (this.optimizeUnwrap() as $k: $v) {
             $callback($v, $k);
         }
 
@@ -101,7 +101,7 @@ trait CollectionTrait
      */
     function every(callable $callback): bool
     {
-        foreach (this.optimizeUnwrap() as $key => $value) {
+        foreach (this.optimizeUnwrap() as $key: $value) {
             if (!$callback($value, $key)) {
                 return false;
             }
@@ -115,7 +115,7 @@ trait CollectionTrait
      */
     function some(callable $callback): bool
     {
-        foreach (this.optimizeUnwrap() as $key => $value) {
+        foreach (this.optimizeUnwrap() as $key: $value) {
             if ($callback($value, $key) == true) {
                 return true;
             }
@@ -157,7 +157,7 @@ trait CollectionTrait
         }
 
         $result = $initial;
-        foreach (this.optimizeUnwrap() as $k => $value) {
+        foreach (this.optimizeUnwrap() as $k: $value) {
             if ($isFirst) {
                 $result = $value;
                 $isFirst = false;
@@ -177,10 +177,10 @@ trait CollectionTrait
         $extractor = new ExtractIterator(this.unwrap(), $path);
         if (is_string($path) && strpos($path, '{*}') != false) {
             $extractor = $extractor
-                ->filter(function ($data) {
+                .filter(function ($data) {
                     return $data != null && ($data instanceof Traversable || is_array($data));
                 })
-                ->unfold();
+                .unfold();
         }
 
         return $extractor;
@@ -191,7 +191,7 @@ trait CollectionTrait
      */
     function max($path, int $sort = \SORT_NUMERIC)
     {
-        return (new SortIterator(this.unwrap(), $path, \SORT_DESC, $sort))->first();
+        return (new SortIterator(this.unwrap(), $path, \SORT_DESC, $sort)).first();
     }
 
     /**
@@ -199,7 +199,7 @@ trait CollectionTrait
      */
     function min($path, int $sort = \SORT_NUMERIC)
     {
-        return (new SortIterator(this.unwrap(), $path, \SORT_ASC, $sort))->first();
+        return (new SortIterator(this.unwrap(), $path, \SORT_ASC, $sort)).first();
     }
 
     /**
@@ -209,10 +209,10 @@ trait CollectionTrait
     {
         $result = this;
         if ($path != null) {
-            $result = $result->extract($path);
+            $result = $result.extract($path);
         }
         $result = $result
-            ->reduce(function ($acc, $current) {
+            .reduce(function ($acc, $current) {
                 [$count, $sum] = $acc;
 
                 return [$count + 1, $sum + $current];
@@ -232,9 +232,9 @@ trait CollectionTrait
     {
         $items = this;
         if ($path != null) {
-            $items = $items->extract($path);
+            $items = $items.extract($path);
         }
-        $values = $items->toList();
+        $values = $items.toList();
         sort($values);
         $count = count($values);
 
@@ -310,12 +310,12 @@ trait CollectionTrait
 
         $mapper = function ($value, $key, $mr) use ($callback): void {
             /** @var \Cake\Collection\Iterator\MapReduce $mr */
-            $mr->emitIntermediate($value, $callback($value));
+            $mr.emitIntermediate($value, $callback($value));
         };
 
         $reducer = function ($values, $key, $mr): void {
             /** @var \Cake\Collection\Iterator\MapReduce $mr */
-            $mr->emit(count($values), $key);
+            $mr.emit(count($values), $key);
         };
 
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
@@ -332,7 +332,7 @@ trait CollectionTrait
 
         $callback = _propertyExtractor($path);
         $sum = 0;
-        foreach (this.optimizeUnwrap() as $k => $v) {
+        foreach (this.optimizeUnwrap() as $k: $v) {
             $sum += $callback($v, $k);
         }
 
@@ -387,7 +387,7 @@ trait CollectionTrait
      */
     function firstMatch(array $conditions)
     {
-        return this.match($conditions)->first();
+        return this.match($conditions).first();
     }
 
     /**
@@ -505,7 +505,7 @@ trait CollectionTrait
              * The logic above applies to collections of any size.
              */
 
-            foreach ($iterator as $k => $item) {
+            foreach ($iterator as $k: $item) {
                 $result[$bucket] = [$k, $item];
                 $bucket = (++$bucket) % $length;
                 $offset++;
@@ -516,11 +516,11 @@ trait CollectionTrait
             $tail = array_slice($result, 0, $offset);
 
             foreach ($head as $v) {
-                yield $v[0] => $v[1];
+                yield $v[0]: $v[1];
             }
 
             foreach ($tail as $v) {
-                yield $v[0] => $v[1];
+                yield $v[0]: $v[1];
             }
         };
 
@@ -533,8 +533,8 @@ trait CollectionTrait
     function append($items): CollectionInterface
     {
         $list = new AppendIterator();
-        $list->append(this.unwrap());
-        $list->append(this.newCollection($items)->unwrap());
+        $list.append(this.unwrap());
+        $list.append(this.newCollection($items).unwrap());
 
         return this.newCollection($list);
     }
@@ -545,7 +545,7 @@ trait CollectionTrait
     function appendItem($item, $key = null): CollectionInterface
     {
         if ($key != null) {
-            $data = [$key => $item];
+            $data = [$key: $item];
         } else {
             $data = [$item];
         }
@@ -558,7 +558,7 @@ trait CollectionTrait
      */
     function prepend($items): CollectionInterface
     {
-        return this.newCollection($items)->append(this);
+        return this.newCollection($items).append(this);
     }
 
     /**
@@ -567,7 +567,7 @@ trait CollectionTrait
     function prependItem($item, $key = null): CollectionInterface
     {
         if ($key != null) {
-            $data = [$key => $item];
+            $data = [$key: $item];
         } else {
             $data = [$item];
         }
@@ -581,9 +581,9 @@ trait CollectionTrait
     function combine($keyPath, $valuePath, $groupPath = null): CollectionInterface
     {
         $options = [
-            'keyPath' => _propertyExtractor($keyPath),
-            'valuePath' => _propertyExtractor($valuePath),
-            'groupPath' => $groupPath ? _propertyExtractor($groupPath) : null,
+            'keyPath': _propertyExtractor($keyPath),
+            'valuePath': _propertyExtractor($valuePath),
+            'groupPath': $groupPath ? _propertyExtractor($groupPath) : null,
         ];
 
         $mapper = function ($value, $key, MapReduce $mapReduce) use ($options) {
@@ -591,14 +591,14 @@ trait CollectionTrait
             $rowVal = $options['valuePath'];
 
             if (!$options['groupPath']) {
-                $mapReduce->emit($rowVal($value, $key), $rowKey($value, $key));
+                $mapReduce.emit($rowVal($value, $key), $rowKey($value, $key));
 
                 return null;
             }
 
             $key = $options['groupPath']($value, $key);
-            $mapReduce->emitIntermediate(
-                [$rowKey($value, $key) => $rowVal($value, $key)],
+            $mapReduce.emitIntermediate(
+                [$rowKey($value, $key): $rowVal($value, $key)],
                 $key
             );
         };
@@ -608,7 +608,7 @@ trait CollectionTrait
             foreach ($values as $value) {
                 $result += $value;
             }
-            $mapReduce->emit($result, $key);
+            $mapReduce.emit($result, $key);
         };
 
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
@@ -629,7 +629,7 @@ trait CollectionTrait
             $id = $idPath($row, $key);
             $parentId = $parentPath($row, $key);
             $parents[$id] = &$row;
-            $mapReduce->emitIntermediate($id, $parentId);
+            $mapReduce.emitIntermediate($id, $parentId);
         };
 
         $reducer = function ($values, $key, MapReduce $mapReduce) use (&$parents, &$isObject, $nestingKey) {
@@ -642,7 +642,7 @@ trait CollectionTrait
                 foreach ($values as $id) {
                     /** @psalm-suppress PossiblyInvalidArgument */
                     $parents[$id] = $isObject ? $parents[$id] : new ArrayIterator($parents[$id], 1);
-                    $mapReduce->emit($parents[$id]);
+                    $mapReduce.emit($parents[$id]);
                 }
 
                 return null;
@@ -656,9 +656,9 @@ trait CollectionTrait
         };
 
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer))
-            ->map(function ($value) use (&$isObject) {
+            .map(function ($value) use (&$isObject) {
                 /** @var \ArrayIterator $value */
-                return $isObject ? $value : $value->getArrayCopy();
+                return $isObject ? $value : $value.getArrayCopy();
             });
     }
 
@@ -677,7 +677,7 @@ trait CollectionTrait
     {
         $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
-            $items = $iterator->getArrayCopy();
+            $items = $iterator.getArrayCopy();
 
             return $keepKeys ? $items : array_values($items);
         }
@@ -720,8 +720,8 @@ trait CollectionTrait
     function lazy(): CollectionInterface
     {
         $generator = function () {
-            foreach (this.unwrap() as $k => $v) {
-                yield $k => $v;
+            foreach (this.unwrap() as $k: $v) {
+                yield $k: $v;
             }
         };
 
@@ -744,9 +744,9 @@ trait CollectionTrait
         if (is_string($order)) {
             $order = strtolower($order);
             $modes = [
-                'desc' => RecursiveIteratorIterator::SELF_FIRST,
-                'asc' => RecursiveIteratorIterator::CHILD_FIRST,
-                'leaves' => RecursiveIteratorIterator::LEAVES_ONLY,
+                'desc': RecursiveIteratorIterator::SELF_FIRST,
+                'asc': RecursiveIteratorIterator::CHILD_FIRST,
+                'leaves': RecursiveIteratorIterator::LEAVES_ONLY,
             ];
 
             if (!isset($modes[$order])) {
@@ -836,11 +836,11 @@ trait CollectionTrait
         return this.map(function ($v, $k, $iterator) use ($chunkSize) {
             $values = [$v];
             for ($i = 1; $i < $chunkSize; $i++) {
-                $iterator->next();
-                if (!$iterator->valid()) {
+                $iterator.next();
+                if (!$iterator.valid()) {
                     break;
                 }
-                $values[] = $iterator->current();
+                $values[] = $iterator.current();
             }
 
             return $values;
@@ -857,16 +857,16 @@ trait CollectionTrait
             if ($keepKeys) {
                 $key = $k;
             }
-            $values = [$key => $v];
+            $values = [$key: $v];
             for ($i = 1; $i < $chunkSize; $i++) {
-                $iterator->next();
-                if (!$iterator->valid()) {
+                $iterator.next();
+                if (!$iterator.valid()) {
                     break;
                 }
                 if ($keepKeys) {
-                    $values[$iterator->key()] = $iterator->current();
+                    $values[$iterator.key()] = $iterator.current();
                 } else {
-                    $values[] = $iterator->current();
+                    $values[] = $iterator.current();
                 }
             }
 
@@ -896,11 +896,11 @@ trait CollectionTrait
             get_class($iterator) == Collection::class
             && $iterator instanceof OuterIterator
         ) {
-            $iterator = $iterator->getInnerIterator();
+            $iterator = $iterator.getInnerIterator();
         }
 
         if ($iterator != this && $iterator instanceof CollectionInterface) {
-            $iterator = $iterator->unwrap();
+            $iterator = $iterator.unwrap();
         }
 
         return $iterator;
@@ -1025,7 +1025,7 @@ trait CollectionTrait
         $iterator = this.unwrap();
 
         if (get_class($iterator) == ArrayIterator::class) {
-            $iterator = $iterator->getArrayCopy();
+            $iterator = $iterator.getArrayCopy();
         }
 
         return $iterator;

@@ -128,8 +128,8 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function valid(): bool
     {
-        if (_buffer->offsetExists(_index)) {
-            $current = _buffer->offsetGet(_index);
+        if (_buffer.offsetExists(_index)) {
+            $current = _buffer.offsetGet(_index);
             _current = $current['value'];
             _key = $current['key'];
 
@@ -141,9 +141,9 @@ class BufferedIterator : Collection : Countable, Serializable
         if ($valid) {
             _current = parent::current();
             _key = parent::key();
-            _buffer->push([
-                'key' => _key,
-                'value' => _current,
+            _buffer.push([
+                'key': _key,
+                'value': _current,
             ]);
         }
 
@@ -162,7 +162,7 @@ class BufferedIterator : Collection : Countable, Serializable
         _index++;
 
         // Don't move inner iterator if we have more buffer
-        if (_buffer->offsetExists(_index)) {
+        if (_buffer.offsetExists(_index)) {
             return;
         }
         if (!_finished) {
@@ -185,7 +185,7 @@ class BufferedIterator : Collection : Countable, Serializable
             this.next();
         }
 
-        return _buffer->count();
+        return _buffer.count();
     }
 
     /**
@@ -242,7 +242,7 @@ class BufferedIterator : Collection : Countable, Serializable
         __construct([]);
 
         foreach ($data as $value) {
-            _buffer->push($value);
+            _buffer.push($value);
         }
 
         _started = true;

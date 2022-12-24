@@ -57,24 +57,24 @@ class MemcachedEngine : CacheEngine
      *    appropriate serializer support.
      * - `servers` String or array of memcached servers. If an array MemcacheEngine will use
      *    them as a pool.
-     * - `options` - Additional options for the memcached client. Should be an array of option => value.
+     * - `options` - Additional options for the memcached client. Should be an array of option: value.
      *    Use the \Memcached::OPT_* constants as keys.
      *
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'compress' => false,
-        'duration' => 3600,
-        'groups' => [],
-        'host' => null,
-        'username' => null,
-        'password' => null,
-        'persistent' => null,
-        'port' => null,
-        'prefix' => 'cake_',
-        'serialize' => 'php',
-        'servers' => ['127.0.0.1'],
-        'options' => [],
+        'compress': false,
+        'duration': 3600,
+        'groups': [],
+        'host': null,
+        'username': null,
+        'password': null,
+        'persistent': null,
+        'port': null,
+        'prefix': 'cake_',
+        'serialize': 'php',
+        'servers': ['127.0.0.1'],
+        'options': [],
     ];
 
     /**
@@ -108,9 +108,9 @@ class MemcachedEngine : CacheEngine
         }
 
         _serializers = [
-            'igbinary' => Memcached::SERIALIZER_IGBINARY,
-            'json' => Memcached::SERIALIZER_JSON,
-            'php' => Memcached::SERIALIZER_PHP,
+            'igbinary': Memcached::SERIALIZER_IGBINARY,
+            'json': Memcached::SERIALIZER_JSON,
+            'php': Memcached::SERIALIZER_PHP,
         ];
         if (defined('Memcached::HAVE_MSGPACK')) {
             _serializers['msgpack'] = Memcached::SERIALIZER_MSGPACK;
@@ -141,9 +141,9 @@ class MemcachedEngine : CacheEngine
         }
         _setOptions();
 
-        $serverList = _Memcached->getServerList();
+        $serverList = _Memcached.getServerList();
         if ($serverList) {
-            if (_Memcached->isPersistent()) {
+            if (_Memcached.isPersistent()) {
                 foreach ($serverList as $server) {
                     if (!in_array($server['host'] . ':' . $server['port'], _config['servers'], true)) {
                         throw new InvalidArgumentException(
@@ -163,13 +163,13 @@ class MemcachedEngine : CacheEngine
             $servers[] = this.parseServerString($server);
         }
 
-        if (!_Memcached->addServers($servers)) {
+        if (!_Memcached.addServers($servers)) {
             return false;
         }
 
         if (is_array(_config['options'])) {
-            foreach (_config['options'] as $opt => $value) {
-                _Memcached->setOption($opt, $value);
+            foreach (_config['options'] as $opt: $value) {
+                _Memcached.setOption($opt, $value);
             }
         }
 
@@ -185,8 +185,8 @@ class MemcachedEngine : CacheEngine
                     'Memcached extension is not built with SASL support'
                 );
             }
-            _Memcached->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
-            _Memcached->setSaslAuthData(
+            _Memcached.setOption(Memcached::OPT_BINARY_PROTOCOL, true);
+            _Memcached.setSaslAuthData(
                 _config['username'],
                 _config['password']
             );
@@ -204,7 +204,7 @@ class MemcachedEngine : CacheEngine
      */
     protected function _setOptions(): void
     {
-        _Memcached->setOption(Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
+        _Memcached.setOption(Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
 
         $serializer = strtolower(_config['serialize']);
         if (!isset(_serializers[$serializer])) {
@@ -222,7 +222,7 @@ class MemcachedEngine : CacheEngine
             );
         }
 
-        _Memcached->setOption(
+        _Memcached.setOption(
             Memcached::OPT_SERIALIZER,
             _serializers[$serializer]
         );
@@ -232,13 +232,13 @@ class MemcachedEngine : CacheEngine
             defined('Memcached::OPT_CLIENT_MODE') &&
             defined('Memcached::DYNAMIC_CLIENT_MODE')
         ) {
-            _Memcached->setOption(
+            _Memcached.setOption(
                 Memcached::OPT_CLIENT_MODE,
                 Memcached::DYNAMIC_CLIENT_MODE
             );
         }
 
-        _Memcached->setOption(
+        _Memcached.setOption(
             Memcached::OPT_COMPRESSION,
             (bool)_config['compress']
         );
@@ -284,7 +284,7 @@ class MemcachedEngine : CacheEngine
      */
     function getOption(int $name)
     {
-        return _Memcached->getOption($name);
+        return _Memcached.getOption($name);
     }
 
     /**
@@ -305,7 +305,7 @@ class MemcachedEngine : CacheEngine
     {
         $duration = this.duration($ttl);
 
-        return _Memcached->set(_key($key), $value, $duration);
+        return _Memcached.set(_key($key), $value, $duration);
     }
 
     /**
@@ -320,12 +320,12 @@ class MemcachedEngine : CacheEngine
     function setMultiple($values, $ttl = null): bool
     {
         $cacheData = [];
-        foreach ($values as $key => $value) {
+        foreach ($values as $key: $value) {
             $cacheData[_key($key)] = $value;
         }
         $duration = this.duration($ttl);
 
-        return _Memcached->setMulti($cacheData, $duration);
+        return _Memcached.setMulti($cacheData, $duration);
     }
 
     /**
@@ -339,8 +339,8 @@ class MemcachedEngine : CacheEngine
     function get($key, $default = null)
     {
         $key = _key($key);
-        $value = _Memcached->get($key);
-        if (_Memcached->getResultCode() == Memcached::RES_NOTFOUND) {
+        $value = _Memcached.get($key);
+        if (_Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
             return $default;
         }
 
@@ -362,9 +362,9 @@ class MemcachedEngine : CacheEngine
             $cacheKeys[$key] = _key($key);
         }
 
-        $values = _Memcached->getMulti($cacheKeys);
+        $values = _Memcached.getMulti($cacheKeys);
         $return = [];
-        foreach ($cacheKeys as $original => $prefixed) {
+        foreach ($cacheKeys as $original: $prefixed) {
             $return[$original] = $values[$prefixed] ?? $default;
         }
 
@@ -380,7 +380,7 @@ class MemcachedEngine : CacheEngine
      */
     function increment(string $key, int $offset = 1)
     {
-        return _Memcached->increment(_key($key), $offset);
+        return _Memcached.increment(_key($key), $offset);
     }
 
     /**
@@ -392,7 +392,7 @@ class MemcachedEngine : CacheEngine
      */
     function decrement(string $key, int $offset = 1)
     {
-        return _Memcached->decrement(_key($key), $offset);
+        return _Memcached.decrement(_key($key), $offset);
     }
 
     /**
@@ -404,7 +404,7 @@ class MemcachedEngine : CacheEngine
      */
     function delete($key): bool
     {
-        return _Memcached->delete(_key($key));
+        return _Memcached.delete(_key($key));
     }
 
     /**
@@ -421,7 +421,7 @@ class MemcachedEngine : CacheEngine
             $cacheKeys[] = _key($key);
         }
 
-        return (bool)_Memcached->deleteMulti($cacheKeys);
+        return (bool)_Memcached.deleteMulti($cacheKeys);
     }
 
     /**
@@ -431,14 +431,14 @@ class MemcachedEngine : CacheEngine
      */
     function clear(): bool
     {
-        $keys = _Memcached->getAllKeys();
+        $keys = _Memcached.getAllKeys();
         if ($keys == false) {
             return false;
         }
 
         foreach ($keys as $key) {
             if (strpos($key, _config['prefix']) == 0) {
-                _Memcached->delete($key);
+                _Memcached.delete($key);
             }
         }
 
@@ -457,7 +457,7 @@ class MemcachedEngine : CacheEngine
         $duration = _config['duration'];
         $key = _key($key);
 
-        return _Memcached->add($key, $value, $duration);
+        return _Memcached.add($key, $value, $duration);
     }
 
     /**
@@ -475,11 +475,11 @@ class MemcachedEngine : CacheEngine
             }
         }
 
-        $groups = _Memcached->getMulti(_compiledGroupNames) ?: [];
+        $groups = _Memcached.getMulti(_compiledGroupNames) ?: [];
         if (count($groups) != count(_config['groups'])) {
             foreach (_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
-                    _Memcached->set($group, 1, 0);
+                    _Memcached.set($group, 1, 0);
                     $groups[$group] = 1;
                 }
             }
@@ -488,7 +488,7 @@ class MemcachedEngine : CacheEngine
 
         $result = [];
         $groups = array_values($groups);
-        foreach (_config['groups'] as $i => $group) {
+        foreach (_config['groups'] as $i: $group) {
             $result[] = $group . $groups[$i];
         }
 
@@ -504,6 +504,6 @@ class MemcachedEngine : CacheEngine
      */
     function clearGroup(string $group): bool
     {
-        return (bool)_Memcached->increment(_config['prefix'] . $group);
+        return (bool)_Memcached.increment(_config['prefix'] . $group);
     }
 }

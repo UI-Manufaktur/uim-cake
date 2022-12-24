@@ -32,9 +32,9 @@ use Cake\Http\ServerRequest;
  * Load `AuthComponent` in your controller's `initialize()` and add 'Basic' in 'authenticate' key
  * ```
  *  this.loadComponent('Auth', [
- *      'authenticate' => ['Basic']
- *      'storage' => 'Memory',
- *      'unauthorizedRedirect' => false,
+ *      'authenticate': ['Basic']
+ *      'storage': 'Memory',
+ *      'unauthorizedRedirect': false,
  *  ]);
  * ```
  *
@@ -74,8 +74,8 @@ class BasicAuthenticate : BaseAuthenticate
      */
     function getUser(ServerRequest $request)
     {
-        $username = $request->getEnv('PHP_AUTH_USER');
-        $pass = $request->getEnv('PHP_AUTH_PW');
+        $username = $request.getEnv('PHP_AUTH_USER');
+        $pass = $request.getEnv('PHP_AUTH_PW');
 
         if (!is_string($username) || $username == '' || !is_string($pass) || $pass == '') {
             return false;
@@ -95,7 +95,7 @@ class BasicAuthenticate : BaseAuthenticate
     function unauthenticated(ServerRequest $request, Response $response)
     {
         $unauthorizedException = new UnauthorizedException();
-        $unauthorizedException->setHeaders(this.loginHeaders($request));
+        $unauthorizedException.setHeaders(this.loginHeaders($request));
 
         throw $unauthorizedException;
     }
@@ -108,10 +108,10 @@ class BasicAuthenticate : BaseAuthenticate
      */
     function loginHeaders(ServerRequest $request): array
     {
-        $realm = this.getConfig('realm') ?: $request->getEnv('SERVER_NAME');
+        $realm = this.getConfig('realm') ?: $request.getEnv('SERVER_NAME');
 
         return [
-            'WWW-Authenticate' => sprintf('Basic realm="%s"', $realm),
+            'WWW-Authenticate': sprintf('Basic realm="%s"', $realm),
         ];
     }
 }

@@ -44,7 +44,7 @@ class CacheListCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser = parent::buildOptionParser($parser);
-        $parser->setDescription('Show a list of configured caches.');
+        $parser.setDescription('Show a list of configured caches.');
 
         return $parser;
     }
@@ -60,7 +60,7 @@ class CacheListCommand : Command
     {
         $engines = Cache::configured();
         foreach ($engines as $engine) {
-            $io->out("- $engine");
+            $io.out("- $engine");
         }
 
         return static::CODE_SUCCESS;

@@ -34,15 +34,15 @@ class I18nCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $io->out('<info>I18n Shell</info>');
-        $io->hr();
-        $io->out('[E]xtract POT file from sources');
-        $io->out('[I]nitialize a language from POT file');
-        $io->out('[H]elp');
-        $io->out('[Q]uit');
+        $io.out('<info>I18n Shell</info>');
+        $io.hr();
+        $io.out('[E]xtract POT file from sources');
+        $io.out('[I]nitialize a language from POT file');
+        $io.out('[H]elp');
+        $io.out('[Q]uit');
 
         do {
-            $choice = strtolower($io->askChoice('What would you like to do?', ['E', 'I', 'H', 'Q']));
+            $choice = strtolower($io.askChoice('What would you like to do?', ['E', 'I', 'H', 'Q']));
             $code = null;
             switch ($choice) {
                 case 'e':
@@ -52,13 +52,13 @@ class I18nCommand : Command
                     $code = this.executeCommand(I18nInitCommand::class, [], $io);
                     break;
                 case 'h':
-                    $io->out(this.getOptionParser()->help());
+                    $io.out(this.getOptionParser().help());
                     break;
                 case 'q':
                     // Do nothing
                     break;
                 default:
-                    $io->err(
+                    $io.err(
                         'You have made an invalid selection. ' .
                         'Please choose a command to execute by entering E, I, H, or Q.'
                     );
@@ -79,7 +79,7 @@ class I18nCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription(
+        $parser.setDescription(
             'I18n commands let you generate .pot files to power translations in your application.'
         );
 

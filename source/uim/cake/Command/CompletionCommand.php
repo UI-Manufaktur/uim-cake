@@ -56,29 +56,29 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $modes = [
-            'commands' => 'Output a list of available commands',
-            'subcommands' => 'Output a list of available sub-commands for a command',
-            'options' => 'Output a list of available options for a command and possible subcommand.',
-            'fuzzy' => 'Does nothing. Only for backwards compatibility',
+            'commands': 'Output a list of available commands',
+            'subcommands': 'Output a list of available sub-commands for a command',
+            'options': 'Output a list of available options for a command and possible subcommand.',
+            'fuzzy': 'Does nothing. Only for backwards compatibility',
         ];
         $modeHelp = '';
-        foreach ($modes as $key => $help) {
+        foreach ($modes as $key: $help) {
             $modeHelp .= "- <info>{$key}</info> {$help}\n";
         }
 
-        $parser->setDescription(
+        $parser.setDescription(
             'Used by shells like bash to autocomplete command name, options and arguments'
-        )->addArgument('mode', [
-            'help' => 'The type of thing to get completion on.',
-            'required' => true,
-            'choices' => array_keys($modes),
-        ])->addArgument('command', [
-            'help' => 'The command name to get information on.',
-            'required' => false,
-        ])->addArgument('subcommand', [
-            'help' => 'The sub-command related to command to get information on.',
-            'required' => false,
-        ])->setEpilog([
+        ).addArgument('mode', [
+            'help': 'The type of thing to get completion on.',
+            'required': true,
+            'choices': array_keys($modes),
+        ]).addArgument('command', [
+            'help': 'The command name to get information on.',
+            'required': false,
+        ]).addArgument('subcommand', [
+            'help': 'The sub-command related to command to get information on.',
+            'required': false,
+        ]).setEpilog([
             'The various modes allow you to get help information on commands and their arguments.',
             'The available modes are:',
             '',
@@ -100,7 +100,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $mode = $args->getArgument('mode');
+        $mode = $args.getArgument('mode');
         switch ($mode) {
             case 'commands':
                 return this.getCommands($args, $io);
@@ -111,7 +111,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
             case 'fuzzy':
                 return static::CODE_SUCCESS;
             default:
-                $io->err('Invalid mode chosen.');
+                $io.err('Invalid mode chosen.');
         }
 
         return static::CODE_SUCCESS;
@@ -127,12 +127,12 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
     protected function getCommands(Arguments $args, ConsoleIo $io): int
     {
         $options = [];
-        foreach (this.commands as $key => $value) {
+        foreach (this.commands as $key: $value) {
             $parts = explode(' ', $key);
             $options[] = $parts[0];
         }
         $options = array_unique($options);
-        $io->out(implode(' ', $options));
+        $io.out(implode(' ', $options));
 
         return static::CODE_SUCCESS;
     }
@@ -146,13 +146,13 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      */
     protected function getSubcommands(Arguments $args, ConsoleIo $io): int
     {
-        $name = $args->getArgument('command');
+        $name = $args.getArgument('command');
         if ($name == null || $name == '') {
             return static::CODE_SUCCESS;
         }
 
         $options = [];
-        foreach (this.commands as $key => $value) {
+        foreach (this.commands as $key: $value) {
             $parts = explode(' ', $key);
             if ($parts[0] != $name) {
                 continue;
@@ -168,7 +168,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
             // Handle class strings
             if (is_string($value)) {
                 $reflection = new ReflectionClass($value);
-                $value = $reflection->newInstance();
+                $value = $reflection.newInstance();
             }
             if ($value instanceof Shell) {
                 $shellCommands = this.shellSubcommands($value);
@@ -176,7 +176,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
             }
         }
         $options = array_unique($options);
-        $io->out(implode(' ', $options));
+        $io.out(implode(' ', $options));
 
         return static::CODE_SUCCESS;
     }
@@ -189,11 +189,11 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      */
     protected function shellSubcommands(Shell $shell): array
     {
-        $shell->initialize();
-        $shell->loadTasks();
+        $shell.initialize();
+        $shell.loadTasks();
 
-        $optionParser = $shell->getOptionParser();
-        $subcommands = $optionParser->subcommands();
+        $optionParser = $shell.getOptionParser();
+        $subcommands = $optionParser.subcommands();
 
         $output = array_keys($subcommands);
 
@@ -203,16 +203,16 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
             /** @psalm-suppress DeprecatedClass */
             $coreShellReflection = new ReflectionClass(Shell::class);
             $reflection = new ReflectionClass($shell);
-            foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            foreach ($reflection.getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
                 if (
-                    $shell->hasMethod($method->getName())
-                    && !$coreShellReflection->hasMethod($method->getName())
+                    $shell.hasMethod($method.getName())
+                    && !$coreShellReflection.hasMethod($method.getName())
                 ) {
-                    $output[] = $method->getName();
+                    $output[] = $method.getName();
                 }
             }
         }
-        $taskNames = array_map('Cake\Utility\Inflector::underscore', $shell->taskNames);
+        $taskNames = array_map('Cake\Utility\Inflector::underscore', $shell.taskNames);
         $output = array_merge($output, $taskNames);
 
         return array_unique($output);
@@ -227,11 +227,11 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      */
     protected function getOptions(Arguments $args, ConsoleIo $io): ?int
     {
-        $name = $args->getArgument('command');
-        $subcommand = $args->getArgument('subcommand');
+        $name = $args.getArgument('command');
+        $subcommand = $args.getArgument('subcommand');
 
         $options = [];
-        foreach (this.commands as $key => $value) {
+        foreach (this.commands as $key: $value) {
             $parts = explode(' ', $key);
             if ($parts[0] != $name) {
                 continue;
@@ -246,27 +246,27 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
             // Handle class strings
             if (is_string($value)) {
                 $reflection = new ReflectionClass($value);
-                $value = $reflection->newInstance();
+                $value = $reflection.newInstance();
             }
             $parser = null;
             if ($value instanceof Command) {
-                $parser = $value->getOptionParser();
+                $parser = $value.getOptionParser();
             }
             if ($value instanceof Shell) {
-                $value->initialize();
-                $value->loadTasks();
+                $value.initialize();
+                $value.loadTasks();
 
-                $parser = $value->getOptionParser();
+                $parser = $value.getOptionParser();
                 $subcommand = Inflector::camelize((string)$subcommand);
-                if ($subcommand && $value->hasTask($subcommand)) {
-                    $parser = $value->{$subcommand}->getOptionParser();
+                if ($subcommand && $value.hasTask($subcommand)) {
+                    $parser = $value.{$subcommand}.getOptionParser();
                 }
             }
 
             if ($parser) {
-                foreach ($parser->options() as $name => $option) {
+                foreach ($parser.options() as $name: $option) {
                     $options[] = "--$name";
-                    $short = $option->short();
+                    $short = $option.short();
                     if ($short) {
                         $options[] = "-$short";
                     }
@@ -274,7 +274,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
             }
         }
         $options = array_unique($options);
-        $io->out(implode(' ', $options));
+        $io.out(implode(' ', $options));
 
         return static::CODE_SUCCESS;
     }

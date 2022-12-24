@@ -45,8 +45,8 @@ class ExtractIterator : Collection
      *
      * ```
      * $items = [
-     *  ['comment' => ['body' => 'cool', 'user' => ['name' => 'Mark']],
-     *  ['comment' => ['body' => 'very cool', 'user' => ['name' => 'Renan']]
+     *  ['comment': ['body': 'cool', 'user': ['name': 'Mark']],
+     *  ['comment': ['body': 'very cool', 'user': ['name': 'Renan']]
      * ];
      * $extractor = new ExtractIterator($items, 'comment.user.name'');
      * ```
@@ -84,7 +84,7 @@ class ExtractIterator : Collection
         $iterator = this.getInnerIterator();
 
         if ($iterator instanceof CollectionInterface) {
-            $iterator = $iterator->unwrap();
+            $iterator = $iterator.unwrap();
         }
 
         if (get_class($iterator) != ArrayIterator::class) {
@@ -97,7 +97,7 @@ class ExtractIterator : Collection
         $callback = _extractor;
         $res = [];
 
-        foreach ($iterator->getArrayCopy() as $k => $v) {
+        foreach ($iterator.getArrayCopy() as $k: $v) {
             $res[$k] = $callback($v);
         }
 

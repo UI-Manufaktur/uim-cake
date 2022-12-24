@@ -90,11 +90,11 @@ class MapReduce : IteratorAggregate
      *  $data = new \ArrayObject([1, 2, 3, 4, 5, 3]);
      *  $mapper = function ($value, $key, $mr) {
      *      $type = ($value % 2 == 0) ? 'even' : 'odd';
-     *      $mr->emitIntermediate($value, $type);
+     *      $mr.emitIntermediate($value, $type);
      *  };
      *
      *  $reducer = function ($numbers, $type, $mr) {
-     *      $mr->emit(array_unique($numbers), $type);
+     *      $mr.emit(array_unique($numbers), $type);
      *  };
      *  $results = new MapReduce($data, $mapper, $reducer);
      * ```
@@ -102,7 +102,7 @@ class MapReduce : IteratorAggregate
      * Previous example will generate the following result:
      *
      * ```
-     *  ['odd' => [1, 3, 5], 'even' => [2, 4]]
+     *  ['odd': [1, 3, 5], 'even': [2, 4]]
      * ```
      *
      * @param \Traversable $data the original data to be processed
@@ -175,7 +175,7 @@ class MapReduce : IteratorAggregate
     protected function _execute(): void
     {
         $mapper = _mapper;
-        foreach (_data as $key => $val) {
+        foreach (_data as $key: $val) {
             $mapper($val, $key, this);
         }
 
@@ -185,7 +185,7 @@ class MapReduce : IteratorAggregate
 
         /** @var callable $reducer */
         $reducer = _reducer;
-        foreach (_intermediate as $key => $list) {
+        foreach (_intermediate as $key: $list) {
             $reducer($list, $key, this);
         }
         _intermediate = [];

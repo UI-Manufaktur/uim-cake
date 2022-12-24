@@ -31,9 +31,9 @@ use Cake\Utility\Security;
  *
  * ```
  *  this.loadComponent('Auth', [
- *      'authenticate' => ['Digest'],
- *      'storage' => 'Memory',
- *      'unauthorizedRedirect' => false,
+ *      'authenticate': ['Digest'],
+ *      'storage': 'Memory',
+ *      'unauthorizedRedirect': false,
  *  ]);
  * ```
  *
@@ -87,11 +87,11 @@ class DigestAuthenticate : BasicAuthenticate
     public this(ComponentRegistry $registry, array $config = [])
     {
         this.setConfig([
-            'nonceLifetime' => 300,
-            'secret' => Security::getSalt(),
-            'realm' => null,
-            'qop' => 'auth',
-            'opaque' => null,
+            'nonceLifetime': 300,
+            'secret': Security::getSalt(),
+            'realm': null,
+            'qop': 'auth',
+            'opaque': null,
         ]);
 
         parent::__construct($registry, $config);
@@ -123,7 +123,7 @@ class DigestAuthenticate : BasicAuthenticate
         $password = $user[$field];
         unset($user[$field]);
 
-        $requestMethod = $request->getEnv('ORIGINAL_REQUEST_METHOD') ?: $request->getMethod();
+        $requestMethod = $request.getEnv('ORIGINAL_REQUEST_METHOD') ?: $request.getMethod();
         $hash = this.generateResponseHash(
             $digest,
             $password,
@@ -144,7 +144,7 @@ class DigestAuthenticate : BasicAuthenticate
      */
     protected function _getDigest(ServerRequest $request): ?array
     {
-        $digest = $request->getEnv('PHP_AUTH_DIGEST');
+        $digest = $request.getEnv('PHP_AUTH_DIGEST');
         if (empty($digest) && function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
             if (!empty($headers['Authorization']) && substr($headers['Authorization'], 0, 7) == 'Digest ') {
@@ -170,7 +170,7 @@ class DigestAuthenticate : BasicAuthenticate
             $digest = substr($digest, 7);
         }
         $keys = $match = [];
-        $req = ['nonce' => 1, 'nc' => 1, 'cnonce' => 1, 'qop' => 1, 'username' => 1, 'uri' => 1, 'response' => 1];
+        $req = ['nonce': 1, 'nc': 1, 'cnonce': 1, 'qop': 1, 'username': 1, 'uri': 1, 'response': 1];
         preg_match_all('/(\w+)=([\'"]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/', $digest, $match, PREG_SET_ORDER);
 
         foreach ($match as $i) {
@@ -223,13 +223,13 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function loginHeaders(ServerRequest $request): array
     {
-        $realm = _config['realm'] ?: $request->getEnv('SERVER_NAME');
+        $realm = _config['realm'] ?: $request.getEnv('SERVER_NAME');
 
         $options = [
-            'realm' => $realm,
-            'qop' => _config['qop'],
-            'nonce' => this.generateNonce(),
-            'opaque' => _config['opaque'] ?: md5($realm),
+            'realm': $realm,
+            'qop': _config['qop'],
+            'nonce': this.generateNonce(),
+            'opaque': _config['opaque'] ?: md5($realm),
         ];
 
         $digest = _getDigest($request);
@@ -238,7 +238,7 @@ class DigestAuthenticate : BasicAuthenticate
         }
 
         $opts = [];
-        foreach ($options as $k => $v) {
+        foreach ($options as $k: $v) {
             if (is_bool($v)) {
                 $v = $v ? 'true' : 'false';
                 $opts[] = sprintf('%s=%s', $k, $v);
@@ -248,7 +248,7 @@ class DigestAuthenticate : BasicAuthenticate
         }
 
         return [
-            'WWW-Authenticate' => 'Digest ' . implode(',', $opts),
+            'WWW-Authenticate': 'Digest ' . implode(',', $opts),
         ];
     }
 

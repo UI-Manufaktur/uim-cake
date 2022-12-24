@@ -53,10 +53,10 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'duration' => 3600,
-        'groups' => [],
-        'prefix' => 'cake_',
-        'warnOnWriteFailures' => true,
+        'duration': 3600,
+        'groups': [],
+        'prefix': 'cake_',
+        'warnOnWriteFailures': true,
     ];
 
     /**
@@ -122,7 +122,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
             ));
         }
 
-        foreach ($iterable as $key => $value) {
+        foreach ($iterable as $key: $value) {
             if ($check == self::CHECK_VALUE) {
                 this.ensureValidKey($value);
             } else {
@@ -153,9 +153,9 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
     }
 
     /**
-     * Persists a set of key => value pairs in the cache, with an optional TTL.
+     * Persists a set of key: value pairs in the cache, with an optional TTL.
      *
-     * @param iterable $values A list of key => value pairs for a multiple-set operation.
+     * @param iterable $values A list of key: value pairs for a multiple-set operation.
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
@@ -172,7 +172,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
             this.setConfig('duration', $ttl);
         }
         try {
-            foreach ($values as $key => $value) {
+            foreach ($values as $key: $value) {
                 $success = this.set($key, $value);
                 if ($success == false) {
                     return false;
@@ -385,8 +385,8 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
         }
         if ($ttl instanceof DateInterval) {
             return (int)DateTime::createFromFormat('U', '0')
-                ->add($ttl)
-                ->format('U');
+                .add($ttl)
+                .format('U');
         }
 
         throw new InvalidArgumentException('TTL values must be one of null, int, \DateInterval');

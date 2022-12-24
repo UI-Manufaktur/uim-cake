@@ -69,16 +69,16 @@ class TreeIterator : RecursiveIteratorIterator : CollectionInterface
      * ### Example
      *
      * ```
-     *  $printer = (new Collection($treeStructure))->listNested()->printer('name');
+     *  $printer = (new Collection($treeStructure)).listNested().printer('name');
      * ```
      *
      * Using a closure:
      *
      * ```
      *  $printer = (new Collection($treeStructure))
-     *      ->listNested()
-     *      ->printer(function ($item, $key, $iterator) {
-     *          return $item->name;
+     *      .listNested()
+     *      .printer(function ($item, $key, $iterator) {
+     *          return $item.name;
      *      });
      * ```
      *

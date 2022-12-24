@@ -55,8 +55,8 @@ class SessionStorage : StorageInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key' => 'Auth.User',
-        'redirect' => 'Auth.redirect',
+        'key': 'Auth.User',
+        'redirect': 'Auth.redirect',
     ];
 
     /**
@@ -68,7 +68,7 @@ class SessionStorage : StorageInterface
      */
     public this(ServerRequest $request, Response $response, array $config = [])
     {
-        _session = $request->getSession();
+        _session = $request.getSession();
         this.setConfig($config);
     }
 
@@ -85,7 +85,7 @@ class SessionStorage : StorageInterface
         }
 
         /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-        _user = _session->read(_config['key']) ?: false;
+        _user = _session.read(_config['key']) ?: false;
 
         /** @psalm-suppress InvalidReturnStatement */
         return _user ?: null;
@@ -103,8 +103,8 @@ class SessionStorage : StorageInterface
     {
         _user = $user;
 
-        _session->renew();
-        _session->write(_config['key'], $user);
+        _session.renew();
+        _session.write(_config['key'], $user);
     }
 
     /**
@@ -118,8 +118,8 @@ class SessionStorage : StorageInterface
     {
         _user = false;
 
-        _session->delete(_config['key']);
-        _session->renew();
+        _session.delete(_config['key']);
+        _session.renew();
     }
 
     /**
@@ -128,16 +128,16 @@ class SessionStorage : StorageInterface
     function redirectUrl($url = null)
     {
         if ($url == null) {
-            return _session->read(_config['redirect']);
+            return _session.read(_config['redirect']);
         }
 
         if ($url == false) {
-            _session->delete(_config['redirect']);
+            _session.delete(_config['redirect']);
 
             return null;
         }
 
-        _session->write(_config['redirect'], $url);
+        _session.write(_config['redirect'], $url);
 
         return null;
     }
