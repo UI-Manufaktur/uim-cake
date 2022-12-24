@@ -13,7 +13,7 @@
  * @since         1.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Log\Engine;
+module uim.cake.Log\Engine;
 
 use Cake\Core\Configure;
 use Cake\Log\Formatter\DefaultFormatter;

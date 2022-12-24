@@ -11,7 +11,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Mailer\Exception;
+module uim.cake.Mailer\Exception;
 
 use Cake\Core\Exception\CakeException;
 

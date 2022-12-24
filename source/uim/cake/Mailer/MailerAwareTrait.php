@@ -13,7 +13,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Mailer;
+module uim.cake.Mailer;
 
 use Cake\Core\App;
 use Cake\Mailer\Exception\MissingMailerException;

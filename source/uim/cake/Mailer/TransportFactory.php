@@ -13,7 +13,7 @@
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Mailer;
+module uim.cake.Mailer;
 
 use Cake\Core\StaticConfigTrait;
 use InvalidArgumentException;

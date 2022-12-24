@@ -12,7 +12,7 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\I18n\Middleware;
+module uim.cake.I18n\Middleware;
 
 use Cake\I18n\I18n;
 use Locale;

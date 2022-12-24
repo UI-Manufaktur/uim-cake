@@ -13,7 +13,7 @@
  * @since         2.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Log\Engine;
+module uim.cake.Log\Engine;
 
 use Cake\Log\Formatter\DefaultFormatter;
 use Cake\Log\Formatter\LegacySyslogFormatter;

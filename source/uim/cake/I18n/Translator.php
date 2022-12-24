@@ -13,7 +13,7 @@
  * @since         3.3.12
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\I18n;
+module uim.cake.I18n;
 
 /**
  * Translator to translate the message.
