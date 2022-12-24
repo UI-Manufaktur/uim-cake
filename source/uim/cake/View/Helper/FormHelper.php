@@ -1580,7 +1580,7 @@ class FormHelper : Helper
     }
 
     /**
-     * Missing method handler - implements various simple input types. Is used to create inputs
+     * Missing method handler - : various simple input types. Is used to create inputs
      * of various types. e.g. `this.Form->text();` will create `<input type="text"/>` while
      * `this.Form->range();` will create `<input type="range"/>`
      *

@@ -25,7 +25,7 @@ use Cake\View\StringTemplate;
  * Generally this element is used by other widgets,
  * and FormHelper itself.
  */
-class LabelWidget implements WidgetInterface
+class LabelWidget : WidgetInterface
 {
     /**
      * Templates

@@ -26,7 +26,7 @@ use Cake\View\StringTemplate;
  * input elements like hidden, text, email, tel and other
  * types.
  */
-class BasicWidget implements WidgetInterface
+class BasicWidget : WidgetInterface
 {
     /**
      * StringTemplate instance.
