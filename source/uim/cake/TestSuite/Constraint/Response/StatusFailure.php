@@ -34,6 +34,6 @@ class StatusFailure : StatusCodeBase
      */
     function toString(): string
     {
-        return sprintf('%d is between 500 and 505', this.response->getStatusCode());
+        return sprintf('%d is between 500 and 505', this.response.getStatusCode());
     }
 }

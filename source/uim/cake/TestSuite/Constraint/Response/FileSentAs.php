@@ -35,12 +35,12 @@ class FileSentAs : ResponseBase
      */
     function matches($other): bool
     {
-        $file = this.response->getFile();
+        $file = this.response.getFile();
         if (!$file) {
             return false;
         }
 
-        return $file->getPathName() == $other;
+        return $file.getPathName() == $other;
     }
 
     /**

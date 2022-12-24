@@ -44,7 +44,7 @@ abstract class StatusCodeBase : ResponseBase
             return this.statusCodeBetween($other[0], $other[1]);
         }
 
-        return this.response->getStatusCode() == $other;
+        return this.response.getStatusCode() == $other;
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class StatusCodeBase : ResponseBase
      */
     protected function statusCodeBetween(int $min, int $max): bool
     {
-        return this.response->getStatusCode() >= $min && this.response->getStatusCode() <= $max;
+        return this.response.getStatusCode() >= $min && this.response.getStatusCode() <= $max;
     }
 
     /**

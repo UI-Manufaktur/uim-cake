@@ -178,29 +178,29 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     protected function _schemaFromFields(): void
     {
         $connection = ConnectionManager::get(this.connection());
-        _schema = $connection->getDriver()->newTableSchema(this.table);
-        foreach (this.fields as $field => $data) {
+        _schema = $connection.getDriver().newTableSchema(this.table);
+        foreach (this.fields as $field: $data) {
             if ($field == '_constraints' || $field == '_indexes' || $field == '_options') {
                 continue;
             }
-            _schema->addColumn($field, $data);
+            _schema.addColumn($field, $data);
         }
         if (!empty(this.fields['_constraints'])) {
-            foreach (this.fields['_constraints'] as $name => $data) {
-                if (!$connection->supportsDynamicConstraints() || $data['type'] != TableSchema::CONSTRAINT_FOREIGN) {
-                    _schema->addConstraint($name, $data);
+            foreach (this.fields['_constraints'] as $name: $data) {
+                if (!$connection.supportsDynamicConstraints() || $data['type'] != TableSchema::CONSTRAINT_FOREIGN) {
+                    _schema.addConstraint($name, $data);
                 } else {
                     _constraints[$name] = $data;
                 }
             }
         }
         if (!empty(this.fields['_indexes'])) {
-            foreach (this.fields['_indexes'] as $name => $data) {
-                _schema->addIndex($name, $data);
+            foreach (this.fields['_indexes'] as $name: $data) {
+                _schema.addIndex($name, $data);
             }
         }
         if (!empty(this.fields['_options'])) {
-            _schema->setOptions(this.fields['_options']);
+            _schema.setOptions(this.fields['_options']);
         }
     }
 
@@ -215,13 +215,13 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         if (!is_array(this.import)) {
             return;
         }
-        $import = this.import + ['connection' => 'default', 'table' => null, 'model' => null];
+        $import = this.import + ['connection': 'default', 'table': null, 'model': null];
 
         if (!empty($import['model'])) {
             if (!empty($import['table'])) {
                 throw new CakeException('You cannot define both table and model.');
             }
-            $import['table'] = this.getTableLocator()->get($import['model'])->getTable();
+            $import['table'] = this.getTableLocator().get($import['model']).getTable();
         }
 
         if (empty($import['table'])) {
@@ -231,8 +231,8 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         this.table = $import['table'];
 
         $db = ConnectionManager::get($import['connection'], false);
-        $schemaCollection = $db->getSchemaCollection();
-        $table = $schemaCollection->describe($import['table']);
+        $schemaCollection = $db.getSchemaCollection();
+        $table = $schemaCollection.describe($import['table']);
         _schema = $table;
     }
 
@@ -247,13 +247,13 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         $db = ConnectionManager::get(this.connection());
         try {
             $name = Inflector::camelize(this.table);
-            $ormTable = this.fetchTable($name, ['connection' => $db]);
+            $ormTable = this.fetchTable($name, ['connection': $db]);
 
             /** @var \Cake\Database\Schema\TableSchema $schema */
-            $schema = $ormTable->getSchema();
+            $schema = $ormTable.getSchema();
             _schema = $schema;
 
-            this.getTableLocator()->clear();
+            this.getTableLocator().clear();
         } catch (CakeException $e) {
             $message = sprintf(
                 'Cannot describe schema for table `%s` for fixture `%s`. The table does not exist.',
@@ -280,17 +280,17 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
 
         try {
             /** @psalm-suppress ArgumentTypeCoercion */
-            $queries = _schema->createSql($connection);
+            $queries = _schema.createSql($connection);
             foreach ($queries as $query) {
-                $stmt = $connection->prepare($query);
-                $stmt->execute();
-                $stmt->closeCursor();
+                $stmt = $connection.prepare($query);
+                $stmt.execute();
+                $stmt.closeCursor();
             }
         } catch (Exception $e) {
             $msg = sprintf(
                 'Fixture creation for "%s" failed "%s"',
                 this.table,
-                $e->getMessage()
+                $e.getMessage()
             );
             Log::error($msg);
             trigger_error($msg, E_USER_WARNING);
@@ -317,9 +317,9 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
 
         try {
             /** @psalm-suppress ArgumentTypeCoercion */
-            $sql = _schema->dropSql($connection);
+            $sql = _schema.dropSql($connection);
             foreach ($sql as $stmt) {
-                $connection->execute($stmt)->closeCursor();
+                $connection.execute($stmt).closeCursor();
             }
         } catch (Exception $e) {
             return false;
@@ -335,15 +335,15 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     {
         if (!empty(this.records)) {
             [$fields, $values, $types] = _getRecords();
-            $query = $connection->newQuery()
-                ->insert($fields, $types)
-                ->into(this.sourceName());
+            $query = $connection.newQuery()
+                .insert($fields, $types)
+                .into(this.sourceName());
 
             foreach ($values as $row) {
-                $query->values($row);
+                $query.values($row);
             }
-            $statement = $query->execute();
-            $statement->closeCursor();
+            $statement = $query.execute();
+            $statement.closeCursor();
 
             return $statement;
         }
@@ -360,19 +360,19 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
             return true;
         }
 
-        foreach (_constraints as $name => $data) {
-            _schema->addConstraint($name, $data);
+        foreach (_constraints as $name: $data) {
+            _schema.addConstraint($name, $data);
         }
 
         /** @psalm-suppress ArgumentTypeCoercion */
-        $sql = _schema->addConstraintSql($connection);
+        $sql = _schema.addConstraintSql($connection);
 
         if (empty($sql)) {
             return true;
         }
 
         foreach ($sql as $stmt) {
-            $connection->execute($stmt)->closeCursor();
+            $connection.execute($stmt).closeCursor();
         }
 
         return true;
@@ -388,18 +388,18 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         }
 
         /** @psalm-suppress ArgumentTypeCoercion */
-        $sql = _schema->dropConstraintSql($connection);
+        $sql = _schema.dropConstraintSql($connection);
 
         if (empty($sql)) {
             return true;
         }
 
         foreach ($sql as $stmt) {
-            $connection->execute($stmt)->closeCursor();
+            $connection.execute($stmt).closeCursor();
         }
 
-        foreach (_constraints as $name => $data) {
-            _schema->dropConstraint($name);
+        foreach (_constraints as $name: $data) {
+            _schema.dropConstraint($name);
         }
 
         return true;
@@ -413,14 +413,14 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     protected function _getRecords(): array
     {
         $fields = $values = $types = [];
-        $columns = _schema->columns();
+        $columns = _schema.columns();
         foreach (this.records as $record) {
             $fields = array_merge($fields, array_intersect(array_keys($record), $columns));
         }
         $fields = array_values(array_unique($fields));
         foreach ($fields as $field) {
             /** @var array $column */
-            $column = _schema->getColumn($field);
+            $column = _schema.getColumn($field);
             $types[$field] = $column['type'];
         }
         $default = array_fill_keys($fields, null);
@@ -437,9 +437,9 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     function truncate(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress ArgumentTypeCoercion */
-        $sql = _schema->truncateSql($connection);
+        $sql = _schema.truncateSql($connection);
         foreach ($sql as $stmt) {
-            $connection->execute($stmt)->closeCursor();
+            $connection.execute($stmt).closeCursor();
         }
 
         return true;

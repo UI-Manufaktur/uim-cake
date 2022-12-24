@@ -42,7 +42,7 @@ class EventFired : Constraint
     {
         _eventManager = $eventManager;
 
-        if (_eventManager->getEventList() == null) {
+        if (_eventManager.getEventList() == null) {
             throw new AssertionFailedError(
                 'The event manager you are asserting against is not configured to track events.'
             );
@@ -57,9 +57,9 @@ class EventFired : Constraint
      */
     function matches($other): bool
     {
-        $list = _eventManager->getEventList();
+        $list = _eventManager.getEventList();
 
-        return $list == null ? false : $list->hasEvent($other);
+        return $list == null ? false : $list.hasEvent($other);
     }
 
     /**

@@ -50,7 +50,7 @@ class HeaderEquals : ResponseBase
      */
     function matches($other): bool
     {
-        return this.response->getHeaderLine(this.headerName) == $other;
+        return this.response.getHeaderLine(this.headerName) == $other;
     }
 
     /**
@@ -60,7 +60,7 @@ class HeaderEquals : ResponseBase
      */
     function toString(): string
     {
-        $responseHeader = this.response->getHeaderLine(this.headerName);
+        $responseHeader = this.response.getHeaderLine(this.headerName);
 
         return sprintf('equals content in header \'%s\' (`%s`)', this.headerName, $responseHeader);
     }

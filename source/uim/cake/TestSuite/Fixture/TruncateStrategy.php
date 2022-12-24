@@ -48,8 +48,8 @@ class TruncateStrategy : FixtureStrategyInterface
             return;
         }
 
-        this.fixtures = this.helper->loadFixtures($fixtureNames);
-        this.helper->insert(this.fixtures);
+        this.fixtures = this.helper.loadFixtures($fixtureNames);
+        this.helper.insert(this.fixtures);
     }
 
     /**
@@ -57,6 +57,6 @@ class TruncateStrategy : FixtureStrategyInterface
      */
     function teardownTest(): void
     {
-        this.helper->truncate(this.fixtures);
+        this.helper.truncate(this.fixtures);
     }
 }

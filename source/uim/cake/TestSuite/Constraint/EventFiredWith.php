@@ -49,7 +49,7 @@ class EventFiredWith : Constraint
         _dataKey = $dataKey;
         _dataValue = $dataValue;
 
-        if (_eventManager->getEventList() == null) {
+        if (_eventManager.getEventList() == null) {
             throw new AssertionFailedError(
                 'The event manager you are asserting against is not configured to track events.'
             );
@@ -66,7 +66,7 @@ class EventFiredWith : Constraint
     function matches($other): bool
     {
         $firedEvents = [];
-        $list = _eventManager->getEventList();
+        $list = _eventManager.getEventList();
         if ($list != null) {
             $totalEvents = count($list);
             for ($e = 0; $e < $totalEvents; $e++) {
@@ -75,10 +75,10 @@ class EventFiredWith : Constraint
         }
 
         $eventGroup = collection($firedEvents)
-            ->groupBy(function (EventInterface $event): string {
-                return $event->getName();
+            .groupBy(function (EventInterface $event): string {
+                return $event.getName();
             })
-            ->toArray();
+            .toArray();
 
         if (!array_key_exists($other, $eventGroup)) {
             return false;
@@ -97,11 +97,11 @@ class EventFiredWith : Constraint
 
         $event = $events[0];
 
-        if (array_key_exists(_dataKey, (array)$event->getData()) == false) {
+        if (array_key_exists(_dataKey, (array)$event.getData()) == false) {
             return false;
         }
 
-        return $event->getData(_dataKey) == _dataValue;
+        return $event.getData(_dataKey) == _dataValue;
     }
 
     /**

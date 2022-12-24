@@ -30,7 +30,7 @@ class HeaderContains : HeaderEquals
      */
     function matches($other): bool
     {
-        return mb_strpos(this.response->getHeaderLine(this.headerName), $other) != false;
+        return mb_strpos(this.response.getHeaderLine(this.headerName), $other) != false;
     }
 
     /**
@@ -43,7 +43,7 @@ class HeaderContains : HeaderEquals
         return sprintf(
             'is in header \'%s\' (`%s`)',
             this.headerName,
-            this.response->getHeaderLine(this.headerName)
+            this.response.getHeaderLine(this.headerName)
         );
     }
 }

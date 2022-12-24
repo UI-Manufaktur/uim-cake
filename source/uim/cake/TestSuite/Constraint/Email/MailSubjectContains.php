@@ -40,7 +40,7 @@ class MailSubjectContains : MailConstraintBase
         }
         $messages = this.getMessages();
         foreach ($messages as $message) {
-            $subject = $message->getOriginalSubject();
+            $subject = $message.getOriginalSubject();
             if (strpos($subject, $other) != false) {
                 return true;
             }
@@ -60,7 +60,7 @@ class MailSubjectContains : MailConstraintBase
         $messageMembers = [];
         $messages = this.getMessages();
         foreach ($messages as $message) {
-            $messageMembers[] = $message->getSubject();
+            $messageMembers[] = $message.getSubject();
         }
         if (this.at && isset($messageMembers[this.at - 1])) {
             $messageMembers = [$messageMembers[this.at - 1]];

@@ -35,7 +35,7 @@ class FileSent : ResponseBase
      */
     function matches($other): bool
     {
-        return this.response->getFile() != null;
+        return this.response.getFile() != null;
     }
 
     /**

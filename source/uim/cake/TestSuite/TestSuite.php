@@ -36,8 +36,8 @@ class TestSuite : BaseTestSuite
     function addTestDirectory(string $directory = '.'): void
     {
         $fs = new Filesystem();
-        $files = $fs->find($directory, '/\.php$/');
-        foreach ($files as $file => $fileInfo) {
+        $files = $fs.find($directory, '/\.php$/');
+        foreach ($files as $file: $fileInfo) {
             this.addTestFile($file);
         }
     }
@@ -51,15 +51,15 @@ class TestSuite : BaseTestSuite
     function addTestDirectoryRecursive(string $directory = '.'): void
     {
         $fs = new Filesystem();
-        $files = $fs->findRecursive($directory, function (SplFileInfo $current) {
-            $file = $current->getFilename();
+        $files = $fs.findRecursive($directory, function (SplFileInfo $current) {
+            $file = $current.getFilename();
             if ($file[0] == '.' || !preg_match('/\.php$/', $file)) {
                 return false;
             }
 
             return true;
         });
-        foreach ($files as $file => $fileInfo) {
+        foreach ($files as $file: $fileInfo) {
             this.addTestFile($file);
         }
     }

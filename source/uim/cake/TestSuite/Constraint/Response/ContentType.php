@@ -35,12 +35,12 @@ class ContentType : ResponseBase
      */
     function matches($other): bool
     {
-        $alias = this.response->getMimeType($other);
+        $alias = this.response.getMimeType($other);
         if ($alias != false) {
             $other = $alias;
         }
 
-        return $other == this.response->getType();
+        return $other == this.response.getType();
     }
 
     /**
@@ -50,6 +50,6 @@ class ContentType : ResponseBase
      */
     function toString(): string
     {
-        return 'is set as the Content-Type (`' . this.response->getType() . '`)';
+        return 'is set as the Content-Type (`' . this.response.getType() . '`)';
     }
 }

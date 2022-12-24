@@ -116,10 +116,10 @@ class FixtureHelper
     {
         $groups = [];
         foreach ($fixtures as $fixture) {
-            $groups[$fixture->connection()][] = $fixture;
+            $groups[$fixture.connection()][] = $fixture;
         }
 
-        foreach ($groups as $connectionName => $fixtures) {
+        foreach ($groups as $connectionName: $fixtures) {
             $callback(ConnectionManager::get($connectionName), $fixtures);
         }
     }
@@ -140,7 +140,7 @@ class FixtureHelper
                     this.insertConnection($connection, $sortedFixtures);
                 } else {
                     $helper = new ConnectionHelper();
-                    $helper->runWithoutConstraints(
+                    $helper.runWithoutConstraints(
                         $connection,
                         function (Connection $connection) use ($groupFixtures): void {
                             this.insertConnection($connection, $groupFixtures);
@@ -164,13 +164,13 @@ class FixtureHelper
     {
         foreach ($fixtures as $fixture) {
             try {
-                $fixture->insert($connection);
+                $fixture.insert($connection);
             } catch (PDOException $exception) {
                 $message = sprintf(
                     'Unable to insert rows for table `%s`.'
                         . " Fixture records might have invalid data or unknown contraints.\n%s",
-                    $fixture->sourceName(),
-                    $exception->getMessage()
+                    $fixture.sourceName(),
+                    $exception.getMessage()
                 );
                 throw new CakeException($message);
             }
@@ -189,7 +189,7 @@ class FixtureHelper
         this.runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
                 $sortedFixtures = null;
-                if ($connection->getDriver()->supports(DriverInterface::FEATURE_TRUNCATE_WITH_CONSTRAINTS)) {
+                if ($connection.getDriver().supports(DriverInterface::FEATURE_TRUNCATE_WITH_CONSTRAINTS)) {
                     $sortedFixtures = this.sortByConstraint($connection, $groupFixtures);
                 }
 
@@ -197,7 +197,7 @@ class FixtureHelper
                     this.truncateConnection($connection, array_reverse($sortedFixtures));
                 } else {
                     $helper = new ConnectionHelper();
-                    $helper->runWithoutConstraints(
+                    $helper.runWithoutConstraints(
                         $connection,
                         function (Connection $connection) use ($groupFixtures): void {
                             this.truncateConnection($connection, $groupFixtures);
@@ -221,13 +221,13 @@ class FixtureHelper
     {
         foreach ($fixtures as $fixture) {
             try {
-                $fixture->truncate($connection);
+                $fixture.truncate($connection);
             } catch (PDOException $exception) {
                 $message = sprintf(
                     'Unable to truncate table `%s`.'
                         . " Fixture records might have invalid data or unknown contraints.\n%s",
-                    $fixture->sourceName(),
-                    $exception->getMessage()
+                    $fixture.sourceName(),
+                    $exception.getMessage()
                 );
                 throw new CakeException($message);
             }
@@ -248,7 +248,7 @@ class FixtureHelper
         foreach ($fixtures as $fixture) {
             $references = this.getForeignReferences($connection, $fixture);
             if ($references) {
-                $constrained[$fixture->sourceName()] = ['references' => $references, 'fixture' => $fixture];
+                $constrained[$fixture.sourceName()] = ['references': $references, 'fixture': $fixture];
             } else {
                 $unconstrained[] = $fixture;
             }
@@ -256,7 +256,7 @@ class FixtureHelper
 
         // Check if any fixtures reference another fixture with constrants
         // If they do, then there might be cross-dependencies which we don't support sorting
-        foreach ($constrained as ['references' => $references]) {
+        foreach ($constrained as ['references': $references]) {
             foreach ($references as $reference) {
                 if (isset($constrained[$reference])) {
                     return null;
@@ -279,15 +279,15 @@ class FixtureHelper
         static $schemas = [];
 
         // Get and cache off the schema since TestFixture generates a fake schema based on $fields
-        $tableName = $fixture->sourceName();
+        $tableName = $fixture.sourceName();
         if (!isset($schemas[$tableName])) {
-            $schemas[$tableName] = $connection->getSchemaCollection()->describe($tableName);
+            $schemas[$tableName] = $connection.getSchemaCollection().describe($tableName);
         }
         $schema = $schemas[$tableName];
 
         $references = [];
-        foreach ($schema->constraints() as $constraintName) {
-            $constraint = $schema->getConstraint($constraintName);
+        foreach ($schema.constraints() as $constraintName) {
+            $constraint = $schema.getConstraint($constraintName);
 
             if ($constraint && $constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
                 $references[] = $constraint['references'][0];

@@ -69,7 +69,7 @@ class SchemaLoader
         }
 
         if ($dropTables) {
-            this.helper->dropTables($connectionName);
+            this.helper.dropTables($connectionName);
         }
 
         /** @var \Cake\Database\Connection $connection */
@@ -82,12 +82,12 @@ class SchemaLoader
 
             // Use the underlying PDO connection so we can avoid prepared statements
             // which don't support multiple queries in postgres.
-            $driver = $connection->getDriver();
-            $driver->getConnection()->exec($sql);
+            $driver = $connection.getDriver();
+            $driver.getConnection().exec($sql);
         }
 
         if ($truncateTables) {
-            this.helper->truncateTables($connectionName);
+            this.helper.truncateTables($connectionName);
         }
     }
 
@@ -106,28 +106,28 @@ class SchemaLoader
             return;
         }
 
-        this.helper->dropTables($connectionName);
+        this.helper.dropTables($connectionName);
 
         $tables = include $file;
 
         $connection = ConnectionManager::get($connectionName);
-        $connection->disableConstraints(function ($connection) use ($tables) {
+        $connection.disableConstraints(function ($connection) use ($tables) {
             foreach ($tables as $table) {
                 $schema = new TableSchema($table['table'], $table['columns']);
                 if (isset($table['indexes'])) {
-                    foreach ($table['indexes'] as $key => $index) {
-                        $schema->addIndex($key, $index);
+                    foreach ($table['indexes'] as $key: $index) {
+                        $schema.addIndex($key, $index);
                     }
                 }
                 if (isset($table['constraints'])) {
-                    foreach ($table['constraints'] as $key => $index) {
-                        $schema->addConstraint($key, $index);
+                    foreach ($table['constraints'] as $key: $index) {
+                        $schema.addConstraint($key, $index);
                     }
                 }
 
                 // Generate SQL for each table.
-                foreach ($schema->createSql($connection) as $sql) {
-                    $connection->execute($sql);
+                foreach ($schema.createSql($connection) as $sql) {
+                    $connection.execute($sql);
                 }
             }
         });

@@ -54,10 +54,10 @@ class FixtureInjector : TestListener
     public this(FixtureManager $manager)
     {
         if (isset($_SERVER['argv'])) {
-            $manager->setDebug(in_array('--debug', $_SERVER['argv'], true));
+            $manager.setDebug(in_array('--debug', $_SERVER['argv'], true));
         }
         _fixtureManager = $manager;
-        _fixtureManager->shutDown();
+        _fixtureManager.shutDown();
         TestCase::$fixtureManager = $manager;
     }
 
@@ -92,7 +92,7 @@ class FixtureInjector : TestListener
     function endTestSuite(TestSuite $suite): void
     {
         if (_first == $suite) {
-            _fixtureManager->shutDown();
+            _fixtureManager.shutDown();
         }
     }
 
@@ -105,8 +105,8 @@ class FixtureInjector : TestListener
     function startTest(Test $test): void
     {
         if ($test instanceof TestCase) {
-            _fixtureManager->fixturize($test);
-            _fixtureManager->load($test);
+            _fixtureManager.fixturize($test);
+            _fixtureManager.load($test);
         }
     }
 
@@ -120,7 +120,7 @@ class FixtureInjector : TestListener
     function endTest(Test $test, float $time): void
     {
         if ($test instanceof TestCase) {
-            _fixtureManager->unload($test);
+            _fixtureManager.unload($test);
         }
     }
 }

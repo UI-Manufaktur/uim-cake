@@ -35,7 +35,7 @@ class MailContainsAttachment : MailContains
 
         $messages = this.getMessages();
         foreach ($messages as $message) {
-            foreach ($message->getAttachments() as $filename => $fileInfo) {
+            foreach ($message.getAttachments() as $filename: $fileInfo) {
                 if ($filename == $expectedFilename && empty($expectedFileInfo)) {
                     return true;
                 }

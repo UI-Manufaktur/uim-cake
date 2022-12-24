@@ -52,6 +52,6 @@ abstract class ResponseBase : Constraint
      */
     protected function _getBodyAsString(): string
     {
-        return (string)this.response->getBody();
+        return (string)this.response.getBody();
     }
 }

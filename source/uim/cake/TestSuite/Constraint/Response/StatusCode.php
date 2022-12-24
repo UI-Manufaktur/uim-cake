@@ -29,7 +29,7 @@ class StatusCode : StatusCodeBase
      */
     function toString(): string
     {
-        return sprintf('matches response status code `%d`', this.response->getStatusCode());
+        return sprintf('matches response status code `%d`', this.response.getStatusCode());
     }
 
     /**

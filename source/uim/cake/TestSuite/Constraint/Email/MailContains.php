@@ -42,7 +42,7 @@ class MailContains : MailConstraintBase
         $messages = this.getMessages();
         foreach ($messages as $message) {
             $method = this.getTypeMethod();
-            $message = $message->$method();
+            $message = $message.$method();
 
             if (preg_match("/$other/", $message) > 0) {
                 return true;
@@ -72,7 +72,7 @@ class MailContains : MailConstraintBase
         $messages = this.getMessages();
         foreach ($messages as $message) {
             $method = this.getTypeMethod();
-            $messageMembers[] = $message->$method();
+            $messageMembers[] = $message.$method();
         }
         if (this.at && isset($messageMembers[this.at - 1])) {
             $messageMembers = [$messageMembers[this.at - 1]];

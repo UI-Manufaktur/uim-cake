@@ -50,7 +50,7 @@ class HeaderSet : ResponseBase
      */
     function matches($other): bool
     {
-        return this.response->hasHeader(this.headerName);
+        return this.response.hasHeader(this.headerName);
     }
 
     /**

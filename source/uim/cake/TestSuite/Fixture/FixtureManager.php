@@ -95,7 +95,7 @@ class FixtureManager
     function fixturize(TestCase $test): void
     {
         _initDb();
-        if (!$test->getFixtures() || !empty(_processed[get_class($test)])) {
+        if (!$test.getFixtures() || !empty(_processed[get_class($test)])) {
             return;
         }
         _loadFixtures($test);
@@ -119,7 +119,7 @@ class FixtureManager
         foreach (_insertionMap as $fixtures) {
             foreach ($fixtures as $fixture) {
                 /** @var \Cake\TestSuite\Fixture\TestFixture $fixture */
-                $inserted[] = $fixture->table;
+                $inserted[] = $fixture.table;
             }
         }
 
@@ -152,7 +152,7 @@ class FixtureManager
                 $map['test_' . $connection] = $connection;
             }
         }
-        foreach ($map as $testConnection => $normal) {
+        foreach ($map as $testConnection: $normal) {
             ConnectionManager::alias($testConnection, $normal);
         }
     }
@@ -180,7 +180,7 @@ class FixtureManager
      */
     protected function _loadFixtures(TestCase $test): void
     {
-        $fixtures = $test->getFixtures();
+        $fixtures = $test.getFixtures();
         if (!$fixtures) {
             return;
         }
@@ -257,24 +257,24 @@ class FixtureManager
         array $sources,
         bool $drop = true
     ): void {
-        $configName = $db->configName();
+        $configName = $db.configName();
         $isFixtureSetup = this.isFixtureSetup($configName, $fixture);
         if ($isFixtureSetup) {
             return;
         }
 
-        $table = $fixture->sourceName();
+        $table = $fixture.sourceName();
         $exists = in_array($table, $sources, true);
 
-        $hasSchema = $fixture instanceof TableSchemaAwareInterface && $fixture->getTableSchema() instanceof TableSchema;
+        $hasSchema = $fixture instanceof TableSchemaAwareInterface && $fixture.getTableSchema() instanceof TableSchema;
 
         if (($drop && $exists) || ($exists && $hasSchema)) {
-            $fixture->drop($db);
-            $fixture->create($db);
+            $fixture.drop($db);
+            $fixture.create($db);
         } elseif (!$exists) {
-            $fixture->create($db);
+            $fixture.create($db);
         } else {
-            $fixture->truncate($db);
+            $fixture.truncate($db);
         }
 
         _insertionMap[$configName][] = $fixture;
@@ -287,16 +287,16 @@ class FixtureManager
      */
     function load(TestCase $test): void
     {
-        $fixtures = $test->getFixtures();
-        if (!$fixtures || !$test->autoFixtures) {
+        $fixtures = $test.getFixtures();
+        if (!$fixtures || !$test.autoFixtures) {
             return;
         }
 
         try {
             $createTables = function (ConnectionInterface $db, array $fixtures) use ($test): void {
                 /** @var array<\Cake\Datasource\FixtureInterface> $fixtures */
-                $tables = $db->getSchemaCollection()->listTables();
-                $configName = $db->configName();
+                $tables = $db.getSchemaCollection().listTables();
+                $configName = $db.configName();
                 _insertionMap[$configName] = _insertionMap[$configName] ?? [];
 
                 foreach ($fixtures as $fixture) {
@@ -304,15 +304,15 @@ class FixtureManager
                         continue;
                     }
 
-                    if (in_array($fixture->sourceName(), $tables, true)) {
+                    if (in_array($fixture.sourceName(), $tables, true)) {
                         try {
-                            $fixture->dropConstraints($db);
+                            $fixture.dropConstraints($db);
                         } catch (PDOException $e) {
                             $msg = sprintf(
                                 'Unable to drop constraints for fixture "%s" in "%s" test case: ' . "\n" . '%s',
                                 get_class($fixture),
                                 get_class($test),
-                                $e->getMessage()
+                                $e.getMessage()
                             );
                             throw new CakeException($msg, null, $e);
                         }
@@ -321,9 +321,9 @@ class FixtureManager
 
                 foreach ($fixtures as $fixture) {
                     if (!in_array($fixture, _insertionMap[$configName], true)) {
-                        _setupTable($fixture, $db, $tables, $test->dropTables);
+                        _setupTable($fixture, $db, $tables, $test.dropTables);
                     } else {
-                        $fixture->truncate($db);
+                        $fixture.truncate($db);
                     }
                 }
 
@@ -333,13 +333,13 @@ class FixtureManager
                     }
 
                     try {
-                        $fixture->createConstraints($db);
+                        $fixture.createConstraints($db);
                     } catch (PDOException $e) {
                         $msg = sprintf(
                             'Unable to create constraints for fixture "%s" in "%s" test case: ' . "\n" . '%s',
                             get_class($fixture),
                             get_class($test),
-                            $e->getMessage()
+                            $e.getMessage()
                         );
                         throw new CakeException($msg, null, $e);
                     }
@@ -351,13 +351,13 @@ class FixtureManager
             $insert = function (ConnectionInterface $db, array $fixtures) use ($test): void {
                 foreach ($fixtures as $fixture) {
                     try {
-                        $fixture->insert($db);
+                        $fixture.insert($db);
                     } catch (PDOException $e) {
                         $msg = sprintf(
                             'Unable to insert fixture "%s" in "%s" test case: ' . "\n" . '%s',
                             get_class($fixture),
                             get_class($test),
-                            $e->getMessage()
+                            $e.getMessage()
                         );
                         throw new CakeException($msg, null, $e);
                     }
@@ -368,7 +368,7 @@ class FixtureManager
             $msg = sprintf(
                 'Unable to insert fixtures for "%s" test case. %s',
                 get_class($test),
-                $e->getMessage()
+                $e.getMessage()
             );
             throw new RuntimeException($msg, 0, $e);
         }
@@ -384,20 +384,20 @@ class FixtureManager
     protected function _runOperation(array $fixtures, callable $operation): void
     {
         $dbs = _fixtureConnections($fixtures);
-        foreach ($dbs as $connection => $fixtures) {
+        foreach ($dbs as $connection: $fixtures) {
             $db = ConnectionManager::get($connection);
-            $logQueries = $db->isQueryLoggingEnabled();
+            $logQueries = $db.isQueryLoggingEnabled();
 
             if ($logQueries && !_debug) {
-                $db->disableQueryLogging();
+                $db.disableQueryLogging();
             }
-            $db->transactional(function (ConnectionInterface $db) use ($fixtures, $operation): void {
-                $db->disableConstraints(function (ConnectionInterface $db) use ($fixtures, $operation): void {
+            $db.transactional(function (ConnectionInterface $db) use ($fixtures, $operation): void {
+                $db.disableConstraints(function (ConnectionInterface $db) use ($fixtures, $operation): void {
                     $operation($db, $fixtures);
                 });
             });
             if ($logQueries) {
-                $db->enableQueryLogging(true);
+                $db.enableQueryLogging(true);
             }
         }
     }
@@ -414,7 +414,7 @@ class FixtureManager
         foreach ($fixtures as $name) {
             if (!empty(_loaded[$name])) {
                 $fixture = _loaded[$name];
-                $dbs[$fixture->connection()][$name] = $fixture;
+                $dbs[$fixture.connection()][$name] = $fixture;
             }
         }
 
@@ -429,19 +429,19 @@ class FixtureManager
      */
     function unload(TestCase $test): void
     {
-        $fixtures = $test->getFixtures();
+        $fixtures = $test.getFixtures();
         if (!$fixtures) {
             return;
         }
         $truncate = function (ConnectionInterface $db, array $fixtures): void {
-            $configName = $db->configName();
+            $configName = $db.configName();
 
             foreach ($fixtures as $fixture) {
                 if (
                     this.isFixtureSetup($configName, $fixture)
                     && $fixture instanceof ConstraintsInterface
                 ) {
-                    $fixture->dropConstraints($db);
+                    $fixture.dropConstraints($db);
                 }
             }
         };
@@ -463,25 +463,25 @@ class FixtureManager
 
         $fixture = _fixtureMap[$name];
         if (!$connection) {
-            $connection = ConnectionManager::get($fixture->connection());
+            $connection = ConnectionManager::get($fixture.connection());
         }
 
-        if (!this.isFixtureSetup($connection->configName(), $fixture)) {
-            $sources = $connection->getSchemaCollection()->listTables();
+        if (!this.isFixtureSetup($connection.configName(), $fixture)) {
+            $sources = $connection.getSchemaCollection().listTables();
             _setupTable($fixture, $connection, $sources, $dropTables);
         }
 
         if (!$dropTables) {
             if ($fixture instanceof ConstraintsInterface) {
-                $fixture->dropConstraints($connection);
+                $fixture.dropConstraints($connection);
             }
-            $fixture->truncate($connection);
+            $fixture.truncate($connection);
         }
 
         if ($fixture instanceof ConstraintsInterface) {
-            $fixture->createConstraints($connection);
+            $fixture.createConstraints($connection);
         }
-        $fixture->insert($connection);
+        $fixture.insert($connection);
     }
 
     /**
@@ -492,11 +492,11 @@ class FixtureManager
     function shutDown(): void
     {
         $shutdown = function (ConnectionInterface $db, array $fixtures): void {
-            $connection = $db->configName();
+            $connection = $db.configName();
             /** @var \Cake\Datasource\FixtureInterface $fixture */
             foreach ($fixtures as $fixture) {
                 if (this.isFixtureSetup($connection, $fixture)) {
-                    $fixture->drop($db);
+                    $fixture.drop($db);
                     $index = array_search($fixture, _insertionMap[$connection], true);
                     unset(_insertionMap[$connection][$index]);
                 }

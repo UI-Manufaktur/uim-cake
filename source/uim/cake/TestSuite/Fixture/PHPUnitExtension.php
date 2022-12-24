@@ -33,16 +33,16 @@ class PHPUnitExtension : BeforeFirstTestHook
     function executeBeforeFirstTest(): void
     {
         $helper = new ConnectionHelper();
-        $helper->addTestAliases();
+        $helper.addTestAliases();
 
         $enableLogging = in_array('--debug', $_SERVER['argv'] ?? [], true);
         if ($enableLogging) {
-            $helper->enableQueryLogging();
+            $helper.enableQueryLogging();
             Log::drop('queries');
             Log::setConfig('queries', [
-                'className' => 'Console',
-                'stream' => 'php://stderr',
-                'scopes' => ['queriesLog'],
+                'className': 'Console',
+                'stream': 'php://stderr',
+                'scopes': ['queriesLog'],
             ]);
         }
     }
