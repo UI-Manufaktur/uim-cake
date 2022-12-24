@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class ContentType extends ResponseBase
+class ContentType : ResponseBase
 {
     /**
      * @var \Cake\Http\Response

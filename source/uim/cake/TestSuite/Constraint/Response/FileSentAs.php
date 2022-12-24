@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class FileSentAs extends ResponseBase
+class FileSentAs : ResponseBase
 {
     /**
      * @var \Cake\Http\Response

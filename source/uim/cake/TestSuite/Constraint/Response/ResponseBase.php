@@ -24,7 +24,7 @@ use Psr\Http\Message\IResponse;
  *
  * @internal
  */
-abstract class ResponseBase extends Constraint
+abstract class ResponseBase : Constraint
 {
     /**
      * @var \Psr\Http\Message\IResponse

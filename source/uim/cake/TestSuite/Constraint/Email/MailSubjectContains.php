@@ -23,7 +23,7 @@ use InvalidArgumentException;
  *
  * @internal
  */
-class MailSubjectContains extends MailConstraintBase
+class MailSubjectContains : MailConstraintBase
 {
     /**
      * Checks constraint

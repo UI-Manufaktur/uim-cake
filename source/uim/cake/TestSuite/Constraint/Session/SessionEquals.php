@@ -23,7 +23,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-class SessionEquals extends Constraint
+class SessionEquals : Constraint
 {
     /**
      * @var string

@@ -25,7 +25,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-class FlashParamEquals extends Constraint
+class FlashParamEquals : Constraint
 {
     /**
      * @var \Cake\Http\Session

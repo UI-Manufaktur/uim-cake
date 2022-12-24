@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class HeaderNotContains extends HeaderContains
+class HeaderNotContains : HeaderContains
 {
     /**
      * Checks assertion

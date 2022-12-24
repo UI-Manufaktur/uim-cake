@@ -22,7 +22,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-class TemplateFileEquals extends Constraint
+class TemplateFileEquals : Constraint
 {
     /**
      * @var string

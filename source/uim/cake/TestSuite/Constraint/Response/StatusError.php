@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class StatusError extends StatusCodeBase
+class StatusError : StatusCodeBase
 {
     /**
      * @var array<int, int>|int

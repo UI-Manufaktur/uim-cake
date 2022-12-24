@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class CookieSet extends ResponseBase
+class CookieSet : ResponseBase
 {
     /**
      * @var \Cake\Http\Response

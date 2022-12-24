@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class HeaderNotSet extends HeaderSet
+class HeaderNotSet : HeaderSet
 {
     /**
      * Checks assertion

@@ -22,7 +22,7 @@ use Cake\Http\Response;
  *
  * @internal
  */
-class CookieEquals extends ResponseBase
+class CookieEquals : ResponseBase
 {
     /**
      * @var \Cake\Http\Response

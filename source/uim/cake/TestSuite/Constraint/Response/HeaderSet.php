@@ -22,7 +22,7 @@ use Psr\Http\Message\IResponse;
  *
  * @internal
  */
-class HeaderSet extends ResponseBase
+class HeaderSet : ResponseBase
 {
     /**
      * @var string

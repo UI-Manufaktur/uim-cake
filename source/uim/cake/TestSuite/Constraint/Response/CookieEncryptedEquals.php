@@ -23,7 +23,7 @@ use Cake\Utility\CookieCryptTrait;
  *
  * @internal
  */
-class CookieEncryptedEquals extends CookieEquals
+class CookieEncryptedEquals : CookieEquals
 {
     use CookieCryptTrait;
 

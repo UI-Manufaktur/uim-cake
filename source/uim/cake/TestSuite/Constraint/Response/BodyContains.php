@@ -22,7 +22,7 @@ use Psr\Http\Message\IResponse;
  *
  * @internal
  */
-class BodyContains extends ResponseBase
+class BodyContains : ResponseBase
 {
     /**
      * @var bool

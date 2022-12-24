@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class BodyNotRegExp extends BodyRegExp
+class BodyNotRegExp : BodyRegExp
 {
     /**
      * Checks assertion

@@ -20,7 +20,7 @@ namespace Cake\TestSuite\Constraint\Response;
  *
  * @internal
  */
-class StatusCode extends StatusCodeBase
+class StatusCode : StatusCodeBase
 {
     /**
      * Assertion message

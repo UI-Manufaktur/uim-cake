@@ -21,7 +21,7 @@ namespace Cake\TestSuite\Constraint\Email;
  *
  * @internal
  */
-class MailSentWith extends MailConstraintBase
+class MailSentWith : MailConstraintBase
 {
     /**
      * @var string
