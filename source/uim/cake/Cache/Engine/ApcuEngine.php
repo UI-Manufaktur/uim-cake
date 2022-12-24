@@ -16,7 +16,7 @@
 module uim.cake.Cache\Engine;
 
 use APCUIterator;
-use Cake\Cache\CacheEngine;
+import uim.cake.Cache\CacheEngine;
 use RuntimeException;
 
 /**

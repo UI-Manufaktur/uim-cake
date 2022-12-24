@@ -15,7 +15,7 @@
  */
 module uim.cake.Collection\Iterator;
 
-use Cake\Collection\Collection;
+import uim.cake.Collection\Collection;
 use RecursiveIterator;
 use Traversable;
 

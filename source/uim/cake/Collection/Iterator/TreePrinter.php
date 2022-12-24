@@ -15,8 +15,8 @@
  */
 module uim.cake.Collection\Iterator;
 
-use Cake\Collection\ICollection;
-use Cake\Collection\CollectionTrait;
+import uim.cake.Collection\ICollection;
+import uim.cake.Collection\CollectionTrait;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
 

@@ -15,7 +15,7 @@
  */
 module uim.cake.Cache;
 
-use Cake\Core\InstanceConfigTrait;
+import uim.cake.Core\InstanceConfigTrait;
 use DateInterval;
 use DateTime;
 use Psr\SimpleCache\ICache;

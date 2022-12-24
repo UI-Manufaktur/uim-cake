@@ -11,7 +11,7 @@ If you have ever used underscore.js, you have an idea of what you can expect fro
 Collections can be created using an array or Traversable object.  A simple use of a Collection would be:
 
 ```php
-use Cake\Collection\Collection;
+import uim.cake.Collection\Collection;
 
 $items = ["a": 1, "b": 2, "c": 3];
 $collection = new Collection($items);

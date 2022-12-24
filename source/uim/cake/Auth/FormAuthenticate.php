@@ -15,8 +15,8 @@
  */
 module uim.cake.Auth;
 
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
 
 /**
  * Form authentication adapter for AuthComponent.

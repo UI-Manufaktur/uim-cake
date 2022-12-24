@@ -15,9 +15,9 @@
  */
 module uim.cake.Auth;
 
-use Cake\Controller\ComponentRegistry;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Http\ServerRequest;
+import uim.cake.Controller\ComponentRegistry;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Http\ServerRequest;
 
 /**
  * Abstract base authorization adapter for AuthComponent.

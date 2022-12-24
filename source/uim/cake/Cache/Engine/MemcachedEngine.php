@@ -15,7 +15,7 @@
  */
 module uim.cake.Cache\Engine;
 
-use Cake\Cache\CacheEngine;
+import uim.cake.Cache\CacheEngine;
 use InvalidArgumentException;
 use Memcached;
 use RuntimeException;

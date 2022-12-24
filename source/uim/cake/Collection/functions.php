@@ -14,8 +14,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-use Cake\Collection\Collection;
-use Cake\Collection\ICollection;
+import uim.cake.Collection\Collection;
+import uim.cake.Collection\ICollection;
 
 if (!function_exists("collection")) {
     /**

@@ -14,13 +14,13 @@
  */
 module uim.cake.Auth;
 
-use Cake\Controller\ComponentRegistry;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Event\IEventListener;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\Query;
+import uim.cake.Controller\ComponentRegistry;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Event\IEventListener;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Query;
 
 /**
  * Base Authentication class with common methods and properties.

@@ -15,7 +15,7 @@
  */
 module uim.cake.Auth;
 
-use Cake\Core\App;
+import uim.cake.Core\App;
 use RuntimeException;
 
 /**

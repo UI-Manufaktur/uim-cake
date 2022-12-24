@@ -15,10 +15,10 @@
  */
 module uim.cake.Auth;
 
-use Cake\Controller\ComponentRegistry;
-use Cake\Controller\Controller;
-use Cake\Core\Exception\CakeException;
-use Cake\Http\ServerRequest;
+import uim.cake.Controller\ComponentRegistry;
+import uim.cake.Controller\Controller;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Http\ServerRequest;
 
 /**
  * An authorization adapter for AuthComponent. Provides the ability to authorize

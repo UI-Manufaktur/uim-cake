@@ -16,8 +16,8 @@
 
 module uim.cake.Cache\Engine;
 
-use Cake\Cache\CacheEngine;
-use Cake\Log\Log;
+import uim.cake.Cache\CacheEngine;
+import uim.cake.Log\Log;
 use Redis;
 use RedisException;
 use RuntimeException;

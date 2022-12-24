@@ -15,8 +15,8 @@
  */
 module uim.cake.Cache;
 
-use Cake\Cache\Engine\NullEngine;
-use Cake\Core\StaticConfigTrait;
+import uim.cake.Cache\Engine\NullEngine;
+import uim.cake.Core\StaticConfigTrait;
 use RuntimeException;
 
 /**

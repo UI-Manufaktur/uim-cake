@@ -15,9 +15,9 @@
  */
 module uim.cake.Auth;
 
-use Cake\Http\Exception\UnauthorizedException;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
+import uim.cake.Http\Exception\UnauthorizedException;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
 
 /**
  * Basic Authentication adapter for AuthComponent.

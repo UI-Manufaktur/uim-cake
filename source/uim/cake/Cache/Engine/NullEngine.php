@@ -15,7 +15,7 @@
  */
 module uim.cake.Cache\Engine;
 
-use Cake\Cache\CacheEngine;
+import uim.cake.Cache\CacheEngine;
 
 /**
  * Null cache engine, all operations appear to work, but do nothing.

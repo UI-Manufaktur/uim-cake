@@ -14,8 +14,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-use Cake\Core\Configure;
-use Cake\Error\Debugger;
+import uim.cake.Core\Configure;
+import uim.cake.Error\Debugger;
 use Psy\Shell as PsyShell;
 
 define("SECOND", 1);

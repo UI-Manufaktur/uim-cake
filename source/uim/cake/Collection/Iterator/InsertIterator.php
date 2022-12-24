@@ -15,7 +15,7 @@
  */
 module uim.cake.Collection\Iterator;
 
-use Cake\Collection\Collection;
+import uim.cake.Collection\Collection;
 
 /**
  * This iterator will insert values into a property of each of the records returned.

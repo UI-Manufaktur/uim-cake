@@ -15,7 +15,7 @@
  */
 module uim.cake.Cache\Engine;
 
-use Cake\Cache\CacheEngine;
+import uim.cake.Cache\CacheEngine;
 
 /**
  * Array storage engine for cache.

@@ -16,8 +16,8 @@
 module uim.cake.Collection\Iterator;
 
 use ArrayIterator;
-use Cake\Collection\Collection;
-use Cake\Collection\ICollection;
+import uim.cake.Collection\Collection;
+import uim.cake.Collection\ICollection;
 use Traversable;
 
 /**

@@ -15,7 +15,7 @@
  */
 module uim.cake.Auth;
 
-use Cake\Core\InstanceConfigTrait;
+import uim.cake.Core\InstanceConfigTrait;
 
 /**
  * Abstract password hashing class

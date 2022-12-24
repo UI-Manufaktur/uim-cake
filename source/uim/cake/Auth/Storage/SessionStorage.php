@@ -15,9 +15,9 @@
  */
 module uim.cake.Auth\Storage;
 
-use Cake\Core\InstanceConfigTrait;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
 
 /**
  * Session based persistent storage for authenticated user record.
