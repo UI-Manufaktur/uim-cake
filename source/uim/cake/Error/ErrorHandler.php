@@ -15,7 +15,7 @@
  * @since         0.10.5
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Error;
+module uim.cake.Error;
 
 use Cake\Core\App;
 use Cake\Http\ResponseEmitter;

@@ -1,6 +1,6 @@
 
 
-namespace Cake\Error;
+module uim.cake.Error;
 
 use Cake\Core\Configure;
 use Cake\Core\InstanceConfigTrait;

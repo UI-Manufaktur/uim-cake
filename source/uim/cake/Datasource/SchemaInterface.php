@@ -13,7 +13,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Datasource;
+module uim.cake.Datasource;
 
 /**
  * An interface used by TableSchema objects.

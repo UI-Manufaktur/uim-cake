@@ -13,7 +13,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Datasource\Paging;
+module uim.cake.Datasource\Paging;
 
 use Cake\Datasource\IResultSet;
 

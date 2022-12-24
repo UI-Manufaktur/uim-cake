@@ -13,7 +13,7 @@
  * @since         4.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Datasource\Locator;
+module uim.cake.Datasource\Locator;
 
 use Cake\Datasource\RepositoryInterface;
 

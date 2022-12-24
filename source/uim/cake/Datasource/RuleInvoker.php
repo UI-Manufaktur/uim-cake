@@ -13,7 +13,7 @@
  * @since         3.2.12
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Datasource;
+module uim.cake.Datasource;
 
 /**
  * Contains logic for invoking an application rule.
