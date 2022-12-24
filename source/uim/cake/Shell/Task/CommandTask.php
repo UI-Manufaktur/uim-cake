@@ -42,21 +42,21 @@ class CommandTask extends Shell
         $shellList = array_fill_keys($plugins, null) + ['CORE' => null, 'app' => null];
 
         $appPath = App::classPath('Shell');
-        $shellList = this->_findShells($shellList, $appPath[0], 'app', $skipFiles);
+        $shellList = this._findShells($shellList, $appPath[0], 'app', $skipFiles);
 
         $appPath = App::classPath('Command');
-        $shellList = this->_findShells($shellList, $appPath[0], 'app', $skipFiles);
+        $shellList = this._findShells($shellList, $appPath[0], 'app', $skipFiles);
 
         $skipCore = array_merge($skipFiles, $hiddenCommands, $shellList['app']);
         $corePath = dirname(__DIR__);
-        $shellList = this->_findShells($shellList, $corePath, 'CORE', $skipCore);
+        $shellList = this._findShells($shellList, $corePath, 'CORE', $skipCore);
 
         $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Command';
-        $shellList = this->_findShells($shellList, $corePath, 'CORE', $skipCore);
+        $shellList = this._findShells($shellList, $corePath, 'CORE', $skipCore);
 
         foreach ($plugins as $plugin) {
             $pluginPath = Plugin::classPath($plugin) . 'Shell';
-            $shellList = this->_findShells($shellList, $pluginPath, $plugin, []);
+            $shellList = this._findShells($shellList, $pluginPath, $plugin, []);
         }
 
         return array_filter($shellList);
@@ -73,9 +73,9 @@ class CommandTask extends Shell
      */
     protected function _findShells(array $shellList, string $path, string $key, array $skip): array
     {
-        $shells = this->_scanDir($path);
+        $shells = this._scanDir($path);
 
-        return this->_appendShells($key, $shells, $shellList, $skip);
+        return this._appendShells($key, $shells, $shellList, $skip);
     }
 
     /**

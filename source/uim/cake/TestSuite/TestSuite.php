@@ -38,7 +38,7 @@ class TestSuite extends BaseTestSuite
         $fs = new Filesystem();
         $files = $fs->find($directory, '/\.php$/');
         foreach ($files as $file => $fileInfo) {
-            this->addTestFile($file);
+            this.addTestFile($file);
         }
     }
 
@@ -60,7 +60,7 @@ class TestSuite extends BaseTestSuite
             return true;
         });
         foreach ($files as $file => $fileInfo) {
-            this->addTestFile($file);
+            this.addTestFile($file);
         }
     }
 }

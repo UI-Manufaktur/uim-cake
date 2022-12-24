@@ -27,7 +27,7 @@ use RuntimeException;
  * The ProgressHelper can be accessed from shells using the helper() method
  *
  * ```
- * this->helper('Progress')->output(['callback' => function ($progress) {
+ * this.helper('Progress')->output(['callback' => function ($progress) {
  *     // Do work
  *     $progress->increment();
  * });
@@ -78,16 +78,16 @@ class ProgressHelper extends Helper
         if (!$args['callback'] || !is_callable($args['callback'])) {
             throw new RuntimeException('Callback option must be a callable.');
         }
-        this->init($args);
+        this.init($args);
 
         $callback = $args['callback'];
 
-        this->_io->out('', 0);
-        while (this->_progress < this->_total) {
+        this._io->out('', 0);
+        while (this._progress < this._total) {
             $callback(this);
-            this->draw();
+            this.draw();
         }
-        this->_io->out('');
+        this._io->out('');
     }
 
     /**
@@ -103,9 +103,9 @@ class ProgressHelper extends Helper
     function init(array $args = [])
     {
         $args += ['total' => 100, 'width' => 80];
-        this->_progress = 0;
-        this->_width = $args['width'];
-        this->_total = $args['total'];
+        this._progress = 0;
+        this._width = $args['width'];
+        this._total = $args['total'];
 
         return this;
     }
@@ -118,7 +118,7 @@ class ProgressHelper extends Helper
      */
     function increment($num = 1)
     {
-        this->_progress = min(max(0, this->_progress + $num), this->_total);
+        this._progress = min(max(0, this._progress + $num), this._total);
 
         return this;
     }
@@ -131,21 +131,21 @@ class ProgressHelper extends Helper
     function draw()
     {
         $numberLen = strlen(' 100%');
-        $complete = round(this->_progress / this->_total, 2);
-        $barLen = (this->_width - $numberLen) * this->_progress / this->_total;
+        $complete = round(this._progress / this._total, 2);
+        $barLen = (this._width - $numberLen) * this._progress / this._total;
         $bar = '';
         if ($barLen > 1) {
             $bar = str_repeat('=', (int)$barLen - 1) . '>';
         }
 
-        $pad = ceil(this->_width - $numberLen - $barLen);
+        $pad = ceil(this._width - $numberLen - $barLen);
         if ($pad > 0) {
             $bar .= str_repeat(' ', (int)$pad);
         }
         $percent = ($complete * 100) . '%';
         $bar .= str_pad($percent, $numberLen, ' ', STR_PAD_LEFT);
 
-        this->_io->overwrite($bar, 0);
+        this._io->overwrite($bar, 0);
 
         return this;
     }

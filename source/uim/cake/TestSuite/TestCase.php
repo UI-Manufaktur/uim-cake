@@ -171,7 +171,7 @@ abstract class TestCase extends BaseTestCase
     function skipIf(bool $shouldSkip, string $message = ''): bool
     {
         if ($shouldSkip) {
-            this->markTestSkipped($message);
+            this.markTestSkipped($message);
         }
 
         return $shouldSkip;
@@ -233,7 +233,7 @@ abstract class TestCase extends BaseTestCase
                 Configure::write('Error.allowDuplicateDeprecations', $duplicate);
             }
         }
-        this->assertTrue($deprecation, 'Should have at least one deprecation warning');
+        this.assertTrue($deprecation, 'Should have at least one deprecation warning');
     }
 
     /**
@@ -246,10 +246,10 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        this->setupFixtures();
+        this.setupFixtures();
 
-        if (!this->_configure) {
-            this->_configure = Configure::read();
+        if (!this._configure) {
+            this._configure = Configure::read();
         }
         if (class_exists(Router::class, false)) {
             Router::reload();
@@ -266,15 +266,15 @@ abstract class TestCase extends BaseTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        this->teardownFixtures();
+        this.teardownFixtures();
 
-        if (this->_configure) {
+        if (this._configure) {
             Configure::clear();
-            Configure::write(this->_configure);
+            Configure::write(this._configure);
         }
-        this->getTableLocator()->clear();
-        this->_configure = [];
-        this->_tableLocator = null;
+        this.getTableLocator()->clear();
+        this._configure = [];
+        this._tableLocator = null;
     }
 
     /**
@@ -284,21 +284,21 @@ abstract class TestCase extends BaseTestCase
      */
     protected function setupFixtures(): void
     {
-        $fixtureNames = this->getFixtures();
+        $fixtureNames = this.getFixtures();
 
         if (!empty($fixtureNames) && static::$fixtureManager) {
-            if (!this->autoFixtures) {
+            if (!this.autoFixtures) {
                 deprecationWarning('`$autoFixtures` is deprecated and will be removed in 5.0.', 0);
             }
-            if (this->dropTables) {
+            if (this.dropTables) {
                 deprecationWarning('`$dropTables` is deprecated and will be removed in 5.0.', 0);
             }
             // legacy fixtures are managed by FixtureInjector
             return;
         }
 
-        this->fixtureStrategy = this->getFixtureStrategy();
-        this->fixtureStrategy->setupTest($fixtureNames);
+        this.fixtureStrategy = this.getFixtureStrategy();
+        this.fixtureStrategy->setupTest($fixtureNames);
     }
 
     /**
@@ -308,9 +308,9 @@ abstract class TestCase extends BaseTestCase
      */
     protected function teardownFixtures(): void
     {
-        if (this->fixtureStrategy) {
-            this->fixtureStrategy->teardownTest();
-            this->fixtureStrategy = null;
+        if (this.fixtureStrategy) {
+            this.fixtureStrategy->teardownTest();
+            this.fixtureStrategy = null;
         }
     }
 
@@ -337,7 +337,7 @@ abstract class TestCase extends BaseTestCase
      */
     function loadFixtures(): void
     {
-        if (this->autoFixtures) {
+        if (this.autoFixtures) {
             throw new RuntimeException('Cannot use `loadFixtures()` with `$autoFixtures` enabled.');
         }
         if (static::$fixtureManager == null) {
@@ -346,14 +346,14 @@ abstract class TestCase extends BaseTestCase
 
         $args = func_get_args();
         foreach ($args as $class) {
-            static::$fixtureManager->loadSingle($class, null, this->dropTables);
+            static::$fixtureManager->loadSingle($class, null, this.dropTables);
         }
 
         if (empty($args)) {
-            $autoFixtures = this->autoFixtures;
-            this->autoFixtures = true;
+            $autoFixtures = this.autoFixtures;
+            this.autoFixtures = true;
             static::$fixtureManager->load(this);
-            this->autoFixtures = $autoFixtures;
+            this.autoFixtures = $autoFixtures;
         }
     }
 
@@ -397,7 +397,7 @@ abstract class TestCase extends BaseTestCase
     function loadPlugins(array $plugins = []): BaseApplication
     {
         /** @var \Cake\Http\BaseApplication $app */
-        $app = this->getMockForAbstractClass(
+        $app = this.getMockForAbstractClass(
             BaseApplication::class,
             ['']
         );
@@ -457,7 +457,7 @@ abstract class TestCase extends BaseTestCase
         if (!$eventManager) {
             $eventManager = EventManager::instance();
         }
-        this->assertThat($name, new EventFired($eventManager), $message);
+        this.assertThat($name, new EventFired($eventManager), $message);
     }
 
     /**
@@ -482,7 +482,7 @@ abstract class TestCase extends BaseTestCase
         if (!$eventManager) {
             $eventManager = EventManager::instance();
         }
-        this->assertThat($name, new EventFiredWith($eventManager, $dataKey, $dataValue), $message);
+        this.assertThat($name, new EventFiredWith($eventManager, $dataKey, $dataValue), $message);
     }
 
     /**
@@ -498,7 +498,7 @@ abstract class TestCase extends BaseTestCase
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
-        this->assertNotEquals($expected, $result, $message);
+        this.assertNotEquals($expected, $result, $message);
     }
 
     /**
@@ -514,7 +514,7 @@ abstract class TestCase extends BaseTestCase
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
-        this->assertEquals($expected, $result, $message);
+        this.assertEquals($expected, $result, $message);
     }
 
     /**
@@ -530,7 +530,7 @@ abstract class TestCase extends BaseTestCase
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
-        this->assertStringStartsWith($prefix, $string, $message);
+        this.assertStringStartsWith($prefix, $string, $message);
     }
 
     /**
@@ -546,7 +546,7 @@ abstract class TestCase extends BaseTestCase
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
-        this->assertStringStartsNotWith($prefix, $string, $message);
+        this.assertStringStartsNotWith($prefix, $string, $message);
     }
 
     /**
@@ -562,7 +562,7 @@ abstract class TestCase extends BaseTestCase
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
-        this->assertStringEndsWith($suffix, $string, $message);
+        this.assertStringEndsWith($suffix, $string, $message);
     }
 
     /**
@@ -578,7 +578,7 @@ abstract class TestCase extends BaseTestCase
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
-        this->assertStringEndsNotWith($suffix, $string, $message);
+        this.assertStringEndsNotWith($suffix, $string, $message);
     }
 
     /**
@@ -601,9 +601,9 @@ abstract class TestCase extends BaseTestCase
         $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
 
         if ($ignoreCase) {
-            this->assertStringContainsStringIgnoringCase($needle, $haystack, $message);
+            this.assertStringContainsStringIgnoringCase($needle, $haystack, $message);
         } else {
-            this->assertStringContainsString($needle, $haystack, $message);
+            this.assertStringContainsString($needle, $haystack, $message);
         }
     }
 
@@ -627,9 +627,9 @@ abstract class TestCase extends BaseTestCase
         $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
 
         if ($ignoreCase) {
-            this->assertStringNotContainsStringIgnoringCase($needle, $haystack, $message);
+            this.assertStringNotContainsStringIgnoringCase($needle, $haystack, $message);
         } else {
-            this->assertStringNotContainsString($needle, $haystack, $message);
+            this.assertStringNotContainsString($needle, $haystack, $message);
         }
     }
 
@@ -646,7 +646,7 @@ abstract class TestCase extends BaseTestCase
         string $actual,
         string $message = ''
     ): void {
-        this->assertEquals($expected, preg_replace('/[`"\[\]]/', '', $actual), $message);
+        this.assertEquals($expected, preg_replace('/[`"\[\]]/', '', $actual), $message);
     }
 
     /**
@@ -665,7 +665,7 @@ abstract class TestCase extends BaseTestCase
         $optional = $optional ? '?' : '';
         $pattern = str_replace('<', '[`"\[]' . $optional, $pattern);
         $pattern = str_replace('>', '[`"\]]' . $optional, $pattern);
-        this->assertMatchesRegularExpression('#' . $pattern . '#', $actual);
+        this.assertMatchesRegularExpression('#' . $pattern . '#', $actual);
     }
 
     /**
@@ -824,7 +824,7 @@ abstract class TestCase extends BaseTestCase
         foreach ($regex as $i => $assertion) {
             $matches = false;
             if (isset($assertion['attrs'])) {
-                $string = this->_assertAttributes($assertion, $string, $fullDebug, $regex);
+                $string = this._assertAttributes($assertion, $string, $fullDebug, $regex);
                 if ($fullDebug == true && $string == false) {
                     debug($string, true);
                     debug($regex, true);
@@ -849,7 +849,7 @@ abstract class TestCase extends BaseTestCase
                     debug($string);
                     debug($regex);
                 }
-                this->assertMatchesRegularExpression(
+                this.assertMatchesRegularExpression(
                     $expression,
                     $string,
                     sprintf('Item #%d / regex #%d failed: %s', $itemNum, $i, $description)
@@ -859,7 +859,7 @@ abstract class TestCase extends BaseTestCase
             }
         }
 
-        this->assertTrue(true, '%s');
+        this.assertTrue(true, '%s');
 
         return true;
     }
@@ -894,7 +894,7 @@ abstract class TestCase extends BaseTestCase
                     debug($string);
                     debug($regex);
                 }
-                this->assertTrue(false, 'Attribute did not match. Was expecting ' . $explains[$j]);
+                this.assertTrue(false, 'Attribute did not match. Was expecting ' . $explains[$j]);
             }
             $len = count($asserts);
         } while ($len > 0);
@@ -972,7 +972,7 @@ abstract class TestCase extends BaseTestCase
     protected function skipUnless($condition, $message = '')
     {
         if (!$condition) {
-            this->markTestSkipped($message);
+            this.markTestSkipped($message);
         }
 
         return $condition;
@@ -991,11 +991,11 @@ abstract class TestCase extends BaseTestCase
      */
     function getMockForModel(string $alias, array $methods = [], array $options = [])
     {
-        $className = this->_getTableClassName($alias, $options);
+        $className = this._getTableClassName($alias, $options);
         $connectionName = $className::defaultConnectionName();
         $connection = ConnectionManager::get($connectionName);
 
-        $locator = this->getTableLocator();
+        $locator = this.getTableLocator();
 
         [, $baseClass] = pluginSplit($alias);
         $options += ['alias' => $baseClass, 'connection' => $connection];
@@ -1008,7 +1008,7 @@ abstract class TestCase extends BaseTestCase
         $existingMethods = array_intersect($classMethods, $methods);
         $nonExistingMethods = array_diff($methods, $existingMethods);
 
-        $builder = this->getMockBuilder($className)
+        $builder = this.getMockBuilder($className)
             ->setConstructorArgs([$options]);
 
         if ($existingMethods || !$nonExistingMethods) {
@@ -1095,7 +1095,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected function addFixture(string $fixture)
     {
-        this->fixtures[] = $fixture;
+        this.fixtures[] = $fixture;
 
         return this;
     }
@@ -1107,6 +1107,6 @@ abstract class TestCase extends BaseTestCase
      */
     function getFixtures(): array
     {
-        return this->fixtures;
+        return this.fixtures;
     }
 }

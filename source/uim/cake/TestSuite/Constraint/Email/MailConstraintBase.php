@@ -39,7 +39,7 @@ abstract class MailConstraintBase extends Constraint
      */
     public this(?int $at = null)
     {
-        this->at = $at;
+        this.at = $at;
     }
 
     /**
@@ -51,12 +51,12 @@ abstract class MailConstraintBase extends Constraint
     {
         $messages = TestEmailTransport::getMessages();
 
-        if (this->at != null) {
-            if (!isset($messages[this->at])) {
+        if (this.at != null) {
+            if (!isset($messages[this.at])) {
                 return [];
             }
 
-            return [$messages[this->at]];
+            return [$messages[this.at]];
         }
 
         return $messages;
