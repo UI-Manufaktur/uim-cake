@@ -89,8 +89,8 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      */
     public static function className(string $class): ?string
     {
-        return App::className($class, 'Model/Behavior', 'Behavior')
-            ?: App::className($class, 'ORM/Behavior', 'Behavior');
+        return App::className($class, "Model/Behavior", "Behavior")
+            ?: App::className($class, "ORM/Behavior", "Behavior");
     }
 
     /**
@@ -121,8 +121,8 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingBehaviorException([
-            'class': $class . 'Behavior',
-            'plugin': $plugin,
+            "class": $class . "Behavior",
+            "plugin": $plugin,
         ]);
     }
 
@@ -142,13 +142,13 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     {
         /** @var \Cake\ORM\Behavior $instance */
         $instance = new $class(_table, $config);
-        $enable = $config['enabled'] ?? true;
+        $enable = $config["enabled"] ?? true;
         if ($enable) {
             this.getEventManager().on($instance);
         }
         $methods = _getMethods($instance, $class, $alias);
-        _methodMap += $methods['methods'];
-        _finderMap += $methods['finders'];
+        _methodMap += $methods["methods"];
+        _finderMap += $methods["finders"];
 
         return $instance;
     }
@@ -175,7 +175,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
             if (isset(_finderMap[$finder]) && this.has(_finderMap[$finder][0])) {
                 $duplicate = _finderMap[$finder];
                 $error = sprintf(
-                    '%s contains duplicate finder "%s" which is already provided by "%s"',
+                    "%s contains duplicate finder "%s" which is already provided by "%s"",
                     $class,
                     $finder,
                     $duplicate[0]
@@ -189,7 +189,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
             if (isset(_methodMap[$method]) && this.has(_methodMap[$method][0])) {
                 $duplicate = _methodMap[$method];
                 $error = sprintf(
-                    '%s contains duplicate method "%s" which is already provided by "%s"',
+                    "%s contains duplicate method "%s" which is already provided by "%s"",
                     $class,
                     $method,
                     $duplicate[0]
@@ -199,7 +199,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
             $methods[$method] = [$alias, $methodName];
         }
 
-        return compact('methods', 'finders');
+        return compact("methods", "finders");
     }
 
     /**
@@ -252,7 +252,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
         }
 
         throw new BadMethodCallException(
-            sprintf('Cannot call "%s" it does not belong to any attached behavior.', $method)
+            sprintf("Cannot call "%s" it does not belong to any attached behavior.", $method)
         );
     }
 
@@ -276,7 +276,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
         }
 
         throw new BadMethodCallException(
-            sprintf('Cannot call finder "%s" it does not belong to any attached behavior.', $type)
+            sprintf("Cannot call finder "%s" it does not belong to any attached behavior.", $type)
         );
     }
 }

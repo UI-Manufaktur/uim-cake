@@ -112,7 +112,7 @@ abstract class BaseApplication implements
      */
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
-        foreach (this.plugins.with('middleware') as $plugin) {
+        foreach (this.plugins.with("middleware") as $plugin) {
             $middleware = $plugin.middleware($middleware);
         }
 
@@ -137,7 +137,7 @@ abstract class BaseApplication implements
     /**
      * Add an optional plugin
      *
-     * If it isn't available, ignore it.
+     * If it isn"t available, ignore it.
      *
      * @param \Cake\Core\PluginInterface|string $name The plugin name or plugin object.
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
@@ -169,7 +169,7 @@ abstract class BaseApplication implements
      */
     function bootstrap(): void
     {
-        require_once this.configDir . 'bootstrap.php';
+        require_once this.configDir . "bootstrap.php";
     }
 
     /**
@@ -177,7 +177,7 @@ abstract class BaseApplication implements
      */
     function pluginBootstrap(): void
     {
-        foreach (this.plugins.with('bootstrap') as $plugin) {
+        foreach (this.plugins.with("bootstrap") as $plugin) {
             $plugin.bootstrap(this);
         }
     }
@@ -194,7 +194,7 @@ abstract class BaseApplication implements
     {
         // Only load routes if the router is empty
         if (!Router::routes()) {
-            $return = require this.configDir . 'routes.php';
+            $return = require this.configDir . "routes.php";
             if ($return instanceof Closure) {
                 $return($routes);
             }
@@ -206,7 +206,7 @@ abstract class BaseApplication implements
      */
     function pluginRoutes(RouteBuilder $routes): RouteBuilder
     {
-        foreach (this.plugins.with('routes') as $plugin) {
+        foreach (this.plugins.with("routes") as $plugin) {
             $plugin.routes($routes);
         }
 
@@ -232,7 +232,7 @@ abstract class BaseApplication implements
      */
     function pluginConsole(CommandCollection $commands): CommandCollection
     {
-        foreach (this.plugins.with('console') as $plugin) {
+        foreach (this.plugins.with("console") as $plugin) {
             $commands = $plugin.console($commands);
         }
 
@@ -268,11 +268,11 @@ abstract class BaseApplication implements
     {
         $container = new Container();
         this.services($container);
-        foreach (this.plugins.with('services') as $plugin) {
+        foreach (this.plugins.with("services") as $plugin) {
             $plugin.services($container);
         }
 
-        $event = this.dispatchEvent('Application.buildContainer', ['container': $container]);
+        $event = this.dispatchEvent("Application.buildContainer", ["container": $container]);
         if ($event.getResult() instanceof IContainer) {
             return $event.getResult();
         }

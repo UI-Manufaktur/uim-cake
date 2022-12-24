@@ -25,11 +25,11 @@ use InvalidArgumentException;
  *
  * An HTTP cookie (also called web cookie, Internet cookie, browser cookie or
  * simply cookie) is a small piece of data sent from a website and stored on
- * the user's computer by the user's web browser while the user is browsing.
+ * the user"s computer by the user"s web browser while the user is browsing.
  *
  * Cookies were designed to be a reliable mechanism for websites to remember
  * stateful information (such as items added in the shopping cart in an online
- * store) or to record the user's browsing activity (including clicking
+ * store) or to record the user"s browsing activity (including clicking
  * particular buttons, logging in, or recording which pages were visited in
  * the past). They can also be used to remember arbitrary pieces of information
  * that the user previously entered into form fields such as names, and preferences.
@@ -38,7 +38,7 @@ use InvalidArgumentException;
  * cookie objects:
  *
  * ```
- * $cookie = $cookie.withValue('0');
+ * $cookie = $cookie.withValue("0");
  * ```
  *
  * @link https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03
@@ -53,14 +53,14 @@ class Cookie : CookieInterface
      *
      * @var string
      */
-    protected $name = '';
+    protected $name = "";
 
     /**
      * Raw Cookie value.
      *
      * @var array|string
      */
-    protected $value = '';
+    protected $value = "";
 
     /**
      * Whether a JSON value has been expanded into an array.
@@ -81,14 +81,14 @@ class Cookie : CookieInterface
      *
      * @var string
      */
-    protected $path = '/';
+    protected $path = "/";
 
     /**
      * Domain
      *
      * @var string
      */
-    protected $domain = '';
+    protected $domain = "";
 
     /**
      * Secure
@@ -118,12 +118,12 @@ class Cookie : CookieInterface
      * @see \Cake\Http\Cookie\Cookie::setDefaults()
      */
     protected static $defaults = [
-        'expires': null,
-        'path': '/',
-        'domain': '',
-        'secure': false,
-        'httponly': false,
-        'samesite': null,
+        "expires": null,
+        "path": "/",
+        "domain": "",
+        "secure": false,
+        "httponly": false,
+        "samesite": null,
     ];
 
     /**
@@ -145,7 +145,7 @@ class Cookie : CookieInterface
      */
     public this(
         string $name,
-        $value = '',
+        $value = "",
         ?DateTimeInterface $expiresAt = null,
         ?string $path = null,
         ?string $domain = null,
@@ -158,21 +158,21 @@ class Cookie : CookieInterface
 
         _setValue($value);
 
-        this.domain = $domain ?? static::$defaults['domain'];
-        this.httpOnly = $httpOnly ?? static::$defaults['httponly'];
-        this.path = $path ?? static::$defaults['path'];
-        this.secure = $secure ?? static::$defaults['secure'];
+        this.domain = $domain ?? static::$defaults["domain"];
+        this.httpOnly = $httpOnly ?? static::$defaults["httponly"];
+        this.path = $path ?? static::$defaults["path"];
+        this.secure = $secure ?? static::$defaults["secure"];
         if ($sameSite == null) {
-            this.sameSite = static::$defaults['samesite'];
+            this.sameSite = static::$defaults["samesite"];
         } else {
             this.validateSameSiteValue($sameSite);
             this.sameSite = $sameSite;
         }
 
         if ($expiresAt) {
-            $expiresAt = $expiresAt.setTimezone(new DateTimeZone('GMT'));
+            $expiresAt = $expiresAt.setTimezone(new DateTimeZone("GMT"));
         } else {
-            $expiresAt = static::$defaults['expires'];
+            $expiresAt = static::$defaults["expires"];
         }
         this.expiresAt = $expiresAt;
     }
@@ -183,8 +183,8 @@ class Cookie : CookieInterface
      * Valid option keys are:
      *
      * - `expires`: Can be a UNIX timestamp or `strtotime()` compatible string or `DateTimeInterface` instance or `null`.
-     * - `path`: A path string. Defauts to `'/'`.
-     * - `domain`: Domain name string. Defaults to `''`.
+     * - `path`: A path string. Defauts to `"/"`.
+     * - `domain`: Domain name string. Defaults to `""`.
      * - `httponly`: Boolean. Defaults to `false`.
      * - `secure`: Boolean. Defaults to `false`.
      * - `samesite`: Can be one of `CookieInterface::SAMESITE_LAX`, `CookieInterface::SAMESITE_STRICT`,
@@ -195,11 +195,11 @@ class Cookie : CookieInterface
      */
     public static function setDefaults(array $options): void
     {
-        if (isset($options['expires'])) {
-            $options['expires'] = static::dateTimeInstance($options['expires']);
+        if (isset($options["expires"])) {
+            $options["expires"] = static::dateTimeInstance($options["expires"]);
         }
-        if (isset($options['samesite'])) {
-            static::validateSameSiteValue($options['samesite']);
+        if (isset($options["samesite"])) {
+            static::validateSameSiteValue($options["samesite"]);
         }
 
         static::$defaults = $options + static::$defaults;
@@ -217,17 +217,17 @@ class Cookie : CookieInterface
     public static function create(string $name, $value, array $options = [])
     {
         $options += static::$defaults;
-        $options['expires'] = static::dateTimeInstance($options['expires']);
+        $options["expires"] = static::dateTimeInstance($options["expires"]);
 
         return new static(
             $name,
             $value,
-            $options['expires'],
-            $options['path'],
-            $options['domain'],
-            $options['secure'],
-            $options['httponly'],
-            $options['samesite']
+            $options["expires"],
+            $options["path"],
+            $options["domain"],
+            $options["secure"],
+            $options["httponly"],
+            $options["samesite"]
         );
     }
 
@@ -245,12 +245,12 @@ class Cookie : CookieInterface
 
         if ($expires instanceof DateTimeInterface) {
             /** @psalm-suppress UndefinedInterfaceMethod */
-            return $expires.setTimezone(new DateTimeZone('GMT'));
+            return $expires.setTimezone(new DateTimeZone("GMT"));
         }
 
         if (!is_string($expires) && !is_int($expires)) {
             throw new InvalidArgumentException(sprintf(
-                'Invalid type `%s` for expires. Expected an string, integer or DateTime object.',
+                "Invalid type `%s` for expires. Expected an string, integer or DateTime object.",
                 getTypeName($expires)
             ));
         }
@@ -260,7 +260,7 @@ class Cookie : CookieInterface
         }
 
         if ($expires != null) {
-            $expires = new DateTimeImmutable('@' . (string)$expires);
+            $expires = new DateTimeImmutable("@" . (string)$expires);
         }
 
         return $expires;
@@ -276,22 +276,22 @@ class Cookie : CookieInterface
      */
     public static function createFromHeaderString(string $cookie, array $defaults = [])
     {
-        if (strpos($cookie, '";"') != false) {
-            $cookie = str_replace('";"', '{__cookie_replace__}', $cookie);
-            $parts = str_replace('{__cookie_replace__}', '";"', explode(';', $cookie));
+        if (strpos($cookie, "";"") != false) {
+            $cookie = str_replace("";"", "{__cookie_replace__}", $cookie);
+            $parts = str_replace("{__cookie_replace__}", "";"", explode(";", $cookie));
         } else {
-            $parts = preg_split('/\;[ \t]*/', $cookie);
+            $parts = preg_split("/\;[ \t]*/", $cookie);
         }
 
-        [$name, $value] = explode('=', array_shift($parts), 2);
+        [$name, $value] = explode("=", array_shift($parts), 2);
         $data = [
-                'name': urldecode($name),
-                'value': urldecode($value),
+                "name": urldecode($name),
+                "value": urldecode($value),
             ] + $defaults;
 
         foreach ($parts as $part) {
-            if (strpos($part, '=') != false) {
-                [$key, $value] = explode('=', $part);
+            if (strpos($part, "=") != false) {
+                [$key, $value] = explode("=", $part);
             } else {
                 $key = $part;
                 $value = true;
@@ -301,22 +301,22 @@ class Cookie : CookieInterface
             $data[$key] = $value;
         }
 
-        if (isset($data['max-age'])) {
-            $data['expires'] = time() + (int)$data['max-age'];
-            unset($data['max-age']);
+        if (isset($data["max-age"])) {
+            $data["expires"] = time() + (int)$data["max-age"];
+            unset($data["max-age"]);
         }
 
-        if (isset($data['samesite'])) {
+        if (isset($data["samesite"])) {
             // Ignore invalid value when parsing headers
             // https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1
-            if (!in_array($data['samesite'], CookieInterface::SAMESITE_VALUES, true)) {
-                unset($data['samesite']);
+            if (!in_array($data["samesite"], CookieInterface::SAMESITE_VALUES, true)) {
+                unset($data["samesite"]);
             }
         }
 
-        $name = (string)$data['name'];
-        $value = (string)$data['value'];
-        unset($data['name'], $data['value']);
+        $name = (string)$data["name"];
+        $value = (string)$data["value"];
+        unset($data["name"], $data["value"]);
 
         return Cookie::create(
             $name,
@@ -339,28 +339,28 @@ class Cookie : CookieInterface
         }
         $headerValue = [];
         /** @psalm-suppress PossiblyInvalidArgument */
-        $headerValue[] = sprintf('%s=%s', this.name, rawurlencode($value));
+        $headerValue[] = sprintf("%s=%s", this.name, rawurlencode($value));
 
         if (this.expiresAt) {
-            $headerValue[] = sprintf('expires=%s', this.getFormattedExpires());
+            $headerValue[] = sprintf("expires=%s", this.getFormattedExpires());
         }
-        if (this.path != '') {
-            $headerValue[] = sprintf('path=%s', this.path);
+        if (this.path != "") {
+            $headerValue[] = sprintf("path=%s", this.path);
         }
-        if (this.domain != '') {
-            $headerValue[] = sprintf('domain=%s', this.domain);
+        if (this.domain != "") {
+            $headerValue[] = sprintf("domain=%s", this.domain);
         }
         if (this.sameSite) {
-            $headerValue[] = sprintf('samesite=%s', this.sameSite);
+            $headerValue[] = sprintf("samesite=%s", this.sameSite);
         }
         if (this.secure) {
-            $headerValue[] = 'secure';
+            $headerValue[] = "secure";
         }
         if (this.httpOnly) {
-            $headerValue[] = 'httponly';
+            $headerValue[] = "httponly";
         }
 
-        return implode('; ', $headerValue);
+        return implode("; ", $headerValue);
     }
 
     /**
@@ -403,12 +403,12 @@ class Cookie : CookieInterface
     {
         if (preg_match("/[=,;\t\r\n\013\014]/", $name)) {
             throw new InvalidArgumentException(
-                sprintf('The cookie name `%s` contains invalid characters.', $name)
+                sprintf("The cookie name `%s` contains invalid characters.", $name)
             );
         }
 
         if (empty($name)) {
-            throw new InvalidArgumentException('The cookie name cannot be empty.');
+            throw new InvalidArgumentException("The cookie name cannot be empty.");
         }
     }
 
@@ -430,7 +430,7 @@ class Cookie : CookieInterface
      */
     function getStringValue()
     {
-        deprecationWarning('Cookie::getStringValue() is deprecated. Use getScalarValue() instead.');
+        deprecationWarning("Cookie::getStringValue() is deprecated. Use getScalarValue() instead.");
 
         return this.getScalarValue();
     }
@@ -553,7 +553,7 @@ class Cookie : CookieInterface
     function withExpiry($dateTime)
     {
         $new = clone this;
-        $new.expiresAt = $dateTime.setTimezone(new DateTimeZone('GMT'));
+        $new.expiresAt = $dateTime.setTimezone(new DateTimeZone("GMT"));
 
         return $new;
     }
@@ -575,7 +575,7 @@ class Cookie : CookieInterface
             return null;
         }
 
-        return (int)this.expiresAt.format('U');
+        return (int)this.expiresAt.format("U");
     }
 
     /**
@@ -584,7 +584,7 @@ class Cookie : CookieInterface
     function getFormattedExpires(): string
     {
         if (!this.expiresAt) {
-            return '';
+            return "";
         }
 
         return this.expiresAt.format(static::EXPIRES_FORMAT);
@@ -595,7 +595,7 @@ class Cookie : CookieInterface
      */
     function isExpired($time = null): bool
     {
-        $time = $time ?: new DateTimeImmutable('now', new DateTimeZone('UTC'));
+        $time = $time ?: new DateTimeImmutable("now", new DateTimeZone("UTC"));
         if (!this.expiresAt) {
             return false;
         }
@@ -609,7 +609,7 @@ class Cookie : CookieInterface
     function withNeverExpire()
     {
         $new = clone this;
-        $new.expiresAt = new DateTimeImmutable('2038-01-01');
+        $new.expiresAt = new DateTimeImmutable("2038-01-01");
 
         return $new;
     }
@@ -620,7 +620,7 @@ class Cookie : CookieInterface
     function withExpired()
     {
         $new = clone this;
-        $new.expiresAt = new DateTimeImmutable('1970-01-01 00:00:01');
+        $new.expiresAt = new DateTimeImmutable("1970-01-01 00:00:01");
 
         return $new;
     }
@@ -659,7 +659,7 @@ class Cookie : CookieInterface
     {
         if (!in_array($sameSite, CookieInterface::SAMESITE_VALUES, true)) {
             throw new InvalidArgumentException(
-                'Samesite value must be either of: ' . implode(', ', CookieInterface::SAMESITE_VALUES)
+                "Samesite value must be either of: " . implode(", ", CookieInterface::SAMESITE_VALUES)
             );
         }
     }
@@ -765,15 +765,15 @@ class Cookie : CookieInterface
     function getOptions(): array
     {
         $options = [
-            'expires': (int)this.getExpiresTimestamp(),
-            'path': this.path,
-            'domain': this.domain,
-            'secure': this.secure,
-            'httponly': this.httpOnly,
+            "expires": (int)this.getExpiresTimestamp(),
+            "path": this.path,
+            "domain": this.domain,
+            "secure": this.secure,
+            "httponly": this.httpOnly,
         ];
 
         if (this.sameSite != null) {
-            $options['samesite'] = this.sameSite;
+            $options["samesite"] = this.sameSite;
         }
 
         return $options;
@@ -785,8 +785,8 @@ class Cookie : CookieInterface
     function toArray(): array
     {
         return [
-            'name': this.name,
-            'value': this.getScalarValue(),
+            "name": this.name,
+            "value": this.getScalarValue(),
         ] + this.getOptions();
     }
 
@@ -812,15 +812,15 @@ class Cookie : CookieInterface
     {
         this.isExpanded = true;
         $first = substr($string, 0, 1);
-        if ($first == '{' || $first == '[') {
+        if ($first == "{" || $first == "[") {
             $ret = json_decode($string, true);
 
             return $ret ?? $string;
         }
 
         $array = [];
-        foreach (explode(',', $string) as $pair) {
-            $key = explode('|', $pair);
+        foreach (explode(",", $string) as $pair) {
+            $key = explode("|", $pair);
             if (!isset($key[1])) {
                 return $key[0];
             }

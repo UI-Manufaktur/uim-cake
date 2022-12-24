@@ -26,8 +26,8 @@ use RuntimeException;
  * In your controller, you could do the following:
  *
  * ```
- * this.set(['posts': $posts]);
- * this.viewBuilder().setOption('serialize', true);
+ * this.set(["posts": $posts]);
+ * this.viewBuilder().setOption("serialize", true);
  * ```
  *
  * When the view is rendered, the `$posts` view variable will be serialized
@@ -37,18 +37,18 @@ use RuntimeException;
  * a top level object containing all the named view variables:
  *
  * ```
- * this.set(compact('posts', 'users', 'stuff'));
- * this.viewBuilder().setOption('serialize', true);
+ * this.set(compact("posts", "users", "stuff"));
+ * this.viewBuilder().setOption("serialize", true);
  * ```
  *
  * The above would generate a JSON object that looks like:
  *
  * `{"posts": [...], "users": [...]}`
  *
- * You can also set `'serialize'` to a string or array to serialize only the
+ * You can also set `"serialize"` to a string or array to serialize only the
  * specified view variables.
  *
- * If you don't set the `serialize` option, you will need a view template.
+ * If you don"t set the `serialize` option, you will need a view template.
  * You can use extended views to provide layout-like functionality.
  *
  * You can also enable JSONP support by setting `jsonp` option to true or a
@@ -62,14 +62,14 @@ class JsonView : SerializedView
      *
      * @var string
      */
-    protected $layoutPath = 'json';
+    protected $layoutPath = "json";
 
     /**
-     * JSON views are located in the 'json' subdirectory for controllers' views.
+     * JSON views are located in the "json" subdirectory for controllers" views.
      *
      * @var string
      */
-    protected $subDir = 'json';
+    protected $subDir = "json";
 
     /**
      * Default config options.
@@ -89,9 +89,9 @@ class JsonView : SerializedView
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'serialize': null,
-        'jsonOptions': null,
-        'jsonp': null,
+        "serialize": null,
+        "jsonOptions": null,
+        "jsonp": null,
     ];
 
     /**
@@ -101,7 +101,7 @@ class JsonView : SerializedView
      */
     public static function contentType(): string
     {
-        return 'application/json';
+        return "application/json";
     }
 
     /**
@@ -115,14 +115,14 @@ class JsonView : SerializedView
     {
         $return = parent::render($template, $layout);
 
-        $jsonp = this.getConfig('jsonp');
+        $jsonp = this.getConfig("jsonp");
         if ($jsonp) {
             if ($jsonp == true) {
-                $jsonp = 'callback';
+                $jsonp = "callback";
             }
             if (this.request.getQuery($jsonp)) {
-                $return = sprintf('%s(%s)', h(this.request.getQuery($jsonp)), $return);
-                this.response = this.response.withType('js');
+                $return = sprintf("%s(%s)", h(this.request.getQuery($jsonp)), $return);
+                this.response = this.response.withType("js");
             }
         }
 
@@ -136,18 +136,18 @@ class JsonView : SerializedView
     {
         $data = _dataToSerialize($serialize);
 
-        $jsonOptions = this.getConfig('jsonOptions');
+        $jsonOptions = this.getConfig("jsonOptions");
         if ($jsonOptions == null) {
             $jsonOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_PARTIAL_OUTPUT_ON_ERROR;
         } elseif ($jsonOptions == false) {
             $jsonOptions = 0;
         }
 
-        if (Configure::read('debug')) {
+        if (Configure::read("debug")) {
             $jsonOptions |= JSON_PRETTY_PRINT;
         }
 
-        if (defined('JSON_THROW_ON_ERROR')) {
+        if (defined("JSON_THROW_ON_ERROR")) {
             $jsonOptions |= JSON_THROW_ON_ERROR;
         }
 

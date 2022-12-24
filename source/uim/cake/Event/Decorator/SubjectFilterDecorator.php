@@ -51,11 +51,11 @@ class SubjectFilterDecorator : AbstractDecorator
      */
     function canTrigger(IEvent $event): bool
     {
-        if (!isset(_options['allowedSubject'])) {
-            throw new RuntimeException(self::class . ' Missing subject filter options!');
+        if (!isset(_options["allowedSubject"])) {
+            throw new RuntimeException(self::class . " Missing subject filter options!");
         }
-        if (is_string(_options['allowedSubject'])) {
-            _options['allowedSubject'] = [_options['allowedSubject']];
+        if (is_string(_options["allowedSubject"])) {
+            _options["allowedSubject"] = [_options["allowedSubject"]];
         }
 
         try {
@@ -64,6 +64,6 @@ class SubjectFilterDecorator : AbstractDecorator
             return false;
         }
 
-        return in_array(get_class($subject), _options['allowedSubject'], true);
+        return in_array(get_class($subject), _options["allowedSubject"], true);
     }
 }

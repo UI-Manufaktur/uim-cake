@@ -32,12 +32,12 @@ class FlashMessage
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key': 'flash',
-        'element': 'default',
-        'plugin': null,
-        'params': [],
-        'clear': false,
-        'duplicate': true,
+        "key": "flash",
+        "element": "default",
+        "plugin": null,
+        "params": [],
+        "clear": false,
+        "duplicate": true,
     ];
 
     /**
@@ -66,9 +66,9 @@ class FlashMessage
      *
      * ### Options:
      *
-     * - `key` The key to set under the session's Flash key.
+     * - `key` The key to set under the session"s Flash key.
      * - `element` The element used to render the flash message. You can use
-     *     `'SomePlugin.name'` style value for flash elements from a plugin.
+     *     `"SomePlugin.name"` style value for flash elements from a plugin.
      * - `plugin` Plugin name to use element from.
      * - `params` An array of variables to be made available to the element.
      * - `clear` A bool stating if the current stack should be cleared to start a new one.
@@ -83,51 +83,51 @@ class FlashMessage
     {
         $options += (array)this.getConfig();
 
-        if (isset($options['escape']) && !isset($options['params']['escape'])) {
-            $options['params']['escape'] = $options['escape'];
+        if (isset($options["escape"]) && !isset($options["params"]["escape"])) {
+            $options["params"]["escape"] = $options["escape"];
         }
 
-        [$plugin, $element] = pluginSplit($options['element']);
-        if ($options['plugin']) {
-            $plugin = $options['plugin'];
+        [$plugin, $element] = pluginSplit($options["element"]);
+        if ($options["plugin"]) {
+            $plugin = $options["plugin"];
         }
 
         if ($plugin) {
-            $options['element'] = $plugin . '.flash/' . $element;
+            $options["element"] = $plugin . ".flash/" . $element;
         } else {
-            $options['element'] = 'flash/' . $element;
+            $options["element"] = "flash/" . $element;
         }
 
         $messages = [];
-        if (!$options['clear']) {
-            $messages = (array)this.session.read('Flash.' . $options['key']);
+        if (!$options["clear"]) {
+            $messages = (array)this.session.read("Flash." . $options["key"]);
         }
 
-        if (!$options['duplicate']) {
+        if (!$options["duplicate"]) {
             foreach ($messages as $existingMessage) {
-                if ($existingMessage['message'] == $message) {
+                if ($existingMessage["message"] == $message) {
                     return;
                 }
             }
         }
 
         $messages[] = [
-            'message': $message,
-            'key': $options['key'],
-            'element': $options['element'],
-            'params': $options['params'],
+            "message": $message,
+            "key": $options["key"],
+            "element": $options["element"],
+            "params": $options["params"],
         ];
 
-        this.session.write('Flash.' . $options['key'], $messages);
+        this.session.write("Flash." . $options["key"], $messages);
     }
 
     /**
-     * Set an exception's message as flash message.
+     * Set an exception"s message as flash message.
      *
      * The following options will be set by default if unset:
      * ```
-     * 'element': 'error',
-     * `params': ['code': $exception.getCode()]
+     * "element": "error",
+     * `params": ["code": $exception.getCode()]
      * ```
      *
      * @param \Throwable $exception Exception instance.
@@ -137,8 +137,8 @@ class FlashMessage
      */
     function setExceptionMessage(Throwable $exception, array $options = []): void
     {
-        $options['element'] = $options['element'] ?? 'error';
-        $options['params']['code'] = $options['params']['code'] ?? $exception.getCode();
+        $options["element"] = $options["element"] ?? "error";
+        $options["params"]["code"] = $options["params"]["code"] ?? $exception.getCode();
 
         $message = $exception.getMessage();
         this.set($message, $options);
@@ -158,7 +158,7 @@ class FlashMessage
     /**
      * Set a success message.
      *
-     * The `'element'` option will be set to  `'success'`.
+     * The `"element"` option will be set to  `"success"`.
      *
      * @param string $message Message to flash.
      * @param array<string, mixed> $options An array of options.
@@ -167,14 +167,14 @@ class FlashMessage
      */
     function success(string $message, array $options = []): void
     {
-        $options['element'] = 'success';
+        $options["element"] = "success";
         this.set($message, $options);
     }
 
     /**
      * Set an success message.
      *
-     * The `'element'` option will be set to  `'error'`.
+     * The `"element"` option will be set to  `"error"`.
      *
      * @param string $message Message to flash.
      * @param array<string, mixed> $options An array of options.
@@ -183,14 +183,14 @@ class FlashMessage
      */
     function error(string $message, array $options = []): void
     {
-        $options['element'] = 'error';
+        $options["element"] = "error";
         this.set($message, $options);
     }
 
     /**
      * Set a warning message.
      *
-     * The `'element'` option will be set to  `'warning'`.
+     * The `"element"` option will be set to  `"warning"`.
      *
      * @param string $message Message to flash.
      * @param array<string, mixed> $options An array of options.
@@ -199,14 +199,14 @@ class FlashMessage
      */
     function warning(string $message, array $options = []): void
     {
-        $options['element'] = 'warning';
+        $options["element"] = "warning";
         this.set($message, $options);
     }
 
     /**
      * Set an info message.
      *
-     * The `'element'` option will be set to  `'info'`.
+     * The `"element"` option will be set to  `"info"`.
      *
      * @param string $message Message to flash.
      * @param array<string, mixed> $options An array of options.
@@ -215,7 +215,7 @@ class FlashMessage
      */
     function info(string $message, array $options = []): void
     {
-        $options['element'] = 'info';
+        $options["element"] = "info";
         this.set($message, $options);
     }
 }

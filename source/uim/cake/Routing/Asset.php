@@ -29,13 +29,13 @@ class Asset
      *
      * @var string
      */
-    protected static $inflectionType = 'underscore';
+    protected static $inflectionType = "underscore";
 
     /**
      * Set inflection type to use when inflecting plugin/theme name.
      *
      * @param string $inflectionType Inflection type. Value should be a valid
-     *  method name of `Inflector` class like `'dasherize'` or `'underscore`'`.
+     *  method name of `Inflector` class like `"dasherize"` or `"underscore`"`.
      * @return void
      */
     public static function setInflectionType(string $inflectionType): void
@@ -56,15 +56,15 @@ class Asset
      *   `plugin` False value will prevent parsing path as a plugin
      *   `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *        Set to false to skip timestamp generation.
-     *        Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *        Set to true to apply timestamps when debug is true. Set to "force" to always
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
     public static function imageUrl(string $path, array $options = []): string
     {
-        $pathPrefix = Configure::read('App.imageBaseUrl');
+        $pathPrefix = Configure::read("App.imageBaseUrl");
 
-        return static::url($path, $options + compact('pathPrefix'));
+        return static::url($path, $options + compact("pathPrefix"));
     }
 
     /**
@@ -81,16 +81,16 @@ class Asset
      *   `plugin` False value will prevent parsing path as a plugin
      *   `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *        Set to false to skip timestamp generation.
-     *        Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *        Set to true to apply timestamps when debug is true. Set to "force" to always
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
     public static function cssUrl(string $path, array $options = []): string
     {
-        $pathPrefix = Configure::read('App.cssBaseUrl');
-        $ext = '.css';
+        $pathPrefix = Configure::read("App.cssBaseUrl");
+        $ext = ".css";
 
-        return static::url($path, $options + compact('pathPrefix', 'ext'));
+        return static::url($path, $options + compact("pathPrefix", "ext"));
     }
 
     /**
@@ -107,16 +107,16 @@ class Asset
      *   `plugin` False value will prevent parsing path as a plugin
      *   `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *        Set to false to skip timestamp generation.
-     *        Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *        Set to true to apply timestamps when debug is true. Set to "force" to always
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
     public static function scriptUrl(string $path, array $options = []): string
     {
-        $pathPrefix = Configure::read('App.jsBaseUrl');
-        $ext = '.js';
+        $pathPrefix = Configure::read("App.jsBaseUrl");
+        $ext = ".js";
 
-        return static::url($path, $options + compact('pathPrefix', 'ext'));
+        return static::url($path, $options + compact("pathPrefix", "ext"));
     }
 
     /**
@@ -135,7 +135,7 @@ class Asset
      * - `theme` Optional theme name
      * - `timestamp` Overrides the value of `Asset.timestamp` in Configure.
      *    Set to false to skip timestamp generation.
-     *    Set to true to apply timestamps when debug is true. Set to 'force' to always
+     *    Set to true to apply timestamps when debug is true. Set to "force" to always
      *    enable timestamping regardless of debug value.
      *
      * @param string $path Path string or URL array
@@ -144,48 +144,48 @@ class Asset
      */
     public static function url(string $path, array $options = []): string
     {
-        if (preg_match('/^data:[a-z]+\/[a-z]+;/', $path)) {
+        if (preg_match("/^data:[a-z]+\/[a-z]+;/", $path)) {
             return $path;
         }
 
-        if (strpos($path, '://') != false || preg_match('/^[a-z]+:/i', $path)) {
-            return ltrim(Router::url($path), '/');
+        if (strpos($path, "://") != false || preg_match("/^[a-z]+:/i", $path)) {
+            return ltrim(Router::url($path), "/");
         }
 
-        if (!array_key_exists('plugin', $options) || $options['plugin'] != false) {
+        if (!array_key_exists("plugin", $options) || $options["plugin"] != false) {
             [$plugin, $path] = static::pluginSplit($path);
         }
-        if (!empty($options['pathPrefix']) && $path[0] != '/') {
-            $pathPrefix = $options['pathPrefix'];
-            $placeHolderVal = '';
-            if (!empty($options['theme'])) {
-                $placeHolderVal = static::inflectString($options['theme']) . '/';
+        if (!empty($options["pathPrefix"]) && $path[0] != "/") {
+            $pathPrefix = $options["pathPrefix"];
+            $placeHolderVal = "";
+            if (!empty($options["theme"])) {
+                $placeHolderVal = static::inflectString($options["theme"]) . "/";
             } elseif (isset($plugin)) {
-                $placeHolderVal = static::inflectString($plugin) . '/';
+                $placeHolderVal = static::inflectString($plugin) . "/";
             }
 
-            $path = str_replace('{plugin}', $placeHolderVal, $pathPrefix) . $path;
+            $path = str_replace("{plugin}", $placeHolderVal, $pathPrefix) . $path;
         }
         if (
-            !empty($options['ext']) &&
-            strpos($path, '?') == false &&
-            substr($path, -strlen($options['ext'])) != $options['ext']
+            !empty($options["ext"]) &&
+            strpos($path, "?") == false &&
+            substr($path, -strlen($options["ext"])) != $options["ext"]
         ) {
-            $path .= $options['ext'];
+            $path .= $options["ext"];
         }
 
         // Check again if path has protocol as `pathPrefix` could be for CDNs.
-        if (preg_match('|^([a-z0-9]+:)?//|', $path)) {
+        if (preg_match("|^([a-z0-9]+:)?//|", $path)) {
             return Router::url($path);
         }
 
         if (isset($plugin)) {
-            $path = static::inflectString($plugin) . '/' . $path;
+            $path = static::inflectString($plugin) . "/" . $path;
         }
 
         $optionTimestamp = null;
-        if (array_key_exists('timestamp', $options)) {
-            $optionTimestamp = $options['timestamp'];
+        if (array_key_exists("timestamp", $options)) {
+            $optionTimestamp = $options["timestamp"];
         }
         $webPath = static::assetTimestamp(
             static::webroot($path, $options),
@@ -194,11 +194,11 @@ class Asset
 
         $path = static::encodeUrl($webPath);
 
-        if (!empty($options['fullBase'])) {
-            $fullBaseUrl = is_string($options['fullBase'])
-                ? $options['fullBase']
+        if (!empty($options["fullBase"])) {
+            $fullBaseUrl = is_string($options["fullBase"])
+                ? $options["fullBase"]
                 : Router::fullBaseUrl();
-            $path = rtrim($fullBaseUrl, '/') . '/' . ltrim($path, '/');
+            $path = rtrim($fullBaseUrl, "/") . "/" . ltrim($path, "/");
         }
 
         return $path;
@@ -217,16 +217,16 @@ class Asset
             $path = $url;
         }
 
-        $parts = array_map('rawurldecode', explode('/', $path));
-        $parts = array_map('rawurlencode', $parts);
-        $encoded = implode('/', $parts);
+        $parts = array_map("rawurldecode", explode("/", $path));
+        $parts = array_map("rawurlencode", $parts);
+        $encoded = implode("/", $parts);
 
         return str_replace($path, $encoded, $url);
     }
 
     /**
      * Adds a timestamp to a file based resource based on the value of `Asset.timestamp` in
-     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp == 'force'
+     * Configure. If Asset.timestamp is true and debug is true, or Asset.timestamp == "force"
      * a timestamp will be added.
      *
      * @param string $path The file path to timestamp, the path must be inside `App.wwwRoot` in Configure.
@@ -235,39 +235,39 @@ class Asset
      */
     public static function assetTimestamp(string $path, $timestamp = null): string
     {
-        if (strpos($path, '?') != false) {
+        if (strpos($path, "?") != false) {
             return $path;
         }
 
         if ($timestamp == null) {
-            $timestamp = Configure::read('Asset.timestamp');
+            $timestamp = Configure::read("Asset.timestamp");
         }
-        $timestampEnabled = $timestamp == 'force' || ($timestamp == true && Configure::read('debug'));
+        $timestampEnabled = $timestamp == "force" || ($timestamp == true && Configure::read("debug"));
         if ($timestampEnabled) {
             $filepath = preg_replace(
-                '/^' . preg_quote(static::requestWebroot(), '/') . '/',
-                '',
+                "/^" . preg_quote(static::requestWebroot(), "/") . "/",
+                "",
                 urldecode($path)
             );
-            $webrootPath = Configure::read('App.wwwRoot') . str_replace('/', DIRECTORY_SEPARATOR, $filepath);
+            $webrootPath = Configure::read("App.wwwRoot") . str_replace("/", DIRECTORY_SEPARATOR, $filepath);
             if (is_file($webrootPath)) {
-                return $path . '?' . filemtime($webrootPath);
+                return $path . "?" . filemtime($webrootPath);
             }
             // Check for plugins and org prefixed plugins.
-            $segments = explode('/', ltrim($filepath, '/'));
+            $segments = explode("/", ltrim($filepath, "/"));
             $plugin = Inflector::camelize($segments[0]);
             if (!Plugin::isLoaded($plugin) && count($segments) > 1) {
-                $plugin = implode('/', [$plugin, Inflector::camelize($segments[1])]);
+                $plugin = implode("/", [$plugin, Inflector::camelize($segments[1])]);
                 unset($segments[1]);
             }
             if (Plugin::isLoaded($plugin)) {
                 unset($segments[0]);
                 $pluginPath = Plugin::path($plugin)
-                    . 'webroot'
+                    . "webroot"
                     . DIRECTORY_SEPARATOR
                     . implode(DIRECTORY_SEPARATOR, $segments);
                 if (is_file($pluginPath)) {
-                    return $path . '?' . filemtime($pluginPath);
+                    return $path . "?" . filemtime($pluginPath);
                 }
             }
         }
@@ -288,35 +288,35 @@ class Asset
      */
     public static function webroot(string $file, array $options = []): string
     {
-        $options += ['theme': null];
+        $options += ["theme": null];
         $requestWebroot = static::requestWebroot();
 
-        $asset = explode('?', $file);
-        $asset[1] = isset($asset[1]) ? '?' . $asset[1] : '';
+        $asset = explode("?", $file);
+        $asset[1] = isset($asset[1]) ? "?" . $asset[1] : "";
         $webPath = $requestWebroot . $asset[0];
         $file = $asset[0];
 
-        $themeName = $options['theme'];
+        $themeName = $options["theme"];
         if ($themeName) {
-            $file = trim($file, '/');
-            $theme = static::inflectString($themeName) . '/';
+            $file = trim($file, "/");
+            $theme = static::inflectString($themeName) . "/";
 
-            if (DIRECTORY_SEPARATOR == '\\') {
-                $file = str_replace('/', '\\', $file);
+            if (DIRECTORY_SEPARATOR == "\\") {
+                $file = str_replace("/", "\\", $file);
             }
 
-            if (is_file(Configure::read('App.wwwRoot') . $theme . $file)) {
+            if (is_file(Configure::read("App.wwwRoot") . $theme . $file)) {
                 $webPath = $requestWebroot . $theme . $asset[0];
             } else {
                 $themePath = Plugin::path($themeName);
-                $path = $themePath . 'webroot/' . $file;
+                $path = $themePath . "webroot/" . $file;
                 if (is_file($path)) {
                     $webPath = $requestWebroot . $theme . $asset[0];
                 }
             }
         }
-        if (strpos($webPath, '//') != false) {
-            return str_replace('//', '/', $webPath . $asset[1]);
+        if (strpos($webPath, "//") != false) {
+            return str_replace("//", "/", $webPath . $asset[1]);
         }
 
         return $webPath . $asset[1];
@@ -342,10 +342,10 @@ class Asset
     {
         $request = Router::getRequest();
         if ($request == null) {
-            return '/';
+            return "/";
         }
 
-        return $request.getAttribute('webroot');
+        return $request.getAttribute("webroot");
     }
 
     /**

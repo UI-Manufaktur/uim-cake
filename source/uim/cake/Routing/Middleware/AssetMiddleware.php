@@ -39,7 +39,7 @@ class AssetMiddleware : IMiddleware
      *
      * @var string
      */
-    protected $cacheTime = '+1 day';
+    protected $cacheTime = "+1 day";
 
     /**
      * Constructor.
@@ -48,8 +48,8 @@ class AssetMiddleware : IMiddleware
      */
     public this(array $options = [])
     {
-        if (!empty($options['cacheTime'])) {
-            this.cacheTime = $options['cacheTime'];
+        if (!empty($options["cacheTime"])) {
+            this.cacheTime = $options["cacheTime"];
         }
     }
 
@@ -63,11 +63,11 @@ class AssetMiddleware : IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $url = $request.getUri().getPath();
-        if (strpos($url, '..') != false || strpos($url, '.') == false) {
+        if (strpos($url, "..") != false || strpos($url, ".") == false) {
             return $handler.handle($request);
         }
 
-        if (strpos($url, '/.') != false) {
+        if (strpos($url, "/.") != false) {
             return $handler.handle($request);
         }
 
@@ -80,10 +80,10 @@ class AssetMiddleware : IMiddleware
         $modifiedTime = $file.getMTime();
         if (this.isNotModified($request, $file)) {
             return (new Response())
-                .withStringBody('')
+                .withStringBody("")
                 .withStatus(304)
                 .withHeader(
-                    'Last-Modified',
+                    "Last-Modified",
                     date(DATE_RFC850, $modifiedTime)
                 );
         }
@@ -100,7 +100,7 @@ class AssetMiddleware : IMiddleware
      */
     protected function isNotModified(IServerRequest $request, SplFileInfo $file): bool
     {
-        $modifiedSince = $request.getHeaderLine('If-Modified-Since');
+        $modifiedSince = $request.getHeaderLine("If-Modified-Since");
         if (!$modifiedSince) {
             return false;
         }
@@ -116,18 +116,18 @@ class AssetMiddleware : IMiddleware
      */
     protected function _getAssetFile(string $url): ?string
     {
-        $parts = explode('/', ltrim($url, '/'));
+        $parts = explode("/", ltrim($url, "/"));
         $pluginPart = [];
         for ($i = 0; $i < 2; $i++) {
             if (!isset($parts[$i])) {
                 break;
             }
             $pluginPart[] = Inflector::camelize($parts[$i]);
-            $plugin = implode('/', $pluginPart);
+            $plugin = implode("/", $pluginPart);
             if (Plugin::isLoaded($plugin)) {
                 $parts = array_slice($parts, $i + 1);
                 $fileFragment = implode(DIRECTORY_SEPARATOR, $parts);
-                $pluginWebroot = Plugin::path($plugin) . 'webroot' . DIRECTORY_SEPARATOR;
+                $pluginWebroot = Plugin::path($plugin) . "webroot" . DIRECTORY_SEPARATOR;
 
                 return $pluginWebroot . $fileFragment;
             }
@@ -145,20 +145,20 @@ class AssetMiddleware : IMiddleware
      */
     protected function deliverAsset(IServerRequest $request, SplFileInfo $file): Response
     {
-        $stream = new Stream(fopen($file.getPathname(), 'rb'));
+        $stream = new Stream(fopen($file.getPathname(), "rb"));
 
-        $response = new Response(['stream': $stream]);
+        $response = new Response(["stream": $stream]);
 
-        $contentType = (array)($response.getMimeType($file.getExtension()) ?: 'application/octet-stream');
+        $contentType = (array)($response.getMimeType($file.getExtension()) ?: "application/octet-stream");
         $modified = $file.getMTime();
         $expire = strtotime(this.cacheTime);
         $maxAge = $expire - time();
 
         return $response
-            .withHeader('Content-Type', $contentType[0])
-            .withHeader('Cache-Control', 'public,max-age=' . $maxAge)
-            .withHeader('Date', gmdate(DATE_RFC7231, time()))
-            .withHeader('Last-Modified', gmdate(DATE_RFC7231, $modified))
-            .withHeader('Expires', gmdate(DATE_RFC7231, $expire));
+            .withHeader("Content-Type", $contentType[0])
+            .withHeader("Cache-Control", "public,max-age=" . $maxAge)
+            .withHeader("Date", gmdate(DATE_RFC7231, time()))
+            .withHeader("Last-Modified", gmdate(DATE_RFC7231, $modified))
+            .withHeader("Expires", gmdate(DATE_RFC7231, $expire));
     }
 }

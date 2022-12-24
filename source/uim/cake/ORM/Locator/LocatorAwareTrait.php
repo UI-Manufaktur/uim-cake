@@ -25,7 +25,7 @@ use UnexpectedValueException;
 trait LocatorAwareTrait
 {
     /**
-     * This object's default table alias.
+     * This object"s default table alias.
      *
      * @var string|null
      */
@@ -60,7 +60,7 @@ trait LocatorAwareTrait
     {
         if (_tableLocator == null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
-            _tableLocator = FactoryLocator::get('Table');
+            _tableLocator = FactoryLocator::get("Table");
         }
 
         /** @var \Cake\ORM\Locator\ILocator*/
@@ -84,7 +84,7 @@ trait LocatorAwareTrait
         $alias = $alias ?? this.defaultTable;
         if (empty($alias)) {
             throw new UnexpectedValueException(
-                'You must provide an `$alias` or set the `$defaultTable` property to a non empty string.'
+                "You must provide an `$alias` or set the `$defaultTable` property to a non empty string."
             );
         }
 

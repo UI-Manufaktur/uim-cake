@@ -42,7 +42,7 @@ trait HttpClientTrait
      * @param string $body The body for the response.
      * @return \Cake\Http\Client\Response
      */
-    function newClientResponse(int $code = 200, array $headers = [], string $body = ''): Response
+    function newClientResponse(int $code = 200, array $headers = [], string $body = ""): Response
     {
         $headers = array_merge(["HTTP/1.1 {$code}"], $headers);
 
@@ -59,7 +59,7 @@ trait HttpClientTrait
      */
     function mockClientPost(string $url, Response $response, array $options = []): void
     {
-        Client::addMockResponse('POST', $url, $response, $options);
+        Client::addMockResponse("POST", $url, $response, $options);
     }
 
     /**
@@ -72,7 +72,7 @@ trait HttpClientTrait
      */
     function mockClientGet(string $url, Response $response, array $options = []): void
     {
-        Client::addMockResponse('GET', $url, $response, $options);
+        Client::addMockResponse("GET", $url, $response, $options);
     }
 
     /**
@@ -85,7 +85,7 @@ trait HttpClientTrait
      */
     function mockClientPatch(string $url, Response $response, array $options = []): void
     {
-        Client::addMockResponse('PATCH', $url, $response, $options);
+        Client::addMockResponse("PATCH", $url, $response, $options);
     }
 
     /**
@@ -98,7 +98,7 @@ trait HttpClientTrait
      */
     function mockClientPut(string $url, Response $response, array $options = []): void
     {
-        Client::addMockResponse('PUT', $url, $response, $options);
+        Client::addMockResponse("PUT", $url, $response, $options);
     }
 
     /**
@@ -111,6 +111,6 @@ trait HttpClientTrait
      */
     function mockClientDelete(string $url, Response $response, array $options = []): void
     {
-        Client::addMockResponse('DELETE', $url, $response, $options);
+        Client::addMockResponse("DELETE", $url, $response, $options);
     }
 }

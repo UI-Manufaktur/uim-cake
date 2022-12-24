@@ -39,14 +39,14 @@ class CacheSession : SessionHandlerInterface
      * Constructor.
      *
      * @param array<string, mixed> $config The configuration to use for this engine
-     * It requires the key 'config' which is the name of the Cache config to use for
+     * It requires the key "config" which is the name of the Cache config to use for
      * storing the session
-     * @throws \InvalidArgumentException if the 'config' key is not provided
+     * @throws \InvalidArgumentException if the "config" key is not provided
      */
     public this(array $config = [])
     {
-        if (empty($config['config'])) {
-            throw new InvalidArgumentException('The cache configuration name to use is required');
+        if (empty($config["config"])) {
+            throw new InvalidArgumentException("The cache configuration name to use is required");
         }
         _options = $config;
     }
@@ -82,10 +82,10 @@ class CacheSession : SessionHandlerInterface
     #[\ReturnTypeWillChange]
     function read($id)
     {
-        $value = Cache::read($id, _options['config']);
+        $value = Cache::read($id, _options["config"]);
 
         if ($value == null) {
-            return '';
+            return "";
         }
 
         return $value;
@@ -104,7 +104,7 @@ class CacheSession : SessionHandlerInterface
             return false;
         }
 
-        return Cache::write($id, $data, _options['config']);
+        return Cache::write($id, $data, _options["config"]);
     }
 
     /**
@@ -115,13 +115,13 @@ class CacheSession : SessionHandlerInterface
      */
     function destroy($id): bool
     {
-        Cache::delete($id, _options['config']);
+        Cache::delete($id, _options["config"]);
 
         return true;
     }
 
     /**
-     * No-op method. Always returns 0 since cache engine don't have garbage collection.
+     * No-op method. Always returns 0 since cache engine don"t have garbage collection.
      *
      * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
      * @return int|false

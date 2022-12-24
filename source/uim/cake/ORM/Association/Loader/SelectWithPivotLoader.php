@@ -59,10 +59,10 @@ class SelectWithPivotLoader : SelectLoader
     public this(array $options)
     {
         parent::__construct($options);
-        this.junctionAssociationName = $options['junctionAssociationName'];
-        this.junctionProperty = $options['junctionProperty'];
-        this.junctionAssoc = $options['junctionAssoc'];
-        this.junctionConditions = $options['junctionConditions'];
+        this.junctionAssociationName = $options["junctionAssociationName"];
+        this.junctionProperty = $options["junctionProperty"];
+        this.junctionAssoc = $options["junctionAssoc"];
+        this.junctionConditions = $options["junctionConditions"];
     }
 
     /**
@@ -82,9 +82,9 @@ class SelectWithPivotLoader : SelectLoader
         $assoc = this.junctionAssoc;
         $queryBuilder = false;
 
-        if (!empty($options['queryBuilder'])) {
-            $queryBuilder = $options['queryBuilder'];
-            unset($options['queryBuilder']);
+        if (!empty($options["queryBuilder"])) {
+            $queryBuilder = $options["queryBuilder"];
+            unset($options["queryBuilder"]);
         }
 
         $query = parent::_buildQuery($options);
@@ -94,18 +94,18 @@ class SelectWithPivotLoader : SelectLoader
         }
 
         if ($query.isAutoFieldsEnabled() == null) {
-            $query.enableAutoFields($query.clause('select') == []);
+            $query.enableAutoFields($query.clause("select") == []);
         }
 
         // Ensure that association conditions are applied
         // and that the required keys are in the selected columns.
 
-        $tempName = this.alias . '_CJoin';
+        $tempName = this.alias . "_CJoin";
         $schema = $assoc.getSchema();
         $joinFields = $types = [];
 
         foreach ($schema.typeMap() as $f: $type) {
-            $key = $tempName . '__' . $f;
+            $key = $tempName . "__" . $f;
             $joinFields[$key] = "$name.$f";
             $types[$key] = $type;
         }
@@ -119,9 +119,9 @@ class SelectWithPivotLoader : SelectLoader
             .addToJoinsMap($tempName, $assoc, false, this.junctionProperty);
 
         $assoc.attachTo($query, [
-            'aliasPath': $assoc.getAlias(),
-            'includeFields': false,
-            'propertyPath': this.junctionProperty,
+            "aliasPath": $assoc.getAlias(),
+            "includeFields": false,
+            "propertyPath": this.junctionProperty,
         ]);
         $query.getTypeMap().addDefaults($types);
 
@@ -148,8 +148,8 @@ class SelectWithPivotLoader : SelectLoader
         $links = [];
         $name = this.junctionAssociationName;
 
-        foreach ((array)$options['foreignKey'] as $key) {
-            $links[] = sprintf('%s.%s', $name, $key);
+        foreach ((array)$options["foreignKey"] as $key) {
+            $links[] = sprintf("%s.%s", $name, $key);
         }
 
         if (count($links) == 1) {
@@ -171,12 +171,12 @@ class SelectWithPivotLoader : SelectLoader
     protected function _buildResultMap(Query $fetchQuery, array $options): array
     {
         $resultMap = [];
-        $key = (array)$options['foreignKey'];
+        $key = (array)$options["foreignKey"];
 
         foreach ($fetchQuery.all() as $result) {
             if (!isset($result[this.junctionProperty])) {
                 throw new RuntimeException(sprintf(
-                    '"%s" is missing from the belongsToMany results. Results cannot be created.',
+                    ""%s" is missing from the belongsToMany results. Results cannot be created.",
                     this.junctionProperty
                 ));
             }
@@ -185,7 +185,7 @@ class SelectWithPivotLoader : SelectLoader
             foreach ($key as $k) {
                 $values[] = $result[this.junctionProperty][$k];
             }
-            $resultMap[implode(';', $values)][] = $result;
+            $resultMap[implode(";", $values)][] = $result;
         }
 
         return $resultMap;

@@ -55,6 +55,6 @@ class ValidCount
             return false;
         }
 
-        return Validation::comparison(count($value), $options['operator'], $options['count']);
+        return Validation::comparison(count($value), $options["operator"], $options["count"]);
     }
 }

@@ -40,7 +40,7 @@ class NullContext : ContextInterface
      */
     function primaryKey(): array
     {
-        deprecationWarning('`NullContext::primaryKey()` is deprecated. Use `NullContext::getPrimaryKey()`.');
+        deprecationWarning("`NullContext::primaryKey()` is deprecated. Use `NullContext::getPrimaryKey()`.");
 
         return [];
     }

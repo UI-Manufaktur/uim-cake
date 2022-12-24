@@ -30,8 +30,8 @@ use function Laminas\Diactoros\normalizeUploadedFiles;
  * Factory for making ServerRequest instances.
  *
  * This adds in CakePHP specific behavior to populate the basePath and webroot
- * attributes. Furthermore the Uri's path is corrected to only contain the
- * 'virtual' path for the request.
+ * attributes. Furthermore the Uri"s path is corrected to only contain the
+ * "virtual" path for the request.
  */
 abstract class ServerRequestFactory : ServerRequestFactoryInterface
 {
@@ -59,8 +59,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $server = normalizeServer($server ?: $_SERVER);
         $uri = static::createUri($server);
 
-        $webroot = '';
-        $base = '';
+        $webroot = "";
+        $base = "";
         if ($uri instanceof CakeUri) {
             // Unwrap our shim for base and webroot.
             // For 5.x we should change the interface on createUri() to return a
@@ -71,21 +71,21 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         }
 
         /** @psalm-suppress NoInterfaceProperties */
-        $sessionConfig = (array)Configure::read('Session') + [
-            'defaults': 'php',
-            'cookiePath': $webroot,
+        $sessionConfig = (array)Configure::read("Session") + [
+            "defaults": "php",
+            "cookiePath": $webroot,
         ];
         $session = Session::create($sessionConfig);
 
         $request = new ServerRequest([
-            'environment': $server,
-            'uri': $uri,
-            'cookies': $cookies ?: $_COOKIE,
-            'query': $query ?: $_GET,
-            'webroot': $webroot,
-            'base': $base,
-            'session': $session,
-            'input': $server['CAKEPHP_INPUT'] ?? null,
+            "environment": $server,
+            "uri": $uri,
+            "cookies": $cookies ?: $_COOKIE,
+            "query": $query ?: $_GET,
+            "webroot": $webroot,
+            "base": $base,
+            "session": $session,
+            "input": $server["CAKEPHP_INPUT"] ?? null,
         ]);
 
         $request = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, $request);
@@ -101,7 +101,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
     /**
      * Sets the REQUEST_METHOD environment variable based on the simulated _method
-     * HTTP override value. The 'ORIGINAL_REQUEST_METHOD' is also preserved, if you
+     * HTTP override value. The "ORIGINAL_REQUEST_METHOD" is also preserved, if you
      * want the read the non-simulated HTTP method the client used.
      *
      * Request body of content type "application/x-www-form-urlencoded" is parsed
@@ -117,27 +117,27 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $override = false;
 
         if (
-            in_array($method, ['PUT', 'DELETE', 'PATCH'], true) &&
-            strpos((string)$request.contentType(), 'application/x-www-form-urlencoded') == 0
+            in_array($method, ["PUT", "DELETE", "PATCH"], true) &&
+            strpos((string)$request.contentType(), "application/x-www-form-urlencoded") == 0
         ) {
             $data = (string)$request.getBody();
             parse_str($data, $parsedBody);
         }
-        if ($request.hasHeader('X-Http-Method-Override')) {
-            $parsedBody['_method'] = $request.getHeaderLine('X-Http-Method-Override');
+        if ($request.hasHeader("X-Http-Method-Override")) {
+            $parsedBody["_method"] = $request.getHeaderLine("X-Http-Method-Override");
             $override = true;
         }
 
-        $request = $request.withEnv('ORIGINAL_REQUEST_METHOD', $method);
-        if (isset($parsedBody['_method'])) {
-            $request = $request.withEnv('REQUEST_METHOD', $parsedBody['_method']);
-            unset($parsedBody['_method']);
+        $request = $request.withEnv("ORIGINAL_REQUEST_METHOD", $method);
+        if (isset($parsedBody["_method"])) {
+            $request = $request.withEnv("REQUEST_METHOD", $parsedBody["_method"]);
+            unset($parsedBody["_method"]);
             $override = true;
         }
 
         if (
             $override &&
-            !in_array($request.getMethod(), ['PUT', 'POST', 'DELETE', 'PATCH'], true)
+            !in_array($request.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
         ) {
             $parsedBody = [];
         }
@@ -162,23 +162,23 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             return $request;
         }
 
-        if (Configure::read('App.uploadedFilesAsObjects', true)) {
+        if (Configure::read("App.uploadedFilesAsObjects", true)) {
             $parsedBody = Hash::merge($parsedBody, $files);
         } else {
             // Make a flat map that can be inserted into body for BC.
             $fileMap = Hash::flatten($files);
             foreach ($fileMap as $key: $file) {
                 $error = $file.getError();
-                $tmpName = '';
+                $tmpName = "";
                 if ($error == UPLOAD_ERR_OK) {
-                    $tmpName = $file.getStream().getMetadata('uri');
+                    $tmpName = $file.getStream().getMetadata("uri");
                 }
                 $parsedBody = Hash::insert($parsedBody, (string)$key, [
-                    'tmp_name': $tmpName,
-                    'error': $error,
-                    'name': $file.getClientFilename(),
-                    'type': $file.getClientMediaType(),
-                    'size': $file.getSize(),
+                    "tmp_name": $tmpName,
+                    "error": $error,
+                    "name": $file.getClientFilename(),
+                    "type": $file.getClientMediaType(),
+                    "size": $file.getSize(),
                 ]);
             }
         }
@@ -203,13 +203,13 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      */
     function createServerRequest(string $method, $uri, array $serverParams = []): IServerRequest
     {
-        $serverParams['REQUEST_METHOD'] = $method;
-        $options = ['environment': $serverParams];
+        $serverParams["REQUEST_METHOD"] = $method;
+        $options = ["environment": $serverParams];
 
         if ($uri instanceof UriInterface) {
-            $options['uri'] = $uri;
+            $options["uri"] = $uri;
         } else {
-            $options['url'] = $uri;
+            $options["url"] = $uri;
         }
 
         return new ServerRequest($options);
@@ -249,7 +249,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
         // Look in PATH_INFO first, as this is the exact value we need prepared
         // by PHP.
-        $pathInfo = Hash::get($server, 'PATH_INFO');
+        $pathInfo = Hash::get($server, "PATH_INFO");
         if ($pathInfo) {
             $uri = $uri.withPath($pathInfo);
         } else {
@@ -257,7 +257,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         }
 
         if (!$uri.getHost()) {
-            $uri = $uri.withHost('localhost');
+            $uri = $uri.withHost("localhost");
         }
 
         return new CakeUri($uri, $base, $webroot);
@@ -273,22 +273,22 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     protected static function updatePath(string $base, UriInterface $uri): UriInterface
     {
         $path = $uri.getPath();
-        if ($base != '' && strpos($path, $base) == 0) {
+        if ($base != "" && strpos($path, $base) == 0) {
             $path = substr($path, strlen($base));
         }
-        if ($path == '/index.php' && $uri.getQuery()) {
+        if ($path == "/index.php" && $uri.getQuery()) {
             $path = $uri.getQuery();
         }
-        if (empty($path) || $path == '/' || $path == '//' || $path == '/index.php') {
-            $path = '/';
+        if (empty($path) || $path == "/" || $path == "//" || $path == "/index.php") {
+            $path = "/";
         }
-        $endsWithIndex = '/' . (Configure::read('App.webroot') ?: 'webroot') . '/index.php';
+        $endsWithIndex = "/" . (Configure::read("App.webroot") ?: "webroot") . "/index.php";
         $endsWithLength = strlen($endsWithIndex);
         if (
             strlen($path) >= $endsWithLength &&
             substr($path, -$endsWithLength) == $endsWithIndex
         ) {
-            $path = '/';
+            $path = "/";
         }
 
         return $uri.withPath($path);
@@ -303,54 +303,54 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      */
     protected static function getBase(UriInterface $uri, array $server): array
     {
-        $config = (array)Configure::read('App') + [
-            'base': null,
-            'webroot': null,
-            'baseUrl': null,
+        $config = (array)Configure::read("App") + [
+            "base": null,
+            "webroot": null,
+            "baseUrl": null,
         ];
-        $base = $config['base'];
-        $baseUrl = $config['baseUrl'];
-        $webroot = $config['webroot'];
+        $base = $config["base"];
+        $baseUrl = $config["baseUrl"];
+        $webroot = $config["webroot"];
 
         if ($base != false && $base != null) {
-            return [$base, $base . '/'];
+            return [$base, $base . "/"];
         }
 
         if (!$baseUrl) {
-            $base = dirname(Hash::get($server, 'PHP_SELF'));
+            $base = dirname(Hash::get($server, "PHP_SELF"));
             // Clean up additional / which cause following code to fail..
-            $base = preg_replace('#/+#', '/', $base);
+            $base = preg_replace("#/+#", "/", $base);
 
-            $indexPos = strpos($base, '/' . $webroot . '/index.php');
+            $indexPos = strpos($base, "/" . $webroot . "/index.php");
             if ($indexPos != false) {
-                $base = substr($base, 0, $indexPos) . '/' . $webroot;
+                $base = substr($base, 0, $indexPos) . "/" . $webroot;
             }
             if ($webroot == basename($base)) {
                 $base = dirname($base);
             }
 
-            if ($base == DIRECTORY_SEPARATOR || $base == '.') {
-                $base = '';
+            if ($base == DIRECTORY_SEPARATOR || $base == ".") {
+                $base = "";
             }
-            $base = implode('/', array_map('rawurlencode', explode('/', $base)));
+            $base = implode("/", array_map("rawurlencode", explode("/", $base)));
 
-            return [$base, $base . '/'];
+            return [$base, $base . "/"];
         }
 
-        $file = '/' . basename($baseUrl);
+        $file = "/" . basename($baseUrl);
         $base = dirname($baseUrl);
 
-        if ($base == DIRECTORY_SEPARATOR || $base == '.') {
-            $base = '';
+        if ($base == DIRECTORY_SEPARATOR || $base == ".") {
+            $base = "";
         }
-        $webrootDir = $base . '/';
+        $webrootDir = $base . "/";
 
-        $docRoot = Hash::get($server, 'DOCUMENT_ROOT');
+        $docRoot = Hash::get($server, "DOCUMENT_ROOT");
         $docRootContainsWebroot = strpos($docRoot, $webroot);
 
         if (!empty($base) || !$docRootContainsWebroot) {
-            if (strpos($webrootDir, '/' . $webroot . '/') == false) {
-                $webrootDir .= $webroot . '/';
+            if (strpos($webrootDir, "/" . $webroot . "/") == false) {
+                $webrootDir .= $webroot . "/";
             }
         }
 

@@ -42,7 +42,7 @@ class DependentDeleteHelper
         }
         $table = $association.getTarget();
         /** @psalm-suppress InvalidArgument */
-        $foreignKey = array_map([$association, 'aliasField'], (array)$association.getForeignKey());
+        $foreignKey = array_map([$association, "aliasField"], (array)$association.getForeignKey());
         $bindingKey = (array)$association.getBindingKey();
         $bindingValue = $entity.extract($bindingKey);
         if (in_array(null, $bindingValue, true)) {

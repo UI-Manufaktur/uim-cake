@@ -97,11 +97,11 @@ interface IQuery
      *
      * ```
      * $query.applyOptions([
-     *   'fields': ['id', 'name'],
-     *   'conditions': [
-     *     'created >=': '2013-01-01'
+     *   "fields": ["id", "name"],
+     *   "conditions": [
+     *     "created >=": "2013-01-01"
      *   ],
-     *   'limit': 10
+     *   "limit": 10
      * ]);
      * ```
      *
@@ -109,8 +109,8 @@ interface IQuery
      *
      * ```
      *  $query
-     *  .select(['id', 'name'])
-     *  .where(['created >=': '2013-01-01'])
+     *  .select(["id", "name"])
+     *  .where(["created >=": "2013-01-01"])
      *  .limit(10)
      * ```
      *
@@ -125,7 +125,7 @@ interface IQuery
      * Allows custom find methods to be combined and applied to each other.
      *
      * ```
-     * $repository.find('all').find('recent');
+     * $repository.find("all").find("recent");
      * ```
      *
      * The above is an example of stacking multiple finder methods onto
@@ -144,7 +144,7 @@ interface IQuery
      * ### Example:
      *
      * ```
-     * $singleUser = $query.select(['id', 'username']).first();
+     * $singleUser = $query.select(["id", "username"]).first();
      * ```
      *
      * @return \Cake\Datasource\EntityInterface|array|null the first result from the ResultSet
@@ -168,7 +168,7 @@ interface IQuery
      *
      * ```
      * $query.limit(10) // generates LIMIT 10
-     * $query.limit($query.newExpr().add(['1 + 1'])); // LIMIT (1 + 1)
+     * $query.limit($query.newExpr().add(["1 + 1"])); // LIMIT (1 + 1)
      * ```
      *
      * @param \Cake\Database\IExpression|int|null $limit number of records to be returned
@@ -188,7 +188,7 @@ interface IQuery
      *
      * ```
      *  $query.offset(10) // generates OFFSET 10
-     *  $query.offset($query.newExpr().add(['1 + 1'])); // OFFSET (1 + 1)
+     *  $query.offset($query.newExpr().add(["1 + 1"])); // OFFSET (1 + 1)
      * ```
      *
      * @param \Cake\Database\IExpression|int|null $offset number of records to be skipped
@@ -212,7 +212,7 @@ interface IQuery
      * ### Examples:
      *
      * ```
-     * $query.order(['title': 'DESC', 'author_id': 'ASC']);
+     * $query.order(["title": "DESC", "author_id": "ASC"]);
      * ```
      *
      * Produces:
@@ -221,8 +221,8 @@ interface IQuery
      *
      * ```
      * $query
-     *     .order(['title': $query.newExpr('DESC NULLS FIRST')])
-     *     .order('author_id');
+     *     .order(["title": $query.newExpr("DESC NULLS FIRST")])
+     *     .order("author_id");
      * ```
      *
      * Will generate:
@@ -230,8 +230,8 @@ interface IQuery
      * `ORDER BY title DESC NULLS FIRST, author_id`
      *
      * ```
-     * $expression = $query.newExpr().add(['id % 2 = 0']);
-     * $query.order($expression).order(['title': 'ASC']);
+     * $expression = $query.newExpr().add(["id % 2 = 0"]);
+     * $query.order($expression).order(["title": "ASC"]);
      * ```
      *
      * Will become:
@@ -307,15 +307,15 @@ interface IQuery
      *
      * ```
      *  $query.where([
-     *      'posted >=': new DateTime('3 days ago'),
-     *      'title LIKE': 'Hello W%',
-     *      'author_id': 1,
-     *  ], ['posted': 'datetime']);
+     *      "posted >=": new DateTime("3 days ago"),
+     *      "title LIKE": "Hello W%",
+     *      "author_id": 1,
+     *  ], ["posted": "datetime"]);
      * ```
      *
      * The previous example produces:
      *
-     * `WHERE posted >= 2012-01-27 AND title LIKE 'Hello W%' AND author_id = 1`
+     * `WHERE posted >= 2012-01-27 AND title LIKE "Hello W%" AND author_id = 1`
      *
      * Second parameter is used to specify what type is expected for each passed
      * key. Valid types can be used from the mapped with Database\Type class.
@@ -324,21 +324,21 @@ interface IQuery
      *
      * ```
      *  $query.where([
-     *      'author_id !=': 1,
-     *      'OR': ['published': true, 'posted <': new DateTime('now')],
-     *      'NOT': ['title': 'Hello']
-     *  ], ['published': boolean, 'posted': 'datetime']
+     *      "author_id !=": 1,
+     *      "OR": ["published": true, "posted <": new DateTime("now")],
+     *      "NOT": ["title": "Hello"]
+     *  ], ["published": boolean, "posted": "datetime"]
      * ```
      *
      * The previous example produces:
      *
-     * `WHERE author_id = 1 AND (published = 1 OR posted < '2012-02-01') AND NOT (title = 'Hello')`
+     * `WHERE author_id = 1 AND (published = 1 OR posted < "2012-02-01") AND NOT (title = "Hello")`
      *
      * You can nest conditions using conjunctions as much as you like. Sometimes, you
      * may want to define 2 different options for the same key, in that case, you can
      * wrap each condition inside a new array:
      *
-     * `$query.where(['OR': [['published': false], ['published': true]])`
+     * `$query.where(["OR": [["published": false], ["published": true]])`
      *
      * Keep in mind that every time you call where() with the third param set to false
      * (default), it will join the passed conditions to the previous stored list using
@@ -348,8 +348,8 @@ interface IQuery
      * ### Using expressions objects:
      *
      * ```
-     *  $exp = $query.newExpr().add(['id !=': 100, 'author_id' != 1]).tieWith('OR');
-     *  $query.where(['published': true], ['published': 'boolean']).where($exp);
+     *  $exp = $query.newExpr().add(["id !=": 100, "author_id" != 1]).tieWith("OR");
+     *  $query.where(["published": true], ["published": "boolean"]).where($exp);
      * ```
      *
      * The previous example produces:
@@ -367,22 +367,22 @@ interface IQuery
      *
      * ```
      *  $query
-     *  .where(['title !=': 'Hello World'])
+     *  .where(["title !=": "Hello World"])
      *  .where(function ($exp, $query) {
-     *      $or = $exp.or(['id': 1]);
-     *      $and = $exp.and(['id >': 2, 'id <': 10]);
+     *      $or = $exp.or(["id": 1]);
+     *      $and = $exp.and(["id >": 2, "id <": 10]);
      *  return $or.add($and);
      *  });
      * ```
      *
      * * The previous example produces:
      *
-     * `WHERE title != 'Hello World' AND (id = 1 OR (id > 2 AND id < 10))`
+     * `WHERE title != "Hello World" AND (id = 1 OR (id > 2 AND id < 10))`
      *
      * ### Conditions as strings:
      *
      * ```
-     *  $query.where(['articles.author_id = authors.id', 'modified IS NULL']);
+     *  $query.where(["articles.author_id = authors.id", "modified IS NULL"]);
      * ```
      *
      * The previous example produces:

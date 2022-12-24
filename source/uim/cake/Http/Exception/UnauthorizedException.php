@@ -28,14 +28,14 @@ class UnauthorizedException : HttpException
     /**
      * Constructor
      *
-     * @param string|null $message If no message is given 'Unauthorized' will be the message
+     * @param string|null $message If no message is given "Unauthorized" will be the message
      * @param int|null $code Status code, defaults to 401
      * @param \Throwable|null $previous The previous exception.
      */
     public this(?string $message = null, ?int $code = null, ?Throwable $previous = null)
     {
         if (empty($message)) {
-            $message = 'Unauthorized';
+            $message = "Unauthorized";
         }
         parent::__construct($message, $code, $previous);
     }

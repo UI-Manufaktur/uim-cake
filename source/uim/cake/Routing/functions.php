@@ -16,7 +16,7 @@
 
 use Cake\Routing\Router;
 
-if (!function_exists('urlArray')) {
+if (!function_exists("urlArray")) {
     /**
      * Returns an array URL from a route path string.
      *
@@ -30,8 +30,8 @@ if (!function_exists('urlArray')) {
     {
         $url = Router::parseRoutePath($path);
         $url += [
-            'plugin': false,
-            'prefix': false,
+            "plugin": false,
+            "prefix": false,
         ];
 
         return $url + $params;

@@ -48,7 +48,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::MESSAGE_HTML instead.
      */
-    public const MESSAGE_HTML = 'html';
+    public const MESSAGE_HTML = "html";
 
     /**
      * Type of message - TEXT
@@ -56,7 +56,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::MESSAGE_TEXT instead.
      */
-    public const MESSAGE_TEXT = 'text';
+    public const MESSAGE_TEXT = "text";
 
     /**
      * Type of message - BOTH
@@ -64,7 +64,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::MESSAGE_BOTH instead.
      */
-    public const MESSAGE_BOTH = 'both';
+    public const MESSAGE_BOTH = "both";
 
     /**
      * Holds the regex pattern for email validation
@@ -72,7 +72,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::EMAIL_PATTERN instead.
      */
-    public const EMAIL_PATTERN = '/^((?:[\p{L}0-9.!#$%&\'*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui';
+    public const EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
 
     /**
      * The transport instance to use for sending mail.
@@ -121,7 +121,7 @@ class Email : JsonSerializable, Serializable
         this.message = new this.messageClass();
 
         if ($config == null) {
-            $config = Mailer::getConfig('default');
+            $config = Mailer::getConfig("default");
         }
 
         if ($config) {
@@ -156,11 +156,11 @@ class Email : JsonSerializable, Serializable
     {
         $result = this.message.$method(...$args);
 
-        if (strpos($method, 'get') == 0) {
+        if (strpos($method, "get") == 0) {
             return $result;
         }
 
-        $getters = ['message'];
+        $getters = ["message"];
         if (in_array($method, $getters, true)) {
             return $result;
         }
@@ -246,12 +246,12 @@ class Email : JsonSerializable, Serializable
             $transport = $name;
         } else {
             throw new InvalidArgumentException(sprintf(
-                'The value passed for the "$name" argument must be either a string, or an object, %s given.',
+                "The value passed for the "$name" argument must be either a string, or an object, %s given.",
                 gettype($name)
             ));
         }
-        if (!method_exists($transport, 'send')) {
-            throw new LogicException(sprintf('The "%s" do not have send method.', get_class($transport)));
+        if (!method_exists($transport, "send")) {
+            throw new LogicException(sprintf("The "%s" do not have send method.", get_class($transport)));
         }
 
         _transport = $transport;
@@ -281,7 +281,7 @@ class Email : JsonSerializable, Serializable
             return this.message.getBody();
         }
 
-        $method = 'getBody' . ucfirst($type);
+        $method = "getBody" . ucfirst($type);
 
         return this.message.$method();
     }
@@ -299,7 +299,7 @@ class Email : JsonSerializable, Serializable
             $name = $config;
             $config = Mailer::getConfig($name);
             if (empty($config)) {
-                throw new InvalidArgumentException(sprintf('Unknown email configuration "%s".', $name));
+                throw new InvalidArgumentException(sprintf("Unknown email configuration "%s".", $name));
             }
             unset($name);
         }
@@ -307,36 +307,36 @@ class Email : JsonSerializable, Serializable
         _profile = $config + _profile;
 
         $simpleMethods = [
-            'transport',
+            "transport",
         ];
         foreach ($simpleMethods as $method) {
             if (isset($config[$method])) {
-                this.{'set' . ucfirst($method)}($config[$method]);
+                this.{"set" . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
         $viewBuilderMethods = [
-            'template', 'layout', 'theme',
+            "template", "layout", "theme",
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                this.getRenderer().viewBuilder().{'set' . ucfirst($method)}($config[$method]);
+                this.getRenderer().viewBuilder().{"set" . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
-        if (array_key_exists('helpers', $config)) {
-            this.getRenderer().viewBuilder().setHelpers($config['helpers'], false);
-            unset($config['helpers']);
+        if (array_key_exists("helpers", $config)) {
+            this.getRenderer().viewBuilder().setHelpers($config["helpers"], false);
+            unset($config["helpers"]);
         }
-        if (array_key_exists('viewRenderer', $config)) {
-            this.getRenderer().viewBuilder().setClassName($config['viewRenderer']);
-            unset($config['viewRenderer']);
+        if (array_key_exists("viewRenderer", $config)) {
+            this.getRenderer().viewBuilder().setClassName($config["viewRenderer"]);
+            unset($config["viewRenderer"]);
         }
-        if (array_key_exists('viewVars', $config)) {
-            this.getRenderer().viewBuilder().setVars($config['viewVars']);
-            unset($config['viewVars']);
+        if (array_key_exists("viewVars", $config)) {
+            this.getRenderer().viewBuilder().setVars($config["viewVars"]);
+            unset($config["viewVars"]);
         }
 
         this.message.setConfig($config);
@@ -372,8 +372,8 @@ class Email : JsonSerializable, Serializable
 
         $transport = this.getTransport();
         if (!$transport) {
-            $msg = 'Cannot send email, transport was not defined. Did you call transport() or define ' .
-                ' a transport in the set profile?';
+            $msg = "Cannot send email, transport was not defined. Did you call transport() or define " .
+                " a transport in the set profile?";
             throw new BadMethodCallException($msg);
         }
         $contents = $transport.send(this.message);
@@ -442,28 +442,28 @@ class Email : JsonSerializable, Serializable
     /**
      * Log the email message delivery.
      *
-     * @param array<string, string> $contents The content with 'headers' and 'message' keys.
+     * @param array<string, string> $contents The content with "headers" and "message" keys.
      * @return void
      */
     protected function _logDelivery(array $contents): void
     {
-        if (empty(_profile['log'])) {
+        if (empty(_profile["log"])) {
             return;
         }
         $config = [
-            'level': 'debug',
-            'scope': 'email',
+            "level": "debug",
+            "scope": "email",
         ];
-        if (_profile['log'] != true) {
-            if (!is_array(_profile['log'])) {
-                _profile['log'] = ['level': _profile['log']];
+        if (_profile["log"] != true) {
+            if (!is_array(_profile["log"])) {
+                _profile["log"] = ["level": _profile["log"]];
             }
-            $config = _profile['log'] + $config;
+            $config = _profile["log"] + $config;
         }
         Log::write(
-            $config['level'],
-            PHP_EOL . this.flatten($contents['headers']) . PHP_EOL . PHP_EOL . this.flatten($contents['message']),
-            $config['scope']
+            $config["level"],
+            PHP_EOL . this.flatten($contents["headers"]) . PHP_EOL . PHP_EOL . this.flatten($contents["message"]),
+            $config["scope"]
         );
     }
 
@@ -475,15 +475,15 @@ class Email : JsonSerializable, Serializable
      */
     protected function flatten($value): string
     {
-        return is_array($value) ? implode(';', $value) : $value;
+        return is_array($value) ? implode(";", $value) : $value;
     }
 
     /**
      * Static method to fast create an instance of \Cake\Mailer\Email
      *
      * @param array|string|null $to Address to send ({@see \Cake\Mailer\Email::setTo()}).
-     *   If null, will try to use 'to' from transport config
-     * @param string|null $subject String of subject or null to use 'subject' from transport config
+     *   If null, will try to use "to" from transport config
+     * @param string|null $subject String of subject or null to use "subject" from transport config
      * @param array|string|null $message String with message or array with variables to be used in render
      * @param array<string, mixed>|string $config String to use Email delivery profile from app.php or array with configs
      * @param bool $send Send the email or just return the instance pre-configured
@@ -494,11 +494,11 @@ class Email : JsonSerializable, Serializable
         $to = null,
         ?string $subject = null,
         $message = null,
-        $config = 'default',
+        $config = "default",
         bool $send = true
     ) {
-        if (is_array($config) && !isset($config['transport'])) {
-            $config['transport'] = 'default';
+        if (is_array($config) && !isset($config["transport"])) {
+            $config["transport"] = "default";
         }
 
         $instance = new static($config);
@@ -513,8 +513,8 @@ class Email : JsonSerializable, Serializable
             $message = null;
         } elseif ($message == null) {
             $config = $instance.getProfile();
-            if (array_key_exists('message', $config)) {
-                $message = $config['message'];
+            if (array_key_exists("message", $config)) {
+                $message = $config["message"];
             }
         }
 
@@ -552,7 +552,7 @@ class Email : JsonSerializable, Serializable
     function jsonSerialize(): array
     {
         $array = this.message.jsonSerialize();
-        $array['viewConfig'] = this.getRenderer().viewBuilder().jsonSerialize();
+        $array["viewConfig"] = this.getRenderer().viewBuilder().jsonSerialize();
 
         return $array;
     }
@@ -565,9 +565,9 @@ class Email : JsonSerializable, Serializable
      */
     function createFromArray(array $config)
     {
-        if (isset($config['viewConfig'])) {
-            this.getRenderer().viewBuilder().createFromArray($config['viewConfig']);
-            unset($config['viewConfig']);
+        if (isset($config["viewConfig"])) {
+            this.getRenderer().viewBuilder().createFromArray($config["viewConfig"]);
+            unset($config["viewConfig"]);
         }
 
         if (this.message == null) {

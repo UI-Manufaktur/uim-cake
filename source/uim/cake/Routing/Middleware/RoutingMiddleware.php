@@ -44,7 +44,7 @@ class RoutingMiddleware : IMiddleware
      *
      * @var string
      */
-    public const ROUTE_COLLECTION_CACHE_KEY = 'routeCollection';
+    public const ROUTE_COLLECTION_CACHE_KEY = "routeCollection";
 
     /**
      * The application that will have its routing hook invoked.
@@ -71,9 +71,9 @@ class RoutingMiddleware : IMiddleware
     {
         if ($cacheConfig != null) {
             deprecationWarning(
-                'Use of routing cache is deprecated and will be removed in 5.0. ' .
-                'Upgrade to the new `CakeDC/CachedRouting` plugin. ' .
-                'See https://github.com/CakeDC/cakephp-cached-routing'
+                "Use of routing cache is deprecated and will be removed in 5.0. " .
+                "Upgrade to the new `CakeDC/CachedRouting` plugin. " .
+                "See https://github.com/CakeDC/cakephp-cached-routing"
             );
         }
         this.app = $app;
@@ -81,7 +81,7 @@ class RoutingMiddleware : IMiddleware
     }
 
     /**
-     * Trigger the application's routes() hook if the application exists and Router isn't initialized.
+     * Trigger the application"s routes() hook if the application exists and Router isn"t initialized.
      * Uses the routes cache if enabled via configuration param "Router.cache"
      *
      * If the middleware is created without an Application, routes will be
@@ -96,7 +96,7 @@ class RoutingMiddleware : IMiddleware
     }
 
     /**
-     * Check if route cache is enabled and use the configured Cache to 'remember' the route collection
+     * Check if route cache is enabled and use the configured Cache to "remember" the route collection
      *
      * @return \Cake\Routing\RouteCollection
      */
@@ -111,9 +111,9 @@ class RoutingMiddleware : IMiddleware
                 throw $e;
             } catch (Exception $e) {
                 throw new FailedRouteCacheException(
-                    'Unable to cache route collection. Cached routes must be serializable. Check for route-specific
+                    "Unable to cache route collection. Cached routes must be serializable. Check for route-specific
                     middleware or other unserializable settings in your routes. The original exception message can
-                    show what type of object failed to serialize.',
+                    show what type of object failed to serialize.",
                     null,
                     $e
                 );
@@ -130,7 +130,7 @@ class RoutingMiddleware : IMiddleware
      */
     protected function prepareRouteCollection(): RouteCollection
     {
-        $builder = Router::createRouteBuilder('/');
+        $builder = Router::createRouteBuilder("/");
         this.app.routes($builder);
         if (this.app instanceof IPluginApplication) {
             this.app.pluginRoutes($builder);
@@ -154,19 +154,19 @@ class RoutingMiddleware : IMiddleware
         this.loadRoutes();
         try {
             Router::setRequest($request);
-            $params = (array)$request.getAttribute('params', []);
+            $params = (array)$request.getAttribute("params", []);
             $middleware = [];
-            if (empty($params['controller'])) {
+            if (empty($params["controller"])) {
                 $params = Router::parseRequest($request) + $params;
-                if (isset($params['_middleware'])) {
-                    $middleware = $params['_middleware'];
+                if (isset($params["_middleware"])) {
+                    $middleware = $params["_middleware"];
                 }
-                $route = $params['_route'];
-                unset($params['_middleware'], $params['_route']);
+                $route = $params["_route"];
+                unset($params["_middleware"], $params["_route"]);
 
-                $request = $request.withAttribute('route', $route);
+                $request = $request.withAttribute("route", $route);
                 /** @var \Cake\Http\ServerRequest $request */
-                $request = $request.withAttribute('params', $params);
+                $request = $request.withAttribute("params", $params);
                 Router::setRequest($request);
             }
         } catch (RedirectException $e) {

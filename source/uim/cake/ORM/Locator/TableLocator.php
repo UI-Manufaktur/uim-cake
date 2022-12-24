@@ -78,13 +78,13 @@ class TableLocator : AbstractLocator : ILocator
      * Constructor.
      *
      * @param array<string>|null $locations Locations where tables should be looked for.
-     *   If none provided, the default `Model\Table` under your app's namespace is used.
+     *   If none provided, the default `Model\Table` under your app"s namespace is used.
      */
     public this(?array $locations = null)
     {
         if ($locations == null) {
             $locations = [
-                'Model/Table',
+                "Model/Table",
             ];
         }
 
@@ -140,7 +140,7 @@ class TableLocator : AbstractLocator : ILocator
 
         if (isset(this.instances[$alias])) {
             throw new RuntimeException(sprintf(
-                'You cannot configure "%s", it has already been constructed.',
+                "You cannot configure "%s", it has already been constructed.",
                 $alias
             ));
         }
@@ -176,7 +176,7 @@ class TableLocator : AbstractLocator : ILocator
      * ### Options
      *
      * - `className` Define the specific class name to use. If undefined, CakePHP will generate the
-     *   class name based on the alias. For example 'Users' would result in
+     *   class name based on the alias. For example "Users" would result in
      *   `App\Model\Table\UsersTable` being used. If this class does not exist,
      *   then the default `Cake\ORM\Table` class will be used. By setting the `className`
      *   option you can define the specific class to use. The className option supports
@@ -184,7 +184,7 @@ class TableLocator : AbstractLocator : ILocator
      * - `table` Define the table name to use. If undefined, this option will default to the underscored
      *   version of the alias name.
      * - `connection` Inject the specific connection object to use. If this option and `connectionName` are undefined,
-     *   The table class' `defaultConnectionName()` method will be invoked to fetch the connection name.
+     *   The table class" `defaultConnectionName()` method will be invoked to fetch the connection name.
      * - `connectionName` Define the connection name to use. The named connection will be fetched from
      *   {@link \Cake\Datasource\ConnectionManager}.
      *
@@ -209,58 +209,58 @@ class TableLocator : AbstractLocator : ILocator
      */
     protected function createInstance(string $alias, array $options)
     {
-        if (strpos($alias, '\\') == false) {
+        if (strpos($alias, "\\") == false) {
             [, $classAlias] = pluginSplit($alias);
-            $options = ['alias': $classAlias] + $options;
-        } elseif (!isset($options['alias'])) {
-            $options['className'] = $alias;
+            $options = ["alias": $classAlias] + $options;
+        } elseif (!isset($options["alias"])) {
+            $options["className"] = $alias;
         }
 
         if (isset(_config[$alias])) {
             $options += _config[$alias];
         }
 
-        $allowFallbackClass = $options['allowFallbackClass'] ?? this.allowFallbackClass;
+        $allowFallbackClass = $options["allowFallbackClass"] ?? this.allowFallbackClass;
         $className = _getClassName($alias, $options);
         if ($className) {
-            $options['className'] = $className;
+            $options["className"] = $className;
         } elseif ($allowFallbackClass) {
-            if (empty($options['className'])) {
-                $options['className'] = $alias;
+            if (empty($options["className"])) {
+                $options["className"] = $alias;
             }
-            if (!isset($options['table']) && strpos($options['className'], '\\') == false) {
-                [, $table] = pluginSplit($options['className']);
-                $options['table'] = Inflector::underscore($table);
+            if (!isset($options["table"]) && strpos($options["className"], "\\") == false) {
+                [, $table] = pluginSplit($options["className"]);
+                $options["table"] = Inflector::underscore($table);
             }
-            $options['className'] = this.fallbackClassName;
+            $options["className"] = this.fallbackClassName;
         } else {
-            $message = $options['className'] ?? $alias;
-            $message = '`' . $message . '`';
-            if (strpos($message, '\\') == false) {
-                $message = 'for alias ' . $message;
+            $message = $options["className"] ?? $alias;
+            $message = "`" . $message . "`";
+            if (strpos($message, "\\") == false) {
+                $message = "for alias " . $message;
             }
             throw new MissingTableClassException([$message]);
         }
 
-        if (empty($options['connection'])) {
-            if (!empty($options['connectionName'])) {
-                $connectionName = $options['connectionName'];
+        if (empty($options["connection"])) {
+            if (!empty($options["connectionName"])) {
+                $connectionName = $options["connectionName"];
             } else {
                 /** @var \Cake\ORM\Table $className */
-                $className = $options['className'];
+                $className = $options["className"];
                 $connectionName = $className::defaultConnectionName();
             }
-            $options['connection'] = ConnectionManager::get($connectionName);
+            $options["connection"] = ConnectionManager::get($connectionName);
         }
-        if (empty($options['associations'])) {
+        if (empty($options["associations"])) {
             $associations = new AssociationCollection(this);
-            $options['associations'] = $associations;
+            $options["associations"] = $associations;
         }
 
-        $options['registryAlias'] = $alias;
+        $options["registryAlias"] = $alias;
         $instance = _create($options);
 
-        if ($options['className'] == this.fallbackClassName) {
+        if ($options["className"] == this.fallbackClassName) {
             _fallbacked[$alias] = $instance;
         }
 
@@ -276,16 +276,16 @@ class TableLocator : AbstractLocator : ILocator
      */
     protected function _getClassName(string $alias, array $options = []): ?string
     {
-        if (empty($options['className'])) {
-            $options['className'] = $alias;
+        if (empty($options["className"])) {
+            $options["className"] = $alias;
         }
 
-        if (strpos($options['className'], '\\') != false && class_exists($options['className'])) {
-            return $options['className'];
+        if (strpos($options["className"], "\\") != false && class_exists($options["className"])) {
+            return $options["className"];
         }
 
         foreach (this.locations as $location) {
-            $class = App::className($options['className'], $location, 'Table');
+            $class = App::className($options["className"], $location, "Table");
             if ($class != null) {
                 return $class;
             }
@@ -303,7 +303,7 @@ class TableLocator : AbstractLocator : ILocator
     protected function _create(array $options): Table
     {
         /** @var \Cake\ORM\Table */
-        return new $options['className']($options);
+        return new $options["className"]($options);
     }
 
     /**
@@ -362,8 +362,8 @@ class TableLocator : AbstractLocator : ILocator
      */
     function addLocation(string $location)
     {
-        $location = str_replace('\\', '/', $location);
-        this.locations[] = trim($location, '/');
+        $location = str_replace("\\", "/", $location);
+        this.locations[] = trim($location, "/");
 
         return this;
     }

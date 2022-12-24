@@ -49,12 +49,12 @@ abstract class AbstractLocator : ILocator
     function get(string $alias, array $options = [])
     {
         $storeOptions = $options;
-        unset($storeOptions['allowFallbackClass']);
+        unset($storeOptions["allowFallbackClass"]);
 
         if (isset(this.instances[$alias])) {
             if (!empty($storeOptions) && isset(this.options[$alias]) && this.options[$alias] != $storeOptions) {
                 throw new RuntimeException(sprintf(
-                    'You cannot configure "%s", it already exists in the registry.',
+                    "You cannot configure "%s", it already exists in the registry.",
                     $alias
                 ));
             }

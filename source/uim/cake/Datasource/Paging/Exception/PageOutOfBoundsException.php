@@ -23,9 +23,9 @@ class PageOutOfBoundsException : CakeException
     /**
      * @inheritDoc
      */
-    protected $_messageTemplate = 'Page number %s could not be found.';
+    protected $_messageTemplate = "Page number %s could not be found.";
 }
 
 // phpcs:disable
-class_exists('Cake\Datasource\Exception\PageOutOfBoundsException');
+class_exists("Cake\Datasource\Exception\PageOutOfBoundsException");
 // phpcs:enable

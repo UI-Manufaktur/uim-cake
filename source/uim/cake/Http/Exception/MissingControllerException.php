@@ -29,12 +29,12 @@ class MissingControllerException : CakeException
     /**
      * @inheritDoc
      */
-    protected $_messageTemplate = 'Controller class %s could not be found.';
+    protected $_messageTemplate = "Controller class %s could not be found.";
 }
 
 // phpcs:disable
 class_alias(
-    'Cake\Http\Exception\MissingControllerException',
-    'Cake\Routing\Exception\MissingControllerException'
+    "Cake\Http\Exception\MissingControllerException",
+    "Cake\Routing\Exception\MissingControllerException"
 );
 // phpcs:enable

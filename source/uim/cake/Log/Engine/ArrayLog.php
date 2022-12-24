@@ -32,11 +32,11 @@ class ArrayLog : BaseLog
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'levels': [],
-        'scopes': [],
-        'formatter': [
-            'className': DefaultFormatter::class,
-            'includeDate': false,
+        "levels": [],
+        "scopes": [],
+        "formatter": [
+            "className": DefaultFormatter::class,
+            "includeDate": false,
         ],
     ];
 

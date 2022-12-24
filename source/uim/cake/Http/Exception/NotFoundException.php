@@ -28,14 +28,14 @@ class NotFoundException : HttpException
     /**
      * Constructor
      *
-     * @param string|null $message If no message is given 'Not Found' will be the message
+     * @param string|null $message If no message is given "Not Found" will be the message
      * @param int|null $code Status code, defaults to 404
      * @param \Throwable|null $previous The previous exception.
      */
     public this(?string $message = null, ?int $code = null, ?Throwable $previous = null)
     {
         if (empty($message)) {
-            $message = 'Not Found';
+            $message = "Not Found";
         }
         parent::__construct($message, $code, $previous);
     }

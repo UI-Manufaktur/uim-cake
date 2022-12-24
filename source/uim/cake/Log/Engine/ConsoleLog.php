@@ -30,13 +30,13 @@ class ConsoleLog : BaseLog
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'stream': 'php://stderr',
-        'levels': null,
-        'scopes': [],
-        'outputAs': null,
-        'formatter': [
-            'className': DefaultFormatter::class,
-            'includeTags': true,
+        "stream": "php://stderr",
+        "levels": null,
+        "scopes": [],
+        "outputAs": null,
+        "formatter": [
+            "className": DefaultFormatter::class,
+            "includeTags": true,
         ],
     ];
 
@@ -66,21 +66,21 @@ class ConsoleLog : BaseLog
         parent::__construct($config);
 
         $config = _config;
-        if ($config['stream'] instanceof ConsoleOutput) {
-            _output = $config['stream'];
-        } elseif (is_string($config['stream'])) {
-            _output = new ConsoleOutput($config['stream']);
+        if ($config["stream"] instanceof ConsoleOutput) {
+            _output = $config["stream"];
+        } elseif (is_string($config["stream"])) {
+            _output = new ConsoleOutput($config["stream"]);
         } else {
-            throw new InvalidArgumentException('`stream` not a ConsoleOutput nor string');
+            throw new InvalidArgumentException("`stream` not a ConsoleOutput nor string");
         }
 
-        if (isset($config['outputAs'])) {
-            _output.setOutputAs($config['outputAs']);
+        if (isset($config["outputAs"])) {
+            _output.setOutputAs($config["outputAs"]);
         }
 
-        if (isset(_config['dateFormat'])) {
-            deprecationWarning('`dateFormat` option should now be set in the formatter options.', 0);
-            this.formatter.setConfig('dateFormat', _config['dateFormat']);
+        if (isset(_config["dateFormat"])) {
+            deprecationWarning("`dateFormat` option should now be set in the formatter options.", 0);
+            this.formatter.setConfig("dateFormat", _config["dateFormat"]);
         }
     }
 

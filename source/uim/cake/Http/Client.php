@@ -37,13 +37,13 @@ use Psr\Http\Message\IResponse;
  *
  * ### Scoped clients
  *
- * If you're doing multiple requests to the same hostname it's often convenient
+ * If you"re doing multiple requests to the same hostname it"s often convenient
  * to use the constructor arguments to create a scoped client. This allows you
  * to keep your code DRY and not repeat hostnames, authentication, and other options.
  *
  * ### Doing requests
  *
- * Once you've created an instance of Client you can do requests
+ * Once you"ve created an instance of Client you can do requests
  * using several methods. Each corresponds to a different HTTP method.
  *
  * - get()
@@ -57,11 +57,11 @@ use Psr\Http\Message\IResponse;
  * Client will maintain cookies from the responses done with
  * a client instance. These cookies will be automatically added
  * to future requests to matching hosts. Cookies will respect the
- * `Expires`, `Path` and `Domain` attributes. You can get the client's
+ * `Expires`, `Path` and `Domain` attributes. You can get the client"s
  * CookieCollection using cookies()
  *
- * You can use the 'cookieJar' constructor option to provide a custom
- * cookie jar instance you've restored from cache/disk. By default,
+ * You can use the "cookieJar" constructor option to provide a custom
+ * cookie jar instance you"ve restored from cache/disk. By default,
  * an empty instance of {@link \Cake\Http\Client\CookieCollection} will be created.
  *
  * ### Sending request bodies
@@ -75,7 +75,7 @@ use Psr\Http\Message\IResponse;
  * set the Content-Type for the request:
  *
  * ```
- * $http.get('/users', [], ['type': 'json']);
+ * $http.get("/users", [], ["type": "json"]);
  * ```
  *
  * The `type` option sets both the `Content-Type` and `Accept` header, to
@@ -110,25 +110,25 @@ class Client : ClientInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'auth': null,
-        'adapter': null,
-        'host': null,
-        'port': null,
-        'scheme': 'http',
-        'basePath': '',
-        'timeout': 30,
-        'ssl_verify_peer': true,
-        'ssl_verify_peer_name': true,
-        'ssl_verify_depth': 5,
-        'ssl_verify_host': true,
-        'redirect': false,
-        'protocolVersion': '1.1',
+        "auth": null,
+        "adapter": null,
+        "host": null,
+        "port": null,
+        "scheme": "http",
+        "basePath": "",
+        "timeout": 30,
+        "ssl_verify_peer": true,
+        "ssl_verify_peer_name": true,
+        "ssl_verify_depth": 5,
+        "ssl_verify_host": true,
+        "redirect": false,
+        "protocolVersion": "1.1",
     ];
 
     /**
      * List of cookies from responses made with this client.
      *
-     * Cookies are indexed by the cookie's domain or
+     * Cookies are indexed by the cookie"s domain or
      * request host name.
      *
      * @var \Cake\Http\Cookie\CookieCollection
@@ -186,15 +186,15 @@ class Client : ClientInterface
     {
         this.setConfig($config);
 
-        $adapter = _config['adapter'];
+        $adapter = _config["adapter"];
         if ($adapter == null) {
             $adapter = Curl::class;
 
-            if (!extension_loaded('curl')) {
+            if (!extension_loaded("curl")) {
                 $adapter = Stream::class;
             }
         } else {
-            this.setConfig('adapter', null);
+            this.setConfig("adapter", null);
         }
 
         if (is_string($adapter)) {
@@ -202,13 +202,13 @@ class Client : ClientInterface
         }
 
         if (!$adapter instanceof AdapterInterface) {
-            throw new InvalidArgumentException('Adapter must be an instance of Cake\Http\Client\AdapterInterface');
+            throw new InvalidArgumentException("Adapter must be an instance of Cake\Http\Client\AdapterInterface");
         }
         _adapter = $adapter;
 
-        if (!empty(_config['cookieJar'])) {
-            _cookies = _config['cookieJar'];
-            this.setConfig('cookieJar', null);
+        if (!empty(_config["cookieJar"])) {
+            _cookies = _config["cookieJar"];
+            this.setConfig("cookieJar", null);
         } else {
             _cookies = new CookieCollection();
         }
@@ -229,18 +229,18 @@ class Client : ClientInterface
         $parts = parse_url($url);
 
         if ($parts == false) {
-            throw new InvalidArgumentException('String ' . $url . ' did not parse');
+            throw new InvalidArgumentException("String " . $url . " did not parse");
         }
 
-        $config = array_intersect_key($parts, ['scheme': '', 'port': '', 'host': '', 'path': '']);
+        $config = array_intersect_key($parts, ["scheme": "", "port": "", "host": "", "path": ""]);
 
-        if (empty($config['scheme']) || empty($config['host'])) {
-            throw new InvalidArgumentException('The URL was parsed but did not contain a scheme or host');
+        if (empty($config["scheme"]) || empty($config["host"])) {
+            throw new InvalidArgumentException("The URL was parsed but did not contain a scheme or host");
         }
 
-        if (isset($config['path'])) {
-            $config['basePath'] = $config['path'];
-            unset($config['path']);
+        if (isset($config["path"])) {
+            $config["basePath"] = $config["path"];
+            unset($config["path"]);
         }
 
         return new static($config);
@@ -266,7 +266,7 @@ class Client : ClientInterface
     function addCookie(CookieInterface $cookie)
     {
         if (!$cookie.getDomain() || !$cookie.getPath()) {
-            throw new InvalidArgumentException('Cookie must have a domain and a path set.');
+            throw new InvalidArgumentException("Cookie must have a domain and a path set.");
         }
         _cookies = _cookies.add($cookie);
 
@@ -290,9 +290,9 @@ class Client : ClientInterface
     {
         $options = _mergeOptions($options);
         $body = null;
-        if (is_array($data) && isset($data['_content'])) {
-            $body = $data['_content'];
-            unset($data['_content']);
+        if (is_array($data) && isset($data["_content"])) {
+            $body = $data["_content"];
+            unset($data["_content"]);
         }
         $url = this.buildUrl($url, $data, $options);
 
@@ -413,7 +413,7 @@ class Client : ClientInterface
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, $data, $options);
 
-        return _doRequest(Request::METHOD_HEAD, $url, '', $options);
+        return _doRequest(Request::METHOD_HEAD, $url, "", $options);
     }
 
     /**
@@ -473,9 +473,9 @@ class Client : ClientInterface
     function send(RequestInterface $request, array $options = []): Response
     {
         $redirects = 0;
-        if (isset($options['redirect'])) {
-            $redirects = (int)$options['redirect'];
-            unset($options['redirect']);
+        if (isset($options["redirect"])) {
+            $redirects = (int)$options["redirect"];
+            unset($options["redirect"]);
         }
 
         do {
@@ -485,12 +485,12 @@ class Client : ClientInterface
             if ($handleRedirect) {
                 $url = $request.getUri();
 
-                $location = $response.getHeaderLine('Location');
+                $location = $response.getHeaderLine("Location");
                 $locationUrl = this.buildUrl($location, [], [
-                    'host': $url.getHost(),
-                    'port': $url.getPort(),
-                    'scheme': $url.getScheme(),
-                    'protocolRelative': true,
+                    "host": $url.getHost(),
+                    "port": $url.getPort(),
+                    "scheme": $url.getScheme(),
+                    "protocolRelative": true,
                 ]);
                 $request = $request.withUri(new Uri($locationUrl));
                 $request = _cookies.addToRequest($request, []);
@@ -575,39 +575,39 @@ class Client : ClientInterface
             return $url;
         }
         $defaults = [
-            'host': null,
-            'port': null,
-            'scheme': 'http',
-            'basePath': '',
-            'protocolRelative': false,
+            "host": null,
+            "port": null,
+            "scheme": "http",
+            "basePath": "",
+            "protocolRelative": false,
         ];
         $options += $defaults;
 
         if ($query) {
-            $q = strpos($url, '?') == false ? '?' : '&';
+            $q = strpos($url, "?") == false ? "?" : "&";
             $url .= $q;
-            $url .= is_string($query) ? $query : http_build_query($query, '', '&', PHP_QUERY_RFC3986);
+            $url .= is_string($query) ? $query : http_build_query($query, "", "&", PHP_QUERY_RFC3986);
         }
 
-        if ($options['protocolRelative'] && preg_match('#^//#', $url)) {
-            $url = $options['scheme'] . ':' . $url;
+        if ($options["protocolRelative"] && preg_match("#^//#", $url)) {
+            $url = $options["scheme"] . ":" . $url;
         }
-        if (preg_match('#^https?://#', $url)) {
+        if (preg_match("#^https?://#", $url)) {
             return $url;
         }
 
         $defaultPorts = [
-            'http': 80,
-            'https': 443,
+            "http": 80,
+            "https": 443,
         ];
-        $out = $options['scheme'] . '://' . $options['host'];
-        if ($options['port'] && (int)$options['port'] != $defaultPorts[$options['scheme']]) {
-            $out .= ':' . $options['port'];
+        $out = $options["scheme"] . "://" . $options["host"];
+        if ($options["port"] && (int)$options["port"] != $defaultPorts[$options["scheme"]]) {
+            $out .= ":" . $options["port"];
         }
-        if (!empty($options['basePath'])) {
-            $out .= '/' . trim($options['basePath'], '/');
+        if (!empty($options["basePath"])) {
+            $out .= "/" . trim($options["basePath"], "/");
         }
-        $out .= '/' . ltrim($url, '/');
+        $out .= "/" . ltrim($url, "/");
 
         return $out;
     }
@@ -624,23 +624,23 @@ class Client : ClientInterface
     protected function _createRequest(string $method, string $url, $data, $options): Request
     {
         /** @var array<non-empty-string, non-empty-string> $headers */
-        $headers = (array)($options['headers'] ?? []);
-        if (isset($options['type'])) {
-            $headers = array_merge($headers, _typeHeaders($options['type']));
+        $headers = (array)($options["headers"] ?? []);
+        if (isset($options["type"])) {
+            $headers = array_merge($headers, _typeHeaders($options["type"]));
         }
-        if (is_string($data) && !isset($headers['Content-Type']) && !isset($headers['content-type'])) {
-            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        if (is_string($data) && !isset($headers["Content-Type"]) && !isset($headers["content-type"])) {
+            $headers["Content-Type"] = "application/x-www-form-urlencoded";
         }
 
         $request = new Request($url, $method, $headers, $data);
-        $request = $request.withProtocolVersion(this.getConfig('protocolVersion'));
-        $cookies = $options['cookies'] ?? [];
+        $request = $request.withProtocolVersion(this.getConfig("protocolVersion"));
+        $cookies = $options["cookies"] ?? [];
         /** @var \Cake\Http\Client\Request $request */
         $request = _cookies.addToRequest($request, $cookies);
-        if (isset($options['auth'])) {
+        if (isset($options["auth"])) {
             $request = _addAuthentication($request, $options);
         }
-        if (isset($options['proxy'])) {
+        if (isset($options["proxy"])) {
             $request = _addProxy($request, $options);
         }
 
@@ -659,23 +659,23 @@ class Client : ClientInterface
      */
     protected function _typeHeaders(string $type): array
     {
-        if (strpos($type, '/') != false) {
+        if (strpos($type, "/") != false) {
             return [
-                'Accept': $type,
-                'Content-Type': $type,
+                "Accept": $type,
+                "Content-Type": $type,
             ];
         }
         $typeMap = [
-            'json': 'application/json',
-            'xml': 'application/xml',
+            "json": "application/json",
+            "xml": "application/xml",
         ];
         if (!isset($typeMap[$type])) {
-            throw new CakeException("Unknown type alias '$type'.");
+            throw new CakeException("Unknown type alias "$type".");
         }
 
         return [
-            'Accept': $typeMap[$type],
-            'Content-Type': $typeMap[$type],
+            "Accept": $typeMap[$type],
+            "Content-Type": $typeMap[$type],
         ];
     }
 
@@ -686,16 +686,16 @@ class Client : ClientInterface
      * and use its methods to add headers.
      *
      * @param \Cake\Http\Client\Request $request The request to modify.
-     * @param array<string, mixed> $options Array of options containing the 'auth' key.
+     * @param array<string, mixed> $options Array of options containing the "auth" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */
     protected function _addAuthentication(Request $request, array $options): Request
     {
-        $auth = $options['auth'];
+        $auth = $options["auth"];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, $options);
 
-        return $adapter.authentication($request, $options['auth']);
+        return $adapter.authentication($request, $options["auth"]);
     }
 
     /**
@@ -705,16 +705,16 @@ class Client : ClientInterface
      * and use its methods to add headers.
      *
      * @param \Cake\Http\Client\Request $request The request to modify.
-     * @param array<string, mixed> $options Array of options containing the 'proxy' key.
+     * @param array<string, mixed> $options Array of options containing the "proxy" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */
     protected function _addProxy(Request $request, array $options): Request
     {
-        $auth = $options['proxy'];
+        $auth = $options["proxy"];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, $options);
 
-        return $adapter.proxyAuthentication($request, $options['proxy']);
+        return $adapter.proxyAuthentication($request, $options["proxy"]);
     }
 
     /**
@@ -730,14 +730,14 @@ class Client : ClientInterface
      */
     protected function _createAuth(array $auth, array $options)
     {
-        if (empty($auth['type'])) {
-            $auth['type'] = 'basic';
+        if (empty($auth["type"])) {
+            $auth["type"] = "basic";
         }
-        $name = ucfirst($auth['type']);
-        $class = App::className($name, 'Http/Client/Auth');
+        $name = ucfirst($auth["type"]);
+        $class = App::className($name, "Http/Client/Auth");
         if (!$class) {
             throw new CakeException(
-                sprintf('Invalid authentication type %s', $name)
+                sprintf("Invalid authentication type %s", $name)
             );
         }
 

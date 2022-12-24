@@ -42,7 +42,7 @@ class SimplePaginator : NumericPaginator
 
 // phpcs:disable
 class_alias(
-    'Cake\Datasource\Paging\SimplePaginator',
-    'Cake\Datasource\SimplePaginator'
+    "Cake\Datasource\Paging\SimplePaginator",
+    "Cake\Datasource\SimplePaginator"
 );
 // phpcs:enable

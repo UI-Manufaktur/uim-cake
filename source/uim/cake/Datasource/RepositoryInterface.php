@@ -67,7 +67,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
      * @return \Cake\Datasource\IQuery
      */
-    function find(string $type = 'all', array $options = []);
+    function find(string $type = "all", array $options = []);
 
     /**
      * Returns a single record after finding it by its primary key, if no record is
@@ -79,7 +79,7 @@ interface RepositoryInterface
      * $id = 10;
      * $article = $articles.get($id);
      *
-     * $article = $articles.get($id, ['contain': ['Comments]]);
+     * $article = $articles.get($id, ["contain": ["Comments]]);
      * ```
      *
      * @param mixed $primaryKey primary key value to find
@@ -118,7 +118,7 @@ interface RepositoryInterface
      * This method will *not* trigger beforeDelete/afterDelete events. If you
      * need those first load a collection of records and delete them.
      *
-     * This method will *not* execute on associations' `cascade` attribute. You should
+     * This method will *not* execute on associations" `cascade` attribute. You should
      * use database foreign keys + ON CASCADE rules if you need cascading deletes combined
      * with this method.
      *
@@ -153,7 +153,7 @@ interface RepositoryInterface
      * Delete a single entity.
      *
      * Deletes an entity and possibly related associations from the database
-     * based on the 'dependent' option used when defining the association.
+     * based on the "dependent" option used when defining the association.
      *
      * @param \Cake\Datasource\EntityInterface $entity The entity to remove.
      * @param \ArrayAccess|array $options The options for the delete.

@@ -39,9 +39,9 @@ class TransportFactory
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        'debug': Transport\DebugTransport::class,
-        'mail': Transport\MailTransport::class,
-        'smtp': Transport\SmtpTransport::class,
+        "debug": Transport\DebugTransport::class,
+        "mail": Transport\MailTransport::class,
+        "smtp": Transport\SmtpTransport::class,
     ];
 
     /**
@@ -82,13 +82,13 @@ class TransportFactory
     {
         if (!isset(static::$_config[$name])) {
             throw new InvalidArgumentException(
-                sprintf('The "%s" transport configuration does not exist', $name)
+                sprintf("The "%s" transport configuration does not exist", $name)
             );
         }
 
-        if (is_array(static::$_config[$name]) && empty(static::$_config[$name]['className'])) {
+        if (is_array(static::$_config[$name]) && empty(static::$_config[$name]["className"])) {
             throw new InvalidArgumentException(
-                sprintf('Transport config "%s" is invalid, the required `className` option is missing', $name)
+                sprintf("Transport config "%s" is invalid, the required `className` option is missing", $name)
             );
         }
 

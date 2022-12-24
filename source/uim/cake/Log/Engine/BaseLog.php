@@ -37,9 +37,9 @@ abstract class BaseLog : AbstractLogger
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'levels': [],
-        'scopes': [],
-        'formatter': DefaultFormatter::class,
+        "levels": [],
+        "scopes": [],
+        "formatter": DefaultFormatter::class,
     ];
 
     /**
@@ -56,22 +56,22 @@ abstract class BaseLog : AbstractLogger
     {
         this.setConfig($config);
 
-        if (!is_array(_config['scopes']) && _config['scopes'] != false) {
-            _config['scopes'] = (array)_config['scopes'];
+        if (!is_array(_config["scopes"]) && _config["scopes"] != false) {
+            _config["scopes"] = (array)_config["scopes"];
         }
 
-        if (!is_array(_config['levels'])) {
-            _config['levels'] = (array)_config['levels'];
+        if (!is_array(_config["levels"])) {
+            _config["levels"] = (array)_config["levels"];
         }
 
-        if (!empty(_config['types']) && empty(_config['levels'])) {
-            _config['levels'] = (array)_config['types'];
+        if (!empty(_config["types"]) && empty(_config["levels"])) {
+            _config["levels"] = (array)_config["types"];
         }
 
-        $formatter = _config['formatter'] ?? DefaultFormatter::class;
+        $formatter = _config["formatter"] ?? DefaultFormatter::class;
         if (!is_object($formatter)) {
             if (is_array($formatter)) {
-                $class = $formatter['className'];
+                $class = $formatter["className"];
                 $options = $formatter;
             } else {
                 $class = $formatter;
@@ -83,7 +83,7 @@ abstract class BaseLog : AbstractLogger
 
         if (!$formatter instanceof AbstractFormatter) {
             throw new InvalidArgumentException(sprintf(
-                'Formatter must extend `%s`, got `%s` instead',
+                "Formatter must extend `%s`, got `%s` instead",
                 AbstractFormatter::class,
                 get_class($formatter)
             ));
@@ -98,7 +98,7 @@ abstract class BaseLog : AbstractLogger
      */
     function levels(): array
     {
-        return _config['levels'];
+        return _config["levels"];
     }
 
     /**
@@ -108,7 +108,7 @@ abstract class BaseLog : AbstractLogger
      */
     function scopes()
     {
-        return _config['scopes'];
+        return _config["scopes"];
     }
 
     /**
@@ -136,12 +136,12 @@ abstract class BaseLog : AbstractLogger
      */
     protected function interpolate(string $message, array $context = []): string
     {
-        if (strpos($message, '{') == false && strpos($message, '}') == false) {
+        if (strpos($message, "{") == false && strpos($message, "}") == false) {
             return $message;
         }
 
         preg_match_all(
-            '/(?<!' . preg_quote('\\', '/') . ')\{([a-z0-9-_]+)\}/i',
+            "/(?<!" . preg_quote("\\", "/") . ")\{([a-z0-9-_]+)\}/i",
             $message,
             $matches
         );
@@ -156,53 +156,53 @@ abstract class BaseLog : AbstractLogger
             $value = $context[$key];
 
             if (is_scalar($value)) {
-                $replacements['{' . $key . '}'] = (string)$value;
+                $replacements["{" . $key . "}"] = (string)$value;
                 continue;
             }
 
             if (is_array($value)) {
-                $replacements['{' . $key . '}'] = json_encode($value, JSON_UNESCAPED_UNICODE);
+                $replacements["{" . $key . "}"] = json_encode($value, JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if ($value instanceof JsonSerializable) {
-                $replacements['{' . $key . '}'] = json_encode($value, JSON_UNESCAPED_UNICODE);
+                $replacements["{" . $key . "}"] = json_encode($value, JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if ($value instanceof ArrayObject) {
-                $replacements['{' . $key . '}'] = json_encode($value.getArrayCopy(), JSON_UNESCAPED_UNICODE);
+                $replacements["{" . $key . "}"] = json_encode($value.getArrayCopy(), JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if ($value instanceof Serializable) {
-                $replacements['{' . $key . '}'] = $value.serialize();
+                $replacements["{" . $key . "}"] = $value.serialize();
                 continue;
             }
 
             if (is_object($value)) {
-                if (method_exists($value, 'toArray')) {
-                    $replacements['{' . $key . '}'] = json_encode($value.toArray(), JSON_UNESCAPED_UNICODE);
+                if (method_exists($value, "toArray")) {
+                    $replacements["{" . $key . "}"] = json_encode($value.toArray(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
 
-                if (method_exists($value, '__serialize')) {
-                    $replacements['{' . $key . '}'] = serialize($value);
+                if (method_exists($value, "__serialize")) {
+                    $replacements["{" . $key . "}"] = serialize($value);
                     continue;
                 }
 
-                if (method_exists($value, '__toString')) {
-                    $replacements['{' . $key . '}'] = (string)$value;
+                if (method_exists($value, "__toString")) {
+                    $replacements["{" . $key . "}"] = (string)$value;
                     continue;
                 }
 
-                if (method_exists($value, '__debugInfo')) {
-                    $replacements['{' . $key . '}'] = json_encode($value.__debugInfo(), JSON_UNESCAPED_UNICODE);
+                if (method_exists($value, "__debugInfo")) {
+                    $replacements["{" . $key . "}"] = json_encode($value.__debugInfo(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
             }
 
-            $replacements['{' . $key . '}'] = sprintf('[unhandled value of type %s]', getTypeName($value));
+            $replacements["{" . $key . "}"] = sprintf("[unhandled value of type %s]", getTypeName($value));
         }
 
         /** @psalm-suppress InvalidArgument */

@@ -38,11 +38,11 @@ class Socket
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'persistent': false,
-        'host': 'localhost',
-        'protocol': 'tcp',
-        'port': 80,
-        'timeout': 30,
+        "persistent": false,
+        "host": "localhost",
+        "protocol": "tcp",
+        "port": 80,
+        "timeout": 30,
     ];
 
     /**
@@ -79,16 +79,16 @@ class Socket
      * @var array<string, int>
      */
     protected $_encryptMethods = [
-        'sslv23_client': STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
-        'tls_client': STREAM_CRYPTO_METHOD_TLS_CLIENT,
-        'tlsv10_client': STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT,
-        'tlsv11_client': STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT,
-        'tlsv12_client': STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT,
-        'sslv23_server': STREAM_CRYPTO_METHOD_SSLv23_SERVER,
-        'tls_server': STREAM_CRYPTO_METHOD_TLS_SERVER,
-        'tlsv10_server': STREAM_CRYPTO_METHOD_TLSv1_0_SERVER,
-        'tlsv11_server': STREAM_CRYPTO_METHOD_TLSv1_1_SERVER,
-        'tlsv12_server': STREAM_CRYPTO_METHOD_TLSv1_2_SERVER,
+        "sslv23_client": STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
+        "tls_client": STREAM_CRYPTO_METHOD_TLS_CLIENT,
+        "tlsv10_client": STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT,
+        "tlsv11_client": STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT,
+        "tlsv12_client": STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT,
+        "sslv23_server": STREAM_CRYPTO_METHOD_SSLv23_SERVER,
+        "tls_server": STREAM_CRYPTO_METHOD_TLS_SERVER,
+        "tlsv10_server": STREAM_CRYPTO_METHOD_TLSv1_0_SERVER,
+        "tlsv11_server": STREAM_CRYPTO_METHOD_TLSv1_1_SERVER,
+        "tlsv12_server": STREAM_CRYPTO_METHOD_TLSv1_2_SERVER,
     ];
 
     /**
@@ -122,42 +122,42 @@ class Socket
             this.disconnect();
         }
 
-        $hasProtocol = strpos(_config['host'], '://') != false;
+        $hasProtocol = strpos(_config["host"], "://") != false;
         if ($hasProtocol) {
-            [_config['protocol'], _config['host']] = explode('://', _config['host']);
+            [_config["protocol"], _config["host"]] = explode("://", _config["host"]);
         }
         $scheme = null;
-        if (!empty(_config['protocol'])) {
-            $scheme = _config['protocol'] . '://';
+        if (!empty(_config["protocol"])) {
+            $scheme = _config["protocol"] . "://";
         }
 
-        _setSslContext(_config['host']);
-        if (!empty(_config['context'])) {
-            $context = stream_context_create(_config['context']);
+        _setSslContext(_config["host"]);
+        if (!empty(_config["context"])) {
+            $context = stream_context_create(_config["context"]);
         } else {
             $context = stream_context_create();
         }
 
         $connectAs = STREAM_CLIENT_CONNECT;
-        if (_config['persistent']) {
+        if (_config["persistent"]) {
             $connectAs |= STREAM_CLIENT_PERSISTENT;
         }
 
         /** @psalm-suppress InvalidArgument */
-        set_error_handler([this, '_connectionErrorHandler']);
-        $remoteSocketTarget = $scheme . _config['host'];
-        $port = (int)_config['port'];
+        set_error_handler([this, "_connectionErrorHandler"]);
+        $remoteSocketTarget = $scheme . _config["host"];
+        $port = (int)_config["port"];
         if ($port > 0) {
-            $remoteSocketTarget .= ':' . $port;
+            $remoteSocketTarget .= ":" . $port;
         }
 
         $errNum = 0;
-        $errStr = '';
+        $errStr = "";
         this.connection = _getStreamSocketClient(
             $remoteSocketTarget,
             $errNum,
             $errStr,
-            (int)_config['timeout'],
+            (int)_config["timeout"],
             $connectAs,
             $context
         );
@@ -176,7 +176,7 @@ class Socket
         this.connected = is_resource(this.connection);
         if (this.connected) {
             /** @psalm-suppress PossiblyNullArgument */
-            stream_set_timeout(this.connection, (int)_config['timeout']);
+            stream_set_timeout(this.connection, (int)_config["timeout"]);
         }
 
         return this.connected;
@@ -230,28 +230,28 @@ class Socket
     protected function _setSslContext(string $host): void
     {
         foreach (_config as $key: $value) {
-            if (substr($key, 0, 4) != 'ssl_') {
+            if (substr($key, 0, 4) != "ssl_") {
                 continue;
             }
             $contextKey = substr($key, 4);
-            if (empty(_config['context']['ssl'][$contextKey])) {
-                _config['context']['ssl'][$contextKey] = $value;
+            if (empty(_config["context"]["ssl"][$contextKey])) {
+                _config["context"]["ssl"][$contextKey] = $value;
             }
             unset(_config[$key]);
         }
-        if (!isset(_config['context']['ssl']['SNI_enabled'])) {
-            _config['context']['ssl']['SNI_enabled'] = true;
+        if (!isset(_config["context"]["ssl"]["SNI_enabled"])) {
+            _config["context"]["ssl"]["SNI_enabled"] = true;
         }
-        if (empty(_config['context']['ssl']['peer_name'])) {
-            _config['context']['ssl']['peer_name'] = $host;
+        if (empty(_config["context"]["ssl"]["peer_name"])) {
+            _config["context"]["ssl"]["peer_name"] = $host;
         }
-        if (empty(_config['context']['ssl']['cafile'])) {
-            _config['context']['ssl']['cafile'] = CaBundle::getBundledCaBundlePath();
+        if (empty(_config["context"]["ssl"]["cafile"])) {
+            _config["context"]["ssl"]["cafile"] = CaBundle::getBundledCaBundlePath();
         }
-        if (!empty(_config['context']['ssl']['verify_host'])) {
-            _config['context']['ssl']['CN_match'] = $host;
+        if (!empty(_config["context"]["ssl"]["verify_host"])) {
+            _config["context"]["ssl"]["CN_match"] = $host;
         }
-        unset(_config['context']['ssl']['verify_host']);
+        unset(_config["context"]["ssl"]["verify_host"]);
     }
 
     /**
@@ -290,8 +290,8 @@ class Socket
      */
     function host(): string
     {
-        if (Validation::ip(_config['host'])) {
-            return gethostbyaddr(_config['host']);
+        if (Validation::ip(_config["host"])) {
+            return gethostbyaddr(_config["host"]);
         }
 
         return gethostbyaddr(this.address());
@@ -304,11 +304,11 @@ class Socket
      */
     function address(): string
     {
-        if (Validation::ip(_config['host'])) {
-            return _config['host'];
+        if (Validation::ip(_config["host"])) {
+            return _config["host"];
         }
 
-        return gethostbyname(_config['host']);
+        return gethostbyname(_config["host"]);
     }
 
     /**
@@ -318,11 +318,11 @@ class Socket
      */
     function addresses(): array
     {
-        if (Validation::ip(_config['host'])) {
-            return [_config['host']];
+        if (Validation::ip(_config["host"])) {
+            return [_config["host"]];
         }
 
-        return gethostbynamel(_config['host']);
+        return gethostbynamel(_config["host"]);
     }
 
     /**
@@ -333,7 +333,7 @@ class Socket
     function lastError(): ?string
     {
         if (!empty(this.lastError)) {
-            return this.lastError['num'] . ': ' . this.lastError['str'];
+            return this.lastError["num"] . ": " . this.lastError["str"];
         }
 
         return null;
@@ -348,7 +348,7 @@ class Socket
      */
     function setLastError(?int $errNum, string $errStr): void
     {
-        this.lastError = ['num': $errNum, 'str': $errStr];
+        this.lastError = ["num": $errNum, "str": $errStr];
     }
 
     /**
@@ -393,8 +393,8 @@ class Socket
         if (!feof(this.connection)) {
             $buffer = fread(this.connection, $length);
             $info = stream_get_meta_data(this.connection);
-            if ($info['timed_out']) {
-                this.setLastError(E_WARNING, 'Connection timed out');
+            if ($info["timed_out"]) {
+                this.setLastError(E_WARNING, "Connection timed out");
 
                 return null;
             }
@@ -436,7 +436,7 @@ class Socket
     }
 
     /**
-     * Resets the state of this Socket instance to it's initial state (before Object::__construct got executed)
+     * Resets the state of this Socket instance to it"s initial state (before Object::__construct got executed)
      *
      * @param array|null $state Array with key and values to reset
      * @return void
@@ -459,20 +459,20 @@ class Socket
     /**
      * Encrypts current stream socket, using one of the defined encryption methods
      *
-     * @param string $type can be one of 'ssl2', 'ssl3', 'ssl23' or 'tls'
-     * @param string $clientOrServer can be one of 'client', 'server'. Default is 'client'
+     * @param string $type can be one of "ssl2", "ssl3", "ssl23" or "tls"
+     * @param string $clientOrServer can be one of "client", "server". Default is "client"
      * @param bool $enable enable or disable encryption. Default is true (enable)
      * @return void
      * @throws \InvalidArgumentException When an invalid encryption scheme is chosen.
      * @throws \Cake\Network\Exception\SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
-    function enableCrypto(string $type, string $clientOrServer = 'client', bool $enable = true): void
+    function enableCrypto(string $type, string $clientOrServer = "client", bool $enable = true): void
     {
-        if (!array_key_exists($type . '_' . $clientOrServer, _encryptMethods)) {
-            throw new InvalidArgumentException('Invalid encryption scheme chosen');
+        if (!array_key_exists($type . "_" . $clientOrServer, _encryptMethods)) {
+            throw new InvalidArgumentException("Invalid encryption scheme chosen");
         }
-        $method = _encryptMethods[$type . '_' . $clientOrServer];
+        $method = _encryptMethods[$type . "_" . $clientOrServer];
 
         if ($method == STREAM_CRYPTO_METHOD_TLS_CLIENT) {
             $method |= STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
@@ -483,7 +483,7 @@ class Socket
 
         try {
             if (this.connection == null) {
-                throw new CakeException('You must call connect() first.');
+                throw new CakeException("You must call connect() first.");
             }
             $enableCryptoResult = stream_socket_enable_crypto(this.connection, $enable, $method);
         } catch (Exception $e) {
@@ -497,7 +497,7 @@ class Socket
             return;
         }
 
-        $errorMessage = 'Unable to perform enableCrypto operation on the current socket';
+        $errorMessage = "Unable to perform enableCrypto operation on the current socket";
         this.setLastError(null, $errorMessage);
         throw new SocketException($errorMessage);
     }
@@ -523,41 +523,41 @@ class Socket
     function __get($name)
     {
         switch ($name) {
-            case 'connected':
-                deprecationWarning('The property `$connected` is deprecated, use `isConnected()` instead.');
+            case "connected":
+                deprecationWarning("The property `$connected` is deprecated, use `isConnected()` instead.");
 
                 return this.connected;
 
-            case 'encrypted':
-                deprecationWarning('The property `$encrypted` is deprecated, use `isEncrypted()` instead.');
+            case "encrypted":
+                deprecationWarning("The property `$encrypted` is deprecated, use `isEncrypted()` instead.");
 
                 return this.encrypted;
 
-            case 'lastError':
-                deprecationWarning('The property `$lastError` is deprecated, use `lastError()` instead.');
+            case "lastError":
+                deprecationWarning("The property `$lastError` is deprecated, use `lastError()` instead.");
 
                 return this.lastError;
 
-            case 'connection':
-                deprecationWarning('The property `$connection` is deprecated.');
+            case "connection":
+                deprecationWarning("The property `$connection` is deprecated.");
 
                 return this.connection;
 
-            case 'description':
-                deprecationWarning('The CakePHP team would love to know your use case for this property.');
+            case "description":
+                deprecationWarning("The CakePHP team would love to know your use case for this property.");
 
-                return 'Remote DataSource Network Socket Interface';
+                return "Remote DataSource Network Socket Interface";
         }
 
         $trace = debug_backtrace();
-        $parts = explode('\\', static::class);
+        $parts = explode("\\", static::class);
         trigger_error(
             sprintf(
-                'Undefined property: %s::$%s in %s on line %s',
+                "Undefined property: %s::$%s in %s on line %s",
                 array_pop($parts),
                 $name,
-                $trace[0]['file'],
-                $trace[0]['line']
+                $trace[0]["file"],
+                $trace[0]["line"]
             ),
             E_USER_NOTICE
         );

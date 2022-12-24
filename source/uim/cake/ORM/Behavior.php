@@ -96,10 +96,10 @@ use ReflectionMethod;
  *
  * ### Finder methods
  *
- * Behaviors can provide finder methods that hook into a Table's
+ * Behaviors can provide finder methods that hook into a Table"s
  * find() method. Custom finders are a great way to provide preset
  * queries that relate to your behavior. For example a SluggableBehavior
- * could provide a find('slugged') finder. Behavior finders
+ * could provide a find("slugged") finder. Behavior finders
  * are implemented the same as other finders. Any method
  * starting with `find` will be setup as a finder. Your finder
  * methods should expect the following arguments:
@@ -152,12 +152,12 @@ class Behavior : IEventListener
     public this(Table $table, array $config = [])
     {
         $config = _resolveMethodAliases(
-            'implementedFinders',
+            "implementedFinders",
             _defaultConfig,
             $config
         );
         $config = _resolveMethodAliases(
-            'implementedMethods',
+            "implementedMethods",
             _defaultConfig,
             $config
         );
@@ -187,7 +187,7 @@ class Behavior : IEventListener
      */
     function getTable(): Table
     {
-        deprecationWarning('Behavior::getTable() is deprecated. Use table() instead.');
+        deprecationWarning("Behavior::getTable() is deprecated. Use table() instead.");
 
         return this.table();
     }
@@ -245,7 +245,7 @@ class Behavior : IEventListener
      */
     function verifyConfig(): void
     {
-        $keys = ['implementedFinders', 'implementedMethods'];
+        $keys = ["implementedFinders", "implementedMethods"];
         foreach ($keys as $key) {
             if (!isset(_config[$key])) {
                 continue;
@@ -254,7 +254,7 @@ class Behavior : IEventListener
             foreach (_config[$key] as $method) {
                 if (!is_callable([this, $method])) {
                     throw new CakeException(sprintf(
-                        'The method %s is not callable on class %s',
+                        "The method %s is not callable on class %s",
                         $method,
                         static::class
                     ));
@@ -277,22 +277,22 @@ class Behavior : IEventListener
     function implementedEvents(): array
     {
         $eventMap = [
-            'Model.beforeMarshal': 'beforeMarshal',
-            'Model.afterMarshal': 'afterMarshal',
-            'Model.beforeFind': 'beforeFind',
-            'Model.beforeSave': 'beforeSave',
-            'Model.afterSave': 'afterSave',
-            'Model.afterSaveCommit': 'afterSaveCommit',
-            'Model.beforeDelete': 'beforeDelete',
-            'Model.afterDelete': 'afterDelete',
-            'Model.afterDeleteCommit': 'afterDeleteCommit',
-            'Model.buildValidator': 'buildValidator',
-            'Model.buildRules': 'buildRules',
-            'Model.beforeRules': 'beforeRules',
-            'Model.afterRules': 'afterRules',
+            "Model.beforeMarshal": "beforeMarshal",
+            "Model.afterMarshal": "afterMarshal",
+            "Model.beforeFind": "beforeFind",
+            "Model.beforeSave": "beforeSave",
+            "Model.afterSave": "afterSave",
+            "Model.afterSaveCommit": "afterSaveCommit",
+            "Model.beforeDelete": "beforeDelete",
+            "Model.afterDelete": "afterDelete",
+            "Model.afterDeleteCommit": "afterDeleteCommit",
+            "Model.buildValidator": "buildValidator",
+            "Model.buildRules": "buildRules",
+            "Model.beforeRules": "beforeRules",
+            "Model.afterRules": "afterRules",
         ];
         $config = this.getConfig();
-        $priority = $config['priority'] ?? null;
+        $priority = $config["priority"] ?? null;
         $events = [];
 
         foreach ($eventMap as $event: $method) {
@@ -303,8 +303,8 @@ class Behavior : IEventListener
                 $events[$event] = $method;
             } else {
                 $events[$event] = [
-                    'callable': $method,
-                    'priority': $priority,
+                    "callable": $method,
+                    "priority": $priority,
                 ];
             }
         }
@@ -319,13 +319,13 @@ class Behavior : IEventListener
      *
      * ```
      *  [
-     *    'this': 'findThis',
-     *    'alias': 'findMethodName'
+     *    "this": "findThis",
+     *    "alias": "findMethodName"
      *  ]
      * ```
      *
-     * With the above example, a call to `$table.find('this')` will call `$behavior.findThis()`
-     * and a call to `$table.find('alias')` will call `$behavior.findMethodName()`
+     * With the above example, a call to `$table.find("this")` will call `$behavior.findThis()`
+     * and a call to `$table.find("alias")` will call `$behavior.findMethodName()`
      *
      * It is recommended, though not required, to define implementedFinders in the config property
      * of child classes such that it is not necessary to use reflections to derive the available
@@ -336,12 +336,12 @@ class Behavior : IEventListener
      */
     function implementedFinders(): array
     {
-        $methods = this.getConfig('implementedFinders');
+        $methods = this.getConfig("implementedFinders");
         if (isset($methods)) {
             return $methods;
         }
 
-        return _reflectionCache()['finders'];
+        return _reflectionCache()["finders"];
     }
 
     /**
@@ -351,8 +351,8 @@ class Behavior : IEventListener
      *
      * ```
      *  [
-     *    'method': 'method',
-     *    'aliasedMethod': 'somethingElse'
+     *    "method": "method",
+     *    "aliasedMethod": "somethingElse"
      *  ]
      * ```
      *
@@ -368,12 +368,12 @@ class Behavior : IEventListener
      */
     function implementedMethods(): array
     {
-        $methods = this.getConfig('implementedMethods');
+        $methods = this.getConfig("implementedMethods");
         if (isset($methods)) {
             return $methods;
         }
 
-        return _reflectionCache()['methods'];
+        return _reflectionCache()["methods"];
     }
 
     /**
@@ -396,9 +396,9 @@ class Behavior : IEventListener
         $events = this.implementedEvents();
         $eventMethods = [];
         foreach ($events as $binding) {
-            if (is_array($binding) && isset($binding['callable'])) {
+            if (is_array($binding) && isset($binding["callable"])) {
                 /** @var string $callable */
-                $callable = $binding['callable'];
+                $callable = $binding["callable"];
                 $binding = $callable;
             }
             $eventMethods[$binding] = true;
@@ -413,8 +413,8 @@ class Behavior : IEventListener
         }
 
         $return = [
-            'finders': [],
-            'methods': [],
+            "finders": [],
+            "methods": [],
         ];
 
         $reflection = new ReflectionClass($class);
@@ -428,10 +428,10 @@ class Behavior : IEventListener
                 continue;
             }
 
-            if (substr($methodName, 0, 4) == 'find') {
-                $return['finders'][lcfirst(substr($methodName, 4))] = $methodName;
+            if (substr($methodName, 0, 4) == "find") {
+                $return["finders"][lcfirst(substr($methodName, 4))] = $methodName;
             } else {
-                $return['methods'][$methodName] = $methodName;
+                $return["methods"][$methodName] = $methodName;
             }
         }
 

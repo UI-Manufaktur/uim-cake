@@ -33,7 +33,7 @@ class RulesProvider
     protected $_class;
 
     /**
-     * The proxied class' reflection
+     * The proxied class" reflection
      *
      * @var \ReflectionClass
      */
@@ -56,7 +56,7 @@ class RulesProvider
      * Proxies validation method calls to the Validation class.
      *
      * The last argument (context) will be sliced off, if the validation
-     * method's last parameter is not named 'context'. This lets
+     * method"s last parameter is not named "context". This lets
      * the various wrapped validation methods to not receive the validation
      * context unless they need it.
      *
@@ -68,7 +68,7 @@ class RulesProvider
     {
         $method = _reflection.getMethod($method);
         $argumentList = $method.getParameters();
-        if (array_pop($argumentList).getName() != 'context') {
+        if (array_pop($argumentList).getName() != "context") {
             $arguments = array_slice($arguments, 0, -1);
         }
         $object = is_string(_class) ? null : _class;

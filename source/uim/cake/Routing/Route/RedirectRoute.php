@@ -45,8 +45,8 @@ class RedirectRoute : Route
     public this(string $template, array $defaults = [], array $options = [])
     {
         parent::__construct($template, $defaults, $options);
-        if (isset($defaults['redirect'])) {
-            $defaults = (array)$defaults['redirect'];
+        if (isset($defaults["redirect"])) {
+            $defaults = (array)$defaults["redirect"];
         }
         this.redirect = $defaults;
     }
@@ -61,20 +61,20 @@ class RedirectRoute : Route
      * @throws \Cake\Http\Exception\RedirectException An exception is raised on successful match.
      *   This is used to halt route matching and signal to the middleware that a redirect should happen.
      */
-    function parse(string $url, string $method = ''): ?array
+    function parse(string $url, string $method = ""): ?array
     {
         $params = parent::parse($url, $method);
         if (!$params) {
             return null;
         }
         $redirect = this.redirect;
-        if (this.redirect && count(this.redirect) == 1 && !isset(this.redirect['controller'])) {
+        if (this.redirect && count(this.redirect) == 1 && !isset(this.redirect["controller"])) {
             $redirect = this.redirect[0];
         }
-        if (isset(this.options['persist']) && is_array($redirect)) {
-            $redirect += ['pass': $params['pass'], 'url': []];
-            if (is_array(this.options['persist'])) {
-                foreach (this.options['persist'] as $elem) {
+        if (isset(this.options["persist"]) && is_array($redirect)) {
+            $redirect += ["pass": $params["pass"], "url": []];
+            if (is_array(this.options["persist"])) {
+                foreach (this.options["persist"] as $elem) {
                     if (isset($params[$elem])) {
                         $redirect[$elem] = $params[$elem];
                     }
@@ -83,8 +83,8 @@ class RedirectRoute : Route
             $redirect = Router::reverseToArray($redirect);
         }
         $status = 301;
-        if (isset(this.options['status']) && (this.options['status'] >= 300 && this.options['status'] < 400)) {
-            $status = this.options['status'];
+        if (isset(this.options["status"]) && (this.options["status"] >= 300 && this.options["status"] < 400)) {
+            $status = this.options["status"];
         }
         throw new RedirectException(Router::url($redirect, true), $status);
     }
@@ -109,7 +109,7 @@ class RedirectRoute : Route
      */
     function setStatus(int $status)
     {
-        this.options['status'] = $status;
+        this.options["status"] = $status;
 
         return this;
     }

@@ -70,7 +70,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
         } catch (MissingHelperException $exception) {
             $plugin = _View.getPlugin();
             if (!empty($plugin)) {
-                this.load($plugin . '.' . $helper);
+                this.load($plugin . "." . $helper);
 
                 return true;
             }
@@ -112,7 +112,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      */
     protected function _resolveClassName(string $class): ?string
     {
-        return App::className($class, 'View/Helper', 'Helper');
+        return App::className($class, "View/Helper", "Helper");
     }
 
     /**
@@ -129,8 +129,8 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingHelperException([
-            'class': $class . 'Helper',
-            'plugin': $plugin,
+            "class": $class . "Helper",
+            "plugin": $plugin,
         ]);
     }
 
@@ -151,7 +151,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
         /** @var \Cake\View\Helper $instance */
         $instance = new $class(_View, $config);
 
-        $enable = $config['enabled'] ?? true;
+        $enable = $config["enabled"] ?? true;
         if ($enable) {
             this.getEventManager().on($instance);
         }

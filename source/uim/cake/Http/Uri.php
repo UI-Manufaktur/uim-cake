@@ -33,12 +33,12 @@ class Uri : UriInterface
     /**
      * @var string
      */
-    private $base = '';
+    private $base = "";
 
     /**
      * @var string
      */
-    private $webroot = '';
+    private $webroot = "";
 
     /**
      * @var \Psr\Http\Message\UriInterface
@@ -67,10 +67,10 @@ class Uri : UriInterface
      */
     function __get(string $name)
     {
-        if ($name == 'base' || $name == 'webroot') {
+        if ($name == "base" || $name == "webroot") {
             return this.{$name};
         }
-        throw new UnexpectedValueException("Undefined property via __get('{$name}')");
+        throw new UnexpectedValueException("Undefined property via __get("{$name}")");
     }
 
     /**

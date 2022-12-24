@@ -28,7 +28,7 @@ use RuntimeException;
  * tokens.
  *
  * Generally not directly constructed, but instead used by {@link \Cake\Http\Client}
- * when $options['auth']['type'] is 'oauth'
+ * when $options["auth"]["type"] is "oauth"
  */
 class Oauth
 {
@@ -42,21 +42,21 @@ class Oauth
      */
     function authentication(Request $request, array $credentials): Request
     {
-        if (!isset($credentials['consumerKey'])) {
+        if (!isset($credentials["consumerKey"])) {
             return $request;
         }
-        if (empty($credentials['method'])) {
-            $credentials['method'] = 'hmac-sha1';
+        if (empty($credentials["method"])) {
+            $credentials["method"] = "hmac-sha1";
         }
 
-        $credentials['method'] = strtoupper($credentials['method']);
+        $credentials["method"] = strtoupper($credentials["method"]);
 
-        switch ($credentials['method']) {
-            case 'HMAC-SHA1':
+        switch ($credentials["method"]) {
+            case "HMAC-SHA1":
                 $hasKeys = isset(
-                    $credentials['consumerSecret'],
-                    $credentials['token'],
-                    $credentials['tokenSecret']
+                    $credentials["consumerSecret"],
+                    $credentials["token"],
+                    $credentials["tokenSecret"]
                 );
                 if (!$hasKeys) {
                     return $request;
@@ -64,18 +64,18 @@ class Oauth
                 $value = _hmacSha1($request, $credentials);
                 break;
 
-            case 'RSA-SHA1':
-                if (!isset($credentials['privateKey'])) {
+            case "RSA-SHA1":
+                if (!isset($credentials["privateKey"])) {
                     return $request;
                 }
                 $value = _rsaSha1($request, $credentials);
                 break;
 
-            case 'PLAINTEXT':
+            case "PLAINTEXT":
                 $hasKeys = isset(
-                    $credentials['consumerSecret'],
-                    $credentials['token'],
-                    $credentials['tokenSecret']
+                    $credentials["consumerSecret"],
+                    $credentials["token"],
+                    $credentials["tokenSecret"]
                 );
                 if (!$hasKeys) {
                     return $request;
@@ -84,10 +84,10 @@ class Oauth
                 break;
 
             default:
-                throw new CakeException(sprintf('Unknown Oauth signature method %s', $credentials['method']));
+                throw new CakeException(sprintf("Unknown Oauth signature method %s", $credentials["method"]));
         }
 
-        return $request.withHeader('Authorization', $value);
+        return $request.withHeader("Authorization", $value);
     }
 
     /**
@@ -104,19 +104,19 @@ class Oauth
     protected function _plaintext(Request $request, array $credentials): string
     {
         $values = [
-            'oauth_version': '1.0',
-            'oauth_nonce': uniqid(),
-            'oauth_timestamp': time(),
-            'oauth_signature_method': 'PLAINTEXT',
-            'oauth_token': $credentials['token'],
-            'oauth_consumer_key': $credentials['consumerKey'],
+            "oauth_version": "1.0",
+            "oauth_nonce": uniqid(),
+            "oauth_timestamp": time(),
+            "oauth_signature_method": "PLAINTEXT",
+            "oauth_token": $credentials["token"],
+            "oauth_consumer_key": $credentials["consumerKey"],
         ];
-        if (isset($credentials['realm'])) {
-            $values['oauth_realm'] = $credentials['realm'];
+        if (isset($credentials["realm"])) {
+            $values["oauth_realm"] = $credentials["realm"];
         }
-        $key = [$credentials['consumerSecret'], $credentials['tokenSecret']];
-        $key = implode('&', $key);
-        $values['oauth_signature'] = $key;
+        $key = [$credentials["consumerSecret"], $credentials["tokenSecret"]];
+        $key = implode("&", $key);
+        $values["oauth_signature"] = $key;
 
         return _buildAuth($values);
     }
@@ -132,31 +132,31 @@ class Oauth
      */
     protected function _hmacSha1(Request $request, array $credentials): string
     {
-        $nonce = $credentials['nonce'] ?? uniqid();
-        $timestamp = $credentials['timestamp'] ?? time();
+        $nonce = $credentials["nonce"] ?? uniqid();
+        $timestamp = $credentials["timestamp"] ?? time();
         $values = [
-            'oauth_version': '1.0',
-            'oauth_nonce': $nonce,
-            'oauth_timestamp': $timestamp,
-            'oauth_signature_method': 'HMAC-SHA1',
-            'oauth_token': $credentials['token'],
-            'oauth_consumer_key': _encode($credentials['consumerKey']),
+            "oauth_version": "1.0",
+            "oauth_nonce": $nonce,
+            "oauth_timestamp": $timestamp,
+            "oauth_signature_method": "HMAC-SHA1",
+            "oauth_token": $credentials["token"],
+            "oauth_consumer_key": _encode($credentials["consumerKey"]),
         ];
         $baseString = this.baseString($request, $values);
 
         // Consumer key should only be encoded for base string calculation as
         // auth header generation already encodes independently
-        $values['oauth_consumer_key'] = $credentials['consumerKey'];
+        $values["oauth_consumer_key"] = $credentials["consumerKey"];
 
-        if (isset($credentials['realm'])) {
-            $values['oauth_realm'] = $credentials['realm'];
+        if (isset($credentials["realm"])) {
+            $values["oauth_realm"] = $credentials["realm"];
         }
-        $key = [$credentials['consumerSecret'], $credentials['tokenSecret']];
-        $key = array_map([this, '_encode'], $key);
-        $key = implode('&', $key);
+        $key = [$credentials["consumerSecret"], $credentials["tokenSecret"]];
+        $key = array_map([this, "_encode"], $key);
+        $key = implode("&", $key);
 
-        $values['oauth_signature'] = base64_encode(
-            hash_hmac('sha1', $baseString, $key, true)
+        $values["oauth_signature"] = base64_encode(
+            hash_hmac("sha1", $baseString, $key, true)
         );
 
         return _buildAuth($values);
@@ -174,54 +174,54 @@ class Oauth
      */
     protected function _rsaSha1(Request $request, array $credentials): string
     {
-        if (!function_exists('openssl_pkey_get_private')) {
-            throw new RuntimeException('RSA-SHA1 signature method requires the OpenSSL extension.');
+        if (!function_exists("openssl_pkey_get_private")) {
+            throw new RuntimeException("RSA-SHA1 signature method requires the OpenSSL extension.");
         }
 
-        $nonce = $credentials['nonce'] ?? bin2hex(Security::randomBytes(16));
-        $timestamp = $credentials['timestamp'] ?? time();
+        $nonce = $credentials["nonce"] ?? bin2hex(Security::randomBytes(16));
+        $timestamp = $credentials["timestamp"] ?? time();
         $values = [
-            'oauth_version': '1.0',
-            'oauth_nonce': $nonce,
-            'oauth_timestamp': $timestamp,
-            'oauth_signature_method': 'RSA-SHA1',
-            'oauth_consumer_key': $credentials['consumerKey'],
+            "oauth_version": "1.0",
+            "oauth_nonce": $nonce,
+            "oauth_timestamp": $timestamp,
+            "oauth_signature_method": "RSA-SHA1",
+            "oauth_consumer_key": $credentials["consumerKey"],
         ];
-        if (isset($credentials['consumerSecret'])) {
-            $values['oauth_consumer_secret'] = $credentials['consumerSecret'];
+        if (isset($credentials["consumerSecret"])) {
+            $values["oauth_consumer_secret"] = $credentials["consumerSecret"];
         }
-        if (isset($credentials['token'])) {
-            $values['oauth_token'] = $credentials['token'];
+        if (isset($credentials["token"])) {
+            $values["oauth_token"] = $credentials["token"];
         }
-        if (isset($credentials['tokenSecret'])) {
-            $values['oauth_token_secret'] = $credentials['tokenSecret'];
+        if (isset($credentials["tokenSecret"])) {
+            $values["oauth_token_secret"] = $credentials["tokenSecret"];
         }
         $baseString = this.baseString($request, $values);
 
-        if (isset($credentials['realm'])) {
-            $values['oauth_realm'] = $credentials['realm'];
+        if (isset($credentials["realm"])) {
+            $values["oauth_realm"] = $credentials["realm"];
         }
 
-        if (is_resource($credentials['privateKey'])) {
-            $resource = $credentials['privateKey'];
+        if (is_resource($credentials["privateKey"])) {
+            $resource = $credentials["privateKey"];
             $privateKey = stream_get_contents($resource);
             rewind($resource);
-            $credentials['privateKey'] = $privateKey;
+            $credentials["privateKey"] = $privateKey;
         }
 
         $credentials += [
-            'privateKeyPassphrase': '',
+            "privateKeyPassphrase": "",
         ];
-        if (is_resource($credentials['privateKeyPassphrase'])) {
-            $resource = $credentials['privateKeyPassphrase'];
+        if (is_resource($credentials["privateKeyPassphrase"])) {
+            $resource = $credentials["privateKeyPassphrase"];
             $passphrase = stream_get_line($resource, 0, PHP_EOL);
             rewind($resource);
-            $credentials['privateKeyPassphrase'] = $passphrase;
+            $credentials["privateKeyPassphrase"] = $passphrase;
         }
-        $privateKey = openssl_pkey_get_private($credentials['privateKey'], $credentials['privateKeyPassphrase']);
+        $privateKey = openssl_pkey_get_private($credentials["privateKey"], $credentials["privateKeyPassphrase"]);
         this.checkSslError();
 
-        $signature = '';
+        $signature = "";
         openssl_sign($baseString, $signature, $privateKey);
         this.checkSslError();
 
@@ -229,7 +229,7 @@ class Oauth
             openssl_free_key($privateKey);
         }
 
-        $values['oauth_signature'] = base64_encode($signature);
+        $values["oauth_signature"] = base64_encode($signature);
 
         return _buildAuth($values);
     }
@@ -254,9 +254,9 @@ class Oauth
             _normalizedUrl($request.getUri()),
             _normalizedParams($request, $oauthValues),
         ];
-        $parts = array_map([this, '_encode'], $parts);
+        $parts = array_map([this, "_encode"], $parts);
 
-        return implode('&', $parts);
+        return implode("&", $parts);
     }
 
     /**
@@ -269,7 +269,7 @@ class Oauth
      */
     protected function _normalizedUrl(UriInterface $uri): string
     {
-        $out = $uri.getScheme() . '://';
+        $out = $uri.getScheme() . "://";
         $out .= strtolower($uri.getHost());
         $out .= $uri.getPath();
 
@@ -294,19 +294,19 @@ class Oauth
         parse_str((string)$query, $queryArgs);
 
         $post = [];
-        $contentType = $request.getHeaderLine('Content-Type');
-        if ($contentType == '' || $contentType == 'application/x-www-form-urlencoded') {
+        $contentType = $request.getHeaderLine("Content-Type");
+        if ($contentType == "" || $contentType == "application/x-www-form-urlencoded") {
             parse_str((string)$request.getBody(), $post);
         }
         $args = array_merge($queryArgs, $oauthValues, $post);
         $pairs = _normalizeData($args);
         $data = [];
         foreach ($pairs as $pair) {
-            $data[] = implode('=', $pair);
+            $data[] = implode("=", $pair);
         }
         sort($data, SORT_STRING);
 
-        return implode('&', $data);
+        return implode("&", $data);
     }
 
     /**
@@ -317,13 +317,13 @@ class Oauth
      * @see https://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
      * @return array
      */
-    protected function _normalizeData(array $args, string $path = ''): array
+    protected function _normalizeData(array $args, string $path = ""): array
     {
         $data = [];
         foreach ($args as $key: $value) {
             if ($path) {
                 // Fold string keys with [].
-                // Numeric keys result in a=b&a=c. While this isn't
+                // Numeric keys result in a=b&a=c. While this isn"t
                 // standard behavior in PHP, it is common in other platforms.
                 if (!is_numeric($key)) {
                     $key = "{$path}[{$key}]";
@@ -332,7 +332,7 @@ class Oauth
                 }
             }
             if (is_array($value)) {
-                uksort($value, 'strcmp');
+                uksort($value, "strcmp");
                 $data = array_merge($data, _normalizeData($value, $key));
             } else {
                 $data[] = [$key, $value];
@@ -350,12 +350,12 @@ class Oauth
      */
     protected function _buildAuth(array $data): string
     {
-        $out = 'OAuth ';
+        $out = "OAuth ";
         $params = [];
         foreach ($data as $key: $value) {
-            $params[] = $key . '="' . _encode((string)$value) . '"';
+            $params[] = $key . "="" . _encode((string)$value) . """;
         }
-        $out .= implode(',', $params);
+        $out .= implode(",", $params);
 
         return $out;
     }
@@ -368,7 +368,7 @@ class Oauth
      */
     protected function _encode(string $value): string
     {
-        return str_replace(['%7E', '+'], ['~', ' '], rawurlencode($value));
+        return str_replace(["%7E", "+"], ["~", " "], rawurlencode($value));
     }
 
     /**
@@ -378,13 +378,13 @@ class Oauth
      */
     protected function checkSslError(): void
     {
-        $error = '';
+        $error = "";
         while ($text = openssl_error_string()) {
             $error .= $text;
         }
 
         if (strlen($error) > 0) {
-            throw new RuntimeException('openssl error: ' . $error);
+            throw new RuntimeException("openssl error: " . $error);
         }
     }
 }

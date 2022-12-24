@@ -91,7 +91,7 @@ class FormDataPart
      * @param string $disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    public this(string $name, string $value, string $disposition = 'form-data', ?string $charset = null)
+    public this(string $name, string $value, string $disposition = "form-data", ?string $charset = null)
     {
         _name = $name;
         _value = $value;
@@ -211,25 +211,25 @@ class FormDataPart
      */
     function __toString(): string
     {
-        $out = '';
+        $out = "";
         if (_disposition) {
-            $out .= 'Content-Disposition: ' . _disposition;
+            $out .= "Content-Disposition: " . _disposition;
             if (_name) {
-                $out .= '; ' . _headerParameterToString('name', _name);
+                $out .= "; " . _headerParameterToString("name", _name);
             }
             if (_filename) {
-                $out .= '; ' . _headerParameterToString('filename', _filename);
+                $out .= "; " . _headerParameterToString("filename", _filename);
             }
             $out .= "\r\n";
         }
         if (_type) {
-            $out .= 'Content-Type: ' . _type . "\r\n";
+            $out .= "Content-Type: " . _type . "\r\n";
         }
         if (_transferEncoding) {
-            $out .= 'Content-Transfer-Encoding: ' . _transferEncoding . "\r\n";
+            $out .= "Content-Transfer-Encoding: " . _transferEncoding . "\r\n";
         }
         if (_contentId) {
-            $out .= 'Content-ID: <' . _contentId . ">\r\n";
+            $out .= "Content-ID: <" . _contentId . ">\r\n";
         }
         $out .= "\r\n";
         $out .= _value;
@@ -249,10 +249,10 @@ class FormDataPart
      */
     protected function _headerParameterToString(string $name, string $value): string
     {
-        $transliterated = Text::transliterate(str_replace('"', '', $value));
-        $return = sprintf('%s="%s"', $name, $transliterated);
+        $transliterated = Text::transliterate(str_replace(""", "", $value));
+        $return = sprintf("%s="%s"", $name, $transliterated);
         if (_charset != null && $value != $transliterated) {
-            $return .= sprintf("; %s*=%s''%s", $name, strtolower(_charset), rawurlencode($value));
+            $return .= sprintf("; %s*=%s""%s", $name, strtolower(_charset), rawurlencode($value));
         }
 
         return $return;

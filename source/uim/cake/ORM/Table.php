@@ -67,13 +67,13 @@ use RuntimeException;
  * to filter users by username you would call
  *
  * ```
- * $query = $users.findByUsername('mark');
+ * $query = $users.findByUsername("mark");
  * ```
  *
  * You can also combine conditions on multiple fields using either `Or` or `And`:
  *
  * ```
- * $query = $users.findByUsernameOrEmail('mark', 'mark@example.org');
+ * $query = $users.findByUsernameOrEmail("mark", "mark@example.org");
  * ```
  *
  * ### Bulk updates/deletes
@@ -152,21 +152,21 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @var string
      */
-    public const DEFAULT_VALIDATOR = 'default';
+    public const DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      *
      * @var string
      */
-    public const VALIDATOR_PROVIDER_NAME = 'table';
+    public const VALIDATOR_PROVIDER_NAME = "table";
 
     /**
      * The name of the event dispatched when a validator has been built.
      *
      * @var string
      */
-    public const BUILD_VALIDATOR_EVENT = 'Model.buildValidator';
+    public const BUILD_VALIDATOR_EVENT = "Model.buildValidator";
 
     /**
      * The rules class name that is used.
@@ -277,39 +277,39 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     public this(array $config = [])
     {
-        if (!empty($config['registryAlias'])) {
-            this.setRegistryAlias($config['registryAlias']);
+        if (!empty($config["registryAlias"])) {
+            this.setRegistryAlias($config["registryAlias"]);
         }
-        if (!empty($config['table'])) {
-            this.setTable($config['table']);
+        if (!empty($config["table"])) {
+            this.setTable($config["table"]);
         }
-        if (!empty($config['alias'])) {
-            this.setAlias($config['alias']);
+        if (!empty($config["alias"])) {
+            this.setAlias($config["alias"]);
         }
-        if (!empty($config['connection'])) {
-            this.setConnection($config['connection']);
+        if (!empty($config["connection"])) {
+            this.setConnection($config["connection"]);
         }
-        if (!empty($config['schema'])) {
-            this.setSchema($config['schema']);
+        if (!empty($config["schema"])) {
+            this.setSchema($config["schema"]);
         }
-        if (!empty($config['entityClass'])) {
-            this.setEntityClass($config['entityClass']);
+        if (!empty($config["entityClass"])) {
+            this.setEntityClass($config["entityClass"]);
         }
         $eventManager = $behaviors = $associations = null;
-        if (!empty($config['eventManager'])) {
-            $eventManager = $config['eventManager'];
+        if (!empty($config["eventManager"])) {
+            $eventManager = $config["eventManager"];
         }
-        if (!empty($config['behaviors'])) {
-            $behaviors = $config['behaviors'];
+        if (!empty($config["behaviors"])) {
+            $behaviors = $config["behaviors"];
         }
-        if (!empty($config['associations'])) {
-            $associations = $config['associations'];
+        if (!empty($config["associations"])) {
+            $associations = $config["associations"];
         }
-        if (!empty($config['validator'])) {
-            if (!is_array($config['validator'])) {
-                this.setValidator(static::DEFAULT_VALIDATOR, $config['validator']);
+        if (!empty($config["validator"])) {
+            if (!is_array($config["validator"])) {
+                this.setValidator(static::DEFAULT_VALIDATOR, $config["validator"]);
             } else {
-                foreach ($config['validator'] as $name: $validator) {
+                foreach ($config["validator"] as $name: $validator) {
                     this.setValidator($name, $validator);
                 }
             }
@@ -321,7 +321,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         this.initialize($config);
         _eventManager.on(this);
-        this.dispatchEvent('Model.initialize');
+        this.dispatchEvent("Model.initialize");
     }
 
     /**
@@ -335,7 +335,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     public static function defaultConnectionName(): string
     {
-        return 'default';
+        return "default";
     }
 
     /**
@@ -347,9 +347,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ```
      *  function initialize(array $config)
      *  {
-     *      this.belongsTo('Users');
-     *      this.belongsToMany('Tagging.Tags');
-     *      this.setPrimaryKey('something_else');
+     *      this.belongsTo("Users");
+     *      this.belongsToMany("Tagging.Tags");
+     *      this.setPrimaryKey("something_else");
      *  }
      * ```
      *
@@ -363,7 +363,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Sets the database table name.
      *
-     * This can include the database schema name in the form 'schema.table'.
+     * This can include the database schema name in the form "schema.table".
      * If the name must be quoted, enable automatic identifier quoting.
      *
      * @param string $table Table name.
@@ -390,7 +390,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             $table = substr(end($table), 0, -5) ?: _alias;
             if (!$table) {
                 throw new CakeException(
-                    'You must specify either the `alias` or the `table` option for the constructor.'
+                    "You must specify either the `alias` or the `table` option for the constructor."
                 );
             }
             _table = Inflector::underscore($table);
@@ -424,7 +424,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             $alias = substr(end($alias), 0, -5) ?: _table;
             if (!$alias) {
                 throw new CakeException(
-                    'You must specify either the `alias` or the `table` option for the constructor.'
+                    "You must specify either the `alias` or the `table` option for the constructor."
                 );
             }
             _alias = $alias;
@@ -434,7 +434,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * Alias a field with the table's current alias.
+     * Alias a field with the table"s current alias.
      *
      * If field is already aliased it will result in no-op.
      *
@@ -443,11 +443,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function aliasField(string $field): string
     {
-        if (strpos($field, '.') != false) {
+        if (strpos($field, ".") != false) {
             return $field;
         }
 
-        return this.getAlias() . '.' . $field;
+        return this.getAlias() . "." . $field;
     }
 
     /**
@@ -507,7 +507,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * Returns the schema table object describing this table's properties.
+     * Returns the schema table object describing this table"s properties.
      *
      * @return \Cake\Database\Schema\TableSchemaInterface
      */
@@ -519,7 +519,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
                     .getSchemaCollection()
                     .describe(this.getTable())
             );
-            if (Configure::read('debug')) {
+            if (Configure::read("debug")) {
                 this.checkAliasLengths();
             }
         }
@@ -528,7 +528,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * Sets the schema table object describing this table's properties.
+     * Sets the schema table object describing this table"s properties.
      *
      * If an array is passed, a new TableSchemaInterface will be constructed
      * out of it and used as the schema for this table.
@@ -541,9 +541,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         if (is_array($schema)) {
             $constraints = [];
 
-            if (isset($schema['_constraints'])) {
-                $constraints = $schema['_constraints'];
-                unset($schema['_constraints']);
+            if (isset($schema["_constraints"])) {
+                $constraints = $schema["_constraints"];
+                unset($schema["_constraints"]);
             }
 
             $schema = this.getConnection().getDriver().newTableSchema(this.getTable(), $schema);
@@ -554,7 +554,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         }
 
         _schema = $schema;
-        if (Configure::read('debug')) {
+        if (Configure::read("debug")) {
             this.checkAliasLengths();
         }
 
@@ -575,7 +575,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         }
 
         $maxLength = null;
-        if (method_exists(this.getConnection().getDriver(), 'getMaxAliasLength')) {
+        if (method_exists(this.getConnection().getDriver(), "getMaxAliasLength")) {
             $maxLength = this.getConnection().getDriver().getMaxAliasLength();
         }
         if ($maxLength == null) {
@@ -584,13 +584,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         $table = this.getAlias();
         foreach (_schema.columns() as $name) {
-            if (strlen($table . '__' . $name) > $maxLength) {
+            if (strlen($table . "__" . $name) > $maxLength) {
                 $nameLength = $maxLength - 2;
                 throw new RuntimeException(
-                    'ORM queries generate field aliases using the table name/alias and column name. ' .
+                    "ORM queries generate field aliases using the table name/alias and column name. " .
                     "The table alias `{$table}` and column `{$name}` create an alias longer than ({$nameLength}). " .
-                    'You must change the table schema in the database and shorten either the table or column ' .
-                    'identifier so they fit within the database alias limits.'
+                    "You must change the table schema in the database and shorten either the table or column " .
+                    "identifier so they fit within the database alias limits."
                 );
             }
         }
@@ -607,7 +607,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * protected function _initializeSchema(\Cake\Database\Schema\TableSchemaInterface $schema) {
-     *  $schema.setColumnType('preferences', 'json');
+     *  $schema.setColumnType("preferences", "json");
      *  return $schema;
      * }
      * ```
@@ -690,7 +690,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         if (_displayField == null) {
             $schema = this.getSchema();
             _displayField = this.getPrimaryKey();
-            foreach (['title', 'name', 'label'] as $field) {
+            foreach (["title", "name", "label"] as $field) {
                 if ($schema.hasColumn($field)) {
                     _displayField = $field;
                     break;
@@ -712,20 +712,20 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         if (!_entityClass) {
             $default = Entity::class;
             $self = static::class;
-            $parts = explode('\\', $self);
+            $parts = explode("\\", $self);
 
             if ($self == self::class || count($parts) < 3) {
                 return _entityClass = $default;
             }
 
             $alias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
-            $name = implode('\\', array_slice($parts, 0, -1)) . '\\Entity\\' . $alias;
+            $name = implode("\\", array_slice($parts, 0, -1)) . "\\Entity\\" . $alias;
             if (!class_exists($name)) {
                 return _entityClass = $default;
             }
 
             /** @var class-string<\Cake\Datasource\EntityInterface>|null $class */
-            $class = App::className($name, 'Model/Entity');
+            $class = App::className($name, "Model/Entity");
             if (!$class) {
                 throw new MissingEntityException([$name]);
             }
@@ -746,7 +746,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function setEntityClass(string $name)
     {
         /** @psalm-var class-string<\Cake\Datasource\EntityInterface>|null */
-        $class = App::className($name, 'Model/Entity');
+        $class = App::className($name, "Model/Entity");
         if ($class == null) {
             throw new MissingEntityException([$name]);
         }
@@ -759,7 +759,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Add a behavior.
      *
-     * Adds a behavior to this table's behavior collection. Behaviors
+     * Adds a behavior to this table"s behavior collection. Behaviors
      * provide an easy way to create horizontally re-usable features
      * that can provide trait like functionality, and allow for events
      * to be listened to.
@@ -769,7 +769,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Load a behavior, with some settings.
      *
      * ```
-     * this.addBehavior('Tree', ['parent': 'parentId']);
+     * this.addBehavior("Tree", ["parent": "parentId"]);
      * ```
      *
      * Behaviors are generally loaded during Table::initialize().
@@ -788,14 +788,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * Adds an array of behaviors to the table's behavior collection.
+     * Adds an array of behaviors to the table"s behavior collection.
      *
      * Example:
      *
      * ```
      * this.addBehaviors([
-     *      'Timestamp',
-     *      'Tree': ['level': 'level'],
+     *      "Timestamp",
+     *      "Tree": ["level": "level"],
      * ]);
      * ```
      *
@@ -818,14 +818,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * Removes a behavior from this table's behavior registry.
+     * Removes a behavior from this table"s behavior registry.
      *
      * Example:
      *
      * Remove a behavior from this table.
      *
      * ```
-     * this.removeBehavior('Tree');
+     * this.removeBehavior("Tree");
      * ```
      *
      * @param string $name The alias that the behavior was added with.
@@ -860,7 +860,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         if (!_behaviors.has($name)) {
             throw new InvalidArgumentException(sprintf(
-                'The %s behavior is not defined on %s.',
+                "The %s behavior is not defined on %s.",
                 $name,
                 static::class
             ));
@@ -886,7 +886,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * The name argument also supports dot syntax to access deeper associations.
      *
      * ```
-     * $users = this.getAssociation('Articles.Comments.Users');
+     * $users = this.getAssociation("Articles.Comments.Users");
      * ```
      *
      * Note that this method requires the association to be present or otherwise
@@ -905,7 +905,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
             $message = "The `{$name}` association is not defined on `{this.getAlias()}`.";
             if ($assocations) {
-                $message .= "\nValid associations are: " . implode(', ', $assocations);
+                $message .= "\nValid associations are: " . implode(", ", $assocations);
             }
             throw new InvalidArgumentException($message);
         }
@@ -919,7 +919,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * The name argument also supports dot syntax to access deeper associations.
      *
      * ```
-     * $hasUsers = this.hasAssociation('Articles.Comments.Users');
+     * $hasUsers = this.hasAssociation("Articles.Comments.Users");
      * ```
      *
      * @param string $name The alias used for the association.
@@ -936,7 +936,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * The name argument also supports dot syntax to access deeper associations.
      *
      * ```
-     * $users = this.getAssociation('Articles.Comments.Users');
+     * $users = this.getAssociation("Articles.Comments.Users");
      * ```
      *
      * @param string $name The alias used for the association.
@@ -944,12 +944,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     protected function findAssociation(string $name): ?Association
     {
-        if (strpos($name, '.') == false) {
+        if (strpos($name, ".") == false) {
             return _associations.get($name);
         }
 
         $result = null;
-        [$name, $next] = array_pad(explode('.', $name, 2), 2, null);
+        [$name, $next] = array_pad(explode(".", $name, 2), 2, null);
         if ($name != null) {
             $result = _associations.get($name);
         }
@@ -979,11 +979,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * this.Posts.addAssociations([
-     *   'belongsTo': [
-     *     'Users': ['className': 'App\Model\Table\UsersTable']
+     *   "belongsTo": [
+     *     "Users": ["className": "App\Model\Table\UsersTable"]
      *   ],
-     *   'hasMany': ['Comments'],
-     *   'belongsToMany': ['Tags']
+     *   "hasMany": ["Comments"],
+     *   "belongsToMany": ["Tags"]
      * ]);
      * ```
      *
@@ -1031,9 +1031,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   will be used
      * - conditions: array with a list of conditions to filter the join with
      * - joinType: The type of join to be used (e.g. INNER)
-     * - strategy: The loading strategy to use. 'join' and 'select' are supported.
+     * - strategy: The loading strategy to use. "join" and "select" are supported.
      * - finder: The finder method to use when loading records from this association.
-     *   Defaults to 'all'. When the strategy is 'join', only the fields, containments,
+     *   Defaults to "all". When the strategy is "join", only the fields, containments,
      *   and where conditions will be used from the finder.
      *
      * This method will return the association object that was built.
@@ -1045,7 +1045,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function belongsTo(string $associated, array $options = []): BelongsTo
     {
-        $options += ['sourceTable': this];
+        $options += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\BelongsTo $association */
         $association = _associations.load(BelongsTo::class, $associated, $options);
@@ -1070,16 +1070,16 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * - dependent: Set to true if you want CakePHP to cascade deletes to the
      *   associated table when an entity is removed on this table. The delete operation
      *   on the associated table will not cascade further. To get recursive cascades enable
-     *   `cascadeCallbacks` as well. Set to false if you don't want CakePHP to remove
+     *   `cascadeCallbacks` as well. Set to false if you don"t want CakePHP to remove
      *   associated data, or when you are using database constraints.
      * - cascadeCallbacks: Set to true if you want CakePHP to fire callbacks on
      *   cascaded deletes. If false the ORM will use deleteAll() to remove data.
      *   When true records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with
      * - joinType: The type of join to be used (e.g. LEFT)
-     * - strategy: The loading strategy to use. 'join' and 'select' are supported.
+     * - strategy: The loading strategy to use. "join" and "select" are supported.
      * - finder: The finder method to use when loading records from this association.
-     *   Defaults to 'all'. When the strategy is 'join', only the fields, containments,
+     *   Defaults to "all". When the strategy is "join", only the fields, containments,
      *   and where conditions will be used from the finder.
      *
      * This method will return the association object that was built.
@@ -1091,7 +1091,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function hasOne(string $associated, array $options = []): HasOne
     {
-        $options += ['sourceTable': this];
+        $options += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\HasOne $association */
         $association = _associations.load(HasOne::class, $associated, $options);
@@ -1116,23 +1116,23 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * - dependent: Set to true if you want CakePHP to cascade deletes to the
      *   associated table when an entity is removed on this table. The delete operation
      *   on the associated table will not cascade further. To get recursive cascades enable
-     *   `cascadeCallbacks` as well. Set to false if you don't want CakePHP to remove
+     *   `cascadeCallbacks` as well. Set to false if you don"t want CakePHP to remove
      *   associated data, or when you are using database constraints.
      * - cascadeCallbacks: Set to true if you want CakePHP to fire callbacks on
      *   cascaded deletes. If false the ORM will use deleteAll() to remove data.
      *   When true records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with
      * - sort: The order in which results for this association should be returned
-     * - saveStrategy: Either 'append' or 'replace'. When 'append' the current records
-     *   are appended to any records in the database. When 'replace' associated records
+     * - saveStrategy: Either "append" or "replace". When "append" the current records
+     *   are appended to any records in the database. When "replace" associated records
      *   not in the current set will be removed. If the foreign key is a null able column
      *   or if `dependent` is true records will be orphaned.
-     * - strategy: The strategy to be used for selecting results Either 'select'
-     *   or 'subquery'. If subquery is selected the query used to return results
+     * - strategy: The strategy to be used for selecting results Either "select"
+     *   or "subquery". If subquery is selected the query used to return results
      *   in the source table will be used as conditions for getting rows in the
      *   target table.
      * - finder: The finder method to use when loading records from this association.
-     *   Defaults to 'all'.
+     *   Defaults to "all".
      *
      * This method will return the association object that was built.
      *
@@ -1143,7 +1143,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function hasMany(string $associated, array $options = []): HasMany
     {
-        $options += ['sourceTable': this];
+        $options += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\HasMany $association */
         $association = _associations.load(HasMany::class, $associated, $options);
@@ -1176,17 +1176,17 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   When true join/junction table records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with.
      * - sort: The order in which results for this association should be returned.
-     * - strategy: The strategy to be used for selecting results Either 'select'
-     *   or 'subquery'. If subquery is selected the query used to return results
+     * - strategy: The strategy to be used for selecting results Either "select"
+     *   or "subquery". If subquery is selected the query used to return results
      *   in the source table will be used as conditions for getting rows in the
      *   target table.
-     * - saveStrategy: Either 'append' or 'replace'. Indicates the mode to be used
+     * - saveStrategy: Either "append" or "replace". Indicates the mode to be used
      *   for saving associated entities. The former will only create new links
      *   between both side of the relation and the latter will do a wipe and
      *   replace to create the links between the passed entities when saving.
-     * - strategy: The loading strategy to use. 'select' and 'subquery' are supported.
+     * - strategy: The loading strategy to use. "select" and "subquery" are supported.
      * - finder: The finder method to use when loading records from this association.
-     *   Defaults to 'all'.
+     *   Defaults to "all".
      *
      * This method will return the association object that was built.
      *
@@ -1197,7 +1197,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function belongsToMany(string $associated, array $options = []): BelongsToMany
     {
-        $options += ['sourceTable': this];
+        $options += ["sourceTable": this];
 
         /** @var \Cake\ORM\Association\BelongsToMany $association */
         $association = _associations.load(BelongsToMany::class, $associated, $options);
@@ -1232,10 +1232,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Using the options array:
      *
      * ```
-     * $query = $articles.find('all', [
-     *   'conditions': ['published': 1],
-     *   'limit': 10,
-     *   'contain': ['Users', 'Comments']
+     * $query = $articles.find("all", [
+     *   "conditions": ["published": 1],
+     *   "limit": 10,
+     *   "contain": ["Users", "Comments"]
      * ]);
      * ```
      *
@@ -1243,9 +1243,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $query = $articles.find()
-     *   .where(['published': 1])
+     *   .where(["published": 1])
      *   .limit(10)
-     *   .contain(['Users', 'Comments']);
+     *   .contain(["Users", "Comments"]);
      * ```
      *
      * ### Calling finders
@@ -1254,7 +1254,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * You can invoke a finder by specifying the type:
      *
      * ```
-     * $query = $articles.find('published');
+     * $query = $articles.find("published");
      * ```
      *
      * Would invoke the `findPublished` method.
@@ -1263,7 +1263,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
      * @return \Cake\ORM\Query The query builder
      */
-    function find(string $type = 'all', array $options = []): Query
+    function find(string $type = "all", array $options = []): Query
     {
         return this.callFinder($type, this.query().select(), $options);
     }
@@ -1272,7 +1272,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Returns the query as passed.
      *
      * By default findAll() applies no conditions, you
-     * can override this method in subclasses to modify how `find('all')` works.
+     * can override this method in subclasses to modify how `find("all")` works.
      *
      * @param \Cake\ORM\Query $query The query to find with
      * @param array<string, mixed> $options The options to use for the find
@@ -1296,9 +1296,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * [
-     *  1: 'value for id 1',
-     *  2: 'value for id 2',
-     *  4: 'value for id 4'
+     *  1: "value for id 1",
+     *  2: "value for id 2",
+     *  4: "value for id 4"
      * ]
      * ```
      *
@@ -1307,9 +1307,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * of calling `primaryKey` and `displayField` respectively in this table:
      *
      * ```
-     * $table.find('list', [
-     *  'keyField': 'name',
-     *  'valueField': 'age'
+     * $table.find("list", [
+     *  "keyField": "name",
+     *  "valueField": "age"
      * ]);
      * ```
      *
@@ -1317,9 +1317,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * the `valueSeparator` option to control how the values will be concatenated:
      *
      * ```
-     * $table.find('list', [
-     *  'valueField': ['first_name', 'last_name'],
-     *  'valueSeparator': ' | ',
+     * $table.find("list", [
+     *  "valueField": ["first_name", "last_name"],
+     *  "valueSeparator": " | ",
      * ]);
      * ```
      *
@@ -1327,8 +1327,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * [
-     *  1: 'John | Doe',
-     *  2: 'Steve | Smith'
+     *  1: "John | Doe",
+     *  2: "Steve | Smith"
      * ]
      * ```
      *
@@ -1336,8 +1336,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * can customize the property to use for grouping by setting `groupField`:
      *
      * ```
-     * $table.find('list', [
-     *  'groupField': 'category_id',
+     * $table.find("list", [
+     *  "groupField": "category_id",
      * ]);
      * ```
      *
@@ -1345,12 +1345,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * [
-     *  'group_1': [
-     *      1: 'value for id 1',
-     *      2: 'value for id 2',
+     *  "group_1": [
+     *      1: "value for id 1",
+     *      2: "value for id 2",
      *  ]
-     *  'group_2': [
-     *      4: 'value for id 4'
+     *  "group_2": [
+     *      4: "value for id 4"
      *  ]
      * ]
      * ```
@@ -1362,22 +1362,22 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function findList(Query $query, array $options): Query
     {
         $options += [
-            'keyField': this.getPrimaryKey(),
-            'valueField': this.getDisplayField(),
-            'groupField': null,
-            'valueSeparator': ';',
+            "keyField": this.getPrimaryKey(),
+            "valueField": this.getDisplayField(),
+            "groupField": null,
+            "valueSeparator": ";",
         ];
 
         if (
-            !$query.clause('select') &&
-            !is_object($options['keyField']) &&
-            !is_object($options['valueField']) &&
-            !is_object($options['groupField'])
+            !$query.clause("select") &&
+            !is_object($options["keyField"]) &&
+            !is_object($options["valueField"]) &&
+            !is_object($options["groupField"])
         ) {
             $fields = array_merge(
-                (array)$options['keyField'],
-                (array)$options['valueField'],
-                (array)$options['groupField']
+                (array)$options["keyField"],
+                (array)$options["valueField"],
+                (array)$options["groupField"]
             );
             $columns = this.getSchema().columns();
             if (count($fields) == count(array_intersect($fields, $columns))) {
@@ -1387,15 +1387,15 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         $options = _setFieldMatchers(
             $options,
-            ['keyField', 'valueField', 'groupField']
+            ["keyField", "valueField", "groupField"]
         );
 
         return $query.formatResults(function ($results) use ($options) {
             /** @var \Cake\Collection\CollectionInterface $results */
             return $results.combine(
-                $options['keyField'],
-                $options['valueField'],
-                $options['groupField']
+                $options["keyField"],
+                $options["valueField"],
+                $options["groupField"]
             );
         });
     }
@@ -1413,10 +1413,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * `$options`:
      *
      * ```
-     * $table.find('threaded', [
-     *  'keyField': 'id',
-     *  'parentField': 'ancestor_id',
-     *  'nestingKey': 'children'
+     * $table.find("threaded", [
+     *  "keyField": "id",
+     *  "parentField": "ancestor_id",
+     *  "nestingKey": "children"
      * ]);
      * ```
      *
@@ -1427,16 +1427,16 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function findThreaded(Query $query, array $options): Query
     {
         $options += [
-            'keyField': this.getPrimaryKey(),
-            'parentField': 'parent_id',
-            'nestingKey': 'children',
+            "keyField": this.getPrimaryKey(),
+            "parentField": "parent_id",
+            "nestingKey": "children",
         ];
 
-        $options = _setFieldMatchers($options, ['keyField', 'parentField']);
+        $options = _setFieldMatchers($options, ["keyField", "parentField"]);
 
         return $query.formatResults(function ($results) use ($options) {
             /** @var \Cake\Collection\CollectionInterface $results */
-            return $results.nest($options['keyField'], $options['parentField'], $options['nestingKey']);
+            return $results.nest($options["keyField"], $options["parentField"], $options["nestingKey"]);
         });
     }
 
@@ -1466,7 +1466,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
 
             $fields = $options[$field];
-            $glue = in_array($field, ['keyField', 'parentField'], true) ? ';' : $options['valueSeparator'];
+            $glue = in_array($field, ["keyField", "parentField"], true) ? ";" : $options["valueSeparator"];
             $options[$field] = function ($row) use ($fields, $glue) {
                 $matches = [];
                 foreach ($fields as $field) {
@@ -1488,7 +1488,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Get an article and some relationships:
      *
      * ```
-     * $article = $articles.get(1, ['contain': ['Users', 'Comments']]);
+     * $article = $articles.get(1, ["contain": ["Users", "Comments"]]);
      * ```
      *
      * @param mixed $primaryKey primary key value to find
@@ -1505,7 +1505,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         if ($primaryKey == null) {
             throw new InvalidPrimaryKeyException(sprintf(
-                'Record not found in table "%s" with primary key [NULL]',
+                "Record not found in table "%s" with primary key [NULL]",
                 this.getTable()
             ));
         }
@@ -1513,7 +1513,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $key = (array)this.getPrimaryKey();
         $alias = this.getAlias();
         foreach ($key as $index: $keyname) {
-            $key[$index] = $alias . '.' . $keyname;
+            $key[$index] = $alias . "." . $keyname;
         }
         if (!is_array($primaryKey)) {
             $primaryKey = [$primaryKey];
@@ -1525,24 +1525,24 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }, $primaryKey);
 
             throw new InvalidPrimaryKeyException(sprintf(
-                'Record not found in table "%s" with primary key [%s]',
+                "Record not found in table "%s" with primary key [%s]",
                 this.getTable(),
-                implode(', ', $primaryKey)
+                implode(", ", $primaryKey)
             ));
         }
         $conditions = array_combine($key, $primaryKey);
 
-        $cacheConfig = $options['cache'] ?? false;
-        $cacheKey = $options['key'] ?? false;
-        $finder = $options['finder'] ?? 'all';
-        unset($options['key'], $options['cache'], $options['finder']);
+        $cacheConfig = $options["cache"] ?? false;
+        $cacheKey = $options["key"] ?? false;
+        $finder = $options["finder"] ?? "all";
+        unset($options["key"], $options["cache"], $options["finder"]);
 
         $query = this.find($finder, $options).where($conditions);
 
         if ($cacheConfig) {
             if (!$cacheKey) {
                 $cacheKey = sprintf(
-                    'get-%s-%s-%s',
+                    "get-%s-%s-%s",
                     this.getConnection().configName(),
                     this.getTable(),
                     json_encode($primaryKey)
@@ -1610,28 +1610,28 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * - defaults: Whether to use the search criteria as default values for the new entity (default: true)
      *
      * @param \Cake\ORM\Query|callable|array $search The criteria to find existing
-     *   records by. Note that when you pass a query object you'll have to use
+     *   records by. Note that when you pass a query object you"ll have to use
      *   the 2nd arg of the method to modify the entity data before saving.
      * @param callable|null $callback A callback that will be invoked for newly
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
      * @param array<string, mixed> $options The options to use when saving.
      * @return \Cake\Datasource\EntityInterface An entity.
-     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn't be saved
+     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      */
     function findOrCreate($search, ?callable $callback = null, $options = []): EntityInterface
     {
         $options = new ArrayObject($options + [
-            'atomic': true,
-            'defaults': true,
+            "atomic": true,
+            "defaults": true,
         ]);
 
         $entity = _executeTransaction(function () use ($search, $callback, $options) {
             return _processFindOrCreate($search, $callback, $options.getArrayCopy());
-        }, $options['atomic']);
+        }, $options["atomic"]);
 
-        if ($entity && _transactionCommitted($options['atomic'], true)) {
-            this.dispatchEvent('Model.afterSaveCommit', compact('entity', 'options'));
+        if ($entity && _transactionCommitted($options["atomic"], true)) {
+            this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
         }
 
         return $entity;
@@ -1647,7 +1647,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   is persisted.
      * @param array<string, mixed> $options The options to use when saving.
      * @return \Cake\Datasource\EntityInterface|array An entity.
-     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn't be saved
+     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      * @throws \InvalidArgumentException
      */
     protected function _processFindOrCreate($search, ?callable $callback = null, $options = [])
@@ -1660,19 +1660,19 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         }
 
         $entity = this.newEmptyEntity();
-        if ($options['defaults'] && is_array($search)) {
+        if ($options["defaults"] && is_array($search)) {
             $accessibleFields = array_combine(array_keys($search), array_fill(0, count($search), true));
-            $entity = this.patchEntity($entity, $search, ['accessibleFields': $accessibleFields]);
+            $entity = this.patchEntity($entity, $search, ["accessibleFields": $accessibleFields]);
         }
         if ($callback != null) {
             $entity = $callback($entity) ?: $entity;
         }
-        unset($options['defaults']);
+        unset($options["defaults"]);
 
         $result = this.save($entity, $options);
 
         if ($result == false) {
-            throw new PersistenceFailedException($entity, ['findOrCreate']);
+            throw new PersistenceFailedException($entity, ["findOrCreate"]);
         }
 
         return $entity;
@@ -1695,7 +1695,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             $query = $search;
         } else {
             throw new InvalidArgumentException(sprintf(
-                'Search criteria must be an array, callable or Query. Got "%s"',
+                "Search criteria must be an array, callable or Query. Got "%s"",
                 getTypeName($search)
             ));
         }
@@ -1759,8 +1759,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function exists($conditions): bool
     {
         return (bool)count(
-            this.find('all')
-            .select(['existing': 1])
+            this.find("all")
+            .select(["existing": 1])
             .where($conditions)
             .limit(1)
             .disableHydration()
@@ -1807,13 +1807,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   it will be reflected in every listener and remembered at the end of the event
      *   so it can be used for the rest of the save operation. Returning false in any
      *   of the listeners will abort the saving process. If the event is stopped
-     *   using the event API, the event object's `result` property will be returned.
+     *   using the event API, the event object"s `result` property will be returned.
      *   This can be useful when having your own saving strategy implemented inside a
      *   listener.
      * - Model.afterSave: Will be triggered after a successful insert or save,
      *   listeners will receive the entity and the options array as arguments. The type
      *   of operation performed (insert or update) can be determined by checking the
-     *   entity's method `isNew`, true meaning an insert and false an update.
+     *   entity"s method `isNew`, true meaning an insert and false an update.
      * - Model.afterSaveCommit: Will be triggered after the transaction is committed
      *   for atomic save, listeners will receive the entity and the options array
      *   as arguments.
@@ -1832,21 +1832,21 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * // Only save the comments association
-     * $articles.save($entity, ['associated': ['Comments']]);
+     * $articles.save($entity, ["associated": ["Comments"]]);
      *
      * // Save the company, the employees and related addresses for each of them.
      * // For employees do not check the entity rules
      * $companies.save($entity, [
-     *   'associated': [
-     *     'Employees': [
-     *       'associated': ['Addresses'],
-     *       'checkRules': false
+     *   "associated": [
+     *     "Employees": [
+     *       "associated": ["Addresses"],
+     *       "checkRules": false
      *     ]
      *   ]
      * ]);
      *
      * // Save no associations
-     * $articles.save($entity, ['associated': false]);
+     * $articles.save($entity, ["associated": false]);
      * ```
      *
      * @param \Cake\Datasource\EntityInterface $entity the entity to be saved
@@ -1857,20 +1857,20 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function save(EntityInterface $entity, $options = [])
     {
         if ($options instanceof SaveOptionsBuilder) {
-            deprecationWarning('SaveOptionsBuilder is deprecated. Use a normal array for options instead.');
+            deprecationWarning("SaveOptionsBuilder is deprecated. Use a normal array for options instead.");
             $options = $options.toArray();
         }
 
         $options = new ArrayObject((array)$options + [
-            'atomic': true,
-            'associated': true,
-            'checkRules': true,
-            'checkExisting': true,
-            '_primary': true,
-            '_cleanOnSuccess': true,
+            "atomic": true,
+            "associated": true,
+            "checkRules": true,
+            "checkExisting": true,
+            "_primary": true,
+            "_cleanOnSuccess": true,
         ]);
 
-        if ($entity.hasErrors((bool)$options['associated'])) {
+        if ($entity.hasErrors((bool)$options["associated"])) {
             return false;
         }
 
@@ -1880,14 +1880,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         $success = _executeTransaction(function () use ($entity, $options) {
             return _processSave($entity, $options);
-        }, $options['atomic']);
+        }, $options["atomic"]);
 
         if ($success) {
-            if (_transactionCommitted($options['atomic'], $options['_primary'])) {
-                this.dispatchEvent('Model.afterSaveCommit', compact('entity', 'options'));
+            if (_transactionCommitted($options["atomic"], $options["_primary"])) {
+                this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
             }
-            if ($options['atomic'] || $options['_primary']) {
-                if ($options['_cleanOnSuccess']) {
+            if ($options["atomic"] || $options["_primary"]) {
+                if ($options["_cleanOnSuccess"]) {
                     $entity.clean();
                     $entity.setNew(false);
                 }
@@ -1905,14 +1905,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \Cake\Datasource\EntityInterface $entity the entity to be saved
      * @param \ArrayAccess|array $options The options to use when saving.
      * @return \Cake\Datasource\EntityInterface
-     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn't be saved
+     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      * @see \Cake\ORM\Table::save()
      */
     function saveOrFail(EntityInterface $entity, $options = []): EntityInterface
     {
         $saved = this.save($entity, $options);
         if ($saved == false) {
-            throw new PersistenceFailedException($entity, ['save']);
+            throw new PersistenceFailedException($entity, ["save"]);
         }
 
         return $saved;
@@ -1932,7 +1932,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $primaryColumns = (array)this.getPrimaryKey();
 
-        if ($options['checkExisting'] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
+        if ($options["checkExisting"] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
             $alias = this.getAlias();
             $conditions = [];
             foreach ($entity.extract($primaryColumns) as $k: $v) {
@@ -1942,12 +1942,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         }
 
         $mode = $entity.isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
-        if ($options['checkRules'] && !this.checkRules($entity, $mode, $options)) {
+        if ($options["checkRules"] && !this.checkRules($entity, $mode, $options)) {
             return false;
         }
 
-        $options['associated'] = _associations.normalizeKeys($options['associated']);
-        $event = this.dispatchEvent('Model.beforeSave', compact('entity', 'options'));
+        $options["associated"] = _associations.normalizeKeys($options["associated"]);
+        $event = this.dispatchEvent("Model.beforeSave", compact("entity", "options"));
 
         if ($event.isStopped()) {
             $result = $event.getResult();
@@ -1957,7 +1957,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
             if ($result != false && !($result instanceof EntityInterface)) {
                 throw new RuntimeException(sprintf(
-                    'The beforeSave callback must return `false` or `EntityInterface` instance. Got `%s` instead.',
+                    "The beforeSave callback must return `false` or `EntityInterface` instance. Got `%s` instead.",
                     getTypeName($result)
                 ));
             }
@@ -1968,11 +1968,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $saved = _associations.saveParents(
             this,
             $entity,
-            $options['associated'],
-            ['_primary': false] + $options.getArrayCopy()
+            $options["associated"],
+            ["_primary": false] + $options.getArrayCopy()
         );
 
-        if (!$saved && $options['atomic']) {
+        if (!$saved && $options["atomic"]) {
             return false;
         }
 
@@ -2012,21 +2012,21 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $success = _associations.saveChildren(
             this,
             $entity,
-            $options['associated'],
-            ['_primary': false] + $options.getArrayCopy()
+            $options["associated"],
+            ["_primary": false] + $options.getArrayCopy()
         );
 
-        if (!$success && $options['atomic']) {
+        if (!$success && $options["atomic"]) {
             return false;
         }
 
-        this.dispatchEvent('Model.afterSave', compact('entity', 'options'));
+        this.dispatchEvent("Model.afterSave", compact("entity", "options"));
 
-        if ($options['atomic'] && !this.getConnection().inTransaction()) {
-            throw new RolledbackTransactionException(['table': static::class]);
+        if ($options["atomic"] && !this.getConnection().inTransaction()) {
+            throw new RolledbackTransactionException(["table": static::class]);
         }
 
-        if (!$options['atomic'] && !$options['_primary']) {
+        if (!$options["atomic"] && !$options["_primary"]) {
             $entity.clean();
             $entity.setNew(false);
             $entity.setSource(this.getRegistryAlias());
@@ -2036,7 +2036,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * Auxiliary function to handle the insert of an entity's data in the table
+     * Auxiliary function to handle the insert of an entity"s data in the table
      *
      * @param \Cake\Datasource\EntityInterface $entity the subject entity from were $data was extracted
      * @param array $data The actual data that needs to be saved
@@ -2049,7 +2049,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $primary = (array)this.getPrimaryKey();
         if (empty($primary)) {
             $msg = sprintf(
-                'Cannot insert row in "%s" table, it has no primary key.',
+                "Cannot insert row in "%s" table, it has no primary key.",
                 this.getTable()
             );
             throw new RuntimeException($msg);
@@ -2069,12 +2069,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         if (count($primary) > 1) {
             $schema = this.getSchema();
             foreach ($primary as $k: $v) {
-                if (!isset($data[$k]) && empty($schema.getColumn($k)['autoIncrement'])) {
-                    $msg = 'Cannot insert row, some of the primary key values are missing. ';
+                if (!isset($data[$k]) && empty($schema.getColumn($k)["autoIncrement"])) {
+                    $msg = "Cannot insert row, some of the primary key values are missing. ";
                     $msg .= sprintf(
-                        'Got (%s), expecting (%s)',
-                        implode(', ', $filteredKeys + $entity.extract(array_keys($primary))),
-                        implode(', ', array_keys($primary))
+                        "Got (%s), expecting (%s)",
+                        implode(", ", $filteredKeys + $entity.extract(array_keys($primary))),
+                        implode(", ", array_keys($primary))
                     );
                     throw new RuntimeException($msg);
                 }
@@ -2092,7 +2092,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $success = false;
         if ($statement.rowCount() != 0) {
             $success = $entity;
-            $entity.set($filteredKeys, ['guard': false]);
+            $entity.set($filteredKeys, ["guard": false]);
             $schema = this.getSchema();
             $driver = this.getConnection().getDriver();
             foreach ($primary as $key: $v) {
@@ -2136,7 +2136,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * Auxiliary function to handle the update of an entity's data in the table
+     * Auxiliary function to handle the update of an entity"s data in the table
      *
      * @param \Cake\Datasource\EntityInterface $entity the subject entity from were $data was extracted
      * @param array $data The actual data that needs to be saved
@@ -2161,8 +2161,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         }
 
         if (!$entity.has($primaryColumns)) {
-            $message = 'All primary key value(s) are needed for updating, ';
-            $message .= get_class($entity) . ' is missing ' . implode(', ', $primaryColumns);
+            $message = "All primary key value(s) are needed for updating, ";
+            $message .= get_class($entity) . " is missing " . implode(", ", $primaryColumns);
             throw new InvalidArgumentException($message);
         }
 
@@ -2172,7 +2172,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             .where($primaryKey)
             .execute();
 
-        $success = $statement.errorCode() == '00000' ? $entity : false;
+        $success = $statement.errorCode() == "00000" ? $entity : false;
         $statement.closeCursor();
 
         return $success;
@@ -2210,7 +2210,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @return iterable<\Cake\Datasource\EntityInterface> Entities list.
      * @throws \Exception
-     * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn't be saved.
+     * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      */
     function saveManyOrFail(iterable $entities, $options = []): iterable
     {
@@ -2220,25 +2220,25 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * @param iterable<\Cake\Datasource\EntityInterface> $entities Entities to save.
      * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn't be saved.
-     * @throws \Exception If an entity couldn't be saved.
+     * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
+     * @throws \Exception If an entity couldn"t be saved.
      * @return iterable<\Cake\Datasource\EntityInterface> Entities list.
      */
     protected function _saveMany(iterable $entities, $options = []): iterable
     {
         if ($options instanceof SaveOptionsBuilder) {
-            deprecationWarning('SaveOptionsBuilder is deprecated. Use a normal array for options instead.');
+            deprecationWarning("SaveOptionsBuilder is deprecated. Use a normal array for options instead.");
             $options = $options.toArray();
         }
 
         $options = new ArrayObject(
             (array)$options + [
-                'atomic': true,
-                'checkRules': true,
-                '_primary': true,
+                "atomic": true,
+                "checkRules": true,
+                "_primary": true,
             ]
         );
-        $options['_cleanOnSuccess'] = false;
+        $options["_cleanOnSuccess"] = false;
 
         /** @var array<bool> $isNew */
         $isNew = [];
@@ -2275,7 +2275,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         if ($failed != null) {
             $cleanupOnFailure($entities);
 
-            throw new PersistenceFailedException($failed, ['saveMany']);
+            throw new PersistenceFailedException($failed, ["saveMany"]);
         }
 
         $cleanupOnSuccess = function (EntityInterface $entity) use (&$cleanupOnSuccess) {
@@ -2295,10 +2295,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
         };
 
-        if (_transactionCommitted($options['atomic'], $options['_primary'])) {
+        if (_transactionCommitted($options["atomic"], $options["_primary"])) {
             foreach ($entities as $entity) {
-                this.dispatchEvent('Model.afterSaveCommit', compact('entity', 'options'));
-                if ($options['atomic'] || $options['_primary']) {
+                this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
+                if ($options["atomic"] || $options["_primary"]) {
                     $cleanupOnSuccess($entity);
                 }
             }
@@ -2340,19 +2340,19 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function delete(EntityInterface $entity, $options = []): bool
     {
         $options = new ArrayObject((array)$options + [
-            'atomic': true,
-            'checkRules': true,
-            '_primary': true,
+            "atomic": true,
+            "checkRules": true,
+            "_primary": true,
         ]);
 
         $success = _executeTransaction(function () use ($entity, $options) {
             return _processDelete($entity, $options);
-        }, $options['atomic']);
+        }, $options["atomic"]);
 
-        if ($success && _transactionCommitted($options['atomic'], $options['_primary'])) {
-            this.dispatchEvent('Model.afterDeleteCommit', [
-                'entity': $entity,
-                'options': $options,
+        if ($success && _transactionCommitted($options["atomic"], $options["_primary"])) {
+            this.dispatchEvent("Model.afterDeleteCommit", [
+                "entity": $entity,
+                "options": $options,
             ]);
         }
 
@@ -2401,7 +2401,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $failed = _deleteMany($entities, $options);
 
         if ($failed != null) {
-            throw new PersistenceFailedException($failed, ['deleteMany']);
+            throw new PersistenceFailedException($failed, ["deleteMany"]);
         }
 
         return $entities;
@@ -2415,9 +2415,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     protected function _deleteMany(iterable $entities, $options = []): ?EntityInterface
     {
         $options = new ArrayObject((array)$options + [
-                'atomic': true,
-                'checkRules': true,
-                '_primary': true,
+                "atomic": true,
+                "checkRules": true,
+                "_primary": true,
             ]);
 
         $failed = _executeTransaction(function () use ($entities, $options) {
@@ -2428,13 +2428,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
 
             return null;
-        }, $options['atomic']);
+        }, $options["atomic"]);
 
-        if ($failed == null && _transactionCommitted($options['atomic'], $options['_primary'])) {
+        if ($failed == null && _transactionCommitted($options["atomic"], $options["_primary"])) {
             foreach ($entities as $entity) {
-                this.dispatchEvent('Model.afterDeleteCommit', [
-                    'entity': $entity,
-                    'options': $options,
+                this.dispatchEvent("Model.afterDeleteCommit", [
+                    "entity": $entity,
+                    "options": $options,
                 ]);
             }
         }
@@ -2456,7 +2456,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $deleted = this.delete($entity, $options);
         if ($deleted == false) {
-            throw new PersistenceFailedException($entity, ['delete']);
+            throw new PersistenceFailedException($entity, ["delete"]);
         }
 
         return $deleted;
@@ -2482,17 +2482,17 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         $primaryKey = (array)this.getPrimaryKey();
         if (!$entity.has($primaryKey)) {
-            $msg = 'Deleting requires all primary key values.';
+            $msg = "Deleting requires all primary key values.";
             throw new InvalidArgumentException($msg);
         }
 
-        if ($options['checkRules'] && !this.checkRules($entity, RulesChecker::DELETE, $options)) {
+        if ($options["checkRules"] && !this.checkRules($entity, RulesChecker::DELETE, $options)) {
             return false;
         }
 
-        $event = this.dispatchEvent('Model.beforeDelete', [
-            'entity': $entity,
-            'options': $options,
+        $event = this.dispatchEvent("Model.beforeDelete", [
+            "entity": $entity,
+            "options": $options,
         ]);
 
         if ($event.isStopped()) {
@@ -2501,7 +2501,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         $success = _associations.cascadeDelete(
             $entity,
-            ['_primary': false] + $options.getArrayCopy()
+            ["_primary": false] + $options.getArrayCopy()
         );
         if (!$success) {
             return $success;
@@ -2516,9 +2516,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             return false;
         }
 
-        this.dispatchEvent('Model.afterDelete', [
-            'entity': $entity,
-            'options': $options,
+        this.dispatchEvent("Model.afterDelete", [
+            "entity": $entity,
+            "options": $options,
         ]);
 
         return true;
@@ -2532,7 +2532,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function hasFinder(string $type): bool
     {
-        $finder = 'find' . $type;
+        $finder = "find" . $type;
 
         return method_exists(this, $finder) || _behaviors.hasFinder($type);
     }
@@ -2553,7 +2553,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $query.applyOptions($options);
         $options = $query.getOptions();
-        $finder = 'find' . $type;
+        $finder = "find" . $type;
         if (method_exists(this, $finder)) {
             return this.{$finder}($query, $options);
         }
@@ -2563,7 +2563,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         }
 
         throw new BadMethodCallException(sprintf(
-            'Unknown finder method "%s" on %s.',
+            "Unknown finder method "%s" on %s.",
             $type,
             static::class
         ));
@@ -2581,23 +2581,23 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     protected function _dynamicFinder(string $method, array $args)
     {
         $method = Inflector::underscore($method);
-        preg_match('/^find_([\w]+)_by_/', $method, $matches);
+        preg_match("/^find_([\w]+)_by_/", $method, $matches);
         if (empty($matches)) {
             // find_by_ is 8 characters.
             $fields = substr($method, 8);
-            $findType = 'all';
+            $findType = "all";
         } else {
             $fields = substr($method, strlen($matches[0]));
             $findType = Inflector::variable($matches[1]);
         }
-        $hasOr = strpos($fields, '_or_');
-        $hasAnd = strpos($fields, '_and_');
+        $hasOr = strpos($fields, "_or_");
+        $hasAnd = strpos($fields, "_and_");
 
         $makeConditions = function ($fields, $args) {
             $conditions = [];
             if (count($args) < count($fields)) {
                 throw new BadMethodCallException(sprintf(
-                    'Not enough arguments for magic finder. Got %s required %s',
+                    "Not enough arguments for magic finder. Got %s required %s",
                     count($args),
                     count($fields)
                 ));
@@ -2611,24 +2611,24 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         if ($hasOr != false && $hasAnd != false) {
             throw new BadMethodCallException(
-                'Cannot mix "and" & "or" in a magic finder. Use find() instead.'
+                "Cannot mix "and" & "or" in a magic finder. Use find() instead."
             );
         }
 
         if ($hasOr == false && $hasAnd == false) {
             $conditions = $makeConditions([$fields], $args);
         } elseif ($hasOr != false) {
-            $fields = explode('_or_', $fields);
+            $fields = explode("_or_", $fields);
             $conditions = [
-                'OR': $makeConditions($fields, $args),
+                "OR": $makeConditions($fields, $args),
             ];
         } else {
-            $fields = explode('_and_', $fields);
+            $fields = explode("_and_", $fields);
             $conditions = $makeConditions($fields, $args);
         }
 
         return this.find($findType, [
-            'conditions': $conditions,
+            "conditions": $conditions,
         ]);
     }
 
@@ -2648,12 +2648,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         if (_behaviors.hasMethod($method)) {
             return _behaviors.call($method, $args);
         }
-        if (preg_match('/^find(?:\w+)?By/', $method) > 0) {
+        if (preg_match("/^find(?:\w+)?By/", $method) > 0) {
             return _dynamicFinder($method, $args);
         }
 
         throw new BadMethodCallException(
-            sprintf('Unknown method "%s" called on %s', $method, static::class)
+            sprintf("Unknown method "%s" called on %s", $method, static::class)
         );
     }
 
@@ -2670,8 +2670,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $association = _associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
-                'Undefined property `%s`. ' .
-                'You have not defined the `%s` association on `%s`.',
+                "Undefined property `%s`. " .
+                "You have not defined the `%s` association on `%s`.",
                 $property,
                 $property,
                 static::class
@@ -2716,7 +2716,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $class = this.getEntityClass();
 
-        return new $class([], ['source': this.getRegistryAlias()]);
+        return new $class([], ["source": this.getRegistryAlias()]);
     }
 
     /**
@@ -2729,7 +2729,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ```
      * $article = this.Articles.newEntity(
      *   this.request.getData(),
-     *   ['associated': ['Tags', 'Comments.Users']]
+     *   ["associated": ["Tags", "Comments.Users"]]
      * );
      * ```
      *
@@ -2738,20 +2738,20 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $article = this.Articles.newEntity(this.request.getData(), [
-     *  'fields': ['title', 'body', 'tags', 'comments'],
-     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      * ]
      * );
      * ```
      *
      * The `fields` option lets remove or restrict input data from ending up in
-     * the entity. If you'd like to relax the entity's default accessible fields,
+     * the entity. If you"d like to relax the entity"s default accessible fields,
      * you can use the `accessibleFields` option:
      *
      * ```
      * $article = this.Articles.newEntity(
      *   this.request.getData(),
-     *   ['accessibleFields': ['protected_field': true]]
+     *   ["accessibleFields": ["protected_field": true]]
      * );
      * ```
      *
@@ -2762,7 +2762,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ```
      * $article = this.Articles.newEntity(
      *   this.request.getData(),
-     *   ['validate': false]
+     *   ["validate": false]
      * );
      * ```
      *
@@ -2780,7 +2780,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function newEntity(array $data, array $options = []): EntityInterface
     {
-        $options['associated'] = $options['associated'] ?? _associations.keys();
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.one($data, $options);
@@ -2796,7 +2796,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ```
      * $articles = this.Articles.newEntities(
      *   this.request.getData(),
-     *   ['associated': ['Tags', 'Comments.Users']]
+     *   ["associated": ["Tags", "Comments.Users"]]
      * );
      * ```
      *
@@ -2805,8 +2805,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $articles = this.Articles.newEntities(this.request.getData(), [
-     *  'fields': ['title', 'body', 'tags', 'comments'],
-     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      *  ]
      * );
      * ```
@@ -2820,7 +2820,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function newEntities(array $data, array $options = []): array
     {
-        $options['associated'] = $options['associated'] ?? _associations.keys();
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.many($data, $options);
@@ -2838,16 +2838,16 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $article = this.Articles.patchEntity($article, this.request.getData(), [
-     *  'fields': ['title', 'body', 'tags', 'comments'],
-     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      *  ]
      * );
      * ```
      *
      * ```
      * $article = this.Articles.patchEntity($article, this.request.getData(), [
-     *   'associated': [
-     *     'Tags': ['accessibleFields': ['*': true]]
+     *   "associated": [
+     *     "Tags": ["accessibleFields": ["*": true]]
      *   ]
      * ]);
      * ```
@@ -2858,7 +2858,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $article = this.patchEntity($article, this.request.getData(),[
-     *  'validate': false
+     *  "validate": false
      * ]);
      * ```
      *
@@ -2879,7 +2879,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
-        $options['associated'] = $options['associated'] ?? _associations.keys();
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.merge($entity, $data, $options);
@@ -2901,8 +2901,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $articles = this.Articles.patchEntities($articles, this.request.getData(), [
-     *  'fields': ['title', 'body', 'tags', 'comments'],
-     *  'associated': ['Tags', 'Comments.Users': ['fields': 'username']]
+     *  "fields": ["title", "body", "tags", "comments"],
+     *  "associated": ["Tags", "Comments.Users": ["fields": "username"]]
      *  ]
      * );
      * ```
@@ -2918,7 +2918,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function patchEntities(iterable $entities, array $data, array $options = []): array
     {
-        $options['associated'] = $options['associated'] ?? _associations.keys();
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
         return $marshaller.mergeMany($entities, $data, $options);
@@ -2932,18 +2932,18 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ### Example:
      *
      * ```
-     * $validator.add('email', [
-     *  'unique': ['rule': 'validateUnique', 'provider': 'table']
+     * $validator.add("email", [
+     *  "unique": ["rule": "validateUnique", "provider": "table"]
      * ])
      * ```
      *
      * Unique validation can be scoped to the value of another column:
      *
      * ```
-     * $validator.add('email', [
-     *  'unique': [
-     *      'rule': ['validateUnique', ['scope': 'site_id']],
-     *      'provider': 'table'
+     * $validator.add("email", [
+     *  "unique": [
+     *      "rule": ["validateUnique", ["scope": "site_id"]],
+     *      "provider": "table"
      *  ]
      * ]);
      * ```
@@ -2953,7 +2953,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * the data to be validated.
      *
      * @param mixed $value The value of column to be checked for uniqueness.
-     * @param array<string, mixed> $options The options array, optionally containing the 'scope' key.
+     * @param array<string, mixed> $options The options array, optionally containing the "scope" key.
      *   May also be the validation context, if there are no options.
      * @param array|null $context Either the validation context or null.
      * @return bool True if the value is unique, or false if a non-scalar, non-unique value was given.
@@ -2964,16 +2964,16 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             $context = $options;
         }
         $entity = new Entity(
-            $context['data'],
+            $context["data"],
             [
-                'useSetters': false,
-                'markNew': $context['newRecord'],
-                'source': this.getRegistryAlias(),
+                "useSetters": false,
+                "markNew": $context["newRecord"],
+                "source": this.getRegistryAlias(),
             ]
         );
         $fields = array_merge(
-            [$context['field']],
-            isset($options['scope']) ? (array)$options['scope'] : []
+            [$context["field"]],
+            isset($options["scope"]) ? (array)$options["scope"] : []
         );
         $values = $entity.extract($fields);
         foreach ($values as $field) {
@@ -2985,7 +2985,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         /** @var \Cake\ORM\Rule\IsUnique $rule */
         $rule = new $class($fields, $options);
 
-        return $rule($entity, ['repository': this]);
+        return $rule($entity, ["repository": this]);
     }
 
     /**
@@ -3017,18 +3017,18 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function implementedEvents(): array
     {
         $eventMap = [
-            'Model.beforeMarshal': 'beforeMarshal',
-            'Model.afterMarshal': 'afterMarshal',
-            'Model.buildValidator': 'buildValidator',
-            'Model.beforeFind': 'beforeFind',
-            'Model.beforeSave': 'beforeSave',
-            'Model.afterSave': 'afterSave',
-            'Model.afterSaveCommit': 'afterSaveCommit',
-            'Model.beforeDelete': 'beforeDelete',
-            'Model.afterDelete': 'afterDelete',
-            'Model.afterDeleteCommit': 'afterDeleteCommit',
-            'Model.beforeRules': 'beforeRules',
-            'Model.afterRules': 'afterRules',
+            "Model.beforeMarshal": "beforeMarshal",
+            "Model.afterMarshal": "afterMarshal",
+            "Model.buildValidator": "buildValidator",
+            "Model.beforeFind": "beforeFind",
+            "Model.beforeSave": "beforeSave",
+            "Model.afterSave": "afterSave",
+            "Model.afterSaveCommit": "afterSaveCommit",
+            "Model.beforeDelete": "beforeDelete",
+            "Model.afterDelete": "afterDelete",
+            "Model.afterDeleteCommit": "afterDeleteCommit",
+            "Model.beforeRules": "beforeRules",
+            "Model.afterRules": "afterRules",
         ];
         $events = [];
 
@@ -3074,7 +3074,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $user = $usersTable.get(1);
-     * $user = $usersTable.loadInto($user, ['Articles.Tags', 'Articles.Comments']);
+     * $user = $usersTable.loadInto($user, ["Articles.Tags", "Articles.Comments"]);
      * echo $user.articles[0].title;
      * ```
      *
@@ -3084,7 +3084,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * ```
      * $users = $usersTable.find().where([...]).toList();
-     * $users = $usersTable.loadInto($users, ['Articles.Tags', 'Articles.Comments']);
+     * $users = $usersTable.loadInto($users, ["Articles.Tags", "Articles.Comments"]);
      * echo $user[1].articles[0].title;
      * ```
      *
@@ -3119,14 +3119,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $conn = this.getConnection();
 
         return [
-            'registryAlias': this.getRegistryAlias(),
-            'table': this.getTable(),
-            'alias': this.getAlias(),
-            'entityClass': this.getEntityClass(),
-            'associations': _associations.keys(),
-            'behaviors': _behaviors.loaded(),
-            'defaultConnection': static::defaultConnectionName(),
-            'connectionName': $conn.configName(),
+            "registryAlias": this.getRegistryAlias(),
+            "table": this.getTable(),
+            "alias": this.getAlias(),
+            "entityClass": this.getEntityClass(),
+            "associations": _associations.keys(),
+            "behaviors": _behaviors.loaded(),
+            "defaultConnection": static::defaultConnectionName(),
+            "connectionName": $conn.configName(),
         ];
     }
 }

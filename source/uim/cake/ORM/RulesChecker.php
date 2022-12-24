@@ -39,7 +39,7 @@ class RulesChecker : BaseRulesChecker
      * ### Example
      *
      * ```
-     * $rules.add($rules.isUnique(['email'], 'The email should be unique'));
+     * $rules.add($rules.isUnique(["email"], "The email should be unique"));
      * ```
      *
      * ### Options
@@ -48,26 +48,26 @@ class RulesChecker : BaseRulesChecker
      *
      * @param array<string> $fields The list of fields to check for uniqueness.
      * @param array<string, mixed>|string|null $message The error message to show in case the rule does not pass. Can
-     *   also be an array of options. When an array, the 'message' key can be used to provide a message.
+     *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return \Cake\Datasource\RuleInvoker
      */
     function isUnique(array $fields, $message = null): RuleInvoker
     {
-        $options = is_array($message) ? $message : ['message': $message];
-        $message = $options['message'] ?? null;
-        unset($options['message']);
+        $options = is_array($message) ? $message : ["message": $message];
+        $message = $options["message"] ?? null;
+        unset($options["message"]);
 
         if (!$message) {
             if (_useI18n) {
-                $message = __d('cake', 'This value is already in use');
+                $message = __d("cake", "This value is already in use");
             } else {
-                $message = 'This value is already in use';
+                $message = "This value is already in use";
             }
         }
 
         $errorField = current($fields);
 
-        return _addError(new IsUnique($fields, $options), '_isUnique', compact('errorField', 'message'));
+        return _addError(new IsUnique($fields, $options), "_isUnique", compact("errorField", "message"));
     }
 
     /**
@@ -79,42 +79,42 @@ class RulesChecker : BaseRulesChecker
      * ### Example:
      *
      * ```
-     * $rules.add($rules.existsIn('author_id', 'Authors', 'Invalid Author'));
+     * $rules.add($rules.existsIn("author_id", "Authors", "Invalid Author"));
      *
-     * $rules.add($rules.existsIn('site_id', new SitesTable(), 'Invalid Site'));
+     * $rules.add($rules.existsIn("site_id", new SitesTable(), "Invalid Site"));
      * ```
      *
-     * Available $options are error 'message' and 'allowNullableNulls' flag.
-     * 'message' sets a custom error message.
-     * Set 'allowNullableNulls' to true to accept composite foreign keys where one or more nullable columns are null.
+     * Available $options are error "message" and "allowNullableNulls" flag.
+     * "message" sets a custom error message.
+     * Set "allowNullableNulls" to true to accept composite foreign keys where one or more nullable columns are null.
      *
      * @param array<string>|string $field The field or list of fields to check for existence by
      * primary key lookup in the other table.
      * @param \Cake\ORM\Table|\Cake\ORM\Association|string $table The table name where the fields existence will be checked.
      * @param array<string, mixed>|string|null $message The error message to show in case the rule does not pass. Can
-     *   also be an array of options. When an array, the 'message' key can be used to provide a message.
+     *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return \Cake\Datasource\RuleInvoker
      */
     function existsIn($field, $table, $message = null): RuleInvoker
     {
         $options = [];
         if (is_array($message)) {
-            $options = $message + ['message': null];
-            $message = $options['message'];
-            unset($options['message']);
+            $options = $message + ["message": null];
+            $message = $options["message"];
+            unset($options["message"]);
         }
 
         if (!$message) {
             if (_useI18n) {
-                $message = __d('cake', 'This value does not exist');
+                $message = __d("cake", "This value does not exist");
             } else {
-                $message = 'This value does not exist';
+                $message = "This value does not exist";
             }
         }
 
         $errorField = is_string($field) ? $field : current($field);
 
-        return _addError(new ExistsIn($field, $table, $options), '_existsIn', compact('errorField', 'message'));
+        return _addError(new ExistsIn($field, $table, $options), "_existsIn", compact("errorField", "message"));
     }
 
     /**
@@ -123,7 +123,7 @@ class RulesChecker : BaseRulesChecker
      * ### Example:
      *
      * ```
-     * $rules.addUpdate($rules.isLinkedTo('Articles', 'article'));
+     * $rules.addUpdate($rules.isLinkedTo("Articles", "article"));
      * ```
      *
      * On a `Comments` table that has a `belongsTo Articles` association, this check would ensure that comments
@@ -143,7 +143,7 @@ class RulesChecker : BaseRulesChecker
             $field,
             $message,
             LinkConstraint::STATUS_LINKED,
-            '_isLinkedTo'
+            "_isLinkedTo"
         );
     }
 
@@ -153,7 +153,7 @@ class RulesChecker : BaseRulesChecker
      * ### Example:
      *
      * ```
-     * $rules.addDelete($rules.isNotLinkedTo('Comments', 'comments'));
+     * $rules.addDelete($rules.isNotLinkedTo("Comments", "comments"));
      * ```
      *
      * On a `Articles` table that has a `hasMany Comments` association, this check would ensure that articles
@@ -173,7 +173,7 @@ class RulesChecker : BaseRulesChecker
             $field,
             $message,
             LinkConstraint::STATUS_NOT_LINKED,
-            '_isNotLinkedTo'
+            "_isNotLinkedTo"
         );
     }
 
@@ -211,7 +211,7 @@ class RulesChecker : BaseRulesChecker
             $associationAlias = $association;
 
             if ($errorField == null) {
-                $repository = _options['repository'] ?? null;
+                $repository = _options["repository"] ?? null;
                 if ($repository instanceof Table) {
                     $association = $repository.getAssociation($association);
                     $errorField = $association.getProperty();
@@ -221,7 +221,7 @@ class RulesChecker : BaseRulesChecker
             }
         } else {
             throw new \InvalidArgumentException(sprintf(
-                'Argument 1 is expected to be of type `\Cake\ORM\Association|string`, `%s` given.',
+                "Argument 1 is expected to be of type `\Cake\ORM\Association|string`, `%s` given.",
                 getTypeName($association)
             ));
         }
@@ -229,13 +229,13 @@ class RulesChecker : BaseRulesChecker
         if (!$message) {
             if (_useI18n) {
                 $message = __d(
-                    'cake',
-                    'Cannot modify row: a constraint for the `{0}` association fails.',
+                    "cake",
+                    "Cannot modify row: a constraint for the `{0}` association fails.",
                     $associationAlias
                 );
             } else {
                 $message = sprintf(
-                    'Cannot modify row: a constraint for the `%s` association fails.',
+                    "Cannot modify row: a constraint for the `%s` association fails.",
                     $associationAlias
                 );
             }
@@ -246,7 +246,7 @@ class RulesChecker : BaseRulesChecker
             $linkStatus
         );
 
-        return _addError($rule, $ruleName, compact('errorField', 'message'));
+        return _addError($rule, $ruleName, compact("errorField", "message"));
     }
 
     /**
@@ -261,14 +261,14 @@ class RulesChecker : BaseRulesChecker
     function validCount(
         string $field,
         int $count = 0,
-        string $operator = '>',
+        string $operator = ">",
         ?string $message = null
     ): RuleInvoker {
         if (!$message) {
             if (_useI18n) {
-                $message = __d('cake', 'The count does not match {0}{1}', [$operator, $count]);
+                $message = __d("cake", "The count does not match {0}{1}", [$operator, $count]);
             } else {
-                $message = sprintf('The count does not match %s%d', $operator, $count);
+                $message = sprintf("The count does not match %s%d", $operator, $count);
             }
         }
 
@@ -276,8 +276,8 @@ class RulesChecker : BaseRulesChecker
 
         return _addError(
             new ValidCount($field),
-            '_validCount',
-            compact('count', 'operator', 'errorField', 'message')
+            "_validCount",
+            compact("count", "operator", "errorField", "message")
         );
     }
 }

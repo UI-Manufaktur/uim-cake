@@ -30,21 +30,21 @@ class ViewBlock
      *
      * @var string
      */
-    public const OVERRIDE = 'override';
+    public const OVERRIDE = "override";
 
     /**
      * Append content
      *
      * @var string
      */
-    public const APPEND = 'append';
+    public const APPEND = "append";
 
     /**
      * Prepend content
      *
      * @var string
      */
-    public const PREPEND = 'prepend';
+    public const PREPEND = "prepend";
 
     /**
      * Block content. An array of blocks indexed by name.
@@ -69,10 +69,10 @@ class ViewBlock
     protected $_discardActiveBufferOnEnd = false;
 
     /**
-     * Start capturing output for a 'block'
+     * Start capturing output for a "block"
      *
      * Blocks allow you to create slots or blocks of dynamic content in the layout.
-     * view files can implement some or all of a layout's slots.
+     * view files can implement some or all of a layout"s slots.
      *
      * You can end capturing blocks using View::end(). Blocks can be output
      * using View::get();
@@ -87,7 +87,7 @@ class ViewBlock
     function start(string $name, string $mode = ViewBlock::OVERRIDE): void
     {
         if (array_key_exists($name, _active)) {
-            throw new CakeException(sprintf("A view block with the name '%s' is already/still open.", $name));
+            throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", $name));
         }
         _active[$name] = $mode;
         ob_start();
@@ -147,7 +147,7 @@ class ViewBlock
         }
 
         if (!isset(_blocks[$name])) {
-            _blocks[$name] = '';
+            _blocks[$name] = "";
         }
         if ($mode == ViewBlock::PREPEND) {
             _blocks[$name] = $value . _blocks[$name];
@@ -177,7 +177,7 @@ class ViewBlock
      * @param string $default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    function get(string $name, string $default = ''): string
+    function get(string $name, string $default = ""): string
     {
         return _blocks[$name] ?? $default;
     }

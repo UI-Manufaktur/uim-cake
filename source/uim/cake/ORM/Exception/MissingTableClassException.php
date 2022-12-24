@@ -25,5 +25,5 @@ class MissingTableClassException : CakeException
     /**
      * @var string
      */
-    protected $_messageTemplate = 'Table class %s could not be found.';
+    protected $_messageTemplate = "Table class %s could not be found.";
 }

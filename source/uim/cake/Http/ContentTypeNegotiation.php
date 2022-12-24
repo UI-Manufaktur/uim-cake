@@ -21,7 +21,7 @@ class ContentTypeNegotiation
      */
     function parseAccept(RequestInterface $request): array
     {
-        $header = $request.getHeaderLine('Accept');
+        $header = $request.getHeaderLine("Accept");
 
         return this.parseQualifiers($header);
     }
@@ -37,7 +37,7 @@ class ContentTypeNegotiation
      */
     function parseAcceptLanguage(RequestInterface $request): array
     {
-        $header = $request.getHeaderLine('Accept-Language');
+        $header = $request.getHeaderLine("Accept-Language");
 
         return this.parseQualifiers($header);
     }
@@ -54,17 +54,17 @@ class ContentTypeNegotiation
         if (!$header) {
             return $accept;
         }
-        $headers = explode(',', $header);
+        $headers = explode(",", $header);
         foreach (array_filter($headers) as $value) {
-            $prefValue = '1.0';
+            $prefValue = "1.0";
             $value = trim($value);
 
-            $semiPos = strpos($value, ';');
+            $semiPos = strpos($value, ";");
             if ($semiPos != false) {
-                $params = explode(';', $value);
+                $params = explode(";", $value);
                 $value = trim($params[0]);
                 foreach ($params as $param) {
-                    $qPos = strpos($param, 'q=');
+                    $qPos = strpos($param, "q=");
                     if ($qPos != false) {
                         $prefValue = substr($param, $qPos + 2);
                     }
@@ -134,8 +134,8 @@ class ContentTypeNegotiation
         $accept = [];
         foreach ($raw as $languages) {
             foreach ($languages as &$lang) {
-                if (strpos($lang, '_')) {
-                    $lang = str_replace('_', '-', $lang);
+                if (strpos($lang, "_")) {
+                    $lang = str_replace("_", "-", $lang);
                 }
                 $lang = strtolower($lang);
             }

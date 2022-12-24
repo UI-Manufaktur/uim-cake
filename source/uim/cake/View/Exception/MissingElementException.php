@@ -21,5 +21,5 @@ class MissingElementException : MissingTemplateException
     /**
      * @var string
      */
-    protected $type = 'Element';
+    protected $type = "Element";
 }

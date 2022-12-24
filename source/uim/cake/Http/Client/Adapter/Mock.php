@@ -52,14 +52,14 @@ class Mock : AdapterInterface
      */
     function addResponse(RequestInterface $request, Response $response, array $options): void
     {
-        if (isset($options['match']) && !($options['match'] instanceof Closure)) {
-            $type = getTypeName($options['match']);
+        if (isset($options["match"]) && !($options["match"] instanceof Closure)) {
+            $type = getTypeName($options["match"]);
             throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{$type}`.");
         }
         this.responses[] = [
-            'request': $request,
-            'response': $response,
-            'options': $options,
+            "request": $request,
+            "response": $response,
+            "options": $options,
         ];
     }
 
@@ -77,16 +77,16 @@ class Mock : AdapterInterface
         $requestUri = (string)$request.getUri();
 
         foreach (this.responses as $index: $mock) {
-            if ($method != $mock['request'].getMethod()) {
+            if ($method != $mock["request"].getMethod()) {
                 continue;
             }
-            if (!this.urlMatches($requestUri, $mock['request'])) {
+            if (!this.urlMatches($requestUri, $mock["request"])) {
                 continue;
             }
-            if (isset($mock['options']['match'])) {
-                $match = $mock['options']['match']($request);
+            if (isset($mock["options"]["match"])) {
+                $match = $mock["options"]["match"]($request);
                 if (!is_bool($match)) {
-                    throw new InvalidArgumentException('Match callback must return a boolean value.');
+                    throw new InvalidArgumentException("Match callback must return a boolean value.");
                 }
                 if (!$match) {
                     continue;
@@ -102,10 +102,10 @@ class Mock : AdapterInterface
             unset(this.responses[$found]);
             this.responses[] = $mock;
 
-            return [$mock['response']];
+            return [$mock["response"]];
         }
 
-        throw new MissingResponseException(['method': $method, 'url': $requestUri]);
+        throw new MissingResponseException(["method": $method, "url": $requestUri]);
     }
 
     /**
@@ -121,7 +121,7 @@ class Mock : AdapterInterface
         if ($requestUri == $mockUri) {
             return true;
         }
-        $starPosition = strrpos($mockUri, '/%2A');
+        $starPosition = strrpos($mockUri, "/%2A");
         if ($starPosition == strlen($mockUri) - 4) {
             $mockUri = substr($mockUri, 0, $starPosition);
 

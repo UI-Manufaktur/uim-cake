@@ -45,24 +45,24 @@ class DatabaseSession : SessionHandlerInterface
      * Constructor. Looks at Session configuration information and
      * sets up the session model.
      *
-     * @param array<string, mixed> $config The configuration for this engine. It requires the 'model'
+     * @param array<string, mixed> $config The configuration for this engine. It requires the "model"
      * key to be present corresponding to the Table to use for managing the sessions.
      */
     public this(array $config = [])
     {
-        if (isset($config['tableLocator'])) {
-            this.setTableLocator($config['tableLocator']);
+        if (isset($config["tableLocator"])) {
+            this.setTableLocator($config["tableLocator"]);
         }
         $tableLocator = this.getTableLocator();
 
-        if (empty($config['model'])) {
-            $config = $tableLocator.exists('Sessions') ? [] : ['table': 'sessions', 'allowFallbackClass': true];
-            _table = $tableLocator.get('Sessions', $config);
+        if (empty($config["model"])) {
+            $config = $tableLocator.exists("Sessions") ? [] : ["table": "sessions", "allowFallbackClass": true];
+            _table = $tableLocator.get("Sessions", $config);
         } else {
-            _table = $tableLocator.get($config['model']);
+            _table = $tableLocator.get($config["model"]);
         }
 
-        _timeout = (int)ini_get('session.gc_maxlifetime');
+        _timeout = (int)ini_get("session.gc_maxlifetime");
     }
 
     /**
@@ -114,24 +114,24 @@ class DatabaseSession : SessionHandlerInterface
         /** @var string $pkField */
         $pkField = _table.getPrimaryKey();
         $result = _table
-            .find('all')
-            .select(['data'])
+            .find("all")
+            .select(["data"])
             .where([$pkField: $id])
             .disableHydration()
             .first();
 
         if (empty($result)) {
-            return '';
+            return "";
         }
 
-        if (is_string($result['data'])) {
-            return $result['data'];
+        if (is_string($result["data"])) {
+            return $result["data"];
         }
 
-        $session = stream_get_contents($result['data']);
+        $session = stream_get_contents($result["data"]);
 
         if ($session == false) {
-            return '';
+            return "";
         }
 
         return $session;
@@ -154,9 +154,9 @@ class DatabaseSession : SessionHandlerInterface
         $pkField = _table.getPrimaryKey();
         $session = _table.newEntity([
             $pkField: $id,
-            'data': $data,
-            'expires': time() + _timeout,
-        ], ['accessibleFields': [$pkField: true]]);
+            "data": $data,
+            "expires": time() + _timeout,
+        ], ["accessibleFields": [$pkField: true]]);
 
         return (bool)_table.save($session);
     }
@@ -185,6 +185,6 @@ class DatabaseSession : SessionHandlerInterface
     #[\ReturnTypeWillChange]
     function gc($maxlifetime)
     {
-        return _table.deleteAll(['expires <': time()]);
+        return _table.deleteAll(["expires <": time()]);
     }
 }

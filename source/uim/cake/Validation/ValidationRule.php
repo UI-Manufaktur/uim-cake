@@ -35,21 +35,21 @@ class ValidationRule
     protected $_rule;
 
     /**
-     * The 'on' key
+     * The "on" key
      *
      * @var callable|string
      */
     protected $_on;
 
     /**
-     * The 'last' key
+     * The "last" key
      *
      * @var bool
      */
     protected $_last = false;
 
     /**
-     * The 'message' key
+     * The "message" key
      *
      * @var string
      */
@@ -61,7 +61,7 @@ class ValidationRule
      *
      * @var string
      */
-    protected $_provider = 'default';
+    protected $_provider = "default";
 
     /**
      * Extra arguments to be passed to the validation method
@@ -111,7 +111,7 @@ class ValidationRule
      */
     function process($value, array $providers, array $context = [])
     {
-        $context += ['data': [], 'newRecord': true, 'providers': $providers];
+        $context += ["data": [], "newRecord": true, "providers": $providers];
 
         if (_skip($context)) {
             return true;
@@ -129,10 +129,10 @@ class ValidationRule
         if (!$isCallable) {
             /** @psalm-suppress PossiblyInvalidArgument */
             $message = sprintf(
-                'Unable to call method "%s" in "%s" provider for field "%s"',
+                "Unable to call method "%s" in "%s" provider for field "%s"",
                 _rule,
                 _provider,
-                $context['field']
+                $context["field"]
             );
             throw new InvalidArgumentException($message);
         }
@@ -171,7 +171,7 @@ class ValidationRule
             return !$function($context);
         }
 
-        $newRecord = $context['newRecord'];
+        $newRecord = $context["newRecord"];
         if (!empty(_on)) {
             return (_on == Validator::WHEN_CREATE && !$newRecord)
                 || (_on == Validator::WHEN_UPDATE && $newRecord);
@@ -192,11 +192,11 @@ class ValidationRule
             if (empty($value)) {
                 continue;
             }
-            if ($key == 'rule' && is_array($value) && !is_callable($value)) {
+            if ($key == "rule" && is_array($value) && !is_callable($value)) {
                 _pass = array_slice($value, 1);
                 $value = array_shift($value);
             }
-            if (in_array($key, ['rule', 'on', 'message', 'last', 'provider', 'pass'], true)) {
+            if (in_array($key, ["rule", "on", "message", "last", "provider", "pass"], true)) {
                 this.{"_$key"} = $value;
             }
         }
@@ -210,7 +210,7 @@ class ValidationRule
      */
     function get(string $property)
     {
-        $property = '_' . $property;
+        $property = "_" . $property;
 
         return this.{$property} ?? null;
     }

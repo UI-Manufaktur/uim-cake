@@ -33,13 +33,13 @@ interface IEventManager
      * Binding with no options:
      *
      * ```
-     * $eventManager.on('Model.beforeSave', $callable);
+     * $eventManager.on("Model.beforeSave", $callable);
      * ```
      *
      * Binding with options:
      *
      * ```
-     * $eventManager.on('Model.beforeSave', ['priority': 90], $callable);
+     * $eventManager.on("Model.beforeSave", ["priority": 90], $callable);
      * ```
      *
      * @param \Cake\Event\IEventListener|string $eventKey The event unique identifier name
@@ -70,13 +70,13 @@ interface IEventManager
      * Remove all listeners for a given event:
      *
      * ```
-     * $manager.off('My.event');
+     * $manager.off("My.event");
      * ```
      *
      * Remove a specific listener:
      *
      * ```
-     * $manager.off('My.event', $callback);
+     * $manager.off("My.event", $callback);
      * ```
      *
      * Remove a callback from all events:

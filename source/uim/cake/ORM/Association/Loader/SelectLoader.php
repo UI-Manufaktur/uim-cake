@@ -102,15 +102,15 @@ class SelectLoader
      */
     public this(array $options)
     {
-        this.alias = $options['alias'];
-        this.sourceAlias = $options['sourceAlias'];
-        this.targetAlias = $options['targetAlias'];
-        this.foreignKey = $options['foreignKey'];
-        this.strategy = $options['strategy'];
-        this.bindingKey = $options['bindingKey'];
-        this.finder = $options['finder'];
-        this.associationType = $options['associationType'];
-        this.sort = $options['sort'] ?? null;
+        this.alias = $options["alias"];
+        this.sourceAlias = $options["sourceAlias"];
+        this.targetAlias = $options["targetAlias"];
+        this.foreignKey = $options["foreignKey"];
+        this.strategy = $options["strategy"];
+        this.bindingKey = $options["bindingKey"];
+        this.finder = $options["finder"];
+        this.associationType = $options["associationType"];
+        this.sort = $options["sort"] ?? null;
     }
 
     /**
@@ -137,11 +137,11 @@ class SelectLoader
     protected function _defaultOptions(): array
     {
         return [
-            'foreignKey': this.foreignKey,
-            'conditions': [],
-            'strategy': this.strategy,
-            'nestKey': this.alias,
-            'sort': this.sort,
+            "foreignKey": this.foreignKey,
+            "conditions": [],
+            "strategy": this.strategy,
+            "nestKey": this.alias,
+            "sort": this.sort,
         ];
     }
 
@@ -157,46 +157,46 @@ class SelectLoader
     protected function _buildQuery(array $options): Query
     {
         $key = _linkField($options);
-        $filter = $options['keys'];
-        $useSubquery = $options['strategy'] == Association::STRATEGY_SUBQUERY;
+        $filter = $options["keys"];
+        $useSubquery = $options["strategy"] == Association::STRATEGY_SUBQUERY;
         $finder = this.finder;
-        $options['fields'] = $options['fields'] ?? [];
+        $options["fields"] = $options["fields"] ?? [];
 
         /** @var \Cake\ORM\Query $query */
         $query = $finder();
-        if (isset($options['finder'])) {
-            [$finderName, $opts] = _extractFinder($options['finder']);
+        if (isset($options["finder"])) {
+            [$finderName, $opts] = _extractFinder($options["finder"]);
             $query = $query.find($finderName, $opts);
         }
 
         $fetchQuery = $query
-            .select($options['fields'])
-            .where($options['conditions'])
+            .select($options["fields"])
+            .where($options["conditions"])
             .eagerLoaded(true)
-            .enableHydration($options['query'].isHydrationEnabled());
-        if ($options['query'].isResultsCastingEnabled()) {
+            .enableHydration($options["query"].isHydrationEnabled());
+        if ($options["query"].isResultsCastingEnabled()) {
             $fetchQuery.enableResultsCasting();
         } else {
             $fetchQuery.disableResultsCasting();
         }
 
         if ($useSubquery) {
-            $filter = _buildSubquery($options['query']);
+            $filter = _buildSubquery($options["query"]);
             $fetchQuery = _addFilteringJoin($fetchQuery, $key, $filter);
         } else {
             $fetchQuery = _addFilteringCondition($fetchQuery, $key, $filter);
         }
 
-        if (!empty($options['sort'])) {
-            $fetchQuery.order($options['sort']);
+        if (!empty($options["sort"])) {
+            $fetchQuery.order($options["sort"]);
         }
 
-        if (!empty($options['contain'])) {
-            $fetchQuery.contain($options['contain']);
+        if (!empty($options["contain"])) {
+            $fetchQuery.contain($options["contain"]);
         }
 
-        if (!empty($options['queryBuilder'])) {
-            $fetchQuery = $options['queryBuilder']($fetchQuery);
+        if (!empty($options["queryBuilder"])) {
+            $fetchQuery = $options["queryBuilder"]($fetchQuery);
         }
 
         _assertFieldsPresent($fetchQuery, (array)$key);
@@ -211,10 +211,10 @@ class SelectLoader
      *
      * ### Examples:
      *
-     * The following will call the finder 'translations' with the value of the finder as its options:
-     * $query.contain(['Comments': ['finder': ['translations']]]);
-     * $query.contain(['Comments': ['finder': ['translations': []]]]);
-     * $query.contain(['Comments': ['finder': ['translations': ['locales': ['en_US']]]]]);
+     * The following will call the finder "translations" with the value of the finder as its options:
+     * $query.contain(["Comments": ["finder": ["translations"]]]);
+     * $query.contain(["Comments": ["finder": ["translations": []]]]);
+     * $query.contain(["Comments": ["finder": ["translations": ["locales": ["en_US"]]]]]);
      *
      * @param array|string $finderData The finder name or an array having the name as key
      * and options as value.
@@ -247,7 +247,7 @@ class SelectLoader
             return;
         }
 
-        $select = $fetchQuery.aliasFields($fetchQuery.clause('select'));
+        $select = $fetchQuery.aliasFields($fetchQuery.clause("select"));
         if (empty($select)) {
             return;
         }
@@ -264,15 +264,15 @@ class SelectLoader
         $missingFields = $missingKey($select, $key);
         if ($missingFields) {
             $driver = $fetchQuery.getConnection().getDriver();
-            $quoted = array_map([$driver, 'quoteIdentifier'], $key);
+            $quoted = array_map([$driver, "quoteIdentifier"], $key);
             $missingFields = $missingKey($select, $quoted);
         }
 
         if ($missingFields) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'You are required to select the "%s" field(s)',
-                    implode(', ', $key)
+                    "You are required to select the "%s" field(s)",
+                    implode(", ", $key)
                 )
             );
         }
@@ -283,7 +283,7 @@ class SelectLoader
      * target table query given a filter key and some filtering values when the
      * filtering needs to be done using a subquery.
      *
-     * @param \Cake\ORM\Query $query Target table's query
+     * @param \Cake\ORM\Query $query Target table"s query
      * @param array<string>|string $key the fields that should be used for filtering
      * @param \Cake\ORM\Query $subquery The Subquery to use for filtering
      * @return \Cake\ORM\Query
@@ -293,7 +293,7 @@ class SelectLoader
         $filter = [];
         $aliasedTable = this.sourceAlias;
 
-        foreach ($subquery.clause('select') as $aliasedField: $field) {
+        foreach ($subquery.clause("select") as $aliasedField: $field) {
             if (is_int($aliasedField)) {
                 $filter[] = new IdentifierExpression($field);
             } else {
@@ -303,7 +303,7 @@ class SelectLoader
         $subquery.select($filter, true);
 
         if (is_array($key)) {
-            $conditions = _createTupleCondition($query, $key, $filter, '=');
+            $conditions = _createTupleCondition($query, $key, $filter, "=");
         } else {
             $filter = current($filter);
             $conditions = $query.newExpr([$key: $filter]);
@@ -319,7 +319,7 @@ class SelectLoader
      * Appends any conditions required to load the relevant set of records in the
      * target table query given a filter key and some filtering values.
      *
-     * @param \Cake\ORM\Query $query Target table's query
+     * @param \Cake\ORM\Query $query Target table"s query
      * @param array<string>|string $key The fields that should be used for filtering
      * @param mixed $filter The value that should be used to match for $key
      * @return \Cake\ORM\Query
@@ -327,9 +327,9 @@ class SelectLoader
     protected function _addFilteringCondition(Query $query, $key, $filter): Query
     {
         if (is_array($key)) {
-            $conditions = _createTupleCondition($query, $key, $filter, 'IN');
+            $conditions = _createTupleCondition($query, $key, $filter, "IN");
         } else {
-            $conditions = [$key . ' IN': $filter];
+            $conditions = [$key . " IN": $filter];
         }
 
         return $query.andWhere($conditions);
@@ -339,7 +339,7 @@ class SelectLoader
      * Returns a TupleComparison object that can be used for matching all the fields
      * from $keys with the tuple values in $filter using the provided operator.
      *
-     * @param \Cake\ORM\Query $query Target table's query
+     * @param \Cake\ORM\Query $query Target table"s query
      * @param array<string> $keys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for $key
      * @param string $operator The operator for comparing the tuples
@@ -371,9 +371,9 @@ class SelectLoader
         $links = [];
         $name = this.alias;
 
-        if ($options['foreignKey'] == false && this.associationType == Association::ONE_TO_MANY) {
-            $msg = 'Cannot have foreignKey = false for hasMany associations. ' .
-                   'You must provide a foreignKey column.';
+        if ($options["foreignKey"] == false && this.associationType == Association::ONE_TO_MANY) {
+            $msg = "Cannot have foreignKey = false for hasMany associations. " .
+                   "You must provide a foreignKey column.";
             throw new RuntimeException($msg);
         }
 
@@ -382,7 +382,7 @@ class SelectLoader
             this.bindingKey;
 
         foreach ((array)$keys as $key) {
-            $links[] = sprintf('%s.%s', $name, $key);
+            $links[] = sprintf("%s.%s", $name, $key);
         }
 
         if (count($links) == 1) {
@@ -410,14 +410,14 @@ class SelectLoader
         $filterQuery.setValueBinder(new ValueBinder());
 
         // Ignore limit if there is no order since we need all rows to find matches
-        if (!$filterQuery.clause('limit') || !$filterQuery.clause('order')) {
+        if (!$filterQuery.clause("limit") || !$filterQuery.clause("order")) {
             $filterQuery.limit(null);
             $filterQuery.order([], true);
             $filterQuery.offset(null);
         }
 
         $fields = _subqueryFields($query);
-        $filterQuery.select($fields['select'], true).group($fields['group']);
+        $filterQuery.select($fields["select"], true).group($fields["group"]);
 
         return $filterQuery;
     }
@@ -443,9 +443,9 @@ class SelectLoader
         $fields = $query.aliasFields($keys, this.sourceAlias);
         $group = $fields = array_values($fields);
 
-        $order = $query.clause('order');
+        $order = $query.clause("order");
         if ($order) {
-            $columns = $query.clause('select');
+            $columns = $query.clause("select");
             $order.iterateParts(function ($direction, $field) use (&$fields, $columns): void {
                 if (isset($columns[$field])) {
                     $fields[$field] = $columns[$field];
@@ -453,7 +453,7 @@ class SelectLoader
             });
         }
 
-        return ['select': $fields, 'group': $group];
+        return ["select": $fields, "group": $group];
     }
 
     /**
@@ -479,9 +479,9 @@ class SelectLoader
                 $values[] = $result[$k];
             }
             if ($singleResult) {
-                $resultMap[implode(';', $values)] = $result;
+                $resultMap[implode(";", $values)] = $result;
             } else {
-                $resultMap[implode(';', $values)][] = $result;
+                $resultMap[implode(";", $values)][] = $result;
             }
         }
 
@@ -510,7 +510,7 @@ class SelectLoader
             $sourceKeys[] = key($f);
         }
 
-        $nestKey = $options['nestKey'];
+        $nestKey = $options["nestKey"];
         if (count($sourceKeys) > 1) {
             return _multiKeysInjector($resultMap, $sourceKeys, $nestKey);
         }
@@ -544,7 +544,7 @@ class SelectLoader
                 $values[] = $row[$key];
             }
 
-            $key = implode(';', $values);
+            $key = implode(";", $values);
             if (isset($resultMap[$key])) {
                 $row[$nestKey] = $resultMap[$key];
             }

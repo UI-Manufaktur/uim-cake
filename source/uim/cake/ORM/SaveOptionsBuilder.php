@@ -87,7 +87,7 @@ class SaveOptionsBuilder : ArrayObject
     {
         $associated = _normalizeAssociations($associated);
         _associated(_table, $associated);
-        _options['associated'] = $associated;
+        _options["associated"] = $associated;
 
         return this;
     }
@@ -107,8 +107,8 @@ class SaveOptionsBuilder : ArrayObject
                 continue;
             }
             _checkAssociation($table, $key);
-            if (isset($associated['associated'])) {
-                _associated($table.getAssociation($key).getTarget(), $associated['associated']);
+            if (isset($associated["associated"])) {
+                _associated($table.getAssociation($key).getTarget(), $associated["associated"]);
                 continue;
             }
         }
@@ -126,7 +126,7 @@ class SaveOptionsBuilder : ArrayObject
     {
         if (!$table.associations().has($association)) {
             throw new RuntimeException(sprintf(
-                'Table `%s` is not associated with `%s`',
+                "Table `%s` is not associated with `%s`",
                 get_class($table),
                 $association
             ));
@@ -141,7 +141,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function guard(bool $guard)
     {
-        _options['guard'] = $guard;
+        _options["guard"] = $guard;
 
         return this;
     }
@@ -155,7 +155,7 @@ class SaveOptionsBuilder : ArrayObject
     function validate(string $validate)
     {
         _table.getValidator($validate);
-        _options['validate'] = $validate;
+        _options["validate"] = $validate;
 
         return this;
     }
@@ -168,7 +168,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function checkExisting(bool $checkExisting)
     {
-        _options['checkExisting'] = $checkExisting;
+        _options["checkExisting"] = $checkExisting;
 
         return this;
     }
@@ -181,7 +181,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function checkRules(bool $checkRules)
     {
-        _options['checkRules'] = $checkRules;
+        _options["checkRules"] = $checkRules;
 
         return this;
     }
@@ -194,7 +194,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function atomic(bool $atomic)
     {
-        _options['atomic'] = $atomic;
+        _options["atomic"] = $atomic;
 
         return this;
     }

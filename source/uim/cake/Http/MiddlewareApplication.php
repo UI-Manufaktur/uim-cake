@@ -50,6 +50,6 @@ abstract class MiddlewareApplication : IHttpApplication
     function handle(
         IServerRequest $request
     ): IResponse {
-        return new Response(['body': 'Not found', 'status': 404]);
+        return new Response(["body": "Not found", "status": 404]);
     }
 }

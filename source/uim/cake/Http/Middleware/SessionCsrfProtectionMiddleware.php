@@ -31,7 +31,7 @@ use RuntimeException;
  *
  * This middleware adds a CSRF token to the session. Each request must
  * contain a token in request data, or the X-CSRF-Token header on each PATCH, POST,
- * PUT, or DELETE request. This follows a 'synchronizer token' pattern.
+ * PUT, or DELETE request. This follows a "synchronizer token" pattern.
  *
  * If the request data is missing or does not match the session data,
  * an InvalidCsrfTokenException will be raised.
@@ -56,8 +56,8 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * @var array<string, mixed>
      */
     protected $_config = [
-        'key': 'csrfToken',
-        'field': '_csrfToken',
+        "key": "csrfToken",
+        "field": "_csrfToken",
     ];
 
     /**
@@ -94,7 +94,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $method = $request.getMethod();
-        $hasData = in_array($method, ['PUT', 'POST', 'DELETE', 'PATCH'], true)
+        $hasData = in_array($method, ["PUT", "POST", "DELETE", "PATCH"], true)
             || $request.getParsedBody();
 
         if (
@@ -107,19 +107,19 @@ class SessionCsrfProtectionMiddleware : IMiddleware
             return $handler.handle($request);
         }
 
-        $session = $request.getAttribute('session');
+        $session = $request.getAttribute("session");
         if (!$session || !($session instanceof Session)) {
-            throw new RuntimeException('You must have a `session` attribute to use session based CSRF tokens');
+            throw new RuntimeException("You must have a `session` attribute to use session based CSRF tokens");
         }
 
-        $token = $session.read(_config['key']);
+        $token = $session.read(_config["key"]);
         if ($token == null) {
             $token = this.createToken();
-            $session.write(_config['key'], $token);
+            $session.write(_config["key"], $token);
         }
-        $request = $request.withAttribute('csrfToken', this.saltToken($token));
+        $request = $request.withAttribute("csrfToken", this.saltToken($token));
 
-        if ($method == 'GET') {
+        if ($method == "GET") {
             return $handler.handle($request);
         }
 
@@ -162,7 +162,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
         $decoded = base64_decode($token);
         $length = strlen($decoded);
         $salt = Security::randomBytes($length);
-        $salted = '';
+        $salted = "";
         for ($i = 0; $i < $length; $i++) {
             // XOR the token and salt together so that we can reverse it later.
             $salted .= chr(ord($decoded[$i]) ^ ord($salt[$i]));
@@ -189,7 +189,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
         $salted = substr($decoded, 0, static::TOKEN_VALUE_LENGTH);
         $salt = substr($decoded, static::TOKEN_VALUE_LENGTH);
 
-        $unsalted = '';
+        $unsalted = "";
         for ($i = 0; $i < static::TOKEN_VALUE_LENGTH; $i++) {
             // Reverse the XOR to desalt.
             $unsalted .= chr(ord($salted[$i]) ^ ord($salt[$i]));
@@ -211,7 +211,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     {
         $body = $request.getParsedBody();
         if (is_array($body)) {
-            unset($body[_config['field']]);
+            unset($body[_config["field"]]);
             $request = $request.withParsedBody($body);
         }
 
@@ -241,29 +241,29 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      */
     protected function validateToken(IServerRequest $request, Session $session): void
     {
-        $token = $session.read(_config['key']);
+        $token = $session.read(_config["key"]);
         if (!$token || !is_string($token)) {
-            throw new InvalidCsrfTokenException(__d('cake', 'Missing or incorrect CSRF session key'));
+            throw new InvalidCsrfTokenException(__d("cake", "Missing or incorrect CSRF session key"));
         }
 
         $body = $request.getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
-            $post = (string)Hash::get($body, _config['field']);
+            $post = (string)Hash::get($body, _config["field"]);
             $post = this.unsaltToken($post);
             if (hash_equals($post, $token)) {
                 return;
             }
         }
 
-        $header = $request.getHeaderLine('X-CSRF-Token');
+        $header = $request.getHeaderLine("X-CSRF-Token");
         $header = this.unsaltToken($header);
         if (hash_equals($header, $token)) {
             return;
         }
 
         throw new InvalidCsrfTokenException(__d(
-            'cake',
-            'CSRF token from either the request body or request headers did not match or is missing.'
+            "cake",
+            "CSRF token from either the request body or request headers did not match or is missing."
         ));
     }
 }

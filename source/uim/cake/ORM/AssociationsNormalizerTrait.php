@@ -39,30 +39,30 @@ trait AssociationsNormalizerTrait
                 $options = [];
             }
 
-            if (!strpos($table, '.')) {
+            if (!strpos($table, ".")) {
                 $result[$table] = $options;
                 continue;
             }
 
-            $path = explode('.', $table);
+            $path = explode(".", $table);
             $table = array_pop($path);
             /** @var string $first */
             $first = array_shift($path);
             $pointer += [$first: []];
             $pointer = &$pointer[$first];
-            $pointer += ['associated': []];
+            $pointer += ["associated": []];
 
             foreach ($path as $t) {
-                $pointer += ['associated': []];
-                $pointer['associated'] += [$t: []];
-                $pointer['associated'][$t] += ['associated': []];
-                $pointer = &$pointer['associated'][$t];
+                $pointer += ["associated": []];
+                $pointer["associated"] += [$t: []];
+                $pointer["associated"][$t] += ["associated": []];
+                $pointer = &$pointer["associated"][$t];
             }
 
-            $pointer['associated'] += [$table: []];
-            $pointer['associated'][$table] = $options + $pointer['associated'][$table];
+            $pointer["associated"] += [$table: []];
+            $pointer["associated"][$table] = $options + $pointer["associated"][$table];
         }
 
-        return $result['associated'] ?? $result;
+        return $result["associated"] ?? $result;
     }
 }

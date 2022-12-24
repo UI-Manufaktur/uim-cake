@@ -43,7 +43,7 @@ interface PaginatorInterface
 
 // phpcs:disable
 class_alias(
-    'Cake\Datasource\Paging\PaginatorInterface',
-    'Cake\Datasource\PaginatorInterface'
+    "Cake\Datasource\Paging\PaginatorInterface",
+    "Cake\Datasource\PaginatorInterface"
 );
 // phpcs:enable

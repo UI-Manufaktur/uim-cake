@@ -84,8 +84,8 @@ class BelongsTo : Association
 
     /**
      * Returns whether the passed table is the owning side for this
-     * association. This means that rows in the 'target' table would miss important
-     * or required information if the row in 'source' did not exist.
+     * association. This means that rows in the "target" table would miss important
+     * or required information if the row in "source" did not exist.
      *
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
@@ -134,7 +134,7 @@ class BelongsTo : Association
             (array)this.getForeignKey(),
             $targetEntity.extract((array)this.getBindingKey())
         );
-        $entity.set($properties, ['guard': false]);
+        $entity.set($properties, ["guard": false]);
 
         return $entity;
     }
@@ -153,27 +153,27 @@ class BelongsTo : Association
         $conditions = [];
         $tAlias = _name;
         $sAlias = _sourceTable.getAlias();
-        $foreignKey = (array)$options['foreignKey'];
+        $foreignKey = (array)$options["foreignKey"];
         $bindingKey = (array)this.getBindingKey();
 
         if (count($foreignKey) != count($bindingKey)) {
             if (empty($bindingKey)) {
-                $msg = 'The "%s" table does not define a primary key. Please set one.';
+                $msg = "The "%s" table does not define a primary key. Please set one.";
                 throw new RuntimeException(sprintf($msg, this.getTarget().getTable()));
             }
 
-            $msg = 'Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"';
+            $msg = "Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"";
             throw new RuntimeException(sprintf(
                 $msg,
                 _name,
-                implode(', ', $foreignKey),
-                implode(', ', $bindingKey)
+                implode(", ", $foreignKey),
+                implode(", ", $bindingKey)
             ));
         }
 
         foreach ($foreignKey as $k: $f) {
-            $field = sprintf('%s.%s', $tAlias, $bindingKey[$k]);
-            $value = new IdentifierExpression(sprintf('%s.%s', $sAlias, $f));
+            $field = sprintf("%s.%s", $tAlias, $bindingKey[$k]);
+            $value = new IdentifierExpression(sprintf("%s.%s", $sAlias, $f));
             $conditions[$field] = $value;
         }
 
@@ -186,14 +186,14 @@ class BelongsTo : Association
     function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
-            'alias': this.getAlias(),
-            'sourceAlias': this.getSource().getAlias(),
-            'targetAlias': this.getTarget().getAlias(),
-            'foreignKey': this.getForeignKey(),
-            'bindingKey': this.getBindingKey(),
-            'strategy': this.getStrategy(),
-            'associationType': this.type(),
-            'finder': [this, 'find'],
+            "alias": this.getAlias(),
+            "sourceAlias": this.getSource().getAlias(),
+            "targetAlias": this.getTarget().getAlias(),
+            "foreignKey": this.getForeignKey(),
+            "bindingKey": this.getBindingKey(),
+            "strategy": this.getStrategy(),
+            "associationType": this.type(),
+            "finder": [this, "find"],
         ]);
 
         return $loader.buildEagerLoader($options);

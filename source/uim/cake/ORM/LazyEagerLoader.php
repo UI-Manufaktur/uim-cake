@@ -71,7 +71,7 @@ class LazyEagerLoader
     protected function _getQuery(CollectionInterface $objects, array $contain, Table $source): Query
     {
         $primaryKey = $source.getPrimaryKey();
-        $method = is_string($primaryKey) ? 'get' : 'extract';
+        $method = is_string($primaryKey) ? "get" : "extract";
 
         $keys = $objects.map(function ($entity) use ($primaryKey, $method) {
             return $entity.{$method}($primaryKey);
@@ -94,16 +94,16 @@ class LazyEagerLoader
                 }
 
                 $types = array_intersect_key($q.getDefaultTypes(), array_flip($primaryKey));
-                $primaryKey = array_map([$source, 'aliasField'], $primaryKey);
+                $primaryKey = array_map([$source, "aliasField"], $primaryKey);
 
-                return new TupleComparison($primaryKey, $keys.toList(), $types, 'IN');
+                return new TupleComparison($primaryKey, $keys.toList(), $types, "IN");
             })
             .enableAutoFields()
             .contain($contain);
 
         foreach ($query.getEagerLoader().attachableAssociations($source) as $loadable) {
             $config = $loadable.getConfig();
-            $config['includeFields'] = true;
+            $config["includeFields"] = true;
             $loadable.setConfig($config);
         }
 
@@ -149,12 +149,12 @@ class LazyEagerLoader
             .all()
             .indexBy(function ($e) use ($primaryKey) {
                 /** @var \Cake\Datasource\EntityInterface $e */
-                return implode(';', $e.extract($primaryKey));
+                return implode(";", $e.extract($primaryKey));
             })
             .toArray();
 
         foreach ($objects as $k: $object) {
-            $key = implode(';', $object.extract($primaryKey));
+            $key = implode(";", $object.extract($primaryKey));
             if (!isset($results[$key])) {
                 $injected[$k] = $object;
                 continue;
@@ -164,7 +164,7 @@ class LazyEagerLoader
             $loaded = $results[$key];
             foreach ($associations as $assoc) {
                 $property = $properties[$assoc];
-                $object.set($property, $loaded.get($property), ['useSetters': false]);
+                $object.set($property, $loaded.get($property), ["useSetters": false]);
                 $object.setDirty($property, false);
             }
             $injected[$k] = $object;

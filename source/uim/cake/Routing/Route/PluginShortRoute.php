@@ -29,13 +29,13 @@ class PluginShortRoute : InflectedRoute
      * @param string $method The HTTP method
      * @return array|null An array of request parameters, or null on failure.
      */
-    function parse(string $url, string $method = ''): ?array
+    function parse(string $url, string $method = ""): ?array
     {
         $params = parent::parse($url, $method);
         if (!$params) {
             return null;
         }
-        $params['controller'] = $params['plugin'];
+        $params["controller"] = $params["plugin"];
 
         return $params;
     }
@@ -52,12 +52,12 @@ class PluginShortRoute : InflectedRoute
      */
     function match(array $url, array $context = []): ?string
     {
-        if (isset($url['controller'], $url['plugin']) && $url['plugin'] != $url['controller']) {
+        if (isset($url["controller"], $url["plugin"]) && $url["plugin"] != $url["controller"]) {
             return null;
         }
-        this.defaults['controller'] = $url['controller'];
+        this.defaults["controller"] = $url["controller"];
         $result = parent::match($url, $context);
-        unset(this.defaults['controller']);
+        unset(this.defaults["controller"]);
 
         return $result;
     }

@@ -131,12 +131,12 @@ class EagerLoadable
     {
         _name = $name;
         $allowed = [
-            'associations', 'instance', 'config', 'canBeJoined',
-            'aliasPath', 'propertyPath', 'forMatching', 'targetProperty',
+            "associations", "instance", "config", "canBeJoined",
+            "aliasPath", "propertyPath", "forMatching", "targetProperty",
         ];
         foreach ($allowed as $property) {
             if (isset($config[$property])) {
-                this.{'_' . $property} = $config[$property];
+                this.{"_" . $property} = $config[$property];
             }
         }
     }
@@ -172,7 +172,7 @@ class EagerLoadable
     function instance(): Association
     {
         if (_instance == null) {
-            throw new \RuntimeException('No instance set.');
+            throw new \RuntimeException("No instance set.");
         }
 
         return _instance;
@@ -300,13 +300,13 @@ class EagerLoadable
         }
         $config = _config;
         if (_forMatching != null) {
-            $config = ['matching': _forMatching] + $config;
+            $config = ["matching": _forMatching] + $config;
         }
 
         return [
             _name: [
-                'associations': $associations,
-                'config': $config,
+                "associations": $associations,
+                "config": $config,
             ],
         ];
     }

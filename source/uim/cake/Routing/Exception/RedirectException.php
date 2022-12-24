@@ -24,7 +24,7 @@ use Cake\Core\Exception\CakeException;
  * The URL and status code are provided as constructor arguments.
  *
  * ```
- * throw new RedirectException('http://example.com/some/path', 301);
+ * throw new RedirectException("http://example.com/some/path", 301);
  * ```
  *
  * If you need a more general purpose redirect exception use

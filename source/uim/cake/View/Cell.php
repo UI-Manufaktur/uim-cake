@@ -48,10 +48,10 @@ abstract class Cell : EventDispatcherInterface
      *
      * @var string
      */
-    public const TEMPLATE_FOLDER = 'cell';
+    public const TEMPLATE_FOLDER = "cell";
 
     /**
-     * Instance of the View created during rendering. Won't be set until after
+     * Instance of the View created during rendering. Won"t be set until after
      * Cell::__toString()/render() is called.
      *
      * @var \Cake\View\View
@@ -75,21 +75,21 @@ abstract class Cell : EventDispatcherInterface
     protected $response;
 
     /**
-     * The cell's action to invoke.
+     * The cell"s action to invoke.
      *
      * @var string
      */
     protected $action;
 
     /**
-     * Arguments to pass to cell's action.
+     * Arguments to pass to cell"s action.
      *
      * @var array
      */
     protected $args = [];
 
     /**
-     * List of valid options (constructor's fourth arguments)
+     * List of valid options (constructor"s fourth arguments)
      * Override this property in subclasses to allow
      * which options you want set as properties in your Cell.
      *
@@ -123,16 +123,16 @@ abstract class Cell : EventDispatcherInterface
         }
         this.request = $request;
         this.response = $response;
-        this.modelFactory('Table', [this.getTableLocator(), 'get']);
+        this.modelFactory("Table", [this.getTableLocator(), "get"]);
 
-        _validCellOptions = array_merge(['action', 'args'], _validCellOptions);
+        _validCellOptions = array_merge(["action", "args"], _validCellOptions);
         foreach (_validCellOptions as $var) {
             if (isset($cellOptions[$var])) {
                 this.{$var} = $cellOptions[$var];
             }
         }
-        if (!empty($cellOptions['cache'])) {
-            _cache = $cellOptions['cache'];
+        if (!empty($cellOptions["cache"])) {
+            _cache = $cellOptions["cache"];
         }
 
         this.initialize();
@@ -173,7 +173,7 @@ abstract class Cell : EventDispatcherInterface
                 $reflect.invokeArgs(this, this.args);
             } catch (ReflectionException $e) {
                 throw new BadMethodCallException(sprintf(
-                    'Class %s does not have a "%s" method.',
+                    "Class %s does not have a "%s" method.",
                     static::class,
                     this.action
                 ));
@@ -186,13 +186,13 @@ abstract class Cell : EventDispatcherInterface
             }
 
             $className = static::class;
-            $namePrefix = '\View\Cell\\';
+            $namePrefix = "\View\Cell\\";
             /** @psalm-suppress PossiblyFalseOperand */
             $name = substr($className, strpos($className, $namePrefix) + strlen($namePrefix));
             $name = substr($name, 0, -4);
             if (!$builder.getTemplatePath()) {
                 $builder.setTemplatePath(
-                    static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $name)
+                    static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . str_replace("\\", DIRECTORY_SEPARATOR, $name)
                 );
             }
             $template = $builder.getTemplate();
@@ -204,8 +204,8 @@ abstract class Cell : EventDispatcherInterface
                 $attributes = $e.getAttributes();
                 throw new MissingCellTemplateException(
                     $name,
-                    $attributes['file'],
-                    $attributes['paths'],
+                    $attributes["file"],
+                    $attributes["paths"],
                     null,
                     $e
                 );
@@ -213,7 +213,7 @@ abstract class Cell : EventDispatcherInterface
         };
 
         if ($cache) {
-            return Cache::remember($cache['key'], $render, $cache['config']);
+            return Cache::remember($cache["key"], $render, $cache["config"]);
         }
 
         return $render();
@@ -233,12 +233,12 @@ abstract class Cell : EventDispatcherInterface
         if (empty(_cache)) {
             return [];
         }
-        $template = $template ?: 'default';
-        $key = 'cell_' . Inflector::underscore(static::class) . '_' . $action . '_' . $template;
-        $key = str_replace('\\', '_', $key);
+        $template = $template ?: "default";
+        $key = "cell_" . Inflector::underscore(static::class) . "_" . $action . "_" . $template;
+        $key = str_replace("\\", "_", $key);
         $default = [
-            'config': 'default',
-            'key': $key,
+            "config": "default",
+            "key": $key,
         ];
         if (_cache == true) {
             return $default;
@@ -265,16 +265,16 @@ abstract class Cell : EventDispatcherInterface
             return this.render();
         } catch (Exception $e) {
             trigger_error(sprintf(
-                'Could not render cell - %s [%s, line %d]',
+                "Could not render cell - %s [%s, line %d]",
                 $e.getMessage(),
                 $e.getFile(),
                 $e.getLine()
             ), E_USER_WARNING);
 
-            return '';
+            return "";
         } catch (Error $e) {
             throw new Error(sprintf(
-                'Could not render cell - %s [%s, line %d]',
+                "Could not render cell - %s [%s, line %d]",
                 $e.getMessage(),
                 $e.getFile(),
                 $e.getLine()
@@ -290,11 +290,11 @@ abstract class Cell : EventDispatcherInterface
     function __debugInfo(): array
     {
         return [
-            'action': this.action,
-            'args': this.args,
-            'request': this.request,
-            'response': this.response,
-            'viewBuilder': this.viewBuilder(),
+            "action": this.action,
+            "args": this.args,
+            "request": this.request,
+            "response": this.response,
+            "viewBuilder": this.viewBuilder(),
         ];
     }
 }

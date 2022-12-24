@@ -29,14 +29,14 @@ class LinkConstraint
      *
      * @var string
      */
-    public const STATUS_LINKED = 'linked';
+    public const STATUS_LINKED = "linked";
 
     /**
      * Status that requires a link to not be present.
      *
      * @var string
      */
-    public const STATUS_NOT_LINKED = 'notLinked';
+    public const STATUS_NOT_LINKED = "notLinked";
 
     /**
      * The association that should be checked.
@@ -66,14 +66,14 @@ class LinkConstraint
             !($association instanceof Association)
         ) {
             throw new \InvalidArgumentException(sprintf(
-                'Argument 1 is expected to be of type `\Cake\ORM\Association|string`, `%s` given.',
+                "Argument 1 is expected to be of type `\Cake\ORM\Association|string`, `%s` given.",
                 getTypeName($association)
             ));
         }
 
         if (!in_array($requiredLinkStatus, [static::STATUS_LINKED, static::STATUS_NOT_LINKED], true)) {
             throw new \InvalidArgumentException(
-                'Argument 2 is expected to match one of the `\Cake\ORM\Rule\LinkConstraint::STATUS_*` constants.'
+                "Argument 2 is expected to match one of the `\Cake\ORM\Rule\LinkConstraint::STATUS_*` constants."
             );
         }
 
@@ -92,10 +92,10 @@ class LinkConstraint
      */
     function __invoke(EntityInterface $entity, array $options): bool
     {
-        $table = $options['repository'] ?? null;
+        $table = $options["repository"] ?? null;
         if (!($table instanceof Table)) {
             throw new \InvalidArgumentException(
-                'Argument 2 is expected to have a `repository` key that holds an instance of `\Cake\ORM\Table`.'
+                "Argument 2 is expected to have a `repository` key that holds an instance of `\Cake\ORM\Table`."
             );
         }
 
@@ -149,7 +149,7 @@ class LinkConstraint
     {
         if (count($fields) != count($values)) {
             throw new \InvalidArgumentException(sprintf(
-                'The number of fields is expected to match the number of values, got %d field(s) and %d value(s).',
+                "The number of fields is expected to match the number of values, got %d field(s) and %d value(s).",
                 count($fields),
                 count($values)
             ));
@@ -172,11 +172,11 @@ class LinkConstraint
         $primaryKey = (array)$source.getPrimaryKey();
         if (!$entity.has($primaryKey)) {
             throw new \RuntimeException(sprintf(
-                'LinkConstraint rule on `%s` requires all primary key values for building the counting ' .
-                'conditions, expected values for `(%s)`, got `(%s)`.',
+                "LinkConstraint rule on `%s` requires all primary key values for building the counting " .
+                "conditions, expected values for `(%s)`, got `(%s)`.",
                 $source.getAlias(),
-                implode(', ', $primaryKey),
-                implode(', ', $entity.extract($primaryKey))
+                implode(", ", $primaryKey),
+                implode(", ", $entity.extract($primaryKey))
             ));
         }
 

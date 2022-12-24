@@ -52,17 +52,17 @@ class EagerLoader
      * @var array<string, int>
      */
     protected $_containOptions = [
-        'associations': 1,
-        'foreignKey': 1,
-        'conditions': 1,
-        'fields': 1,
-        'sort': 1,
-        'matching': 1,
-        'queryBuilder': 1,
-        'finder': 1,
-        'joinType': 1,
-        'strategy': 1,
-        'negateMatch': 1,
+        "associations": 1,
+        "foreignKey": 1,
+        "conditions": 1,
+        "fields": 1,
+        "sort": 1,
+        "matching": 1,
+        "queryBuilder": 1,
+        "finder": 1,
+        "joinType": 1,
+        "strategy": 1,
+        "negateMatch": 1,
     ];
 
     /**
@@ -80,7 +80,7 @@ class EagerLoader
     protected $_aliasList = [];
 
     /**
-     * Another EagerLoader instance that will be used for 'matching' associations.
+     * Another EagerLoader instance that will be used for "matching" associations.
      *
      * @var \Cake\ORM\EagerLoader|null
      */
@@ -136,13 +136,13 @@ class EagerLoader
         if ($queryBuilder) {
             if (!is_string($associations)) {
                 throw new InvalidArgumentException(
-                    'Cannot set containments. To use $queryBuilder, $associations must be a string'
+                    "Cannot set containments. To use $queryBuilder, $associations must be a string"
                 );
             }
 
             $associations = [
                 $associations: [
-                    'queryBuilder': $queryBuilder,
+                    "queryBuilder": $queryBuilder,
                 ],
             ];
         }
@@ -233,7 +233,7 @@ class EagerLoader
      *  - `fields`: Fields to contain
      *  - `negateMatch`: Whether to add conditions negate match on target association
      *
-     * @param string $associationPath Dot separated association path, 'Name1.Name2.Name3'
+     * @param string $associationPath Dot separated association path, "Name1.Name2.Name3"
      * @param callable|null $builder the callback function to be used for setting extra
      * options to the filtering query
      * @param array<string, mixed> $options Extra options for the association matching.
@@ -245,12 +245,12 @@ class EagerLoader
             _matching = new static();
         }
 
-        $options += ['joinType': Query::JOIN_TYPE_INNER];
-        $sharedOptions = ['negateMatch': false, 'matching': true] + $options;
+        $options += ["joinType": Query::JOIN_TYPE_INNER];
+        $sharedOptions = ["negateMatch": false, "matching": true] + $options;
 
         $contains = [];
         $nested = &$contains;
-        foreach (explode('.', $associationPath) as $association) {
+        foreach (explode(".", $associationPath) as $association) {
             // Add contain to parent contain using association name as key
             $nested[$association] = $sharedOptions;
             // Set to next nested level
@@ -258,7 +258,7 @@ class EagerLoader
         }
 
         // Add all options to target association contain which is the last in nested chain
-        $nested = ['matching': true, 'queryBuilder': $builder] + $options;
+        $nested = ["matching": true, "queryBuilder": $builder] + $options;
         _matching.contain($contains);
 
         return this;
@@ -287,7 +287,7 @@ class EagerLoader
      * object, that contains all the information required for the association objects
      * to load the information from the database.
      *
-     * Additionally, it will set an 'instance' key per association containing the
+     * Additionally, it will set an "instance" key per association containing the
      * association instance from the corresponding source table
      *
      * @param \Cake\ORM\Table $repository The table containing the association that
@@ -302,7 +302,7 @@ class EagerLoader
 
         $contain = [];
         foreach (_containments as $alias: $options) {
-            if (!empty($options['instance'])) {
+            if (!empty($options["instance"])) {
                 $contain = _containments;
                 break;
             }
@@ -310,7 +310,7 @@ class EagerLoader
                 $repository,
                 $alias,
                 $options,
-                ['root': null]
+                ["root": null]
             );
         }
 
@@ -349,8 +349,8 @@ class EagerLoader
                 continue;
             }
 
-            if (strpos($table, '.')) {
-                $path = explode('.', $table);
+            if (strpos($table, ".")) {
+                $path = explode(".", $table);
                 $table = array_pop($path);
                 foreach ($path as $t) {
                     $pointer += [$t: []];
@@ -359,8 +359,8 @@ class EagerLoader
             }
 
             if (is_array($options)) {
-                $options = isset($options['config']) ?
-                    $options['config'] + $options['associations'] :
+                $options = isset($options["config"]) ?
+                    $options["config"] + $options["associations"] :
                     $options;
                 $options = _reformatContain(
                     $options,
@@ -369,15 +369,15 @@ class EagerLoader
             }
 
             if ($options instanceof Closure) {
-                $options = ['queryBuilder': $options];
+                $options = ["queryBuilder": $options];
             }
 
             $pointer += [$table: []];
 
-            if (isset($options['queryBuilder'], $pointer[$table]['queryBuilder'])) {
-                $first = $pointer[$table]['queryBuilder'];
-                $second = $options['queryBuilder'];
-                $options['queryBuilder'] = function ($query) use ($first, $second) {
+            if (isset($options["queryBuilder"], $pointer[$table]["queryBuilder"])) {
+                $first = $pointer[$table]["queryBuilder"];
+                $second = $options["queryBuilder"];
+                $options["queryBuilder"] = function ($query) use ($first, $second) {
                     return $second($first($query));
                 };
             }
@@ -417,9 +417,9 @@ class EagerLoader
         do {
             foreach ($attachable as $alias: $loadable) {
                 $config = $loadable.getConfig() + [
-                    'aliasPath': $loadable.aliasPath(),
-                    'propertyPath': $loadable.propertyPath(),
-                    'includeFields': $includeFields,
+                    "aliasPath": $loadable.aliasPath(),
+                    "propertyPath": $loadable.propertyPath(),
+                    "includeFields": $includeFields,
                 ];
                 $loadable.instance().attachTo($query, $config);
                 $processed[$alias] = true;
@@ -478,7 +478,7 @@ class EagerLoader
      * @param array<string, mixed> $paths An array with two values, the first one is a list of dot
      * separated strings representing associations that lead to this `$alias` in the
      * chain of associations to be loaded. The second value is the path to follow in
-     * entities' properties to fetch a record of the corresponding association.
+     * entities" properties to fetch a record of the corresponding association.
      * @return \Cake\ORM\EagerLoadable Object with normalized associations
      * @throws \InvalidArgumentException When containments refer to associations that do not exist.
      */
@@ -487,36 +487,36 @@ class EagerLoader
         $defaults = _containOptions;
         $instance = $parent.getAssociation($alias);
 
-        $paths += ['aliasPath': '', 'propertyPath': '', 'root': $alias];
-        $paths['aliasPath'] .= '.' . $alias;
+        $paths += ["aliasPath": "", "propertyPath": "", "root": $alias];
+        $paths["aliasPath"] .= "." . $alias;
 
         if (
-            isset($options['matching']) &&
-            $options['matching'] == true
+            isset($options["matching"]) &&
+            $options["matching"] == true
         ) {
-            $paths['propertyPath'] = '_matchingData.' . $alias;
+            $paths["propertyPath"] = "_matchingData." . $alias;
         } else {
-            $paths['propertyPath'] .= '.' . $instance.getProperty();
+            $paths["propertyPath"] .= "." . $instance.getProperty();
         }
 
         $table = $instance.getTarget();
 
         $extra = array_diff_key($options, $defaults);
         $config = [
-            'associations': [],
-            'instance': $instance,
-            'config': array_diff_key($options, $extra),
-            'aliasPath': trim($paths['aliasPath'], '.'),
-            'propertyPath': trim($paths['propertyPath'], '.'),
-            'targetProperty': $instance.getProperty(),
+            "associations": [],
+            "instance": $instance,
+            "config": array_diff_key($options, $extra),
+            "aliasPath": trim($paths["aliasPath"], "."),
+            "propertyPath": trim($paths["propertyPath"], "."),
+            "targetProperty": $instance.getProperty(),
         ];
-        $config['canBeJoined'] = $instance.canBeJoined($config['config']);
+        $config["canBeJoined"] = $instance.canBeJoined($config["config"]);
         $eagerLoadable = new EagerLoadable($alias, $config);
 
-        if ($config['canBeJoined']) {
-            _aliasList[$paths['root']][$alias][] = $eagerLoadable;
+        if ($config["canBeJoined"]) {
+            _aliasList[$paths["root"]][$alias][] = $eagerLoadable;
         } else {
-            $paths['root'] = $config['aliasPath'];
+            $paths["root"] = $config["aliasPath"];
         }
 
         foreach ($extra as $t: $assoc) {
@@ -547,7 +547,7 @@ class EagerLoader
                 }
                 /** @var \Cake\ORM\EagerLoadable $loadable */
                 foreach ($configs as $loadable) {
-                    if (strpos($loadable.aliasPath(), '.')) {
+                    if (strpos($loadable.aliasPath(), ".")) {
                         _correctStrategy($loadable);
                     }
                 }
@@ -565,14 +565,14 @@ class EagerLoader
     protected function _correctStrategy(EagerLoadable $loadable): void
     {
         $config = $loadable.getConfig();
-        $currentStrategy = $config['strategy'] ??
-            'join';
+        $currentStrategy = $config["strategy"] ??
+            "join";
 
-        if (!$loadable.canBeJoined() || $currentStrategy != 'join') {
+        if (!$loadable.canBeJoined() || $currentStrategy != "join") {
             return;
         }
 
-        $config['strategy'] = Association::STRATEGY_SELECT;
+        $config["strategy"] = Association::STRATEGY_SELECT;
         $loadable.setConfig($config);
         $loadable.setCanBeJoined(false);
     }
@@ -650,7 +650,7 @@ class EagerLoader
                 // Nested paths are not subject to this condition because they could
                 // be attached to joined associations.
                 if (
-                    strpos($path, '.') == false &&
+                    strpos($path, ".") == false &&
                     (!array_key_exists($path, $collected) || !array_key_exists($alias, $collected[$path]))
                 ) {
                     $message = "Unable to load `{$path}` association. Ensure foreign key in `{$alias}` is selected.";
@@ -667,10 +667,10 @@ class EagerLoader
             $keys = $collected[$path][$alias] ?? null;
             $f = $instance.eagerLoader(
                 $config + [
-                    'query': $query,
-                    'contain': $contain,
-                    'keys': $keys,
-                    'nestKey': $meta.aliasPath(),
+                    "query": $query,
+                    "contain": $contain,
+                    "keys": $keys,
+                    "nestKey": $meta.aliasPath(),
                 ]
             );
             $statement = new CallbackStatement($statement, $driver, $f);
@@ -726,13 +726,13 @@ class EagerLoader
             $associations = $meta.associations();
             $forMatching = $meta.forMatching();
             $map[] = [
-                'alias': $assoc,
-                'instance': $instance,
-                'canBeJoined': $canBeJoined,
-                'entityClass': $instance.getTarget().getEntityClass(),
-                'nestKey': $canBeJoined ? $assoc : $meta.aliasPath(),
-                'matching': $forMatching ?? $matching,
-                'targetProperty': $meta.targetProperty(),
+                "alias": $assoc,
+                "instance": $instance,
+                "canBeJoined": $canBeJoined,
+                "entityClass": $instance.getTarget().getEntityClass(),
+                "nestKey": $canBeJoined ? $assoc : $meta.aliasPath(),
+                "matching": $forMatching ?? $matching,
+                "targetProperty": $meta.targetProperty(),
             ];
             if ($canBeJoined && $associations) {
                 $map = _buildAssociationsMap($map, $associations, $matching);
@@ -751,7 +751,7 @@ class EagerLoader
      * @param \Cake\ORM\Association $assoc The association object the alias represents;
      * will be normalized
      * @param bool $asMatching Whether this join results should be treated as a
-     * 'matching' association.
+     * "matching" association.
      * @param string|null $targetProperty The property name where the results of the join should be nested at.
      * If not passed, the default property for the association will be used.
      * @return void
@@ -763,11 +763,11 @@ class EagerLoader
         ?string $targetProperty = null
     ): void {
         _joinsMap[$alias] = new EagerLoadable($alias, [
-            'aliasPath': $alias,
-            'instance': $assoc,
-            'canBeJoined': true,
-            'forMatching': $asMatching,
-            'targetProperty': $targetProperty ?: $assoc.getProperty(),
+            "aliasPath": $alias,
+            "instance": $assoc,
+            "canBeJoined": true,
+            "forMatching": $asMatching,
+            "targetProperty": $targetProperty ?: $assoc.getProperty(),
         ]);
     }
 
@@ -823,7 +823,7 @@ class EagerLoader
     protected function _groupKeys(BufferedStatement $statement, array $collectKeys): array
     {
         $keys = [];
-        foreach (($statement.fetchAll('assoc') ?: []) as $result) {
+        foreach (($statement.fetchAll("assoc") ?: []) as $result) {
             foreach ($collectKeys as $nestKey: $parts) {
                 if ($parts[2] == true) {
                     // Missed joins will have null in the results.
@@ -847,7 +847,7 @@ class EagerLoader
                 foreach ($parts[1] as $key) {
                     $collected[] = $result[$key];
                 }
-                $keys[$nestKey][$parts[0]][implode(';', $collected)] = $collected;
+                $keys[$nestKey][$parts[0]][implode(";", $collected)] = $collected;
             }
         }
         $statement.rewind();

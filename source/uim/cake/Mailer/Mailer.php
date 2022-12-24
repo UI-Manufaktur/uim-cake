@@ -41,9 +41,9 @@ use InvalidArgumentException;
  *     function resetPassword($user)
  *     {
  *         this
- *             .setSubject('Reset Password')
+ *             .setSubject("Reset Password")
  *             .setTo($user.email)
- *             .set(['token': $user.token]);
+ *             .set(["token": $user.token]);
  *     }
  * }
  * ```
@@ -56,7 +56,7 @@ use InvalidArgumentException;
  *
  * ```
  * $mailer = new UserMailer();
- * $mailer.send('resetPassword', $user);
+ * $mailer.send("resetPassword", $user);
  * ```
  *
  * ## Event Listener
@@ -71,21 +71,21 @@ use InvalidArgumentException;
  * function implementedEvents(): array
  * {
  *     return [
- *         'Model.afterSave': 'onRegistration',
+ *         "Model.afterSave": "onRegistration",
  *     ];
  * }
  *
  * function onRegistration(IEvent $event, EntityInterface $entity, ArrayObject $options)
  * {
  *     if ($entity.isNew()) {
- *          this.send('welcome', [$entity]);
+ *          this.send("welcome", [$entity]);
  *     }
  * }
  * ```
  *
  * The onRegistration method converts the application event into a mailer method.
  * Our mailer could either be registered in the application bootstrap, or
- * in the Table class' initialize() hook.
+ * in the Table class" initialize() hook.
  *
  * @method this setTo($email, $name = null) Sets "to" address. {@see \Cake\Mailer\Message::setTo()}
  * @method array getTo() Gets "to" address. {@see \Cake\Mailer\Message::getTo()}
@@ -138,7 +138,7 @@ class Mailer : IEventListener
     use StaticConfigTrait;
 
     /**
-     * Mailer's name.
+     * Mailer"s name.
      *
      * @var string
      */
@@ -180,9 +180,9 @@ class Mailer : IEventListener
      * @var array<string, mixed>
      */
     protected $clonedInstances = [
-        'message': null,
-        'renderer': null,
-        'transport': null,
+        "message": null,
+        "renderer": null,
+        "transport": null,
     ];
 
     /**
@@ -212,7 +212,7 @@ class Mailer : IEventListener
         }
 
         if ($config == null) {
-            $config = static::getConfig('default');
+            $config = static::getConfig("default");
         }
 
         if ($config) {
@@ -290,7 +290,7 @@ class Mailer : IEventListener
     function __call(string $method, array $args)
     {
         $result = this.message.$method(...$args);
-        if (strpos($method, 'get') == 0) {
+        if (strpos($method, "get") == 0) {
             return $result;
         }
 
@@ -307,7 +307,7 @@ class Mailer : IEventListener
      */
     function set($key, $value = null)
     {
-        deprecationWarning('Mailer::set() is deprecated. Use setViewVars() instead.');
+        deprecationWarning("Mailer::set() is deprecated. Use setViewVars() instead.");
 
         return this.setViewVars($key, $value);
     }
@@ -346,15 +346,15 @@ class Mailer : IEventListener
 
         if (!method_exists(this, $action)) {
             throw new MissingActionException([
-                'mailer': static::class,
-                'action': $action,
+                "mailer": static::class,
+                "action": $action,
             ]);
         }
 
-        this.clonedInstances['message'] = clone this.message;
-        this.clonedInstances['renderer'] = clone this.getRenderer();
+        this.clonedInstances["message"] = clone this.message;
+        this.clonedInstances["renderer"] = clone this.getRenderer();
         if (this.transport != null) {
-            this.clonedInstances['transport'] = clone this.transport;
+            this.clonedInstances["transport"] = clone this.transport;
         }
 
         this.getMessage().setHeaders($headers);
@@ -379,7 +379,7 @@ class Mailer : IEventListener
      * @param string $content Content.
      * @return this
      */
-    function render(string $content = '')
+    function render(string $content = "")
     {
         $content = this.getRenderer().render(
             $content,
@@ -398,7 +398,7 @@ class Mailer : IEventListener
      * @return array
      * @psalm-return array{headers: string, message: string}
      */
-    function deliver(string $content = '')
+    function deliver(string $content = "")
     {
         this.render($content);
 
@@ -421,52 +421,52 @@ class Mailer : IEventListener
             $name = $config;
             $config = static::getConfig($name);
             if (empty($config)) {
-                throw new InvalidArgumentException(sprintf('Unknown email configuration "%s".', $name));
+                throw new InvalidArgumentException(sprintf("Unknown email configuration "%s".", $name));
             }
             unset($name);
         }
 
         $simpleMethods = [
-            'transport',
+            "transport",
         ];
         foreach ($simpleMethods as $method) {
             if (isset($config[$method])) {
-                this.{'set' . ucfirst($method)}($config[$method]);
+                this.{"set" . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
         $viewBuilderMethods = [
-            'template', 'layout', 'theme',
+            "template", "layout", "theme",
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                this.viewBuilder().{'set' . ucfirst($method)}($config[$method]);
+                this.viewBuilder().{"set" . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
-        if (array_key_exists('helpers', $config)) {
-            this.viewBuilder().setHelpers($config['helpers'], false);
-            unset($config['helpers']);
+        if (array_key_exists("helpers", $config)) {
+            this.viewBuilder().setHelpers($config["helpers"], false);
+            unset($config["helpers"]);
         }
-        if (array_key_exists('viewRenderer', $config)) {
-            this.viewBuilder().setClassName($config['viewRenderer']);
-            unset($config['viewRenderer']);
+        if (array_key_exists("viewRenderer", $config)) {
+            this.viewBuilder().setClassName($config["viewRenderer"]);
+            unset($config["viewRenderer"]);
         }
-        if (array_key_exists('viewVars', $config)) {
-            this.viewBuilder().setVars($config['viewVars']);
-            unset($config['viewVars']);
+        if (array_key_exists("viewVars", $config)) {
+            this.viewBuilder().setVars($config["viewVars"]);
+            unset($config["viewVars"]);
         }
-        if (isset($config['autoLayout'])) {
-            if ($config['autoLayout'] == false) {
+        if (isset($config["autoLayout"])) {
+            if ($config["autoLayout"] == false) {
                 this.viewBuilder().disableAutoLayout();
             }
-            unset($config['autoLayout']);
+            unset($config["autoLayout"]);
         }
 
-        if (isset($config['log'])) {
-            this.setLogConfig($config['log']);
+        if (isset($config["log"])) {
+            this.setLogConfig($config["log"]);
         }
 
         this.message.setConfig($config);
@@ -493,11 +493,11 @@ class Mailer : IEventListener
         } elseif (is_object($name)) {
             $transport = $name;
             if (!$transport instanceof AbstractTransport) {
-                throw new CakeException('Transport class must extend Cake\Mailer\AbstractTransport');
+                throw new CakeException("Transport class must extend Cake\Mailer\AbstractTransport");
             }
         } else {
             throw new InvalidArgumentException(sprintf(
-                'The value passed for the "$name" argument must be either a string, or an object, %s given.',
+                "The value passed for the "$name" argument must be either a string, or an object, %s given.",
                 gettype($name)
             ));
         }
@@ -516,8 +516,8 @@ class Mailer : IEventListener
     {
         if (this.transport == null) {
             throw new BadMethodCallException(
-                'Transport was not defined. '
-                . 'You must set on using setTransport() or set `transport` option in your mailer profile.'
+                "Transport was not defined. "
+                . "You must set on using setTransport() or set `transport` option in your mailer profile."
             );
         }
 
@@ -554,9 +554,9 @@ class Mailer : IEventListener
         this.getRenderer().reset();
         this.transport = null;
         this.clonedInstances = [
-            'message': null,
-            'renderer': null,
-            'transport': null,
+            "message": null,
+            "renderer": null,
+            "transport": null,
         ];
 
         return this;
@@ -565,7 +565,7 @@ class Mailer : IEventListener
     /**
      * Log the email message delivery.
      *
-     * @param array $contents The content with 'headers' and 'message' keys.
+     * @param array $contents The content with "headers" and "message" keys.
      * @return void
      * @psalm-param array{headers: string, message: string} $contents
      */
@@ -576,9 +576,9 @@ class Mailer : IEventListener
         }
 
         Log::write(
-            this.logConfig['level'],
-            PHP_EOL . this.flatten($contents['headers']) . PHP_EOL . PHP_EOL . this.flatten($contents['message']),
-            this.logConfig['scope']
+            this.logConfig["level"],
+            PHP_EOL . this.flatten($contents["headers"]) . PHP_EOL . PHP_EOL . this.flatten($contents["message"]),
+            this.logConfig["scope"]
         );
     }
 
@@ -591,12 +591,12 @@ class Mailer : IEventListener
     protected function setLogConfig($log)
     {
         $config = [
-            'level': 'debug',
-            'scope': 'email',
+            "level": "debug",
+            "scope": "email",
         ];
         if ($log != true) {
             if (!is_array($log)) {
-                $log = ['level': $log];
+                $log = ["level": $log];
             }
             $config = $log + $config;
         }
@@ -612,7 +612,7 @@ class Mailer : IEventListener
      */
     protected function flatten($value): string
     {
-        return is_array($value) ? implode(';', $value) : $value;
+        return is_array($value) ? implode(";", $value) : $value;
     }
 
     /**

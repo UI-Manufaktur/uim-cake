@@ -46,18 +46,18 @@ class TimestampBehavior : Behavior
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'implementedFinders': [],
-        'implementedMethods': [
-            'timestamp': 'timestamp',
-            'touch': 'touch',
+        "implementedFinders": [],
+        "implementedMethods": [
+            "timestamp": "timestamp",
+            "touch": "touch",
         ],
-        'events': [
-            'Model.beforeSave': [
-                'created': 'new',
-                'modified': 'always',
+        "events": [
+            "Model.beforeSave": [
+                "created": "new",
+                "modified": "always",
             ],
         ],
-        'refreshTimestamp': true,
+        "refreshTimestamp": true,
     ];
 
     /**
@@ -78,8 +78,8 @@ class TimestampBehavior : Behavior
      */
     function initialize(array $config): void
     {
-        if (isset($config['events'])) {
-            this.setConfig('events', $config['events'], false);
+        if (isset($config["events"])) {
+            this.setConfig("events", $config["events"], false);
         }
     }
 
@@ -88,33 +88,33 @@ class TimestampBehavior : Behavior
      *
      * @param \Cake\Event\IEvent $event Event instance.
      * @param \Cake\Datasource\EntityInterface $entity Entity instance.
-     * @throws \UnexpectedValueException if a field's when value is misdefined
+     * @throws \UnexpectedValueException if a field"s when value is misdefined
      * @return true Returns true irrespective of the behavior logic, the save will not be prevented.
-     * @throws \UnexpectedValueException When the value for an event is not 'always', 'new' or 'existing'
+     * @throws \UnexpectedValueException When the value for an event is not "always", "new" or "existing"
      */
     function handleEvent(IEvent $event, EntityInterface $entity): bool
     {
         $eventName = $event.getName();
-        $events = _config['events'];
+        $events = _config["events"];
 
         $new = $entity.isNew() != false;
-        $refresh = _config['refreshTimestamp'];
+        $refresh = _config["refreshTimestamp"];
 
         foreach ($events[$eventName] as $field: $when) {
-            if (!in_array($when, ['always', 'new', 'existing'], true)) {
+            if (!in_array($when, ["always", "new", "existing"], true)) {
                 throw new UnexpectedValueException(sprintf(
-                    'When should be one of "always", "new" or "existing". The passed value "%s" is invalid',
+                    "When should be one of "always", "new" or "existing". The passed value "%s" is invalid",
                     $when
                 ));
             }
             if (
-                $when == 'always' ||
+                $when == "always" ||
                 (
-                    $when == 'new' &&
+                    $when == "new" &&
                     $new
                 ) ||
                 (
-                    $when == 'existing' &&
+                    $when == "existing" &&
                     !$new
                 )
             ) {
@@ -134,7 +134,7 @@ class TimestampBehavior : Behavior
      */
     function implementedEvents(): array
     {
-        return array_fill_keys(array_keys(_config['events']), 'handleEvent');
+        return array_fill_keys(array_keys(_config["events"]), "handleEvent");
     }
 
     /**
@@ -151,8 +151,8 @@ class TimestampBehavior : Behavior
     function timestamp(?DateTimeInterface $ts = null, bool $refreshTimestamp = false): DateTimeInterface
     {
         if ($ts) {
-            if (_config['refreshTimestamp']) {
-                _config['refreshTimestamp'] = false;
+            if (_config["refreshTimestamp"]) {
+                _config["refreshTimestamp"] = false;
             }
             _ts = new FrozenTime($ts);
         } elseif (_ts == null || $refreshTimestamp) {
@@ -173,18 +173,18 @@ class TimestampBehavior : Behavior
      * @param string $eventName Event name.
      * @return bool true if a field is updated, false if no action performed
      */
-    function touch(EntityInterface $entity, string $eventName = 'Model.beforeSave'): bool
+    function touch(EntityInterface $entity, string $eventName = "Model.beforeSave"): bool
     {
-        $events = _config['events'];
+        $events = _config["events"];
         if (empty($events[$eventName])) {
             return false;
         }
 
         $return = false;
-        $refresh = _config['refreshTimestamp'];
+        $refresh = _config["refreshTimestamp"];
 
         foreach ($events[$eventName] as $field: $when) {
-            if (in_array($when, ['always', 'existing'], true)) {
+            if (in_array($when, ["always", "existing"], true)) {
                 $return = true;
                 $entity.setDirty($field, false);
                 _updateField($entity, $field, $refresh);
@@ -195,7 +195,7 @@ class TimestampBehavior : Behavior
     }
 
     /**
-     * Update a field, if it hasn't been updated already
+     * Update a field, if it hasn"t been updated already
      *
      * @param \Cake\Datasource\EntityInterface $entity Entity instance.
      * @param string $field Field name
@@ -219,7 +219,7 @@ class TimestampBehavior : Behavior
         $type = TypeFactory::build($columnType);
 
         if (!$type instanceof DateTimeType) {
-            throw new RuntimeException('TimestampBehavior only supports columns of type DateTimeType.');
+            throw new RuntimeException("TimestampBehavior only supports columns of type DateTimeType.");
         }
 
         $class = $type.getDateTimeClassName();

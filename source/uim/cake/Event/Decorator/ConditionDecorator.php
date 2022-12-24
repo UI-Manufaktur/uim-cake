@@ -47,8 +47,8 @@ class ConditionDecorator : AbstractDecorator
      */
     function canTrigger(IEvent $event): bool
     {
-        $if = _evaluateCondition('if', $event);
-        $unless = _evaluateCondition('unless', $event);
+        $if = _evaluateCondition("if", $event);
+        $unless = _evaluateCondition("unless", $event);
 
         return $if && !$unless;
     }
@@ -63,10 +63,10 @@ class ConditionDecorator : AbstractDecorator
     protected function _evaluateCondition(string $condition, IEvent $event): bool
     {
         if (!isset(_options[$condition])) {
-            return $condition != 'unless';
+            return $condition != "unless";
         }
         if (!is_callable(_options[$condition])) {
-            throw new RuntimeException(self::class . ' the `' . $condition . '` condition is not a callable!');
+            throw new RuntimeException(self::class . " the `" . $condition . "` condition is not a callable!");
         }
 
         return (bool)_options[$condition]($event);

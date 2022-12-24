@@ -20,23 +20,23 @@ should be configured using `Cake\Log\Log.` An example would be:
 use Cake\Log\Log;
 
 // Short classname
-Log::setConfig('local', [
-    'className': 'File',
-    'levels': ['notice', 'info', 'debug'],
-    'file': '/path/to/file.log',
+Log::setConfig("local", [
+    "className": "File",
+    "levels": ["notice", "info", "debug"],
+    "file": "/path/to/file.log",
 ]);
 
 // Fully namespaced name.
-Log::setConfig('production', [
-    'className': \Cake\Log\Engine\SyslogLog::class,
-    'levels': ['warning', 'error', 'critical', 'alert', 'emergency'],
+Log::setConfig("production", [
+    "className": \Cake\Log\Engine\SyslogLog::class,
+    "levels": ["warning", "error", "critical", "alert", "emergency"],
 ]);
 ```
 
 It is also possible to create loggers by providing a closure.
 
 ```php
-Log::setConfig('special', function () {
+Log::setConfig("special", function () {
 	// Return any PSR-3 compatible logger
 	return new MyPSR3CompatibleLogger();
 });
@@ -45,17 +45,17 @@ Log::setConfig('special', function () {
 Or by injecting an instance directly:
 
 ```php
-Log::setConfig('special', new MyPSR3CompatibleLogger());
+Log::setConfig("special", new MyPSR3CompatibleLogger());
 ```
 
 You can then use the `Log` class to pass messages to the logging backends:
 
 ```php
-Log::write('debug', 'Something did not work');
+Log::write("debug", "Something did not work");
 ```
 
 Only the logging engines subscribed to the log level you are writing to will
-get the message passed. In the example above, only the 'local' engine will get
+get the message passed. In the example above, only the "local" engine will get
 the log message.
 
 ### Filtering messages with scopes
@@ -66,14 +66,14 @@ you can limit the logging engines that receive a particular message.
 ```php
 // Configure /logs/payments.log to receive all levels, but only
 // those with `payments` scope.
-Log::setConfig('payments', [
-    'className': 'File',
-    'levels': ['error', 'info', 'warning'],
-    'scopes': ['payments'],
-    'file': '/logs/payments.log',
+Log::setConfig("payments", [
+    "className": "File",
+    "levels": ["error", "info", "warning"],
+    "scopes": ["payments"],
+    "file": "/logs/payments.log",
 ]);
 
-Log::warning('this gets written only to payments.log', ['scope': ['payments']]);
+Log::warning("this gets written only to payments.log", ["scope": ["payments"]]);
 ```
 
 ## Documentation

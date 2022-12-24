@@ -17,14 +17,14 @@ use Cake\Http\Client;
 $http = new Client();
 
 // Simple get
-$response = $http.get('http://example.com/test.html');
+$response = $http.get("http://example.com/test.html");
 
 // Simple get with querystring
-$response = $http.get('http://example.com/search', ['q': 'widget']);
+$response = $http.get("http://example.com/search", ["q": "widget"]);
 
 // Simple get with querystring & additional headers
-$response = $http.get('http://example.com/search', ['q': 'widget'], [
-  'headers': ['X-Requested-With': 'XMLHttpRequest'],
+$response = $http.get("http://example.com/search", ["q": "widget"], [
+  "headers": ["X-Requested-With": "XMLHttpRequest"],
 ]);
 ```
 
@@ -78,19 +78,19 @@ class Application : IHttpApplication
      */
     function handle(IServerRequest $request): IResponse
     {
-        return new Response(['body'=>'Hello World!']);
+        return new Response(["body"=>"Hello World!"]);
     }
 }
 ```
 
 Once you have an application with some middleware. You can start accepting
-requests. In your application's webroot, you can add an `index.php` and process
+requests. In your application"s webroot, you can add an `index.php` and process
 requests:
 
 ```php
 <?php
 // in webroot/index.php
-require dirname(__DIR__) . '/vendor/autoload.php';
+require dirname(__DIR__) . "/vendor/autoload.php";
 
 use App\Application;
 use Cake\Http\Server;
@@ -102,7 +102,7 @@ $server = new Server(new Application());
 $server.emit($server.run());
 ```
 
-You can then run your application using PHP's built in webserver:
+You can then run your application using PHP"s built in webserver:
 
 ```bash
 php -S localhost:8765 -t ./webroot ./webroot/index.php

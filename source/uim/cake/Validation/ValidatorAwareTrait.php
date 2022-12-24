@@ -61,19 +61,19 @@ trait ValidatorAwareTrait
      * If a validator has not been set earlier, this method will build a valiator
      * using a method inside your class.
      *
-     * For example, if you wish to create a validation set called 'forSubscription',
+     * For example, if you wish to create a validation set called "forSubscription",
      * you will need to create a method in your Table subclass as follows:
      *
      * ```
      * function validationForSubscription($validator)
      * {
      *     return $validator
-     *         .add('email', 'valid-email', ['rule': 'email'])
-     *         .add('password', 'valid', ['rule': 'notBlank'])
-     *         .requirePresence('username');
+     *         .add("email", "valid-email", ["rule": "email"])
+     *         .add("password", "valid", ["rule": "notBlank"])
+     *         .requirePresence("username");
      * }
      *
-     * $validator = this.getValidator('forSubscription');
+     * $validator = this.getValidator("forSubscription");
      * ```
      *
      * You can implement the method in `validationDefault` in your Table subclass
@@ -110,24 +110,24 @@ trait ValidatorAwareTrait
      */
     protected function createValidator(string $name): Validator
     {
-        $method = 'validation' . ucfirst($name);
+        $method = "validation" . ucfirst($name);
         if (!this.validationMethodExists($method)) {
-            $message = sprintf('The %s::%s() validation method does not exists.', static::class, $method);
+            $message = sprintf("The %s::%s() validation method does not exists.", static::class, $method);
             throw new RuntimeException($message);
         }
 
         $validator = new _validatorClass();
         $validator = this.$method($validator);
         if (this instanceof EventDispatcherInterface) {
-            $event = defined(static::class . '::BUILD_VALIDATOR_EVENT')
+            $event = defined(static::class . "::BUILD_VALIDATOR_EVENT")
                 ? static::BUILD_VALIDATOR_EVENT
-                : 'Model.buildValidator';
-            this.dispatchEvent($event, compact('validator', 'name'));
+                : "Model.buildValidator";
+            this.dispatchEvent($event, compact("validator", "name"));
         }
 
         if (!$validator instanceof Validator) {
             throw new RuntimeException(sprintf(
-                'The %s::%s() validation method must return an instance of %s.',
+                "The %s::%s() validation method must return an instance of %s.",
                 static::class,
                 $method,
                 Validator::class
@@ -145,10 +145,10 @@ trait ValidatorAwareTrait
      * ```
      * $validator = new \Cake\Validation\Validator();
      * $validator
-     *     .add('email', 'valid-email', ['rule': 'email'])
-     *     .add('password', 'valid', ['rule': 'notBlank'])
-     *     .allowEmpty('bio');
-     * this.setValidator('forSubscription', $validator);
+     *     .add("email", "valid-email", ["rule": "email"])
+     *     .add("password", "valid", ["rule": "notBlank"])
+     *     .allowEmpty("bio");
+     * this.setValidator("forSubscription", $validator);
      * ```
      *
      * @param string $name The name of a validator to be set.
@@ -171,7 +171,7 @@ trait ValidatorAwareTrait
      */
     function hasValidator(string $name): bool
     {
-        $method = 'validation' . ucfirst($name);
+        $method = "validation" . ucfirst($name);
         if (this.validationMethodExists($method)) {
             return true;
         }

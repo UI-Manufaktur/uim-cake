@@ -66,8 +66,8 @@ abstract class AbstractTransport
             && $message.getBcc() == []
         ) {
             throw new CakeException(
-                'You must specify at least one recipient.'
-                . ' Use one of `setTo`, `setCc` or `setBcc` to define a recipient.'
+                "You must specify at least one recipient."
+                . " Use one of `setTo`, `setCc` or `setBcc` to define a recipient."
             );
         }
     }

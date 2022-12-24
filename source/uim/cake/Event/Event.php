@@ -69,8 +69,8 @@ class Event : EventInterface
      * ### Examples of usage:
      *
      * ```
-     *  $event = new Event('Order.afterBuy', this, ['buyer': $userData]);
-     *  $event = new Event('User.afterRegister', $userModel);
+     *  $event = new Event("Order.afterBuy", this, ["buyer": $userData]);
+     *  $event = new Event("User.afterRegister", $userModel);
      * ```
      *
      * @param string $name Name of the event
@@ -109,7 +109,7 @@ class Event : EventInterface
     function getSubject()
     {
         if (_subject == null) {
-            throw new CakeException('No subject set for this event');
+            throw new CakeException("No subject set for this event");
         }
 
         return _subject;

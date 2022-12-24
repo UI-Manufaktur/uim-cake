@@ -98,7 +98,7 @@ trait TranslateStrategyTrait
     /**
      * Unset empty translations to avoid persistence.
      *
-     * Should only be called if _config['allowEmptyTranslations'] is false.
+     * Should only be called if _config["allowEmptyTranslations"] is false.
      *
      * @param \Cake\Datasource\EntityInterface $entity The entity to check for empty translations fields inside.
      * @return void
@@ -106,28 +106,28 @@ trait TranslateStrategyTrait
     protected function unsetEmptyFields($entity)
     {
         /** @var array<\Cake\ORM\Entity> $translations */
-        $translations = (array)$entity.get('_translations');
+        $translations = (array)$entity.get("_translations");
         foreach ($translations as $locale: $translation) {
-            $fields = $translation.extract(_config['fields'], false);
+            $fields = $translation.extract(_config["fields"], false);
             foreach ($fields as $field: $value) {
-                if ($value == null || $value == '') {
+                if ($value == null || $value == "") {
                     $translation.unset($field);
                 }
             }
 
-            $translation = $translation.extract(_config['fields']);
+            $translation = $translation.extract(_config["fields"]);
 
             // If now, the current locale property is empty,
             // unset it completely.
             if (empty(array_filter($translation))) {
-                unset($entity.get('_translations')[$locale]);
+                unset($entity.get("_translations")[$locale]);
             }
         }
 
         // If now, the whole _translations property is empty,
         // unset it completely and return
-        if (empty($entity.get('_translations'))) {
-            $entity.unset('_translations');
+        if (empty($entity.get("_translations"))) {
+            $entity.unset("_translations");
         }
     }
 
@@ -135,7 +135,7 @@ trait TranslateStrategyTrait
      * Build a set of properties that should be included in the marshalling process.
 
      * Add in `_translations` marshalling handlers. You can disable marshalling
-     * of translations by setting `'translations': false` in the options
+     * of translations by setting `"translations": false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
@@ -145,23 +145,23 @@ trait TranslateStrategyTrait
      */
     function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
-        if (isset($options['translations']) && !$options['translations']) {
+        if (isset($options["translations"]) && !$options["translations"]) {
             return [];
         }
 
         return [
-            '_translations': function ($value, $entity) use ($marshaller, $options) {
+            "_translations": function ($value, $entity) use ($marshaller, $options) {
                 if (!is_array($value)) {
                     return null;
                 }
 
                 /** @var array<string, \Cake\Datasource\EntityInterface>|null $translations */
-                $translations = $entity.get('_translations');
+                $translations = $entity.get("_translations");
                 if ($translations == null) {
                     $translations = [];
                 }
 
-                $options['validate'] = _config['validator'];
+                $options["validate"] = _config["validator"];
                 $errors = [];
                 foreach ($value as $language: $fields) {
                     if (!isset($translations[$language])) {
@@ -177,7 +177,7 @@ trait TranslateStrategyTrait
 
                 // Set errors into the root entity, so validation errors match the original form data position.
                 if ($errors) {
-                    $entity.setErrors(['_translations': $errors]);
+                    $entity.setErrors(["_translations": $errors]);
                 }
 
                 return $translations;
@@ -194,6 +194,6 @@ trait TranslateStrategyTrait
      */
     function afterSave(IEvent $event, EntityInterface $entity)
     {
-        $entity.unset('_i18n');
+        $entity.unset("_i18n");
     }
 }

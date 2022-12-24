@@ -23,9 +23,9 @@ class JsonFormatter : AbstractFormatter
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'dateFormat': DATE_ATOM,
-        'flags': JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-        'appendNewline': true,
+        "dateFormat": DATE_ATOM,
+        "flags": JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+        "appendNewline": true,
     ];
 
     /**
@@ -41,9 +41,9 @@ class JsonFormatter : AbstractFormatter
      */
     function format($level, string $message, array $context = []): string
     {
-        $log = ['date': date(_config['dateFormat']), 'level': (string)$level, 'message': $message];
-        $json = json_encode($log, _config['flags']);
+        $log = ["date": date(_config["dateFormat"]), "level": (string)$level, "message": $message];
+        $json = json_encode($log, _config["flags"]);
 
-        return _config['appendNewline'] ? $json . "\n" : $json;
+        return _config["appendNewline"] ? $json . "\n" : $json;
     }
 }

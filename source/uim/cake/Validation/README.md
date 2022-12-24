@@ -16,15 +16,15 @@ use Cake\Validation\Validator;
 
 $validator = new Validator();
 $validator
-    .requirePresence('email')
-    .add('email', 'validFormat', [
-        'rule': 'email',
-        'message': 'E-mail must be valid'
+    .requirePresence("email")
+    .add("email", "validFormat", [
+        "rule": "email",
+        "message": "E-mail must be valid"
     ])
-    .requirePresence('name')
-    .notEmptyString('name', 'We need your name.')
-    .requirePresence('comment')
-    .notEmptyString('comment', 'You need to give a comment.');
+    .requirePresence("name")
+    .notEmptyString("name", "We need your name.")
+    .requirePresence("comment")
+    .notEmptyString("comment", "You need to give a comment.");
 
 $errors = $validator.validate($_POST);
 if (!empty($errors)) {

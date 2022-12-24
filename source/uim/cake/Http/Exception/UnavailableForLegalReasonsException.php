@@ -28,14 +28,14 @@ class UnavailableForLegalReasonsException : HttpException
     /**
      * Constructor
      *
-     * @param string|null $message If no message is given 'Unavailable For Legal Reasons' will be the message
+     * @param string|null $message If no message is given "Unavailable For Legal Reasons" will be the message
      * @param int|null $code Status code, defaults to 451
      * @param \Throwable|null $previous The previous exception.
      */
     public this(?string $message = null, ?int $code = null, ?Throwable $previous = null)
     {
         if (empty($message)) {
-            $message = 'Unavailable For Legal Reasons';
+            $message = "Unavailable For Legal Reasons";
         }
         parent::__construct($message, $code, $previous);
     }

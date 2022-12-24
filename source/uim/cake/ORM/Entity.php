@@ -40,7 +40,7 @@ class Entity : EntityInterface, InvalidPropertyInterface
      * ### Example:
      *
      * ```
-     *  $entity = new Entity(['id': 1, 'name': 'Andrew'])
+     *  $entity = new Entity(["id": 1, "name": "Andrew"])
      * ```
      *
      * @param array<string, mixed> $properties hash of properties to set in this entity
@@ -49,22 +49,22 @@ class Entity : EntityInterface, InvalidPropertyInterface
     public this(array $properties = [], array $options = [])
     {
         $options += [
-            'useSetters': true,
-            'markClean': false,
-            'markNew': null,
-            'guard': false,
-            'source': null,
+            "useSetters": true,
+            "markClean": false,
+            "markNew": null,
+            "guard": false,
+            "source": null,
         ];
 
-        if (!empty($options['source'])) {
-            this.setSource($options['source']);
+        if (!empty($options["source"])) {
+            this.setSource($options["source"]);
         }
 
-        if ($options['markNew'] != null) {
-            this.setNew($options['markNew']);
+        if ($options["markNew"] != null) {
+            this.setNew($options["markNew"]);
         }
 
-        if (!empty($properties) && $options['markClean'] && !$options['useSetters']) {
+        if (!empty($properties) && $options["markClean"] && !$options["useSetters"]) {
             _fields = $properties;
 
             return;
@@ -72,12 +72,12 @@ class Entity : EntityInterface, InvalidPropertyInterface
 
         if (!empty($properties)) {
             this.set($properties, [
-                'setter': $options['useSetters'],
-                'guard': $options['guard'],
+                "setter": $options["useSetters"],
+                "guard": $options["guard"],
             ]);
         }
 
-        if ($options['markClean']) {
+        if ($options["markClean"]) {
             this.clean();
         }
     }

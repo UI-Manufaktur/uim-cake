@@ -38,21 +38,21 @@ class HttpsEnforcerMiddleware : IMiddleware
      * - `statusCode` - Status code to use in case of redirect, defaults to 301 - Permanent redirect.
      * - `headers` - Array of response headers in case of redirect.
      * - `disableOnDebug` - Whether HTTPS check should be disabled when debug is on. Default `true`.
-     * - 'hsts' - Strict-Transport-Security header for HTTPS response configuration. Defaults to `null`.
+     * - "hsts" - Strict-Transport-Security header for HTTPS response configuration. Defaults to `null`.
      *    If enabled, an array of config options:
      *
-     *        - 'maxAge' - `max-age` directive value in seconds.
-     *        - 'includeSubDomains' - Whether to include `includeSubDomains` directive. Defaults to `false`.
-     *        - 'preload' - Whether to include 'preload' directive. Defauls to `false`.
+     *        - "maxAge" - `max-age` directive value in seconds.
+     *        - "includeSubDomains" - Whether to include `includeSubDomains` directive. Defaults to `false`.
+     *        - "preload" - Whether to include "preload" directive. Defauls to `false`.
      *
      * @var array<string, mixed>
      */
     protected $config = [
-        'redirect': true,
-        'statusCode': 301,
-        'headers': [],
-        'disableOnDebug': true,
-        'hsts': null,
+        "redirect": true,
+        "statusCode": 301,
+        "headers": [],
+        "disableOnDebug": true,
+        "hsts": null,
     ];
 
     /**
@@ -80,34 +80,34 @@ class HttpsEnforcerMiddleware : IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if (
-            $request.getUri().getScheme() == 'https'
-            || (this.config['disableOnDebug']
-                && Configure::read('debug'))
+            $request.getUri().getScheme() == "https"
+            || (this.config["disableOnDebug"]
+                && Configure::read("debug"))
         ) {
             $response = $handler.handle($request);
-            if (this.config['hsts']) {
+            if (this.config["hsts"]) {
                 $response = this.addHsts($response);
             }
 
             return $response;
         }
 
-        if (this.config['redirect'] && $request.getMethod() == 'GET') {
-            $uri = $request.getUri().withScheme('https');
-            $base = $request.getAttribute('base');
+        if (this.config["redirect"] && $request.getMethod() == "GET") {
+            $uri = $request.getUri().withScheme("https");
+            $base = $request.getAttribute("base");
             if ($base) {
                 $uri = $uri.withPath($base . $uri.getPath());
             }
 
             return new RedirectResponse(
                 $uri,
-                this.config['statusCode'],
-                this.config['headers']
+                this.config["statusCode"],
+                this.config["headers"]
             );
         }
 
         throw new BadRequestException(
-            'Requests to this URL must be made with HTTPS.'
+            "Requests to this URL must be made with HTTPS."
         );
     }
 
@@ -119,19 +119,19 @@ class HttpsEnforcerMiddleware : IMiddleware
      */
     protected function addHsts(IResponse $response): IResponse
     {
-        $config = this.config['hsts'];
+        $config = this.config["hsts"];
         if (!is_array($config)) {
-            throw new UnexpectedValueException('The `hsts` config must be an array.');
+            throw new UnexpectedValueException("The `hsts` config must be an array.");
         }
 
-        $value = 'max-age=' . $config['maxAge'];
-        if ($config['includeSubDomains'] ?? false) {
-            $value .= '; includeSubDomains';
+        $value = "max-age=" . $config["maxAge"];
+        if ($config["includeSubDomains"] ?? false) {
+            $value .= "; includeSubDomains";
         }
-        if ($config['preload'] ?? false) {
-            $value .= '; preload';
+        if ($config["preload"] ?? false) {
+            $value .= "; preload";
         }
 
-        return $response.withHeader('strict-transport-security', $value);
+        return $response.withHeader("strict-transport-security", $value);
     }
 }

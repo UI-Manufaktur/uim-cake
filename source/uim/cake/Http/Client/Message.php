@@ -97,56 +97,56 @@ class Message
      *
      * @var string
      */
-    public const METHOD_GET = 'GET';
+    public const METHOD_GET = "GET";
 
     /**
      * HTTP POST method
      *
      * @var string
      */
-    public const METHOD_POST = 'POST';
+    public const METHOD_POST = "POST";
 
     /**
      * HTTP PUT method
      *
      * @var string
      */
-    public const METHOD_PUT = 'PUT';
+    public const METHOD_PUT = "PUT";
 
     /**
      * HTTP DELETE method
      *
      * @var string
      */
-    public const METHOD_DELETE = 'DELETE';
+    public const METHOD_DELETE = "DELETE";
 
     /**
      * HTTP PATCH method
      *
      * @var string
      */
-    public const METHOD_PATCH = 'PATCH';
+    public const METHOD_PATCH = "PATCH";
 
     /**
      * HTTP OPTIONS method
      *
      * @var string
      */
-    public const METHOD_OPTIONS = 'OPTIONS';
+    public const METHOD_OPTIONS = "OPTIONS";
 
     /**
      * HTTP TRACE method
      *
      * @var string
      */
-    public const METHOD_TRACE = 'TRACE';
+    public const METHOD_TRACE = "TRACE";
 
     /**
      * HTTP HEAD method
      *
      * @var string
      */
-    public const METHOD_HEAD = 'HEAD';
+    public const METHOD_HEAD = "HEAD";
 
     /**
      * The array of cookies in the response.

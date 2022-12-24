@@ -30,7 +30,7 @@ class Renderer
      *
      * @var string
      */
-    public const TEMPLATE_FOLDER = 'email';
+    public const TEMPLATE_FOLDER = "email";
 
     /**
      * Constructor
@@ -74,8 +74,8 @@ class Renderer
             $view.setPlugin($layoutPlugin);
         }
 
-        if ($view.get('content') == null) {
-            $view.set('content', $content);
+        if ($view.get("content") == null) {
+            $view.set("content", $content);
         }
 
         foreach ($types as $type) {
@@ -99,8 +99,8 @@ class Renderer
 
         this.viewBuilder()
             .setClassName(View::class)
-            .setLayout('default')
-            .setHelpers(['Html'], false);
+            .setLayout("default")
+            .setHelpers(["Html"], false);
 
         return this;
     }

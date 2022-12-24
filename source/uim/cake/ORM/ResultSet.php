@@ -228,8 +228,8 @@ class ResultSet : IResultSet
         }
 
         if (!_useBuffering) {
-            $msg = 'You cannot rewind an un-buffered ResultSet. '
-                . 'Use Query::bufferResults() to get a buffered ResultSet.';
+            $msg = "You cannot rewind an un-buffered ResultSet. "
+                . "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
         }
 
@@ -310,8 +310,8 @@ class ResultSet : IResultSet
     function __serialize(): array
     {
         if (!_useBuffering) {
-            $msg = 'You cannot serialize an un-buffered ResultSet. '
-                . 'Use Query::bufferResults() to get a buffered ResultSet.';
+            $msg = "You cannot serialize an un-buffered ResultSet. "
+                . "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
         }
 
@@ -388,13 +388,13 @@ class ResultSet : IResultSet
     {
         $map = $query.getEagerLoader().associationsMap(_defaultTable);
         _matchingMap = (new Collection($map))
-            .match(['matching': true])
-            .indexBy('alias')
+            .match(["matching": true])
+            .indexBy("alias")
             .toArray();
 
         _containMap = (new Collection(array_reverse($map)))
-            .match(['matching': false])
-            .indexBy('nestKey')
+            .match(["matching": false])
+            .indexBy("nestKey")
             .toArray();
     }
 
@@ -408,15 +408,15 @@ class ResultSet : IResultSet
     protected function _calculateColumnMap(Query $query): void
     {
         $map = [];
-        foreach ($query.clause('select') as $key: $field) {
-            $key = trim($key, '"`[]');
+        foreach ($query.clause("select") as $key: $field) {
+            $key = trim($key, ""`[]");
 
-            if (strpos($key, '__') <= 0) {
+            if (strpos($key, "__") <= 0) {
                 $map[_defaultAlias][$key] = $key;
                 continue;
             }
 
-            $parts = explode('__', $key, 2);
+            $parts = explode("__", $key, 2);
             $map[$parts[0]][$key] = $parts[1];
         }
 
@@ -443,7 +443,7 @@ class ResultSet : IResultSet
             return false;
         }
 
-        $row = _statement.fetch('assoc');
+        $row = _statement.fetch("assoc");
         if ($row == false) {
             return $row;
         }
@@ -462,25 +462,25 @@ class ResultSet : IResultSet
         $defaultAlias = _defaultAlias;
         $results = $presentAliases = [];
         $options = [
-            'useSetters': false,
-            'markClean': true,
-            'markNew': false,
-            'guard': false,
+            "useSetters": false,
+            "markClean": true,
+            "markNew": false,
+            "guard": false,
         ];
 
         foreach (_matchingMapColumns as $alias: $keys) {
             $matching = _matchingMap[$alias];
-            $results['_matchingData'][$alias] = array_combine(
+            $results["_matchingData"][$alias] = array_combine(
                 $keys,
                 array_intersect_key($row, $keys)
             );
             if (_hydrate) {
                 /** @var \Cake\ORM\Table $table */
-                $table = $matching['instance'];
-                $options['source'] = $table.getRegistryAlias();
+                $table = $matching["instance"];
+                $options["source"] = $table.getRegistryAlias();
                 /** @var \Cake\Datasource\EntityInterface $entity */
-                $entity = new $matching['entityClass']($results['_matchingData'][$alias], $options);
-                $results['_matchingData'][$alias] = $entity;
+                $entity = new $matching["entityClass"]($results["_matchingData"][$alias], $options);
+                $results["_matchingData"][$alias] = $entity;
             }
         }
 
@@ -497,29 +497,29 @@ class ResultSet : IResultSet
         unset($presentAliases[$defaultAlias]);
 
         foreach (_containMap as $assoc) {
-            $alias = $assoc['nestKey'];
+            $alias = $assoc["nestKey"];
 
-            if ($assoc['canBeJoined'] && empty(_map[$alias])) {
+            if ($assoc["canBeJoined"] && empty(_map[$alias])) {
                 continue;
             }
 
             /** @var \Cake\ORM\Association $instance */
-            $instance = $assoc['instance'];
+            $instance = $assoc["instance"];
 
-            if (!$assoc['canBeJoined'] && !isset($row[$alias])) {
-                $results = $instance.defaultRowValue($results, $assoc['canBeJoined']);
+            if (!$assoc["canBeJoined"] && !isset($row[$alias])) {
+                $results = $instance.defaultRowValue($results, $assoc["canBeJoined"]);
                 continue;
             }
 
-            if (!$assoc['canBeJoined']) {
+            if (!$assoc["canBeJoined"]) {
                 $results[$alias] = $row[$alias];
             }
 
             $target = $instance.getTarget();
-            $options['source'] = $target.getRegistryAlias();
+            $options["source"] = $target.getRegistryAlias();
             unset($presentAliases[$alias]);
 
-            if ($assoc['canBeJoined'] && _autoFields != false) {
+            if ($assoc["canBeJoined"] && _autoFields != false) {
                 $hasData = false;
                 foreach ($results[$alias] as $v) {
                     if ($v != null && $v != []) {
@@ -533,12 +533,12 @@ class ResultSet : IResultSet
                 }
             }
 
-            if (_hydrate && $results[$alias] != null && $assoc['canBeJoined']) {
-                $entity = new $assoc['entityClass']($results[$alias], $options);
+            if (_hydrate && $results[$alias] != null && $assoc["canBeJoined"]) {
+                $entity = new $assoc["entityClass"]($results[$alias], $options);
                 $results[$alias] = $entity;
             }
 
-            $results = $instance.transformRow($results, $alias, $assoc['canBeJoined'], $assoc['targetProperty']);
+            $results = $instance.transformRow($results, $alias, $assoc["canBeJoined"], $assoc["targetProperty"]);
         }
 
         foreach ($presentAliases as $alias: $present) {
@@ -548,11 +548,11 @@ class ResultSet : IResultSet
             $results[$defaultAlias][$alias] = $results[$alias];
         }
 
-        if (isset($results['_matchingData'])) {
-            $results[$defaultAlias]['_matchingData'] = $results['_matchingData'];
+        if (isset($results["_matchingData"])) {
+            $results[$defaultAlias]["_matchingData"] = $results["_matchingData"];
         }
 
-        $options['source'] = _defaultTable.getRegistryAlias();
+        $options["source"] = _defaultTable.getRegistryAlias();
         if (isset($results[$defaultAlias])) {
             $results = $results[$defaultAlias];
         }
@@ -577,7 +577,7 @@ class ResultSet : IResultSet
         _index = $currentIndex;
 
         return [
-            'items': $items,
+            "items": $items,
         ];
     }
 }

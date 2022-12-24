@@ -27,7 +27,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Parse encoded request body data.
  *
- * Enables JSON and XML request payloads to be parsed into the request's body.
+ * Enables JSON and XML request payloads to be parsed into the request"s body.
  * You can also add your own request body parsers using the `addParser()` method.
  */
 class BodyParserMiddleware : IMiddleware
@@ -44,7 +44,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @var array<string>
      */
-    protected $methods = ['PUT', 'POST', 'PATCH', 'DELETE'];
+    protected $methods = ["PUT", "POST", "PATCH", "DELETE"];
 
     /**
      * Constructor
@@ -60,21 +60,21 @@ class BodyParserMiddleware : IMiddleware
      */
     public this(array $options = [])
     {
-        $options += ['json': true, 'xml': false, 'methods': null];
-        if ($options['json']) {
+        $options += ["json": true, "xml": false, "methods": null];
+        if ($options["json"]) {
             this.addParser(
-                ['application/json', 'text/json'],
-                Closure::fromCallable([this, 'decodeJson'])
+                ["application/json", "text/json"],
+                Closure::fromCallable([this, "decodeJson"])
             );
         }
-        if ($options['xml']) {
+        if ($options["xml"]) {
             this.addParser(
-                ['application/xml', 'text/xml'],
-                Closure::fromCallable([this, 'decodeXml'])
+                ["application/xml", "text/xml"],
+                Closure::fromCallable([this, "decodeXml"])
             );
         }
-        if ($options['methods']) {
-            this.setMethods($options['methods']);
+        if ($options["methods"]) {
+            this.setMethods($options["methods"]);
         }
     }
 
@@ -111,7 +111,7 @@ class BodyParserMiddleware : IMiddleware
      * An naive CSV request body parser could be built like so:
      *
      * ```
-     * $parser.addParser(['text/csv'], function ($body) {
+     * $parser.addParser(["text/csv"], function ($body) {
      *   return str_getcsv($body);
      * });
      * ```
@@ -155,7 +155,7 @@ class BodyParserMiddleware : IMiddleware
         if (!in_array($request.getMethod(), this.methods, true)) {
             return $handler.handle($request);
         }
-        [$type] = explode(';', $request.getHeaderLine('Content-Type'));
+        [$type] = explode(";", $request.getHeaderLine("Content-Type"));
         $type = strtolower($type);
         if (!isset(this.parsers[$type])) {
             return $handler.handle($request);
@@ -179,7 +179,7 @@ class BodyParserMiddleware : IMiddleware
      */
     protected function decodeJson(string $body)
     {
-        if ($body == '') {
+        if ($body == "") {
             return [];
         }
         $decoded = json_decode($body, true);
@@ -199,7 +199,7 @@ class BodyParserMiddleware : IMiddleware
     protected function decodeXml(string $body): array
     {
         try {
-            $xml = Xml::build($body, ['return': 'domdocument', 'readFile': false]);
+            $xml = Xml::build($body, ["return": "domdocument", "readFile": false]);
             // We might not get child nodes if there are nested inline entities.
             if ((int)$xml.childNodes.length > 0) {
                 return Xml::toArray($xml);

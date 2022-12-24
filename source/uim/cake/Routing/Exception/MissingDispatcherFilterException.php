@@ -23,5 +23,5 @@ class MissingDispatcherFilterException : CakeException
     /**
      * @inheritDoc
      */
-    protected $_messageTemplate = 'Dispatcher filter %s could not be found.';
+    protected $_messageTemplate = "Dispatcher filter %s could not be found.";
 }

@@ -38,7 +38,7 @@ class TransportRegistry : ObjectRegistry
      */
     protected function _resolveClassName(string $class): ?string
     {
-        return App::className($class, 'Mailer/Transport', 'Transport');
+        return App::className($class, "Mailer/Transport", "Transport");
     }
 
     /**
@@ -53,7 +53,7 @@ class TransportRegistry : ObjectRegistry
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
-        throw new BadMethodCallException(sprintf('Mailer transport %s is not available.', $class));
+        throw new BadMethodCallException(sprintf("Mailer transport %s is not available.", $class));
     }
 
     /**
@@ -65,7 +65,7 @@ class TransportRegistry : ObjectRegistry
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of settings to use for the cache engine.
      * @return \Cake\Mailer\AbstractTransport The constructed transport class.
-     * @throws \RuntimeException when an object doesn't implement the correct interface.
+     * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected function _create($class, string $alias, array $config): AbstractTransport
     {
@@ -80,7 +80,7 @@ class TransportRegistry : ObjectRegistry
         }
 
         throw new RuntimeException(
-            'Mailer transports must use Cake\Mailer\AbstractTransport as a base class.'
+            "Mailer transports must use Cake\Mailer\AbstractTransport as a base class."
         );
     }
 

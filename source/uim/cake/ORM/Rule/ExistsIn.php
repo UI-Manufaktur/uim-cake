@@ -50,19 +50,19 @@ class ExistsIn
     /**
      * Constructor.
      *
-     * Available option for $options is 'allowNullableNulls' flag.
+     * Available option for $options is "allowNullableNulls" flag.
      * Set to true to accept composite foreign keys where one or more nullable columns are null.
      *
      * @param array<string>|string $fields The field or fields to check existence as primary key.
      * @param \Cake\ORM\Table|\Cake\ORM\Association|string $repository The repository where the
      * field will be looked for, or the association name for the repository.
-     * @param array<string, mixed> $options The options that modify the rule's behavior.
-     *     Options 'allowNullableNulls' will make the rule pass if given foreign keys are set to `null`.
+     * @param array<string, mixed> $options The options that modify the rule"s behavior.
+     *     Options "allowNullableNulls" will make the rule pass if given foreign keys are set to `null`.
      *     Notice: allowNullableNulls cannot pass by database columns set to `NOT NULL`.
      */
     public this($fields, $repository, array $options = [])
     {
-        $options += ['allowNullableNulls': false];
+        $options += ["allowNullableNulls": false];
         _options = $options;
 
         _fields = (array)$fields;
@@ -81,15 +81,15 @@ class ExistsIn
     function __invoke(EntityInterface $entity, array $options): bool
     {
         if (is_string(_repository)) {
-            if (!$options['repository'].hasAssociation(_repository)) {
+            if (!$options["repository"].hasAssociation(_repository)) {
                 throw new RuntimeException(sprintf(
-                    "ExistsIn rule for '%s' is invalid. '%s' is not associated with '%s'.",
-                    implode(', ', _fields),
+                    "ExistsIn rule for "%s" is invalid. "%s" is not associated with "%s".",
+                    implode(", ", _fields),
                     _repository,
-                    get_class($options['repository'])
+                    get_class($options["repository"])
                 ));
             }
-            $repository = $options['repository'].getAssociation(_repository);
+            $repository = $options["repository"].getAssociation(_repository);
             _repository = $repository;
         }
 
@@ -103,12 +103,12 @@ class ExistsIn
             $realTarget = $target;
         }
 
-        if (!empty($options['_sourceTable']) && $realTarget == $options['_sourceTable']) {
+        if (!empty($options["_sourceTable"]) && $realTarget == $options["_sourceTable"]) {
             return true;
         }
 
-        if (!empty($options['repository'])) {
-            $source = $options['repository'];
+        if (!empty($options["repository"])) {
+            $source = $options["repository"];
         }
         if ($source instanceof Association) {
             $source = $source.getSource();
@@ -122,7 +122,7 @@ class ExistsIn
             return true;
         }
 
-        if (_options['allowNullableNulls']) {
+        if (_options["allowNullableNulls"]) {
             $schema = $source.getSchema();
             foreach ($fields as $i: $field) {
                 if ($schema.getColumn($field) && $schema.isNullable($field) && $entity.get($field) == null) {
@@ -133,7 +133,7 @@ class ExistsIn
 
         $primary = array_map(
             function ($key) use ($target) {
-                return $target.aliasField($key) . ' IS';
+                return $target.aliasField($key) . " IS";
             },
             $bindingKey
         );

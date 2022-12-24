@@ -26,8 +26,8 @@ class Orders
 	function placeOrder($order)
 	{
 		this.doStuff();
-		$event = new Event('Orders.afterPlace', this, [
-			'order': $order
+		$event = new Event("Orders.afterPlace", this, [
+			"order": $order
 		]);
 		this.getEventManager().dispatch($event);
 	}
@@ -37,7 +37,7 @@ $orders = new Orders();
 $orders.getEventManager().on(function ($event) {
 	// Do something after the order was placed
 	...
-}, 'Orders.afterPlace');
+}, "Orders.afterPlace");
 
 $orders.placeOrder($order);
 ```

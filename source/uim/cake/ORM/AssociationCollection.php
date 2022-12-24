@@ -86,7 +86,7 @@ class AssociationCollection : IteratorAggregate
     function load(string $className, string $associated, array $options = []): Association
     {
         $options += [
-            'tableLocator': this.getTableLocator(),
+            "tableLocator": this.getTableLocator(),
         ];
 
         $association = new $className($associated, $options);
@@ -147,13 +147,13 @@ class AssociationCollection : IteratorAggregate
      * Get an array of associations matching a specific type.
      *
      * @param array<string>|string $class The type of associations you want.
-     *   For example 'BelongsTo' or array like ['BelongsTo', 'HasOne']
+     *   For example "BelongsTo" or array like ["BelongsTo", "HasOne"]
      * @return array<\Cake\ORM\Association> An array of Association objects.
      * @since 3.5.3
      */
     function getByType($class): array
     {
-        $class = array_map('strtolower', (array)$class);
+        $class = array_map("strtolower", (array)$class);
 
         $out = array_filter(_items, function ($assoc) use ($class) {
             [, $name] = namespaceSplit(get_class($assoc));
@@ -236,13 +236,13 @@ class AssociationCollection : IteratorAggregate
     }
 
     /**
-     * Helper method for saving an association's data.
+     * Helper method for saving an association"s data.
      *
      * @param \Cake\ORM\Table $table The table the save is currently operating on
      * @param \Cake\Datasource\EntityInterface $entity The entity to save
      * @param array $associations Array of associations to save.
      * @param array<string, mixed> $options Original options
-     * @param bool $owningSide Compared with association classes'
+     * @param bool $owningSide Compared with association classes"
      *   isOwningSide method.
      * @return bool Success
      * @throws \InvalidArgumentException When an unknown alias is used.
@@ -254,7 +254,7 @@ class AssociationCollection : IteratorAggregate
         array $options,
         bool $owningSide
     ): bool {
-        unset($options['associated']);
+        unset($options["associated"]);
         foreach ($associations as $alias: $nested) {
             if (is_int($alias)) {
                 $alias = $nested;
@@ -263,7 +263,7 @@ class AssociationCollection : IteratorAggregate
             $relation = this.get($alias);
             if (!$relation) {
                 $msg = sprintf(
-                    'Cannot save %s, it is not associated to %s',
+                    "Cannot save %s, it is not associated to %s",
                     $alias,
                     $table.getAlias()
                 );
@@ -281,7 +281,7 @@ class AssociationCollection : IteratorAggregate
     }
 
     /**
-     * Helper method for saving an association's data.
+     * Helper method for saving an association"s data.
      *
      * @param \Cake\ORM\Association $association The association object to save with.
      * @param \Cake\Datasource\EntityInterface $entity The entity to save

@@ -68,8 +68,8 @@ class HasOne : Association
 
     /**
      * Returns whether the passed table is the owning side for this
-     * association. This means that rows in the 'target' table would miss important
-     * or required information if the row in 'source' did not exist.
+     * association. This means that rows in the "target" table would miss important
+     * or required information if the row in "source" did not exist.
      *
      * @param \Cake\ORM\Table $side The potential Table with ownership
      * @return bool
@@ -112,7 +112,7 @@ class HasOne : Association
             (array)this.getForeignKey(),
             $entity.extract((array)this.getBindingKey())
         );
-        $targetEntity.set($properties, ['guard': false]);
+        $targetEntity.set($properties, ["guard": false]);
 
         if (!this.getTarget().save($targetEntity, $options)) {
             $targetEntity.unset(array_keys($properties));
@@ -129,14 +129,14 @@ class HasOne : Association
     function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
-            'alias': this.getAlias(),
-            'sourceAlias': this.getSource().getAlias(),
-            'targetAlias': this.getTarget().getAlias(),
-            'foreignKey': this.getForeignKey(),
-            'bindingKey': this.getBindingKey(),
-            'strategy': this.getStrategy(),
-            'associationType': this.type(),
-            'finder': [this, 'find'],
+            "alias": this.getAlias(),
+            "sourceAlias": this.getSource().getAlias(),
+            "targetAlias": this.getTarget().getAlias(),
+            "foreignKey": this.getForeignKey(),
+            "bindingKey": this.getBindingKey(),
+            "strategy": this.getStrategy(),
+            "associationType": this.type(),
+            "finder": [this, "find"],
         ]);
 
         return $loader.buildEagerLoader($options);

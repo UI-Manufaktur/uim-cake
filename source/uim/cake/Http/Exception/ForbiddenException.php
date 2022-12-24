@@ -28,14 +28,14 @@ class ForbiddenException : HttpException
     /**
      * Constructor
      *
-     * @param string|null $message If no message is given 'Forbidden' will be the message
+     * @param string|null $message If no message is given "Forbidden" will be the message
      * @param int|null $code Status code, defaults to 403
      * @param \Throwable|null $previous The previous exception.
      */
     public this(?string $message = null, ?int $code = null, ?Throwable $previous = null)
     {
         if (empty($message)) {
-            $message = 'Forbidden';
+            $message = "Forbidden";
         }
         parent::__construct($message, $code, $previous);
     }

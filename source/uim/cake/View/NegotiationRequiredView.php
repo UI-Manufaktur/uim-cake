@@ -56,6 +56,6 @@ class NegotiationRequiredView : View
      */
     function render(?string $template = null, $layout = null): string
     {
-        return '';
+        return "";
     }
 }

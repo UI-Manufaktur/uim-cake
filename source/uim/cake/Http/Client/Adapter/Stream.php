@@ -24,7 +24,7 @@ use Psr\Http\Message\RequestInterface;
 
 /**
  * : sending Cake\Http\Client\Request
- * via php's stream API.
+ * via php"s stream API.
  *
  * This approach and implementation is partly inspired by Aura.Http
  */
@@ -95,7 +95,7 @@ class Stream : AdapterInterface
     {
         $indexes = $responses = [];
         foreach ($headers as $i: $header) {
-            if (strtoupper(substr($header, 0, 5)) == 'HTTP/') {
+            if (strtoupper(substr($header, 0, 5)) == "HTTP/") {
                 $indexes[] = $i;
             }
         }
@@ -105,7 +105,7 @@ class Stream : AdapterInterface
             $end = isset($indexes[$i + 1]) ? $indexes[$i + 1] - $start : null;
             /** @psalm-suppress PossiblyInvalidArgument */
             $headerSlice = array_slice($headers, $start, $end);
-            $body = $i == $last ? $content : '';
+            $body = $i == $last ? $content : "";
             $responses[] = _buildResponse($headerSlice, $body);
         }
 
@@ -127,12 +127,12 @@ class Stream : AdapterInterface
 
         $url = $request.getUri();
         $scheme = parse_url((string)$url, PHP_URL_SCHEME);
-        if ($scheme == 'https') {
+        if ($scheme == "https") {
             _buildSslContext($request, $options);
         }
         _context = stream_context_create([
-            'http': _contextOptions,
-            'ssl': _sslContextOptions,
+            "http": _contextOptions,
+            "ssl": _sslContextOptions,
         ]);
     }
 
@@ -149,9 +149,9 @@ class Stream : AdapterInterface
     {
         $headers = [];
         foreach ($request.getHeaders() as $name: $values) {
-            $headers[] = sprintf('%s: %s', $name, implode(', ', $values));
+            $headers[] = sprintf("%s: %s", $name, implode(", ", $values));
         }
-        _contextOptions['header'] = implode("\r\n", $headers);
+        _contextOptions["header"] = implode("\r\n", $headers);
     }
 
     /**
@@ -168,7 +168,7 @@ class Stream : AdapterInterface
     {
         $body = $request.getBody();
         $body.rewind();
-        _contextOptions['content'] = $body.getContents();
+        _contextOptions["content"] = $body.getContents();
     }
 
     /**
@@ -180,19 +180,19 @@ class Stream : AdapterInterface
      */
     protected function _buildOptions(RequestInterface $request, array $options): void
     {
-        _contextOptions['method'] = $request.getMethod();
-        _contextOptions['protocol_version'] = $request.getProtocolVersion();
-        _contextOptions['ignore_errors'] = true;
+        _contextOptions["method"] = $request.getMethod();
+        _contextOptions["protocol_version"] = $request.getProtocolVersion();
+        _contextOptions["ignore_errors"] = true;
 
-        if (isset($options['timeout'])) {
-            _contextOptions['timeout'] = $options['timeout'];
+        if (isset($options["timeout"])) {
+            _contextOptions["timeout"] = $options["timeout"];
         }
         // Redirects are handled in the client layer because of cookie handling issues.
-        _contextOptions['max_redirects'] = 0;
+        _contextOptions["max_redirects"] = 0;
 
-        if (isset($options['proxy']['proxy'])) {
-            _contextOptions['request_fulluri'] = true;
-            _contextOptions['proxy'] = $options['proxy']['proxy'];
+        if (isset($options["proxy"]["proxy"])) {
+            _contextOptions["request_fulluri"] = true;
+            _contextOptions["proxy"] = $options["proxy"]["proxy"];
         }
     }
 
@@ -206,22 +206,22 @@ class Stream : AdapterInterface
     protected function _buildSslContext(RequestInterface $request, array $options): void
     {
         $sslOptions = [
-            'ssl_verify_peer',
-            'ssl_verify_peer_name',
-            'ssl_verify_depth',
-            'ssl_allow_self_signed',
-            'ssl_cafile',
-            'ssl_local_cert',
-            'ssl_local_pk',
-            'ssl_passphrase',
+            "ssl_verify_peer",
+            "ssl_verify_peer_name",
+            "ssl_verify_depth",
+            "ssl_allow_self_signed",
+            "ssl_cafile",
+            "ssl_local_cert",
+            "ssl_local_pk",
+            "ssl_passphrase",
         ];
-        if (empty($options['ssl_cafile'])) {
-            $options['ssl_cafile'] = CaBundle::getBundledCaBundlePath();
+        if (empty($options["ssl_cafile"])) {
+            $options["ssl_cafile"] = CaBundle::getBundledCaBundlePath();
         }
-        if (!empty($options['ssl_verify_host'])) {
+        if (!empty($options["ssl_verify_host"])) {
             $url = $request.getUri();
             $host = parse_url((string)$url, PHP_URL_HOST);
-            _sslContextOptions['peer_name'] = $host;
+            _sslContextOptions["peer_name"] = $host;
         }
         foreach ($sslOptions as $key) {
             if (isset($options[$key])) {
@@ -241,13 +241,13 @@ class Stream : AdapterInterface
     protected function _send(RequestInterface $request): array
     {
         $deadline = false;
-        if (isset(_contextOptions['timeout']) && _contextOptions['timeout'] > 0) {
-            $deadline = time() + _contextOptions['timeout'];
+        if (isset(_contextOptions["timeout"]) && _contextOptions["timeout"] > 0) {
+            $deadline = time() + _contextOptions["timeout"];
         }
 
         $url = $request.getUri();
         _open((string)$url, $request);
-        $content = '';
+        $content = "";
         $timedOut = false;
 
         /** @psalm-suppress PossiblyNullArgument  */
@@ -259,7 +259,7 @@ class Stream : AdapterInterface
             $content .= fread(_stream, 8192);
 
             $meta = stream_get_meta_data(_stream);
-            if ($meta['timed_out'] || ($deadline != false && time() > $deadline)) {
+            if ($meta["timed_out"] || ($deadline != false && time() > $deadline)) {
                 $timedOut = true;
                 break;
             }
@@ -270,12 +270,12 @@ class Stream : AdapterInterface
         fclose(_stream);
 
         if ($timedOut) {
-            throw new NetworkException('Connection timed out ' . $url, $request);
+            throw new NetworkException("Connection timed out " . $url, $request);
         }
 
-        $headers = $meta['wrapper_data'];
-        if (isset($headers['headers']) && is_array($headers['headers'])) {
-            $headers = $headers['headers'];
+        $headers = $meta["wrapper_data"];
+        if (isset($headers["headers"]) && is_array($headers["headers"])) {
+            $headers = $headers["headers"];
         }
 
         return this.createResponses($headers, $content);
@@ -303,8 +303,8 @@ class Stream : AdapterInterface
      */
     protected function _open(string $url, RequestInterface $request): void
     {
-        if (!(bool)ini_get('allow_url_fopen')) {
-            throw new ClientException('The PHP directive `allow_url_fopen` must be enabled.');
+        if (!(bool)ini_get("allow_url_fopen")) {
+            throw new ClientException("The PHP directive `allow_url_fopen` must be enabled.");
         }
 
         set_error_handler(function ($code, $message): bool {
@@ -314,7 +314,7 @@ class Stream : AdapterInterface
         });
         try {
             /** @psalm-suppress PossiblyNullArgument */
-            _stream = fopen($url, 'rb', false, _context);
+            _stream = fopen($url, "rb", false, _context);
         } finally {
             restore_error_handler();
         }

@@ -64,7 +64,7 @@ use Traversable;
  * @method \Cake\Collection\CollectionInterface append(array|\Traversable $items) Appends more rows to the result of the query.
  * @method \Cake\Collection\CollectionInterface combine($k, $v, $g = null) Returns the values of the column $v index by column $k,
  *   and grouped by $g.
- * @method \Cake\Collection\CollectionInterface nest($k, $p, $n = 'children') Creates a tree structure by nesting the values of column $p into that
+ * @method \Cake\Collection\CollectionInterface nest($k, $p, $n = "children") Creates a tree structure by nesting the values of column $p into that
  *   with the same value for $k using $n as the nesting key.
  * @method array toArray() Returns a key-value array with the results of this query.
  * @method array toList() Returns a numerically indexed array with the results of this query.
@@ -202,12 +202,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Examples:
      *
      * ```
-     * $query.select(['id', 'title']); // Produces SELECT id, title
-     * $query.select(['author': 'author_id']); // Appends author: SELECT id, title, author_id as author
-     * $query.select('id', true); // Resets the list: SELECT id
-     * $query.select(['total': $countQuery]); // SELECT id, (SELECT ...) AS total
+     * $query.select(["id", "title"]); // Produces SELECT id, title
+     * $query.select(["author": "author_id"]); // Appends author: SELECT id, title, author_id as author
+     * $query.select("id", true); // Resets the list: SELECT id
+     * $query.select(["total": $countQuery]); // SELECT id, (SELECT ...) AS total
      * $query.select(function ($query) {
-     *     return ['article_id', 'total': $query.count('*')];
+     *     return ["article_id", "total": $query.count("*")];
      * })
      * ```
      *
@@ -261,7 +261,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         }
 
         if (!($table instanceof Table)) {
-            throw new InvalidArgumentException('You must provide either an Association or a Table object');
+            throw new InvalidArgumentException("You must provide either an Association or a Table object");
         }
 
         $fields = array_diff($table.getSchema().columns(), $excludedFields);
@@ -289,7 +289,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         $map = $table.getSchema().typeMap();
         $fields = [];
         foreach ($map as $f: $type) {
-            $fields[$f] = $fields[$alias . '.' . $f] = $fields[$alias . '__' . $f] = $type;
+            $fields[$f] = $fields[$alias . "." . $f] = $fields[$alias . "__" . $f] = $type;
         }
         this.getTypeMap().addDefaults($fields);
 
@@ -332,11 +332,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * // Bring articles' author information
-     * $query.contain('Author');
+     * // Bring articles" author information
+     * $query.contain("Author");
      *
      * // Also bring the category and tags associated to each article
-     * $query.contain(['Category', 'Tag']);
+     * $query.contain(["Category", "Tag"]);
      * ```
      *
      * Associations can be arbitrarily nested using dot notation or nested arrays,
@@ -347,13 +347,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * ```
      * // Eager load the product info, and for each product load other 2 associations
-     * $query.contain(['Product': ['Manufacturer', 'Distributor']);
+     * $query.contain(["Product": ["Manufacturer", "Distributor"]);
      *
      * // Which is equivalent to calling
-     * $query.contain(['Products.Manufactures', 'Products.Distributors']);
+     * $query.contain(["Products.Manufactures", "Products.Distributors"]);
      *
      * // For an author query, load his region, state and country
-     * $query.contain('Regions.States.Countries');
+     * $query.contain("Regions.States.Countries");
      * ```
      *
      * It is possible to control the conditions and fields selected for each of the
@@ -362,12 +362,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * $query.contain(['Tags': function ($q) {
-     *     return $q.where(['Tags.is_popular': true]);
+     * $query.contain(["Tags": function ($q) {
+     *     return $q.where(["Tags.is_popular": true]);
      * }]);
      *
-     * $query.contain(['Products.Manufactures': function ($q) {
-     *     return $q.select(['name']).where(['Manufactures.active': true]);
+     * $query.contain(["Products.Manufactures": function ($q) {
+     *     return $q.select(["name"]).where(["Manufactures.active": true]);
      * }]);
      * ```
      *
@@ -387,8 +387,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ```
      * // Set options for the hasMany articles that will be eagerly loaded for an author
      * $query.contain([
-     *     'Articles': [
-     *         'fields': ['title', 'author_id']
+     *     "Articles": [
+     *         "fields": ["title", "author_id"]
      *     ]
      * ]);
      * ```
@@ -398,10 +398,10 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ```
      * // Retrieve translations for the articles, but only those for the `en` and `es` locales
      * $query.contain([
-     *     'Articles': [
-     *         'finder': [
-     *             'translations': [
-     *                 'locales': ['en', 'es']
+     *     "Articles": [
+     *         "finder": [
+     *             "translations": [
+     *                 "locales": ["en", "es"]
      *             ]
      *         ]
      *     ]
@@ -413,18 +413,18 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * ```
      * // Use a query builder to add conditions to the containment
-     * $query.contain('Authors', function ($q) {
+     * $query.contain("Authors", function ($q) {
      *     return $q.where(...); // add conditions
      * });
      * // Use special join conditions for multiple containments in the same method call
      * $query.contain([
-     *     'Authors': [
-     *         'foreignKey': false,
-     *         'queryBuilder': function ($q) {
+     *     "Authors": [
+     *         "foreignKey": false,
+     *         "queryBuilder": function ($q) {
      *             return $q.where(...); // Add full filtering conditions
      *         }
      *     ],
-     *     'Tags': function ($q) {
+     *     "Tags": function ($q) {
      *         return $q.where(...); // add conditions
      *     }
      * ]);
@@ -522,9 +522,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * // Bring only articles that were tagged with 'cake'
-     * $query.matching('Tags', function ($q) {
-     *     return $q.where(['name': 'cake']);
+     * // Bring only articles that were tagged with "cake"
+     * $query.matching("Tags", function ($q) {
+     *     return $q.where(["name": "cake"]);
      * });
      * ```
      *
@@ -533,24 +533,24 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * // Bring only articles that were commented by 'markstory'
-     * $query.matching('Comments.Users', function ($q) {
-     *     return $q.where(['username': 'markstory']);
+     * // Bring only articles that were commented by "markstory"
+     * $query.matching("Comments.Users", function ($q) {
+     *     return $q.where(["username": "markstory"]);
      * });
      * ```
      *
      * As this function will create `INNER JOIN`, you might want to consider
      * calling `distinct` on this query as you might get duplicate rows if
-     * your conditions don't filter them already. This might be the case, for example,
+     * your conditions don"t filter them already. This might be the case, for example,
      * of the same user commenting more than once in the same article.
      *
      * ### Example:
      *
      * ```
-     * // Bring unique articles that were commented by 'markstory'
-     * $query.distinct(['Articles.id'])
-     *     .matching('Comments.Users', function ($q) {
-     *         return $q.where(['username': 'markstory']);
+     * // Bring unique articles that were commented by "markstory"
+     * $query.distinct(["Articles.id"])
+     *     .matching("Comments.Users", function ($q) {
+     *         return $q.where(["username": "markstory"]);
      *     });
      * ```
      *
@@ -584,9 +584,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ```
      * // Get the count of articles per user
      * $usersQuery
-     *     .select(['total_articles': $query.func().count('Articles.id')])
-     *     .leftJoinWith('Articles')
-     *     .group(['Users.id'])
+     *     .select(["total_articles": $query.func().count("Articles.id")])
+     *     .leftJoinWith("Articles")
+     *     .group(["Users.id"])
      *     .enableAutoFields();
      * ```
      *
@@ -595,11 +595,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ```
      * // Get the count of articles per user with at least 5 votes
      * $usersQuery
-     *     .select(['total_articles': $query.func().count('Articles.id')])
-     *     .leftJoinWith('Articles', function ($q) {
-     *         return $q.where(['Articles.votes >=': 5]);
+     *     .select(["total_articles": $query.func().count("Articles.id")])
+     *     .leftJoinWith("Articles", function ($q) {
+     *         return $q.where(["Articles.votes >=": 5]);
      *     })
-     *     .group(['Users.id'])
+     *     .group(["Users.id"])
      *     .enableAutoFields();
      * ```
      *
@@ -617,13 +617,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * // Total comments in articles by 'markstory'
+     * // Total comments in articles by "markstory"
      * $query
-     *     .select(['total_comments': $query.func().count('Comments.id')])
-     *     .leftJoinWith('Comments.Users', function ($q) {
-     *         return $q.where(['username': 'markstory']);
+     *     .select(["total_comments": $query.func().count("Comments.id")])
+     *     .leftJoinWith("Comments.Users", function ($q) {
+     *         return $q.where(["username": "markstory"]);
      *     })
-     *    .group(['Users.id']);
+     *    .group(["Users.id"]);
      * ```
      *
      * Please note that the query passed to the closure will only accept calling
@@ -639,8 +639,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     {
         $result = this.getEagerLoader()
             .setMatching($assoc, $builder, [
-                'joinType': Query::JOIN_TYPE_LEFT,
-                'fields': false,
+                "joinType": Query::JOIN_TYPE_LEFT,
+                "fields": false,
             ])
             .getMatching();
         _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
@@ -659,9 +659,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * // Bring only articles that were tagged with 'cake'
-     * $query.innerJoinWith('Tags', function ($q) {
-     *     return $q.where(['name': 'cake']);
+     * // Bring only articles that were tagged with "cake"
+     * $query.innerJoinWith("Tags", function ($q) {
+     *     return $q.where(["name": "cake"]);
      * });
      * ```
      *
@@ -670,7 +670,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ```
      * SELECT Articles.*
      * FROM articles Articles
-     * INNER JOIN tags Tags ON Tags.name = 'cake'
+     * INNER JOIN tags Tags ON Tags.name = "cake"
      * INNER JOIN articles_tags ArticlesTags ON ArticlesTags.tag_id = Tags.id
      *   AND ArticlesTags.articles_id = Articles.id
      * ```
@@ -688,8 +688,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     {
         $result = this.getEagerLoader()
             .setMatching($assoc, $builder, [
-                'joinType': Query::JOIN_TYPE_INNER,
-                'fields': false,
+                "joinType": Query::JOIN_TYPE_INNER,
+                "fields": false,
             ])
             .getMatching();
         _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
@@ -707,9 +707,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * // Bring only articles that were not tagged with 'cake'
-     * $query.notMatching('Tags', function ($q) {
-     *     return $q.where(['name': 'cake']);
+     * // Bring only articles that were not tagged with "cake"
+     * $query.notMatching("Tags", function ($q) {
+     *     return $q.where(["name": "cake"]);
      * });
      * ```
      *
@@ -718,24 +718,24 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * ### Example:
      *
      * ```
-     * // Bring only articles that weren't commented by 'markstory'
-     * $query.notMatching('Comments.Users', function ($q) {
-     *     return $q.where(['username': 'markstory']);
+     * // Bring only articles that weren"t commented by "markstory"
+     * $query.notMatching("Comments.Users", function ($q) {
+     *     return $q.where(["username": "markstory"]);
      * });
      * ```
      *
      * As this function will create a `LEFT JOIN`, you might want to consider
      * calling `distinct` on this query as you might get duplicate rows if
-     * your conditions don't filter them already. This might be the case, for example,
+     * your conditions don"t filter them already. This might be the case, for example,
      * of the same article having multiple comments.
      *
      * ### Example:
      *
      * ```
-     * // Bring unique articles that were commented by 'markstory'
-     * $query.distinct(['Articles.id'])
-     *     .notMatching('Comments.Users', function ($q) {
-     *         return $q.where(['username': 'markstory']);
+     * // Bring unique articles that were commented by "markstory"
+     * $query.distinct(["Articles.id"])
+     *     .notMatching("Comments.Users", function ($q) {
+     *         return $q.where(["username": "markstory"]);
      *     });
      * ```
      *
@@ -752,9 +752,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     {
         $result = this.getEagerLoader()
             .setMatching($assoc, $builder, [
-                'joinType': Query::JOIN_TYPE_LEFT,
-                'fields': false,
-                'negateMatch': true,
+                "joinType": Query::JOIN_TYPE_LEFT,
+                "fields": false,
+                "negateMatch": true,
             ])
             .getMatching();
         _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
@@ -788,11 +788,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * ```
      * $query.applyOptions([
-     *   'fields': ['id', 'name'],
-     *   'conditions': [
-     *     'created >=': '2013-01-01'
+     *   "fields": ["id", "name"],
+     *   "conditions": [
+     *     "created >=": "2013-01-01"
      *   ],
-     *   'limit': 10,
+     *   "limit": 10,
      * ]);
      * ```
      *
@@ -800,8 +800,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * ```
      * $query
-     *   .select(['id', 'name'])
-     *   .where(['created >=': '2013-01-01'])
+     *   .select(["id", "name"])
+     *   .where(["created >=": "2013-01-01"])
      *   .limit(10)
      * ```
      *
@@ -809,14 +809,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * ```
      * $query.applyOptions([
-     *   'fields': ['id', 'name'],
-     *   'custom': 'value',
+     *   "fields": ["id", "name"],
+     *   "custom": "value",
      * ]);
      * ```
      *
-     * Here `$options` will hold `['custom': 'value']` (the `fields`
+     * Here `$options` will hold `["custom": "value"]` (the `fields`
      * option will be applied to the query instead of being stored, as
-     * it's a query clause related option):
+     * it"s a query clause related option):
      *
      * ```
      * $options = $query.getOptions();
@@ -829,16 +829,16 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     function applyOptions(array $options)
     {
         $valid = [
-            'fields': 'select',
-            'conditions': 'where',
-            'join': 'join',
-            'order': 'order',
-            'limit': 'limit',
-            'offset': 'offset',
-            'group': 'group',
-            'having': 'having',
-            'contain': 'contain',
-            'page': 'page',
+            "fields": "select",
+            "conditions": "where",
+            "join": "join",
+            "order": "order",
+            "limit": "limit",
+            "offset": "offset",
+            "group": "group",
+            "having": "having",
+            "contain": "contain",
+            "page": "page",
         ];
 
         ksort($options);
@@ -946,15 +946,15 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         }
 
         $complex = (
-            $query.clause('distinct') ||
-            count($query.clause('group')) ||
-            count($query.clause('union')) ||
-            $query.clause('having')
+            $query.clause("distinct") ||
+            count($query.clause("group")) ||
+            count($query.clause("union")) ||
+            $query.clause("having")
         );
 
         if (!$complex) {
             // Expression fields could have bound parameters.
-            foreach ($query.clause('select') as $field) {
+            foreach ($query.clause("select") as $field) {
                 if ($field instanceof IExpression) {
                     $complex = true;
                     break;
@@ -963,11 +963,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         }
 
         if (!$complex && _valueBinder != null) {
-            $order = this.clause('order');
+            $order = this.clause("order");
             $complex = $order == null ? false : $order.hasNestedExpression();
         }
 
-        $count = ['count': $query.func().count('*')];
+        $count = ["count": $query.func().count("*")];
 
         if (!$complex) {
             $query.getEagerLoader().disableAutoFields();
@@ -978,18 +978,18 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         } else {
             $statement = this.getConnection().newQuery()
                 .select($count)
-                .from(['count_source': $query])
+                .from(["count_source": $query])
                 .execute();
         }
 
-        $result = $statement.fetch('assoc');
+        $result = $statement.fetch("assoc");
         $statement.closeCursor();
 
         if ($result == false) {
             return 0;
         }
 
-        return (int)$result['count'];
+        return (int)$result["count"];
     }
 
     /**
@@ -1069,10 +1069,10 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      * @throws \RuntimeException When you attempt to cache a non-select query.
      */
-    function cache($key, $config = 'default')
+    function cache($key, $config = "default")
     {
-        if (_type != 'select' && _type != null) {
-            throw new RuntimeException('You cannot cache the results of non-select queries.');
+        if (_type != "select" && _type != null) {
+            throw new RuntimeException("You cannot cache the results of non-select queries.");
         }
 
         return _cache($key, $config);
@@ -1086,9 +1086,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     function all(): IResultSet
     {
-        if (_type != 'select' && _type != null) {
+        if (_type != "select" && _type != null) {
             throw new RuntimeException(
-                'You cannot call all() on a non-select query. Use execute() instead.'
+                "You cannot call all() on a non-select query. Use execute() instead."
             );
         }
 
@@ -1096,7 +1096,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     }
 
     /**
-     * Trigger the beforeFind event on the query's repository object.
+     * Trigger the beforeFind event on the query"s repository object.
      *
      * Will not trigger more than once, and only for select queries.
      *
@@ -1104,11 +1104,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     function triggerBeforeFind(): void
     {
-        if (!_beforeFindFired && _type == 'select') {
+        if (!_beforeFindFired && _type == "select") {
             _beforeFindFired = true;
 
             $repository = this.getRepository();
-            $repository.dispatchEvent('Model.beforeFind', [
+            $repository.dispatchEvent("Model.beforeFind", [
                 this,
                 new ArrayObject(_options),
                 !this.isEagerLoaded(),
@@ -1163,13 +1163,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     protected function _transformQuery(): void
     {
-        if (!_dirty || _type != 'select') {
+        if (!_dirty || _type != "select") {
             return;
         }
 
         $repository = this.getRepository();
 
-        if (empty(_parts['from'])) {
+        if (empty(_parts["from"])) {
             this.from([$repository.getAlias(): $repository.getTable()]);
         }
         _addDefaultFields();
@@ -1185,7 +1185,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     protected function _addDefaultFields(): void
     {
-        $select = this.clause('select');
+        $select = this.clause("select");
         _hasFields = true;
 
         $repository = this.getRepository();
@@ -1193,7 +1193,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         if (!count($select) || _autoFields == true) {
             _hasFields = false;
             this.select($repository.getSchema().columns());
-            $select = this.clause('select');
+            $select = this.clause("select");
         }
 
         if (this.aliasingEnabled) {
@@ -1210,7 +1210,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     protected function _addDefaultSelectTypes(): void
     {
         $typeMap = this.getTypeMap().getDefaults();
-        $select = this.clause('select');
+        $select = this.clause("select");
         $types = [];
 
         foreach ($select as $alias: $value) {
@@ -1261,7 +1261,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Create an update query.
      *
-     * This changes the query type to be 'update'.
+     * This changes the query type to be "update".
      * Can be combined with set() and where() methods to create update queries.
      *
      * @param \Cake\Database\IExpression|string|null $table Unused parameter.
@@ -1280,7 +1280,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Create a delete query.
      *
-     * This changes the query type to be 'delete'.
+     * This changes the query type to be "delete".
      * Can be combined with the where() method to create delete queries.
      *
      * @param string|null $table Unused parameter.
@@ -1298,7 +1298,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Create an insert query.
      *
-     * This changes the query type to be 'insert'.
+     * This changes the query type to be "insert".
      * Note calling this method will reset any data previously set
      * with Query::values()
      *
@@ -1341,12 +1341,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     function __call(string $method, array $arguments)
     {
-        if (this.type() == 'select') {
+        if (this.type() == "select") {
             return _call($method, $arguments);
         }
 
         throw new BadMethodCallException(
-            sprintf('Cannot call method "%s" on a "%s" query', $method, this.type())
+            sprintf("Cannot call method "%s" on a "%s" query", $method, this.type())
         );
     }
 
@@ -1358,14 +1358,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         $eagerLoader = this.getEagerLoader();
 
         return parent::__debugInfo() + [
-            'hydrate': _hydrate,
-            'buffered': _useBufferedResults,
-            'formatters': count(_formatters),
-            'mapReducers': count(_mapReduce),
-            'contain': $eagerLoader.getContain(),
-            'matching': $eagerLoader.getMatching(),
-            'extraOptions': _options,
-            'repository': _repository,
+            "hydrate": _hydrate,
+            "buffered": _useBufferedResults,
+            "formatters": count(_formatters),
+            "mapReducers": count(_mapReduce),
+            "contain": $eagerLoader.getContain(),
+            "matching": $eagerLoader.getMatching(),
+            "extraOptions": _options,
+            "repository": _repository,
         ];
     }
 
