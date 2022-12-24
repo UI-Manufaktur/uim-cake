@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -31,7 +30,7 @@ use Cake\Datasource\RepositoryInterface;
 use Cake\Datasource\RulesAwareTrait;
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use Cake\Event\EventManager;
 use Cake\ORM\Association\BelongsTo;
 use Cake\ORM\Association\BelongsToMany;
@@ -142,7 +141,7 @@ use RuntimeException;
  * @see \Cake\Event\EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
  */
-class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterface, ValidatorAwareInterface
+class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use RulesAwareTrait;
