@@ -55,7 +55,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      *
      * Previous line will generate `CONCAT('CakePHP', ' rules')`
      *
-     * `$f = new FunctionExpression('CONCAT', ['name' => 'literal', ' rules']);`
+     * `$f = new FunctionExpression('CONCAT', ['name': 'literal', ' rules']);`
      *
      * Will produce `CONCAT(name, ' rules')`
      *
@@ -111,8 +111,8 @@ class FunctionExpression : QueryExpression : TypedResultInterface
     function add($conditions, array $types = [], bool $prepend = false)
     {
         $put = $prepend ? 'array_unshift' : 'array_push';
-        $typeMap = this.getTypeMap()->setTypes($types);
-        foreach ($conditions as $k => $p) {
+        $typeMap = this.getTypeMap().setTypes($types);
+        foreach ($conditions as $k: $p) {
             if ($p == 'literal') {
                 $put(_conditions, $k);
                 continue;
@@ -123,7 +123,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
                 continue;
             }
 
-            $type = $typeMap->type($k);
+            $type = $typeMap.type($k);
 
             if ($type != null && !$p instanceof IExpression) {
                 $p = _castToExpression($p, $type);
@@ -134,7 +134,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
                 continue;
             }
 
-            $put(_conditions, ['value' => $p, 'type' => $type]);
+            $put(_conditions, ['value': $p, 'type': $type]);
         }
 
         return this;
@@ -148,12 +148,12 @@ class FunctionExpression : QueryExpression : TypedResultInterface
         $parts = [];
         foreach (_conditions as $condition) {
             if ($condition instanceof Query) {
-                $condition = sprintf('(%s)', $condition->sql($binder));
+                $condition = sprintf('(%s)', $condition.sql($binder));
             } elseif ($condition instanceof IExpression) {
-                $condition = $condition->sql($binder);
+                $condition = $condition.sql($binder);
             } elseif (is_array($condition)) {
-                $p = $binder->placeholder('param');
-                $binder->bind($p, $condition['value'], $condition['type']);
+                $p = $binder.placeholder('param');
+                $binder.bind($p, $condition['value'], $condition['type']);
                 $condition = $p;
             }
             $parts[] = $condition;

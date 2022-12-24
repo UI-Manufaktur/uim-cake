@@ -71,8 +71,8 @@ class StringExpression : IExpression
      */
     function sql(ValueBinder $binder): string
     {
-        $placeholder = $binder->placeholder('c');
-        $binder->bind($placeholder, this.string, 'string');
+        $placeholder = $binder.placeholder('c');
+        $binder.bind($placeholder, this.string, 'string');
 
         return $placeholder . ' COLLATE ' . this.collation;
     }

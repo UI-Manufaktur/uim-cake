@@ -53,19 +53,19 @@ class IdentifierQuoter
      */
     function quote(Query $query): Query
     {
-        $binder = $query->getValueBinder();
-        $query->setValueBinder(null);
+        $binder = $query.getValueBinder();
+        $query.setValueBinder(null);
 
-        if ($query->type() == 'insert') {
+        if ($query.type() == 'insert') {
             _quoteInsert($query);
-        } elseif ($query->type() == 'update') {
+        } elseif ($query.type() == 'update') {
             _quoteUpdate($query);
         } else {
             _quoteParts($query);
         }
 
-        $query->traverseExpressions([this, 'quoteExpression']);
-        $query->setValueBinder($binder);
+        $query.traverseExpressions([this, 'quoteExpression']);
+        $query.setValueBinder($binder);
 
         return $query;
     }
@@ -106,7 +106,7 @@ class IdentifierQuoter
     protected function _quoteParts(Query $query): void
     {
         foreach (['distinct', 'select', 'from', 'group'] as $part) {
-            $contents = $query->clause($part);
+            $contents = $query.clause($part);
 
             if (!is_array($contents)) {
                 continue;
@@ -114,14 +114,14 @@ class IdentifierQuoter
 
             $result = _basicQuoter($contents);
             if (!empty($result)) {
-                $query->{$part}($result, true);
+                $query.{$part}($result, true);
             }
         }
 
-        $joins = $query->clause('join');
+        $joins = $query.clause('join');
         if ($joins) {
             $joins = _quoteJoins($joins);
-            $query->join($joins, [], true);
+            $query.join($joins, [], true);
         }
     }
 
@@ -134,9 +134,9 @@ class IdentifierQuoter
     protected function _basicQuoter(array $part): array
     {
         $result = [];
-        foreach ($part as $alias => $value) {
-            $value = !is_string($value) ? $value : _driver->quoteIdentifier($value);
-            $alias = is_numeric($alias) ? $alias : _driver->quoteIdentifier($alias);
+        foreach ($part as $alias: $value) {
+            $value = !is_string($value) ? $value : _driver.quoteIdentifier($value);
+            $alias = is_numeric($alias) ? $alias : _driver.quoteIdentifier($alias);
             $result[$alias] = $value;
         }
 
@@ -156,12 +156,12 @@ class IdentifierQuoter
         foreach ($joins as $value) {
             $alias = '';
             if (!empty($value['alias'])) {
-                $alias = _driver->quoteIdentifier($value['alias']);
+                $alias = _driver.quoteIdentifier($value['alias']);
                 $value['alias'] = $alias;
             }
 
             if (is_string($value['table'])) {
-                $value['table'] = _driver->quoteIdentifier($value['table']);
+                $value['table'] = _driver.quoteIdentifier($value['table']);
             }
 
             $result[$alias] = $value;
@@ -178,18 +178,18 @@ class IdentifierQuoter
      */
     protected function _quoteInsert(Query $query): void
     {
-        $insert = $query->clause('insert');
+        $insert = $query.clause('insert');
         if (!isset($insert[0]) || !isset($insert[1])) {
             return;
         }
         [$table, $columns] = $insert;
-        $table = _driver->quoteIdentifier($table);
+        $table = _driver.quoteIdentifier($table);
         foreach ($columns as &$column) {
             if (is_scalar($column)) {
-                $column = _driver->quoteIdentifier((string)$column);
+                $column = _driver.quoteIdentifier((string)$column);
             }
         }
-        $query->insert($columns)->into($table);
+        $query.insert($columns).into($table);
     }
 
     /**
@@ -200,10 +200,10 @@ class IdentifierQuoter
      */
     protected function _quoteUpdate(Query $query): void
     {
-        $table = $query->clause('update')[0];
+        $table = $query.clause('update')[0];
 
         if (is_string($table)) {
-            $query->update(_driver->quoteIdentifier($table));
+            $query.update(_driver.quoteIdentifier($table));
         }
     }
 
@@ -215,15 +215,15 @@ class IdentifierQuoter
      */
     protected function _quoteComparison(FieldInterface $expression): void
     {
-        $field = $expression->getField();
+        $field = $expression.getField();
         if (is_string($field)) {
-            $expression->setField(_driver->quoteIdentifier($field));
+            $expression.setField(_driver.quoteIdentifier($field));
         } elseif (is_array($field)) {
             $quoted = [];
             foreach ($field as $f) {
-                $quoted[] = _driver->quoteIdentifier($f);
+                $quoted[] = _driver.quoteIdentifier($f);
             }
-            $expression->setField($quoted);
+            $expression.setField($quoted);
         } elseif ($field instanceof IExpression) {
             this.quoteExpression($field);
         }
@@ -240,14 +240,14 @@ class IdentifierQuoter
      */
     protected function _quoteOrderBy(OrderByExpression $expression): void
     {
-        $expression->iterateParts(function ($part, &$field) {
+        $expression.iterateParts(function ($part, &$field) {
             if (is_string($field)) {
-                $field = _driver->quoteIdentifier($field);
+                $field = _driver.quoteIdentifier($field);
 
                 return $part;
             }
             if (is_string($part) && strpos($part, ' ') == false) {
-                return _driver->quoteIdentifier($part);
+                return _driver.quoteIdentifier($part);
             }
 
             return $part;
@@ -262,8 +262,8 @@ class IdentifierQuoter
      */
     protected function _quoteIdentifierExpression(IdentifierExpression $expression): void
     {
-        $expression->setIdentifier(
-            _driver->quoteIdentifier($expression->getIdentifier())
+        $expression.setIdentifier(
+            _driver.quoteIdentifier($expression.getIdentifier())
         );
     }
 }

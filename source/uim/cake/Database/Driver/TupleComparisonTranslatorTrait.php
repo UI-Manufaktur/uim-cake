@@ -50,13 +50,13 @@ trait TupleComparisonTranslatorTrait
      */
     protected function _transformTupleComparison(TupleComparison $expression, Query $query): void
     {
-        $fields = $expression->getField();
+        $fields = $expression.getField();
 
         if (!is_array($fields)) {
             return;
         }
 
-        $operator = strtoupper($expression->getOperator());
+        $operator = strtoupper($expression.getOperator());
         if (!in_array($operator, ['IN', '='])) {
             throw new RuntimeException(
                 sprintf(
@@ -66,22 +66,22 @@ trait TupleComparisonTranslatorTrait
             );
         }
 
-        $value = $expression->getValue();
+        $value = $expression.getValue();
         $true = new QueryExpression('1');
 
         if ($value instanceof Query) {
-            $selected = array_values($value->clause('select'));
-            foreach ($fields as $i => $field) {
-                $value->andWhere([$field => new IdentifierExpression($selected[$i])]);
+            $selected = array_values($value.clause('select'));
+            foreach ($fields as $i: $field) {
+                $value.andWhere([$field: new IdentifierExpression($selected[$i])]);
             }
-            $value->select($true, true);
-            $expression->setField($true);
-            $expression->setOperator('=');
+            $value.select($true, true);
+            $expression.setField($true);
+            $expression.setOperator('=');
 
             return;
         }
 
-        $type = $expression->getType();
+        $type = $expression.getType();
         if ($type) {
             /** @var array<string, string> $typeMap */
             $typeMap = array_combine($fields, $type) ?: [];
@@ -89,26 +89,26 @@ trait TupleComparisonTranslatorTrait
             $typeMap = [];
         }
 
-        $surrogate = $query->getConnection()
-            ->newQuery()
-            ->select($true);
+        $surrogate = $query.getConnection()
+            .newQuery()
+            .select($true);
 
         if (!is_array(current($value))) {
             $value = [$value];
         }
 
-        $conditions = ['OR' => []];
+        $conditions = ['OR': []];
         foreach ($value as $tuple) {
             $item = [];
-            foreach (array_values($tuple) as $i => $value2) {
-                $item[] = [$fields[$i] => $value2];
+            foreach (array_values($tuple) as $i: $value2) {
+                $item[] = [$fields[$i]: $value2];
             }
             $conditions['OR'][] = $item;
         }
-        $surrogate->where($conditions, $typeMap);
+        $surrogate.where($conditions, $typeMap);
 
-        $expression->setField($true);
-        $expression->setValue($surrogate);
-        $expression->setOperator('=');
+        $expression.setField($true);
+        $expression.setValue($surrogate);
+        $expression.setOperator('=');
     }
 }

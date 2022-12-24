@@ -64,7 +64,7 @@ trait TypeMapTrait
      * multiple functions/expressions in a query.
      *
      * To add a default without overwriting existing ones
-     * use `getTypeMap()->addDefaults()`
+     * use `getTypeMap().addDefaults()`
      *
      * @param array<int|string, string> $types The array of types to set.
      * @return this
@@ -72,7 +72,7 @@ trait TypeMapTrait
      */
     function setDefaultTypes(array $types)
     {
-        this.getTypeMap()->setDefaults($types);
+        this.getTypeMap().setDefaults($types);
 
         return this;
     }
@@ -84,6 +84,6 @@ trait TypeMapTrait
      */
     function getDefaultTypes(): array
     {
-        return this.getTypeMap()->getDefaults();
+        return this.getTypeMap().getDefaults();
     }
 }

@@ -81,7 +81,7 @@ class UnaryExpression : IExpression
     {
         $operand = _value;
         if ($operand instanceof IExpression) {
-            $operand = $operand->sql($binder);
+            $operand = $operand.sql($binder);
         }
 
         if (this.position == self::POSTFIX) {
@@ -98,7 +98,7 @@ class UnaryExpression : IExpression
     {
         if (_value instanceof IExpression) {
             $callback(_value);
-            _value->traverse($callback);
+            _value.traverse($callback);
         }
 
         return this;

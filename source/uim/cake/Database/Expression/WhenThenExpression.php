@@ -167,7 +167,7 @@ class WhenThenExpression : IExpression
                 is_array($type) &&
                 count($type) > 0
             ) {
-                $typeMap = $typeMap->setTypes($type);
+                $typeMap = $typeMap.setTypes($type);
             }
 
             $when = new QueryExpression($when, $typeMap);
@@ -294,17 +294,17 @@ class WhenThenExpression : IExpression
             $when = _castToExpression($when, this.whenType);
         }
         if ($when instanceof Query) {
-            $when = sprintf('(%s)', $when->sql($binder));
+            $when = sprintf('(%s)', $when.sql($binder));
         } elseif ($when instanceof IExpression) {
-            $when = $when->sql($binder);
+            $when = $when.sql($binder);
         } else {
-            $placeholder = $binder->placeholder('c');
+            $placeholder = $binder.placeholder('c');
             if (is_string(this.whenType)) {
                 $whenType = this.whenType;
             } else {
                 $whenType = null;
             }
-            $binder->bind($placeholder, $when, $whenType);
+            $binder.bind($placeholder, $when, $whenType);
             $when = $placeholder;
         }
 
@@ -320,12 +320,12 @@ class WhenThenExpression : IExpression
     {
         if (this.when instanceof IExpression) {
             $callback(this.when);
-            this.when->traverse($callback);
+            this.when.traverse($callback);
         }
 
         if (this.then instanceof IExpression) {
             $callback(this.then);
-            this.then->traverse($callback);
+            this.then.traverse($callback);
         }
 
         return this;

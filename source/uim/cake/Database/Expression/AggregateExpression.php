@@ -56,7 +56,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
             $conditions = $conditions(new QueryExpression());
         }
 
-        this.filter->add($conditions, $types);
+        this.filter.add($conditions, $types);
 
         return this;
     }
@@ -74,7 +74,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         }
         if ($name) {
             // Set name manually in case this was chained from FunctionsBuilder wrapper
-            this.window->name($name);
+            this.window.name($name);
         }
 
         return this;
@@ -86,7 +86,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function partition($partitions)
     {
         this.over();
-        this.window->partition($partitions);
+        this.window.partition($partitions);
 
         return this;
     }
@@ -97,7 +97,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function order($fields)
     {
         this.over();
-        this.window->order($fields);
+        this.window.order($fields);
 
         return this;
     }
@@ -108,7 +108,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function range($start, $end = 0)
     {
         this.over();
-        this.window->range($start, $end);
+        this.window.range($start, $end);
 
         return this;
     }
@@ -119,7 +119,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function rows(?int $start, ?int $end = 0)
     {
         this.over();
-        this.window->rows($start, $end);
+        this.window.rows($start, $end);
 
         return this;
     }
@@ -130,7 +130,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function groups(?int $start, ?int $end = 0)
     {
         this.over();
-        this.window->groups($start, $end);
+        this.window.groups($start, $end);
 
         return this;
     }
@@ -146,7 +146,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         string $endDirection
     ) {
         this.over();
-        this.window->frame($type, $startOffset, $startDirection, $endOffset, $endDirection);
+        this.window.frame($type, $startOffset, $startDirection, $endOffset, $endDirection);
 
         return this;
     }
@@ -157,7 +157,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function excludeCurrent()
     {
         this.over();
-        this.window->excludeCurrent();
+        this.window.excludeCurrent();
 
         return this;
     }
@@ -168,7 +168,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function excludeGroup()
     {
         this.over();
-        this.window->excludeGroup();
+        this.window.excludeGroup();
 
         return this;
     }
@@ -179,7 +179,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     function excludeTies()
     {
         this.over();
-        this.window->excludeTies();
+        this.window.excludeTies();
 
         return this;
     }
@@ -191,13 +191,13 @@ class AggregateExpression : FunctionExpression : WindowInterface
     {
         $sql = parent::sql($binder);
         if (this.filter != null) {
-            $sql .= ' FILTER (WHERE ' . this.filter->sql($binder) . ')';
+            $sql .= ' FILTER (WHERE ' . this.filter.sql($binder) . ')';
         }
         if (this.window != null) {
-            if (this.window->isNamedOnly()) {
-                $sql .= ' OVER ' . this.window->sql($binder);
+            if (this.window.isNamedOnly()) {
+                $sql .= ' OVER ' . this.window.sql($binder);
             } else {
-                $sql .= ' OVER (' . this.window->sql($binder) . ')';
+                $sql .= ' OVER (' . this.window.sql($binder) . ')';
             }
         }
 
@@ -212,11 +212,11 @@ class AggregateExpression : FunctionExpression : WindowInterface
         parent::traverse($callback);
         if (this.filter != null) {
             $callback(this.filter);
-            this.filter->traverse($callback);
+            this.filter.traverse($callback);
         }
         if (this.window != null) {
             $callback(this.window);
-            this.window->traverse($callback);
+            this.window.traverse($callback);
         }
 
         return this;

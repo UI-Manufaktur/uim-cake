@@ -58,12 +58,12 @@ class SchemaCache
         if ($name) {
             $tables = [$name];
         } else {
-            $tables = _schema->listTables();
+            $tables = _schema.listTables();
         }
 
         foreach ($tables as $table) {
             /** @psalm-suppress PossiblyNullArgument */
-            _schema->describe($table, ['forceRefresh' => true]);
+            _schema.describe($table, ['forceRefresh': true]);
         }
 
         return $tables;
@@ -80,15 +80,15 @@ class SchemaCache
         if ($name) {
             $tables = [$name];
         } else {
-            $tables = _schema->listTables();
+            $tables = _schema.listTables();
         }
 
-        $cacher = _schema->getCacher();
+        $cacher = _schema.getCacher();
 
         foreach ($tables as $table) {
             /** @psalm-suppress PossiblyNullArgument */
-            $key = _schema->cacheKey($table);
-            $cacher->delete($key);
+            $key = _schema.cacheKey($table);
+            $cacher.delete($key);
         }
 
         return $tables;
@@ -103,13 +103,13 @@ class SchemaCache
      */
     function getSchema(Connection $connection): CachedCollection
     {
-        $config = $connection->config();
+        $config = $connection.config();
         if (empty($config['cacheMetadata'])) {
-            $connection->cacheMetadata(true);
+            $connection.cacheMetadata(true);
         }
 
         /** @var \Cake\Database\Schema\CachedCollection $schemaCollection */
-        $schemaCollection = $connection->getSchemaCollection();
+        $schemaCollection = $connection.getSchemaCollection();
 
         return $schemaCollection;
     }

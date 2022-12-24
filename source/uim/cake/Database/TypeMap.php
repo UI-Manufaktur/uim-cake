@@ -63,7 +63,7 @@ class TypeMap
      * ### Example
      *
      * ```
-     * $query->setDefaults(['created' => 'datetime', 'is_visible' => 'boolean']);
+     * $query.setDefaults(['created': 'datetime', 'is_visible': 'boolean']);
      * ```
      *
      * This method will replace all the existing default mappings with the ones provided.
@@ -109,7 +109,7 @@ class TypeMap
      * ### Example
      *
      * ```
-     * $query->setTypes(['created' => 'time']);
+     * $query.setTypes(['created': 'time']);
      * ```
      *
      * This method will replace all the existing type maps with the ones provided.

@@ -56,16 +56,16 @@ class Mysql : Driver
      * @var array<string, mixed>
      */
     protected $_baseConfig = [
-        'persistent' => true,
-        'host' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'cake',
-        'port' => '3306',
-        'flags' => [],
-        'encoding' => 'utf8mb4',
-        'timezone' => null,
-        'init' => [],
+        'persistent': true,
+        'host': 'localhost',
+        'username': 'root',
+        'password': '',
+        'database': 'cake',
+        'port': '3306',
+        'flags': [],
+        'encoding': 'utf8mb4',
+        'timezone': null,
+        'init': [],
     ];
 
     /**
@@ -105,15 +105,15 @@ class Mysql : Driver
      * @var array<string, array<string, string>>
      */
     protected $featureVersions = [
-        'mysql' => [
-            'json' => '5.7.0',
-            'cte' => '8.0.0',
-            'window' => '8.0.0',
+        'mysql': [
+            'json': '5.7.0',
+            'cte': '8.0.0',
+            'window': '8.0.0',
         ],
-        'mariadb' => [
-            'json' => '10.2.7',
-            'cte' => '10.2.1',
-            'window' => '10.2.0',
+        'mariadb': [
+            'json': '10.2.7',
+            'cte': '10.2.1',
+            'window': '10.2.0',
         ],
     ];
 
@@ -138,9 +138,9 @@ class Mysql : Driver
         }
 
         $config['flags'] += [
-            PDO::ATTR_PERSISTENT => $config['persistent'],
-            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_PERSISTENT: $config['persistent'],
+            PDO::MYSQL_ATTR_USE_BUFFERED_QUERY: true,
+            PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
 
         if (!empty($config['ssl_key']) && !empty($config['ssl_cert'])) {
@@ -166,7 +166,7 @@ class Mysql : Driver
         if (!empty($config['init'])) {
             $connection = this.getConnection();
             foreach ((array)$config['init'] as $command) {
-                $connection->exec($command);
+                $connection.exec($command);
             }
         }
 
@@ -197,11 +197,11 @@ class Mysql : Driver
          * @psalm-suppress PossiblyInvalidMethodCall
          * @psalm-suppress PossiblyInvalidArgument
          */
-        $statement = _connection->prepare($isObject ? $query->sql() : $query);
+        $statement = _connection.prepare($isObject ? $query.sql() : $query);
         $result = new MysqlStatement($statement, this);
         /** @psalm-suppress PossiblyInvalidMethodCall */
-        if ($isObject && $query->isBufferedResultsEnabled() == false) {
-            $result->bufferResults(false);
+        if ($isObject && $query.isBufferedResultsEnabled() == false) {
+            $result.bufferResults(false);
         }
 
         return $result;
@@ -291,7 +291,7 @@ class Mysql : Driver
     {
         if (_version == null) {
             this.connect();
-            _version = (string)_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
+            _version = (string)_connection.getAttribute(PDO::ATTR_SERVER_VERSION);
 
             if (strpos(_version, 'MariaDB') != false) {
                 this.serverType = static::SERVER_TYPE_MARIADB;

@@ -55,9 +55,9 @@ class OrderClauseExpression : IExpression, FieldInterface
         /** @var \Cake\Database\IExpression|string $field */
         $field = _field;
         if ($field instanceof Query) {
-            $field = sprintf('(%s)', $field->sql($binder));
+            $field = sprintf('(%s)', $field.sql($binder));
         } elseif ($field instanceof IExpression) {
-            $field = $field->sql($binder);
+            $field = $field.sql($binder);
         }
 
         return sprintf('%s %s', $field, _direction);
@@ -70,7 +70,7 @@ class OrderClauseExpression : IExpression, FieldInterface
     {
         if (_field instanceof IExpression) {
             $callback(_field);
-            _field->traverse($callback);
+            _field.traverse($callback);
         }
 
         return this;

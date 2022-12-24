@@ -67,9 +67,9 @@ trait CaseExpressionTrait
             _typeMap != null &&
             $value instanceof IdentifierExpression
         ) {
-            $type = _typeMap->type($value->getIdentifier());
+            $type = _typeMap.type($value.getIdentifier());
         } elseif ($value instanceof TypedResultInterface) {
-            $type = $value->getReturnType();
+            $type = $value.getReturnType();
         }
 
         return $type;
@@ -95,12 +95,12 @@ trait CaseExpressionTrait
         if ($value == null) {
             $value = 'NULL';
         } elseif ($value instanceof Query) {
-            $value = sprintf('(%s)', $value->sql($binder));
+            $value = sprintf('(%s)', $value.sql($binder));
         } elseif ($value instanceof IExpression) {
-            $value = $value->sql($binder);
+            $value = $value.sql($binder);
         } else {
-            $placeholder = $binder->placeholder('c');
-            $binder->bind($placeholder, $value, $type);
+            $placeholder = $binder.placeholder('c');
+            $binder.bind($placeholder, $value, $type);
             $value = $placeholder;
         }
 

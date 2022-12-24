@@ -47,16 +47,16 @@ class Sqlite : Driver
      * @var array<string, mixed>
      */
     protected $_baseConfig = [
-        'persistent' => false,
-        'username' => null,
-        'password' => null,
-        'database' => ':memory:',
-        'encoding' => 'utf8',
-        'mask' => 0644,
-        'cache' => null,
-        'mode' => null,
-        'flags' => [],
-        'init' => [],
+        'persistent': false,
+        'username': null,
+        'password': null,
+        'database': ':memory:',
+        'encoding': 'utf8',
+        'mask': 0644,
+        'cache': null,
+        'mode': null,
+        'flags': [],
+        'init': [],
     ];
 
     /**
@@ -93,13 +93,13 @@ class Sqlite : Driver
      * @var array<string, string>
      */
     protected $_dateParts = [
-        'day' => 'd',
-        'hour' => 'H',
-        'month' => 'm',
-        'minute' => 'M',
-        'second' => 'S',
-        'week' => 'W',
-        'year' => 'Y',
+        'day': 'd',
+        'hour': 'H',
+        'month': 'm',
+        'minute': 'M',
+        'second': 'S',
+        'week': 'W',
+        'year': 'Y',
     ];
 
     /**
@@ -108,8 +108,8 @@ class Sqlite : Driver
      * @var array<string, string>
      */
     protected $featureVersions = [
-        'cte' => '3.8.3',
-        'window' => '3.28.0',
+        'cte': '3.8.3',
+        'window': '3.28.0',
     ];
 
     /**
@@ -124,9 +124,9 @@ class Sqlite : Driver
         }
         $config = _config;
         $config['flags'] += [
-            PDO::ATTR_PERSISTENT => $config['persistent'],
-            PDO::ATTR_EMULATE_PREPARES => false,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_PERSISTENT: $config['persistent'],
+            PDO::ATTR_EMULATE_PREPARES: false,
+            PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
         if (!is_string($config['database']) || $config['database'] == '') {
             $name = $config['name'] ?? 'unknown';
@@ -166,7 +166,7 @@ class Sqlite : Driver
 
         if (!empty($config['init'])) {
             foreach ((array)$config['init'] as $command) {
-                this.getConnection()->exec($command);
+                this.getConnection().exec($command);
             }
         }
 
@@ -197,11 +197,11 @@ class Sqlite : Driver
          * @psalm-suppress PossiblyInvalidMethodCall
          * @psalm-suppress PossiblyInvalidArgument
          */
-        $statement = _connection->prepare($isObject ? $query->sql() : $query);
+        $statement = _connection.prepare($isObject ? $query.sql() : $query);
         $result = new SqliteStatement(new PDOStatement($statement, this), this);
         /** @psalm-suppress PossiblyInvalidMethodCall */
-        if ($isObject && $query->isBufferedResultsEnabled() == false) {
-            $result->bufferResults(false);
+        if ($isObject && $query.isBufferedResultsEnabled() == false) {
+            $result.bufferResults(false);
         }
 
         return $result;
@@ -278,8 +278,8 @@ class Sqlite : Driver
     protected function _expressionTranslators(): array
     {
         return [
-            FunctionExpression::class => '_transformFunctionExpression',
-            TupleComparison::class => '_transformTupleComparison',
+            FunctionExpression::class: '_transformFunctionExpression',
+            TupleComparison::class: '_transformTupleComparison',
         ];
     }
 
@@ -292,42 +292,42 @@ class Sqlite : Driver
      */
     protected function _transformFunctionExpression(FunctionExpression $expression): void
     {
-        switch ($expression->getName()) {
+        switch ($expression.getName()) {
             case 'CONCAT':
                 // CONCAT function is expressed as exp1 || exp2
-                $expression->setName('')->setConjunction(' ||');
+                $expression.setName('').setConjunction(' ||');
                 break;
             case 'DATEDIFF':
                 $expression
-                    ->setName('ROUND')
-                    ->setConjunction('-')
-                    ->iterateParts(function ($p) {
+                    .setName('ROUND')
+                    .setConjunction('-')
+                    .iterateParts(function ($p) {
                         return new FunctionExpression('JULIANDAY', [$p['value']], [$p['type']]);
                     });
                 break;
             case 'NOW':
-                $expression->setName('DATETIME')->add(["'now'" => 'literal']);
+                $expression.setName('DATETIME').add(["'now'": 'literal']);
                 break;
             case 'RAND':
                 $expression
-                    ->setName('ABS')
-                    ->add(['RANDOM() % 1' => 'literal'], [], true);
+                    .setName('ABS')
+                    .add(['RANDOM() % 1': 'literal'], [], true);
                 break;
             case 'CURRENT_DATE':
-                $expression->setName('DATE')->add(["'now'" => 'literal']);
+                $expression.setName('DATE').add(["'now'": 'literal']);
                 break;
             case 'CURRENT_TIME':
-                $expression->setName('TIME')->add(["'now'" => 'literal']);
+                $expression.setName('TIME').add(["'now'": 'literal']);
                 break;
             case 'EXTRACT':
                 $expression
-                    ->setName('STRFTIME')
-                    ->setConjunction(' ,')
-                    ->iterateParts(function ($p, $key) {
+                    .setName('STRFTIME')
+                    .setConjunction(' ,')
+                    .iterateParts(function ($p, $key) {
                         if ($key == 0) {
                             $value = rtrim(strtolower($p), 's');
                             if (isset(_dateParts[$value])) {
-                                $p = ['value' => '%' . _dateParts[$value], 'type' => null];
+                                $p = ['value': '%' . _dateParts[$value], 'type': null];
                             }
                         }
 
@@ -336,11 +336,11 @@ class Sqlite : Driver
                 break;
             case 'DATE_ADD':
                 $expression
-                    ->setName('DATE')
-                    ->setConjunction(',')
-                    ->iterateParts(function ($p, $key) {
+                    .setName('DATE')
+                    .setConjunction(',')
+                    .iterateParts(function ($p, $key) {
                         if ($key == 1) {
-                            $p = ['value' => $p, 'type' => null];
+                            $p = ['value': $p, 'type': null];
                         }
 
                         return $p;
@@ -348,10 +348,10 @@ class Sqlite : Driver
                 break;
             case 'DAYOFWEEK':
                 $expression
-                    ->setName('STRFTIME')
-                    ->setConjunction(' ')
-                    ->add(["'%w', " => 'literal'], [], true)
-                    ->add([') + (1' => 'literal']); // Sqlite starts on index 0 but Sunday should be 1
+                    .setName('STRFTIME')
+                    .setConjunction(' ')
+                    .add(["'%w', ": 'literal'], [], true)
+                    .add([') + (1': 'literal']); // Sqlite starts on index 0 but Sunday should be 1
                 break;
         }
     }

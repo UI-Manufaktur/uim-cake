@@ -101,7 +101,7 @@ class TupleComparison : ComparisonExpression
         }
 
         foreach ($originalFields as $field) {
-            $fields[] = $field instanceof IExpression ? $field->sql($binder) : $field;
+            $fields[] = $field instanceof IExpression ? $field.sql($binder) : $field;
         }
 
         $values = _stringifyValues($binder);
@@ -124,12 +124,12 @@ class TupleComparison : ComparisonExpression
         $parts = this.getValue();
 
         if ($parts instanceof IExpression) {
-            return $parts->sql($binder);
+            return $parts.sql($binder);
         }
 
-        foreach ($parts as $i => $value) {
+        foreach ($parts as $i: $value) {
             if ($value instanceof IExpression) {
-                $values[] = $value->sql($binder);
+                $values[] = $value.sql($binder);
                 continue;
             }
 
@@ -141,7 +141,7 @@ class TupleComparison : ComparisonExpression
 
             if ($isMultiOperation) {
                 $bound = [];
-                foreach ($value as $k => $val) {
+                foreach ($value as $k: $val) {
                     /** @var string $valType */
                     $valType = $type && isset($type[$k]) ? $type[$k] : $type;
                     $bound[] = _bindValue($val, $binder, $valType);
@@ -164,8 +164,8 @@ class TupleComparison : ComparisonExpression
      */
     protected function _bindValue($value, ValueBinder $binder, ?string $type = null): string
     {
-        $placeholder = $binder->placeholder('tuple');
-        $binder->bind($placeholder, $value, $type);
+        $placeholder = $binder.placeholder('tuple');
+        $binder.bind($placeholder, $value, $type);
 
         return $placeholder;
     }
@@ -184,7 +184,7 @@ class TupleComparison : ComparisonExpression
         $value = this.getValue();
         if ($value instanceof IExpression) {
             $callback($value);
-            $value->traverse($callback);
+            $value.traverse($callback);
 
             return this;
         }
@@ -214,7 +214,7 @@ class TupleComparison : ComparisonExpression
     {
         if ($value instanceof IExpression) {
             $callback($value);
-            $value->traverse($callback);
+            $value.traverse($callback);
         }
     }
 

@@ -38,12 +38,12 @@ class SqlserverCompiler : QueryCompiler
      * @inheritDoc
      */
     protected $_templates = [
-        'delete' => 'DELETE',
-        'where' => ' WHERE %s',
-        'group' => ' GROUP BY %s',
-        'order' => ' %s',
-        'offset' => ' OFFSET %s ROWS',
-        'epilog' => ' %s',
+        'delete': 'DELETE',
+        'where': ' WHERE %s',
+        'group': ' GROUP BY %s',
+        'order': ' %s',
+        'offset': ' OFFSET %s ROWS',
+        'epilog': ' %s',
     ];
 
     /**
@@ -68,7 +68,7 @@ class SqlserverCompiler : QueryCompiler
     {
         $expressions = [];
         foreach ($parts as $cte) {
-            $expressions[] = $cte->sql($binder);
+            $expressions[] = $cte.sql($binder);
         }
 
         return sprintf('WITH %s ', implode(', ', $expressions));
@@ -96,7 +96,7 @@ class SqlserverCompiler : QueryCompiler
         }
         $table = $parts[0];
         $columns = _stringifyExpressions($parts[1], $binder);
-        $modifiers = _buildModifierPart($query->clause('modifier'), $query, $binder);
+        $modifiers = _buildModifierPart($query.clause('modifier'), $query, $binder);
 
         return sprintf(
             'INSERT%s INTO %s (%s) OUTPUT INSERTED.*',
@@ -115,7 +115,7 @@ class SqlserverCompiler : QueryCompiler
      */
     protected function _buildLimitPart(int $limit, Query $query): string
     {
-        if ($query->clause('offset') == null) {
+        if ($query.clause('offset') == null) {
             return '';
         }
 
@@ -134,13 +134,13 @@ class SqlserverCompiler : QueryCompiler
      */
     protected function _buildHavingPart($parts, $query, $binder)
     {
-        $selectParts = $query->clause('select');
+        $selectParts = $query.clause('select');
 
-        foreach ($selectParts as $selectKey => $selectPart) {
+        foreach ($selectParts as $selectKey: $selectPart) {
             if (!$selectPart instanceof FunctionExpression) {
                 continue;
             }
-            foreach ($parts as $k => $p) {
+            foreach ($parts as $k: $p) {
                 if (!is_string($p)) {
                     continue;
                 }
@@ -156,7 +156,7 @@ class SqlserverCompiler : QueryCompiler
 
                 $parts[$k] = preg_replace(
                     ['/\[|\]/', '/\b' . trim($selectKey, '[]') . '\b/i'],
-                    ['', $selectPart->sql($binder)],
+                    ['', $selectPart.sql($binder)],
                     $p
                 );
             }

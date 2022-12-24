@@ -68,7 +68,7 @@ class WindowExpression : IExpression, WindowInterface
      */
     function isNamedOnly(): bool
     {
-        return this.name->getIdentifier() && (!this.partitions && !this.frame && !this.order);
+        return this.name.getIdentifier() && (!this.partitions && !this.frame && !this.order);
     }
 
     /**
@@ -129,7 +129,7 @@ class WindowExpression : IExpression, WindowInterface
             $fields = $fields(new QueryExpression([], [], ''));
         }
 
-        this.order->add($fields);
+        this.order.add($fields);
 
         return this;
     }
@@ -169,14 +169,14 @@ class WindowExpression : IExpression, WindowInterface
         string $endDirection
     ) {
         this.frame = [
-            'type' => $type,
-            'start' => [
-                'offset' => $startOffset,
-                'direction' => $startDirection,
+            'type': $type,
+            'start': [
+                'offset': $startOffset,
+                'direction': $startDirection,
             ],
-            'end' => [
-                'offset' => $endOffset,
-                'direction' => $endDirection,
+            'end': [
+                'offset': $endOffset,
+                'direction': $endDirection,
             ],
         ];
 
@@ -219,21 +219,21 @@ class WindowExpression : IExpression, WindowInterface
     function sql(ValueBinder $binder): string
     {
         $clauses = [];
-        if (this.name->getIdentifier()) {
-            $clauses[] = this.name->sql($binder);
+        if (this.name.getIdentifier()) {
+            $clauses[] = this.name.sql($binder);
         }
 
         if (this.partitions) {
             $expressions = [];
             foreach (this.partitions as $partition) {
-                $expressions[] = $partition->sql($binder);
+                $expressions[] = $partition.sql($binder);
             }
 
             $clauses[] = 'PARTITION BY ' . implode(', ', $expressions);
         }
 
         if (this.order) {
-            $clauses[] = this.order->sql($binder);
+            $clauses[] = this.order.sql($binder);
         }
 
         if (this.frame) {
@@ -268,24 +268,24 @@ class WindowExpression : IExpression, WindowInterface
         $callback(this.name);
         foreach (this.partitions as $partition) {
             $callback($partition);
-            $partition->traverse($callback);
+            $partition.traverse($callback);
         }
 
         if (this.order) {
             $callback(this.order);
-            this.order->traverse($callback);
+            this.order.traverse($callback);
         }
 
         if (this.frame != null) {
             $offset = this.frame['start']['offset'];
             if ($offset instanceof IExpression) {
                 $callback($offset);
-                $offset->traverse($callback);
+                $offset.traverse($callback);
             }
             $offset = this.frame['end']['offset'] ?? null;
             if ($offset instanceof IExpression) {
                 $callback($offset);
-                $offset->traverse($callback);
+                $offset.traverse($callback);
             }
         }
 
@@ -307,7 +307,7 @@ class WindowExpression : IExpression, WindowInterface
         }
 
         if ($offset instanceof IExpression) {
-            $offset = $offset->sql($binder);
+            $offset = $offset.sql($binder);
         }
 
         return sprintf(
@@ -325,7 +325,7 @@ class WindowExpression : IExpression, WindowInterface
     function __clone()
     {
         this.name = clone this.name;
-        foreach (this.partitions as $i => $partition) {
+        foreach (this.partitions as $i: $partition) {
             this.partitions[$i] = clone $partition;
         }
         if (this.order != null) {

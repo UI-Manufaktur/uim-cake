@@ -100,7 +100,7 @@ trait SqlDialectTrait
     {
         return function ($query) use ($type) {
             if (this.isAutoQuotingEnabled()) {
-                $query = (new IdentifierQuoter(this))->quote($query);
+                $query = (new IdentifierQuoter(this)).quote($query);
             }
 
             /** @var \Cake\ORM\Query $query */
@@ -110,8 +110,8 @@ trait SqlDialectTrait
                 return $query;
             }
 
-            $query->traverseExpressions(function ($expression) use ($translators, $query): void {
-                foreach ($translators as $class => $method) {
+            $query.traverseExpressions(function ($expression) use ($translators, $query): void {
+                foreach ($translators as $class: $method) {
                     if ($expression instanceof $class) {
                         this.{$method}($expression, $query);
                     }
@@ -155,9 +155,9 @@ trait SqlDialectTrait
      */
     protected function _transformDistinct(Query $query): Query
     {
-        if (is_array($query->clause('distinct'))) {
-            $query->group($query->clause('distinct'), true);
-            $query->distinct(false);
+        if (is_array($query.clause('distinct'))) {
+            $query.group($query.clause('distinct'), true);
+            $query.distinct(false);
         }
 
         return $query;
@@ -179,14 +179,14 @@ trait SqlDialectTrait
     {
         $hadAlias = false;
         $tables = [];
-        foreach ($query->clause('from') as $alias => $table) {
+        foreach ($query.clause('from') as $alias: $table) {
             if (is_string($alias)) {
                 $hadAlias = true;
             }
             $tables[] = $table;
         }
         if ($hadAlias) {
-            $query->from($tables, true);
+            $query.from($tables, true);
         }
 
         if (!$hadAlias) {
@@ -222,34 +222,34 @@ trait SqlDialectTrait
      */
     protected function _removeAliasesFromConditions(Query $query): Query
     {
-        if ($query->clause('join')) {
+        if ($query.clause('join')) {
             throw new RuntimeException(
                 'Aliases are being removed from conditions for UPDATE/DELETE queries, ' .
                 'this can break references to joined tables.'
             );
         }
 
-        $conditions = $query->clause('where');
+        $conditions = $query.clause('where');
         if ($conditions) {
-            $conditions->traverse(function ($expression) {
+            $conditions.traverse(function ($expression) {
                 if ($expression instanceof ComparisonExpression) {
-                    $field = $expression->getField();
+                    $field = $expression.getField();
                     if (
                         is_string($field) &&
                         strpos($field, '.') != false
                     ) {
                         [, $unaliasedField] = explode('.', $field, 2);
-                        $expression->setField($unaliasedField);
+                        $expression.setField($unaliasedField);
                     }
 
                     return $expression;
                 }
 
                 if ($expression instanceof IdentifierExpression) {
-                    $identifier = $expression->getIdentifier();
+                    $identifier = $expression.getIdentifier();
                     if (strpos($identifier, '.') != false) {
                         [, $unaliasedIdentifier] = explode('.', $identifier, 2);
-                        $expression->setIdentifier($unaliasedIdentifier);
+                        $expression.setIdentifier($unaliasedIdentifier);
                     }
 
                     return $expression;

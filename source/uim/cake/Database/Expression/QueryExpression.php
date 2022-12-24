@@ -69,7 +69,7 @@ class QueryExpression : IExpression, Countable
         this.setTypeMap($types);
         this.setConjunction(strtoupper($conjunction));
         if (!empty($conditions)) {
-            this.add($conditions, this.getTypeMap()->getTypes());
+            this.add($conditions, this.getTypeMap().getTypes());
         }
     }
 
@@ -377,7 +377,7 @@ class QueryExpression : IExpression, Countable
             $expression = new CaseStatementExpression();
         }
 
-        return $expression->setTypeMap(this.getTypeMap());
+        return $expression.setTypeMap(this.getTypeMap());
     }
 
     /**
@@ -414,8 +414,8 @@ class QueryExpression : IExpression, Countable
     {
         $or = new static([], [], 'OR');
         $or
-            ->notIn($field, $values, $type)
-            ->isNull($field);
+            .notIn($field, $values, $type)
+            .isNull($field);
 
         return this.add($or);
     }
@@ -473,10 +473,10 @@ class QueryExpression : IExpression, Countable
     function and($conditions, $types = [])
     {
         if ($conditions instanceof Closure) {
-            return $conditions(new static([], this.getTypeMap()->setTypes($types)));
+            return $conditions(new static([], this.getTypeMap().setTypes($types)));
         }
 
-        return new static($conditions, this.getTypeMap()->setTypes($types));
+        return new static($conditions, this.getTypeMap().setTypes($types));
     }
 
     /**
@@ -491,10 +491,10 @@ class QueryExpression : IExpression, Countable
     function or($conditions, $types = [])
     {
         if ($conditions instanceof Closure) {
-            return $conditions(new static([], this.getTypeMap()->setTypes($types), 'OR'));
+            return $conditions(new static([], this.getTypeMap().setTypes($types), 'OR'));
         }
 
-        return new static($conditions, this.getTypeMap()->setTypes($types), 'OR');
+        return new static($conditions, this.getTypeMap().setTypes($types), 'OR');
     }
 
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
@@ -548,7 +548,7 @@ class QueryExpression : IExpression, Countable
      */
     function not($conditions, $types = [])
     {
-        return this.add(['NOT' => $conditions], $types);
+        return this.add(['NOT': $conditions], $types);
     }
 
     /**
@@ -597,9 +597,9 @@ class QueryExpression : IExpression, Countable
         $parts = [];
         foreach (_conditions as $part) {
             if ($part instanceof Query) {
-                $part = '(' . $part->sql($binder) . ')';
+                $part = '(' . $part.sql($binder) . ')';
             } elseif ($part instanceof IExpression) {
-                $part = $part->sql($binder);
+                $part = $part.sql($binder);
             }
             if ($part != '') {
                 $parts[] = $part;
@@ -617,7 +617,7 @@ class QueryExpression : IExpression, Countable
         foreach (_conditions as $c) {
             if ($c instanceof IExpression) {
                 $callback($c);
-                $c->traverse($callback);
+                $c.traverse($callback);
             }
         }
 
@@ -642,7 +642,7 @@ class QueryExpression : IExpression, Countable
     function iterateParts(callable $callback)
     {
         $parts = [];
-        foreach (_conditions as $k => $c) {
+        foreach (_conditions as $k: $c) {
             $key = &$k;
             $part = $callback($c, $key);
             if ($part != null) {
@@ -709,9 +709,9 @@ class QueryExpression : IExpression, Countable
     {
         $operators = ['and', 'or', 'xor'];
 
-        $typeMap = this.getTypeMap()->setTypes($types);
+        $typeMap = this.getTypeMap().setTypes($types);
 
-        foreach ($conditions as $k => $c) {
+        foreach ($conditions as $k: $c) {
             $numericKey = is_numeric($k);
 
             if ($c instanceof Closure) {
@@ -799,7 +799,7 @@ class QueryExpression : IExpression, Countable
             [$expression, $operator] = $parts;
         }
         $operator = strtolower(trim($operator));
-        $type = this.getTypeMap()->type($expression);
+        $type = this.getTypeMap().type($expression);
 
         $typeMultiple = (is_string($type) && strpos($type, '[]') != false);
         if (in_array($operator, ['in', 'not in']) || $typeMultiple) {
@@ -857,9 +857,9 @@ class QueryExpression : IExpression, Countable
      */
     protected function _calculateType($field): ?string
     {
-        $field = $field instanceof IdentifierExpression ? $field->getIdentifier() : $field;
+        $field = $field instanceof IdentifierExpression ? $field.getIdentifier() : $field;
         if (is_string($field)) {
-            return this.getTypeMap()->type($field);
+            return this.getTypeMap().type($field);
         }
 
         return null;
@@ -872,7 +872,7 @@ class QueryExpression : IExpression, Countable
      */
     function __clone()
     {
-        foreach (_conditions as $i => $condition) {
+        foreach (_conditions as $i: $condition) {
             if ($condition instanceof IExpression) {
                 _conditions[$i] = clone $condition;
             }

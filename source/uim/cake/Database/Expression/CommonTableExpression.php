@@ -185,7 +185,7 @@ class CommonTableExpression : IExpression
         $fields = '';
         if (this.fields) {
             $expressions = array_map(function (IdentifierExpression $e) use ($binder) {
-                return $e->sql($binder);
+                return $e.sql($binder);
             }, this.fields);
             $fields = sprintf('(%s)', implode(', ', $expressions));
         }
@@ -194,10 +194,10 @@ class CommonTableExpression : IExpression
 
         return sprintf(
             '%s%s AS %s(%s)',
-            this.name->sql($binder),
+            this.name.sql($binder),
             $fields,
             $suffix,
-            this.query ? this.query->sql($binder) : ''
+            this.query ? this.query.sql($binder) : ''
         );
     }
 
@@ -209,12 +209,12 @@ class CommonTableExpression : IExpression
         $callback(this.name);
         foreach (this.fields as $field) {
             $callback($field);
-            $field->traverse($callback);
+            $field.traverse($callback);
         }
 
         if (this.query) {
             $callback(this.query);
-            this.query->traverse($callback);
+            this.query.traverse($callback);
         }
 
         return this;
@@ -232,7 +232,7 @@ class CommonTableExpression : IExpression
             this.query = clone this.query;
         }
 
-        foreach (this.fields as $key => $field) {
+        foreach (this.fields as $key: $field) {
             this.fields[$key] = clone $field;
         }
     }

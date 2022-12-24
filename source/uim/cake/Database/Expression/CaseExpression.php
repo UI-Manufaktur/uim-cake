@@ -117,7 +117,7 @@ class CaseExpression : IExpression
         $rawValues = array_values($values);
         $keyValues = array_keys($values);
 
-        foreach ($conditions as $k => $c) {
+        foreach ($conditions as $k: $c) {
             $numericKey = is_numeric($k);
 
             if ($numericKey && empty($c)) {
@@ -156,7 +156,7 @@ class CaseExpression : IExpression
                 continue;
             }
 
-            _values[] = ['value' => $value, 'type' => $type];
+            _values[] = ['value': $value, 'type': $type];
         }
     }
 
@@ -179,7 +179,7 @@ class CaseExpression : IExpression
         }
 
         if (!$value instanceof IExpression) {
-            $value = ['value' => $value, 'type' => $type];
+            $value = ['value': $value, 'type': $type];
         }
 
         _elseValue = $value;
@@ -195,10 +195,10 @@ class CaseExpression : IExpression
     protected function _compile($part, ValueBinder $binder): string
     {
         if ($part instanceof IExpression) {
-            $part = $part->sql($binder);
+            $part = $part.sql($binder);
         } elseif (is_array($part)) {
-            $placeholder = $binder->placeholder('param');
-            $binder->bind($placeholder, $part['value'], $part['type']);
+            $placeholder = $binder.placeholder('param');
+            $binder.bind($placeholder, $part['value'], $part['type']);
             $part = $placeholder;
         }
 
@@ -215,7 +215,7 @@ class CaseExpression : IExpression
     {
         $parts = [];
         $parts[] = 'CASE';
-        foreach (_conditions as $k => $part) {
+        foreach (_conditions as $k: $part) {
             $value = _values[$k];
             $parts[] = 'WHEN ' . _compile($part, $binder) . ' THEN ' . _compile($value, $binder);
         }
@@ -237,13 +237,13 @@ class CaseExpression : IExpression
             foreach (this.{$part} as $c) {
                 if ($c instanceof IExpression) {
                     $callback($c);
-                    $c->traverse($callback);
+                    $c.traverse($callback);
                 }
             }
         }
         if (_elseValue instanceof IExpression) {
             $callback(_elseValue);
-            _elseValue->traverse($callback);
+            _elseValue.traverse($callback);
         }
 
         return this;

@@ -59,24 +59,24 @@ class Sqlserver : Driver
      * @var array<string, mixed>
      */
     protected $_baseConfig = [
-        'host' => 'localhost\SQLEXPRESS',
-        'username' => '',
-        'password' => '',
-        'database' => 'cake',
-        'port' => '',
+        'host': 'localhost\SQLEXPRESS',
+        'username': '',
+        'password': '',
+        'database': 'cake',
+        'port': '',
         // PDO::SQLSRV_ENCODING_UTF8
-        'encoding' => 65001,
-        'flags' => [],
-        'init' => [],
-        'settings' => [],
-        'attributes' => [],
-        'app' => null,
-        'connectionPooling' => null,
-        'failoverPartner' => null,
-        'loginTimeout' => null,
-        'multiSubnetFailover' => null,
-        'encrypt' => null,
-        'trustServerCertificate' => null,
+        'encoding': 65001,
+        'flags': [],
+        'init': [],
+        'settings': [],
+        'attributes': [],
+        'app': null,
+        'connectionPooling': null,
+        'failoverPartner': null,
+        'loginTimeout': null,
+        'multiSubnetFailover': null,
+        'encrypt': null,
+        'trustServerCertificate': null,
     ];
 
     /**
@@ -126,7 +126,7 @@ class Sqlserver : Driver
         }
 
         $config['flags'] += [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
 
         if (!empty($config['encoding'])) {
@@ -164,17 +164,17 @@ class Sqlserver : Driver
         $connection = this.getConnection();
         if (!empty($config['init'])) {
             foreach ((array)$config['init'] as $command) {
-                $connection->exec($command);
+                $connection.exec($command);
             }
         }
         if (!empty($config['settings']) && is_array($config['settings'])) {
-            foreach ($config['settings'] as $key => $value) {
-                $connection->exec("SET {$key} {$value}");
+            foreach ($config['settings'] as $key: $value) {
+                $connection.exec("SET {$key} {$value}");
             }
         }
         if (!empty($config['attributes']) && is_array($config['attributes'])) {
-            foreach ($config['attributes'] as $key => $value) {
-                $connection->setAttribute($key, $value);
+            foreach ($config['attributes'] as $key: $value) {
+                $connection.setAttribute($key, $value);
             }
         }
 
@@ -203,12 +203,12 @@ class Sqlserver : Driver
 
         $sql = $query;
         $options = [
-            PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
-            PDO::SQLSRV_ATTR_CURSOR_SCROLL_TYPE => PDO::SQLSRV_CURSOR_BUFFERED,
+            PDO::ATTR_CURSOR: PDO::CURSOR_SCROLL,
+            PDO::SQLSRV_ATTR_CURSOR_SCROLL_TYPE: PDO::SQLSRV_CURSOR_BUFFERED,
         ];
         if ($query instanceof Query) {
-            $sql = $query->sql();
-            if (count($query->getValueBinder()->bindings()) > 2100) {
+            $sql = $query.sql();
+            if (count($query.getValueBinder().bindings()) > 2100) {
                 throw new InvalidArgumentException(
                     'Exceeded maximum number of parameters (2100) for prepared statements in Sql Server. ' .
                     'This is probably due to a very large WHERE IN () clause which generates a parameter ' .
@@ -217,13 +217,13 @@ class Sqlserver : Driver
                 );
             }
 
-            if (!$query->isBufferedResultsEnabled()) {
+            if (!$query.isBufferedResultsEnabled()) {
                 $options = [];
             }
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        $statement = _connection->prepare($sql, $options);
+        $statement = _connection.prepare($sql, $options);
 
         return new SqlserverStatement($statement, this);
     }
@@ -283,7 +283,7 @@ class Sqlserver : Driver
             case static::FEATURE_QUOTE:
                 this.connect();
 
-                return _connection->getAttribute(PDO::ATTR_DRIVER_NAME) != 'odbc';
+                return _connection.getAttribute(PDO::ATTR_DRIVER_NAME) != 'odbc';
         }
 
         return parent::supports($feature);
@@ -324,15 +324,15 @@ class Sqlserver : Driver
      */
     protected function _selectQueryTranslator(Query $query): Query
     {
-        $limit = $query->clause('limit');
-        $offset = $query->clause('offset');
+        $limit = $query.clause('limit');
+        $offset = $query.clause('offset');
 
         if ($limit && $offset == null) {
-            $query->modifier(['_auto_top_' => sprintf('TOP %d', $limit)]);
+            $query.modifier(['_auto_top_': sprintf('TOP %d', $limit)]);
         }
 
-        if ($offset != null && !$query->clause('order')) {
-            $query->order($query->newExpr()->add('(SELECT NULL)'));
+        if ($offset != null && !$query.clause('order')) {
+            $query.order($query.newExpr().add('(SELECT NULL)'));
         }
 
         if (this.version() < 11 && $offset != null) {
@@ -357,24 +357,24 @@ class Sqlserver : Driver
     {
         $field = '_cake_paging_._cake_page_rownum_';
 
-        if ($original->clause('order')) {
+        if ($original.clause('order')) {
             // SQL server does not support column aliases in OVER clauses.  But
             // the only practical way to specify the use of calculated columns
             // is with their alias.  So substitute the select SQL in place of
             // any column aliases for those entries in the order clause.
-            $select = $original->clause('select');
+            $select = $original.clause('select');
             $order = new OrderByExpression();
             $original
-                ->clause('order')
-                ->iterateParts(function ($direction, $orderBy) use ($select, $order) {
+                .clause('order')
+                .iterateParts(function ($direction, $orderBy) use ($select, $order) {
                     $key = $orderBy;
                     if (
                         isset($select[$orderBy]) &&
                         $select[$orderBy] instanceof IExpression
                     ) {
-                        $order->add(new OrderClauseExpression($select[$orderBy], $direction));
+                        $order.add(new OrderClauseExpression($select[$orderBy], $direction));
                     } else {
-                        $order->add([$key => $direction]);
+                        $order.add([$key: $direction]);
                     }
 
                     // Leave original order clause unchanged.
@@ -385,27 +385,27 @@ class Sqlserver : Driver
         }
 
         $query = clone $original;
-        $query->select([
-                '_cake_page_rownum_' => new UnaryExpression('ROW_NUMBER() OVER', $order),
-            ])->limit(null)
-            ->offset(null)
-            ->order([], true);
+        $query.select([
+                '_cake_page_rownum_': new UnaryExpression('ROW_NUMBER() OVER', $order),
+            ]).limit(null)
+            .offset(null)
+            .order([], true);
 
-        $outer = new Query($query->getConnection());
-        $outer->select('*')
-            ->from(['_cake_paging_' => $query]);
+        $outer = new Query($query.getConnection());
+        $outer.select('*')
+            .from(['_cake_paging_': $query]);
 
         if ($offset) {
-            $outer->where(["$field > " . $offset]);
+            $outer.where(["$field > " . $offset]);
         }
         if ($limit) {
             $value = (int)$offset + $limit;
-            $outer->where(["$field <= $value"]);
+            $outer.where(["$field <= $value"]);
         }
 
         // Decorate the original query as that is what the
         // end developer will be calling execute() on originally.
-        $original->decorateResults(function ($row) {
+        $original.decorateResults(function ($row) {
             if (isset($row['_cake_page_rownum_'])) {
                 unset($row['_cake_page_rownum_']);
             }
@@ -421,42 +421,42 @@ class Sqlserver : Driver
      */
     protected function _transformDistinct(Query $query): Query
     {
-        if (!is_array($query->clause('distinct'))) {
+        if (!is_array($query.clause('distinct'))) {
             return $query;
         }
 
         $original = $query;
         $query = clone $original;
 
-        $distinct = $query->clause('distinct');
-        $query->distinct(false);
+        $distinct = $query.clause('distinct');
+        $query.distinct(false);
 
         $order = new OrderByExpression($distinct);
         $query
-            ->select(function ($q) use ($distinct, $order) {
-                $over = $q->newExpr('ROW_NUMBER() OVER')
-                    ->add('(PARTITION BY')
-                    ->add($q->newExpr()->add($distinct)->setConjunction(','))
-                    ->add($order)
-                    ->add(')')
-                    ->setConjunction(' ');
+            .select(function ($q) use ($distinct, $order) {
+                $over = $q.newExpr('ROW_NUMBER() OVER')
+                    .add('(PARTITION BY')
+                    .add($q.newExpr().add($distinct).setConjunction(','))
+                    .add($order)
+                    .add(')')
+                    .setConjunction(' ');
 
                 return [
-                    '_cake_distinct_pivot_' => $over,
+                    '_cake_distinct_pivot_': $over,
                 ];
             })
-            ->limit(null)
-            ->offset(null)
-            ->order([], true);
+            .limit(null)
+            .offset(null)
+            .order([], true);
 
-        $outer = new Query($query->getConnection());
-        $outer->select('*')
-            ->from(['_cake_distinct_' => $query])
-            ->where(['_cake_distinct_pivot_' => 1]);
+        $outer = new Query($query.getConnection());
+        $outer.select('*')
+            .from(['_cake_distinct_': $query])
+            .where(['_cake_distinct_pivot_': 1]);
 
         // Decorate the original query as that is what the
         // end developer will be calling execute() on originally.
-        $original->decorateResults(function ($row) {
+        $original.decorateResults(function ($row) {
             if (isset($row['_cake_distinct_pivot_'])) {
                 unset($row['_cake_distinct_pivot_']);
             }
@@ -473,8 +473,8 @@ class Sqlserver : Driver
     protected function _expressionTranslators(): array
     {
         return [
-            FunctionExpression::class => '_transformFunctionExpression',
-            TupleComparison::class => '_transformTupleComparison',
+            FunctionExpression::class: '_transformFunctionExpression',
+            TupleComparison::class: '_transformTupleComparison',
         ];
     }
 
@@ -487,10 +487,10 @@ class Sqlserver : Driver
      */
     protected function _transformFunctionExpression(FunctionExpression $expression): void
     {
-        switch ($expression->getName()) {
+        switch ($expression.getName()) {
             case 'CONCAT':
                 // CONCAT function is expressed as exp1 + exp2
-                $expression->setName('')->setConjunction(' +');
+                $expression.setName('').setConjunction(' +');
                 break;
             case 'DATEDIFF':
                 /** @var bool $hasDay */
@@ -502,25 +502,25 @@ class Sqlserver : Driver
 
                     return $value;
                 };
-                $expression->iterateParts($visitor);
+                $expression.iterateParts($visitor);
 
                 if (!$hasDay) {
-                    $expression->add(['day' => 'literal'], [], true);
+                    $expression.add(['day': 'literal'], [], true);
                 }
                 break;
             case 'CURRENT_DATE':
                 $time = new FunctionExpression('GETUTCDATE');
-                $expression->setName('CONVERT')->add(['date' => 'literal', $time]);
+                $expression.setName('CONVERT').add(['date': 'literal', $time]);
                 break;
             case 'CURRENT_TIME':
                 $time = new FunctionExpression('GETUTCDATE');
-                $expression->setName('CONVERT')->add(['time' => 'literal', $time]);
+                $expression.setName('CONVERT').add(['time': 'literal', $time]);
                 break;
             case 'NOW':
-                $expression->setName('GETUTCDATE');
+                $expression.setName('GETUTCDATE');
                 break;
             case 'EXTRACT':
-                $expression->setName('DATEPART')->setConjunction(' ,');
+                $expression.setName('DATEPART').setConjunction(' ,');
                 break;
             case 'DATE_ADD':
                 $params = [];
@@ -540,27 +540,27 @@ class Sqlserver : Driver
                 };
 
                 $expression
-                    ->setName('DATEADD')
-                    ->setConjunction(',')
-                    ->iterateParts($visitor)
-                    ->iterateParts($manipulator)
-                    ->add([$params[2] => 'literal']);
+                    .setName('DATEADD')
+                    .setConjunction(',')
+                    .iterateParts($visitor)
+                    .iterateParts($manipulator)
+                    .add([$params[2]: 'literal']);
                 break;
             case 'DAYOFWEEK':
                 $expression
-                    ->setName('DATEPART')
-                    ->setConjunction(' ')
-                    ->add(['weekday, ' => 'literal'], [], true);
+                    .setName('DATEPART')
+                    .setConjunction(' ')
+                    .add(['weekday, ': 'literal'], [], true);
                 break;
             case 'SUBSTR':
-                $expression->setName('SUBSTRING');
+                $expression.setName('SUBSTRING');
                 if (count($expression) < 4) {
                     $params = [];
                     $expression
-                        ->iterateParts(function ($p) use (&$params) {
+                        .iterateParts(function ($p) use (&$params) {
                             return $params[] = $p;
                         })
-                        ->add([new FunctionExpression('LEN', [$params[0]]), ['string']]);
+                        .add([new FunctionExpression('LEN', [$params[0]]), ['string']]);
                 }
 
                 break;

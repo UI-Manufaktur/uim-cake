@@ -52,7 +52,7 @@ class ValueBinder
     function bind($param, $value, $type = null): void
     {
         _bindings[$param] = compact('value', 'type') + [
-            'placeholder' => is_int($param) ? $param : substr($param, 1),
+            'placeholder': is_int($param) ? $param : substr($param, 1),
         ];
     }
 
@@ -86,12 +86,12 @@ class ValueBinder
     function generateManyNamed(iterable $values, $type = null): array
     {
         $placeholders = [];
-        foreach ($values as $k => $value) {
+        foreach ($values as $k: $value) {
             $param = this.placeholder('c');
             _bindings[$param] = [
-                'value' => $value,
-                'type' => $type,
-                'placeholder' => substr($param, 1),
+                'value': $value,
+                'type': $type,
+                'placeholder': substr($param, 1),
             ];
             $placeholders[$k] = $param;
         }
@@ -145,7 +145,7 @@ class ValueBinder
         }
 
         foreach ($bindings as $b) {
-            $statement->bindValue($b['placeholder'], $b['value'], $b['type']);
+            $statement.bindValue($b['placeholder'], $b['value'], $b['type']);
         }
     }
 }

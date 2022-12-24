@@ -167,12 +167,12 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $queryExpression
-     *     ->case($query->identifier('Table.column'))
-     *     ->when(true)
-     *     ->then('Yes')
-     *     ->when(false)
-     *     ->then('No')
-     *     ->else('Maybe');
+     *     .case($query.identifier('Table.column'))
+     *     .when(true)
+     *     .then('Yes')
+     *     .when(false)
+     *     .then('No')
+     *     .else('Maybe');
      * ```
      *
      * ### Self-contained expressions
@@ -189,18 +189,18 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $queryExpression
-     *     ->case()
-     *     ->when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .case()
+     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             ->when(['Table.column' => true])
-     *             ->then('Yes');
+     *             .when(['Table.column': true])
+     *             .then('Yes');
      *     })
-     *     ->when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             ->when(['Table.column' => false])
-     *             ->then('No');
+     *             .when(['Table.column': false])
+     *             .then('No');
      *     })
-     *     ->else('Maybe');
+     *     .else('Maybe');
      * ```
      *
      * ### Type handling
@@ -215,18 +215,18 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $queryExpression
-     *     ->case()
-     *     ->when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .case()
+     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             ->when(['unmapped_column' => true], ['unmapped_column' => 'bool'])
-     *             ->then('Yes');
+     *             .when(['unmapped_column': true], ['unmapped_column': 'bool'])
+     *             .then('Yes');
      *     })
-     *     ->when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             ->when(['unmapped_column' => false], ['unmapped_column' => 'bool'])
-     *             ->then('No');
+     *             .when(['unmapped_column': false], ['unmapped_column': 'bool'])
+     *             .then('No');
      *     })
-     *     ->else('Maybe');
+     *     .else('Maybe');
      * ```
      *
      * ### User data safety
@@ -239,7 +239,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $case
-     *      ->when($userData)
+     *      .when($userData)
      * ```
      *
      * A safe variant for the above would be to define a single type for
@@ -247,7 +247,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $case
-     *      ->when($userData, 'integer')
+     *      .when($userData, 'integer')
      * ```
      *
      * This way an exception would be triggered when an array is passed for
@@ -260,8 +260,8 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $case
-     *      ->when([
-     *          'Table.column' => $userData,
+     *      .when([
+     *          'Table.column': $userData,
      *      ])
      * ```
      *
@@ -269,13 +269,13 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $query
-     *      ->select([
-     *          'val' => $query->newExpr()
-     *              ->case()
-     *              ->when($query->newExpr(':userData'))
-     *              ->then(123)
+     *      .select([
+     *          'val': $query.newExpr()
+     *              .case()
+     *              .when($query.newExpr(':userData'))
+     *              .then(123)
      *      ])
-     *      ->bind(':userData', $userData, 'integer')
+     *      .bind(':userData', $userData, 'integer')
      * ```
      *
      * @param \Cake\Database\IExpression|\Closure|object|array|scalar $when The `WHEN` value. When using an
@@ -311,7 +311,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
         if ($when instanceof WhenThenExpression) {
             this.when[] = $when;
         } else {
-            this.whenBuffer = ['when' => $when, 'type' => $type];
+            this.whenBuffer = ['when': $when, 'type': $type];
         }
 
         return this;
@@ -329,40 +329,40 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $case
-     *     ->when(['Table.column' => true])
-     *     ->then('Yes')
-     *     ->when(['Table.column' => false])
-     *     ->then('No')
-     *     ->else('Maybe');
+     *     .when(['Table.column': true])
+     *     .then('Yes')
+     *     .when(['Table.column': false])
+     *     .then('No')
+     *     .else('Maybe');
      * ```
      *
      * The following would all fail with an exception:
      *
      * ```
      * $case
-     *     ->when(['Table.column' => true])
-     *     ->when(['Table.column' => false])
+     *     .when(['Table.column': true])
+     *     .when(['Table.column': false])
      *     // ...
      * ```
      *
      * ```
      * $case
-     *     ->when(['Table.column' => true])
-     *     ->else('Maybe')
+     *     .when(['Table.column': true])
+     *     .else('Maybe')
      *     // ...
      * ```
      *
      * ```
      * $case
-     *     ->then('Yes')
+     *     .then('Yes')
      *     // ...
      * ```
      *
      * ```
      * $case
-     *     ->when(['Table.column' => true])
-     *     ->then('Yes')
-     *     ->then('No')
+     *     .when(['Table.column': true])
+     *     .then('Yes')
+     *     .then('No')
      *     // ...
      * ```
      *
@@ -380,8 +380,8 @@ class CaseStatementExpression : IExpression, TypedResultInterface
         }
 
         $whenThen = (new WhenThenExpression(this.getTypeMap()))
-            ->when(this.whenBuffer['when'], this.whenBuffer['type'])
-            ->then($result, $type);
+            .when(this.whenBuffer['when'], this.whenBuffer['type'])
+            .then($result, $type);
 
         this.whenBuffer = null;
 
@@ -449,7 +449,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
 
         $types = [];
         foreach (this.when as $when) {
-            $type = $when->getResultType();
+            $type = $when.getResultType();
             if ($type != null) {
                 $types[] = $type;
             }
@@ -534,7 +534,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
 
         $whenThenExpressions = [];
         foreach (this.when as $whenThen) {
-            $whenThenExpressions[] = $whenThen->sql($binder);
+            $whenThenExpressions[] = $whenThen.sql($binder);
         }
         $whenThen = implode(' ', $whenThenExpressions);
 
@@ -554,17 +554,17 @@ class CaseStatementExpression : IExpression, TypedResultInterface
 
         if (this.value instanceof IExpression) {
             $callback(this.value);
-            this.value->traverse($callback);
+            this.value.traverse($callback);
         }
 
         foreach (this.when as $when) {
             $callback($when);
-            $when->traverse($callback);
+            $when.traverse($callback);
         }
 
         if (this.else instanceof IExpression) {
             $callback(this.else);
-            this.else->traverse($callback);
+            this.else.traverse($callback);
         }
 
         return this;
@@ -585,7 +585,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
             this.value = clone this.value;
         }
 
-        foreach (this.when as $key => $when) {
+        foreach (this.when as $key: $when) {
             this.when[$key] = clone this.when[$key];
         }
 
