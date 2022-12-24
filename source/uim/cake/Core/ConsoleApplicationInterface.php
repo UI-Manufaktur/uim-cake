@@ -12,7 +12,7 @@
  * @since         3.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Core;
+module uim.cake.Core;
 
 use Cake\Console\CommandCollection;
 

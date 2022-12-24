@@ -13,7 +13,7 @@
  * @since         4.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Core;
+module uim.cake.Core;
 
 use League\Container\DefinitionIContainer;
 use League\Container\ServiceProvider\AbstractServiceProvider;

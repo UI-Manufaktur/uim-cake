@@ -13,7 +13,7 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Controller;
+module uim.cake.Controller;
 
 use Cake\Controller\Exception\InvalidParameterException;
 use Cake\Core\App;

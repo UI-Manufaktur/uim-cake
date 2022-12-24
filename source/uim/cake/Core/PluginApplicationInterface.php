@@ -13,7 +13,7 @@
  * @since         3.6.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Core;
+module uim.cake.Core;
 
 use Cake\Console\CommandCollection;
 use Cake\Event\EventDispatcherInterface;

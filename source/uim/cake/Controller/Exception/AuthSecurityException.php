@@ -11,7 +11,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Controller\Exception;
+module uim.cake.Controller\Exception;
 
 /**
  * Auth Security exception - used when SecurityComponent detects any issue with the current request

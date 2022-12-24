@@ -13,7 +13,7 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Controller\Component;
+module uim.cake.Controller\Component;
 
 use Cake\Auth\BaseAuthenticate;
 use Cake\Auth\BaseAuthorize;

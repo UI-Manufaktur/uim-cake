@@ -13,7 +13,7 @@
  * @since         4.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Controller\Component;
+module uim.cake.Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Core\Configure;

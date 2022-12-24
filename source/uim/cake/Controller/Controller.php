@@ -13,7 +13,7 @@
  * @since         0.2.9
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Controller;
+module uim.cake.Controller;
 
 use Cake\Controller\Exception\MissingActionException;
 use Cake\Core\App;

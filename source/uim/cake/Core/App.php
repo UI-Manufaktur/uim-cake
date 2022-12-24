@@ -13,7 +13,7 @@
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Core;
+module uim.cake.Core;
 
 /**
  * App is responsible for resource location, and path management.
