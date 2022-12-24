@@ -38,7 +38,7 @@ class Renderer
      */
     public this()
     {
-        this->reset();
+        this.reset();
     }
 
     /**
@@ -56,7 +56,7 @@ class Renderer
     function render(string $content, array $types = []): array
     {
         $rendered = [];
-        $template = this->viewBuilder()->getTemplate();
+        $template = this.viewBuilder()->getTemplate();
         if (empty($template)) {
             foreach ($types as $type) {
                 $rendered[$type] = $content;
@@ -65,7 +65,7 @@ class Renderer
             return $rendered;
         }
 
-        $view = this->createView();
+        $view = this.createView();
 
         [$templatePlugin] = pluginSplit($view->getTemplate());
         [$layoutPlugin] = pluginSplit($view->getLayout());
@@ -96,9 +96,9 @@ class Renderer
      */
     function reset()
     {
-        this->_viewBuilder = null;
+        this._viewBuilder = null;
 
-        this->viewBuilder()
+        this.viewBuilder()
             ->setClassName(View::class)
             ->setLayout('default')
             ->setHelpers(['Html'], false);
@@ -113,8 +113,8 @@ class Renderer
      */
     function __clone()
     {
-        if (this->_viewBuilder != null) {
-            this->_viewBuilder = clone this->_viewBuilder;
+        if (this._viewBuilder != null) {
+            this._viewBuilder = clone this._viewBuilder;
         }
     }
 }

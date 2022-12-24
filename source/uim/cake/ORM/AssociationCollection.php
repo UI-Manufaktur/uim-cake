@@ -53,7 +53,7 @@ class AssociationCollection implements IteratorAggregate
     public this(?LocatorInterface $tableLocator = null)
     {
         if ($tableLocator != null) {
-            this->_tableLocator = $tableLocator;
+            this._tableLocator = $tableLocator;
         }
     }
 
@@ -71,7 +71,7 @@ class AssociationCollection implements IteratorAggregate
     {
         [, $alias] = pluginSplit($alias);
 
-        return this->_items[$alias] = $association;
+        return this._items[$alias] = $association;
     }
 
     /**
@@ -87,12 +87,12 @@ class AssociationCollection implements IteratorAggregate
     function load(string $className, string $associated, array $options = []): Association
     {
         $options += [
-            'tableLocator' => this->getTableLocator(),
+            'tableLocator' => this.getTableLocator(),
         ];
 
         $association = new $className($associated, $options);
 
-        return this->add($association->getName(), $association);
+        return this.add($association->getName(), $association);
     }
 
     /**
@@ -103,7 +103,7 @@ class AssociationCollection implements IteratorAggregate
      */
     function get(string $alias): ?Association
     {
-        return this->_items[$alias] ?? null;
+        return this._items[$alias] ?? null;
     }
 
     /**
@@ -114,7 +114,7 @@ class AssociationCollection implements IteratorAggregate
      */
     function getByProperty(string $prop): ?Association
     {
-        foreach (this->_items as $assoc) {
+        foreach (this._items as $assoc) {
             if ($assoc->getProperty() == $prop) {
                 return $assoc;
             }
@@ -131,7 +131,7 @@ class AssociationCollection implements IteratorAggregate
      */
     function has(string $alias): bool
     {
-        return isset(this->_items[$alias]);
+        return isset(this._items[$alias]);
     }
 
     /**
@@ -141,7 +141,7 @@ class AssociationCollection implements IteratorAggregate
      */
     function keys(): array
     {
-        return array_keys(this->_items);
+        return array_keys(this._items);
     }
 
     /**
@@ -156,7 +156,7 @@ class AssociationCollection implements IteratorAggregate
     {
         $class = array_map('strtolower', (array)$class);
 
-        $out = array_filter(this->_items, function ($assoc) use ($class) {
+        $out = array_filter(this._items, function ($assoc) use ($class) {
             [, $name] = namespaceSplit(get_class($assoc));
 
             return in_array(strtolower($name), $class, true);
@@ -175,7 +175,7 @@ class AssociationCollection implements IteratorAggregate
      */
     function remove(string $alias): void
     {
-        unset(this->_items[$alias]);
+        unset(this._items[$alias]);
     }
 
     /**
@@ -187,8 +187,8 @@ class AssociationCollection implements IteratorAggregate
      */
     function removeAll(): void
     {
-        foreach (this->_items as $alias => $object) {
-            this->remove($alias);
+        foreach (this._items as $alias => $object) {
+            this.remove($alias);
         }
     }
 
@@ -211,7 +211,7 @@ class AssociationCollection implements IteratorAggregate
             return true;
         }
 
-        return this->_saveAssociations($table, $entity, $associations, $options, false);
+        return this._saveAssociations($table, $entity, $associations, $options, false);
     }
 
     /**
@@ -233,7 +233,7 @@ class AssociationCollection implements IteratorAggregate
             return true;
         }
 
-        return this->_saveAssociations($table, $entity, $associations, $options, true);
+        return this._saveAssociations($table, $entity, $associations, $options, true);
     }
 
     /**
@@ -261,7 +261,7 @@ class AssociationCollection implements IteratorAggregate
                 $alias = $nested;
                 $nested = [];
             }
-            $relation = this->get($alias);
+            $relation = this.get($alias);
             if (!$relation) {
                 $msg = sprintf(
                     'Cannot save %s, it is not associated to %s',
@@ -273,7 +273,7 @@ class AssociationCollection implements IteratorAggregate
             if ($relation->isOwningSide($table) != $owningSide) {
                 continue;
             }
-            if (!this->_save($relation, $entity, $nested, $options)) {
+            if (!this._save($relation, $entity, $nested, $options)) {
                 return false;
             }
         }
@@ -317,7 +317,7 @@ class AssociationCollection implements IteratorAggregate
     function cascadeDelete(EntityInterface $entity, array $options): bool
     {
         $noCascade = [];
-        foreach (this->_items as $assoc) {
+        foreach (this._items as $assoc) {
             if (!$assoc->getCascadeCallbacks()) {
                 $noCascade[] = $assoc;
                 continue;
@@ -349,14 +349,14 @@ class AssociationCollection implements IteratorAggregate
     function normalizeKeys($keys): array
     {
         if ($keys == true) {
-            $keys = this->keys();
+            $keys = this.keys();
         }
 
         if (empty($keys)) {
             return [];
         }
 
-        return this->_normalizeAssociations($keys);
+        return this._normalizeAssociations($keys);
     }
 
     /**
@@ -366,6 +366,6 @@ class AssociationCollection implements IteratorAggregate
      */
     function getIterator(): Traversable
     {
-        return new ArrayIterator(this->_items);
+        return new ArrayIterator(this._items);
     }
 }

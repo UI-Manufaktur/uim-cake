@@ -79,7 +79,7 @@ use InvalidArgumentException;
  * function onRegistration(EventInterface $event, EntityInterface $entity, ArrayObject $options)
  * {
  *     if ($entity->isNew()) {
- *          this->send('welcome', [$entity]);
+ *          this.send('welcome', [$entity]);
  *     }
  * }
  * ```
@@ -206,10 +206,10 @@ class Mailer implements EventListenerInterface
      */
     public this($config = null)
     {
-        this->message = new this->messageClass();
+        this.message = new this.messageClass();
 
-        if (this->defaultTable != null) {
-            this->modelClass = this->defaultTable;
+        if (this.defaultTable != null) {
+            this.modelClass = this.defaultTable;
         }
 
         if ($config == null) {
@@ -217,7 +217,7 @@ class Mailer implements EventListenerInterface
         }
 
         if ($config) {
-            this->setProfile($config);
+            this.setProfile($config);
         }
     }
 
@@ -228,7 +228,7 @@ class Mailer implements EventListenerInterface
      */
     function viewBuilder(): ViewBuilder
     {
-        return this->getRenderer()->viewBuilder();
+        return this.getRenderer()->viewBuilder();
     }
 
     /**
@@ -238,11 +238,11 @@ class Mailer implements EventListenerInterface
      */
     function getRenderer(): Renderer
     {
-        if (this->renderer == null) {
-            this->renderer = new Renderer();
+        if (this.renderer == null) {
+            this.renderer = new Renderer();
         }
 
-        return this->renderer;
+        return this.renderer;
     }
 
     /**
@@ -253,7 +253,7 @@ class Mailer implements EventListenerInterface
      */
     function setRenderer(Renderer $renderer)
     {
-        this->renderer = $renderer;
+        this.renderer = $renderer;
 
         return this;
     }
@@ -265,7 +265,7 @@ class Mailer implements EventListenerInterface
      */
     function getMessage(): Message
     {
-        return this->message;
+        return this.message;
     }
 
     /**
@@ -276,7 +276,7 @@ class Mailer implements EventListenerInterface
      */
     function setMessage(Message $message)
     {
-        this->message = $message;
+        this.message = $message;
 
         return this;
     }
@@ -290,7 +290,7 @@ class Mailer implements EventListenerInterface
      */
     function __call(string $method, array $args)
     {
-        $result = this->message->$method(...$args);
+        $result = this.message->$method(...$args);
         if (strpos($method, 'get') == 0) {
             return $result;
         }
@@ -310,7 +310,7 @@ class Mailer implements EventListenerInterface
     {
         deprecationWarning('Mailer::set() is deprecated. Use setViewVars() instead.');
 
-        return this->setViewVars($key, $value);
+        return this.setViewVars($key, $value);
     }
 
     /**
@@ -322,7 +322,7 @@ class Mailer implements EventListenerInterface
      */
     function setViewVars($key, $value = null)
     {
-        this->getRenderer()->set($key, $value);
+        this.getRenderer()->set($key, $value);
 
         return this;
     }
@@ -342,7 +342,7 @@ class Mailer implements EventListenerInterface
     function send(?string $action = null, array $args = [], array $headers = []): array
     {
         if ($action == null) {
-            return this->deliver();
+            return this.deliver();
         }
 
         if (!method_exists(this, $action)) {
@@ -352,23 +352,23 @@ class Mailer implements EventListenerInterface
             ]);
         }
 
-        this->clonedInstances['message'] = clone this->message;
-        this->clonedInstances['renderer'] = clone this->getRenderer();
-        if (this->transport != null) {
-            this->clonedInstances['transport'] = clone this->transport;
+        this.clonedInstances['message'] = clone this.message;
+        this.clonedInstances['renderer'] = clone this.getRenderer();
+        if (this.transport != null) {
+            this.clonedInstances['transport'] = clone this.transport;
         }
 
-        this->getMessage()->setHeaders($headers);
-        if (!this->viewBuilder()->getTemplate()) {
-            this->viewBuilder()->setTemplate($action);
+        this.getMessage()->setHeaders($headers);
+        if (!this.viewBuilder()->getTemplate()) {
+            this.viewBuilder()->setTemplate($action);
         }
 
         try {
-            this->$action(...$args);
+            this.$action(...$args);
 
-            $result = this->deliver();
+            $result = this.deliver();
         } finally {
-            this->restore();
+            this.restore();
         }
 
         return $result;
@@ -382,12 +382,12 @@ class Mailer implements EventListenerInterface
      */
     function render(string $content = '')
     {
-        $content = this->getRenderer()->render(
+        $content = this.getRenderer()->render(
             $content,
-            this->message->getBodyTypes()
+            this.message->getBodyTypes()
         );
 
-        this->message->setBody($content);
+        this.message->setBody($content);
 
         return this;
     }
@@ -401,10 +401,10 @@ class Mailer implements EventListenerInterface
      */
     function deliver(string $content = '')
     {
-        this->render($content);
+        this.render($content);
 
-        $result = this->getTransport()->send(this->message);
-        this->logDelivery($result);
+        $result = this.getTransport()->send(this.message);
+        this.logDelivery($result);
 
         return $result;
     }
@@ -432,7 +432,7 @@ class Mailer implements EventListenerInterface
         ];
         foreach ($simpleMethods as $method) {
             if (isset($config[$method])) {
-                this->{'set' . ucfirst($method)}($config[$method]);
+                this.{'set' . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
@@ -442,35 +442,35 @@ class Mailer implements EventListenerInterface
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                this->viewBuilder()->{'set' . ucfirst($method)}($config[$method]);
+                this.viewBuilder()->{'set' . ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
 
         if (array_key_exists('helpers', $config)) {
-            this->viewBuilder()->setHelpers($config['helpers'], false);
+            this.viewBuilder()->setHelpers($config['helpers'], false);
             unset($config['helpers']);
         }
         if (array_key_exists('viewRenderer', $config)) {
-            this->viewBuilder()->setClassName($config['viewRenderer']);
+            this.viewBuilder()->setClassName($config['viewRenderer']);
             unset($config['viewRenderer']);
         }
         if (array_key_exists('viewVars', $config)) {
-            this->viewBuilder()->setVars($config['viewVars']);
+            this.viewBuilder()->setVars($config['viewVars']);
             unset($config['viewVars']);
         }
         if (isset($config['autoLayout'])) {
             if ($config['autoLayout'] == false) {
-                this->viewBuilder()->disableAutoLayout();
+                this.viewBuilder()->disableAutoLayout();
             }
             unset($config['autoLayout']);
         }
 
         if (isset($config['log'])) {
-            this->setLogConfig($config['log']);
+            this.setLogConfig($config['log']);
         }
 
-        this->message->setConfig($config);
+        this.message->setConfig($config);
 
         return this;
     }
@@ -503,7 +503,7 @@ class Mailer implements EventListenerInterface
             ));
         }
 
-        this->transport = $transport;
+        this.transport = $transport;
 
         return this;
     }
@@ -515,14 +515,14 @@ class Mailer implements EventListenerInterface
      */
     function getTransport(): AbstractTransport
     {
-        if (this->transport == null) {
+        if (this.transport == null) {
             throw new BadMethodCallException(
                 'Transport was not defined. '
                 . 'You must set on using setTransport() or set `transport` option in your mailer profile.'
             );
         }
 
-        return this->transport;
+        return this.transport;
     }
 
     /**
@@ -532,12 +532,12 @@ class Mailer implements EventListenerInterface
      */
     protected function restore()
     {
-        foreach (array_keys(this->clonedInstances) as $key) {
-            if (this->clonedInstances[$key] == null) {
-                this->{$key} = null;
+        foreach (array_keys(this.clonedInstances) as $key) {
+            if (this.clonedInstances[$key] == null) {
+                this.{$key} = null;
             } else {
-                this->{$key} = clone this->clonedInstances[$key];
-                this->clonedInstances[$key] = null;
+                this.{$key} = clone this.clonedInstances[$key];
+                this.clonedInstances[$key] = null;
             }
         }
 
@@ -551,10 +551,10 @@ class Mailer implements EventListenerInterface
      */
     function reset()
     {
-        this->message->reset();
-        this->getRenderer()->reset();
-        this->transport = null;
-        this->clonedInstances = [
+        this.message->reset();
+        this.getRenderer()->reset();
+        this.transport = null;
+        this.clonedInstances = [
             'message' => null,
             'renderer' => null,
             'transport' => null,
@@ -572,14 +572,14 @@ class Mailer implements EventListenerInterface
      */
     protected function logDelivery(array $contents): void
     {
-        if (empty(this->logConfig)) {
+        if (empty(this.logConfig)) {
             return;
         }
 
         Log::write(
-            this->logConfig['level'],
-            PHP_EOL . this->flatten($contents['headers']) . PHP_EOL . PHP_EOL . this->flatten($contents['message']),
-            this->logConfig['scope']
+            this.logConfig['level'],
+            PHP_EOL . this.flatten($contents['headers']) . PHP_EOL . PHP_EOL . this.flatten($contents['message']),
+            this.logConfig['scope']
         );
     }
 
@@ -602,7 +602,7 @@ class Mailer implements EventListenerInterface
             $config = $log + $config;
         }
 
-        this->logConfig = $config;
+        this.logConfig = $config;
     }
 
     /**

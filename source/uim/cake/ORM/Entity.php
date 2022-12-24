@@ -58,28 +58,28 @@ class Entity implements EntityInterface, InvalidPropertyInterface
         ];
 
         if (!empty($options['source'])) {
-            this->setSource($options['source']);
+            this.setSource($options['source']);
         }
 
         if ($options['markNew'] != null) {
-            this->setNew($options['markNew']);
+            this.setNew($options['markNew']);
         }
 
         if (!empty($properties) && $options['markClean'] && !$options['useSetters']) {
-            this->_fields = $properties;
+            this._fields = $properties;
 
             return;
         }
 
         if (!empty($properties)) {
-            this->set($properties, [
+            this.set($properties, [
                 'setter' => $options['useSetters'],
                 'guard' => $options['guard'],
             ]);
         }
 
         if ($options['markClean']) {
-            this->clean();
+            this.clean();
         }
     }
 }

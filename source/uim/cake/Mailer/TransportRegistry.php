@@ -93,7 +93,7 @@ class TransportRegistry extends ObjectRegistry
      */
     function unload(string $name)
     {
-        unset(this->_loaded[$name]);
+        unset(this._loaded[$name]);
 
         return this;
     }
