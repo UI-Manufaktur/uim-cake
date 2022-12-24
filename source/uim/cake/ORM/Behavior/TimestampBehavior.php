@@ -96,10 +96,10 @@ class TimestampBehavior : Behavior
     function handleEvent(EventInterface $event, EntityInterface $entity): bool
     {
         $eventName = $event->getName();
-        $events = this._config['events'];
+        $events = _config['events'];
 
         $new = $entity->isNew() != false;
-        $refresh = this._config['refreshTimestamp'];
+        $refresh = _config['refreshTimestamp'];
 
         foreach ($events[$eventName] as $field => $when) {
             if (!in_array($when, ['always', 'new', 'existing'], true)) {
@@ -119,7 +119,7 @@ class TimestampBehavior : Behavior
                     !$new
                 )
             ) {
-                this._updateField($entity, $field, $refresh);
+                _updateField($entity, $field, $refresh);
             }
         }
 
@@ -135,7 +135,7 @@ class TimestampBehavior : Behavior
      */
     function implementedEvents(): array
     {
-        return array_fill_keys(array_keys(this._config['events']), 'handleEvent');
+        return array_fill_keys(array_keys(_config['events']), 'handleEvent');
     }
 
     /**
@@ -152,15 +152,15 @@ class TimestampBehavior : Behavior
     function timestamp(?DateTimeInterface $ts = null, bool $refreshTimestamp = false): DateTimeInterface
     {
         if ($ts) {
-            if (this._config['refreshTimestamp']) {
-                this._config['refreshTimestamp'] = false;
+            if (_config['refreshTimestamp']) {
+                _config['refreshTimestamp'] = false;
             }
-            this._ts = new FrozenTime($ts);
-        } elseif (this._ts == null || $refreshTimestamp) {
-            this._ts = new FrozenTime();
+            _ts = new FrozenTime($ts);
+        } elseif (_ts == null || $refreshTimestamp) {
+            _ts = new FrozenTime();
         }
 
-        return this._ts;
+        return _ts;
     }
 
     /**
@@ -176,19 +176,19 @@ class TimestampBehavior : Behavior
      */
     function touch(EntityInterface $entity, string $eventName = 'Model.beforeSave'): bool
     {
-        $events = this._config['events'];
+        $events = _config['events'];
         if (empty($events[$eventName])) {
             return false;
         }
 
         $return = false;
-        $refresh = this._config['refreshTimestamp'];
+        $refresh = _config['refreshTimestamp'];
 
         foreach ($events[$eventName] as $field => $when) {
             if (in_array($when, ['always', 'existing'], true)) {
                 $return = true;
                 $entity->setDirty($field, false);
-                this._updateField($entity, $field, $refresh);
+                _updateField($entity, $field, $refresh);
             }
         }
 

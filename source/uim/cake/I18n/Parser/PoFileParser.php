@@ -88,12 +88,12 @@ class PoFileParser
 
             if ($line == '') {
                 // Whitespace indicated current item is done
-                this._addMessage($messages, $item);
+                _addMessage($messages, $item);
                 $item = $defaults;
                 $stage = [];
             } elseif (substr($line, 0, 7) == 'msgid "') {
                 // We start a new msg so save previous
-                this._addMessage($messages, $item);
+                _addMessage($messages, $item);
                 /** @psalm-suppress InvalidArrayOffset */
                 $item['ids']['singular'] = substr($line, 7, -1);
                 $stage = ['ids', 'singular'];
@@ -136,7 +136,7 @@ class PoFileParser
             }
         }
         // save last item
-        this._addMessage($messages, $item);
+        _addMessage($messages, $item);
         fclose($stream);
 
         return $messages;

@@ -255,7 +255,7 @@ class Email : JsonSerializable, Serializable
             throw new LogicException(sprintf('The "%s" do not have send method.', get_class($transport)));
         }
 
-        this._transport = $transport;
+        _transport = $transport;
 
         return this;
     }
@@ -267,7 +267,7 @@ class Email : JsonSerializable, Serializable
      */
     function getTransport(): ?AbstractTransport
     {
-        return this._transport;
+        return _transport;
     }
 
     /**
@@ -305,7 +305,7 @@ class Email : JsonSerializable, Serializable
             unset($name);
         }
 
-        this._profile = $config + this._profile;
+        _profile = $config + _profile;
 
         $simpleMethods = [
             'transport',
@@ -352,7 +352,7 @@ class Email : JsonSerializable, Serializable
      */
     function getProfile(): array
     {
-        return this._profile;
+        return _profile;
     }
 
     /**
@@ -378,7 +378,7 @@ class Email : JsonSerializable, Serializable
             throw new BadMethodCallException($msg);
         }
         $contents = $transport->send(this.message);
-        this._logDelivery($contents);
+        _logDelivery($contents);
 
         return $contents;
     }
@@ -448,18 +448,18 @@ class Email : JsonSerializable, Serializable
      */
     protected function _logDelivery(array $contents): void
     {
-        if (empty(this._profile['log'])) {
+        if (empty(_profile['log'])) {
             return;
         }
         $config = [
             'level' => 'debug',
             'scope' => 'email',
         ];
-        if (this._profile['log'] != true) {
-            if (!is_array(this._profile['log'])) {
-                this._profile['log'] = ['level' => this._profile['log']];
+        if (_profile['log'] != true) {
+            if (!is_array(_profile['log'])) {
+                _profile['log'] = ['level' => _profile['log']];
             }
-            $config = this._profile['log'] + $config;
+            $config = _profile['log'] + $config;
         }
         Log::write(
             $config['level'],
@@ -537,8 +537,8 @@ class Email : JsonSerializable, Serializable
         if (this.renderer != null) {
             this.renderer->reset();
         }
-        this._transport = null;
-        this._profile = [];
+        _transport = null;
+        _profile = [];
 
         return this;
     }
@@ -586,7 +586,7 @@ class Email : JsonSerializable, Serializable
      */
     function serialize(): string
     {
-        $array = this.__serialize();
+        $array = __serialize();
 
         return serialize($array);
     }

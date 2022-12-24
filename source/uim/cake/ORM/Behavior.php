@@ -152,17 +152,17 @@ class Behavior : EventListenerInterface
      */
     public this(Table $table, array $config = [])
     {
-        $config = this._resolveMethodAliases(
+        $config = _resolveMethodAliases(
             'implementedFinders',
-            this._defaultConfig,
+            _defaultConfig,
             $config
         );
-        $config = this._resolveMethodAliases(
+        $config = _resolveMethodAliases(
             'implementedMethods',
-            this._defaultConfig,
+            _defaultConfig,
             $config
         );
-        this._table = $table;
+        _table = $table;
         this.setConfig($config);
         this.initialize($config);
     }
@@ -200,7 +200,7 @@ class Behavior : EventListenerInterface
      */
     function table(): Table
     {
-        return this._table;
+        return _table;
     }
 
     /**
@@ -248,11 +248,11 @@ class Behavior : EventListenerInterface
     {
         $keys = ['implementedFinders', 'implementedMethods'];
         foreach ($keys as $key) {
-            if (!isset(this._config[$key])) {
+            if (!isset(_config[$key])) {
                 continue;
             }
 
-            foreach (this._config[$key] as $method) {
+            foreach (_config[$key] as $method) {
                 if (!is_callable([this, $method])) {
                     throw new CakeException(sprintf(
                         'The method %s is not callable on class %s',
@@ -342,7 +342,7 @@ class Behavior : EventListenerInterface
             return $methods;
         }
 
-        return this._reflectionCache()['finders'];
+        return _reflectionCache()['finders'];
     }
 
     /**
@@ -374,7 +374,7 @@ class Behavior : EventListenerInterface
             return $methods;
         }
 
-        return this._reflectionCache()['methods'];
+        return _reflectionCache()['methods'];
     }
 
     /**

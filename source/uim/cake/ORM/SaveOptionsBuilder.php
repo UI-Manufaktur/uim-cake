@@ -54,7 +54,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     public this(Table $table, array $options = [])
     {
-        this._table = $table;
+        _table = $table;
         this.parseArrayOptions($options);
 
         parent::__construct();
@@ -86,9 +86,9 @@ class SaveOptionsBuilder : ArrayObject
      */
     function associated($associated)
     {
-        $associated = this._normalizeAssociations($associated);
-        this._associated(this._table, $associated);
-        this._options['associated'] = $associated;
+        $associated = _normalizeAssociations($associated);
+        _associated(_table, $associated);
+        _options['associated'] = $associated;
 
         return this;
     }
@@ -104,12 +104,12 @@ class SaveOptionsBuilder : ArrayObject
     {
         foreach ($associations as $key => $associated) {
             if (is_int($key)) {
-                this._checkAssociation($table, $associated);
+                _checkAssociation($table, $associated);
                 continue;
             }
-            this._checkAssociation($table, $key);
+            _checkAssociation($table, $key);
             if (isset($associated['associated'])) {
-                this._associated($table->getAssociation($key)->getTarget(), $associated['associated']);
+                _associated($table->getAssociation($key)->getTarget(), $associated['associated']);
                 continue;
             }
         }
@@ -142,7 +142,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function guard(bool $guard)
     {
-        this._options['guard'] = $guard;
+        _options['guard'] = $guard;
 
         return this;
     }
@@ -155,8 +155,8 @@ class SaveOptionsBuilder : ArrayObject
      */
     function validate(string $validate)
     {
-        this._table->getValidator($validate);
-        this._options['validate'] = $validate;
+        _table->getValidator($validate);
+        _options['validate'] = $validate;
 
         return this;
     }
@@ -169,7 +169,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function checkExisting(bool $checkExisting)
     {
-        this._options['checkExisting'] = $checkExisting;
+        _options['checkExisting'] = $checkExisting;
 
         return this;
     }
@@ -182,7 +182,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function checkRules(bool $checkRules)
     {
-        this._options['checkRules'] = $checkRules;
+        _options['checkRules'] = $checkRules;
 
         return this;
     }
@@ -195,7 +195,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function atomic(bool $atomic)
     {
-        this._options['atomic'] = $atomic;
+        _options['atomic'] = $atomic;
 
         return this;
     }
@@ -205,7 +205,7 @@ class SaveOptionsBuilder : ArrayObject
      */
     function toArray(): array
     {
-        return this._options;
+        return _options;
     }
 
     /**
@@ -220,7 +220,7 @@ class SaveOptionsBuilder : ArrayObject
         if (method_exists(this, $option)) {
             return this.{$option}($value);
         }
-        this._options[$option] = $value;
+        _options[$option] = $value;
 
         return this;
     }

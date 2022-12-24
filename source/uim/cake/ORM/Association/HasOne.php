@@ -48,11 +48,11 @@ class HasOne : Association
      */
     function getForeignKey()
     {
-        if (this._foreignKey == null) {
-            this._foreignKey = this._modelKey(this.getSource()->getAlias());
+        if (_foreignKey == null) {
+            _foreignKey = _modelKey(this.getSource()->getAlias());
         }
 
-        return this._foreignKey;
+        return _foreignKey;
     }
 
     /**
@@ -62,7 +62,7 @@ class HasOne : Association
      */
     protected function _propertyName(): string
     {
-        [, $name] = pluginSplit(this._name);
+        [, $name] = pluginSplit(_name);
 
         return Inflector::underscore(Inflector::singularize($name));
     }

@@ -1895,7 +1895,7 @@ class Message : JsonSerializable, Serializable
      */
     function serialize(): string
     {
-        $array = this.__serialize();
+        $array = __serialize();
 
         return serialize($array);
     }

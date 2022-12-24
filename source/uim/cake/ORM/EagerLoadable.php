@@ -130,7 +130,7 @@ class EagerLoadable
      */
     public this(string $name, array $config = [])
     {
-        this._name = $name;
+        _name = $name;
         $allowed = [
             'associations', 'instance', 'config', 'canBeJoined',
             'aliasPath', 'propertyPath', 'forMatching', 'targetProperty',
@@ -151,7 +151,7 @@ class EagerLoadable
      */
     function addAssociation(string $name, EagerLoadable $association): void
     {
-        this._associations[$name] = $association;
+        _associations[$name] = $association;
     }
 
     /**
@@ -161,7 +161,7 @@ class EagerLoadable
      */
     function associations(): array
     {
-        return this._associations;
+        return _associations;
     }
 
     /**
@@ -172,11 +172,11 @@ class EagerLoadable
      */
     function instance(): Association
     {
-        if (this._instance == null) {
+        if (_instance == null) {
             throw new \RuntimeException('No instance set.');
         }
 
-        return this._instance;
+        return _instance;
     }
 
     /**
@@ -187,7 +187,7 @@ class EagerLoadable
      */
     function aliasPath(): string
     {
-        return this._aliasPath;
+        return _aliasPath;
     }
 
     /**
@@ -206,7 +206,7 @@ class EagerLoadable
      */
     function propertyPath(): ?string
     {
-        return this._propertyPath;
+        return _propertyPath;
     }
 
     /**
@@ -217,7 +217,7 @@ class EagerLoadable
      */
     function setCanBeJoined(bool $possible)
     {
-        this._canBeJoined = $possible;
+        _canBeJoined = $possible;
 
         return this;
     }
@@ -229,7 +229,7 @@ class EagerLoadable
      */
     function canBeJoined(): bool
     {
-        return this._canBeJoined;
+        return _canBeJoined;
     }
 
     /**
@@ -241,7 +241,7 @@ class EagerLoadable
      */
     function setConfig(array $config)
     {
-        this._config = $config;
+        _config = $config;
 
         return this;
     }
@@ -254,7 +254,7 @@ class EagerLoadable
      */
     function getConfig(): array
     {
-        return this._config;
+        return _config;
     }
 
     /**
@@ -265,7 +265,7 @@ class EagerLoadable
      */
     function forMatching(): ?bool
     {
-        return this._forMatching;
+        return _forMatching;
     }
 
     /**
@@ -284,7 +284,7 @@ class EagerLoadable
      */
     function targetProperty(): ?string
     {
-        return this._targetProperty;
+        return _targetProperty;
     }
 
     /**
@@ -296,16 +296,16 @@ class EagerLoadable
     function asContainArray(): array
     {
         $associations = [];
-        foreach (this._associations as $assoc) {
+        foreach (_associations as $assoc) {
             $associations += $assoc->asContainArray();
         }
-        $config = this._config;
-        if (this._forMatching != null) {
-            $config = ['matching' => this._forMatching] + $config;
+        $config = _config;
+        if (_forMatching != null) {
+            $config = ['matching' => _forMatching] + $config;
         }
 
         return [
-            this._name => [
+            _name => [
                 'associations' => $associations,
                 'config' => $config,
             ],
@@ -319,8 +319,8 @@ class EagerLoadable
      */
     function __clone()
     {
-        foreach (this._associations as $i => $association) {
-            this._associations[$i] = clone $association;
+        foreach (_associations as $i => $association) {
+            _associations[$i] = clone $association;
         }
     }
 }

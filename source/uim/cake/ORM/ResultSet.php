@@ -160,20 +160,20 @@ class ResultSet : ResultSetInterface
     public this(Query $query, StatementInterface $statement)
     {
         $repository = $query->getRepository();
-        this._statement = $statement;
-        this._driver = $query->getConnection()->getDriver();
-        this._defaultTable = $repository;
-        this._calculateAssociationMap($query);
-        this._hydrate = $query->isHydrationEnabled();
-        this._entityClass = $repository->getEntityClass();
-        this._useBuffering = $query->isBufferedResultsEnabled();
-        this._defaultAlias = this._defaultTable->getAlias();
-        this._calculateColumnMap($query);
-        this._autoFields = $query->isAutoFieldsEnabled();
+        _statement = $statement;
+        _driver = $query->getConnection()->getDriver();
+        _defaultTable = $repository;
+        _calculateAssociationMap($query);
+        _hydrate = $query->isHydrationEnabled();
+        _entityClass = $repository->getEntityClass();
+        _useBuffering = $query->isBufferedResultsEnabled();
+        _defaultAlias = _defaultTable->getAlias();
+        _calculateColumnMap($query);
+        _autoFields = $query->isAutoFieldsEnabled();
 
-        if (this._useBuffering) {
+        if (_useBuffering) {
             $count = this.count();
-            this._results = new SplFixedArray($count);
+            _results = new SplFixedArray($count);
         }
     }
 
@@ -187,7 +187,7 @@ class ResultSet : ResultSetInterface
     #[\ReturnTypeWillChange]
     function current()
     {
-        return this._current;
+        return _current;
     }
 
     /**
@@ -199,7 +199,7 @@ class ResultSet : ResultSetInterface
      */
     function key(): int
     {
-        return this._index;
+        return _index;
     }
 
     /**
@@ -211,7 +211,7 @@ class ResultSet : ResultSetInterface
      */
     function next(): void
     {
-        this._index++;
+        _index++;
     }
 
     /**
@@ -224,17 +224,17 @@ class ResultSet : ResultSetInterface
      */
     function rewind(): void
     {
-        if (this._index == 0) {
+        if (_index == 0) {
             return;
         }
 
-        if (!this._useBuffering) {
+        if (!_useBuffering) {
             $msg = 'You cannot rewind an un-buffered ResultSet. '
                 . 'Use Query::bufferResults() to get a buffered ResultSet.';
             throw new DatabaseException($msg);
         }
 
-        this._index = 0;
+        _index = 0;
     }
 
     /**
@@ -246,10 +246,10 @@ class ResultSet : ResultSetInterface
      */
     function valid(): bool
     {
-        if (this._useBuffering) {
-            $valid = this._index < this._count;
-            if ($valid && this._results[this._index] != null) {
-                this._current = this._results[this._index];
+        if (_useBuffering) {
+            $valid = _index < _count;
+            if ($valid && _results[_index] != null) {
+                _current = _results[_index];
 
                 return true;
             }
@@ -258,14 +258,14 @@ class ResultSet : ResultSetInterface
             }
         }
 
-        this._current = this._fetchResult();
-        $valid = this._current != false;
+        _current = _fetchResult();
+        $valid = _current != false;
 
-        if ($valid && this._useBuffering) {
-            this._results[this._index] = this._current;
+        if ($valid && _useBuffering) {
+            _results[_index] = _current;
         }
-        if (!$valid && this._statement != null) {
-            this._statement->closeCursor();
+        if (!$valid && _statement != null) {
+            _statement->closeCursor();
         }
 
         return $valid;
@@ -281,8 +281,8 @@ class ResultSet : ResultSetInterface
     function first()
     {
         foreach (this as $result) {
-            if (this._statement != null && !this._useBuffering) {
-                this._statement->closeCursor();
+            if (_statement != null && !_useBuffering) {
+                _statement->closeCursor();
             }
 
             return $result;
@@ -300,7 +300,7 @@ class ResultSet : ResultSetInterface
      */
     function serialize(): string
     {
-        return serialize(this.__serialize());
+        return serialize(__serialize());
     }
 
     /**
@@ -310,7 +310,7 @@ class ResultSet : ResultSetInterface
      */
     function __serialize(): array
     {
-        if (!this._useBuffering) {
+        if (!_useBuffering) {
             $msg = 'You cannot serialize an un-buffered ResultSet. '
                 . 'Use Query::bufferResults() to get a buffered ResultSet.';
             throw new DatabaseException($msg);
@@ -320,11 +320,11 @@ class ResultSet : ResultSetInterface
             this.next();
         }
 
-        if (this._results instanceof SplFixedArray) {
-            return this._results->toArray();
+        if (_results instanceof SplFixedArray) {
+            return _results->toArray();
         }
 
-        return this._results;
+        return _results;
     }
 
     /**
@@ -337,7 +337,7 @@ class ResultSet : ResultSetInterface
      */
     function unserialize($serialized)
     {
-        this.__unserialize((array)(unserialize($serialized) ?: []));
+        __unserialize((array)(unserialize($serialized) ?: []));
     }
 
     /**
@@ -348,9 +348,9 @@ class ResultSet : ResultSetInterface
      */
     function __unserialize(array $data): void
     {
-        this._results = SplFixedArray::fromArray($data);
-        this._useBuffering = true;
-        this._count = this._results->count();
+        _results = SplFixedArray::fromArray($data);
+        _useBuffering = true;
+        _count = _results->count();
     }
 
     /**
@@ -362,20 +362,20 @@ class ResultSet : ResultSetInterface
      */
     function count(): int
     {
-        if (this._count != null) {
-            return this._count;
+        if (_count != null) {
+            return _count;
         }
-        if (this._statement != null) {
-            return this._count = this._statement->rowCount();
+        if (_statement != null) {
+            return _count = _statement->rowCount();
         }
 
-        if (this._results instanceof SplFixedArray) {
-            this._count = this._results->count();
+        if (_results instanceof SplFixedArray) {
+            _count = _results->count();
         } else {
-            this._count = count(this._results);
+            _count = count(_results);
         }
 
-        return this._count;
+        return _count;
     }
 
     /**
@@ -387,13 +387,13 @@ class ResultSet : ResultSetInterface
      */
     protected function _calculateAssociationMap(Query $query): void
     {
-        $map = $query->getEagerLoader()->associationsMap(this._defaultTable);
-        this._matchingMap = (new Collection($map))
+        $map = $query->getEagerLoader()->associationsMap(_defaultTable);
+        _matchingMap = (new Collection($map))
             ->match(['matching' => true])
             ->indexBy('alias')
             ->toArray();
 
-        this._containMap = (new Collection(array_reverse($map)))
+        _containMap = (new Collection(array_reverse($map)))
             ->match(['matching' => false])
             ->indexBy('nestKey')
             ->toArray();
@@ -413,7 +413,7 @@ class ResultSet : ResultSetInterface
             $key = trim($key, '"`[]');
 
             if (strpos($key, '__') <= 0) {
-                $map[this._defaultAlias][$key] = $key;
+                $map[_defaultAlias][$key] = $key;
                 continue;
             }
 
@@ -421,15 +421,15 @@ class ResultSet : ResultSetInterface
             $map[$parts[0]][$key] = $parts[1];
         }
 
-        foreach (this._matchingMap as $alias => $assoc) {
+        foreach (_matchingMap as $alias => $assoc) {
             if (!isset($map[$alias])) {
                 continue;
             }
-            this._matchingMapColumns[$alias] = $map[$alias];
+            _matchingMapColumns[$alias] = $map[$alias];
             unset($map[$alias]);
         }
 
-        this._map = $map;
+        _map = $map;
     }
 
     /**
@@ -440,16 +440,16 @@ class ResultSet : ResultSetInterface
      */
     protected function _fetchResult()
     {
-        if (this._statement == null) {
+        if (_statement == null) {
             return false;
         }
 
-        $row = this._statement->fetch('assoc');
+        $row = _statement->fetch('assoc');
         if ($row == false) {
             return $row;
         }
 
-        return this._groupResult($row);
+        return _groupResult($row);
     }
 
     /**
@@ -460,7 +460,7 @@ class ResultSet : ResultSetInterface
      */
     protected function _groupResult(array $row)
     {
-        $defaultAlias = this._defaultAlias;
+        $defaultAlias = _defaultAlias;
         $results = $presentAliases = [];
         $options = [
             'useSetters' => false,
@@ -469,13 +469,13 @@ class ResultSet : ResultSetInterface
             'guard' => false,
         ];
 
-        foreach (this._matchingMapColumns as $alias => $keys) {
-            $matching = this._matchingMap[$alias];
+        foreach (_matchingMapColumns as $alias => $keys) {
+            $matching = _matchingMap[$alias];
             $results['_matchingData'][$alias] = array_combine(
                 $keys,
                 array_intersect_key($row, $keys)
             );
-            if (this._hydrate) {
+            if (_hydrate) {
                 /** @var \Cake\ORM\Table $table */
                 $table = $matching['instance'];
                 $options['source'] = $table->getRegistryAlias();
@@ -485,7 +485,7 @@ class ResultSet : ResultSetInterface
             }
         }
 
-        foreach (this._map as $table => $keys) {
+        foreach (_map as $table => $keys) {
             $results[$table] = array_combine($keys, array_intersect_key($row, $keys));
             $presentAliases[$table] = true;
         }
@@ -497,10 +497,10 @@ class ResultSet : ResultSetInterface
 
         unset($presentAliases[$defaultAlias]);
 
-        foreach (this._containMap as $assoc) {
+        foreach (_containMap as $assoc) {
             $alias = $assoc['nestKey'];
 
-            if ($assoc['canBeJoined'] && empty(this._map[$alias])) {
+            if ($assoc['canBeJoined'] && empty(_map[$alias])) {
                 continue;
             }
 
@@ -520,7 +520,7 @@ class ResultSet : ResultSetInterface
             $options['source'] = $target->getRegistryAlias();
             unset($presentAliases[$alias]);
 
-            if ($assoc['canBeJoined'] && this._autoFields != false) {
+            if ($assoc['canBeJoined'] && _autoFields != false) {
                 $hasData = false;
                 foreach ($results[$alias] as $v) {
                     if ($v != null && $v != []) {
@@ -534,7 +534,7 @@ class ResultSet : ResultSetInterface
                 }
             }
 
-            if (this._hydrate && $results[$alias] != null && $assoc['canBeJoined']) {
+            if (_hydrate && $results[$alias] != null && $assoc['canBeJoined']) {
                 $entity = new $assoc['entityClass']($results[$alias], $options);
                 $results[$alias] = $entity;
             }
@@ -553,12 +553,12 @@ class ResultSet : ResultSetInterface
             $results[$defaultAlias]['_matchingData'] = $results['_matchingData'];
         }
 
-        $options['source'] = this._defaultTable->getRegistryAlias();
+        $options['source'] = _defaultTable->getRegistryAlias();
         if (isset($results[$defaultAlias])) {
             $results = $results[$defaultAlias];
         }
-        if (this._hydrate && !($results instanceof EntityInterface)) {
-            $results = new this._entityClass($results, $options);
+        if (_hydrate && !($results instanceof EntityInterface)) {
+            $results = new _entityClass($results, $options);
         }
 
         return $results;
@@ -572,10 +572,10 @@ class ResultSet : ResultSetInterface
      */
     function __debugInfo()
     {
-        $currentIndex = this._index;
+        $currentIndex = _index;
         // toArray() adjusts the current index, so we have to reset it
         $items = this.toArray();
-        this._index = $currentIndex;
+        _index = $currentIndex;
 
         return [
             'items' => $items,

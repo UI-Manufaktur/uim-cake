@@ -89,29 +89,29 @@ class FileLog : BaseLog
     {
         parent::__construct($config);
 
-        this._path = this.getConfig('path', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
-        if (Configure::read('debug') && !is_dir(this._path)) {
-            mkdir(this._path, 0775, true);
+        _path = this.getConfig('path', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
+        if (Configure::read('debug') && !is_dir(_path)) {
+            mkdir(_path, 0775, true);
         }
 
-        if (!empty(this._config['file'])) {
-            this._file = this._config['file'];
-            if (substr(this._file, -4) != '.log') {
-                this._file .= '.log';
+        if (!empty(_config['file'])) {
+            _file = _config['file'];
+            if (substr(_file, -4) != '.log') {
+                _file .= '.log';
             }
         }
 
-        if (!empty(this._config['size'])) {
-            if (is_numeric(this._config['size'])) {
-                this._size = (int)this._config['size'];
+        if (!empty(_config['size'])) {
+            if (is_numeric(_config['size'])) {
+                _size = (int)_config['size'];
             } else {
-                this._size = Text::parseFileSize(this._config['size']);
+                _size = Text::parseFileSize(_config['size']);
             }
         }
 
-        if (isset(this._config['dateFormat'])) {
+        if (isset(_config['dateFormat'])) {
             deprecationWarning('`dateFormat` option should now be set in the formatter options.', 0);
-            this.formatter->setConfig('dateFormat', this._config['dateFormat']);
+            this.formatter->setConfig('dateFormat', _config['dateFormat']);
         }
     }
 
@@ -126,16 +126,16 @@ class FileLog : BaseLog
      */
     function log($level, $message, array $context = []): void
     {
-        $message = this._format($message, $context);
+        $message = _format($message, $context);
         $message = this.formatter->format($level, $message, $context);
 
-        $filename = this._getFilename($level);
-        if (this._size) {
-            this._rotateFile($filename);
+        $filename = _getFilename($level);
+        if (_size) {
+            _rotateFile($filename);
         }
 
-        $pathname = this._path . $filename;
-        $mask = this._config['mask'];
+        $pathname = _path . $filename;
+        $mask = _config['mask'];
         if (!$mask) {
             file_put_contents($pathname, $message . "\n", FILE_APPEND);
 
@@ -166,8 +166,8 @@ class FileLog : BaseLog
     {
         $debugTypes = ['notice', 'info', 'debug'];
 
-        if (this._file) {
-            $filename = this._file;
+        if (_file) {
+            $filename = _file;
         } elseif ($level == 'error' || $level == 'warning') {
             $filename = 'error.log';
         } elseif (in_array($level, $debugTypes, true)) {
@@ -189,17 +189,17 @@ class FileLog : BaseLog
      */
     protected function _rotateFile(string $filename): ?bool
     {
-        $filePath = this._path . $filename;
+        $filePath = _path . $filename;
         clearstatcache(true, $filePath);
 
         if (
             !is_file($filePath) ||
-            filesize($filePath) < this._size
+            filesize($filePath) < _size
         ) {
             return null;
         }
 
-        $rotate = this._config['rotate'];
+        $rotate = _config['rotate'];
         if ($rotate == 0) {
             $result = unlink($filePath);
         } else {

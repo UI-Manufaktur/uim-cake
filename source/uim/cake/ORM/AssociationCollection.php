@@ -53,7 +53,7 @@ class AssociationCollection : IteratorAggregate
     public this(?LocatorInterface $tableLocator = null)
     {
         if ($tableLocator != null) {
-            this._tableLocator = $tableLocator;
+            _tableLocator = $tableLocator;
         }
     }
 
@@ -71,7 +71,7 @@ class AssociationCollection : IteratorAggregate
     {
         [, $alias] = pluginSplit($alias);
 
-        return this._items[$alias] = $association;
+        return _items[$alias] = $association;
     }
 
     /**
@@ -103,7 +103,7 @@ class AssociationCollection : IteratorAggregate
      */
     function get(string $alias): ?Association
     {
-        return this._items[$alias] ?? null;
+        return _items[$alias] ?? null;
     }
 
     /**
@@ -114,7 +114,7 @@ class AssociationCollection : IteratorAggregate
      */
     function getByProperty(string $prop): ?Association
     {
-        foreach (this._items as $assoc) {
+        foreach (_items as $assoc) {
             if ($assoc->getProperty() == $prop) {
                 return $assoc;
             }
@@ -131,7 +131,7 @@ class AssociationCollection : IteratorAggregate
      */
     function has(string $alias): bool
     {
-        return isset(this._items[$alias]);
+        return isset(_items[$alias]);
     }
 
     /**
@@ -141,7 +141,7 @@ class AssociationCollection : IteratorAggregate
      */
     function keys(): array
     {
-        return array_keys(this._items);
+        return array_keys(_items);
     }
 
     /**
@@ -156,7 +156,7 @@ class AssociationCollection : IteratorAggregate
     {
         $class = array_map('strtolower', (array)$class);
 
-        $out = array_filter(this._items, function ($assoc) use ($class) {
+        $out = array_filter(_items, function ($assoc) use ($class) {
             [, $name] = namespaceSplit(get_class($assoc));
 
             return in_array(strtolower($name), $class, true);
@@ -175,7 +175,7 @@ class AssociationCollection : IteratorAggregate
      */
     function remove(string $alias): void
     {
-        unset(this._items[$alias]);
+        unset(_items[$alias]);
     }
 
     /**
@@ -187,7 +187,7 @@ class AssociationCollection : IteratorAggregate
      */
     function removeAll(): void
     {
-        foreach (this._items as $alias => $object) {
+        foreach (_items as $alias => $object) {
             this.remove($alias);
         }
     }
@@ -211,7 +211,7 @@ class AssociationCollection : IteratorAggregate
             return true;
         }
 
-        return this._saveAssociations($table, $entity, $associations, $options, false);
+        return _saveAssociations($table, $entity, $associations, $options, false);
     }
 
     /**
@@ -233,7 +233,7 @@ class AssociationCollection : IteratorAggregate
             return true;
         }
 
-        return this._saveAssociations($table, $entity, $associations, $options, true);
+        return _saveAssociations($table, $entity, $associations, $options, true);
     }
 
     /**
@@ -273,7 +273,7 @@ class AssociationCollection : IteratorAggregate
             if ($relation->isOwningSide($table) != $owningSide) {
                 continue;
             }
-            if (!this._save($relation, $entity, $nested, $options)) {
+            if (!_save($relation, $entity, $nested, $options)) {
                 return false;
             }
         }
@@ -317,7 +317,7 @@ class AssociationCollection : IteratorAggregate
     function cascadeDelete(EntityInterface $entity, array $options): bool
     {
         $noCascade = [];
-        foreach (this._items as $assoc) {
+        foreach (_items as $assoc) {
             if (!$assoc->getCascadeCallbacks()) {
                 $noCascade[] = $assoc;
                 continue;
@@ -356,7 +356,7 @@ class AssociationCollection : IteratorAggregate
             return [];
         }
 
-        return this._normalizeAssociations($keys);
+        return _normalizeAssociations($keys);
     }
 
     /**
@@ -366,6 +366,6 @@ class AssociationCollection : IteratorAggregate
      */
     function getIterator(): Traversable
     {
-        return new ArrayIterator(this._items);
+        return new ArrayIterator(_items);
     }
 }

@@ -59,7 +59,7 @@ class ArrayLog : BaseLog
      */
     function log($level, $message, array $context = [])
     {
-        $message = this._format($message, $context);
+        $message = _format($message, $context);
         this.content[] = this.formatter->format($level, $message, $context);
     }
 

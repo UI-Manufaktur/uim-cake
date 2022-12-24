@@ -42,9 +42,9 @@ class JsonFormatter : AbstractFormatter
      */
     function format($level, string $message, array $context = []): string
     {
-        $log = ['date' => date(this._config['dateFormat']), 'level' => (string)$level, 'message' => $message];
-        $json = json_encode($log, this._config['flags']);
+        $log = ['date' => date(_config['dateFormat']), 'level' => (string)$level, 'message' => $message];
+        $json = json_encode($log, _config['flags']);
 
-        return this._config['appendNewline'] ? $json . "\n" : $json;
+        return _config['appendNewline'] ? $json . "\n" : $json;
     }
 }

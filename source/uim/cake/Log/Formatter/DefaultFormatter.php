@@ -44,12 +44,12 @@ class DefaultFormatter : AbstractFormatter
      */
     function format($level, string $message, array $context = []): string
     {
-        if (this._config['includeDate']) {
-            $message = sprintf('%s %s: %s', (new DateTime())->format(this._config['dateFormat']), $level, $message);
+        if (_config['includeDate']) {
+            $message = sprintf('%s %s: %s', (new DateTime())->format(_config['dateFormat']), $level, $message);
         } else {
             $message = sprintf('%s: %s', $level, $message);
         }
-        if (this._config['includeTags']) {
+        if (_config['includeTags']) {
             $message = sprintf('<%s>%s</%s>', $level, $message, $level);
         }
 

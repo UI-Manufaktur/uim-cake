@@ -115,7 +115,7 @@ class HasMany : Association
             throw new InvalidArgumentException($msg);
         }
 
-        this._saveStrategy = $strategy;
+        _saveStrategy = $strategy;
 
         return this;
     }
@@ -127,7 +127,7 @@ class HasMany : Association
      */
     function getSaveStrategy(): string
     {
-        return this._saveStrategy;
+        return _saveStrategy;
     }
 
     /**
@@ -173,8 +173,8 @@ class HasMany : Association
         $options['_sourceTable'] = this.getSource();
 
         if (
-            this._saveStrategy == self::SAVE_REPLACE &&
-            !this._unlinkAssociated($foreignKeyReference, $entity, this.getTarget(), $targetEntities, $options)
+            _saveStrategy == self::SAVE_REPLACE &&
+            !_unlinkAssociated($foreignKeyReference, $entity, this.getTarget(), $targetEntities, $options)
         ) {
             return false;
         }
@@ -182,7 +182,7 @@ class HasMany : Association
         if (!is_array($targetEntities)) {
             $targetEntities = iterator_to_array($targetEntities);
         }
-        if (!this._saveTarget($foreignKeyReference, $entity, $targetEntities, $options)) {
+        if (!_saveTarget($foreignKeyReference, $entity, $targetEntities, $options)) {
             return false;
         }
 
@@ -368,7 +368,7 @@ class HasMany : Association
                 ->toList(),
         ];
 
-        this._unlink($foreignKey, $target, $conditions, $options);
+        _unlink($foreignKey, $target, $conditions, $options);
 
         $result = $sourceEntity->get($property);
         if ($options['cleanProperty'] && $result != null) {
@@ -492,7 +492,7 @@ class HasMany : Association
             ];
         }
 
-        return this._unlink(array_keys($foreignKeyReference), $target, $conditions, $options);
+        return _unlink(array_keys($foreignKeyReference), $target, $conditions, $options);
     }
 
     /**
@@ -509,10 +509,10 @@ class HasMany : Association
      */
     protected function _unlink(array $foreignKey, Table $target, array $conditions = [], array $options = []): bool
     {
-        $mustBeDependent = (!this._foreignKeyAcceptsNull($target, $foreignKey) || this.getDependent());
+        $mustBeDependent = (!_foreignKeyAcceptsNull($target, $foreignKey) || this.getDependent());
 
         if ($mustBeDependent) {
-            if (this._cascadeCallbacks) {
+            if (_cascadeCallbacks) {
                 $conditions = new QueryExpression($conditions);
                 $conditions->traverse(function ($entry) use ($target): void {
                     if ($entry instanceof FieldInterface) {
@@ -591,11 +591,11 @@ class HasMany : Association
      */
     function getForeignKey()
     {
-        if (this._foreignKey == null) {
-            this._foreignKey = this._modelKey(this.getSource()->getTable());
+        if (_foreignKey == null) {
+            _foreignKey = _modelKey(this.getSource()->getTable());
         }
 
-        return this._foreignKey;
+        return _foreignKey;
     }
 
     /**
@@ -606,7 +606,7 @@ class HasMany : Association
      */
     function setSort($sort)
     {
-        this._sort = $sort;
+        _sort = $sort;
 
         return this;
     }
@@ -618,7 +618,7 @@ class HasMany : Association
      */
     function getSort()
     {
-        return this._sort;
+        return _sort;
     }
 
     /**

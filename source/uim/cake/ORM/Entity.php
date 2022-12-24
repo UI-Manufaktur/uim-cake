@@ -66,7 +66,7 @@ class Entity : EntityInterface, InvalidPropertyInterface
         }
 
         if (!empty($properties) && $options['markClean'] && !$options['useSetters']) {
-            this._fields = $properties;
+            _fields = $properties;
 
             return;
         }

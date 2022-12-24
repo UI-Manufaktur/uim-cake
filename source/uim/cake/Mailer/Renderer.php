@@ -96,7 +96,7 @@ class Renderer
      */
     function reset()
     {
-        this._viewBuilder = null;
+        _viewBuilder = null;
 
         this.viewBuilder()
             ->setClassName(View::class)
@@ -113,8 +113,8 @@ class Renderer
      */
     function __clone()
     {
-        if (this._viewBuilder != null) {
-            this._viewBuilder = clone this._viewBuilder;
+        if (_viewBuilder != null) {
+            _viewBuilder = clone _viewBuilder;
         }
     }
 }

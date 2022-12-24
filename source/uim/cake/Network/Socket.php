@@ -123,42 +123,42 @@ class Socket
             this.disconnect();
         }
 
-        $hasProtocol = strpos(this._config['host'], '://') != false;
+        $hasProtocol = strpos(_config['host'], '://') != false;
         if ($hasProtocol) {
-            [this._config['protocol'], this._config['host']] = explode('://', this._config['host']);
+            [_config['protocol'], _config['host']] = explode('://', _config['host']);
         }
         $scheme = null;
-        if (!empty(this._config['protocol'])) {
-            $scheme = this._config['protocol'] . '://';
+        if (!empty(_config['protocol'])) {
+            $scheme = _config['protocol'] . '://';
         }
 
-        this._setSslContext(this._config['host']);
-        if (!empty(this._config['context'])) {
-            $context = stream_context_create(this._config['context']);
+        _setSslContext(_config['host']);
+        if (!empty(_config['context'])) {
+            $context = stream_context_create(_config['context']);
         } else {
             $context = stream_context_create();
         }
 
         $connectAs = STREAM_CLIENT_CONNECT;
-        if (this._config['persistent']) {
+        if (_config['persistent']) {
             $connectAs |= STREAM_CLIENT_PERSISTENT;
         }
 
         /** @psalm-suppress InvalidArgument */
         set_error_handler([this, '_connectionErrorHandler']);
-        $remoteSocketTarget = $scheme . this._config['host'];
-        $port = (int)this._config['port'];
+        $remoteSocketTarget = $scheme . _config['host'];
+        $port = (int)_config['port'];
         if ($port > 0) {
             $remoteSocketTarget .= ':' . $port;
         }
 
         $errNum = 0;
         $errStr = '';
-        this.connection = this._getStreamSocketClient(
+        this.connection = _getStreamSocketClient(
             $remoteSocketTarget,
             $errNum,
             $errStr,
-            (int)this._config['timeout'],
+            (int)_config['timeout'],
             $connectAs,
             $context
         );
@@ -169,15 +169,15 @@ class Socket
             throw new SocketException($errStr, $errNum);
         }
 
-        if (this.connection == null && this._connectionErrors) {
-            $message = implode("\n", this._connectionErrors);
+        if (this.connection == null && _connectionErrors) {
+            $message = implode("\n", _connectionErrors);
             throw new SocketException($message, E_WARNING);
         }
 
         this.connected = is_resource(this.connection);
         if (this.connected) {
             /** @psalm-suppress PossiblyNullArgument */
-            stream_set_timeout(this.connection, (int)this._config['timeout']);
+            stream_set_timeout(this.connection, (int)_config['timeout']);
         }
 
         return this.connected;
@@ -230,29 +230,29 @@ class Socket
      */
     protected function _setSslContext(string $host): void
     {
-        foreach (this._config as $key => $value) {
+        foreach (_config as $key => $value) {
             if (substr($key, 0, 4) != 'ssl_') {
                 continue;
             }
             $contextKey = substr($key, 4);
-            if (empty(this._config['context']['ssl'][$contextKey])) {
-                this._config['context']['ssl'][$contextKey] = $value;
+            if (empty(_config['context']['ssl'][$contextKey])) {
+                _config['context']['ssl'][$contextKey] = $value;
             }
-            unset(this._config[$key]);
+            unset(_config[$key]);
         }
-        if (!isset(this._config['context']['ssl']['SNI_enabled'])) {
-            this._config['context']['ssl']['SNI_enabled'] = true;
+        if (!isset(_config['context']['ssl']['SNI_enabled'])) {
+            _config['context']['ssl']['SNI_enabled'] = true;
         }
-        if (empty(this._config['context']['ssl']['peer_name'])) {
-            this._config['context']['ssl']['peer_name'] = $host;
+        if (empty(_config['context']['ssl']['peer_name'])) {
+            _config['context']['ssl']['peer_name'] = $host;
         }
-        if (empty(this._config['context']['ssl']['cafile'])) {
-            this._config['context']['ssl']['cafile'] = CaBundle::getBundledCaBundlePath();
+        if (empty(_config['context']['ssl']['cafile'])) {
+            _config['context']['ssl']['cafile'] = CaBundle::getBundledCaBundlePath();
         }
-        if (!empty(this._config['context']['ssl']['verify_host'])) {
-            this._config['context']['ssl']['CN_match'] = $host;
+        if (!empty(_config['context']['ssl']['verify_host'])) {
+            _config['context']['ssl']['CN_match'] = $host;
         }
-        unset(this._config['context']['ssl']['verify_host']);
+        unset(_config['context']['ssl']['verify_host']);
     }
 
     /**
@@ -267,7 +267,7 @@ class Socket
      */
     protected function _connectionErrorHandler(int $code, string $message): void
     {
-        this._connectionErrors[] = $message;
+        _connectionErrors[] = $message;
     }
 
     /**
@@ -291,8 +291,8 @@ class Socket
      */
     function host(): string
     {
-        if (Validation::ip(this._config['host'])) {
-            return gethostbyaddr(this._config['host']);
+        if (Validation::ip(_config['host'])) {
+            return gethostbyaddr(_config['host']);
         }
 
         return gethostbyaddr(this.address());
@@ -305,11 +305,11 @@ class Socket
      */
     function address(): string
     {
-        if (Validation::ip(this._config['host'])) {
-            return this._config['host'];
+        if (Validation::ip(_config['host'])) {
+            return _config['host'];
         }
 
-        return gethostbyname(this._config['host']);
+        return gethostbyname(_config['host']);
     }
 
     /**
@@ -319,11 +319,11 @@ class Socket
      */
     function addresses(): array
     {
-        if (Validation::ip(this._config['host'])) {
-            return [this._config['host']];
+        if (Validation::ip(_config['host'])) {
+            return [_config['host']];
         }
 
-        return gethostbynamel(this._config['host']);
+        return gethostbynamel(_config['host']);
     }
 
     /**
@@ -470,10 +470,10 @@ class Socket
      */
     function enableCrypto(string $type, string $clientOrServer = 'client', bool $enable = true): void
     {
-        if (!array_key_exists($type . '_' . $clientOrServer, this._encryptMethods)) {
+        if (!array_key_exists($type . '_' . $clientOrServer, _encryptMethods)) {
             throw new InvalidArgumentException('Invalid encryption scheme chosen');
         }
-        $method = this._encryptMethods[$type . '_' . $clientOrServer];
+        $method = _encryptMethods[$type . '_' . $clientOrServer];
 
         if ($method == STREAM_CRYPTO_METHOD_TLS_CLIENT) {
             $method |= STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;

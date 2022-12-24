@@ -50,11 +50,11 @@ class BelongsTo : Association
      */
     function getForeignKey()
     {
-        if (this._foreignKey == null) {
-            this._foreignKey = this._modelKey(this.getTarget()->getAlias());
+        if (_foreignKey == null) {
+            _foreignKey = _modelKey(this.getTarget()->getAlias());
         }
 
-        return this._foreignKey;
+        return _foreignKey;
     }
 
     /**
@@ -78,7 +78,7 @@ class BelongsTo : Association
      */
     protected function _propertyName(): string
     {
-        [, $name] = pluginSplit(this._name);
+        [, $name] = pluginSplit(_name);
 
         return Inflector::underscore(Inflector::singularize($name));
     }
@@ -152,8 +152,8 @@ class BelongsTo : Association
     protected function _joinCondition(array $options): array
     {
         $conditions = [];
-        $tAlias = this._name;
-        $sAlias = this._sourceTable->getAlias();
+        $tAlias = _name;
+        $sAlias = _sourceTable->getAlias();
         $foreignKey = (array)$options['foreignKey'];
         $bindingKey = (array)this.getBindingKey();
 
@@ -166,7 +166,7 @@ class BelongsTo : Association
             $msg = 'Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"';
             throw new RuntimeException(sprintf(
                 $msg,
-                this._name,
+                _name,
                 implode(', ', $foreignKey),
                 implode(', ', $bindingKey)
             ));

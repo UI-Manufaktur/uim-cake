@@ -315,13 +315,13 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
                 }
             }
         }
-        this._eventManager = $eventManager ?: new EventManager();
-        this._behaviors = $behaviors ?: new BehaviorRegistry();
-        this._behaviors->setTable(this);
-        this._associations = $associations ?: new AssociationCollection();
+        _eventManager = $eventManager ?: new EventManager();
+        _behaviors = $behaviors ?: new BehaviorRegistry();
+        _behaviors->setTable(this);
+        _associations = $associations ?: new AssociationCollection();
 
         this.initialize($config);
-        this._eventManager->on(this);
+        _eventManager->on(this);
         this.dispatchEvent('Model.initialize');
     }
 
@@ -372,7 +372,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function setTable(string $table)
     {
-        this._table = $table;
+        _table = $table;
 
         return this;
     }
@@ -386,18 +386,18 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getTable(): string
     {
-        if (this._table == null) {
+        if (_table == null) {
             $table = namespaceSplit(static::class);
-            $table = substr(end($table), 0, -5) ?: this._alias;
+            $table = substr(end($table), 0, -5) ?: _alias;
             if (!$table) {
                 throw new CakeException(
                     'You must specify either the `alias` or the `table` option for the constructor.'
                 );
             }
-            this._table = Inflector::underscore($table);
+            _table = Inflector::underscore($table);
         }
 
-        return this._table;
+        return _table;
     }
 
     /**
@@ -408,7 +408,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function setAlias(string $alias)
     {
-        this._alias = $alias;
+        _alias = $alias;
 
         return this;
     }
@@ -420,18 +420,18 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getAlias(): string
     {
-        if (this._alias == null) {
+        if (_alias == null) {
             $alias = namespaceSplit(static::class);
-            $alias = substr(end($alias), 0, -5) ?: this._table;
+            $alias = substr(end($alias), 0, -5) ?: _table;
             if (!$alias) {
                 throw new CakeException(
                     'You must specify either the `alias` or the `table` option for the constructor.'
                 );
             }
-            this._alias = $alias;
+            _alias = $alias;
         }
 
-        return this._alias;
+        return _alias;
     }
 
     /**
@@ -459,7 +459,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function setRegistryAlias(string $registryAlias)
     {
-        this._registryAlias = $registryAlias;
+        _registryAlias = $registryAlias;
 
         return this;
     }
@@ -471,11 +471,11 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getRegistryAlias(): string
     {
-        if (this._registryAlias == null) {
-            this._registryAlias = this.getAlias();
+        if (_registryAlias == null) {
+            _registryAlias = this.getAlias();
         }
 
-        return this._registryAlias;
+        return _registryAlias;
     }
 
     /**
@@ -486,7 +486,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function setConnection(Connection $connection)
     {
-        this._connection = $connection;
+        _connection = $connection;
 
         return this;
     }
@@ -498,13 +498,13 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getConnection(): Connection
     {
-        if (!this._connection) {
+        if (!_connection) {
             /** @var \Cake\Database\Connection $connection */
             $connection = ConnectionManager::get(static::defaultConnectionName());
-            this._connection = $connection;
+            _connection = $connection;
         }
 
-        return this._connection;
+        return _connection;
     }
 
     /**
@@ -514,8 +514,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getSchema(): TableSchemaInterface
     {
-        if (this._schema == null) {
-            this._schema = this._initializeSchema(
+        if (_schema == null) {
+            _schema = _initializeSchema(
                 this.getConnection()
                     ->getSchemaCollection()
                     ->describe(this.getTable())
@@ -525,7 +525,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             }
         }
 
-        return this._schema;
+        return _schema;
     }
 
     /**
@@ -554,7 +554,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             }
         }
 
-        this._schema = $schema;
+        _schema = $schema;
         if (Configure::read('debug')) {
             this.checkAliasLengths();
         }
@@ -571,7 +571,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     protected function checkAliasLengths(): void
     {
-        if (this._schema == null) {
+        if (_schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
         }
 
@@ -584,7 +584,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         }
 
         $table = this.getAlias();
-        foreach (this._schema->columns() as $name) {
+        foreach (_schema->columns() as $name) {
             if (strlen($table . '__' . $name) > $maxLength) {
                 $nameLength = $maxLength - 2;
                 throw new RuntimeException(
@@ -645,7 +645,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function setPrimaryKey($key)
     {
-        this._primaryKey = $key;
+        _primaryKey = $key;
 
         return this;
     }
@@ -657,15 +657,15 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getPrimaryKey()
     {
-        if (this._primaryKey == null) {
+        if (_primaryKey == null) {
             $key = this.getSchema()->getPrimaryKey();
             if (count($key) == 1) {
                 $key = $key[0];
             }
-            this._primaryKey = $key;
+            _primaryKey = $key;
         }
 
-        return this._primaryKey;
+        return _primaryKey;
     }
 
     /**
@@ -676,7 +676,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function setDisplayField($field)
     {
-        this._displayField = $field;
+        _displayField = $field;
 
         return this;
     }
@@ -688,18 +688,18 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getDisplayField()
     {
-        if (this._displayField == null) {
+        if (_displayField == null) {
             $schema = this.getSchema();
-            this._displayField = this.getPrimaryKey();
+            _displayField = this.getPrimaryKey();
             foreach (['title', 'name', 'label'] as $field) {
                 if ($schema->hasColumn($field)) {
-                    this._displayField = $field;
+                    _displayField = $field;
                     break;
                 }
             }
         }
 
-        return this._displayField;
+        return _displayField;
     }
 
     /**
@@ -710,19 +710,19 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getEntityClass(): string
     {
-        if (!this._entityClass) {
+        if (!_entityClass) {
             $default = Entity::class;
             $self = static::class;
             $parts = explode('\\', $self);
 
             if ($self == self::class || count($parts) < 3) {
-                return this._entityClass = $default;
+                return _entityClass = $default;
             }
 
             $alias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
             $name = implode('\\', array_slice($parts, 0, -1)) . '\\Entity\\' . $alias;
             if (!class_exists($name)) {
-                return this._entityClass = $default;
+                return _entityClass = $default;
             }
 
             /** @var class-string<\Cake\Datasource\EntityInterface>|null $class */
@@ -731,10 +731,10 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
                 throw new MissingEntityException([$name]);
             }
 
-            this._entityClass = $class;
+            _entityClass = $class;
         }
 
-        return this._entityClass;
+        return _entityClass;
     }
 
     /**
@@ -752,7 +752,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             throw new MissingEntityException([$name]);
         }
 
-        this._entityClass = $class;
+        _entityClass = $class;
 
         return this;
     }
@@ -783,7 +783,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function addBehavior(string $name, array $options = [])
     {
-        this._behaviors->load($name, $options);
+        _behaviors->load($name, $options);
 
         return this;
     }
@@ -835,7 +835,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function removeBehavior(string $name)
     {
-        this._behaviors->unload($name);
+        _behaviors->unload($name);
 
         return this;
     }
@@ -847,7 +847,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function behaviors(): BehaviorRegistry
     {
-        return this._behaviors;
+        return _behaviors;
     }
 
     /**
@@ -859,7 +859,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function getBehavior(string $name): Behavior
     {
-        if (!this._behaviors->has($name)) {
+        if (!_behaviors->has($name)) {
             throw new InvalidArgumentException(sprintf(
                 'The %s behavior is not defined on %s.',
                 $name,
@@ -867,7 +867,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             ));
         }
 
-        return this._behaviors->get($name);
+        return _behaviors->get($name);
     }
 
     /**
@@ -878,7 +878,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function hasBehavior(string $name): bool
     {
-        return this._behaviors->has($name);
+        return _behaviors->has($name);
     }
 
     /**
@@ -946,13 +946,13 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     protected function findAssociation(string $name): ?Association
     {
         if (strpos($name, '.') == false) {
-            return this._associations->get($name);
+            return _associations->get($name);
         }
 
         $result = null;
         [$name, $next] = array_pad(explode('.', $name, 2), 2, null);
         if ($name != null) {
-            $result = this._associations->get($name);
+            $result = _associations->get($name);
         }
 
         if ($result != null && $next != null) {
@@ -969,7 +969,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function associations(): AssociationCollection
     {
-        return this._associations;
+        return _associations;
     }
 
     /**
@@ -1049,7 +1049,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $options += ['sourceTable' => this];
 
         /** @var \Cake\ORM\Association\BelongsTo $association */
-        $association = this._associations->load(BelongsTo::class, $associated, $options);
+        $association = _associations->load(BelongsTo::class, $associated, $options);
 
         return $association;
     }
@@ -1095,7 +1095,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $options += ['sourceTable' => this];
 
         /** @var \Cake\ORM\Association\HasOne $association */
-        $association = this._associations->load(HasOne::class, $associated, $options);
+        $association = _associations->load(HasOne::class, $associated, $options);
 
         return $association;
     }
@@ -1147,7 +1147,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $options += ['sourceTable' => this];
 
         /** @var \Cake\ORM\Association\HasMany $association */
-        $association = this._associations->load(HasMany::class, $associated, $options);
+        $association = _associations->load(HasMany::class, $associated, $options);
 
         return $association;
     }
@@ -1201,7 +1201,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $options += ['sourceTable' => this];
 
         /** @var \Cake\ORM\Association\BelongsToMany $association */
-        $association = this._associations->load(BelongsToMany::class, $associated, $options);
+        $association = _associations->load(BelongsToMany::class, $associated, $options);
 
         return $association;
     }
@@ -1386,7 +1386,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             }
         }
 
-        $options = this._setFieldMatchers(
+        $options = _setFieldMatchers(
             $options,
             ['keyField', 'valueField', 'groupField']
         );
@@ -1433,7 +1433,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             'nestingKey' => 'children',
         ];
 
-        $options = this._setFieldMatchers($options, ['keyField', 'parentField']);
+        $options = _setFieldMatchers($options, ['keyField', 'parentField']);
 
         return $query->formatResults(function ($results) use ($options) {
             /** @var \Cake\Collection\CollectionInterface $results */
@@ -1627,11 +1627,11 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             'defaults' => true,
         ]);
 
-        $entity = this._executeTransaction(function () use ($search, $callback, $options) {
-            return this._processFindOrCreate($search, $callback, $options->getArrayCopy());
+        $entity = _executeTransaction(function () use ($search, $callback, $options) {
+            return _processFindOrCreate($search, $callback, $options->getArrayCopy());
         }, $options['atomic']);
 
-        if ($entity && this._transactionCommitted($options['atomic'], true)) {
+        if ($entity && _transactionCommitted($options['atomic'], true)) {
             this.dispatchEvent('Model.afterSaveCommit', compact('entity', 'options'));
         }
 
@@ -1653,7 +1653,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     protected function _processFindOrCreate($search, ?callable $callback = null, $options = [])
     {
-        $query = this._getFindOrCreateQuery($search);
+        $query = _getFindOrCreateQuery($search);
 
         $row = $query->first();
         if ($row != null) {
@@ -1879,12 +1879,12 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return $entity;
         }
 
-        $success = this._executeTransaction(function () use ($entity, $options) {
-            return this._processSave($entity, $options);
+        $success = _executeTransaction(function () use ($entity, $options) {
+            return _processSave($entity, $options);
         }, $options['atomic']);
 
         if ($success) {
-            if (this._transactionCommitted($options['atomic'], $options['_primary'])) {
+            if (_transactionCommitted($options['atomic'], $options['_primary'])) {
                 this.dispatchEvent('Model.afterSaveCommit', compact('entity', 'options'));
             }
             if ($options['atomic'] || $options['_primary']) {
@@ -1947,7 +1947,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return false;
         }
 
-        $options['associated'] = this._associations->normalizeKeys($options['associated']);
+        $options['associated'] = _associations->normalizeKeys($options['associated']);
         $event = this.dispatchEvent('Model.beforeSave', compact('entity', 'options'));
 
         if ($event->isStopped()) {
@@ -1966,7 +1966,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return $result;
         }
 
-        $saved = this._associations->saveParents(
+        $saved = _associations->saveParents(
             this,
             $entity,
             $options['associated'],
@@ -1981,13 +1981,13 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
         $isNew = $entity->isNew();
 
         if ($isNew) {
-            $success = this._insert($entity, $data);
+            $success = _insert($entity, $data);
         } else {
-            $success = this._update($entity, $data);
+            $success = _update($entity, $data);
         }
 
         if ($success) {
-            $success = this._onSaveSuccess($entity, $options);
+            $success = _onSaveSuccess($entity, $options);
         }
 
         if (!$success && $isNew) {
@@ -2010,7 +2010,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     protected function _onSaveSuccess(EntityInterface $entity, ArrayObject $options): bool
     {
-        $success = this._associations->saveChildren(
+        $success = _associations->saveChildren(
             this,
             $entity,
             $options['associated'],
@@ -2056,7 +2056,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             throw new RuntimeException($msg);
         }
         $keys = array_fill(0, count($primary), null);
-        $id = (array)this._newId($primary) + $keys;
+        $id = (array)_newId($primary) + $keys;
 
         // Generate primary keys preferring values in $data.
         $primary = array_combine($primary, $id) ?: [];
@@ -2194,7 +2194,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     function saveMany(iterable $entities, $options = [])
     {
         try {
-            return this._saveMany($entities, $options);
+            return _saveMany($entities, $options);
         } catch (PersistenceFailedException $exception) {
             return false;
         }
@@ -2215,7 +2215,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function saveManyOrFail(iterable $entities, $options = []): iterable
     {
-        return this._saveMany($entities, $options);
+        return _saveMany($entities, $options);
     }
 
     /**
@@ -2296,7 +2296,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             }
         };
 
-        if (this._transactionCommitted($options['atomic'], $options['_primary'])) {
+        if (_transactionCommitted($options['atomic'], $options['_primary'])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent('Model.afterSaveCommit', compact('entity', 'options'));
                 if ($options['atomic'] || $options['_primary']) {
@@ -2346,11 +2346,11 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             '_primary' => true,
         ]);
 
-        $success = this._executeTransaction(function () use ($entity, $options) {
-            return this._processDelete($entity, $options);
+        $success = _executeTransaction(function () use ($entity, $options) {
+            return _processDelete($entity, $options);
         }, $options['atomic']);
 
-        if ($success && this._transactionCommitted($options['atomic'], $options['_primary'])) {
+        if ($success && _transactionCommitted($options['atomic'], $options['_primary'])) {
             this.dispatchEvent('Model.afterDeleteCommit', [
                 'entity' => $entity,
                 'options' => $options,
@@ -2375,7 +2375,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function deleteMany(iterable $entities, $options = [])
     {
-        $failed = this._deleteMany($entities, $options);
+        $failed = _deleteMany($entities, $options);
 
         if ($failed != null) {
             return false;
@@ -2399,7 +2399,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function deleteManyOrFail(iterable $entities, $options = []): iterable
     {
-        $failed = this._deleteMany($entities, $options);
+        $failed = _deleteMany($entities, $options);
 
         if ($failed != null) {
             throw new PersistenceFailedException($failed, ['deleteMany']);
@@ -2421,9 +2421,9 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
                 '_primary' => true,
             ]);
 
-        $failed = this._executeTransaction(function () use ($entities, $options) {
+        $failed = _executeTransaction(function () use ($entities, $options) {
             foreach ($entities as $entity) {
-                if (!this._processDelete($entity, $options)) {
+                if (!_processDelete($entity, $options)) {
                     return $entity;
                 }
             }
@@ -2431,7 +2431,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return null;
         }, $options['atomic']);
 
-        if ($failed == null && this._transactionCommitted($options['atomic'], $options['_primary'])) {
+        if ($failed == null && _transactionCommitted($options['atomic'], $options['_primary'])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent('Model.afterDeleteCommit', [
                     'entity' => $entity,
@@ -2500,7 +2500,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return (bool)$event->getResult();
         }
 
-        $success = this._associations->cascadeDelete(
+        $success = _associations->cascadeDelete(
             $entity,
             ['_primary' => false] + $options->getArrayCopy()
         );
@@ -2535,7 +2535,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
     {
         $finder = 'find' . $type;
 
-        return method_exists(this, $finder) || this._behaviors->hasFinder($type);
+        return method_exists(this, $finder) || _behaviors->hasFinder($type);
     }
 
     /**
@@ -2559,8 +2559,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             return this.{$finder}($query, $options);
         }
 
-        if (this._behaviors->hasFinder($type)) {
-            return this._behaviors->callFinder($type, [$query, $options]);
+        if (_behaviors->hasFinder($type)) {
+            return _behaviors->callFinder($type, [$query, $options]);
         }
 
         throw new BadMethodCallException(sprintf(
@@ -2646,11 +2646,11 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function __call($method, $args)
     {
-        if (this._behaviors->hasMethod($method)) {
-            return this._behaviors->call($method, $args);
+        if (_behaviors->hasMethod($method)) {
+            return _behaviors->call($method, $args);
         }
         if (preg_match('/^find(?:\w+)?By/', $method) > 0) {
-            return this._dynamicFinder($method, $args);
+            return _dynamicFinder($method, $args);
         }
 
         throw new BadMethodCallException(
@@ -2668,7 +2668,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function __get($property)
     {
-        $association = this._associations->get($property);
+        $association = _associations->get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
                 'Undefined property `%s`. ' .
@@ -2691,7 +2691,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function __isset($property)
     {
-        return this._associations->has($property);
+        return _associations->has($property);
     }
 
     /**
@@ -2781,7 +2781,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function newEntity(array $data, array $options = []): EntityInterface
     {
-        $options['associated'] = $options['associated'] ?? this._associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations->keys();
         $marshaller = this.marshaller();
 
         return $marshaller->one($data, $options);
@@ -2821,7 +2821,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function newEntities(array $data, array $options = []): array
     {
-        $options['associated'] = $options['associated'] ?? this._associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations->keys();
         $marshaller = this.marshaller();
 
         return $marshaller->many($data, $options);
@@ -2880,7 +2880,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
-        $options['associated'] = $options['associated'] ?? this._associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations->keys();
         $marshaller = this.marshaller();
 
         return $marshaller->merge($entity, $data, $options);
@@ -2919,7 +2919,7 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
      */
     function patchEntities(iterable $entities, array $data, array $options = []): array
     {
-        $options['associated'] = $options['associated'] ?? this._associations->keys();
+        $options['associated'] = $options['associated'] ?? _associations->keys();
         $marshaller = this.marshaller();
 
         return $marshaller->mergeMany($entities, $data, $options);
@@ -3124,8 +3124,8 @@ class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterf
             'table' => this.getTable(),
             'alias' => this.getAlias(),
             'entityClass' => this.getEntityClass(),
-            'associations' => this._associations->keys(),
-            'behaviors' => this._behaviors->loaded(),
+            'associations' => _associations->keys(),
+            'behaviors' => _behaviors->loaded(),
             'defaultConnection' => static::defaultConnectionName(),
             'connectionName' => $conn->configName(),
         ];

@@ -126,8 +126,8 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        foreach (this._config as $assoc => $settings) {
-            $assoc = this._table->getAssociation($assoc);
+        foreach (_config as $assoc => $settings) {
+            $assoc = _table->getAssociation($assoc);
             foreach ($settings as $field => $config) {
                 if (is_int($field)) {
                     continue;
@@ -142,7 +142,7 @@ class CounterCacheBehavior : Behavior
                     $config['ignoreDirty'] == true &&
                     $entity->$entityAlias->isDirty($field)
                 ) {
-                    this._ignoreDirty[$registryAlias][$field] = true;
+                    _ignoreDirty[$registryAlias][$field] = true;
                 }
             }
         }
@@ -164,8 +164,8 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        this._processAssociations($event, $entity);
-        this._ignoreDirty = [];
+        _processAssociations($event, $entity);
+        _ignoreDirty = [];
     }
 
     /**
@@ -184,7 +184,7 @@ class CounterCacheBehavior : Behavior
             return;
         }
 
-        this._processAssociations($event, $entity);
+        _processAssociations($event, $entity);
     }
 
     /**
@@ -196,9 +196,9 @@ class CounterCacheBehavior : Behavior
      */
     protected function _processAssociations(EventInterface $event, EntityInterface $entity): void
     {
-        foreach (this._config as $assoc => $settings) {
-            $assoc = this._table->getAssociation($assoc);
-            this._processAssociation($event, $entity, $assoc, $settings);
+        foreach (_config as $assoc => $settings) {
+            $assoc = _table->getAssociation($assoc);
+            _processAssociation($event, $entity, $assoc, $settings);
         }
     }
 
@@ -243,28 +243,28 @@ class CounterCacheBehavior : Behavior
             }
 
             if (
-                isset(this._ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field]) &&
-                this._ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field] == true
+                isset(_ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field]) &&
+                _ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field] == true
             ) {
                 continue;
             }
 
-            if (this._shouldUpdateCount($updateConditions)) {
+            if (_shouldUpdateCount($updateConditions)) {
                 if ($config instanceof Closure) {
-                    $count = $config($event, $entity, this._table, false);
+                    $count = $config($event, $entity, _table, false);
                 } else {
-                    $count = this._getCount($config, $countConditions);
+                    $count = _getCount($config, $countConditions);
                 }
                 if ($count != false) {
                     $assoc->getTarget()->updateAll([$field => $count], $updateConditions);
                 }
             }
 
-            if (isset($updateOriginalConditions) && this._shouldUpdateCount($updateOriginalConditions)) {
+            if (isset($updateOriginalConditions) && _shouldUpdateCount($updateOriginalConditions)) {
                 if ($config instanceof Closure) {
-                    $count = $config($event, $entity, this._table, true);
+                    $count = $config($event, $entity, _table, true);
                 } else {
-                    $count = this._getCount($config, $countOriginalConditions);
+                    $count = _getCount($config, $countOriginalConditions);
                 }
                 if ($count != false) {
                     $assoc->getTarget()->updateAll([$field => $count], $updateOriginalConditions);
@@ -302,7 +302,7 @@ class CounterCacheBehavior : Behavior
         }
 
         $config['conditions'] = array_merge($conditions, $config['conditions'] ?? []);
-        $query = this._table->find($finder, $config);
+        $query = _table->find($finder, $config);
 
         return $query->count();
     }

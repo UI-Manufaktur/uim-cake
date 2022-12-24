@@ -77,7 +77,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      */
     function setTable(Table $table): void
     {
-        this._table = $table;
+        _table = $table;
         this.setEventManager($table->getEventManager());
     }
 
@@ -142,14 +142,14 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _create($class, string $alias, array $config): Behavior
     {
         /** @var \Cake\ORM\Behavior $instance */
-        $instance = new $class(this._table, $config);
+        $instance = new $class(_table, $config);
         $enable = $config['enabled'] ?? true;
         if ($enable) {
             this.getEventManager()->on($instance);
         }
-        $methods = this._getMethods($instance, $class, $alias);
-        this._methodMap += $methods['methods'];
-        this._finderMap += $methods['finders'];
+        $methods = _getMethods($instance, $class, $alias);
+        _methodMap += $methods['methods'];
+        _finderMap += $methods['finders'];
 
         return $instance;
     }
@@ -173,8 +173,8 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
         $methods = array_change_key_case($instance->implementedMethods());
 
         foreach ($finders as $finder => $methodName) {
-            if (isset(this._finderMap[$finder]) && this.has(this._finderMap[$finder][0])) {
-                $duplicate = this._finderMap[$finder];
+            if (isset(_finderMap[$finder]) && this.has(_finderMap[$finder][0])) {
+                $duplicate = _finderMap[$finder];
                 $error = sprintf(
                     '%s contains duplicate finder "%s" which is already provided by "%s"',
                     $class,
@@ -187,8 +187,8 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
         }
 
         foreach ($methods as $method => $methodName) {
-            if (isset(this._methodMap[$method]) && this.has(this._methodMap[$method][0])) {
-                $duplicate = this._methodMap[$method];
+            if (isset(_methodMap[$method]) && this.has(_methodMap[$method][0])) {
+                $duplicate = _methodMap[$method];
                 $error = sprintf(
                     '%s contains duplicate method "%s" which is already provided by "%s"',
                     $class,
@@ -216,7 +216,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     {
         $method = strtolower($method);
 
-        return isset(this._methodMap[$method]);
+        return isset(_methodMap[$method]);
     }
 
     /**
@@ -232,7 +232,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     {
         $method = strtolower($method);
 
-        return isset(this._finderMap[$method]);
+        return isset(_finderMap[$method]);
     }
 
     /**
@@ -246,10 +246,10 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     function call(string $method, array $args = [])
     {
         $method = strtolower($method);
-        if (this.hasMethod($method) && this.has(this._methodMap[$method][0])) {
-            [$behavior, $callMethod] = this._methodMap[$method];
+        if (this.hasMethod($method) && this.has(_methodMap[$method][0])) {
+            [$behavior, $callMethod] = _methodMap[$method];
 
-            return this._loaded[$behavior]->{$callMethod}(...$args);
+            return _loaded[$behavior]->{$callMethod}(...$args);
         }
 
         throw new BadMethodCallException(
@@ -269,9 +269,9 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     {
         $type = strtolower($type);
 
-        if (this.hasFinder($type) && this.has(this._finderMap[$type][0])) {
-            [$behavior, $callMethod] = this._finderMap[$type];
-            $callable = [this._loaded[$behavior], $callMethod];
+        if (this.hasFinder($type) && this.has(_finderMap[$type][0])) {
+            [$behavior, $callMethod] = _finderMap[$type];
+            $callable = [_loaded[$behavior], $callMethod];
 
             return $callable(...$args);
         }
