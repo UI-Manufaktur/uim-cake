@@ -66,13 +66,13 @@ class CspMiddleware implements MiddlewareInterface
         if (!class_exists(CSPBuilder::class)) {
             throw new RuntimeException('You must install paragonie/csp-builder to use CspMiddleware');
         }
-        this->setConfig($config);
+        this.setConfig($config);
 
         if (!$csp instanceof CSPBuilder) {
             $csp = new CSPBuilder($csp);
         }
 
-        this->csp = $csp;
+        this.csp = $csp;
     }
 
     /**
@@ -84,15 +84,15 @@ class CspMiddleware implements MiddlewareInterface
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        if (this->getConfig('scriptNonce')) {
-            $request = $request->withAttribute('cspScriptNonce', this->csp->nonce('script-src'));
+        if (this.getConfig('scriptNonce')) {
+            $request = $request->withAttribute('cspScriptNonce', this.csp->nonce('script-src'));
         }
-        if (this->getconfig('styleNonce')) {
-            $request = $request->withAttribute('cspStyleNonce', this->csp->nonce('style-src'));
+        if (this.getconfig('styleNonce')) {
+            $request = $request->withAttribute('cspStyleNonce', this.csp->nonce('style-src'));
         }
         $response = $handler->handle($request);
 
         /** @var \Psr\Http\Message\IResponse */
-        return this->csp->injectCSPHeader($response);
+        return this.csp->injectCSPHeader($response);
     }
 }

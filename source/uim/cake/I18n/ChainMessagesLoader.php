@@ -39,7 +39,7 @@ class ChainMessagesLoader
      */
     public this(array $loaders)
     {
-        this->_loaders = $loaders;
+        this._loaders = $loaders;
     }
 
     /**
@@ -51,7 +51,7 @@ class ChainMessagesLoader
      */
     function __invoke(): Package
     {
-        foreach (this->_loaders as $k => $loader) {
+        foreach (this._loaders as $k => $loader) {
             if (!is_callable($loader)) {
                 throw new RuntimeException(sprintf(
                     'Loader "%s" in the chain is not a valid callable',

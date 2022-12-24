@@ -64,7 +64,7 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
      */
     public this(array $config = [])
     {
-        this->config = $config + this->config;
+        this.config = $config + this.config;
     }
 
     /**
@@ -82,18 +82,18 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
     {
         if (
             $request->getUri()->getScheme() == 'https'
-            || (this->config['disableOnDebug']
+            || (this.config['disableOnDebug']
                 && Configure::read('debug'))
         ) {
             $response = $handler->handle($request);
-            if (this->config['hsts']) {
-                $response = this->addHsts($response);
+            if (this.config['hsts']) {
+                $response = this.addHsts($response);
             }
 
             return $response;
         }
 
-        if (this->config['redirect'] && $request->getMethod() == 'GET') {
+        if (this.config['redirect'] && $request->getMethod() == 'GET') {
             $uri = $request->getUri()->withScheme('https');
             $base = $request->getAttribute('base');
             if ($base) {
@@ -102,8 +102,8 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
 
             return new RedirectResponse(
                 $uri,
-                this->config['statusCode'],
-                this->config['headers']
+                this.config['statusCode'],
+                this.config['headers']
             );
         }
 
@@ -120,7 +120,7 @@ class HttpsEnforcerMiddleware implements MiddlewareInterface
      */
     protected function addHsts(IResponse $response): IResponse
     {
-        $config = this->config['hsts'];
+        $config = this.config['hsts'];
         if (!is_array($config)) {
             throw new UnexpectedValueException('The `hsts` config must be an array.');
         }

@@ -43,7 +43,7 @@ class RedirectException extends HttpException
         parent::__construct($target, $code);
 
         foreach ($headers as $key => $value) {
-            this->setHeader($key, (array)$value);
+            this.setHeader($key, (array)$value);
         }
     }
 
@@ -60,7 +60,7 @@ class RedirectException extends HttpException
         deprecationWarning('RedirectException::addHeaders() is deprecated, use setHeaders() instead.');
 
         foreach ($headers as $key => $value) {
-            this->headers[$key][] = $value;
+            this.headers[$key][] = $value;
         }
 
         return this;
@@ -77,7 +77,7 @@ class RedirectException extends HttpException
     {
         deprecationWarning('RedirectException::removeHeader() is deprecated, use setHeaders() instead.');
 
-        unset(this->headers[$key]);
+        unset(this.headers[$key]);
 
         return this;
     }

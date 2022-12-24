@@ -43,7 +43,7 @@ class NetworkException extends RuntimeException implements NetworkExceptionInter
      */
     public this(string $message, RequestInterface $request, ?Throwable $previous = null)
     {
-        this->request = $request;
+        this.request = $request;
         parent::__construct($message, 0, $previous);
     }
 
@@ -56,6 +56,6 @@ class NetworkException extends RuntimeException implements NetworkExceptionInter
      */
     function getRequest(): RequestInterface
     {
-        return this->request;
+        return this.request;
     }
 }
